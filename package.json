@@ -1,7 +1,6 @@
 {
   "name": "web-admin-dashboard",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "prop-types": "^15.6.0",
     "react": "^15.0.0",
