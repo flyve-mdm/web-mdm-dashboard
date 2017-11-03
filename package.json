@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
+    "react-redux": "^5.0.6",
     "react-scripts": "1.0.16",
     "react-winjs": "^2.5.0",
+    "redux": "^3.7.2",
     "winjs": "^4.4.3"
   },
   "scripts": {
