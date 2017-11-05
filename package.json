@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "dependencies": {
     "prop-types": "^15.6.0",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.16",
-    "react-winjs": "^2.5.0",
+    "react-winjs": "https://github.com/flyve-mdm/react-winjs#feature/modernization",
     "redux": "^3.7.2",
     "winjs": "^4.4.3"
   },
@@ -17,7 +17,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build -m 'build(gh-pages): deploy project'"
   },
   "devDependencies": {
     "gh-pages": "^1.0.0"
