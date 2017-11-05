@@ -4049,7 +4049,11 @@ miller-rabin@^4.0.0:
     bn.js "^4.0.0"
     brorand "^1.0.1"
 
-"mime-db@>= 1.30.0 < 2", mime-db@~1.30.0:
+"mime-db@>= 1.30.0 < 2":
+  version "1.31.0"
+  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.31.0.tgz#a49cd8f3ebf3ed1a482b60561d9105ad40ca74cb"
+
+mime-db@~1.30.0:
   version "1.30.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.30.0.tgz#74c643da2dd9d6a45399963465b26d5ca7d71f01"
 
@@ -5142,7 +5146,7 @@ react-scripts@1.0.16:
 
 "react-winjs@https://github.com/flyve-mdm/react-winjs#feature/modernization":
   version "2.5.0"
-  resolved "https://github.com/flyve-mdm/react-winjs#6ba2ed7795f946a46e632f49bf6e66a66c0fcc22"
+  resolved "https://github.com/flyve-mdm/react-winjs#9b9edb0af52288499b6fb98ed7492ae1d1a28960"
 
 react@^16.0.0:
   version "16.0.0"
