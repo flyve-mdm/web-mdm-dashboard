@@ -6,9 +6,10 @@ cache:
   directories:
     - "node_modules"
 before_deploy:
-  - "./ci/scripts/git_config.sh"
+  - ./ci/scripts/git_config.sh
 deploy:
+  skip_cleanup: true
   provider: script
-  script: "./ci/scripts/deploy.sh"
+  script: ./ci/scripts/deploy.sh
   on:
     branch: develop
