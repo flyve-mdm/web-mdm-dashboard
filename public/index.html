@@ -3,26 +3,37 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/winjs/4.4.0/css/ui-light.css" />
-    <link rel="stylesheet" href="main.css" />
+    <meta name="theme-color" content="#158784">
 
     <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
+          manifest.json provides metadata used when your web app is added to the
+          homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+        -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+          Notice the use of %PUBLIC_URL% in the tags above.
+          It will be replaced with the URL of the `public` folder during the build.
+          Only files inside the `public` folder can be referenced from the HTML.
+    
+          Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+          work correctly both with client-side routing and a non-root public URL.
+          Learn how to configure a non-root public URL by running `npm run build`.
+        -->
+    <link rel="icon" href="%PUBLIC_URL%/images/favicon.png">
+    <meta property="og:title" content="web admin dashboard" />
+    <meta property="og:site_name" content="web admin dashboard" />
+    <meta property="og:image" content="%PUBLIC_URL%/images/logo2.png" />
+    <meta name="description" content="Flyve MDM Dashboard">
+    <meta name="og:description" content="Flyve MDM Dashboard">
+    
+    <link rel="canonical" href="%PUBLIC_URL%/">
+    
+    <Link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png">
+    <link rel="apple-touch-startup-image" href="%PUBLIC_URL%/images/logo2.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="web admin dashboard">
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <title>Flyve MDM</title>
   </head>
   <body class="win-type-body">
