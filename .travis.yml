@@ -10,6 +10,6 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: script
-  script: ./ci/scripts/deploy.sh
+  script: ./ci/scripts/deploy_develop.sh
   on:
     branch: develop
