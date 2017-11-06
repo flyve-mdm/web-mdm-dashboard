@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 if [[ -n $GITHUB_TOKEN ]]; then
     git config --global user.email $GITHUB_EMAIL
