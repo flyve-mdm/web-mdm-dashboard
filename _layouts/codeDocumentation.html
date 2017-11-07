@@ -1,0 +1,18 @@
+---
+layout: container
+---
+
+<div class="codeDocumentation table-responsive">
+{% if page.url != "/reports/javadoc/" %}
+<p class="goHome">
+    <a href="{{ "reports/javadoc" | absolute_url }}">
+        <span class="glyph glyph-back" aria-hidden="true"></span> &nbsp; Back to index
+    </a>
+</p>
+{% else %}
+<h2>
+    Code documentation
+</h2>
+{% endif %}
+  {{ content }}
+</div>
