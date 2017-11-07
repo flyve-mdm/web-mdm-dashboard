@@ -2,9 +2,10 @@ import * as React from 'react'
 import ReactWinJS from 'react-winjs'
 import Calc100PercentMinus from '../Utils/Calc100PercentMinus'
 import ProfilePicture from './ProfilePicture'
+import PropTypes from 'prop-types'
 let WinJS = require('winjs')
 
-export default class PeoplePage extends React.Component {
+class PeoplePage extends React.Component {
 
     constructor (props) {
         super (props)
@@ -15,7 +16,7 @@ export default class PeoplePage extends React.Component {
         }
     }
 
-    personRenderer = ReactWinJS.reactRenderer(function (person) {
+    personRenderer = ReactWinJS.reactRenderer((person) => {
         return (
             <div>
                 <ProfilePicture backgroundUrl={person.data.picture} size={34} />
@@ -24,7 +25,7 @@ export default class PeoplePage extends React.Component {
         )
     })
 
-    groupHeaderRenderer = ReactWinJS.reactRenderer(function (item) {
+    groupHeaderRenderer = ReactWinJS.reactRenderer((item) => {
         return (
             <div>{item.data.title}</div>
         )
@@ -39,8 +40,10 @@ export default class PeoplePage extends React.Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let indices = listView.selection.getIndices()
-        this.setState({ selectedPeople: indices })
-        this.props.onNavigate(indices.length === 1 && !this.state.selectionMode ? ['people', indices[0]] : ['people'])
+        setTimeout(function () {
+            this.setState({ selectedPeople: indices });
+            this.props.onNavigate(indices.length === 1 && !this.state.selectionMode ? ["people", indices[0]] : ["people"]);
+        }.bind(this), 0)
     }
 
     handleContentAnimating (eventObject) {
@@ -55,7 +58,7 @@ export default class PeoplePage extends React.Component {
         let indices = this.state.selectedPeople
         indices.sort()
         indices.reverse()
-        indices.forEach(function (i) {
+        indices.forEach((i) => {
             people.splice(i, 1)
         })
         this.setState({
@@ -216,3 +219,13 @@ export default class PeoplePage extends React.Component {
         }
     }
 }
+
+PeoplePage.propTypes = {
+    mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
+    people: PropTypes.object.isRequired,
+    location: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired,
+    changePeople: PropTypes.func.isRequired
+}
+
+export default PeoplePage
