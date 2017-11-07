@@ -16,14 +16,17 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "predeploy-build": "yarn run build",
-    "deploy-build": "gh-pages -d build",
+    "deploy-build": "gh-pages --dist build --dest build -m 'build(gh-pages): deploy project'",
+    "gh-pages": "gh-pages",
     "standard-version": "standard-version",
     "conventional-github-releaser": "conventional-github-releaser",
-    "github-release": "node-github-release"
+    "github-release": "github-release",
+    "jsdoc": "jsdoc"
   },
   "devDependencies": {
     "conventional-github-releaser": "^2.0.0",
     "gh-pages": "^1.0.0",
+    "jsdoc": "^3.5.5",
     "node-github-release": "^0.2.1",
     "standard-version": "^4.2.0"
   },
