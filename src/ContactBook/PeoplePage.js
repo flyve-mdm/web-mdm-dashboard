@@ -33,7 +33,7 @@ export default class PeoplePage extends React.Component {
     handleToggleSelectionMode =  () => {
         this.setState({selectionMode: !this.state.selectionMode})
         this.props.onNavigate(["people"])
-        // this.refs.listView.winControl.selection.clear()
+        this.refs.listView.winControl.selection.clear()
     }
 
     handleSelectionChanged = (eventObject) => {
