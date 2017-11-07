@@ -15,8 +15,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build -m 'build(gh-pages): deploy project'",
+    "predeploy-build": "yarn run build",
+    "deploy-build": "gh-pages -d build",
     "standard-version": "standard-version",
     "conventional-github-releaser": "conventional-github-releaser",
     "github-release": "node-github-release"
