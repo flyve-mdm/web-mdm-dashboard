@@ -4,7 +4,7 @@ language: node_js
 node_js:
   - "node"
 before_install:
-  - git checkout $TRAVIS_BRANCH
+  - if [ $TRAVIS_PULL_REQUEST = false ]; then git checkout $TRAVIS_BRANCH; fi
 install:
   - source ci/scripts/install.sh
 after_success:
