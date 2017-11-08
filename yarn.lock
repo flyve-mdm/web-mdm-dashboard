@@ -5641,9 +5641,9 @@ react-scripts@1.0.16:
   optionalDependencies:
     fsevents "1.1.2"
 
-"react-winjs@https://github.com/flyve-mdm/react-winjs":
+"react-winjs@git+https://git@github.com/flyve-mdm/react-winjs.git":
   version "2.5.0"
-  resolved "https://github.com/flyve-mdm/react-winjs#bfdbaf653fa6db3a7046abec385c661b50d0f167"
+  resolved "git+https://git@github.com/flyve-mdm/react-winjs.git#bfdbaf653fa6db3a7046abec385c661b50d0f167"
 
 react@^16.0.0:
   version "16.0.0"
