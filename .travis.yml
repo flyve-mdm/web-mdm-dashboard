@@ -7,11 +7,6 @@ before_install:
   - git checkout $TRAVIS_BRANCH
 install:
   - source ci/scripts/install.sh
-before_deploy:
-  - source ci/scripts/git_config.sh
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: source ci/scripts/deploy_develop.sh
-  on:
-    branch: develop
+after_success:
+ - source ci/scripts/git_config.sh
+ - source ci/scripts/deploy.sh
