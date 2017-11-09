@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "predeploy-build": "yarn run build",
@@ -22,6 +23,7 @@
     "github-release": "github-release"
   },
   "devDependencies": {
+    "canvas-prebuilt": "^1.6.5-prerelease.1",
     "conventional-github-releaser": "^2.0.0",
     "node-github-release": "^0.2.1",
     "standard-version": "^4.2.0"
