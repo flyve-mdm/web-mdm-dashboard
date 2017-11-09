@@ -29,6 +29,8 @@
   "devDependencies": {
     "canvas-prebuilt": "^1.6.5-prerelease.1",
     "conventional-github-releaser": "^2.0.0",
+    "gh-pages": "^1.0.0",
+    "jsdoc": "^3.5.5",
     "node-github-release": "^0.2.1",
     "standard-version": "^4.2.0"
   },
