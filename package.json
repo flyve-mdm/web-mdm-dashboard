@@ -20,7 +20,11 @@
     "deploy-build": "gh-pages --dist build --dest build -m 'build(gh-pages): deploy project'",
     "release": "standard-version",
     "conventional-github-releaser": "conventional-github-releaser",
-    "github-release": "github-release"
+    "github-release": "github-release",
+    "jsdoc": "jsdoc src -r -d docs",
+    "coverage": "react-scripts test --env=jsdom --coverage",
+    "gh-pages-docs": "gh-pages --dist docs --dest docs",
+    "gh-pages-coverage": "gh-pages --dist coverage --dest coverage"
   },
   "devDependencies": {
     "canvas-prebuilt": "^1.6.5-prerelease.1",
