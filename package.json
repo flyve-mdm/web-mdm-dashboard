@@ -24,7 +24,8 @@
     "jsdoc": "jsdoc src -r -d docs",
     "coverage": "react-scripts test --env=jsdom --coverage",
     "gh-pages-docs": "gh-pages --dist docs --dest docs",
-    "gh-pages-coverage": "gh-pages --dist coverage --dest coverage"
+    "gh-pages-coverage": "gh-pages --dist coverage --dest coverage",
+    "gh-pages-changelog": "gh-pages --dist ./ --src '{./C*.md,CHANGELOG.md}' --dest ./ --add"
   },
   "devDependencies": {
     "canvas-prebuilt": "^1.6.5-prerelease.1",
