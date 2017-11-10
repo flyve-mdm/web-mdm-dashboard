@@ -32,32 +32,54 @@ class BodyAdminDashboard extends React.Component {
 
     render () {
         let contentComponent= <h2 className="win-h2" style={{marginLeft: '10px'}}> {this.props.location} </h2>
-
-        let pane = (
-            <div>
-                <ReactWinJS.SplitView.Command
-                    label="People"
-                    icon="contact"
-                    onInvoked={() => this.handleCommandInvoked(['people'])}
-                />
-                <ReactWinJS.SplitView.Command
-                    label="What's New"
-                    icon="comment"
-                    onInvoked={() => this.handleCommandInvoked(['What\'s New'])}
-                />
-                <ReactWinJS.SplitView.Command
-                    label="Groups"
-                    icon="people"
-                    onInvoked={() => this.handleCommandInvoked(['Groups'])}
-                />
-
-                <ReactWinJS.SplitView.Command
-                    label="Settings"
-                    icon="settings"
-                    style={{position: 'absolute', bottom: 0, width: '100%'}}
-                    onInvoked={() => this.handleCommandInvoked(['Settings'])}
-                />
-            </div>
+        
+            let pane = (
+                <div>
+                    <ReactWinJS.SplitView.Command
+                        label="Dashboard"
+                        icon="home"
+                        onInvoked={() => this.handleCommandInvoked(['Dashboard'])}
+                    />
+                    <ReactWinJS.SplitView.Command
+                        label="Devices"
+                        icon="cellphone"
+                        onInvoked={() => this.handleCommandInvoked(['Devices'])}
+                    />
+                    <ReactWinJS.SplitView.Command
+                        label="Fleets"
+                        icon="gotostart"
+                        onInvoked={() => this.handleCommandInvoked(['Fleets'])}
+                    />
+                    <ReactWinJS.SplitView.Command
+                        label="Files"
+                        icon="copy"
+                        onInvoked={() => this.handleCommandInvoked(['Files'])}
+                    />
+                    <ReactWinJS.SplitView.Command
+                        label="Applications"
+                        icon="switchapps"
+                        onInvoked={() => this.handleCommandInvoked(['Applications'])}
+                    />
+                    <ReactWinJS.SplitView.Command
+                        label="Users"
+                        icon="people"
+                        onInvoked={() => this.handleCommandInvoked(['Users'])}
+                    />
+    
+                    <ReactWinJS.SplitView.Command
+                        label="Settings"
+                        icon="settings"
+                        style={{position: 'absolute', bottom: 48, width: '100%'}}
+                        onInvoked={() => this.handleCommandInvoked(['Settings'])}
+                    />
+                    <ReactWinJS.SplitView.Command
+                        label="About"
+                        icon="contactinfo"
+                        style={{position: 'absolute', bottom: 0, width: '100%'}}
+                        onInvoked={() => this.handleCommandInvoked(['About'])}
+                    />
+                </div>
+            
         )
 
         return (
