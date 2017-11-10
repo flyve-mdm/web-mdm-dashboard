@@ -9,6 +9,15 @@ install:
   - source ci/scripts/install.sh
 script:
   - yarn build
+  - zip -r ./build.zip build/*
 after_success:
  - source ci/scripts/git_config.sh
  - source ci/scripts/deploy.sh
+deploy:
+  provider: releases
+  api_key:
+    secure: $GITHUB_TOKEN
+  file: ./build.zip
+  skip_cleanup: true
+  on:
+    tags: true
