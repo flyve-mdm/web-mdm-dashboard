@@ -331,9 +331,8 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
                 itemsSeen[item.longname] = true;
             }
         });
-
         if (itemsNav !== '') {
-            nav += '<h3>' + itemHeading + '</h3><ul>' + itemsNav + '</ul>';
+            nav += '<li class="active side-nav-c2">' + itemHeading + '</li><ul class="nav collapse in" id="father-john-misty">' + itemsNav + '</ul>';
         }
     }
 
@@ -364,7 +363,7 @@ function linktoExternal(longName, name) {
  */
 function buildNav(members) {
     var globalNav;
-    var nav = '<h4><a href="index.html">Home</a></h4>';
+    var nav = '<a class="btn btn-lightweight no-outline navigation-btn">Index</a><ul role="navigation" id="sidenav-small" class="nav side-navigation side-navigation-small theme-default"><button type="button" class="close" data-dismiss="side-navigation" aria-label="close"><i class="glyph glyph-cancel"></i></button>';
     var seen = {};
     var seenTutorials = {};
 
@@ -389,13 +388,14 @@ function buildNav(members) {
 
         if (!globalNav) {
             // turn the heading into a link so you can actually get to the global page
-            nav += '<h3>' + linkto('global', 'Global') + '</h3>';
+            nav += '<li class="active side-nav-c2">' + linkto('global', 'Global') + '</li>';
         }
         else {
-            nav += '<h3>Global</h3><ul>' + globalNav + '</ul>';
+            nav += '<li class="active side-nav-c2">' + linkto('global', 'Global') + '<ul class="nav collapse in" id="father-john-misty">' + globalNav + '</ul></li>';
         }
     }
 
+    nav += '</ul>'
     return nav;
 }
 
