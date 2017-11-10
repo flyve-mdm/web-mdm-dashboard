@@ -7,6 +7,8 @@ before_install:
   - if [ $TRAVIS_PULL_REQUEST = false ]; then git checkout $TRAVIS_BRANCH; fi
 install:
   - source ci/scripts/install.sh
+script:
+  - yarn build
 after_success:
  - source ci/scripts/git_config.sh
  - source ci/scripts/deploy.sh
