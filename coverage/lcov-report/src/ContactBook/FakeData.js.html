@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/ContactBook/FakeData.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/ContactBook</a> FakeData.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/31</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">let nextPerso<span class="cstat-no" title="statement not covered" >nId = 0<span class="cstat-no" title="statement not covered" ></span></span>
+let firstNames = <span class="cstat-no" title="statement not covered" >['Aaliyah', 'Aaron', 'Abigail', 'Adam', 'Addison', 'Adrian', 'Aiden', 'Alexa', 'Alexandra', 'Alexis', 'Alice', 'Allison', 'Alyssa', 'Amelia', 'Andrew', 'Angel', 'Anna', 'Annabelle', 'Anthony', 'Aria', 'Ariana', 'Arianna', 'Asher', 'Ashley', 'Aubree', 'Aubrey', 'Audrey', 'Austin', 'Autumn', 'Ava', 'Avery', 'Ayden', 'Bella', 'Benjamin', 'Bentley', 'Blake', 'Brandon', 'Brayden', 'Brianna', 'Brody', 'Brooklyn', 'Caleb', 'Camden', 'Cameron', 'Camila', 'Caroline', 'Carson', 'Carter', 'Charles', 'Charlotte', 'Chase', 'Chloe', 'Christian', 'Christopher', 'Claire', 'Colton', 'Connor', 'Cooper', 'Daniel', 'David', 'Dominic', 'Dylan', 'Easton', 'Eleanor', 'Eli', 'Elijah', 'Elizabeth', 'Ella', 'Ellie', 'Emily', 'Emma', 'Eva', 'Evan', 'Evelyn', 'Faith', 'Gabriel', 'Gabriella', 'Gavin', 'Genesis', 'Gianna', 'Grace', 'Grayson', 'Hadley', 'Hailey', 'Hannah', 'Harper', 'Henry', 'Hudson', 'Hunter', 'Ian', 'Isaac', 'Isabella', 'Isabelle', 'Isaiah', 'Jace', 'Jack', 'Jackson', 'Jasmine', 'Jason', 'Jaxon', 'Jaxson', 'Jayden', 'Jeremiah', 'John', 'Jonathan', 'Jordan', 'Jose', 'Joseph', 'Joshua', 'Josiah', 'Juan', 'Julia', 'Julian', 'Justin', 'Katherine', 'Kayden', 'Kaylee', 'Kennedy', 'Kevin', 'Khloe', 'Kylie', 'Landon', 'Lauren', 'Layla', 'Leah', 'Leo', 'Levi', 'Lillian', 'Lily', 'Lincoln', 'Logan', 'London', 'Lucas', 'Lucy', 'Luis', 'Luke', 'Lydia', 'Mackenzie', 'Madeline', 'Madelyn', 'Madison', 'Matthew', 'Maya', 'Melanie', 'Mia', 'Mila', 'Naomi', 'Natalie', 'Nathan', 'Nathaniel', 'Nevaeh', 'Nicholas', 'Nolan', 'Nora', 'Oliver', 'Olivia', 'Owen', 'Paisley', 'Parker', 'Penelope', 'Peyton', 'Piper', 'Riley', 'Robert', 'Ruby', 'Ryan', 'Ryder', 'Sadie', 'Samantha', 'Samuel', 'Sarah', 'Savannah', 'Scarlett', 'Sebastian', 'Serenity', 'Skylar', 'Sofia', 'Sophia', 'Sophie', 'Stella', 'Taylor', 'Thomas', 'Tristan', 'Tyler', 'Victoria', 'Violet', 'Vivian', 'Wyatt', 'Xavier', 'Zachary', 'Zoe', 'Zoey']</span>
+let lastNames = <span class="cstat-no" title="statement not covered" >['Avey', 'Crofoot', 'Flor', 'Barletta', 'Zoller', 'Rosson', 'Coomes', 'Wilken', 'Withey', 'Ojeda', 'Mennella', 'Gauer', 'Puccio', 'Zimmerer', 'Cottrell', 'Bridgman', 'Gershman', 'Tinoco', 'Ayoub', 'Fournier', 'Marcella', 'Melrose', 'Lafontaine', 'Cathcart', 'Cioffi', 'Sands', 'Lei', 'Cardoso', 'Dela', 'Metcalfe', 'Ethridge', 'Fryer', 'Warden', 'Madson', 'Gonsales', 'Tobey', 'Knecht', 'Gallion', 'Thibault', 'Brockington', 'Baney', 'Haddox', 'Kang', 'Galyean', 'Riccio', 'Lake', 'Mirabella', 'Frechette', 'Rearick', 'Carmouche']</span>
+// let loremIpsum = [
+//     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+//     'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur',
+//     'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?',
+//     'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.',
+//     'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.',
+// ]
+let statuses = <span class="cstat-no" title="statement not covered" >[</span>
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.',
+    'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.',
+    'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account.',
+    'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas.',
+    'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the.'
+]
+&nbsp;
+let posterWidth = <span class="cstat-no" title="statement not covered" >400</span>
+let posterHeight = <span class="cstat-no" title="statement not covered" >400</span>
+var _canvas
+function <span class="fstat-no" title="function not covered" >makePoster(</span>color) {
+<span class="cstat-no" title="statement not covered" >    if (!_canvas) {</span>
+<span class="cstat-no" title="statement not covered" >        _canvas = document.createElement('canvas')</span>
+<span class="cstat-no" title="statement not covered" >        _canvas.width = posterWidth</span>
+<span class="cstat-no" title="statement not covered" >        _canvas.height = posterHeight</span>
+    }
+    let ctxt = <span class="cstat-no" title="statement not covered" >_canvas.getContext('2d')</span>
+<span class="cstat-no" title="statement not covered" >    ctxt.fillStyle = color</span>
+<span class="cstat-no" title="statement not covered" >    ctxt.fillRect(0, 0, posterWidth, posterHeight)</span>
+<span class="cstat-no" title="statement not covered" >    return _canvas.toDataURL()</span>
+}
+&nbsp;
+let posterColors = <span class="cstat-no" title="statement not covered" >[</span>
+    [68, 34, 87], [100, 66, 119], [132, 98, 151],
+    [164, 162, 165], [196, 194, 197], [228, 226, 229],
+    [220, 77, 6], [252, 109, 38], [255, 141, 70]
+]
+let posters = <span class="cstat-no" title="statement not covered" >posterColors.map(<span class="fstat-no" title="function not covered" >fu</span>nction (color) {</span>
+<span class="cstat-no" title="statement not covered" >    return makePoster('rgb(' + color.join(', ') + ')')</span>
+})
+&nbsp;
+function <span class="fstat-no" title="function not covered" >randomInt(</span>first, last) {
+<span class="cstat-no" title="statement not covered" >    return Math.round(Math.random() * (last - first)) + first</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >randomElement(</span> array ) {
+<span class="cstat-no" title="statement not covered" >    return array[randomInt(0, array.length - 1)]</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >genArray(</span> minLength, maxLength, genElement ) {
+    let len = <span class="cstat-no" title="statement not covered" >randomInt(minLength, maxLength)</span>
+    var result = <span class="cstat-no" title="statement not covered" >new Array(len)</span>
+<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        result[i] = genElement()</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return result</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >genName(</span>) {
+<span class="cstat-no" title="statement not covered" >    return randomElement(firstNames) + ' ' + randomElement(lastNames)</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >genPhoneNumber(</span>) {
+<span class="cstat-no" title="statement not covered" >    return '555-0' + randomInt(100, 199)</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >genPerson(</span>) {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        id: nextPersonId++,
+        name: genName(),
+        status: randomElement(statuses),
+        statusHoursAgo: randomElement([2, 3, 4, 5, 6, 7, 8, 9]),
+        picture: randomElement(posters),
+        mobilePhone: genPhoneNumber(),
+        workPhone: genPhoneNumber()
+    }
+}
+&nbsp;
+let personCount = <span class="cstat-no" title="statement not covered" >50</span>
+let people = <span class="cstat-no" title="statement not covered" >genArray(personCount, personCount, genPerson)<span class="cstat-no" title="statement not covered" ></span></span>
+&nbsp;
+export default people</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Nov 10 2017 17:00:14 GMT+0000 (UTC)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
