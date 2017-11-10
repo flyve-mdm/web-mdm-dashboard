@@ -7,10 +7,10 @@ import GetMode from '../Utils/GetMode'
 
 function mapStateToProps(state, props) {
   return {
-    splitViewId: state.ContactBook.splitViewId,
-    paneOpened: state.ContactBook.paneOpened,
-    mode: state.ContactBook.mode,
-    location: state.ContactBook.location
+    splitViewId: state.AdminDashboard.splitViewId,
+    paneOpened: state.AdminDashboard.paneOpened,
+    mode: state.AdminDashboard.mode,
+    location: state.AdminDashboard.location
   }
 }
 
@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch) {
   return { actions }
 }
 
-class HeaderContactBook extends React.Component {
+class HeaderAdminDashboard extends React.Component {
 
     handleResize = () => {
         let prevMode = this.props.mode
@@ -61,7 +61,7 @@ class HeaderContactBook extends React.Component {
                     paneOpened={this.props.paneOpened}
                 />
                 {this.renderBackButton()}
-                <h3 className="win-h3" style={{display: 'inline-block', marginLeft: 5}}>Address Book </h3>
+                <h3 className="win-h3" style={{display: 'inline-block', marginLeft: 5}}>Admin Dashboard </h3>
             </div>
         )
     }
@@ -69,4 +69,4 @@ class HeaderContactBook extends React.Component {
 export default connect (
   mapStateToProps,
   mapDispatchToProps
-)(HeaderContactBook)
+)(HeaderAdminDashboard)

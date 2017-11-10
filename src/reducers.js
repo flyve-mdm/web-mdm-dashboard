@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import ContactBook from './ContactBook/DuckController'
+import AdminDashboard from './AdminDashboard/DuckController'
 
 export default combineReducers ({
-    ContactBook: ContactBook
+    AdminDashboard: AdminDashboard
 })

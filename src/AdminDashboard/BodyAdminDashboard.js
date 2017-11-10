@@ -2,17 +2,16 @@ import * as React from 'react'
 import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { closePane, changeLocation, changePeople } from './DuckController'
-import PeoplePage from './PeoplePage'
+import { closePane, changeLocation } from './DuckController'
 
 function mapStateToProps(state, props) {
   return {
-    splitViewId: state.ContactBook.splitViewId,
-    paneOpened: state.ContactBook.paneOpened,
-    location: state.ContactBook.location,
-    splitViewConfigs: state.ContactBook.splitViewConfigs,
-    mode: state.ContactBook.mode,
-    people: state.ContactBook.people
+    splitViewId: state.AdminDashboard.splitViewId,
+    paneOpened: state.AdminDashboard.paneOpened,
+    location: state.AdminDashboard.location,
+    splitViewConfigs: state.AdminDashboard.splitViewConfigs,
+    mode: state.AdminDashboard.mode,
+    people: state.AdminDashboard.people
   }
 }
 
@@ -20,12 +19,11 @@ function mapDispatchToProps(dispatch) {
   const actions = {
     closePane: bindActionCreators(closePane, dispatch),
     changeLocation: bindActionCreators(changeLocation, dispatch),
-    changePeople: bindActionCreators(changePeople, dispatch)
   }
   return { actions }
 }
 
-class BodyContactBook extends React.Component {
+class BodyAdminDashboard extends React.Component {
     
     handleCommandInvoked (newLocation) {
         this.props.actions.changeLocation(newLocation)
@@ -33,12 +31,7 @@ class BodyContactBook extends React.Component {
     }
 
     render () {
-        let contentComponent
-         if (this.props.location[0] === 'people') {
-            contentComponent = <PeoplePage mode={this.props.mode} location={this.props.location} people={this.props.people} onNavigate={this.props.actions.changeLocation} changePeople={this.props.actions.changePeople} />
-        } else {
-            contentComponent = <h2 className="win-h2" style={{marginLeft: '10px'}}> {this.props.location} </h2>
-        }
+        let contentComponent= <h2 className="win-h2" style={{marginLeft: '10px'}}> {this.props.location} </h2>
 
         let pane = (
             <div>
@@ -83,4 +76,4 @@ class BodyContactBook extends React.Component {
 export default connect (
   mapStateToProps,
   mapDispatchToProps
-)(BodyContactBook)
+)(BodyAdminDashboard)

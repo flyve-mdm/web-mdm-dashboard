@@ -2,7 +2,7 @@
  * Dependencies
  */
 import * as React from 'react'
-import ContactBook from './ContactBook'
+import AdminDashboard from './AdminDashboard'
 /**
  * Assets
  */
@@ -10,10 +10,10 @@ import './App.css'
 import '../node_modules/winjs/css/ui-light.css'
 /**
  * Main component
- * @returns ContactBook component
+ * @returns AdminDashboard component
  */
 function App() {
-  return <ContactBook />
+  return <AdminDashboard />
 }
 
 export default App
