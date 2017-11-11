@@ -1,4 +1,5 @@
 import GetMode from '../Utils/GetMode'
+import InitialListItem from './InitialListItem'
 
 const INITIAL_STATE = {
     splitViewId: 'rootSplitView',
@@ -18,7 +19,8 @@ const INITIAL_STATE = {
             closedDisplayMode: 'inline',
             openedDisplayMode: 'inline'
         }
-    }
+    },
+    listItem: InitialListItem()
 }
 
 // Constants
@@ -27,6 +29,7 @@ const CLOSE_PANE = 'flyve-mdm-web-ui/AdminDashboard/closePane'
 const CHANGE_MODE = 'flyve-mdm-web-ui/AdminDashboard/changeMode'
 const CHANGE_LOCATION = 'flyve-mdm-web-ui/AdminDashboard/changeLocation'
 const HANDLE_BACK = 'flyve-mdm-web-ui/AdminDashboard/handleBack'
+const CHANGE_LIST_ITEM = 'flyve-mdm-web-ui/AdminDashboard/changeListItem'
 
 // Reducers
 export default function reducer(state = INITIAL_STATE, action) {
@@ -61,6 +64,12 @@ export default function reducer(state = INITIAL_STATE, action) {
                ...state,
                location: [...state.location.slice(0, 1)]
             }
+        
+        case CHANGE_LIST_ITEM:
+            return {
+                ...state,
+                listItem: action.newListItem
+            }
 
         default: return state
     }
@@ -92,5 +101,11 @@ export function changeLocation (newLocation) {
 export function handleBack () {
   return { 
       type: HANDLE_BACK
+    }
+}
+export function changeListItem(newListItem) {
+    return {
+        type: CHANGE_LIST_ITEM,
+        newListItem
     }
 }
