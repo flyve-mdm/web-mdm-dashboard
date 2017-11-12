@@ -1,4 +1,4 @@
-import Users from './data/users.json'
+import USERS from './data/users.json'
 
 let nextPersonId = 0
 let firstNames = ['Aaliyah', 'Aaron', 'Abigail', 'Adam', 'Addison', 'Adrian', 'Aiden', 'Alexa', 'Alexandra', 'Alexis', 'Alice', 'Allison', 'Alyssa', 'Amelia', 'Andrew', 'Angel', 'Anna', 'Annabelle', 'Anthony', 'Aria', 'Ariana', 'Arianna', 'Asher', 'Ashley', 'Aubree', 'Aubrey', 'Audrey', 'Austin', 'Autumn', 'Ava', 'Avery', 'Ayden', 'Bella', 'Benjamin', 'Bentley', 'Blake', 'Brandon', 'Brayden', 'Brianna', 'Brody', 'Brooklyn', 'Caleb', 'Camden', 'Cameron', 'Camila', 'Caroline', 'Carson', 'Carter', 'Charles', 'Charlotte', 'Chase', 'Chloe', 'Christian', 'Christopher', 'Claire', 'Colton', 'Connor', 'Cooper', 'Daniel', 'David', 'Dominic', 'Dylan', 'Easton', 'Eleanor', 'Eli', 'Elijah', 'Elizabeth', 'Ella', 'Ellie', 'Emily', 'Emma', 'Eva', 'Evan', 'Evelyn', 'Faith', 'Gabriel', 'Gabriella', 'Gavin', 'Genesis', 'Gianna', 'Grace', 'Grayson', 'Hadley', 'Hailey', 'Hannah', 'Harper', 'Henry', 'Hudson', 'Hunter', 'Ian', 'Isaac', 'Isabella', 'Isabelle', 'Isaiah', 'Jace', 'Jack', 'Jackson', 'Jasmine', 'Jason', 'Jaxon', 'Jaxson', 'Jayden', 'Jeremiah', 'John', 'Jonathan', 'Jordan', 'Jose', 'Joseph', 'Joshua', 'Josiah', 'Juan', 'Julia', 'Julian', 'Justin', 'Katherine', 'Kayden', 'Kaylee', 'Kennedy', 'Kevin', 'Khloe', 'Kylie', 'Landon', 'Lauren', 'Layla', 'Leah', 'Leo', 'Levi', 'Lillian', 'Lily', 'Lincoln', 'Logan', 'London', 'Lucas', 'Lucy', 'Luis', 'Luke', 'Lydia', 'Mackenzie', 'Madeline', 'Madelyn', 'Madison', 'Matthew', 'Maya', 'Melanie', 'Mia', 'Mila', 'Naomi', 'Natalie', 'Nathan', 'Nathaniel', 'Nevaeh', 'Nicholas', 'Nolan', 'Nora', 'Oliver', 'Olivia', 'Owen', 'Paisley', 'Parker', 'Penelope', 'Peyton', 'Piper', 'Riley', 'Robert', 'Ruby', 'Ryan', 'Ryder', 'Sadie', 'Samantha', 'Samuel', 'Sarah', 'Savannah', 'Scarlett', 'Sebastian', 'Serenity', 'Skylar', 'Sofia', 'Sophia', 'Sophie', 'Stella', 'Taylor', 'Thomas', 'Tristan', 'Tyler', 'Victoria', 'Violet', 'Vivian', 'Wyatt', 'Xavier', 'Zachary', 'Zoe', 'Zoey']
@@ -79,8 +79,8 @@ function genPerson() {
     }
 }
 
-export let devices = genArray(20, 20, genPerson)
-export let fleets = genArray(20, 20, genPerson)
-export let files = genArray(20, 20, genPerson)
-export let applications = genArray(20, 20, genPerson)
-export let users = Users
+export let Devices = genArray(20, 20, genPerson)
+export let Fleets = genArray(20, 20, genPerson)
+export let Files = genArray(20, 20, genPerson)
+export let Applications = genArray(20, 20, genPerson)
+export let Users = USERS

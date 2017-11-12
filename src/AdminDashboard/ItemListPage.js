@@ -1,26 +1,26 @@
 import * as React from 'react'
 import ReactWinJS from 'react-winjs'
 import Calc100PercentMinus from '../Utils/Calc100PercentMinus'
-import IconListItem from './IconListItem'
+import IconItemList from './IconItemList'
 import PropTypes from 'prop-types'
 let WinJS = require('winjs')
 
-class ListItemPage extends React.Component {
+class ItemListPage extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedListItem: [],
+            selectedItemList: [],
             selectionMode: false
         }
     }
 
-    listItemRenderer = ReactWinJS.reactRenderer((listItem) => {
+    ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <div>
-                <IconListItem backgroundUrl={listItem.data.picture} size={34} />
-                <span className="name">{listItem.data.name}</span>
+                <IconItemList backgroundUrl={ItemList.data.picture} size={34} />
+                <span className="name">{ItemList.data.name}</span>
             </div>
         )
     })
@@ -41,7 +41,7 @@ class ListItemPage extends React.Component {
         let listView = eventObject.currentTarget.winControl
         let indices = listView.selection.getIndices()
         setTimeout(function () {
-            this.setState({ selectedListItem: indices });
+            this.setState({ selectedItemList: indices });
             this.props.onNavigate(indices.length === 1 && !this.state.selectionMode ? ["Devices", indices[0]] : ["Devices"]);
         }.bind(this), 0)
     }
@@ -54,8 +54,8 @@ class ListItemPage extends React.Component {
     }
 
     handleDelete = () => {
-        let item = this.props.listItem
-        let indices = this.state.selectedListItem
+        let item = this.props.ItemList
+        let indices = this.state.selectedItemList
         indices.sort()
         indices.reverse()
         indices.forEach((i) => {
@@ -65,23 +65,23 @@ class ListItemPage extends React.Component {
             selectedItem: [],
             selectionMode: false
         })
-        this.props.changeListItem(item)
+        this.props.changeItemList(item)
     }
 
-    renderListItemPane(listItemPaneWidth) {
+    renderItemListPane(ItemListPaneWidth) {
  
         let deleteCommand = (
             <ReactWinJS.ToolBar.Button
                 key="delete"
                 icon="delete"
                 priority={0}
-                disabled={this.state.selectedListItem.length === 0}
+                disabled={this.state.selectedItemList.length === 0}
                 onClick={this.handleDelete}
             />
         )
 
         return (
-            <div className="peopleSearchPane" style={{ height: '100%', width: listItemPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+            <div className="peopleSearchPane" style={{ height: '100%', width: ItemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ToolBar className="peopleToolBar">
                     <ReactWinJS.ToolBar.Button
                         key="edit"
@@ -131,10 +131,10 @@ class ListItemPage extends React.Component {
                     ref="listView"
                     className="peopleListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.props.listItem.dataSource}
-                    groupDataSource={this.props.listItem.groups.dataSource}
+                    itemDataSource={this.props.ItemList.dataSource}
+                    groupDataSource={this.props.ItemList.groups.dataSource}
                     layout={this.state.layout}
-                    itemTemplate={this.listItemRenderer}
+                    itemTemplate={this.ItemListRenderer}
                     groupHeaderTemplate={this.groupHeaderRenderer}
                     selectionMode={this.state.selectionMode ? 'multi' : 'single'}
                     tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
@@ -145,28 +145,28 @@ class ListItemPage extends React.Component {
         )
     }
 
-    renderContentPane(selectedIndex, listItemPaneWidth) {
+    renderContentPane(selectedIndex, ItemListPaneWidth) {
         if (selectedIndex === null) {
             return (
-                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(listItemPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                         <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
                     </div>
                 </div>
             )
         } else {
-            let selectedListItem = this.props.listItem.getAt(selectedIndex)
+            let selectedItemList = this.props.ItemList.getAt(selectedIndex)
             return (
-                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(listItemPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div className="profileHeader">
-                        <div className="name">{selectedListItem.name}</div>
+                        <div className="name">{selectedItemList.name}</div>
                         <div className="personInfo">
-                            <IconListItem backgroundUrl={selectedListItem.picture} size={100} />
+                            <IconItemList backgroundUrl={selectedItemList.picture} size={100} />
                             <div className="profileStatus">
                                 <span className="message">
-                                    {selectedListItem.status}
+                                    {selectedItemList.status}
                                 </span>
-                                <span className="source">{selectedListItem.statusHoursAgo} hours ago</span>
+                                <span className="source">{selectedItemList.statusHoursAgo} hours ago</span>
                             </div>
                         </div>
                     </div>
@@ -178,14 +178,14 @@ class ListItemPage extends React.Component {
                                 <span className="phoneIcon" />
                                 <div className="callContent">
                                     <a href="call:5550100">Call Mobile</a>
-                                    <div className="number">{selectedListItem.mobilePhone}</div>
+                                    <div className="number">{selectedItemList.mobilePhone}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
                                     <a href="call:5550100">Call Work</a>
-                                    <div className="number">{selectedListItem.workPhone}</div>
+                                    <div className="number">{selectedItemList.workPhone}</div>
                                 </div>
                             </li>
                             <li><span className="phoneIcon" />Call using an app</li>
@@ -204,28 +204,28 @@ class ListItemPage extends React.Component {
 
         if (this.props.mode === 'small') {
             if (selectedIndex === null) {
-                return this.renderListItemPane('100%')
+                return this.renderItemListPane('100%')
             } else {
                 return this.renderContentPane(selectedIndex, 0)
             }
         } else {
-            let listItemPaneWidth = 320
+            let ItemListPaneWidth = 320
             return (
                 <div style={{ height: '100%' }}>
-                    {this.renderListItemPane(listItemPaneWidth)}
-                    {this.renderContentPane(selectedIndex, listItemPaneWidth)}
+                    {this.renderItemListPane(ItemListPaneWidth)}
+                    {this.renderContentPane(selectedIndex, ItemListPaneWidth)}
                 </div>
             )
         }
     }
 }
 
-ListItemPage.propTypes = {
+ItemListPage.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
-    listItem: PropTypes.object.isRequired,
+    ItemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeListItem: PropTypes.func.isRequired
+    changeItemList: PropTypes.func.isRequired
 }
 
-export default ListItemPage
+export default ItemListPage

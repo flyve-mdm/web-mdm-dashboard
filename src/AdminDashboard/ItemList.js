@@ -1,7 +1,7 @@
-import { devices as Data } from './Data'
+import * as DATA from './Data'
 var WinJS = require('winjs')
 
-export default function () {
+export default function (Data) {
     var groupKey = function (data) {
         return data.name[0].toUpperCase()
     }
@@ -20,7 +20,7 @@ export default function () {
         }
     }
     
-    return new WinJS.Binding.List(Data)
+    return new WinJS.Binding.List(DATA[Data])
         .createSorted(sorter)
         .createGrouped(groupKey, groupData)
 }
