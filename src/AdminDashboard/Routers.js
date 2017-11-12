@@ -1,4 +1,4 @@
-import { devices, fleets, files, applications, users } from './Data'
+import * as Data from './Data'
 
 const routers = [
     {
@@ -13,35 +13,35 @@ const routers = [
         label: "Devices",
         icon: "cellphone",
         style: {},
-        data: devices
+        data: Data.Devices
     },
     {
         type: "list",
         label: "Fleets",
         icon: "gotostart",
         style: {},
-        data: fleets
+        data: Data.Fleets
     },
     {
         type: "list",
         label: "Files",
         icon: "copy",
         style: {},
-        data: files
+        data: Data.Files
     },
     {
         type: "list",
         label: "Applications",
         icon: "switchapps",
         style: {},
-        data: applications
+        data: Data.Applications
     },
     {
         type: "list",
         label: "Users",
         icon: "people",
         style: {},
-        data: users
+        data: Data.Users
     },
     {
         type: "content",

@@ -1,7 +1,7 @@
 import React from 'react'
 import CssUrl from '../Utils/CssUrl'
 
-export default class IconListItem extends React.Component {
+export default class IconItemList extends React.Component {
     render() {
         let size = this.props.size
         return (

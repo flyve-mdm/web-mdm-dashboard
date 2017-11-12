@@ -1,5 +1,5 @@
 import GetMode from '../Utils/GetMode'
-import InitialListItem from './InitialListItem'
+import ItemList from './ItemList'
 import Routers from './Routers'
 
 const INITIAL_STATE = {
@@ -23,7 +23,7 @@ const INITIAL_STATE = {
             openedDisplayMode: 'inline'
         }
     },
-    listItem: InitialListItem()
+    ItemList: ItemList()
 }
 
 // Constants
@@ -33,7 +33,7 @@ const CHANGE_MODE = 'flyve-mdm-web-ui/AdminDashboard/changeMode'
 const CHANGE_LOCATION = 'flyve-mdm-web-ui/AdminDashboard/changeLocation'
 const CHANGE_INDEX = 'flyve-mdm-web-ui/AdminDashboard/changeIndex'
 const HANDLE_BACK = 'flyve-mdm-web-ui/AdminDashboard/handleBack'
-const CHANGE_LIST_ITEM = 'flyve-mdm-web-ui/AdminDashboard/changeListItem'
+const CHANGE_ITEM_LIST = 'flyve-mdm-web-ui/AdminDashboard/changeItemList'
 
 // Reducers
 export default function reducer(state = INITIAL_STATE, action) {
@@ -75,10 +75,10 @@ export default function reducer(state = INITIAL_STATE, action) {
                location: [...state.location.slice(0, 1)]
             }
         
-        case CHANGE_LIST_ITEM:
+        case CHANGE_ITEM_LIST:
             return {
                 ...state,
-                listItem: action.newListItem
+                ItemList: ItemList(action.newItemList)
             }
 
         default: return state
@@ -119,9 +119,9 @@ export function handleBack () {
       type: HANDLE_BACK
     }
 }
-export function changeListItem(newListItem) {
+export function changeItemList(newItemList) {
     return {
-        type: CHANGE_LIST_ITEM,
-        newListItem
+        type: CHANGE_ITEM_LIST,
+        newItemList: newItemList[0]
     }
 }

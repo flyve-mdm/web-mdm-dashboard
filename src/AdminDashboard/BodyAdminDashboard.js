@@ -2,8 +2,8 @@ import * as React from 'react'
 import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { closePane, changeLocation, changeIndex, changeListItem } from './DuckController'
-import ListItemPage from './ListItemPage'
+import { closePane, changeLocation, changeIndex, changeItemList } from './DuckController'
+import ItemListPage from './ItemListPage'
 
 function mapStateToProps(state, props) {
     return {
@@ -14,7 +14,7 @@ function mapStateToProps(state, props) {
         router: state.AdminDashboard.router,
         splitViewConfigs: state.AdminDashboard.splitViewConfigs,
         mode: state.AdminDashboard.mode,
-        listItem: state.AdminDashboard.listItem
+        ItemList: state.AdminDashboard.ItemList
     }
 }
 
@@ -23,7 +23,7 @@ function mapDispatchToProps(dispatch) {
         closePane: bindActionCreators(closePane, dispatch),
         changeLocation: bindActionCreators(changeLocation, dispatch),
         changeIndex: bindActionCreators(changeIndex, dispatch),
-        changeListItem: bindActionCreators(changeListItem, dispatch)
+        changeItemList: bindActionCreators(changeItemList, dispatch)
     }
     return { actions }
 }
@@ -31,6 +31,7 @@ function mapDispatchToProps(dispatch) {
 class BodyAdminDashboard extends React.Component {
 
     handleCommandInvoked(newLocation, newIndex) {
+        this.props.actions.changeItemList(newLocation)
         this.props.actions.changeLocation(newLocation)
         this.props.actions.changeIndex(newIndex)
         this.props.actions.closePane()
@@ -39,7 +40,7 @@ class BodyAdminDashboard extends React.Component {
     render() {
         let contentComponent
         if (this.props.router[this.props.index].type === 'list') {
-            contentComponent = <ListItemPage mode={this.props.mode} location={this.props.location} listItem={this.props.listItem} onNavigate={this.props.actions.changeLocation} changeListItem={this.props.actions.changeListItem} />
+            contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} ItemList={this.props.ItemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
         } else {
             contentComponent = <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
         }
