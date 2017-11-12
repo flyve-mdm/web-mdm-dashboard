@@ -77,7 +77,8 @@ function genPerson() {
     }
 }
 
-let personCount = 50
-let people = genArray(personCount, personCount, genPerson)
-
-export default people
+export let devices = genArray(20, 20, genPerson)
+export let fleets = genArray(20, 20, genPerson)
+export let files = genArray(20, 20, genPerson)
+export let applications = genArray(20, 20, genPerson)
+export let users = genArray(50, 50, genPerson)

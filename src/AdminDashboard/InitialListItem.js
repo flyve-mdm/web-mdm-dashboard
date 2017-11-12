@@ -1,4 +1,4 @@
-import Data from './Data'
+import { devices as Data } from './Data'
 var WinJS = require('winjs')
 
 export default function () {
