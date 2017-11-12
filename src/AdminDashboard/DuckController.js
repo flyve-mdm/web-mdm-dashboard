@@ -1,11 +1,14 @@
 import GetMode from '../Utils/GetMode'
 import InitialListItem from './InitialListItem'
+import Routers from './Routers'
 
 const INITIAL_STATE = {
     splitViewId: 'rootSplitView',
     paneOpened: false,
     mode: GetMode(),
-    location: ['Dashboard'],
+    index: 0,
+    location: [Routers[0].label],
+    router: Routers,
     splitViewConfigs: {
         small: {
             closedDisplayMode: 'none',
@@ -28,6 +31,7 @@ const HANDLE_TOGGLE_PANE = 'flyve-mdm-web-ui/AdminDashboard/handleTogglePane'
 const CLOSE_PANE = 'flyve-mdm-web-ui/AdminDashboard/closePane'
 const CHANGE_MODE = 'flyve-mdm-web-ui/AdminDashboard/changeMode'
 const CHANGE_LOCATION = 'flyve-mdm-web-ui/AdminDashboard/changeLocation'
+const CHANGE_INDEX = 'flyve-mdm-web-ui/AdminDashboard/changeIndex'
 const HANDLE_BACK = 'flyve-mdm-web-ui/AdminDashboard/handleBack'
 const CHANGE_LIST_ITEM = 'flyve-mdm-web-ui/AdminDashboard/changeListItem'
 
@@ -57,6 +61,12 @@ export default function reducer(state = INITIAL_STATE, action) {
             return {
                ...state,
                location: action.newLocation
+            }
+        
+        case CHANGE_INDEX:
+            return {
+                ...state,
+                index: action.newIndex
             }
 
         case HANDLE_BACK:
@@ -98,6 +108,12 @@ export function changeLocation (newLocation) {
       newLocation
     }
 }
+export function changeIndex (newIndex) {
+    return { 
+        type: CHANGE_INDEX,
+        newIndex
+      }
+  }
 export function handleBack () {
   return { 
       type: HANDLE_BACK
