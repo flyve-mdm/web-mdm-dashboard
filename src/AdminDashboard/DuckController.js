@@ -23,12 +23,11 @@ const INITIAL_STATE = {
             openedDisplayMode: 'inline'
         }
     },
-    devices: ItemList("Devices"),
-    fleets: ItemList("Fleets"),
-    files: ItemList("Files"),
-    applications: ItemList("Applications"),
-    users: ItemList("Users")
-    
+    devices: { itemList: ItemList("Devices"), sort: true},
+    fleets: { itemList: ItemList("Fleets"), sort: true},
+    files: { itemList: ItemList("Files"), sort: true},
+    applications: { itemList: ItemList("Applications"), sort: true},
+    users: { itemList: ItemList("Users"), sort: true}
 }
 
 // Constants
@@ -83,7 +82,7 @@ export default function reducer(state = INITIAL_STATE, action) {
         case CHANGE_ITEM_LIST:
             return {
                 ...state,
-                devices: action.newItemList
+                [action.location]: action.newItemList
             }
 
         default: return state

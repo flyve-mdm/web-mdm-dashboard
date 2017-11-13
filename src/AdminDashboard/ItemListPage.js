@@ -3,6 +3,7 @@ import ReactWinJS from 'react-winjs'
 import Calc100PercentMinus from '../Utils/Calc100PercentMinus'
 import IconItemList from './IconItemList'
 import PropTypes from 'prop-types'
+import ItemList from './ItemList'
 let WinJS = require('winjs')
 
 class ItemListPage extends Component {
@@ -33,16 +34,16 @@ class ItemListPage extends Component {
 
     handleToggleSelectionMode = () => {
         this.setState({ selectionMode: !this.state.selectionMode })
-        this.props.onNavigate(["Devices"])
+        this.props.onNavigate(this.props.location)
         this.refs.listView.winControl.selection.clear()
     }
 
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
-        let indices = listView.selection.getIndices()
+        let index = listView.selection.getIndices()
         setTimeout(function () {
-            this.setState({ selectedItemList: indices });
-            this.props.onNavigate(indices.length === 1 && !this.state.selectionMode ? ["Devices", indices[0]] : ["Devices"]);
+            this.setState({ selectedItemList: index });
+            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
         }.bind(this), 0)
     }
 
@@ -65,7 +66,24 @@ class ItemListPage extends Component {
             selectedItem: [],
             selectionMode: false
         })
-        this.props.changeItemList(this.props.location, item)
+        this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
+    }
+
+    handleSort = () => {
+        let array = []
+        this.props.itemList.map((value, index) =>
+            array.push(value)
+        );
+        this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.sort), sort: !this.props.sort })
+    }
+
+    descendingCompare(first, second) {
+        if (first === second)
+            return 0;
+        else if (first < second)
+            return 1;
+        else
+            return -1;
     }
 
     renderItemListPane(ItemListPaneWidth) {
@@ -96,10 +114,11 @@ class ItemListPage extends Component {
                         priority={3}
                     />
                     <ReactWinJS.ToolBar.Button
-                        key="link"
-                        icon="link"
-                        label="Link"
-                        priority={2}
+                        key="sort"
+                        icon="sort"
+                        label="Sort"
+                        priority={1}
+                        onClick={this.handleSort}
                     />
                     <ReactWinJS.ToolBar.Button
                         key="refresh"
@@ -222,6 +241,7 @@ class ItemListPage extends Component {
 
 ItemListPage.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
+    sort: PropTypes.bool.isRequired,
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
