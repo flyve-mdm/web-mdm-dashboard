@@ -23,7 +23,12 @@ const INITIAL_STATE = {
             openedDisplayMode: 'inline'
         }
     },
-    ItemList: ItemList()
+    devices: ItemList("Devices"),
+    fleets: ItemList("Fleets"),
+    files: ItemList("Files"),
+    applications: ItemList("Applications"),
+    users: ItemList("Users")
+    
 }
 
 // Constants
@@ -78,7 +83,7 @@ export default function reducer(state = INITIAL_STATE, action) {
         case CHANGE_ITEM_LIST:
             return {
                 ...state,
-                ItemList: ItemList(action.newItemList)
+                devices: action.newItemList
             }
 
         default: return state
@@ -119,9 +124,10 @@ export function handleBack () {
       type: HANDLE_BACK
     }
 }
-export function changeItemList(newItemList) {
+export function changeItemList(location, newItemList) {
     return {
         type: CHANGE_ITEM_LIST,
-        newItemList: newItemList[0]
+        newItemList,
+        location: location[0].toLowerCase()
     }
 }

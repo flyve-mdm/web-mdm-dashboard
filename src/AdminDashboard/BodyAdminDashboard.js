@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -14,7 +14,11 @@ function mapStateToProps(state, props) {
         router: state.AdminDashboard.router,
         splitViewConfigs: state.AdminDashboard.splitViewConfigs,
         mode: state.AdminDashboard.mode,
-        ItemList: state.AdminDashboard.ItemList
+        devices: state.AdminDashboard.devices,
+        fleets: state.AdminDashboard.fleets,
+        files: state.AdminDashboard.files,
+        applications: state.AdminDashboard.applications,
+        users: state.AdminDashboard.users
     }
 }
 
@@ -28,21 +32,37 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class BodyAdminDashboard extends React.Component {
+class BodyAdminDashboard extends Component {
 
     handleCommandInvoked(newLocation, newIndex) {
-        this.props.actions.changeItemList(newLocation)
         this.props.actions.changeLocation(newLocation)
         this.props.actions.changeIndex(newIndex)
         this.props.actions.closePane()
     }
 
     render() {
+
         let contentComponent
-        if (this.props.router[this.props.index].type === 'list') {
-            contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} ItemList={this.props.ItemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
-        } else {
-            contentComponent = <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
+
+        switch (this.props.router[this.props.index].label) {
+
+            case "Devices":
+                contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} itemList={this.props.devices} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                break
+            case "Fleets":
+                contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} itemList={this.props.fleets} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                break
+            case "Files":
+                contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} itemList={this.props.files} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                break
+            case "Applications":
+                contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} itemList={this.props.applications} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                break
+            case "Users":
+                contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} itemList={this.props.users} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                break
+            default: 
+                contentComponent = <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
         }
 
         let pane = (
