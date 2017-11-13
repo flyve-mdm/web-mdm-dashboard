@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { closePane, changeLocation, changeIndex, changeItemList } from './DuckController'
 import ItemListPage from './ItemListPage'
+import AboutPage from './AboutPage'
 
 function mapStateToProps(state, props) {
     return {
@@ -60,6 +61,9 @@ class BodyAdminDashboard extends Component {
                 break
             case "Users":
                 contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} sort={this.props.users.sort} itemList={this.props.users.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                break
+            case "About":
+                contentComponent = <AboutPage mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} />
                 break
             default: 
                 contentComponent = <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
