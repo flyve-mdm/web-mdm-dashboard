@@ -1,11 +1,11 @@
-import * as React from 'react'
+import React, { Component } from "react"
 import ReactWinJS from 'react-winjs'
 import Calc100PercentMinus from '../Utils/Calc100PercentMinus'
 import IconItemList from './IconItemList'
 import PropTypes from 'prop-types'
 let WinJS = require('winjs')
 
-class ItemListPage extends React.Component {
+class ItemListPage extends Component {
 
     constructor(props) {
         super(props)
@@ -54,18 +54,18 @@ class ItemListPage extends React.Component {
     }
 
     handleDelete = () => {
-        let item = this.props.ItemList
-        let indices = this.state.selectedItemList
-        indices.sort()
-        indices.reverse()
-        indices.forEach((i) => {
+        let item = this.props.itemList
+        let index = this.state.selectedItemList
+        index.sort()
+        index.reverse()
+        index.forEach((i) => {
             item.splice(i, 1)
         })
         this.setState({
             selectedItem: [],
             selectionMode: false
         })
-        this.props.changeItemList(item)
+        this.props.changeItemList(this.props.location, item)
     }
 
     renderItemListPane(ItemListPaneWidth) {
@@ -131,8 +131,8 @@ class ItemListPage extends React.Component {
                     ref="listView"
                     className="peopleListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.props.ItemList.dataSource}
-                    groupDataSource={this.props.ItemList.groups.dataSource}
+                    itemDataSource={this.props.itemList.dataSource}
+                    groupDataSource={this.props.itemList.groups.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
                     groupHeaderTemplate={this.groupHeaderRenderer}
@@ -155,7 +155,7 @@ class ItemListPage extends React.Component {
                 </div>
             )
         } else {
-            let selectedItemList = this.props.ItemList.getAt(selectedIndex)
+            let selectedItemList = this.props.itemList.getAt(selectedIndex)
             return (
                 <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div className="profileHeader">
@@ -222,7 +222,7 @@ class ItemListPage extends React.Component {
 
 ItemListPage.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
-    ItemList: PropTypes.object.isRequired,
+    itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeItemList: PropTypes.func.isRequired
