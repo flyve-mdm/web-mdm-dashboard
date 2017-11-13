@@ -7,7 +7,7 @@ import AdminDashboard from './AdminDashboard'
  * Assets
  */
 import './App.css'
-import '../node_modules/winjs/css/ui-light.css'
+import './ui-light.css'
 /**
  * Main component
  * @returns AdminDashboard component
