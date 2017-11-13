@@ -359,7 +359,8 @@
   }
   @font-face {
     font-family: "Symbols";
-    src: url(./fonts/Symbols.ttf);
+    src: url("./fonts/glyphs/winjs-symbols.eot");
+    src: url("./fonts/glyphs/winjs-symbols.ttf") format("truetype");
   }
   .win-type-header,
   .win-h1 {
