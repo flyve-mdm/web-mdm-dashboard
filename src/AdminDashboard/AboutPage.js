@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 import ReactWinJS from 'react-winjs'
 import Calc100PercentMinus from '../Utils/Calc100PercentMinus'
+import {markdown} from 'markdown'
+import LICENCE from './LICENCE.md'
 let WinJS = require('winjs')
-
 export default class AboutPage extends Component {
 
     
@@ -72,6 +73,7 @@ export default class AboutPage extends Component {
             return (
                 <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     { selectedItemList.title }
+                    { markdown.toHTML(LICENCE) }
                 </div>
             )
         }
