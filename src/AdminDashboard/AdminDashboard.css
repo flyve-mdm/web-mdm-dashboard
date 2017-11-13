@@ -2,6 +2,9 @@
     height: 100%;
 }
 
+.listViewExample .win-container {
+    margin: 0 !important;
+}
 /*
  * BackButton
  *  Ensure it's the same size as the SplitViewPaneToggle
