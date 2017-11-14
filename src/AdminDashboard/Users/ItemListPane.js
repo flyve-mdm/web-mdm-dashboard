@@ -19,9 +19,14 @@ class ItemListPane extends Component {
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
-            <div>
-                <IconItemList backgroundUrl={ItemList.data.picture} size={34} />
-                <span className="name">{ItemList.data.name}</span>
+            <div style={{  padding: '5px', paddingLeft: '12px' }}>
+                <div style={{ float: 'left' }}>
+                    <IconItemList backgroundUrl={ItemList.data.picture} size={34} />
+                </div>
+                <div style={{ display: 'inline-block' }}>
+                    <span className="name">{ItemList.data['User.name']}</span><br/>
+                    <span className="email">{ItemList.data['User.UserEmail.email']}</span>
+                </div>
             </div>
         )
     })
