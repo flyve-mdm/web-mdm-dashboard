@@ -1,7 +1,7 @@
 export default () => {
     return (
-        window.innerWidth >= 1366 ? 'large' :
-        window.innerWidth >= 800 ? 'medium' :
+        window.innerWidth >= 1024 ? 'large' :
+        window.innerWidth >= 772 ? 'medium' :
         'small'
     )
 }
