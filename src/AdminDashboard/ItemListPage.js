@@ -17,6 +17,10 @@ class ItemListPage extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.setState({ selectionMode: false, selectedItemList: [] }) 
+    }
+
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <div>
