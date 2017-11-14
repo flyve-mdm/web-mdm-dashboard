@@ -2,13 +2,17 @@ import * as DATA from './Data'
 import WinJS from 'winjs'
 
 export default function (name, list, sort) {
-    const groupKey = function (data) {
+
+    var groupKey = function (data) {
         switch (name) {
-            case 'Users':
+            case "Devices":
+                return data["PluginFlyvemdmAgent.Computer.User.realname"][0].toUpperCase()
+            case "Users":
                 return data['User.name'][0].toUpperCase()
             default:
                 return data.name[0].toUpperCase()
         }
+        
     }
 
     const groupData = function (data) {
