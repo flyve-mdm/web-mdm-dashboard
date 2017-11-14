@@ -1,16 +1,20 @@
 import * as DATA from './Data'
-var WinJS = require('winjs')
+import WinJS from 'winjs'
 
 export default function (name, list, sort) {
-    var groupKey = function (data) {
-        return data.name[0].toUpperCase()
+    const groupKey = function (data) {
+        if (data.User) {
+            return data.User.name[0].toUpperCase()
+        } else {
+            return data.name[0].toUpperCase()
+        }
     }
 
-    var groupData = function (data) {
+    const groupData = function (data) {
         return { title: groupKey(data) }
     }
 
-    var groupSorted = function (a, b) {
+    const groupSorted = function (a, b) {
         if (sort) {
             if (a < b) {
                 return -1
@@ -31,7 +35,7 @@ export default function (name, list, sort) {
         
     }
 
-    var sorter = function (a, b) {
+    const sorter = function (a, b) {
         if (a.name < b.name) {
             return -1
         } else if (a.name > b.name) {
