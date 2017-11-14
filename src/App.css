@@ -37,6 +37,29 @@ body {
 
 #app .peopleSearchPane .peopleListView .win-container {
     margin: 0;
+    /* height: 48px; */
+}
+
+#app .peopleSearchPane .peopleListView .win-item {
+    padding-top: 8px;
+    width: calc(100% - 12px);
+    padding-left: 12px;
+}
+
+#app .peopleSearchPane .peopleListView .win-item .profilePicture {
+    width: 34px;
+    height: 34px;
+    background-size: cover;
+    -webkit-border-radius: 34px;
+    -moz-border-radius: 34px;
+    border-radius: 34px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+#app .peopleSearchPane .peopleListView .win-item .name {
+    vertical-align: middle;
 }
 
 #app .peopleSearchPane .peopleListView .win-groupheadercontainer {
@@ -55,7 +78,7 @@ body {
     color: white;
     text-align: center;
     line-height: 32px;
-}
+} 
 
 .peopleToolBar .win-toolbar-actionarea {
     background-color: white;
