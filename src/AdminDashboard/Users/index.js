@@ -10,15 +10,15 @@ class UsersPage extends Component {
 
         if (this.props.mode === 'small') {
             if (selectedIndex === null) {
-                return <ItemListPane itemListPaneWidth="100%" location={this.props.location} onNavigate={this.props.onNavigate} itemList={this.props.itemList} sort={this.props.sort} />
+                return <ItemListPane itemListPaneWidth="100%" changeItemList={this.props.changeItemList} location={this.props.location} onNavigate={this.props.onNavigate} itemList={this.props.itemList} sort={this.props.sort} />
             } else {
-                return <ContentPane selectedIndex={selectedIndex} itemListPaneWidth="0"/>
+                return <ContentPane selectedIndex={selectedIndex} itemListPaneWidth={0} itemList={this.props.itemList} />
             }
         } else {
             return (
                 <div style={{ height: '100%' }}>
-                    <ItemListPane itemListPaneWidth="320" location={this.props.location} onNavigate={this.props.onNavigate} itemList={this.props.itemList} sort={this.props.sort} />
-                    <ContentPane selectedIndex={selectedIndex} itemListPaneWidth="320"/>
+                    <ItemListPane itemListPaneWidth={320} changeItemList={this.props.changeItemList} location={this.props.location} onNavigate={this.props.onNavigate} itemList={this.props.itemList} sort={this.props.sort} />
+                    <ContentPane selectedIndex={selectedIndex} itemListPaneWidth={320} itemList={this.props.itemList} />
                 </div>
             )
         }

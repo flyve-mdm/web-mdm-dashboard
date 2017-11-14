@@ -62,7 +62,8 @@ class ContentPane extends Component {
 
 ContentPane.propTypes = {
     // selectedIndex: PropTypes. ,
-    itemListPaneWidth: PropTypes.string.isRequired
+    itemList: PropTypes.object.isRequired,
+    itemListPaneWidth: PropTypes.number.isRequired
 }
 
 export default ContentPane
