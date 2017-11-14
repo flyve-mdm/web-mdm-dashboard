@@ -3,10 +3,11 @@ import WinJS from 'winjs'
 
 export default function (name, list, sort) {
     const groupKey = function (data) {
-        if (data.User) {
-            return data.User.name[0].toUpperCase()
-        } else {
-            return data.name[0].toUpperCase()
+        switch (name) {
+            case 'Users':
+                return data['User.name'][0].toUpperCase()
+            default:
+                return data.name[0].toUpperCase()
         }
     }
 

@@ -166,7 +166,10 @@ class ItemListPane extends Component {
 }
 
 ItemListPane.propTypes = {
-    itemListPaneWidth: PropTypes.string.isRequired,
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
     sort: PropTypes.bool.isRequired,
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
