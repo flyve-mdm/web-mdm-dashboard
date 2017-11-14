@@ -2,8 +2,6 @@ import React from 'react'
 import HeaderAdminDashboard from './HeaderAdminDashboard'
 import BodyAdminDashboard from './BodyAdminDashboard'
 
-import './AdminDashboard.css'
-
 export default class App extends React.Component {
 
     render () {
