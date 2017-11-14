@@ -19,39 +19,40 @@ class ContentPane extends Component {
             return (
                 <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div className="profileHeader">
-                        <div className="name">{selectedItemList.name}</div>
+                        <div className="name">{selectedItemList['User.name']}</div>
                         <div className="personInfo">
-                            <IconItemList backgroundUrl={selectedItemList.picture} size={100} />
+                            <IconItemList backgroundUrl={selectedItemList['User.picture']} size={100} />
                             <div className="profileStatus">
                                 <span className="message">
-                                    {selectedItemList.status}
+                                    {selectedItemList['User.Profile_User.Profile.name']}
                                 </span>
-                                <span className="source">{selectedItemList.statusHoursAgo} hours ago</span>
+                                <span className="source">{selectedItemList['User.last_login']}</span>
                             </div>
                         </div>
                     </div>
                     <div className="separator" />
                     <div className="profileContent">
                         <ul>
-                            <li><span className="messageIcon" />Message</li>
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
                                     <a href="call:5550100">Call Mobile</a>
-                                    <div className="number">{selectedItemList.mobilePhone}</div>
+                                    <span>{}</span>
+                                    <div className="number">{selectedItemList['User.mobile']}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
                                     <a href="call:5550100">Call Work</a>
-                                    <div className="number">{selectedItemList.workPhone}</div>
+                                    <div className="number">{selectedItemList['User.phone2']}</div>
                                 </div>
                             </li>
-                            <li><span className="phoneIcon" />Call using an app</li>
-                            <li><span className="videoCallIcon" />Video call</li>
-                            <li><span className="emailIcon" />Email work</li>
-                            <li><span className="mapIcon" />Map home</li>
+                            <li>
+                                <span className="emailIcon" />
+                                <a href="mail:{}">Email</a>
+                            </li>
+                            <li><span className="cellphoneIcon" />Divice</li>
                         </ul>
                     </div>
                 </div>
