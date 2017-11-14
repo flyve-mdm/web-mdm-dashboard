@@ -83,4 +83,4 @@ export let Devices = genArray(20, 20, genPerson)
 export let Fleets = genArray(20, 20, genPerson)
 export let Files = genArray(20, 20, genPerson)
 export let Applications = genArray(20, 20, genPerson)
-export let Users = USERS
+export let Users = USERS.data
