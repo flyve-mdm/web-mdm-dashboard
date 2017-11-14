@@ -61,7 +61,7 @@ class HeaderAdminDashboard extends React.Component {
                     paneOpened={this.props.paneOpened}
                 />
                 {this.renderBackButton()}
-                <h3 className="win-h3" style={{display: 'inline-block', marginLeft: 5}}>Admin Dashboard </h3>
+                <h3 className="win-h3" style={{display: 'inline-block', marginLeft: 5}}>{ this.props.location[0] } </h3>
             </div>
         )
     }
