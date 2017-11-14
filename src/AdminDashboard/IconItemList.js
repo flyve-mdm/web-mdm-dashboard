@@ -1,5 +1,4 @@
 import React from 'react'
-import CssUrl from '../Utils/CssUrl'
 
 export default class IconItemList extends React.Component {
     render() {
@@ -8,7 +7,7 @@ export default class IconItemList extends React.Component {
             <div
                 className="profilePicture"
                 style={{
-                    backgroundImage: CssUrl(this.props.backgroundUrl),
+                    backgroundColor: '#BBBBBB',
                     width: size,
                     height: size,
                     WebkitBorderRadius: size,
@@ -18,7 +17,7 @@ export default class IconItemList extends React.Component {
                     display: 'inline-block'
                 }}
             >
-                <img src="profile.png" height={size} width={size} alt="" />
+                <img src="images/" height={size} width={size} alt="" />
             </div>
         )
     }
