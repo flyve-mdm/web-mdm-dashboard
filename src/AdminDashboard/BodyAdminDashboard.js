@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { closePane, changeLocation, changeIndex, changeItemList } from './DuckController'
 import ItemListPage from './ItemListPage'
 import Users from './Users'
+import Devices from './devices'
 import AboutPage from './AboutPage'
 
 function mapStateToProps(state, props) {
@@ -49,7 +50,7 @@ class BodyAdminDashboard extends Component {
         switch (this.props.router[this.props.index].label) {
 
             case "Devices":
-                contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                contentComponent = <Devices mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
                 break
             case "Fleets":
                 contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
