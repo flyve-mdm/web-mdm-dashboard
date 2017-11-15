@@ -1,25 +1,13 @@
 import React, { Component } from 'react'
+import IconItemList from '../IconItemList'
+
 
 export default class DevicesItemList extends Component {
     render() {
         let size = this.props.size
         return (
             <div>
-                <div
-                    className="profilePicture"
-                    style={{
-                        backgroundColor: '#e6e6e6',
-                        width: size,
-                        height: size,
-                        WebkitBorderRadius: size,
-                        MozBorderRadius: size,
-                        borderRadius: size,
-                        backgroundSize: 'cover',
-                        display: 'inline-block'
-                    }}
-                >
-                    <img src="images\" height={size} width={size} alt="" />
-                </div>
+                <IconItemList size={size}/>
                 <div style={{ display: 'inline-block'}}>
                     <div className="name">{this.props.itemList["PluginFlyvemdmAgent.Computer.User.realname"]}</div>
                     <div className="detail">{this.props.itemList["PluginFlyvemdmAgent.name"]}</div>
