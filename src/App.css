@@ -204,7 +204,7 @@ a {
 }
 
 .profileContent .mapIcon::before {
-    content: "\E139";
+    content: "\E1C4";
 }
 
 .deviceIcon::before {

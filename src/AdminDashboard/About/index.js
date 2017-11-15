@@ -105,6 +105,13 @@ export default class AboutPage extends Component {
                             <SystemInformation />
                         </div>
                     )
+                case 'Contact':
+                    return (
+                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                            <h1>{ selectedItemList.title }</h1>
+                            <Contact />
+                        </div>
+                    )
                 default:
                     return (
                         <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
