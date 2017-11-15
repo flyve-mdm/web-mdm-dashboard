@@ -7,6 +7,7 @@ import ItemListPage from './ItemListPage'
 import Users from './Users'
 import Devices from './devices'
 import AboutPage from './AboutPage'
+import SettingsPage from './SettingsPage'
 
 function mapStateToProps(state, props) {
     return {
@@ -63,6 +64,9 @@ class BodyAdminDashboard extends Component {
                 break
             case "Users":
                 contentComponent = <Users mode={this.props.mode} location={this.props.location} sort={this.props.users.sort} itemList={this.props.users.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                break
+            case "Settings":
+                contentComponent = <SettingsPage mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} />
                 break
             case "About":
                 contentComponent = <AboutPage mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} />
