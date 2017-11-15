@@ -1,0 +1,29 @@
+.plugins {
+    margin: 15px 0;
+}
+
+.pluginLeft {
+    display: inline-block;
+    width: 350px;
+    text-overflow: ellipsis;
+}
+.pluginRight {
+    display: inline-block;
+    text-align: right;
+    width: 100px;
+}
+@media (max-width: 840px) {
+    .pluginLeft {
+        display: inline-block;
+        width: 200px;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+    }
+    .pluginRight {
+        display: inline-block;
+        text-align: right;
+        width: 100px;
+        vertical-align: top;
+        float: right;
+    }
+}
