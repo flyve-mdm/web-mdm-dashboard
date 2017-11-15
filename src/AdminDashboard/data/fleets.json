@@ -1,0 +1,15 @@
+{
+    "totalcount": 2,
+    "count": 2,
+    "sort": 1,
+    "order": "ASC",
+    "data": [
+      {
+        "Fleets.name": "Sales"
+      },
+      {
+        "Fleets.name": "IT"
+      }
+    ],
+    "content-range": "0-1/2"
+  }

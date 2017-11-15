@@ -1,0 +1,21 @@
+{
+    "totalcount": 3,
+    "count": 3,
+    "sort": 1,
+    "order": "ASC",
+    "data": [
+      {
+        "Files.name": "reports.odt",
+        "Files.size": "40 KiB"
+      },
+      {
+        "Files.name": "catalog.pdf",
+        "Files.size": "60 MiB"
+      },
+      {
+        "Files.name": "logo.png",
+        "Files.size": "5 MiB"
+      }
+    ],
+    "content-range": "0-2/3"
+  }
