@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import ReactWinJS from 'react-winjs'
-import Calc100PercentMinus from '../Utils/Calc100PercentMinus'
+import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 let WinJS = require('winjs')
 
 export default class SettingsPage extends Component {
