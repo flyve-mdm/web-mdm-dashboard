@@ -42,24 +42,40 @@ body {
 
 #app .peopleSearchPane .peopleListView .win-item {
     padding-top: 8px;
+    padding-bottom: 8px;
     width: calc(100% - 12px);
     padding-left: 12px;
 }
 
 #app .peopleSearchPane .peopleListView .win-item .profilePicture {
-    width: 34px;
-    height: 34px;
+    width: 42px;
+    height: 42px;
     background-size: cover;
-    -webkit-border-radius: 34px;
-    -moz-border-radius: 34px;
-    border-radius: 34px;
+    -webkit-border-radius: 42px;
+    -moz-border-radius: 42px;
+    border-radius: 42px;
     display: inline-block;
     vertical-align: top;
-    margin-right: 5px;
+    margin-right: 8px;
 }
 
 #app .peopleSearchPane .peopleListView .win-item .name {
     vertical-align: middle;
+    font-weight: 500;
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#app .peopleSearchPane .peopleListView .win-item .detail {
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: 300;
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #app .peopleSearchPane .peopleListView .win-groupheadercontainer {

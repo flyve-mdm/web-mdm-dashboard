@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { closePane, changeLocation, changeIndex, changeItemList } from './DuckController'
 import ItemListPage from './ItemListPage'
 import Users from './Users'
-import Devices from './devices'
+import Devices from './Devices'
 import AboutPage from './AboutPage'
 import SettingsPage from './SettingsPage'
 

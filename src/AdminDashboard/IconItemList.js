@@ -7,7 +7,7 @@ export default class IconItemList extends React.Component {
             <div
                 className="profilePicture"
                 style={{
-                    backgroundColor: '#BBBBBB',
+                    backgroundColor: '#e6e6e6',
                     width: size,
                     height: size,
                     WebkitBorderRadius: size,
@@ -17,7 +17,7 @@ export default class IconItemList extends React.Component {
                     display: 'inline-block'
                 }}
             >
-                <img src="images/" height={size} width={size} alt="" />
+                <img src="images/profile.png" height={size} width={size} alt="" />
             </div>
         )
     }
