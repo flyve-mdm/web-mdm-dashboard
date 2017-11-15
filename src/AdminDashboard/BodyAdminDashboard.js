@@ -6,7 +6,7 @@ import { closePane, changeLocation, changeIndex, changeItemList } from './DuckCo
 import ItemListPage from './ItemListPage'
 import Users from './Users'
 import Devices from './Devices'
-import AboutPage from './AboutPage'
+import About from './About'
 import SettingsPage from './SettingsPage'
 
 function mapStateToProps(state, props) {
@@ -69,7 +69,7 @@ class BodyAdminDashboard extends Component {
                 contentComponent = <SettingsPage mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} />
                 break
             case "About":
-                contentComponent = <AboutPage mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} />
+                contentComponent = <About mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} />
                 break
             default: 
                 contentComponent = <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
