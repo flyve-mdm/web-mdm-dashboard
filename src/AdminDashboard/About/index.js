@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import ReactWinJS from 'react-winjs'
-import Calc100PercentMinus from '../Utils/Calc100PercentMinus'
+import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import LICENCE from './LICENCE.md'
 import ReactMarkdown from 'react-markdown' 
 let WinJS = require('winjs')
