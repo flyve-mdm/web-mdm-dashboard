@@ -3,7 +3,7 @@ import ReactWinJS from 'react-winjs'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import LICENCE from './LICENCE.md'
 import ReactMarkdown from 'react-markdown' 
-let WinJS = require('winjs')
+import WinJS from 'winjs'
 export default class AboutPage extends Component {
 
     
@@ -70,12 +70,21 @@ export default class AboutPage extends Component {
             )
         } else {
             let selectedItemList = this.state.list.getAt(selectedIndex)
-            return (
-                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                    <h1>{ selectedItemList.title }</h1>
-                    <ReactMarkdown source={LICENCE} />
-                </div>
-            )
+            switch (selectedItemList.title) {
+                case 'License':
+                    return (
+                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                            <h1>{ selectedItemList.title }</h1>
+                            <ReactMarkdown source={LICENCE} />
+                        </div>
+                    )
+                default:
+                    return (
+                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                            <h1>{ selectedItemList.title }</h1>
+                        </div>
+                    )
+            }
         }
     }
 
