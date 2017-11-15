@@ -42,7 +42,7 @@ export default class SettingsPage extends Component {
             <div className="peopleSearchPane" style={{ height: '100%', width: ItemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ListView
                     ref="listView"
-                    className="listViewExample win-selectionstylefilled"
+                    className="peopleListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.state.list.dataSource}
                     itemTemplate={this.itemRenderer}
