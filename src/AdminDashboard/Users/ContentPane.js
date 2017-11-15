@@ -36,22 +36,21 @@ class ContentPane extends Component {
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
-                                    <a href="call:">Call Mobile</a>
-                                    <span>{}</span>
+                                    <a href={"tel:" + selectedItemList['User.mobile']}>Call Mobile</a>
                                     <div className="number">{selectedItemList['User.mobile']}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
-                                    <a href="call:">Call Work</a>
+                                    <a href={"tel:" + selectedItemList['User.phone2']}>Call Work</a>
                                     <div className="number">{selectedItemList['User.phone2']}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="emailIcon" />
                                 <div className="callContent">
-                                <a href="mail:{}">Email</a>
+                                <a href={"mailto:" + selectedItemList['User.UserEmail.email']}>Email</a>
                                 <div className="number">{selectedItemList['User.UserEmail.email']}</div>
                                 </div>
                             </li>
