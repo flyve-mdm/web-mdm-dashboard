@@ -6,6 +6,10 @@ body {
     overflow: auto;
 }
 
+a {
+    color: #158784
+}
+
 #app {
     height: 100%;
 }
