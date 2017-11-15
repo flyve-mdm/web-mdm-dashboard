@@ -9,6 +9,8 @@ export default function (name, list, sort) {
                 return data["PluginFlyvemdmAgent.Computer.User.realname"][0].toUpperCase()
             case "Files":
                 return data["PluginFlyvemdmFile.name"][0].toUpperCase()
+            case "Applications":
+                return data["PluginFlyvemdmPackage.alias"][0]
             case "Users":
                 return data['User.name'][0].toUpperCase()
             default:
