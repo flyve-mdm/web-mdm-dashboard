@@ -406,50 +406,9 @@
   }
   @font-face {
     font-family: "Segoe UI";
-    font-weight: 200;
     src: local("Segoe UI Light");
     src: url("./fonts/selawkl.eot");
     src: url("./fonts/selawkl.ttf") format("truetype");
-  }
-  @font-face {
-    font-family: "Segoe UI";
-    font-weight: 300;
-    src: local("Segoe UI Semilight");
-    src: url("./fonts/selawksl.eot");
-    src: url("./fonts/selawksl.ttf") format("truetype");
-  }
-  @font-face {
-    font-family: "Segoe UI";
-    font-weight: 400;
-    src: local("Segoe UI");
-    src: url("./fonts/selawk.eot");
-    src: url("./fonts/selawk.ttf") format("truetype");
-  }
-  @font-face {
-    font-family: "Segoe UI";
-    font-weight: 500;
-    src: local("Segoe UI Semibold");
-    src: url("./fonts/selawksb.eot");
-    src: url("./fonts/selawksb.ttf") format("truetype");
-  }
-  @font-face {
-    font-family: "Segoe UI";
-    font-weight: 600;
-    src: local("Segoe UI Bold");
-    src: url("./fonts/selawkb.eot");
-    src: url("./fonts/selawkb.ttf") format("truetype");
-  }
-  @font-face {
-    font-family: "Segoe UI";
-    font-style: italic;
-    font-weight: 400;
-    src: local("Segoe UI Italic");
-  }
-  @font-face {
-    font-family: "Segoe UI";
-    font-style: italic;
-    font-weight: 700;
-    src: local("Segoe UI Bold Italic");
   }
   @font-face {
     font-family: "Microsoft Yahei UI";
