@@ -26,7 +26,7 @@ class ContentPane extends Component {
                                 <span className="message">
                                     {selectedItemList['User.Profile_User.Profile.name']}
                                 </span>
-                                <span className="source">{selectedItemList['User.last_login']}</span>
+                                <span className="source">Joined {selectedItemList['User.date_creation']}</span>
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@ class ContentPane extends Component {
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
-                                    <a href="call:5550100">Call Mobile</a>
+                                    <a href="call:">Call Mobile</a>
                                     <span>{}</span>
                                     <div className="number">{selectedItemList['User.mobile']}</div>
                                 </div>
@@ -44,15 +44,17 @@ class ContentPane extends Component {
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
-                                    <a href="call:5550100">Call Work</a>
+                                    <a href="call:">Call Work</a>
                                     <div className="number">{selectedItemList['User.phone2']}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="emailIcon" />
+                                <div className="callContent">
                                 <a href="mail:{}">Email</a>
+                                <div className="number">{selectedItemList['User.UserEmail.email']}</div>
+                                </div>
                             </li>
-                            <li><span className="cellphoneIcon" />Divice</li>
                         </ul>
                     </div>
                 </div>

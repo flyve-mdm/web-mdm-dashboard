@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import IconItemList from '../IconItemList'
 import ItemList from '../ItemList'
+import IconItemList from '../IconItemList'
 import WinJS from 'winjs'
 
 
@@ -19,13 +19,12 @@ class ItemListPane extends Component {
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
-            <div style={{  padding: '5px', paddingLeft: '12px' }}>
-                <div style={{ float: 'left' }}>
-                    <IconItemList backgroundUrl={ItemList.data.picture} size={34} />
-                </div>
-                <div style={{ display: 'inline-block' }}>
-                    <span className="name">{ItemList.data['User.name']}</span><br/>
-                    <span className="email">{ItemList.data['User.UserEmail.email']}</span>
+            
+            <div>
+                <IconItemList backgroundUrl={ItemList.data['User.picture']} size={42} />
+                <div style={{ display: 'inline-block'}}>
+                    <div className="name">{ItemList.data['User.name']}</div>
+                    <div className="detail">{ItemList.data['User.UserEmail.email']}</div>
                 </div>
             </div>
         )
