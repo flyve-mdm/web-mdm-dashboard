@@ -2,7 +2,8 @@ import React, { Component } from "react"
 import ReactWinJS from 'react-winjs'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import LICENCE from './LICENCE.md'
-import ReactMarkdown from 'react-markdown' 
+import ReactMarkdown from 'react-markdown'
+import TermsOfUse from './TermsOfUse'
 import WinJS from 'winjs'
 export default class AboutPage extends Component {
 
@@ -76,6 +77,13 @@ export default class AboutPage extends Component {
                         <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                             <h1>{ selectedItemList.title }</h1>
                             <ReactMarkdown source={LICENCE} />
+                        </div>
+                    )
+                case 'Term of use':
+                    return (
+                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                            <h1>{ selectedItemList.title }</h1>
+                            <TermsOfUse />
                         </div>
                     )
                 default:
