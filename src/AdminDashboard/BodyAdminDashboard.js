@@ -6,6 +6,7 @@ import { closePane, changeLocation, changeIndex, changeItemList } from './DuckCo
 import ItemListPage from './ItemListPage'
 import Users from './Users'
 import Devices from './Devices'
+import Files from './Files'
 import About from './About'
 import SettingsPage from './SettingsPage'
 
@@ -57,7 +58,7 @@ class BodyAdminDashboard extends Component {
                 contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
                 break
             case "Files":
-                contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} sort={this.props.files.sort} itemList={this.props.files.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                contentComponent = <Files mode={this.props.mode} location={this.props.location} sort={this.props.files.sort} itemList={this.props.files.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
                 break
             case "Applications":
                 contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} sort={this.props.applications.sort} itemList={this.props.applications.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
