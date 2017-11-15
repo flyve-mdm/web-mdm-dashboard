@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import ReactWinJS from 'react-winjs'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import LICENCE from './LICENCE.md'
+import CHANGELOG from './CHANGELOG.md'
 import ReactMarkdown from 'react-markdown'
 import TermsOfUse from './TermsOfUse'
 import WinJS from 'winjs'
@@ -84,6 +85,13 @@ export default class AboutPage extends Component {
                         <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                             <h1>{ selectedItemList.title }</h1>
                             <TermsOfUse />
+                        </div>
+                    )
+                case 'Release notes':
+                    return (
+                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                            <h1>{ selectedItemList.title }</h1>
+                            <ReactMarkdown source={CHANGELOG} />
                         </div>
                     )
                 default:
