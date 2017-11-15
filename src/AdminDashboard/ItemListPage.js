@@ -24,7 +24,7 @@ class ItemListPage extends Component {
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <div>
-                <IconItemList backgroundUrl={ItemList.data.picture} size={34} />
+                <IconItemList backgroundUrl={ItemList.data.picture} size={42} />
                 <span className="name">{ItemList.data.name}</span>
             </div>
         )

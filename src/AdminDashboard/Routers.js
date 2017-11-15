@@ -44,14 +44,14 @@ const routers = [
         data: Data.Users
     },
     {
-        type: "content",
+        type: "list",
         label: "Settings",
         icon: "settings",
         style: { position: 'absolute', bottom: 48, width: '100%' },
         data: []
     },
     {
-        type: "content",
+        type: "list",
         label: "About",
         icon: "contactinfo",
         style: { position: 'absolute', bottom: 0, width: '100%' },
