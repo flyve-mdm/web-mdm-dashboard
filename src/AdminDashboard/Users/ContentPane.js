@@ -19,10 +19,15 @@ class ContentPane extends Component {
             return (
                 <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div className="profileHeader">
-                        <div className="name">{selectedItemList['User.name']}</div>
+                        <h2 className="win-h2" style={{ margin: '20.1px 0' }}> User </h2>
                         <div className="personInfo">
                             <IconItemList backgroundUrl={selectedItemList['User.picture']} size={100} />
                             <div className="profileStatus">
+                                <div className="message">
+                                    <b>
+                                        {selectedItemList['User.name']}
+                                    </b>
+                                </div>
                                 <span className="message">
                                     {selectedItemList['User.Profile_User.Profile.name']}
                                 </span>
