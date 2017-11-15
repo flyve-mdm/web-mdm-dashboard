@@ -5,7 +5,11 @@ import LICENCE from './LICENCE.md'
 import CHANGELOG from './CHANGELOG.md'
 import ReactMarkdown from 'react-markdown'
 import TermsOfUse from './TermsOfUse'
+import SystemInformation from './SystemInformation'
+import Overview from './Overview'
+import Contact from './Contact'
 import WinJS from 'winjs'
+import './About.css'
 export default class AboutPage extends Component {
 
     
@@ -92,6 +96,13 @@ export default class AboutPage extends Component {
                         <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                             <h1>{ selectedItemList.title }</h1>
                             <ReactMarkdown source={CHANGELOG} />
+                        </div>
+                    )
+                case 'System information':
+                    return (
+                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                            <h1>{ selectedItemList.title }</h1>
+                            <SystemInformation />
                         </div>
                     )
                 default:
