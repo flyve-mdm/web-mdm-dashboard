@@ -21,6 +21,7 @@ export default class Devices extends Component {
             } else {
                 return <DevicesPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
+                    location={this.props.location}
                     itemList={this.props.itemList} />
             }
         } else {
@@ -36,6 +37,7 @@ export default class Devices extends Component {
                         changeItemList={this.props.changeItemList} />
                     <DevicesPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
+                        location={this.props.location}
                         itemList={this.props.itemList} />
                 </div>
             )

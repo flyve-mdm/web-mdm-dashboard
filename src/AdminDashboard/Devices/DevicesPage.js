@@ -19,16 +19,18 @@ export default class DevicesPage extends Component {
             return (
                 <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div className="profileHeader">
-                        <div className="name">{selectedItemList["PluginFlyvemdmAgent.Computer.User.realname"]}</div>
+                    <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> {this.props.location[0]} </h2>
                         <div className="personInfo">
-                            <IconItemList size={100} />
+                            <IconItemList size={72} />
                             <div className="profileStatus">
-                                <span className="message">
+                                <div className="name">{selectedItemList["PluginFlyvemdmAgent.Computer.User.realname"]}</div>
+                                
+                                <div className="message">
                                     {
                                         selectedItemList["PluginFlyvemdmAgent.is_online"] === 1 ? 'Online' : 'Offline'
                                     }
-                                </span>
-                                <span className="source">{selectedItemList["PluginFlyvemdmAgent.last_contact"]} last contact</span>
+                                </div>
+                                <div className="source">{selectedItemList["PluginFlyvemdmAgent.last_contact"]} last contact</div>
                             </div>
                         </div>
                     </div>
