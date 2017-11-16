@@ -21,6 +21,7 @@ export default class Fleets extends Component {
             } else {
                 return <FleetsPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
+                    location={this.props.location}
                     itemList={this.props.itemList} />
             }
         } else {
@@ -36,6 +37,7 @@ export default class Fleets extends Component {
                         changeItemList={this.props.changeItemList} />
                     <FleetsPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
+                        location={this.props.location}
                         itemList={this.props.itemList} />
                 </div>
             )
