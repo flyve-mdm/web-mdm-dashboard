@@ -17,16 +17,17 @@ export default class ApplicationsPage extends Component {
             )
         } else {
             let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
+            let image = "data:image/png;base64, " + selectedItemList["PluginFlyvemdmPackage.icon"]
             return (
                 <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div className="profileHeader">
-                        <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location[0]} </h2>
+                        <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> {this.props.location[0]} </h2>
                         <div className="personInfo">
-                            <IconItemList size={72} />
+                            <IconItemList size={72} image={image} type="base64" />
                             <div className="profileStatus">
-                                <div className="detail">{this.props.itemList["PluginFlyvemdmPackage.name"]}</div>
-                                <div className="detail">{this.props.itemList["PluginFlyvemdmPackage.filesize"]}</div>
-                                <div className="detail">{BytesToSize(this.props.itemList["PluginFlyvemdmPackage.filesize"])}</div>
+                                <div className="detail">{selectedItemList["PluginFlyvemdmPackage.alias"]}</div>
+                                <div className="detail">{selectedItemList["PluginFlyvemdmPackage.name"]}</div>
+                                <div className="detail">{BytesToSize(selectedItemList["PluginFlyvemdmPackage.filesize"])}</div>
                                 <span className="source">{selectedItemList["PluginFlyvemdmFile.source"]}</span>
                             </div>
                         </div>
