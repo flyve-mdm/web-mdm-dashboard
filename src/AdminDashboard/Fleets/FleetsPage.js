@@ -8,7 +8,7 @@ export default class FleetsPage extends Component {
     render() {
         if (this.props.selectedIndex === null) {
             return (
-                <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                     <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                         <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
                     </div>
@@ -17,13 +17,13 @@ export default class FleetsPage extends Component {
         } else {
             let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
             return (
-                <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                     <div className="contentHeader">
-                        <div className="name">{selectedItemList["PluginFlyvemdmFile.name"]}</div>
+                        <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
                         <div className="itemInfo">
                             <IconItemList size={72} />
                             <div className="contentStatus">
-                                <span className="source">{selectedItemList["PluginFlyvemdmFile.source"]}</span>
+                                <div className="name">{selectedItemList["Fleets.name"]}</div>
                             </div>
                         </div>
                     </div>
