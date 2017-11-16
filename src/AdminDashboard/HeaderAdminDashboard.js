@@ -53,7 +53,7 @@ class HeaderAdminDashboard extends React.Component {
 
     render () {
         return (
-            <div style={{height: 48, backgroundColor: '#158784'}} className="win-ui-dark">
+            <div className="header-admin-dashboard win-ui-dark">
                 <ReactWinJS.SplitViewPaneToggle
                     aria-controls={this.props.splitViewId}
                     style={{ display: 'inline-block' }}

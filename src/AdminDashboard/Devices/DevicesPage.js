@@ -8,7 +8,7 @@ export default class DevicesPage extends Component {
     render() {
         if (this.props.selectedIndex === null) {
             return (
-                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                     <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                         <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
                     </div>
@@ -17,12 +17,12 @@ export default class DevicesPage extends Component {
         } else {
             let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
             return (
-                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                    <div className="profileHeader">
-                    <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> {this.props.location[0]} </h2>
-                        <div className="personInfo">
+                <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                    <div className="contentHeader">
+                        <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
+                        <div className="itemInfo">
                             <IconItemList size={72} />
-                            <div className="profileStatus">
+                            <div className="contentStatus">
                                 <div className="name">{selectedItemList["PluginFlyvemdmAgent.Computer.User.realname"]}</div>
                                 
                                 <div className="message">
@@ -35,18 +35,18 @@ export default class DevicesPage extends Component {
                         </div>
                     </div>
                     <div className="separator" />
-                    <div className="profileContent">
+                    <div className="contentInfo">
                         <ul>
                             <li>
                                 <div className="callContent">
                                     <div>Version</div>
-                                    <div className="number">{ selectedItemList["PluginFlyvemdmAgent.version"] }</div>
+                                    <div>{ selectedItemList["PluginFlyvemdmAgent.version"] }</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="callContent">
                                     <div>Fleets</div>
-                                    <div className="number">{ selectedItemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"] }</div>
+                                    <div>{ selectedItemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"] }</div>
                                 </div>
                             </li>
                         </ul>

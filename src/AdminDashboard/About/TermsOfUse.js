@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class TermsOfUse extends Component {
     render() {
         return (
-            <div>
+            <div className="aboutPane">
                 <p>By using our website, you agree to be bound by the full Terms &amp; Conditions posted on our website.</p>
                 <p>These terms and conditions apply to the business relation between the Client and the Editor (as identified further below), arising from the Client requesting the Editor to provide certain corporate and management services. Any order placed in any of our offices, by internet or by any other means, shall constitute a binding agreement of these terms &amp; conditions between the Client and the Editor.</p>
                 <p><strong>DEFINITIONS</strong></p>

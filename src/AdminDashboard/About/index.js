@@ -48,10 +48,10 @@ export default class AboutPage extends Component {
     renderItemListPane(ItemListPaneWidth) {
 
         return (
-            <div className="peopleSearchPane" style={{ height: '100%', width: ItemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+            <div className="listPane" style={{ height: '100%', width: ItemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ListView
                     ref="listView"
-                    className="peopleListView win-selectionstylefilled"
+                    className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.state.list.dataSource}
                     itemTemplate={this.itemRenderer}
@@ -68,7 +68,7 @@ export default class AboutPage extends Component {
     renderContentPane(selectedIndex, ItemListPaneWidth) {
         if (selectedIndex === null) {
             return (
-                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
                     <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                         <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
                     </div>
@@ -79,49 +79,53 @@ export default class AboutPage extends Component {
             switch (selectedItemList.title) {
                 case 'License':
                     return (
-                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                            <h1>{ selectedItemList.title }</h1>
-                            <ReactMarkdown source={LICENCE} />
+                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
+                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
+                            <div className="contentMarkdown aboutPane">
+                                <ReactMarkdown source={LICENCE} />
+                            </div>
                         </div>
                     )
                 case 'Term of use':
                     return (
-                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                            <h1>{ selectedItemList.title }</h1>
+                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
+                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
                             <TermsOfUse />
                         </div>
                     )
                 case 'Release notes':
                     return (
-                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                            <h1>{ selectedItemList.title }</h1>
-                            <ReactMarkdown source={CHANGELOG} />
+                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
+                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
+                            <div className="contentMarkdown aboutPane">
+                                <ReactMarkdown source={CHANGELOG} />
+                            </div>
                         </div>
                     )
                 case 'System information':
                     return (
-                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                            <h1>{ selectedItemList.title }</h1>
+                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
+                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
                             <SystemInformation />
                         </div>
                     )
                 case 'Contact':
                     return (
-                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                            <h1>{ selectedItemList.title }</h1>
+                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
+                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
                             <Contact />
                         </div>
                     )
                 case 'Overview':
                     return (
-                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                            <h1>{ selectedItemList.title }</h1>
+                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
+                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
                             <Overview />
                         </div>
                     )
                 default:
                     return (
-                        <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                        <div className="contentPane titleContentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
                             <h1>{ selectedItemList.title }</h1>
                         </div>
                     )

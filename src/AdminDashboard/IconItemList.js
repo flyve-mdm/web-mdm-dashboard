@@ -39,7 +39,7 @@ export default class IconItemList extends React.Component {
 
 
         return (
-            <div className="profilePicture" style={style}>
+            <div className="contentPicture" style={style}>
                 <img src={image} height={size} width={size} alt="" />
             </div>
         )

@@ -103,8 +103,8 @@ class ItemListPage extends Component {
         )
 
         return (
-            <div className="peopleSearchPane" style={{ height: '100%', width: ItemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
-                <ReactWinJS.ToolBar className="peopleToolBar">
+            <div className="listPane" style={{ height: '100%', width: ItemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+                <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
                         key="edit"
                         icon="edit"
@@ -152,7 +152,7 @@ class ItemListPage extends Component {
 
                 <ReactWinJS.ListView
                     ref="listView"
-                    className="peopleListView win-selectionstylefilled"
+                    className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.props.itemList.dataSource}
                     groupDataSource={this.props.itemList.groups.dataSource}
@@ -171,7 +171,7 @@ class ItemListPage extends Component {
     renderContentPane(selectedIndex, ItemListPaneWidth) {
         if (selectedIndex === null) {
             return (
-                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                         <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
                     </div>
@@ -180,12 +180,12 @@ class ItemListPage extends Component {
         } else {
             let selectedItemList = this.props.itemList.getAt(selectedIndex)
             return (
-                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                    <div className="profileHeader">
+                <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                    <div className="contentHeader">
                         <div className="name">{selectedItemList.name}</div>
-                        <div className="personInfo">
+                        <div className="itemInfo">
                             <IconItemList backgroundUrl={selectedItemList.picture} size={100} />
-                            <div className="profileStatus">
+                            <div className="contentStatus">
                                 <span className="message">
                                     {selectedItemList.status}
                                 </span>
@@ -194,7 +194,7 @@ class ItemListPage extends Component {
                         </div>
                     </div>
                     <div className="separator" />
-                    <div className="profileContent">
+                    <div className="contentInfo">
                         <ul>
                             <li><span className="messageIcon" />Message</li>
                             <li>
