@@ -3,9 +3,9 @@ import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { closePane, changeLocation, changeIndex, changeItemList } from './DuckController'
-import ItemListPage from './ItemListPage'
 import Users from './Users'
 import Devices from './Devices'
+import Fleets from './Fleets'
 import Files from './Files'
 import Applications from './Applications'
 import About from './About'
@@ -56,7 +56,7 @@ class BodyAdminDashboard extends Component {
                 contentComponent = <Devices mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
                 break
             case "Fleets":
-                contentComponent = <ItemListPage mode={this.props.mode} location={this.props.location} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                contentComponent = <Fleets mode={this.props.mode} location={this.props.location} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
                 break
             case "Files":
                 contentComponent = <Files mode={this.props.mode} location={this.props.location} sort={this.props.files.sort} itemList={this.props.files.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
