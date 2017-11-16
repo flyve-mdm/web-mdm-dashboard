@@ -12,6 +12,12 @@
     text-align: right;
     width: 100px;
 }
+.pluginTitle {
+    font-weight: 400;
+}
+.pluginDetail {
+    font-weight: 200;
+}
 @media (max-width: 840px) {
     .pluginLeft {
         display: inline-block;
@@ -26,4 +32,18 @@
         vertical-align: top;
         float: right;
     }
+}
+
+.contentMarkdown h1, h2, h3, h4, strong {
+    font-weight: 400;
+}
+
+.contentMarkdown p {
+    font-weight: 200;
+}
+
+.aboutPane {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }

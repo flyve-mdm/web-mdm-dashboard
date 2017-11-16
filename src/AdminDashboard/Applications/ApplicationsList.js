@@ -98,8 +98,8 @@ export default class ApplicationsList extends Component {
         )
 
         return (
-            <div className="peopleSearchPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
-                <ReactWinJS.ToolBar className="peopleToolBar">
+            <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+                <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
                         key="edit"
                         icon="edit"
@@ -147,7 +147,7 @@ export default class ApplicationsList extends Component {
 
                 <ReactWinJS.ListView
                     ref="listView"
-                    className="peopleListView win-selectionstylefilled"
+                    className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.props.itemList.dataSource}
                     layout={this.state.layout}

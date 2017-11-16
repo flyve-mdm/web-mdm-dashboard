@@ -427,7 +427,7 @@
   }
   @font-face {
     font-family: "Segoe UI";
-    font-weight: 500;
+    font-weight: bold;
     src: local("Segoe UI Semibold");
     src: url("./fonts/selawksb.eot");
     src: url("./fonts/selawksb.ttf") format("truetype");

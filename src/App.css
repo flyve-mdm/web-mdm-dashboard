@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
 }
-.profilePane {
+.contentPane {
     overflow: auto;
 }
 
@@ -12,6 +12,12 @@ a {
 
 #app {
     height: 100%;
+    font-weight: 300;
+}
+
+#app .header-admin-dashboard {
+    height: 48;
+    background-color: #158784;
 }
 
 /*
@@ -32,26 +38,25 @@ a {
 }
 
 /*
- * People Search Pane
+ * list Search Pane
 */
 
-#app .peopleSearchPane .peopleListView .win-surface {
+#app .listPane .contentListView .win-surface {
     margin-top: 0;
 }
 
-#app .peopleSearchPane .peopleListView .win-container {
+#app .listPane .contentListView .win-container {
     margin: 0;
-    /* height: 48px; */
 }
 
-#app .peopleSearchPane .peopleListView .win-item {
+#app .listPane .contentListView .win-item {
     padding-top: 8px;
     padding-bottom: 8px;
-    width: calc(100% - 12px);
+    width: calc(100% - 24px);
     padding-left: 12px;
 }
 
-#app .peopleSearchPane .peopleListView .win-item .profilePicture {
+#app .listPane .contentListView .win-item .contentPicture {
     width: 42px;
     height: 42px;
     background-size: cover;
@@ -63,33 +68,33 @@ a {
     margin-right: 8px;
 }
 
-#app .peopleSearchPane .peopleListView .win-item .name {
+#app .listPane .contentListView .win-item .name, #app .listPane .contentListView .win-item .detail {
     vertical-align: middle;
-    font-weight: 500;
-    width: 220px;
+    width: 240px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-#app .peopleSearchPane .peopleListView .win-item .detail {
-    vertical-align: middle;
-    font-size: 14px;
-    font-weight: 300;
-    width: 220px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+#app .listPane .contentListView .win-item .name {
+    font-size: 15px;
+    font-weight: bold;
 }
 
-#app .peopleSearchPane .peopleListView .win-groupheadercontainer {
+#app .listPane .contentListView .win-item .detail {
+    color: #586069;
+    font-size: 15px;
+    font-weight: 200;
+}
+
+#app .listPane .contentListView .win-groupheadercontainer {
     width: 32px;
     height: 32px;
     margin-top: 7px;
     margin-bottom: 10px;
     margin-left: 12px;
 }
-#app .peopleSearchPane .peopleListView .win-groupheader {
+#app .listPane .contentListView .win-groupheader {
     font-size: 15px;
     width: 32px;
     height: 32px;
@@ -100,36 +105,46 @@ a {
     line-height: 32px;
 } 
 
-.peopleToolBar .win-toolbar-actionarea {
+.listToolBar .win-toolbar-actionarea {
     background-color: white;
 }
 
 /*
- * Profile Pane
+ * Content Pane
 */
 
-#app .profilePane {
+#app .contentPane {
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
     box-sizing: border-box;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-#app .profilePane .profileHeader {
+#app .contentPane .titleContentPane {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+#app .contentPane .contentHeader {
+    padding-top: 10px;
     padding-bottom: 10px;
 }
 
-#app .profilePane .profileHeader .name {
+#app .contentPane .contentHeader .name {
     vertical-align: top;
     display: inline-block;
-    font-size: 25px;
+    font-size: 24px;
     padding-top: 6px;
 }
 
-.profileHeader .personInfo {
+.contentHeader .itemInfo {
     display: flex;
 }
 
-#app .profilePane .profileHeader .profilePicture {
+#app .contentPane .contentHeader .contentPicture {
     width: 100px;
     height: 100px;
     background-size: cover;
@@ -141,29 +156,33 @@ a {
     margin-top:10px;
 }
 
-.profileHeader .personInfo .profileStatus {
+.contentHeader .itemInfo .contentStatus {
     width: 240px;
     margin-left:20px;
     margin-top:10px;
 }
 
-.profileHeader .personInfo .profileStatus .message {
-    /*color: #ffffff;*/
+.contentHeader .itemInfo .contentStatus .name {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.contentHeader .itemInfo .contentStatus .message {
     font-size: 14px;
 }
-.profileHeader .personInfo .profileStatus .source {
+.contentHeader .itemInfo .contentStatus .source {
     display:block;
     color: grey;
     font-size: 13px;
 }
 
-.profileContent ul {
+.contentInfo ul {
     list-style:none;
     padding-left: 25px;
     padding-right: 25px;
 }
 
-.profileContent ul li {
+.contentInfo ul li {
     margin-bottom:25px;
 }
 
@@ -173,37 +192,37 @@ a {
     background-color:rgb(205, 205, 205);
 }
 
-.profileContent .phoneIcon,
-.profileContent .callContent {
+.contentInfo .phoneIcon,
+.contentInfo .callContent {
     display: inline-block;
     vertical-align: top;
 }
 
-.profileContent .videoCallIcon,
-.profileContent .emailIcon,
-.profileContent .messageIcon,
-.profileContent .phoneIcon,
-.profileContent .mapIcon {
+.contentInfo .videoCallIcon,
+.contentInfo .emailIcon,
+.contentInfo .messageIcon,
+.contentInfo .phoneIcon,
+.contentInfo .mapIcon {
     margin-right: 8px;
 }
 
-.profileContent .videoCallIcon::before {
+.contentInfo .videoCallIcon::before {
     content: "\E13B";
 }
 
-.profileContent .emailIcon::before {
+.contentInfo .emailIcon::before {
     content: "\E119";
 }
 
-.profileContent .messageIcon::before {
+.contentInfo .messageIcon::before {
     content: "\E15F";
 }
 
-.profileContent .phoneIcon::before {
+.contentInfo .phoneIcon::before {
     content: "\E13A";
 }
 
-.profileContent .mapIcon::before {
+.contentInfo .mapIcon::before {
     content: "\E1C4";
 }
 

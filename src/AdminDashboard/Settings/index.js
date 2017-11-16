@@ -39,10 +39,10 @@ export default class SettingsPage extends Component {
     renderItemListPane(ItemListPaneWidth) {
 
         return (
-            <div className="peopleSearchPane" style={{ height: '100%', width: ItemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+            <div className="listPane" style={{ height: '100%', width: ItemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ListView
                     ref="listView"
-                    className="peopleListView win-selectionstylefilled"
+                    className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.state.list.dataSource}
                     itemTemplate={this.itemRenderer}
@@ -58,7 +58,7 @@ export default class SettingsPage extends Component {
 
     renderContentPane(selectedIndex, ItemListPaneWidth) {
         return (
-            <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+            <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                 <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                     <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
                 </div>

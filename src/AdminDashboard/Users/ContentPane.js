@@ -8,7 +8,7 @@ class ContentPane extends Component {
     render() {
         if (this.props.selectedIndex === null) {
             return (
-                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                         <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
                     </div>
@@ -17,12 +17,12 @@ class ContentPane extends Component {
         } else {
             let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
             return (
-                <div className="profilePane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                    <div className="profileHeader">
+                <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                    <div className="contentHeader">
                         <h2 className="win-h2" style={{ margin: '20.1px 0' }}> User </h2>
-                        <div className="personInfo">
+                        <div className="itemInfo">
                             <IconItemList backgroundUrl={selectedItemList['User.picture']} size={100} />
-                            <div className="profileStatus">
+                            <div className="contentStatus">
                                 <div className="message">
                                     <b>
                                         {selectedItemList['User.name']}
@@ -36,7 +36,7 @@ class ContentPane extends Component {
                         </div>
                     </div>
                     <div className="separator" />
-                    <div className="profileContent">
+                    <div className="contentInfo">
                         <ul>
                             <li>
                                 <span className="phoneIcon" />

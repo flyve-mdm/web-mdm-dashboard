@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Overview extends Component {
     render() {
         return (
-            <div>
+            <div className="aboutPane">
                 <p>
                     Flyve MDM is a mobile device management software that enables you to secure and manage all the mobile devices of your business via a unique web-based console (MDM).
                 </p>

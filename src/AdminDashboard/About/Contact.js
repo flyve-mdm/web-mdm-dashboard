@@ -3,13 +3,13 @@ import React, { Component } from 'react'
 export default class Contact extends Component {
     render() {
         return (
-            <div>
+            <div className="aboutPane">
                 <img src="images/logo-teclib.png" alt="Teclib" />
                 <p>
                     Feel free to contact us at any time, selecting your preferred channel. A Teclib’ expert will answer your request and provide you with all the information and advice you need about: our Products, Partnership Programs, Training Courses and Support solutions.
                 </p>
                 <div className="separator" />
-                <div className="profileContent">
+                <div className="contentInfo">
                     <ul>
                         <li>
                             <span className="phoneIcon" />
