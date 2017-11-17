@@ -23,7 +23,7 @@ export default class FleetsPage extends Component {
                         <div className="itemInfo">
                             <IconItemList size={72} />
                             <div className="contentStatus">
-                                <div className="name">{selectedItemList["Fleets.name"]}</div>
+                                <div className="name">{selectedItemList["PluginFlyvemdmFleet.name"]}</div>
                             </div>
                         </div>
                     </div>

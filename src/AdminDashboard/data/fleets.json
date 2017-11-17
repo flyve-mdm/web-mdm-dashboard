@@ -1,216 +1,216 @@
 {
-    "totalcount": 25,
-    "count": 25,
-    "sort": 1,
-    "order": "ASC",
-    "data": [
-        {
-            "PluginFlyvemdmFleet.name": "another one",
-            "PluginFlyvemdmFleet.id": 24,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
-                0,
-                0,
-                0
-            ],
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
-                "",
-                "",
-                ""
-            ],
-            "PluginFlyvemdmFleet.is_default": 0
-        },
-        {
-            "PluginFlyvemdmFleet.name": "Blue",
-            "PluginFlyvemdmFleet.id": 28,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": 0,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": "",
-            "PluginFlyvemdmFleet.is_default": 0
-        },
-        {
-            "PluginFlyvemdmFleet.name": "new policies",
-            "PluginFlyvemdmFleet.id": 22,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-            ],
-            "PluginFlyvemdmFleet.is_default": 0
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 1,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 3,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 7,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 11,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 13,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 14,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 18,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 19,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 21,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 26,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 27,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 30,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 33,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 34,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 37,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 39,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 46,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 48,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "not managed fleet",
-            "PluginFlyvemdmFleet.id": 49,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-            "PluginFlyvemdmFleet.is_default": 1
-        },
-        {
-            "PluginFlyvemdmFleet.name": "Password",
-            "PluginFlyvemdmFleet.id": 25,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
-                0,
-                0,
-                0
-            ],
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
-                "",
-                "",
-                ""
-            ],
-            "PluginFlyvemdmFleet.is_default": 0
-        },
-        {
-            "PluginFlyvemdmFleet.name": "test",
-            "PluginFlyvemdmFleet.id": 23,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": 0,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": "",
-            "PluginFlyvemdmFleet.is_default": 0
-        },
-        {
-            "PluginFlyvemdmFleet.name": "Test",
-            "PluginFlyvemdmFleet.id": 29,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": 8,
-            "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": "PluginFlyvemdmFile",
-            "PluginFlyvemdmFleet.is_default": 0
-        }
-    ],
-    "content-range": "0-24/25"
+  "totalcount": 25,
+  "count": 25,
+  "sort": 1,
+  "order": "ASC",
+  "data": [
+      {
+          "PluginFlyvemdmFleet.name": "another one",
+          "PluginFlyvemdmFleet.id": 24,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
+              0,
+              0,
+              0
+          ],
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
+              "",
+              "",
+              ""
+          ],
+          "PluginFlyvemdmFleet.is_default": 0
+      },
+      {
+          "PluginFlyvemdmFleet.name": "Blue",
+          "PluginFlyvemdmFleet.id": 28,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": 0,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": "",
+          "PluginFlyvemdmFleet.is_default": 0
+      },
+      {
+          "PluginFlyvemdmFleet.name": "new policies",
+          "PluginFlyvemdmFleet.id": 22,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+          ],
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+          ],
+          "PluginFlyvemdmFleet.is_default": 0
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 1,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 3,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 7,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 11,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 13,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 14,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 18,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 19,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 21,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 26,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 27,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 30,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 33,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 34,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 37,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 39,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 46,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 48,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "not managed fleet",
+          "PluginFlyvemdmFleet.id": 49,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+          "PluginFlyvemdmFleet.is_default": 1
+      },
+      {
+          "PluginFlyvemdmFleet.name": "Password",
+          "PluginFlyvemdmFleet.id": 25,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
+              0,
+              0,
+              0
+          ],
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
+              "",
+              "",
+              ""
+          ],
+          "PluginFlyvemdmFleet.is_default": 0
+      },
+      {
+          "PluginFlyvemdmFleet.name": "test",
+          "PluginFlyvemdmFleet.id": 23,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": 0,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": "",
+          "PluginFlyvemdmFleet.is_default": 0
+      },
+      {
+          "PluginFlyvemdmFleet.name": "Test",
+          "PluginFlyvemdmFleet.id": 29,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": 8,
+          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": "PluginFlyvemdmFile",
+          "PluginFlyvemdmFleet.is_default": 0
+      }
+  ],
+  "content-range": "0-24/25"
 }
