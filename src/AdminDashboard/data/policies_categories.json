@@ -1,0 +1,49 @@
+{
+    "totalcount": 8,
+    "count": 8,
+    "sort": 1,
+    "order": "ASC",
+    "data": [
+        {
+            "PluginFlyvemdmPolicyCategory.completename": "Deployment",
+            "PluginFlyvemdmPolicyCategory.id": 6,
+            "PluginFlyvemdmPolicyCategory.comment": ""
+        },
+        {
+            "PluginFlyvemdmPolicyCategory.completename": "Security",
+            "PluginFlyvemdmPolicyCategory.id": 1,
+            "PluginFlyvemdmPolicyCategory.comment": ""
+        },
+        {
+            "PluginFlyvemdmPolicyCategory.completename": "Security > Authentication",
+            "PluginFlyvemdmPolicyCategory.id": 2,
+            "PluginFlyvemdmPolicyCategory.comment": ""
+        },
+        {
+            "PluginFlyvemdmPolicyCategory.completename": "Security > Authentication > Password",
+            "PluginFlyvemdmPolicyCategory.id": 3,
+            "PluginFlyvemdmPolicyCategory.comment": ""
+        },
+        {
+            "PluginFlyvemdmPolicyCategory.completename": "Security > Encryption",
+            "PluginFlyvemdmPolicyCategory.id": 4,
+            "PluginFlyvemdmPolicyCategory.comment": ""
+        },
+        {
+            "PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicyCategory.id": 5,
+            "PluginFlyvemdmPolicyCategory.comment": ""
+        },
+        {
+            "PluginFlyvemdmPolicyCategory.completename": "Security > Phone",
+            "PluginFlyvemdmPolicyCategory.id": 8,
+            "PluginFlyvemdmPolicyCategory.comment": null
+        },
+        {
+            "PluginFlyvemdmPolicyCategory.completename": "Security > USB",
+            "PluginFlyvemdmPolicyCategory.id": 7,
+            "PluginFlyvemdmPolicyCategory.comment": null
+        }
+    ],
+    "content-range": "0-7/8"
+}

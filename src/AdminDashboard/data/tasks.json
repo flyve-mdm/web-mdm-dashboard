@@ -1,0 +1,294 @@
+[
+    {
+        "id": 1,
+        "plugin_flyvemdm_fleets_id": 22,
+        "plugin_flyvemdm_policies_id": 2,
+        "value": 6,
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/22"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/2"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "plugin_flyvemdm_fleets_id": 22,
+        "plugin_flyvemdm_policies_id": 3,
+        "value": "PASSWORD_QUALITY_UNSPECIFIED",
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/22"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/3"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "plugin_flyvemdm_fleets_id": 22,
+        "plugin_flyvemdm_policies_id": 1,
+        "value": "PASSWORD_PIN",
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/22"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/1"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "plugin_flyvemdm_fleets_id": 22,
+        "plugin_flyvemdm_policies_id": 13,
+        "value": 0,
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/22"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/13"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "plugin_flyvemdm_fleets_id": 22,
+        "plugin_flyvemdm_policies_id": 12,
+        "value": 1,
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/22"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/12"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "plugin_flyvemdm_fleets_id": 22,
+        "plugin_flyvemdm_policies_id": 18,
+        "value": 0,
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/22"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/18"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "plugin_flyvemdm_fleets_id": 22,
+        "plugin_flyvemdm_policies_id": 19,
+        "value": 0,
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/22"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/19"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "plugin_flyvemdm_fleets_id": 23,
+        "plugin_flyvemdm_policies_id": 12,
+        "value": 1,
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/23"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/12"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "plugin_flyvemdm_fleets_id": 24,
+        "plugin_flyvemdm_policies_id": 12,
+        "value": 1,
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/24"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/12"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "plugin_flyvemdm_fleets_id": 25,
+        "plugin_flyvemdm_policies_id": 1,
+        "value": "PASSWORD_PASSWD",
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/25"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/1"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "plugin_flyvemdm_fleets_id": 25,
+        "plugin_flyvemdm_policies_id": 2,
+        "value": 8,
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/25"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/2"
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "plugin_flyvemdm_fleets_id": 25,
+        "plugin_flyvemdm_policies_id": 3,
+        "value": "PASSWORD_QUALITY_NUMERIC",
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/25"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/3"
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "plugin_flyvemdm_fleets_id": 24,
+        "plugin_flyvemdm_policies_id": 15,
+        "value": "org.flyve.inventory.agent",
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/24"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/15"
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "plugin_flyvemdm_fleets_id": 24,
+        "plugin_flyvemdm_policies_id": 17,
+        "value": "%SDCARD%/test.txt",
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/24"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/17"
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "plugin_flyvemdm_fleets_id": 28,
+        "plugin_flyvemdm_policies_id": 19,
+        "value": 1,
+        "itemtype": "",
+        "items_id": 0,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/28"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/19"
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "plugin_flyvemdm_fleets_id": 29,
+        "plugin_flyvemdm_policies_id": 16,
+        "value": "{\"destination\":\"%DOCUMENTS%\",\"remove_on_delete\":\"1\"}",
+        "itemtype": "PluginFlyvemdmFile",
+        "items_id": 8,
+        "links": [
+            {
+                "rel": "PluginFlyvemdmFleet",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFleet/29"
+            },
+            {
+                "rel": "PluginFlyvemdmPolicy",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmPolicy/16"
+            },
+            {
+                "rel": "PluginFlyvemdmFile",
+                "href": "https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmFile/8"
+            }
+        ]
+    }
+]
