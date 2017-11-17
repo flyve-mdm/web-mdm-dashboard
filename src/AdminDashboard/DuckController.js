@@ -7,7 +7,10 @@ const INITIAL_STATE = {
     paneOpened: false,
     mode: GetMode(),
     index: 0,
-    location: [Routers[0].label],
+    location: {
+        route: Routers[0].label,
+        index: null
+    },
     router: Routers,
     splitViewConfigs: {
         small: {
@@ -76,7 +79,10 @@ export default function reducer(state = INITIAL_STATE, action) {
         case HANDLE_BACK:
             return {
                ...state,
-               location: [...state.location.slice(0, 1)]
+               location: {
+                    route: [...state.location.route.slice(0, 1)],
+                    index: null
+               }
             }
         
         case CHANGE_ITEM_LIST:
@@ -127,6 +133,6 @@ export function changeItemList(location, newItemList) {
     return {
         type: CHANGE_ITEM_LIST,
         newItemList,
-        location: location[0].toLowerCase()
+        location: location.route[location.route.length - 1 ].toLowerCase()
     }
 }

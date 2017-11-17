@@ -73,7 +73,7 @@ export default class SettingsPage extends Component {
     }
     
     render() {
-        let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
+        let selectedIndex = this.props.location.index !== null ? this.props.location.index : null
         
         if (this.props.mode === 'small') {
             if (selectedIndex === null) {

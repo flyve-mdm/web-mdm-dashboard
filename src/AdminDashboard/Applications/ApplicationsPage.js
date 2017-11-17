@@ -21,7 +21,7 @@ export default class ApplicationsPage extends Component {
             return (
                 <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div className="contentHeader">
-                        <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> {this.props.location[0]} </h2>
+                        <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> {this.props.location.route[0]} </h2>
                         <div className="itemInfo">
                             <IconItemList size={72} image={image} type="base64" />
                             <div className="contentStatus">

@@ -18,6 +18,12 @@
 .pluginDetail {
     font-weight: 200;
 }
+.listToolBar .win-textbox {
+    width: 200px;
+}
+.listToolBar .win-command[aria-label="search bar"] {
+    padding: 0 10px;
+}
 @media (max-width: 840px) {
     .pluginLeft {
         display: inline-block;

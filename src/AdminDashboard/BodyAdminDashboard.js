@@ -74,7 +74,7 @@ class BodyAdminDashboard extends Component {
                 contentComponent = <About mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} />
                 break
             default: 
-                contentComponent = <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
+                contentComponent = <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location.route[this.props.location.route.length]} </h2>
         }
 
         let pane = (
@@ -85,8 +85,8 @@ class BodyAdminDashboard extends Component {
                     label={item.label}
                     icon={item.icon}
                     style={item.style}
-                    onInvoked={() => this.handleCommandInvoked([item.label], index)}
-                />)}
+                    onInvoked={() => this.handleCommandInvoked({...this.props.location, route: [item.label], index: null}, index)}
+                    />)}
             </div>
         )
 
