@@ -38,7 +38,7 @@ class ItemListPane extends Component {
 
     handleToggleSelectionMode = () => {
         this.setState({ selectionMode: !this.state.selectionMode })
-        this.props.onNavigate(this.props.location)
+        this.props.onNavigate([this.props.location[0], null])
         this.refs.listView.winControl.selection.clear()
     }
 
