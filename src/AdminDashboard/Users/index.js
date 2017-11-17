@@ -6,7 +6,7 @@ import ContentPane from './ContentPane'
 class UsersPage extends Component {
 
     render() {
-        let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
+        let selectedIndex = this.props.location.index !== null ? this.props.location.index : null
 
         if (this.props.mode === 'small') {
             if (selectedIndex === null) {
@@ -29,7 +29,7 @@ UsersPage.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
     sort: PropTypes.bool.isRequired,
     itemList: PropTypes.object.isRequired,
-    location: PropTypes.array.isRequired,
+    location: PropTypes.object.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeItemList: PropTypes.func.isRequired
 }
