@@ -21,6 +21,7 @@ export default class Files extends Component {
             } else {
                 return <FilesPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
+                    location={this.props.location}
                     itemList={this.props.itemList} />
             }
         } else {
@@ -36,6 +37,7 @@ export default class Files extends Component {
                         changeItemList={this.props.changeItemList} />
                     <FilesPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
+                        location={this.props.location}
                         itemList={this.props.itemList} />
                 </div>
             )

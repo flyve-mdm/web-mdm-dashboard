@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
-import IconItemList from '../IconItemList'
+import BytesToSize from '../../Utils/BytesToSize'
 
 export default class DevicesPage extends Component {
 
@@ -17,13 +17,14 @@ export default class DevicesPage extends Component {
         } else {
             let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
             return (
-                <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                     <div className="contentHeader">
-                        <div className="name">{selectedItemList["PluginFlyvemdmFile.name"]}</div>
+                        <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
                         <div className="itemInfo">
-                            <IconItemList size={100} />
+                            <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px'}} />
                             <div className="contentStatus">
-                                <span className="source">{selectedItemList["PluginFlyvemdmFile.source"]}</span>
+                                <div className="name">{selectedItemList["PluginFlyvemdmFile.name"]}</div>
+                                <div className="detail">{BytesToSize(selectedItemList["PluginFlyvemdmFile.filesize"])}</div>
                             </div>
                         </div>
                     </div>
