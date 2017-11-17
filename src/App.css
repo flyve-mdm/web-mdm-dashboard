@@ -229,3 +229,16 @@ a {
 .deviceIcon::before {
     content: "\E1C9";
 }
+
+.deviceIcon::before {
+    content: "\E1C9";
+}
+
+.fileIcon::before {
+    content: "\E295";
+}
+/* .myIcon {
+    font-family: "Symbols";
+    font-size: 28px;
+    color: #5729c1;
+} */
