@@ -1,18 +1,10 @@
 import React, { Component } from "react"
-import ReactWinJS from 'react-winjs'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
-import LICENCE from './LICENCE.md'
-import CHANGELOG from './CHANGELOG.md'
-import ReactMarkdown from 'react-markdown'
-import TermsOfUse from './TermsOfUse'
-import SystemInformation from './SystemInformation'
-import Overview from './Overview'
-import Contact from './Contact'
 import WinJS from 'winjs'
+import AboutList from './AboutList'
+import AboutPage from './AboutPage'
 import './About.css'
-export default class AboutPage extends Component {
+export default class About extends Component {
 
-    
     constructor(props) {
         super(props)
         this.state = {
@@ -24,136 +16,26 @@ export default class AboutPage extends Component {
                 { title: "Release notes" },
                 { title: "Term of use" },
                 { title: "License"}
-            ]),
-            layout: { type: WinJS.UI.ListLayout }
+            ])
         }
 
     }
-    
-    itemRenderer = ReactWinJS.reactRenderer((item) => {
-        return (
-            <div style={{ padding: '14px', width: '100%' }}>
-                {item.data.title}
-            </div>
-        )
-    })
-
-    handleContentAnimating(eventObject) {
-        // Disable ListView's entrance animation
-        if (eventObject.detail.type === 'entrance') {
-            eventObject.preventDefault()
-        }
-    }
-
-    renderItemListPane(ItemListPaneWidth) {
-
-        return (
-            <div className="listPane" style={{ height: '100%', width: ItemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
-                <ReactWinJS.ListView
-                    ref="listView"
-                    className="contentListView win-selectionstylefilled"
-                    style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.state.list.dataSource}
-                    itemTemplate={this.itemRenderer}
-                    layout={this.state.layout}
-                    selectionMode="single"
-                    tapBehavior="directSelect" 
-                    onContentAnimating={this.handleContentAnimating}
-                    onSelectionChanged={this.handleSelectionChanged}
-                />
-            </div>
-        )
-    }
-
-    renderContentPane(selectedIndex, ItemListPaneWidth) {
-        if (selectedIndex === null) {
-            return (
-                <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
-                    <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                        <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
-                    </div>
-                </div>
-            )
-        } else {
-            let selectedItemList = this.state.list.getAt(selectedIndex)
-            switch (selectedItemList.title) {
-                case 'License':
-                    return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
-                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <div className="contentMarkdown aboutPane">
-                                <ReactMarkdown source={LICENCE} />
-                            </div>
-                        </div>
-                    )
-                case 'Term of use':
-                    return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
-                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <TermsOfUse />
-                        </div>
-                    )
-                case 'Release notes':
-                    return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
-                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <div className="contentMarkdown aboutPane">
-                                <ReactMarkdown source={CHANGELOG} />
-                            </div>
-                        </div>
-                    )
-                case 'System information':
-                    return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
-                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <SystemInformation />
-                        </div>
-                    )
-                case 'Contact':
-                    return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
-                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <Contact />
-                        </div>
-                    )
-                case 'Overview':
-                    return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
-                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <Overview />
-                        </div>
-                    )
-                default:
-                    return (
-                        <div className="contentPane titleContentPane" style={{ width: Calc100PercentMinus(ItemListPaneWidth) }}>
-                            <h1>{ selectedItemList.title }</h1>
-                        </div>
-                    )
-            }
-        }
-    }
-
-    handleSelectionChanged = (eventObject) => {
-        let listView = eventObject.currentTarget.winControl
-        let indices = listView.selection.getIndices()
-        this.props.onNavigate([this.props.location, indices[0]])
-    }
-    
+        
     render() {
         let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
         
         if (this.props.mode === 'small') {
             if (selectedIndex === null) {
-                return this.renderItemListPane('100%')
+                return <AboutList itemListPaneWidth="100%" itemList={this.state.list} location={this.props.location} onNavigate={this.props.onNavigate}/>
             } else {
-                return this.renderContentPane(selectedIndex, 0)
+                return <AboutPage selectedIndex={selectedIndex} itemList={this.state.list} itemListPaneWidth={0}/>
             }
         } else {
-            let ItemListPaneWidth = 320
+            let itemListPaneWidth = 320
             return (
                 <div style={{ height: '100%' }}>
-                    {this.renderItemListPane(ItemListPaneWidth)}
-                    {this.renderContentPane(selectedIndex, ItemListPaneWidth)}
+                    <AboutList itemListPaneWidth={itemListPaneWidth} itemList={this.state.list} location={this.props.location} onNavigate={this.props.onNavigate}/>
+                    <AboutPage selectedIndex={selectedIndex} itemList={this.state.list} itemListPaneWidth={itemListPaneWidth}/>
                 </div>
             )
         }
