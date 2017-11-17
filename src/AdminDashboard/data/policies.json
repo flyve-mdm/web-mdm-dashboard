@@ -1,0 +1,209 @@
+{
+    "totalcount": 31,
+    "count": 20,
+    "sort": 1,
+    "order": "ASC",
+    "data": [
+        {
+            "PluginFlyvemdmPolicy.name": "Deploy application",
+            "PluginFlyvemdmPolicy.id": 14,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Deployment",
+            "PluginFlyvemdmPolicy.type": "deployapp",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "application",
+            "PluginFlyvemdmPolicy.default_value": "",
+            "PluginFlyvemdmPolicy.recommended_value": ""
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Deploy file",
+            "PluginFlyvemdmPolicy.id": 16,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Deployment",
+            "PluginFlyvemdmPolicy.type": "deployfile",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "file",
+            "PluginFlyvemdmPolicy.default_value": "",
+            "PluginFlyvemdmPolicy.recommended_value": ""
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable Bluetooth",
+            "PluginFlyvemdmPolicy.id": 19,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable call auto answer",
+            "PluginFlyvemdmPolicy.id": 26,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Phone",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "phone",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable Camera",
+            "PluginFlyvemdmPolicy.id": 13,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "camera",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable FM Radio",
+            "PluginFlyvemdmPolicy.id": 23,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable GPS",
+            "PluginFlyvemdmPolicy.id": 20,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable hotspot and tethering",
+            "PluginFlyvemdmPolicy.id": 29,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable Mobile line",
+            "PluginFlyvemdmPolicy.id": 24,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable NFC",
+            "PluginFlyvemdmPolicy.id": 28,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable roaming",
+            "PluginFlyvemdmPolicy.id": 21,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable SMS and MMS",
+            "PluginFlyvemdmPolicy.id": 31,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Phone",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "phone",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable USB file transfer protocols",
+            "PluginFlyvemdmPolicy.id": 22,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > USB",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable USB On-The-Go",
+            "PluginFlyvemdmPolicy.id": 30,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable voice dictation",
+            "PluginFlyvemdmPolicy.id": 27,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable Voice mail",
+            "PluginFlyvemdmPolicy.id": 25,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Phone",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "phone",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Disable Wifi",
+            "PluginFlyvemdmPolicy.id": 18,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Peripherals",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "connectivity",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Internal Storage encryption",
+            "PluginFlyvemdmPolicy.id": 12,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Encryption",
+            "PluginFlyvemdmPolicy.type": "bool",
+            "PluginFlyvemdmPolicy.type_data": "\"\"",
+            "PluginFlyvemdmPolicy.group": "encryption",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 0
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Maximum failed password attemps for wipe",
+            "PluginFlyvemdmPolicy.id": 10,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Authentication > Password",
+            "PluginFlyvemdmPolicy.type": "int",
+            "PluginFlyvemdmPolicy.type_data": "{\"min\":0}",
+            "PluginFlyvemdmPolicy.group": "policies",
+            "PluginFlyvemdmPolicy.default_value": 0,
+            "PluginFlyvemdmPolicy.recommended_value": 5
+        },
+        {
+            "PluginFlyvemdmPolicy.name": "Maximum time to lock (milliseconds)",
+            "PluginFlyvemdmPolicy.id": 11,
+            "PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename": "Security > Authentication > Password",
+            "PluginFlyvemdmPolicy.type": "int",
+            "PluginFlyvemdmPolicy.type_data": "{\"min\":0}",
+            "PluginFlyvemdmPolicy.group": "policies",
+            "PluginFlyvemdmPolicy.default_value": 60000,
+            "PluginFlyvemdmPolicy.recommended_value": 60000
+        }
+    ],
+    "content-range": "0-20/31"
+}
