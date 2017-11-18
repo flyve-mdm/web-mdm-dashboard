@@ -34,12 +34,8 @@ export default class FleetsList extends Component {
 
     handleToggleSelectionMode = () => {
         this.setState({ selectionMode: !this.state.selectionMode })
-<<<<<<< HEAD
         this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
-=======
-        this.props.onNavigate([this.props.location[0], null])
->>>>>>> 0d2b51b... refactor(dashboard): revert change location management
         this.refs.listView.winControl.selection.clear()
     }
 
