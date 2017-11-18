@@ -8,6 +8,7 @@ import TermsOfUse from './TermsOfUse'
 import SystemInformation from './SystemInformation'
 import Overview from './Overview'
 import Contact from './Contact'
+import HelpCenterList from './HelpCenterList'
 
 export default class AboutPage extends Component {
 
@@ -68,6 +69,10 @@ export default class AboutPage extends Component {
                             <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
                             <Overview />
                         </div>
+                    )
+                case 'Help Center':
+                    return (
+                        <HelpCenterList />
                     )
                 default:
                     return (
