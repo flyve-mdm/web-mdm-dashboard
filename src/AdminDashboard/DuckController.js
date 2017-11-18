@@ -136,11 +136,14 @@ export function changeItemList(location, newItemList) {
         type: CHANGE_ITEM_LIST,
         newItemList,
         location: location[0].toLowerCase()
+<<<<<<< HEAD
     }
 }
 export function changeActionList(newActionList) {
     return {
         type: CHANGE_ACTION_LIST,
         newActionList
+=======
+>>>>>>> 0d2b51b... refactor(dashboard): revert change location management
     }
 }
