@@ -7,7 +7,7 @@ export default class Applications extends Component {
 
     render() {
 
-        let selectedIndex = this.props.location.index !== null ? this.props.location.index : null
+        let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
 
         if (this.props.mode === 'small') {
             if (selectedIndex === null) {
@@ -49,7 +49,7 @@ Applications.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
     sort: PropTypes.bool.isRequired,
     itemList: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
+    location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeItemList: PropTypes.func.isRequired
 }

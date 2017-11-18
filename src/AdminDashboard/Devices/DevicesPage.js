@@ -19,7 +19,7 @@ export default class DevicesPage extends Component {
             return (
                 <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > {this.props.location.route[0]} </h2>
+                        <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
                         <div className="itemInfo">
                             <IconItemList size={72} />
                             <div className="contentStatus">

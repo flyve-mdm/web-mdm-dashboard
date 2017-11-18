@@ -34,7 +34,7 @@ export default class FilesList extends Component {
 
     handleToggleSelectionMode = () => {
         this.setState({ selectionMode: !this.state.selectionMode })
-        this.props.onNavigate({...this.props.location, index: null})
+        this.props.onNavigate([this.props.location[0],null])
         this.refs.listView.winControl.selection.clear()
     }
 
@@ -42,8 +42,8 @@ export default class FilesList extends Component {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
         setTimeout(function () {
-            this.setState({ selectedItemList: index })
-            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? {...this.props.location, index: index[0]} : {...this.props.location, index: null})
+            this.setState({ selectedItemList: index });
+            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
         }.bind(this), 0)
     }
 
@@ -74,7 +74,7 @@ export default class FilesList extends Component {
         this.props.itemList.map((value, index) =>
             array.push(value)
         );
-        this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location.route[0], array, !this.props.sort), sort: !this.props.sort })
+        this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.sort), sort: !this.props.sort })
     }
 
     descendingCompare(first, second) {
@@ -168,7 +168,7 @@ FilesList.propTypes = {
     ]).isRequired,
     sort: PropTypes.bool.isRequired,
     itemList: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
+    location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeItemList: PropTypes.func.isRequired
 }
