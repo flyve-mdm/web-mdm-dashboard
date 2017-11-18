@@ -85,6 +85,5 @@ AboutPage.propTypes = {
         PropTypes.number
     ]).isRequired,
     selectedIndex: PropTypes.number,
-    itemList: PropTypes.object.isRequired,
-    isHelpCenter: PropTypes.bool.isRequired
+    itemList: PropTypes.object.isRequired
 }

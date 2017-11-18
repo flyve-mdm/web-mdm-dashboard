@@ -19,7 +19,7 @@ export default class DevicesPage extends Component {
             return (
                 <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                     <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > {this.props.location.route[0]} </h2>
+                        <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
                         <div className="itemInfo">
                             <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px'}} />
                             <div className="contentStatus">
