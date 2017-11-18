@@ -24,7 +24,10 @@ export default class AboutList extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        this.props.onNavigate([this.props.location, index[0]])
+        setTimeout(function () {
+            this.setState({ selectedItemList: index });
+            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
+        }.bind(this), 0)
     }
 
     handleContentAnimating(eventObject) {
