@@ -1,0 +1,45 @@
+{
+    "totalcount": 6,
+    "count": 6,
+    "sort": 1,
+    "order": "ASC",
+    "data": [
+        {
+            "PluginFlyvemdmFile.name": "Article 1",
+            "PluginFlyvemdmFile.id": 1,
+            "PluginFlyvemdmFile.rating": 14,
+            "PluginFlyvemdmFile.source": "articles/article_1.md"
+        },
+        {
+            "PluginFlyvemdmFile.name": "Article 2",
+            "PluginFlyvemdmFile.id": 2,
+            "PluginFlyvemdmFile.rating": 92,
+            "PluginFlyvemdmFile.source": "articles/article_2.md"
+        },
+        {
+            "PluginFlyvemdmFile.name": "Article 3",
+            "PluginFlyvemdmFile.id": 3,
+            "PluginFlyvemdmFile.rating": 68,
+            "PluginFlyvemdmFile.source": "articles/article_3.md"
+        },
+        {
+            "PluginFlyvemdmFile.name": "Article 4",
+            "PluginFlyvemdmFile.id": 4,
+            "PluginFlyvemdmFile.rating": 32,
+            "PluginFlyvemdmFile.source": "articles/article_4.md"
+        },
+        {
+            "PluginFlyvemdmFile.name": "Article 5",
+            "PluginFlyvemdmFile.id": 5,
+            "PluginFlyvemdmFile.rating": 83,
+            "PluginFlyvemdmFile.source": "articles/article_5.md"
+        },
+        {
+            "PluginFlyvemdmFile.name": "Article 6",
+            "PluginFlyvemdmFile.id": 6,
+            "PluginFlyvemdmFile.rating": 76,
+            "PluginFlyvemdmFile.source": "articles/article_6.md"
+        }
+    ],
+    "content-range": "0-5/6"
+  }
