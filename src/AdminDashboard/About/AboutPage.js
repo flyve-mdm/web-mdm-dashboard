@@ -72,7 +72,9 @@ export default class AboutPage extends Component {
                     )
                 case 'Help Center':
                     return (
-                        <HelpCenterList />
+                        <div className="contentPane listPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth), padding: 0 }}>
+                            <HelpCenterList />
+                        </div>
                     )
                 default:
                     return (
