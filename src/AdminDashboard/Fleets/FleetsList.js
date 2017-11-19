@@ -34,6 +34,7 @@ export default class FleetsList extends Component {
 
     handleToggleSelectionMode = () => {
         this.setState({ selectionMode: !this.state.selectionMode })
+        this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
         this.refs.listView.winControl.selection.clear()
     }
@@ -52,6 +53,14 @@ export default class FleetsList extends Component {
         if (eventObject.detail.type === 'entrance') {
             eventObject.preventDefault()
         }
+    }
+
+    handleAdd = (eventObject) => {
+        let button = eventObject.currentTarget.winControl
+        this.setState({ selectionMode: false })
+        this.props.changeActionList(button.label)
+        this.props.onNavigate([this.props.location[0]])
+        this.refs.listView.winControl.selection.clear()
     }
 
     handleDelete = () => {
@@ -101,18 +110,6 @@ export default class FleetsList extends Component {
             <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
-                        key="edit"
-                        icon="edit"
-                        label="Edit"
-                        priority={4}
-                    />
-                    <ReactWinJS.ToolBar.Button
-                        key="favorite"
-                        icon="favorite"
-                        label="Favorite"
-                        priority={3}
-                    />
-                    <ReactWinJS.ToolBar.Button
                         key="sort"
                         icon="sort"
                         label="Sort"
@@ -131,6 +128,7 @@ export default class FleetsList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
+                        onClick={this.handleAdd}
                     />
 
                     {this.state.selectionMode ? deleteCommand : null}

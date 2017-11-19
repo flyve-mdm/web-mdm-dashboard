@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { closePane, changeLocation, changeIndex, changeItemList } from './DuckController'
+import { closePane, changeLocation, changeIndex, changeItemList, changeActionList } from './DuckController'
 import Users from './Users'
 import Devices from './Devices'
 import Fleets from './Fleets'
@@ -20,6 +20,7 @@ function mapStateToProps(state, props) {
         router: state.AdminDashboard.router,
         splitViewConfigs: state.AdminDashboard.splitViewConfigs,
         mode: state.AdminDashboard.mode,
+        actionList: state.AdminDashboard.actionList,
         devices: state.AdminDashboard.devices,
         fleets: state.AdminDashboard.fleets,
         files: state.AdminDashboard.files,
@@ -33,7 +34,8 @@ function mapDispatchToProps(dispatch) {
         closePane: bindActionCreators(closePane, dispatch),
         changeLocation: bindActionCreators(changeLocation, dispatch),
         changeIndex: bindActionCreators(changeIndex, dispatch),
-        changeItemList: bindActionCreators(changeItemList, dispatch)
+        changeItemList: bindActionCreators(changeItemList, dispatch),
+        changeActionList: bindActionCreators(changeActionList, dispatch)
     }
     return { actions }
 }
@@ -56,7 +58,7 @@ class BodyAdminDashboard extends Component {
                 contentComponent = <Devices mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
                 break
             case "Fleets":
-                contentComponent = <Fleets mode={this.props.mode} location={this.props.location} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                contentComponent = <Fleets mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} />
                 break
             case "Files":
                 contentComponent = <Files mode={this.props.mode} location={this.props.location} sort={this.props.files.sort} itemList={this.props.files.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />

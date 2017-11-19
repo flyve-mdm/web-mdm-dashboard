@@ -17,12 +17,14 @@ export default class Fleets extends Component {
                     sort={this.props.sort}
                     itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
-                    changeItemList={this.props.changeItemList} />
+                    changeItemList={this.props.changeItemList}
+                    changeActionList={this.props.changeActionList} />
             } else {
                 return <FleetsPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
                     location={this.props.location}
-                    itemList={this.props.itemList} />
+                    itemList={this.props.itemList} 
+                    changeActionList={this.props.changeActionList} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -34,11 +36,13 @@ export default class Fleets extends Component {
                         sort={this.props.sort}
                         itemList={this.props.itemList}
                         onNavigate={this.props.onNavigate}
-                        changeItemList={this.props.changeItemList} />
+                        changeItemList={this.props.changeItemList} 
+                        changeActionList={this.props.changeActionList} />
                     <FleetsPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
                         location={this.props.location}
-                        itemList={this.props.itemList} />
+                        itemList={this.props.itemList}
+                        actionList={this.props.actionList} />
                 </div>
             )
         }
