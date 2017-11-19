@@ -7,13 +7,36 @@ export default class FleetsPage extends Component {
 
     render() {
         if (this.props.selectedIndex === null) {
-            return (
-                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                    <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                        <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+            if(this.props.actionList === null) {
+                return (
+                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                        <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+                        </div>
                     </div>
-                </div>
-            )
+                )
+            } else {
+                switch (this.props.actionList) {
+        
+                    case "Add":
+                    return (
+                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                            <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                                <h1 className="win-h1" style={{ color: 'grey' }}>{this.props.actionList}</h1>
+                            </div>
+                        </div>
+                    )
+                    default: 
+                    return (
+                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                            <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                                <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+                            </div>
+                        </div>
+                    )
+                }
+            }
+            
         } else {
             let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
             return (

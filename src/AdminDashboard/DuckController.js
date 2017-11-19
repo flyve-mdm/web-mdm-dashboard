@@ -23,6 +23,7 @@ const INITIAL_STATE = {
             openedDisplayMode: 'inline'
         }
     },
+    actionList: null,
     devices: { itemList: ItemList("Devices"), sort: true},
     fleets: { itemList: ItemList("Fleets"), sort: true},
     files: { itemList: ItemList("Files"), sort: true},
@@ -38,6 +39,7 @@ const CHANGE_LOCATION = 'flyve-mdm-web-ui/AdminDashboard/changeLocation'
 const CHANGE_INDEX = 'flyve-mdm-web-ui/AdminDashboard/changeIndex'
 const HANDLE_BACK = 'flyve-mdm-web-ui/AdminDashboard/handleBack'
 const CHANGE_ITEM_LIST = 'flyve-mdm-web-ui/AdminDashboard/changeItemList'
+const CHANGE_ACTION_LIST = 'flyve-mdm-web-ui/AdminDashboard/changeActionList'
 
 // Reducers
 export default function reducer(state = INITIAL_STATE, action) {
@@ -84,6 +86,12 @@ export default function reducer(state = INITIAL_STATE, action) {
                 ...state,
                 [action.location]: action.newItemList
             }
+        
+        case CHANGE_ACTION_LIST:
+            return {
+                ...state,
+                actionList: action.newActionList
+            }
 
         default: return state
     }
@@ -128,5 +136,11 @@ export function changeItemList(location, newItemList) {
         type: CHANGE_ITEM_LIST,
         newItemList,
         location: location[0].toLowerCase()
+    }
+}
+export function changeActionList(newActionList) {
+    return {
+        type: CHANGE_ACTION_LIST,
+        newActionList
     }
 }
