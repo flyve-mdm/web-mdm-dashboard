@@ -26,6 +26,7 @@ export default class HelpCenterList extends Component {
     itemRenderer = ReactWinJS.reactRenderer((item) => {
         return (
             <div style={{ padding: '14px', width: '100%' }}>
+                <span className="documentIcon" style={{marginRight: '5px'}}/>
                 {item.data['HelpCenter.name']}
             </div>
         )
@@ -136,6 +137,7 @@ export default class HelpCenterList extends Component {
                     <div className="separator" />
     
                     <div className="itemList">
+                        <span className="messageIcon" style={{marginRight: '5px'}}/>
                         Send feedback
                     </div>
                 </div>
