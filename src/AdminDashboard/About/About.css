@@ -47,3 +47,10 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+
+.itemList {
+    padding: 22px 14px 22px 26px;
+}
+.itemList:hover {
+    background-color: #E5E5E5;
+}

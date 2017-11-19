@@ -5,40 +5,40 @@
     "order": "ASC",
     "data": [
         {
-            "PluginFlyvemdmFile.name": "Article 1",
-            "PluginFlyvemdmFile.id": 1,
-            "PluginFlyvemdmFile.rating": 14,
-            "PluginFlyvemdmFile.source": "articles/article_1.md"
+            "HelpCenter.name": "Article 1",
+            "HelpCenter.id": 1,
+            "HelpCenter.rating": 14,
+            "HelpCenter.source": "articles/article_1.md"
         },
         {
-            "PluginFlyvemdmFile.name": "Article 2",
-            "PluginFlyvemdmFile.id": 2,
-            "PluginFlyvemdmFile.rating": 92,
-            "PluginFlyvemdmFile.source": "articles/article_2.md"
+            "HelpCenter.name": "Article 2",
+            "HelpCenter.id": 2,
+            "HelpCenter.rating": 92,
+            "HelpCenter.source": "articles/article_2.md"
         },
         {
-            "PluginFlyvemdmFile.name": "Article 3",
-            "PluginFlyvemdmFile.id": 3,
-            "PluginFlyvemdmFile.rating": 68,
-            "PluginFlyvemdmFile.source": "articles/article_3.md"
+            "HelpCenter.name": "Article 3",
+            "HelpCenter.id": 3,
+            "HelpCenter.rating": 68,
+            "HelpCenter.source": "articles/article_3.md"
         },
         {
-            "PluginFlyvemdmFile.name": "Article 4",
-            "PluginFlyvemdmFile.id": 4,
-            "PluginFlyvemdmFile.rating": 32,
-            "PluginFlyvemdmFile.source": "articles/article_4.md"
+            "HelpCenter.name": "Article 4",
+            "HelpCenter.id": 4,
+            "HelpCenter.rating": 32,
+            "HelpCenter.source": "articles/article_4.md"
         },
         {
-            "PluginFlyvemdmFile.name": "Article 5",
-            "PluginFlyvemdmFile.id": 5,
-            "PluginFlyvemdmFile.rating": 83,
-            "PluginFlyvemdmFile.source": "articles/article_5.md"
+            "HelpCenter.name": "Article 5",
+            "HelpCenter.id": 5,
+            "HelpCenter.rating": 83,
+            "HelpCenter.source": "articles/article_5.md"
         },
         {
-            "PluginFlyvemdmFile.name": "Article 6",
-            "PluginFlyvemdmFile.id": 6,
-            "PluginFlyvemdmFile.rating": 76,
-            "PluginFlyvemdmFile.source": "articles/article_6.md"
+            "HelpCenter.name": "Article 6",
+            "HelpCenter.id": 6,
+            "HelpCenter.rating": 76,
+            "HelpCenter.source": "articles/article_6.md"
         }
     ],
     "content-range": "0-5/6"
