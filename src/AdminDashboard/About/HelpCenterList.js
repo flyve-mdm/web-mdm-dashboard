@@ -32,8 +32,8 @@ export default class HelpCenterList extends Component {
         )
     })
 
-    deselectItem = () => {
-        this.setState({ itemSelected: null })
+    changeSelectItem = (item) => {
+        this.setState({ itemSelected: item })
     }
 
     handleContentAnimating(eventObject) {
@@ -88,15 +88,30 @@ export default class HelpCenterList extends Component {
             )
         }
 
-        if (this.state.itemSelected !== null) {
+        if (this.state.itemSelected !== null && this.state.itemSelected !== 'feedback') {
             return (
                 <div>
-                    <h2 className="win-h2 titleContentPane" onClick={this.deselectItem}>
+                    <h2 className="win-h2 titleContentPane" onClick={() =>this.changeSelectItem(null)}>
                         {'<'} Help Center
                     </h2>
 
                     {this.renderArticle()}
 
+                </div>
+            )
+        } else if (this.state.itemSelected === 'feedback') {
+            return (
+                <div>
+                    <h2 className="win-h2 titleContentPane" onClick={() => this.changeSelectItem(null)}>
+                        {'<'} Help Center
+                    </h2>
+                    <div style={{padding: '0 10px'}}>
+                        <h1>Feedback</h1>
+                        <textarea className="win-textbox feedback-textarea"/>
+                        <button className="win-button">
+                            Send
+                        </button>
+                    </div>
                 </div>
             )
         } else {
@@ -136,7 +151,7 @@ export default class HelpCenterList extends Component {
     
                     <div className="separator" />
     
-                    <div className="itemList">
+                    <div className="itemList" onClick={()=> this.changeSelectItem('feedback')}>
                         <span className="messageIcon" style={{marginRight: '5px'}}/>
                         Send feedback
                     </div>
