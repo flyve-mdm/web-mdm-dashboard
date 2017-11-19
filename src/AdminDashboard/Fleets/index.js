@@ -10,7 +10,7 @@ export default class Fleets extends Component {
         let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
 
         if (this.props.mode === 'small') {
-            if (selectedIndex === null) {
+            if (selectedIndex === null && this.props.actionList === null) {
                 return <FleetsList
                     itemListPaneWidth={'100%'}
                     location={this.props.location}
@@ -24,7 +24,7 @@ export default class Fleets extends Component {
                     selectedIndex={selectedIndex}
                     location={this.props.location}
                     itemList={this.props.itemList} 
-                    changeActionList={this.props.changeActionList} />
+                    actionList={this.props.actionList} />
             }
         } else {
             let itemListPaneWidth = 320

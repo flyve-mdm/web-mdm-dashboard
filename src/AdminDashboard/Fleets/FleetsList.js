@@ -43,6 +43,9 @@ export default class FleetsList extends Component {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
         setTimeout(function () {
+            if(index.length !== 0) {
+                this.props.changeActionList(null)
+            }
             this.setState({ selectedItemList: index });
             this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
         }.bind(this), 0)
@@ -57,10 +60,13 @@ export default class FleetsList extends Component {
 
     handleAdd = (eventObject) => {
         let button = eventObject.currentTarget.winControl
-        this.setState({ selectionMode: false })
-        this.props.changeActionList(button.label)
-        this.props.onNavigate([this.props.location[0]])
         this.refs.listView.winControl.selection.clear()
+
+        setTimeout(function () {
+            this.setState({ selectionMode: false })
+            this.props.changeActionList(button.label)
+            this.props.onNavigate([this.props.location[0]])
+        }.bind(this), 0)
     }
 
     handleDelete = () => {

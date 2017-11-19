@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import IconItemList from '../IconItemList'
+import FleetsAdd from './FleetsAdd'
 
 export default class FleetsPage extends Component {
 
@@ -21,9 +22,7 @@ export default class FleetsPage extends Component {
                     case "Add":
                     return (
                         <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                            <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                                <h1 className="win-h1" style={{ color: 'grey' }}>{this.props.actionList}</h1>
-                            </div>
+                            <FleetsAdd />
                         </div>
                     )
                     default: 
