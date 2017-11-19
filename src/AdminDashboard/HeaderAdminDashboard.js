@@ -2,7 +2,7 @@ import * as React from 'react'
 import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { handleTogglePane, changeMode, changeLocation, handleBack } from './DuckController'
+import { handleTogglePane, changeMode, changeLocation, handleBack, changeActionList } from './DuckController'
 import GetMode from '../Utils/GetMode'
 
 function mapStateToProps(state, props) {
@@ -10,7 +10,8 @@ function mapStateToProps(state, props) {
     splitViewId: state.AdminDashboard.splitViewId,
     paneOpened: state.AdminDashboard.paneOpened,
     mode: state.AdminDashboard.mode,
-    location: state.AdminDashboard.location
+    location: state.AdminDashboard.location,
+    actionList: state.AdminDashboard.actionList,
   }
 }
 
@@ -19,7 +20,8 @@ function mapDispatchToProps(dispatch) {
     handleTogglePane: bindActionCreators(handleTogglePane, dispatch),
     changeMode: bindActionCreators(changeMode, dispatch),
     changeLocation: bindActionCreators(changeLocation, dispatch),
-    handleBack: bindActionCreators(handleBack, dispatch)
+    handleBack: bindActionCreators(handleBack, dispatch),
+    changeActionList: bindActionCreators(changeActionList, dispatch)
   }
   return { actions }
 }
@@ -44,11 +46,16 @@ class HeaderAdminDashboard extends React.Component {
     }
 
     renderBackButton () {
-        var canGoBack = this.props.location.length > 1
+        var canGoBack = this.props.location.length > 1 || this.props.actionList !== null
         var shouldShowBackButton = canGoBack && this.props.mode === 'small'
         return shouldShowBackButton ?
-            <button style={{display: 'inline-block'}} className="win-backbutton" onClick={this.props.actions.handleBack} /> :
+            <button style={{display: 'inline-block'}} className="win-backbutton" onClick={this.handleBack} /> :
             null
+    }
+
+    handleBack = (eventObject) => {
+        this.props.actions.changeActionList(null)
+        this.props.actions.handleBack()
     }
 
     render () {
