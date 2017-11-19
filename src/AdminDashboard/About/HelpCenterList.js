@@ -43,7 +43,6 @@ export default class HelpCenterList extends Component {
         }
     }
 
-<<<<<<< HEAD
     showAllArticles = () => {
         this.setState({labelList: 'All articles', list: new WinJS.Binding.List(Articles.data)})
     }
@@ -175,24 +174,5 @@ export default class HelpCenterList extends Component {
           )
         }
 
-=======
-    render() {
-      return (
-          <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
-              <ReactWinJS.ListView
-                  ref="listView"
-                  className="contentListView win-selectionstylefilled"
-                  style={{ height: 'calc(100% - 48px)' }}
-                  itemDataSource={this.state.list.dataSource}
-                  itemTemplate={this.itemRenderer}
-                  layout={this.state.layout}
-                  selectionMode="single"
-                  tapBehavior="directSelect"
-                  onContentAnimating={this.handleContentAnimating}
-                //   onSelectionChanged={this.handleSelectionChanged}
-              />
-          </div>
-      )
->>>>>>> 90be8f9... feat(helpCenter): create component HelpCenterList
     }
 }
