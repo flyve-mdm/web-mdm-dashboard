@@ -147,3 +147,9 @@ export function changeActionList(newActionList) {
 >>>>>>> 0d2b51b... refactor(dashboard): revert change location management
     }
 }
+export function changeActionList(newActionList) {
+    return {
+        type: CHANGE_ACTION_LIST,
+        newActionList
+    }
+}
