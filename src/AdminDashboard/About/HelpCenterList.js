@@ -81,7 +81,7 @@ export default class HelpCenterList extends Component {
                 <div>
                     <div className="separator" />
                     
-                    <div style={{padding: '22px 14px 22px 0'}}>
+                    <div style={{padding: '22px 14px 22px 10px'}}>
                         <a onClick={this.showAllArticles}>Browse all articles</a>
                     </div>
                 </div>
@@ -107,10 +107,12 @@ export default class HelpCenterList extends Component {
                     </h2>
                     <div style={{padding: '0 10px'}}>
                         <h1>Feedback</h1>
-                        <textarea className="win-textbox feedback-textarea"/>
-                        <button className="win-button">
-                            Send
-                        </button>
+                        <div className="feedback">
+                            <textarea className="win-textbox feedback-textarea"/>
+                            <button className="win-button" style={{float: 'right'}}>
+                                Send
+                            </button>
+                        </div>
                     </div>
                 </div>
             )
@@ -121,8 +123,21 @@ export default class HelpCenterList extends Component {
                         <ReactWinJS.ToolBar.ContentCommand
                             key="content"
                             icon="accept"
-                            label="search bar">
-                            <input className="win-textbox win-interactive" type="text" />
+                            label="search bar"
+                            style={{
+                                width: 'calc(100% - 110px)',
+                                padding: '0'
+                            }}
+                        >
+
+                            <input 
+                                className="win-textbox" 
+                                type="text" 
+                                style={{
+                                    width: '100%'
+                                }}
+                            />
+
                         </ReactWinJS.ToolBar.ContentCommand>
                         <ReactWinJS.ToolBar.Button
                             key="search"
@@ -132,7 +147,7 @@ export default class HelpCenterList extends Component {
                             />
                     </ReactWinJS.ToolBar>
     
-                    <h3>{this.state.labelList}</h3>
+                    <h3 style={{paddingLeft: '10px'}}>{this.state.labelList}</h3>
     
                     <ReactWinJS.ListView
                         ref="listView"
