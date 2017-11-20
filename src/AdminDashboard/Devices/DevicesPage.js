@@ -2,20 +2,42 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import IconItemList from '../IconItemList'
+import Invitations from './Invitations'
 
 export default class DevicesPage extends Component {
 
     render() {
         if (this.props.selectedIndex === null) {
-            return (
-                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                    <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                        <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+            if(this.props.actionList === null) {
+                return (
+                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                        <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+                        </div>
                     </div>
-                </div>
-            )
+                )
+            } else {
+                console.log(this.props.actionList)
+                switch (this.props.actionList) {
+                    
+                    case "Pending Invitation":
+                    return (
+                        <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                            <Invitations />
+                        </div>
+                    )
+                    default: 
+                    return (
+                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                            <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                                <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+                            </div>
+                        </div>
+                    )
+                }
+            }
         } else {
-            let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
+            const selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)            
             return (
                 <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                     <div className="contentHeader">
@@ -62,5 +84,6 @@ DevicesPage.propTypes = {
         PropTypes.number
     ]).isRequired,
     selectedIndex: PropTypes.number,
-    itemList: PropTypes.object.isRequired
+    itemList: PropTypes.object.isRequired,
+    actionList: PropTypes.string
 }

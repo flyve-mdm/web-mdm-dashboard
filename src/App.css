@@ -206,34 +206,29 @@ a {
     margin-right: 8px;
 }
 
-.contentInfo .videoCallIcon::before {
+.videoCallIcon::before {
     content: "\E13B";
 }
 
-.contentInfo .emailIcon::before {
+.emailIcon::before {
     content: "\E119";
 }
 
-.contentInfo .messageIcon::before {
+.messageIcon::before {
     content: "\E15F";
 }
 
-.contentInfo .phoneIcon::before {
+.phoneIcon::before {
     content: "\E13A";
 }
 
-.contentInfo .mapIcon::before {
+.mapIcon::before {
     content: "\E1C4";
 }
 
 .deviceIcon::before {
     content: "\E1C9";
 }
-
-.deviceIcon::before {
-    content: "\E1C9";
-}
-
 .fileIcon::before {
     content: "\E295";
 }

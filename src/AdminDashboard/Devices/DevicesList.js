@@ -32,8 +32,18 @@ export default class DevicesList extends Component {
         )
     })
 
+    handleInvitations = (eventObject) => {
+        let button = eventObject.currentTarget.winControl
+        this.refs.listView.winControl.selection.clear()
+
+        this.setState({ selectionMode: false })
+        this.props.changeActionList(button.label)
+        this.props.onNavigate([this.props.location[0]])
+    }
+
     handleToggleSelectionMode = () => {
         this.setState({ selectionMode: !this.state.selectionMode })
+        this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
         this.refs.listView.winControl.selection.clear()
     }
@@ -42,6 +52,9 @@ export default class DevicesList extends Component {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
         setTimeout(function () {
+            if(index.length !== 0) {
+                this.props.changeActionList(null)
+            }
             this.setState({ selectedItemList: index });
             this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
         }.bind(this), 0)
@@ -133,6 +146,14 @@ export default class DevicesList extends Component {
                         priority={0}
                     />
 
+                    <ReactWinJS.ToolBar.Button
+                        key="invitations"
+                        icon="mail"
+                        label="Pending Invitation"
+                        priority={0}
+                        onClick={this.handleInvitations}
+                    />
+
                     {this.state.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
@@ -172,5 +193,6 @@ DevicesList.propTypes = {
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired
+    changeItemList: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired
 }

@@ -174,5 +174,6 @@ FleetsList.propTypes = {
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired
+    changeItemList: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired
 }

@@ -88,6 +88,7 @@ export default function reducer(state = INITIAL_STATE, action) {
             }
         
         case CHANGE_ACTION_LIST:
+            console.log(state.actionList)
             return {
                 ...state,
                 actionList: action.newActionList

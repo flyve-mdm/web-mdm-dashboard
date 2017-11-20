@@ -55,7 +55,7 @@ class BodyAdminDashboard extends Component {
         switch (this.props.router[this.props.index].label) {
 
             case "Devices":
-                contentComponent = <Devices mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                contentComponent = <Devices mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} />
                 break
             case "Fleets":
                 contentComponent = <Fleets mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} />

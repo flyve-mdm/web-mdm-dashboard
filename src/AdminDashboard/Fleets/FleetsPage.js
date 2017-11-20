@@ -61,5 +61,6 @@ FleetsPage.propTypes = {
         PropTypes.number
     ]).isRequired,
     selectedIndex: PropTypes.number,
-    itemList: PropTypes.object.isRequired
+    itemList: PropTypes.object.isRequired,
+    actionList: PropTypes.string
 }
