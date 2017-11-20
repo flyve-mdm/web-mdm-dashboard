@@ -23,7 +23,9 @@ export default class FleetsAdd extends Component {
                     </div>
                 </ReactWinJS.Pivot.Item>
                 <ReactWinJS.Pivot.Item key="files" header="Files">
-                    <div>Files</div>
+                    <div style={{ padding: '10px' }}>
+                        <input className="win-textbox" type="file" placeholder="Fleet Name" multiple />
+                    </div>
                 </ReactWinJS.Pivot.Item>
             </ReactWinJS.Pivot>
         )
