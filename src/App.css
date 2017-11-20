@@ -243,6 +243,9 @@ a {
 .messageIcon:before {
     content: "\E134";
 }
+.win-textbox:focus {
+    border-color: #158783 !important;
+}
 /* .myIcon {
     font-family: "Symbols";
     font-size: 28px;
