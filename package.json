@@ -34,7 +34,7 @@
     "react": "^16.0.0",
     "react-dev-utils": "^4.2.1",
     "react-dom": "^16.0.0",
-    "react-markdown": "^2.5.1",
+    "react-markdown": "^3.0.0",
     "react-redux": "^5.0.6",
     "react-winjs": "git+https://git@github.com/flyve-mdm/react-winjs.git",
     "redux": "^3.7.2",
