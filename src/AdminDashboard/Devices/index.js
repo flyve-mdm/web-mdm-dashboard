@@ -17,12 +17,14 @@ export default class Devices extends Component {
                     sort={this.props.sort}
                     itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
-                    changeItemList={this.props.changeItemList} />
+                    changeItemList={this.props.changeItemList} 
+                    changeActionList={this.props.changeActionList} />
             } else {
                 return <DevicesPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
                     location={this.props.location}
-                    itemList={this.props.itemList} />
+                    itemList={this.props.itemList}
+                    actionList={this.props.actionList} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -34,11 +36,13 @@ export default class Devices extends Component {
                         sort={this.props.sort}
                         itemList={this.props.itemList}
                         onNavigate={this.props.onNavigate}
-                        changeItemList={this.props.changeItemList} />
+                        changeItemList={this.props.changeItemList} 
+                        changeActionList={this.props.changeActionList} />
                     <DevicesPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
                         location={this.props.location}
-                        itemList={this.props.itemList} />
+                        itemList={this.props.itemList}
+                        actionList={this.props.actionList} />
                 </div>
             )
         }
@@ -50,5 +54,7 @@ Devices.propTypes = {
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired
+    changeItemList: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired,
+    actionList: PropTypes.string
 }
