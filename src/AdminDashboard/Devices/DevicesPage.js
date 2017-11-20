@@ -22,7 +22,7 @@ export default class DevicesPage extends Component {
                     
                     case "Pending Invitation":
                     return (
-                        <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                        <div className="contentPane listPane" style={{ height: '100%', padding: '0', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                             <Invitations />
                         </div>
                     )
