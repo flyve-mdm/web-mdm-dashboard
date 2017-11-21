@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Invitations from '../data/invitations.json'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
+import ItemList from '../ItemList'
 
 export default class InvitationsPage extends Component {
 
@@ -12,7 +13,8 @@ export default class InvitationsPage extends Component {
             layout: { type: WinJS.UI.ListLayout },
             list: new WinJS.Binding.List(Invitations.data),
             selectedItemList: [],
-            selectionMode: false
+            selectionMode: false,
+            sort: true
         }
     }
     
@@ -36,7 +38,7 @@ export default class InvitationsPage extends Component {
     }
 
     // handleDelete = () => {
-    //     let item = this.props.itemList
+    //     let item = this.state.list
     //     let index = this.state.selectedItemList
     //     index.sort()
     //     index.reverse()
@@ -47,6 +49,7 @@ export default class InvitationsPage extends Component {
     //         selectedItem: [],
     //         selectionMode: false
     //     })
+    //     this.setState({list: })
     //     this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
     // }
 
@@ -63,6 +66,13 @@ export default class InvitationsPage extends Component {
         this.setState({ selectedItemList: index })
         // this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
     }
+
+    handleSort = () => {
+        let array = []
+        this.state.list.map((value, index) =>
+            array.push(value)
+        )
+        this.setState({list: ItemList(null, array, this.state.sort, false), sort: !this.state.sort})
     }
 
 
