@@ -3,6 +3,7 @@
  */
 import * as React from 'react'
 import AdminDashboard from './AdminDashboard'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 /**
  * Assets
  */
@@ -13,7 +14,11 @@ import './ui-light.css'
  * @returns AdminDashboard component
  */
 function App() {
-  return <AdminDashboard />
+  return (
+    <Router>
+      <Route path="/" component={AdminDashboard} />
+    </Router>
+  ) 
 }
 
 export default App
