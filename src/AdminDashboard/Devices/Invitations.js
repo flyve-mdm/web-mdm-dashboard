@@ -37,21 +37,20 @@ export default class InvitationsPage extends Component {
         }
     }
 
-    // handleDelete = () => {
-    //     let item = this.state.list
-    //     let index = this.state.selectedItemList
-    //     index.sort()
-    //     index.reverse()
-    //     index.forEach((i) => {
-    //         item.splice(i, 1)
-    //     })
-    //     this.setState({
-    //         selectedItem: [],
-    //         selectionMode: false
-    //     })
-    //     this.setState({list: })
-    //     this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
-    // }
+    handleDelete = () => {
+        let item = this.state.list
+        let index = this.state.selectedItemList
+        index.sort()
+        index.reverse()
+        index.forEach((i) => {
+            item.splice(i, 1)
+        })
+        this.setState({
+            selectedItem: [],
+            selectionMode: false,
+            list: item
+        })
+    }
 
     handleToggleSelectionMode = () => {
         this.setState({ selectionMode: !this.state.selectionMode })
@@ -133,5 +132,4 @@ export default class InvitationsPage extends Component {
     }
 }
 InvitationsPage.propTypes = {
-
 }
