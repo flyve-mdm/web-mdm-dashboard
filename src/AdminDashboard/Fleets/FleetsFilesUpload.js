@@ -15,7 +15,7 @@ export default class FleetsFilesUpload extends Component {
         this.setState({
           files
         }, () => {
-          console.log(this.state.files)
+        //   console.log(this.state.files)
         })
       }
     
