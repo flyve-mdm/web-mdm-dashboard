@@ -36,6 +36,8 @@ export default class FilesUpload extends Component {
             file.id = 'files-' + this.id++
             // Tell file it's own extension
             file.extension = this.fileExtension(file)
+            // Tell file it's own size
+            file.filesize = file.size
             // Tell file it's own readable size
             file.sizeReadable = BytesToSize(file.size)
             // Add preview, either image or file extension
