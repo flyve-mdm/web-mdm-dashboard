@@ -59,7 +59,6 @@ export default class HelpCenterList extends Component {
     renderArticle = () => {
         let Article
         Articles.data.forEach(element => {
-            console.log(element)
             if (element['HelpCenter.id'] === this.state.itemSelected) {
                 Article = element['HelpCenter.source']
             }
@@ -73,8 +72,6 @@ export default class HelpCenterList extends Component {
     }
 
     render() {
-        console.log(this.state.itemSelected)
-
         let showAll = ''
         if (this.state.labelList === 'Popular' ) {
             showAll = (
