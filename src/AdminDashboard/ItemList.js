@@ -1,7 +1,7 @@
 import * as DATA from './Data'
 import WinJS from 'winjs'
 
-export default function (name, list, sort) {
+export default function (name, list, sort, createGroup = true) {
 
     var groupKey = function (data) {
         switch (name) {
@@ -46,24 +46,57 @@ export default function (name, list, sort) {
         
     }
 
-    const sorter = function (a, b) {
-        if (a.name < b.name) {
-            return -1
-        } else if (a.name > b.name) {
-            return 1
-        } else {
-            return 0
+    let sorter
+    if (createGroup) {
+        sorter = (a, b) => {
+            if (a.name < b.name) {
+                return -1
+            } else if (a.name > b.name) {
+                return 1
+            } else {
+                return 0
+            }
+        }
+    } else {
+        sorter = (a, b) => {
+            if (sort) {
+                if (a['PluginFlyvemdmInvitation.User.name'] > b['PluginFlyvemdmInvitation.User.name']) {
+                    return -1
+                } else if (a['PluginFlyvemdmInvitation.User.name'] < b['PluginFlyvemdmInvitation.User.name']) {
+                    return 1
+                } else {
+                    return 0
+                }
+            } else {
+                if (a['PluginFlyvemdmInvitation.User.name'] < b['PluginFlyvemdmInvitation.User.name']) {
+                    return -1
+                } else if (a['PluginFlyvemdmInvitation.User.name'] > b['PluginFlyvemdmInvitation.User.name']) {
+                    return 1
+                } else {
+                    return 0
+                }
+            }
         }
     }
 
-    if (list) {
-        return new WinJS.Binding.List(list)
-            .createSorted(sorter)
-            .createGrouped(groupKey, groupData, groupSorted)
+    if (createGroup) {
+        if (list) {
+            return new WinJS.Binding.List(list)
+                .createSorted(sorter)
+                .createGrouped(groupKey, groupData, groupSorted)
+        } else {
+            return new WinJS.Binding.List(DATA[name])
+                .createSorted(sorter)
+                .createGrouped(groupKey, groupData)
+        }
     } else {
-        return new WinJS.Binding.List(DATA[name])
-            .createSorted(sorter)
-            .createGrouped(groupKey, groupData)
+        if (list) {
+            return new WinJS.Binding.List(list)
+                .createSorted(sorter)
+        } else {
+            return new WinJS.Binding.List(DATA[name])
+                .createSorted(sorter)
+        }
     }
     
 }
