@@ -10,19 +10,23 @@ export default class Files extends Component {
         let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
 
         if (this.props.mode === 'small') {
-            if (selectedIndex === null) {
+            if (selectedIndex === null && this.props.actionList === null) {
                 return <FilesList
                     itemListPaneWidth={'100%'}
                     location={this.props.location}
                     sort={this.props.sort}
                     itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
-                    changeItemList={this.props.changeItemList} />
+                    changeItemList={this.props.changeItemList} 
+                    changeActionList={this.props.changeActionList}/>
             } else {
                 return <FilesPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
                     location={this.props.location}
-                    itemList={this.props.itemList} />
+                    itemList={this.props.itemList}
+                    actionList={this.props.actionList}
+                    changeItemList={this.props.changeItemList}
+                    changeActionList={this.props.changeActionList} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -34,11 +38,15 @@ export default class Files extends Component {
                         sort={this.props.sort}
                         itemList={this.props.itemList}
                         onNavigate={this.props.onNavigate}
-                        changeItemList={this.props.changeItemList} />
+                        changeItemList={this.props.changeItemList} 
+                        changeActionList={this.props.changeActionList} />
                     <FilesPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
                         location={this.props.location}
-                        itemList={this.props.itemList} />
+                        itemList={this.props.itemList}
+                        actionList={this.props.actionList} 
+                        changeItemList={this.props.changeItemList}
+                        changeActionList={this.props.changeActionList}/>
                 </div>
             )
         }
@@ -50,5 +58,7 @@ Files.propTypes = {
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired
+    changeItemList: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired,
+    actionList: PropTypes.string
 }

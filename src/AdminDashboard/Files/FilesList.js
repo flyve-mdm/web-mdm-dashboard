@@ -54,6 +54,17 @@ export default class FilesList extends Component {
         }
     }
 
+    handleAdd = (eventObject) => {
+        let button = eventObject.currentTarget.winControl
+        this.refs.listView.winControl.selection.clear()
+
+        setTimeout(function () {
+            this.setState({ selectionMode: false })
+            this.props.changeActionList(button.label)
+            this.props.onNavigate([this.props.location[0]])
+        }.bind(this), 0)
+    }
+
     handleDelete = () => {
         let item = this.props.itemList
         let index = this.state.selectedItemList
@@ -107,12 +118,6 @@ export default class FilesList extends Component {
                         priority={4}
                     />
                     <ReactWinJS.ToolBar.Button
-                        key="favorite"
-                        icon="favorite"
-                        label="Favorite"
-                        priority={3}
-                    />
-                    <ReactWinJS.ToolBar.Button
                         key="sort"
                         icon="sort"
                         label="Sort"
@@ -131,6 +136,7 @@ export default class FilesList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
+                        onClick={this.handleAdd}
                     />
 
                     {this.state.selectionMode ? deleteCommand : null}

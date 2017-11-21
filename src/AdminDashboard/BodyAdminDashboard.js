@@ -61,7 +61,7 @@ class BodyAdminDashboard extends Component {
                 contentComponent = <Fleets mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} />
                 break
             case "Files":
-                contentComponent = <Files mode={this.props.mode} location={this.props.location} sort={this.props.files.sort} itemList={this.props.files.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                contentComponent = <Files mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.files.sort} itemList={this.props.files.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} />
                 break
             case "Applications":
                 contentComponent = <Applications mode={this.props.mode} location={this.props.location} sort={this.props.applications.sort} itemList={this.props.applications.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
