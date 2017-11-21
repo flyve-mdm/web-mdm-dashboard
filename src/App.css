@@ -238,11 +238,23 @@ a {
 .messageIcon:before {
     content: "\E134";
 }
+.deleteIcon:before {
+    content: "\E107";
+}
 .win-textbox:focus {
     border-color: #158783 !important;
 }
-/* .myIcon {
-    font-family: "Symbols";
-    font-size: 28px;
-    color: #5729c1;
-} */
+
+.files-dropzone {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px;
+    border: 1px dashed #D3D3D3;
+    cursor: pointer;
+  }
+
+  .files-dropzone-active {
+    border: 1px solid #158783;
+    color: #158783;
+  }
