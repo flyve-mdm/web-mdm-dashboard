@@ -3,7 +3,9 @@
  */
 import * as React from 'react'
 import AdminDashboard from './AdminDashboard'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Login from './Login'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 /**
  * Assets
  */
@@ -16,7 +18,10 @@ import './ui-light.css'
 function App() {
   return (
     <Router>
-      <Route path="/" component={AdminDashboard} />
+      <Switch>
+        <Route exact path='/' component={Login}/>
+        <Route path='/app' component={AdminDashboard}/>
+      </Switch>
     </Router>
   ) 
 }
