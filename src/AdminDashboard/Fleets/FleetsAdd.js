@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
+import FleetsFilesUpload from './FleetsFilesUpload'
 
 export default class FleetsAdd extends Component {
     render() {
@@ -11,7 +12,7 @@ export default class FleetsAdd extends Component {
                 </div>
                 </ReactWinJS.Pivot.Item>
                 <ReactWinJS.Pivot.Item key="policies" header="Policies">
-                    <div>Policies </div>
+                    <div>Policies</div>
                 </ReactWinJS.Pivot.Item>
                 <ReactWinJS.Pivot.Item key="applications" header="Applications">
                     <div>
@@ -23,9 +24,7 @@ export default class FleetsAdd extends Component {
                     </div>
                 </ReactWinJS.Pivot.Item>
                 <ReactWinJS.Pivot.Item key="files" header="Files">
-                    <div style={{ padding: '10px' }}>
-                        <input className="win-textbox" type="file" placeholder="Fleet Name" multiple />
-                    </div>
+                    <FleetsFilesUpload/>
                 </ReactWinJS.Pivot.Item>
             </ReactWinJS.Pivot>
         )
