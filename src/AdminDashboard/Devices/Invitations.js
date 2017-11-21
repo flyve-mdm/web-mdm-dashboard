@@ -10,8 +10,14 @@ export default class InvitationsPage extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            list: new WinJS.Binding.List(Invitations.data)
+            list: new WinJS.Binding.List(Invitations.data),
+            selectedItemList: [],
+            selectionMode: false
         }
+    }
+    
+    componentWillUnmount() {
+        this.setState({ selectionMode: false, selectedItemList: [] })
     }
 
     itemRenderer = ReactWinJS.reactRenderer((item) => {
@@ -44,19 +50,36 @@ export default class InvitationsPage extends Component {
     //     this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
     // }
 
-    handleSelectionChanged = (eventObject) => {
-        // let listView = eventObject.currentTarget.winControl
-        // let index = listView.selection.getIndices()
-        // setTimeout(function () {
-        //     this.setState({ selectedItemList: index });
-        //     this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
-        // }.bind(this), 0)
+    handleToggleSelectionMode = () => {
+        this.setState({ selectionMode: !this.state.selectionMode })
+        // this.props.changeActionList(null)
+        // this.props.onNavigate([this.props.location[0]])
+        this.refs.listView.winControl.selection.clear()
     }
 
+    handleSelectionChanged = (eventObject) => {
+        let listView = eventObject.currentTarget.winControl
+        let index = listView.selection.getIndices()
+        this.setState({ selectedItemList: index })
+        // this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
+    }
+    }
+
+
     render() {
+        let deleteCommand = (
+            <ReactWinJS.ToolBar.Button
+                key="delete"
+                icon="delete"
+                priority={0}
+                disabled={this.state.selectedItemList.length === 0}
+                onClick={this.handleDelete}
+            />
+        )
         return (
-            <div>                
-                <ReactWinJS.ToolBar className="listToolBar">
+            <div className="listPane" style={{ height: '100%', width: '100%', display: 'inline-block', verticalAlign: 'top' }}>
+            
+                <ReactWinJS.ToolBar layout={WinJS.UI.Orientation.vertical} className="listToolBar">
 
                     <ReactWinJS.ToolBar.Button
                         key="sort"
@@ -71,15 +94,8 @@ export default class InvitationsPage extends Component {
                         label="Refresh"
                         priority={1}
                     />
-    
-                    <ReactWinJS.ToolBar.Button
-                        key="add"
-                        icon="add"
-                        label="Add"
-                        priority={0}
-                    />
         
-                    {/* {this.state.selectionMode ? deleteCommand : null} */}
+                    {this.state.selectionMode ? deleteCommand : null}
     
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
@@ -87,6 +103,7 @@ export default class InvitationsPage extends Component {
                         label="Select"
                         priority={0}
                         selected={this.state.selectionMode}
+                        onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
                     <ReactWinJS.ListView
@@ -96,8 +113,8 @@ export default class InvitationsPage extends Component {
                         itemDataSource={this.state.list.dataSource}
                         itemTemplate={this.itemRenderer}
                         layout={this.state.layout}
-                        selectionMode="single"
-                        tapBehavior="directSelect" 
+                        selectionMode={this.state.selectionMode ? 'multi' : 'single'}
+                        tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
                         onContentAnimating={this.handleContentAnimating}
                         onSelectionChanged={this.handleSelectionChanged}
                     />
