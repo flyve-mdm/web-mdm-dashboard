@@ -32,7 +32,7 @@ export default class DevicesList extends Component {
         )
     })
 
-    handleInvitations = (eventObject) => {
+    handlePanel = (eventObject) => {
         let button = eventObject.currentTarget.winControl
         this.refs.listView.winControl.selection.clear()
 
@@ -145,6 +145,7 @@ export default class DevicesList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
+                        onClick={this.handlePanel}
                     />
 
                     <ReactWinJS.ToolBar.Button
@@ -152,7 +153,7 @@ export default class DevicesList extends Component {
                         icon="mail"
                         label="Pending Invitation"
                         priority={0}
-                        onClick={this.handleInvitations}
+                        onClick={this.handlePanel}
                     />
 
                     {this.state.selectionMode ? deleteCommand : null}

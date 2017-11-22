@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import IconItemList from '../IconItemList'
 import Invitations from './Invitations'
+import Enroll from './Enroll'
 
 export default class DevicesPage extends Component {
 
@@ -23,6 +24,12 @@ export default class DevicesPage extends Component {
                         return (
                             <div className="contentPane listPane" style={{ height: '100%', padding: '0', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                                 <Invitations changeActionList={this.props.changeActionList}/>
+                            </div>
+                        )
+                    case "Add":
+                        return (
+                            <div className="contentPane listPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                                <Enroll/>
                             </div>
                         )
                     default: 

@@ -242,7 +242,7 @@ a {
     content: "\E107";
 }
 .win-textbox:focus {
-    border-color: #158783 !important;
+    border-color: #158784 !important;
 }
 
 .files-dropzone {
@@ -252,9 +252,13 @@ a {
     padding: 10px;
     border: 1px dashed #D3D3D3;
     cursor: pointer;
-  }
+}
 
-  .files-dropzone-active {
-    border: 1px solid #158783;
-    color: #158783;
-  }
+.files-dropzone-active {
+    border: 1px solid #158784;
+    color: #158784;
+}
+
+.win-button-primary {
+    background-color: #158784 !important;
+}
