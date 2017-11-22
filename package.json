@@ -70,7 +70,9 @@
     "gh-pages": "^1.0.0",
     "jsdoc": "^3.5.5",
     "node-github-release": "^0.2.1",
+    "node-sass": "^4.7.2",
     "raw-loader": "^0.5.1",
+    "sass-loader": "^6.0.6",
     "standard-version": "^4.2.0"
   },
   "homepage": "http://flyve.org/web-admin-dashboard/",
