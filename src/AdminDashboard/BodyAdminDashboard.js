@@ -45,6 +45,7 @@ class BodyAdminDashboard extends Component {
     handleCommandInvoked(newLocation, newIndex) {
         this.props.actions.changeLocation(newLocation)
         this.props.actions.changeIndex(newIndex)
+        this.props.actions.changeActionList(null)
         this.props.actions.closePane()
     }
 
