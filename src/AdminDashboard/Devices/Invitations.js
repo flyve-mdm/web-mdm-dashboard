@@ -14,7 +14,7 @@ export default class InvitationsPage extends Component {
             list: new WinJS.Binding.List(Invitations.data),
             selectedItemList: [],
             selectionMode: false,
-            sort: true
+            sort: false
         }
     }
     
@@ -71,7 +71,7 @@ export default class InvitationsPage extends Component {
         this.state.list.map((value, index) =>
             array.push(value)
         )
-        this.setState({list: ItemList(null, array, this.state.sort, false), sort: !this.state.sort})
+        this.setState({list: ItemList("Invitation", array, this.state.sort), sort: !this.state.sort})
     }
 
 
