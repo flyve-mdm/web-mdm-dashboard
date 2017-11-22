@@ -10,19 +10,23 @@ export default class Applications extends Component {
         let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
 
         if (this.props.mode === 'small') {
-            if (selectedIndex === null) {
+            if (selectedIndex === null && this.props.actionList === null) {
                 return <ApplicationsList
                     itemListPaneWidth={'100%'}
                     location={this.props.location}
                     sort={this.props.sort}
                     itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
-                    changeItemList={this.props.changeItemList} />
+                    changeItemList={this.props.changeItemList}
+                    changeActionList={this.props.changeActionList} />
             } else {
                 return <ApplicationsPage itemListPaneWidth={0}
-                    location={this.props.location}
                     selectedIndex={selectedIndex}
-                    itemList={this.props.itemList} />
+                    location={this.props.location}
+                    itemList={this.props.itemList}
+                    actionList={this.props.actionList}
+                    changeItemList={this.props.changeItemList}
+                    changeActionList={this.props.changeActionList} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -34,12 +38,15 @@ export default class Applications extends Component {
                         sort={this.props.sort}
                         itemList={this.props.itemList}
                         onNavigate={this.props.onNavigate}
-                        changeItemList={this.props.changeItemList} />
-                    <ApplicationsPage 
-                        itemListPaneWidth={itemListPaneWidth}
-                        location={this.props.location}
+                        changeItemList={this.props.changeItemList}
+                        changeActionList={this.props.changeActionList} />
+                    <ApplicationsPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
-                        itemList={this.props.itemList} />
+                        location={this.props.location}
+                        itemList={this.props.itemList}
+                        actionList={this.props.actionList}
+                        changeItemList={this.props.changeItemList}
+                        changeActionList={this.props.changeActionList} />
                 </div>
             )
         }
@@ -51,5 +58,7 @@ Applications.propTypes = {
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired
+    changeItemList: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired,
+    actionList: PropTypes.string
 }

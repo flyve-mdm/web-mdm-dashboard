@@ -54,6 +54,16 @@ export default class ApplicationsList extends Component {
         }
     }
 
+    handleAdd = (eventObject) => {
+        let button = eventObject.currentTarget.winControl
+        this.refs.listView.winControl.selection.clear()
+        setTimeout(function () {
+            this.setState({ selectionMode: false })
+            this.props.changeActionList(button.label)
+            this.props.onNavigate([this.props.location[0]])
+        }.bind(this), 0)
+    }
+
     handleDelete = () => {
         let item = this.props.itemList
         let index = this.state.selectedItemList
@@ -131,6 +141,7 @@ export default class ApplicationsList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
+                        onClick={this.handleAdd}
                     />
 
                     {this.state.selectionMode ? deleteCommand : null}
