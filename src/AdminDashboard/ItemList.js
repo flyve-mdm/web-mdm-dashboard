@@ -1,9 +1,9 @@
 import * as DATA from './Data'
 import WinJS from 'winjs'
 
-export default function (name, list, sort, createGroup = true) {
+export default function (name, list, sort) {
 
-    var groupKey = function (data) {
+    const groupKey = function (data) {
         switch (name) {
             case "Devices":
                 return data["PluginFlyvemdmAgent.Computer.User.realname"][0].toUpperCase()
@@ -15,6 +15,8 @@ export default function (name, list, sort, createGroup = true) {
                 return data["PluginFlyvemdmPackage.alias"][0]
             case "Users":
                 return data['User.name'][0].toUpperCase()
+            case "Invitation":
+                return data['PluginFlyvemdmInvitation.User.name'][0].toUpperCase()
             default:
                 return data.name[0].toUpperCase()
         }
@@ -46,57 +48,26 @@ export default function (name, list, sort, createGroup = true) {
         
     }
 
-    let sorter
-    if (createGroup) {
-        sorter = (a, b) => {
-            if (a.name < b.name) {
-                return -1
-            } else if (a.name > b.name) {
-                return 1
-            } else {
-                return 0
-            }
-        }
-    } else {
-        sorter = (a, b) => {
-            if (sort) {
-                if (a['PluginFlyvemdmInvitation.User.name'] > b['PluginFlyvemdmInvitation.User.name']) {
-                    return -1
-                } else if (a['PluginFlyvemdmInvitation.User.name'] < b['PluginFlyvemdmInvitation.User.name']) {
-                    return 1
-                } else {
-                    return 0
-                }
-            } else {
-                if (a['PluginFlyvemdmInvitation.User.name'] < b['PluginFlyvemdmInvitation.User.name']) {
-                    return -1
-                } else if (a['PluginFlyvemdmInvitation.User.name'] > b['PluginFlyvemdmInvitation.User.name']) {
-                    return 1
-                } else {
-                    return 0
-                }
-            }
+    const sorter = (a, b) => {
+        if (a.name < b.name) {
+            return -1
+        } else if (a.name > b.name) {
+            return 1
+        } else {
+            return 0
         }
     }
 
-    if (createGroup) {
-        if (list) {
-            return new WinJS.Binding.List(list)
-                .createSorted(sorter)
-                .createGrouped(groupKey, groupData, groupSorted)
-        } else {
-            return new WinJS.Binding.List(DATA[name])
-                .createSorted(sorter)
-                .createGrouped(groupKey, groupData)
-        }
+
+    if (list) {
+        return new WinJS.Binding.List(list)
+            .createSorted(sorter)
+            .createGrouped(groupKey, groupData, groupSorted)
     } else {
-        if (list) {
-            return new WinJS.Binding.List(list)
-                .createSorted(sorter)
-        } else {
-            return new WinJS.Binding.List(DATA[name])
-                .createSorted(sorter)
-        }
+        return new WinJS.Binding.List(DATA[name])
+            .createSorted(sorter)
+            .createGrouped(groupKey, groupData)
     }
+    
     
 }
