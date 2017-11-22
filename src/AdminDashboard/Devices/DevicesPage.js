@@ -20,19 +20,19 @@ export default class DevicesPage extends Component {
                 switch (this.props.actionList) {
                     
                     case "Pending Invitation":
-                    return (
-                        <div className="contentPane listPane" style={{ height: '100%', padding: '0', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                            <Invitations />
-                        </div>
-                    )
-                    default: 
-                    return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                            <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                                <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+                        return (
+                            <div className="contentPane listPane" style={{ height: '100%', padding: '0', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                                <Invitations changeActionList={this.props.changeActionList}/>
                             </div>
-                        </div>
-                    )
+                        )
+                    default: 
+                        return (
+                            <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                                <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                                    <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+                                </div>
+                            </div>
+                        )
                 }
             }
         } else {
@@ -84,5 +84,6 @@ DevicesPage.propTypes = {
     ]).isRequired,
     selectedIndex: PropTypes.number,
     itemList: PropTypes.object.isRequired,
-    actionList: PropTypes.string
+    actionList: PropTypes.string,
+    changeActionList: PropTypes.func.isRequired
 }
