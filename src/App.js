@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 /**
  * Assets
  */
-import './App.css'
+import './App.scss'
 import './ui-light.css'
 /**
  * Main component
