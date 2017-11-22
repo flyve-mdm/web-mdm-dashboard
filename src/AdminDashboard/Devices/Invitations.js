@@ -123,10 +123,13 @@ export default class InvitationsPage extends Component {
                 )
             } else {
                 return (
-                    <div>
+                    <div style={{height: '100%'}}>
                         <h2 className="win-h2 titleContentPane" onClick={() =>this.changeSelectItem([])}>
                             {'<'} Pending Invitation
                         </h2>
+                        <div style={{ display: 'flex', height: '70%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            <h1 className="win-h1" style={{ color: 'grey' }}>No Logs Available</h1>
+                        </div>
                     </div>
                )
             }
