@@ -1,9 +1,9 @@
 import React, { Component } from "react"
-import ReactWinJS from 'react-winjs'
-import DevicesItemList from './DevicesItemList'
 import PropTypes from 'prop-types'
+import ReactWinJS from 'react-winjs'
+import WinJS from 'winjs'
+import DevicesItemList from './DevicesItemList'
 import ItemList from '../ItemList'
-let WinJS = require('winjs')
 
 export default class DevicesList extends Component {
 
@@ -51,13 +51,11 @@ export default class DevicesList extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        setTimeout(function () {
-            if(index.length !== 0) {
-                this.props.changeActionList(null)
-            }
-            this.setState({ selectedItemList: index });
-            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
-        }.bind(this), 0)
+
+        if(index.length !== 0) this.props.changeActionList(null)
+
+        this.setState({ selectedItemList: index })
+        this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
     }
 
     handleContentAnimating(eventObject) {
@@ -86,17 +84,20 @@ export default class DevicesList extends Component {
         let array = []
         this.props.itemList.map((value, index) =>
             array.push(value)
-        );
-        this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.sort), sort: !this.props.sort })
+        )
+        this.props.changeItemList(
+            this.props.location, 
+            { itemList: ItemList(this.props.location[0], array, !this.props.sort), sort: !this.props.sort }
+        )
     }
 
     descendingCompare(first, second) {
         if (first === second)
-            return 0;
+            return 0
         else if (first < second)
-            return 1;
+            return 1
         else
-            return -1;
+            return -1
     }
 
     render() {
