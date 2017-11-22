@@ -9,8 +9,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 /**
  * Assets
  */
-import './App.scss'
-import './ui-light.css'
+import './styles/App.scss'
+import './styles/ui-light.css'
 /**
  * Main component
  * @returns AdminDashboard component

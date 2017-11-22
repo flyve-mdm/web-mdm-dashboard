@@ -359,8 +359,8 @@
   }
   @font-face {
     font-family: "Symbols";
-    src: url("./fonts/glyphs/winjs-symbols.eot");
-    src: url("./fonts/glyphs/winjs-symbols.ttf") format("truetype");
+    src: url("../fonts/glyphs/winjs-symbols.eot");
+    src: url("../fonts/glyphs/winjs-symbols.ttf") format("truetype");
   }
   .win-type-header,
   .win-h1 {
@@ -408,36 +408,36 @@
     font-family: "Segoe UI";
     font-weight: 200;
     src: local("Segoe UI Light");
-    src: url("./fonts/selawkl.eot");
-    src: url("./fonts/selawkl.ttf") format("truetype");
+    src: url("../fonts/selawkl.eot");
+    src: url("../fonts/selawkl.ttf") format("truetype");
   }
   @font-face {
     font-family: "Segoe UI";
     font-weight: 300;
     src: local("Segoe UI Semilight");
-    src: url("./fonts/selawksl.eot");
-    src: url("./fonts/selawksl.ttf") format("truetype");
+    src: url("../fonts/selawksl.eot");
+    src: url("../fonts/selawksl.ttf") format("truetype");
   }
   @font-face {
     font-family: "Segoe UI";
     font-weight: 400;
     src: local("Segoe UI");
-    src: url("./fonts/selawk.eot");
-    src: url("./fonts/selawk.ttf") format("truetype");
+    src: url("../fonts/selawk.eot");
+    src: url("../fonts/selawk.ttf") format("truetype");
   }
   @font-face {
     font-family: "Segoe UI";
     font-weight: bold;
     src: local("Segoe UI Semibold");
-    src: url("./fonts/selawksb.eot");
-    src: url("./fonts/selawksb.ttf") format("truetype");
+    src: url("../fonts/selawksb.eot");
+    src: url("../fonts/selawksb.ttf") format("truetype");
   }
   @font-face {
     font-family: "Segoe UI";
     font-weight: 600;
     src: local("Segoe UI Bold");
-    src: url("./fonts/selawkb.eot");
-    src: url("./fonts/selawkb.ttf") format("truetype");
+    src: url("../fonts/selawkb.eot");
+    src: url("../fonts/selawkb.ttf") format("truetype");
   }
 
   @font-face {
