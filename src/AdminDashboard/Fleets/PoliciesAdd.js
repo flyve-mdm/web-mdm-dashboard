@@ -68,7 +68,11 @@ export default class FleetsAddPolicies extends Component {
         this.state.selectedPolicies.forEach(selectedPolicy => {
             if (selectedPolicy === eventObject.detail.queryText) isValid = false
         })
-        if (isValid) {
+        let isExists = false
+        Policies.data.forEach(policiy => {
+            if (policiy['PluginFlyvemdmPolicy.name'] === eventObject.detail.queryText) isExists = true
+        })
+        if (isValid && isExists) {
             document.querySelectorAll('[type="search"]')[0].value = ''            
             this.setState({ selectedPolicies: [...this.state.selectedPolicies, eventObject.detail.queryText] })
         }
@@ -81,7 +85,7 @@ export default class FleetsAddPolicies extends Component {
             <div className="listPane" style={{ height: '100%', width: '100%', display: 'inline-block', verticalAlign: 'top' }}>
                 
                 <ReactWinJS.AutoSuggestBox
-                    placeholderText="Type a city"
+                    placeholderText="Type a policy"
                     onSuggestionsRequested={this.handleSuggestionsRequested}
                     onQuerySubmitted={this.handleQuerySubmitted} />
                 
