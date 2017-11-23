@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
 import FleetsFilesUpload from './FleetsFilesUpload'
+import PoliciesAdd from './PoliciesAdd'
 
 export default class FleetsAdd extends Component {
     render() {
@@ -12,7 +13,7 @@ export default class FleetsAdd extends Component {
                 </div>
                 </ReactWinJS.Pivot.Item>
                 <ReactWinJS.Pivot.Item key="policies" header="Policies">
-                    <div>Policies</div>
+                    <PoliciesAdd />
                 </ReactWinJS.Pivot.Item>
                 <ReactWinJS.Pivot.Item key="applications" header="Applications">
                     <div>
