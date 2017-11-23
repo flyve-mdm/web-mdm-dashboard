@@ -56,25 +56,25 @@ class BodyAdminDashboard extends Component {
         switch (this.props.router[this.props.index].label) {
 
             case "Devices":
-                contentComponent = <Devices mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} />
+                contentComponent = <div className="devices" ><Devices mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
                 break
             case "Fleets":
-                contentComponent = <Fleets mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} />
+                contentComponent = <div className="fleets" ><Fleets mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} /></div>
                 break
             case "Files":
-                contentComponent = <Files mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.files.sort} itemList={this.props.files.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} />
+                contentComponent = <div className="files" ><Files mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.files.sort} itemList={this.props.files.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} /></div>
                 break
             case "Applications":
-                contentComponent = <Applications mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.applications.sort} itemList={this.props.applications.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} />
+                contentComponent = <div className="applications" ><Applications mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.applications.sort} itemList={this.props.applications.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} /></div>
                 break
             case "Users":
-                contentComponent = <Users mode={this.props.mode} location={this.props.location} sort={this.props.users.sort} itemList={this.props.users.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} />
+                contentComponent = <div className="users" ><Users mode={this.props.mode} location={this.props.location} sort={this.props.users.sort} itemList={this.props.users.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
                 break
             case "Settings":
-                contentComponent = <Settings mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} />
+                contentComponent = <div className="settings" ><Settings mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} /></div>
                 break
             case "About":
-                contentComponent = <About mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} />
+                contentComponent = <div className="about" ><About mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} /></div>
                 break
             default: 
                 contentComponent = <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
