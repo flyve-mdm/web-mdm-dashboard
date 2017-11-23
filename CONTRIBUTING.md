@@ -14,7 +14,7 @@ As a contributor, we present you the guidelines to start contributing in any of 
 
 If you require general support assistance, you can find us in [Telegram](https://t.me/flyvemdm), and we'll help you as soon as possible.
 
-For notices about major changes and general discussion of Flyve MDM development, subscribe to the [/r/FlyveMDM](https://www.reddit.com/r/FlyveMDM/) subreddit. You can also chat with us via IRC in [#flyve-mdm on freenode](http://webchat.freenode.net/?channels=flyve-mdm%5D).
+For notices about major changes and general discussion of Flyve MDM development, subscribe to the [/r/FlyveMDM](https://www.reddit.com/r/FlyveMDM/) subreddit. You can also chat with us via IRC in [#flyve-mdm on freenode](http://webchat.freenode.net/?channels=flyve-mdm).
 
 This is in order to keep GitHub issues for bug reports and new features only.
 
@@ -35,7 +35,7 @@ You can _**request**_ a new feature by submitting an issue, and if you would lik
 
 ### Submit an Issue
 
-Before submitting the issue please check the [issue tracker](https://github.com/flyve-mdm/web-admin-dashboard/issues), there exists the possibility that the bug was already reported by other contributor.
+Before submitting the issue please check the [issue tracker](https://github.com/flyve-mdm/web-mdm-dashboard/issues), there exists the possibility that the bug was already reported by other contributor.
 
 This way you help us to maximize the effort we can spend fixing issues and adding new features, by not reporting duplicate issues.
 
@@ -49,7 +49,7 @@ We'll work very hard to fix all the issues without delay, but before fixing it w
 * Related Issues - has a similar issue been reported before?
 * Suggest a Fix - if you can't fix the bug yourself, perhaps you can point to what might be causing the problem (line of code or commit)
 
-You can file new issues by filling out our [new issue form](https://github.com/flyve-mdm/web-admin-dashboard/issues/new).
+You can file new issues by filling out our [new issue form](https://github.com/flyve-mdm/web-mdm-dashboard/issues/new).
 
 ### Submit a Pull Request
 
@@ -71,7 +71,7 @@ Before submitting your Pull Request check  for an open or closed PR that relates
     git push origin my-fix-branch
 ```
 
-* In GitHub, send a pull request to our [Repository](https://github.com/flyve-mdm/web-admin-dashboard).
+* In GitHub, send a pull request to our [Repository](https://github.com/flyve-mdm/web-mdm-dashboard).
 
 * If we suggest changes then:
 
@@ -96,7 +96,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 ## Test
 
-To test the project you can run either of thi command:
+To test the project you can run either of these commands:
 
 * Using npm
 
@@ -106,6 +106,6 @@ To test the project you can run either of thi command:
 
 * Using Yarn
 
-```
+```console
     yarn test
 ```

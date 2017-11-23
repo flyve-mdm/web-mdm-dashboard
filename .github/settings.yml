@@ -1,7 +1,7 @@
 repository:
-  name: web-admin-dashboard
+  name: web-mdm-dashboard
   description: New generation of the Flyve MDM Dashboard 
-  homepage: http://flyve.org/web-admin-dashboard/
+  homepage: http://flyve.org/web-mdm-dashboard/
   topics: flyve-mdm, dashboard, admin, web, glpi
   private: false
   has_issues: true
