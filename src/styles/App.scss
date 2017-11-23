@@ -13,6 +13,9 @@ $text-detail-color: grey;
     "settings",
     "about"
 ;
+.devices, .fleets, .files, .applications, .users, .settings, .about {
+    height: 100%;
+}
 
 #app {
     height: 100%;
