@@ -10,7 +10,9 @@ export default class FleetsAddPolicies extends Component {
         this.state = {
             list: new WinJS.Binding.List(Policies.data).createGrouped(this.groupKey, this.groupData),
             layout: { type: WinJS.UI.ListLayout },
-            itemSelected: null
+            itemSelected: null,
+            suggestionList: Policies.data.map(function(policie) { return policie['PluginFlyvemdmPolicy.name'] }),
+            selectedPolicies: []
         }
     }
 
@@ -36,9 +38,34 @@ export default class FleetsAddPolicies extends Component {
         )
     })
 
+    handleSuggestionsRequested = (eventObject) => {
+        let queryText = eventObject.detail.queryText,
+            query = queryText.toLowerCase(),
+            suggestionCollection = eventObject.detail.searchSuggestionCollection
+
+        if (queryText.length > 0) {
+            for (let i = 0, len = this.state.suggestionList.length; i < len; i++) {
+                if (this.state.suggestionList[i].substr(0, query.length).toLowerCase() === query) {
+                    suggestionCollection.appendQuerySuggestion(this.state.suggestionList[i])
+                }
+            }
+        }
+    }
+    handleQuerySubmitted = (eventObject) => {
+        console.log(eventObject)
+        this.setState({ selectedPolicies: [...this.state.selectedPolicies, eventObject.detail.queryText] })
+    }
+
     render() {
+        console.log(this.state.selectedPolicies)
         return (
             <div className="listPane" style={{ height: '100%', width: '100%', display: 'inline-block', verticalAlign: 'top' }}>
+                
+                <ReactWinJS.AutoSuggestBox
+                    placeholderText="Type a city"
+                    onSuggestionsRequested={this.handleSuggestionsRequested}
+                    onQuerySubmitted={this.handleQuerySubmitted} />
+                
                 <ReactWinJS.ListView
                     ref="listView"
                     className="contentListView win-selectionstylefilled"
