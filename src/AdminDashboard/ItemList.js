@@ -58,7 +58,6 @@ export default function (name, list, sort) {
         }
     }
 
-
     if (list) {
         return new WinJS.Binding.List(list)
             .createSorted(sorter)
@@ -68,6 +67,5 @@ export default function (name, list, sort) {
             .createSorted(sorter)
             .createGrouped(groupKey, groupData)
     }
-    
     
 }

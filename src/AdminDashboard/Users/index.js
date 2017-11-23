@@ -10,15 +10,39 @@ class UsersPage extends Component {
 
         if (this.props.mode === 'small') {
             if (selectedIndex === null) {
-                return <ItemListPane itemListPaneWidth="100%" changeItemList={this.props.changeItemList} location={this.props.location} onNavigate={this.props.onNavigate} itemList={this.props.itemList} sort={this.props.sort} />
+                return <ItemListPane 
+                        itemListPaneWidth="100%" 
+                        changeItemList={this.props.changeItemList} 
+                        location={this.props.location} 
+                        onNavigate={this.props.onNavigate} 
+                        itemList={this.props.itemList} 
+                        sort={this.props.sort} 
+                        changeActionList={this.props.changeActionList}/>
             } else {
-                return <ContentPane selectedIndex={selectedIndex} itemListPaneWidth={0} itemList={this.props.itemList} />
+                return <ContentPane 
+                        selectedIndex={selectedIndex} 
+                        itemListPaneWidth={0} 
+                        itemList={this.props.itemList}
+                        actionList={this.props.actionList}
+                        changeActionList={this.props.changeActionList} />
             }
         } else {
             return (
                 <div style={{ height: '100%' }}>
-                    <ItemListPane itemListPaneWidth={320} changeItemList={this.props.changeItemList} location={this.props.location} onNavigate={this.props.onNavigate} itemList={this.props.itemList} sort={this.props.sort} />
-                    <ContentPane selectedIndex={selectedIndex} itemListPaneWidth={320} itemList={this.props.itemList} />
+                    <ItemListPane 
+                        itemListPaneWidth={320} 
+                        changeItemList={this.props.changeItemList} 
+                        location={this.props.location} 
+                        onNavigate={this.props.onNavigate} 
+                        itemList={this.props.itemList} 
+                        sort={this.props.sort} 
+                        changeActionList={this.props.changeActionList}/>
+                    <ContentPane 
+                        selectedIndex={selectedIndex} 
+                        itemListPaneWidth={320} 
+                        itemList={this.props.itemList} 
+                        actionList={this.props.actionList}
+                        changeActionList={this.props.changeActionList} />
                 </div>
             )
         }
@@ -31,7 +55,9 @@ UsersPage.propTypes = {
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired
+    changeItemList: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired,
+    actionList: PropTypes.string
 }
 
 export default UsersPage

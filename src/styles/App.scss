@@ -272,6 +272,9 @@ $text-detail-color: grey;
     .deleteIcon:before {
         content: "\E107";
     }
+    .editIcon:before {
+        content: "\E104";
+    }
 
     .files-dropzone {
         display: table-cell;

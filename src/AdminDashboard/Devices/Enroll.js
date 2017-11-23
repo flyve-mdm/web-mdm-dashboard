@@ -1,6 +1,23 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-export default class InvitationsPage extends Component {
+export default class Enroll extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            email: ''
+        }
+    }
+
+    inviteDevice = () => {
+        this.props.changeActionList('Pending Invitation')
+    }
+
+    changeInput = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
     render() {
         return (
             <div>
@@ -9,11 +26,28 @@ export default class InvitationsPage extends Component {
                 </h2>
                 <p>Please insert an active email address.</p>
                 <p>An email will be sent with a QR code.</p>
-                <input type="text" className="win-textbox" placeholder="Email"/>
+                <input 
+                    type="email" 
+                    className="win-textbox" 
+                    placeholder="Email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.changeInput}
+                    required
+                />
                 <br/>
-                <button className="win-button">Cancel</button>
-                <button className="win-button win-button-primary" style={{marginLeft: 10}}>Save</button>
+                <button className="win-button" onClick={() => this.props.changeActionList(null)}>Cancel</button>
+                <button 
+                    className="win-button win-button-primary" 
+                    style={{marginLeft: 10}}
+                    onClick={this.inviteDevice}
+                >
+                    Save
+                </button>
             </div>
         )
     }
+}
+Enroll.propTypes = {
+    changeActionList: PropTypes.func.isRequired
 }
