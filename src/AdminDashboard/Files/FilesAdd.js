@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FilesUpload from '../Files/FilesUpload'
-
+import FilesUploadItemList from './FliesUploadItemList'
 
 export default class FilesAdd extends Component {
 
@@ -72,32 +72,15 @@ export default class FilesAdd extends Component {
                 Drop the file here or click to upload
             </FilesUpload>
             <div style={{ margin: '10px' }}>
-                <button className="win-button" onClick={this.filesUpload}>Save</button>
+                <button className="win-button win-button-primary" onClick={this.filesUpload}>Save</button>
                 {
                     this.state.files.length > 0
-                    ? <div>
-                        <ul>{this.state.files.map((file) =>
-                        <li key={file.id}>
-                            <div>
-                                <div>
-                                    <div>{file.extension}</div>
-                                </div>
-                                <div>
-                                    <div>{file.name}</div>
-                                    <div>{file.sizeReadable}</div>
-                                </div>
-                            </div>
-                            <div>
-                                <span
-                                id={file.id}
-                                className='deleteIcon'
-                                onClick={this.filesRemoveOne.bind(this, file)}
-                                />
-                            </div>
-                        </li>
-                        )}</ul>
-                    </div>
-                    : null
+                        ? <div>
+                            {this.state.files.map((file) =>
+                                <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
+                            )}
+                        </div>
+                        : null
                 }
             </div>
         </div>
