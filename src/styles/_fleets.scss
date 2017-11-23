@@ -3,4 +3,19 @@
         overflow-y: auto !important;
     }
 
+    .listPane {
+        
+        .contentListView {
+
+            .win-groupheadercontainer {
+                width: 100% !important;
+            }
+
+            .win-groupheader {
+                display: inline-block !important;
+                width: initial !important;
+                padding: 0 20px !important;
+            }
+        }
+    }
 }
