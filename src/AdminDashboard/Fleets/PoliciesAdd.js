@@ -69,6 +69,7 @@ export default class FleetsAddPolicies extends Component {
             if (selectedPolicy === eventObject.detail.queryText) isValid = false
         })
         if (isValid) {
+            document.querySelectorAll('[type="search"]')[0].value = ''            
             this.setState({ selectedPolicies: [...this.state.selectedPolicies, eventObject.detail.queryText] })
         }
         
