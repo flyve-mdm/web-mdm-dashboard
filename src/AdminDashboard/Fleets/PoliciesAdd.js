@@ -55,12 +55,23 @@ export default class FleetsAddPolicies extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let policiesName = listView.selection.getItems()._value[0].data['PluginFlyvemdmPolicy.name']
-        this.setState({ selectedPolicies: [...this.state.selectedPolicies,  policiesName] });
+
+        let isValid = true
+        this.state.selectedPolicies.forEach(selectedPolicy => {
+            if (selectedPolicy === policiesName) isValid = false
+        })
+        if (isValid) this.setState({ selectedPolicies: [...this.state.selectedPolicies,  policiesName] })
     }
 
     handleQuerySubmitted = (eventObject) => {
-        console.log(eventObject)
-        this.setState({ selectedPolicies: [...this.state.selectedPolicies, eventObject.detail.queryText] })
+        let isValid = true
+        this.state.selectedPolicies.forEach(selectedPolicy => {
+            if (selectedPolicy === eventObject.detail.queryText) isValid = false
+        })
+        if (isValid) {
+            this.setState({ selectedPolicies: [...this.state.selectedPolicies, eventObject.detail.queryText] })
+        }
+        
     }
 
     render() {
