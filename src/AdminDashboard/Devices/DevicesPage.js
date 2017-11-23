@@ -29,7 +29,7 @@ export default class DevicesPage extends Component {
                     case "Add":
                         return (
                             <div className="contentPane listPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                                <Enroll/>
+                                <Enroll changeActionList={this.props.changeActionList}/>
                             </div>
                         )
                     default: 
