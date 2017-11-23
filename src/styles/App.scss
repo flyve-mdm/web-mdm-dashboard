@@ -1,264 +1,289 @@
-body {
-    margin: 0;
-    padding: 0;
-}
-.contentPane {
-    overflow: auto;
-}
-
-a {
-    color: #158784
-}
+// Colors
+$app-color:  #158784;
+$white-color: #FFFFFF;
+$border-ligth-color: #D3D3D3;
+$text-detail-color: grey;
 
 #app {
     height: 100%;
     font-weight: 300;
-}
 
-#app .header-admin-dashboard {
-    height: 48;
-    background-color: #158784;
-}
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .contentPane {
+        overflow: auto;
+    }
+    
+    a {
+        color: $app-color;
+    }
 
-/*
- * BackButton
- *  Ensure it's the same size as the SplitViewPaneToggle
-*/
-#app .win-backbutton {
-    height: 48px;
-    width: 48px;
-    font-size: inherit;
-    line-height: inherit;
-    box-sizing: border-box;
-}
-#app .win-backbutton::before {
-    font-size: 24px;
-    line-height: 1.333;
-    vertical-align: baseline;
-}
+    .header-admin-dashboard {
+        height: 48px;
+        background-color: $app-color;
+    }
 
-/*
- * list Search Pane
-*/
+    /*
+    * Input Text
+    */
+    .win-textbox:focus {
+        border-color: $app-color !important;
+    }
 
-#app .listPane .contentListView .win-surface {
-    margin-top: 0;
-}
+    /*
+    * Button primary
+    */
+    .win-button-primary {
+        background-color: $app-color !important;
+    }
 
-#app .listPane .contentListView .win-container {
-    margin: 0;
-}
+    /*
+    * BackButton
+    *  Ensure it's the same size as the SplitViewPaneToggle
+    */
+    .win-backbutton {
+        height: 48px;
+        width: 48px;
+        font-size: inherit;
+        line-height: inherit;
+        box-sizing: border-box;
 
-#app .listPane .contentListView .win-item {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    width: calc(100% - 24px);
-    padding-left: 12px;
-}
+        &::before {
+            font-size: 24px;
+            line-height: 1.333;
+            vertical-align: baseline;
+        }
+    }
 
-#app .listPane .contentListView .win-item .contentPicture {
-    width: 42px;
-    height: 42px;
-    background-size: cover;
-    -webkit-border-radius: 42px;
-    -moz-border-radius: 42px;
-    border-radius: 42px;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 8px;
-}
+    /*
+    * list Search Pane
+    */
+    .listPane {
 
-#app .listPane .contentListView .win-item .name, #app .listPane .contentListView .win-item .detail {
-    vertical-align: middle;
-    width: 240px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+        .contentListView {
 
-#app .listPane .contentListView .win-item .name {
-    font-size: 15px;
-    font-weight: bold;
-}
+            .win-surface {
+                margin-top: 0;
+            }
 
-#app .listPane .contentListView .win-item .detail {
-    color: #586069;
-    font-size: 15px;
-    font-weight: 200;
-}
+            .win-container {
+                margin: 0;
+            }
 
-#app .listPane .contentListView .win-groupheadercontainer {
-    width: 32px;
-    height: 32px;
-    margin-top: 7px;
-    margin-bottom: 10px;
-    margin-left: 12px;
-}
-#app .listPane .contentListView .win-groupheader {
-    font-size: 15px;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    background-color: #158784;
-    color: white;
-    text-align: center;
-    line-height: 32px;
-} 
+            .win-item {
+                padding-top: 8px;
+                padding-bottom: 8px;
+                width: calc(100% - 24px);
+                padding-left: 12px;
 
-.listToolBar .win-toolbar-actionarea {
-    background-color: white;
-}
+                .contentPicture {
+                    width: 42px;
+                    height: 42px;
+                    background-size: cover;
+                    -webkit-border-radius: 42px;
+                    -moz-border-radius: 42px;
+                    border-radius: 42px;
+                    display: inline-block;
+                    vertical-align: top;
+                    margin-right: 8px;
+                }
 
-/*
- * Content Pane
-*/
+                .name, .detail {
+                    vertical-align: middle;
+                    width: 240px;
+                    $white-color-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
 
-#app .contentPane {
-    display: inline-block;
-    height: 100%;
-    vertical-align: top;
-    box-sizing: border-box;
-    padding-left: 10px;
-    padding-right: 10px;
-}
+                .name {
+                    font-size: 15px;
+                    font-weight: 400;
+                }
 
-#app .contentPane .titleContentPane {
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-bottom: 20px;
-}
+                .detail {
+                    color: $text-detail-color;
+                    font-size: 15px;
+                    font-weight: 200;
+                }
+            }
+            
+            .win-groupheadercontainer {
+                width: 32px;
+                height: 32px;
+                margin-top: 7px;
+                margin-bottom: 10px;
+                margin-left: 12px;
+            }
 
-#app .contentPane .contentHeader {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
+            .win-groupheader {
+                font-size: 15px;
+                width: 32px;
+                height: 32px;
+                padding: 0;
+                background-color: $app-color;
+                color: $white-color;
+                text-align: center;
+                line-height: 32px;
+            } 
 
-#app .contentPane .contentHeader .name {
-    vertical-align: top;
-    display: inline-block;
-    font-size: 24px;
-    padding-top: 6px;
-}
+        }
+    }
 
-.contentHeader .itemInfo {
-    display: flex;
-}
+    .listToolBar .win-toolbar-actionarea {
+        background-color: $white-color;
+    }
 
-#app .contentPane .contentHeader .contentPicture {
-    width: 100px;
-    height: 100px;
-    background-size: cover;
-    display: inline-block;
-    border-radius: 100px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    margin-left: 25px;
-    margin-top:10px;
-}
+    /*
+    * Content Pane
+    */
+    .contentPane {
+        display: inline-block;
+        height: 100%;
+        vertical-align: top;
+        box-sizing: border-box;
+        padding-left: 10px;
+        padding-right: 10px;
 
-.contentHeader .itemInfo .contentStatus {
-    width: 240px;
-    margin-left:20px;
-    margin-top:10px;
-}
+        .titleContentPane {
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-bottom: 20px;
+        }
 
-.contentHeader .itemInfo .contentStatus .name {
-    font-size: 14px;
-    font-weight: 300;
-}
+        .contentHeader {
+            padding-top: 10px;
+            padding-bottom: 10px;
 
-.contentHeader .itemInfo .contentStatus .message {
-    font-size: 14px;
-}
-.contentHeader .itemInfo .contentStatus .source {
-    display:block;
-    color: grey;
-    font-size: 13px;
-}
+            .name {
+                vertical-align: top;
+                display: inline-block;
+                font-size: 24px;
+                padding-top: 6px;
+            }
 
-.contentInfo ul {
-    list-style:none;
-    padding-left: 25px;
-    padding-right: 25px;
-}
+            .itemInfo {
+                display: flex;
 
-.contentInfo ul li {
-    margin-bottom:25px;
-}
+                .contentStatus {
+                    width: 240px;
+                    margin-left:20px;
+                    margin-top:10px;
 
-.separator {
-    width:100%;
-    height:2px;
-    background-color:rgb(205, 205, 205);
-}
+                    .name {
+                        font-size: 14px;
+                        font-weight: 300;
+                    }
 
-.contentInfo .phoneIcon,
-.contentInfo .callContent {
-    display: inline-block;
-    vertical-align: top;
-}
+                    .message {
+                        font-size: 14px;
+                    }
 
-.contentInfo .videoCallIcon,
-.contentInfo .emailIcon,
-.contentInfo .messageIcon,
-.contentInfo .phoneIcon,
-.contentInfo .mapIcon {
-    margin-right: 8px;
-}
+                    .source {
+                        display:block;
+                        color: $text-detail-color;
+                        font-size: 13px;
+                    }
+                }
+            }
 
-.videoCallIcon::before {
-    content: "\E13B";
-}
+            .contentPicture {
+                width: 100px;
+                height: 100px;
+                background-size: cover;
+                display: inline-block;
+                border-radius: 100px;
+                -webkit-border-radius: 100px;
+                -moz-border-radius: 100px;
+                margin-left: 25px;
+                margin-top:10px;
+            }
+        }
 
-.emailIcon::before {
-    content: "\E119";
-}
+        .contentInfo {
 
-.messageIcon::before {
-    content: "\E15F";
-}
+            ul li {
+                margin-bottom:25px;
+            }
+            
+            ul {
+                list-style:none;
+                padding-left: 25px;
+                padding-right: 25px;
+            }
 
-.phoneIcon::before {
-    content: "\E13A";
-}
+            .phoneIcon, 
+            .callContent {
+                display: inline-block;
+                vertical-align: top;
+            }
 
-.mapIcon::before {
-    content: "\E1C4";
-}
+            .videoCallIcon,
+            .emailIcon,
+            .messageIcon,
+            .phoneIcon,
+            .mapIcon {
+                margin-right: 8px;
+            }
+        }
+    }
 
-.deviceIcon::before {
-    content: "\E1C9";
-}
-.fileIcon::before {
-    content: "\E295";
-}
-.documentIcon:before {
-    content: "\E160";
-}
-.messageIcon:before {
-    content: "\E134";
-}
-.deleteIcon:before {
-    content: "\E107";
-}
-.win-textbox:focus {
-    border-color: #158784 !important;
-}
+    .separator {
+        width:100%;
+        height:2px;
+        background-color: $border-ligth-color;
+    }
 
-.files-dropzone {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    padding: 10px;
-    border: 1px dashed #D3D3D3;
-    cursor: pointer;
-}
+    .videoCallIcon::before {
+        content: "\E13B";
+    }
 
-.files-dropzone-active {
-    border: 1px solid #158784;
-    color: #158784;
-}
+    .emailIcon::before {
+        content: "\E119";
+    }
 
-.win-button-primary {
-    background-color: #158784 !important;
+    .messageIcon::before {
+        content: "\E15F";
+    }
+
+    .phoneIcon::before {
+        content: "\E13A";
+    }
+
+    .mapIcon::before {
+        content: "\E1C4";
+    }
+
+    .deviceIcon::before {
+        content: "\E1C9";
+    }
+    .fileIcon::before {
+        content: "\E295";
+    }
+    .documentIcon:before {
+        content: "\E160";
+    }
+    .messageIcon:before {
+        content: "\E134";
+    }
+    .deleteIcon:before {
+        content: "\E107";
+    }
+
+    .files-dropzone {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        padding: 10px;
+        border: 1px dashed $border-ligth-color;
+        cursor: pointer;
+    }
+
+    .files-dropzone-active {
+        border: 1px solid $app-color;
+        color: $app-color;
+    }
 }
