@@ -9,7 +9,7 @@ PLEASE HELP US PROCESS GITHUB ISSUES FASTER BY PROVIDING THE FOLLOWING INFORMATI
 - [ ] Bug report  <!-- Please search GitHub for a similar issue or PR before submitting -->
 - [ ] Feature request
 - [ ] Documentation issue or request
-- [ ] Support request => Please do not submit support request here, instead see https://github.com/flyve-mdm/web-admin-dashboard/blob/develop/CONTRIBUTING.md#questions-or-doubts
+- [ ] Support request => Please do not submit support request here, instead see https://github.com/flyve-mdm/web-mdm-dashboard/blob/develop/CONTRIBUTING.md#questions-or-doubts
 
 
 ## Current behavior
