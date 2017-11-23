@@ -4,6 +4,9 @@ $white-color: #FFFFFF;
 $border-ligth-color: #D3D3D3;
 $text-detail-color: grey;
 
+// Size
+$list-item-icon-size: 48px;
+
 @import
     "devices",
     "fleets",
@@ -11,8 +14,8 @@ $text-detail-color: grey;
     "applications",
     "users",
     "settings",
-    "about"
-;
+    "about";
+
 .devices, .fleets, .files, .applications, .users, .settings, .about {
     height: 100%;
 }
@@ -250,6 +253,13 @@ $text-detail-color: grey;
         background-color: $border-ligth-color;
     }
 
+    .icon {
+        display: block;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
     .videoCallIcon::before {
         content: "\E13B";
     }
@@ -302,7 +312,66 @@ $text-detail-color: grey;
         border: 1px solid $app-color;
         color: $app-color;
     }
+
+    .files-list {
+        padding: 10px;
+        width: 320px;
+        .files-list-item {
+
+            .item-icon {
+                float: left;
+                width: $list-item-icon-size;
+                height: $list-item-icon-size;
+                vertical-align: middle;
+
+                span {
+                    font-size: 32px;
+                    text-align: center;
+                }
+            }
+
+            .item-content-primary {
+
+                .progress {
+                    margin-top: spacing(xxxs);
+                    height: 6px;
+
+                    .progress-bar {
+                        height: 6px;
+                    }
+                }
+            }
+
+            .item-content-secondary {
+                float: right;
+                text-align: center;
+
+                .btn-toggle-switch {
+                    margin: spacing(xxs, -2) 0 0;
+                    padding: 0;
+                    float: right;
+                }
+            }
+
+            .content-text-primary, .content-text-secondary {
+                font-size: 15px;
+                letter-spacing: normal;
+                line-height: 1.33333;
+                vertical-align: middle;
+                // width: 240px;
+                $white-color-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .content-text-primary {
+                font-weight: 300;
+            }
+
+            .content-text-secondary {
+                font-weight: 300;
+                color: $text-detail-color;
+            }
+        }
+    }
 }
-
-
- 
