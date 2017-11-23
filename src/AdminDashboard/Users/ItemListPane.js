@@ -5,7 +5,6 @@ import ItemList from '../ItemList'
 import IconItemList from '../IconItemList'
 import WinJS from 'winjs'
 
-
 class ItemListPane extends Component {
     
     constructor(props) {
@@ -46,8 +45,9 @@ class ItemListPane extends Component {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
         setTimeout(function () {
-            this.setState({ selectedItemList: index });
-            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
+            this.setState({ selectedItemList: index })
+            this.props.changeActionList(null)
+            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
         }.bind(this), 0)
     }
 
@@ -178,7 +178,8 @@ ItemListPane.propTypes = {
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired
+    changeItemList: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired
 }
 
 export default ItemListPane

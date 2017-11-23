@@ -51,11 +51,13 @@ export default class DevicesList extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-
-        if(index.length !== 0) this.props.changeActionList(null)
-
-        this.setState({ selectedItemList: index })
-        this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
+        setTimeout(() => {
+            if(index.length !== 0) this.props.changeActionList(null)
+            
+            this.setState({ selectedItemList: index })
+            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
+        }, 0)
+        
     }
 
     handleContentAnimating(eventObject) {

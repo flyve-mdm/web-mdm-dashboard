@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FleetsList from './FleetsList'
 import FleetsPage from './FleetsPage'
-
+import './Fleets.scss'
 export default class Fleets extends Component {
 
     render() {

@@ -68,7 +68,7 @@ class BodyAdminDashboard extends Component {
                 contentComponent = <Applications mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.applications.sort} itemList={this.props.applications.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} />
                 break
             case "Users":
-                contentComponent = <Users mode={this.props.mode} location={this.props.location} sort={this.props.users.sort} itemList={this.props.users.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} />
+                contentComponent = <Users mode={this.props.mode} location={this.props.location} sort={this.props.users.sort} itemList={this.props.users.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} />
                 break
             case "Settings":
                 contentComponent = <Settings mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} />
