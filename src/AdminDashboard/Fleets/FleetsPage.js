@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
-import IconItemList from '../IconItemList'
 import FleetsAdd from './FleetsAdd'
 import FleetsNew from './FleetsNew'
 import FleetsContent from './FleetsContent'
+import PoliciesAdd from './PoliciesAdd'
 
 export default class FleetsPage extends Component {
-
+    
     render() {
         if (this.props.selectedIndex === null) {
             if(this.props.actionList === null) {
@@ -43,9 +43,15 @@ export default class FleetsPage extends Component {
                         return (
                             <FleetsContent
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            location={this.props.location} 
+                            location={this.props.location}
+                            onNavigate={this.props.onNavigate}
                             itemList={this.props.itemList}
-                            currentItem={this.props.currentItem}/>
+                            currentItem={this.props.currentItem}
+                            changeActionList={this.props.changeActionList} />
+                        )
+                    case "Add Policies":
+                        return (
+                            <PoliciesAdd />
                         )
                     default: 
                     return (
@@ -63,9 +69,11 @@ export default class FleetsPage extends Component {
             return (
                 <FleetsContent
                 itemListPaneWidth={this.props.itemListPaneWidth}
-                location={this.props.location} 
+                location={this.props.location}
+                onNavigate={this.props.onNavigate}
                 itemList={this.props.itemList}
-                currentItem={selectedItemList}/>
+                currentItem={selectedItemList}
+                changeActionList={this.props.changeActionList} />
             )
         }
     }
