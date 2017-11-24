@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { closePane, changeLocation, changeIndex, changeItemList, changeActionList } from './DuckController'
+import { closePane, changeLocation, changeIndex, changeItemList, changeActionList, changeCurrentItem } from './DuckController'
 import Users from './Users'
 import Devices from './Devices'
 import Fleets from './Fleets'
@@ -21,6 +21,7 @@ function mapStateToProps(state, props) {
         splitViewConfigs: state.AdminDashboard.splitViewConfigs,
         mode: state.AdminDashboard.mode,
         actionList: state.AdminDashboard.actionList,
+        currentItem: state.AdminDashboard.currentItem,
         devices: state.AdminDashboard.devices,
         fleets: state.AdminDashboard.fleets,
         files: state.AdminDashboard.files,
@@ -35,7 +36,8 @@ function mapDispatchToProps(dispatch) {
         changeLocation: bindActionCreators(changeLocation, dispatch),
         changeIndex: bindActionCreators(changeIndex, dispatch),
         changeItemList: bindActionCreators(changeItemList, dispatch),
-        changeActionList: bindActionCreators(changeActionList, dispatch)
+        changeActionList: bindActionCreators(changeActionList, dispatch),
+        changeCurrentItem: bindActionCreators(changeCurrentItem, dispatch)
     }
     return { actions }
 }
@@ -46,6 +48,7 @@ class BodyAdminDashboard extends Component {
         this.props.actions.changeLocation(newLocation)
         this.props.actions.changeIndex(newIndex)
         this.props.actions.changeActionList(null)
+        this.props.actions.changeCurrentItem(null)
         this.props.actions.closePane()
     }
 
@@ -59,7 +62,7 @@ class BodyAdminDashboard extends Component {
                 contentComponent = <div className="devices" ><Devices mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
                 break
             case "Fleets":
-                contentComponent = <div className="fleets" ><Fleets mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} /></div>
+                contentComponent = <div className="fleets" ><Fleets mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} currentItem={this.props.currentItem} changeCurrentItem={this.props.actions.changeCurrentItem}/></div>
                 break
             case "Files":
                 contentComponent = <div className="files" ><Files mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.files.sort} itemList={this.props.files.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} /></div>
