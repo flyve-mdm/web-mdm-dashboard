@@ -23,7 +23,9 @@ export default class Fleets extends Component {
                     selectedIndex={selectedIndex}
                     location={this.props.location}
                     itemList={this.props.itemList} 
-                    actionList={this.props.actionList} />
+                    actionList={this.props.actionList}
+                    changeItemList={this.props.changeItemList}
+                    changeActionList={this.props.changeActionList} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -41,7 +43,9 @@ export default class Fleets extends Component {
                         selectedIndex={selectedIndex}
                         location={this.props.location}
                         itemList={this.props.itemList}
-                        actionList={this.props.actionList} />
+                        actionList={this.props.actionList}
+                        changeItemList={this.props.changeItemList}
+                        changeActionList={this.props.changeActionList} />
                 </div>
             )
         }
