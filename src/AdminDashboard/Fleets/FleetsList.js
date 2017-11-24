@@ -47,6 +47,7 @@ export default class FleetsList extends Component {
                 this.props.changeActionList(null)
             }
             this.setState({ selectedItemList: index });
+            this.props.changeCurrentItem(null)
             this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
         }.bind(this), 0)
     }
@@ -170,7 +171,7 @@ FleetsList.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    sort: PropTypes.bool.isRequired,
+    sort: PropTypes.bool,
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,

@@ -54,13 +54,13 @@ export default class FleetsPage extends Component {
                             <PoliciesAdd />
                         )
                     default: 
-                    return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                            <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                                <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+                        return (
+                            <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                                <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                                    <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+                                </div>
                             </div>
-                        </div>
-                    )
+                        )
                 }
             }
             
@@ -73,6 +73,7 @@ export default class FleetsPage extends Component {
                 onNavigate={this.props.onNavigate}
                 itemList={this.props.itemList}
                 currentItem={selectedItemList}
+                changeItemList={this.props.changeItemList}
                 changeActionList={this.props.changeActionList} />
             )
         }

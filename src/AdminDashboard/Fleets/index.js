@@ -17,6 +17,7 @@ export default class Fleets extends Component {
                     itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
                     changeItemList={this.props.changeItemList}
+                    changeCurrentItem={this.props.changeCurrentItem}
                     changeActionList={this.props.changeActionList} />
             } else {
                 return <FleetsPage itemListPaneWidth={0}
@@ -40,6 +41,7 @@ export default class Fleets extends Component {
                         sort={this.props.sort}
                         itemList={this.props.itemList}
                         onNavigate={this.props.onNavigate}
+                        changeCurrentItem={this.props.changeCurrentItem}
                         changeItemList={this.props.changeItemList} 
                         changeActionList={this.props.changeActionList} />
                     <FleetsPage itemListPaneWidth={itemListPaneWidth}
@@ -59,7 +61,7 @@ export default class Fleets extends Component {
 }
 Fleets.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
-    sort: PropTypes.bool.isRequired,
+    sort: PropTypes.bool,
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
