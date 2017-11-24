@@ -3,6 +3,18 @@ import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import IconItemList from '../IconItemList'
 
 export default class FleetsContent extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
+    handleAddPolicy = () => {
+        console.log(this.props)
+        this.props.changeActionList('Add Policies')
+        this.props.onNavigate([this.props.location[0]])
+    }
+
     render() {
 
         return ( 
@@ -17,6 +29,12 @@ export default class FleetsContent extends Component {
                     </div>
                 </div>
                 <div className="separator" />
+                <div className="contentInfo" style={{ width: '100%', marginTop: '20px', display: 'inline-block' }} >
+                    <h3 className="win-h3" style={{ display: 'inline-block' }} > Tasks </h3>
+                    <div style={{ float: 'right', textAlign: 'center', display: 'inline-block' }}>
+                        <span className="addIcon" style={{ fontSize: '18px' }} onClick={this.handleAddPolicy}></span>
+                    </div>
+                </div>
             </div>
         )
     }

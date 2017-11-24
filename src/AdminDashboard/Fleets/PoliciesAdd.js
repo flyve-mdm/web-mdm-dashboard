@@ -38,6 +38,10 @@ export default class FleetsAddPolicies extends Component {
         )
     })
 
+    handleBack = () => {
+
+    }
+
     handleSuggestionsRequested = (eventObject) => {
         let queryText = eventObject.detail.queryText,
             query = queryText.toLowerCase(),
@@ -83,8 +87,10 @@ export default class FleetsAddPolicies extends Component {
         console.log(this.state.selectedPolicies)
         return (
             <div className="listPane" style={{ height: '100%', width: '100%', display: 'inline-block', verticalAlign: 'top' }}>
-                
+                <button style={{display: 'inline-block'}} className="win-backbutton" onClick={this.handleBack} />
+                <h2 className="win-h2 titleContentPane" style={{ margin: '20px', display: 'inline-block'}} > Add Policy </h2>
                 <ReactWinJS.AutoSuggestBox
+                    style={{ margin: '20px'}}
                     placeholderText="Type a policy"
                     onSuggestionsRequested={this.handleSuggestionsRequested}
                     onQuerySubmitted={this.handleQuerySubmitted} />

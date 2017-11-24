@@ -22,6 +22,7 @@ export default class Fleets extends Component {
                 return <FleetsPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
                     location={this.props.location}
+                    onNavigate={this.props.onNavigate}
                     itemList={this.props.itemList} 
                     actionList={this.props.actionList}
                     changeItemList={this.props.changeItemList}
@@ -44,6 +45,7 @@ export default class Fleets extends Component {
                     <FleetsPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
                         location={this.props.location}
+                        onNavigate={this.props.onNavigate}
                         itemList={this.props.itemList}
                         actionList={this.props.actionList}
                         changeItemList={this.props.changeItemList}
