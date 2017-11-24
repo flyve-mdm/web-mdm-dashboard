@@ -1,7 +1,7 @@
 import * as DATA from './Data'
 import WinJS from 'winjs'
 
-export default function (name, list, sort) {
+export default function (name, list, sort = true) {
 
     const groupKey = function (data) {
         switch (name) {
