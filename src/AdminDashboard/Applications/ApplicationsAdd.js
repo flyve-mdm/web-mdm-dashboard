@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FilesUpload from '../Files/FilesUpload'
-
+import FilesUploadItemList from '../Files/FilesUploadItemList'
 
 export default class ApplicationsAdd extends Component {
 
@@ -59,7 +59,6 @@ export default class ApplicationsAdd extends Component {
                 <FilesUpload
                     ref='files'
                     className='files-dropzone'
-                    style={{ height: '100px', width: '320px' }}
                     onChange={this.onFilesChange}
                     onError={this.onFilesError}
                     maxFiles={1}
@@ -70,30 +69,13 @@ export default class ApplicationsAdd extends Component {
                     Drop the file here or click to upload
             </FilesUpload>
                 <div style={{ margin: '10px' }}>
-                    <button className="win-button" onClick={this.filesUpload}>Save</button>
+                    <button className="win-button win-button-primary" onClick={this.filesUpload}>Save</button>
                     {
                         this.state.files.length > 0
                             ? <div>
-                                <ul>{this.state.files.map((file) =>
-                                    <li key={file.id}>
-                                        <div>
-                                            <div>
-                                                <div>{file.extension}</div>
-                                            </div>
-                                            <div>
-                                                <div>{file.name}</div>
-                                                <div>{file.sizeReadable}</div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span
-                                                id={file.id}
-                                                className='deleteIcon'
-                                                onClick={this.filesRemoveOne.bind(this, file)}
-                                            />
-                                        </div>
-                                    </li>
-                                )}</ul>
+                                {this.state.files.map((file) =>
+                                    <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
+                                )}
                             </div>
                             : null
                     }
