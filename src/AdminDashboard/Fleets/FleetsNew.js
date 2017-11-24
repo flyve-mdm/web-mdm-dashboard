@@ -10,19 +10,24 @@ export default class FleetsNew extends Component {
     }
 
     newFleet = () => {
-        let item = this.props.itemList
-        item.push(
-            {
+
+        if(this.state.name !== '' && this.state.name !== undefined) {
+
+            let item = this.props.itemList
+            
+            let newItem = {
                 "PluginFlyvemdmFleet.name": this.state.name,
                 "PluginFlyvemdmFleet.id": 100,
                 "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
                 "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
                 "PluginFlyvemdmFleet.is_default": 1
             }
-        )
-        console.log(this.props)
-        this.props.changeItemList(this.props.location, { itemList: item, sort: true })
-        this.props.changeActionList(null)
+    
+            item.push(newItem)
+            this.props.changeItemList(this.props.location, { itemList: item, sort: true })
+            this.props.changeCurrentItem(newItem)
+            this.props.changeActionList('Add Tasks')
+        }
     }
 
     changeInput = (e) => {

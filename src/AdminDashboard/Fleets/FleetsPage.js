@@ -4,6 +4,7 @@ import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import IconItemList from '../IconItemList'
 import FleetsAdd from './FleetsAdd'
 import FleetsNew from './FleetsNew'
+import FleetsContent from './FleetsContent'
 
 export default class FleetsPage extends Component {
 
@@ -33,9 +34,19 @@ export default class FleetsPage extends Component {
                             location={this.props.location}
                             itemList={this.props.itemList} 
                             changeItemList={this.props.changeItemList}
-                            changeActionList={this.props.changeActionList} />
+                            changeActionList={this.props.changeActionList}
+                            changeCurrentItem={this.props.changeCurrentItem} />
                         </div>
                     )
+                    case "Add Tasks":
+
+                        return (
+                            <FleetsContent
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            location={this.props.location} 
+                            itemList={this.props.itemList}
+                            currentItem={this.props.currentItem}/>
+                        )
                     default: 
                     return (
                         <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
