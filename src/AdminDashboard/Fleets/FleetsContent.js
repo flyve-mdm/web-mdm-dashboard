@@ -5,9 +5,6 @@ import IconItemList from '../IconItemList'
 export default class FleetsContent extends Component {
     render() {
 
-        let selectedItemList = null
-        this.props.currentItem !== null ? selectedItemList = this.props.currentItem : selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
-
         return ( 
             <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                 <div className="contentHeader">
@@ -15,7 +12,7 @@ export default class FleetsContent extends Component {
                     <div className="itemInfo">
                         <IconItemList size={72} />
                         <div className="contentStatus">
-                            <div className="name">{selectedItemList["PluginFlyvemdmFleet.name"]}</div>
+                            <div className="name">{this.props.currentItem["PluginFlyvemdmFleet.name"]}</div>
                         </div>
                     </div>
                 </div>

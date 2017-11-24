@@ -61,18 +61,11 @@ export default class FleetsPage extends Component {
         } else {
             let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
             return (
-                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                    <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
-                        <div className="itemInfo">
-                            <IconItemList size={72} />
-                            <div className="contentStatus">
-                                <div className="name">{selectedItemList["PluginFlyvemdmFleet.name"]}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="separator" />
-                </div>
+                <FleetsContent
+                itemListPaneWidth={this.props.itemListPaneWidth}
+                location={this.props.location} 
+                itemList={this.props.itemList}
+                currentItem={selectedItemList}/>
             )
         }
     }
