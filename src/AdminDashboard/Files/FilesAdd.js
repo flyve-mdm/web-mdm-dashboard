@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FilesUpload from '../Files/FilesUpload'
-import FilesUploadItemList from './FliesUploadItemList'
+import FilesUploadItemList from './FilesUploadItemList'
 
 export default class FilesAdd extends Component {
 
@@ -61,7 +61,6 @@ export default class FilesAdd extends Component {
             <FilesUpload
                 ref='files'
                 className='files-dropzone'
-                style={{ height: '100px', width: '320px' }}
                 onChange={this.onFilesChange}
                 onError={this.onFilesError}
                 maxFiles={1}

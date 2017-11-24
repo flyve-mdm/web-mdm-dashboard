@@ -303,10 +303,8 @@ $list-item-icon-size: 48px;
     }
 
     .files-dropzone {
-        display: table-cell;
-        vertical-align: middle;
         text-align: center;
-        padding: 10px;
+        padding: 60px;
         border: 1px dashed $border-ligth-color;
         cursor: pointer;
     }
@@ -317,63 +315,56 @@ $list-item-icon-size: 48px;
     }
 
     .files-list {
-        padding: 10px;
-        width: 320px;
-        .files-list-item {
+        padding: 20px;
+        display: table;
+        width: 100%;
 
-            .item-icon {
-                float: left;
-                width: $list-item-icon-size;
-                height: $list-item-icon-size;
-                vertical-align: middle;
+        .files-list-content {
+            display: table-row-group;
+            
+            .files-list-item {
+                display: table-row;
 
-                span {
-                    font-size: 32px;
-                    text-align: center;
-                }
-            }
+                .item-icon {
+                    display: table-cell;
+                    float: left;
+                    width: $list-item-icon-size;
+                    height: $list-item-icon-size;
 
-            .item-content-primary {
-
-                .progress {
-                    margin-top: spacing(xxxs);
-                    height: 6px;
-
-                    .progress-bar {
-                        height: 6px;
+                    span {
+                        font-size: 32px;
+                        text-align: center;
                     }
                 }
-            }
 
-            .item-content-secondary {
-                float: right;
-                text-align: center;
-
-                .btn-toggle-switch {
-                    margin: spacing(xxs, -2) 0 0;
-                    padding: 0;
-                    float: right;
+                .item-content-primary {
+                    display: table-cell;
+                    padding-right: 10px;
+                    vertical-align: top;
+                    text-align: left;
+                    width: 100%;
                 }
-            }
 
-            .content-text-primary, .content-text-secondary {
-                font-size: 15px;
-                letter-spacing: normal;
-                line-height: 1.33333;
-                vertical-align: middle;
-                // width: 240px;
-                $white-color-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
+                .item-content-secondary {
+                    display: table-cell;
+                    float: right;
+                    text-align: left;
+                }
 
-            .content-text-primary {
-                font-weight: 300;
-            }
+                .content-text-primary, .content-text-secondary {
+                    font-size: 15px;
+                    letter-spacing: normal;
+                    line-height: 1.33333;
+                }
 
-            .content-text-secondary {
-                font-weight: 300;
-                color: $text-detail-color;
+                .content-text-primary {
+                    font-weight: 300;
+                }
+
+                .content-text-secondary {
+                    font-weight: 300;
+                    color: $text-detail-color;
+                }
             }
         }
     }
