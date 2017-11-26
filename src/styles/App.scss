@@ -318,6 +318,7 @@ $list-item-icon-size: 48px;
         padding: 20px;
         display: table;
         width: 100%;
+        border: 0;
 
         .files-list-content {
             display: table-row-group;
@@ -368,4 +369,19 @@ $list-item-icon-size: 48px;
             }
         }
     }
+}
+
+
+html.win-hoverable .win-listview .win-itembox:hover::before,
+html.win-hoverable .win-itemcontainer .win-itembox:hover::before {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  content: "";
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  pointer-events: none;
+  border-style: none !important;
+  border-width: 0 !important;
+  z-index: 3;
 }

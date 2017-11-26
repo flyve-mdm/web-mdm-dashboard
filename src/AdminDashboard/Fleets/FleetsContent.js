@@ -5,6 +5,7 @@ import IconItemList from '../IconItemList'
 import Policies from '../data/policies.json'
 import ItemList from '../ItemList'
 import WinJS from 'winjs'
+import FleetsTaskItemList from './FleetsTaskItemList'
 
 export default class FleetsContent extends Component {
 
@@ -21,17 +22,24 @@ export default class FleetsContent extends Component {
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-        if (!ItemList.data['PluginFlyvemdmPolicy.name']){
-            return (
-                <div style={{ display: 'inline-block' }}>
-                    <div className="name">not available</div>
-                </div>
-            )
+        if (ItemList.data['PluginFlyvemdmPolicy.name']) {
+
+            switch (ItemList.data["PluginFlyvemdmPolicy.type"]) {
+                
+                case "bool":
+                    return (
+                        <FleetsTaskItemList
+                        data={ItemList.data} />
+                    )
+                default:
+                    return (
+                        <FleetsTaskItemList
+                        data={ItemList.data} />
+                    )
+            }
         }
         return (
-            <div style={{ display: 'inline-block' }}>
-                <div className="name">{ItemList.data['PluginFlyvemdmPolicy.name']}</div>
-            </div>
+            <FleetsTaskItemList />
         )
     })
 
@@ -133,8 +141,8 @@ export default class FleetsContent extends Component {
                 </div>
                 <ReactWinJS.ListView
                     ref="listView"
-                    className="contentListView win-selectionstylefilled"
-                    style={{ height: 'calc(100% - 48px)' }}
+                    className="contentListView"
+                    style={{ height: 'calc(100% - 48px)', border: 0 }}
                     itemDataSource={this.state.list.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
