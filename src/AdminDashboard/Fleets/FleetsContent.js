@@ -11,7 +11,6 @@ export default class FleetsContent extends Component {
     constructor(props) {
         super(props)
         let policies = this.props.currentItem['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype']
-        // console.log(policies)
         this.state = {
             suggestionList: Policies.data.map(function(policy) { return policy['PluginFlyvemdmPolicy.name'] }),
             list: new WinJS.Binding.List(policies),
@@ -22,13 +21,10 @@ export default class FleetsContent extends Component {
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-        console.log('ItemList')
-        console.log(ItemList.data)
-        console.log(ItemList.data['PluginFlyvemdmPolicy.name'])
         if (!ItemList.data['PluginFlyvemdmPolicy.name']){
             return (
                 <div style={{ display: 'inline-block' }}>
-                    <div className="name">Error</div>
+                    <div className="name">not available</div>
                 </div>
             )
         }
@@ -59,8 +55,6 @@ export default class FleetsContent extends Component {
 
     componentWillReceiveProps (newProps) {
         let policies = newProps.currentItem['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype']
-        // console.log('policies')
-        // console.log(policies)
         this.setState({addPolicy: false, list: new WinJS.Binding.List(policies)})
     }
 
@@ -100,8 +94,6 @@ export default class FleetsContent extends Component {
                     }
                     return item
                 })
-            console.log('array')
-            console.log(array)
             this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], array) })
             
         }
@@ -109,7 +101,6 @@ export default class FleetsContent extends Component {
     }
 
     render() {
-        console.log(this.state.list.map((item) => {return item}))
         let addPolicy = <span/>
         if (this.state.addPolicy) {
             addPolicy = <ReactWinJS.AutoSuggestBox
