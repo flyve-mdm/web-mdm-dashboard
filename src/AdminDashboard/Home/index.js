@@ -19,7 +19,7 @@ export default class Dashboard extends Component {
     render() {
         
         return (
-            <div>
+            <div className="home">
                 <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
                 <DashboardPage count={this.state.pages.devices} name="Devices"/>
                 <DashboardPage count={this.state.pages.fleets} name="Fleets"/>

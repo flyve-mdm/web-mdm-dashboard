@@ -1,0 +1,20 @@
+.home {
+    .info-box {
+        display: inline-block; 
+        margin: 15px;
+        width: 150px; 
+        float: left;
+        text-align: center;
+        border: 1px solid $border-ligth-color;
+
+        .title {
+            background-color: $app-color;
+            color: $white-color;
+            line-height: 30px;
+
+            h3 {
+                margin: 0
+            }
+        }
+    }
+}
