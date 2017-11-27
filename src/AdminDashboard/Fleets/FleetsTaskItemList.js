@@ -33,8 +33,7 @@ export default class FleetsTaskItemList extends Component {
     }
 
     changeInput = (e) => {
-        console.log(e.target)
-        this.setState({[e.target.input]: e.target.value})
+        this.setState({input: e.target.value})
     }
 
     render() {
@@ -119,7 +118,7 @@ export default class FleetsTaskItemList extends Component {
                                         <option>Select an application</option>
                                         {
                                             Applications.map((value, index) =>
-                                                <option>{value["PluginFlyvemdmPackage.alias"]}</option>
+                                                <option key={index}>{value["PluginFlyvemdmPackage.alias"]}</option>
                                             )
                                         }
                                     </select>

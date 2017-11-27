@@ -372,21 +372,6 @@ $list-item-icon-size: 48px;
     }
 }
 
-
-html.win-hoverable .win-listview .win-itembox:hover::before,
-html.win-hoverable .win-itemcontainer .win-itembox:hover::before {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  content: "";
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
-  pointer-events: none;
-  border-style: none !important;
-  border-width: 0 !important;
-  z-index: 3;
-}
-
 .win-toggleswitch-on .win-toggleswitch-track {
     background-color: $app-color !important;
 }

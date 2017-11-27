@@ -14,7 +14,7 @@ export default class FleetsContent extends Component {
         let policies = this.props.currentItem['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype']
         this.state = {
             suggestionList: Policies.data.map(function(policy) { return policy['PluginFlyvemdmPolicy.name'] }),
-            list: new WinJS.Binding.List(policies),
+            list: policies,
             selectedPolicies: [],            
             layout: { type: WinJS.UI.ListLayout },
             addPolicy: false
@@ -22,24 +22,10 @@ export default class FleetsContent extends Component {
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-        if (ItemList.data['PluginFlyvemdmPolicy.name']) {
-
-            switch (ItemList.data["PluginFlyvemdmPolicy.type"]) {
-                
-                case "bool":
-                    return (
-                        <FleetsTaskItemList
-                        data={ItemList.data} />
-                    )
-                default:
-                    return (
-                        <FleetsTaskItemList
-                        data={ItemList.data} />
-                    )
-            }
-        }
         return (
-            <FleetsTaskItemList />
+            <FleetsTaskItemList
+            key={ItemList.data['PluginFlyvemdmPolicy.name']}
+            data={ItemList.data} />
         )
     })
 
@@ -139,15 +125,13 @@ export default class FleetsContent extends Component {
                     <h3 className="win-h3" style={{ display: 'inline-block' }} > Tasks </h3>
                     { addPolicy }
                 </div>
-                <ReactWinJS.ListView
-                    ref="listView"
-                    className="contentListView"
-                    style={{ height: 'calc(100% - 48px)', border: 0 }}
-                    itemDataSource={this.state.list.dataSource}
-                    layout={this.state.layout}
-                    itemTemplate={this.ItemListRenderer}
-                    selectionMode={'single'}
-                />
+                {this.state.list.map((item, index) => {
+                   return (
+                       <FleetsTaskItemList
+                           key={[item['PluginFlyvemdmPolicy.name'], index].join("_")}
+                           data={item} />
+                   )
+                })}
             </div>
         )
     }
