@@ -21,13 +21,25 @@ export default class FleetsContent extends Component {
         }
     }
 
-    ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-        return (
-            <FleetsTaskItemList
-            key={ItemList.data['PluginFlyvemdmPolicy.name']}
-            data={ItemList.data} />
-        )
-    })
+    deletePolicy = (policy) => {
+        const itemList = this.props.itemList.map((item) => item)
+        const pos = itemList.indexOf(this.props.currentItem)
+        const pos_items_id = itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'].indexOf(policy['PluginFlyvemdmPolicy.id'])
+        const pos_itemtype = itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype'].indexOf(policy)
+        const newCurrentItem = {
+            ...this.props.currentItem,
+            'PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id': [
+                ...itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'].slice(0, pos_items_id),
+                ...itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'].slice(pos_items_id+1)
+            ],
+            'PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype': [
+                ...itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype'].slice(0, pos_itemtype),
+                ...itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype'].slice(pos_itemtype+1)
+            ]
+        }
+        const newList = itemList.map(item => item === this.props.currentItem ? newCurrentItem : item)
+        this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], newList) })
+    }
 
     handleAddPolicy = () => {
         this.setState({ addPolicy: true })
