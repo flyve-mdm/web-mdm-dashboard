@@ -106,18 +106,6 @@ class ItemListPane extends Component {
             <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
-                        key="edit"
-                        icon="edit"
-                        label="Edit"
-                        priority={4}
-                    />
-                    <ReactWinJS.ToolBar.Button
-                        key="favorite"
-                        icon="favorite"
-                        label="Favorite"
-                        priority={3}
-                    />
-                    <ReactWinJS.ToolBar.Button
                         key="sort"
                         icon="sort"
                         label="Sort"
