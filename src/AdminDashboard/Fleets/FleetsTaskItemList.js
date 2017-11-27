@@ -7,12 +7,26 @@ export default class FleetsTaskItemList extends Component {
         super(props)
 
         this.state = {
-            toggleSelected: false
+            toggleSelected: true,
+            input: '' 
+        }
+    }
+
+    componentDidMount() {
+        if(this.props.data !== undefined) {
+            if (this.props.data['PluginFlyvemdmPolicy.type'] === "int") {
+                this.setState({ input: this.props.data['PluginFlyvemdmPolicy.default_value'] })
+            }
         }
     }
 
     handleToggle = () => {
         this.setState({ toggleSelected: !this.state.toggleSelected })
+    }
+
+    changeInput = (e) => {
+        console.log(e.target)
+        this.setState({[e.target.input]: e.target.value})
     }
 
     render() {
@@ -34,7 +48,6 @@ export default class FleetsTaskItemList extends Component {
                     </div>
             )
         } else {
-            console.log(this.props.data)
             switch (this.props.data["PluginFlyvemdmPolicy.type"]) {
                 
                 case "bool":
@@ -50,6 +63,32 @@ export default class FleetsTaskItemList extends Component {
                                     onChange={this.handleToggle}
                                     labelOn="On"
                                     labelOff="Off" />
+                                </div>
+                                <div className='item-content-secondary'>
+                                    <div className='icon item-icon'>
+                                        <span className='deleteIcon' style={{ fontSize: '18px' }} ></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+                case "int":
+                return (
+                    <div className='files-list' >
+                        <div className='files-list-content'>
+                            <div className='files-list-item'>
+                                <div className='item-content-primary'>
+                                    <div className='content-text-primary'>{this.props.data['PluginFlyvemdmPolicy.name']}</div>
+                                    <input 
+                                    type="text" 
+                                    className="win-textbox" 
+                                    placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
+                                    name="input"
+                                    value={this.state.input}
+                                    onChange={this.changeInput}
+                                    required
+                                    />
                                 </div>
                                 <div className='item-content-secondary'>
                                     <div className='icon item-icon'>
