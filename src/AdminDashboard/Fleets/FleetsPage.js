@@ -47,6 +47,7 @@ export default class FleetsPage extends Component {
                             onNavigate={this.props.onNavigate}
                             itemList={this.props.itemList}
                             currentItem={this.props.currentItem}
+                            changeItemList={this.props.changeItemList}
                             changeActionList={this.props.changeActionList} />
                         )
                     case "Add Policies":

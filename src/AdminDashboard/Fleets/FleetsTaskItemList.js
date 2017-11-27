@@ -47,7 +47,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary'>
                                     <div className='icon item-icon'>
-                                        <span className='deleteIcon' style={{ fontSize: '18px' }} ></span>
+                                        <span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary'>
                                     <div className='icon item-icon'>
-                                        <span className='deleteIcon' style={{ fontSize: '18px' }} ></span>
+                                        <span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary'>
                                     <div className='icon item-icon'>
-                                        <span className='deleteIcon' style={{ fontSize: '18px' }} ></span>
+                                        <span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary'>
                                     <div className='icon item-icon'>
-                                        <span className='deleteIcon' style={{ fontSize: '18px' }} ></span>
+                                        <span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary'>
                                     <div className='icon item-icon'>
-                                        <span className='deleteIcon' style={{ fontSize: '18px' }} ></span>
+                                        <span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary'>
                                     <div className='icon item-icon'>
-                                        <span className='deleteIcon' style={{ fontSize: '18px' }} ></span>
+                                        <span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
                                     </div>
                                 </div>
                             </div>
