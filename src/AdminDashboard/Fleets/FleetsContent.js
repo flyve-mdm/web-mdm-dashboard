@@ -112,11 +112,12 @@ export default class FleetsContent extends Component {
         let renderComponent
 
         if (this.state.list) {
-            renderComponent = this.state.list.map(function (item, index) {
+            renderComponent = this.state.list.map((item, index) => {
                 return (
                     <FleetsTaskItemList
                         key={[item['PluginFlyvemdmPolicy.name'], index].join("_")}
-                        data={item} />
+                        data={item} 
+                        deletePolicy={this.deletePolicy} />
                 )
             })
         }
