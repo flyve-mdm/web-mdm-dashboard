@@ -117,18 +117,6 @@ export default class DevicesList extends Component {
             <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
-                        key="edit"
-                        icon="edit"
-                        label="Edit"
-                        priority={4}
-                    />
-                    <ReactWinJS.ToolBar.Button
-                        key="favorite"
-                        icon="favorite"
-                        label="Favorite"
-                        priority={3}
-                    />
-                    <ReactWinJS.ToolBar.Button
                         key="sort"
                         icon="sort"
                         label="Sort"
@@ -139,7 +127,7 @@ export default class DevicesList extends Component {
                         key="refresh"
                         icon="refresh"
                         label="Refresh"
-                        priority={1}
+                        priority={2}
                     />
 
                     <ReactWinJS.ToolBar.Button
