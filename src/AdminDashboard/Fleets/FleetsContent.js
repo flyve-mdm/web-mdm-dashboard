@@ -21,24 +21,26 @@ export default class FleetsContent extends Component {
         }
     }
 
-    deletePolicy = (policy) => {
+    savePolicies = () => {
         const itemList = this.props.itemList.map((item) => item)
-        const pos = itemList.indexOf(this.props.currentItem)
-        const pos_items_id = itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'].indexOf(policy['PluginFlyvemdmPolicy.id'])
-        const pos_itemtype = itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype'].indexOf(policy)
+        const items_id = this.state.list.map((item) => item['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'])
         const newCurrentItem = {
             ...this.props.currentItem,
-            'PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id': [
-                ...itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'].slice(0, pos_items_id),
-                ...itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'].slice(pos_items_id+1)
-            ],
-            'PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype': [
-                ...itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype'].slice(0, pos_itemtype),
-                ...itemList[pos]['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype'].slice(pos_itemtype+1)
-            ]
+            'PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id': items_id,
+            'PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype': this.state.list
         }
         const newList = itemList.map(item => item === this.props.currentItem ? newCurrentItem : item)
         this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], newList) })
+    }
+
+    deletePolicy = (policy) => {
+        const index = this.state.list.indexOf(policy)
+        this.setState({
+            list: [
+                ...this.state.list.slice(0, index),
+                ...this.state.list.slice(index+1)
+            ]
+        })
     }
 
     handleAddPolicy = () => {
@@ -144,6 +146,9 @@ export default class FleetsContent extends Component {
                             <div className="name">{this.props.currentItem["PluginFlyvemdmFleet.name"]}</div>
                         </div>
                     </div>
+                        <button className="win-button win-button-primary" onClick={this.savePolicies}>
+                            Save
+                        </button>
                 </div>
                 <div className="separator" />
                 <div className="contentInfo" style={{ width: '100%', marginTop: '20px', display: 'inline-block' }} >
