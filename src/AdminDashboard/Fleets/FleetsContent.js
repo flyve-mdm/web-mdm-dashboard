@@ -109,6 +109,19 @@ export default class FleetsContent extends Component {
                 </div>
             )
         }
+
+        let renderComponent
+
+        if (this.state.list) {
+            renderComponent = this.state.list.map(function (item, index) {
+                return (
+                    <FleetsTaskItemList
+                        key={[item['PluginFlyvemdmPolicy.name'], index].join("_")}
+                        data={item} />
+                )
+            })
+        }
+
         return ( 
             <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                 <div className="contentHeader">
@@ -125,13 +138,7 @@ export default class FleetsContent extends Component {
                     <h3 className="win-h3" style={{ display: 'inline-block' }} > Tasks </h3>
                     { addPolicy }
                 </div>
-                {this.state.list.map((item, index) => {
-                   return (
-                       <FleetsTaskItemList
-                           key={[item['PluginFlyvemdmPolicy.name'], index].join("_")}
-                           data={item} />
-                   )
-                })}
+                { renderComponent }
             </div>
         )
     }
