@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
-import { Applications } from '../Data'
+import { Applications, Files } from '../Data'
 export default class FleetsTaskItemList extends Component {
 
     constructor(props) {
@@ -9,7 +9,8 @@ export default class FleetsTaskItemList extends Component {
         this.state = {
             toggleSelected: true,
             input: '',
-            applications: null
+            applications: null,
+            files: null
         }
     }
 
@@ -20,6 +21,9 @@ export default class FleetsTaskItemList extends Component {
             }
             if (this.props.data['PluginFlyvemdmPolicy.type'] === "deployapp") {
                 this.setState({ applications: Applications })
+            }
+            if (this.props.data['PluginFlyvemdmPolicy.type'] === "deployfile") {
+                this.setState({ files: Files })
             }
         }
     }
@@ -85,7 +89,8 @@ export default class FleetsTaskItemList extends Component {
                                 <div className='item-content-primary'>
                                     <div className='content-text-primary'>{this.props.data['PluginFlyvemdmPolicy.name']}</div>
                                     <input 
-                                    type="number" 
+                                    type="number"
+                                    style={{ width: '80px'}}
                                     className="win-textbox" 
                                     placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
                                     name="input"
@@ -115,6 +120,31 @@ export default class FleetsTaskItemList extends Component {
                                         {
                                             Applications.map((value, index) =>
                                                 <option>{value["PluginFlyvemdmPackage.alias"]}</option>
+                                            )
+                                        }
+                                    </select>
+                                </div>
+                                <div className='item-content-secondary'>
+                                    <div className='icon item-icon'>
+                                        <span className='deleteIcon' style={{ fontSize: '18px' }} ></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+                case "deployfile":
+                return (
+                    <div className='files-list' >
+                        <div className='files-list-content'>
+                            <div className='files-list-item'>
+                                <div className='item-content-primary'>
+                                    <div className='content-text-primary'>{this.props.data['PluginFlyvemdmPolicy.name']}</div>
+                                    <select className="win-dropdown">
+                                        <option>Select a file</option>
+                                        {
+                                            Files.map((value, index) =>
+                                                <option>{value["PluginFlyvemdmFile.name"]}</option>
                                             )
                                         }
                                     </select>

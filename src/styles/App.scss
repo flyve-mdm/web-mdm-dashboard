@@ -385,3 +385,7 @@ html.win-hoverable .win-itemcontainer .win-itembox:hover::before {
   border-width: 0 !important;
   z-index: 3;
 }
+
+.win-toggleswitch-on .win-toggleswitch-track {
+    background-color: $app-color !important;
+}
