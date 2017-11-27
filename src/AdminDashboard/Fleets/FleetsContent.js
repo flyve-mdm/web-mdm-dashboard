@@ -15,7 +15,6 @@ export default class FleetsContent extends Component {
         this.state = {
             suggestionList: Policies.data.map(function(policy) { return policy['PluginFlyvemdmPolicy.name'] }),
             list: policies,
-            selectedPolicies: [],            
             layout: { type: WinJS.UI.ListLayout },
             addPolicy: false
         }
@@ -63,49 +62,35 @@ export default class FleetsContent extends Component {
 
     componentWillReceiveProps (newProps) {
         let policies = newProps.currentItem['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype']
-        this.setState({addPolicy: false, list: new WinJS.Binding.List(policies)})
+        this.setState({addPolicy: false, list: policies})
     }
 
     handleQuerySubmitted = (eventObject) => {
         let isValid = true
-        this.state.selectedPolicies.forEach(selectedPolicy => {
-            if (selectedPolicy === eventObject.detail.queryText) isValid = false
+        this.state.list.forEach(policy => {
+            if (policy['PluginFlyvemdmPolicy.name'] === eventObject.detail.queryText) isValid = false
         })
         let isExists = false
         Policies.data.forEach(policiy => {
             if (policiy['PluginFlyvemdmPolicy.name'] === eventObject.detail.queryText) isExists = true
         })
         if (isValid && isExists) {
-            document.querySelectorAll('[type="search"]')[0].value = ''
-            this.setState({ selectedPolicies: [...this.state.selectedPolicies, eventObject.detail.queryText] })
-            let array = this.props.itemList.map((item) => {
-                    if (item['PluginFlyvemdmFleet.id'] === this.props.currentItem['PluginFlyvemdmFleet.id']) {
-                        for (let index = 0; index < Policies.data.length; index++) {
-                            const element = Policies.data[index]
-                            if(element['PluginFlyvemdmPolicy.name'] === eventObject.detail.queryText) {
-                                if (Array.isArray(item['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype'])) {
-                                    item['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype'] = [
-                                        ...item['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype'], 
-                                        element
-                                    ]
-                                    item['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'] = [
-                                        ...item['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'],
-                                        element['PluginFlyvemdmPolicy.id']
-                                    ]
-                                } else {
-                                    item['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype'] = [ element ]
-                                    item['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'] = [ element['PluginFlyvemdmPolicy.id'] ]
-                                }
-                            }
-                        }
-                        return item
-                    }
-                    return item
-                })
-            this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], array) })
-            
+            for (let index = 0; index < Policies.data.length; index++) {
+                const policy = Policies.data[index]
+                if(policy['PluginFlyvemdmPolicy.name'] === eventObject.detail.queryText) { 
+                    console.log('dd')
+                    console.log(document.querySelectorAll('[type="search"]'))
+                    document.querySelectorAll('[type="search"]')[0].value = ''
+                    this.setState({ 
+                        list: [
+                            ...this.state.list,
+                            policy
+                        ],
+                        addPolicy: false
+                    })
+                }
+            } 
         }
-        
     }
 
     render() {
