@@ -3,6 +3,7 @@ import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { closePane, changeLocation, changeIndex, changeItemList, changeActionList, changeCurrentItem } from './DuckController'
+import Dashboard from './Home'
 import Users from './Users'
 import Devices from './Devices'
 import Fleets from './Fleets'
@@ -55,9 +56,12 @@ class BodyAdminDashboard extends Component {
     render() {
 
         let contentComponent
-
+        
         switch (this.props.router[this.props.index].label) {
-
+            
+            case "Dashboard":
+                contentComponent = <div className="dashboard" ><Dashboard location={this.props.location} /></div>
+                break
             case "Devices":
                 contentComponent = <div className="devices" ><Devices mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
                 break
