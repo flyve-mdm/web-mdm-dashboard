@@ -143,7 +143,7 @@ export default class FleetsTaskItemList extends Component {
                                         <option>Select a file</option>
                                         {
                                             Files.map((value, index) =>
-                                                <option>{value["PluginFlyvemdmFile.name"]}</option>
+                                                <option key={index}>{value["PluginFlyvemdmFile.name"]}</option>
                                             )
                                         }
                                     </select>
