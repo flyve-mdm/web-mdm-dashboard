@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import Invitations from '../data/invitations.json'
 import InvitationsLog from '../data/invitationsLog.json'
 import ReactWinJS from 'react-winjs'
