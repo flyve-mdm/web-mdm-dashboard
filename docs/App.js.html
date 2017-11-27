@@ -23,17 +23,27 @@ layout: container
  */
 import * as React from 'react'
 import AdminDashboard from './AdminDashboard'
+import Login from './Login'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 /**
  * Assets
  */
-import './App.css'
-import './ui-light.css'
+import './styles/App.scss'
+import './styles/ui-light.css'
 /**
  * Main component
  * @returns AdminDashboard component
  */
 function App() {
-  return &lt;AdminDashboard />
+  return (
+    &lt;Router>
+      &lt;Switch>
+        &lt;Route exact path='/' component={Login}/>
+        &lt;Route path='/app' component={AdminDashboard}/>
+      &lt;/Switch>
+    &lt;/Router>
+  ) 
 }
 
 export default App
