@@ -7,10 +7,6 @@ import EditUser from './EditUser'
 class ContentPane extends Component {
 
     changePanel = () => {
-        console.log(this.props.changeActionList)
-        console.log(this.props.actionList)
-        console.log(this.props.selectedIndex)
-        
         this.props.changeActionList('Edit')
     }
     
@@ -30,7 +26,10 @@ class ContentPane extends Component {
                     case "Edit":
                         return (
                             <div className="contentPane listPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                                <EditUser changeActionList={this.props.changeActionList}/>
+                                <EditUser 
+                                selectedIndex={this.props.selectedIndex}
+                                itemList={this.props.itemList}
+                                changeActionList={this.props.changeActionList}/>
                             </div>
                         )
                     default: 

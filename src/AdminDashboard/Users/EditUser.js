@@ -6,12 +6,22 @@ export default class EditUser extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            login: '',
+            surname: '',
             firstName: '',
-            lastName: '',
-            email: '',
             password: '',
             passwordConfirmation: ''
         }
+    }
+
+    componentDidMount() {
+        const selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
+
+        this.setState({
+            login: selectedItemList["User.name"],
+            surname: '',
+            firstName: '',
+        })
     }
 
     sendChanges = () => {
@@ -31,39 +41,37 @@ export default class EditUser extends Component {
                 <p>Please insert an active email address.</p>
                 <p>An email will be sent with a QR code.</p>
                 <div>
+                    <b>Login </b> <br/>
+                    <input 
+                        type="text" 
+                        className="win-textbox" 
+                        placeholder="Login"
+                        name="login"
+                        value={this.state.login}
+                        onChange={this.changeInput}
+                        required
+                    />
+                </div>
+                <div>
+                    <b>Surname </b> <br/>
+                    <input 
+                        type="text" 
+                        className="win-textbox" 
+                        placeholder="Surname"
+                        name="surname"
+                        value={this.state.surname}
+                        onChange={this.changeInput}
+                    />
+                </div>
+                <div>
                     <b>First name </b> <br/>
                     <input 
                         type="text" 
                         className="win-textbox" 
-                        placeholder="Email"
+                        placeholder="First name"
                         name="firstName"
                         value={this.state.firstName}
                         onChange={this.changeInput}
-                        required
-                    />
-                </div>
-                <div>
-                    <b>Last name </b> <br/>
-                    <input 
-                        type="text" 
-                        className="win-textbox" 
-                        placeholder="Email"
-                        name="lastName"
-                        value={this.state.lastName}
-                        onChange={this.changeInput}
-                        required
-                    />
-                </div>
-                <div>
-                    <b>Email </b> <br/>
-                    <input 
-                        type="email" 
-                        className="win-textbox" 
-                        placeholder="Email"
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.changeInput}
-                        required
                     />
                 </div>
                 <div>
@@ -71,7 +79,7 @@ export default class EditUser extends Component {
                     <input 
                         type="password" 
                         className="win-textbox" 
-                        placeholder="Email"
+                        placeholder="Password"
                         name="password"
                         value={this.state.password}
                         onChange={this.changeInput}
@@ -83,7 +91,7 @@ export default class EditUser extends Component {
                     <input 
                         type="password" 
                         className="win-textbox" 
-                        placeholder="Email"
+                        placeholder="Password"
                         name="passwordConfirmation"
                         value={this.state.passwordConfirmation}
                         onChange={this.changeInput}
