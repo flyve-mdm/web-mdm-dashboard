@@ -89,7 +89,9 @@ export default class FleetsList extends Component {
         let array = []
         this.props.itemList.map((value, index) =>
             array.push(value)
-        );
+        )
+        this.props.changeActionList(null)
+        this.props.onNavigate([this.props.location[0]])
         this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.sort), sort: !this.props.sort })
     }
 
