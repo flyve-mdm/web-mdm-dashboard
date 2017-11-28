@@ -12,7 +12,8 @@ export default class FleetsList extends Component {
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
             selectedItemList: [],
-            selectionMode: false
+            selectionMode: false,
+            editMode: false
         }
     }
 
@@ -33,23 +34,30 @@ export default class FleetsList extends Component {
     })
 
     handleToggleSelectionMode = () => {
-        this.setState({ selectionMode: !this.state.selectionMode })
+        
+        this.setState({ selectionMode: !this.state.selectionMode, editMode: false, selectedItemList: [] })
         this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
         this.refs.listView.winControl.selection.clear()
     }
 
     handleSelectionChanged = (eventObject) => {
+        
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        setTimeout(function () {
-            if(index.length !== 0) {
-                this.props.changeActionList(null)
-            }
-            this.setState({ selectedItemList: index });
-            this.props.changeCurrentItem(null)
-            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
-        }.bind(this), 0)
+        this.setState({ selectedItemList: index });
+        
+        if(!this.state.editMode) {
+            setTimeout(function () {
+                if(index.length !== 0) {
+                    this.props.changeActionList(null)
+                }
+                
+                this.props.changeCurrentItem(null)
+                this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
+            }.bind(this), 0)
+        }
+        
     }
 
     handleContentAnimating(eventObject) {
@@ -70,6 +78,17 @@ export default class FleetsList extends Component {
         }.bind(this), 0)
     }
 
+    handleEdit = (eventObject) => {
+        let index = this.state.selectedItemList
+        let button = eventObject.currentTarget.winControl
+
+        this.setState({ editMode: true })
+        setTimeout(function () {
+            this.props.changeActionList(button.label)
+            this.props.onNavigate(index.length > 0 && this.state.selectionMode ? [this.props.location[0], index] : this.props.location);
+        }.bind(this), 0)
+    }
+
     handleDelete = () => {
         let item = this.props.itemList
         let index = this.state.selectedItemList
@@ -80,12 +99,15 @@ export default class FleetsList extends Component {
         })
         this.setState({
             selectedItem: [],
-            selectionMode: false
+            selectionMode: false,
+            editMode: false
         })
+
         this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
     }
 
     handleSort = () => {
+        this.setState({ editMode: false })
         let array = []
         this.props.itemList.map((value, index) =>
             array.push(value)
@@ -115,6 +137,17 @@ export default class FleetsList extends Component {
             />
         )
 
+        let editCommand = (
+            <ReactWinJS.ToolBar.Button
+                key="edit"
+                icon="edit"
+                label="Edit"
+                priority={0}
+                disabled={this.state.selectedItemList.length === 0}
+                onClick={this.handleEdit}
+            />
+        )
+
         return (
             <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ToolBar className="listToolBar">
@@ -140,6 +173,7 @@ export default class FleetsList extends Component {
                         onClick={this.handleAdd}
                     />
 
+                    {this.state.selectionMode ? editCommand : null}
                     {this.state.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
