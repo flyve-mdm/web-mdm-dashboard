@@ -26,6 +26,7 @@ const INITIAL_STATE = {
     actionList: null,
     currentItem: null,
     devices: { itemList: ItemList("Devices"), sort: true},
+    invitations: { itemList: ItemList("Invitations"), sort: true},
     fleets: { itemList: ItemList("Fleets"), sort: true},
     files: { itemList: ItemList("Files"), sort: true},
     applications: { itemList: ItemList("Applications"), sort: true},

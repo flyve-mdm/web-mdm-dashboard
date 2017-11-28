@@ -17,6 +17,13 @@ const routers = [
     },
     {
         type: "list",
+        label: "Invitations",
+        icon: "mail",
+        style: {},
+        data: Data.Invitations
+    },
+    {
+        type: "list",
         label: "Fleets",
         icon: "gotostart",
         style: {},
