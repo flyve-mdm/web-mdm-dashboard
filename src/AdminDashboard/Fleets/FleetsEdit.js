@@ -86,8 +86,7 @@ export default class FleetsEdit extends Component {
                         <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
                     </div>
                 </div>
-                )
-    
+            )
         }
     }
 }

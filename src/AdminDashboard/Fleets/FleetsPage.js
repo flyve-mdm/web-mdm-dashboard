@@ -56,46 +56,16 @@ export default class FleetsPage extends Component {
                             <PoliciesAdd />
                         )
                     case "Edit":
-                        let selectedItemList
-                        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
-
-                        if(selectedIndex) {
-
-                            let renderComponent = selectedIndex.map((index) => {
-                                selectedItemList = this.props.itemList.getAt(index)                                
-                                return (
-                                    <FleetsEdit
-                                    key={index}
-                                    itemListPaneWidth={this.props.itemListPaneWidth}
-                                    location={this.props.location}
-                                    currentItem={selectedItemList}
-                                    changeActionList={this.props.changeActionList} />
-                                )
-                            })
-
-                            return(
-                                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                                    <div className="contentHeader">
-                                        <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
-                                        <button className="win-button win-button-primary" onClick={this.savePolicies}>
-                                            Save
-                                        </button>
-                                    </div>
-                                    <div className="separator" />
-                                    {renderComponent}
-                                </div>
-                            )
-
-                            
-                        } else {
-                            return (
-                                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                                    <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                                        <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
-                                    </div>
-                                </div>
-                            )
-                        }
+                        
+                        return (
+                            <FleetsEdit
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            onNavigate={this.props.onNavigate}
+                            location={this.props.location}
+                            itemList={this.props.itemList}
+                            changeItemList={this.props.changeItemList}
+                            changeActionList={this.props.changeActionList} />
+                        )
                         
                     default: 
                         return (
