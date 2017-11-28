@@ -21,9 +21,8 @@ export default class InvitationsList extends Component {
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-
         return (
-            <InvitationsItemList itemList={ItemList.data} />
+            <InvitationsItemList itemList={ItemList.data} size={42} />
         )
     })
 
@@ -53,17 +52,6 @@ export default class InvitationsList extends Component {
         if (eventObject.detail.type === 'entrance') {
             eventObject.preventDefault()
         }
-    }
-
-    handleAdd = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        this.refs.listView.winControl.selection.clear()
-
-        setTimeout(function () {
-            this.setState({ selectionMode: false })
-            this.props.changeActionList(button.label)
-            this.props.onNavigate([this.props.location[0]])
-        }.bind(this), 0)
     }
 
     handleDelete = () => {
@@ -124,14 +112,6 @@ export default class InvitationsList extends Component {
                         icon="refresh"
                         label="Refresh"
                         priority={1}
-                    />
-
-                    <ReactWinJS.ToolBar.Button
-                        key="add"
-                        icon="add"
-                        label="Add"
-                        priority={0}
-                        onClick={this.handleAdd}
                     />
 
                     {this.state.selectionMode ? deleteCommand : null}
