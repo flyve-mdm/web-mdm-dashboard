@@ -5,11 +5,12 @@ import FleetsAdd from './FleetsAdd'
 import FleetsNew from './FleetsNew'
 import FleetsContent from './FleetsContent'
 import PoliciesAdd from './PoliciesAdd'
+import FleetsEdit from './FleetsEdit'
 
 export default class FleetsPage extends Component {
     
     render() {
-        if (this.props.selectedIndex === null) {
+        if (this.props.selectedIndex === null || this.props.actionList === 'Edit') {
             if(this.props.actionList === null) {
                 return (
                     <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
@@ -54,6 +55,48 @@ export default class FleetsPage extends Component {
                         return (
                             <PoliciesAdd />
                         )
+                    case "Edit":
+                        let selectedItemList
+                        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
+
+                        if(selectedIndex) {
+
+                            let renderComponent = selectedIndex.map((index) => {
+                                selectedItemList = this.props.itemList.getAt(index)                                
+                                return (
+                                    <FleetsEdit
+                                    key={index}
+                                    itemListPaneWidth={this.props.itemListPaneWidth}
+                                    location={this.props.location}
+                                    currentItem={selectedItemList}
+                                    changeActionList={this.props.changeActionList} />
+                                )
+                            })
+
+                            return(
+                                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                                    <div className="contentHeader">
+                                        <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
+                                        <button className="win-button win-button-primary" onClick={this.savePolicies}>
+                                            Save
+                                        </button>
+                                    </div>
+                                    <div className="separator" />
+                                    {renderComponent}
+                                </div>
+                            )
+
+                            
+                        } else {
+                            return (
+                                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                                    <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                                        <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        
                     default: 
                         return (
                             <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
@@ -67,16 +110,27 @@ export default class FleetsPage extends Component {
             
         } else {
             let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
-            return (
-                <FleetsContent
-                itemListPaneWidth={this.props.itemListPaneWidth}
-                location={this.props.location}
-                onNavigate={this.props.onNavigate}
-                itemList={this.props.itemList}
-                currentItem={selectedItemList}
-                changeItemList={this.props.changeItemList}
-                changeActionList={this.props.changeActionList} />
-            )
+            if(selectedItemList !== undefined) {
+                return (
+                    <FleetsContent
+                    itemListPaneWidth={this.props.itemListPaneWidth}
+                    location={this.props.location}
+                    onNavigate={this.props.onNavigate}
+                    itemList={this.props.itemList}
+                    currentItem={selectedItemList}
+                    changeItemList={this.props.changeItemList}
+                    changeActionList={this.props.changeActionList} />
+                )
+            } else {
+                return (
+                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                        <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                            <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
+                        </div>
+                    </div>
+                )
+            }
+            
         }
     }
 }
@@ -85,7 +139,10 @@ FleetsPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedIndex: PropTypes.number,
+    selectedIndex: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.array
+    ]),
     itemList: PropTypes.object.isRequired,
     actionList: PropTypes.string,
     changeItemList: PropTypes.func,
