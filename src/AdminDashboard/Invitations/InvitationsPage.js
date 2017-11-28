@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
+import InvitationsPendingPage from './InvitationsPendingPage'
 
-
-export default class InvitationsPage extends Component {
+export default class FilesPage extends Component {
 
     render() {
         if (this.props.selectedIndex === null) {
@@ -22,7 +22,7 @@ export default class InvitationsPage extends Component {
                     return (
                         <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                             <div className="contentHeader">
-                                <h2 className="win-h2 titleContentPane" > New File </h2>
+                                <h2 className="win-h2 titleContentPane" > Enroll </h2>
                             </div>
                         </div>
                     )
@@ -37,25 +37,19 @@ export default class InvitationsPage extends Component {
                 }
             }
         } else {
-            let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
+
+            const selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
+
             return (
-                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                    <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
-                        <div className="itemInfo">
-                            <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px'}} />
-                            <div className="contentStatus">
-                                <div className="name">{selectedItemList["PluginFlyvemdmFile.name"]}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="separator" />
-                </div>
+                <InvitationsPendingPage
+                itemListPaneWidth={this.props.itemListPaneWidth}
+                location={this.props.location}
+                currentItem={selectedItemList} />
             )
         }
     }
 }
-InvitationsPage.propTypes = {
+FilesPage.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number

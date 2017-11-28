@@ -8,6 +8,7 @@ export default class Invitations extends Component {
     render() {
 
         let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
+
         if (this.props.mode === 'small') {
             if (selectedIndex === null && this.props.actionList === null) {
                 return <InvitationsList
@@ -17,13 +18,14 @@ export default class Invitations extends Component {
                     itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
                     changeItemList={this.props.changeItemList} 
-                    changeActionList={this.props.changeActionList} />
+                    changeActionList={this.props.changeActionList}/>
             } else {
                 return <InvitationsPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
                     location={this.props.location}
                     itemList={this.props.itemList}
                     actionList={this.props.actionList}
+                    changeItemList={this.props.changeItemList}
                     changeActionList={this.props.changeActionList} />
             }
         } else {
@@ -42,8 +44,9 @@ export default class Invitations extends Component {
                         selectedIndex={selectedIndex}
                         location={this.props.location}
                         itemList={this.props.itemList}
-                        actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} />
+                        actionList={this.props.actionList} 
+                        changeItemList={this.props.changeItemList}
+                        changeActionList={this.props.changeActionList}/>
                 </div>
             )
         }

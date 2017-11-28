@@ -17,6 +17,8 @@ export default function (name, list, sort = true) {
                 return data['User.name'][0].toUpperCase()
             case "Invitations":
                 return data['PluginFlyvemdmInvitation.User.name'][0].toUpperCase()
+            case "InvitationsLog":
+                return data['PluginFlyvemdmInvitationLog.PluginFlyvemdmInvitationlog.date_creation']
             default:
                 return data.name[0].toUpperCase()
         }

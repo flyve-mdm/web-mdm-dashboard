@@ -9,6 +9,7 @@ $list-item-icon-size: 48px;
 
 @import
     "devices",
+    "invitations",
     "fleets",
     "files",
     "applications",
@@ -17,7 +18,7 @@ $list-item-icon-size: 48px;
     "about",
     "home";
 
-.devices, .fleets, .files, .applications, .users, .settings, .about {
+.devices, .invitations, .fleets, .files, .applications, .users, .settings, .about {
     height: 100%;
 }
 
