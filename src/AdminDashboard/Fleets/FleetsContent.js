@@ -14,7 +14,7 @@ export default class FleetsContent extends Component {
         let policies = this.props.currentItem['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype']
         this.state = {
             suggestionList: Policies.data.map(function(policy) { return policy['PluginFlyvemdmPolicy.name'] }),
-            list: policies,
+            list: policies ? policies : [],
             layout: { type: WinJS.UI.ListLayout },
             addPolicy: false
         }
@@ -78,8 +78,6 @@ export default class FleetsContent extends Component {
             for (let index = 0; index < Policies.data.length; index++) {
                 const policy = Policies.data[index]
                 if(policy['PluginFlyvemdmPolicy.name'] === eventObject.detail.queryText) { 
-                    console.log('dd')
-                    console.log(document.querySelectorAll('[type="search"]'))
                     document.querySelectorAll('[type="search"]')[0].value = ''
                     this.setState({ 
                         list: [
