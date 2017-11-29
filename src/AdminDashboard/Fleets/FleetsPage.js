@@ -64,6 +64,7 @@ export default class FleetsPage extends Component {
                             location={this.props.location}
                             itemList={this.props.itemList}
                             changeItemList={this.props.changeItemList}
+                            changeSelectionMode={this.props.changeSelectionMode}
                             changeActionList={this.props.changeActionList} />
                         )
                         
@@ -117,5 +118,6 @@ FleetsPage.propTypes = {
     actionList: PropTypes.string,
     changeItemList: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    onNavigate: PropTypes.func.isRequired
+    onNavigate: PropTypes.func.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired
 }

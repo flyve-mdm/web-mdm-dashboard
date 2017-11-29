@@ -46,7 +46,6 @@ export default class Fleets extends Component {
                     changeActionList={this.props.changeActionList}
                     currentItem={this.props.currentItem}
                     changeSelectionMode={this.changeSelectionMode}
-                    selectionMode={this.state.selectionMode}
                     changeCurrentItem={this.props.changeCurrentItem} />
             }
         } else {
@@ -75,7 +74,6 @@ export default class Fleets extends Component {
                         changeActionList={this.props.changeActionList}
                         currentItem={this.props.currentItem}
                         changeSelectionMode={this.changeSelectionMode}
-                        selectionMode={this.state.selectionMode}
                         changeCurrentItem={this.props.changeCurrentItem} />
                 </div>
             )
