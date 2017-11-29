@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import FleetsEditItemList from './FleetsEditItemList'
 import ItemList from '../ItemList'
@@ -40,6 +41,7 @@ export default class FleetsEdit extends Component {
 
     handleSaveFleets = () => {
 
+        this.props.changeSelectionMode(false)
         this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
         this.props.changeItemList([this.props.location[0]], { itemList: ItemList(this.props.location[0], this.state.itemListArray) })
@@ -89,4 +91,22 @@ export default class FleetsEdit extends Component {
             )
         }
     }
+}
+FleetsEdit.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    selectedIndex: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.array
+    ]),
+    itemList: PropTypes.object.isRequired,
+    actionList: PropTypes.string,
+    changeItemList: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired,
+    onNavigate: PropTypes.func.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired
+    
+    // location= PropTypes.
 }
