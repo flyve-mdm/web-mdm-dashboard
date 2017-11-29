@@ -1,9 +1,9 @@
 import React, { Component } from "react"
+import PropTypes from 'prop-types'
+import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
 import FleetsItemList from './FleetsItemList'
-import PropTypes from 'prop-types'
 import ItemList from '../ItemList'
-let WinJS = require('winjs')
 
 export default class FleetsList extends Component {
 
@@ -11,14 +11,13 @@ export default class FleetsList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItemList: [],
-            selectionMode: false,
-            editMode: false
+            selectedItemList: []
         }
     }
 
     componentWillUnmount() {
-        this.setState({ selectionMode: false, selectedItemList: [] })
+        this.setState({ selectedItemList: [] })
+        this.props.changeSelectionMode(false)
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
@@ -35,7 +34,8 @@ export default class FleetsList extends Component {
 
     handleToggleSelectionMode = () => {
         
-        this.setState({ selectionMode: !this.state.selectionMode, editMode: false, selectedItemList: [] })
+        this.setState({ selectedItemList: [] })
+        this.props.changeSelectionMode(!this.props.selectionMode)      
         this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
         this.refs.listView.winControl.selection.clear()
@@ -47,14 +47,14 @@ export default class FleetsList extends Component {
         let index = listView.selection.getIndices()
         this.setState({ selectedItemList: index });
         
-        if(!this.state.editMode) {
+        if(!this.props.actionList !== 'Edit') {
             setTimeout(() => {
                 if(index.length !== 0) {
                     this.props.changeActionList(null)
                 }
                 
                 this.props.changeCurrentItem(null)
-                this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
+                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
             }, 0)
         }
         
@@ -72,7 +72,7 @@ export default class FleetsList extends Component {
         this.refs.listView.winControl.selection.clear()
 
         setTimeout(() => {
-            this.setState({ selectionMode: false })
+            this.props.changeSelectionMode(false)      
             this.props.changeActionList(button.label)
             this.props.onNavigate([this.props.location[0]])
         }, 0)
@@ -82,10 +82,9 @@ export default class FleetsList extends Component {
         let index = this.state.selectedItemList
         let button = eventObject.currentTarget.winControl
 
-        this.setState({ editMode: true })
         setTimeout(() => {
             this.props.changeActionList(button.label)
-            this.props.onNavigate(index.length > 0 && this.state.selectionMode ? [this.props.location[0], index] : this.props.location);
+            this.props.onNavigate(index.length > 0 && this.props.selectionMode ? [this.props.location[0], index] : this.props.location);
         }, 0)
     }
 
@@ -97,17 +96,12 @@ export default class FleetsList extends Component {
         index.forEach((i) => {
             item.splice(i, 1)
         })
-        this.setState({
-            selectedItem: [],
-            selectionMode: false,
-            editMode: false
-        })
-
+        this.setState({ selectedItem: [] })
+        this.props.changeSelectionMode(false)              
         this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
     }
 
     handleSort = () => {
-        this.setState({ editMode: false })
         let array = []
         this.props.itemList.map((value, index) =>
             array.push(value)
@@ -119,11 +113,11 @@ export default class FleetsList extends Component {
 
     descendingCompare(first, second) {
         if (first === second)
-            return 0;
+            return 0
         else if (first < second)
-            return 1;
+            return 1
         else
-            return -1;
+            return -1
     }
 
     render() {
@@ -173,15 +167,15 @@ export default class FleetsList extends Component {
                         onClick={this.handleAdd}
                     />
 
-                    {this.state.selectionMode ? editCommand : null}
-                    {this.state.selectionMode ? deleteCommand : null}
+                    {this.props.selectionMode ? editCommand : null}
+                    {this.props.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
                         icon="bullets"
                         label="Select"
                         priority={0}
-                        selected={this.state.selectionMode}
+                        selected={this.props.selectionMode}
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
@@ -193,8 +187,8 @@ export default class FleetsList extends Component {
                     itemDataSource={this.props.itemList.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
-                    selectionMode={this.state.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
+                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
                     onContentAnimating={this.handleContentAnimating}
                 />
@@ -213,5 +207,8 @@ FleetsList.propTypes = {
     onNavigate: PropTypes.func.isRequired,
     changeItemList: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    changeCurrentItem: PropTypes.func.isRequired
+    changeCurrentItem: PropTypes.func.isRequired,
+    selectionMode: PropTypes.bool.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
+    actionList: PropTypes.string
 }
