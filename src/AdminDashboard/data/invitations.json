@@ -1,6 +1,6 @@
 {
-    "totalcount": 22,
-    "count": 20,
+    "totalcount": 12,
+    "count": 12,
     "sort": 1,
     "order": "ASC",
     "data": [
@@ -12,11 +12,6 @@
         {
             "PluginFlyvemdmInvitation.User.name": "bugier.t@gmail.com",
             "PluginFlyvemdmInvitation.id": 122,
-            "PluginFlyvemdmInvitation.status": "pending"
-        },
-        {
-            "PluginFlyvemdmInvitation.User.name": "bugier.t@gmail.com",
-            "PluginFlyvemdmInvitation.id": 123,
             "PluginFlyvemdmInvitation.status": "pending"
         },
         {
@@ -45,11 +40,6 @@
             "PluginFlyvemdmInvitation.status": "pending"
         },
         {
-            "PluginFlyvemdmInvitation.User.name": "gupta.miltondatta@gmail.com",
-            "PluginFlyvemdmInvitation.id": 193,
-            "PluginFlyvemdmInvitation.status": "pending"
-        },
-        {
             "PluginFlyvemdmInvitation.User.name": "paubry@teclib.com",
             "PluginFlyvemdmInvitation.id": 70,
             "PluginFlyvemdmInvitation.status": "pending"
@@ -57,36 +47,6 @@
         {
             "PluginFlyvemdmInvitation.User.name": "tabs01@aasraatrust.org",
             "PluginFlyvemdmInvitation.id": 201,
-            "PluginFlyvemdmInvitation.status": "pending"
-        },
-        {
-            "PluginFlyvemdmInvitation.User.name": "tabs01@aasraatrust.org",
-            "PluginFlyvemdmInvitation.id": 183,
-            "PluginFlyvemdmInvitation.status": "pending"
-        },
-        {
-            "PluginFlyvemdmInvitation.User.name": "tbugier@teclib.com",
-            "PluginFlyvemdmInvitation.id": 199,
-            "PluginFlyvemdmInvitation.status": "pending"
-        },
-        {
-            "PluginFlyvemdmInvitation.User.name": "tbugier@teclib.com",
-            "PluginFlyvemdmInvitation.id": 198,
-            "PluginFlyvemdmInvitation.status": "pending"
-        },
-        {
-            "PluginFlyvemdmInvitation.User.name": "tbugier@teclib.com",
-            "PluginFlyvemdmInvitation.id": 197,
-            "PluginFlyvemdmInvitation.status": "pending"
-        },
-        {
-            "PluginFlyvemdmInvitation.User.name": "tbugier@teclib.com",
-            "PluginFlyvemdmInvitation.id": 196,
-            "PluginFlyvemdmInvitation.status": "pending"
-        },
-        {
-            "PluginFlyvemdmInvitation.User.name": "tbugier@teclib.com",
-            "PluginFlyvemdmInvitation.id": 195,
             "PluginFlyvemdmInvitation.status": "pending"
         },
         {
@@ -105,5 +65,5 @@
             "PluginFlyvemdmInvitation.status": "pending"
         }
     ],
-    "content-range": "0-20/22"
+    "content-range": "0-11/12"
 }

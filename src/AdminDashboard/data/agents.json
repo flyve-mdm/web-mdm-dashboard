@@ -1,6 +1,6 @@
 {
-  "totalcount": 9,
-  "count": 9,
+  "totalcount": 6,
+  "count": 6,
   "sort": 1,
   "order": "ASC",
   "data": [
@@ -26,7 +26,7 @@
       "PluginFlyvemdmAgent.Computer.User.id": 174,
       "PluginFlyvemdmAgent.PluginFlyvemdmFleet.id": 26,
       "PluginFlyvemdmAgent.last_contact": null,
-      "PluginFlyvemdmAgent.Computer.User.realname": "Rondon",
+      "PluginFlyvemdmAgent.Computer.User.realname": "Hector Rondon",
       "PluginFlyvemdmAgent.version": "1.0.0",
       "PluginFlyvemdmAgent.is_online": 0
     },
@@ -39,7 +39,7 @@
       "PluginFlyvemdmAgent.Computer.User.id": 150,
       "PluginFlyvemdmAgent.PluginFlyvemdmFleet.id": 3,
       "PluginFlyvemdmAgent.last_contact": "2017-11-13 14:59:40",
-      "PluginFlyvemdmAgent.Computer.User.realname": "Hernandez",
+      "PluginFlyvemdmAgent.Computer.User.realname": "Rafael Hernandez",
       "PluginFlyvemdmAgent.version": "2.0.1-beta",
       "PluginFlyvemdmAgent.is_online": 1
     },
@@ -52,7 +52,7 @@
       "PluginFlyvemdmAgent.Computer.User.id": 230,
       "PluginFlyvemdmAgent.PluginFlyvemdmFleet.id": 3,
       "PluginFlyvemdmAgent.last_contact": "2017-11-10 22:39:42",
-      "PluginFlyvemdmAgent.Computer.User.realname": "jshsbshshssh",
+      "PluginFlyvemdmAgent.Computer.User.realname": "Test User",
       "PluginFlyvemdmAgent.version": "2.0.1-beta",
       "PluginFlyvemdmAgent.is_online": 1
     },
@@ -65,47 +65,8 @@
       "PluginFlyvemdmAgent.Computer.User.id": 8,
       "PluginFlyvemdmAgent.PluginFlyvemdmFleet.id": 1,
       "PluginFlyvemdmAgent.last_contact": "2017-07-21 16:04:38",
-      "PluginFlyvemdmAgent.Computer.User.realname": "bugier",
+      "PluginFlyvemdmAgent.Computer.User.realname": "Thierry Bugier",
       "PluginFlyvemdmAgent.version": "1.0.14",
-      "PluginFlyvemdmAgent.is_online": 0
-    },
-    {
-      "PluginFlyvemdmAgent.name": "tbugier@teclib.com",
-      "PluginFlyvemdmAgent.id": 1,
-      "PluginFlyvemdmAgent.PluginFlyvemdmFleet.name": "not managed fleet",
-      "PluginFlyvemdmAgent.Computer.id": 1,
-      "PluginFlyvemdmAgent.Computer.serial": "BH91BQDY16__",
-      "PluginFlyvemdmAgent.Computer.User.id": 8,
-      "PluginFlyvemdmAgent.PluginFlyvemdmFleet.id": 1,
-      "PluginFlyvemdmAgent.last_contact": null,
-      "PluginFlyvemdmAgent.Computer.User.realname": "bugier",
-      "PluginFlyvemdmAgent.version": "0.99.46",
-      "PluginFlyvemdmAgent.is_online": 0
-    },
-    {
-      "PluginFlyvemdmAgent.name": "tbugier@teclib.com",
-      "PluginFlyvemdmAgent.id": 7,
-      "PluginFlyvemdmAgent.PluginFlyvemdmFleet.name": "not managed fleet",
-      "PluginFlyvemdmAgent.Computer.id": 11,
-      "PluginFlyvemdmAgent.Computer.serial": "ABCDEFGHIJ1234_",
-      "PluginFlyvemdmAgent.Computer.User.id": 8,
-      "PluginFlyvemdmAgent.PluginFlyvemdmFleet.id": 1,
-      "PluginFlyvemdmAgent.last_contact": null,
-      "PluginFlyvemdmAgent.Computer.User.realname": "bugier",
-      "PluginFlyvemdmAgent.version": "0.99.1",
-      "PluginFlyvemdmAgent.is_online": 0
-    },
-    {
-      "PluginFlyvemdmAgent.name": "tbugier@teclib.com",
-      "PluginFlyvemdmAgent.id": 8,
-      "PluginFlyvemdmAgent.PluginFlyvemdmFleet.name": "not managed fleet",
-      "PluginFlyvemdmAgent.Computer.id": 12,
-      "PluginFlyvemdmAgent.Computer.serial": "BH91BQDY16__",
-      "PluginFlyvemdmAgent.Computer.User.id": 8,
-      "PluginFlyvemdmAgent.PluginFlyvemdmFleet.id": 1,
-      "PluginFlyvemdmAgent.last_contact": null,
-      "PluginFlyvemdmAgent.Computer.User.realname": "bugier",
-      "PluginFlyvemdmAgent.version": "0.99.1",
       "PluginFlyvemdmAgent.is_online": 0
     },
     {
@@ -117,10 +78,10 @@
       "PluginFlyvemdmAgent.Computer.User.id": 210,
       "PluginFlyvemdmAgent.PluginFlyvemdmFleet.id": 3,
       "PluginFlyvemdmAgent.last_contact": "2017-11-08 15:07:46",
-      "PluginFlyvemdmAgent.Computer.User.realname": "Hernandez ",
+      "PluginFlyvemdmAgent.Computer.User.realname": "Gianfranco Manganiello",
       "PluginFlyvemdmAgent.version": "2.0.1-beta",
       "PluginFlyvemdmAgent.is_online": 1
     }
   ],
-  "content-range": "0-8/9"
+  "content-range": "0-5/6"
 }
