@@ -21,11 +21,13 @@ export default class Dashboard extends Component {
         return (
             <div className="home">
                 <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
-                <DashboardPage count={this.state.pages.devices} name="Devices"/>
-                <DashboardPage count={this.state.pages.fleets} name="Fleets"/>
-                <DashboardPage count={this.state.pages.files} name="Files"/>
-                <DashboardPage count={this.state.pages.applications} name="Applications"/>
-                <DashboardPage count={this.state.pages.users} name="Users"/>
+                <div className="wrapper">
+                    <DashboardPage count={this.state.pages.devices} name="Devices"/>
+                    <DashboardPage count={this.state.pages.fleets} name="Fleets"/>
+                    <DashboardPage count={this.state.pages.files} name="Files"/>
+                    <DashboardPage count={this.state.pages.applications} name="Applications"/>
+                    <DashboardPage count={this.state.pages.users} name="Users"/>
+                </div>
             </div>
             
         )
