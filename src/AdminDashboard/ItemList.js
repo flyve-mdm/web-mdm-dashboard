@@ -12,7 +12,7 @@ export default function (name, list, sort = true) {
             case "Files":
                 return data["PluginFlyvemdmFile.name"][0].toUpperCase()
             case "Applications":
-                return data["PluginFlyvemdmPackage.alias"][0]
+                return data["PluginFlyvemdmPackage.name"][0]
             case "Users":
                 return data['User.name'][0].toUpperCase()
             case "Invitations":
