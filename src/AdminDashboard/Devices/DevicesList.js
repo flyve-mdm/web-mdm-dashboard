@@ -138,14 +138,6 @@ export default class DevicesList extends Component {
                         onClick={this.handlePanel}
                     />
 
-                    <ReactWinJS.ToolBar.Button
-                        key="invitations"
-                        icon="mail"
-                        label="Pending Invitation"
-                        priority={0}
-                        onClick={this.handlePanel}
-                    />
-
                     {this.state.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
