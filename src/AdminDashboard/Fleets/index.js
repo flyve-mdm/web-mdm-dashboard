@@ -4,6 +4,19 @@ import FleetsList from './FleetsList'
 import FleetsPage from './FleetsPage'
 export default class Fleets extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectionMode: false
+        }
+    }
+
+    changeSelectionMode = (selectionMode) => {
+        this.setState({
+            selectionMode
+        })
+    }
+
     render() {
 
         let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
@@ -17,7 +30,10 @@ export default class Fleets extends Component {
                     itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
                     changeItemList={this.props.changeItemList}
+                    actionList={this.props.actionList}
                     changeCurrentItem={this.props.changeCurrentItem}
+                    changeSelectionMode={this.changeSelectionMode}
+                    selectionMode={this.state.selectionMode}
                     changeActionList={this.props.changeActionList} />
             } else {
                 return <FleetsPage itemListPaneWidth={0}
@@ -29,6 +45,8 @@ export default class Fleets extends Component {
                     changeItemList={this.props.changeItemList}
                     changeActionList={this.props.changeActionList}
                     currentItem={this.props.currentItem}
+                    changeSelectionMode={this.changeSelectionMode}
+                    selectionMode={this.state.selectionMode}
                     changeCurrentItem={this.props.changeCurrentItem} />
             }
         } else {
@@ -42,7 +60,10 @@ export default class Fleets extends Component {
                         itemList={this.props.itemList}
                         onNavigate={this.props.onNavigate}
                         changeCurrentItem={this.props.changeCurrentItem}
-                        changeItemList={this.props.changeItemList} 
+                        changeItemList={this.props.changeItemList}
+                        changeSelectionMode={this.changeSelectionMode}
+                        actionList={this.props.actionList}
+                        selectionMode={this.state.selectionMode}
                         changeActionList={this.props.changeActionList} />
                     <FleetsPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
@@ -53,6 +74,8 @@ export default class Fleets extends Component {
                         changeItemList={this.props.changeItemList}
                         changeActionList={this.props.changeActionList}
                         currentItem={this.props.currentItem}
+                        changeSelectionMode={this.changeSelectionMode}
+                        selectionMode={this.state.selectionMode}
                         changeCurrentItem={this.props.changeCurrentItem} />
                 </div>
             )
