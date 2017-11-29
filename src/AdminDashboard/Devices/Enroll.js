@@ -11,7 +11,9 @@ export default class Enroll extends Component {
     }
 
     inviteDevice = () => {
-        this.props.changeActionList('Pending Invitation')
+        if(this.state.email.trim() !== "") {
+            this.props.changeActionList(null)
+        }
     }
 
     changeInput = (e) => {
@@ -21,7 +23,7 @@ export default class Enroll extends Component {
     render() {
         return (
             <div>
-                <h2 className="win-h2 titleContentPane" onClick={() =>this.changeSelectItem([])}>
+                <h2 className="win-h2 titleContentPane">
                     Enroll new device
                 </h2>
                 <p>Please insert an active email address.</p>
