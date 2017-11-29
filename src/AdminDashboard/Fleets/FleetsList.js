@@ -48,14 +48,14 @@ export default class FleetsList extends Component {
         this.setState({ selectedItemList: index });
         
         if(!this.state.editMode) {
-            setTimeout(function () {
+            setTimeout(() => {
                 if(index.length !== 0) {
                     this.props.changeActionList(null)
                 }
                 
                 this.props.changeCurrentItem(null)
                 this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
-            }.bind(this), 0)
+            }, 0)
         }
         
     }
@@ -71,11 +71,11 @@ export default class FleetsList extends Component {
         let button = eventObject.currentTarget.winControl
         this.refs.listView.winControl.selection.clear()
 
-        setTimeout(function () {
+        setTimeout(() => {
             this.setState({ selectionMode: false })
             this.props.changeActionList(button.label)
             this.props.onNavigate([this.props.location[0]])
-        }.bind(this), 0)
+        }, 0)
     }
 
     handleEdit = (eventObject) => {
@@ -83,10 +83,10 @@ export default class FleetsList extends Component {
         let button = eventObject.currentTarget.winControl
 
         this.setState({ editMode: true })
-        setTimeout(function () {
+        setTimeout(() => {
             this.props.changeActionList(button.label)
             this.props.onNavigate(index.length > 0 && this.state.selectionMode ? [this.props.location[0], index] : this.props.location);
-        }.bind(this), 0)
+        }, 0)
     }
 
     handleDelete = () => {
@@ -212,5 +212,6 @@ FleetsList.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeItemList: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    changeCurrentItem: PropTypes.func.isRequired
 }

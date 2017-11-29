@@ -67,5 +67,7 @@ Fleets.propTypes = {
     onNavigate: PropTypes.func.isRequired,
     changeItemList: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    actionList: PropTypes.string
+    actionList: PropTypes.string,
+    currentItem: PropTypes.object,
+    changeCurrentItem: PropTypes.func.isRequired
 }

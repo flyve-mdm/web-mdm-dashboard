@@ -115,6 +115,7 @@ FleetsPage.propTypes = {
     ]),
     itemList: PropTypes.object.isRequired,
     actionList: PropTypes.string,
-    changeItemList: PropTypes.func,
-    changeActionList: PropTypes.func
+    changeItemList: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired,
+    onNavigate: PropTypes.func.isRequired
 }
