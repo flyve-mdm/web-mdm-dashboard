@@ -5,6 +5,19 @@ import ApplicationsPage from './ApplicationsPage'
 
 export default class Applications extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectionMode: false
+        }
+    }
+
+    changeSelectionMode = (selectionMode) => {
+        this.setState({
+            selectionMode
+        })
+    }
+
     render() {
 
         let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
@@ -16,6 +29,9 @@ export default class Applications extends Component {
                     location={this.props.location}
                     sort={this.props.sort}
                     itemList={this.props.itemList}
+                    changeSelectionMode={this.changeSelectionMode}
+                    selectionMode={this.state.selectionMode}
+                    actionList={this.props.actionList}
                     onNavigate={this.props.onNavigate}
                     changeItemList={this.props.changeItemList}
                     changeActionList={this.props.changeActionList} />
@@ -25,7 +41,9 @@ export default class Applications extends Component {
                     location={this.props.location}
                     itemList={this.props.itemList}
                     actionList={this.props.actionList}
+                    changeSelectionMode={this.changeSelectionMode}
                     changeItemList={this.props.changeItemList}
+                    onNavigate={this.props.onNavigate}
                     changeActionList={this.props.changeActionList} />
             }
         } else {
@@ -36,6 +54,9 @@ export default class Applications extends Component {
                         itemListPaneWidth={itemListPaneWidth}
                         location={this.props.location}
                         sort={this.props.sort}
+                        changeSelectionMode={this.changeSelectionMode}
+                        selectionMode={this.state.selectionMode}
+                        actionList={this.props.actionList}
                         itemList={this.props.itemList}
                         onNavigate={this.props.onNavigate}
                         changeItemList={this.props.changeItemList}
@@ -45,7 +66,9 @@ export default class Applications extends Component {
                         location={this.props.location}
                         itemList={this.props.itemList}
                         actionList={this.props.actionList}
+                        changeSelectionMode={this.changeSelectionMode}
                         changeItemList={this.props.changeItemList}
+                        onNavigate={this.props.onNavigate}
                         changeActionList={this.props.changeActionList} />
                 </div>
             )
@@ -54,7 +77,7 @@ export default class Applications extends Component {
 }
 Applications.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
-    sort: PropTypes.bool.isRequired,
+    sort: PropTypes.bool,
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
