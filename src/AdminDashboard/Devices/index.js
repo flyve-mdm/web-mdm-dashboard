@@ -23,6 +23,8 @@ export default class Devices extends Component {
                     selectedIndex={selectedIndex}
                     location={this.props.location}
                     itemList={this.props.itemList}
+                    onNavigate={this.props.onNavigate}
+                    changeItemList={this.props.changeItemList} 
                     actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} />
             }
@@ -43,6 +45,8 @@ export default class Devices extends Component {
                         location={this.props.location}
                         itemList={this.props.itemList}
                         actionList={this.props.actionList}
+                        changeItemList={this.props.changeItemList} 
+                        onNavigate={this.props.onNavigate}
                         changeActionList={this.props.changeActionList} />
                 </div>
             )
@@ -51,7 +55,7 @@ export default class Devices extends Component {
 }
 Devices.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
-    sort: PropTypes.bool.isRequired,
+    sort: PropTypes.bool,
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,

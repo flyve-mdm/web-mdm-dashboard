@@ -32,6 +32,17 @@ export default class DevicesList extends Component {
         )
     })
 
+    handleEdit = (eventObject) => {
+        let index = this.state.selectedItemList
+        let button = eventObject.currentTarget.winControl
+
+        this.setState({ editMode: true })
+        setTimeout(() => {
+            this.props.changeActionList(button.label)
+            this.props.onNavigate(index.length > 0 && this.state.selectionMode ? [this.props.location[0], index] : this.props.location)
+        }, 0)
+    }
+
     handlePanel = (eventObject) => {
         let button = eventObject.currentTarget.winControl
         this.refs.listView.winControl.selection.clear()
@@ -51,12 +62,17 @@ export default class DevicesList extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        setTimeout(() => {
-            if(index.length !== 0) this.props.changeActionList(null)
-            
-            this.setState({ selectedItemList: index })
-            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
-        }, 0)
+        this.setState({ selectedItemList: index })
+        
+        if(!this.state.editMode) {
+            setTimeout(() => {
+                if(index.length !== 0) {
+                    this.props.changeActionList(null)
+                }
+                
+                this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
+            }, 0)
+        }
         
     }
 
@@ -113,6 +129,17 @@ export default class DevicesList extends Component {
             />
         )
 
+        let editCommand = (
+            <ReactWinJS.ToolBar.Button
+                key="edit"
+                icon="edit"
+                label="Edit"
+                priority={0}
+                disabled={this.state.selectedItemList.length === 0}
+                onClick={this.handleEdit}
+            />
+        )
+
         return (
             <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ToolBar className="listToolBar">
@@ -138,6 +165,7 @@ export default class DevicesList extends Component {
                         onClick={this.handlePanel}
                     />
 
+                    {this.state.selectionMode ? editCommand : null}
                     {this.state.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
@@ -173,7 +201,7 @@ DevicesList.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    sort: PropTypes.bool.isRequired,
+    sort: PropTypes.bool,
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
