@@ -30,7 +30,7 @@ $list-item-icon-size: 48px;
         margin: 0;
         padding: 0;
     }
-    
+
     .contentPane {
         overflow: auto;
     }
@@ -115,17 +115,18 @@ $list-item-icon-size: 48px;
                     $white-color-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    font-weight: 400;
                 }
 
                 .name {
-                    font-size: 15px;
-                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 22px;
                 }
 
                 .detail {
                     color: $text-detail-color;
-                    font-size: 15px;
-                    font-weight: 200;
+                    font-size: 13px;
+                    line-height: 16px;
                 }
             }
             
@@ -177,9 +178,9 @@ $list-item-icon-size: 48px;
             padding-bottom: 10px;
 
             .name {
-                vertical-align: top;
-                display: inline-block;
                 font-size: 24px;
+                line-height: 28px;
+                font-weight: 300;
                 padding-top: 6px;
             }
 
@@ -191,19 +192,18 @@ $list-item-icon-size: 48px;
                     margin-left:20px;
                     margin-top:10px;
 
-                    .name {
-                        font-size: 14px;
-                        font-weight: 300;
-                    }
-
                     .message {
-                        font-size: 14px;
+                        font-size: 15px;
+                        line-height: 20px;
+                        font-weight: 500;
                     }
 
                     .source {
                         display:block;
                         color: $text-detail-color;
                         font-size: 13px;
+                        line-height: 16px;
+                        font-weight: 400;
                     }
                 }
             }
@@ -231,6 +231,10 @@ $list-item-icon-size: 48px;
                 list-style:none;
                 padding-left: 25px;
                 padding-right: 25px;
+            }
+
+            .title{
+                font-weight: 700;
             }
 
             .phoneIcon, 
@@ -354,18 +358,14 @@ $list-item-icon-size: 48px;
                     text-align: left;
                 }
 
-                .content-text-primary, .content-text-secondary {
-                    font-size: 15px;
-                    letter-spacing: normal;
-                    line-height: 1.33333;
-                }
-
                 .content-text-primary {
-                    font-weight: 300;
+                    font-weight: 700;
                 }
 
                 .content-text-secondary {
-                    font-weight: 300;
+                    font-size: 13px;
+                    line-height: 16px;
+                    font-weight: 400;
                     color: $text-detail-color;
                 }
             }
