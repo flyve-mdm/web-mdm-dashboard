@@ -1,9 +1,9 @@
 import React, { Component } from "react"
-import ReactWinJS from 'react-winjs'
-import FilesItemList from './FilesItemList'
 import PropTypes from 'prop-types'
+import ReactWinJS from 'react-winjs'
+import WinJS from 'winjs'
+import FilesItemList from './FilesItemList'
 import ItemList from '../ItemList'
-let WinJS = require('winjs')
 
 export default class FilesList extends Component {
 
@@ -11,13 +11,13 @@ export default class FilesList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItemList: [],
-            selectionMode: false
+            selectedItemList: []
         }
     }
 
     componentWillUnmount() {
-        this.setState({ selectionMode: false, selectedItemList: [] })
+        this.setState({ selectedItemList: [] })
+        this.props.changeSelectionMode(false)
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
@@ -33,7 +33,7 @@ export default class FilesList extends Component {
     })
 
     handleToggleSelectionMode = () => {
-        this.setState({ selectionMode: !this.state.selectionMode })
+        this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.onNavigate([this.props.location[0],null])
         this.refs.listView.winControl.selection.clear()
     }
@@ -41,10 +41,10 @@ export default class FilesList extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        setTimeout(function () {
-            this.setState({ selectedItemList: index });
-            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
-        }.bind(this), 0)
+        setTimeout(() => {
+            this.setState({ selectedItemList: index })
+            this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
+        }, 0)
     }
 
     handleContentAnimating(eventObject) {
@@ -54,15 +54,25 @@ export default class FilesList extends Component {
         }
     }
 
+    handleEdit = (eventObject) => {
+        let index = this.state.selectedItemList
+        let button = eventObject.currentTarget.winControl
+
+        setTimeout(() => {
+            this.props.changeActionList(button.label)
+            this.props.onNavigate(index.length > 0 && this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
+        }, 0)
+    }
+
     handleAdd = (eventObject) => {
         let button = eventObject.currentTarget.winControl
         this.refs.listView.winControl.selection.clear()
 
-        setTimeout(function () {
-            this.setState({ selectionMode: false })
+        setTimeout(() => {
+            this.props.changeSelectionMode(false)
             this.props.changeActionList(button.label)
             this.props.onNavigate([this.props.location[0]])
-        }.bind(this), 0)
+        }, 0)
     }
 
     handleDelete = () => {
@@ -74,9 +84,9 @@ export default class FilesList extends Component {
             item.splice(i, 1)
         })
         this.setState({
-            selectedItem: [],
-            selectionMode: false
+            selectedItem: []
         })
+        this.props.changeSelectionMode(false)
         this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
     }
 
@@ -84,17 +94,17 @@ export default class FilesList extends Component {
         let array = []
         this.props.itemList.map((value, index) =>
             array.push(value)
-        );
+        )
         this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.sort), sort: !this.props.sort })
     }
 
     descendingCompare(first, second) {
         if (first === second)
-            return 0;
+            return 0
         else if (first < second)
-            return 1;
+            return 1
         else
-            return -1;
+            return -1
     }
 
     render() {
@@ -105,6 +115,17 @@ export default class FilesList extends Component {
                 priority={0}
                 disabled={this.state.selectedItemList.length === 0}
                 onClick={this.handleDelete}
+            />
+        )
+
+        let editCommand = (
+            <ReactWinJS.ToolBar.Button
+                key="edit"
+                icon="edit"
+                label="Edit"
+                priority={0}
+                disabled={this.state.selectedItemList.length === 0}
+                onClick={this.handleEdit}
             />
         )
 
@@ -133,14 +154,15 @@ export default class FilesList extends Component {
                         onClick={this.handleAdd}
                     />
 
-                    {this.state.selectionMode ? deleteCommand : null}
+                    {this.props.selectionMode ? editCommand : null}
+                    {this.props.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
                         icon="bullets"
                         label="Select"
                         priority={0}
-                        selected={this.state.selectionMode}
+                        selected={this.props.selectionMode}
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
@@ -152,8 +174,8 @@ export default class FilesList extends Component {
                     itemDataSource={this.props.itemList.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
-                    selectionMode={this.state.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
+                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
                     onContentAnimating={this.handleContentAnimating}
                 />
@@ -166,7 +188,7 @@ FilesList.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    sort: PropTypes.bool.isRequired,
+    sort: PropTypes.bool,
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
