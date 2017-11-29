@@ -29,7 +29,8 @@ export default class FleetsContent extends Component {
             'PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype': this.state.list
         }
         const newList = itemList.map(item => item === this.props.currentItem ? newCurrentItem : item)
-        this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], newList) })
+        this.props.changeActionList(null)
+        this.props.changeItemList([this.props.location[0]], { itemList: ItemList(this.props.location[0], newList) })
     }
 
     deletePolicy = (policy) => {
