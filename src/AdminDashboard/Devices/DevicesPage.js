@@ -67,13 +67,13 @@ export default class DevicesPage extends Component {
                         <ul>
                             <li>
                                 <div className="callContent">
-                                    <div>Version</div>
+                                    <div className="title">Version</div>
                                     <div>{ selectedItemList["PluginFlyvemdmAgent.version"] }</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="callContent">
-                                    <div>Fleets</div>
+                                    <div className="title">Fleets</div>
                                     <div>{ selectedItemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"] }</div>
                                 </div>
                             </li>

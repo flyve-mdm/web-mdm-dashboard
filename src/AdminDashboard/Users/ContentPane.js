@@ -50,7 +50,7 @@ class ContentPane extends Component {
                             <div className="itemInfo">
                                 <IconItemList backgroundUrl={selectedItemList['User.picture']} size={100} />
                                 <div className="contentStatus">
-                                    <div className="message">
+                                    <div className="name">
                                         <b>
                                             {selectedItemList['User.name']}
                                         </b>
