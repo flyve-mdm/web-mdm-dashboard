@@ -11,13 +11,13 @@ export default class DevicesList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItemList: [],
-            selectionMode: false
+            selectedItemList: []
         }
     }
 
     componentWillUnmount() {
-        this.setState({ selectionMode: false, selectedItemList: [] })
+        this.setState({ selectedItemList: [] })
+        this.props.changeSelectionMode(false)
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
@@ -36,10 +36,9 @@ export default class DevicesList extends Component {
         let index = this.state.selectedItemList
         let button = eventObject.currentTarget.winControl
 
-        this.setState({ editMode: true })
         setTimeout(() => {
             this.props.changeActionList(button.label)
-            this.props.onNavigate(index.length > 0 && this.state.selectionMode ? [this.props.location[0], index] : this.props.location)
+            this.props.onNavigate(index.length > 0 && this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
         }, 0)
     }
 
@@ -47,13 +46,13 @@ export default class DevicesList extends Component {
         let button = eventObject.currentTarget.winControl
         this.refs.listView.winControl.selection.clear()
 
-        this.setState({ selectionMode: false })
+        this.props.changeSelectionMode(false)
         this.props.changeActionList(button.label)
         this.props.onNavigate([this.props.location[0]])
     }
 
     handleToggleSelectionMode = () => {
-        this.setState({ selectionMode: !this.state.selectionMode })
+        this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
         this.refs.listView.winControl.selection.clear()
@@ -64,13 +63,13 @@ export default class DevicesList extends Component {
         let index = listView.selection.getIndices()
         this.setState({ selectedItemList: index })
         
-        if(!this.state.editMode) {
+        if(this.props.actionList !== 'Edit') {
             setTimeout(() => {
                 if(index.length !== 0) {
                     this.props.changeActionList(null)
                 }
                 
-                this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
+                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
             }, 0)
         }
         
@@ -92,9 +91,9 @@ export default class DevicesList extends Component {
             item.splice(i, 1)
         })
         this.setState({
-            selectedItem: [],
-            selectionMode: false
+            selectedItem: []
         })
+        this.props.changeSelectionMode(false)        
         this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
     }
 
@@ -165,15 +164,15 @@ export default class DevicesList extends Component {
                         onClick={this.handlePanel}
                     />
 
-                    {this.state.selectionMode ? editCommand : null}
-                    {this.state.selectionMode ? deleteCommand : null}
+                    {this.props.selectionMode ? editCommand : null}
+                    {this.props.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
                         icon="bullets"
                         label="Select"
                         priority={0}
-                        selected={this.state.selectionMode}
+                        selected={this.props.selectionMode}
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
@@ -187,8 +186,8 @@ export default class DevicesList extends Component {
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
                     groupHeaderTemplate={this.groupHeaderRenderer}
-                    selectionMode={this.state.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
+                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
                     onContentAnimating={this.handleContentAnimating}
                 />
@@ -206,5 +205,8 @@ DevicesList.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeItemList: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    selectionMode: PropTypes.bool.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
+    actionList: PropTypes.string
 }

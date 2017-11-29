@@ -41,6 +41,7 @@ export default class DevicesEdit extends Component {
 
     handleSaveDevices = () => {
 
+        this.props.changeSelectionMode(false)
         this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
         this.props.changeItemList([this.props.location[0]], { itemList: ItemList(this.props.location[0], this.state.itemListArray) })
@@ -105,7 +106,8 @@ DevicesEdit.propTypes = {
     actionList: PropTypes.string,
     changeItemList: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    onNavigate: PropTypes.func.isRequired
-
+    onNavigate: PropTypes.func.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired
+    
     // location= PropTypes.
 }

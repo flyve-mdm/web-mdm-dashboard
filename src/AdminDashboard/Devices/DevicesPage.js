@@ -27,6 +27,7 @@ export default class DevicesPage extends Component {
                             location={this.props.location}
                             itemList={this.props.itemList}
                             changeItemList={this.props.changeItemList}
+                            changeSelectionMode={this.props.changeSelectionMode}
                             changeActionList={this.props.changeActionList} />
                         )
                     case "Add":
@@ -46,9 +47,6 @@ export default class DevicesPage extends Component {
                 }
             }
         } else {
-            console.log(this.props.itemList)
-            console.log(this.props.selectedIndex)
-            console.log(this.props.itemList.getAt(this.props.selectedIndex))
             const selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
             if(selectedItemList !== undefined) {
                 return (
@@ -113,5 +111,6 @@ DevicesPage.propTypes = {
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired
+    changeItemList: PropTypes.func.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired
 }

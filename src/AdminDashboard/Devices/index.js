@@ -5,6 +5,19 @@ import DevicesPage from './DevicesPage'
 
 export default class Devices extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectionMode: false
+        }
+    }
+
+    changeSelectionMode = (selectionMode) => {
+        this.setState({
+            selectionMode
+        })
+    }
+
     render() {
 
         let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
@@ -16,7 +29,10 @@ export default class Devices extends Component {
                     sort={this.props.sort}
                     itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
-                    changeItemList={this.props.changeItemList} 
+                    changeItemList={this.props.changeItemList}
+                    changeSelectionMode={this.changeSelectionMode}
+                    selectionMode={this.state.selectionMode}
+                    actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} />
             } else {
                 return <DevicesPage itemListPaneWidth={0}
@@ -25,6 +41,7 @@ export default class Devices extends Component {
                     itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
                     changeItemList={this.props.changeItemList} 
+                    changeSelectionMode={this.changeSelectionMode}
                     actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} />
             }
@@ -38,7 +55,10 @@ export default class Devices extends Component {
                         sort={this.props.sort}
                         itemList={this.props.itemList}
                         onNavigate={this.props.onNavigate}
+                        changeSelectionMode={this.changeSelectionMode}
                         changeItemList={this.props.changeItemList} 
+                        selectionMode={this.state.selectionMode}
+                        actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} />
                     <DevicesPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
@@ -46,6 +66,7 @@ export default class Devices extends Component {
                         itemList={this.props.itemList}
                         actionList={this.props.actionList}
                         changeItemList={this.props.changeItemList} 
+                        changeSelectionMode={this.changeSelectionMode}
                         onNavigate={this.props.onNavigate}
                         changeActionList={this.props.changeActionList} />
                 </div>
