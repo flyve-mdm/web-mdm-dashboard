@@ -52,7 +52,7 @@ class ContentPane extends Component {
                                 <div className="contentStatus">
                                     <div className="name">
                                         <b>
-                                            {selectedItemList['User.name']}
+                                            {selectedItemList['User.realname']}
                                         </b>
                                     </div>
                                     <span className="message">

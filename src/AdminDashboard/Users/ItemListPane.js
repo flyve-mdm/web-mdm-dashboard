@@ -22,7 +22,7 @@ class ItemListPane extends Component {
             <div>
                 <IconItemList backgroundUrl={ItemList.data['User.picture']} size={42} />
                 <div style={{ display: 'inline-block'}}>
-                    <div className="name">{ItemList.data['User.name']}</div>
+                    <div className="name">{ItemList.data['User.realname']}</div>
                     <div className="detail">{ItemList.data['User.UserEmail.email']}</div>
                 </div>
             </div>
