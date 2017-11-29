@@ -1,17 +1,24 @@
 {
-  "totalcount": 25,
-  "count": 25,
+  "totalcount": 6,
+  "count": 6,
   "sort": 1,
   "order": "ASC",
   "data": [
-      {
-          "PluginFlyvemdmFleet.name": "another one",
-          "PluginFlyvemdmFleet.id": 24,
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
+    {
+        "PluginFlyvemdmFleet.name": "Not managed fleet",
+        "PluginFlyvemdmFleet.id": 1,
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+        "PluginFlyvemdmFleet.is_default": 1
+    },
+    {
+        "PluginFlyvemdmFleet.name": "Peripherals",
+        "PluginFlyvemdmFleet.id": 24,
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
             20,
             28
-          ],
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
+        ],
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
             {
                 "PluginFlyvemdmPolicy.name": "Disable GPS",
                 "PluginFlyvemdmPolicy.id": 20,
@@ -32,17 +39,17 @@
                 "PluginFlyvemdmPolicy.default_value": 0,
                 "PluginFlyvemdmPolicy.recommended_value": 0
             }
-          ],
-          "PluginFlyvemdmFleet.is_default": 0
-      },
-      {
-          "PluginFlyvemdmFleet.name": "Blue",
-          "PluginFlyvemdmFleet.id": 28,
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
+        ],
+        "PluginFlyvemdmFleet.is_default": 0
+    },
+    {
+        "PluginFlyvemdmFleet.name": "Connectivity",
+        "PluginFlyvemdmFleet.id": 28,
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
             18,
             11
-          ],
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
+        ],
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
             {
                 "PluginFlyvemdmPolicy.name": "Disable Wifi",
                 "PluginFlyvemdmPolicy.id": 18,
@@ -63,16 +70,16 @@
                 "PluginFlyvemdmPolicy.default_value": 60000,
                 "PluginFlyvemdmPolicy.recommended_value": 60000
             }
-          ],
-          "PluginFlyvemdmFleet.is_default": 0
-      },
-      {
-          "PluginFlyvemdmFleet.name": "new policies",
-          "PluginFlyvemdmFleet.id": 22,
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
+        ],
+        "PluginFlyvemdmFleet.is_default": 0
+    },
+    {
+        "PluginFlyvemdmFleet.name": "Deploy apps",
+        "PluginFlyvemdmFleet.id": 22,
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": [
             14
-          ],
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
+        ],
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": [
             {
                 "PluginFlyvemdmPolicy.name": "Deploy application",
                 "PluginFlyvemdmPolicy.id": 14,
@@ -83,30 +90,23 @@
                 "PluginFlyvemdmPolicy.default_value": "",
                 "PluginFlyvemdmPolicy.recommended_value": ""
             }
-          ],
-          "PluginFlyvemdmFleet.is_default": 0
-      },
-      {
-          "PluginFlyvemdmFleet.name": "not managed fleet",
-          "PluginFlyvemdmFleet.id": 1,
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-          "PluginFlyvemdmFleet.is_default": 1
-      },
-      {
-          "PluginFlyvemdmFleet.name": "Password",
-          "PluginFlyvemdmFleet.id": 25,
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-          "PluginFlyvemdmFleet.is_default": 0
-      },
-      {
-          "PluginFlyvemdmFleet.name": "Test",
-          "PluginFlyvemdmFleet.id": 29,
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
-          "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
-          "PluginFlyvemdmFleet.is_default": 0
-      }
-  ],
-  "content-range": "0-24/25"
+        ],
+        "PluginFlyvemdmFleet.is_default": 0
+    },
+    {
+        "PluginFlyvemdmFleet.name": "Security IT",
+        "PluginFlyvemdmFleet.id": 25,
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+        "PluginFlyvemdmFleet.is_default": 0
+    },
+    {
+        "PluginFlyvemdmFleet.name": "Test IT policies",
+        "PluginFlyvemdmFleet.id": 29,
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
+        "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
+        "PluginFlyvemdmFleet.is_default": 0
+    }
+],
+"content-range": "0-5/6"
 }
