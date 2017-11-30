@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import DevicesEditItemList from './DevicesEditItemList'
 import ItemList from '../ItemList'
+import EmptyMessage from '../../Utils/EmptyMessage'
 
 export default class DevicesEdit extends Component {
 
@@ -84,11 +85,7 @@ export default class DevicesEdit extends Component {
             
         } else {
             return (
-                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                    <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                        <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
-                    </div>
-                </div>
+                <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
             )
         }
     }
