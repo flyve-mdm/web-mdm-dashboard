@@ -21,17 +21,19 @@ export default class FleetsContent extends Component {
     }
 
     savePolicies = () => {
-        const itemList = this.props.itemList.map((item) => item)
-        const items_id = this.state.list.map((item) => item['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'])
-        const newCurrentItem = {
-            ...this.props.currentItem,
-            'PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id': items_id,
-            'PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype': this.state.list
+        if (this.props.itemList) {
+            const itemList = this.props.itemList.map((item) => item)
+            const items_id = this.state.list.map((item) => item['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'])
+            const newCurrentItem = {
+                ...this.props.currentItem,
+                'PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id': items_id,
+                'PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype': this.state.list
+            }
+            const newList = itemList.map(item => item === this.props.currentItem ? newCurrentItem : item)
+            this.props.changeActionList(null)
+            this.props.onNavigate([this.props.location[0]])
+            this.props.changeItemList([this.props.location[0]], { itemList: ItemList(this.props.location[0], newList) })
         }
-        const newList = itemList.map(item => item === this.props.currentItem ? newCurrentItem : item)
-        this.props.changeActionList(null)
-        this.props.onNavigate([this.props.location[0]])
-        this.props.changeItemList([this.props.location[0]], { itemList: ItemList(this.props.location[0], newList) })
     }
 
     deletePolicy = (policy) => {
