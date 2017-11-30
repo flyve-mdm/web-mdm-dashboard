@@ -4,6 +4,7 @@ import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import IconItemList from '../IconItemList'
 import Enroll from './Enroll'
 import DevicesEdit from './DevicesEdit'
+import EmptyMessage from '../../Utils/EmptyMessage'
 
 export default class DevicesPage extends Component {
 
@@ -11,11 +12,7 @@ export default class DevicesPage extends Component {
         if (this.props.selectedIndex === null || this.props.actionList === 'Edit') {
             if(this.props.actionList === null) {
                 return (
-                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                        <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                            <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
-                        </div>
-                    </div>
+                    <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
                 )
             } else {
                 switch (this.props.actionList) {
@@ -38,11 +35,7 @@ export default class DevicesPage extends Component {
                         )
                     default: 
                         return (
-                            <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                                <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                                    <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
-                                </div>
-                            </div>
+                            <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
                         )
                 }
             }
@@ -88,11 +81,7 @@ export default class DevicesPage extends Component {
                 )
             } else {
                 return (
-                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                        <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                            <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
-                        </div>
-                    </div>
+                    <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
                 )
             }
         }

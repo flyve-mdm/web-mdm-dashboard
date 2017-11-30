@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import ReactWinJS from 'react-winjs'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
-let WinJS = require('winjs')
+import WinJS from 'winjs'
+import EmptyMessage from '../../Utils/EmptyMessage'
 
 export default class SettingsPage extends Component {
 
@@ -58,11 +58,7 @@ export default class SettingsPage extends Component {
 
     renderContentPane(selectedIndex, ItemListPaneWidth) {
         return (
-            <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(ItemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
-                <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                    <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
-                </div>
-            </div>
+            <EmptyMessage message="No Selection" itemListPaneWidth={ItemListPaneWidth} />
         )
     }
 

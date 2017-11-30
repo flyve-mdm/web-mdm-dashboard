@@ -8,6 +8,7 @@ import TermsOfUse from './TermsOfUse'
 import SystemInformation from './SystemInformation'
 import Overview from './Overview'
 import Contact from './Contact'
+import EmptyMessage from '../../Utils/EmptyMessage'
 import HelpCenterList from './HelpCenterList'
 
 export default class AboutPage extends Component {
@@ -15,11 +16,7 @@ export default class AboutPage extends Component {
     render() {
         if (this.props.selectedIndex === null) {
             return (
-                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                    <div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                        <h1 className="win-h1" style={{ color: 'grey' }}>No Selection</h1>
-                    </div>
-                </div>
+                <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
             )
         } else {
             let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
