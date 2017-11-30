@@ -17,10 +17,11 @@ class ItemListPane extends Component {
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
+        let imageProfile = ItemList.data['User.picture'] ? ItemList.data['User.picture'] : "profile.png"
         return (
             
             <div>
-                <IconItemList backgroundUrl={ItemList.data['User.picture']} size={42} />
+                <IconItemList image={imageProfile} size={42} />
                 <div style={{ display: 'inline-block'}}>
                     <div className="name">{ItemList.data['User.realname']}</div>
                     <div className="detail">{ItemList.data['User.UserEmail.email']}</div>

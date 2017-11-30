@@ -43,12 +43,13 @@ class ContentPane extends Component {
                 }
             } else {
                 let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
+                let imageProfile = selectedItemList['User.picture'] ? selectedItemList['User.picture'] : "profile.png"
                 return (
                     <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
                         <div className="contentHeader">
                             <h2 className="win-h2" style={{ margin: '20.1px 0' }}> User </h2>
                             <div className="itemInfo">
-                                <IconItemList backgroundUrl={selectedItemList['User.picture']} size={100} />
+                                <IconItemList image={imageProfile} size={100} />
                                 <div className="contentStatus">
                                     <div className="name">
                                         <b>

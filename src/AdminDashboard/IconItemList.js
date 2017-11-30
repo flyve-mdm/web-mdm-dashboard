@@ -18,8 +18,13 @@ export default class IconItemList extends React.Component {
 
             style = {
                 lineHeight: size + 'px',
+                backgroundColor: backgroundColor,
                 width: size,
                 height: size,
+                WebkitBorderRadius: size,
+                MozBorderRadius: size,
+                borderRadius: size,
+                backgroundSize: 'cover',
                 display: 'inline-block'
             }
 
@@ -40,7 +45,7 @@ export default class IconItemList extends React.Component {
 
         return (
             <div className="contentPicture" style={style}>
-                <img src={image} height={size} width={size} alt="" />
+                <img src={image} style={style} alt="" />
             </div>
         )
     }
