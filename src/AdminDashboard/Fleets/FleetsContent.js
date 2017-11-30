@@ -57,7 +57,22 @@ export default class FleetsContent extends Component {
             }
             return element
         })
-        
+
+        this.setState({ list: newArray })
+    }
+
+    editPolicy = (name, value) => {
+        const newArray = this.state.list.map(element => {
+            if (element['PluginFlyvemdmPolicy.id'] === name) {
+                const editElement = { 
+                    ...element,
+                    'PluginFlyvemdmPolicy.default_value': value
+                }
+                return editElement
+            }
+            return element
+        })
+
         this.setState({ list: newArray })
     }
 
@@ -135,7 +150,8 @@ export default class FleetsContent extends Component {
                         key={[item['PluginFlyvemdmPolicy.name'], index].join("_")}
                         data={item} 
                         deletePolicy={this.deletePolicy}
-                        changeInput={this.changeInput} />
+                        changeInput={this.changeInput}
+                        editPolicy={this.editPolicy} />
                 )
             })
         }
