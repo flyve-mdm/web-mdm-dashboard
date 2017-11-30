@@ -8,9 +8,9 @@ export default class FleetsTaskItemList extends Component {
 
         this.state = {
             toggleSelected: true,
-            input: '',
-            applications: null,
-            files: null
+            input: ''
+            // applications: null
+            // files: null
         }
     }
 
@@ -19,12 +19,12 @@ export default class FleetsTaskItemList extends Component {
             if (this.props.data['PluginFlyvemdmPolicy.type'] === "int") {
                 this.setState({ input: this.props.data['PluginFlyvemdmPolicy.default_value'] })
             }
-            if (this.props.data['PluginFlyvemdmPolicy.type'] === "deployapp") {
-                this.setState({ applications: Applications })
-            }
-            if (this.props.data['PluginFlyvemdmPolicy.type'] === "deployfile") {
-                this.setState({ files: Files })
-            }
+            // if (this.props.data['PluginFlyvemdmPolicy.type'] === "deployapp") {
+            //     this.setState({ applications: Applications })
+            // }
+            // if (this.props.data['PluginFlyvemdmPolicy.type'] === "deployfile") {
+            //     this.setState({ files: Files })
+            // }
         }
     }
 
@@ -92,9 +92,9 @@ export default class FleetsTaskItemList extends Component {
                                     style={{ width: '80px'}}
                                     className="win-textbox" 
                                     placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
-                                    name="input"
-                                    value={this.state.input}
-                                    onChange={this.changeInput}
+                                    name={this.props.data['PluginFlyvemdmPolicy.id']}
+                                    value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                    onChange={this.props.changeInput}
                                     required
                                     />
                                 </div>
