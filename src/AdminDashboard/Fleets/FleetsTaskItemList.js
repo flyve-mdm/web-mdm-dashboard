@@ -85,11 +85,17 @@ export default class FleetsTaskItemList extends Component {
                             <div className='files-list-item'>
                                 <div className='item-content-primary'>
                                     <div className='content-text-primary'>{this.props.data['PluginFlyvemdmPolicy.name']}</div>
-                                    <select className="win-dropdown">
+                                    <select 
+                                    className="win-dropdown" 
+                                    name={this.props.data['PluginFlyvemdmPolicy.id']} 
+                                    value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                    onChange={this.props.changeInput}>
                                         <option>Select an application</option>
                                         {
                                             Applications.map((value, index) =>
-                                                <option key={index}>{value["PluginFlyvemdmPackage.alias"]}</option>
+                                                <option key={index} value={value["PluginFlyvemdmPackage.alias"]}>
+                                                    {value["PluginFlyvemdmPackage.alias"]}
+                                                </option>
                                             )
                                         }
                                     </select>
@@ -110,11 +116,17 @@ export default class FleetsTaskItemList extends Component {
                             <div className='files-list-item'>
                                 <div className='item-content-primary'>
                                     <div className='content-text-primary'>{this.props.data['PluginFlyvemdmPolicy.name']}</div>
-                                    <select className="win-dropdown">
+                                    <select 
+                                    className="win-dropdown" 
+                                    name={this.props.data['PluginFlyvemdmPolicy.id']} 
+                                    value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                    onChange={this.props.changeInput}>
                                         <option>Select a file</option>
                                         {
                                             Files.map((value, index) =>
-                                                <option key={index}>{value["PluginFlyvemdmFile.name"]}</option>
+                                                <option key={index} value={value["PluginFlyvemdmFile.name"]}>
+                                                    {value["PluginFlyvemdmFile.name"]}
+                                                </option>
                                             )
                                         }
                                     </select>

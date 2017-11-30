@@ -21,7 +21,7 @@ export default class FleetsContent extends Component {
     }
 
     savePolicies = () => {
-        if (this.props.itemList) {
+        if (this.props.itemList && this.state.list) {
             const itemList = this.props.itemList.map((item) => item)
             const items_id = this.state.list.map((item) => item['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'])
             const newCurrentItem = {
@@ -100,6 +100,7 @@ export default class FleetsContent extends Component {
     }
 
     handleQuerySubmitted = (eventObject) => {
+        if (!this.state.list) this.setState({ list: []})
         let isValid = true
         this.state.list.forEach(policy => {
             if (policy['PluginFlyvemdmPolicy.name'] === eventObject.detail.queryText) isValid = false
