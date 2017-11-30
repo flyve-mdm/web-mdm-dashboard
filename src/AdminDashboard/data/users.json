@@ -50,7 +50,7 @@
             "User.Location.comment": null,
             "User.date_creation": "2017-11-02 04:45:01",
             "User.Link_Itemtype.Link._virtual": null,
-            "User.picture": "24/221_5a084effc6624.jpg"
+            "User.picture": "profile/221_5a084effc6624.jpg"
         },
         {
             "User.name": "jperez",
@@ -134,7 +134,7 @@
             "User.Location.comment": null,
             "User.date_creation": "2017-10-10 16:19:03",
             "User.Link_Itemtype.Link._virtual": null,
-            "User.picture": null
+            "User.picture": "profile/222_5a084effc6624.jpg"
         },
         {
             "User.name": "gmanganiello",
@@ -176,7 +176,7 @@
             "User.Location.comment": null,
             "User.date_creation": "2017-10-10 16:19:07",
             "User.Link_Itemtype.Link._virtual": null,
-            "User.picture": null
+            "User.picture": "profile/223_5a084effc6624.jpg"
         },
         {
             "User.name": "glpi",
@@ -218,7 +218,7 @@
             "User.Location.comment": null,
             "User.date_creation": null,
             "User.Link_Itemtype.Link._virtual": null,
-            "User.picture": "ef/2_5a084ec9dd7ef.png"
+            "User.picture": "profile/2_5a084ec9dd7ef.png"
         },
         {
             "User.name": "hrondon",
@@ -260,7 +260,7 @@
             "User.Location.comment": null,
             "User.date_creation": "2017-06-23 14:35:29",
             "User.Link_Itemtype.Link._virtual": null,
-            "User.picture": null
+            "User.picture": "profile/224_5a084effc6624.jpg"
         },
         {
             "User.name": "juperez",
@@ -305,11 +305,11 @@
             "User.picture": null
         },
         {
-            "User.name": "ontact",
+            "User.name": "nmedina",
             "User.id": 28,
             "User.Location.completename": null,
             "User.UserEmail.email": [
-                "ontact@chatbots.email"
+                "nmedina@teclib.com"
             ],
             "User.phone": null,
             "User.is_active": 1,
@@ -329,7 +329,7 @@
             "User.is_deleted_ldap": 0,
             "User.AuthLDAP.name": null,
             "User.AuthMail.name": null,
-            "User.realname": "Bot Chat",
+            "User.realname": "Naylin Medina",
             "User.Ticket_User.Ticket.id": 0,
             "User.Ticket.id": 0,
             "User.begin_date": null,
@@ -344,7 +344,7 @@
             "User.Location.comment": null,
             "User.date_creation": "2017-06-27 21:22:40",
             "User.Link_Itemtype.Link._virtual": null,
-            "User.picture": null
+            "User.picture": "profile/227_5a084effc6624.jpg"
         },
         {
             "User.name": "post-only",
@@ -428,7 +428,7 @@
             "User.Location.comment": null,
             "User.date_creation": "2017-06-23 14:33:09",
             "User.Link_Itemtype.Link._virtual": null,
-            "User.picture": null
+            "User.picture": "profile/225_5a084effc6624.jpg"
         },
         {
             "User.name": "tech",
@@ -512,7 +512,7 @@
             "User.Location.comment": null,
             "User.date_creation": null,
             "User.Link_Itemtype.Link._virtual": null,
-            "User.picture": null
+            "User.picture": "profile/226_5a084effc6624.jpg"
         }
     ],
     "content-range": "0-23/24"
