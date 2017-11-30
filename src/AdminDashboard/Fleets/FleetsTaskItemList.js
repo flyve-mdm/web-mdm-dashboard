@@ -3,39 +3,6 @@ import ReactWinJS from 'react-winjs'
 import { Applications, Files } from '../Data'
 export default class FleetsTaskItemList extends Component {
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            toggleSelected: true,
-            input: ''
-            // applications: null
-            // files: null
-        }
-    }
-
-    componentDidMount() {
-        if(this.props.data !== undefined) {
-            if (this.props.data['PluginFlyvemdmPolicy.type'] === "int") {
-                this.setState({ input: this.props.data['PluginFlyvemdmPolicy.default_value'] })
-            }
-            // if (this.props.data['PluginFlyvemdmPolicy.type'] === "deployapp") {
-            //     this.setState({ applications: Applications })
-            // }
-            // if (this.props.data['PluginFlyvemdmPolicy.type'] === "deployfile") {
-            //     this.setState({ files: Files })
-            // }
-        }
-    }
-
-    handleToggle = () => {
-        this.setState({ toggleSelected: !this.state.toggleSelected })
-    }
-
-    changeInput = (e) => {
-        this.setState({input: e.target.value})
-    }
-
     render() {
         if(this.props.data === undefined) {
             return (   
@@ -58,6 +25,10 @@ export default class FleetsTaskItemList extends Component {
             switch (this.props.data["PluginFlyvemdmPolicy.type"]) {
                 
                 case "bool":
+                let value = this.props.data['PluginFlyvemdmPolicy.default_value']
+                if(typeof(value) !== "boolean") {
+                    value = true
+                }
                 return (
                     <div className='files-list' >
                         <div className='files-list-content'>
@@ -66,8 +37,8 @@ export default class FleetsTaskItemList extends Component {
                                     <div className='content-text-primary'>{this.props.data['PluginFlyvemdmPolicy.name']}</div>
                                     <ReactWinJS.ToggleSwitch 
                                     className="content-text-primary"
-                                    checked={this.state.toggleSelected}
-                                    onChange={this.handleToggle}
+                                    checked={value}
+                                    onChange={() => this.props.editPolicy(this.props.data['PluginFlyvemdmPolicy.id'], !value)}
                                     labelOn="On"
                                     labelOff="Off" />
                                 </div>
