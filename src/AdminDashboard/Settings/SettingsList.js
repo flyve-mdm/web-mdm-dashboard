@@ -8,13 +8,6 @@ class SettingsList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            list: new WinJS.Binding.List([
-                { title: "Entity" },
-                { title: "Profiles" },
-                { title: "Security" },
-                { title: "Notifications" },
-                { title: "Display" }
-            ]),
             layout: { type: WinJS.UI.ListLayout }
         }
     }
@@ -37,7 +30,7 @@ class SettingsList extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let indices = listView.selection.getIndices()
-        this.props.onNavigate([this.props.location, indices[0]])
+        this.props.onNavigate(['Settings', indices[0]])
     }
     
     render () {
@@ -47,7 +40,7 @@ class SettingsList extends Component {
                     ref="listView"
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.state.list.dataSource}
+                    itemDataSource={this.props.itemList.dataSource}
                     itemTemplate={this.itemRenderer}
                     layout={this.state.layout}
                     selectionMode="single"
@@ -61,11 +54,13 @@ class SettingsList extends Component {
 }
 
 SettingsList.propTypes = {
-    onNavigate: PropTypes.func.isRequired,
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ]).isRequired
+    ]).isRequired,
+    onNavigate: PropTypes.func.isRequired,
+    location: PropTypes.array.isRequired,
+    itemList: PropTypes.object.isRequired
 }
 
 export default SettingsList
