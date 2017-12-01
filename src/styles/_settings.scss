@@ -1,3 +1,59 @@
 .settings {
     
+    h2 {
+        padding: 20px 10px;
+    }
+
+    .title {
+        font-size: 15px;
+        display: inline-block;
+        height: 32px;
+        margin: 20px 0;
+        padding: 0 15px;
+        background-color: $app-color;
+        color: $white-color;
+        text-align: center;
+        line-height: 32px;
+    }
+
+    .listElement {
+        display: block;
+        overflow: auto;
+        width: 100%;
+        
+        .message {
+            display: inline-block;
+            padding: 18px 0px 15px 15px;
+            width: 50%;
+            vertical-align: middle;
+
+            .detail {
+                color: $text-detail-color;
+                font-size: 13px;
+                line-height: 16px;
+            }
+        }
+        .controller {
+            padding: 15px 15px 15px 0;                
+            float: right;
+            display: inline-block;
+            
+            .win-toggleswitch-values {
+                display: none;
+            }
+            .win-toggleswitch-header {
+                margin: 0;
+            }
+
+            button {
+                margin-top: 5px;
+            }
+        }
+    }
+
+    .list-content {
+        .list-col {
+            display: inline-block;
+        }
+    }
 }
