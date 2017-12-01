@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import Reducers from './reducers'
-
+import { createLogger } from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 
@@ -15,7 +15,7 @@ const getMiddleware = () => {
         return applyMiddleware(routerReduxMiddleware)
     } else {
         // Enable additional logging in non-production environments.
-        return applyMiddleware(routerReduxMiddleware)
+        return applyMiddleware(routerReduxMiddleware, createLogger())
     }
 };
 
