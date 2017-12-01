@@ -1,8 +1,9 @@
 import React, { Component } from "react"
 import SettingsList from "./SettingsList"
 import SettingsPage from "./SettingsPage"
+import PropTypes from 'prop-types'
 
-export default class Settings extends Component {
+class Settings extends Component {
 
     render() {
         const selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
@@ -37,3 +38,11 @@ export default class Settings extends Component {
         }
     }
 }
+
+Settings.propTypes = {
+    mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
+    location: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired
+}
+
+export default Settings
