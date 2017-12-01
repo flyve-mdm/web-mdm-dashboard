@@ -15,23 +15,23 @@ class SettingsPage extends Component {
             switch (selectedItemList.title) {
                 case 'Entity':
                     return (
-                        <Entity />
+                        <Entity itemListPaneWidth={this.props.itemListPaneWidth}/>
                     )
                 case 'Profiles':
                     return (
-                        <Profiles />
+                        <Profiles itemListPaneWidth={this.props.itemListPaneWidth}/>
                     )
                 case 'Security':
                     return (
-                        <Security />
+                        <Security itemListPaneWidth={this.props.itemListPaneWidth}/>
                     )
                 case 'Notifications':
                     return (
-                        <Notifications />
+                        <Notifications itemListPaneWidth={this.props.itemListPaneWidth}/>
                     )
                 case 'Display':
                     return (
-                        <Display />
+                        <Display itemListPaneWidth={this.props.itemListPaneWidth}/>
                     )
                 default:
                     return (
