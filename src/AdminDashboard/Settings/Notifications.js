@@ -1,15 +1,56 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import ReactWinJS from 'react-winjs'
+import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
+import PropTypes from 'prop-types'
 
 class Notifications extends Component {
     render () {
         return (
-            <div></div>
+            <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                <h2 className="win-h2"> Notifications </h2>
+
+                <div className="listElement">
+                    <div className="message">
+                        Show notifications
+                        <div className="detail">For error messages is always enabled </div>
+                    </div>
+                    <div className="controller">
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            // checked={value}
+                            // onChange={() => this.props.editPolicy(this.props.data['PluginFlyvemdmPolicy.id'], !value)}
+                            />
+                    </div>
+                </div>
+
+                <div className="listElement">
+                    <div className="message">
+                        Notification type
+                        <div className="detail">For native you need to grant permissions</div>
+                    </div>
+                    <div className="controller" style={{ paddingTop: 10 }}>
+                        <select 
+                        className="win-dropdown" 
+                        // name={} 
+                        // value={}
+                        // onChange={}
+                        >
+                            <option>Toast</option>
+                            <option>Native</option>
+                        </select>
+                    </div>
+                </div>
+                                        
+            </div>
         )
     }
 }
 
-// Notifications.propTypes = {
-// }
+Notifications.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired
+}
 
 export default Notifications
