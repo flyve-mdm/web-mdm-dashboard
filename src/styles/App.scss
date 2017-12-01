@@ -3,6 +3,7 @@ $app-color:  #158784;
 $white-color: #FFFFFF;
 $border-ligth-color: #D3D3D3;
 $text-detail-color: grey;
+$hover-dropdown-color: rgba(0,0,0,.1);
 
 // Size
 $list-item-icon-size: 48px;
@@ -37,6 +38,21 @@ $list-item-icon-size: 48px;
     
     a {
         color: $app-color;
+    }
+
+    .win-dropdown {
+        width: 100%;
+        min-width: 67px;
+        max-width: 368px;
+        min-height: 36px;
+        padding: 4px 42px 4px 12px;
+        background-color: $white-color;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -o-appearance: none;
+    }
+    .win-dropdown:hover{ 
+        background-color: $hover-dropdown-color;
     }
 
     .header-admin-dashboard {
