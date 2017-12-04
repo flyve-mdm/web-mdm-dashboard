@@ -27,12 +27,14 @@
             width: 50%;
             vertical-align: middle;
 
-            .detail {
-                color: $text-detail-color;
-                font-size: 13px;
-                line-height: 16px;
-            }
         }
+
+        .detail {
+            color: $text-detail-color;
+            font-size: 13px;
+            line-height: 16px;
+        }
+        
         .controller {
             padding: 15px 15px 15px 0;                
             float: right;
@@ -54,6 +56,7 @@
     .list-content {
         .list-col {
             display: inline-block;
+            margin-right: 10px;
         }
     }
 }
