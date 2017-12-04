@@ -15,6 +15,12 @@ export default class DevicesList extends Component {
         }
     }
 
+    componentDidMount() {
+        console.log("--------------------------------------------")
+        console.log(this.props)
+        console.log("--------------------------------------------")
+    }
+
     componentWillUnmount() {
         this.setState({ selectedItemList: [] })
         this.props.changeSelectionMode(false)

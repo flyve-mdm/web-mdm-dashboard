@@ -3,6 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import Reducers from './reducers'
 import { createLogger } from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
+import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 
 export const history = createHistory()
@@ -12,10 +13,10 @@ const routerReduxMiddleware = routerMiddleware(history)
 
 const getMiddleware = () => {
     if (process.env.NODE_ENV === 'production') {
-        return applyMiddleware(routerReduxMiddleware)
+        return applyMiddleware(routerReduxMiddleware, thunk)
     } else {
         // Enable additional logging in non-production environments.
-        return applyMiddleware(routerReduxMiddleware, createLogger())
+        return applyMiddleware(routerReduxMiddleware, thunk, createLogger())
     }
 };
 
