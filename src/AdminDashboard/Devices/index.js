@@ -33,7 +33,8 @@ export default class Devices extends Component {
                     changeSelectionMode={this.changeSelectionMode}
                     selectionMode={this.state.selectionMode}
                     actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} />
+                    changeActionList={this.props.changeActionList}
+                    fetchData={this.props.fetchData} />
             } else {
                 return <DevicesPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
@@ -59,7 +60,8 @@ export default class Devices extends Component {
                         changeItemList={this.props.changeItemList} 
                         selectionMode={this.state.selectionMode}
                         actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList}
+                        fetchData={this.props.fetchData} />
                     <DevicesPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
                         location={this.props.location}
