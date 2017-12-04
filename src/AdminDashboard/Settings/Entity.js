@@ -39,6 +39,34 @@ class Entity extends Component {
     render () {
         switch (this.state.mode) {
 
+            case 'change Token life':
+                return (
+                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                        <h2 className="win-h2"> Entity </h2>
+                        
+                        <div className="listElement">
+                            Date Period
+                            <div className="detail">In number of days</div>
+                        </div>
+                        <div className="listElement">
+                            <input 
+                                type="number" 
+                                className="win-textbox" 
+                                name="tokenLife"
+                                value={this.state.tokenLife}
+                                onChange={this.changeInput}
+                            />
+                        </div>
+                        <button className="win-button" style={{marginRight: 10}} onClick={() => this.changeMode("")}>
+                            Cancel
+                        </button>
+                        <button className="win-button win-button-primary" onClick={() => this.changeMode("")}>
+                            Save
+                        </button>
+
+                    </div>
+                )
+
             case 'change download URL':
                 return (
                     <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
@@ -79,7 +107,7 @@ class Entity extends Component {
                             Token life
                         </div>
                         <div className="controller">
-                            <a>{this.state.tokenLife} DAYS</a>
+                            <a onClick={() => this.changeMode("change Token life")}>{this.state.tokenLife} DAYS</a>
                         </div>
                     </div>
 
