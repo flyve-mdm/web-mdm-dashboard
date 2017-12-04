@@ -6,8 +6,68 @@ import SettingsEntity from '../data/SettingsEntity.json'
 
 class Entity extends Component {
 
-    render () {
+    constructor(props) {
+        super(props)
+        this.state = {
+            mode: '', 
+            buttonSaveClassName: "win-button win-button-primary hidden",
+            tokenLife: validateData(SettingsEntity["tokenLife"]),
+            downloadURL: validateData(SettingsEntity["downloadURL"], "https://"),
+            entityID: validateData(SettingsEntity["entityID"]),
+            maximunManagedDevices: validateData(SettingsEntity["maximunManagedDevices"]),
+            devicesCurretlymanaged: validateData(SettingsEntity["devicesCurretlymanaged"]),
+            fleetsCurrentlyManaged: validateData(SettingsEntity["fleetsCurrentlyManaged"]),
+            filesUploaded: validateData(SettingsEntity["filesUploaded"]),
+            applicationsUploaded: validateData(SettingsEntity["applicationsUploaded"]),
+            numberUsers: validateData(SettingsEntity["numberUsers"]),
+            invitationsSent: validateData(SettingsEntity["invitationsSent"]),
+            typesPolicies: validateData(SettingsEntity["typesPolicies"]),
+            numberCategoriesForPolicies: validateData(SettingsEntity["numberCategoriesForPolicies"])
+        }
+    }
 
+    changeMode = (mode) => {
+        this.setState({ mode })
+    }
+
+    changeInput = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    render () {
+        switch (this.state.mode) {
+
+            case 'change download URL':
+                return (
+                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                        <h2 className="win-h2"> Entity </h2>
+                        
+                        <div className="listElement">
+                            URL of the application
+                            <div className="detail">File extension as apk or upk</div>
+                        </div>
+                        <div className="listElement">
+                            <input 
+                                type="text" 
+                                className="win-textbox" 
+                                name="downloadURL"
+                                value={this.state.downloadURL}
+                                onChange={this.changeInput}
+                            />
+                        </div>
+                        <button className="win-button" style={{marginRight: 10}} onClick={() => this.changeMode("")}>
+                            Cancel
+                        </button>
+                        <button className="win-button win-button-primary" onClick={() => this.changeMode("")}>
+                            Save
+                        </button>
+
+                    </div>
+                )
+        
+            default:
                 return (
                     <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                     <h2 className="win-h2"> Entity </h2>
@@ -19,14 +79,14 @@ class Entity extends Component {
                             Token life
                         </div>
                         <div className="controller">
-                            <a>10</a>
+                            <a>{this.state.tokenLife} DAYS</a>
                         </div>
                     </div>
 
                     <div className="listElement">
                         <div className="message">
                             Download URL
-                            <div className="detail10div>
+                            <div className="detail">{this.state.downloadURL}</div>
                         </div>
 
                         <div className="controller">
@@ -43,7 +103,7 @@ class Entity extends Component {
                             Entity ID
                         </div>
                         <div className="controller">
-                            10
+                            {this.state.entityID}
                         </div>
                     </div>
 
@@ -52,7 +112,7 @@ class Entity extends Component {
                             Maximum managed devices
                         </div>
                         <div className="controller">
-                            10
+                            {this.state.maximunManagedDevices}
                         </div>
                     </div>
 
@@ -63,7 +123,7 @@ class Entity extends Component {
                             Devices currently managed
                         </div>
                         <div className="controller">
-                            10
+                            {this.state.devicesCurretlymanaged}
                         </div>
                     </div>
 
@@ -72,7 +132,7 @@ class Entity extends Component {
                             Fleets currently managed
                         </div>
                         <div className="controller">
-                            10
+                            {this.state.fleetsCurrentlyManaged}
                         </div>
                     </div>
         
@@ -81,7 +141,7 @@ class Entity extends Component {
                             Files uploaded
                         </div>
                         <div className="controller">
-                            10
+                            {this.state.filesUploaded}
                         </div>
                     </div>
         
@@ -90,7 +150,7 @@ class Entity extends Component {
                             Applications uploaded
                         </div>
                         <div className="controller">
-                            10
+                            {this.state.applicationsUploaded}
                         </div>
                     </div>
         
@@ -99,7 +159,7 @@ class Entity extends Component {
                             Number of users
                         </div>
                         <div className="controller">
-                            10
+                            {this.state.numberUsers}
                         </div>
                     </div>
         
@@ -108,7 +168,7 @@ class Entity extends Component {
                             Invitations sent
                         </div>
                         <div className="controller">
-                            10
+                            {this.state.invitationsSent}
                         </div>
                     </div>
         
@@ -117,7 +177,7 @@ class Entity extends Component {
                             Types of policies
                         </div>
                         <div className="controller">
-                            10
+                            {this.state.typesPolicies}
                         </div>
                     </div>
         
@@ -126,14 +186,16 @@ class Entity extends Component {
                             Number of categories for policies
                         </div>
                         <div className="controller">
-                            10
+                            {this.state.numberCategoriesForPolicies}
                         </div>
                     </div>
                         
                 </div>
                 )
-            }
         }
+
+    }
+}
 
 Entity.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
