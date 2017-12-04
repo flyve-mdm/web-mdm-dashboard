@@ -25,6 +25,7 @@
     "fs-extra": "4.0.3",
     "history": "^4.7.2",
     "html-webpack-plugin": "2.29.0",
+    "isomorphic-fetch": "^2.2.1",
     "jest": "20.0.4",
     "object-assign": "4.1.1",
     "postcss-flexbugs-fixes": "3.2.0",
@@ -66,13 +67,16 @@
     "coverage": "node scripts/test.js --env=jsdom --coverage",
     "gh-pages-docs": "gh-pages --dist docs --dest docs",
     "gh-pages-coverage": "gh-pages --dist coverage --dest coverage",
-    "gh-pages-changelog": "gh-pages --dist ./ --src '{./C*.md,CHANGELOG.md}' --dest ./ --add"
+    "gh-pages-changelog": "gh-pages --dist ./ --src '{./C*.md,CHANGELOG.md}' --dest ./ --add",
+    "fech-data": "",
+    "prestart": "json-server ./config/generateJsonData.js --port 3004 --delay 2000 &"
   },
   "devDependencies": {
     "canvas-prebuilt": "^1.6.5-prerelease.1",
     "conventional-github-releaser": "^2.0.0",
     "gh-pages": "^1.0.0",
     "jsdoc": "^3.5.5",
+    "json-server": "^0.12.1",
     "node-github-release": "^0.2.1",
     "node-sass": "^4.7.2",
     "raw-loader": "^0.5.1",
