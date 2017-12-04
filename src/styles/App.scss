@@ -40,6 +40,10 @@ $list-item-icon-size: 48px;
         color: $app-color;
     }
 
+    .hidden {
+        display: none;
+    }
+
     .win-dropdown {
         width: 100%;
         min-width: 67px;
@@ -322,6 +326,9 @@ $list-item-icon-size: 48px;
     }
     .addIcon:before {
         content: "\E109";
+    }
+    .contactIcon:before {
+        content: "\E13D";
     }
 
     .files-dropzone {
