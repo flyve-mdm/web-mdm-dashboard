@@ -4,6 +4,7 @@ import ReactWinJS from 'react-winjs'
 import ItemList from '../ItemList'
 import IconItemList from '../IconItemList'
 import WinJS from 'winjs'
+import Loading from '../../Utils/Loading'
 
 class ItemListPane extends Component {
     
@@ -107,7 +108,7 @@ class ItemListPane extends Component {
             />
         )
 
-        let listComponent = "Loading..."
+        let listComponent = <Loading message="Loading..." headerSize={48}/>
 
         if (this.isError) {
             listComponent = "Error"

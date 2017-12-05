@@ -3,7 +3,8 @@ import ReactWinJS from 'react-winjs'
 import InvitationsItemList from './InvitationsItemList'
 import PropTypes from 'prop-types'
 import ItemList from '../ItemList'
-let WinJS = require('winjs')
+import WinJS from 'winjs'
+import Loading from '../../Utils/Loading'
 
 export default class InvitationsList extends Component {
 
@@ -101,7 +102,7 @@ export default class InvitationsList extends Component {
             />
         )
 
-        let listComponent = "Loading..."
+        let listComponent = <Loading message="Loading..." headerSize={48}/>
 
         if (this.isError) {
             listComponent = "Error"

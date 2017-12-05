@@ -4,6 +4,7 @@ import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import FilesItemList from './FilesItemList'
 import ItemList from '../ItemList'
+import Loading from '../../Utils/Loading'
 
 export default class FilesList extends Component {
 
@@ -133,7 +134,7 @@ export default class FilesList extends Component {
             />
         )
 
-        let listComponent = "Loading..."
+        let listComponent = <Loading message="Loading..." headerSize={48}/>
 
         if (this.isError) {
             listComponent = "Error"
