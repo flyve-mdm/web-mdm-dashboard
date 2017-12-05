@@ -16,9 +16,7 @@ export default class DevicesList extends Component {
     }
 
     componentDidMount() {
-        console.log("--------------------------------------------")
-        console.log(this.props)
-        console.log("--------------------------------------------")
+        this.props.fetchData("Devices")
     }
 
     componentWillUnmount() {
@@ -145,6 +143,29 @@ export default class DevicesList extends Component {
             />
         )
 
+        let listComponent = "Loading..."
+
+        if(this.isError) {
+            listComponent = "Error"
+        } else if(!this.props.isLoading ) {
+            listComponent = (
+                < ReactWinJS.ListView
+                    ref="listView"
+                    className="contentListView win-selectionstylefilled"
+                    style={{ height: 'calc(100% - 48px)' }}
+                    itemDataSource={this.props.itemList.dataSource}
+                    groupDataSource={this.props.itemList.groups.dataSource}
+                    layout={this.state.layout}
+                    itemTemplate={this.ItemListRenderer}
+                    groupHeaderTemplate={this.groupHeaderRenderer}
+                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
+                    onSelectionChanged={this.handleSelectionChanged}
+                    onContentAnimating={this.handleContentAnimating}
+                />
+            )
+        }
+
         return (
             <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ToolBar className="listToolBar">
@@ -182,21 +203,8 @@ export default class DevicesList extends Component {
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
-
-                <ReactWinJS.ListView
-                    ref="listView"
-                    className="contentListView win-selectionstylefilled"
-                    style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.props.itemList.dataSource}
-                    groupDataSource={this.props.itemList.groups.dataSource}
-                    layout={this.state.layout}
-                    itemTemplate={this.ItemListRenderer}
-                    groupHeaderTemplate={this.groupHeaderRenderer}
-                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
-                    onSelectionChanged={this.handleSelectionChanged}
-                    onContentAnimating={this.handleContentAnimating}
-                />
+                { listComponent }
+                
             </div>
         )
     }

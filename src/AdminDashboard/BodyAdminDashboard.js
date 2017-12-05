@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { closePane, changeLocation, changeIndex, changeItemList, changeActionList, changeCurrentItem, fetchData } from './DuckController'
+import * as Actions from './DuckController'
 import Dashboard from './Home'
 import Users from './Users'
 import Devices from './Devices'
@@ -14,7 +14,6 @@ import About from './About'
 import Settings from './Settings'
 
 function mapStateToProps(state, props) {
-    console.log(state.AdminDashboard)
     return {
         splitViewId: state.AdminDashboard.splitViewId,
         paneOpened: state.AdminDashboard.paneOpened,
@@ -25,25 +24,30 @@ function mapStateToProps(state, props) {
         mode: state.AdminDashboard.mode,
         actionList: state.AdminDashboard.actionList,
         currentItem: state.AdminDashboard.currentItem,
+        dataSource: state.AdminDashboard.dataSource,
+        isLoading: state.AdminDashboard.isLoading,
+        isError: state.AdminDashboard.isError,
         devices: state.AdminDashboard.devices,
         invitations: state.AdminDashboard.invitations,
         fleets: state.AdminDashboard.fleets,
         files: state.AdminDashboard.files,
         applications: state.AdminDashboard.applications,
-        users: state.AdminDashboard.users,
-        fetchData: state.AdminDashboard.fetchData,
+        users: state.AdminDashboard.users
     }
 }
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        closePane: bindActionCreators(closePane, dispatch),
-        changeLocation: bindActionCreators(changeLocation, dispatch),
-        changeIndex: bindActionCreators(changeIndex, dispatch),
-        changeItemList: bindActionCreators(changeItemList, dispatch),
-        changeActionList: bindActionCreators(changeActionList, dispatch),
-        changeCurrentItem: bindActionCreators(changeCurrentItem, dispatch),
-        fetchData: () => dispatch(fetchData)
+        closePane: bindActionCreators(Actions.closePane, dispatch),
+        changeLocation: bindActionCreators(Actions.changeLocation, dispatch),
+        changeIndex: bindActionCreators(Actions.changeIndex, dispatch),
+        changeItemList: bindActionCreators(Actions.changeItemList, dispatch),
+        changeActionList: bindActionCreators(Actions.changeActionList, dispatch),
+        changeCurrentItem: bindActionCreators(Actions.changeCurrentItem, dispatch),
+        changeEndpoint: bindActionCreators(Actions.changeEndpoint, dispatch),
+        fetchDataSuccess: bindActionCreators(Actions.fetchDataSuccess, dispatch),
+        fetchDataFailure: bindActionCreators(Actions.fetchDataFailure, dispatch),
+        fetchData: (api) => dispatch(Actions.fetchData(api))
     }
     return { actions }
 }
@@ -59,16 +63,15 @@ class BodyAdminDashboard extends Component {
     }
 
     render() {
-
         let contentComponent
-        
+
         switch (this.props.router[this.props.index].label) {
             
             case "Dashboard":
                 contentComponent = <div className="dashboard" ><Dashboard location={this.props.location} /></div>
                 break
             case "Devices":
-                contentComponent = <div className="devices" ><Devices fetchData={this.props.fetchData} mode={this.props.mode} location={this.props.location} sort={this.props.devices.sort} itemList={this.props.devices.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
+                contentComponent = <div className="devices" ><Devices fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
                 break
             case "Invitations":
                 contentComponent = <div className="invitations" ><Invitations mode={this.props.mode} location={this.props.location} sort={this.props.invitations.sort} itemList={this.props.invitations.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
