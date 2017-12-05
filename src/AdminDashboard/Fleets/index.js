@@ -34,7 +34,10 @@ export default class Fleets extends Component {
                     changeCurrentItem={this.props.changeCurrentItem}
                     changeSelectionMode={this.changeSelectionMode}
                     selectionMode={this.state.selectionMode}
-                    changeActionList={this.props.changeActionList} />
+                    changeActionList={this.props.changeActionList}
+                    fetchData={this.props.fetchData}
+                    isLoading={this.props.isLoading}
+                    isError={this.props.isError} />
             } else {
                 return <FleetsPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
@@ -63,7 +66,10 @@ export default class Fleets extends Component {
                         changeSelectionMode={this.changeSelectionMode}
                         actionList={this.props.actionList}
                         selectionMode={this.state.selectionMode}
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList}
+                        fetchData={this.props.fetchData}
+                        isLoading={this.props.isLoading}
+                        isError={this.props.isError} />
                     <FleetsPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
                         location={this.props.location}
