@@ -30,8 +30,7 @@ const INITIAL_STATE = {
     endpoint: null,
     dataSource: { itemList: new WinJS.Binding.List([]), sort: true},
     isLoading: true,
-    isError: false,
-    users: { itemList: ItemList("Users"), sort: true}
+    isError: false
 }
 
 // Constants
