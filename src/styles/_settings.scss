@@ -20,13 +20,12 @@
         display: block;
         overflow: auto;
         width: 100%;
-        
+
         .message {
             display: inline-block;
             padding: 18px 0px 15px 15px;
             width: 50%;
             vertical-align: middle;
-
         }
 
         .detail {
@@ -34,7 +33,7 @@
             font-size: 13px;
             line-height: 16px;
         }
-        
+
         .controller {
             padding: 15px 15px 15px 0;                
             float: right;
@@ -59,4 +58,18 @@
             margin-right: 10px;
         }
     }
+
+    .Profiles {
+        .listElement {
+            margin-left: 30px;        
+        } 
+        .icon {
+            margin: 20px 10px;
+    
+            span {
+                font-size: 25px;
+            }
+        }
+    }  
+
 }

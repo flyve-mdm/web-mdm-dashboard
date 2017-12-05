@@ -42,8 +42,12 @@ class Profiles extends Component {
 
     render () {
         return (
-            <div className="contentPane list-content" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+            <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                 <h2 className="win-h2"> Profiles </h2>
+
+                <div className="listElement icon">
+                    <span className="contactIcon"/>
+                </div>
 
                 <div className="listElement">  
                     <div className="list-col">
@@ -61,10 +65,6 @@ class Profiles extends Component {
                         />
                     </div>              
                 </div>
-
-                {/* <div className="listElement">
-                    <spang className="contactIcon"/>
-                </div> */}
 
                 <div className="listElement">
                     <div className="list-col">
@@ -90,6 +90,10 @@ class Profiles extends Component {
                             onChange={this.changeInput}
                         />
                     </div>               
+                </div>
+
+                <div className="listElement icon">
+                    <span className="phoneIcon"/>
                 </div>
 
                 <div className="listElement">
@@ -145,6 +149,10 @@ class Profiles extends Component {
                     </div> 
                 </div>
 
+                <div className="listElement icon">
+                    <span className="documentIcon"/>
+                </div>
+
                 <div className="listElement">
                     <div className="list-col">
                         <p>Last login</p>
@@ -193,6 +201,7 @@ class Profiles extends Component {
                     Save
                 </button>
                 
+                <br/>
             </div>
         )
     }
