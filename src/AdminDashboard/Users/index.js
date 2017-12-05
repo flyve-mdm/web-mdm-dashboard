@@ -17,7 +17,10 @@ class UsersPage extends Component {
                         onNavigate={this.props.onNavigate} 
                         itemList={this.props.itemList} 
                         sort={this.props.sort} 
-                        changeActionList={this.props.changeActionList}/>
+                        changeActionList={this.props.changeActionList}
+                        fetchData={this.props.fetchData}
+                        isLoading={this.props.isLoading}
+                        isError={this.props.isError} />
             } else {
                 return <ContentPane 
                         selectedIndex={selectedIndex} 
@@ -36,7 +39,10 @@ class UsersPage extends Component {
                         onNavigate={this.props.onNavigate} 
                         itemList={this.props.itemList} 
                         sort={this.props.sort} 
-                        changeActionList={this.props.changeActionList}/>
+                        changeActionList={this.props.changeActionList} 
+                        fetchData={this.props.fetchData}
+                        isLoading={this.props.isLoading}
+                        isError={this.props.isError} />
                     <ContentPane 
                         selectedIndex={selectedIndex} 
                         itemListPaneWidth={320} 

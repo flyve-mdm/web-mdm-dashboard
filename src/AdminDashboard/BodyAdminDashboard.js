@@ -26,8 +26,7 @@ function mapStateToProps(state, props) {
         currentItem: state.AdminDashboard.currentItem,
         dataSource: state.AdminDashboard.dataSource,
         isLoading: state.AdminDashboard.isLoading,
-        isError: state.AdminDashboard.isError,
-        users: state.AdminDashboard.users
+        isError: state.AdminDashboard.isError
     }
 }
 
@@ -81,7 +80,7 @@ class BodyAdminDashboard extends Component {
                 contentComponent = <div className="applications" ><Applications fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} /></div>
                 break
             case "Users":
-                contentComponent = <div className="users" ><Users mode={this.props.mode} location={this.props.location} sort={this.props.users.sort} itemList={this.props.users.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
+                contentComponent = <div className="users" ><Users fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
                 break
             case "Settings":
                 contentComponent = <div className="settings" ><Settings mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} /></div>
