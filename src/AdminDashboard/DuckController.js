@@ -1,7 +1,7 @@
 import GetMode from '../Utils/GetMode'
 import ItemList from './ItemList'
 import Routers from './Routers'
-import { getDevices } from './Api/DevicesApi'
+import * as api from './Api'
 import WinJS from 'winjs'
 
 const INITIAL_STATE = {
@@ -216,11 +216,11 @@ export function fetchDataFailure() {
         type: FETCHING_DATA_FAILURE
     }
 }
-export function fetchData(api) {
+export function fetchData(endpoint) {
     return (dispatch) => {
-        dispatch(changeEndpoint(api))
+        dispatch(changeEndpoint(endpoint))
         dispatch(fetchingData(true))
-        getDevices()
+        api[endpoint.toLowerCase()].getAll()
         .then(([response, json]) => {
             dispatch(fetchDataSuccess(json))
             dispatch(fetchingData(false))
