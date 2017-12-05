@@ -16,7 +16,7 @@ export default class DevicesList extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchData("Devices")
+        this.props.fetchData(this.props.location[0])
     }
 
     componentWillUnmount() {
