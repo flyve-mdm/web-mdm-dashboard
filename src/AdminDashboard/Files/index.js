@@ -33,7 +33,10 @@ export default class Files extends Component {
                     actionList={this.props.actionList}itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
                     changeItemList={this.props.changeItemList} 
-                    changeActionList={this.props.changeActionList}/>
+                    changeActionList={this.props.changeActionList}
+                    fetchData={this.props.fetchData}
+                    isLoading={this.props.isLoading}
+                    isError={this.props.isError} />
             } else {
                 return <FilesPage itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
@@ -59,7 +62,10 @@ export default class Files extends Component {
                         actionList={this.props.actionList}
                         onNavigate={this.props.onNavigate}
                         changeItemList={this.props.changeItemList} 
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList}
+                        fetchData={this.props.fetchData}
+                        isLoading={this.props.isLoading}
+                        isError={this.props.isError} />
                     <FilesPage itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
                         location={this.props.location}
