@@ -6,7 +6,7 @@ module.exports = function() {
     var HelpCenter = require('../src/AdminDashboard/data/helpCenter.json')
     var Invitations = require('../src/AdminDashboard/data/invitations.json')
     var InvitationsLog = require('../src/AdminDashboard/data/invitationsLog.json')
-    var Packages = require('../src/AdminDashboard/data/invitations.json')
+    var Packages = require('../src/AdminDashboard/data/packages.json')
     var Plugins = require('../src/AdminDashboard/data/plugins.json')
     var Policies = require('../src/AdminDashboard/data/policies.json')
     var Users = require('../src/AdminDashboard/data/users.json')
@@ -17,7 +17,7 @@ module.exports = function() {
         helpCenter: HelpCenter,
         invitations: Invitations,
         invitationsLog: InvitationsLog,
-        packages: Packages,
+        applications: Packages,
         plugins: Plugins,
         policies: Policies,
         users: Users
