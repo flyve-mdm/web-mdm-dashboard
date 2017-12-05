@@ -31,8 +31,6 @@ const INITIAL_STATE = {
     dataSource: { itemList: new WinJS.Binding.List([]), sort: true},
     isLoading: true,
     isError: false,
-    devices: { itemList: ItemList("Devices"), sort: true},
-    invitations: { itemList: ItemList("Invitations"), sort: true},
     fleets: { itemList: ItemList("Fleets"), sort: true},
     files: { itemList: ItemList("Files"), sort: true},
     applications: { itemList: ItemList("Applications"), sort: true},

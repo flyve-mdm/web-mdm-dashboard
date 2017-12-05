@@ -1,3 +1,4 @@
 import devices from './Devices'
+import invitations from './Invitations'
 
-export { devices }
+export { devices, invitations }

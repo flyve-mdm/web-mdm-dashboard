@@ -16,6 +16,10 @@ export default class InvitationsList extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.fetchData(this.props.location[0])
+    }
+
     componentWillUnmount() {
         this.setState({ selectionMode: false, selectedItemList: [] })
     }
@@ -97,6 +101,27 @@ export default class InvitationsList extends Component {
             />
         )
 
+        let listComponent = "Loading..."
+
+        if (this.isError) {
+            listComponent = "Error"
+        } else if (!this.props.isLoading) {
+            listComponent = (
+                <ReactWinJS.ListView
+                    ref="listView"
+                    className="contentListView win-selectionstylefilled"
+                    style={{ height: 'calc(100% - 48px)' }}
+                    itemDataSource={this.props.itemList.dataSource}
+                    layout={this.state.layout}
+                    itemTemplate={this.ItemListRenderer}
+                    selectionMode={this.state.selectionMode ? 'multi' : 'single'}
+                    tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
+                    onSelectionChanged={this.handleSelectionChanged}
+                    onContentAnimating={this.handleContentAnimating}
+                />
+            )
+        }
+
         return (
             <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ToolBar className="listToolBar">
@@ -126,18 +151,8 @@ export default class InvitationsList extends Component {
                     />
                 </ReactWinJS.ToolBar>
 
-                <ReactWinJS.ListView
-                    ref="listView"
-                    className="contentListView win-selectionstylefilled"
-                    style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.props.itemList.dataSource}
-                    layout={this.state.layout}
-                    itemTemplate={this.ItemListRenderer}
-                    selectionMode={this.state.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
-                    onSelectionChanged={this.handleSelectionChanged}
-                    onContentAnimating={this.handleContentAnimating}
-                />
+                { listComponent }
+                
             </div>
         )
     }

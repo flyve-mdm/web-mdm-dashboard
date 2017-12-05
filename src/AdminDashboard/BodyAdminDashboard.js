@@ -27,8 +27,6 @@ function mapStateToProps(state, props) {
         dataSource: state.AdminDashboard.dataSource,
         isLoading: state.AdminDashboard.isLoading,
         isError: state.AdminDashboard.isError,
-        devices: state.AdminDashboard.devices,
-        invitations: state.AdminDashboard.invitations,
         fleets: state.AdminDashboard.fleets,
         files: state.AdminDashboard.files,
         applications: state.AdminDashboard.applications,
@@ -74,7 +72,7 @@ class BodyAdminDashboard extends Component {
                 contentComponent = <div className="devices" ><Devices fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
                 break
             case "Invitations":
-                contentComponent = <div className="invitations" ><Invitations mode={this.props.mode} location={this.props.location} sort={this.props.invitations.sort} itemList={this.props.invitations.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
+                contentComponent = <div className="invitations" ><Invitations fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
                 break
             case "Fleets":
                 contentComponent = <div className="fleets" ><Fleets mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.fleets.sort} itemList={this.props.fleets.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} currentItem={this.props.currentItem} changeCurrentItem={this.props.actions.changeCurrentItem}/></div>
