@@ -103,7 +103,7 @@ export default class HelpCenterList extends Component {
                         {'<'} Help Center
                     </h2>
                     <div style={{padding: '0 10px'}}>
-                        <h1>Feedback</h1>
+                        <h3 className="win-h3">Feedback</h3>
                         <div className="feedback">
                             <textarea className="win-textbox feedback-textarea"/>
                             <button className="win-button" style={{float: 'right'}}>
