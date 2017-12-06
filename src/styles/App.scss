@@ -32,6 +32,14 @@ $list-item-icon-size: 48px;
     body {
         margin: 0;
         padding: 0;
+        user-select:auto;
+    }
+
+    ::selection {
+        background: $app-color;
+    }
+    ::-moz-selection {
+        background: $app-color; 
     }
 
     input {
