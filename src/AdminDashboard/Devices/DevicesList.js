@@ -17,7 +17,7 @@ export default class DevicesList extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchData(this.props.location[0])
+        this.handleRefresh()
     }
 
     componentWillUnmount() {
@@ -36,6 +36,10 @@ export default class DevicesList extends Component {
             <div>{item.data.title}</div>
         )
     })
+
+    handleRefresh = () => {
+        this.props.fetchData(this.props.location[0])
+    }
 
     handleEdit = (eventObject) => {
         let index = this.state.selectedItemList
@@ -182,6 +186,7 @@ export default class DevicesList extends Component {
                         icon="refresh"
                         label="Refresh"
                         priority={2}
+                        onClick={this.handleRefresh}
                     />
 
                     <ReactWinJS.ToolBar.Button

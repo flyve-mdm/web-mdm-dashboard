@@ -18,7 +18,7 @@ class ItemListPane extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchData(this.props.location[0])
+        this.handleRefresh()
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
@@ -62,6 +62,10 @@ class ItemListPane extends Component {
         if (eventObject.detail.type === 'entrance') {
             eventObject.preventDefault()
         }
+    }
+
+    handleRefresh = () => {
+        this.props.fetchData(this.props.location[0])
     }
 
     handleDelete = () => {
@@ -146,6 +150,7 @@ class ItemListPane extends Component {
                         icon="refresh"
                         label="Refresh"
                         priority={1}
+                        onClick={this.handleRefresh}
                     />
 
                     <ReactWinJS.ToolBar.Button
