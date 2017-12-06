@@ -38,6 +38,13 @@ $list-item-icon-size: 48px;
         box-shadow:none;
     }
 
+    button, button:focus {
+        box-shadow:none;
+        -webkit-box-shadow: none;
+        outline: 0;
+        outline-offset: 0;
+    }
+
     .contentPane {
         overflow: auto;
     }
