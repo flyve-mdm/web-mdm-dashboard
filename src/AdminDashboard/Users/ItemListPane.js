@@ -69,6 +69,9 @@ class ItemListPane extends Component {
     }
 
     handleDelete = () => {
+        // Clean another actions selected
+        this.props.changeActionList(null)
+        
         let item = this.props.itemList
         let index = this.state.selectedItemList
         index.sort()
