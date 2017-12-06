@@ -29,10 +29,14 @@ export default class LoginEmail extends Component {
     render () { 
         return (
             <div className="passwordSection">
-                <h1>Enter password</h1>
-                <span>Enter the password for</span>	<br />
-                <span>{this.props.email}</span>	
-                {this.state.errorMessage}
+                <h2 className="win-h2">Enter password</h2>
+                <p>
+                    Enter the password for
+                    <br/>
+                    {this.props.email}
+                    <br/>
+                    {this.state.errorMessage}
+                </p>	
                 <form onSubmit={this.LogInServer}>
                     <input 
                         type="password" 
