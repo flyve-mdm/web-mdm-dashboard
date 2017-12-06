@@ -17,7 +17,7 @@ export default class FilesList extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchData(this.props.location[0])
+        this.handleRefresh()
     }
 
     componentWillUnmount() {
@@ -57,6 +57,10 @@ export default class FilesList extends Component {
         if (eventObject.detail.type === 'entrance') {
             eventObject.preventDefault()
         }
+    }
+
+    handleRefresh = () => {
+        this.props.fetchData(this.props.location[0])
     }
 
     handleEdit = (eventObject) => {
@@ -170,6 +174,7 @@ export default class FilesList extends Component {
                         icon="refresh"
                         label="Refresh"
                         priority={1}
+                        onClick={this.handleRefresh}
                     />
 
                     <ReactWinJS.ToolBar.Button

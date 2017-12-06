@@ -17,7 +17,7 @@ export default class FleetsList extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchData(this.props.location[0])
+        this.handleRefresh()
     }
 
     componentWillUnmount() {
@@ -81,6 +81,10 @@ export default class FleetsList extends Component {
             this.props.changeActionList(button.label)
             this.props.onNavigate([this.props.location[0]])
         }, 0)
+    }
+
+    handleRefresh = () => {
+        this.props.fetchData(this.props.location[0])
     }
 
     handleEdit = (eventObject) => {
@@ -183,6 +187,7 @@ export default class FleetsList extends Component {
                         icon="refresh"
                         label="Refresh"
                         priority={1}
+                        onClick={this.handleRefresh}
                     />
 
                     <ReactWinJS.ToolBar.Button
