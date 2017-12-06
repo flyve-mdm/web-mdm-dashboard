@@ -5,6 +5,19 @@ import ContentPane from './ContentPane'
 
 class UsersPage extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectionMode: false
+        }
+    }
+
+    changeSelectionMode = (selectionMode) => {
+        this.setState({
+            selectionMode
+        })
+    }
+
     render() {
         let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
 
@@ -14,7 +27,9 @@ class UsersPage extends Component {
                         itemListPaneWidth="100%" 
                         changeItemList={this.props.changeItemList} 
                         location={this.props.location} 
-                        onNavigate={this.props.onNavigate} 
+                        onNavigate={this.props.onNavigate}
+                        changeSelectionMode={this.changeSelectionMode}
+                        selectionMode={this.state.selectionMode}
                         itemList={this.props.itemList} 
                         sort={this.props.sort} 
                         changeActionList={this.props.changeActionList}
@@ -25,6 +40,7 @@ class UsersPage extends Component {
                 return <ContentPane 
                         selectedIndex={selectedIndex} 
                         itemListPaneWidth={0} 
+                        changeSelectionMode={this.changeSelectionMode}
                         itemList={this.props.itemList}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} />
@@ -37,6 +53,8 @@ class UsersPage extends Component {
                         changeItemList={this.props.changeItemList} 
                         location={this.props.location} 
                         onNavigate={this.props.onNavigate} 
+                        changeSelectionMode={this.changeSelectionMode}
+                        selectionMode={this.state.selectionMode}
                         itemList={this.props.itemList} 
                         sort={this.props.sort} 
                         changeActionList={this.props.changeActionList} 
@@ -46,6 +64,7 @@ class UsersPage extends Component {
                     <ContentPane 
                         selectedIndex={selectedIndex} 
                         itemListPaneWidth={320} 
+                        changeSelectionMode={this.changeSelectionMode}
                         itemList={this.props.itemList} 
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} />

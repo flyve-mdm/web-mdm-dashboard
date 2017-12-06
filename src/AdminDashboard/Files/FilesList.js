@@ -85,6 +85,11 @@ export default class FilesList extends Component {
     }
 
     handleDelete = () => {
+        // Clean another actions selected
+        this.props.changeActionList(null)
+        // Exit selection mode
+        this.props.changeSelectionMode(false)
+
         let item = this.props.itemList
         let index = this.state.selectedItemList
         index.sort()
@@ -92,10 +97,11 @@ export default class FilesList extends Component {
         index.forEach((i) => {
             item.splice(i, 1)
         })
+
         this.setState({
             selectedItem: []
         })
-        this.props.changeSelectionMode(false)
+
         this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
     }
 

@@ -12,8 +12,7 @@ export default class InvitationsList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItemList: [],
-            selectionMode: false
+            selectedItemList: []
         }
     }
 
@@ -22,7 +21,7 @@ export default class InvitationsList extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({ selectionMode: false, selectedItemList: [] })
+        this.setState({ selectedItemList: [] })
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
@@ -38,8 +37,10 @@ export default class InvitationsList extends Component {
     })
 
     handleToggleSelectionMode = () => {
-        this.setState({ selectionMode: !this.state.selectionMode })
-        this.props.onNavigate([this.props.location[0],null])
+        this.setState({ selectedItemList: [] })
+        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.props.changeActionList(null)
+        this.props.onNavigate([this.props.location[0]])
         this.refs.listView.winControl.selection.clear()
     }
 
@@ -48,7 +49,7 @@ export default class InvitationsList extends Component {
         let index = listView.selection.getIndices()
         setTimeout(function () {
             this.setState({ selectedItemList: index });
-            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
+            this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
         }.bind(this), 0)
     }
 
@@ -64,6 +65,11 @@ export default class InvitationsList extends Component {
     }
 
     handleDelete = () => {
+        // Clean another actions selected
+        this.props.changeActionList(null)
+        // Exit selection mode
+        this.props.changeSelectionMode(false)
+        
         let item = this.props.itemList
         let index = this.state.selectedItemList
         index.sort()
@@ -72,8 +78,7 @@ export default class InvitationsList extends Component {
             item.splice(i, 1)
         })
         this.setState({
-            selectedItem: [],
-            selectionMode: false
+            selectedItem: []
         })
         this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
     }
@@ -119,8 +124,8 @@ export default class InvitationsList extends Component {
                     itemDataSource={this.props.itemList.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
-                    selectionMode={this.state.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
+                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
                     onContentAnimating={this.handleContentAnimating}
                 />
@@ -145,14 +150,14 @@ export default class InvitationsList extends Component {
                         onClick={this.handleRefresh}
                     />
 
-                    {this.state.selectionMode ? deleteCommand : null}
+                    {this.props.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
                         icon="bullets"
                         label="Select"
                         priority={0}
-                        selected={this.state.selectionMode}
+                        selected={this.props.selectionMode}
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>

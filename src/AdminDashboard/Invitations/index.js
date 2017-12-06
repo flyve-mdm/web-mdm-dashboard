@@ -5,6 +5,19 @@ import InvitationsPage from './InvitationsPage'
 
 export default class Invitations extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            selectionMode: false
+        }
+    }
+
+    changeSelectionMode = (selectionMode) => {
+        this.setState({
+            selectionMode
+        })
+    }
+
     render() {
 
         let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
@@ -17,6 +30,8 @@ export default class Invitations extends Component {
                     sort={this.props.sort}
                     itemList={this.props.itemList}
                     onNavigate={this.props.onNavigate}
+                    changeSelectionMode={this.changeSelectionMode}
+                    selectionMode={this.state.selectionMode}
                     changeItemList={this.props.changeItemList} 
                     changeActionList={this.props.changeActionList}
                     fetchData={this.props.fetchData}
@@ -28,6 +43,7 @@ export default class Invitations extends Component {
                     location={this.props.location}
                     itemList={this.props.itemList}
                     actionList={this.props.actionList}
+                    changeSelectionMode={this.changeSelectionMode}
                     changeItemList={this.props.changeItemList}
                     changeActionList={this.props.changeActionList} />
             }
@@ -41,6 +57,8 @@ export default class Invitations extends Component {
                         sort={this.props.sort}
                         itemList={this.props.itemList}
                         onNavigate={this.props.onNavigate}
+                        changeSelectionMode={this.changeSelectionMode}
+                        selectionMode={this.state.selectionMode}
                         changeItemList={this.props.changeItemList} 
                         changeActionList={this.props.changeActionList}
                         fetchData={this.props.fetchData}
@@ -50,7 +68,8 @@ export default class Invitations extends Component {
                         selectedIndex={selectedIndex}
                         location={this.props.location}
                         itemList={this.props.itemList}
-                        actionList={this.props.actionList} 
+                        actionList={this.props.actionList}
+                        changeSelectionMode={this.changeSelectionMode}
                         changeItemList={this.props.changeItemList}
                         changeActionList={this.props.changeActionList}/>
                 </div>
