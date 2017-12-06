@@ -1,0 +1,29 @@
+#LoginForm {
+    width: 360px;
+    height: 100%;
+    margin: 20px auto;
+    text-align: center;
+
+    .img-login {
+        width: 80px;
+    }
+
+    .emailSection button {
+        width: 290px;
+        background-color: $app-color;
+        color: $white-color;
+    }
+
+    .passwordSection button {
+        margin: 0 5px;
+        
+        &[type="submit"] {
+            background-color: $app-color;
+            color: $white-color;
+        }
+    }
+
+    .credentials {
+        margin-top: 40px;
+    }
+}

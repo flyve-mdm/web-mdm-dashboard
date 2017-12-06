@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import './Login.css'
 import { bindActionCreators } from 'redux'
 import { changeLoading, changeValue } from './DuckController'
 import { connect } from 'react-redux'
