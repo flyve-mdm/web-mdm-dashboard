@@ -35,10 +35,12 @@ export default class LoginEmail extends Component {
     
         return (
             <div className="emailSection">
-                <h1>Sign in</h1>
-                <span>Use your Flyve account.</span>
-                <br />		
-                <a href="https://flyve-mdm.com/"> What's this? </a>	
+                <h2 className="win-h2">Sign in</h2>
+                <p>
+                    Use your Flyve account.
+                    <br/>
+                    <a href="https://flyve-mdm.com/"> What's this? </a>	
+                </p>
                 {this.state.errorMessage}
                 <form onSubmit={this.LogInServer}>
                     <input 
