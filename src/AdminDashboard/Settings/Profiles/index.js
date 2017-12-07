@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Calc100PercentMinus from '../../../Utils/Calc100PercentMinus'
 import currentUser from '../../data/currentUser.json'
 import validateData from '../../../Utils/validateData'
+import ConstructInputs from './ConstructInputs'
 
 class Profiles extends Component {
     
@@ -12,14 +13,18 @@ class Profiles extends Component {
             buttonSaveClassName: "win-button win-button-primary hidden",
             login: validateData(currentUser["User.name"], undefined),
             firstName: validateData(currentUser["User.firstname"]),
-            realname: validateData(currentUser["User.realname"]),
+            realName: validateData(currentUser["User.realname"]),
             phone: validateData(currentUser["User.phone"]),
             mobilePhone: validateData(currentUser["User.mobile"]),
             phone2: validateData(currentUser["User.phone2"]),
             administrativeNumber: validateData(currentUser["User.registration_number"]),
             lastLogin: validateData(currentUser["User.last_login"], undefined),
             created: validateData(currentUser["User.date_creation"], undefined),
-            modified: validateData(currentUser["User.date_mod"], undefined) 
+            modified: validateData(currentUser["User.date_mod"], undefined),
+            title: '',
+            location: '',
+            defaultProfile: ''
+
         }
     }
 
@@ -41,106 +46,116 @@ class Profiles extends Component {
     }
 
     render () {
+
+        let personalInformation = [
+            [
+                {
+                    label: "Login",
+                    type: "text",
+                    name: "login",
+                    value: this.state.login,
+                    placeholder: null,
+                    function: null,
+                    disabled: true,
+                    style: {
+                        width: 'auto'
+                    }
+                },
+            ],
+            [
+                {
+                    label: "Realname",
+                    type: "text",
+                    name: "realName",
+                    value: this.state.realName,
+                    placeholder: "Realname",
+                    function: this.changeInput,
+                    disabled: false,
+                    style: null
+                },
+                {
+                    label: "First name",
+                    type: "text",
+                    name: "firstName",
+                    value: this.state.firstName,
+                    placeholder: "First name",
+                    function: this.changeInput,
+                    disabled: false,
+                    style: null
+                }
+            ],
+            [
+                {
+                    label: "Title",
+                    type: "select",
+                    name: "title",
+                    value: this.state.title,
+                    options: [
+                        {
+                            label: 'option 1',
+                            value: 'option 1'
+                        },
+                        {
+                            label: 'option 2',
+                            value: 'option 2'
+                        },
+                        {
+                            label: 'option 3',
+                            value: 'option 3'
+                        }
+                    ],
+                    function: this.changeInput
+                },
+                {
+                    label: "Location",
+                    type: "select",
+                    name: "location",
+                    value: this.state.location,
+                    options: [
+                        {
+                            label: 'option 1',
+                            value: 'option 1'
+                        },
+                        {
+                            label: 'option 2',
+                            value: 'option 2'
+                        },
+                        {
+                            label: 'option 3',
+                            value: 'option 3'
+                        }
+                    ],
+                    function: this.changeInput
+                },
+                {
+                    label: "Default profile",
+                    type: "select",
+                    name: "defaultProfile",
+                    value: this.state.defaultProfile,
+                    options: [
+                        {
+                            label: 'option 1',
+                            value: 'option 1'
+                        },
+                        {
+                            label: 'option 2',
+                            value: 'option 2'
+                        },
+                        {
+                            label: 'option 3',
+                            value: 'option 3'
+                        }
+                    ],
+                    function: this.changeInput
+                }
+            ]
+        ]
+
         return (
             <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                 <h2 className="win-h2"> Profiles </h2>
 
-                <div className="listElement icon">
-                    <span className="contactIcon"/>
-                </div>
-
-                <div className="listElement">  
-                    <div className="list-col">
-                        <p>login</p>
-                        <input 
-                            type="text" 
-                            className="win-textbox" 
-                            placeholder="User name"
-                            name="login"
-                            disabled                            
-                            style={{
-                                width: 'auto'
-                            }}
-                            value={this.state.login}
-                        />
-                    </div>              
-                </div>
-
-                <div className="listElement">
-
-                    <div className="list-col">
-                        <p>Surname</p>
-                        <input 
-                            type="text" 
-                            className="win-textbox" 
-                            placeholder="Surname"
-                            name="realname"
-                            value={this.state.realname}
-                            onChange={this.changeInput}
-                        />
-                    </div>  
-
-                    <div className="list-col">
-                        <p>First name</p>
-                        <input 
-                            type="text" 
-                            className="win-textbox" 
-                            placeholder="First name"
-                            name="firstName"
-                            value={this.state.firstName}
-                            onChange={this.changeInput}
-                        />
-                    </div>   
-                    
-             
-                </div>
-
-                <div className="listElement">
-                    <div className="list-col">
-                        <p>Title</p>
-                        <select 
-                        className="win-dropdown" 
-                        // name={} 
-                        // value={}
-                        // onChange={}
-                        >
-                            <option>option 1</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                        </select>
-                    </div>  
-
-                    <div className="list-col">
-                        <p>Location</p>
-                        <select 
-                        className="win-dropdown" 
-                        // name={} 
-                        // value={}
-                        // onChange={}
-                        >
-                            <option>option 1</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                        </select>
-                    </div>  
-
-                    <div className="list-col">
-                        <p>Default profile</p>
-                        <select 
-                        className="win-dropdown" 
-                        // name={} 
-                        // value={}
-                        // onChange={}
-                        >
-                            <option>option 1</option>
-                            <option>option 2</option>
-                            <option>option 3</option>
-                            <option>option 4</option>
-                        </select>
-                    </div>  
-                </div>
+                <ConstructInputs data={personalInformation} icon="contactIcon" />
       
                 <div className="listElement icon">
                     <span className="phoneIcon"/>
