@@ -126,6 +126,10 @@ export default class FleetsContent extends Component {
         }
     }
 
+    handleEdit = () => {
+        this.props.changeActionList("EditOne")
+    }
+
     render() {
         let addPolicy = <span/>
         if (this.state.addPolicy) {
@@ -165,6 +169,8 @@ export default class FleetsContent extends Component {
                         <IconItemList size={72} />
                         <div className="contentStatus">
                             <div className="name">{this.props.currentItem["PluginFlyvemdmFleet.name"]}</div>
+                            <br />
+                            <span className="editIcon" onClick={this.handleEdit} />
                         </div>
                     </div>
                         <button className="win-button win-button-primary" onClick={this.savePolicies}>

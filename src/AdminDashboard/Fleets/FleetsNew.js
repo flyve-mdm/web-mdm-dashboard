@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ContentPane from '../../Utils/ContentPane'
 
 export default class FleetsNew extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ export default class FleetsNew extends Component {
 
     render() {
         return (
-            <div>
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <h2 className="win-h2 titleContentPane" onClick={() =>this.changeSelectItem([])}>
                     New Fleet
                 </h2>
@@ -58,10 +59,14 @@ export default class FleetsNew extends Component {
                 >
                     Save
                 </button>
-            </div>
+            </ContentPane>
         )
     }
 }
 FleetsNew.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
     changeActionList: PropTypes.func.isRequired
 }

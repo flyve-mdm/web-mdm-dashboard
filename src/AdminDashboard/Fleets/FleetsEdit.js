@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
+import ContentPane from '../../Utils/ContentPane'
 import FleetsEditItemList from './FleetsEditItemList'
 import ItemList from '../ItemList'
 import EmptyMessage from '../../Utils/EmptyMessage'
@@ -49,12 +49,15 @@ export default class FleetsEdit extends Component {
     }
 
     render() {
-
         let selectedItemList
         let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
-
-        if(selectedIndex) {
-
+        
+        if (typeof selectedIndex === 'number') {
+            selectedIndex = [selectedIndex]
+        }
+        
+        if(selectedIndex !== null) {
+            
             let renderComponent = selectedIndex.map((index) => {
                 selectedItemList = this.props.itemList.getAt(index)                                
                 return (
@@ -69,7 +72,7 @@ export default class FleetsEdit extends Component {
             })
 
             return(
-                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
                         <button className="win-button win-button-primary" onClick={this.handleSaveFleets}>
@@ -78,7 +81,7 @@ export default class FleetsEdit extends Component {
                     </div>
                     <div className="separator" />
                     {renderComponent}
-                </div>
+                </ContentPane>
             )
 
             
@@ -104,6 +107,4 @@ FleetsEdit.propTypes = {
     changeActionList: PropTypes.func.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired
-    
-    // location= PropTypes.
 }
