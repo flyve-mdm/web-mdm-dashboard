@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import IconItemList from '../IconItemList'
 
-
 export default class DevicesItemList extends Component {
     render() {
         let size = this.props.size

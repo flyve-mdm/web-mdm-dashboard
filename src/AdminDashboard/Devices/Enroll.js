@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ContentPane from '../../Utils/ContentPane'
 
 export default class Enroll extends Component {
 
@@ -22,7 +23,7 @@ export default class Enroll extends Component {
 
     render() {
         return (
-            <div>
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <h2 className="win-h2 titleContentPane">
                     Enroll new device
                 </h2>
@@ -46,10 +47,14 @@ export default class Enroll extends Component {
                 >
                     Save
                 </button>
-            </div>
+            </ContentPane >
         )
     }
 }
 Enroll.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
     changeActionList: PropTypes.func.isRequired
 }
