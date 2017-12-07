@@ -95,8 +95,53 @@ class Profiles extends Component {
              
                 </div>
 
-            
+                <div className="listElement">
+                    <div className="list-col">
+                        <p>Title</p>
+                        <select 
+                        className="win-dropdown" 
+                        // name={} 
+                        // value={}
+                        // onChange={}
+                        >
+                            <option>option 1</option>
+                            <option>option 2</option>
+                            <option>option 3</option>
+                            <option>option 4</option>
+                        </select>
+                    </div>  
 
+                    <div className="list-col">
+                        <p>Location</p>
+                        <select 
+                        className="win-dropdown" 
+                        // name={} 
+                        // value={}
+                        // onChange={}
+                        >
+                            <option>option 1</option>
+                            <option>option 2</option>
+                            <option>option 3</option>
+                            <option>option 4</option>
+                        </select>
+                    </div>  
+
+                    <div className="list-col">
+                        <p>Default profile</p>
+                        <select 
+                        className="win-dropdown" 
+                        // name={} 
+                        // value={}
+                        // onChange={}
+                        >
+                            <option>option 1</option>
+                            <option>option 2</option>
+                            <option>option 3</option>
+                            <option>option 4</option>
+                        </select>
+                    </div>  
+                </div>
+      
                 <div className="listElement icon">
                     <span className="phoneIcon"/>
                 </div>
