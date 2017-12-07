@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class Input extends Component {
+class Select extends Component {
     render() {
 
         const options = this.props.options ? this.props.options : []
         return (
             <div className="list-col">
                 <p>{this.props.label}</p>
-                <select className="win-dropdown" name={this.props.name} value={this.props.value}>
+                <select className="win-dropdown" name={this.props.name} value={this.props.value} onChange={this.props.function}>
                     {   
                         options.map((element, index) => {
                             return (
-                                <option value={element.value} key={index} onChange={this.props.function}>
+                                <option value={element.value} key={index}>
                                     { element.label }
                                 </option>
                             )
@@ -24,7 +24,7 @@ class Input extends Component {
     }
 }
 
-Input.propTypes = {
+Select.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
@@ -32,5 +32,5 @@ Input.propTypes = {
     function: PropTypes.func
 }
 
-export default Input
+export default Select
     
