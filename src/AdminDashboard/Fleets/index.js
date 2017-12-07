@@ -39,7 +39,8 @@ export default class Fleets extends Component {
                     isLoading={this.props.isLoading}
                     isError={this.props.isError} />
             } else {
-                return <FleetsPage itemListPaneWidth={0}
+                return <FleetsPage 
+                    itemListPaneWidth={0}
                     selectedIndex={selectedIndex}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
@@ -70,7 +71,8 @@ export default class Fleets extends Component {
                         fetchData={this.props.fetchData}
                         isLoading={this.props.isLoading}
                         isError={this.props.isError} />
-                    <FleetsPage itemListPaneWidth={itemListPaneWidth}
+                    <FleetsPage 
+                        itemListPaneWidth={itemListPaneWidth}
                         selectedIndex={selectedIndex}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
