@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
-import currentUser from '../data/currentUser.json'
-import validateData from '../../Utils/validateData'
+import Calc100PercentMinus from '../../../Utils/Calc100PercentMinus'
+import currentUser from '../../data/currentUser.json'
+import validateData from '../../../Utils/validateData'
 
 class Profiles extends Component {
     
@@ -12,7 +12,7 @@ class Profiles extends Component {
             buttonSaveClassName: "win-button win-button-primary hidden",
             login: validateData(currentUser["User.name"], undefined),
             firstName: validateData(currentUser["User.firstname"]),
-            lastName: validateData(currentUser["User.realname"]),
+            realname: validateData(currentUser["User.realname"]),
             phone: validateData(currentUser["User.phone"]),
             mobilePhone: validateData(currentUser["User.mobile"]),
             phone2: validateData(currentUser["User.phone2"]),
@@ -67,6 +67,19 @@ class Profiles extends Component {
                 </div>
 
                 <div className="listElement">
+
+                    <div className="list-col">
+                        <p>Surname</p>
+                        <input 
+                            type="text" 
+                            className="win-textbox" 
+                            placeholder="Surname"
+                            name="realname"
+                            value={this.state.realname}
+                            onChange={this.changeInput}
+                        />
+                    </div>  
+
                     <div className="list-col">
                         <p>First name</p>
                         <input 
@@ -78,19 +91,11 @@ class Profiles extends Component {
                             onChange={this.changeInput}
                         />
                     </div>   
-
-                    <div className="list-col">
-                        <p>Last name</p>
-                        <input 
-                            type="text" 
-                            className="win-textbox" 
-                            placeholder="Last name"
-                            name="lastName"
-                            value={this.state.lastName}
-                            onChange={this.changeInput}
-                        />
-                    </div>               
+                    
+             
                 </div>
+
+            
 
                 <div className="listElement icon">
                     <span className="phoneIcon"/>
@@ -196,6 +201,9 @@ class Profiles extends Component {
                         />
                     </div> 
                 </div>
+
+
+                
 
                 <button className={ this.state.buttonSaveClassName } style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                     Save
