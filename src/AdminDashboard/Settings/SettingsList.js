@@ -30,7 +30,9 @@ class SettingsList extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let indices = listView.selection.getIndices()
-        this.props.onNavigate(['Settings', indices[0]])
+        setTimeout(() => {
+            this.props.onNavigate(['Settings', indices[0]])
+        }, 0)
     }
     
     render () {
