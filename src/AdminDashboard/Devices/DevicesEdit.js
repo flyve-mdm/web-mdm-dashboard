@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import DevicesEditItemList from './DevicesEditItemList'
 import ItemList from '../ItemList'
+import ContentPane from '../../Utils/ContentPane'
 import EmptyMessage from '../../Utils/EmptyMessage'
 
 export default class DevicesEdit extends Component {
@@ -70,7 +70,7 @@ export default class DevicesEdit extends Component {
             })
 
             return(
-                <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
                         <button className="win-button win-button-primary" onClick={this.handleSaveDevices}>
@@ -79,9 +79,8 @@ export default class DevicesEdit extends Component {
                     </div>
                     <div className="separator" />
                     {renderComponent}
-                </div>
+                </ContentPane>
             )
-
             
         } else {
             return (
@@ -105,6 +104,4 @@ DevicesEdit.propTypes = {
     changeActionList: PropTypes.func.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired
-    
-    // location= PropTypes.
 }
