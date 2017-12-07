@@ -10,7 +10,7 @@ class Input extends Component {
                     type={this.props.type} 
                     className="win-textbox" 
                     name={this.props.name}
-                    value={this.props.value1}
+                    value={this.props.value}
                     placeholder={this.props.placeholder}
                     onChange={this.props.function}
                     disabled={this.props.disabled}
@@ -25,7 +25,7 @@ Input.propTypes = {
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    value1: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     function: PropTypes.func,
     disabled: PropTypes.bool,
