@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class DevicesEditItemList extends Component {
     constructor(props) {
@@ -49,4 +50,14 @@ export default class DevicesEditItemList extends Component {
         </div>
     )
   }
+}
+DevicesEditItemList.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    updateItemList: PropTypes.func.isRequired,
+    location: PropTypes.array.isRequired,
+    currentItem: PropTypes.object.isRequired,
+    changeActionList: PropTypes.func.isRequired
 }

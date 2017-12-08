@@ -78,7 +78,7 @@ export default class DevicesList extends Component {
                     this.props.changeActionList(null)
                 }
                 
-                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
+                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
             }, 0)
         }
         
@@ -97,7 +97,7 @@ export default class DevicesList extends Component {
         // Exit selection mode
         this.props.changeSelectionMode(false)
 
-        let item = this.props.itemList
+        let item = this.props.dataSource.itemList
         let index = this.state.selectedItemList
         index.sort()
         index.reverse()
@@ -108,17 +108,17 @@ export default class DevicesList extends Component {
             selectedItem: []
         })
         
-        this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
+        this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
     }
 
     handleSort = () => {
         let array = []
-        this.props.itemList.map((value, index) =>
+        this.props.dataSource.itemList.map((value, index) =>
             array.push(value)
         )
-        this.props.changeItemList(
+        this.props.changeDataSource(
             this.props.location, 
-            { itemList: ItemList(this.props.location[0], array, !this.props.sort), sort: !this.props.sort }
+            { itemList: ItemList(this.props.location[0], array, !this.props.dataSource.sort), sort: !this.props.dataSource.sort }
         )
     }
 
@@ -163,8 +163,8 @@ export default class DevicesList extends Component {
                     ref="listView"
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.props.itemList.dataSource}
-                    groupDataSource={this.props.itemList.groups.dataSource}
+                    itemDataSource={this.props.dataSource.itemList.dataSource}
+                    groupDataSource={this.props.dataSource.itemList.groups.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
                     groupHeaderTemplate={this.groupHeaderRenderer}
@@ -225,13 +225,12 @@ DevicesList.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    sort: PropTypes.bool,
-    itemList: PropTypes.object.isRequired,
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired,
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
-    actionList: PropTypes.string
+    actionList: PropTypes.string,
+    changeActionList: PropTypes.func.isRequired
 }

@@ -15,10 +15,10 @@ export default class DevicesPage extends Component {
                     return (
                         <DevicesEdit
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            onNavigate={this.props.onNavigate}
+                            dataSource={this.props.dataSource}
+                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
-                            itemList={this.props.itemList}
-                            changeItemList={this.props.changeItemList}
+                            onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
                             changeActionList={this.props.changeActionList} />
                     )
@@ -37,7 +37,7 @@ export default class DevicesPage extends Component {
             }
         } else {
             if (this.props.actionList === null) {
-                const selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
+                const selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
                 if (selectedItemList !== undefined) {
                     return (
                         <DevicesContent
@@ -56,8 +56,8 @@ export default class DevicesPage extends Component {
                 return (
                     <DevicesEditOne 
                         itemListPaneWidth={this.props.itemListPaneWidth}
+                        dataSource={this.props.dataSource}
                         location={this.props.location}    
-                        itemList={this.props.itemList}
                         changeActionList={this.props.changeActionList} />
                 )
             }
@@ -69,15 +69,12 @@ DevicesPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedIndex: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.array
-    ]),
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
+    selectedIndex: PropTypes.array,
     location: PropTypes.array.isRequired,
-    itemList: PropTypes.object.isRequired,
-    actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired,
-    changeSelectionMode: PropTypes.func.isRequired
+    changeSelectionMode: PropTypes.func.isRequired,
+    actionList: PropTypes.string,
+    changeActionList: PropTypes.func.isRequired
 }
