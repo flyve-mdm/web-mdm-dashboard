@@ -32,6 +32,7 @@ class ConstructInputs extends Component {
                                     function={element.function}
                                     disabled={element.disabled}
                                     style={element.style}
+                                    delete={element.delete}
                                     key={element.name} />
                             )
                         }
