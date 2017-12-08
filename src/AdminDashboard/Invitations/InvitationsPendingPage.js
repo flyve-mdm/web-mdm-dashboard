@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
 import InvitationsLog from '../data/invitationsLog.json'
 import WinJS from 'winjs'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import ItemList from '../ItemList'
 import EmptyMessage from '../../Utils/EmptyMessage'
+import ContentPane from '../../Utils/ContentPane'
 
 export default class InvitationsPendingPage extends Component {
 
@@ -46,7 +46,7 @@ export default class InvitationsPendingPage extends Component {
             let currentListItemLogs = ItemList('InvitationsLog', currentLog)
 
             return (
-                <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" >Pending {this.props.location[0]} </h2>
                     </div>
@@ -60,7 +60,7 @@ export default class InvitationsPendingPage extends Component {
                         onContentAnimating={this.handleContentAnimating}
                         selectionMode={'single'}
                     />
-                </div>
+                </ContentPane>
             )
         } else {
 
