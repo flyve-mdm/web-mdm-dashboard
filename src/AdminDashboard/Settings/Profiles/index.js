@@ -66,6 +66,15 @@ class Profiles extends Component {
         })
     }
 
+    addEmail = () => {
+        this.setState({
+            emails: [
+                ...this.state.emails,
+                ''
+            ]
+        })
+    }
+
     render () {
 
         const personalInformation = [
