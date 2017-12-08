@@ -100,6 +100,10 @@ export default class InvitationsList extends Component {
             return -1;
     }
 
+    handleResendEmail = () => {
+        this.handleToggleSelectionMode()
+    }
+
     render() {
         let deleteCommand = (
             <ReactWinJS.ToolBar.Button
@@ -108,6 +112,17 @@ export default class InvitationsList extends Component {
                 priority={0}
                 disabled={this.state.selectedItemList.length === 0}
                 onClick={this.handleDelete}
+            />
+        )
+
+        let resendCommand = (
+            <ReactWinJS.ToolBar.Button
+                key="mail"
+                icon="mail"
+                label="Resend Email"
+                priority={0}
+                disabled={this.state.selectedItemList.length === 0}
+                onClick={this.handleResendEmail}
             />
         )
 
@@ -150,6 +165,7 @@ export default class InvitationsList extends Component {
                         onClick={this.handleRefresh}
                     />
 
+                    {this.props.selectionMode ? resendCommand : null}
                     {this.props.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
