@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import InvitationsLog from '../data/invitationsLog.json'
 import WinJS from 'winjs'
@@ -69,4 +70,12 @@ export default class InvitationsPendingPage extends Component {
             )
         }
     }
+}
+InvitationsPendingPage.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    location: PropTypes.array.isRequired,
+    currentItem: PropTypes.object.isRequired
 }
