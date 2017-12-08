@@ -59,6 +59,13 @@ class Profiles extends Component {
             })
         }
     }
+
+    deleteEmail = (index) => {
+        this.setState({
+            emails: this.state.emails.slice(0,index).concat(this.state.emails.slice(index+1))
+        })
+    }
+
     render () {
 
         const personalInformation = [
