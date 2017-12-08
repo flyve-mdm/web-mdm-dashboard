@@ -46,9 +46,22 @@ class Profiles extends Component {
         }
     }
 
+    changeEmail = (e) => {
+        let emails = [...this.state.emails]
+        emails[e.target.name] = e.target.value
+
+        this.setState({
+            emails
+        })
+        if (this.state.buttonSaveClassName === "win-button win-button-primary hidden") {
+            this.setState({
+                buttonSaveClassName: "win-button win-button-primary"
+            })
+        }
+    }
     render () {
 
-        let personalInformation = [
+        const personalInformation = [
             [
                 {
                     label: "Login",
@@ -152,7 +165,7 @@ class Profiles extends Component {
             ]
         ]
 
-        let contactInformation = [
+        const contactInformation = [
             [
                 {
                     label: "Phone",
@@ -199,7 +212,7 @@ class Profiles extends Component {
             ]
         ]
 
-        let activityInformation = [
+        const activityInformation = [
             [
                 {
                     label: "Last login",
@@ -267,6 +280,7 @@ class Profiles extends Component {
                 <h2 className="win-h2"> Profiles </h2>
 
                 <ConstructInputs data={emailsInformation} icon="emailIcon" />
+                <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
 
                 <ConstructInputs data={personalInformation} icon="contactIcon" />
                 
