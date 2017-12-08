@@ -351,6 +351,9 @@ $list-item-icon-size: 48px;
     .contactIcon:before {
         content: "\E13D";
     }
+    .clearIcon:before {
+        content: "\E106";        
+    }
 
     .files-dropzone {
         text-align: center;
