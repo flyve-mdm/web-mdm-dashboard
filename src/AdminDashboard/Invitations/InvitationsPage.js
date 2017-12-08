@@ -4,7 +4,7 @@ import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import InvitationsPendingPage from './InvitationsPendingPage'
 import EmptyMessage from '../../Utils/EmptyMessage'
 
-export default class FilesPage extends Component {
+export default class InvitationsPage extends Component {
 
     render() {
         if (this.props.selectedIndex === null) {
@@ -31,7 +31,7 @@ export default class FilesPage extends Component {
             }
         } else {
 
-            const selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
+            const selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
 
             return (
                 <InvitationsPendingPage
@@ -42,11 +42,17 @@ export default class FilesPage extends Component {
         }
     }
 }
-FilesPage.propTypes = {
+InvitationsPage.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedIndex: PropTypes.number,
-    itemList: PropTypes.object.isRequired
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
+    selectedIndex: PropTypes.array,
+    location: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
+    actionList: PropTypes.string,
+    changeActionList: PropTypes.func.isRequired
 }
