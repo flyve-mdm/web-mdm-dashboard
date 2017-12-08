@@ -354,6 +354,9 @@ $list-item-icon-size: 48px;
     .clearIcon:before {
         content: "\E106";        
     }
+    .addIcon:before {
+        content: "\E109";        
+    }
 
     .files-dropzone {
         text-align: center;
