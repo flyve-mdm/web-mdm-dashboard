@@ -21,10 +21,10 @@ export default class ApplicationsPage extends Component {
                         return (
                             <ApplicationsEdit
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            onNavigate={this.props.onNavigate}
+                            dataSource={this.props.dataSource}
+                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
-                            itemList={this.props.itemList}
-                            changeItemList={this.props.changeItemList}
+                            onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
                             changeActionList={this.props.changeActionList} />
                         )
@@ -36,8 +36,8 @@ export default class ApplicationsPage extends Component {
                                 </div>
                                 <ApplicationsAdd
                                     location={this.props.location}
-                                    itemList={this.props.itemList}
-                                    changeItemList={this.props.changeItemList}
+                                    dataSource={this.props.dataSource}
+                                    changeDataSource={this.props.changeDataSource}
                                     changeActionList={this.props.changeActionList} />
                             </div>
                         )
@@ -48,7 +48,7 @@ export default class ApplicationsPage extends Component {
                 }
             }
         } else {
-            let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
+            let selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
             let image = "data:image/png;base64, " + selectedItemList["PluginFlyvemdmPackage.icon"]
             if(selectedItemList !== undefined) {
                 return (
@@ -81,14 +81,12 @@ ApplicationsPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedIndex: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.array
-    ]),
-    itemList: PropTypes.object.isRequired,
-    actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
+    selectedIndex: PropTypes.array,
+    location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired,
-    changeSelectionMode: PropTypes.func.isRequired
+    changeSelectionMode: PropTypes.func.isRequired,
+    actionList: PropTypes.string,
+    changeActionList: PropTypes.func.isRequired
 }
