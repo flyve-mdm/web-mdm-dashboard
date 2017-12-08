@@ -13,6 +13,8 @@ import Applications from './Applications'
 import About from './About'
 import Settings from './Settings'
 
+const components = { Dashboard, Devices, Invitations, Fleets, Files, Applications, Users, Settings, About }
+
 function mapStateToProps(state, props) {
     return {
         splitViewId: state.AdminDashboard.splitViewId,
@@ -35,7 +37,7 @@ function mapDispatchToProps(dispatch) {
         closePane: bindActionCreators(Actions.closePane, dispatch),
         changeLocation: bindActionCreators(Actions.changeLocation, dispatch),
         changeIndex: bindActionCreators(Actions.changeIndex, dispatch),
-        changeItemList: bindActionCreators(Actions.changeItemList, dispatch),
+        changeDataSource: bindActionCreators(Actions.changeDataSource, dispatch),
         changeActionList: bindActionCreators(Actions.changeActionList, dispatch),
         changeCurrentItem: bindActionCreators(Actions.changeCurrentItem, dispatch),
         changeEndpoint: bindActionCreators(Actions.changeEndpoint, dispatch),
@@ -57,40 +59,26 @@ class BodyAdminDashboard extends Component {
     }
 
     render() {
-        let contentComponent
 
-        switch (this.props.router[this.props.index].label) {
-            
-            case "Dashboard":
-                contentComponent = <div className="dashboard" ><Dashboard location={this.props.location} /></div>
-                break
-            case "Devices":
-                contentComponent = <div className="devices" ><Devices fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
-                break
-            case "Invitations":
-                contentComponent = <div className="invitations" ><Invitations fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
-                break
-            case "Fleets":
-                contentComponent = <div className="fleets" ><Fleets fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} currentItem={this.props.currentItem} changeCurrentItem={this.props.actions.changeCurrentItem}/></div>
-                break
-            case "Files":
-                contentComponent = <div className="files" ><Files fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} /></div>
-                break
-            case "Applications":
-                contentComponent = <div className="applications" ><Applications fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} actionList={this.props.actionList} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} /></div>
-                break
-            case "Users":
-                contentComponent = <div className="users" ><Users fetchData={this.props.actions.fetchData} isLoading={this.props.isLoading} isError={this.props.isError} mode={this.props.mode} location={this.props.location} sort={this.props.dataSource.sort} itemList={this.props.dataSource.itemList} onNavigate={this.props.actions.changeLocation} changeItemList={this.props.actions.changeItemList} changeActionList={this.props.actions.changeActionList} actionList={this.props.actionList} /></div>
-                break
-            case "Settings":
-                contentComponent = <div className="settings" ><Settings mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} /></div>
-                break
-            case "About":
-                contentComponent = <div className="about" ><About mode={this.props.mode} location={this.props.location} onNavigate={this.props.actions.changeLocation} /></div>
-                break
-            default: 
-                contentComponent = <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
+        const propsData = {
+            dataSource: this.props.dataSource,
+            changeDataSource: this.props.actions.changeDataSource,
+            fetchData: this.props.actions.fetchData,
+            isLoading: this.props.isLoading,
+            isError: this.props.isError,
+            mode: this.props.mode,
+            location: this.props.location,
+            onNavigate: this.props.actions.changeLocation,
+            changeActionList: this.props.actions.changeActionList,
+            actionList: this.props.actionList, 
+            currentItem: this.props.currentItem, 
+            changeCurrentItem: this.props.actions.changeCurrentItem
         }
+
+        const contentComponent = React.createElement("div", { className: this.props.router[this.props.index].label.toLowerCase() },
+            React.createElement(components[this.props.router[this.props.index].label], { ...propsData }, null),
+            this.props.children
+        )
 
         let pane = (
             <div>
