@@ -151,6 +151,95 @@ class Profiles extends Component {
             ]
         ]
 
+        let contactInformation = [
+            [
+                {
+                    label: "Phone",
+                    type: "text",
+                    name: "phone",
+                    value: this.state.phone,
+                    placeholder: "Phone",
+                    function: this.changeInput,
+                    disabled: false,
+                    style: null
+                },
+                {
+                    label: "Mobile phone",
+                    type: "text",
+                    name: "mobilePhone",
+                    value: this.state.mobilePhone,
+                    placeholder: "Mobile phone",
+                    function: this.changeInput,
+                    disabled: false,
+                    style: null
+                }
+            ],
+            [
+                {
+                    label: "Phone 2",
+                    type: "text",
+                    name: "phone2",
+                    value: this.state.phone2,
+                    placeholder: "Phone 2",
+                    function: this.changeInput,
+                    disabled: false,
+                    style: null
+                },
+                {
+                    label: "Administrative number",
+                    type: "text",
+                    name: "administrativeNumber",
+                    value: this.state.administrativeNumber,
+                    placeholder: "Administrative number",
+                    function: this.changeInput,
+                    disabled: false,
+                    style: null
+                }
+            ]
+        ]
+
+        let activityInformation = [
+            [
+                {
+                    label: "Last login",
+                    type: "text",
+                    name: "lastLogin",
+                    value: this.state.lastLogin,
+                    placeholder: "Last login",
+                    function: this.changeInput,
+                    disabled: true,
+                    style: {
+                        width: '100%'
+                    }
+                },
+                {
+                    label: "Created",
+                    type: "text",
+                    name: "created",
+                    value: this.state.created,
+                    placeholder: "Created",
+                    function: this.changeInput,
+                    disabled: true,
+                    style: {
+                        width: 'auto'
+                    } 
+                },
+                {
+                    label: "Modified",
+                    type: "text",
+                    name: "modified",
+                    value: this.state.modified,
+                    placeholder: "Modified",
+                    function: this.changeInput,
+                    disabled: true,
+                    style: {
+                        width: 'auto'
+                    } 
+                }
+            ]
+
+        ]
+
         return (
             <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                 <h2 className="win-h2"> Profiles </h2>
