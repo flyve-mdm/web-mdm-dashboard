@@ -21,6 +21,7 @@ class Profiles extends Component {
             lastLogin: validateData(currentUser["User.last_login"], undefined),
             created: validateData(currentUser["User.date_creation"], undefined),
             modified: validateData(currentUser["User.date_mod"], undefined),
+            emails: validateData(currentUser["User.UserEmail.email"], []),
             title: '',
             location: '',
             defaultProfile: ''
@@ -240,9 +241,32 @@ class Profiles extends Component {
 
         ]
 
+        let emailsInformation = [[]]
+
+        for (let index = 0; index < this.state.emails.length; index++) {
+            emailsInformation = [
+                ...emailsInformation,
+                [{
+                    label: `Email ${index + 1}`,
+                    type: "email",
+                    name: index,
+                    value: this.state.emails[index],
+                    placeholder: null,
+                    function: this.changeEmail,
+                    disabled: false,
+                    style: null,
+                    delete: this.deleteEmail
+                }]
+            ]
+            
+        }
+        
+
         return (
             <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                 <h2 className="win-h2"> Profiles </h2>
+
+                <ConstructInputs data={emailsInformation} icon="emailIcon" />
 
                 <ConstructInputs data={personalInformation} icon="contactIcon" />
                 
