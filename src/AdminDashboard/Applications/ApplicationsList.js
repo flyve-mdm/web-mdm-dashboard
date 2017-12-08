@@ -48,7 +48,7 @@ export default class ApplicationsList extends Component {
         let index = listView.selection.getIndices()
         setTimeout(() => {
             this.setState({ selectedItemList: index })
-            this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index[0]] : this.props.location)
+            this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
         }, 0)
     }
 
@@ -89,7 +89,7 @@ export default class ApplicationsList extends Component {
         // Exit selection mode
         this.props.changeSelectionMode(false)
 
-        let item = this.props.itemList
+        let item = this.props.dataSource.itemList
         let index = this.state.selectedItemList
         index.sort()
         index.reverse()
@@ -98,15 +98,15 @@ export default class ApplicationsList extends Component {
         })
         
         this.setState({ selectedItem: [] })     
-        this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
+        this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
     }
 
     handleSort = () => {
         let array = []
-        this.props.itemList.map((value, index) =>
+        this.props.dataSource.itemList.map((value, index) =>
             array.push(value)
         )
-        this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.sort), sort: !this.props.sort })
+        this.props.changeDataSource(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.dataSource.sort), sort: !this.props.dataSource.sort })
     }
 
     descendingCompare(first, second) {
@@ -150,7 +150,7 @@ export default class ApplicationsList extends Component {
                     ref="listView"
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.props.itemList.dataSource}
+                    itemDataSource={this.props.dataSource.itemList.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
@@ -211,9 +211,12 @@ ApplicationsList.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    sort: PropTypes.bool,
-    itemList: PropTypes.object.isRequired,
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired
+    selectionMode: PropTypes.bool.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
+    actionList: PropTypes.string,
+    changeActionList: PropTypes.func.isRequired
 }
