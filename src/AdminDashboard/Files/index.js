@@ -20,32 +20,32 @@ export default class Files extends Component {
 
     render() {
 
-        let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
-
+        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
         if (this.props.mode === 'small') {
             if (selectedIndex === null && this.props.actionList === null) {
                 return <FilesList
                     itemListPaneWidth={'100%'}
-                    location={this.props.location}
-                    sort={this.props.sort}
-                    changeSelectionMode={this.changeSelectionMode}
-                    selectionMode={this.state.selectionMode}
-                    actionList={this.props.actionList}itemList={this.props.itemList}
-                    onNavigate={this.props.onNavigate}
-                    changeItemList={this.props.changeItemList} 
-                    changeActionList={this.props.changeActionList}
+                    dataSource={this.props.dataSource}
+                    changeDataSource={this.props.changeDataSource}
                     fetchData={this.props.fetchData}
                     isLoading={this.props.isLoading}
-                    isError={this.props.isError} />
-            } else {
-                return <FilesPage itemListPaneWidth={0}
-                    selectedIndex={selectedIndex}
+                    isError={this.props.isError}
                     location={this.props.location}
-                    itemList={this.props.itemList}
-                    actionList={this.props.actionList}
-                    changeSelectionMode={this.changeSelectionMode}
-                    changeItemList={this.props.changeItemList}
                     onNavigate={this.props.onNavigate}
+                    changeSelectionMode={this.changeSelectionMode}
+                    selectionMode={this.state.selectionMode}
+                    actionList={this.props.actionList}
+                    changeActionList={this.props.changeActionList} />
+            } else {
+                return <FilesPage 
+                    itemListPaneWidth={0}
+                    dataSource={this.props.dataSource}
+                    changeDataSource={this.props.changeDataSource}
+                    location={this.props.location}
+                    onNavigate={this.props.onNavigate}
+                    selectedIndex={selectedIndex}
+                    changeSelectionMode={this.changeSelectionMode}
+                    actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} />
             }
         } else {
@@ -54,27 +54,27 @@ export default class Files extends Component {
                 <div style={{ height: '100%' }}>
                     <FilesList
                         itemListPaneWidth={itemListPaneWidth}
+                        dataSource={this.props.dataSource}
+                        changeDataSource={this.props.changeDataSource}
+                        fetchData={this.props.fetchData}
+                        isLoading={this.props.isLoading}
+                        isError={this.props.isError}
                         location={this.props.location}
-                        sort={this.props.sort}
-                        itemList={this.props.itemList}
+                        onNavigate={this.props.onNavigate}
                         changeSelectionMode={this.changeSelectionMode}
                         selectionMode={this.state.selectionMode}
                         actionList={this.props.actionList}
-                        onNavigate={this.props.onNavigate}
-                        changeItemList={this.props.changeItemList} 
-                        changeActionList={this.props.changeActionList}
-                        fetchData={this.props.fetchData}
-                        isLoading={this.props.isLoading}
-                        isError={this.props.isError} />
-                    <FilesPage itemListPaneWidth={itemListPaneWidth}
-                        selectedIndex={selectedIndex}
+                        changeActionList={this.props.changeActionList} />
+                    <FilesPage 
+                        itemListPaneWidth={itemListPaneWidth}
+                        dataSource={this.props.dataSource}
+                        changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
-                        itemList={this.props.itemList}
-                        actionList={this.props.actionList} 
-                        changeSelectionMode={this.changeSelectionMode}
-                        changeItemList={this.props.changeItemList}
                         onNavigate={this.props.onNavigate}
-                        changeActionList={this.props.changeActionList}/>
+                        selectedIndex={selectedIndex}
+                        changeSelectionMode={this.changeSelectionMode}
+                        actionList={this.props.actionList}
+                        changeActionList={this.props.changeActionList} />
                 </div>
             )
         }
@@ -82,11 +82,10 @@ export default class Files extends Component {
 }
 Files.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
-    sort: PropTypes.bool,
-    itemList: PropTypes.object.isRequired,
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
     actionList: PropTypes.string
 }

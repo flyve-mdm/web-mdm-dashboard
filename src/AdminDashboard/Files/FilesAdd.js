@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import FilesUpload from '../Files/FilesUpload'
 import FilesUploadItemList from './FilesUploadItemList'
 
@@ -37,7 +38,7 @@ export default class FilesAdd extends Component {
           const file = this.state.files[key]
           formData.append(key, new Blob([file], { type: file.type }), file.name || 'file')
     
-          let item = this.props.itemList
+          let item = this.props.dataSource.itemList
           item.push(
               {
                   "PluginFlyvemdmFile.name": file.name,
@@ -46,7 +47,7 @@ export default class FilesAdd extends Component {
                   "PluginFlyvemdmFile.source": ""
               }
           )
-          this.props.changeItemList(this.props.location, { itemList: item, sort: true })
+          this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
           this.props.changeActionList(null)
         })
 
@@ -85,4 +86,10 @@ export default class FilesAdd extends Component {
         </div>
     )
   }
+}
+FilesAdd.propTypes = {
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
+    location: PropTypes.array.isRequired,
+    changeActionList: PropTypes.func.isRequired
 }
