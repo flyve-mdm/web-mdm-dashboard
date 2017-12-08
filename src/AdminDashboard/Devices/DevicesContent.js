@@ -76,6 +76,7 @@ DevicesContent.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
+    location: PropTypes.array.isRequired,
     selectedItemList: PropTypes.object.isRequired,
     changeActionList: PropTypes.func.isRequired
 }

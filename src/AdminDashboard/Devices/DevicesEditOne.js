@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ContentPane from '../../Utils/ContentPane'
 
 export default class DevicesEditOne extends Component {
@@ -16,7 +17,7 @@ export default class DevicesEditOne extends Component {
         let selectedItemList
         let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
         if (selectedIndex !== null) {
-            selectedItemList = this.props.itemList.getAt(selectedIndex)
+            selectedItemList = this.props.dataSource.itemList.getAt(selectedIndex)
             this.setState({
                 inputName: selectedItemList["PluginFlyvemdmAgent.Computer.User.realname"],
                 inputFleet: selectedItemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"]
@@ -87,4 +88,13 @@ export default class DevicesEditOne extends Component {
             </ContentPane>
         )
     }
+}
+DevicesEditOne.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    dataSource: PropTypes.object.isRequired,
+    location: PropTypes.array.isRequired,
+    changeActionList: PropTypes.func.isRequired
 }
