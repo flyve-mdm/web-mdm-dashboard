@@ -32,7 +32,7 @@ export default class FleetsContent extends Component {
             const newList = itemList.map(item => item === this.props.currentItem ? newCurrentItem : item)
             this.props.changeActionList(null)
             this.props.onNavigate([this.props.location[0]])
-            this.props.changeItemList([this.props.location[0]], { itemList: ItemList(this.props.location[0], newList) })
+            this.props.changeDataSource([this.props.location[0]], { itemList: ItemList(this.props.location[0], newList) })
         }
     }
 

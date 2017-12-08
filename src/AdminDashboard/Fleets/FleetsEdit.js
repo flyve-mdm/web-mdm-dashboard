@@ -17,7 +17,7 @@ export default class FleetsEdit extends Component {
     componentWillMount() {
         var newArray = []
 
-        this.props.itemList.map((value, index) =>
+        this.props.dataSource.itemList.map((value, index) =>
             newArray.push(value)
         )
 
@@ -45,21 +45,17 @@ export default class FleetsEdit extends Component {
         this.props.changeSelectionMode(false)
         this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
-        this.props.changeItemList([this.props.location[0]], { itemList: ItemList(this.props.location[0], this.state.itemListArray) })
+        this.props.changeDataSource([this.props.location[0]], { itemList: ItemList(this.props.location[0], this.state.itemListArray), sort: this.props.dataSource.sort })
     }
 
     render() {
         let selectedItemList
         let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
-        
-        if (typeof selectedIndex === 'number') {
-            selectedIndex = [selectedIndex]
-        }
-        
+
         if(selectedIndex !== null) {
             
             let renderComponent = selectedIndex.map((index) => {
-                selectedItemList = this.props.itemList.getAt(index)                                
+                selectedItemList = this.props.dataSource.itemList.getAt(index)                                
                 return (
                     <FleetsEditItemList
                     key={index}
@@ -97,14 +93,12 @@ FleetsEdit.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedIndex: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.array
-    ]),
-    itemList: PropTypes.object.isRequired,
-    actionList: PropTypes.string,
-    changeItemList: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired,
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
+    location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeSelectionMode: PropTypes.func.isRequired
+    selectedIndex: PropTypes.array,
+    changeSelectionMode: PropTypes.func.isRequired,
+    actionList: PropTypes.string,
+    changeActionList: PropTypes.func.isRequired,
 }
