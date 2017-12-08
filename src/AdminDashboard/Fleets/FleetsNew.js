@@ -14,7 +14,7 @@ export default class FleetsNew extends Component {
 
         if(this.state.name !== '' && this.state.name !== undefined) {
 
-            let item = this.props.itemList
+            let item = this.props.dataSource.itemList
             
             let newItem = {
                 "PluginFlyvemdmFleet.name": this.state.name,
@@ -25,7 +25,7 @@ export default class FleetsNew extends Component {
             }
     
             item.push(newItem)
-            this.props.changeItemList(this.props.location, { itemList: item, sort: true })
+            this.props.changeDataSource(this.props.location, { itemList: item, sort: true })
             this.props.changeCurrentItem(newItem)
             this.props.changeActionList('Add Tasks')
         }
@@ -68,5 +68,8 @@ FleetsNew.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
+    dataSource: PropTypes.object.isRequired,
+    location: PropTypes.array.isRequired,
+    changeCurrentItem:  PropTypes.func,
     changeActionList: PropTypes.func.isRequired
 }

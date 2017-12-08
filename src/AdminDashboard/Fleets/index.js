@@ -19,38 +19,35 @@ export default class Fleets extends Component {
 
     render() {
 
-        let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
-
+        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
         if (this.props.mode === 'small') {
             if (selectedIndex === null && this.props.actionList === null) {
                 return <FleetsList
                     itemListPaneWidth={'100%'}
-                    location={this.props.location}
-                    sort={this.props.sort}
-                    itemList={this.props.itemList}
-                    onNavigate={this.props.onNavigate}
-                    changeItemList={this.props.changeItemList}
-                    actionList={this.props.actionList}
-                    changeCurrentItem={this.props.changeCurrentItem}
-                    changeSelectionMode={this.changeSelectionMode}
-                    selectionMode={this.state.selectionMode}
-                    changeActionList={this.props.changeActionList}
+                    dataSource={this.props.dataSource}
+                    changeDataSource={this.props.changeDataSource}
                     fetchData={this.props.fetchData}
                     isLoading={this.props.isLoading}
-                    isError={this.props.isError} />
-            } else {
-                return <FleetsPage 
-                    itemListPaneWidth={0}
-                    selectedIndex={selectedIndex}
+                    isError={this.props.isError}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
-                    itemList={this.props.itemList} 
-                    actionList={this.props.actionList}
-                    changeItemList={this.props.changeItemList}
-                    changeActionList={this.props.changeActionList}
-                    currentItem={this.props.currentItem}
                     changeSelectionMode={this.changeSelectionMode}
-                    changeCurrentItem={this.props.changeCurrentItem} />
+                    selectionMode={this.state.selectionMode}
+                    changeCurrentItem={this.props.changeCurrentItem}
+                    actionList={this.props.actionList}
+                    changeActionList={this.props.changeActionList} />
+            } else {
+                return <FleetsPage
+                    itemListPaneWidth={0}
+                    dataSource={this.props.dataSource}
+                    changeDataSource={this.props.changeDataSource}
+                    location={this.props.location}
+                    onNavigate={this.props.onNavigate}
+                    selectedIndex={selectedIndex}
+                    changeSelectionMode={this.changeSelectionMode}
+                    changeCurrentItem={this.props.changeCurrentItem}
+                    actionList={this.props.actionList}
+                    changeActionList={this.props.changeActionList} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -58,31 +55,31 @@ export default class Fleets extends Component {
                 <div style={{ height: '100%' }}>
                     <FleetsList
                         itemListPaneWidth={itemListPaneWidth}
-                        location={this.props.location}
-                        sort={this.props.sort}
-                        itemList={this.props.itemList}
-                        onNavigate={this.props.onNavigate}
-                        changeCurrentItem={this.props.changeCurrentItem}
-                        changeItemList={this.props.changeItemList}
-                        changeSelectionMode={this.changeSelectionMode}
-                        actionList={this.props.actionList}
-                        selectionMode={this.state.selectionMode}
-                        changeActionList={this.props.changeActionList}
+                        dataSource={this.props.dataSource}
+                        changeDataSource={this.props.changeDataSource}
                         fetchData={this.props.fetchData}
                         isLoading={this.props.isLoading}
-                        isError={this.props.isError} />
-                    <FleetsPage 
-                        itemListPaneWidth={itemListPaneWidth}
-                        selectedIndex={selectedIndex}
+                        isError={this.props.isError}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
-                        itemList={this.props.itemList}
-                        actionList={this.props.actionList}
-                        changeItemList={this.props.changeItemList}
-                        changeActionList={this.props.changeActionList}
-                        currentItem={this.props.currentItem}
                         changeSelectionMode={this.changeSelectionMode}
-                        changeCurrentItem={this.props.changeCurrentItem} />
+                        selectionMode={this.state.selectionMode}
+                        currentItem={this.props.currentItem}
+                        changeCurrentItem={this.props.changeCurrentItem}
+                        actionList={this.props.actionList}
+                        changeActionList={this.props.changeActionList} />
+                    <FleetsPage
+                        itemListPaneWidth={itemListPaneWidth}
+                        dataSource={this.props.dataSource}
+                        changeDataSource={this.props.changeDataSource}
+                        location={this.props.location}
+                        onNavigate={this.props.onNavigate}
+                        selectedIndex={selectedIndex}
+                        changeSelectionMode={this.changeSelectionMode}
+                        currentItem={this.props.currentItem}
+                        changeCurrentItem={this.props.changeCurrentItem}
+                        actionList={this.props.actionList}
+                        changeActionList={this.props.changeActionList} />
                 </div>
             )
         }
@@ -90,13 +87,12 @@ export default class Fleets extends Component {
 }
 Fleets.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
-    sort: PropTypes.bool,
-    itemList: PropTypes.object.isRequired,
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
     currentItem: PropTypes.object,
-    changeCurrentItem: PropTypes.func.isRequired
+    changeCurrentItem: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired,
+    actionList: PropTypes.string
 }
