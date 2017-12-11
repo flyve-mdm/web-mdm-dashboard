@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FilesUpload from '../Files/FilesUpload'
 import FilesUploadItemList from '../Files/FilesUploadItemList'
+import ContentPane from '../../Utils/ContentPane'
 
 export default class ApplicationsAdd extends Component {
 
@@ -56,36 +57,45 @@ export default class ApplicationsAdd extends Component {
 
     render() {
         return (
-            <div style={{ padding: '10px' }}>
-                <FilesUpload
-                    ref='files'
-                    className='files-dropzone'
-                    onChange={this.onFilesChange}
-                    onError={this.onFilesError}
-                    maxFiles={1}
-                    maxFileSize={10000000}
-                    minFileSize={0}
-                    clickable
-                >
-                    Drop the file here or click to upload
-            </FilesUpload>
-                <div style={{ margin: '10px' }}>
-                    <button className="win-button win-button-primary" onClick={this.filesUpload}>Save</button>
-                    {
-                        this.state.files.length > 0
-                            ? <div>
-                                {this.state.files.map((file) =>
-                                    <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
-                                )}
-                            </div>
-                            : null
-                    }
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                <div className="contentHeader">
+                    <h2 className="win-h2 titleContentPane" > New Application </h2>
                 </div>
-            </div>
+                <div style={{ padding: '10px' }}>
+                    <FilesUpload
+                        ref='files'
+                        className='files-dropzone'
+                        onChange={this.onFilesChange}
+                        onError={this.onFilesError}
+                        maxFiles={1}
+                        maxFileSize={10000000}
+                        minFileSize={0}
+                        clickable
+                    >
+                        Drop the file here or click to upload
+                    </FilesUpload>
+                    <div style={{ margin: '10px' }}>
+                        <button className="win-button win-button-primary" onClick={this.filesUpload}>Save</button>
+                        {
+                            this.state.files.length > 0
+                                ? <div>
+                                    {this.state.files.map((file) =>
+                                        <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
+                                    )}
+                                </div>
+                                : null
+                        }
+                    </div>
+                </div>
+            </ContentPane>
         )
     }
 }
 ApplicationsAdd.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
     dataSource: PropTypes.object.isRequired,
     changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
