@@ -25,7 +25,6 @@ class Profiles extends Component {
             title: '',
             location: '',
             defaultProfile: ''
-
         }
     }
 
@@ -292,24 +291,47 @@ class Profiles extends Component {
         
 
         return (
+            // <ConfirmationScreen itemListPaneWidth={this.props.itemListPaneWidth} title="Title" message="message" function={res => console.log(res)}/>
+
             <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                <h2 className="win-h2"> Profiles </h2>
 
                 <ConstructInputs data={emailsInformation} icon="emailIcon" />
                 <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
 
                 <ConstructInputs data={personalInformation} icon="contactIcon" />
-                
+            
                 <ConstructInputs data={contactInformation} icon="phoneIcon" />
-                
+            
                 <ConstructInputs data={activityInformation} icon="documentIcon" />
 
                 <button className={ this.state.buttonSaveClassName } style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                     Save
                 </button>
-                
+            
                 <br/>
+
+
+
             </div>
+            // <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+            //     <h2 className="win-h2"> Profiles </h2>
+
+            //     <ConstructInputs data={emailsInformation} icon="emailIcon" />
+            //     <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
+
+            //     <ConstructInputs data={personalInformation} icon="contactIcon" />
+                
+            //     <ConstructInputs data={contactInformation} icon="phoneIcon" />
+                
+            //     <ConstructInputs data={activityInformation} icon="documentIcon" />
+
+            //     <button className={ this.state.buttonSaveClassName } style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+            //         Save
+            //     </button>
+                
+            //     <br/>
+            // </div>
+
         )
     }
 }

@@ -25,6 +25,19 @@ $list-item-icon-size: 48px;
     height: 100%;
 }
 
+.win-clickeater {
+    display: none;
+}
+
+.win-contentdialog-dialog {
+    outline-color: $app-color !important;
+}
+
+.win-button-primary, .win-contentdialog-primarycommand {
+    background-color: $app-color !important;
+    color: $white-color !important; 
+}
+
 #app {
     height: 100%;
     font-weight: 300;
@@ -92,12 +105,6 @@ $list-item-icon-size: 48px;
         border-color: $app-color !important;
     }
 
-    /*
-    * Button primary
-    */
-    .win-button-primary {
-        background-color: $app-color !important;
-    }
 
     /*
     * BackButton
