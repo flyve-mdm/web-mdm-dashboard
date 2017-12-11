@@ -38,7 +38,8 @@ export default class ApplicationsList extends Component {
     })
 
     handleToggleSelectionMode = () => {
-        this.props.changeSelectionMode(!this.props.selectionMode)                
+        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
         this.refs.listView.winControl.selection.clear()
     }
