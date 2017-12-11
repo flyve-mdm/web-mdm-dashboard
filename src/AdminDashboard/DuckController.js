@@ -41,7 +41,7 @@ const CHANGE_LOCATION = 'flyve-mdm-web-ui/AdminDashboard/changeLocation'
 const CHANGE_INDEX = 'flyve-mdm-web-ui/AdminDashboard/changeIndex'
 const HANDLE_BACK = 'flyve-mdm-web-ui/AdminDashboard/handleBack'
 const CHANGE_ENDPOINT = 'flyve-mdm-web-ui/AdminDashboard/changeEndpoint'
-const CHANGE_ITEM_LIST = 'flyve-mdm-web-ui/AdminDashboard/changeItemList'
+const CHANGE_DATA_SOURCE = 'flyve-mdm-web-ui/AdminDashboard/changeDataSource'
 const CHANGE_ACTION_LIST = 'flyve-mdm-web-ui/AdminDashboard/changeActionList'
 const CHANGE_CURRENT_ITEM = 'flyve-mdm-web-ui/AdminDashboard/changeCurrentItem'
 const FETCHING_DATA = 'flyve-mdm-web-ui/AdminDashboard/fetchingData'
@@ -94,7 +94,7 @@ export default function reducer(state = INITIAL_STATE, action) {
                 endpoint: action.newEndpoint
             }
         
-        case CHANGE_ITEM_LIST:
+        case CHANGE_DATA_SOURCE:
             return {
                 ...state,
                 dataSource: action.newDataSource
@@ -172,9 +172,9 @@ export function changeEndpoint(newEndpoint) {
         newEndpoint
     }
 }
-export function changeItemList(location, newDataSource) {
+export function changeDataSource(location, newDataSource) {
     return {
-        type: CHANGE_ITEM_LIST,
+        type: CHANGE_DATA_SOURCE,
         newDataSource,
         location: location[0].toLowerCase()
     }
