@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
-import ItemListPane from './ItemListPane'
-import ContentPane from './ContentPane'
+import UsersList from './UsersList'
+import UsersPage from './UsersPage'
 
-class UsersPage extends Component {
+export default class Users extends Component {
 
     constructor(props) {
         super(props)
@@ -19,53 +19,65 @@ class UsersPage extends Component {
     }
 
     render() {
-        let selectedIndex = this.props.location.length >= 2 ? this.props.location[1] : null
-
+        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
         if (this.props.mode === 'small') {
-            if (selectedIndex === null) {
-                return <ItemListPane 
-                        itemListPaneWidth="100%" 
-                        changeItemList={this.props.changeItemList} 
-                        location={this.props.location} 
+            if (selectedIndex === null && this.props.actionList === null) {
+                return <UsersList
+                    itemListPaneWidth={'100%'}
+                    dataSource={this.props.dataSource}
+                    changeDataSource={this.props.changeDataSource}
+                    fetchData={this.props.fetchData}
+                    isLoading={this.props.isLoading}
+                    isError={this.props.isError}
+                    location={this.props.location}
+                    onNavigate={this.props.onNavigate}
+                    changeSelectionMode={this.changeSelectionMode}
+                    selectionMode={this.state.selectionMode}
+                    changeCurrentItem={this.props.changeCurrentItem}
+                    actionList={this.props.actionList}
+                    changeActionList={this.props.changeActionList} />
+            } else {
+                return <UsersPage
+                    itemListPaneWidth={0}
+                    dataSource={this.props.dataSource}
+                    changeDataSource={this.props.changeDataSource}
+                    location={this.props.location}
+                    onNavigate={this.props.onNavigate}
+                    selectedIndex={selectedIndex}
+                    changeSelectionMode={this.changeSelectionMode}
+                    changeCurrentItem={this.props.changeCurrentItem}
+                    actionList={this.props.actionList}
+                    changeActionList={this.props.changeActionList} />
+            }
+        } else {
+            let itemListPaneWidth = 320
+            return (
+                <div style={{ height: '100%' }}>
+                    <UsersList
+                        itemListPaneWidth={itemListPaneWidth}
+                        dataSource={this.props.dataSource}
+                        changeDataSource={this.props.changeDataSource}
+                        fetchData={this.props.fetchData}
+                        isLoading={this.props.isLoading}
+                        isError={this.props.isError}
+                        location={this.props.location}
                         onNavigate={this.props.onNavigate}
                         changeSelectionMode={this.changeSelectionMode}
                         selectionMode={this.state.selectionMode}
-                        itemList={this.props.itemList} 
-                        sort={this.props.sort} 
-                        changeActionList={this.props.changeActionList}
-                        fetchData={this.props.fetchData}
-                        isLoading={this.props.isLoading}
-                        isError={this.props.isError} />
-            } else {
-                return <ContentPane 
-                        selectedIndex={selectedIndex} 
-                        itemListPaneWidth={0} 
-                        changeSelectionMode={this.changeSelectionMode}
-                        itemList={this.props.itemList}
+                        currentItem={this.props.currentItem}
+                        changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} />
-            }
-        } else {
-            return (
-                <div style={{ height: '100%' }}>
-                    <ItemListPane 
-                        itemListPaneWidth={320} 
-                        changeItemList={this.props.changeItemList} 
-                        location={this.props.location} 
-                        onNavigate={this.props.onNavigate} 
+                    <UsersPage
+                        itemListPaneWidth={itemListPaneWidth}
+                        dataSource={this.props.dataSource}
+                        changeDataSource={this.props.changeDataSource}
+                        location={this.props.location}
+                        onNavigate={this.props.onNavigate}
+                        selectedIndex={selectedIndex}
                         changeSelectionMode={this.changeSelectionMode}
-                        selectionMode={this.state.selectionMode}
-                        itemList={this.props.itemList} 
-                        sort={this.props.sort} 
-                        changeActionList={this.props.changeActionList} 
-                        fetchData={this.props.fetchData}
-                        isLoading={this.props.isLoading}
-                        isError={this.props.isError} />
-                    <ContentPane 
-                        selectedIndex={selectedIndex} 
-                        itemListPaneWidth={320} 
-                        changeSelectionMode={this.changeSelectionMode}
-                        itemList={this.props.itemList} 
+                        currentItem={this.props.currentItem}
+                        changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} />
                 </div>
@@ -73,16 +85,14 @@ class UsersPage extends Component {
         }
     }
 }
-
-UsersPage.propTypes = {
+Users.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
-    sort: PropTypes.bool.isRequired,
-    itemList: PropTypes.object.isRequired,
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired,
+    currentItem: PropTypes.object,
+    changeCurrentItem: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
     actionList: PropTypes.string
 }
-
-export default UsersPage
