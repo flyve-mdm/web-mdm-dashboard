@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
-import BytesToSize from '../../Utils/BytesToSize'
+import FilesContent from './FilesContent'
 import FilesAdd from './FilesAdd'
 import FilesEdit from './FilesEdit'
 import EmptyMessage from '../../Utils/EmptyMessage'
@@ -29,16 +28,12 @@ export default class FilesPage extends Component {
                         )
                     case "Add":
                     return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                            <div className="contentHeader">
-                                <h2 className="win-h2 titleContentPane" > New File </h2>
-                            </div>
-                            <FilesAdd
-                            dataSource={this.props.dataSource} 
-                            changeDataSource={this.props.changeDataSource} 
+                        <FilesAdd
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            dataSource={this.props.dataSource}
+                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
-                            changeActionList={this.props.changeActionList}/>
-                        </div>
+                            changeActionList={this.props.changeActionList} />
                     )
                     default: 
                     return (
@@ -50,19 +45,12 @@ export default class FilesPage extends Component {
             let selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
             if(selectedItemList !== undefined) {
                 return (
-                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                        <div className="contentHeader">
-                            <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
-                            <div className="itemInfo">
-                                <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px'}} />
-                                <div className="contentStatus">
-                                    <div className="name">{selectedItemList["PluginFlyvemdmFile.name"]}</div>
-                                    <div className="detail">{BytesToSize(selectedItemList["PluginFlyvemdmFile.filesize"])}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="separator" />
-                    </div>
+                    <FilesContent
+                        itemListPaneWidth={this.props.itemListPaneWidth}
+                        location={this.props.location}
+                        selectedIndex={this.props.selectedIndex}
+                        selectedItemList={selectedItemList}
+                        changeActionList={this.props.changeActionList} />
                 )
             } else {
                 return (
