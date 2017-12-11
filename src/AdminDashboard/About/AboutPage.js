@@ -19,7 +19,7 @@ export default class AboutPage extends Component {
                 <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
             )
         } else {
-            let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex)
+            let selectedItemList = this.props.itemList.getAt(this.props.selectedIndex[0])
             switch (selectedItemList.title) {
                 case 'License':
                     return (
@@ -88,6 +88,6 @@ AboutPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedIndex: PropTypes.number,
+    selectedIndex: PropTypes.array,
     itemList: PropTypes.object.isRequired
 }

@@ -47,7 +47,7 @@ class ItemListPage extends Component {
         let index = listView.selection.getIndices()
         setTimeout(function () {
             this.setState({ selectedItemList: index });
-            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
+            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index] : this.props.location);
         }.bind(this), 0)
     }
 
@@ -70,7 +70,7 @@ class ItemListPage extends Component {
             selectedItem: [],
             selectionMode: false
         })
-        this.props.changeItemList(this.props.location, { itemList: item, sort: this.props.sort })
+        this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.sort })
     }
 
     handleSort = () => {
@@ -78,7 +78,7 @@ class ItemListPage extends Component {
         this.props.itemList.map((value, index) =>
             array.push(value)
         );
-        this.props.changeItemList(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.sort), sort: !this.props.sort })
+        this.props.changeDataSource(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.sort), sort: !this.props.sort })
     }
 
     descendingCompare(first, second) {
@@ -249,7 +249,7 @@ ItemListPage.propTypes = {
     itemList: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeItemList: PropTypes.func.isRequired
+    changeDataSource: PropTypes.func.isRequired
 }
 
 export default ItemListPage

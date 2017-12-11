@@ -26,7 +26,7 @@ export default class AboutList extends Component {
         let index = listView.selection.getIndices()
         setTimeout(function () {
             this.setState({ selectedItemList: index });
-            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index[0]] : this.props.location);
+            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index] : this.props.location);
         }.bind(this), 0)
     }
 
