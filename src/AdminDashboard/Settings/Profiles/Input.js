@@ -6,7 +6,7 @@ class Input extends Component {
     render() {
         let clearIcon 
         const deleteEmail = async () => {
-            const isOK = await Confirmation.isOK()
+            const isOK = await Confirmation.isOK(this.contentDialog)
             if(isOK) this.props.delete(this.props.name)
         }
         if (this.props.delete) clearIcon = <span className="clearIcon" style={{ margin: 10 }} onClick={deleteEmail}/>
@@ -24,7 +24,7 @@ class Input extends Component {
                     disabled={this.props.disabled}
                     style={this.props.style}
                 />
-                {this.props.delete ? <Confirmation title={this.props.label} message={this.props.value} reference={this.props.name}/> : <span/>}
+                {this.props.delete ? <Confirmation title={`Delete ${this.props.label}`} message={this.props.value} reference={el => this.contentDialog = el} /> : <span/>}
             </div>            
         )
     }
