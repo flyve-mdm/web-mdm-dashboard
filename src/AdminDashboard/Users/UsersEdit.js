@@ -1,125 +1,105 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import UsersEditItemList from './UsersEditItemList'
+import ItemList from '../ItemList'
 import ContentPane from '../../Utils/ContentPane'
+import EmptyMessage from '../../Utils/EmptyMessage'
 
-export default class UsersEdit extends Component {
+export default class DevicesEdit extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            login: '',
-            surname: '',
-            firstName: '',
-            password: '',
-            passwordConfirmation: ''
+            itemListArray: []
         }
     }
 
-    componentDidMount() {
-        const selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
+    componentWillMount() {
+        let newArray = []
+
+        this.props.dataSource.itemList.map((value, index) =>
+            newArray.push(value)
+        )
 
         this.setState({
-            login: selectedItemList["User.name"],
-            surname: '',
-            firstName: '',
+            itemListArray: newArray
         })
     }
 
-    sendChanges = () => {
-        this.props.changeActionList(null)
+    updateItemList = (index, name) => {
+        let newItem = this.state.itemListArray
+
+        //Find index of specific object using findIndex method.    
+        let objIndex = newItem.findIndex((obj => obj["User.id"] === index));
+
+        //Update object's name property.
+        newItem[objIndex]["User.name"] = name
+
+        this.setState({
+            itemListArray: newItem
+        })
     }
 
-    changeInput = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+    handleSaveDevices = () => {
+
+        this.props.changeSelectionMode(false)
+        this.props.changeActionList(null)
+        this.props.onNavigate([this.props.location[0]])
+        this.props.changeDataSource([this.props.location[0]], { itemList: ItemList(this.props.location[0], this.state.itemListArray), sort: this.props.dataSource.sort })
     }
 
     render() {
-        return (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
-                <h2 className="win-h2 titleContentPane" onClick={() =>this.changeSelectItem([])}>
-                    Edit User
-                </h2>
-                <p>Please insert an active email address.</p>
-                <p>An email will be sent with a QR code.</p>
-                <div>
-                    <b>Login </b> <br/>
-                    <input 
-                        type="text" 
-                        className="win-textbox" 
-                        placeholder="Login"
-                        name="login"
-                        value={this.state.login}
-                        onChange={this.changeInput}
-                        required
-                    />
-                </div>
-                <div>
-                    <b>Surname </b> <br/>
-                    <input 
-                        type="text" 
-                        className="win-textbox" 
-                        placeholder="Surname"
-                        name="surname"
-                        value={this.state.surname}
-                        onChange={this.changeInput}
-                    />
-                </div>
-                <div>
-                    <b>First name </b> <br/>
-                    <input 
-                        type="text" 
-                        className="win-textbox" 
-                        placeholder="First name"
-                        name="firstName"
-                        value={this.state.firstName}
-                        onChange={this.changeInput}
-                    />
-                </div>
-                <div>
-                    <b>Password </b> <br/>
-                    <input 
-                        type="password" 
-                        className="win-textbox" 
-                        placeholder="Password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.changeInput}
-                        required
-                    />
-                </div>
-                <div>
-                    <b>Password (confirmation) </b> <br/>
-                    <input 
-                        type="password" 
-                        className="win-textbox" 
-                        placeholder="Password"
-                        name="passwordConfirmation"
-                        value={this.state.passwordConfirmation}
-                        onChange={this.changeInput}
-                        required
-                    />
-                </div>
-                
-                <br/>
 
-                <button className="win-button" onClick={() => this.props.changeActionList(null)}>Cancel</button>
-                <button 
-                    className="win-button win-button-primary" 
-                    style={{marginLeft: 10}}
-                    onClick={this.sendChanges}
-                >
-                    Save
-                </button>
-            </ContentPane>
-        )
+        let selectedItemList
+        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
+
+        if (selectedIndex) {
+
+            let renderComponent = selectedIndex.map((index) => {
+                selectedItemList = this.props.dataSource.itemList.getAt(index)
+
+                return (
+                    <UsersEditItemList
+                        key={index}
+                        itemListPaneWidth={this.props.itemListPaneWidth}
+                        updateItemList={this.updateItemList}
+                        location={this.props.location}
+                        currentItem={selectedItemList}
+                        changeActionList={this.props.changeActionList} />
+                )
+            })
+
+            return (
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                    <div className="contentHeader">
+                        <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
+                        <button className="win-button win-button-primary" onClick={this.handleSaveDevices}>
+                            Save
+                        </button>
+                    </div>
+                    <div className="separator" />
+                    {renderComponent}
+                </ContentPane>
+            )
+
+        } else {
+            return (
+                <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
+            )
+        }
     }
 }
-UsersEdit.propTypes = {
+DevicesEdit.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
     dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
+    location: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired,
     selectedIndex: PropTypes.array,
-    changeActionList: PropTypes.func.isRequired
+    changeSelectionMode: PropTypes.func.isRequired,
+    actionList: PropTypes.string,
+    changeActionList: PropTypes.func.isRequired,
 }

@@ -25,7 +25,7 @@ export default class UsersContent extends Component {
                             </span>
                             <span className="source">Joined {selectedItemList['User.date_creation']}</span>
                             <br />
-                            <span className="editIcon" onClick={() => this.props.changeActionList('Edit')} />
+                            <span className="editIcon" onClick={() => this.props.changeActionList('EditOne')} />
                         </div>
                     </div>
                 </div>

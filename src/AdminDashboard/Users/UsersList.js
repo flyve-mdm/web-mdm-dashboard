@@ -12,8 +12,7 @@ export default class UsersList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItemList: [],
-            selectionMode: false
+            selectedItemList: []
         }
     }
 
@@ -33,8 +32,18 @@ export default class UsersList extends Component {
         )
     })
 
+    handlePanel = (eventObject) => {
+        let button = eventObject.currentTarget.winControl
+        this.refs.listView.winControl.selection.clear()
+
+        this.props.changeSelectionMode(false)
+        this.props.changeActionList(button.label)
+        this.props.onNavigate([this.props.location[0]])
+    }
+
     handleToggleSelectionMode = () => {
-        this.setState({ selectionMode: !this.state.selectionMode })
+        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
         this.refs.listView.winControl.selection.clear()
     }
@@ -42,11 +51,18 @@ export default class UsersList extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        setTimeout(function () {
-            this.setState({ selectedItemList: index })
-            this.props.changeActionList(null)
-            this.props.onNavigate(index.length === 1 && !this.state.selectionMode ? [this.props.location[0], index] : this.props.location)
-        }.bind(this), 0)
+        this.setState({ selectedItemList: index })
+
+        if (this.props.actionList !== 'Edit') {
+            setTimeout(() => {
+                if (index.length !== 0) {
+                    this.props.changeActionList(null)
+                }
+
+                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
+            }, 0)
+        }
+
     }
 
     handleContentAnimating(eventObject) {
@@ -60,9 +76,21 @@ export default class UsersList extends Component {
         this.props.fetchData(this.props.location[0])
     }
 
+    handleEdit = (eventObject) => {
+        let index = this.state.selectedItemList
+        let button = eventObject.currentTarget.winControl
+
+        setTimeout(() => {
+            this.props.changeActionList(button.label)
+            this.props.onNavigate(index.length > 0 && this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
+        }, 0)
+    }
+
     handleDelete = () => {
         // Clean another actions selected
         this.props.changeActionList(null)
+        // Exit selection mode
+        this.props.changeSelectionMode(false)
         
         let item = this.props.dataSource.itemList
         let index = this.state.selectedItemList
@@ -72,8 +100,7 @@ export default class UsersList extends Component {
             item.splice(i, 1)
         })
         this.setState({
-            selectedItem: [],
-            selectionMode: false
+            selectedItem: []
         })
         this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
     }
@@ -107,6 +134,17 @@ export default class UsersList extends Component {
             />
         )
 
+        let editCommand = (
+            <ReactWinJS.ToolBar.Button
+                key="edit"
+                icon="edit"
+                label="Edit"
+                priority={0}
+                disabled={this.state.selectedItemList.length === 0}
+                onClick={this.handleEdit}
+            />
+        )
+
         let listComponent = <Loading message="Loading..." headerSize={48}/>
 
         if (this.isError) {
@@ -122,8 +160,8 @@ export default class UsersList extends Component {
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
                     groupHeaderTemplate={this.groupHeaderRenderer}
-                    selectionMode={this.state.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
+                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
                     onContentAnimating={this.handleContentAnimating}
                 />
@@ -153,9 +191,11 @@ export default class UsersList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
+                        onClick={this.handlePanel}
                     />
 
-                    {this.state.selectionMode ? deleteCommand : null}
+                    {this.props.selectionMode ? editCommand : null}
+                    {this.props.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
