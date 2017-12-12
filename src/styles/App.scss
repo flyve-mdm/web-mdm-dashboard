@@ -81,7 +81,7 @@ $list-item-icon-size: 48px;
     .contentPicture {
 
         .clickable {
-            
+
             &:after {
                 content: "\E114";
                 display: block;
@@ -385,6 +385,9 @@ $list-item-icon-size: 48px;
     }
     .viewIcon:before {
         content: "\E18B";        
+    }
+    .monthIcon:before {
+        content: "\E163";        
     }
 
     .files-dropzone {
