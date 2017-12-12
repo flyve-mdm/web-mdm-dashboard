@@ -74,6 +74,25 @@ $list-item-icon-size: 48px;
         color: $app-color;
     }
 
+    .clickable {
+        cursor: pointer;
+    }
+
+    .contentPicture {
+
+        .clickable {
+            
+            &:after {
+                content: "\E114";
+                display: block;
+                margin-top: -30px;
+                margin-left: 110px;
+                font-size: 30px;
+            }
+        }
+    }
+
+
     .hidden {
         display: none;
     }
