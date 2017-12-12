@@ -24,6 +24,10 @@ class Profiles extends Component {
             modified: validateData(currentUser["User.date_mod"], undefined),
             emails: validateData(currentUser["User.UserEmail.email"], []),
             imageProfile: validateData(currentUser['User.picture'], "profile.png"),
+            authentication: 'GLPI internal database',
+            category: '',
+            defaultEntity: '',
+            comments: '',
             typeImageProfile: 'file',
             title: '',
             location: '',
@@ -309,21 +313,90 @@ class Profiles extends Component {
 
         ]
 
-        const validDatesInformation  = [
+        const validDatesInformation = [
             [{
                 label: "Valid since",
                 type: "date",
                 name: "validSince",
                 value: this.state.validSince,
-                function: this.changeDate,
+                function: this.changeDate
             }],
             [{
                 label: "Valid until",
                 type: "date",
                 name: "validUntil",
                 value: this.state.validUntil,
-                function: this.changeDate,
+                function: this.changeDate
             }]
+        ]
+
+        const moreInformation = [
+            [{
+                label: "Authentication",
+                type: "text",
+                name: "authentication",
+                value: this.state.authentication,
+                placeholder: null,
+                function: this.changeInput,
+                disabled: true,
+                style: null
+            }],
+            [
+                {
+                    label: "Comments",
+                    type: "textArea",
+                    name: "comments",
+                    value: this.state.comments,
+                    placeholder: null,
+                    function: this.changeInput,
+                    disabled: false,
+                    style: null
+                }
+            ],
+            [   
+                {
+                    label: "Category",
+                    type: "select",
+                    name: "category",
+                    value: this.state.category,
+                    options: [
+                        {
+                            label: 'option 1',
+                            value: 'option 1'
+                        },
+                        {
+                            label: 'option 2',
+                            value: 'option 2'
+                        },
+                        {
+                            label: 'option 3',
+                            value: 'option 3'
+                        }
+                    ],
+                    function: this.changeInput
+                },
+                {
+                    label: "Default entity",
+                    type: "select",
+                    name: "defaultEntity",
+                    value: this.state.defaultEntity,
+                    options: [
+                        {
+                            label: 'option 1',
+                            value: 'option 1'
+                        },
+                        {
+                            label: 'option 2',
+                            value: 'option 2'
+                        },
+                        {
+                            label: 'option 3',
+                            value: 'option 3'
+                        }
+                    ],
+                    function: this.changeInput
+                }
+            ]
         ]
 
         let emailsInformation = [[]]
@@ -395,6 +468,8 @@ class Profiles extends Component {
 
                 <ConstructInputs data={contactInformation} icon="phoneIcon" />
             
+                <ConstructInputs data={moreInformation} icon="detailsIcon" />
+
                 <ConstructInputs data={activityInformation} icon="documentIcon" />
 
                 <button className={ this.state.buttonSaveClassName } style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
