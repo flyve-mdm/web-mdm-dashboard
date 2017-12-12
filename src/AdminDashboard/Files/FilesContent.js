@@ -4,6 +4,21 @@ import ContentPane from '../../Utils/ContentPane'
 import BytesToSize from '../../Utils/BytesToSize'
 
 export default class FilesContent extends Component {
+
+    handleDelete = () => {
+
+        let item = this.props.dataSource.itemList
+        let index = this.props.selectedIndex
+        index.sort()
+        index.reverse()
+        index.forEach((i) => {
+            item.splice(i, 1)
+        })
+
+        this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
+        this.props.onNavigate([this.props.location[0]])
+    }
+    
     render() {
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
@@ -15,7 +30,8 @@ export default class FilesContent extends Component {
                             <div className="name">{this.props.selectedItemList["PluginFlyvemdmFile.name"]}</div>
                             <div className="detail">{BytesToSize(this.props.selectedItemList["PluginFlyvemdmFile.filesize"])}</div>
                             <br />
-                            <span className="editIcon" onClick={() => this.props.changeActionList('Edit')} />
+                            <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.changeActionList('Edit')} />
+                            <span className="deleteIcon" onClick={this.handleDelete} />
                         </div>
                     </div>
                 </div>
@@ -29,8 +45,11 @@ FilesContent.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
     selectedIndex: PropTypes.array,
     location: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired,
     selectedItemList: PropTypes.object.isRequired,
     changeActionList: PropTypes.func.isRequired
 }
