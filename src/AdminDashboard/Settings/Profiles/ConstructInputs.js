@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Input from './Input'
 import Select from './Select'
+import DatePicker from './DatePicker'
 
 class ConstructInputs extends Component {
 
@@ -18,6 +19,15 @@ class ConstructInputs extends Component {
                                 name={element.name}
                                 value={element.value}
                                 options={element.options}
+                                function={element.function}
+                                key={element.name}/>
+                            )
+                        } else if (element.type === 'date') {
+                            renderElement = (
+                                <DatePicker
+                                label={element.label}
+                                name={element.name}
+                                value={element.value}
                                 function={element.function}
                                 key={element.name}/>
                             )
