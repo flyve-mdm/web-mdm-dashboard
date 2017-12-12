@@ -4,19 +4,18 @@ import Confirmation from '../../../Utils/Confirmation'
 
 class Input extends Component {
     render() {
-        let clearIcon 
+        let deleteIcon 
         const deleteEmail = async () => {
             const isOK = await Confirmation.isOK(this.contentDialog)
             if(isOK) this.props.delete(this.props.name)
         }
-        if (this.props.delete) clearIcon = <span className="clearIcon" style={{ margin: 10 }} onClick={deleteEmail}/>
+        if (this.props.delete) deleteIcon = <span className="deleteIcon" style={{ margin: 10, fontSize: 18 }} onClick={deleteEmail}/>
         return (
             <div className="list-col">
                 <p>{this.props.label}</p>
-                { clearIcon }
-                <input 
-                    type={this.props.type} 
-                    className="win-textbox" 
+                <input
+                    type={this.props.type}
+                    className="win-textbox"
                     name={this.props.name}
                     value={this.props.value}
                     placeholder={this.props.placeholder}
@@ -24,8 +23,9 @@ class Input extends Component {
                     disabled={this.props.disabled}
                     style={this.props.style}
                 />
+                { deleteIcon }
                 {this.props.delete ? <Confirmation title={`Delete ${this.props.label}`} message={this.props.value} reference={el => this.contentDialog = el} /> : <span/>}
-            </div>            
+            </div>
         )
     }
 }
