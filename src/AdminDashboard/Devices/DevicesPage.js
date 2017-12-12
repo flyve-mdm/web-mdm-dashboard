@@ -42,7 +42,10 @@ export default class DevicesPage extends Component {
                     return (
                         <DevicesContent
                             itemListPaneWidth={this.props.itemListPaneWidth}
+                            dataSource={this.props.dataSource}
+                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
+                            onNavigate={this.props.onNavigate}
                             selectedIndex={this.props.selectedIndex}
                             selectedItemList={selectedItemList}
                             changeActionList={this.props.changeActionList} />
