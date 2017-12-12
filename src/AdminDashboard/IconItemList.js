@@ -10,7 +10,6 @@ export default class IconItemList extends React.Component {
             image = "images/" + this.props.image
         }
         const style = {
-            lineHeight: size + 'px',
             backgroundColor: backgroundColor,
             width: size,
             height: size,
@@ -23,7 +22,9 @@ export default class IconItemList extends React.Component {
 
         return (
             <div className="contentPicture" style={style}>
-                <img src={image} style={style} alt="" />
+                <div className={this.props.imgClass} >
+                    <img alt="" src={image} style={style} onClick={this.props.imgClick}/>
+                </div>
             </div>
         )
     }
@@ -32,5 +33,7 @@ IconItemList.propTypes = {
     size: PropTypes.number,
     backgroundColor: PropTypes.string,
     image: PropTypes.string,
-    type: PropTypes.oneOf(["file", "base64", "localFile"])
+    type: PropTypes.oneOf(["file", "base64", "localFile"]),
+    imgClick: PropTypes.func,
+    imgClass: PropTypes.string
 }
