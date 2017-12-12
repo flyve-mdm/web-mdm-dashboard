@@ -389,6 +389,9 @@ $list-item-icon-size: 48px;
     .monthIcon:before {
         content: "\E163";        
     }
+    .detailsIcon:before {
+        content: "\E14C";        
+    }
 
     .files-dropzone {
         text-align: center;
