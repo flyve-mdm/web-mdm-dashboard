@@ -16,7 +16,7 @@ export default class FleetsNew extends Component {
     item = () => {
         return {
             "PluginFlyvemdmFleet.name": '',
-            "PluginFlyvemdmFleet.id": 0,
+            "PluginFlyvemdmFleet.id": Math.floor(Math.random() * 1000) + 1,
             "PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id": null,
             "PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype": null,
             "PluginFlyvemdmFleet.is_default": 1
