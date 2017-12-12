@@ -120,7 +120,7 @@ $list-item-icon-size: 48px;
     /*
     * Input Text
     */
-    .win-textbox:focus {
+    .win-textbox:focus, .win-textarea:focus {
         border-color: $app-color !important;
     }
 
