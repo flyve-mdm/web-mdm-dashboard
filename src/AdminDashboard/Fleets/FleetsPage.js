@@ -65,6 +65,7 @@ export default class FleetsPage extends Component {
                             changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
+                            selectedIndex={this.props.selectedIndex}
                             currentItem={selectedItemList}
                             changeActionList={this.props.changeActionList} />
                     )
