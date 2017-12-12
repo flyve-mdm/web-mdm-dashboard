@@ -4,6 +4,7 @@ import Calc100PercentMinus from '../../../Utils/Calc100PercentMinus'
 import currentUser from '../../data/currentUser.json'
 import validateData from '../../../Utils/validateData'
 import ConstructInputs from './ConstructInputs'
+import IconItemList from '../../IconItemList'
 
 class Profiles extends Component {
     
@@ -22,6 +23,8 @@ class Profiles extends Component {
             created: validateData(currentUser["User.date_creation"], undefined),
             modified: validateData(currentUser["User.date_mod"], undefined),
             emails: validateData(currentUser["User.UserEmail.email"], []),
+            imageProfile: validateData(currentUser['User.picture'], "profile.png"),
+            typeImageProfile: 'file',
             title: '',
             location: '',
             defaultProfile: ''
@@ -72,6 +75,30 @@ class Profiles extends Component {
                 ''
             ]
         })
+    }
+
+    previewFile = (evt) => {
+
+        const file = evt.target.files[0]
+        if (file.type.match('image.*')) {
+            let reader = new FileReader()
+
+            reader.onload = ((theFile) => {
+                return (e) => {
+                this.setState({
+                    imageProfile: e.target.result,
+                    typeImageProfile: 'localFile'
+                })
+            }})(file)
+
+            reader.readAsDataURL(file)
+        }
+   }
+
+    openFileChooser = () => {
+        console.log('ddd')
+        this.inputElement.value = null
+        this.inputElement.click()
     }
 
     render () {
@@ -288,16 +315,51 @@ class Profiles extends Component {
             ]
             
         }
-        
-        
+
+
+        const inputAttributes = {
+            type: 'file',
+            accept: "image/*",
+            name: "imageProfile",
+            style: { display: 'none' },
+            ref: (element) => {
+                this.inputElement = element
+            },
+            onChange: this.previewFile
+        }
+
         return (
 
             <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
 
+                <div className="listElement icon">
+                    <span className="viewIcon"/>
+                </div>
+                
+
+                <div className="listElement">
+
+                    <div style={{ overflow: 'hidden' }}>
+                        <input
+                            {...inputAttributes}
+                        />
+                        <IconItemList 
+                            image={this.state.imageProfile} 
+                            type={this.state.typeImageProfile}
+                            imgClick={this.openFileChooser}
+                            size={150}
+                            imgClass="clickable"/>
+                    </div>
+
+                </div>
+
+
                 <ConstructInputs data={personalInformation} icon="contactIcon" />
 
                 <ConstructInputs data={emailsInformation} icon="emailIcon" />
-                <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
+                <div style={{ overflow: 'auto' }}>
+                    <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
+                </div>
 
                 <ConstructInputs data={contactInformation} icon="phoneIcon" />
             
