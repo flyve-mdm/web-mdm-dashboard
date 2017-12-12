@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import IconItemList from '../IconItemList'
@@ -130,6 +131,20 @@ export default class FleetsContent extends Component {
         this.props.changeActionList("EditOne")
     }
 
+    handleDelete = () => {
+
+        let item = this.props.dataSource.itemList
+        let index = this.props.selectedIndex
+        index.sort()
+        index.reverse()
+        index.forEach((i) => {
+            item.splice(i, 1)
+        })
+
+        this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
+        this.props.onNavigate([this.props.location[0]])
+    }
+
     render() {
         let addPolicy = <span/>
         if (this.state.addPolicy) {
@@ -170,7 +185,8 @@ export default class FleetsContent extends Component {
                         <div className="contentStatus">
                             <div className="name">{this.props.currentItem["PluginFlyvemdmFleet.name"]}</div>
                             <br />
-                            <span className="editIcon" onClick={this.handleEdit} />
+                            <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
+                            <span className="deleteIcon" onClick={this.handleDelete} />
                         </div>
                     </div>
                         <button className="win-button win-button-primary" onClick={this.savePolicies}>
@@ -186,4 +202,16 @@ export default class FleetsContent extends Component {
             </div>
         )
     }
+}
+FleetsContent.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    dataSource: PropTypes.object.isRequired,
+    changeDataSource: PropTypes.func.isRequired,
+    selectedIndex: PropTypes.array,
+    location: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired,
+    changeActionList: PropTypes.func.isRequired
 }
