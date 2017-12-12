@@ -27,7 +27,9 @@ class Profiles extends Component {
             typeImageProfile: 'file',
             title: '',
             location: '',
-            defaultProfile: ''
+            defaultProfile: '',
+            validSince: new Date(),
+            validUntil: new Date()
         }
     }
 
@@ -40,6 +42,17 @@ class Profiles extends Component {
     changeInput = (e) => {
         this.setState({
             [e.target.name]: e.target.value
+        })
+        if (this.state.buttonSaveClassName === "win-button win-button-primary hidden") {
+            this.setState({
+                buttonSaveClassName: "win-button win-button-primary"
+            })
+        }
+    }
+
+    changeDate = (name, value) => {
+        this.setState({
+            [name]: value
         })
         if (this.state.buttonSaveClassName === "win-button win-button-primary hidden") {
             this.setState({
@@ -296,6 +309,23 @@ class Profiles extends Component {
 
         ]
 
+        const validDatesInformation  = [
+            [{
+                label: "Valid since",
+                type: "date",
+                name: "validSince",
+                value: this.state.validSince,
+                function: this.changeDate,
+            }],
+            [{
+                label: "Valid until",
+                type: "date",
+                name: "validUntil",
+                value: this.state.validUntil,
+                function: this.changeDate,
+            }]
+        ]
+
         let emailsInformation = [[]]
 
         for (let index = 0; index < this.state.emails.length; index++) {
@@ -355,6 +385,8 @@ class Profiles extends Component {
 
 
                 <ConstructInputs data={personalInformation} icon="contactIcon" />
+               
+                <ConstructInputs data={validDatesInformation} icon="monthIcon" />
 
                 <ConstructInputs data={emailsInformation} icon="emailIcon" />
                 <div style={{ overflow: 'auto' }}>
