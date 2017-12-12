@@ -364,6 +364,9 @@ $list-item-icon-size: 48px;
     .addIcon:before {
         content: "\E109";        
     }
+    .viewIcon:before {
+        content: "\E18B";        
+    }
 
     .files-dropzone {
         text-align: center;
