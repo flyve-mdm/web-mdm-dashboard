@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import IconItemList from '../IconItemList'
 import ContentPane from '../../Utils/ContentPane'
+import Confirmation from '../../Utils/Confirmation'
 
 
 export default class DevicesContent extends Component {
@@ -11,18 +12,20 @@ export default class DevicesContent extends Component {
         this.props.changeActionList("EditOne")
     }
 
-    handleDelete = () => {
+    handleDelete = async () => {
+        const isOK = await Confirmation.isOK(this.contentDialog)
+        if (isOK) {
+            let item = this.props.dataSource.itemList
+            let index = this.props.selectedIndex
+            index.sort()
+            index.reverse()
+            index.forEach((i) => {
+                item.splice(i, 1)
+            })
 
-        let item = this.props.dataSource.itemList
-        let index = this.props.selectedIndex
-        index.sort()
-        index.reverse()
-        index.forEach((i) => {
-            item.splice(i, 1)
-        })
-
-        this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-        this.props.onNavigate([this.props.location[0]])
+            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
+            this.props.onNavigate([this.props.location[0]])
+        }
     }
 
     render() {
@@ -67,6 +70,7 @@ export default class DevicesContent extends Component {
                                     </li>
                                 </ul>
                             </div>
+                            <Confirmation title={`Delete ` + this.props.location[0]} message={this.props.selectedItemList["PluginFlyvemdmAgent.Computer.User.realname"]} reference={el => this.contentDialog = el} /> 
                         </div>
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="systemReport" header="System Report">
