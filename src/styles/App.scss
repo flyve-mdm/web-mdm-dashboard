@@ -78,6 +78,56 @@ $list-item-icon-size: 48px;
         cursor: pointer;
     }
 
+    .listElement {
+        display: block;
+        overflow: auto;
+
+        .message {
+            display: inline-block;
+            padding: 18px 0px 15px 15px;
+            width: 50%;
+            vertical-align: middle;
+        }
+
+        .detail {
+            color: $text-detail-color;
+            font-size: 13px;
+            line-height: 16px;
+        }
+
+        .controller {
+            padding: 15px 15px 15px 0;                
+            float: right;
+            display: inline-block;
+            
+            .win-toggleswitch-values {
+                display: none;
+            }
+            .win-toggleswitch-header {
+                margin: 0;
+            }
+
+            button {
+                margin-top: 5px;
+            }
+        }
+    }
+
+    .list-content {
+        .list-col {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    }
+
+    .listElementIcon {
+        margin: 40px 10px 5px;
+
+        span {
+            font-size: 25px;
+        }
+    }
+
     .contentPicture {
 
         .clickable {
