@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
+import Pluralize from 'pluralize'
 import IconItemList from '../IconItemList'
 import ContentPane from '../../Utils/ContentPane'
 import Confirmation from '../../Utils/Confirmation'
@@ -35,7 +36,7 @@ export default class DevicesContent extends Component {
                     <ReactWinJS.Pivot.Item key="main" header="Main">
                         <div>
                             <div className="contentHeader">
-                                <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
+                                <h2 className="win-h2 titleContentPane" > {Pluralize.singular(this.props.location[0])} </h2>
                                 <div className="itemInfo">
                                     <IconItemList size={72} />
                                     <div className="contentStatus">

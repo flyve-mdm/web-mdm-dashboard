@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Pluralize from 'pluralize'
 import ContentPane from '../../Utils/ContentPane'
 import IconItemList from '../IconItemList'
 import Confirmation from '../../Utils/Confirmation'
@@ -29,7 +30,7 @@ export default class UsersContent extends Component {
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <div className="contentHeader">
-                    <h2 className="win-h2" style={{ margin: '20.1px 0' }}> User </h2>
+                    <h2 className="win-h2" style={{ margin: '20.1px 0' }}> {Pluralize.singular(this.props.location[0])} </h2>
                     <div className="itemInfo">
                         <IconItemList image={imageProfile} size={100} />
                         <div className="contentStatus">
@@ -40,8 +41,8 @@ export default class UsersContent extends Component {
                             </div>
                             
                             {
-                                selectedItemList['User.Profile_User.Profile.name'].map((name) => {
-                                    return (<span className = "message" >{name}<br/></span>)
+                                selectedItemList['User.Profile_User.Profile.name'].map((name, index) => {
+                                    return (<span key={index} className = "message" >{name}<br/></span>)
                                 })
                             }
                             

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
+import Pluralize from 'pluralize'
 import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import IconItemList from '../IconItemList'
 import Policies from '../data/policies.json'
@@ -182,7 +183,7 @@ export default class FleetsContent extends Component {
         return ( 
             <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
                 <div className="contentHeader">
-                    <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
+                    <h2 className="win-h2 titleContentPane" > {Pluralize.singular(this.props.location[0])} </h2>
                     <div className="itemInfo">
                         <IconItemList size={72} />
                         <div className="contentStatus">
