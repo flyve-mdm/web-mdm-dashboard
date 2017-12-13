@@ -392,6 +392,9 @@ $list-item-icon-size: 48px;
     .detailsIcon:before {
         content: "\E14C";        
     }
+    .permissionsIcon:before {
+        content: "\E192";        
+    }
 
     .files-dropzone {
         text-align: center;
