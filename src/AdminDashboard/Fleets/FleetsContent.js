@@ -7,6 +7,7 @@ import Policies from '../data/policies.json'
 import ItemList from '../ItemList'
 import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
+import Confirmation from '../../Utils/Confirmation'
 
 export default class FleetsContent extends Component {
 
@@ -131,18 +132,20 @@ export default class FleetsContent extends Component {
         this.props.changeActionList("EditOne")
     }
 
-    handleDelete = () => {
+    handleDelete = async () => {
+        const isOK = await Confirmation.isOK(this.contentDialog)
+        if (isOK) {
+            let item = this.props.dataSource.itemList
+            let index = this.props.selectedIndex
+            index.sort()
+            index.reverse()
+            index.forEach((i) => {
+                item.splice(i, 1)
+            })
 
-        let item = this.props.dataSource.itemList
-        let index = this.props.selectedIndex
-        index.sort()
-        index.reverse()
-        index.forEach((i) => {
-            item.splice(i, 1)
-        })
-
-        this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-        this.props.onNavigate([this.props.location[0]])
+            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
+            this.props.onNavigate([this.props.location[0]])
+        }
     }
 
     render() {
@@ -199,6 +202,7 @@ export default class FleetsContent extends Component {
                     { addPolicy }
                 </div>
                 { renderComponent }
+                <Confirmation title={`Delete ` + this.props.location[0]} message={this.props.currentItem["PluginFlyvemdmFleet.name"]} reference={el => this.contentDialog = el} />
             </div>
         )
     }
