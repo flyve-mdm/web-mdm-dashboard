@@ -17,7 +17,7 @@ class Confirmation extends Component {
                 title={this.props.title}
                 primaryCommandText="OK"
                 secondaryCommandText="Cancel">
-                    <div>{ this.props.message }</div>
+                    <p>{ this.props.message }</p>
             </ReactWinJS.ContentDialog>
         )
     }
