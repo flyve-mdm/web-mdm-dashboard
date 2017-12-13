@@ -5,6 +5,7 @@ import WinJS from 'winjs'
 import DevicesItemList from './DevicesItemList'
 import ItemList from '../ItemList'
 import Loading from '../../Utils/Loading'
+import Confirmation from '../../Utils/Confirmation'
 
 export default class DevicesList extends Component {
 
@@ -38,6 +39,7 @@ export default class DevicesList extends Component {
     })
 
     handleRefresh = () => {
+        this.props.onNavigate([this.props.location[0]])
         this.props.fetchData(this.props.location[0])
     }
 
@@ -91,27 +93,40 @@ export default class DevicesList extends Component {
         }
     }
 
-    handleDelete = () => {
-        // Clean another actions selected
-        this.props.changeActionList(null)
-        // Exit selection mode
-        this.props.changeSelectionMode(false)
+    handleDelete = async () => {
+        const isOK = await Confirmation.isOK(this.contentDialog)
+        if (isOK) {
+            // Clean another actions selected
+            this.props.changeActionList(null)
+            // Exit selection mode
+            this.props.changeSelectionMode(false)
 
-        let item = this.props.dataSource.itemList
-        let index = this.state.selectedItemList
-        index.sort()
-        index.reverse()
-        index.forEach((i) => {
-            item.splice(i, 1)
-        })
-        this.setState({
-            selectedItem: []
-        })
-        
-        this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
+            let item = this.props.dataSource.itemList
+            let index = this.state.selectedItemList
+            index.sort()
+            index.reverse()
+            index.forEach((i) => {
+                item.splice(i, 1)
+            })
+            this.setState({
+                selectedItem: []
+            })
+
+            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
+        } else {
+            // Clean another actions selected
+            this.props.changeActionList(null)
+            // Exit selection mode
+            this.props.changeSelectionMode(false)
+            this.refs.listView.winControl.selection.clear()
+            this.setState({
+                selectedItem: []
+            })
+        }
     }
 
     handleSort = () => {
+        this.props.onNavigate([this.props.location[0]])
         let array = []
         this.props.dataSource.itemList.map((value, index) =>
             array.push(value)
@@ -215,7 +230,7 @@ export default class DevicesList extends Component {
                     />
                 </ReactWinJS.ToolBar>
                 { listComponent }
-                
+                <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.selectedItemList.length +` `+ this.props.location[0]} reference={el => this.contentDialog = el} /> 
             </div>
         )
     }
