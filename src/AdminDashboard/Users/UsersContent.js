@@ -38,9 +38,13 @@ export default class UsersContent extends Component {
                                     {selectedItemList['User.realname']}
                                 </b>
                             </div>
-                            <span className="message">
-                                {selectedItemList['User.Profile_User.Profile.name']}
-                            </span>
+                            
+                            {
+                                selectedItemList['User.Profile_User.Profile.name'].map((name) => {
+                                    return (<span className = "message" >{name}<br/></span>)
+                                })
+                            }
+                            
                             <span className="source">Joined {selectedItemList['User.date_creation']}</span>
                             <br />
                             <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.changeActionList('EditOne')} />
