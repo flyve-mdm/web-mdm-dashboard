@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Calc100PercentMinus from '../../../Utils/Calc100PercentMinus'
+import ConstructInputs from '../../../Utils/Forms'
 import currentUser from '../../data/currentUser.json'
 import validateData from '../../../Utils/validateData'
-import ConstructInputs from './ConstructInputs'
 import IconItemList from '../../IconItemList'
+import { usersScheme } from '../../../Utils/Forms/Schemes'
 
 class Profiles extends Component {
     
@@ -25,6 +26,8 @@ class Profiles extends Component {
             emails: validateData(currentUser["User.UserEmail.email"], []),
             imageProfile: validateData(currentUser['User.picture'], "profile.png"),
             authentication: 'GLPI internal database',
+            password: '',
+            passwordConfirmation: '',
             category: '',
             defaultEntity: '',
             comments: '',
@@ -43,18 +46,7 @@ class Profiles extends Component {
         })
     }
 
-    changeInput = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-        if (this.state.buttonSaveClassName === "win-button win-button-primary hidden") {
-            this.setState({
-                buttonSaveClassName: "win-button win-button-primary"
-            })
-        }
-    }
-
-    changeDate = (name, value) => {
+    changeState = (name, value) => {
         this.setState({
             [name]: value
         })
@@ -65,18 +57,10 @@ class Profiles extends Component {
         }
     }
 
-    changeEmail = (e) => {
+    changeEmail = (name, value) => {
         let emails = [...this.state.emails]
-        emails[e.target.name] = e.target.value
-
-        this.setState({
-            emails
-        })
-        if (this.state.buttonSaveClassName === "win-button win-button-primary hidden") {
-            this.setState({
-                buttonSaveClassName: "win-button win-button-primary"
-            })
-        }
+        emails[name] = value
+        this.changeState('emails', emails)
     }
 
     deleteEmail = (index) => {
@@ -113,312 +97,17 @@ class Profiles extends Component {
    }
 
     openFileChooser = () => {
-        console.log('ddd')
         this.inputElement.value = null
         this.inputElement.click()
     }
 
     render () {
 
-        const personalInformation = [
-            [
-                {
-                    label: "Login",
-                    type: "text",
-                    name: "login",
-                    value: this.state.login,
-                    placeholder: null,
-                    function: null,
-                    disabled: true,
-                    style: {
-                        width: 'auto'
-                    }
-                },
-            ],
-            [
-                {
-                    label: "Realname",
-                    type: "text",
-                    name: "realName",
-                    value: this.state.realName,
-                    placeholder: "Realname",
-                    function: this.changeInput,
-                    disabled: false,
-                    style: null
-                },
-                {
-                    label: "First name",
-                    type: "text",
-                    name: "firstName",
-                    value: this.state.firstName,
-                    placeholder: "First name",
-                    function: this.changeInput,
-                    disabled: false,
-                    style: null
-                }
-            ],
-            [
-                {
-                    label: "Title",
-                    type: "select",
-                    name: "title",
-                    value: this.state.title,
-                    options: [
-                        {
-                            label: 'option 1',
-                            value: 'option 1'
-                        },
-                        {
-                            label: 'option 2',
-                            value: 'option 2'
-                        },
-                        {
-                            label: 'option 3',
-                            value: 'option 3'
-                        }
-                    ],
-                    function: this.changeInput
-                },
-                {
-                    label: "Location",
-                    type: "select",
-                    name: "location",
-                    value: this.state.location,
-                    options: [
-                        {
-                            label: 'option 1',
-                            value: 'option 1'
-                        },
-                        {
-                            label: 'option 2',
-                            value: 'option 2'
-                        },
-                        {
-                            label: 'option 3',
-                            value: 'option 3'
-                        }
-                    ],
-                    function: this.changeInput
-                },
-                {
-                    label: "Default profile",
-                    type: "select",
-                    name: "defaultProfile",
-                    value: this.state.defaultProfile,
-                    options: [
-                        {
-                            label: 'option 1',
-                            value: 'option 1'
-                        },
-                        {
-                            label: 'option 2',
-                            value: 'option 2'
-                        },
-                        {
-                            label: 'option 3',
-                            value: 'option 3'
-                        }
-                    ],
-                    function: this.changeInput
-                }
-            ]
-        ]
-
-        const contactInformation = [
-            [
-                {
-                    label: "Phone",
-                    type: "text",
-                    name: "phone",
-                    value: this.state.phone,
-                    placeholder: "Phone",
-                    function: this.changeInput,
-                    disabled: false,
-                    style: null
-                },
-                {
-                    label: "Mobile phone",
-                    type: "text",
-                    name: "mobilePhone",
-                    value: this.state.mobilePhone,
-                    placeholder: "Mobile phone",
-                    function: this.changeInput,
-                    disabled: false,
-                    style: null
-                }
-            ],
-            [
-                {
-                    label: "Phone 2",
-                    type: "text",
-                    name: "phone2",
-                    value: this.state.phone2,
-                    placeholder: "Phone 2",
-                    function: this.changeInput,
-                    disabled: false,
-                    style: null
-                },
-                {
-                    label: "Administrative number",
-                    type: "text",
-                    name: "administrativeNumber",
-                    value: this.state.administrativeNumber,
-                    placeholder: "Administrative number",
-                    function: this.changeInput,
-                    disabled: false,
-                    style: null
-                }
-            ]
-        ]
-
-        const activityInformation = [
-            [
-                {
-                    label: "Last login",
-                    type: "text",
-                    name: "lastLogin",
-                    value: this.state.lastLogin,
-                    placeholder: "Last login",
-                    function: this.changeInput,
-                    disabled: true,
-                    style: {
-                        width: '100%'
-                    }
-                },
-                {
-                    label: "Created",
-                    type: "text",
-                    name: "created",
-                    value: this.state.created,
-                    placeholder: "Created",
-                    function: this.changeInput,
-                    disabled: true,
-                    style: {
-                        width: 'auto'
-                    } 
-                },
-                {
-                    label: "Modified",
-                    type: "text",
-                    name: "modified",
-                    value: this.state.modified,
-                    placeholder: "Modified",
-                    function: this.changeInput,
-                    disabled: true,
-                    style: {
-                        width: 'auto'
-                    } 
-                }
-            ]
-
-        ]
-
-        const validDatesInformation = [
-            [{
-                label: "Valid since",
-                type: "date",
-                name: "validSince",
-                value: this.state.validSince,
-                function: this.changeDate
-            }],
-            [{
-                label: "Valid until",
-                type: "date",
-                name: "validUntil",
-                value: this.state.validUntil,
-                function: this.changeDate
-            }]
-        ]
-
-        const moreInformation = [
-            [{
-                label: "Authentication",
-                type: "text",
-                name: "authentication",
-                value: this.state.authentication,
-                placeholder: null,
-                function: this.changeInput,
-                disabled: true,
-                style: null
-            }],
-            [
-                {
-                    label: "Comments",
-                    type: "textArea",
-                    name: "comments",
-                    value: this.state.comments,
-                    placeholder: null,
-                    function: this.changeInput,
-                    disabled: false,
-                    style: null
-                }
-            ],
-            [   
-                {
-                    label: "Category",
-                    type: "select",
-                    name: "category",
-                    value: this.state.category,
-                    options: [
-                        {
-                            label: 'option 1',
-                            value: 'option 1'
-                        },
-                        {
-                            label: 'option 2',
-                            value: 'option 2'
-                        },
-                        {
-                            label: 'option 3',
-                            value: 'option 3'
-                        }
-                    ],
-                    function: this.changeInput
-                },
-                {
-                    label: "Default entity",
-                    type: "select",
-                    name: "defaultEntity",
-                    value: this.state.defaultEntity,
-                    options: [
-                        {
-                            label: 'option 1',
-                            value: 'option 1'
-                        },
-                        {
-                            label: 'option 2',
-                            value: 'option 2'
-                        },
-                        {
-                            label: 'option 3',
-                            value: 'option 3'
-                        }
-                    ],
-                    function: this.changeInput
-                }
-            ]
-        ]
-
-        let emailsInformation = [[]]
-
-        for (let index = 0; index < this.state.emails.length; index++) {
-            emailsInformation = [
-                ...emailsInformation,
-                [{
-                    label: `Email ${index + 1}`,
-                    type: "email",
-                    name: index,
-                    value: this.state.emails[index],
-                    placeholder: null,
-                    function: this.changeEmail,
-                    disabled: false,
-                    style: null,
-                    delete: this.deleteEmail
-                }]
-            ]
-            
-        }
-
+        const user = usersScheme({
+            state: this.state, 
+            changeState: this.changeState,
+            deleteEmail: this.deleteEmail
+        })
 
         const inputAttributes = {
             type: 'file',
@@ -435,7 +124,7 @@ class Profiles extends Component {
 
             <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
 
-                <div className="listElement icon">
+                <div className="listElement listElementIcon">
                     <span className="viewIcon"/>
                 </div>
                 
@@ -457,20 +146,22 @@ class Profiles extends Component {
                 </div>
 
 
-                <ConstructInputs data={personalInformation} icon="contactIcon" />
-               
-                <ConstructInputs data={validDatesInformation} icon="monthIcon" />
+                <ConstructInputs data={user.personalInformation} icon="contactIcon" />
 
-                <ConstructInputs data={emailsInformation} icon="emailIcon" />
+                <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
+               
+                <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
+
+                <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
                 <div style={{ overflow: 'auto' }}>
                     <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
                 </div>
 
-                <ConstructInputs data={contactInformation} icon="phoneIcon" />
+                <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
             
-                <ConstructInputs data={moreInformation} icon="detailsIcon" />
+                <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
 
-                <ConstructInputs data={activityInformation} icon="documentIcon" />
+                <ConstructInputs data={user.activityInformation} icon="documentIcon" />
 
                 <button className={ this.state.buttonSaveClassName } style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                     Save
