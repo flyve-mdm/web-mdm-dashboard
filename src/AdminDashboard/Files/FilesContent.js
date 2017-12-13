@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Pluralize from 'pluralize'
 import ContentPane from '../../Utils/ContentPane'
 import BytesToSize from '../../Utils/BytesToSize'
 import Confirmation from '../../Utils/Confirmation'
@@ -26,7 +27,7 @@ export default class FilesContent extends Component {
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
                 <div className="contentHeader">
-                    <h2 className="win-h2 titleContentPane" > {this.props.location[0]} </h2>
+                    <h2 className="win-h2 titleContentPane" > {Pluralize.singular(this.props.location[0])} </h2>
                     <div className="itemInfo">
                         <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} />
                         <div className="contentStatus">
