@@ -3,21 +3,24 @@ import PropTypes from 'prop-types'
 import ContentPane from '../../Utils/ContentPane'
 import IconItemList from '../IconItemList'
 import BytesToSize from '../../Utils/BytesToSize'
+import Confirmation from '../../Utils/Confirmation'
 
 export default class ApplicationsContent extends Component {
 
-    handleDelete = () => {
+    handleDelete = async () => {
+        const isOK = await Confirmation.isOK(this.contentDialog)
+        if (isOK) {
+            let item = this.props.dataSource.itemList
+            let index = this.props.selectedIndex
+            index.sort()
+            index.reverse()
+            index.forEach((i) => {
+                item.splice(i, 1)
+            })
 
-        let item = this.props.dataSource.itemList
-        let index = this.props.selectedIndex
-        index.sort()
-        index.reverse()
-        index.forEach((i) => {
-            item.splice(i, 1)
-        })
-
-        this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-        this.props.onNavigate([this.props.location[0]])
+            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
+            this.props.onNavigate([this.props.location[0]])
+        }
     }
 
     render() {
@@ -42,6 +45,7 @@ export default class ApplicationsContent extends Component {
                     </div>
                 </div>
                 <div className="separator" />
+                <Confirmation title={`Delete ` + this.props.location[0]} message={this.props.selectedItemList["PluginFlyvemdmPackage.name"]} reference={el => this.contentDialog = el} />
             </ContentPane>
         )
     }
