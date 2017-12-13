@@ -1,8 +1,4 @@
 .settings {
-    
-    h2 {
-        padding: 20px 10px;
-    }
 
     .title {
         font-size: 15px;
@@ -15,60 +11,5 @@
         text-align: center;
         line-height: 32px;
     }
-
-    .listElement {
-        display: block;
-        overflow: auto;
-
-        .message {
-            display: inline-block;
-            padding: 18px 0px 15px 15px;
-            width: 50%;
-            vertical-align: middle;
-        }
-
-        .detail {
-            color: $text-detail-color;
-            font-size: 13px;
-            line-height: 16px;
-        }
-
-        .controller {
-            padding: 15px 15px 15px 0;                
-            float: right;
-            display: inline-block;
-            
-            .win-toggleswitch-values {
-                display: none;
-            }
-            .win-toggleswitch-header {
-                margin: 0;
-            }
-
-            button {
-                margin-top: 5px;
-            }
-        }
-    }
-
-    .list-content {
-        .list-col {
-            display: inline-block;
-            margin-right: 10px;
-        }
-    }
-
-    .Profiles {
-        .listElement {
-            margin-left: 30px;        
-        } 
-        .icon {
-            margin: 20px 10px;
-    
-            span {
-                font-size: 25px;
-            }
-        }
-    }  
 
 }
