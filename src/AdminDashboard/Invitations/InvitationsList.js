@@ -64,6 +64,15 @@ export default class InvitationsList extends Component {
         this.props.fetchData(this.props.location[0])
     }
 
+    handlePanel = (eventObject) => {
+        let button = eventObject.currentTarget.winControl
+        this.refs.listView.winControl.selection.clear()
+
+        this.props.changeSelectionMode(false)
+        this.props.changeActionList(button.label)
+        this.props.onNavigate([this.props.location[0]])
+    }
+
     handleDelete = () => {
         // Clean another actions selected
         this.props.changeActionList(null)
@@ -163,6 +172,14 @@ export default class InvitationsList extends Component {
                         label="Refresh"
                         priority={1}
                         onClick={this.handleRefresh}
+                    />
+
+                    <ReactWinJS.ToolBar.Button
+                        key="add"
+                        icon="add"
+                        label="Add"
+                        priority={0}
+                        onClick={this.handlePanel}
                     />
 
                     {this.props.selectionMode ? resendCommand : null}
