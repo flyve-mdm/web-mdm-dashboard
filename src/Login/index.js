@@ -67,7 +67,7 @@ class Login extends Component {
                     <a href="https://flyve-mdm.com/privacy-policy/">Terms and Conditions</a>
                     <br />
                     <span>
-                        Teclib
+                        © 2017 Teclib'.
                     </span>
                 </div>
             </div>

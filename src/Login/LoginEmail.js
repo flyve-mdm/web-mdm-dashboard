@@ -37,7 +37,7 @@ export default class LoginEmail extends Component {
             <div className="emailSection">
                 <h2 className="win-h2">Sign in</h2>
                 <p>
-                    Use your Flyve account.
+                    Use your Flyve MDM account.
                     <br/>
                     <a href="https://flyve-mdm.com/"> What's this? </a>	
                 </p>
