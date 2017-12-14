@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import ReactWinJS from 'react-winjs'
-import Articles from '../data/helpCenter.json'
+import Articles from '../../data/helpCenter.json'
 import ReactMarkdown from 'react-markdown'
-let WinJS = require('winjs')
+import WinJS from 'winjs'
 
 export default class HelpCenterList extends Component {
 
@@ -15,6 +15,7 @@ export default class HelpCenterList extends Component {
                 popular.push(element)
             }
         }
+
         this.state = {
             list: new WinJS.Binding.List(popular),
             layout: { type: WinJS.UI.ListLayout },
@@ -51,9 +52,9 @@ export default class HelpCenterList extends Component {
         let listView = eventObject.currentTarget.winControl
         let id = listView.selection.getItems()._value[0].data['HelpCenter.id']
         console.log(id)
-        setTimeout(function () {
+        setTimeout(() => {
             this.setState({ itemSelected: id })
-        }.bind(this), 0)
+        }, 0)
     }
 
     renderArticle = () => {

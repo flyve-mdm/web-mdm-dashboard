@@ -9,7 +9,7 @@ import SystemInformation from './SystemInformation'
 import Overview from './Overview'
 import Contact from './Contact'
 import EmptyMessage from '../../Utils/EmptyMessage'
-import HelpCenterList from './HelpCenterList'
+import HelpCenterList from './HelpCenter'
 
 export default class AboutPage extends Component {
 
