@@ -6240,9 +6240,9 @@ react-router@^4.2.0:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-"react-winjs@git+https://git@github.com/flyve-mdm/react-winjs.git":
+"react-winjs@git+https://git@github.com/TECLIB/react-winjs.git":
   version "2.5.0"
-  resolved "git+https://git@github.com/flyve-mdm/react-winjs.git#e8ba3b844d76a851b79872f12e50b874e72b690b"
+  resolved "git+https://git@github.com/TECLIB/react-winjs.git#e8ba3b844d76a851b79872f12e50b874e72b690b"
 
 react@^16.0.0:
   version "16.2.0"
