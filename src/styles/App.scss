@@ -40,6 +40,7 @@ $list-item-icon-size: 48px;
 
 .win-selectionbackground {
     background-color: $app-color !important;
+    opacity: 0.2 !important;
 }
 
 #app {
@@ -56,7 +57,7 @@ $list-item-icon-size: 48px;
         background: $app-color;
     }
     ::-moz-selection {
-        background: $app-color; 
+        background: $app-color;
     }
 
     h1 {
