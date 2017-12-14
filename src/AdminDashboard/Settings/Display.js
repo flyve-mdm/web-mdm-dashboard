@@ -19,18 +19,23 @@ class Display extends Component {
             filesUploaded: display.filesUploaded ? display.filesUploaded: false,
             fleetsCurrentlyManaged: display.fleetsCurrentlyManaged ? display.fleetsCurrentlyManaged: false,
             invitationsSent: display.invitationsSent ? display.invitationsSent: false,
-            numberUsers: display.numberUsers ? display.numberUsers: false
+            numberUsers: display.numberUsers ? display.numberUsers: false,
+            animations: display.animations !== undefined ? display.animations : true 
         }
     }
 
-    changeLocalStorage (name) {
+    changeLocalStorage = (name) => {
             let display = localStorage.getItem('display') ? localStorage.getItem('display') : '{}'
             display = JSON.parse(display)
-            
+
             display = { 
                 ...display, 
                 [name]: !display[name]
             }
+
+            this.setState({
+                [name]: !this.state[name]
+            })
 
             localStorage.setItem('display', JSON.stringify(display))
     }
@@ -62,6 +67,21 @@ class Display extends Component {
                             <option>Spanish</option>
                             <option>Portuguese</option>
                         </select>
+                    </div>
+                </div>
+
+                <div className="title"> Animations </div>
+
+                    <div className="listElement">
+                        <div className="message">
+                        {this.state.animations ? 'Disable animations' : 'Enable animations' }
+                        </div>
+                    <div className="controller">
+                        <ReactWinJS.ToggleSwitch
+                        className="content-text-primary"
+                            checked={this.state.animations}
+                            onChange={() => this.changeLocalStorage('animations')}
+                        />
                     </div>
                 </div>
                                         
