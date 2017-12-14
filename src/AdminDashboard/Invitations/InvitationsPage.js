@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import InvitationsPendingPage from './InvitationsPendingPage'
+import Enroll from '../Devices/Enroll'
 import EmptyMessage from '../../Utils/EmptyMessage'
 
 export default class InvitationsPage extends Component {
@@ -17,11 +17,9 @@ export default class InvitationsPage extends Component {
         
                     case "Add":
                     return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                            <div className="contentHeader">
-                                <h2 className="win-h2 titleContentPane" > Enroll </h2>
-                            </div>
-                        </div>
+                        <Enroll
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            changeActionList={this.props.changeActionList} />
                     )
                     default: 
                     return (
