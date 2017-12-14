@@ -38,6 +38,10 @@ $list-item-icon-size: 48px;
     color: $white-color !important; 
 }
 
+.win-selectionbackground {
+    background-color: $app-color !important;
+}
+
 #app {
     height: 100%;
     font-weight: 300;
