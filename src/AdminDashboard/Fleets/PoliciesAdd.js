@@ -49,7 +49,7 @@ export default class FleetsAddPolicies extends Component {
 
         if (queryText.length > 0) {
             for (let i = 0, len = this.state.suggestionList.length; i < len; i++) {
-                if (this.state.suggestionList[i].substr(0, query.length).toLowerCase() === query) {
+                if (this.state.suggestionList[i].toLowerCase().indexOf(query) !== -1) {
                     suggestionCollection.appendQuerySuggestion(this.state.suggestionList[i])
                 }
             }
