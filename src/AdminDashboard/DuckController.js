@@ -225,3 +225,18 @@ export function fetchData(endpoint) {
         })
     }
 }
+export function sendFeedback() {
+    return (dispatch) => {
+        dispatch(changeEndpoint('feedback'))
+        dispatch(fetchingData(true))
+        api.feedback.sendFeedback()
+        .then(([response, json]) => {
+            dispatch(fetchDataSuccess(json))
+            dispatch(fetchingData(false))
+        })
+        .catch((error) => {
+            dispatch(fetchDataFailure())
+            dispatch(fetchingData(false))
+        })
+    }
+}
