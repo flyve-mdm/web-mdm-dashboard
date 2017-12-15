@@ -27,6 +27,14 @@ class Feedback extends Component {
         } else if(this.state.feedbackSent) {
             return (
                 <div>
+                    <h2 className="titleContentPane" onClick={() => this.props.changeSelectItem(null)}>
+                        {'<'} Help Center
+                    </h2>
+                    <br />
+                    <div style={{textAlign: 'center'}}>
+                        <h3>Thank you!</h3>
+                        <p>your submission has been received</p>
+                    </div>
                 </div>
             )
         } else {
