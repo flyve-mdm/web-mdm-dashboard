@@ -58,18 +58,14 @@ class HelpCenterList extends Component {
                 />
 
                 {
-                    () => {
-                        if (this.props.labelList === 'Popular')
-                            return (
-                                <div>
-                                    <div className="separator" />
-                                    
-                                    <div style={{padding: '22px 14px 22px 10px'}}>
-                                        <a onClick={this.props.showAllArticles}>Browse all articles</a>
-                                    </div>
-                                </div>
-                            )
-                    }
+                    this.props.labelList !== 'Popular' ? '' : 
+                        <div>
+                            <div className="separator" />
+                            
+                            <div style={{padding: '22px 14px 22px 10px'}}>
+                                <a onClick={this.props.showAllArticles}>Browse all articles</a>
+                            </div>
+                        </div>
                 }
 
                 <div className="separator" />

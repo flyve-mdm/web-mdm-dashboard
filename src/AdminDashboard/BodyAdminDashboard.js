@@ -43,7 +43,9 @@ function mapDispatchToProps(dispatch) {
         changeEndpoint: bindActionCreators(Actions.changeEndpoint, dispatch),
         fetchDataSuccess: bindActionCreators(Actions.fetchDataSuccess, dispatch),
         fetchDataFailure: bindActionCreators(Actions.fetchDataFailure, dispatch),
-        fetchData: (api) => dispatch(Actions.fetchData(api))
+        fetchingData: bindActionCreators(Actions.fetchingData, dispatch),
+        fetchData: (api) => dispatch(Actions.fetchData(api)),
+        sendFeedback: (api) => dispatch(Actions.sendFeedback(api))
     }
     return { actions }
 }
@@ -60,7 +62,7 @@ class BodyAdminDashboard extends Component {
 
     render() {
 
-        const propsData = {
+        let propsData = {
             dataSource: this.props.dataSource,
             changeDataSource: this.props.actions.changeDataSource,
             fetchData: this.props.actions.fetchData,
@@ -73,6 +75,15 @@ class BodyAdminDashboard extends Component {
             actionList: this.props.actionList, 
             currentItem: this.props.currentItem, 
             changeCurrentItem: this.props.actions.changeCurrentItem
+        }
+
+        if (this.props.router[this.props.index].label === 'About') {
+            
+            propsData = {
+                ...propsData,
+                sendFeedback: this.props.actions.sendFeedback,
+                changeLoading: this.props.actions.fetchingData
+            }
         }
 
         const contentComponent = React.createElement("div", { className: this.props.router[this.props.index].label.toLowerCase() },

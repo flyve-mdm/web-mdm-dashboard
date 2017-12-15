@@ -52,7 +52,7 @@ SettingsPage.propTypes = {
         PropTypes.number
     ]).isRequired,
     location: PropTypes.array.isRequired,
-    itemList: PropTypes.object.isRequired    
+    itemList: PropTypes.object.isRequired
 }
 
 export default SettingsPage
