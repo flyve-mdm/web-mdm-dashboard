@@ -86,10 +86,12 @@ export default class DevicesList extends Component {
         
     }
 
-    handleContentAnimating(eventObject) {
-        // Disable ListView's entrance animation
-        if (eventObject.detail.type === 'entrance') {
-            eventObject.preventDefault()
+    handleContentAnimating = (eventObject) => {
+        // Enable/Disable ListView's entrance animation
+        if (!this.props.animation) {
+            if (eventObject.detail.type === 'entrance' || eventObject.detail.type === 'contentTransition') {
+                eventObject.preventDefault()
+            }
         }
     }
 
@@ -240,6 +242,7 @@ DevicesList.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
+    animation: PropTypes.bool.isRequired,
     dataSource: PropTypes.object.isRequired,
     changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,

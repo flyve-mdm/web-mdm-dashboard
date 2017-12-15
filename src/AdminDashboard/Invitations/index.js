@@ -26,6 +26,7 @@ export default class Invitations extends Component {
             if (selectedIndex === null && this.props.actionList === null) {
                 return <InvitationsList
                     itemListPaneWidth={'100%'}
+                    animation={this.props.animation}
                     dataSource={this.props.dataSource}
                     changeDataSource={this.props.changeDataSource}
                     fetchData={this.props.fetchData}
@@ -40,6 +41,7 @@ export default class Invitations extends Component {
             } else {
                 return <InvitationsPage
                     itemListPaneWidth={0}
+                    animation={this.props.animation}
                     dataSource={this.props.dataSource}
                     changeDataSource={this.props.changeDataSource}
                     location={this.props.location}
@@ -55,6 +57,7 @@ export default class Invitations extends Component {
                 <div style={{ height: '100%' }}>
                     <InvitationsList
                         itemListPaneWidth={itemListPaneWidth}
+                        animation={this.props.animation}
                         dataSource={this.props.dataSource}
                         changeDataSource={this.props.changeDataSource}
                         fetchData={this.props.fetchData}
@@ -68,6 +71,7 @@ export default class Invitations extends Component {
                         changeActionList={this.props.changeActionList} />
                     <InvitationsPage
                         itemListPaneWidth={itemListPaneWidth}
+                        animation={this.props.animation}
                         dataSource={this.props.dataSource}
                         changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
@@ -83,6 +87,7 @@ export default class Invitations extends Component {
 }
 Invitations.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
+    animation: PropTypes.bool.isRequired,
     dataSource: PropTypes.object.isRequired,
     changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
