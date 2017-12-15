@@ -31,7 +31,10 @@ class SettingsPage extends Component {
                     )
                 case 'Display':
                     return (
-                        <Display itemListPaneWidth={this.props.itemListPaneWidth}/>
+                        <Display 
+                        itemListPaneWidth={this.props.itemListPaneWidth}
+                        handleToggleAnimation={this.props.handleToggleAnimation}
+                        />
                     )
                 default:
                     return (
@@ -51,6 +54,8 @@ SettingsPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
+    animation: PropTypes.bool.isRequired,
+    handleToggleAnimation: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     itemList: PropTypes.object.isRequired
 }

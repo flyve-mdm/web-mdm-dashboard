@@ -19,6 +19,7 @@ function mapStateToProps(state, props) {
     return {
         splitViewId: state.AdminDashboard.splitViewId,
         paneOpened: state.AdminDashboard.paneOpened,
+        animation: state.AdminDashboard.animation,
         location: state.AdminDashboard.location,
         index: state.AdminDashboard.index,
         router: state.AdminDashboard.router,
@@ -35,6 +36,7 @@ function mapStateToProps(state, props) {
 function mapDispatchToProps(dispatch) {
     const actions = {
         closePane: bindActionCreators(Actions.closePane, dispatch),
+        handleToggleAnimation: bindActionCreators(Actions.handleToggleAnimation, dispatch),
         changeLocation: bindActionCreators(Actions.changeLocation, dispatch),
         changeIndex: bindActionCreators(Actions.changeIndex, dispatch),
         changeDataSource: bindActionCreators(Actions.changeDataSource, dispatch),
@@ -61,7 +63,7 @@ class BodyAdminDashboard extends Component {
     }
 
     render() {
-
+    
         let propsData = {
             dataSource: this.props.dataSource,
             changeDataSource: this.props.actions.changeDataSource,
@@ -69,6 +71,8 @@ class BodyAdminDashboard extends Component {
             isLoading: this.props.isLoading,
             isError: this.props.isError,
             mode: this.props.mode,
+            animation: this.props.animation,
+            handleToggleAnimation: this.props.actions.handleToggleAnimation,
             location: this.props.location,
             onNavigate: this.props.actions.changeLocation,
             changeActionList: this.props.actions.changeActionList,

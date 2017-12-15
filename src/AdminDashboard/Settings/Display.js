@@ -25,19 +25,23 @@ class Display extends Component {
     }
 
     changeLocalStorage = (name) => {
-            let display = localStorage.getItem('display') ? localStorage.getItem('display') : '{}'
-            display = JSON.parse(display)
+        let display = localStorage.getItem('display') ? localStorage.getItem('display') : '{}'
+        display = JSON.parse(display)
 
-            display = { 
-                ...display, 
-                [name]: !display[name]
-            }
+        display = { 
+            ...display, 
+            [name]: !display[name]
+        }
 
-            this.setState({
-                [name]: !this.state[name]
-            })
+        this.setState({
+            [name]: !this.state[name]
+        })
 
-            localStorage.setItem('display', JSON.stringify(display))
+        localStorage.setItem('display', JSON.stringify(display))
+
+        if (name === 'animations') {
+            this.props.handleToggleAnimation()
+        }
     }
 
     render () {
@@ -213,7 +217,8 @@ Display.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ]).isRequired
+    ]).isRequired,
+    handleToggleAnimation: PropTypes.func.isRequired
 }
 
 export default Display

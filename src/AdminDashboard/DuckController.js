@@ -4,9 +4,12 @@ import Routers from './Routers'
 import * as api from './Api'
 import WinJS from 'winjs'
 
+const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
+
 const INITIAL_STATE = {
     splitViewId: 'rootSplitView',
     paneOpened: false,
+    animation: display.animations !== undefined ? display.animations : true,
     mode: GetMode(),
     index: 0,
     location: [Routers[0].label],
@@ -30,12 +33,13 @@ const INITIAL_STATE = {
     endpoint: null,
     dataSource: { itemList: new WinJS.Binding.List([]), sort: true},
     isLoading: true,
-    isError: false
+    isError: false 
 }
 
 // Constants
 const HANDLE_TOGGLE_PANE = 'flyve-mdm-web-ui/AdminDashboard/handleTogglePane'
 const CLOSE_PANE = 'flyve-mdm-web-ui/AdminDashboard/closePane'
+const HANDLE_TOGGLE_ANIMATION = 'flyve-mdm-web-ui/AdminDashboard/handleToggleAnimation'
 const CHANGE_MODE = 'flyve-mdm-web-ui/AdminDashboard/changeMode'
 const CHANGE_LOCATION = 'flyve-mdm-web-ui/AdminDashboard/changeLocation'
 const CHANGE_INDEX = 'flyve-mdm-web-ui/AdminDashboard/changeIndex'
@@ -62,6 +66,12 @@ export default function reducer(state = INITIAL_STATE, action) {
             return {
                ...state,
                paneOpened: false
+            }
+
+        case HANDLE_TOGGLE_ANIMATION:
+            return {
+                ...state,
+                animation: !state.animation
             }
         
         case CHANGE_MODE:
@@ -141,6 +151,11 @@ export function handleTogglePane () {
 export function closePane () {
   return { 
       type: CLOSE_PANE
+    }
+}
+export function handleToggleAnimation() {
+    return {
+        type: HANDLE_TOGGLE_ANIMATION
     }
 }
 export function changeMode (nexMode) {

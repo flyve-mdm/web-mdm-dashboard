@@ -27,6 +27,7 @@ class Settings extends Component {
                 return (
                     <SettingsList
                     itemListPaneWidth="100%" 
+                    animation={this.props.animation}
                     location={this.props.location}
                     itemList={this.state.itemList}
                     onNavigate={this.props.onNavigate}/>
@@ -34,6 +35,8 @@ class Settings extends Component {
             } else {
                 return (
                     <SettingsPage 
+                    animation={this.props.animation}
+                    handleToggleAnimation={this.props.handleToggleAnimation}
                     location={this.props.location}
                     itemList={this.state.itemList}
                     itemListPaneWidth={0}/>
@@ -45,11 +48,14 @@ class Settings extends Component {
                 <div style={{ height: '100%' }}>
                     <SettingsList 
                     itemListPaneWidth={ItemListPaneWidth}
+                    animation={this.props.animation}
                     itemList={this.state.itemList}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}/>
 
                     <SettingsPage 
+                    animation={this.props.animation}
+                    handleToggleAnimation={this.props.handleToggleAnimation}
                     location={this.props.location}
                     itemList={this.state.itemList}
                     itemListPaneWidth={ItemListPaneWidth}/>
@@ -61,6 +67,8 @@ class Settings extends Component {
 
 Settings.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
+    animation: PropTypes.bool.isRequired,
+    handleToggleAnimation: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired
 }
