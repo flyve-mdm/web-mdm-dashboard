@@ -4,8 +4,9 @@ import WinJS from 'winjs'
 import Feedback from './Feedback'
 import HelpCenterList from './HelpCenterList'
 import HelpCenterArticle from './HelpCenterArticle'
+import PropTypes from 'prop-types'
 
-export default class HelpCenter extends Component {
+class HelpCenter extends Component {
 
     constructor(props) {
         super(props)
@@ -59,7 +60,13 @@ export default class HelpCenter extends Component {
             )
         } else if (this.state.itemSelected === 'feedback') {
 
-            return <Feedback changeSelectItem={this.changeSelectItem} />
+            return (
+                <Feedback 
+                changeSelectItem={this.changeSelectItem} 
+                sendFeedback={this.props.sendFeedback}
+                isLoading={this.props.isLoading}
+                isError={this.props.isError}/>
+            )
 
         } else {
             return (
@@ -77,3 +84,10 @@ export default class HelpCenter extends Component {
 
     }
 }
+HelpCenter.propTypes = {
+    sendFeedback: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    isError: PropTypes.bool.isRequired   
+}
+
+export default HelpCenter

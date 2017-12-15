@@ -9,9 +9,9 @@ import SystemInformation from './SystemInformation'
 import Overview from './Overview'
 import Contact from './Contact'
 import EmptyMessage from '../../Utils/EmptyMessage'
-import HelpCenterList from './HelpCenter'
+import HelpCenter from './HelpCenter'
 
-export default class AboutPage extends Component {
+class AboutPage extends Component {
 
     render() {
         if (this.props.selectedIndex === null) {
@@ -70,7 +70,10 @@ export default class AboutPage extends Component {
                 case 'Help Center':
                     return (
                         <div className="contentPane listPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth), padding: 0 }}>
-                            <HelpCenterList />
+                            <HelpCenter 
+                            sendFeedback={this.props.sendFeedback}
+                            isLoading={this.props.isLoading}
+                            isError={this.props.isError} />
                         </div>
                     )
                 default:
@@ -83,11 +86,17 @@ export default class AboutPage extends Component {
         }
     }
 }
+
 AboutPage.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
     selectedIndex: PropTypes.array,
-    itemList: PropTypes.object.isRequired
+    itemList: PropTypes.object.isRequired,
+    sendFeedback: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    isError: PropTypes.bool.isRequired        
 }
+
+export default AboutPage
