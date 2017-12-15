@@ -24,6 +24,7 @@ export default class Fleets extends Component {
             if (selectedIndex === null && this.props.actionList === null) {
                 return <FleetsList
                     itemListPaneWidth={'100%'}
+                    animation={this.props.animation}
                     dataSource={this.props.dataSource}
                     changeDataSource={this.props.changeDataSource}
                     fetchData={this.props.fetchData}
@@ -39,6 +40,7 @@ export default class Fleets extends Component {
             } else {
                 return <FleetsPage
                     itemListPaneWidth={0}
+                    animation={this.props.animation}
                     dataSource={this.props.dataSource}
                     changeDataSource={this.props.changeDataSource}
                     location={this.props.location}
@@ -55,6 +57,7 @@ export default class Fleets extends Component {
                 <div style={{ height: '100%' }}>
                     <FleetsList
                         itemListPaneWidth={itemListPaneWidth}
+                        animation={this.props.animation}
                         dataSource={this.props.dataSource}
                         changeDataSource={this.props.changeDataSource}
                         fetchData={this.props.fetchData}
@@ -70,6 +73,7 @@ export default class Fleets extends Component {
                         changeActionList={this.props.changeActionList} />
                     <FleetsPage
                         itemListPaneWidth={itemListPaneWidth}
+                        animation={this.props.animation}
                         dataSource={this.props.dataSource}
                         changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
@@ -87,6 +91,7 @@ export default class Fleets extends Component {
 }
 Fleets.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
+    animation: PropTypes.bool.isRequired,
     dataSource: PropTypes.object.isRequired,
     changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,

@@ -25,6 +25,7 @@ export default class Files extends Component {
             if (selectedIndex === null && this.props.actionList === null) {
                 return <FilesList
                     itemListPaneWidth={'100%'}
+                    animation={this.props.animation}
                     dataSource={this.props.dataSource}
                     changeDataSource={this.props.changeDataSource}
                     fetchData={this.props.fetchData}
@@ -39,6 +40,7 @@ export default class Files extends Component {
             } else {
                 return <FilesPage 
                     itemListPaneWidth={0}
+                    animation={this.props.animation}
                     dataSource={this.props.dataSource}
                     changeDataSource={this.props.changeDataSource}
                     location={this.props.location}
@@ -54,6 +56,7 @@ export default class Files extends Component {
                 <div style={{ height: '100%' }}>
                     <FilesList
                         itemListPaneWidth={itemListPaneWidth}
+                        animation={this.props.animation}
                         dataSource={this.props.dataSource}
                         changeDataSource={this.props.changeDataSource}
                         fetchData={this.props.fetchData}
@@ -67,6 +70,7 @@ export default class Files extends Component {
                         changeActionList={this.props.changeActionList} />
                     <FilesPage 
                         itemListPaneWidth={itemListPaneWidth}
+                        animation={this.props.animation}
                         dataSource={this.props.dataSource}
                         changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
@@ -82,6 +86,7 @@ export default class Files extends Component {
 }
 Files.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
+    animation: PropTypes.bool.isRequired,
     dataSource: PropTypes.object.isRequired,
     changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
