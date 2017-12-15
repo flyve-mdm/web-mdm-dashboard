@@ -60,6 +60,7 @@ SettingsList.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
+    animation: PropTypes.bool.isRequired,
     onNavigate: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     itemList: PropTypes.object.isRequired
