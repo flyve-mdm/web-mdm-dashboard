@@ -10,6 +10,8 @@ module.exports = function() {
     var Plugins = require('../src/AdminDashboard/data/plugins.json')
     var Policies = require('../src/AdminDashboard/data/policies.json')
     var Users = require('../src/AdminDashboard/data/users.json')
+    var Feedback = require('../src/AdminDashboard/data/feedback.json')
+
     return {
         devices: Agents,
         files: Files,
@@ -20,6 +22,7 @@ module.exports = function() {
         applications: Packages,
         plugins: Plugins,
         policies: Policies,
-        users: Users
+        users: Users,
+        feedback: Feedback
     }
 }
