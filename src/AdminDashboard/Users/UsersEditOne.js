@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import ConstructInputs from '../../Utils/Forms'
+import ContentPane from '../../Utils/ContentPane'
 import validateData from '../../Utils/validateData'
 import IconItemList from '../IconItemList'
 import { usersScheme } from '../../Utils/Forms/Schemes'
@@ -124,55 +124,54 @@ class Profiles extends Component {
 
         return (
 
-            <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-
-                <div className="listElement listElementIcon">
-                    <span className="viewIcon"/>
-                </div>
-                
-
-                <div className="listElement">
-
-                    <div style={{ overflow: 'hidden' }}>
-                        <input
-                            {...inputAttributes}
-                        />
-                        <IconItemList 
-                            image={this.state.imageProfile} 
-                            type={this.state.typeImageProfile}
-                            imgClick={this.openFileChooser}
-                            size={150}
-                            imgClass="clickable"/>
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                <div className="list-content Profiles">
+                    <div className="listElement listElementIcon">
+                        <span className="viewIcon" />
                     </div>
 
+
+                    <div className="listElement">
+
+                        <div style={{ overflow: 'hidden' }}>
+                            <input
+                                {...inputAttributes}
+                            />
+                            <IconItemList
+                                image={this.state.imageProfile}
+                                type={this.state.typeImageProfile}
+                                imgClick={this.openFileChooser}
+                                size={150}
+                                imgClass="clickable" />
+                        </div>
+
+                    </div>
+
+
+                    <ConstructInputs data={user.personalInformation} icon="contactIcon" />
+
+                    <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
+
+                    <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
+
+                    <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
+                    <div style={{ overflow: 'auto' }}>
+                        <button className="win-button" style={{ float: 'right' }} onClick={this.addEmail}>Add email</button>
+                    </div>
+
+                    <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
+
+                    <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
+
+                    <ConstructInputs data={user.activityInformation} icon="documentIcon" />
+
+                    <button className={this.state.buttonSaveClassName} style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                        Save
+                    </button>
+
+                    <br />
                 </div>
-
-
-                <ConstructInputs data={user.personalInformation} icon="contactIcon" />
-
-                <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
-               
-                <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
-
-                <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
-                <div style={{ overflow: 'auto' }}>
-                    <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
-                </div>
-
-                <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
-            
-                <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
-
-                <ConstructInputs data={user.activityInformation} icon="documentIcon" />
-
-                <button className={ this.state.buttonSaveClassName } style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                    Save
-                </button>
-            
-                <br/>
-
-            </div>
-
+            </ContentPane>
         )
     }
 }
