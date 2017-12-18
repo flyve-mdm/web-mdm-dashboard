@@ -1,4 +1,4 @@
-#LoginForm {
+.LoginForm {
     width: 360px;
     height: 100%;
     margin: 20px auto;
@@ -14,13 +14,8 @@
         color: $white-color;
     }
 
-    .passwordSection button {
-        margin: 0 5px;
-        
-        &[type="submit"] {
-            background-color: $app-color;
-            color: $white-color;
-        }
+    .win-button-primary {
+        margin-left: 10px
     }
 
     .credentials {
