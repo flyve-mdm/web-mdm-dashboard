@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
     email: '',
     password: '',
-    loading: false,
+    isLoading: false,
     phase: 1
 }
 
@@ -16,7 +16,7 @@ export default function reducer(state = INITIAL_STATE, action) {
         case CHANGE_LOADING:
             return {
                ...state,
-               loading: action.loading
+               isLoading: action.isLoading
             }
         
         case CHANGE_VALUE:
@@ -30,10 +30,10 @@ export default function reducer(state = INITIAL_STATE, action) {
 }
 
 // Action Creators
-export function changeLoading (loading) {
+export function changeLoading (isLoading) {
     return { 
         type: CHANGE_LOADING,
-        loading
+        isLoading
     }
 }
 export function changeValue (name, value) {
