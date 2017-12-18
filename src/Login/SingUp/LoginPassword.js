@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-export default class LoginEmail extends Component {
+import PropTypes from 'prop-types'
+
+class LoginPassword extends Component {
     
     constructor (props) {
         super(props)
@@ -9,21 +11,9 @@ export default class LoginEmail extends Component {
         }
     }
 
-    ChangeInput = (input) => {
-        this.props.changeValue(input.target.name, input.target.value)
-    }
-    
     LogInServer = (e) => {
         e.preventDefault()
-        console.log('login ˆ_ˆ')
         this.props.history.push(`/app`)
-                // this.setState({
-                //         classInput: 'color-line-alert',
-                //         errorMessage: <p className="win-textbox color-type-alert"> 
-                //                         Your account or password is incorrect. If you don't remember your password, 
-                //                         <a> reset it now.</a>
-                //                       </p>
-                //     })
     }
 
     render () { 
@@ -44,13 +34,13 @@ export default class LoginEmail extends Component {
                         className={this.state.classInput}
                         placeholder="Password"
                         value={this.props.password} 
-                        onChange={this.ChangeInput} 
+                        onChange={this.props.changeInput} 
                         required={true}
                     />
                     <button 
                         className="win-button" 
                         type="button" 
-                        onClick={() => this.props.changeValue('phase', 1)}
+                        onClick={() => this.props.changePhase(1)}
                     >
                         Back 
                     </button>
@@ -59,7 +49,16 @@ export default class LoginEmail extends Component {
                 </form>
                 <a>Forgot my password</a>
             </div>
-            
         )
     }
 }
+
+LoginPassword.propTypes = {
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    changeInput: PropTypes.func.isRequired,
+    changePhase: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
+}
+
+export default LoginPassword

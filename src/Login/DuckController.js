@@ -1,13 +1,11 @@
 const INITIAL_STATE = {
     email: '',
-    password: '',
-    isLoading: false,
-    phase: 1
+    isLoading: false
 }
 
 // Constants
 const CHANGE_LOADING = 'flyve-mdm-web-ui/Login/changeLoading'
-const CHANGE_VALUE = 'flyve-mdm-web-ui/Login/changeValue'
+const CHANGE_EMAIL = 'flyve-mdm-web-ui/Login/changeEmail'
 
 // Reducers
 export default function reducer(state = INITIAL_STATE, action) {
@@ -19,10 +17,10 @@ export default function reducer(state = INITIAL_STATE, action) {
                isLoading: action.isLoading
             }
         
-        case CHANGE_VALUE:
+        case CHANGE_EMAIL:
             return {
                ...state,
-               [action.name]: action.value
+               email: action.newEmail
             }
         
         default: return state
@@ -36,10 +34,9 @@ export function changeLoading (isLoading) {
         isLoading
     }
 }
-export function changeValue (name, value) {
+export function changeEmail (newEmail) {
     return {
-        type: CHANGE_VALUE,
-        name,
-        value
+        type: CHANGE_EMAIL,
+        newEmail
     }
 }
