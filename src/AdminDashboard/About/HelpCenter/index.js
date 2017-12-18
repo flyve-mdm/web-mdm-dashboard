@@ -30,13 +30,6 @@ class HelpCenter extends Component {
         this.setState({ itemSelected: item })
     }
 
-    handleContentAnimating(eventObject) {
-        // Disable ListView's entrance animation
-        if (eventObject.detail.type === 'entrance') {
-            eventObject.preventDefault()
-        }
-    }
-
     showAllArticles = () => {
         this.setState({labelList: 'All articles', list: new WinJS.Binding.List(Articles.data)})
     }
@@ -74,7 +67,6 @@ class HelpCenter extends Component {
                     labelList={this.state.labelList}
                     dataSource={this.state.list.dataSource}
                     layout={this.state.layout}
-                    handleContentAnimating={this.handleContentAnimating}
                     handleSelectionChanged={this.handleSelectionChanged}
                     showAllArticles={this.showAllArticles}
                     changeSelectItem={this.changeSelectItem}

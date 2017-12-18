@@ -86,15 +86,6 @@ export default class DevicesList extends Component {
         
     }
 
-    handleContentAnimating = (eventObject) => {
-        // Enable/Disable ListView's entrance animation
-        if (!this.props.animation) {
-            if (eventObject.detail.type === 'entrance' || eventObject.detail.type === 'contentTransition') {
-                eventObject.preventDefault()
-            }
-        }
-    }
-
     handleDelete = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
@@ -188,7 +179,6 @@ export default class DevicesList extends Component {
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
                     tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
-                    onContentAnimating={this.handleContentAnimating}
                 />
             )
         }

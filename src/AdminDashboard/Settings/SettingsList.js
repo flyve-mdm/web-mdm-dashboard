@@ -20,13 +20,6 @@ class SettingsList extends Component {
         )
     })
 
-    handleContentAnimating(eventObject) {
-        // Disable ListView's entrance animation
-        if (eventObject.detail.type === 'entrance') {
-            eventObject.preventDefault()
-        }
-    }
-
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let indices = listView.selection.getIndices()
@@ -47,7 +40,6 @@ class SettingsList extends Component {
                     layout={this.state.layout}
                     selectionMode="single"
                     tapBehavior="directSelect" 
-                    onContentAnimating={this.handleContentAnimating}
                     onSelectionChanged={this.handleSelectionChanged}
                 />
             </div>

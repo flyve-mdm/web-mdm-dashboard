@@ -66,15 +66,6 @@ export default class FleetsList extends Component {
         
     }
 
-    handleContentAnimating = (eventObject) => {
-        // Enable/Disable ListView's entrance animation
-        if (!this.props.animation) {
-            if (eventObject.detail.type === 'entrance' || eventObject.detail.type === 'contentTransition') {
-                eventObject.preventDefault()
-            }
-        }
-    }
-
     handleAdd = (eventObject) => {
         let button = eventObject.currentTarget.winControl
         this.refs.listView.winControl.selection.clear()
@@ -188,7 +179,6 @@ export default class FleetsList extends Component {
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
                     tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
-                    onContentAnimating={this.handleContentAnimating}
                 />
             )
         }

@@ -30,13 +30,6 @@ export default class AboutList extends Component {
         }.bind(this), 0)
     }
 
-    handleContentAnimating(eventObject) {
-        // Disable ListView's entrance animation
-        if (eventObject.detail.type === 'entrance') {
-            eventObject.preventDefault()
-        }
-    }
-
     render() {
         return (
             <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
@@ -49,7 +42,6 @@ export default class AboutList extends Component {
                     layout={this.state.layout}
                     selectionMode="single"
                     tapBehavior="directSelect" 
-                    onContentAnimating={this.handleContentAnimating}
                     onSelectionChanged={this.handleSelectionChanged}
                 />
             </div>

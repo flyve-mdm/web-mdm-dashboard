@@ -105,7 +105,6 @@ export default class FleetsAddPolicies extends Component {
                     layout={this.state.layout}
                     selectionMode="single"
                     tapBehavior="directSelect"
-                    onContentAnimating={this.handleContentAnimating}
                     onSelectionChanged={this.handleSelectionChanged}
                     groupHeaderTemplate={this.groupHeaderRenderer}
                 />

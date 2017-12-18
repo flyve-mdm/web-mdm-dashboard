@@ -53,15 +53,6 @@ export default class FilesList extends Component {
         }, 0)
     }
 
-    handleContentAnimating = (eventObject) => {
-        // Enable/Disable ListView's entrance animation
-        if (!this.props.animation) {
-            if (eventObject.detail.type === 'entrance' || eventObject.detail.type === 'contentTransition') {
-                eventObject.preventDefault()
-            }
-        }
-    }
-
     handleRefresh = () => {
         this.props.onNavigate([this.props.location[0]])
         this.props.fetchData(this.props.location[0])
@@ -177,7 +168,6 @@ export default class FilesList extends Component {
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
                     tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
-                    onContentAnimating={this.handleContentAnimating}
                 />
             )
         }
