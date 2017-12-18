@@ -95,8 +95,7 @@ class ConstructInputs extends Component {
 }
 
 ConstructInputs.propTypes = {
-    data: PropTypes.array.isRequired,
-    function: PropTypes.func,    
+    data: PropTypes.array.isRequired, 
     icon: PropTypes.string
 }
 
