@@ -1,11 +1,12 @@
 import GetMode from '../Utils/GetMode'
+import Animations from '../Utils/Animations'
 import ItemList from './ItemList'
 import Routers from './Routers'
 import * as api from './Api'
 import WinJS from 'winjs'
 
 const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
-
+Animations()
 const INITIAL_STATE = {
     splitViewId: 'rootSplitView',
     paneOpened: false,
@@ -154,6 +155,7 @@ export function closePane () {
     }
 }
 export function handleToggleAnimation() {
+    Animations()
     return {
         type: HANDLE_TOGGLE_ANIMATION
     }
