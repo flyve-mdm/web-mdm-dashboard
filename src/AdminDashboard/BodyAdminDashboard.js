@@ -45,7 +45,7 @@ function mapDispatchToProps(dispatch) {
         changeEndpoint: bindActionCreators(Actions.changeEndpoint, dispatch),
         fetchDataSuccess: bindActionCreators(Actions.fetchDataSuccess, dispatch),
         fetchDataFailure: bindActionCreators(Actions.fetchDataFailure, dispatch),
-        fetchingData: bindActionCreators(Actions.fetchingData, dispatch),
+        changeLoading: bindActionCreators(Actions.changeLoading, dispatch),
         fetchData: (api) => dispatch(Actions.fetchData(api)),
         sendFeedback: (api) => dispatch(Actions.sendFeedback(api))
     }
@@ -86,7 +86,7 @@ class BodyAdminDashboard extends Component {
             propsData = {
                 ...propsData,
                 sendFeedback: this.props.actions.sendFeedback,
-                changeLoading: this.props.actions.fetchingData
+                changeLoading: this.props.actions.changeLoading
             }
         }
 
