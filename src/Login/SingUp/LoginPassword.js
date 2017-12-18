@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class LoginPassword extends Component {
     
@@ -47,7 +48,7 @@ class LoginPassword extends Component {
 
                     <button type="submit" className="win-button">Sing in</button>
                 </form>
-                <a>Forgot my password</a>
+                <Link to="/forgotPassword">Forgot my password</Link>
             </div>
         )
     }
