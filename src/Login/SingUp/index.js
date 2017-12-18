@@ -21,8 +21,6 @@ function mapDispatchToProps(dispatch) {
 
 class Login extends Component {
 
-
-
     constructor (props) {
         super(props)
         this.state = {
@@ -65,7 +63,7 @@ class Login extends Component {
             />
         }
         return (
-            <div id="LoginForm">
+            <div className="LoginForm">
                 <img alt="" src="images/logo2.png" className="img-login"/>
 
                 {form}
@@ -85,7 +83,6 @@ class Login extends Component {
 
 Login.propTypes = {
     email: PropTypes.string.isRequired,    
-    changeEmail: PropTypes.func.isRequired,    
     history: PropTypes.object.isRequired
 }
 
