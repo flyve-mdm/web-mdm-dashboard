@@ -48,7 +48,7 @@ const CHANGE_ENDPOINT = 'flyve-mdm-web-ui/AdminDashboard/changeEndpoint'
 const CHANGE_DATA_SOURCE = 'flyve-mdm-web-ui/AdminDashboard/changeDataSource'
 const CHANGE_ACTION_LIST = 'flyve-mdm-web-ui/AdminDashboard/changeActionList'
 const CHANGE_CURRENT_ITEM = 'flyve-mdm-web-ui/AdminDashboard/changeCurrentItem'
-const FETCHING_DATA = 'flyve-mdm-web-ui/AdminDashboard/fetchingData'
+const CHANGE_LOADING = 'flyve-mdm-web-ui/AdminDashboard/changeLoading'
 const FETCHING_DATA_SUCCESS = 'flyve-mdm-web-ui/AdminDashboard/fetchingDataSuccess'
 const FETCHING_DATA_FAILURE = 'flyve-mdm-web-ui/AdminDashboard/fetchingDataFailure'
 
@@ -121,7 +121,7 @@ export default function reducer(state = INITIAL_STATE, action) {
                 ...state,
                 currentItem: action.newCurrentItem
             }
-        case FETCHING_DATA:
+        case CHANGE_LOADING:
             return {
                 ...state,
                 isLoading: action.isLoading
@@ -208,9 +208,9 @@ export function changeCurrentItem(newCurrentItem) {
 
     }
 }
-export function fetchingData(bool) {
+export function changeLoading(bool) {
     return {
-        type: FETCHING_DATA,
+        type: CHANGE_LOADING,
         isLoading: bool
     }
 }
@@ -228,30 +228,30 @@ export function fetchDataFailure() {
 export function fetchData(endpoint) {
     return (dispatch) => {
         dispatch(changeEndpoint(endpoint))
-        dispatch(fetchingData(true))
+        dispatch(changeLoading(true))
         api[endpoint.toLowerCase()].getAll()
         .then(([response, json]) => {
             dispatch(fetchDataSuccess(json))
-            dispatch(fetchingData(false))
+            dispatch(changeLoading(false))
         })
         .catch((error) => {
             dispatch(fetchDataFailure())
-            dispatch(fetchingData(false))
+            dispatch(changeLoading(false))
         })
     }
 }
 export function sendFeedback() {
     return (dispatch) => {
         dispatch(changeEndpoint('feedback'))
-        dispatch(fetchingData(true))
+        dispatch(changeLoading(true))
         api.feedback.sendFeedback()
         .then(([response, json]) => {
             dispatch(fetchDataSuccess(json))
-            dispatch(fetchingData(false))
+            dispatch(changeLoading(false))
         })
         .catch((error) => {
             dispatch(fetchDataFailure())
-            dispatch(fetchingData(false))
+            dispatch(changeLoading(false))
         })
     }
 }
