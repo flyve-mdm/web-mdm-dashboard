@@ -53,7 +53,6 @@ class HelpCenterList extends Component {
                     layout={this.props.layout}
                     selectionMode="single"
                     tapBehavior="directSelect"
-                    onContentAnimating={this.props.handleContentAnimating}
                     onSelectionChanged={this.props.handleSelectionChanged}
                 />
 
@@ -83,7 +82,6 @@ HelpCenterList.propTypes = {
     labelList: PropTypes.string.isRequired,
     dataSource: PropTypes.object.isRequired,
     layout: PropTypes.object.isRequired,
-    handleContentAnimating: PropTypes.func.isRequired,
     handleSelectionChanged: PropTypes.func.isRequired,
     showAllArticles: PropTypes.func.isRequired,
     changeSelectItem: PropTypes.func.isRequired

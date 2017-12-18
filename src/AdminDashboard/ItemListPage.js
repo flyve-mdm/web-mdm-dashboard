@@ -51,13 +51,6 @@ class ItemListPage extends Component {
         }.bind(this), 0)
     }
 
-    handleContentAnimating(eventObject) {
-        // Disable ListView's entrance animation
-        if (eventObject.detail.type === 'entrance') {
-            eventObject.preventDefault()
-        }
-    }
-
     handleDelete = () => {
         let item = this.props.itemList
         let index = this.state.selectedItemList
@@ -162,7 +155,6 @@ class ItemListPage extends Component {
                     selectionMode={this.state.selectionMode ? 'multi' : 'single'}
                     tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
-                    onContentAnimating={this.handleContentAnimating}
                 />
             </div>
         )

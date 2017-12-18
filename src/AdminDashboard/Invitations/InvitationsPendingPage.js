@@ -17,13 +17,6 @@ export default class InvitationsPendingPage extends Component {
         }
     }
 
-    handleContentAnimating(eventObject) {
-        // Disable ListView's entrance animation
-        if (eventObject.detail.type === 'entrance') {
-            eventObject.preventDefault()
-        }
-    }
-
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <div style={{ padding: '14px', width: '100%' }}>
@@ -59,7 +52,6 @@ export default class InvitationsPendingPage extends Component {
                         itemDataSource={currentListItemLogs.dataSource}
                         itemTemplate={this.ItemListRenderer}
                         layout={this.state.layout}
-                        onContentAnimating={this.handleContentAnimating}
                         selectionMode={'single'}
                     />
                 </ContentPane>
