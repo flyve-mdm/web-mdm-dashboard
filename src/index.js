@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import registerServiceWorker from './registerServiceWorker'
 import AdminDashboard from './AdminDashboard'
-import { SingUp } from './Login'
+import { SingUp, ForgotPassword } from './Login'
 
 /**
  * Assets
@@ -20,6 +20,7 @@ ReactDOM.render((
             <Switch>
                 <Route exact path='/' component={SingUp} />
                 <Route path='/app' component={AdminDashboard} />
+                <Route path='/forgotPassword' component={ForgotPassword} />
             </Switch>
         </ConnectedRouter>
     </Provider>), 
