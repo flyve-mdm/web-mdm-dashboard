@@ -1,12 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Calc100PercentMinus from './Calc100PercentMinus'
+import WinJS from 'winjs'
 
 export default class ContentPane extends Component {
 
+  componentDidUpdate() {
+    this.handleAnimation()
+  }
+
+  componentDidMount() {
+    this.handleAnimation()
+  }
+
+  handleAnimation = () => {
+    WinJS.UI.Animation.enterContent(document.getElementById('main'), { top: '0px', left: '30px', rtlflip: true }, { mechanism: "transition" })
+  }
+
   render() {
     return (
-      <div className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
+      <div id="main" className="contentPane" style={{ height: '100%', width: Calc100PercentMinus(this.props.itemListPaneWidth), display: 'inline-block', verticalAlign: 'top' }}>
         { this.props.children }
       </div>
     )
