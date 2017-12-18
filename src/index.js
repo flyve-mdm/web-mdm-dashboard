@@ -5,8 +5,8 @@ import { store, history } from './store'
 import { Route, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import registerServiceWorker from './registerServiceWorker'
-import Login from './Login'
 import AdminDashboard from './AdminDashboard'
+import { SingUp } from './Login'
 
 /**
  * Assets
@@ -18,7 +18,7 @@ ReactDOM.render((
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <Switch>
-                <Route exact path='/' component={Login} />
+                <Route exact path='/' component={SingUp} />
                 <Route path='/app' component={AdminDashboard} />
             </Switch>
         </ConnectedRouter>
