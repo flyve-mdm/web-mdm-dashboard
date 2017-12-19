@@ -11,6 +11,7 @@ module.exports = function() {
     var Policies = require('../src/AdminDashboard/data/policies.json')
     var Users = require('../src/AdminDashboard/data/users.json')
     var Feedback = require('../src/AdminDashboard/data/feedback.json')
+    var Login = require('../src/AdminDashboard/data/login.json')
 
     return {
         devices: Agents,
@@ -23,6 +24,7 @@ module.exports = function() {
         plugins: Plugins,
         policies: Policies,
         users: Users,
-        feedback: Feedback
+        feedback: Feedback,
+        login: Login
     }
 }
