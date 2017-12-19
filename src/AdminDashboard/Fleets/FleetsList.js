@@ -4,7 +4,7 @@ import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
 import FleetsItemList from './FleetsItemList'
 import ItemList from '../ItemList'
-import Loading from '../../Utils/Loading'
+import Loader from '../../Utils/Loader'
 import Confirmation from '../../Utils/Confirmation'
 
 export default class FleetsList extends Component {
@@ -163,7 +163,7 @@ export default class FleetsList extends Component {
             />
         )
 
-        let listComponent = <Loading message="Loading..." headerSize={48}/>
+        let listComponent = <Loader count={3} />
 
         if (this.isError) {
             listComponent = "Error"
