@@ -26,6 +26,15 @@ export default class UsersContent extends Component {
     render() {
         let selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
         let imageProfile = selectedItemList['User.picture'] ? selectedItemList['User.picture'] : "profile.png"
+        let nameProfile
+
+        if (typeof selectedItemList['User.Profile_User.Profile.name'] === 'string') {
+            nameProfile = (<span key={selectedItemList['User.Profile_User.Profile.name']} className="message" >{selectedItemList['User.Profile_User.Profile.name']}<br /></span>)
+        } else {
+            nameProfile = selectedItemList['User.Profile_User.Profile.name'].map((name, index) => {
+                return (<span key={index} className="message" >{name}<br /></span>)
+            })
+        }
         
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
@@ -40,11 +49,7 @@ export default class UsersContent extends Component {
                                 </b>
                             </div>
                             
-                            {
-                                selectedItemList['User.Profile_User.Profile.name'].map((name, index) => {
-                                    return (<span key={index} className = "message" >{name}<br/></span>)
-                                })
-                            }
+                            { nameProfile }
                             
                             <span className="source">Joined {selectedItemList['User.date_creation']}</span>
                             <br />
