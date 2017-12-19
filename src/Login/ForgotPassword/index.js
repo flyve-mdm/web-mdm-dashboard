@@ -90,6 +90,13 @@ class ForgotPassword extends Component {
                     <p>
                         To reset your password, open your mailbox and find the email with the subject "Reset Password" and open the link to create a new password.
                     </p>
+                    <button 
+                        className="win-button" 
+                        type="button" 
+                        onClick={() => this.props.history.push('/')}
+                    >
+                        Go home
+                    </button>
                 </div>
             )
         }
