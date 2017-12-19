@@ -4,7 +4,7 @@ import InvitationsItemList from './InvitationsItemList'
 import PropTypes from 'prop-types'
 import ItemList from '../ItemList'
 import WinJS from 'winjs'
-import Loading from '../../Utils/Loading'
+import Loader from '../../Utils/Loader'
 
 export default class InvitationsList extends Component {
 
@@ -128,7 +128,7 @@ export default class InvitationsList extends Component {
             />
         )
 
-        let listComponent = <Loading message="Loading..." headerSize={48}/>
+        let listComponent = <Loader count={3} />
 
         if (this.isError) {
             listComponent = "Error"

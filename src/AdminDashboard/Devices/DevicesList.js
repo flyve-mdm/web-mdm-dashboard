@@ -4,7 +4,7 @@ import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import DevicesItemList from './DevicesItemList'
 import ItemList from '../ItemList'
-import Loading from '../../Utils/Loading'
+import Loader from '../../Utils/Loader'
 import Confirmation from '../../Utils/Confirmation'
 
 export default class DevicesList extends Component {
@@ -161,7 +161,7 @@ export default class DevicesList extends Component {
             />
         )
 
-        let listComponent = <Loading message="Loading..." headerSize={48}/>
+        let listComponent = <Loader count={3} />
 
         if(this.isError) {
             listComponent = "Error"
@@ -169,6 +169,7 @@ export default class DevicesList extends Component {
             listComponent = (
                 < ReactWinJS.ListView
                     ref="listView"
+                    onHeaderVisibilityChanged={this.onHeaderVisibilityChanged}
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.props.dataSource.itemList.dataSource}
