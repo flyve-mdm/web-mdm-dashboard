@@ -15,6 +15,7 @@ class Input extends Component {
             if(isOK) this.props.delete(this.props.name)
         }
         if (this.props.delete) deleteIcon = <span className="deleteIcon" style={{ margin: 10, fontSize: 18 }} onClick={deleteEmail}/>
+        const required = (this.props.required === true)
         return (
             <div className="list-col">
                 <p>{this.props.label}</p>
@@ -27,6 +28,7 @@ class Input extends Component {
                     onChange={this.change}
                     disabled={this.props.disabled}
                     style={this.props.style}
+                    required={required}
                 />
                 { deleteIcon }
                 {this.props.delete ? <Confirmation title={`Delete ${this.props.label}`} message={this.props.value} reference={el => this.contentDialog = el} /> : <span/>}
@@ -47,7 +49,8 @@ Input.propTypes = {
     function: PropTypes.func,
     disabled: PropTypes.bool,
     style: PropTypes.object,
-    delete: PropTypes.func
+    delete: PropTypes.func,
+    required: PropTypes.bool
 }
 
 export default Input
