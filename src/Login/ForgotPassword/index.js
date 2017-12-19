@@ -21,11 +21,58 @@ function mapDispatchToProps(dispatch) {
 
 class ForgotPassword extends Component {
 
+    constructor (props) {
+        super(props)
+        this.state = {
+            isSuccessful: false
+        }
+    }
+
     changeInput = (name, value) => {
         this.props.actions.changeEmail(value)
     }
 
     render() {
+        
+        let element
+        
+        if (!this.state.isSuccessful) {
+            element = (
+                <div>
+                    <p>
+                        We can help you reset password and security info.
+                        Please, enter your Flyve MDM account in the text box.
+                    </p>
+                    <Input 
+                        label="" 
+                        type="text" 
+                        name="email" 
+                        value={this.props.email} 
+                        placeholder="Flyve MDM account" 
+                        function={this.changeInput}
+                    />
+
+                    <button 
+                        className="win-button" 
+                        type="button" 
+                        onClick={() => this.props.history.push('/')}
+                    >
+                        Back 
+                    </button>
+
+                    <button type="submit" className="win-button win-button-primary">Sing in</button>
+                </div>
+            )
+        }
+
+        else {
+            element = (
+                <p>
+                    To reset your password, open your mailbox and find the email with the subject "Reset Password" and open the link to create a new password.
+                </p>
+            )
+        }
+
         return (
             <div className="LoginForm">
                 <img alt="" src="images/logo2.png" className="img-login"/>
@@ -34,29 +81,9 @@ class ForgotPassword extends Component {
                     Recover your <br/>
                     account
                 </h2>
-                <p>
-                    We can help you reset password and security info.
-                    Please, enter your Flyve MDM account in the text box.
-                </p>
-                <Input 
-                    label="" 
-                    type="text" 
-                    name="email" 
-                    value={this.props.email} 
-                    placeholder="Flyve MDM account" 
-                    function={this.changeInput}
-                />
 
-                <button 
-                    className="win-button" 
-                    type="button" 
-                    onClick={() => this.props.history.push('/')}
-                >
-                    Back 
-                </button>
-
-                <button type="submit" className="win-button win-button-primary">Sing in</button>
-
+                { element }
+                
                 <div className="credentials">
                     <a href="https://flyve-mdm.com/privacy-policy/">Terms and Conditions</a>
                     <br />
