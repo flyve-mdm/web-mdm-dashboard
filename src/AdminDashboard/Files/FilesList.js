@@ -13,12 +13,19 @@ export default class FilesList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItemList: []
+            selectedItemList: [],
+            scrolling: false
         }
     }
 
     componentDidMount() {
         this.handleRefresh()
+    }
+
+    componentDidUpdate() {
+        if (this.refs.listView !== undefined && !this.state.scrolling) {
+            this.refs.listView.winControl.footer.style.height = '1px'
+        }
     }
 
     componentWillUnmount() {
@@ -130,6 +137,33 @@ export default class FilesList extends Component {
             return -1
     }
 
+    onLoadingStateChanged = (eventObject) => {
+        if (eventObject.detail.scrolling === true) {
+            setTimeout(() => {
+                this.setState({
+                    scrolling: true
+                })
+            }, 0)
+        }
+    }
+
+    onFooterVisibilityChanged = (eventObject) => {
+
+        let listView = eventObject.currentTarget.winControl
+
+        if (eventObject.detail.visible && this.state.scrolling) {
+            listView.footer.style.height = '100px'
+            setTimeout(() => {
+                listView.footer.style.height = '1px'
+            }, 3000)
+
+        } else {
+            setTimeout(() => {
+                listView.footer.style.height = '1px'
+            }, 3000)
+        }
+    }
+
     render() {
         let deleteCommand = (
             <ReactWinJS.ToolBar.Button
@@ -160,11 +194,14 @@ export default class FilesList extends Component {
             listComponent = (
                 <ReactWinJS.ListView
                     ref="listView"
+                    onLoadingStateChanged={this.onLoadingStateChanged}
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.props.dataSource.itemList.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
+                    footerComponent={<Loader />}
+                    onFooterVisibilityChanged={this.onFooterVisibilityChanged}
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
                     tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
