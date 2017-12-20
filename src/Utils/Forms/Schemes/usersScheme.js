@@ -245,18 +245,6 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
             disabled: true,
             style: null
         }],
-        [
-            {
-                label: "Comments",
-                type: "textArea",
-                name: "comments",
-                value: state.comments,
-                placeholder: null,
-                function: changeState,
-                disabled: false,
-                style: null
-            }
-        ],
         [   
             {
                 label: "Category",
@@ -299,6 +287,18 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                     }
                 ],
                 function: changeState
+            }
+        ],
+        [
+            {
+                label: "Comments",
+                type: "textArea",
+                name: "comments",
+                value: state.comments,
+                placeholder: null,
+                function: changeState,
+                disabled: false,
+                style: null
             }
         ]
     ]
