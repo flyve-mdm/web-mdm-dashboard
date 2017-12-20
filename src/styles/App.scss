@@ -47,6 +47,11 @@ $list-item-icon-size: 48px;
     height: 100%;
     font-weight: 300;
 
+    input, textarea {
+        width: 280px;
+    }
+
+
     body {
         margin: 0;
         padding: 0;
