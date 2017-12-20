@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { changeEmail } from '../DuckController'
 import { connect } from 'react-redux'
+import LoginContainer from '../LoginContainer'
 import LoginEmail from './LoginEmail'
 import LoginPassword from './LoginPassword'
 
@@ -63,20 +64,9 @@ class Login extends Component {
             />
         }
         return (
-            <div className="LoginForm">
-                <img alt="" src="images/logo2.png" className="img-login"/>
-
+            <LoginContainer>
                 {form}
-
-                <div className="credentials">
-                    <a href="https://flyve-mdm.com/privacy-policy/">Terms and Conditions</a>
-                    <br />
-                    <span>
-                        © 2017 Teclib'.
-                    </span>
-                </div>
-            </div>
-            
+            </LoginContainer>
         )
     }
 }

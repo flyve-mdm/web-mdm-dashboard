@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { changeEmail, recoverPassword } from '../DuckController'
 import Loading from '../../Utils/Loading'
+import LoginContainer from '../LoginContainer'
 
 
 function mapStateToProps(state, props) {
@@ -107,24 +108,14 @@ class ForgotPassword extends Component {
 
         } else {
             return (
-                <div className="LoginForm">
-                    <img alt="" src="images/logo2.png" className="img-login"/>
-
+                <LoginContainer>
                     <h2>
                         Recover your <br/>
                         account
                     </h2>
 
                     { element }
-                    
-                    <div className="credentials">
-                        <a href="https://flyve-mdm.com/privacy-policy/">Terms and Conditions</a>
-                        <br />
-                        <span>
-                            © 2017 Teclib'.
-                        </span>
-                    </div>
-                </div>
+                </LoginContainer>
             )
         }
     }
