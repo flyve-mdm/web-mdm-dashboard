@@ -107,10 +107,6 @@ $list-item-icon-size: 48px;
         outline: 0;
         outline-offset: 0;
     }
-
-    .contentPane {
-        overflow: auto;
-    }
     
     a {
         color: $app-color;
@@ -321,6 +317,7 @@ $list-item-icon-size: 48px;
     */
     .contentPane {
         display: inline-block;
+        overflow: auto;
         height: 100%;
         vertical-align: top;
         box-sizing: border-box;
