@@ -71,7 +71,7 @@
     "gh-pages-coverage": "gh-pages --dist coverage --dest coverage",
     "gh-pages-changelog": "gh-pages --dist ./ --src '{./C*.md,CHANGELOG.md}' --dest ./ --add",
     "fech-data": "",
-    "prestart": "json-server ./config/generateJsonData.js --port 3004 --delay 500 &"
+    "prestart": "json-server ./config/generateJsonData.js --port 3004 --delay 1000 &"
   },
   "devDependencies": {
     "canvas-prebuilt": "^1.6.5-prerelease.1",
