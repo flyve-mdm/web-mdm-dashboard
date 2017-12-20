@@ -1,24 +1,40 @@
-.LoginForm {
-    width: 360px;
+.LoginFormContainer {
     height: 100%;
-    margin: 20px auto;
-    text-align: center;
+    overflow: auto;
 
-    .img-login {
-        width: 80px;
+    .list-content {
+        overflow: auto;
     }
 
-    .emailSection button {
-        width: 290px;
-        background-color: $app-color;
-        color: $white-color;
-    }
-
-    .win-button-primary {
-        margin-left: 10px
-    }
-
-    .credentials {
-        margin-top: 40px;
+    .LoginForm {
+        margin: auto;
+        height: 100%;
+        
+        .content {
+        padding-top: 20px;
+        min-height: 85%;
+            
+            .img-login {
+                text-align: center;
+                
+                img {
+                    width: 90px;
+                }
+            }
+        
+            .emailSection button {
+                width: 290px;
+                background-color: $app-color;
+                color: $white-color;
+            }
+        
+            .win-button-primary {
+                margin-left: 10px
+            }
+        
+        }
+        .credentials {
+            text-align: center;
+        }
     }
 }

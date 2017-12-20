@@ -1,21 +1,48 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-export default class LoginContainer extends Component {
+class LoginContainer extends Component {
   render() {
+
+    const style = {
+        textAlign: this.props.centerContent ? 'center' : null,
+        width: this.props.width
+    }
     return (
-        <div className="LoginForm">
-            <img alt="" src="images/logo2.png" className="img-login"/>
+        <div className="LoginFormContainer">
+            <div className="LoginForm" style={style}>
+                <div className="content">
+                    <div className="img-login">
+                        <img alt="" src="images/logo2.png"/>
+                    </div>
 
-            { this.props.children }
+                    { this.props.children }
+                </div>
 
-            <div className="credentials">
-                <a href="https://flyve-mdm.com/privacy-policy/">Terms and Conditions</a>
-                <br />
-                <span>
-                    © 2017 Teclib'.
-                </span>
+                <div className="credentials">
+                    <a href="https://flyve-mdm.com/privacy-policy/">Terms and Conditions</a>
+                    <br />
+                    <span>
+                        © 2017 Teclib'.
+                    </span>
+                </div>
             </div>
         </div>
     )
   }
 }
+
+LoginContainer.defaultProps = {
+    centerContent: true,
+    width: 360
+}
+
+LoginContainer.propTypes = {
+    centerContent: PropTypes.bool.isRequired,
+    width: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired
+}
+
+export default LoginContainer
