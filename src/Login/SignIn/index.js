@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ConstructInputs from '../../Utils/Forms'
-import IconItemList from '../../AdminDashboard/IconItemList'
-import { usersScheme } from '../../Utils/Forms/Schemes'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { changeEmail } from '../DuckController'
@@ -30,114 +28,81 @@ class SignIn extends Component {
         super(props)
         this.state = {
             login: '',
-            firstName: '',
             realName: '',
-            phone: '',
-            mobilePhone: '',
-            phone2: '',
-            administrativeNumber: '',
-            lastLogin: '',
-            created: '',
-            modified: '',
-            emails: [''],
-            imageProfile: '',
-            authentication: 'GLPI internal database',
             password: '',
-            passwordConfirmation: '',
-            category: '',
-            defaultEntity: '',
-            comments: '',
-            typeImageProfile: 'file',
-            title: '',
-            location: '',
-            defaultProfile: '',
-            validSince: new Date(),
-            validUntil: new Date()
+            passwordConfirmation: ''
         }
-    }
-
-    addEmail = () => {
-        this.setState({
-            emails: [
-                ...this.state.emails,
-                ''
-            ]
-        })
-    }
-
-    changeEmail = (name, value) => {
-        let emails = [...this.state.emails]
-        emails[name] = value
-        this.changeState('emails', emails)
-    }
-
-    deleteEmail = (index) => {
-        this.setState({
-            emails: this.state.emails.slice(0,index).concat(this.state.emails.slice(index+1))
-        })
     }
 
     changeState = (name, value) => {
         this.setState({
             [name]: value
         })
-        if (this.state.buttonSaveClassName === "win-button win-button-primary hidden") {
-            this.setState({
-                buttonSaveClassName: "win-button win-button-primary"
-            })
-        }
-    }
-
-    previewFile = (evt) => {
-
-        const file = evt.target.files[0]
-        if (file.type.match('image.*')) {
-            let reader = new FileReader()
-
-            reader.onload = ((theFile) => {
-                return (e) => {
-                this.setState({
-                    imageProfile: e.target.result,
-                    typeImageProfile: 'localFile'
-                })
-            }})(file)
-
-            reader.readAsDataURL(file)
-        }
-   }
-
-    openFileChooser = () => {
-        this.inputElement.value = null
-        this.inputElement.click()
     }
 
     render() {
-        let user = usersScheme({
-            state: this.state, 
-            changeState: this.changeState,
-            deleteEmail: this.deleteEmail,
-            changeEmail: this.changeEmail
-        })
-        
-        user.personalInformation[0][0].placeholder = 'Your user name'
-        user.personalInformation[0][0].disabled = false
-        user.personalInformation[0][0].function = this.changeState
-        user.personalInformation[0][0].style = null
-
-        const inputAttributes = {
-            type: 'file',
-            accept: "image/*",
-            name: "imageProfile",
-            style: { display: 'none' },
-            ref: (element) => {
-                this.inputElement = element
-            },
-            onChange: this.previewFile
+        const user = {
+            personalInformation: [
+                [
+                    {
+                        label: "User name",
+                        type: "text",
+                        name: "login",
+                        value: this.state.login,
+                        placeholder: "Your user name",
+                        function: this.changeState,
+                        disabled: false,
+                        style: {
+                            width: 340
+                        }
+                    },
+                    {
+                        label: "Real name",
+                        type: "text",
+                        name: "realName",
+                        value: this.state.realName,
+                        placeholder: "Your name",
+                        function: this.changeState,
+                        disabled: false,
+                        style: {
+                            width: 340
+                        }
+                    }
+                ]
+            ],
+            passwordInformation: [
+                [
+                    {
+                        label: "Password",
+                        type: "password",
+                        name: "password",
+                        value: this.state.password,
+                        placeholder: "Password",
+                        function: this.changeState,
+                        disabled: false,
+                        style: {
+                            width: 340
+                        }
+                    },
+                    {
+                        label: "Password (confirmation)",
+                        type: "password",
+                        name: "passwordConfirmation",
+                        value: this.state.passwordConfirmation,
+                        placeholder: "Password confirmation",
+                        function: this.changeState,
+                        disabled: false,
+                        style: {
+                            width: 340
+                        }
+                    }
+                ]
+            ] 
+            
         }
 
-
         return (
-            <LoginContainer centerContent={false} width="90%" >
+            <LoginContainer centerContent={false} >
                 <h2 style={{
                     textAlign: 'center'
                 }}>
@@ -146,47 +111,15 @@ class SignIn extends Component {
 
                 <form className="list-content">
 
-                    <div className="listElement">
+                    <ConstructInputs data={user.personalInformation} />
 
-                        <div style={{ overflow: 'hidden' }}>
-                            <input
-                                {...inputAttributes}
-                            />
-                            <IconItemList 
-                                image={this.state.imageProfile} 
-                                type={this.state.typeImageProfile}
-                                imgClick={this.openFileChooser}
-                                size={150}
-                                imgClass="clickable"/>
-                        </div>
+                    <ConstructInputs data={user.passwordInformation}  />
 
-                    </div>
-
-                    <ConstructInputs data={user.personalInformation} icon="contactIcon" />
-
-                    <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
-
-                    <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
-
-                    <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
-                    <div style={{ overflow: 'auto' }}>
-                        <button 
-                        className="win-button" 
-                        type="button"
-                        style={{ margin: "20px" }} 
-                        onClick={this.addEmail}>
-                                Add email
+                    <div style={{textAlign: 'center'}}>
+                        <button className="win-button win-button-primary" style={{ margin: "20px" }} onClick={this.saveChanges}>
+                            Register
                         </button>
                     </div>
-
-                    <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
-
-                    <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
-
-
-                    <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                        Save
-                    </button>
                 </form>
             </LoginContainer>
         )

@@ -34,7 +34,7 @@ class LoginContainer extends Component {
 
 LoginContainer.defaultProps = {
     centerContent: true,
-    width: 360
+    width: 340
 }
 
 LoginContainer.propTypes = {

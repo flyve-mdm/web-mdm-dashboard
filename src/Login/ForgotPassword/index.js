@@ -54,7 +54,7 @@ class ForgotPassword extends Component {
                 <div>
                     <p>
                         We can help you reset password and security info.
-                        Please, enter your Flyve MDM account in the text box.
+                        Please, enter your Flyve MDM account in the following text box.
                     </p>
                     <form onSubmit={this.recover}>
                         <Input 
