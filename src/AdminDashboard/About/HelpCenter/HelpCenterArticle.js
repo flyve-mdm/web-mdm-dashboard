@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import ReactMarkdown from 'react-markdown'
+import ContentPane from '../../../Utils/ContentPane'
 
 class HelpCenterArticle extends Component {
 
@@ -21,19 +22,24 @@ class HelpCenterArticle extends Component {
 
     render() {
         return (
-            <div>
-                <h2 className="win-h2 titleContentPane" onClick={() =>this.props.changeSelectItem(null)}>
-                    {'<'} Help Center
-                </h2>
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                <div className="listPane" style={{ padding: 0 }}>
+                    <h2 className="win-h2 titleContentPane" onClick={() =>this.props.changeSelectItem(null)}>
+                        {'<'} Help Center
+                    </h2>
 
-                {this.renderArticle()}
-
-            </div>
+                    {this.renderArticle()}
+                </div>
+            </ContentPane>
         )
     }
 }
 
 HelpCenterArticle.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
     articles: PropTypes.object.isRequired,
     itemSelected: PropTypes.object.isRequired,
     changeSelectItem: PropTypes.func.isRequired
