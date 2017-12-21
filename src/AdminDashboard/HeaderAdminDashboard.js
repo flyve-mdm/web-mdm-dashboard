@@ -1,4 +1,5 @@
-import * as React from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -28,7 +29,7 @@ function mapDispatchToProps(dispatch) {
   return { actions }
 }
 
-class HeaderAdminDashboard extends React.Component {
+class HeaderAdminDashboard extends Component {
 
     handleResize = () => {
         let prevMode = this.props.mode
@@ -98,6 +99,16 @@ class HeaderAdminDashboard extends React.Component {
         )
     }
 }
+
+HeaderAdminDashboard.propTypes = {
+    splitViewId: PropTypes.string.isRequired,    
+    paneOpened: PropTypes.bool.isRequired,
+    mode: PropTypes.string.isRequired,
+    location: PropTypes.array.isRequired,
+    actionList: PropTypes.string,
+    history: PropTypes.object.isRequired
+}
+
 export default connect (
   mapStateToProps,
   mapDispatchToProps
