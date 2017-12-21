@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
+import ContentPane from '../../Utils/ContentPane'
 import ConstructInputs from '../../Utils/Forms'
 import currentUser from '../data/currentUser.json'
 import validateData from '../../Utils/validateData'
@@ -121,8 +121,8 @@ export default class Profiles extends Component {
         }
 
         return (
-
-            <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+            <div className="list-content Profiles">
 
                 <div className="listElement listElementIcon">
                     <span className="viewIcon"/>
@@ -170,6 +170,7 @@ export default class Profiles extends Component {
                 <br/>
 
             </div>
+            </ContentPane>
 
         )
     }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-// import ReactWinJS from 'react-winjs'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import PropTypes from 'prop-types'
+import ContentPane from '../../Utils/ContentPane'
 
 class Security extends Component {
 
@@ -14,7 +13,7 @@ class Security extends Component {
 
     render () {
         return (
-            <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 
                 <h2 className="win-h2"> Security </h2>
                       
@@ -60,7 +59,7 @@ class Security extends Component {
                     </div>
                 </div>
                 
-            </div>
+            </ContentPane>
         )
     }
 }
