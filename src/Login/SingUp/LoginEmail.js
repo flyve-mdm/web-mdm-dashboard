@@ -56,7 +56,12 @@ class LoginEmail extends Component {
                     />
                     <button className="win-button color-accent">Next</button>
                 </form>
-                <p>No account? <a>Create one!</a></p>
+                {
+                    !this.props.selfRegistration ? '' : (
+                        <p>No account? <a>Create one!</a></p>
+                    )
+                }
+               
             </div>
             
         )
@@ -67,7 +72,8 @@ LoginEmail.propTypes = {
     email: PropTypes.string.isRequired,
     changeInput: PropTypes.func.isRequired,
     changePhase: PropTypes.func.isRequired,
-    changeEmail: PropTypes.func.isRequired
+    changeEmail: PropTypes.func.isRequired,
+    selfRegistration: PropTypes.bool.isRequired
 }
 
 export default LoginEmail
