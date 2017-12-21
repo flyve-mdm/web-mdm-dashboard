@@ -75,6 +75,7 @@ class ConstructInputs extends Component {
             icon = (
                 <div className="listElement listElementIcon">
                     <span className={this.props.icon}/>
+                    {this.props.title ? <span style={{ marginLeft: '10px' }}>{this.props.title}</span> : null }
                 </div>
             )
         }
@@ -96,7 +97,8 @@ class ConstructInputs extends Component {
 
 ConstructInputs.propTypes = {
     data: PropTypes.array.isRequired, 
-    icon: PropTypes.string
+    icon: PropTypes.string,
+    title: PropTypes.string
 }
 
 export default ConstructInputs
