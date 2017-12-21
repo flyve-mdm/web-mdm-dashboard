@@ -3,7 +3,9 @@ import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { handleTogglePane, changeMode, changeLocation, handleBack, changeActionList } from './DuckController'
+import IconItemList from './IconItemList'
 import GetMode from '../Utils/GetMode'
+import currentUser from './data/currentUser.json'
 
 function mapStateToProps(state, props) {
   return {
@@ -67,8 +69,31 @@ class HeaderAdminDashboard extends React.Component {
                     onInvoked={this.props.actions.handleTogglePane}
                     paneOpened={this.props.paneOpened}
                 />
+
                 {this.renderBackButton()}
+
                 <h3 className="win-h3" style={{display: 'inline-block', marginLeft: 5}}>Flyve MDM</h3>
+
+                <div className="clickable" style={{float: 'right', marginRight: 20}}>
+                    <img alt="" src="images/logout.png" style={{width: 25, marginTop: 11}} />
+                </div>
+
+                {
+                    (GetMode() === 'small') ? '' : (
+                        <div style={{display: 'inline-block', float: 'right'}}>
+                            <div style={{display: 'inline-block', marginRight: 5, marginTop: 7}}>
+                                <IconItemList backgroundColor="#158784" size={35} image={currentUser['User.picture']} />
+                            </div>
+                            <div style={{display: 'inline-block', marginRight: 20, lineHeight: '13px', verticalAlign: 'super'}}>
+                                { currentUser['User.name'] }<br/>
+                                <span className="detail">
+                                    { currentUser['User.UserEmail.email'][0] }
+                                </span>
+                            </div>
+                        </div>
+                    ) 
+                }
+
             </div>
         )
     }
