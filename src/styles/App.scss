@@ -212,6 +212,11 @@ $list-item-icon-size: 48px;
     .header-admin-dashboard {
         height: 48px;
         background-color: $app-color;
+
+        .detail {
+            color: rgb(238, 238, 238);
+            font-size: 10px;
+        }
     }
 
     /*
