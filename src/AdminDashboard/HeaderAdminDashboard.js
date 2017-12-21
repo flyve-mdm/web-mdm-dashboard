@@ -7,6 +7,7 @@ import { handleTogglePane, changeMode, changeLocation, handleBack, changeActionL
 import IconItemList from './IconItemList'
 import GetMode from '../Utils/GetMode'
 import currentUser from './data/currentUser.json'
+import Confirmation from '../Utils/Confirmation'
 
 function mapStateToProps(state, props) {
   return {
@@ -61,13 +62,14 @@ class HeaderAdminDashboard extends Component {
         this.props.actions.handleBack()
     }
 
-    logout = () => {
-        this.props.history.push('/')
+    logout = async () => {
+        const isOK = await Confirmation.isOK(this.contentDialog)
+        if(isOK) this.props.history.push('/')
     }
 
     render () {
         return (
-            <div className="header-admin-dashboard win-ui-dark">
+            <div className="header-admin-dashboard">
                 <ReactWinJS.SplitViewPaneToggle
                     aria-controls={this.props.splitViewId}
                     style={{ display: 'inline-block' }}
@@ -81,6 +83,10 @@ class HeaderAdminDashboard extends Component {
 
                 <div className="clickable" style={{float: 'right', marginRight: 20}}>
                     <img alt="Logout" src="images/logout.png" style={{width: 25, marginTop: 11}} onClick={this.logout} />
+                    <Confirmation 
+                        title="Close session" 
+                        message='Are you sure you want to close your session?' 
+                        reference={el => this.contentDialog = el} />
                 </div>
 
                 {

@@ -213,6 +213,10 @@ $list-item-icon-size: 48px;
         height: 48px;
         background-color: $app-color;
 
+        &, .win-splitviewpanetoggle {
+            color: $white-color;
+        }
+
         .detail {
             color: rgb(238, 238, 238);
             font-size: 10px;
