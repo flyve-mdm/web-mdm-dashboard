@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
+import ContentPane from '../../Utils/ContentPane'
 import ConstructInputs from '../../Utils/Forms'
 import supervisionData from '../data/supervision.json'
 import validateData from '../../Utils/validateData'
@@ -45,8 +45,8 @@ export default class Supervision extends Component {
         })
 
         return (
-
-            <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+            <div className="list-content Profiles">
 
                 <ConstructInputs data={supervision.helpDeskInformation} icon="supervisionIcon" title="Helpdesk Information" />
                 <button className={this.state.buttonSaveClassName} style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
@@ -54,7 +54,7 @@ export default class Supervision extends Component {
                 </button>
                 <br />
             </div>
-
+            </ContentPane>
         )
     }
 }

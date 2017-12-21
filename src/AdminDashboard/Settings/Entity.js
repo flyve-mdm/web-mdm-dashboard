@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
+import ContentPane from '../../Utils/ContentPane'
 import validateData from '../../Utils/validateData'
 import SettingsEntity from '../data/SettingsEntity.json'
 
@@ -41,7 +41,7 @@ class Entity extends Component {
 
             case 'change Token life':
                 return (
-                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                         <h2 className="win-h2"> Entity </h2>
                         
                         <div className="listElement">
@@ -64,12 +64,12 @@ class Entity extends Component {
                             Save
                         </button>
 
-                    </div>
+                    </ContentPane>
                 )
 
             case 'change download URL':
                 return (
-                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                         <h2 className="win-h2"> Entity </h2>
                         
                         <div className="listElement">
@@ -92,12 +92,12 @@ class Entity extends Component {
                             Save
                         </button>
 
-                    </div>
+                    </ContentPane>
                 )
         
             default:
                 return (
-                    <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <h2 className="win-h2"> Entity </h2>
 
                     <div className="title"> Agent </div>
@@ -218,7 +218,7 @@ class Entity extends Component {
                         </div>
                     </div>
                         
-                </div>
+                </ContentPane>
                 )
         }
 

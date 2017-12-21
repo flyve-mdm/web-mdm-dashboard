@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ReactWinJS from 'react-winjs'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
 import PropTypes from 'prop-types'
+import ReactWinJS from 'react-winjs'
+import ContentPane from '../../Utils/ContentPane'
 
 class Display extends Component {
 
@@ -46,7 +46,7 @@ class Display extends Component {
 
     render () {
         return (
-            <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <h2 className="win-h2"> Display </h2>
 
                 <div className="title"> Language </div>
@@ -208,7 +208,7 @@ class Display extends Component {
                     </div>
                 </div>
                 
-            </div>
+            </ContentPane>
         )
     }
 }
