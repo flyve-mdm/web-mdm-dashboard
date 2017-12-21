@@ -1,5 +1,7 @@
 import usersScheme from "./usersScheme"
+import supervisionScheme from "./supervisionScheme"
 
 export {
-    usersScheme
+    usersScheme,
+    supervisionScheme
 }
