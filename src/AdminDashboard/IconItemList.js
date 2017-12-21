@@ -3,19 +3,14 @@ import PropTypes from 'prop-types'
 
 export default class IconItemList extends React.Component {
     render() {
-        const size = this.props.size ? this.props.size : 100
-        const backgroundColor = this.props.backgroundColor ? this.props.backgroundColor : '#e6e6e6'
-        let image = this.props.image ? this.props.image : ''
-        if (this.props.type !== "base64" && this.props.type !== "localFile" && this.props.image) {
-            image = "images/" + this.props.image
-        }
+        const image = (this.props.type === 'file' && this.props.image !== '') ? ("images/" + this.props.image) : this.props.image
         const style = {
-            backgroundColor: backgroundColor,
-            width: size,
-            height: size,
-            WebkitBorderRadius: size,
-            MozBorderRadius: size,
-            borderRadius: size,
+            backgroundColor: this.props.backgroundColor,
+            width: this.props.size,
+            height: this.props.size,
+            WebkitBorderRadius: this.props.size,
+            MozBorderRadius: this.props.size,
+            borderRadius: this.props.size,
             backgroundSize: 'cover',
             display: 'inline-block'
         }
@@ -29,11 +24,19 @@ export default class IconItemList extends React.Component {
         )
     }
 }
+
+IconItemList.defaultProps = {
+    size: 100,
+    backgroundColor: '#e6e6e6',
+    image: '',
+    type: 'file'
+}
+
 IconItemList.propTypes = {
-    size: PropTypes.number,
-    backgroundColor: PropTypes.string,
-    image: PropTypes.string,
-    type: PropTypes.oneOf(["file", "base64", "localFile"]),
+    size: PropTypes.number.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(["file", "base64", "localFile"]).isRequired,
     imgClick: PropTypes.func,
     imgClass: PropTypes.string
 }
