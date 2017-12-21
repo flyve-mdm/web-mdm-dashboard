@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import Loading from '../../../Utils/Loading'
+import ContentPane from '../../../Utils/ContentPane'
 
 class Feedback extends Component {
 
@@ -26,20 +27,22 @@ class Feedback extends Component {
             return <Loading message="Sending..." />
         } else if(this.state.feedbackSent) {
             return (
-                <div>
-                    <h2 className="titleContentPane" onClick={() => this.props.changeSelectItem(null)}>
-                        {'<'} Help Center
-                    </h2>
-                    <br />
-                    <div style={{textAlign: 'center'}}>
-                        <h3>Thank you!</h3>
-                        <p>your submission has been received</p>
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                    <div className="listPane" style={{ padding: 0}}>
+                        <h2 className="titleContentPane" onClick={() => this.props.changeSelectItem(null)}>
+                            {'<'} Help Center
+                        </h2>
+                        <br />
+                        <div style={{ textAlign: 'center' }}>
+                            <h3>Thank you!</h3>
+                            <p>your submission has been received</p>
+                        </div>
                     </div>
-                </div>
+                </ContentPane>
             )
         } else {
             return (
-                <div>
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <h2 className="titleContentPane" onClick={() => this.props.changeSelectItem(null)}>
                         {'<'} Help Center
                     </h2>
@@ -52,13 +55,17 @@ class Feedback extends Component {
                             </button>
                         </div>
                     </div>
-                </div>
+                </ContentPane>
             )
         }
     }
 }
 
 Feedback.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
     changeSelectItem: PropTypes.func.isRequired,
     sendFeedback: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,

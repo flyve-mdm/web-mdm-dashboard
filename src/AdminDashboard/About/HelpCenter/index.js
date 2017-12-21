@@ -46,7 +46,8 @@ class HelpCenter extends Component {
 
         if (this.state.itemSelected !== null && this.state.itemSelected !== 'feedback') {
             return (
-                <HelpCenterArticle 
+                <HelpCenterArticle
+                itemListPaneWidth={this.props.itemListPaneWidth} 
                 articles={Articles}
                 itemSelected={this.state.itemSelected}
                 changeSelectItem={this.changeSelectItem}/>
@@ -55,6 +56,7 @@ class HelpCenter extends Component {
 
             return (
                 <Feedback 
+                itemListPaneWidth={this.props.itemListPaneWidth}
                 changeSelectItem={this.changeSelectItem} 
                 sendFeedback={this.props.sendFeedback}
                 isLoading={this.props.isLoading}
@@ -64,6 +66,7 @@ class HelpCenter extends Component {
         } else {
             return (
                 <HelpCenterList
+                    itemListPaneWidth={this.props.itemListPaneWidth}
                     labelList={this.state.labelList}
                     dataSource={this.state.list.dataSource}
                     layout={this.state.layout}
@@ -77,6 +80,10 @@ class HelpCenter extends Component {
     }
 }
 HelpCenter.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
     sendFeedback: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isError: PropTypes.bool.isRequired   

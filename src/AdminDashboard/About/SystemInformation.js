@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import plugins from '../data/plugins.json'
+import ContentPane from '../../Utils/ContentPane'
 
 export default class SystemInformation extends Component {
     render() {
@@ -18,6 +20,18 @@ export default class SystemInformation extends Component {
                 </div>
             )
         })
-        return <div className="aboutPane">{element}</div>
+        return (
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                <h2 className="win-h2 titleContentPane">{this.props.title}</h2>
+                <div className="aboutPane">{element}</div>
+            </ContentPane>
+        )
     }
+}
+SystemInformation.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    title: PropTypes.string.isRequired
 }

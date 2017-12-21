@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
+import ContentPane from '../../Utils/ContentPane'
 import LICENCE from './LICENCE.md'
 import CHANGELOG from './CHANGELOG.md'
 import ReactMarkdown from 'react-markdown'
@@ -23,64 +23,52 @@ class AboutPage extends Component {
             switch (selectedItemList.title) {
                 case 'License':
                     return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                        <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
                             <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
                             <div className="contentMarkdown aboutPane">
                                 <ReactMarkdown source={LICENCE} />
                             </div>
-                        </div>
+                        </ContentPane>
                     )
                 case 'Term of use':
                     return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <TermsOfUse />
-                        </div>
+                         <TermsOfUse title={selectedItemList.title} itemListPaneWidth={this.props.itemListPaneWidth}/>
                     )
                 case 'Release notes':
                     return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
+                        <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
                             <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
                             <div className="contentMarkdown aboutPane">
                                 <ReactMarkdown source={CHANGELOG} />
                             </div>
-                        </div>
+                        </ContentPane>
                     )
                 case 'System information':
                     return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <SystemInformation />
-                        </div>
+                        <SystemInformation title={selectedItemList.title} itemListPaneWidth={this.props.itemListPaneWidth}/>
                     )
                 case 'Contact':
                     return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <Contact />
-                        </div>
+                        <Contact title={selectedItemList.title} itemListPaneWidth={this.props.itemListPaneWidth}/>
                     )
                 case 'Overview':
                     return (
-                        <div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                            <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <Overview />
-                        </div>
+                        <Overview title={selectedItemList.title} itemListPaneWidth={this.props.itemListPaneWidth}/>
                     )
                 case 'Help Center':
                     return (
-                        <div className="contentPane listPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth), padding: 0 }}>
-                            <HelpCenter 
-                            sendFeedback={this.props.sendFeedback}
-                            isLoading={this.props.isLoading}
-                            isError={this.props.isError} />
-                        </div>
+                        <HelpCenter 
+                        title={selectedItemList.title} 
+                        itemListPaneWidth={this.props.itemListPaneWidth}
+                        sendFeedback={this.props.sendFeedback}
+                        isLoading={this.props.isLoading}
+                        isError={this.props.isError}/>
                     )
                 default:
                     return (
-                        <div className="contentPane titleContentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
-                            <h1>{ selectedItemList.title }</h1>
-                        </div>
+                        <EmptyMessage 
+                            message={ selectedItemList.title }
+                            itemListPaneWidth={this.props.itemListPaneWidth} />
                     )
             }
         }
