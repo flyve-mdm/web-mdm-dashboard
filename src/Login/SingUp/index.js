@@ -9,7 +9,8 @@ import LoginPassword from './LoginPassword'
 
 function mapStateToProps(state, props) {
     return {
-        email: state.Login.email
+        email: state.Login.email,
+        selfRegistration: state.Login.selfRegistration
     }
 }
 
@@ -52,6 +53,7 @@ class Login extends Component {
                     changeInput={this.changeInput}
                     changePhase={this.changePhase}
                     changeEmail={this.props.actions.changeEmail}
+                    selfRegistration={this.props.selfRegistration}
                 />    
         } else {
             form = 
@@ -73,7 +75,8 @@ class Login extends Component {
 
 Login.propTypes = {
     email: PropTypes.string.isRequired,    
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    selfRegistration: PropTypes.bool.isRequired
 }
 
 export default connect (

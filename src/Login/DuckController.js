@@ -1,11 +1,13 @@
 import * as api from '../AdminDashboard/Api'
+import config from '../config.json'
 
 const INITIAL_STATE = {
     email: '',
     isLoading: false,
     isError: false,
     endpoint: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    selfRegistration: config.self_registration
 }
 
 // Constants
