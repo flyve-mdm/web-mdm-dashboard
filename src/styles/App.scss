@@ -493,6 +493,9 @@ $list-item-icon-size: 48px;
     .permissionsIcon:before {
         content: "\E192";        
     }
+    .supervisionIcon:before {
+        content: "\E1DE";        
+    }
 
     .files-dropzone {
         text-align: center;
