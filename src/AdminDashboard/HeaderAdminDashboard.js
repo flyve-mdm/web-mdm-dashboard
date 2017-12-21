@@ -61,6 +61,10 @@ class HeaderAdminDashboard extends Component {
         this.props.actions.handleBack()
     }
 
+    logout = () => {
+        this.props.history.push('/')
+    }
+
     render () {
         return (
             <div className="header-admin-dashboard win-ui-dark">
@@ -76,7 +80,7 @@ class HeaderAdminDashboard extends Component {
                 <h3 className="win-h3" style={{display: 'inline-block', marginLeft: 5}}>Flyve MDM</h3>
 
                 <div className="clickable" style={{float: 'right', marginRight: 20}}>
-                    <img alt="" src="images/logout.png" style={{width: 25, marginTop: 11}} />
+                    <img alt="Logout" src="images/logout.png" style={{width: 25, marginTop: 11}} onClick={this.logout} />
                 </div>
 
                 {
