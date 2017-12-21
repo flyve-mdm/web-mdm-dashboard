@@ -48,7 +48,7 @@ export default class Supervision extends Component {
 
             <div className="contentPane list-content Profiles" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}>
 
-                <ConstructInputs data={supervision.helpDeskInformation} icon="supervisionIcon" />
+                <ConstructInputs data={supervision.helpDeskInformation} icon="supervisionIcon" title="Helpdesk Information" />
                 <button className={this.state.buttonSaveClassName} style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                     Save
                 </button>
