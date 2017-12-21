@@ -12,6 +12,7 @@ class Settings extends Component {
             itemList: new WinJS.Binding.List([
                 { title: "Entity" },
                 { title: "Profiles" },
+                { title: "Supervision" },
                 { title: "Security" },
                 { title: "Notifications" },
                 { title: "Display" }
