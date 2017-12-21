@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from '../../../Utils/Calc100PercentMinus'
-import ConstructInputs from '../../../Utils/Forms'
-import currentUser from '../../data/currentUser.json'
-import validateData from '../../../Utils/validateData'
-import IconItemList from '../../IconItemList'
-import { usersScheme } from '../../../Utils/Forms/Schemes'
+import Calc100PercentMinus from '../../Utils/Calc100PercentMinus'
+import ConstructInputs from '../../Utils/Forms'
+import currentUser from '../data/currentUser.json'
+import validateData from '../../Utils/validateData'
+import IconItemList from '../IconItemList'
+import { usersScheme } from '../../Utils/Forms/Schemes'
 
-class Profiles extends Component {
+export default class Profiles extends Component {
     
     constructor(props) {
         super(props)
@@ -181,5 +181,3 @@ Profiles.propTypes = {
         PropTypes.number
     ]).isRequired
 }
-
-export default Profiles
