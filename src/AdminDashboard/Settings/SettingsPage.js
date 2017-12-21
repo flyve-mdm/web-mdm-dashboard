@@ -3,6 +3,7 @@ import EmptyMessage from '../../Utils/EmptyMessage'
 import PropTypes from 'prop-types'
 import Entity from './Entity'
 import Profiles from './Profiles'
+import Supervision from './Supervision'
 import Security from './Security'
 import Notifications from './Notifications'
 import Display from './Display'
@@ -20,6 +21,10 @@ class SettingsPage extends Component {
                 case 'Profiles':
                     return (
                         <Profiles itemListPaneWidth={this.props.itemListPaneWidth}/>
+                    )
+                case 'Supervision':
+                    return (
+                        <Supervision itemListPaneWidth={this.props.itemListPaneWidth} />
                     )
                 case 'Security':
                     return (
