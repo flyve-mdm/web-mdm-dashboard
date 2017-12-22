@@ -43,6 +43,31 @@ class SignIn extends Component {
         })
     }
 
+    registerUser = (e) => {
+        e.preventDefault()
+        let isCorrect = true
+        if (this.props.configurationPassword.minimun_length) {
+            if (this.state.password.length < this.props.configurationPassword.minimun_length) isCorrect = false 
+        }
+        if (this.props.configurationPassword.need_digit) {
+            const myRe = /[\d]/g
+            if (!myRe.test(this.state.password)) isCorrect = false
+        }
+        if (this.props.configurationPassword.need_uppercase_character) {
+            const myRe = /[a-z]/g
+            if (!myRe.test(this.state.password)) isCorrect = false
+        }
+        if (this.props.configurationPassword.need_uppercase_character) {
+            const myRe = /[A-Z]/g
+            if (!myRe.test(this.state.password)) isCorrect = false
+        }
+        if (this.props.configurationPassword.need_symbol) {
+            const myRe = /[!@#%^&*?><)(+=._\-\\[\]^~`'"˜$ˆ/:;{}|]/g
+            if (!myRe.test(this.state.password)) isCorrect = false
+        }
+        if (this.state.password !== this.state.passwordConfirmation) isCorrect = false   
+    }
+
     render() {
         const user = {
             personalInformation: [
@@ -55,6 +80,7 @@ class SignIn extends Component {
                         placeholder: "Your user name",
                         function: this.changeState,
                         disabled: false,
+                        required: true,
                         style: {
                             width: 340
                         }
@@ -82,6 +108,7 @@ class SignIn extends Component {
                         value: this.state.password,
                         placeholder: "Password",
                         function: this.changeState,
+                        required: true,
                         disabled: false,
                         style: {
                             width: 340
@@ -94,6 +121,7 @@ class SignIn extends Component {
                         value: this.state.passwordConfirmation,
                         placeholder: "Password confirmation",
                         function: this.changeState,
+                        required: true,
                         disabled: false,
                         style: {
                             width: 340
@@ -116,14 +144,14 @@ class SignIn extends Component {
                         Create account
                     </h2>
 
-                    <form className="list-content">
+                    <form className="list-content" onSubmit={this.registerUser}>
 
                         <ConstructInputs data={user.personalInformation} />
 
                         <ConstructInputs data={user.passwordInformation}  />
 
                         <div style={{textAlign: 'center'}}>
-                            <button className="win-button win-button-primary" style={{ margin: "20px" }} onClick={this.saveChanges}>
+                            <button className="win-button win-button-primary" style={{ margin: "20px" }}>
                                 Register
                             </button>
                         </div>
