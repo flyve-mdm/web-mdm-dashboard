@@ -6,16 +6,16 @@ const INITIAL_STATE = {
     isLoading: false,
     isError: false,
     endpoint: null,
-    isLoggedIn: false,
-    selfRegistration: config.self_registration
+    selfRegistration: config.self_registration,
+    configurationPassword: {}
 }
 
 // Constants
 const CHANGE_LOADING = 'flyve-mdm-web-ui/Login/changeLoading'
 const CHANGE_EMAIL = 'flyve-mdm-web-ui/Login/changeEmail'
-const LOGIN_SUCCESS = 'flyve-mdm-web-ui/Login/loginSuccess'
 const FAILURE = 'flyve-mdm-web-ui/Login/failure'
 const CHANGE_ENDPOINT = 'flyve-mdm-web-ui/Login/changeEndpoint'
+const FETCHING_DATA_SUCCESS = 'flyve-mdm-web-ui/Login/fetchingDataSuccess'
 
 // Reducers
 export default function reducer(state = INITIAL_STATE, action) {
@@ -26,7 +26,6 @@ export default function reducer(state = INITIAL_STATE, action) {
                ...state,
                isLoading: action.isLoading
             }
-        
         case CHANGE_EMAIL:
             return {
                ...state,
@@ -37,16 +36,16 @@ export default function reducer(state = INITIAL_STATE, action) {
                 ...state,
                 endpoint: action.newEndpoint
             }
-        case LOGIN_SUCCESS:
-            return {
-                ...state,
-                isLoggedIn: true
-            }
         case FAILURE:
             return {
                 ...state,
                 error: action.newError
             }
+        case FETCHING_DATA_SUCCESS: 
+         return {
+            ...state,
+            [action.name]: action.newData             
+         }
         
         default: return state
     }
@@ -71,15 +70,32 @@ export function changeEndpoint(newEndpoint) {
         newEndpoint
     }
 }
-export function loginSuccess() {
-    return {
-        type: LOGIN_SUCCESS
-    }
-}
 export function failure(newError) {
     return {
         type: FAILURE,
         newError
+    }
+}
+export function fetchDataSuccess(name, data) {
+    return {
+        type: FETCHING_DATA_SUCCESS,
+        newData: data,
+        name
+    }
+}
+export function fetchData(endpoint) {
+    return (dispatch) => {
+        dispatch(changeEndpoint(endpoint))
+        dispatch(changeLoading(true))
+        api[endpoint.toLowerCase()].getAll()
+        .then(([response, json]) => {
+            dispatch(fetchDataSuccess(endpoint, json))
+            dispatch(changeLoading(false))
+        })
+        .catch((error) => {
+            dispatch(failure())
+            dispatch(changeLoading(false))
+        })
     }
 }
 export function login(user, password) {
@@ -88,7 +104,6 @@ export function login(user, password) {
         dispatch(changeLoading(true))
         api.login.singUp(user, password)
         .then(([response, json]) => {
-            dispatch(loginSuccess())
             dispatch(changeLoading(false))
         })
         .catch((error) => {
