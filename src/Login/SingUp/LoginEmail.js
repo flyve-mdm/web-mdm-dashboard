@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 class LoginEmail extends Component {
 
@@ -58,7 +59,7 @@ class LoginEmail extends Component {
                 </form>
                 {
                     !this.props.selfRegistration ? '' : (
-                        <p>No account? <a>Create one!</a></p>
+                        <p>No account? <Link to='/signIn'>Create one!</Link></p>
                     )
                 }
                
