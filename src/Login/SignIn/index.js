@@ -4,7 +4,7 @@ import ConstructInputs from '../../Utils/Forms'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { changeEmail } from '../DuckController'
-// import Loading from '../../Utils/Loading'
+import Loading from '../../Utils/Loading'
 import LoginContainer from '../LoginContainer'
 
 
@@ -101,28 +101,35 @@ class SignIn extends Component {
             
         }
 
-        return (
-            <LoginContainer centerContent={false} >
-                <h2 style={{
-                    textAlign: 'center'
-                }}>
-                    Create account
-                </h2>
+        let renderComponent 
+        if (this.props.isLoading) {
+            renderComponent = <Loading message="Loading..."/>
+        } else {
+            renderComponent = (
+                <LoginContainer centerContent={false} >
+                    <h2 style={{
+                        textAlign: 'center'
+                    }}>
+                        Create account
+                    </h2>
 
-                <form className="list-content">
+                    <form className="list-content">
 
-                    <ConstructInputs data={user.personalInformation} />
+                        <ConstructInputs data={user.personalInformation} />
 
-                    <ConstructInputs data={user.passwordInformation}  />
+                        <ConstructInputs data={user.passwordInformation}  />
 
-                    <div style={{textAlign: 'center'}}>
-                        <button className="win-button win-button-primary" style={{ margin: "20px" }} onClick={this.saveChanges}>
-                            Register
-                        </button>
-                    </div>
-                </form>
-            </LoginContainer>
-        )
+                        <div style={{textAlign: 'center'}}>
+                            <button className="win-button win-button-primary" style={{ margin: "20px" }} onClick={this.saveChanges}>
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                </LoginContainer>
+            )
+        }
+
+        return renderComponent
     }
 }
 
