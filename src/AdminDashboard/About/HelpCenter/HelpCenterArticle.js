@@ -41,7 +41,7 @@ HelpCenterArticle.propTypes = {
         PropTypes.number
     ]).isRequired,
     articles: PropTypes.object.isRequired,
-    itemSelected: PropTypes.object.isRequired,
+    itemSelected: PropTypes.number.isRequired,
     changeSelectItem: PropTypes.func.isRequired
 }
 
