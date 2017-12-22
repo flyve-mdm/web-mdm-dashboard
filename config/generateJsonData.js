@@ -12,6 +12,7 @@ module.exports = function() {
     var Users = require('../src/AdminDashboard/data/users.json')
     var Feedback = require('../src/AdminDashboard/data/feedback.json')
     var Login = require('../src/AdminDashboard/data/login.json')
+    var ConfigurationPassword = require('../src/AdminDashboard/data/configurationPassword.json')
 
     return {
         devices: Agents,
@@ -25,6 +26,7 @@ module.exports = function() {
         policies: Policies,
         users: Users,
         feedback: Feedback,
-        login: Login
+        login: Login,
+        configurationPassword: ConfigurationPassword
     }
 }
