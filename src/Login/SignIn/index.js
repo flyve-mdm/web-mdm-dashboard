@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ConstructInputs from '../../Utils/Forms'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { changeEmail } from '../DuckController'
+import { changeEmail, fetchData } from '../DuckController'
 import Loading from '../../Utils/Loading'
 import LoginContainer from '../LoginContainer'
 
@@ -11,13 +11,15 @@ import LoginContainer from '../LoginContainer'
 function mapStateToProps(state, props) {
     return {
         email: state.Login.email,
-        isLoading: state.Login.isLoading
+        isLoading: state.Login.isLoading,
+        configurationPassword: state.Login.configurationPassword
     }
 }
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        changeEmail: bindActionCreators(changeEmail, dispatch)
+        changeEmail: bindActionCreators(changeEmail, dispatch),
+        fetchData: bindActionCreators(fetchData, dispatch)
     }
     return { actions }
 }
@@ -26,6 +28,7 @@ class SignIn extends Component {
 
     constructor (props) {
         super(props)
+        this.props.actions.fetchData('configurationPassword')
         this.state = {
             login: '',
             realName: '',
@@ -135,7 +138,8 @@ class SignIn extends Component {
 
 SignIn.propTypes = {
     email: PropTypes.string,
-    isLoading: PropTypes.bool.isRequired
+    isLoading: PropTypes.bool.isRequired,
+    configurationPassword: PropTypes.object.isRequired    
 }
 
 export default connect (

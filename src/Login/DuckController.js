@@ -3,7 +3,7 @@ import config from '../config.json'
 
 const INITIAL_STATE = {
     email: '',
-    isLoading: false,
+    isLoading: true,
     isError: false,
     endpoint: null,
     selfRegistration: config.self_registration,
@@ -87,7 +87,7 @@ export function fetchData(endpoint) {
     return (dispatch) => {
         dispatch(changeEndpoint(endpoint))
         dispatch(changeLoading(true))
-        api[endpoint.toLowerCase()].getAll()
+        api[endpoint].getAll()
         .then(([response, json]) => {
             dispatch(fetchDataSuccess(endpoint, json))
             dispatch(changeLoading(false))
