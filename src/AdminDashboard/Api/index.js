@@ -6,5 +6,6 @@ import applications from './Applications'
 import users from './Users'
 import feedback from './Feedback'
 import login from './Login'
+import configurationPassword from './ConfigurationPassword'
 
-export { devices, invitations, fleets, files, applications, users, feedback, login }
+export { devices, invitations, fleets, files, applications, users, feedback, login, configurationPassword }
