@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ConstructInputs from '../../Utils/Forms'
+import ErrorValidation from '../../Utils/Forms/ErrorValidation'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { changeEmail, fetchData } from '../DuckController'
@@ -45,35 +46,27 @@ class SignIn extends Component {
 
     registerUser = (e) => {
         e.preventDefault()
+        const user = this.buildDataArray()
         let isCorrect = true
-        if (this.props.configurationPassword.minimun_length) {
-            if (this.state.password.length < this.props.configurationPassword.minimun_length) isCorrect = false 
-        }
-        if (this.props.configurationPassword.need_digit) {
-            const myRe = /[\d]/g
-            if (!myRe.test(this.state.password)) isCorrect = false
-        }
-        if (this.props.configurationPassword.need_lowercase_character) {
-            const myRe = /[a-z]/g
-            if (!myRe.test(this.state.password)) isCorrect = false
-        }
-        if (this.props.configurationPassword.need_uppercase_character) {
-            const myRe = /[A-Z]/g
-            if (!myRe.test(this.state.password)) isCorrect = false
-        }
-        if (this.props.configurationPassword.need_symbol) {
-            const myRe = /[!@#%^&*?><)(+=._\-\\[\]^~`'"˜$ˆ/:;{}|]/g
-            if (!myRe.test(this.state.password)) isCorrect = false
-        }
-        if (this.state.password !== this.state.passwordConfirmation) isCorrect = false   
 
+        for (const key in user) {
+            if (user.hasOwnProperty(key)) {
+                const elements = user[key]
+                for (let index = 0; index < elements[0].length; index++) {
+                    const element = elements[0][index]
+                    if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect) 
+                        isCorrect = false
+                }
+            }
+        }
+        
         if (isCorrect) {
             this.props.history.push('/')
         }
     }
 
-    render() {
-        const user = {
+    buildDataArray = () => {
+        const dataArray = {
             personalInformation: [
                 [
                     {
@@ -161,6 +154,11 @@ class SignIn extends Component {
             ] 
             
         }
+        return dataArray
+    }
+
+    render() {
+        const user = this.buildDataArray()
 
         let renderComponent 
         if (this.props.isLoading) {

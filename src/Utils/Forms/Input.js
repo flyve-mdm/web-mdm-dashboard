@@ -27,12 +27,7 @@ class Input extends Component {
     validate = (parametersToEvaluate, value) => {
         if (parametersToEvaluate) {
             
-            const newParametersToEvaluate = {
-                ...parametersToEvaluate,
-                data: value
-            }
-            
-            const validation = ErrorValidation.validation(newParametersToEvaluate)
+            const validation = ErrorValidation.validation(parametersToEvaluate, value)
 
             this.setState({
                 isCorrect: validation.isCorrect,
