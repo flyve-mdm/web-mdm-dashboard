@@ -87,6 +87,9 @@ class SignIn extends Component {
                         required: true,
                         style: {
                             width: 340
+                        },
+                        parametersToEvaluate: {
+                            isRequired: true
                         }
                     },
                     {
@@ -99,6 +102,9 @@ class SignIn extends Component {
                         disabled: false,
                         style: {
                             width: 340
+                        },
+                        parametersToEvaluate: {
+                            isRequired: true
                         }
                     }
                 ]
@@ -116,6 +122,14 @@ class SignIn extends Component {
                         disabled: false,
                         style: {
                             width: 340
+                        },
+                        parametersToEvaluate: {
+                            isRequired: true,
+                            minimunLength: this.props.configurationPassword.minimun_length,
+                            needDigit: this.props.configurationPassword.need_digit,
+                            needLowercaseCharacter: this.props.configurationPassword.need_lowercase_character,
+                            needUppercaseCharacter: this.props.configurationPassword.need_uppercase_character,
+                            needSymbol: this.props.configurationPassword.need_symbol
                         }
                     },
                     {
@@ -129,6 +143,18 @@ class SignIn extends Component {
                         disabled: false,
                         style: {
                             width: 340
+                        },
+                        parametersToEvaluate: {
+                            isRequired: true,
+                            minimunLength: this.props.configurationPassword.minimun_length,
+                            needDigit: this.props.configurationPassword.need_digit,
+                            needLowercaseCharacter: this.props.configurationPassword.need_lowercase_character,
+                            needUppercaseCharacter: this.props.configurationPassword.need_uppercase_character,
+                            needSymbol: this.props.configurationPassword.need_symbol,
+                            isEqualTo: {
+                                value: this.state.password,
+                                message: "Passwords do not match"
+                            }
                         }
                     }
                 ]
