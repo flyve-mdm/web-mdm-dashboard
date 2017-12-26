@@ -45,7 +45,6 @@ class Input extends Component {
             if(isOK) this.props.delete(this.props.name)
         }
         if (this.props.delete) deleteIcon = <span className="deleteIcon" style={{ margin: 10, fontSize: 18 }} onClick={deleteEmail}/>
-        const required = (this.props.required === true)
 
         return (
             <div className="list-col">
@@ -60,7 +59,6 @@ class Input extends Component {
                     onBlur={() => this.validate(this.props.parametersToEvaluate, this.props.value)}
                     disabled={this.props.disabled}
                     style={this.props.style}
-                    required={required}
                 />
                 <ErrorValidation errors={this.state.errors} />
                 { deleteIcon }
@@ -83,7 +81,6 @@ Input.propTypes = {
     disabled: PropTypes.bool,
     style: PropTypes.object,
     delete: PropTypes.func,
-    required: PropTypes.bool,
     validation: PropTypes.func,
     parametersToEvaluate: PropTypes.object
 }

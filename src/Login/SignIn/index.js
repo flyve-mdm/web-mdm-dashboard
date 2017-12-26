@@ -77,7 +77,6 @@ class SignIn extends Component {
                         placeholder: "Your user name",
                         function: this.changeState,
                         disabled: false,
-                        required: true,
                         style: {
                             width: 340
                         },
@@ -111,7 +110,6 @@ class SignIn extends Component {
                         value: this.state.password,
                         placeholder: "Password",
                         function: this.changeState,
-                        required: true,
                         disabled: false,
                         style: {
                             width: 340
@@ -132,7 +130,6 @@ class SignIn extends Component {
                         value: this.state.passwordConfirmation,
                         placeholder: "Password confirmation",
                         function: this.changeState,
-                        required: true,
                         disabled: false,
                         style: {
                             width: 340
