@@ -66,6 +66,11 @@ class SignIn extends Component {
             if (!myRe.test(this.state.password)) isCorrect = false
         }
         if (this.state.password !== this.state.passwordConfirmation) isCorrect = false   
+
+        console.log(isCorrect)
+        if (isCorrect) {
+            this.props.history.push('/')
+        }
     }
 
     render() {
@@ -167,6 +172,7 @@ class SignIn extends Component {
 SignIn.propTypes = {
     email: PropTypes.string,
     isLoading: PropTypes.bool.isRequired,
+    history: PropTypes.object.isRequired,
     configurationPassword: PropTypes.object.isRequired    
 }
 
