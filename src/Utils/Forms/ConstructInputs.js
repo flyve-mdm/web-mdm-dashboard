@@ -60,6 +60,7 @@ class ConstructInputs extends Component {
                                     style={element.style}
                                     required={element.required}
                                     delete={element.delete}
+                                    parametersToEvaluate={element.parametersToEvaluate}
                                     key={element.name} />
                             )
                         }
