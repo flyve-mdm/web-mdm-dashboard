@@ -53,7 +53,7 @@ class SignIn extends Component {
             const myRe = /[\d]/g
             if (!myRe.test(this.state.password)) isCorrect = false
         }
-        if (this.props.configurationPassword.need_uppercase_character) {
+        if (this.props.configurationPassword.need_lowercase_character) {
             const myRe = /[a-z]/g
             if (!myRe.test(this.state.password)) isCorrect = false
         }
@@ -67,7 +67,6 @@ class SignIn extends Component {
         }
         if (this.state.password !== this.state.passwordConfirmation) isCorrect = false   
 
-        console.log(isCorrect)
         if (isCorrect) {
             this.props.history.push('/')
         }
