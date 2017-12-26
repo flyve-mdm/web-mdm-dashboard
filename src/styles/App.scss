@@ -4,11 +4,13 @@ $white-color: #FFFFFF;
 $border-ligth-color: #D3D3D3;
 $text-detail-color: grey;
 $hover-dropdown-color: rgba(0,0,0,.1);
+$alert-color: #dd0000;
 
 // Size
 $list-item-icon-size: 48px;
 
 @import
+    "errors",
     "devices",
     "invitations",
     "fleets",
@@ -19,7 +21,8 @@ $list-item-icon-size: 48px;
     "about",
     "home",
     "loading",
-    "login";
+    "login"
+    ;
 
 .devices, .invitations, .fleets, .files, .applications, .users, .settings, .about {
     height: 100%;
