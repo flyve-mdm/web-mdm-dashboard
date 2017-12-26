@@ -3,53 +3,55 @@ import PropTypes from 'prop-types'
 
 class ErrorValidation extends Component {
 
-    validation = () => {
-        let errorMessage = []
+    static validation = (parametersToEvaluate) => {
+        let errorMessages = []
 
-        if (this.props.isRequired && !this.props.data )
-            errorMessage.push( 'Required field' )
-        if (this.props.minimunLength) {
-            if (this.props.data.length < this.props.minimunLength)
-                errorMessage.push( `Insufficient characters, a minimum of ${this.props.minimunLength} is required` )
+        if (parametersToEvaluate.isRequired && !parametersToEvaluate.data )
+            errorMessages.push( 'Required field' )
+        if (parametersToEvaluate.minimunLength) {
+            if (parametersToEvaluate.data.length < parametersToEvaluate.minimunLength)
+                errorMessages.push( `Insufficient characters, a minimum of ${parametersToEvaluate.minimunLength} is required` )
         }
-        if (this.props.needDigit) {
+        if (parametersToEvaluate.needDigit) {
             const myRe = /[\d]/g
-            if (!myRe.test(this.props.data)) 
-                errorMessage.push( 'At least one digit is necessary' )
+            if (!myRe.test(parametersToEvaluate.data)) 
+                errorMessages.push( 'At least one digit is necessary' )
         }
-        if (this.props.needLowercaseCharacter) {
+        if (parametersToEvaluate.needLowercaseCharacter) {
             const myRe = /[a-z]/g
-            if (!myRe.test(this.props.data))
-                errorMessage.push( 'At least one lowercase character is required' )
+            if (!myRe.test(parametersToEvaluate.data))
+                errorMessages.push( 'At least one lowercase character is required' )
         }
-        if (this.props.needUppercaseCharacter) {
+        if (parametersToEvaluate.needUppercaseCharacter) {
             const myRe = /[A-Z]/g
-            if (!myRe.test(this.props.data))
-                errorMessage.push( 'At least one uppercase character is required' )
+            if (!myRe.test(parametersToEvaluate.data))
+                errorMessages.push( 'At least one uppercase character is required' )
         }
-        if (this.props.needSymbol) {
+        if (parametersToEvaluate.needSymbol) {
             const myRe = /[!@#%^&*?><)(+=._\-\\[\]^~`'"˜$ˆ/:;{}|]/g
-            if (!myRe.test(this.props.data))
-                errorMessage.push( 'At least one special character is required' )
+            if (!myRe.test(parametersToEvaluate.data))
+                errorMessages.push( 'At least one special character is required' )
         }
-        if (this.props.isEqualTo) {
-            if(this.props.data === this.props.isEqualTo.value)
-                errorMessage.push( this.props.isEqualTo.message )
+        if (parametersToEvaluate.isEqualTo) {
+            if(parametersToEvaluate.data !== parametersToEvaluate.isEqualTo.value)
+                errorMessages.push( parametersToEvaluate.isEqualTo.message )
         }   
-        if (this.props.extraValidation) {
-            if (this.props.extraValidation(this.props.data))
-                errorMessage.push( this.props.extraValidation(this.props.data) )
+        if (parametersToEvaluate.customValidation) {
+            if (parametersToEvaluate.customValidation(parametersToEvaluate.data))
+                errorMessages.push( parametersToEvaluate.customValidation(parametersToEvaluate.data) )
         } 
-        
-        return errorMessage
+
+        const result = (errorMessages.length <= 0) ? {isCorrect: true, errors: []} : {isCorrect: false, errors: errorMessages}
+
+        return result
     }
 
     render() {
         return (
             <div className="error-message">
                 <ul>
-                    { this.validation().map((element, index) => {
-                        return <li key={index}>{element}</li>
+                    { this.props.errors.map((element, index) => {
+                        return <li key={index}>- {element}</li>
                     }) }
                 </ul>
             </div>
@@ -58,18 +60,7 @@ class ErrorValidation extends Component {
 }
 
 ErrorValidation.propTypes = {
-    data: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]),
-    isRequired: PropTypes.bool,
-    minimunLength: PropTypes.number,
-    needDigit: PropTypes.bool,
-    needLowercaseCharacter: PropTypes.bool,
-    needUppercaseCharacter: PropTypes.bool,
-    needSymbol: PropTypes.bool,
-    isEqualTo: PropTypes.object,
-    extraValidation: PropTypes.func
+    errors: PropTypes.array
 }
 
 export default ErrorValidation
