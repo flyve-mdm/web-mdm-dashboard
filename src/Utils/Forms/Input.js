@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Confirmation from '../Confirmation'
+import ErrorValidation from './ErrorValidation'
 
 class Input extends Component {
 
@@ -30,6 +31,7 @@ class Input extends Component {
                     style={this.props.style}
                     required={required}
                 />
+                <ErrorValidation {...this.props.parametersToEvaluate} data={this.props.value} />
                 { deleteIcon }
                 {this.props.delete ? <Confirmation title={`Delete ${this.props.label}`} message={this.props.value} reference={el => this.contentDialog = el} /> : <span/>}
             </div>
@@ -50,7 +52,9 @@ Input.propTypes = {
     disabled: PropTypes.bool,
     style: PropTypes.object,
     delete: PropTypes.func,
-    required: PropTypes.bool
+    required: PropTypes.bool,
+    validation: PropTypes.func,
+    parametersToEvaluate: PropTypes.object
 }
 
 export default Input
