@@ -32,7 +32,7 @@ class HelpCenterArticle extends Component {
                 </div>
             </ContentPane>
         )
-    }
+    } 
 }
 
 HelpCenterArticle.propTypes = {
