@@ -19,7 +19,7 @@ class Input extends Component {
     }
 
     componentWillReceiveProps = (newProps) => {
-        if (!this.state.isCorrect) {
+        if (!this.state.isCorrect || newProps.forceValidation) {
             this.validate(newProps.parametersToEvaluate, newProps.value)
         }
     }
@@ -81,8 +81,8 @@ Input.propTypes = {
     disabled: PropTypes.bool,
     style: PropTypes.object,
     delete: PropTypes.func,
-    validation: PropTypes.func,
-    parametersToEvaluate: PropTypes.object
+    parametersToEvaluate: PropTypes.object,
+    forceValidation: PropTypes.bool
 }
 
 export default Input
