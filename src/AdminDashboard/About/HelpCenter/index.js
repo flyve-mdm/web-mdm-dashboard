@@ -35,6 +35,20 @@ class HelpCenter extends Component {
         this.setState({labelList: 'All articles', list: new WinJS.Binding.List(Articles.data)})
     }
 
+    filterArticles = (filter) => {
+        let filteredArticles = []
+        for (let index = 0; index < Articles.data.length; index++) {
+            const element = Articles.data[index]
+            console.log(element['HelpCenter.name'].toLowerCase().indexOf(filter.toLowerCase()) >= 0)
+            if (element['HelpCenter.name'].toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+                filteredArticles.push(element)
+            }
+        }
+        this.setState({
+            list: new WinJS.Binding.List(filteredArticles)
+        })
+    }
+
     handleSelectionChanged = (eventObject) => {
         const listView = eventObject.currentTarget.winControl
         const id = listView.selection.getItems()._value[0].data['HelpCenter.id']
@@ -75,6 +89,7 @@ class HelpCenter extends Component {
                     handleSelectionChanged={this.handleSelectionChanged}
                     showAllArticles={this.showAllArticles}
                     changeSelectItem={this.changeSelectItem}
+                    filterArticles={this.filterArticles}
                     />
           )
         }

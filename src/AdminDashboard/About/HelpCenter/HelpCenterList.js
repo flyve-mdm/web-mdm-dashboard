@@ -29,11 +29,10 @@ class HelpCenterList extends Component {
     }
 
     handleQuerySubmitted = (eventObject) => {
-        console.log('ˆ_ˆ')
+        this.props.filterArticles(eventObject.detail.queryText)
     }
 
     render() {
-        console.log(this.props.dataSource)
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <div className="listPane" style={{ padding: 0 }}>
