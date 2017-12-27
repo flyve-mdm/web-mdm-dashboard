@@ -14,7 +14,26 @@ class HelpCenterList extends Component {
         )
     })
 
+    handleSuggestionsRequested = (eventObject) => {
+        let queryText = eventObject.detail.queryText,
+            query = queryText.toLowerCase(),
+            suggestionCollection = eventObject.detail.searchSuggestionCollection
+
+        if (queryText.length > 0) {
+            for (let i = 0, len = this.props.suggestionList.length; i < len; i++) {
+                if (this.props.suggestionList[i].toLowerCase().indexOf(query) !== -1) {
+                    suggestionCollection.appendQuerySuggestion(this.props.suggestionList[i])
+                }
+            }
+        }
+    }
+
+    handleQuerySubmitted = (eventObject) => {
+        console.log('ˆ_ˆ')
+    }
+
     render() {
+        console.log(this.props.dataSource)
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <div className="listPane" style={{ padding: 0 }}>
@@ -43,6 +62,12 @@ class HelpCenterList extends Component {
                             priority={1} />
 
                     </ReactWinJS.ToolBar>
+
+                    <ReactWinJS.AutoSuggestBox
+                        style={{ margin: '20px'}}
+                        placeholderText="Type a policy"
+                        onSuggestionsRequested={this.handleSuggestionsRequested}
+                        onQuerySubmitted={this.handleQuerySubmitted} />
 
                     <h3 style={{paddingLeft: '10px'}}>{this.props.labelList}</h3>
 

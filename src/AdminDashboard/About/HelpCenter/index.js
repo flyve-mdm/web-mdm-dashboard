@@ -22,6 +22,7 @@ class HelpCenter extends Component {
             list: new WinJS.Binding.List(popular),
             layout: { type: WinJS.UI.ListLayout },
             labelList: 'Popular',
+            suggestionList: Articles.data.map((article) => article['HelpCenter.name']),
             itemSelected: null
         }
     }
@@ -68,6 +69,7 @@ class HelpCenter extends Component {
                 <HelpCenterList
                     itemListPaneWidth={this.props.itemListPaneWidth}
                     labelList={this.state.labelList}
+                    suggestionList={this.state.suggestionList}
                     dataSource={this.state.list.dataSource}
                     layout={this.state.layout}
                     handleSelectionChanged={this.handleSelectionChanged}
