@@ -4,13 +4,30 @@
     }
     .win-autosuggestbox {
         display: inline-block;
-        margin: 0 !important;
-        position: absolute;
-        top: 10px;
-        right: 80px;
+        margin: 15px 0 !important;
+        float: right;
 
         input {
-            width: 240px !important;
+            width: 260px !important;
+        }
+    }
+    .search {
+        width: 68px;
+        height: 48px;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 22px;
+        text-align: center;
+        line-height: 54px;
+        float: right;
+        margin-top: 5px;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        &:active {
+            background-color: rgba(0, 0, 0, 0.2);
         }
     }
 }
