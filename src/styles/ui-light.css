@@ -352,15 +352,10 @@
     }
   }
   @font-face {
-    font-family: "Segoe UI Command";
-    src: local("Segoe MDL2 Assets");
+    font-family: "Symbols";
+    src: url("../fonts/SegMDL2.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
-  }
-  @font-face {
-    font-family: "Symbols";
-    src: url("../fonts/glyphs/winjs-symbols.eot");
-    src: url("../fonts/glyphs/winjs-symbols.ttf") format("truetype");
   }
   .win-type-header,
   .win-h1 {
@@ -3222,7 +3217,7 @@
   }
   .win-commandimage {
     /* Default font for glyphs. */
-    font-family: "Segoe UI Command", "Symbols";
+    font-family: "Symbols", "Segoe UI Command";
     letter-spacing: 0;
     /* Applications provide their own content, like &#xE0D5;. */
     vertical-align: middle;
