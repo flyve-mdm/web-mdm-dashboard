@@ -37,23 +37,18 @@ class HelpCenterList extends Component {
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <div className="listPane" style={{ padding: 0 }}>
-                    <ReactWinJS.ToolBar className="listToolBar">
-                    
-                        <ReactWinJS.ToolBar.Button
-                            key="search"
-                            icon="zoom"
-                            label="Search"
-                            priority={1} />
 
-                    </ReactWinJS.ToolBar>
+                    <div className="search">
+                        <span className="searchIcon"></span>
+                    </div>
 
                     <ReactWinJS.AutoSuggestBox
                         style={{ margin: '20px'}}
-                        placeholderText="Type a policy"
+                        placeholderText="Search an article"
                         onSuggestionsRequested={this.handleSuggestionsRequested}
                         onQuerySubmitted={this.handleQuerySubmitted} />
 
-                    <h3 style={{paddingLeft: '10px'}}>{this.props.labelList}</h3>
+                    <h3 style={{paddingLeft: '10px', width: '100%', overflow: 'auto'}}>{this.props.labelList}</h3>
 
                     <ReactWinJS.ListView
                         ref="listView"
