@@ -4,18 +4,15 @@ export default class DashboardPage extends Component {
     
     render() {
         return (
+
             <div className="info-box">
-                <div>
-                    <h1>
-                        {this.props.count}
-                    </h1>
-                </div>
-                <div className="title">
-                    <h3>
-                        {this.props.name}
-                    </h3>
-                </div>
-                
+                <span className="content-box">
+                    {this.props.count}
+                </span>
+                <span className={'icon-box ' + this.props.icon} />
+                <span className="title-box">
+                    { this.props.name.toUpperCase() }
+                </span>
             </div>
         )
     }

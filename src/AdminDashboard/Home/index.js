@@ -20,17 +20,15 @@ export default class Dashboard extends Component {
     render() {
         
         return (
-            <ContentPane itemListPaneWidth={'100%'}>
-                <div className="home">
+            <ContentPane itemListPaneWidth={0}>
                     <h2 className="win-h2" style={{ marginLeft: '10px' }}> {this.props.location} </h2>
                     <div className="wrapper">
-                        <DashboardPage count={this.state.pages.devices} name="Devices" icon="device"/>
-                        <DashboardPage count={this.state.pages.fleets} name="Fleets"/>
-                        <DashboardPage count={this.state.pages.files} name="Files"/>
-                        <DashboardPage count={this.state.pages.applications} name="Applications"/>
-                        <DashboardPage count={this.state.pages.users} name="Users"/>
+                        <DashboardPage count={this.state.pages.devices} name="Devices" icon="deviceIcon"/>
+                        <DashboardPage count={this.state.pages.fleets} name="Fleets" icon="goToStartIcon"/>
+                        <DashboardPage count={this.state.pages.files} name="Files" icon="copyIcon"/>
+                        <DashboardPage count={this.state.pages.applications} name="Applications" icon="appsIcon"/>
+                        <DashboardPage count={this.state.pages.users} name="Users" icon="peopleIcon"/>
                     </div>
-                </div>
             </ContentPane>
             
         )
