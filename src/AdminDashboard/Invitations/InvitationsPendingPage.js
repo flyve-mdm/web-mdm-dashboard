@@ -41,7 +41,8 @@ export default class InvitationsPendingPage extends Component {
             let currentListItemLogs = ItemList('InvitationsLog', currentLog)
 
             return (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                    <div className="listPane" style={{ padding: 0 }}>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" >Pending {Pluralize.singular(this.props.location[0])} </h2>
                     </div>
@@ -54,6 +55,7 @@ export default class InvitationsPendingPage extends Component {
                         layout={this.state.layout}
                         selectionMode={'single'}
                     />
+                    </div>
                 </ContentPane>
             )
         } else {

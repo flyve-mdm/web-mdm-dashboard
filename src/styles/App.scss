@@ -550,7 +550,7 @@ $list-item-icon-size: 48px;
     }
 
     .files-list {
-        padding: 20px 20px 5px;
+        padding: 20px 5px;
         display: table;
         width: 100%;
         border: 0;
@@ -606,8 +606,13 @@ $list-item-icon-size: 48px;
     background-color: $app-color !important;
 }
 
+.win-pivot.win-pivot-nosnap .win-pivot-item {
+    height: 100%;
+}
+
 .win-pivot-item .win-pivot-item-content {
     padding: 0 !important;
+    height: 100%;
 }
 
 select {
