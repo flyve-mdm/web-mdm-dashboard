@@ -34,7 +34,8 @@ class SignIn extends Component {
             login: '',
             realName: '',
             password: '',
-            passwordConfirmation: ''
+            passwordConfirmation: '',
+            forceValidation: false
         }
     }
 
@@ -62,6 +63,10 @@ class SignIn extends Component {
         
         if (isCorrect) {
             this.props.history.push('/')
+        } else {
+            this.setState({
+                forceValidation: true
+            })
         }
     }
 
@@ -82,7 +87,8 @@ class SignIn extends Component {
                         },
                         parametersToEvaluate: {
                             isRequired: true
-                        }
+                        },
+                        forceValidation: this.state.forceValidation
                     },
                     {
                         label: "Real name",
@@ -97,7 +103,8 @@ class SignIn extends Component {
                         },
                         parametersToEvaluate: {
                             isRequired: true
-                        }
+                        },
+                        forceValidation: this.state.forceValidation
                     }
                 ]
             ],
@@ -121,7 +128,8 @@ class SignIn extends Component {
                             needLowercaseCharacter: this.props.configurationPassword.need_lowercase_character,
                             needUppercaseCharacter: this.props.configurationPassword.need_uppercase_character,
                             needSymbol: this.props.configurationPassword.need_symbol
-                        }
+                        },
+                        forceValidation: this.state.forceValidation
                     },
                     {
                         label: "Password (confirmation)",
@@ -145,7 +153,8 @@ class SignIn extends Component {
                                 value: this.state.password,
                                 message: "Passwords do not match"
                             }
-                        }
+                        },
+                        forceValidation: this.state.forceValidation
                     }
                 ]
             ] 
