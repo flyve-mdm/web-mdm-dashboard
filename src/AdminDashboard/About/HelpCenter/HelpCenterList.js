@@ -38,23 +38,7 @@ class HelpCenterList extends Component {
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <div className="listPane" style={{ padding: 0 }}>
                     <ReactWinJS.ToolBar className="listToolBar">
-                        <ReactWinJS.ToolBar.ContentCommand
-                        key="content"
-                        icon="accept"
-                        label="search bar"
-                        style={{
-                            width: 'calc(100% - 110px)',
-                            padding: '0'
-                        }}>
-
-                            <input 
-                                className="win-textbox" 
-                                type="text" 
-                                style={{
-                                    width: '100%'
-                                }} />
-
-                        </ReactWinJS.ToolBar.ContentCommand>
+                    
                         <ReactWinJS.ToolBar.Button
                             key="search"
                             icon="zoom"
