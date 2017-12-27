@@ -508,6 +508,9 @@ $list-item-icon-size: 48px;
     .supervisionIcon:before {
         content: "\E1DE";        
     }
+    .searchIcon:before {
+        content: "\E1A3";        
+    }
 
     .files-dropzone {
         text-align: center;
