@@ -32,12 +32,16 @@ class HelpCenterList extends Component {
         this.props.filterArticles(eventObject.detail.queryText)
     }
 
+    search = () => {
+        this.props.filterArticles(document.getElementsByClassName('win-autosuggestbox-input win-textbox')[0].value)
+    }
+
     render() {
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <div className="listPane" style={{ padding: 0 }}>
 
-                    <div className="search">
+                    <div className="search" onClick={this.search}>
                         <span className="searchIcon"></span>
                     </div>
 
