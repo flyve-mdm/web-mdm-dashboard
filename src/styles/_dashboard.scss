@@ -1,41 +1,72 @@
 .dashboard {
     $box-size: 150px;
+    $chart-size: 310px;
     height: 100%;
-    .wrapper {
-        margin: 10px 10px;
-        display: grid;
-        grid-template-columns: repeat(3, $box-size);
-        grid-gap: 10px;
-        @media only screen and (max-width: 540px) {
-            grid-template-columns: repeat(2, $box-size);
-        }
-        
-        .info-box {
-            display: inline-block;
-            background: #E1E1E1;
-            position: relative;
-            width: $box-size;
-            height: $box-size;
 
-            .title-box {
-                padding: 10px;
-                position: absolute;
-                bottom: 0;
-                left: 0;
+    .wrapper {
+        display: inline-block;
+
+        .wrapper-box {
+            margin: 10px 10px;
+            display: grid;
+            grid-template-columns: repeat(6, $box-size);
+            grid-gap: 10px;
+            @media only screen and (max-width: 1036px) {
+                grid-template-columns: repeat(3, $box-size);
             }
-            .content-box {
-                display: inline-block;
-                margin: 10px;
-                vertical-align: middle;
-                line-height: $box-size;
-                font-size: 64px;
-                font-weight: 200
+            @media only screen and (max-width: 540px) {
+                grid-template-columns: repeat(2, $box-size);
             }
-            .icon-box {
+            
+            .info-box {
                 display: inline-block;
-                float: right; 
-                margin: 10px;
-                font-size: 32px
+                background: #E1E1E1;
+                position: relative;
+                width: $box-size;
+                height: $box-size;
+
+                .title-box {
+                    padding: 10px;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                }
+                .content-box {
+                    display: inline-block;
+                    margin: 10px;
+                    vertical-align: middle;
+                    line-height: $box-size;
+                    font-size: 64px;
+                    font-weight: 200
+                }
+                .icon-box {
+                    display: inline-block;
+                    float: right; 
+                    margin: 10px;
+                    font-size: 32px
+                }
+            }
+        }
+
+        .wrapper-chart {
+            margin: 10px 10px;
+            display: grid;
+            grid-template-columns: $chart-size;
+            grid-gap: 10px;
+
+            .info-box {
+                background: #E1E1E1;
+                display: inline-block;    
+                position: relative;
+                width: $chart-size;
+                height: $chart-size;
+                
+                .title-box {
+                    padding: 10px;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                }
             }
         }
     }
