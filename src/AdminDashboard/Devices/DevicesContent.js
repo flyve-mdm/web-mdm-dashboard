@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import ContentPane from '../../Utils/ContentPane'
-import { DangerZone, Main } from './Sections'
+import { DangerZone, Main, SystemReport } from './Sections'
 
 class DevicesContent extends Component {
 
@@ -24,7 +24,11 @@ class DevicesContent extends Component {
 
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="systemReport" header="System Report">
-                        <div>System Report</div>
+
+                        <SystemReport 
+                            selectedItemList={this.props.selectedItemList}
+                        />
+
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="applications" header="Applications">
                         <div>Applications</div>
