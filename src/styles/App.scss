@@ -121,6 +121,18 @@ $list-item-icon-size: 48px;
         text-decoration: none;
     }
 
+    .title {
+        font-size: 15px;
+        display: inline-block;
+        height: 32px;
+        margin: 20px 0;
+        padding: 0 15px;
+        background-color: $app-color;
+        color: $white-color;
+        text-align: center;
+        line-height: 32px;
+    }
+
     .clickable {
         cursor: pointer;
     }
