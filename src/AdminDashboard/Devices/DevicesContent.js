@@ -34,7 +34,9 @@ class DevicesContent extends Component {
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="dangerZone" header="Danger Zone">
 
-                        <DangerZone />
+                        <DangerZone 
+                            selectedItemList={this.props.selectedItemList}
+                        />
 
                     </ReactWinJS.Pivot.Item>
                 </ReactWinJS.Pivot>
