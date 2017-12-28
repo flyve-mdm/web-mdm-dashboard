@@ -8,4 +8,38 @@
         }
     }
 
+    .system-report {
+
+        .list-content {
+            padding: 5px 0 5px 30px;
+            
+            .list-col:first-child {
+                padding: 0;
+                width: 200px;
+                vertical-align: top;
+                color: black;
+            }
+            .list-col {
+                width: -webkit-calc(100% - 230px);
+                width:    -moz-calc(100% - 230px);
+                width:         calc(100% - 230px);
+                overflow: auto;
+                font-weight: 400;
+                color: $text-detail-color;
+            }
+
+            @media screen and (max-width: 772px) {
+                .list-col {
+                    padding: 10px 0 0 5px;
+                    display: block !important; 
+                    width: 100% !important;
+                }
+            }
+        }
+
+        .list-content:nth-child(even) {
+            background: #f2f2f2;
+        }
+    }
+
 }
