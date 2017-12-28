@@ -51,8 +51,12 @@
         .wrapper-chart {
             margin: 10px 10px;
             display: grid;
-            grid-template-columns: $chart-size;
+            grid-template-columns: repeat(3, $chart-size);
             grid-gap: 10px;
+
+            @media only screen and (max-width: 1036px) {
+               grid-template-columns: repeat(1, $chart-size);
+            }
 
             .info-box {
                 background: #E1E1E1;
