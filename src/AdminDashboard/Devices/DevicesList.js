@@ -200,7 +200,7 @@ export default class DevicesList extends Component {
 
         if(this.isError) {
             listComponent = "Error"
-        } else if(!this.props.isLoading ) {
+        } else if (!this.props.isLoading && this.props.dataSource.itemList.groups !== undefined ) {
             listComponent = (
                 < ReactWinJS.ListView
                     ref="listView"
