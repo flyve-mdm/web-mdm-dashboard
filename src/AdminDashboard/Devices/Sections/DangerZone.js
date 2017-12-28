@@ -26,7 +26,6 @@ class DangerZone extends Component {
     }
 
     render() {
-        console.log(this.props.selectedItemList)
         return ( 
             <div>
                 <div className="listElement">
