@@ -121,6 +121,10 @@ $list-item-icon-size: 48px;
         text-decoration: none;
     }
 
+    .win-splitview-pane {
+        overflow: auto;
+    }
+
     .title {
         font-size: 15px;
         display: inline-block;

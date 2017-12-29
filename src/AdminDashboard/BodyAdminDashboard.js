@@ -54,12 +54,35 @@ function mapDispatchToProps(dispatch) {
 
 class BodyAdminDashboard extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            heigth: window.innerHeight
+        }
+    }
+
     handleCommandInvoked(newLocation, newIndex) {
         this.props.actions.changeLocation(newLocation)
         this.props.actions.changeIndex(newIndex)
         this.props.actions.changeActionList(null)
         this.props.actions.changeCurrentItem(null)
         this.props.actions.closePane()
+    }
+
+    handleResize = () => {
+        if (this.state.heigth !== window.innerHeight) {
+            this.setState({
+                heigth: window.innerHeight
+            })
+        }
+    }
+
+    componentWillMount () {
+        window.addEventListener('resize', this.handleResize)
+    }
+
+    componentWillUnmount () {
+        window.removeEventListener('resize', this.handleResize)
     }
 
     render() {
@@ -97,14 +120,36 @@ class BodyAdminDashboard extends Component {
 
         let pane = (
             <div>
-                {this.props.router.map((item, index) =>
-                <ReactWinJS.SplitView.Command
-                    key={index}
-                    label={item.label}
-                    icon={item.icon}
-                    style={item.style}
-                    onInvoked={() => this.handleCommandInvoked([item.label], index)}
-                />)}
+                {this.props.router.map((item, index) => {
+                    let style = item.style
+                    if (this.state.heigth > ((this.props.router.length +  1) * 48)) {
+                        if (item.label === 'Settings') {
+                            style = {
+                                ...item.style,
+                                position: 'absolute', 
+                                bottom: 48, 
+                                width: '100%'
+                            }
+                        } else if (item.label === 'About') {
+                            style = {
+                                ...item.style,
+                                position: 'absolute',
+                                bottom: 0,
+                                width: '100%'
+                            }
+                        }
+                    }
+
+                    return (
+                        <ReactWinJS.SplitView.Command
+                            key={index}
+                            label={item.label}
+                            icon={item.icon}
+                            style={style}
+                            onInvoked={() => this.handleCommandInvoked([item.label], index)}
+                        />
+                    )
+                })}
             </div>
         )
 
