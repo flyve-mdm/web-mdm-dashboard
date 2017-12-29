@@ -4,19 +4,26 @@ import PropTypes from 'prop-types'
 export default class IconItemList extends React.Component {
     render() {
         const image = (this.props.type === 'file' && this.props.image !== '') ? ("images/" + this.props.image) : this.props.image
-        const style = {
+        let style = {
             backgroundColor: this.props.backgroundColor,
             width: this.props.size,
             height: this.props.size,
-            WebkitBorderRadius: this.props.size,
-            MozBorderRadius: this.props.size,
-            borderRadius: this.props.size,
             backgroundSize: 'cover',
             display: 'inline-block'
         }
+        let className = ''
+        if (this.props.type !== 'base64') {
+            className = 'contentPicture'
+            style = {
+                ...style,
+                WebkitBorderRadius: this.props.size,
+                MozBorderRadius: this.props.size,
+                borderRadius: this.props.size
+            }
+        }
 
         return (
-            <div className="contentPicture" style={style}>
+            <div className={className} style={style}>
                 <div className={this.props.imgClass} >
                     <img alt="" src={image} style={style} onClick={this.props.imgClick}/>
                 </div>
