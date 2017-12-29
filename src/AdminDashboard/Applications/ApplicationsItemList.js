@@ -7,8 +7,13 @@ export default class ApplicationsItemList extends Component {
         let image = "data:image/png;base64, " + this.props.itemList["PluginFlyvemdmPackage.icon"]
         return (
             <div>
-                <IconItemList size={size} image={image} type="base64" />
-                <div style={{ display: 'inline-block' }}>
+                <IconItemList 
+                    size={size} 
+                    image={image} 
+                    type="base64"
+                    backgroundColor="transparent"
+                />
+                <div style={{ marginLeft: 5, display: 'inline-block' }}>
                     <div className="name">{this.props.itemList["PluginFlyvemdmPackage.alias"]}</div>
                     <div className="detail">{this.props.itemList["PluginFlyvemdmPackage.name"]}</div>
                 </div>
