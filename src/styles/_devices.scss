@@ -8,6 +8,41 @@
         }
     }
 
+    .applications {
+        .win-listview > .win-vertical .win-container {
+            margin: 0;
+        }
+        .win-listview ._win-dynamic-containersize-1 .win-container {
+            height: auto;
+        }
+
+        .list-content {
+            padding: 14px;
+
+            .list-col:first-child {
+                padding: 0;
+                width: 70px;
+                vertical-align: top;
+            }
+            .list-col {
+                width: -webkit-calc(100% - 98px);
+                width:    -moz-calc(100% - 98px);
+                width:         calc(100% - 98px);
+                overflow: auto;
+
+                .aplication {
+                    font-weight: 400;
+                    .aplication-detail {
+                        color: $text-detail-color;
+                        display: inline-block;
+                        font-size: 13px;
+                        line-height: 16px;
+                    }
+                }
+            }
+        }
+    }
+
     .system-report {
 
         .list-content {
