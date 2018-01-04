@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import ContentPane from '../../Utils/ContentPane'
-import { DangerZone, Main, SystemReport, Applications } from './Sections'
+import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sections'
 
 class DevicesContent extends Component {
 
@@ -38,7 +38,9 @@ class DevicesContent extends Component {
 
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="geolocation" header="Geolocation">
-                        <div>Geolocation</div>
+                        <Geolocation 
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                        />
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="dangerZone" header="Danger Zone">
 
