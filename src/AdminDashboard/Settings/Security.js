@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../Utils/ContentPane'
+import Confirmation from '../../Utils/Confirmation'
 
 class Security extends Component {
 
@@ -8,6 +9,13 @@ class Security extends Component {
         super(props)
         this.state = {
 
+        }
+    }
+
+    deleteUser = async () => {
+        const isOK = await Confirmation.isOK(this.deleteAccount)
+        if (isOK) {
+            
         }
     }
 
@@ -55,10 +63,15 @@ class Security extends Component {
                         <div className="detail">This action remove all information related to the user and the entity</div>
                     </div>
                     <div className="controller">
-                        <button className="win-button">Delete</button>
+                        <button className="win-button" onClick={this.deleteUser}>Delete</button>
                     </div>
                 </div>
                 
+                <Confirmation 
+                    title="Please confirm account deletion"
+                    message="Are you certain to delete the account?"
+                    reference={el => this.deleteAccount = el} 
+                />
             </ContentPane>
         )
     }
