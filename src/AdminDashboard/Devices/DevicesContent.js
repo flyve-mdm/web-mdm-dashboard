@@ -8,7 +8,7 @@ class DevicesContent extends Component {
 
     render() {
         return (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true} >
                 <ReactWinJS.Pivot>
                     <ReactWinJS.Pivot.Item key="main" header="Main">
 
