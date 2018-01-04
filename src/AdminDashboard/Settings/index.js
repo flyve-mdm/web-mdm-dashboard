@@ -36,11 +36,16 @@ class Settings extends Component {
             } else {
                 return (
                     <SettingsPage 
-                    animation={this.props.animation}
-                    handleToggleAnimation={this.props.handleToggleAnimation}
-                    location={this.props.location}
-                    itemList={this.state.itemList}
-                    itemListPaneWidth={0}/>
+                        animation={this.props.animation}
+                        handleToggleAnimation={this.props.handleToggleAnimation}
+                        location={this.props.location}
+                        itemList={this.state.itemList}
+                        itemListPaneWidth={0}
+                        getPasswordConfiguration={this.props.getPasswordConfiguration}
+                        passwordConfiguration={this.props.passwordConfiguration}
+                        changeLoading={this.props.changeLoading}
+                        isLoading={this.props.isLoading}
+                    />
                 )
             }
         } else {
@@ -55,11 +60,16 @@ class Settings extends Component {
                     onNavigate={this.props.onNavigate}/>
 
                     <SettingsPage 
-                    animation={this.props.animation}
-                    handleToggleAnimation={this.props.handleToggleAnimation}
-                    location={this.props.location}
-                    itemList={this.state.itemList}
-                    itemListPaneWidth={ItemListPaneWidth}/>
+                        animation={this.props.animation}
+                        handleToggleAnimation={this.props.handleToggleAnimation}
+                        location={this.props.location}
+                        itemList={this.state.itemList}
+                        itemListPaneWidth={ItemListPaneWidth}
+                        getPasswordConfiguration={this.props.getPasswordConfiguration}
+                        passwordConfiguration={this.props.passwordConfiguration}
+                        isLoading={this.props.isLoading}
+                        changeLoading={this.props.changeLoading}
+                    />
                 </div>
             )
         }
@@ -71,7 +81,11 @@ Settings.propTypes = {
     animation: PropTypes.bool.isRequired,
     handleToggleAnimation: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired
+    onNavigate: PropTypes.func.isRequired,
+    getPasswordConfiguration: PropTypes.func.isRequired,
+    passwordConfiguration: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    changeLoading: PropTypes.func.isRequired
 }
 
 export default Settings

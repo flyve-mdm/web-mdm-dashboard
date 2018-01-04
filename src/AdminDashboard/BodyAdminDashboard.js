@@ -29,7 +29,8 @@ function mapStateToProps(state, props) {
         currentItem: state.AdminDashboard.currentItem,
         dataSource: state.AdminDashboard.dataSource,
         isLoading: state.AdminDashboard.isLoading,
-        isError: state.AdminDashboard.isError
+        isError: state.AdminDashboard.isError,
+        passwordConfiguration: state.AdminDashboard.passwordConfiguration
     }
 }
 
@@ -47,7 +48,8 @@ function mapDispatchToProps(dispatch) {
         fetchDataFailure: bindActionCreators(Actions.fetchDataFailure, dispatch),
         changeLoading: bindActionCreators(Actions.changeLoading, dispatch),
         fetchData: (api) => dispatch(Actions.fetchData(api)),
-        sendFeedback: (api) => dispatch(Actions.sendFeedback(api))
+        sendFeedback: (api) => dispatch(Actions.sendFeedback(api)),
+        getPasswordConfiguration: (api) => dispatch(Actions.getPasswordConfiguration(api))
     }
     return { actions }
 }
@@ -101,15 +103,16 @@ class BodyAdminDashboard extends Component {
             changeActionList: this.props.actions.changeActionList,
             actionList: this.props.actionList, 
             currentItem: this.props.currentItem, 
-            changeCurrentItem: this.props.actions.changeCurrentItem
+            changeCurrentItem: this.props.actions.changeCurrentItem,
+            passwordConfiguration: this.props.passwordConfiguration,
+            getPasswordConfiguration: this.props.actions.getPasswordConfiguration,
+            changeLoading: this.props.actions.changeLoading
         }
 
         if (this.props.router[this.props.index].label === 'About') {
-            
             propsData = {
                 ...propsData,
-                sendFeedback: this.props.actions.sendFeedback,
-                changeLoading: this.props.actions.changeLoading
+                sendFeedback: this.props.actions.sendFeedback
             }
         }
 

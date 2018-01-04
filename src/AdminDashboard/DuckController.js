@@ -34,7 +34,8 @@ const INITIAL_STATE = {
     endpoint: null,
     dataSource: { itemList: new WinJS.Binding.List([]), sort: true},
     isLoading: true,
-    isError: false 
+    isError: false ,
+    passwordConfiguration: {}
 }
 
 // Constants
@@ -52,6 +53,7 @@ const CHANGE_CURRENT_ITEM = 'flyve-mdm-web-ui/AdminDashboard/changeCurrentItem'
 const CHANGE_LOADING = 'flyve-mdm-web-ui/AdminDashboard/changeLoading'
 const FETCHING_DATA_SUCCESS = 'flyve-mdm-web-ui/AdminDashboard/fetchingDataSuccess'
 const FETCHING_DATA_FAILURE = 'flyve-mdm-web-ui/AdminDashboard/fetchingDataFailure'
+const CHANGE_PASSWORD_CONFIGURATION = 'flyve-mdm-web-ui/AdminDashboard/changePasswordConfiguration'
 
 // Reducers
 export default function reducer(state = INITIAL_STATE, action) {
@@ -138,7 +140,11 @@ export default function reducer(state = INITIAL_STATE, action) {
                 ...state,
                 error: action.newError
             }
-
+        case CHANGE_PASSWORD_CONFIGURATION: 
+            return {
+                ...state,
+                passwordConfiguration: action.newConfiguration
+            }
         default: return state
     }
 }
@@ -242,7 +248,7 @@ export function fetchData(endpoint) {
         })
     }
 }
-export function sendFeedback() {
+export function sendFeedback () {
     return (dispatch) => {
         dispatch(changeEndpoint('feedback'))
         dispatch(changeLoading(true))
@@ -255,5 +261,26 @@ export function sendFeedback() {
             dispatch(fetchDataFailure())
             dispatch(changeLoading(false))
         })
+    }
+}
+export function changePasswordConfiguration (newConfiguration) {
+    return {
+        type: CHANGE_PASSWORD_CONFIGURATION,
+        newConfiguration
+    }
+}
+
+export function getPasswordConfiguration () {
+    return (dispatch) => {
+        dispatch(changeLoading(true))
+        api.configurationPassword.getAll()
+            .then(([response, json]) => {
+                dispatch(changePasswordConfiguration(json))
+                dispatch(changeLoading(false))
+            })
+            .catch((error) => {
+                dispatch(fetchDataFailure())
+                dispatch(changeLoading(false))
+            })
     }
 }
