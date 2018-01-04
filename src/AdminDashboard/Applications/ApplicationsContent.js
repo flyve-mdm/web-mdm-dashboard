@@ -33,7 +33,12 @@ export default class ApplicationsContent extends Component {
                 <div className="contentHeader">
                     <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> {Pluralize.singular(this.props.location[0])} </h2>
                     <div className="itemInfo">
-                        <IconItemList size={72} image={image} type="base64" />
+                        <IconItemList 
+                            size={72} 
+                            image={image} 
+                            type="base64" 
+                            backgroundColor="transparent"
+                        />
                         <div className="contentStatus">
                             <div className="name">{this.props.selectedItemList["PluginFlyvemdmPackage.alias"]}</div>
                             <div className="detail">{this.props.selectedItemList["PluginFlyvemdmPackage.name"]}</div>
