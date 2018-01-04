@@ -25,7 +25,7 @@ export default class FilesContent extends Component {
 
     render() {
         return (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true} >
                 <div className="contentHeader">
                     <h2 className="win-h2 titleContentPane" > {Pluralize.singular(this.props.location[0])} </h2>
                     <div className="itemInfo">

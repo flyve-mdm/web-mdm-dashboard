@@ -6,7 +6,9 @@ import WinJS from 'winjs'
 export default class ContentPane extends Component {
 
   componentDidUpdate() {
-    this.handleAnimation()
+    if (this.props.updateAnimation) {
+      this.handleAnimation()
+    }
   }
 
   componentDidMount() {
@@ -29,5 +31,9 @@ ContentPane.propTypes = {
   itemListPaneWidth: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]).isRequired
+  ]).isRequired,
+  updateAnimation: PropTypes.bool,
+}
+ContentPane.defaultProps = {
+  updateAnimation: false,
 }
