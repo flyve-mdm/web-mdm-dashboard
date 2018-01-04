@@ -28,7 +28,13 @@ class SettingsPage extends Component {
                     )
                 case 'Security':
                     return (
-                        <Security itemListPaneWidth={this.props.itemListPaneWidth}/>
+                        <Security 
+                            itemListPaneWidth={this.props.itemListPaneWidth} 
+                            getPasswordConfiguration={this.props.getPasswordConfiguration}
+                            passwordConfiguration={this.props.passwordConfiguration}
+                            isLoading={this.props.isLoading}
+                            changeLoading={this.props.changeLoading}
+                        />
                     )
                 case 'Notifications':
                     return (
@@ -37,8 +43,8 @@ class SettingsPage extends Component {
                 case 'Display':
                     return (
                         <Display 
-                        itemListPaneWidth={this.props.itemListPaneWidth}
-                        handleToggleAnimation={this.props.handleToggleAnimation}
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            handleToggleAnimation={this.props.handleToggleAnimation}
                         />
                     )
                 default:
@@ -62,7 +68,11 @@ SettingsPage.propTypes = {
     animation: PropTypes.bool.isRequired,
     handleToggleAnimation: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
-    itemList: PropTypes.object.isRequired
+    itemList: PropTypes.object.isRequired,
+    getPasswordConfiguration: PropTypes.func.isRequired,
+    passwordConfiguration: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    changeLoading: PropTypes.func.isRequired
 }
 
 export default SettingsPage
