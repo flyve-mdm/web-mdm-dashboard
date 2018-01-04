@@ -14,31 +14,32 @@ export default class Geolocation extends Component {
         super();
         this.state ={
           map: null,
-          position: [51.505, -0.09],
+          position: [10.2484425 , -67.5906903],
         };
       }
     
-      componentDidMount() {
+    componentDidMount() {
         setTimeout(() => {
             var map = L.map('map', {
                 minZoom: 2,
-                maxZoom: 20,
+                maxZoom: 18,
                 center: this.state.position,
-                zoom: 13,
+                zoom: 16,
                 layers: [L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})],
                 attributionControl: true,
                 preferCanvas: true,
             });
-            L.marker(this.state.position).addTo(map);
+            var marker = L.marker(this.state.position).addTo(map);
+            marker.bindPopup("last known location")
             return this.setState({
                 map: map
             });
-        }, 100)
-      }
+        }, 500)
+    }
 
     render() {
         return (
-            <div id="map" style={{ height: '400px' }}></div>
+            <div id="map" style={{ height: '400px' }} ></div>
         )
     }
 }
