@@ -109,6 +109,14 @@ class BodyAdminDashboard extends Component {
             changeLoading: this.props.actions.changeLoading
         }
 
+        if (this.props.router[this.props.index].label === 'Dashboard') {
+            propsData = {
+                ...propsData,
+                changeIndex: this.props.actions.changeIndex,
+                routers: this.props.router,
+            }
+        }
+
         if (this.props.router[this.props.index].label === 'About') {
             propsData = {
                 ...propsData,

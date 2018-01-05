@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import DashboardPage from './DashboardPage'
 import { Devices, Invitations, Fleets, Files, Applications, Users } from '../Data'
 import ContentPane from '../../Utils/ContentPane'
@@ -28,12 +29,12 @@ export default class Dashboard extends Component {
                 <div style={{ display: 'inlineBlock'}}>
                     <div className="wrapper">
                         <div className="wrapper-box">
-                            <DashboardPage count={this.state.pages.devices} name="Devices" icon="deviceIcon"/>
-                            <DashboardPage count={this.state.pages.invitations} name="Invitations" icon="emailIcon" />
-                            <DashboardPage count={this.state.pages.fleets} name="Fleets" icon="goToStartIcon"/>
-                            <DashboardPage count={this.state.pages.files} name="Files" icon="copyIcon"/>
-                            <DashboardPage count={this.state.pages.applications} name="Applications" icon="appsIcon"/>
-                            <DashboardPage count={this.state.pages.users} name="Users" icon="peopleIcon"/>
+                            <DashboardPage count={this.state.pages.devices} name="Devices" icon="deviceIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
+                            <DashboardPage count={this.state.pages.invitations} name="Invitations" icon="emailIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
+                            <DashboardPage count={this.state.pages.fleets} name="Fleets" icon="goToStartIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
+                            <DashboardPage count={this.state.pages.files} name="Files" icon="copyIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
+                            <DashboardPage count={this.state.pages.applications} name="Applications" icon="appsIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
+                            <DashboardPage count={this.state.pages.users} name="Users" icon="peopleIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
                         </div>
                         <div className="wrapper-chart">
 
@@ -81,4 +82,9 @@ export default class Dashboard extends Component {
             
         )
     }
+}
+Dashboard.propTypes = {
+    routers: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired,
+    changeIndex: PropTypes.func.isRequired,
 }
