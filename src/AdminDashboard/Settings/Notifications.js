@@ -4,7 +4,31 @@ import ReactWinJS from 'react-winjs'
 import ContentPane from '../../Utils/ContentPane'
 
 class Notifications extends Component {
+
+    constructor (props) {
+        super(props)
+        const notificationType = localStorage.getItem('notificationType') ? localStorage.getItem('notificationType') : 'Toast'
+        const showNotifications = localStorage.getItem('showNotifications') ? (localStorage.getItem('showNotifications') === 'true') : true
+        this.state = {
+            notificationType,
+            showNotifications
+        }
+    }
+
+    changeNotificationType = (e) => {
+        localStorage.setItem('notificationType', e.target.value)
+        this.setState({
+            notificationType: e.target.value
+        })
+    } 
+
+    changeShowNotifications = () => {
+        localStorage.setItem('showNotifications', !this.state.showNotifications)
+        this.setState({showNotifications: !this.state.showNotifications})
+    }
+
     render () {
+        
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <h2 className="win-h2"> Notifications </h2>
@@ -17,8 +41,8 @@ class Notifications extends Component {
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
-                            // checked={value}
-                            // onChange={() => this.props.editPolicy(this.props.data['PluginFlyvemdmPolicy.id'], !value)}
+                                checked={this.state.showNotifications}
+                                onChange={this.changeShowNotifications}
                             />
                     </div>
                 </div>
@@ -31,9 +55,9 @@ class Notifications extends Component {
                     <div className="controller" style={{ paddingTop: 10 }}>
                         <select 
                         className="win-dropdown" 
-                        // name={} 
-                        // value={}
-                        // onChange={}
+                        name='notificationType' 
+                        value={this.state.notificationType}
+                        onChange={this.changeNotificationType}
                         >
                             <option>Toast</option>
                             <option>Native</option>
