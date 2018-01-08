@@ -122,7 +122,8 @@ $list-item-icon-size: 48px;
     }
 
     .win-splitview-pane {
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .title {
