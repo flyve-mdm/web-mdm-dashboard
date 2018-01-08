@@ -7,7 +7,8 @@ class Notifications extends Component {
 
     constructor (props) {
         super(props)
-        const notificationType = localStorage.getItem('notificationType') ? localStorage.getItem('notificationType') : 'Toast'
+        const notificationType = (localStorage.getItem('notificationType') && Notification.permission === 'granted') ? 
+            localStorage.getItem('notificationType') : 'Toast'
         const showNotifications = localStorage.getItem('showNotifications') ? (localStorage.getItem('showNotifications') === 'true') : true
         this.state = {
             notificationType,
@@ -16,10 +17,18 @@ class Notifications extends Component {
     }
 
     changeNotificationType = (e) => {
-        localStorage.setItem('notificationType', e.target.value)
-        this.setState({
-            notificationType: e.target.value
-        })
+        const newNotificationType = e.target.value
+        if (Notification) {
+            Notification.requestPermission()
+                .then((permission) => {
+                    if(permission === "granted") {
+                        localStorage.setItem('notificationType', newNotificationType)
+                        this.setState({
+                            notificationType: newNotificationType
+                        })
+                    }
+                })
+        }
     } 
 
     changeShowNotifications = () => {
@@ -28,7 +37,6 @@ class Notifications extends Component {
     }
 
     render () {
-        
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <h2 className="win-h2"> Notifications </h2>
