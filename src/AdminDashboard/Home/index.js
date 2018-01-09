@@ -25,10 +25,34 @@ export default class Dashboard extends Component {
 
         const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
         let componentsBox = []
+        let componentsChart = []
 
         if (display.maximumManagedDevices === undefined || display.maximumManagedDevices) {
             componentsBox.push(<DashboardPage count={this.state.pages.devices} name="Devices" icon="deviceIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
         } 
+        if (display.devicesByOperatingSystemVersion === undefined || display.devicesByOperatingSystemVersion) {
+            componentsChart.push(
+                <div className="info-box">
+                    <VictoryPie
+                        colorScale={[
+                            "#969696",
+                            "#bdbdbd",
+                            "#d9d9d9"]}
+                        innerRadius={50}
+                        padAngle={5}
+                        labelRadius={90}
+                        labels={(d) => `${d.x} ${d.y}`}
+                        data={[
+                            { x: "Android", y: 5 },
+                            { x: "iOS", y: 2 },
+                            { x: "Windows", y: 2 }
+                        ]}
+                        style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
+                    />
+                    <span className="title-box">DEVICES BY PLATAFORM</span>
+                </div>
+            )
+        }
         if (display.applicationsUploaded === undefined || display.applicationsUploaded) {
             componentsBox.push(<DashboardPage count={this.state.pages.applications} name="Applications" icon="appsIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
         }
@@ -40,6 +64,25 @@ export default class Dashboard extends Component {
         }
         if (display.invitationsSent === undefined || display.invitationsSent) {
             componentsBox.push(<DashboardPage count={this.state.pages.invitations} name="Invitations" icon="emailIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+            componentsChart.push(
+                <div className="info-box">
+                    <VictoryPie
+                        colorScale={[
+                            "#969696",
+                            "#bdbdbd",
+                            "#d9d9d9"]}
+                        innerRadius={50}
+                        padAngle={5}
+                        labelRadius={90}
+                        labels={(d) => `${d.x} ${d.y}`}
+                        data={[
+                            { x: "Invitations", y: this.state.pages.invitations },
+                        ]}
+                        style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
+                    />
+                    <span className="title-box">PENDING INVITATIONS</span>
+                </div>
+            )
         }
         if (display.numberUsers === undefined || display.numberUsers) {
             componentsBox.push(<DashboardPage count={this.state.pages.users} name="Users" icon="peopleIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
@@ -54,44 +97,7 @@ export default class Dashboard extends Component {
                             {componentsBox}
                         </div>
                         <div className="wrapper-chart">
-
-                            <div className="info-box">
-                                <VictoryPie
-                                    colorScale={[
-                                        "#969696",
-                                        "#bdbdbd",
-                                        "#d9d9d9"]}
-                                    innerRadius={50}
-                                    padAngle={5}
-                                    labelRadius={90}
-                                    labels={(d) => `${d.x} ${d.y}`}
-                                    data={[
-                                        { x: "Android", y: 5 },
-                                        { x: "iOS", y: 2 },
-                                        { x: "Windows", y: 2 }
-                                    ]}
-                                    style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
-                                />
-                                <span className="title-box">DEVICES BY PLATAFORM</span>
-                            </div>
-
-                            <div className="info-box">
-                                <VictoryPie
-                                    colorScale={[
-                                        "#969696",
-                                        "#bdbdbd",
-                                        "#d9d9d9"]}
-                                    innerRadius={50}
-                                    padAngle={5}
-                                    labelRadius={90}
-                                    labels={(d) => `${d.x} ${d.y}`}
-                                    data={[
-                                        { x: "Invitations", y: this.state.pages.invitations },
-                                    ]}
-                                    style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
-                                />
-                                <span className="title-box">PENDING INVITATIONS</span>
-                            </div>
+                            {componentsChart}
                         </div>
                     </div>
                 </div>
