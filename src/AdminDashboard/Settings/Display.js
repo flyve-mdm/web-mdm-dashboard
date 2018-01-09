@@ -11,15 +11,15 @@ class Display extends Component {
         const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
 
         this.state = {
-            maximumManagedDevices: display.maximumManagedDevices ? display.maximumManagedDevices: false,
-            applicationsUploaded: display.applicationsUploaded ? display.applicationsUploaded: false,
-            devicesByOperatingSystemVersion: display.devicesByOperatingSystemVersion ? display.devicesByOperatingSystemVersion: false,
-            devicesByUsers: display.devicesByUsers ? display.devicesByUsers: false,
-            devicesCurrentlyManaged: display.devicesCurrentlyManaged ? display.devicesCurrentlyManaged: false,
-            filesUploaded: display.filesUploaded ? display.filesUploaded: false,
-            fleetsCurrentlyManaged: display.fleetsCurrentlyManaged ? display.fleetsCurrentlyManaged: false,
-            invitationsSent: display.invitationsSent ? display.invitationsSent: false,
-            numberUsers: display.numberUsers ? display.numberUsers: false,
+            maximumManagedDevices: display.maximumManagedDevices !== undefined ? display.maximumManagedDevices : true,
+            applicationsUploaded: display.applicationsUploaded !== undefined ? display.applicationsUploaded : true,
+            devicesByOperatingSystemVersion: display.devicesByOperatingSystemVersion !== undefined ? display.devicesByOperatingSystemVersion : true,
+            devicesByUsers: display.devicesByUsers !== undefined ? display.devicesByUsers : true,
+            devicesCurrentlyManaged: display.devicesCurrentlyManaged !== undefined ? display.devicesCurrentlyManaged : true,
+            filesUploaded: display.filesUploaded !== undefined ? display.filesUploaded : true,
+            fleetsCurrentlyManaged: display.fleetsCurrentlyManaged !== undefined ? display.fleetsCurrentlyManaged : true,
+            invitationsSent: display.invitationsSent !== undefined ? display.invitationsSent: true,
+            numberUsers: display.numberUsers !== undefined ? display.numberUsers: true,
             animations: display.animations !== undefined ? display.animations : true 
         }
     }
