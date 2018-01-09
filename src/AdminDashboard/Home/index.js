@@ -22,6 +22,28 @@ export default class Dashboard extends Component {
     }
 
     render() {
+
+        const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
+        let componentsBox = []
+
+        if (display.maximumManagedDevices === undefined || display.maximumManagedDevices) {
+            componentsBox.push(<DashboardPage count={this.state.pages.devices} name="Devices" icon="deviceIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+        } 
+        if (display.applicationsUploaded === undefined || display.applicationsUploaded) {
+            componentsBox.push(<DashboardPage count={this.state.pages.applications} name="Applications" icon="appsIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+        }
+        if (display.filesUploaded === undefined || display.filesUploaded) {
+            componentsBox.push(<DashboardPage count={this.state.pages.files} name="Files" icon="copyIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+        }
+        if (display.fleetsCurrentlyManaged === undefined || display.fleetsCurrentlyManaged) {
+            componentsBox.push(<DashboardPage count={this.state.pages.fleets} name="Fleets" icon="goToStartIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+        }
+        if (display.invitationsSent === undefined || display.invitationsSent) {
+            componentsBox.push(<DashboardPage count={this.state.pages.invitations} name="Invitations" icon="emailIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+        }
+        if (display.numberUsers === undefined || display.numberUsers) {
+            componentsBox.push(<DashboardPage count={this.state.pages.users} name="Users" icon="peopleIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+        }
         
         return (
             <ContentPane itemListPaneWidth={0}>
@@ -29,12 +51,7 @@ export default class Dashboard extends Component {
                 <div style={{ display: 'inlineBlock'}}>
                     <div className="wrapper">
                         <div className="wrapper-box">
-                            <DashboardPage count={this.state.pages.devices} name="Devices" icon="deviceIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
-                            <DashboardPage count={this.state.pages.invitations} name="Invitations" icon="emailIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
-                            <DashboardPage count={this.state.pages.fleets} name="Fleets" icon="goToStartIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
-                            <DashboardPage count={this.state.pages.files} name="Files" icon="copyIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
-                            <DashboardPage count={this.state.pages.applications} name="Applications" icon="appsIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
-                            <DashboardPage count={this.state.pages.users} name="Users" icon="peopleIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers}/>
+                            {componentsBox}
                         </div>
                         <div className="wrapper-chart">
 
