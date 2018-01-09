@@ -15,7 +15,7 @@ function mapStateToProps(state, props) {
     paneOpened: state.AdminDashboard.paneOpened,
     mode: state.AdminDashboard.mode,
     location: state.AdminDashboard.location,
-    actionList: state.AdminDashboard.actionList,
+    actionList: state.AdminDashboard.actionList
   }
 }
 

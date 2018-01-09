@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import ContentPane from '../../Utils/ContentPane'
+import ToastNotifications from '../../Utils/ToastNotifications'
+
 
 class Notifications extends Component {
 
@@ -39,6 +41,9 @@ class Notifications extends Component {
     render () {
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                
+                <ToastNotifications show={this.state.showNotifications}/>
+
                 <h2 className="win-h2"> Notifications </h2>
 
                 <div className="listElement">
@@ -72,7 +77,7 @@ class Notifications extends Component {
                         </select>
                     </div>
                 </div>
-                                        
+
             </ContentPane>
         )
     }
