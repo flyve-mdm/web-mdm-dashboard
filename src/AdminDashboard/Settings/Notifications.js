@@ -42,7 +42,7 @@ class Notifications extends Component {
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 
-                <ToastNotifications show={this.state.showNotifications}/>
+                <ToastNotifications ref={instance => { this.notification = instance }}/>
 
                 <h2 className="win-h2"> Notifications </h2>
 

@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import WinJS from 'winjs'
 
 class ToastNotifications extends Component {
@@ -9,13 +8,19 @@ class ToastNotifications extends Component {
         super(props)
         this.state = {
             show: false,
+            title: '',
+            body: '',
+            type: '',
             timer: {}
         }
     }
 
-    componentWillReceiveProps (newProps) {
+    showNotification = (title, body = '', type = 'success') => {
         this.setState({
-            show: true
+            show: true,
+            title,
+            body,
+            type
         }, () => {
             WinJS.UI.Animation.enterContent(
                 document.getElementsByClassName('toast'), { top: '0px', left: '30px', rtlflip: true }, { mechanism: "transition" }
@@ -42,16 +47,16 @@ class ToastNotifications extends Component {
         let render = <div/>
         if (this.state.show) {
             render = (
-                <div className={`toast toast-${this.props.type}`}>
+                <div className={`toast toast-${this.state.type}`}>
                     <span className="cancelIcon" style={{ float: 'right', cursor: 'pointer' }} onClick={()=> {
                         clearTimeout(this.state.timer)
                         this.removeNotification()
                     }}/>
                     <div className="toast-title">
-                        { this.props.title }
+                        { this.state.title }
                     </div>
                     <div className="toast-body">
-                        { this.props.body }
+                        { this.state.body }
                     </div>
                 </div>
             )
@@ -63,18 +68,6 @@ class ToastNotifications extends Component {
     render () {
         return this.renderNotification()
     }
-}
-
-ToastNotifications.defaultProps = {
-    title: 'Title example',
-    body: 'body example',
-    type: 'info'
-}
-
-ToastNotifications.propTypes = {
-    title: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(["alert", "warning", "success", "info"]).isRequired,
 }
 
 export default ToastNotifications
