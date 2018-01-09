@@ -21,7 +21,8 @@ $list-item-icon-size: 48px;
     "about",
     "loading",
     "login",
-    "errors"
+    "errors",
+    "toast"
     ;
 
 .devices, .invitations, .fleets, .files, .applications, .users, .settings, .about {
@@ -552,6 +553,9 @@ $list-item-icon-size: 48px;
     }
     .searchIcon:before {
         content: "\E1A3";        
+    }
+    .cancelIcon:before {
+        content: "\E711";        
     }
 
     .files-dropzone {
