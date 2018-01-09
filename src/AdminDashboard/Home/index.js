@@ -28,11 +28,11 @@ export default class Dashboard extends Component {
         let componentsChart = []
 
         if (display.maximumManagedDevices === undefined || display.maximumManagedDevices) {
-            componentsBox.push(<DashboardPage count={this.state.pages.devices} name="Devices" icon="deviceIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+            componentsBox.push(<DashboardPage key="Devices" count={this.state.pages.devices} name="Devices" icon="deviceIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
         } 
         if (display.devicesByOperatingSystemVersion === undefined || display.devicesByOperatingSystemVersion) {
             componentsChart.push(
-                <div className="info-box">
+                <div key="DevicesOS" className="info-box">
                     <VictoryPie
                         colorScale={[
                             "#969696",
@@ -54,18 +54,18 @@ export default class Dashboard extends Component {
             )
         }
         if (display.applicationsUploaded === undefined || display.applicationsUploaded) {
-            componentsBox.push(<DashboardPage count={this.state.pages.applications} name="Applications" icon="appsIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+            componentsBox.push(<DashboardPage key="Applications" count={this.state.pages.applications} name="Applications" icon="appsIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
         }
         if (display.filesUploaded === undefined || display.filesUploaded) {
-            componentsBox.push(<DashboardPage count={this.state.pages.files} name="Files" icon="copyIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+            componentsBox.push(<DashboardPage key="Files" count={this.state.pages.files} name="Files" icon="copyIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
         }
         if (display.fleetsCurrentlyManaged === undefined || display.fleetsCurrentlyManaged) {
-            componentsBox.push(<DashboardPage count={this.state.pages.fleets} name="Fleets" icon="goToStartIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+            componentsBox.push(<DashboardPage key="Fleets" count={this.state.pages.fleets} name="Fleets" icon="goToStartIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
         }
         if (display.invitationsSent === undefined || display.invitationsSent) {
-            componentsBox.push(<DashboardPage count={this.state.pages.invitations} name="Invitations" icon="emailIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+            componentsBox.push(<DashboardPage key="Invitations" count={this.state.pages.invitations} name="Invitations" icon="emailIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
             componentsChart.push(
-                <div className="info-box">
+                <div key="InvitationsChart" className="info-box">
                     <VictoryPie
                         colorScale={[
                             "#969696",
@@ -85,7 +85,7 @@ export default class Dashboard extends Component {
             )
         }
         if (display.numberUsers === undefined || display.numberUsers) {
-            componentsBox.push(<DashboardPage count={this.state.pages.users} name="Users" icon="peopleIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
+            componentsBox.push(<DashboardPage key="Users" count={this.state.pages.users} name="Users" icon="peopleIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} />)
         }
         
         return (
