@@ -103,6 +103,13 @@ export default class UsersList extends Component {
             index.forEach((i) => {
                 item.splice(i, 1)
             })
+
+            if (this.state.selectedItemList.length > 1) {
+                this.props.showNotification('Success', 'deleted users')
+            } else {
+                this.props.showNotification('Success', 'deleted user')
+            }
+
             this.setState({
                 selectedItem: []
             })
@@ -272,5 +279,6 @@ UsersList.propTypes = {
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }

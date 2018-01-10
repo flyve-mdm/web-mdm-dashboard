@@ -36,7 +36,8 @@ export default class Users extends Component {
                     selectionMode={this.state.selectionMode}
                     changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} />
+                    changeActionList={this.props.changeActionList} 
+                    showNotification={this.props.showNotification} />
             } else {
                 return <UsersPage
                     itemListPaneWidth={0}
@@ -49,7 +50,8 @@ export default class Users extends Component {
                     changeSelectionMode={this.changeSelectionMode}
                     changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} />
+                    changeActionList={this.props.changeActionList} 
+                    showNotification={this.props.showNotification} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -70,7 +72,9 @@ export default class Users extends Component {
                         currentItem={this.props.currentItem}
                         changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList} 
+                        showNotification={this.props.showNotification}
+                    />
                     <UsersPage
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
@@ -83,7 +87,9 @@ export default class Users extends Component {
                         currentItem={this.props.currentItem}
                         changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList} 
+                        showNotification={this.props.showNotification}
+                    />
                 </div>
             )
         }
@@ -99,5 +105,6 @@ Users.propTypes = {
     currentItem: PropTypes.object,
     changeCurrentItem: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    actionList: PropTypes.string
+    actionList: PropTypes.string,
+    showNotification: PropTypes.func.isRequired
 }

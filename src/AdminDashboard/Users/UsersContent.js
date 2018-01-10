@@ -18,6 +18,7 @@ export default class UsersContent extends Component {
                 item.splice(i, 1)
             })
 
+            this.props.showNotification('Success', 'deleted user')
             this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
             this.props.onNavigate([this.props.location[0]])
         }
@@ -100,5 +101,6 @@ UsersContent.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectedItemList: PropTypes.object.isRequired,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
