@@ -52,6 +52,7 @@ export default class ApplicationsAdd extends Component {
             )
             this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
             this.props.changeActionList(null)
+            this.props.showNotification('Success', 'save application')
         })
     }
 
@@ -99,5 +100,6 @@ ApplicationsAdd.propTypes = {
     dataSource: PropTypes.object.isRequired,
     changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }

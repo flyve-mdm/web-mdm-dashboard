@@ -36,6 +36,7 @@ export default class ApplicationsPage extends Component {
                                 dataSource={this.props.dataSource}
                                 changeDataSource={this.props.changeDataSource}
                                 changeActionList={this.props.changeActionList} 
+                                showNotification={this.props.showNotification}
                             />
                         )
                     default:
