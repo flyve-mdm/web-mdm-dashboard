@@ -45,6 +45,13 @@ export default class FilesEdit extends Component {
         this.props.changeSelectionMode(false)
         this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
+
+        if (this.props.location[1].length > 1) {
+            this.props.showNotification('Success', 'edited files')
+        } else {
+            this.props.showNotification('Success', 'edited file')
+        }
+
         this.props.changeDataSource([this.props.location[0]], { itemList: ItemList(this.props.location[0], this.state.itemListArray), sort: this.props.dataSource.sort })
     }
 
@@ -103,4 +110,5 @@ FilesEdit.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
