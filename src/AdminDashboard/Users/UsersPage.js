@@ -41,7 +41,9 @@ export default class UsersPage extends Component {
                             onNavigate={this.props.onNavigate}
                             selectedIndex={this.props.selectedIndex}
                             selectedItemList={selectedItemList}
-                            changeActionList={this.props.changeActionList} />
+                            changeActionList={this.props.changeActionList} 
+                            showNotification={this.props.showNotification}    
+                        />
                     )
                 } else {
                     return (
@@ -73,5 +75,6 @@ UsersPage.propTypes = {
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
