@@ -41,6 +41,7 @@ export default class DevicesEditOne extends Component {
     }
 
     handleSaveOneDevices = () => {
+        this.props.showNotification('Success', 'changes saved successfully')
         this.props.changeActionList(null)
     }
 
@@ -96,5 +97,6 @@ DevicesEditOne.propTypes = {
     ]).isRequired,
     dataSource: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }

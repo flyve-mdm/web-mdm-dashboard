@@ -19,7 +19,6 @@ class App extends React.Component {
             <div style={{height: '100%'}}>
                 <HeaderAdminDashboard history={this.props.history}/>
                 <BodyAdminDashboard />
-                {/* <ToastNotifications title={} body={} type={} /> */}
             </div>
         )
     }

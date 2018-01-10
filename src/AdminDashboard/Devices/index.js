@@ -48,7 +48,8 @@ export default class Devices extends Component {
                     selectedIndex={selectedIndex}
                     changeSelectionMode={this.changeSelectionMode}
                     actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} />
+                    changeActionList={this.props.changeActionList}
+                    showNotification={this.props.showNotification} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -78,7 +79,8 @@ export default class Devices extends Component {
                         selectedIndex={selectedIndex}
                         changeSelectionMode={this.changeSelectionMode}
                         actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList} 
+                        showNotification={this.props.showNotification}/>
                 </div>
             )
         }
@@ -92,5 +94,6 @@ Devices.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    actionList: PropTypes.string
+    actionList: PropTypes.string,
+    showNotification: PropTypes.func.isRequired
 }

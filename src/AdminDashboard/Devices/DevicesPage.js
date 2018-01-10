@@ -20,7 +20,8 @@ export default class DevicesPage extends Component {
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
-                            changeActionList={this.props.changeActionList} />
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification} />
                     )
                 case "Add":
                     return (
@@ -61,7 +62,9 @@ export default class DevicesPage extends Component {
                         itemListPaneWidth={this.props.itemListPaneWidth}
                         dataSource={this.props.dataSource}
                         location={this.props.location}    
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList}
+                        showNotification={this.props.showNotification} 
+                    />
                 )
             }
         }
@@ -79,5 +82,6 @@ DevicesPage.propTypes = {
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
