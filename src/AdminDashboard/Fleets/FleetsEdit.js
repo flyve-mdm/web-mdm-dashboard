@@ -46,6 +46,12 @@ export default class FleetsEdit extends Component {
         this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
         this.props.changeDataSource([this.props.location[0]], { itemList: ItemList(this.props.location[0], this.state.itemListArray), sort: this.props.dataSource.sort })
+        
+        if (this.props.location[1].length > 1) {
+            this.props.showNotification('Success', 'modified fleets')
+        } else {
+            this.props.showNotification('Success', 'modified fleet')
+        }
     }
 
     render() {
@@ -101,4 +107,5 @@ FleetsEdit.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
