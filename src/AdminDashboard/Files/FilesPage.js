@@ -33,7 +33,9 @@ export default class FilesPage extends Component {
                             dataSource={this.props.dataSource}
                             changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
-                            changeActionList={this.props.changeActionList} />
+                            changeActionList={this.props.changeActionList} 
+                            showNotification={this.props.showNotification}
+                        />
                     )
                     default: 
                     return (
