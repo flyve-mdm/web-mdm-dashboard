@@ -56,6 +56,11 @@ export default class FleetsNew extends Component {
             this.props.changeDataSource(this.props.location, { itemList: ItemList(this.props.location[0], array, this.props.dataSource.sort), sort: this.props.dataSource.sort })
             this.props.changeCurrentItem(this.state.itemListArray[0])
             this.props.changeActionList('Add Tasks')
+            if(this.state.itemListArray.length > 1) {
+                this.props.showNotification('Success', 'new fleets added')
+            } else {
+                this.props.showNotification('Success', 'new fleet added')
+            }
         }
     }
 
@@ -104,5 +109,6 @@ FleetsNew.propTypes = {
     dataSource: PropTypes.object.isRequired,
     location: PropTypes.array.isRequired,
     changeCurrentItem:  PropTypes.func,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
