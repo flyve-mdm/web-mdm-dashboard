@@ -147,6 +147,7 @@ export default class FleetsContent extends Component {
 
             this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
             this.props.onNavigate([this.props.location[0]])
+            this.props.showNotification('Success', 'deleted fleet')
         }
     }
 
