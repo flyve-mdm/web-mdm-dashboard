@@ -19,6 +19,7 @@ class DangerZone extends Component {
 
             this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
             this.props.onNavigate([this.props.location[0]])
+            this.props.showNotification('Success', 'element successfully removed')
         }
     }
 
@@ -78,7 +79,8 @@ DangerZone.propTypes = {
     changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     selectedItemList: PropTypes.object.isRequired,
-    onNavigate: PropTypes.func.isRequired
+    onNavigate: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
 
 export default DangerZone

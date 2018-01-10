@@ -21,7 +21,7 @@ class DangerZone extends Component {
     delete = async () => {
         const isOK = await Confirmation.isOK(this.deleteDevice)
         if (isOK) {
-            
+            this.props.showNotification('Success', 'element successfully removed')                        
         }
     }
 

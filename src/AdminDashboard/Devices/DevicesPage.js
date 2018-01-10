@@ -49,7 +49,8 @@ export default class DevicesPage extends Component {
                             onNavigate={this.props.onNavigate}
                             selectedIndex={this.props.selectedIndex}
                             selectedItemList={selectedItemList}
-                            changeActionList={this.props.changeActionList} />
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification} />
                     )
                 } else {
                     return (
