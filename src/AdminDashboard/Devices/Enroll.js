@@ -14,6 +14,7 @@ export default class Enroll extends Component {
     inviteDevice = () => {
         if(this.state.email.trim() !== "") {
             this.props.changeActionList(null)
+            this.props.showNotification('Success', 'invitation sent')
         }
     }
 
@@ -56,5 +57,6 @@ Enroll.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }

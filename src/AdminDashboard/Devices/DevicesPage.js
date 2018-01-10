@@ -27,7 +27,9 @@ export default class DevicesPage extends Component {
                     return (
                         <Enroll
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            changeActionList={this.props.changeActionList} />
+                            changeActionList={this.props.changeActionList} 
+                            showNotification={this.props.showNotification}
+                        />
                     )
                 default:
                     return (
