@@ -7,7 +7,7 @@ class DangerZone extends Component {
     wipe = async () => {
         const isOK = await Confirmation.isOK(this.wipeDevice)
         if (isOK) {
-            
+            this.props.showNotification('Success', 'data deleted successfully')
         }
     }
 
@@ -78,7 +78,8 @@ class DangerZone extends Component {
 }
 
 DangerZone.propTypes = {
-    selectedItemList: PropTypes.object.isRequired
+    selectedItemList: PropTypes.object.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
 
 export default DangerZone
