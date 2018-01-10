@@ -36,7 +36,8 @@ export default class Fleets extends Component {
                     selectionMode={this.state.selectionMode}
                     changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} />
+                    changeActionList={this.props.changeActionList} 
+                    showNotification={this.props.showNotification}/>
             } else {
                 return <FleetsPage
                     itemListPaneWidth={0}
@@ -72,6 +73,7 @@ export default class Fleets extends Component {
                         changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
+                        showNotification={this.props.showNotification}
                     />
                     <FleetsPage
                         itemListPaneWidth={itemListPaneWidth}

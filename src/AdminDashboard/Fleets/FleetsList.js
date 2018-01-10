@@ -115,6 +115,12 @@ export default class FleetsList extends Component {
                 item.splice(i, 1)
             })
 
+            if (this.state.selectedItemList > 1) {
+                this.props.showNotification('Success', 'deleted fleets')
+            } else {
+                this.props.showNotification('Success', 'deleted fleet')
+            }
+
             this.setState({ selectedItem: [] })
             this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
         } else {
@@ -279,5 +285,6 @@ FleetsList.propTypes = {
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
