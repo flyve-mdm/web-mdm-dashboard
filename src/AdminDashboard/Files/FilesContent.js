@@ -20,6 +20,8 @@ export default class FilesContent extends Component {
 
             this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
             this.props.onNavigate([this.props.location[0]])
+
+            this.props.showNotification('Success', 'deleted file')
         }
     }
 
@@ -56,5 +58,6 @@ FilesContent.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectedItemList: PropTypes.object.isRequired,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }

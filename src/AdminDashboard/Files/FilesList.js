@@ -102,8 +102,15 @@ export default class FilesList extends Component {
                 item.splice(i, 1)
             })
 
+            
+            if (this.state.selectedItemList.length > 1) {
+                this.props.showNotification('Success', 'deleted files')
+            } else {
+                this.props.showNotification('Success', 'deleted file')
+            }
+            
             this.setState({
-                selectedItem: []
+                selectedItemList: []
             })
 
             this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
@@ -114,7 +121,7 @@ export default class FilesList extends Component {
             this.props.changeSelectionMode(false)
             this.refs.listView.winControl.selection.clear()
             this.setState({
-                selectedItem: []
+                selectedItemList: []
             })
         }
     }
@@ -267,5 +274,6 @@ FilesList.propTypes = {
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
