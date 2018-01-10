@@ -33,15 +33,15 @@ export default class FilesEditItemList extends Component {
                 <div className='files-list-item'>
                     <div className='item-content-primary'>
                         <input 
-                        type="text"
-                        style={{ width: '240px'}}
-                        className="win-textbox" 
-                        placeholder="Fleet name"
-                        name="input"
-                        value={this.state.input}
-                        onChange={this.changeInput}
-                        onBlur={this.blurInput}
-                        required
+                            type="text"
+                            style={{ width: '240px'}}
+                            className="win-textbox" 
+                            placeholder="Fleet name"
+                            name="input"
+                            value={this.state.input}
+                            onChange={this.changeInput}
+                            onBlur={this.blurInput}
+                            required
                         />
                     </div>
                 </div>
