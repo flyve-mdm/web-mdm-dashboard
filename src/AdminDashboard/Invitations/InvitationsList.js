@@ -91,6 +91,11 @@ export default class InvitationsList extends Component {
             selectedItem: []
         })
         this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
+        if (this.state.selectedItemList.length > 1) {
+            this.props.showNotification('Success', 'elements successfully removed')                        
+        } else {
+            this.props.showNotification('Success', 'element successfully removed')                        
+        }
     }
 
     handleSort = () => {
@@ -244,5 +249,6 @@ InvitationsList.propTypes = {
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
