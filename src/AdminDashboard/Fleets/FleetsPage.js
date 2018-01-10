@@ -20,7 +20,9 @@ export default class FleetsPage extends Component {
                             changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             changeActionList={this.props.changeActionList}
-                            changeCurrentItem={this.props.changeCurrentItem} />
+                            changeCurrentItem={this.props.changeCurrentItem} 
+                            showNotification={this.props.showNotification}
+                        />
                     )
                 case "Add Tasks":
                     return (
@@ -101,5 +103,6 @@ FleetsPage.propTypes = {
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }

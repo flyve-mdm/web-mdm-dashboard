@@ -49,7 +49,8 @@ export default class Fleets extends Component {
                     changeSelectionMode={this.changeSelectionMode}
                     changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} />
+                    changeActionList={this.props.changeActionList} 
+                    showNotification={this.props.showNotification}/>
             }
         } else {
             let itemListPaneWidth = 320
@@ -70,7 +71,8 @@ export default class Fleets extends Component {
                         currentItem={this.props.currentItem}
                         changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList} 
+                    />
                     <FleetsPage
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
@@ -83,7 +85,9 @@ export default class Fleets extends Component {
                         currentItem={this.props.currentItem}
                         changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList} 
+                        showNotification={this.props.showNotification}
+                    />
                 </div>
             )
         }
@@ -99,5 +103,6 @@ Fleets.propTypes = {
     currentItem: PropTypes.object,
     changeCurrentItem: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    actionList: PropTypes.string
+    actionList: PropTypes.string,
+    showNotification: PropTypes.func.isRequired
 }
