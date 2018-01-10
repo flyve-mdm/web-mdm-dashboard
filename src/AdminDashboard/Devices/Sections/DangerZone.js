@@ -14,7 +14,7 @@ class DangerZone extends Component {
     unenroll = async () => {
         const isOK = await Confirmation.isOK(this.unenrollmentDevice)
         if (isOK) {
-            
+            this.props.showNotification('Success', 'unenrollment device')            
         }
     }
 
