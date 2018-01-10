@@ -92,9 +92,9 @@ export default class InvitationsList extends Component {
         })
         this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
         if (this.state.selectedItemList.length > 1) {
-            this.props.showNotification('Success', 'elements successfully removed')                        
+            this.props.showNotification('Success', 'invitation sent')                        
         } else {
-            this.props.showNotification('Success', 'element successfully removed')                        
+            this.props.showNotification('Success', 'element successfully removed')         
         }
     }
 
@@ -116,6 +116,11 @@ export default class InvitationsList extends Component {
     }
 
     handleResendEmail = () => {
+        if (this.state.selectedItemList.length > 1) {
+            this.props.showNotification('Success', 'invitations sent')                        
+        } else {
+            this.props.showNotification('Success', 'invitation sent')         
+        }          
         this.handleToggleSelectionMode()
     }
 

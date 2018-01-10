@@ -50,7 +50,8 @@ export default class Invitations extends Component {
                     selectedIndex={selectedIndex}
                     changeSelectionMode={this.changeSelectionMode}
                     actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} />
+                    changeActionList={this.props.changeActionList} 
+                    showNotification={this.props.showNotification}/>
             }
         } else {
             let itemListPaneWidth = 320
@@ -70,7 +71,8 @@ export default class Invitations extends Component {
                         selectionMode={this.state.selectionMode}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}/>
+                        showNotification={this.props.showNotification}
+                    />
                     <InvitationsPage
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
@@ -81,7 +83,9 @@ export default class Invitations extends Component {
                         selectedIndex={selectedIndex}
                         changeSelectionMode={this.changeSelectionMode}
                         actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList} 
+                        showNotification={this.props.showNotification}
+                    />
                 </div>
             )
         }
