@@ -37,7 +37,8 @@ export default class Invitations extends Component {
                     changeSelectionMode={this.changeSelectionMode}
                     selectionMode={this.state.selectionMode}
                     actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} />
+                    changeActionList={this.props.changeActionList} 
+                    showNotification={this.props.showNotification}/>
             } else {
                 return <InvitationsPage
                     itemListPaneWidth={0}
@@ -68,7 +69,8 @@ export default class Invitations extends Component {
                         changeSelectionMode={this.changeSelectionMode}
                         selectionMode={this.state.selectionMode}
                         actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList} 
+                        showNotification={this.props.showNotification}/>
                     <InvitationsPage
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
@@ -93,5 +95,6 @@ Invitations.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    actionList: PropTypes.string
+    actionList: PropTypes.string,
+    showNotification: PropTypes.func.isRequired
 }
