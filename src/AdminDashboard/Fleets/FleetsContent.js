@@ -24,8 +24,8 @@ export default class FleetsContent extends Component {
     }
 
     savePolicies = () => {
-        if (this.props.itemList && this.state.list) {
-            const itemList = this.props.itemList.map((item) => item)
+        if (this.props.dataSource.itemList && this.state.list) {
+            const itemList = this.props.dataSource.itemList.map((item) => item)
             const items_id = this.state.list.map((item) => item['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'])
             const newCurrentItem = {
                 ...this.props.currentItem,
@@ -36,6 +36,7 @@ export default class FleetsContent extends Component {
             this.props.changeActionList(null)
             this.props.onNavigate([this.props.location[0]])
             this.props.changeDataSource([this.props.location[0]], { itemList: ItemList(this.props.location[0], newList) })
+            this.props.showNotification('Success', 'saved policies')
         }
     }
 
@@ -218,5 +219,6 @@ FleetsContent.propTypes = {
     selectedIndex: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }

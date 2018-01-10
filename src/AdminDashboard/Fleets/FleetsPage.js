@@ -33,7 +33,9 @@ export default class FleetsPage extends Component {
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             currentItem={this.props.currentItem}
-                            changeActionList={this.props.changeActionList} />
+                            changeActionList={this.props.changeActionList} 
+                            showNotification={this.props.showNotification}
+                        />
                     )
                 case "Add Policies":
                     return (
@@ -49,7 +51,8 @@ export default class FleetsPage extends Component {
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
                             changeActionList={this.props.changeActionList} 
-                            showNotification={this.props.showNotification}/>
+                            showNotification={this.props.showNotification}
+                        />
                     )
                 default:
                     return (
@@ -70,7 +73,9 @@ export default class FleetsPage extends Component {
                             onNavigate={this.props.onNavigate}
                             selectedIndex={this.props.selectedIndex}
                             currentItem={selectedItemList}
-                            changeActionList={this.props.changeActionList} />
+                            changeActionList={this.props.changeActionList} 
+                            showNotification={this.props.showNotification}
+                        />
                     )
                 } else {
                     return (
