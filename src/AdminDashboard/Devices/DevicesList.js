@@ -114,6 +114,11 @@ export default class DevicesList extends Component {
             })
 
             this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
+            if (this.state.selectedItemList.length > 1) {
+                this.props.showNotification('Success', 'elements successfully removed')                        
+            } else {
+                this.props.showNotification('Success', 'element successfully removed')                        
+            }
         } else {
             // Clean another actions selected
             this.props.changeActionList(null)
@@ -202,7 +207,7 @@ export default class DevicesList extends Component {
             listComponent = "Error"
         } else if (!this.props.isLoading && this.props.dataSource.itemList.groups !== undefined ) {
             listComponent = (
-                < ReactWinJS.ListView
+                <ReactWinJS.ListView
                     ref="listView"
                     onLoadingStateChanged={this.onLoadingStateChanged}
                     className="contentListView win-selectionstylefilled"
@@ -278,5 +283,6 @@ DevicesList.propTypes = {
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
