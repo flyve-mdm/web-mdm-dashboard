@@ -47,6 +47,7 @@ class DevicesContent extends Component {
 
                         <DangerZone 
                             selectedItemList={this.props.selectedItemList}
+                            showNotification={this.props.showNotification}
                         />
 
                     </ReactWinJS.Pivot.Item>
