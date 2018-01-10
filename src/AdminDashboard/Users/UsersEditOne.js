@@ -108,6 +108,7 @@ class Profiles extends Component {
         const user = usersScheme({
             state: this.state, 
             changeState: this.changeState,
+            changeEmail: this.changeEmail,
             deleteEmail: this.deleteEmail
         })
 
