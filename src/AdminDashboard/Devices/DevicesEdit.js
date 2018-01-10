@@ -102,4 +102,5 @@ DevicesEdit.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }

@@ -12,6 +12,7 @@ import Files from './Files'
 import Applications from './Applications'
 import About from './About'
 import Settings from './Settings'
+import ToastNotifications from '../Utils/ToastNotifications'
 
 const components = { Dashboard, Devices, Invitations, Fleets, Files, Applications, Users, Settings, About }
 
@@ -59,7 +60,8 @@ class BodyAdminDashboard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            heigth: window.innerHeight
+            heigth: window.innerHeight,
+            notifications: () => {}
         }
     }
 
@@ -106,7 +108,8 @@ class BodyAdminDashboard extends Component {
             changeCurrentItem: this.props.actions.changeCurrentItem,
             passwordConfiguration: this.props.passwordConfiguration,
             getPasswordConfiguration: this.props.actions.getPasswordConfiguration,
-            changeLoading: this.props.actions.changeLoading
+            changeLoading: this.props.actions.changeLoading,
+            showNotification: this.notifications ? this.notifications.showNotification : () => ''
         }
 
         if (this.props.router[this.props.index].label === 'Dashboard') {
@@ -165,15 +168,21 @@ class BodyAdminDashboard extends Component {
         )
 
         return (
-            <ReactWinJS.SplitView
-                id={this.props.splitViewId}
-                paneComponent={pane}
-                style={{ height: 'calc(100% - 48px)' }}
-                contentComponent={contentComponent}
-                paneOpened={this.props.paneOpened}
-                onAfterClose={this.props.actions.closePane}
-                {...this.props.splitViewConfigs[this.props.mode]}
-            />
+            <div style={{height: '100%'}}>
+
+                <ToastNotifications ref={instance => { this.notifications = instance }}/>
+
+                <ReactWinJS.SplitView
+                    id={this.props.splitViewId}
+                    paneComponent={pane}
+                    style={{ height: 'calc(100% - 48px)' }}
+                    contentComponent={contentComponent}
+                    paneOpened={this.props.paneOpened}
+                    onAfterClose={this.props.actions.closePane}
+                    {...this.props.splitViewConfigs[this.props.mode]}
+                />
+
+            </div>
         )
     }
 }
