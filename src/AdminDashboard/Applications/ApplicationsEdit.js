@@ -44,6 +44,13 @@ export default class ApplicationsEdit extends Component {
 
         this.props.changeSelectionMode(false)
         this.props.changeActionList(null)
+
+        if (this.props.location[1].length > 1) {
+            this.props.showNotification('Success', 'edited applications')
+        } else {
+            this.props.showNotification('Success', 'edited application')
+        }
+
         this.props.onNavigate([this.props.location[0]])
         this.props.changeDataSource([this.props.location[0]], { itemList: ItemList(this.props.location[0], this.state.itemListArray), sort: this.props.dataSource.sort })
     }
@@ -103,4 +110,5 @@ ApplicationsEdit.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }

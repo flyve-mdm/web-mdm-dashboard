@@ -18,13 +18,15 @@ export default class ApplicationsPage extends Component {
                     case "Edit":    
                         return (
                             <ApplicationsEdit
-                            itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
-                            location={this.props.location}
-                            onNavigate={this.props.onNavigate}
-                            changeSelectionMode={this.props.changeSelectionMode}
-                            changeActionList={this.props.changeActionList} />
+                                itemListPaneWidth={this.props.itemListPaneWidth}
+                                dataSource={this.props.dataSource}
+                                changeDataSource={this.props.changeDataSource}
+                                location={this.props.location}
+                                onNavigate={this.props.onNavigate}
+                                changeSelectionMode={this.props.changeSelectionMode}
+                                changeActionList={this.props.changeActionList} 
+                                showNotification={this.props.showNotification}
+                            />
                         )
                     case "Add":
                         return (
@@ -33,7 +35,8 @@ export default class ApplicationsPage extends Component {
                                 location={this.props.location}
                                 dataSource={this.props.dataSource}
                                 changeDataSource={this.props.changeDataSource}
-                                changeActionList={this.props.changeActionList} />
+                                changeActionList={this.props.changeActionList} 
+                            />
                         )
                     default:
                         return (
