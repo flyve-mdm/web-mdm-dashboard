@@ -1,14 +1,14 @@
 {
-    "User.name": "gmanganiello",
+    "User.name": "username",
     "User.id": 186,
     "User.Location.completename": null,
     "User.UserEmail.email": [
-        "gmanganiello@teclib.com",
-        "gmanganiello2@teclib.com"
+        "name@teclib.com",
+        "demo@teclib.com"
     ],
     "User.phone": "+58 2432386578",
     "User.is_active": 1,
-    "User.firstname": "Gianfranco",
+    "User.firstname": "User",
     "User.phone2": null,
     "User.mobile": "+58 4164332135",
     "User.Group_User.Group.completename": null,
@@ -24,7 +24,7 @@
     "User.is_deleted_ldap": 0,
     "User.AuthLDAP.name": null,
     "User.AuthMail.name": null,
-    "User.realname": "Manganiello",
+    "User.realname": "Demo",
     "User.Ticket_User.Ticket.id": 0,
     "User.Ticket.id": 0,
     "User.begin_date": null,
@@ -39,5 +39,5 @@
     "User.Location.comment": null,
     "User.date_creation": "2017-10-10 16:19:07",
     "User.Link_Itemtype.Link._virtual": null,
-    "User.picture": "profile/223_5a084effc6624.jpg"
+    "User.picture": "profile.png"
 }
