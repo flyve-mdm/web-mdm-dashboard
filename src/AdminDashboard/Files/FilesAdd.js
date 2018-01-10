@@ -9,53 +9,50 @@ export default class FilesAdd extends Component {
     constructor (props) {
         super(props)
         this.state = {
-          files: []
+            files: []
         }
-      }
+    }
     
-      onFilesChange = (files) => {
+    onFilesChange = (files) => {
         this.setState({
-          files
+            files
         }, () => {
-        //   console.log(this.state.files)
+            //   console.log(this.state.files)
         })
-      }
-    
-      onFilesError = (error, file) => {
+    }
+
+    onFilesError = (error, file) => {
         console.log('error code ' + error.code + ': ' + error.message)
-      }
-    
-      filesRemoveOne = (file) => {
+    }
+
+    filesRemoveOne = (file) => {
         this.refs.files.removeFile(file)
-      }
-    
-      filesRemoveAll = () => {
+    }
+
+    filesRemoveAll = () => {
         this.refs.files.removeFiles()
-      }
-    
-      filesUpload = () => {
+    }
+
+    filesUpload = () => {
         const formData = new FormData()
         Object.keys(this.state.files).forEach((key) => {
-          const file = this.state.files[key]
-          formData.append(key, new Blob([file], { type: file.type }), file.name || 'file')
-    
-          let item = this.props.dataSource.itemList
-          item.push(
-              {
-                  "PluginFlyvemdmFile.name": file.name,
-                  "PluginFlyvemdmFile.id": 10,
-                  "PluginFlyvemdmFile.filesize": file.filesize,
-                  "PluginFlyvemdmFile.source": ""
-              }
-          )
-          this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-          this.props.changeActionList(null)
+            const file = this.state.files[key]
+            formData.append(key, new Blob([file], { type: file.type }), file.name || 'file')
+
+            let item = this.props.dataSource.itemList
+            item.push(
+                {
+                    "PluginFlyvemdmFile.name": file.name,
+                    "PluginFlyvemdmFile.id": 10,
+                    "PluginFlyvemdmFile.filesize": file.filesize,
+                    "PluginFlyvemdmFile.source": ""
+                }
+            )
+            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
+            this.props.changeActionList(null)
+            this.props.showNotification('Success', 'saved file')
         })
-
-
-
-        
-      }
+    }
 
   render() {
     return (
@@ -98,5 +95,6 @@ FilesAdd.propTypes = {
     dataSource: PropTypes.object.isRequired,
     changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
