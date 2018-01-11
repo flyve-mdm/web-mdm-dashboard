@@ -13,7 +13,6 @@ class Profiles extends Component {
         const currentUser = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
         
         this.state = {
-            buttonSaveClassName: "win-button win-button-primary hidden",
             login: validateData(currentUser["User.name"], undefined),
             firstName: validateData(currentUser["User.firstname"]),
             realName: validateData(currentUser["User.realname"]),
@@ -42,9 +41,7 @@ class Profiles extends Component {
     }
 
     saveChanges = () => {
-        this.setState({
-            buttonSaveClassName: "win-button win-button-primary hidden"
-        })
+        this.props.showNotification('Success', 'edited user')            
         this.props.changeActionList(null)
     }
 
@@ -52,11 +49,6 @@ class Profiles extends Component {
         this.setState({
             [name]: value
         })
-        if (this.state.buttonSaveClassName === "win-button win-button-primary hidden") {
-            this.setState({
-                buttonSaveClassName: "win-button win-button-primary"
-            })
-        }
     }
 
     changeEmail = (name, value) => {
@@ -166,7 +158,7 @@ class Profiles extends Component {
 
                     <ConstructInputs data={user.activityInformation} icon="documentIcon" />
 
-                    <button className={this.state.buttonSaveClassName} style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                    <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                         Save
                     </button>
 
@@ -184,7 +176,8 @@ Profiles.propTypes = {
     ]).isRequired,
     dataSource: PropTypes.object.isRequired,
     selectedIndex: PropTypes.array,
-    changeActionList: PropTypes.func.isRequired
+    changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
 
 export default Profiles
