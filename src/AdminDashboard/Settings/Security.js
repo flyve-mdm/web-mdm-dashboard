@@ -35,6 +35,13 @@ class Security extends Component {
         }
     }
 
+    cleanWebStorage  = async () => {
+        const isOK = await Confirmation.isOK(this.deleteBrowserData)
+        if (isOK) {
+            this.props.showNotification('Success', 'web storage and database indexed, cleaned')
+        }
+    }
+
     savePassword = () => {
         this.setState({ forceValidation: true })
         console.log(this.state)
@@ -209,9 +216,15 @@ class Security extends Component {
                                 <div className="detail">Delete Web Storage and Indexed Database</div>
                             </div>
                             <div className="controller">
-                                <button className="win-button">Delete</button>
+                                <button className="win-button" onClick={this.cleanWebStorage}>Delete</button>
                             </div>
                         </div>
+
+                        <Confirmation 
+                            title="Delete browser data"
+                            message="Are you sure you want to delete all data/information in the web storage and indexed database?"
+                            reference={el => this.deleteBrowserData = el} 
+                        />
         
                         <div className="listElement">
                             <div className="message">
@@ -224,7 +237,7 @@ class Security extends Component {
                         </div>
                         
                         <Confirmation 
-                            title="Please confirm account deletion"
+                            title="Account deletion"
                             message="Are you certain to delete the account?"
                             reference={el => this.deleteAccount = el} 
                         />
