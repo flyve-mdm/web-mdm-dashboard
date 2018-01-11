@@ -60,6 +60,7 @@ class Entity extends Component {
                             changeMode={this.changeMode} 
                             downloadURL={this.state.downloadURL} 
                             saveValues={this.saveValues}
+                            showNotification={this.props.showNotification}
                         />
                     </ContentPane>
                 )
@@ -93,7 +94,8 @@ Entity.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ]).isRequired
+    ]).isRequired,
+    showNotification: PropTypes.func.isRequired
 }
 
 export default Entity

@@ -19,6 +19,7 @@ class ChangeDownloadURL extends Component {
     saveURL = () => {
         this.props.saveValues('downloadURL', this.state.downloadURL)
         this.props.changeMode('')
+        this.props.showNotification('Success', 'download URL changed')
     }
 
     render () {
@@ -53,7 +54,8 @@ class ChangeDownloadURL extends Component {
 ChangeDownloadURL.propTypes = {
     changeMode: PropTypes.func.isRequired,
     downloadURL: PropTypes.string.isRequired,
-    saveValues: PropTypes.func.isRequired
+    saveValues: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
 
 export default ChangeDownloadURL

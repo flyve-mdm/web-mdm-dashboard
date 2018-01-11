@@ -45,6 +45,7 @@ class Settings extends Component {
                         passwordConfiguration={this.props.passwordConfiguration}
                         changeLoading={this.props.changeLoading}
                         isLoading={this.props.isLoading}
+                        showNotification={this.props.showNotification}
                     />
                 )
             }
@@ -69,6 +70,7 @@ class Settings extends Component {
                         passwordConfiguration={this.props.passwordConfiguration}
                         isLoading={this.props.isLoading}
                         changeLoading={this.props.changeLoading}
+                        showNotification={this.props.showNotification}
                     />
                 </div>
             )
@@ -85,7 +87,8 @@ Settings.propTypes = {
     getPasswordConfiguration: PropTypes.func.isRequired,
     passwordConfiguration: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
-    changeLoading: PropTypes.func.isRequired
+    changeLoading: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
 
 export default Settings
