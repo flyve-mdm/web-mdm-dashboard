@@ -44,6 +44,13 @@ export default class DevicesEdit extends Component {
 
         this.props.changeSelectionMode(false)
         this.props.changeActionList(null)
+
+        if (this.props.location[1].length > 1) {
+            this.props.showNotification('Success', 'edited users')            
+        } else {
+            this.props.showNotification('Success', 'edited user')            
+        }
+        
         this.props.onNavigate([this.props.location[0]])
         this.props.changeDataSource([this.props.location[0]], { itemList: ItemList(this.props.location[0], this.state.itemListArray), sort: this.props.dataSource.sort })
     }
@@ -102,4 +109,5 @@ DevicesEdit.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }

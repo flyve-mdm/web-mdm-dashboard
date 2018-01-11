@@ -19,13 +19,16 @@ export default class UsersPage extends Component {
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
-                            changeActionList={this.props.changeActionList} />
+                            changeActionList={this.props.changeActionList} 
+                            showNotification={this.props.showNotification}                            
+                        />
                     )
                 default:
                     return (
                         <EmptyMessage
                             message="No Selection"
-                            itemListPaneWidth={this.props.itemListPaneWidth} />
+                            itemListPaneWidth={this.props.itemListPaneWidth} 
+                        />
                     )
             }
         } else {
@@ -57,7 +60,9 @@ export default class UsersPage extends Component {
                         dataSource={this.props.dataSource}
                         location={this.props.location}
                         selectedIndex={this.props.selectedIndex}
-                        changeActionList={this.props.changeActionList} />
+                        changeActionList={this.props.changeActionList} 
+                        showNotification={this.props.showNotification}
+                    />
                 )
             }
         }
