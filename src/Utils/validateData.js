@@ -6,5 +6,5 @@ export default (data, specialReturn) => {
     else if (!data && data !== 0) value = "not available"
     else value = data
 
-    return value
+    return value.toString()
 }
