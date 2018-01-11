@@ -12,7 +12,6 @@ export default class Profiles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            buttonSaveClassName: "win-button win-button-primary hidden",
             login: validateData(currentUser["User.name"], undefined),
             firstName: validateData(currentUser["User.firstname"]),
             realName: validateData(currentUser["User.realname"]),
@@ -41,20 +40,13 @@ export default class Profiles extends Component {
     }
 
     saveChanges = () => {
-        this.setState({
-            buttonSaveClassName: "win-button win-button-primary hidden"
-        })
+        this.props.showNotification('Success', 'saved profile')
     }
 
     changeState = (name, value) => {
         this.setState({
             [name]: value
         })
-        if (this.state.buttonSaveClassName === "win-button win-button-primary hidden") {
-            this.setState({
-                buttonSaveClassName: "win-button win-button-primary"
-            })
-        }
     }
 
     changeEmail = (name, value) => {
@@ -163,7 +155,7 @@ export default class Profiles extends Component {
 
                 <ConstructInputs data={user.activityInformation} icon="documentIcon" />
 
-                <button className={ this.state.buttonSaveClassName } style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                     Save
                 </button>
             
@@ -180,5 +172,6 @@ Profiles.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ]).isRequired
+    ]).isRequired,
+    showNotification: PropTypes.func.isRequired
 }
