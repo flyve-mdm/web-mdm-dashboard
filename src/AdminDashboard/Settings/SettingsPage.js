@@ -30,7 +30,10 @@ class SettingsPage extends Component {
                     )
                 case 'Supervision':
                     return (
-                        <Supervision itemListPaneWidth={this.props.itemListPaneWidth} />
+                        <Supervision 
+                            itemListPaneWidth={this.props.itemListPaneWidth} 
+                            showNotification={this.props.showNotification}
+                        />
                     )
                 case 'Security':
                     return (

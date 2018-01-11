@@ -11,7 +11,6 @@ export default class Supervision extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            buttonSaveClassName: "win-button win-button-primary hidden",
             name: validateData(supervisionData["Supervision.name"]),
             phone: validateData(supervisionData["Supervision.phone"]),
             website: validateData(supervisionData["Supervision.website"]),
@@ -21,20 +20,13 @@ export default class Supervision extends Component {
     }
 
     saveChanges = () => {
-        this.setState({
-            buttonSaveClassName: "win-button win-button-primary hidden"
-        })
+        this.props.showNotification('Success', 'Helpdesk configuration saved')
     }
 
     changeState = (name, value) => {
         this.setState({
             [name]: value
         })
-        if (this.state.buttonSaveClassName === "win-button win-button-primary hidden") {
-            this.setState({
-                buttonSaveClassName: "win-button win-button-primary"
-            })
-        }
     }
 
     render() {
@@ -46,14 +38,14 @@ export default class Supervision extends Component {
 
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
-            <div className="list-content Profiles">
+                <div className="list-content Profiles">
 
-                <ConstructInputs data={supervision.helpDeskInformation} icon="supervisionIcon" title="Helpdesk Information" />
-                <button className={this.state.buttonSaveClassName} style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                    Save
-                </button>
-                <br />
-            </div>
+                    <ConstructInputs data={supervision.helpDeskInformation} icon="supervisionIcon" title="Helpdesk Information" />
+                    <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                        Save
+                    </button>
+                    <br />
+                </div>
             </ContentPane>
         )
     }
@@ -63,5 +55,6 @@ Supervision.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ]).isRequired
+    ]).isRequired,
+    showNotification: PropTypes.func.isRequired
 }
