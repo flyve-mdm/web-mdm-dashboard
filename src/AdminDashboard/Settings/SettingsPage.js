@@ -43,6 +43,7 @@ class SettingsPage extends Component {
                             passwordConfiguration={this.props.passwordConfiguration}
                             isLoading={this.props.isLoading}
                             changeLoading={this.props.changeLoading}
+                            showNotification={this.props.showNotification}
                         />
                     )
                 case 'Notifications':

@@ -53,6 +53,7 @@ class Security extends Component {
 
         if (isCorrect) {
             this.changeMode('')
+            this.props.showNotification('Success', 'new password saved')
         } else {
             this.setState({
                 forceValidation: true
@@ -228,7 +229,8 @@ Security.propTypes = {
     getPasswordConfiguration: PropTypes.func.isRequired,
     passwordConfiguration: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
-    changeLoading: PropTypes.func.isRequired
+    changeLoading: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
 
 export default Security
