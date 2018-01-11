@@ -23,7 +23,10 @@ class SettingsPage extends Component {
                     )
                 case 'Profiles':
                     return (
-                        <Profiles itemListPaneWidth={this.props.itemListPaneWidth}/>
+                        <Profiles 
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            showNotification={this.props.showNotification}
+                        />
                     )
                 case 'Supervision':
                     return (
