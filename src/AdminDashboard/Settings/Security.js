@@ -28,6 +28,13 @@ class Security extends Component {
         }
     }
 
+    closeSession  = async () => {
+        const isOK = await Confirmation.isOK(this.killSession)
+        if (isOK) {
+            
+        }
+    }
+
     savePassword = () => {
         this.setState({ forceValidation: true })
         console.log(this.state)
@@ -186,9 +193,15 @@ class Security extends Component {
                                 <div className="detail">Destroy the session identified by your session token</div>
                             </div>
                             <div className="controller">
-                                <button className="win-button">Logout</button>
+                                <button className="win-button" onClick={this.closeSession}>Logout</button>
                             </div>
                         </div>
+
+                        <Confirmation 
+                            title="Kill session"
+                            message="Are you sure you want to close your session?"
+                            reference={el => this.killSession = el} 
+                        />
         
                         <div className="listElement">
                             <div className="message">
