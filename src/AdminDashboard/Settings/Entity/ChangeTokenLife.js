@@ -19,6 +19,7 @@ class ChangeTokenLife extends Component {
     saveTokenLife = () => {
         this.props.saveValues('tokenLife', this.state.tokenLife)
         this.props.changeMode('')
+        this.props.showNotification('Success', 'token life changed')
     }
 
     render () {

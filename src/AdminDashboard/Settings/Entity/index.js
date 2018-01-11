@@ -49,6 +49,7 @@ class Entity extends Component {
                             changeMode={this.changeMode} 
                             tokenLife={this.state.tokenLife}
                             saveValues={this.saveValues}
+                            showNotification={this.props.showNotification}
                         />
                     </ContentPane>
                 )
