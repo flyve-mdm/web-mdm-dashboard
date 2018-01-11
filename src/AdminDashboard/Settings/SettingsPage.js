@@ -16,7 +16,10 @@ class SettingsPage extends Component {
             switch (selectedItemList.title) {
                 case 'Entity':
                     return (
-                        <Entity itemListPaneWidth={this.props.itemListPaneWidth}/>
+                        <Entity 
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            showNotification={this.props.showNotification}
+                        />
                     )
                 case 'Profiles':
                     return (
@@ -72,7 +75,8 @@ SettingsPage.propTypes = {
     getPasswordConfiguration: PropTypes.func.isRequired,
     passwordConfiguration: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
-    changeLoading: PropTypes.func.isRequired
+    changeLoading: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
 
 export default SettingsPage
