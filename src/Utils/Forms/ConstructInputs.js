@@ -8,7 +8,7 @@ import TextArea from './TextArea'
 class ConstructInputs extends Component {
 
     createListElement (elements, index) {
-        let style = this.props.icon ? {marginLeft: 30} : {}
+        let style = this.props.icon ? { marginLeft: 30, overflow: 'hidden' } : { overflow: 'hidden' }
         return (
             <div className="listElement" style={style} key={index}>
                 {
