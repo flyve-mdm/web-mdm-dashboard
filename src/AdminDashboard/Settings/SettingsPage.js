@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import EmptyMessage from '../../Utils/EmptyMessage'
 import PropTypes from 'prop-types'
-import Entity from './Entity'
+import Entity from './Entity/'
 import Profiles from './Profiles'
 import Supervision from './Supervision'
 import Security from './Security'
