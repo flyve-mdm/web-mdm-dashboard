@@ -13,6 +13,7 @@ import Applications from './Applications'
 import About from './About'
 import Settings from './Settings'
 import ToastNotifications from '../Utils/ToastNotifications'
+import NativeNotification from '../Utils/NativeNotification'
 
 const components = { Dashboard, Devices, Invitations, Fleets, Files, Applications, Users, Settings, About }
 
@@ -89,6 +90,16 @@ class BodyAdminDashboard extends Component {
         window.removeEventListener('resize', this.handleResize)
     }
 
+    showNotification = (title, body) => {
+        if (localStorage.getItem('showNotifications') === 'true') {
+            if (localStorage.getItem('notificationType') === "Toast") {
+                if(this.toastNotifications) this.toastNotifications.showNotification(title, body)
+            } else {
+                NativeNotification(title, body)
+            }
+        } 
+    }
+
     render() {
     
         let propsData = {
@@ -109,7 +120,7 @@ class BodyAdminDashboard extends Component {
             passwordConfiguration: this.props.passwordConfiguration,
             getPasswordConfiguration: this.props.actions.getPasswordConfiguration,
             changeLoading: this.props.actions.changeLoading,
-            showNotification: this.notifications ? this.notifications.showNotification : () => ''
+            showNotification: this.showNotification
         }
 
         if (this.props.router[this.props.index].label === 'Dashboard') {
@@ -132,7 +143,7 @@ class BodyAdminDashboard extends Component {
             this.props.children
         )
 
-        let pane = (
+        const pane = (
             <div>
                 {this.props.router.map((item, index) => {
                     let style = item.style
@@ -170,7 +181,7 @@ class BodyAdminDashboard extends Component {
         return (
             <div style={{height: '100%'}}>
 
-                <ToastNotifications ref={instance => { this.notifications = instance }}/>
+                <ToastNotifications ref={instance => { this.toastNotifications = instance }}/>
 
                 <ReactWinJS.SplitView
                     id={this.props.splitViewId}
