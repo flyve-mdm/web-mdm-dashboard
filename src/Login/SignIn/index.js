@@ -87,7 +87,8 @@ class SignIn extends Component {
                             width: 340
                         },
                         parametersToEvaluate: {
-                            isRequired: true
+                            isRequired: true,
+                            isEmail: true
                         },
                         forceValidation: this.state.forceValidation
                     },
