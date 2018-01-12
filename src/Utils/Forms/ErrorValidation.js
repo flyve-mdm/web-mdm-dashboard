@@ -32,6 +32,11 @@ class ErrorValidation extends Component {
             if (!myRe.test(value))
                 errorMessages.push( 'At least one special character is required' )
         }
+        if (parametersToEvaluate.isEmail) {
+            const myRe = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/g
+            if (!myRe.test(value))
+                errorMessages.push('It is not a valid email')
+        }
         if (parametersToEvaluate.isEqualTo) {
             if(value !== parametersToEvaluate.isEqualTo.value)
                 errorMessages.push( parametersToEvaluate.isEqualTo.message )
