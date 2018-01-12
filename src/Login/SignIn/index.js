@@ -31,6 +31,7 @@ class SignIn extends Component {
         super(props)
         this.props.actions.fetchData('configurationPassword')
         this.state = {
+            email: '',
             login: '',
             realName: '',
             password: '',
@@ -74,6 +75,22 @@ class SignIn extends Component {
         const dataArray = {
             personalInformation: [
                 [
+                    {
+                        label: "Email",
+                        type: "email",
+                        name: "email",
+                        value: this.state.email,
+                        placeholder: "Your email",
+                        function: this.changeState,
+                        disabled: false,
+                        style: {
+                            width: 340
+                        },
+                        parametersToEvaluate: {
+                            isRequired: true
+                        },
+                        forceValidation: this.state.forceValidation
+                    },
                     {
                         label: "User name",
                         type: "text",
