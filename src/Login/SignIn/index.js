@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { changeEmail, fetchData } from '../DuckController'
 import Loading from '../../Utils/Loading'
 import LoginContainer from '../LoginContainer'
-
+import Glpi from '../../AdminDashboard/Api/Glpi'
 
 function mapStateToProps(state, props) {
     return {
@@ -63,7 +63,34 @@ class SignIn extends Component {
         }
         
         if (isCorrect) {
-            this.props.history.push('/')
+            let data = {
+                "input": {
+                    "name": this.state.login,
+                    "realname": this.state.realName,
+                    "password": this.state.password,
+                    "password2": this.state.passwordConfirmation,
+                    "_useremails": [this.state.email]
+                }
+            }
+            console.log(data)
+            Glpi.initSession().then(([response, json]) => {
+                
+                const options = new Headers({
+                    "Content-Type": "application/json",
+                    "Session-Token": json.session_token
+                })
+                console.log(json.session_token)
+                Glpi.register(data, options).then(([response, json]) => {
+                    this.props.history.push('/')
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+
         } else {
             this.setState({
                 forceValidation: true
