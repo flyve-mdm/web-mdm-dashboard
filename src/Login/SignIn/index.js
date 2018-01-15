@@ -72,16 +72,16 @@ class SignIn extends Component {
                     "_useremails": [this.state.email]
                 }
             }
-            console.log(data)
+
             Glpi.initSession().then(([response, json]) => {
-                
-                const options = new Headers({
-                    "Content-Type": "application/json",
-                    "Session-Token": json.session_token
-                })
-                console.log(json.session_token)
-                Glpi.register(data, options).then(([response, json]) => {
-                    this.props.history.push('/')
+                Glpi.sessionToken(json.session_token)
+                Glpi.register(data).then(([response, json]) => {
+                    Glpi.killSession().then((response) => {
+                        this.props.history.push('/')
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
                 })
                 .catch((error) => {
                     console.log(error)
