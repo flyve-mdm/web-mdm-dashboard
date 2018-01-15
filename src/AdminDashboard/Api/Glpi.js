@@ -1,27 +1,47 @@
 import 'isomorphic-fetch'
-const URL = "https://dev.flyve.org/glpi/apirest.php/"
-// const URL = "http://glpis42.local/apirest.php/"
-const userToken = "zq6xxHdUwJfh1pnTcKi66sLvX978KKGVvOFK9LBS"
-const headersInitSession = new Headers({
-    "Content-Type": "application/json",
-    "Authorization": "user_token " + userToken
+const URL = "http://glpis42.local/apirest.php/"
+const userToken = "MIjQRsCzLeBxnhisscm88H7LAu7xOsiNT7Ibgugx"
+let sessionToken = ""
+let headers = new Headers({
+    "Content-Type": "application/json"
 })
 
 const glpi = {
+    sessionToken: (token) => {
+        sessionToken = token
+    },
     initSession: () => {
-        return fetch(URL+"initSession/", {
-            method: 'POST',
-            headers: headersInitSession
+        headers.append("Authorization", `user_token ${userToken}`)
+        return fetch(`${URL}initSession/`, {
+            method: 'GET',
+            headers: headers
         })
         .then(response => Promise.all([response, response.json()]))
     },
     register: (payload, options) => {
-        return fetch(URL+"User/", {
+        headers.append("Session-Token", sessionToken)
+        return fetch(`${URL}User/`, {
             method: 'POST',
-            headers: options,
+            headers: headers,
             body: JSON.stringify(payload)
         })
         .then(response => Promise.all([response, response.json()]))
+    }, 
+    killSession: () => {
+        if (!headers.has("Session-Token")) {
+            headers.append("Session-Token", sessionToken)
+        }
+        return fetch(`${URL}killSession/`, {
+            method: 'GET',
+            headers: headers
+        })
+        .then(response => {
+            if (response.status >= 200 && response.status < 300) {
+                return Promise.resolve(response)
+            } else {
+                return Promise.reject(new Error(response.statusText))
+            }
+        })
     }
 }
 
