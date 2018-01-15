@@ -42,6 +42,18 @@ const glpi = {
                 return Promise.reject(new Error(response.statusText))
             }
         })
+    },
+    login: (user, password) => {
+        if (!headers.has("Authorization")) {
+            headers.append("Authorization", `Basic  ${Buffer.from(`${user}:${password}`).toString('base64')}`)
+        } else {
+            headers.set("Authorization", `Basic  ${Buffer.from(`${user}:${password}`).toString('base64')}`)
+        }
+        return fetch(`${URL}initSession/`, {
+            method: 'GET',
+            headers: headers
+        })
+        .then(response => Promise.all([response, response.json()]))
     }
 }
 
