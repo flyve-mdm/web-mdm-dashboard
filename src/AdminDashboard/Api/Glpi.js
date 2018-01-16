@@ -53,6 +53,16 @@ const glpi = {
             headers: headers
         })
         .then(response => Promise.all([response, response.json()]))
+    },
+    getFullSession: () => {
+        if (!headers.has("Session-Token")) {
+            headers.append("Session-Token", sessionToken)
+        }
+        return fetch(`${URL}getFullSession/`, {
+            method: 'GET',
+            headers: headers
+        })
+            .then(response => Promise.all([response, response.json()]))
     }
 }
 
