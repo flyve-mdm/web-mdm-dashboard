@@ -11,8 +11,7 @@ const glpi = {
         sessionToken = token
     },
     initSession: () => {
-        headers.append("Authorization", `user_token ${userToken}`)
-        return fetch(`${URL}initSession/`, {
+        return fetch(`${URL}initSession?user_token=${userToken}`, {
             method: 'GET',
             headers: headers
         })
