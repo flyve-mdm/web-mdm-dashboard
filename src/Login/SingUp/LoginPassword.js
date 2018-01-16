@@ -17,7 +17,12 @@ class LoginPassword extends Component {
         e.preventDefault()
         Glpi.login(this.props.email, this.props.password).then(([response, json]) => {
             Glpi.sessionToken(json.session_token)
-            this.props.history.push(`/app`)
+            Glpi.getFullSession().then(([response, json]) => {
+                this.props.history.push(`/app`)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
         })
         .catch((error) => {
             console.log(error)
