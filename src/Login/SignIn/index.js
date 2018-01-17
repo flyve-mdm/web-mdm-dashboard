@@ -8,6 +8,7 @@ import { changeEmail, fetchData } from '../DuckController'
 import Loading from '../../Utils/Loading'
 import LoginContainer from '../LoginContainer'
 import Glpi from 'javascript-library-glpi'
+import config from '../../config.json'
 
 function mapStateToProps(state, props) {
     return {
@@ -71,8 +72,8 @@ class SignIn extends Component {
                 "_useremails": [this.state.email]
             }]
 
-            let glpi = new Glpi({ url: "http://glpis42.local/apirest.php" })
-            glpi.registerUser("MIjQRsCzLeBxnhisscm88H7LAu7xOsiNT7Ibgugx", data)
+            let glpi = new Glpi({ url: config.URL_GLPI_API })
+            glpi.registerUser(config.USER_TOKEN, data)
                 .then(() => {
                     this.props.history.push('/')
                 })

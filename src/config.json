@@ -1,3 +1,5 @@
 {
-    "self_registration": true
+    "self_registration": true,
+    "URL_GLPI_API": "http://glpis42.local/apirest.php",
+    "USER_TOKEN": "MIjQRsCzLeBxnhisscm88H7LAu7xOsiNT7Ibgugx"
 }
