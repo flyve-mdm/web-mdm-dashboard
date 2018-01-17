@@ -26,6 +26,7 @@
     "history": "^4.7.2",
     "html-webpack-plugin": "2.29.0",
     "isomorphic-fetch": "^2.2.1",
+    "javascript-library-glpi": "https://github.com/flyve-mdm/javascript-library-glpi",
     "jest": "22.1.2",
     "leaflet": "^1.2.0",
     "object-assign": "4.1.1",
