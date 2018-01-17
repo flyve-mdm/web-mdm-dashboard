@@ -26,7 +26,7 @@
     "history": "^4.7.2",
     "html-webpack-plugin": "2.29.0",
     "isomorphic-fetch": "^2.2.1",
-    "jest": "22.1.0",
+    "jest": "22.1.2",
     "leaflet": "^1.2.0",
     "object-assign": "4.1.1",
     "pluralize": "^7.0.0",
