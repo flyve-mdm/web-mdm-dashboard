@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { changeEmail, fetchData } from '../DuckController'
 import Loading from '../../Utils/Loading'
 import LoginContainer from '../LoginContainer'
-import Glpi from '../../AdminDashboard/Api/Glpi'
+import Glpi from 'javascript-library-glpi'
 
 function mapStateToProps(state, props) {
     return {
@@ -63,33 +63,22 @@ class SignIn extends Component {
         }
         
         if (isCorrect) {
-            let data = {
-                "input": {
-                    "name": this.state.login,
-                    "realname": this.state.realName,
-                    "password": this.state.password,
-                    "password2": this.state.passwordConfirmation,
-                    "_useremails": [this.state.email]
-                }
-            }
+            let data = [{
+                "name": this.state.login,
+                "realname": this.state.realName,
+                "password": this.state.password,
+                "password2": this.state.passwordConfirmation,
+                "_useremails": [this.state.email]
+            }]
 
-            Glpi.initSession().then(([response, json]) => {
-                Glpi.sessionToken(json.session_token)
-                Glpi.register(data).then(([response, json]) => {
-                    Glpi.killSession().then((response) => {
-                        this.props.history.push('/')
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    })
+            let glpi = new Glpi({ url: "http://glpis42.local/apirest.php" })
+            glpi.registerUser("MIjQRsCzLeBxnhisscm88H7LAu7xOsiNT7Ibgugx", data)
+                .then(() => {
+                    this.props.history.push('/')
                 })
                 .catch((error) => {
-                    console.log(error)
+                    console.log(`registerUser ${error}`)
                 })
-            })
-            .catch((error) => {
-                console.log(error)
-            })
 
         } else {
             this.setState({
