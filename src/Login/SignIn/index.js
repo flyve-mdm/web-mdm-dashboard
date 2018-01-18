@@ -4,11 +4,12 @@ import ConstructInputs from '../../Utils/Forms'
 import ErrorValidation from '../../Utils/Forms/ErrorValidation'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { changeEmail, fetchData } from '../DuckController'
+import { changeEmail, fetchData, changeNotificationMessage } from '../DuckController'
 import Loading from '../../Utils/Loading'
 import LoginContainer from '../LoginContainer'
 import Glpi from 'javascript-library-glpi'
 import config from '../../config.json'
+import ToastNotifications from '../../Utils/ToastNotifications'
 
 function mapStateToProps(state, props) {
     return {
@@ -21,7 +22,8 @@ function mapStateToProps(state, props) {
 function mapDispatchToProps(dispatch) {
     const actions = {
         changeEmail: bindActionCreators(changeEmail, dispatch),
-        fetchData: bindActionCreators(fetchData, dispatch)
+        fetchData: bindActionCreators(fetchData, dispatch),
+        changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
     }
     return { actions }
 }
@@ -37,7 +39,8 @@ class SignIn extends Component {
             realName: '',
             password: '',
             passwordConfirmation: '',
-            forceValidation: false
+            forceValidation: false,
+            isLoading: false,
         }
     }
 
@@ -47,8 +50,14 @@ class SignIn extends Component {
         })
     }
 
+    showNotification = (title, body) => {
+        if (this.toastNotifications) this.toastNotifications.showNotification(title, body)
+        this.props.actions.changeNotificationMessage(undefined)
+    }
+
     registerUser = (e) => {
         e.preventDefault()
+        
         const user = this.buildDataArray()
         let isCorrect = true
 
@@ -64,22 +73,31 @@ class SignIn extends Component {
         }
         
         if (isCorrect) {
-            let data = [{
+            let data = {
                 "name": this.state.login,
                 "realname": this.state.realName,
                 "password": this.state.password,
                 "password2": this.state.passwordConfirmation,
-                "_useremails": [this.state.email]
-            }]
+                "_useremails": [this.state.email],
+                "_profiles_id": 3
+            }
 
             let glpi = new Glpi({ url: config.URL_GLPI_API })
             glpi.registerUser(config.USER_TOKEN, data)
                 .then(() => {
+                    this.props.actions.changeNotificationMessage({ title: "Flyve Dashboard", body: "successfully registered user" })
                     this.props.history.push('/')
                 })
                 .catch((error) => {
-                    console.log(`registerUser ${error}`)
+                    this.setState({
+                        isLoading: false
+                    })
+                    this.showNotification(error[0], error[1])
                 })
+            
+            this.setState({
+                isLoading: true
+            })
 
         } else {
             this.setState({
@@ -202,11 +220,12 @@ class SignIn extends Component {
         const user = this.buildDataArray()
 
         let renderComponent 
-        if (this.props.isLoading) {
+        if (this.props.isLoading || this.state.isLoading) {
             renderComponent = <Loading message="Loading..."/>
         } else {
             renderComponent = (
-                <LoginContainer centerContent={false} >
+                <LoginContainer centerContent={false}>
+                    <ToastNotifications ref={instance => { this.toastNotifications = instance }} />
                     <h2 style={{
                         textAlign: 'center'
                     }}>
