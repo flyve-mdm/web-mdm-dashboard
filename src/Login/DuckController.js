@@ -7,7 +7,8 @@ const INITIAL_STATE = {
     isError: false,
     endpoint: null,
     selfRegistration: config.self_registration,
-    configurationPassword: {}
+    configurationPassword: {},
+    notificationMessage: undefined
 }
 
 // Constants
@@ -16,6 +17,7 @@ const CHANGE_EMAIL = 'flyve-mdm-web-ui/Login/changeEmail'
 const FAILURE = 'flyve-mdm-web-ui/Login/failure'
 const CHANGE_ENDPOINT = 'flyve-mdm-web-ui/Login/changeEndpoint'
 const FETCHING_DATA_SUCCESS = 'flyve-mdm-web-ui/Login/fetchingDataSuccess'
+const CHANGE_NOTIFICATION_MESSAGE = 'flyve-mdm-web-ui/Login/changeNotificationMessage'
 
 // Reducers
 export default function reducer(state = INITIAL_STATE, action) {
@@ -46,6 +48,11 @@ export default function reducer(state = INITIAL_STATE, action) {
             ...state,
             [action.name]: action.newData             
          }
+        case CHANGE_NOTIFICATION_MESSAGE:
+        return {
+            ...state,
+            notificationMessage: action.newNotification
+        }
         
         default: return state
     }
@@ -124,5 +131,11 @@ export function recoverPassword(user) {
             dispatch(failure(error))
             dispatch(changeLoading(false))
         })
+    }
+}
+export function changeNotificationMessage(newNotification) {
+    return {
+        type: CHANGE_NOTIFICATION_MESSAGE,
+        newNotification
     }
 }
