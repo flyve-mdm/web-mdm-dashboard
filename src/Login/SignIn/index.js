@@ -97,7 +97,7 @@ class SignIn extends Component {
                         type: "email",
                         name: "email",
                         value: this.state.email,
-                        placeholder: "Your email",
+                        placeholder: "Email",
                         function: this.changeState,
                         disabled: false,
                         style: {
@@ -110,11 +110,11 @@ class SignIn extends Component {
                         forceValidation: this.state.forceValidation
                     },
                     {
-                        label: "User name",
+                        label: "Username",
                         type: "text",
                         name: "login",
                         value: this.state.login,
-                        placeholder: "Your user name",
+                        placeholder: "Username",
                         function: this.changeState,
                         disabled: false,
                         style: {
@@ -126,11 +126,11 @@ class SignIn extends Component {
                         forceValidation: this.state.forceValidation
                     },
                     {
-                        label: "Real name",
+                        label: "Full name",
                         type: "text",
                         name: "realName",
                         value: this.state.realName,
-                        placeholder: "Your name",
+                        placeholder: "Full name",
                         function: this.changeState,
                         disabled: false,
                         style: {
