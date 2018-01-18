@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
-import { changeEmail } from '../DuckController'
+import { changeEmail, changeNotificationMessage } from '../DuckController'
 import { connect } from 'react-redux'
 import LoginContainer from '../LoginContainer'
 import LoginEmail from './LoginEmail'
 import LoginPassword from './LoginPassword'
+import ToastNotifications from '../../Utils/ToastNotifications'
 
 function mapStateToProps(state, props) {
     return {
         email: state.Login.email,
-        selfRegistration: state.Login.selfRegistration
+        selfRegistration: state.Login.selfRegistration,
+        notificationMessage: state.Login.notificationMessage
     }
 }
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        changeEmail: bindActionCreators(changeEmail, dispatch)
+        changeEmail: bindActionCreators(changeEmail, dispatch),
+        changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
     }
     return { actions }
 }
@@ -30,6 +33,17 @@ class Login extends Component {
             password: '',
             phase: 1
         }
+    }
+
+    componentDidMount() {
+        if (this.props.notificationMessage !== undefined) {
+            this.showNotification(this.props.notificationMessage.title, this.props.notificationMessage.body)
+        }
+    }
+
+    showNotification = (title, body) => {
+        if (this.toastNotifications) this.toastNotifications.showNotification(title, body)
+        this.props.actions.changeNotificationMessage(undefined)
     }
 
     changeInput = (e) => {
@@ -67,6 +81,7 @@ class Login extends Component {
         }
         return (
             <LoginContainer>
+                <ToastNotifications ref={instance => { this.toastNotifications = instance }} />
                 {form}
             </LoginContainer>
         )
