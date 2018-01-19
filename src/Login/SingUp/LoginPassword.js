@@ -18,6 +18,7 @@ class LoginPassword extends Component {
         e.preventDefault()
         let glpi = new Glpi({ url: config.URL_GLPI_API })
         glpi.login(this.props.username, this.props.password).then((response) => {
+            localStorage.setItem('sessionToken', response.sessionToken)
             this.props.history.push(`/app`)
         })
         .catch((error) => {
