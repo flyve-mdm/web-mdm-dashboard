@@ -58,7 +58,9 @@ class LoginPassword extends Component {
                         Back 
                     </button>
 
-                    <button type="submit" className="win-button win-button-primary">Sing in</button>
+                    <button type="submit" className="win-button win-button-primary">
+                        Sign in
+                    </button>
                 </form>
                 <Link to="/forgotPassword">Forgot my password</Link>
             </div>
