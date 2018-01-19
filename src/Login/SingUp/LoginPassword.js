@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import Glpi from '../../AdminDashboard/Api/Glpi'
+import Glpi from 'javascript-library-glpi'
+import config from '../../config.json'
 
 class LoginPassword extends Component {
     
@@ -15,14 +16,9 @@ class LoginPassword extends Component {
 
     LogInServer = (e) => {
         e.preventDefault()
-        Glpi.login(this.props.username, this.props.password).then(([response, json]) => {
-            Glpi.sessionToken(json.session_token)
-            Glpi.getFullSession().then(([response, json]) => {
-                this.props.history.push(`/app`)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+        let glpi = new Glpi({ url: config.URL_GLPI_API })
+        glpi.login(this.props.username, this.props.password).then((response) => {
+            this.props.history.push(`/app`)
         })
         .catch((error) => {
             console.log(error)
