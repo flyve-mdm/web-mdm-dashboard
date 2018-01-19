@@ -27,7 +27,7 @@
     "html-webpack-plugin": "2.29.0",
     "isomorphic-fetch": "^2.2.1",
     "javascript-library-glpi": "https://github.com/flyve-mdm/javascript-library-glpi",
-    "jest": "22.1.3",
+    "jest": "22.1.4",
     "leaflet": "^1.2.0",
     "object-assign": "4.1.1",
     "pluralize": "^7.0.0",
