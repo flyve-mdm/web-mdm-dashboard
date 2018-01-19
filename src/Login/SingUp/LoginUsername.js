@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-class LoginEmail extends Component {
+class LoginUsername extends Component {
 
     constructor (props) {
         super(props)
@@ -15,16 +15,16 @@ class LoginEmail extends Component {
     LogInServer = (e) => {
         e.preventDefault()
 
-        let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        if (re.test(this.props.email)) {
-            this.props.changeEmail(this.props.email)
+        // let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        if (this.props.username) {
+            this.props.changeUsername(this.props.username)
             this.props.changePhase(2)
         } else {
             this.setState({
                 classInput: 'win-textbox color-line-alert',
                 errorMessage: (
                     <p className="color-type-alert"> 
-                        <span> The email entered is not registered. Try a different account or </span> 
+                        <span> The username entered is not registered. Try a different account or </span> 
                         <a>create an new</a>
                     </p>
                 )
@@ -47,11 +47,11 @@ class LoginEmail extends Component {
 
                 <form onSubmit={this.LogInServer}>
                     <input 
-                        type="email" 
-                        name="email"
+                        type="text" 
+                        name="username"
                         className={this.state.classInput} 
-                        placeholder="Your Email Registered"
-                        value={this.props.email} 
+                        placeholder="Username"
+                        value={this.props.username} 
                         onChange={this.props.changeInput} 
                         required={true}
                     />
@@ -69,12 +69,12 @@ class LoginEmail extends Component {
     }
 }
 
-LoginEmail.propTypes = {
-    email: PropTypes.string.isRequired,
+LoginUsername.propTypes = {
+    username: PropTypes.string.isRequired,
     changeInput: PropTypes.func.isRequired,
     changePhase: PropTypes.func.isRequired,
-    changeEmail: PropTypes.func.isRequired,
+    changeUsername: PropTypes.func.isRequired,
     selfRegistration: PropTypes.bool.isRequired
 }
 
-export default LoginEmail
+export default LoginUsername
