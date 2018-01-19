@@ -85,7 +85,7 @@ class SignIn extends Component {
             let glpi = new Glpi({ url: config.URL_GLPI_API })
             glpi.registerUser(config.USER_TOKEN, data)
                 .then(() => {
-                    this.props.actions.changeNotificationMessage({ title: "Flyve Dashboard", body: "successfully registered user" })
+                    this.props.actions.changeNotificationMessage({ title: config.APP_NAME, body: "successfully registered user" })
                     this.props.history.push('/')
                 })
                 .catch((error) => {
