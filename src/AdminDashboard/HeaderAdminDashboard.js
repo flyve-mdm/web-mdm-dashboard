@@ -8,6 +8,8 @@ import IconItemList from './IconItemList'
 import GetMode from '../Utils/GetMode'
 import currentUser from './data/currentUser.json'
 import Confirmation from '../Utils/Confirmation'
+import Glpi from 'javascript-library-glpi'
+import config from '../config.json'
 
 function mapStateToProps(state, props) {
   return {
@@ -64,8 +66,15 @@ class HeaderAdminDashboard extends Component {
 
     logout = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
-        localStorage.removeItem('sessionToken')
-        if(isOK) this.props.history.push('/')
+        let glpi = new Glpi({ url: config.URL_GLPI_API })
+        glpi.sessionToken = localStorage.getItem('sessionToken')
+        glpi.killSession().then((response) => {
+            localStorage.removeItem('sessionToken')
+            if (isOK) this.props.history.push('/')
+        }).catch((error) => {
+            localStorage.removeItem('sessionToken')
+            if (isOK) this.props.history.push('/')
+        })
     }
 
     render () {
