@@ -41,6 +41,12 @@ class Login extends Component {
         }
     }
 
+    componentDidUpdate() {
+        if (this.props.notificationMessage !== undefined) {
+            this.showNotification(this.props.notificationMessage.title, this.props.notificationMessage.body)
+        }
+    }
+
     showNotification = (title, body) => {
         if (this.toastNotifications) this.toastNotifications.showNotification(title, body)
         this.props.actions.changeNotificationMessage(undefined)
@@ -77,6 +83,7 @@ class Login extends Component {
                 changeInput={this.changeInput}
                 changePhase={this.changePhase}
                 history={this.props.history}
+                changeNotificationMessage={this.props.actions.changeNotificationMessage}
             />
         }
         return (

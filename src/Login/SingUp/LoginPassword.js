@@ -22,6 +22,7 @@ class LoginPassword extends Component {
         })
         .catch((error) => {
             console.log(error)
+            this.props.changeNotificationMessage({ title: "Flyve Dashboard", body: `${error[0]}\n${error[1]}` })
         })
     }
 
@@ -69,7 +70,8 @@ LoginPassword.propTypes = {
     password: PropTypes.string.isRequired,
     changeInput: PropTypes.func.isRequired,
     changePhase: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    changeNotificationMessage: PropTypes.func.isRequired
 }
 
 export default LoginPassword
