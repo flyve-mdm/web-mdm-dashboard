@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
-import { changeEmail, changeNotificationMessage } from '../DuckController'
+import { changeUsername, changeNotificationMessage } from '../DuckController'
 import { connect } from 'react-redux'
 import LoginContainer from '../LoginContainer'
-import LoginEmail from './LoginEmail'
+import LoginUsername from './LoginUsername'
 import LoginPassword from './LoginPassword'
 import ToastNotifications from '../../Utils/ToastNotifications'
 
 function mapStateToProps(state, props) {
     return {
-        email: state.Login.email,
+        username: state.Login.username,
         selfRegistration: state.Login.selfRegistration,
         notificationMessage: state.Login.notificationMessage
     }
@@ -18,7 +18,7 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        changeEmail: bindActionCreators(changeEmail, dispatch),
+        changeUsername: bindActionCreators(changeUsername, dispatch),
         changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
     }
     return { actions }
@@ -29,7 +29,7 @@ class Login extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            email: this.props.email,
+            username: this.props.username,
             password: '',
             phase: 1
         }
@@ -62,17 +62,17 @@ class Login extends Component {
         let form
         if (this.state.phase === 1) {
             form = 
-                <LoginEmail 
-                    email={this.state.email} 
+                <LoginUsername 
+                    username={this.state.username} 
                     changeInput={this.changeInput}
                     changePhase={this.changePhase}
-                    changeEmail={this.props.actions.changeEmail}
+                    changeUsername={this.props.actions.changeUsername}
                     selfRegistration={this.props.selfRegistration}
                 />    
         } else {
             form = 
             <LoginPassword 
-                email={this.state.email} 
+                username={this.state.username} 
                 password={this.state.password}
                 changeInput={this.changeInput}
                 changePhase={this.changePhase}
@@ -89,7 +89,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-    email: PropTypes.string.isRequired,    
+    username: PropTypes.string.isRequired,    
     history: PropTypes.object.isRequired,
     selfRegistration: PropTypes.bool.isRequired
 }

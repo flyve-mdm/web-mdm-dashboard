@@ -2,6 +2,7 @@ import * as api from '../AdminDashboard/Api'
 import config from '../config.json'
 
 const INITIAL_STATE = {
+    username: '',
     email: '',
     isLoading: true,
     isError: false,
@@ -13,6 +14,7 @@ const INITIAL_STATE = {
 
 // Constants
 const CHANGE_LOADING = 'flyve-mdm-web-ui/Login/changeLoading'
+const CHANGE_USERNAME = 'flyve-mdm-web-ui/Login/changeUsername'
 const CHANGE_EMAIL = 'flyve-mdm-web-ui/Login/changeEmail'
 const FAILURE = 'flyve-mdm-web-ui/Login/failure'
 const CHANGE_ENDPOINT = 'flyve-mdm-web-ui/Login/changeEndpoint'
@@ -28,10 +30,15 @@ export default function reducer(state = INITIAL_STATE, action) {
                ...state,
                isLoading: action.isLoading
             }
-        case CHANGE_EMAIL:
+        case CHANGE_USERNAME:
             return {
                ...state,
-               email: action.newEmail
+               username: action.newUsername
+            }
+        case CHANGE_EMAIL:
+            return {
+                ...state,
+                email: action.newEmail
             }
         case CHANGE_ENDPOINT:
             return {
@@ -65,7 +72,13 @@ export function changeLoading (isLoading) {
         isLoading
     }
 }
-export function changeEmail (newEmail) {
+export function changeUsername (newUsername) {
+    return {
+        type: CHANGE_USERNAME,
+        newUsername
+    }
+}
+export function changeEmail(newEmail) {
     return {
         type: CHANGE_EMAIL,
         newEmail

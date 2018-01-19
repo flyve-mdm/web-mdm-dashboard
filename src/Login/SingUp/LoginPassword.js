@@ -15,7 +15,7 @@ class LoginPassword extends Component {
 
     LogInServer = (e) => {
         e.preventDefault()
-        Glpi.login(this.props.email, this.props.password).then(([response, json]) => {
+        Glpi.login(this.props.username, this.props.password).then(([response, json]) => {
             Glpi.sessionToken(json.session_token)
             Glpi.getFullSession().then(([response, json]) => {
                 this.props.history.push(`/app`)
@@ -36,7 +36,7 @@ class LoginPassword extends Component {
                 <p>
                     Enter the password for
                     <br/>
-                    {this.props.email}
+                    {this.props.username}
                     <br/>
                     {this.state.errorMessage}
                 </p>	
@@ -67,7 +67,7 @@ class LoginPassword extends Component {
 }
 
 LoginPassword.propTypes = {
-    email: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     changeInput: PropTypes.func.isRequired,
     changePhase: PropTypes.func.isRequired,
