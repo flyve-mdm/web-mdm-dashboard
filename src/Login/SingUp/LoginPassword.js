@@ -22,7 +22,7 @@ class LoginPassword extends Component {
         })
         .catch((error) => {
             console.log(error)
-            this.props.changeNotificationMessage({ title: "Flyve Dashboard", body: `${error[0]}\n${error[1]}` })
+            this.props.changeNotificationMessage({ title: config.APP_NAME, body: `${error[0]}\n${error[1]}` })
         })
     }
 
