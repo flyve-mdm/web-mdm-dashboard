@@ -64,6 +64,7 @@ class HeaderAdminDashboard extends Component {
 
     logout = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
+        localStorage.removeItem('sessionToken')
         if(isOK) this.props.history.push('/')
     }
 
