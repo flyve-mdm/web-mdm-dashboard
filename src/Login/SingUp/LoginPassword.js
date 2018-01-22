@@ -37,6 +37,7 @@ class LoginPassword extends Component {
             }
             localStorage.setItem('sessionToken', response.sessionToken)
             localStorage.setItem('currentUser', JSON.stringify(user))
+            this.props.changeCurrentUser(user)
             this.props.history.push(`/app`)
         })
         .catch((error) => {
