@@ -71,11 +71,11 @@ class HeaderAdminDashboard extends Component {
         const isOK = await Confirmation.isOK(this.contentDialog)
         let glpi = new Glpi({ url: config.URL_GLPI_API })
         glpi.sessionToken = localStorage.getItem('sessionToken')
+        localStorage.removeItem('sessionToken')
+        localStorage.removeItem('currentUser')
         glpi.killSession().then((response) => {
-            localStorage.removeItem('sessionToken')
             if (isOK) this.props.history.push('/')
         }).catch((error) => {
-            localStorage.removeItem('sessionToken')
             if (isOK) this.props.history.push('/')
         })
     }
