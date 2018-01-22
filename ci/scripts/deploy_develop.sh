@@ -20,3 +20,8 @@ git add coverage -f
 git commit -m "ci(docs): generate **coverage** for version ${GIT_TAG}"
 # Copy code coverage to gh-pages branch
 yarn gh-pages-coverage -- -m "ci(docs): generate code coverage for version ${GIT_TAG}"
+
+if [[ $TRAVIS_COMMIT_MESSAGE != *"ci(stats): generate stats.json for version"* ]]; then
+    git add reports
+    yarn gh-pages-reports -- -m "ci(stats): generate stats.json for version ${GIT_TAG}"
+fi

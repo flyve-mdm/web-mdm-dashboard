@@ -13,3 +13,8 @@ if [[ $TRAVIS_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version
     # Create release with conventional-github-releaser
     yarn conventional-github-releaser -- -p angular -t $GITHUB_TOKEN
 fi
+
+if [[ $TRAVIS_COMMIT_MESSAGE != *"ci(stats): generate stats.json for version"* ]]; then
+    git add reports
+    yarn gh-pages-reports -- -m "ci(stats): generate stats.json for version ${GIT_TAG}"
+fi

@@ -111,6 +111,11 @@ function build(previousFileSizes) {
         return reject(err);
       }
 
+      // create reports directory 
+      if (!fs.existsSync('./reports')){
+          fs.mkdirSync('./reports');
+      }
+
       // write stats.json
       fs.writeFile('./reports/stats.json', JSON.stringify(stats.toJson()));
 
