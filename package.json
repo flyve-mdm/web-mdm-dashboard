@@ -73,6 +73,7 @@
     "coverage": "node scripts/test.js --env=jsdom --coverage",
     "gh-pages-docs": "gh-pages --dist docs --dest docs",
     "gh-pages-coverage": "gh-pages --dist coverage --dest coverage",
+    "gh-pages-reports": "gh-pages --dist reports --dest reports",
     "gh-pages-changelog": "gh-pages --dist ./ --src '{./C*.md,CHANGELOG.md}' --dest ./ --add",
     "fech-data": "",
     "prestart": "json-server ./config/generateJsonData.js --port 3004 --delay 1000 &"
