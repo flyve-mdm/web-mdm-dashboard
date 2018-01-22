@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
-import { changeUsername, changeNotificationMessage } from '../DuckController'
+import { changeUsername, changeNotificationMessage, changeCurrentUser } from '../DuckController'
 import { connect } from 'react-redux'
 import LoginContainer from '../LoginContainer'
 import LoginUsername from './LoginUsername'
@@ -20,6 +20,7 @@ function mapDispatchToProps(dispatch) {
     const actions = {
         changeUsername: bindActionCreators(changeUsername, dispatch),
         changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
+        changeCurrentUser: bindActionCreators(changeCurrentUser, dispatch),
     }
     return { actions }
 }
@@ -82,6 +83,7 @@ class Login extends Component {
                 password={this.state.password}
                 changeInput={this.changeInput}
                 changePhase={this.changePhase}
+                changeCurrentUser={this.props.actions.changeCurrentUser}
                 history={this.props.history}
                 changeNotificationMessage={this.props.actions.changeNotificationMessage}
             />
