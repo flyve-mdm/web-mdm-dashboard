@@ -14,6 +14,10 @@ class LoginPassword extends Component {
         }
     }
 
+    componentDidMount() {
+        this.passwordInput.focus()
+    }
+
     LogInServer = (e) => {
         e.preventDefault()
         let glpi = new Glpi({ url: config.URL_GLPI_API })
@@ -22,7 +26,6 @@ class LoginPassword extends Component {
             this.props.history.push(`/app`)
         })
         .catch((error) => {
-            console.log(error)
             this.props.changeNotificationMessage({ title: config.APP_NAME, body: `${error[0]}\n${error[1]}` })
         })
     }
@@ -42,6 +45,7 @@ class LoginPassword extends Component {
                     <input 
                         type="password" 
                         name="password" 
+                        ref={(input) => { this.passwordInput = input; }} 
                         className={this.state.classInput}
                         placeholder="Password"
                         value={this.props.password} 

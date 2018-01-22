@@ -11,11 +11,13 @@ class LoginUsername extends Component {
             errorMessage: ''
         }
     }
-        
+
+    componentDidMount() {
+        this.usernameInput.focus()
+    }
+
     LogInServer = (e) => {
         e.preventDefault()
-
-        // let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         if (this.props.username) {
             this.props.changeUsername(this.props.username)
             this.props.changePhase(2)
@@ -49,6 +51,7 @@ class LoginUsername extends Component {
                     <input 
                         type="text" 
                         name="username"
+                        ref={(input) => { this.usernameInput = input; }} 
                         className={this.state.classInput} 
                         placeholder="Username"
                         value={this.props.username} 
