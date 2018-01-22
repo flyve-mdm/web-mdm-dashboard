@@ -110,6 +110,10 @@ function build(previousFileSizes) {
       if (err) {
         return reject(err);
       }
+
+      // write stats.json
+      fs.writeFile('./reports/stats.json', JSON.stringify(stats.toJson()));
+
       const messages = formatWebpackMessages(stats.toJson({}, true));
       if (messages.errors.length) {
         // Only keep the first error. Others are often indicative
