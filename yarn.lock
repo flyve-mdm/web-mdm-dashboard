@@ -4611,7 +4611,7 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
-"javascript-library-glpi@https://github.com/flyve-mdm/javascript-library-glpi":
+"javascript-library-glpi@https://github.com/flyve-mdm/javascript-library-glpi#develop":
   version "0.1.0"
   resolved "https://github.com/flyve-mdm/javascript-library-glpi#cbd88eb1c6465e7961b1aff4695f2d30fec53d05"
 
@@ -6831,9 +6831,9 @@ react-router@^4.2.0:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-"react-winjs@git+https://git@github.com/TECLIB/react-winjs.git":
+"react-winjs@https://github.com/TECLIB/react-winjs#develop":
   version "2.5.0"
-  resolved "git+https://git@github.com/TECLIB/react-winjs.git#e8ba3b844d76a851b79872f12e50b874e72b690b"
+  resolved "https://github.com/TECLIB/react-winjs#e8ba3b844d76a851b79872f12e50b874e72b690b"
 
 react@^16.0.0:
   version "16.2.0"
