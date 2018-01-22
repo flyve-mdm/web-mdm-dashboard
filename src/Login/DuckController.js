@@ -1,6 +1,7 @@
 import * as api from '../AdminDashboard/Api'
 import config from '../config.json'
 
+const user = localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : {}
 const INITIAL_STATE = {
     username: '',
     email: '',
@@ -9,7 +10,8 @@ const INITIAL_STATE = {
     endpoint: null,
     selfRegistration: config.self_registration,
     configurationPassword: {},
-    notificationMessage: undefined
+    notificationMessage: undefined,
+    currentUser: user
 }
 
 // Constants
@@ -20,6 +22,7 @@ const FAILURE = 'flyve-mdm-web-ui/Login/failure'
 const CHANGE_ENDPOINT = 'flyve-mdm-web-ui/Login/changeEndpoint'
 const FETCHING_DATA_SUCCESS = 'flyve-mdm-web-ui/Login/fetchingDataSuccess'
 const CHANGE_NOTIFICATION_MESSAGE = 'flyve-mdm-web-ui/Login/changeNotificationMessage'
+const CHANGE_CURRENT_USER = 'flyve-mdm-web-ui/Login/changeCurrentUser'
 
 // Reducers
 export default function reducer(state = INITIAL_STATE, action) {
@@ -59,6 +62,11 @@ export default function reducer(state = INITIAL_STATE, action) {
         return {
             ...state,
             notificationMessage: action.newNotification
+        }
+        case CHANGE_CURRENT_USER:
+        return {
+            ...state,
+            currentUser: action.newCurrentUser
         }
         
         default: return state
@@ -150,5 +158,11 @@ export function changeNotificationMessage(newNotification) {
     return {
         type: CHANGE_NOTIFICATION_MESSAGE,
         newNotification
+    }
+}
+export function changeCurrentUser(newCurrentUser) {
+    return {
+        type: CHANGE_CURRENT_USER,
+        newCurrentUser
     }
 }

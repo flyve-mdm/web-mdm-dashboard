@@ -29,10 +29,18 @@ class LoginPassword extends Component {
         })
         let glpi = new Glpi({ url: config.URL_GLPI_API })
         glpi.login(this.props.username, this.props.password).then((response) => {
+            const user = {
+                id: response.userData.id,
+                name: response.userData.name,
+                email: response.userEmails[0].email,
+                picture: null
+            }
             localStorage.setItem('sessionToken', response.sessionToken)
+            localStorage.setItem('currentUser', JSON.stringify(user))
             this.props.history.push(`/app`)
         })
         .catch((error) => {
+            console.log(error)
             this.setState({
                 isLoading: false
             })
@@ -97,7 +105,7 @@ LoginPassword.propTypes = {
     password: PropTypes.string.isRequired,
     changeInput: PropTypes.func.isRequired,
     changePhase: PropTypes.func.isRequired,
-    changeLoading: PropTypes.func.isRequired,
+    changeCurrentUser: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     changeNotificationMessage: PropTypes.func.isRequired
 }

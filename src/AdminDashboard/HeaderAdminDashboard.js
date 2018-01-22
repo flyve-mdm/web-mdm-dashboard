@@ -4,6 +4,7 @@ import ReactWinJS from 'react-winjs'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { handleTogglePane, changeMode, changeLocation, handleBack, changeActionList } from './DuckController'
+import { changeCurrentUser } from '../Login/DuckController'
 import IconItemList from './IconItemList'
 import GetMode from '../Utils/GetMode'
 import currentUser from './data/currentUser.json'
@@ -12,13 +13,14 @@ import Glpi from 'javascript-library-glpi'
 import config from '../config.json'
 
 function mapStateToProps(state, props) {
-  return {
-    splitViewId: state.AdminDashboard.splitViewId,
-    paneOpened: state.AdminDashboard.paneOpened,
-    mode: state.AdminDashboard.mode,
-    location: state.AdminDashboard.location,
-    actionList: state.AdminDashboard.actionList
-  }
+    return {
+        splitViewId: state.AdminDashboard.splitViewId,
+        paneOpened: state.AdminDashboard.paneOpened,
+        mode: state.AdminDashboard.mode,
+        location: state.AdminDashboard.location,
+        actionList: state.AdminDashboard.actionList,
+        currentUser: state.Login.currentUser,
+    }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -27,7 +29,8 @@ function mapDispatchToProps(dispatch) {
     changeMode: bindActionCreators(changeMode, dispatch),
     changeLocation: bindActionCreators(changeLocation, dispatch),
     handleBack: bindActionCreators(handleBack, dispatch),
-    changeActionList: bindActionCreators(changeActionList, dispatch)
+    changeActionList: bindActionCreators(changeActionList, dispatch),
+    changeCurrentUser: bindActionCreators(changeCurrentUser, dispatch),
   }
   return { actions }
 }
@@ -106,9 +109,9 @@ class HeaderAdminDashboard extends Component {
                                 <IconItemList backgroundColor="#158784" size={35} image={currentUser['User.picture']} />
                             </div>
                             <div style={{display: 'inline-block', marginRight: 20, lineHeight: '13px', verticalAlign: 'super'}}>
-                                { currentUser['User.name'] }<br/>
+                                {this.props.currentUser.name }<br/>
                                 <span className="detail">
-                                    { currentUser['User.UserEmail.email'][0] }
+                                    {this.props.currentUser.email }
                                 </span>
                             </div>
                         </div>
