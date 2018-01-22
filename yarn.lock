@@ -4613,7 +4613,7 @@ isurl@^1.0.0-alpha5:
 
 "javascript-library-glpi@https://github.com/flyve-mdm/javascript-library-glpi":
   version "0.1.0"
-  resolved "https://github.com/flyve-mdm/javascript-library-glpi#bfae14d344649d9c6b8612898959ccf3b054fab6"
+  resolved "https://github.com/flyve-mdm/javascript-library-glpi#cbd88eb1c6465e7961b1aff4695f2d30fec53d05"
 
 jest-changed-files@^22.1.4:
   version "22.1.4"
