@@ -29,10 +29,11 @@ class LoginPassword extends Component {
         })
         let glpi = new Glpi({ url: config.URL_GLPI_API })
         glpi.login(this.props.username, this.props.password).then((response) => {
+            let email = response.userEmails.lenght > 0 ? response.userEmails[0].email : ''
             const user = {
                 id: response.userData.id,
                 name: response.userData.name,
-                email: response.userEmails[0].email,
+                email: email,
                 picture: null
             }
             localStorage.setItem('sessionToken', response.sessionToken)
