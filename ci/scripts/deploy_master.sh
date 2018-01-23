@@ -15,6 +15,6 @@ if [[ $TRAVIS_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version
 fi
 
 if [[ $TRAVIS_COMMIT_MESSAGE != *"ci(stats): generate stats.json for version"* ]]; then
-    git add reports
+    git add reports -f
     yarn gh-pages-reports -- -m "ci(stats): generate stats.json for version ${GIT_TAG}"
 fi
