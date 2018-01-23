@@ -31,7 +31,8 @@ class Settings extends Component {
                     animation={this.props.animation}
                     location={this.props.location}
                     itemList={this.state.itemList}
-                    onNavigate={this.props.onNavigate}/>
+                    onNavigate={this.props.onNavigate}
+                    glpi={this.props.glpi} />
                 )
             } else {
                 return (
@@ -46,6 +47,7 @@ class Settings extends Component {
                         changeLoading={this.props.changeLoading}
                         isLoading={this.props.isLoading}
                         showNotification={this.props.showNotification}
+                        glpi={this.props.glpi}
                     />
                 )
             }
@@ -58,7 +60,8 @@ class Settings extends Component {
                     animation={this.props.animation}
                     itemList={this.state.itemList}
                     location={this.props.location}
-                    onNavigate={this.props.onNavigate}/>
+                    onNavigate={this.props.onNavigate}
+                    glpi={this.props.glpi} />
 
                     <SettingsPage 
                         animation={this.props.animation}
@@ -71,6 +74,7 @@ class Settings extends Component {
                         isLoading={this.props.isLoading}
                         changeLoading={this.props.changeLoading}
                         showNotification={this.props.showNotification}
+                        glpi={this.props.glpi}
                     />
                 </div>
             )
@@ -88,7 +92,8 @@ Settings.propTypes = {
     passwordConfiguration: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
     changeLoading: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.func.isRequired
 }
 
 export default Settings

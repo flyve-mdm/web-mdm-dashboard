@@ -37,7 +37,8 @@ export default class Files extends Component {
                     selectionMode={this.state.selectionMode}
                     actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification}/>
+                    showNotification={this.props.showNotification} 
+                    glpi={this.props.glpi} />
             } else {
                 return <FilesPage 
                     itemListPaneWidth={0}
@@ -50,7 +51,8 @@ export default class Files extends Component {
                     changeSelectionMode={this.changeSelectionMode}
                     actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification} />
+                    showNotification={this.props.showNotification} 
+                    glpi={this.props.glpi} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -71,6 +73,7 @@ export default class Files extends Component {
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
                         showNotification={this.props.showNotification}
+                        glpi={this.props.glpi}
                     />
                     <FilesPage 
                         itemListPaneWidth={itemListPaneWidth}
@@ -84,6 +87,7 @@ export default class Files extends Component {
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
                         showNotification={this.props.showNotification}
+                        glpi={this.props.glpi}
                     />
                 </div>
             )
@@ -99,5 +103,6 @@ Files.propTypes = {
     onNavigate: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.func.isRequired
 }
