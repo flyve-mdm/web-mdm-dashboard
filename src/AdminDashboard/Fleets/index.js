@@ -37,7 +37,8 @@ export default class Fleets extends Component {
                     changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification}/>
+                    showNotification={this.props.showNotification} 
+                    glpi={this.props.glpi} />
             } else {
                 return <FleetsPage
                     itemListPaneWidth={0}
@@ -51,7 +52,8 @@ export default class Fleets extends Component {
                     changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification}/>
+                    showNotification={this.props.showNotification} 
+                    glpi={this.props.glpi} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -73,7 +75,8 @@ export default class Fleets extends Component {
                         changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}
+                        showNotification={this.props.showNotification} 
+                        glpi={this.props.glpi}
                     />
                     <FleetsPage
                         itemListPaneWidth={itemListPaneWidth}
@@ -88,7 +91,8 @@ export default class Fleets extends Component {
                         changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}
+                        showNotification={this.props.showNotification} 
+                        glpi={this.props.glpi}
                     />
                 </div>
             )
@@ -106,5 +110,6 @@ Fleets.propTypes = {
     changeCurrentItem: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.func.isRequired
 }

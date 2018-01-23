@@ -110,4 +110,5 @@ Dashboard.propTypes = {
     routers: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeIndex: PropTypes.func.isRequired,
+    glpi: PropTypes.func.isRequired,
 }

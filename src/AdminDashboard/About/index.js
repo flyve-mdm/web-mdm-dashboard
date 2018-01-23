@@ -29,7 +29,7 @@ class About extends Component {
         
         if (this.props.mode === 'small') {
             if (selectedIndex === null) {
-                return <AboutList itemListPaneWidth="100%" itemList={this.state.list} location={this.props.location} onNavigate={this.props.onNavigate}/>
+                return <AboutList itemListPaneWidth="100%" itemList={this.state.list} location={this.props.location} onNavigate={this.props.onNavigate} glpi={this.props.glpi} />
             } else {
                 return (
                     <AboutPage 
@@ -38,21 +38,23 @@ class About extends Component {
                     itemListPaneWidth={0} 
                     sendFeedback={this.props.sendFeedback}
                     isLoading={this.props.isLoading}
-                    isError={this.props.isError}/>
+                    isError={this.props.isError} 
+                    glpi={this.props.glpi} />
                 )
             }
         } else {
             let itemListPaneWidth = 320
             return (
                 <div style={{ height: '100%' }}>
-                    <AboutList itemListPaneWidth={itemListPaneWidth} itemList={this.state.list} location={this.props.location} onNavigate={this.props.onNavigate}/>
+                    <AboutList itemListPaneWidth={itemListPaneWidth} itemList={this.state.list} location={this.props.location} onNavigate={this.props.onNavigate} glpi={this.props.glpi} />
                     <AboutPage 
                     selectedIndex={selectedIndex} 
                     itemList={this.state.list} 
                     itemListPaneWidth={itemListPaneWidth} 
                     sendFeedback={this.props.sendFeedback}
                     isLoading={this.props.isLoading}
-                    isError={this.props.isError}/>
+                    isError={this.props.isError} 
+                    glpi={this.props.glpi} />
                 </div>
             )
         }
@@ -62,7 +64,8 @@ class About extends Component {
 About.propTypes = {
     sendFeedback: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
-    isError: PropTypes.bool.isRequired       
+    isError: PropTypes.bool.isRequired,
+    glpi: PropTypes.func.isRequired   
 }
 
 export default About
