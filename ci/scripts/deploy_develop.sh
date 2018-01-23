@@ -22,6 +22,6 @@ git commit -m "ci(docs): generate **coverage** for version ${GIT_TAG}"
 yarn gh-pages-coverage -- -m "ci(docs): generate code coverage for version ${GIT_TAG}"
 
 if [[ $TRAVIS_COMMIT_MESSAGE != *"ci(stats): generate stats.json for version"* ]]; then
-    git add reports
+    git add reports -f
     yarn gh-pages-reports -- -m "ci(stats): generate stats.json for version ${GIT_TAG}"
 fi
