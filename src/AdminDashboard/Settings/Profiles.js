@@ -6,12 +6,14 @@ import currentUser from '../data/currentUser.json'
 import validateData from '../../Utils/validateData'
 import IconItemList from '../IconItemList'
 import { usersScheme } from '../../Utils/Forms/Schemes'
+import Loading from '../../Utils/Loading'
 
 export default class Profiles extends Component {
     
     constructor(props) {
         super(props)
         this.state = {
+            isLoading: true,
             login: validateData(currentUser["User.name"], undefined),
             firstName: validateData(currentUser["User.firstname"]),
             realName: validateData(currentUser["User.realname"]),
@@ -37,6 +39,13 @@ export default class Profiles extends Component {
             validSince: new Date(),
             validUntil: new Date()
         }
+    }
+
+    componentDidMount = async () => {
+        const myUser = await this.props.glpi.getAnItem('User', this.props.currentUser.id)
+        this.setState({
+            isLoading: false
+        })
     }
 
     saveChanges = () => {
@@ -112,8 +121,8 @@ export default class Profiles extends Component {
             onChange: this.previewFile
         }
 
-        return (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+        const renderComponent = this.state.isLoading ?  ( <Loading message="Loading..." /> ) :
+        (
             <div className="list-content Profiles">
 
                 <div className="listElement listElementIcon">
@@ -141,7 +150,7 @@ export default class Profiles extends Component {
                 <ConstructInputs data={user.personalInformation} icon="contactIcon" />
 
                 <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
-               
+            
                 <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
 
                 <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
@@ -161,7 +170,14 @@ export default class Profiles extends Component {
             
                 <br/>
 
-            </div>
+            </div>   
+        )
+
+        return (
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+
+                { renderComponent }
+
             </ContentPane>
 
         )
@@ -173,5 +189,7 @@ Profiles.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired
 }

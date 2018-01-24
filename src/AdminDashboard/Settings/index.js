@@ -48,6 +48,7 @@ class Settings extends Component {
                         isLoading={this.props.isLoading}
                         showNotification={this.props.showNotification}
                         glpi={this.props.glpi}
+                        currentUser={this.props.currentUser}
                     />
                 )
             }
@@ -75,6 +76,7 @@ class Settings extends Component {
                         changeLoading={this.props.changeLoading}
                         showNotification={this.props.showNotification}
                         glpi={this.props.glpi}
+                        currentUser={this.props.currentUser}
                     />
                 </div>
             )
@@ -93,7 +95,8 @@ Settings.propTypes = {
     isLoading: PropTypes.bool.isRequired,
     changeLoading: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
+    glpi: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired
 }
 
 export default Settings
