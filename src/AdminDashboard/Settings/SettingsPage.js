@@ -26,6 +26,8 @@ class SettingsPage extends Component {
                         <Profiles 
                             itemListPaneWidth={this.props.itemListPaneWidth}
                             showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}
+                            currentUser={this.props.currentUser}
                         />
                     )
                 case 'Supervision':
@@ -83,7 +85,9 @@ SettingsPage.propTypes = {
     passwordConfiguration: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
     changeLoading: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired
 }
 
 export default SettingsPage

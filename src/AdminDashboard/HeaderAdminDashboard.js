@@ -19,7 +19,7 @@ function mapStateToProps(state, props) {
         mode: state.AdminDashboard.mode,
         location: state.AdminDashboard.location,
         actionList: state.AdminDashboard.actionList,
-        currentUser: state.Login.currentUser,
+        currentUser: state.Login.currentUser
     }
 }
 

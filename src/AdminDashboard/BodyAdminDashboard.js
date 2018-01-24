@@ -33,7 +33,8 @@ function mapStateToProps(state, props) {
         dataSource: state.AdminDashboard.dataSource,
         isLoading: state.AdminDashboard.isLoading,
         isError: state.AdminDashboard.isError,
-        passwordConfiguration: state.AdminDashboard.passwordConfiguration
+        passwordConfiguration: state.AdminDashboard.passwordConfiguration,
+        currentUser: state.Login.currentUser
     }
 }
 
@@ -137,6 +138,12 @@ class BodyAdminDashboard extends Component {
             propsData = {
                 ...propsData,
                 sendFeedback: this.props.actions.sendFeedback
+            }
+        }
+        if (this.props.router[this.props.index].label === 'Settings') {
+            propsData = {
+                ...propsData,
+                currentUser: this.props.currentUser
             }
         }
 
