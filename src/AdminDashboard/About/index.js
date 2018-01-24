@@ -65,7 +65,7 @@ About.propTypes = {
     sendFeedback: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isError: PropTypes.bool.isRequired,
-    glpi: PropTypes.func.isRequired   
+    glpi: PropTypes.object.isRequired   
 }
 
 export default About
