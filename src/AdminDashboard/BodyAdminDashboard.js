@@ -14,8 +14,7 @@ import About from './About'
 import Settings from './Settings'
 import ToastNotifications from '../Utils/ToastNotifications'
 import NativeNotification from '../Utils/NativeNotification'
-import Glpi from 'javascript-library-glpi'
-import config from '../config.json'
+import GlpiApi from '../Utils/GlpiApi'
 
 const components = { Dashboard, Devices, Invitations, Fleets, Files, Applications, Users, Settings, About }
 
@@ -65,8 +64,8 @@ class BodyAdminDashboard extends Component {
         this.state = {
             heigth: window.innerHeight,
             notifications: () => {},
-            glpi: new Glpi({ url: config.URL_GLPI_API })
         }
+        this.glpi = GlpiApi
     }
 
     handleCommandInvoked(newLocation, newIndex) {
@@ -104,7 +103,6 @@ class BodyAdminDashboard extends Component {
     }
 
     render() {
-    
         let propsData = {
             dataSource: this.props.dataSource,
             changeDataSource: this.props.actions.changeDataSource,
@@ -124,7 +122,7 @@ class BodyAdminDashboard extends Component {
             getPasswordConfiguration: this.props.actions.getPasswordConfiguration,
             changeLoading: this.props.actions.changeLoading,
             showNotification: this.showNotification,
-            glpi: this.state.glpi
+            glpi: this.glpi
         }
 
         if (this.props.router[this.props.index].label === 'Dashboard') {
