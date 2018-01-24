@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../Utils/ContentPane'
 import ConstructInputs from '../../Utils/Forms'
-import currentUser from '../data/currentUser.json'
 import validateData from '../../Utils/validateData'
 import IconItemList from '../IconItemList'
 import { usersScheme } from '../../Utils/Forms/Schemes'
@@ -13,19 +12,29 @@ export default class Profiles extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoading: true,
-            login: validateData(currentUser["User.name"], undefined),
-            firstName: validateData(currentUser["User.firstname"]),
-            realName: validateData(currentUser["User.realname"]),
-            phone: validateData(currentUser["User.phone"]),
-            mobilePhone: validateData(currentUser["User.mobile"]),
-            phone2: validateData(currentUser["User.phone2"]),
-            administrativeNumber: validateData(currentUser["User.registration_number"]),
-            lastLogin: validateData(currentUser["User.last_login"], undefined),
-            created: validateData(currentUser["User.date_creation"], undefined),
-            modified: validateData(currentUser["User.date_mod"], undefined),
-            emails: validateData(currentUser["User.UserEmail.email"], []),
-            imageProfile: validateData(currentUser['User.picture'], "profile.png"),
+            isLoading: true
+        }
+    }
+
+    componentDidMount = async () => {
+        const myUser = await this.props.glpi.getAnItem('User', this.props.currentUser.id)
+        const myUserEmails = await this.props.glpi.getSubItems('User', this.props.currentUser.id, 'UserEmail')
+        const myEmails = myUserEmails.map(e => e.email)
+
+        this.setState({
+            isLoading: false,
+            login: validateData(myUser.name, undefined),
+            firstName: validateData(myUser.firstname),
+            realName: validateData(myUser.realname),
+            phone: validateData(myUser.phone),
+            mobilePhone: validateData(myUser.mobile),
+            phone2: validateData(myUser.phone2),
+            administrativeNumber: validateData(myUser.registration_number),
+            lastLogin: validateData(myUser.last_login, undefined),
+            created: validateData(myUser.date_creation, undefined),
+            modified: validateData(myUser.date_mod, undefined),
+            emails: validateData(myEmails, []),
+            imageProfile: validateData(myUser.picture, "profile.png"),
             authentication: 'GLPI internal database',
             password: '',
             passwordConfirmation: '',
@@ -38,13 +47,6 @@ export default class Profiles extends Component {
             defaultProfile: '',
             validSince: new Date(),
             validUntil: new Date()
-        }
-    }
-
-    componentDidMount = async () => {
-        const myUser = await this.props.glpi.getAnItem('User', this.props.currentUser.id)
-        this.setState({
-            isLoading: false
         })
     }
 
@@ -104,11 +106,12 @@ export default class Profiles extends Component {
 
     render () {
 
-        const user = usersScheme({
-            state: this.state, 
-            changeState: this.changeState,
-            deleteEmail: this.deleteEmail
-        })
+        const user = this.state.isLoading ? '' : 
+            usersScheme({
+                state: this.state, 
+                changeState: this.changeState,
+                deleteEmail: this.deleteEmail
+            })
 
         const inputAttributes = {
             type: 'file',
