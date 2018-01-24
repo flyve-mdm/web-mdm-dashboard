@@ -320,7 +320,6 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 delete: deleteEmail
             }]
         ]
-        
     }
 
     return {
