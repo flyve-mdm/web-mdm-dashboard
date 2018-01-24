@@ -104,5 +104,5 @@ Files.propTypes = {
     changeActionList: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     showNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.func.isRequired
+    glpi: PropTypes.object.isRequired
 }

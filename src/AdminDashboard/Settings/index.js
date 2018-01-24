@@ -93,7 +93,7 @@ Settings.propTypes = {
     isLoading: PropTypes.bool.isRequired,
     changeLoading: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.func.isRequired
+    glpi: PropTypes.object.isRequired
 }
 
 export default Settings
