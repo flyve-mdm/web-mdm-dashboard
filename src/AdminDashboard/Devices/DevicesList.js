@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import DevicesItemList from './DevicesItemList'
-import ItemList from '../ItemList'
 import BuildItemList from '../BuildItemList'
 import Loader from '../../Utils/Loader'
 import Confirmation from '../../Utils/Confirmation'
@@ -57,7 +56,6 @@ export default class DevicesList extends Component {
         })
         this.props.glpi.searchItems('PluginFlyvemdmAgent', null, null, { uid_cols: true, forcedisplay: [2,3,12] })
         .then((response) => {
-            console.log(response)
             this.setState({
                 isLoading: false,
                 order: response.order,
@@ -154,23 +152,25 @@ export default class DevicesList extends Component {
 
     handleSort = () => {
         this.props.onNavigate([this.props.location[0]])
-        let array = []
-        this.props.dataSource.itemList.map((value, index) =>
-            array.push(value)
-        )
-        this.props.changeDataSource(
-            this.props.location, 
-            { itemList: ItemList(this.props.location[0], array, !this.props.dataSource.sort), sort: !this.props.dataSource.sort }
-        )
-    }
+        this.setState({
+            isLoading: true
+        })
+        let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-    descendingCompare(first, second) {
-        if (first === second)
-            return 0
-        else if (first < second)
-            return 1
-        else
-            return -1
+        this.props.glpi.searchItems('PluginFlyvemdmAgent', null, null, { uid_cols: true, order: newOrder, forcedisplay: [2, 3, 12] })
+            .then((response) => {
+                this.setState({
+                    isLoading: false,
+                    order: response.order,
+                    itemList: BuildItemList(response)
+                })
+            })
+            .catch((error) => {
+                this.setState({
+                    isLoading: false,
+                    order: undefined
+                })
+            })
     }
 
     onLoadingStateChanged = (eventObject) => {
