@@ -77,7 +77,15 @@ export default class Profiles extends Component {
                     value: '2'
                 }
             },
-            defaultProfile: '',
+            defaultProfile: {
+                value: myUser.profiles_id,
+                request: {
+                    params: [],
+                    method: 'getMyProfiles',
+                    content: 'name',
+                    value: 'id'
+                }
+            },
             validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
             validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined
         })
