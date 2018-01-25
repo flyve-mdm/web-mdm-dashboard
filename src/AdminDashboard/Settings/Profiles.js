@@ -20,7 +20,6 @@ export default class Profiles extends Component {
         const myUser = await this.props.glpi.getAnItem('User', this.props.currentUser.id)
         const myUserEmails = await this.props.glpi.getSubItems('User', this.props.currentUser.id, 'UserEmail')
         const myEmails = myUserEmails.map(e => e.email)
-
         this.setState({
             isLoading: false,
             login: validateData(myUser.name, undefined),
