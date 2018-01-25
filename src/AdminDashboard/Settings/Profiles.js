@@ -59,33 +59,9 @@ export default class Profiles extends Component {
             },
             comments: myUser.comment,
             typeImageProfile: 'file',
-            title: {
-                value: myUser.usertitles_id,
-                request: {
-                    params: ['UserTitle', null, null, {range: '0-200', forcedisplay: [2]}],
-                    method: 'searchItems',
-                    content: '1',
-                    value: '2'
-                }
-            },
-            location: {
-                value: myUser.locations_id,
-                request: {
-                    params: ['Location', null, null, {range: '0-200', forcedisplay: [2]}],
-                    method: 'searchItems',
-                    content: '1',
-                    value: '2'
-                }
-            },
-            defaultProfile: {
-                value: myUser.profiles_id,
-                request: {
-                    params: [],
-                    method: 'getMyProfiles',
-                    content: 'name',
-                    value: 'id'
-                }
-            },
+            title: '',
+            location: '',
+            defaultProfile: '',
             validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
             validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined
         })
