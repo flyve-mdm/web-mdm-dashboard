@@ -68,7 +68,15 @@ export default class Profiles extends Component {
                     value: '2'
                 }
             },
-            location: '',
+            location: {
+                value: myUser.locations_id,
+                request: {
+                    params: ['Location', null, null, {range: '0-200', forcedisplay: [2]}],
+                    method: 'searchItems',
+                    content: '1',
+                    value: '2'
+                }
+            },
             defaultProfile: '',
             validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
             validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined
