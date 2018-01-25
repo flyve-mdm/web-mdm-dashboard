@@ -59,7 +59,15 @@ export default class Profiles extends Component {
             },
             comments: myUser.comment,
             typeImageProfile: 'file',
-            title: '',
+            title: {
+                value: myUser.usertitles_id,
+                request: {
+                    params: ['UserTitle', null, null, {range: '0-200', forcedisplay: [2]}],
+                    method: 'searchItems',
+                    content: '1',
+                    value: '2'
+                }
+            },
             location: '',
             defaultProfile: '',
             validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
