@@ -1,6 +1,6 @@
 # How to contribute
 
-Welcome to our ever growing community! We are more than happy to accept external contributions to the project in the form of feedback, bug reports and even better, pull requests!
+Welcome to our ever growing community! We are more than happy to accept external contributions to the project in the form of feedback, [translations](http://flyve.org/web-mdm-dashboard/howtos/contribute-translating), bug reports and even better, pull requests!
 
 As a contributor, we present you the guidelines to start contributing in any of the Flyve MDM projects.
 
@@ -37,7 +37,7 @@ You can _**request**_ a new feature by submitting an issue, and if you would lik
 
 Before submitting the issue please check the [issue tracker](https://github.com/flyve-mdm/web-mdm-dashboard/issues), there exists the possibility that the bug was already reported by other contributor.
 
-This way you help us to maximize the effort we can spend fixing issues and adding new features, by not reporting duplicate issues.
+This way you help us to maximise the effort we can spend fixing issues and adding new features, by not reporting duplicate issues.
 
 We'll work very hard to fix all the issues without delay, but before fixing it we need to confirm it, for that we require you to provide us of the following information:
 
@@ -65,6 +65,24 @@ Before submitting your Pull Request check  for an open or closed PR that relates
 
 * Commit your changes using a descriptive commit message that follows the [Conventional Commit](http://conventionalcommits.org/). This is **indispensable** since the release notes and changelogs are automatically generated from these messages.
 
+Please try not to write a commit message too long, in case your commit changes several aspect provide this information in the commit's description, for example:
+
+Bad
+
+```console
+docs(readme): fix orthography, remove out of date paragraph and fix broken links
+```
+
+Good
+
+```console
+    docs(readme): change content
+
+    fix orthography
+    remove out of date paragraph
+    fix broken links
+```
+
 * Push your branch to GitHub:
 
 ```console
@@ -72,6 +90,33 @@ Before submitting your Pull Request check  for an open or closed PR that relates
 ```
 
 * In GitHub, send a pull request to our [Repository](https://github.com/flyve-mdm/web-mdm-dashboard).
+
+Keep in mind that the PR should be named in reference of the main fix or feature you provide, minor information can be added in the description.
+
+Bad
+
+> Fix errors in installation method, update dependencies and improve installation documentation
+
+Good
+
+> Fix installation method
+
+> What's the new behaviour?
+> 
+> * Dependencies updated
+> * Documentation improved
+
+Also, avoid using your branch or the commit guidelines to name your PR, for example:
+
+Bad
+
+> feat(private): implement private data method
+
+Good
+
+> Feature private information
+
+In case your contribution has to do with reports, remember those are created in the develop branch, nor master or PR's.
 
 * If we suggest changes then:
 
