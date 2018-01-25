@@ -22,6 +22,8 @@ class ConstructInputs extends Component {
                                 value={element.value}
                                 options={element.options}
                                 function={element.function}
+                                glpi={element.glpi}
+                                request={element.request}
                                 key={element.name}/>
                             )
                         } else if (element.type === 'date') {

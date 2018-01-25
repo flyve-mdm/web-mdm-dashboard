@@ -1,4 +1,4 @@
-export default function ({state, changeState, changeEmail, deleteEmail}) {
+export default function ({state, changeState, changeEmail, deleteEmail, glpi}) {
 
     const personalInformation = [
         [
@@ -42,64 +42,31 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 label: "Title",
                 type: "select",
                 name: "title",
-                value: state.title,
-                options: [
-                    {
-                        label: 'option 1',
-                        value: 'option 1'
-                    },
-                    {
-                        label: 'option 2',
-                        value: 'option 2'
-                    },
-                    {
-                        label: 'option 3',
-                        value: 'option 3'
-                    }
-                ],
-                function: changeState
+                value: state.title.value,
+                options: [],
+                function: changeState,
+                request: state.title.request,
+                glpi
             },
             {
                 label: "Location",
                 type: "select",
                 name: "location",
-                value: state.location,
-                options: [
-                    {
-                        label: 'option 1',
-                        value: 'option 1'
-                    },
-                    {
-                        label: 'option 2',
-                        value: 'option 2'
-                    },
-                    {
-                        label: 'option 3',
-                        value: 'option 3'
-                    }
-                ],
-                function: changeState
+                value: state.location.value,
+                options: [],
+                function: changeState,
+                request: state.location.request,
+                glpi
             },
             {
                 label: "Default profile",
                 type: "select",
                 name: "defaultProfile",
-                value: state.defaultProfile,
-                options: [
-                    {
-                        label: 'option 1',
-                        value: 'option 1'
-                    },
-                    {
-                        label: 'option 2',
-                        value: 'option 2'
-                    },
-                    {
-                        label: 'option 3',
-                        value: 'option 3'
-                    }
-                ],
-                function: changeState
+                value: state.defaultProfile.value,
+                options: [],
+                function: changeState,
+                request: state.defaultProfile.request,
+                glpi
             }
         ]
     ]
@@ -250,43 +217,21 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 label: "Category",
                 type: "select",
                 name: "category",
-                value: state.category,
-                options: [
-                    {
-                        label: 'option 1',
-                        value: 'option 1'
-                    },
-                    {
-                        label: 'option 2',
-                        value: 'option 2'
-                    },
-                    {
-                        label: 'option 3',
-                        value: 'option 3'
-                    }
-                ],
-                function: changeState
+                value: state.category.value,
+                options: [],
+                function: changeState,
+                request: state.category.request,
+                glpi
             },
             {
                 label: "Default entity",
                 type: "select",
                 name: "defaultEntity",
-                value: state.defaultEntity,
-                options: [
-                    {
-                        label: 'option 1',
-                        value: 'option 1'
-                    },
-                    {
-                        label: 'option 2',
-                        value: 'option 2'
-                    },
-                    {
-                        label: 'option 3',
-                        value: 'option 3'
-                    }
-                ],
-                function: changeState
+                value: state.defaultEntity.value,
+                options: [],
+                function: changeState,                
+                request: state.defaultEntity.request,
+                glpi
             }
         ],
         [
