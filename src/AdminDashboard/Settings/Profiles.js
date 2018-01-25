@@ -6,6 +6,7 @@ import validateData from '../../Utils/validateData'
 import IconItemList from '../IconItemList'
 import { usersScheme } from '../../Utils/Forms/Schemes'
 import Loading from '../../Utils/Loading'
+import authtype from '../../Utils/authtype'
 
 export default class Profiles extends Component {
     
@@ -20,6 +21,7 @@ export default class Profiles extends Component {
         const myUser = await this.props.glpi.getAnItem('User', this.props.currentUser.id)
         const myUserEmails = await this.props.glpi.getSubItems('User', this.props.currentUser.id, 'UserEmail')
         const myEmails = myUserEmails.map(e => e.email)
+        
         this.setState({
             isLoading: false,
             login: validateData(myUser.name, undefined),
@@ -34,18 +36,58 @@ export default class Profiles extends Component {
             modified: validateData(myUser.date_mod, undefined),
             emails: validateData(myEmails, []),
             imageProfile: validateData(myUser.picture, "profile.png"),
-            authentication: 'GLPI internal database',
+            authentication: authtype(myUser.authtype),
             password: '',
             passwordConfirmation: '',
-            category: '',
-            defaultEntity: '',
-            comments: '',
+            category: {
+                value: myUser.usercategories_id,
+                request: {
+                    params: ['UserCategory', null, null, {range: '0-200', forcedisplay: [2]}],
+                    method: 'searchItems',
+                    content: '1',
+                    value: '2'
+                }
+            },
+            defaultEntity:  {
+                value: myUser.entities_id,
+                request: {
+                    params: [],
+                    method: 'getMyEntities',
+                    content: 'name',
+                    value: 'id'
+                }
+            },
+            comments: myUser.comment,
             typeImageProfile: 'file',
-            title: '',
-            location: '',
-            defaultProfile: '',
-            validSince: new Date(),
-            validUntil: new Date()
+            title: {
+                value: myUser.usertitles_id,
+                request: {
+                    params: ['UserTitle', null, null, {range: '0-200', forcedisplay: [2]}],
+                    method: 'searchItems',
+                    content: '1',
+                    value: '2'
+                }
+            },
+            location: {
+                value: myUser.locations_id,
+                request: {
+                    params: ['Location', null, null, {range: '0-200', forcedisplay: [2]}],
+                    method: 'searchItems',
+                    content: '1',
+                    value: '2'
+                }
+            },
+            defaultProfile: {
+                value: myUser.profiles_id,
+                request: {
+                    params: [],
+                    method: 'getMyProfiles',
+                    content: 'name',
+                    value: 'id'
+                }
+            },
+            validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
+            validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined
         })
     }
 
@@ -109,7 +151,8 @@ export default class Profiles extends Component {
             usersScheme({
                 state: this.state, 
                 changeState: this.changeState,
-                deleteEmail: this.deleteEmail
+                deleteEmail: this.deleteEmail,
+                glpi: this.props.glpi
             })
 
         const inputAttributes = {
