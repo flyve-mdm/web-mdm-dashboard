@@ -4,6 +4,7 @@ import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import DevicesItemList from './DevicesItemList'
 import ItemList from '../ItemList'
+import BuildItemList from '../BuildItemList'
 import Loader from '../../Utils/Loader'
 import Confirmation from '../../Utils/Confirmation'
 
@@ -14,7 +15,10 @@ export default class DevicesList extends Component {
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
             selectedItemList: [],
-            scrolling: false
+            scrolling: false,
+            isLoading: false,
+            itemList: new WinJS.Binding.List([]),
+            order: undefined
         }
     }
 
@@ -48,7 +52,24 @@ export default class DevicesList extends Component {
 
     handleRefresh = () => {
         this.props.onNavigate([this.props.location[0]])
-        this.props.fetchData(this.props.location[0])
+        this.setState({
+            isLoading: true
+        })
+        this.props.glpi.searchItems('PluginFlyvemdmAgent', null, null, { uid_cols: true, forcedisplay: [2,3,12] })
+        .then((response) => {
+            console.log(response)
+            this.setState({
+                isLoading: false,
+                order: response.order,
+                itemList: BuildItemList(response)
+            })
+        })
+        .catch((error) => {
+            this.setState({
+                isLoading: false,
+                order: undefined
+            })
+        })
     }
 
     handleEdit = (eventObject) => {
@@ -205,15 +226,15 @@ export default class DevicesList extends Component {
 
         if(this.isError) {
             listComponent = "Error"
-        } else if (!this.props.isLoading && this.props.dataSource.itemList.groups !== undefined ) {
+        } else if (!this.state.isLoading && this.state.itemList.groups !== undefined ) {
             listComponent = (
                 <ReactWinJS.ListView
                     ref="listView"
                     onLoadingStateChanged={this.onLoadingStateChanged}
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.props.dataSource.itemList.dataSource}
-                    groupDataSource={this.props.dataSource.itemList.groups.dataSource}
+                    itemDataSource={this.state.itemList.dataSource}
+                    groupDataSource={this.state.itemList.groups.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
                     groupHeaderTemplate={this.groupHeaderRenderer}
@@ -284,5 +305,6 @@ DevicesList.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
