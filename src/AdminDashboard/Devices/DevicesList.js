@@ -99,14 +99,14 @@ export default class DevicesList extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        let idSelected = []
+        let itemSelected = []
 
         for (const item of index) {
-            idSelected.push(this.state.itemList.getItem(item).data['PluginFlyvemdmAgent.id'])
+            itemSelected.push(this.state.itemList.getItem(item).data)
         }
 
         this.setState({
-            selectedItemList: idSelected
+            selectedItemList: itemSelected
         })
 
         if (this.props.actionList !== 'Edit') {
