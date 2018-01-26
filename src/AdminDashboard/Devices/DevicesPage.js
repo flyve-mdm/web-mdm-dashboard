@@ -9,7 +9,7 @@ import EmptyMessage from '../../Utils/EmptyMessage'
 export default class DevicesPage extends Component {
     
     render() {
-        if (this.props.selectedIndex === null || this.props.actionList === 'Edit') {
+        if (this.props.selectedItemList === null || this.props.actionList === 'Edit') {
             switch (this.props.actionList) {
                 case "Edit":
                     return (
@@ -40,8 +40,8 @@ export default class DevicesPage extends Component {
             }
         } else {
             if (this.props.actionList === null) {
-                const selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
-                if (selectedItemList !== undefined) {
+                
+                if (this.props.selectedItemList.length > 0) {
                     return (
                         <DevicesContent
                             itemListPaneWidth={this.props.itemListPaneWidth}
@@ -49,10 +49,10 @@ export default class DevicesPage extends Component {
                             changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
-                            selectedIndex={this.props.selectedIndex}
-                            selectedItemList={selectedItemList}
+                            selectedItemList={this.props.selectedItemList}
                             changeActionList={this.props.changeActionList}
-                            showNotification={this.props.showNotification} />
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi} />
                     )
                 } else {
                     return (
@@ -80,11 +80,12 @@ DevicesPage.propTypes = {
     ]).isRequired,
     dataSource: PropTypes.object.isRequired,
     changeDataSource: PropTypes.func.isRequired,
-    selectedIndex: PropTypes.array,
+    selectedItemList: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
