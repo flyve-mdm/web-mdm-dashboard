@@ -20,9 +20,9 @@ export default class Devices extends Component {
 
     render() {
 
-        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
+        let selectedItemList = this.props.location.length === 2 ? this.props.location[1] : null
         if (this.props.mode === 'small') {
-            if (selectedIndex === null && this.props.actionList === null) {
+            if (selectedItemList === null && this.props.actionList === null) {
                 return <DevicesList
                     itemListPaneWidth={'100%'}
                     animation={this.props.animation}
@@ -47,7 +47,7 @@ export default class Devices extends Component {
                     changeDataSource={this.props.changeDataSource}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
-                    selectedIndex={selectedIndex}
+                    selectedItemList={selectedItemList}
                     changeSelectionMode={this.changeSelectionMode}
                     actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList}
@@ -82,7 +82,7 @@ export default class Devices extends Component {
                         changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
-                        selectedIndex={selectedIndex}
+                        selectedItemList={selectedItemList}
                         changeSelectionMode={this.changeSelectionMode}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 

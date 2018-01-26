@@ -14,13 +14,13 @@ class DevicesContent extends Component {
 
                         <Main 
                             dataSource={this.props.dataSource} 
-                            selectedIndex={this.props.selectedIndex} 
                             changeActionList={this.props.changeActionList} 
                             location={this.props.location} 
                             selectedItemList={this.props.selectedItemList} 
                             onNavigate={this.props.onNavigate} 
                             changeDataSource={this.props.changeDataSource}
                             showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -64,12 +64,12 @@ DevicesContent.propTypes = {
     ]).isRequired,
     dataSource: PropTypes.object.isRequired,
     changeDataSource: PropTypes.func.isRequired,
-    selectedIndex: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    selectedItemList: PropTypes.object.isRequired,
+    selectedItemList: PropTypes.array,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
 
 export default DevicesContent
