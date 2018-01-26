@@ -99,18 +99,25 @@ export default class DevicesList extends Component {
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        this.setState({ selectedItemList: index })
-        
-        if(this.props.actionList !== 'Edit') {
+        let idSelected = []
+
+        for (const item of index) {
+            idSelected.push(this.state.itemList.getItem(item).data['PluginFlyvemdmAgent.id'])
+        }
+
+        this.setState({
+            selectedItemList: idSelected
+        })
+
+        if (this.props.actionList !== 'Edit') {
+               
             setTimeout(() => {
                 if(index.length !== 0) {
                     this.props.changeActionList(null)
                 }
-                
-                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
+                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
             }, 0)
         }
-        
     }
 
     handleDelete = async () => {
