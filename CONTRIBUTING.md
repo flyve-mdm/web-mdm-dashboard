@@ -10,7 +10,7 @@ As a contributor, we present you the guidelines to start contributing in any of 
 * [Submitting issues and Pull Requests](#submitting)
 * [Coding Rules](#coding-rules)
 
-### Questions or Doubts
+## Questions or Doubts
 
 If you require general support assistance, you can find us in [Telegram](https://t.me/flyvemdm), and we'll help you as soon as possible.
 
@@ -39,11 +39,11 @@ Before submitting the issue please check the [issue tracker](https://github.com/
 
 This way you help us to maximise the effort we can spend fixing issues and adding new features, by not reporting duplicate issues.
 
-We'll work very hard to fix all the issues without delay, but before fixing it we need to confirm it, for that we require you to provide us of the following information:
+We'll work very hard to fix all the issues without delay, but before fixing it we need to confirm it, for that we require you to provide us the following information:
 
 * Overview of the Issue - if an error is being thrown a description of the problem is extremely helpful
 * Motivation for or Use Case - explain why this is a bug for you
-* Project Version(s)
+* Web Dashboard Version(s)
 * Device Operating System & Model - is this a problem with all devices or only specific ones?
 * Reproduce the Error - provide a live example or an unambiguous set of steps.
 * Related Issues - has a similar issue been reported before?
@@ -53,7 +53,7 @@ You can file new issues by filling out our [new issue form](https://github.com/f
 
 ### Submit a Pull Request
 
-Before submitting your Pull Request check  for an open or closed PR that relates to your submission. We don't want to duplicate efforts.
+Before submitting your Pull Request check for an open or closed PR that relates to your submission. We don't want to duplicate efforts.
 
 * Make your changes in a new branch, the project is organized according to the branch model [Git Flow](http://git-flow.readthedocs.io/en/latest/), though this is not mandatory it's really useful:
 
@@ -83,23 +83,17 @@ Good
     fix broken links
 ```
 
-* Push your branch to GitHub:
-
-```console
-    git push origin my-fix-branch
-```
-
-* In GitHub, send a pull request to our [Repository](https://github.com/flyve-mdm/web-mdm-dashboard).
-
 Keep in mind that the PR should be named in reference of the main fix or feature you provide, minor information can be added in the description.
+
+Use the WIP label while you're working on it, this will prevent us from merging unfinished work.
 
 Bad
 
-> Fix errors in installation method, update dependencies and improve installation documentation
+> WIP Fix errors in installation method, update dependencies and improve installation documentation
 
 Good
 
-> Fix installation method
+> WIP Fix installation method
 
 > What's the new behaviour?
 > 
@@ -114,17 +108,19 @@ Bad
 
 Good
 
-> Feature private information
+> WIP Feature private information
 
 In case your contribution has to do with reports, remember those are created in the develop branch, nor master or PR's.
 
 * If we suggest changes then:
 
-    * Make the required updates.
+  * Make the required updates.
 
-    * Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
+  * Rebase your branch and force push to your GitHub repository (this will update your Pull Request)
 
-    **That's it! :tada:  Thank you for your contribution!**
+  * Remove the WIP label
+
+    **That's it! :tada: Thank you for your contribution!**
 
 #### After your pull request is merged
 
