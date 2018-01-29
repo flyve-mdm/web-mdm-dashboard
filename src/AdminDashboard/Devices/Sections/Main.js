@@ -103,7 +103,7 @@ class DangerZone extends Component {
                         </li>
                     </ul>
                 </div>
-                <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.data["PluginFlyvemdmAgent.Computer.User.realname"]} reference={el => this.contentDialog = el} /> 
+                <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.data["name"]} reference={el => this.contentDialog = el} /> 
             </div>
             )
         }
