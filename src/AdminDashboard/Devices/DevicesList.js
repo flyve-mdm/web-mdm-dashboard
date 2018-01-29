@@ -71,12 +71,10 @@ export default class DevicesList extends Component {
     }
 
     handleEdit = (eventObject) => {
-        let index = this.state.selectedItemList
         let button = eventObject.currentTarget.winControl
-
         setTimeout(() => {
+            this.props.onNavigate(this.state.selectedItemList.length > 0 && this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
             this.props.changeActionList(button.label)
-            this.props.onNavigate(index.length > 0 && this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
         }, 0)
     }
 

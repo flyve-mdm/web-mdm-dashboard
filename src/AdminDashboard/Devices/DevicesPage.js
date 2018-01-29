@@ -15,13 +15,16 @@ export default class DevicesPage extends Component {
                     return (
                         <DevicesEdit
                             itemListPaneWidth={this.props.itemListPaneWidth}
+                            selectedItemList={this.props.selectedItemList}
                             dataSource={this.props.dataSource}
                             changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
                             changeActionList={this.props.changeActionList}
-                            showNotification={this.props.showNotification} />
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi} 
+                            />
                     )
                 case "Add":
                     return (
