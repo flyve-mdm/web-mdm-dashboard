@@ -83,10 +83,10 @@ export default class DevicesList extends Component {
     handlePanel = (eventObject) => {
         let button = eventObject.currentTarget.winControl
         this.refs.listView.winControl.selection.clear()
-
+        
         this.props.changeSelectionMode(false)
-        this.props.changeActionList(button.label)
         this.props.onNavigate([this.props.location[0]])
+        this.props.changeActionList(button.label)
     }
 
     handleToggleSelectionMode = () => {
