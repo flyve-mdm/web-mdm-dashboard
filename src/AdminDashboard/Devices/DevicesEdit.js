@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import DevicesEditItemList from './DevicesEditItemList'
-import ItemList from '../ItemList'
 import ContentPane from '../../Utils/ContentPane'
 import EmptyMessage from '../../Utils/EmptyMessage'
 
@@ -10,61 +9,59 @@ export default class DevicesEdit extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            itemListArray:[]
+            itemListEdit: [...this.props.selectedItemList]
         }
     }
 
-    componentWillMount() {
-        let newArray = []
-
-        this.props.dataSource.itemList.map((value, index) =>
-            newArray.push(value)
-        )
-
-        this.setState({
-            itemListArray: newArray
-        })
-    }
-
     updateItemList = (index, name) => {
-        let newItem = this.state.itemListArray
+        let newItem = [...this.state.itemListEdit]
 
         //Find index of specific object using findIndex method.    
         let objIndex = newItem.findIndex((obj => obj["PluginFlyvemdmAgent.id"] === index));
 
         //Update object's name property.
-        newItem[objIndex]["PluginFlyvemdmAgent.Computer.User.realname"] = name
+        newItem[objIndex]["PluginFlyvemdmAgent.name"] = name
 
         this.setState({
-            itemListArray: newItem
+            itemListEdit: [...newItem]
         })
     }
 
     handleSaveDevices = () => {
 
-        this.props.changeSelectionMode(false)
-        this.props.changeActionList(null)
-        this.props.onNavigate([this.props.location[0]])
-        this.props.changeDataSource([this.props.location[0]], { itemList: ItemList(this.props.location[0], this.state.itemListArray), sort: this.props.dataSource.sort })
+        let itemListToSave = this.state.itemListEdit.map((item) => {
+            return {
+                id: item["PluginFlyvemdmAgent.id"],
+                name: item["PluginFlyvemdmAgent.name"]
+            }
+        })
+
+        if (itemListToSave.length > 0) {
+            this.props.glpi.updateItem("PluginFlyvemdmAgent", null, itemListToSave)
+            .then((response) => {
+                this.props.changeSelectionMode(false)
+                this.props.changeActionList(null)
+                this.props.onNavigate([this.props.location[0]])
+            })
+            .catch((error) => {
+                console.log(error)
+                this.props.changeSelectionMode(false)
+                this.props.changeActionList(null)
+                this.props.onNavigate([this.props.location[0]])
+            })
+        }
     }
 
     render() {
-
-        let selectedItemList
-        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
-
-        if(selectedIndex) {
-
-            let renderComponent = selectedIndex.map((index) => {
-                selectedItemList = this.props.dataSource.itemList.getAt(index)                                
-                    
+        if (this.props.selectedItemList) {
+            let renderComponent = this.props.selectedItemList.map((item) => {                                
                 return (
                     <DevicesEditItemList
-                    key={index}
+                    key={item["PluginFlyvemdmAgent.id"]}
                     itemListPaneWidth={this.props.itemListPaneWidth}
                     updateItemList={this.updateItemList}
                     location={this.props.location}
-                    currentItem={selectedItemList}
+                    currentItem={item}
                     changeActionList={this.props.changeActionList} />
                 )
             })
@@ -94,6 +91,7 @@ DevicesEdit.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
+    selectedItemList: PropTypes.array,
     dataSource: PropTypes.object.isRequired,
     changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
@@ -102,5 +100,6 @@ DevicesEdit.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
