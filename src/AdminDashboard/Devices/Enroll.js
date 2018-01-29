@@ -13,8 +13,16 @@ export default class Enroll extends Component {
 
     inviteDevice = () => {
         if(this.state.email.trim() !== "") {
-            this.props.changeActionList(null)
-            this.props.showNotification('Success', 'invitation sent')
+            this.props.glpi.addItem('PluginFlyvemdmInvitation', { _useremails: this.state.email.trim() })
+            .then((response) => {
+                console.log(response)
+                this.props.changeActionList(null)
+                this.props.showNotification('Success', 'invitation sent')
+            })
+            .catch((error) => {
+                console.log(error)
+                this.props.showNotification('Error', error)
+            })   
         }
     }
 
@@ -58,5 +66,6 @@ Enroll.propTypes = {
         PropTypes.number
     ]).isRequired,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
