@@ -29,6 +29,7 @@ export default class DevicesPage extends Component {
                             itemListPaneWidth={this.props.itemListPaneWidth}
                             changeActionList={this.props.changeActionList} 
                             showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}
                         />
                     )
                 default:
