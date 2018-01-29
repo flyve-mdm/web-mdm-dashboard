@@ -11,8 +11,9 @@ export default class DevicesEditItemList extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.currentItem)
         this.setState({
-            input: this.props.currentItem["PluginFlyvemdmAgent.Computer.User.realname"]
+            input: this.props.currentItem["PluginFlyvemdmAgent.name"]
         })
     }
 
@@ -37,7 +38,7 @@ export default class DevicesEditItemList extends Component {
                         type="text"
                         style={{ width: '240px'}}
                         className="win-textbox" 
-                        placeholder="Fleet name"
+                        placeholder="Agent name"
                         name="input"
                         value={this.state.input}
                         onChange={this.changeInput}
