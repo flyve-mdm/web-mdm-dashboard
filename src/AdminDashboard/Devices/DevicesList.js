@@ -27,7 +27,7 @@ export default class DevicesList extends Component {
 
     componentDidUpdate(prevProps) {
 
-        if (!this.props.actionList && prevProps.actionList === 'Edit') {
+        if (!this.props.actionList && (prevProps.actionList === 'Edit' || prevProps.actionList === 'Delete')) {
             this.handleRefresh()
         }
 
@@ -122,31 +122,41 @@ export default class DevicesList extends Component {
         }
     }
 
-    handleDelete = async () => {
+    handleDelete = async (eventObject) => {
+        let button = eventObject.currentTarget.winControl
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
-            // Clean another actions selected
-            this.props.changeActionList(null)
-            // Exit selection mode
-            this.props.changeSelectionMode(false)
 
-            let item = this.props.dataSource.itemList
-            let index = this.state.selectedItemList
-            index.sort()
-            index.reverse()
-            index.forEach((i) => {
-                item.splice(i, 1)
+            let itemListToDelete = this.state.selectedItemList.map((item) => {
+                return {
+                    id: item["PluginFlyvemdmAgent.id"]
+                }
             })
+
             this.setState({
-                selectedItem: []
+                isLoading: true
             })
+            this.props.changeActionList(button.label)
 
-            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-            if (this.state.selectedItemList.length > 1) {
-                this.props.showNotification('Success', 'elements successfully removed')                        
-            } else {
-                this.props.showNotification('Success', 'element successfully removed')                        
-            }
+            this.props.glpi.deleteItem('PluginFlyvemdmAgent', null, itemListToDelete, { force_purge: true })
+                .then((response) => {
+                    this.props.showNotification('Success', 'elements successfully removed')
+                    this.props.changeActionList(null)
+                    this.props.changeSelectionMode(false)
+                    this.setState({
+                        selectedItemList: []
+                    })
+                })
+                .catch((error) => {
+                    if (error.length > 1) {
+                        this.props.showNotification(error[0], error[1])
+                    }
+                    this.props.changeActionList(null)
+                    this.props.changeSelectionMode(false)
+                    this.setState({
+                        selectedItemList: []
+                    })
+                })
         } else {
             // Clean another actions selected
             this.props.changeActionList(null)
@@ -154,7 +164,7 @@ export default class DevicesList extends Component {
             this.props.changeSelectionMode(false)
             this.refs.listView.winControl.selection.clear()
             this.setState({
-                selectedItem: []
+                selectedItemList: []
             })
         }
     }
@@ -214,6 +224,7 @@ export default class DevicesList extends Component {
             <ReactWinJS.ToolBar.Button
                 key="delete"
                 icon="delete"
+                label="Delete"
                 priority={0}
                 disabled={this.state.selectedItemList.length === 0}
                 onClick={this.handleDelete}
