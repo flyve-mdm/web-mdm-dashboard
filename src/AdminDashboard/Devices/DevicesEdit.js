@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import DevicesEditItemList from './DevicesEditItemList'
 import ContentPane from '../../Utils/ContentPane'
 import EmptyMessage from '../../Utils/EmptyMessage'
+import Loading from '../../Utils/Loading'
 
 export default class DevicesEdit extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            itemListEdit: [...this.props.selectedItemList]
+            itemListEdit: [...this.props.selectedItemList],
+            isLoading: false
         }
     }
 
@@ -36,17 +38,26 @@ export default class DevicesEdit extends Component {
             }
         })
 
+        this.setState({
+            isLoading: true
+        })
+
         if (itemListToSave.length > 0) {
             this.props.glpi.updateItem("PluginFlyvemdmAgent", null, itemListToSave)
             .then((response) => {
-                this.props.changeSelectionMode(false)
+                this.setState({
+                    isLoading: false
+                })
                 this.props.changeActionList(null)
+                this.props.changeSelectionMode(false)
                 this.props.onNavigate([this.props.location[0]])
             })
             .catch((error) => {
-                console.log(error)
-                this.props.changeSelectionMode(false)
+                this.setState({
+                    isLoading: false
+                })
                 this.props.changeActionList(null)
+                this.props.changeSelectionMode(false)
                 this.props.onNavigate([this.props.location[0]])
             })
         }
@@ -54,17 +65,23 @@ export default class DevicesEdit extends Component {
 
     render() {
         if (this.props.selectedItemList) {
-            let renderComponent = this.props.selectedItemList.map((item) => {                                
-                return (
-                    <DevicesEditItemList
-                    key={item["PluginFlyvemdmAgent.id"]}
-                    itemListPaneWidth={this.props.itemListPaneWidth}
-                    updateItemList={this.updateItemList}
-                    location={this.props.location}
-                    currentItem={item}
-                    changeActionList={this.props.changeActionList} />
-                )
-            })
+            
+            let renderComponent
+            if (this.state.isLoading) {
+                renderComponent = <Loading message="Loading..." />
+            } else {
+                renderComponent = this.props.selectedItemList.map((item) => {                                
+                    return (
+                        <DevicesEditItemList
+                        key={item["PluginFlyvemdmAgent.id"]}
+                        itemListPaneWidth={this.props.itemListPaneWidth}
+                        updateItemList={this.updateItemList}
+                        location={this.props.location}
+                        currentItem={item}
+                        changeActionList={this.props.changeActionList} />
+                    )
+                })
+            }
 
             return(
                 <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
