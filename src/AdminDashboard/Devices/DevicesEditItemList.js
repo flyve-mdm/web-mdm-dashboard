@@ -11,7 +11,6 @@ export default class DevicesEditItemList extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.currentItem)
         this.setState({
             input: this.props.currentItem["PluginFlyvemdmAgent.name"]
         })
