@@ -25,8 +25,12 @@ export default class DevicesList extends Component {
         this.handleRefresh()
     }
 
-    componentDidUpdate() {
-        
+    componentDidUpdate(prevProps) {
+
+        if (!this.props.actionList && prevProps.actionList === 'Edit') {
+            this.handleRefresh()
+        }
+
         if(this.refs.listView !== undefined && !this.state.scrolling) {
             this.refs.listView.winControl.footer.style.height = '1px'
         }
