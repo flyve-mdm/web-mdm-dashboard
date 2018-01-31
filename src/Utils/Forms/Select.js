@@ -17,7 +17,7 @@ class Select extends Component {
     componentDidMount = async () => {
         if (this.props.glpi && this.props.request) {
             const response = await this.props.glpi[this.props.request.method](...this.props.request.params)
-            
+
             let options = []
 
             switch (this.props.request.method) {
@@ -36,6 +36,19 @@ class Select extends Component {
                 case 'searchItems':
                     if (response.data) {
                         response.data.forEach(element => {
+                            options = [
+                                ...options, 
+                                {
+                                    content: element[this.props.request.content],
+                                    value: element[this.props.request.value]
+                                }
+                            ]
+                        })
+                    }
+                    break
+                    case 'getAllItems':
+                    if (response) {
+                        response.forEach(element => {
                             options = [
                                 ...options, 
                                 {
