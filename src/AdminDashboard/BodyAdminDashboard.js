@@ -14,6 +14,7 @@ import About from './About'
 import Settings from './Settings'
 import ToastNotifications from '../Utils/ToastNotifications'
 import NativeNotification from '../Utils/NativeNotification'
+import validateNotifications from '../Utils/validateNotifications'
 import GlpiApi from '../Utils/GlpiApi'
 
 const components = { Dashboard, Devices, Invitations, Fleets, Files, Applications, Users, Settings, About }
@@ -93,8 +94,9 @@ class BodyAdminDashboard extends Component {
     }
 
     showNotification = (title, body) => {
-        if (localStorage.getItem('showNotifications') === 'true') {
-            if (localStorage.getItem('notificationType') === "Toast") {
+        let notifications = validateNotifications()
+        if (notifications.show) {
+            if (notifications.type === "Toast") {
                 if(this.toastNotifications) this.toastNotifications.showNotification(title, body)
             } else {
                 NativeNotification(title, body)
