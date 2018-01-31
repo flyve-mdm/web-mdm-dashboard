@@ -24,16 +24,16 @@ export default class Profiles extends Component {
         
         this.setState({
             isLoading: false,
-            login: validateData(myUser.name, undefined),
+            login: validateData(myUser.name),
             firstName: validateData(myUser.firstname),
             realName: validateData(myUser.realname),
             phone: validateData(myUser.phone),
             mobilePhone: validateData(myUser.mobile),
             phone2: validateData(myUser.phone2),
             administrativeNumber: validateData(myUser.registration_number),
-            lastLogin: validateData(myUser.last_login, undefined),
-            created: validateData(myUser.date_creation, undefined),
-            modified: validateData(myUser.date_mod, undefined),
+            lastLogin: validateData(myUser.last_login),
+            created: validateData(myUser.date_creation),
+            modified: validateData(myUser.date_mod),
             emails: validateData(myEmails, []),
             imageProfile: validateData(myUser.picture, "profile.png"),
             authentication: authtype(myUser.authtype),
@@ -57,7 +57,7 @@ export default class Profiles extends Component {
                     value: 'id'
                 }
             },
-            comments: myUser.comment,
+            comments: validateData(myUser.comment, ''),
             typeImageProfile: 'file',
             title: {
                 value: myUser.usertitles_id,
