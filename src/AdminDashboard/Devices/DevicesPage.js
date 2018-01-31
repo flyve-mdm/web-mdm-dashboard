@@ -67,10 +67,11 @@ export default class DevicesPage extends Component {
                 return (
                     <DevicesEditOne 
                         itemListPaneWidth={this.props.itemListPaneWidth}
-                        dataSource={this.props.dataSource}
+                        selectedItemList={this.props.selectedItemList}
                         location={this.props.location}    
                         changeActionList={this.props.changeActionList}
                         showNotification={this.props.showNotification} 
+                        glpi={this.props.glpi}
                     />
                 )
             }
