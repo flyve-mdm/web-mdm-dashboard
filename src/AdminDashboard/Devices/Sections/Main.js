@@ -28,7 +28,7 @@ class DangerZone extends Component {
     }
 
     handleRefresh = () => {
-        this.props.glpi.getAnItem('PluginFlyvemdmAgent', this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'], { expand_dropdowns: true })
+        this.props.glpi.getAnItem('PluginFlyvemdmAgent', this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'], null)
             .then((response) => {
                 this.setState({
                     data: response
