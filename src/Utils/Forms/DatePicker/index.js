@@ -9,11 +9,11 @@ class DatePicker extends Component {
 
     constructor (props) {
         super(props)
-        const date = new Date (this.props.date)
+        const date = new Date (this.props.value)
         this.state = {
-            year: this.props.date ? date.getFullYear() : undefined,
-            month: this.props.date ? monthsList[date.getMonth()] : undefined,
-            day: this.props.date ? date.getDate() : undefined
+            year: this.props.value ? date.getFullYear() : undefined,
+            month: this.props.value ? monthsList[date.getMonth()] : undefined,
+            day: this.props.value ? date.getDate() : undefined
         }
     }
 
