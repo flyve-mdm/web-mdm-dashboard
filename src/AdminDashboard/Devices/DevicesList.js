@@ -26,13 +26,13 @@ export default class DevicesList extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        
+        if(this.listView && !this.state.scrolling) {
+            this.listView.winControl.footer.style.height = '1px'
+        }
 
         if (!this.props.actionList && (prevProps.actionList === 'Edit' || prevProps.actionList === 'Delete')) {
             this.handleRefresh()
-        }
-
-        if(this.refs.listView !== undefined && !this.state.scrolling) {
-            this.refs.listView.winControl.footer.style.height = '1px'
         }
     }
 
@@ -84,7 +84,7 @@ export default class DevicesList extends Component {
 
     handlePanel = (eventObject) => {
         let button = eventObject.currentTarget.winControl
-        this.refs.listView.winControl.selection.clear()
+        this.listView.winControl.selection.clear()
         
         this.props.changeSelectionMode(false)
         this.props.onNavigate([this.props.location[0]])
@@ -92,10 +92,13 @@ export default class DevicesList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.listView.winControl.selection.clear()
         this.props.changeActionList(null)
-        this.props.onNavigate([this.props.location[0]])
-        this.refs.listView.winControl.selection.clear()
+        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.props.onNavigate([this.props.location[0]])  
+        this.setState({
+            selectedItemList: []
+        })
     }
 
     handleSelectionChanged = (eventObject) => {
@@ -162,7 +165,7 @@ export default class DevicesList extends Component {
             this.props.changeActionList(null)
             // Exit selection mode
             this.props.changeSelectionMode(false)
-            this.refs.listView.winControl.selection.clear()
+            this.listView.winControl.selection.clear()
             this.setState({
                 selectedItemList: []
             })
@@ -249,7 +252,7 @@ export default class DevicesList extends Component {
         } else if (!this.state.isLoading && this.state.itemList.groups !== undefined ) {
             listComponent = (
                 <ReactWinJS.ListView
-                    ref="listView"
+                    ref={(listView) => { this.listView = listView }}
                     onLoadingStateChanged={this.onLoadingStateChanged}
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
