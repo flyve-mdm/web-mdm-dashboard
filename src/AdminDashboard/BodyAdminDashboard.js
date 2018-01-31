@@ -10,13 +10,14 @@ import Invitations from './Invitations'
 import Fleets from './Fleets'
 import Files from './Files'
 import Applications from './Applications'
+import SearchEngine from './SearchEngine'
 import About from './About'
 import Settings from './Settings'
 import ToastNotifications from '../Utils/ToastNotifications'
 import NativeNotification from '../Utils/NativeNotification'
 import GlpiApi from '../Utils/GlpiApi'
 
-const components = { Dashboard, Devices, Invitations, Fleets, Files, Applications, Users, Settings, About }
+const components = { Dashboard, Devices, Invitations, Fleets, Files, Applications, Users, Settings, About, SearchEngine}
 
 function mapStateToProps(state, props) {
     return {

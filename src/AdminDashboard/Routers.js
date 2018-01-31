@@ -51,6 +51,13 @@ const routers = [
         data: Data.Users
     },
     {
+        type: "content",
+        label: "SearchEngine",
+        icon: "find",
+        style: {},
+        data: []
+    },
+    {
         type: "list",
         label: "Settings",
         icon: "settings",
