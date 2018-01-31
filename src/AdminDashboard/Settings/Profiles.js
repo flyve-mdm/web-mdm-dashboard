@@ -92,7 +92,41 @@ export default class Profiles extends Component {
     }
 
     saveChanges = () => {
-        this.props.showNotification('Success', 'saved profile')
+
+        let newUser = { 
+            id: this.props.currentUser.id,
+            firstname: this.state.firstName,
+            realname: this.state.realName,
+            phone: this.state.phone,
+            mobile: this.state.mobilePhone,
+            phone2: this.state.phone2,
+            registration_number: this.state.administrativeNumber,
+            picture: this.state.imageProfile,
+            authentication: this.state.authtype,
+            usercategories_id: this.state.category.value,
+            entities_id: this.state.defaultEntity.value,
+            comment: this.state.comments,
+            usertitles_id: this.state.title.value,
+            locations_id: this.state.location.value,
+            profiles_id: this.state.defaultProfile.value,
+            begin_date: this.state.validSince,
+            end_date: this.state.validUntil
+        }
+
+        try {
+            this.setState (
+                { isLoading: true },
+                async () => {
+                    await this.props.glpi.updateItem('User', null, newUser)
+                    this.props.showNotification('Success', 'saved profile')
+                    this.setState ({isLoading: false})
+                }
+            )
+        } catch (e) {
+            this.setState ({isLoading: false})            
+            this.props.showNotification('Error', e)
+         }
+        
     }
 
     changeState = (name, value) => {
