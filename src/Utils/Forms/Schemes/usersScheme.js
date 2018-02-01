@@ -254,10 +254,10 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
         emailsInformation = [
             ...emailsInformation,
             [{
+                index,
                 label: `Email ${index + 1}`,
                 type: "email",
-                name: index,
-                value: state.emails[index],
+                email: state.emails[index],
                 placeholder: null,
                 function: changeEmail,
                 disabled: false,
