@@ -9,21 +9,47 @@ export default class DevicesEditOne extends Component {
 
     componentDidMount() {
         if (this.props.selectedItemList) {
-            this.setState({
-                isLoading: false,
-                id: this.props.selectedItemList[0]["id"],
-                name: this.props.selectedItemList[0]["name"],
-                fleet: {
-                    value: this.props.selectedItemList[0]["plugin_flyvemdm_fleets_id"],
-                    request: {
-                        params: ['PluginFlyvemdmFleet', null],
-                        method: 'getAllItems',
-                        content: 'name',
-                        value: 'id'
-                    }
-                }
-            })
+            this.handleRefresh()
         }
+    }
+
+    handleRefresh = () => {
+        this.setState({
+            isLoading: true
+        })
+        this.props.glpi.getAnItem('PluginFlyvemdmAgent', this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'], null)
+            .then((response) => {
+                this.setState({
+                    isLoading: false,
+                    id: response["id"],
+                    name: response["name"],
+                    fleet: {
+                        value: response["plugin_flyvemdm_fleets_id"],
+                        request: {
+                            params: ['PluginFlyvemdmFleet', null],
+                            method: 'getAllItems',
+                            content: 'name',
+                            value: 'id'
+                        }
+                    }
+                })
+            })
+            .catch((error) => {
+                this.setState({
+                    isLoading: false,
+                    id: null,
+                    name: '',
+                    fleet: {
+                        value: '',
+                        request: {
+                            params: ['PluginFlyvemdmFleet', null],
+                            method: 'getAllItems',
+                            content: 'name',
+                            value: 'id'
+                        }
+                    }
+                })
+            })
     }
 
     changeState = (name, value) => {
@@ -72,15 +98,17 @@ export default class DevicesEditOne extends Component {
             <div className="separator" />
             <Loading message="Loading..." />
         </ContentPane>) 
-        const agent = this.state ? agentScheme({
+
+        if(!this.state) {
+            return componetRender
+        } else {
+            const agent = this.state.name ? agentScheme({
                 state: this.state, 
                 changeState: this.changeState,
                 glpi: this.props.glpi
             }) : null
-        if(agent) {
-            if(this.state.isLoading) {
-                return componetRender
-            } else {
+
+            if(agent) {
                 return (
                     <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                         <div className="contentHeader">
@@ -93,12 +121,10 @@ export default class DevicesEditOne extends Component {
                         <ConstructInputs data={agent.mainInformation} />
                     </ContentPane>
                 )
-            }
-            
-        } else {
-            return componetRender
+            } else {
+                return componetRender
+            }   
         }
-        
     }
 }
 DevicesEditOne.propTypes = {
