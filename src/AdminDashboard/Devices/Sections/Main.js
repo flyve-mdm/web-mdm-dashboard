@@ -58,7 +58,6 @@ class Main extends Component {
 
     handleEdit = () => {
         this.props.changeActionList("EditOne")
-        this.props.onNavigate([this.props.location[0], [this.state.data]])
     }
     
     render() {
