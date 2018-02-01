@@ -141,6 +141,15 @@ export default class Profiles extends Component {
         this.changeState('emails', emails)
     }
 
+    changeSelect = (name, value) => {
+        this.setState({
+            [name]: {
+                ...this.state[name],
+                value
+            }
+        })
+    }
+
     deleteEmail = (index) => {
         this.setState({
             emails: this.state.emails.slice(0,index).concat(this.state.emails.slice(index+1))
@@ -186,6 +195,7 @@ export default class Profiles extends Component {
                 state: this.state, 
                 changeState: this.changeState,
                 deleteEmail: this.deleteEmail,
+                changeSelect: this.changeSelect,
                 glpi: this.props.glpi
             })
 
