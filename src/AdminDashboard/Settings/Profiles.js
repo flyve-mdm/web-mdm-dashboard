@@ -20,7 +20,7 @@ export default class Profiles extends Component {
     componentDidMount = async () => {
         const myUser = await this.props.glpi.getAnItem('User', this.props.currentUser.id)
         const myEmails = await this.props.glpi.getSubItems('User', this.props.currentUser.id, 'UserEmail')
-        
+
         this.setState({
             isLoading: false,
             login: myUser.name,
@@ -33,6 +33,7 @@ export default class Profiles extends Component {
             lastLogin: myUser.last_login,
             created: myUser.date_creation,
             modified: myUser.date_mod,
+            currentEmails: myEmails.map(a => ({...a})),
             emails: validateData(myEmails, []),
             imageProfile: validateData(myUser.picture, "profile.png"),
             authentication: authtype(myUser.authtype),
@@ -116,6 +117,7 @@ export default class Profiles extends Component {
                 { isLoading: true },
                 async () => {
                     await this.props.glpi.updateItem('User', null, newUser)
+                    await this.props.glpi.updateEmails(newUser.id, this.state.currentEmails, this.state.emails)
                     this.props.showNotification('Success', 'saved profile')
                     this.setState ({isLoading: false})
                 }
@@ -123,8 +125,7 @@ export default class Profiles extends Component {
         } catch (e) {
             this.setState ({isLoading: false})            
             this.props.showNotification('Error', e)
-         }
-        
+        }
     }
 
     changeState = (name, value) => {
@@ -136,7 +137,7 @@ export default class Profiles extends Component {
     changeEmail = (index, value) => {
         let emails = [...this.state.emails]
         emails[index].email = value
-        this.changeState('emails', emails)
+        this.setState({emails})
     }
 
     changeSelect = (name, value) => {

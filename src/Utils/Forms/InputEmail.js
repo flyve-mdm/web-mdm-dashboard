@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Confirmation from '../Confirmation'
 import ErrorValidation from './ErrorValidation'
 
-class Input extends Component {
+class InputEmail extends Component {
 
     constructor(props) {
         super(props)
@@ -67,7 +67,7 @@ class Input extends Component {
     }
 }
 
-Input.propTypes = {
+InputEmail.propTypes = {
     label: PropTypes.string.isRequired,
     index: PropTypes.oneOfType([
         PropTypes.string,
@@ -83,5 +83,5 @@ Input.propTypes = {
     forceValidation: PropTypes.bool
 }
 
-export default Input
+export default InputEmail
     
