@@ -98,8 +98,8 @@ class DangerZone extends Component {
                         </li>
                         <li>
                             <div className="callContent">
-                                <div className="title">Fleets</div>
-                                <div>{this.state.data["plugin_flyvemdm_fleets_id"]}</div>
+                                <div className="title">Type</div>
+                                <div>{this.state.data["mdm_type"]}</div>
                             </div>
                         </li>
                     </ul>
