@@ -19,8 +19,7 @@ export default class Profiles extends Component {
 
     componentDidMount = async () => {
         const myUser = await this.props.glpi.getAnItem('User', this.props.currentUser.id)
-        const myUserEmails = await this.props.glpi.getSubItems('User', this.props.currentUser.id, 'UserEmail')
-        const myEmails = myUserEmails.map(e => e.email)
+        const myEmails = await this.props.glpi.getSubItems('User', this.props.currentUser.id, 'UserEmail')
         
         this.setState({
             isLoading: false,
@@ -134,9 +133,9 @@ export default class Profiles extends Component {
         })
     }
 
-    changeEmail = (name, value) => {
+    changeEmail = (index, value) => {
         let emails = [...this.state.emails]
-        emails[name] = value
+        emails[index].email = value
         this.changeState('emails', emails)
     }
 
@@ -159,7 +158,7 @@ export default class Profiles extends Component {
         this.setState({
             emails: [
                 ...this.state.emails,
-                ''
+                { email: '' }
             ]
         })
     }
@@ -193,6 +192,7 @@ export default class Profiles extends Component {
             usersScheme({
                 state: this.state, 
                 changeState: this.changeState,
+                changeEmail: this.changeEmail,
                 deleteEmail: this.deleteEmail,
                 changeSelect: this.changeSelect,
                 glpi: this.props.glpi
