@@ -40,7 +40,7 @@ export default function ({ state, changeState }) {
         [
             {
                 label: "Support email",
-                type: "email",
+                type: "text",
                 name: "email",
                 value: state.email,
                 placeholder: null,
