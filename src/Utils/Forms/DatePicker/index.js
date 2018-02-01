@@ -28,7 +28,7 @@ class DatePicker extends Component {
         newDate[eventObject.target.name] = eventObject.target.value
 
         this.setState({ ...newDate },
-            this.props.function(this.props.name, new Date (`${this.state.year} ${this.state.month} ${this.state.day}`))
+            this.props.function(this.props.name, new Date (`${newDate.year} ${newDate.month} ${newDate.day}`))
         )
     }
 
