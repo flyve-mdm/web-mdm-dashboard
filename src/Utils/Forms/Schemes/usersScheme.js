@@ -1,4 +1,4 @@
-export default function ({state, changeState, changeEmail, deleteEmail, glpi}) {
+export default function ({state, changeState, changeEmail, deleteEmail, changeSelect, glpi}) {
 
     const personalInformation = [
         [
@@ -44,7 +44,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, glpi}) {
                 name: "title",
                 value: state.title.value,
                 options: [],
-                function: changeState,
+                function: changeSelect,
                 request: state.title.request,
                 glpi
             },
@@ -54,7 +54,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, glpi}) {
                 name: "location",
                 value: state.location.value,
                 options: [],
-                function: changeState,
+                function: changeSelect,
                 request: state.location.request,
                 glpi
             },
@@ -64,7 +64,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, glpi}) {
                 name: "defaultProfile",
                 value: state.defaultProfile.value,
                 options: [],
-                function: changeState,
+                function: changeSelect,
                 request: state.defaultProfile.request,
                 glpi
             }
@@ -219,7 +219,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, glpi}) {
                 name: "category",
                 value: state.category.value,
                 options: [],
-                function: changeState,
+                function: changeSelect,
                 request: state.category.request,
                 glpi
             },
@@ -229,7 +229,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, glpi}) {
                 name: "defaultEntity",
                 value: state.defaultEntity.value,
                 options: [],
-                function: changeState,                
+                function: changeSelect,                
                 request: state.defaultEntity.request,
                 glpi
             }
