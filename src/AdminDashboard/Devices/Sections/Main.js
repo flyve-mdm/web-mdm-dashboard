@@ -65,12 +65,20 @@ class Main extends Component {
         if (this.state.data === undefined) {
             renderComponent = <Loading message="Loading..."/>
         } else {
+            let imageAgent = this.state.data["mdm_type"] ? `${this.state.data["mdm_type"]}.png` : null
+            let iconComponent 
+            
+            if (imageAgent) {
+                iconComponent = <IconItemList image={imageAgent} size={72} backgroundColor="transparent"/>
+            } else {
+                iconComponent = <IconItemList size={72} />
+            }
             renderComponent = (
             <div>
                 <div className="contentHeader">
                     <h2 className="win-h2 titleContentPane" > {Pluralize.singular(this.props.location[0])} </h2>
                     <div className="itemInfo">
-                        <IconItemList size={72} />
+                        {iconComponent}
                         <div className="contentStatus">
                             <div className="name">{this.state.data["name"]}</div>
 
