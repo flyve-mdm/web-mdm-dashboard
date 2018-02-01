@@ -5,7 +5,7 @@ import IconItemList from '../../IconItemList'
 import Confirmation from '../../../Utils/Confirmation'
 import Loading from '../../../Utils/Loading'
 
-class DangerZone extends Component {
+class Main extends Component {
 
     constructor(props) {
         super(props)
@@ -112,7 +112,7 @@ class DangerZone extends Component {
     }
 }
 
-DangerZone.propTypes = {
+Main.propTypes = {
     dataSource: PropTypes.object.isRequired,
     changeActionList: PropTypes.func.isRequired,
     changeDataSource: PropTypes.func.isRequired,
@@ -122,4 +122,4 @@ DangerZone.propTypes = {
     showNotification: PropTypes.func.isRequired
 }
 
-export default DangerZone
+export default Main
