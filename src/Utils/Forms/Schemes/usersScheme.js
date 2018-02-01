@@ -21,7 +21,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "text",
                 name: "realName",
                 value: state.realName,
-                placeholder: "Realname",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -31,7 +31,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "text",
                 name: "firstName",
                 value: state.firstName,
-                placeholder: "First name",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -78,7 +78,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "text",
                 name: "phone",
                 value: state.phone,
-                placeholder: "Phone",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -88,7 +88,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "text",
                 name: "mobilePhone",
                 value: state.mobilePhone,
-                placeholder: "Mobile phone",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -100,7 +100,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "text",
                 name: "phone2",
                 value: state.phone2,
-                placeholder: "Phone 2",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -110,7 +110,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "text",
                 name: "administrativeNumber",
                 value: state.administrativeNumber,
-                placeholder: "Administrative number",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -124,7 +124,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "password",
                 name: "password",
                 value: state.password,
-                placeholder: "Password",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -134,7 +134,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "password",
                 name: "passwordConfirmation",
                 value: state.passwordConfirmation,
-                placeholder: "Password confirmation",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -149,7 +149,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "text",
                 name: "lastLogin",
                 value: state.lastLogin,
-                placeholder: "Last login",
+                placeholder: null,
                 function: changeState,
                 disabled: true,
                 style: {
@@ -161,7 +161,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "text",
                 name: "created",
                 value: state.created,
-                placeholder: "Created",
+                placeholder: null,
                 function: changeState,
                 disabled: true,
                 style: {
@@ -173,7 +173,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 type: "text",
                 name: "modified",
                 value: state.modified,
-                placeholder: "Modified",
+                placeholder: null,
                 function: changeState,
                 disabled: true,
                 style: {
