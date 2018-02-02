@@ -27,6 +27,7 @@ class DevicesContent extends Component {
 
                         <SystemReport 
                             selectedItemList={this.props.selectedItemList}
+                            glpi={this.props.glpi}
                         />
 
                     </ReactWinJS.Pivot.Item>
