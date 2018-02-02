@@ -97,8 +97,6 @@ export default class Profiles extends Component {
             id: this.props.currentUser.id,
             firstname: this.state.firstName,
             realname: this.state.realName,
-            password: this.state.password,
-            password2: this.state.passwordConfirmation,
             phone: this.state.phone,
             mobile: this.state.mobilePhone,
             phone2: this.state.phone2,
@@ -112,6 +110,14 @@ export default class Profiles extends Component {
             profiles_id: this.state.defaultProfile.value,
             begin_date: this.state.validSince,
             end_date: this.state.validUntil
+        }
+
+        if (this.state.password !== '' || this.state.passwordConfirmation !== '') {
+            newUser = {
+                ...newUser,
+                password: this.state.password,
+                password2: this.state.passwordConfirmation,
+            }
         }
 
         try {
