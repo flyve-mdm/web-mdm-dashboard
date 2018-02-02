@@ -31,7 +31,7 @@ export default class DevicesList extends Component {
             this.listView.winControl.footer.style.height = '1px'
         }
 
-        if (!this.props.actionList && (prevProps.actionList === 'Edit' || prevProps.actionList === 'Delete')) {
+        if (!this.props.actionList && (prevProps.actionList === 'Edit' || prevProps.actionList === 'EditOne' || prevProps.actionList === 'Delete')) {
             this.handleRefresh()
         }
     }

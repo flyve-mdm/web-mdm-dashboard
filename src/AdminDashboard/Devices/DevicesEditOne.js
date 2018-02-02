@@ -74,11 +74,9 @@ export default class DevicesEditOne extends Component {
         }
         this.props.glpi.updateItem('PluginFlyvemdmAgent', this.state.id, input)
         .then(() => {
-            this.setState({
-                isLoading: false
-            })
             this.props.showNotification('Success', 'changes saved successfully')
             this.props.changeActionList(null)
+            this.props.changeSelectionMode(false)
         })
         .catch((error) => {
             this.setState({
@@ -89,7 +87,7 @@ export default class DevicesEditOne extends Component {
             }
         })
     }
-
+    
     render() {
         const componetRender = (<ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
             <div className="contentHeader">
@@ -108,7 +106,7 @@ export default class DevicesEditOne extends Component {
                 glpi: this.props.glpi
             }) : null
 
-            if(agent) {
+            if(agent && !this.state.isLoading) {
                 return (
                     <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                         <div className="contentHeader">
@@ -133,7 +131,9 @@ DevicesEditOne.propTypes = {
         PropTypes.number
     ]).isRequired,
     selectedItemList: PropTypes.array,
+    changeSelectionMode: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
