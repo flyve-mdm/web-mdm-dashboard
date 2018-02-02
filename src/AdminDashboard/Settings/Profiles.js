@@ -7,6 +7,7 @@ import IconItemList from '../IconItemList'
 import { usersScheme } from '../../Utils/Forms/Schemes'
 import Loading from '../../Utils/Loading'
 import authtype from '../../Utils/authtype'
+import ErrorValidation from '../../Utils/Forms/ErrorValidation'
 
 export default class Profiles extends Component {
     
@@ -20,15 +21,14 @@ export default class Profiles extends Component {
     componentDidMount = async () => {
         const myUser = await this.props.glpi.getAnItem('User', this.props.currentUser.id)
         const myEmails = await this.props.glpi.getSubItems('User', this.props.currentUser.id, 'UserEmail')
-        const glpiConfig = await this.props.glpi.getGlpiConfig()
+        const {cfg_glpi} = await this.props.glpi.getGlpiConfig()
 
         const parametersToEvaluate = {
-            isRequired: true,
-            minimunLength: glpiConfig.password_min_length,
-            needDigit: glpiConfig.password_need_number,
-            needLowercaseCharacter: glpiConfig.password_need_letter,
-            needUppercaseCharacter: glpiConfig.password_need_caps,
-            needSymbol: glpiConfig.password_need_symbol
+            minimunLength: cfg_glpi.password_min_length,
+            needDigit: cfg_glpi.password_need_number,
+            needLowercaseCharacter: cfg_glpi.password_need_letter,
+            needUppercaseCharacter: cfg_glpi.password_need_caps,
+            needSymbol: cfg_glpi.password_need_symbol
         }
 
         this.setState({
@@ -123,28 +123,38 @@ export default class Profiles extends Component {
             end_date: this.state.validUntil
         }
 
-        if (this.state.password !== '' || this.state.passwordConfirmation !== '') {
-            newUser = {
-                ...newUser,
-                password: this.state.password,
-                password2: this.state.passwordConfirmation,
-            }
-        }
+        let correctPassword = true        
 
-        this.setState (
-            { isLoading: true },
-            async () => {
-                try {
-                    await this.props.glpi.updateItem('User', null, newUser)
-                    await this.props.glpi.updateEmails(newUser.id, this.state.currentEmails, this.state.emails)
-                    this.props.showNotification('Success', 'saved profile')
-                    this.setState ({isLoading: false})
-                } catch (e) {
-                    this.setState ({isLoading: false})            
-                    this.props.showNotification('Error', e)
+        if (this.state.password !== '' || this.state.passwordConfirmation !== '') {
+            if (!ErrorValidation.validation(this.state.parametersToEvaluate, this.state.password).isCorrect) {
+                correctPassword = false
+            } else if (!ErrorValidation.validation({...this.state.parametersToEvaluate, isEqualTo: {value: this.state.password, message: "Passwords do not match"}}, this.state.passwordConfirmation).isCorrect) {
+                correctPassword = false
+            } else {
+                newUser = {
+                    ...newUser,
+                    password: this.state.password,
+                    password2: this.state.passwordConfirmation,
                 }
             }
-        )
+        }
+        
+        if (correctPassword) { 
+            this.setState (
+                { isLoading: true },
+                async () => {
+                    try {
+                        await this.props.glpi.updateItem('User', null, newUser)
+                        await this.props.glpi.updateEmails(newUser.id, this.state.currentEmails, this.state.emails)
+                        this.props.showNotification('Success', 'saved profile')
+                        this.setState ({isLoading: false})
+                    } catch (e) {
+                        this.setState ({isLoading: false})            
+                        this.props.showNotification('Error', e)
+                    }
+                }
+            )
+        }
     }
 
     changeState = (name, value) => {
