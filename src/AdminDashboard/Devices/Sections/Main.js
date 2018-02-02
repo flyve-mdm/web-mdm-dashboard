@@ -52,10 +52,12 @@ class Main extends Component {
             this.setState({
                 isLoading: true
             })
+            this.props.changeActionList("Delete")
 
             this.props.glpi.deleteItem('PluginFlyvemdmAgent', null, itemListToDelete, null)
             .then((response) => {
                 this.props.showNotification('Success', 'elements successfully removed')
+                this.props.changeActionList(null)
                 this.props.changeSelectionMode(false)
                 this.props.onNavigate([this.props.location[0]])
             })
@@ -131,9 +133,8 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-    dataSource: PropTypes.object.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     selectedItemList: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
