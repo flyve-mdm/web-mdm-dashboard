@@ -1,65 +1,80 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-class SystemReport extends Component {
-    
-    buildList = (title) => {
-        let elementList
-        if (Array.isArray(this.props.selectedItemList['PluginFlyvemdmAgent.systemReport'][title])) {
-            elementList = this.props.selectedItemList['PluginFlyvemdmAgent.systemReport'][title].map((x) => {
-                return Object.keys(x).map((element, key2) => {
-                    return (
-                        <div className="list-content" key={key2}>
-                            <div className="list-col">
-                                { element }
-                            </div>
-                            <div className="list-col">
-                                {x[element]}
-                            </div>
-                        </div>
-                    )
-                })
-            })
-        } else {
-            elementList = Object.keys(this.props.selectedItemList['PluginFlyvemdmAgent.systemReport'][title]).map((element, key2) => {
-                return (
-                    <div className="list-content" key={key2}>
-                        <div className="list-col">
-                            { element }
-                        </div>
-                        <div className="list-col">
-                            {this.props.selectedItemList['PluginFlyvemdmAgent.systemReport'][title][element]}
-                        </div>
-                    </div>
-                )
-            })
-        }
 
-        return elementList
+class SystemReport extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            agent: undefined,
+            isLoading: false
+        }
     }
-                
+
+    componentDidMount() {
+        this.handleRefresh()
+    }
+
+    handleRefresh = async () => {
+
+        try {
+            this.setState({
+                isLoading: true
+            })
+            const agent = await this.props.glpi.getAnItem('PluginFlyvemdmAgent', this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'], null)
+            this.setState({
+                isLoading: false,
+                agent
+            })
+            console.log(agent)
+        } catch (error) {
+            console.log(error)
+        }
+    }            
 
     render() {
-        return ( 
-            <div className="system-report">
-                {
-                    Object.keys(this.props.selectedItemList['PluginFlyvemdmAgent.systemReport']).map((title, key) => {
-                        return (
-                            <div key={key}>
-                                <div className="title"> { title } </div>
-                                {
-                                    this.buildList(title) 
-                                }
-                            </div>
-                        )
-                    })
-                }
-            </div>
-        )
+        if (this.state.isLoading && !this.state.agent) {
+            return (
+                <div className="system-report">
+                </div>
+            )
+        } else if (!this.state.isLoading && this.state.agent){
+            return (
+                <div className="system-report">
+                    <div className="title">Agent</div>
+                    <div className="list-content">
+                        <div className="list-col">ID</div>
+                        <div className="list-col">{this.state.agent['id']}</div>
+                    </div>
+                    <div className="list-content">
+                        <div className="list-col">Name</div>
+                        <div className="list-col">{this.state.agent['name']}</div>
+                    </div>
+                    <div className="list-content">
+                        <div className="list-col">Version</div>
+                        <div className="list-col">{this.state.agent['version']}</div>
+                    </div>
+                    <div className="list-content">
+                        <div className="list-col">Last contact</div>
+                        <div className="list-col">{this.state.agent['last_contact']}</div>
+                    </div>
+                    <div className="list-content">
+                        <div className="list-col">Last report</div>
+                        <div className="list-col">{this.state.agent['last_report'] ? this.state.agent['last_report'] : 'N/A'}</div>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className="system-report">
+                </div>
+            )
+        }
     }
 }
 
 SystemReport.propTypes = {
-    selectedItemList: PropTypes.object.isRequired
+    selectedItemList: PropTypes.array.isRequired
 }
 
 export default SystemReport
