@@ -113,8 +113,6 @@ DevicesEdit.propTypes = {
         PropTypes.number
     ]).isRequired,
     selectedItemList: PropTypes.array,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectedIndex: PropTypes.array,

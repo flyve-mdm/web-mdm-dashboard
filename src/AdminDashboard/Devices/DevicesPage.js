@@ -16,8 +16,6 @@ export default class DevicesPage extends Component {
                         <DevicesEdit
                             itemListPaneWidth={this.props.itemListPaneWidth}
                             selectedItemList={this.props.selectedItemList}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
@@ -93,8 +91,6 @@ DevicesPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     selectedItemList: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
