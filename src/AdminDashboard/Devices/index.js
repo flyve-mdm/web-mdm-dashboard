@@ -26,11 +26,6 @@ export default class Devices extends Component {
                 return <DevicesList
                     itemListPaneWidth={'100%'}
                     animation={this.props.animation}
-                    dataSource={this.props.dataSource}
-                    changeDataSource={this.props.changeDataSource}
-                    fetchData={this.props.fetchData}
-                    isLoading={this.props.isLoading}
-                    isError={this.props.isError}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
                     changeSelectionMode={this.changeSelectionMode}
@@ -43,8 +38,6 @@ export default class Devices extends Component {
                 return <DevicesPage 
                     itemListPaneWidth={0}
                     animation={this.props.animation}
-                    dataSource={this.props.dataSource}
-                    changeDataSource={this.props.changeDataSource}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
                     selectedItemList={selectedItemList}
@@ -61,11 +54,6 @@ export default class Devices extends Component {
                     <DevicesList
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
-                        fetchData={this.props.fetchData}
-                        isLoading={this.props.isLoading}
-                        isError={this.props.isError}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
                         changeSelectionMode={this.changeSelectionMode}
@@ -78,8 +66,6 @@ export default class Devices extends Component {
                     <DevicesPage 
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
                         selectedItemList={selectedItemList}
@@ -97,8 +83,6 @@ export default class Devices extends Component {
 Devices.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
     animation: PropTypes.bool.isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
