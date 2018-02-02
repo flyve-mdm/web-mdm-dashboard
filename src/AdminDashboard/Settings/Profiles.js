@@ -120,20 +120,20 @@ export default class Profiles extends Component {
             }
         }
 
-        try {
-            this.setState (
-                { isLoading: true },
-                async () => {
+        this.setState (
+            { isLoading: true },
+            async () => {
+                try {
                     await this.props.glpi.updateItem('User', null, newUser)
                     await this.props.glpi.updateEmails(newUser.id, this.state.currentEmails, this.state.emails)
                     this.props.showNotification('Success', 'saved profile')
                     this.setState ({isLoading: false})
+                } catch (e) {
+                    this.setState ({isLoading: false})            
+                    this.props.showNotification('Error', e)
                 }
-            )
-        } catch (e) {
-            this.setState ({isLoading: false})            
-            this.props.showNotification('Error', e)
-        }
+            }
+        )
     }
 
     changeState = (name, value) => {
