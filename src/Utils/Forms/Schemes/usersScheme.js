@@ -126,6 +126,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 value: state.password,
                 placeholder: null,
                 function: changeState,
+                parametersToEvaluate: state.parametersToEvaluate,
                 disabled: false,
                 style: null
             },
@@ -135,6 +136,13 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 name: "passwordConfirmation",
                 value: state.passwordConfirmation,
                 placeholder: null,
+                parametersToEvaluate: {
+                    ...state.parametersToEvaluate,
+                    isEqualTo: {
+                        value: state.password,
+                        message: "Passwords do not match"
+                    }
+                },
                 function: changeState,
                 disabled: false,
                 style: null
