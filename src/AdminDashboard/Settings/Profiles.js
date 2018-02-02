@@ -20,8 +20,19 @@ export default class Profiles extends Component {
     componentDidMount = async () => {
         const myUser = await this.props.glpi.getAnItem('User', this.props.currentUser.id)
         const myEmails = await this.props.glpi.getSubItems('User', this.props.currentUser.id, 'UserEmail')
+        const glpiConfig = await this.props.glpi.getGlpiConfig()
+
+        const parametersToEvaluate = {
+            isRequired: true,
+            minimunLength: glpiConfig.password_min_length,
+            needDigit: glpiConfig.password_need_number,
+            needLowercaseCharacter: glpiConfig.password_need_letter,
+            needUppercaseCharacter: glpiConfig.password_need_caps,
+            needSymbol: glpiConfig.password_need_symbol
+        }
 
         this.setState({
+            parametersToEvaluate,
             isLoading: false,
             login: myUser.name,
             firstName: myUser.firstname,
