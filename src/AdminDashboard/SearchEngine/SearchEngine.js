@@ -5,8 +5,6 @@ import Panel from './Panel/Panel';
 
 import { setFields, getTranslation, normalizeQuery } from './actions';
 
-import computerOptions from './computerOptions.json';
-
 
 class SearchEngine extends Component {
   constructor(props) {
@@ -27,13 +25,15 @@ class SearchEngine extends Component {
 
   componentDidMount() {
     /*
-    * Simulation of searchOptions fetch response
+    * Fetch search options list of itemType
     */
-    setTimeout( () => {
-      this.setState({ listSearchOptions: computerOptions }, () => {
-        this.setFields();
+
+    GlpiApi.listSearchOptions(this.state.itemType).then( 
+      value => {
+        this.setState({ listSearchOptions: value }, () => {
+          this.setFields();
+        });
       });
-    }, 1000 )
   }
 
   handleChangeQuery = (query) => {
@@ -48,11 +48,9 @@ class SearchEngine extends Component {
     * Handle click event in the search button
     */
     
-    GlpiApi.searchItems('computer', this.normalizeQuery()).then( 
+    GlpiApi.searchItems(this.state.itemType, this.normalizeQuery()).then(
        value => {
       this.setState({itemResults: value.data})
-    }, reason => {
-      console.log(reason)
     });
 
   }
@@ -72,16 +70,19 @@ class SearchEngine extends Component {
       let arrayOfArraysIdAndData = Object.entries(result);
 
       arrayOfArraysIdAndData.forEach( (field, indexField) => {
+        // @field -> [fieldId, fieldValue]
         let objectField = {}
 
         objectField['fieldName'] = this.state.listSearchOptions[field[0]]['name'];
         objectField['fieldValue'] = field[1];
+        objectField['fieldId'] = field[0];
+        
 
-        arrayResult.push( objectField )
+        arrayResult.push( objectField );
 
       });
 
-      arrayResultsWithFields.push( arrayResult )
+      arrayResultsWithFields.push( arrayResult );
     });
 
     return (

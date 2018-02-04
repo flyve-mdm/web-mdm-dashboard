@@ -12,7 +12,10 @@ class Panel extends Component {
 
     this.props.itemResults.length && fields.push.apply(
       fields, this.props.itemResults[0].map(field => {
-        return field['fieldName'];
+        return [
+          field['fieldId'],
+          field['fieldName']
+        ];
       })
     )
     

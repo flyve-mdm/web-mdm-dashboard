@@ -20,6 +20,7 @@ const setFields = (ctx) => {
         let name = listSearchOptions[key]['name'];
 
         fields.push({
+          'id': key,
           'name': name.toLocaleLowerCase(),
           'label': name
         });
@@ -53,7 +54,39 @@ const getFieldId = (ctx, fieldName) => {
     }
   });
 
-  return id; // 23 is Manufacturer
+  return id;
+}
+
+const normalizeRule = (ctx, rule) => {
+  /*
+   * Normalize keys of rule object
+   * */
+  let objectCriteria = {};
+  objectCriteria['field'] = getFieldId(ctx, rule['field']);
+  objectCriteria['searchtype'] = rule['operator'];
+  objectCriteria['value'] = rule['value'];
+  return objectCriteria;
+}
+
+const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator) => {
+  if (typeof(query.rules) === undefined || typeof(query.field) === "string") {
+    /*
+     * It means that it is a rule, and it has operator, value and field
+     * */
+    arrayRulesExtracted.push( {
+      'link': combinator, // 'AND' or 'OR'
+      ...normalizeRule(ctx, query)
+    } );
+  } else {
+    /*
+     * It means that it is a group and you have rules and combinator
+     * */
+    query.rules.forEach( (rule) => {
+      recursiveExtractQueryRules(rule, ctx, arrayRulesExtracted, query.combinator);
+    })
+  }
+  
+  return arrayRulesExtracted;
 }
 
 const normalizeQuery = (ctx) => {
@@ -63,33 +96,13 @@ const normalizeQuery = (ctx) => {
   */
 
   const query = {...ctx.state.query};
-  const newArrayQuery = [];
+  const arrayRules = []
 
-  console.log('[Antes del each] ', query, ctx.state.query)
+  const arrayRulesExtracted = recursiveExtractQueryRules(
+    query, ctx, arrayRules, query.combinator
+  )
 
-  let objectCriteria = {};
-
-  // TODO: Make a recursive function 
-  query.rules.forEach( (value, index) => {
-    if (query.combinator !== undefined ) {
-      objectCriteria['link'] = query.combinator
-    } 
-
-    objectCriteria['field'] = getFieldId(ctx, value['field']);
-
-    objectCriteria['searchtype'] = value['operator'];
-
-    objectCriteria['value'] = value['value'];
-
-    newArrayQuery.push( objectCriteria );
-
-    objectCriteria = {}
-  });
-
-  console.log('[Despues del each] ', newArrayQuery);
-
-  return newArrayQuery;
-
+  return arrayRulesExtracted;
 }
 
 const getTranslation = () => {

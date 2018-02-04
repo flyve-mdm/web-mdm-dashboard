@@ -5,15 +5,14 @@ import PropTypes from 'prop-types';
 class PanelFields extends Component {
   render() { 
     return ( 
-      /*
-      * TODO: Fix bug: The Operating System field is being supplanted by the Name Field
-      */
       <thead>
         <tr>
           {this.props.fields.map(field => {
+            let fieldKey = field[0];
+            let fieldName = field[1];
             return (
-              <th key={field}>
-                { field }
+              <th key={fieldKey}>
+                { fieldName }
               </th>
             )
           })}
