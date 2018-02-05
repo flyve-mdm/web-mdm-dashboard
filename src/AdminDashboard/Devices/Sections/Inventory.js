@@ -34,7 +34,6 @@ export default class Inventory extends Component {
             let object = Object.keys(this.props.fields).map((key, index) => {
                 return { [this.props.fields[key]]: data[key] }
             })
-            console.log(data)
             this.setState({
                 isLoading: false,
                 data: object
