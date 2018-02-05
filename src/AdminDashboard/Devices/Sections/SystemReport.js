@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Inventory from './Inventory'
 
 class SystemReport extends Component {
 
@@ -36,7 +37,6 @@ class SystemReport extends Component {
                 isLoading: false,
                 agent
             })
-            console.log(agent)
         } catch (error) {
             console.log(error)
         }
@@ -72,6 +72,15 @@ class SystemReport extends Component {
                         <div className="list-col">Last report</div>
                         <div className="list-col">{this.state.agent['last_report'] ? this.state.agent['last_report'] : 'N/A'}</div>
                     </div>
+
+                    <Inventory 
+                        title='Fleet'
+                        itemType='PluginFlyvemdmFleet'
+                        itemID={this.state.agent['plugin_flyvemdm_fleets_id']}
+                        fields={{id: 'ID', name: 'Name'}}
+                        glpi={this.props.glpi}
+                    />
+                    
                 </div>
             )
         } else {
