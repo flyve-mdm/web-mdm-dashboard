@@ -11,6 +11,16 @@ class SystemReport extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (this.props.selectedItemList !== prevProps.selectedItemList) {
+            this.setState({
+                agent: undefined,
+                isLoading: false
+            })
+            this.handleRefresh()
+        }
+    }
+
     componentDidMount() {
         this.handleRefresh()
     }
