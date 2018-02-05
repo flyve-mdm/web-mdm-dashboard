@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import Glpi from 'javascript-library-glpi'
+import Glpi from '@teclib/glpi-api-client'
 import config from '../../config.json'
 import Loading from '../../Utils/Loading'
 

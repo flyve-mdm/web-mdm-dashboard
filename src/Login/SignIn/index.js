@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { changeEmail, fetchData, changeNotificationMessage } from '../DuckController'
 import Loading from '../../Utils/Loading'
 import LoginContainer from '../LoginContainer'
-import Glpi from 'javascript-library-glpi'
+import Glpi from '@teclib/glpi-api-client'
 import config from '../../config.json'
 import ToastNotifications from '../../Utils/ToastNotifications'
 

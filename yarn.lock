@@ -62,6 +62,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@teclib/glpi-api-client@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@teclib/glpi-api-client/-/glpi-api-client-0.2.0.tgz#886f488cbc0f221bdc523a106cd58771729fe449"
+
 JSONStream@^1.0.4:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/JSONStream/-/JSONStream-1.3.2.tgz#c102371b6ec3a7cf3b847ca00c20bb0fce4c6dea"
@@ -2834,9 +2838,9 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@4.16.0:
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.16.0.tgz#934ada9e98715e1d7bbfd6f6f0519ed2fab35cc1"
+eslint@4.17.0:
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.17.0.tgz#dc24bb51ede48df629be7031c71d9dc0ee4f3ddf"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
@@ -4547,10 +4551,6 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
-"javascript-library-glpi@https://github.com/flyve-mdm/javascript-library-glpi#develop":
-  version "0.1.0"
-  resolved "https://github.com/flyve-mdm/javascript-library-glpi#fb9744376ca78d298fe808bd09de8471ca7f818f"
-
 jest-changed-files@^22.1.4:
   version "22.1.4"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-22.1.4.tgz#1f7844bcb739dec07e5899a633c0cb6d5069834e"
@@ -6256,14 +6256,14 @@ postcss-load-plugins@^2.3.0:
     cosmiconfig "^2.1.1"
     object-assign "^4.1.0"
 
-postcss-loader@2.0.10:
-  version "2.0.10"
-  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-2.0.10.tgz#090db0540140bd56a7a7f717c41bc29aeef4c674"
+postcss-loader@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-2.1.0.tgz#038c2d6d59753fef4667827fd3ae03f5dc5e6a7a"
   dependencies:
     loader-utils "^1.1.0"
     postcss "^6.0.0"
     postcss-load-config "^1.2.0"
-    schema-utils "^0.3.0"
+    schema-utils "^0.4.0"
 
 postcss-merge-idents@^2.1.5:
   version "2.1.7"
@@ -7240,7 +7240,7 @@ schema-utils@^0.3.0:
   dependencies:
     ajv "^5.0.0"
 
-schema-utils@^0.4.3:
+schema-utils@^0.4.0, schema-utils@^0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.4.3.tgz#e2a594d3395834d5e15da22b48be13517859458e"
   dependencies:
@@ -8373,17 +8373,17 @@ vfile@^2.0.0:
     unist-util-stringify-position "^1.0.0"
     vfile-message "^1.0.0"
 
-victory-chart@^24.6.1:
-  version "24.6.1"
-  resolved "https://registry.yarnpkg.com/victory-chart/-/victory-chart-24.6.1.tgz#8e1a85ab42c2e471d356e15f1637430cd57aca90"
+victory-chart@^25.0.0:
+  version "25.0.0"
+  resolved "https://registry.yarnpkg.com/victory-chart/-/victory-chart-25.0.0.tgz#8e53a6ec4322196057c264e82fd9ed2ba3b18c97"
   dependencies:
     d3-voronoi "^1.1.2"
     lodash "^4.17.4"
-    victory-core "^20.6.0"
+    victory-core "^21.0.1"
 
-victory-core@^20.6.0:
-  version "20.6.0"
-  resolved "https://registry.yarnpkg.com/victory-core/-/victory-core-20.6.0.tgz#5f5f4ac43364c9025dbbfbcd97a2f3feb3f9f6ad"
+victory-core@^21.0.0, victory-core@^21.0.1:
+  version "21.0.1"
+  resolved "https://registry.yarnpkg.com/victory-core/-/victory-core-21.0.1.tgz#69f10141a15aa1a5c6d2ea8e4126e01257ccd043"
   dependencies:
     d3-ease "^1.0.0"
     d3-interpolate "^1.1.1"
@@ -8392,21 +8392,21 @@ victory-core@^20.6.0:
     d3-timer "^1.0.0"
     lodash "^4.17.4"
 
-victory-pie@^13.3.1:
-  version "13.3.1"
-  resolved "https://registry.yarnpkg.com/victory-pie/-/victory-pie-13.3.1.tgz#26cf91ad492ea5f84785dfc34b705e58515f2386"
+victory-pie@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/victory-pie/-/victory-pie-14.0.0.tgz#393446774e59ec8652764d4d48efebf83ca4c28b"
   dependencies:
     d3-shape "^1.0.0"
     lodash "^4.17.4"
-    victory-core "^20.6.0"
+    victory-core "^21.0.0"
 
-victory@^0.24.3:
-  version "0.24.5"
-  resolved "https://registry.yarnpkg.com/victory/-/victory-0.24.5.tgz#2dccb0d8a4ad67d41a0c2989d4faee0f57cf6c74"
+victory@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/victory/-/victory-0.25.0.tgz#b802c7cf26ab00e5fee4e69c802a10a89b9a4c61"
   dependencies:
-    victory-chart "^24.6.1"
-    victory-core "^20.6.0"
-    victory-pie "^13.3.1"
+    victory-chart "^25.0.0"
+    victory-core "^21.0.0"
+    victory-pie "^14.0.0"
 
 viewport-dimensions@^0.2.0:
   version "0.2.0"
