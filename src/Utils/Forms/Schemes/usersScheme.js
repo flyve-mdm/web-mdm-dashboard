@@ -1,4 +1,4 @@
-export default function ({state, changeState, changeEmail, deleteEmail}) {
+export default function ({state, changeState, changeEmail, deleteEmail, changeSelect, glpi}) {
 
     const personalInformation = [
         [
@@ -21,7 +21,7 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "text",
                 name: "realName",
                 value: state.realName,
-                placeholder: "Realname",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -31,7 +31,7 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "text",
                 name: "firstName",
                 value: state.firstName,
-                placeholder: "First name",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -42,64 +42,31 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 label: "Title",
                 type: "select",
                 name: "title",
-                value: state.title,
-                options: [
-                    {
-                        label: 'option 1',
-                        value: 'option 1'
-                    },
-                    {
-                        label: 'option 2',
-                        value: 'option 2'
-                    },
-                    {
-                        label: 'option 3',
-                        value: 'option 3'
-                    }
-                ],
-                function: changeState
+                value: state.title.value,
+                options: [],
+                function: changeSelect,
+                request: state.title.request,
+                glpi
             },
             {
                 label: "Location",
                 type: "select",
                 name: "location",
-                value: state.location,
-                options: [
-                    {
-                        label: 'option 1',
-                        value: 'option 1'
-                    },
-                    {
-                        label: 'option 2',
-                        value: 'option 2'
-                    },
-                    {
-                        label: 'option 3',
-                        value: 'option 3'
-                    }
-                ],
-                function: changeState
+                value: state.location.value,
+                options: [],
+                function: changeSelect,
+                request: state.location.request,
+                glpi
             },
             {
                 label: "Default profile",
                 type: "select",
                 name: "defaultProfile",
-                value: state.defaultProfile,
-                options: [
-                    {
-                        label: 'option 1',
-                        value: 'option 1'
-                    },
-                    {
-                        label: 'option 2',
-                        value: 'option 2'
-                    },
-                    {
-                        label: 'option 3',
-                        value: 'option 3'
-                    }
-                ],
-                function: changeState
+                value: state.defaultProfile.value,
+                options: [],
+                function: changeSelect,
+                request: state.defaultProfile.request,
+                glpi
             }
         ]
     ]
@@ -111,7 +78,7 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "text",
                 name: "phone",
                 value: state.phone,
-                placeholder: "Phone",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -121,7 +88,7 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "text",
                 name: "mobilePhone",
                 value: state.mobilePhone,
-                placeholder: "Mobile phone",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -133,7 +100,7 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "text",
                 name: "phone2",
                 value: state.phone2,
-                placeholder: "Phone 2",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -143,7 +110,7 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "text",
                 name: "administrativeNumber",
                 value: state.administrativeNumber,
-                placeholder: "Administrative number",
+                placeholder: null,
                 function: changeState,
                 disabled: false,
                 style: null
@@ -157,8 +124,9 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "password",
                 name: "password",
                 value: state.password,
-                placeholder: "Password",
+                placeholder: null,
                 function: changeState,
+                parametersToEvaluate: state.parametersToEvaluate,
                 disabled: false,
                 style: null
             },
@@ -167,7 +135,14 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "password",
                 name: "passwordConfirmation",
                 value: state.passwordConfirmation,
-                placeholder: "Password confirmation",
+                placeholder: null,
+                parametersToEvaluate: {
+                    ...state.parametersToEvaluate,
+                    isEqualTo: {
+                        value: state.password,
+                        message: "Passwords do not match"
+                    }
+                },
                 function: changeState,
                 disabled: false,
                 style: null
@@ -182,7 +157,7 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "text",
                 name: "lastLogin",
                 value: state.lastLogin,
-                placeholder: "Last login",
+                placeholder: null,
                 function: changeState,
                 disabled: true,
                 style: {
@@ -194,7 +169,7 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "text",
                 name: "created",
                 value: state.created,
-                placeholder: "Created",
+                placeholder: null,
                 function: changeState,
                 disabled: true,
                 style: {
@@ -206,7 +181,7 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 type: "text",
                 name: "modified",
                 value: state.modified,
-                placeholder: "Modified",
+                placeholder: null,
                 function: changeState,
                 disabled: true,
                 style: {
@@ -250,43 +225,21 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 label: "Category",
                 type: "select",
                 name: "category",
-                value: state.category,
-                options: [
-                    {
-                        label: 'option 1',
-                        value: 'option 1'
-                    },
-                    {
-                        label: 'option 2',
-                        value: 'option 2'
-                    },
-                    {
-                        label: 'option 3',
-                        value: 'option 3'
-                    }
-                ],
-                function: changeState
+                value: state.category.value,
+                options: [],
+                function: changeSelect,
+                request: state.category.request,
+                glpi
             },
             {
                 label: "Default entity",
                 type: "select",
                 name: "defaultEntity",
-                value: state.defaultEntity,
-                options: [
-                    {
-                        label: 'option 1',
-                        value: 'option 1'
-                    },
-                    {
-                        label: 'option 2',
-                        value: 'option 2'
-                    },
-                    {
-                        label: 'option 3',
-                        value: 'option 3'
-                    }
-                ],
-                function: changeState
+                value: state.defaultEntity.value,
+                options: [],
+                function: changeSelect,                
+                request: state.defaultEntity.request,
+                glpi
             }
         ],
         [
@@ -309,10 +262,10 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
         emailsInformation = [
             ...emailsInformation,
             [{
+                index,
                 label: `Email ${index + 1}`,
                 type: "email",
-                name: index,
-                value: state.emails[index],
+                email: state.emails[index],
                 placeholder: null,
                 function: changeEmail,
                 disabled: false,
@@ -320,7 +273,6 @@ export default function ({state, changeState, changeEmail, deleteEmail}) {
                 delete: deleteEmail
             }]
         ]
-        
     }
 
     return {

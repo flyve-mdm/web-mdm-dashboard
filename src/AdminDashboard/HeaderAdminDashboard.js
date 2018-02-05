@@ -9,7 +9,7 @@ import IconItemList from './IconItemList'
 import GetMode from '../Utils/GetMode'
 import currentUser from './data/currentUser.json'
 import Confirmation from '../Utils/Confirmation'
-import Glpi from 'javascript-library-glpi'
+import Glpi from '@teclib/glpi-api-client'
 import config from '../config.json'
 
 function mapStateToProps(state, props) {
@@ -19,7 +19,7 @@ function mapStateToProps(state, props) {
         mode: state.AdminDashboard.mode,
         location: state.AdminDashboard.location,
         actionList: state.AdminDashboard.actionList,
-        currentUser: state.Login.currentUser,
+        currentUser: state.Login.currentUser
     }
 }
 

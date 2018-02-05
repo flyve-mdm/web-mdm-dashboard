@@ -16,8 +16,6 @@ export default class DevicesPage extends Component {
                         <DevicesEdit
                             itemListPaneWidth={this.props.itemListPaneWidth}
                             selectedItemList={this.props.selectedItemList}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
@@ -49,8 +47,7 @@ export default class DevicesPage extends Component {
                     return (
                         <DevicesContent
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
+                            changeSelectionMode={this.props.changeSelectionMode}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             selectedItemList={this.props.selectedItemList}
@@ -64,15 +61,27 @@ export default class DevicesPage extends Component {
                     )
                 }
             } else {
-                return (
-                    <DevicesEditOne 
-                        itemListPaneWidth={this.props.itemListPaneWidth}
-                        dataSource={this.props.dataSource}
-                        location={this.props.location}    
-                        changeActionList={this.props.changeActionList}
-                        showNotification={this.props.showNotification} 
-                    />
-                )
+                switch (this.props.actionList) {
+                    case "EditOne":
+                    return (
+                        <DevicesEditOne 
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            selectedItemList={this.props.selectedItemList}
+                            changeSelectionMode={this.props.changeSelectionMode}
+                            location={this.props.location} 
+                            onNavigate={this.props.onNavigate}
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification} 
+                            glpi={this.props.glpi}
+                        />
+                    )
+                    default:
+                    return (
+                        <EmptyMessage 
+                            message="No Selection" 
+                            itemListPaneWidth={this.props.itemListPaneWidth} />
+                    )
+                }
             }
         }
     }
@@ -82,8 +91,6 @@ DevicesPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     selectedItemList: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,

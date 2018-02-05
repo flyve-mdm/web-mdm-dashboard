@@ -55,7 +55,8 @@ SettingsList.propTypes = {
     animation: PropTypes.bool.isRequired,
     onNavigate: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
-    itemList: PropTypes.object.isRequired
+    itemList: PropTypes.object.isRequired,
+    glpi: PropTypes.object.isRequired
 }
 
 export default SettingsList

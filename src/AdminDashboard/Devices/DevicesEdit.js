@@ -51,8 +51,12 @@ export default class DevicesEdit extends Component {
                 this.props.changeActionList(null)
                 this.props.changeSelectionMode(false)
                 this.props.onNavigate([this.props.location[0]])
+                this.props.showNotification('Success', 'changes saved successfully')
             })
             .catch((error) => {
+                if(error.length > 1) {
+                    this.props.showNotification(error[0], error[1])
+                }
                 this.setState({
                     isLoading: false
                 })
@@ -109,8 +113,6 @@ DevicesEdit.propTypes = {
         PropTypes.number
     ]).isRequired,
     selectedItemList: PropTypes.array,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectedIndex: PropTypes.array,

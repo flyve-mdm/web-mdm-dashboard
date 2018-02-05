@@ -31,7 +31,7 @@ export default class DevicesList extends Component {
             this.listView.winControl.footer.style.height = '1px'
         }
 
-        if (!this.props.actionList && (prevProps.actionList === 'Edit' || prevProps.actionList === 'Delete')) {
+        if (!this.props.actionList && (prevProps.actionList === 'Edit' || prevProps.actionList === 'EditOne' || prevProps.actionList === 'Delete')) {
             this.handleRefresh()
         }
     }
@@ -247,9 +247,7 @@ export default class DevicesList extends Component {
 
         let listComponent = <Loader count={3} />
 
-        if(this.isError) {
-            listComponent = "Error"
-        } else if (!this.state.isLoading && this.state.itemList.groups !== undefined ) {
+        if (!this.state.isLoading && this.state.itemList.groups !== undefined ) {
             listComponent = (
                 <ReactWinJS.ListView
                     ref={(listView) => { this.listView = listView }}
@@ -320,8 +318,6 @@ DevicesList.propTypes = {
         PropTypes.number
     ]).isRequired,
     animation: PropTypes.bool.isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectionMode: PropTypes.bool.isRequired,

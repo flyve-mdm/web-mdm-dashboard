@@ -4,6 +4,7 @@ import Input from './Input'
 import Select from './Select'
 import DatePicker from './DatePicker'
 import TextArea from './TextArea'
+import InputEmail from './InputEmail'
 
 class ConstructInputs extends Component {
 
@@ -22,6 +23,8 @@ class ConstructInputs extends Component {
                                 value={element.value}
                                 options={element.options}
                                 function={element.function}
+                                glpi={element.glpi}
+                                request={element.request}
                                 key={element.name}/>
                             )
                         } else if (element.type === 'date') {
@@ -46,6 +49,18 @@ class ConstructInputs extends Component {
                                 style={element.style}
                                 delete={element.delete}
                                 key={element.name}/>
+                            )
+                        } else if (element.type === 'email') {
+                            renderElement = (
+                                <InputEmail
+                                index={element.index}
+                                label={element.label}
+                                email={element.email}
+                                function={element.function}
+                                disabled={element.disabled}
+                                style={element.style}
+                                delete={element.delete}                                
+                                key={`email${element.index}`}/>
                             )
                         } else {
                             renderElement = (

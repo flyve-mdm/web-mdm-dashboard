@@ -5,7 +5,7 @@ import IconItemList from '../../IconItemList'
 import Confirmation from '../../../Utils/Confirmation'
 import Loading from '../../../Utils/Loading'
 
-class DangerZone extends Component {
+class Main extends Component {
 
     constructor(props) {
         super(props)
@@ -28,7 +28,7 @@ class DangerZone extends Component {
     }
 
     handleRefresh = () => {
-        this.props.glpi.getAnItem('PluginFlyvemdmAgent', this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'], { expand_dropdowns: true })
+        this.props.glpi.getAnItem('PluginFlyvemdmAgent', this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'], null)
             .then((response) => {
                 this.setState({
                     data: response
@@ -42,17 +42,30 @@ class DangerZone extends Component {
     handleDelete = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
-            let item = this.props.dataSource.itemList
-            let index = this.props.selectedIndex
-            index.sort()
-            index.reverse()
-            index.forEach((i) => {
-                item.splice(i, 1)
+
+            let itemListToDelete = this.props.selectedItemList.map((item) => {
+                return {
+                    id: item["PluginFlyvemdmAgent.id"]
+                }
             })
 
-            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-            this.props.onNavigate([this.props.location[0]])
-            this.props.showNotification('Success', 'element successfully removed')
+            this.setState({
+                isLoading: true
+            })
+            this.props.changeActionList("Delete")
+
+            this.props.glpi.deleteItem('PluginFlyvemdmAgent', null, itemListToDelete, null)
+            .then((response) => {
+                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.changeActionList(null)
+                this.props.changeSelectionMode(false)
+                this.props.onNavigate([this.props.location[0]])
+            })
+            .catch((error) => {
+                if (error.length > 1) {
+                    this.props.showNotification(error[0], error[1])
+                }
+            })
         }
     }
 
@@ -65,12 +78,20 @@ class DangerZone extends Component {
         if (this.state.data === undefined) {
             renderComponent = <Loading message="Loading..."/>
         } else {
+            let imageAgent = this.state.data["mdm_type"] ? `${this.state.data["mdm_type"]}.png` : null
+            let iconComponent 
+            
+            if (imageAgent) {
+                iconComponent = <IconItemList image={imageAgent} size={72} backgroundColor="transparent"/>
+            } else {
+                iconComponent = <IconItemList size={72} />
+            }
             renderComponent = (
             <div>
                 <div className="contentHeader">
                     <h2 className="win-h2 titleContentPane" > {Pluralize.singular(this.props.location[0])} </h2>
                     <div className="itemInfo">
-                        <IconItemList size={72} />
+                        {iconComponent}
                         <div className="contentStatus">
                             <div className="name">{this.state.data["name"]}</div>
 
@@ -97,8 +118,8 @@ class DangerZone extends Component {
                         </li>
                         <li>
                             <div className="callContent">
-                                <div className="title">Fleets</div>
-                                <div>{this.state.data["plugin_flyvemdm_fleets_id"]}</div>
+                                <div className="title">Type</div>
+                                <div>{this.state.data["mdm_type"]}</div>
                             </div>
                         </li>
                     </ul>
@@ -111,14 +132,13 @@ class DangerZone extends Component {
     }
 }
 
-DangerZone.propTypes = {
-    dataSource: PropTypes.object.isRequired,
+Main.propTypes = {
     changeActionList: PropTypes.func.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     selectedItemList: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired
 }
 
-export default DangerZone
+export default Main

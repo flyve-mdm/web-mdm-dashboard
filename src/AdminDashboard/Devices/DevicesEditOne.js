@@ -1,93 +1,128 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../Utils/ContentPane'
+import ConstructInputs from '../../Utils/Forms'
+import { agentScheme } from '../../Utils/Forms/Schemes'
+import Loading from '../../Utils/Loading'
 
 export default class DevicesEditOne extends Component {
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            inputName: '',
-            inputFleet: ''
-        }
-    }
-
     componentDidMount() {
-        let selectedItemList
-        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
-        if (selectedIndex !== null) {
-            selectedItemList = this.props.dataSource.itemList.getAt(selectedIndex)
-            this.setState({
-                inputName: selectedItemList["PluginFlyvemdmAgent.Computer.User.realname"],
-                inputFleet: selectedItemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"]
-            })
+        if (this.props.selectedItemList) {
+            this.handleRefresh()
         }
     }
 
-    changeInput = (e) => {
-        switch (e.target.name) {
-            case 'inputName':
-                this.setState({ inputName: e.target.value })
-                break;
+    handleRefresh = () => {
+        this.setState({
+            isLoading: true
+        })
+        this.props.glpi.getAnItem('PluginFlyvemdmAgent', this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'], null)
+            .then((response) => {
+                this.setState({
+                    isLoading: false,
+                    id: response["id"],
+                    name: response["name"],
+                    fleet: {
+                        value: response["plugin_flyvemdm_fleets_id"],
+                        request: {
+                            params: ['PluginFlyvemdmFleet', null],
+                            method: 'getAllItems',
+                            content: 'name',
+                            value: 'id'
+                        }
+                    }
+                })
+            })
+            .catch((error) => {
+                this.setState({
+                    isLoading: false,
+                    id: null,
+                    name: '',
+                    fleet: {
+                        value: '',
+                        request: {
+                            params: ['PluginFlyvemdmFleet', null],
+                            method: 'getAllItems',
+                            content: 'name',
+                            value: 'id'
+                        }
+                    }
+                })
+            })
+    }
 
-            case 'inputFleet':
-                this.setState({ inputFleet: e.target.value })
-                break;
-    
-            default:
-                break;
-        }
+    changeState = (name, value) => {
+        if(name === 'fleet') {
+            this.setState({
+                [name]: {...this.state[name], value}
+            })
+        } else {
+            this.setState({
+                [name]: value
+            })
+        }   
     }
 
     handleSaveOneDevices = () => {
-        this.props.showNotification('Success', 'changes saved successfully')
-        this.props.changeActionList(null)
+        this.setState({
+            isLoading: true
+        })
+        const input = {
+            name: this.state.name,
+            plugin_flyvemdm_fleets_id: this.state.fleet.value
+        }
+        this.props.glpi.updateItem('PluginFlyvemdmAgent', this.state.id, input)
+        .then(() => {
+            this.props.showNotification('Success', 'changes saved successfully')
+            this.props.changeActionList(null)
+            this.props.changeSelectionMode(false)
+        })
+        .catch((error) => {
+            this.setState({
+                isLoading: false
+            })
+            if(error.length > 1) {
+                this.props.showNotification(error[0], error[1])
+            }
+        })
     }
-
+    
     render() {
+        const componetRender = (<ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+            <div className="contentHeader">
+                <h2 className="win-h2 titleContentPane" > Edit Device</h2>
+            </div>
+            <div className="separator" />
+            <Loading message="Loading..." />
+        </ContentPane>) 
 
-        return (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
-                <div className="contentHeader">
-                    <h2 className="win-h2 titleContentPane" > Edit Device</h2>
-                    <button className="win-button win-button-primary" onClick={this.handleSaveOneDevices}>
-                        Save
-                    </button>
-                </div>
-                <div className="separator" />
-                <div className='files-list' >
-                    <div className='files-list-content'>
-                        <div className='files-list-item'>
-                            <div className='item-content-primary'>
-                                <div>Device name</div>
-                                <input
-                                    type="text"
-                                    style={{ width: '240px' }}
-                                    className="win-textbox"
-                                    placeholder="Device name"
-                                    name="inputName"
-                                    value={this.state.inputName}
-                                    onChange={this.changeInput}
-                                />
-                            </div>
+        if(!this.state) {
+            return componetRender
+        } else {
+            const agent = this.state.name ? agentScheme({
+                state: this.state, 
+                changeState: this.changeState,
+                glpi: this.props.glpi
+            }) : null
+
+            if(agent && !this.state.isLoading) {
+                return (
+                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                        <div className="contentHeader">
+                            <h2 className="win-h2 titleContentPane" > Edit Device</h2>
+                            <button className="win-button win-button-primary" onClick={this.handleSaveOneDevices}>
+                                Save
+                            </button>
                         </div>
-                        <div className='files-list-item'>
-                            <div className='item-content-primary'>
-                                <div>Fleet name</div>
-                                <select 
-                                className="win-textbox"
-                                name="inputFleet"
-                                >
-                                    <option value="not managed fleet">not managed fleet</option>
-                                </select>
-                                <p>Changing the Fleet of the device has the immediate consequence of applying the Fleet's Configuration to the specific Device</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ContentPane>
-        )
+                        <div className="separator" />
+                        <ConstructInputs data={agent.mainInformation} />
+                    </ContentPane>
+                )
+            } else {
+                return componetRender
+            }   
+        }
     }
 }
 DevicesEditOne.propTypes = {
@@ -95,8 +130,11 @@ DevicesEditOne.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
+    selectedItemList: PropTypes.array,
+    changeSelectionMode: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }

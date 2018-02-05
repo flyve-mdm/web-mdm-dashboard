@@ -15,6 +15,7 @@ import About from './About'
 import Settings from './Settings'
 import ToastNotifications from '../Utils/ToastNotifications'
 import NativeNotification from '../Utils/NativeNotification'
+import validateNotifications from '../Utils/validateNotifications'
 import GlpiApi from '../Utils/GlpiApi'
 
 const components = { Dashboard, Devices, Invitations, Fleets, Files, Applications, Users, Settings, About, SearchEngine}
@@ -34,7 +35,8 @@ function mapStateToProps(state, props) {
         dataSource: state.AdminDashboard.dataSource,
         isLoading: state.AdminDashboard.isLoading,
         isError: state.AdminDashboard.isError,
-        passwordConfiguration: state.AdminDashboard.passwordConfiguration
+        passwordConfiguration: state.AdminDashboard.passwordConfiguration,
+        currentUser: state.Login.currentUser
     }
 }
 
@@ -94,8 +96,9 @@ class BodyAdminDashboard extends Component {
     }
 
     showNotification = (title, body) => {
-        if (localStorage.getItem('showNotifications') === 'true') {
-            if (localStorage.getItem('notificationType') === "Toast") {
+        let notifications = validateNotifications()
+        if (notifications.show) {
+            if (notifications.type === "Toast") {
                 if(this.toastNotifications) this.toastNotifications.showNotification(title, body)
             } else {
                 NativeNotification(title, body)
@@ -138,6 +141,12 @@ class BodyAdminDashboard extends Component {
             propsData = {
                 ...propsData,
                 sendFeedback: this.props.actions.sendFeedback
+            }
+        }
+        if (this.props.router[this.props.index].label === 'Settings') {
+            propsData = {
+                ...propsData,
+                currentUser: this.props.currentUser
             }
         }
 
