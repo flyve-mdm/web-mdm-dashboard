@@ -2,7 +2,7 @@
   "name": "web-admin-dashboard",
   "version": "0.1.0",
   "dependencies": {
-    "@teclib/glpi-api-client": "^0.2.0",
+    "@glpi-project/javascript-library-glpi": "^0.0.0",
     "autoprefixer": "7.2.5",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.0",
