@@ -9,8 +9,7 @@ import IconItemList from './IconItemList'
 import GetMode from '../Utils/GetMode'
 import currentUser from './data/currentUser.json'
 import Confirmation from '../Utils/Confirmation'
-import Glpi from '@teclib/glpi-api-client'
-import config from '../config.json'
+import Glpi from '../Utils/GlpiApi'
 
 function mapStateToProps(state, props) {
     return {
@@ -69,11 +68,11 @@ class HeaderAdminDashboard extends Component {
 
     logout = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
-        let glpi = new Glpi({ url: config.URL_GLPI_API })
-        glpi.sessionToken = localStorage.getItem('sessionToken')
+        
+        Glpi.sessionToken = localStorage.getItem('sessionToken')
         localStorage.removeItem('sessionToken')
         localStorage.removeItem('currentUser')
-        glpi.killSession().then((response) => {
+        Glpi.killSession().then((response) => {
             if (isOK) this.props.history.push('/')
         }).catch((error) => {
             if (isOK) this.props.history.push('/')
