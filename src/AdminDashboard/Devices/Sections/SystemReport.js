@@ -74,10 +74,35 @@ class SystemReport extends Component {
                     </div>
 
                     <Inventory 
+                        selectedItemList={this.props.selectedItemList}
                         title='Fleet'
                         itemType='PluginFlyvemdmFleet'
                         itemID={this.state.agent['plugin_flyvemdm_fleets_id']}
                         fields={{id: 'ID', name: 'Name'}}
+                        glpi={this.props.glpi}
+                    />
+
+                    <Inventory
+                        selectedItemList={this.props.selectedItemList}
+                        title='Device'
+                        itemType='Computer'
+                        itemID={this.state.agent['computers_id']}
+                        fields={{ 
+                            id: 'ID', 
+                            name: 'Name',
+                            uuid: 'UUID', 
+                            date_creation: 'Creation', 
+                            date_mod: 'Modification', 
+                            computermodels_id: 'Model', 
+                            computertypes_id: 'Type', 
+                            manufacturers_id: 'Manufacturer', serial: 'Serial' }}
+                        parameters={{ 
+                            expand_dropdowns: true, 
+                            with_devices: true, 
+                            with_disks: true, 
+                            with_softwares: true, 
+                            with_connections: true, 
+                            with_networkports: true }}
                         glpi={this.props.glpi}
                     />
                     
