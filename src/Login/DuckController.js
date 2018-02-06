@@ -11,7 +11,8 @@ const INITIAL_STATE = {
     selfRegistration: config.self_registration,
     configurationPassword: {},
     notificationMessage: undefined,
-    currentUser: user
+    currentUser: user,
+    locationLanguage: 'en'
 }
 
 // Constants

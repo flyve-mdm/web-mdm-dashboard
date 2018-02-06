@@ -7,12 +7,14 @@ import LoginContainer from '../LoginContainer'
 import LoginUsername from './LoginUsername'
 import LoginPassword from './LoginPassword'
 import ToastNotifications from '../../Utils/ToastNotifications'
+import I18n from '../../i18n';
 
 function mapStateToProps(state, props) {
     return {
         username: state.Login.username,
         selfRegistration: state.Login.selfRegistration,
-        notificationMessage: state.Login.notificationMessage
+        notificationMessage: state.Login.notificationMessage,
+        locationLanguage: state.Login.locationLanguage
     }
 }
 
@@ -45,6 +47,12 @@ class Login extends Component {
     componentDidUpdate() {
         if (this.props.notificationMessage !== undefined) {
             this.showNotification(this.props.notificationMessage.title, this.props.notificationMessage.body)
+        }
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.locationLanguage !== this.props.locationLanguage) {
+            I18n.setLocale(nextProps.locationLanguage);
         }
     }
 
