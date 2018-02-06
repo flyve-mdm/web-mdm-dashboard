@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class Inventory extends Component {
 
@@ -30,7 +31,7 @@ export default class Inventory extends Component {
             this.setState({
                 isLoading: true
             })
-            const data = await this.props.glpi.getAnItem(this.props.itemType, this.props.itemID, null)
+            const data = await this.props.glpi.getAnItem(this.props.itemType, this.props.itemID, this.props.parameters)
             let object = Object.keys(this.props.fields).map((key, index) => {
                 return { [this.props.fields[key]]: data[key] }
             })
@@ -84,4 +85,15 @@ export default class Inventory extends Component {
             )
         }
     }
+}
+Inventory.propTypes = {
+    selectedItemList: PropTypes.array.isRequired,
+    title: PropTypes.string.isRequired,
+    itemType: PropTypes.string.isRequired,
+    fields: PropTypes.object.isRequired,
+    parameters: PropTypes.object,
+    glpi: PropTypes.object.isRequired
+}
+Inventory.defaultProps = {
+    parameters: {}
 }
