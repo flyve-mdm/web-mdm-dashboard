@@ -69,11 +69,7 @@ export default class Inventory extends Component {
                     <div className="title">{this.props.title}</div>
                     {
                         this.state.data.map((value, index) => {
-                            return (
-                                <div key={index}>
-                                {this.buildList(value)}
-                                </div>
-                            )
+                            return (this.buildList(value))
                         })
                     }
                 </div>
