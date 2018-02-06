@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Inventory from './Inventory'
+import Loader from '../../../Utils/Loader'
 
 class SystemReport extends Component {
 
@@ -44,10 +45,7 @@ class SystemReport extends Component {
 
     render() {
         if (this.state.isLoading && !this.state.agent) {
-            return (
-                <div className="system-report">
-                </div>
-            )
+            return (<Loader type="content"/>)
         } else if (!this.state.isLoading && this.state.agent){
             return (
                 <div className="system-report">
@@ -109,10 +107,7 @@ class SystemReport extends Component {
                 </div>
             )
         } else {
-            return (
-                <div className="system-report">
-                </div>
-            )
+            return (null)
         }
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Loader from '../../../Utils/Loader'
 
 export default class Inventory extends Component {
 
@@ -41,6 +42,10 @@ export default class Inventory extends Component {
             })
         } catch (error) {
             console.log(error)
+            this.setState({
+                isLoading: false,
+                data: undefined
+            })
         }
     }
 
@@ -57,13 +62,8 @@ export default class Inventory extends Component {
 
     render() {
         if (this.state.isLoading && !this.state.data) {
-            return (
-                <div>
-                </div>
-            )
+            return (<Loader type="content" />)
         } else if (!this.state.isLoading && this.state.data) {
-
-            
             return (
                 <div>
                     <div className="title">{this.props.title}</div>
@@ -79,10 +79,7 @@ export default class Inventory extends Component {
                 </div>
             )
         } else {
-            return (
-                <div>
-                </div>
-            )
+            return (null)
         }
     }
 }

@@ -14,7 +14,7 @@ export default class Loader extends Component {
                 <rect x={80} y={60} rx={3} ry={3} width={260} height={10} radius={5} />
             </ContentLoader >)
         } else {
-            return <BulletList key={index} speed={1.5} style={{ width: '480px' }}/>
+            return <BulletList key={index} speed={1.5} style={{ width: '360px' }}/>
         }
         
     }
