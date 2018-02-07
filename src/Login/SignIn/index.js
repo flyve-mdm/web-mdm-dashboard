@@ -4,7 +4,7 @@ import ConstructInputs from '../../Utils/Forms'
 import ErrorValidation from '../../Utils/Forms/ErrorValidation'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { changeEmail, fetchData, changeNotificationMessage } from '../DuckController'
+import { changeEmail, changeNotificationMessage } from '../DuckController'
 import Loading from '../../Utils/Loading'
 import LoginContainer from '../LoginContainer'
 import Glpi from '../../Utils/GlpiApi'
@@ -13,16 +13,13 @@ import ToastNotifications from '../../Utils/ToastNotifications'
 
 function mapStateToProps(state, props) {
     return {
-        email: state.Login.email,
-        isLoading: state.Login.isLoading,
-        configurationPassword: state.Login.configurationPassword
+        email: state.Login.email
     }
 }
 
 function mapDispatchToProps(dispatch) {
     const actions = {
         changeEmail: bindActionCreators(changeEmail, dispatch),
-        fetchData: bindActionCreators(fetchData, dispatch),
         changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
     }
     return { actions }
@@ -32,7 +29,6 @@ class SignIn extends Component {
 
     constructor (props) {
         super(props)
-        this.props.actions.fetchData('configurationPassword')
         this.state = {
             email: '',
             login: '',
@@ -40,13 +36,19 @@ class SignIn extends Component {
             password: '',
             passwordConfirmation: '',
             forceValidation: false,
-            isLoading: false,
+            configurationPassword: undefined,
+            isLoading: true,
             captcha: undefined
         }
     }
 
     componentDidMount() {
         this.refreshCaptcha()
+    }
+
+    componentWillUnmount() {
+
+        console.log('componentWillUnmount')
     }
 
     refreshCaptcha = async () => {
@@ -63,8 +65,24 @@ class SignIn extends Component {
             headers.append('Content-Type', 'application/octet-stream')
             const captcha = await Glpi.genericRequest({ path: `PluginFlyvemdmdemoCaptcha/${id}`, queryString: { alt: 'media' }, requestParams: { method: 'GET', headers } })
             const imgCaptcha = await captcha.blob()
+
+            // Get Glpi configuration
+            const { cfg_glpi } = await Glpi.getGlpiConfig()
+
+            const configurationPassword = {
+                minimunLength: cfg_glpi.password_min_length,
+                needDigit: cfg_glpi.password_need_number,
+                needLowercaseCharacter: cfg_glpi.password_need_letter,
+                needUppercaseCharacter: cfg_glpi.password_need_caps,
+                needSymbol: cfg_glpi.password_need_symbol
+            }
+
+            console.log(configurationPassword)
+
             this.setState({
-                captcha: URL.createObjectURL(imgCaptcha)
+                captcha: URL.createObjectURL(imgCaptcha),
+                configurationPassword: configurationPassword,
+                isLoading: false
             })
                 
         } catch (error) {
@@ -85,7 +103,7 @@ class SignIn extends Component {
 
     registerUser = (e) => {
         e.preventDefault()
-        
+ 
         const user = this.buildDataArray()
         let isCorrect = true
 
@@ -203,11 +221,7 @@ class SignIn extends Component {
                         },
                         parametersToEvaluate: {
                             isRequired: true,
-                            minimunLength: this.props.configurationPassword.minimun_length,
-                            needDigit: this.props.configurationPassword.need_digit,
-                            needLowercaseCharacter: this.props.configurationPassword.need_lowercase_character,
-                            needUppercaseCharacter: this.props.configurationPassword.need_uppercase_character,
-                            needSymbol: this.props.configurationPassword.need_symbol
+                            ...this.state.configurationPassword
                         },
                         forceValidation: this.state.forceValidation
                     },
@@ -224,11 +238,7 @@ class SignIn extends Component {
                         },
                         parametersToEvaluate: {
                             isRequired: true,
-                            minimunLength: this.props.configurationPassword.minimun_length,
-                            needDigit: this.props.configurationPassword.need_digit,
-                            needLowercaseCharacter: this.props.configurationPassword.need_lowercase_character,
-                            needUppercaseCharacter: this.props.configurationPassword.need_uppercase_character,
-                            needSymbol: this.props.configurationPassword.need_symbol,
+                            ...this.state.configurationPassword,
                             isEqualTo: {
                                 value: this.state.password,
                                 message: "Passwords do not match"
@@ -244,12 +254,11 @@ class SignIn extends Component {
     }
 
     render() {
-        const user = this.buildDataArray()
-
         let renderComponent 
-        if (this.props.isLoading || this.state.isLoading) {
+        if (this.state.isLoading) {
             renderComponent = <Loading message="Loading..."/>
         } else {
+            const user = this.buildDataArray()
             renderComponent = (
                 <LoginContainer centerContent={false}>
                     <ToastNotifications ref={instance => { this.toastNotifications = instance }} />
@@ -264,7 +273,7 @@ class SignIn extends Component {
                         <ConstructInputs data={user.personalInformation} />
 
                         <ConstructInputs data={user.passwordInformation}  />
-                        
+
                         <div style={{textAlign: 'center'}}>
                             <button className="win-button win-button-primary" style={{ margin: "20px" }}>
                                 Register
@@ -281,9 +290,7 @@ class SignIn extends Component {
 
 SignIn.propTypes = {
     email: PropTypes.string,
-    isLoading: PropTypes.bool.isRequired,
-    history: PropTypes.object.isRequired,
-    configurationPassword: PropTypes.object.isRequired    
+    history: PropTypes.object.isRequired  
 }
 
 export default connect (
