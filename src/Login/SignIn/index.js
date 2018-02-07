@@ -41,6 +41,7 @@ class SignIn extends Component {
             passwordConfirmation: '',
             forceValidation: false,
             isLoading: false,
+            captcha: undefined
         }
     }
 
@@ -55,9 +56,16 @@ class SignIn extends Component {
             const responseSession = await Glpi.genericRequest({ path: 'initSession', queryString: { user_token: config.USER_TOKEN }, requestParams: { method: 'GET' } })
             const session = await responseSession.json()
             Glpi.sessionToken = session.session_token
-
             // Create new captcha
             const {id} = await Glpi.addItem({ itemtype: 'PluginFlyvemdmdemoCaptcha', input: {}})
+            // Get new captcha
+            let headers = new Headers()
+            headers.append('Content-Type', 'application/octet-stream')
+            const captcha = await Glpi.genericRequest({ path: `PluginFlyvemdmdemoCaptcha/${id}`, queryString: { alt: 'media' }, requestParams: { method: 'GET', headers } })
+            const imgCaptcha = await captcha.blob()
+            this.setState({
+                captcha: URL.createObjectURL(imgCaptcha)
+            })
                 
         } catch (error) {
             console.log(error)
@@ -256,7 +264,7 @@ class SignIn extends Component {
                         <ConstructInputs data={user.personalInformation} />
 
                         <ConstructInputs data={user.passwordInformation}  />
-
+                        
                         <div style={{textAlign: 'center'}}>
                             <button className="win-button win-button-primary" style={{ margin: "20px" }}>
                                 Register
