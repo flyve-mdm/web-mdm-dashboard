@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { changeEmail, fetchData, changeNotificationMessage } from '../DuckController'
 import Loading from '../../Utils/Loading'
 import LoginContainer from '../LoginContainer'
-import Glpi from '@teclib/glpi-api-client'
+import Glpi from '../../Utils/GlpiApi'
 import config from '../../config.json'
 import ToastNotifications from '../../Utils/ToastNotifications'
 
@@ -82,8 +82,7 @@ class SignIn extends Component {
                 "_profiles_id": 3
             }
 
-            let glpi = new Glpi({ url: config.URL_GLPI_API })
-            glpi.registerUser(config.USER_TOKEN, data)
+            Glpi.registerUser(config.USER_TOKEN, data)
                 .then(() => {
                     this.props.actions.changeNotificationMessage({ title: config.APP_NAME, body: "successfully registered user" })
                     this.props.history.push('/')
@@ -112,7 +111,7 @@ class SignIn extends Component {
                 [
                     {
                         label: "Email",
-                        type: "email",
+                        type: "text",
                         name: "email",
                         value: this.state.email,
                         placeholder: "Email",

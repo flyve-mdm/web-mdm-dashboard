@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import Glpi from '@teclib/glpi-api-client'
+import Glpi from '../../Utils/GlpiApi'
 import config from '../../config.json'
 import Loading from '../../Utils/Loading'
 
@@ -27,8 +27,7 @@ class LoginPassword extends Component {
         this.setState({
             isLoading: true
         })
-        let glpi = new Glpi({ url: config.URL_GLPI_API })
-        glpi.login(this.props.username, this.props.password).then((response) => {
+        Glpi.login(this.props.username, this.props.password).then((response) => {
             let email = response.userEmails.length > 0 ? response.userEmails[0].email : ''
             const user = {
                 id: response.userData.id,

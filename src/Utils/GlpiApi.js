@@ -1,4 +1,4 @@
-import Glpi from '@teclib/glpi-api-client'
+import Glpi from '@glpi-project/javascript-library-glpi'
 import config from '../config.json'
 
 let glpi = new Glpi({ url: config.URL_GLPI_API })
