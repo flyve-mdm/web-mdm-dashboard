@@ -44,6 +44,23 @@ class SignIn extends Component {
         }
     }
 
+    componentDidMount() {
+        this.refreshCaptcha()
+    }
+
+    refreshCaptcha = async () => {
+
+        try {
+            // Init session by user_token
+            const responseSession = await Glpi.genericRequest({ path: 'initSession', queryString: { user_token: config.USER_TOKEN }, requestParams: { method: 'GET' } })
+            const session = await responseSession.json()
+            Glpi.sessionToken = session.session_token
+                
+        } catch (error) {
+            
+        }
+    }
+
     changeState = (name, value) => {
         this.setState({
             [name]: value
