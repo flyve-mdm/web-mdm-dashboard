@@ -55,9 +55,12 @@ class SignIn extends Component {
             const responseSession = await Glpi.genericRequest({ path: 'initSession', queryString: { user_token: config.USER_TOKEN }, requestParams: { method: 'GET' } })
             const session = await responseSession.json()
             Glpi.sessionToken = session.session_token
+
+            // Create new captcha
+            const {id} = await Glpi.addItem({ itemtype: 'PluginFlyvemdmdemoCaptcha', input: {}})
                 
         } catch (error) {
-            
+            console.log(error)
         }
     }
 
