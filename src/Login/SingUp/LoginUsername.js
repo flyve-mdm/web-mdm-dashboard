@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import Translate from 'react-i18nify/build/lib/Translate';
-import I18n from '../../i18n';
+import { Translate } from 'react-i18nify';
 
 class LoginUsername extends Component {
 
@@ -57,7 +56,7 @@ class LoginUsername extends Component {
                         name="username"
                         ref={(input) => { this.usernameInput = input; }} 
                         className={this.state.classInput} 
-                        placeholder={I18n.t('login.username')}
+                        placeholder={this.props.usernamePlaceholder}
                         value={this.props.username} 
                         onChange={this.props.changeInput} 
                         required={true}

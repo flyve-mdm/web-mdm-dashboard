@@ -7,7 +7,8 @@ import LoginContainer from '../LoginContainer'
 import LoginUsername from './LoginUsername'
 import LoginPassword from './LoginPassword'
 import ToastNotifications from '../../Utils/ToastNotifications'
-import I18n from '../../i18n';
+import { I18n } from 'react-i18nify';
+import findI18NString from '../../i18n/findI18NString';
 
 function mapStateToProps(state, props) {
     return {
@@ -39,6 +40,8 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        findI18NString(this, this.props.locationLanguage);
+
         if (this.props.notificationMessage !== undefined) {
             this.showNotification(this.props.notificationMessage.title, this.props.notificationMessage.body)
         }
@@ -52,7 +55,7 @@ class Login extends Component {
 
     componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.locationLanguage !== this.props.locationLanguage) {
-            I18n.setLocale(nextProps.locationLanguage);
+            findI18NString(this, nextProps.locationLanguage)
         }
     }
 
@@ -83,6 +86,7 @@ class Login extends Component {
                     changePhase={this.changePhase}
                     changeUsername={this.props.actions.changeUsername}
                     selfRegistration={this.props.selfRegistration}
+                    usernamePlaceholder={I18n.t('login.username')}
                 />    
         } else {
             form = 
