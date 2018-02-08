@@ -136,7 +136,7 @@ class SignIn extends Component {
             Glpi.registerUser({ userToken: config.USER_TOKEN, userData: data, itemtype: 'PluginFlyvemdmdemoUser' })
                 .then(() => {
                     this.props.actions.changeNotificationMessage({ title: config.APP_NAME, body: "successfully registered user" })
-                    this.props.history.push('/')
+                    this.props.history.push('/validateAccount')
                 })
                 .catch((error) => {
                     this.setState({
