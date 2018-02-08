@@ -36,6 +36,7 @@ class SignIn extends Component {
             password: '',
             passwordConfirmation: '',
             captcha: '',
+            captchaID: undefined,
             forceValidation: false,
             configurationPassword: undefined,
             isLoading: true,
@@ -81,6 +82,7 @@ class SignIn extends Component {
             console.log(configurationPassword)
 
             this.setState({
+                captchaID: id,
                 imgCaptcha: URL.createObjectURL(imgCaptcha),
                 configurationPassword: configurationPassword,
                 isLoading: false
@@ -121,12 +123,13 @@ class SignIn extends Component {
         
         if (isCorrect) {
             let data = {
-                "name": this.state.login,
+                "name": this.state.email,
                 "realname": this.state.realName,
                 "password": this.state.password,
                 "password2": this.state.passwordConfirmation,
                 "_useremails": [this.state.email],
-                "_profiles_id": 3
+                "_plugin_flyvemdmdemo_captchas_id": this.state.captchaID,
+                "_answer": this.state.captcha
             }
 
             Glpi.registerUser(config.USER_TOKEN, data)
