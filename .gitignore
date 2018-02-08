@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/src/i18n/strings/*
+!/src/i18n/strings/en_GB.json

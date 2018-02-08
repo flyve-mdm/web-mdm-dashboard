@@ -12,7 +12,7 @@ const INITIAL_STATE = {
     configurationPassword: {},
     notificationMessage: undefined,
     currentUser: user,
-    locationLanguage: 'en-GB'
+    locationLanguage: 'en_GB'
 }
 
 // Constants
