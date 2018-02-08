@@ -35,10 +35,11 @@ class SignIn extends Component {
             realName: '',
             password: '',
             passwordConfirmation: '',
+            captcha: '',
             forceValidation: false,
             configurationPassword: undefined,
             isLoading: true,
-            captcha: undefined
+            imgCaptcha: undefined
         }
     }
 
@@ -80,7 +81,7 @@ class SignIn extends Component {
             console.log(configurationPassword)
 
             this.setState({
-                captcha: URL.createObjectURL(imgCaptcha),
+                imgCaptcha: URL.createObjectURL(imgCaptcha),
                 configurationPassword: configurationPassword,
                 isLoading: false
             })
@@ -247,7 +248,27 @@ class SignIn extends Component {
                         forceValidation: this.state.forceValidation
                     }
                 ]
-            ] 
+            ],
+            captchaInformation: [
+                [
+                    {
+                        label: "Enter the code from the image",
+                        type: "text",
+                        name: "captcha",
+                        value: this.state.captcha,
+                        placeholder: null,
+                        function: this.changeState,
+                        disabled: false,
+                        style: {
+                            width: 340
+                        },
+                        parametersToEvaluate: {
+                            isRequired: true
+                        },
+                        forceValidation: this.state.forceValidation
+                    }
+                ]
+            ]  
             
         }
         return dataArray
@@ -273,7 +294,11 @@ class SignIn extends Component {
                         <ConstructInputs data={user.personalInformation} />
 
                         <ConstructInputs data={user.passwordInformation}  />
-
+                        
+                        <ConstructInputs data={user.captchaInformation} />
+                        <div style={{ textAlign: 'center' }}>
+                            <img src={this.state.imgCaptcha} alt='' />
+                        </div>
                         <div style={{textAlign: 'center'}}>
                             <button className="win-button win-button-primary" style={{ margin: "20px" }}>
                                 Register
