@@ -4,8 +4,6 @@ machine:
 dependencies:
   pre:
     - pip install transifex-client
-deployment:
-  pre:
     - sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
     - tx pull -a
 test:
