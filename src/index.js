@@ -6,7 +6,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import registerServiceWorker from './registerServiceWorker'
 import AdminDashboard from './AdminDashboard'
-import { SingUp, SignIn, ForgotPassword } from './Login'
+import { SingUp, SignIn, ValidateAccount, ForgotPassword } from './Login'
 
 /**
  * Assets
@@ -43,6 +43,7 @@ ReactDOM.render((
                 <Route exact path='/' component={SingUp} />
                 <PrivateRoute path="/app" component={AdminDashboard} />
                 <Route path='/signIn' component={SignIn} />
+                <Route path='/validateAccount' component={ValidateAccount} />
                 <Route path='/forgotPassword' component={ForgotPassword} />
             </Switch>
         </ConnectedRouter>
