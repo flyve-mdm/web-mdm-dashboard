@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import ConstructInputs from '../../Utils/Forms'
 import ErrorValidation from '../../Utils/Forms/ErrorValidation'
 import { connect } from 'react-redux'
@@ -306,7 +307,9 @@ class SignIn extends Component {
                             <button className="win-button win-button-primary" style={{ margin: "20px" }}>
                                 Register
                             </button>
+                            <p>Do you already have an account? <Link to='/'>Sign in</Link></p>
                         </div>
+
                     </form>
                 </LoginContainer>
             )
