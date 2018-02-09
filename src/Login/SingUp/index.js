@@ -7,12 +7,15 @@ import LoginContainer from '../LoginContainer'
 import LoginUsername from './LoginUsername'
 import LoginPassword from './LoginPassword'
 import ToastNotifications from '../../Utils/ToastNotifications'
+import { I18n } from 'react-i18nify';
+import withI18NTranslation from '../../i18n/withI18NTranslation';
 
 function mapStateToProps(state, props) {
     return {
         username: state.Login.username,
         selfRegistration: state.Login.selfRegistration,
-        notificationMessage: state.Login.notificationMessage
+        notificationMessage: state.Login.notificationMessage,
+        locationLanguage: state.Login.locationLanguage
     }
 }
 
@@ -75,6 +78,7 @@ class Login extends Component {
                     changePhase={this.changePhase}
                     changeUsername={this.props.actions.changeUsername}
                     selfRegistration={this.props.selfRegistration}
+                    usernamePlaceholder={I18n.t('login.username')}
                 />    
         } else {
             form = 
@@ -100,10 +104,11 @@ class Login extends Component {
 Login.propTypes = {
     username: PropTypes.string.isRequired,    
     history: PropTypes.object.isRequired,
-    selfRegistration: PropTypes.bool.isRequired
+    selfRegistration: PropTypes.bool.isRequired,
+    locationLanguage: PropTypes.string.isRequired
 }
 
 export default connect (
   mapStateToProps,
   mapDispatchToProps
-)(Login)
+)(withI18NTranslation(Login))
