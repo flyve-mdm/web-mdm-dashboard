@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/AdminDashboard/Fleets/FleetsTaskItemList.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/AdminDashboard/Fleets</a> FleetsTaskItemList.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/29</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/24</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import ReactWinJS <span class="cstat-no" title="statement not covered" >from 'react-winjs'<span class="cstat-no" title="statement not covered" ></span></span>
+import { App<span class="cstat-no" title="statement not covered" >lications, Files } </span>from '../<span class="fstat-no" title="function not covered" >Data'<span class="cstat-no" title="statement not covered" ></span></span>
+export default class FleetsTaskItemList extends Component {
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="cstat-no" title="statement not covered" >        if(this.props.data === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >            return (   </span>
+                &lt;div className='files-list' &gt;
+                        &lt;div className='files-list-content'&gt;
+                            &lt;div className='files-list-item'&gt;
+                                &lt;div className='item-content-primary'&gt;
+                                    &lt;div className='content-text-primary'&gt;not available&lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div className='item-content-secondary'&gt;
+                                    &lt;div className='icon item-icon'&gt;
+                                        &lt;span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() =&gt; this.props.deletePolicy(th<span class="fstat-no" title="function not covered" >is</span>.pro<span class="cstat-no" title="statement not covered" >ps.data)}/&gt;</span>
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+            )
+        } else {
+<span class="cstat-no" title="statement not covered" >            switch (this.props.data["PluginFlyvemdmPolicy.type"]) {</span>
+                
+                case "bool":
+                let value = this<span class="cstat-no" title="statement not covered" >.props.data['PluginFlyvemdmPolicy.default_value']</span>
+                if(t<span class="cstat-no" title="statement not covered" >ypeof(value) !== "boolean") {</span>
+                    valu<span class="cstat-no" title="statement not covered" >e = true</span>
+                }
+                retu<span class="cstat-no" title="statement not covered" >rn (</span>
+                    &lt;div className='files-list' &gt;
+                        &lt;div className='files-list-content'&gt;
+                            &lt;div className='files-list-item'&gt;
+                                &lt;div className='item-content-primary'&gt;
+                                    &lt;div className='content-text-primary'&gt;{this.props.data['PluginFlyvemdmPolicy.name']}&lt;/div&gt;
+                                    &lt;ReactWinJS.ToggleSwitch 
+                                    className="content-text-primary"
+                                    checked={value}
+                                    onChange={() =&gt; th<span class="fstat-no" title="function not covered" >is</span>.pro<span class="cstat-no" title="statement not covered" >ps.editPolicy(this.props.data['PluginFlyvemdmPolicy.id'], !value)}</span>
+                                    labelOn="On"
+                                    labelOff="Off" /&gt;
+                                &lt;/div&gt;
+                                &lt;div className='item-content-secondary'&gt;
+                                    &lt;div className='icon item-icon'&gt;
+                                        &lt;span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() =&gt; this.props.deletePolicy(this.props<span class="fstat-no" title="function not covered" >.d</span>ata)<span class="cstat-no" title="statement not covered" >}/&gt;</span>
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                )
+                case "int":
+                retu<span class="cstat-no" title="statement not covered" >rn (</span>
+                    &lt;div className='files-list' &gt;
+                        &lt;div className='files-list-content'&gt;
+                            &lt;div className='files-list-item'&gt;
+                                &lt;div className='item-content-primary'&gt;
+                                    &lt;div className='content-text-primary'&gt;{this.props.data['PluginFlyvemdmPolicy.name']}&lt;/div&gt;
+                                    &lt;input 
+                                    type="number"
+                                    style={{ width: '80px'}}
+                                    className="win-textbox" 
+                                    placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
+                                    name={this.props.data['PluginFlyvemdmPolicy.id']}
+                                    value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                    onChange={this.props.changeInput}
+                                    required
+                                    /&gt;
+                                &lt;/div&gt;
+                                &lt;div className='item-content-secondary'&gt;
+                                    &lt;div className='icon item-icon'&gt;
+                                        &lt;span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() =&gt; this.props.deletePolicy(this.props<span class="fstat-no" title="function not covered" >.d</span>ata)<span class="cstat-no" title="statement not covered" >}/&gt;</span>
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                )
+                case "deployapp":
+                retu<span class="cstat-no" title="statement not covered" >rn (</span>
+                    &lt;div className='files-list' &gt;
+                        &lt;div className='files-list-content'&gt;
+                            &lt;div className='files-list-item'&gt;
+                                &lt;div className='item-content-primary'&gt;
+                                    &lt;div className='content-text-primary'&gt;{this.props.data['PluginFlyvemdmPolicy.name']}&lt;/div&gt;
+                                    &lt;select 
+                                    className="win-dropdown" 
+                                    name={this.props.data['PluginFlyvemdmPolicy.id']} 
+                                    value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                    onChange={this.props.changeInput}&gt;
+                                        &lt;option&gt;Select an application&lt;/option&gt;
+                                        {
+                                            Applications.map((value<span class="fstat-no" title="function not covered" >, </span>index) =&gt;
+<span class="cstat-no" title="statement not covered" >                                                &lt;option key={index} value={value["PluginFlyvemdmPackage.alias"]}&gt;</span>
+                                                    {value["PluginFlyvemdmPackage.alias"]}
+                                                &lt;/option&gt;
+                                            )
+                                        }
+                                    &lt;/select&gt;
+                                &lt;/div&gt;
+                                &lt;div className='item-content-secondary'&gt;
+                                    &lt;div className='icon item-icon'&gt;
+                                        &lt;span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() =&gt; this.props.deletePolicy(this.props<span class="fstat-no" title="function not covered" >.d</span>ata)<span class="cstat-no" title="statement not covered" >}/&gt;</span>
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                )
+                case "deployfile":
+                retu<span class="cstat-no" title="statement not covered" >rn (</span>
+                    &lt;div className='files-list' &gt;
+                        &lt;div className='files-list-content'&gt;
+                            &lt;div className='files-list-item'&gt;
+                                &lt;div className='item-content-primary'&gt;
+                                    &lt;div className='content-text-primary'&gt;{this.props.data['PluginFlyvemdmPolicy.name']}&lt;/div&gt;
+                                    &lt;select 
+                                    className="win-dropdown" 
+                                    name={this.props.data['PluginFlyvemdmPolicy.id']} 
+                                    value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                    onChange={this.props.changeInput}&gt;
+                                        &lt;option&gt;Select a file&lt;/option&gt;
+                                        {
+                                            Files.map((value<span class="fstat-no" title="function not covered" >, </span>index) =&gt;
+<span class="cstat-no" title="statement not covered" >                                                &lt;option key={index} value={value["PluginFlyvemdmFile.name"]}&gt;</span>
+                                                    {value["PluginFlyvemdmFile.name"]}
+                                                &lt;/option&gt;
+                                            )
+                                        }
+                                    &lt;/select&gt;
+                                &lt;/div&gt;
+                                &lt;div className='item-content-secondary'&gt;
+                                    &lt;div className='icon item-icon'&gt;
+                                        &lt;span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() =&gt; this.props.deletePolicy(this.props<span class="fstat-no" title="function not covered" >.d</span>ata)<span class="cstat-no" title="statement not covered" >}/&gt;</span>
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                )
+                default:
+                retu<span class="cstat-no" title="statement not covered" >rn (</span>
+                    &lt;div className='files-list' &gt;
+                        &lt;div className='files-list-content'&gt;
+                            &lt;div className='files-list-item'&gt;
+                                &lt;div className='item-content-primary'&gt;
+                                    &lt;div className='content-text-primary'&gt;not available&lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div className='item-content-secondary'&gt;
+                                    &lt;div className='icon item-icon'&gt;
+                                        &lt;span className='deleteIcon' style={{ fontSize: '18px' }} onClick={() =&gt; this.props.deletePolicy(this.props<span class="fstat-no" title="function not covered" >.d</span>ata)<span class="cstat-no" title="statement not covered" >}/&gt;</span>
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                )
+            }
+            
+               
+        }
+    }<span class="cstat-no" title="statement not covered" ></span>
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 09 2018 18:02:34 GMT+0000 (UTC)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

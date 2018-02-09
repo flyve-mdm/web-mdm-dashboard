@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/AdminDashboard/Devices/Sections/DangerZone.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/AdminDashboard/Devices/Sections</a> DangerZone.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/25</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/19</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import Confirmation <span class="cstat-no" title="statement not covered" >from '../../../Utils/Confirmation'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+&nbsp;
+class DangerZone extends Component {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+    wipe = asyn<span class="fstat-no" title="function not covered" >c </span>() =&gt; {
+        const isOK = awai<span class="cstat-no" title="statement not covered" >t Confirmation.isOK(this.wipeDevice)</span>
+        if (<span class="cstat-no" title="statement not covered" >isOK) {</span>
+            this<span class="cstat-no" title="statement not covered" >.props.showNotification('Success', 'data deleted successfully')</span>
+        }
+    }
+&nbsp;
+    unenroll = asyn<span class="fstat-no" title="function not covered" >c </span>() =&gt; {
+        const isOK = awai<span class="cstat-no" title="statement not covered" >t Confirmation.isOK(this.unenrollmentDevice)</span>
+        if (<span class="cstat-no" title="statement not covered" >isOK) {</span>
+            this<span class="cstat-no" title="statement not covered" >.props.showNotification('Success', 'unenrollment device')            </span>
+        }
+    }
+&nbsp;
+    delete = asyn<span class="fstat-no" title="function not covered" >c </span>() =&gt; {
+        const isOK = awai<span class="cstat-no" title="statement not covered" >t Confirmation.isOK(this.deleteDevice)</span>
+        if (<span class="cstat-no" title="statement not covered" >isOK) {</span>
+            this<span class="cstat-no" title="statement not covered" >.props.showNotification('Success', 'element successfully removed')                        </span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="cstat-no" title="statement not covered" >        return ( </span>
+            &lt;div&gt;
+                &lt;div className="listElement"&gt;
+                    &lt;div className="message"&gt;
+                        Wipe Device
+                        &lt;div className="detail"&gt;Wipe will delete all data on the device&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div className="controller"&gt;
+                        &lt;button className="win-button" onClick={this.wipe}&gt;Wipe&lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;Confirmation 
+                        title="This is the last warning"
+                        message="You're about to wipe the device. Are you really certain ? (the device is going to delete all its data next time it turns on)"
+                        reference={<span class="fstat-no" title="function not covered" >el</span> =&gt; <span class="cstat-no" title="statement not covered" >this.wipeDevice = el} </span>
+                    /&gt; 
+                &lt;/div&gt;
+&nbsp;
+                &lt;div className="listElement"&gt;
+                    &lt;div className="message"&gt;
+                        Unenrollment Device
+                        &lt;div className="detail"&gt;Unenrollment will change the state of the device (policies are unapplied, deployed files and app will be removed)&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div className="controller"&gt;
+                        &lt;button className="win-button" onClick={this.unenroll}&gt;Unenroll&lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;Confirmation 
+                        title={'Unenroll device #' + this.props.selectedItemList["PluginFlyvemdmAgent.id"] } 
+                        message={'You are going to unenroll device ' + this.props.selectedItemList["PluginFlyvemdmAgent.id"]} 
+                        reference={<span class="fstat-no" title="function not covered" >el</span> =&gt; <span class="cstat-no" title="statement not covered" >this.unenrollmentDevice = el} </span>
+                    /&gt; 
+                &lt;/div&gt;
+&nbsp;
+                &lt;div className="listElement"&gt;
+                    &lt;div className="message"&gt;
+                        Delete Device
+                        &lt;div className="detail"&gt;Once you delete a device, there is no going back. Please be certain&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div className="controller"&gt;
+                        &lt;button className="win-button" onClick={this.delete}&gt;Delete&lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;Confirmation 
+                        title={'Delete device #' + this.props.selectedItemList["PluginFlyvemdmAgent.id"] } 
+                        message={'You are going to delete device ' + this.props.selectedItemList["PluginFlyvemdmAgent.id"]} 
+                        reference={<span class="fstat-no" title="function not covered" >el</span> =&gt; <span class="cstat-no" title="statement not covered" >this.deleteDevice = el} </span>
+                    /&gt; 
+                &lt;/div&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >DangerZone.propTypes = {</span>
+    selectedItemList: PropTypes.object.isRequired,
+    showNotification: PropTypes.func.isRequired<span class="cstat-no" title="statement not covered" ></span>
+}
+&nbsp;
+export default DangerZone</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 09 2018 18:02:34 GMT+0000 (UTC)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

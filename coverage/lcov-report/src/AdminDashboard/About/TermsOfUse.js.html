@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/AdminDashboard/About/TermsOfUse.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/AdminDashboard/About</a> TermsOfUse.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/6</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import ContentPane <span class="cstat-no" title="statement not covered" >from '../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+&nbsp;
+export default class TermsOfUse extends Component {
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth}&gt;
+                &lt;h2 className="win-h2 titleContentPane"&gt;{this.props.title}&lt;/h2&gt;
+                &lt;div className="aboutPane"&gt;
+                    &lt;p&gt;By using our website, you agree to be bound by the full Terms &amp;amp; Conditions posted on our website.&lt;/p&gt;
+                    &lt;p&gt;These terms and conditions apply to the business relation between the Client and the Editor (as identified further below), arising from the Client requesting the Editor to provide certain corporate and management services. Any order placed in any of our offices, by internet or by any other means, shall constitute a binding agreement of these terms &amp;amp; conditions between the Client and the Editor.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;DEFINITIONS&lt;/strong&gt;&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;&amp;#8220;The Editor&amp;#8221;&lt;/strong&gt; means Teclib&amp;#8217; Spain, a company, registered in Spain and it also includes any subsidiary or branch of Teclib&amp;#8217; Group, which provides services to the client or the company.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;&amp;#8220;Services&amp;#8221;&lt;/strong&gt; means any or several of the following: GLPi Network, Kimios DMS, Uhuru Mobile, Armadito Antivirus, Flyve MDM, Training sessions, any IT related services and support, Partnership agreements, Registered Member agreements, Marketing agreements, administrative and managerial work and any other corporate services of similar nature that the Editor agrees to provide.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;&amp;#8220;Company&amp;#8221;&lt;/strong&gt; means any company beneficially owned by the client for which services are provided by the Editor.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;&amp;#8220;Client&amp;#8221;&lt;/strong&gt; means the beneficial owner(s) of the company and/or the person(s) who has(ve) requested the Editor to provide services. It also means any person the client may represent in the case of a group (all such persons jointly and separately).&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;&amp;#8220;Contact Form&amp;#8221;&lt;/strong&gt; means the standard contact form posted on the Editor&amp;#8217;s website http://www.teclib-edition.com/en/contact-us/ or other format of the same form submitted by the client to the Editor before beginning and providing services.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;&amp;#8220;Communication&amp;#8221; &lt;/strong&gt;means any communication between the Editor and the client by any of the following methods: (a) email or other message or form posted through the internet; (b) fax; (c) courier or mail delivery, any of the above being addressed to the last known or notified address of the recipient.&lt;/p&gt;
+                    &lt;p&gt;&lt;u&gt;&lt;strong&gt;I. GENERAL NOTES&lt;/strong&gt;&lt;/u&gt;&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Complaints Procedure&lt;/strong&gt;&lt;br /&gt;
+                    The management of the company wishes to remain open to well-founded complaints in order not to only resolve them efficiently, but also to improve our service at large. Complaints are usually handled by the office manager, however if you have a complaint that cannot be resolved, you can write an email to our complaint resolution department.&lt;br /&gt;
+                    Complaints can be lodged in writing to the office with the envelope marked personal and confidential.&lt;br /&gt;
+                    Please substantiate any complaints with precise facts, dates and names if you want us to be able to act on your complaint. Any vague complaints or unconstructive insults will be discarded without follow-up. We will attempt to answer or resolve any complaint within a maximum of 3 days.&lt;/p&gt;
+                    &lt;p&gt;&lt;u&gt;&lt;strong&gt;II. OUR SERVICES&lt;/strong&gt;&lt;/u&gt;&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;GLPi Network&lt;/strong&gt;&lt;br /&gt;
+                    Distribution of a complete pack based on GLPi project and other open source technologies, that helps you manage and control your IT infrastructure, with asset management, ticketing and loads of features and plugins.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Kimios DMS&lt;/strong&gt;&lt;br /&gt;
+                    Java-based, Open Source Knowledge Management Solution also Document Management System. It helps you produce, store, organize, manage and research any kind of document, media and file in your repository&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Uhuru Mobile&lt;/strong&gt;&lt;br /&gt;
+                    Secure operating system for Android-based smartphones, tablets, PCs and applications.&lt;br /&gt;
+                    Uhuru analyzes, controls and protects against malware and vulnerability exploits.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Armadito Antivirus&lt;/strong&gt;&lt;br /&gt;
+                    Open source antivirus and anti-malware software for desktop (computers) and servers. It analyses your system, detects viruses, identify malware codes, and last but not least: it protects and strengthens your network.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Flyve MDM&lt;/strong&gt;&lt;br /&gt;
+                    Mobile Device Management that allows you to: configure, deploy, secure, monitor, integrate and manage any mobile devices within the organization, protecting your corporate network and data.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Teclib&amp;#8217; Training Courses&lt;/strong&gt;&lt;br /&gt;
+                    Follow a training program, get certified and become an expert of our technologies&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Become a Partner&lt;/strong&gt;&lt;br /&gt;
+                    Our Partnership Program gives access to a portfolio of subscription-based services, letting Partners and customers receive technical support and trainings, to answer the fast evolving business’ needs.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Become a Registered Member&lt;/strong&gt;&lt;br /&gt;
+                    Becoming a Teclib’ Registered Member is a great way to help improve your profit potential and ensure your business is recognized by the industry and amongst end-users as being professional and technically competent.&lt;/p&gt;
+                    &lt;p&gt;&lt;u&gt;&lt;strong&gt;III. GENERAL CONDITIONS&lt;/strong&gt;&lt;/u&gt;&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Your obligations under this agreement&lt;/strong&gt;&lt;br /&gt;
+                    We provide you services with the understanding that you have supplied us with true and accurate instructions and that you have given us the authority to lawfully carry out those instructions. You warrant that you are acting on your own authority or have the authority of your client to instruct us in this regards.&lt;br /&gt;
+                    While identifying officers to the company, you fully warrant that you have the legal consent of those officers, and you agree to indemnify us in the case of a conflict with the directors. You will ensure the accuracy and completeness of the information you provide us.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Our obligations under this agreement&lt;/strong&gt;&lt;br /&gt;
+                    We will take reasonable steps to insure that our website is as complete and precise as possible and to protect your privacy. We will protect your private data and will never stock any information without strong encryption and following PCI-DSS guidelines.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Force Majeure&lt;/strong&gt;&lt;br /&gt;
+                    We shall in no case be liable to you for any breach of the terms and conditions or any failure to provide or delay in providing our services through our site resulting from any event or circumstance beyond our reasonable control including, without limitation, breakdown of systems or network access, fire, explosion or accident or any &amp;#8220;acts of God&amp;#8221;.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Exclusions and Limitations&lt;/strong&gt;&lt;br /&gt;
+                    We make no representations or warranties about the accuracy, completeness, or suitability for any specific purpose of the information and related graphics published on our website.&lt;br /&gt;
+                    The information published may contain technical inaccuracies, out-dated material or typographical errors and is only intended to be a general indication of our services. Except for claims related to death or personal injury resulting from negligence or as otherwise prescribed by law, our liability for any loss or damage (compensatory, direct, indirect or consequential damages, loss of data, income or profit, loss or damage to property and claims of third parties) arising out of any single claim will be limited to the value of re-supplying the relevant product or service.&lt;/p&gt;
+                    &lt;p&gt;You agree that this limitation is reasonable due to the nature of our site and given that when you require information or services through our site you start a separate contract with us in each case.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Changes in Content and Services&lt;/strong&gt;&lt;br /&gt;
+                    At any time and without notice, we reserve the right to revise our terms and conditions, our bouquet of services and the content of our site.&lt;/p&gt;
+                    &lt;p&gt;Outgoing Web Links&lt;br /&gt;
+                    Outgoing links to third party websites are provided for your convenience and for general information. We do not warrant any of the content, services or accuracy of these third parties.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Ownership and Rights to the materials on this website&lt;/strong&gt;&lt;br /&gt;
+                    All rights to the design, text &amp;amp; graphics and any other material on our website, layout and style are our own copyright or the ones of related third parties. Permission is granted to electronically copy and print hard copy portions of our site solely for the purpose of studying offers in connection with the acquisition of goods or services from our website. Any other use of the materials on our website (including reproduction for purposes other than those above mentioned and any alteration, modification, distribution, or publication) without our prior written permission is strictly prohibited and will be prosecuted to the full extend authorized by law.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Third Party Rights&lt;/strong&gt;&lt;br /&gt;
+                    Our terms and conditions are not intended to be enforceable by any third party.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Competent Jurisdiction and Tribunals&lt;/strong&gt;&lt;br /&gt;
+                    These Terms and Conditions and our relationship with you shall be governed by and construed in accordance with the laws of Spain and will be subject to the exclusive jurisdiction of the Spanish Courts.&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;Privacy Policy&lt;/strong&gt;&lt;br /&gt;
+                    You agree that we may collect, store, and use information about you in accordance with our Privacy Policy. You acknowledge and agree to be bound by the terms of our Privacy Policy.&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/ContentPane&gt;
+        )
+    }<span class="cstat-no" title="statement not covered" ></span>
+}
+<span class="cstat-no" title="statement not covered" >TermsOfUse.propTypes = {</span>
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    title: PropTypes.string.isRequired
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 09 2018 18:02:34 GMT+0000 (UTC)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

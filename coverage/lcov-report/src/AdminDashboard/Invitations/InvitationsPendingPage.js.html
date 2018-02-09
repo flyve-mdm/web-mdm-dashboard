@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/AdminDashboard/Invitations/InvitationsPendingPage.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/AdminDashboard/Invitations</a> InvitationsPendingPage.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/23</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import ReactWinJS <span class="cstat-no" title="statement not covered" >from 'react-winjs'<span class="cstat-no" title="statement not covered" ></span></span>
+import Pluralize <span class="cstat-no" title="statement not covered" >from 'pluralize'<span class="cstat-no" title="statement not covered" ></span></span>
+import InvitationsLog <span class="cstat-no" title="statement not covered" >from '../data/invitationsLog.json'<span class="cstat-no" title="statement not covered" ></span></span>
+import WinJS <span class="cstat-no" title="statement not covered" >from 'winjs'<span class="cstat-no" title="statement not covered" ></span></span>
+import ItemList <span class="cstat-no" title="statement not covered" >from '../ItemList'<span class="cstat-no" title="statement not covered" ></span></span>
+import EmptyMessage <span class="cstat-no" title="statement not covered" >from '../../Utils/EmptyMessage'<span class="cstat-no" title="statement not covered" ></span></span>
+import ContentPane <span class="cstat-no" title="statement not covered" >from '../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+&nbsp;
+export default class InvitationsPendingPage extends Component {
+&nbsp;
+<span class="fstat-no" title="function not covered" >    co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >        super(props)<span class="cstat-no" title="statement not covered" ></span></span>
+        this.state = {
+            layout: { type: WinJS.UI.ListLayout }
+        }
+    }
+&nbsp;
+    ItemListRenderer = ReactWinJS.reactRenderer((ItemList) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+        retu<span class="cstat-no" title="statement not covered" >rn (</span>
+            &lt;div style={{ padding: '14px', width: '100%' }}&gt;
+                &lt;b&gt;{ItemList.data['PluginFlyvemdmInvitationLog.PluginFlyvemdmInvitationlog.event']}&lt;/b&gt;
+                &lt;br /&gt;
+                {ItemList.data['PluginFlyvemdmInvitationLog.PluginFlyvemdmInvitationlog.date_creation']}
+            &lt;/div&gt;
+        )
+    })<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+        let currentLog = <span class="cstat-no" title="statement not covered" >[]</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (let index = 0; index &lt; InvitationsLog.data.length; index++) {</span>
+            const element = <span class="cstat-no" title="statement not covered" >InvitationsLog.data[index]</span>
+<span class="cstat-no" title="statement not covered" >            if (element['PluginFlyvemdmInvitationLog.PluginFlyvemdmInvitation.id'] === this.props.currentItem['PluginFlyvemdmInvitation.id']) {</span>
+<span class="cstat-no" title="statement not covered" >                currentLog.push(element)</span>
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (currentLog.length &gt; 0) {</span>
+            let currentListItemLogs = <span class="cstat-no" title="statement not covered" >ItemList('InvitationsLog', currentLog)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return (</span>
+                &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true}&gt;
+                    &lt;div className="listPane" style={{ padding: 0 }}&gt;
+                    &lt;div className="contentHeader"&gt;
+                        &lt;h2 className="win-h2 titleContentPane" &gt;Pending {Pluralize.singular(this.props.location[0])} &lt;/h2&gt;
+                    &lt;/div&gt;
+                    &lt;ReactWinJS.ListView
+                        ref="listView"
+                        className="contentListView win-selectionstylefilled"
+                        style={{ height: 'calc(100% - 48px)' }}
+                        itemDataSource={currentListItemLogs.dataSource}
+                        itemTemplate={this.ItemListRenderer}
+                        layout={this.state.layout}
+                        selectionMode={'single'}
+                    /&gt;
+                    &lt;/div&gt;
+                &lt;/ContentPane&gt;
+            )
+        } else {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return (</span>
+                &lt;EmptyMessage message="No Logs Available" itemListPaneWidth={this.props.itemListPaneWidth} /&gt;
+            )
+        }
+    }<span class="cstat-no" title="statement not covered" ></span>
+}
+<span class="cstat-no" title="statement not covered" >InvitationsPendingPage.propTypes = {</span>
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    location: PropTypes.array.isRequired,
+    currentItem: PropTypes.object.isRequired
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 09 2018 18:02:34 GMT+0000 (UTC)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

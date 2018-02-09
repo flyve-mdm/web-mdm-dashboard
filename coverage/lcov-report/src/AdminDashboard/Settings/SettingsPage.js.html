@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/AdminDashboard/Settings/SettingsPage.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/AdminDashboard/Settings</a> SettingsPage.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/34</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/15</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/22</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+import EmptyMessage <span class="cstat-no" title="statement not covered" >from '../../Utils/EmptyMessage'<span class="cstat-no" title="statement not covered" ></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import Entity <span class="cstat-no" title="statement not covered" >from './Entity/'<span class="cstat-no" title="statement not covered" ></span></span>
+import Profiles <span class="cstat-no" title="statement not covered" >from './Profiles'<span class="cstat-no" title="statement not covered" ></span></span>
+import Supervision <span class="cstat-no" title="statement not covered" >from './Supervision'<span class="cstat-no" title="statement not covered" ></span></span>
+import Security <span class="cstat-no" title="statement not covered" >from './Security'<span class="cstat-no" title="statement not covered" ></span></span>
+import Notifications <span class="cstat-no" title="statement not covered" >from './Notifications'<span class="cstat-no" title="statement not covered" ></span></span>
+import Display <span class="cstat-no" title="statement not covered" >from './Display'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+&nbsp;
+&nbsp;
+class SettingsPage extends Component {
+<span class="fstat-no" title="function not covered" >    re</span>nder () {
+<span class="cstat-no" title="statement not covered" >        if (this.props.location[1] || this.props.location[1] === 0) {</span>
+            const selectedItemList = <span class="cstat-no" title="statement not covered" >this.props.itemList.getAt(this.props.location[1])</span>
+<span class="cstat-no" title="statement not covered" >            switch (selectedItemList.title) {</span>
+                case 'Entity':
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;Entity 
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            showNotification={this.props.showNotification}
+                        /&gt;
+                    )
+                case 'Profiles':
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;Profiles 
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}
+                            currentUser={this.props.currentUser}
+                        /&gt;
+                    )
+                case 'Supervision':
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;Supervision 
+                            itemListPaneWidth={this.props.itemListPaneWidth} 
+                            showNotification={this.props.showNotification}
+                        /&gt;
+                    )
+                case 'Security':
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;Security 
+                            itemListPaneWidth={this.props.itemListPaneWidth} 
+                            getPasswordConfiguration={this.props.getPasswordConfiguration}
+                            passwordConfiguration={this.props.passwordConfiguration}
+                            isLoading={this.props.isLoading}
+                            changeLoading={this.props.changeLoading}
+                            showNotification={this.props.showNotification}
+                        /&gt;
+                    )
+                case 'Notifications':
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;Notifications itemListPaneWidth={this.props.itemListPaneWidth}/&gt;
+                    )
+                case 'Display':
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;Display 
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            handleToggleAnimation={this.props.handleToggleAnimation}
+                        /&gt;
+                    )
+                default:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} /&gt;
+                    )
+            }
+        } else {
+<span class="cstat-no" title="statement not covered" >            return (</span>
+                &lt;EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} /&gt;            
+            )
+        }
+    }
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >SettingsPage.propTypes = {</span>
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    animation: PropTypes.bool.isRequired,
+    handleToggleAnimation: PropTypes.func.isRequired,
+    location: PropTypes.array.isRequired,
+    itemList: PropTypes.object.isRequired,
+    getPasswordConfiguration: PropTypes.func.isRequired,
+    passwordConfiguration: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    changeLoading: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired,
+    currentUser: PropTypes.object.isRequired<span class="cstat-no" title="statement not covered" ></span>
+}
+&nbsp;
+export default SettingsPage</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 09 2018 18:02:34 GMT+0000 (UTC)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
