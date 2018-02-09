@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { i18n } from '../../i18n/i18n-redux-helpers';
 
 class LoginUsername extends Component {
 
@@ -40,9 +41,9 @@ class LoginUsername extends Component {
             <div className="emailSection">
                 <h2 className="win-h2">Sign in</h2>
                 <p>
-                    Use your Flyve MDM account.
+                    {i18n('login.instruction')}
                     <br/>
-                    <a href="https://flyve-mdm.com/"> What's this? </a>	
+                    <a href="https://flyve-mdm.com/"> {i18n('login.what_s_this')} </a>	
                 </p>
 
                 {this.state.errorMessage}
@@ -51,18 +52,18 @@ class LoginUsername extends Component {
                     <input 
                         type="text" 
                         name="username"
-                        ref={(input) => { this.usernameInput = input; }} 
+                        ref={(input) => { this.usernameInput = input; }}
                         className={this.state.classInput} 
-                        placeholder="Username"
+                        placeholder={i18n('login.username')}
                         value={this.props.username} 
                         onChange={this.props.changeInput} 
                         required={true}
                     />
-                    <button className="win-button color-accent">Next</button>
+                    <button className="win-button color-accent">{i18n('login.next')}</button>
                 </form>
                 {
                     !this.props.selfRegistration ? '' : (
-                        <p>No account? <Link to='/signIn'>Create one!</Link></p>
+                        <p>{i18n('login.no_account?')} <Link to='/signIn'>{i18n('login.create_one!')}</Link></p>
                     )
                 }
                

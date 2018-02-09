@@ -7,6 +7,9 @@ import LoginContainer from '../LoginContainer'
 import LoginUsername from './LoginUsername'
 import LoginPassword from './LoginPassword'
 import ToastNotifications from '../../Utils/ToastNotifications'
+import withI18NTranslation from '../../i18n/withI18NTranslation';
+import I18NinitialState from '../../i18n/strings/en-GB.json';
+
 
 function mapStateToProps(state, props) {
     return {
@@ -106,4 +109,13 @@ Login.propTypes = {
 export default connect (
   mapStateToProps,
   mapDispatchToProps
-)(Login)
+)(withI18NTranslation(
+    Login, 
+    {
+        fallBackLocale : "en-GB",
+        initialState : {
+            locale : "en-GB",
+            data : I18NinitialState
+        }
+    }
+))

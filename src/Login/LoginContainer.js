@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { changeLocale } from '../i18n/i18n-redux-helpers';
 
 class LoginContainer extends Component {
     render() {
@@ -24,8 +25,12 @@ class LoginContainer extends Component {
                         <br />
                         <span>
                             © 2017 Teclib'.
-                    </span>
+                        </span>
                     </div>
+                    <button onClick={() => changeLocale("pt-PT")}>Portugues</button>
+                    <button onClick={() => changeLocale("en-GB")}>Ingles</button>
+                    <button onClick={() => changeLocale("fr-FR")}>Francia</button>
+                    <button onClick={() => changeLocale("es-ES")}>Español</button>
                 </div>
             </div>
         )
