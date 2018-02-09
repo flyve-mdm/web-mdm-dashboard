@@ -166,22 +166,6 @@ class SignIn extends Component {
                         forceValidation: this.state.forceValidation
                     },
                     {
-                        label: "Username",
-                        type: "text",
-                        name: "login",
-                        value: this.state.login,
-                        placeholder: "Username",
-                        function: this.changeState,
-                        disabled: false,
-                        style: {
-                            width: 340
-                        },
-                        parametersToEvaluate: {
-                            isRequired: true
-                        },
-                        forceValidation: this.state.forceValidation
-                    },
-                    {
                         label: "Full name",
                         type: "text",
                         name: "realName",
