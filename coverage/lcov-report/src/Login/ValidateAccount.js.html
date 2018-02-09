@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/13</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -32,7 +32,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -66,16 +66,9 @@
 21
 22
 23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+24</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -83,18 +76,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -108,35 +90,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-<span class="cstat-no" title="statement not covered" >import './Login.css'<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+import { Link } from '<span class="cstat-no" title="statement not covered" >react-router-dom'</span>
+import LoginContainer <span class="cstat-no" title="statement not covered" >from './LoginContainer'<span class="cstat-no" title="statement not covered" ></span></span>
+import ToastNotifications <span class="cstat-no" title="statement not covered" >from '../Utils/ToastNotifications'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
 &nbsp;
 export default class ValidateAccount extends Component {
-    
-<span class="fstat-no" title="function not covered" >    co</span>nstructor (props) {
-<span class="cstat-no" title="statement not covered" >        super(props)<span class="cstat-no" title="statement not covered" ></span></span>
-        document.body.className = 'color-accent'
-    }
-&nbsp;
-    goLogin = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
-        this<span class="cstat-no" title="statement not covered" >.props.history.push(`/`)</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
 <span class="fstat-no" title="function not covered" >    re</span>nder () {
 <span class="cstat-no" title="statement not covered" >        return (</span>
-            &lt;div className="ms-grid" id="ValidateAccount"&gt;
-                &lt;div className="ms-row"&gt;
-                    &lt;div className="m-col-1-1 section1 color-white"&gt;
-                        &lt;img alt="" src="img/logo-flyve-login.png" className="img-login"/&gt;
-                    &lt;/div&gt;
-                    &lt;div className="m-col-1-1 color-bg-light-vivid-mid" style={{paddingBottom: 20, marginBottom: 10}}&gt;
-                        &lt;h2&gt; Your user is not yet activated, please check your email and activate your account &lt;/h2&gt;
-                        &lt;button className="win-button color-accent" onClick={this.goLogin}&gt;Go to login&lt;/button&gt;
-                    &lt;/div&gt;
+            &lt;LoginContainer&gt;
+                &lt;ToastNotifications ref={instance =&gt; { this.toastNotifications = in<span class="fstat-no" title="function not covered" >st</span>ance }} /&gt;<span class="cstat-no" title="statement not covered" ></span>
+                &lt;div&gt;
+                    &lt;h2 className="win-h2"&gt;Validate Account&lt;/h2&gt;
+                    &lt;p&gt;
+                        Your user is not yet activated, please check your email and activate your account
+                        &lt;br /&gt;
+                    &lt;/p&gt;
+                    &lt;p&gt;&lt;Link to='/'&gt;Sign in&lt;/Link&gt;&lt;/p&gt;
+&nbsp;
                 &lt;/div&gt;
-                &lt;span className="credentials color-type-primary-alt" &gt;
-                    A solution powered by &amp;nbsp; &lt;img alt="" src="img/logo-teclib-blanc-1-2.png" /&gt;
-                &lt;/span&gt;
-            &lt;/div&gt;
+            &lt;/LoginContainer&gt;
         )
     }<span class="cstat-no" title="statement not covered" ></span>
 }</pre></td></tr>
@@ -145,7 +118,7 @@ export default class ValidateAccount extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 09 2018 22:58:18 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 09 2018 23:14:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>
