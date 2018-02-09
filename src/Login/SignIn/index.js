@@ -49,26 +49,16 @@ class SignIn extends Component {
         this.refreshCaptcha()
     }
 
-    componentWillUnmount() {
-
-        console.log('componentWillUnmount')
-    }
-
     refreshCaptcha = async () => {
 
         try {
             // Init session by user_token
-            const responseSession = await Glpi.genericRequest({ path: 'initSession', queryString: { user_token: config.USER_TOKEN }, requestParams: { method: 'GET' } })
-            const session = await responseSession.json()
+            const session = await Glpi.initSessionByUserToken({ userToken: config.USER_TOKEN })
             Glpi.sessionToken = session.session_token
             // Create new captcha
             const {id} = await Glpi.addItem({ itemtype: 'PluginFlyvemdmdemoCaptcha', input: {}})
             // Get new captcha
-            let headers = new Headers()
-            headers.append('Content-Type', 'application/octet-stream')
-            const captcha = await Glpi.genericRequest({ path: `PluginFlyvemdmdemoCaptcha/${id}`, queryString: { alt: 'media' }, requestParams: { method: 'GET', headers } })
-            const imgCaptcha = await captcha.blob()
-
+            const captcha = await Glpi.genericRequest({ path: `PluginFlyvemdmdemoCaptcha/${id}`, queryString: { alt: 'media' }, requestParams: { method: 'GET', headers: {'Content-Type': 'application/octet-stream'} } })
             // Get Glpi configuration
             const { cfg_glpi } = await Glpi.getGlpiConfig()
 
@@ -80,11 +70,9 @@ class SignIn extends Component {
                 needSymbol: cfg_glpi.password_need_symbol
             }
 
-            console.log(configurationPassword)
-
             this.setState({
                 captchaID: id,
-                imgCaptcha: URL.createObjectURL(imgCaptcha),
+                imgCaptcha: URL.createObjectURL(captcha),
                 configurationPassword: configurationPassword,
                 isLoading: false
             })
