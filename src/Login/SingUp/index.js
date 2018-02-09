@@ -8,7 +8,7 @@ import LoginUsername from './LoginUsername'
 import LoginPassword from './LoginPassword'
 import ToastNotifications from '../../Utils/ToastNotifications'
 import { I18n } from 'react-i18nify';
-import findI18NString from '../../i18n/findI18NString';
+import withI18NTranslation from '../../i18n/withI18NTranslation';
 
 function mapStateToProps(state, props) {
     return {
@@ -40,8 +40,6 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        findI18NString(this, this.props.locationLanguage);
-
         if (this.props.notificationMessage !== undefined) {
             this.showNotification(this.props.notificationMessage.title, this.props.notificationMessage.body)
         }
@@ -50,12 +48,6 @@ class Login extends Component {
     componentDidUpdate() {
         if (this.props.notificationMessage !== undefined) {
             this.showNotification(this.props.notificationMessage.title, this.props.notificationMessage.body)
-        }
-    }
-
-    componentWillReceiveProps(nextProps, nextContext) {
-        if (nextProps.locationLanguage !== this.props.locationLanguage) {
-            findI18NString(this, nextProps.locationLanguage)
         }
     }
 
@@ -112,10 +104,11 @@ class Login extends Component {
 Login.propTypes = {
     username: PropTypes.string.isRequired,    
     history: PropTypes.object.isRequired,
-    selfRegistration: PropTypes.bool.isRequired
+    selfRegistration: PropTypes.bool.isRequired,
+    locationLanguage: PropTypes.string.isRequired
 }
 
 export default connect (
   mapStateToProps,
   mapDispatchToProps
-)(Login)
+)(withI18NTranslation(Login))
