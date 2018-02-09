@@ -11,7 +11,8 @@ const INITIAL_STATE = {
     selfRegistration: config.self_registration,
     configurationPassword: {},
     notificationMessage: undefined,
-    currentUser: user
+    currentUser: user,
+    locationLanguage: 'en-GB'
 }
 
 // Constants
@@ -23,6 +24,8 @@ const CHANGE_ENDPOINT = 'flyve-mdm-web-ui/Login/changeEndpoint'
 const FETCHING_DATA_SUCCESS = 'flyve-mdm-web-ui/Login/fetchingDataSuccess'
 const CHANGE_NOTIFICATION_MESSAGE = 'flyve-mdm-web-ui/Login/changeNotificationMessage'
 const CHANGE_CURRENT_USER = 'flyve-mdm-web-ui/Login/changeCurrentUser'
+
+const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE'
 
 // Reducers
 export default function reducer(state = INITIAL_STATE, action) {
@@ -67,6 +70,11 @@ export default function reducer(state = INITIAL_STATE, action) {
         return {
             ...state,
             currentUser: action.newCurrentUser
+        }
+        case CHANGE_LANGUAGE:
+        return  {
+            ...state,
+            locationLanguage: action.languageName
         }
         
         default: return state
@@ -164,5 +172,11 @@ export function changeCurrentUser(newCurrentUser) {
     return {
         type: CHANGE_CURRENT_USER,
         newCurrentUser
+    }
+}
+export function changeLanguage(languageName) {
+    return {
+        type: CHANGE_LANGUAGE,
+        languageName
     }
 }

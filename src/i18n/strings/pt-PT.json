@@ -1,0 +1,10 @@
+{
+  "login": {
+    "instruction": "Use sua conta do Flyve MDM",
+    "what_s_this": "O que é isso?",
+    "username": "Nome de usuário",
+    "next": "Seguindo",
+    "no_account?": "Não tem uma conta?",
+    "create_one!": "Crie um!"
+  }
+}

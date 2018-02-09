@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { Translate } from 'react-i18nify';
 
 class LoginUsername extends Component {
 
@@ -40,29 +41,31 @@ class LoginUsername extends Component {
             <div className="emailSection">
                 <h2 className="win-h2">Sign in</h2>
                 <p>
-                    Use your Flyve MDM account.
+                    <Translate value="login.instruction"/>
                     <br/>
-                    <a href="https://flyve-mdm.com/"> What's this? </a>	
+                    <a href="https://flyve-mdm.com/">
+                        <Translate value="login.what_s_this"/>
+                    </a>	
                 </p>
 
                 {this.state.errorMessage}
-
+ 
                 <form onSubmit={this.LogInServer}>
                     <input 
                         type="text" 
                         name="username"
                         ref={(input) => { this.usernameInput = input; }} 
                         className={this.state.classInput} 
-                        placeholder="Username"
+                        placeholder={this.props.usernamePlaceholder}
                         value={this.props.username} 
                         onChange={this.props.changeInput} 
                         required={true}
                     />
-                    <button className="win-button color-accent">Next</button>
+                    <button className="win-button color-accent"><Translate value="login.next"/></button>
                 </form>
                 {
                     !this.props.selfRegistration ? '' : (
-                        <p>No account? <Link to='/signIn'>Create one!</Link></p>
+                        <p><Translate value="login.no_account?"/> <Link to='/signIn'><Translate value="login.create_one!"/></Link></p>
                     )
                 }
                
