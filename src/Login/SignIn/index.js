@@ -58,7 +58,7 @@ class SignIn extends Component {
             // Create new captcha
             const {id} = await Glpi.addItem({ itemtype: 'PluginFlyvemdmdemoCaptcha', input: {}})
             // Get new captcha
-            const captcha = await Glpi.genericRequest({ path: `PluginFlyvemdmdemoCaptcha/${id}`, queryString: { alt: 'media' }, requestParams: { method: 'GET', headers: {'Content-Type': 'application/octet-stream'} } })
+            const captcha = await Glpi.genericRequest({ path: `PluginFlyvemdmdemoCaptcha/${id}`, queryString: { alt: 'media' }, requestParams: { method: 'GET', headers: {'Content-Type': 'application/octet-stream'}, responseType: 'blob' } })
             // Get Glpi configuration
             const { cfg_glpi } = await Glpi.getGlpiConfig()
 
