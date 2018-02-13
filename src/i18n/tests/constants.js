@@ -1,11 +1,12 @@
 const TRANSLATIONS_AVAILABLES = {
-  'English': 'en_GB',
-  'Portuguese':'pt_BR',
-  'Spain': 'es',
-  'French': 'fr',
+  //'Portuguese':'pt_BR',
+  
+  //'Spain': 'es',
+  
+  //'French': 'fr',
 }
 const LANGUAGE_DEFAULT = 'en_GB';
-const TRANSLATION_FOLDER = 'strings';
+const TRANSLATION_FOLDER = 'translations';
 const LANGUAGE_NAMES = Object.keys(TRANSLATIONS_AVAILABLES);
 
 export {

@@ -1,36 +1,46 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify';
+import source_file from './source_file.json';
+
+const LENGUAGE_DEFAULT = 'en_GB';
+
+let json = {};
+
+json[LENGUAGE_DEFAULT] = source_file;
+
+I18n.setTranslations(json);
+
 
 /**
  * 
  * @param {*} WrappedComponent -> React Component
  * @param {*} configurationObject  -> Object {language_default}
  */
-const withI18NTranslation = (WrappedComponent, language_default) => {
+const withI18NTranslation = (WrappedComponent) => {
   return class withI18NTranslation extends Component {
-    constructor(props) {
-      super(props);
-
-      this.language_default = language_default;
-    }
-
      /**
-     * @param {*} i18nConvention -> String, e.g: 'en_GB'
+     * @param {*} i18nConvention -> String, e.g: 'pt_BR'
      */
     findI18NString = i18nConvention => {
-      import(`./strings/${i18nConvention}.json`).then(jsonModule => {
-        I18n.setTranslationsGetter(() => {
-            const json = {};
-            json[i18nConvention] = jsonModule;
-            return json
+      if (i18nConvention !== LENGUAGE_DEFAULT) {
+        import(`./strings/${i18nConvention}.json`).then(jsonModule => {
+          I18n.setTranslationsGetter(() => {
+              const json = {};
+              json[i18nConvention] = jsonModule;
+              return json
+          });
+          I18n.setLocale(i18nConvention);
+          this.forceUpdate();
+        }).catch(() => {
+          I18n.setLocale(LENGUAGE_DEFAULT);
+          this.forceUpdate();
         });
-        I18n.setLocale(i18nConvention);
+      }
+      else {
+        I18n.setLocale(LENGUAGE_DEFAULT);
         this.forceUpdate();
-      }).catch(() => {
-        I18n.setLocale(this.language_default);
-        this.forceUpdate();
-      });
+      }
     };
   
     componentDidMount() {

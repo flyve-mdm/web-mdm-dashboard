@@ -1,5 +1,6 @@
 import React from 'react';
 import { I18n, Translate } from 'react-i18nify';
+import source_file from '../source_file.json';
 import {
   TRANSLATIONS_AVAILABLES,
   LANGUAGE_DEFAULT,
@@ -11,6 +12,11 @@ describe('Check if translations are available', () => {;
   beforeAll(()=> {
     let count = 1;
     let json  = {} ;
+
+    json[LANGUAGE_DEFAULT] = source_file;
+
+    I18n.setTranslations(json);
+
     for (let i in TRANSLATIONS_AVAILABLES) {
       import(`../${TRANSLATION_FOLDER}/${TRANSLATIONS_AVAILABLES[i]}.json`).then(jsonModule => {
         count++;
@@ -22,14 +28,8 @@ describe('Check if translations are available', () => {;
     }
   }) 
 
-  it(`The login have translations in ${LANGUAGE_NAMES.join(', ')}`, () => {
+  it(`The login have translations in English, ${LANGUAGE_NAMES.join(', ')}`, () => {
     I18n.setLocale(LANGUAGE_DEFAULT); 
-    expect(I18n.t('login.instruction')).toBe('Use your Flyve MDM account')
-    I18n.setLocale('pt_BR'); 
-    expect(I18n.t('login.instruction')).toBe('Use sua conta do Flyve MDM')
-    I18n.setLocale('es'); 
-    expect(I18n.t('login.instruction')).toBe('Use su cuenta Flyve MDM')
-    I18n.setLocale('fr'); 
-    expect(I18n.t('login.instruction')).toBe('Utilisez votre compte Flyve MDM')
+    expect(I18n.t('login.use_your_flyve_mdm_account')).toBe('Use your Flyve MDM account')
   })
 });

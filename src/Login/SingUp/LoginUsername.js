@@ -41,7 +41,7 @@ class LoginUsername extends Component {
             <div className="emailSection">
                 <h2 className="win-h2">Sign in</h2>
                 <p>
-                    <Translate value="login.instruction"/>
+                    <Translate value="login.use_your_flyve_mdm_account"/>
                     <br/>
                     <a href="https://flyve-mdm.com/">
                         <Translate value="login.what_s_this"/>
