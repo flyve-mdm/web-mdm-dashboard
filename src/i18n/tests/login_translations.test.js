@@ -28,8 +28,13 @@ describe('Check if translations are available', () => {;
     }
   }) 
 
-  it(`The login have translations in English, ${LANGUAGE_NAMES.join(', ')}`, () => {
+  it(`The login page have translations in English, ${LANGUAGE_NAMES.join(', ')}`, () => {
     I18n.setLocale(LANGUAGE_DEFAULT); 
     expect(I18n.t('login.use_your_flyve_mdm_account')).toBe('Use your Flyve MDM account')
-  })
+  });
+
+  it(`The create account page have translations in English, ${LANGUAGE_NAMES.join(', ')}`, () => {
+    I18n.setLocale(LANGUAGE_DEFAULT); 
+    expect(I18n.t('create_account.create_account')).toBe('Create account')
+  });
 });

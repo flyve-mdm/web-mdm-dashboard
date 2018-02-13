@@ -11,7 +11,6 @@ json[LENGUAGE_DEFAULT] = source_file;
 
 I18n.setTranslations(json);
 
-
 /**
  * 
  * @param {*} WrappedComponent -> React Component
@@ -23,24 +22,22 @@ const withI18NTranslation = (WrappedComponent) => {
      * @param {*} i18nConvention -> String, e.g: 'pt_BR'
      */
     findI18NString = i18nConvention => {
-      if (i18nConvention !== LENGUAGE_DEFAULT) {
-        import(`./strings/${i18nConvention}.json`).then(jsonModule => {
-          I18n.setTranslationsGetter(() => {
-              const json = {};
-              json[i18nConvention] = jsonModule;
-              return json
-          });
-          I18n.setLocale(i18nConvention);
-          this.forceUpdate();
-        }).catch(() => {
-          I18n.setLocale(LENGUAGE_DEFAULT);
-          this.forceUpdate();
+      let path = i18nConvention === LENGUAGE_DEFAULT
+        ? `./source_file`
+        : `./translations/${i18nConvention}`;
+        
+      import(`${path}.json`).then(jsonModule => {
+        I18n.setTranslationsGetter(() => {
+          const json = {};
+          json[i18nConvention] = jsonModule;
+          return json
         });
-      }
-      else {
+        I18n.setLocale(i18nConvention);
+        this.forceUpdate();
+      }).catch(() => {
         I18n.setLocale(LENGUAGE_DEFAULT);
         this.forceUpdate();
-      }
+      });
     };
   
     componentDidMount() {
