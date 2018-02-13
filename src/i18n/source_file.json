@@ -5,6 +5,21 @@
     "username": "Username",
     "next": "Next",
     "no_account?": "No account?",
-    "create_one!": "Create one!"
+    "create_one!": "Create one!",
+    "terms_and_conditions": "Terms and Conditions"
+  },
+  "create_account": {
+    "create_account": "Create account",
+    "enter_the_code_from_the_image": "Enter the code from the image",
+    "do_you_already_have_an_account?": "Do you already have an account?",
+    "sign_in": "Sign in",
+    "full_name": "Full name",
+    "password_(confirmation)": "Password (confirmation)",
+    "register": "Register"
+  },
+  "commons": {
+    "email": "Email",
+    "name": "Name",
+    "password": "Password"
   }
 }

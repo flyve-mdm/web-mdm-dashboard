@@ -11,10 +11,13 @@ import LoginContainer from '../LoginContainer'
 import Glpi from '../../Utils/GlpiApi'
 import config from '../../config.json'
 import ToastNotifications from '../../Utils/ToastNotifications'
+import withI18NTranslation from '../../i18n/withI18NTranslation';
+import { I18n, Translate } from 'react-i18nify';
 
 function mapStateToProps(state, props) {
     return {
-        email: state.Login.email
+        email: state.Login.email,
+        locationLanguage: state.Login.locationLanguage
     }
 }
 
@@ -41,7 +44,7 @@ class SignIn extends Component {
             forceValidation: false,
             configurationPassword: undefined,
             isLoading: true,
-            imgCaptcha: undefined
+            imgCaptcha: undefined,
         }
     }
 
@@ -149,11 +152,11 @@ class SignIn extends Component {
             personalInformation: [
                 [
                     {
-                        label: "Email",
+                        label: I18n.t('commons.email'),
                         type: "text",
                         name: "email",
                         value: this.state.email,
-                        placeholder: "Email",
+                        placeholder: I18n.t('commons.email'),
                         function: this.changeState,
                         disabled: false,
                         style: {
@@ -166,11 +169,11 @@ class SignIn extends Component {
                         forceValidation: this.state.forceValidation
                     },
                     {
-                        label: "Full name",
+                        label: I18n.t('create_account.full_name'),
                         type: "text",
                         name: "realName",
                         value: this.state.realName,
-                        placeholder: "Full name",
+                        placeholder: I18n.t('create_account.full_name'),
                         function: this.changeState,
                         disabled: false,
                         style: {
@@ -186,11 +189,11 @@ class SignIn extends Component {
             passwordInformation: [
                 [
                     {
-                        label: "Password",
+                        label: I18n.t('commons.password'),
                         type: "password",
                         name: "password",
                         value: this.state.password,
-                        placeholder: "Password",
+                        placeholder: I18n.t('commons.password'),
                         function: this.changeState,
                         disabled: false,
                         style: {
@@ -203,11 +206,11 @@ class SignIn extends Component {
                         forceValidation: this.state.forceValidation
                     },
                     {
-                        label: "Password (confirmation)",
+                        label: I18n.t('create_account.password_(confirmation)'),
                         type: "password",
                         name: "passwordConfirmation",
                         value: this.state.passwordConfirmation,
-                        placeholder: "Password confirmation",
+                        placeholder: I18n.t('create_account.password_(confirmation)'),
                         function: this.changeState,
                         disabled: false,
                         style: {
@@ -228,7 +231,7 @@ class SignIn extends Component {
             captchaInformation: [
                 [
                     {
-                        label: "Enter the code from the image",
+                        label: I18n.t('create_account.enter_the_code_from_the_image'),
                         type: "text",
                         name: "captcha",
                         value: this.state.captcha,
@@ -262,7 +265,7 @@ class SignIn extends Component {
                     <h2 style={{
                         textAlign: 'center'
                     }}>
-                        Create account
+                        <Translate value="create_account.create_account"/>
                     </h2>
 
                     <form className="list-content" onSubmit={this.registerUser}>
@@ -277,9 +280,15 @@ class SignIn extends Component {
                         </div>
                         <div style={{textAlign: 'center'}}>
                             <button className="win-button win-button-primary" style={{ margin: "20px" }}>
-                                Register
+                                <Translate value="create_account.register"/>
                             </button>
-                            <p>Do you already have an account? <Link to='/'>Sign in</Link></p>
+                            <p>
+                                <Translate value="create_account.do_you_already_have_an_account?"/>
+                                &#160;
+                                <Link to='/'>
+                                    <Translate value="create_account.sign_in"/>
+                                </Link>
+                            </p>
                         </div>
 
                     </form>
@@ -293,10 +302,11 @@ class SignIn extends Component {
 
 SignIn.propTypes = {
     email: PropTypes.string,
-    history: PropTypes.object.isRequired  
+    history: PropTypes.object.isRequired,
+    locationLanguage: PropTypes.string.isRequired
 }
 
 export default connect (
     mapStateToProps,
     mapDispatchToProps
-)(SignIn)    
+)(withI18NTranslation(SignIn))
