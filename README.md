@@ -47,7 +47,7 @@ For more information visit our [website](http://flyve.org/web-mdm-dashboard/).
 
 |**Release channel**|Beta Channel|
 |:---:|:---:|
-|[![Travis CI build](https://api.travis-ci.org/flyve-mdm/web-mdm-dashboard.svg?branch=master)](https://travis-ci.org/flyve-mdm/web-mdm-dashboard)|[![Travis CI build](https://api.travis-ci.org/flyve-mdm/web-mdm-dashboard.svg?branch=develop)](https://travis-ci.org/flyve-mdm/web-mdm-dashboard)|
+|[![Circle CI build](https://circleci.com/gh/flyve-mdm/web-mdm-dashboard/tree/master.svg?style=svg)](https://circleci.com/gh/flyve-mdm/web-mdm-dashboard/tree/master)|[![Circle CI build](https://circleci.com/gh/flyve-mdm/web-mdm-dashboard/tree/develop.svg?style=svg)](https://circleci.com/gh/flyve-mdm/web-mdm-dashboard/tree/develop)|
 
 ## Matrix
 
