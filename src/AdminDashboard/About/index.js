@@ -4,6 +4,7 @@ import AboutList from './AboutList'
 import AboutPage from './AboutPage'
 import PropTypes from 'prop-types'
 import './About.css'
+import { I18n } from 'react-i18nify';
 
 class About extends Component {
 
@@ -11,13 +12,13 @@ class About extends Component {
         super(props)
         this.state = {
             list: new WinJS.Binding.List([
-                { title: "Overview" },
-                { title: "System information" },
-                { title: "Help Center" },
-                { title: "Contact" },
-                { title: "Release notes" },
-                { title: "Term of use" },
-                { title: "License"}
+                { title: I18n.t('about.overview') },
+                { title: I18n.t('about.system_information') },
+                { title: I18n.t('about.help_center') },
+                { title: I18n.t('about.contact') },
+                { title: I18n.t('about.release_notes') },
+                { title: I18n.t('about.term_of_use') }, 
+                { title: I18n.t('about.license') }
             ])
         }
         

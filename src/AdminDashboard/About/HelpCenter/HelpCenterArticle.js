@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import ReactMarkdown from 'react-markdown'
 import ContentPane from '../../../Utils/ContentPane'
+import { I18n } from "react-i18nify";
 
 class HelpCenterArticle extends Component {
 
@@ -25,9 +26,8 @@ class HelpCenterArticle extends Component {
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <div className="listPane" style={{ padding: 0 }}>
                     <h2 className="win-h2 titleContentPane" onClick={() =>this.props.changeSelectItem(null)}>
-                        {'<'} Help Center
+                        {'< ' + I18n.t('about.help_center') }
                     </h2>
-
                     {this.renderArticle()}
                 </div>
             </ContentPane>

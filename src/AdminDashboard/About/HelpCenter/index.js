@@ -5,6 +5,7 @@ import Feedback from './Feedback'
 import HelpCenterList from './HelpCenterList'
 import HelpCenterArticle from './HelpCenterArticle'
 import PropTypes from 'prop-types'
+import I18n from "react-i18nify/build/lib/I18n";
 
 class HelpCenter extends Component {
 
@@ -21,7 +22,7 @@ class HelpCenter extends Component {
         this.state = {
             list: new WinJS.Binding.List(popular),
             layout: { type: WinJS.UI.ListLayout },
-            labelList: 'Popular',
+            labelList: I18n.t('about.help_center_STRINGS.popular'),
             suggestionList: Articles.data.map((article) => article['HelpCenter.name']),
             itemSelected: null
         }
@@ -32,7 +33,7 @@ class HelpCenter extends Component {
     }
 
     showAllArticles = () => {
-        this.setState({labelList: 'All articles', list: new WinJS.Binding.List(Articles.data)})
+        this.setState({labelList: I18n.t('about.help_center_STRINGS.all_articles'), list: new WinJS.Binding.List(Articles.data)})
     }
 
     filterArticles = (filter) => {
