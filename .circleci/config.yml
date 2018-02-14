@@ -18,12 +18,57 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      
+      - run: 
+          name: "Build application"
+          command: yarn build
+      
+  deploy:
+    docker:
+      - image: circleci/node
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: 
+          name: "Install dependencies"
+          command: source ci/scripts/install.sh
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: 
           name: "Install Transifex Client and Files"
-          command: |
-            sudo pip install transifex-client
-            sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_API_TOKEN"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
-            tx pull -a
+          command: source ci/scripts/trasifex.sh
+      
+      - run: 
+          name: "Build application"
+          command: yarn build
+      
+      - run:
+        name: "Create artifact"
+        command: |
+          zip -r ./build.zip build/* > /tmp/artifacts/build.zip
+      
+      - store_artifacts:
+          path: /tmp/artifacts
+          destination: build.zip
 
-      - run: yarn test src/
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: feature/circle
