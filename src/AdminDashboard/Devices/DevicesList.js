@@ -141,7 +141,7 @@ export default class DevicesList extends Component {
             })
             this.props.changeActionList(button.label)
 
-            this.props.glpi.deleteItem('PluginFlyvemdmAgent', null, itemListToDelete, { force_purge: true })
+            this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })
                 .then((response) => {
                     this.props.showNotification('Success', 'elements successfully removed')
                     this.props.changeActionList(null)
