@@ -25,8 +25,7 @@ export default class DevicesList extends Component {
         this.handleRefresh()
     }
 
-    componentDidUpdate(prevProps) {
-        
+    componentDidUpdate(prevProps) {    
         if(this.listView && !this.state.scrolling) {
             this.listView.winControl.footer.style.height = '1px'
         }
