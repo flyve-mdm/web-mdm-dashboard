@@ -179,7 +179,7 @@ export default class DevicesList extends Component {
         })
         let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-        this.props.glpi.searchItems('PluginFlyvemdmAgent', null, null, { uid_cols: true, order: newOrder, forcedisplay: [2, 3, 12] })
+        this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, order: newOrder, forcedisplay: [2, 3, 12] } })
             .then((response) => {
                 this.setState({
                     isLoading: false,
