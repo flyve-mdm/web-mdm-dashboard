@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/13</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/7</span>
       </div>
     </div>
   </div>
@@ -77,24 +77,14 @@
 32
 33
 34
-35
-36
-37
-38
-39
-40</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+35</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -123,7 +113,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
 import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import ContentPane <span class="cstat-no" title="statement not covered" >from '../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+import ContentPane <span class="cstat-no" title="statement not covered" >from '../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ></span></span>
+import { Translate }<span class="cstat-no" title="statement not covered" > from 'react-i18nify';<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
 &nbsp;
 export default class Overview extends Component {
 <span class="fstat-no" title="function not covered" >    re</span>nder() {
@@ -131,24 +122,18 @@ export default class Overview extends Component {
             &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth}&gt;
                 &lt;h2 className="win-h2 titleContentPane"&gt;{this.props.title}&lt;/h2&gt;
                 &lt;div className="aboutPane"&gt;
-                    &lt;p&gt;
-                        Flyve MDM is a mobile device management software that enables you to secure and manage all the mobile devices of your business via a unique web-based console (MDM).
-                    &lt;/p&gt;
-                    &lt;p&gt;
-                        Our solution allows you to efficiently and easily control any aspects of your Android-based mobile fleet, providing a panel of functionalities:
-                    &lt;/p&gt;
+                    &lt;Translate tag='p' value={'about.overview_STRINGS.flyve_MDM_is_a_mobile_device_management_software_that_enables_you_to_secure_and_manage_all_the_mobile_devices_of_your_business_via_a_unique_web-based_console_(MDM)'} /&gt;
+                    &lt;Translate tag='p' value={'about.overview_STRINGS.our_solution_allows_you_to_efficiently_and_easily_control_any_aspects_of_your_Android-based_mobile_fleet,_providing_a_panel_of_functionalities'} /&gt;
                     &lt;ul&gt;
-                        &lt;li&gt;Provided as a SaaS platform&lt;/li&gt;
-                        &lt;li&gt;Google independent&lt;/li&gt;
-                        &lt;li&gt;Deploy and configure applications&lt;/li&gt;
-                        &lt;li&gt;Deploy files&lt;/li&gt;
-                        &lt;li&gt;Wipe a phone&lt;/li&gt;
-                        &lt;li&gt;Work with devices running Android 4.4 or higher&lt;/li&gt;
-                        &lt;li&gt;Simple web application user interface&lt;/li&gt;
+                        &lt;Translate tag='li' value={'about.overview_STRINGS.provided_as_sass_platform'} /&gt;
+                        &lt;Translate tag='li' value={'about.overview_STRINGS.google_indepent'} /&gt;
+                        &lt;Translate tag='li' value={'about.overview_STRINGS.deploy_and_configure_applications'} /&gt;
+                        &lt;Translate tag='li' value={'about.overview_STRINGS.deploy_files'} /&gt;
+                        &lt;Translate tag='li' value={'about.overview_STRINGS.wipe_a_phone'} /&gt;
+                        &lt;Translate tag='li' value={'about.overview_STRINGS.work_with_devices_running_Android_4,4_or_higher'} /&gt;
+                        &lt;Translate tag='li' value={'about.overview_STRINGS.simple_web_application_user_interface'} /&gt;
                     &lt;/ul&gt;
-                    &lt;p&gt;
-                        Source codes will be released during  fall 2016.
-                    &lt;/p&gt;
+                    &lt;Translate tag='p' value={'about.overview_STRINGS.source_codes_will_be_released_during_fall_2016'} /&gt;
                 &lt;/div&gt;
             &lt;/ContentPane&gt;
         )
@@ -166,7 +151,7 @@ export default class Overview extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 14 2018 16:36:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 14 2018 22:12:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

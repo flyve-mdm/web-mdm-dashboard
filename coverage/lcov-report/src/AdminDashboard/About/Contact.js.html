@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/13</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/7</span>
       </div>
     </div>
   </div>
@@ -94,7 +94,9 @@
 49
 50
 51
-52</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+52
+53</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -147,7 +149,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
 import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import ContentPane <span class="cstat-no" title="statement not covered" >from '../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+import ContentPane <span class="cstat-no" title="statement not covered" >from '../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ></span></span>
+import { I18n } from<span class="cstat-no" title="statement not covered" > 'react-i18nify';<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
 &nbsp;
 export default class Contact extends Component {
 <span class="fstat-no" title="function not covered" >    re</span>nder() {
@@ -157,7 +160,7 @@ export default class Contact extends Component {
                 &lt;div className="aboutPane"&gt;
                     &lt;img src="images/logo-teclib.png" alt="Teclib" /&gt;
                     &lt;p&gt;
-                        Feel free to contact us at any time, selecting your preferred channel. A Teclib’ expert will answer your request and provide you with all the information and advice you need about: our Products, Partnership Programs, Training Courses and Support solutions.
+                        { I18n.t('about.contact_STRINGS.feel_free_to_contact_us_at_any_time,_selecting_your_preferred_channel_a_teclib’_expert_will_answer_your_request_and_provide_you_with_all_the_information_and_advice_you_need_about:_our_products,_partnership_programs,_training_courses_and_support_solutions') }
                     &lt;/p&gt;
                     &lt;div className="separator" /&gt;
                     &lt;div className="contentInfo"&gt;
@@ -165,21 +168,21 @@ export default class Contact extends Component {
                             &lt;li&gt;
                                 &lt;span className="phoneIcon" /&gt;
                                 &lt;div className="callContent"&gt;
-                                    &lt;div&gt;Email&lt;/div&gt;
+                                    &lt;div&gt;{ I18n.t('commons.email') }&lt;/div&gt;
                                     &lt;a href="mailto:contact@teclib.com"&gt;contact@teclib.com&lt;/a&gt;
                                 &lt;/div&gt;
                             &lt;/li&gt;
                             &lt;li&gt;
                                 &lt;span className="phoneIcon" /&gt;
                                 &lt;div className="callContent"&gt;
-                                    &lt;div&gt;Call&lt;/div&gt;
+                                    &lt;div&gt;{ I18n.t('commons.call') }&lt;/div&gt;
                                     &lt;a href="tel:+34512702140"&gt;+34512702140&lt;/a&gt;
                                 &lt;/div&gt;
                             &lt;/li&gt;
                             &lt;li&gt;
                                 &lt;span className="mapIcon" /&gt;
                                 &lt;div className="callContent"&gt;
-                                    &lt;div&gt;Map&lt;/div&gt;
+                                    &lt;div&gt;{ I18n.t('commons.map') }&lt;/div&gt;
                                     &lt;a href="https://goo.gl/maps/qDijeVyCUwq"&gt;Barcelona, Spain&lt;/a&gt;
                                 &lt;/div&gt;
                             &lt;/li&gt;
@@ -202,7 +205,7 @@ export default class Contact extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 14 2018 16:36:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 14 2018 22:12:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

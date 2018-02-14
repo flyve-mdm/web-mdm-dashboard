@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/25</span>
+        <span class='fraction'>0/26</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/17</span>
+        <span class='fraction'>0/18</span>
       </div>
     </div>
   </div>
@@ -117,7 +117,9 @@
 72
 73
 74
-75</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+75
+76</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -194,7 +196,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from "react"<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
 import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
 import Loading <span class="cstat-no" title="statement not covered" >from '../../../Utils/Loading'<span class="cstat-no" title="statement not covered" ></span></span>
-import ContentPane <span class="cstat-no" title="statement not covered" >from '../../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+import ContentPane <span class="cstat-no" title="statement not covered" >from '../../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ></span></span>
+import { I18n } from<span class="cstat-no" title="statement not covered" > "react-i18nify";<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
 &nbsp;
 class Feedback extends Component {
 &nbsp;
@@ -217,18 +220,18 @@ class Feedback extends Component {
 <span class="fstat-no" title="function not covered" >    re</span>nder() {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if(this.props.isLoading) {</span>
-<span class="cstat-no" title="statement not covered" >            return &lt;Loading message="Sending..." /&gt;</span>
+<span class="cstat-no" title="statement not covered" >            return &lt;Loading message={I18n.t('commons.sending') } /&gt;</span>
         } else <span class="cstat-no" title="statement not covered" >if(this.state.feedbackSent) {</span>
 <span class="cstat-no" title="statement not covered" >            return (</span>
                 &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth}&gt;
                     &lt;div className="listPane" style={{ padding: 0}}&gt;
                         &lt;h2 className="titleContentPane" onClick={() =&gt; this.props.changeSelectItem(nu<span class="fstat-no" title="function not covered" >ll</span>)}&gt;<span class="cstat-no" title="statement not covered" ></span>
-                            {'&lt;'} Help Center
+                            {'&lt; ' + I18n.t('about.help_center') }
                         &lt;/h2&gt;
                         &lt;br /&gt;
                         &lt;div style={{ textAlign: 'center' }}&gt;
-                            &lt;h3&gt;Thank you!&lt;/h3&gt;
-                            &lt;p&gt;your submission has been received&lt;/p&gt;
+                            &lt;h3&gt;{I18n.t('about.help_center_STRINGS.thank_you!') }&lt;/h3&gt;
+                            &lt;p&gt;{I18n.t('about.help_center_STRINGS.your_submission_has_been_received') }&lt;/p&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
                 &lt;/ContentPane&gt;
@@ -237,14 +240,14 @@ class Feedback extends Component {
 <span class="cstat-no" title="statement not covered" >            return (</span>
                 &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth}&gt;
                     &lt;h2 className="titleContentPane" onClick={() =&gt; this.props.changeSelectItem(nu<span class="fstat-no" title="function not covered" >ll</span>)}&gt;<span class="cstat-no" title="statement not covered" ></span>
-                        {'&lt;'} Help Center
+                    {'&lt; ' + I18n.t('about.help_center') }
                     &lt;/h2&gt;
                     &lt;div style={{padding: '0 10px'}}&gt;
-                        &lt;h3&gt;Feedback&lt;/h3&gt;
+                        &lt;h3&gt;{I18n.t('about.help_center_STRINGS.feedback') }&lt;/h3&gt;
                         &lt;div className="feedback"&gt;
                             &lt;textarea className="win-textbox feedback-textarea"/&gt;
                             &lt;button className="win-button" style={{float: 'right'}} onClick={this.send}&gt;
-                                Send
+                                {I18n.t('commons.send') }
                             &lt;/button&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
@@ -271,7 +274,7 @@ export default Feedback</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 14 2018 16:36:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 14 2018 22:12:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

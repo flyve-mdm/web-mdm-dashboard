@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/38</span>
+        <span class='fraction'>0/39</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/31</span>
+        <span class='fraction'>0/32</span>
       </div>
     </div>
   </div>
@@ -156,7 +156,9 @@
 111
 112
 113
-114</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+114
+115</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -274,7 +276,8 @@ import PropTypes <span class="cstat-no" title="statement not covered" >from 'pro
 import DashboardPage <span class="cstat-no" title="statement not covered" >from './DashboardPage'<span class="cstat-no" title="statement not covered" ></span></span>
 import { Dev<span class="cstat-no" title="statement not covered" >ices, Invitations, </span>Fleets, Files, Applications, Users } from '../Data'
 import ContentPane <span class="cstat-no" title="statement not covered" >from '../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ></span></span>
-import { Victor<span class="cstat-no" title="statement not covered" >yPie } from 'victor</span>y'<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+import { Victor<span class="cstat-no" title="statement not covered" >yPie } from 'victor</span>y'
+import { I18n } from<span class="cstat-no" title="statement not covered" > 'react-i18nify';<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
 &nbsp;
 export default class Dashboard extends Component {
 &nbsp;
@@ -299,7 +302,7 @@ export default class Dashboard extends Component {
         let componentsChart = <span class="cstat-no" title="statement not covered" >[]</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (display.maximumManagedDevices === undefined || display.maximumManagedDevices) {</span>
-<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Devices" count={this.state.pages.devices} name="Devices" icon="deviceIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
+<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Devices" count={this.state.pages.devices} name={I18n.t('commons.devices')} icon="deviceIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
         } 
 <span class="cstat-no" title="statement not covered" >        if (display.devicesByOperatingSystemVersion === undefined || display.devicesByOperatingSystemVersion) {</span>
 <span class="cstat-no" title="statement not covered" >            componentsChart.push(</span>
@@ -320,21 +323,21 @@ export default class Dashboard extends Component {
                         ]}
                         style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
                     /&gt;
-                    &lt;span className="title-box"&gt;DEVICES BY PLATAFORM&lt;/span&gt;
+                    &lt;span className="title-box"&gt;{I18n.t('commons.devices_by_plataform').toUpperCase()}&lt;/span&gt;
                 &lt;/div&gt;
             )
         }
 <span class="cstat-no" title="statement not covered" >        if (display.applicationsUploaded === undefined || display.applicationsUploaded) {</span>
-<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Applications" count={this.state.pages.applications} name="Applications" icon="appsIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
+<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Applications" count={this.state.pages.applications} name={I18n.t('commons.applications')} icon="appsIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
         }
 <span class="cstat-no" title="statement not covered" >        if (display.filesUploaded === undefined || display.filesUploaded) {</span>
-<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Files" count={this.state.pages.files} name="Files" icon="copyIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
+<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Files" count={this.state.pages.files} name={I18n.t('commons.files')} icon="copyIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
         }
 <span class="cstat-no" title="statement not covered" >        if (display.fleetsCurrentlyManaged === undefined || display.fleetsCurrentlyManaged) {</span>
-<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Fleets" count={this.state.pages.fleets} name="Fleets" icon="goToStartIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
+<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Fleets" count={this.state.pages.fleets} name={I18n.t('commons.fleets')} icon="goToStartIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
         }
 <span class="cstat-no" title="statement not covered" >        if (display.invitationsSent === undefined || display.invitationsSent) {</span>
-<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Invitations" count={this.state.pages.invitations} name="Invitations" icon="emailIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
+<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Invitations" count={this.state.pages.invitations} name={I18n.t('commons.invitations')} icon="emailIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
 <span class="cstat-no" title="statement not covered" >            componentsChart.push(</span>
                 &lt;div key="InvitationsChart" className="info-box"&gt;
                     &lt;VictoryPie
@@ -347,21 +350,21 @@ export default class Dashboard extends Component {
                         labelRadius={90}
                         labe<span class="fstat-no" title="function not covered" >ls</span>={(<span class="cstat-no" title="statement not covered" >d) =&gt; `${d.x} ${</span>d.y}`}
                         data={[
-                            { x: "Invitations", y: this.state.pages.invitations },
+                            { x: I18n.t('commons.invitations'), y: this.state.pages.invitations },
                         ]}
                         style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
                     /&gt;
-                    &lt;span className="title-box"&gt;PENDING INVITATIONS&lt;/span&gt;
+                    &lt;span className="title-box"&gt;{I18n.t('commons.pending_invitations').toUpperCase()}&lt;/span&gt;
                 &lt;/div&gt;
             )
         }
 <span class="cstat-no" title="statement not covered" >        if (display.numberUsers === undefined || display.numberUsers) {</span>
-<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Users" count={this.state.pages.users} name="Users" icon="peopleIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
+<span class="cstat-no" title="statement not covered" >            componentsBox.push(&lt;DashboardPage key="Users" count={this.state.pages.users} name={I18n.t('commons.users')} icon="peopleIcon" onNavigate={this.props.onNavigate} changeIndex={this.props.changeIndex} routers={this.props.routers} /&gt;)</span>
         }
         
 <span class="cstat-no" title="statement not covered" >        return (</span>
             &lt;ContentPane itemListPaneWidth={0}&gt;
-                &lt;h2 className="win-h2" style={{ marginLeft: '10px' }}&gt; {this.props.location} &lt;/h2&gt;
+                &lt;h2 className="win-h2" style={{ marginLeft: '10px' }}&gt; {I18n.t('commons.dashboard')} &lt;/h2&gt;
                 &lt;div style={{ display: 'inlineBlock'}}&gt;
                     &lt;div className="wrapper"&gt;
                         &lt;div className="wrapper-box"&gt;
@@ -388,7 +391,7 @@ export default class Dashboard extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 14 2018 16:36:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 14 2018 22:12:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
