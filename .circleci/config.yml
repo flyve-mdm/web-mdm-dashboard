@@ -12,7 +12,9 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
-      - run: source ci/scripts/install.sh
+      - run: 
+          name: "Install dependencies"
+          command: source ci/scripts/install.sh
 
       - save_cache:
           paths:
