@@ -39,10 +39,14 @@ class LoginContainer extends Component {
                             © 2017 Teclib'.
                         </span>
                     </div>
-                    <button onClick={() => this.props.actions.changeLanguage('en_GB')}>English</button>
-                    <button onClick={() => this.props.actions.changeLanguage('pt_BR')}>Portuguese</button>
-                    <button onClick={() => this.props.actions.changeLanguage('fr_FR')}>French</button>
-                    <button onClick={() => this.props.actions.changeLanguage('es_ES')}>Spain</button>
+                    {
+                        /* 
+                            <button onClick={() => this.props.actions.changeLanguage('en_GB')}>English</button>
+                            <button onClick={() => this.props.actions.changeLanguage('pt_BR')}>Portuguese</button>
+                            <button onClick={() => this.props.actions.changeLanguage('fr_FR')}>French</button>
+                            <button onClick={() => this.props.actions.changeLanguage('es_ES')}>Spain</button>
+                        */
+                    }
                 </div>
             </div>
         )
