@@ -17,6 +17,7 @@ import ToastNotifications from '../Utils/ToastNotifications'
 import NativeNotification from '../Utils/NativeNotification'
 import validateNotifications from '../Utils/validateNotifications'
 import GlpiApi from '../Utils/GlpiApi'
+import withI18NTranslation from '../i18n/withI18NTranslation';
 
 const components = { Dashboard, Devices, Invitations, Fleets, Files, Applications, Users, Settings, About, SearchEngine}
 
@@ -36,7 +37,8 @@ function mapStateToProps(state, props) {
         isLoading: state.AdminDashboard.isLoading,
         isError: state.AdminDashboard.isError,
         passwordConfiguration: state.AdminDashboard.passwordConfiguration,
-        currentUser: state.Login.currentUser
+        currentUser: state.Login.currentUser,
+        locationLanguage: state.Login.locationLanguage
     }
 }
 
@@ -209,7 +211,9 @@ class BodyAdminDashboard extends Component {
         )
     }
 }
+
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(BodyAdminDashboard)
+)(withI18NTranslation(BodyAdminDashboard))

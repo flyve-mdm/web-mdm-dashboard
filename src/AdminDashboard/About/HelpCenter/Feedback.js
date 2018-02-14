@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import Loading from '../../../Utils/Loading'
 import ContentPane from '../../../Utils/ContentPane'
+import { I18n } from "react-i18nify";
 
 class Feedback extends Component {
 
@@ -24,18 +25,18 @@ class Feedback extends Component {
     render() {
 
         if(this.props.isLoading) {
-            return <Loading message="Sending..." />
+            return <Loading message={I18n.t('commons.sending') } />
         } else if(this.state.feedbackSent) {
             return (
                 <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <div className="listPane" style={{ padding: 0}}>
                         <h2 className="titleContentPane" onClick={() => this.props.changeSelectItem(null)}>
-                            {'<'} Help Center
+                            {'< ' + I18n.t('about.help_center') }
                         </h2>
                         <br />
                         <div style={{ textAlign: 'center' }}>
-                            <h3>Thank you!</h3>
-                            <p>your submission has been received</p>
+                            <h3>{I18n.t('about.help_center_STRINGS.thank_you!') }</h3>
+                            <p>{I18n.t('about.help_center_STRINGS.your_submission_has_been_received') }</p>
                         </div>
                     </div>
                 </ContentPane>
@@ -44,14 +45,14 @@ class Feedback extends Component {
             return (
                 <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <h2 className="titleContentPane" onClick={() => this.props.changeSelectItem(null)}>
-                        {'<'} Help Center
+                    {'< ' + I18n.t('about.help_center') }
                     </h2>
                     <div style={{padding: '0 10px'}}>
-                        <h3>Feedback</h3>
+                        <h3>{I18n.t('about.help_center_STRINGS.feedback') }</h3>
                         <div className="feedback">
                             <textarea className="win-textbox feedback-textarea"/>
                             <button className="win-button" style={{float: 'right'}} onClick={this.send}>
-                                Send
+                                {I18n.t('commons.send') }
                             </button>
                         </div>
                     </div>
