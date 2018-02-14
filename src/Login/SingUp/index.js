@@ -7,7 +7,6 @@ import LoginContainer from '../LoginContainer'
 import LoginUsername from './LoginUsername'
 import LoginPassword from './LoginPassword'
 import ToastNotifications from '../../Utils/ToastNotifications'
-import { I18n } from 'react-i18nify';
 import withI18NTranslation from '../../i18n/withI18NTranslation';
 
 function mapStateToProps(state, props) {
@@ -78,7 +77,6 @@ class Login extends Component {
                     changePhase={this.changePhase}
                     changeUsername={this.props.actions.changeUsername}
                     selfRegistration={this.props.selfRegistration}
-                    usernamePlaceholder={I18n.t('login.username')}
                 />    
         } else {
             form = 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import { changeLanguage } from './DuckController';
-import { Translate } from 'react-i18nify';
+import { I18n } from 'react-i18nify';
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -32,7 +32,7 @@ class LoginContainer extends Component {
 
                     <div className="credentials">
                         <a href="https://flyve-mdm.com/privacy-policy/">
-                            <Translate value="login.terms_and_conditions"/>
+                            {I18n.t('commons.terms_and_conditions')}
                         </a>
                         <br />
                         <span>

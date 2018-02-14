@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Glpi from '../../Utils/GlpiApi'
 import config from '../../config.json'
 import Loading from '../../Utils/Loading'
+import { I18n } from 'react-i18nify';
 
 class LoginPassword extends Component {
     
@@ -63,7 +64,7 @@ class LoginPassword extends Component {
                 <div className="passwordSection">
                     <h2 className="win-h2">Enter password</h2>
                     <p>
-                        Enter the password for
+                        { I18n.t('login.enter_the_password_for') }
                     <br />
                         {this.props.username}
                         <br />
@@ -75,7 +76,7 @@ class LoginPassword extends Component {
                             name="password"
                             ref={(input) => { this.passwordInput = input; }}
                             className={this.state.classInput}
-                            placeholder="Password"
+                            placeholder={I18n.t('commons.password')}
                             value={this.props.password}
                             onChange={this.props.changeInput}
                             required={true}
@@ -85,14 +86,16 @@ class LoginPassword extends Component {
                             type="button"
                             onClick={() => this.props.changePhase(1)}
                         >
-                            Back
+                        { I18n.t('commons.back') }
                     </button>
 
-                        <button type="submit" className="win-button win-button-primary">
-                            Sign in
+                    <button type="submit" className="win-button win-button-primary">
+                        { I18n.t('commons.sign_in') }
                     </button>
                     </form>
-                    <Link to="/forgotPassword">Forgot my password</Link>
+                    <Link to="/forgotPassword">
+                        { I18n.t('login.forgot_my_password') }
+                    </Link>
                 </div>
             )
         }
