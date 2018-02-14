@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import ContentPane from '../../../Utils/ContentPane'
+import  { I18n } from "react-i18nify";
 
 class HelpCenterList extends Component {
 
@@ -47,7 +48,7 @@ class HelpCenterList extends Component {
 
                     <ReactWinJS.AutoSuggestBox
                         style={{ margin: '20px'}}
-                        placeholderText="Search an article"
+                        placeholderText={I18n.t('about.help_center_STRINGS.search_an_article')}
                         onSuggestionsRequested={this.handleSuggestionsRequested}
                         onQuerySubmitted={this.handleQuerySubmitted} />
 
@@ -66,12 +67,14 @@ class HelpCenterList extends Component {
                     />
 
                     {
-                        this.props.labelList !== 'Popular' ? '' : 
+                        this.props.labelList !== I18n.t('about.help_center_STRINGS.popular') ? '' : 
                             <div>
                                 <div className="separator" />
                                 
                                 <div style={{padding: '22px 14px 22px 10px'}}>
-                                    <a onClick={this.props.showAllArticles}>Browse all articles</a>
+                                    <a onClick={this.props.showAllArticles}>
+                                        { I18n.t('about.help_center_STRINGS.browse_all_articles') }            
+                                    </a>
                                 </div>
                             </div>
                     }
@@ -80,7 +83,7 @@ class HelpCenterList extends Component {
 
                     <div className="itemList" onClick={()=> this.props.changeSelectItem('feedback')}>
                         <span className="messageIcon" style={{marginRight: '5px'}}/>
-                        Send feedback
+                        { I18n.t('about.help_center_STRINGS.send_feedback') }
                     </div>
                 </div>
             </ContentPane>
