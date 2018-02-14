@@ -58,7 +58,7 @@ export default class DevicesList extends Component {
         this.setState({
             isLoading: true
         })
-        this.props.glpi.searchItems('PluginFlyvemdmAgent', null, null, { uid_cols: true, forcedisplay: [2,3,12] })
+        this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12] } })
         .then((response) => {
             this.setState({
                 isLoading: false,
