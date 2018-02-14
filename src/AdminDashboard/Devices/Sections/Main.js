@@ -28,7 +28,7 @@ class Main extends Component {
     }
 
     handleRefresh = () => {
-        this.props.glpi.getAnItem('PluginFlyvemdmAgent', this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'], null)
+        this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'] })
             .then((response) => {
                 this.setState({
                     data: response
@@ -54,7 +54,7 @@ class Main extends Component {
             })
             this.props.changeActionList("Delete")
 
-            this.props.glpi.deleteItem('PluginFlyvemdmAgent', null, itemListToDelete, null)
+            this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete })
             .then((response) => {
                 this.props.showNotification('Success', 'elements successfully removed')
                 this.props.changeActionList(null)
