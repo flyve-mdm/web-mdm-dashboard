@@ -32,7 +32,7 @@ export default class Inventory extends Component {
             this.setState({
                 isLoading: true
             })
-            const data = await this.props.glpi.getAnItem(this.props.itemType, this.props.itemID, this.props.parameters)
+            const data = await this.props.glpi.getAnItem({ itemtype: this.props.itemType, id: this.props.itemID, queryString: this.props.parameters })
             let object = Object.keys(this.props.fields).map((key, index) => {
                 return { [this.props.fields[key]]: data[key] }
             })

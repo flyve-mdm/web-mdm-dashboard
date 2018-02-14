@@ -33,7 +33,7 @@ class SystemReport extends Component {
             this.setState({
                 isLoading: true
             })
-            const agent = await this.props.glpi.getAnItem('PluginFlyvemdmAgent', this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'], null)
+            const agent = await this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'] })
             this.setState({
                 isLoading: false,
                 agent
