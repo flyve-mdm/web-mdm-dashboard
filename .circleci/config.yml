@@ -46,7 +46,7 @@ jobs:
 
       - run: 
           name: "Install Transifex Client and Files"
-          command: source ci/scripts/trasifex.sh
+          command: source ci/scripts/transifex.sh
       
       - run: 
           name: "Build application"
@@ -71,4 +71,8 @@ workflows:
             - build
           filters:
             branches:
+<<<<<<< HEAD
               only: feature/circle
+=======
+              only: develop
+>>>>>>> 339fbb5... ci(deploy): send to transifex on develop branch
