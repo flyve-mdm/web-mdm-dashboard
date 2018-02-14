@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1518538531902" clover="3.2.0">
-  <project timestamp="1518538531902" name="All files">
-    <metrics statements="3195" coveredstatements="4" conditionals="1734" coveredconditionals="0" methods="1039" coveredmethods="0" elements="5968" coveredelements="4" complexity="0" loc="3195" ncloc="3195" packages="27" files="159" classes="159">
+<coverage generated="1518622402816" clover="3.2.0">
+  <project timestamp="1518622402817" name="All files">
+    <metrics statements="3226" coveredstatements="4" conditionals="1760" coveredconditionals="0" methods="1047" coveredmethods="0" elements="6033" coveredelements="4" complexity="0" loc="3226" ncloc="3226" packages="27" files="160" classes="160">
       <package name="src">
         <metrics statements="48" coveredstatements="0" conditionals="43" coveredconditionals="0" methods="22" coveredmethods="0"/>
         <file name="index.js" path="/home/travis/build/flyve-mdm/web-mdm-dashboard/src/index.js">
@@ -965,8 +965,8 @@
           <line num="4" count="0" type="stmt"/>
           <line num="5" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="10" count="0" type="stmt"/>
-          <line num="59" count="0" type="stmt"/>
-          <line num="70" count="0" type="stmt"/>
+          <line num="60" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
         </file>
         <file name="DevicesEdit.js" path="/home/travis/build/flyve-mdm/web-mdm-dashboard/src/AdminDashboard/Devices/DevicesEdit.js">
           <metrics statements="38" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="10" coveredmethods="0"/>
@@ -1238,7 +1238,7 @@
         </file>
       </package>
       <package name="src.AdminDashboard.Devices.Sections">
-        <metrics statements="105" coveredstatements="0" conditionals="46" coveredconditionals="0" methods="41" coveredmethods="0"/>
+        <metrics statements="134" coveredstatements="0" conditionals="70" coveredconditionals="0" methods="49" coveredmethods="0"/>
         <file name="Applications.js" path="/home/travis/build/flyve-mdm/web-mdm-dashboard/src/AdminDashboard/Devices/Sections/Applications.js">
           <metrics statements="13" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -1293,6 +1293,34 @@
           <line num="41" count="0" type="stmt"/>
           <line num="44" count="0" type="stmt"/>
         </file>
+        <file name="Inventory.js" path="/home/travis/build/flyve-mdm/web-mdm-dashboard/src/AdminDashboard/Devices/Sections/Inventory.js">
+          <metrics statements="25" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="10" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="35" count="0" type="stmt"/>
+          <line num="36" count="0" type="stmt"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="39" count="0" type="stmt"/>
+          <line num="44" count="0" type="stmt"/>
+          <line num="45" count="0" type="stmt"/>
+          <line num="50" count="0" type="stmt"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="54" count="0" type="stmt"/>
+          <line num="61" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="64" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="65" count="0" type="stmt"/>
+          <line num="66" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="67" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
+          <line num="78" count="0" type="stmt"/>
+          <line num="80" count="0" type="stmt"/>
+          <line num="82" count="0" type="stmt"/>
+          <line num="90" count="0" type="stmt"/>
+        </file>
         <file name="Main.js" path="/home/travis/build/flyve-mdm/web-mdm-dashboard/src/AdminDashboard/Devices/Sections/Main.js">
           <metrics statements="37" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="14" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -1334,21 +1362,25 @@
           <line num="141" count="0" type="stmt"/>
         </file>
         <file name="SystemReport.js" path="/home/travis/build/flyve-mdm/web-mdm-dashboard/src/AdminDashboard/Devices/Sections/SystemReport.js">
-          <metrics statements="14" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="8" coveredmethods="0"/>
+          <metrics statements="18" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="6" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
-          <line num="2" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="2" count="0" type="stmt"/>
           <line num="3" count="0" type="stmt"/>
-          <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="8" count="0" type="stmt"/>
+          <line num="4" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="9" count="0" type="stmt"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="23" count="0" type="stmt"/>
-          <line num="24" count="0" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="33" count="0" type="stmt"/>
+          <line num="36" count="0" type="stmt"/>
           <line num="37" count="0" type="stmt"/>
           <line num="42" count="0" type="stmt"/>
-          <line num="46" count="0" type="stmt"/>
-          <line num="61" count="0" type="stmt"/>
-          <line num="62" count="0" type="stmt"/>
+          <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="47" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="48" count="0" type="stmt"/>
+          <line num="49" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="50" count="0" type="stmt"/>
+          <line num="110" count="0" type="stmt"/>
+          <line num="115" count="0" type="stmt"/>
+          <line num="116" count="0" type="stmt"/>
         </file>
         <file name="index.js" path="/home/travis/build/flyve-mdm/web-mdm-dashboard/src/AdminDashboard/Devices/Sections/index.js">
           <metrics statements="9" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -3301,7 +3333,7 @@
         </file>
       </package>
       <package name="src.Utils">
-        <metrics statements="124" coveredstatements="0" conditionals="94" coveredconditionals="0" methods="42" coveredmethods="0"/>
+        <metrics statements="126" coveredstatements="0" conditionals="96" coveredconditionals="0" methods="42" coveredmethods="0"/>
         <file name="Animations.js" path="/home/travis/build/flyve-mdm/web-mdm-dashboard/src/Utils/Animations.js">
           <metrics statements="6" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -3385,19 +3417,21 @@
           <line num="5" count="0" type="stmt"/>
         </file>
         <file name="Loader.js" path="/home/travis/build/flyve-mdm/web-mdm-dashboard/src/Utils/Loader.js">
-          <metrics statements="12" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
+          <metrics statements="14" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="2" count="0" type="stmt"/>
           <line num="3" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="5" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
+          <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="10" count="0" type="stmt"/>
           <line num="17" count="0" type="stmt"/>
-          <line num="19" count="0" type="stmt"/>
-          <line num="20" count="0" type="stmt"/>
+          <line num="23" count="0" type="stmt"/>
           <line num="25" count="0" type="stmt"/>
-          <line num="28" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
+          <line num="26" count="0" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
+          <line num="36" count="0" type="stmt"/>
+          <line num="40" count="0" type="stmt"/>
         </file>
         <file name="Loading.js" path="/home/travis/build/flyve-mdm/web-mdm-dashboard/src/Utils/Loading.js">
           <metrics statements="7" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
