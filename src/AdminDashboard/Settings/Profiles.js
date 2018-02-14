@@ -19,8 +19,12 @@ export default class Profiles extends Component {
     }
 
     componentDidMount = async () => {
-        const myUser = await this.props.glpi.getAnItem('User', this.props.currentUser.id)
-        const myEmails = await this.props.glpi.getSubItems('User', this.props.currentUser.id, 'UserEmail')
+        const myUser = await this.props.glpi.getAnItem({itemtype: 'User', id: this.props.currentUser.id})
+        const myEmails = await this.props.glpi.getSubItems({
+            itemtype: 'User', 
+            id: this.props.currentUser.id, 
+            subItemtype: 'UserEmail'
+        })
         const {cfg_glpi} = await this.props.glpi.getGlpiConfig()
 
         const parametersToEvaluate = {
@@ -144,8 +148,12 @@ export default class Profiles extends Component {
                 { isLoading: true },
                 async () => {
                     try {
-                        await this.props.glpi.updateItem('User', null, newUser)
-                        await this.props.glpi.updateEmails(newUser.id, this.state.currentEmails, this.state.emails)
+                        await this.props.glpi.updateItem({itemtype: 'User', input: newUser})
+                        await this.props.glpi.updateEmails({
+                            userID: newUser.id, 
+                            currentEmails: this.state.currentEmails, 
+                            newEmails: this.state.emails
+                        })
                         this.props.showNotification('Success', 'saved profile')
                         this.setState ({isLoading: false})
                     } catch (e) {
