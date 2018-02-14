@@ -58,7 +58,7 @@ export default class DevicesList extends Component {
         this.setState({
             isLoading: true
         })
-        this.props.glpi.searchItems('PluginFlyvemdmAgent', null, null, { uid_cols: true, forcedisplay: [2,3,12] })
+        this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12] } })
         .then((response) => {
             this.setState({
                 isLoading: false,
@@ -141,7 +141,7 @@ export default class DevicesList extends Component {
             })
             this.props.changeActionList(button.label)
 
-            this.props.glpi.deleteItem('PluginFlyvemdmAgent', null, itemListToDelete, { force_purge: true })
+            this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })
                 .then((response) => {
                     this.props.showNotification('Success', 'elements successfully removed')
                     this.props.changeActionList(null)
@@ -179,7 +179,7 @@ export default class DevicesList extends Component {
         })
         let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-        this.props.glpi.searchItems('PluginFlyvemdmAgent', null, null, { uid_cols: true, order: newOrder, forcedisplay: [2, 3, 12] })
+        this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, order: newOrder, forcedisplay: [2, 3, 12] } })
             .then((response) => {
                 this.setState({
                     isLoading: false,
