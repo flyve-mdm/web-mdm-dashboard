@@ -82,8 +82,6 @@ workflows:
             - build
           filters:
             branches:
-<<<<<<< HEAD
-              only: feature/circle
-=======
-              only: develop
->>>>>>> 339fbb5... ci(deploy): send to transifex on develop branch
+              only: 
+                - develop
+                - master
