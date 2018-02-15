@@ -172,9 +172,7 @@ UsersContent.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
-    selectedIndex: PropTypes.array,
+    selectedItemList: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
