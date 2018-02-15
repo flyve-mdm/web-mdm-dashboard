@@ -53,7 +53,8 @@ export default class DevicesPage extends Component {
                             selectedItemList={this.props.selectedItemList}
                             changeActionList={this.props.changeActionList}
                             showNotification={this.props.showNotification}
-                            glpi={this.props.glpi} />
+                            glpi={this.props.glpi} 
+                        />
                     )
                 } else {
                     return (

@@ -19,9 +19,9 @@ export default class Users extends Component {
     }
 
     render() {
-        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
+        let selectedItemList = this.props.location.length === 2 ? this.props.location[1] : null
         if (this.props.mode === 'small') {
-            if (selectedIndex === null && this.props.actionList === null) {
+            if (selectedItemList === null && this.props.actionList === null) {
                 return <UsersList
                     itemListPaneWidth={'100%'}
                     animation={this.props.animation}
@@ -35,19 +35,16 @@ export default class Users extends Component {
                     glpi={this.props.glpi} />
             } else {
                 return <UsersPage
-                    itemListPaneWidth={0}
-                    animation={this.props.animation}
-                    dataSource={this.props.dataSource}
-                    changeDataSource={this.props.changeDataSource}
-                    location={this.props.location}
-                    onNavigate={this.props.onNavigate}
-                    selectedIndex={selectedIndex}
-                    changeSelectionMode={this.changeSelectionMode}
-                    changeCurrentItem={this.props.changeCurrentItem}
-                    actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification}
-                    glpi={this.props.glpi} />
+                itemListPaneWidth={0}
+                animation={this.props.animation}
+                location={this.props.location}
+                onNavigate={this.props.onNavigate}
+                selectedItemList={selectedItemList}
+                changeSelectionMode={this.changeSelectionMode}
+                actionList={this.props.actionList}
+                changeActionList={this.props.changeActionList}
+                showNotification={this.props.showNotification} 
+                glpi={this.props.glpi} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -68,17 +65,13 @@ export default class Users extends Component {
                     <UsersPage
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
-                        selectedIndex={selectedIndex}
+                        selectedItemList={selectedItemList}
                         changeSelectionMode={this.changeSelectionMode}
-                        currentItem={this.props.currentItem}
-                        changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}
+                        showNotification={this.props.showNotification} 
                         glpi={this.props.glpi}
                     />
                 </div>
@@ -89,8 +82,6 @@ export default class Users extends Component {
 Users.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
     animation: PropTypes.bool.isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     currentItem: PropTypes.object,
