@@ -67,6 +67,10 @@ jobs:
       - run:
           name: "Configure GIT"
           command: source ci/scripts/git_config.sh
+      
+      - run: 
+          name: "Deploy application"
+          command: source ci/scripts/deploy.sh
 
 workflows:
   version: 2
