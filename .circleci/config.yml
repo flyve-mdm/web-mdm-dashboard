@@ -63,6 +63,10 @@ jobs:
       - store_artifacts:
           path: /tmp/artifacts
           destination: artifacts
+      
+      - run:
+          name: "Configure GIT"
+          command: source ci/scripts/git_config.sh
 
 workflows:
   version: 2
