@@ -27,17 +27,30 @@ export default class UsersContent extends Component {
     handleDelete = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
-            let item = this.props.dataSource.itemList
-            let index = this.props.selectedIndex
-            index.sort()
-            index.reverse()
-            index.forEach((i) => {
-                item.splice(i, 1)
+
+            let itemListToDelete = this.props.selectedItemList.map((item) => {
+                return {
+                    id: item["User.id"]
+                }
             })
 
-            this.props.showNotification('Success', 'deleted user')
-            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-            this.props.onNavigate([this.props.location[0]])
+            this.setState({
+                isLoading: true
+            })
+            this.props.changeActionList("Delete")
+
+            this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete })
+            .then((response) => {
+                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.changeActionList(null)
+                this.props.changeSelectionMode(false)
+                this.props.onNavigate([this.props.location[0]])
+            })
+            .catch((error) => {
+                if (error.length > 1) {
+                    this.props.showNotification(error[0], error[1])
+                }
+            })
         }
     }
 
