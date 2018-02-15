@@ -14,6 +14,14 @@ if [[ $GITHUB_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version
     git push --follow-tags origin $CIRCLE_BRANCH
     # Create release with conventional-github-releaser
     yarn conventional-github-releaser -- -p angular -t $GITHUB_TOKEN
+
+    # Upload build file to release
+    yarn github-release upload \
+    --user "${CIRCLE_PROJECT_USERNAME}" \
+    --repo "${CIRCLE_PROJECT_REPONAME}" \
+    --tag "v${GIT_TAG}" \
+    --name "build.zip" \
+    --file "./build.zip"
 fi
 
 if [[ $GITHUB_COMMIT_MESSAGE != *"ci(stats): generate stats.json for version"* ]]; then
