@@ -95,18 +95,13 @@ export default class UsersList extends Component {
         }
     }
 
-    handleRefresh = () => {
-        this.props.onNavigate([this.props.location[0]])
-        this.props.fetchData(this.props.location[0])
-    }
-
     handleRefresh = async () => {
         this.props.onNavigate([this.props.location[0]])
         this.setState({
             isLoading: true
         })
         try {
-            const response = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true } })        
+            const response = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true, forcedisplay: [1, 2, 5] } })        
             this.setState({
                 isLoading: false,
                 order: response.order,
@@ -135,17 +130,15 @@ export default class UsersList extends Component {
 
             let itemListToDelete = this.state.selectedItemList.map((item) => {
                 return {
-                    id: item["PluginFlyvemdmAgent.id"]
+                    id: item["User.id"]
                 }
             })
 
-            this.setState({
-                isLoading: true
-            })
+            this.setState({isLoading: true})
             this.props.changeActionList(button.label)
 
             try {
-                const response = await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete, queryString: { force_purge: true } })
+                await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete, queryString: { force_purge: true } })
                 this.props.showNotification('Success', 'elements successfully removed')
                 this.props.changeActionList(null)
                 this.props.changeSelectionMode(false)
@@ -182,7 +175,7 @@ export default class UsersList extends Component {
         let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
         
         try {
-            const response = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 5]  } })
+            const response = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 5] } })
             this.setState({
                 isLoading: false,
                 order: response.order,
@@ -198,11 +191,9 @@ export default class UsersList extends Component {
 
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {
-             setTimeout(() => {
-                 this.setState({
-                scrolling: true
-            })
-             }, 0)
+            setTimeout(() => {
+                this.setState({scrolling: true})
+            }, 0)
         }
     }
 
@@ -229,6 +220,7 @@ export default class UsersList extends Component {
             <ReactWinJS.ToolBar.Button
                 key="delete"
                 icon="delete"
+                label="Delete"
                 priority={0}
                 disabled={this.state.selectedItemList.length === 0}
                 onClick={this.handleDelete}
