@@ -3,8 +3,7 @@ import IconItemList from '../IconItemList'
 
 export default class UsersItemList extends Component {
     render() {
-        console.log(this.props.itemList)
-        let imageProfile = this.props.itemList['User.picture'] ? this.props.itemList['User.picture'] : "profile.png"
+        const imageProfile = this.props.itemList['User.picture'] ? this.props.itemList['User.picture'] : "profile.png"
         const email = this.props.itemList['User.UserEmail.email'] ? 
             Array.isArray(this.props.itemList['User.UserEmail.email']) ? 
                 this.props.itemList['User.UserEmail.email'][0] 

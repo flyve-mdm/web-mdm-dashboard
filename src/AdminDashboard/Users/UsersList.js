@@ -182,7 +182,7 @@ export default class UsersList extends Component {
         let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
         
         try {
-            const response = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true, order: newOrder } })
+            const response = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 5]  } })
             this.setState({
                 isLoading: false,
                 order: response.order,
