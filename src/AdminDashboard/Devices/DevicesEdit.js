@@ -19,7 +19,7 @@ export default class DevicesEdit extends Component {
         let newItem = [...this.state.itemListEdit]
 
         //Find index of specific object using findIndex method.    
-        let objIndex = newItem.findIndex((obj => obj["PluginFlyvemdmAgent.id"] === index));
+        let objIndex = newItem.findIndex((obj => obj["PluginFlyvemdmAgent.id"] === index))
 
         //Update object's name property.
         newItem[objIndex]["PluginFlyvemdmAgent.name"] = name
@@ -30,7 +30,6 @@ export default class DevicesEdit extends Component {
     }
 
     handleSaveDevices = () => {
-
         let itemListToSave = this.state.itemListEdit.map((item) => {
             return {
                 id: item["PluginFlyvemdmAgent.id"],
@@ -43,7 +42,7 @@ export default class DevicesEdit extends Component {
         })
 
         if (itemListToSave.length > 0) {
-            this.props.glpi.updateItem("PluginFlyvemdmAgent", null, itemListToSave)
+            this.props.glpi.updateItem({ itemtype: "PluginFlyvemdmAgent", input: itemListToSave })
             .then((response) => {
                 this.setState({
                     isLoading: false
