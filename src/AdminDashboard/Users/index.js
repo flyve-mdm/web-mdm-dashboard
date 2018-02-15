@@ -25,19 +25,13 @@ export default class Users extends Component {
                 return <UsersList
                     itemListPaneWidth={'100%'}
                     animation={this.props.animation}
-                    dataSource={this.props.dataSource}
-                    changeDataSource={this.props.changeDataSource}
-                    fetchData={this.props.fetchData}
-                    isLoading={this.props.isLoading}
-                    isError={this.props.isError}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
                     changeSelectionMode={this.changeSelectionMode}
                     selectionMode={this.state.selectionMode}
-                    changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification}
+                    changeActionList={this.props.changeActionList}
+                    showNotification={this.props.showNotification} 
                     glpi={this.props.glpi} />
             } else {
                 return <UsersPage
@@ -62,20 +56,13 @@ export default class Users extends Component {
                     <UsersList
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
-                        fetchData={this.props.fetchData}
-                        isLoading={this.props.isLoading}
-                        isError={this.props.isError}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
                         changeSelectionMode={this.changeSelectionMode}
                         selectionMode={this.state.selectionMode}
-                        currentItem={this.props.currentItem}
-                        changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}
+                        showNotification={this.props.showNotification} 
                         glpi={this.props.glpi}
                     />
                     <UsersPage
