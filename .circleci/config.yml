@@ -55,13 +55,14 @@ jobs:
           command: yarn build
       
       - run:
-        name: "Create artifact"
-        command: |
-          zip -r ./build.zip build/* > /tmp/artifacts/build.zip
+          name: "Create artifact"
+          command: |
+            mkdir /tmp/artifacts
+            zip -r ./build.zip build/* > /tmp/artifacts/build.zip
       
       - store_artifacts:
           path: /tmp/artifacts
-          destination: build.zip
+          destination: artifacts
 
 workflows:
   version: 2
