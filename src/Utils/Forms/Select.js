@@ -16,7 +16,7 @@ class Select extends Component {
 
     componentDidMount = async () => {
         if (this.props.glpi && this.props.request) {
-            const response = await this.props.glpi[this.props.request.method](...this.props.request.params)
+            const response = await this.props.glpi[this.props.request.method](this.props.request.params)
 
             let options = []
 
