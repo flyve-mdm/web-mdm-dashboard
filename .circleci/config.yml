@@ -24,7 +24,32 @@ jobs:
       - run: 
           name: "Build application"
           command: yarn build
+ 
+  test:
+    docker:
+      - image: circleci/node
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: 
+          name: "Install dependencies"
+          command: source ci/scripts/install.sh
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
       
+      - run: 
+          name: "Run tests"
+          command: yarn test
+ 
   deploy:
     docker:
       - image: circleci/node
@@ -77,6 +102,7 @@ workflows:
   build-and-deploy:
     jobs:
       - build
+      - test
       - deploy:
           requires:
             - build
