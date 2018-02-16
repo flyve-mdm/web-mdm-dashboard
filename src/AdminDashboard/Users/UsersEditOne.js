@@ -144,7 +144,7 @@ class Profiles extends Component {
     saveChanges = () => {
 
         let newUser = { 
-            id: this.props.currentUser.id,
+            id: this.props.selectedItemList[0]['User.id'],
             firstname: this.state.firstName,
             realname: this.state.realName,
             phone: this.state.phone,
