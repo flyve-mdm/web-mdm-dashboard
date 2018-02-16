@@ -3,7 +3,6 @@ import ReactWinJS from 'react-winjs'
 import InvitationsItemList from './InvitationsItemList'
 import PropTypes from 'prop-types'
 import BuildItemList from '../BuildItemList'
-import ItemList from '../ItemList'
 import WinJS from 'winjs'
 import Loader from '../../Utils/Loader'
 
@@ -122,21 +121,29 @@ export default class InvitationsList extends Component {
         }
     }
 
-    handleSort = () => {
-        let array = []
-        this.props.dataSource.itemList.map((value, index) =>
-            array.push(value)
-        );
-        this.props.changeDataSource(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.dataSource.sort), sort: !this.props.dataSource.sort })
-    }
+    handleSort = async () => {
 
-    descendingCompare(first, second) {
-        if (first === second)
-            return 0;
-        else if (first < second)
-            return 1;
-        else
-            return -1;
+        try {
+            this.props.onNavigate([this.props.location[0]])
+            this.setState({
+                isLoading: true
+            })
+            let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
+
+            const invitations = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmInvitation', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3] } })
+
+            this.setState({
+                isLoading: false,
+                order: invitations.order,
+                itemList: BuildItemList(invitations)
+            })
+
+        } catch (error) {
+            this.setState({
+                isLoading: false,
+                order: undefined
+            })
+        }
     }
 
     handleResendEmail = () => {
