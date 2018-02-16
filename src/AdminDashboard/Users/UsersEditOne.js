@@ -6,6 +6,7 @@ import validateData from '../../Utils/validateData'
 import IconItemList from '../IconItemList'
 import { usersScheme } from '../../Utils/Forms/Schemes'
 import Loading from '../../Utils/Loading'
+import ErrorValidation from '../../Utils/Forms/ErrorValidation'
 
 class Profiles extends Component {
     
@@ -52,41 +53,153 @@ class Profiles extends Component {
         })
         try {
             const response = await this.props.glpi.getAnItem({ itemtype: 'User', id: this.props.selectedItemList[0]['User.id']})
+            const myEmails = await this.props.glpi.getSubItems({
+                itemtype: 'User', 
+                id: this.props.selectedItemList[0]['User.id'], 
+                subItemtype: 'UserEmail'
+            })
+            const {cfg_glpi} = await this.props.glpi.getGlpiConfig()
+    
+            const parametersToEvaluate = {
+                minimunLength: cfg_glpi.password_min_length,
+                needDigit: cfg_glpi.password_need_number,
+                needLowercaseCharacter: cfg_glpi.password_need_letter,
+                needUppercaseCharacter: cfg_glpi.password_need_caps,
+                needSymbol: cfg_glpi.password_need_symbol
+            }
             this.setState({
                 isLoading: false,
-                login: response["User.name"],
-                firstName: response["User.firstname"],
-                realName: response["User.realname"],
-                phone: response["User.phone"],
-                mobilePhone: response["User.mobile"],
-                phone2: response["User.phone2"],
-                administrativeNumber: response["User.registration_number"],
-                lastLogin: response["User.last_login"],
-                created: response["User.date_creation"],
-                modified: response["User.date_mod"],
-                emails: validateData(response["User.UserEmail.email"], []),
-                imageProfile: validateData(response['User.picture'], "profile.png"),
+                parametersToEvaluate,
+                login: response.name,
+                firstName: response.firstname,
+                realName: response.realname,
+                phone: response.phone,
+                mobilePhone: response.mobile,
+                phone2: response.phone2,
+                administrativeNumber: response.registration_number,
+                lastLogin: response.last_login,
+                created: response.date_creation,
+                modified: response.date_mod,
+                currentEmails: myEmails.map(a => ({...a})),
+                emails: validateData(myEmails, []),
+                imageProfile: validateData(response.picture, "profile.png"),
                 authentication: 'GLPI internal database',
                 password: '',
                 passwordConfirmation: '',
-                category: '',
-                defaultEntity: '',
+                category: {
+                    value: response.usercategories_id,
+                    request: {
+                        params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
+                        method: 'searchItems',
+                        content: '1',
+                        value: '2'
+                    }
+                },
+                defaultEntity:  {
+                    value: response.entities_id,
+                    request: {
+                        params: {},
+                        method: 'getMyEntities',
+                        content: 'name',
+                        value: 'id'
+                    }
+                },
                 comments: '',
                 typeImageProfile: 'file',
-                title: '',
-                location: '',
-                defaultProfile: '',
-                validSince: new Date(),
-                validUntil: new Date()
+                title: {
+                    value: response.usertitles_id,
+                    request: {
+                        params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
+                        method: 'searchItems',
+                        content: '1',
+                        value: '2'
+                    }
+                },
+                location: {
+                    value: response.locations_id,
+                    request: {
+                        params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
+                        method: 'searchItems',
+                        content: '1',
+                        value: '2'
+                    }
+                },
+                defaultProfile: {
+                    value: response.profiles_id,
+                    request: {
+                        params: {},
+                        method: 'getMyProfiles',
+                        content: 'name',
+                        value: 'id'
+                    }
+                },
+                validSince: response.begin_date ? new Date(response.begin_date) : undefined,
+                validUntil: response.end_date ? new Date(response.end_date) : undefined
             })
         } catch (error) {
             this.setState({isLoading: false})
         }
     } 
+
     saveChanges = () => {
-        this.props.showNotification('Success', 'edited user')            
-        this.props.changeActionList(null)
+
+        let newUser = { 
+            id: this.props.currentUser.id,
+            firstname: this.state.firstName,
+            realname: this.state.realName,
+            phone: this.state.phone,
+            mobile: this.state.mobilePhone,
+            phone2: this.state.phone2,
+            registration_number: this.state.administrativeNumber,
+            picture: this.state.imageProfile,
+            usercategories_id: this.state.category.value,
+            entities_id: this.state.defaultEntity.value,
+            comment: this.state.comments,
+            usertitles_id: this.state.title.value,
+            locations_id: this.state.location.value,
+            profiles_id: this.state.defaultProfile.value,
+            begin_date: this.state.validSince,
+            end_date: this.state.validUntil
+        }
+
+        let correctPassword = true        
+
+        if (this.state.password !== '' || this.state.passwordConfirmation !== '') {
+            if (!ErrorValidation.validation(this.state.parametersToEvaluate, this.state.password).isCorrect) {
+                correctPassword = false
+            } else if (!ErrorValidation.validation({...this.state.parametersToEvaluate, isEqualTo: {value: this.state.password, message: "Passwords do not match"}}, this.state.passwordConfirmation).isCorrect) {
+                correctPassword = false
+            } else {
+                newUser = {
+                    ...newUser,
+                    password: this.state.password,
+                    password2: this.state.passwordConfirmation,
+                }
+            }
+        }
+        
+        if (correctPassword) { 
+            this.setState (
+                { isLoading: true },
+                async () => {
+                    try {
+                        await this.props.glpi.updateItem({itemtype: 'User', input: newUser})
+                        await this.props.glpi.updateEmails({
+                            userID: newUser.id, 
+                            currentEmails: this.state.currentEmails, 
+                            newEmails: this.state.emails
+                        })
+                        this.props.showNotification('Success', 'saved profile')
+                        this.props.changeActionList(null)
+                    } catch (e) {
+                        this.setState ({isLoading: false})            
+                        this.props.showNotification('Error', e)
+                    }
+                }
+            )
+        }
     }
+
 
     changeState = (name, value) => {
         this.setState({
@@ -94,10 +207,19 @@ class Profiles extends Component {
         })
     }
 
-    changeEmail = (name, value) => {
+    changeEmail = (index, value) => {
         let emails = [...this.state.emails]
-        emails[name] = value
-        this.changeState('emails', emails)
+        emails[index].email = value
+        this.setState({emails})
+    }
+
+    changeSelect = (name, value) => {
+        this.setState({
+            [name]: {
+                ...this.state[name],
+                value
+            }
+        })
     }
 
     deleteEmail = (index) => {
@@ -110,7 +232,7 @@ class Profiles extends Component {
         this.setState({
             emails: [
                 ...this.state.emails,
-                ''
+                { email: '' }
             ]
         })
     }
@@ -149,9 +271,11 @@ class Profiles extends Component {
                 state: this.state, 
                 changeState: this.changeState,
                 changeEmail: this.changeEmail,
-                deleteEmail: this.deleteEmail
+                deleteEmail: this.deleteEmail,
+                changeSelect: this.changeSelect,
+                glpi: this.props.glpi
             })
-    
+
             const inputAttributes = {
                 type: 'file',
                 accept: "image/*",
@@ -162,55 +286,56 @@ class Profiles extends Component {
                 },
                 onChange: this.previewFile
             }
+
             componetRender = (
-                <div>
-                    <div className="list-content Profiles">
-                        <div className="listElement listElementIcon">
-                            <span className="viewIcon" />
-                        </div>
+                <div className="list-content Profiles">
 
-
-                        <div className="listElement">
-
-                            <div style={{ overflow: 'hidden' }}>
-                                <input
-                                    {...inputAttributes}
-                                />
-                                <IconItemList
-                                    image={this.state.imageProfile}
-                                    type={this.state.typeImageProfile}
-                                    imgClick={this.openFileChooser}
-                                    size={150}
-                                    imgClass="clickable" />
-                            </div>
-
-                        </div>
-
-
-                        <ConstructInputs data={user.personalInformation} icon="contactIcon" />
-
-                        <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
-
-                        <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
-
-                        <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
-                        <div style={{ overflow: 'auto' }}>
-                            <button className="win-button" style={{ float: 'right' }} onClick={this.addEmail}>Add email</button>
-                        </div>
-
-                        <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
-
-                        <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
-
-                        <ConstructInputs data={user.activityInformation} icon="documentIcon" />
-
-                        <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                            Save
-                        </button>
-
-                        <br />
+                    <div className="listElement listElementIcon">
+                        <span className="viewIcon"/>
                     </div>
-                </div>
+                    
+
+                    <div className="listElement">
+
+                        <div style={{ overflow: 'hidden' }}>
+                            <input
+                                {...inputAttributes}
+                            />
+                            <IconItemList 
+                                image={this.state.imageProfile} 
+                                type={this.state.typeImageProfile}
+                                imgClick={this.openFileChooser}
+                                size={150}
+                                imgClass="clickable"/>
+                        </div>
+
+                    </div>
+
+
+                    <ConstructInputs data={user.personalInformation} icon="contactIcon" />
+
+                    <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
+                
+                    <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
+
+                    <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
+                    <div style={{ overflow: 'auto' }}>
+                        <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
+                    </div>
+
+                    <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
+                
+                    <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
+
+                    <ConstructInputs data={user.activityInformation} icon="documentIcon" />
+
+                    <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                        Save
+                    </button>
+                
+                    <br/>
+
+                </div>   
             )
         }
 
