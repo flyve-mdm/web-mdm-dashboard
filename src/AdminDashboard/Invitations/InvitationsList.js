@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import ReactWinJS from 'react-winjs'
 import InvitationsItemList from './InvitationsItemList'
 import PropTypes from 'prop-types'
+import BuildItemList from '../BuildItemList'
 import ItemList from '../ItemList'
 import WinJS from 'winjs'
 import Loader from '../../Utils/Loader'
@@ -13,7 +14,10 @@ export default class InvitationsList extends Component {
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
             selectedItemList: [],
-            scrolling: false
+            scrolling: false,
+            isLoading: false,
+            itemList: new WinJS.Binding.List([]),
+            order: undefined
         }
     }
 
@@ -61,8 +65,28 @@ export default class InvitationsList extends Component {
         }.bind(this), 0)
     }
 
-    handleRefresh = () => {
-        this.props.fetchData(this.props.location[0])
+    handleRefresh = async () => {
+
+        try {
+            this.props.onNavigate([this.props.location[0]])
+            this.setState({
+                isLoading: true
+            })
+
+            const invitations = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmInvitation', options: { uid_cols: true, forcedisplay: [1, 2, 3] } })
+
+            this.setState({
+                isLoading: false,
+                order: invitations.order,
+                itemList: BuildItemList(invitations)
+            })
+
+        } catch (error) {
+            this.setState({
+                isLoading: false,
+                order: undefined
+            })
+        }
     }
 
     handlePanel = (eventObject) => {
@@ -175,16 +199,14 @@ export default class InvitationsList extends Component {
 
         let listComponent = <Loader count={3} />
 
-        if (this.isError) {
-            listComponent = "Error"
-        } else if (!this.props.isLoading) {
+        if (!this.state.isLoading && this.state.itemList.groups !== undefined) {
             listComponent = (
                 <ReactWinJS.ListView
-                    ref="listView"
+                    ref={(listView) => { this.listView = listView }}
                     onLoadingStateChanged={this.onLoadingStateChanged}
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.props.dataSource.itemList.dataSource}
+                    itemDataSource={this.state.itemList.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
                     footerComponent={<Loader />}
@@ -255,5 +277,6 @@ InvitationsList.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
