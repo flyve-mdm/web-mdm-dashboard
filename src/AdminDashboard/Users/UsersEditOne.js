@@ -174,8 +174,6 @@ Profiles.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    selectedIndex: PropTypes.array,
     changeActionList: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired
 }

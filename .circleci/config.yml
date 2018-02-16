@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: truckfly/python-yarn
+      - image: circleci/node
     working_directory: ~/repo
     steps:
       - checkout
@@ -12,7 +12,34 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
-      - run: yarn install
+      - run: 
+          name: "Install dependencies"
+          command: source ci/scripts/install.sh
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      
+      - run: 
+          name: "Build application"
+          command: yarn build
+      
+  deploy:
+    docker:
+      - image: circleci/node
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: 
+          name: "Install dependencies"
+          command: source ci/scripts/install.sh
 
       - save_cache:
           paths:
@@ -21,9 +48,40 @@ jobs:
 
       - run: 
           name: "Install Transifex Client and Files"
+          command: source ci/scripts/transifex.sh
+      
+      - run: 
+          name: "Build application"
+          command: yarn build
+      
+      - run:
+          name: "Create artifact"
           command: |
-            sudo pip install transifex-client
-            sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_API_TOKEN"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
-            tx pull -a
+            mkdir /tmp/artifacts
+            zip -r ./build.zip build/* > /tmp/artifacts/build.zip
+      
+      - store_artifacts:
+          path: /tmp/artifacts
+          destination: artifacts
+      
+      - run:
+          name: "Configure GIT"
+          command: source ci/scripts/git_config.sh
+      
+      - run: 
+          name: "Deploy application"
+          command: source ci/scripts/deploy.sh
 
-      - run: yarn test src/
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: 
+                - develop
+                - master

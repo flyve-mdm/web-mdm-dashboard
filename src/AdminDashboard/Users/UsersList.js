@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import ItemList from '../ItemList'
 import WinJS from 'winjs'
 import UsersItemList from './UsersItemList'
 import Loader from '../../Utils/Loader'
 import Confirmation from '../../Utils/Confirmation'
+import BuildItemList from '../BuildItemList'
 
 export default class UsersList extends Component {
     
@@ -14,7 +14,10 @@ export default class UsersList extends Component {
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
             selectedItemList: [],
-            scrolling: false
+            scrolling: false,
+            isLoading: false,
+            itemList: new WinJS.Binding.List([]),
+            order: undefined
         }
     }
 
@@ -22,10 +25,19 @@ export default class UsersList extends Component {
         this.handleRefresh()
     }
     
-    componentDidUpdate() {
-        if (this.refs.listView !== undefined && !this.state.scrolling) {
-            this.refs.listView.winControl.footer.style.height = '1px'
+    componentDidUpdate(prevProps) {
+        if(this.listView && !this.state.scrolling) {
+            this.listView.winControl.footer.style.height = '1px'
         }
+
+        if (!this.props.actionList && (prevProps.actionList === 'Edit' || prevProps.actionList === 'EditOne' || prevProps.actionList === 'Delete')) {
+            this.handleRefresh()
+        }
+    }
+
+    componentWillUnmount() {
+        this.setState({ selectedItemList: [] })
+        this.props.changeSelectionMode(false)
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
@@ -42,114 +54,145 @@ export default class UsersList extends Component {
 
     handlePanel = (eventObject) => {
         let button = eventObject.currentTarget.winControl
-        this.refs.listView.winControl.selection.clear()
-
+        this.listView.winControl.selection.clear()
+        
         this.props.changeSelectionMode(false)
-        this.props.changeActionList(button.label)
         this.props.onNavigate([this.props.location[0]])
+        this.props.changeActionList(button.label)
     }
 
     handleToggleSelectionMode = () => {
-        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.listView.winControl.selection.clear()
         this.props.changeActionList(null)
-        this.props.onNavigate([this.props.location[0]])
-        this.refs.listView.winControl.selection.clear()
+        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.props.onNavigate([this.props.location[0]])  
+        this.setState({
+            selectedItemList: []
+        })
     }
 
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        this.setState({ selectedItemList: index })
+        let itemSelected = []
 
-        if (this.props.actionList !== 'Edit') {
-            setTimeout(() => {
-                if (index.length !== 0) {
-                    this.props.changeActionList(null)
-                }
-
-                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
-            }, 0)
+        for (const item of index) {
+            itemSelected.push(this.state.itemList.getItem(item).data)
         }
 
+        this.setState({
+            selectedItemList: itemSelected
+        })
+
+        if (this.props.actionList !== 'Edit') {
+               
+            setTimeout(() => {
+                if(index.length !== 0) {
+                    this.props.changeActionList(null)
+                }
+                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
+            }, 0)
+        }
     }
 
-    handleRefresh = () => {
+    handleRefresh = async () => {
         this.props.onNavigate([this.props.location[0]])
-        this.props.fetchData(this.props.location[0])
+        this.setState({
+            isLoading: true
+        })
+        try {
+            const response = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true, forcedisplay: [1, 2, 5] } })        
+            this.setState({
+                isLoading: false,
+                order: response.order,
+                itemList: BuildItemList(response)
+            })
+        } catch (e) {
+            this.setState({
+                isLoading: false,
+                order: undefined
+            })
+        }
     }
 
     handleEdit = (eventObject) => {
-        let index = this.state.selectedItemList
         let button = eventObject.currentTarget.winControl
-
         setTimeout(() => {
+            this.props.onNavigate(this.state.selectedItemList.length > 0 && this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
             this.props.changeActionList(button.label)
-            this.props.onNavigate(index.length > 0 && this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
         }, 0)
     }
 
-    handleDelete = async () => {
+    handleDelete = async (eventObject) => {
+        let button = eventObject.currentTarget.winControl
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
-            // Clean another actions selected
-            this.props.changeActionList(null)
-            // Exit selection mode
-            this.props.changeSelectionMode(false)
 
-            let item = this.props.dataSource.itemList
-            let index = this.state.selectedItemList
-            index.sort()
-            index.reverse()
-            index.forEach((i) => {
-                item.splice(i, 1)
+            let itemListToDelete = this.state.selectedItemList.map((item) => {
+                return {
+                    id: item["User.id"]
+                }
             })
 
-            if (this.state.selectedItemList.length > 1) {
-                this.props.showNotification('Success', 'deleted users')
-            } else {
-                this.props.showNotification('Success', 'deleted user')
+            this.setState({isLoading: true})
+            this.props.changeActionList(button.label)
+
+            try {
+                await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete, queryString: { force_purge: true } })
+                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.changeActionList(null)
+                this.props.changeSelectionMode(false)
+                this.setState({
+                    selectedItemList: []
+                })
+            } catch (error) {
+                if (error.length > 1) {
+                    this.props.showNotification(error[0], error[1])
+                }
+                this.props.changeActionList(null)
+                this.props.changeSelectionMode(false)
+                this.setState({
+                    selectedItemList: []
+                })
             }
-
-            this.setState({
-                selectedItem: []
-            })
-            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
         } else {
             // Clean another actions selected
             this.props.changeActionList(null)
             // Exit selection mode
             this.props.changeSelectionMode(false)
-            this.refs.listView.winControl.selection.clear()
+            this.listView.winControl.selection.clear()
             this.setState({
-                selectedItem: []
+                selectedItemList: []
             })
         }
     }
 
-    handleSort = () => {
+    handleSort = async () => {
         this.props.onNavigate([this.props.location[0]])
-        let array = []
-        this.props.dataSource.itemList.map((value, index) =>
-            array.push(value)
-        );
-        this.props.changeDataSource(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.dataSource.sort), sort: !this.props.dataSource.sort })
-    }
-
-    descendingCompare(first, second) {
-        if (first === second)
-            return 0;
-        else if (first < second)
-            return 1;
-        else
-            return -1;
+        this.setState({
+            isLoading: true
+        })
+        let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
+        
+        try {
+            const response = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 5] } })
+            this.setState({
+                isLoading: false,
+                order: response.order,
+                itemList: BuildItemList(response)
+            })
+        } catch (e) {
+            this.setState({
+                isLoading: false,
+                order: undefined
+            })
+        }
     }
 
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {
             setTimeout(() => {
-                this.setState({
-                    scrolling: true
-                })
+                this.setState({scrolling: true})
             }, 0)
         }
     }
@@ -157,13 +200,13 @@ export default class UsersList extends Component {
     onFooterVisibilityChanged = (eventObject) => {
 
         let listView = eventObject.currentTarget.winControl
-
+        
         if (eventObject.detail.visible && this.state.scrolling) {
             listView.footer.style.height = '100px'
             setTimeout(() => {
                 listView.footer.style.height = '1px'
             }, 3000)
-
+            
         } else {
             setTimeout(() => {
                 listView.footer.style.height = '1px'
@@ -177,6 +220,7 @@ export default class UsersList extends Component {
             <ReactWinJS.ToolBar.Button
                 key="delete"
                 icon="delete"
+                label="Delete"
                 priority={0}
                 disabled={this.state.selectedItemList.length === 0}
                 onClick={this.handleDelete}
@@ -196,17 +240,15 @@ export default class UsersList extends Component {
 
         let listComponent = <Loader count={3} />
 
-        if (this.isError) {
-            listComponent = "Error"
-        } else if (!this.props.isLoading && this.props.dataSource.itemList.groups !== undefined) {
+        if (!this.state.isLoading && this.state.itemList.groups !== undefined ) {
             listComponent = (
                 <ReactWinJS.ListView
-                    ref="listView"
+                    ref={(listView) => { this.listView = listView }}
                     onLoadingStateChanged={this.onLoadingStateChanged}
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.props.dataSource.itemList.dataSource}
-                    groupDataSource={this.props.dataSource.itemList.groups.dataSource}
+                    itemDataSource={this.state.itemList.dataSource}
+                    groupDataSource={this.state.itemList.groups.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
                     groupHeaderTemplate={this.groupHeaderRenderer}
@@ -257,7 +299,6 @@ export default class UsersList extends Component {
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
-
                 { listComponent }
                 <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.selectedItemList.length + ` ` + this.props.location[0]} reference={el => this.contentDialog = el} />
 
@@ -272,13 +313,12 @@ UsersList.propTypes = {
         PropTypes.number
     ]).isRequired,
     animation: PropTypes.bool.isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired    
 }

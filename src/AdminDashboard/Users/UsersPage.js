@@ -8,19 +8,19 @@ import EmptyMessage from '../../Utils/EmptyMessage'
 export default class UsersPage extends Component {
     
     render() {
-        if (this.props.selectedIndex === null || this.props.actionList === 'Edit') {
+        if (this.props.selectedItemList === null || this.props.actionList === 'Edit') {
             switch (this.props.actionList) {
                 case "Edit":
                     return (
                         <UsersEdit
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
+                            selectedItemList={this.props.selectedItemList}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
-                            changeActionList={this.props.changeActionList} 
-                            showNotification={this.props.showNotification}                            
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}                             
                         />
                     )
                 default:
@@ -33,19 +33,17 @@ export default class UsersPage extends Component {
             }
         } else {
             if (this.props.actionList === null) {
-                const selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
-                if (selectedItemList !== undefined) {
+                if (this.props.selectedItemList.length > 0) {
                     return (
                         <UsersContent
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
+                            changeSelectionMode={this.props.changeSelectionMode}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
-                            selectedIndex={this.props.selectedIndex}
-                            selectedItemList={selectedItemList}
-                            changeActionList={this.props.changeActionList} 
-                            showNotification={this.props.showNotification}    
+                            selectedItemList={this.props.selectedItemList}
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi} 
                         />
                     )
                 } else {
@@ -54,16 +52,27 @@ export default class UsersPage extends Component {
                     )
                 }
             } else {
-                return (
-                    <UserEditOne
-                        itemListPaneWidth={this.props.itemListPaneWidth}
-                        dataSource={this.props.dataSource}
-                        location={this.props.location}
-                        selectedIndex={this.props.selectedIndex}
-                        changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}
-                    />
-                )
+                switch (this.props.actionList) {
+                    case "EditOne":
+                    return (
+                        <UserEditOne 
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            selectedItemList={this.props.selectedItemList}
+                            changeSelectionMode={this.props.changeSelectionMode}
+                            location={this.props.location} 
+                            onNavigate={this.props.onNavigate}
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification} 
+                            glpi={this.props.glpi}
+                        />
+                    )
+                    default:
+                    return (
+                        <EmptyMessage 
+                            message="No Selection" 
+                            itemListPaneWidth={this.props.itemListPaneWidth} />
+                    )
+                }
             }
         }
     }
@@ -73,9 +82,7 @@ UsersPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
-    selectedIndex: PropTypes.array,
+    selectedItemList: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
