@@ -5,41 +5,84 @@ import ContentPane from '../../Utils/ContentPane'
 import validateData from '../../Utils/validateData'
 import IconItemList from '../IconItemList'
 import { usersScheme } from '../../Utils/Forms/Schemes'
+import Loading from '../../Utils/Loading'
 
 class Profiles extends Component {
     
     constructor(props) {
         super(props)
-        const currentUser = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
-        
         this.state = {
-            login: validateData(currentUser["User.name"], undefined),
-            firstName: validateData(currentUser["User.firstname"]),
-            realName: validateData(currentUser["User.realname"]),
-            phone: validateData(currentUser["User.phone"]),
-            mobilePhone: validateData(currentUser["User.mobile"]),
-            phone2: validateData(currentUser["User.phone2"]),
-            administrativeNumber: validateData(currentUser["User.registration_number"]),
-            lastLogin: validateData(currentUser["User.last_login"], undefined),
-            created: validateData(currentUser["User.date_creation"], undefined),
-            modified: validateData(currentUser["User.date_mod"], undefined),
-            emails: validateData(currentUser["User.UserEmail.email"], []),
-            imageProfile: validateData(currentUser['User.picture'], "profile.png"),
-            authentication: 'GLPI internal database',
-            password: '',
-            passwordConfirmation: '',
-            category: '',
-            defaultEntity: '',
-            comments: '',
-            typeImageProfile: 'file',
-            title: '',
-            location: '',
-            defaultProfile: '',
-            validSince: new Date(),
-            validUntil: new Date()
+            isLoading: true,
+            login: undefined,
+            firstName: undefined,
+            realName: undefined,
+            phone: undefined,
+            mobilePhone: undefined,
+            phone2: undefined,
+            administrativeNumber: undefined,
+            lastLogin: undefined,
+            created: undefined,
+            modified: undefined,
+            emails: undefined,
+            imageProfile: undefined,
+            authentication: undefined,
+            password: undefined,
+            passwordConfirmation: undefined,
+            category: undefined,
+            defaultEntity: undefined,
+            comments: undefined,
+            typeImageProfile: undefined,
+            title: undefined,
+            location: undefined,
+            defaultProfile: undefined,
+            validSince: undefined,
+            validUntil: undefined
         }
     }
 
+    componentDidMount() {
+        if (this.props.selectedItemList) {
+            this.handleRefresh()
+        }
+    }
+
+    handleRefresh = async () => {
+        this.setState({
+            isLoading: true
+        })
+        try {
+            const response = await this.props.glpi.getAnItem({ itemtype: 'User', id: this.props.selectedItemList[0]['User.id']})
+            this.setState({
+                isLoading: false,
+                login: response["User.name"],
+                firstName: response["User.firstname"],
+                realName: response["User.realname"],
+                phone: response["User.phone"],
+                mobilePhone: response["User.mobile"],
+                phone2: response["User.phone2"],
+                administrativeNumber: response["User.registration_number"],
+                lastLogin: response["User.last_login"],
+                created: response["User.date_creation"],
+                modified: response["User.date_mod"],
+                emails: validateData(response["User.UserEmail.email"], []),
+                imageProfile: validateData(response['User.picture'], "profile.png"),
+                authentication: 'GLPI internal database',
+                password: '',
+                passwordConfirmation: '',
+                category: '',
+                defaultEntity: '',
+                comments: '',
+                typeImageProfile: 'file',
+                title: '',
+                location: '',
+                defaultProfile: '',
+                validSince: new Date(),
+                validUntil: new Date()
+            })
+        } catch (error) {
+            this.setState({isLoading: false})
+        }
+    } 
     saveChanges = () => {
         this.props.showNotification('Success', 'edited user')            
         this.props.changeActionList(null)
@@ -97,74 +140,84 @@ class Profiles extends Component {
 
     render () {
 
-        const user = usersScheme({
-            state: this.state, 
-            changeState: this.changeState,
-            changeEmail: this.changeEmail,
-            deleteEmail: this.deleteEmail
-        })
+        let componetRender
 
-        const inputAttributes = {
-            type: 'file',
-            accept: "image/*",
-            name: "imageProfile",
-            style: { display: 'none' },
-            ref: (element) => {
-                this.inputElement = element
-            },
-            onChange: this.previewFile
+        if (this.state.isLoading) {
+            componetRender = <Loading message="Loading..." />
+        } else {
+            const user = usersScheme({
+                state: this.state, 
+                changeState: this.changeState,
+                changeEmail: this.changeEmail,
+                deleteEmail: this.deleteEmail
+            })
+    
+            const inputAttributes = {
+                type: 'file',
+                accept: "image/*",
+                name: "imageProfile",
+                style: { display: 'none' },
+                ref: (element) => {
+                    this.inputElement = element
+                },
+                onChange: this.previewFile
+            }
+            componetRender = (
+                <div>
+                    <div className="list-content Profiles">
+                        <div className="listElement listElementIcon">
+                            <span className="viewIcon" />
+                        </div>
+
+
+                        <div className="listElement">
+
+                            <div style={{ overflow: 'hidden' }}>
+                                <input
+                                    {...inputAttributes}
+                                />
+                                <IconItemList
+                                    image={this.state.imageProfile}
+                                    type={this.state.typeImageProfile}
+                                    imgClick={this.openFileChooser}
+                                    size={150}
+                                    imgClass="clickable" />
+                            </div>
+
+                        </div>
+
+
+                        <ConstructInputs data={user.personalInformation} icon="contactIcon" />
+
+                        <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
+
+                        <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
+
+                        <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
+                        <div style={{ overflow: 'auto' }}>
+                            <button className="win-button" style={{ float: 'right' }} onClick={this.addEmail}>Add email</button>
+                        </div>
+
+                        <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
+
+                        <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
+
+                        <ConstructInputs data={user.activityInformation} icon="documentIcon" />
+
+                        <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                            Save
+                        </button>
+
+                        <br />
+                    </div>
+                </div>
+            )
         }
 
         return (
-
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-                <div className="list-content Profiles">
-                    <div className="listElement listElementIcon">
-                        <span className="viewIcon" />
-                    </div>
-
-
-                    <div className="listElement">
-
-                        <div style={{ overflow: 'hidden' }}>
-                            <input
-                                {...inputAttributes}
-                            />
-                            <IconItemList
-                                image={this.state.imageProfile}
-                                type={this.state.typeImageProfile}
-                                imgClick={this.openFileChooser}
-                                size={150}
-                                imgClass="clickable" />
-                        </div>
-
-                    </div>
-
-
-                    <ConstructInputs data={user.personalInformation} icon="contactIcon" />
-
-                    <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
-
-                    <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
-
-                    <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
-                    <div style={{ overflow: 'auto' }}>
-                        <button className="win-button" style={{ float: 'right' }} onClick={this.addEmail}>Add email</button>
-                    </div>
-
-                    <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
-
-                    <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
-
-                    <ConstructInputs data={user.activityInformation} icon="documentIcon" />
-
-                    <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                        Save
-                    </button>
-
-                    <br />
-                </div>
-            </ContentPane>
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                {componetRender}
+            </ContentPane>            
         )
     }
 }
