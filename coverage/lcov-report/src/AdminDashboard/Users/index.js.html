@@ -136,29 +136,7 @@
 91
 92
 93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+94</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -194,16 +172,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -246,22 +215,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -294,41 +250,32 @@ export default class Users extends Component {
     }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
 <span class="fstat-no" title="function not covered" >    re</span>nder() {
-        let selectedIndex = <span class="cstat-no" title="statement not covered" >this.props.location.length === 2 ? this.props.location[1] : null</span>
+        let selectedItemList = <span class="cstat-no" title="statement not covered" >this.props.location.length === 2 ? this.props.location[1] : null</span>
 <span class="cstat-no" title="statement not covered" >        if (this.props.mode === 'small') {</span>
-<span class="cstat-no" title="statement not covered" >            if (selectedIndex === null &amp;&amp; this.props.actionList === null) {</span>
+<span class="cstat-no" title="statement not covered" >            if (selectedItemList === null &amp;&amp; this.props.actionList === null) {</span>
 <span class="cstat-no" title="statement not covered" >                return &lt;UsersList</span>
                     itemListPaneWidth={'100%'}
                     animation={this.props.animation}
-                    dataSource={this.props.dataSource}
-                    changeDataSource={this.props.changeDataSource}
-                    fetchData={this.props.fetchData}
-                    isLoading={this.props.isLoading}
-                    isError={this.props.isError}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
                     changeSelectionMode={this.changeSelectionMode}
                     selectionMode={this.state.selectionMode}
-                    changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification}
+                    changeActionList={this.props.changeActionList}
+                    showNotification={this.props.showNotification} 
                     glpi={this.props.glpi} /&gt;
             } else {
 <span class="cstat-no" title="statement not covered" >                return &lt;UsersPage</span>
-                    itemListPaneWidth={0}
-                    animation={this.props.animation}
-                    dataSource={this.props.dataSource}
-                    changeDataSource={this.props.changeDataSource}
-                    location={this.props.location}
-                    onNavigate={this.props.onNavigate}
-                    selectedIndex={selectedIndex}
-                    changeSelectionMode={this.changeSelectionMode}
-                    changeCurrentItem={this.props.changeCurrentItem}
-                    actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification}
-                    glpi={this.props.glpi} /&gt;
+                itemListPaneWidth={0}
+                animation={this.props.animation}
+                location={this.props.location}
+                onNavigate={this.props.onNavigate}
+                selectedItemList={selectedItemList}
+                changeSelectionMode={this.changeSelectionMode}
+                actionList={this.props.actionList}
+                changeActionList={this.props.changeActionList}
+                showNotification={this.props.showNotification} 
+                glpi={this.props.glpi} /&gt;
             }
         } else {
             let itemListPaneWidth = <span class="cstat-no" title="statement not covered" >320</span>
@@ -337,36 +284,25 @@ export default class Users extends Component {
                     &lt;UsersList
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
-                        fetchData={this.props.fetchData}
-                        isLoading={this.props.isLoading}
-                        isError={this.props.isError}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
                         changeSelectionMode={this.changeSelectionMode}
                         selectionMode={this.state.selectionMode}
-                        currentItem={this.props.currentItem}
-                        changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}
+                        showNotification={this.props.showNotification} 
                         glpi={this.props.glpi}
                     /&gt;
                     &lt;UsersPage
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
-                        selectedIndex={selectedIndex}
+                        selectedItemList={selectedItemList}
                         changeSelectionMode={this.changeSelectionMode}
-                        currentItem={this.props.currentItem}
-                        changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}
+                        showNotification={this.props.showNotification} 
                         glpi={this.props.glpi}
                     /&gt;
                 &lt;/div&gt;
@@ -377,8 +313,6 @@ export default class Users extends Component {
 <span class="cstat-no" title="statement not covered" >Users.propTypes = {</span>
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
     animation: PropTypes.bool.isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     currentItem: PropTypes.object,
@@ -394,7 +328,7 @@ export default class Users extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 15 2018 17:06:49 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 16 2018 20:47:53 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

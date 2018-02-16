@@ -22,12 +22,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/27</span>
+        <span class='fraction'>0/28</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/16</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/18</span>
+        <span class='fraction'>0/19</span>
       </div>
     </div>
   </div>
@@ -128,7 +128,14 @@
 83
 84
 85
-86</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+86
+87
+88
+89
+90
+91
+92
+93</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -165,26 +172,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -198,9 +186,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -223,19 +237,19 @@ import EmptyMessage <span class="cstat-no" title="statement not covered" >from '
 export default class UsersPage extends Component {
     
 <span class="fstat-no" title="function not covered" >    re</span>nder() {
-<span class="cstat-no" title="statement not covered" >        if (this.props.selectedIndex === null || this.props.actionList === 'Edit') {</span>
+<span class="cstat-no" title="statement not covered" >        if (this.props.selectedItemList === null || this.props.actionList === 'Edit') {</span>
 <span class="cstat-no" title="statement not covered" >            switch (this.props.actionList) {</span>
                 case "Edit":
 <span class="cstat-no" title="statement not covered" >                    return (</span>
                         &lt;UsersEdit
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
+                            selectedItemList={this.props.selectedItemList}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
-                            changeActionList={this.props.changeActionList} 
-                            showNotification={this.props.showNotification}                            
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}                             
                         /&gt;
                     )
                 default:
@@ -248,19 +262,17 @@ export default class UsersPage extends Component {
             }
         } else {
 <span class="cstat-no" title="statement not covered" >            if (this.props.actionList === null) {</span>
-                const selectedItemList = <span class="cstat-no" title="statement not covered" >this.props.dataSource.itemList.getAt(this.props.selectedIndex)</span>
-<span class="cstat-no" title="statement not covered" >                if (selectedItemList !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                if (this.props.selectedItemList.length &gt; 0) {</span>
 <span class="cstat-no" title="statement not covered" >                    return (</span>
                         &lt;UsersContent
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
+                            changeSelectionMode={this.props.changeSelectionMode}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
-                            selectedIndex={this.props.selectedIndex}
-                            selectedItemList={selectedItemList}
-                            changeActionList={this.props.changeActionList} 
-                            showNotification={this.props.showNotification}    
+                            selectedItemList={this.props.selectedItemList}
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi} 
                         /&gt;
                     )
                 } else {
@@ -269,16 +281,27 @@ export default class UsersPage extends Component {
                     )
                 }
             } else {
-<span class="cstat-no" title="statement not covered" >                return (</span>
-                    &lt;UserEditOne
-                        itemListPaneWidth={this.props.itemListPaneWidth}
-                        dataSource={this.props.dataSource}
-                        location={this.props.location}
-                        selectedIndex={this.props.selectedIndex}
-                        changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}
-                    /&gt;
-                )
+<span class="cstat-no" title="statement not covered" >                switch (this.props.actionList) {</span>
+                    case "EditOne":
+                    retu<span class="cstat-no" title="statement not covered" >rn (</span>
+                        &lt;UserEditOne 
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            selectedItemList={this.props.selectedItemList}
+                            changeSelectionMode={this.props.changeSelectionMode}
+                            location={this.props.location} 
+                            onNavigate={this.props.onNavigate}
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification} 
+                            glpi={this.props.glpi}
+                        /&gt;
+                    )
+                    default:
+                    retu<span class="cstat-no" title="statement not covered" >rn (</span>
+                        &lt;EmptyMessage 
+                            message="No Selection" 
+                            itemListPaneWidth={this.props.itemListPaneWidth} /&gt;
+                    )
+                }
             }
         }
     }<span class="cstat-no" title="statement not covered" ></span>
@@ -288,9 +311,7 @@ export default class UsersPage extends Component {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
-    selectedIndex: PropTypes.array,
+    selectedItemList: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
@@ -304,7 +325,7 @@ export default class UsersPage extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 15 2018 17:06:49 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 16 2018 20:47:53 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
