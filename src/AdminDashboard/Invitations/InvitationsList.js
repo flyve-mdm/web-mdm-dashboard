@@ -207,8 +207,10 @@ export default class InvitationsList extends Component {
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.state.itemList.dataSource}
+                    groupDataSource={this.state.itemList.groups.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
+                    groupHeaderTemplate={this.groupHeaderRenderer}
                     footerComponent={<Loader />}
                     onFooterVisibilityChanged={this.onFooterVisibilityChanged}
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
