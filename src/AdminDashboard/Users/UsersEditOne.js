@@ -70,16 +70,16 @@ class Profiles extends Component {
             this.setState({
                 isLoading: false,
                 parametersToEvaluate,
-                login: response.name,
-                firstName: response.firstname,
-                realName: response.realname,
-                phone: response.phone,
-                mobilePhone: response.mobile,
-                phone2: response.phone2,
-                administrativeNumber: response.registration_number,
-                lastLogin: response.last_login,
-                created: response.date_creation,
-                modified: response.date_mod,
+                login: validateData(response.name),
+                firstName: validateData(response.firstname),
+                realName: validateData(response.realname),
+                phone: validateData(response.phone),
+                mobilePhone: validateData(response.mobile),
+                phone2: validateData(response.phone2),
+                administrativeNumber: validateData(response.registration_number),
+                lastLogin: validateData(response.last_login),
+                created: validateData(response.date_creation),
+                modified: validateData(response.date_mod),
                 currentEmails: myEmails.map(a => ({...a})),
                 emails: validateData(myEmails, []),
                 imageProfile: validateData(response.picture, "profile.png"),
@@ -87,7 +87,7 @@ class Profiles extends Component {
                 password: '',
                 passwordConfirmation: '',
                 category: {
-                    value: response.usercategories_id,
+                    value: validateData(response.usercategories_id),
                     request: {
                         params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
@@ -96,7 +96,7 @@ class Profiles extends Component {
                     }
                 },
                 defaultEntity:  {
-                    value: response.entities_id,
+                    value: validateData(response.entities_id),
                     request: {
                         params: {},
                         method: 'getMyEntities',
@@ -107,7 +107,7 @@ class Profiles extends Component {
                 comments: '',
                 typeImageProfile: 'file',
                 title: {
-                    value: response.usertitles_id,
+                    value: validateData(response.usertitles_id),
                     request: {
                         params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
@@ -116,7 +116,7 @@ class Profiles extends Component {
                     }
                 },
                 location: {
-                    value: response.locations_id,
+                    value: validateData(response.locations_id),
                     request: {
                         params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
@@ -125,7 +125,7 @@ class Profiles extends Component {
                     }
                 },
                 defaultProfile: {
-                    value: response.profiles_id,
+                    value: validateData(response.profiles_id),
                     request: {
                         params: {},
                         method: 'getMyProfiles',
