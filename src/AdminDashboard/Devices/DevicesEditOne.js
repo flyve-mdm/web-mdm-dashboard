@@ -17,7 +17,7 @@ export default class DevicesEditOne extends Component {
         this.setState({
             isLoading: true
         })
-        this.props.glpi.getAnItem('PluginFlyvemdmAgent', this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'], null)
+        this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'] })
             .then((response) => {
                 this.setState({
                     isLoading: false,
@@ -72,7 +72,7 @@ export default class DevicesEditOne extends Component {
             name: this.state.name,
             plugin_flyvemdm_fleets_id: this.state.fleet.value
         }
-        this.props.glpi.updateItem('PluginFlyvemdmAgent', this.state.id, input)
+        this.props.glpi.updateItem({itemtype: 'PluginFlyvemdmAgent', id: this.state.id, input})
         .then(() => {
             this.props.showNotification('Success', 'changes saved successfully')
             this.props.changeActionList(null)
