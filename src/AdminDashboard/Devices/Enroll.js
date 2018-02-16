@@ -13,7 +13,7 @@ export default class Enroll extends Component {
 
     inviteDevice = () => {
         if(this.state.email.trim() !== "") {
-            this.props.glpi.addItem('PluginFlyvemdmInvitation', { _useremails: this.state.email.trim() })
+            this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmInvitation', input: { _useremails: this.state.email.trim()} })
             .then((response) => {
                 this.props.changeActionList(null)
                 this.props.showNotification('Success', 'invitation sent')
