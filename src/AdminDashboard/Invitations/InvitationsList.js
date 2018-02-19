@@ -16,7 +16,7 @@ export default class InvitationsList extends Component {
             scrolling: false,
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
-            order: undefined,
+            order: "ASC",
             pagination: {
                 start: 0,
                 page: 1,
