@@ -17,7 +17,12 @@ export default class DevicesList extends Component {
             scrolling: false,
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
-            order: undefined
+            order: undefined,
+            pagination: {
+                start: 0,
+                page: 1,
+                count: 15
+            }
         }
     }
 
@@ -55,9 +60,15 @@ export default class DevicesList extends Component {
     handleRefresh = () => {
         this.props.onNavigate([this.props.location[0]])
         this.setState({
-            isLoading: true
+            isLoading: true,
+            scrolling: false,
+            pagination: {
+                start: 0,
+                page: 1,
+                count: 15
+            }
         })
-        this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12] } })
+        this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12], range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
         .then((response) => {
             this.setState({
                 isLoading: false,
@@ -174,7 +185,12 @@ export default class DevicesList extends Component {
     handleSort = () => {
         this.props.onNavigate([this.props.location[0]])
         this.setState({
-            isLoading: true
+            isLoading: true,
+            pagination: {
+                start: 0,
+                page: 1,
+                count: 15
+            }
         })
         let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
@@ -204,20 +220,33 @@ export default class DevicesList extends Component {
         }
     }
 
-    onFooterVisibilityChanged = (eventObject) => {
-
+    showFooterList = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
-        
         if (eventObject.detail.visible && this.state.scrolling) {
             listView.footer.style.height = '100px'
-            setTimeout(() => {
-                listView.footer.style.height = '1px'
-            }, 3000)
+            this.loadMoreData()
+        }
+    }
+
+    loadMoreData = async () => {
+        try {
+            const devices = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12], range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
             
-        } else {
-            setTimeout(() => {
-                listView.footer.style.height = '1px'
-            }, 3000)
+            for (const item in devices.data) {
+                this.state.itemList.push(devices.data[item])
+            }
+
+            this.setState({
+                pagination: {
+                    ...this.state.pagination,
+                    page: this.state.pagination.page + 1
+                }
+            })
+
+            this.listView.winControl.footer.style.height = '1px'
+
+        } catch (error) {
+            this.listView.winControl.footer.style.height = '1px'
         }
     }
 
@@ -259,7 +288,7 @@ export default class DevicesList extends Component {
                     itemTemplate={this.ItemListRenderer}
                     groupHeaderTemplate={this.groupHeaderRenderer}
                     footerComponent={<Loader />}
-                    onFooterVisibilityChanged={this.onFooterVisibilityChanged}
+                    onFooterVisibilityChanged={this.showFooterList}
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
                     tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
