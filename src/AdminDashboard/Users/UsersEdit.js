@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import UsersEditItemList from './UsersEditItemList'
 import ContentPane from '../../Utils/ContentPane'
 import EmptyMessage from '../../Utils/EmptyMessage'
 import Loading from '../../Utils/Loading'
+import { Select } from '../../Utils/Forms'
 
 export default class DevicesEdit extends Component {
 
@@ -50,11 +50,28 @@ export default class DevicesEdit extends Component {
                         <h4  className="win-h4">
                             Select the field that you want to update
                         </h4>
-                        <select className="win-dropdown" name="field" value={this.state.field} onChange={this.changeField}>
-                            <option>
-                                ---
-                            </option>
-                        </select>
+                        <Select
+                            name="field"
+                            value={this.state.field}
+                            options={[
+                                'Realname',
+                                'First name',
+                                'Title',
+                                'Location',
+                                'Default profile',
+                                'Password',
+                                'Valid since',
+                                'Valid until',
+                                'Phone',
+                                'Phone 2',
+                                'Mobile phone',
+                                'Administrative number',
+                                'Category',
+                                'Default entity',
+                                'Comments'
+                            ]}
+                            function={this.changeField}
+                        />
                         <br/>
                         <button className="win-button win-button-primary" onClick={this.handleSaveDevices}>
                             Save
