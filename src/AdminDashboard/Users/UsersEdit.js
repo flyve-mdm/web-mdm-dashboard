@@ -23,15 +23,14 @@ export default class DevicesEdit extends Component {
         })
     }
 
-    changeField = (name, value) => {
+    change = (name, value) => {
         this.setState({
-            field: value
+            [name]: value
         })
     }
 
     render() {
         if (this.props.selectedItemList) {
-
             let renderComponent
             if (this.state.isLoading) {
                 renderComponent = <Loading message="Loading..." />
@@ -50,6 +49,7 @@ export default class DevicesEdit extends Component {
                                 type="text"
                                 name="newValue"
                                 value={this.state.newValue}
+                                function={this.change}
                             />
                         )
                     break
@@ -91,7 +91,7 @@ export default class DevicesEdit extends Component {
                                 'Default entity',
                                 'Comments'
                             ]}
-                            function={this.changeField}
+                            function={this.change}
                         />
                         
                         {renderComponent}
