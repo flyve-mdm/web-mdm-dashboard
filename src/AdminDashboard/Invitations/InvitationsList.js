@@ -16,7 +16,12 @@ export default class InvitationsList extends Component {
             scrolling: false,
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
-            order: undefined
+            order: undefined,
+            pagination: {
+                start: 0,
+                page: 1,
+                count:15
+            }
         }
     }
 
@@ -69,10 +74,16 @@ export default class InvitationsList extends Component {
         try {
             this.props.onNavigate([this.props.location[0]])
             this.setState({
-                isLoading: true
+                isLoading: true,
+                scrolling: false,
+                pagination: {
+                    start: 0,
+                    page: 1,
+                    count: 15
+                }
             })
 
-            const invitations = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmInvitation', options: { uid_cols: true, forcedisplay: [1, 2, 3] } })
+            const invitations = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmInvitation', options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page)-1}` } })
 
             this.setState({
                 isLoading: false,
@@ -126,7 +137,12 @@ export default class InvitationsList extends Component {
         try {
             this.props.onNavigate([this.props.location[0]])
             this.setState({
-                isLoading: true
+                isLoading: true,
+                pagination: {
+                    start: 0,
+                    page: 1,
+                    count: 15
+                }
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
@@ -182,6 +198,36 @@ export default class InvitationsList extends Component {
         }
     }
 
+    showFooterList = (eventObject) => {
+        let listView = eventObject.currentTarget.winControl
+        if (eventObject.detail.visible && this.state.scrolling) {
+            listView.footer.style.height = '100px'
+            this.loadMoreData()
+        }
+    }
+
+    loadMoreData = async () => {
+        try {
+            const invitations = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmInvitation', options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+
+            for (const item in invitations.data) {
+                this.state.itemList.push(invitations.data[item])
+            }
+
+            this.setState({
+                pagination: {
+                    ...this.state.pagination,
+                    page: this.state.pagination.page + 1
+                }
+            })
+
+            this.listView.winControl.footer.style.height = '1px'
+            
+        } catch (error) {
+            this.listView.winControl.footer.style.height = '1px'
+        }
+    }
+
     render() {
         let deleteCommand = (
             <ReactWinJS.ToolBar.Button
@@ -219,7 +265,7 @@ export default class InvitationsList extends Component {
                     itemTemplate={this.ItemListRenderer}
                     groupHeaderTemplate={this.groupHeaderRenderer}
                     footerComponent={<Loader />}
-                    onFooterVisibilityChanged={this.onFooterVisibilityChanged}
+                    onFooterVisibilityChanged={this.showFooterList}
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
                     tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
