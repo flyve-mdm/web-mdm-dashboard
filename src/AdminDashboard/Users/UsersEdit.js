@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ContentPane from '../../Utils/ContentPane'
 import EmptyMessage from '../../Utils/EmptyMessage'
 import Loading from '../../Utils/Loading'
-import { Select } from '../../Utils/Forms'
+import { Select, Input } from '../../Utils/Forms'
 
 export default class DevicesEdit extends Component {
 
@@ -12,7 +12,8 @@ export default class DevicesEdit extends Component {
         this.state = {
             itemListEdit: [...this.props.selectedItemList],
             isLoading: false,
-            field: undefined
+            field: undefined,
+            newValue: ''
         }
     }
 
@@ -37,15 +38,29 @@ export default class DevicesEdit extends Component {
             } else {
                 let input
                 switch (this.state.field) {
-                    case '':
-                        
-                        break
+                    case 'Realname':
+                    case 'First name':
+                    case 'Phone':
+                    case 'Phone 2':
+                    case 'Mobile phone':
+                    case 'Administrative number':
+                        input = (
+                            <Input
+                                label="What will be the new value?"
+                                type="text"
+                                name="newValue"
+                                value={this.state.newValue}
+                            />
+                        )
+                    break
                 
                     default:
                         break
                 }
                 renderComponent = (
-                    <div>{input}</div>
+                    <div>
+                        {input}
+                    </div>
                 )
             }              
 
@@ -78,13 +93,15 @@ export default class DevicesEdit extends Component {
                             ]}
                             function={this.changeField}
                         />
+                        
+                        {renderComponent}
+
                         <br/>
+                        
                         <button className="win-button win-button-primary" onClick={this.handleSaveDevices}>
                             Save
                         </button>
                     </div>
-                    <div className="separator" />
-                    {renderComponent}
                 </ContentPane>
             )
 
