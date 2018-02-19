@@ -15,80 +15,85 @@ class Select extends Component {
     }
 
     componentDidMount = async () => {
+        let options = []
+
         if (this.props.glpi && this.props.request) {
             const response = await this.props.glpi[this.props.request.method](this.props.request.params)
-
-            let options = []
 
             switch (this.props.request.method) {
                 case 'getMyProfiles':
                     response.myprofiles.forEach(element => {
-                        options = [
-                            ...options, 
+                        options.push(
                             {
                                 content: element[this.props.request.content],
                                 value: element[this.props.request.value]
                             }
-                        ]
+                        )
                     })
                     break
                 
                 case 'searchItems':
                     if (response.data) {
                         response.data.forEach(element => {
-                            options = [
-                                ...options, 
+                            options.push(
                                 {
                                     content: element[this.props.request.content],
                                     value: element[this.props.request.value]
                                 }
-                            ]
+                            )
                         })
                     }
                     break
                     case 'getAllItems':
                     if (response) {
                         response.forEach(element => {
-                            options = [
-                                ...options, 
+                            options.push(
                                 {
                                     content: element[this.props.request.content],
                                     value: element[this.props.request.value]
                                 }
-                            ]
+                            )
                         })
                     }
                     break
 
                 case 'getSubItems':
                     response.forEach(element => {
-                        options = [
-                            ...options, 
+                        options.push(
                             {
                                 content: element[this.props.request.content],
                                 value: element[this.props.request.value]
                             }
-                        ]
+                        )
                     })    
                     break
                 case 'getMyEntities':
                     response.myentities.forEach(element => {
-                        options = [
-                            ...options, 
+                        options.push(
                             {
                                 content: element[this.props.request.content],
                                 value: element[this.props.request.value]
                             }
-                        ]
+                        )
                     }) 
                     break
                 default:
                     break
             }
-            this.setState ({
-                options
+        } else {
+            this.props.options.forEach(element => {
+                options.push(
+                    {
+                        value: element,
+                        content: element
+                    }
+                )
             })
         }
+
+        this.setState ({
+            options
+        })
     }
 
     render() {
