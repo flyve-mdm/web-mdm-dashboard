@@ -31,8 +31,8 @@ export default class InvitationsList extends Component {
 
     componentDidUpdate() {
 
-        if (this.refs.listView !== undefined && !this.state.scrolling) {
-            this.refs.listView.winControl.footer.style.height = '1px'
+        if (this.listView && !this.state.scrolling) {
+            this.listView.winControl.footer.style.height = '1px'
         }
     }
 
