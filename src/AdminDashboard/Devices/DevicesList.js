@@ -17,7 +17,7 @@ export default class DevicesList extends Component {
             scrolling: false,
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
-            order: undefined,
+            order: "ASC",
             pagination: {
                 start: 0,
                 page: 1,
@@ -68,7 +68,7 @@ export default class DevicesList extends Component {
                 count: 15
             }
         })
-        this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12], range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+        this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
         .then((response) => {
             this.setState({
                 isLoading: false,
@@ -230,7 +230,7 @@ export default class DevicesList extends Component {
 
     loadMoreData = async () => {
         try {
-            const devices = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12], range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            const devices = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
             
             for (const item in devices.data) {
                 this.state.itemList.push(devices.data[item])
