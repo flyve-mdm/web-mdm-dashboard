@@ -13,26 +13,28 @@ export default class Enroll extends Component {
         }
     }
 
-    inviteDevice = () => {
-        if(this.state.email.trim() !== "") {
-            this.setState({
-                isLoading: true
-            })
-            this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmInvitation', input: { _useremails: this.state.email.trim()} })
-            .then((response) => {
+    inviteDevice = async () => {
+        try {
+            if (this.state.email.trim() !== "") {
+                
+                this.setState({
+                    isLoading: true
+                })
+                
+                await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmInvitation', input: { _useremails: this.state.email.trim() } })
                 
                 this.setState({
                     isLoading: false
                 })
+
                 this.props.showNotification('Success', 'invitation sent')
                 this.props.changeActionList(null)
-                
-            })
-            .catch((error) => {
-                if (error.length > 1) {
-                    this.props.showNotification(error[0], error[1])
-                }
-            })   
+ 
+            }
+        } catch (error) {
+            if (error.length > 1) {
+                this.props.showNotification(error[0], error[1])
+            }
         }
     }
 
