@@ -57,31 +57,31 @@ export default class DevicesList extends Component {
         )
     })
 
-    handleRefresh = () => {
-        this.props.onNavigate([this.props.location[0]])
-        this.setState({
-            isLoading: true,
-            scrolling: false,
-            pagination: {
-                start: 0,
-                page: 1,
-                count: 15
-            }
-        })
-        this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
-        .then((response) => {
+    handleRefresh = async () => {
+        try {
+            this.props.onNavigate([this.props.location[0]])
+            this.setState({
+                isLoading: true,
+                scrolling: false,
+                pagination: {
+                    start: 0,
+                    page: 1,
+                    count: 15
+                }
+            })
+            const devices = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 12], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
             this.setState({
                 isLoading: false,
-                order: response.order,
-                itemList: BuildItemList(response)
+                order: devices.order,
+                itemList: BuildItemList(devices)
             })
-        })
-        .catch((error) => {
+            
+        } catch (error) {
             this.setState({
                 isLoading: false,
-                order: undefined
+                order: "ASC"
             })
-        })
+        }
     }
 
     handleEdit = (eventObject) => {
@@ -136,78 +136,80 @@ export default class DevicesList extends Component {
     }
 
     handleDelete = async (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        const isOK = await Confirmation.isOK(this.contentDialog)
-        if (isOK) {
+        try {
+            let button = eventObject.currentTarget.winControl
+            const isOK = await Confirmation.isOK(this.contentDialog)
+            if (isOK) {
 
-            let itemListToDelete = this.state.selectedItemList.map((item) => {
-                return {
-                    id: item["PluginFlyvemdmAgent.id"]
-                }
-            })
-
-            this.setState({
-                isLoading: true
-            })
-            this.props.changeActionList(button.label)
-
-            this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })
-                .then((response) => {
-                    this.props.showNotification('Success', 'elements successfully removed')
-                    this.props.changeActionList(null)
-                    this.props.changeSelectionMode(false)
-                    this.setState({
-                        selectedItemList: []
-                    })
-                })
-                .catch((error) => {
-                    if (error.length > 1) {
-                        this.props.showNotification(error[0], error[1])
+                let itemListToDelete = this.state.selectedItemList.map((item) => {
+                    return {
+                        id: item["PluginFlyvemdmAgent.id"]
                     }
-                    this.props.changeActionList(null)
-                    this.props.changeSelectionMode(false)
-                    this.setState({
-                        selectedItemList: []
-                    })
                 })
-        } else {
-            // Clean another actions selected
+
+                this.setState({
+                    isLoading: true
+                })
+                this.props.changeActionList(button.label)
+
+                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })
+
+                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.changeActionList(null)
+                this.props.changeSelectionMode(false)
+                this.setState({
+                    selectedItemList: []
+                })
+            } else {
+                // Clean another actions selected
+                this.props.changeActionList(null)
+                // Exit selection mode
+                this.props.changeSelectionMode(false)
+                this.listView.winControl.selection.clear()
+                this.setState({
+                    selectedItemList: []
+                })
+            }
+            
+        } catch (error) {
+            if (error.length > 1) {
+                this.props.showNotification(error[0], error[1])
+            }
             this.props.changeActionList(null)
-            // Exit selection mode
             this.props.changeSelectionMode(false)
-            this.listView.winControl.selection.clear()
             this.setState({
                 selectedItemList: []
             })
         }
     }
 
-    handleSort = () => {
-        this.props.onNavigate([this.props.location[0]])
-        this.setState({
-            isLoading: true,
-            pagination: {
-                start: 0,
-                page: 1,
-                count: 15
-            }
-        })
-        let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
+    handleSort = async () => {
+        try {
+            this.props.onNavigate([this.props.location[0]])
+            this.setState({
+                isLoading: true,
+                pagination: {
+                    start: 0,
+                    page: 1,
+                    count: 15
+                }
+            })
+            let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-        this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, order: newOrder, forcedisplay: [2, 3, 12] } })
-            .then((response) => {
-                this.setState({
-                    isLoading: false,
-                    order: response.order,
-                    itemList: BuildItemList(response)
-                })
+            const devices = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, order: newOrder, forcedisplay: [2, 3, 12] } })
+
+            this.setState({
+                isLoading: false,
+                order: devices.order,
+                itemList: BuildItemList(devices)
             })
-            .catch((error) => {
-                this.setState({
-                    isLoading: false,
-                    order: undefined
-                })
+
+        } catch (error) {
+            this.setState({
+                isLoading: false,
+                order: "ASC"
             })
+        }
     }
 
     onLoadingStateChanged = (eventObject) => {
