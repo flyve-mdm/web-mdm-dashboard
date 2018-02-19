@@ -22,6 +22,12 @@ export default class DevicesEdit extends Component {
         })
     }
 
+    changeField = (name, value) => {
+        this.setState({
+            field: value
+        })
+    }
+
     render() {
         if (this.props.selectedItemList) {
 
