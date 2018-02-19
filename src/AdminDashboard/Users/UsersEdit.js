@@ -53,6 +53,101 @@ export default class DevicesEdit extends Component {
                             />
                         )
                     break
+
+                    case 'Title':
+                        input = (
+                            <Select
+                                label= "What will be the new value?"
+                                name="newValue"
+                                value={this.state.newValue}
+                                options={[]}
+                                function={this.change}
+                                glpi={this.props.glpi}
+                                request={{
+                                    params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
+                                    method: 'searchItems',
+                                    content: '1',
+                                    value: '2'
+                                }}
+                            />
+                        )
+                    break
+
+                    case 'Location':
+                        input = (
+                            <Select
+                                label= "What will be the new value?"
+                                name="newValue"
+                                value={this.state.newValue}
+                                options={[]}
+                                function={this.change}
+                                glpi={this.props.glpi}
+                                request={{
+                                    params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
+                                    method: 'searchItems',
+                                    content: '1',
+                                    value: '2'
+                                }}
+                            />
+                        )
+                    break
+
+                    case 'Default profile':
+                        input = (
+                            <Select
+                                label= "What will be the new value?"
+                                name="newValue"
+                                value={this.state.newValue}
+                                options={[]}
+                                function={this.change}
+                                glpi={this.props.glpi}
+                                request={{
+                                    params: {},
+                                    method: 'getMyProfiles',
+                                    content: 'name',
+                                    value: 'id'
+                                }}
+                            />
+                        )
+                    break
+
+                    case 'Category':
+                        input = (
+                            <Select
+                                label= "What will be the new value?"
+                                name="newValue"
+                                value={this.state.newValue}
+                                options={[]}
+                                function={this.change}
+                                glpi={this.props.glpi}
+                                request={{
+                                    params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
+                                    method: 'searchItems',
+                                    content: '1',
+                                    value: '2'
+                                }}
+                            />
+                        )  
+                    break
+
+                    case 'Default entity':
+                        input = (
+                            <Select
+                                label= "What will be the new value?"
+                                name="newValue"
+                                value={this.state.newValue}
+                                options={[]}
+                                function={this.change}
+                                glpi={this.props.glpi}
+                                request={{
+                                    params: {},
+                                    method: 'getMyEntities',
+                                    content: 'name',
+                                    value: 'id'
+                                }}
+                            />
+                        )  
+                    break
                 
                     default:
                         break
