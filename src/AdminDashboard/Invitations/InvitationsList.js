@@ -36,7 +36,7 @@ export default class InvitationsList extends Component {
             this.listView.winControl.footer.style.height = '1px'
         }
 
-        if (!this.props.actionList && (prevProps.actionList === 'Delete')) {
+        if (!this.props.actionList && (prevProps.actionList === 'Add' || prevProps.actionList === 'Delete')) {
             this.handleRefresh()
         }
     }
