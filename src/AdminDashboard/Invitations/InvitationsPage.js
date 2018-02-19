@@ -19,8 +19,10 @@ export default class InvitationsPage extends Component {
                     return (
                         <Enroll
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            changeActionList={this.props.changeActionList} 
-                            showNotification={this.props.showNotification}/>
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}
+                        />
                     )
                     default: 
                     return (
@@ -46,13 +48,12 @@ InvitationsPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     selectedIndex: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
