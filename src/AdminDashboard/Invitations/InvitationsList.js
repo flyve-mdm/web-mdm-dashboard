@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import BuildItemList from '../BuildItemList'
 import WinJS from 'winjs'
 import Loader from '../../Utils/Loader'
+import Confirmation from '../../Utils/Confirmation'
 
 export default class InvitationsList extends Component {
 
@@ -20,7 +21,7 @@ export default class InvitationsList extends Component {
             pagination: {
                 start: 0,
                 page: 1,
-                count:15
+                count: 15
             }
         }
     }
@@ -29,10 +30,14 @@ export default class InvitationsList extends Component {
         this.handleRefresh()
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
 
         if (this.listView && !this.state.scrolling) {
             this.listView.winControl.footer.style.height = '1px'
+        }
+
+        if (!this.props.actionList && (prevProps.actionList === 'Delete')) {
+            this.handleRefresh()
         }
     }
 
@@ -53,20 +58,37 @@ export default class InvitationsList extends Component {
     })
 
     handleToggleSelectionMode = () => {
-        this.setState({ selectedItemList: [] })
-        this.props.changeSelectionMode(!this.props.selectionMode)
-        this.props.changeActionList(null)
-        this.props.onNavigate([this.props.location[0]])
         this.listView.winControl.selection.clear()
+        this.props.changeActionList(null)
+        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.props.onNavigate([this.props.location[0]])
+        this.setState({
+            selectedItemList: []
+        })
     }
 
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        setTimeout(function () {
-            this.setState({ selectedItemList: index });
-            this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index] : this.props.location);
-        }.bind(this), 0)
+        let itemSelected = []
+
+        for (const item of index) {
+            itemSelected.push(this.state.itemList.getItem(item).data)
+        }
+
+        this.setState({
+            selectedItemList: itemSelected
+        })
+
+        if (this.props.actionList !== 'Edit') {
+
+            setTimeout(() => {
+                if (index.length !== 0) {
+                    this.props.changeActionList(null)
+                }
+                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
+            }, 0)
+        }
     }
 
     handleRefresh = async () => {
@@ -108,27 +130,51 @@ export default class InvitationsList extends Component {
         this.props.onNavigate([this.props.location[0]])
     }
 
-    handleDelete = () => {
-        // Clean another actions selected
-        this.props.changeActionList(null)
-        // Exit selection mode
-        this.props.changeSelectionMode(false)
-        
-        let item = this.props.dataSource.itemList
-        let index = this.state.selectedItemList
-        index.sort()
-        index.reverse()
-        index.forEach((i) => {
-            item.splice(i, 1)
-        })
-        this.setState({
-            selectedItem: []
-        })
-        this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-        if (this.state.selectedItemList.length > 1) {
-            this.props.showNotification('Success', 'invitation sent')                        
-        } else {
-            this.props.showNotification('Success', 'element successfully removed')         
+    handleDelete = async (eventObject) => {
+        try {
+            let button = eventObject.currentTarget.winControl
+            const isOK = await Confirmation.isOK(this.contentDialog)
+            if (isOK) {
+
+                let itemListToDelete = this.state.selectedItemList.map((item) => {
+                    return {
+                        id: item["PluginFlyvemdmInvitation.id"]
+                    }
+                })
+
+                this.setState({
+                    isLoading: true
+                })
+                this.props.changeActionList(button.label)
+
+                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmInvitation', input: itemListToDelete, queryString: { force_purge: true } })
+
+                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.changeActionList(null)
+                this.props.changeSelectionMode(false)
+                this.setState({
+                    selectedItemList: []
+                })
+            } else {
+                // Clean another actions selected
+                this.props.changeActionList(null)
+                // Exit selection mode
+                this.props.changeSelectionMode(false)
+                this.listView.winControl.selection.clear()
+                this.setState({
+                    selectedItemList: []
+                })
+            }
+
+        } catch (error) {
+            if (error.length > 1) {
+                this.props.showNotification(error[0], error[1])
+            }
+            this.props.changeActionList(null)
+            this.props.changeSelectionMode(false)
+            this.setState({
+                selectedItemList: []
+            })
         }
     }
 
@@ -216,6 +262,7 @@ export default class InvitationsList extends Component {
             <ReactWinJS.ToolBar.Button
                 key="delete"
                 icon="delete"
+                label="Delete"
                 priority={0}
                 disabled={this.state.selectedItemList.length === 0}
                 onClick={this.handleDelete}
@@ -296,7 +343,7 @@ export default class InvitationsList extends Component {
                 </ReactWinJS.ToolBar>
 
                 { listComponent }
-                
+                <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.selectedItemList.length + ` ` + this.props.location[0]} reference={el => this.contentDialog = el} /> 
             </div>
         )
     }
@@ -307,8 +354,6 @@ InvitationsList.propTypes = {
         PropTypes.number
     ]).isRequired,
     animation: PropTypes.bool.isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectionMode: PropTypes.bool.isRequired,
