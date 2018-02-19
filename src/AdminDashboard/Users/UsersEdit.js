@@ -11,54 +11,15 @@ export default class DevicesEdit extends Component {
         super(props)
         this.state = {
             itemListEdit: [...this.props.selectedItemList],
-            isLoading: false
+            isLoading: false,
+            field: undefined
         }
-    }
-
-    updateItemList = (index, name) => {
-        let newItem = [...this.state.itemListEdit]
-
-        //Find index of specific object using findIndex method.    
-        let objIndex = newItem.findIndex((obj => obj["User.id"] === index))
-
-        //Update object's name property.
-        newItem[objIndex]["User.name"] = name
-
-        this.setState({
-            itemListEdit: [...newItem]
-        })
     }
 
     handleSaveDevices = async () => {
-        let itemListToSave = this.state.itemListEdit.map((item) => {
-            return {
-                id: item["User.id"],
-                name: item["User.name"]
-            }
-        })
-
         this.setState({
             isLoading: true
         })
-
-        if (itemListToSave.length > 0) {
-            try {
-                await this.props.glpi.updateItem({ itemtype: "User", input: itemListToSave })
-                this.setState({isLoading: false})
-                this.props.changeActionList(null)
-                this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
-                this.props.showNotification('Success', 'changes saved successfully')
-            } catch (error) {
-                if (error.length > 1) {
-                    this.props.showNotification(error[0], error[1])
-                }
-                this.setState({isLoading: false})
-                this.props.changeActionList(null)
-                this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
-            }
-        }
     }
 
     render() {
@@ -68,24 +29,33 @@ export default class DevicesEdit extends Component {
             if (this.state.isLoading) {
                 renderComponent = <Loading message="Loading..." />
             } else {
-                renderComponent = this.props.selectedItemList.map((item) => {                                
-                    return (
-                        <UsersEditItemList
-                            key={item["User.id"]}
-                            itemListPaneWidth={this.props.itemListPaneWidth}
-                            updateItemList={this.updateItemList}
-                            location={this.props.location}
-                            currentItem={item}
-                            changeActionList={this.props.changeActionList} 
-                        />
-                    )
-                })
+                let input
+                switch (this.state.field) {
+                    case '':
+                        
+                        break
+                
+                    default:
+                        break
+                }
+                renderComponent = (
+                    <div>{input}</div>
+                )
             }              
 
             return (
                 <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
+                        <h4  className="win-h4">
+                            Select the field that you want to update
+                        </h4>
+                        <select className="win-dropdown" name="field" value={this.state.field} onChange={this.changeField}>
+                            <option>
+                                ---
+                            </option>
+                        </select>
+                        <br/>
                         <button className="win-button win-button-primary" onClick={this.handleSaveDevices}>
                             Save
                         </button>
