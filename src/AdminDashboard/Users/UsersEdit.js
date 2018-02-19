@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ContentPane from '../../Utils/ContentPane'
 import EmptyMessage from '../../Utils/EmptyMessage'
 import Loading from '../../Utils/Loading'
-import { Select, Input } from '../../Utils/Forms'
+import { Select, Input, DatePicker } from '../../Utils/Forms'
 
 export default class DevicesEdit extends Component {
 
@@ -133,7 +133,7 @@ export default class DevicesEdit extends Component {
                     case 'Default entity':
                         input = (
                             <Select
-                                label= "What will be the new value?"
+                                label="What will be the new value?"
                                 name="newValue"
                                 value={this.state.newValue}
                                 options={[]}
@@ -147,6 +147,18 @@ export default class DevicesEdit extends Component {
                                 }}
                             />
                         )  
+                    break
+
+                    case 'Valid since':
+                    case 'Valid until':
+                        input = (
+                            <DatePicker
+                                label="What will be the new value?"
+                                name="newValue"
+                                value={this.state.newValue}
+                                function={this.change}
+                            />
+                        )
                     break
                 
                     default:
