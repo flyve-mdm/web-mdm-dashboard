@@ -94,7 +94,7 @@ export default class InvitationsList extends Component {
         } catch (error) {
             this.setState({
                 isLoading: false,
-                order: undefined
+                order: "ASC"
             })
         }
     }
@@ -178,23 +178,6 @@ export default class InvitationsList extends Component {
                     scrolling: true
                 })
             }, 0)
-        }
-    }
-
-    onFooterVisibilityChanged = (eventObject) => {
-
-        let listView = eventObject.currentTarget.winControl
-
-        if (eventObject.detail.visible && this.state.scrolling) {
-            listView.footer.style.height = '100px'
-            setTimeout(() => {
-                listView.footer.style.height = '1px'
-            }, 3000)
-
-        } else {
-            setTimeout(() => {
-                listView.footer.style.height = '1px'
-            }, 3000)
         }
     }
 
