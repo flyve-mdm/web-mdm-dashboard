@@ -57,7 +57,7 @@ export default class InvitationsList extends Component {
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
-        this.refs.listView.winControl.selection.clear()
+        this.listView.winControl.selection.clear()
     }
 
     handleSelectionChanged = (eventObject) => {
@@ -101,7 +101,7 @@ export default class InvitationsList extends Component {
 
     handlePanel = (eventObject) => {
         let button = eventObject.currentTarget.winControl
-        this.refs.listView.winControl.selection.clear()
+        this.listView.winControl.selection.clear()
 
         this.props.changeSelectionMode(false)
         this.props.changeActionList(button.label)
