@@ -45,7 +45,11 @@ export default class Enroll extends Component {
     render() {
         let renderComponent
         if (this.state.isLoading) {
-            renderComponent = <Loading message="Loading..." />
+            renderComponent = (
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                    <Loading message="Loading..." />
+                </ContentPane >
+            )
         } else {
             renderComponent = (
                 <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
