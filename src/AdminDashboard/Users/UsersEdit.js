@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ContentPane from '../../Utils/ContentPane'
 import EmptyMessage from '../../Utils/EmptyMessage'
 import Loading from '../../Utils/Loading'
-import { Select, Input, DatePicker } from '../../Utils/Forms'
+import { Select, Input, DatePicker, TextArea } from '../../Utils/Forms'
 
 export default class DevicesEdit extends Component {
 
@@ -13,7 +13,8 @@ export default class DevicesEdit extends Component {
             itemListEdit: [...this.props.selectedItemList],
             isLoading: false,
             field: undefined,
-            newValue: ''
+            newValue: '',
+            passwordConfirmation: undefined
         }
     }
 
@@ -52,6 +53,29 @@ export default class DevicesEdit extends Component {
                                 function={this.change}
                             />
                         )
+                    break
+
+                    case 'Password':
+                        input = [
+                            <Input
+                                label="What is the new password?"
+                                type="password"
+                                name="newValue"
+                                value={this.state.newValue}
+                                // parametersToEvaluate={}
+                                function={this.change}
+                                key="password-1"
+                            />,
+                            <Input
+                                label="Please repeat the password"
+                                type="password"
+                                name="passwordConfirmation"
+                                value={this.state.newValue}
+                                // parametersToEvaluate={}
+                                function={this.change}
+                                key="password-2"
+                            />
+                        ]
                     break
 
                     case 'Title':
@@ -154,6 +178,18 @@ export default class DevicesEdit extends Component {
                         input = (
                             <DatePicker
                                 label="What will be the new value?"
+                                name="newValue"
+                                value={this.state.newValue}
+                                function={this.change}
+                            />
+                        )
+                    break
+
+                    case 'Comments': 
+                        input = (
+                            <TextArea
+                                label="What will be the new value?"
+                                type="text"
                                 name="newValue"
                                 value={this.state.newValue}
                                 function={this.change}
