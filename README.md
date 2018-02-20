@@ -18,6 +18,7 @@ To get started, check out [Flyve MDM website](https://flyve-mdm.com/)!
 * [Synopsis](#synopsis)
 * [Build Status](#build-status)
 * [Compatibility Matrix](#matrix)
+* [Installation](#installation)
 * [Documentation](#documentation)
 * [Versioning](#versioning)
 * [Contact](#contact)
@@ -54,6 +55,10 @@ For more information visit our [website](http://flyve.org/web-mdm-dashboard/).
 |**GLPI Version**|9.1.1|9.1.2|9.1.3|9.1.5|9.1.6|9.2.0|
 |:----|----|----|----|---|---|---|
 |**GLPI API Client**|||||||
+
+## Installation
+
+Instructions are available on the website, see our [Installation article](http://flyve.org/web-mdm-dashboard/howtos/installation)
 
 ## Documentation
 
