@@ -72,6 +72,21 @@ class Main extends Component {
     handleEdit = () => {
         this.props.changeActionList("EditOne")
     }
+
+    ping = async () => {
+        try {
+            const response = await this.props.glpi.genericRequest({
+                path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
+                requestParams: {
+                    method: 'PUT',
+                    body: JSON.stringify({"input":{"_ping": ""}})
+                }
+            })
+            this.props.showNotification('Success', response[0].message)
+        } catch (error) {
+            this.props.showNotification(error[0], error[1])
+        }
+    }
     
     render() {
         let renderComponent 
@@ -100,11 +115,22 @@ class Main extends Component {
                                     this.state.data["is_online"] === 1 ? 'Online' : 'Offline'
                                 }
                             </div>
-                            <div className="source">{this.state.data["last_contact"]} last contact</div>
-                            <br />
-                            <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
-                            <span className="deleteIcon" onClick={this.handleDelete} />
-                        </div>
+                            <div className="source">
+                                {this.state.data["last_contact"]} 
+                                last contact
+                            </div>   
+                            <div>
+                                <br/>
+                                <br/>                                
+                                <button className="win-button win-button-primary" style={{float:'left'}} onClick={this.ping}>
+                                    PING
+                                </button>
+                                
+                                <br/>
+                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
+                                <span className="deleteIcon" onClick={this.handleDelete} />
+                            </div>
+                        </div>                        
                     </div>
                 </div>
                 <div className="separator" />
