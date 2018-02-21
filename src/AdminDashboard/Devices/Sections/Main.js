@@ -10,7 +10,8 @@ class Main extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: undefined
+            data: undefined,
+            sendingPing: false
         }
     }
 
@@ -73,19 +74,25 @@ class Main extends Component {
         this.props.changeActionList("EditOne")
     }
 
-    ping = async () => {
-        try {
-            const response = await this.props.glpi.genericRequest({
-                path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
-                requestParams: {
-                    method: 'PUT',
-                    body: JSON.stringify({"input":{"_ping": ""}})
-                }
-            })
-            this.props.showNotification('Success', response[0].message)
-        } catch (error) {
-            this.props.showNotification(error[0], error[1])
-        }
+    ping = () => {
+        this.setState({
+            sendingPing: true
+        }, async () => {
+            try {
+                const response = await this.props.glpi.genericRequest({
+                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
+                    requestParams: {
+                        method: 'PUT',
+                        body: JSON.stringify({"input":{"_ping": ""}})
+                    }
+                })
+                this.props.showNotification('Success', response[0].message)
+                this.setState({ sendingPing: false })
+            } catch (error) {
+                this.props.showNotification(error[0], error[1])
+                this.setState({ sendingPing: false })
+            }
+        })
     }
     
     render() {
@@ -119,14 +126,16 @@ class Main extends Component {
                                 {this.state.data["last_contact"]} 
                                 last contact
                             </div>   
+                            <div style={{overflow: 'auto'}}>
+                                <div>
+                                    <button className="win-button win-button-primary" style={{float:'left', marginTop: 5, marginBottom: 5}} onClick={this.ping}>
+                                        PING
+                                    </button>
+                                </div>       
+
+                                { this.state.sendingPing ? <Loading small/> : '' }
+                            </div>
                             <div>
-                                <br/>
-                                <br/>                                
-                                <button className="win-button win-button-primary" style={{float:'left'}} onClick={this.ping}>
-                                    PING
-                                </button>
-                                
-                                <br/>
                                 <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
                                 <span className="deleteIcon" onClick={this.handleDelete} />
                             </div>
