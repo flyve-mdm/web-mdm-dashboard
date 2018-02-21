@@ -7,15 +7,10 @@ import EmptyMessage from '../../Utils/EmptyMessage'
 export default class InvitationsPage extends Component {
 
     render() {
-        if (this.props.selectedIndex === null) {
-            if(this.props.actionList === null) {
-                return (
-                    <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
-                )
-            } else {
-                switch (this.props.actionList) {
-        
-                    case "Add":
+        if (this.props.selectedItemList === null || this.props.actionList === 'Edit') {
+            switch (this.props.actionList) {
+
+                case "Add":
                     return (
                         <Enroll
                             itemListPaneWidth={this.props.itemListPaneWidth}
@@ -24,22 +19,36 @@ export default class InvitationsPage extends Component {
                             glpi={this.props.glpi}
                         />
                     )
-                    default: 
+                default:
+                    return (
+                        <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
+                    )
+            }
+        } else {
+            if (this.props.actionList === null) {
+
+                if (this.props.selectedItemList.length > 0) {
+                    return (
+                        <InvitationsPendingPage
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            changeSelectionMode={this.props.changeSelectionMode}
+                            location={this.props.location}
+                            onNavigate={this.props.onNavigate}
+                            selectedItemList={this.props.selectedItemList}
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}  />
+                    )
+                } else {
                     return (
                         <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
                     )
                 }
+            } else {
+                return (
+                    <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
+                )
             }
-        } else {
-
-            const selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
-
-            return (
-                <InvitationsPendingPage
-                itemListPaneWidth={this.props.itemListPaneWidth}
-                location={this.props.location}
-                currentItem={selectedItemList} />
-            )
         }
     }
 }
