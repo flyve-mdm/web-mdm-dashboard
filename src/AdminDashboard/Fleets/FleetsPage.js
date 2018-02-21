@@ -9,15 +9,15 @@ import FleetsEdit from './FleetsEdit'
 export default class FleetsPage extends Component {
     
     render() {
-        if (this.props.selectedIndex === null || this.props.actionList === 'Edit') {
+                console.log(this.props.selectedItemList)
+
+        if (this.props.selectedItemList === null || this.props.actionList === 'Edit') {
             switch (this.props.actionList) {
 
                 case "Add":
                     return (
                         <FleetsNew
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             changeActionList={this.props.changeActionList}
                             changeCurrentItem={this.props.changeCurrentItem} 
@@ -28,11 +28,9 @@ export default class FleetsPage extends Component {
                     return (
                         <FleetsContent
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
-                            currentItem={this.props.currentItem}
+                            selectedItemList={this.props.selectedItemList}
                             changeActionList={this.props.changeActionList} 
                             showNotification={this.props.showNotification}
                         />
@@ -45,8 +43,6 @@ export default class FleetsPage extends Component {
                     return (
                         <FleetsEdit
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
@@ -62,17 +58,13 @@ export default class FleetsPage extends Component {
             
         } else {
             if (this.props.actionList === null) {
-                let selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
-                if (selectedItemList !== undefined) {
+                if (this.props.selectedItemList.length > 0) {
                     return (
                         <FleetsContent
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
-                            selectedIndex={this.props.selectedIndex}
-                            currentItem={selectedItemList}
+                            selectedItemList={this.props.selectedItemList}
                             changeActionList={this.props.changeActionList} 
                             showNotification={this.props.showNotification}
                         />
@@ -86,8 +78,6 @@ export default class FleetsPage extends Component {
                 return (
                     <FleetsEdit
                         itemListPaneWidth={this.props.itemListPaneWidth}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
                         changeSelectionMode={this.props.changeSelectionMode}
@@ -104,8 +94,6 @@ FleetsPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     selectedIndex: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,

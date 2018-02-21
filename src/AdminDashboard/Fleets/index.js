@@ -7,7 +7,12 @@ export default class Fleets extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectionMode: false
+            selectionMode: false,
+            policiesData: null
+        }
+
+        this.fecthPolicies = () => {
+            return this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPolicy', options: { uid_cols: true, forcedisplay: [2]}})
         }
     }
 
@@ -19,9 +24,10 @@ export default class Fleets extends Component {
 
     render() {
 
-        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
+        let selectedItemList = this.props.location.length === 2 ? this.props.location[1] : null
+        console.log(this.props.actionList, selectedItemList)
         if (this.props.mode === 'small') {
-            if (selectedIndex === null && this.props.actionList === null) {
+            if (selectedItemList === null && this.props.actionList === null) {
                 return <FleetsList
                     itemListPaneWidth={'100%'}
                     animation={this.props.animation}
@@ -43,13 +49,11 @@ export default class Fleets extends Component {
                 return <FleetsPage
                     itemListPaneWidth={0}
                     animation={this.props.animation}
-                    dataSource={this.props.dataSource}
-                    changeDataSource={this.props.changeDataSource}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
-                    selectedIndex={selectedIndex}
+                    selectedItemList={selectedItemList}
                     changeSelectionMode={this.changeSelectionMode}
-                    changeCurrentItem={this.props.changeCurrentItem}
+                    //changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} 
                     showNotification={this.props.showNotification} 
@@ -81,14 +85,11 @@ export default class Fleets extends Component {
                     <FleetsPage
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
-                        selectedIndex={selectedIndex}
+                        selectedItemList={selectedItemList}
                         changeSelectionMode={this.changeSelectionMode}
                         currentItem={this.props.currentItem}
-                        changeCurrentItem={this.props.changeCurrentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
                         showNotification={this.props.showNotification} 
