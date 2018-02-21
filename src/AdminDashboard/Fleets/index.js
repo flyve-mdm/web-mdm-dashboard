@@ -11,9 +11,14 @@ export default class Fleets extends Component {
             policiesData: null
         }
 
-        this.fecthPolicies = () => {
-            return this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPolicy', options: { uid_cols: true, forcedisplay: [2]}})
+        this.fecthPolicies =  () => {  
+            return this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPolicy', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 6]}})
         }
+    }
+
+    componentDidMount = async () => {
+        let policiesData = await this.fecthPolicies()
+        this.setState({policiesData: policiesData.data})
     }
 
     changeSelectionMode = (selectionMode) => {
@@ -25,7 +30,6 @@ export default class Fleets extends Component {
     render() {
 
         let selectedItemList = this.props.location.length === 2 ? this.props.location[1] : null
-        console.log(this.props.actionList, selectedItemList)
         if (this.props.mode === 'small') {
             if (selectedItemList === null && this.props.actionList === null) {
                 return <FleetsList
@@ -43,7 +47,7 @@ export default class Fleets extends Component {
                     changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification} 
+                    showNotification={this.props.showNotification}
                     glpi={this.props.glpi} />
             } else {
                 return <FleetsPage
@@ -53,10 +57,10 @@ export default class Fleets extends Component {
                     onNavigate={this.props.onNavigate}
                     selectedItemList={selectedItemList}
                     changeSelectionMode={this.changeSelectionMode}
-                    //changeCurrentItem={this.props.changeCurrentItem}
                     actionList={this.props.actionList}
                     changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification} 
+                    showNotification={this.props.showNotification}
+                    policiesData={this.state.policiesData}
                     glpi={this.props.glpi} />
             }
         } else {
@@ -92,7 +96,8 @@ export default class Fleets extends Component {
                         currentItem={this.props.currentItem}
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification} 
+                        showNotification={this.props.showNotification}
+                        policiesData={this.state.policiesData} 
                         glpi={this.props.glpi}
                     />
                 </div>

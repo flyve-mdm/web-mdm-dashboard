@@ -67,6 +67,7 @@ export default class FleetsPage extends Component {
                             selectedItemList={this.props.selectedItemList}
                             changeActionList={this.props.changeActionList} 
                             showNotification={this.props.showNotification}
+                            policiesData={this.props.policiesData}
                         />
                     )
                 } else {

@@ -170,8 +170,8 @@ export default class FleetsContent extends Component {
 
         let renderComponent
 
-        if (this.state.list) {
-            renderComponent = this.state.list.map((item, index) => {
+        if (this.props.policiesData) {
+            renderComponent = this.props.policiesData.map((item, index) => {
                 return (
                     <FleetsTaskItemList
                         key={[item['PluginFlyvemdmPolicy.name'], index].join("_")}
@@ -206,6 +206,8 @@ export default class FleetsContent extends Component {
                     { addPolicy }
                 </div>
                 { renderComponent }
+
+
                 <Confirmation title={`Delete ` + this.props.location[0]} message={this.props.selectedItemList[0]["PluginFlyvemdmFleet.name"]} reference={el => this.contentDialog = el} />
             </ContentPane>
         )
