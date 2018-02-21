@@ -87,7 +87,9 @@ class Main extends Component {
                     }
                 })
                 this.props.showNotification('Success', response[0].message)
-                this.setState({ sendingPing: false })
+                this.setState({ sendingPing: false }, () => {
+                    this.handleRefresh()
+                })
             } catch (error) {
                 this.props.showNotification(error[0], error[1])
                 this.setState({ sendingPing: false })
