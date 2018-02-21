@@ -7,38 +7,56 @@
         font-weight: 200;
     }
 
+    .small-loader {
+        position: relative;
+        width: 10px;
+        margin: auto;
+        .circle {
+            width: 18px;
+            height: 18px;
+            &:after {
+                width: 3px;
+                height: 3px;
+            }
+        }
+    }
+
     .loader {
         position: relative;
         width: 40px;
         margin: auto;
-      
         .circle {
-            position: absolute;
             width: 48px;
             height: 48px;
-            opacity: 0;
-            transform: rotate(225deg);
-            animation-iteration-count: infinite;
-            animation-name: orbit;
-            animation-duration: 5.5s;
-            
             &:after {
-                content: '';
-                position: absolute;
                 width: 5px;
                 height: 5px;
-                border-radius: 5px;
-                background: $app-color; /* Pick a color */
             }
-            
-            &:nth-child(2) {  animation-delay: 240ms; }
-            &:nth-child(3) {  animation-delay: 480ms; }
-            &:nth-child(4) {  animation-delay: 720ms; }
-            &:nth-child(5) {  animation-delay: 960ms; }
         }
-      }
-      
-      @keyframes orbit { 
+    }
+
+    .circle {
+        position: absolute;
+        opacity: 0;
+        transform: rotate(225deg);
+        animation-iteration-count: infinite;
+        animation-name: orbit;
+        animation-duration: 5.5s;
+        
+        &:after {
+            content: '';
+            position: absolute;
+            border-radius: 5px;
+            background: $app-color; /* Pick a color */
+        }
+        
+        &:nth-child(2) { animation-delay: 240ms; }
+        &:nth-child(3) { animation-delay: 480ms; }
+        &:nth-child(4) { animation-delay: 720ms; }
+        &:nth-child(5) { animation-delay: 960ms; }
+    }
+
+    @keyframes orbit { 
         0%  { 
             transform:rotate(225deg); 
             opacity: 1;
@@ -73,5 +91,5 @@
             transform:rotate(945deg); 
             opacity: 0; 
         } 
-      }
+    }
 }
