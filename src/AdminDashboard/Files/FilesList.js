@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import FilesItemList from './FilesItemList'
-import ItemList from '../ItemList'
 import Loader from '../../Utils/Loader'
 import Confirmation from '../../Utils/Confirmation'
 
@@ -14,7 +13,15 @@ export default class FilesList extends Component {
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
             selectedItemList: [],
-            scrolling: false
+            scrolling: false,
+            isLoading: false,
+            itemList: new WinJS.Binding.List([]),
+            order: "ASC",
+            pagination: {
+                start: 0,
+                page: 1,
+                count: 15
+            }
         }
     }
 
@@ -22,9 +29,13 @@ export default class FilesList extends Component {
         this.handleRefresh()
     }
 
-    componentDidUpdate() {
-        if (this.refs.listView !== undefined && !this.state.scrolling) {
-            this.refs.listView.winControl.footer.style.height = '1px'
+    componentDidUpdate(prevProps) {
+        if (this.listView && !this.state.scrolling) {
+            this.listView.winControl.footer.style.height = '1px'
+        }
+
+        if (!this.props.actionList && (prevProps.actionList === 'Edit' || prevProps.actionList === 'EditOne' || prevProps.actionList === 'Delete')) {
+            this.handleRefresh()
         }
     }
 
@@ -45,6 +56,33 @@ export default class FilesList extends Component {
         )
     })
 
+    handleRefresh = async () => {
+        try {
+            this.props.onNavigate([this.props.location[0]])
+            this.setState({
+                isLoading: true,
+                scrolling: false,
+                pagination: {
+                    start: 0,
+                    page: 1,
+                    count: 15
+                }
+            })
+            const files = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFile', options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            this.setState({
+                isLoading: false,
+                order: files.order,
+                itemList: new WinJS.Binding.List(files.data),
+            })
+
+        } catch (error) {
+            this.setState({
+                isLoading: false,
+                order: "ASC"
+            })
+        }
+    }
+
     handleToggleSelectionMode = () => {
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.onNavigate([this.props.location[0]])
@@ -58,11 +96,6 @@ export default class FilesList extends Component {
             this.setState({ selectedItemList: index })
             this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
         }, 0)
-    }
-
-    handleRefresh = () => {
-        this.props.onNavigate([this.props.location[0]])
-        this.props.fetchData(this.props.location[0])
     }
 
     handleEdit = (eventObject) => {
@@ -132,7 +165,7 @@ export default class FilesList extends Component {
         this.props.dataSource.itemList.map((value, index) =>
             array.push(value)
         )
-        this.props.changeDataSource(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.dataSource.sort), sort: !this.props.dataSource.sort })
+        // this.props.changeDataSource(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.dataSource.sort), sort: !this.props.dataSource.sort })
     }
 
     descendingCompare(first, second) {
@@ -195,20 +228,18 @@ export default class FilesList extends Component {
 
         let listComponent = <Loader count={3} />
 
-        if (this.isError) {
-            listComponent = "Error"
-        } else if (!this.props.isLoading) {
+        if (!this.state.isLoading && this.state.itemList.length > 0) {
             listComponent = (
                 <ReactWinJS.ListView
-                    ref="listView"
+                    ref={(listView) => { this.listView = listView }}
                     onLoadingStateChanged={this.onLoadingStateChanged}
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.props.dataSource.itemList.dataSource}
+                    itemDataSource={this.state.itemList.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
                     footerComponent={<Loader />}
-                    onFooterVisibilityChanged={this.onFooterVisibilityChanged}
+                    onFooterVisibilityChanged={this.showFooterList}
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
                     tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
