@@ -92,7 +92,7 @@
     "sass-loader": "^6.0.6",
     "standard-version": "^4.2.0"
   },
-  "homepage": "http://flyve.org/web-admin-dashboard/",
+  "homepage": ".",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"
