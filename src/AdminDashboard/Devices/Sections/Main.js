@@ -86,7 +86,7 @@ class Main extends Component {
                         body: JSON.stringify({"input":{"_ping": ""}})
                     }
                 })
-                this.props.showNotification('Success', response[0].message)
+                this.props.showNotification('Success', response[0].message ? response[0].message : "Ping sent")
                 this.setState({ sendingPing: false }, () => {
                     this.handleRefresh()
                 })
