@@ -5,6 +5,7 @@
     "type": "git",
     "url": "git://github.com/flyve-mdm/web-mdm-dashboard.git"
   },
+  "license": "GPL-3.0",
   "dependencies": {
     "@glpi-project/javascript-library-glpi": ">=0.1.0-beta <=1.0.0",
     "autoprefixer": "8.0.0",
