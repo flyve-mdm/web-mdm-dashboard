@@ -2,68 +2,104 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import Pluralize from 'pluralize'
-import InvitationsLog from '../data/invitationsLog.json'
 import WinJS from 'winjs'
-import ItemList from '../ItemList'
 import EmptyMessage from '../../Utils/EmptyMessage'
 import ContentPane from '../../Utils/ContentPane'
+import Loader from '../../Utils/Loader'
 
 export default class InvitationsPendingPage extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            layout: { type: WinJS.UI.ListLayout }
+            layout: { type: WinJS.UI.ListLayout },
+            isLoading: false,
+            itemList: new WinJS.Binding.List([])
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (this.props.selectedItemList !== prevProps.selectedItemList) {
+            this.handleRefresh()
+        }
+    }
+
+    componentDidMount() {
+        this.handleRefresh()
+    }
+
+    handleRefresh = async () => {
+        try {
+            this.setState({
+                isLoading: true
+            })
+
+            const idInvitation = this.props.selectedItemList[0]["PluginFlyvemdmInvitation.id"] !== null ? this.props.selectedItemList[0]["PluginFlyvemdmInvitation.id"] : ""
+            const logs = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmInvitationlog', options: { uid_cols: true, forcedisplay: [2, 3, 4, 5] }, criteria: [{ field: '4', searchtype: 'equal', value: idInvitation }] })
+
+            this.setState({
+                isLoading: false,
+                itemList: new WinJS.Binding.List(logs.data)
+            })
+            
+        } catch (error) {
+            this.setState({
+                isLoading: false,
+                itemList: new WinJS.Binding.List([])
+            })
         }
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <div style={{ padding: '14px', width: '100%' }}>
-                <b>{ItemList.data['PluginFlyvemdmInvitationLog.PluginFlyvemdmInvitationlog.event']}</b>
+                <b>{ItemList.data['PluginFlyvemdmInvitationlog.event']}</b>
                 <br />
-                {ItemList.data['PluginFlyvemdmInvitationLog.PluginFlyvemdmInvitationlog.date_creation']}
+                {ItemList.data['PluginFlyvemdmInvitationlog.date_creation']}
             </div>
         )
     })
 
     render() {
-        let currentLog = []
 
-        for (let index = 0; index < InvitationsLog.data.length; index++) {
-            const element = InvitationsLog.data[index]
-            if (element['PluginFlyvemdmInvitationLog.PluginFlyvemdmInvitation.id'] === this.props.currentItem['PluginFlyvemdmInvitation.id']) {
-                currentLog.push(element)
-            }
-        }
-
-        if (currentLog.length > 0) {
-            let currentListItemLogs = ItemList('InvitationsLog', currentLog)
-
-            return (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true}>
-                    <div className="listPane" style={{ padding: 0 }}>
+        let listComponent = (
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                <div className="listPane" style={{ padding: 0 }}>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" >Pending {Pluralize.singular(this.props.location[0])} </h2>
                     </div>
-                    <ReactWinJS.ListView
-                        ref="listView"
-                        className="contentListView win-selectionstylefilled"
-                        style={{ height: 'calc(100% - 48px)' }}
-                        itemDataSource={currentListItemLogs.dataSource}
-                        itemTemplate={this.ItemListRenderer}
-                        layout={this.state.layout}
-                        selectionMode={'single'}
-                    />
+                    <Loader count={1} />
+                </div>
+            </ContentPane>
+        )
+
+        if (!this.state.isLoading && this.state.itemList.length > 0) {
+            listComponent = (
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                    <div className="listPane" style={{ padding: 0 }}>
+                        <div className="contentHeader">
+                            <h2 className="win-h2 titleContentPane" >Pending {Pluralize.singular(this.props.location[0])} </h2>
+                        </div>
+                        <ReactWinJS.ListView
+                            ref={(listView) => { this.listView = listView }}
+                            className="contentListView win-selectionstylefilled"
+                            style={{ height: 'calc(100% - 48px)' }}
+                            itemDataSource={this.state.itemList.dataSource}
+                            itemTemplate={this.ItemListRenderer}
+                            layout={this.state.layout}
+                            selectionMode={'single'}
+                        />
                     </div>
                 </ContentPane>
+                
             )
-        } else {
-
-            return (
+        } else if (!this.state.isLoading && this.state.itemList.length === 0) {
+            listComponent = (
                 <EmptyMessage message="No Logs Available" itemListPaneWidth={this.props.itemListPaneWidth} />
             )
         }
+
+        return listComponent
     }
 }
 InvitationsPendingPage.propTypes = {
@@ -71,6 +107,10 @@ InvitationsPendingPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
+    changeActionList: PropTypes.func.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
-    currentItem: PropTypes.object.isRequired
+    selectedItemList: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
 }
