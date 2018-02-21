@@ -126,7 +126,7 @@ class Main extends Component {
                             </div>
                             <div className="source">
                                 {this.state.data["last_contact"]} 
-                                last contact
+                                &nbsp; last contact
                             </div>   
                             <div style={{overflow: 'auto'}}>
                                 <div>
