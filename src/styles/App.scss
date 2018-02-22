@@ -163,7 +163,6 @@ $list-item-icon-size: 48px;
 
         .controller {
             padding: 15px 15px 15px 0;                
-            float: right;
             display: inline-block;
             
             .win-toggleswitch-values {
@@ -385,7 +384,7 @@ $list-item-icon-size: 48px;
 
                 .contentStatus {
                     width: 240px;
-                    margin-left:20px;
+                    margin-left:11px;
                     margin-top:10px;
 
                     .message {
@@ -558,7 +557,9 @@ $list-item-icon-size: 48px;
     .cancelIcon:before {
         content: "\E711";        
     }
-
+    .removeIcon:before {
+        content: "\E738";        
+    }
     .files-dropzone {
         text-align: center;
         padding: 60px;
@@ -592,6 +593,7 @@ $list-item-icon-size: 48px;
                     span {
                         font-size: 32px;
                         text-align: center;
+                        cursor: pointer;
                     }
                 }
 
@@ -620,6 +622,24 @@ $list-item-icon-size: 48px;
                     color: $text-detail-color;
                 }
             }
+        }
+
+        &.fleet-list {
+            padding: 10px 5px;
+
+            .item-content-primary {
+                .item-list-field {
+                    transition: opacity 1s ease-out;
+                    opacity: 0; 
+                    height: 0;
+                    overflow: hidden;
+
+                    &.active {
+                        opacity: 1;
+                        height: auto;
+                    }
+                }
+            }        
         }
     }
 }

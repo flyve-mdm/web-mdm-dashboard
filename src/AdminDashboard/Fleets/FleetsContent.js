@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ReactWinJS from 'react-winjs'
 import Pluralize from 'pluralize'
 import ContentPane from '../../Utils/ContentPane'
-import IconItemList from '../IconItemList'
-// import Policies from '../data/policies.json'
-// import ItemList from '../ItemList'
 import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
 import Confirmation from '../../Utils/Confirmation'
@@ -14,30 +10,9 @@ export default class FleetsContent extends Component {
 
     constructor(props) {
         super(props)
-        // let policies = this.props.currentItem['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype']
         this.state = {
-            // suggestionList: Policies.data.map(function(policy) { return policy['PluginFlyvemdmPolicy.name'] }),
-            //list: policies ? policies : [],
             layout: { type: WinJS.UI.ListLayout },
-            addPolicy: false
         }
-    }
-
-    savePolicies = () => {
-        // if (this.props.dataSource.itemList && this.state.list) {
-        //     const itemList = this.props.dataSource.itemList.map((item) => item)
-        //     const items_id = this.state.list.map((item) => item['PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id'])
-        //     const newCurrentItem = {
-        //         ...this.props.currentItem,
-        //         'PluginFlyvemdmFleet.PluginFlyvemdmTask.items_id': items_id,
-        //         'PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype': this.state.list
-        //     }
-        //     const newList = itemList.map(item => item === this.props.currentItem ? newCurrentItem : item)
-        //     this.props.changeActionList(null)
-        //     this.props.onNavigate([this.props.location[0]])
-        //     this.props.changeDataSource([this.props.location[0]], { itemList: ItemList(this.props.location[0], newList) })
-        //     this.props.showNotification('Success', 'saved policies')
-        // }
     }
 
     deletePolicy = (policy) => {
@@ -152,24 +127,7 @@ export default class FleetsContent extends Component {
     }
 
     render() {
-        console.log(this.props.selectedItemList)
-        let addPolicy = <span/>
-        if (this.state.addPolicy) {
-            addPolicy = <ReactWinJS.AutoSuggestBox
-                        style={{ margin: '20px'}}
-                        placeholderText="Type a policy"
-                        onSuggestionsRequested={this.handleSuggestionsRequested}
-                        onQuerySubmitted={this.handleQuerySubmitted} />
-        } else {
-            addPolicy = (
-                <div style={{ float: 'right', textAlign: 'center', display: 'inline-block' }}>
-                    <span className="addIcon" style={{ fontSize: '18px' }} onClick={this.handleAddPolicy}></span>
-                </div>
-            )
-        }
-
         let renderComponent
-
         if (this.props.policiesData) {
             renderComponent = this.props.policiesData.map((item, index) => {
                 return (
@@ -188,7 +146,6 @@ export default class FleetsContent extends Component {
                 <div className="contentHeader">
                     <h2 className="win-h2 titleContentPane" > {Pluralize.singular(this.props.location[0])} </h2>
                     <div className="itemInfo">
-                        <IconItemList size={72} />
                         <div className="contentStatus">
                             <div className="name">{this.props.selectedItemList[0]["PluginFlyvemdmFleet.name"]}</div>
                             <br />
@@ -196,17 +153,13 @@ export default class FleetsContent extends Component {
                             <span className="deleteIcon" onClick={this.handleDelete} />
                         </div>
                     </div>
-                        <button className="win-button win-button-primary" onClick={this.savePolicies}>
-                            Save
-                        </button>
                 </div>
                 <div className="separator" />
-                <div className="contentInfo" style={{ width: '100%', marginTop: '20px', display: 'inline-block' }} >
+                <div className="contentInfo" style={{ width: '100%', marginTop: '20px', marginBottom: '20px', display: 'inline-block' }} >
                     <h3 className="win-h3" style={{ display: 'inline-block' }} > Tasks </h3>
-                    { addPolicy }
                 </div>
-                { renderComponent }
 
+                { renderComponent }
 
                 <Confirmation title={`Delete ` + this.props.location[0]} message={this.props.selectedItemList[0]["PluginFlyvemdmFleet.name"]} reference={el => this.contentDialog = el} />
             </ContentPane>
@@ -222,5 +175,7 @@ FleetsContent.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    policiesData: PropTypes.array.isRequired,
+    fetchTasks: PropTypes.func.isRequired
 }

@@ -2,23 +2,44 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FleetsList from './FleetsList'
 import FleetsPage from './FleetsPage'
+
 export default class Fleets extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             selectionMode: false,
-            policiesData: null
+            policiesData: []
         }
 
         this.fecthPolicies =  () => {  
-            return this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPolicy', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 6]}})
+            return this.props.glpi.searchItems({
+                itemtype: 'PluginFlyvemdmPolicy', 
+                options: { 
+                    uid_cols: true, 
+                    forcedisplay: [1, 2, 3, 4, 6]
+                }
+            })
+        }
+
+        this.fetchTasks = IdFleet => {
+            return this.props.glpi.getSubItems({
+                itemtype: 'PluginFlyvemdmFleet',
+                id: IdFleet,
+                subItemtype: 'PluginFlyvemdmTask',
+                options: { 
+                    uid_cols: true, 
+                    forcedisplay: [1, 2, 3, 4, 6]
+                }
+            })
         }
     }
 
     componentDidMount = async () => {
-        let policiesData = await this.fecthPolicies()
-        this.setState({policiesData: policiesData.data})
+        const policiesData = await this.fecthPolicies()
+        this.setState({
+            policiesData: this.state.policiesData.concat(policiesData.data)
+        })
     }
 
     changeSelectionMode = (selectionMode) => {
@@ -61,6 +82,7 @@ export default class Fleets extends Component {
                     changeActionList={this.props.changeActionList} 
                     showNotification={this.props.showNotification}
                     policiesData={this.state.policiesData}
+                    fetchTasks={this.fetchTasks}
                     glpi={this.props.glpi} />
             }
         } else {
@@ -97,7 +119,8 @@ export default class Fleets extends Component {
                         actionList={this.props.actionList}
                         changeActionList={this.props.changeActionList} 
                         showNotification={this.props.showNotification}
-                        policiesData={this.state.policiesData} 
+                        policiesData={this.state.policiesData}
+                        fetchTasks={this.fetchTasks} 
                         glpi={this.props.glpi}
                     />
                 </div>

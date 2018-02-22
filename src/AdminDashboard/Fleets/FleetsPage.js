@@ -7,9 +7,23 @@ import PoliciesAdd from './PoliciesAdd'
 import FleetsEdit from './FleetsEdit'
 
 export default class FleetsPage extends Component {
-    
+    constructor(props) {
+        super(props)
+        this.state = {
+            tasksData: []
+        }
+    }
+
+    componentDidMount = async () => {
+        const tasksData = await this.props.fetchTasks(this.props.selectedItemList[0]['PluginFlyvemdmFleet.id'])
+        this.setState({
+            tasksData: this.state.tasksData.concat(tasksData)
+        })
+    }
+
     render() {
-                console.log(this.props.selectedItemList)
+        console.log(this.props.selectedItemList)
+        console.log(this.state.tasksData)
 
         if (this.props.selectedItemList === null || this.props.actionList === 'Edit') {
             switch (this.props.actionList) {
@@ -68,6 +82,7 @@ export default class FleetsPage extends Component {
                             changeActionList={this.props.changeActionList} 
                             showNotification={this.props.showNotification}
                             policiesData={this.props.policiesData}
+                            fetchTasks={this.props.fetchTasks}
                         />
                     )
                 } else {
@@ -90,6 +105,7 @@ export default class FleetsPage extends Component {
         }
     }
 }
+
 FleetsPage.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
@@ -101,5 +117,7 @@ FleetsPage.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    policiesData: PropTypes.array.isRequired,
+    fetchTasks: PropTypes.func.isRequired
 }
