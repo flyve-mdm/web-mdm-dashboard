@@ -23,6 +23,7 @@ class DangerZone extends Component {
                     }
                 })
                 this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
+                this.props.changeAction("reload")
                 this.props.onNavigate([this.props.location[0]])
             } catch (error) {
                 this.props.showNotification(error[0], error[1])
