@@ -7,7 +7,7 @@ class DangerZone extends Component {
     wipe = async () => {
         const isOK = await Confirmation.isOK(this.wipeDevice)
         if (isOK) {
-            this.props.showNotification('Success', 'data deleted successfully')
+            this.props.showNotification('Success', 'Data deleted successfully')
         }
     }
 
@@ -32,9 +32,28 @@ class DangerZone extends Component {
     }
 
     delete = async () => {
+
         const isOK = await Confirmation.isOK(this.deleteDevice)
         if (isOK) {
-            this.props.showNotification('Success', 'element successfully removed')                        
+            try {
+                const response = await this.props.glpi.genericRequest({
+                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
+                    requestParams: {
+                        method: 'DELETE',
+                        body: JSON.stringify({"input":{}})
+                    }
+                })
+                this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
+                this.props.showNotification('Success', 'Devices successfully deleted')                        
+                this.props.changeAction("reload")
+                this.props.onNavigate([this.props.location[0]])
+            } catch (error) {
+                this.props.showNotification(error[0], error[1])
+            }
+        }
+
+
+        if (isOK) {
         }
     }
 
