@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/17</span>
       </div>
     </div>
   </div>
@@ -80,33 +80,26 @@
 35
 36
 37
-38</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+38</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -114,40 +107,47 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import plugins <span class="cstat-no" title="statement not covered" >from '../data/plugins.json'<span class="cstat-no" title="statement not covered" ></span></span>
-import ContentPane <span class="cstat-no" title="statement not covered" >from '../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+<span class="cstat-no" title="statement not covered" >import plugins from '../data/plugins.json'</span>
+import ContentPane from '../../Utils/ContentPane'
 &nbsp;
-export default class SystemInformation extends Component {
-<span class="fstat-no" title="function not covered" >    re</span>nder() {
-        let element = <span class="cstat-no" title="statement not covered" >[]</span>
-<span class="cstat-no" title="statement not covered" >        plugins.forEach(plugin =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
-<span class="cstat-no" title="statement not covered" >            element.push(</span>
+export default clas<span class="cstat-no" title="statement not covered" >s SystemInformation extends Component {</span>
+    render() {
+        let e<span class="cstat-no" title="statement not covered" >lement = []</span>
+        plugins.forEach(plugin =&gt; {
+            el<span class="cstat-no" title="statement not covered" >ement.push(</span>
                 &lt;div className="plugins" key={plugin.id}&gt;
-                    &lt;div className="pluginLeft"&gt;
+<span class="cstat-no" title="statement not covered" >                    &lt;div className="plu</span>ginLeft"&gt;
                         &lt;div className="pluginTitle"&gt;{ plugin.name }&lt;/div&gt;
-                        &lt;div className="pluginDetail" dangerouslySetInnerHTML={{__html: plugin.author}}&gt;&lt;/div&gt;
+<span class="cstat-no" title="statement not covered" >                        &lt;div className="pluginDetail"</span> dangerouslySetInnerHTML={{__html: plugin.author}}&gt;&lt;/div&gt;
                     &lt;/div&gt;
-                    &lt;div className="pluginRight"&gt;
+<span class="cstat-no" title="statement not covered" >                    &lt;div className="pluginRight</span>"&gt;
                         &lt;span className="pluginTitle"&gt;{ plugin.version }&lt;/span&gt;
-                        &lt;div className="pluginDetail"&gt;{ plugin.license }&lt;/div&gt;
+<span class="cstat-no" title="statement not covered" >                        &lt;div className="pluginDet</span>ail"&gt;{ plugin.license }&lt;/div&gt;
                     &lt;/div&gt;
-                &lt;/div&gt;
+                &lt;/d<span class="cstat-no" title="statement not covered" >iv&gt;</span>
             )
-        })
-<span class="cstat-no" title="statement not covered" >        return (</span>
-            &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth}&gt;
+        })<span class="cstat-no" title="statement not covered" ></span>
+        return (
+<span class="fstat-no" title="function not covered" >            &lt;ContentPane itemLis</span>tPaneWi<span class="cstat-no" title="statement not covered" >dth={this.props.itemListPaneWidth}&gt;</span>
                 &lt;h2 className="win-h2 titleContentPane"&gt;{this.props.title}&lt;/h2&gt;
                 &lt;div className="aboutPane"&gt;{element}&lt;/div&gt;
-            &lt;/ContentPane&gt;
-        )
-    }<span class="cstat-no" title="statement not covered" ></span>
-}
-<span class="cstat-no" title="statement not covered" >SystemInformation.propTypes = {</span>
+<span class="fstat-no" title="function not covered" ></span>            &lt;/ContentPane&gt;
+        )<span class="cstat-no" title="statement not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+}<span class="cstat-no" title="statement not covered" ></span>
+SystemInformation.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
@@ -160,7 +160,7 @@ export default class SystemInformation extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

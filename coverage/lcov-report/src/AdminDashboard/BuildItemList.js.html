@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/26</span>
+        <span class='fraction'>0/29</span>
       </div>
     </div>
   </div>
@@ -90,38 +90,23 @@
 45
 46
 47
-48</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+48</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -131,66 +116,81 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import WinJS <span class="cstat-no" title="statement not covered" >from 'winjs'<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import WinJS from 'winjs'
 &nbsp;
-<span class="fstat-no" title="function not covered" >ex</span>port default function (dataSource) {
+<span class="cstat-no" title="statement not covered" >export default function (dataSource) {</span>
 &nbsp;
-    const groupKey = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (data) {</span>
-<span class="cstat-no" title="statement not covered" >        return (data[Object.keys(data)[0]])[0].toUpperCase()</span>
-    }
+    const groupKey = function (data) {
+        return (data[Object.keys(data)[0]])[0].toUpperCase()
+<span class="cstat-no" title="statement not covered" >    }<span class="fstat-no" title="function not covered" ></span></span>
 &nbsp;
-    const groupData = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (data) {</span>
+    const groupData =<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > f</span>unction (data) {</span>
 <span class="cstat-no" title="statement not covered" >        return { title: groupKey(data) }</span>
     }
 &nbsp;
-    const groupSorted = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (a, b) {</span>
+    const groupSorted <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >= </span>function (a, b) {</span>
 <span class="cstat-no" title="statement not covered" >        if (dataSource.order === 'ASC') {</span>
-<span class="cstat-no" title="statement not covered" >            if (a &lt; b) {</span>
-<span class="cstat-no" title="statement not covered" >                return -1</span>
-            } else <span class="cstat-no" title="statement not covered" >if (a &gt; b) {</span>
+            if (a &lt; b) {
+                return -1
+            } else if (a<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > &gt;</span> b) {</span>
 <span class="cstat-no" title="statement not covered" >                return 1</span>
-            } else {
+<span class="cstat-no" title="statement not covered" >            } else {</span>
 <span class="cstat-no" title="statement not covered" >                return 0</span>
-            }
-        } else {
-<span class="cstat-no" title="statement not covered" >            if (a &gt; b) {</span>
+            }<span class="cstat-no" title="statement not covered" ></span>
+        } else {<span class="cstat-no" title="statement not covered" ></span>
+            if (a &gt; b) {
 <span class="cstat-no" title="statement not covered" >                return -1</span>
-            } else <span class="cstat-no" title="statement not covered" >if (a &lt; b) {</span>
-<span class="cstat-no" title="statement not covered" >                return 1</span>
-            } else {
+            } else if (a &lt; b) {
+                return 1
+<span class="cstat-no" title="statement not covered" >            } else {</span>
 <span class="cstat-no" title="statement not covered" >                return 0</span>
-            }
-        }
+            }<span class="cstat-no" title="statement not covered" ></span>
+        }<span class="cstat-no" title="statement not covered" ></span>
     }
-&nbsp;
-    const sorter = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        if (a[Object.keys(a)[0]] &lt; b[Object.keys(b)[0]]) {</span>
-<span class="cstat-no" title="statement not covered" >            return -1</span>
-        } else <span class="cstat-no" title="statement not covered" >if (a[Object.keys(a)[0]] &gt; b[Object.keys(b)[0]]) {</span>
-<span class="cstat-no" title="statement not covered" >            return 1</span>
-        } else {
+<span class="cstat-no" title="statement not covered" ></span>
+    const sorter = (a, b) =&gt; {
+        if (a[Object.keys(a)[0]] &lt; b[Object.keys(b)[0]]) {
+            return -1
+        } else if (a[Object.keys(a)[0]] &gt; b[Object.keys(b)[0]]) {
+            return <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >1</span></span>
+<span class="cstat-no" title="statement not covered" >        } else {</span>
 <span class="cstat-no" title="statement not covered" >            return 0</span>
-        }
-    }
+        }<span class="cstat-no" title="statement not covered" ></span>
+    }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (dataSource.data) {</span>
-<span class="cstat-no" title="statement not covered" >        return new WinJS.Binding.List(dataSource.data)</span>
+    if (data<span class="cstat-no" title="statement not covered" >Source.dat</span>a) {
+        return new WinJS.Binding.List(dataSource.data)
             .createSorted(sorter)
             .createGrouped(groupKey, groupData, groupSorted)
-    }
-}<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></pre></td></tr>
+<span class="cstat-no" title="statement not covered" >    }</span>
+}<span class="cstat-no" title="statement not covered" ></span></pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>

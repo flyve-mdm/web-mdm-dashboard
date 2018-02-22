@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/12</span>
       </div>
     </div>
   </div>
@@ -66,59 +66,59 @@
 21
 22
 23
-24</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+24</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import Calc100PercentMinus <span class="cstat-no" title="statement not covered" >from './Calc100PercentMinus'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+<span class="cstat-no" title="statement not covered" >import Calc100PercentMinus from './Calc100PercentMinus'</span>
 &nbsp;
 class EmptyMessage extends Component {
-<span class="fstat-no" title="function not covered" >    re</span>nder () {
-<span class="cstat-no" title="statement not covered" >        return (</span>
-            &lt;div className="contentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}&gt;
+    render () {<span class="cstat-no" title="statement not covered" ></span>
+        return (
+            &lt;<span class="cstat-no" title="statement not covered" >div className="co</span>ntentPane" style={{ width: Calc100PercentMinus(this.props.itemListPaneWidth) }}&gt;
                 &lt;div style={{ display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}&gt;
-                    &lt;h1 className="win-h1" style={{ color: 'grey' }}&gt; 
+<span class="cstat-no" title="statement not covered" >                    &lt;h1 className="win-h1" st</span>yle={{ color: 'grey' }}&gt; 
                         { this.props.message } 
-                    &lt;/h1&gt;
+<span class="cstat-no" title="statement not covered" >                    &lt;/h1&gt;</span>
                 &lt;/div&gt;
-            &lt;/div&gt;
+            &lt;/div&gt;<span class="cstat-no" title="statement not covered" ></span>
         )
-    }
+    }<span class="cstat-no" title="statement not covered" ></span>
 }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >EmptyMessage.propTypes = {</span>
-    itemListPaneWidth: PropTypes.number.isRequired,
-    message: PropTypes.string.isRequired<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+EmptyMessage.propTypes = {
+    itemL<span class="fstat-no" title="function not covered" >istPaneWidth: PropTypes</span>.number<span class="cstat-no" title="statement not covered" >.isRequired,</span>
+    message: PropTypes.string.isRequired
 }
-&nbsp;
-export default EmptyMessage</pre></td></tr>
+<span class="fstat-no" title="function not covered" ></span>
+export d<span class="cstat-no" title="statement not covered" >efault EmptyMessage</span></pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>

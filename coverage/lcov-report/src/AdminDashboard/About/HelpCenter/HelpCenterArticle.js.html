@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/22</span>
       </div>
     </div>
   </div>
@@ -90,32 +90,30 @@
 45
 46
 47
-48</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+48</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -123,10 +121,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -134,54 +136,52 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from "react"<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import ReactMarkdown <span class="cstat-no" title="statement not covered" >from 'react-markdown'<span class="cstat-no" title="statement not covered" ></span></span>
-import ContentPane <span class="cstat-no" title="statement not covered" >from '../../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ></span></span>
-import { I18n } from<span class="cstat-no" title="statement not covered" > "react-i18nify";<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
-&nbsp;
-class HelpCenterArticle extends Component {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-&nbsp;
-    renderArticle = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
-        let articleName
-        this<span class="cstat-no" title="statement not covered" >.props.articles.data.forEach(elem<span class="fstat-no" title="function not covered" >en</span>t =&gt; {</span>
-            if (<span class="cstat-no" title="statement not covered" >element['HelpCenter.id'] === this.props.itemSelected) {</span>
-                arti<span class="cstat-no" title="statement not covered" >cleName = element['HelpCenter.source']</span>
-            }
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from "react"
+import PropTypes from 'prop-types'
+<span class="cstat-no" title="statement not covered" >import ReactMarkdown from 'react-markdown'</span>
+import ContentPane from '../../../Utils/ContentPane'
+import { I18n } from "react-i18nify";
+<span class="cstat-no" title="statement not covered" ></span>
+class HelpCenterArticle extends Component {
+<span class="cstat-no" title="statement not covered" ></span>
+    renderArticle = () =&gt; {
+        let ar<span class="cstat-no" title="statement not covered" >ticleName</span>
+        this.props.articles.data.forEach(element =&gt; {
+            if (e<span class="cstat-no" title="statement not covered" >lement['HelpCenter.id'</span>] === this.props.itemSelected) {
+                articleName = element['HelpCenter.source']
+            }<span class="cstat-no" title="statement not covered" ></span>
         })
-        const article = requ<span class="cstat-no" title="statement not covered" >ire(`./${articleName}`)</span>
-        retu<span class="cstat-no" title="statement not covered" >rn (</span>
-            &lt;div style={{padding: '0 10px'}}&gt;
+        const article<span class="cstat-no" title="statement not covered" > = require(`./${articleNam</span>e}`)
+        return (
+            &lt;div style<span class="cstat-no" title="statement not covered" >={{padding: '0 10px'}}&gt;</span>
                 &lt;ReactMarkdown source={article}/&gt;
-            &lt;/div&gt;
+            &lt;/div&gt;<span class="cstat-no" title="statement not covered" ></span>
         )
-    }
+    }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-<span class="fstat-no" title="function not covered" >    re</span>nder() {
-<span class="cstat-no" title="statement not covered" >        return (</span>
-            &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth}&gt;
+    render() {<span class="cstat-no" title="statement not covered" ></span>
+        return (
+<span class="fstat-no" title="function not covered" >            &lt;ContentPane itemLis</span>tPaneWi<span class="cstat-no" title="statement not covered" >dth={this.props.itemListPaneWidth}&gt;</span>
                 &lt;div className="listPane" style={{ padding: 0 }}&gt;
-                    &lt;h2 className="win-h2 titleContentPane" onClick={() =&gt;this.props.changeSelectItem(nul<span class="fstat-no" title="function not covered" >l)</span>}&gt;<span class="cstat-no" title="statement not covered" ></span>
-                        {'&lt; ' + I18n.t('about.help_center') }
+                    &lt;h2 className="win-h2 titleContentPane" onClick={() =&gt;this.props.changeSelectItem(null)}&gt;
+<span class="fstat-no" title="function not covered" ></span>                        {'&lt; ' + I18n.t('about.help_center') }
                     &lt;/h2&gt;
                     {this.renderArticle()}
-                &lt;/div&gt;
+<span class="cstat-no" title="statement not covered" >                &lt;/div&gt;<span class="fstat-no" title="function not covered" ></span></span>
             &lt;/ContentPane&gt;
-        )
-    } 
-}
+        )<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    } <span class="cstat-no" title="statement not covered" ></span>
+}<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >HelpCenterArticle.propTypes = {</span>
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
+HelpCenterArticle.propTypes = {
+    itemListPaneWidth: PropT<span class="cstat-no" title="statement not covered" >ypes.oneOfType([</span>
+        Prop<span class="cstat-no" title="statement not covered" >Types.string,</span>
         PropTypes.number
     ]).isRequired,
     articles: PropTypes.object.isRequired,
     itemSelected: PropTypes.number.isRequired,
-    changeSelectItem: PropTypes.func.isRequired<span class="cstat-no" title="statement not covered" ></span>
+    changeSelectItem: PropTypes.func.isRequired
 }
 &nbsp;
 export default HelpCenterArticle</pre></td></tr>
@@ -190,7 +190,7 @@ export default HelpCenterArticle</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/28</span>
+        <span class='fraction'>0/29</span>
       </div>
     </div>
   </div>
@@ -111,7 +111,14 @@
 66
 67
 68
-69</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+69</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -127,40 +134,10 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -178,74 +155,97 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import 'isomo<span class="cstat-no" title="statement not covered" >rphic-fetch'<span class="cstat-no" title="statement not covered" ></span></span>
-const URL = <span class="cstat-no" title="statement not covered" >"http://glpis42.local/apirest.php/"</span>
-const userToken = <span class="cstat-no" title="statement not covered" >"MIjQRsCzLeBxnhisscm88H7LAu7xOsiNT7Ibgugx"</span>
-let sessionToken = <span class="cstat-no" title="statement not covered" >""</span>
-let headers = <span class="cstat-no" title="statement not covered" >new Headers({</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import 'isomorphic-fetch'
+const URL = "http://glpis42.local/apirest.php/"
+<span class="cstat-no" title="statement not covered" >const userToken = "MIjQRsCzLeBxnhisscm88H7LAu7xOsiNT7Ibgugx"</span>
+let sessionToken = ""
+let headers = new Headers({
     "Content-Type": "application/json"
-})
+<span class="cstat-no" title="statement not covered" >})</span>
 &nbsp;
-const glpi = <span class="cstat-no" title="statement not covered" >{</span>
-    sessionToken: <span class="fstat-no" title="function not covered" >(t</span>oken) =&gt; {
-<span class="cstat-no" title="statement not covered" >        sessionToken = token</span>
-    },
-    initSession: <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >        return fetch(`${URL}initSession?user_token=${userToken}`, {</span>
+const glpi =<span class="cstat-no" title="statement not covered" > {</span>
+    sessionToken: <span class="cstat-no" title="statement not covered" >(token) =&gt; {</span>
+        sessionToke<span class="cstat-no" title="statement not covered" >n =</span> token
+    },<span class="cstat-no" title="statement not covered" ></span>
+    initSession: () =&gt; {
+        return fetch(`${URL}initSession?user_token=${userToken}`, {
             method: 'GET',
-            headers: headers
-        })
-        .then<span class="fstat-no" title="function not covered" >(r</span>esponse =&gt;<span class="cstat-no" title="statement not covered" > Promise.all([response, response.json()])</span>)
+            h<span class="cstat-no" title="statement not covered" >eaders: headers</span>
+        })<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        .then(response =&gt; Prom</span>ise.all([response, response.json()]))
     },
-    register: <span class="fstat-no" title="function not covered" >(p</span>ayload, options) =&gt; {
+    register: (pa<span class="fstat-no" title="function not covered" >yl</span>oad, options) =&gt; {
 <span class="cstat-no" title="statement not covered" >        headers.append("Session-Token", sessionToken)</span>
-<span class="cstat-no" title="statement not covered" >        return fetch(`${URL}User/`, {</span>
+        return fetch(`${URL}User/`, {
             method: 'POST',
-            headers: headers,
+            head<span class="fstat-no" title="function not covered" >er</span>s: headers<span class="cstat-no" title="statement not covered" >,</span>
             body: JSON.stringify(payload)
-        })
-        .then<span class="fstat-no" title="function not covered" >(r</span>esponse =&gt;<span class="cstat-no" title="statement not covered" > Promise.all([response, response.json()])</span>)
-    }, 
-    killSession: <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >        if (!headers.has("Session-Token")) {</span>
-<span class="cstat-no" title="statement not covered" >            headers.append("Session-Token", sessionToken)</span>
-        }
-<span class="cstat-no" title="statement not covered" >        return fetch(`${URL}killSession/`, {</span>
-            method: 'GET',
-            headers: headers
-        })
-        .then<span class="fstat-no" title="function not covered" >(r</span>esponse =&gt; {
+        })<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        .then(response =&gt; Promise.all([response, respon</span>se.json()]))
+    }, <span class="cstat-no" title="statement not covered" ></span>
+    killSession: () =&gt; {
+        if (!headers.has("Session-Token")) {
+            headers.append("Session-Token", sessionToken)
+        }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+        return fetch(`${URL}killSession/`, {
+            metho<span class="fstat-no" title="function not covered" >d:</span> 'GET',
+<span class="cstat-no" title="statement not covered" >            headers: headers</span>
+        })<span class="cstat-no" title="statement not covered" ></span>
+        .then(response =&gt; {
 <span class="cstat-no" title="statement not covered" >            if (response.status &gt;= 200 &amp;&amp; response.status &lt; 300) {</span>
-<span class="cstat-no" title="statement not covered" >                return Promise.resolve(response)</span>
+                return Promise.resolve(response)
             } else {
-<span class="cstat-no" title="statement not covered" >                return Promise.reject(new Error(response.statusText))</span>
-            }
-        })
+<span class="fstat-no" title="function not covered" >                re</span>turn Promise.reject(new Error(response.statusText))
+<span class="cstat-no" title="statement not covered" >            }</span>
+        })<span class="cstat-no" title="statement not covered" ></span>
     },
-    login: <span class="fstat-no" title="function not covered" >(u</span>ser, password) =&gt; {
-<span class="cstat-no" title="statement not covered" >        if (!headers.has("Authorization")) {</span>
-<span class="cstat-no" title="statement not covered" >            headers.append("Authorization", `Basic  ${Buffer.from(`${user}:${password}`).toString('base64')}`)</span>
+    login: (user<span class="cstat-no" title="statement not covered" >, password) =&gt; {</span>
+        if (!headers.has("Authorization")) {
+            headers.append("Authorization", `Basic  ${Buffer.from(`${user}:${password}`).toString('base64')}`)
         } else {
-<span class="cstat-no" title="statement not covered" >            headers.set("Authorization", `Basic  ${Buffer.from(`${user}:${password}`).toString('base64')}`)</span>
-        }
-<span class="cstat-no" title="statement not covered" >        return fetch(`${URL}initSession/`, {</span>
+<span class="fstat-no" title="function not covered" >            h</span>eaders.set("Authorization", `Basic  ${Buffer.from(`${user}:${password}`).toString('base64')}`)
+<span class="cstat-no" title="statement not covered" >        }</span>
+        retu<span class="cstat-no" title="statement not covered" >rn fetch(`${URL}initSession/`, {</span>
             method: 'GET',
-            headers: headers
+<span class="cstat-no" title="statement not covered" >            headers: headers</span>
         })
-        .then<span class="fstat-no" title="function not covered" >(r</span>esponse =&gt;<span class="cstat-no" title="statement not covered" > Promise.all([response, response.json()])</span>)
+<span class="cstat-no" title="statement not covered" >        .then(response =&gt; Promise.all([response, response.json()]))</span>
     },
-    getFullSession: <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >        if (!headers.has("Session-Token")) {</span>
-<span class="cstat-no" title="statement not covered" >            headers.append("Session-Token", sessionToken)</span>
-        }
+    getFullSession: () =&gt; {
+        if (!hea<span class="fstat-no" title="function not covered" >de</span>rs.has("Se<span class="cstat-no" title="statement not covered" >ssion-Token")) {</span>
+            headers.append("Session-Token", sessionToken)
+        }<span class="fstat-no" title="function not covered" ></span>
 <span class="cstat-no" title="statement not covered" >        return fetch(`${URL}getFullSession/`, {</span>
-            method: 'GET',
+<span class="cstat-no" title="statement not covered" >            method: 'GET',</span>
             headers: headers
-        })
-            .<span class="fstat-no" title="function not covered" >th</span>en(respons<span class="cstat-no" title="statement not covered" >e =&gt; Promise.all([response, response.json</span>()]))
-    }<span class="cstat-no" title="statement not covered" ></span>
-}
+<span class="cstat-no" title="statement not covered" >        })</span>
+            .then(response =&gt; Promise.all([response, response.json()]))
+    }
+}<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 &nbsp;
 export default glpi</pre></td></tr>
 </table></pre>
@@ -253,7 +253,7 @@ export default glpi</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

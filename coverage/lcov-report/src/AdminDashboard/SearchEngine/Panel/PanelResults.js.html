@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/15</span>
       </div>
     </div>
   </div>
@@ -84,36 +84,32 @@
 39
 40
 41
-42</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+42</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,48 +117,52 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
-&nbsp;
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
 class PanelResults extends Component {
-<span class="fstat-no" title="function not covered" >  re</span>nder() { 
-    let tbodyContent = <span class="cstat-no" title="statement not covered" >null;</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    if (this.props.itemResults) {</span>
-<span class="cstat-no" title="statement not covered" >      tbodyContent = this.props.itemResults.map(<span class="fstat-no" title="function not covered" >(i</span>tem, index) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return (</span>
-         &lt;tr key={item[0]['fieldValue']}&gt;
+  render() { <span class="cstat-no" title="statement not covered" ></span>
+    let tbodyContent = null;
+<span class="cstat-no" title="statement not covered" ></span>
+    if (this.props.itemResults) {
+      tbodyCon<span class="cstat-no" title="statement not covered" >tent = this.props.itemResults.m</span>ap((item, index) =&gt; {
+        return (
+         &lt;tr key=<span class="cstat-no" title="statement not covered" >{item[0]['fieldValue']</span>}&gt;
            {
-             item.map<span class="fstat-no" title="function not covered" >((</span>fieldObject, indexFieldObject) =&gt; {
-<span class="cstat-no" title="statement not covered" >               return (</span>
-                &lt;td key={indexFieldObject}&gt;
+             item.<span class="cstat-no" title="statement not covered" >map((fieldObject, indexFieldObject)</span> =&gt; {
+               return (
+<span class="fstat-no" title="function not covered" >                &lt;td key={indexFi</span>eldObje<span class="cstat-no" title="statement not covered" >ct}&gt;</span>
                   {fieldObject['fieldValue']}
                 &lt;/td&gt;
-               )
-             })
+<span class="fstat-no" title="function not covered" ></span>               )
+             })<span class="cstat-no" title="statement not covered" ></span>
            }
-         &lt;/tr&gt;
-        )
-     });
+<span class="cstat-no" title="statement not covered" >         &lt;/tr&gt;</span>
+<span class="cstat-no" title="statement not covered" >        )<span class="fstat-no" title="function not covered" ></span></span>
+     });<span class="cstat-no" title="statement not covered" ></span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return (</span>
+    return (
       &lt;tbody style={{
         textAlign: 'center'
       }}&gt;
         {tbodyContent || 'Result Empty'}
-      &lt;/tbody&gt;
-    )
+      &lt;/tbody&gt;<span class="fstat-no" title="function not covered" ></span>
+    )<span class="cstat-no" title="statement not covered" ></span>
   }
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >PanelResults.propTypes = {</span>
-  itemResults: PropTypes.array.isRequired,<span class="cstat-no" title="statement not covered" ></span>
+PanelResults.propTypes = {
+  itemResults: PropTypes.array.isRequired,
 }
 &nbsp;
 export default PanelResults;
@@ -172,7 +172,7 @@ export default PanelResults;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

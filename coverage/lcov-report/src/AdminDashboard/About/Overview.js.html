@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/7</span>
+        <span class='fraction'>0/13</span>
       </div>
     </div>
   </div>
@@ -77,31 +77,24 @@
 32
 33
 34
-35</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+35</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -109,37 +102,44 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import ContentPane <span class="cstat-no" title="statement not covered" >from '../../Utils/ContentPane'<span class="cstat-no" title="statement not covered" ></span></span>
-import { Translate }<span class="cstat-no" title="statement not covered" > from 'react-i18nify';<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+<span class="cstat-no" title="statement not covered" >import ContentPane from '../../Utils/ContentPane'</span>
+import { Translate } from 'react-i18nify';
 &nbsp;
-export default class Overview extends Component {
-<span class="fstat-no" title="function not covered" >    re</span>nder() {
-<span class="cstat-no" title="statement not covered" >        return (</span>
+export default clas<span class="cstat-no" title="statement not covered" >s Overview extends Component {</span>
+    render() {
+        retur<span class="cstat-no" title="statement not covered" >n (</span>
             &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth}&gt;
-                &lt;h2 className="win-h2 titleContentPane"&gt;{this.props.title}&lt;/h2&gt;
+<span class="cstat-no" title="statement not covered" >                &lt;h2 className="win-h2 titleCo</span>ntentPane"&gt;{this.props.title}&lt;/h2&gt;
                 &lt;div className="aboutPane"&gt;
-                    &lt;Translate tag='p' value={'about.overview_STRINGS.flyve_MDM_is_a_mobile_device_management_software_that_enables_you_to_secure_and_manage_all_the_mobile_devices_of_your_business_via_a_unique_web-based_console_(MDM)'} /&gt;
+<span class="cstat-no" title="statement not covered" >                    &lt;Translate tag='p' </span>value={'about.overview_STRINGS.flyve_MDM_is_a_mobile_device_management_software_that_enables_you_to_secure_and_manage_all_the_mobile_devices_of_your_business_via_a_unique_web-based_console_(MDM)'} /&gt;
                     &lt;Translate tag='p' value={'about.overview_STRINGS.our_solution_allows_you_to_efficiently_and_easily_control_any_aspects_of_your_Android-based_mobile_fleet,_providing_a_panel_of_functionalities'} /&gt;
-                    &lt;ul&gt;
+<span class="cstat-no" title="statement not covered" >                    &lt;ul&gt;</span>
                         &lt;Translate tag='li' value={'about.overview_STRINGS.provided_as_sass_platform'} /&gt;
-                        &lt;Translate tag='li' value={'about.overview_STRINGS.google_indepent'} /&gt;
+<span class="cstat-no" title="statement not covered" >                        &lt;Translate tag='li' value={'ab</span>out.overview_STRINGS.google_indepent'} /&gt;
                         &lt;Translate tag='li' value={'about.overview_STRINGS.deploy_and_configure_applications'} /&gt;
-                        &lt;Translate tag='li' value={'about.overview_STRINGS.deploy_files'} /&gt;
+<span class="cstat-no" title="statement not covered" >                        &lt;Translate tag='li' value={'about</span>.overview_STRINGS.deploy_files'} /&gt;
                         &lt;Translate tag='li' value={'about.overview_STRINGS.wipe_a_phone'} /&gt;
-                        &lt;Translate tag='li' value={'about.overview_STRINGS.work_with_devices_running_Android_4,4_or_higher'} /&gt;
+<span class="cstat-no" title="statement not covered" >                        &lt;Translate tag='li' v</span>alue={'about.overview_STRINGS.work_with_devices_running_Android_4,4_or_higher'} /&gt;
                         &lt;Translate tag='li' value={'about.overview_STRINGS.simple_web_application_user_interface'} /&gt;
-                    &lt;/ul&gt;
+<span class="fstat-no" title="function not covered" >                    &lt;/ul&gt;<span class="cstat-no" title="statement not covered" ></span></span>
                     &lt;Translate tag='p' value={'about.overview_STRINGS.source_codes_will_be_released_during_fall_2016'} /&gt;
                 &lt;/div&gt;
-            &lt;/ContentPane&gt;
-        )
-    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="fstat-no" title="function not covered" ></span>            &lt;/ContentPane&gt;
+<span class="cstat-no" title="statement not covered" >        )</span>
+    }
 }
-<span class="cstat-no" title="statement not covered" >Overview.propTypes = {</span>
+Overview.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
@@ -151,7 +151,7 @@ export default class Overview extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

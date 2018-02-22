@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/20</span>
       </div>
     </div>
   </div>
@@ -86,35 +86,7 @@
 41
 42
 43
-44</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+44</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -123,52 +95,80 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import ContentLoader, { Bu<span class="cstat-no" title="statement not covered" >lletList } from 'react-content-l</span>oader'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+<span class="cstat-no" title="statement not covered" >import ContentLoader, { BulletList } from 'react-content-loader'</span>
 &nbsp;
-export default class Loader extends Com<span class="fstat-no" title="function not covered" >po</span>nent {<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-    listRender = (ind<span class="fstat-no" title="function not covered" >ex</span>) =&gt; {
-&nbsp;
-        if(t<span class="cstat-no" title="statement not covered" >his.props.type === "list") {</span>
-            retu<span class="cstat-no" title="statement not covered" >rn (&lt; ContentLoader key={index} speed={1.5} style={{ width: '360px' }}&gt;</span>
+export default class Loader extends Component {
+<span class="cstat-no" title="statement not covered" ></span>
+    listRender = (index) =&gt; {
+<span class="cstat-no" title="statement not covered" ></span>
+        if(this.props.type === "list") {
+            re<span class="cstat-no" title="statement not covered" >turn (&lt; ContentLoader key={inde</span>x} speed={1.5} style={{ width: '360px' }}&gt;
                 &lt;circle cx="40" cy="45" r="27" /&gt;
-                &lt;rect x={80} y={20} rx={3} ry={3} width={250} height={10} radius={5} /&gt;
+                &lt;<span class="cstat-no" title="statement not covered" >rect x={80} y={20} rx=</span>{3} ry={3} width={250} height={10} radius={5} /&gt;
                 &lt;rect x={80} y={40} rx={3} ry={3} width={300} height={10} radius={5} /&gt;
-                &lt;rect x={80} y={60} rx={3} ry={3} width={260} height={10} radius={5} /&gt;
+                &lt;r<span class="cstat-no" title="statement not covered" >ect x={80} y={60} rx={3} ry={3} wid</span>th={260} height={10} radius={5} /&gt;
             &lt;/ContentLoader &gt;)
-        } else {
-            retu<span class="cstat-no" title="statement not covered" >rn &lt;BulletList key={index} speed={1.5} style={{ width: '360px' }}/&gt;</span>
-        }
+        } else {<span class="cstat-no" title="statement not covered" ></span>
+            return &lt;BulletList key={index} speed={1.5} style={{ width: '360px' }}/&gt;
+        }<span class="cstat-no" title="statement not covered" ></span>
         
-    }
+    }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 &nbsp;
-<span class="fstat-no" title="function not covered" >    re</span>nder() {
-        let content = <span class="cstat-no" title="statement not covered" >[]</span>
+    render() {
+<span class="fstat-no" title="function not covered" ></span>        let content = []
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        for (let index = 0; index &lt; this.props.count; index++) {</span>
-<span class="cstat-no" title="statement not covered" >            content = [</span>
+        for (let index = 0; index &lt; this.props.count; index++) {
+<span class="cstat-no" title="statement not covered" >            content = [<span class="fstat-no" title="function not covered" ></span></span>
                 ...content,
-                this.listRender(index)
-            ]
+<span class="cstat-no" title="statement not covered" >                this.listRender(index)</span>
+            ]<span class="cstat-no" title="statement not covered" ></span>
         }
-<span class="cstat-no" title="statement not covered" >        return (</span>
+        return (
             &lt;div&gt;{ content }&lt;/div&gt;
         )
-    }<span class="cstat-no" title="statement not covered" ></span>
+    }
 }
-<span class="cstat-no" title="statement not covered" >Loader.propTypes = {</span>
+Loader.propTypes = {
     count: PropTypes.number,
     type: PropTypes.oneOf(["list", "content"])
 }
-<span class="cstat-no" title="statement not covered" >Loader.defaultProps = {</span>
+Loader.defaultProps = {
     count: 1,
     type: "list"
 }
@@ -178,7 +178,7 @@ export default class Loader extends Com<span class="fstat-no" title="function no
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>

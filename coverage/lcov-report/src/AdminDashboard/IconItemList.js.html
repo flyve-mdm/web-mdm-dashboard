@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/17</span>
       </div>
     </div>
   </div>
@@ -92,7 +92,21 @@
 47
 48
 49
-50</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+50</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,24 +129,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -141,48 +137,52 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React <span class="cstat-no" title="statement not covered" >from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
-&nbsp;
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
+import PropTypes from 'prop-types'
+<span class="cstat-no" title="statement not covered" ></span>
 export default class IconItemList extends React.Component {
-<span class="fstat-no" title="function not covered" >    re</span>nder() {
-        const image = <span class="cstat-no" title="statement not covered" >(this.props.type === 'file' &amp;&amp; this.props.image !== '') ? ("images/" + this.props.image) : this.props.im</span>age
-        let style = <span class="cstat-no" title="statement not covered" >{</span>
-            backgroundColor: this.props.backgroundColor,
+    render() {
+        const image<span class="cstat-no" title="statement not covered" > = (this.props.type === 'file' &amp;&amp; this.props.image !== ''</span>) ? ("images/" + this.props.image) : this.props.image
+        let style = {
+            b<span class="cstat-no" title="statement not covered" >ackgroundColor: t</span>his.props.backgroundColor,
             width: this.props.size,
-            height: this.props.size,
+            he<span class="cstat-no" title="statement not covered" >ight: this.props.size,</span>
             backgroundSize: 'cover',
-            display: 'inline-block'
+            displ<span class="cstat-no" title="statement not covered" >ay: 'inline-block'</span>
         }
-        let className = <span class="cstat-no" title="statement not covered" >''</span>
-<span class="cstat-no" title="statement not covered" >        if (this.props.type !== 'base64') {</span>
-<span class="cstat-no" title="statement not covered" >            className = 'contentPicture'</span>
-<span class="cstat-no" title="statement not covered" >            style = {</span>
+        let classN<span class="cstat-no" title="statement not covered" >ame = ''</span>
+        if (this.props.type !== 'base64') {
+<span class="fstat-no" title="function not covered" >            className = 'content</span>Picture<span class="cstat-no" title="statement not covered" >'</span>
+            style = {
                 ...style,
-                WebkitBorderRadius: this.props.size,
-                MozBorderRadius: this.props.size,
-                borderRadius: this.props.size
+<span class="fstat-no" title="function not covered" ></span>                WebkitBorderRadius: this.props.size,
+                MozBor<span class="cstat-no" title="statement not covered" >derRadius: this.props.size,</span>
+                bord<span class="cstat-no" title="statement not covered" >erRadius: this.props.size</span>
             }
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        return (</span>
+        return (
             &lt;div className={className} style={style}&gt;
                 &lt;div className={this.props.imgClass} &gt;
-                    &lt;img alt="" src={image} style={style} onClick={this.props.imgClick}/&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        )
-    }<span class="cstat-no" title="statement not covered" ></span>
+                    &lt;img<span class="cstat-no" title="statement not covered" > al</span>t="" src={image} style={style} onClick={this.props.imgClick}/&gt;
+<span class="cstat-no" title="statement not covered" >                &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+        )<span class="cstat-no" title="statement not covered" ></span>
+    }
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >IconItemList.defaultProps = {</span>
+IconItemList.defaultProps = {
     size: 100,
     backgroundColor: '#e6e6e6',
-    image: '',
+    imag<span class="cstat-no" title="statement not covered" >e: '',</span>
     type: 'file'
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >IconItemList.propTypes = {</span>
+IconItemList.propTypes = {
     size: PropTypes.number.isRequired,
     backgroundColor: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
@@ -196,7 +196,7 @@ export default class IconItemList extends React.Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>

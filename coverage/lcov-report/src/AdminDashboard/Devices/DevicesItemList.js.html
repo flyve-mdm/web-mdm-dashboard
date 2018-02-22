@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/14</span>
       </div>
     </div>
   </div>
@@ -70,7 +70,21 @@
 25
 26
 27
-28</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+28</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -82,47 +96,33 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import IconItemList <span class="cstat-no" title="statement not covered" >from '../IconItemList'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
-&nbsp;
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import IconItemList from '../IconItemList'
+<span class="cstat-no" title="statement not covered" ></span>
 export default class DevicesItemList extends Component {
-<span class="fstat-no" title="function not covered" >    re</span>nder() {
+    render() {
         let size = <span class="cstat-no" title="statement not covered" >this.props.size</span>
-        let imageAgent = <span class="cstat-no" title="statement not covered" >this.props.itemList["PluginFlyvemdmAgent.mdm_type"] ? `${this.props.itemList["PluginFlyvemdmAgent.mdm_type"]}.png` : null</span>
-        let iconComponent 
+        let imageAgent = this.props.itemList["PluginFlyvemdmAgent.mdm_type"] ? `${this.props.itemList["PluginFlyvemdmAgent.mdm_type"]}.png` : null
+        let i<span class="cstat-no" title="statement not covered" >conComponent </span>
         
-<span class="cstat-no" title="statement not covered" >        if (imageAgent) {</span>
-<span class="cstat-no" title="statement not covered" >            iconComponent = &lt;IconItemList image={imageAgent} size={size} backgroundColor="transparent"/&gt;</span>
-        } else {
-<span class="cstat-no" title="statement not covered" >            iconComponent = &lt;IconItemList size={size} /&gt;</span>
-        }
+        if (im<span class="cstat-no" title="statement not covered" >ageAgent) {</span>
+            iconComponent = &lt;IconItemList image={imageAgent} size={size} backgroundColor="transparent"/&gt;
+        } else {<span class="cstat-no" title="statement not covered" ></span>
+            iconComponent = &lt;IconItemList size={size} /&gt;
+        }<span class="cstat-no" title="statement not covered" ></span>
         
-<span class="cstat-no" title="statement not covered" >        return (</span>
+        r<span class="fstat-no" title="function not covered" >eturn (<span class="cstat-no" title="statement not covered" ></span></span>
             &lt;div&gt;
                 {iconComponent}
-                &lt;div style={{ display: 'inline-block'}}&gt;
-                    &lt;div className="name"&gt;{this.props.itemList["PluginFlyvemdmAgent.name"]}&lt;/div&gt;
-                    &lt;div className="detail"&gt;{this.props.itemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"]}&lt;/div&gt;
+<span class="fstat-no" title="function not covered" ></span>                &lt;div style={{ display: 'inline-block'}}&gt;
+<span class="cstat-no" title="statement not covered" >                    &lt;div className=</span>"name"&gt;{this.props.itemList["PluginFlyvemdmAgent.name"]}&lt;/div&gt;
+                    &lt;div <span class="cstat-no" title="statement not covered" >className="detail"&gt;{this.props.itemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"]}&lt;/div&gt;</span>
                     &lt;div className="detail"&gt;{this.props.itemList["PluginFlyvemdmAgent.mdm_type"].toUpperCase()}&lt;/div&gt;
                 &lt;/div&gt;
-            &lt;/div&gt;
-        )
-    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+        )<span class="cstat-no" title="statement not covered" ></span>
+    }
 }
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -130,7 +130,7 @@ export default class DevicesItemList extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

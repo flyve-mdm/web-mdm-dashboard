@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/7</span>
+        <span class='fraction'>0/13</span>
       </div>
     </div>
   </div>
@@ -66,59 +66,59 @@
 21
 22
 23
-24</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+24</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import { Link } from '<span class="cstat-no" title="statement not covered" >react-router-dom'</span>
-import LoginContainer <span class="cstat-no" title="statement not covered" >from './LoginContainer'<span class="cstat-no" title="statement not covered" ></span></span>
-import ToastNotifications <span class="cstat-no" title="statement not covered" >from '../Utils/ToastNotifications'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+<span class="cstat-no" title="statement not covered" >import LoginContainer from './LoginContainer'</span>
+import ToastNotifications from '../Utils/ToastNotifications'
 &nbsp;
-export default class ValidateAccount extends Component {
+export default clas<span class="cstat-no" title="statement not covered" >s ValidateAccount extends Component {</span>
 &nbsp;
-<span class="fstat-no" title="function not covered" >    re</span>nder () {
-<span class="cstat-no" title="statement not covered" >        return (</span>
-            &lt;LoginContainer&gt;
-                &lt;ToastNotifications ref={instance =&gt; { this.toastNotifications = in<span class="fstat-no" title="function not covered" >st</span>ance }} /&gt;<span class="cstat-no" title="statement not covered" ></span>
-                &lt;div&gt;
+    render ()<span class="cstat-no" title="statement not covered" > {</span>
+        return (
+            &lt;L<span class="cstat-no" title="statement not covered" >oginContainer&gt;</span>
+                &lt;ToastNotifications ref={instance =&gt; { this.toastNotifications = instance }} /&gt;
+                &lt;div&gt;<span class="cstat-no" title="statement not covered" ></span>
                     &lt;h2 className="win-h2"&gt;Validate Account&lt;/h2&gt;
-                    &lt;p&gt;
+                    &lt;p<span class="cstat-no" title="statement not covered" >&gt;</span>
                         Your user is not yet activated, please check your email and activate your account
-                        &lt;br /&gt;
+<span class="cstat-no" title="statement not covered" >                        &lt;br /&gt;</span>
                     &lt;/p&gt;
-                    &lt;p&gt;&lt;Link to='/'&gt;Sign in&lt;/Link&gt;&lt;/p&gt;
+                    &lt;p&gt;&lt;Li<span class="cstat-no" title="statement not covered" >nk to='/'&gt;Sign in&lt;/Link&gt;&lt;/p&gt;</span>
 &nbsp;
-                &lt;/div&gt;
+                &lt;/div&gt;<span class="cstat-no" title="statement not covered" ></span>
             &lt;/LoginContainer&gt;
-        )
-    }<span class="cstat-no" title="statement not covered" ></span>
+        )<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    }
 }</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>

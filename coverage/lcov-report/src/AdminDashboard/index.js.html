@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/16</span>
       </div>
     </div>
   </div>
@@ -73,73 +73,73 @@
 28
 29
 30
-31</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+31</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React <span class="cstat-no" title="statement not covered" >from 'react'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import HeaderAdminDashboard <span class="cstat-no" title="statement not covered" >from './HeaderAdminDashboard'<span class="cstat-no" title="statement not covered" ></span></span>
-import BodyAdminDashboard <span class="cstat-no" title="statement not covered" >from './BodyAdminDashboard'<span class="cstat-no" title="statement not covered" ></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
+import HeaderAdminDashboard from './HeaderAdminDashboard'
+<span class="cstat-no" title="statement not covered" >import BodyAdminDashboard from './BodyAdminDashboard'</span>
+import PropTypes from 'prop-types'
 &nbsp;
-class App extends React.Component {
+class App extends R<span class="cstat-no" title="statement not covered" >eact.Component {</span>
 &nbsp;
-<span class="fstat-no" title="function not covered" >    co</span>nstructor (props) {
-<span class="cstat-no" title="statement not covered" >        super(props)</span>
-<span class="cstat-no" title="statement not covered" >        this.state = {</span>
+    construct<span class="cstat-no" title="statement not covered" >or (props) {</span>
+        super(props)
+        this.s<span class="cstat-no" title="statement not covered" >tate = {</span>
             title: '',
-            body: '',
+            body: '',<span class="cstat-no" title="statement not covered" ></span>
             type: ''
-        }
+        }<span class="cstat-no" title="statement not covered" ></span>
     }
-&nbsp;
-<span class="fstat-no" title="function not covered" >    re</span>nder () {
-<span class="cstat-no" title="statement not covered" >        return (</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    render () {
+        return (<span class="cstat-no" title="statement not covered" ></span>
             &lt;div style={{height: '100%'}}&gt;
-                &lt;HeaderAdminDashboard history={this.props.history}/&gt;
+                &lt;<span class="cstat-no" title="statement not covered" >HeaderAdminDashboard h</span>istory={this.props.history}/&gt;
                 &lt;BodyAdminDashboard /&gt;
-            &lt;/div&gt;
+            &lt;/div&gt;<span class="cstat-no" title="statement not covered" ></span>
         )
-    }
+    }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >App.propTypes = {</span>
-    history: PropTypes.object.isRequired<span class="cstat-no" title="statement not covered" ></span>
-}
-&nbsp;
+App.propTypes = {
+<span class="fstat-no" title="function not covered" >    hi</span>story: PropTypes.object.isRequired
+}<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
 export default App</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>

@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/12</span>
       </div>
     </div>
   </div>
@@ -73,29 +73,22 @@
 28
 29
 30
-31</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+31</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -103,33 +96,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React,<span class="cstat-no" title="statement not covered" > { Component } from 'react';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-import QueryBuilder from <span class="cstat-no" title="statement not covered" >'react-querybuilder';<span class="cstat-no" title="statement not covered" ></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types';<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
+import QueryBuilder from 'react-querybuilder';
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types';</span>
 &nbsp;
 &nbsp;
-class SearchQueryBuilder extends Component {
-<span class="fstat-no" title="function not covered" >  re</span>nder() { 
-<span class="cstat-no" title="statement not covered" >    return (</span>
+class SearchQueryBu<span class="cstat-no" title="statement not covered" >ilder extends Component {</span>
+  render() { 
+    return (<span class="cstat-no" title="statement not covered" ></span>
       &lt;QueryBuilder
-        fields={this.props.fields}
+        fields<span class="cstat-no" title="statement not covered" >={this.props.fields}</span>
         operators={[
-          {name: 'contains', label: 'Contains'},
+          {name: 'contain<span class="cstat-no" title="statement not covered" >s', label: 'Contains'},</span>
           {name: 'equal', label: 'Equals'}, // equal instead equals because work it
-          {name: 'notequals', label: 'Not equals'},
+          {name: 'notequal<span class="cstat-no" title="statement not covered" >s', label: 'Not equals'},</span>
           {name: 'lessthan', label: 'Less Than'},
-          {name: 'morethan', label: 'More Than'},
+          {name: <span class="cstat-no" title="statement not covered" >'morethan', label: 'Mo</span>re Than'},
           {name: 'under', label: 'Under'},
-          {name: 'notunder', label: 'Not Under'}
+          {name: '<span class="cstat-no" title="statement not covered" >notunder', label: 'Not Under'}</span>
         ]}
-        onQueryChange={this.props.handleChangeQuery}/&gt;
+        o<span class="fstat-no" title="function not covered" >nQueryChange={this.prop</span>s.handl<span class="cstat-no" title="statement not covered" >eChangeQuery}/&gt;</span>
     )
   }
-}
-&nbsp;
-<span class="cstat-no" title="statement not covered" >SearchQueryBuilder.propTypes = {</span>
+}<span class="fstat-no" title="function not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+SearchQueryBuilder.propTypes = {
   fields: PropTypes.array.isRequired,
-  handleChangeQuery: PropTypes.func.isRequired<span class="cstat-no" title="statement not covered" ></span>
+  handleChangeQuery: PropTypes.func.isRequired
 }
 &nbsp;
  
@@ -139,7 +139,7 @@ export default SearchQueryBuilder;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:35:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
