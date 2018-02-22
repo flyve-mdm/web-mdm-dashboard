@@ -38,6 +38,11 @@ export default class DevicesList extends Component {
         if (!this.props.action && (prevProps.action === 'Edit' || prevProps.action === 'EditOne' || prevProps.action === 'Delete')) {
             this.handleRefresh()
         }
+
+        if (this.props.action === "reload") {
+            this.handleRefresh()
+            this.props.changeAction(null)            
+        }
     }
 
     componentWillUnmount() {
