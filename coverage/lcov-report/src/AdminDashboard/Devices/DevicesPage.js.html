@@ -146,7 +146,8 @@
 101
 102
 103
-104</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+104
+105</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -193,6 +194,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -260,8 +262,8 @@ import EmptyMessage <span class="cstat-no" title="statement not covered" >from '
 export default class DevicesPage extends Component {
     
 <span class="fstat-no" title="function not covered" >    re</span>nder() {
-<span class="cstat-no" title="statement not covered" >        if (this.props.selectedItemList === null || this.props.actionList === 'Edit') {</span>
-<span class="cstat-no" title="statement not covered" >            switch (this.props.actionList) {</span>
+<span class="cstat-no" title="statement not covered" >        if (!this.props.selectedItemList || this.props.action === 'Edit') {</span>
+<span class="cstat-no" title="statement not covered" >            switch (this.props.action) {</span>
                 case "Edit":
 <span class="cstat-no" title="statement not covered" >                    return (</span>
                         &lt;DevicesEdit
@@ -270,7 +272,7 @@ export default class DevicesPage extends Component {
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
-                            changeActionList={this.props.changeActionList}
+                            changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
                             glpi={this.props.glpi} 
                             /&gt;
@@ -279,7 +281,7 @@ export default class DevicesPage extends Component {
 <span class="cstat-no" title="statement not covered" >                    return (</span>
                         &lt;Enroll
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            changeActionList={this.props.changeActionList} 
+                            changeAction={this.props.changeAction} 
                             showNotification={this.props.showNotification}
                             glpi={this.props.glpi}
                         /&gt;
@@ -292,7 +294,7 @@ export default class DevicesPage extends Component {
                     )
             }
         } else {
-<span class="cstat-no" title="statement not covered" >            if (this.props.actionList === null) {</span>
+<span class="cstat-no" title="statement not covered" >            if (!this.props.action) {</span>
                 
 <span class="cstat-no" title="statement not covered" >                if (this.props.selectedItemList.length &gt; 0) {</span>
 <span class="cstat-no" title="statement not covered" >                    return (</span>
@@ -302,7 +304,8 @@ export default class DevicesPage extends Component {
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             selectedItemList={this.props.selectedItemList}
-                            changeActionList={this.props.changeActionList}
+                            action={this.props.action}
+                            changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
                             glpi={this.props.glpi} 
                         /&gt;
@@ -313,7 +316,7 @@ export default class DevicesPage extends Component {
                     )
                 }
             } else {
-<span class="cstat-no" title="statement not covered" >                switch (this.props.actionList) {</span>
+<span class="cstat-no" title="statement not covered" >                switch (this.props.action) {</span>
                     case "EditOne":
                     retu<span class="cstat-no" title="statement not covered" >rn (</span>
                         &lt;DevicesEditOne 
@@ -322,7 +325,7 @@ export default class DevicesPage extends Component {
                             changeSelectionMode={this.props.changeSelectionMode}
                             location={this.props.location} 
                             onNavigate={this.props.onNavigate}
-                            changeActionList={this.props.changeActionList}
+                            changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification} 
                             glpi={this.props.glpi}
                         /&gt;
@@ -347,8 +350,8 @@ export default class DevicesPage extends Component {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
+    action: PropTypes.string,
+    changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
@@ -358,7 +361,7 @@ export default class DevicesPage extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 17:13:20 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -22,12 +22,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/126</span>
+        <span class='fraction'>0/129</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/50</span>
+        <span class='fraction'>0/52</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -402,7 +402,12 @@
 357
 358
 359
-360</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+360
+361
+362
+363
+364
+365</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -415,6 +420,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -798,8 +808,13 @@ export default class DevicesList extends Component {
             this.listView.winControl.footer.style.height = '1px'
         }
 &nbsp;
-        if (!this.props.actionList &amp;&amp; (prevProps.actionList === 'Edit' || prevProps.actionList === 'EditOne' || prevProps.actionList === 'Delete')) {
+        if (!this.props.action &amp;&amp; (prevProps.action === 'Edit' || prevProps.action === 'EditOne' || prevProps.action === 'Delete')) {
             this.handleRefresh()
+        }
+&nbsp;
+        if (this.props.action === "reload") {
+            this.handleRefresh()
+            this.props.changeAction(null)            
         }
     }
 &nbsp;
@@ -851,7 +866,7 @@ export default class DevicesList extends Component {
         let button = even<span class="cstat-no" title="statement not covered" >tObject.currentTarget.winControl</span>
         setT<span class="cstat-no" title="statement not covered" >imeout(() =<span class="fstat-no" title="function not covered" >&gt; </span>{</span>
             this<span class="cstat-no" title="statement not covered" >.props.onNavigate(this.state.selectedItemList.length &gt; 0 &amp;&amp; this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)</span>
-            this<span class="cstat-no" title="statement not covered" >.props.changeActionList(button.label)</span>
+            this<span class="cstat-no" title="statement not covered" >.props.changeAction(button.label)</span>
         }, 0)
     }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
@@ -861,12 +876,12 @@ export default class DevicesList extends Component {
         
         this<span class="cstat-no" title="statement not covered" >.props.changeSelectionMode(false)</span>
         this<span class="cstat-no" title="statement not covered" >.props.onNavigate([this.props.location[0]])</span>
-        this<span class="cstat-no" title="statement not covered" >.props.changeActionList(button.label)</span>
+        this<span class="cstat-no" title="statement not covered" >.props.changeAction(button.label)</span>
     }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
     handleToggleSelectionMode = () =<span class="fstat-no" title="function not covered" >&gt; </span>{
         this<span class="cstat-no" title="statement not covered" >.listView.winControl.selection.clear()</span>
-        this<span class="cstat-no" title="statement not covered" >.props.changeActionList(null)</span>
+        this<span class="cstat-no" title="statement not covered" >.props.changeAction(null)</span>
         this<span class="cstat-no" title="statement not covered" >.props.changeSelectionMode(!this.props.selectionMode)</span>
         this<span class="cstat-no" title="statement not covered" >.props.onNavigate([this.props.location[0]])  </span>
         this<span class="cstat-no" title="statement not covered" >.setState({</span>
@@ -887,11 +902,11 @@ export default class DevicesList extends Component {
             selectedItemList: itemSelected
         })
 &nbsp;
-        if (<span class="cstat-no" title="statement not covered" >this.props.actionList !== 'Edit') {</span>
+        if (<span class="cstat-no" title="statement not covered" >this.props.action !== 'Edit') {</span>
                
             setT<span class="cstat-no" title="statement not covered" >imeout(() =<span class="fstat-no" title="function not covered" >&gt; </span>{</span>
                 if(i<span class="cstat-no" title="statement not covered" >ndex.length !== 0) {</span>
-                    this<span class="cstat-no" title="statement not covered" >.props.changeActionList(null)</span>
+                    this<span class="cstat-no" title="statement not covered" >.props.changeAction(null)</span>
                 }
                 this<span class="cstat-no" title="statement not covered" >.props.onNavigate(index.length === 1 &amp;&amp; !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)</span>
             }, 0)
@@ -913,19 +928,19 @@ export default class DevicesList extends Component {
                 this<span class="cstat-no" title="statement not covered" >.setState({</span>
                     isLoading: true
                 })
-                this<span class="cstat-no" title="statement not covered" >.props.changeActionList(button.label)</span>
+                this<span class="cstat-no" title="statement not covered" >.props.changeAction(button.label)</span>
 &nbsp;
                 awai<span class="cstat-no" title="statement not covered" >t this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })</span>
 &nbsp;
                 this<span class="cstat-no" title="statement not covered" >.props.showNotification('Success', 'elements successfully removed')</span>
-                this<span class="cstat-no" title="statement not covered" >.props.changeActionList(null)</span>
+                this<span class="cstat-no" title="statement not covered" >.props.changeAction(null)</span>
                 this<span class="cstat-no" title="statement not covered" >.props.changeSelectionMode(false)</span>
                 this<span class="cstat-no" title="statement not covered" >.setState({</span>
                     selectedItemList: []
                 })
             } else {
                 // Clean another actions selected
-                this<span class="cstat-no" title="statement not covered" >.props.changeActionList(null)</span>
+                this<span class="cstat-no" title="statement not covered" >.props.changeAction(null)</span>
                 // Exit selection mode
                 this<span class="cstat-no" title="statement not covered" >.props.changeSelectionMode(false)</span>
                 this<span class="cstat-no" title="statement not covered" >.listView.winControl.selection.clear()</span>
@@ -938,7 +953,7 @@ export default class DevicesList extends Component {
             if (<span class="cstat-no" title="statement not covered" >error.length &gt; 1) {</span>
                 this<span class="cstat-no" title="statement not covered" >.props.showNotification(error[0], error[1])</span>
             }
-            this<span class="cstat-no" title="statement not covered" >.props.changeActionList(null)</span>
+            this<span class="cstat-no" title="statement not covered" >.props.changeAction(null)</span>
             this<span class="cstat-no" title="statement not covered" >.props.changeSelectionMode(false)</span>
             this<span class="cstat-no" title="statement not covered" >.setState({</span>
                 selectedItemList: []
@@ -1013,7 +1028,7 @@ export default class DevicesList extends Component {
         } catch (error) {
             this<span class="cstat-no" title="statement not covered" >.listView.winControl.footer.style.height = '1px'</span>
         }
-    }<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span></span></span></span></span></span>
+    }<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
 &nbsp;
 <span class="fstat-no" title="function not covered" >    re</span>nder() {
         let deleteCommand = (
@@ -1115,8 +1130,8 @@ export default class DevicesList extends Component {
     onNavigate: PropTypes.func.isRequired,
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
+    action: PropTypes.string,
+    changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
@@ -1126,7 +1141,7 @@ export default class DevicesList extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 17:13:20 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 21:02:21 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
