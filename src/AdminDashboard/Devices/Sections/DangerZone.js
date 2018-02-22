@@ -65,8 +65,8 @@ class DangerZone extends Component {
                         <button className="win-button" onClick={this.unenroll}>Unenroll</button>
                     </div>
                     <Confirmation 
-                        title={'Unenroll device #' + this.props.selectedItemList["PluginFlyvemdmAgent.id"] } 
-                        message={'You are going to unenroll device ' + this.props.selectedItemList["PluginFlyvemdmAgent.id"]} 
+                        title={'Unenroll device #' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"] } 
+                        message={'You are going to unenroll device ' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"]} 
                         reference={el => this.unenrollmentDevice = el} 
                     /> 
                 </div>
@@ -80,8 +80,8 @@ class DangerZone extends Component {
                         <button className="win-button" onClick={this.delete}>Delete</button>
                     </div>
                     <Confirmation 
-                        title={'Delete device #' + this.props.selectedItemList["PluginFlyvemdmAgent.id"] } 
-                        message={'You are going to delete device ' + this.props.selectedItemList["PluginFlyvemdmAgent.id"]} 
+                        title={'Delete device #' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"] } 
+                        message={'You are going to delete device ' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"]} 
                         reference={el => this.deleteDevice = el} 
                     /> 
                 </div>
