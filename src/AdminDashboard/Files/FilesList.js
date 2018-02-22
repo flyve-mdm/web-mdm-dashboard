@@ -215,20 +215,33 @@ export default class FilesList extends Component {
         }
     }
 
-    onFooterVisibilityChanged = (eventObject) => {
-
+    showFooterList = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
-
         if (eventObject.detail.visible && this.state.scrolling) {
             listView.footer.style.height = '100px'
-            setTimeout(() => {
-                listView.footer.style.height = '1px'
-            }, 3000)
+            this.loadMoreData()
+        }
+    }
 
-        } else {
-            setTimeout(() => {
-                listView.footer.style.height = '1px'
-            }, 3000)
+    loadMoreData = async () => {
+        try {
+            const files = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFile', options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+
+            for (const item in files.data) {
+                this.state.itemList.push(files.data[item])
+            }
+
+            this.setState({
+                pagination: {
+                    ...this.state.pagination,
+                    page: this.state.pagination.page + 1
+                }
+            })
+
+            this.listView.winControl.footer.style.height = '1px'
+
+        } catch (error) {
+            this.listView.winControl.footer.style.height = '1px'
         }
     }
 
@@ -298,7 +311,7 @@ export default class FilesList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
-                        onClick={this.handleAdd}
+                        onClick={this.handlePanel}
                     />
 
                     {this.props.selectionMode ? editCommand : null}
