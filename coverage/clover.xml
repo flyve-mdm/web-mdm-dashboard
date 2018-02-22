@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1519306840144" clover="3.2.0">
-  <project timestamp="1519306840145" name="All files">
-    <metrics statements="3359" coveredstatements="4" conditionals="1817" coveredconditionals="0" methods="1051" coveredmethods="0" elements="6227" coveredelements="4" complexity="0" loc="3359" ncloc="3359" packages="27" files="160" classes="160">
+<coverage generated="1519310308717" clover="3.2.0">
+  <project timestamp="1519310308718" name="All files">
+    <metrics statements="3369" coveredstatements="4" conditionals="1823" coveredconditionals="0" methods="1054" coveredmethods="0" elements="6246" coveredelements="4" complexity="0" loc="3369" ncloc="3369" packages="27" files="160" classes="160">
       <package name="src">
         <metrics statements="48" coveredstatements="0" conditionals="43" coveredconditionals="0" methods="22" coveredmethods="0"/>
         <file name="index.js" path="/home/circleci/repo/src/index.js">
@@ -1262,7 +1262,7 @@
         </file>
       </package>
       <package name="src.AdminDashboard.Devices.Sections">
-        <metrics statements="134" coveredstatements="0" conditionals="70" coveredconditionals="0" methods="49" coveredmethods="0"/>
+        <metrics statements="143" coveredstatements="0" conditionals="74" coveredconditionals="0" methods="52" coveredmethods="0"/>
         <file name="Applications.js" path="/home/circleci/repo/src/AdminDashboard/Devices/Sections/Applications.js">
           <metrics statements="13" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -1346,7 +1346,7 @@
           <line num="90" count="0" type="stmt"/>
         </file>
         <file name="Main.js" path="/home/circleci/repo/src/AdminDashboard/Devices/Sections/Main.js">
-          <metrics statements="37" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="14" coveredmethods="0"/>
+          <metrics statements="46" coveredstatements="0" conditionals="22" coveredconditionals="0" methods="17" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="2" count="0" type="stmt"/>
           <line num="3" count="0" type="stmt"/>
@@ -1354,36 +1354,45 @@
           <line num="5" count="0" type="stmt"/>
           <line num="6" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="11" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="40" count="0" type="stmt"/>
-          <line num="43" count="0" type="stmt"/>
-          <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="46" count="0" type="stmt"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="34" count="0" type="stmt"/>
+          <line num="41" count="0" type="stmt"/>
+          <line num="44" count="0" type="stmt"/>
+          <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="47" count="0" type="stmt"/>
-          <line num="52" count="0" type="stmt"/>
-          <line num="55" count="0" type="stmt"/>
-          <line num="57" count="0" type="stmt"/>
-          <line num="59" count="0" type="stmt"/>
+          <line num="48" count="0" type="stmt"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="56" count="0" type="stmt"/>
+          <line num="58" count="0" type="stmt"/>
           <line num="60" count="0" type="stmt"/>
           <line num="61" count="0" type="stmt"/>
           <line num="62" count="0" type="stmt"/>
-          <line num="65" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="66" count="0" type="stmt"/>
-          <line num="70" count="0" type="stmt"/>
-          <line num="73" count="0" type="stmt"/>
-          <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="78" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="79" count="0" type="stmt"/>
-          <line num="81" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="84" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="85" count="0" type="stmt"/>
-          <line num="87" count="0" type="stmt"/>
-          <line num="89" count="0" type="stmt"/>
-          <line num="127" count="0" type="stmt"/>
-          <line num="131" count="0" type="stmt"/>
-          <line num="135" count="0" type="stmt"/>
-          <line num="141" count="0" type="stmt"/>
+          <line num="63" count="0" type="stmt"/>
+          <line num="66" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="67" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="74" count="0" type="stmt"/>
+          <line num="75" count="0" type="stmt"/>
+          <line num="78" count="0" type="stmt"/>
+          <line num="81" count="0" type="stmt"/>
+          <line num="82" count="0" type="stmt"/>
+          <line num="89" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="90" count="0" type="stmt"/>
+          <line num="91" count="0" type="stmt"/>
+          <line num="94" count="0" type="stmt"/>
+          <line num="95" count="0" type="stmt"/>
+          <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="102" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="103" count="0" type="stmt"/>
+          <line num="105" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="108" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="109" count="0" type="stmt"/>
+          <line num="111" count="0" type="stmt"/>
+          <line num="113" count="0" type="stmt"/>
+          <line num="164" count="0" type="stmt"/>
+          <line num="168" count="0" type="stmt"/>
+          <line num="172" count="0" type="stmt"/>
+          <line num="178" count="0" type="stmt"/>
         </file>
         <file name="SystemReport.js" path="/home/circleci/repo/src/AdminDashboard/Devices/Sections/SystemReport.js">
           <metrics statements="18" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="6" coveredmethods="0"/>
@@ -3464,7 +3473,7 @@
         </file>
       </package>
       <package name="src.Utils">
-        <metrics statements="126" coveredstatements="0" conditionals="96" coveredconditionals="0" methods="42" coveredmethods="0"/>
+        <metrics statements="127" coveredstatements="0" conditionals="98" coveredconditionals="0" methods="42" coveredmethods="0"/>
         <file name="Animations.js" path="/home/circleci/repo/src/Utils/Animations.js">
           <metrics statements="6" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -3565,14 +3574,15 @@
           <line num="40" count="0" type="stmt"/>
         </file>
         <file name="Loading.js" path="/home/circleci/repo/src/Utils/Loading.js">
-          <metrics statements="7" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
+          <metrics statements="8" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="2" count="0" type="stmt"/>
           <line num="3" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="26" count="0" type="stmt"/>
-          <line num="28" count="0" type="stmt"/>
+          <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="36" count="0" type="stmt"/>
+          <line num="40" count="0" type="stmt"/>
+          <line num="43" count="0" type="stmt"/>
         </file>
         <file name="NativeNotification.js" path="/home/circleci/repo/src/Utils/NativeNotification.js">
           <metrics statements="4" coveredstatements="0" conditionals="5" coveredconditionals="0" methods="2" coveredmethods="0"/>
