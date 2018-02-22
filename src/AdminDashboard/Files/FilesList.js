@@ -50,12 +50,6 @@ export default class FilesList extends Component {
         )
     })
 
-    groupHeaderRenderer = ReactWinJS.reactRenderer((item) => {
-        return (
-            <div>{item.data.title}</div>
-        )
-    })
-
     handleRefresh = async () => {
         try {
             this.props.onNavigate([this.props.location[0]])
