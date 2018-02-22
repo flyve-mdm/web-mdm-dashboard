@@ -29,7 +29,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary '>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
+                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }}/>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary'>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
+                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }}/>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary '>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
+                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }}/>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary '>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
+                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }}/>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +164,7 @@ export default class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary '>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
+                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }}/>
                                     </div>
                                 </div>
                             </div>

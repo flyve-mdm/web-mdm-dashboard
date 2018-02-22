@@ -15,117 +15,6 @@ export default class FleetsContent extends Component {
         }
     }
 
-    deletePolicy = (policy) => {
-        // const index = this.state.list.indexOf(policy)
-        // this.setState({
-            // list: [
-                // ...this.state.list.slice(0, index),
-                // ...this.state.list.slice(index+1)
-            // ]
-        // })
-    }
-
-    changeInput = (e) => {
-        // const newArray = this.state.list.map(element => {
-            // if (element['PluginFlyvemdmPolicy.id'].toString() === e.target.name) {
-                // const editElement = { 
-                    // ...element,
-                    // 'PluginFlyvemdmPolicy.default_value': e.target.value
-                // }
-                // return editElement
-            // }
-            // return element
-        // })
-// 
-        // this.setState({ list: newArray })
-    }
-
-    editPolicy = (name, value) => {
-        // const newArray = this.state.list.map(element => {
-        //     if (element['PluginFlyvemdmPolicy.id'] === name) {
-        //         const editElement = { 
-        //             ...element,
-        //             'PluginFlyvemdmPolicy.default_value': value
-        //         }
-        //         return editElement
-        //     }
-        //     return element
-        // })
-
-        // this.setState({ list: newArray })
-    }
-
-    handleAddPolicy = () => {
-        // this.setState({ addPolicy: true })
-    }
-
-    handleSuggestionsRequested = (eventObject) => {
-        // let queryText = eventObject.detail.queryText,
-        //     query = queryText.toLowerCase(),
-        //     suggestionCollection = eventObject.detail.searchSuggestionCollection
-
-        // if (queryText.length > 0) {
-        //     for (let i = 0, len = this.state.suggestionList.length; i < len; i++) {
-        //         if (this.state.suggestionList[i].toLowerCase().indexOf(query) !== -1) {
-        //             suggestionCollection.appendQuerySuggestion(this.state.suggestionList[i])
-        //         }
-        //     }
-        // }
-    }
-
-    componentWillReceiveProps (newProps) {
-        // let policies = newProps.currentItem['PluginFlyvemdmFleet.PluginFlyvemdmTask.itemtype']
-        // this.setState({addPolicy: false, list: policies})
-    }
-
-    handleQuerySubmitted = (eventObject) => {
-        // if (!this.state.list) this.setState({ list: []})
-        // let isValid = true
-        // this.state.list.forEach(policy => {
-            // if (policy['PluginFlyvemdmPolicy.name'] === eventObject.detail.queryText) isValid = false
-        // })
-        // let isExists = false
-        // Policies.data.forEach(policiy => {
-            // if (policiy['PluginFlyvemdmPolicy.name'] === eventObject.detail.queryText) isExists = true
-        // })
-        // if (isValid && isExists) {
-            // for (let index = 0; index < Policies.data.length; index++) {
-                // const policy = Policies.data[index]
-                // if(policy['PluginFlyvemdmPolicy.name'] === eventObject.detail.queryText) { 
-                    // document.querySelectorAll('[type="search"]')[0].value = ''
-                    // this.setState({ 
-                        // list: [
-                            // ...this.state.list,
-                            // policy
-                        // ],
-                        // addPolicy: false
-                    // })
-                // }
-            // } 
-        // }
-    }
-
-    handleEdit = () => {
-        // this.props.changeActionList("EditOne")
-    }
-
-    handleDelete = async () => {
-        //const isOK = await Confirmation.isOK(this.contentDialog)
-        //if (isOK) {
-        //    let item = this.props.dataSource.itemList
-        //    let index = this.props.selectedIndex
-        //    index.sort()
-        //    index.reverse()
-        //    index.forEach((i) => {
-        //        item.splice(i, 1)
-        //    })
-//
-        //    this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-        //    this.props.onNavigate([this.props.location[0]])
-        //    this.props.showNotification('Success', 'deleted fleet')
-        //}
-    }
-
     render() {
         let renderComponent
         if (this.props.policiesData) {
@@ -134,9 +23,7 @@ export default class FleetsContent extends Component {
                     <FleetsTaskItemList
                         key={[item['PluginFlyvemdmPolicy.name'], index].join("_")}
                         data={item} 
-                        deletePolicy={this.deletePolicy}
-                        changeInput={this.changeInput}
-                        editPolicy={this.editPolicy} />
+                        addedPolicy={false} />
                 )
             })
         }
@@ -177,5 +64,5 @@ FleetsContent.propTypes = {
     changeActionList: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     policiesData: PropTypes.array.isRequired,
-    fetchTasks: PropTypes.func.isRequired
+    tasksData: PropTypes.array.isRequired
 }

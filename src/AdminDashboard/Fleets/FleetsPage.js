@@ -5,6 +5,8 @@ import FleetsNew from './FleetsNew'
 import FleetsContent from './FleetsContent'
 import PoliciesAdd from './PoliciesAdd'
 import FleetsEdit from './FleetsEdit'
+import Loading from '../../Utils/Loading'
+import ContentPane from '../../Utils/ContentPane'
 
 export default class FleetsPage extends Component {
     constructor(props) {
@@ -14,11 +16,30 @@ export default class FleetsPage extends Component {
         }
     }
 
-    componentDidMount = async () => {
-        const tasksData = await this.props.fetchTasks(this.props.selectedItemList[0]['PluginFlyvemdmFleet.id'])
+    handleFecthTask = async IdTask => {
+        const tasksData = await this.props.fetchTasks(IdTask)
         this.setState({
             tasksData: this.state.tasksData.concat(tasksData)
         })
+    }
+
+    componentDidMount = () => {
+        this.props.selectedItemList && this.handleFecthTask(
+            this.props.selectedItemList[0]['PluginFlyvemdmFleet.id']
+        )
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (Array.isArray(nextProps.selectedItemList) && 
+            nextProps.selectedItemList !== this.props.selectedItemList) {
+            this.setState({
+                tasksData: []
+            }, () => {
+                this.handleFecthTask(
+                    nextProps.selectedItemList[0]['PluginFlyvemdmFleet.id']
+                )
+            })
+        }
     }
 
     render() {
@@ -73,8 +94,16 @@ export default class FleetsPage extends Component {
         } else {
             if (this.props.actionList === null) {
                 if (this.props.selectedItemList.length > 0) {
-                    return (
-                        <FleetsContent
+                    if (!this.state.tasksData.length) {
+                        return ( 
+                            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                                <Loading />
+                            </ContentPane>
+
+                        )
+                    } else {
+                        return (
+                            <FleetsContent
                             itemListPaneWidth={this.props.itemListPaneWidth}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
@@ -82,9 +111,10 @@ export default class FleetsPage extends Component {
                             changeActionList={this.props.changeActionList} 
                             showNotification={this.props.showNotification}
                             policiesData={this.props.policiesData}
-                            fetchTasks={this.props.fetchTasks}
-                        />
-                    )
+                            tasksData={this.state.tasksData}
+                            />
+                        )
+                    }
                 } else {
                     return (
                         <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
@@ -111,13 +141,13 @@ FleetsPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedIndex: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
+    selectedItemList: PropTypes.array,
     policiesData: PropTypes.array.isRequired,
     fetchTasks: PropTypes.func.isRequired
 }
