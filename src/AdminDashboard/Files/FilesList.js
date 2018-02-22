@@ -136,7 +136,7 @@ export default class FilesList extends Component {
 
                 let itemListToDelete = this.state.selectedItemList.map((item) => {
                     return {
-                        id: item["PluginFlyvemdmAgent.id"]
+                        id: item["PluginFlyvemdmFile.id"]
                     }
                 })
 
@@ -151,8 +151,9 @@ export default class FilesList extends Component {
                 this.props.changeActionList(null)
                 this.props.changeSelectionMode(false)
                 this.setState({
-                    selectedItemList: []
+                    selectedItemList: [],
                 })
+                this.handleRefresh()
             } else {
                 // Clean another actions selected
                 this.props.changeActionList(null)
@@ -160,7 +161,8 @@ export default class FilesList extends Component {
                 this.props.changeSelectionMode(false)
                 this.listView.winControl.selection.clear()
                 this.setState({
-                    selectedItemList: []
+                    selectedItemList: [],
+                    isLoading: false
                 })
             }
 
@@ -226,7 +228,6 @@ export default class FilesList extends Component {
     loadMoreData = async () => {
         try {
             const files = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFile', options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
-
             for (const item in files.data) {
                 this.state.itemList.push(files.data[item])
             }
@@ -345,5 +346,6 @@ FilesList.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
