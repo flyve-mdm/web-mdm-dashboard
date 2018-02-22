@@ -28,8 +28,7 @@ export default class Enroll extends Component {
                 })
 
                 this.props.showNotification('Success', 'invitation sent')
-                this.props.changeActionList(null)
- 
+                this.props.changeAction(null)
             }
         } catch (error) {
             if (error.length > 1) {
@@ -68,7 +67,7 @@ export default class Enroll extends Component {
                         required
                     />
                     <br />
-                    <button className="win-button" onClick={() => this.props.changeActionList(null)}>Cancel</button>
+                    <button className="win-button" onClick={() => this.props.changeAction(null)}>Cancel</button>
                     <button
                         className="win-button win-button-primary"
                         style={{ marginLeft: 10 }}
@@ -87,7 +86,7 @@ Enroll.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    changeActionList: PropTypes.func.isRequired,
+    changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }

@@ -35,7 +35,7 @@ export default class DevicesList extends Component {
             this.listView.winControl.footer.style.height = '1px'
         }
 
-        if (!this.props.actionList && (prevProps.actionList === 'Edit' || prevProps.actionList === 'EditOne' || prevProps.actionList === 'Delete')) {
+        if (!this.props.action && (prevProps.action === 'Edit' || prevProps.action === 'EditOne' || prevProps.action === 'Delete')) {
             this.handleRefresh()
         }
     }
@@ -88,7 +88,7 @@ export default class DevicesList extends Component {
         let button = eventObject.currentTarget.winControl
         setTimeout(() => {
             this.props.onNavigate(this.state.selectedItemList.length > 0 && this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
-            this.props.changeActionList(button.label)
+            this.props.changeAction(button.label)
         }, 0)
     }
 
@@ -98,12 +98,12 @@ export default class DevicesList extends Component {
         
         this.props.changeSelectionMode(false)
         this.props.onNavigate([this.props.location[0]])
-        this.props.changeActionList(button.label)
+        this.props.changeAction(button.label)
     }
 
     handleToggleSelectionMode = () => {
         this.listView.winControl.selection.clear()
-        this.props.changeActionList(null)
+        this.props.changeAction(null)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.onNavigate([this.props.location[0]])  
         this.setState({
@@ -124,11 +124,11 @@ export default class DevicesList extends Component {
             selectedItemList: itemSelected
         })
 
-        if (this.props.actionList !== 'Edit') {
+        if (this.props.action !== 'Edit') {
                
             setTimeout(() => {
                 if(index.length !== 0) {
-                    this.props.changeActionList(null)
+                    this.props.changeAction(null)
                 }
                 this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
             }, 0)
@@ -150,19 +150,19 @@ export default class DevicesList extends Component {
                 this.setState({
                     isLoading: true
                 })
-                this.props.changeActionList(button.label)
+                this.props.changeAction(button.label)
 
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })
 
                 this.props.showNotification('Success', 'elements successfully removed')
-                this.props.changeActionList(null)
+                this.props.changeAction(null)
                 this.props.changeSelectionMode(false)
                 this.setState({
                     selectedItemList: []
                 })
             } else {
                 // Clean another actions selected
-                this.props.changeActionList(null)
+                this.props.changeAction(null)
                 // Exit selection mode
                 this.props.changeSelectionMode(false)
                 this.listView.winControl.selection.clear()
@@ -175,7 +175,7 @@ export default class DevicesList extends Component {
             if (error.length > 1) {
                 this.props.showNotification(error[0], error[1])
             }
-            this.props.changeActionList(null)
+            this.props.changeAction(null)
             this.props.changeSelectionMode(false)
             this.setState({
                 selectedItemList: []
@@ -352,8 +352,8 @@ DevicesList.propTypes = {
     onNavigate: PropTypes.func.isRequired,
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
+    action: PropTypes.string,
+    changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
