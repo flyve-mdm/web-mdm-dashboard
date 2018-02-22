@@ -72,7 +72,7 @@ export default class FilesList extends Component {
             this.setState({
                 isLoading: false,
                 order: files.order,
-                itemList: new WinJS.Binding.List(files.data),
+                itemList: new WinJS.Binding.List(files.data)
             })
 
         } catch (error) {
@@ -83,98 +83,132 @@ export default class FilesList extends Component {
         }
     }
 
+    handleEdit = (eventObject) => {
+        let button = eventObject.currentTarget.winControl
+        setTimeout(() => {
+            this.props.onNavigate(this.state.selectedItemList.length > 0 && this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
+            this.props.changeActionList(button.label)
+        }, 0)
+    }
+
+    handlePanel = (eventObject) => {
+        let button = eventObject.currentTarget.winControl
+        this.listView.winControl.selection.clear()
+
+        this.props.changeSelectionMode(false)
+        this.props.onNavigate([this.props.location[0]])
+        this.props.changeActionList(button.label)
+    }
+
     handleToggleSelectionMode = () => {
+        this.listView.winControl.selection.clear()
+        this.props.changeActionList(null)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.onNavigate([this.props.location[0]])
-        this.refs.listView.winControl.selection.clear()
+        this.setState({
+            selectedItemList: []
+        })
     }
 
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        setTimeout(() => {
-            this.setState({ selectedItemList: index })
-            this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
-        }, 0)
+        let itemSelected = []
+
+        for (const item of index) {
+            itemSelected.push(this.state.itemList.getItem(item).data)
+        }
+
+        this.setState({
+            selectedItemList: itemSelected
+        })
+
+        if (this.props.actionList !== 'Edit') {
+
+            setTimeout(() => {
+                if (index.length !== 0) {
+                    this.props.changeActionList(null)
+                }
+                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
+            }, 0)
+        }
     }
 
-    handleEdit = (eventObject) => {
-        let index = this.state.selectedItemList
-        let button = eventObject.currentTarget.winControl
+    handleDelete = async (eventObject) => {
+        try {
+            let button = eventObject.currentTarget.winControl
+            const isOK = await Confirmation.isOK(this.contentDialog)
+            if (isOK) {
 
-        setTimeout(() => {
-            this.props.changeActionList(button.label)
-            this.props.onNavigate(index.length > 0 && this.props.selectionMode ? [this.props.location[0], index] : this.props.location)
-        }, 0)
-    }
+                let itemListToDelete = this.state.selectedItemList.map((item) => {
+                    return {
+                        id: item["PluginFlyvemdmAgent.id"]
+                    }
+                })
 
-    handleAdd = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        this.refs.listView.winControl.selection.clear()
+                this.setState({
+                    isLoading: true
+                })
+                this.props.changeActionList(button.label)
 
-        setTimeout(() => {
-            this.props.changeSelectionMode(false)
-            this.props.changeActionList(button.label)
-            this.props.onNavigate([this.props.location[0]])
-        }, 0)
-    }
+                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmFile', input: itemListToDelete, queryString: { force_purge: true } })
 
-    handleDelete = async () => {
-        const isOK = await Confirmation.isOK(this.contentDialog)
-        if (isOK) {
-            // Clean another actions selected
-            this.props.changeActionList(null)
-            // Exit selection mode
-            this.props.changeSelectionMode(false)
-
-            let item = this.props.dataSource.itemList
-            let index = this.state.selectedItemList
-            index.sort()
-            index.reverse()
-            index.forEach((i) => {
-                item.splice(i, 1)
-            })
-
-            
-            if (this.state.selectedItemList.length > 1) {
-                this.props.showNotification('Success', 'deleted files')
+                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.changeActionList(null)
+                this.props.changeSelectionMode(false)
+                this.setState({
+                    selectedItemList: []
+                })
             } else {
-                this.props.showNotification('Success', 'deleted file')
+                // Clean another actions selected
+                this.props.changeActionList(null)
+                // Exit selection mode
+                this.props.changeSelectionMode(false)
+                this.listView.winControl.selection.clear()
+                this.setState({
+                    selectedItemList: []
+                })
             }
-            
-            this.setState({
-                selectedItemList: []
-            })
 
-            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-        } else {
-            // Clean another actions selected
+        } catch (error) {
+            if (error.length > 1) {
+                this.props.showNotification(error[0], error[1])
+            }
             this.props.changeActionList(null)
-            // Exit selection mode
             this.props.changeSelectionMode(false)
-            this.refs.listView.winControl.selection.clear()
             this.setState({
                 selectedItemList: []
             })
         }
     }
 
-    handleSort = () => {
-        this.props.onNavigate([this.props.location[0]])
-        let array = []
-        this.props.dataSource.itemList.map((value, index) =>
-            array.push(value)
-        )
-        // this.props.changeDataSource(this.props.location, { itemList: ItemList(this.props.location[0], array, !this.props.dataSource.sort), sort: !this.props.dataSource.sort })
-    }
+    handleSort = async () => {
+        try {
+            this.props.onNavigate([this.props.location[0]])
+            this.setState({
+                isLoading: true,
+                pagination: {
+                    start: 0,
+                    page: 1,
+                    count: 15
+                }
+            })
+            let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-    descendingCompare(first, second) {
-        if (first === second)
-            return 0
-        else if (first < second)
-            return 1
-        else
-            return -1
+            const files = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFile', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3] } })
+
+            this.setState({
+                isLoading: false,
+                order: files.order,
+                itemList: new WinJS.Binding.List(files.data)
+            })
+
+        } catch (error) {
+            this.setState({
+                isLoading: false,
+                order: "ASC"
+            })
+        }
     }
 
     onLoadingStateChanged = (eventObject) => {
@@ -298,8 +332,6 @@ FilesList.propTypes = {
         PropTypes.number
     ]).isRequired,
     animation: PropTypes.bool.isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectionMode: PropTypes.bool.isRequired,
