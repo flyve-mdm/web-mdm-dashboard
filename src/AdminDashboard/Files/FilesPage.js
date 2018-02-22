@@ -8,62 +8,69 @@ import EmptyMessage from '../../Utils/EmptyMessage'
 export default class FilesPage extends Component {
 
     render() {
-        if (this.props.selectedIndex === null || this.props.actionList === 'Edit') {
-            if(this.props.actionList === null) {
-                return (
-                    <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
-                )
-            } else {
-                switch (this.props.actionList) {
-                    case "Edit":    
-                        return (
-                            <FilesEdit
+        if(this.props.selectedItemList === null || this.props.actionList === 'Edit') {
+            switch (this.props.actionList) {
+                case "Edit":
+                    return (
+                        <FilesEdit
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
-                            changeActionList={this.props.changeActionList} 
+                            changeActionList={this.props.changeActionList}
                             showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}
                         />
-                        )
-                    case "Add":
+                    )
+                case "Add":
                     return (
                         <FilesAdd
                             itemListPaneWidth={this.props.itemListPaneWidth}
                             dataSource={this.props.dataSource}
                             changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
-                            changeActionList={this.props.changeActionList} 
+                            changeActionList={this.props.changeActionList}
                             showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}
                         />
                     )
-                    default: 
+                default:
                     return (
-                        <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
+                        <EmptyMessage
+                            message="No Selection"
+                            itemListPaneWidth={this.props.itemListPaneWidth} />
                     )
-                }
             }
         } else {
-            let selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
-            if(selectedItemList !== undefined) {
-                return (
-                    <FilesContent
-                        itemListPaneWidth={this.props.itemListPaneWidth}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
-                        location={this.props.location}
-                        onNavigate={this.props.onNavigate}
-                        selectedIndex={this.props.selectedIndex}
-                        selectedItemList={selectedItemList}
-                        changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}
-                    />
-                )
+            if (this.props.actionList === null) {
+
+                if (this.props.selectedItemList.length > 0) {
+                    return (
+                        <FilesContent
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            changeSelectionMode={this.props.changeSelectionMode}
+                            location={this.props.location}
+                            onNavigate={this.props.onNavigate}
+                            selectedItemList={this.props.selectedItemList}
+                            changeActionList={this.props.changeActionList}
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi} 
+                        />
+                    )
+                } else {
+                    return (
+                        <EmptyMessage
+                            message="No Selection"
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                        />
+                    )
+                }
             } else {
                 return (
-                    <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
+                    <EmptyMessage
+                        message="No Selection"
+                        itemListPaneWidth={this.props.itemListPaneWidth} 
+                    />
                 )
             }
         }
@@ -74,13 +81,12 @@ FilesPage.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
-    selectedIndex: PropTypes.array,
+    selectedItemList: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }

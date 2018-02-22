@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Pluralize from 'pluralize'
 import ContentPane from '../../Utils/ContentPane'
-import BytesToSize from '../../Utils/BytesToSize'
 import Confirmation from '../../Utils/Confirmation'
 
 export default class FilesContent extends Component {
@@ -33,8 +32,7 @@ export default class FilesContent extends Component {
                     <div className="itemInfo">
                         <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} />
                         <div className="contentStatus">
-                            <div className="name">{this.props.selectedItemList["PluginFlyvemdmFile.name"]}</div>
-                            <div className="detail">{BytesToSize(this.props.selectedItemList["PluginFlyvemdmFile.filesize"])}</div>
+                            <div className="name">{this.props.selectedItemList[0]["PluginFlyvemdmFile.name"]}</div>
                             <br />
                             <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.changeActionList('Edit')} />
                             <span className="deleteIcon" onClick={this.handleDelete} />
@@ -42,7 +40,7 @@ export default class FilesContent extends Component {
                     </div>
                 </div>
                 <div className="separator" />
-                <Confirmation title={`Delete ` + this.props.location[0]} message={this.props.selectedItemList["PluginFlyvemdmFile.name"]} reference={el => this.contentDialog = el} />
+                <Confirmation title={`Delete ` + this.props.location[0]} message={this.props.selectedItemList[0]["PluginFlyvemdmFile.name"]} reference={el => this.contentDialog = el} />
             </ContentPane>
         )
     }
@@ -52,12 +50,11 @@ FilesContent.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
-    selectedIndex: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    selectedItemList: PropTypes.object.isRequired,
+    selectedItemList: PropTypes.array,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    changeSelectionMode: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
