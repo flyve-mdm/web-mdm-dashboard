@@ -275,7 +275,6 @@ export default class FleetsList extends Component {
         let listComponent = <Loader count={3} />
         
         if (!this.state.isLoading && this.state.itemList) {
-            console.log("Renderiza la lista")
             listComponent = (
                 <ReactWinJS.ListView
                     ref={(listView) => { this.listView = listView }}

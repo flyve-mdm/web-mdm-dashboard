@@ -18,6 +18,12 @@ export default class FleetsTaskItemList extends Component {
         })
     }
 
+    componentDidMount = () => {
+        this.props.addedPolicy && this.setState({
+            alreadyAdded: true
+        })
+    }
+
     render() {
         if(this.props.data === undefined) {
             return (   

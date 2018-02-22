@@ -15,7 +15,17 @@ export default class FleetsContent extends Component {
         }
     }
 
+    handleFleetHaveTask = policy => {
+        const haveTask = this.props.tasksData.some((task) => {
+            return task['plugin_flyvemdm_policies_id'] === policy['PluginFlyvemdmPolicy.id']
+        });
+        console.log(haveTask)
+        return haveTask
+    } 
+
     render() {
+        console.log('[Las Tasks]', this.props.tasksData)
+        console.log('[Las Politicas] ', this.props.policiesData)
         let renderComponent
         if (this.props.policiesData) {
             renderComponent = this.props.policiesData.map((item, index) => {
@@ -23,7 +33,7 @@ export default class FleetsContent extends Component {
                     <FleetsTaskItemList
                         key={[item['PluginFlyvemdmPolicy.name'], index].join("_")}
                         data={item} 
-                        addedPolicy={false} />
+                        addedPolicy={this.handleFleetHaveTask(item)} />
                 )
             })
         }

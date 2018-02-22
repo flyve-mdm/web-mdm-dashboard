@@ -43,9 +43,6 @@ export default class FleetsPage extends Component {
     }
 
     render() {
-        console.log(this.props.selectedItemList)
-        console.log(this.state.tasksData)
-
         if (this.props.selectedItemList === null || this.props.actionList === 'Edit') {
             switch (this.props.actionList) {
 

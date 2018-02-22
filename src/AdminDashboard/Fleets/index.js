@@ -17,7 +17,8 @@ export default class Fleets extends Component {
                 itemtype: 'PluginFlyvemdmPolicy', 
                 options: { 
                     uid_cols: true, 
-                    forcedisplay: [1, 2, 3, 4, 6]
+                    forcedisplay: [1, 2, 3, 4, 6],
+                    range: '0-50'
                 }
             })
         }
