@@ -14,7 +14,18 @@ class DangerZone extends Component {
     unenroll = async () => {
         const isOK = await Confirmation.isOK(this.unenrollmentDevice)
         if (isOK) {
-            this.props.showNotification('Success', 'unenrollment device')            
+            try {
+                const response = await this.props.glpi.genericRequest({
+                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
+                    requestParams: {
+                        method: 'PUT',
+                        body: JSON.stringify({"input":{"_unenroll": "1"}})
+                    }
+                })
+                this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
+            } catch (error) {
+                this.props.showNotification(error[0], error[1])
+            }
         }
     }
 
@@ -79,7 +90,8 @@ class DangerZone extends Component {
 
 DangerZone.propTypes = {
     selectedItemList: PropTypes.object.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.func.isRequired
 }
 
 export default DangerZone
