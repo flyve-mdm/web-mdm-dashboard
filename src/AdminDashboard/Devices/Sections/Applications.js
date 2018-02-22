@@ -83,7 +83,7 @@ class Applications extends Component {
 }
 
 Applications.propTypes = {
-    selectedItemList: PropTypes.object.isRequired
+    selectedItemList: PropTypes.array.isRequired
 }
 
 export default Applications

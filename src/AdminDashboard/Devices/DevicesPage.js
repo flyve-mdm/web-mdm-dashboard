@@ -9,8 +9,8 @@ import EmptyMessage from '../../Utils/EmptyMessage'
 export default class DevicesPage extends Component {
     
     render() {
-        if (this.props.selectedItemList === null || this.props.actionList === 'Edit') {
-            switch (this.props.actionList) {
+        if (!this.props.selectedItemList || this.props.action === 'Edit') {
+            switch (this.props.action) {
                 case "Edit":
                     return (
                         <DevicesEdit
@@ -19,7 +19,7 @@ export default class DevicesPage extends Component {
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
-                            changeActionList={this.props.changeActionList}
+                            changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
                             glpi={this.props.glpi} 
                             />
@@ -28,7 +28,7 @@ export default class DevicesPage extends Component {
                     return (
                         <Enroll
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            changeActionList={this.props.changeActionList} 
+                            changeAction={this.props.changeAction} 
                             showNotification={this.props.showNotification}
                             glpi={this.props.glpi}
                         />
@@ -41,7 +41,7 @@ export default class DevicesPage extends Component {
                     )
             }
         } else {
-            if (this.props.actionList === null) {
+            if (!this.props.action) {
                 
                 if (this.props.selectedItemList.length > 0) {
                     return (
@@ -51,7 +51,8 @@ export default class DevicesPage extends Component {
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             selectedItemList={this.props.selectedItemList}
-                            changeActionList={this.props.changeActionList}
+                            action={this.props.action}
+                            changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
                             glpi={this.props.glpi} 
                         />
@@ -62,7 +63,7 @@ export default class DevicesPage extends Component {
                     )
                 }
             } else {
-                switch (this.props.actionList) {
+                switch (this.props.action) {
                     case "EditOne":
                     return (
                         <DevicesEditOne 
@@ -71,7 +72,7 @@ export default class DevicesPage extends Component {
                             changeSelectionMode={this.props.changeSelectionMode}
                             location={this.props.location} 
                             onNavigate={this.props.onNavigate}
-                            changeActionList={this.props.changeActionList}
+                            changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification} 
                             glpi={this.props.glpi}
                         />
@@ -96,8 +97,8 @@ DevicesPage.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
+    action: PropTypes.string,
+    changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }

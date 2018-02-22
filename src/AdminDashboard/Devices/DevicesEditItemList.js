@@ -58,6 +58,5 @@ DevicesEditItemList.propTypes = {
     ]).isRequired,
     updateItemList: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
-    currentItem: PropTypes.object.isRequired,
-    changeActionList: PropTypes.func.isRequired
+    currentItem: PropTypes.object.isRequired
 }

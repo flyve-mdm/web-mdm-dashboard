@@ -8,21 +8,20 @@ export default class Devices extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectionMode: false
+            selectionMode: false,
+            action: null
         }
     }
 
-    changeSelectionMode = (selectionMode) => {
-        this.setState({
-            selectionMode
-        })
-    }
+    changeAction = action => this.setState({action})
+
+    changeSelectionMode = selectionMode => this.setState({selectionMode})
 
     render() {
 
         let selectedItemList = this.props.location.length === 2 ? this.props.location[1] : null
         if (this.props.mode === 'small') {
-            if (selectedItemList === null && this.props.actionList === null) {
+            if (!selectedItemList && !this.state.action) {
                 return <DevicesList
                     itemListPaneWidth={'100%'}
                     animation={this.props.animation}
@@ -30,8 +29,8 @@ export default class Devices extends Component {
                     onNavigate={this.props.onNavigate}
                     changeSelectionMode={this.changeSelectionMode}
                     selectionMode={this.state.selectionMode}
-                    actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList}
+                    action={this.state.action}
+                    changeAction={this.changeAction}
                     showNotification={this.props.showNotification} 
                     glpi={this.props.glpi} />
             } else {
@@ -42,8 +41,8 @@ export default class Devices extends Component {
                     onNavigate={this.props.onNavigate}
                     selectedItemList={selectedItemList}
                     changeSelectionMode={this.changeSelectionMode}
-                    actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList}
+                    action={this.state.action}
+                    changeAction={this.changeAction}
                     showNotification={this.props.showNotification} 
                     glpi={this.props.glpi} />
             }
@@ -58,8 +57,8 @@ export default class Devices extends Component {
                         onNavigate={this.props.onNavigate}
                         changeSelectionMode={this.changeSelectionMode}
                         selectionMode={this.state.selectionMode}
-                        actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} 
+                        action={this.state.action}
+                        changeAction={this.changeAction} 
                         showNotification={this.props.showNotification} 
                         glpi={this.props.glpi}
                     />
@@ -70,8 +69,8 @@ export default class Devices extends Component {
                         onNavigate={this.props.onNavigate}
                         selectedItemList={selectedItemList}
                         changeSelectionMode={this.changeSelectionMode}
-                        actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} 
+                        action={this.state.action}
+                        changeAction={this.changeAction} 
                         showNotification={this.props.showNotification} 
                         glpi={this.props.glpi}
                     />
@@ -85,8 +84,6 @@ Devices.propTypes = {
     animation: PropTypes.bool.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }

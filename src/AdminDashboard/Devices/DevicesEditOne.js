@@ -75,7 +75,7 @@ export default class DevicesEditOne extends Component {
         this.props.glpi.updateItem({itemtype: 'PluginFlyvemdmAgent', id: this.state.id, input})
         .then(() => {
             this.props.showNotification('Success', 'changes saved successfully')
-            this.props.changeActionList(null)
+            this.props.changeAction(null)
             this.props.changeSelectionMode(false)
         })
         .catch((error) => {
@@ -134,7 +134,7 @@ DevicesEditOne.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired,
+    changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }

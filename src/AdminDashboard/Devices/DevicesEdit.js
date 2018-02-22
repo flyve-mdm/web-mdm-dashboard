@@ -47,7 +47,7 @@ export default class DevicesEdit extends Component {
                 this.setState({
                     isLoading: false
                 })
-                this.props.changeActionList(null)
+                this.props.changeAction(null)
                 this.props.changeSelectionMode(false)
                 this.props.onNavigate([this.props.location[0]])
                 this.props.showNotification('Success', 'changes saved successfully')
@@ -59,7 +59,7 @@ export default class DevicesEdit extends Component {
                 this.setState({
                     isLoading: false
                 })
-                this.props.changeActionList(null)
+                this.props.changeAction(null)
                 this.props.changeSelectionMode(false)
                 this.props.onNavigate([this.props.location[0]])
             })
@@ -76,12 +76,12 @@ export default class DevicesEdit extends Component {
                 renderComponent = this.props.selectedItemList.map((item) => {                                
                     return (
                         <DevicesEditItemList
-                        key={item["PluginFlyvemdmAgent.id"]}
-                        itemListPaneWidth={this.props.itemListPaneWidth}
-                        updateItemList={this.updateItemList}
-                        location={this.props.location}
-                        currentItem={item}
-                        changeActionList={this.props.changeActionList} />
+                            key={item["PluginFlyvemdmAgent.id"]}
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            updateItemList={this.updateItemList}
+                            location={this.props.location}
+                            currentItem={item}
+                        />
                     )
                 })
             }
@@ -116,8 +116,8 @@ DevicesEdit.propTypes = {
     onNavigate: PropTypes.func.isRequired,
     selectedIndex: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
+    action: PropTypes.string,
+    changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
