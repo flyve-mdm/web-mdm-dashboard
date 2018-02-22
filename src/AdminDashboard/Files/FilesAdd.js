@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import FilesUpload from '../Files/FilesUpload'
 import FilesUploadItemList from './FilesUploadItemList'
 import ContentPane from '../../Utils/ContentPane'
+import Loading from '../../Utils/Loading'
 
 export default class FilesAdd extends Component {
 
     constructor (props) {
         super(props)
         this.state = {
-            files: []
+            files: [],
+            isLoading: false
         }
     }
     
@@ -34,67 +36,78 @@ export default class FilesAdd extends Component {
     }
 
     filesUpload = () => {
-        const formData = new FormData()
-        Object.keys(this.state.files).forEach((key) => {
-            const file = this.state.files[key]
-            formData.append(key, new Blob([file], { type: file.type }), file.name || 'file')
 
-            let item = this.props.dataSource.itemList
-            item.push(
-                {
-                    "PluginFlyvemdmFile.name": file.name,
-                    "PluginFlyvemdmFile.id": 10,
-                    "PluginFlyvemdmFile.filesize": file.filesize,
-                    "PluginFlyvemdmFile.source": ""
-                }
-            )
-            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-            this.props.changeActionList(null)
-            this.props.showNotification('Success', 'saved file')
-        })
+        try {
+            const formData = new FormData()
+            Object.keys(this.state.files).forEach(async(key) => {
+                const file = this.state.files[key]
+                formData.append("file", file)
+                formData.append("uploadManifest", `{"input":{"name":"${file.name}"}}`)
+                this.setState({
+                    isLoading: true
+                })
+                await this.props.glpi.uploadFile({ itemtype: "PluginFlyvemdmFile", input: formData })
+                this.setState({
+                    isLoading: false
+                })
+                this.props.showNotification('Success', 'Saved file')
+                this.props.changeActionList(null)
+            })
+        } catch (error) {
+            this.setState({
+                isLoading: false
+            })
+        }
     }
 
-  render() {
-    return (
-        <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-            <div className="contentHeader">
-                <h2 className="win-h2 titleContentPane" > New File </h2>
-            </div>
-            <div style={{ padding: '10px' }}>
-                <FilesUpload
-                    ref='files'
-                    className='files-dropzone'
-                    onChange={this.onFilesChange}
-                    onError={this.onFilesError}
-                    maxFiles={1}
-                    maxFileSize={10000000}
-                    minFileSize={0}
-                    clickable
-                >
-                    Drop the file here or click to upload
-            </FilesUpload>
-                <div style={{ margin: '10px' }}>
-                    <button className="win-button win-button-primary" onClick={this.filesUpload}>Save</button>
-                    {
-                        this.state.files.length > 0
-                            ? <div>
-                                {this.state.files.map((file) =>
-                                    <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
-                                )}
-                            </div>
-                            : null
-                    }
-                </div>
-            </div>
-        </ContentPane>
-        
-    )
-  }
+    render() {
+        let renderComponent
+        if (this.state.isLoading) {
+            renderComponent = (
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                    <Loading message="Loading..." />
+                </ContentPane>)
+        } else {
+            renderComponent = (
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                    <div className="contentHeader">
+                        <h2 className="win-h2 titleContentPane" > New File </h2>
+                    </div>
+                    <div style={{ padding: '10px' }}>
+                        <FilesUpload
+                            ref='files'
+                            className='files-dropzone'
+                            onChange={this.onFilesChange}
+                            onError={this.onFilesError}
+                            maxFiles={1}
+                            maxFileSize={10000000}
+                            minFileSize={0}
+                            clickable
+                        >
+                            Drop the file here or click to upload
+                        </FilesUpload>
+                        <div style={{ margin: '10px' }}>
+                            <button className="win-button win-button-primary" onClick={this.filesUpload}>Save</button>
+                            {
+                                this.state.files.length > 0
+                                    ? <div>
+                                        {this.state.files.map((file) =>
+                                            <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
+                                        )}
+                                    </div>
+                                    : null
+                            }
+                        </div>
+                    </div>
+                </ContentPane>
+            )
+        }
+        return renderComponent
+    }
 }
 FilesAdd.propTypes = {
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
