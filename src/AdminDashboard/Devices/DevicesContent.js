@@ -14,10 +14,10 @@ class DevicesContent extends Component {
 
                         <Main 
                             location={this.props.location}
-                            onNavigate={this.props.onNavigate}  
-                            changeActionList={this.props.changeActionList} 
                             selectedItemList={this.props.selectedItemList} 
+                            changeAction={this.props.changeAction} 
                             changeSelectionMode={this.props.changeSelectionMode} 
+                            onNavigate={this.props.onNavigate}  
                             showNotification={this.props.showNotification}
                             glpi={this.props.glpi}
                         />
@@ -48,6 +48,11 @@ class DevicesContent extends Component {
                         <DangerZone 
                             selectedItemList={this.props.selectedItemList}
                             showNotification={this.props.showNotification}
+                            location={this.props.location}
+                            onNavigate={this.props.onNavigate} 
+                            changeAction={this.props.changeAction}
+                            action={this.props.action}
+                            glpi={this.props.glpi}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -65,10 +70,11 @@ DevicesContent.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectedItemList: PropTypes.array,
-    changeActionList: PropTypes.func.isRequired,
+    changeAction: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
+    glpi: PropTypes.object.isRequired,
+    action: PropTypes.string
 }
 
 export default DevicesContent

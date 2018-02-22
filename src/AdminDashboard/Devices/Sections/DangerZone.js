@@ -14,7 +14,20 @@ class DangerZone extends Component {
     unenroll = async () => {
         const isOK = await Confirmation.isOK(this.unenrollmentDevice)
         if (isOK) {
-            this.props.showNotification('Success', 'unenrollment device')            
+            try {
+                const response = await this.props.glpi.genericRequest({
+                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
+                    requestParams: {
+                        method: 'PUT',
+                        body: JSON.stringify({"input":{"_unenroll": "1"}})
+                    }
+                })
+                this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
+                this.props.changeAction("reload")
+                this.props.onNavigate([this.props.location[0]])
+            } catch (error) {
+                this.props.showNotification(error[0], error[1])
+            }
         }
     }
 
@@ -52,8 +65,8 @@ class DangerZone extends Component {
                         <button className="win-button" onClick={this.unenroll}>Unenroll</button>
                     </div>
                     <Confirmation 
-                        title={'Unenroll device #' + this.props.selectedItemList["PluginFlyvemdmAgent.id"] } 
-                        message={'You are going to unenroll device ' + this.props.selectedItemList["PluginFlyvemdmAgent.id"]} 
+                        title={'Unenroll device #' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"] } 
+                        message={'You are going to unenroll device ' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"]} 
                         reference={el => this.unenrollmentDevice = el} 
                     /> 
                 </div>
@@ -67,8 +80,8 @@ class DangerZone extends Component {
                         <button className="win-button" onClick={this.delete}>Delete</button>
                     </div>
                     <Confirmation 
-                        title={'Delete device #' + this.props.selectedItemList["PluginFlyvemdmAgent.id"] } 
-                        message={'You are going to delete device ' + this.props.selectedItemList["PluginFlyvemdmAgent.id"]} 
+                        title={'Delete device #' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"] } 
+                        message={'You are going to delete device ' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"]} 
                         reference={el => this.deleteDevice = el} 
                     /> 
                 </div>
@@ -78,8 +91,9 @@ class DangerZone extends Component {
 }
 
 DangerZone.propTypes = {
-    selectedItemList: PropTypes.object.isRequired,
-    showNotification: PropTypes.func.isRequired
+    selectedItemList: PropTypes.array.isRequired,
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
 
 export default DangerZone
