@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import L from 'leaflet';
+import PropTypes from 'prop-types'
+import L from 'leaflet'
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -42,4 +43,14 @@ export default class Geolocation extends Component {
             <div id="map" style={{ height: '400px' }} ></div>
         )
     }
+}
+
+Geolocation.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    selectedItemList: PropTypes.array,
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }

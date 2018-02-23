@@ -42,6 +42,9 @@ class DevicesContent extends Component {
                     <ReactWinJS.Pivot.Item key="geolocation" header="Geolocation">
                         <Geolocation 
                             itemListPaneWidth={this.props.itemListPaneWidth}
+                            selectedItemList={this.props.selectedItemList}
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}
                         />
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="dangerZone" header="Danger Zone">
