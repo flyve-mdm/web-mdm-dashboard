@@ -43,8 +43,8 @@ export default class FilesEdit extends Component {
     handleSaveFiles = () => {
 
         this.props.changeSelectionMode(false)
-        this.props.changeActionList(null)
         this.props.onNavigate([this.props.location[0]])
+        this.props.changeAction("Reload")
 
         if (this.props.location[1].length > 1) {
             this.props.showNotification('Success', 'edited files')
@@ -72,7 +72,7 @@ export default class FilesEdit extends Component {
                     itemListPaneWidth={this.props.itemListPaneWidth}
                     location={this.props.location}
                     currentItem={selectedItemList}
-                    changeActionList={this.props.changeActionList} />
+                    changeAction={this.props.changeAction} />
                 )
             })
 
@@ -102,13 +102,11 @@ FilesEdit.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectedIndex: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
+    action: PropTypes.string,
+    changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired
 }

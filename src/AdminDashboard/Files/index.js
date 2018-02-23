@@ -8,15 +8,13 @@ export default class Files extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectionMode: false
+            selectionMode: false,
+            action: null
         }
     }
 
-    changeSelectionMode = (selectionMode) => {
-        this.setState({
-            selectionMode
-        })
-    }
+    changeAction = action => this.setState({ action })
+    changeSelectionMode = selectionMode => this.setState({ selectionMode })
 
     render() {
 
@@ -30,8 +28,8 @@ export default class Files extends Component {
                     onNavigate={this.props.onNavigate}
                     changeSelectionMode={this.changeSelectionMode}
                     selectionMode={this.state.selectionMode}
-                    actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList}
+                    action={this.state.action}
+                    changeAction={this.changeAction}
                     showNotification={this.props.showNotification}
                     glpi={this.props.glpi} />
             } else {
@@ -42,8 +40,8 @@ export default class Files extends Component {
                     onNavigate={this.props.onNavigate}
                     selectedItemList={selectedItemList}
                     changeSelectionMode={this.changeSelectionMode}
-                    actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList}
+                    action={this.state.action}
+                    changeAction={this.changeAction}
                     showNotification={this.props.showNotification}
                     glpi={this.props.glpi} />
             }
@@ -58,8 +56,8 @@ export default class Files extends Component {
                         onNavigate={this.props.onNavigate}
                         changeSelectionMode={this.changeSelectionMode}
                         selectionMode={this.state.selectionMode}
-                        actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList}
+                        action={this.state.action}
+                        changeAction={this.changeAction}
                         showNotification={this.props.showNotification}
                         glpi={this.props.glpi}
                     />
@@ -70,8 +68,8 @@ export default class Files extends Component {
                         onNavigate={this.props.onNavigate}
                         selectedItemList={selectedItemList}
                         changeSelectionMode={this.changeSelectionMode}
-                        actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList}
+                        action={this.state.action}
+                        changeAction={this.changeAction}
                         showNotification={this.props.showNotification}
                         glpi={this.props.glpi}
                     />
@@ -85,8 +83,6 @@ Files.propTypes = {
     animation: PropTypes.bool.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }

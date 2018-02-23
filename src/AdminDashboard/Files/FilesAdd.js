@@ -51,7 +51,7 @@ export default class FilesAdd extends Component {
                     isLoading: false
                 })
                 this.props.showNotification('Success', 'Saved file')
-                this.props.changeActionList(null)
+                this.props.changeAction("Reload")
             })
         } catch (error) {
             this.setState({
@@ -107,7 +107,7 @@ export default class FilesAdd extends Component {
 }
 FilesAdd.propTypes = {
     location: PropTypes.array.isRequired,
-    changeActionList: PropTypes.func.isRequired,
+    changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
