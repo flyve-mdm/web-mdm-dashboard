@@ -22,13 +22,13 @@ Once this is done, Congratulations you are part of Flyve MDM!
 
 You can now Login and take full control of your IT infrastructure.
 
-## Invite Agents
+## Enrolling Agents
 
-In order to manage the agents you must invite them, go to the Invitations section, click on the "+" button and write the email of the user whose device you'll control.
+In order to manage the agents, you must invite the user of the device, go to the Invitations section, click on the "+" button and write the email of the user whose device you'll control.
 
 Automatically, the user will receive an invitation in his email account.
 
-Please note that the users must have installed in their devices the Android or iOS Agent, see these links for more information:
+Please note that the users must have installed in their devices the Android or iOS MDM Agent, see these links for more information:
 
 * [Android Agent](http://flyve.org/android-mdm-agent/)
 * [iOS Agent](http://flyve.org/ios-mdm-agent/)
@@ -51,7 +51,7 @@ To Deploy applications on your fleets they must be added first on the Dashboard.
 
 Go to the Applications section, click on "+" button and select the file your fleet requires.
 
-The same procedures applies to the Files. 
+The same procedures applies to the Files.
 
 Once this is done you will be able use them with the Deploy policy on the fleets.
 
