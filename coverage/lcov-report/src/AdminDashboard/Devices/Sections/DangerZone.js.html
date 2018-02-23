@@ -22,12 +22,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/30</span>
+        <span class='fraction'>0/37</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/16</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/30</span>
+        <span class='fraction'>0/37</span>
       </div>
     </div>
   </div>
@@ -141,7 +141,26 @@
 96
 97
 98
-99</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -190,6 +209,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -198,7 +219,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -248,7 +286,7 @@ class DangerZone extends Component {
     wipe = async () =&gt; {
         const<span class="cstat-no" title="statement not covered" > isOK = await Con</span>firmation.isOK(this.wipeDevice)
         if (isOK) {
-            th<span class="cstat-no" title="statement not covered" >is.props.showNotification('Succ</span>ess', 'data deleted successfully')
+            th<span class="cstat-no" title="statement not covered" >is.props.showNotification('Succ</span>ess', 'Data deleted successfully')
         }
     }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
@@ -273,9 +311,28 @@ class DangerZone extends Component {
     }<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" ></span>
     delete = asy<span class="cstat-no" title="statement not covered" >nc () =&gt; {</span>
-        const isOK = await Confirmati<span class="cstat-no" title="statement not covered" >on.isOK(this.deleteDevice)</span>
+<span class="cstat-no" title="statement not covered" ></span>
+        const isOK = await Confirmation.isOK(this.deleteDevice)
         if (isOK) {
-            this.props.showNotification('Success', 'element successfully removed')                        
+            try {
+                const response = await this.props.glpi.genericRequest({
+                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
+                    requestParams: {
+<span class="cstat-no" title="statement not covered" >                        method: 'DELETE',</span>
+<span class="cstat-no" title="statement not covered" >                        body: JSON.stringify({"input":{</span>}})
+<span class="cstat-no" title="statement not covered" >                    }</span>
+                })
+                this<span class="cstat-no" title="statement not covered" >.props.showNotification('Success', response[0].me</span>ssage ? response[0].message : "Unenrollment device")
+                this.props.showNotification('Success', 'Devices successfully deleted')                        
+                this.props.changeAction("reload")
+                this.prop<span class="fstat-no" title="function not covered" >s.</span>onNavigate([this.props.location[0]])
+            } catch (error) {
+                this.prop<span class="cstat-no" title="statement not covered" >s.showNotification(error[0], error[1])</span>
+<span class="cstat-no" title="statement not covered" >            }</span>
+        }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+        if (isOK) {
         }
     }
 &nbsp;
@@ -283,20 +340,20 @@ class DangerZone extends Component {
         return ( <span class="cstat-no" title="statement not covered" ></span>
             &lt;div&gt;<span class="cstat-no" title="statement not covered" ></span>
                 &lt;div<span class="cstat-no" title="statement not covered" > className="listElement"&gt;</span>
-                    &lt;div className="message"&gt;
-<span class="cstat-no" title="statement not covered" >                        Wipe Device</span>
-                        &lt;div className="detail"&gt;Wipe will delete all data on the device&lt;/div&gt;
+<span class="cstat-no" title="statement not covered" >                    &lt;div className="message"&gt;</span>
+                        Wipe Device
+<span class="cstat-no" title="statement not covered" >                        &lt;div className="detail"&gt;Wipe will delete all </span>data on the device&lt;/div&gt;
                     &lt;/div&gt;
-                    &lt;div <span class="fstat-no" title="function not covered" >cl</span>assName="controller"&gt;
-                        &lt;<span class="cstat-no" title="statement not covered" >button className="win-button" onClick={this.wipe}&gt;Wip</span>e&lt;/button&gt;
-<span class="cstat-no" title="statement not covered" >                    &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >                    &lt;Confirmation </span>
+                    &lt;div className="controller"&gt;
+                        &lt;button className="win-button" onClick={this.wipe}&gt;Wipe&lt;/button&gt;
+<span class="cstat-no" title="statement not covered" >                    &lt;/div</span>&gt;
+                    &lt;Confirmation 
                         title="This is the last warning"
                         message="You're about to wipe the device. Are you really certain ? (the device is going to delete all its data next time it turns on)"
-                        reference={el =&gt; this.wipeDevice = el} 
-                    /&gt; 
-<span class="fstat-no" title="function not covered" ></span>                &lt;/div&gt;
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="fstat-no" title="function not covered" ></span>                        reference={el =&gt; this.wipeDevice = el} 
+<span class="cstat-no" title="statement not covered" >                    /&gt; </span>
+                &lt;/div&gt;
+&nbsp;
                 &lt;div className="listElement"&gt;
                     &lt;div className="message"&gt;
                         Unenrollment Device
@@ -343,7 +400,7 @@ export default DangerZone</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 22 2018 22:42:13 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 09:01:38 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>
