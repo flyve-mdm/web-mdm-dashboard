@@ -6,6 +6,11 @@ import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
 import Confirmation from '../../Utils/Confirmation'
 
+const POLICIES_CAN_MULTIPLE_VALUE = [
+    14, // -> Deploy Application
+    16, // -> Deploy File
+]
+
 export default class FleetsContent extends Component {
 
     constructor(props) {
@@ -16,24 +21,33 @@ export default class FleetsContent extends Component {
     }
 
     handleFleetHaveTask = policy => {
+        let policyId = null
         const haveTask = this.props.tasksData.some((task) => {
-            return task['plugin_flyvemdm_policies_id'] === policy['PluginFlyvemdmPolicy.id']
+            policyId = task['plugin_flyvemdm_policies_id']
+            return policyId === policy['PluginFlyvemdmPolicy.id']
         });
-        console.log(haveTask)
         return haveTask
     } 
 
     render() {
-        console.log('[Las Tasks]', this.props.tasksData)
-        console.log('[Las Politicas] ', this.props.policiesData)
         let renderComponent
         if (this.props.policiesData) {
             renderComponent = this.props.policiesData.map((item, index) => {
+                let multiplesValues = null
+                const addedPolicy = this.handleFleetHaveTask(item)
+                const IdPolicy = item['PluginFlyvemdmPolicy.id']
+                if (addedPolicy && POLICIES_CAN_MULTIPLE_VALUE.includes(IdPolicy)) {
+                    multiplesValues = this.props.tasksData.filter(task => (
+                        task['plugin_flyvemdm_policies_id'] === IdPolicy
+                    ))
+                }
+
                 return (
                     <FleetsTaskItemList
                         key={[item['PluginFlyvemdmPolicy.name'], index].join("_")}
                         data={item} 
-                        addedPolicy={this.handleFleetHaveTask(item)} />
+                        addedPolicy={addedPolicy}
+                        multiplesValues={multiplesValues} />
                 )
             })
         }

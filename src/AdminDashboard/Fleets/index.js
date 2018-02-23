@@ -11,29 +11,29 @@ export default class Fleets extends Component {
             selectionMode: false,
             policiesData: []
         }
+    }
 
-        this.fecthPolicies =  () => {  
-            return this.props.glpi.searchItems({
-                itemtype: 'PluginFlyvemdmPolicy', 
-                options: { 
-                    uid_cols: true, 
-                    forcedisplay: [1, 2, 3, 4, 6],
-                    range: '0-50'
-                }
-            })
-        }
+    fecthPolicies =  () => {  
+        return this.props.glpi.searchItems({
+            itemtype: 'PluginFlyvemdmPolicy', 
+            options: { 
+                uid_cols: true, 
+                forcedisplay: [1, 2, 3, 4, 6],
+                range: '0-50' // Can more than 50 items
+            }
+        })
+    }
 
-        this.fetchTasks = IdFleet => {
-            return this.props.glpi.getSubItems({
-                itemtype: 'PluginFlyvemdmFleet',
-                id: IdFleet,
-                subItemtype: 'PluginFlyvemdmTask',
-                options: { 
-                    uid_cols: true, 
-                    forcedisplay: [1, 2, 3, 4, 6]
-                }
-            })
-        }
+    fetchTasks = IdFleet => {
+        return this.props.glpi.getSubItems({
+            itemtype: 'PluginFlyvemdmFleet',
+            id: IdFleet,
+            subItemtype: 'PluginFlyvemdmTask',
+            options: { 
+                uid_cols: true, 
+                forcedisplay: [1, 2, 3, 4, 6]
+            }
+        })
     }
 
     componentDidMount = async () => {

@@ -6,10 +6,18 @@ export default class FleetsTaskItemList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            alreadyAdded: false
+            alreadyAdded: false,
+            active: false
         }
     }
 
+    componentDidMount = () => {
+        this.props.addedPolicy && this.setState({
+            alreadyAdded: true,
+            active: true
+        })
+    }
+    
     handleAddedToggle = () => {
         this.setState((prevState) => {
             return {
@@ -18,9 +26,11 @@ export default class FleetsTaskItemList extends Component {
         })
     }
 
-    componentDidMount = () => {
-        this.props.addedPolicy && this.setState({
-            alreadyAdded: true
+    handleActivePolicyToggle = () => {
+        this.setState((prevState) => {
+            return {
+                active: !prevState.active
+            }
         })
     }
 
@@ -30,12 +40,17 @@ export default class FleetsTaskItemList extends Component {
                 <div className='files-list fleet-list'>
                         <div className='files-list-content'>
                             <div className='files-list-item'>
-                                <div className='item-content-primary'>
-                                    <div className='content-text-primary '>not available</div>
+                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
+                                    <div className='content-text-primary'>not available</div>
                                 </div>
-                                <div className='item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }}/>
+                                <div className='item-content-secondary'>
+                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <ReactWinJS.ToggleSwitch 
+                                        className="content-text-primary"
+                                        checked={this.state.alreadyAdded}
+                                        onChange={() => this.handleAddedToggle}
+                                        labelOn=""
+                                        labelOff="" />
                                     </div>
                                 </div>
                             </div>
@@ -46,30 +61,37 @@ export default class FleetsTaskItemList extends Component {
             switch (this.props.data["PluginFlyvemdmPolicy.type"]) {
                 
                 case "bool":
+
                 let value = this.props.data['PluginFlyvemdmPolicy.default_value']
+
                 if(typeof(value) !== "boolean") {
                     value = true
                 }
+
                 return (
                     <div className='files-list fleet-list'>
                         <div className='files-list-content'>
                             <div className='files-list-item'>
-                                <div className='item-content-primary'>
+                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`} >
                                     <div className='content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
-                                    <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
-                                        <ReactWinJS.ToggleSwitch 
-                                        className="content-text-primary"
-                                        checked={value}
-                                        onChange={() => this.props.editPolicy(this.props.data['PluginFlyvemdmPolicy.id'], !value)}
-                                        labelOn="On"
-                                        labelOff="Off" />
+                                    <div
+                                    className={`item-list-field checkbox ${this.state.alreadyAdded && 'active'}`}
+                                    onClick={this.handleActivePolicyToggle}>
+                                        {this.state.active ? 
+                                            <span className='selectIcon'></span> :
+                                            <span className='unselectIcon'></span> }
                                     </div>
                                 </div>
                                 <div className='item-content-secondary'>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }}/>
+                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <ReactWinJS.ToggleSwitch 
+                                        className="content-text-primary"
+                                        checked={this.state.alreadyAdded}
+                                        onChange={() => this.handleAddedToggle}
+                                        labelOn=""
+                                        labelOff="" />
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +103,7 @@ export default class FleetsTaskItemList extends Component {
                     <div className='files-list fleet-list'>
                         <div className='files-list-content'>
                             <div className='files-list-item'>
-                                <div className='item-content-primary '>
+                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
                                     <div className='content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
@@ -99,8 +121,13 @@ export default class FleetsTaskItemList extends Component {
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }}/>
+                                <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <ReactWinJS.ToggleSwitch 
+                                        className="content-text-primary"
+                                        checked={this.state.alreadyAdded}
+                                        onChange={() => this.handleAddedToggle}
+                                        labelOn=""
+                                        labelOff="" />
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +139,7 @@ export default class FleetsTaskItemList extends Component {
                     <div className='files-list fleet-list'>
                         <div className='files-list-content'>
                             <div className='files-list-item'>
-                                <div className='item-content-primary '>
+                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
                                     <div className='content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
@@ -134,8 +161,13 @@ export default class FleetsTaskItemList extends Component {
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }}/>
+                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <ReactWinJS.ToggleSwitch 
+                                        className="content-text-primary"
+                                        checked={this.state.alreadyAdded}
+                                        onChange={() => this.handleAddedToggle}
+                                        labelOn=""
+                                        labelOff="" />
                                     </div>
                                 </div>
                             </div>
@@ -147,7 +179,7 @@ export default class FleetsTaskItemList extends Component {
                     <div className='files-list fleet-list' >
                         <div className='files-list-content'>
                             <div className='files-list-item'>
-                                <div className='item-content-primary '>
+                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
                                     <div className='content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
@@ -169,8 +201,13 @@ export default class FleetsTaskItemList extends Component {
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }}/>
+                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <ReactWinJS.ToggleSwitch 
+                                        className="content-text-primary"
+                                        checked={this.state.alreadyAdded}
+                                        onChange={() => this.handleAddedToggle}
+                                        labelOn=""
+                                        labelOff="" />
                                     </div>
                                 </div>
                             </div>
@@ -182,12 +219,17 @@ export default class FleetsTaskItemList extends Component {
                     <div className='files-list fleet-list' >
                         <div className='files-list-content'>
                             <div className='files-list-item'>
-                                <div className='item-content-primary '>
+                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
                                     <div className='content-text-primary'>not available</div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <span className={this.state.alreadyAdded ? 'removeIcon': 'addIcon'} style={{ fontSize: '18px' }} onClick={() => this.props.deletePolicy(this.props.data)}/>
+                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <ReactWinJS.ToggleSwitch 
+                                        className="content-text-primary"
+                                        checked={this.state.alreadyAdded}
+                                        onChange={() => this.handleAddedToggle}
+                                        labelOn=""
+                                        labelOff="" />
                                     </div>
                                 </div>
                             </div>
@@ -195,8 +237,6 @@ export default class FleetsTaskItemList extends Component {
                     </div>
                 )
             }
-            
-               
         }
     }
 }
