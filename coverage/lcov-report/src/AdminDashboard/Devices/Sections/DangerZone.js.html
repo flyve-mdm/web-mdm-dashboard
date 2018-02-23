@@ -22,12 +22,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/37</span>
+        <span class='fraction'>0/42</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/16</span>
+        <span class='fraction'>0/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/37</span>
+        <span class='fraction'>0/42</span>
       </div>
     </div>
   </div>
@@ -160,7 +160,13 @@
 115
 116
 117
-118</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+118
+119
+120
+121
+122
+123
+124</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -189,14 +195,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,7 +208,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -217,6 +215,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -286,54 +298,60 @@ class DangerZone extends Component {
     wipe = async () =&gt; {
         const<span class="cstat-no" title="statement not covered" > isOK = await Con</span>firmation.isOK(this.wipeDevice)
         if (isOK) {
-            th<span class="cstat-no" title="statement not covered" >is.props.showNotification('Succ</span>ess', 'Data deleted successfully')
+            tr<span class="cstat-no" title="statement not covered" >y {</span>
+                const response = await this.props.glpi.updateItem({
+<span class="cstat-no" title="statement not covered" >                    itemtype: 'PluginFl</span>yvemdmAgent',
+                    id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'],
+<span class="cstat-no" title="statement not covered" >                    input: {"wipe": "1"}</span>
+                })
+                this<span class="cstat-no" title="statement not covered" >.props.showNotification('Success', resp</span>onse[0].message ? response[0].message : "Data deleted successfully")
+                this.props.changeAction("reload")
+                this.<span class="cstat-no" title="statement not covered" >props.onNavigate([this.props.location[</span>0]])
+            } catch (error) {
+<span class="fstat-no" title="function not covered" >                this.props.showN</span>otifica<span class="cstat-no" title="statement not covered" >tion(error[0], error[1])</span>
+            }
         }
-    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="fstat-no" title="function not covered" >    }</span>
 &nbsp;
-    unenroll = asy<span class="cstat-no" title="statement not covered" >nc () =&gt; {</span>
-        const isOK = await Confirmation.isOK(this.unenrollmentDevice)
+    unenroll = async () =&gt; {
+<span class="cstat-no" title="statement not covered" >        const isOK = await Confirmation.isOK(this.u<span class="fstat-no" title="function not covered" >ne</span>nrollmentDevice)</span>
         if (isOK) {<span class="cstat-no" title="statement not covered" ></span>
-            try {
-                const<span class="cstat-no" title="statement not covered" > response = await this.props.glpi.gene</span>ricRequest({
-                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
-<span class="fstat-no" title="function not covered" >                    requestParam</span>s: {<span class="cstat-no" title="statement not covered" ></span>
-                        method: 'PUT',
-                        body: JSON.stringify({"input":{"_unenroll": "1"}})
-<span class="fstat-no" title="function not covered" ></span>                    }
+<span class="cstat-no" title="statement not covered" >            try {</span>
+<span class="cstat-no" title="statement not covered" >                const response = await this.props.glpi.updateItem({</span>
+                    itemtype: 'Plugin<span class="cstat-no" title="statement not covered" >FlyvemdmAgent',</span>
+                    id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'],
+                    input: {"_unenroll": "1"}
                 })
                 this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
-<span class="cstat-no" title="statement not covered" >                this.props.changeAction("reload")<span class="fstat-no" title="function not covered" ></span></span>
-                this.prop<span class="cstat-no" title="statement not covered" >s.onNavigate([this.props.location[0]])</span>
-<span class="cstat-no" title="statement not covered" >            } catch (error) {</span>
-<span class="cstat-no" title="statement not covered" >                this.props.showNotification(error[0], error[1])</span>
-            }
-        }<span class="fstat-no" title="function not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-    delete = asy<span class="cstat-no" title="statement not covered" >nc () =&gt; {</span>
-<span class="cstat-no" title="statement not covered" ></span>
-        const isOK = await Confirmation.isOK(this.deleteDevice)
-        if (isOK) {
-            try {
-                const response = await this.props.glpi.genericRequest({
-                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
-                    requestParams: {
-<span class="cstat-no" title="statement not covered" >                        method: 'DELETE',</span>
-<span class="cstat-no" title="statement not covered" >                        body: JSON.stringify({"input":{</span>}})
-<span class="cstat-no" title="statement not covered" >                    }</span>
-                })
-                this<span class="cstat-no" title="statement not covered" >.props.showNotification('Success', response[0].me</span>ssage ? response[0].message : "Unenrollment device")
-                this.props.showNotification('Success', 'Devices successfully deleted')                        
-                this.props.changeAction("reload")
-                this.prop<span class="fstat-no" title="function not covered" >s.</span>onNavigate([this.props.location[0]])
-            } catch (error) {
-                this.prop<span class="cstat-no" title="statement not covered" >s.showNotification(error[0], error[1])</span>
-<span class="cstat-no" title="statement not covered" >            }</span>
-        }<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-        if (isOK) {
+                this<span class="cstat-no" title="statement not covered" >.props.changeAction("reload")</span>
+                this<span class="cstat-no" title="statement not covered" >.props.onNavigate([this.props.locat</span>ion[0]])
+            } catch <span class="cstat-no" title="statement not covered" >(error) {</span>
+                this.props.showNotification(error[0], error[1])
+            }<span class="cstat-no" title="statement not covered" ></span>
         }
+    }
+<span class="fstat-no" title="function not covered" ></span>
+    delete = async () =&gt; <span class="cstat-no" title="statement not covered" >{</span>
+<span class="cstat-no" title="statement not covered" ></span>
+        const is<span class="cstat-no" title="statement not covered" >OK = await Confirmation.isOK(this.deleteDevice)</span>
+        if (isOK) {<span class="cstat-no" title="statement not covered" ></span>
+            try {
+                const response = await this.props.glpi.deleteItem({
+                    itemtype: 'PluginFlyvemdmAgent',
+                    id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'],
+                })<span class="cstat-no" title="statement not covered" ></span>
+                this<span class="cstat-no" title="statement not covered" >.props.showNotification('Success', </span>response[0].message ? response[0].message : "Unenrollment device")
+                this<span class="cstat-no" title="statement not covered" >.props.showNotification('Success', 'Devices succe</span>ssfully deleted')                        
+                this.props.changeAction("reload")
+                this<span class="cstat-no" title="statement not covered" >.props.onNavigate([this.props.location[0]])</span>
+            } catch (error) {
+                this.props.showNotification(error[0], error[1])
+            }<span class="fstat-no" title="function not covered" ></span>
+        }
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+        if (isOK<span class="cstat-no" title="statement not covered" >) {</span>
+        }<span class="cstat-no" title="statement not covered" ></span>
     }
 &nbsp;
     render() {
@@ -400,7 +418,7 @@ export default DangerZone</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 09:01:38 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 17:18:07 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>
