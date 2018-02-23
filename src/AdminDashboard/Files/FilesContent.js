@@ -34,7 +34,7 @@ export default class FilesContent extends Component {
                         <div className="contentStatus">
                             <div className="name">{this.props.selectedItemList[0]["PluginFlyvemdmFile.name"]}</div>
                             <br />
-                            <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.changeActionList('Edit')} />
+                            <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.changeAction("Edit")} />
                             <span className="deleteIcon" onClick={this.handleDelete} />
                         </div>
                     </div>
@@ -53,7 +53,7 @@ FilesContent.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     selectedItemList: PropTypes.array,
-    changeActionList: PropTypes.func.isRequired,
+    changeAction: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired

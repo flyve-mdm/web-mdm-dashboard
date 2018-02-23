@@ -8,8 +8,8 @@ import EmptyMessage from '../../Utils/EmptyMessage'
 export default class FilesPage extends Component {
 
     render() {
-        if(this.props.selectedItemList === null || this.props.actionList === 'Edit') {
-            switch (this.props.actionList) {
+        if(this.props.selectedItemList === null || this.props.action === 'Edit') {
+            switch (this.props.action) {
                 case "Edit":
                     return (
                         <FilesEdit
@@ -17,7 +17,7 @@ export default class FilesPage extends Component {
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             changeSelectionMode={this.props.changeSelectionMode}
-                            changeActionList={this.props.changeActionList}
+                            changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
                             glpi={this.props.glpi}
                         />
@@ -29,7 +29,7 @@ export default class FilesPage extends Component {
                             dataSource={this.props.dataSource}
                             changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
-                            changeActionList={this.props.changeActionList}
+                            changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
                             glpi={this.props.glpi}
                         />
@@ -42,7 +42,7 @@ export default class FilesPage extends Component {
                     )
             }
         } else {
-            if (this.props.actionList === null) {
+            if (!this.props.action) {
 
                 if (this.props.selectedItemList.length > 0) {
                     return (
@@ -52,7 +52,7 @@ export default class FilesPage extends Component {
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
                             selectedItemList={this.props.selectedItemList}
-                            changeActionList={this.props.changeActionList}
+                            changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
                             glpi={this.props.glpi} 
                         />
@@ -85,8 +85,8 @@ FilesPage.propTypes = {
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
+    action: PropTypes.string,
+    changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
