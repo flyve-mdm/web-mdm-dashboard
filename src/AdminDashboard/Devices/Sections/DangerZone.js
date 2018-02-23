@@ -45,12 +45,9 @@ class DangerZone extends Component {
         const isOK = await Confirmation.isOK(this.deleteDevice)
         if (isOK) {
             try {
-                const response = await this.props.glpi.genericRequest({
-                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
-                    requestParams: {
-                        method: 'DELETE',
-                        body: JSON.stringify({"input":{}})
-                    }
+                const response = await this.props.glpi.deleteItem({
+                    itemtype: 'PluginFlyvemdmAgent',
+                    id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'],
                 })
                 this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
                 this.props.showNotification('Success', 'Devices successfully deleted')                        
