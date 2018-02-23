@@ -8,12 +8,10 @@ class DangerZone extends Component {
         const isOK = await Confirmation.isOK(this.wipeDevice)
         if (isOK) {
             try {
-                const response = await this.props.glpi.genericRequest({
-                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
-                    requestParams: {
-                        method: 'PUT',
-                        body: JSON.stringify({"input":{"wipe": "1"}})
-                    }
+                const response = await this.props.glpi.updateItem({
+                    itemtype: 'PluginFlyvemdmAgent',
+                    id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'],
+                    input: {"wipe": "1"}
                 })
                 this.props.showNotification('Success', response[0].message ? response[0].message : "Data deleted successfully")
                 this.props.changeAction("reload")
@@ -28,12 +26,10 @@ class DangerZone extends Component {
         const isOK = await Confirmation.isOK(this.unenrollmentDevice)
         if (isOK) {
             try {
-                const response = await this.props.glpi.genericRequest({
-                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
-                    requestParams: {
-                        method: 'PUT',
-                        body: JSON.stringify({"input":{"_unenroll": "1"}})
-                    }
+                const response = await this.props.glpi.updateItem({
+                    itemtype: 'PluginFlyvemdmAgent',
+                    id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'],
+                    input: {"_unenroll": "1"}
                 })
                 this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
                 this.props.changeAction("reload")
