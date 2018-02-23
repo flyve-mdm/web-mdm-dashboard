@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class FilesEditItemList extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ export default class FilesEditItemList extends Component {
 
     componentDidMount() {
         this.setState({
-            input: this.props.currentItem["PluginFlyvemdmFile.name"]
+            input: this.props.selectedItem["PluginFlyvemdmFile.name"]
         })
     }
 
@@ -21,7 +22,7 @@ export default class FilesEditItemList extends Component {
 
     blurInput = (e) => {
         if (e.target.value.trim() !== "") {
-            this.props.updateItemList(this.props.currentItem["PluginFlyvemdmFile.id"], e.target.value)
+            this.props.updateItemList(this.props.selectedItem["PluginFlyvemdmFile.id"], e.target.value)
         }
     }
 
@@ -41,7 +42,6 @@ export default class FilesEditItemList extends Component {
                             value={this.state.input}
                             onChange={this.changeInput}
                             onBlur={this.blurInput}
-                            required
                         />
                     </div>
                 </div>
@@ -50,3 +50,9 @@ export default class FilesEditItemList extends Component {
     )
   }
 }
+FilesEditItemList.propTypes = {
+    selectedItem: PropTypes.object.isRequired,
+    changeAction: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
+}
+

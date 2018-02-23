@@ -16,6 +16,7 @@ export default class FilesPage extends Component {
                             itemListPaneWidth={this.props.itemListPaneWidth}
                             location={this.props.location}
                             onNavigate={this.props.onNavigate}
+                            selectedItemList={this.props.selectedItemList}
                             changeSelectionMode={this.props.changeSelectionMode}
                             changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
@@ -26,8 +27,6 @@ export default class FilesPage extends Component {
                     return (
                         <FilesAdd
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-                            changeDataSource={this.props.changeDataSource}
                             location={this.props.location}
                             changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
