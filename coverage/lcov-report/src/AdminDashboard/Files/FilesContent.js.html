@@ -22,12 +22,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/32</span>
+        <span class='fraction'>0/41</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/32</span>
+        <span class='fraction'>0/41</span>
       </div>
     </div>
   </div>
@@ -106,7 +106,42 @@
 61
 62
 63
-64</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -142,18 +177,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,8 +206,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -173,64 +243,99 @@
 import PropTypes from 'prop-types'
 <span class="cstat-no" title="statement not covered" >import Pluralize from 'pluralize'</span>
 import ContentPane from '../../Utils/ContentPane'
-import BytesToSize from '../../Utils/BytesToSize'
-import Confirmation<span class="cstat-no" title="statement not covered" > from '../../Utils/Confirmation'</span>
+import Confirmation from '../../Utils/Confirmation'
+import Loading from<span class="cstat-no" title="statement not covered" > '../../Utils/Loading'</span>
 &nbsp;
 export defaul<span class="cstat-no" title="statement not covered" >t class FilesCont</span>ent extends Component {
 &nbsp;
-    handleDele<span class="cstat-no" title="statement not covered" >te = async () =&gt; {</span>
-        const isOK = await Confirmation.isOK(this.contentDialog)
-        if (isOK)<span class="cstat-no" title="statement not covered" > {</span>
-            let item = this.props.dataSource.itemList
-            let in<span class="cstat-no" title="statement not covered" >dex = this.props.selectedIndex</span>
-            index.sort()
-            index<span class="cstat-no" title="statement not covered" >.reverse()</span>
-            index.forEach((i) =&gt; {
-                it<span class="cstat-no" title="statement not covered" >em.splice(i, 1)</span>
-            })
-<span class="cstat-no" title="statement not covered" ></span>
-            this.props.changeDataSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })
-            this.pro<span class="cstat-no" title="statement not covered" >ps.onNavigate([this.props.location[0]</span>])
-&nbsp;
-            this.pr<span class="cstat-no" title="statement not covered" >ops.showNotification('Success', 'de</span>leted file')
-        }
-    }<span class="cstat-no" title="statement not covered" ></span>
-&nbsp;
-    render() {<span class="cstat-no" title="statement not covered" ></span>
-        return (
-            &lt;ContentP<span class="cstat-no" title="statement not covered" >ane itemListPaneWidth={this.props.item</span>ListPaneWidth} updateAnimation={true} &gt;
-                &lt;div className="contentHeader"&gt;
-<span class="fstat-no" title="function not covered" >                    &lt;h2 classNam</span>e="win-<span class="cstat-no" title="statement not covered" >h2 titleContentPane" &gt; {Pluralize.singular(this.props.l</span>ocation[0])} &lt;/h2&gt;
-                    &lt;div className="itemInfo"&gt;
-                        &lt;span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} /&gt;
-<span class="fstat-no" title="function not covered" ></span>                        &lt;div className="contentStatus"&gt;
-                            &lt;div className="name"&gt;{this.props.selectedItemList["PluginFlyvemdmFile.name"]}&lt;/div&gt;
-                            &lt;div className="detail"&gt;{BytesToSize(this.props.selectedItemList["PluginFlyvemdmFile.filesize"])}&lt;/div&gt;
-<span class="cstat-no" title="statement not covered" >                            &lt;br /&gt;<span class="fstat-no" title="function not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >                            &lt;span className="editIcon" style={{ marginRight: '2</span>0px' }} onClick={() =&gt; this.props.changeActionList('Edit')} /&gt;
-<span class="cstat-no" title="statement not covered" >                            &lt;span className="deleteIcon" onClick={this.handleDelete} /&gt;</span>
-                        &lt;/d<span class="cstat-no" title="statement not covered" >iv&gt;</span>
-                    &lt;/div&gt;<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >                &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;div className="s</span>eparator" /&gt;
-<span class="cstat-no" title="statement not covered" >                &lt;Confirmation <span class="fstat-no" title="function not covered" >ti</span>tle={`Delete ` + this.props.location[0]} message={this.props.selectedItemList["PluginFlyvemdmFile.name"]} reference={el =&gt; this.contentDialog = el} /&gt;</span>
-            &lt;/Conten<span class="cstat-no" title="statement not covered" >tPane&gt;</span>
-        )
+    constructo<span class="cstat-no" title="statement not covered" >r(props) {</span>
+        super(props)
+        this.stat<span class="cstat-no" title="statement not covered" >e = {</span>
+            isLoading: false
+        }<span class="cstat-no" title="statement not covered" ></span>
     }
-}<span class="cstat-no" title="statement not covered" ></span>
-FilesContent.pro<span class="cstat-no" title="statement not covered" >pTypes = {</span>
+<span class="cstat-no" title="statement not covered" ></span>
+    handleDelete = async () =&gt; {
+        try {<span class="cstat-no" title="statement not covered" ></span>
+            const isOK = await Confirmation.isOK(this.contentDialog)
+            if (isO<span class="cstat-no" title="statement not covered" >K) {</span>
+&nbsp;
+                let <span class="cstat-no" title="statement not covered" >itemListToDelete = this.props.selecte</span>dItemList.map((item) =&gt; {
+                    return {
+<span class="cstat-no" title="statement not covered" >                        id: item["PluginFlyvemdmFile.id"</span>]
+                    }
+                })<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                this.setState({</span>
+                    isLoading: true
+<span class="cstat-no" title="statement not covered" >                })</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >                await this.props</span>.glpi.d<span class="cstat-no" title="statement not covered" >eleteItem({ itemtype: 'PluginFlyvemdmFile', input: item</span>ListToDelete, queryString: { force_purge: true } })
+&nbsp;
+                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.changeSelectionMode(false)
+<span class="fstat-no" title="function not covered" ></span>                this.props.onNavigate([this.props.location[0]])
+<span class="cstat-no" title="statement not covered" >                this.p</span>rops.changeAction("Reload")
+        
+<span class="cstat-no" title="statement not covered" >            } else {<span class="fstat-no" title="function not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >                this.setState({</span>
+                    isLoading<span class="cstat-no" title="statement not covered" >: false</span>
+<span class="cstat-no" title="statement not covered" >                })</span>
+            }
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+        } catch (error) <span class="cstat-no" title="statement not covered" >{</span>
+            if (error.length &gt; 1) {
+                this.props.showNotification(error[0], error[1])
+            } else {
+                this.props.showNotification('Error', error)
+            }<span class="cstat-no" title="statement not covered" ></span>
+            this.setState({
+                isLoading: false
+            })
+        }<span class="cstat-no" title="statement not covered" ></span>
+    }
+<span class="cstat-no" title="statement not covered" ></span>
+    render() {<span class="cstat-no" title="statement not covered" ></span>
+        if (this.sta<span class="cstat-no" title="statement not covered" >te.isLoading) {</span>
+            return (<span class="cstat-no" title="statement not covered" ></span>
+                &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth} &gt;
+<span class="cstat-no" title="statement not covered" >                    &lt;Loading message="Loading..." /&gt;</span>
+                &lt;/ContentPane&gt;
+            )
+        } else {
+            return (
+<span class="cstat-no" title="statement not covered" >                &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true} &gt;</span>
+<span class="cstat-no" title="statement not covered" >                    &lt;div className="contentHeader"&gt;</span>
+                        &lt;h2 className="win-h2 titleContentPane" &gt; {Pluralize.singular(this.props.location[0])} &lt;/h2&gt;
+<span class="cstat-no" title="statement not covered" >                        &lt;div className="itemInfo"&gt;</span>
+                            &lt;span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} /&gt;
+<span class="cstat-no" title="statement not covered" >                            &lt;div className="contentStatus"&gt;</span>
+                                &lt;div className="name"&gt;{this.props.selectedItemList[0]["PluginFlyvemdmFile.name"]}&lt;/div&gt;
+                                &lt;br /&gt;
+                                &lt;span className="editIcon" style={{ marginRight: '20px' }} onClick={() =&gt; this.props.changeAction("Edit")} /&gt;
+                                &lt;span className="deleteIcon" onClick={this.handleDelete} /&gt;
+                            &lt;/div&gt;
+<span class="cstat-no" title="statement not covered" >                        &lt;/div&gt;</span>
+                    &lt;/div&gt;
+                    &lt;div className="separator" /&gt;
+                    &lt;Confirmation title={`Delete ` + this.props.location[0]} message={this.props.selectedItemList[0]["PluginFlyvemdmFile.name"]} reference={el =&gt; this.contentDialog = el} /&gt;
+                &lt;/ContentPane&gt;
+<span class="fstat-no" title="function not covered" ></span>            )
+<span class="cstat-no" title="statement not covered" >        }</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+}
+FilesContent.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
-        PropType<span class="cstat-no" title="statement not covered" >s.string,</span>
+        PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
-<span class="fstat-no" title="function not covered" >    se</span>lectedIndex: PropTypes.array,
-    loca<span class="cstat-no" title="statement not covered" >tion: PropTypes.array.isRequired,</span>
+    location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    selectedItemList: PropTypes.object.isRequired,
-    changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    selectedItemList: PropTypes.array,
+    changeAction: PropTypes.func.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -238,7 +343,7 @@ FilesContent.pro<span class="cstat-no" title="statement not covered" >pTypes = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 17:18:07 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/37</span>
+        <span class='fraction'>0/45</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/37</span>
+        <span class='fraction'>0/45</span>
       </div>
     </div>
   </div>
@@ -142,7 +142,20 @@
 97
 98
 99
-100</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -171,6 +184,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,28 +214,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -227,6 +238,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -238,6 +259,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -246,107 +272,120 @@ import PropTypes from 'prop-types'
 <span class="cstat-no" title="statement not covered" >import FilesUpload from '../Files/FilesUpload'</span>
 import FilesUploadItemList from './FilesUploadItemList'
 import ContentPane from '../../Utils/ContentPane'
-<span class="cstat-no" title="statement not covered" ></span>
-export default class FilesAdd extends Component {
-<span class="cstat-no" title="statement not covered" ></span>
-    constructor (props) {
-        super(<span class="cstat-no" title="statement not covered" >props)</span>
-        this.state = {
-            files<span class="cstat-no" title="statement not covered" >: []</span>
+import Loading from<span class="cstat-no" title="statement not covered" > '../../Utils/Loading'</span>
+&nbsp;
+export defaul<span class="cstat-no" title="statement not covered" >t class FilesAdd </span>extends Component {
+&nbsp;
+    constructo<span class="cstat-no" title="statement not covered" >r (props) {</span>
+        super(props)
+        this.stat<span class="cstat-no" title="statement not covered" >e = {</span>
+            files: [],
+            isLoad<span class="cstat-no" title="statement not covered" >ing: false</span>
         }
     }<span class="cstat-no" title="statement not covered" ></span>
     
-    onFilesChange =<span class="cstat-no" title="statement not covered" > (files) =&gt; {</span>
+    onFilesChange = <span class="cstat-no" title="statement not covered" >(files) =&gt; {</span>
         this.setState({
             files<span class="cstat-no" title="statement not covered" ></span>
         }, () =&gt; {
-            //   console.lo<span class="cstat-no" title="statement not covered" >g(this.state.files)</span>
+            //   console.log<span class="cstat-no" title="statement not covered" >(this.state.files)</span>
         })
     }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-    onFilesError = <span class="cstat-no" title="statement not covered" >(error, file) =&gt; {</span>
+    onFilesError = (<span class="cstat-no" title="statement not covered" >error, file) =&gt; {</span>
         console.log('error code ' + error.code + ': ' + error.message)
     }<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-    files<span class="fstat-no" title="function not covered" >RemoveOne = (file) =&gt; {<span class="cstat-no" title="statement not covered" ></span></span>
+    filesRemoveO<span class="cstat-no" title="statement not covered" >ne = (file) =&gt; {</span>
         this.refs.files.removeFile(file)
-    }
-&nbsp;
-<span class="fstat-no" title="function not covered" >    fi</span>lesRemoveAll = () =&gt; {
-<span class="cstat-no" title="statement not covered" >        this.refs.file</span>s.removeFiles()
-    }
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-    filesUpl<span class="cstat-no" title="statement not covered" >oad = () =&gt; {</span>
-        const formData = new FormData()
-        Object.<span class="fstat-no" title="function not covered" >ke</span>ys(this.state.files).forEach((key) =&gt; {
-            const file = this.state.files[key]
-            formData.append(key, new Blob([file], { type: file.type }), file.name || 'file')
-&nbsp;
-            let item = this.props.dataSource.itemList
-<span class="cstat-no" title="statement not covered" >            item.push(<span class="fstat-no" title="function not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >                {</span>
-                    "PluginFlyvemdmFile.name": file.name,
-                    "PluginFlyvemdmFile.id": 10,
-<span class="cstat-no" title="statement not covered" >                    "PluginFly<span class="fstat-no" title="function not covered" >ve</span>mdmFile.filesize": file.filesize,</span>
-<span class="cstat-no" title="statement not covered" >                    "PluginFlyvemdmFile.source</span>": ""
-                }
-            )
-<span class="cstat-no" title="statement not covered" >            this.props.changeD<span class="fstat-no" title="function not covered" >at</span>aSource(this.props.location, { itemList: item, sort: this.props.dataSource.sort })</span>
-<span class="cstat-no" title="statement not covered" >            this.props.changeActionList(nul</span>l)
-            this.props.showNotification('Success', 'saved file')
-        })
     }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+&nbsp;
+    filesRemoveAll = () =&gt; {
+        this.refs.files.removeFiles()
+<span class="fstat-no" title="function not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" ></span>
-  render() {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-    return (<span class="cstat-no" title="statement not covered" ></span>
-        &lt;Content<span class="cstat-no" title="statement not covered" >Pane itemListPaneWidth={this.props.itemListPaneWidth} &gt;</span>
-            &lt;div className="contentHeader"&gt;
-                &lt;h2 classNa<span class="cstat-no" title="statement not covered" >me="win-h2 titleContentPane" &gt; </span>New File &lt;/h2&gt;
-            &lt;/di<span class="cstat-no" title="statement not covered" >v&gt;</span>
-            &lt;div style={{ padding: '10px' }}&gt;
-                &lt;FilesUpload
-                    ref='files'
-                    className='files-dropzone'
-                    onChange={this.onFilesChange}
-<span class="cstat-no" title="statement not covered" >                    onError={this.onFilesError}</span>
-<span class="cstat-no" title="statement not covered" >                    maxFiles={1}</span>
-<span class="cstat-no" title="statement not covered" >                    maxFileSize={10000000}</span>
-                    minFileSize={0}
-                    clickable
-                &gt;
-<span class="cstat-no" title="statement not covered" >                    Drop the file here or click to upload</span>
-            &lt;/FilesUpload&gt;
-                &lt;div style={{ margin: '10px' }}&gt;
-                    &lt;button className="win-button win-button-primary" onClick={this.filesUpload}&gt;Save&lt;/button&gt;
-                    {
-<span class="fstat-no" title="function not covered" ></span>                        this.state.files.length &gt; 0
-<span class="cstat-no" title="statement not covered" >                            ? &lt;div&gt;</span>
-                                {this.state.files.map((file) =&gt;
-                                    &lt;FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} /&gt;
-                                )}
-                            &lt;/div&gt;
-                            : null
-                    }
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/ContentPane&gt;
-        
-    )
-  }
+    filesUpload = () =&gt; {
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+        try <span class="cstat-no" title="statement not covered" >{</span>
+            const formData = new FormData()
+            Obj<span class="fstat-no" title="function not covered" >ec</span>t.keys(this.state.files).forEach(async(key) =&gt; {
+                const file = this.state.files[key]
+                formData.append("file", file)
+                formData.append("uploadManifest", `{"input":{"name":"${file.name}"}}`)
+                this.setState({
+<span class="cstat-no" title="statement not covered" >                    isLoadin<span class="fstat-no" title="function not covered" >g:</span> true</span>
+<span class="cstat-no" title="statement not covered" >                })</span>
+                await this.props.glpi.uploadFile({ itemtype: "PluginFlyvemdmFile", input: formData })
+                this.setState({
+<span class="cstat-no" title="statement not covered" >                    isLoading:<span class="fstat-no" title="function not covered" > f</span>alse</span>
+<span class="cstat-no" title="statement not covered" >                })</span>
+                this.props.showNotification('Success', 'Saved file')
+                this.props.changeAction("Reload")
+<span class="cstat-no" title="statement not covered" >            })<span class="fstat-no" title="function not covered" ></span></span>
+        } ca<span class="cstat-no" title="statement not covered" >tch (error) {</span>
+            this.setState({
+                isLoading: false
+<span class="cstat-no" title="statement not covered" >            })<span class="fstat-no" title="function not covered" ></span></span>
+        }
+    }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" ></span>
+    render() {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+        let renderComponent<span class="cstat-no" title="statement not covered" ></span>
+        if (this.sta<span class="cstat-no" title="statement not covered" >te.isLoading) {</span>
+            renderCo<span class="cstat-no" title="statement not covered" >mponent = (</span>
+                &lt;Con<span class="cstat-no" title="statement not covered" >tentPane itemListPaneWidth={this.props.itemListPaneWidth} &gt;</span>
+                    &lt;Loading message="Loading..." /&gt;
+                &lt;/ContentPane&gt;)
+        } else {<span class="cstat-no" title="statement not covered" ></span>
+            renderCo<span class="cstat-no" title="statement not covered" >mponent = (</span>
+                &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth} &gt;
+                    &lt;div className="contentHeader"&gt;
+<span class="cstat-no" title="statement not covered" >                        &lt;h2 className="win-h2 titleContentPane" &gt; New File</span> &lt;/h2&gt;
+<span class="cstat-no" title="statement not covered" >                    &lt;/div&gt;</span>
+                    &lt;div style={{ padding: '10px' }}&gt;
+                        &lt;FilesUpload
+<span class="cstat-no" title="statement not covered" >                            ref='files'</span>
+                            className='files-dropzone'
+                            onChange={this.onFilesChange}
+                            onError={this.onFilesError}
+                            maxFiles={1}
+                            maxFileSize={10000000}
+<span class="cstat-no" title="statement not covered" >                            minFileSize={0}</span>
+                            clickable
+                        &gt;
+                            Drop the file here or click to upload
+                        &lt;/FilesUpload&gt;
+                        &lt;div style={{ margin: '10px' }}&gt;
+<span class="fstat-no" title="function not covered" ></span>                            &lt;button className="win-button win-button-primary" onClick={this.filesUpload}&gt;Save&lt;/button&gt;
+                            {
+<span class="cstat-no" title="statement not covered" >                                this.state.files.length &gt; 0</span>
+<span class="cstat-no" title="statement not covered" >                                    ? &lt;div&gt;</span>
+                                        {this.state.files.map((file) =&gt;
+                                            &lt;FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} /&gt;
+                                        )}
+                                    &lt;/div&gt;
+                                    : null
+                            }
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/ContentPane&gt;
+            )
+        }
+        return renderComponent
+    }
 }
 FilesAdd.propTypes = {
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
-    location: PropTypes.array.isRequired,
-    changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    location<span class="cstat-no" title="statement not covered" >: PropTypes.array.isRequired,</span>
+    changeAction: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 17:18:07 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

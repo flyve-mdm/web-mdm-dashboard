@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/24</span>
+        <span class='fraction'>0/26</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -32,7 +32,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -131,27 +131,7 @@
 86
 87
 88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+89</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,27 +162,21 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -237,22 +211,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -269,51 +229,42 @@ export default clas<span class="cstat-no" title="statement not covered" >s Files
     construct<span class="cstat-no" title="statement not covered" >or(props) {</span>
         super(props)
         this.s<span class="cstat-no" title="statement not covered" >tate = {</span>
-            selectionMode: false
-        }<span class="cstat-no" title="statement not covered" ></span>
-    }
-<span class="cstat-no" title="statement not covered" ></span>
-    changeSelectionMode = (selectionMode) =&gt; {
-        this.setS<span class="cstat-no" title="statement not covered" >tate({</span>
-            selectionMode
-        })<span class="cstat-no" title="statement not covered" ></span>
-    }
+            selectionMode: false,
+            actio<span class="cstat-no" title="statement not covered" >n: null</span>
+        }
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    changeAction <span class="cstat-no" title="statement not covered" >= action =&gt; this.setSta</span>te({ action })
+    changeSelectionMode = selectionMode =&gt; this.setState({ selectionMode })
 <span class="cstat-no" title="statement not covered" ></span>
     render() {
 <span class="cstat-no" title="statement not covered" ></span>
-        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
-        i<span class="fstat-no" title="function not covered" >f (this.props.mode === </span>'small'<span class="cstat-no" title="statement not covered" >) {</span>
-            if (selectedIndex === null &amp;&amp; this.props.actionList === null) {
-                return &lt;FilesList
+        let selectedItemList = this.props.location.length === 2 ? this.props.location[1] : null
+        if (this.p<span class="cstat-no" title="statement not covered" >rops.mode === 'small') {</span>
+            if (selectedItemList === null &amp;&amp; this.props.actionList === null) {
+<span class="fstat-no" title="function not covered" >                return &lt;FilesLis</span>t<span class="cstat-no" title="statement not covered" ></span>
                     itemListPaneWidth={'100%'}
-<span class="fstat-no" title="function not covered" ></span>                    animation={this.props.animation}
-<span class="cstat-no" title="statement not covered" >                    da</span>taSource={this.props.dataSource}
-                    changeDataSource={this.props.changeDataSource}
-<span class="cstat-no" title="statement not covered" >                    fetchData={this<span class="fstat-no" title="function not covered" >.p</span>rops.fetchData}</span>
-<span class="cstat-no" title="statement not covered" >                    isLoading={this.props.isLoading}</span>
-                    isError={this.props.isError}
+                    animation={this.props.animation}
                     location={this.props.location}
-                    onNavigate={this.props.onNavigate}
-                    changeSelectionMode={this.changeSelectionMode}
-<span class="cstat-no" title="statement not covered" >                    selectionMode={this.state.selectionMode}</span>
-                    actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification} 
+<span class="fstat-no" title="function not covered" ></span>                    onNavigate={this.props.onNavigate}
+<span class="cstat-no" title="statement not covered" >                    ch</span>angeSelectionMode={this.changeSelectionMode}
+                    selectionMode={this.state.selectionMode}
+<span class="cstat-no" title="statement not covered" >                    action={<span class="fstat-no" title="function not covered" >th</span>is.state<span class="cstat-no" title="statement not covered" >.action}</span></span>
+                    changeAction={this.changeAction}
+<span class="cstat-no" title="statement not covered" >                    showNotificatio<span class="fstat-no" title="function not covered" >n=</span>{this.props.sho<span class="cstat-no" title="statement not covered" >wNotification}</span></span>
                     glpi={this.props.glpi} /&gt;
-<span class="fstat-no" title="function not covered" ></span>            } else {
+<span class="cstat-no" title="statement not covered" >            } else {</span>
                 return &lt;FilesPage 
-                    itemList<span class="cstat-no" title="statement not covered" >PaneWidth={0}</span>
-<span class="cstat-no" title="statement not covered" >                    animation={this.props.animation}</span>
-<span class="cstat-no" title="statement not covered" >                    dataSource={this.props.dataSource}</span>
-<span class="cstat-no" title="statement not covered" >                    changeDataSource={this.props.changeDataSource}</span>
+                    itemListPaneWidth={0}
+                    animation={this.props.animation}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
-                    selectedIndex={selectedIndex}
+<span class="fstat-no" title="function not covered" ></span>                    selectedItemList={selectedItemList}
                     changeSelectionMode={this.changeSelectionMode}
-                    actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification} 
-                    glpi={this.props.glpi} /&gt;
+                    action={thi<span class="cstat-no" title="statement not covered" >s.state.action}</span>
+<span class="cstat-no" title="statement not covered" >                    changeAction={this.changeAction}</span>
+<span class="cstat-no" title="statement not covered" >                    showNotification={this.props.showNotification}</span>
+<span class="cstat-no" title="statement not covered" >                    glpi={this.props.glpi} /&gt;</span>
             }
         } else {
             let itemListPaneWidth = 320
@@ -322,48 +273,37 @@ export default clas<span class="cstat-no" title="statement not covered" >s Files
                     &lt;FilesList
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
-                        fetchData={this.props.fetchData}
-                        isLoading={this.props.isLoading}
-                        isError={this.props.isError}
-<span class="cstat-no" title="statement not covered" >                        location={this.props.location}</span>
+                        location={this.props.location}
                         onNavigate={this.props.onNavigate}
                         changeSelectionMode={this.changeSelectionMode}
                         selectionMode={this.state.selectionMode}
-                        actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} 
+                        action={this.state.action}
+                        changeAction={this.changeAction}
                         showNotification={this.props.showNotification}
                         glpi={this.props.glpi}
-                    /&gt;
+<span class="cstat-no" title="statement not covered" >                    /&gt;</span>
                     &lt;FilesPage 
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
-                        selectedIndex={selectedIndex}
+                        selectedItemList={selectedItemList}
                         changeSelectionMode={this.changeSelectionMode}
-                        actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} 
-                        showNotifica<span class="cstat-no" title="statement not covered" >tion</span>={this.props.showNotification}
-<span class="cstat-no" title="statement not covered" >                        glpi={this.props.glpi}</span>
+                        action={this.state.action}
+                        changeAction={this.changeAction}
+                        showNotification={this.props.showNotification}
+                        glpi={this.props.glpi}
                     /&gt;
                 &lt;/div&gt;
             )
         }
     }
 }
-Files.propTypes = {
-    mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
+Files.propTypes = {<span class="cstat-no" title="statement not covered" ></span>
+    mode: Pr<span class="cstat-no" title="statement not covered" >opTypes.oneOf(["small", "medium", "large"]).isRequired,</span>
     animation: PropTypes.bool.isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
@@ -373,7 +313,7 @@ Files.propTypes = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 17:18:07 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

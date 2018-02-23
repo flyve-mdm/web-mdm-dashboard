@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/28</span>
+        <span class='fraction'>0/27</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/28</span>
+        <span class='fraction'>0/27</span>
       </div>
     </div>
   </div>
@@ -129,7 +129,12 @@
 84
 85
 86
-87</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+87
+88
+89
+90
+91
+92</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -167,14 +172,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,7 +202,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,7 +211,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 <span class="cstat-no" title="statement not covered" >import FilesContent from './FilesContent'</span>
 import FilesAdd from './FilesAdd'
@@ -225,89 +235,94 @@ import EmptyMessage<span class="cstat-no" title="statement not covered" > from '
 export defaul<span class="cstat-no" title="statement not covered" >t class FilesPage</span> extends Component {
 &nbsp;
     render() {<span class="cstat-no" title="statement not covered" ></span>
-        if (this.props.selectedIndex === null || this.props.actionList === 'Edit') {
-            if(th<span class="cstat-no" title="statement not covered" >is.props.actionList ==</span>= null) {
-                return (
-<span class="cstat-no" title="statement not covered" >                    &lt;EmptyMessage message="No Selecti</span>on" itemListPaneWidth={this.props.itemListPaneWidth} /&gt;
-                )
-            } else {<span class="cstat-no" title="statement not covered" ></span>
-                switch (this.props.actionList) {
-                    c<span class="cstat-no" title="statement not covered" >ase "Edit":    </span>
-                        return (
-<span class="cstat-no" title="statement not covered" >                            &lt;FilesEdit</span>
-                            itemListPaneWidth={this.props.itemListPaneWidth}
-<span class="cstat-no" title="statement not covered" >                            dataSource={this.props.</span>dataSource}
-                            changeDataSource={this.props.changeDataSource}
-<span class="cstat-no" title="statement not covered" >                            location={th</span>is.props.location}
-                            onNavigate={this.props.onNavigate}
-<span class="cstat-no" title="statement not covered" >                            changeSelectionMode={this</span>.props.changeSelectionMode}
-                            changeActionList={this.props.changeActionList} 
-<span class="cstat-no" title="statement not covered" >                            showNotification={this.props</span>.showNotification}
-                        /&gt;
-<span class="cstat-no" title="statement not covered" >                        )</span>
-                    case "Add":
-<span class="fstat-no" title="function not covered" >                    return (<span class="cstat-no" title="statement not covered" ></span></span>
-                        &lt;FilesAdd
-                            itemListPaneWidth={this.props.itemListPaneWidth}
-                            dataSource={this.props.dataSource}
-<span class="fstat-no" title="function not covered" ></span>                            changeDataSource={this.props.changeDataSource}
-<span class="cstat-no" title="statement not covered" >                            location={this.props.location}</span>
-<span class="cstat-no" title="statement not covered" >                            changeActionList={this.props.changeActionList} </span>
-<span class="cstat-no" title="statement not covered" >                            showNotification={this.props.showNotification}</span>
-                        /&gt;
+        if(this.props.selectedItemList === null || this.props.action === 'Edit') {
+            switc<span class="cstat-no" title="statement not covered" >h (this.props.action) </span>{
+                case "Edit":
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+                        &lt;FilesEdit
+<span class="cstat-no" title="statement not covered" >                            itemListPaneWidth=</span>{this.props.itemListPaneWidth}
+                            location={this.props.location}
+<span class="cstat-no" title="statement not covered" >                            onNavigate={this.props.onNaviga</span>te}
+                            selectedItemList={this.props.selectedItemList}
+<span class="cstat-no" title="statement not covered" >                            changeSele</span>ctionMode={this.props.changeSelectionMode}
+                            changeAction={this.props.changeAction}
+<span class="cstat-no" title="statement not covered" >                            showNotification={this.</span>props.showNotification}
+                            glpi={this.props.glpi}
+<span class="cstat-no" title="statement not covered" >                        /&gt;</span>
                     )
-                    default: 
+                ca<span class="cstat-no" title="statement not covered" >se "Add":</span>
                     return (
-                        &lt;EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} /&gt;
+<span class="cstat-no" title="statement not covered" >                        &lt;FilesAdd</span>
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+<span class="cstat-no" title="statement not covered" >                            location={this.props.location}</span>
+                            changeAction={this.props.changeAction}
+<span class="fstat-no" title="function not covered" >                            show</span>Notific<span class="cstat-no" title="statement not covered" >ation={this.props.showNotification}</span>
+                            glpi={this.props.glpi}
+                        /&gt;
                     )
-<span class="cstat-no" title="statement not covered" >                }</span>
+<span class="fstat-no" title="function not covered" ></span>                default:
+<span class="cstat-no" title="statement not covered" >                    return (</span>
+<span class="cstat-no" title="statement not covered" >                        &lt;EmptyMessage</span>
+                            message="No Selection"
+<span class="cstat-no" title="statement not covered" >                            itemListPaneWidth={this.props.itemListPaneWidth} /&gt;</span>
+                    )
             }
-        } else {<span class="cstat-no" title="statement not covered" ></span>
-            let selectedItemList = this.props.dataSource.itemList.getAt(this.props.selectedIndex)
-            if(selectedItemList !== undefined) {
+        } else {
+            if (!this.props.action) {
+&nbsp;
+                if (this.props.selectedItemList.length &gt; 0) {
+                    return (
+                        &lt;FilesContent
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            changeSelectionMode={this.props.changeSelectionMode}
+                            location={this.props.location}
+                            onNavigate={this.props.onNavigate}
+                            selectedItemList={this.props.selectedItemList}
+                            changeAction={this.props.changeAction}
+                            showNotification={this.props.showNotification}
+<span class="cstat-no" title="statement not covered" >                            glpi={this.props.glpi} </span>
+                        /&gt;
+                    )
+                } else {
+                    return (
+                        &lt;EmptyMessage
+                            message="No Selection"
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                        /&gt;
+                    )
+                }
+            } else {
                 return (
-                    &lt;FilesContent
-                        itemListPaneWidth={this.props.itemListPaneWidth}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
-                        location={this.props.location}
-                        onNavigate={this.props.onNavigate}
-                        selectedIndex={this.props.selectedIndex}
-                        selectedItemList={selectedItemList}
-                        changeActionList={this.props.changeActionList} 
-                        showNotification={this.props.showNotification}
+<span class="cstat-no" title="statement not covered" >                    &lt;EmptyMessage</span>
+                        message="No Selection"
+                        itemListPaneWidth={this.props.itemListPaneWidth} 
                     /&gt;
-                )
-            } else {<span class="cstat-no" title="statement not covered" ></span>
-                return (
-                    &lt;EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} /&gt;
                 )
             }
         }
     }
 }
 FilesPage.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
+    itemList<span class="cstat-no" title="statement not covered" >PaneWidth: PropTypes.oneOfType([</span>
         PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: Pr<span class="cstat-no" title="statement not covered" >opTypes.func.isRequired,</span>
-    selectedIndex: PropTypes.array,
+        PropType<span class="cstat-no" title="statement not covered" >s.number</span>
+    ]).isRequired,<span class="cstat-no" title="statement not covered" ></span>
+    selectedItemList: PropTypes.array,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    action: PropTypes.string,
+    changeAction: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
-<span class="cstat-no" title="statement not covered" ></span></pre></td></tr>
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 17:18:07 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
