@@ -1,53 +1,34 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { store, history } from './store'
-import { Route, Switch, Redirect } from 'react-router-dom'
-import { ConnectedRouter } from 'react-router-redux'
+import { BrowserRouter } from 'react-router-dom'
+import ApplicationWebDashboard from './applications/ApplicationWebDashboard'
 import registerServiceWorker from './registerServiceWorker'
-import AdminDashboard from './AdminDashboard'
-import { SingUp, SignIn, ValidateAccount, ForgotPassword } from './Login'
+import { Provider } from 'react-redux';
+import {
+    createStore,
+    applyMiddleware, 
+    compose
+} from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './store'
+import './assets/styles/main.scss' // Global CSS Styles
 
-/**
- * Assets
- */
-import './styles/App.scss'
-import './styles/ui-light.css'
+// Enable Redux DevTool
+const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose
 
-const auth = {
-    isAuthenticated: () => {
-        if (localStorage.getItem('sessionToken') && localStorage.getItem('sessionToken') !== undefined ) {
-            return true
-        } else {
-            return false
-        }
-    }
-}
+const store = createStore(rootReducer, composeEnhancers(
+    applyMiddleware(thunk)
+));
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={props => (
-        auth.isAuthenticated() ? (
-            <Component {...props} />
-        ) : (
-                <Redirect to={{
-                    pathname: '/'
-                }} />
-            )
-    )} />
+ReactDOM.render(
+    (
+        <Provider store={store}>
+            <BrowserRouter>
+                <ApplicationWebDashboard />
+            </BrowserRouter>
+        </Provider>
+    ),
+    document.getElementById('root')
 )
 
-ReactDOM.render((
-    <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <Switch>
-                <Route exact path='/' component={SingUp} />
-                <PrivateRoute path="/app" component={AdminDashboard} />
-                <Route path='/signIn' component={SignIn} />
-                <Route path='/validateAccount' component={ValidateAccount} />
-                <Route path='/forgotPassword' component={ForgotPassword} />
-            </Switch>
-        </ConnectedRouter>
-    </Provider>), 
-    document.getElementById('app')
-)
 registerServiceWorker()
