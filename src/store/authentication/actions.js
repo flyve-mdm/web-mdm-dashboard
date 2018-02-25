@@ -45,7 +45,8 @@ export const authRefreshCaptcha = ({ idCaptcha, imgCaptcha, configurationPasswor
 
 // Actions Creators
 
-/* Fetch and Sign In a User with credentials
+/**
+ * Fetch and Sign In a User with credentials
  * @param {String} username 
  * @param {String} password 
  */
@@ -84,7 +85,7 @@ export const fetchSignIn = (username, password) => {
   }
 }
 
-/*
+/** 
 * Fetch and Refresh de Captcha 
 */
 export const fetchCaptcha = () => {
@@ -161,5 +162,31 @@ export const fetchSignUp = (data) => {
 export const fetchRecoverPassword = ()=> {
   return dispatch => { // TODO: Create this
     dispatch(uiTransactionStart())
+  }
+}
+
+export function fetchSendFeedback (data) {
+  return (dispatch) => {
+    dispatch(uiTransactionStart())
+    glpi.sendFeedback({ // TODO: GLPI Clien no have sendFeedback method
+      text: data.text,
+      userId: data.userId
+    })
+    .then(([response, json]) => {
+      dispatch(uiTransactionFinish())
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: 'Successfully send feedback',
+        type: 'success'
+      }))
+    })
+    .catch((error) => {
+      dispatch(uiTransactionFinish())
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: 'Error, feedback no send',
+        type: 'warning'
+      }))
+    })
   }
 }

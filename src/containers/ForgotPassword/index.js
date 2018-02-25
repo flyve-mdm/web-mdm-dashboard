@@ -63,13 +63,13 @@ class ForgotPassword extends Component {
                             inputRef={(input) => { this.textInput = input }}
                         />
 
-                        <button className="btn —secondary" type="button" onClick={
+                        <button className="btn --secondary" type="button" onClick={
                             () => this.props.history.push('/')
                         }>
                             Back 
                         </button>
 
-                        <button className="btn —primary" type="submit">
+                        <button className="btn --primary" type="submit">
                             Sing in
                         </button>
                     </form>

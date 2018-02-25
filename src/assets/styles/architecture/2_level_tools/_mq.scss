@@ -1,13 +1,13 @@
 @charset "UTF-8"; // Fixes an issue where Ruby locale is not set properly
 // See https://github.com/sass-mq/sass-mq/pull/10
 
-/// Base font size on the <body> element
+/// Base font size on the `<body>` element
 /// @type Number (unit)
 $mq-base-font-size: 16px !default;
 
 /// Responsive mode
 ///
-/// Set to false to enable support for browsers that do not support @media queries,
+/// Set to `false` to enable support for browsers that do not support @media queries,
 /// (IE <= 8, Firefox <= 3, Opera <= 9)
 ///
 /// You could create a stylesheet served exclusively to older browsers,
@@ -64,8 +64,8 @@ $mq-static-breakpoint: desktop !default;
 /// @type map
 $mq-show-breakpoints: () !default;
 
-/// Customize the media type (e.g. @media screen or @media print)
-/// By default sass-mq uses an "all" media type (@media all and …)
+/// Customize the media type (e.g. `@media screen` or `@media print`)
+/// By default sass-mq uses an "all" media type (`@media all and …`)
 ///
 /// @type String
 /// @link https://github.com/sass-mq/sass-mq#changing-media-type Full documentation and examples
@@ -74,7 +74,7 @@ $mq-media-type: all !default;
 /// Convert pixels to ems
 ///
 /// @param {Number} $px - value to convert
-/// @param {Number} $base-font-size ($mq-base-font-size) - <body> font size
+/// @param {Number} $base-font-size ($mq-base-font-size) - `<body>` font size
 ///
 /// @example scss
 ///  $font-size-in-ems: mq-px2em(16px);
@@ -254,29 +254,29 @@ $mq-media-type: all !default;
 ///  // Show breakpoints using custom settings
 ///  @include mq-show-breakpoints((L, XL), (S: 300px, L: 800px, XL: 1200px));
 @mixin mq-show-breakpoints($show-breakpoints: $mq-show-breakpoints, $breakpoints: $mq-breakpoints) {
-    body:before {
-      background-color: #FCF8E3;
-      border-bottom: 1px solid #FBEED5;
-      border-left: 1px solid #FBEED5;
-      color: #C09853;
-      font: small-caption;
-      padding: 3px 6px;
-      pointer-events: none;
-      position: fixed;
-      right: 0;
-      top: 0;
-      z-index: 100;
-  
-      // Loop through the breakpoints that should be shown
-      @each $show-breakpoint in $show-breakpoints {
-        $width: mq-get-breakpoint-width($show-breakpoint, $breakpoints);
-        @include mq($show-breakpoint, $breakpoints: $breakpoints) {
-          content: "#{$show-breakpoint} ≥ #{$width} (#{mq-px2em($width)})";
-        }
+  body:before {
+    background-color: #FCF8E3;
+    border-bottom: 1px solid #FBEED5;
+    border-left: 1px solid #FBEED5;
+    color: #C09853;
+    font: small-caption;
+    padding: 3px 6px;
+    pointer-events: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+
+    // Loop through the breakpoints that should be shown
+    @each $show-breakpoint in $show-breakpoints {
+      $width: mq-get-breakpoint-width($show-breakpoint, $breakpoints);
+      @include mq($show-breakpoint, $breakpoints: $breakpoints) {
+        content: "#{$show-breakpoint} ≥ #{$width} (#{mq-px2em($width)})";
       }
     }
   }
-  
+}
+
 @if length($mq-show-breakpoints) > 0 {
-    @include mq-show-breakpoints;
+  @include mq-show-breakpoints;
 }

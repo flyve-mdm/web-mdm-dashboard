@@ -8,7 +8,6 @@ import UsernameFieldset from './components/UsernameFieldset'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 
 import {
-    changeNotificationMessage,
     fetchSignIn
 } from '../../store/authentication/actions'
 
@@ -22,14 +21,12 @@ function mapStateToProps(state, props) {
     return {
         isAuthenticated: state.auth.currentUser !== null,
         isLoading: state.ui.loading,        
-        selfRegistration: state.auth.selfRegistration,
-        notificationMessage: state.auth.notificationMessage
+        selfRegistration: state.auth.selfRegistration
     }
 }
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
         fetchSignIn: bindActionCreators(fetchSignIn, dispatch)
     }
     return { actions }
