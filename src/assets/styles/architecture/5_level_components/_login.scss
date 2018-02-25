@@ -1,0 +1,40 @@
+.LoginBlock {
+    height: 100%;
+    overflow: auto;
+
+    .list-content {
+        overflow: auto;
+    }
+
+    .LoginForm {
+        margin: auto;
+        height: 100%;
+        
+        .content {
+        padding-top: 20px;
+        min-height: 85%;
+            
+            .img-login {
+                text-align: center;
+                
+                img {
+                    width: 90px;
+                }
+            }
+        
+            .emailSection button {
+                width: 290px;
+                background-color: $app-color;
+                color: $white-color;
+            }
+        
+            .win-button-primary {
+                margin-left: 10px
+            }
+        
+        }
+        .credentials {
+            text-align: center;
+        }
+    }
+}
