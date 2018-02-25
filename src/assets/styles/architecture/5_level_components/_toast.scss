@@ -1,0 +1,57 @@
+.toast {
+    position: fixed;
+    top: 48px;
+    z-index: 100;
+    right: 0;
+    margin: 10px;
+    padding: 12px;
+    overflow: hidden;
+    width: 200px;
+    min-height: 48px;
+
+    .toast-body {
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 16px;
+    }
+
+    &.--alert {
+        background-color: $alert;
+
+        .toast-body,
+        .toast-title {
+            color: white
+        }
+    }
+
+    &.--warning {
+        background-color: $warning;
+
+        .toast-body,
+        .toast-title {
+            color: white
+        }
+    }
+    
+    &.--success {
+        background-color: $success;
+
+        .toast-body,
+        .toast-title {
+            color: darken($color-2-primary, 5)
+        }
+    }
+
+    &.--info {
+        background-color: $info;
+
+        .toast-body,
+        .toast-title {
+            color: darken($color-2-primary, 5)
+        }
+    }
+
+    @extend %box-shadow;
+
+    @include animation('fade-in .5s ease-out');
+}
