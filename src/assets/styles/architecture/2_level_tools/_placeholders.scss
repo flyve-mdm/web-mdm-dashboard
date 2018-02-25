@@ -1,0 +1,15 @@
+%button-concept {
+
+}
+
+%normalize-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+%normalize-anchor {
+  &:hover {
+    text-decoration: none;
+  }
+}
