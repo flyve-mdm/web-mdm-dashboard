@@ -12,7 +12,10 @@
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.2",
     "babel-jest": "22.4.1",
-    "babel-loader": "7.1.2",
+    "babel-loader": "7.1.3",
+    "babel-preset-react-app": "^3.1.1",
+    "babel-runtime": "6.26.0",
+    "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "2.3.1",
     "css-loader": "0.28.10",
     "dotenv": "5.0.0",
@@ -62,10 +65,7 @@
     "webpack-dev-server": "2.11.1",
     "webpack-manifest-plugin": "1.3.2",
     "whatwg-fetch": "2.0.3",
-    "winjs": "^4.4.3",
-    "babel-preset-react-app": "^3.1.1",
-    "babel-runtime": "6.26.0",
-    "case-sensitive-paths-webpack-plugin": "2.1.1"
+    "winjs": "^4.4.3"
   },
   "scripts": {
     "start": "node scripts/start.js",
