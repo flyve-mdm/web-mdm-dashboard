@@ -61,7 +61,7 @@
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
     "victory": "^0.25.0",
-    "webpack": "3.11.0",
+    "webpack": "4.0.0",
     "webpack-dev-server": "3.0.0",
     "webpack-manifest-plugin": "2.0.0-rc.2",
     "whatwg-fetch": "2.0.3",
