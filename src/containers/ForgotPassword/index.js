@@ -110,4 +110,4 @@ ForgotPassword.propTypes = {
     isLoading: PropTypes.bool.isRequired
 }
 
-export default withAuthenticationLayout(ForgotPassword)
+export default withAuthenticationLayout(ForgotPassword, { centerContent: true })

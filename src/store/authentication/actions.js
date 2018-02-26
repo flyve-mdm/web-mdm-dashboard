@@ -1,23 +1,30 @@
 import * as actionTypes from './actionTypes'
 
-export const changeNotificationMessage = newNotification => {
+export const changeNotificationMessage = notification => {
   return {
       type: actionTypes.CHANGE_NOTIFICATION_MESSAGE,
-      newNotification
+      notification
   }
 }
 
-export const changeUsername = newUsername => {
+export const changeUsername = username => {
   return {
       type: actionTypes.CHANGE_USERNAME,
-      newUsername
+      username
   }
 }
 
-export const changeCurrentUser = newCurrentUser =>  {
+export const changeEmail = email =>  {
+  return {
+      type: actionTypes.CHANGE_EMAIL,
+      email
+  }
+}
+
+export const changeCurrentUser = currentUser =>  {
   return {
       type: actionTypes.CHANGE_CURRENT_USER,
-      newCurrentUser
+      currentUser
   }
 }
 

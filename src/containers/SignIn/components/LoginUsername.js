@@ -69,7 +69,7 @@ class LoginUsername extends Component {
                     !this.props.selfRegistration ? '' : (
                         <p>
                             {I18n.t('login.no_account?')}
-                            <Link to='/signIn'>
+                            <Link to='/signUp'>
                                 {I18n.t('login.create_one!')}
                             </Link>
                         </p>
