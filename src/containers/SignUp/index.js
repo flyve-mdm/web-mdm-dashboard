@@ -10,6 +10,16 @@ import ErrorValidation from '../../components/ErrorValidation'
 import ConstructInputs from '../../components/Forms'
 import config from '../../config/config.json'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+import { changeNotificationMessage } from '../../store/authentication/actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
+    }
+    return { actions }
+}
 
 class SignUp extends Component {
 
@@ -283,11 +293,11 @@ class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-    email: PropTypes.string,
     history: PropTypes.object.isRequired,
-    locationLanguage: PropTypes.string.isRequired
+    actions: PropTypes.object.isRequired
 }
 
-export default withAuthenticationLayout(SignUp, {
-    centerContent: false
-})
+export default connect(
+    null,
+    mapDispatchToProps
+)(withAuthenticationLayout(SignUp, {contentCenter: true}))

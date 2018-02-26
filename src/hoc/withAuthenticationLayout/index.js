@@ -39,7 +39,7 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
                     </a>
                     <br />
                     <span>
-                        © 2017 Teclib'.
+                        :copyright: 2017 Teclib'.
                     </span>
                     <br/>
                     <span className='language__span btn'>
