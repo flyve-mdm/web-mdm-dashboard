@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import L from 'leaflet'
+import Loading from '../../../Utils/Loading'
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -16,12 +17,33 @@ export default class Geolocation extends Component {
         this.state ={
           map: null,
           position: [10.2484425 , -67.5906903],
-        };
+          isLoading: true,
+          locations: []
+        }
       }
     
-    componentDidMount() {
-        setTimeout(() => {
-            var map = L.map('map', {
+    componentDidMount () {
+        this.handleRefresh()
+    }
+
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (this.props.selectedItemList !== prevProps.selectedItemList) {
+            this.setState({isLoading: true}, () => this.handleRefresh())
+        }
+    }
+
+    handleRefresh = async () => {
+        const response = await this.props.glpi.getSubItems({
+            itemtype: 'Computer', 
+            id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.Computer.id'], 
+            subItemtype: 'PluginFlyvemdmGeolocation'
+        })
+
+        this.setState({
+            locations: response,
+            isLoading: false
+        }, () => {
+            const map = L.map('map', {
                 minZoom: 2,
                 maxZoom: 18,
                 center: this.state.position,
@@ -29,19 +51,17 @@ export default class Geolocation extends Component {
                 layers: [L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})],
                 attributionControl: true,
                 preferCanvas: true,
-            });
-            var marker = L.marker(this.state.position).addTo(map);
+            })
+            let marker = L.marker(this.state.position).addTo(map)
             marker.bindPopup("last known location")
             return this.setState({
                 map: map
-            });
-        }, 500)
+            })
+        })
     }
 
     render() {
-        return (
-            <div id="map" style={{ height: '400px' }} ></div>
-        )
+        return this.state.isLoading ? <Loading message="Loading..." /> : <div id="map" style={{ height: '400px' }} />
     }
 }
 

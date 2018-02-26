@@ -7,7 +7,6 @@ import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sec
 class DevicesContent extends Component {
 
     render() {
-        console.log(this.props.selectedItemList)
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true} >
                 <ReactWinJS.Pivot>
