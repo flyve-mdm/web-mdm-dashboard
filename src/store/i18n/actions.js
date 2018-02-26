@@ -1,6 +1,8 @@
 import * as actionTypes from './actionTypes'
 import initialState from "./initialState"
 
+// Actions
+
 export const changeLanguage = languageName => {
   return {
       type: actionTypes.CHANGE_LANGUAGE,

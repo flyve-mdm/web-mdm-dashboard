@@ -4,15 +4,18 @@ import { Route } from 'react-router'
 
 import PrivateRoute from '../../components/PrivateRoute'
 
+// Home Page '/'
 import SignIn from '../../containers/SignIn'
 
-import asyncAdminDashboard from './asyncComponents/asyncAdminDashboard'
-import asyncLogout from './asyncComponents/asyncLogout';
-import asyncSignUp from './asyncComponents/asyncSignUp';
-
+// I18N HOC
 import withI18NTranslation from '../../hoc/withI18NTranslation'
-import asyncValidateAccount from './asyncComponents/asyncValidateAccount';
-import asyncForgotPassword from './asyncComponents/asyncForgotPassword';
+
+// Async Components
+import asyncSignUp from '../../asyncComponents/asyncSignUp'
+import asyncLogout from '../../asyncComponents/asyncLogout'
+import asyncAdminDashboard from '../../asyncComponents/asyncAdminDashboard'
+import asyncValidateAccount from '../../asyncComponents/asyncValidateAccount'
+import asyncForgotPassword from '../../asyncComponents/asyncForgotPassword'
 
 
 /**

@@ -3,11 +3,9 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { I18n } from 'react-i18nify';
 
-import Glpi from '../../../shared/glpiApi'
 import Loading from '../../../components/Loading'
-import config from '../../../config/config.json'
 
-class LoginPassword extends Component {
+class PasswordFieldset extends Component {
     
     constructor (props) {
         super(props)
@@ -22,33 +20,6 @@ class LoginPassword extends Component {
         if (this.passwordInput) {
             this.passwordInput.focus()
         }        
-    }
-
-    LogInServer = (e) => {
-        e.preventDefault()
-        this.setState({
-            isLoading: true
-        })
-        Glpi.login({ userName: this.props.username, userPassword: this.props.password }).then((response) => {
-            let email = response.userEmails.length > 0 ? response.userEmails[0].email : ''
-            const user = {
-                id: response.userData.id,
-                name: response.userData.name,
-                email: email,
-                picture: null
-            }
-            localStorage.setItem('sessionToken', response.sessionToken)
-            localStorage.setItem('currentUser', JSON.stringify(user))
-            this.props.changeCurrentUser(user)
-            this.props.history.push(`/app`)
-        })
-        .catch((error) => {
-            console.log(error)
-            this.setState({
-                isLoading: false
-            })
-            this.props.changeNotificationMessage({ title: config.APP_NAME, body: `${error[0]}\n${error[1]}` })
-        })
     }
 
     render () { 
@@ -71,7 +42,7 @@ class LoginPassword extends Component {
                         <br />
                         {this.state.errorMessage}
                     </p>
-                    <form onSubmit={this.LogInServer}>
+                    <form onSubmit={this.props.handleOnSubmit}>
                         <input
                             type="password"
                             name="password"
@@ -93,7 +64,9 @@ class LoginPassword extends Component {
                     <button type="submit" className="win-button win-button-primary">
                         { I18n.t('commons.sign_in') }
                     </button>
+
                     </form>
+                    
                     <Link to="/forgotPassword">
                         { I18n.t('login.forgot_my_password') }
                     </Link>
@@ -105,14 +78,12 @@ class LoginPassword extends Component {
     }
 }
 
-LoginPassword.propTypes = {
-    username: PropTypes.string.isRequired,
+PasswordFieldset.propTypes = {
     password: PropTypes.string.isRequired,
     changeInput: PropTypes.func.isRequired,
     changePhase: PropTypes.func.isRequired,
-    changeCurrentUser: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    changeNotificationMessage: PropTypes.func.isRequired
+    handleOnSubmit: PropTypes.func.isRequired
 }
 
-export default LoginPassword
+export default PasswordFieldset
