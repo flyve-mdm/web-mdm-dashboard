@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { I18n } from 'react-i18nify';
-// import source_file from './source_file.json';
+import { I18n } from 'react-i18nify'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
-const LENGUAGE_DEFAULT = 'en_GB';
+import source_file_translation from '../../i18n/source_file.json'
 
-let json = {};
-
-// json[LENGUAGE_DEFAULT] = source_file;
-
-I18n.setTranslations(json);
+function mapStateToProps(state, props) {
+  return {
+      languageDefault: state.language.languageDefault,
+      languageCurrent: state.language.languageCurrent
+  }
+}
 
 /**
- * 
+ * Translations HOC
  * @param {*} WrappedComponent -> React Component
- * @param {*} configurationObject  -> Object {language_default}
  */
-const withI18NTranslation = (WrappedComponent) => {
-  return class withI18NTranslation extends Component {
+const withI18NTranslation = WrappedComponent => {
+  class I18NTranslation extends Component {
      /**
      * @param {*} i18nConvention -> String, e.g: 'pt_BR'
      */
     findI18NString = i18nConvention => {
-      let path = i18nConvention === LENGUAGE_DEFAULT
+      let path = i18nConvention === this.props.languageDefault
         ? `./source_file`
         : `./translations/${i18nConvention}`;
         
@@ -35,18 +36,24 @@ const withI18NTranslation = (WrappedComponent) => {
         I18n.setLocale(i18nConvention);
         this.forceUpdate();
       }).catch(() => {
-        I18n.setLocale(LENGUAGE_DEFAULT);
+        I18n.setLocale(this.props.languageDefault);
         this.forceUpdate();
       });
     };
   
-    componentDidMount() {
-      this.findI18NString(this.props.locationLanguage);
+    componentWillMount() {
+      let json = {};
+      json[this.props.languageDefault] = source_file_translation
+      I18n.setTranslations(json);
     }
 
-    componentWillReceiveProps(nextProps, nextContext) {
-      if (nextProps.locationLanguage !== this.props.locationLanguage) {
-          this.findI18NString(nextProps.locationLanguage)
+    componentDidMount() {
+      this.findI18NString(this.props.languageCurrent);
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.languageCurrent !== this.props.languageCurrent) {
+          this.findI18NString(nextProps.languageCurrent)
       }
     }
 
@@ -54,10 +61,15 @@ const withI18NTranslation = (WrappedComponent) => {
       return <WrappedComponent {...this.props} />
     }
   }
-}
 
-withI18NTranslation.propTypes = {
-  locationLanguage: PropTypes.string.isRequired
+  I18NTranslation.propTypes = {
+    languageDefault: PropTypes.string.isRequired,
+    languageCurrent: PropTypes.string.isRequired
+  }
+
+  return withRouter(
+    connect(mapStateToProps, null)(I18NTranslation)
+  )
 }
 
 export default withI18NTranslation;
