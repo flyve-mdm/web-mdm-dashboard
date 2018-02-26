@@ -260,25 +260,25 @@ class SignUp extends Component {
                         <Translate value="create_account.create_account"/>
                     </h2>
 
-                    <form className="list-content" onSubmit={this.registerUser}>
+                    <form className="authentication--form" onSubmit={this.registerUser}>
 
                         <ConstructInputs data={user.personalInformation} />
 
                         <ConstructInputs data={user.passwordInformation}  />
                         
                         <ConstructInputs data={user.captchaInformation} />
-                        <div style={{ textAlign: 'center' }}>
-                            <img src={this.state.imgCaptcha} alt='' />
+                        <div style={{ textAlign: 'center', marginTop: '15px' }}>
+                            <img src={this.state.imgCaptcha} alt='Captcha' />
                         </div>
                         <div style={{textAlign: 'center'}}>
-                            <button className="win-button win-button-primary" style={{ margin: "20px" }}>
+                            <button className='btn --primary' style={{ margin: "20px" }}>
                                 <Translate value="create_account.register"/>
                             </button>
                             <p>
                                 <Translate value="create_account.do_you_already_have_an_account?"/>
                                 &#160;
                                 <Link to='/'>
-                                    <Translate value="create_account.sign_in"/>
+                                    <Translate value="commons.sign_in"/>
                                 </Link>
                             </p>
                         </div>

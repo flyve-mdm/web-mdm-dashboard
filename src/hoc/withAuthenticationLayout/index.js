@@ -26,39 +26,34 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
         }
 
         return (
-            <div className="LoginBlock">
-                <div className="LoginForm" style={style}>
-                    <div className="content">
-                        <div className="img-login">
-                            <img alt="Flyve MDM Dashboard" src="images/logo2.png" />
-                        </div>
-    
-                        <WrappedComponent {...props} />
-
-                    </div>
-    
-                    <div className="credentials">
-                        <a href="https://flyve-mdm.com/privacy-policy/">
-                            {I18n.t('commons.terms_and_conditions')}
-                        </a>
-                        <br />
-                        <span>
-                            © 2017 Teclib'.
-                        </span>
-                        <br/>
-                        <span className='select__span__language'>
-                        Idioma
-                            <select className='select__input__language' onChange={
-                                event => props.changeLanguage(event.target.value)
-                            }>
-                                <option value='en_GB'>English</option>
-                                <option value='pt_BR'>Portuguese</option>
-                                <option value='fr_FR'>French</option>
-                                <option value='es_ES'>Spain</option>
-                            </select>
-                        </span>
-                    </div>
-                </div>
+            <div className="authentication-block " style={style} >
+                <section className="authentication--section">
+                    <figure className="authentication--figure">
+                        <img alt="Flyve MDM Dashboard" src="images/logo2.png" />
+                    </figure>
+                    <WrappedComponent {...props} />
+                </section>
+                <footer className="authenticaton--footer">
+                    <a href="https://flyve-mdm.com/privacy-policy/">
+                        {I18n.t('commons.terms_and_conditions')}
+                    </a>
+                    <br />
+                    <span>
+                        © 2017 Teclib'.
+                    </span>
+                    <br/>
+                    <span className='language--span btn'>
+                    Idioma
+                        <select className='language--select' onChange={
+                            event => props.changeLanguage(event.target.value)
+                        }>
+                            <option value='en_GB'>English</option>
+                            <option value='pt_BR'>Portuguese</option>
+                            <option value='fr_FR'>French</option>
+                            <option value='es_ES'>Spain</option>
+                        </select>
+                    </span>
+                </footer>
             </div>
         )
     }
