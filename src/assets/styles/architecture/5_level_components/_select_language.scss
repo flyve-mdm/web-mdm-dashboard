@@ -1,16 +1,16 @@
-.select__span__language {
+.language--span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   vertical-align: top;
   border: 1px solid #11615f;
-  padding: 1% 5%;
   margin: 20px;
   background: #13908d;
   color: white;
+  font-size: 14px
 }
 
-.select__input__language {
+.language--select {
   cursor: pointer;
   height: 100%;
   left: 0;

@@ -48,7 +48,7 @@ class Input extends Component {
         if (this.props.delete) deleteIcon = <span className="deleteIcon" style={{ margin: 10, fontSize: 18 }} onClick={deleteEmail}/>
 
         return (
-            <div className="list-col">
+            <div className="field--div">
                 <p>{this.props.label}</p>
                 <input
                     type={this.props.type}
