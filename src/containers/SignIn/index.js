@@ -3,19 +3,23 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import LoginUsername from './components/LoginUsername'
-import LoginPassword from './components/LoginPassword'
+import UsernameFieldset from './components/UsernameFieldset'
 import ToastNotifications from '../../components/ToastNotifications'
+
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+
 import {
-    changeCurrentUser,
     changeNotificationMessage,
-    changeUsername
+    fetchSignIn
 } from '../../store/authentication/actions'
+
+// Async Component
+import AsyncPasswordFieldset from '../../asyncComponents/asyncPasswordFielset'
+import { Redirect } from 'react-router';
 
 function mapStateToProps(state, props) {
     return {
-        username: state.auth.username,
+        isAuthenticated: state.auth.currentUser !== null,
         selfRegistration: state.auth.selfRegistration,
         notificationMessage: state.auth.notificationMessage,
     }
@@ -23,9 +27,8 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        changeUsername: bindActionCreators(changeUsername, dispatch),
         changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
-        changeCurrentUser: bindActionCreators(changeCurrentUser, dispatch),
+        fetchSignIn: bindActionCreators(fetchSignIn, dispatch)
     }
     return { actions }
 }
@@ -35,7 +38,7 @@ class SignIn extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            username: this.props.username,
+            username: '',
             password: '',
             phase: 1
         }
@@ -72,41 +75,50 @@ class SignIn extends Component {
         })
     }
 
+    handleFormSubmit = (e) => {
+        e.preventDefault()
+        this.props.actions.fetchSignIn(
+            this.state.username,
+            this.state.password
+        )
+    }
+
     render () {
         let form
         if (this.state.phase === 1) {
             form = 
-                <LoginUsername 
+                <UsernameFieldset
                     username={this.state.username} 
                     changeInput={this.changeInput}
                     changePhase={this.changePhase}
-                    changeUsername={this.props.actions.changeUsername}
                     selfRegistration={this.props.selfRegistration}
                 />    
         } else {
-            form = 
-            <LoginPassword 
-                username={this.state.username} 
+            form = <AsyncPasswordFieldset
+                username={this.state.username}
                 password={this.state.password}
                 changeInput={this.changeInput}
                 changePhase={this.changePhase}
-                changeCurrentUser={this.props.actions.changeCurrentUser}
                 history={this.props.history}
-                changeNotificationMessage={this.props.actions.changeNotificationMessage}
+                handleOnSubmit={this.handleFormSubmit}
             />
         }
 
-        return (
+        return !this.props.isAuthenticated ?
+        (
             <React.Fragment>
                 <ToastNotifications ref={instance => { this.toastNotifications = instance }} />
                 {form}
             </React.Fragment>
+        ) : 
+        (
+            <Redirect to='/app'/>
         )
     }
 }
 
 SignIn.propTypes = {
-    username: PropTypes.string.isRequired,    
+    isAuthenticated: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
     selfRegistration: PropTypes.bool.isRequired,
     actions: PropTypes.object.isRequired

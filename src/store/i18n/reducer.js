@@ -2,6 +2,8 @@ import * as actionTypes from './actionTypes'
 import initialState from "./initialState"
 import { updateObject } from '../../shared/updateObject'
 
+// Sugar Functions
+
 const changeLanguage = (state, action) => {
   return updateObject(state, {locationLanguage: action.languageCurrent})
 }
@@ -9,6 +11,8 @@ const changeLanguage = (state, action) => {
 const changeLanguageFallBack = (state, action) => {
   return updateObject(state, {locationLanguage: action.languageDefault})
 }
+
+// Reducer
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {

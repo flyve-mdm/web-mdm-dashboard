@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { I18n } from 'react-i18nify';
 
-class LoginUsername extends Component {
+class UsernameFieldset extends Component {
 
     constructor (props) {
         super(props)
@@ -20,7 +20,6 @@ class LoginUsername extends Component {
     LogInServer = (e) => {
         e.preventDefault()
         if (this.props.username) {
-            this.props.changeUsername(this.props.username)
             this.props.changePhase(2)
         } else {
             this.setState({
@@ -69,6 +68,7 @@ class LoginUsername extends Component {
                     !this.props.selfRegistration ? '' : (
                         <p>
                             {I18n.t('login.no_account?')}
+                            &nbsp;
                             <Link to='/signUp'>
                                 {I18n.t('login.create_one!')}
                             </Link>
@@ -82,12 +82,11 @@ class LoginUsername extends Component {
     }
 }
 
-LoginUsername.propTypes = {
+UsernameFieldset.propTypes = {
     username: PropTypes.string.isRequired,
     changeInput: PropTypes.func.isRequired,
     changePhase: PropTypes.func.isRequired,
-    changeUsername: PropTypes.func.isRequired,
     selfRegistration: PropTypes.bool.isRequired
 }
 
-export default LoginUsername
+export default UsernameFieldset
