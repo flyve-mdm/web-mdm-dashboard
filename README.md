@@ -27,7 +27,7 @@ To get started, check out [Flyve MDM website](https://flyve-mdm.com/)!
 
 ## Synopsis
 
-The Web Administration Dashboard of Flyve MDM is a centralised mobile device management tool.
+The Web Administration Dashboard of Flyve MDM is a centralised mobile device management tool. Designed to work in conjuction with [Flyve MDM plugin for GLPI](http://flyve.org/glpi-plugin) and [Flyve MDM Demo plugin](http://flyve.org/demo-mode).
 
 It allows you to manage all your mobile devices effectively through a secure and intuitive Web Interface, providing the ability to:
 
@@ -62,7 +62,7 @@ Instructions are available on the website, see our [Installation article](http:/
 
 ## Documentation
 
-We maintain a detailed documentation of the project on the [website](http://flyve.org/web-mdm-dashboard/).
+We maintain a detailed documentation of the project on the website, see our [How-tos](http://flyve.org/web-mdm-dashboard/howtos) and [Development](http://flyve.org/web-mdm-dashboard/) sections.
 
 ## Versioning
 
