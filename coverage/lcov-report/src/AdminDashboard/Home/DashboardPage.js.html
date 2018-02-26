@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/9</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/8</span>
       </div>
     </div>
   </div>
@@ -74,67 +74,67 @@
 29
 30
 31
-32</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+32</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-<span class="cstat-no" title="statement not covered" ></span>
-export default class DashboardPage extends Component {
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 &nbsp;
-    handleLocation <span class="cstat-no" title="statement not covered" >= () =&gt; {</span>
-        let index = this.props.routers.findIndex(obj =&gt; obj.label===this.props.name)
-        this.<span class="cstat-no" title="statement not covered" >props.onNavigate(</span>[this.props.name])
-        this.props.changeIndex(index)
-    }<span class="cstat-no" title="statement not covered" ></span>
+export default class DashboardPage extends Component <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
+&nbsp;
+    handleLocation = <span class="fstat-no" title="function not covered" >() =&gt; </span>{
+        let index = <span class="cstat-no" title="statement not covered" >this.props.routers.findIndex(<span class="fstat-no" title="function not covered" >obj =&gt; <span class="cstat-no" title="statement not covered" ></span>obj.label===this.props.name)</span></span>
+<span class="cstat-no" title="statement not covered" >        this.props.onNavigate([this.props.name])</span>
+<span class="cstat-no" title="statement not covered" >        this.props.changeIndex(index)</span>
+    }
     
-    render() {<span class="cstat-no" title="statement not covered" ></span>
-        return (
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="fstat-no" title="function not covered" >    render() </span>{
+<span class="cstat-no" title="statement not covered" >        return (</span>
+&nbsp;
             &lt;div className="info-box" onClick={this.handleLocation}&gt;
-<span class="fstat-no" title="function not covered" >                &lt;span className=</span>"conten<span class="cstat-no" title="statement not covered" >t-box"&gt;</span>
+                &lt;span className="content-box"&gt;
                     {this.props.count}
                 &lt;/span&gt;
-<span class="fstat-no" title="function not covered" ></span>                &lt;span className={'icon-box ' + this.props.icon} /&gt;
+                &lt;span className={'icon-box ' + this.props.icon} /&gt;
                 &lt;span className="title-box"&gt;
                     { this.props.name.toUpperCase() }
-<span class="cstat-no" title="statement not covered" >                &lt;/span&gt;<span class="fstat-no" title="function not covered" ></span></span>
-            &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
-        )<span class="cstat-no" title="statement not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
+                &lt;/span&gt;
+            &lt;/div&gt;
+        )
+    }
 }
-DashboardPage.propTypes = {
+<span class="cstat-no" title="statement not covered" >DashboardPage.propTypes = {</span>
     name: PropTypes.string.isRequired,
-<span class="fstat-no" title="function not covered" >    ro</span>uters: PropTypes.array.isRequired,
-    onNa<span class="cstat-no" title="statement not covered" >vigate: PropTypes.func.isRequired,</span>
+    routers: PropTypes.array.isRequired,
+    onNavigate: PropTypes.func.isRequired,
     changeIndex: PropTypes.func.isRequired,
 }</pre></td></tr>
 </table></pre>
@@ -142,7 +142,7 @@ DashboardPage.propTypes = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

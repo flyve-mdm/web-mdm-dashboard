@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/18</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/18</span>
+        <span class='fraction'>0/12</span>
       </div>
     </div>
   </div>
@@ -88,21 +88,7 @@
 43
 44
 45
-46</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+46</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -133,58 +119,72 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
-import L from 'leaflet';
-<span class="cstat-no" title="statement not covered" ></span>
-delete L.Icon.Default.prototype._getIconUrl;
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import L from 'leaflet';</span>
 &nbsp;
-L.Icon.Default.merg<span class="cstat-no" title="statement not covered" >eOptions({</span>
+<span class="cstat-no" title="statement not covered" >delete L.Icon.Default.prototype._getIconUrl;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >L.Icon.Default.mergeOptions({</span>
   iconRetinaUrl: require('../../../../node_modules/leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: re<span class="cstat-no" title="statement not covered" >quire('../../../.</span>./node_modules/leaflet/dist/images/marker-icon.png'),
+  iconUrl: require('../../../../node_modules/leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('../../../../node_modules/leaflet/dist/images/marker-shadow.png')
-})<span class="cstat-no" title="statement not covered" ></span>
+})
 &nbsp;
-export default <span class="cstat-no" title="statement not covered" >class Geolocation e</span>xtends Component {
-    constructor() {
-        super();<span class="cstat-no" title="statement not covered" ></span>
-        this.state ={
-<span class="fstat-no" title="function not covered" >          map: null,<span class="cstat-no" title="statement not covered" ></span></span>
+export default class Geolocation extends Component {
+<span class="fstat-no" title="function not covered" >    constructor() </span>{
+<span class="cstat-no" title="statement not covered" >        super();</span>
+<span class="cstat-no" title="statement not covered" >        this.state ={</span>
+          map: null,
           position: [10.2484425 , -67.5906903],
-<span class="cstat-no" title="statement not covered" >        };</span>
+        };
       }
-<span class="cstat-no" title="statement not covered" >    </span>
-    componentDidMount() {
-        setTimeout(() =&gt; {
-            var map = L.map('map', {
+    
+<span class="fstat-no" title="function not covered" >    componentDidMount() </span>{
+<span class="cstat-no" title="statement not covered" >        setTimeout(<span class="fstat-no" title="function not covered" >() =&gt; </span>{</span>
+            var map = <span class="cstat-no" title="statement not covered" >L.map('map', {</span>
                 minZoom: 2,
                 maxZoom: 18,
                 center: this.state.position,
-<span class="fstat-no" title="function not covered" ></span>                zoom: 16,
-<span class="cstat-no" title="statement not covered" >                l</span>ayers: [L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&amp;copy; &lt;a href="http://openstreetmap.org"&gt;OpenStreetMap&lt;/a&gt; contributors, &lt;a href="http://creativecommons.org/licenses/by-sa/2.0/"&gt;CC-BY-SA&lt;/a&gt;'})],
-<span class="cstat-no" title="statement not covered" >                attributionControl: true,</span>
+                zoom: 16,
+                layers: [L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&amp;copy; &lt;a href="http://openstreetmap.org"&gt;OpenStreetMap&lt;/a&gt; contributors, &lt;a href="http://creativecommons.org/licenses/by-sa/2.0/"&gt;CC-BY-SA&lt;/a&gt;'})],
+                attributionControl: true,
                 preferCanvas: true,
             });
-            var marker = L.marker(this.state.position).addTo(map);
-            marker.bindPopup("last known location")
-            return this.setState({
-<span class="fstat-no" title="function not covered" ></span>                map: map
-<span class="cstat-no" title="statement not covered" >            });<span class="fstat-no" title="function not covered" ></span></span>
-        }, 500)<span class="cstat-no" title="statement not covered" ></span>
+            var marker = <span class="cstat-no" title="statement not covered" >L.marker(this.state.position).addTo(map);</span>
+<span class="cstat-no" title="statement not covered" >            marker.bindPopup("last known location")</span>
+<span class="cstat-no" title="statement not covered" >            return this.setState({</span>
+                map: map
+            });
+        }, 500)
     }
 &nbsp;
-    render() {
-        return (
+<span class="fstat-no" title="function not covered" >    render() </span>{
+<span class="cstat-no" title="statement not covered" >        return (</span>
             &lt;div id="map" style={{ height: '400px' }} &gt;&lt;/div&gt;
         )
     }
 }
-<span class="cstat-no" title="statement not covered" ></span></pre></td></tr>
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

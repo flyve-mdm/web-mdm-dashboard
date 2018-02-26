@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/1</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/6</span>
       </div>
     </div>
   </div>
@@ -68,21 +68,7 @@
 23
 24
 25
-26</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+26</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -93,29 +79,43 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
+&nbsp;
 class EmptyList extends Component {
-    render () {
-        const heade<span class="cstat-no" title="statement not covered" >rSize = this.props.headerSize ? this.props.he</span>aderSize : 0        
-        const icon = this.props.icon ? this.props.icon : "fileIcon"
-<span class="cstat-no" title="statement not covered" ></span>
-        return (
-            &lt;d<span class="cstat-no" title="statement not covered" >iv style={{ marginTop: - header</span>Size, display: 'flex', height: '100%', justifyContent: 'center', textAlign: 'center', alignItems: 'center', flexDirection: 'column' }}&gt;
+<span class="fstat-no" title="function not covered" >    render () </span>{
+        const headerSize = <span class="cstat-no" title="statement not covered" >this.props.headerSize ? this.props.headerSize : 0        </span>
+        const icon = <span class="cstat-no" title="statement not covered" >this.props.icon ? this.props.icon : "fileIcon"</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;div style={{ marginTop: - headerSize, display: 'flex', height: '100%', justifyContent: 'center', textAlign: 'center', alignItems: 'center', flexDirection: 'column' }}&gt;
                 &lt;h4 className="win-h4" style={{ color: 'grey' }}&gt;
-<span class="cstat-no" title="statement not covered" >                    &lt;span className={ic</span>on} style={{fontSize: "40px", lineHeight: "60px"}}/&gt; &lt;br/&gt;
+                    &lt;span className={icon} style={{fontSize: "40px", lineHeight: "60px"}}/&gt; &lt;br/&gt;
                     { this.props.message } 
-                &lt;/<span class="cstat-no" title="statement not covered" >h4&gt;</span>
+                &lt;/h4&gt;
             &lt;/div&gt;
-        )<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+        )
     }
 }
-<span class="fstat-no" title="function not covered" ></span>
-EmptyList.propTypes = {<span class="cstat-no" title="statement not covered" ></span>
-    message: PropType<span class="cstat-no" title="statement not covered" >s.string.isRequired,</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >EmptyList.propTypes = {</span>
+    message: PropTypes.string.isRequired,
     icon: PropTypes.string,
-    head<span class="cstat-no" title="statement not covered" >erSize: PropTypes.number    </span>
+    headerSize: PropTypes.number    
 }
 &nbsp;
 export default EmptyList</pre></td></tr>
@@ -124,7 +124,7 @@ export default EmptyList</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>

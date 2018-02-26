@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/6</span>
       </div>
     </div>
   </div>
@@ -88,30 +88,13 @@
 43
 44
 45
-46</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+46</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,36 +116,53 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-<span class="cstat-no" title="statement not covered" ></span>
-class TextArea extends Component {
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 &nbsp;
-    change = (event<span class="cstat-no" title="statement not covered" >Object) =&gt; {</span>
-        this.props.function(this.props.name, eventObject.target.value)
-    }<span class="cstat-no" title="statement not covered" ></span>
+class TextArea extends Component <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
 &nbsp;
-    render() {<span class="cstat-no" title="statement not covered" ></span>
-        return (
-            &lt;div <span class="cstat-no" title="statement not covered" >className="list-col"&gt;</span>
+    change = (<span class="fstat-no" title="function not covered" >eventObject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        this.props.function(this.props.name, eventObject.target.value)</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" >    render() </span>{
+<span class="cstat-no" title="statement not covered" >        return (</span>
+            &lt;div className="list-col"&gt;
                 &lt;p&gt;{this.props.label}&lt;/p&gt;
-                &lt;t<span class="cstat-no" title="statement not covered" >extarea</span>
+                &lt;textarea
                     rows="6"
-<span class="fstat-no" title="function not covered" >                    type={this.p</span>rops.ty<span class="cstat-no" title="statement not covered" >pe}</span>
+                    type={this.props.type}
                     className="win-textarea"
                     name={this.props.name}
-<span class="fstat-no" title="function not covered" ></span>                    value={this.props.value}
+                    value={this.props.value}
                     placeholder={this.props.placeholder}
                     onChange={this.change}
-<span class="cstat-no" title="statement not covered" >                    disabled={this.props.disabled}<span class="fstat-no" title="function not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" >                    style={this.props.style}</span>
+                    disabled={this.props.disabled}
+                    style={this.props.style}
                 /&gt;
             &lt;/div&gt;
         )
-<span class="fstat-no" title="function not covered" >    }</span>
-}<span class="cstat-no" title="statement not covered" ></span>
+    }
+}
 &nbsp;
-TextArea.propTypes = {
+<span class="cstat-no" title="statement not covered" >TextArea.propTypes = {</span>
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     name: PropTypes.oneOfType([
@@ -184,7 +184,7 @@ export default TextArea
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/7</span>
       </div>
     </div>
   </div>
@@ -74,25 +74,14 @@
 29
 30
 31
-32</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+32</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -105,32 +94,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 <span class="cstat-no" title="statement not covered" >import ReactWinJS from 'react-winjs'</span>
 &nbsp;
 class Confirmation extends Component {
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
     static isOK = async (contentDialog) =&gt; {
-        retur<span class="cstat-no" title="statement not covered" >n await contentDi</span>alog.winControl.show().then(({ result }) =&gt; {
-            return result === "primary"
-        })<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        return await contentDialog.winControl.show().then(<span class="fstat-no" title="function not covered" >({</span> result }) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            return result === "primary"</span>
+        })
     }
-<span class="cstat-no" title="statement not covered" ></span>
-    render () {
-        return (<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    render () </span>{
+<span class="cstat-no" title="statement not covered" >        return (</span>
             &lt;ReactWinJS.ContentDialog
-                re<span class="cstat-no" title="statement not covered" >f={this.props.reference</span>}
+                ref={this.props.reference}
                 title={this.props.title}
-                pri<span class="cstat-no" title="statement not covered" >maryCommandText="OK"</span>
+                primaryCommandText="OK"
                 secondaryCommandText="Cancel"&gt;
-<span class="fstat-no" title="function not covered" >                    &lt;p&gt;{ this.pr</span>ops.mes<span class="cstat-no" title="statement not covered" >sage }&lt;/p&gt;</span>
+                    &lt;p&gt;{ this.props.message }&lt;/p&gt;
             &lt;/ReactWinJS.ContentDialog&gt;
         )
     }
-}<span class="fstat-no" title="function not covered" ></span>
-<span class="cstat-no" title="statement not covered" ></span>
-Confirmation.propTypes = {
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >Confirmation.propTypes = {</span>
     reference: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired
@@ -142,7 +142,7 @@ export default Confirmation</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>

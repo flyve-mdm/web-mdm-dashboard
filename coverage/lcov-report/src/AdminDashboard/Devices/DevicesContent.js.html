@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/1</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/7</span>
       </div>
     </div>
   </div>
@@ -122,31 +122,10 @@
 77
 78
 79
-80</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+80</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -201,37 +180,58 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 <span class="cstat-no" title="statement not covered" >import ReactWinJS from 'react-winjs'</span>
-import ContentPane from '../../Utils/ContentPane'
-import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sections'
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >import ContentPane from '../../Utils/ContentPane'</span>
+<span class="cstat-no" title="statement not covered" >import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sections'</span>
+&nbsp;
 class DevicesContent extends Component {
-<span class="cstat-no" title="statement not covered" ></span>
-    render() {
-        return<span class="cstat-no" title="statement not covered" > (</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    render() </span>{
+<span class="cstat-no" title="statement not covered" >        return (</span>
             &lt;ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true} &gt;
-                &lt;<span class="cstat-no" title="statement not covered" >ReactWinJS.Pivot&gt;</span>
+                &lt;ReactWinJS.Pivot&gt;
                     &lt;ReactWinJS.Pivot.Item key="main" header="Main"&gt;
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
                         &lt;Main 
-<span class="cstat-no" title="statement not covered" >                            location={thi</span>s.props.location}
+                            location={this.props.location}
                             selectedItemList={this.props.selectedItemList} 
-<span class="cstat-no" title="statement not covered" >                            changeAction={this.props.ch</span>angeAction} 
+                            changeAction={this.props.changeAction} 
                             changeSelectionMode={this.props.changeSelectionMode} 
-<span class="cstat-no" title="statement not covered" >                            onNavigate={this.props.onN</span>avigate}  
+                            onNavigate={this.props.onNavigate}  
                             showNotification={this.props.showNotification}
-<span class="cstat-no" title="statement not covered" >                            glpi={this.props.glpi}</span>
+                            glpi={this.props.glpi}
                         /&gt;
-<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
                     &lt;/ReactWinJS.Pivot.Item&gt;
-<span class="fstat-no" title="function not covered" >                    &lt;ReactWinJS.</span>Pivot.I<span class="cstat-no" title="statement not covered" >tem key="systemReport" header="System Report"&gt;</span>
+                    &lt;ReactWinJS.Pivot.Item key="systemReport" header="System Report"&gt;
 &nbsp;
                         &lt;SystemReport 
                             selectedItemList={this.props.selectedItemList}
-<span class="fstat-no" title="function not covered" ></span>                            glpi={this.props.glpi}
-<span class="cstat-no" title="statement not covered" >                        /&gt;</span>
+                            glpi={this.props.glpi}
+                        /&gt;
 &nbsp;
                     &lt;/ReactWinJS.Pivot.Item&gt;
                     &lt;ReactWinJS.Pivot.Item key="applications" header="Applications"&gt;
@@ -265,7 +265,7 @@ class DevicesContent extends Component {
     }
 }
 &nbsp;
-DevicesContent.propTypes = {
+<span class="cstat-no" title="statement not covered" >DevicesContent.propTypes = {</span>
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
@@ -286,7 +286,7 @@ export default DevicesContent</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

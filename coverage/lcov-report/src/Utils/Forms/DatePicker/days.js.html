@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/9</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/11</span>
+        <span class='fraction'>0/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/9</span>
       </div>
     </div>
   </div>
@@ -78,20 +78,9 @@
 33
 34
 35
-36</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+36</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -113,48 +102,59 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React from 'react'</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default (year, month) =&gt; {</span>
-    const daysList = {
+export default (year, month) =&gt; {
+    const daysList = <span class="cstat-no" title="statement not covered" >{</span>
         January: 31, 
-        February: 2<span class="cstat-no" title="statement not covered" >8,</span>
+        February: 28,
         March: 31, 
-        April<span class="cstat-no" title="statement not covered" >: 30, </span>
+        April: 30, 
         May: 31, 
-        June: <span class="cstat-no" title="statement not covered" >30,</span>
+        June: 30,
         July: 31,
-        A<span class="fstat-no" title="function not covered" >ugust:31, <span class="cstat-no" title="statement not covered" ></span></span>
+        August:31, 
         September: 30, 
-<span class="cstat-no" title="statement not covered" >        October: 3<span class="fstat-no" title="function not covered" >1, </span></span>
-        November: 30, <span class="cstat-no" title="statement not covered" ></span>
+        October: 31, 
+        November: 30, 
         December: 31
     }
 &nbsp;
-    if(year % 400 === 0 || (year % 100 !== 0 &amp;&amp; year % 4 === 0)){
-        daysList.February = 29
+<span class="cstat-no" title="statement not covered" >    if(year % 400 === 0 || (year % 100 !== 0 &amp;&amp; year % 4 === 0)){</span>
+<span class="cstat-no" title="statement not covered" >        daysList.February = 29</span>
     }
     
-    let days = []
+    let days = <span class="cstat-no" title="statement not covered" >[]</span>
 &nbsp;
-    if (month) {
-        for (let index = 1; index &lt;= daysList[month]; index++) {
-            days.push((
+<span class="cstat-no" title="statement not covered" >    if (month) {</span>
+<span class="cstat-no" title="statement not covered" >        for (let index = 1; index &lt;= daysList[month]; index++) {</span>
+<span class="cstat-no" title="statement not covered" >            days.push((</span>
                 &lt;option value={index} key={`day${index}`}&gt;
                     { index }
-<span class="cstat-no" title="statement not covered" >                &lt;/option&gt;</span>
-<span class="cstat-no" title="statement not covered" >            ))</span>
+                &lt;/option&gt;
+            ))
         }
     }
-<span class="cstat-no" title="statement not covered" ></span>
-    return days
-}<span class="cstat-no" title="statement not covered" ></span></pre></td></tr>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return days</span>
+}</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

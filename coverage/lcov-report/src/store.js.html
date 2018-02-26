@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/17</span>
+        <span class='fraction'>0/11</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/1</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/17</span>
+        <span class='fraction'>0/11</span>
       </div>
     </div>
   </div>
@@ -62,51 +62,51 @@
 17
 18
 19
-20</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+20</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { applyMiddleware, createStore } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { applyMiddleware, createStore } from 'redux'</span>
+<span class="cstat-no" title="statement not covered" >import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'</span>
 <span class="cstat-no" title="statement not covered" >import Reducers from './reducers'</span>
-import { routerMiddleware } from 'react-router-redux'
-import thunk from 'redux-thunk'
-<span class="cstat-no" title="statement not covered" >import createHistory from 'history/createBrow</span>serHistory'
+<span class="cstat-no" title="statement not covered" >import { routerMiddleware } from 'react-router-redux'</span>
+<span class="cstat-no" title="statement not covered" >import thunk from 'redux-thunk'</span>
+<span class="cstat-no" title="statement not covered" >import createHistory from 'history/createBrowserHistory'</span>
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >history = createH</span>istory()
+export const <span class="cstat-no" title="statement not covered" >history = createHistory()</span>
 &nbsp;
-// Build the middleware<span class="cstat-no" title="statement not covered" > for intercepting and dispatching navigation actions</span>
-const routerReduxMiddleware = routerMiddleware(history)
-<span class="cstat-no" title="statement not covered" ></span>
-const getMiddleware = () =&gt; {
-    return applyM<span class="cstat-no" title="statement not covered" >iddleware(routerReduxMiddleware, t</span>hunk)
+// Build the middleware for intercepting and dispatching navigation actions
+const routerReduxMiddleware = <span class="cstat-no" title="statement not covered" >routerMiddleware(history)</span>
+&nbsp;
+const getMiddleware = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; </span>{</span>
+<span class="cstat-no" title="statement not covered" >    return applyMiddleware(routerReduxMiddleware, thunk)</span>
 }
-<span class="cstat-no" title="statement not covered" ></span>
-export const store = createStore(
-    Reducers, <span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+export const <span class="cstat-no" title="statement not covered" >store = createStore(</span>
+    Reducers, 
     composeWithDevTools(getMiddleware())
-)<span class="cstat-no" title="statement not covered" ></span></pre></td></tr>
+)</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../prettify.js"></script>

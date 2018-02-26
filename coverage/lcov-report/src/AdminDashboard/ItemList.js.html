@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/49</span>
+        <span class='fraction'>0/35</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/37</span>
+        <span class='fraction'>0/25</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/7</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/41</span>
+        <span class='fraction'>0/35</span>
       </div>
     </div>
   </div>
@@ -115,13 +115,10 @@
 70
 71
 72
-73</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+73</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -141,6 +138,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,6 +166,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -181,91 +180,92 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as DATA from './Data'
-import WinJS from 'winjs'
-<span class="cstat-no" title="statement not covered" ></span>
-export default function (name, list, sort = true) {
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import * as DATA from './Data'</span>
+<span class="cstat-no" title="statement not covered" >import WinJS from 'winjs'</span>
 &nbsp;
-    const groupKey = function (data) {
-<span class="cstat-no" title="statement not covered" >        switch (na<span class="fstat-no" title="function not covered" >me</span>) {<span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
+export default function (name, list, sort = <span class="branch-0 cbranch-no" title="branch not covered" >true) {</span>
+&nbsp;
+    const groupKey = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function (</span>data) {</span>
+<span class="cstat-no" title="statement not covered" >        switch (name) {</span>
             case "Devices":
-                retur<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >n </span>data["PluginFlyvemdmAgent.Computer.User.realname"][0].toUpperCase()</span>
-<span class="cstat-no" title="statement not covered" >            case "Fleets":</span>
-                return data["PluginFlyvemdmFleet.name"][0].toUpperCase()
-            case<span class="cstat-no" title="statement not covered" > "Files":</span>
-                return data["PluginFlyvemdmFile.name"][0].toUpperCase()
-            case<span class="cstat-no" title="statement not covered" > "Applications":</span>
-                return data["PluginFlyvemdmPackage.name"][0]
-            case<span class="cstat-no" title="statement not covered" > "Users":</span>
-                return data['User.name'][0].toUpperCase()
-            case<span class="cstat-no" title="statement not covered" > "Invitations":</span>
-                return data['PluginFlyvemdmInvitation.User.name'][0].toUpperCase()
-            case<span class="cstat-no" title="statement not covered" > "InvitationsLog":</span>
-                return data['PluginFlyvemdmInvitationLog.PluginFlyvemdmInvitationlog.date_creation']
-            defa<span class="cstat-no" title="statement not covered" >ult:</span>
-                return data.name[0].toUpperCase()
-        }<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >                return data["PluginFlyvemdmAgent.Computer.User.realname"][0].toUpperCase()</span>
+            case "Fleets":
+<span class="cstat-no" title="statement not covered" >                return data["PluginFlyvemdmFleet.name"][0].toUpperCase()</span>
+            case "Files":
+<span class="cstat-no" title="statement not covered" >                return data["PluginFlyvemdmFile.name"][0].toUpperCase()</span>
+            case "Applications":
+<span class="cstat-no" title="statement not covered" >                return data["PluginFlyvemdmPackage.name"][0]</span>
+            case "Users":
+<span class="cstat-no" title="statement not covered" >                return data['User.name'][0].toUpperCase()</span>
+            case "Invitations":
+<span class="cstat-no" title="statement not covered" >                return data['PluginFlyvemdmInvitation.User.name'][0].toUpperCase()</span>
+            case "InvitationsLog":
+<span class="cstat-no" title="statement not covered" >                return data['PluginFlyvemdmInvitationLog.PluginFlyvemdmInvitationlog.date_creation']</span>
+            default:
+<span class="cstat-no" title="statement not covered" >                return data.name[0].toUpperCase()</span>
+        }
         
-    }<span class="cstat-no" title="statement not covered" ></span>
+    }
 &nbsp;
-    const groupData = function (data) {
-        return { title: groupKey(data) }
-    }<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-<span class="cstat-no" title="statement not covered" ></span>
-    const groupSorted = function (a, b) {
-        if (sort) {
-            if (a &lt; b) {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+    const groupData = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function (</span>data) {</span>
+<span class="cstat-no" title="statement not covered" >        return { title: groupKey(data) }</span>
+    }
+&nbsp;
+    const groupSorted = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function (</span>a, b) {</span>
+<span class="cstat-no" title="statement not covered" >        if (sort) {</span>
+<span class="cstat-no" title="statement not covered" >            if (a &lt; b) {</span>
 <span class="cstat-no" title="statement not covered" >                return -1</span>
-<span class="cstat-no" title="statement not covered" >            } else if (a &gt; b) {</span>
+            } else <span class="cstat-no" title="statement not covered" >if (a &gt; b) {</span>
 <span class="cstat-no" title="statement not covered" >                return 1</span>
-            } else <span class="cstat-no" title="statement not covered" >{</span>
+            } else {
 <span class="cstat-no" title="statement not covered" >                return 0</span>
             }
-        } else {<span class="cstat-no" title="statement not covered" ></span>
-            if (a &gt; b) {
-                return -1
-<span class="cstat-no" title="statement not covered" >            } else if (a &lt; b) {</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            if (a &gt; b) {</span>
+<span class="cstat-no" title="statement not covered" >                return -1</span>
+            } else <span class="cstat-no" title="statement not covered" >if (a &lt; b) {</span>
 <span class="cstat-no" title="statement not covered" >                return 1</span>
-            } else <span class="cstat-no" title="statement not covered" >{</span>
+            } else {
 <span class="cstat-no" title="statement not covered" >                return 0</span>
             }
-        }<span class="cstat-no" title="statement not covered" ></span>
+        }
         
     }
 &nbsp;
-    const sorter = (a, b) =&gt; {
-        if (a.name <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >&lt; </span>b.name) {</span>
+    const sorter = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        if (a.name &lt; b.name) {</span>
 <span class="cstat-no" title="statement not covered" >            return -1</span>
-        } el<span class="cstat-no" title="statement not covered" >se if (a.na</span>me &gt; b.name) {
-            ret<span class="cstat-no" title="statement not covered" >urn 1</span>
-        } el<span class="cstat-no" title="statement not covered" >se {</span>
-            return 0
-        }<span class="cstat-no" title="statement not covered" ></span>
+        } else <span class="cstat-no" title="statement not covered" >if (a.name &gt; b.name) {</span>
+<span class="cstat-no" title="statement not covered" >            return 1</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            return 0</span>
+        }
     }
 &nbsp;
-    if (list) {
+<span class="cstat-no" title="statement not covered" >    if (list) {</span>
 <span class="cstat-no" title="statement not covered" >        return new WinJS.Binding.List(list)</span>
-<span class="cstat-no" title="statement not covered" >            .createSorted(sorter)</span>
+            .createSorted(sorter)
             .createGrouped(groupKey, groupData, groupSorted)
-    } el<span class="cstat-no" title="statement not covered" >se {</span>
-        return new WinJS.Binding.List(DATA[name])
+    } else {
+<span class="cstat-no" title="statement not covered" >        return new WinJS.Binding.List(DATA[name])</span>
             .createSorted(sorter)
             .createGrouped(groupKey, groupData)
-    }<span class="cstat-no" title="statement not covered" ></span>
+    }
     
-}<span class="cstat-no" title="statement not covered" ></span></pre></td></tr>
+}</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>

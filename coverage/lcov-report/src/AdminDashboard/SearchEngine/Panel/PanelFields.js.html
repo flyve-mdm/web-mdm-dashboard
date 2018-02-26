@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/13</span>
+        <span class='fraction'>0/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/13</span>
+        <span class='fraction'>0/7</span>
       </div>
     </div>
   </div>
@@ -71,25 +71,18 @@
 26
 27
 28
-29</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+29</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -99,31 +92,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component } from 'react';</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types';</span>
+&nbsp;
 &nbsp;
 class PanelFields extends Component {
-  render() { <span class="cstat-no" title="statement not covered" ></span>
-    return ( 
-      &lt;thead&gt;<span class="cstat-no" title="statement not covered" ></span>
+<span class="fstat-no" title="function not covered" >  render() </span>{ 
+<span class="cstat-no" title="statement not covered" >    return ( </span>
+      &lt;thead&gt;
         &lt;tr&gt;
-          {thi<span class="cstat-no" title="statement not covered" >s.props.fields.map(field =&gt; {</span>
-            let fieldKey = field[0];
-            let f<span class="cstat-no" title="statement not covered" >ieldName = field[1];</span>
-            return (
-              &lt;th <span class="cstat-no" title="statement not covered" >key={fieldKey}&gt;</span>
+          {this.props.fields.map(<span class="fstat-no" title="function not covered" >field =&gt; </span>{
+            let fieldKey = <span class="cstat-no" title="statement not covered" >field[0];</span>
+            let fieldName = <span class="cstat-no" title="statement not covered" >field[1];</span>
+<span class="cstat-no" title="statement not covered" >            return (</span>
+              &lt;th key={fieldKey}&gt;
                 { fieldName }
-<span class="fstat-no" title="function not covered" >              &lt;/th&gt;<span class="cstat-no" title="statement not covered" ></span></span>
+              &lt;/th&gt;
             )
           })}
-<span class="fstat-no" title="function not covered" ></span>        &lt;/tr&gt;
-<span class="cstat-no" title="statement not covered" >      &lt;/thead&gt;</span>
+        &lt;/tr&gt;
+      &lt;/thead&gt;
     )
   }
 }
 &nbsp;
-PanelFields.propTypes = {
+<span class="cstat-no" title="statement not covered" >PanelFields.propTypes = {</span>
   fields: PropTypes.array.isRequired
 }
  
@@ -133,7 +133,7 @@ export default PanelFields;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

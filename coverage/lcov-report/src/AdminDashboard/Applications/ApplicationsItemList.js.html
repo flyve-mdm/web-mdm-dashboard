@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/11</span>
+        <span class='fraction'>0/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/1</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/11</span>
+        <span class='fraction'>0/5</span>
       </div>
     </div>
   </div>
@@ -66,21 +66,7 @@
 21
 22
 23
-24</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+24</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -89,28 +75,42 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react'
-import IconItemList from '../IconItemList'
-<span class="cstat-no" title="statement not covered" ></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import IconItemList from '../IconItemList'</span>
+&nbsp;
 export default class ApplicationsItemList extends Component {
-    render() {
+<span class="fstat-no" title="function not covered" >    render() </span>{
         let size = <span class="cstat-no" title="statement not covered" >this.props.size</span>
-        let image = "data:image/png;base64, " + this.props.itemList["PluginFlyvemdmPackage.icon"]
-        retur<span class="cstat-no" title="statement not covered" >n (</span>
+        let image = <span class="cstat-no" title="statement not covered" >"data:image/png;base64, " + this.props.itemList["PluginFlyvemdmPackage.icon"]</span>
+<span class="cstat-no" title="statement not covered" >        return (</span>
             &lt;div&gt;
-<span class="cstat-no" title="statement not covered" >                &lt;IconItemList </span>
+                &lt;IconItemList 
                     size={size} 
-<span class="cstat-no" title="statement not covered" >                    image={image} </span>
+                    image={image} 
                     type="base64"
-                    b<span class="cstat-no" title="statement not covered" >ackgroundColor="transparent"</span>
+                    backgroundColor="transparent"
                 /&gt;
-<span class="fstat-no" title="function not covered" >                &lt;div style={{ ma</span>rginLef<span class="cstat-no" title="statement not covered" >t: 5, display: 'inline-block' }}&gt;</span>
+                &lt;div style={{ marginLeft: 5, display: 'inline-block' }}&gt;
                     &lt;div className="name"&gt;{this.props.itemList["PluginFlyvemdmPackage.alias"]}&lt;/div&gt;
                     &lt;div className="detail"&gt;{this.props.itemList["PluginFlyvemdmPackage.name"]}&lt;/div&gt;
-<span class="fstat-no" title="function not covered" ></span>                &lt;/div&gt;
-            &lt;/div&gt;<span class="cstat-no" title="statement not covered" ></span>
-        )<span class="cstat-no" title="statement not covered" ></span>
-    }<span class="cstat-no" title="statement not covered" ></span>
+                &lt;/div&gt;
+            &lt;/div&gt;
+        )
+    }
 }
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -118,7 +118,7 @@ export default class ApplicationsItemList extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Feb 23 2018 21:15:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Feb 26 2018 13:28:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
