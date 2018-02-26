@@ -18,7 +18,6 @@ function mapStateToProps(state, props) {
         username: state.auth.username,
         selfRegistration: state.auth.selfRegistration,
         notificationMessage: state.auth.notificationMessage,
-        locationLanguage: state.auth.locationLanguage
     }
 }
 
@@ -96,6 +95,7 @@ class SignIn extends Component {
                 changeNotificationMessage={this.props.actions.changeNotificationMessage}
             />
         }
+
         return (
             <React.Fragment>
                 <ToastNotifications ref={instance => { this.toastNotifications = instance }} />
@@ -108,10 +108,11 @@ class SignIn extends Component {
 SignIn.propTypes = {
     username: PropTypes.string.isRequired,    
     history: PropTypes.object.isRequired,
-    selfRegistration: PropTypes.bool.isRequired
+    selfRegistration: PropTypes.bool.isRequired,
+    actions: PropTypes.object.isRequired
 }
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withAuthenticationLayout(SignIn))
+)(withAuthenticationLayout(SignIn, { centerContent: true }))
