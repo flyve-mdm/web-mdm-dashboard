@@ -20,4 +20,6 @@ const ValidateAccount = () => {
     )
 }
 
-export default withAuthenticationLayout(ValidateAccount)
+export default withAuthenticationLayout(ValidateAccount, {
+    centerContent: true
+})

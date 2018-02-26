@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
-import { Switch, Redirect } from 'react-router-dom';
-import { Route } from 'react-router';
+import React, { Component } from 'react'
+import { Switch } from 'react-router-dom'
+import { Route } from 'react-router'
 
-import PrivateRoute from '../../components/PrivateRoute';
+import PrivateRoute from '../../components/PrivateRoute'
 
-import SignUp from '../../containers/SignUp'
 import SignIn from '../../containers/SignIn'
-import ForgotPassword from '../../containers/ForgotPassword'
-
-import ValidateAccount from '../../components/ValidateAccount'
 
 import asyncAdminDashboard from './asyncComponents/asyncAdminDashboard'
+import asyncLogout from './asyncComponents/asyncLogout';
+import asyncSignUp from './asyncComponents/asyncSignUp';
+
+import withI18NTranslation from '../../hoc/withI18NTranslation'
+import asyncValidateAccount from './asyncComponents/asyncValidateAccount';
+import asyncForgotPassword from './asyncComponents/asyncForgotPassword';
+
 
 /**
  * Main Component in the React Tree
@@ -21,14 +24,14 @@ class ApplicationWebDashboard extends Component {
     return (
       <Switch>
         <Route exact path='/' component={SignIn} /> 
-        <Route path='/signUp' component={SignUp} />
-        <Route path='/validateAccount' component={ValidateAccount} />
-        <Route path='/forgotPassword' component={ForgotPassword} />
-        <PrivateRoute path="/app" component={asyncAdminDashboard} />
-        <Redirect to='/' />
+        <Route exact path='/signUp' component={asyncSignUp} />
+        <Route exact path='/validateAccount' component={asyncValidateAccount} />
+        <Route exact path='/forgotPassword' component={asyncForgotPassword} />
+        <PrivateRoute exact path="/app" component={asyncAdminDashboard} />
+        <PrivateRoute exact path="/logout" component={asyncLogout} />
       </Switch>    
     )
   }
 }
 
-export default ApplicationWebDashboard
+export default withI18NTranslation(ApplicationWebDashboard)

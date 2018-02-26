@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { I18n } from 'react-i18nify'
+
 import { changeLanguage } from '../../store/i18n/actions'
 
 function mapDispatchToProps(dispatch) {
-    const actions = {
-        changeLanguage: bindActionCreators(changeLanguage, dispatch)
+    return { 
+        changeLanguage: bindActionCreators(changeLanguage, dispatch) 
     }
-    return { actions }
 }
 
 /**
@@ -18,10 +18,10 @@ function mapDispatchToProps(dispatch) {
  * @param {* component} WrappedComponent   - Component to wrapper it
  * @param {* object } stylesConfiguration  - Config styles of wrapper div
  */
-const withAuthenticationLayout = (WrappedComponent, stylesConfiguration) => {
+const withAuthenticationLayout = (WrappedComponent, configStyles) => {
     const authenticationLayout = props => {
         const style = {
-            textAlign: (stylesConfiguration && stylesConfiguration.centerContent) ? 'center' : null,
+            textAlign: configStyles.centerContent ? 'center' : null,
             width: props.width
         }
 
@@ -45,15 +45,19 @@ const withAuthenticationLayout = (WrappedComponent, stylesConfiguration) => {
                         <span>
                             © 2017 Teclib'.
                         </span>
+                        <br/>
+                        <span className='select__span__language'>
+                        Idioma
+                            <select className='select__input__language' onChange={
+                                event => props.changeLanguage(event.target.value)
+                            }>
+                                <option value='en_GB'>English</option>
+                                <option value='pt_BR'>Portuguese</option>
+                                <option value='fr_FR'>French</option>
+                                <option value='es_ES'>Spain</option>
+                            </select>
+                        </span>
                     </div>
-                    {
-                        <React.Fragment>
-                            <button onClick={() => props.actions.changeLanguage('en_GB')}>English</button>
-                            <button onClick={() => props.actions.changeLanguage('pt_BR')}>Portuguese</button>
-                            <button onClick={() => props.actions.changeLanguage('fr_FR')}>French</button>
-                            <button onClick={() => props.actions.changeLanguage('es_ES')}>Spain</button>
-                        </React.Fragment>
-                    }
                 </div>
             </div>
         )
