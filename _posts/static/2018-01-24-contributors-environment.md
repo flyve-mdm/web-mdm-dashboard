@@ -16,6 +16,6 @@ Add this information where indicated in config.json file:
 
 * User Token
 
-> u92ntVqpwULbmur2RWRpe3w90So9MwudwMDRPreh
+> pe90W27ebPXIeYXsj2mYE0nMrRz9q1AlguKhbhcI
 
 Once all this is set, you can create an account to Sign In to Flyve MDM Web Dashboard.
