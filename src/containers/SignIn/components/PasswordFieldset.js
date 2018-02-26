@@ -33,7 +33,7 @@ class PasswordFieldset extends Component {
 
         } else {
             renderComponent = (
-                <div className="passwordSection">
+                <div className="authentication-password-div">
                     <h2 className="win-h2">Enter password</h2>
                     <p>
                         { I18n.t('login.enter_the_password_for') }
@@ -53,18 +53,16 @@ class PasswordFieldset extends Component {
                             onChange={this.props.changeInput}
                             required={true}
                         />
-                        <button
-                            className="win-button"
-                            type="button"
-                            onClick={() => this.props.changePhase(1)}
-                        >
-                        { I18n.t('commons.back') }
-                    </button>
 
-                    <button type="submit" className="win-button win-button-primary">
-                        { I18n.t('commons.sign_in') }
-                    </button>
+                        <button className="btn --secondary" type="button" onClick={
+                            () => this.props.changePhase(1)
+                        }>
+                            { I18n.t('commons.back') }
+                        </button>
 
+                        <button type="submit" className="btn --primary">
+                            { I18n.t('commons.sign_in') }
+                        </button>
                     </form>
                     
                     <Link to="/forgotPassword">

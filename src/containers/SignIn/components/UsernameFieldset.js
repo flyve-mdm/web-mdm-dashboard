@@ -37,9 +37,9 @@ class UsernameFieldset extends Component {
     render () {
     
         return (
-            <div className="emailSection">
+            <div className="authentication-email-div">
                 <h2 className="win-h2">Sign in</h2>
-                <p>
+                <p className="--description">
                     {I18n.t('login.use_your_flyve_mdm_account')}
                     <br/>
                     <a href="https://flyve-mdm.com/">
@@ -60,7 +60,7 @@ class UsernameFieldset extends Component {
                         onChange={this.props.changeInput} 
                         required={true}
                     />
-                    <button className="win-button color-accent">
+                    <button className="btn --primary">
                         {I18n.t('login.next')}
                     </button>
                 </form>
