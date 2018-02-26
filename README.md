@@ -52,9 +52,12 @@ For more information visit our [website](http://flyve.org/web-mdm-dashboard/).
 
 ## Matrix
 
-|**GLPI Version**|9.1.1|9.1.2|9.1.3|9.1.5|9.1.6|9.2.0|
-|:----|----|----|----|---|---|---|
-|**GLPI API Client**|||||||
+|**GLPI Version**|9.1.x|9.2.x|
+|:---|:---:|:---:|
+|GLPI API Client|||
+|Flyve MDM|1.x|2.0.0-dev|
+|Demo Mode|-|1.0.0-dev|
+|Web MDM Dashboard|-|1.0.0-dev|
 
 ## Installation
 
