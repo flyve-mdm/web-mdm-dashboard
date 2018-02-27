@@ -5,11 +5,11 @@ import { updateObject } from '../../shared/updateObject'
 // Sugar Functions
 
 const changeLanguage = (state, action) => {
-  return updateObject(state, {locationLanguage: action.languageCurrent})
+  return updateObject(state, {languageCurrent: action.languageCurrent})
 }
 
 const changeLanguageFallBack = (state, action) => {
-  return updateObject(state, {locationLanguage: action.languageDefault})
+  return updateObject(state, {languageCurrent: action.languageDefault})
 }
 
 // Reducer

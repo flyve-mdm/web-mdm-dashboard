@@ -32,6 +32,13 @@ const authLogout = (state, action) => {
   });
 }
 
+const authRefreshCaptcha = (state, action) => {
+  return updateObject(state, {
+    captcha: action.captcha,
+    configurationPassword: action.configurationPassword
+  });
+}
+
 // Reducer
 
 const reducer = (state = initialState, action) => {
@@ -39,8 +46,9 @@ const reducer = (state = initialState, action) => {
     case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
     case actionTypes.AUTH_FAIL: return authFail(state, action);
     case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
-    case actionTypes.CHANGE_NOTIFICATION_MESSAGE: return changeNotificationMessage(state, action)
-    default: return state
+    case actionTypes.AUTH_REFRESH_CAPTCHA: return authRefreshCaptcha(state, action);
+    case actionTypes.CHANGE_NOTIFICATION_MESSAGE: return changeNotificationMessage(state, action);
+    default: return state;
   }
 }
 
