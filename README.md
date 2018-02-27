@@ -27,7 +27,7 @@ To get started, check out [Flyve MDM website](https://flyve-mdm.com/)!
 
 ## Synopsis
 
-The Web Administration Dashboard of Flyve MDM is a centralised mobile device management tool.
+The Web Administration Dashboard of Flyve MDM is a centralised mobile device management tool. Designed to work in conjuction with [Flyve MDM plugin for GLPI](http://flyve.org/glpi-plugin) and [Flyve MDM Demo plugin](http://flyve.org/demo-mode).
 
 It allows you to manage all your mobile devices effectively through a secure and intuitive Web Interface, providing the ability to:
 
@@ -52,9 +52,12 @@ For more information visit our [website](http://flyve.org/web-mdm-dashboard/).
 
 ## Matrix
 
-|**GLPI Version**|9.1.1|9.1.2|9.1.3|9.1.5|9.1.6|9.2.0|
-|:----|----|----|----|---|---|---|
-|**GLPI API Client**|||||||
+|**GLPI Version**|9.1.x|9.2.x|
+|:---|:---:|:---:|
+|GLPI API Client|||
+|Flyve MDM|1.x|2.0.0-dev|
+|Demo Mode|-|1.0.0-dev|
+|Web MDM Dashboard|-|1.0.0-dev|
 
 ## Installation
 
@@ -62,7 +65,7 @@ Instructions are available on the website, see our [Installation article](http:/
 
 ## Documentation
 
-We maintain a detailed documentation of the project on the [website](http://flyve.org/web-mdm-dashboard/).
+We maintain a detailed documentation of the project on the website, see our [How-tos](http://flyve.org/web-mdm-dashboard/howtos) and [Development](http://flyve.org/web-mdm-dashboard/) sections.
 
 ## Versioning
 
