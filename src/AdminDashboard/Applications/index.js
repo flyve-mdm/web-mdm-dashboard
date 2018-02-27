@@ -5,53 +5,44 @@ import ApplicationsPage from './ApplicationsPage'
 
 export default class Applications extends Component {
 
-    constructor(props) {
+        constructor(props) {
         super(props)
         this.state = {
-            selectionMode: false
+            selectionMode: false,
+            action: null
         }
     }
 
-    changeSelectionMode = (selectionMode) => {
-        this.setState({
-            selectionMode
-        })
-    }
+    changeAction = action => this.setState({ action })
+    changeSelectionMode = selectionMode => this.setState({ selectionMode })
 
     render() {
 
-        let selectedIndex = this.props.location.length === 2 ? this.props.location[1] : null
+        let selectedItemList = this.props.location.length === 2 ? this.props.location[1] : null
         if (this.props.mode === 'small') {
-            if (selectedIndex === null && this.props.actionList === null) {
+            if (selectedItemList === null && this.props.actionList === null) {
                 return <ApplicationsList
                     itemListPaneWidth={'100%'}
                     animation={this.props.animation}
-                    dataSource={this.props.dataSource}
-                    changeDataSource={this.props.changeDataSource}
-                    fetchData={this.props.fetchData}
-                    isLoading={this.props.isLoading}
-                    isError={this.props.isError}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
                     changeSelectionMode={this.changeSelectionMode}
                     selectionMode={this.state.selectionMode}
-                    actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification} 
+                    action={this.state.action}
+                    changeAction={this.changeAction}
+                    showNotification={this.props.showNotification}
                     glpi={this.props.glpi} />
             } else {
                 return <ApplicationsPage 
                     itemListPaneWidth={0}
                     animation={this.props.animation}
-                    dataSource={this.props.dataSource}
-                    changeDataSource={this.props.changeDataSource}
                     location={this.props.location}
                     onNavigate={this.props.onNavigate}
-                    selectedIndex={selectedIndex}
+                    selectedItemList={selectedItemList}
                     changeSelectionMode={this.changeSelectionMode}
-                    actionList={this.props.actionList}
-                    changeActionList={this.props.changeActionList} 
-                    showNotification={this.props.showNotification} 
+                    action={this.state.action}
+                    changeAction={this.changeAction}
+                    showNotification={this.props.showNotification}
                     glpi={this.props.glpi} />
             }
         } else {
@@ -61,31 +52,24 @@ export default class Applications extends Component {
                     <ApplicationsList
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
-                        fetchData={this.props.fetchData}
-                        isLoading={this.props.isLoading}
-                        isError={this.props.isError}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
                         changeSelectionMode={this.changeSelectionMode}
                         selectionMode={this.state.selectionMode}
-                        actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} 
+                        action={this.state.action}
+                        changeAction={this.changeAction}
                         showNotification={this.props.showNotification}
                         glpi={this.props.glpi}
                     />
                     <ApplicationsPage 
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.props.animation}
-                        dataSource={this.props.dataSource}
-                        changeDataSource={this.props.changeDataSource}
                         location={this.props.location}
                         onNavigate={this.props.onNavigate}
-                        selectedIndex={selectedIndex}
+                        selectedItemList={selectedItemList}
                         changeSelectionMode={this.changeSelectionMode}
-                        actionList={this.props.actionList}
-                        changeActionList={this.props.changeActionList} 
+                        action={this.state.action}
+                        changeAction={this.changeAction}
                         showNotification={this.props.showNotification}
                         glpi={this.props.glpi}
                     />
@@ -97,12 +81,8 @@ export default class Applications extends Component {
 Applications.propTypes = {
     mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
     animation: PropTypes.bool.isRequired,
-    dataSource: PropTypes.object.isRequired,
-    changeDataSource: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    changeActionList: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
