@@ -158,3 +158,10 @@ export const fetchSignUp = (data) => {
     })
   }
 }
+
+
+export const fetchRecoverPassword = ()=> {
+  return dispatch => { // TODO: Create this
+    dispatch(uiTransactionStart())
+  }
+}
