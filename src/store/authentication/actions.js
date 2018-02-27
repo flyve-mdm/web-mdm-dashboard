@@ -32,6 +32,17 @@ export const authFail = error => {
   };
 };
 
+export const authRefreshCaptcha = ({ idCaptcha, imgCaptcha, configurationPassword }) => {
+  return {
+    type: actionTypes.AUTH_REFRESH_CAPTCHA,
+    captcha: {
+      id: idCaptcha,
+      img: imgCaptcha
+    },
+    configurationPassword: configurationPassword
+  }
+}
+
 // Actions Creators
 
 export const fetchSignIn = (username, password) => {
@@ -60,5 +71,45 @@ export const fetchSignIn = (username, password) => {
         body: `${error[0]}\n${error[1]}` 
       }))
     })
+  }
+}
+
+export const refreshCaptcha = () => {
+  return async dispatch => {
+    dispatch(uiTransactionStart())
+    try {
+      const session     = await glpi.initSessionByUserToken({ userToken: config.USER_TOKEN })
+      glpi.sessionToken = session.session_token
+      const {id}        = await glpi.addItem({ itemtype: 'PluginFlyvemdmdemoCaptcha', input: {}})
+      const captcha     = await glpi.genericRequest({
+        path: `PluginFlyvemdmdemoCaptcha/${id}`,
+        queryString: { alt: 'media' }, 
+        requestParams: { 
+        method: 'GET', 
+        headers: {'Content-Type': 'application/octet-stream'}, 
+        responseType: 'blob' } 
+      })
+      const { cfg_glpi } = await glpi.getGlpiConfig()
+      const configurationPassword = {
+          minimunLength: cfg_glpi.password_min_length,
+          needDigit: cfg_glpi.password_need_number,
+          needLowercaseCharacter: cfg_glpi.password_need_letter,
+          needUppercaseCharacter: cfg_glpi.password_need_caps,
+          needSymbol: cfg_glpi.password_need_symbol
+      }
+
+      dispatch(authRefreshCaptcha({
+          idCaptcha: id,
+          imgCaptcha: URL.createObjectURL(captcha),
+          configurationPassword: configurationPassword
+      }))
+      dispatch(uiTransactionFinish())
+    } catch (error) {
+      dispatch(uiTransactionFinish())
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: `${error[0]}\n${error[1]}` 
+      }))
+    }
   }
 }
