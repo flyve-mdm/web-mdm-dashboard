@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import withAdminDashboardLayout from '../../hoc/withAdminDashboardLayout'
 
-// TODO: Add HOC withAdminDashboardLayout
 class AdminDashboard extends Component {
   render() { 
     return (
@@ -13,4 +13,4 @@ class AdminDashboard extends Component {
   }
 }
  
-export default AdminDashboard
+export default withAdminDashboardLayout(AdminDashboard)
