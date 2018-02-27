@@ -3,20 +3,22 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { I18n, Translate } from 'react-i18nify'
 
-import Glpi from '../../shared/glpiApi'
-import ToastNotifications from '../../components/ToastNotifications'
 import Loading from '../../components/Loading'
 import ErrorValidation from '../../components/ErrorValidation'
 import ConstructInputs from '../../components/Forms'
-import config from '../../config/config.json'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import { changeNotificationMessage, refreshCaptcha } from '../../store/authentication/actions'
+import {
+    changeNotificationMessage,
+    fetchCaptcha,
+    fetchSignUp
+} from '../../store/authentication/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        refreshCaptcha: bindActionCreators(refreshCaptcha, dispatch),
+        fetchCaptcha: bindActionCreators(fetchCaptcha, dispatch),
+        fetchSignUp: bindActionCreators(fetchSignUp, dispatch),
         changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch)
     }
     return { actions }
@@ -46,18 +48,13 @@ class SignUp extends Component {
     }
 
     componentDidMount() {
-        this.props.actions.refreshCaptcha()
+        this.props.actions.fetchCaptcha()
     }
 
     changeState = (name, value) => {
         this.setState({
             [name]: value
         })
-    }
-
-    showNotification = (title, body) => {
-        if (this.toastNotifications) this.toastNotifications.showNotification(title, body)
-        this.props.actions.changeNotificationMessage(undefined)
     }
 
     registerUser = (e) => {
@@ -78,7 +75,7 @@ class SignUp extends Component {
         }
         
         if (isCorrect) {
-            let data = {
+            this.props.actions.fetchSignUp({
                 "name": this.state.email,
                 "realname": this.state.realName,
                 "password": this.state.password,
@@ -86,25 +83,8 @@ class SignUp extends Component {
                 "_useremails": [this.state.email],
                 "_plugin_flyvemdmdemo_captchas_id": this.props.captcha.id,
                 "_answer": this.state.captchaValue
-            }
-
-            // TODO: Convert into Action Creator
-            Glpi.registerUser({ userToken: config.USER_TOKEN, userData: data, itemtype: 'PluginFlyvemdmdemoUser' })
-                .then(() => {
-                    this.props.actions.changeNotificationMessage({ title: config.APP_NAME, body: "successfully registered user" })
-                    this.props.history.push('/validateAccount')
-                })
-                .catch((error) => {
-                    this.setState({
-                        isLoading: false
-                    })
-                    this.showNotification(error[0], error[1])
-                })
-            
-            this.setState({
-                isLoading: true
             })
-
+            this.props.history.push('/validateAccount')
         } else {
             this.setState({
                 forceValidation: true
@@ -226,7 +206,6 @@ class SignUp extends Component {
             const user = this.buildDataArray()
             renderComponent = (
                 <React.Fragment>
-                    <ToastNotifications ref={instance => { this.toastNotifications = instance }} />
                     <h2 className="win-h2" style={{
                         textAlign: 'center'
                     }}>
