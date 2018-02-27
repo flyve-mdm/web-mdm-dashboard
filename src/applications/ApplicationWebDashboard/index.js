@@ -7,8 +7,9 @@ import PrivateRoute from '../../components/PrivateRoute'
 // Home Page '/'
 import SignIn from '../../containers/SignIn'
 
-// I18N HOC
+// HOC's
 import withI18NTranslation from '../../hoc/withI18NTranslation'
+import withToastNotification from '../../hoc/withToastNotification'
 
 // Async Components
 import asyncSignUp from '../../asyncComponents/asyncSignUp'
@@ -37,4 +38,8 @@ class ApplicationWebDashboard extends Component {
   }
 }
 
-export default withI18NTranslation(ApplicationWebDashboard)
+export default withI18NTranslation(
+  withToastNotification(
+    ApplicationWebDashboard
+  )
+)

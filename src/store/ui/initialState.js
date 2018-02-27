@@ -5,7 +5,11 @@
  */
 
 const initialState = {
-  notification: '',
+  notification: {
+    title: '',
+    body: '',
+    tipe: 'info'
+  },
   error: '',
   success: '',
   loading: false,
