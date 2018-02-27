@@ -163,7 +163,6 @@ $list-item-icon-size: 48px;
 
         .controller {
             padding: 15px 15px 15px 0;                
-            float: right;
             display: inline-block;
             
             .win-toggleswitch-values {
@@ -386,7 +385,7 @@ $list-item-icon-size: 48px;
 
                 .contentStatus {
                     width: 240px;
-                    margin-left:20px;
+                    margin-left:11px;
                     margin-top:10px;
 
                     .message {
@@ -559,7 +558,15 @@ $list-item-icon-size: 48px;
     .cancelIcon:before {
         content: "\E711";        
     }
-
+    .removeIcon:before {
+        content: "\E738";        
+    }
+    .unselectIcon:before {
+        content: "\E73A";        
+    }
+    .selectIcon:before {
+        content: "\E739";        
+    }
     .files-dropzone {
         text-align: center;
         padding: 60px;
@@ -593,6 +600,7 @@ $list-item-icon-size: 48px;
                     span {
                         font-size: 32px;
                         text-align: center;
+                        cursor: pointer;
                     }
                 }
 
@@ -602,12 +610,30 @@ $list-item-icon-size: 48px;
                     vertical-align: top;
                     text-align: left;
                     width: 100%;
+
+                    &.deactive {
+                    
+                        .content-text-primary {
+                            color: rgba(156, 156, 156, 0.726);
+                        }       
+                    }
                 }
 
                 .item-content-secondary {
-                    display: table-cell;
-                    float: right;
-                    text-align: left;
+                    position: relative;
+
+                    .item-icon {
+                        &.--fleets {
+                            width: 48px;
+                            position: absolute;
+                            right: 0;
+                            
+                            .win-toggleswitch-header {
+                                margin-bottom: 0;
+                                margin-top: 0;
+                            }
+                        }
+                    }
                 }
 
                 .content-text-primary {
@@ -621,6 +647,24 @@ $list-item-icon-size: 48px;
                     color: $text-detail-color;
                 }
             }
+        }
+
+        &.fleet-list {
+            padding: 10px 5px;
+
+            .item-content-primary {
+                .item-list-field {
+                    transition: opacity 1s ease-out;
+                    opacity: 0; 
+                    height: 0;
+                    overflow: hidden;
+
+                    &.active {
+                        opacity: 1;
+                        height: auto;
+                    }
+                }
+            }        
         }
     }
 }
