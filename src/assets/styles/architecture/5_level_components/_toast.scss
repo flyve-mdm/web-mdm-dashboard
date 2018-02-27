@@ -4,36 +4,54 @@
     z-index: 100;
     right: 0;
     margin: 10px;
-    padding: 7px;
+    padding: 12px;
     overflow: hidden;
     width: 200px;
     min-height: 48px;
 
-    background-color: #ddd;
-
-    .toast-title {
-
-    }
-
     .toast-body {
-        color: $text-detail-color;
+        margin-top: 8px;
         font-size: 13px;
         line-height: 16px;
     }
 
-    .type-alert {
-        // background-color: ;
+    &.--alert {
+        background-color: $alert;
+
+        .toast-body,
+        .toast-title {
+            color: white
+        }
     }
 
-    .type-warning {
-        // background-color: ;
+    &.--warning {
+        background-color: $warning;
+
+        .toast-body,
+        .toast-title {
+            color: white
+        }
+    }
+    
+    &.--success {
+        background-color: $success;
+
+        .toast-body,
+        .toast-title {
+            color: $text-detail-color
+        }
     }
 
-    .type-success {
-        // background-color: ;
+    &.--info {
+        background-color: $info;
+
+        .toast-body,
+        .toast-title {
+            color: $text-detail-color
+        }
     }
 
-    .type-info {
-        // background-color: ;
-    }
+    @extend %box-shadow;
+
+    @include animation('fade-in .5s ease-out');
 }
