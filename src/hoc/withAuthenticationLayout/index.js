@@ -43,7 +43,7 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
                     </span>
                     <br/>
                     <span className='language__span btn'>
-                    Idioma
+                        {I18n.t('commons.language')}
                         <select className='language__select' onChange={
                             event => props.changeLanguage(event.target.value)
                         }>

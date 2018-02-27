@@ -69,6 +69,11 @@ export const fetchSignIn = (username, password) => {
 
       dispatch(uiTransactionFinish())
       dispatch(authSuccess(user))
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: 'Welcome!',
+        type: 'success'
+      }))
     }).catch( error => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
@@ -82,7 +87,6 @@ export const fetchSignIn = (username, password) => {
 
 /** 
 * Fetch and Refresh de Captcha 
-* 
 */
 export const fetchCaptcha = () => {
   return async dispatch => {
@@ -140,7 +144,8 @@ export const fetchSignUp = (data) => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
         title: config.APP_NAME,
-        body: 'Successfully registered user'
+        body: 'Successfully registered user',
+        type: 'success'
       }))
     })
     .catch((error) => {
