@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import WinJS from 'winjs'
+import { withRouter } from 'react-router';
 
 function mapStateToProps(state, props) {
   return {
@@ -44,7 +45,7 @@ const withToastNotification = WrappedComponent => {
       })
     }
 
-    renderNotification = () => {
+    render () {
       let toast = null
 
       if (this.state.show) {
@@ -63,7 +64,7 @@ const withToastNotification = WrappedComponent => {
           </div>
         )
       }
-      
+
       return (
         <React.Fragment>
           { toast }
@@ -71,18 +72,17 @@ const withToastNotification = WrappedComponent => {
         </React.Fragment>
       )
     }
-
-    render () {
-      return this.renderNotification()
-    }
   }
 
   ToastNotification.propTypes = {
     title: PropTypes.string,
-    body: PropTypes.string
+    body: PropTypes.string,
+    type: PropTypes.string
   }
 
-  return connect(mapStateToProps, null)(ToastNotification)
+  return withRouter(
+    connect(mapStateToProps, null)(ToastNotification)
+  )
   
 }
 
