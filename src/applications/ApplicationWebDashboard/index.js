@@ -38,8 +38,7 @@ class ApplicationWebDashboard extends Component {
   }
 }
 
-export default withI18NTranslation(
-  withToastNotification(
-    ApplicationWebDashboard
-  )
+
+export default withToastNotification(
+  withI18NTranslation(ApplicationWebDashboard)
 )
