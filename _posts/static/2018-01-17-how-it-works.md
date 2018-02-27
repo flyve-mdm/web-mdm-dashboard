@@ -4,7 +4,7 @@ howtos: true
 published: true
 title: How it works
 permalink: howtos/how-it-works
-description: A brief introduction
+description: What you need to know
 ---
 The Web Administrative Dashboard of Flyve MDM is a centralised mobile device management tool.
 
