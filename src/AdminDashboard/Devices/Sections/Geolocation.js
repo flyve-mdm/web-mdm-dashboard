@@ -32,6 +32,20 @@ export default class Geolocation extends Component {
         }
     }
 
+    requestLocation = async () => {
+        try {
+            await this.props.glpi.updateItem({
+                itemtype: 'PluginFlyvemdmAgent', 
+                id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'],
+                input: {_geolocate: ""}
+            })
+            this.props.showNotification('Success', 'Request sent')
+            this.handleRefresh()
+        } catch (error) {
+            this.props.showNotification(error[0], error[1])
+        }
+    }
+
     handleRefresh = async () => {
         try {
             const response = await this.props.glpi.getSubItems({
@@ -67,7 +81,14 @@ export default class Geolocation extends Component {
     render() {
         return this.state.isLoading ? 
             <Loading message="Loading..." /> : 
-                <div id="map" style={{ height: '400px' }} />
+                (   
+                    <React.Fragment>
+                        <div id="map" style={{ height: '250px' }} />
+                        <button className="win-button win-button-primary" style={{margin: 5}} onClick={this.requestLocation}>
+                            Request current location
+                        </button>
+                    </React.Fragment>
+                )
     }
 }
 
