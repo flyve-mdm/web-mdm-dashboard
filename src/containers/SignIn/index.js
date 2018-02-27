@@ -16,12 +16,14 @@ import {
 // Async Component
 import AsyncPasswordFieldset from '../../asyncComponents/asyncPasswordFielset'
 import { Redirect } from 'react-router';
+import Loading from '../../components/Loading';
 
 function mapStateToProps(state, props) {
     return {
         isAuthenticated: state.auth.currentUser !== null,
+        isLoading: state.ui.loading,        
         selfRegistration: state.auth.selfRegistration,
-        notificationMessage: state.auth.notificationMessage,
+        notificationMessage: state.auth.notificationMessage
     }
 }
 
@@ -77,6 +79,7 @@ class SignIn extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault()
+
         this.props.actions.fetchSignIn(
             this.state.username,
             this.state.password
@@ -108,7 +111,7 @@ class SignIn extends Component {
         (
             <React.Fragment>
                 <ToastNotifications ref={instance => { this.toastNotifications = instance }} />
-                {form}
+                { this.props.isLoading ? <Loading message="Loading..."/> : form }
             </React.Fragment>
         ) : 
         (
@@ -119,6 +122,7 @@ class SignIn extends Component {
 
 SignIn.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
     selfRegistration: PropTypes.bool.isRequired,
     actions: PropTypes.object.isRequired

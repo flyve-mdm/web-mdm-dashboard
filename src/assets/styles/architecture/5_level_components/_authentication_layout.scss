@@ -3,11 +3,11 @@
     margin: auto;
     overflow: auto;
     
-    .authentication--section {
-    padding-top: 20px;
-    min-height: 85%;
+    .authentication__section {
+        padding-top: 20px;
+        min-height: 85%;
         
-        .authentication--figure {
+        .authentication__figure {
             text-align: center;
             
             img {
@@ -15,9 +15,9 @@
             }
         }
 
-        .authentication--form {
-            .fields--div {
-                .field--div {
+        .authentication__form {
+            .fields-block {     
+                .field__div {  
                     p {
                         margin: 10px 0 0 0
                     }
@@ -25,8 +25,9 @@
             }
         }
 
-        .authentication-password-div,
-        .authentication-email-div {
+        .authentication-password__div,
+        .authentication-email__div,
+        .authentication-forgot__div {
             min-height: 18vw;
 
             @include animation('fade-in .5s ease-out');
@@ -37,20 +38,21 @@
             }
         }
 
-        .authentication-email-div {
-            p:not(.--description) {
+        .authentication-email__div {
+            .paragraph__p:not(.--description) {
                 margin: 0
             }
         }
 
-        .authentication-password-div {
+        .authentication-password__div,
+        .authentication-forgot__div {
             .btn.--primary {
                 margin-left: 30px
             }
         }
     }
 
-    .authenticaton--footer {
+    .authenticaton__footer {
         text-align: center;
     }
 }
