@@ -10,15 +10,24 @@ import ErrorValidation from '../../components/ErrorValidation'
 import ConstructInputs from '../../components/Forms'
 import config from '../../config/config.json'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import { changeNotificationMessage } from '../../store/authentication/actions';
+import { changeNotificationMessage, refreshCaptcha } from '../../store/authentication/actions'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
+        refreshCaptcha: bindActionCreators(refreshCaptcha, dispatch),
+        changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch)
     }
     return { actions }
+}
+
+function mapStateToProps(state, props) {
+    return {
+        isLoading: state.ui.loading,
+        captcha: state.auth.captcha,
+        configurationPassword: state.auth.configurationPassword
+    }
 }
 
 class SignUp extends Component {
@@ -31,50 +40,13 @@ class SignUp extends Component {
             realName: '',
             password: '',
             passwordConfirmation: '',
-            captcha: '',
-            captchaID: undefined,
+            captchaValue: '',
             forceValidation: false,
-            configurationPassword: undefined,
-            isLoading: true,
-            imgCaptcha: undefined,
         }
     }
 
     componentDidMount() {
-        this.refreshCaptcha()
-    }
-
-    refreshCaptcha = async () => {
-
-        try {
-            // Init session by user_token
-            const session = await Glpi.initSessionByUserToken({ userToken: config.USER_TOKEN })
-            Glpi.sessionToken = session.session_token
-            // Create new captcha
-            const {id} = await Glpi.addItem({ itemtype: 'PluginFlyvemdmdemoCaptcha', input: {}})
-            // Get new captcha
-            const captcha = await Glpi.genericRequest({ path: `PluginFlyvemdmdemoCaptcha/${id}`, queryString: { alt: 'media' }, requestParams: { method: 'GET', headers: {'Content-Type': 'application/octet-stream'}, responseType: 'blob' } })
-            // Get Glpi configuration
-            const { cfg_glpi } = await Glpi.getGlpiConfig()
-
-            const configurationPassword = {
-                minimunLength: cfg_glpi.password_min_length,
-                needDigit: cfg_glpi.password_need_number,
-                needLowercaseCharacter: cfg_glpi.password_need_letter,
-                needUppercaseCharacter: cfg_glpi.password_need_caps,
-                needSymbol: cfg_glpi.password_need_symbol
-            }
-
-            this.setState({
-                captchaID: id,
-                imgCaptcha: URL.createObjectURL(captcha),
-                configurationPassword: configurationPassword,
-                isLoading: false
-            })
-                
-        } catch (error) {
-            console.log(error)
-        }
+        this.props.actions.refreshCaptcha()
     }
 
     changeState = (name, value) => {
@@ -112,10 +84,11 @@ class SignUp extends Component {
                 "password": this.state.password,
                 "password2": this.state.passwordConfirmation,
                 "_useremails": [this.state.email],
-                "_plugin_flyvemdmdemo_captchas_id": this.state.captchaID,
-                "_answer": this.state.captcha
+                "_plugin_flyvemdmdemo_captchas_id": this.props.captcha.id,
+                "_answer": this.state.captchaValue
             }
 
+            // TODO: Convert into Action Creator
             Glpi.registerUser({ userToken: config.USER_TOKEN, userData: data, itemtype: 'PluginFlyvemdmdemoUser' })
                 .then(() => {
                     this.props.actions.changeNotificationMessage({ title: config.APP_NAME, body: "successfully registered user" })
@@ -225,8 +198,8 @@ class SignUp extends Component {
                     {
                         label: I18n.t('create_account.enter_the_code_from_the_image'),
                         type: "text",
-                        name: "captcha",
-                        value: this.state.captcha,
+                        name: "captchaValue",
+                        value: this.state.captchaValue,
                         placeholder: null,
                         function: this.changeState,
                         disabled: false,
@@ -247,7 +220,7 @@ class SignUp extends Component {
 
     render() {
         let renderComponent 
-        if (this.state.isLoading) {
+        if (this.props.isLoading) {
             renderComponent = <Loading message="Loading..."/>
         } else {
             const user = this.buildDataArray()
@@ -268,7 +241,7 @@ class SignUp extends Component {
                         
                         <ConstructInputs data={user.captchaInformation} />
                         <div style={{ textAlign: 'center', marginTop: '15px' }}>
-                            <img src={this.state.imgCaptcha} alt='Captcha' />
+                            <img src={this.props.captcha.img} alt='Captcha' />
                         </div>
                         <div style={{textAlign: 'center'}}>
                             <button className='btn --primary' style={{ margin: "20px" }}>
@@ -298,6 +271,6 @@ SignUp.propTypes = {
 }
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(withAuthenticationLayout(SignUp, {contentCenter: true}))
