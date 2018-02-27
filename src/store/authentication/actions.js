@@ -45,6 +45,11 @@ export const authRefreshCaptcha = ({ idCaptcha, imgCaptcha, configurationPasswor
 
 // Actions Creators
 
+/**
+ * Fetch and Sign In a User with credentials
+ * @param {String} username 
+ * @param {String} password 
+ */
 export const fetchSignIn = (username, password) => {
   return dispatch => {
     dispatch(uiTransactionStart())
@@ -68,13 +73,18 @@ export const fetchSignIn = (username, password) => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
         title: config.APP_NAME,
-        body: `${error[0]}\n${error[1]}` 
+        body: `${error[0]}\n${error[1]}`,
+        type: 'warning'
       }))
     })
   }
 }
 
-export const refreshCaptcha = () => {
+/** 
+* Fetch and Refresh de Captcha 
+* 
+*/
+export const fetchCaptcha = () => {
   return async dispatch => {
     dispatch(uiTransactionStart())
     try {
@@ -108,8 +118,38 @@ export const refreshCaptcha = () => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
         title: config.APP_NAME,
-        body: `${error[0]}\n${error[1]}` 
+        body: `${error[0]}\n${error[1]}`,
+        type: 'warning'
       }))
     }
+  }
+}
+
+/**
+ * 
+ * @param {Object} data
+ */
+export const fetchSignUp = (data) => {
+  return dispatch => {
+    dispatch(uiTransactionStart())
+    glpi.registerUser({ 
+      userToken: config.USER_TOKEN, 
+      userData: data, 
+      itemtype: 'PluginFlyvemdmdemoUser' })
+    .then(() => {
+      dispatch(uiTransactionFinish())
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: 'Successfully registered user'
+      }))
+    })
+    .catch((error) => {
+      dispatch(uiTransactionFinish())
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: `${error[0]}\n${error[1]}`,
+        type: 'warning' 
+      }))
+    })
   }
 }
