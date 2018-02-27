@@ -19,20 +19,32 @@ class Map extends Component {
         }
     }
 
-    componentDidMount () {
-        const map = L.map('map', {
-            minZoom: 2,
-            maxZoom: 18,
-            center: [10.2484425 , -67.5906903],
-            zoom: 2,
-            layers: [L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})],
-            attributionControl: true,
-            preferCanvas: true,
-        })
+    addMarkers = () => {
+        for (let index = 0; index < this.props.markers.length; index++) {
+            let marker = L.marker(this.props.markers[index].position).addTo(this.state.map)
+            marker.bindPopup(this.props.markers[index].message)
+        }
+    }
 
-        // let marker = L.marker(this.state.position).addTo(map)
-        // marker.bindPopup("last known location")
-        return this.setState({ map })
+    componentDidMount () {
+        setTimeout(() => { 
+            const map = L.map('map', {
+                minZoom: 1,
+                maxZoom: 18,
+                center: [30.481913, 6.499247],
+                zoom: 1,
+                layers: [L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})],
+                attributionControl: true,
+                preferCanvas: true,
+            })
+            this.setState({ map }, () => this.addMarkers())
+        }, 500)
+    }
+
+    componentWillUpdate = () => {
+        if (this.state.map) {
+            this.addMarkers()
+        }
     }
 
     render () {
@@ -41,12 +53,14 @@ class Map extends Component {
 }
 
 Map.defaultProps = {
-    style: { height: '250px' }
+    style: { height: '250px' },
+    markers: []
 }
 
 
 Map.propTypes = {
-    style: PropTypes.object
+    style: PropTypes.object,
+    markers: PropTypes.array
 }
 
 export default Map
