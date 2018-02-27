@@ -27,13 +27,13 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
 
         return (
             <div className="authentication-block " style={style} >
-                <section className="authentication--section">
-                    <figure className="authentication--figure">
+                <section className="authentication__section">
+                    <figure className="authentication__figure">
                         <img alt="Flyve MDM Dashboard" src="images/logo2.png" />
                     </figure>
                     <WrappedComponent {...props} />
                 </section>
-                <footer className="authenticaton--footer">
+                <footer className="authenticaton__footer">
                     <a href="https://flyve-mdm.com/privacy-policy/">
                         {I18n.t('commons.terms_and_conditions')}
                     </a>
@@ -42,9 +42,9 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
                         © 2017 Teclib'.
                     </span>
                     <br/>
-                    <span className='language--span btn'>
+                    <span className='language__span btn'>
                     Idioma
-                        <select className='language--select' onChange={
+                        <select className='language__select' onChange={
                             event => props.changeLanguage(event.target.value)
                         }>
                             <option value='en_GB'>English</option>

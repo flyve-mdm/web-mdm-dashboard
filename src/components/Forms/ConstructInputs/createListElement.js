@@ -8,7 +8,7 @@ import InputEmail from '../InputEmail'
 const createListElement = ({icon, elements, index}) => {
   let style = icon ? { marginLeft: 30, overflow: 'hidden' } : { overflow: 'hidden' }
   return (
-      <div className="fields--div" style={style} key={index}>
+      <div className="fields-block" style={style} key={index}>
           {
               elements.map((element, index2) => {
                   let renderElement
