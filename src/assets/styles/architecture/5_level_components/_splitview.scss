@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $width-desktop: 20vw;
 $width-tablet-small: (640px / 2.5);
 $width-phablet: (560px / 2.5);
@@ -40,6 +41,13 @@ $color-fonts-hover: $splitview-color-fonts-hover;
 
   .splitview-wrapper__div {
     height: $splitview-height;
+=======
+.splitview-block {
+  width: 304px;
+
+  .splitview-wrapper__div {
+    height: 100vh;
+>>>>>>> 12e15418... feat(reat-architecture): add splitview components without winjs
     transition: height 0.25s ease-in-out;
     -webkit-transition: height 0.25s ease-in-out;
     display: -webkit-box;
@@ -52,8 +60,15 @@ $color-fonts-hover: $splitview-color-fonts-hover;
     -webkit-box-orient: horizontal;
     -ms-flex-direction: row;
     -webkit-flex-direction: row;
+<<<<<<< HEAD
     left: 0;
     width: inherit;
+=======
+    position: fixed;
+    left: 0;
+    width: inherit;
+    z-index: 300;
+>>>>>>> 12e15418... feat(reat-architecture): add splitview components without winjs
 
     .splitview-wrapped__navbar {
       display: -webkit-box;
@@ -70,7 +85,12 @@ $color-fonts-hover: $splitview-color-fonts-hover;
         -webkit-box-align: center;
         -ms-flex-align: center;
         -webkit-align-items: center;
+<<<<<<< HEAD
         background-color: $color-2-primary;
+=======
+        color: #DEEBFF;
+        background-color: #0747A6;
+>>>>>>> 12e15418... feat(reat-architecture): add splitview components without winjs
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         display: -webkit-box;
@@ -84,6 +104,7 @@ $color-fonts-hover: $splitview-color-fonts-hover;
         -ms-flex-direction: column;
         -webkit-flex-direction: column;
         padding: 16px 0 16px;
+<<<<<<< HEAD
         overflow-y: auto;
         overflow-x: hidden;
         width: $splitview-width;
@@ -133,6 +154,9 @@ $color-fonts-hover: $splitview-color-fonts-hover;
           -ms-flex-align: end;
           -webkit-align-items: left;
         }
+=======
+        width: 64px;
+>>>>>>> 12e15418... feat(reat-architecture): add splitview components without winjs
 
         .splitview-wrapped-navbar-wrapped-top__section {
           flex-grow: 1;
@@ -147,11 +171,18 @@ $color-fonts-hover: $splitview-color-fonts-hover;
         }
   
         .splitview-wrapped-navbar-wrapped-bottom__section {
+<<<<<<< HEAD
+=======
+          align-self: center;
+          -ms-flex-item-align: center;
+          -webkit-align-self: center;
+>>>>>>> 12e15418... feat(reat-architecture): add splitview components without winjs
           flex-grow: 0;
           -ms-flex-positive: 0;
           -webkit-flex-grow: 0;
         }
 
+<<<<<<< HEAD
         .splitview-wrapped-navbar-wrapped-top__section,
         .splitview-wrapped-navbar-wrapped-bottom__section {
           > div {
@@ -204,6 +235,14 @@ $color-fonts-hover: $splitview-color-fonts-hover;
                 }
               }
             }
+=======
+        .splitview-wrapped-navbar-wrapped-top__section > div,
+        .splitview-wrapped-navbar-wrapped-bottom__section > div {
+          margin-bottom: 20px;
+
+          > span {
+            font-size: 20px
+>>>>>>> 12e15418... feat(reat-architecture): add splitview components without winjs
           }
         }
       }

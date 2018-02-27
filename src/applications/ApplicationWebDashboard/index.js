@@ -31,7 +31,8 @@ class ApplicationWebDashboard extends Component {
         <Route exact path='/signUp' component={asyncSignUp} />
         <Route exact path='/validateAccount' component={asyncValidateAccount} />
         <Route exact path='/forgotPassword' component={asyncForgotPassword} />
-        <PrivateRoute exact path="/app" component={asyncAdminDashboard} />
+        <Route exact path='/app' component={asyncAdminDashboard} />
+        {/*<PrivateRoute exact path="/app" component={asyncAdminDashboard} />*/}
         <PrivateRoute exact path="/logout" component={asyncLogout} />
       </Switch>    
     )
