@@ -13,7 +13,7 @@ L.Icon.Default.mergeOptions({
 
 export default class Geolocation extends Component {
     constructor() {
-        super();
+        super()
         this.state ={
           map: null,
           position: [10.2484425 , -67.5906903],
@@ -33,35 +33,41 @@ export default class Geolocation extends Component {
     }
 
     handleRefresh = async () => {
-        const response = await this.props.glpi.getSubItems({
-            itemtype: 'Computer', 
-            id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.Computer.id'], 
-            subItemtype: 'PluginFlyvemdmGeolocation'
-        })
-
-        this.setState({
-            locations: response,
-            isLoading: false
-        }, () => {
-            const map = L.map('map', {
-                minZoom: 2,
-                maxZoom: 18,
-                center: this.state.position,
-                zoom: 16,
-                layers: [L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})],
-                attributionControl: true,
-                preferCanvas: true,
+        try {
+            const response = await this.props.glpi.getSubItems({
+                itemtype: 'Computer', 
+                id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.Computer.id'], 
+                subItemtype: 'PluginFlyvemdmGeolocation'
             })
-            let marker = L.marker(this.state.position).addTo(map)
-            marker.bindPopup("last known location")
-            return this.setState({
-                map: map
+    
+            this.setState({
+                locations: response,
+                isLoading: false
             })
+        } catch (e) {
+            this.props.showNotification('Error','Problems loading data')
+            this.setState({  
+                isLoading: false 
+            })
+        }
+        const map = L.map('map', {
+            minZoom: 2,
+            maxZoom: 18,
+            center: this.state.position,
+            zoom: 16,
+            layers: [L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'})],
+            attributionControl: true,
+            preferCanvas: true,
         })
+        // let marker = L.marker(this.state.position).addTo(map)
+        // marker.bindPopup("last known location")
+        return this.setState({ map })
     }
 
     render() {
-        return this.state.isLoading ? <Loading message="Loading..." /> : <div id="map" style={{ height: '400px' }} />
+        return this.state.isLoading ? 
+            <Loading message="Loading..." /> : 
+                <div id="map" style={{ height: '400px' }} />
     }
 }
 
