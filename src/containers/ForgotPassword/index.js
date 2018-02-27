@@ -1,30 +1,44 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 
 import Loading from '../../components/Loading'
 import Input from '../../components/Forms/Input'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+import { fetchRecoverPassword } from '../../store/authentication/actions'
+import { handleRecover } from './actions';
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        fetchRecoverPassword: bindActionCreators(fetchRecoverPassword, dispatch),
+    }
+    return { actions }
+}
+
+function mapStateToProps(state, props) {
+    return {
+        isLoading: state.ui.loading,
+        type: state.ui.notification.type
+    }
+}
 
 class ForgotPassword extends Component {
 
     constructor (props) {
         super(props)
         this.state = {
-            isRecoverSent: false
+            isRecoverSent: false,
+            text: ''
         }
+
+        this.handleRecover = event => handleRecover(this, event)
     }
 
-    changeInput = (name, value) => {
-        this.props.actions.changeEmail(value)
+    componentDidMount() {
+        this.textInput.focus();
     }
-
-    recover = (event) => {
-        event.preventDefault()
-        this.setState({
-            isRecoverSent: true
-        })
-        this.props.actions.recoverPassword()
-    }    
 
     render() {
         
@@ -37,15 +51,16 @@ class ForgotPassword extends Component {
                         We can help you reset password and security info.
                         Please, enter your Flyve MDM account in the following text box.
                     </p>
-                    <form onSubmit={this.recover}>
+                    <form onSubmit={(event) => { this.handleRecover(event) }}>
                         <Input 
                             label="" 
                             type="text" 
-                            name="email" 
-                            value={this.props.email} 
+                            name="text" 
+                            value={this.state.text} 
                             placeholder="Flyve MDM account" 
                             required
-                            function={this.changeInput}
+                            function={(name, value) => {this.setState({ text: value })}}
+                            inputRef={(input) => { this.textInput = input }}
                         />
 
                         <button className="btn --secondary" type="button" onClick={
@@ -100,9 +115,14 @@ class ForgotPassword extends Component {
 }
 
 ForgotPassword.propTypes = {
-    email: PropTypes.string.isRequired,
     history: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired,
+    type: PropTypes.string.isRequired,
     isLoading: PropTypes.bool.isRequired
 }
 
-export default withAuthenticationLayout(ForgotPassword, { centerContent: true })
+export default withAuthenticationLayout(
+    connect(mapStateToProps, mapDispatchToProps)(ForgotPassword), {
+        centerContent: true 
+    }
+)

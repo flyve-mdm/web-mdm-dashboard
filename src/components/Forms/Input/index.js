@@ -60,6 +60,8 @@ class Input extends Component {
                     onBlur={() => this.validate(this.props.parametersToEvaluate, this.props.value)}
                     disabled={this.props.disabled}
                     style={this.props.style}
+                    ref={this.props.inputRef}
+                    required={this.props.required ? true : false}
                 />
                 <ErrorValidation errors={this.state.errors} />
                 { deleteIcon }

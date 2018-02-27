@@ -12,11 +12,11 @@ import withI18NTranslation from '../../hoc/withI18NTranslation'
 import withToastNotification from '../../hoc/withToastNotification'
 
 // Async Components
-import asyncSignUp from '../../asyncComponents/asyncSignUp'
-import asyncLogout from '../../asyncComponents/asyncLogout'
-import asyncAdminDashboard from '../../asyncComponents/asyncAdminDashboard'
-import asyncValidateAccount from '../../asyncComponents/asyncValidateAccount'
-import asyncForgotPassword from '../../asyncComponents/asyncForgotPassword'
+import asyncSignUp from '../../async/asyncSignUp'
+import asyncLogout from '../../async/asyncLogout'
+import asyncAdminDashboard from '../../async/asyncAdminDashboard'
+import asyncValidateAccount from '../../async/asyncValidateAccount'
+import asyncForgotPassword from '../../async/asyncForgotPassword'
 
 
 /**

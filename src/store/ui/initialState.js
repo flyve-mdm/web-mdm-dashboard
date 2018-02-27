@@ -8,7 +8,7 @@ const initialState = {
   notification: {
     title: '',
     body: '',
-    tipe: 'info'
+    type: 'info'
   },
   error: '',
   success: '',
