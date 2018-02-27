@@ -22,5 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/src/i18n/translations/*
-!/src/i18n/translations/.gitkeep
+*src/hoc/withI18NTranslation/i18n/translations
+!src/hoc/withI18NTranslation/i18n/translations/.gitkeep

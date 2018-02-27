@@ -4,7 +4,7 @@ import { I18n } from 'react-i18nify'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
-import source_file_translation from '../../i18n/source_file.json'
+import source_file_translation from './i18n/source_file.json'
 
 function mapStateToProps(state, props) {
   return {
@@ -19,26 +19,27 @@ function mapStateToProps(state, props) {
  */
 const withI18NTranslation = WrappedComponent => {
   class I18NTranslation extends Component {
-     /**
+    /**
      * @param {*} i18nConvention -> String, e.g: 'pt_BR'
      */
     findI18NString = i18nConvention => {
       let path = i18nConvention === this.props.languageDefault
-        ? `./source_file`
-        : `./translations/${i18nConvention}`;
-        
-      import(`${path}.json`).then(jsonModule => {
-        I18n.setTranslationsGetter(() => {
-          const json = {};
-          json[i18nConvention] = jsonModule;
-          return json
+        ? `./i18n/source_file`
+        : `./i18n/translations/${i18nConvention}`;
+
+        import(`${path}.json`)
+          .then(jsonModule => {
+            I18n.setTranslationsGetter(() => {
+              const json = {};
+              json[i18nConvention] = jsonModule;
+              return json
+            });
+            I18n.setLocale(i18nConvention);
+            this.forceUpdate();
+          }).catch((error) => {
+            I18n.setLocale(this.props.languageDefault);
+            this.forceUpdate();
         });
-        I18n.setLocale(i18nConvention);
-        this.forceUpdate();
-      }).catch(() => {
-        I18n.setLocale(this.props.languageDefault);
-        this.forceUpdate();
-      });
     };
   
     componentWillMount() {
@@ -52,8 +53,8 @@ const withI18NTranslation = WrappedComponent => {
     }
 
     componentWillReceiveProps(nextProps) {
-      if (nextProps.languageCurrent !== this.props.languageCurrent) {
-          this.findI18NString(nextProps.languageCurrent)
+      if (nextProps.languageCurrent !== this.props.languageCurrent) {        
+        this.findI18NString(nextProps.languageCurrent)
       }
     }
 
