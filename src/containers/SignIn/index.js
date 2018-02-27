@@ -13,7 +13,7 @@ import {
 } from '../../store/authentication/actions'
 
 // Async Component
-import AsyncPasswordFieldset from '../../asyncComponents/asyncPasswordFielset'
+import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
 import { Redirect } from 'react-router';
 import Loading from '../../components/Loading';
 import { changeInput, changePhase, handleFormSubmit } from './actions';
