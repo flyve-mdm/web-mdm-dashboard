@@ -32,7 +32,7 @@ class ForgotPassword extends Component {
         
         if (!this.state.isRecoverSent) {
             element = (
-                <div>
+                <div className="authentication-forgot__div">
                     <p>
                         We can help you reset password and security info.
                         Please, enter your Flyve MDM account in the following text box.
@@ -48,18 +48,13 @@ class ForgotPassword extends Component {
                             function={this.changeInput}
                         />
 
-                        <button 
-                            className="win-button" 
-                            type="button" 
-                            onClick={() => this.props.history.push('/')}
-                        >
+                        <button className="btn --secondary" type="button" onClick={
+                            () => this.props.history.push('/')
+                        }>
                             Back 
                         </button>
 
-                        <button 
-                            className="win-button win-button-primary"
-                            type="submit" 
-                        >
+                        <button className="btn --primary" type="submit">
                             Sing in
                         </button>
                     </form>
@@ -92,7 +87,7 @@ class ForgotPassword extends Component {
         } else {
             return (
                 <React.Fragment>
-                    <h2>
+                    <h2 className="win-h2">
                         Recover your <br/>
                         account
                     </h2>

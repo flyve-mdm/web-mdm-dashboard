@@ -254,13 +254,13 @@ class SignUp extends Component {
             renderComponent = (
                 <React.Fragment>
                     <ToastNotifications ref={instance => { this.toastNotifications = instance }} />
-                    <h2 style={{
+                    <h2 className="win-h2" style={{
                         textAlign: 'center'
                     }}>
                         <Translate value="create_account.create_account"/>
                     </h2>
 
-                    <form className="authentication--form" onSubmit={this.registerUser}>
+                    <form className="authentication__form" onSubmit={this.registerUser}>
 
                         <ConstructInputs data={user.personalInformation} />
 

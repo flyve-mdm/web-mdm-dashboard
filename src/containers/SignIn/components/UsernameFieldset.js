@@ -37,9 +37,9 @@ class UsernameFieldset extends Component {
     render () {
     
         return (
-            <div className="authentication-email-div">
+            <div className="authentication-email__div">
                 <h2 className="win-h2">Sign in</h2>
-                <p className="--description">
+                <p className="paragraph__p --description">
                     {I18n.t('login.use_your_flyve_mdm_account')}
                     <br/>
                     <a href="https://flyve-mdm.com/">
