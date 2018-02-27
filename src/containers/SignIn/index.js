@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import UsernameFieldset from './components/UsernameFieldset'
-import ToastNotifications from '../../components/ToastNotifications'
 
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 
@@ -17,6 +16,7 @@ import {
 import AsyncPasswordFieldset from '../../asyncComponents/asyncPasswordFielset'
 import { Redirect } from 'react-router';
 import Loading from '../../components/Loading';
+import { changeInput, changePhase, handleFormSubmit } from './actions';
 
 function mapStateToProps(state, props) {
     return {
@@ -44,79 +44,37 @@ class SignIn extends Component {
             password: '',
             phase: 1
         }
-    }
 
-    componentDidMount() {
-        if (this.props.notificationMessage !== undefined) {
-            this.showNotification(this.props.notificationMessage.title, this.props.notificationMessage.body)
-        }
-    }
-
-    componentDidUpdate() {
-        if (this.props.notificationMessage !== undefined) {
-            this.showNotification(this.props.notificationMessage.title, this.props.notificationMessage.body)
-        }
-    }
-
-    showNotification = (title, body) => {
-        if (this.toastNotifications) {
-            this.toastNotifications.showNotification(title, body)
-        }
-        this.props.actions.changeNotificationMessage(undefined)
-    }
-
-    changeInput = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
-    changePhase = (newPhase) => {
-        this.setState({
-            phase: newPhase
-        })
-    }
-
-    handleFormSubmit = (e) => {
-        e.preventDefault()
-
-        this.props.actions.fetchSignIn(
-            this.state.username,
-            this.state.password
-        )
+        this.changeInput = event => changeInput(this, event.target)
+        this.changePhase = newPhase => changePhase(this, newPhase)
+        this.handleFormSubmit = event => handleFormSubmit(this, event)
     }
 
     render () {
-        let form
-        if (this.state.phase === 1) {
-            form = 
-                <UsernameFieldset
-                    username={this.state.username} 
+        if (this.props.isAuthenticated) {
+            return <Redirect to='/app'/>
+        } else {
+            let form
+            if (this.state.phase === 1) {
+                form = 
+                    <UsernameFieldset
+                        username={this.state.username} 
+                        changeInput={this.changeInput}
+                        changePhase={this.changePhase}
+                        selfRegistration={this.props.selfRegistration}
+                    />    
+            } else {
+                form = <AsyncPasswordFieldset
+                    username={this.state.username}
+                    password={this.state.password}
                     changeInput={this.changeInput}
                     changePhase={this.changePhase}
-                    selfRegistration={this.props.selfRegistration}
-                />    
-        } else {
-            form = <AsyncPasswordFieldset
-                username={this.state.username}
-                password={this.state.password}
-                changeInput={this.changeInput}
-                changePhase={this.changePhase}
-                history={this.props.history}
-                handleOnSubmit={this.handleFormSubmit}
-            />
+                    history={this.props.history}
+                    handleOnSubmit={this.handleFormSubmit}
+                />
+            }
+            return this.props.isLoading ? <Loading message="Loading..."/> : form 
         }
-
-        return !this.props.isAuthenticated ?
-        (
-            <React.Fragment>
-                <ToastNotifications ref={instance => { this.toastNotifications = instance }} />
-                { this.props.isLoading ? <Loading message="Loading..."/> : form }
-            </React.Fragment>
-        ) : 
-        (
-            <Redirect to='/app'/>
-        )
     }
 }
 
