@@ -109,7 +109,7 @@ export default class ApplicationsContent extends Component {
                                 <div className="detail">{BytesToSize(this.state.data["filesize"])}</div>
                                 <span className="source">{this.state.data["source"]}</span>
                                 <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.changeActionList('Edit')} />
+                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.changeAction('Edit')} />
                                 <span className="deleteIcon" onClick={this.handleDelete} />
                             </div>
                         </div>
