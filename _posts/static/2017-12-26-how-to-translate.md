@@ -2,9 +2,9 @@
 layout: post
 howtos: true
 published: true
-title: How to Translate
+title: Contribute Translating
 permalink: howtos/contribute-translating
-description: Translate with Transifex
+description: We Translate with Transifex
 ---
 We use [Transifex](https://www.transifex.com/) to translate our projects
 
