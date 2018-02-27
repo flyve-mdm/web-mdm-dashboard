@@ -11,7 +11,14 @@
 
 @import './architecture/4_level_elements/body_font_size';
 
+// With Refactor
 @import './architecture/5_level_components/btn';
+@import './architecture/5_level_components/authentication_layout';
+@import './architecture/5_level_components/select_language';
+@import './architecture/5_level_components/splitview';
+@import './architecture/5_level_components/icons';
+
+// Without Refactor
 @import './architecture/5_level_components/about';
 @import './architecture/5_level_components/applications';
 @import './architecture/5_level_components/dashboard';
@@ -21,9 +28,7 @@
 @import './architecture/5_level_components/fleets';
 @import './architecture/5_level_components/invitations';
 @import './architecture/5_level_components/loading';
-@import './architecture/5_level_components/authentication_layout';
 @import './architecture/5_level_components/search_engine';
-@import './architecture/5_level_components/select_language';
 @import './architecture/5_level_components/settings';
 @import './architecture/5_level_components/toast';
 @import './architecture/5_level_components/users';
