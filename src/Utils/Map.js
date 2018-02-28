@@ -21,6 +21,7 @@ class Map extends Component {
     }
 
     addMarkers = () => {
+        this.state.markerGroup.clearLayers()
         for (let index = 0; index < this.props.markers.length; index++) {
             L.marker(this.props.markers[index].position).addTo(this.state.markerGroup)
         }
