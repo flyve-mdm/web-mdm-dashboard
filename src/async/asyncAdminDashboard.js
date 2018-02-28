@@ -1,7 +1,7 @@
 import withAsyncComponent from '../hoc/withAsyncComponent';
 
 const asyncAdminDashboard = withAsyncComponent(() => {
-  return import('../containers/AdminDashboard')
+  return import('../applications/AdminDashboardApp')
 })
 
 export default asyncAdminDashboard

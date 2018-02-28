@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import ApplicationWebDashboard from './applications/ApplicationWebDashboard'
+import RootApp from './applications/RootApp'
 import registerServiceWorker from './registerServiceWorker'
 import { Provider } from 'react-redux';
 import {
@@ -26,7 +26,7 @@ ReactDOM.render(
             ))
         }>
             <BrowserRouter>
-                <ApplicationWebDashboard />
+                <RootApp />
             </BrowserRouter>
         </Provider>
     ),
