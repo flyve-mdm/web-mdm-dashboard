@@ -35,6 +35,8 @@ class DevicesContent extends Component {
                         
                         <Applications 
                             selectedItemList={this.props.selectedItemList}
+                            itemListPaneWidth={this.props.itemListPaneWidth}
+                            glpi={this.props.glpi}
                         />
 
                     </ReactWinJS.Pivot.Item>
