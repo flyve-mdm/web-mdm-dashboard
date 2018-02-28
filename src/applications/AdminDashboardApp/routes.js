@@ -1,4 +1,4 @@
-import Dashboard from '../../containers/HomeDashboard';
+import Dashboard from '../../containers/HomeDashboard'
 
 const routes = [
   {

@@ -3,20 +3,16 @@ import PropTypes from 'prop-types'
 import { VictoryPie } from 'victory'
 import { I18n } from 'react-i18nify'
 
-import ContentPane from '../../components/ContentPane'
 import InfoBox from '../../components/InfoBox';
+import Title from '../../components/Title';
 
 class Dashboard extends Component {
-  constructor(props) {
-      super(props)
-  }
-
   render() {
     return (
       <React.Fragment>
-        <h2 className="win-h2" style={{ marginLeft: '10px' }}> {I18n.t('commons.dashboard')} </h2>
-
         <div className="dashboard-block">
+
+            <Title text={I18n.t('commons.dashboard')} />
 
             <div className="dashboard-wrapper__div">
 
@@ -30,38 +26,38 @@ class Dashboard extends Component {
                     />
 
                     <InfoBox
-                      to='/applications'
+                      to='/invitations'
                       count={1}
-                      name={I18n.t('commons.applications')}
-                      icon="deviceIcon"
-                    />
-
-                    <InfoBox
-                      to='/files'
-                      count={1}
-                      name={I18n.t('commons.files')}
-                      icon="deviceIcon"
+                      name={I18n.t('commons.invitations')}
+                      icon="emailIcon"
                     />
 
                     <InfoBox
                       to='/fleets'
                       count={1}
                       name={I18n.t('commons.fleets')}
-                      icon="deviceIcon"
+                      icon="goToStartIcon"
                     />
 
                     <InfoBox
-                      to='/invitations'
+                      to='/files'
                       count={1}
-                      name={I18n.t('commons.invitations')}
-                      icon="deviceIcon"
+                      name={I18n.t('commons.files')}
+                      icon="filesIcon"
+                    />
+
+                    <InfoBox
+                      to='/applications'
+                      count={1}
+                      name={I18n.t('commons.applications')}
+                      icon="switchAppsIcon"
                     />
 
                     <InfoBox
                       to='/users'
                       count={1}
                       name={I18n.t('commons.users')}
-                      icon="deviceIcon"
+                      icon="peopleIcon"
                     />
 
                 </div>
@@ -117,7 +113,7 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-
+  history: PropTypes.object.isRequired
 }
 
 export default Dashboard

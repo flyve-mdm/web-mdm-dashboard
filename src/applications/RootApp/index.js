@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Switch } from 'react-router-dom'
 import { Route } from 'react-router'
 
-import PrivateRoute from '../../components/PrivateRoute'
+// TODO: import PrivateRoute from '../../components/PrivateRoute'
 
 import withI18NTranslation from '../../hoc/withI18NTranslation'
 import withToastNotification from '../../hoc/withToastNotification'

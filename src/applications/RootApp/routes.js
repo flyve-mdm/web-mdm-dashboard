@@ -5,8 +5,6 @@ import asyncAdminDashboard from '../../async/asyncAdminDashboard'
 import asyncValidateAccount from '../../async/asyncValidateAccount'
 import asyncForgotPassword from '../../async/asyncForgotPassword'
 
-import Dashboard from '../../containers/HomeDashboard';
-
 const routes = [
   {
     path: '/',

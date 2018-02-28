@@ -23,7 +23,7 @@ const splitView = ({
     <ScrollSync>
       <div className="splitview-block">
         <div className="splitview-wrapper__div">
-          <nav className="splitview-wrapped__navbar" onClick={handleExpand}>
+          <nav className="splitview-wrapped__navbar">
 
             <ScrollSyncPane>
               <div className="splitview-wrapper-wrapper__div">

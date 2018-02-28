@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 
@@ -20,9 +20,12 @@ const InfoBox = ({to, icon, count, name}) => {
 
 InfoBox.propTypes = {
     to: PropTypes.string.isRequired,
-    icon: PropTypes.array.isRequired,
-    count: PropTypes.func.isRequired,
-    name: PropTypes.func.isRequired,
+    icon: PropTypes.string.isRequired,
+    count: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+    ]).isRequired,
+    name: PropTypes.string.isRequired,
 }
 
 export default InfoBox;
