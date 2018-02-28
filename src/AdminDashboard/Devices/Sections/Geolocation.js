@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Loading from '../../../Utils/Loading'
 import Map from '../../../Utils/Map'
+import GeolocationList from './GeolocationList'
 
 export default class Geolocation extends Component {
     constructor() {
@@ -78,19 +79,7 @@ export default class Geolocation extends Component {
                             Request current location
                         </button>
 
-                        {
-                            this.state.locations.map((location, index) => (
-                                <div key={`${this.props.selectedItemList['PluginFlyvemdmAgent.name']}-${index}`}>
-                                    <input 
-                                        type="checkbox" 
-                                        className="win-checkbox" 
-                                        style={{width: 'auto'}} 
-                                        onChange={() => this.showLocations(location)} 
-                                    /> 
-                                    <label>{ location['PluginFlyvemdmGeolocation.date'] }</label>
-                                </div>
-                            ))
-                        }
+                        <GeolocationList locations={this.state.locations} showLocations={this.showLocations} />
                     </React.Fragment>
                 )
     }
