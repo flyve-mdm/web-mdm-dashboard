@@ -4,6 +4,8 @@ import HeaderAdminDashboard from '../../components/HeaderAdminDashboard'
 
 // TODO: Passing Routes to props for generate NavLink in SplitView component
 
+const TIMEOUT_CONTRACT = 420
+
 const withAdminDashboardLayout = WrappedComponent=> {
   class AdminDashboardLayout extends Component {
     constructor (props) {
@@ -37,7 +39,7 @@ const withAdminDashboardLayout = WrappedComponent=> {
           contract: false,
           expanded: false
         });
-      }, 250)
+      }, TIMEOUT_CONTRACT)
     }
 
     render() {

@@ -19,12 +19,12 @@
 @import './architecture/5_level_components/splitview';
 @import './architecture/5_level_components/icons';
 @import './architecture/5_level_components/toast';
+@import './architecture/5_level_components/dashboard';
 
 // Without Refactor
+@import './architecture/5_level_components/devices';
 @import './architecture/5_level_components/about';
 @import './architecture/5_level_components/applications';
-@import './architecture/5_level_components/dashboard';
-@import './architecture/5_level_components/devices';
 @import './architecture/5_level_components/errors';
 @import './architecture/5_level_components/files';
 @import './architecture/5_level_components/fleets';
