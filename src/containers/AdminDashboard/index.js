@@ -5,9 +5,7 @@ class AdminDashboard extends Component {
   render() { 
     return (
       <React.Fragment>
-        <h1>
-          Admin Dashboard - Flyve MDM
-        </h1>
+        <div/>
       </React.Fragment>
     )
   }
