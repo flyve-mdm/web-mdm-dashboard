@@ -23,7 +23,7 @@ import asyncForgotPassword from '../../async/asyncForgotPassword'
  * Main Component in the React Tree
  * This Render each route of the containers or / and components like 404
  */
-class ApplicationWebDashboard extends Component {
+class RootApp extends Component {
   render () {
     return (
       <Switch>
@@ -33,7 +33,8 @@ class ApplicationWebDashboard extends Component {
         <Route exact path='/forgotPassword' component={asyncForgotPassword} />
         <Route exact path='/app' component={asyncAdminDashboard} />
         {/*<PrivateRoute exact path="/app" component={asyncAdminDashboard} />*/}
-        <PrivateRoute exact path="/logout" component={asyncLogout} />
+        {/*<PrivateRoute exact path="/logout" component={asyncLogout} />*/}
+        <Route render={() => <h1 style={{textAlign: 'center'}}>Not Found</h1>} />
       </Switch>    
     )
   }
@@ -41,5 +42,5 @@ class ApplicationWebDashboard extends Component {
 
 
 export default withToastNotification(
-  withI18NTranslation(ApplicationWebDashboard)
+  withI18NTranslation(RootApp)
 )
