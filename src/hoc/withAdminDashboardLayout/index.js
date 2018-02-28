@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+=import React, { Component } from 'react'
 import SplitView from "../../components/SplitView"
 import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
 
