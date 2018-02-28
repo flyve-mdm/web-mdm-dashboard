@@ -16,11 +16,11 @@ class Dashboard extends Component {
       <React.Fragment>
         <h2 className="win-h2" style={{ marginLeft: '10px' }}> {I18n.t('commons.dashboard')} </h2>
 
-        <div className="dashboard">
+        <div className="dashboard-block">
 
-            <div className="wrapper">
+            <div className="dashboard-wrapper__div">
 
-                <div className="wrapper-box">
+                <div className="dashboard-infobox-wraper__div">
 
                     <InfoBox
                       to='/devices'
@@ -66,7 +66,7 @@ class Dashboard extends Component {
 
                 </div>
 
-                <div className="wrapper-chart">
+                <div className="dashboard-chart-wraper__div">
 
                   <div key="DevicesOS" className="info-box">
                       <VictoryPie
