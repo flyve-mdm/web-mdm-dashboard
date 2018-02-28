@@ -44,7 +44,7 @@ class Map extends Component {
         }, 500)
     }
 
-    componentWillUpdate = () => {
+    componentDidUpdate = () => {
         if (this.state.map) {
             this.addMarkers()
         }
