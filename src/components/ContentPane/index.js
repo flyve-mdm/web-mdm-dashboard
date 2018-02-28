@@ -16,12 +16,18 @@ class ContentPane extends Component {
   }
 
   handleAnimation = () => {
-    WinJS.UI.Animation.enterContent(document.getElementById('main'), { top: '0px', left: '30px', rtlflip: true }, { mechanism: "transition" })
+    WinJS.UI.Animation.enterContent(document.getElementById('content-pane-block'), {
+      top: '0px', 
+      left: '30px', 
+      rtlflip: true 
+    }, {
+      mechanism: "transition" 
+    })
   }
 
   render() {
     return (
-      <div id="main" className="contentPane" style={{ width: calc100PercentMinus(this.props.itemListPaneWidth) }}>
+      <div id="content-pane-block" className="content-pane-block" style={{ width: calc100PercentMinus(this.props.itemListPaneWidth) }}>
         { this.props.children }
       </div>
     )

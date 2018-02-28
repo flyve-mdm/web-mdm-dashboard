@@ -18,6 +18,16 @@ $chart-size: 310px;
             @media only screen and (max-width: 540px) {
                 grid-template-columns: repeat(2, $box-size);
             }
+
+            a {
+                color: $splitview-color-fonts;
+                
+                @extend %normalize-anchor;
+
+                &:hover {
+                    color: $splitview-color-fonts-hover;
+                }
+            }
             
             .info-box {
                 display: inline-block;
@@ -26,6 +36,12 @@ $chart-size: 310px;
                 width: $box-size;
                 height: $box-size;
                 cursor: pointer;
+
+                @include transition(all .1s);
+
+                &:hover  {
+                    @extend %box-shadow;
+                }
 
                 .title-box {
                     padding: 10px;
