@@ -1,142 +1,126 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import IconWithPopper from './IconWithPopper';
 import ImgWithPopper from './imgWithPopper';
 import SpanWithPopper from './spanWithAnchor';
+import { ScrollSync, ScrollSyncPane } from '../ScrollSync';
 
-// TODO: Pass disabled as props
 // TODO: Pass routes as props
 // TODO: Create manual redirect for the description of SplitView (history.push('/example')) 
 
-class SplitView extends PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      expanded: false,
-      contract: false
-    }
-  }
+const splitView = ({
+  expanded,  
+  contract,
+  handleExpand,
+  handleContract,
+  handleSetTimeOut
+}) => {
+  
+  handleSetTimeOut()
 
-  handleContract = () => {
-    this.setState({
-      contract: true
-    })
-  }
-
-  handleExpand = () => {
-    this.setState({
-      expanded: true,
-      contract: false
-    })
-  }
-
-  render() {
-    this.state.contract && setTimeout(() => {
-      this.setState({
-        contract: false,
-        expanded: false
-      });
-    }, 250)
-
-    return (
+  return (
+    <ScrollSync>
       <div className="splitview-block">
         <div className="splitview-wrapper__div">
-          <nav className="splitview-wrapped__navbar" onClick={this.handleExpand}>
-            <div className="splitview-wrapper-wrapper__div">
-              <section className="splitview-wrapped-navbar-wrapped-top__section">
-                {
-                  /*
-                  <IconWithPopper
+          <nav className="splitview-wrapped__navbar" onClick={handleExpand}>
+
+            <ScrollSyncPane>
+              <div className="splitview-wrapper-wrapper__div">
+                <section className="splitview-wrapped-navbar-wrapped-top__section">
+                  {
+                    /*
+                    <IconWithPopper
+                      to={'/app'}
+                      iconName='homeIcon'
+                      title='Dashboard'
+                      disabled={expanded}/>
+                    */
+                  }
+                  <ImgWithPopper
                     to={'/app'}
-                    iconName='homeIcon'
+                    alt='Flyve MDM Dashboard'
+                    img='images/logo2.png'
                     title='Dashboard'
-                    disabled={this.state.expanded}/>
-                  */
-                }
-                <ImgWithPopper
-                  to={'/app'}
-                  alt='Flyve MDM Dashboard'
-                  img='images/logo2.png'
-                  title='Dashboard'
-                  disabled={this.state.expanded}
-                />
-                <IconWithPopper
-                  to={'/app/devices'}
-                  iconName='deviceIcon'
-                  title='Device'
-                  disabled={this.state.expanded}/>
-                <IconWithPopper
-                  to={'/app/invitations'}
-                  iconName='emailIcon'
-                  title='Invitations'
-                  disabled={this.state.expanded}/>
-                <IconWithPopper
-                  to={'/app/fleets'}
-                  iconName='goToStartIcon'
-                  title='Fleets'
-                  disabled={this.state.expanded}/>                
-                <IconWithPopper
-                  to={'/app/files'}
-                  iconName='filesIcon'
-                  title='Files'
-                  disabled={this.state.expanded}/>  
-                <IconWithPopper
-                  to={'/app/applications'}
-                  iconName='switchAppsIcon'
-                  title='Applications'
-                  disabled={this.state.expanded}/>
-                <IconWithPopper
-                  to={'/app/contacts'}
-                  iconName='peopleIcon'
-                  title='Contacts'
-                  disabled={this.state.expanded}/>  
-                <IconWithPopper
-                  to={'/app/search'}
-                  iconName='searchIcon'
-                  title='Search devices, fleets or other item'
-                  disabled={this.state.expanded}/>  
-              </section>
-              <section className="splitview-wrapped-navbar-wrapped-bottom__section">
-                <IconWithPopper
-                  to={'/app/settings'}
-                  iconName='settingsIcon'
-                  title='Setting of Flyve MDM'
-                  disabled={this.state.expanded}/>  
-                <IconWithPopper
-                  to={'/app/about'}
-                  iconName='contactInfoIcon'
-                  title='About of Flyve MDM'
-                  disabled={this.state.expanded}/>  
-              </section>
-            </div>
+                    disabled={expanded}
+                  />
+                  <IconWithPopper
+                    to={'/app/devices'}
+                    iconName='deviceIcon'
+                    title='Device'
+                    disabled={expanded}/>
+                  <IconWithPopper
+                    to={'/app/invitations'}
+                    iconName='emailIcon'
+                    title='Invitations'
+                    disabled={expanded}/>
+                  <IconWithPopper
+                    to={'/app/fleets'}
+                    iconName='goToStartIcon'
+                    title='Fleets'
+                    disabled={expanded}/>                
+                  <IconWithPopper
+                    to={'/app/files'}
+                    iconName='filesIcon'
+                    title='Files'
+                    disabled={expanded}/>  
+                  <IconWithPopper
+                    to={'/app/applications'}
+                    iconName='switchAppsIcon'
+                    title='Applications'
+                    disabled={expanded}/>
+                  <IconWithPopper
+                    to={'/app/contacts'}
+                    iconName='peopleIcon'
+                    title='Contacts'
+                    disabled={expanded}/>  
+                  <IconWithPopper
+                    to={'/app/search'}
+                    iconName='searchIcon'
+                    title='Search devices, fleets or other item'
+                    disabled={expanded}/>  
+                </section>
+                <section className="splitview-wrapped-navbar-wrapped-bottom__section">
+                  <IconWithPopper
+                    to={'/app/settings'}
+                    iconName='settingsIcon'
+                    title='Setting of Flyve MDM'
+                    disabled={expanded}/>  
+                  <IconWithPopper
+                    to={'/app/about'}
+                    iconName='contactInfoIcon'
+                    title='About of Flyve MDM'
+                    disabled={expanded}/>  
+                </section>
+              </div>
+            </ScrollSyncPane>
           </nav>
-          
-          { this.state.expanded && (
-          <nav className="splitview-wrapped__navbar" onClick={this.handleContract}>
-            <div className={`splitview-wrapper-wrapper__div --large --end --opening ${
-                this.state.contract && '--closing'
-              }`}>
-              <section className="splitview-wrapped-navbar-wrapped-top__section --description">
-                <SpanWithPopper description='Dashboard' />
-                <SpanWithPopper description='Devices' />
-                <SpanWithPopper description='Invitations' />
-                <SpanWithPopper description='Fleets' />
-                <SpanWithPopper description='Files' />
-                <SpanWithPopper description='Applications' />
-                <SpanWithPopper description='Contact' />
-                <SpanWithPopper description='Search' />
-              </section>
-              <section className="splitview-wrapped-navbar-wrapped-bottom__section --description">
-                <SpanWithPopper description='Setting of Flyve MDM ' />
-                <SpanWithPopper description='About of Flyve MDM' />
-              </section>
-            </div>
+          { expanded && (
+          <nav className="splitview-wrapped__navbar" onClick={handleContract}>
+            <ScrollSyncPane>
+              <div className={`splitview-wrapper-wrapper__div --large --end --opening ${
+                  contract && '--closing'
+                }`}>
+                <section className="splitview-wrapped-navbar-wrapped-top__section --description">
+                  <SpanWithPopper description='Dashboard' />
+                  <SpanWithPopper description='Devices' />
+                  <SpanWithPopper description='Invitations' />
+                  <SpanWithPopper description='Fleets' />
+                  <SpanWithPopper description='Files' />
+                  <SpanWithPopper description='Applications' />
+                  <SpanWithPopper description='Contact' />
+                  <SpanWithPopper description='Search' />
+                </section>
+                <section className="splitview-wrapped-navbar-wrapped-bottom__section --description">
+                  <SpanWithPopper description='Setting of Flyve MDM ' />
+                  <SpanWithPopper description='About of Flyve MDM' />
+                </section>
+              </div>
+            </ScrollSyncPane>
           </nav>
           )}
-
         </div>
       </div>
-    )
-  }
+    </ScrollSync>
+  )
 }
   
-export default SplitView;
+export default splitView;

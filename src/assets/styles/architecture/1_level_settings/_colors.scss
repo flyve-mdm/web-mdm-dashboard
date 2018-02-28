@@ -1,22 +1,28 @@
-// Global Colors Palette
-$app-color:  #158784;
-$white-color: #FFFFFF;
-$border-ligth-color: #D3D3D3;
-$text-detail-color: grey;
-$hover-dropdown-color: rgba(0,0,0,.1);
-$alert-color: #dd0000;
-
 // Theme Colors
 
 $color-1-primary:  #158784;
-$color-2-primary:  #95a695;
+$color-2-primary:  #f2f2f2;
 
 $color-1-secondary:  #ffffff;
 $color-2-secondary:  #507675;
 
-// Toast
+$font-color-primary: black;
+
+// Color of signal
 
 $alert: #9e0000;
 $warning: #dd2100;
 $success: #158784;
 $info: #00BCD4;
+
+// Colors to delete
+
+$text-detail-color: darken($color-2-primary, 5);
+$border-ligth-color: lighten($color-2-primary, 5);
+$app-color: $color-1-primary;
+$white-color: $color-2-primary;
+
+// Colors Split View
+
+$splitview-color-fonts: lighten($font-color-primary, 28);
+$splitview-color-fonts-hover: $font-color-primary;
