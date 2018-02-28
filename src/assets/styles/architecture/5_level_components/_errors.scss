@@ -1,5 +1,5 @@
 .error-message {
-    color: $alert-color;
+    color: $alert;
 
     ul {
         list-style: none;
@@ -8,5 +8,5 @@
     }
 }
 .error-input, .error-input:focus {
-    border-color: $alert-color !important;
+    border-color: $alert !important;
 }

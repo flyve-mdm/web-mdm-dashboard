@@ -1,6 +1,8 @@
 $width-desktop: 20vw;
 $width-tablet-small: (640px / 2.5);
 $width-phablet: (560px / 2.5);
+$color-fonts: $splitview-color-fonts;
+$color-fonts-hover: $splitview-color-fonts-hover;
 
 @include keyframes(expanding-splitview-desktop) {
   0% { width: 0; }
@@ -39,7 +41,7 @@ $width-phablet: (560px / 2.5);
   width: 304px;
 
   .splitview-wrapper__div {
-    height: 100vh;
+    height: $splitview-height;
     transition: height 0.25s ease-in-out;
     -webkit-transition: height 0.25s ease-in-out;
     display: -webkit-box;
@@ -72,7 +74,7 @@ $width-phablet: (560px / 2.5);
         -webkit-box-align: center;
         -ms-flex-align: center;
         -webkit-align-items: center;
-        background-color: $app-color;
+        background-color: $color-2-primary;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         display: -webkit-box;
@@ -86,7 +88,8 @@ $width-phablet: (560px / 2.5);
         -ms-flex-direction: column;
         -webkit-flex-direction: column;
         padding: 16px 0 16px;
-        width: 64px;
+        overflow: auto;
+        width: $splitview-width;
 
         &.--large {
           width: 20vw;
@@ -160,19 +163,19 @@ $width-phablet: (560px / 2.5);
             
             > a {
               cursor: pointer;            
-              font-size: 22px;
-              color: $border-ligth-color;
+              font-size: $splitview-icon-size;
+              color: $color-fonts;
   
               @extend %normalize-anchor;
               
               @include transition(all, .2s, ease);
               
               &:hover {
-                color: $white-color;
+                color: $color-fonts-hover;
               }
   
               &:active {
-                text-shadow: 2px 1px 2px #264b4d;
+                text-shadow: 1px 1px 1px darken($color-2-primary, 30);
               }
   
               > img {
@@ -191,7 +194,7 @@ $width-phablet: (560px / 2.5);
 
               span {
                 cursor: pointer;           
-                color: black;
+                color: $color-fonts;
                 white-space: nowrap;
                 overflow: hidden;
 
@@ -200,11 +203,7 @@ $width-phablet: (560px / 2.5);
                 @include animation('fade-in 1s');
 
                 &:hover {
-                  color: $white-color;
-                }
-    
-                &:active {
-                  text-shadow: 2px 1px 2px #264b4d;
+                  color: $color-fonts-hover;
                 }
               }
             }

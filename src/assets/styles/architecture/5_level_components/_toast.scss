@@ -38,7 +38,7 @@
 
         .toast-body,
         .toast-title {
-            color: $text-detail-color
+            color: darken($color-2-primary, 5)
         }
     }
 
@@ -47,7 +47,7 @@
 
         .toast-body,
         .toast-title {
-            color: $text-detail-color
+            color: darken($color-2-primary, 5)
         }
     }
 
