@@ -23,11 +23,19 @@ class Map extends Component {
     addMarkers = () => {
         this.state.markerGroup.clearLayers()
         for (let index = 0; index < this.props.markers.length; index++) {
-            L.marker(this.props.markers[index].position).addTo(this.state.markerGroup)
+            L.marker(
+                this.props.markers[index]['PluginFlyvemdmGeolocation.latitude'], 
+                this.props.markers[index]['PluginFlyvemdmGeolocation.longitude']
+            ).addTo(this.state.markerGroup)
         }
         if (this.props.markers[0]) {
             this.state.map.setZoom(10)
-            this.state.map.panTo(new L.LatLng(this.props.markers[this.props.markers.length - 1].position[0], this.props.markers[0].position[1]))
+            this.state.map.panTo(
+                new L.LatLng(
+                    this.props.markers[this.props.markers.length - 1]['PluginFlyvemdmGeolocation.latitude'], 
+                    this.props.markers[this.props.markers.length - 1]['PluginFlyvemdmGeolocation.longitude']
+                )
+            )
         }
     }
 
