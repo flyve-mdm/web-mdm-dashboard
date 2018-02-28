@@ -15,14 +15,14 @@ class Map extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            map: undefined
+            map: undefined,
+            markerGroup: undefined
         }
     }
 
     addMarkers = () => {
         for (let index = 0; index < this.props.markers.length; index++) {
-            let marker = L.marker(this.props.markers[index].position).addTo(this.state.map)
-            marker.bindPopup(this.props.markers[index].message)
+            L.marker(this.props.markers[index].position).addTo(this.state.markerGroup)
         }
     }
 
@@ -37,7 +37,10 @@ class Map extends Component {
                 attributionControl: true,
                 preferCanvas: true,
             })
-            this.setState({ map }, () => this.addMarkers())
+            this.setState({ 
+                map, 
+                markerGroup: L.layerGroup().addTo(map)
+            }, () => this.addMarkers())
         }, 500)
     }
 
