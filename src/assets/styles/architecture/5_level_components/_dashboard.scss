@@ -1,6 +1,7 @@
+$box-size: 150px;
+$chart-size: 310px;
+
 .dashboard {
-    $box-size: 150px;
-    $chart-size: 310px;
     height: 100%;
 
     .wrapper {
@@ -11,6 +12,7 @@
             display: grid;
             grid-template-columns: repeat(6, $box-size);
             grid-gap: 10px;
+
             @media only screen and (max-width: 1036px) {
                 grid-template-columns: repeat(3, $box-size);
             }

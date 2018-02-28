@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import SplitView from "../../components/SplitView"
-import HeaderAdminDashboard from '../../components/HeaderAdminDashboard';
+import HeaderAdminDashboard from '../../components/HeaderAdminDashboard'
+
+// TODO: Passing Routes to props for generate NavLink in SplitView component
 
 const withAdminDashboardLayout = WrappedComponent=> {
   class AdminDashboardLayout extends Component {
@@ -44,14 +46,16 @@ const withAdminDashboardLayout = WrappedComponent=> {
           <HeaderAdminDashboard
             handleToggleExpand={this.handleToggleExpand}
           />
-          <SplitView
-            expanded={this.state.expanded}
-            contract={this.state.contract}
-            handleExpand={this.handleExpand}
-            handleContract={this.handleContract}
-            handleSetTimeOut={this.handleSetTimeOut}
-          />
-          <WrappedComponent {...this.props} />
+          <main style={{display: 'inline-flex'}}>
+            <SplitView
+              expanded={this.state.expanded}
+              contract={this.state.contract}
+              handleExpand={this.handleExpand}
+              handleContract={this.handleContract}
+              handleSetTimeOut={this.handleSetTimeOut}
+            />
+            <WrappedComponent {...this.props} />
+          </main>
         </React.Fragment>
       )
     }

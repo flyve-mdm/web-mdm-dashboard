@@ -4,6 +4,8 @@ import ImgWithPopper from './imgWithPopper';
 import SpanWithPopper from './spanWithAnchor';
 import { ScrollSync, ScrollSyncPane } from '../ScrollSync';
 
+import 'react-tippy/dist/tippy.css'
+
 // TODO: Pass routes as props
 // TODO: Create manual redirect for the description of SplitView (history.push('/example')) 
 

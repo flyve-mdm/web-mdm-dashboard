@@ -38,8 +38,6 @@ $color-fonts-hover: $splitview-color-fonts-hover;
 .splitview-block {
   @include animation('fade-in .5s');
 
-  width: 304px;
-
   .splitview-wrapper__div {
     height: $splitview-height;
     transition: height 0.25s ease-in-out;
@@ -54,10 +52,8 @@ $color-fonts-hover: $splitview-color-fonts-hover;
     -webkit-box-orient: horizontal;
     -ms-flex-direction: row;
     -webkit-flex-direction: row;
-    position: fixed;
     left: 0;
     width: inherit;
-    z-index: 300;
 
     .splitview-wrapped__navbar {
       display: -webkit-box;
@@ -88,7 +84,8 @@ $color-fonts-hover: $splitview-color-fonts-hover;
         -ms-flex-direction: column;
         -webkit-flex-direction: column;
         padding: 16px 0 16px;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
         width: $splitview-width;
 
         &.--large {
@@ -134,7 +131,7 @@ $color-fonts-hover: $splitview-color-fonts-hover;
           align-items: end;
           -webkit-box-align: end;
           -ms-flex-align: end;
-          -webkit-align-items: end;
+          -webkit-align-items: left;
         }
 
         .splitview-wrapped-navbar-wrapped-top__section {

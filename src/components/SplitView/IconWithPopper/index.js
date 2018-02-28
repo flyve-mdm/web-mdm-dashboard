@@ -1,23 +1,12 @@
 import React from 'react'
-import { Tooltip } from 'react-tippy'
-import { NavLink } from 'react-router-dom';
-
-import 'react-tippy/dist/tippy.css'
+import { NavLink } from 'react-router-dom'
 
 const iconWithPopper = ({to, iconName, title, disabled}) => (
-  <Tooltip
-    className='popper'
-    disabled={disabled}
-    title={title}
-    position="right"
-    trigger="mouseenter"
-    style={{
-      display: 'auto'
-    }}>
+  <div>
     <NavLink to={to} activeClassName="selected">
       <span className={iconName}/>
     </NavLink>
-  </Tooltip>
+  </div>
 )
  
 export default iconWithPopper;
