@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import withAdminDashboardLayout from '../../hoc/withAdminDashboardLayout'
-import { Switch, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import routes from './routes'
-import Dashboard from '../../containers/HomeDashboard'
 import ContentPane from '../../components/ContentPane'
 
 class AdminDashboard extends Component {
