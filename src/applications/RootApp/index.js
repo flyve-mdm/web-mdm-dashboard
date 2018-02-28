@@ -4,36 +4,27 @@ import { Route } from 'react-router'
 
 import PrivateRoute from '../../components/PrivateRoute'
 
-// Home Page '/'
-import SignIn from '../../containers/SignIn'
-
-// HOC's
 import withI18NTranslation from '../../hoc/withI18NTranslation'
 import withToastNotification from '../../hoc/withToastNotification'
-
-// Async Components
-import asyncSignUp from '../../async/asyncSignUp'
-import asyncLogout from '../../async/asyncLogout'
-import asyncAdminDashboard from '../../async/asyncAdminDashboard'
-import asyncValidateAccount from '../../async/asyncValidateAccount'
-import asyncForgotPassword from '../../async/asyncForgotPassword'
-
+import routes from './routes'
 
 /**
  * Main Component in the React Tree
  * This Render each route of the containers or / and components like 404
+ * TODO: Use PrivateRoute if the `private attribute of route is true
  */
 class RootApp extends Component {
   render () {
     return (
       <Switch>
-        <Route exact path='/' component={SignIn} /> 
-        <Route exact path='/signUp' component={asyncSignUp} />
-        <Route exact path='/validateAccount' component={asyncValidateAccount} />
-        <Route exact path='/forgotPassword' component={asyncForgotPassword} />
-        <Route exact path='/app' component={asyncAdminDashboard} />
-        {/*<PrivateRoute exact path="/app" component={asyncAdminDashboard} />*/}
-        {/*<PrivateRoute exact path="/logout" component={asyncLogout} />*/}
+        {routes.map(({exact, path, component}, i) => (
+          <Route 
+            exact={exact}
+            path={path}
+            component={component}
+            key={i} />
+        ))}
+        {/* 404 Page Component */}
         <Route render={() => <h1 style={{textAlign: 'center'}}>Not Found</h1>} />
       </Switch>    
     )
