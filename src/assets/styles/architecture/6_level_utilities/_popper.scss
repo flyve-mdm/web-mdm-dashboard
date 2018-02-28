@@ -1,0 +1,12 @@
+.tippy-popper {
+  .tippy-tooltip[data-animatefill] {
+    background: lighten($app-color, 15);
+    padding: 4px 10px;
+    
+    @extend %box-shadow;
+    
+    > .enter {
+      background: lighten($app-color, 2);
+    }
+  }
+}

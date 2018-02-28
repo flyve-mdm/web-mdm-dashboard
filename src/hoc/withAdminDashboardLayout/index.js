@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { Component } from 'react'
 import SplitView from "../../components/SplitView"
 import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
@@ -63,22 +62,6 @@ const withAdminDashboardLayout = WrappedComponent=> {
   }
 
   return AdminDashboardLayout
-=======
-import React from 'react';
-import SplitView from "../../components/SplitView"
-
-const withAdminDashboardLayout = WrappedComponent=> {
-  const adminDashboardLayout = props => {
-      return (
-        <React.Fragment>
-          <SplitView/>
-          <WrappedComponent {...props} />
-        </React.Fragment>
-      )
-  }
-
-  return adminDashboardLayout
->>>>>>> 12e15418... feat(reat-architecture): add splitview components without winjs
 }
 
 export default withAdminDashboardLayout;
