@@ -25,6 +25,10 @@ class Map extends Component {
         for (let index = 0; index < this.props.markers.length; index++) {
             L.marker(this.props.markers[index].position).addTo(this.state.markerGroup)
         }
+        if (this.props.markers[0]) {
+            this.state.map.setZoom(10)
+            this.state.map.panTo(new L.LatLng(this.props.markers[this.props.markers.length - 1].position[0], this.props.markers[0].position[1]))
+        }
     }
 
     componentDidMount () {
