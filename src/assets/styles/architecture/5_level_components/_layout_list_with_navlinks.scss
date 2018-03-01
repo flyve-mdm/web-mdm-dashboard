@@ -1,0 +1,51 @@
+$nav-width: 35%;
+$article-width: 75%;
+$anchor-background-color: $color-2-secondary;
+
+.layout_list_with_navlinks-block {
+  display: flex;
+
+  > nav {
+    width: $nav-width;
+
+    @include animation('enter-content 1s');
+
+    > ul {
+      @extend %normalize-list;
+
+      > li {
+        > a {
+          display: block;
+          padding-left: 11px;
+          padding-bottom: 20px;
+          padding-top: 20px;
+          
+          @extend %normalize-anchor;
+
+          @include transition(all, .2s, ease);
+
+          &:hover {
+            background-color: lighten($anchor-background-color, 45) 
+          }
+
+          &.--active {
+            background-color: lighten($anchor-background-color, 25) 
+          }
+        }
+      }
+    }
+  }
+
+  > article {
+    width: $article-width;
+    padding: 0 0 0 20px;
+
+    > div {
+      @include animation('fade-in .2s');
+
+      > .title {
+        margin: 0
+      }
+    }
+  }
+}
