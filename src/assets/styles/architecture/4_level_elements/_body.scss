@@ -1,0 +1,8 @@
+body {
+    ::selection {
+        background: $app-color;
+    }
+    ::-moz-selection {
+        background: $app-color;
+    }
+}
