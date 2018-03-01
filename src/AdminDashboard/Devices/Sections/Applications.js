@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import IconItemList from '../../IconItemList'
-import BytesToSize from '../../../Utils/BytesToSize'
 import EmptyMessage from '../../../Utils/EmptyMessage'
 import ContentPane from '../../../Utils/ContentPane'
 import Loader from '../../../Utils/Loader'
@@ -61,49 +59,21 @@ class Applications extends Component {
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
+
+        const styles = {
+            boxSizing: 'border-box',
+            padding: '15px',
+            width: '25%',
+            float: 'left'
+        }
+
         return (
-            <div className="list-content">
-                <div className="list-col">
-                    <IconItemList
-                        size={60}
-                        image={"data:image/png;base64, " + ItemList.data["PluginFlyvemdmPackage.icon"]}
-                        type="base64"
-                        backgroundColor="transparent"
-                    />
-                </div>
-                <div className="list-col">
-                    <div className="aplication">
-                        ID: &nbsp;
-                        <div className="aplication-detail">
-                            {ItemList.data['id']}
-                        </div>
-                    </div>
-                    <div className="aplication">
-                        Name: &nbsp;
-                        <div className="aplication-detail">
-                            {ItemList.data['name']}
-                        </div>
-                    </div>
-                    <div className="aplication">
-                        Alias: &nbsp;
-                        <div className="aplication-detail">
-                            {ItemList.data['alias']}
-                        </div>
-                    </div>
-                    <div className="aplication">
-                        Version: &nbsp;
-                        <div className="aplication-detail">
-                            {ItemList.data['version']}
-                        </div>
-                    </div>
-                    <div className="aplication">
-                        Filesize: &nbsp;
-                        <div className="aplication-detail">
-                            {BytesToSize(ItemList.data['filesize'])}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <React.Fragment>
+                <div style={styles}>{ItemList.data['id']}</div>
+                <div style={styles}>{ItemList.data['name']}</div>
+                <div style={styles}>{ItemList.data['version']}</div>
+                <div style={styles}>N/A</div>
+            </React.Fragment>
         )
     })
 
