@@ -6,6 +6,22 @@
   justify-content: space-between;
   height: $header-height;
 
+  &.--breadcrumb-mode {
+    background: transparent;
+    margin-top: 10px;
+    height: ($header-height - 20 );
+
+    .header-breadcrumb__div {
+      padding-left: 10px;
+
+      span {
+        color: black;
+        font-size: 22;
+        margin-right: 10px
+      }
+    }
+  }
+
   .header-content-left__nav {
     @include animation('fade-in 2s');
     
@@ -17,7 +33,7 @@
       width: 70%;
     }
 
-    > div:first-child {
+    > div:first-child:not(.header-breadcrumb__div) {
       text-align: center;
       width: $splitview-width;
       
@@ -39,7 +55,7 @@
       }
     }
   
-    > div:last-child {
+    > div:last-child:not(.header-breadcrumb__div) {
       text-align: center;
       min-width: 150px;
 
@@ -102,6 +118,13 @@
         cursor: pointer;
         width: 40px;
         max-width: 100%
+      }
+    }
+
+    &.--breadcrumb-mode {
+      > div {
+        text-align: right;
+        padding-top: 10px;
       }
     }
   }

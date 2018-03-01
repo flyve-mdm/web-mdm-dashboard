@@ -1,8 +1,8 @@
-import React from 'react';
-import IconWithPopper from './IconWithPopper';
-import ImgWithPopper from './imgWithPopper';
-import SpanWithPopper from './spanWithAnchor';
-import { ScrollSync, ScrollSyncPane } from '../ScrollSync';
+import React from 'react'
+import IconWithPopper from './IconWithPopper'
+import ImgWithPopper from './imgWithPopper'
+import SpanWithPopper from './spanWithAnchor'
+import { ScrollSync, ScrollSyncPane } from '../ScrollSync'
 
 // TODO: Pass routes as props
 // TODO: Create manual redirect for the description of SplitView (history.push('/example')) 
@@ -26,15 +26,6 @@ const splitView = ({
             <ScrollSyncPane>
               <div className="splitview-wrapper-wrapper__div">
                 <section className="splitview-wrapped-navbar-wrapped-top__section">
-                  {
-                    /*
-                    <IconWithPopper
-                      to={'/app'}
-                      iconName='homeIcon'
-                      title='Dashboard'
-                      disabled={expanded}/>
-                    */
-                  }
                   <ImgWithPopper
                     to={'/app'}
                     alt='Flyve MDM Dashboard'
@@ -88,7 +79,12 @@ const splitView = ({
                     to={'/app/about'}
                     iconName='contactInfoIcon'
                     title='About of Flyve MDM'
-                    disabled={expanded}/>  
+                    disabled={expanded}/> 
+                  <IconWithPopper
+                    click={() => 0}
+                    iconName='PowerButtonIcon'
+                    title='Logout'
+                    disabled={expanded}/> 
                 </section>
               </div>
             </ScrollSyncPane>
@@ -112,6 +108,7 @@ const splitView = ({
                 <section className="splitview-wrapped-navbar-wrapped-bottom__section --description">
                   <SpanWithPopper description='Setting of Flyve MDM ' />
                   <SpanWithPopper description='About of Flyve MDM' />
+                  <SpanWithPopper description='Logout' />
                 </section>
               </div>
             </ScrollSyncPane>

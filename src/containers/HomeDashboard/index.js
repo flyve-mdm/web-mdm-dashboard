@@ -12,49 +12,47 @@ class Dashboard extends Component {
       <React.Fragment>
         <div className="dashboard-block">
 
-            <Title text={I18n.t('commons.dashboard')} />
-
             <div className="dashboard-wrapper__div">
 
                 <div className="dashboard-infobox-wraper__div">
 
                     <InfoBox
-                      to='/devices'
+                      to='app/devices'
                       count={1}
                       name={I18n.t('commons.devices')}
                       icon="deviceIcon"
                     />
 
                     <InfoBox
-                      to='/invitations'
+                      to='app/invitations'
                       count={1}
                       name={I18n.t('commons.invitations')}
                       icon="emailIcon"
                     />
 
                     <InfoBox
-                      to='/fleets'
+                      to='app/fleets'
                       count={1}
                       name={I18n.t('commons.fleets')}
                       icon="goToStartIcon"
                     />
 
                     <InfoBox
-                      to='/files'
+                      to='app/files'
                       count={1}
                       name={I18n.t('commons.files')}
                       icon="filesIcon"
                     />
 
                     <InfoBox
-                      to='/applications'
+                      to='app/applications'
                       count={1}
                       name={I18n.t('commons.applications')}
                       icon="switchAppsIcon"
                     />
 
                     <InfoBox
-                      to='/users'
+                      to='app/users'
                       count={1}
                       name={I18n.t('commons.users')}
                       icon="peopleIcon"
