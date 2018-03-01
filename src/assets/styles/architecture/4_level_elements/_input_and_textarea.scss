@@ -1,0 +1,7 @@
+input, textarea {
+    &:focus {
+        border-color: $color-1-primary !important;
+    } 
+}
+
+
