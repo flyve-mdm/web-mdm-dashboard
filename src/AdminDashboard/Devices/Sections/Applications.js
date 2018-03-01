@@ -17,6 +17,15 @@ class Applications extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (this.props.selectedItemList !== prevProps.selectedItemList) {
+            this.setState({
+                itemList: new WinJS.Binding.List([])
+            })
+            this.handleRefresh()
+        }
+    }
+
     componentDidMount() {
         this.handleRefresh()
     }
