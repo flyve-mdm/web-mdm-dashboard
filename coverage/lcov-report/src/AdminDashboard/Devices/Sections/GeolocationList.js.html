@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/Utils/Forms/Schemes/agentScheme.js</title>
+    <title>Code coverage report for src/AdminDashboard/Devices/Sections/GeolocationList.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../../../index.html">All files</a> / <a href="index.html">src/Utils/Forms/Schemes</a> agentScheme.js
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/AdminDashboard/Devices/Sections</a> GeolocationList.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
+        <span class='fraction'>0/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
         <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
-        <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
-      </div>
-      <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/9</span>
       </div>
     </div>
   </div>
@@ -76,30 +76,21 @@
 31
 32
 33
-34</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+34
+35</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -109,40 +100,52 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export default function ({state, changeState, glpi}) {
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import React, { Component } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 &nbsp;
-    const mainInformation = <span class="cstat-no" title="statement not covered" >[</span>
-        [
-            {
-                label: "Device name",
-                type: "text",
-                name: "name",
-                value: state.name,
-                placeholder: "Device name",
-                function: changeState,
-                disabled: false,
-                style: null
-            },
-        ],
-        [
-            {
-                label: "Fleet name",
-                type: "select",
-                name: "fleet",
-                value: state.fleet.value,
-                options: [],
-                function: changeState,
-                request: state.fleet.request,
-                glpi
-            }
-        ]
-    ]
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    return {</span>
-        mainInformation
+class GeolocationList extends Component {
+<span class="fstat-no" title="function not covered" >    render() </span>{
+        let renderList
+<span class="cstat-no" title="statement not covered" >        if (this.props.locations.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            renderList = this.props.locations.map(<span class="fstat-no" title="function not covered" >(l</span>ocation, index) =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >                &lt;div key={`location-${index}`}&gt;</span>
+                    &lt;input 
+                        type="checkbox" 
+                        className="win-checkbox" 
+                        style={{width: 'auto'}} 
+                        onChange={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.showLocations(location)} </span>
+                    /&gt; 
+                    &lt;label&gt;{ location['PluginFlyvemdmGeolocation.date'] }&lt;/label&gt;
+                &lt;/div&gt;
+            ))
+        } else {
+<span class="cstat-no" title="statement not covered" >            renderList = (</span>
+                &lt;p style={{ color: 'grey', marginLeft: 5 }}&gt; 
+                    No locations available
+                &lt;/p&gt;
+            )
+        }
+<span class="cstat-no" title="statement not covered" >        return renderList</span>
     }
 }
-&nbsp;</pre></td></tr>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >GeolocationList.propTypes = {</span>
+    locations: PropTypes.array.isRequired,
+    showLocations: PropTypes.func.isRequired
+}
+&nbsp;
+export default GeolocationList</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->

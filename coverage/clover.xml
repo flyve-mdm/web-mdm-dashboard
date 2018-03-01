@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1519927867596" clover="3.2.0">
-  <project timestamp="1519927867596" name="All files">
-    <metrics statements="3491" coveredstatements="4" conditionals="1281" coveredconditionals="0" methods="887" coveredmethods="0" elements="5659" coveredelements="4" complexity="0" loc="3491" ncloc="3491" packages="27" files="160" classes="160">
+<coverage generated="1519937425601" clover="3.2.0">
+  <project timestamp="1519937425602" name="All files">
+    <metrics statements="3540" coveredstatements="4" conditionals="1293" coveredconditionals="0" methods="903" coveredmethods="0" elements="5736" coveredelements="4" complexity="0" loc="3540" ncloc="3540" packages="27" files="162" classes="162">
       <package name="src">
         <metrics statements="63" coveredstatements="0" conditionals="27" coveredconditionals="0" methods="18" coveredmethods="0"/>
         <file name="index.js" path="/home/circleci/repo/src/index.js">
@@ -1070,7 +1070,7 @@
           <line num="4" count="0" type="stmt"/>
           <line num="5" count="0" type="stmt"/>
           <line num="10" count="0" type="stmt"/>
-          <line num="65" count="0" type="stmt"/>
+          <line num="68" count="0" type="stmt"/>
         </file>
         <file name="DevicesEdit.js" path="/home/circleci/repo/src/AdminDashboard/Devices/DevicesEdit.js">
           <metrics statements="37" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="9" coveredmethods="0"/>
@@ -1353,7 +1353,7 @@
         </file>
       </package>
       <package name="src.AdminDashboard.Devices.Sections">
-        <metrics statements="162" coveredstatements="0" conditionals="54" coveredconditionals="0" methods="45" coveredmethods="0"/>
+        <metrics statements="188" coveredstatements="0" conditionals="62" coveredconditionals="0" methods="54" coveredmethods="0"/>
         <file name="Applications.js" path="/home/circleci/repo/src/AdminDashboard/Devices/Sections/Applications.js">
           <metrics statements="13" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -1409,19 +1409,48 @@
           <line num="118" count="0" type="stmt"/>
         </file>
         <file name="Geolocation.js" path="/home/circleci/repo/src/AdminDashboard/Devices/Sections/Geolocation.js">
-          <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+          <metrics statements="29" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="10" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="stmt"/>
           <line num="4" count="0" type="stmt"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="14" count="0" type="stmt"/>
-          <line num="15" count="0" type="stmt"/>
-          <line num="22" count="0" type="stmt"/>
+          <line num="5" count="0" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="9" count="0" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+          <line num="18" count="0" type="stmt"/>
+          <line num="22" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="23" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
+          <line num="28" count="0" type="stmt"/>
+          <line num="29" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
-          <line num="41" count="0" type="stmt"/>
+          <line num="35" count="0" type="stmt"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="42" count="0" type="stmt"/>
+          <line num="43" count="0" type="stmt"/>
+          <line num="48" count="0" type="stmt"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="54" count="0" type="stmt"/>
+          <line num="61" count="0" type="stmt"/>
+          <line num="62" count="0" type="stmt"/>
+          <line num="63" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="64" count="0" type="stmt"/>
+          <line num="66" count="0" type="stmt"/>
+          <line num="68" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
+          <line num="88" count="0" type="stmt"/>
+        </file>
+        <file name="GeolocationList.js" path="/home/circleci/repo/src/AdminDashboard/Devices/Sections/GeolocationList.js">
+          <metrics statements="9" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="9" count="0" type="stmt"/>
+          <line num="14" count="0" type="stmt"/>
+          <line num="20" count="0" type="stmt"/>
+          <line num="26" count="0" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
         </file>
         <file name="Inventory.js" path="/home/circleci/repo/src/AdminDashboard/Devices/Sections/Inventory.js">
           <metrics statements="28" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="9" coveredmethods="0"/>
@@ -3595,7 +3624,7 @@
         </file>
       </package>
       <package name="src.Utils">
-        <metrics statements="111" coveredstatements="0" conditionals="62" coveredconditionals="0" methods="23" coveredmethods="0"/>
+        <metrics statements="134" coveredstatements="0" conditionals="66" coveredconditionals="0" methods="30" coveredmethods="0"/>
         <file name="Animations.js" path="/home/circleci/repo/src/Utils/Animations.js">
           <metrics statements="5" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="0" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -3696,6 +3725,32 @@
           <line num="9" count="0" type="stmt"/>
           <line num="36" count="0" type="stmt"/>
           <line num="40" count="0" type="stmt"/>
+        </file>
+        <file name="Map.js" path="/home/circleci/repo/src/Utils/Map.js">
+          <metrics statements="23" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="stmt"/>
+          <line num="5" count="0" type="stmt"/>
+          <line num="7" count="0" type="stmt"/>
+          <line num="15" count="0" type="stmt"/>
+          <line num="16" count="0" type="stmt"/>
+          <line num="17" count="0" type="stmt"/>
+          <line num="24" count="0" type="stmt"/>
+          <line num="25" count="0" type="stmt"/>
+          <line num="26" count="0" type="stmt"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="32" count="0" type="stmt"/>
+          <line num="33" count="0" type="stmt"/>
+          <line num="43" count="0" type="stmt"/>
+          <line num="44" count="0" type="stmt"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="56" count="0" type="stmt"/>
+          <line num="61" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="62" count="0" type="stmt"/>
+          <line num="67" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="77" count="0" type="stmt"/>
         </file>
         <file name="NativeNotification.js" path="/home/circleci/repo/src/Utils/NativeNotification.js">
           <metrics statements="3" coveredstatements="0" conditionals="5" coveredconditionals="0" methods="1" coveredmethods="0"/>
