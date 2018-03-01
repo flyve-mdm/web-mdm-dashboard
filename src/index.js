@@ -1,53 +1,36 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { store, history } from './store'
-import { Route, Switch, Redirect } from 'react-router-dom'
-import { ConnectedRouter } from 'react-router-redux'
+import { BrowserRouter } from 'react-router-dom'
+import RootApp from './applications/RootApp'
 import registerServiceWorker from './registerServiceWorker'
-import AdminDashboard from './AdminDashboard'
-import { SingUp, SignIn, ValidateAccount, ForgotPassword } from './Login'
+import { Provider } from 'react-redux';
+import {
+    createStore,
+    applyMiddleware, 
+    compose
+} from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './store'
+import './assets/styles/main.scss' // Global CSS Styles
 
-/**
- * Assets
- */
-import './styles/App.scss'
-import './styles/ui-light.css'
-
-const auth = {
-    isAuthenticated: () => {
-        if (localStorage.getItem('sessionToken') && localStorage.getItem('sessionToken') !== undefined ) {
-            return true
-        } else {
-            return false
-        }
-    }
-}
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={props => (
-        auth.isAuthenticated() ? (
-            <Component {...props} />
-        ) : (
-                <Redirect to={{
-                    pathname: '/'
-                }} />
-            )
-    )} />
+ReactDOM.render(
+    (
+        <Provider store={
+            createStore(rootReducer, (
+                (DevTool) => { // Enable Redux DevTool if are available
+                    return (process.env.NODE_ENV === 'development' && typeof(DevTool) === 'function')
+                        ? DevTool
+                        : compose
+                    })(window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)(
+                applyMiddleware(thunk)
+            ))
+        }>
+            <BrowserRouter>
+                <RootApp />
+            </BrowserRouter>
+        </Provider>
+    ),
+    document.getElementById('root')
 )
 
-ReactDOM.render((
-    <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <Switch>
-                <Route exact path='/' component={SingUp} />
-                <PrivateRoute path="/app" component={AdminDashboard} />
-                <Route path='/signIn' component={SignIn} />
-                <Route path='/validateAccount' component={ValidateAccount} />
-                <Route path='/forgotPassword' component={ForgotPassword} />
-            </Switch>
-        </ConnectedRouter>
-    </Provider>), 
-    document.getElementById('app')
-)
 registerServiceWorker()

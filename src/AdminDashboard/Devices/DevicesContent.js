@@ -7,6 +7,7 @@ import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sec
 class DevicesContent extends Component {
 
     render() {
+        console.log(this.props.selectedItemList)
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true} >
                 <ReactWinJS.Pivot>
@@ -41,6 +42,9 @@ class DevicesContent extends Component {
                     <ReactWinJS.Pivot.Item key="geolocation" header="Geolocation">
                         <Geolocation 
                             itemListPaneWidth={this.props.itemListPaneWidth}
+                            selectedItemList={this.props.selectedItemList}
+                            showNotification={this.props.showNotification}
+                            glpi={this.props.glpi}
                         />
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="dangerZone" header="Danger Zone">
