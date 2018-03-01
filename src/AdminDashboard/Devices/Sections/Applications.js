@@ -87,14 +87,30 @@ class Applications extends Component {
             </ContentPane>
         )
 
+        const stylesHeader = {
+            boxSizing: 'border-box',
+            padding: '15px',
+            width: '25%',
+            float: 'left'
+        }
+
+        const headerComponent = (
+            <React.Fragment>
+                <div style={stylesHeader}>#</div>
+                <div style={stylesHeader}>Application ID</div>
+                <div style={stylesHeader}>Name version</div>
+                <div style={stylesHeader}>Category</div>
+            </React.Fragment>
+        )
+
         if (!this.state.isLoading && this.state.itemList.length > 0) {
             listComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                <ContentPane >
                     <div className="listPane" style={{ padding: 0 }}>
                         <ReactWinJS.ListView
                             ref={(listView) => { this.listView = listView }}
                             className="contentListView win-selectionstylefilled"
-                            style={{ height: 'calc(100% - 48px)' }}
+                            headerComponent={headerComponent}
                             itemDataSource={this.state.itemList.dataSource}
                             itemTemplate={this.ItemListRenderer}
                             layout={this.state.layout}
