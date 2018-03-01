@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1519937425601" clover="3.2.0">
-  <project timestamp="1519937425602" name="All files">
-    <metrics statements="3540" coveredstatements="4" conditionals="1293" coveredconditionals="0" methods="903" coveredmethods="0" elements="5736" coveredelements="4" complexity="0" loc="3540" ncloc="3540" packages="27" files="162" classes="162">
+<coverage generated="1519937755753" clover="3.2.0">
+  <project timestamp="1519937755753" name="All files">
+    <metrics statements="3566" coveredstatements="4" conditionals="1305" coveredconditionals="0" methods="907" coveredmethods="0" elements="5778" coveredelements="4" complexity="0" loc="3566" ncloc="3566" packages="27" files="162" classes="162">
       <package name="src">
         <metrics statements="63" coveredstatements="0" conditionals="27" coveredconditionals="0" methods="18" coveredmethods="0"/>
         <file name="index.js" path="/home/circleci/repo/src/index.js">
@@ -1070,7 +1070,7 @@
           <line num="4" count="0" type="stmt"/>
           <line num="5" count="0" type="stmt"/>
           <line num="10" count="0" type="stmt"/>
-          <line num="68" count="0" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
         </file>
         <file name="DevicesEdit.js" path="/home/circleci/repo/src/AdminDashboard/Devices/DevicesEdit.js">
           <metrics statements="37" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="9" coveredmethods="0"/>
@@ -1353,9 +1353,9 @@
         </file>
       </package>
       <package name="src.AdminDashboard.Devices.Sections">
-        <metrics statements="188" coveredstatements="0" conditionals="62" coveredconditionals="0" methods="54" coveredmethods="0"/>
+        <metrics statements="214" coveredstatements="0" conditionals="74" coveredconditionals="0" methods="58" coveredmethods="0"/>
         <file name="Applications.js" path="/home/circleci/repo/src/AdminDashboard/Devices/Sections/Applications.js">
-          <metrics statements="13" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+          <metrics statements="39" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="7" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="2" count="0" type="stmt"/>
           <line num="3" count="0" type="stmt"/>
@@ -1366,9 +1366,35 @@
           <line num="11" count="0" type="stmt"/>
           <line num="12" count="0" type="stmt"/>
           <line num="13" count="0" type="stmt"/>
-          <line num="20" count="0" type="stmt"/>
-          <line num="67" count="0" type="stmt"/>
-          <line num="85" count="0" type="stmt"/>
+          <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="22" count="0" type="stmt"/>
+          <line num="25" count="0" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="34" count="0" type="stmt"/>
+          <line num="35" count="0" type="stmt"/>
+          <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="40" count="0" type="stmt"/>
+          <line num="41" count="0" type="stmt"/>
+          <line num="42" count="0" type="stmt"/>
+          <line num="43" count="0" type="stmt"/>
+          <line num="44" count="0" type="stmt"/>
+          <line num="46" count="0" type="stmt"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="56" count="0" type="stmt"/>
+          <line num="62" count="0" type="stmt"/>
+          <line num="63" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
+          <line num="79" count="0" type="stmt"/>
+          <line num="92" count="0" type="stmt"/>
+          <line num="99" count="0" type="stmt"/>
+          <line num="107" count="0" type="stmt"/>
+          <line num="115" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="116" count="0" type="stmt"/>
+          <line num="120" count="0" type="stmt"/>
+          <line num="132" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="133" count="0" type="stmt"/>
+          <line num="138" count="0" type="stmt"/>
+          <line num="142" count="0" type="stmt"/>
         </file>
         <file name="DangerZone.js" path="/home/circleci/repo/src/AdminDashboard/Devices/Sections/DangerZone.js">
           <metrics statements="35" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="8" coveredmethods="0"/>
