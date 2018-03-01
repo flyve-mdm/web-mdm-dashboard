@@ -2,16 +2,18 @@
   cursor: pointer;
   border-style: solid;
   margin: 0px;
-  min-width: 80px;
+  min-height: 32px;
+  min-width: 120px;
   padding: 4px 8px;
   border-width: 2px;
   background-clip: border-box;
   border-radius: 0;
+  -ms-touch-action: manipulation;
   touch-action: manipulation;
   -webkit-appearance: none;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.333;
-  border: none;
 
   @include transition(background-color, .2s, ease);
   @include font-source(Segoe UI, 15px, #616264);
@@ -22,25 +24,23 @@
     color: white;
 
     &:hover {
-      border-color: $color-2-primary;
       background-color: lighten($color-1-primary, 5);
+      border-color: rgba(0, 0, 0, 0.4);
     }
   
     &:active,
     &.active {
       background-color: lighten($color-1-primary, 10);
-      border-color: lighten($color-2-primary, 10);
-      color: white;
     }
   }
 
   &.--secondary {
-    border: 1px solid $app-color;
+    border: 1px solid $border-ligth-color;
+    background-color: $color-1-secondary;    
 
     &:hover {
-      border-color: $color-1-secondary;
-      background-color: $color-2-secondary;
-      color: white;
+      background-color: lighten($color-1-secondary, 5);
+      border-color: rgba(0, 0, 0, 0.4);
     }
   
     &:active,
