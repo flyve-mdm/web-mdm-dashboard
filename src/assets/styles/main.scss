@@ -10,6 +10,7 @@
 @import './architecture/3_level_generic/normalize';
 
 @import './architecture/4_level_elements/body_font_size';
+@import './architecture/4_level_elements/main';
 
 // With Refactor
 @import './architecture/5_level_components/btn';
@@ -21,6 +22,7 @@
 @import './architecture/5_level_components/toast';
 @import './architecture/5_level_components/dashboard';
 @import './architecture/5_level_components/title';
+@import './architecture/5_level_components/layout_list_with_navlinks';
 
 // Without Refactor
 @import './architecture/5_level_components/devices';
@@ -33,8 +35,6 @@
 @import './architecture/5_level_components/loading';
 @import './architecture/5_level_components/search_engine';
 @import './architecture/5_level_components/settings';
-
 @import './architecture/5_level_components/users';
 
-@import './architecture/6_level_utilities/popper';
 @import './architecture/6_level_utilities/ui-light';

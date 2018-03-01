@@ -176,7 +176,7 @@ $color-fonts-hover: $splitview-color-fonts-hover;
               }
   
               > img {
-                border-bottom: 1px solid #ffffff42;
+                border-bottom: 1px solid $color-fonts;
                 padding-bottom: 8px;
               }
             }

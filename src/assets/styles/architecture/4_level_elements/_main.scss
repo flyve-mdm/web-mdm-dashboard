@@ -1,0 +1,10 @@
+main {
+  display: inline-flex;
+  width: 100%;
+
+  @include animation('fade-in 5s');
+
+  > div:nth-child(2) {
+    flex: 1 1 100%
+  }
+}

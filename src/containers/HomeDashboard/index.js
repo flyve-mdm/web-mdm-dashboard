@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import { VictoryPie } from 'victory'
 import { I18n } from 'react-i18nify'
 
-import InfoBox from '../../components/InfoBox';
-import Title from '../../components/Title';
+import InfoBox from '../../components/InfoBox'
 
 class Dashboard extends Component {
   render() {

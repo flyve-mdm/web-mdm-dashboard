@@ -26,7 +26,7 @@
     @include animation('fade-in 2s');
     
     display: flex;
-    width: 95vw;
+    width: 75%;
     align-items: center;
 
     @include mq($until: 'desktop-wide') {
@@ -71,7 +71,7 @@
     @include animation('fade-in 3s');
 
     display: flex;
-    min-width: 16vw;
+    min-width: 25%;
     align-items: center;
     padding-right: 2%;
 
