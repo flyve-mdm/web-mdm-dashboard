@@ -39,9 +39,7 @@ $chart-size: 310px;
 
                 @include transition(all .1s);
 
-                &:hover  {
-                    @extend %box-shadow;
-                }
+                @extend %box-shadow;
 
                 .title-box {
                     padding: 10px;
@@ -89,6 +87,8 @@ $chart-size: 310px;
                     bottom: 0;
                     left: 0;
                 }
+
+                @extend %box-shadow;
             }
         }
     }
