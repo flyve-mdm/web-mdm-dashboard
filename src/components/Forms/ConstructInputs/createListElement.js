@@ -57,7 +57,7 @@ const createListElement = ({icon, elements, index}) => {
                           disabled={element.disabled}
                           style={element.style}
                           delete={element.delete}                                
-                          key={email${element.index}}/>
+                          key={`email${element.index}`}/>
                       )
                   } else {
                       renderElement = (

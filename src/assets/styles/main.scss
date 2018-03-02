@@ -9,8 +9,10 @@
 @import './architecture/3_level_generic/animations';
 @import './architecture/3_level_generic/normalize';
 
-@import './architecture/4_level_elements/body_font_size';
+@import './architecture/4_level_elements/body';
+@import './architecture/4_level_elements/a';
 @import './architecture/4_level_elements/main';
+@import './architecture/4_level_elements/input_and_textarea';
 
 // With Refactor
 @import './architecture/5_level_components/btn';

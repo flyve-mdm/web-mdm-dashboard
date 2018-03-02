@@ -50,7 +50,7 @@ const withToastNotification = WrappedComponent => {
 
       if (this.state.show) {
         toast = (
-        <div className={toast --${this.props.type}}>
+        <div className={`toast --${this.props.type}`}>
             <span className="cancelIcon" style={{ float: 'right', cursor: 'pointer' }} onClick={()=> {
                 clearTimeout(this.state.timer)
                 this.hideNotification()
