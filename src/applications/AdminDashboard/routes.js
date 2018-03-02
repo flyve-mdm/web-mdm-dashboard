@@ -6,6 +6,7 @@ import Applications from '../../containers/Applications'
 import Users from '../../containers/Users'
 import About from '../../containers/About'
 import Settings from '../../containers/Settings'
+import Devices from '../../containers/Devices'
 
 const routes = [
   {
@@ -51,9 +52,15 @@ const routes = [
     exact: false
   },
   {
-    path: '/settings',
+    path: '/Settings',
     name: 'Settings',
     component: Settings,
+    exact: false
+  },
+  {
+    path: '/Devices',
+    name: 'Devices',
+    component: Devices,
     exact: false
   }
 ]
