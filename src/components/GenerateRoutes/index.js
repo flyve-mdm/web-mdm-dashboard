@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React from 'react'
+import { Route } from 'react-router-dom'
 
 // TODO: Enable PrivateRoute if route if private
 
@@ -26,4 +26,4 @@ const generateRoutes = ({routes, rootPath, withNotFound}) => {
   return r
 }
 
-export default generateRoutes;
+export default generateRoutes
