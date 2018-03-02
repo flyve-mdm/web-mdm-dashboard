@@ -1,6 +1,7 @@
 import React from 'react'
 import { Translate } from 'react-i18nify'
-import Title from '../../../components/Title'
+
+import Title from '../../../../components/Title'
 
 const Overview = () => {
   return (

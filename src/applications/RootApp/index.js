@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Switch } from 'react-router-dom'
-import { Route } from 'react-router'
 
 // TODO: import PrivateRoute from '../../components/PrivateRoute'
 
@@ -18,8 +17,7 @@ class RootApp extends Component {
   render () {
     return (
       <Switch>
-        <GenerateRoutes routes={routes} />
-        <Route render={() => <h1 style={{textAlign: 'center'}}>Not Found</h1>} />
+        <GenerateRoutes routes={routes} withNotFound />
       </Switch>    
     )
   }

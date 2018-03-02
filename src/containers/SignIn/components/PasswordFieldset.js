@@ -3,16 +3,11 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { I18n } from 'react-i18nify';
 
-import Loading from '../../../components/Loading'
-
 class PasswordFieldset extends Component {
-    
     constructor (props) {
         super(props)
         this.state = {
-            classInput: 'win-textbox',
-            errorMessage: '',
-            isLoading: false
+            errorMessage: '' // TODO: Set errors
         }
     }
 
@@ -23,56 +18,44 @@ class PasswordFieldset extends Component {
     }
 
     render () { 
-        let renderComponent
-        if (this.state.isLoading) {
-            renderComponent = (
-                <div style={{margin: 50}}>
-                    <Loading message="Loading..." />
-                </div>
-            )
-
-        } else {
-            renderComponent = (
-                <div className="authentication-password__div">
-                    <h2 className="win-h2">Enter password</h2>
-                    <p>
-                        { I18n.t('login.enter_the_password_for') }
+        return (
+            <div className="authentication-password__div">
+                <h2 className="win-h2">Enter password</h2>
+                <p>
+                    { I18n.t('login.enter_the_password_for') }
+                <br />
+                    {this.props.username}
                     <br />
-                        {this.props.username}
-                        <br />
-                        {this.state.errorMessage}
-                    </p>
-                    <form onSubmit={this.props.handleOnSubmit}>
-                        <input
-                            type="password"
-                            name="password"
-                            ref={(input) => { this.passwordInput = input; }}
-                            className={this.state.classInput}
-                            placeholder={I18n.t('commons.password')}
-                            value={this.props.password}
-                            onChange={this.props.changeInput}
-                            required={true}
-                        />
+                    {this.state.errorMessage}
+                </p>
+                <form onSubmit={this.props.handleOnSubmit}>
+                    <input
+                        type="password"
+                        name="password"
+                        ref={(input) => { this.passwordInput = input; }}
+                        className="win-textbox"
+                        placeholder={I18n.t('commons.password')}
+                        value={this.props.password}
+                        onChange={this.props.changeInput}
+                        required={true}
+                    />
 
-                        <button className="btn --secondary" type="button" onClick={
-                            () => this.props.changePhase(1)
-                        }>
-                            { I18n.t('commons.back') }
-                        </button>
+                    <button className="btn --secondary" type="button" onClick={
+                        () => this.props.changePhase(1)
+                    }>
+                        { I18n.t('commons.back') }
+                    </button>
 
-                        <button type="submit" className="btn --primary">
-                            { I18n.t('commons.sign_in') }
-                        </button>
-                    </form>
-                    
-                    <Link to="/forgotPassword">
-                        { I18n.t('login.forgot_my_password') }
-                    </Link>
-                </div>
-            )
-        }
-        
-        return renderComponent
+                    <button type="submit" className="btn --primary">
+                        { I18n.t('commons.sign_in') }
+                    </button>
+                </form>
+                
+                <Link to="/forgotPassword">
+                    { I18n.t('login.forgot_my_password') }
+                </Link>
+            </div>
+        )
     }
 }
 

@@ -165,3 +165,29 @@ export const fetchRecoverPassword = ()=> {
     dispatch(uiTransactionStart())
   }
 }
+
+export function fetchSendFeedback (data) {
+  return (dispatch) => {
+    dispatch(uiTransactionStart())
+    glpi.sendFeedback({ // TODO: GLPI Clien no have sendFeedback method
+      text: data.text,
+      userId: data.userId
+    })
+    .then(([response, json]) => {
+      dispatch(uiTransactionFinish())
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: 'Successfully send feedback',
+        type: 'success'
+      }))
+    })
+    .catch((error) => {
+      dispatch(uiTransactionFinish())
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: 'Error, feedback no send',
+        type: 'warning'
+      }))
+    })
+  }
+}
