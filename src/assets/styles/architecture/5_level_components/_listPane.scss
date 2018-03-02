@@ -1,0 +1,81 @@
+.listPane {
+
+    .contentListView {
+
+        .win-surface {
+            margin-top: 0;
+            white-space: nowrap;
+        }
+
+        .win-container {
+            margin: 0;
+        }
+
+        .win-item {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            width: calc(100% - 24px);
+            padding-left: 12px;
+
+            .contentPicture {
+                width: 42px;
+                height: 42px;
+                background-size: cover;
+                -webkit-border-radius: 42px;
+                -moz-border-radius: 42px;
+                border-radius: 42px;
+                display: inline-block;
+                vertical-align: top;
+                margin-right: 8px;
+            }
+
+            .name, .detail {
+                vertical-align: middle;
+                width: 240px;
+                $white-color-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-weight: 400;
+            }
+
+            .name {
+                font-size: 18px;
+                line-height: 22px;
+            }
+
+            .detail {
+                color: $text-detail-color;
+                font-size: 13px;
+                line-height: 16px;
+            }
+        }
+        
+        .win-groupheadercontainer {
+            width: 32px;
+            height: 32px;
+            margin-top: 7px;
+            margin-bottom: 10px;
+            margin-left: 12px;
+        }
+
+        .win-groupheader {
+            font-size: 15px;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            background-color: $app-color;
+            color: $white-color;
+            text-align: center;
+            line-height: 32px;
+        } 
+
+    }
+}
+
+.listToolBar .win-toolbar-actionarea {
+    background-color: $white-color;
+}
+
+.win-commandingsurface .win-commandingsurface-actionarea {
+    justify-content: space-around !important;
+}
