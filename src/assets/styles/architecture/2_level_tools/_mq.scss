@@ -110,6 +110,7 @@ $mq-media-type: all !default;
     @warn "Breakpoint #{$name} wasn't found in $breakpoints.";
   }
 }
+
 /// Media Query mixin
 ///
 /// @param {String | Boolean} $from (false) - One of $mq-breakpoints
@@ -238,6 +239,7 @@ $mq-media-type: all !default;
   $new-breakpoint: ($name: $width);
   $mq-breakpoints: map-merge($mq-breakpoints, $new-breakpoint) !global;
 }
+
 /// Show the active breakpoint in the top right corner of the viewport
 /// @link https://github.com/sass-mq/sass-mq#seeing-the-currently-active-breakpoint
 ///

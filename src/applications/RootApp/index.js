@@ -6,7 +6,7 @@ import { Switch } from 'react-router-dom'
 import withI18NTranslation from '../../hoc/withI18NTranslation'
 import withToastNotification from '../../hoc/withToastNotification'
 import routes from './routes'
-import GenerateRoutes from '../../components/GenerateRoutes';
+import GenerateRoutes from '../../components/GenerateRoutes'
 
 /**
  * Main Component in the React Tree
