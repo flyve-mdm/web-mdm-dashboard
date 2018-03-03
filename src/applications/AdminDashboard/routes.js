@@ -2,8 +2,10 @@ import Dashboard from '../../containers/HomeDashboard'
 import Devices from '../../containers/Devices'
 import Invitations from '../../containers/Invitations'
 import Files from '../../containers/Files'
+import Applications from '../../containers/Applications'
 import About from '../../containers/About'
 import Settings from '../../containers/Settings'
+import { Application } from 'winjs';
 
 const routes = [
   {
@@ -28,6 +30,12 @@ const routes = [
     path: '/files',
     name: 'Files',
     component: Files,
+    exact: true
+  },
+  {
+    path: '/applications',
+    name: 'Applications',
+    component: Applications,
     exact: true
   },
   {
