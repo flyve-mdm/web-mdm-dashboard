@@ -1,4 +1,4 @@
-export default (id) => {
+const authtype = id => {
     switch (id) {
         case 1:
             return 'GLPI internal database'
@@ -22,3 +22,6 @@ export default (id) => {
             return ''
     }
 }
+
+
+export default authtype

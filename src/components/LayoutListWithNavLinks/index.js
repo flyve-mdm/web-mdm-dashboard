@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
 
 const ListWithNavLinks = ({routes, rootPath, children}) => {
@@ -34,4 +34,4 @@ const ListWithNavLinks = ({routes, rootPath, children}) => {
     );
 }
 
-export default ListWithNavLinks;
+export default ListWithNavLinks

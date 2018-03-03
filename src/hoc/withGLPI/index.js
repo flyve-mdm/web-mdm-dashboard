@@ -33,7 +33,7 @@ const withGLPI = (WrappedComponent, fetch) => {
     glpi: glpi
   }
 
-  return GLPIClient;
+  return withRouter(GLPIClient)
 }
 
 

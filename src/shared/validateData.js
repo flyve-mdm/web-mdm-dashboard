@@ -1,4 +1,4 @@
-export default (data, specialReturn) => {
+const validateData = (data, specialReturn) => {
     let value
 
     if (!data && (specialReturn || specialReturn === '')) value = specialReturn
@@ -8,3 +8,5 @@ export default (data, specialReturn) => {
     if (Array.isArray(value)) return value
     return value.toString()
 }
+
+export default validateData;
