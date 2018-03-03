@@ -1,46 +1,46 @@
 import React from 'react'
-
-const MonkComponent1 = () => <div><h1> Mock1 </h1></div>
-const MonkComponent2 = () => <div><h1> Mock2 </h1></div>
-const MonkComponent3 = () => <div><h1> Mock3 </h1></div>
-const MonkComponent4 = () => <div><h1> Mock4 </h1></div>
-const MonkComponent5 = () => <div><h1> Mock5 </h1></div>
+import Entity from './components/Entity'
+import Profiles from './components/Profiles'
+import Supervision from './components/Supervision'
+import Security from './components/Security'
+import Notifications from './components/Notifications'
+import Display from './components/Display'
 
 const routes = [
   {
     path: '/',
     name: 'Entity',
-    component: MonkComponent1,
+    component: Entity,
     exact: true
   },
   {
     path: '/profiles',
     name: 'Profiles',
-    component: MonkComponent3,
+    component: Profiles,
     exact: false
   },
   {
     path: '/supervision',
     name: 'Supervision',
-    component: MonkComponent4,
+    component: Supervision,
     exact: false
   },
   {
     path: '/security',
     name: 'Security',
-    component: MonkComponent1,
+    component: Security,
     exact: false
   },
   {
     path: '/notifications',
     name: 'Notifications',
-    component: MonkComponent2,
+    component: Notifications,
     exact: false
   },
   {
     path: '/display',
     name: 'Display',
-    component: MonkComponent5,
+    component: Display,
     exact: false
   }
 ]
