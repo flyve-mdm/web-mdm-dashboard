@@ -38,7 +38,7 @@ $anchor-background-color: $color-2-secondary;
 
   > article {
     width: $article-width;
-    padding: 0 0 0 20px;
+    padding: 0 58px 0 20px;
 
     > div {
       @include animation('fade-in .2s');

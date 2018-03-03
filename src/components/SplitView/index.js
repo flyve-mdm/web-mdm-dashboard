@@ -29,7 +29,7 @@ const splitView = ({
                   <ImgWithPopper
                     to={'/app'}
                     alt='Flyve MDM Dashboard'
-                    img='images/logo2.png'
+                    img='/images/logo2.png'
                     title='Dashboard'
                     disabled={expanded}
                   />
@@ -92,10 +92,10 @@ const splitView = ({
           { expanded && (
           <nav className="splitview-wrapped__navbar" onClick={handleContract}>
             <ScrollSyncPane>
-              <div className={`splitview-wrapper-wrapper__div —large —end —opening ${
+              <div className={`splitview-wrapper-wrapper__div --large --end --opening ${
                   contract && '--closing'
                 }`}>
-                <section className="splitview-wrapped-navbar-wrapped-top__section —description">
+                <section className="splitview-wrapped-navbar-wrapped-top__section --description">
                   <SpanWithPopper description='Dashboard' />
                   <SpanWithPopper description='Devices' />
                   <SpanWithPopper description='Invitations' />
@@ -105,7 +105,7 @@ const splitView = ({
                   <SpanWithPopper description='Contact' />
                   <SpanWithPopper description='Search' />
                 </section>
-                <section className="splitview-wrapped-navbar-wrapped-bottom__section —description">
+                <section className="splitview-wrapped-navbar-wrapped-bottom__section --description">
                   <SpanWithPopper description='Setting of Flyve MDM ' />
                   <SpanWithPopper description='About of Flyve MDM' />
                   <SpanWithPopper description='Logout' />

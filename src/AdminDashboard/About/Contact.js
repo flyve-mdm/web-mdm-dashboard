@@ -15,7 +15,7 @@ export default class Contact extends Component {
                     </p>
                     <div className="separator" />
                     <div className="contentInfo">
-                        <ul>
+                        <ul className="contact-list__ul">
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">

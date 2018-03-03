@@ -64,7 +64,6 @@ const withToastNotification = WrappedComponent => {
           </div>
         )
       }
-
       return (
         <React.Fragment>
           { toast }

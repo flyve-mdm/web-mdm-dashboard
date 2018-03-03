@@ -31,12 +31,14 @@
             min-height: 18vw;
 
             @include animation('fade-in .5s ease-out');
+
+            .btn {
+                margin-top: 15px;
+                margin-bottom: 15px
+            }
         }
 
         .authentication-email__div {
-            .btn {
-                width: 290px
-            }
             .paragraph__p:not(.--description) {
                 margin: 0
             }
@@ -45,7 +47,7 @@
         .authentication-password__div,
         .authentication-forgot__div {
             .btn.--primary {
-                margin-left: 10px
+                margin-left: 30px
             }
         }
     }
