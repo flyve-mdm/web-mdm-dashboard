@@ -3,9 +3,9 @@ import Devices from '../../containers/Devices'
 import Invitations from '../../containers/Invitations'
 import Files from '../../containers/Files'
 import Applications from '../../containers/Applications'
+import Users from '../../containers/Users'
 import About from '../../containers/About'
 import Settings from '../../containers/Settings'
-import { Application } from 'winjs';
 
 const routes = [
   {
@@ -36,6 +36,12 @@ const routes = [
     path: '/applications',
     name: 'Applications',
     component: Applications,
+    exact: true
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: Users,
     exact: true
   },
   {
