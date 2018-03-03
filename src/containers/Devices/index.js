@@ -1,50 +1,55 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import DevicesList from './DevicesList'
 import DevicesPage from './DevicesPage'
+import getMode from '../../shared/getMode'
+import glpi from '../../shared/glpiApi'
 
 export default class Devices extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
+            location: ['Devices'],
             selectionMode: false,
-            action: null
+            action: null,
+            animation: false,
         }
     }
 
+    onNavigate = location => this.setState({location})
     changeAction = action => this.setState({action})
-
     changeSelectionMode = selectionMode => this.setState({selectionMode})
+    showNotification = (title, body) => {
+    }
 
     render() {
 
-        let selectedItemList = this.props.location.length === 2 ? this.props.location[1] : null
-        if (this.props.mode === 'small') {
+        let selectedItemList = this.state.location.length === 2 ? this.state.location[1] : null
+        if (getMode() === 'small') {
             if (!selectedItemList && !this.state.action) {
                 return <DevicesList
                     itemListPaneWidth={'100%'}
-                    animation={this.props.animation}
-                    location={this.props.location}
-                    onNavigate={this.props.onNavigate}
+                    animation={this.state.animation}
+                    location={this.state.location}
+                    onNavigate={this.onNavigate}
                     changeSelectionMode={this.changeSelectionMode}
                     selectionMode={this.state.selectionMode}
                     action={this.state.action}
                     changeAction={this.changeAction}
-                    showNotification={this.props.showNotification} 
-                    glpi={this.props.glpi} />
+                    showNotification={this.showNotification} 
+                    glpi={glpi} />
             } else {
                 return <DevicesPage 
                     itemListPaneWidth={0}
-                    animation={this.props.animation}
-                    location={this.props.location}
-                    onNavigate={this.props.onNavigate}
+                    animation={this.state.animation}
+                    location={this.state.location}
+                    onNavigate={this.onNavigate}
                     selectedItemList={selectedItemList}
                     changeSelectionMode={this.changeSelectionMode}
                     action={this.state.action}
                     changeAction={this.changeAction}
-                    showNotification={this.props.showNotification} 
-                    glpi={this.props.glpi} />
+                    showNotification={this.showNotification} 
+                    glpi={glpi} />
             }
         } else {
             let itemListPaneWidth = 320
@@ -52,38 +57,30 @@ export default class Devices extends Component {
                 <div style={{ height: '100%' }}>
                     <DevicesList
                         itemListPaneWidth={itemListPaneWidth}
-                        animation={this.props.animation}
-                        location={this.props.location}
-                        onNavigate={this.props.onNavigate}
+                        animation={this.state.animation}
+                        location={this.state.location}
+                        onNavigate={this.onNavigate}
                         changeSelectionMode={this.changeSelectionMode}
                         selectionMode={this.state.selectionMode}
                         action={this.state.action}
                         changeAction={this.changeAction} 
-                        showNotification={this.props.showNotification} 
-                        glpi={this.props.glpi}
+                        showNotification={this.showNotification} 
+                        glpi={glpi}
                     />
                     <DevicesPage 
                         itemListPaneWidth={itemListPaneWidth}
-                        animation={this.props.animation}
-                        location={this.props.location}
-                        onNavigate={this.props.onNavigate}
+                        animation={this.state.animation}
+                        location={this.state.location}
+                        onNavigate={this.onNavigate}
                         selectedItemList={selectedItemList}
                         changeSelectionMode={this.changeSelectionMode}
                         action={this.state.action}
                         changeAction={this.changeAction} 
-                        showNotification={this.props.showNotification} 
-                        glpi={this.props.glpi}
+                        showNotification={this.showNotification} 
+                        glpi={glpi}
                     />
                 </div>
             )
         }
     }
-}
-Devices.propTypes = {
-    mode: PropTypes.oneOf(["small", "medium", "large"]).isRequired,
-    animation: PropTypes.bool.isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
 }
