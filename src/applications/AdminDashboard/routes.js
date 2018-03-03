@@ -1,5 +1,6 @@
 import Dashboard from '../../containers/HomeDashboard'
 import Devices from '../../containers/Devices'
+import Invitations from '../../containers/Invitations'
 import About from '../../containers/About'
 import Settings from '../../containers/Settings'
 
@@ -14,6 +15,12 @@ const routes = [
     path: '/devices',
     name: 'Devices',
     component: Devices,
+    exact: true
+  },
+  {
+    path: '/invitations',
+    name: 'Invitations',
+    component: Invitations,
     exact: true
   },
   {
