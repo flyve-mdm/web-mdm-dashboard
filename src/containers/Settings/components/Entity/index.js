@@ -12,7 +12,7 @@ class Entity extends Component {
         super(props)
         this.state = {
             mode: '', 
-            buttonSaveClassName: "win-button win-button-primary hidden",
+            buttonSaveClassName: "win-button hidden",
             tokenLife: validateData(SettingsEntity["tokenLife"]),
             downloadURL: validateData(SettingsEntity["downloadURL"], "https://"),
             entityID: validateData(SettingsEntity["entityID"]),
@@ -53,6 +53,8 @@ class Entity extends Component {
                         />
                     </div>
                 )
+                
+            break
 
             case 'change download URL':
                 content = (
@@ -65,6 +67,8 @@ class Entity extends Component {
                         />
                     </div>
                 )
+
+            break
         
             default:
                 content = (

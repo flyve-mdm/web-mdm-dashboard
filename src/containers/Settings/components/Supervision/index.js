@@ -42,7 +42,7 @@ class Supervision extends Component {
                 <Title text="Supervision" />
                 <div className="list-content Profiles" style={{marginTop: '20px'}}>
                     <ConstructInputs data={supervision.helpDeskInformation} icon="supervisionIcon" title="Helpdesk Information" />
-                    <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                    <button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                         Save
                     </button>
                     <br />
