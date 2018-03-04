@@ -1,10 +1,12 @@
+@include scrollbars(.5em, $color-1-primary);
+
 main {
   display: inline-flex;
   width: 100%;
 
-  // @include animation('fade-in 5s');
+  @include animation('fade-in 3s');
 
   > div:nth-child(2) {
-    flex: 1 1 100%
+    flex: 1 1 100%;
   }
 }
