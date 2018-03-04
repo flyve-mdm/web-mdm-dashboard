@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import Title from '../../../../components/Title'
 

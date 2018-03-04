@@ -1,4 +1,3 @@
-import React from 'react'
 import Entity from './components/Entity'
 import Profiles from './components/Profiles'
 import Supervision from './components/Supervision'

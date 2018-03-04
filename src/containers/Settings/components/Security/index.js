@@ -19,17 +19,15 @@ class Security extends Component {
         }
     }
 
-    deleteUser = async () => {7
+    deleteUser = async () => {
         const isOK = await Confirmation.isOK(this.deleteAccount)
         if (isOK) {
-            
         }
     }
 
     closeSession  = async () => {
         const isOK = await Confirmation.isOK(this.killSession)
         if (isOK) {
-            
         }
     }
 
@@ -165,7 +163,7 @@ class Security extends Component {
                                 Cancel
                             </button>
 
-                            <button className="win-button win-button-primary">
+                            <button className="win-button">
                                 Save
                             </button>
 

@@ -314,7 +314,7 @@ class Profiles extends Component {
     
                     <ConstructInputs data={user.activityInformation} icon="documentIcon" />
     
-                    <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                    <button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                         Save
                     </button>
                 
