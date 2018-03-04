@@ -9,7 +9,7 @@ import Title from '../../../../components/Title'
 import { bindActionCreators } from 'redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { connect } from 'react-redux'
-import { fetchPasswordConfiguration } from '../../../../store/authentication/actions';
+import { fetchPasswordConfiguration } from '../../../../store/authentication/actions'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
