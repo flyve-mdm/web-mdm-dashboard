@@ -54,7 +54,7 @@ export default class Files extends Component {
         } else {
             let itemListPaneWidth = 320
             return (
-                <div style={{ height: '100%' }}>
+                <div className="flex-block">
                     <FilesList
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.state.animation}

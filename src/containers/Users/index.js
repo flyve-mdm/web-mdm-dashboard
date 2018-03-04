@@ -54,7 +54,7 @@ export default class Users extends Component {
         } else {
             let itemListPaneWidth = 320
             return (
-                <div style={{ height: '100%' }}>
+                <div className="flex-block">
                     <UsersList
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.state.animation}
