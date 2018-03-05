@@ -161,7 +161,11 @@ export default class ListWinJs extends Component {
                 if(index.length !== 0) {
                     this.props.changeAction(null)
                 }
-                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
+                if (index.length === 1 && !this.props.selectionMode) {
+                    this.props.history.replace(
+                        `/app/devices/${this.state.selectedItemList[0]['PluginFlyvemdmAgent.id']}`
+                    )
+                }
             }, 0)
         }
     }
