@@ -1,13 +1,10 @@
 %extend-button-concept {
   cursor: pointer;
-  border-style: solid;
   margin: 0px;
   min-width: 120px;
   min-height: 32px;
   padding: 4px 8px;
-  border-width: 2px;
   background-clip: border-box;
-  border-radius: 0;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.333;
@@ -20,28 +17,23 @@
   @include font-source(Segoe UI, 15px, #616264);
 
   &.--primary {
-    border: 1px solid $border-ligth-color;
     background-color: $color-1-primary;
     color: white;
 
     &:hover {
-      border-color: $color-2-primary;
       background-color: lighten($color-1-primary, 5);
     }
   
     &:active,
     &.active {
       background-color: lighten($color-1-primary, 10);
-      border-color: lighten($color-2-primary, 10);
       color: white;
     }
   }
 
   &.--secondary {
-    border: 1px solid $app-color;
 
     &:hover {
-      border-color: $color-1-secondary;
       background-color: $color-2-secondary;
       color: white;
     }
@@ -49,7 +41,6 @@
     &:active,
     &.active {
       background-color: lighten($color-1-secondary, 10);
-      border-color: lighten($color-2-secondary, 10);
       color: darken($color-2-secondary, 10);
     }
   }
