@@ -65,9 +65,11 @@ class PasswordFieldset extends Component {
                         </button>
                     </form>
                     
-                    <Link to="/forgotPassword">
-                        { I18n.t('login.forgot_my_password') }
-                    </Link>
+                    <p>
+                        <Link to="/forgotPassword">
+                            { I18n.t('login.forgot_my_password') }
+                        </Link>
+                    </p>
                 </div>
             )
         }
