@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 
 // TODO: Enable PrivateRoute if route if private
 
-const generateRoutes = ({routes, rootPath, withNotFound}) => {
+const GenerateRoutes = ({routes, rootPath, withNotFound}) => {
   let r = routes.map(({exact, path, component}, i) => {
     return <Route
       exact={exact}
@@ -26,4 +26,4 @@ const generateRoutes = ({routes, rootPath, withNotFound}) => {
   return r
 }
 
-export default generateRoutes
+export default GenerateRoutes
