@@ -224,7 +224,7 @@ export default class ListWinJs extends Component {
 
     handleSort = async () => {
         try {
-            this.props.onNavigate([this.props.location[0]])
+            this.props.history.replace('/app/devices')
             this.setState({
                 isLoading: true,
                 pagination: {
