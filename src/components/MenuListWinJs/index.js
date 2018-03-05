@@ -91,6 +91,9 @@ export default class ListWinJs extends Component {
                     count: 15
                 }
             })
+
+            this.props.history.replace('/app/devices')
+
             const devices = await GLPI.searchItems({ 
                 itemtype: this.props.handleRefreshRequest.itemtype, 
                 options: { 
@@ -99,12 +102,11 @@ export default class ListWinJs extends Component {
                     ...this.props.handleRefreshRequest.options
                 } 
             })
+            
             this.setState({
                 isLoading: false,
                 order: devices.order,
                 itemList: buildItemList(devices)
-            }, () => {
-                this.props.history.replace('/app/devices')
             })
             
         } catch (error) {
@@ -115,26 +117,18 @@ export default class ListWinJs extends Component {
         }
     }
 
-    handleEdit = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        setTimeout(() => {
-            this.props.onNavigate(this.state.selectedItemList.length > 0 && this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
-            this.props.changeAction(button.label)
-        }, 0)
+    handleEdit = () => {
+        this.props.history.replace('/app/devices/edit')        
     }
 
     handlePanel = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
         this.listView.winControl.selection.clear()
-        
         this.props.changeSelectionMode(false)
-        this.props.onNavigate([this.props.location[0]])
-        this.props.changeAction(button.label)
+        this.props.history.replace('/app/devices/add')
     }
 
     handleToggleSelectionMode = () => {
         this.listView.winControl.selection.clear()
-        this.props.changeAction(null)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.history.replace('/app/devices')
         this.setState({
@@ -406,8 +400,7 @@ ListWinJs.propTypes = {
     ]).isRequired,
     screen: PropTypes.string.isRequired,
     animation: PropTypes.bool.isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,

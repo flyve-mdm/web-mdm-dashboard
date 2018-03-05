@@ -55,12 +55,6 @@ const routes = [
     name: 'Settings',
     component: Settings,
     exact: false
-  },
-  {
-    path: '/Devices',
-    name: 'Devices',
-    component: Devices,
-    exact: false
   }
 ]
 

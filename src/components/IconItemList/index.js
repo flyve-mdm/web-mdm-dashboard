@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 export default class IconItemList extends React.Component {
     render() {
-        const image = (this.props.type === 'file' && this.props.image !== '') ? ("images/" + this.props.image) : this.props.image
+        const image = (this.props.type === 'file' && this.props.image !== '') ? ("/images/" + this.props.image) : this.props.image
         let style = {
             backgroundColor: this.props.backgroundColor,
             width: this.props.size,
