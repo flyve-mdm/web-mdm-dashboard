@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentLoader, { BulletList } from 'react-content-loader'
 
-listRender = ({props, index}) => {
+const listRender = ({props, index}) => {
     if (props.type === "list") {
         return (<ContentLoader key={index} speed={1.5} style={{ width: '360px' }}>
             <circle cx="40" cy="45" r="27" />

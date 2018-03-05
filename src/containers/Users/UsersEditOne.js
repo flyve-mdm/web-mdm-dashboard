@@ -1,58 +1,63 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import validateData from '../../../../shared/validateData'
-import IconItemList from '../../../../AdminDashboard/IconItemList'
-import { usersScheme } from '../../../../components/Forms/Schemas'
-import Loading from '../../../../components/Loading'
-import authtype from '../../../../shared/authtype'
-import ErrorValidation from '../../../../components/ErrorValidation'
-import ConstructInputs from '../../../../components/Forms'
-import withGLPI from '../../../../hoc/withGLPI'
-import Title from '../../../../components/Title'
-import {
-    uiTransactionStart,
-    uiTransactionFinish,
-    uiSetNotification
-} from '../../../../store/ui/actions';
-
-import { bindActionCreators } from 'redux'
-
-function mapStateToProps(state, props) {
-    return {
-        isLoading: state.ui.loading,        
-        currentUser: state.auth.currentUser
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    const actions = {
-        uiTransactionStart: bindActionCreators(uiTransactionStart, dispatch),
-        uiTransactionFinish: bindActionCreators(uiTransactionFinish, dispatch),
-        setNotification: bindActionCreators(uiSetNotification, dispatch)
-    }
-    return { actions }
-}
+import PropTypes from 'prop-types'
+import ConstructInputs from '../../components/Forms'
+import ContentPane from '../../components/ContentPane'
+import validateData from '../../shared/validateData'
+import IconItemList from '../../components/IconItemList'
+import { usersScheme } from '../../components/Forms/Schemas'
+import Loading from '../../components/Loading'
+import ErrorValidation from '../../components/ErrorValidation'
 
 class Profiles extends Component {
+    
     constructor(props) {
         super(props)
         this.state = {
-            login: null
+            isLoading: true,
+            login: undefined,
+            firstName: undefined,
+            realName: undefined,
+            phone: undefined,
+            mobilePhone: undefined,
+            phone2: undefined,
+            administrativeNumber: undefined,
+            lastLogin: undefined,
+            created: undefined,
+            modified: undefined,
+            emails: undefined,
+            imageProfile: undefined,
+            authentication: undefined,
+            password: undefined,
+            passwordConfirmation: undefined,
+            category: undefined,
+            defaultEntity: undefined,
+            comments: undefined,
+            typeImageProfile: undefined,
+            title: undefined,
+            location: undefined,
+            defaultProfile: undefined,
+            validSince: undefined,
+            validUntil: undefined
         }
     }
 
-    componentDidMount = async () => {
-        if (this.state.login === null) {
-            this.props.actions.uiTransactionStart()
+    componentDidMount() {
+        if (this.props.selectedItemList) {
+            this.handleRefresh()
+        }
+    }
 
-            const myUser = await this.props.glpi.getAnItem({itemtype: 'User', id: this.props.currentUser.id})
-
+    handleRefresh = async () => {
+        this.setState({
+            isLoading: true
+        })
+        try {
+            const response = await this.props.glpi.getAnItem({ itemtype: 'User', id: this.props.selectedItemList[0]['User.id']})
             const myEmails = await this.props.glpi.getSubItems({
                 itemtype: 'User', 
-                id: this.props.currentUser.id, 
+                id: this.props.selectedItemList[0]['User.id'], 
                 subItemtype: 'UserEmail'
             })
-    
             const {cfg_glpi} = await this.props.glpi.getGlpiConfig()
     
             const parametersToEvaluate = {
@@ -62,84 +67,84 @@ class Profiles extends Component {
                 needUppercaseCharacter: cfg_glpi.password_need_caps,
                 needSymbol: cfg_glpi.password_need_symbol
             }
-    
             this.setState({
+                isLoading: false,
                 parametersToEvaluate,
-                login: myUser.name,
-                firstName: myUser.firstname,
-                realName: myUser.realname,
-                phone: myUser.phone,
-                mobilePhone: myUser.mobile,
-                phone2: myUser.phone2,
-                administrativeNumber: myUser.registration_number,
-                lastLogin: myUser.last_login,
-                created: myUser.date_creation,
-                modified: myUser.date_mod,
+                login: validateData(response.name),
+                firstName: validateData(response.firstname),
+                realName: validateData(response.realname),
+                phone: validateData(response.phone),
+                mobilePhone: validateData(response.mobile),
+                phone2: validateData(response.phone2),
+                administrativeNumber: validateData(response.registration_number),
+                lastLogin: validateData(response.last_login),
+                created: validateData(response.date_creation),
+                modified: validateData(response.date_mod),
                 currentEmails: myEmails.map(a => ({...a})),
                 emails: validateData(myEmails, []),
-                imageProfile: validateData(myUser.picture, "profile.png"),
-                authentication: authtype(myUser.authtype),
+                imageProfile: validateData(response.picture, "profile.png"),
+                authentication: 'GLPI internal database',
                 password: '',
                 passwordConfirmation: '',
                 category: {
-                    value: myUser.usercategories_id,
+                    value: validateData(response.usercategories_id),
                     request: {
-                        params: ['UserCategory', null, null, {range: '0-200', forcedisplay: [2]}],
+                        params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
                         content: '1',
                         value: '2'
                     }
                 },
                 defaultEntity:  {
-                    value: myUser.entities_id,
+                    value: validateData(response.entities_id),
                     request: {
-                        params: [],
+                        params: {},
                         method: 'getMyEntities',
                         content: 'name',
                         value: 'id'
                     }
                 },
-                comments: validateData(myUser.comment, ''),
+                comments: '',
                 typeImageProfile: 'file',
                 title: {
-                    value: myUser.usertitles_id,
+                    value: validateData(response.usertitles_id),
                     request: {
-                        params: ['UserTitle', null, null, {range: '0-200', forcedisplay: [2]}],
+                        params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
                         content: '1',
                         value: '2'
                     }
                 },
                 location: {
-                    value: myUser.locations_id,
+                    value: validateData(response.locations_id),
                     request: {
-                        params: ['Location', null, null, {range: '0-200', forcedisplay: [2]}],
+                        params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
                         content: '1',
                         value: '2'
                     }
                 },
                 defaultProfile: {
-                    value: myUser.profiles_id,
+                    value: validateData(response.profiles_id),
                     request: {
-                        params: [],
+                        params: {},
                         method: 'getMyProfiles',
                         content: 'name',
                         value: 'id'
                     }
                 },
-                validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
-                validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined
-            }, () => {
-                this.props.actions.uiTransactionFinish()
+                validSince: response.begin_date ? new Date(response.begin_date) : undefined,
+                validUntil: response.end_date ? new Date(response.end_date) : undefined
             })
+        } catch (error) {
+            this.setState({isLoading: false})
         }
-    }
+    } 
 
     saveChanges = () => {
 
         let newUser = { 
-            id: this.props.currentUser.id,
+            id: this.props.selectedItemList[0]['User.id'],
             firstname: this.state.firstName,
             realname: this.state.realName,
             phone: this.state.phone,
@@ -177,7 +182,6 @@ class Profiles extends Component {
             this.setState (
                 { isLoading: true },
                 async () => {
-                    this.props.actions.uiTransactionStart()
                     try {
                         await this.props.glpi.updateItem({itemtype: 'User', input: newUser})
                         await this.props.glpi.updateEmails({
@@ -185,19 +189,17 @@ class Profiles extends Component {
                             currentEmails: this.state.currentEmails, 
                             newEmails: this.state.emails
                         })
-                        this.props.actions.uiTransactionFinish()
+                        this.props.showNotification('Success', 'saved profile')
+                        this.props.changeAction(null)
                     } catch (e) {
-                        this.props.actions.uiTransactionFinish()
+                        this.setState ({isLoading: false})            
+                        this.props.showNotification('Error', e)
                     }
                 }
-            , () => this.props.actions.setNotification({
-                    title: 'Successfully',
-                    body: 'The Profile data changed',
-                    type: 'info'
-                })
             )
         }
     }
+
 
     changeState = (name, value) => {
         this.setState({
@@ -258,13 +260,14 @@ class Profiles extends Component {
         this.inputElement.click()
     }
 
-    render () {        
-        let component = null
+    render () {
 
-        if (this.props.isLoading || !this.state.login) {
-            component = <Loading message="Loading..." />
+        let componetRender
+
+        if (this.state.isLoading) {
+            componetRender = <Loading message="Loading..." />
         } else {
-            let user = usersScheme({
+            const user = usersScheme({
                 state: this.state, 
                 changeState: this.changeState,
                 changeEmail: this.changeEmail,
@@ -272,8 +275,8 @@ class Profiles extends Component {
                 changeSelect: this.changeSelect,
                 glpi: this.props.glpi
             })
-    
-            let inputAttributes = {
+
+            const inputAttributes = {
                 type: 'file',
                 accept: "image/*",
                 name: "imageProfile",
@@ -282,18 +285,18 @@ class Profiles extends Component {
                     this.inputElement = element
                 },
                 onChange: this.previewFile
-            }    
+            }
 
-            component = (
-                <div className="list-content Profiles" style={{marginTop: '20px'}}>
+            componetRender = (
+                <div className="list-content Profiles">
 
                     <div className="listElement listElementIcon">
                         <span className="viewIcon"/>
                     </div>
                     
-    
+
                     <div className="listElement">
-    
+
                         <div style={{ overflow: 'hidden' }}>
                             <input
                                 {...inputAttributes}
@@ -305,46 +308,52 @@ class Profiles extends Component {
                                 size={150}
                                 imgClass="clickable"/>
                         </div>
-    
+
                     </div>
-    
+
+
                     <ConstructInputs data={user.personalInformation} icon="contactIcon" />
-    
+
                     <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
                 
                     <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
-    
+
                     <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
                     <div style={{ overflow: 'auto' }}>
                         <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
                     </div>
-    
+
                     <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
                 
                     <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
-    
+
                     <ConstructInputs data={user.activityInformation} icon="documentIcon" />
-    
-                    <button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+
+                    <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                         Save
                     </button>
                 
                     <br/>
-    
+
                 </div>   
             )
-        }       
-        return (
-            <div>
-                <Title text="Profiles" />
+        }
 
-                { component }
-            </div>
+        return (
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                {componetRender}
+            </ContentPane>            
         )
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withGLPI(Profiles))
+Profiles.propTypes = {
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    changeAction: PropTypes.func.isRequired,
+    showNotification: PropTypes.func.isRequired
+}
+
+export default Profiles

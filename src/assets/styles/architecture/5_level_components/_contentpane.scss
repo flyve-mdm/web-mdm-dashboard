@@ -1,0 +1,63 @@
+.contentPane {
+  display: inline-block;
+  overflow: auto;
+  height: 100%;
+  vertical-align: top;
+  box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  .titleContentPane {
+      margin-top: 10px;
+      margin-left: 10px;
+      margin-bottom: 20px;
+  }
+
+  .contentHeader {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      .name {
+          font-size: 24px;
+          line-height: 28px;
+          font-weight: 300;
+          padding-top: 6px;
+      }
+
+      .itemInfo {
+          display: flex;
+
+          .contentStatus {
+              width: 240px;
+              margin-left:20px;
+              margin-top:10px;
+
+              .message {
+                  font-size: 15px;
+                  line-height: 20px;
+                  font-weight: 500;
+              }
+
+              .source {
+                  display:block;
+                  color: $text-detail-color;
+                  font-size: 13px;
+                  line-height: 16px;
+                  font-weight: 400;
+              }
+          }
+      }
+
+      .contentPicture {
+          width: 100px;
+          height: 100px;
+          background-size: cover;
+          display: inline-block;
+          border-radius: 100px;
+          -webkit-border-radius: 100px;
+          -moz-border-radius: 100px;
+          margin-left: 25px;
+          margin-top:10px;
+      }
+  }
+}

@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import Calc100PercentMinus from './Calc100PercentMinus'
+import Calc100PercentMinus from '../../shared/calc100PercentMinus'
 
 const EmptyMessage = props => (
     <div className="contentPane" style={{ width: Calc100PercentMinus(props.itemListPaneWidth) }}>

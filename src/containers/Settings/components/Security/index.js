@@ -274,7 +274,7 @@ class Security extends Component {
 }
 
 Security.propTypes = {
-    actions: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
 }
 
 export default connect(null, mapDispatchToProps)(Security)
