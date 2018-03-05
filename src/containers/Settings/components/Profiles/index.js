@@ -14,7 +14,6 @@ import {
     uiTransactionFinish,
     uiSetNotification
 } from '../../../../store/ui/actions';
-
 import { bindActionCreators } from 'redux'
 
 function mapStateToProps(state, props) {
