@@ -6,6 +6,18 @@ import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
 import Loading from '../../../../components/Loading'
 import Title from '../../../../components/Title'
+import { bindActionCreators } from 'redux'
+import { uiSetNotification } from '../../../../store/ui/actions'
+import { connect } from 'react-redux'
+import { fetchPasswordConfiguration } from '../../../../store/authentication/actions';
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch),
+        fetchPasswordConfiguration: bindActionCreators(fetchPasswordConfiguration, dispatch)
+    }
+    return { actions }
+}
 
 class Security extends Component {
 
@@ -22,19 +34,33 @@ class Security extends Component {
     deleteUser = async () => {
         const isOK = await Confirmation.isOK(this.deleteAccount)
         if (isOK) {
+            this.props.actions.setNotification({
+                title: 'Successfully',
+                body: 'User deleted!',
+                type: 'info'
+            })
         }
     }
 
     closeSession  = async () => {
         const isOK = await Confirmation.isOK(this.killSession)
         if (isOK) {
+            this.props.actions.setNotification({
+                title: 'Successfully',
+                body: 'Session closed!',
+                type: 'info'
+            })
         }
     }
 
     cleanWebStorage  = async () => {
         const isOK = await Confirmation.isOK(this.deleteBrowserData)
         if (isOK) {
-            this.props.showNotification('Success', 'web storage and database indexed, cleaned')
+            this.props.actions.setNotification({
+                title: 'Successfully',
+                body: 'Web storage and database indexed, cleaned',
+                type: 'info'
+            })
         }
     }
 
@@ -61,7 +87,11 @@ class Security extends Component {
 
         if (isCorrect) {
             this.changeMode('')
-            this.props.showNotification('Success', 'new password saved')
+            this.props.actions.setNotification({
+                title: 'Successfully',
+                body: 'New password saved!',
+                type: 'info'
+            })
         } else {
             this.setState({
                 forceValidation: true
@@ -76,7 +106,9 @@ class Security extends Component {
     }
 
     changeMode = (mode) => {
-        if (mode === 'Change password') this.props.getPasswordConfiguration()
+        if (mode === 'Change password') {
+            this.props.actions.fetchPasswordConfiguration()
+        }
         this.setState({ 
             forceValidation: false,
             mode 
@@ -242,10 +274,7 @@ class Security extends Component {
 }
 
 Security.propTypes = {
-    getPasswordConfiguration: PropTypes.func.isRequired,
-    passwordConfiguration: PropTypes.object.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    showNotification: PropTypes.func.isRequired
+    actions: PropTypes.object.isRequired
 }
 
-export default Security
+export default connect(null, mapDispatchToProps)(Security)

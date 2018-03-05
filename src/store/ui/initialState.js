@@ -13,6 +13,7 @@ const initialState = {
   error: '',
   success: '',
   loading: false,
+  animation: true
 }
 
 export default initialState;

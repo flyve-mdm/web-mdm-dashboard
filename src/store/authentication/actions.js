@@ -43,6 +43,13 @@ export const authRefreshCaptcha = ({ idCaptcha, imgCaptcha, configurationPasswor
   }
 }
 
+export function changePasswordConfiguration (newConfiguration) {
+  return {
+      type: actionTypes.CHANGE_PASSWORD_CONFIGURATION,
+      newConfiguration
+  }
+}
+
 // Actions Creators
 
 /**
@@ -158,10 +165,28 @@ export const fetchSignUp = (data) => {
   }
 }
 
-
-export const fetchRecoverPassword = ()=> {
+export const fetchRecoverPassword = () => {
   return dispatch => { // TODO: Create this
     dispatch(uiTransactionStart())
+  }
+}
+
+export const fetchPasswordConfiguration = () => {
+  return (dispatch) => {
+    dispatch(uiTransactionStart())
+    glpi.configurationPassword.getAll()
+    .then(([response, json]) => {
+      dispatch(uiTransactionFinish())
+      dispatch(changePasswordConfiguration(json)) // TODO: Not Work
+    })
+    .catch((error) => {
+      dispatch(uiTransactionFinish())
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: 'Error, password configuration no fetched',
+        type: 'warning'
+      }))
+    })
   }
 }
 
