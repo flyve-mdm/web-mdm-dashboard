@@ -12,6 +12,10 @@
   -webkit-appearance: none;
   touch-action: manipulation;
   -ms-touch-action: manipulation;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  outline: 0;
+  outline-offset: 0;
 
   @include transition(background-color, .2s, ease);
   @include font-source(Segoe UI, 15px, #616264);
@@ -24,24 +28,20 @@
       background-color: lighten($color-1-primary, 5);
     }
   
-    &:active,
     &.active {
       background-color: lighten($color-1-primary, 10);
-      color: white;
     }
   }
 
   &.--secondary {
+    background-color: $color-1-secondary;
 
     &:hover {
-      background-color: $color-2-secondary;
-      color: white;
+      background-color: lighten($color-1-secondary, 5);
     }
   
-    &:active,
     &.active {
       background-color: lighten($color-1-secondary, 10);
-      color: darken($color-2-secondary, 10);
     }
   }
 }
