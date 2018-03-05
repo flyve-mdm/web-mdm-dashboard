@@ -6,7 +6,6 @@ import Applications from '../../containers/Applications'
 import Users from '../../containers/Users'
 import About from '../../containers/About'
 import Settings from '../../containers/Settings'
-import Devices from '../../containers/Devices'
 
 const routes = [
   {
