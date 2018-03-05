@@ -36,7 +36,6 @@ class Supervision extends Component {
             body: 'Helpdesk configuration saved',
             type: 'info'
         })
-
     }
 
     changeState = (name, value) => {
