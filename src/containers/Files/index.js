@@ -54,7 +54,7 @@ export default class Files extends Component {
         } else {
             let itemListPaneWidth = 320
             return (
-                <div className="flex-block">
+                <div className="flex-block --with-scroll --with-content-pane">
                     <FilesList
                         itemListPaneWidth={itemListPaneWidth}
                         animation={this.state.animation}

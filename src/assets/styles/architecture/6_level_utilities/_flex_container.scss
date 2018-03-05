@@ -1,3 +1,11 @@
 .flex-block {
-  display: flex
+  display: flex;
+
+  &.--with-scroll {
+    @extend %content-with-scroll;
+  }
+
+  &.--with-content-pane {
+    @extend %content-pane;
+  }
 }

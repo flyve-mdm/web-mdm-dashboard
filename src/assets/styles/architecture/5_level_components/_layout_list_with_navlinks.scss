@@ -1,7 +1,6 @@
 $nav-width: 35%;
 $article-width: 75%;
 $anchor-background-color: $color-2-secondary;
-$height: ($header-height - 10 );
 
 .layout_list_with_navlinks-block {
   display: flex;
@@ -40,8 +39,8 @@ $height: ($header-height - 10 );
   > article {
     width: $article-width;
     padding: 0 58px 0 20px;
-    overflow-y: auto;
-    height: calc(100vh - #{$height});
+
+    @extend %content-with-scroll;
 
     > div {
       @include animation('fade-in .2s');

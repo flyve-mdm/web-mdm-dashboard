@@ -73,7 +73,7 @@ export default class FilesAdd extends Component {
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" > New File </h2>
                     </div>
-                    <div style={{ padding: '10px' }}>
+                    <div>
                         <FilesUpload
                             ref='files'
                             className='files-dropzone'
@@ -86,7 +86,7 @@ export default class FilesAdd extends Component {
                         >
                             Drop the file here or click to upload
                         </FilesUpload>
-                        <div style={{ margin: '10px' }}>
+                        <div>
                             <button className="win-button win-button-primary" onClick={this.filesUpload}>Save</button>
                             {
                                 this.state.files.length > 0
