@@ -3,11 +3,10 @@
   display: inline-block;
   position: relative;
   vertical-align: top;
-  border: 1px solid #11615f;
+  line-height: 2;
   margin: 20px;
-  background: #13908d;
-  color: white;
-  font-size: 14px
+  height: 32px;
+  border: 1px solid $color-1-primary;
 }
 
 .language__select {
