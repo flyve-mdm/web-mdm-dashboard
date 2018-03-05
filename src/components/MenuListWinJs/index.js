@@ -82,7 +82,6 @@ export default class ListWinJs extends Component {
 
     handleRefresh = async () => {
         try {
-            // this.props.onNavigate([this.props.location[0]])
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -104,6 +103,8 @@ export default class ListWinJs extends Component {
                 isLoading: false,
                 order: devices.order,
                 itemList: buildItemList(devices)
+            }, () => {
+                this.props.history.replace('/app/devices')
             })
             
         } catch (error) {
@@ -411,5 +412,6 @@ ListWinJs.propTypes = {
     handleRefreshRequest: PropTypes.object.isRequired,
     handleDeleteRequest: PropTypes.object.isRequired,
     handleSortRequest: PropTypes.object.isRequired,
-    loadMoreDataRequest: PropTypes.object.isRequired
+    loadMoreDataRequest: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 }
