@@ -59,7 +59,7 @@ const splitView = ({
                     title='Applications'
                     disabled={expanded}/>
                   <IconWithPopper
-                    to={'/app/contacts'}
+                    to={'/app/users'}
                     iconName='peopleIcon'
                     title='Contacts'
                     disabled={expanded}/>  
