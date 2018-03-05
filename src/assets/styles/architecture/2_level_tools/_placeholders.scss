@@ -2,16 +2,19 @@
   cursor: pointer;
   border-style: solid;
   margin: 0px;
-  min-width: 80px;
+  min-width: 120px;
+  min-height: 32px;
   padding: 4px 8px;
   border-width: 2px;
   background-clip: border-box;
   border-radius: 0;
-  touch-action: manipulation;
-  -webkit-appearance: none;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.333;
   border: none;
+  -webkit-appearance: none;
+  touch-action: manipulation;
+  -ms-touch-action: manipulation;
 
   @include transition(background-color, .2s, ease);
   @include font-source(Segoe UI, 15px, #616264);
