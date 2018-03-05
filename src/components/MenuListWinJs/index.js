@@ -136,7 +136,7 @@ export default class ListWinJs extends Component {
         this.listView.winControl.selection.clear()
         this.props.changeAction(null)
         this.props.changeSelectionMode(!this.props.selectionMode)
-        this.props.onNavigate([this.props.location[0]])  
+        this.props.history.replace('/app/devices')
         this.setState({
             selectedItemList: []
         })
