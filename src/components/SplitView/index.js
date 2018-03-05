@@ -120,4 +120,4 @@ const splitView = ({
   )
 }
   
-export default splitView;
+export default splitView

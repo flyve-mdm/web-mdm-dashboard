@@ -21,4 +21,4 @@ const iconWithPopper = ({to, iconName, title, disabled, click}) => {
   }
 }
  
-export default iconWithPopper;
+export default iconWithPopper
