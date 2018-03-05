@@ -9,7 +9,11 @@ import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
 import withGLPI from '../../../../hoc/withGLPI'
 import Title from '../../../../components/Title'
-import { uiTransactionStart, uiTransactionFinish } from '../../../../store/ui/actions'
+import {
+    uiTransactionStart,
+    uiTransactionFinish,
+    uiSetNotification
+} from '../../../../store/ui/actions';
 import { bindActionCreators } from 'redux'
 
 function mapStateToProps(state, props) {
@@ -23,6 +27,7 @@ function mapDispatchToProps(dispatch) {
     const actions = {
         uiTransactionStart: bindActionCreators(uiTransactionStart, dispatch),
         uiTransactionFinish: bindActionCreators(uiTransactionFinish, dispatch),
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
     }
     return { actions }
 }
@@ -184,6 +189,11 @@ class Profiles extends Component {
                         this.props.actions.uiTransactionFinish()
                     }
                 }
+            , () => this.props.actions.setNotification({
+                    title: 'Successfully',
+                    body: 'The Profile data changed',
+                    type: 'info'
+                })
             )
         }
     }

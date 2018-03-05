@@ -1,5 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { uiSetNotification } from '../../../../store/ui/actions'
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
 
 class ChangeDownloadURL extends Component {
 
@@ -19,7 +29,11 @@ class ChangeDownloadURL extends Component {
     saveURL = () => {
         this.props.saveValues('downloadURL', this.state.downloadURL)
         this.props.changeMode('')
-        this.props.showNotification('Success', 'download URL changed')
+        this.props.actions.setNotification({
+            title: 'Successfully',
+            body: 'The Download URL was changed',
+            type: 'info'
+        })
     }
 
     render () {
@@ -55,7 +69,7 @@ ChangeDownloadURL.propTypes = {
     changeMode: PropTypes.func.isRequired,
     downloadURL: PropTypes.string.isRequired,
     saveValues: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    actions: PropTypes.object.isRequired
 }
 
-export default ChangeDownloadURL
+export default connect(null, mapDispatchToProps)(ChangeDownloadURL)

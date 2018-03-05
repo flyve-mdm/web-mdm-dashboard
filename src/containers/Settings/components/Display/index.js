@@ -3,6 +3,20 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import Title from '../../../../components/Title'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { uiToggleAnimation } from '../../../../store/ui/actions'
+import { changeLanguage } from '../../../../store/i18n/actions'
+import { I18n } from 'react-i18nify'
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        uiToggleAnimation: bindActionCreators(uiToggleAnimation, dispatch),
+        changeLanguage: bindActionCreators(changeLanguage, dispatch) 
+    }
+    return { actions }
+}
+
 class Display extends Component {
 
     constructor(props) {
@@ -40,7 +54,7 @@ class Display extends Component {
         localStorage.setItem('display', JSON.stringify(display))
 
         if (name === 'animations') {
-            this.props.handleToggleAnimation()
+            this.props.actions.uiToggleAnimation()
         }
     }
 
@@ -60,17 +74,17 @@ class Display extends Component {
                     style={{
                         paddingTop: 10
                     }}>
-                        <select 
-                        className="win-dropdown" 
-                        // name={} 
-                        // value={}
-                        // onChange={}
-                        >
-                            <option>English</option>
-                            <option>French</option>
-                            <option>Spanish</option>
-                            <option>Portuguese</option>
-                        </select>
+                        <span className='language__span btn' style={{margin: 0}}>
+                            {I18n.t('commons.language')}
+                            <select className='language__select' onChange={
+                                event => this.props.actions.changeLanguage(event.target.value)
+                            }>
+                                <option value='en_GB'>English</option>
+                                <option value='pt_BR'>Portuguese</option>
+                                <option value='fr_FR'>French</option>
+                                <option value='es_ES'>Spain</option>
+                            </select>
+                        </span>
                     </div>
                 </div>
 
@@ -214,7 +228,7 @@ class Display extends Component {
 }
 
 Display.propTypes = {
-    handleToggleAnimation: PropTypes.func.isRequired
+    actions: PropTypes.object.isRequired
 }
 
-export default Display
+export default connect(null, mapDispatchToProps)(Display)

@@ -6,6 +6,16 @@ import validateData from '../../../../shared/validateData'
 import supervision from '../../../../AdminDashboard/data/supervision.json'
 import ConstructInputs from '../../../../components/Forms'
 import Title from '../../../../components/Title'
+import { bindActionCreators } from 'redux'
+import { uiSetNotification } from '../../../../store/ui/actions'
+import { connect } from 'react-redux'
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
 
 class Supervision extends Component {
 
@@ -21,7 +31,11 @@ class Supervision extends Component {
     }
 
     saveChanges = () => {
-        this.props.showNotification('Success', 'Helpdesk configuration saved')
+        this.props.actions.setNotification({
+            title: 'Successfully',
+            body: 'Helpdesk configuration saved',
+            type: 'info'
+        })
     }
 
     changeState = (name, value) => {
@@ -53,7 +67,7 @@ class Supervision extends Component {
 }
 
 Supervision.propTypes = {
-    showNotification: PropTypes.func.isRequired
+    actions: PropTypes.object.isRequired
 }
 
-export default Supervision
+export default connect(null, mapDispatchToProps)(Supervision)

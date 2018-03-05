@@ -4,8 +4,21 @@ import { updateObject } from '../../shared/updateObject'
 
 // Sugar Functions
 
+const uiToggleAnimation = (state) => {
+  return updateObject(state, {animation: !state.animation})
+}
+
 const uiSetNotification = (state, action) => {
-  return updateObject(state, {notification: action.notification})
+  return updateObject(state, {notification: {
+    show: true,
+    ...action.notification
+  }})
+}
+
+const uiHideNotification = (state) => {
+  return updateObject(state, {notification: {
+    show: false
+  }})
 }
 
 const uiTransactionStart = (state, action) => {
@@ -28,7 +41,9 @@ const uiTransactionFinish = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.TOGGLE_ANIMATION: return uiToggleAnimation(state);
     case actionTypes.CHANGE_NOTIFICATION_MESSAGE: return uiSetNotification(state, action);
+    case actionTypes.HIDE_NOTIFICATION: return uiHideNotification(state);
     case actionTypes.UI_TRANSACTION_START: return uiTransactionStart(state, action);
     case actionTypes.UI_TRANSACTION_FAIL: return uiTransactionFail(state, action);
     case actionTypes.UI_TRANSACTION_FINISH: return uiTransactionFinish(state, action);

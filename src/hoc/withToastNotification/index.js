@@ -2,14 +2,24 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import WinJS from 'winjs'
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router'
+import { bindActionCreators } from 'redux'
+import { uiHideNotification } from '../../store/ui/actions'
 
 function mapStateToProps(state, props) {
   return {
       body: state.ui.notification.body,
       title: state.ui.notification.title,
-      type: state.ui.notification.type
+      type: state.ui.notification.type,
+      show: state.ui.notification.show
   }
+}
+
+function mapDispatchToProps(dispatch) {
+  const actions = {
+    uiHideNotification: bindActionCreators(uiHideNotification, dispatch)
+  }
+  return { actions }
 }
 
 const withToastNotification = WrappedComponent => {
@@ -17,8 +27,8 @@ const withToastNotification = WrappedComponent => {
     constructor (props) {
       super(props)
       this.state = {
-          show: false,
-          timer: {}
+          timer: {},
+          show: false
       }
     }
 
@@ -39,20 +49,22 @@ const withToastNotification = WrappedComponent => {
       WinJS.UI.Animation.exitContent(
           document.getElementsByClassName('toast'), { top: '0px', left: '20px' }
       ).then(() => {
-          this.setState({
-              show: false
-          })
+        this.setState({
+            show: false
+        }, () => {
+          clearTimeout(this.state.timer)
+          this.props.actions.uiHideNotification()
+        })
       })
     }
 
     render () {
       let toast = null
 
-      if (this.state.show) {
+      if (this.state.show && this.props.show) {
         toast = (
         <div className={`toast --${this.props.type}`}>
             <span className="cancelIcon" style={{ float: 'right', cursor: 'pointer' }} onClick={()=> {
-                clearTimeout(this.state.timer)
                 this.hideNotification()
             }}/>
             <div className="toast-title">
@@ -76,11 +88,15 @@ const withToastNotification = WrappedComponent => {
   ToastNotification.propTypes = {
     title: PropTypes.string,
     body: PropTypes.string,
-    type: PropTypes.string
+    type: PropTypes.string,
+    show: PropTypes.bool
   }
 
   return withRouter(
-    connect(mapStateToProps, null)(ToastNotification)
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(ToastNotification)
   )
   
 }

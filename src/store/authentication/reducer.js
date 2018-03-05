@@ -8,6 +8,10 @@ const changeNotificationMessage = (state, action) => {
   return updateObject(state, {notification: action.notification})
 }
 
+const changePasswordConfiguration = (state, action) => {
+  return updateObject(state, {configurationPassword: action.configurationPassword})
+}
+
 const authSuccess = (state, action) => {
   return updateObject(state, {
     currentUser: {
@@ -48,6 +52,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
     case actionTypes.AUTH_REFRESH_CAPTCHA: return authRefreshCaptcha(state, action);
     case actionTypes.CHANGE_NOTIFICATION_MESSAGE: return changeNotificationMessage(state, action);
+    case actionTypes.CHANGE_PASSWORD_CONFIGURATION: return changePasswordConfiguration(state, action);
     default: return state;
   }
 }

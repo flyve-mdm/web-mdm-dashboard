@@ -1,5 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { uiSetNotification } from '../../../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
 
 class ChangeTokenLife extends Component {
 
@@ -19,7 +29,11 @@ class ChangeTokenLife extends Component {
     saveTokenLife = () => {
         this.props.saveValues('tokenLife', this.state.tokenLife)
         this.props.changeMode('')
-        this.props.showNotification('Success', 'token life changed')
+        this.props.actions.setNotification({
+            title: 'Successfully',
+            body: 'The Token Life changed',
+            type: 'info'
+        })
     }
 
     render () {
@@ -54,7 +68,8 @@ class ChangeTokenLife extends Component {
 ChangeTokenLife.propTypes = {
     changeMode: PropTypes.func.isRequired,
     tokenLife: PropTypes.string.isRequired,
-    saveValues: PropTypes.func.isRequired
+    saveValues: PropTypes.func.isRequired,
+    actions: PropTypes.object.isRequired
 }
 
-export default ChangeTokenLife
+export default connect(null, mapDispatchToProps)(ChangeTokenLife)
