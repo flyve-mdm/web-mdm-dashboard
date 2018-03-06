@@ -27,11 +27,6 @@ const splitView = ({
             <ScrollSyncPane>
               <div className="splitview-wrapper-wrapper__div">
                 <section className="splitview-wrapped-navbar-wrapped-top__section">
-                
-                  <div className="splitview-wrapped-navbar-wrapped-top-burger">
-                    <span className="burgerIcon" onClick={handleToggleExpand}/>
-                  </div>
-
                   <ImgWithPopper
                     to={'/app'}
                     alt='Flyve MDM Dashboard'
@@ -102,7 +97,6 @@ const splitView = ({
                   contract && '--closing'
                 }`}>
                 <section className="splitview-wrapped-navbar-wrapped-top__section --description">
-                  <div style={{marginBottom: 8}}/>
                   <SpanWithPopper description='Dashboard' />
                   <SpanWithPopper description='Devices' />
                   <SpanWithPopper description='Invitations' />

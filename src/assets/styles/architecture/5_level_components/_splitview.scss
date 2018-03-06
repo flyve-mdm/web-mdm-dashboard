@@ -1,6 +1,6 @@
-$width-desktop: 20vw;
-$width-tablet-small: (640px / 2.5);
-$width-phablet: (560px / 2.5);
+$width-desktop: 200px;
+$width-tablet-small:  200px;
+$width-phablet:  200px;
 $color-fonts: $splitview-color-fonts;
 $color-fonts-hover: $splitview-color-fonts-hover;
 
@@ -37,6 +37,7 @@ $color-fonts-hover: $splitview-color-fonts-hover;
 
 .splitview-block {
   @include animation('fade-in .5s');
+  display: inline-block;
 
   .splitview-wrapper__div {
     height: $splitview-height;
@@ -89,16 +90,16 @@ $color-fonts-hover: $splitview-color-fonts-hover;
         width: $splitview-width;
 
         &.--large {
-          width: 20vw;
+          width: 200px;
 
           @include animation('expanding-splitview-desktop .5s ease');
 
           @include mq($until: 'tablet-small') {
-            width: (640px / 2.5);
+            width:  200px;
           }
 
           @include mq($until: 'phablet') {
-            width: (560px / 2.5);
+            width:  200px;
           }
 
           &.--opening {
@@ -154,19 +155,6 @@ $color-fonts-hover: $splitview-color-fonts-hover;
 
         .splitview-wrapped-navbar-wrapped-top__section,
         .splitview-wrapped-navbar-wrapped-bottom__section {
-
-          .splitview-wrapped-navbar-wrapped-top-burger {
-            height: 30px;
-            border-bottom: .1px solid $color-fonts;
-            margin-bottom: 8px;
-            span {
-              cursor: pointer;
-            }
-          }
-
-          div:first-child {
-            height: 30px !important;
-          }
 
           > div {
             height: 40px;

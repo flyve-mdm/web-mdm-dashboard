@@ -3,6 +3,7 @@ $article-width: 75%;
 $anchor-background-color: $color-2-secondary;
 
 .layout_list_with_navlinks-block {
+  flex: 1 100%;
   display: flex;
 
   > nav {
