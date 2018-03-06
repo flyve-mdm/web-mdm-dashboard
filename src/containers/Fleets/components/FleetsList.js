@@ -1,5 +1,4 @@
 import React, {Component} from "react"
-import PropTypes from 'prop-types'
 import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
 import FleetsItemList from './FleetsItemList'

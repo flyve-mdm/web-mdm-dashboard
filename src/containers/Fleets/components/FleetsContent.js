@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import Pluralize from 'pluralize'
 import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
 import Confirmation from '../../../components/Confirmation'
@@ -34,18 +32,21 @@ class FleetsContent extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.data.fleetSelected !== this.props.data.fleetSelected && nextProps.data.fleetSelected !== null) {
-            nextProps.data.fetchTasks(nextProps.data.fleetSelected['PluginFlyvemdmFleet.id'])
+            nextProps.data.fetchTasks()
         }
     }
 
     render() {
         let renderComponent
-        console.log(this.props)
+
         if (this.props.data.policiesData && this.props.data.tasksData) {
             renderComponent = this.props.data.policiesData.map((item, index) => {
                 let multiplesValues = null
+
                 const addedPolicy = this.handleFleetHaveTask(item)
+
                 const IdPolicy = item['PluginFlyvemdmPolicy.id']
+                
                 if (addedPolicy && POLICIES_CAN_MULTIPLE_VALUE.includes(IdPolicy)) {
                     multiplesValues = this.props.data.tasksData.filter(task => (
                         task['plugin_flyvemdm_policies_id'] === IdPolicy

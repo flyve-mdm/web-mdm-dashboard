@@ -1,11 +1,8 @@
 import React from 'react'
-import { I18n } from 'react-i18nify'
 
 import FleetsContent from './components/FleetsContent'
 
 const MonkComponent1 = () => <div><h1> Mock1 </h1></div>
-const MonkComponent2 = () => <div><h1> Mock2 </h1></div>
-const MonkComponent3 = () => <div><h1> Mock3 </h1></div>
 const MonkComponent4 = () => <div><h1> Mock4 </h1></div>
 const MonkComponent5 = () => <div><h1> Mock5 </h1></div>
 

@@ -27,10 +27,10 @@ class Fleets extends Component {
     this.setState({ policiesData:  response.data });
   }
 
-  fetchTasks = async IdFleet => {
+  fetchTasks = async () => {
     const response = await this.props.glpi.getSubItems({
         itemtype: 'PluginFlyvemdmFleet',
-        id: IdFleet,
+        id: this.state.fleetSelected['PluginFlyvemdmFleet.id'],
         subItemtype: 'PluginFlyvemdmTask',
         options: { 
             uid_cols: true, 
@@ -38,7 +38,7 @@ class Fleets extends Component {
         }
     })
 
-    this.setState({ tasksData: response.data });
+    this.setState({ tasksData: response });
   }
 
   componentDidMount = () => {
