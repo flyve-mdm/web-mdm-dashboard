@@ -341,7 +341,7 @@ export default class DevicesList extends Component {
                     />
                 </ReactWinJS.ToolBar>
                 { listComponent }
-                <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.selectedItemList.length +` `+ this.props.location[0]} reference={el => this.contentDialog = el} /> 
+                <Confirmation title={`Delete Devices`} message={this.state.selectedItemList.length +` Devices`} reference={el => this.contentDialog = el} /> 
             </div>
         )
     }
