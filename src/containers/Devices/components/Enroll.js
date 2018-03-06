@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ContentPane from '../../components/ContentPane'
-import Loading from '../../components/Loading'
+import ContentPane from '../../../components/ContentPane'
+import Loading from '../../../components/Loading'
 
 export default class Enroll extends Component {
 

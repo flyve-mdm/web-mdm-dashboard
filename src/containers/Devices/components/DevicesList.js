@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import DevicesItemList from './DevicesItemList'
-import BuildItemList from '../../components/BuildItemList'
-import Loader from '../../components/Loader'
-import Confirmation from '../../components/Confirmation'
+import BuildItemList from '../../../components/BuildItemList'
+import Loader from '../../../components/Loader'
+import Confirmation from '../../../components/Confirmation'
 
 export default class DevicesList extends Component {
 
@@ -341,7 +341,7 @@ export default class DevicesList extends Component {
                     />
                 </ReactWinJS.ToolBar>
                 { listComponent }
-                <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.selectedItemList.length +` `+ this.props.location[0]} reference={el => this.contentDialog = el} /> 
+                <Confirmation title={`Delete Devices`} message={this.state.selectedItemList.length +` Devices`} reference={el => this.contentDialog = el} /> 
             </div>
         )
     }
