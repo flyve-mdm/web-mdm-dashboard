@@ -1,34 +1,56 @@
 import React, { Component } from 'react'
+import routes from './routes'
+import withGLPI from '../../hoc/withGLPI'
+import GenerateRoutes from '../../components/GenerateRoutes'
 import DevicesList from './components/DevicesList'
-import DevicesPage from './components/DevicesPage'
-import getMode from '../../shared/getMode'
-import glpi from '../../shared/glpiApi'
+import {
+    uiTransactionStart,
+    uiTransactionFinish,
+    uiSetNotification
+} from '../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-export default class Devices extends Component {
+function mapStateToProps(state, props) {
+    return {
+        isLoading: state.ui.loading,
+        currentUser: state.auth.currentUser
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        uiTransactionStart: bindActionCreators(uiTransactionStart, dispatch),
+        uiTransactionFinish: bindActionCreators(uiTransactionFinish, dispatch),
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
+
+class Devices extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            location: ['Devices'],
+            location: ['Files'],
             selectionMode: false,
             action: null,
             animation: false,
         }
     }
 
-    onNavigate = location => this.setState({location})
-    changeAction = action => this.setState({action})
-    changeSelectionMode = selectionMode => this.setState({selectionMode})
+    onNavigate = location => this.setState({ location })
+    changeAction = action => this.setState({ action })
+    changeSelectionMode = selectionMode => this.setState({ selectionMode })
     showNotification = (title, body) => {
     }
 
     render() {
-
-        let selectedItemList = this.state.location.length === 2 ? this.state.location[1] : null
-        if (getMode() === 'small') {
-            if (!selectedItemList && !this.state.action) {
-                return <DevicesList
-                    itemListPaneWidth={'100%'}
+        console.log(this.props)
+        return (
+            <div className="flex-block --with-scroll --with-content-pane">
+                <DevicesList
+                    itemListPaneWidth={320}
                     animation={this.state.animation}
                     location={this.state.location}
                     onNavigate={this.onNavigate}
@@ -36,51 +58,17 @@ export default class Devices extends Component {
                     selectionMode={this.state.selectionMode}
                     action={this.state.action}
                     changeAction={this.changeAction}
-                    showNotification={this.showNotification} 
-                    glpi={glpi} />
-            } else {
-                return <DevicesPage 
-                    itemListPaneWidth={0}
-                    animation={this.state.animation}
-                    location={this.state.location}
-                    onNavigate={this.onNavigate}
-                    selectedItemList={selectedItemList}
-                    changeSelectionMode={this.changeSelectionMode}
-                    action={this.state.action}
-                    changeAction={this.changeAction}
-                    showNotification={this.showNotification} 
-                    glpi={glpi} />
-            }
-        } else {
-            let itemListPaneWidth = 320
-            return (
-                <div className="flex-block --with-scroll --with-content-pane">
-                    <DevicesList
-                        itemListPaneWidth={itemListPaneWidth}
-                        animation={this.state.animation}
-                        location={this.state.location}
-                        onNavigate={this.onNavigate}
-                        changeSelectionMode={this.changeSelectionMode}
-                        selectionMode={this.state.selectionMode}
-                        action={this.state.action}
-                        changeAction={this.changeAction} 
-                        showNotification={this.showNotification} 
-                        glpi={glpi}
-                    />
-                    <DevicesPage 
-                        itemListPaneWidth={itemListPaneWidth}
-                        animation={this.state.animation}
-                        location={this.state.location}
-                        onNavigate={this.onNavigate}
-                        selectedItemList={selectedItemList}
-                        changeSelectionMode={this.changeSelectionMode}
-                        action={this.state.action}
-                        changeAction={this.changeAction} 
-                        showNotification={this.showNotification} 
-                        glpi={glpi}
-                    />
-                </div>
-            )
-        }
+                    showNotification={this.props.actions.setNotification}
+                    history={this.props.history}
+                    glpi={this.props.glpi}
+                />
+                <GenerateRoutes routes={routes} rootPath={this.props.match.url} />
+            </div>
+        )
+
     }
 }
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withGLPI(Devices))
