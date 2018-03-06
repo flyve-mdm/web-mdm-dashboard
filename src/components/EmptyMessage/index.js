@@ -17,4 +17,9 @@ EmptyMessage.propTypes = {
     message: PropTypes.string.isRequired
 }
 
+EmptyMessage.defaultProps = {
+    itemListPaneWidth: 320,
+    message: "No Selection"
+}
+
 export default EmptyMessage
