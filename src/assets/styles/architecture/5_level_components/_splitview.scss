@@ -83,7 +83,7 @@ $color-fonts-hover: $splitview-color-fonts-hover;
         -webkit-box-orient: vertical;
         -ms-flex-direction: column;
         -webkit-flex-direction: column;
-        padding: 16px 0 16px;
+        padding: 16px 0 0;
         overflow-y: auto;
         overflow-x: hidden;
         width: $splitview-width;
@@ -156,13 +156,20 @@ $color-fonts-hover: $splitview-color-fonts-hover;
         .splitview-wrapped-navbar-wrapped-bottom__section {
 
           .splitview-wrapped-navbar-wrapped-top-burger {
-            border-bottom: 1px solid $color-fonts;
+            height: 30px;
+            border-bottom: .1px solid $color-fonts;
             margin-bottom: 8px;
-            cursor: pointer;
+            span {
+              cursor: pointer;
+            }
+          }
+
+          div:first-child {
+            height: 30px !important;
           }
 
           > div {
-            height: 50px;
+            height: 40px;
             text-align: center;
             
             > a {
@@ -185,10 +192,9 @@ $color-fonts-hover: $splitview-color-fonts-hover;
           }
 
           &.--description {
-            margin-top: 5px;
 
             > div {
-              height: 49px;
+              height: 40px;
               text-align: left;
 
               span {
