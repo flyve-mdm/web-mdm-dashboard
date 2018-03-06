@@ -3,8 +3,13 @@
     
     .authentication__section {
         padding-top: 20px;
+        padding-bottom: 20px;
         min-height: 75vh;
         
+        .loading {
+            margin-top: 100px !important;
+        }
+
         .authentication__figure {
             text-align: center;
             
