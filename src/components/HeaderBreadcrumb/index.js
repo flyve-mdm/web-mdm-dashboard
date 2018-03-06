@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const headerBreadcrumb = ({handleToggleExpand}) => {
   
@@ -17,13 +17,8 @@ const headerBreadcrumb = ({handleToggleExpand}) => {
           <span>{ lastSeg }</span>
         </div>
       </nav>
-      <nav className="header-content-right__nav --breadcrumb-mode">
-        <div>
-          <span className="burgerIcon" onClick={handleToggleExpand}/>
-        </div>
-      </nav>
     </header>
   )
 }
  
-export default headerBreadcrumb;
+export default headerBreadcrumb

@@ -12,7 +12,8 @@ const splitView = ({
   contract,
   handleExpand,
   handleContract,
-  handleSetTimeOut
+  handleSetTimeOut,
+  handleToggleExpand
 }) => {
   
   handleSetTimeOut()
@@ -26,6 +27,11 @@ const splitView = ({
             <ScrollSyncPane>
               <div className="splitview-wrapper-wrapper__div">
                 <section className="splitview-wrapped-navbar-wrapped-top__section">
+                
+                  <div className="splitview-wrapped-navbar-wrapped-top-burger">
+                    <span className="burgerIcon" onClick={handleToggleExpand}/>
+                  </div>
+
                   <ImgWithPopper
                     to={'/app'}
                     alt='Flyve MDM Dashboard'
