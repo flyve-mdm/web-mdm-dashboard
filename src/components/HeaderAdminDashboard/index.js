@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const HeaderAdminDashboard = ({
   handleToggleExpand
@@ -30,4 +30,4 @@ const HeaderAdminDashboard = ({
   </header>
 )
  
-export default HeaderAdminDashboard;
+export default HeaderAdminDashboard

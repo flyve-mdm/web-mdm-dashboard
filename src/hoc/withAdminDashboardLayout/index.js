@@ -51,9 +51,10 @@ const withAdminDashboardLayout = WrappedComponent=> {
             handleExpand={this.handleExpand}
             handleContract={this.handleContract}
             handleSetTimeOut={this.handleSetTimeOut}
+            handleToggleExpand={this.handleToggleExpand}
           />
           <div>
-            <HeaderBreadcrumb handleToggleExpand={this.handleToggleExpand}/> 
+            <HeaderBreadcrumb /> 
             <WrappedComponent {...this.props} />
           </div>
         </main>
@@ -64,4 +65,4 @@ const withAdminDashboardLayout = WrappedComponent=> {
   return AdminDashboardLayout
 }
 
-export default withAdminDashboardLayout;
+export default withAdminDashboardLayout
