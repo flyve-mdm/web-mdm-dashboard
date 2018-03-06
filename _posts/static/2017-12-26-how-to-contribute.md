@@ -2,7 +2,7 @@
 layout: post
 howtos: true
 published: true
-title: Join our Communitty!
+title: Join our Community!
 permalink: howtos/contribute
 description: Be part of our awesome team
 ---
