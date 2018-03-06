@@ -45,18 +45,21 @@ const withAdminDashboardLayout = WrappedComponent=> {
     render() {
       return (
         <main>
-          <SplitView
-            expanded={this.state.expanded}
-            contract={this.state.contract}
-            handleExpand={this.handleExpand}
-            handleContract={this.handleContract}
-            handleSetTimeOut={this.handleSetTimeOut}
-            handleToggleExpand={this.handleToggleExpand}
-          />
-          <div>
-            <HeaderBreadcrumb /> 
+
+          <HeaderBreadcrumb handleToggleExpand={this.handleToggleExpand}/> 
+
+          <div className="flex-block">
+            <SplitView
+              expanded={this.state.expanded}
+              contract={this.state.contract}
+              handleExpand={this.handleExpand}
+              handleContract={this.handleContract}
+              handleSetTimeOut={this.handleSetTimeOut}
+              handleToggleExpand={this.handleToggleExpand}
+            />
             <WrappedComponent {...this.props} />
           </div>
+        
         </main>
       )
     }

@@ -7,5 +7,6 @@
 
   &.--with-content-pane {
     @extend %content-pane;
+    flex: 1 100%;
   }
 }
