@@ -113,7 +113,9 @@ class FleetsList extends Component {
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-        return (<FleetsItemList itemList={ItemList.data} history={this.props.history}/>)
+        return (<FleetsItemList 
+                itemList={ItemList.data} 
+                clicked={this.props.handleClickFleet}/>)
     })
 
     groupHeaderRenderer = ReactWinJS.reactRenderer((item) => {
