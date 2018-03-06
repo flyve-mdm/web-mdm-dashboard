@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Pluralize from 'pluralize'
-import IconItemList from '../../../components/IconItemList'
-import Confirmation from '../../../components/Confirmation'
-import Loading from '../../../components/Loading'
+import IconItemList from '../../../../components/IconItemList'
+import Confirmation from '../../../../components/Confirmation'
+import Loading from '../../../../components/Loading'
 
 class Main extends Component {
 

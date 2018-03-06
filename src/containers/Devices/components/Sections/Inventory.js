@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Loader from '../../../components/Loader'
+import Loader from '../../../../components/Loader'
 
 export default class Inventory extends Component {
 

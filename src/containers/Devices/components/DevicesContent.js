@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import ContentPane from '../../components/ContentPane'
+import ContentPane from '../../../components/ContentPane'
 import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sections'
 
 class DevicesContent extends Component {

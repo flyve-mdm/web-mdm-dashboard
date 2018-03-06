@@ -4,7 +4,7 @@ import Enroll from './Enroll'
 import DevicesEdit from './DevicesEdit'
 import DevicesEditOne from './DevicesEditOne'
 import DevicesContent from './DevicesContent'
-import EmptyMessage from '../../components/EmptyMessage'
+import EmptyMessage from '../../../components/EmptyMessage'
 
 export default class DevicesPage extends Component {
     

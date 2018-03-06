@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ContentPane from '../../components/ContentPane'
-import ConstructInputs from '../../components/Forms'
-import { agentScheme } from '../../components/Forms/Schemas'
-import Loading from '../../components/Loading'
+import ContentPane from '../../../components/ContentPane'
+import ConstructInputs from '../../../components/Forms'
+import { agentScheme } from '../../../components/Forms/Schemas'
+import Loading from '../../../components/Loading'
 
 export default class DevicesEditOne extends Component {
 
