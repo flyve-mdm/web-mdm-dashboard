@@ -6,6 +6,7 @@ import Applications from '../../containers/Applications'
 import Users from '../../containers/Users'
 import About from '../../containers/About'
 import Settings from '../../containers/Settings'
+import Fleets from '../../containers/Fleets'
 
 const routes = [
   {
@@ -18,31 +19,37 @@ const routes = [
     path: '/devices',
     name: 'Devices',
     component: Devices,
-    exact: true
+    exact: false
   },
   {
     path: '/invitations',
     name: 'Invitations',
     component: Invitations,
-    exact: true
+    exact: false
   },
   {
     path: '/files',
     name: 'Files',
     component: Files,
-    exact: true
+    exact: false
+  },
+  {
+    path: '/fleets',
+    name: 'Fleets',
+    component: Fleets,
+    exact: false
   },
   {
     path: '/applications',
     name: 'Applications',
     component: Applications,
-    exact: true
+    exact: false
   },
   {
     path: '/users',
     name: 'Users',
     component: Users,
-    exact: true
+    exact: false
   },
   {
     path: '/about',
