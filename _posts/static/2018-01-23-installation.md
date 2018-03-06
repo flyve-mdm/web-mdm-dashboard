@@ -64,7 +64,7 @@ The following commands can be used either with npm or yarn
 
 ## Configure the Dashboard
 
-* Go to src/config.json
+* Go to src/config/config.json
 * Add the url of the GLPI API and the User Token from Demo plugin where indicated in the config.json file.
 
 You can find the GLPI API url in Setup>General>API
