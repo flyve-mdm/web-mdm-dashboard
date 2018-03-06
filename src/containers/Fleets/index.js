@@ -3,13 +3,13 @@ import withGLPI from '../../hoc/withGLPI'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import FleetsList from './components/FleetsList'
 import routes from './routes'
-import { Route } from 'react-router';
 
 class Fleets extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        policiesData: []
+        policiesData: [],
+        fleetSelected: null
     }
   }
 
@@ -43,10 +43,26 @@ class Fleets extends Component {
     })
   }
 
+  handleClickFleet = (fleetData) => {
+    this.setState({ fleetSelected: {...fleetData} },
+      () => {
+        this.props.history.push(`/app/fleets/${fleetData["PluginFlyvemdmFleet.id"]}`)
+      }
+    );
+  }
+
   render() { 
     return ( 
-      <FleetsList glpi={this.props.glpi} history={this.props.history}>
-        <GenerateRoutes routes={routes} rootPath={this.props.match.url}/>
+      <FleetsList 
+        glpi={this.props.glpi}
+        fleetSelected={this.state.fleetSelected}
+        handleClickFleet={this.handleClickFleet}
+      >
+        <GenerateRoutes routes={routes} rootPath={this.props.match.url} data={{
+          policiesData: this.state.policiesData,
+          fleetSelected: this.state.fleetSelected,
+          fetchTasks: this.fetchTasks
+        }}/>
       </FleetsList>
     )
   }

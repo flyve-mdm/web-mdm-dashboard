@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 
-const FleetsItemList = ({itemList, history}) => {
-    const id = itemList["PluginFlyvemdmFleet.id"]
+const FleetsItemList = ({itemList, history, clicked}) => {
     return (
-        <div style={{ display: 'inline-block' }} onClick={() => history.push(`${id}`)}>
+        <div style={{ display: 'inline-block' }} onClick={() => clicked(itemList)}>
             <div className="name">{itemList["PluginFlyvemdmFleet.name"]}</div>
         </div>
     )

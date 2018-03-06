@@ -20,7 +20,7 @@ class FleetsContent extends Component {
     }
     
     handleFecthTask = async IdTask => {
-        const tasksData = await this.props.route.data.fetchTasks(IdTask)
+        const tasksData = await this.props.data.fetchTasks(IdTask)
         this.setState({
             tasksData: this.state.tasksData.concat(tasksData)
         })
@@ -36,7 +36,7 @@ class FleetsContent extends Component {
     } 
 
     componentDidMount = () => {
-        this.handleFecthTask(this.props.route.data.fleetData['PluginFlyvemdmFleet.id'])
+        this.props.data.fetchTasks(this.props.data.fleetSelected['PluginFlyvemdmFleet.id'])
     }
 
     render() {
@@ -69,7 +69,7 @@ class FleetsContent extends Component {
                     <h2 className="win-h2 titleContentPane" > Fleets </h2>
                     <div className="itemInfo">
                         <div className="contentStatus">
-                            <div className="name">{this.props.route.data.fleetSelected["PluginFlyvemdmFleet.name"]}</div>
+                            <div className="name">{this.props.data.fleetSelected["PluginFlyvemdmFleet.name"]}</div>
                             <br />
                             <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
                             <span className="deleteIcon" onClick={this.handleDelete} />
@@ -83,7 +83,7 @@ class FleetsContent extends Component {
 
                 { renderComponent }
 
-                <Confirmation title={`Delete Fleet`} message={this.props.route.data.fleetSelected["PluginFlyvemdmFleet.name"]} reference={el => this.contentDialog = el} />
+                <Confirmation title={`Delete Fleet`} message={this.props.data.fleetSelected["PluginFlyvemdmFleet.name"]} reference={el => this.contentDialog = el} />
             </div>
         )
     }
