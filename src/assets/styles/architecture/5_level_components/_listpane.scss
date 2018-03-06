@@ -2,11 +2,15 @@
 
     .contentListView {
 
-    .win-listlayout {
-        margin-top: 0;
-    }
+        .win-selectionbackground {
+            background-color: $color-1-primary !important;
+        }
 
-    .win-surface {
+        .win-listlayout {
+            margin-top: 0;
+        }
+
+        .win-surface {
             margin-top: 0 !important;
             white-space: nowrap;
         }

@@ -8,13 +8,14 @@ class Fleets extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        policiesData: [],
+        policiesData: null,
+        tasksData: null,        
         fleetSelected: null
     }
   }
 
-  fecthPolicies =  () => {  
-    return this.props.glpi.searchItems({
+  fecthPolicies = async () => {  
+    const response = await this.props.glpi.searchItems({
         itemtype: 'PluginFlyvemdmPolicy', 
         options: { 
             uid_cols: true, 
@@ -22,10 +23,12 @@ class Fleets extends Component {
             range: '0-50' // Can more than 50 items
         }
     })
+
+    this.setState({ policiesData:  response.data });
   }
 
-  fetchTasks = IdFleet => {
-    return this.props.glpi.getSubItems({
+  fetchTasks = async IdFleet => {
+    const response = await this.props.glpi.getSubItems({
         itemtype: 'PluginFlyvemdmFleet',
         id: IdFleet,
         subItemtype: 'PluginFlyvemdmTask',
@@ -34,13 +37,12 @@ class Fleets extends Component {
             forcedisplay: [1, 2, 3, 4, 6]
         }
     })
+
+    this.setState({ tasksData: response.data });
   }
 
-  componentDidMount = async () => {
-    const policiesData = await this.fecthPolicies()
-    this.setState({
-        policiesData: this.state.policiesData.concat(policiesData.data)
-    })
+  componentDidMount = () => {
+    this.fecthPolicies()
   }
 
   handleClickFleet = (fleetData) => {
@@ -61,6 +63,7 @@ class Fleets extends Component {
         <GenerateRoutes routes={routes} rootPath={this.props.match.url} data={{
           policiesData: this.state.policiesData,
           fleetSelected: this.state.fleetSelected,
+          tasksData: this.state.tasksData,
           fetchTasks: this.fetchTasks
         }}/>
       </FleetsList>
