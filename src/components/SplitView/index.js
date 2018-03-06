@@ -35,7 +35,7 @@ const splitView = ({
                   <ImgWithPopper
                     to={'/app'}
                     alt='Flyve MDM Dashboard'
-                    img='/images/logo2.png'
+                    img='/images/dashboard.svg'
                     title='Dashboard'
                     disabled={expanded}
                   />
