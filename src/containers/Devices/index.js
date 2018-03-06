@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import DevicesList from './DevicesList'
-import DevicesPage from './DevicesPage'
+import DevicesList from './components/DevicesList'
+import DevicesPage from './components/DevicesPage'
 import getMode from '../../shared/getMode'
 import glpi from '../../shared/glpiApi'
 

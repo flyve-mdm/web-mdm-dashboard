@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Confirmation from '../../../components/Confirmation'
+import Confirmation from '../../../../components/Confirmation'
 
 class DangerZone extends Component {
 

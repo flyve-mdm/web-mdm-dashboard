@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Loading from '../../../components/Loading'
-import Map from '../../../Utils/Map'
+import Loading from '../../../../components/Loading'
+import Map from '../Map'
 import GeolocationList from './GeolocationList'
 
 export default class Geolocation extends Component {

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import DevicesItemList from './DevicesItemList'
-import BuildItemList from '../../components/BuildItemList'
-import Loader from '../../components/Loader'
-import Confirmation from '../../components/Confirmation'
+import BuildItemList from '../../../components/BuildItemList'
+import Loader from '../../../components/Loader'
+import Confirmation from '../../../components/Confirmation'
 
 export default class DevicesList extends Component {
 

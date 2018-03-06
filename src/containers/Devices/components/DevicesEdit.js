@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import DevicesEditItemList from './DevicesEditItemList'
-import ContentPane from '../../components/ContentPane'
-import EmptyMessage from '../../components/EmptyMessage'
-import Loading from '../../components/Loading'
+import ContentPane from '../../../components/ContentPane'
+import EmptyMessage from '../../../components/EmptyMessage'
+import Loading from '../../../components/Loading'
 
 export default class DevicesEdit extends Component {
 

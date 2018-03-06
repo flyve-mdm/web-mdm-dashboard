@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import IconItemList from '../../components/IconItemList'
+import IconItemList from '../../../components/IconItemList'
 
 export default class DevicesItemList extends Component {
     render() {

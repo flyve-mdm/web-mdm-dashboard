@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Inventory from './Inventory'
-import Loader from '../../../components/Loader'
+import Loader from '../../../../components/Loader'
 
 class SystemReport extends Component {
 
