@@ -197,9 +197,9 @@ $color-fonts-hover: $splitview-color-fonts-hover;
                 white-space: nowrap;
                 overflow: hidden;
 
-                @include transition(all, .2s, ease);
+                @include transition(all, .1s, linear);
                 
-                @include animation('fade-in 1s');
+                @include animation('fade-in .5s');
 
                 &:hover {
                   color: $color-fonts-hover;
