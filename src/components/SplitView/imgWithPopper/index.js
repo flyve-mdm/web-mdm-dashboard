@@ -7,7 +7,7 @@ const imgWithPopper = ({to, img, alt, title, disabled}) => (
   <div>
     <NavLink to={to} activeClassName="selected">
       <ImageResponsive alt={alt} src={img} styleNew={{
-        width: '30px'
+        width: '20px'
       }}/>
     </NavLink>
   </div>

@@ -102,6 +102,7 @@ const splitView = ({
                   contract && '--closing'
                 }`}>
                 <section className="splitview-wrapped-navbar-wrapped-top__section --description">
+                  <div style={{marginBottom: 8}}/>
                   <SpanWithPopper description='Dashboard' />
                   <SpanWithPopper description='Devices' />
                   <SpanWithPopper description='Invitations' />
