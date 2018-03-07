@@ -25,6 +25,16 @@ class FleetsContent extends Component {
         return haveTask
     }
 
+    getDefaultValues = policyId => {
+        // Check if the policy default value are applications, files or nothing 
+        if (policyId === 14) {
+            return this.props.data.applicationsData
+        }
+        else if (policyId === 16) {
+            return this.props.data.filesData
+        }
+    }
+
     getValueOfTask = policy => {
         // Check if the current Fleet have a Task that have a relation with this Policy
         if (policy['fleetHaveTask']) {
@@ -57,7 +67,6 @@ class FleetsContent extends Component {
                 // Check if the same Policy Category name is equal to the Category name
                 return policy['PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename'] === categoryCompleteName
             })
-            console.log('[Politicas por categoria]', categoryCompleteName, policiesPerThisCategory)
             obj['name'] = categoryCompleteName
             obj['id'] = category['PluginFlyvemdmPolicyCategory.id']
             obj['policies'] = policiesPerThisCategory
@@ -83,7 +92,9 @@ class FleetsContent extends Component {
 
         if (this.props.data.fleetSelected 
         &&  this.props.data.policyCategoriesData
-        &&  this.props.data.tasksData) {
+        &&  this.props.data.tasksData
+        &&  this.props.data.filesData
+        &&  this.props.data.applicationsData) {
             policiesPerCategory = this.filterPoliciesPerCategory()
         } 
 
@@ -120,7 +131,12 @@ class FleetsContent extends Component {
                                                 key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
                                                 data={policy} 
                                                 addedPolicy={policy['fleetHaveTask']}
-                                                value={this.getValueOfTask(policy)} />
+                                                value={this.getValueOfTask(policy)}
+                                                defaultValues={
+                                                    (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id'])) 
+                                                    ? (this.getDefaultValues(policy['PluginFlyvemdmPolicy.id']))
+                                                    : null
+                                                } />
                                             ))}
                                         </div>
                                     </div>
