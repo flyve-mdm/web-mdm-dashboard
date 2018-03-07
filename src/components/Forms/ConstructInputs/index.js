@@ -16,7 +16,7 @@ const ConstructInputs = props => {
     }
 
     return (
-        <div>
+        <React.Fragment>
             { icon }
             {   
                 props.data.map((elements, index) => {
@@ -27,7 +27,7 @@ const ConstructInputs = props => {
                     })
                 })
             }
-        </div>
+        </React.Fragment>
     ) 
 }
 
