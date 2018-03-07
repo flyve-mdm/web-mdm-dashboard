@@ -52,7 +52,7 @@ class Devices extends Component {
             changeSelectedItems: this.changeSelectedItems,
             action: this.state.action,
             changeAction: this.changeAction,
-            showNotification: this.props.actions.setNotification,
+            setNotification: this.props.actions.setNotification,
             history: this.props.history,
             glpi: this.props.glpi
         }
@@ -62,8 +62,6 @@ class Devices extends Component {
     onNavigate = location => this.setState({ location })
     changeAction = action => this.setState({ action })
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
-    showNotification = (title, body) => {
-    }
 
     render() {
         return (

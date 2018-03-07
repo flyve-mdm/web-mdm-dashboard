@@ -157,31 +157,41 @@ export default class DevicesList extends Component {
 
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })
 
-                this.props.showNotification('Success', 'elements successfully removed')
-                this.props.changeAction(null)
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: 'Device successfully removed!',
+                    type: 'success'
+                })
+
                 this.setState((prevState, props) => ({
                     selectedItems: [],
-                    selectionMode: !prevState.selectionMode
+                    selectionMode: !prevState.selectionMode,
+                    isLoading: false
                 }))
             } else {
-                // Clean another actions selected
-                this.props.changeAction(null)
                 // Exit selection mode
                 this.setState((prevState, props) => ({
                     selectedItems: [],
                     selectionMode: !prevState.selectionMode
                 }))
+
                 this.listView.winControl.selection.clear()
             }
             
         } catch (error) {
             if (error.length > 1) {
-                this.props.showNotification(error[0], error[1])
+
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             }
-            this.props.changeAction(null)
+
             this.setState((prevState, props) => ({
                 selectedItems: [],
-                selectionMode: !prevState.selectionMode
+                selectionMode: !prevState.selectionMode,
+                isLoading: false
             }))
         }
     }
@@ -361,6 +371,6 @@ DevicesList.propTypes = {
     onNavigate: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
