@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
-import Confirmation from '../../../components/Confirmation'
+import Confirmation from '../../../../components/Confirmation'
 
 const POLICIES_CAN_MULTIPLE_VALUE = [
     14, // -> Deploy Application
@@ -14,6 +14,7 @@ class FleetsContent extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
+            policiesPerCategory: null
         }
     }
     
@@ -25,6 +26,17 @@ class FleetsContent extends Component {
         });
         return haveTask
     } 
+
+    filterPoliciesPerCategory = () => {
+        // policiesPerCategory
+        this.props.data.policyCategoriesData.forEach(category => {
+            let categoryCompleteName = category['PluginFlyvemdmPolicyCategory.completename']
+            let policiesPerThisCategory = this.props.data.policiesData.filter(policy => (
+                policy['PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename'] === categoryCompleteName
+            ))
+            console.log('[Politicas por categoria]', categoryCompleteName, policiesPerThisCategory)
+        });
+    }
 
     componentDidMount = () => {
         !this.props.data.fleetSelected && this.props.history.push('/app/fleets')
@@ -38,6 +50,12 @@ class FleetsContent extends Component {
     }
 
     render() {
+        if (this.props.data.fleetSelected 
+        &&  this.props.data.policyCategoriesData
+        &&  this.props.data.tasksData) {
+            this.filterPoliciesPerCategory()
+        } 
+
         let renderComponent
 
         if (this.props.data.policiesData && this.props.data.tasksData) {
@@ -64,8 +82,6 @@ class FleetsContent extends Component {
             })
         }
 
-        console.log(renderComponent)
-
         return this.props.data.fleetSelected ? 
             ( 
                 <div>
@@ -90,8 +106,7 @@ class FleetsContent extends Component {
                     <Confirmation title={`Delete Fleet`} message={this.props.data.fleetSelected["PluginFlyvemdmFleet.name"]} reference={el => this.contentDialog = el} />
                 </div>
             )
-            :
-            null
+            : null
     }
 }
 
