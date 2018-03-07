@@ -2,8 +2,8 @@ import React, {Component} from "react"
 import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
 import FleetsItemList from './FleetsItemList'
-import Confirmation from '../../../components/Confirmation'
-import Loader from '../../../components/Loader'
+import Loader from '../../../../components/Loader'
+import Confirmation from '../../../../components/Confirmation'
 
 class FleetsList extends Component {
 

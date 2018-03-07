@@ -10,7 +10,8 @@ class Fleets extends Component {
     this.state = {
         policiesData: null,
         tasksData: null,        
-        fleetSelected: null
+        fleetSelected: null,
+        policyCategoriesData: null
     }
   }
 
@@ -28,6 +29,9 @@ class Fleets extends Component {
   }
 
   fetchTasks = async () => {
+    /*
+     * Name, ID, Category ID, Policy ID
+     * */
     const response = await this.props.glpi.getSubItems({
         itemtype: 'PluginFlyvemdmFleet',
         id: this.state.fleetSelected['PluginFlyvemdmFleet.id'],
@@ -41,8 +45,24 @@ class Fleets extends Component {
     this.setState({ tasksData: response });
   }
 
+  fetchPolicyCategories = async () => {
+    /*
+     * Name, ID
+     * */
+    const response = await this.props.glpi.searchItems({
+      itemtype: 'PluginFlyvemdmPolicyCategory',
+      options: { 
+          uid_cols: true, 
+          forcedisplay: [1, 2]
+      }
+    })
+
+    this.setState({ policyCategoriesData: response.data });
+  }
+
   componentDidMount = () => {
     this.fecthPolicies()
+    this.fetchPolicyCategories()
   }
 
   handleClickFleet = (fleetData) => {
@@ -64,7 +84,8 @@ class Fleets extends Component {
           policiesData: this.state.policiesData,
           fleetSelected: this.state.fleetSelected,
           tasksData: this.state.tasksData,
-          fetchTasks: this.fetchTasks
+          fetchTasks: this.fetchTasks,
+          policyCategoriesData: this.state.policyCategoriesData
         }}/>
       </FleetsList>
     )
