@@ -5,16 +5,33 @@ class FleetsTaskItemList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            alreadyAdded: false,
-            active: false
+            alreadyAdded: null,
+            active: null
+        }
+    }
+
+    updateState = (addedPolicy) => {
+        if (addedPolicy) { 
+            this.setState({
+                alreadyAdded: true,
+                active: true
+            })
+        } else {
+            this.setState({
+                alreadyAdded: false,
+                active: false
+            })
         }
     }
 
     componentDidMount = () => {
-        this.props.addedPolicy && this.setState({
-            alreadyAdded: true,
-            active: true
-        })
+        this.updateState(this.props.addedPolicy)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.addedPolicy !== this.props.addedPolicy) {
+            this.updateState(nextProps.addedPolicy)
+        }
     }
     
     handleAddedToggle = () => {
