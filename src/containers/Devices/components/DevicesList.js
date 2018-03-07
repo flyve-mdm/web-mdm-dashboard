@@ -288,6 +288,7 @@ export default class DevicesList extends Component {
                     ref={(listView) => { this.listView = listView }}
                     onLoadingStateChanged={this.onLoadingStateChanged}
                     className="contentListView win-selectionstylefilled"
+                    style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.state.itemList.dataSource}
                     groupDataSource={this.state.itemList.groups.dataSource}
                     layout={this.state.layout}
