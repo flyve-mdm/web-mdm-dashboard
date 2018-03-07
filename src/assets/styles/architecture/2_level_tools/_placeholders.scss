@@ -72,6 +72,7 @@
 
 %content-pane {
   .content-pane-block {
+    overflow: auto;
     padding: 10px;
 
     .titleContentPane {
