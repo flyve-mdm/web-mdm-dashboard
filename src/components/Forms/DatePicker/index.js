@@ -35,7 +35,7 @@ class DatePicker extends Component {
 
     render () {
         return (
-            <div className="list-col">
+            <div className="froms__col">
 
                 <p>{this.props.label}</p>
 

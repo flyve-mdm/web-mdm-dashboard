@@ -93,7 +93,7 @@ class Select extends Component {
 
     render() {
         return (
-            <div className="list-col">
+            <div className="froms__col">
                 <p>{this.props.label}</p>
                 <select className="win-dropdown" name={this.props.name} value={this.props.value} onChange={this.change}>
                         <option>

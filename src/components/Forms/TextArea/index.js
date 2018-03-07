@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const TextArea = props =>  {
     return (
-        <div className="list-col">
+        <div className="froms__col">
             <p>{props.label}</p>
             <textarea
                 rows="6"
