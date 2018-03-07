@@ -13,8 +13,7 @@ class FleetsContent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            layout: { type: WinJS.UI.ListLayout },
-            policiesPerCategory: null
+            layout: { type: WinJS.UI.ListLayout }
         }
     }
     
@@ -28,14 +27,26 @@ class FleetsContent extends Component {
     } 
 
     filterPoliciesPerCategory = () => {
-        // policiesPerCategory
+        //  TODO: Set State called: `policiesPerCategory`
+        const policiesPerCategory = []
+
         this.props.data.policyCategoriesData.forEach(category => {
+            let obj = {}
             let categoryCompleteName = category['PluginFlyvemdmPolicyCategory.completename']
-            let policiesPerThisCategory = this.props.data.policiesData.filter(policy => (
-                policy['PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename'] === categoryCompleteName
-            ))
+            let policiesPerThisCategory = this.props.data.policiesData.filter(policy => {
+                // Check if the current Fleet have a Task that have a relation with this Policy
+                policy['fleetHaveTask'] = this.handleFleetHaveTask(policy) 
+                // Check if the same Policy Category name is equal to the Category name
+                return policy['PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename'] === categoryCompleteName
+            })
             console.log('[Politicas por categoria]', categoryCompleteName, policiesPerThisCategory)
+            obj['name'] = categoryCompleteName
+            obj['id'] = category['PluginFlyvemdmPolicyCategory.id']
+            obj['policies'] = policiesPerThisCategory
+            policiesPerCategory.push(obj)
         });
+
+        return policiesPerCategory
     }
 
     componentDidMount = () => {
@@ -50,43 +61,19 @@ class FleetsContent extends Component {
     }
 
     render() {
+        let policiesPerCategory
+
         if (this.props.data.fleetSelected 
         &&  this.props.data.policyCategoriesData
         &&  this.props.data.tasksData) {
-            this.filterPoliciesPerCategory()
+            policiesPerCategory = this.filterPoliciesPerCategory()
         } 
-
-        let renderComponent
-
-        if (this.props.data.policiesData && this.props.data.tasksData) {
-            renderComponent = this.props.data.policiesData.map((item, index) => {
-                let multiplesValues = null
-
-                const addedPolicy = this.handleFleetHaveTask(item)
-
-                const IdPolicy = item['PluginFlyvemdmPolicy.id']
-                
-                if (addedPolicy && POLICIES_CAN_MULTIPLE_VALUE.includes(IdPolicy)) {
-                    multiplesValues = this.props.data.tasksData.filter(task => (
-                        task['plugin_flyvemdm_policies_id'] === IdPolicy
-                    ))
-                }
-
-                return (
-                    <FleetsTaskItemList
-                        key={[item['PluginFlyvemdmPolicy.name'], index].join("_")}
-                        data={item} 
-                        addedPolicy={addedPolicy}
-                        multiplesValues={multiplesValues} />
-                )
-            })
-        }
 
         return this.props.data.fleetSelected ? 
             ( 
                 <div>
                     <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > Fleets </h2>
+                        <h1 className="win-h1 titleContentPane"> Fleets </h1>
                         <div className="itemInfo">
                             <div className="contentStatus">
                                 <div className="name">{this.props.data.fleetSelected["PluginFlyvemdmFleet.name"]}</div>
@@ -98,10 +85,31 @@ class FleetsContent extends Component {
                     </div>
                     <div className="separator" />
                     <div className="contentInfo" style={{ width: '100%', marginTop: '20px', marginBottom: '20px', display: 'inline-block' }} >
-                        <h3 className="win-h3" style={{ display: 'inline-block' }} > Tasks </h3>
+                        <h3 className="win-h3" style={{ display: 'inline-block' }} > Tasks per Category </h3>
                     </div>
-
-                    { renderComponent }
+                    <div className="separator" />
+                    { policiesPerCategory ? (
+                        policiesPerCategory.map((category) => {
+                            return category['policies'].length > 0 
+                                ? (
+                                    <div key={category['id']}>
+                                        <h2>
+                                            {category['name']}
+                                        </h2>
+                                        <div>
+                                            {category['policies'].map((policy, index) => (
+                                                <FleetsTaskItemList
+                                                key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
+                                                data={policy} 
+                                                addedPolicy={policy['fleetHaveTask']}
+                                                multiplesValues={POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id'])} />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )
+                                : null
+                        })
+                    ) : <h1>Loading Tasks, Policies and Categories</h1>}
 
                     <Confirmation title={`Delete Fleet`} message={this.props.data.fleetSelected["PluginFlyvemdmFleet.name"]} reference={el => this.contentDialog = el} />
                 </div>
