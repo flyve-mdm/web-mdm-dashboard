@@ -36,6 +36,7 @@ class Devices extends Component {
             selectionMode: false,
             action: null,
             animation: false,
+            selectedItems: []
         }
     }
 
@@ -47,6 +48,8 @@ class Devices extends Component {
             onNavigate: this.onNavigate,
             changeSelectionMode: this.changeSelectionMode,
             selectionMode: this.state.selectionMode,
+            selectedItems: this.selectedItems,
+            changeSelectedItems: this.changeSelectedItems,
             action: this.state.action,
             changeAction: this.changeAction,
             showNotification: this.props.actions.setNotification,
@@ -55,6 +58,7 @@ class Devices extends Component {
         }
     }
 
+    changeSelectedItems = selectedItems => this.setState({ selectedItems })
     onNavigate = location => this.setState({ location })
     changeAction = action => this.setState({ action })
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
