@@ -284,14 +284,14 @@ class Profiles extends Component {
             }    
 
             component = (
-                <div className="list-content Profiles" style={{marginTop: '20px'}}>
+                <div className="froms Profiles" style={{marginTop: '20px'}}>
 
-                    <div className="listElement listElementIcon">
+                    <div className="froms__row froms__row--icon">
                         <span className="viewIcon"/>
                     </div>
                     
     
-                    <div className="listElement">
+                    <div className="froms__row">
     
                         <div style={{ overflow: 'hidden' }}>
                             <input

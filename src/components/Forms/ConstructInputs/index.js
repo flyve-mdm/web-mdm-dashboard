@@ -8,7 +8,7 @@ const ConstructInputs = props => {
     
     if (props.icon) {
         icon = (
-            <div className="listElement listElementIcon">
+            <div className="froms__row froms__row--icon">
                 <span className={props.icon}/>
                 {props.title ? <span style={{ marginLeft: '10px' }}>{props.title}</span> : null }
             </div>

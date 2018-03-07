@@ -288,14 +288,14 @@ class Profiles extends Component {
             }
 
             componetRender = (
-                <div className="list-content Profiles">
+                <div className="froms Profiles">
 
-                    <div className="listElement listElementIcon">
+                    <div className="froms__row froms__row--icon">
                         <span className="viewIcon"/>
                     </div>
                     
 
-                    <div className="listElement">
+                    <div className="froms__row">
 
                         <div style={{ overflow: 'hidden' }}>
                             <input

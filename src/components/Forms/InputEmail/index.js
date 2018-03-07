@@ -45,7 +45,7 @@ class InputEmail extends Component {
         }
 
         return (
-            <div className="list-col">
+            <div className="froms__col">
                 <p>{this.props.label}</p>
                 <input
                     type={this.props.type}
