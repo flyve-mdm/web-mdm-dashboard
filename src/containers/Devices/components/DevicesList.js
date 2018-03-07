@@ -67,7 +67,7 @@ export default class DevicesList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.onNavigate([this.props.location[0]])
+            this.props.history.push('/app/devices')
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -198,7 +198,6 @@ export default class DevicesList extends Component {
 
     handleSort = async () => {
         try {
-            this.props.onNavigate([this.props.location[0]])
             this.setState({
                 isLoading: true,
                 pagination: {
@@ -216,6 +215,7 @@ export default class DevicesList extends Component {
                 order: devices.order,
                 itemList: BuildItemList(devices)
             })
+            this.props.history.push('/app/devices')
 
         } catch (error) {
             this.setState({
