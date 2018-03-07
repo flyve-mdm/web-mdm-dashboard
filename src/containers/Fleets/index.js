@@ -11,7 +11,9 @@ class Fleets extends Component {
         policiesData: null,
         tasksData: null,        
         fleetSelected: null,
-        policyCategoriesData: null
+        policyCategoriesData: null,
+        filesData: null,
+        applicationsData: null        
     }
   }
 
@@ -60,9 +62,47 @@ class Fleets extends Component {
     this.setState({ policyCategoriesData: response.data });
   }
 
+  fetchFile = async () => {
+    /* 
+    * Id and Name of file
+    */
+    const response = await this.props.glpi.searchItems({
+      itemtype: 'PluginFlyvemdmFile',
+      options: {
+        uid_cols: true,
+        forcedisplay: [
+          1, 2, 3
+        ],
+        range: '0-50' // Can more than 50 items
+      }
+    })
+
+    this.setState({ filesData: response.data });
+  }
+
+  fetchApplication = async () => {
+    /* 
+    * Id and Alias
+    */
+    const response = await this.props.glpi.searchItems({
+      itemtype: 'PluginFlyvemdmPackage',
+      options: {
+        uid_cols: true,
+        forcedisplay: [
+          1,2,3,4,5,6
+        ],
+        range: '0-50' // Can more than 50 items
+      }
+    })
+
+    this.setState({ applicationsData: response.data });
+  }
+
   componentDidMount = () => {
     this.fecthPolicies()
     this.fetchPolicyCategories()
+    this.fetchFile()
+    this.fetchApplication()
   }
 
   handleClickFleet = (fleetData) => {
@@ -85,7 +125,9 @@ class Fleets extends Component {
           fleetSelected: this.state.fleetSelected,
           tasksData: this.state.tasksData,
           fetchTasks: this.fetchTasks,
-          policyCategoriesData: this.state.policyCategoriesData
+          policyCategoriesData: this.state.policyCategoriesData,
+          filesData: this.state.filesData,
+          applicationsData: this.state.applicationsData
         }}/>
       </FleetsList>
     )
