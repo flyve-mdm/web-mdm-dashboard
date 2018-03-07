@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
-import Confirmation from '../../../../components/Confirmation'
 
 const POLICIES_CAN_MULTIPLE_VALUE = [
     14, // -> Deploy Application
@@ -24,10 +23,29 @@ class FleetsContent extends Component {
             return policyId === policy['PluginFlyvemdmPolicy.id']
         });
         return haveTask
-    } 
+    }
+
+    getValueOfTask = policy => {
+        // Check if the current Fleet have a Task that have a relation with this Policy
+        if (policy['fleetHaveTask']) {
+            if (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id'])) {
+                // Return a Array with the multiples Tasks (values)
+                return this.props.data.tasksData.filter(task => (	
+                    task['plugin_flyvemdm_policies_id'] === policy['PluginFlyvemdmPolicy.id']	
+                ))
+            }
+            else {
+                // Return a Object that is the Task
+                return this.props.data.tasksData.some(task => (	
+                    task['plugin_flyvemdm_policies_id'] === policy['PluginFlyvemdmPolicy.id']	
+                ))
+            }
+        } else {
+            return null
+        }
+    }
 
     filterPoliciesPerCategory = () => {
-        //  TODO: Set State called: `policiesPerCategory`
         const policiesPerCategory = []
 
         this.props.data.policyCategoriesData.forEach(category => {
@@ -102,7 +120,7 @@ class FleetsContent extends Component {
                                                 key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
                                                 data={policy} 
                                                 addedPolicy={policy['fleetHaveTask']}
-                                                multiplesValues={POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id'])} />
+                                                value={this.getValueOfTask(policy)} />
                                             ))}
                                         </div>
                                     </div>
@@ -110,8 +128,6 @@ class FleetsContent extends Component {
                                 : null
                         })
                     ) : <h1>Loading Tasks, Policies and Categories</h1>}
-
-                    <Confirmation title={`Delete Fleet`} message={this.props.data.fleetSelected["PluginFlyvemdmFleet.name"]} reference={el => this.contentDialog = el} />
                 </div>
             )
             : null

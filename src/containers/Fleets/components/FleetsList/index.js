@@ -272,7 +272,9 @@ class FleetsList extends Component {
                         message={'mock message'}
                         reference={el => this.contentDialog = el}/>
                 </div>
-                <div>
+                <div className="flex-block --with-scroll --with-content-pane" style={{
+                    width: '100%'
+                }}>
                     { this.props.children }
                 </div>
             </div>
