@@ -39,6 +39,22 @@ class Devices extends Component {
         }
     }
 
+    propsData = () => {
+        return {
+            itemListPaneWidth: 320,
+            animation: this.state.animation,
+            location:this.state.location,
+            onNavigate: this.onNavigate,
+            changeSelectionMode: this.changeSelectionMode,
+            selectionMode: this.state.selectionMode,
+            action: this.state.action,
+            changeAction: this.changeAction,
+            showNotification: this.props.actions.setNotification,
+            history: this.props.history,
+            glpi: this.props.glpi
+        }
+    }
+
     onNavigate = location => this.setState({ location })
     changeAction = action => this.setState({ action })
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
@@ -46,26 +62,14 @@ class Devices extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div className="flex-block --with-scroll --with-content-pane">
-                <DevicesList
-                    itemListPaneWidth={320}
-                    animation={this.state.animation}
-                    location={this.state.location}
-                    onNavigate={this.onNavigate}
-                    changeSelectionMode={this.changeSelectionMode}
-                    selectionMode={this.state.selectionMode}
-                    action={this.state.action}
-                    changeAction={this.changeAction}
-                    showNotification={this.props.actions.setNotification}
-                    history={this.props.history}
-                    glpi={this.props.glpi}
+                <DevicesList 
+                    {...this.propsData()}
                 />
-                <GenerateRoutes routes={routes} rootPath={this.props.match.url} />
+                <GenerateRoutes routes={routes} rootPath={this.props.match.url} data={this.propsData()} />
             </div>
         )
-
     }
 }
 export default connect(
