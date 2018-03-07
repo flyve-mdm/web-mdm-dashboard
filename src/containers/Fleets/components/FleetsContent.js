@@ -27,7 +27,8 @@ class FleetsContent extends Component {
     } 
 
     componentDidMount = () => {
-        this.props.data.fleetSelected && this.props.data.fetchTasks(this.props.data.fleetSelected['PluginFlyvemdmFleet.id'])
+        !this.props.data.fleetSelected && this.props.history.push('/app/fleets')
+        !this.props.data.fleetSelected || this.props.data.fetchTasks()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -63,6 +64,8 @@ class FleetsContent extends Component {
             })
         }
 
+        console.log(renderComponent)
+
         return this.props.data.fleetSelected ? 
             ( 
                 <div>
@@ -88,7 +91,7 @@ class FleetsContent extends Component {
                 </div>
             )
             :
-            <h1>Loading</h1>
+            null
     }
 }
 
