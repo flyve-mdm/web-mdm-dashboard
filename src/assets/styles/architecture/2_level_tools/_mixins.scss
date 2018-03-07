@@ -64,18 +64,3 @@
 @mixin animation($str) {
   @include css3-prefix('animation', $str);
 }
-
-@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white, 50%)) {
-  ::-webkit-scrollbar {
-      width:  $size;
-      height: $size;
-  }
-
-  ::-webkit-scrollbar-thumb {
-      background: $foreground-color;
-  }
-
-  ::-webkit-scrollbar-track {
-      background: $background-color;
-  }
-}
