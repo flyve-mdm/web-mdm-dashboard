@@ -13,7 +13,8 @@ export default class DevicesList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItemList: [],
+            selectionMode: false,
+            selectedItems: [],
             scrolling: false,
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
@@ -46,8 +47,10 @@ export default class DevicesList extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({ selectedItemList: [] })
-        this.props.changeSelectionMode(false)
+        this.setState({ 
+            selectionMode: false,
+            selectedItem: [] 
+        })
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
@@ -92,7 +95,7 @@ export default class DevicesList extends Component {
     handleEdit = (eventObject) => {
         let button = eventObject.currentTarget.winControl
         setTimeout(() => {
-            this.props.onNavigate(this.state.selectedItemList.length > 0 && this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
+            this.props.onNavigate(this.state.selectedItems.length > 0 && this.state.selectionMode ? [this.props.location[0], this.state.selectedItems] : this.props.location)
             this.props.changeAction(button.label)
         }, 0)
     }
@@ -100,20 +103,19 @@ export default class DevicesList extends Component {
     handlePanel = (eventObject) => {
         let button = eventObject.currentTarget.winControl
         this.listView.winControl.selection.clear()
-        
-        this.props.changeSelectionMode(false)
-        this.props.onNavigate([this.props.location[0]])
-        this.props.changeAction(button.label)
+
+        this.setState({
+            selectionMode: false
+        })
+        this.props.history.replace(button.path)
     }
 
     handleToggleSelectionMode = () => {
         this.listView.winControl.selection.clear()
-        this.props.changeAction(null)
-        this.props.changeSelectionMode(!this.props.selectionMode)
-        this.props.onNavigate([this.props.location[0]])  
-        this.setState({
-            selectedItemList: []
-        })
+        this.setState((prevState, props) => ({
+            selectedItems: [],
+            selectionMode: !prevState.selectionMode
+        }))
     }
 
     handleSelectionChanged = (eventObject) => {
@@ -124,19 +126,15 @@ export default class DevicesList extends Component {
         for (const item of index) {
             itemSelected.push(this.state.itemList.getItem(item).data)
         }
-
         this.setState({
-            selectedItemList: itemSelected
+            selectedItems: itemSelected
         })
-
-        if (this.props.action !== 'Edit') {
-               
-            setTimeout(() => {
-                if(index.length !== 0) {
-                    this.props.changeAction(null)
-                }
-                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
-            }, 0)
+        this.props.changeSelectedItems(itemSelected)
+        if (index.length === 1 && !this.state.selectionMode) {
+            this.props.history.push(`/app/devices/${itemSelected[0]["PluginFlyvemdmAgent.id"]}`)
+        }
+        if (index.length > 1 && !this.state.selectionMode) {
+            this.props.history.push('/app/devices/edit/')
         }
     }
 
@@ -146,7 +144,7 @@ export default class DevicesList extends Component {
             const isOK = await Confirmation.isOK(this.contentDialog)
             if (isOK) {
 
-                let itemListToDelete = this.state.selectedItemList.map((item) => {
+                let itemListToDelete = this.state.selectedItems.map((item) => {
                     return {
                         id: item["PluginFlyvemdmAgent.id"]
                     }
@@ -161,19 +159,19 @@ export default class DevicesList extends Component {
 
                 this.props.showNotification('Success', 'elements successfully removed')
                 this.props.changeAction(null)
-                this.props.changeSelectionMode(false)
-                this.setState({
-                    selectedItemList: []
-                })
+                this.setState((prevState, props) => ({
+                    selectedItems: [],
+                    selectionMode: !prevState.selectionMode
+                }))
             } else {
                 // Clean another actions selected
                 this.props.changeAction(null)
                 // Exit selection mode
-                this.props.changeSelectionMode(false)
+                this.setState((prevState, props) => ({
+                    selectedItems: [],
+                    selectionMode: !prevState.selectionMode
+                }))
                 this.listView.winControl.selection.clear()
-                this.setState({
-                    selectedItemList: []
-                })
             }
             
         } catch (error) {
@@ -181,10 +179,10 @@ export default class DevicesList extends Component {
                 this.props.showNotification(error[0], error[1])
             }
             this.props.changeAction(null)
-            this.props.changeSelectionMode(false)
-            this.setState({
-                selectedItemList: []
-            })
+            this.setState((prevState, props) => ({
+                selectedItems: [],
+                selectionMode: !prevState.selectionMode
+            }))
         }
     }
 
@@ -263,8 +261,9 @@ export default class DevicesList extends Component {
                 key="delete"
                 icon="delete"
                 label="Delete"
+                path="/"
                 priority={0}
-                disabled={this.state.selectedItemList.length === 0}
+                disabled={this.state.selectedItems.length === 0}
                 onClick={this.handleDelete}
             />
         )
@@ -274,8 +273,9 @@ export default class DevicesList extends Component {
                 key="edit"
                 icon="edit"
                 label="Edit"
+                path="/"
                 priority={0}
-                disabled={this.state.selectedItemList.length === 0}
+                disabled={this.state.selectedItems.length === 0}
                 onClick={this.handleEdit}
             />
         )
@@ -296,8 +296,8 @@ export default class DevicesList extends Component {
                     groupHeaderTemplate={this.groupHeaderRenderer}
                     footerComponent={<Loader />}
                     onFooterVisibilityChanged={this.showFooterList}
-                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
+                    selectionMode={this.state.selectionMode ? 'multi' : 'single'}
+                    tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
                 />
             )
@@ -310,6 +310,7 @@ export default class DevicesList extends Component {
                         key="sort"
                         icon="sort"
                         label="Sort"
+                        path="/"
                         priority={1}
                         onClick={this.handleSort}
                     />
@@ -317,6 +318,7 @@ export default class DevicesList extends Component {
                         key="refresh"
                         icon="refresh"
                         label="Refresh"
+                        path="/"
                         priority={2}
                         onClick={this.handleRefresh}
                     />
@@ -325,24 +327,26 @@ export default class DevicesList extends Component {
                         key="add"
                         icon="add"
                         label="Add"
+                        path="/add"
                         priority={0}
                         onClick={this.handlePanel}
                     />
 
-                    {this.props.selectionMode ? editCommand : null}
-                    {this.props.selectionMode ? deleteCommand : null}
+                    {this.state.selectionMode ? editCommand : null}
+                    {this.state.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
                         icon="bullets"
                         label="Select"
+                        path="/"
                         priority={0}
-                        selected={this.props.selectionMode}
+                        selected={this.state.selectionMode}
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
                 { listComponent }
-                <Confirmation title={`Delete Devices`} message={this.state.selectedItemList.length +` Devices`} reference={el => this.contentDialog = el} /> 
+                <Confirmation title={`Delete Devices`} message={this.state.selectedItems.length +` Devices`} reference={el => this.contentDialog = el} /> 
             </div>
         )
     }
@@ -355,8 +359,6 @@ DevicesList.propTypes = {
     animation: PropTypes.bool.isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    selectionMode: PropTypes.bool.isRequired,
-    changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
     showNotification: PropTypes.func.isRequired,
