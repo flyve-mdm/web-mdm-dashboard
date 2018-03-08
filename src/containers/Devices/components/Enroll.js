@@ -27,12 +27,19 @@ export default class Enroll extends Component {
                     isLoading: false
                 })
 
-                this.props.data.showNotification('Success', 'invitation sent')
-                this.props.data.changeAction(null)
+                this.props.data.setNotification({
+                    title: 'Successfully',
+                    body: 'Invitation successfully sent!',
+                    type: 'success'
+                })
             }
         } catch (error) {
             if (error.length > 1) {
-                this.props.data.showNotification(error[0], error[1])
+                this.props.data.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             }
         }
     }
@@ -67,7 +74,7 @@ export default class Enroll extends Component {
                         required
                     />
                     <br />
-                    <button className="win-button" onClick={() => this.props.data.changeAction(null)}>Cancel</button>
+                    <button className="win-button" onClick={() => {}}>Cancel</button>
                     <button
                         className="win-button win-button-primary"
                         style={{ marginLeft: 10 }}
@@ -87,8 +94,7 @@ Enroll.propTypes = {
             PropTypes.string,
             PropTypes.number
         ]).isRequired,
-        changeAction: PropTypes.func.isRequired,
-        showNotification: PropTypes.func.isRequired,
+        setNotification: PropTypes.func.isRequired,
         glpi: PropTypes.object.isRequired
     })
 }
