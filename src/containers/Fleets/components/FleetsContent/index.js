@@ -104,21 +104,21 @@ class FleetsContent extends Component {
             ( 
                 <div style={{width: 'calc(100% - 20px)'}}> 
                     <div className="contentHeader">
-                        <h1 className="win-h1 titleContentPane"> Fleets </h1>
+                        <h1 className="win-h1 titleContentPane"> {this.props.data.fleetSelected["PluginFlyvemdmFleet.name"]} </h1>
                         <div className="itemInfo">
                             <div className="contentStatus">
-                                <div className="name">{this.props.data.fleetSelected["PluginFlyvemdmFleet.name"]}</div>
-                                <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
-                                <span className="deleteIcon" onClick={this.handleDelete} />
+                                <span
+                                className="editIcon"
+                                onClick={() => this.props.history.replace(this.props.match.url + '/edit')} />
+                                <span
+                                className="deleteIcon"
+                                onClick={this.handleDeleteFleet} />
                             </div>
                         </div>
                     </div>
-                    <div className="separator" />
                     <div className="contentInfo" style={{ width: '100%', marginTop: '20px', marginBottom: '20px', display: 'inline-block' }} >
                         <h3 className="win-h3" style={{ display: 'inline-block' }} > Tasks per Category </h3>
                     </div>
-                    <div className="separator" />
                     { policiesPerCategory ? (
                         policiesPerCategory.map((category) => {
                             return category['policies'].length > 0 

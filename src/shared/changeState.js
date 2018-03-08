@@ -1,6 +1,6 @@
-const changeState = (e) => {
-  this.setState({
-      [e.target.name]: e.target.value
+const changeState = (ctx, event) => {
+  ctx.setState({
+      [event.target.name]: event.target.value
   })
 }
 
