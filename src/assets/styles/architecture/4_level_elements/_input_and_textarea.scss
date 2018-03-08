@@ -1,4 +1,7 @@
-.win-textbox:focus, .win-textarea:focus {
-    border-color: $app-color !important;
+.win-textbox, .win-textarea {
     box-shadow: none;
+    
+    &:focus {
+        border-color: $app-color !important;
+    }
 }
