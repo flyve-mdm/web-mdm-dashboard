@@ -100,7 +100,7 @@ export default class DevicesList extends Component {
         }, 0)
     }
 
-    handlePanel(path, eventObject) {
+    handleAdd(eventObject, path) {
 
         this.listView.winControl.selection.clear()
         this.setState({
@@ -338,7 +338,7 @@ export default class DevicesList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
-                        onClick={this.handlePanel.bind(this, "/app/devices/add")}
+                        onClick={(e) => this.handleAdd(e, "/app/devices/add")}
                     />
 
                     {this.state.selectionMode ? editCommand : null}
