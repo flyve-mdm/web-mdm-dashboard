@@ -36,7 +36,7 @@ $color-fonts-hover: $splitview-color-fonts-hover;
 
 
 .splitview-block {
-  @include animation('fade-in .5s');
+  @include animation('fade-in .25s');
   display: inline-block;
 
   .splitview-wrapper__div {
@@ -92,7 +92,7 @@ $color-fonts-hover: $splitview-color-fonts-hover;
         &.--large {
           width: 200px;
 
-          @include animation('expanding-splitview-desktop .5s ease');
+          @include animation('expanding-splitview-desktop .25s linear');
 
           @include mq($until: 'tablet-small') {
             width:  200px;
@@ -103,27 +103,27 @@ $color-fonts-hover: $splitview-color-fonts-hover;
           }
 
           &.--opening {
-            @include animation('expanding-splitview-desktop .5s ease');
+            @include animation('expanding-splitview-desktop .25s linear');
 
             @include mq($until: 'tablet-small') {
-              @include animation('expanding-splitview-tablet-small .5s ease');
+              @include animation('expanding-splitview-tablet-small .25s linear');
             }
 
             @include mq($until: 'phablet') {
-              @include animation('expanding-splitview-phablet .5s ease');
+              @include animation('expanding-splitview-phablet .25s linear');
             }
           }
 
           &.--closing {
 
-            @include animation('contract-splitview-desktop .5s ease forwards');
+            @include animation('contract-splitview-desktop .25s linear forwards');
 
             @include mq($until: 'tablet-small') {
-              @include animation('contract-splitview-tablet-small .5s ease forwards');
+              @include animation('contract-splitview-tablet-small .25s linear forwards');
             }
   
             @include mq($until: 'phablet') {
-              @include animation('contract-splitview-phablet .5s ease forwards');
+              @include animation('contract-splitview-phablet .25s linear forwards');
             }
           }
         }
