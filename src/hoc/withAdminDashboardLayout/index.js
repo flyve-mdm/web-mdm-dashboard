@@ -6,7 +6,7 @@ import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
 
 const TIMEOUT_CONTRACT = 420
 
-const withAdminDashboardLayout = WrappedComponent=> {
+const withAdminDashboardLayout = WrappedComponent => {
   class AdminDashboardLayout extends Component {
     constructor (props) {
       super(props)
@@ -46,7 +46,10 @@ const withAdminDashboardLayout = WrappedComponent=> {
       return (
         <main>
 
-          <HeaderBreadcrumb handleToggleExpand={this.handleToggleExpand}/> 
+          <HeaderBreadcrumb 
+            handleToggleExpand={this.handleToggleExpand} 
+            history={this.props.history}
+          /> 
 
           <div className="flex-block">
             <SplitView
