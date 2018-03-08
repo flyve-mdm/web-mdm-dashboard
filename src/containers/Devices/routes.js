@@ -10,15 +10,15 @@ const routes = [
     exact: true
   },
   {
-    path: '/:id',
-    name: 'Selected',
-    component: DevicesContent,
-    exact: false
-  },
-  {
     path: '/add',
     name: 'Add',
     component: Enroll,
+    exact: true
+  },
+  {
+    path: '/:id',
+    name: 'Selected',
+    component: DevicesContent,
     exact: false
   }
 ]
