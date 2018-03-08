@@ -100,14 +100,14 @@ export default class DevicesList extends Component {
         }, 0)
     }
 
-    handlePanel = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        this.listView.winControl.selection.clear()
+    handlePanel(path, eventObject) {
 
+        this.listView.winControl.selection.clear()
         this.setState({
+            selectedItems: [],
             selectionMode: false
         })
-        this.props.history.replace(button.path)
+        this.props.history.push(path)
     }
 
     handleToggleSelectionMode = () => {
@@ -337,9 +337,8 @@ export default class DevicesList extends Component {
                         key="add"
                         icon="add"
                         label="Add"
-                        path="/add"
                         priority={0}
-                        onClick={this.handlePanel}
+                        onClick={this.handlePanel.bind(this, "/app/devices/add")}
                     />
 
                     {this.state.selectionMode ? editCommand : null}
