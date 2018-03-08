@@ -38,6 +38,16 @@ class FleetsList extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.fleetsData !== nextProps.fleetsData) {
+            this.setState({
+                itemList: new WinJS
+                    .Binding
+                    .List(nextProps.fleetsData)
+            })
+        }
+    }
+
     handleRefresh = async() => {
         this.setState({
             isLoading: true,
@@ -63,12 +73,10 @@ class FleetsList extends Component {
                         range: `${this.state.pagination.start}-${ (this.state.pagination.count * this.state.pagination.page) - 1}`
                     }
                 })
+            this.props.setFleets(response.data)
             this.setState({
                 isLoading: false,
-                order: response.order,
-                itemList: new WinJS
-                    .Binding
-                    .List(response.data)
+                order: response.order
             })
         } catch (e) {
             this.setState({isLoading: false, order: "ASC"})
@@ -91,10 +99,7 @@ class FleetsList extends Component {
                 })
 
             for (const item in devices.data) {
-                this
-                    .state
-                    .itemList
-                    .push(devices.data[item])
+                this.state.itemList.push(devices.data[item])
             }
 
             this.setState({
@@ -148,13 +153,10 @@ class FleetsList extends Component {
                         forcedisplay: [2, 5]
                     }
                 })
-
+            this.props.setFleets(response.data)
             this.setState({
                 isLoading: false,
-                order: response.order,
-                itemList: new WinJS
-                    .Binding
-                    .List(response.data)
+                order: response.order
             })
 
         } catch (error) {
