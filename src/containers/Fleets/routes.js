@@ -2,8 +2,8 @@ import React from 'react'
 
 import FleetsContent from './components/FleetsContent'
 import EmptyMessage from '../../components/EmptyMessage'
+import FleetEdit from './components/FleetEdit'
 
-const MonkComponent4 = () => <div><h1> Mock4 </h1></div>
 const MonkComponent5 = () => <div><h1> Mock5 </h1></div>
 
 const routes = [
@@ -14,15 +14,15 @@ const routes = [
     exact: true
   },
   {
-    path: '/:id',
-    name: 'Fleet',
-    component: FleetsContent,
+    path: '/:id/edit',
+    name: 'Edit Fleet',
+    component: FleetEdit,
     exact: false
   },
   {
-    path: '/:id/edit',
-    name: 'Edit Fleet',
-    component: MonkComponent4,
+    path: '/:id',
+    name: 'Fleet',
+    component: FleetsContent,
     exact: false
   },
   {

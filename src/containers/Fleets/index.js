@@ -121,14 +121,14 @@ class Fleets extends Component {
         handleClickFleet={this.handleClickFleet}
       >
         <GenerateRoutes routes={routes} rootPath={this.props.match.url} data={{
-          policiesData: this.state.policiesData,
-          fleetSelected: this.state.fleetSelected,
-          tasksData: this.state.tasksData,
-          fetchTasks: this.fetchTasks,
-          policyCategoriesData: this.state.policyCategoriesData,
-          filesData: this.state.filesData,
-          applicationsData: this.state.applicationsData
-        }}/>
+            policiesData: this.state.policiesData,
+            fleetSelected: this.state.fleetSelected,
+            tasksData: this.state.tasksData,
+            fetchTasks: this.fetchTasks,
+            policyCategoriesData: this.state.policyCategoriesData,
+            filesData: this.state.filesData,
+            applicationsData: this.state.applicationsData
+          }}/>
       </FleetsList>
     )
   }
