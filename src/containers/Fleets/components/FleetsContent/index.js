@@ -4,7 +4,9 @@ import FleetsTaskItemList from './FleetsTaskItemList'
 
 const POLICIES_CAN_MULTIPLE_VALUE = [
     14, // -> Deploy Application
+    15, // -> Remove Application
     16, // -> Deploy File
+    17, // -> Remove File
 ]
 
 class FleetsContent extends Component {
@@ -27,10 +29,10 @@ class FleetsContent extends Component {
 
     getDefaultValues = policyId => {
         // Check if the policy default value are applications, files or nothing 
-        if (policyId === 14) {
+        if (policyId === 14 || policyId === 15) {
             return this.props.data.applicationsData
         }
-        else if (policyId === 16) {
+        else if (policyId === 16 || policyId === 17) {
             return this.props.data.filesData
         }
     }

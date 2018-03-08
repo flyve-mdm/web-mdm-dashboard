@@ -51,7 +51,8 @@ class FleetsTaskItemList extends Component {
     }
 
     render() {
-        if(this.props.data === undefined) {
+        console.log(this.props.data["PluginFlyvemdmPolicy.type"])
+        if (this.props.data === undefined) {
             return (   
                 <div className='files-list fleet-list'>
                         <div className='files-list-content'>
@@ -75,15 +76,11 @@ class FleetsTaskItemList extends Component {
             )
         } else {
             switch (this.props.data["PluginFlyvemdmPolicy.type"]) {
-                
                 case "bool":
-
                 let value = this.props.data['PluginFlyvemdmPolicy.default_value']
-
                 if(typeof(value) !== "boolean") {
                     value = true
                 }
-
                 return (
                     <div className='files-list fleet-list'>
                         <div className='files-list-content'>
@@ -166,13 +163,57 @@ class FleetsTaskItemList extends Component {
                                         value={this.props.data['PluginFlyvemdmPolicy.default_value']}
                                         onChange={this.props.changeInput}>
                                             <option>Select an application</option>
-                                            {/*
-                                                Applications.map((value, index) =>
-                                                    <option key={index} value={value["PluginFlyvemdmPackage.alias"]}>
+                                            {
+                                                this.props.defaultValues.map((value, index) =>
+                                                    <option
+                                                    key={value['PluginFlyvemdmPackage.id']}
+                                                    value={value["PluginFlyvemdmPackage.id"]}>
                                                         {value["PluginFlyvemdmPackage.alias"]}
                                                     </option>
                                                 )
-                                            */}
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className='item-content-secondary '>
+                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <ReactWinJS.ToggleSwitch 
+                                        className="content-text-primary"
+                                        checked={this.state.alreadyAdded}
+                                        onChange={() => this.handleAddedToggle}
+                                        labelOn=""
+                                        labelOff="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+                case "removeapp":
+                return (
+                    <div className='files-list fleet-list'>
+                        <div className='files-list-content'>
+                            <div className='files-list-item'>
+                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
+                                    <div className='content-text-primary'>
+                                        {this.props.data['PluginFlyvemdmPolicy.name']}
+                                    </div>
+                                    <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
+                                        <select
+                                        className="win-dropdown" 
+                                        name={this.props.data['PluginFlyvemdmPolicy.id']} 
+                                        value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                        onChange={this.props.changeInput}>
+                                            <option>Select an application</option>
+                                            {
+                                                this.props.defaultValues.map((value, index) =>
+                                                    <option
+                                                    key={value['PluginFlyvemdmPackage.id']}
+                                                    value={value["PluginFlyvemdmPackage.id"]}>
+                                                        {value["PluginFlyvemdmPackage.alias"]}
+                                                    </option>
+                                                )
+                                            }
                                         </select>
                                     </div>
                                 </div>
@@ -206,13 +247,57 @@ class FleetsTaskItemList extends Component {
                                         value={this.props.data['PluginFlyvemdmPolicy.default_value']}
                                         onChange={this.props.changeInput}>
                                             <option>Select a file</option>
-                                            {/*
-                                                Files.map((value, index) =>
-                                                    <option key={index} value={value["PluginFlyvemdmFile.name"]}>
+                                            {
+                                                this.props.defaultValues.map(value => 
+                                                    <option
+                                                    key={value['PluginFlyvemdmFile.id']}
+                                                    value={value["PluginFlyvemdmFile.id"]}>
                                                         {value["PluginFlyvemdmFile.name"]}
                                                     </option>
                                                 )
-                                              */}
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className='item-content-secondary '>
+                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <ReactWinJS.ToggleSwitch 
+                                        className="content-text-primary"
+                                        checked={this.state.alreadyAdded}
+                                        onChange={() => this.handleAddedToggle}
+                                        labelOn=""
+                                        labelOff="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+                case "removefile":
+                return (
+                    <div className='files-list fleet-list' >
+                        <div className='files-list-content'>
+                            <div className='files-list-item'>
+                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
+                                    <div className='content-text-primary'>
+                                        {this.props.data['PluginFlyvemdmPolicy.name']}
+                                    </div>
+                                    <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
+                                        <select 
+                                        className="win-dropdown" 
+                                        name={this.props.data['PluginFlyvemdmPolicy.id']} 
+                                        value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                        onChange={this.props.changeInput}>
+                                            <option>Select a file</option>
+                                            {
+                                                this.props.defaultValues.map(value => 
+                                                    <option
+                                                    key={value['PluginFlyvemdmFile.id']}
+                                                    value={value["PluginFlyvemdmFile.id"]}>
+                                                        {value["PluginFlyvemdmFile.name"]}
+                                                    </option>
+                                                )
+                                            }
                                         </select>
                                     </div>
                                 </div>
