@@ -123,7 +123,6 @@ class FleetsTaskItemList extends Component {
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
                                         <input 
                                         type="number"
-                                        style={{ width: '80px'}}
                                         className="win-textbox" 
                                         placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
                                         name={this.props.data['PluginFlyvemdmPolicy.id']}
@@ -321,14 +320,14 @@ class FleetsTaskItemList extends Component {
                         <div className='files-list-content'>
                             <div className='files-list-item'>
                                 <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                    <div className='content-text-primary'>not available</div>
+                                    <div className='content-text-primary'>Not available</div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <div className='icon item-icon --fleets'>
                                     <ReactWinJS.ToggleSwitch 
                                         className="content-text-primary"
-                                        checked={this.state.alreadyAdded}
-                                        onChange={() => this.handleAddedToggle}
+                                        checked={false}
+                                        disabled
                                         labelOn=""
                                         labelOff="" />
                                     </div>

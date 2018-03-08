@@ -102,7 +102,7 @@ class FleetsContent extends Component {
 
         return this.props.data.fleetSelected ? 
             ( 
-                <div>
+                <div style={{width: 'calc(100% - 20px)'}}> 
                     <div className="contentHeader">
                         <h1 className="win-h1 titleContentPane"> Fleets </h1>
                         <div className="itemInfo">
