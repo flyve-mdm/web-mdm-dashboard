@@ -1,5 +1,6 @@
 import EmptyMessage from '../../components/EmptyMessage'
 import DevicesContent from './components/DevicesContent'
+import Enroll from './components/Enroll'
 
 const routes = [
   {
@@ -12,6 +13,12 @@ const routes = [
     path: '/:id',
     name: 'Selected',
     component: DevicesContent,
+    exact: false
+  },
+  {
+    path: '/add',
+    name: 'Add',
+    component: Enroll,
     exact: false
   }
 ]
