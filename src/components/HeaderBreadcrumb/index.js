@@ -17,7 +17,7 @@ class HeaderBreadcrumb extends React.Component {
           <span className="header-breadcrumb-separator">/</span>
           <span>
             <Link to={path}>
-              {addresses[index]}
+              {addresses[index].replace(/\b\w/g, l => l.toUpperCase())}
             </Link>
           </span>
         </React.Fragment>
