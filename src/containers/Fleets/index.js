@@ -3,20 +3,28 @@ import withGLPI from '../../hoc/withGLPI'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import FleetsList from './components/FleetsList'
 import routes from './routes'
+import { updateObject } from '../../shared/updateObject'
 
 class Fleets extends Component {
   constructor(props) {
     super(props)
     this.state = {
+        fleetsData: null,
         policiesData: null,
         tasksData: null,        
         fleetSelected: null,
         policyCategoriesData: null,
         filesData: null,
-        applicationsData: null        
+        applicationsData: null
     }
   }
 
+  setFleets = (fleetsData) => {
+    this.setState({
+      fleetsData: fleetsData
+    })
+  }
+ 
   fecthPolicies = async () => {  
     const response = await this.props.glpi.searchItems({
         itemtype: 'PluginFlyvemdmPolicy', 
@@ -113,12 +121,37 @@ class Fleets extends Component {
     );
   }
 
+  updateFleetSelect = (newFleetData) => {
+    // Update FleetSelected and FleetsData
+    const newFleetSelected = updateObject(this.state.fleetSelected, newFleetData)
+
+    this.setState({
+      fleetSelected: newFleetSelected
+    })
+
+    const newFleetsData = [
+      ...this.state.fleetsData
+    ]
+
+    const index = newFleetsData.findIndex(
+      fleet => fleet['PluginFlyvemdmFleet.id'] === newFleetSelected['PluginFlyvemdmFleet.id']
+    )
+
+    newFleetsData[index] = newFleetSelected
+
+    this.setState({
+      fleetsData: newFleetsData
+    })
+  }
+
   render() { 
     return ( 
       <FleetsList 
         glpi={this.props.glpi}
         fleetSelected={this.state.fleetSelected}
         handleClickFleet={this.handleClickFleet}
+        fleetsData={this.state.fleetsData}
+        setFleets={this.setFleets}
       >
         <GenerateRoutes routes={routes} rootPath={this.props.match.url} data={{
             policiesData: this.state.policiesData,
@@ -127,7 +160,8 @@ class Fleets extends Component {
             fetchTasks: this.fetchTasks,
             policyCategoriesData: this.state.policyCategoriesData,
             filesData: this.state.filesData,
-            applicationsData: this.state.applicationsData
+            applicationsData: this.state.applicationsData,
+            updateFleetSelect: this.updateFleetSelect
           }}/>
       </FleetsList>
     )
