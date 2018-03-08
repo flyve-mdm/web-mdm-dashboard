@@ -48,7 +48,7 @@ class Devices extends Component {
             onNavigate: this.onNavigate,
             changeSelectionMode: this.changeSelectionMode,
             selectionMode: this.state.selectionMode,
-            selectedItems: this.selectedItems,
+            selectedItems: this.state.selectedItems,
             changeSelectedItems: this.changeSelectedItems,
             action: this.state.action,
             changeAction: this.changeAction,
