@@ -32,6 +32,7 @@ export default class Enroll extends Component {
                     body: 'Invitation successfully sent!',
                     type: 'success'
                 })
+                this.props.data.history.goBack()
             }
         } catch (error) {
             if (error.length > 1) {
@@ -74,7 +75,7 @@ export default class Enroll extends Component {
                         required
                     />
                     <br />
-                    <button className="win-button" onClick={() => {}}>Cancel</button>
+                    <button className="win-button" onClick={() => this.props.data.history.goBack()}>Cancel</button>
                     <button
                         className="win-button win-button-primary"
                         style={{ marginLeft: 10 }}
