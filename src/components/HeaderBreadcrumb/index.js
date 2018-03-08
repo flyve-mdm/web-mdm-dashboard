@@ -56,6 +56,5 @@ HeaderBreadcrumb.propTypes = {
   handleToggleExpand: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 }
-
  
 export default HeaderBreadcrumb
