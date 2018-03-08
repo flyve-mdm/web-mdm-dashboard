@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Pluralize from 'pluralize'
 import IconItemList from '../../../../components/IconItemList'
 import Confirmation from '../../../../components/Confirmation'
 import Loading from '../../../../components/Loading'
 
-class Main extends Component {
+export default class Main extends Component {
 
     constructor(props) {
         super(props)
@@ -16,7 +15,7 @@ class Main extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItemList !== prevProps.selectedItemList) {
+        if (this.props.data.selectedItems !== prevProps.data.selectedItems) {
             this.setState({
                 data: undefined
             })
@@ -29,7 +28,7 @@ class Main extends Component {
     }
 
     handleRefresh = () => {
-        this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'] })
+        this.props.data.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.data.selectedItems[0]['PluginFlyvemdmAgent.id'] })
             .then((response) => {
                 this.setState({
                     data: response
@@ -44,7 +43,7 @@ class Main extends Component {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
 
-            let itemListToDelete = this.props.selectedItemList.map((item) => {
+            let itemListToDelete = this.props.data.selectedItems.map((item) => {
                 return {
                     id: item["PluginFlyvemdmAgent.id"]
                 }
@@ -53,25 +52,24 @@ class Main extends Component {
             this.setState({
                 isLoading: true
             })
-            this.props.changeAction("Delete")
-
-            this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete })
+            
+            this.props.data.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete })
             .then((response) => {
-                this.props.showNotification('Success', 'elements successfully removed')
-                this.props.changeAction(null)
-                this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
+                this.props.data.showNotification('Success', 'elements successfully removed')
+                this.props.data.changeSelectionMode(false)
+                this.props.data.history.goBack()
+                this.props.data.changeAction('reload')
             })
             .catch((error) => {
                 if (error.length > 1) {
-                    this.props.showNotification(error[0], error[1])
+                    this.props.data.showNotification(error[0], error[1])
                 }
             })
         }
     }
 
     handleEdit = () => {
-        this.props.changeAction("EditOne")
+        this.props.data.changeAction("EditOne")
     }
 
     ping = () => {
@@ -79,19 +77,19 @@ class Main extends Component {
             sendingPing: true
         }, async () => {
             try {
-                const response = await this.props.glpi.genericRequest({
-                    path: `PluginFlyvemdmAgent/${this.props.selectedItemList[0]['PluginFlyvemdmAgent.id']}`,
+                const response = await this.props.data.glpi.genericRequest({
+                    path: `PluginFlyvemdmAgent/${this.props.data.selectedItems[0]['PluginFlyvemdmAgent.id']}`,
                     requestParams: {
                         method: 'PUT',
                         body: JSON.stringify({"input":{"_ping": ""}})
                     }
                 })
-                this.props.showNotification('Success', response[0].message ? response[0].message : "Ping sent")
+                this.props.data.showNotification('Success', response[0].message ? response[0].message : "Ping sent")
                 this.setState({ sendingPing: false }, () => {
                     this.handleRefresh()
                 })
             } catch (error) {
-                this.props.showNotification(error[0], error[1])
+                this.props.data.showNotification(error[0], error[1])
                 this.setState({ sendingPing: false })
             }
         })
@@ -113,7 +111,6 @@ class Main extends Component {
             renderComponent = (
             <div>
                 <div className="contentHeader">
-                    <h2 className="win-h2 titleContentPane" > {Pluralize.singular(this.props.location[0])} </h2>
                     <div className="itemInfo">
                         {iconComponent}
                         <div className="contentStatus">
@@ -161,21 +158,18 @@ class Main extends Component {
                         </li>
                     </ul>
                 </div>
-                <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.data["name"]} reference={el => this.contentDialog = el} /> 
+                <Confirmation title={`Delete devices`} message={this.state.data["name"]} reference={el => this.contentDialog = el} /> 
             </div>
             )
         }
         return renderComponent
     }
 }
-
 Main.propTypes = {
-    changeAction: PropTypes.func.isRequired,
-    changeSelectionMode: PropTypes.func.isRequired,
-    location: PropTypes.array.isRequired,
-    selectedItemList: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    data: PropTypes.shape({
+        action: PropTypes.string,
+        changeAction: PropTypes.func.isRequired,
+        setNotification: PropTypes.func.isRequired,
+        glpi: PropTypes.object.isRequired
+    })
 }
-
-export default Main
