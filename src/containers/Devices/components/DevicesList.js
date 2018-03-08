@@ -36,13 +36,13 @@ export default class DevicesList extends Component {
             this.listView.winControl.footer.style.height = '1px'
         }
 
-        if (!this.props.action && (prevProps.action === 'Edit' || prevProps.action === 'EditOne' || prevProps.action === 'Delete')) {
+        if (!this.props.data.action && (prevProps.action === 'Edit' || prevProps.action === 'EditOne' || prevProps.action === 'Delete')) {
             this.handleRefresh()
         }
 
-        if (this.props.action === "reload") {
+        if (this.props.data.action === "reload") {
             this.handleRefresh()
-            this.props.changeAction(null)            
+            this.props.data.changeAction(null)
         }
     }
 
@@ -67,7 +67,7 @@ export default class DevicesList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push('/app/devices')
+            this.props.data.history.push('/app/devices')
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -77,7 +77,7 @@ export default class DevicesList extends Component {
                     count: 15
                 }
             })
-            const devices = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 4, 12], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            const devices = await this.props.data.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 4, 12], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
             this.setState({
                 isLoading: false,
                 order: devices.order,
@@ -95,8 +95,8 @@ export default class DevicesList extends Component {
     handleEdit = (eventObject) => {
         let button = eventObject.currentTarget.winControl
         setTimeout(() => {
-            this.props.onNavigate(this.state.selectedItems.length > 0 && this.state.selectionMode ? [this.props.location[0], this.state.selectedItems] : this.props.location)
-            this.props.changeAction(button.label)
+            this.props.data.onNavigate(this.state.selectedItems.length > 0 && this.state.selectionMode ? [this.props.data.location[0], this.state.selectedItems] : this.props.data.location)
+            this.props.data.changeAction(button.label)
         }, 0)
     }
 
@@ -107,7 +107,7 @@ export default class DevicesList extends Component {
             selectedItems: [],
             selectionMode: false
         })
-        this.props.history.push(path)
+        this.props.data.history.push(path)
     }
 
     handleToggleSelectionMode = () => {
@@ -129,12 +129,12 @@ export default class DevicesList extends Component {
         this.setState({
             selectedItems: itemSelected
         })
-        this.props.changeSelectedItems(itemSelected)
+        this.props.data.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.state.selectionMode) {
-            this.props.history.push(`/app/devices/${itemSelected[0]["PluginFlyvemdmAgent.id"]}`)
+            this.props.data.history.push(`/app/devices/${itemSelected[0]["PluginFlyvemdmAgent.id"]}`)
         }
         if (index.length > 1 && !this.state.selectionMode) {
-            this.props.history.push('/app/devices/edit/')
+            this.props.data.history.push('/app/devices/edit/')
         }
     }
 
@@ -153,11 +153,11 @@ export default class DevicesList extends Component {
                 this.setState({
                     isLoading: true
                 })
-                this.props.changeAction(button.label)
+                this.props.data.changeAction(button.label)
 
-                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })
+                await this.props.data.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })
 
-                this.props.setNotification({
+                this.props.data.setNotification({
                     title: 'Successfully',
                     body: 'Device successfully removed!',
                     type: 'success'
@@ -181,7 +181,7 @@ export default class DevicesList extends Component {
         } catch (error) {
             if (error.length > 1) {
 
-                this.props.setNotification({
+                this.props.data.setNotification({
                     title: error[0],
                     body: error[1],
                     type: 'alert'
@@ -208,14 +208,14 @@ export default class DevicesList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const devices = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, order: newOrder, forcedisplay: [2, 3, 4, 12] } })
+            const devices = await this.props.data.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, order: newOrder, forcedisplay: [2, 3, 4, 12] } })
 
             this.setState({
                 isLoading: false,
                 order: devices.order,
                 itemList: BuildItemList(devices)
             })
-            this.props.history.push('/app/devices')
+            this.props.data.history.push('/app/devices')
 
         } catch (error) {
             this.setState({
@@ -245,7 +245,7 @@ export default class DevicesList extends Component {
 
     loadMoreData = async () => {
         try {
-            const devices = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 4, 12], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            const devices = await this.props.data.glpi.searchItems({ itemtype: 'PluginFlyvemdmAgent', options: { uid_cols: true, forcedisplay: [2, 3, 4, 12], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
             
             for (const item in devices.data) {
                 this.state.itemList.push(devices.data[item])
@@ -314,7 +314,7 @@ export default class DevicesList extends Component {
         }
 
         return (
-            <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+            <div className="listPane" style={{ height: '100%', width: this.props.data.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                 <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
                         key="sort"
@@ -361,15 +361,17 @@ export default class DevicesList extends Component {
     }
 }
 DevicesList.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
-    animation: PropTypes.bool.isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
-    action: PropTypes.string,
-    changeAction: PropTypes.func.isRequired,
-    setNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
+    data: PropTypes.shape({
+        itemListPaneWidth: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]).isRequired,
+        animation: PropTypes.bool.isRequired,
+        location: PropTypes.array.isRequired,
+        onNavigate: PropTypes.func.isRequired,
+        action: PropTypes.string,
+        changeAction: PropTypes.func.isRequired,
+        setNotification: PropTypes.func.isRequired,
+        glpi: PropTypes.object.isRequired
+    })
 }
