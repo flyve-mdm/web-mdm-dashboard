@@ -101,13 +101,12 @@ export default class DevicesList extends Component {
     }
 
     handleAdd(eventObject, path) {
-
+        this.props.history.push(path)
         this.listView.winControl.selection.clear()
         this.setState({
             selectedItems: [],
             selectionMode: false
-        })
-        this.props.history.push(path)
+        }) 
     }
 
     handleToggleSelectionMode = () => {
