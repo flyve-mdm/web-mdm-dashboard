@@ -20,23 +20,22 @@ $color-fonts-hover: $splitview-color-fonts-hover;
 }
 
 @include keyframes(contract-splitview-desktop) {
-  0% { width: $width-desktop; opacity: 1}
-  100% { width: 0; opacity: 0}
+  0% { width: $width-desktop;}
+  100% { width: 0;}
 }
 
 @include keyframes(contract-splitview-tablet-small) {
-  0% { width:  $width-tablet-small; opacity: 1}
-  100% { width: 0; opacity: 0}
+  0% { width:  $width-tablet-small;}
+  100% { width: 0;}
 }
 
 @include keyframes(contract-splitview-phablet) {
-  0% { width: $width-phablet; opacity: 1}
-  100% { width: 0; opacity: 0}
+  0% { width: $width-phablet;}
+  100% { width: 0;}
 }
 
 
 .splitview-block {
-  @include animation('fade-in .25s');
   display: inline-block;
 
   .splitview-wrapper__div {

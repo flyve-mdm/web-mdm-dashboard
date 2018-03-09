@@ -119,7 +119,6 @@ class SplitView extends React.Component {
       )
     }
     
-    console.log(toRender)
     return toRender
   }
 }
