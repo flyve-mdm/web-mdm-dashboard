@@ -8,7 +8,7 @@ import Loading from '../../../components/Loading'
 export default class DevicesEditOne extends Component {
 
     componentDidMount() {
-        if (this.props.data.selectedItems) {
+        if (this.props.selectedItems) {
             this.handleRefresh()
         }
     }
@@ -17,7 +17,7 @@ export default class DevicesEditOne extends Component {
         this.setState({
             isLoading: true
         })
-        this.props.data.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.data.selectedItems[0]['PluginFlyvemdmAgent.id'] })
+        this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'] })
             .then((response) => {
                 this.setState({
                     isLoading: false,
@@ -72,25 +72,25 @@ export default class DevicesEditOne extends Component {
             name: this.state.name,
             plugin_flyvemdm_fleets_id: this.state.fleet.value
         }
-        this.props.data.glpi.updateItem({itemtype: 'PluginFlyvemdmAgent', id: this.state.id, input})
+        this.props.glpi.updateItem({itemtype: 'PluginFlyvemdmAgent', id: this.state.id, input})
         .then(() => {
-            this.props.data.setNotification('Success', 'changes saved successfully')
-            this.props.data.changeAction(null)
-            this.props.data.changeSelectionMode(false)
+            this.props.setNotification('Success', 'changes saved successfully')
+            this.props.changeAction(null)
+            this.props.changeSelectionMode(false)
         })
         .catch((error) => {
             this.setState({
                 isLoading: false
             })
             if(error.length > 1) {
-                this.props.data.setNotification(error[0], error[1])
+                this.props.setNotification(error[0], error[1])
             }
         })
     }
     
     render() {
         const componetRender = (
-            <ContentPane itemListPaneWidth={this.props.data.itemListPaneWidth}>
+            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                 <Loading message="Loading..." />
             </ContentPane>
         ) 
@@ -101,12 +101,12 @@ export default class DevicesEditOne extends Component {
             const agent = this.state.name ? agentScheme({
                 state: this.state, 
                 changeState: this.changeState,
-                glpi: this.props.data.glpi
+                glpi: this.props.glpi
             }) : null
 
             if(agent && !this.state.isLoading) {
                 return (
-                    <ContentPane itemListPaneWidth={this.props.data.itemListPaneWidth}>
+                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                         <div className="contentHeader">
                             <button className="btn --primary" onClick={this.handleSaveOneDevices}>
                                 Save
@@ -123,16 +123,14 @@ export default class DevicesEditOne extends Component {
     }
 }
 DevicesEditOne.propTypes = {
-    data: PropTypes.shape({
-        itemListPaneWidth: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.number
-        ]).isRequired,
-        selectedItems: PropTypes.array,
-        changeSelectionMode: PropTypes.func.isRequired,
-        changeAction: PropTypes.func.isRequired,
-        setNotification: PropTypes.func.isRequired,
-        history: PropTypes.object.isRequired,
-        glpi: PropTypes.object.isRequired
-    })
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    selectedItems: PropTypes.array,
+    changeSelectionMode: PropTypes.func.isRequired,
+    changeAction: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    glpi: PropTypes.object.isRequired
 }

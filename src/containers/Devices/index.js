@@ -67,7 +67,7 @@ class Devices extends Component {
         return (
             <div className="flex-block --with-scroll --with-content-pane">
                 <DevicesList 
-                    data={{...this.propsData()}}
+                    {...this.propsData()}
                 />
                 <GenerateRoutes routes={routes} rootPath={this.props.match.url} data={{...this.propsData()}} />
             </div>

@@ -15,7 +15,7 @@ export default class Main extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.data.selectedItems !== prevProps.data.selectedItems) {
+        if (this.props.selectedItems !== prevProps.selectedItems) {
             this.setState({
                 data: undefined
             })
@@ -28,7 +28,7 @@ export default class Main extends Component {
     }
 
     handleRefresh = () => {
-        this.props.data.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.data.selectedItems[0]['PluginFlyvemdmAgent.id'] })
+        this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'] })
             .then((response) => {
                 this.setState({
                     data: response
@@ -43,7 +43,7 @@ export default class Main extends Component {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
 
-            let itemListToDelete = this.props.data.selectedItems.map((item) => {
+            let itemListToDelete = this.props.selectedItems.map((item) => {
                 return {
                     id: item["PluginFlyvemdmAgent.id"]
                 }
@@ -53,24 +53,24 @@ export default class Main extends Component {
                 isLoading: true
             })
             
-            this.props.data.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete })
+            this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete })
             .then((response) => {
-                this.props.data.showNotification('Success', 'elements successfully removed')
-                this.props.data.changeSelectionMode(false)
-                this.props.data.history.goBack()
-                this.props.data.changeAction('reload')
+                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.changeSelectionMode(false)
+                this.props.history.goBack()
+                this.props.changeAction('reload')
             })
             .catch((error) => {
                 if (error.length > 1) {
-                    this.props.data.showNotification(error[0], error[1])
+                    this.props.showNotification(error[0], error[1])
                 }
             })
         }
     }
 
     handleEdit = () => {
-        const location = `${this.props.data.history.location.pathname}/edit`
-        this.props.data.history.push(location)
+        const location = `${this.props.history.location.pathname}/edit`
+        this.props.history.push(location)
     }
 
     ping = () => {
@@ -78,19 +78,19 @@ export default class Main extends Component {
             sendingPing: true
         }, async () => {
             try {
-                const response = await this.props.data.glpi.genericRequest({
-                    path: `PluginFlyvemdmAgent/${this.props.data.selectedItems[0]['PluginFlyvemdmAgent.id']}`,
+                const response = await this.props.glpi.genericRequest({
+                    path: `PluginFlyvemdmAgent/${this.props.selectedItems[0]['PluginFlyvemdmAgent.id']}`,
                     requestParams: {
                         method: 'PUT',
                         body: JSON.stringify({"input":{"_ping": ""}})
                     }
                 })
-                this.props.data.showNotification('Success', response[0].message ? response[0].message : "Ping sent")
+                this.props.showNotification('Success', response[0].message ? response[0].message : "Ping sent")
                 this.setState({ sendingPing: false }, () => {
                     this.handleRefresh()
                 })
             } catch (error) {
-                this.props.data.showNotification(error[0], error[1])
+                this.props.showNotification(error[0], error[1])
                 this.setState({ sendingPing: false })
             }
         })
@@ -167,11 +167,9 @@ export default class Main extends Component {
     }
 }
 Main.propTypes = {
-    data: PropTypes.shape({
-        action: PropTypes.string,
-        changeAction: PropTypes.func.isRequired,
-        setNotification: PropTypes.func.isRequired,
-        history: PropTypes.object.isRequired,
-        glpi: PropTypes.object.isRequired
-    })
+    action: PropTypes.string,
+    changeAction: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    glpi: PropTypes.object.isRequired
 }
