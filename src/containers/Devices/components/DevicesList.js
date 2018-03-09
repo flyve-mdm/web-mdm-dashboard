@@ -271,7 +271,6 @@ export default class DevicesList extends Component {
                 key="delete"
                 icon="delete"
                 label="Delete"
-                path="/"
                 priority={0}
                 disabled={this.state.selectedItems.length === 0}
                 onClick={this.handleDelete}
@@ -283,7 +282,6 @@ export default class DevicesList extends Component {
                 key="edit"
                 icon="edit"
                 label="Edit"
-                path="/"
                 priority={0}
                 disabled={this.state.selectedItems.length === 0}
                 onClick={this.handleEdit}
@@ -328,7 +326,6 @@ export default class DevicesList extends Component {
                         key="refresh"
                         icon="refresh"
                         label="Refresh"
-                        path="/"
                         priority={2}
                         onClick={this.handleRefresh}
                     />
@@ -348,7 +345,6 @@ export default class DevicesList extends Component {
                         key="select"
                         icon="bullets"
                         label="Select"
-                        path="/"
                         priority={0}
                         selected={this.state.selectionMode}
                         onClick={this.handleToggleSelectionMode}
