@@ -18,6 +18,7 @@ export default class DevicesContent extends Component {
                                 changeAction: this.props.data.changeAction,
                                 changeSelectionMode: this.props.data.changeSelectionMode,
                                 setNotification: this.props.data.setNotification,
+                                history: this.props.data.history,
                                 glpi: this.props.data.glpi
                             }}
                         />
@@ -83,6 +84,7 @@ DevicesContent.propTypes = {
         changeAction: PropTypes.func.isRequired,
         selectedItems: PropTypes.array.isRequired,
         setNotification: PropTypes.func.isRequired,
+        history: PropTypes.object.isRequired,
         glpi: PropTypes.object.isRequired
     })
 }
