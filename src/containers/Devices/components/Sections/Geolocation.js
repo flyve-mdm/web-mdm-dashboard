@@ -31,10 +31,18 @@ export default class Geolocation extends Component {
                 id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
                 input: {_geolocate: ""}
             })
-            this.props.showNotification('Success', 'Request sent')
+            this.props.setNotification({
+                title: 'Successfully',
+                body: 'Request sent',
+                type: 'success'
+            })
             this.handleRefresh()
         } catch (error) {
-            this.props.showNotification(error[0], error[1])
+            this.props.setNotification({
+                title: error[0],
+                body: error[1],
+                type: 'alert'
+            })
         }
     }
 
@@ -50,7 +58,11 @@ export default class Geolocation extends Component {
                 isLoading: false
             })
         } catch (e) {
-            this.props.showNotification('Error','Problems loading data')
+            this.props.setNotification({
+                title: 'Error',
+                body: 'Problems loading data',
+                type: 'alert'
+            })
             this.setState({  
                 isLoading: false 
             })
@@ -87,6 +99,6 @@ export default class Geolocation extends Component {
 
 Geolocation.propTypes = {
     selectedItems: PropTypes.array,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }

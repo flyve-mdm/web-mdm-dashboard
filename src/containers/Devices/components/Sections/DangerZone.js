@@ -13,11 +13,19 @@ class DangerZone extends Component {
                     id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
                     input: {"wipe": "1"}
                 })
-                this.props.showNotification('Success', response[0].message ? response[0].message : "Data deleted successfully")
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: response[0].message ? response[0].message : 'Data deleted successfully',
+                    type: 'success'
+                })
                 this.props.changeAction("reload")
                 this.props.onNavigate([this.props.location[0]])
             } catch (error) {
-                this.props.showNotification(error[0], error[1])
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             }
         }
     }
@@ -31,11 +39,19 @@ class DangerZone extends Component {
                     id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
                     input: {"_unenroll": "1"}
                 })
-                this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: response[0].message ? response[0].message : 'Unenrollment device',
+                    type: 'success'
+                })
                 this.props.changeAction("reload")
                 this.props.onNavigate([this.props.location[0]])
             } catch (error) {
-                this.props.showNotification(error[0], error[1])
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             }
         }
     }
@@ -49,12 +65,19 @@ class DangerZone extends Component {
                     itemtype: 'PluginFlyvemdmAgent',
                     id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
                 })
-                this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
-                this.props.showNotification('Success', 'Devices successfully deleted')                        
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: response[0].message ? response[0].message : 'Devices successfully deleted',
+                    type: 'success'
+                })
                 this.props.changeAction("reload")
                 this.props.onNavigate([this.props.location[0]])
             } catch (error) {
-                this.props.showNotification(error[0], error[1])
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             }
         }
 
@@ -117,7 +140,7 @@ class DangerZone extends Component {
 
 DangerZone.propTypes = {
     selectedItems: PropTypes.array.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
 
