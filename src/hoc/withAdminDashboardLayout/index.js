@@ -5,7 +5,7 @@ import getMode from '../../shared/getMode'
 
 // TODO: Passing Routes to props for generate NavLink in SplitView component
 
-const TIMEOUT_CONTRACT = 420
+const TIMEOUT_CONTRACT = 250
 
 const withAdminDashboardLayout = WrappedComponent => {
   class AdminDashboardLayout extends Component {
