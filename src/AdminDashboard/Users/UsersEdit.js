@@ -35,6 +35,75 @@ export default class DevicesEdit extends Component {
         if (isCorrect) {
             this.setState({
                 isLoading: true
+            }, async () => {
+                let input
+
+                switch (this.state.field) {
+                    case 'Realname': input = {realname: this.state.newValue}
+                        break
+
+                    case 'First name': input = {firstname: this.state.newValue}
+                        break
+                    
+                    case 'Title': input = {usertitles_id: this.state.newValue}
+                        break
+
+                    case 'Location': input = {locations_id: this.state.newValue}
+                        break
+                    
+                    case 'Default profile': input = {profiles_id: this.state.newValue}
+                        break
+
+                    case 'Password': input = {password: this.state.newValue, password2: this.state.passwordConfirmation}
+                        break
+
+                    case 'Valid since': input = {begin_date: this.state.newValue}
+                        break
+
+                    case 'Valid until': input = {end_date: this.state.newValue}
+                        break
+                    
+                    case 'Phone': input = {phone: this.state.newValue}
+                        break
+
+                    case 'Phone 2': input = {phone2: this.state.newValue}
+                        break
+
+                    case 'Mobile phone': input = {mobile: this.state.newValue}
+                        break
+
+                    case 'Administrative number': input = {registration_number: this.state.newValue}
+                        break
+
+                    case 'Category': input = {usercategories_id: this.state.newValue}
+                        break
+
+                    case 'Default entity': input = {entities_id: this.state.newValue}
+                        break
+
+                    case 'Comments': input = {comment: this.state.newValue}
+                        break
+
+                    default:
+                        break
+                }
+
+                input = this.props.selectedItemList.map(element => {
+                    return ({
+                        id: element['User.id'],
+                        ...input
+                    })
+                })
+
+                try {
+                    await this.props.glpi.updateItem({itemtype: 'User', input})
+                    this.props.showNotification('Success', 'saved profile')
+                    this.props.changeActionList(null)
+                } catch (e) {
+                    this.setState ({isLoading: false})            
+                    this.props.showNotification('Error', e)
+                }
+                
             })
         } else {
             this.setState({
