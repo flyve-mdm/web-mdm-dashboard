@@ -43,9 +43,6 @@ class Devices extends Component {
     propsData = () => {
         return {
             itemListPaneWidth: 320,
-            animation: this.state.animation,
-            location:this.state.location,
-            onNavigate: this.onNavigate,
             changeSelectionMode: this.changeSelectionMode,
             selectionMode: this.state.selectionMode,
             selectedItems: this.state.selectedItems,
@@ -59,7 +56,6 @@ class Devices extends Component {
     }
 
     changeSelectedItems = selectedItems => this.setState({ selectedItems })
-    onNavigate = location => this.setState({ location })
     changeAction = action => this.setState({ action })
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
 

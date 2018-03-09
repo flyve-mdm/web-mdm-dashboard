@@ -10,7 +10,7 @@ export default class DevicesEdit extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            itemListEdit: [...this.props.selectedItemList],
+            itemListEdit: [...this.props.selectedItems],
             isLoading: false
         }
     }
@@ -47,33 +47,37 @@ export default class DevicesEdit extends Component {
                 this.setState({
                     isLoading: false
                 })
-                this.props.changeAction(null)
                 this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
-                this.props.showNotification('Success', 'changes saved successfully')
+                this.props.changeAction('reload')
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: 'Device successfully updated!',
+                    type: 'success'
+                })
             })
             .catch((error) => {
                 if(error.length > 1) {
-                    this.props.showNotification(error[0], error[1])
+                    this.props.setNotification({
+                        title: error[0],
+                        body: error[1],
+                        type: 'alert'
+                    })
                 }
                 this.setState({
                     isLoading: false
                 })
-                this.props.changeAction(null)
-                this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
             })
         }
     }
 
     render() {
-        if (this.props.selectedItemList) {
+        if (this.props.selectedItems) {
             
             let renderComponent
             if (this.state.isLoading) {
                 renderComponent = <Loading message="Loading..." />
             } else {
-                renderComponent = this.props.selectedItemList.map((item) => {                                
+                renderComponent = this.props.selectedItems.map((item) => {                                
                     return (
                         <DevicesEditItemList
                             key={item["PluginFlyvemdmAgent.id"]}
@@ -111,13 +115,11 @@ DevicesEdit.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedItemList: PropTypes.array,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
+    selectedItems: PropTypes.array,
     selectedIndex: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
