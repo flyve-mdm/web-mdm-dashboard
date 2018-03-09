@@ -89,13 +89,11 @@ export default class DevicesEditOne extends Component {
     }
     
     render() {
-        const componetRender = (<ContentPane itemListPaneWidth={this.props.data.itemListPaneWidth}>
-            <div className="contentHeader">
-                <h2 className="win-h2 titleContentPane" > Edit Device</h2>
-            </div>
-            <div className="separator" />
-            <Loading message="Loading..." />
-        </ContentPane>) 
+        const componetRender = (
+            <ContentPane itemListPaneWidth={this.props.data.itemListPaneWidth}>
+                <Loading message="Loading..." />
+            </ContentPane>
+        ) 
 
         if(!this.state) {
             return componetRender
