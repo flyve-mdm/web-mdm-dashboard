@@ -69,7 +69,8 @@ export default class Main extends Component {
     }
 
     handleEdit = () => {
-        this.props.data.changeAction("EditOne")
+        const location = `${this.props.data.history.location.pathname}/edit`
+        this.props.data.history.push(location)
     }
 
     ping = () => {
