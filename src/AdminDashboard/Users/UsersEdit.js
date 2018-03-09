@@ -44,21 +44,27 @@ export default class DevicesEdit extends Component {
     }
 
     change = (name, value) => {
-        if(name === "field" && value === "Password") {
+        if(name === "field") {
             this.setState({
-                isLoading: true
-            }, async () => {
-                const { cfg_glpi } = await this.props.glpi.getGlpiConfig()
-                this.setState({
-                    passwordConfiguration: {
-                        minimunLength: cfg_glpi.password_min_length,
-                        needDigit: cfg_glpi.password_need_number,
-                        needLowercaseCharacter: cfg_glpi.password_need_letter,
-                        needUppercaseCharacter: cfg_glpi.password_need_caps,
-                        needSymbol: cfg_glpi.password_need_symbol
-                    },
-                    isLoading: false
-                })
+                newValue: ''
+            }, ()=> {
+                if (value === "Password") {
+                    this.setState({
+                        isLoading: true
+                    }, async () => {
+                        const { cfg_glpi } = await this.props.glpi.getGlpiConfig()
+                        this.setState({
+                            passwordConfiguration: {
+                                minimunLength: cfg_glpi.password_min_length,
+                                needDigit: cfg_glpi.password_need_number,
+                                needLowercaseCharacter: cfg_glpi.password_need_letter,
+                                needUppercaseCharacter: cfg_glpi.password_need_caps,
+                                needSymbol: cfg_glpi.password_need_symbol
+                            },
+                            isLoading: false
+                        })
+                    })
+                }
             })
         } 
         this.setState({
