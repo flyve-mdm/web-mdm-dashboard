@@ -114,7 +114,7 @@ class Applications extends Component {
 
         if (!this.state.isLoading && this.state.itemList.length > 0) {
             listComponent = (
-                <ContentPane >
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <div className="listPane" style={{ padding: 0 }}>
                         <ReactWinJS.ListView
                             ref={(listView) => { this.listView = listView }}

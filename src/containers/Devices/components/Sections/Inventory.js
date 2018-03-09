@@ -13,7 +13,7 @@ export default class Inventory extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItemList !== prevProps.selectedItemList) {
+        if (this.props.selectedItems !== prevProps.selectedItems) {
             this.setState({
                 data: undefined,
                 isLoading: false
@@ -80,7 +80,7 @@ export default class Inventory extends Component {
     }
 }
 Inventory.propTypes = {
-    selectedItemList: PropTypes.array.isRequired,
+    selectedItems: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
     itemType: PropTypes.string.isRequired,
     fields: PropTypes.object.isRequired,
