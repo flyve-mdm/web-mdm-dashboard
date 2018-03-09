@@ -4,6 +4,7 @@ import ContentPane from '../../Utils/ContentPane'
 import EmptyMessage from '../../Utils/EmptyMessage'
 import Loading from '../../Utils/Loading'
 import { Select, Input, DatePicker, TextArea } from '../../Utils/Forms'
+import ErrorValidation from '../../Utils/Forms/ErrorValidation'
 
 export default class DevicesEdit extends Component {
 
@@ -11,17 +12,49 @@ export default class DevicesEdit extends Component {
         super(props)
         this.state = {
             itemListEdit: [...this.props.selectedItemList],
-            isLoading: false,
+            isLoading: true,
             field: undefined,
             newValue: '',
-            passwordConfirmation: undefined
+            passwordConfirmation: '',
+            passwordConfiguration: {},
+            forceValidation: false
         }
     }
 
-    handleSaveDevices = async () => {
+    componentWillMount = async () => {
+        const { cfg_glpi } = await this.props.glpi.getGlpiConfig()
         this.setState({
-            isLoading: true
+            passwordConfiguration: {
+                minimunLength: cfg_glpi.password_min_length,
+                needDigit: cfg_glpi.password_need_number,
+                needLowercaseCharacter: cfg_glpi.password_need_letter,
+                needUppercaseCharacter: cfg_glpi.password_need_caps,
+                needSymbol: cfg_glpi.password_need_symbol
+            },
+            isLoading: false
         })
+    }
+
+    handleSave = async () => {
+        let isCorrect = true
+
+        if (this.state.field === "Password") {
+            if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.newValue).isCorrect) 
+                isCorrect = false
+            
+            if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.passwordConfirmation).isCorrect) 
+                isCorrect = false
+        }
+
+        if (isCorrect) {
+            this.setState({
+                isLoading: true
+            })
+        } else {
+            this.setState({
+                forceValidation: true
+            })
+        }
     }
 
     change = (name, value) => {
@@ -62,17 +95,25 @@ export default class DevicesEdit extends Component {
                                 type="password"
                                 name="newValue"
                                 value={this.state.newValue}
-                                // parametersToEvaluate={}
+                                parametersToEvaluate={this.state.passwordConfiguration}
                                 function={this.change}
+                                forceValidation={this.state.forceValidation}
                                 key="password-1"
                             />,
                             <Input
                                 label="Please repeat the password"
                                 type="password"
                                 name="passwordConfirmation"
-                                value={this.state.newValue}
-                                // parametersToEvaluate={}
+                                value={this.state.passwordConfirmation}
+                                parametersToEvaluate={{
+                                    ...this.state.passwordConfiguration,
+                                    isEqualTo: {
+                                        value: this.state.newValue,
+                                        message: "Passwords do not match"
+                                    }
+                                }}
                                 function={this.change}
+                                forceValidation={this.state.forceValidation}
                                 key="password-2"
                             />
                         ]
@@ -241,7 +282,7 @@ export default class DevicesEdit extends Component {
 
                         <br/>
                         
-                        <button className="win-button win-button-primary" onClick={this.handleSaveDevices}>
+                        <button className="win-button win-button-primary" onClick={this.handleSave}>
                             Save
                         </button>
                     </div>
