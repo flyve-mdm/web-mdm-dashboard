@@ -12,27 +12,13 @@ export default class DevicesEdit extends Component {
         super(props)
         this.state = {
             itemListEdit: [...this.props.selectedItemList],
-            isLoading: true,
+            isLoading: false,
             field: undefined,
             newValue: '',
             passwordConfirmation: '',
             passwordConfiguration: {},
             forceValidation: false
         }
-    }
-
-    componentWillMount = async () => {
-        const { cfg_glpi } = await this.props.glpi.getGlpiConfig()
-        this.setState({
-            passwordConfiguration: {
-                minimunLength: cfg_glpi.password_min_length,
-                needDigit: cfg_glpi.password_need_number,
-                needLowercaseCharacter: cfg_glpi.password_need_letter,
-                needUppercaseCharacter: cfg_glpi.password_need_caps,
-                needSymbol: cfg_glpi.password_need_symbol
-            },
-            isLoading: false
-        })
     }
 
     handleSave = async () => {
@@ -58,6 +44,23 @@ export default class DevicesEdit extends Component {
     }
 
     change = (name, value) => {
+        if(name === "field" && value === "Password") {
+            this.setState({
+                isLoading: true
+            }, async () => {
+                const { cfg_glpi } = await this.props.glpi.getGlpiConfig()
+                this.setState({
+                    passwordConfiguration: {
+                        minimunLength: cfg_glpi.password_min_length,
+                        needDigit: cfg_glpi.password_need_number,
+                        needLowercaseCharacter: cfg_glpi.password_need_letter,
+                        needUppercaseCharacter: cfg_glpi.password_need_caps,
+                        needSymbol: cfg_glpi.password_need_symbol
+                    },
+                    isLoading: false
+                })
+            })
+        } 
         this.setState({
             [name]: value
         })
