@@ -94,7 +94,7 @@ export default class DevicesEdit extends Component {
                 <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
-                        <button className="win-button win-button-primary" onClick={this.handleSaveDevices}>
+                        <button className="btn --primary" onClick={this.handleSaveDevices}>
                             Save
                         </button>
                     </div>
