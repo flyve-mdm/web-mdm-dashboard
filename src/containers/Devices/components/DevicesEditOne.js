@@ -26,7 +26,7 @@ export default class DevicesEditOne extends Component {
                     fleet: {
                         value: response["plugin_flyvemdm_fleets_id"],
                         request: {
-                            params: ['PluginFlyvemdmFleet', null],
+                            params: {itemtype: 'PluginFlyvemdmFleet'},
                             method: 'getAllItems',
                             content: 'name',
                             value: 'id'
