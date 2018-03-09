@@ -54,7 +54,7 @@ class Map extends Component {
                 map, 
                 markerGroup: L.layerGroup().addTo(map)
             }, () => this.addMarkers())
-        }, 500)
+        }, 0)
     }
 
     componentDidUpdate = () => {
