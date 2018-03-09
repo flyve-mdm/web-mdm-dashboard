@@ -33,6 +33,7 @@ export default class DevicesContent extends Component {
                     <ReactWinJS.Pivot.Item key="applications" header="Applications">
                         
                         <Applications 
+                            itemListPaneWidth={this.props.itemListPaneWidth}
                             selectedItems={this.props.selectedItems}
                             glpi={this.props.glpi}
                         />
