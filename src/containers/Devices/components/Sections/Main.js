@@ -144,7 +144,7 @@ export default class Main extends Component {
                             </div>   
                             <div style={{overflow: 'auto'}}>
                                 <div>
-                                    <button className="win-button win-button-primary" style={{float:'left', marginTop: 5, marginBottom: 5}} onClick={this.ping}>
+                                        <button className="btn --primary" style={{float:'left', marginTop: 5, marginBottom: 5}} onClick={this.ping}>
                                         PING
                                     </button>
                                 </div>       
