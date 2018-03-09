@@ -10,7 +10,7 @@ class DangerZone extends Component {
             try {
                 const response = await this.props.glpi.updateItem({
                     itemtype: 'PluginFlyvemdmAgent',
-                    id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'],
+                    id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
                     input: {"wipe": "1"}
                 })
                 this.props.showNotification('Success', response[0].message ? response[0].message : "Data deleted successfully")
@@ -28,7 +28,7 @@ class DangerZone extends Component {
             try {
                 const response = await this.props.glpi.updateItem({
                     itemtype: 'PluginFlyvemdmAgent',
-                    id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'],
+                    id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
                     input: {"_unenroll": "1"}
                 })
                 this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
@@ -47,7 +47,7 @@ class DangerZone extends Component {
             try {
                 const response = await this.props.glpi.deleteItem({
                     itemtype: 'PluginFlyvemdmAgent',
-                    id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'],
+                    id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
                 })
                 this.props.showNotification('Success', response[0].message ? response[0].message : "Unenrollment device")
                 this.props.showNotification('Success', 'Devices successfully deleted')                        
@@ -90,8 +90,8 @@ class DangerZone extends Component {
                         <button className="win-button" onClick={this.unenroll}>Unenroll</button>
                     </div>
                     <Confirmation 
-                        title={'Unenroll device #' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"] } 
-                        message={'You are going to unenroll device ' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"]} 
+                        title={'Unenroll device #' + this.props.selectedItems[0]["PluginFlyvemdmAgent.id"] } 
+                        message={'You are going to unenroll device ' + this.props.selectedItems[0]["PluginFlyvemdmAgent.id"]} 
                         reference={el => this.unenrollmentDevice = el} 
                     /> 
                 </div>
@@ -105,8 +105,8 @@ class DangerZone extends Component {
                         <button className="win-button" onClick={this.delete}>Delete</button>
                     </div>
                     <Confirmation 
-                        title={'Delete device #' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"] } 
-                        message={'You are going to delete device ' + this.props.selectedItemList[0]["PluginFlyvemdmAgent.id"]} 
+                        title={'Delete device #' + this.props.selectedItems[0]["PluginFlyvemdmAgent.id"] } 
+                        message={'You are going to delete device ' + this.props.selectedItems[0]["PluginFlyvemdmAgent.id"]} 
                         reference={el => this.deleteDevice = el} 
                     /> 
                 </div>
@@ -116,7 +116,7 @@ class DangerZone extends Component {
 }
 
 DangerZone.propTypes = {
-    selectedItemList: PropTypes.array.isRequired,
+    selectedItems: PropTypes.array.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }

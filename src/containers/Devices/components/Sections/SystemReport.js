@@ -14,7 +14,7 @@ class SystemReport extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItemList !== prevProps.selectedItemList) {
+        if (this.props.selectedItems !== prevProps.selectedItems) {
             this.setState({
                 agent: undefined,
                 isLoading: false
@@ -33,7 +33,7 @@ class SystemReport extends Component {
             this.setState({
                 isLoading: true
             })
-            const agent = await this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItemList[0]['PluginFlyvemdmAgent.id'] })
+            const agent = await this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'] })
             this.setState({
                 isLoading: false,
                 agent
@@ -72,7 +72,7 @@ class SystemReport extends Component {
                     </div>
 
                     <Inventory 
-                        selectedItemList={this.props.selectedItemList}
+                        selectedItems={this.props.selectedItems}
                         title='Fleet'
                         itemType='PluginFlyvemdmFleet'
                         itemID={this.state.agent['plugin_flyvemdm_fleets_id']}
@@ -81,7 +81,7 @@ class SystemReport extends Component {
                     />
 
                     <Inventory
-                        selectedItemList={this.props.selectedItemList}
+                        selectedItems={this.props.selectedItems}
                         title='Device'
                         itemType='Computer'
                         itemID={this.state.agent['computers_id']}
@@ -113,7 +113,8 @@ class SystemReport extends Component {
 }
 
 SystemReport.propTypes = {
-    selectedItemList: PropTypes.array.isRequired
+    selectedItems: PropTypes.array.isRequired,
+    glpi: PropTypes.object.isRequired
 }
 
 export default SystemReport

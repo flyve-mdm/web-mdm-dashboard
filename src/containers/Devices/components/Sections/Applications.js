@@ -18,7 +18,7 @@ class Applications extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItemList !== prevProps.selectedItemList) {
+        if (this.props.selectedItems !== prevProps.selectedItems) {
             this.setState({
                 itemList: new WinJS.Binding.List([])
             })
@@ -36,7 +36,7 @@ class Applications extends Component {
                 isLoading: true
             })
 
-            const idComputer = this.props.selectedItemList[0]["PluginFlyvemdmAgent.Computer.id"] !== null ? this.props.selectedItemList[0]["PluginFlyvemdmAgent.Computer.id"] : ""
+            const idComputer = this.props.selectedItems[0]["PluginFlyvemdmAgent.Computer.id"] !== null ? this.props.selectedItems[0]["PluginFlyvemdmAgent.Computer.id"] : ""
             const computer = await this.props.glpi.getAnItem({ itemtype: 'Computer', id: idComputer, queryString: { with_softwares: true } })
             let softwareList = []
             for (const item of computer['_softwares']) {
@@ -140,7 +140,7 @@ class Applications extends Component {
 }
 
 Applications.propTypes = {
-    selectedItemList: PropTypes.array.isRequired,
+    selectedItems: PropTypes.array.isRequired,
     glpi: PropTypes.object.isRequired
 }
 
