@@ -110,8 +110,7 @@ export default class DevicesEditOne extends Component {
                 return (
                     <ContentPane itemListPaneWidth={this.props.data.itemListPaneWidth}>
                         <div className="contentHeader">
-                            <h2 className="win-h2 titleContentPane" > Edit Device</h2>
-                            <button className="win-button win-button-primary" onClick={this.handleSaveOneDevices}>
+                            <button className="btn --primary" onClick={this.handleSaveOneDevices}>
                                 Save
                             </button>
                         </div>
