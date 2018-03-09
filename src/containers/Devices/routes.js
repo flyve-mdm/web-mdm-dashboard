@@ -2,6 +2,7 @@ import EmptyMessage from '../../components/EmptyMessage'
 import DevicesContent from './components/DevicesContent'
 import Enroll from './components/Enroll'
 import DevicesEditOne from './components/DevicesEditOne'
+import DevicesEdit from './components/DevicesEdit'
 
 const routes = [
   {
@@ -17,8 +18,14 @@ const routes = [
     exact: true
   },
   {
+    path: '/edit',
+    name: 'Edit',
+    component: DevicesEdit,
+    exact: true
+  },
+  {
     path: '/:id/edit',
-    name: 'EditOne',
+    name: 'Edit one',
     component: DevicesEditOne,
     exact: true
   },

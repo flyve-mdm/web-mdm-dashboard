@@ -13,7 +13,6 @@ export default class DevicesList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectionMode: false,
             selectedItems: [],
             scrolling: false,
             isLoading: false,
@@ -36,10 +35,6 @@ export default class DevicesList extends Component {
             this.listView.winControl.footer.style.height = '1px'
         }
 
-        if (!this.props.action && (prevProps.action === 'Edit' || prevProps.action === 'EditOne' || prevProps.action === 'Delete')) {
-            this.handleRefresh()
-        }
-
         if (this.props.action === "reload") {
             this.handleRefresh()
             this.props.changeAction(null)
@@ -48,9 +43,9 @@ export default class DevicesList extends Component {
 
     componentWillUnmount() {
         this.setState({ 
-            selectionMode: false,
             selectedItem: [] 
         })
+        this.props.changeSelectionMode(false)
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
@@ -92,29 +87,25 @@ export default class DevicesList extends Component {
         }
     }
 
-    handleEdit = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        setTimeout(() => {
-            this.props.onNavigate(this.state.selectedItems.length > 0 && this.state.selectionMode ? [this.props.location[0], this.state.selectedItems] : this.props.location)
-            this.props.changeAction(button.label)
-        }, 0)
+    handleEdit(eventObject, path) {
+        this.props.history.push(path)
     }
 
     handleAdd(eventObject, path) {
         this.props.history.push(path)
+        this.props.changeSelectionMode(false)
         this.listView.winControl.selection.clear()
         this.setState({
-            selectedItems: [],
-            selectionMode: false
-        }) 
+            selectedItems: []
+        })
     }
 
     handleToggleSelectionMode = () => {
-        this.props.history.push('/app/devices')        
+        this.props.history.push('/app/devices')
+        this.props.changeSelectionMode(!this.props.selectionMode)     
         this.listView.winControl.selection.clear()
         this.setState((prevState, props) => ({
-            selectedItems: [],
-            selectionMode: !prevState.selectionMode
+            selectedItems: []
         }))
     }
 
@@ -130,17 +121,16 @@ export default class DevicesList extends Component {
             selectedItems: itemSelected
         })
         this.props.changeSelectedItems(itemSelected)
-        if (index.length === 1 && !this.state.selectionMode) {
+        if (index.length === 1 && !this.props.selectionMode) {
             this.props.history.push(`/app/devices/${itemSelected[0]["PluginFlyvemdmAgent.id"]}`)
         }
-        if (index.length > 1 && !this.state.selectionMode) {
+        if (index.length > 1 && !this.props.selectionMode) {
             this.props.history.push('/app/devices/edit/')
         }
     }
 
     handleDelete = async (eventObject) => {
         try {
-            let button = eventObject.currentTarget.winControl
             const isOK = await Confirmation.isOK(this.contentDialog)
             if (isOK) {
 
@@ -153,7 +143,6 @@ export default class DevicesList extends Component {
                 this.setState({
                     isLoading: true
                 })
-                this.props.changeAction(button.label)
 
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })
 
@@ -162,17 +151,18 @@ export default class DevicesList extends Component {
                     body: 'Device successfully removed!',
                     type: 'success'
                 })
+                this.props.changeSelectionMode(false)
+                this.props.changeAction('reload')
 
                 this.setState((prevState, props) => ({
                     selectedItems: [],
-                    selectionMode: !prevState.selectionMode,
                     isLoading: false
                 }))
             } else {
                 // Exit selection mode
+                this.props.changeSelectionMode(false)
                 this.setState((prevState, props) => ({
-                    selectedItems: [],
-                    selectionMode: !prevState.selectionMode
+                    selectedItems: []
                 }))
 
                 this.listView.winControl.selection.clear()
@@ -188,9 +178,10 @@ export default class DevicesList extends Component {
                 })
             }
 
+            this.props.changeSelectionMode(false)
+
             this.setState((prevState, props) => ({
                 selectedItems: [],
-                selectionMode: !prevState.selectionMode,
                 isLoading: false
             }))
         }
@@ -284,7 +275,7 @@ export default class DevicesList extends Component {
                 label="Edit"
                 priority={0}
                 disabled={this.state.selectedItems.length === 0}
-                onClick={this.handleEdit}
+                onClick={(e) => this.handleEdit(e, "/app/devices/edit")}
             />
         )
 
@@ -304,8 +295,8 @@ export default class DevicesList extends Component {
                     groupHeaderTemplate={this.groupHeaderRenderer}
                     footerComponent={<Loader />}
                     onFooterVisibilityChanged={this.showFooterList}
-                    selectionMode={this.state.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.state.selectionMode ? 'toggleSelect' : 'directSelect'}
+                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
                 />
             )
@@ -338,15 +329,15 @@ export default class DevicesList extends Component {
                         onClick={(e) => this.handleAdd(e, "/app/devices/add")}
                     />
 
-                    {this.state.selectionMode ? editCommand : null}
-                    {this.state.selectionMode ? deleteCommand : null}
+                    {this.props.selectionMode ? editCommand : null}
+                    {this.props.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
                         icon="bullets"
                         label="Select"
                         priority={0}
-                        selected={this.state.selectionMode}
+                        selected={this.props.selectionMode}
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
@@ -361,9 +352,6 @@ DevicesList.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    animation: PropTypes.bool.isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
