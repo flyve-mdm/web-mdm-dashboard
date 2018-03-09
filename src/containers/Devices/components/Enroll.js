@@ -75,9 +75,9 @@ export default class Enroll extends Component {
                         required
                     />
                     <br />
-                    <button className="win-button" onClick={() => this.props.data.history.goBack()}>Cancel</button>
+                    <button className="btn --secondary" onClick={() => this.props.data.history.goBack()}>Cancel</button>
                     <button
-                        className="win-button win-button-primary"
+                        className="btn --primary"
                         style={{ marginLeft: 10 }}
                         onClick={this.inviteDevice}>
                         Save
