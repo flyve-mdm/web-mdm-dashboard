@@ -21,22 +21,22 @@ export default class Enroll extends Component {
                     isLoading: true
                 })
                 
-                await this.props.data.glpi.addItem({ itemtype: 'PluginFlyvemdmInvitation', input: { _useremails: this.state.email.trim() } })
+                await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmInvitation', input: { _useremails: this.state.email.trim() } })
                 
                 this.setState({
                     isLoading: false
                 })
 
-                this.props.data.setNotification({
+                this.props.setNotification({
                     title: 'Successfully',
                     body: 'Invitation successfully sent!',
                     type: 'success'
                 })
-                this.props.data.history.goBack()
+                this.props.history.goBack()
             }
         } catch (error) {
             if (error.length > 1) {
-                this.props.data.setNotification({
+                this.props.setNotification({
                     title: error[0],
                     body: error[1],
                     type: 'alert'
@@ -53,13 +53,13 @@ export default class Enroll extends Component {
         let renderComponent
         if (this.state.isLoading) {
             renderComponent = (
-                <ContentPane itemListPaneWidth={this.props.data.itemListPaneWidth}>
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <Loading message="Loading..." />
                 </ContentPane >
             )
         } else {
             renderComponent = (
-                <ContentPane itemListPaneWidth={this.props.data.itemListPaneWidth}>
+                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <h2 className="win-h2 titleContentPane">
                         Enroll new device
                     </h2>
@@ -75,7 +75,7 @@ export default class Enroll extends Component {
                         required
                     />
                     <br />
-                    <button className="btn --secondary" onClick={() => this.props.data.history.goBack()}>Cancel</button>
+                    <button className="btn --secondary" onClick={() => this.props.history.goBack()}>Cancel</button>
                     <button
                         className="btn --primary"
                         style={{ marginLeft: 10 }}
@@ -90,12 +90,10 @@ export default class Enroll extends Component {
     }
 }
 Enroll.propTypes = {
-    data: PropTypes.shape({
-        itemListPaneWidth: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.number
-        ]).isRequired,
-        setNotification: PropTypes.func.isRequired,
-        glpi: PropTypes.object.isRequired
-    })
+    itemListPaneWidth: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    setNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
