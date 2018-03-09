@@ -55,14 +55,22 @@ export default class Main extends Component {
             
             this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete })
             .then((response) => {
-                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: 'Device successfully removed',
+                    type: 'success'
+                })
                 this.props.changeSelectionMode(false)
                 this.props.history.goBack()
                 this.props.changeAction('reload')
             })
             .catch((error) => {
                 if (error.length > 1) {
-                    this.props.showNotification(error[0], error[1])
+                    this.props.setNotification({
+                        title: error[0],
+                        body: error[1],
+                        type: 'alert'
+                    })
                 }
             })
         }
@@ -85,12 +93,20 @@ export default class Main extends Component {
                         body: JSON.stringify({"input":{"_ping": ""}})
                     }
                 })
-                this.props.showNotification('Success', response[0].message ? response[0].message : "Ping sent")
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: response[0].message ? response[0].message : "Ping sent",
+                    type: 'success'
+                })
                 this.setState({ sendingPing: false }, () => {
                     this.handleRefresh()
                 })
             } catch (error) {
-                this.props.showNotification(error[0], error[1])
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alet'
+                })
                 this.setState({ sendingPing: false })
             }
         })
