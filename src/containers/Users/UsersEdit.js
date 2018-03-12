@@ -100,6 +100,7 @@ class DevicesEdit extends Component {
                     this.setState ({isLoading: false})            
                     this.props.showNotification('Success', 'saved profile')
                     this.props.history.push('/app/users')
+                    this.props.changeAction(null)
                 } catch (e) {
                     this.setState ({isLoading: false})            
                     this.props.showNotification('Error', e)
@@ -388,7 +389,8 @@ DevicesEdit.propTypes = {
     actionList: PropTypes.string,
     history: PropTypes.object.isRequired,
     showNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
+    glpi: PropTypes.object.isRequired,
+    changeAction: PropTypes.func.isRequired
 }
 
 export default DevicesEdit
