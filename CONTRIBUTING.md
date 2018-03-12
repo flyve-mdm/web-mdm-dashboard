@@ -393,7 +393,8 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 * All classes must follow the [BEM](http://getbem.com/naming/) approach.
 * The contribution must follow the [Airbnb Style Guide for Javascript and React](https://github.com/airbnb/javascript/tree/master/react).
 * Every JSON file must follow the [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml).
-* Use the Inverted Triangle CSS approach.
+* Use the [ITCSS Architecture](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+).
 
 # Good luck! :tada:
 
