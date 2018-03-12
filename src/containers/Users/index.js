@@ -4,6 +4,16 @@ import UsersList from './UsersList'
 import UsersPage from './UsersPage'
 import getMode from '../../shared/getMode'
 import glpi from '../../shared/glpiApi'
+import { uiSetNotification } from '../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
 
 class Users extends Component {
 
@@ -79,6 +89,7 @@ class Users extends Component {
                         changeAction={this.changeAction} 
                         showNotification={this.showNotification} 
                         history={this.props.history}
+                        setNotification={this.props.actions.setNotification}
                         glpi={glpi}
                     />
                 </div>
@@ -91,4 +102,7 @@ Users.propTypes = {
     history: PropTypes.object.isRequired
 }
 
-export default Users
+export default connect(
+    null,
+    mapDispatchToProps
+)(Users)

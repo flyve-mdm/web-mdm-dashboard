@@ -98,14 +98,21 @@ class DevicesEdit extends Component {
                 try {
                     await this.props.glpi.updateItem({itemtype: 'User', input})
                     this.setState ({isLoading: false})            
-                    this.props.showNotification('Success', 'saved profile')
+                    this.props.setNotification({
+                        title: 'Success',
+                        body: 'Users successfully edited',
+                        type: 'success'
+                    })
                     this.props.history.push('/app/users')
                     this.props.changeAction(null)
-                } catch (e) {
+                } catch (error) {
                     this.setState ({isLoading: false})            
-                    this.props.showNotification('Error', e)
+                    this.props.setNotification({
+                        title: error[0],
+                        body: error[1],
+                        type: 'alert'
+                    })
                 }
-                
             })
         } else {
             this.setState({
