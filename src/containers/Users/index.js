@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import UsersList from './UsersList'
 import UsersPage from './UsersPage'
 import getMode from '../../shared/getMode'
 import glpi from '../../shared/glpiApi'
 
-export default class Users extends Component {
+class Users extends Component {
 
     constructor(props) {
         super(props)
@@ -77,6 +78,7 @@ export default class Users extends Component {
                         action={this.state.action}
                         changeAction={this.changeAction} 
                         showNotification={this.showNotification} 
+                        history={this.props.history}
                         glpi={glpi}
                     />
                 </div>
@@ -84,3 +86,9 @@ export default class Users extends Component {
         }
     }
 }
+
+Users.propTypes = {
+    history: PropTypes.object.isRequired
+}
+
+export default Users
