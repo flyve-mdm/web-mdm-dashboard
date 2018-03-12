@@ -13,7 +13,6 @@ export default class DevicesList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItems: [],
             scrolling: false,
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
@@ -42,9 +41,6 @@ export default class DevicesList extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({ 
-            selectedItem: [] 
-        })
         this.props.changeSelectionMode(false)
     }
 
@@ -62,7 +58,6 @@ export default class DevicesList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push('/app/devices')
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -94,19 +89,15 @@ export default class DevicesList extends Component {
     handleAdd(eventObject, path) {
         this.props.history.push(path)
         this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
         this.listView.winControl.selection.clear()
-        this.setState({
-            selectedItems: []
-        })
     }
 
     handleToggleSelectionMode = () => {
         this.props.history.push('/app/devices')
-        this.props.changeSelectionMode(!this.props.selectionMode)     
+        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.props.changeSelectedItems([])
         this.listView.winControl.selection.clear()
-        this.setState((prevState, props) => ({
-            selectedItems: []
-        }))
     }
 
     handleSelectionChanged = (eventObject) => {
@@ -117,9 +108,6 @@ export default class DevicesList extends Component {
         for (const item of index) {
             itemSelected.push(this.state.itemList.getItem(item).data)
         }
-        this.setState({
-            selectedItems: itemSelected
-        })
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
             this.props.history.push(`/app/devices/${itemSelected[0]["PluginFlyvemdmAgent.id"]}`)
@@ -134,7 +122,7 @@ export default class DevicesList extends Component {
             const isOK = await Confirmation.isOK(this.contentDialog)
             if (isOK) {
 
-                let itemListToDelete = this.state.selectedItems.map((item) => {
+                let itemListToDelete = this.props.selectedItems.map((item) => {
                     return {
                         id: item["PluginFlyvemdmAgent.id"]
                     }
@@ -152,18 +140,16 @@ export default class DevicesList extends Component {
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)
+                this.props.changeSelectedItems([])
                 this.props.changeAction('reload')
 
                 this.setState((prevState, props) => ({
-                    selectedItems: [],
                     isLoading: false
                 }))
             } else {
                 // Exit selection mode
                 this.props.changeSelectionMode(false)
-                this.setState((prevState, props) => ({
-                    selectedItems: []
-                }))
+                this.props.changeSelectedItems([])
 
                 this.listView.winControl.selection.clear()
             }
@@ -179,9 +165,9 @@ export default class DevicesList extends Component {
             }
 
             this.props.changeSelectionMode(false)
+            this.props.changeSelectedItems([])
 
             this.setState((prevState, props) => ({
-                selectedItems: [],
                 isLoading: false
             }))
         }
@@ -263,7 +249,7 @@ export default class DevicesList extends Component {
                 icon="delete"
                 label="Delete"
                 priority={0}
-                disabled={this.state.selectedItems.length === 0}
+                disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleDelete}
             />
         )
@@ -274,7 +260,7 @@ export default class DevicesList extends Component {
                 icon="edit"
                 label="Edit"
                 priority={0}
-                disabled={this.state.selectedItems.length === 0}
+                disabled={this.props.selectedItems.length === 0}
                 onClick={(e) => this.handleEdit(e, "/app/devices/edit")}
             />
         )
@@ -342,7 +328,7 @@ export default class DevicesList extends Component {
                     />
                 </ReactWinJS.ToolBar>
                 { listComponent }
-                <Confirmation title={`Delete Devices`} message={this.state.selectedItems.length +` Devices`} reference={el => this.contentDialog = el} /> 
+                <Confirmation title={`Delete Devices`} message={this.props.selectedItems.length +` Devices`} reference={el => this.contentDialog = el} /> 
             </div>
         )
     }
