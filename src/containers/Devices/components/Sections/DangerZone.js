@@ -95,7 +95,7 @@ class DangerZone extends Component {
                         <div className="detail">Wipe will delete all data on the device</div>
                     </div>
                     <div className="controller">
-                        <button className="win-button" onClick={this.wipe}>Wipe</button>
+                        <button className="btn --primary" onClick={this.wipe}>Wipe</button>
                     </div>
                     <Confirmation 
                         title="This is the last warning"
@@ -110,7 +110,7 @@ class DangerZone extends Component {
                         <div className="detail">Unenrollment will change the state of the device (policies are unapplied, deployed files and app will be removed)</div>
                     </div>
                     <div className="controller">
-                        <button className="win-button" onClick={this.unenroll}>Unenroll</button>
+                        <button className="btn --primary" onClick={this.unenroll}>Unenroll</button>
                     </div>
                     <Confirmation 
                         title={'Unenroll device #' + this.props.selectedItems[0]["PluginFlyvemdmAgent.id"] } 
@@ -125,7 +125,7 @@ class DangerZone extends Component {
                         <div className="detail">Once you delete a device, there is no going back. Please be certain</div>
                     </div>
                     <div className="controller">
-                        <button className="win-button" onClick={this.delete}>Delete</button>
+                        <button className="btn --primary" onClick={this.delete}>Delete</button>
                     </div>
                     <Confirmation 
                         title={'Delete device #' + this.props.selectedItems[0]["PluginFlyvemdmAgent.id"] } 
