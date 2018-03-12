@@ -11,7 +11,7 @@ class DevicesEdit extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            itemListEdit: [...this.props.selectedItemList],
+            itemListEdit: [...this.props.selectedItems],
             isLoading: false,
             field: undefined,
             newValue: '',
@@ -88,7 +88,7 @@ class DevicesEdit extends Component {
                         break
                 }
 
-                input = this.props.selectedItemList.map(element => {
+                input = this.props.selectedItems.map(element => {
                     return ({
                         id: element['User.id'],
                         ...input
@@ -104,7 +104,8 @@ class DevicesEdit extends Component {
                         type: 'success'
                     })
                     this.props.history.push('/app/users')
-                    this.props.changeAction(null)
+                    this.props.changeAction('reload')
+                    this.props.changeSelectionMode(false)
                 } catch (error) {
                     this.setState ({isLoading: false})            
                     this.props.setNotification({
@@ -150,8 +151,14 @@ class DevicesEdit extends Component {
         })
     }
 
+    cancel = () => {
+        this.props.history.push('/app/users')
+        this.props.changeAction('reload')
+        this.props.changeSelectionMode(false)
+    }
+
     render() {
-        if (this.props.selectedItemList) {
+        if (this.props.selectedItems) {
             let renderComponent
             if (this.state.isLoading) {
                 renderComponent = <div style={{marginTop: 40}}><Loading message="Loading..." /></div>
@@ -333,12 +340,12 @@ class DevicesEdit extends Component {
                         {input}
                     </div>
                 )
-            }              
-
+            }      
+            
             return (
                 <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
                     <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
+                        <h2 className="win-h2 titleContentPane" > Edit Users </h2>
                         <h4  className="win-h4">
                             Select the field that you want to update
                         </h4>
@@ -372,7 +379,7 @@ class DevicesEdit extends Component {
                             <React.Fragment>
                                 <br/>
 
-                                <button className="btn --secondary" onClick={() => this.props.changeAction(null)}>
+                                <button className="btn --secondary" onClick={this.cancel}>
                                     Cancel
                                 </button>
                                 
@@ -398,15 +405,14 @@ DevicesEdit.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedItemList: PropTypes.array,
-    location: PropTypes.array.isRequired,
-    selectedIndex: PropTypes.array,
+    selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
     history: PropTypes.object.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired,
-    changeAction: PropTypes.func.isRequired
+    changeAction: PropTypes.func.isRequired,
+    changeSelectedItems: PropTypes.func.isRequired,
 }
 
 export default DevicesEdit
