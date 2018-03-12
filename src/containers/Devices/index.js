@@ -10,6 +10,7 @@ import {
 } from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import getMode from '../../shared/getMode'
 
 function mapStateToProps(state, props) {
     return {
@@ -33,6 +34,8 @@ class Devices extends Component {
         super(props)
         this.state = {
             location: ['Files'],
+            mode: getMode(),
+            itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
             selectionMode: false,
             action: null,
             animation: false,
@@ -40,9 +43,37 @@ class Devices extends Component {
         }
     }
 
+    handleResize = () => {
+        let nextMode = getMode()
+
+        if (nextMode === 'small') {
+            this.setState({
+                itemListPaneWidth: '100%'
+            })
+        } else {
+            this.setState({
+                itemListPaneWidth: 320
+            })
+        }
+
+        if (this.state.mode !== nextMode) {
+            this.setState({
+                mode: nextMode 
+            })
+        }
+    }
+
+    componentWillMount () {
+        window.addEventListener('resize', this.handleResize)
+    }
+
+    componentWillUnmount () {
+        window.removeEventListener('resize', this.handleResize)
+    }
+    
     propsData = () => {
         return {
-            itemListPaneWidth: 320,
+            itemListPaneWidth: this.state.itemListPaneWidth,
             changeSelectionMode: this.changeSelectionMode,
             selectionMode: this.state.selectionMode,
             selectedItems: this.state.selectedItems,
@@ -60,12 +91,33 @@ class Devices extends Component {
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
 
     render() {
+        let renderComponents
+        const renderList = (
+            <DevicesList
+                key="list"
+                {...this.propsData()}
+            />
+        )
+
+        const renderContent = (
+            <GenerateRoutes key="content" routes={routes} rootPath={this.props.match.url} data={{...this.propsData(), itemListPaneWidth: this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth}} />
+        )
+
+        if (this.state.mode === 'small') {
+
+            if (this.state.selectedItems.length === 0  || this.props.history.location.pathname === '/app/devices') {
+                renderComponents = [renderList]
+            } else {
+                renderComponents = [renderContent]
+            }
+            
+        } else {
+            renderComponents = [renderList, renderContent]
+        }
+
         return (
             <div className="flex-block --with-scroll --with-content-pane">
-                <DevicesList 
-                    {...this.propsData()}
-                />
-                <GenerateRoutes routes={routes} rootPath={this.props.match.url} data={{...this.propsData()}} />
+                {renderComponents}
             </div>
         )
     }
