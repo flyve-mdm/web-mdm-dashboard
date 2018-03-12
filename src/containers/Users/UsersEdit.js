@@ -6,7 +6,7 @@ import Loading from '../../components/Loading'
 import { Select, Input, DatePicker, TextArea } from '../../components/Forms'
 import ErrorValidation from '../../components/ErrorValidation'
 
-export default class DevicesEdit extends Component {
+class DevicesEdit extends Component {
 
     constructor(props) {
         super(props)
@@ -97,8 +97,9 @@ export default class DevicesEdit extends Component {
 
                 try {
                     await this.props.glpi.updateItem({itemtype: 'User', input})
+                    this.setState ({isLoading: false})            
                     this.props.showNotification('Success', 'saved profile')
-                    this.props.changeActionList(null)
+                    this.props.history.push('/app/users')
                 } catch (e) {
                     this.setState ({isLoading: false})            
                     this.props.showNotification('Error', e)
@@ -374,6 +375,7 @@ export default class DevicesEdit extends Component {
         }
     }
 }
+
 DevicesEdit.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
@@ -381,11 +383,12 @@ DevicesEdit.propTypes = {
     ]).isRequired,
     selectedItemList: PropTypes.array,
     location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
     selectedIndex: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
-    changeActionList: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
     showNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
+
+export default DevicesEdit

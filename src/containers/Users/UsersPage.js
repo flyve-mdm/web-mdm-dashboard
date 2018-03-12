@@ -20,6 +20,7 @@ export default class UsersPage extends Component {
                             changeSelectionMode={this.props.changeSelectionMode}
                             changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
+                            history={this.props.history}
                             glpi={this.props.glpi}                             
                         />
                     )
@@ -77,6 +78,7 @@ export default class UsersPage extends Component {
         }
     }
 }
+
 UsersPage.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
@@ -88,5 +90,6 @@ UsersPage.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    showNotification: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
 }
