@@ -1,15 +1,26 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import UsersList from './UsersList'
-import UsersPage from './UsersPage'
-import getMode from '../../shared/getMode'
-import glpi from '../../shared/glpiApi'
-import { uiSetNotification } from '../../store/ui/actions'
+import UsersList from './components/UsersList'
+import {
+    uiTransactionStart,
+    uiTransactionFinish,
+    uiSetNotification
+} from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import GenerateRoutes from '../../components/GenerateRoutes'
+import withGLPI from '../../hoc/withGLPI'
+import routes from './routes'
+
+function mapStateToProps(state, props) {
+    return {
+        isLoading: state.ui.loading
+    }
+}
 
 function mapDispatchToProps(dispatch) {
     const actions = {
+        uiTransactionStart: bindActionCreators(uiTransactionStart, dispatch),
+        uiTransactionFinish: bindActionCreators(uiTransactionFinish, dispatch),
         setNotification: bindActionCreators(uiSetNotification, dispatch)
     }
     return { actions }
@@ -20,89 +31,44 @@ class Users extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            location: ['Users'],
             selectionMode: false,
             action: null,
-            animation: false,
+            selectedItems: []            
         }
     }
 
-    onNavigate = location => this.setState({location})
     changeAction = action => this.setState({action})
     changeSelectionMode = selectionMode => this.setState({selectionMode})
-    showNotification = (title, body) => {
+    changeSelectedItems = selectedItems => this.setState({ selectedItems })
+
+    propsData = () => {
+        return {
+            itemListPaneWidth: 320,
+            changeSelectionMode: this.changeSelectionMode,
+            selectionMode: this.state.selectionMode,
+            selectedItems: this.state.selectedItems,
+            changeSelectedItems: this.changeSelectedItems,
+            action: this.state.action,
+            changeAction: this.changeAction,
+            setNotification: this.props.actions.setNotification,
+            history: this.props.history,
+            glpi: this.props.glpi
+        }
     }
 
     render() {
-
-        let selectedItemList = this.state.location.length === 2 ? this.state.location[1] : null
-        if (getMode() === 'small') {
-            if (!selectedItemList && !this.state.action) {
-                return <UsersList
-                    itemListPaneWidth={'100%'}
-                    animation={this.state.animation}
-                    location={this.state.location}
-                    onNavigate={this.onNavigate}
-                    changeSelectionMode={this.changeSelectionMode}
-                    selectionMode={this.state.selectionMode}
-                    action={this.state.action}
-                    changeAction={this.changeAction}
-                    showNotification={this.showNotification} 
-                    glpi={glpi} />
-            } else {
-                return <UsersPage 
-                    itemListPaneWidth={0}
-                    animation={this.state.animation}
-                    location={this.state.location}
-                    onNavigate={this.onNavigate}
-                    selectedItemList={selectedItemList}
-                    changeSelectionMode={this.changeSelectionMode}
-                    action={this.state.action}
-                    changeAction={this.changeAction}
-                    showNotification={this.showNotification} 
-                    glpi={glpi} />
-            }
-        } else {
-            let itemListPaneWidth = 320
-            return (
-                <div className="flex-block --with-scroll --with-content-pane">
-                    <UsersList
-                        itemListPaneWidth={itemListPaneWidth}
-                        animation={this.state.animation}
-                        location={this.state.location}
-                        onNavigate={this.onNavigate}
-                        changeSelectionMode={this.changeSelectionMode}
-                        selectionMode={this.state.selectionMode}
-                        action={this.state.action}
-                        changeAction={this.changeAction} 
-                        showNotification={this.showNotification} 
-                        glpi={glpi}
-                    />
-                    <UsersPage 
-                        itemListPaneWidth={itemListPaneWidth}
-                        animation={this.state.animation}
-                        location={this.state.location}
-                        onNavigate={this.onNavigate}
-                        selectedItemList={selectedItemList}
-                        changeSelectionMode={this.changeSelectionMode}
-                        action={this.state.action}
-                        changeAction={this.changeAction} 
-                        showNotification={this.showNotification} 
-                        history={this.props.history}
-                        setNotification={this.props.actions.setNotification}
-                        glpi={glpi}
-                    />
-                </div>
-            )
-        }
+        return (
+            <div className="flex-block --with-scroll --with-content-pane">
+                <UsersList 
+                    {...this.propsData()}
+                />
+                <GenerateRoutes routes={routes} rootPath={this.props.match.url} data={{...this.propsData()}} />
+            </div>
+        )
     }
 }
 
-Users.propTypes = {
-    history: PropTypes.object.isRequired
-}
-
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
-)(Users)
+)(withGLPI(Users))
