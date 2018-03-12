@@ -74,8 +74,12 @@ export default class DevicesEditOne extends Component {
         }
         this.props.glpi.updateItem({itemtype: 'PluginFlyvemdmAgent', id: this.state.id, input})
         .then(() => {
-            this.props.setNotification('Success', 'changes saved successfully')
-            this.props.changeAction(null)
+            this.props.setNotification({
+                title: 'Successfully',
+                body: 'changes saved successfully',
+                type: 'success'
+            })
+            this.props.changeAction('reload')
             this.props.changeSelectionMode(false)
         })
         .catch((error) => {
@@ -83,7 +87,11 @@ export default class DevicesEditOne extends Component {
                 isLoading: false
             })
             if(error.length > 1) {
-                this.props.setNotification(error[0], error[1])
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             }
         })
     }
