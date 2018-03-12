@@ -48,6 +48,7 @@ class SystemReport extends Component {
             return (<Loader type="content"/>)
         } else if (!this.state.isLoading && this.state.agent){
             return (
+                <div className="devices">
                 <div className="system-report">
                     <div className="title">Agent</div>
                     <div className="list-content">
@@ -104,6 +105,7 @@ class SystemReport extends Component {
                         glpi={this.props.glpi}
                     />
                     
+                </div>
                 </div>
             )
         } else {
