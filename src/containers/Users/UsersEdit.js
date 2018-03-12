@@ -361,7 +361,7 @@ class DevicesEdit extends Component {
 
                         <br/>
                         
-                        <button className="win-button win-button-primary" onClick={this.handleSave}>
+                        <button className="btn --primary" onClick={this.handleSave}>
                             Save
                         </button>
                     </div>
