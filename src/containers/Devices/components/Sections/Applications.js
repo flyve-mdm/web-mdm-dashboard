@@ -91,7 +91,7 @@ class Applications extends Component {
         let listComponent = (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
                 <div className="listPane" style={{ padding: 0 }}>
-                    <Loader count={1} />
+                    <Loader type="content"/>
                 </div>
             </ContentPane>
         )
