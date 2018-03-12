@@ -154,7 +154,7 @@ class DevicesEdit extends Component {
         if (this.props.selectedItemList) {
             let renderComponent
             if (this.state.isLoading) {
-                renderComponent = <Loading message="Loading..." />
+                renderComponent = <div style={{marginTop: 40}}><Loading message="Loading..." /></div>
             } else {
                 let input
                 switch (this.state.field) {
@@ -368,8 +368,12 @@ class DevicesEdit extends Component {
                         {renderComponent}
 
                         <br/>
+
+                        <button className="btn --secondary" onClick={() => this.props.changeAction(null)}>
+                            Cancel
+                        </button>
                         
-                        <button className="btn --primary" onClick={this.handleSave}>
+                        <button className="btn --primary" onClick={this.handleSave} style={{marginLeft: 10}}>
                             Save
                         </button>
                     </div>
