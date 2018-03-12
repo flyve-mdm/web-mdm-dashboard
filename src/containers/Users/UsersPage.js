@@ -21,6 +21,7 @@ export default class UsersPage extends Component {
                             changeAction={this.props.changeAction}
                             showNotification={this.props.showNotification}
                             history={this.props.history}
+                            setNotification={this.props.setNotification}
                             glpi={this.props.glpi}                             
                         />
                     )
