@@ -126,7 +126,7 @@ export default class Main extends Component {
                 iconComponent = <IconItemList size={72} />
             }
             renderComponent = (
-            <div>
+            <div className="devices">
                 <div className="contentHeader">
                     <div className="itemInfo">
                         {iconComponent}
@@ -162,13 +162,13 @@ export default class Main extends Component {
                 <div className="contentInfo">
                     <ul>
                         <li>
-                            <div className="callContent">
+                            <div className="detailContent">
                                 <div className="title">Version</div>
                                 <div>{this.state.data["version"]}</div>
                             </div>
                         </li>
                         <li>
-                            <div className="callContent">
+                            <div className="detailContent">
                                 <div className="title">Type</div>
                                 <div>{this.state.data["mdm_type"]}</div>
                             </div>
