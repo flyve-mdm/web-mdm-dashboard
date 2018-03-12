@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ContentPane from '../../components/ContentPane'
-import EmptyMessage from '../../components/EmptyMessage'
-import Loading from '../../components/Loading'
-import { Select, Input, DatePicker, TextArea } from '../../components/Forms'
-import ErrorValidation from '../../components/ErrorValidation'
+import ContentPane from '../../../components/ContentPane'
+import EmptyMessage from '../../../components/EmptyMessage'
+import Loading from '../../../components/Loading'
+import { Select, Input, DatePicker, TextArea } from '../../../components/Forms'
+import ErrorValidation from '../../../components/ErrorValidation'
 
 class DevicesEdit extends Component {
 

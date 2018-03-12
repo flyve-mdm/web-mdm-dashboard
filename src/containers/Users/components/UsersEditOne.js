@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ConstructInputs from '../../components/Forms'
-import ContentPane from '../../components/ContentPane'
-import validateData from '../../shared/validateData'
-import IconItemList from '../../components/IconItemList'
-import { usersScheme } from '../../components/Forms/Schemas'
-import Loading from '../../components/Loading'
-import ErrorValidation from '../../components/ErrorValidation'
+import ConstructInputs from '../../../components/Forms'
+import ContentPane from '../../../components/ContentPane'
+import validateData from '../../../shared/validateData'
+import IconItemList from '../../../components/IconItemList'
+import { usersScheme } from '../../../components/Forms/Schemas'
+import Loading from '../../../components/Loading'
+import ErrorValidation from '../../../components/ErrorValidation'
 
 class Profiles extends Component {
     

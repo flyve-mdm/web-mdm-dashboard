@@ -34,7 +34,7 @@ const uiTransactionFinish = (state, action) => {
     error: null,
     success: action.success || null,
     loading: false
-  });
+  })
 }
 
 // Reducer

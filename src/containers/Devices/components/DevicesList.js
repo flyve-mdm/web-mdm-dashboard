@@ -204,11 +204,9 @@ export default class DevicesList extends Component {
 
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {
-             setTimeout(() => {
-                 this.setState({
-                scrolling: true
-            })
-             }, 0)
+            setTimeout(() => {
+                this.setState({scrolling: true})
+            }, 0)
         }
     }
 

@@ -20,7 +20,7 @@ const authSuccess = (state, action) => {
       email: action.user.email,
       picture: action.user.picture
     }
-  });
+  })
 }
 
 const authFail = (state, action) => {
@@ -33,14 +33,14 @@ const authLogout = (state, action) => {
     username: null,
     email: null, 
     picture: null 
-  });
+  })
 }
 
 const authRefreshCaptcha = (state, action) => {
   return updateObject(state, {
     captcha: action.captcha,
     configurationPassword: action.configurationPassword
-  });
+  })
 }
 
 // Reducer

@@ -38,7 +38,6 @@ class Devices extends Component {
             itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
             selectionMode: false,
             action: null,
-            animation: false,
             selectedItems: []
         }
     }

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import UsersItemList from './UsersItemList'
-import Loader from '../../components/Loader'
-import Confirmation from '../../components/Confirmation'
-import BuildItemList from '../../components/BuildItemList'
+import Loader from '../../../components/Loader'
+import Confirmation from '../../../components/Confirmation'
+import BuildItemList from '../../../components/BuildItemList'
 
 export default class UsersList extends Component {
     
@@ -13,11 +13,16 @@ export default class UsersList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItemList: [],
+            selectedItems: [],
             scrolling: false,
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
-            order: undefined
+            order: "ASC",
+            pagination: {
+                start: 0,
+                page: 1,
+                count: 15
+            }
         }
     }
 
@@ -25,18 +30,19 @@ export default class UsersList extends Component {
         this.handleRefresh()
     }
     
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps) {    
         if(this.listView && !this.state.scrolling) {
             this.listView.winControl.footer.style.height = '1px'
         }
 
-        if (!this.props.action && (prevProps.action === 'Edit' || prevProps.action === 'EditOne' || prevProps.action === 'Delete')) {
+        if (this.props.action === "reload") {
             this.handleRefresh()
+            this.props.changeAction(null)
         }
     }
 
     componentWillUnmount() {
-        this.setState({ selectedItemList: [] })
+        this.setState({ selectedItems: [] })
         this.props.changeSelectionMode(false)
     }
 
@@ -52,55 +58,58 @@ export default class UsersList extends Component {
         )
     })
 
-    handlePanel = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        this.listView.winControl.selection.clear()
+    // handlePanel = (eventObject) => {
+    //     let button = eventObject.currentTarget.winControl
+    //     this.listView.winControl.selection.clear()
         
-        this.props.changeSelectionMode(false)
-        this.props.onNavigate([this.props.location[0]])
-        this.props.changeAction(button.label)
-    }
+    //     this.props.changeSelectionMode(false)
+    //     this.props.onNavigate([this.props.location[0]])
+    //     this.props.changeAction(button.label)
+    // }
 
     handleToggleSelectionMode = () => {
+        this.props.history.push('/app/users')
+        this.props.changeSelectionMode(!this.props.selectionMode)     
         this.listView.winControl.selection.clear()
-        this.props.changeAction(null)
-        this.props.changeSelectionMode(!this.props.selectionMode)
-        this.props.onNavigate([this.props.location[0]])  
-        this.setState({
-            selectedItemList: []
-        })
+        this.setState((prevState, props) => ({
+            selectedItems: []
+        }))
     }
 
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        let itemSelected = []
+        let selectedItems = []
 
         for (const item of index) {
-            itemSelected.push(this.state.itemList.getItem(item).data)
+            selectedItems.push(this.state.itemList.getItem(item).data)
         }
 
-        this.setState({
-            selectedItemList: itemSelected
-        })
+        this.setState({ selectedItems })
 
-        if (this.props.action !== 'Edit') {
-               
-            setTimeout(() => {
-                if(index.length !== 0) {
-                    this.props.changeAction(null)
-                }
-                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
-            }, 0)
+        this.props.changeSelectedItems(selectedItems)
+
+        if (index.length === 1 && !this.props.selectionMode) {
+            this.props.history.push(`/app/users/${selectedItems[0]["User.id"]}`)
+        }
+
+        if (index.length > 1 && !this.props.selectionMode) {
+            this.props.history.push('/app/users/edit/')
         }
     }
 
     handleRefresh = async () => {
-        this.props.onNavigate([this.props.location[0]])
-        this.setState({
-            isLoading: true
-        })
         try {
+            this.props.history.push('/app/users')
+            this.setState({
+                isLoading: true,
+                scrolling: false,
+                pagination: {
+                    start: 0,
+                    page: 1,
+                    count: 15
+                }
+            })
             const response = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true, forcedisplay: [1, 2, 5, 34] } })        
             this.setState({
                 isLoading: false,
@@ -110,81 +119,98 @@ export default class UsersList extends Component {
         } catch (e) {
             this.setState({
                 isLoading: false,
-                order: undefined
+                order: "ASC"
             })
         }
     }
 
-    handleEdit = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        setTimeout(() => {
-            this.props.onNavigate(this.state.selectedItemList.length > 0 && this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
-            this.props.changeAction(button.label)
-        }, 0)
+    handleEdit (path) { 
+        this.props.history.push(path) 
     }
 
     handleDelete = async (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        const isOK = await Confirmation.isOK(this.contentDialog)
-        if (isOK) {
+        try {
+            const isOK = await Confirmation.isOK(this.contentDialog)
+            if (isOK) {
 
-            let itemListToDelete = this.state.selectedItemList.map((item) => {
-                return {
-                    id: item["User.id"]
-                }
-            })
-
-            this.setState({isLoading: true})
-            this.props.changeAction(button.label)
-
-            try {
-                await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete, queryString: { force_purge: true } })
-                this.props.showNotification('Success', 'elements successfully removed')
-                this.props.changeAction(null)
-                this.props.changeSelectionMode(false)
-                this.setState({
-                    selectedItemList: []
+                let itemListToDelete = this.state.selectedItems.map((item) => {
+                    return {
+                        id: item["User.id"]
+                    }
                 })
-            } catch (error) {
-                if (error.length > 1) {
-                    this.props.showNotification(error[0], error[1])
-                }
-                this.props.changeAction(null)
-                this.props.changeSelectionMode(false)
+
                 this.setState({
-                    selectedItemList: []
+                    isLoading: true
+                })
+
+                await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete, queryString: { force_purge: true } })
+
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: 'User successfully removed!',
+                    type: 'success'
+                })
+                this.props.changeSelectionMode(false)
+                this.props.changeAction('reload')
+
+                this.setState((prevState, props) => ({
+                    selectedItems: [],
+                    isLoading: false
+                }))
+            } else {
+                // Exit selection mode
+                this.props.changeSelectionMode(false)
+                this.setState((prevState, props) => ({
+                    selectedItems: []
+                }))
+
+                this.listView.winControl.selection.clear()
+            }
+            
+        } catch (error) {
+            if (error.length > 1) {
+
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
                 })
             }
-        } else {
-            // Clean another actions selected
-            this.props.changeAction(null)
-            // Exit selection mode
+
             this.props.changeSelectionMode(false)
-            this.listView.winControl.selection.clear()
-            this.setState({
-                selectedItemList: []
-            })
+
+            this.setState((prevState, props) => ({
+                selectedItems: [],
+                isLoading: false
+            }))
         }
     }
 
     handleSort = async () => {
-        this.props.onNavigate([this.props.location[0]])
-        this.setState({
-            isLoading: true
-        })
-        let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
-        
         try {
+            this.setState({
+                isLoading: true,
+                pagination: {
+                    start: 0,
+                    page: 1,
+                    count: 15
+                }
+            })
+            let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
+
             const response = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 5, 34] } })
+
             this.setState({
                 isLoading: false,
                 order: response.order,
                 itemList: BuildItemList(response)
             })
-        } catch (e) {
+            this.props.history.push('/app/users')
+
+        } catch (error) {
             this.setState({
                 isLoading: false,
-                order: undefined
+                order: "ASC"
             })
         }
     }
@@ -197,20 +223,33 @@ export default class UsersList extends Component {
         }
     }
 
-    onFooterVisibilityChanged = (eventObject) => {
-
+    showFooterList = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
-        
         if (eventObject.detail.visible && this.state.scrolling) {
             listView.footer.style.height = '100px'
-            setTimeout(() => {
-                listView.footer.style.height = '1px'
-            }, 3000)
+            this.loadMoreData()
+        }
+    }
+
+    loadMoreData = async () => {
+        try {
+            const devices = await this.props.glpi.searchItems({ itemtype: 'User', options: { uid_cols: true, forcedisplay: [1, 2, 5, 34], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
             
-        } else {
-            setTimeout(() => {
-                listView.footer.style.height = '1px'
-            }, 3000)
+            for (const item in devices.data) {
+                this.state.itemList.push(devices.data[item])
+            }
+
+            this.setState({
+                pagination: {
+                    ...this.state.pagination,
+                    page: this.state.pagination.page + 1
+                }
+            })
+
+            this.listView.winControl.footer.style.height = '1px'
+
+        } catch (error) {
+            this.listView.winControl.footer.style.height = '1px'
         }
     }
 
@@ -222,7 +261,7 @@ export default class UsersList extends Component {
                 icon="delete"
                 label="Delete"
                 priority={0}
-                disabled={this.state.selectedItemList.length === 0}
+                disabled={this.state.selectedItems.length === 0}
                 onClick={this.handleDelete}
             />
         )
@@ -233,8 +272,8 @@ export default class UsersList extends Component {
                 icon="edit"
                 label="Edit"
                 priority={0}
-                disabled={this.state.selectedItemList.length === 0}
-                onClick={this.handleEdit}
+                disabled={this.state.selectedItems.length === 0}
+                onClick={() => this.handleEdit("/app/users/edit")}
             />
         )
 
@@ -253,7 +292,7 @@ export default class UsersList extends Component {
                     itemTemplate={this.ItemListRenderer}
                     groupHeaderTemplate={this.groupHeaderRenderer}
                     footerComponent={<Loader />}
-                    onFooterVisibilityChanged={this.onFooterVisibilityChanged}
+                    onFooterVisibilityChanged={this.showFooterList}
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
                     tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                     onSelectionChanged={this.handleSelectionChanged}
@@ -279,13 +318,13 @@ export default class UsersList extends Component {
                         onClick={this.handleRefresh}
                     />
 
-                    <ReactWinJS.ToolBar.Button
+                    {/* <ReactWinJS.ToolBar.Button
                         key="add"
                         icon="add"
                         label="Add"
                         priority={0}
-                        onClick={this.handlePanel}
-                    />
+                        onClick={(e) => this.handleAdd(e, "/app/users/add")}
+                    /> */}
 
                     {this.props.selectionMode ? editCommand : null}
                     {this.props.selectionMode ? deleteCommand : null}
@@ -299,9 +338,10 @@ export default class UsersList extends Component {
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
-                { listComponent }
-                <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.selectedItemList.length + ` ` + this.props.location[0]} reference={el => this.contentDialog = el} />
 
+                { listComponent }
+
+                <Confirmation title={`Delete Users`} message={this.state.selectedItems.length +` Users`} reference={el => this.contentDialog = el} /> 
             </div>
         )
     }
@@ -312,13 +352,8 @@ UsersList.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    animation: PropTypes.bool.isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
-    selectionMode: PropTypes.bool.isRequired,
-    changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired    
+    setNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
