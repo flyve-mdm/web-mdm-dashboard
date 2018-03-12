@@ -366,16 +366,21 @@ class DevicesEdit extends Component {
                         />
                         
                         {renderComponent}
-
-                        <br/>
-
-                        <button className="btn --secondary" onClick={() => this.props.changeAction(null)}>
-                            Cancel
-                        </button>
                         
-                        <button className="btn --primary" onClick={this.handleSave} style={{marginLeft: 10}}>
-                            Save
-                        </button>
+
+                        { this.state.isLoading ? "" : (
+                            <React.Fragment>
+                                <br/>
+
+                                <button className="btn --secondary" onClick={() => this.props.changeAction(null)}>
+                                    Cancel
+                                </button>
+                                
+                                <button className="btn --primary" onClick={this.handleSave} style={{marginLeft: 10}}>
+                                    Save
+                                </button>
+                            </React.Fragment>
+                        )}
                     </div>
                 </ContentPane>
             )
