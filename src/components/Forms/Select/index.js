@@ -6,7 +6,7 @@ class Select extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            options: this.props.options
+            options: this.props.options ? this.props.options : []
         }
     }
 
@@ -14,74 +14,94 @@ class Select extends Component {
         this.props.function(this.props.name, eventObject.target.value)
     }
 
-    componentDidMount = async () => {
+    listRequest = async (props) => {
         let options = []
+        const response = await props.glpi[props.request.method](props.request.params)
 
-        if (this.props.glpi && this.props.request) {
-            const response = await this.props.glpi[this.props.request.method](this.props.request.params)
-
-            switch (this.props.request.method) {
-                case 'getMyProfiles':
-                    response.myprofiles.forEach(element => {
+        switch (props.request.method) {
+            case 'getMyProfiles':
+                response.myprofiles.forEach(element => {
+                    options.push(
+                        {
+                            content: element[props.request.content],
+                            value: element[props.request.value]
+                        }
+                    )
+                })
+                break
+            
+            case 'searchItems':
+                if (response.data) {
+                    response.data.forEach(element => {
                         options.push(
                             {
-                                content: element[this.props.request.content],
-                                value: element[this.props.request.value]
+                                content: element[props.request.content],
+                                value: element[props.request.value]
                             }
                         )
                     })
-                    break
-                
-                case 'searchItems':
-                    if (response.data) {
-                        response.data.forEach(element => {
-                            options.push(
-                                {
-                                    content: element[this.props.request.content],
-                                    value: element[this.props.request.value]
-                                }
-                            )
-                        })
-                    }
-                    break
-                    case 'getAllItems':
-                    if (response) {
-                        response.forEach(element => {
-                            options.push(
-                                {
-                                    content: element[this.props.request.content],
-                                    value: element[this.props.request.value]
-                                }
-                            )
-                        })
-                    }
-                    break
-
-                case 'getSubItems':
+                }
+                break
+                case 'getAllItems':
+                if (response) {
                     response.forEach(element => {
                         options.push(
                             {
-                                content: element[this.props.request.content],
-                                value: element[this.props.request.value]
+                                content: element[props.request.content],
+                                value: element[props.request.value]
                             }
                         )
-                    })    
-                    break
-                case 'getMyEntities':
-                    response.myentities.forEach(element => {
-                        options.push(
-                            {
-                                content: element[this.props.request.content],
-                                value: element[this.props.request.value]
-                            }
-                        )
-                    }) 
-                    break
-                default:
-                    break
-            }
+                    })
+                }
+                break
+
+            case 'getSubItems':
+                response.forEach(element => {
+                    options.push(
+                        {
+                            content: element[props.request.content],
+                            value: element[props.request.value]
+                        }
+                    )
+                })    
+                break
+            case 'getMyEntities':
+                response.myentities.forEach(element => {
+                    options.push(
+                        {
+                            content: element[props.request.content],
+                            value: element[props.request.value]
+                        }
+                    )
+                }) 
+                break
+            default:
+                break
+        }
+
+        return options
+    }
+
+    componentDidMount = () => {
+        this.handleRefresh(this.props)
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        if (nextProps !== this.props) {
+            this.handleRefresh(nextProps)
+        }
+    }
+
+    handleRefresh = async (props) => {
+        if (props.glpi && props.request) {
+
+            this.setState ({
+                options: await this.listRequest(props)
+            })
+
         } else {
-            this.props.options.forEach(element => {
+            let options = []
+            props.options.forEach(element => {
                 options.push(
                     {
                         value: element,
@@ -89,11 +109,9 @@ class Select extends Component {
                     }
                 )
             })
-        }
 
-        this.setState ({
-            options
-        })
+            this.setState ({ options })
+        }
     }
 
     render() {
