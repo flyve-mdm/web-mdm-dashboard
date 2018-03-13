@@ -11,6 +11,7 @@ import {
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import getMode from '../../shared/getMode'
+import calc100PercentMinus from '../../shared/calc100PercentMinus'
 
 function mapStateToProps(state, props) {
     return {
@@ -72,7 +73,6 @@ class Devices extends Component {
 
     propsData = () => {
         return {
-            itemListPaneWidth: this.state.itemListPaneWidth,
             changeSelectionMode: this.changeSelectionMode,
             selectionMode: this.state.selectionMode,
             selectedItems: this.state.selectedItems,
@@ -89,30 +89,69 @@ class Devices extends Component {
     changeAction = action => this.setState({ action })
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
 
-    render() {
-        let renderComponents
-        const renderList = (
-            <DevicesList
-                key="list"
-                {...this.propsData()}
-            />
-        )
+    stylesList = () => {
 
-        const renderContent = (
-            <GenerateRoutes key="content" routes={routes} rootPath={this.props.match.url} data={{...this.propsData(), itemListPaneWidth: this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth}} />
-        )
+        let styles = {
+            width: this.state.itemListPaneWidth   
+        }
 
         if (this.state.mode === 'small') {
-
             if (this.state.selectedItems.length === 0  || this.props.history.location.pathname === '/app/devices') {
-                renderComponents = [renderList]
+                styles.display = 'inline-block'
             } else {
-                renderComponents = [renderContent]
+                styles.display = 'none'
             }
-            
+
         } else {
-            renderComponents = [renderList, renderContent]
+            styles.display = 'inline-block'
+        } 
+
+        return styles
+    }
+
+    stylesContent = () => {
+
+        const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
+        let styles = {
+            width: calc100PercentMinus(validWidth)
         }
+
+        if (this.state.mode === 'small') {
+            if (this.state.selectedItems.length === 0  || this.props.history.location.pathname === '/app/devices') {
+                styles.display = 'none'
+            } else {
+                styles.display = 'inline-block'
+            }
+
+        } else {
+            styles.display = 'inline-block'
+        } 
+
+        return styles
+    }
+
+    render() {
+
+        let renderComponents = (
+
+            <React.Fragment>
+                <div className="listPane flex-block-list" style={{...this.stylesList()}}>
+                <DevicesList
+                    key="list"
+                    {...this.propsData()}
+                />
+                </div>
+                <div className="flex-block-content" style={{...this.stylesContent()}}>
+                <GenerateRoutes 
+                    key="content" 
+                    routes={routes} 
+                    rootPath={this.props.match.url} 
+                    data={{...this.propsData()}} 
+                />
+                </div>
+            </React.Fragment>
+
+        )
 
         return (
             <div className="flex-block --with-scroll --with-content-pane">
