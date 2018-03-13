@@ -10,16 +10,19 @@ export default class UsersContent extends Component {
     constructor (props) {
         super(props)
         this.state = {
+            id: this.props.history.location.pathname.split("/")[3],
             data: undefined
         }
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItems !== prevProps.selectedItems) {
+    componentWillReceiveProps(newProps) {
+        if (this.state.id !== newProps.history.location.pathname.split("/")[3]) {
             this.setState({
-                data: undefined
+                data: undefined,
+                id: newProps.history.location.pathname.split("/")[3]
+            }, ()=> {
+                this.handleRefresh()
             })
-            this.handleRefresh()
         }
     }
 
@@ -66,13 +69,16 @@ export default class UsersContent extends Component {
     handleRefresh = async () => {
         try {
             this.setState({ 
-                data: await this.props.glpi.getAnItem({ itemtype: 'User', id: this.props.selectedItems[0]['User.id'] }) 
+                data: await this.props.glpi.getAnItem({ 
+                    itemtype: 'User', 
+                    id: this.state.id 
+                }) 
             })
         } catch (error) {
             this.props.setNotification({
                 title: "Error",
                 body: "There was a problem loading this user's data",
-                type: 'alert'
+                type: "alert"
             }) 
             this.props.history.push("/app/users")
         }
@@ -115,21 +121,21 @@ export default class UsersContent extends Component {
                                 <span className="phoneIcon" />
                                 <div className="callContent">
                                     <a href={"tel:" + this.state.data.mobile}>Call Mobile</a>
-                                    <div className="number">{this.state.data.mobile}</div>
+                                    <div>{this.state.data.mobile}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
                                     <a href={"tel:" + this.state.data.phone2}>Call Work</a>
-                                    <div className="number">{this.state.data.phone2}</div>
+                                    <div>{this.state.data.phone2}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="emailIcon" />
                                 <div className="callContent">
-                                    <a href={"mailto:" + this.props.selectedItems[0]['User.UserEmail.email']}>Email</a>
-                                    <div className="number">{this.props.selectedItems[0]['User.UserEmail.email']}</div>
+                                    <a href={"mailto:" + this.state.data['User.UserEmail.email']}>Email</a>
+                                    <div>{this.state.data['User.UserEmail.email']}</div>
                                 </div>
                             </li>
                         </ul>
@@ -150,7 +156,6 @@ UsersContent.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedItems: PropTypes.array,
     history: PropTypes.object.isRequired,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired
