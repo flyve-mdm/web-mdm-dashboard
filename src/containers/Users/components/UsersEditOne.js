@@ -14,6 +14,7 @@ class UsersEditOne extends Component {
         super(props)
         this.state = {
             isLoading: true,
+            id: this.props.history.location.pathname.split("/")[3],
             login: undefined,
             firstName: undefined,
             realName: undefined,
@@ -42,109 +43,107 @@ class UsersEditOne extends Component {
     }
 
     componentDidMount() {
-        if (this.props.selectedItemList) {
-            this.handleRefresh()
-        }
+        this.handleRefresh()
     }
 
-    handleRefresh = async () => {
+    handleRefresh = () => {
         this.setState({
             isLoading: true
-        })
-        try {
-            const response = await this.props.glpi.getAnItem({ itemtype: 'User', id: this.props.selectedItemList[0]['User.id']})
-            const myEmails = await this.props.glpi.getSubItems({
-                itemtype: 'User', 
-                id: this.props.selectedItemList[0]['User.id'], 
-                subItemtype: 'UserEmail'
-            })
-            const {cfg_glpi} = await this.props.glpi.getGlpiConfig()
-    
-            const parametersToEvaluate = {
-                minimunLength: cfg_glpi.password_min_length,
-                needDigit: cfg_glpi.password_need_number,
-                needLowercaseCharacter: cfg_glpi.password_need_letter,
-                needUppercaseCharacter: cfg_glpi.password_need_caps,
-                needSymbol: cfg_glpi.password_need_symbol
+        }, async () => {
+            try {
+                const response = await this.props.glpi.getAnItem({ itemtype: 'User', id: this.state.id})
+                const myEmails = await this.props.glpi.getSubItems({
+                    itemtype: 'User', 
+                    id: this.state.id, 
+                    subItemtype: 'UserEmail'
+                })
+                const {cfg_glpi} = await this.props.glpi.getGlpiConfig()
+        
+                const parametersToEvaluate = {
+                    minimunLength: cfg_glpi.password_min_length,
+                    needDigit: cfg_glpi.password_need_number,
+                    needLowercaseCharacter: cfg_glpi.password_need_letter,
+                    needUppercaseCharacter: cfg_glpi.password_need_caps,
+                    needSymbol: cfg_glpi.password_need_symbol
+                }
+                this.setState({
+                    isLoading: false,
+                    parametersToEvaluate,
+                    login: validateData(response.name),
+                    firstName: validateData(response.firstname),
+                    realName: validateData(response.realname),
+                    phone: validateData(response.phone),
+                    mobilePhone: validateData(response.mobile),
+                    phone2: validateData(response.phone2),
+                    administrativeNumber: validateData(response.registration_number),
+                    lastLogin: validateData(response.last_login),
+                    created: validateData(response.date_creation),
+                    modified: validateData(response.date_mod),
+                    currentEmails: myEmails.map(a => ({...a})),
+                    emails: validateData(myEmails, []),
+                    imageProfile: validateData(response.picture, "profile.png"),
+                    authentication: 'GLPI internal database',
+                    password: '',
+                    passwordConfirmation: '',
+                    category: {
+                        value: validateData(response.usercategories_id),
+                        request: {
+                            params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
+                            method: 'searchItems',
+                            content: '1',
+                            value: '2'
+                        }
+                    },
+                    defaultEntity:  {
+                        value: validateData(response.entities_id),
+                        request: {
+                            params: {},
+                            method: 'getMyEntities',
+                            content: 'name',
+                            value: 'id'
+                        }
+                    },
+                    comments: '',
+                    typeImageProfile: 'file',
+                    title: {
+                        value: validateData(response.usertitles_id),
+                        request: {
+                            params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
+                            method: 'searchItems',
+                            content: '1',
+                            value: '2'
+                        }
+                    },
+                    location: {
+                        value: validateData(response.locations_id),
+                        request: {
+                            params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
+                            method: 'searchItems',
+                            content: '1',
+                            value: '2'
+                        }
+                    },
+                    defaultProfile: {
+                        value: validateData(response.profiles_id),
+                        request: {
+                            params: {},
+                            method: 'getMyProfiles',
+                            content: 'name',
+                            value: 'id'
+                        }
+                    },
+                    validSince: response.begin_date ? new Date(response.begin_date) : undefined,
+                    validUntil: response.end_date ? new Date(response.end_date) : undefined
+                })
+            } catch (error) {
+                this.setState({isLoading: false})
             }
-            this.setState({
-                isLoading: false,
-                parametersToEvaluate,
-                login: validateData(response.name),
-                firstName: validateData(response.firstname),
-                realName: validateData(response.realname),
-                phone: validateData(response.phone),
-                mobilePhone: validateData(response.mobile),
-                phone2: validateData(response.phone2),
-                administrativeNumber: validateData(response.registration_number),
-                lastLogin: validateData(response.last_login),
-                created: validateData(response.date_creation),
-                modified: validateData(response.date_mod),
-                currentEmails: myEmails.map(a => ({...a})),
-                emails: validateData(myEmails, []),
-                imageProfile: validateData(response.picture, "profile.png"),
-                authentication: 'GLPI internal database',
-                password: '',
-                passwordConfirmation: '',
-                category: {
-                    value: validateData(response.usercategories_id),
-                    request: {
-                        params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
-                        method: 'searchItems',
-                        content: '1',
-                        value: '2'
-                    }
-                },
-                defaultEntity:  {
-                    value: validateData(response.entities_id),
-                    request: {
-                        params: {},
-                        method: 'getMyEntities',
-                        content: 'name',
-                        value: 'id'
-                    }
-                },
-                comments: '',
-                typeImageProfile: 'file',
-                title: {
-                    value: validateData(response.usertitles_id),
-                    request: {
-                        params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
-                        method: 'searchItems',
-                        content: '1',
-                        value: '2'
-                    }
-                },
-                location: {
-                    value: validateData(response.locations_id),
-                    request: {
-                        params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
-                        method: 'searchItems',
-                        content: '1',
-                        value: '2'
-                    }
-                },
-                defaultProfile: {
-                    value: validateData(response.profiles_id),
-                    request: {
-                        params: {},
-                        method: 'getMyProfiles',
-                        content: 'name',
-                        value: 'id'
-                    }
-                },
-                validSince: response.begin_date ? new Date(response.begin_date) : undefined,
-                validUntil: response.end_date ? new Date(response.end_date) : undefined
-            })
-        } catch (error) {
-            this.setState({isLoading: false})
-        }
+        })
     } 
 
     saveChanges = () => {
-
         let newUser = { 
-            id: this.props.selectedItemList[0]['User.id'],
+            id: this.state.id,
             firstname: this.state.firstName,
             realname: this.state.realName,
             phone: this.state.phone,
@@ -189,11 +188,19 @@ class UsersEditOne extends Component {
                             currentEmails: this.state.currentEmails, 
                             newEmails: this.state.emails
                         })
-                        this.props.showNotification('Success', 'saved profile')
-                        this.props.changeAction(null)
-                    } catch (e) {
+                        this.props.setNotification({
+                            title: 'Success',
+                            body: 'Saved profile',
+                            type: 'success'
+                        })
+                        this.props.changeAction('reload')
+                    } catch (error) {
                         this.setState ({isLoading: false})            
-                        this.props.showNotification('Error', e)
+                        this.props.setNotification({
+                            title: error[0],
+                            body: error[1],
+                            type: 'alert'
+                        })
                     }
                 }
             )
@@ -329,7 +336,7 @@ class UsersEditOne extends Component {
 
                     <ConstructInputs data={user.activityInformation} icon="documentIcon" />
 
-                    <button className="win-button win-button-primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                    <button className="btn --primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                         Save
                     </button>
                 
@@ -353,7 +360,7 @@ UsersEditOne.propTypes = {
         PropTypes.number
     ]).isRequired,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    setNotification: PropTypes.func.isRequired
 }
 
 export default UsersEditOne
