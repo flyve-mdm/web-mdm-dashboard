@@ -23,12 +23,20 @@ export default class Main extends Component {
         }
     }
 
+    componentWillReceiveProps(newProps) {
+        if (this.props.id !== newProps.id) {
+            this.setState({
+                data: undefined
+            }, () => this.handleRefresh())
+        }
+    }
+
     componentDidMount() {
         this.handleRefresh()
     }
 
     handleRefresh = () => {
-        this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'] })
+        this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.id })
             .then((response) => {
                 this.setState({
                     data: response
@@ -87,7 +95,7 @@ export default class Main extends Component {
         }, async () => {
             try {
                 const response = await this.props.glpi.genericRequest({
-                    path: `PluginFlyvemdmAgent/${this.props.selectedItems[0]['PluginFlyvemdmAgent.id']}`,
+                    path: `PluginFlyvemdmAgent/${this.props.id}`,
                     requestParams: {
                         method: 'PUT',
                         body: JSON.stringify({"input":{"_ping": ""}})
@@ -175,7 +183,12 @@ export default class Main extends Component {
                         </li>
                     </ul>
                 </div>
-                <Confirmation title={`Delete devices`} message={this.state.data["name"]} reference={el => this.contentDialog = el} /> 
+                
+                <Confirmation 
+                    title="Delete devices" 
+                    message={this.state.data["name"]} 
+                    reference={el => this.contentDialog = el} 
+                /> 
             </div>
             )
         }
@@ -183,9 +196,9 @@ export default class Main extends Component {
     }
 }
 Main.propTypes = {
-    action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    glpi: PropTypes.object.isRequired
+    glpi: PropTypes.object.isRequired,
+    id: PropTypes.string.isRequired
 }

@@ -6,6 +6,21 @@ import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sec
 
 export default class DevicesContent extends Component {
 
+    constructor (props) {
+        super(props)
+        this.state = {
+            id: this.props.history.location.pathname.split("/")[3]
+        }
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (this.state.id !== newProps.history.location.pathname.split("/")[3]) {
+            this.setState({
+                id: newProps.history.location.pathname.split("/")[3]
+            })
+        }
+    }
+
     render() {
         return (
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true} >
@@ -13,20 +28,22 @@ export default class DevicesContent extends Component {
                     <ReactWinJS.Pivot.Item key="main" header="Main">
 
                         <Main 
-                            selectedItems={this.props.selectedItems}
+                            id={this.state.id}
                             changeAction={this.props.changeAction}
                             changeSelectionMode={this.props.changeSelectionMode}
                             setNotification={this.props.setNotification}
                             history={this.props.history}
                             glpi={this.props.glpi}
+                            changeID={this.props.changeID}
                         />
 
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="systemReport" header="System Report">
 
                         <SystemReport 
-                            selectedItems={this.props.selectedItems}
+                            id={this.state.id}
                             glpi={this.props.glpi}
+                            changeID={this.props.changeID}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -34,29 +51,32 @@ export default class DevicesContent extends Component {
                         
                         <Applications 
                             itemListPaneWidth={this.props.itemListPaneWidth}
-                            selectedItems={this.props.selectedItems}
+                            id={this.state.id}
                             glpi={this.props.glpi}
+                            changeID={this.props.changeID}
                         />
 
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="geolocation" header="Geolocation">
                         <Geolocation 
-                            selectedItems={this.props.selectedItems}
+                            id={this.state.id}
                             changeAction={this.props.changeAction}
                             changeSelectionMode={this.props.changeSelectionMode}
                             setNotification={this.props.setNotification}
                             glpi={this.props.glpi}
-                    />
+                            changeID={this.props.changeID}
+                        />
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="dangerZone" header="Danger Zone">
 
                         <DangerZone 
-                            selectedItems={this.props.selectedItems}
+                            id={this.state.id}
                             changeAction={this.props.changeAction}
                             action={this.props.action}
                             changeSelectionMode={this.props.changeSelectionMode}
                             setNotification={this.props.setNotification}
                             glpi={this.props.glpi}
+                            changeID={this.props.changeID}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -72,7 +92,6 @@ DevicesContent.propTypes = {
     ]).isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    selectedItems: PropTypes.array.isRequired,
     setNotification: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     glpi: PropTypes.object.isRequired

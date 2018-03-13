@@ -20,9 +20,7 @@ export default class UsersContent extends Component {
             this.setState({
                 data: undefined,
                 id: newProps.history.location.pathname.split("/")[3]
-            }, ()=> {
-                this.handleRefresh()
-            })
+            }, () => this.handleRefresh())
         }
     }
 
