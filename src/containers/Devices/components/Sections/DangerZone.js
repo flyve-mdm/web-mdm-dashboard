@@ -10,7 +10,7 @@ class DangerZone extends Component {
             try {
                 const response = await this.props.glpi.updateItem({
                     itemtype: 'PluginFlyvemdmAgent',
-                    id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
+                    id: this.props.id,
                     input: {"wipe": "1"}
                 })
                 this.props.setNotification({
@@ -19,7 +19,7 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction("reload")
-                this.props.onNavigate([this.props.location[0]])
+                this.props.history.push('/app/devices')
             } catch (error) {
                 this.props.setNotification({
                     title: error[0],
@@ -36,7 +36,7 @@ class DangerZone extends Component {
             try {
                 const response = await this.props.glpi.updateItem({
                     itemtype: 'PluginFlyvemdmAgent',
-                    id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
+                    id: this.props.id,
                     input: {"_unenroll": "1"}
                 })
                 this.props.setNotification({
@@ -45,7 +45,7 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction("reload")
-                this.props.onNavigate([this.props.location[0]])
+                this.props.history.push('/app/devices')
             } catch (error) {
                 this.props.setNotification({
                     title: error[0],
@@ -63,7 +63,7 @@ class DangerZone extends Component {
             try {
                 const response = await this.props.glpi.deleteItem({
                     itemtype: 'PluginFlyvemdmAgent',
-                    id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
+                    id: this.props.id,
                 })
                 this.props.setNotification({
                     title: 'Successfully',
@@ -71,7 +71,7 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction("reload")
-                this.props.onNavigate([this.props.location[0]])
+                this.props.history.push('/app/devices')
             } catch (error) {
                 this.props.setNotification({
                     title: error[0],
@@ -79,10 +79,6 @@ class DangerZone extends Component {
                     type: 'alert'
                 })
             }
-        }
-
-
-        if (isOK) {
         }
     }
 
@@ -113,8 +109,8 @@ class DangerZone extends Component {
                         <button className="btn --primary" onClick={this.unenroll}>Unenroll</button>
                     </div>
                     <Confirmation 
-                        title={'Unenroll device #' + this.props.selectedItems[0]["PluginFlyvemdmAgent.id"] } 
-                        message={'You are going to unenroll device ' + this.props.selectedItems[0]["PluginFlyvemdmAgent.id"]} 
+                        title={'Unenroll device #' + this.props.id } 
+                        message={'You are going to unenroll device ' + this.props.id} 
                         reference={el => this.unenrollmentDevice = el} 
                     /> 
                 </div>
@@ -128,8 +124,8 @@ class DangerZone extends Component {
                         <button className="btn --primary" onClick={this.delete}>Delete</button>
                     </div>
                     <Confirmation 
-                        title={'Delete device #' + this.props.selectedItems[0]["PluginFlyvemdmAgent.id"] } 
-                        message={'You are going to delete device ' + this.props.selectedItems[0]["PluginFlyvemdmAgent.id"]} 
+                        title={'Delete device #' + this.props.id } 
+                        message={'You are going to delete device ' + this.props.id} 
                         reference={el => this.deleteDevice = el} 
                     /> 
                 </div>
@@ -139,9 +135,11 @@ class DangerZone extends Component {
 }
 
 DangerZone.propTypes = {
-    selectedItems: PropTypes.array.isRequired,
+    id: PropTypes.string.isRequired,
     setNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
+    glpi: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    changeAction: PropTypes.func.isRequired
 }
 
 export default DangerZone
