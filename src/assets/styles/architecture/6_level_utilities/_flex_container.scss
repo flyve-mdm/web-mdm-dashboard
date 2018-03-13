@@ -10,3 +10,11 @@
     flex: 1 100%;
   }
 }
+
+.center-block-content {
+  display: flex; 
+  height: 100%; 
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column;
+}
