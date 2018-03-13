@@ -34,7 +34,6 @@ export default class DevicesContent extends Component {
                             setNotification={this.props.setNotification}
                             history={this.props.history}
                             glpi={this.props.glpi}
-                            changeID={this.props.changeID}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -43,7 +42,7 @@ export default class DevicesContent extends Component {
                         <SystemReport 
                             id={this.state.id}
                             glpi={this.props.glpi}
-                            changeID={this.props.changeID}
+                            setNotification={this.props.setNotification}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -53,7 +52,6 @@ export default class DevicesContent extends Component {
                             itemListPaneWidth={this.props.itemListPaneWidth}
                             id={this.state.id}
                             glpi={this.props.glpi}
-                            changeID={this.props.changeID}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -64,7 +62,6 @@ export default class DevicesContent extends Component {
                             changeSelectionMode={this.props.changeSelectionMode}
                             setNotification={this.props.setNotification}
                             glpi={this.props.glpi}
-                            changeID={this.props.changeID}
                         />
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="dangerZone" header="Danger Zone">
@@ -72,11 +69,9 @@ export default class DevicesContent extends Component {
                         <DangerZone 
                             id={this.state.id}
                             changeAction={this.props.changeAction}
-                            action={this.props.action}
-                            changeSelectionMode={this.props.changeSelectionMode}
                             setNotification={this.props.setNotification}
                             glpi={this.props.glpi}
-                            changeID={this.props.changeID}
+                            history={this.props.history}
                         />
 
                     </ReactWinJS.Pivot.Item>

@@ -18,9 +18,11 @@ export default class Geolocation extends Component {
         this.handleRefresh()
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItems !== prevProps.selectedItems) {
-            this.setState({isLoading: true}, () => this.handleRefresh())
+    componentWillReceiveProps(newProps) {
+        if (this.props.id !== newProps.id) {
+            this.setState({
+                isLoading: true
+            }, () => this.handleRefresh())
         }
     }
 
@@ -28,7 +30,7 @@ export default class Geolocation extends Component {
         try {
             await this.props.glpi.updateItem({
                 itemtype: 'PluginFlyvemdmAgent', 
-                id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'],
+                id: this.props.id,
                 input: {_geolocate: ""}
             })
             this.props.setNotification({
@@ -48,9 +50,10 @@ export default class Geolocation extends Component {
 
     handleRefresh = async () => {
         try {
+            const {computers_id} = await this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.id })
             const response = await this.props.glpi.getSubItems({
                 itemtype: 'Computer', 
-                id: this.props.selectedItems[0]['PluginFlyvemdmAgent.Computer.id'], 
+                id: computers_id, 
                 subItemtype: 'PluginFlyvemdmGeolocation'
             })    
             this.setState({
@@ -98,7 +101,7 @@ export default class Geolocation extends Component {
 }
 
 Geolocation.propTypes = {
-    selectedItems: PropTypes.array,
+    id: PropTypes.string.isRequired,
     setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
