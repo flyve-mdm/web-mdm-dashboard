@@ -58,15 +58,6 @@ export default class UsersList extends Component {
         )
     })
 
-    // handlePanel = (eventObject) => {
-    //     let button = eventObject.currentTarget.winControl
-    //     this.listView.winControl.selection.clear()
-        
-    //     this.props.changeSelectionMode(false)
-    //     this.props.onNavigate([this.props.location[0]])
-    //     this.props.changeAction(button.label)
-    // }
-
     handleToggleSelectionMode = () => {
         this.props.history.push('/app/users')
         this.props.changeSelectionMode(!this.props.selectionMode)     
