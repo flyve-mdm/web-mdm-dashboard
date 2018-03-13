@@ -105,7 +105,7 @@ export default class Main extends Component {
                 this.props.setNotification({
                     title: error[0],
                     body: error[1],
-                    type: 'alet'
+                    type: 'alert'
                 })
                 this.setState({ sendingPing: false })
             }
