@@ -62,16 +62,19 @@ export default class UsersContent extends Component {
         this.handleRefresh()
     }
 
-    handleRefresh = () => {
-        this.props.glpi.getAnItem({ itemtype: 'User', id: this.props.selectedItems[0]['User.id'] })
-            .then((response) => {
-                this.setState({
-                    data: response
-                })
+    handleRefresh = async () => {
+        try {
+            this.setState({ 
+                data: await this.props.glpi.getAnItem({ itemtype: 'User', id: this.props.selectedItems[0]['User.id'] }) 
             })
-            .catch((error) => {
-
-            })
+        } catch (error) {
+            this.props.setNotification({
+                title: "Error",
+                body: "There was a problem loading this user's data",
+                type: 'alert'
+            }) 
+            this.props.history.push("/app/users")
+        }
     }
 
     render() {
