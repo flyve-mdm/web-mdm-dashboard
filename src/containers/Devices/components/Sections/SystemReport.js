@@ -8,18 +8,17 @@ class SystemReport extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            agent: undefined,
+            data: undefined,
             isLoading: false
         }
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItems !== prevProps.selectedItems) {
+    componentWillReceiveProps(newProps) {
+        if (this.props.id !== newProps.id) {
             this.setState({
-                agent: undefined,
+                data: undefined,
                 isLoading: false
-            })
-            this.handleRefresh()
+            }, () => this.handleRefresh())
         }
     }
 
@@ -27,96 +26,102 @@ class SystemReport extends Component {
         this.handleRefresh()
     }
 
-    handleRefresh = async () => {
-
-        try {
-            this.setState({
-                isLoading: true
-            })
-            const agent = await this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'] })
-            this.setState({
-                isLoading: false,
-                agent
-            })
-        } catch (error) {
-            console.log(error)
-        }
+    handleRefresh =  () => {
+        this.setState({
+            isLoading: true
+        }, async () => {
+            try {
+                this.setState({
+                    isLoading: false,
+                    data: await this.props.glpi.getAnItem({ 
+                        itemtype: 'PluginFlyvemdmAgent', 
+                        id: this.props.id 
+                    })
+                })
+            } catch (error) {
+                this.props.setNotification({
+                    title: "Error",
+                    body: "There was a problem loading the data of this device",
+                    type: "alert"
+                }) 
+            }
+        })
     }            
 
     render() {
-        if (this.state.isLoading && !this.state.agent) {
+        if (this.state.isLoading && !this.state.data) {
             return (<Loader type="content"/>)
-        } else if (!this.state.isLoading && this.state.agent){
+        } else if (!this.state.isLoading && this.state.data){
             return (
                 <div className="devices">
-                <div className="system-report">
-                    <div className="title">Agent</div>
-                    <div className="list-content">
-                        <div className="list-col">ID</div>
-                        <div className="list-col">{this.state.agent['id']}</div>
-                    </div>
-                    <div className="list-content">
-                        <div className="list-col">Name</div>
-                        <div className="list-col">{this.state.agent['name']}</div>
-                    </div>
-                    <div className="list-content">
-                        <div className="list-col">Version</div>
-                        <div className="list-col">{this.state.agent['version']}</div>
-                    </div>
-                    <div className="list-content">
-                        <div className="list-col">Last contact</div>
-                        <div className="list-col">{this.state.agent['last_contact']}</div>
-                    </div>
-                    <div className="list-content">
-                        <div className="list-col">Last report</div>
-                        <div className="list-col">{this.state.agent['last_report'] ? this.state.agent['last_report'] : 'N/A'}</div>
-                    </div>
+                    <div className="system-report">
+                        <div className="title">Agent</div>
+                        <div className="list-content">
+                            <div className="list-col">ID</div>
+                            <div className="list-col">{this.state.data['id']}</div>
+                        </div>
+                        <div className="list-content">
+                            <div className="list-col">Name</div>
+                            <div className="list-col">{this.state.data['name']}</div>
+                        </div>
+                        <div className="list-content">
+                            <div className="list-col">Version</div>
+                            <div className="list-col">{this.state.data['version']}</div>
+                        </div>
+                        <div className="list-content">
+                            <div className="list-col">Last contact</div>
+                            <div className="list-col">{this.state.data['last_contact']}</div>
+                        </div>
+                        <div className="list-content">
+                            <div className="list-col">Last report</div>
+                            <div className="list-col">{this.state.data['last_report'] ? this.state.data['last_report'] : 'N/A'}</div>
+                        </div>
 
-                    <Inventory 
-                        selectedItems={this.props.selectedItems}
-                        title='Fleet'
-                        itemType='PluginFlyvemdmFleet'
-                        itemID={this.state.agent['plugin_flyvemdm_fleets_id']}
-                        fields={{id: 'ID', name: 'Name'}}
-                        glpi={this.props.glpi}
-                    />
+                        <Inventory 
+                            selectedItems={this.props.selectedItems}
+                            title='Fleet'
+                            itemType='PluginFlyvemdmFleet'
+                            itemID={this.state.data['plugin_flyvemdm_fleets_id']}
+                            fields={{id: 'ID', name: 'Name'}}
+                            glpi={this.props.glpi}
+                        />
 
-                    <Inventory
-                        selectedItems={this.props.selectedItems}
-                        title='Device'
-                        itemType='Computer'
-                        itemID={this.state.agent['computers_id']}
-                        fields={{ 
-                            id: 'ID', 
-                            name: 'Name',
-                            uuid: 'UUID', 
-                            date_creation: 'Creation', 
-                            date_mod: 'Modification', 
-                            computermodels_id: 'Model', 
-                            computertypes_id: 'Type', 
-                            manufacturers_id: 'Manufacturer', serial: 'Serial' }}
-                        parameters={{ 
-                            expand_dropdowns: true, 
-                            with_devices: true, 
-                            with_disks: true, 
-                            with_softwares: true, 
-                            with_connections: true, 
-                            with_networkports: true }}
-                        glpi={this.props.glpi}
-                    />
-                    
-                </div>
+                        <Inventory
+                            selectedItems={this.props.selectedItems}
+                            title='Device'
+                            itemType='Computer'
+                            itemID={this.state.data['computers_id']}
+                            fields={{ 
+                                id: 'ID', 
+                                name: 'Name',
+                                uuid: 'UUID', 
+                                date_creation: 'Creation', 
+                                date_mod: 'Modification', 
+                                computermodels_id: 'Model', 
+                                computertypes_id: 'Type', 
+                                manufacturers_id: 'Manufacturer', serial: 'Serial' }}
+                            parameters={{ 
+                                expand_dropdowns: true, 
+                                with_devices: true, 
+                                with_disks: true, 
+                                with_softwares: true, 
+                                with_connections: true, 
+                                with_networkports: true }}
+                            glpi={this.props.glpi}
+                        />
+                    </div>
                 </div>
             )
         } else {
-            return (null)
+            return ""
         }
     }
 }
 
 SystemReport.propTypes = {
-    selectedItems: PropTypes.array.isRequired,
-    glpi: PropTypes.object.isRequired
+    id: PropTypes.string.isRequired,
+    glpi: PropTypes.object.isRequired,
+    setNotification: PropTypes.func.isRequired
 }
 
 export default SystemReport
