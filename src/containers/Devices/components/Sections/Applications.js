@@ -17,12 +17,11 @@ class Applications extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItems !== prevProps.selectedItems) {
+    componentWillReceiveProps(newProps) {
+        if (this.props.id !== newProps.id) {
             this.setState({
-                itemList: new WinJS.Binding.List([])
-            })
-            this.handleRefresh()
+                isLoading: false
+            }, () => this.handleRefresh())
         }
     }
 
@@ -30,41 +29,40 @@ class Applications extends Component {
         this.handleRefresh()
     }
 
-    handleRefresh = async () => {
-        try {
-            this.setState({
-                isLoading: true
-            })
-
-            const idComputer = this.props.selectedItems[0]["PluginFlyvemdmAgent.Computer.id"] !== null ? this.props.selectedItems[0]["PluginFlyvemdmAgent.Computer.id"] : ""
-            const computer = await this.props.glpi.getAnItem({ itemtype: 'Computer', id: idComputer, queryString: { with_softwares: true } })
-            let softwareList = []
-            for (const item of computer['_softwares']) {
-                const software = await this.props.glpi.getAnItem({ itemtype: 'Software', id: item['softwares_id']})
-                const softwareVersion = await this.props.glpi.getAnItem({ itemtype: 'SoftwareVersion', id: item['softwareversions_id']})
-
-                let data = {
-                    id: software['id'],
-                    name: software['name'],
-                    alias: software['name'],
-                    version: softwareVersion['name'],
-                    filesize: 0
+    handleRefresh = () => {
+        this.setState({
+            isLoading: true
+        }, async () => {
+            try {
+                const {computers_id} = await this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.id })
+                const computer = await this.props.glpi.getAnItem({ itemtype: 'Computer', id: computers_id, queryString: { with_softwares: true } })
+                let softwareList = []
+                for (const item of computer['_softwares']) {
+                    const software = await this.props.glpi.getAnItem({ itemtype: 'Software', id: item['softwares_id']})
+                    const softwareVersion = await this.props.glpi.getAnItem({ itemtype: 'SoftwareVersion', id: item['softwareversions_id']})
+    
+                    let data = {
+                        id: software['id'],
+                        name: software['name'],
+                        alias: software['name'],
+                        version: softwareVersion['name'],
+                        filesize: 0
+                    }
+                    softwareList.push(data)
                 }
-                softwareList.push(data)
+    
+                this.setState({
+                    isLoading: false,
+                    itemList: new WinJS.Binding.List(softwareList)
+                })
+    
+            } catch (error) {
+                this.setState({
+                    isLoading: false,
+                    itemList: new WinJS.Binding.List([])
+                })
             }
-
-            this.setState({
-                isLoading: false,
-                itemList: new WinJS.Binding.List(softwareList)
-            })
-
-        } catch (error) {
-            console.log(error)
-            this.setState({
-                isLoading: false,
-                itemList: new WinJS.Binding.List([])
-            })
-        }
+        })
     }
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
@@ -140,7 +138,7 @@ class Applications extends Component {
 }
 
 Applications.propTypes = {
-    selectedItems: PropTypes.array.isRequired,
+    id: PropTypes.string.isRequired,
     glpi: PropTypes.object.isRequired
 }
 
