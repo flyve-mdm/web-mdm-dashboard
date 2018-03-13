@@ -80,6 +80,9 @@ class Devices extends Component {
             changeSelectedItems: this.changeSelectedItems,
             action: this.state.action,
             changeAction: this.changeAction,
+            isLoading: this.props.isLoading,
+            uiTransactionStart: this.props.actions.uiTransactionStart,
+            uiTransactionFinish: this.props.actions.uiTransactionFinish,
             setNotification: this.props.actions.setNotification,
             history: this.props.history,
             glpi: this.props.glpi
