@@ -37,6 +37,9 @@ export default class UsersContent extends Component {
                 isLoading: true
             })
 
+            this.props.changeAction("reload")            
+            this.props.changeSelectionMode(false)
+            
             try {
                 await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete })
                 this.props.setNotification({
@@ -53,8 +56,6 @@ export default class UsersContent extends Component {
                 })
             }
             
-            this.props.changeAction("reload")            
-            this.props.changeSelectionMode(false)
         }
     }
 
