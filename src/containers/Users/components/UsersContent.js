@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Pluralize from 'pluralize'
 import ContentPane from '../../../components/ContentPane'
 import IconItemList from '../../../components/IconItemList'
 import Confirmation from '../../../components/Confirmation'
@@ -16,7 +15,7 @@ export default class UsersContent extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItemList !== prevProps.selectedItemList) {
+        if (this.props.selectedItems !== prevProps.selectedItems) {
             this.setState({
                 data: undefined
             })
@@ -28,7 +27,7 @@ export default class UsersContent extends Component {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
 
-            let itemListToDelete = this.props.selectedItemList.map((item) => {
+            let itemListToDelete = this.props.selectedItems.map((item) => {
                 return {
                     id: item["User.id"]
                 }
@@ -37,50 +36,25 @@ export default class UsersContent extends Component {
             this.setState({
                 isLoading: true
             })
-            this.props.changeAction("Delete")
 
-            this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete })
-            .then((response) => {
-                this.props.showNotification('Success', 'elements successfully removed')
-                this.props.changeAction(null)
-                this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
-            })
-            .catch((error) => {
-                if (error.length > 1) {
-                    this.props.showNotification(error[0], error[1])
-                }
-            })
-        }
-    }
-
-    handleDelete = async () => {
-        const isOK = await Confirmation.isOK(this.contentDialog)
-        if (isOK) {
-
-            let itemListToDelete = this.props.selectedItemList.map((item) => {
-                return {
-                    id: item["User.id"]
-                }
-            })
-
-            this.setState({
-                isLoading: true
-            })
-            this.props.changeAction("Delete")
-
-            this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete })
-            .then((response) => {
-                this.props.showNotification('Success', 'elements successfully removed')
-                this.props.changeAction(null)
-                this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
-            })
-            .catch((error) => {
-                if (error.length > 1) {
-                    this.props.showNotification(error[0], error[1])
-                }
-            })
+            try {
+                await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete })
+                this.props.setNotification({
+                    title: 'Success',
+                    body: 'Elements successfully removed',
+                    type: 'success'
+                })
+                this.props.history.push("/app/users")
+            } catch (error) {                
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
+            }
+            
+            this.props.changeAction("reload")            
+            this.props.changeSelectionMode(false)
         }
     }
 
@@ -89,7 +63,7 @@ export default class UsersContent extends Component {
     }
 
     handleRefresh = () => {
-        this.props.glpi.getAnItem({ itemtype: 'User', id: this.props.selectedItemList[0]['User.id'] })
+        this.props.glpi.getAnItem({ itemtype: 'User', id: this.props.selectedItems[0]['User.id'] })
             .then((response) => {
                 this.setState({
                     data: response
@@ -109,7 +83,7 @@ export default class UsersContent extends Component {
             renderComponent = (
                 <div>
                     <div className="contentHeader">
-                        <h2 className="win-h2" style={{ margin: '20.1px 0' }}> {Pluralize.singular(this.props.location[0])} </h2>
+                        <h2 className="win-h2" style={{ margin: '20.1px 0' }}> User </h2>
                         <div className="itemInfo">
                             <IconItemList image={imageProfile} size={100} />
                             <div className="contentStatus">
@@ -150,13 +124,13 @@ export default class UsersContent extends Component {
                             <li>
                                 <span className="emailIcon" />
                                 <div className="callContent">
-                                    <a href={"mailto:" + this.props.selectedItemList[0]['User.UserEmail.email']}>Email</a>
-                                    <div className="number">{this.props.selectedItemList[0]['User.UserEmail.email']}</div>
+                                    <a href={"mailto:" + this.props.selectedItems[0]['User.UserEmail.email']}>Email</a>
+                                    <div className="number">{this.props.selectedItems[0]['User.UserEmail.email']}</div>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.data.name} reference={el => this.contentDialog = el} />
+                    <Confirmation title="Delete Users" message={this.state.data.name} reference={el => this.contentDialog = el} />
                 </div>
             )
         }
@@ -172,9 +146,8 @@ UsersContent.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    selectedItemList: PropTypes.array,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
+    selectedItems: PropTypes.array,
+    history: PropTypes.object.isRequired,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    setNotification: PropTypes.func.isRequired
 }
