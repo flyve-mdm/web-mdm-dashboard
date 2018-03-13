@@ -32,7 +32,7 @@ const routes = [
     path: '/:id',
     name: 'Selected',
     component: UsersContent,
-    exact: false
+    exact: true
   }
 ]
 
