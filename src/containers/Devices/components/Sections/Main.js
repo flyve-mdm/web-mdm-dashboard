@@ -35,16 +35,22 @@ export default class Main extends Component {
         this.handleRefresh()
     }
 
-    handleRefresh = () => {
-        this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.id })
-            .then((response) => {
-                this.setState({
-                    data: response
-                })
+    handleRefresh = async () => {
+        try {
+            this.setState({ 
+                data: await this.props.glpi.getAnItem({ 
+                    itemtype: 'PluginFlyvemdmAgent', 
+                    id: this.props.id 
+                }) 
             })
-            .catch((error) => {
-
-            })
+        } catch (error) {
+            this.props.setNotification({
+                title: "Error",
+                body: "There was a problem loading the data of this device",
+                type: "alert"
+            }) 
+            this.props.history.push("/app/devices")
+        }
     }
 
     handleDelete = async () => {
