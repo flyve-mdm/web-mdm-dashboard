@@ -69,7 +69,7 @@ class Devices extends Component {
     componentWillUnmount () {
         window.removeEventListener('resize', this.handleResize)
     }
-    
+
     propsData = () => {
         return {
             itemListPaneWidth: this.state.itemListPaneWidth,
