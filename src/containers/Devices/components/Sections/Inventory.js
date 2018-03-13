@@ -12,41 +12,31 @@ export default class Inventory extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItems !== prevProps.selectedItems) {
-            this.setState({
-                data: undefined,
-                isLoading: false
-            })
-            this.handleRefresh()
-        }
-    }
-
     componentDidMount() {
         this.handleRefresh()
     }
 
-    handleRefresh = async () => {
+    handleRefresh = () => {
         
-        try {
-            this.setState({
-                isLoading: true
-            })
+        this.setState({
+            isLoading: true
+        }, async () => {
+            try {
             const data = await this.props.glpi.getAnItem({ itemtype: this.props.itemType, id: this.props.itemID, queryString: this.props.parameters })
-            let object = Object.keys(this.props.fields).map((key, index) => {
-                return { [this.props.fields[key]]: data[key] }
-            })
-            this.setState({
-                isLoading: false,
-                data: object
-            })
-        } catch (error) {
-            console.log(error)
-            this.setState({
-                isLoading: false,
-                data: undefined
-            })
-        }
+                let object = Object.keys(this.props.fields).map((key, index) => {
+                    return { [this.props.fields[key]]: data[key] }
+                })
+                this.setState({
+                    isLoading: false,
+                    data: object
+                })
+            } catch (error) {
+                this.setState({
+                    isLoading: false,
+                    data: undefined
+                })
+            }
+        })
     }
 
     buildList = (value) => {
@@ -80,7 +70,6 @@ export default class Inventory extends Component {
     }
 }
 Inventory.propTypes = {
-    selectedItems: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
     itemType: PropTypes.string.isRequired,
     fields: PropTypes.object.isRequired,
