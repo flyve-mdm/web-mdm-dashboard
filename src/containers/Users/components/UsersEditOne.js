@@ -8,7 +8,7 @@ import { usersScheme } from '../../../components/Forms/Schemas'
 import Loading from '../../../components/Loading'
 import ErrorValidation from '../../../components/ErrorValidation'
 
-class Profiles extends Component {
+class UsersEditOne extends Component {
     
     constructor(props) {
         super(props)
@@ -347,7 +347,7 @@ class Profiles extends Component {
     }
 }
 
-Profiles.propTypes = {
+UsersEditOne.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
@@ -356,4 +356,4 @@ Profiles.propTypes = {
     showNotification: PropTypes.func.isRequired
 }
 
-export default Profiles
+export default UsersEditOne
