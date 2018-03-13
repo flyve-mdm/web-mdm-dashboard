@@ -1,5 +1,21 @@
-.flex-block {
-  display: flex;
+  .flex-block {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  align-content: flex-start;
+  width: 100%;
+
+  .flex-block-list {
+    height: 100%; 
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .flex-block-content {
+    height: 100%;
+  }
+
 
   &.--with-scroll {
     @extend %content-with-scroll;
