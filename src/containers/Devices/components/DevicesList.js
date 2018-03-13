@@ -204,9 +204,11 @@ export default class DevicesList extends Component {
 
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {
-            setTimeout(() => {
-                this.setState({scrolling: true})
-            }, 0)
+             setTimeout(() => {
+                 this.setState({
+                scrolling: true
+            })
+             }, 0)
         }
     }
 
@@ -287,7 +289,7 @@ export default class DevicesList extends Component {
         }
 
         return (
-            <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+            <React.Fragment>
                 <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
                         key="sort"
@@ -327,15 +329,11 @@ export default class DevicesList extends Component {
                 </ReactWinJS.ToolBar>
                 { listComponent }
                 <Confirmation title={`Delete Devices`} message={this.props.selectedItems.length +` Devices`} reference={el => this.contentDialog = el} /> 
-            </div>
+            </React.Fragment>
         )
     }
 }
 DevicesList.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
