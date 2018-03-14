@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import UsersItemList from './UsersItemList'
+import BuildItemList from '../../../components/BuildItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
-import BuildItemList from '../../../components/BuildItemList'
 
 export default class UsersList extends Component {
     
@@ -292,7 +292,7 @@ export default class UsersList extends Component {
         }
 
         return (
-            <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+            <React.Fragment>
                 <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
                         key="sort"
@@ -333,16 +333,12 @@ export default class UsersList extends Component {
                 { listComponent }
 
                 <Confirmation title={`Delete Users`} message={this.state.selectedItems.length +` Users`} reference={el => this.contentDialog = el} /> 
-            </div>
+            </React.Fragment>
         )
     }
 }
 
 UsersList.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,

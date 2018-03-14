@@ -343,7 +343,7 @@ class DevicesEdit extends Component {
             }      
             
             return (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                <ContentPane>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" > Edit Users </h2>
                         <h4  className="win-h4">
@@ -394,17 +394,13 @@ class DevicesEdit extends Component {
 
         } else {
             return (
-                <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
+                <EmptyMessage message="No Selection"/>
             )
         }
     }
 }
 
 DevicesEdit.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
     actionList: PropTypes.string,
