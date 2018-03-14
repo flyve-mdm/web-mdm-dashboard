@@ -87,8 +87,8 @@ export default class DevicesList extends Component {
         this.props.history.push(path)
     }
 
-    handleAdd(eventObject, path) {
-        this.props.history.push(path)
+    handleAdd = () => {
+        this.props.history.push("/app/devices/add")
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         this.listView.winControl.selection.clear()
@@ -313,7 +313,7 @@ export default class DevicesList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
-                        onClick={(e) => this.handleAdd(e, "/app/devices/add")}
+                        onClick={this.handleAdd}
                     />
 
                     {this.props.selectionMode ? editCommand : null}

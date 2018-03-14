@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import Pluralize from 'pluralize'
 import WinJS from 'winjs'
 import EmptyMessage from '../../../components/EmptyMessage'
 import ContentPane from '../../../components/ContentPane'
 import Loader from '../../../components/Loader'
 
-export default class InvitationsPendingPage extends Component {
+class InvitationsPendingPage extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
             isLoading: false,
-            itemList: new WinJS.Binding.List([])
+            itemList: new WinJS.Binding.List([]),
+            id: this.props.history.location.pathname.split("/")[3]
         }
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItemList !== prevProps.selectedItemList) {
-            this.handleRefresh()
+    componentWillReceiveProps(newProps) {
+        if (this.state.id !== newProps.history.location.pathname.split("/")[3]) {
+            this.setState({
+                id: newProps.history.location.pathname.split("/")[3]
+            }, () => this.handleRefresh())
         }
     }
 
@@ -34,8 +36,11 @@ export default class InvitationsPendingPage extends Component {
                 isLoading: true
             })
 
-            const idInvitation = this.props.selectedItemList[0]["PluginFlyvemdmInvitation.id"] !== null ? this.props.selectedItemList[0]["PluginFlyvemdmInvitation.id"] : ""
-            const logs = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmInvitationlog', options: { uid_cols: true, forcedisplay: [2, 3, 4, 5] }, criteria: [{ field: '4', searchtype: 'equal', value: idInvitation }] })
+            const logs = await this.props.glpi.searchItems({ 
+                itemtype: 'PluginFlyvemdmInvitationlog', 
+                options: { uid_cols: true, forcedisplay: [2, 3, 4, 5] }, 
+                criteria: [{ field: '4', searchtype: 'equal', value: this.state.id }] 
+            })
 
             this.setState({
                 isLoading: false,
@@ -66,7 +71,7 @@ export default class InvitationsPendingPage extends Component {
             <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
                 <div className="listPane" style={{ padding: 0 }}>
                     <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" >Pending {Pluralize.singular(this.props.location[0])} </h2>
+                        <h2 className="win-h2 titleContentPane" >Pending Invitation</h2>
                     </div>
                     <Loader count={1} />
                 </div>
@@ -78,7 +83,7 @@ export default class InvitationsPendingPage extends Component {
                 <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
                     <div className="listPane" style={{ padding: 0 }}>
                         <div className="contentHeader">
-                            <h2 className="win-h2 titleContentPane" >Pending {Pluralize.singular(this.props.location[0])} </h2>
+                            <h2 className="win-h2 titleContentPane" >Pending Invitation</h2>
                         </div>
                         <ReactWinJS.ListView
                             ref={(listView) => { this.listView = listView }}
@@ -102,14 +107,12 @@ export default class InvitationsPendingPage extends Component {
         return listComponent
     }
 }
+
 InvitationsPendingPage.propTypes = {
     itemListPaneWidth: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ]).isRequired,
-    changeAction: PropTypes.func.isRequired,
-    changeSelectionMode: PropTypes.func.isRequired,
-    location: PropTypes.array.isRequired,
-    selectedItemList: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired
+    ]).isRequired
 }
+
+export default InvitationsPendingPage

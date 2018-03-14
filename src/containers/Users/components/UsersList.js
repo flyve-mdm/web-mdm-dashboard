@@ -95,6 +95,7 @@ export default class UsersList extends Component {
             this.setState({
                 isLoading: true,
                 scrolling: false,
+                selectedItems: [],
                 pagination: {
                     start: 0,
                     page: 1,
@@ -132,22 +133,17 @@ export default class UsersList extends Component {
 
                 this.setState({
                     isLoading: true
+                }, async () => {
+                    await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete, queryString: { force_purge: true } })
+    
+                    this.props.setNotification({
+                        title: 'Successfully',
+                        body: 'User successfully removed!',
+                        type: 'success'
+                    })
+                    this.props.changeSelectionMode(false)
+                    this.props.changeAction('reload')
                 })
-
-                await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete, queryString: { force_purge: true } })
-
-                this.props.setNotification({
-                    title: 'Successfully',
-                    body: 'User successfully removed!',
-                    type: 'success'
-                })
-                this.props.changeSelectionMode(false)
-                this.props.changeAction('reload')
-
-                this.setState((prevState, props) => ({
-                    selectedItems: [],
-                    isLoading: false
-                }))
             } else {
                 // Exit selection mode
                 this.props.changeSelectionMode(false)
