@@ -78,7 +78,7 @@ Input.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
     placeholder: PropTypes.string,
     function: PropTypes.func,
     disabled: PropTypes.bool,
