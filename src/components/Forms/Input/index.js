@@ -54,7 +54,7 @@ class Input extends Component {
                     type={this.props.type}
                     className={this.state.className}
                     name={this.props.name}
-                    value={this.props.value}
+                    value={this.props.value ? this.props.value : ''}
                     placeholder={this.props.placeholder}
                     onChange={this.change}
                     onBlur={() => this.validate(this.props.parametersToEvaluate, this.props.value)}
