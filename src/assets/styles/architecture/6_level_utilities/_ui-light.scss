@@ -2884,6 +2884,7 @@
       PivotItem
   */
   .win-pivot-item {
+    height: 100%;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -2911,7 +2912,7 @@
     height: 100%;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    padding: 0px 24px;
+    padding: 0px;
   }
   /*
       Modified styles for when the Pivot is in nosnap mode
