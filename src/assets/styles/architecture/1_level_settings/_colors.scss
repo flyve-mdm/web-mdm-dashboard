@@ -8,6 +8,8 @@ $color-2-secondary:  #507675;
 
 $font-color-primary: black;
 
+$white-color: #FFFFFF;
+
 // Color of signal
 
 $alert: #dd0000;
@@ -15,12 +17,12 @@ $warning: #ffa600;
 $success: #158784;
 $info: #00BCD4;
 
+
 // Colors to delete
 
 $text-detail-color: grey;
 $border-ligth-color: lighten($color-2-primary, 5);
 $app-color: $color-1-primary;
-$white-color: $color-2-primary;
 
 // Colors Split View
 
