@@ -58,6 +58,7 @@ export default class DevicesList extends Component {
 
     handleRefresh = async () => {
         try {
+            this.props.history.push('/app/devices')
             this.setState({
                 isLoading: true,
                 scrolling: false,
