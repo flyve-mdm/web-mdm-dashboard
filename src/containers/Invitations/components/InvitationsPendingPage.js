@@ -68,7 +68,7 @@ class InvitationsPendingPage extends Component {
     render() {
 
         let listComponent = (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+            <ContentPane>
                 <div className="listPane" style={{ padding: 0 }}>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" >Pending Invitation</h2>
@@ -80,7 +80,7 @@ class InvitationsPendingPage extends Component {
 
         if (!this.state.isLoading && this.state.itemList.length > 0) {
             listComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                <ContentPane>
                     <div className="listPane" style={{ padding: 0 }}>
                         <div className="contentHeader">
                             <h2 className="win-h2 titleContentPane" >Pending Invitation</h2>
@@ -100,7 +100,7 @@ class InvitationsPendingPage extends Component {
             )
         } else if (!this.state.isLoading && this.state.itemList.length === 0) {
             listComponent = (
-                <EmptyMessage message="No Logs Available" itemListPaneWidth={this.props.itemListPaneWidth} />
+                <EmptyMessage message="No Logs Available"/>
             )
         }
 
@@ -109,10 +109,7 @@ class InvitationsPendingPage extends Component {
 }
 
 InvitationsPendingPage.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired
+
 }
 
 export default InvitationsPendingPage
