@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import Pluralize from 'pluralize'
 import WinJS from 'winjs'
-import EmptyMessage from '../../components/EmptyMessage'
-import ContentPane from '../../components/ContentPane'
-import Loader from '../../components/Loader'
+import EmptyMessage from '../../../components/EmptyMessage'
+import ContentPane from '../../../components/ContentPane'
+import Loader from '../../../components/Loader'
 
 export default class InvitationsPendingPage extends Component {
 
