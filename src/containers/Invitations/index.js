@@ -3,9 +3,18 @@ import InvitationsList from './components/InvitationsList'
 import InvitationsPage from './components/InvitationsPage'
 import getMode from '../../shared/getMode'
 import glpi from '../../shared/glpiApi'
+import { uiSetNotification } from '../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-export default class Invitations extends Component {
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
 
+class Invitations extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -19,8 +28,6 @@ export default class Invitations extends Component {
     onNavigate = location => this.setState({location})
     changeAction = action => this.setState({action})
     changeSelectionMode = selectionMode => this.setState({selectionMode})
-    showNotification = (title, body) => {
-    }
 
     render() {
 
@@ -36,7 +43,7 @@ export default class Invitations extends Component {
                     selectionMode={this.state.selectionMode}
                     action={this.state.action}
                     changeAction={this.changeAction}
-                    showNotification={this.showNotification} 
+                    setNotification={this.props.actions.uiSetNotification}
                     glpi={glpi} />
             } else {
                 return <InvitationsPage 
@@ -48,7 +55,7 @@ export default class Invitations extends Component {
                     changeSelectionMode={this.changeSelectionMode}
                     action={this.state.action}
                     changeAction={this.changeAction}
-                    showNotification={this.showNotification} 
+                    setNotification={this.props.actions.uiSetNotification}
                     glpi={glpi} />
             }
         } else {
@@ -64,7 +71,7 @@ export default class Invitations extends Component {
                         selectionMode={this.state.selectionMode}
                         action={this.state.action}
                         changeAction={this.changeAction} 
-                        showNotification={this.showNotification} 
+                        setNotification={this.props.actions.uiSetNotification}
                         glpi={glpi}
                     />
                     <InvitationsPage 
@@ -76,7 +83,7 @@ export default class Invitations extends Component {
                         changeSelectionMode={this.changeSelectionMode}
                         action={this.state.action}
                         changeAction={this.changeAction} 
-                        showNotification={this.showNotification} 
+                        setNotification={this.props.actions.uiSetNotification}
                         glpi={glpi}
                     />
                 </div>
@@ -84,3 +91,8 @@ export default class Invitations extends Component {
         }
     }
 }
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Invitations)
