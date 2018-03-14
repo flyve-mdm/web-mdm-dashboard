@@ -347,7 +347,7 @@ class UsersEditOne extends Component {
         }
 
         return (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+            <ContentPane>
                 {componetRender}
             </ContentPane>            
         )
@@ -355,10 +355,6 @@ class UsersEditOne extends Component {
 }
 
 UsersEditOne.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired
 }

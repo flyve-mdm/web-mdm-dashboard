@@ -143,17 +143,13 @@ export default class UsersContent extends Component {
             )
         }
         return (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true}>
+            <ContentPane updateAnimation={true}>
                 { renderComponent }
             </ContentPane>
         ) 
     }
 }
 UsersContent.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     history: PropTypes.object.isRequired,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired
