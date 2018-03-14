@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import IconItemList from '../../../../components/IconItemList'
 import Confirmation from '../../../../components/Confirmation'
 import Loading from '../../../../components/Loading'
+import ContentPane from '../../../../components/ContentPane'
 
 export default class Main extends Component {
 
@@ -140,7 +141,7 @@ export default class Main extends Component {
                 iconComponent = <IconItemList size={72} />
             }
             renderComponent = (
-            <div className="devices">
+            <ContentPane className="devices">
                 <div className="contentHeader">
                     <div className="itemInfo">
                         {iconComponent}
@@ -195,7 +196,7 @@ export default class Main extends Component {
                     message={this.state.data["name"]} 
                     reference={el => this.contentDialog = el} 
                 /> 
-            </div>
+            </ContentPane>
             )
         }
         return renderComponent

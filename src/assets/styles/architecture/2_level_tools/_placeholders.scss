@@ -121,5 +121,28 @@
           margin-top:10px;
       }
     }
+
+    .contentInfo {
+      .detailContent {
+          display: inline-block;
+          vertical-align: top;
+          .title {
+              font-weight: 700;
+              font-size: 15px;
+              display: inline-block;
+              height: 32px;
+              margin: 20px 0;
+              padding: 0 15px;
+              background-color: #158784;
+              color: #FFFFFF;
+              text-align: center;
+              line-height: 32px;
+          }
+      }
+
+      ul {
+          list-style: none;
+      }
+    }
   }
 }
