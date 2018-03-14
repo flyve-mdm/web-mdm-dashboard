@@ -113,18 +113,19 @@ class Devices extends Component {
 
         const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
         let styles = {
-            width: calc100PercentMinus(validWidth)
+            width: calc100PercentMinus(validWidth),
+            height:'100%'
         }
 
         if (this.state.mode === 'small') {
             if (this.state.selectedItems.length === 0  || this.props.history.location.pathname === '/app/devices') {
                 styles.display = 'none'
             } else {
-                styles.display = 'inline-block'
+                styles.display = 'inline-flex'
             }
-
+            
         } else {
-            styles.display = 'inline-block'
+            styles.display = 'inline-flex'
         } 
 
         return styles
@@ -154,7 +155,7 @@ class Devices extends Component {
         )
 
         return (
-            <div className="flex-block --with-scroll --with-content-pane">
+            <div className="flex-block --with-scroll">
                 {renderComponents}
             </div>
         )
