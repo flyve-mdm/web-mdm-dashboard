@@ -52,10 +52,6 @@ export default class DevicesEditItemList extends Component {
   }
 }
 DevicesEditItemList.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     updateItemList: PropTypes.func.isRequired,
     currentItem: PropTypes.object.isRequired
 }

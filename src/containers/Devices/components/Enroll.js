@@ -53,13 +53,11 @@ export default class Enroll extends Component {
         let renderComponent
         if (this.state.isLoading) {
             renderComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
-                    <Loading message="Loading..." />
-                </ContentPane >
+                <Loading message="Loading..." />
             )
         } else {
             renderComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                <ContentPane>
                     <h2 className="win-h2 titleContentPane">
                         Enroll new device
                     </h2>
@@ -90,10 +88,6 @@ export default class Enroll extends Component {
     }
 }
 Enroll.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }

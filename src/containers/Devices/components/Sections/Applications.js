@@ -87,7 +87,7 @@ class Applications extends Component {
     render() {
 
         let listComponent = (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+            <ContentPane>
                 <div className="listPane" style={{ padding: 0 }}>
                     <Loader type="content"/>
                 </div>
@@ -112,7 +112,7 @@ class Applications extends Component {
 
         if (!this.state.isLoading && this.state.itemList.length > 0) {
             listComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                <ContentPane>
                     <div className="listPane" style={{ padding: 0 }}>
                         <ReactWinJS.ListView
                             ref={(listView) => { this.listView = listView }}
@@ -129,7 +129,7 @@ class Applications extends Component {
             )
         } else if (!this.state.isLoading && this.state.itemList.length === 0) {
             listComponent = (
-                <EmptyMessage message="No Applications Available" itemListPaneWidth={this.props.itemListPaneWidth} />
+                <EmptyMessage message="No Applications Available" />
             )
         }
 

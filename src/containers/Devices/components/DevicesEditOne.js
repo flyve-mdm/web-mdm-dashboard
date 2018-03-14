@@ -98,7 +98,7 @@ export default class DevicesEditOne extends Component {
     
     render() {
         const componetRender = (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+            <ContentPane>
                 <Loading message="Loading..." />
             </ContentPane>
         ) 
@@ -114,7 +114,7 @@ export default class DevicesEditOne extends Component {
 
             if(agent && !this.state.isLoading) {
                 return (
-                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth}>
+                    <ContentPane>
                         <div className="contentHeader">
                             <button className="btn --primary" onClick={this.handleSaveOneDevices}>
                                 Save
@@ -131,10 +131,6 @@ export default class DevicesEditOne extends Component {
     }
 }
 DevicesEditOne.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
     changeAction: PropTypes.func.isRequired,
