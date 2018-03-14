@@ -297,7 +297,7 @@ export default class InvitationsList extends Component {
         }
 
         return (
-            <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+            <React.Fragment>
                 <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
                         key="sort"
@@ -337,15 +337,11 @@ export default class InvitationsList extends Component {
 
                 { listComponent }
                 <Confirmation title="Delete Invitations" message={`${this.state.selectedItems.length} Invitations`} reference={el => this.contentDialog = el} /> 
-            </div>
+            </React.Fragment>
         )
     }
 }
 InvitationsList.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
