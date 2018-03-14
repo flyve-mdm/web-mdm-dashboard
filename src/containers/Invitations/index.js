@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import InvitationsList from './InvitationsList'
-import InvitationsPage from './InvitationsPage'
+import InvitationsList from './components/InvitationsList'
+import InvitationsPage from './components/InvitationsPage'
 import getMode from '../../shared/getMode'
 import glpi from '../../shared/glpiApi'
 

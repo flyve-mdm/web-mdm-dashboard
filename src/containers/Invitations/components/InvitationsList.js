@@ -2,10 +2,10 @@ import React, { Component } from "react"
 import ReactWinJS from 'react-winjs'
 import InvitationsItemList from './InvitationsItemList'
 import PropTypes from 'prop-types'
-import BuildItemList from '../../components/BuildItemList'
+import BuildItemList from '../../../components/BuildItemList'
 import WinJS from 'winjs'
-import Loader from '../../components/Loader'
-import Confirmation from '../../components/Confirmation'
+import Loader from '../../../components/Loader'
+import Confirmation from '../../../components/Confirmation'
 
 export default class InvitationsList extends Component {
 

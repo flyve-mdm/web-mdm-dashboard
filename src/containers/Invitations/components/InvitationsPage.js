@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import InvitationsPendingPage from './InvitationsPendingPage'
-import Enroll from '../Devices/components/Enroll'
-import EmptyMessage from '../../components/EmptyMessage'
+import Enroll from '../../Devices/components/Enroll'
+import EmptyMessage from '../../../components/EmptyMessage'
 
 export default class InvitationsPage extends Component {
 
