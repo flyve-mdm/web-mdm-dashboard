@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import WinJS from 'winjs'
-import calc100PercentMinus from '../../shared/calc100PercentMinus';
 
 class ContentPane extends Component {
 
@@ -27,18 +26,17 @@ class ContentPane extends Component {
 
   render() {
     return (
-      <div id="content-pane-block" className="content-pane-block" style={{ width: calc100PercentMinus(this.props.itemListPaneWidth) }}>
+      <div className="content-pane">
+        <div id="content-pane-block" className="content-pane-block">
         { this.props.children }
+        </div>
       </div>
+      
     )
   }
 }
 
 ContentPane.propTypes = {
-  itemListPaneWidth: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired,
   updateAnimation: PropTypes.bool,
 }
 
