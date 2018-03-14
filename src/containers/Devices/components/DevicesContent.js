@@ -23,7 +23,7 @@ export default class DevicesContent extends Component {
 
     render() {
         return (
-            <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true} >
+            <ContentPane updateAnimation={false} >
                 <ReactWinJS.Pivot>
                     <ReactWinJS.Pivot.Item key="main" header="Main">
 
@@ -49,7 +49,6 @@ export default class DevicesContent extends Component {
                     <ReactWinJS.Pivot.Item key="applications" header="Applications">
                         
                         <Applications 
-                            itemListPaneWidth={this.props.itemListPaneWidth}
                             id={this.state.id}
                             glpi={this.props.glpi}
                         />
@@ -81,10 +80,6 @@ export default class DevicesContent extends Component {
     }
 }
 DevicesContent.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
