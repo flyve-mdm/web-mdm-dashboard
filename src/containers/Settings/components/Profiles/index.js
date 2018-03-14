@@ -83,7 +83,7 @@ class Profiles extends Component {
                 category: {
                     value: myUser.usercategories_id,
                     request: {
-                        params: ['UserCategory', null, null, {range: '0-200', forcedisplay: [2]}],
+                        params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
                         content: '1',
                         value: '2'
@@ -92,7 +92,7 @@ class Profiles extends Component {
                 defaultEntity:  {
                     value: myUser.entities_id,
                     request: {
-                        params: [],
+                        params: {},
                         method: 'getMyEntities',
                         content: 'name',
                         value: 'id'
@@ -103,7 +103,7 @@ class Profiles extends Component {
                 title: {
                     value: myUser.usertitles_id,
                     request: {
-                        params: ['UserTitle', null, null, {range: '0-200', forcedisplay: [2]}],
+                        params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
                         content: '1',
                         value: '2'
@@ -112,7 +112,7 @@ class Profiles extends Component {
                 location: {
                     value: myUser.locations_id,
                     request: {
-                        params: ['Location', null, null, {range: '0-200', forcedisplay: [2]}],
+                        params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
                         content: '1',
                         value: '2'
@@ -121,7 +121,7 @@ class Profiles extends Component {
                 defaultProfile: {
                     value: myUser.profiles_id,
                     request: {
-                        params: [],
+                        params: {},
                         method: 'getMyProfiles',
                         content: 'name',
                         value: 'id'
