@@ -3,27 +3,14 @@ import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import UsersList from './components/UsersList'
-import {
-    uiTransactionStart,
-    uiTransactionFinish,
-    uiSetNotification
-} from '../../store/ui/actions'
+import { uiSetNotification } from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 
-function mapStateToProps(state, props) {
-    return {
-        isLoading: state.ui.loading,
-        currentUser: state.auth.currentUser
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     const actions = {
-        uiTransactionStart: bindActionCreators(uiTransactionStart, dispatch),
-        uiTransactionFinish: bindActionCreators(uiTransactionFinish, dispatch),
         setNotification: bindActionCreators(uiSetNotification, dispatch)
     }
     return { actions }
@@ -161,6 +148,6 @@ class Users extends Component {
     }
 }
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(withGLPI(Users))

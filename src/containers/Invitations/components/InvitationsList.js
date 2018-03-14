@@ -149,7 +149,11 @@ export default class InvitationsList extends Component {
 
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmInvitation', input: itemListToDelete, queryString: { force_purge: true } })
 
-                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: 'Elements successfully removed',
+                    type: 'success'
+                })
                 this.props.changeAction(null)
                 this.props.changeSelectionMode(false)
                 this.setState({
@@ -168,7 +172,11 @@ export default class InvitationsList extends Component {
 
         } catch (error) {
             if (error.length > 1) {
-                this.props.showNotification(error[0], error[1])
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             }
             this.props.changeAction(null)
             this.props.changeSelectionMode(false)
@@ -209,11 +217,11 @@ export default class InvitationsList extends Component {
     }
 
     handleResendEmail = () => {
-        if (this.state.selectedItemList.length > 1) {
-            this.props.showNotification('Success', 'invitations sent')                        
-        } else {
-            this.props.showNotification('Success', 'invitation sent')         
-        }          
+        this.props.setNotification({
+            title: 'Successfully',
+            body: 'Invitations sent',
+            type: 'success'
+        })       
         this.handleToggleSelectionMode()
     }
 
@@ -360,6 +368,6 @@ InvitationsList.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }

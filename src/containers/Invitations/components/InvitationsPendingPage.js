@@ -111,6 +111,5 @@ InvitationsPendingPage.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     location: PropTypes.array.isRequired,
     selectedItemList: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    onNavigate: PropTypes.func.isRequired
 }
