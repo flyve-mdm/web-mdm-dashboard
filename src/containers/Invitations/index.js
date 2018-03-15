@@ -57,6 +57,12 @@ class Invitations extends Component {
         window.removeEventListener('resize', this.handleResize)
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(this.props.history.location.pathname === '/app/invitations' && this.state.selectedItems.length > 0) {
+            this.changeSelectedItems([])
+        }
+    }
+
     propsData = () => {
         return {
             changeSelectionMode: this.changeSelectionMode,
@@ -82,10 +88,13 @@ class Invitations extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if (this.state.selectedItems.length === 0  || this.props.history.location.pathname === '/app/devices') {
-                styles.display = 'inline-block'
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/invitations' )  || 
+                this.props.history.location.pathname === '/app/invitations' || 
+                (this.props.history.location.pathname === '/app/invitations' &&
+                 this.state.selectionMode )) {
+                     styles.display = 'inline-block'
             } else {
-                styles.display = 'none'
+                  styles.display = 'none'
             }
 
         } else {
@@ -104,8 +113,11 @@ class Invitations extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if (this.state.selectedItems.length === 0  || this.props.history.location.pathname === '/app/devices') {
-                styles.display = 'none'
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/invitations' )  || 
+                this.props.history.location.pathname === '/app/invitations' || 
+                (this.props.history.location.pathname === '/app/invitations' &&
+                 this.state.selectionMode )) {
+                     styles.display = 'none'
             } else {
                 styles.display = 'inline-flex'
             }
