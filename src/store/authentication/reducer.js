@@ -28,6 +28,9 @@ const authFail = (state, action) => {
 }
 
 const authLogout = (state, action) => {
+  
+  localStorage.clear()
+
   return updateObject(state, {
     id: null,
     username: null,

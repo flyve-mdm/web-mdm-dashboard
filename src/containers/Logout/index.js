@@ -9,12 +9,12 @@ function mapDispatchToProps(dispatch) {
     logout: bindActionCreators(authLogout, dispatch)
   }
   return { actions }
-};
+}
 
 
 class Logout extends Component {
-  componentDidMount () {
-    this.props.onLogout();
+  componentWillMount () {
+    this.props.actions.logout()
   }
 
   render() { 
@@ -22,4 +22,4 @@ class Logout extends Component {
   }
 }
  
-export default connect(null, mapDispatchToProps)(Logout);
+export default connect(null, mapDispatchToProps)(Logout)
