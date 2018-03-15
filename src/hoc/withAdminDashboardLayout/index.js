@@ -79,6 +79,7 @@ const withAdminDashboardLayout = WrappedComponent => {
               handleSetTimeOut={this.handleSetTimeOut}
               handleToggleExpand={this.handleToggleExpand}
               mode={this.state.mode}
+              history={this.props.history}
             />
             <WrappedComponent {...this.props} mode={this.state.mode} />
           </div>
