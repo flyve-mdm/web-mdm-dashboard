@@ -39,7 +39,7 @@ const routes = [
   {
     path: '/logout',
     component: asyncLogout,
-    exact: false,
+    exact: true,
     private: false
   }
 ]
