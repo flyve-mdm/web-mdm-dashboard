@@ -109,7 +109,8 @@ class InvitationsPendingPage extends Component {
 }
 
 InvitationsPendingPage.propTypes = {
-
+    history: PropTypes.object.isRequired,
+    glpi: PropTypes.object.isRequired
 }
 
 export default InvitationsPendingPage
