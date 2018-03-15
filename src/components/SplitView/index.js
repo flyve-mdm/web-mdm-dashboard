@@ -60,7 +60,7 @@ class SplitView extends React.Component {
                       <IconWithPopper
                         to={'/app/users'}
                         iconName='peopleIcon'
-                        title='Contacts'
+                        title='Users'
                         disabled={this.props.expanded}/>  
                       <IconWithPopper
                         to={'/app/search'}
@@ -95,19 +95,19 @@ class SplitView extends React.Component {
                       this.props.contract && '--closing'
                     }`}>
                     <section className="splitview-wrapped-navbar-wrapped-top__section --description">
-                      <SpanWithPopper description='Dashboard' />
-                      <SpanWithPopper description='Devices' />
-                      <SpanWithPopper description='Invitations' />
-                      <SpanWithPopper description='Fleets' />
-                      <SpanWithPopper description='Files' />
-                      <SpanWithPopper description='Applications' />
-                      <SpanWithPopper description='Contact' />
-                      <SpanWithPopper description='Search' />
+                      <SpanWithPopper description='Dashboard' to="/app" />
+                      <SpanWithPopper description='Devices' to="/app/devices" />
+                      <SpanWithPopper description='Invitations' to="/app/invitations" />
+                      <SpanWithPopper description='Fleets' to="/app/fleets" />
+                      <SpanWithPopper description='Files' to="/app/files" />
+                      <SpanWithPopper description='Applications' to="/app/applications" />
+                      <SpanWithPopper description='Users' to="/app/users" />
+                      <SpanWithPopper description='Search' to="/app/search" />
                     </section>
                     <section className="splitview-wrapped-navbar-wrapped-bottom__section --description">
-                      <SpanWithPopper description='Setting of Flyve MDM ' />
-                      <SpanWithPopper description='About of Flyve MDM' />
-                      <SpanWithPopper description='Logout' />
+                      <SpanWithPopper description='Setting of Flyve MDM ' to="/app/settings" />
+                      <SpanWithPopper description='About of Flyve MDM' to="/app/about" />
+                      <SpanWithPopper description='Logout' click={() => 0} />
                     </section>
                   </div>
                 </ScrollSyncPane>

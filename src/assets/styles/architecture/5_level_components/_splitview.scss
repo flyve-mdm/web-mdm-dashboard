@@ -38,6 +38,10 @@ $color-fonts-hover: $splitview-color-fonts-hover;
 .splitview-block {
   display: inline-block;
 
+  div {
+    white-space: nowrap;
+  }
+
   .splitview-wrapper__div {
     height: $splitview-height;
     transition: height 0.25s ease-in-out;
