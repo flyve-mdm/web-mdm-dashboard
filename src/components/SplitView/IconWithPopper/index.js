@@ -23,10 +23,6 @@ class iconWithPopper extends Component {
     }
   }
 }
- 
-iconWithPopper.defaultProps = {
-  alt: ""
-}
 
 iconWithPopper.propTypes = {
   to: PropTypes.string,

@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-const spanWithPopper = ({description}) => (
-  <div>
-    <span>
-      { description }
-    </span>
-  </div>
-)
+class spanWithPopper extends Component {
+  render () {
+    return (
+      <div>
+        <span>
+          { this.props.description }
+        </span>
+      </div>
+    )
+  }
+}
  
-export default spanWithPopper;
+spanWithPopper.propTypes = {
+  description: PropTypes.string.isRequired
+}
+
+export default spanWithPopper
