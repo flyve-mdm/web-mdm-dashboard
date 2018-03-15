@@ -13,7 +13,6 @@ export default class InvitationsList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItems: [],
             scrolling: false,
             isLoading: true,
             itemList: new WinJS.Binding.List([]),
@@ -42,7 +41,6 @@ export default class InvitationsList extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({ selectedItems: [] })
         this.props.changeSelectionMode(false)
     }
 
@@ -60,31 +58,29 @@ export default class InvitationsList extends Component {
 
     handleToggleSelectionMode = () => {
         this.props.history.push('/app/invitations')
-        this.props.changeSelectionMode(!this.props.selectionMode)     
+        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.props.changeSelectedItems([])
         this.listView.winControl.selection.clear()
-        this.setState((prevState, props) => ({
-            selectedItems: []
-        }))
     }
 
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        let selectedItems = []
+        let itemSelected = []
 
         for (const item of index) {
-            selectedItems.push(this.state.itemList.getItem(item).data)
+            itemSelected.push(this.state.itemList.getItem(item).data)
         }
+        this.props.changeSelectedItems(itemSelected)
 
-        this.setState({ selectedItems }, () => {
-            if (index.length === 1 && !this.props.selectionMode) {
-                this.props.history.push(`/app/invitations/${selectedItems[0]["PluginFlyvemdmInvitation.id"]}`)
-            }
-        })
+        if (index.length === 1 && !this.props.selectionMode) {
+            this.props.history.push(`/app/invitations/${itemSelected[0]["PluginFlyvemdmInvitation.id"]}`)
+        }
     }
 
     handleRefresh = () => {
         try {
+            this.props.history.push('/app/invitations')
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -100,6 +96,7 @@ export default class InvitationsList extends Component {
                     order: response.order,
                     itemList: BuildItemList(response)
                 })
+                this.props.changeSelectedItems([])
             })
         } catch (e) {
             this.setState({
@@ -114,7 +111,7 @@ export default class InvitationsList extends Component {
             const isOK = await Confirmation.isOK(this.contentDialog)
             if (isOK) {
 
-                let itemListToDelete = this.state.selectedItems.map((item) => {
+                let itemListToDelete = this.props.selectedItems.map((item) => {
                     return {
                         id: item["PluginFlyvemdmInvitation.id"]
                     }
@@ -128,20 +125,19 @@ export default class InvitationsList extends Component {
                         body: 'Elements successfully removed',
                         type: 'success'
                     })
-                    
-                    this.props.changeAction('reload')
                     this.props.changeSelectionMode(false)
+                    this.props.changeSelectedItems([])
+                    this.props.changeAction('reload')
+
                     this.setState((prevState, props) => ({
-                        selectedItems: []
+                        isLoading: false
                     }))
                 })
 
             } else {
                 // Exit selection mode
                 this.props.changeSelectionMode(false)
-                this.setState((prevState, props) => ({
-                    selectedItems: []
-                }))
+                this.props.changeSelectedItems([])
 
                 this.listView.winControl.selection.clear()
             }
@@ -157,9 +153,9 @@ export default class InvitationsList extends Component {
             }
 
             this.props.changeSelectionMode(false)
+            this.props.changeSelectedItems([])
 
             this.setState((prevState, props) => ({
-                selectedItems: [],
                 isLoading: false
             }))
         }
@@ -257,7 +253,7 @@ export default class InvitationsList extends Component {
                 icon="delete"
                 label="Delete"
                 priority={0}
-                disabled={this.state.selectedItems.length === 0}
+                disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleDelete}
             />
         )
@@ -268,7 +264,7 @@ export default class InvitationsList extends Component {
                 icon="mail"
                 label="Resend Email"
                 priority={0}
-                disabled={this.state.selectedItems.length === 0}
+                disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleResendEmail}
             />
         )
@@ -336,7 +332,7 @@ export default class InvitationsList extends Component {
                 </ReactWinJS.ToolBar>
 
                 { listComponent }
-                <Confirmation title="Delete Invitations" message={`${this.state.selectedItems.length} Invitations`} reference={el => this.contentDialog = el} /> 
+                <Confirmation title="Delete Invitations" message={`${this.props.selectedItems.length} Invitations`} reference={el => this.contentDialog = el} /> 
             </React.Fragment>
         )
     }
