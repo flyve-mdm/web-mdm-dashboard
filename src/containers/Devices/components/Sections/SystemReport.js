@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Inventory from './Inventory'
 import Loader from '../../../../components/Loader'
 
-class SystemReport extends Component {
+export default class SystemReport extends Component {
 
     constructor(props) {
         super(props)
@@ -78,7 +78,6 @@ class SystemReport extends Component {
                         </div>
 
                         <Inventory 
-                            selectedItems={this.props.selectedItems}
                             title='Fleet'
                             itemType='PluginFlyvemdmFleet'
                             itemID={this.state.data['plugin_flyvemdm_fleets_id']}
@@ -87,7 +86,6 @@ class SystemReport extends Component {
                         />
 
                         <Inventory
-                            selectedItems={this.props.selectedItems}
                             title='Device'
                             itemType='Computer'
                             itemID={this.state.data['computers_id']}
@@ -117,11 +115,8 @@ class SystemReport extends Component {
         }
     }
 }
-
 SystemReport.propTypes = {
     id: PropTypes.string.isRequired,
     glpi: PropTypes.object.isRequired,
     setNotification: PropTypes.func.isRequired
 }
-
-export default SystemReport

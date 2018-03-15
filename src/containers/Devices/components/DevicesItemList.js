@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import IconItemList from '../../../components/IconItemList'
 
 export default class DevicesItemList extends Component {
@@ -24,4 +25,8 @@ export default class DevicesItemList extends Component {
             </div>
         )
     }
+}
+DevicesItemList.propTypes = {
+    itemList: PropTypes.object.isRequired,
+    size: PropTypes.number.isRequired
 }

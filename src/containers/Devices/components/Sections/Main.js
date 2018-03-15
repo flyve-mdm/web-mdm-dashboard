@@ -203,9 +203,10 @@ export default class Main extends Component {
     }
 }
 Main.propTypes = {
+    id: PropTypes.string.isRequired,
     changeAction: PropTypes.func.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    glpi: PropTypes.object.isRequired,
-    id: PropTypes.string.isRequired
+    glpi: PropTypes.object.isRequired
 }

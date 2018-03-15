@@ -135,6 +135,5 @@ DevicesEditOne.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
     glpi: PropTypes.object.isRequired
 }

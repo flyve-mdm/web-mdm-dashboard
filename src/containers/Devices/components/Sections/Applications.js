@@ -6,7 +6,7 @@ import EmptyMessage from '../../../../components/EmptyMessage'
 import ContentPane from '../../../../components/ContentPane'
 import Loader from '../../../../components/Loader'
 
-class Applications extends Component {
+export default class Applications extends Component {
 
     constructor(props) {
         super(props)
@@ -130,10 +130,7 @@ class Applications extends Component {
         return listComponent
     }
 }
-
 Applications.propTypes = {
     id: PropTypes.string.isRequired,
     glpi: PropTypes.object.isRequired
 }
-
-export default Applications
