@@ -3,27 +3,14 @@ import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import DevicesList from './components/DevicesList'
-import {
-    uiTransactionStart,
-    uiTransactionFinish,
-    uiSetNotification
-} from '../../store/ui/actions'
+import { uiSetNotification } from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 
-function mapStateToProps(state, props) {
-    return {
-        isLoading: state.ui.loading,
-        currentUser: state.auth.currentUser
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     const actions = {
-        uiTransactionStart: bindActionCreators(uiTransactionStart, dispatch),
-        uiTransactionFinish: bindActionCreators(uiTransactionFinish, dispatch),
         setNotification: bindActionCreators(uiSetNotification, dispatch)
     }
     return { actions }
@@ -34,7 +21,6 @@ class Devices extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            location: ['Files'],
             mode: getMode(),
             itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
             selectionMode: false,
@@ -71,6 +57,12 @@ class Devices extends Component {
         window.removeEventListener('resize', this.handleResize)
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(this.props.history.location.pathname === '/app/devices' && this.state.selectedItems.length > 0) {
+            this.changeSelectedItems([])
+        }
+    }
+
     propsData = () => {
         return {
             changeSelectionMode: this.changeSelectionMode,
@@ -96,10 +88,13 @@ class Devices extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if (this.state.selectedItems.length === 0  || this.props.history.location.pathname === '/app/devices') {
-                styles.display = 'inline-block'
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/devices' )  || 
+                this.props.history.location.pathname === '/app/devices' || 
+                (this.props.history.location.pathname === '/app/devices' &&
+                 this.state.selectionMode )) {
+                     styles.display = 'inline-block'
             } else {
-                styles.display = 'none'
+                  styles.display = 'none'
             }
 
         } else {
@@ -118,8 +113,11 @@ class Devices extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if (this.state.selectedItems.length === 0  || this.props.history.location.pathname === '/app/devices') {
-                styles.display = 'none'
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/devices' )  || 
+                this.props.history.location.pathname === '/app/devices' || 
+                (this.props.history.location.pathname === '/app/devices' &&
+                 this.state.selectionMode )) {
+                     styles.display = 'none'
             } else {
                 styles.display = 'inline-flex'
             }
@@ -162,6 +160,6 @@ class Devices extends Component {
     }
 }
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(withGLPI(Devices))

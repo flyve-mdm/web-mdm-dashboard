@@ -38,6 +38,12 @@ export default class DevicesList extends Component {
             this.handleRefresh()
             this.props.changeAction(null)
         }
+
+        if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
+            if(this.listView) {
+                this.listView.winControl.selection.clear()
+            }
+        }
     }
 
     componentWillUnmount() {
