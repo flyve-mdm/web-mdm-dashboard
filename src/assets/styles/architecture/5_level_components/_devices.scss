@@ -73,7 +73,7 @@
             font-size: 15px;
             display: inline-block;
             height: 32px;
-            margin: 20px 0;
+            margin: 20px;
             padding: 0 15px;
             background-color: #158784;
             color: #FFFFFF;
@@ -82,20 +82,17 @@
         }
 
         .list-content {
-            padding: 5px 0 5px 30px;
+            padding: 5px 5px 5px 30px;
             
             .list-col:first-child {
                 padding: 0;
-                width: 200px;
+                width: 30%;
                 vertical-align: top;
                 color: black;
             }
             .list-col {
                 display: inline-block;
-                margin-right: 10px;
-                width: -webkit-calc(100% - 230px);
-                width:    -moz-calc(100% - 230px);
-                width:         calc(100% - 230px);
+                width: 70%;
                 overflow: auto;
                 font-weight: 400;
                 color: $text-detail-color;
@@ -103,7 +100,6 @@
 
             @media screen and (max-width: 772px) {
                 .list-col {
-                    padding: 10px 0 0 5px;
                     display: block !important; 
                     width: 100% !important;
                 }
