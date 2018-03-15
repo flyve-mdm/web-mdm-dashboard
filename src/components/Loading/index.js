@@ -25,6 +25,7 @@ const Loading = props => {
                 marginTop: - headerSize,
                 display: 'flex',
                 height: '100%',
+                width: '100%',
                 justifyContent: 'center',
                 textAlign: 'center',
                 alignItems: 'center',
