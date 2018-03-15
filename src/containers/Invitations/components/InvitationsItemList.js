@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class InvitationsItemList extends Component {
     render() {
@@ -9,4 +10,7 @@ export default class InvitationsItemList extends Component {
             </div>
         )
     }
+}
+InvitationsItemList.propTypes = {
+    itemList: PropTypes.object.isRequired
 }

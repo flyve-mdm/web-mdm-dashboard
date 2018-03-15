@@ -1,7 +1,7 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import InvitationsItemList from './InvitationsItemList'
-import PropTypes from 'prop-types'
 import BuildItemList from '../../../components/BuildItemList'
 import WinJS from 'winjs'
 import Loader from '../../../components/Loader'
@@ -345,6 +345,7 @@ export default class InvitationsList extends Component {
 }
 InvitationsList.propTypes = {
     selectionMode: PropTypes.bool.isRequired,
+    history: PropTypes.object.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
