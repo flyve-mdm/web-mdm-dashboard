@@ -86,13 +86,7 @@ class Applications extends Component {
 
     render() {
 
-        let listComponent = (
-            <ContentPane>
-                <div className="listPane" style={{ padding: 0 }}>
-                    <Loader type="content"/>
-                </div>
-            </ContentPane>
-        )
+        let listComponent = (<div style={{padding:'20px'}}><Loader type="content"/></div>)
 
         const stylesHeader = {
             boxSizing: 'border-box',
