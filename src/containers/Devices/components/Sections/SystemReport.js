@@ -50,7 +50,7 @@ class SystemReport extends Component {
 
     render() {
         if (this.state.isLoading && !this.state.data) {
-            return (<Loader type="content"/>)
+            return (<div style={{padding:'20px'}}><Loader type="content"/></div>)
         } else if (!this.state.isLoading && this.state.data){
             return (
                 <div className="devices">

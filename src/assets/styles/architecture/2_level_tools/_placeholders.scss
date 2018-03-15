@@ -78,6 +78,7 @@
     height: 100%;
 
     .contentHeader {
+      line-height: 1.5;
       .name {
           font-size: 24px;
           line-height: 28px;
@@ -89,10 +90,6 @@
           display: flex;
 
           .contentStatus {
-              width: 240px;
-              margin-left:20px;
-              margin-top:10px;
-
               .message {
                   font-size: 15px;
                   line-height: 20px;
@@ -117,8 +114,7 @@
           border-radius: 100px;
           -webkit-border-radius: 100px;
           -moz-border-radius: 100px;
-          margin-left: 25px;
-          margin-top:10px;
+          margin: 15px;
       }
     }
 
@@ -131,7 +127,7 @@
               font-size: 15px;
               display: inline-block;
               height: 32px;
-              margin: 20px 0;
+              margin: 15px 0;
               padding: 0 15px;
               background-color: #158784;
               color: #FFFFFF;
@@ -142,6 +138,11 @@
 
       ul {
           list-style: none;
+          -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        -webkit-padding-start: 20px;
       }
     }
   }
