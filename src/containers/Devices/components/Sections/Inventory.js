@@ -72,6 +72,7 @@ export default class Inventory extends Component {
 Inventory.propTypes = {
     title: PropTypes.string.isRequired,
     itemType: PropTypes.string.isRequired,
+    itemID: PropTypes.number.isRequired,
     fields: PropTypes.object.isRequired,
     parameters: PropTypes.object,
     glpi: PropTypes.object.isRequired

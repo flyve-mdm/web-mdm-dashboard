@@ -57,8 +57,6 @@ export default class DevicesContent extends Component {
                     <ReactWinJS.Pivot.Item key="geolocation" header="Geolocation">
                         <Geolocation 
                             id={this.state.id}
-                            changeAction={this.props.changeAction}
-                            changeSelectionMode={this.props.changeSelectionMode}
                             setNotification={this.props.setNotification}
                             glpi={this.props.glpi}
                         />
@@ -80,7 +78,7 @@ export default class DevicesContent extends Component {
     }
 }
 DevicesContent.propTypes = {
-    action: PropTypes.string,
+    changeSelectionMode: PropTypes.func.isRequired,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,

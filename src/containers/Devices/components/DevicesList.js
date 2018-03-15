@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
@@ -341,6 +341,9 @@ export default class DevicesList extends Component {
     }
 }
 DevicesList.propTypes = {
+    selectionMode: PropTypes.bool.isRequired,
+    history: PropTypes.object.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,

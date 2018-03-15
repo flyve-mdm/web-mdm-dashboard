@@ -111,9 +111,7 @@ export default class DevicesEdit extends Component {
 }
 DevicesEdit.propTypes = {
     selectedItems: PropTypes.array,
-    selectedIndex: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
-    action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
