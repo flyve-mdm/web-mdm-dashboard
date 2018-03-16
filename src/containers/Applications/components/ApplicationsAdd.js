@@ -118,7 +118,7 @@ export default class ApplicationsAdd extends Component {
                             Drop the file here or click to upload
                         </FilesUpload>
                         <div style={{ margin: '10px' }}>
-                            <button className="win-button win-button-primary" onClick={this.filesUpload}>Save</button>
+                            <button className="btn --primary" onClick={this.filesUpload}>Save</button>
                             {
                                 this.state.files.length > 0
                                     ? <div>
@@ -137,7 +137,6 @@ export default class ApplicationsAdd extends Component {
     }
 }
 ApplicationsAdd.propTypes = {
-    location: PropTypes.array.isRequired,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
