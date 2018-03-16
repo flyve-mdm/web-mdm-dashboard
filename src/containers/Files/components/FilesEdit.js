@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FilesEditItemList from './FilesEditItemList'
-import EmptyMessage from '../../components/EmptyMessage'
-import ContentPane from '../../components/ContentPane'
-import Loading from '../../components/Loading'
+import EmptyMessage from '../../../components/EmptyMessage'
+import ContentPane from '../../../components/ContentPane'
+import Loading from '../../../components/Loading'
 
 export default class FilesEdit extends Component {
 

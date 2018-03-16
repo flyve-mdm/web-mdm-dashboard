@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import FilesContent from './FilesContent'
 import FilesAdd from './FilesAdd'
 import FilesEdit from './FilesEdit'
-import EmptyMessage from '../../components/EmptyMessage'
+import EmptyMessage from '../../../components/EmptyMessage'
 
 export default class FilesPage extends Component {
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import BytesToSize from '../../shared/bytesToSize'
+import bytesToSize from '../../../shared/bytesToSize'
 
 export default class FilesUpload extends Component {
     
@@ -39,7 +39,7 @@ export default class FilesUpload extends Component {
             // Tell file it's own size
             file.filesize = file.size
             // Tell file it's own readable size
-            file.sizeReadable = BytesToSize(file.size)
+            file.sizeReadable = bytesToSize(file.size)
             // Add preview, either image or file extension
             
             if (file.type && this.mimeTypeLeft(file.type) === 'image') {

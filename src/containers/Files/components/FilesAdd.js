@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FilesUpload from './FilesUpload'
 import FilesUploadItemList from './FilesUploadItemList'
-import ContentPane from '../../components/ContentPane'
-import Loading from '../../components/Loading'
+import ContentPane from '../../../components/ContentPane'
+import Loading from '../../../components/Loading'
 
 export default class FilesAdd extends Component {
 
