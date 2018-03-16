@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # Install jq for json parse
-sudo apt-get install jq
-sudo apt-get install python-pip
+
+apt-get -y update
+apt-get -y install jq
+apt-get -y install python-pip
 npm rebuild node-sass
 yarn cache clean
 yarn global add jsdoc
