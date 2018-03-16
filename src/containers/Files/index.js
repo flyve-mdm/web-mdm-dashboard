@@ -1,86 +1,61 @@
 import React, { Component } from 'react'
-import FilesList from './FilesList'
-import FilesPage from './FilesPage'
-import getMode from '../../shared/getMode'
-import glpi from '../../shared/glpiApi'
+import FilesList from './components/FilesList'
+import { uiSetNotification } from '../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import withGLPI from '../../hoc/withGLPI'
+import GenerateRoutes from '../../components/GenerateRoutes'
+import routes from './routes'
 
-export default class Files extends Component {
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
 
+class Files extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            location: ['Files'],
             selectionMode: false,
             action: null,
-            animation: false,
+            selectedItems: []
         }
     }
 
-    onNavigate = location => this.setState({location})
-    changeAction = action => this.setState({action})
-    changeSelectionMode = selectionMode => this.setState({selectionMode})
-    showNotification = (title, body) => {
+    changeSelectedItems = selectedItems => this.setState({ selectedItems })
+    changeAction = action => this.setState({ action })
+    changeSelectionMode = selectionMode => this.setState({ selectionMode })
+
+    propsData = () => {
+        return {
+            itemListPaneWidth: 320,
+            selectedItems: this.state.selectedItems,
+            changeSelectedItems: this.changeSelectedItems,
+            changeSelectionMode: this.changeSelectionMode,
+            changeAction: this.changeAction,
+            setNotification: this.props.actions.setNotification,
+            selectionMode: this.state.selectionMode,
+            action: this.state.action,
+            history: this.props.history,
+            glpi: this.props.glpi
+        }
     }
 
     render() {
-
-        let selectedItemList = this.state.location.length === 2 ? this.state.location[1] : null
-        if (getMode() === 'small') {
-            if (!selectedItemList && !this.state.action) {
-                return <FilesList
-                    itemListPaneWidth={'100%'}
-                    animation={this.state.animation}
-                    location={this.state.location}
-                    onNavigate={this.onNavigate}
-                    changeSelectionMode={this.changeSelectionMode}
-                    selectionMode={this.state.selectionMode}
-                    action={this.state.action}
-                    changeAction={this.changeAction}
-                    showNotification={this.showNotification} 
-                    glpi={glpi} />
-            } else {
-                return <FilesPage 
-                    itemListPaneWidth={0}
-                    animation={this.state.animation}
-                    location={this.state.location}
-                    onNavigate={this.onNavigate}
-                    selectedItemList={selectedItemList}
-                    changeSelectionMode={this.changeSelectionMode}
-                    action={this.state.action}
-                    changeAction={this.changeAction}
-                    showNotification={this.showNotification} 
-                    glpi={glpi} />
-            }
-        } else {
-            let itemListPaneWidth = 320
-            return (
-                <div className="flex-block --with-scroll --with-content-pane">
-                    <FilesList
-                        itemListPaneWidth={itemListPaneWidth}
-                        animation={this.state.animation}
-                        location={this.state.location}
-                        onNavigate={this.onNavigate}
-                        changeSelectionMode={this.changeSelectionMode}
-                        selectionMode={this.state.selectionMode}
-                        action={this.state.action}
-                        changeAction={this.changeAction} 
-                        showNotification={this.showNotification} 
-                        glpi={glpi}
-                    />
-                    <FilesPage 
-                        itemListPaneWidth={itemListPaneWidth}
-                        animation={this.state.animation}
-                        location={this.state.location}
-                        onNavigate={this.onNavigate}
-                        selectedItemList={selectedItemList}
-                        changeSelectionMode={this.changeSelectionMode}
-                        action={this.state.action}
-                        changeAction={this.changeAction} 
-                        showNotification={this.showNotification} 
-                        glpi={glpi}
-                    />
-                </div>
-            )
-        }
+        return (
+            <div className="flex-block --with-scroll --with-content-pane">
+                <FilesList
+                    {...this.propsData()}
+                />
+                <GenerateRoutes routes={routes} rootPath={this.props.match.url} data={{ ...this.propsData() }} />
+            </div>
+        )
     }
 }
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(withGLPI(Files))
