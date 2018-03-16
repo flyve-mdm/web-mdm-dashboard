@@ -86,13 +86,11 @@ export default class FilesList extends Component {
         }, 0)
     }
 
-    handlePanel = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        this.listView.winControl.selection.clear()
-
+    handleAdd = (eventObject) => {
+        this.props.history.push("/app/files/add")
         this.props.changeSelectionMode(false)
-        this.props.onNavigate([this.props.location[0]])
-        this.props.changeAction(button.label)
+        this.props.changeSelectedItems([])
+        this.listView.winControl.selection.clear()
     }
 
     handleToggleSelectionMode = () => {
@@ -113,20 +111,7 @@ export default class FilesList extends Component {
         for (const item of index) {
             itemSelected.push(this.state.itemList.getItem(item).data)
         }
-
-        this.setState({
-            selectedItemList: itemSelected
-        })
-
-        if (this.props.action !== 'Edit') {
-
-            setTimeout(() => {
-                if (index.length !== 0) {
-                    this.props.changeAction(null)
-                }
-                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
-            }, 0)
-        }
+        this.props.changeSelectedItems(itemSelected)
     }
 
     handleDelete = async (eventObject) => {
@@ -318,7 +303,7 @@ export default class FilesList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
-                        onClick={this.handlePanel}
+                        onClick={this.handleAdd}
                     />
 
                     {this.props.selectionMode ? editCommand : null}
