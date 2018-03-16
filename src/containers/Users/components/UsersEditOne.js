@@ -8,7 +8,7 @@ import { usersScheme } from '../../../components/Forms/Schemas'
 import Loading from '../../../components/Loading'
 import ErrorValidation from '../../../components/ErrorValidation'
 
-class UsersEditOne extends Component {
+export default class UsersEditOne extends Component {
     
     constructor(props) {
         super(props)
@@ -353,10 +353,9 @@ class UsersEditOne extends Component {
         )
     }
 }
-
 UsersEditOne.propTypes = {
+    history: PropTypes.object.isRequired,
     changeAction: PropTypes.func.isRequired,
-    setNotification: PropTypes.func.isRequired
+    setNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
-
-export default UsersEditOne

@@ -6,7 +6,7 @@ import Loading from '../../../components/Loading'
 import { Select, Input, DatePicker, TextArea } from '../../../components/Forms'
 import ErrorValidation from '../../../components/ErrorValidation'
 
-class DevicesEdit extends Component {
+export default class DevicesEdit extends Component {
 
     constructor(props) {
         super(props)
@@ -399,16 +399,11 @@ class DevicesEdit extends Component {
         }
     }
 }
-
 DevicesEdit.propTypes = {
     selectedItems: PropTypes.array,
+    changeAction: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
-    actionList: PropTypes.string,
     history: PropTypes.object.isRequired,
     setNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired,
-    changeAction: PropTypes.func.isRequired,
-    changeSelectedItems: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }
-
-export default DevicesEdit

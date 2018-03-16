@@ -150,7 +150,10 @@ export default class UsersContent extends Component {
     }
 }
 UsersContent.propTypes = {
-    history: PropTypes.object.isRequired,
+    selectedItems: PropTypes.array,
     changeAction: PropTypes.func.isRequired,
-    setNotification: PropTypes.func.isRequired
+    changeSelectionMode: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    setNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired
 }

@@ -10,12 +10,6 @@ const routes = [
     component: EmptyMessage,
     exact: true
   },
-  // {
-  //   path: '/add',
-  //   name: 'Add',
-  //   component: Enroll,
-  //   exact: true
-  // },
   {
     path: '/edit',
     name: 'Edit',
