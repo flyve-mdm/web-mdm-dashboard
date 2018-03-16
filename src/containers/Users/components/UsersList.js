@@ -323,8 +323,12 @@ export default class UsersList extends Component {
         )
     }
 }
-
 UsersList.propTypes = {
+    selectedItems: PropTypes.array.isRequired,
+    changeSelectedItems: PropTypes.func.isRequired,
+    selectionMode: PropTypes.bool.isRequired,
+    history: PropTypes.object.isRequired,
+    changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,

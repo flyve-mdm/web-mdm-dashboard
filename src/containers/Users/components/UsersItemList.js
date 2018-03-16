@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import IconItemList from '../../../components/IconItemList'
 
 export default class UsersItemList extends Component {
@@ -14,4 +15,7 @@ export default class UsersItemList extends Component {
             </div>
         )
     }
+}
+UsersItemList.propTypes = {
+    itemList: PropTypes.object.isRequired
 }
