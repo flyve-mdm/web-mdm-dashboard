@@ -84,7 +84,7 @@ export default class ApplicationsList extends Component {
     }
 
 
-    handleEdit(eventObject, path) {
+    handleEdit(path) {
         this.props.history.push(path)
     }
 
@@ -269,7 +269,7 @@ export default class ApplicationsList extends Component {
                 label="Edit"
                 priority={0}
                 disabled={this.props.selectedItems.length === 0}
-                onClick={this.handleEdit}
+                onClick={() => this.handleEdit("/app/applications/edit")}
             />
         )
 
