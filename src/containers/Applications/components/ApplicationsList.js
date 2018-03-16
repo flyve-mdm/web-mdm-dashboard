@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import ApplicationsItemList from './ApplicationsItemList'
-import Loader from '../../components/Loader'
-import Confirmation from '../../components/Confirmation'
+import Loader from '../../../components/Loader'
+import Confirmation from '../../../components/Confirmation'
 
 export default class ApplicationsList extends Component {
 

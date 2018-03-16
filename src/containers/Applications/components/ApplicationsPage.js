@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ApplicationsContent from './ApplicationsContent'
 import ApplicationsAdd from './ApplicationsAdd'
 import ApplicationsEdit from './ApplicationsEdit'
-import EmptyMessage from '../../components/EmptyMessage'
+import EmptyMessage from '../../../components/EmptyMessage'
 
 export default class ApplicationsPage extends Component {
 

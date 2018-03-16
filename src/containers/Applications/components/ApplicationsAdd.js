@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { FilesUpload, FilesUploadItemList } from '../../components/FilesUpload'
-import ContentPane from '../../components/ContentPane'
-import Loading from '../../components/Loading'
+import FilesUpload from '../../Files/FilesUpload'
+import FilesUploadItemList from '../../Files/FilesUploadItemList'
+import ContentPane from '../../../components/ContentPane'
+import Loading from '../../../components/Loading'
 
 export default class ApplicationsAdd extends Component {
 
