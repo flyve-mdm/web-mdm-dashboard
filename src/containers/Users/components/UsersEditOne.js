@@ -304,7 +304,7 @@ export default class UsersEditOne extends Component {
 
                     <div className="froms__row">
 
-                        <div style={{ overflow: 'hidden' }}>
+                        <div style={{ overflow: 'hidden', paddingLeft: '20px'}}>
                             <input
                                 {...inputAttributes}
                             />
@@ -326,7 +326,7 @@ export default class UsersEditOne extends Component {
                     <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
 
                     <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
-                    <div style={{ overflow: 'auto' }}>
+                    <div style={{ overflow: 'auto', paddingRight: '20px'}}>
                         <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
                     </div>
 

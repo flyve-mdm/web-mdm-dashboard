@@ -91,7 +91,6 @@ export default class UsersContent extends Component {
             renderComponent = (
                 <div>
                     <div className="contentHeader">
-                        <h2 className="win-h2" style={{ margin: '20.1px 0' }}> User </h2>
                         <div className="itemInfo">
                             <IconItemList image={imageProfile} size={100} />
                             <div className="contentStatus">
