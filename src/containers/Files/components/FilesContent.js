@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Pluralize from 'pluralize'
-import ContentPane from '../../components/ContentPane'
-import Confirmation from '../../components/Confirmation'
-import Loading from '../../components/Loading'
+import ContentPane from '../../../components/ContentPane'
+import Confirmation from '../../../components/Confirmation'
+import Loading from '../../../components/Loading'
 
 export default class FilesContent extends Component {
 

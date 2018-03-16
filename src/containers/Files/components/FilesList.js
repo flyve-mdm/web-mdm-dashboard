@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import FilesItemList from './FilesItemList'
-import Loader from '../../components/Loader'
-import Confirmation from '../../components/Confirmation'
+import Loader from '../../../components/Loader'
+import Confirmation from '../../../components/Confirmation'
 
 export default class FilesList extends Component {
 
@@ -327,7 +327,7 @@ export default class FilesList extends Component {
                 </ReactWinJS.ToolBar>
 
                 { listComponent }
-                <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.selectedItemList.length + ` ` + this.props.location[0]} reference={el => this.contentDialog = el} />
+                <Confirmation title={`Delete files`} message={this.state.selectedItemList.length + ` files` } reference={el => this.contentDialog = el} />
             </div>
         )
     }
