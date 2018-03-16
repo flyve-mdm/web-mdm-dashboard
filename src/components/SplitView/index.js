@@ -5,13 +5,25 @@ import ImgWithPopper from './imgWithPopper'
 import SpanWithPopper from './spanWithAnchor'
 import { ScrollSync, ScrollSyncPane } from '../ScrollSync'
 import Confirmation from '../../components/Confirmation'
+import withGLPI from '../../hoc/withGLPI'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { logout } from '../../store/authentication/actions'
+
+function mapDispatchToProps(dispatch) {
+  const actions = {
+    logout: bindActionCreators(logout, dispatch)
+  }
+  return { actions }
+}
+
 
 class SplitView extends React.Component {
 
   logout = async () => {
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
-      this.props.history.push('/logout')
+      this.props.actions.logout(this.props.history)
     }
   }
 
@@ -143,7 +155,11 @@ SplitView.propTypes = {
   handleContract: PropTypes.func.isRequired,
   handleSetTimeOut: PropTypes.func.isRequired,
   handleToggleExpand: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  glpi: PropTypes.object.isRequired
 }
 
-export default SplitView
+export default connect(
+  null,
+  mapDispatchToProps
+)(withGLPI(SplitView))

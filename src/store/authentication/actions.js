@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes'
 import glpi from '../../shared/glpiApi'
 import config from '../../config/config.json'
-import { uiTransactionFinish, uiTransactionStart } from '../ui/actions';
+import { uiTransactionFinish, uiTransactionStart } from '../ui/actions'
 
 // Actions
 
@@ -12,25 +12,26 @@ export const changeNotificationMessage = notification => {
   }
 }
 
-export const authLogout = () => {
-  return {
-    type: actionTypes.AUTH_LOGOUT
-  }
-}
-
 export const authSuccess = user => {
   return {
       type: actionTypes.AUTH_SUCCESS,
-      user: user
-  };
-};
+      user
+  }
+}
 
 export const authFail = error => {
   return {
       type: actionTypes.AUTH_FAIL,
-      error: error
-  };
-};
+      error
+  }
+}
+
+export const logout = history => {
+  return {
+      type: actionTypes.LOGOUT,
+      history
+  }
+}
 
 export const authRefreshCaptcha = ({ idCaptcha, imgCaptcha, configurationPassword }) => {
   return {

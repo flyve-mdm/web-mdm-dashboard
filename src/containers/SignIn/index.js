@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 import UsernameFieldset from './components/UsernameFieldset'
 
@@ -19,7 +19,7 @@ import { changeInput, changePhase, handleFormSubmit } from './actions';
 
 function mapStateToProps(state, props) {
     return {
-        isAuthenticated: state.auth.currentUser !== null,
+        isAuthenticated: state.auth.currentUser ? true : false,
         isLoading: state.ui.loading,        
         selfRegistration: state.auth.selfRegistration
     }

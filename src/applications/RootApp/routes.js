@@ -1,6 +1,5 @@
 import SignIn from '../../containers/SignIn'
 import asyncSignUp from '../../async/asyncSignUp'
-import asyncLogout from '../../async/asyncLogout'
 import asyncAdminDashboard from '../../async/asyncAdminDashboard'
 import asyncValidateAccount from '../../async/asyncValidateAccount'
 import asyncForgotPassword from '../../async/asyncForgotPassword'
@@ -34,12 +33,6 @@ const routes = [
     path: '/app',
     component: asyncAdminDashboard,
     exact: false,
-    private: false
-  },
-  {
-    path: '/logout',
-    component: asyncLogout,
-    exact: true,
     private: false
   }
 ]
