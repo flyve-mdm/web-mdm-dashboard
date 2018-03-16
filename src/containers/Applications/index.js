@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ApplicationsList from './ApplicationsList'
-import ApplicationsPage from './ApplicationsPage'
+import ApplicationsList from './components/ApplicationsList'
+import ApplicationsPage from './components/ApplicationsPage'
 import getMode from '../../shared/getMode'
 import glpi from '../../shared/glpiApi'
 
