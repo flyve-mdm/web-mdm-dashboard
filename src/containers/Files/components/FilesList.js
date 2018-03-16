@@ -53,7 +53,7 @@ export default class FilesList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.onNavigate([this.props.location[0]])
+            this.props.history.push('/app/files')
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -337,9 +337,6 @@ FilesList.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    animation: PropTypes.bool.isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
