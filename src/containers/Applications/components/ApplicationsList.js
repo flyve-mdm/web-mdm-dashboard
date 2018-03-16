@@ -243,6 +243,13 @@ export default class ApplicationsList extends Component {
         }
     }
 
+    handleAdd = () => {
+        this.props.history.push("/app/applications/add")
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
+        this.listView.winControl.selection.clear()
+    }
+
     render() {
         let deleteCommand = (
             <ReactWinJS.ToolBar.Button
@@ -310,7 +317,7 @@ export default class ApplicationsList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
-                        onClick={this.handlePanel}
+                        onClick={this.handleAdd}
                     />
 
                     {this.props.selectionMode ? editCommand : null}
