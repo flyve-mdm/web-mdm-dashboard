@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import RootApp from './applications/RootApp'
 import registerServiceWorker from './registerServiceWorker'
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
 import {
     createStore,
     applyMiddleware, 
     compose
-} from 'redux';
-import thunk from 'redux-thunk';
+} from 'redux'
+import thunk from 'redux-thunk'
 import rootReducer from './store'
 import './assets/styles/main.scss' // Global CSS Styles
 
