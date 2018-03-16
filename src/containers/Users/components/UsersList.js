@@ -39,6 +39,12 @@ export default class UsersList extends Component {
             this.handleRefresh()
             this.props.changeAction(null)
         }
+
+        if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
+            if(this.listView) {
+                this.listView.winControl.selection.clear()
+            }
+        }
     }
 
     componentWillUnmount() {
@@ -60,30 +66,23 @@ export default class UsersList extends Component {
 
     handleToggleSelectionMode = () => {
         this.props.history.push('/app/users')
-        this.props.changeSelectionMode(!this.props.selectionMode)     
+        this.props.changeSelectionMode(!this.props.selectionMode)
+        this.props.changeSelectedItems([])
         this.listView.winControl.selection.clear()
-        this.setState((prevState, props) => ({
-            selectedItems: []
-        }))
     }
 
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
-        let selectedItems = []
+        let itemSelected = []
 
         for (const item of index) {
-            selectedItems.push(this.state.itemList.getItem(item).data)
+            itemSelected.push(this.state.itemList.getItem(item).data)
         }
-
-        this.setState({ selectedItems })
-
-        this.props.changeSelectedItems(selectedItems)
-
+        this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`/app/users/${selectedItems[0]["User.id"]}`)
+            this.props.history.push(`/app/users/${itemSelected[0]["User.id"]}`)
         }
-
         if (index.length > 1 && !this.props.selectionMode) {
             this.props.history.push('/app/users/edit/')
         }
@@ -125,7 +124,7 @@ export default class UsersList extends Component {
             const isOK = await Confirmation.isOK(this.contentDialog)
             if (isOK) {
 
-                let itemListToDelete = this.state.selectedItems.map((item) => {
+                let itemListToDelete = this.props.selectedItems.map((item) => {
                     return {
                         id: item["User.id"]
                     }
@@ -142,14 +141,13 @@ export default class UsersList extends Component {
                         type: 'success'
                     })
                     this.props.changeSelectionMode(false)
+                    this.props.changeSelectedItems([])
                     this.props.changeAction('reload')
                 })
             } else {
                 // Exit selection mode
                 this.props.changeSelectionMode(false)
-                this.setState((prevState, props) => ({
-                    selectedItems: []
-                }))
+                this.props.changeSelectedItems([])
 
                 this.listView.winControl.selection.clear()
             }
@@ -165,9 +163,9 @@ export default class UsersList extends Component {
             }
 
             this.props.changeSelectionMode(false)
+            this.props.changeSelectedItems([])
 
             this.setState((prevState, props) => ({
-                selectedItems: [],
                 isLoading: false
             }))
         }
@@ -248,7 +246,7 @@ export default class UsersList extends Component {
                 icon="delete"
                 label="Delete"
                 priority={0}
-                disabled={this.state.selectedItems.length === 0}
+                disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleDelete}
             />
         )
@@ -259,7 +257,7 @@ export default class UsersList extends Component {
                 icon="edit"
                 label="Edit"
                 priority={0}
-                disabled={this.state.selectedItems.length === 0}
+                disabled={this.props.selectedItems.length === 0}
                 onClick={() => this.handleEdit("/app/users/edit")}
             />
         )
@@ -305,14 +303,6 @@ export default class UsersList extends Component {
                         onClick={this.handleRefresh}
                     />
 
-                    {/* <ReactWinJS.ToolBar.Button
-                        key="add"
-                        icon="add"
-                        label="Add"
-                        priority={0}
-                        onClick={(e) => this.handleAdd(e, "/app/users/add")}
-                    /> */}
-
                     {this.props.selectionMode ? editCommand : null}
                     {this.props.selectionMode ? deleteCommand : null}
 
@@ -328,7 +318,7 @@ export default class UsersList extends Component {
 
                 { listComponent }
 
-                <Confirmation title={`Delete Users`} message={this.state.selectedItems.length +` Users`} reference={el => this.contentDialog = el} /> 
+                <Confirmation title={`Delete Users`} message={this.props.selectedItems.length +` Users`} reference={el => this.contentDialog = el} /> 
             </React.Fragment>
         )
     }
