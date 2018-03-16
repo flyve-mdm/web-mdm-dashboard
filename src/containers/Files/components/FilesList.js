@@ -146,7 +146,11 @@ export default class FilesList extends Component {
 
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmFile', input: itemListToDelete, queryString: { force_purge: true } })
 
-                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: 'Elements successfully removed',
+                    type: 'success'
+                })
                 this.props.changeSelectionMode(false)
                 this.props.changeAction("Reload")
                 this.setState({
@@ -166,7 +170,11 @@ export default class FilesList extends Component {
 
         } catch (error) {
             if (error.length > 1) {
-                this.props.showNotification(error[0], error[1])
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             }
             this.props.changeAction(null)
             this.props.changeSelectionMode(false)
@@ -178,7 +186,6 @@ export default class FilesList extends Component {
 
     handleSort = async () => {
         try {
-            this.props.onNavigate([this.props.location[0]])
             this.setState({
                 isLoading: true,
                 pagination: {
@@ -196,6 +203,7 @@ export default class FilesList extends Component {
                 order: files.order,
                 itemList: new WinJS.Binding.List(files.data)
             })
+            this.props.history.push('/app/files')
 
         } catch (error) {
             this.setState({
@@ -341,6 +349,6 @@ FilesList.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
