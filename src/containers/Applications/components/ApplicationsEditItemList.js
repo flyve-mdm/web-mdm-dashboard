@@ -53,6 +53,5 @@ export default class ApplicationsEditItemList extends Component {
 }
 ApplicationsEditItemList.propTypes = {
     selectedItem: PropTypes.object.isRequired,
-    changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    changeAction: PropTypes.func.isRequired
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Pluralize from 'pluralize'
 import ContentPane from '../../../components/ContentPane'
 import IconItemList from '../../../components/IconItemList'
 import BytesToSize from '../../../shared/bytesToSize'
@@ -12,17 +11,52 @@ export default class ApplicationsContent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoading: false,
+            id: this.props.history.location.pathname.split("/")[3],
             data: undefined
         }
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItemList !== prevProps.selectedItemList) {
+    componentWillReceiveProps(newProps) {
+        if (this.state.id !== newProps.history.location.pathname.split("/")[3]) {
             this.setState({
-                data: undefined
+                data: undefined,
+                id: newProps.history.location.pathname.split("/")[3]
+            }, () => this.handleRefresh())
+        }
+    }
+    handleDelete = async () => {
+        const isOK = await Confirmation.isOK(this.contentDialog)
+        if (isOK) {
+
+            let itemListToDelete = this.props.selectedItems.map((item) => {
+                return {
+                    id: item["PluginFlyvemdmPackage.id"]
+                }
             })
-            this.handleRefresh()
+
+            this.setState({
+                isLoading: true
+            })
+
+            this.props.changeAction("reload")            
+            this.props.changeSelectionMode(false)
+            
+            try {
+                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmPackage', input: itemListToDelete, queryString: { force_purge: true } })
+                this.props.setNotification({
+                    title: 'Success',
+                    body: 'Elements successfully removed',
+                    type: 'success'
+                })
+                this.props.history.push("/app/applications")
+            } catch (error) {                
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
+            }
+            
         }
     }
 
@@ -31,55 +65,20 @@ export default class ApplicationsContent extends Component {
     }
 
     handleRefresh = async () => {
-
         try {
-            const applications = await this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmPackage', id: this.props.selectedItemList[0]['PluginFlyvemdmPackage.id'] })
-            this.setState({
-                data: applications
+            this.setState({ 
+                data: await this.props.glpi.getAnItem({ 
+                    itemtype: 'PluginFlyvemdmPackage', 
+                    id: this.state.id 
+                }) 
             })
-            
         } catch (error) {
-            
-        }
-    }
-
-    handleDelete = async () => {
-        try {
-            const isOK = await Confirmation.isOK(this.contentDialog)
-            if (isOK) {
-
-                let itemListToDelete = this.props.selectedItemList.map((item) => {
-                    return {
-                        id: item["PluginFlyvemdmPackage.id"]
-                    }
-                })
-
-                this.setState({
-                    isLoading: true
-                })
-
-                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmPackage', input: itemListToDelete, queryString: { force_purge: true } })
-
-                this.props.showNotification('Success', 'elements successfully removed')
-                this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
-                this.props.changeAction("Reload")
-
-            } else {
-                this.setState({
-                    isLoading: false
-                })
-            }
-
-        } catch (error) {
-            if (error.length > 1) {
-                this.props.showNotification(error[0], error[1])
-            } else {
-                this.props.showNotification('Error', error)
-            }
-            this.setState({
-                isLoading: false
-            })
+            this.props.setNotification({
+                title: "Error",
+                body: "There was a problem loading application data",
+                type: "alert"
+            }) 
+            this.props.history.push("/app/applications")
         }
     }
 
@@ -95,7 +94,7 @@ export default class ApplicationsContent extends Component {
             return (
                 <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true}>
                     <div className="contentHeader">
-                        <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> {Pluralize.singular(this.props.location[0])} </h2>
+                        <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> Application </h2>
                         <div className="itemInfo">
                             <IconItemList
                                 size={72}
@@ -115,7 +114,7 @@ export default class ApplicationsContent extends Component {
                         </div>
                     </div>
                     <div className="separator" />
-                    <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.data["name"]} reference={el => this.contentDialog = el} />
+                    <Confirmation title="Delete Applications" message={this.state.data["name"]} reference={el => this.contentDialog = el} />
                 </ContentPane>
             )
         }
@@ -126,14 +125,12 @@ ApplicationsContent.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
-    selectedItemList: PropTypes.array,
+    selectedItems: PropTypes.array,
     changeAction: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
 ApplicationsContent.defaultProps = {
-    selectedItemList: []
+    selectedItems: []
 }

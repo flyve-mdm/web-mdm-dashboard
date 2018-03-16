@@ -45,9 +45,17 @@ export default class ApplicationsEdit extends Component {
                 await this.props.glpi.updateItem({ itemtype: "PluginFlyvemdmPackage", input: this.state.selectedItem })
 
                 if (this.state.selectedItem.length > 1) {
-                    this.props.showNotification('Success', 'Edited files')
+                    this.props.setNotification({
+                        title: 'Successfully',
+                        body: 'Edited files',
+                        type: 'success'
+                    })
                 } else {
-                    this.props.showNotification('Success', 'Edited file')
+                    this.props.setNotification({
+                        title: 'Successfully',
+                        body: 'Edited file',
+                        type: 'success'
+                    })
                 }
 
                 this.props.changeSelectionMode(false)
@@ -61,17 +69,25 @@ export default class ApplicationsEdit extends Component {
                 isLoading: false
             })
 
-            if (error.length > 1) {
-                this.props.showNotification(error[0], error[1])
+            if (Array.isArray(error)) {
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             } else {
-                this.props.showNotification('Error', error)
+                this.props.setNotification({
+                    title:'Error',
+                    body: error,
+                    type: 'alert'
+                })
             }
         }
     }
 
     render() {
 
-        if (this.props.selectedItemList) {
+        if (this.props.selectedItems) {
 
             if (this.state.isLoading) {
                 return (
@@ -80,7 +96,7 @@ export default class ApplicationsEdit extends Component {
                     </ContentPane>
                 )
             } else {
-                let renderComponent = this.props.selectedItemList.map((item, index) => {
+                let renderComponent = this.props.selectedItems.map((item, index) => {
 
                     return (
                         <ApplicationsEditItemList
@@ -90,7 +106,6 @@ export default class ApplicationsEdit extends Component {
                             updateItemList={this.updateItemList}
                             selectedItem={item}
                             changeAction={this.props.changeAction}
-                            showNotification={this.props.showNotification}
                         />
                     )
                 })
@@ -123,14 +138,14 @@ ApplicationsEdit.propTypes = {
     ]).isRequired,
     location: PropTypes.array.isRequired,
     onNavigate: PropTypes.func.isRequired,
-    selectedItemList: PropTypes.array,
+    selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
 ApplicationsEdit.defaultProps = {
-    selectedItemList: [],
+    selectedItems: [],
     action: null
 }

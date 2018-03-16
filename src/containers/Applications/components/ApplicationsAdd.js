@@ -55,10 +55,27 @@ export default class ApplicationsAdd extends Component {
                 this.setState({
                     isLoading: false
                 })
-                this.props.showNotification('Success', 'Saved file')
+                this.props.setNotification({
+                    title: 'Success',
+                    body: 'Saved file',
+                    type: 'success'
+                })
                 this.props.changeAction("Reload")
             })
         } catch (error) {
+            if (Array.isArray(error)) {
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
+            } else {
+                this.props.setNotification({
+                    title:'Error',
+                    body: error,
+                    type: 'alert'
+                })
+            }
             this.setState({
                 isLoading: false
             })
@@ -122,6 +139,6 @@ export default class ApplicationsAdd extends Component {
 ApplicationsAdd.propTypes = {
     location: PropTypes.array.isRequired,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
