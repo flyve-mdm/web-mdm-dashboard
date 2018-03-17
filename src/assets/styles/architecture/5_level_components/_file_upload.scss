@@ -1,0 +1,69 @@
+.file-upload {
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.files-dropzone {
+    text-align: center;
+    padding: 60px;
+    border: 1px dashed $color-1-secondary;
+    cursor: pointer;
+}
+
+.files-dropzone-active {
+    border: 1px solid $color-1-primary;
+    color: $color-1-primary;
+}
+
+.files-list {
+    padding: 20px 20px;
+    display: table;
+    width: auto;
+    border: 0;
+
+    .files-list-content {
+        display: table-row-group;
+            
+        .files-list-item {
+            display: table-row;
+
+            .item-icon {
+                display: table-cell;
+                float: left;
+                width: $list-item-icon-size;
+                height: $list-item-icon-size;
+
+                span {
+                    font-size: 32px;
+                    text-align: center;
+                }
+            }
+
+            .item-content-primary {
+                display: table-cell;
+                padding-right: 10px;
+                vertical-align: top;
+                text-align: left;
+                width: 100%;
+            }
+
+            .item-content-secondary {
+                display: table-cell;
+                float: right;
+                text-align: left;
+            }
+
+            .content-text-primary {
+                font-weight: 700;
+            }
+
+            .content-text-secondary {
+                font-size: 13px;
+                line-height: 16px;
+                font-weight: 400;
+                color: $text-detail-color;
+            }
+        }
+    }
+}
