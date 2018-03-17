@@ -194,7 +194,7 @@ export default class FilesUpload extends Component {
         }
         
         return (
-            <div>
+            <div className="file-upload">
                 <input
                 {...inputAttributes}
                 />
