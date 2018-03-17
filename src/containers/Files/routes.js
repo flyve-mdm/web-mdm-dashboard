@@ -1,5 +1,6 @@
 import EmptyMessage from '../../components/EmptyMessage'
 import FilesAdd from './components/FilesAdd'
+import FilesEdit from './components/FilesEdit'
 
 const routes = [
     {
@@ -14,6 +15,12 @@ const routes = [
         component: FilesAdd,
         exact: true
     },
+    {
+        path: '/edit',
+        name: 'Edit',
+        component: FilesEdit,
+        exact: true
+    }
 ]
 
 export default routes
