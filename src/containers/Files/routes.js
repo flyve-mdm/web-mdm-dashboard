@@ -23,6 +23,12 @@ const routes = [
         exact: true
     },
     {
+        path: '/:id/edit',
+        name: 'Edit one',
+        component: FilesEdit,
+        exact: true
+    },
+    {
         path: '/:id',
         name: 'Selected',
         component: FilesContent,
