@@ -105,9 +105,11 @@ export default class FilesList extends Component {
             itemSelected.push(this.state.itemList.getItem(item).data)
         }
         this.props.changeSelectedItems(itemSelected)
-
+        if (index.length === 1 && !this.props.selectionMode) {
+            this.props.history.push(`/app/files/${itemSelected[0]["PluginFlyvemdmFile.id"]}`)
+        }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push('/app/devices/edit/')
+            this.props.history.push('/app/files/edit/')
         }
     }
 
