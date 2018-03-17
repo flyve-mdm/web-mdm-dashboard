@@ -81,7 +81,7 @@ export default class FilesList extends Component {
     handleEdit = (eventObject) => {
         let button = eventObject.currentTarget.winControl
         setTimeout(() => {
-            this.props.onNavigate(this.state.selectedItemList.length > 0 && this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
+            this.props.onNavigate(this.props.selectedItems.length > 0 && this.props.selectionMode ? [this.props.location[0], this.props.selectedItems] : this.props.location)
             this.props.changeAction(button.label)
         }, 0)
     }
@@ -94,13 +94,10 @@ export default class FilesList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.listView.winControl.selection.clear()
-        this.props.changeAction(null)
+        this.props.history.push('/app/files')
         this.props.changeSelectionMode(!this.props.selectionMode)
-        this.props.onNavigate([this.props.location[0]])
-        this.setState({
-            selectedItemList: []
-        })
+        this.props.changeSelectedItems([])
+        this.listView.winControl.selection.clear()
     }
 
     handleSelectionChanged = (eventObject) => {
@@ -119,7 +116,7 @@ export default class FilesList extends Component {
             const isOK = await Confirmation.isOK(this.contentDialog)
             if (isOK) {
 
-                let itemListToDelete = this.state.selectedItemList.map((item) => {
+                let itemListToDelete = this.props.selectedItems.map((item) => {
                     return {
                         id: item["PluginFlyvemdmFile.id"]
                     }
@@ -243,7 +240,7 @@ export default class FilesList extends Component {
                 key="delete"
                 icon="delete"
                 priority={0}
-                disabled={this.state.selectedItemList.length === 0}
+                disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleDelete}
             />
         )
@@ -254,7 +251,7 @@ export default class FilesList extends Component {
                 icon="edit"
                 label="Edit"
                 priority={0}
-                disabled={this.state.selectedItemList.length === 0}
+                disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleEdit}
             />
         )
@@ -320,7 +317,7 @@ export default class FilesList extends Component {
                 </ReactWinJS.ToolBar>
 
                 { listComponent }
-                <Confirmation title={`Delete files`} message={this.state.selectedItemList.length + ` files` } reference={el => this.contentDialog = el} />
+                <Confirmation title={`Delete files`} message={this.props.selectedItems.length + ` files` } reference={el => this.contentDialog = el} />
             </div>
         )
     }
