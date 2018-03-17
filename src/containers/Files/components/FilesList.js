@@ -34,7 +34,7 @@ export default class FilesList extends Component {
             this.listView.winControl.footer.style.height = '1px'
         }
 
-        if (this.props.action === "Reload") {
+        if (this.props.action === "reload") {
             this.handleRefresh()
             this.props.changeAction(null)
         }
@@ -130,39 +130,40 @@ export default class FilesList extends Component {
 
                 this.props.setNotification({
                     title: 'Successfully',
-                    body: 'Elements successfully removed',
+                    body: 'Device successfully removed!',
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)
-                this.props.changeAction("Reload")
-                this.setState({
-                    selectedItemList: [],
-                })
+                this.props.changeSelectedItems([])
+                this.props.changeAction('reload')
+
+                this.setState((prevState, props) => ({
+                    isLoading: false
+                }))
             } else {
-                // Clean another actions selected
-                this.props.changeAction(null)
                 // Exit selection mode
                 this.props.changeSelectionMode(false)
+                this.props.changeSelectedItems([])
+
                 this.listView.winControl.selection.clear()
-                this.setState({
-                    selectedItemList: [],
-                    isLoading: false
-                })
             }
 
         } catch (error) {
             if (error.length > 1) {
+
                 this.props.setNotification({
                     title: error[0],
                     body: error[1],
                     type: 'alert'
                 })
             }
-            this.props.changeAction(null)
+
             this.props.changeSelectionMode(false)
-            this.setState({
-                selectedItemList: []
-            })
+            this.props.changeSelectedItems([])
+
+            this.setState((prevState, props) => ({
+                isLoading: false
+            }))
         }
     }
 
