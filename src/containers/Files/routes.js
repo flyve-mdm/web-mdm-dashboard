@@ -1,6 +1,7 @@
 import EmptyMessage from '../../components/EmptyMessage'
 import FilesAdd from './components/FilesAdd'
 import FilesEdit from './components/FilesEdit'
+import FilesContent from './components/FilesContent'
 
 const routes = [
     {
@@ -20,6 +21,12 @@ const routes = [
         name: 'Edit',
         component: FilesEdit,
         exact: true
+    },
+    {
+        path: '/:id',
+        name: 'Selected',
+        component: FilesContent,
+        exact: false
     }
 ]
 
