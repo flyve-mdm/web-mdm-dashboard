@@ -78,12 +78,8 @@ export default class FilesList extends Component {
         }
     }
 
-    handleEdit = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        setTimeout(() => {
-            this.props.onNavigate(this.props.selectedItems.length > 0 && this.props.selectionMode ? [this.props.location[0], this.props.selectedItems] : this.props.location)
-            this.props.changeAction(button.label)
-        }, 0)
+    handleEdit = () => {
+        this.props.history.push('/app/files/edit')
     }
 
     handleAdd = (eventObject) => {
@@ -109,6 +105,10 @@ export default class FilesList extends Component {
             itemSelected.push(this.state.itemList.getItem(item).data)
         }
         this.props.changeSelectedItems(itemSelected)
+
+        if (index.length > 1 && !this.props.selectionMode) {
+            this.props.history.push('/app/devices/edit/')
+        }
     }
 
     handleDelete = async (eventObject) => {

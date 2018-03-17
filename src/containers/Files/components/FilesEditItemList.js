@@ -52,7 +52,6 @@ export default class FilesEditItemList extends Component {
 }
 FilesEditItemList.propTypes = {
     selectedItem: PropTypes.object.isRequired,
-    changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired
+    updateItemList: PropTypes.func.isRequired
 }
 

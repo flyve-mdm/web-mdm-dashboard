@@ -45,14 +45,21 @@ export default class FilesEdit extends Component {
                 await this.props.glpi.updateItem({ itemtype: "PluginFlyvemdmFile", input: this.state.selectedItem})
 
                 if (this.state.selectedItem.length > 1) {
-                    this.props.showNotification('Success', 'Edited files')
+                    this.props.setNotification({
+                        title: 'Successfully',
+                        body: 'Edited files',
+                        type: 'success'
+                    })
                 } else {
-                    this.props.showNotification('Success', 'Edited file')
+                    this.props.setNotification({
+                        title: 'Successfully',
+                        body: 'Edited file',
+                        type: 'success'
+                    })
                 }
 
                 this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
-                this.props.changeAction("Reload")
+                this.props.changeAction("reload")
             }
             
         } catch (error) {
@@ -62,16 +69,24 @@ export default class FilesEdit extends Component {
             })
 
             if (error.length > 1) {
-                this.props.showNotification(error[0], error[1])
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             } else {
-                this.props.showNotification('Error', error)
+                this.props.setNotification({
+                    title: 'Error',
+                    body: `${error}`,
+                    type: 'alert'
+                })
             }
         }
     }
 
     render() {
 
-        if (this.props.selectedItemList) {
+        if (this.props.selectedItems) {
 
             if (this.state.isLoading) {
                 return (
@@ -80,29 +95,20 @@ export default class FilesEdit extends Component {
                     </ContentPane>
                 )
             } else {
-                let renderComponent = this.props.selectedItemList.map((item, index) => {
+                let renderComponent = this.props.selectedItems.map((item, index) => {
 
                     return (
                         <FilesEditItemList
                             key={index}
-                            itemListPaneWidth={this.props.itemListPaneWidth}
-                            location={this.props.location}
                             updateItemList={this.updateItemList}
                             selectedItem={item}
-                            changeAction={this.props.changeAction}
-                            showNotification={this.props.showNotification}
                         />
                     )
                 })
 
                 return (
                     <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-                        <div className="contentHeader">
-                            <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
-                            <button className="win-button win-button-primary" onClick={this.handleSaveFiles}>
-                                Save
-                        </button>
-                        </div>
+                        <button className="btn --primary" onClick={this.handleSaveFiles}>Save</button>
                         <div className="separator" />
                         {renderComponent}
                     </ContentPane>
@@ -121,12 +127,10 @@ FilesEdit.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
-    selectedItemList: PropTypes.array,
+    selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
