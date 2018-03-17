@@ -55,7 +55,7 @@ export default class FilesAdd extends Component {
                     body: 'Saved file',
                     type: 'success'
                 })
-                this.props.changeAction("Reload")
+                this.props.changeAction("reload")
             })
         } catch (error) {
             if (error.length > 1) {

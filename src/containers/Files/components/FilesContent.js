@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Pluralize from 'pluralize'
 import ContentPane from '../../../components/ContentPane'
 import Confirmation from '../../../components/Confirmation'
 import Loading from '../../../components/Loading'
@@ -14,12 +13,17 @@ export default class FilesContent extends Component {
         }
     }
 
+    handleEdit = () => {
+        const location = `${this.props.history.location.pathname}/edit`
+        this.props.history.push(location)
+    }
+
     handleDelete = async () => {
         try {
             const isOK = await Confirmation.isOK(this.contentDialog)
             if (isOK) {
 
-                let itemListToDelete = this.props.selectedItemList.map((item) => {
+                let itemListToDelete = this.props.selectedItems.map((item) => {
                     return {
                         id: item["PluginFlyvemdmFile.id"]
                     }
@@ -31,10 +35,13 @@ export default class FilesContent extends Component {
 
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmFile', input: itemListToDelete, queryString: { force_purge: true } })
 
-                this.props.showNotification('Success', 'elements successfully removed')
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: 'file successfully removed!',
+                    type: 'success'
+                })
                 this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
-                this.props.changeAction("Reload")
+                this.props.changeAction("reload")
         
             } else {
                 this.setState({
@@ -44,9 +51,17 @@ export default class FilesContent extends Component {
 
         } catch (error) {
             if (error.length > 1) {
-                this.props.showNotification(error[0], error[1])
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             } else {
-                this.props.showNotification('Error', error)
+                this.props.setNotification({
+                    title: 'Error',
+                    body: `${error}`,
+                    type: 'alert'
+                })
             }
             this.setState({
                 isLoading: false
@@ -65,19 +80,18 @@ export default class FilesContent extends Component {
             return (
                 <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true} >
                     <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > {Pluralize.singular(this.props.location[0])} </h2>
                         <div className="itemInfo">
                             <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} />
                             <div className="contentStatus">
-                                <div className="name">{this.props.selectedItemList[0]["PluginFlyvemdmFile.name"]}</div>
+                                <div className="name">{this.props.selectedItems[0]["PluginFlyvemdmFile.name"]}</div>
                                 <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.changeAction("Edit")} />
+                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
                                 <span className="deleteIcon" onClick={this.handleDelete} />
                             </div>
                         </div>
                     </div>
                     <div className="separator" />
-                    <Confirmation title={`Delete ` + this.props.location[0]} message={this.props.selectedItemList[0]["PluginFlyvemdmFile.name"]} reference={el => this.contentDialog = el} />
+                    <Confirmation title={`Delete file`} message={this.props.selectedItems[0]["PluginFlyvemdmFile.name"]} reference={el => this.contentDialog = el} />
                 </ContentPane>
             )
         }
@@ -88,11 +102,9 @@ FilesContent.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
-    selectedItemList: PropTypes.array,
+    selectedItems: PropTypes.array,
     changeAction: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
