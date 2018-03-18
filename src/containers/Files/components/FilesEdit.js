@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FilesEditItemList from './FilesEditItemList'
-import EmptyMessage from '../../../components/EmptyMessage'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 
@@ -89,11 +88,7 @@ export default class FilesEdit extends Component {
         if (this.props.selectedItems) {
 
             if (this.state.isLoading) {
-                return (
-                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-                        <Loading message="Loading..." />
-                    </ContentPane>
-                )
+                return (<Loading message="Loading..." />)
             } else {
                 let renderComponent = this.props.selectedItems.map((item, index) => {
 
@@ -107,7 +102,7 @@ export default class FilesEdit extends Component {
                 })
 
                 return (
-                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                    <ContentPane>
                         <button className="btn --primary" onClick={this.handleSaveFiles}>Save</button>
                         <div className="separator" />
                         {renderComponent}
@@ -116,17 +111,11 @@ export default class FilesEdit extends Component {
             }
 
         } else {
-            return (
-                <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
-            )
+            return null
         }
     }
 }
 FilesEdit.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
