@@ -12,7 +12,6 @@ export default class FilesList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItemList: [],
             scrolling: false,
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
@@ -38,10 +37,15 @@ export default class FilesList extends Component {
             this.handleRefresh()
             this.props.changeAction(null)
         }
+
+        if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
+            if (this.listView) {
+                this.listView.winControl.selection.clear()
+            }
+        }
     }
 
     componentWillUnmount() {
-        this.setState({ selectedItemList: [] })
         this.props.changeSelectionMode(false)
     }
 
@@ -281,7 +285,7 @@ export default class FilesList extends Component {
         }
 
         return (
-            <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+            <React.Fragment>
                 <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
                         key="sort"
@@ -318,19 +322,17 @@ export default class FilesList extends Component {
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
-
                 { listComponent }
                 <Confirmation title={`Delete files`} message={this.props.selectedItems.length + ` files` } reference={el => this.contentDialog = el} />
-            </div>
+            </React.Fragment>
         )
     }
 }
 FilesList.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
+    selectedItems: PropTypes.array.isRequired,
+    changeSelectedItems: PropTypes.func.isRequired,
     selectionMode: PropTypes.bool.isRequired,
+    history: PropTypes.object.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
