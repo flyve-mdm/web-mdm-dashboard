@@ -71,14 +71,10 @@ export default class FilesContent extends Component {
 
     render() {
         if (this.state.isLoading) {
-            return (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-                    <Loading message="Loading..." />
-                </ContentPane>
-            )
+            return (<Loading message="Loading..." />)
         } else {
             return (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true} >
+                <ContentPane>
                     <div className="contentHeader">
                         <div className="itemInfo">
                             <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} />
@@ -98,10 +94,6 @@ export default class FilesContent extends Component {
     }
 }
 FilesContent.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     selectedItems: PropTypes.array,
     changeAction: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
