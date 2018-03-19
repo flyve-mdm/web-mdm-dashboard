@@ -10,13 +10,13 @@ export default class ApplicationsEdit extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedItem: [],
+            itemListEdit: [...this.props.selectedItems],
             isLoading: false
         }
     }
 
     updateItemList = (index, name) => {
-        let newItem = [...this.state.selectedItem]
+        let newItem = [...this.state.itemListEdit]
 
         //Find index of specific object using findIndex method.    
         let objIndex = newItem.findIndex((obj => obj["id"] === index));
@@ -30,21 +30,21 @@ export default class ApplicationsEdit extends Component {
         }
 
         this.setState({
-            selectedItem: newItem
+            itemListEdit: [...newItem]
         })
     }
 
     handleSaveFiles = async () => {
 
         try {
-            if (this.state.selectedItem.length > 0) {
+            if (this.state.itemListEdit.length > 0) {
 
                 this.setState({
                     isLoading: true
                 })
-                await this.props.glpi.updateItem({ itemtype: "PluginFlyvemdmPackage", input: this.state.selectedItem })
+                await this.props.glpi.updateItem({ itemtype: "PluginFlyvemdmPackage", input: this.state.itemListEdit })
 
-                if (this.state.selectedItem.length > 1) {
+                if (this.state.itemListEdit.length > 1) {
                     this.props.setNotification({
                         title: 'Successfully',
                         body: 'Edited files',
