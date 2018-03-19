@@ -59,8 +59,7 @@ export default class ApplicationsEdit extends Component {
                 }
 
                 this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
-                this.props.changeAction("Reload")
+                this.props.changeAction("reload")
             }
 
         } catch (error) {
@@ -90,19 +89,14 @@ export default class ApplicationsEdit extends Component {
         if (this.props.selectedItems) {
 
             if (this.state.isLoading) {
-                return (
-                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-                        <Loading message="Loading..." />
-                    </ContentPane>
-                )
+                return (<Loading message="Loading..." />)
             } else {
                 let renderComponent = this.props.selectedItems.map((item, index) => {
 
                     return (
                         <ApplicationsEditItemList
                             key={index}
-                            itemListPaneWidth={this.props.itemListPaneWidth}
-                            location={this.props.location}
+                            history={this.props.history}
                             updateItemList={this.updateItemList}
                             selectedItem={item}
                             changeAction={this.props.changeAction}
@@ -111,9 +105,9 @@ export default class ApplicationsEdit extends Component {
                 })
 
                 return (
-                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                    <ContentPane>
                         <div className="contentHeader">
-                            <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
+                            <h2 className="win-h2 titleContentPane" > Edit application</h2>
                             <button className="win-button win-button-primary" onClick={this.handleSaveFiles}>
                                 Save
                         </button>
@@ -126,18 +120,12 @@ export default class ApplicationsEdit extends Component {
 
         } else {
             return (
-                <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
+                <EmptyMessage message="No Selection"/>
             )
         }
     }
 }
 ApplicationsEdit.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
     selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
