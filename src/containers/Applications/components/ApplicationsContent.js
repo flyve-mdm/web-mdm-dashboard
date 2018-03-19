@@ -84,15 +84,11 @@ export default class ApplicationsContent extends Component {
 
     render() {
         if (this.state.isLoading || this.state.data === undefined) {
-            return (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-                    <Loading message="Loading..." />
-                </ContentPane>
-            )
+            return (<Loading message="Loading..." />)
         } else {
             let image = "data:image/png;base64, " + this.state.data["icon"]
             return (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} updateAnimation={true}>
+                <ContentPane updateAnimation={true}>
                     <div className="contentHeader">
                         <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> Application </h2>
                         <div className="itemInfo">
@@ -121,10 +117,6 @@ export default class ApplicationsContent extends Component {
     }
 }
 ApplicationsContent.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
     selectedItems: PropTypes.array,
     changeAction: PropTypes.func.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,

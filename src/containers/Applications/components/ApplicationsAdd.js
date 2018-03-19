@@ -85,13 +85,10 @@ export default class ApplicationsAdd extends Component {
     render() {
         let renderComponent
         if (this.state.isLoading) {
-            renderComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-                    <Loading message="Loading..." />
-                </ContentPane>)
+            renderComponent = (<Loading message="Loading..." />)
         } else {
             renderComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                <ContentPane>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" > New Application </h2>
                     </div>
