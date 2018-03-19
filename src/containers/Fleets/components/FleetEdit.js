@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import Input from '../../../../components/Forms/Input'
+import Input from '../../../components/Forms/Input'
 import { I18n } from 'react-i18nify'
-import Loading from '../../../../components/Loading'
+import Loading from '../../../components/Loading'
 import { connect } from 'react-redux'
 import {
     uiSetNotification,
     uiTransactionFinish,
     uiTransactionStart
-} from '../../../../store/ui/actions'
+} from '../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 
 function mapStateToProps(state, props) {
