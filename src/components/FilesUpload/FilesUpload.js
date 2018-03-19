@@ -1,37 +1,37 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import bytesToSize from '../../../shared/bytesToSize'
+import bytesToSize from '../../shared/bytesToSize'
 
 export default class FilesUpload extends Component {
-    
-    constructor (props, context) {
+
+    constructor(props, context) {
         super(props, context)
         this.onDrop = this.onDrop.bind(this)
         this.onDragEnter = this.onDragEnter.bind(this)
         this.onDragLeave = this.onDragLeave.bind(this)
         this.openFileChooser = this.openFileChooser.bind(this)
-        
-        this.id = 1    
+
+        this.id = 1
         this.state = { files: [] }
     }
-  
-    onDrop (event) {
+
+    onDrop(event) {
         event.preventDefault()
         this.onDragLeave(event)
-        
+
         // Collect added files, perform checking, cast pseudo-array to Array,
         // then return to method
         let filesAdded = event.dataTransfer ? event.dataTransfer.files : event.target.files
-        
+
         // Multiple files dropped when not allowed
         if (this.props.multiple === false && filesAdded.length > 1) {
             filesAdded = [filesAdded[0]]
         }
-        
+
         let files = []
         for (let i = 0; i < filesAdded.length; i++) {
             let file = filesAdded[i]
-            
+
             // Assign file an id
             file.id = 'files-' + this.id++
             // Tell file it's own extension
@@ -41,7 +41,7 @@ export default class FilesUpload extends Component {
             // Tell file it's own readable size
             file.sizeReadable = bytesToSize(file.size)
             // Add preview, either image or file extension
-            
+
             if (file.type && this.mimeTypeLeft(file.type) === 'image') {
                 file.preview = {
                     type: 'image',
@@ -49,10 +49,10 @@ export default class FilesUpload extends Component {
                 }
             } else {
                 file.preview = {
-                type: 'file'
+                    type: 'file'
                 }
             }
-  
+
             // Check for file max limit
             if (this.state.files.length + files.length >= this.props.maxFiles) {
                 this.onError({
@@ -61,41 +61,41 @@ export default class FilesUpload extends Component {
                 }, file)
                 break
             }
-  
+
             // If file is acceptable, push or replace
             if (this.fileTypeAcceptable(file) && this.fileSizeAcceptable(file)) {
                 files.push(file)
             }
         }
-        
+
         this.setState({
             files: this.props.multiple === false ? files : [...this.state.files, ...files]
         }, () => {
             this.props.onChange.call(this, this.state.files)
         })
     }
-    
-    onDragOver (event) {
+
+    onDragOver(event) {
         event.preventDefault()
         event.stopPropagation()
     }
 
-    onDragEnter (event) {
+    onDragEnter(event) {
         let el = this.dropzone
         el.className += ' ' + this.props.dropActiveClassName
     }
-  
-    onDragLeave (event) {
+
+    onDragLeave(event) {
         let el = this.dropzone
         this.dropzone.className = el.className.replace(' ' + this.props.dropActiveClassName, '')
     }
-  
-    openFileChooser () {
+
+    openFileChooser() {
         this.inputElement.value = null
         this.inputElement.click()
     }
-  
-    fileTypeAcceptable (file) {
+
+    fileTypeAcceptable(file) {
         let accepts = this.props.accepts
         if (accepts) {
             if (file.type) {
@@ -114,7 +114,7 @@ export default class FilesUpload extends Component {
                         }
                     }
                 }
-            }  
+            }
             this.onError({
                 code: 1,
                 message: file.name + ' is not a valid file type'
@@ -124,8 +124,8 @@ export default class FilesUpload extends Component {
             return true
         }
     }
-    
-    fileSizeAcceptable (file) {
+
+    fileSizeAcceptable(file) {
         if (file.size > this.props.maxFileSize) {
             this.onError({
                 code: 2,
@@ -142,16 +142,16 @@ export default class FilesUpload extends Component {
             return true
         }
     }
-    
-    mimeTypeLeft (mime) {
+
+    mimeTypeLeft(mime) {
         return mime.split('/')[0]
     }
-    
-    mimeTypeRight (mime) {
+
+    mimeTypeRight(mime) {
         return mime.split('/')[1]
     }
-    
-    fileExtension (file) {
+
+    fileExtension(file) {
         let extensionSplit = file.name.split('.')
         if (extensionSplit.length > 1) {
             return extensionSplit[extensionSplit.length - 1]
@@ -159,12 +159,12 @@ export default class FilesUpload extends Component {
             return 'none'
         }
     }
-    
-    onError (error, file) {
+
+    onError(error, file) {
         this.props.onError.call(this, error, file)
     }
-  
-    removeFile (fileToRemove) {
+
+    removeFile(fileToRemove) {
         this.setState({
             files: this.state.files.filter(file => file.id !== fileToRemove.id)
         }, () => {
@@ -172,15 +172,15 @@ export default class FilesUpload extends Component {
         })
     }
 
-    removeFiles () {
+    removeFiles() {
         this.setState({
             files: []
         }, () => {
             this.props.onChange.call(this, this.state.files)
         })
     }
-    
-    render () {
+
+    render() {
         const inputAttributes = {
             type: 'file',
             accept: this.props.accepts ? this.props.accepts.join() : '',
@@ -192,25 +192,25 @@ export default class FilesUpload extends Component {
             },
             onChange: this.onDrop
         }
-        
+
         return (
             <div className="file-upload">
                 <input
-                {...inputAttributes}
+                    {...inputAttributes}
                 />
                 <div
-                className={this.props.className}
-                onClick={
-                    this.props.clickable === true
-                    ? this.openFileChooser
-                    : null
-                }
-                onDrop={this.onDrop}
-                onDragOver={this.onDragOver}
-                onDragEnter={this.onDragEnter}
-                onDragLeave={this.onDragLeave}
-                ref={dropzone => { this.dropzone = dropzone }}
-                style={this.props.style}
+                    className={this.props.className}
+                    onClick={
+                        this.props.clickable === true
+                            ? this.openFileChooser
+                            : null
+                    }
+                    onDrop={this.onDrop}
+                    onDragOver={this.onDragOver}
+                    onDragEnter={this.onDragEnter}
+                    onDragLeave={this.onDragLeave}
+                    ref={dropzone => { this.dropzone = dropzone }}
+                    style={this.props.style}
                 >
                     {this.props.children}
                 </div>
@@ -237,7 +237,7 @@ FilesUpload.propTypes = {
     name: PropTypes.string,
     style: PropTypes.object
 }
-  
+
 FilesUpload.defaultProps = {
     onChange: function (files) {
         console.log(files)
