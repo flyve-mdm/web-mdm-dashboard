@@ -317,13 +317,9 @@ _WIP: Maintainers: Required / Contributors: Required_
 
 _AccessLint: Maintainers: Required / Contributors: Required_
 
-**GPG:** After installation, this app checks all commits of new (or newly updated) pull requests for valid GPG signatures according to the GitHub API.
+**commitlint:** Runs commitlint against all commits of new or edited pull requests and sets an appropriate status check.
 
-_GPG: Maintainers: Required / Contributors: Optional_
-
-**validate-commit-msg:** Runs validate-commit-msg over all commits of new or edited pull requests and sets an appropriate status check.
-
-_validate-commit-msg: Maintainers: Required / Contributors: Required_
+_commitlint: Maintainers: Required / Contributors: Required_
 
 **DCO:** This App enforces the Developer Certificate of Origin (DCO) on Pull Requests. It requires all commit messages to contain the Signed-off-by line with an email address that matches the commit author.
 
