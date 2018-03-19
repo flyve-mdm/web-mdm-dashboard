@@ -42,7 +42,7 @@ export default class DevicesEditOne extends Component {
                     fleet: {
                         value: '',
                         request: {
-                            params: ['PluginFlyvemdmFleet', null],
+                            params: {itemtype: 'PluginFlyvemdmFleet'},
                             method: 'getAllItems',
                             content: 'name',
                             value: 'id'
