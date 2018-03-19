@@ -102,12 +102,21 @@ class Select extends Component {
         } else {
             let options = []
             props.options.forEach(element => {
-                options.push(
-                    {
-                        value: element,
-                        content: element
-                    }
-                )
+                if (!element.name) {
+                    options.push(
+                        {
+                            value: element,
+                            content: element
+                        }
+                    )
+                } else {
+                    options.push(
+                        {
+                            value: element.value,
+                            content: element.name
+                        }
+                    )
+                }
             })
 
             this.setState ({ options })
