@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import FilesUpload from './FilesUpload'
-import FilesUploadItemList from './FilesUploadItemList'
+import { FilesUpload, FilesUploadItemList } from '../../../components/FilesUpload'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 
@@ -28,11 +27,11 @@ export default class FilesAdd extends Component {
     }
 
     filesRemoveOne = (file) => {
-        this.refs.files.removeFile(file)
+        this.files.removeFile(file)
     }
 
     filesRemoveAll = () => {
-        this.refs.files.removeFiles()
+        this.files.removeFiles()
     }
 
     filesUpload = () => {
@@ -74,18 +73,15 @@ export default class FilesAdd extends Component {
     render() {
         let renderComponent
         if (this.state.isLoading) {
-            renderComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-                    <Loading message="Loading..." />
-                </ContentPane>)
+            renderComponent = (<Loading message="Loading..." />)
         } else {
             renderComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                <ContentPane>
                     <button className="btn --primary" onClick={this.filesUpload}>Save</button>
                     <div className="separator" />
                     <React.Fragment>
                         <FilesUpload
-                            ref='files'
+                            ref={(files) => { this.files = files }}
                             className='files-dropzone'
                             onChange={this.onFilesChange}
                             onError={this.onFilesError}
