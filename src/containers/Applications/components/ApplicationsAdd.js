@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { FilesUpload, FilesUploadItemList } from '../../components/FilesUpload'
-import ContentPane from '../../components/ContentPane'
-import Loading from '../../components/Loading'
+import { FilesUpload, FilesUploadItemList } from '../../../components/FilesUpload'
+import ContentPane from '../../../components/ContentPane'
+import Loading from '../../../components/Loading'
 
 export default class ApplicationsAdd extends Component {
 
@@ -54,10 +54,27 @@ export default class ApplicationsAdd extends Component {
                 this.setState({
                     isLoading: false
                 })
-                this.props.showNotification('Success', 'Saved file')
+                this.props.setNotification({
+                    title: 'Success',
+                    body: 'Saved file',
+                    type: 'success'
+                })
                 this.props.changeAction("Reload")
             })
         } catch (error) {
+            if (Array.isArray(error)) {
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
+            } else {
+                this.props.setNotification({
+                    title:'Error',
+                    body: error,
+                    type: 'alert'
+                })
+            }
             this.setState({
                 isLoading: false
             })
@@ -67,13 +84,10 @@ export default class ApplicationsAdd extends Component {
     render() {
         let renderComponent
         if (this.state.isLoading) {
-            renderComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-                    <Loading message="Loading..." />
-                </ContentPane>)
+            renderComponent = (<Loading message="Loading..." />)
         } else {
             renderComponent = (
-                <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                <ContentPane>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" > New Application </h2>
                     </div>
@@ -100,7 +114,7 @@ export default class ApplicationsAdd extends Component {
                             Drop the file here or click to upload
                         </FilesUpload>
                         <div style={{ margin: '10px' }}>
-                            <button className="win-button win-button-primary" onClick={this.filesUpload}>Save</button>
+                            <button className="btn --primary" onClick={this.filesUpload}>Save</button>
                             {
                                 this.state.files.length > 0
                                     ? <div>
@@ -119,8 +133,7 @@ export default class ApplicationsAdd extends Component {
     }
 }
 ApplicationsAdd.propTypes = {
-    location: PropTypes.array.isRequired,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }

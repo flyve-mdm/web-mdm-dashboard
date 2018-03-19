@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import ApplicationsItemList from './ApplicationsItemList'
-import Loader from '../../components/Loader'
-import Confirmation from '../../components/Confirmation'
+import Loader from '../../../components/Loader'
+import Confirmation from '../../../components/Confirmation'
 
 export default class ApplicationsList extends Component {
 
@@ -12,7 +12,6 @@ export default class ApplicationsList extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItemList: [],
             scrolling: false,
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
@@ -29,19 +28,24 @@ export default class ApplicationsList extends Component {
         this.handleRefresh()
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.listView && !this.state.scrolling) {
+    componentDidUpdate(prevProps) {    
+        if(this.listView && !this.state.scrolling) {
             this.listView.winControl.footer.style.height = '1px'
         }
 
-        if (this.props.action === "Reload") {
+        if (this.props.action === "reload") {
             this.handleRefresh()
             this.props.changeAction(null)
+        }
+
+        if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
+            if(this.listView) {
+                this.listView.winControl.selection.clear()
+            }
         }
     }
 
     componentWillUnmount() {
-        this.setState({ selectedItemList: [] })
         this.props.changeSelectionMode(false)
     }
 
@@ -51,9 +55,10 @@ export default class ApplicationsList extends Component {
         )
     })
 
+
     handleRefresh = async () => {
         try {
-            this.props.onNavigate([this.props.location[0]])
+            this.props.history.push('/app/applications')
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -63,13 +68,13 @@ export default class ApplicationsList extends Component {
                     count: 15
                 }
             })
-            const files = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPackage', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            const response = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPackage', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
             this.setState({
                 isLoading: false,
-                order: files.order,
-                itemList: new WinJS.Binding.List(files.data)
+                order: response.order,
+                itemList: new WinJS.Binding.List(response.data)
             })
-
+            
         } catch (error) {
             this.setState({
                 isLoading: false,
@@ -78,31 +83,23 @@ export default class ApplicationsList extends Component {
         }
     }
 
-    handleEdit = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        setTimeout(() => {
-            this.props.onNavigate(this.state.selectedItemList.length > 0 && this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
-            this.props.changeAction(button.label)
-        }, 0)
+
+    handleEdit(path) {
+        this.props.history.push(path)
     }
 
-    handlePanel = (eventObject) => {
-        let button = eventObject.currentTarget.winControl
-        this.listView.winControl.selection.clear()
-
+    handleAdd = () => {
+        this.props.history.push("/app/applications/add")
         this.props.changeSelectionMode(false)
-        this.props.onNavigate([this.props.location[0]])
-        this.props.changeAction(button.label)
+        this.props.changeSelectedItems([])
+        this.listView.winControl.selection.clear()
     }
 
     handleToggleSelectionMode = () => {
-        this.listView.winControl.selection.clear()
-        this.props.changeAction(null)
+        this.props.history.push('/app/applications')
         this.props.changeSelectionMode(!this.props.selectionMode)
-        this.props.onNavigate([this.props.location[0]])
-        this.setState({
-            selectedItemList: []
-        })
+        this.props.changeSelectedItems([])
+        this.listView.winControl.selection.clear()
     }
 
     handleSelectionChanged = (eventObject) => {
@@ -113,19 +110,12 @@ export default class ApplicationsList extends Component {
         for (const item of index) {
             itemSelected.push(this.state.itemList.getItem(item).data)
         }
-
-        this.setState({
-            selectedItemList: itemSelected
-        })
-
-        if (this.props.action !== 'Edit') {
-
-            setTimeout(() => {
-                if (index.length !== 0) {
-                    this.props.changeAction(null)
-                }
-                this.props.onNavigate(index.length === 1 && !this.props.selectionMode ? [this.props.location[0], this.state.selectedItemList] : this.props.location)
-            }, 0)
+        this.props.changeSelectedItems(itemSelected)
+        if (index.length === 1 && !this.props.selectionMode) {
+            this.props.history.push(`/app/applications/${itemSelected[0]["PluginFlyvemdmPackage.id"]}`)
+        }
+        if (index.length > 1 && !this.props.selectionMode) {
+            this.props.history.push('/app/applications/edit/')
         }
     }
 
@@ -134,7 +124,7 @@ export default class ApplicationsList extends Component {
             const isOK = await Confirmation.isOK(this.contentDialog)
             if (isOK) {
 
-                let itemListToDelete = this.state.selectedItemList.map((item) => {
+                let itemListToDelete = this.props.selectedItems.map((item) => {
                     return {
                         id: item["PluginFlyvemdmPackage.id"]
                     }
@@ -146,39 +136,47 @@ export default class ApplicationsList extends Component {
 
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmPackage', input: itemListToDelete, queryString: { force_purge: true } })
 
-                this.props.showNotification('Success', 'elements successfully removed')
-                this.props.changeSelectionMode(false)
-                this.props.changeAction("Reload")
-                this.setState({
-                    selectedItemList: [],
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: 'Applications successfully removed',
+                    type: 'success'
                 })
+                this.props.changeSelectionMode(false)
+                this.props.changeSelectedItems([])
+                this.props.changeAction('reload')
+
+                this.setState((prevState, props) => ({
+                    isLoading: false
+                }))
             } else {
-                // Clean another actions selected
-                this.props.changeAction(null)
                 // Exit selection mode
                 this.props.changeSelectionMode(false)
+                this.props.changeSelectedItems([])
+
                 this.listView.winControl.selection.clear()
-                this.setState({
-                    selectedItemList: [],
-                    isLoading: false
+            }
+            
+        } catch (error) {
+            if (error.length > 1) {
+
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
                 })
             }
 
-        } catch (error) {
-            if (error.length > 1) {
-                this.props.showNotification(error[0], error[1])
-            }
-            this.props.changeAction(null)
             this.props.changeSelectionMode(false)
-            this.setState({
-                selectedItemList: []
-            })
+            this.props.changeSelectedItems([])
+
+            this.setState((prevState, props) => ({
+                isLoading: false
+            }))
         }
     }
 
     handleSort = async () => {
         try {
-            this.props.onNavigate([this.props.location[0]])
             this.setState({
                 isLoading: true,
                 pagination: {
@@ -189,13 +187,14 @@ export default class ApplicationsList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const files = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPackage', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 5, 6] } })
+            const response = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPackage', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 5, 6] } })
 
             this.setState({
                 isLoading: false,
-                order: files.order,
-                itemList: new WinJS.Binding.List(files.data)
+                order: response.order,
+                itemList: new WinJS.Binding.List(response.data)
             })
+            this.props.history.push('/app/applications')
 
         } catch (error) {
             this.setState({
@@ -225,9 +224,9 @@ export default class ApplicationsList extends Component {
 
     loadMoreData = async () => {
         try {
-            const files = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPackage', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
-            for (const item in files.data) {
-                this.state.itemList.push(files.data[item])
+            const response = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPackage', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            for (const item in response.data) {
+                this.state.itemList.push(response.data[item])
             }
 
             this.setState({
@@ -244,13 +243,21 @@ export default class ApplicationsList extends Component {
         }
     }
 
+    handleAdd = () => {
+        this.props.history.push("/app/applications/add")
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
+        this.listView.winControl.selection.clear()
+    }
+
     render() {
         let deleteCommand = (
             <ReactWinJS.ToolBar.Button
                 key="delete"
                 icon="delete"
+                label="Delete"
                 priority={0}
-                disabled={this.state.selectedItemList.length === 0}
+                disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleDelete}
             />
         )
@@ -261,8 +268,8 @@ export default class ApplicationsList extends Component {
                 icon="edit"
                 label="Edit"
                 priority={0}
-                disabled={this.state.selectedItemList.length === 0}
-                onClick={this.handleEdit}
+                disabled={this.props.selectedItems.length === 0}
+                onClick={() => this.handleEdit("/app/applications/edit")}
             />
         )
 
@@ -288,7 +295,7 @@ export default class ApplicationsList extends Component {
         }
 
         return (
-            <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+            <React.Fragment>
                 <ReactWinJS.ToolBar className="listToolBar">
                     <ReactWinJS.ToolBar.Button
                         key="sort"
@@ -310,7 +317,7 @@ export default class ApplicationsList extends Component {
                         icon="add"
                         label="Add"
                         priority={0}
-                        onClick={this.handlePanel}
+                        onClick={this.handleAdd}
                     />
 
                     {this.props.selectionMode ? editCommand : null}
@@ -327,23 +334,18 @@ export default class ApplicationsList extends Component {
                 </ReactWinJS.ToolBar>
 
                 {listComponent}
-                <Confirmation title={`Delete ` + this.props.location[0]} message={this.state.selectedItemList.length + ` ` + this.props.location[0]} reference={el => this.contentDialog = el} />
-            </div>
+                <Confirmation title="Delete Applications" message={`${this.props.selectedItems.length} Applications`} reference={el => this.contentDialog = el} />
+            </React.Fragment>
         )
     }
 }
 ApplicationsList.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
-    animation: PropTypes.bool.isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
     selectionMode: PropTypes.bool.isRequired,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
+    setNotification: PropTypes.func.isRequired,
+    glpi: PropTypes.object.isRequired,
+    selectedItems: PropTypes.array.isRequired    
 }

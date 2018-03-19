@@ -130,7 +130,6 @@ class Devices extends Component {
     }
 
     render() {
-
         let renderComponents = (
 
             <React.Fragment>

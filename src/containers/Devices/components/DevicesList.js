@@ -347,5 +347,6 @@ DevicesList.propTypes = {
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
+    glpi: PropTypes.object.isRequired,
+    selectedItems: PropTypes.array.isRequired
 }

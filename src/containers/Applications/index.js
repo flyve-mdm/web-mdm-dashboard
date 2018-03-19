@@ -1,86 +1,165 @@
 import React, { Component } from 'react'
-import ApplicationsList from './ApplicationsList'
-import ApplicationsPage from './ApplicationsPage'
+import ApplicationsList from './components/ApplicationsList'
 import getMode from '../../shared/getMode'
-import glpi from '../../shared/glpiApi'
+import { uiSetNotification } from '../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import withGLPI from '../../hoc/withGLPI'
+import calc100PercentMinus from '../../shared/calc100PercentMinus'
+import GenerateRoutes from '../../components/GenerateRoutes'
+import routes from './routes'
 
-export default class Applications extends Component {
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
+
+class Applications extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            location: ['Applications'],
+            mode: getMode(),
+            itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
             selectionMode: false,
             action: null,
-            animation: false,
+            selectedItems: []
         }
     }
 
-    onNavigate = location => this.setState({location})
-    changeAction = action => this.setState({action})
-    changeSelectionMode = selectionMode => this.setState({selectionMode})
-    showNotification = (title, body) => {
+    handleResize = () => {
+        let nextMode = getMode()
+
+        if (nextMode === 'small') {
+            this.setState({
+                itemListPaneWidth: '100%'
+            })
+        } else {
+            this.setState({
+                itemListPaneWidth: 320
+            })
+        }
+
+        if (this.state.mode !== nextMode) {
+            this.setState({
+                mode: nextMode 
+            })
+        }
+    }
+
+    componentWillMount () {
+        window.addEventListener('resize', this.handleResize)
+    }
+
+    componentWillUnmount () {
+        window.removeEventListener('resize', this.handleResize)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.history.location.pathname === '/app/applications' && this.state.selectedItems.length > 0) {
+            this.changeSelectedItems([])
+        }
+    }
+
+    propsData = () => {
+        return {
+            changeSelectionMode: this.changeSelectionMode,
+            selectionMode: this.state.selectionMode,
+            selectedItems: this.state.selectedItems,
+            changeSelectedItems: this.changeSelectedItems,
+            action: this.state.action,
+            changeAction: this.changeAction,
+            setNotification: this.props.actions.setNotification,
+            history: this.props.history,
+            glpi: this.props.glpi
+        }
+    }
+
+    changeSelectedItems = selectedItems => this.setState({ selectedItems })
+    changeAction = action => this.setState({ action })
+    changeSelectionMode = selectionMode => this.setState({ selectionMode })
+
+    stylesList = () => {
+
+        let styles = {
+            width: this.state.itemListPaneWidth   
+        }
+
+        if (this.state.mode === 'small') {
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/applications' )  || 
+                this.props.history.location.pathname === '/app/applications' || 
+                (this.props.history.location.pathname === '/app/applications' &&
+                 this.state.selectionMode )) {
+                     styles.display = 'inline-block'
+            } else {
+                  styles.display = 'none'
+            }
+
+        } else {
+            styles.display = 'inline-block'
+        } 
+
+        return styles
+    }
+
+    stylesContent = () => {
+
+        const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
+        let styles = {
+            width: calc100PercentMinus(validWidth),
+            height:'100%'
+        }
+
+        if (this.state.mode === 'small') {
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/applications' )  || 
+                this.props.history.location.pathname === '/app/applications' || 
+                (this.props.history.location.pathname === '/app/applications' &&
+                 this.state.selectionMode )) {
+                     styles.display = 'none'
+            } else {
+                styles.display = 'inline-flex'
+            }
+            
+        } else {
+            styles.display = 'inline-flex'
+        } 
+
+        return styles
     }
 
     render() {
+        let renderComponents = (
 
-        let selectedItemList = this.state.location.length === 2 ? this.state.location[1] : null
-        if (getMode() === 'small') {
-            if (!selectedItemList && !this.state.action) {
-                return <ApplicationsList
-                    itemListPaneWidth={'100%'}
-                    animation={this.state.animation}
-                    location={this.state.location}
-                    onNavigate={this.onNavigate}
-                    changeSelectionMode={this.changeSelectionMode}
-                    selectionMode={this.state.selectionMode}
-                    action={this.state.action}
-                    changeAction={this.changeAction}
-                    showNotification={this.showNotification} 
-                    glpi={glpi} />
-            } else {
-                return <ApplicationsPage 
-                    itemListPaneWidth={0}
-                    animation={this.state.animation}
-                    location={this.state.location}
-                    onNavigate={this.onNavigate}
-                    selectedItemList={selectedItemList}
-                    changeSelectionMode={this.changeSelectionMode}
-                    action={this.state.action}
-                    changeAction={this.changeAction}
-                    showNotification={this.showNotification} 
-                    glpi={glpi} />
-            }
-        } else {
-            let itemListPaneWidth = 320
-            return (
-                <div className="flex-block --with-scroll --with-content-pane">
-                    <ApplicationsList
-                        itemListPaneWidth={itemListPaneWidth}
-                        animation={this.state.animation}
-                        location={this.state.location}
-                        onNavigate={this.onNavigate}
-                        changeSelectionMode={this.changeSelectionMode}
-                        selectionMode={this.state.selectionMode}
-                        action={this.state.action}
-                        changeAction={this.changeAction} 
-                        showNotification={this.showNotification} 
-                        glpi={glpi}
-                    />
-                    <ApplicationsPage 
-                        itemListPaneWidth={itemListPaneWidth}
-                        animation={this.state.animation}
-                        location={this.state.location}
-                        onNavigate={this.onNavigate}
-                        selectedItemList={selectedItemList}
-                        changeSelectionMode={this.changeSelectionMode}
-                        action={this.state.action}
-                        changeAction={this.changeAction} 
-                        showNotification={this.showNotification} 
-                        glpi={glpi}
-                    />
+            <React.Fragment>
+                <div className="listPane flex-block-list" style={{...this.stylesList()}}>
+                <ApplicationsList
+                    key="list"
+                    {...this.propsData()}
+                />
                 </div>
-            )
-        }
+                <div className="flex-block-content" style={{...this.stylesContent()}}>
+                <GenerateRoutes 
+                    key="content" 
+                    routes={routes} 
+                    rootPath={this.props.match.url} 
+                    data={{...this.propsData()}} 
+                />
+                </div>
+            </React.Fragment>
+
+        )
+
+        return (
+            <div className="flex-block --with-scroll">
+                {renderComponents}
+            </div>
+        )
     }
 }
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(withGLPI(Applications))

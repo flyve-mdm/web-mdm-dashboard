@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ApplicationsEditItemList from './ApplicationsEditItemList'
-import EmptyMessage from '../../components/EmptyMessage'
-import ContentPane from '../../components/ContentPane'
-import Loading from '../../components/Loading'
+import EmptyMessage from '../../../components/EmptyMessage'
+import ContentPane from '../../../components/ContentPane'
+import Loading from '../../../components/Loading'
 
 export default class ApplicationsEdit extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            selectedItem: [],
+            itemListEdit: [...this.props.selectedItems],
             isLoading: false
         }
     }
 
     updateItemList = (index, name) => {
-        let newItem = [...this.state.selectedItem]
+        let newItem = [...this.state.itemListEdit]
 
         //Find index of specific object using findIndex method.    
         let objIndex = newItem.findIndex((obj => obj["id"] === index));
@@ -30,29 +30,36 @@ export default class ApplicationsEdit extends Component {
         }
 
         this.setState({
-            selectedItem: newItem
+            itemListEdit: [...newItem]
         })
     }
 
     handleSaveFiles = async () => {
 
         try {
-            if (this.state.selectedItem.length > 0) {
+            if (this.state.itemListEdit.length > 0) {
 
                 this.setState({
                     isLoading: true
                 })
-                await this.props.glpi.updateItem({ itemtype: "PluginFlyvemdmPackage", input: this.state.selectedItem })
+                await this.props.glpi.updateItem({ itemtype: "PluginFlyvemdmPackage", input: this.state.itemListEdit })
 
-                if (this.state.selectedItem.length > 1) {
-                    this.props.showNotification('Success', 'Edited files')
+                if (this.state.itemListEdit.length > 1) {
+                    this.props.setNotification({
+                        title: 'Successfully',
+                        body: 'Edited files',
+                        type: 'success'
+                    })
                 } else {
-                    this.props.showNotification('Success', 'Edited file')
+                    this.props.setNotification({
+                        title: 'Successfully',
+                        body: 'Edited file',
+                        type: 'success'
+                    })
                 }
 
                 this.props.changeSelectionMode(false)
-                this.props.onNavigate([this.props.location[0]])
-                this.props.changeAction("Reload")
+                this.props.changeAction("reload")
             }
 
         } catch (error) {
@@ -61,45 +68,47 @@ export default class ApplicationsEdit extends Component {
                 isLoading: false
             })
 
-            if (error.length > 1) {
-                this.props.showNotification(error[0], error[1])
+            if (Array.isArray(error)) {
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
             } else {
-                this.props.showNotification('Error', error)
+                this.props.setNotification({
+                    title:'Error',
+                    body: error,
+                    type: 'alert'
+                })
             }
         }
     }
 
     render() {
 
-        if (this.props.selectedItemList) {
+        if (this.props.selectedItems) {
 
             if (this.state.isLoading) {
-                return (
-                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
-                        <Loading message="Loading..." />
-                    </ContentPane>
-                )
+                return (<Loading message="Loading..." />)
             } else {
-                let renderComponent = this.props.selectedItemList.map((item, index) => {
+                let renderComponent = this.props.selectedItems.map((item, index) => {
 
                     return (
                         <ApplicationsEditItemList
                             key={index}
-                            itemListPaneWidth={this.props.itemListPaneWidth}
-                            location={this.props.location}
+                            history={this.props.history}
                             updateItemList={this.updateItemList}
                             selectedItem={item}
                             changeAction={this.props.changeAction}
-                            showNotification={this.props.showNotification}
                         />
                     )
                 })
 
                 return (
-                    <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
+                    <ContentPane>
                         <div className="contentHeader">
-                            <h2 className="win-h2 titleContentPane" > Edit {this.props.location[0]} </h2>
-                            <button className="win-button win-button-primary" onClick={this.handleSaveFiles}>
+                            <h2 className="win-h2 titleContentPane" > Edit application</h2>
+                            <button className="btn --primary" onClick={this.handleSaveFiles}>
                                 Save
                         </button>
                         </div>
@@ -111,26 +120,20 @@ export default class ApplicationsEdit extends Component {
 
         } else {
             return (
-                <EmptyMessage message="No Selection" itemListPaneWidth={this.props.itemListPaneWidth} />
+                <EmptyMessage message="No Selection"/>
             )
         }
     }
 }
 ApplicationsEdit.propTypes = {
-    itemListPaneWidth: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
-    location: PropTypes.array.isRequired,
-    onNavigate: PropTypes.func.isRequired,
-    selectedItemList: PropTypes.array,
+    selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
     action: PropTypes.string,
     changeAction: PropTypes.func.isRequired,
-    showNotification: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
 ApplicationsEdit.defaultProps = {
-    selectedItemList: [],
+    selectedItems: [],
     action: null
 }
