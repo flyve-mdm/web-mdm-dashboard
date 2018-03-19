@@ -118,6 +118,10 @@ class DevicesEdit extends Component {
                 history={this.props.history}
                 setNotification={this.props.setNotification}
                 glpi={this.props.glpi}
+                request={{
+                    id: 'User.id',
+                    itemtype: 'User'
+                }}
             />
         )
     }

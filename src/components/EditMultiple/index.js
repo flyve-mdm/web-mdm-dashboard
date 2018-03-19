@@ -42,6 +42,33 @@ export default class EditMultiple extends Component {
                         [this.state.selectedField.DBName[0]]: this.state.newValue,
                         [this.state.selectedField.DBName[1]]: this.state.passwordConfirmation
                     }
+
+                input = this.props.selectedItems.map(element => {
+                    return ({
+                        id: element[this.props.request.id],
+                        ...input
+                    })
+                })
+
+                try {
+                    await this.props.glpi.updateItem({itemtype: this.props.request.itemtype, input})
+                    this.setState ({isLoading: false})            
+                    this.props.setNotification({
+                        title: 'Success',
+                        body: 'Elements successfully edited',
+                        type: 'success'
+                    })
+                    this.props.history.goBack()
+                    this.props.changeAction('reload')
+                    this.props.changeSelectionMode(false)
+                } catch (error) {
+                    this.setState ({isLoading: false})            
+                    this.props.setNotification({
+                        title: error[0],
+                        body: error[1],
+                        type: 'alert'
+                    })
+                }
             })
         } else {
             this.setState({
@@ -238,5 +265,6 @@ EditMultiple.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     setNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
+    glpi: PropTypes.object.isRequired,
+    request: PropTypes.object.isRequired
 }
