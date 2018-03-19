@@ -108,7 +108,7 @@ export default class ApplicationsEdit extends Component {
                     <ContentPane>
                         <div className="contentHeader">
                             <h2 className="win-h2 titleContentPane" > Edit application</h2>
-                            <button className="win-button win-button-primary" onClick={this.handleSaveFiles}>
+                            <button className="btn --primary" onClick={this.handleSaveFiles}>
                                 Save
                         </button>
                         </div>
