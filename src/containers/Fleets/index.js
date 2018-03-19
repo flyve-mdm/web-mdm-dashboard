@@ -1,171 +1,164 @@
 import React, { Component } from 'react'
+import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import FleetsList from './components/FleetsList'
-import routes from './routes'
-import { updateObject } from '../../shared/updateObject'
+import { uiSetNotification } from '../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import getMode from '../../shared/getMode'
+import calc100PercentMinus from '../../shared/calc100PercentMinus'
+
+function mapDispatchToProps(dispatch) {
+  const actions = {
+    setNotification: bindActionCreators(uiSetNotification, dispatch)
+  }
+  return { actions }
+}
 
 class Fleets extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
-        fleetsData: null,
-        policiesData: null,
-        tasksData: null,        
-        fleetSelected: null,
-        policyCategoriesData: null,
-        filesData: null,
-        applicationsData: null
+      mode: getMode(),
+      itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
+      selectionMode: false,
+      action: null,
+      selectedItems: []
     }
   }
 
-  setFleets = (fleetsData) => {
-    this.setState({
-      fleetsData: fleetsData
-    })
-  }
- 
-  fecthPolicies = async () => {  
-    const response = await this.props.glpi.searchItems({
-        itemtype: 'PluginFlyvemdmPolicy', 
-        options: { 
-            uid_cols: true, 
-            forcedisplay: [1, 2, 3, 4, 6],
-            range: '0-50' // Can more than 50 items
-        }
-    })
+  handleResize = () => {
+    let nextMode = getMode()
 
-    this.setState({ policiesData:  response.data });
-  }
+    if (nextMode === 'small') {
+      this.setState({
+        itemListPaneWidth: '100%'
+      })
+    } else {
+      this.setState({
+        itemListPaneWidth: 320
+      })
+    }
 
-  fetchTasks = async () => {
-    /*
-     * Name, ID, Category ID, Policy ID
-     * */
-    const response = await this.props.glpi.getSubItems({
-        itemtype: 'PluginFlyvemdmFleet',
-        id: this.state.fleetSelected['PluginFlyvemdmFleet.id'],
-        subItemtype: 'PluginFlyvemdmTask',
-        options: { 
-            uid_cols: true, 
-            forcedisplay: [1, 2, 3, 4, 6]
-        }
-    })
-
-    this.setState({ tasksData: response });
+    if (this.state.mode !== nextMode) {
+      this.setState({
+        mode: nextMode
+      })
+    }
   }
 
-  fetchPolicyCategories = async () => {
-    /*
-     * Name, ID
-     * */
-    const response = await this.props.glpi.searchItems({
-      itemtype: 'PluginFlyvemdmPolicyCategory',
-      options: { 
-          uid_cols: true, 
-          forcedisplay: [1, 2]
+  componentWillMount() {
+    window.addEventListener('resize', this.handleResize)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.history.location.pathname === '/spp/fleets' && this.state.selectedItems.length > 0) {
+      this.changeSelectedItems([])
+    }
+  }
+
+  propsData = () => {
+    return {
+      changeSelectionMode: this.changeSelectionMode,
+      selectionMode: this.state.selectionMode,
+      selectedItems: this.state.selectedItems,
+      changeSelectedItems: this.changeSelectedItems,
+      action: this.state.action,
+      changeAction: this.changeAction,
+      setNotification: this.props.actions.setNotification,
+      history: this.props.history,
+      glpi: this.props.glpi
+    }
+  }
+
+  changeSelectedItems = selectedItems => this.setState({ selectedItems })
+  changeAction = action => this.setState({ action })
+  changeSelectionMode = selectionMode => this.setState({ selectionMode })
+
+  stylesList = () => {
+
+    let styles = {
+      width: this.state.itemListPaneWidth
+    }
+
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/spp/fleets') ||
+        this.props.history.location.pathname === '/spp/fleets' ||
+        (this.props.history.location.pathname === '/spp/fleets' &&
+          this.state.selectionMode)) {
+        styles.display = 'inline-block'
+      } else {
+        styles.display = 'none'
       }
-    })
 
-    this.setState({ policyCategoriesData: response.data });
+    } else {
+      styles.display = 'inline-block'
+    }
+
+    return styles
   }
 
-  fetchFile = async () => {
-    /* 
-    * Id and Name of file
-    */
-    const response = await this.props.glpi.searchItems({
-      itemtype: 'PluginFlyvemdmFile',
-      options: {
-        uid_cols: true,
-        forcedisplay: [
-          1, 2, 3
-        ],
-        range: '0-50' // Can more than 50 items
+  stylesContent = () => {
+
+    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
+    let styles = {
+      width: calc100PercentMinus(validWidth),
+      height: '100%'
+    }
+
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/spp/fleets') ||
+        this.props.history.location.pathname === '/spp/fleets' ||
+        (this.props.history.location.pathname === '/spp/fleets' &&
+          this.state.selectionMode)) {
+        styles.display = 'none'
+      } else {
+        styles.display = 'inline-flex'
       }
-    })
 
-    this.setState({ filesData: response.data });
+    } else {
+      styles.display = 'inline-flex'
+    }
+
+    return styles
   }
 
-  fetchApplication = async () => {
-    /* 
-    * Id and Alias
-    */
-    const response = await this.props.glpi.searchItems({
-      itemtype: 'PluginFlyvemdmPackage',
-      options: {
-        uid_cols: true,
-        forcedisplay: [
-          1,2,3,4,5,6
-        ],
-        range: '0-50' // Can more than 50 items
-      }
-    })
+  render() {
+    let renderComponents = (
 
-    this.setState({ applicationsData: response.data });
-  }
+      <React.Fragment>
+        <div className="listPane flex-block-list" style={{ ...this.stylesList() }}>
+          <FleetsList
+            key="list"
+            {...this.propsData()}
+          />
+        </div>
+        <div className="flex-block-content" style={{ ...this.stylesContent() }}>
+          <GenerateRoutes
+            key="content"
+            routes={routes}
+            rootPath={this.props.match.url}
+            data={{ ...this.propsData() }}
+          />
+        </div>
+      </React.Fragment>
 
-  componentDidMount = () => {
-    this.fecthPolicies()
-    this.fetchPolicyCategories()
-    this.fetchFile()
-    this.fetchApplication()
-  }
-
-  handleClickFleet = (fleetData) => {
-    this.setState({ fleetSelected: {...fleetData} },
-      () => {
-        this.props.history.push(`/app/fleets/${fleetData["PluginFlyvemdmFleet.id"]}`)
-      }
-    );
-  }
-
-  updateFleetSelect = (newFleetData) => {
-    // Update FleetSelected and FleetsData
-    const newFleetSelected = updateObject(this.state.fleetSelected, newFleetData)
-
-    this.setState({
-      fleetSelected: newFleetSelected
-    })
-
-    const newFleetsData = [
-      ...this.state.fleetsData
-    ]
-
-    const index = newFleetsData.findIndex(
-      fleet => fleet['PluginFlyvemdmFleet.id'] === newFleetSelected['PluginFlyvemdmFleet.id']
     )
 
-    newFleetsData[index] = newFleetSelected
-
-    this.setState({
-      fleetsData: newFleetsData
-    })
-  }
-
-  render() { 
-    return ( 
-      <FleetsList 
-        glpi={this.props.glpi}
-        fleetSelected={this.state.fleetSelected}
-        handleClickFleet={this.handleClickFleet}
-        fleetsData={this.state.fleetsData}
-        setFleets={this.setFleets}
-      >
-        <GenerateRoutes routes={routes} rootPath={this.props.match.url} data={{
-            policiesData: this.state.policiesData,
-            fleetSelected: this.state.fleetSelected,
-            tasksData: this.state.tasksData,
-            fetchTasks: this.fetchTasks,
-            policyCategoriesData: this.state.policyCategoriesData,
-            filesData: this.state.filesData,
-            applicationsData: this.state.applicationsData,
-            updateFleetSelect: this.updateFleetSelect
-          }}/>
-      </FleetsList>
+    return (
+      <div className="flex-block --with-scroll">
+        {renderComponents}
+      </div>
     )
   }
 }
-
-export default withGLPI(Fleets);
+export default connect(
+  null,
+  mapDispatchToProps
+)(withGLPI(Fleets))
