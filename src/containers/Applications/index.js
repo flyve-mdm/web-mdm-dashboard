@@ -58,7 +58,7 @@ class Applications extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.history.location.pathname === '/app/devices' && this.state.selectedItems.length > 0) {
+        if(this.props.history.location.pathname === '/app/applications' && this.state.selectedItems.length > 0) {
             this.changeSelectedItems([])
         }
     }
@@ -88,9 +88,9 @@ class Applications extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/devices' )  || 
-                this.props.history.location.pathname === '/app/devices' || 
-                (this.props.history.location.pathname === '/app/devices' &&
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/applications' )  || 
+                this.props.history.location.pathname === '/app/applications' || 
+                (this.props.history.location.pathname === '/app/applications' &&
                  this.state.selectionMode )) {
                      styles.display = 'inline-block'
             } else {
@@ -113,9 +113,9 @@ class Applications extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/devices' )  || 
-                this.props.history.location.pathname === '/app/devices' || 
-                (this.props.history.location.pathname === '/app/devices' &&
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/applications' )  || 
+                this.props.history.location.pathname === '/app/applications' || 
+                (this.props.history.location.pathname === '/app/applications' &&
                  this.state.selectionMode )) {
                      styles.display = 'none'
             } else {
