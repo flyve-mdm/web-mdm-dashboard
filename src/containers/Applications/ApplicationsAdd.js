@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import FilesUpload from '../Files/components/FilesUpload'
-import FilesUploadItemList from '../Files/components/FilesUploadItemList'
+import { FilesUpload, FilesUploadItemList } from '../../components/FilesUpload'
 import ContentPane from '../../components/ContentPane'
 import Loading from '../../components/Loading'
 
