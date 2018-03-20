@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import FleetsItemList from './FleetsItemList'
-import BuildItemList from '../../../components/BuildItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
 
@@ -56,12 +55,6 @@ export default class FleetsList extends Component {
         )
     })
 
-    groupHeaderRenderer = ReactWinJS.reactRenderer((item) => {
-        return (
-            <div>{item.data.title}</div>
-        )
-    })
-
     handleRefresh = async () => {
         try {
             this.props.history.push('/app/fleets')
@@ -74,11 +67,11 @@ export default class FleetsList extends Component {
                     count: 15
                 }
             })
-            const Fleets = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFleet', options: { uid_cols: true, forcedisplay: [2, 3, 4, 12], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            const fleets = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFleet', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
             this.setState({
                 isLoading: false,
-                order: Fleets.order,
-                itemList: BuildItemList(Fleets)
+                order: fleets.order,
+                itemList: new WinJS.Binding.List(fleets.data)
             })
 
         } catch (error) {
@@ -192,12 +185,12 @@ export default class FleetsList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const Fleets = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFleet', options: { uid_cols: true, order: newOrder, forcedisplay: [2, 3, 4, 12] } })
+            const fleets = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFleet', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 6] } })
 
             this.setState({
                 isLoading: false,
-                order: Fleets.order,
-                itemList: BuildItemList(Fleets)
+                order: fleets.order,
+                itemList: new WinJS.Binding.List(fleets.data)
             })
             this.props.history.push('/app/fleets')
 
@@ -229,7 +222,7 @@ export default class FleetsList extends Component {
 
     loadMoreData = async () => {
         try {
-            const Fleets = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFleet', options: { uid_cols: true, forcedisplay: [2, 3, 4, 12], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            const Fleets = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFleet', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
 
             for (const item in Fleets.data) {
                 this.state.itemList.push(Fleets.data[item])
@@ -274,7 +267,7 @@ export default class FleetsList extends Component {
 
         let listComponent = <Loader count={3} />
 
-        if (!this.state.isLoading && this.state.itemList.groups !== undefined) {
+        if (!this.state.isLoading && this.state.itemList.length > 0) {
             listComponent = (
                 <ReactWinJS.ListView
                     ref={(listView) => { this.listView = listView }}
@@ -282,10 +275,8 @@ export default class FleetsList extends Component {
                     className="contentListView win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.state.itemList.dataSource}
-                    groupDataSource={this.state.itemList.groups.dataSource}
                     layout={this.state.layout}
                     itemTemplate={this.ItemListRenderer}
-                    groupHeaderTemplate={this.groupHeaderRenderer}
                     footerComponent={<Loader />}
                     onFooterVisibilityChanged={this.showFooterList}
                     selectionMode={this.props.selectionMode ? 'multi' : 'single'}
