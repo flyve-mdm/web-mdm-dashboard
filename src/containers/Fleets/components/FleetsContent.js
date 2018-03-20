@@ -14,13 +14,119 @@ class FleetsContent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            layout: { type: WinJS.UI.ListLayout }
+            layout: { type: WinJS.UI.ListLayout },
+            data: {
+                policies: undefined,
+                tasks: undefined,
+                categories: undefined,
+                files: undefined,
+                applications: undefined
+            }
         }
+    }
+
+    componentDidMount = () => {
+
+        this.getPolicies()
+        this.getTasks()
+        this.getPolicyCategories()
+        this.getFile()
+        this.getApplication()
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+    }
+
+    getPolicies = async () => {
+        const policies = await this.props.glpi.searchItems({
+            itemtype: 'PluginFlyvemdmPolicy',
+            options: {
+                uid_cols: true,
+                forcedisplay: [1, 2, 3, 4, 6],
+                range: '0-50' // Can more than 50 items
+            }
+        })
+        this.setState((prevState, props) => ({
+            data: { ...prevState.data, policies: policies.data }
+        }))
+    }
+
+    getTasks = async () => {
+        /*
+         * Name, ID, Category ID, Policy ID
+         * */
+        const tasks = await this.props.glpi.getSubItems({
+            itemtype: 'PluginFlyvemdmFleet',
+            id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
+            subItemtype: 'PluginFlyvemdmTask',
+            options: {
+                uid_cols: true,
+                forcedisplay: [1, 2, 3, 4, 6]
+            }
+        })
+        this.setState((prevState, props) => ({
+            data: { ...prevState.data, tasks: tasks }
+        }))
+    }
+
+    getPolicyCategories = async () => {
+        /*
+         * Name, ID
+         * */
+        const categories = await this.props.glpi.searchItems({
+            itemtype: 'PluginFlyvemdmPolicyCategory',
+            options: {
+                uid_cols: true,
+                forcedisplay: [1, 2]
+            }
+        })
+        this.setState((prevState, props) => ({
+            data: { ...prevState.data, categories: categories.data }
+        }))
+    }
+
+    getFile = async () => {
+        /* 
+        * Id and Name of file
+        */
+        const files = await this.props.glpi.searchItems({
+            itemtype: 'PluginFlyvemdmFile',
+            options: {
+                uid_cols: true,
+                forcedisplay: [
+                    1, 2, 3
+                ],
+                range: '0-50' // Can more than 50 items
+            }
+        })
+        this.setState((prevState, props) => ({
+            data: { ...prevState.data, files: files.data }
+        }))
+    }
+
+    getApplication = async () => {
+        /* 
+        * Id and Alias
+        */
+        const applications = await this.props.glpi.searchItems({
+            itemtype: 'PluginFlyvemdmPackage',
+            options: {
+                uid_cols: true,
+                forcedisplay: [
+                    1, 2, 3, 4, 5, 6
+                ],
+                range: '0-50' // Can more than 50 items
+            }
+        })
+        this.setState((prevState, props) => ({
+            data: { ...prevState.data, applications: applications.data }
+        }))
     }
     
     handleFleetHaveTask = policy => {
         let policyId = null
-        const haveTask = this.props.data.tasksData.some((task) => {
+        const haveTask = this.state.data.tasks.some((task) => {
             policyId = task['plugin_flyvemdm_policies_id']
             return policyId === policy['PluginFlyvemdmPolicy.id']
         });
@@ -30,10 +136,10 @@ class FleetsContent extends Component {
     getDefaultValues = policyId => {
         // Check if the policy default value are applications, files or nothing 
         if (policyId === 14 || policyId === 15) {
-            return this.props.data.applicationsData
+            return this.state.data.applications
         }
         else if (policyId === 16 || policyId === 17) {
-            return this.props.data.filesData
+            return this.state.data.files
         }
     }
 
@@ -42,13 +148,13 @@ class FleetsContent extends Component {
         if (policy['fleetHaveTask']) {
             if (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id'])) {
                 // Return a Array with the multiples Tasks (values)
-                return this.props.data.tasksData.filter(task => (	
+                return this.state.data.tasks.filter(task => (	
                     task['plugin_flyvemdm_policies_id'] === policy['PluginFlyvemdmPolicy.id']	
                 ))
             }
             else {
                 // Return a Object that is the Task
-                return this.props.data.tasksData.some(task => (	
+                return this.state.data.tasks.some(task => (	
                     task['plugin_flyvemdm_policies_id'] === policy['PluginFlyvemdmPolicy.id']	
                 ))
             }
@@ -60,10 +166,10 @@ class FleetsContent extends Component {
     filterPoliciesPerCategory = () => {
         const policiesPerCategory = []
 
-        this.props.data.policyCategoriesData.forEach(category => {
+        this.state.data.categories.forEach(category => {
             let obj = {}
             let categoryCompleteName = category['PluginFlyvemdmPolicyCategory.completename']
-            let policiesPerThisCategory = this.props.data.policiesData.filter(policy => {
+            let policiesPerThisCategory = this.state.data.policies.filter(policy => {
                 // Check if the current Fleet have a Task that have a relation with this Policy
                 policy['fleetHaveTask'] = this.handleFleetHaveTask(policy) 
                 // Check if the same Policy Category name is equal to the Category name
@@ -74,37 +180,33 @@ class FleetsContent extends Component {
             obj['policies'] = policiesPerThisCategory
             policiesPerCategory.push(obj)
         });
-
+        console.log('policiesPerCategory')
+        console.log(policiesPerCategory)
         return policiesPerCategory
-    }
-
-    componentDidMount = () => {
-        !this.props.data.fleetSelected && this.props.history.push('/app/fleets')
-        !this.props.data.fleetSelected || this.props.data.fetchTasks()
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.data.fleetSelected !== this.props.data.fleetSelected && nextProps.data.fleetSelected !== null) {
-            nextProps.data.fetchTasks()
-        }
     }
 
     render() {
         let policiesPerCategory
 
-        if (this.props.data.fleetSelected 
-        &&  this.props.data.policyCategoriesData
-        &&  this.props.data.tasksData
-        &&  this.props.data.filesData
-        &&  this.props.data.applicationsData) {
-            policiesPerCategory = this.filterPoliciesPerCategory()
-        } 
+        console.log(this.props.selectedItems.length)
+        console.log(this.state.data.categories)
+        console.log(this.state.data.tasks)
+        console.log(this.state.data.files)
+        console.log(this.state.data.applications)
 
-        return this.props.data.fleetSelected ? 
+        if (this.props.selectedItems.length === 1 
+        &&  this.state.data.categories
+        &&  this.state.data.tasks
+        &&  this.state.data.files
+        &&  this.state.data.applications) {
+            policiesPerCategory = this.filterPoliciesPerCategory()
+        }         
+
+        return this.props.selectedItems.length === 1 ? 
             ( 
                 <div style={{width: 'calc(100% - 20px)'}}> 
                     <div className="contentHeader">
-                        <h1 className="win-h1 titleContentPane"> {this.props.data.fleetSelected["PluginFlyvemdmFleet.name"]} </h1>
+                        <h1 className="win-h1 titleContentPane"> {this.props.selectedItems[0]["PluginFlyvemdmFleet.name"]} </h1>
                         <div className="itemInfo">
                             <div className="contentStatus">
                                 <span
