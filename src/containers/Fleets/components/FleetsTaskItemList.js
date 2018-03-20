@@ -51,28 +51,27 @@ class FleetsTaskItemList extends Component {
     }
 
     render() {
-        console.log(this.props.data["PluginFlyvemdmPolicy.type"])
         if (this.props.data === undefined) {
             return (   
-                <div className='files-list fleet-list'>
-                        <div className='files-list-content'>
-                            <div className='files-list-item'>
-                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                    <div className='content-text-primary'>not available</div>
-                                </div>
-                                <div className='item-content-secondary'>
-                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
-                                    <ReactWinJS.ToggleSwitch 
+                <div className='files-list fleet-list' >
+                    <div className='files-list-content'>
+                        <div className='files-list-item'>
+                            <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
+                                <div className='content-text-primary'>not available</div>
+                            </div>
+                            <div className='item-content-secondary'>
+                                <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                                    <ReactWinJS.ToggleSwitch
                                         className="content-text-primary"
                                         checked={this.state.alreadyAdded}
                                         onChange={() => this.handleAddedToggle}
                                         labelOn=""
                                         labelOff="" />
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             )
         } else {
             switch (this.props.data["PluginFlyvemdmPolicy.type"]) {
@@ -98,7 +97,7 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                 </div>
                                 <div className='item-content-secondary'>
-                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch 
                                         className="content-text-primary"
                                         checked={this.state.alreadyAdded}
@@ -133,7 +132,7 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                <div className='icon item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch 
                                         className="content-text-primary"
                                         checked={this.state.alreadyAdded}
@@ -175,7 +174,7 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch 
                                         className="content-text-primary"
                                         checked={this.state.alreadyAdded}
@@ -217,7 +216,7 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch 
                                         className="content-text-primary"
                                         checked={this.state.alreadyAdded}
@@ -259,7 +258,7 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch 
                                         className="content-text-primary"
                                         checked={this.state.alreadyAdded}
@@ -301,7 +300,7 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                    <div className='icon item-icon --fleets' onClick={this.handleAddedToggle}>
+                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch 
                                         className="content-text-primary"
                                         checked={this.state.alreadyAdded}
@@ -323,7 +322,7 @@ class FleetsTaskItemList extends Component {
                                     <div className='content-text-primary'>Not available</div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                    <div className='icon item-icon --fleets'>
+                                    <div className='icon item-icon'>
                                     <ReactWinJS.ToggleSwitch 
                                         className="content-text-primary"
                                         checked={false}
