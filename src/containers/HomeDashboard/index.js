@@ -22,15 +22,9 @@ class Dashboard extends Component {
     }
   }
 
-  componentDidMount = async () => {
+  getDevices = new Promise(async (resolve) => {
     try {
       const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
-      const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
-      const fleets = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFleet"})
-      const files = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFile"})
-      const applications = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmPackage"})
-      const users = await this.props.glpi.getAllItems({itemtype: "User"})
-      const pendingInvitations = invitations.filter(invitation => invitation.status === "pending")
       const devicesAndroid = devices.filter(device => device.mdm_type === "android").length
       const devicesiOS = devices.filter(device => device.mdm_type === "ios").length
       const devicesWindows = devices.filter(device => device.mdm_type === "windows").length
@@ -38,20 +32,73 @@ class Dashboard extends Component {
       if (devicesAndroid) devicesByPlataform.push({ x: 'Android', y: devicesAndroid })
       if (devicesiOS) devicesByPlataform.push({ x: 'Android', y: devicesiOS })
       if (devicesWindows) devicesByPlataform.push({ x: 'Android', y: devicesWindows })
-      this.setState({
+      resolve({
         devices: devices.length,
-        invitations: invitations.length,
-        fleets: fleets.length,
-        files: files.length,
-        applications: applications.length,
-        users: users.length,
-        pendingInvitations: pendingInvitations.length,
-        devicesByPlataform,
-        isLoading: false
+        devicesByPlataform
       })
     } catch (error) {
-      
+      resolve({})
     }
+  })
+
+  getInvitations = new Promise(async (resolve) => {
+    try {
+      const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
+      resolve({
+        invitations: invitations.length,
+        pendingInvitations: invitations.filter(invitation => invitation.status === "pending").length
+      })
+    } catch (error) {
+      resolve({})
+    }
+  })
+
+  getFleets = new Promise(async (resolve) => {
+    try {
+      const fleets = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFleet"})
+      resolve({fleets: fleets.length})
+    } catch (error) {
+      resolve({})
+    }
+  })
+
+  getFiles = new Promise(async (resolve) => {
+    try {
+      const files = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFile"})
+      resolve({files: files.length })
+    } catch (error) {
+      resolve({})
+    }
+  })
+
+  getApplications = new Promise(async (resolve) => {
+    try {
+      const applications = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmPackage"})
+      resolve({applications: applications.length })
+    } catch (error) {
+      resolve({})
+    }
+  })
+
+  getUsers = new Promise(async (resolve) => {
+    try {
+      const users = await this.props.glpi.getAllItems({itemtype: "User"})
+      resolve({users: users.length })
+    } catch (error) {
+      resolve({})
+    }
+  })
+
+  componentDidMount = async () => {
+    this.setState({
+      ...await this.getDevices,
+      ...await this.getInvitations,
+      ...await this.getFleets,
+      ...await this.getFiles,
+      ...await this.getApplications,
+      ...await this.getUsers,
+      isLoading: false
+    })
   }
 
   render() {
@@ -113,9 +160,10 @@ class Dashboard extends Component {
                   <div key="DevicesOS" className="info-box">
                       <VictoryPie
                           colorScale={[
-                              "#969696",
-                              "#bdbdbd",
-                              "#d9d9d9"]}
+                            "#969696",
+                            "#bdbdbd",
+                            "#d9d9d9"
+                          ]}
                           innerRadius={50}
                           padAngle={5}
                           labelRadius={90}
