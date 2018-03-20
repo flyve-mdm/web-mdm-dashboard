@@ -5,6 +5,16 @@ import { I18n } from 'react-i18nify'
 import withGLPI from '../../hoc/withGLPI'
 import Loading from '../../components/Loading'
 import InfoBox from '../../components/InfoBox'
+import { uiSetNotification } from '../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+function mapDispatchToProps(dispatch) {
+  const actions = {
+      setNotification: bindActionCreators(uiSetNotification, dispatch)
+  }
+  return { actions }
+}
 
 class Dashboard extends Component {
   constructor (props) {
@@ -22,6 +32,14 @@ class Dashboard extends Component {
     }
   }
 
+  showError = (error) => {
+    this.props.actions.setNotification({
+      title: error[0],
+      body: error[1],
+      type: 'alert'
+    })
+  }
+
   getDevices = new Promise(async (resolve) => {
     try {
       const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
@@ -37,6 +55,7 @@ class Dashboard extends Component {
         devicesByPlataform
       })
     } catch (error) {
+      this.showError(error)
       resolve({})
     }
   })
@@ -49,6 +68,7 @@ class Dashboard extends Component {
         pendingInvitations: invitations.filter(invitation => invitation.status === "pending").length
       })
     } catch (error) {
+      this.showError(error)
       resolve({})
     }
   })
@@ -58,6 +78,7 @@ class Dashboard extends Component {
       const fleets = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFleet"})
       resolve({fleets: fleets.length})
     } catch (error) {
+      this.showError(error)
       resolve({})
     }
   })
@@ -67,6 +88,7 @@ class Dashboard extends Component {
       const files = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFile"})
       resolve({files: files.length })
     } catch (error) {
+      this.showError(error)
       resolve({})
     }
   })
@@ -76,6 +98,7 @@ class Dashboard extends Component {
       const applications = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmPackage"})
       resolve({applications: applications.length })
     } catch (error) {
+      this.showError(error)
       resolve({})
     }
   })
@@ -85,6 +108,7 @@ class Dashboard extends Component {
       const users = await this.props.glpi.getAllItems({itemtype: "User"})
       resolve({users: users.length })
     } catch (error) {
+      this.showError(error)
       resolve({})
     }
   })
@@ -210,4 +234,7 @@ Dashboard.propTypes = {
   glpi: PropTypes.object.isRequired
 }
 
-export default withGLPI(Dashboard)
+export default connect(
+  null,
+  mapDispatchToProps
+)(withGLPI(Dashboard))
