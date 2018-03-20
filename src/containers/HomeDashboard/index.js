@@ -17,6 +17,7 @@ class Dashboard extends Component {
       files: undefined,
       applications: undefined,
       users: undefined,
+      devicesByPlataform: undefined,
       pendingInvitations: undefined
     }
   }
@@ -30,6 +31,13 @@ class Dashboard extends Component {
       const applications = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmPackage"})
       const users = await this.props.glpi.getAllItems({itemtype: "User"})
       const pendingInvitations = invitations.filter(invitation => invitation.status === "pending")
+      const devicesAndroid = devices.filter(device => device.mdm_type === "android").length
+      const devicesiOS = devices.filter(device => device.mdm_type === "ios").length
+      const devicesWindows = devices.filter(device => device.mdm_type === "windows").length
+      let devicesByPlataform = []
+      if (devicesAndroid) devicesByPlataform.push({ x: 'Android', y: devicesAndroid })
+      if (devicesiOS) devicesByPlataform.push({ x: 'Android', y: devicesiOS })
+      if (devicesWindows) devicesByPlataform.push({ x: 'Android', y: devicesWindows })
       this.setState({
         devices: devices.length,
         invitations: invitations.length,
@@ -38,6 +46,7 @@ class Dashboard extends Component {
         applications: applications.length,
         users: users.length,
         pendingInvitations: pendingInvitations.length,
+        devicesByPlataform,
         isLoading: false
       })
     } catch (error) {
@@ -111,11 +120,7 @@ class Dashboard extends Component {
                           padAngle={5}
                           labelRadius={90}
                           labels={(d) => `${d.x} ${d.y}`}
-                          data={[
-                              { x: "Android", y: 1 },
-                              { x: "iOS", y: 1 },
-                              { x: "Windows", y: 1 }
-                          ]}
+                          data={this.state.devicesByPlataform}
                           style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
                       />
                       <span className="title-box">{I18n.t('commons.devices_by_plataform').toUpperCase()}</span>
