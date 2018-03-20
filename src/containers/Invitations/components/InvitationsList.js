@@ -196,13 +196,32 @@ export default class InvitationsList extends Component {
         }
     }
 
-    handleResendEmail = () => {
-        this.props.setNotification({
-            title: 'Successfully',
-            body: 'Invitations sent',
-            type: 'success'
-        })       
-        this.handleToggleSelectionMode()
+    handleResendEmail = async () => {
+        console.log(this.props.selectedItems)
+        try {
+            const itemListToSend= this.props.selectedItems.map((item) => {
+                return {
+                    id: item["PluginFlyvemdmInvitation.id"],
+                    _notify: item["PluginFlyvemdmInvitation.User.name"]
+                }
+            })
+
+            await this.props.glpi.updateItem({itemtype: 'PluginFlyvemdmInvitation', input: itemListToSend})
+
+            this.props.setNotification({
+                title: 'Successfully',
+                body: 'Invitations sent',
+                type: 'success'
+            })       
+            
+            this.handleToggleSelectionMode()
+        } catch (error) {
+            this.props.setNotification({
+                title: error[0],
+                body: error[1],
+                type: 'alert'
+            })
+        }
     }
 
     onLoadingStateChanged = (eventObject) => {
