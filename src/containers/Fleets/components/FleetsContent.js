@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
+import ContentPane from '../../../components/ContentPane'
 
 const POLICIES_CAN_MULTIPLE_VALUE = [
     14, // -> Deploy Application
@@ -129,7 +130,7 @@ class FleetsContent extends Component {
         const haveTask = this.state.data.tasks.some((task) => {
             policyId = task['plugin_flyvemdm_policies_id']
             return policyId === policy['PluginFlyvemdmPolicy.id']
-        });
+        })
         return haveTask
     }
 
@@ -179,76 +180,74 @@ class FleetsContent extends Component {
             obj['id'] = category['PluginFlyvemdmPolicyCategory.id']
             obj['policies'] = policiesPerThisCategory
             policiesPerCategory.push(obj)
-        });
-        console.log('policiesPerCategory')
-        console.log(policiesPerCategory)
+        })
         return policiesPerCategory
     }
 
     render() {
         let policiesPerCategory
 
-        console.log(this.props.selectedItems.length)
-        console.log(this.state.data.categories)
-        console.log(this.state.data.tasks)
-        console.log(this.state.data.files)
-        console.log(this.state.data.applications)
-
         if (this.props.selectedItems.length === 1 
-        &&  this.state.data.categories
-        &&  this.state.data.tasks
-        &&  this.state.data.files
-        &&  this.state.data.applications) {
+        && this.state.data.policies
+        && this.state.data.categories
+        && this.state.data.tasks
+        && this.state.data.files
+        && this.state.data.applications) {
             policiesPerCategory = this.filterPoliciesPerCategory()
         }         
 
         return this.props.selectedItems.length === 1 ? 
             ( 
-                <div style={{width: 'calc(100% - 20px)'}}> 
-                    <div className="contentHeader">
-                        <h1 className="win-h1 titleContentPane"> {this.props.selectedItems[0]["PluginFlyvemdmFleet.name"]} </h1>
-                        <div className="itemInfo">
+                <ContentPane>
+                    <div className="contentHeader" style={{ display:'table'}}>
+                        <h1 className="win-h1 titleContentPane" style={{ display: 'table-cell', verticalAlign: 'middle', padding:'0 20px'}}> {this.props.selectedItems[0]["PluginFlyvemdmFleet.name"]} </h1>
+                        <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
                             <div className="contentStatus">
                                 <span
                                 className="editIcon"
+                                    style={{ padding: '10px' }}
                                 onClick={() => this.props.history.replace(this.props.match.url + '/edit')} />
                                 <span
                                 className="deleteIcon"
+                                    style={{ padding: '10px' }}
                                 onClick={this.handleDeleteFleet} />
                             </div>
                         </div>
                     </div>
-                    <div className="contentInfo" style={{ width: '100%', marginTop: '20px', marginBottom: '20px', display: 'inline-block' }} >
-                        <h3 className="win-h3" style={{ display: 'inline-block' }} > Tasks per Category </h3>
+                    <div className="separator" />
+                    <div className="contentInfo" style={{ padding: '20px' }} >
+                        <h3 className="win-h3" > Tasks per Category </h3>
+                        <div style={{ padding: '0 20px'}}>
+                            {policiesPerCategory ? (
+                                policiesPerCategory.map((category) => {
+                                    return category['policies'].length > 0
+                                        ? (
+                                            <div key={category['id']}>
+                                                <h2>
+                                                    {category['name']}
+                                                </h2>
+                                                <div>
+                                                    {category['policies'].map((policy, index) => (
+                                                        <FleetsTaskItemList
+                                                            key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
+                                                            data={policy}
+                                                            addedPolicy={policy['fleetHaveTask']}
+                                                            value={this.getValueOfTask(policy)}
+                                                            defaultValues={
+                                                                (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id']))
+                                                                    ? (this.getDefaultValues(policy['PluginFlyvemdmPolicy.id']))
+                                                                    : null
+                                                            } />
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )
+                                        : null
+                                })
+                            ) : <h1>Loading Tasks, Policies and Categories</h1>}
+                        </div>
                     </div>
-                    { policiesPerCategory ? (
-                        policiesPerCategory.map((category) => {
-                            return category['policies'].length > 0 
-                                ? (
-                                    <div key={category['id']}>
-                                        <h2>
-                                            {category['name']}
-                                        </h2>
-                                        <div>
-                                            {category['policies'].map((policy, index) => (
-                                                <FleetsTaskItemList
-                                                key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
-                                                data={policy} 
-                                                addedPolicy={policy['fleetHaveTask']}
-                                                value={this.getValueOfTask(policy)}
-                                                defaultValues={
-                                                    (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id'])) 
-                                                    ? (this.getDefaultValues(policy['PluginFlyvemdmPolicy.id']))
-                                                    : null
-                                                } />
-                                            ))}
-                                        </div>
-                                    </div>
-                                )
-                                : null
-                        })
-                    ) : <h1>Loading Tasks, Policies and Categories</h1>}
-                </div>
+                </ContentPane>
             )
             : null
     }
