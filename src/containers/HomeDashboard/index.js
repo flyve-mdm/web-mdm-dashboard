@@ -11,15 +11,18 @@ class Dashboard extends Component {
     super(props)
     this.state = {
       isLoading: true,
-      devices: undefined
+      devices: undefined,
+      invitations: undefined
     }
   }
 
   componentDidMount = async () => {
     try {
       const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
+      const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
       this.setState({
         devices: devices.length,
+        invitations: invitations.length,
         isLoading: false
       })
     } catch (error) {
@@ -46,7 +49,7 @@ class Dashboard extends Component {
 
                     <InfoBox
                       to='app/invitations'
-                      count={1}
+                      count={this.state.invitations}
                       name={I18n.t('commons.invitations')}
                       icon="emailIcon"
                     />
