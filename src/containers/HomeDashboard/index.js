@@ -12,6 +12,7 @@ class Dashboard extends Component {
     this.state = {
       isLoading: true,
       devices: undefined,
+      fleets: undefined,
       invitations: undefined
     }
   }
@@ -20,9 +21,11 @@ class Dashboard extends Component {
     try {
       const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
       const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
+      const fleets = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFleet"})
       this.setState({
         devices: devices.length,
         invitations: invitations.length,
+        fleets: fleets.length,
         isLoading: false
       })
     } catch (error) {
@@ -56,7 +59,7 @@ class Dashboard extends Component {
 
                     <InfoBox
                       to='app/fleets'
-                      count={1}
+                      count={this.state.fleets}
                       name={I18n.t('commons.fleets')}
                       icon="goToStartIcon"
                     />
