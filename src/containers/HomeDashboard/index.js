@@ -16,7 +16,8 @@ class Dashboard extends Component {
       invitations: undefined,
       files: undefined,
       applications: undefined,
-      users: undefined
+      users: undefined,
+      pendingInvitations: undefined
     }
   }
 
@@ -28,6 +29,7 @@ class Dashboard extends Component {
       const files = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFile"})
       const applications = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmPackage"})
       const users = await this.props.glpi.getAllItems({itemtype: "User"})
+      const pendingInvitations = invitations.filter(invitation => invitation.status === "pending")
       this.setState({
         devices: devices.length,
         invitations: invitations.length,
@@ -35,6 +37,7 @@ class Dashboard extends Component {
         files: files.length,
         applications: applications.length,
         users: users.length,
+        pendingInvitations: pendingInvitations.length,
         isLoading: false
       })
     } catch (error) {
@@ -121,15 +124,16 @@ class Dashboard extends Component {
                   <div key="InvitationsChart" className="info-box">
                     <VictoryPie
                         colorScale={[
-                            "#969696",
-                            "#bdbdbd",
-                            "#d9d9d9"]}
+                          "#969696",
+                          "#bdbdbd",
+                          "#d9d9d9"
+                        ]}
                         innerRadius={50}
                         padAngle={5}
                         labelRadius={90}
                         labels={(d) => `${d.x} ${d.y}`}
                         data={[
-                            { x: I18n.t('commons.invitations'), y: 1 },
+                          { x: I18n.t('commons.invitations'), y: this.state.pendingInvitations }
                         ]}
                         style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
                     />
