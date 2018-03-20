@@ -13,7 +13,8 @@ class Dashboard extends Component {
       isLoading: true,
       devices: undefined,
       fleets: undefined,
-      invitations: undefined
+      invitations: undefined,
+      files: undefined
     }
   }
 
@@ -22,10 +23,12 @@ class Dashboard extends Component {
       const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
       const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
       const fleets = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFleet"})
+      const files = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFile"})
       this.setState({
         devices: devices.length,
         invitations: invitations.length,
         fleets: fleets.length,
+        files: files.length,
         isLoading: false
       })
     } catch (error) {
@@ -66,7 +69,7 @@ class Dashboard extends Component {
 
                     <InfoBox
                       to='app/files'
-                      count={1}
+                      count={this.state.files}
                       name={I18n.t('commons.files')}
                       icon="filesIcon"
                     />
