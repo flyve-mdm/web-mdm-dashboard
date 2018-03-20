@@ -15,7 +15,8 @@ class Dashboard extends Component {
       fleets: undefined,
       invitations: undefined,
       files: undefined,
-      applications: undefined
+      applications: undefined,
+      users: undefined
     }
   }
 
@@ -26,12 +27,14 @@ class Dashboard extends Component {
       const fleets = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFleet"})
       const files = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFile"})
       const applications = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmPackage"})
+      const users = await this.props.glpi.getAllItems({itemtype: "User"})
       this.setState({
         devices: devices.length,
         invitations: invitations.length,
         fleets: fleets.length,
         files: files.length,
         applications: applications.length,
+        users: users.length,
         isLoading: false
       })
     } catch (error) {
@@ -86,7 +89,7 @@ class Dashboard extends Component {
 
                     <InfoBox
                       to='app/users'
-                      count={1}
+                      count={this.state.users}
                       name={I18n.t('commons.users')}
                       icon="peopleIcon"
                     />
