@@ -2,12 +2,34 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { VictoryPie } from 'victory'
 import { I18n } from 'react-i18nify'
-
+import withGLPI from '../../hoc/withGLPI'
+import Loading from '../../components/Loading'
 import InfoBox from '../../components/InfoBox'
 
 class Dashboard extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isLoading: true,
+      devices: undefined
+    }
+  }
+
+  componentDidMount = async () => {
+    try {
+      const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
+      this.setState({
+        devices: devices.length,
+        isLoading: false
+      })
+    } catch (error) {
+      
+    }
+  }
+
   render() {
-    return (
+    const renderComponent = this.state.isLoading ? <Loading message="Loading..." /> :
+    (
       <React.Fragment>
         <div className="dashboard-block">
 
@@ -17,7 +39,7 @@ class Dashboard extends Component {
 
                     <InfoBox
                       to='app/devices'
-                      count={1}
+                      count={this.state.devices}
                       name={I18n.t('commons.devices')}
                       icon="deviceIcon"
                     />
@@ -106,11 +128,14 @@ class Dashboard extends Component {
         </div>
       </React.Fragment>
     )
+
+    return renderComponent
   }
 }
 
 Dashboard.propTypes = {
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  glpi: PropTypes.object.isRequired
 }
 
-export default Dashboard
+export default withGLPI(Dashboard)
