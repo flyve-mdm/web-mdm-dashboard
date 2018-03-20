@@ -27,7 +27,7 @@ class Dashboard extends Component {
       files: undefined,
       applications: undefined,
       users: undefined,
-      devicesByPlataform: undefined,
+      devicesByPlatform: undefined,
       pendingInvitations: undefined
     }
   }
@@ -46,13 +46,13 @@ class Dashboard extends Component {
       const devicesAndroid = devices.filter(device => device.mdm_type === "android").length
       const devicesiOS = devices.filter(device => device.mdm_type === "ios").length
       const devicesWindows = devices.filter(device => device.mdm_type === "windows").length
-      let devicesByPlataform = []
-      if (devicesAndroid) devicesByPlataform.push({ x: 'Android', y: devicesAndroid })
-      if (devicesiOS) devicesByPlataform.push({ x: 'Android', y: devicesiOS })
-      if (devicesWindows) devicesByPlataform.push({ x: 'Android', y: devicesWindows })
+      let devicesByPlatform = []
+      if (devicesAndroid) devicesByPlatform.push({ x: 'Android', y: devicesAndroid })
+      if (devicesiOS) devicesByPlatform.push({ x: 'Android', y: devicesiOS })
+      if (devicesWindows) devicesByPlatform.push({ x: 'Android', y: devicesWindows })
       resolve({
         devices: devices.length,
-        devicesByPlataform
+        devicesByPlatform
       })
     } catch (error) {
       this.showError(error)
@@ -126,7 +126,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const renderComponent = this.state.isLoading ? <Loading message="Loading..." /> :
+    const renderComponent = this.state.isLoading ? <div style={{width: '100%', height: 'calc(100vh - 80px)'}}><Loading message="Loading..." /></div>:
     (
       <React.Fragment>
         <div className="dashboard-block">
@@ -192,7 +192,7 @@ class Dashboard extends Component {
                           padAngle={5}
                           labelRadius={90}
                           labels={(d) => `${d.x} ${d.y}`}
-                          data={this.state.devicesByPlataform}
+                          data={this.state.devicesByPlatform}
                           style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
                       />
                       <span className="title-box">{I18n.t('commons.devices_by_plataform').toUpperCase()}</span>
