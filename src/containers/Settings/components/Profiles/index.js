@@ -261,7 +261,7 @@ class Profiles extends Component {
         let component = null
 
         if (this.props.isLoading || !this.state.login) {
-            component = <Loading message="Loading..." />
+            component = <div style={{width: '100%', height: 'calc(100vh - 120px)'}}><Loading message="Loading..." /></div>
         } else {
             let user = usersScheme({
                 state: this.state, 
