@@ -39,8 +39,6 @@ class ChangeTokenLife extends Component {
     render () {
         return (    
             <div>
-                <h2 className="win-h2"> Entity </h2>
-                
                 <div className="listElement">
                     Date Period
                     <div className="detail">In number of days</div>
