@@ -1,8 +1,8 @@
 import React, { Component } from "react"
-
 import LayoutListWithNavLinks from '../../components/LayoutListWithNavLinks'
 import routes from './routes'
 import GenerateRoutes from '../../components/GenerateRoutes'
+import PropTypes from 'prop-types'
 
 class About extends Component {
     render() {
@@ -12,6 +12,10 @@ class About extends Component {
             </LayoutListWithNavLinks>
         )
     }
+}
+
+About.propTypes = {
+    match: PropTypes.object.isRequired
 }
 
 export default About
