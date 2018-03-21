@@ -1,5 +1,4 @@
 import { I18n } from 'react-i18nify'
-
 import Overview from './components/Overview/'
 import SystemInformation from './components/SystemInformation/'
 import HelpCenter from './components/HelpCenter/'
