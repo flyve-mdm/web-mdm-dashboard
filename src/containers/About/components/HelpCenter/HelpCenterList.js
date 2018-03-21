@@ -125,12 +125,16 @@ class HelpCenterList extends Component {
                                 onSuggestionsRequested={this.handleSuggestionsRequested}
                                 onQuerySubmitted={this.handleQuerySubmitted} />       
                             </div>
-                            <div onClick={this.handleSearch} style={{
-                                position: 'absolute',
-                                top: '124px',
-                                right: '20%',
-                                fontSize: '20px'
-                            }}>
+                            <div 
+                                onClick={this.handleSearch} 
+                                style={{
+                                    fontSize: '20px',
+                                    float: 'right',
+                                    marginTop: '-26px',
+                                    marginRight: '20px',
+                                    cursor: 'pointer'
+                                }}
+                            >
                                 <span className="searchIcon"></span>
                             </div>
                         </div>
