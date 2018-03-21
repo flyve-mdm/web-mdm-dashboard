@@ -24,7 +24,7 @@ class Main extends Component {
                     </div>
 
                     <div className="controller">
-                        <button className="win-button" onClick={() => this.props.changeMode("change download URL")}>
+                        <button className="btn --secondary" onClick={() => this.props.changeMode("change download URL")}>
                             Change
                         </button>
                     </div>

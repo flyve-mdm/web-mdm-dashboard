@@ -52,10 +52,10 @@ class ChangeDownloadURL extends Component {
                         onChange={this.changeState}
                     />
                 </div>
-                <button className="win-button" style={{marginRight: 10}} onClick={() => this.props.changeMode("")}>
+                <button className="btn --secondary" style={{marginRight: 10}} onClick={() => this.props.changeMode("")}>
                     Cancel
                 </button>
-                <button className="win-button" onClick={this.saveURL}>
+                <button className="btn --primary" onClick={this.saveURL}>
                     Save
                 </button>
             </div>

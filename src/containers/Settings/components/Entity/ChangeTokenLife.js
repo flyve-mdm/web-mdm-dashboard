@@ -52,10 +52,10 @@ class ChangeTokenLife extends Component {
                         onChange={this.changeState}
                     />
                 </div>
-                <button className="win-button" style={{marginRight: 10}} onClick={() => this.props.changeMode("")}>
+                <button className="btn --secondary" style={{marginRight: 10}} onClick={() => this.props.changeMode("")}>
                     Cancel
                 </button>
-                <button className="win-button" onClick={this.saveTokenLife}>
+                <button className="btn --primary" onClick={this.saveTokenLife}>
                     Save
                 </button>
             </div>
