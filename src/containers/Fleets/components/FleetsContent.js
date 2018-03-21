@@ -248,6 +248,7 @@ class FleetsContent extends Component {
                                                             data={policy}
                                                             addedPolicy={policy['fleetHaveTask']}
                                                             value={this.getValueOfTask(policy)}
+                                                            addTask={this.addTask}
                                                             defaultValues={
                                                                 (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id']))
                                                                     ? (this.getDefaultValues(policy['PluginFlyvemdmPolicy.id']))
