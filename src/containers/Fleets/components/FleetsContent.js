@@ -186,6 +186,19 @@ class FleetsContent extends Component {
         return policiesPerCategory
     }
 
+    addTask = (policy, value) => {
+        console.log(policy)
+        console.log(value)
+    }
+
+    handleSaveFleet = () => {
+        console.log('save')
+    }
+
+    handleDeleteFleet = () => {
+        console.log('delete')
+    }
+
     render() {
         let policiesPerCategory
 
@@ -206,13 +219,13 @@ class FleetsContent extends Component {
                         <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
                             <div className="contentStatus">
                                 <span
-                                className="saveIcon"
+                                    className="saveIcon"
                                     style={{ padding: '10px', fontSize: '20px' }}
-                                onClick={() => this.props.history.replace(this.props.match.url + '/edit')} />
+                                    onClick={this.handleSaveFleet} />
                                 <span
-                                className="deleteIcon"
+                                    className="deleteIcon"
                                     style={{ padding: '10px', fontSize: '20px' }}
-                                onClick={this.handleDeleteFleet} />
+                                    onClick={this.handleDeleteFleet} />
                             </div>
                         </div>
                     </div>
