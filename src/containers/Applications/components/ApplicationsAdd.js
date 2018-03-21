@@ -94,7 +94,6 @@ export default class ApplicationsAdd extends Component {
                     <div style={{ padding: '10px' }}>
                         <input
                             type="text"
-                            style={{ width: '240px' }}
                             className="win-textbox"
                             placeholder="Application name"
                             name="input"
@@ -113,7 +112,7 @@ export default class ApplicationsAdd extends Component {
                         >
                             Drop the file here or click to upload
                         </FilesUpload>
-                        <div style={{ margin: '10px' }}>
+                        <div style={{marginTop: 10}}>
                             <button className="btn --primary" onClick={this.filesUpload}>Save</button>
                             {
                                 this.state.files.length > 0
