@@ -39,8 +39,6 @@ class ChangeDownloadURL extends Component {
     render () {
         return (    
             <div>
-                <h2 className="win-h2"> Entity </h2>
-                
                 <div className="listElement">
                     URL of the application
                     <div className="detail">File extension as apk or upk</div>
