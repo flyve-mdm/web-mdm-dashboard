@@ -1,10 +1,9 @@
 import React from 'react'
 import { I18n, Translate } from 'react-i18nify'
-import Title from '../../../../components/Title'
 
 const TermsOfUse = () => (
   <div>
-    <Title text="Terms Of Use"/>
+    <h2>Terms Of Use</h2>
     <div className="aboutPane">
       <Translate value={'about.term_of_use_STRINGS.by_using_our_website,_you_agree_to_be_bound_by_the_full_terms_&_conditions_posted_on_our_website'} tag='p'/>
       <Translate value={'about.term_of_use_STRINGS.these_terms_and_conditions_apply_to_the_business_relation_between_the_client_and_the_editor_(as_identified_further_below),_arising_from_the_client_requesting_the_editor_to_provide_certain_corporate_and_management_services_any_order_placed_in_any_of_our_offices,_by_internet_or_by_any_other_means,_shall_constitute_a_binding_agreement_of_these_terms_&_conditions_between_the_client_and_the_editor'} tag='p'/>

@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
 import { supervisionScheme } from '../../../../components/Forms/Schemas'
 import validateData from '../../../../shared/validateData'
 import supervision from '../../../../AdminDashboard/data/supervision.json'
 import ConstructInputs from '../../../../components/Forms'
-import Title from '../../../../components/Title'
 import { bindActionCreators } from 'redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { connect } from 'react-redux'
@@ -53,7 +51,7 @@ class Supervision extends Component {
 
         return (
             <div>
-                <Title text="Supervision" />
+                <h2>Supervision</h2>
                 <div className="list-content Profiles" style={{marginTop: '20px'}}>
                     <ConstructInputs data={supervision.helpDeskInformation} icon="supervisionIcon" title="Helpdesk Information" />
                     <button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>

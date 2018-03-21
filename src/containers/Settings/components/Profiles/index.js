@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import validateData from '../../../../shared/validateData'
 import IconItemList from '../../../../AdminDashboard/IconItemList'
 import { usersScheme } from '../../../../components/Forms/Schemas'
@@ -8,12 +8,11 @@ import authtype from '../../../../shared/authtype'
 import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
 import withGLPI from '../../../../hoc/withGLPI'
-import Title from '../../../../components/Title'
 import {
     uiTransactionStart,
     uiTransactionFinish,
     uiSetNotification
-} from '../../../../store/ui/actions';
+} from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 
 function mapStateToProps(state, props) {
@@ -335,7 +334,7 @@ class Profiles extends Component {
         }       
         return (
             <div>
-                <Title text="Profiles" />
+                <h2>Profiles</h2>
 
                 { component }
             </div>

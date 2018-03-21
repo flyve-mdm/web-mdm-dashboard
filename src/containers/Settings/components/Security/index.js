@@ -5,7 +5,6 @@ import Confirmation from '../../../../components/Confirmation'
 import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
 import Loading from '../../../../components/Loading'
-import Title from '../../../../components/Title'
 import { bindActionCreators } from 'redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { connect } from 'react-redux'
@@ -206,7 +205,7 @@ class Security extends Component {
             default:
                 return (
                     <div>
-                        <Title text="Security" style={{marginBottom: '20px'}}/>
+                        <h2 style={{marginBottom: '20px'}}>Security</h2>
                         
                         <div className="listElement">
                             <div className="message">

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
-import Title from '../../../../components/Title'
 
 class Notifications extends Component {
 
@@ -44,7 +43,7 @@ class Notifications extends Component {
     render () {
         return (
             <div>
-                <Title text="Notifications" style={{marginBottom: '20px'}}/>
+                <h2 style={{marginBottom: '20px'}}>Notifications</h2>
                 <div className="listElement">
                     <div className="message">
                         Show notifications

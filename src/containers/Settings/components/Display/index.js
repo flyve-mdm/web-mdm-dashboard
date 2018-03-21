@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import Title from '../../../../components/Title'
-
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { uiToggleAnimation } from '../../../../store/ui/actions'
@@ -61,7 +59,7 @@ class Display extends Component {
     render () {
         return (
             <div>
-                <Title text="Supervision" style={{marginBottom: '20px'}}/>
+                <h2 style={{marginBottom: '20px'}}>Supervision</h2>
 
                 <div className="win-h3"> Language </div>
 

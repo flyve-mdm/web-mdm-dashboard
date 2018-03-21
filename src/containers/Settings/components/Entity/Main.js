@@ -6,7 +6,7 @@ class Main extends Component {
     render () {
         return (    
             <React.Fragment>
-                <div className="win-h3"> Agent </div>
+                <div className="title"> Agent </div>
 
                 <div className="listElement">
                     <div className="message">
@@ -30,7 +30,7 @@ class Main extends Component {
                     </div>
                 </div>
 
-                <div className="win-h3"> Configuration </div>
+                <div className="title"> Configuration </div>
 
                 <div className="listElement">
                     <div className="message">
@@ -50,7 +50,7 @@ class Main extends Component {
                     </div>
                 </div>
 
-                <div className="win-h3"> General information </div>
+                <div className="title"> General information </div>
 
                 <div className="listElement">
                     <div className="message">
