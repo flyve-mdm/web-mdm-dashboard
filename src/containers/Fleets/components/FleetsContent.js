@@ -36,7 +36,9 @@ class FleetsContent extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
+        if (this.props.selectedItems.length === 0) {
+            this.props.history.push('/app/fleets')
+        } 
     }
 
     getPolicies = async () => {
