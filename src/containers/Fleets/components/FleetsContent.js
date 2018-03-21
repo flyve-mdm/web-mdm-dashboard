@@ -204,12 +204,12 @@ class FleetsContent extends Component {
                         <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
                             <div className="contentStatus">
                                 <span
-                                className="editIcon"
-                                    style={{ padding: '10px' }}
+                                className="saveIcon"
+                                    style={{ padding: '10px', fontSize: '20px' }}
                                 onClick={() => this.props.history.replace(this.props.match.url + '/edit')} />
                                 <span
                                 className="deleteIcon"
-                                    style={{ padding: '10px' }}
+                                    style={{ padding: '10px', fontSize: '20px' }}
                                 onClick={this.handleDeleteFleet} />
                             </div>
                         </div>
