@@ -1,11 +1,10 @@
 import React from 'react'
 import { Translate } from 'react-i18nify'
-import Title from '../../../components/Title'
 
 const Overview = () => {
   return (
     <div>
-      <Title text="Overview"/>
+      <h2>Overview</h2>
         <div className="aboutPane">
             <Translate tag='p' value={'about.overview_STRINGS.flyve_MDM_is_a_mobile_device_management_software_that_enables_you_to_secure_and_manage_all_the_mobile_devices_of_your_business_via_a_unique_web-based_console_(MDM)'} />
             <Translate tag='p' value={'about.overview_STRINGS.our_solution_allows_you_to_efficiently_and_easily_control_any_aspects_of_your_Android-based_mobile_fleet,_providing_a_panel_of_functionalities'} />

@@ -4,7 +4,6 @@ import ChangeTokenLife from './ChangeTokenLife'
 import Main from './Main'
 import validateData from '../../../../shared/validateData'
 import SettingsEntity from '../../../../data/SettingsEntity.json'
-import Title from '../../../../components/Title'
 
 class Entity extends Component {
 
@@ -94,7 +93,7 @@ class Entity extends Component {
 
         return (
             <div>
-                <Title text="Entity" />
+                <h2>Entity</h2> 
                 <div style={{marginTop: '20px'}}>
                     {content}
                 </div>

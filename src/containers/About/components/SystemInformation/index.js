@@ -1,7 +1,4 @@
 import React from 'react'
-
-import Title from '../../../../components/Title'
-
 import plugins from '../../../../data/plugins.json'
 
 const SystemInformation = () => {
@@ -22,7 +19,7 @@ const SystemInformation = () => {
   })
   return (
     <div>
-      <Title text="System Information"/>
+      <h2>System Information</h2>
       <div className="aboutPane">
         {element}
       </div>

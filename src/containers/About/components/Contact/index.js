@@ -1,11 +1,9 @@
 import React from 'react'
 import { I18n } from 'react-i18nify'
 
-import Title from '../../../../components/Title'
-
 const Contact = () => (
     <div>
-        <Title text="Contact"/>
+        <h2>Contact</h2>
         <div className="aboutPane">
             <img src="/images/logo-teclib.png" alt="Teclib" />
             <p>
