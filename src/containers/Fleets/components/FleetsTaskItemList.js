@@ -5,8 +5,9 @@ class FleetsTaskItemList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            alreadyAdded: null,
-            active: null
+            alreadyAdded: false,
+            active: false,
+            input:''
         }
     }
 
@@ -25,6 +26,9 @@ class FleetsTaskItemList extends Component {
     }
 
     componentDidMount = () => {
+        this.setState({
+            input: this.props.value ? this.props.value : ''
+        })
         this.updateState(this.props.fleetHaveTask)
     }
 
@@ -35,10 +39,7 @@ class FleetsTaskItemList extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log(nextProps)        
-        if ((nextState.alreadyAdded || (this.state.alreadyAdded !== nextState.alreadyAdded)) && this.state.alreadyAdded !== null) {
-
-        }
+    
     }
     
     handleAddedToggle = () => {
@@ -55,12 +56,25 @@ class FleetsTaskItemList extends Component {
     }
 
     handleActivePolicyToggle = () => {
-        this.props.updateValueTask(this.props.data, !this.props.value)
-        // this.setState((prevState) => {
-        //     return {
-        //         active: !prevState.active
-        //     }
-        // })
+        switch (this.props.data['PluginFlyvemdmPolicy.type']) {
+            case 'bool':
+                this.props.updateValueTask(this.props.data, !this.props.value)
+                break;
+            case 'int':
+                this.props.updateValueTask(this.props.data, this.state.input)
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    handleChangeInput = (e) => {
+        this.setState({ input: e.target.value })
+    }
+
+    handleBlurInput = (e) => {
+        this.handleActivePolicyToggle()
     }
 
     render() {
@@ -138,9 +152,9 @@ class FleetsTaskItemList extends Component {
                                         className="win-textbox" 
                                         placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
                                         name={this.props.data['PluginFlyvemdmPolicy.id']}
-                                        value={this.props.data['PluginFlyvemdmPolicy.default_value']}
-                                        onChange={this.props.changeInput}
-                                        required
+                                        value={this.state.input}
+                                        onChange={this.handleChangeInput}
+                                        onBlur={this.handleBlurInput}
                                         />
                                     </div>
                                 </div>
