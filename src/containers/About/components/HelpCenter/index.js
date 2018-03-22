@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-
 import GenerateRoutes from '../../../../components/GenerateRoutes'
 import routes from './routes'
 
