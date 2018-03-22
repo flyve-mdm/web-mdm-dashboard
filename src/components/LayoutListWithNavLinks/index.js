@@ -2,12 +2,14 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import getMode from '../../shared/getMode'
+import calc100PercentMinus from '../../shared/calc100PercentMinus'
 
 class ListWithNavLinks extends Component {
     constructor(props) {
         super(props)
         this.state = {
             mode: getMode(),
+            itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
             styleNav: this.styleNav(getMode(), this.props.history)
         }
     }
@@ -17,6 +19,7 @@ class ListWithNavLinks extends Component {
         if (this.state.mode !== nextMode) {
             this.setState({
                 mode: nextMode,
+                itemListPaneWidth: nextMode === "small" ? "100%" : 320,
                 styleNav: this.styleNav(nextMode, this.props.history)
             })
         }
@@ -28,6 +31,13 @@ class ListWithNavLinks extends Component {
                 history.location.pathname.split("/").length > 3 ?
                     {display: 'none'} : {width: '100%'} : {}
         )
+    }
+
+    stylesArticle () {
+        const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
+        return ({
+            width: calc100PercentMinus(validWidth)
+        })
     }
 
     componentWillMount () {
@@ -46,8 +56,8 @@ class ListWithNavLinks extends Component {
 
     render () {
         return (
-            <div className="layout_list_with_navlinks-block">
-                <nav style={this.state.styleNav}>
+            <div className="flex-block --with-scroll --with-content-pane">
+                <nav style={this.state.styleNav} className="flex-block-list navlinks">
                     <ul>
                         {this.props.routes.map((route, i) => {
                             if (route.path !== "/") {
@@ -70,9 +80,9 @@ class ListWithNavLinks extends Component {
                 {
                     (this.state.mode === "small" && !this.state.styleNav.display) ? 
                         "" : (
-                            <article>
+                            <div className="content-pane-block" style={this.stylesArticle()}>
                                 {this.props.children}
-                            </article>
+                            </div>
                         )
                 }
             </div>
