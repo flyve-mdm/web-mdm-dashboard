@@ -42,13 +42,16 @@ class FleetsTaskItemList extends Component {
     }
     
     handleAddedToggle = () => {
+        if (!this.state.alreadyAdded) {
+            this.props.addTask(this.props.data)
+        } else {
+            this.props.removeTask(this.props.data)
+        }
         this.setState((prevState) => {
             return {
                 alreadyAdded: !prevState.alreadyAdded
             }
         }) 
-        this.props.addTask(this.props.data)
-
     }
 
     handleActivePolicyToggle = () => {
