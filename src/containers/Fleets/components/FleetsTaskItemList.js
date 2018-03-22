@@ -10,8 +10,8 @@ class FleetsTaskItemList extends Component {
         }
     }
 
-    updateState = (addedPolicy) => {
-        if (addedPolicy) { 
+    updateState = (fleetHaveTask) => {
+        if (fleetHaveTask) { 
             this.setState({
                 alreadyAdded: true,
                 active: true
@@ -25,16 +25,17 @@ class FleetsTaskItemList extends Component {
     }
 
     componentDidMount = () => {
-        this.updateState(this.props.addedPolicy)
+        this.updateState(this.props.fleetHaveTask)
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.addedPolicy !== this.props.addedPolicy) {
-            this.updateState(nextProps.addedPolicy)
+        if (nextProps.fleetHaveTask !== this.props.fleetHaveTask) {
+            this.updateState(nextProps.fleetHaveTask)
         }
     }
 
     componentWillUpdate(nextProps, nextState) {
+        console.log(nextProps)        
         if ((nextState.alreadyAdded || (this.state.alreadyAdded !== nextState.alreadyAdded)) && this.state.alreadyAdded !== null) {
             this.props.addTask(this.props.data, nextState.active)
         }
@@ -97,7 +98,7 @@ class FleetsTaskItemList extends Component {
                                     <div
                                     className={`item-list-field checkbox ${this.state.alreadyAdded && 'active'}`}
                                     onClick={this.handleActivePolicyToggle}>
-                                        {this.state.active ? 
+                                        {this.props.value === 1 ? 
                                             <span className='selectIcon'></span> :
                                             <span className='unselectIcon'></span> }
                                     </div>
