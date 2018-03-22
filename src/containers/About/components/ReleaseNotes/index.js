@@ -5,7 +5,7 @@ import CHANGELOG from './CHANGELOG.md'
 const ReleaseNotes = () => (
   <div>
     <h2>Release Notes</h2>
-    <div className="contentMarkdown aboutPane">
+    <div className="aboutPane">
       <ReactMarkdown source={CHANGELOG} />
     </div>
   </div>

@@ -141,15 +141,15 @@ class HelpCenterList extends Component {
                     </div>
                 </div>
                 <ReactWinJS.ListView
-                ref="listView"
-                className="contentListView win-selectionstylefilled"
-                style={{ height: 'calc(100% - 48px)' }}
-                itemDataSource={this.state.list.dataSource}
-                itemTemplate={this.itemRenderer}
-                layout={this.state.layout}
-                selectionMode="single"
-                tapBehavior="directSelect"
-                onSelectionChanged={this.handleSelectionChanged}
+                    ref="listView"
+                    className="contentListView win-selectionstylefilled"
+                    style={{ height: 'calc(100% - 48px)' }}
+                    itemDataSource={this.state.list.dataSource}
+                    itemTemplate={this.itemRenderer}
+                    layout={this.state.layout}
+                    selectionMode="single"
+                    tapBehavior="directSelect"
+                    onSelectionChanged={this.handleSelectionChanged}
                 />
 
                 {

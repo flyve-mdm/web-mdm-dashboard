@@ -6,7 +6,7 @@ import LICENCE from './LICENCE.md'
 const Licence = () => (
   <div>
     <h2>Licence</h2>
-    <div className="contentMarkdown aboutPane">
+    <div className="aboutPane">
       <ReactMarkdown source={LICENCE} />
     </div>
   </div>
