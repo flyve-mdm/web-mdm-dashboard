@@ -22,7 +22,8 @@ class FleetsContent extends Component {
                 categories: undefined,
                 files: undefined,
                 applications: undefined,
-                tasksNew: {}       
+                tasksNew: {},
+                tasksRemove: {}
             }
         }
     }
@@ -188,6 +189,9 @@ class FleetsContent extends Component {
 
     handleAddTask = (policy) => {
         if (policy) {
+            let tasks = { ...this.state.data.tasksRemove }
+            delete tasks[policy['PluginFlyvemdmPolicy.id']]
+
             let addPolicy = {
                 plugin_flyvemdm_fleets_id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
                 plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
@@ -195,7 +199,23 @@ class FleetsContent extends Component {
             }
 
             this.setState((prevState, props) => ({
-                data: { ...prevState.data, tasksNew: { ...prevState.data.tasksNew, [policy['PluginFlyvemdmPolicy.id']]: addPolicy } }
+                data: { ...prevState.data, tasksNew: { ...prevState.data.tasksNew, [policy['PluginFlyvemdmPolicy.id']]: addPolicy }, tasksRemove: tasks }
+            }))
+        }
+    }
+
+    handleRemoveTask = (policy) => {
+        if (policy) {
+            let tasks = { ...this.state.data.tasksNew}
+            delete tasks[policy['PluginFlyvemdmPolicy.id']]
+            let removePolicy = {
+                plugin_flyvemdm_fleets_id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
+                plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
+                value: policy['PluginFlyvemdmPolicy.default_value']
+            }
+            
+            this.setState((prevState, props) => ({
+                data: { ...prevState.data, tasksNew: tasks, tasksRemove: { ...prevState.data.tasksRemove, [policy['PluginFlyvemdmPolicy.id']]: removePolicy } }
             }))
         }
     }
@@ -217,7 +237,10 @@ class FleetsContent extends Component {
     }
 
     handleSaveFleet = () => {
+        console.log('---------ADD--------')
         console.log(this.state.data.tasksNew)
+        console.log('------- REMOVE------')
+        console.log(this.state.data.tasksRemove)
     }
 
     handleDeleteFleet = () => {
@@ -274,6 +297,7 @@ class FleetsContent extends Component {
                                                             data={policy}
                                                             value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
                                                             addTask={this.handleAddTask}
+                                                            removeTask={this.handleRemoveTask}
                                                             updateValueTask={this.handleUpdateValueTask}
                                                             defaultValues={
                                                                 (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id']))
