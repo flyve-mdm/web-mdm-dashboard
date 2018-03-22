@@ -1,3 +1,4 @@
+import EmptyMessage from '../../components/EmptyMessage'
 import Entity from './components/Entity'
 import Profiles from './components/Profiles'
 import Supervision from './components/Supervision'
@@ -8,6 +9,12 @@ import Display from './components/Display'
 const routes = [
   {
     path: '/',
+    name: 'No selected',
+    component: EmptyMessage,
+    exact: true
+  },
+  {
+    path: '/entity',
     name: 'Entity',
     component: Entity,
     exact: true
