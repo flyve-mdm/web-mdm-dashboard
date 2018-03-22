@@ -126,6 +126,7 @@ class FleetsContent extends Component {
     handleFleetHaveTask = policy => {
         let policyId = null
         const haveTask = this.state.data.tasks.some((task) => {
+            // Check if the current Fleet have a Task that have a relation with this Policy
             policyId = task['plugin_flyvemdm_policies_id']
             return policyId === policy['PluginFlyvemdmPolicy.id']
         })
@@ -142,9 +143,9 @@ class FleetsContent extends Component {
         }
     }
 
-    getValueOfTask = policy => {
+    getValueOfTask = (policy, fleetHaveTask) => {
         // Check if the current Fleet have a Task that have a relation with this Policy
-        if (policy['fleetHaveTask']) {
+        if (fleetHaveTask) {
             if (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id'])) {
                 // Return a Array with the multiples Tasks (values)
                 return this.state.data.tasks.filter(task => (	
@@ -153,8 +154,8 @@ class FleetsContent extends Component {
             }
             else {
                 // Return a Object that is the Task
-                return this.state.data.tasks.some(task => (	
-                    task['plugin_flyvemdm_policies_id'] === policy['PluginFlyvemdmPolicy.id']	
+                return this.state.data.tasks.filter(task => (
+                    task['plugin_flyvemdm_policies_id'] === policy['PluginFlyvemdmPolicy.id']
                 ))
             }
         } else {
@@ -169,8 +170,6 @@ class FleetsContent extends Component {
             let obj = {}
             let categoryCompleteName = category['PluginFlyvemdmPolicyCategory.completename']
             let policiesPerThisCategory = this.state.data.policies.filter(policy => {
-                // Check if the current Fleet have a Task that have a relation with this Policy
-                policy['fleetHaveTask'] = this.handleFleetHaveTask(policy) 
                 // Check if the same Policy Category name is equal to the Category name
                 return policy['PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename'] === categoryCompleteName
             })
@@ -183,8 +182,7 @@ class FleetsContent extends Component {
     }
 
     addTask = (policy, value) => {
-        console.log(policy)
-        console.log(value)
+        
     }
 
     handleSaveFleet = () => {
@@ -241,9 +239,9 @@ class FleetsContent extends Component {
                                                     {category['policies'].map((policy, index) => (
                                                         <FleetsTaskItemList
                                                             key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
+                                                            fleetHaveTask={this.handleFleetHaveTask(policy)}
                                                             data={policy}
-                                                            addedPolicy={policy['fleetHaveTask']}
-                                                            value={this.getValueOfTask(policy)}
+                                                            value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy)) ? this.getValueOfTask(policy, this.handleFleetHaveTask(policy))[0]['value'] : null}
                                                             addTask={this.addTask}
                                                             defaultValues={
                                                                 (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id']))
