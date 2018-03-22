@@ -31,8 +31,8 @@ class HelpCenterList extends Component {
         }
     }
 
-    redirectToArticle = id => (
-        this.props.history.push(`/app/about/help/article/${id}`)
+    redirectToArticle = article => (
+        this.props.history.push(`/app/about/help/${article}`)
     )
 
     redirectToFeedBack = () => {
@@ -43,7 +43,7 @@ class HelpCenterList extends Component {
         return (
             <div 
             style={{ padding: '14px', width: '100%' }}
-            onClick={() => this.redirectToArticle(item.data['HelpCenter.id'])}>
+            onClick={() => this.redirectToArticle(item.data['HelpCenter.name'])}>
                 <span className="documentIcon" style={{marginRight: '5px'}}/>
                 {item.data['HelpCenter.name']}
             </div>

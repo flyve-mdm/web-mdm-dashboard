@@ -10,7 +10,7 @@ const routes = [
     exact: true
   },
   {
-    path: '/article/:id',
+    path: '/:article',
     name: 'Article',
     component: HelpCenterArticle,
     exact: false
