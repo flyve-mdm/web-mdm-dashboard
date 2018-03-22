@@ -21,7 +21,8 @@ class FleetsContent extends Component {
                 tasks: undefined,
                 categories: undefined,
                 files: undefined,
-                applications: undefined
+                applications: undefined,
+                tasksNew: {}       
             }
         }
     }
@@ -46,7 +47,7 @@ class FleetsContent extends Component {
             itemtype: 'PluginFlyvemdmPolicy',
             options: {
                 uid_cols: true,
-                forcedisplay: [1, 2, 3, 4, 6],
+                forcedisplay: [1, 2, 3, 4, 7, 8],
                 range: '0-50' // Can more than 50 items
             }
         })
@@ -64,8 +65,19 @@ class FleetsContent extends Component {
             id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
             subItemtype: 'PluginFlyvemdmTask'
         })
+
+        const tasksNew = tasks.map((task) => {
+            return {
+                [task['plugin_flyvemdm_policies_id']]: {
+                    plugin_flyvemdm_fleets_id: task['plugin_flyvemdm_fleets_id'],
+                    plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
+                    value: task['value']
+                }
+            } 
+        })
+
         this.setState((prevState, props) => ({
-            data: { ...prevState.data, tasks: tasks }
+            data: { ...prevState.data, tasks, tasksNew:tasksNew[0] }
         }))
     }
 
@@ -124,13 +136,16 @@ class FleetsContent extends Component {
     }
     
     handleFleetHaveTask = policy => {
-        let policyId = null
-        const haveTask = this.state.data.tasks.some((task) => {
-            // Check if the current Fleet have a Task that have a relation with this Policy
-            policyId = task['plugin_flyvemdm_policies_id']
-            return policyId === policy['PluginFlyvemdmPolicy.id']
-        })
-        return haveTask
+        // let policyId = null
+
+        // const haveTask = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]
+
+        // const haveTask = this.state.data.tasksNew.some((task) => {
+        //     // Check if the current Fleet have a Task that have a relation with this Policy
+        //     policyId = task['plugin_flyvemdm_policies_id']
+        //     return policyId === policy['PluginFlyvemdmPolicy.id']
+        // })
+        return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? true : false
     }
 
     getDefaultValues = policyId => {
@@ -146,18 +161,8 @@ class FleetsContent extends Component {
     getValueOfTask = (policy, fleetHaveTask) => {
         // Check if the current Fleet have a Task that have a relation with this Policy
         if (fleetHaveTask) {
-            if (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id'])) {
-                // Return a Array with the multiples Tasks (values)
-                return this.state.data.tasks.filter(task => (	
-                    task['plugin_flyvemdm_policies_id'] === policy['PluginFlyvemdmPolicy.id']	
-                ))
-            }
-            else {
-                // Return a Object that is the Task
-                return this.state.data.tasks.filter(task => (
-                    task['plugin_flyvemdm_policies_id'] === policy['PluginFlyvemdmPolicy.id']
-                ))
-            }
+            // Return a Object that is the Task
+            return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['value'] : null
         } else {
             return null
         }
@@ -181,12 +186,22 @@ class FleetsContent extends Component {
         return policiesPerCategory
     }
 
-    addTask = (policy, value) => {
-        
+    handleAddTask = (policy) => {
+        if (policy) {
+            let addPolicy = {
+                plugin_flyvemdm_fleets_id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
+                plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
+                value: policy['PluginFlyvemdmPolicy.default_value']
+            }
+
+            this.setState((prevState, props) => ({
+                data: { ...prevState.data, tasksNew: { ...prevState.data.tasksNew, [policy['PluginFlyvemdmPolicy.id']]: addPolicy } }
+            }))
+        }
     }
 
     handleSaveFleet = () => {
-        console.log('save')
+        console.log(this.state.data.tasksNew)
     }
 
     handleDeleteFleet = () => {
@@ -199,7 +214,7 @@ class FleetsContent extends Component {
         if (this.props.selectedItems.length === 1 
         && this.state.data.policies
         && this.state.data.categories
-        && this.state.data.tasks
+        && this.state.data.tasksNew
         && this.state.data.files
         && this.state.data.applications) {
             policiesPerCategory = this.filterPoliciesPerCategory()
@@ -241,12 +256,12 @@ class FleetsContent extends Component {
                                                             key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
                                                             fleetHaveTask={this.handleFleetHaveTask(policy)}
                                                             data={policy}
-                                                            value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy)) ? this.getValueOfTask(policy, this.handleFleetHaveTask(policy))[0]['value'] : null}
-                                                            addTask={this.addTask}
+                                                            value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
+                                                            addTask={this.handleAddTask}
                                                             defaultValues={
                                                                 (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id']))
                                                                     ? (this.getDefaultValues(policy['PluginFlyvemdmPolicy.id']))
-                                                                    : null
+                                                                    : policy['PluginFlyvemdmPolicy.default_value']
                                                             } />
                                                     ))}
                                                 </div>

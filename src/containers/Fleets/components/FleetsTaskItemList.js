@@ -37,7 +37,7 @@ class FleetsTaskItemList extends Component {
     componentWillUpdate(nextProps, nextState) {
         console.log(nextProps)        
         if ((nextState.alreadyAdded || (this.state.alreadyAdded !== nextState.alreadyAdded)) && this.state.alreadyAdded !== null) {
-            this.props.addTask(this.props.data, nextState.active)
+
         }
     }
     
@@ -46,7 +46,9 @@ class FleetsTaskItemList extends Component {
             return {
                 alreadyAdded: !prevState.alreadyAdded
             }
-        })
+        }) 
+        this.props.addTask(this.props.data)
+
     }
 
     handleActivePolicyToggle = () => {
@@ -104,7 +106,7 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                 </div>
                                 <div className='item-content-secondary'>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>bol
+                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch 
                                         className="content-text-primary"
                                         checked={this.state.alreadyAdded}
