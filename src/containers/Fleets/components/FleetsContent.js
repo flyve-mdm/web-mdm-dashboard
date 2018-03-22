@@ -28,8 +28,8 @@ class FleetsContent extends Component {
 
     componentDidMount = () => {
 
-        this.getPolicies()
         this.getTasks()
+        this.getPolicies()
         this.getPolicyCategories()
         this.getFile()
         this.getApplication()
@@ -62,11 +62,7 @@ class FleetsContent extends Component {
         const tasks = await this.props.glpi.getSubItems({
             itemtype: 'PluginFlyvemdmFleet',
             id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
-            subItemtype: 'PluginFlyvemdmTask',
-            options: {
-                uid_cols: true,
-                forcedisplay: [1, 2, 3, 4, 6]
-            }
+            subItemtype: 'PluginFlyvemdmTask'
         })
         this.setState((prevState, props) => ({
             data: { ...prevState.data, tasks: tasks }
