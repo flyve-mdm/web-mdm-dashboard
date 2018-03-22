@@ -52,11 +52,12 @@ class FleetsTaskItemList extends Component {
     }
 
     handleActivePolicyToggle = () => {
-        this.setState((prevState) => {
-            return {
-                active: !prevState.active
-            }
-        })
+        this.props.updateValueTask(this.props.data, !this.props.value)
+        // this.setState((prevState) => {
+        //     return {
+        //         active: !prevState.active
+        //     }
+        // })
     }
 
     render() {

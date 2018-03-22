@@ -200,6 +200,22 @@ class FleetsContent extends Component {
         }
     }
 
+    handleUpdateValueTask = (policy, value) => {
+        if (policy) {
+            let newValue
+            switch (policy['PluginFlyvemdmPolicy.type']) {
+                case 'bool':
+                    newValue = value ? 1 : 0
+                    break
+                default:
+                    break
+            }
+            this.setState((prevState, props) => ({
+                data: { ...prevState.data, tasksNew: { ...prevState.data.tasksNew, [policy['PluginFlyvemdmPolicy.id']]: { value: newValue } } }
+            }))
+        }
+    }
+
     handleSaveFleet = () => {
         console.log(this.state.data.tasksNew)
     }
@@ -258,6 +274,7 @@ class FleetsContent extends Component {
                                                             data={policy}
                                                             value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
                                                             addTask={this.handleAddTask}
+                                                            updateValueTask={this.handleUpdateValueTask}
                                                             defaultValues={
                                                                 (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id']))
                                                                     ? (this.getDefaultValues(policy['PluginFlyvemdmPolicy.id']))
