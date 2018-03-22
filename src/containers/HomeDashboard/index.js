@@ -28,7 +28,8 @@ class Dashboard extends Component {
       applications: undefined,
       users: undefined,
       devicesByPlatform: undefined,
-      pendingInvitations: undefined
+      pendingInvitations: undefined,
+      display: localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
     }
   }
 
