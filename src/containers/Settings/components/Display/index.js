@@ -37,23 +37,17 @@ class Display extends Component {
     }
 
     changeLocalStorage = (name) => {
-        let display = localStorage.getItem('display') ? localStorage.getItem('display') : '{}'
-        display = JSON.parse(display)
-
-        display = { 
-            ...display, 
-            [name]: !display[name]
-        }
-
         this.setState({
             [name]: !this.state[name]
         })
 
-        localStorage.setItem('display', JSON.stringify(display))
-
         if (name === 'animations') {
             this.props.actions.uiToggleAnimation()
         }
+    }
+
+    componentDidUpdate  (){
+        localStorage.setItem('display', JSON.stringify(this.state))
     }
 
     render () {
@@ -112,7 +106,7 @@ class Display extends Component {
                             className="content-text-primary"
                             checked={this.state.maximumManagedDevices}
                             onChange={() => this.changeLocalStorage('maximumManagedDevices')}
-                            />
+                        />
                     </div>
                 </div>
                 
@@ -125,7 +119,7 @@ class Display extends Component {
                                 className="content-text-primary"
                                 checked={this.state.devicesCurrentlyManaged}
                                 onChange={() => this.changeLocalStorage('devicesCurrentlyManaged')}
-                                />
+                            />
                     </div>
                 </div>
                 
@@ -138,7 +132,7 @@ class Display extends Component {
                                 className="content-text-primary"
                                 checked={this.state.fleetsCurrentlyManaged}
                                 onChange={() => this.changeLocalStorage('fleetsCurrentlyManaged')}
-                                />
+                            />
                     </div>
                 </div>
                 
@@ -151,7 +145,7 @@ class Display extends Component {
                                 className="content-text-primary"
                                 checked={this.state.filesUploaded}
                                 onChange={() => this.changeLocalStorage('filesUploaded')}
-                                />
+                            />
                     </div>
                 </div>
                 
@@ -164,7 +158,7 @@ class Display extends Component {
                                 className="content-text-primary"
                                 checked={this.state.applicationsUploaded}
                                 onChange={() => this.changeLocalStorage('applicationsUploaded')}
-                                />
+                            />
                     </div>
                 </div>
                 
@@ -177,7 +171,7 @@ class Display extends Component {
                                 className="content-text-primary"
                                 checked={this.state.numberUsers}
                                 onChange={() => this.changeLocalStorage('numberUsers')}
-                                />
+                            />
                     </div>
                 </div>
                 
@@ -190,7 +184,7 @@ class Display extends Component {
                                 className="content-text-primary"
                                 checked={this.state.invitationsSent}
                                 onChange={() => this.changeLocalStorage('invitationsSent')}
-                                />
+                            />
                     </div>
                 </div>
                 
@@ -216,7 +210,7 @@ class Display extends Component {
                                 className="content-text-primary"
                                 checked={this.state.devicesByOperatingSystemVersion}
                                 onChange={() => this.changeLocalStorage('devicesByOperatingSystemVersion')}
-                                />
+                            />
                     </div>
                 </div>
                 
