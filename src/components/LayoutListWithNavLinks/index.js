@@ -45,16 +45,20 @@ class ListWithNavLinks extends Component {
                 <nav style={this.state.mode === "small" ? {display: 'none'} : {}}>
                     <ul>
                         {this.props.routes.map((route, i) => {
-                            return (
-                                <li key={i}>
-                                    <NavLink 
-                                        exact
-                                        to={`${this.props.rootPath}${route.path !== "/" ? route.path : ""}`}
-                                        activeClassName='--active'>
-                                        {route.name}
-                                    </NavLink>
-                                </li>
-                            )
+                            if (route.path !== "/") {
+                                return (
+                                    <li key={i}>
+                                        <NavLink 
+                                            exact
+                                            to={`${this.props.rootPath}${route.path !== "/" ? route.path : ""}`}
+                                            activeClassName='--active'>
+                                            {route.name}
+                                        </NavLink>
+                                    </li>
+                                )
+                            } else {
+                                return ""
+                            }
                         })}
                     </ul>
                 </nav>
