@@ -228,10 +228,19 @@ class FleetsContent extends Component {
                     newValue = value ? 1 : 0
                     break
                 default:
+                    newValue = value
                     break
             }
             this.setState((prevState, props) => ({
-                data: { ...prevState.data, tasksNew: { ...prevState.data.tasksNew, [policy['PluginFlyvemdmPolicy.id']]: { value: newValue } } }
+                data: { 
+                ...prevState.data, 
+                tasksNew: { 
+                    ...prevState.data.tasksNew, 
+                    [policy['PluginFlyvemdmPolicy.id']]: { 
+                        ...prevState.data.tasksNew[policy['PluginFlyvemdmPolicy.id']], 
+                        value: newValue } 
+                    } 
+                }
             }))
         }
     }
