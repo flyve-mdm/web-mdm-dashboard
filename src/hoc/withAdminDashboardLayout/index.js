@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SplitView from "../../components/SplitView"
 import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
 import getMode from '../../shared/getMode'
+import configureDisplay from '../../shared/configureDisplay'
 
 // TODO: Passing Routes to props for generate NavLink in SplitView component
 
@@ -29,6 +30,7 @@ const withAdminDashboardLayout = WrappedComponent => {
 
     componentWillMount () {
       window.addEventListener('resize', this.handleResize)
+      configureDisplay()
     }
 
     componentWillUnmount () {
