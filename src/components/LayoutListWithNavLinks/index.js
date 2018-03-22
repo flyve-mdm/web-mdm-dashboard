@@ -7,28 +7,27 @@ class ListWithNavLinks extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            mode: getMode()
+            mode: getMode(),
+            styleNav: this.styleNav(getMode(), this.props.history)
         }
     }
 
     handleResize = () => {
-        let nextMode = getMode()
-
-        if (nextMode === 'small') {
-            this.setState({
-                itemListPaneWidth: '100%'
-            })
-        } else {
-            this.setState({
-                itemListPaneWidth: 320
-            })
-        }
-
+        const nextMode = getMode()
         if (this.state.mode !== nextMode) {
             this.setState({
-                mode: nextMode 
+                mode: nextMode,
+                styleNav: this.styleNav(nextMode, this.props.history)
             })
         }
+    }
+
+    styleNav (mode, history) {
+        return (
+            mode === "small" ? 
+                history.location.pathname.split("/").length > 3 ?
+                    {display: 'none'} : {width: '100%'} : {}
+        )
     }
 
     componentWillMount () {
@@ -39,10 +38,16 @@ class ListWithNavLinks extends Component {
         window.removeEventListener('resize', this.handleResize)
     }
 
+    componentWillReceiveProps (nextProps) {
+        this.setState({
+            styleNav: this.styleNav(this.state.mode, nextProps.history)
+        })
+    }
+
     render () {
         return (
             <div className="layout_list_with_navlinks-block">
-                <nav style={this.state.mode === "small" ? {display: 'none'} : {}}>
+                <nav style={this.state.styleNav}>
                     <ul>
                         {this.props.routes.map((route, i) => {
                             if (route.path !== "/") {
@@ -62,9 +67,14 @@ class ListWithNavLinks extends Component {
                         })}
                     </ul>
                 </nav>
-                <article>
-                    {this.props.children}
-                </article>
+                {
+                    (this.state.mode === "small" && !this.state.styleNav.display) ? 
+                        "" : (
+                            <article>
+                                {this.props.children}
+                            </article>
+                        )
+                }
             </div>
         )
     }
@@ -73,7 +83,8 @@ class ListWithNavLinks extends Component {
 ListWithNavLinks.propTypes = {
     routes: PropTypes.array.isRequired,
     rootPath: PropTypes.string.isRequired,
-    children: PropTypes.element
+    children: PropTypes.element.isRequired,
+    history: PropTypes.object.isRequired
 }
 
 export default ListWithNavLinks

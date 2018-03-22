@@ -25,7 +25,7 @@ class AboutPage extends Component {
                     return (
                         <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
                             <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <div className="contentMarkdown aboutPane">
+                            <div className="aboutPane">
                                 <ReactMarkdown source={LICENCE} />
                             </div>
                         </ContentPane>
@@ -38,7 +38,7 @@ class AboutPage extends Component {
                     return (
                         <ContentPane itemListPaneWidth={this.props.itemListPaneWidth} >
                             <h2 className="win-h2 titleContentPane">{selectedItemList.title}</h2>
-                            <div className="contentMarkdown aboutPane">
+                            <div className="aboutPane">
                                 <ReactMarkdown source={CHANGELOG} />
                             </div>
                         </ContentPane>
