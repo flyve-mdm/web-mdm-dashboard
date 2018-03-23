@@ -1,7 +1,6 @@
 export default () => {
     const currentDisplay = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
     const newtDisplay = {
-        maximumManagedDevices: currentDisplay.maximumManagedDevices !== undefined ? currentDisplay.maximumManagedDevices : true,
         applicationsUploaded: currentDisplay.applicationsUploaded !== undefined ? currentDisplay.applicationsUploaded : true,
         devicesByOperatingSystemVersion: currentDisplay.devicesByOperatingSystemVersion !== undefined ? currentDisplay.devicesByOperatingSystemVersion : true,
         devicesByUsers: currentDisplay.devicesByUsers !== undefined ? currentDisplay.devicesByUsers : true,

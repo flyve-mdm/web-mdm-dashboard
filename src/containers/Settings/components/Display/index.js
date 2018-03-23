@@ -23,7 +23,6 @@ class Display extends Component {
         const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
 
         this.state = {
-            maximumManagedDevices: display.maximumManagedDevices !== undefined ? display.maximumManagedDevices : true,
             applicationsUploaded: display.applicationsUploaded !== undefined ? display.applicationsUploaded : true,
             devicesByOperatingSystemVersion: display.devicesByOperatingSystemVersion !== undefined ? display.devicesByOperatingSystemVersion : true,
             devicesByUsers: display.devicesByUsers !== undefined ? display.devicesByUsers : true,
@@ -96,19 +95,6 @@ class Display extends Component {
                 </div>
                                         
                 <div className="win-h3">Show in dashboard </div>
-
-                <div className="listElement">
-                    <div className="message">
-                        Maximum managed devices
-                    </div>
-                    <div className="controller">
-                        <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
-                            checked={this.state.maximumManagedDevices}
-                            onChange={() => this.changeLocalStorage('maximumManagedDevices')}
-                        />
-                    </div>
-                </div>
                 
                 <div className="listElement">
                     <div className="message">
