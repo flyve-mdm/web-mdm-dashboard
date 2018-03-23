@@ -136,6 +136,7 @@
     "invitations": "Invitations",
     "users": "Users",
     "devices_by_plataform": "Devices by plataform",
+    "devices_by_users": "Devices by users",
     "pending_invitations": "Pending invitations",
     "dashboard": "Dashboard",
     "ok": "Ok",

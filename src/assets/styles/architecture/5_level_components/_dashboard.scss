@@ -83,6 +83,12 @@ $chart-size: 310px;
                 width: $chart-size;
                 height: $chart-size;
                 
+                ul {
+                    height: $chart-size - 40px;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                }
+                
                 .title-box {
                     padding: 10px;
                     position: absolute;
