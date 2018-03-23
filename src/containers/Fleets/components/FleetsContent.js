@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
 import ContentPane from '../../../components/ContentPane'
+import Loading from '../../../components/Loading'
 
 const POLICIES_CAN_MULTIPLE_VALUE = [
     14, // -> Deploy Application
@@ -16,6 +17,7 @@ class FleetsContent extends Component {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
+            isLoading: false,
             data: {
                 policies: undefined,
                 tasks: undefined,
@@ -295,61 +297,64 @@ class FleetsContent extends Component {
         && this.state.data.applications) {
             policiesPerCategory = this.filterPoliciesPerCategory()
         }         
-
-        return this.props.selectedItems.length === 1 ? 
-            ( 
-                <ContentPane>
-                    <div className="contentHeader" style={{ display:'table'}}>
-                        <h1 className="win-h1 titleContentPane" style={{ display: 'table-cell', verticalAlign: 'middle', padding:'0 20px'}}> {this.props.selectedItems[0]["PluginFlyvemdmFleet.name"]} </h1>
-                        <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-                            <div className="contentStatus">
-                                <span
-                                    className="saveIcon"
-                                    style={{ padding: '10px', fontSize: '20px' }}
-                                    onClick={this.handleSaveFleet} />
-                                <span
-                                    className="deleteIcon"
-                                    style={{ padding: '10px', fontSize: '20px' }}
-                                    onClick={this.handleDeleteFleet} />
+        if (this.state.isLoading) {
+            return (<Loading message="Loading..." />)
+        } else {
+            return this.props.selectedItems.length === 1 ?
+                (
+                    <ContentPane>
+                        <div className="contentHeader" style={{ display: 'table' }}>
+                            <h1 className="win-h1 titleContentPane" style={{ display: 'table-cell', verticalAlign: 'middle', padding: '0 20px' }}> {this.props.selectedItems[0]["PluginFlyvemdmFleet.name"]} </h1>
+                            <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+                                <div className="contentStatus">
+                                    <span
+                                        className="saveIcon"
+                                        style={{ padding: '10px', fontSize: '20px' }}
+                                        onClick={this.handleSaveFleet} />
+                                    <span
+                                        className="deleteIcon"
+                                        style={{ padding: '10px', fontSize: '20px' }}
+                                        onClick={this.handleDeleteFleet} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="separator" />
-                    <div className="contentInfo" style={{ padding: '20px' }} >
-                        <h3 className="win-h3" > Tasks per Category </h3>
-                        <div style={{ padding: '0 20px'}}>
-                            {policiesPerCategory ? (
-                                policiesPerCategory.map((category) => {
-                                    return category['policies'].length > 0
-                                        ? (
-                                            <div key={category['id']}>
-                                                <h2>
-                                                    {category['name']}
-                                                </h2>
-                                                <div>
-                                                    {category['policies'].map((policy, index) => (
-                                                        <FleetsTaskItemList
-                                                            key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
-                                                            fleetHaveTask={this.handleFleetHaveTask(policy)}
-                                                            data={policy}
-                                                            value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
-                                                            addTask={this.handleAddTask}
-                                                            removeTask={this.handleRemoveTask}
-                                                            updateValueTask={this.handleUpdateValueTask}
-                                                            typeData={this.getTypeData(policy)}
-                                                         />
-                                                    ))}
+                        <div className="separator" />
+                        <div className="contentInfo" style={{ padding: '20px' }} >
+                            <h3 className="win-h3" > Tasks per Category </h3>
+                            <div style={{ padding: '0 20px' }}>
+                                {policiesPerCategory ? (
+                                    policiesPerCategory.map((category) => {
+                                        return category['policies'].length > 0
+                                            ? (
+                                                <div key={category['id']}>
+                                                    <h2>
+                                                        {category['name']}
+                                                    </h2>
+                                                    <div>
+                                                        {category['policies'].map((policy, index) => (
+                                                            <FleetsTaskItemList
+                                                                key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
+                                                                fleetHaveTask={this.handleFleetHaveTask(policy)}
+                                                                data={policy}
+                                                                value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
+                                                                addTask={this.handleAddTask}
+                                                                removeTask={this.handleRemoveTask}
+                                                                updateValueTask={this.handleUpdateValueTask}
+                                                                typeData={this.getTypeData(policy)}
+                                                            />
+                                                        ))}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
-                                        : null
-                                })
-                            ) : <h1>Loading Tasks, Policies and Categories</h1>}
+                                            )
+                                            : null
+                                    })
+                                ) : <h1>Loading Tasks, Policies and Categories</h1>}
+                            </div>
                         </div>
-                    </div>
-                </ContentPane>
-            )
-            : null
+                    </ContentPane>
+                )
+                : null
+        }
     }
 }
 
