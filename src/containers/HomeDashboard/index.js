@@ -8,6 +8,7 @@ import InfoBox from '../../components/InfoBox'
 import { uiSetNotification } from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import EmptyMessage from '../../components/EmptyMessage'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -282,26 +283,33 @@ class Dashboard extends Component {
   }
 
   render() {
+    const renderInfoBox = this.renderInfoBox()
+    const renderGraphics = this.renderGraphics()
     const renderComponent = this.state.isLoading ? <div style={{width: '100%', height: 'calc(100vh - 80px)'}}><Loading message="Loading..." /></div>:
     (
       <React.Fragment>
         <div className="dashboard-block">
 
-            <div className="dashboard-wrapper__div">
+        {
+          (renderInfoBox.length > 0 || renderGraphics.length > 0) ?
+            (
+              <div className="dashboard-wrapper__div">
 
-                <div className="dashboard-infobox-wraper__div">
+                  <div className="dashboard-infobox-wraper__div">
 
-                  {this.renderInfoBox()}
+                    {renderInfoBox}
 
-                </div>
+                  </div>
 
-                <div className="dashboard-chart-wraper__div">
+                  <div className="dashboard-chart-wraper__div">
 
-                  {this.renderGraphics()}
+                    {renderGraphics}
 
-                </div> 
+                  </div> 
 
-            </div>
+              </div>
+            ) : <EmptyMessage message="No data" />
+        }
 
         </div>
       </React.Fragment>
