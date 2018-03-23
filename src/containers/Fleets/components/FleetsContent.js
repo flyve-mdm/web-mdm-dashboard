@@ -18,6 +18,7 @@ class FleetsContent extends Component {
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
             isLoading: false,
+            input: '',
             data: {
                 policies: undefined,
                 tasks: undefined,
@@ -32,17 +33,17 @@ class FleetsContent extends Component {
 
     componentDidMount = () => {
         this.requestAllData()
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.props.selectedItems.length === 0) {
-            this.props.history.push('/app/fleets')
-        }
+        this.setState({
+            input: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Feet'
+        })
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.selectedItems && (prevProps.selectedItems !== this.props.selectedItems)) {
             this.requestAllData()
+            this.setState({
+                input: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Fleet'
+            })
         }
     }
 
@@ -50,28 +51,34 @@ class FleetsContent extends Component {
         this.setState((prevState, props) => ({
             isLoading: true
         }))
-        /*
+
+        let tasks = []
+        let tasksNew = {}
+
+        if (this.props.selectedItems.length > 0) {
+            /*
          * Get Tasks 
          * */
-        const tasks = await this.props.glpi.getSubItems({
-            itemtype: 'PluginFlyvemdmFleet',
-            id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
-            subItemtype: 'PluginFlyvemdmTask'
-        })
+            tasks = await this.props.glpi.getSubItems({
+                itemtype: 'PluginFlyvemdmFleet',
+                id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
+                subItemtype: 'PluginFlyvemdmTask'
+            })
 
-        const tasksNew = tasks.map((task) => {
-            return {
-                [task['plugin_flyvemdm_policies_id']]: {
-                    plugin_flyvemdm_fleets_id: task['plugin_flyvemdm_fleets_id'],
-                    plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
-                    value: task['value']
+            tasksNew = tasks.map((task) => {
+                return {
+                    [task['plugin_flyvemdm_policies_id']]: {
+                        plugin_flyvemdm_fleets_id: task['plugin_flyvemdm_fleets_id'],
+                        plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
+                        value: task['value']
+                    }
                 }
-            }
-        }).reduce(function (result, item) {
-            var key = Object.keys(item)[0]
-            result[key] = item[key];
-            return result
-        }, {})
+            }).reduce(function (result, item) {
+                var key = Object.keys(item)[0]
+                result[key] = item[key];
+                return result
+            }, {})
+        }
 
         /*
          * Get Policies 
@@ -139,6 +146,10 @@ class FleetsContent extends Component {
             }
         }))
 
+    }
+
+    handleChangeInput = (e) => {
+        this.setState({ input: e.target.value })
     }
     
     handleFleetHaveTask = policy => {
@@ -254,21 +265,34 @@ class FleetsContent extends Component {
 
     handleSaveFleet = async () => {
 
+        if(this.props.selectedItems.length === 1) {
+            this.handleUpdateFleet()
+        }
+    }
+
+    handleUpdateFleet = async () => {
         this.setState({
             isLoading: true
         })
 
-        const itemsToDelete = this.state.data.tasks.filter(task => {
-            // Check if the same Policy id is equal on object to remove
-            return this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']] ? true : false
-        }).map((item) => {
-            return {
-                id: item["id"]
-            }
-        })
+        const fleetToUpdate = {
+            name: this.state.input
+        }
 
-        let itemsToUpdate = [] 
-        
+        let itemsToDelete = []
+        if (this.state.data.tasksRemove) {
+            itemsToDelete = this.state.data.tasks.filter(task => {
+                // Check if the same Policy id is equal on object to remove
+                return this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']] ? true : false
+            }).map((item) => {
+                return {
+                    id: item["id"]
+                }
+            })
+        }
+
+        let itemsToUpdate = []
+
         this.state.data.tasks.map(task => {
             // Check if the same Policy id is equal on object to remove
             return this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']] ? itemsToUpdate.push({
@@ -277,7 +301,7 @@ class FleetsContent extends Component {
             }) : null
         })
 
-        let itemsToAdd = {...this.state.data.tasksNew}
+        let itemsToAdd = { ...this.state.data.tasksNew }
 
         this.state.data.tasks.map(task => {
             // Check if the same Policy id is equal on object to remove
@@ -289,14 +313,17 @@ class FleetsContent extends Component {
         })
 
         try {
-            if (itemsToDelete.length > 0 ){
+
+            await this.props.glpi.updateItem({ itemtype: 'PluginFlyvemdmFleet', id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'], input: fleetToUpdate })
+
+            if (itemsToDelete.length > 0) {
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToDelete })
             }
 
             if (itemsToUpdate.length > 0) {
                 await this.props.glpi.updateItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToUpdate })
             }
-            
+
             if (itemsToSave.length > 0) {
                 await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToSave })
             }
@@ -330,8 +357,7 @@ class FleetsContent extends Component {
     render() {
         let policiesPerCategory
 
-        if (this.props.selectedItems.length === 1 
-        && this.state.data.policies
+        if (this.state.data.policies
         && this.state.data.categories
         && this.state.data.tasksNew
         && this.state.data.files
@@ -341,60 +367,68 @@ class FleetsContent extends Component {
         if (this.state.isLoading) {
             return (<Loading message="Loading..." />)
         } else {
-            return this.props.selectedItems.length === 1 ?
-                (
-                    <ContentPane>
-                        <div className="contentHeader" style={{ display: 'table' }}>
-                            <h1 className="win-h1 titleContentPane" style={{ display: 'table-cell', verticalAlign: 'middle', padding: '0 20px' }}> {this.props.selectedItems[0]["PluginFlyvemdmFleet.name"]} </h1>
-                            <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-                                <div className="contentStatus">
-                                    <span
-                                        className="saveIcon"
-                                        style={{ padding: '10px', fontSize: '20px' }}
-                                        onClick={this.handleSaveFleet} />
-                                    <span
-                                        className="deleteIcon"
-                                        style={{ padding: '10px', fontSize: '20px' }}
-                                        onClick={this.handleDeleteFleet} />
-                                </div>
+            return (
+                <ContentPane>
+                    <div className="contentHeader" style={{ display: 'table' }}>
+                        <h1 className="win-h1 titleContentPane" style={{ display: 'table-cell', verticalAlign: 'middle', padding: '0 20px' }}> 
+                            <input
+                                type="text"
+                                className="win-textbox"
+                                style={{fontSize:'34px', fontWeight:'200'}}
+                                placeholder="Fleet name"
+                                name="fleetName"
+                                onChange={this.handleChangeInput}
+                                value={this.state.input}
+                            />                           
+                        </h1>
+                        <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+                            <div className="contentStatus">
+                                <span
+                                    className="saveIcon"
+                                    style={{ padding: '10px', fontSize: '20px' }}
+                                    onClick={this.handleSaveFleet} />
+                                <span
+                                    className="deleteIcon"
+                                    style={{ padding: '10px', fontSize: '20px' }}
+                                    onClick={this.handleDeleteFleet} />
                             </div>
                         </div>
-                        <div className="separator" />
-                        <div className="contentInfo" style={{ padding: '20px' }} >
-                            <h3 className="win-h3" > Tasks per Category </h3>
-                            <div style={{ padding: '0 20px' }}>
-                                {policiesPerCategory ? (
-                                    policiesPerCategory.map((category) => {
-                                        return category['policies'].length > 0
-                                            ? (
-                                                <div key={category['id']}>
-                                                    <h2>
-                                                        {category['name']}
-                                                    </h2>
-                                                    <div>
-                                                        {category['policies'].map((policy, index) => (
-                                                            <FleetsTaskItemList
-                                                                key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
-                                                                fleetHaveTask={this.handleFleetHaveTask(policy)}
-                                                                data={policy}
-                                                                value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
-                                                                addTask={this.handleAddTask}
-                                                                removeTask={this.handleRemoveTask}
-                                                                updateValueTask={this.handleUpdateValueTask}
-                                                                typeData={this.getTypeData(policy)}
-                                                            />
-                                                        ))}
-                                                    </div>
+                    </div>
+                    <div className="separator" />
+                    <div className="contentInfo" style={{ padding: '20px' }} >
+                        <h3 className="win-h3" > Tasks per Category </h3>
+                        <div style={{ padding: '0 20px' }}>
+                            {policiesPerCategory ? (
+                                policiesPerCategory.map((category) => {
+                                    return category['policies'].length > 0
+                                        ? (
+                                            <div key={category['id']}>
+                                                <h2>
+                                                    {category['name']}
+                                                </h2>
+                                                <div>
+                                                    {category['policies'].map((policy, index) => (
+                                                        <FleetsTaskItemList
+                                                            key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
+                                                            fleetHaveTask={this.handleFleetHaveTask(policy)}
+                                                            data={policy}
+                                                            value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
+                                                            addTask={this.handleAddTask}
+                                                            removeTask={this.handleRemoveTask}
+                                                            updateValueTask={this.handleUpdateValueTask}
+                                                            typeData={this.getTypeData(policy)}
+                                                        />
+                                                    ))}
                                                 </div>
-                                            )
-                                            : null
-                                    })
-                                ) : <h1>Loading Tasks, Policies and Categories</h1>}
-                            </div>
+                                            </div>
+                                        )
+                                        : null
+                                })
+                            ) : <h1>Loading Tasks, Policies and Categories</h1>}
                         </div>
-                    </ContentPane>
-                )
-                : null
+                    </div>
+                </ContentPane>
+            )
         }
     }
 }
