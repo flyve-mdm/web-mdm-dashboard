@@ -172,6 +172,46 @@ class FleetsTaskItemList extends Component {
                         </div>
                     </div>
                 )
+                case "dropdown":
+                return (
+                    <div className='files-list fleet-list'>
+                        <div className='files-list-content'>
+                            <div className='files-list-item'>
+                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
+                                    <div className='content-text-primary'>
+                                        {this.props.data['PluginFlyvemdmPolicy.name']}
+                                    </div>
+                                    <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
+                                        <select
+                                            className="win-dropdown"
+                                            name={this.props.data['PluginFlyvemdmPolicy.id']}>
+                                            <option>dropdown</option>
+                                            {
+                                                this.props.typeData.map((value, index) =>
+                                                    <option
+                                                        key={value[0]}
+                                                        value={value[0]}>
+                                                        {value[1]}
+                                                    </option>
+                                                )
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div className='item-content-secondary '>
+                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                                        <ReactWinJS.ToggleSwitch
+                                            className="content-text-primary"
+                                            checked={this.state.alreadyAdded}
+                                            onChange={() => this.handleAddedToggle}
+                                            labelOn=""
+                                            labelOff="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
                 case "deployapp":
                 return (
                     <div className='files-list fleet-list'>
@@ -189,7 +229,7 @@ class FleetsTaskItemList extends Component {
                                         onChange={this.props.changeInput}>
                                             <option>Select an application</option>
                                             {
-                                                this.props.defaultValues.map((value, index) =>
+                                                this.props.typeData.map((value, index) =>
                                                     <option
                                                     key={value['PluginFlyvemdmPackage.id']}
                                                     value={value["PluginFlyvemdmPackage.id"]}>
@@ -231,7 +271,7 @@ class FleetsTaskItemList extends Component {
                                         onChange={this.props.changeInput}>
                                             <option>Select an application</option>
                                             {
-                                                this.props.defaultValues.map((value, index) =>
+                                                this.props.typeData.map((value, index) =>
                                                     <option
                                                     key={value['PluginFlyvemdmPackage.id']}
                                                     value={value["PluginFlyvemdmPackage.id"]}>
@@ -273,7 +313,7 @@ class FleetsTaskItemList extends Component {
                                         onChange={this.props.changeInput}>
                                             <option>Select a file</option>
                                             {
-                                                this.props.defaultValues.map(value => 
+                                                this.props.typeData.map(value => 
                                                     <option
                                                     key={value['PluginFlyvemdmFile.id']}
                                                     value={value["PluginFlyvemdmFile.id"]}>
@@ -315,7 +355,7 @@ class FleetsTaskItemList extends Component {
                                         onChange={this.props.changeInput}>
                                             <option>Select a file</option>
                                             {
-                                                this.props.defaultValues.map(value => 
+                                                this.props.typeData.map(value => 
                                                     <option
                                                     key={value['PluginFlyvemdmFile.id']}
                                                     value={value["PluginFlyvemdmFile.id"]}>
