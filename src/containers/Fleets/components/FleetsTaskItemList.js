@@ -20,21 +20,25 @@ class FleetsTaskItemList extends Component {
         } else {
             this.setState({
                 alreadyAdded: false,
-                active: false
+                active: false,
+                input: ''
             })
         }
     }
 
     componentDidMount = () => {
+        this.updateState(this.props.fleetHaveTask)
         this.setState({
             input: this.props.value ? this.props.value : ''
         })
-        this.updateState(this.props.fleetHaveTask)
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.fleetHaveTask !== this.props.fleetHaveTask) {
             this.updateState(nextProps.fleetHaveTask)
+            this.setState({
+                input: this.props.value ? this.props.value : ''
+            })
         }
     }
 
@@ -184,11 +188,12 @@ class FleetsTaskItemList extends Component {
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
                                         <select
                                             className="win-dropdown"
-                                            name={this.props.data['PluginFlyvemdmPolicy.id']}>
-                                            <option>dropdown</option>
+                                            name={this.props.data['PluginFlyvemdmPolicy.id']}
+                                            value={this.props.value}
+                                            onChange={this.handleChangeInput}>
                                             {
                                                 this.props.typeData.map((value, index) =>
-                                                    <option
+                                                    <option 
                                                         key={value[0]}
                                                         value={value[0]}>
                                                         {value[1]}
