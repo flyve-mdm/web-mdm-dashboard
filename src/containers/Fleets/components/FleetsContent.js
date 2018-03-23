@@ -48,7 +48,7 @@ class FleetsContent extends Component {
             itemtype: 'PluginFlyvemdmPolicy',
             options: {
                 uid_cols: true,
-                forcedisplay: [1, 2, 3, 4, 7, 8],
+                forcedisplay: [1, 2, 3, 4, 5, 6, 7, 8],
                 range: '0-50' // Can more than 50 items
             }
         })
@@ -137,25 +137,26 @@ class FleetsContent extends Component {
     }
     
     handleFleetHaveTask = policy => {
-        // let policyId = null
-
-        // const haveTask = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]
-
-        // const haveTask = this.state.data.tasksNew.some((task) => {
-        //     // Check if the current Fleet have a Task that have a relation with this Policy
-        //     policyId = task['plugin_flyvemdm_policies_id']
-        //     return policyId === policy['PluginFlyvemdmPolicy.id']
-        // })
         return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? true : false
     }
 
-    getDefaultValues = policyId => {
-        // Check if the policy default value are applications, files or nothing 
-        if (policyId === 14 || policyId === 15) {
-            return this.state.data.applications
-        }
-        else if (policyId === 16 || policyId === 17) {
-            return this.state.data.files
+    getTypeData = policy => {
+        const policyId = policy['PluginFlyvemdmPolicy.id']
+        const policyType = policy['PluginFlyvemdmPolicy.type']
+        // Check if the policy default value are applications, files or other
+        if ((POLICIES_CAN_MULTIPLE_VALUE.includes(policyId))) {
+            if (policyId === 14 || policyId === 15) {
+                return this.state.data.applications
+            }
+            else if (policyId === 16 || policyId === 17) {
+                return this.state.data.files
+            }
+        } else {
+            if (policyType === 'dropdown') {
+                return Object.entries(JSON.parse(policy['PluginFlyvemdmPolicy.type_data']))
+            } else {
+                return JSON.parse(policy['PluginFlyvemdmPolicy.type_data'])
+            }
         }
     }
 
@@ -308,11 +309,8 @@ class FleetsContent extends Component {
                                                             addTask={this.handleAddTask}
                                                             removeTask={this.handleRemoveTask}
                                                             updateValueTask={this.handleUpdateValueTask}
-                                                            defaultValues={
-                                                                (POLICIES_CAN_MULTIPLE_VALUE.includes(policy['PluginFlyvemdmPolicy.id']))
-                                                                    ? (this.getDefaultValues(policy['PluginFlyvemdmPolicy.id']))
-                                                                    : policy['PluginFlyvemdmPolicy.default_value']
-                                                            } />
+                                                            typeData={this.getTypeData(policy)}
+                                                         />
                                                     ))}
                                                 </div>
                                             </div>
