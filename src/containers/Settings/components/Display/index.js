@@ -54,7 +54,7 @@ class Display extends Component {
             <div>
                 <h2 style={{marginBottom: '20px'}}>Supervision</h2>
 
-                <div className="win-h3"> Language </div>
+                <div className="title"> Language </div>
 
                 <div className="listElement">
                     <div className="message">
@@ -79,7 +79,7 @@ class Display extends Component {
                     </div>
                 </div>
 
-                <div className="win-h3"> Animations </div>
+                <div className="title"> Animations </div>
 
                     <div className="listElement">
                         <div className="message">
@@ -94,7 +94,7 @@ class Display extends Component {
                     </div>
                 </div>
                                         
-                <div className="win-h3">Show in dashboard </div>
+                <div className="title">Show in dashboard </div>
                 
                 <div className="listElement">
                     <div className="message">
