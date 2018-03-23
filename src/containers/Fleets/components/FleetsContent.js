@@ -31,37 +31,27 @@ class FleetsContent extends Component {
     }
 
     componentDidMount = () => {
-
-        this.getTasks()
-        this.getPolicies()
-        this.getPolicyCategories()
-        this.getFile()
-        this.getApplication()
+        this.requestAllData()
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.selectedItems.length === 0) {
             this.props.history.push('/app/fleets')
-        } 
+        }
     }
 
-    getPolicies = async () => {
-        const policies = await this.props.glpi.searchItems({
-            itemtype: 'PluginFlyvemdmPolicy',
-            options: {
-                uid_cols: true,
-                forcedisplay: [1, 2, 3, 4, 5, 6, 7, 8],
-                range: '0-50' // Can more than 50 items
-            }
-        })
+    componentDidUpdate(prevProps) {
+        if (prevProps.selectedItems && (prevProps.selectedItems !== this.props.selectedItems)) {
+            this.requestAllData()
+        }
+    }
+
+    requestAllData = async () => {
         this.setState((prevState, props) => ({
-            data: { ...prevState.data, policies: policies.data }
+            isLoading: true
         }))
-    }
-
-    getTasks = async () => {
         /*
-         * Name, ID, Category ID, Policy ID
+         * Get Tasks 
          * */
         const tasks = await this.props.glpi.getSubItems({
             itemtype: 'PluginFlyvemdmFleet',
@@ -76,21 +66,27 @@ class FleetsContent extends Component {
                     plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
                     value: task['value']
                 }
-            } 
+            }
         }).reduce(function (result, item) {
-                var key = Object.keys(item)[0]
-                result[key] = item[key];
-                return result
-            }, {})
+            var key = Object.keys(item)[0]
+            result[key] = item[key];
+            return result
+        }, {})
 
-        this.setState((prevState, props) => ({
-            data: { ...prevState.data, tasks, tasksNew: tasksNew }
-        }))
-    }
-
-    getPolicyCategories = async () => {
         /*
-         * Name, ID
+         * Get Policies 
+         * */
+        const policies = await this.props.glpi.searchItems({
+            itemtype: 'PluginFlyvemdmPolicy',
+            options: {
+                uid_cols: true,
+                forcedisplay: [1, 2, 3, 4, 5, 6, 7, 8],
+                range: '0-50' // Can more than 50 items
+            }
+        })
+
+        /*
+         * Get categories
          * */
         const categories = await this.props.glpi.searchItems({
             itemtype: 'PluginFlyvemdmPolicyCategory',
@@ -99,14 +95,9 @@ class FleetsContent extends Component {
                 forcedisplay: [1, 2]
             }
         })
-        this.setState((prevState, props) => ({
-            data: { ...prevState.data, categories: categories.data }
-        }))
-    }
 
-    getFile = async () => {
         /* 
-        * Id and Name of file
+        * Get files
         */
         const files = await this.props.glpi.searchItems({
             itemtype: 'PluginFlyvemdmFile',
@@ -118,14 +109,9 @@ class FleetsContent extends Component {
                 range: '0-50' // Can more than 50 items
             }
         })
-        this.setState((prevState, props) => ({
-            data: { ...prevState.data, files: files.data }
-        }))
-    }
 
-    getApplication = async () => {
         /* 
-        * Id and Alias
+        * Get Applications
         */
         const applications = await this.props.glpi.searchItems({
             itemtype: 'PluginFlyvemdmPackage',
@@ -137,9 +123,22 @@ class FleetsContent extends Component {
                 range: '0-50' // Can more than 50 items
             }
         })
+
+        /* 
+        * Update props
+        */
         this.setState((prevState, props) => ({
-            data: { ...prevState.data, applications: applications.data }
+            isLoading: false,
+            data: {
+                tasks, 
+                tasksNew: tasksNew,
+                policies: policies.data,
+                categories: categories.data, 
+                files: files.data, 
+                applications: applications.data 
+            }
         }))
+
     }
     
     handleFleetHaveTask = policy => {
