@@ -9,6 +9,7 @@ import { uiSetNotification } from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import EmptyMessage from '../../components/EmptyMessage'
+import { NavLink } from 'react-router-dom'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -43,19 +44,18 @@ class Dashboard extends Component {
     })
   }
 
-  getDevices = new Promise(async (resolve) => {
+  getDevices = () => new Promise(async (resolve) => {
     try {
       const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
-      resolve(devices.length)
+      resolve(devices)
     } catch (error) {
       this.showError(error)
-      resolve()
+      resolve(null)
     }
   })
 
-  getDevicesByOperatingSystemVersion = new Promise(async (resolve) => {
+  getDevicesByOperatingSystemVersion = (devices) => new Promise(async (resolve) => {
     try {
-      const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
       const devicesAndroid = devices.filter(device => device.mdm_type === "android").length
       const devicesiOS = devices.filter(device => device.mdm_type === "ios").length
       const devicesWindows = devices.filter(device => device.mdm_type === "windows").length
@@ -66,89 +66,108 @@ class Dashboard extends Component {
       resolve(devicesByOperatingSystemVersion)
     } catch (error) {
       this.showError(error)
-      resolve()
+      resolve(null)
     }
   })
 
-  getInvitations = new Promise(async (resolve) => {
+  getDevicesByUsers = (devices) => new Promise(async (resolve) => {
     try {
-      const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
-      resolve(invitations.length)
+      const devicesByUsers = devices.map(device => {
+        return ({
+          name: device.name,
+          id: device.id
+        }) 
+      })
+      resolve(devicesByUsers)
     } catch (error) {
       this.showError(error)
-      resolve()
+      resolve(null)
     }
   })
 
-  getPendingInvitations = new Promise(async (resolve) => {
+  getInvitations = () => new Promise(async (resolve) => {
     try {
       const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
-      resolve(invitations.filter(invitation => invitation.status === "pending").length)
+      resolve(invitations)
     } catch (error) {
       this.showError(error)
-      resolve()
+      resolve(null)
     }
   })
 
-  getFleets = new Promise(async (resolve) => {
+  getPendingInvitations = () => new Promise(async (resolve) => {
+    try {
+      const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
+      resolve(invitations.filter(invitation => invitation.status === "pending"))
+    } catch (error) {
+      this.showError(error)
+      resolve(null)
+    }
+  })
+
+  getFleets = () => new Promise(async (resolve) => {
     try {
       const fleets = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFleet"})
-      resolve(fleets.length)
+      resolve(fleets)
     } catch (error) {
       this.showError(error)
-      resolve()
+      resolve(null)
     }
   })
 
-  getFiles = new Promise(async (resolve) => {
+  getFiles = () => new Promise(async (resolve) => {
     try {
       const files = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFile"})
-      resolve(files.length)
+      resolve(files)
     } catch (error) {
       this.showError(error)
-      resolve()
+      resolve(null)
     }
   })
 
-  getApplications = new Promise(async (resolve) => {
+  getApplications = () => new Promise(async (resolve) => {
     try {
       const applications = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmPackage"})
-      resolve(applications.length)
+      resolve(applications)
     } catch (error) {
       this.showError(error)
-      resolve()
+      resolve(null)
     }
   })
 
-  getUsers = new Promise(async (resolve) => {
+  getUsers = () => new Promise(async (resolve) => {
     try {
       const users = await this.props.glpi.getAllItems({itemtype: "User"})
-      resolve(users.length)
+      resolve(users)
     } catch (error) {
       this.showError(error)
-      resolve()
+      resolve(null)
     }
   })
 
   componentDidMount = async () => {
-    const applicationsUploaded = this.state.display.applicationsUploaded ? await this.getApplications : undefined
-    const devicesByOperatingSystemVersion = this.state.display.devicesByOperatingSystemVersion ? await this.getDevicesByOperatingSystemVersion : undefined
-    const devicesCurrentlyManaged = this.state.display.devicesCurrentlyManaged ? await this.getDevices : undefined
-    const filesUploaded = this.state.display.filesUploaded ? await this.getFiles : undefined
-    const fleetsCurrentlyManaged = this.state.display.fleetsCurrentlyManaged ? await this.getFleets : undefined
-    const invitationsSent = this.state.display.invitationsSent ? await this.getInvitations : undefined
-    const pendingInvitations = this.state.display.pendingInvitations ? await this.getPendingInvitations : undefined
-    const numberUsers = this.state.display.numberUsers ? await this.getUsers : undefined
+    const applicationsUploaded = this.state.display.applicationsUploaded ? await this.getApplications() : undefined
+    const filesUploaded = this.state.display.filesUploaded ? await this.getFiles(): undefined
+    const fleetsCurrentlyManaged = this.state.display.fleetsCurrentlyManaged ? await this.getFleets() : undefined
+    const invitationsSent = this.state.display.invitationsSent ? await this.getInvitations() : undefined
+    const pendingInvitations = this.state.display.pendingInvitations ? await this.getPendingInvitations() : undefined
+    const numberUsers = this.state.display.numberUsers ? await this.getUsers() : undefined
+    const devices = (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion || this.state.display.devicesByUsers) ?
+      await this.getDevices() : undefined
+    const devicesCurrentlyManaged = this.state.display.devicesCurrentlyManaged ? devices : undefined
+    const devicesByOperatingSystemVersion = this.state.display.devicesByOperatingSystemVersion ? await this.getDevicesByOperatingSystemVersion(devices) : undefined 
+    const devicesByUsers = this.state.display.devicesByUsers ?  await this.getDevicesByUsers(devices) : undefined
 
     this.setState({
-      applicationsUploaded,
+      applicationsUploaded: applicationsUploaded ? applicationsUploaded.length : applicationsUploaded,
+      filesUploaded: filesUploaded ? filesUploaded.length : filesUploaded,
+      fleetsCurrentlyManaged: fleetsCurrentlyManaged ? fleetsCurrentlyManaged.length : fleetsCurrentlyManaged,
+      invitationsSent: invitationsSent ? invitationsSent.length : invitationsSent,
+      pendingInvitations: pendingInvitations ? pendingInvitations.length : pendingInvitations,
+      numberUsers: numberUsers ? numberUsers.length : numberUsers,
+      devicesCurrentlyManaged: devicesCurrentlyManaged ? devicesCurrentlyManaged.length : devicesCurrentlyManaged,
       devicesByOperatingSystemVersion,
-      devicesCurrentlyManaged,
-      filesUploaded,
-      fleetsCurrentlyManaged,
-      invitationsSent,
-      pendingInvitations,
-      numberUsers,
+      devicesByUsers,
       isLoading: false
     })
   }
@@ -278,11 +297,36 @@ class Dashboard extends Component {
         </div>
       )
     }
+
+    if (this.state.devicesByUsers) {
+      graphics.push(
+        <div key="devicesByUsersChart" className="info-box navlinks">
+          <ul>
+            { 
+              this.state.devicesByUsers.map((device, id) => {
+                return (
+                  <li key={`device${id}`}>
+                    <NavLink 
+                      exact
+                      to={`/app/devices/${device.id}`}
+                    >
+                      {device.name}
+                    </NavLink>
+                  </li>
+                )
+              }) 
+            }
+          </ul>
+          <span className="title-box">{I18n.t('commons.devices_by_users').toUpperCase()}</span>
+        </div>
+      )
+    }
     
     return graphics
   }
 
   render() {
+    console.log(this.state)
     const renderInfoBox = this.renderInfoBox()
     const renderGraphics = this.renderGraphics()
     const renderComponent = this.state.isLoading ? <div style={{width: '100%', height: 'calc(100vh - 80px)'}}><Loading message="Loading..." /></div>:
