@@ -45,86 +45,240 @@ class Dashboard extends Component {
   getDevices = new Promise(async (resolve) => {
     try {
       const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
+      resolve(devices.length)
+    } catch (error) {
+      this.showError(error)
+      resolve()
+    }
+  })
+
+  getDevicesByOperatingSystemVersion = new Promise(async (resolve) => {
+    try {
+      const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
       const devicesAndroid = devices.filter(device => device.mdm_type === "android").length
       const devicesiOS = devices.filter(device => device.mdm_type === "ios").length
       const devicesWindows = devices.filter(device => device.mdm_type === "windows").length
       let devicesByOperatingSystemVersion = []
       if (devicesAndroid) devicesByOperatingSystemVersion.push({ x: 'Android', y: devicesAndroid })
-      if (devicesiOS) devicesByOperatingSystemVersion.push({ x: 'Android', y: devicesiOS })
-      if (devicesWindows) devicesByOperatingSystemVersion.push({ x: 'Android', y: devicesWindows })
-      resolve({
-        devicesCurrentlyManaged: devices.length,
-        devicesByOperatingSystemVersion
-      })
+      if (devicesiOS) devicesByOperatingSystemVersion.push({ x: 'iOS', y: devicesiOS })
+      if (devicesWindows) devicesByOperatingSystemVersion.push({ x: 'Windows', y: devicesWindows })
+      resolve(devicesByOperatingSystemVersion)
     } catch (error) {
       this.showError(error)
-      resolve({})
+      resolve()
     }
   })
 
   getInvitations = new Promise(async (resolve) => {
     try {
       const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
-      resolve({
-        invitationsSent: invitations.length,
-        pendingInvitations: invitations.filter(invitation => invitation.status === "pending").length
-      })
+      resolve(invitations.length)
     } catch (error) {
       this.showError(error)
-      resolve({})
+      resolve()
+    }
+  })
+
+  getPendingInvitations = new Promise(async (resolve) => {
+    try {
+      const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
+      resolve(invitations.filter(invitation => invitation.status === "pending").length)
+    } catch (error) {
+      this.showError(error)
+      resolve()
     }
   })
 
   getFleets = new Promise(async (resolve) => {
     try {
       const fleets = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFleet"})
-      resolve({fleetsCurrentlyManaged: fleets.length})
+      resolve(fleets.length)
     } catch (error) {
       this.showError(error)
-      resolve({})
+      resolve()
     }
   })
 
   getFiles = new Promise(async (resolve) => {
     try {
       const files = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFile"})
-      resolve({filesUploaded: files.length })
+      resolve(files.length)
     } catch (error) {
       this.showError(error)
-      resolve({})
+      resolve()
     }
   })
 
   getApplications = new Promise(async (resolve) => {
     try {
       const applications = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmPackage"})
-      resolve({applicationsUploaded: applications.length })
+      resolve(applications.length)
     } catch (error) {
       this.showError(error)
-      resolve({})
+      resolve()
     }
   })
 
   getUsers = new Promise(async (resolve) => {
     try {
       const users = await this.props.glpi.getAllItems({itemtype: "User"})
-      resolve({numberUsers: users.length })
+      resolve(users.length)
     } catch (error) {
       this.showError(error)
-      resolve({})
+      resolve()
     }
   })
 
   componentDidMount = async () => {
+    const applicationsUploaded = this.state.display.applicationsUploaded ? await this.getApplications : undefined
+    const devicesByOperatingSystemVersion = this.state.display.devicesByOperatingSystemVersion ? await this.getDevicesByOperatingSystemVersion : undefined
+    const devicesCurrentlyManaged = this.state.display.devicesCurrentlyManaged ? await this.getDevices : undefined
+    const filesUploaded = this.state.display.filesUploaded ? await this.getFiles : undefined
+    const fleetsCurrentlyManaged = this.state.display.fleetsCurrentlyManaged ? await this.getFleets : undefined
+    const invitationsSent = this.state.display.invitationsSent ? await this.getInvitations : undefined
+    const pendingInvitations = this.state.display.pendingInvitations ? await this.getPendingInvitations : undefined
+    const numberUsers = this.state.display.numberUsers ? await this.getUsers : undefined
+
     this.setState({
-      ...await this.getDevices,
-      ...await this.getInvitations,
-      ...await this.getFleets,
-      ...await this.getFiles,
-      ...await this.getApplications,
-      ...await this.getUsers,
+      applicationsUploaded,
+      devicesByOperatingSystemVersion,
+      devicesCurrentlyManaged,
+      filesUploaded,
+      fleetsCurrentlyManaged,
+      invitationsSent,
+      pendingInvitations,
+      numberUsers,
       isLoading: false
     })
+  }
+
+  renderInfoBox () {
+    let boxes = []
+
+    if (this.state.devicesCurrentlyManaged) {
+      boxes.push(
+        <InfoBox
+          to='app/devices'
+          count={this.state.devicesCurrentlyManaged}
+          name={I18n.t('commons.devices')}
+          icon="deviceIcon"
+          key="devicesCurrentlyManaged"
+        />
+      )
+    }
+
+    if (this.state.invitationsSent) {
+      boxes.push(
+        <InfoBox
+          to='app/invitations'
+          count={this.state.invitationsSent}
+          name={I18n.t('commons.invitations')}
+          icon="emailIcon"
+          key="invitationsSent"
+        />
+      )
+    }
+
+    if (this.state.fleetsCurrentlyManaged) {
+      boxes.push(
+        <InfoBox
+          to='app/fleets'
+          count={this.state.fleetsCurrentlyManaged}
+          name={I18n.t('commons.fleets')}
+          icon="goToStartIcon"
+          key="fleetsCurrentlyManaged"
+        />
+      )
+    }
+
+    if (this.state.filesUploaded) {
+      boxes.push(
+        <InfoBox
+          to='app/files'
+          count={this.state.filesUploaded}
+          name={I18n.t('commons.files')}
+          icon="filesIcon"
+          key="filesUploaded"
+        />
+      )
+    }
+
+    if (this.state.applicationsUploaded) {
+      boxes.push(
+        <InfoBox
+          to='app/applications'
+          count={this.state.applicationsUploaded}
+          name={I18n.t('commons.applications')}
+          icon="switchAppsIcon"
+          key="applicationsUploaded"
+        />
+      )
+    }
+
+    if (this.state.numberUsers) {
+      boxes.push(
+        <InfoBox
+          to='app/users'
+          count={this.state.numberUsers}
+          name={I18n.t('commons.users')}
+          icon="peopleIcon"
+          key="numberUsers"
+        />
+      )
+    }
+
+    return boxes
+
+  }
+
+  renderGraphics () {
+    let graphics = []
+
+    if (this.state.devicesByOperatingSystemVersion) {
+      graphics.push(
+        <div key="DevicesOS" className="info-box">
+          <VictoryPie
+            colorScale={[
+              "#969696",
+              "#bdbdbd",
+              "#d9d9d9"
+            ]}
+            innerRadius={50}
+            padAngle={5}
+            labelRadius={90}
+            labels={(d) => `${d.x} ${d.y}`}
+            data={this.state.devicesByOperatingSystemVersion}
+            style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
+          />
+          <span className="title-box">{I18n.t('commons.devices_by_plataform').toUpperCase()}</span>
+        </div>
+      )
+    }
+
+    if (this.state.devicesByOperatingSystemVersion) {
+      graphics.push(
+        <div key="InvitationsChart" className="info-box">
+          <VictoryPie
+              colorScale={[
+                "#969696",
+                "#bdbdbd",
+                "#d9d9d9"
+              ]}
+              innerRadius={50}
+              padAngle={5}
+              labelRadius={90}
+              labels={(d) => `${d.x} ${d.y}`}
+              data={[
+                { x: I18n.t('commons.invitations'), y: this.state.pendingInvitations }
+              ]}
+              style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
+          />
+          <span className="title-box">{I18n.t('commons.pending_invitations').toUpperCase()}</span>
+        </div>
+      )
+    }
+    
+    return graphics
   }
 
   render() {
@@ -137,89 +291,15 @@ class Dashboard extends Component {
 
                 <div className="dashboard-infobox-wraper__div">
 
-                    <InfoBox
-                      to='app/devices'
-                      count={this.state.devicesCurrentlyManaged}
-                      name={I18n.t('commons.devices')}
-                      icon="deviceIcon"
-                    />
-
-                    <InfoBox
-                      to='app/invitations'
-                      count={this.state.invitationsSent}
-                      name={I18n.t('commons.invitations')}
-                      icon="emailIcon"
-                    />
-
-                    <InfoBox
-                      to='app/fleets'
-                      count={this.state.fleetsCurrentlyManaged}
-                      name={I18n.t('commons.fleets')}
-                      icon="goToStartIcon"
-                    />
-
-                    <InfoBox
-                      to='app/files'
-                      count={this.state.filesUploaded}
-                      name={I18n.t('commons.files')}
-                      icon="filesIcon"
-                    />
-
-                    <InfoBox
-                      to='app/applications'
-                      count={this.state.applicationsUploaded}
-                      name={I18n.t('commons.applications')}
-                      icon="switchAppsIcon"
-                    />
-
-                    <InfoBox
-                      to='app/users'
-                      count={this.state.numberUsers}
-                      name={I18n.t('commons.users')}
-                      icon="peopleIcon"
-                    />
+                  {this.renderInfoBox()}
 
                 </div>
 
                 <div className="dashboard-chart-wraper__div">
 
-                  <div key="DevicesOS" className="info-box">
-                      <VictoryPie
-                          colorScale={[
-                            "#969696",
-                            "#bdbdbd",
-                            "#d9d9d9"
-                          ]}
-                          innerRadius={50}
-                          padAngle={5}
-                          labelRadius={90}
-                          labels={(d) => `${d.x} ${d.y}`}
-                          data={this.state.devicesByOperatingSystemVersion}
-                          style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
-                      />
-                      <span className="title-box">{I18n.t('commons.devices_by_plataform').toUpperCase()}</span>
-                  </div>
+                  {this.renderGraphics()}
 
-                  <div key="InvitationsChart" className="info-box">
-                    <VictoryPie
-                        colorScale={[
-                          "#969696",
-                          "#bdbdbd",
-                          "#d9d9d9"
-                        ]}
-                        innerRadius={50}
-                        padAngle={5}
-                        labelRadius={90}
-                        labels={(d) => `${d.x} ${d.y}`}
-                        data={[
-                          { x: I18n.t('commons.invitations'), y: this.state.pendingInvitations }
-                        ]}
-                        style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
-                    />
-                    <span className="title-box">{I18n.t('commons.pending_invitations').toUpperCase()}</span>
-                  </div>
-
-                </div>
+                </div> 
 
             </div>
 
