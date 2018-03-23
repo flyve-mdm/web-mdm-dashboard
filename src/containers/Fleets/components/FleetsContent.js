@@ -257,6 +257,16 @@ class FleetsContent extends Component {
                 id: item["plugin_flyvemdm_policies_id"]
             }
         })
+
+        let itemsToUpdate = [] 
+        
+        this.state.data.tasks.map(task => {
+            // Check if the same Policy id is equal on object to remove
+            return this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']] ? itemsToUpdate.push({
+                id: task["plugin_flyvemdm_policies_id"],
+                value: this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']]['value']
+            }) : null
+        })
     }
 
     handleDeleteFleet = () => {
