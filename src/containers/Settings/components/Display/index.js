@@ -31,7 +31,8 @@ class Display extends Component {
             fleetsCurrentlyManaged: display.fleetsCurrentlyManaged !== undefined ? display.fleetsCurrentlyManaged : true,
             invitationsSent: display.invitationsSent !== undefined ? display.invitationsSent: true,
             numberUsers: display.numberUsers !== undefined ? display.numberUsers: true,
-            animations: display.animations !== undefined ? display.animations : true 
+            animations: display.animations !== undefined ? display.animations : true,
+            pendingInvitations: display.pendingInvitations !== undefined ? display.pendingInvitations: true,
         }
     }
 
@@ -61,15 +62,17 @@ class Display extends Component {
                         Change interface language
                     </div>
                     <div 
-                    className="controller" 
-                    style={{
-                        paddingTop: 10
-                    }}>
+                        className="controller" 
+                        style={{
+                            paddingTop: 10
+                        }}
+                    >
                         <span className='language__span btn' style={{margin: 0}}>
                             {I18n.t('commons.language')}
-                            <select className='language__select' onChange={
-                                event => this.props.actions.changeLanguage(event.target.value)
-                            }>
+                            <select 
+                                className='language__select' 
+                                onChange={event => this.props.actions.changeLanguage(event.target.value)}
+                            >
                                 <option value='en_GB'>English</option>
                                 <option value='pt_BR'>Portuguese</option>
                                 <option value='fr_FR'>French</option>
@@ -87,7 +90,7 @@ class Display extends Component {
                         </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch
-                        className="content-text-primary"
+                            className="content-text-primary"
                             checked={this.state.animations}
                             onChange={() => this.changeLocalStorage('animations')}
                         />
@@ -101,11 +104,11 @@ class Display extends Component {
                         Devices currently managed
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.devicesCurrentlyManaged}
-                                onChange={() => this.changeLocalStorage('devicesCurrentlyManaged')}
-                            />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.devicesCurrentlyManaged}
+                            onChange={() => this.changeLocalStorage('devicesCurrentlyManaged')}
+                        />
                     </div>
                 </div>
                 
@@ -114,11 +117,11 @@ class Display extends Component {
                         Fleets currently managed
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.fleetsCurrentlyManaged}
-                                onChange={() => this.changeLocalStorage('fleetsCurrentlyManaged')}
-                            />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.fleetsCurrentlyManaged}
+                            onChange={() => this.changeLocalStorage('fleetsCurrentlyManaged')}
+                        />
                     </div>
                 </div>
                 
@@ -127,11 +130,11 @@ class Display extends Component {
                         Files uploaded
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.filesUploaded}
-                                onChange={() => this.changeLocalStorage('filesUploaded')}
-                            />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.filesUploaded}
+                            onChange={() => this.changeLocalStorage('filesUploaded')}
+                        />
                     </div>
                 </div>
                 
@@ -140,11 +143,11 @@ class Display extends Component {
                         Applications uploaded   
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.applicationsUploaded}
-                                onChange={() => this.changeLocalStorage('applicationsUploaded')}
-                            />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.applicationsUploaded}
+                            onChange={() => this.changeLocalStorage('applicationsUploaded')}
+                        />
                     </div>
                 </div>
                 
@@ -153,11 +156,11 @@ class Display extends Component {
                         Number of users
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.numberUsers}
-                                onChange={() => this.changeLocalStorage('numberUsers')}
-                            />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.numberUsers}
+                            onChange={() => this.changeLocalStorage('numberUsers')}
+                        />
                     </div>
                 </div>
                 
@@ -166,11 +169,24 @@ class Display extends Component {
                         Invitations sent
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.invitationsSent}
-                                onChange={() => this.changeLocalStorage('invitationsSent')}
-                            />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.invitationsSent}
+                            onChange={() => this.changeLocalStorage('invitationsSent')}
+                        />
+                    </div>
+                </div>
+
+                <div className="listElement">
+                    <div className="message">
+                        Pending invitations
+                    </div>
+                    <div className="controller">
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.pendingInvitations}
+                            onChange={() => this.changeLocalStorage('pendingInvitations')}
+                        />
                     </div>
                 </div>
                 
@@ -179,11 +195,11 @@ class Display extends Component {
                         Devices by users
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.devicesByUsers}
-                                onChange={() => this.changeLocalStorage('devicesByUsers')}
-                                />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.devicesByUsers}
+                            onChange={() => this.changeLocalStorage('devicesByUsers')}
+                        />
                     </div>
                 </div>
                 
@@ -192,11 +208,11 @@ class Display extends Component {
                         Devices by Operating System version
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.devicesByOperatingSystemVersion}
-                                onChange={() => this.changeLocalStorage('devicesByOperatingSystemVersion')}
-                            />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.devicesByOperatingSystemVersion}
+                            onChange={() => this.changeLocalStorage('devicesByOperatingSystemVersion')}
+                        />
                     </div>
                 </div>
                 

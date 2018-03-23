@@ -21,13 +21,14 @@ class Dashboard extends Component {
     super(props)
     this.state = {
       isLoading: true,
-      devices: undefined,
-      fleets: undefined,
-      invitations: undefined,
-      files: undefined,
-      applications: undefined,
-      users: undefined,
-      devicesByPlatform: undefined,
+      applicationsUploaded: undefined,
+      devicesByOperatingSystemVersion: undefined,
+      devicesByUsers: undefined,
+      devicesCurrentlyManaged: undefined,
+      filesUploaded: undefined,
+      fleetsCurrentlyManaged: undefined,
+      invitationsSent: undefined,
+      numberUsers: undefined,
       pendingInvitations: undefined,
       display: localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
     }
@@ -47,13 +48,13 @@ class Dashboard extends Component {
       const devicesAndroid = devices.filter(device => device.mdm_type === "android").length
       const devicesiOS = devices.filter(device => device.mdm_type === "ios").length
       const devicesWindows = devices.filter(device => device.mdm_type === "windows").length
-      let devicesByPlatform = []
-      if (devicesAndroid) devicesByPlatform.push({ x: 'Android', y: devicesAndroid })
-      if (devicesiOS) devicesByPlatform.push({ x: 'Android', y: devicesiOS })
-      if (devicesWindows) devicesByPlatform.push({ x: 'Android', y: devicesWindows })
+      let devicesByOperatingSystemVersion = []
+      if (devicesAndroid) devicesByOperatingSystemVersion.push({ x: 'Android', y: devicesAndroid })
+      if (devicesiOS) devicesByOperatingSystemVersion.push({ x: 'Android', y: devicesiOS })
+      if (devicesWindows) devicesByOperatingSystemVersion.push({ x: 'Android', y: devicesWindows })
       resolve({
-        devices: devices.length,
-        devicesByPlatform
+        devicesCurrentlyManaged: devices.length,
+        devicesByOperatingSystemVersion
       })
     } catch (error) {
       this.showError(error)
@@ -65,7 +66,7 @@ class Dashboard extends Component {
     try {
       const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
       resolve({
-        invitations: invitations.length,
+        invitationsSent: invitations.length,
         pendingInvitations: invitations.filter(invitation => invitation.status === "pending").length
       })
     } catch (error) {
@@ -77,7 +78,7 @@ class Dashboard extends Component {
   getFleets = new Promise(async (resolve) => {
     try {
       const fleets = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFleet"})
-      resolve({fleets: fleets.length})
+      resolve({fleetsCurrentlyManaged: fleets.length})
     } catch (error) {
       this.showError(error)
       resolve({})
@@ -87,7 +88,7 @@ class Dashboard extends Component {
   getFiles = new Promise(async (resolve) => {
     try {
       const files = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFile"})
-      resolve({files: files.length })
+      resolve({filesUploaded: files.length })
     } catch (error) {
       this.showError(error)
       resolve({})
@@ -97,7 +98,7 @@ class Dashboard extends Component {
   getApplications = new Promise(async (resolve) => {
     try {
       const applications = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmPackage"})
-      resolve({applications: applications.length })
+      resolve({applicationsUploaded: applications.length })
     } catch (error) {
       this.showError(error)
       resolve({})
@@ -107,7 +108,7 @@ class Dashboard extends Component {
   getUsers = new Promise(async (resolve) => {
     try {
       const users = await this.props.glpi.getAllItems({itemtype: "User"})
-      resolve({users: users.length })
+      resolve({numberUsers: users.length })
     } catch (error) {
       this.showError(error)
       resolve({})
@@ -138,42 +139,42 @@ class Dashboard extends Component {
 
                     <InfoBox
                       to='app/devices'
-                      count={this.state.devices}
+                      count={this.state.devicesCurrentlyManaged}
                       name={I18n.t('commons.devices')}
                       icon="deviceIcon"
                     />
 
                     <InfoBox
                       to='app/invitations'
-                      count={this.state.invitations}
+                      count={this.state.invitationsSent}
                       name={I18n.t('commons.invitations')}
                       icon="emailIcon"
                     />
 
                     <InfoBox
                       to='app/fleets'
-                      count={this.state.fleets}
+                      count={this.state.fleetsCurrentlyManaged}
                       name={I18n.t('commons.fleets')}
                       icon="goToStartIcon"
                     />
 
                     <InfoBox
                       to='app/files'
-                      count={this.state.files}
+                      count={this.state.filesUploaded}
                       name={I18n.t('commons.files')}
                       icon="filesIcon"
                     />
 
                     <InfoBox
                       to='app/applications'
-                      count={this.state.applications}
+                      count={this.state.applicationsUploaded}
                       name={I18n.t('commons.applications')}
                       icon="switchAppsIcon"
                     />
 
                     <InfoBox
                       to='app/users'
-                      count={this.state.users}
+                      count={this.state.numberUsers}
                       name={I18n.t('commons.users')}
                       icon="peopleIcon"
                     />
@@ -193,7 +194,7 @@ class Dashboard extends Component {
                           padAngle={5}
                           labelRadius={90}
                           labels={(d) => `${d.x} ${d.y}`}
-                          data={this.state.devicesByPlatform}
+                          data={this.state.devicesByOperatingSystemVersion}
                           style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
                       />
                       <span className="title-box">{I18n.t('commons.devices_by_plataform').toUpperCase()}</span>

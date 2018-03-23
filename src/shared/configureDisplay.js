@@ -9,6 +9,7 @@ export default () => {
         fleetsCurrentlyManaged: currentDisplay.fleetsCurrentlyManaged !== undefined ? currentDisplay.fleetsCurrentlyManaged : true,
         invitationsSent: currentDisplay.invitationsSent !== undefined ? currentDisplay.invitationsSent: true,
         numberUsers: currentDisplay.numberUsers !== undefined ? currentDisplay.numberUsers: true,
+        pendingInvitations: currentDisplay.pendingInvitations !== undefined ? currentDisplay.pendingInvitations: true,
         animations: currentDisplay.animations !== undefined ? currentDisplay.animations : true 
     }
     if (currentDisplay !== newtDisplay) {
