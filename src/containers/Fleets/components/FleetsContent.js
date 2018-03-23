@@ -211,7 +211,7 @@ class FleetsContent extends Component {
             delete tasks[policy['PluginFlyvemdmPolicy.id']]
 
             let addPolicy = {
-                plugin_flyvemdm_fleets_id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
+                plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                 plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                 value: policy['PluginFlyvemdmPolicy.recommended_value']
             }
@@ -227,7 +227,7 @@ class FleetsContent extends Component {
             let tasks = { ...this.state.data.tasksNew}
             delete tasks[policy['PluginFlyvemdmPolicy.id']]
             let removePolicy = {
-                plugin_flyvemdm_fleets_id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
+                plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                 plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                 value: policy['PluginFlyvemdmPolicy.default_value']
             }
@@ -267,6 +267,8 @@ class FleetsContent extends Component {
 
         if(this.props.selectedItems.length === 1) {
             this.handleUpdateFleet()
+        } else {
+            this.handleCreateFleet()
         }
     }
 
@@ -334,6 +336,56 @@ class FleetsContent extends Component {
             this.props.setNotification({
                 title: 'Successfully',
                 body: 'file successfully updated!',
+                type: 'success'
+            })
+            this.props.changeSelectionMode(false)
+            this.props.changeAction("reload")
+        } catch (error) {
+            this.props.setNotification({
+                title: 'Error',
+                body: 'Error',
+                type: 'alert'
+            })
+            this.setState({
+                isLoading: false
+            })
+        }
+    }
+
+    handleCreateFleet = async () => {
+        this.setState({
+            isLoading: true
+        })
+
+        try {
+            const fleetToCreate = {
+                name: this.state.input
+            }
+
+            const newFleet = await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmFleet', input: fleetToCreate })
+
+            let itemsToAdd = { ...this.state.data.tasksNew }
+
+            this.state.data.tasks.map(task => {
+                // Check if the same Policy id is equal on object to remove
+                return itemsToAdd[task['plugin_flyvemdm_policies_id']] ? delete itemsToAdd[task['plugin_flyvemdm_policies_id']] : null
+            })
+
+            const itemsToSave = Object.values(itemsToAdd).map(item => {
+                item['plugin_flyvemdm_fleets_id'] = newFleet['id']
+                return item
+            })
+
+            if (itemsToSave.length > 0) {
+                await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToSave })
+            }
+
+            this.setState({
+                isLoading: true
+            })
+            this.props.setNotification({
+                title: 'Successfully',
+                body: 'file successfully Created!',
                 type: 'success'
             })
             this.props.changeSelectionMode(false)
