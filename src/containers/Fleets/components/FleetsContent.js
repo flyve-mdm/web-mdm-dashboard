@@ -164,9 +164,10 @@ class FleetsContent extends Component {
         // Check if the current Fleet have a Task that have a relation with this Policy
         if (fleetHaveTask) {
             // Return a Object that is the Task
-            return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['value'] : null
+            return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['value'] : policy['PluginFlyvemdmPolicy.recommended_value']
         } else {
-            return null
+            // Return recommended value
+            return policy['PluginFlyvemdmPolicy.recommended_value']
         }
     }
 
@@ -196,7 +197,7 @@ class FleetsContent extends Component {
             let addPolicy = {
                 plugin_flyvemdm_fleets_id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
                 plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
-                value: policy['PluginFlyvemdmPolicy.default_value']
+                value: policy['PluginFlyvemdmPolicy.recommended_value']
             }
 
             this.setState((prevState, props) => ({
