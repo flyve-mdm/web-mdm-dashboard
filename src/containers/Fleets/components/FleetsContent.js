@@ -77,10 +77,14 @@ class FleetsContent extends Component {
                     value: task['value']
                 }
             } 
-        })
+        }).reduce(function (result, item) {
+                var key = Object.keys(item)[0]
+                result[key] = item[key];
+                return result
+            }, {})
 
         this.setState((prevState, props) => ({
-            data: { ...prevState.data, tasks, tasksNew:tasksNew[0] }
+            data: { ...prevState.data, tasks, tasksNew: tasksNew }
         }))
     }
 
