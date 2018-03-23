@@ -255,12 +255,16 @@ class FleetsContent extends Component {
 
     handleSaveFleet = async () => {
 
+        this.setState({
+            isLoading: true
+        })
+
         const itemsToDelete = this.state.data.tasks.filter(task => {
             // Check if the same Policy id is equal on object to remove
             return this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']] ? true : false
         }).map((item) => {
             return {
-                id: item["plugin_flyvemdm_policies_id"]
+                id: item["id"]
             }
         })
 
@@ -269,7 +273,7 @@ class FleetsContent extends Component {
         this.state.data.tasks.map(task => {
             // Check if the same Policy id is equal on object to remove
             return this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']] ? itemsToUpdate.push({
-                id: task["plugin_flyvemdm_policies_id"],
+                id: task['id'],
                 value: this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']]['value']
             }) : null
         })
@@ -284,6 +288,40 @@ class FleetsContent extends Component {
         const itemsToSave = Object.values(itemsToAdd).map(item => {
             return item
         })
+
+        try {
+            if (itemsToDelete.length > 0 ){
+                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToDelete })
+            }
+
+            if (itemsToUpdate.length > 0) {
+                await this.props.glpi.updateItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToUpdate })
+            }
+            
+            if (itemsToSave.length > 0) {
+                await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToSave })
+            }
+
+            this.setState({
+                isLoading: true
+            })
+            this.props.setNotification({
+                title: 'Successfully',
+                body: 'file successfully updated!',
+                type: 'success'
+            })
+            this.props.changeSelectionMode(false)
+            this.props.changeAction("reload")
+        } catch (error) {
+            this.props.setNotification({
+                title: 'Error',
+                body: 'Error',
+                type: 'alert'
+            })
+            this.setState({
+                isLoading: false
+            })
+        }
     }
 
     handleDeleteFleet = () => {
