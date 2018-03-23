@@ -82,10 +82,6 @@ export default class FleetsList extends Component {
         }
     }
 
-    handleEdit(eventObject, path) {
-        this.props.history.push(path)
-    }
-
     handleAdd = () => {
         this.props.history.push("/app/fleets/add")
         this.props.changeSelectionMode(false)
@@ -254,17 +250,6 @@ export default class FleetsList extends Component {
             />
         )
 
-        let editCommand = (
-            <ReactWinJS.ToolBar.Button
-                key="edit"
-                icon="edit"
-                label="Edit"
-                priority={0}
-                disabled={this.props.selectedItems.length === 0}
-                onClick={(e) => this.handleEdit(e, "/app/fleets/edit")}
-            />
-        )
-
         let listComponent = <Loader count={3} />
 
         if (!this.state.isLoading && this.state.itemList.length > 0) {
@@ -312,8 +297,7 @@ export default class FleetsList extends Component {
                         priority={0}
                         onClick={this.handleAdd}
                     />
-
-                    {this.props.selectionMode ? editCommand : null}
+                    
                     {this.props.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle

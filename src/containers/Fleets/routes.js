@@ -1,6 +1,5 @@
 import FleetsContent from './components/FleetsContent'
 import EmptyMessage from '../../components/EmptyMessage'
-import FleetEdit from './components/FleetEdit'
 
 const routes = [
   {
@@ -8,12 +7,6 @@ const routes = [
     name: 'No selected',
     component: EmptyMessage,
     exact: true
-  },
-  {
-    path: '/:id/edit',
-    name: 'Edit Fleet',
-    component: FleetEdit,
-    exact: false
   },
   {
     path: '/:id',
