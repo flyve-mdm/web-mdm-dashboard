@@ -3,6 +3,7 @@ import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
+import Confirmation from '../../../components/Confirmation'
 
 const POLICIES_CAN_MULTIPLE_VALUE = [
     14, // -> Deploy Application
@@ -331,7 +332,7 @@ class FleetsContent extends Component {
             }
 
             this.setState({
-                isLoading: true
+                isLoading: false
             })
             this.props.setNotification({
                 title: 'Successfully',
@@ -381,7 +382,7 @@ class FleetsContent extends Component {
             }
 
             this.setState({
-                isLoading: true
+                isLoading: false
             })
             this.props.setNotification({
                 title: 'Successfully',
@@ -402,8 +403,40 @@ class FleetsContent extends Component {
         }
     }
 
-    handleDeleteFleet = () => {
-        console.log('delete')
+    handleDeleteFleet = async (eventObject) => {
+        if (this.props.selectedItems.length === 1) {
+            this.setState({
+                isLoading: true
+            })
+
+            try {
+                await this.props.glpi.deleteItem({
+                    itemtype: 'PluginFlyvemdmFleet',
+                    id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id']
+                })
+
+                this.setState({
+                    isLoading: false
+                })
+                this.props.setNotification({
+                    title: 'Successfully',
+                    body: 'file successfully removed!',
+                    type: 'success'
+                })
+                this.props.changeSelectionMode(false)
+                this.props.changeAction("reload")    
+
+            } catch (error) {
+                this.props.setNotification({
+                    title: 'Error',
+                    body: 'Error',
+                    type: 'alert'
+                })
+                this.setState({
+                    isLoading: false
+                })
+            }
+        }
     }
 
     render() {
@@ -479,6 +512,7 @@ class FleetsContent extends Component {
                             ) : <h1>Loading Tasks, Policies and Categories</h1>}
                         </div>
                     </div>
+                    <Confirmation title={`Delete Fleets`} message={this.props.selectedItems.length + ` Fleets`} reference={el => this.contentDialog = el} />
                 </ContentPane>
             )
         }
