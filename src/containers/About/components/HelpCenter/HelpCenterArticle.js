@@ -47,7 +47,7 @@ class HelpCenterArticle extends Component {
     render () {
         return (
             this.state.isLoading ? 
-                <Loading /> :
+                <div style={{height: "100%", marginTop: "-80px"}}><Loading message="Loading..." /></div> :
                     <div className="listPane" style={{ padding: 0 }}>
                         <h2>{this.state.article.name}</h2>
                         <div className="date">{this.state.article.date}</div>                        

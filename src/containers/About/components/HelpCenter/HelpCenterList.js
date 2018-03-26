@@ -128,7 +128,7 @@ class HelpCenterList extends Component {
     render() {
         return (
             this.state.isLoading ? 
-                <Loading/> : 
+                <div style={{height: "100%", marginTop: "-80px"}}><Loading message="Loading..." /></div> : 
                 (   
                     <React.Fragment>
                         <h2>Help Center</h2>
