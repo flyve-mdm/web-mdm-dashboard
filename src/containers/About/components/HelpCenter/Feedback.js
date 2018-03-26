@@ -75,7 +75,7 @@ class Feedback extends Component {
                         value={this.state.textarea}
                         onChange={(event) => this.setState({ textarea: event.target.value })}
                         required={true}/>
-                            <button className="win-button" style={{float: 'right'}}>
+                            <button className="btn --primary" style={{float: 'right'}}>
                                 {I18n.t('commons.send') }
                             </button>
                         </form>
