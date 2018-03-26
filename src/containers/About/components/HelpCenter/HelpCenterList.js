@@ -129,77 +129,81 @@ class HelpCenterList extends Component {
         return (
             this.state.isLoading ? 
                 <Loading/> : 
-                (
-                    <div className="listPane" style={{ padding: 0 }}>
-                        <div>
-                            <div style={{
-                                display: 'flex',
-                                justifyContent: 'space-between'
-                            }}>
-                                <div>
-                                    <h3>{this.state.labelList}</h3>
-                                </div>
-                                <div>
+                (   
+                    <React.Fragment>
+                        <h2>Help Center</h2>
+                        <br />
+                        <div className="listPane" style={{ padding: 0 }}>
+                            <div>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between'
+                                }}>
                                     <div>
-                                        <ReactWinJS.AutoSuggestBox
-                                            style={{
-                                                marginTop: '20px',
-                                                marginRight: '50px',
-                                                width: '150px',
-                                                minWidth: 'unset'
-                                            }}
-                                            placeholderText={I18n.t('about.help_center_STRINGS.search_an_article')}
-                                            onSuggestionsRequested={this.handleSuggestionsRequested}
-                                            onQuerySubmitted={this.handleQuerySubmitted} 
-                                        />       
+                                        <h3>{this.state.labelList}</h3>
                                     </div>
-                                    <div 
-                                        onClick={this.handleSearch} 
-                                        style={{
-                                            fontSize: '20px',
-                                            float: 'right',
-                                            marginTop: '-26px',
-                                            marginRight: '20px',
-                                            cursor: 'pointer'
-                                        }}
-                                    >
-                                        <span className="searchIcon"></span>
+                                    <div>
+                                        <div>
+                                            <ReactWinJS.AutoSuggestBox
+                                                style={{
+                                                    marginTop: '20px',
+                                                    marginRight: '50px',
+                                                    width: '150px',
+                                                    minWidth: 'unset'
+                                                }}
+                                                placeholderText={I18n.t('about.help_center_STRINGS.search_an_article')}
+                                                onSuggestionsRequested={this.handleSuggestionsRequested}
+                                                onQuerySubmitted={this.handleQuerySubmitted} 
+                                            />       
+                                        </div>
+                                        <div 
+                                            onClick={this.handleSearch} 
+                                            style={{
+                                                fontSize: '20px',
+                                                float: 'right',
+                                                marginTop: '-26px',
+                                                marginRight: '20px',
+                                                cursor: 'pointer'
+                                            }}
+                                        >
+                                            <span className="searchIcon"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <ReactWinJS.ListView
-                            ref="listView"
-                            className="contentListView win-selectionstylefilled"
-                            style={{ height: 'calc(100% - 48px)' }}
-                            itemDataSource={this.state.list.dataSource}
-                            itemTemplate={this.itemRenderer}
-                            layout={this.state.layout}
-                            selectionMode="single"
-                            tapBehavior="directSelect"
-                            onSelectionChanged={this.handleSelectionChanged}
-                        />
+                            <ReactWinJS.ListView
+                                ref="listView"
+                                className="contentListView win-selectionstylefilled"
+                                style={{ height: 'calc(100% - 48px)' }}
+                                itemDataSource={this.state.list.dataSource}
+                                itemTemplate={this.itemRenderer}
+                                layout={this.state.layout}
+                                selectionMode="single"
+                                tapBehavior="directSelect"
+                                onSelectionChanged={this.handleSelectionChanged}
+                            />
 
-                        {
-                            this.state.labelList !== I18n.t('about.help_center_STRINGS.recent_articles') ? '' : 
-                                <div>
-                                    <div className="separator" />
-                                    
+                            {
+                                this.state.labelList !== I18n.t('about.help_center_STRINGS.recent_articles') ? '' : 
                                     <div>
-                                        <a onClick={this.showAllArticles}>
-                                            { I18n.t('about.help_center_STRINGS.browse_all_articles') }            
-                                        </a>
+                                        <div className="separator" />
+                                        
+                                        <div>
+                                            <a onClick={this.showAllArticles}>
+                                                { I18n.t('about.help_center_STRINGS.browse_all_articles') }            
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                        }
+                            }
 
-                        <div className="separator" />
+                            <div className="separator" />
 
-                        <div className="itemList" onClick={this.redirectToFeedBack}>
-                            <span className="messageIcon" style={{marginRight: '5px'}}/>
-                            { I18n.t('about.help_center_STRINGS.send_feedback') }
+                            <div className="itemList" onClick={this.redirectToFeedBack}>
+                                <span className="messageIcon" style={{marginRight: '5px'}}/>
+                                { I18n.t('about.help_center_STRINGS.send_feedback') }
+                            </div>
                         </div>
-                    </div>
+                    </React.Fragment>
                 )
         )
     }

@@ -49,7 +49,8 @@ class HelpCenterArticle extends Component {
             this.state.isLoading ? 
                 <Loading /> :
                     <div className="listPane" style={{ padding: 0 }}>
-                        <h3>{this.state.article.name}</h3>
+                        <h2>{this.state.article.name}</h2>
+                        <div className="date">{this.state.article.date}</div>                        
                         <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(this.state.article.answer) }} />
                     </div>
         ) 
