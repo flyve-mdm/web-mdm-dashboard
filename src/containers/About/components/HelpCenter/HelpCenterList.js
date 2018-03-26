@@ -2,32 +2,42 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import  { I18n } from "react-i18nify"
-
-import Articles from '../../../../data/helpCenter.json'
+import { I18n } from "react-i18nify"
+import withGLPI from "../../../../hoc/withGLPI"
+import Loading from "../../../../components/Loading"
 
 class HelpCenterList extends Component {
     constructor(props) {
         super(props)
-
-        let popular = []
-
-        for (let index = 0; index < Articles.data.length; index++) {
-
-            const element = Articles.data[index]
-            
-            if (element['HelpCenter.rating'] > 70 && popular.length <= 5) {
-                popular.push(element)
-            }
-            
-        }
-
         this.state = {
-            list: new WinJS.Binding.List(popular),
+            articles: undefined,
+            list: undefined,
+            suggestionList: undefined,
             layout: { type: WinJS.UI.ListLayout },
-            labelList: I18n.t('about.help_center_STRINGS.popular'),
-            suggestionList: Articles.data.map((article) => article['HelpCenter.name']),
-            itemSelected: null
+            labelList: I18n.t('about.help_center_STRINGS.recent_articles'),
+            itemSelected: null,
+            isLoading: true
+        }
+    }
+
+    componentDidMount = async () => {
+        try {
+            const response = await this.props.glpi.getAllItems({itemtype: "KnowbaseItem"})
+
+            const recentArticles = response.slice().sort((a, b) => {
+                return new Date(a).getTime() - new Date(b).getTime()
+            })
+
+            recentArticles.splice(2)
+
+            this.setState({
+                articles: response,
+                list: new WinJS.Binding.List(recentArticles),
+                suggestionList: response.map(article => article.name),
+                isLoading: false
+            })
+        } catch (error) {
+            
         }
     }
 
@@ -42,10 +52,11 @@ class HelpCenterList extends Component {
     itemRenderer = ReactWinJS.reactRenderer((item) => {
         return (
             <div 
-            style={{ padding: '14px', width: '100%' }}
-            onClick={() => this.redirectToArticle(item.data['HelpCenter.name'])}>
+                style={{ padding: '14px', width: '100%' }}
+                onClick={() => this.redirectToArticle(item.data.id)}
+            >
                 <span className="documentIcon" style={{marginRight: '5px'}}/>
-                {item.data['HelpCenter.name']}
+                {item.data.name}
             </div>
         )
     })
@@ -55,17 +66,16 @@ class HelpCenterList extends Component {
     }
 
     showAllArticles = () => {
-        this.setState({labelList: I18n.t('about.help_center_STRINGS.all_articles'), list: new WinJS.Binding.List(Articles.data)})
+        this.setState({labelList: I18n.t('about.help_center_STRINGS.all_articles'), list: new WinJS.Binding.List(this.state.articles)})
     }
 
     filterArticles = (filter) => {
         const filteredArticles = []
-        for (let index = 0; index < Articles.data.length; index++) {
-            const element = Articles.data[index]
-            if (element['HelpCenter.name'].toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+        this.state.articles.forEach(element => {
+            if (element.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
                 filteredArticles.push(element)
             }
-        }
+        })
         this.setState({
             list: new WinJS.Binding.List(filteredArticles)
         })
@@ -103,82 +113,88 @@ class HelpCenterList extends Component {
 
     render() {
         return (
-            <div className="listPane" style={{ padding: 0 }}>
-                <div>
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                    }}>
+            this.state.isLoading ? 
+                <Loading/> : 
+                (
+                    <div className="listPane" style={{ padding: 0 }}>
                         <div>
-                            <h3>{this.state.labelList}</h3>
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'space-between'
+                            }}>
+                                <div>
+                                    <h3>{this.state.labelList}</h3>
+                                </div>
+                                <div>
+                                    <div>
+                                        <ReactWinJS.AutoSuggestBox
+                                            style={{
+                                                marginTop: '20px',
+                                                marginRight: '50px',
+                                                width: '150px',
+                                                minWidth: 'unset'
+                                            }}
+                                            placeholderText={I18n.t('about.help_center_STRINGS.search_an_article')}
+                                            onSuggestionsRequested={this.handleSuggestionsRequested}
+                                            onQuerySubmitted={this.handleQuerySubmitted} 
+                                        />       
+                                    </div>
+                                    <div 
+                                        onClick={this.handleSearch} 
+                                        style={{
+                                            fontSize: '20px',
+                                            float: 'right',
+                                            marginTop: '-26px',
+                                            marginRight: '20px',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        <span className="searchIcon"></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <div>
-                                <ReactWinJS.AutoSuggestBox
-                                style={{
-                                    marginTop: '20px',
-                                    marginRight: '50px',
-                                    width: '150px',
-                                    minWidth: 'unset'
-                                }}
-                                placeholderText={I18n.t('about.help_center_STRINGS.search_an_article')}
-                                onSuggestionsRequested={this.handleSuggestionsRequested}
-                                onQuerySubmitted={this.handleQuerySubmitted} />       
-                            </div>
-                            <div 
-                                onClick={this.handleSearch} 
-                                style={{
-                                    fontSize: '20px',
-                                    float: 'right',
-                                    marginTop: '-26px',
-                                    marginRight: '20px',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                <span className="searchIcon"></span>
-                            </div>
+                        <ReactWinJS.ListView
+                            ref="listView"
+                            className="contentListView win-selectionstylefilled"
+                            style={{ height: 'calc(100% - 48px)' }}
+                            itemDataSource={this.state.list.dataSource}
+                            itemTemplate={this.itemRenderer}
+                            layout={this.state.layout}
+                            selectionMode="single"
+                            tapBehavior="directSelect"
+                            onSelectionChanged={this.handleSelectionChanged}
+                        />
+
+                        {
+                            this.state.labelList !== I18n.t('about.help_center_STRINGS.recent_articles') ? '' : 
+                                <div>
+                                    <div className="separator" />
+                                    
+                                    <div>
+                                        <a onClick={this.showAllArticles}>
+                                            { I18n.t('about.help_center_STRINGS.browse_all_articles') }            
+                                        </a>
+                                    </div>
+                                </div>
+                        }
+
+                        <div className="separator" />
+
+                        <div className="itemList" onClick={this.redirectToFeedBack}>
+                            <span className="messageIcon" style={{marginRight: '5px'}}/>
+                            { I18n.t('about.help_center_STRINGS.send_feedback') }
                         </div>
                     </div>
-                </div>
-                <ReactWinJS.ListView
-                    ref="listView"
-                    className="contentListView win-selectionstylefilled"
-                    style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.state.list.dataSource}
-                    itemTemplate={this.itemRenderer}
-                    layout={this.state.layout}
-                    selectionMode="single"
-                    tapBehavior="directSelect"
-                    onSelectionChanged={this.handleSelectionChanged}
-                />
-
-                {
-                    this.state.labelList !== I18n.t('about.help_center_STRINGS.popular') ? '' : 
-                        <div>
-                            <div className="separator" />
-                            
-                            <div>
-                                <a onClick={this.showAllArticles}>
-                                    { I18n.t('about.help_center_STRINGS.browse_all_articles') }            
-                                </a>
-                            </div>
-                        </div>
-                }
-
-                <div className="separator" />
-
-                <div className="itemList" onClick={this.redirectToFeedBack}>
-                    <span className="messageIcon" style={{marginRight: '5px'}}/>
-                    { I18n.t('about.help_center_STRINGS.send_feedback') }
-                </div>
-            </div>
+                )
         )
     }
 }
 
 
 HelpCenterList.propTypes = {
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    glpi: PropTypes.object.isRequired
 }
 
-export default HelpCenterList
+export default withGLPI(HelpCenterList)
