@@ -2,6 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Loading from "../../../../components/Loading"
 import withGLPI from "../../../../hoc/withGLPI"
+import { uiSetNotification } from '../../../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
 
 class HelpCenterArticle extends Component {
     constructor(props) {
@@ -20,7 +30,11 @@ class HelpCenterArticle extends Component {
                 isLoading: false
             })
         } catch (error) {
-            console.log(error)
+            this.props.actions.setNotification({
+                title: error[0],
+                body: error[1],
+                type: 'alert'
+            })
         }
     }
 
@@ -47,4 +61,7 @@ HelpCenterArticle.propTypes = {
     glpi: PropTypes.object.isRequired
 }
 
-export default withGLPI(HelpCenterArticle)
+export default connect(
+    null,
+    mapDispatchToProps
+)(withGLPI(HelpCenterArticle))
