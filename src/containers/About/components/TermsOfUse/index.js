@@ -1,8 +1,9 @@
 import React from 'react'
 import { I18n, Translate } from 'react-i18nify'
+import ContentPane from '../../../../components/ContentPane'
 
 const TermsOfUse = () => (
-  <div>
+  <ContentPane>
     <h2>Terms Of Use</h2>
     <div className="aboutPane">
       <Translate value={'about.term_of_use_STRINGS.by_using_our_website,_you_agree_to_be_bound_by_the_full_terms_&_conditions_posted_on_our_website'} tag='p'/>
@@ -122,7 +123,7 @@ const TermsOfUse = () => (
         { I18n.t('about.term_of_use_STRINGS.general_conditions_STRINGS.you_agree_that_we_may_collect,_store,_and_use_information_about_you_in_accordance_with_our_privacy_policy_you_acknowledge_and_agree_to_be_bound_by_the_terms_of_our_privacy_policy') }
       </p>
     </div>
-  </div>
+  </ContentPane>
 )
     
 export default TermsOfUse

@@ -1,9 +1,10 @@
 import React from 'react'
 import { Translate } from 'react-i18nify'
+import ContentPane from '../../../../components/ContentPane'
 
 const Overview = () => {
   return (
-    <div>
+    <ContentPane>
       <h2>Overview</h2>
         <div className="aboutPane">
             <Translate tag='p' value={'about.overview_STRINGS.flyve_MDM_is_a_mobile_device_management_software_that_enables_you_to_secure_and_manage_all_the_mobile_devices_of_your_business_via_a_unique_web-based_console_(MDM)'} />
@@ -19,7 +20,7 @@ const Overview = () => {
             </ul>
             <Translate tag='p' value={'about.overview_STRINGS.source_codes_will_be_released_during_fall_2016'} />
         </div>
-    </div>
+    </ContentPane>
   )
 }
 

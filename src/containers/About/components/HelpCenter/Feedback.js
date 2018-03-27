@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Loading from '../../../../components/Loading'
 import { uiSetNotification } from '../../../../store/ui/actions'
+import ContentPane from '../../../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -54,7 +55,7 @@ class Feedback extends Component {
             )
         } else {
             return (
-                <React.Fragment>
+                <ContentPane>
                     <h3>{I18n.t('about.help_center_STRINGS.feedback') }</h3>
                     <div className="feedback">
                         <form onSubmit={this.handleSubmit}>
@@ -71,7 +72,7 @@ class Feedback extends Component {
                             </button>
                         </form>
                     </div>
-                </React.Fragment>
+                </ContentPane>
             )
         }
     }
