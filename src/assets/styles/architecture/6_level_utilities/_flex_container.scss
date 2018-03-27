@@ -34,6 +34,10 @@
   overflow-y: auto;
 }
 
+.content-pane--animate {
+  @include animation('slide-up 0.05s')  
+}
+
 .center-block-content {
   display: flex; 
   height: 100%;
