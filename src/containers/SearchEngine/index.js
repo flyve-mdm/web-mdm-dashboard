@@ -24,7 +24,8 @@ class SearchEngine extends Component {
             query: null,
             itemType: 'computer',
             itemResults: [],
-            fields: [] // -> {name: 'name', label: 'Name'},
+            fields: [],
+            isLoading: true
         }
 
         this.translations = getTranslation() // Friendly translations of each QueryBuilder input
