@@ -12,8 +12,7 @@ const initialState = {
   },
   error: '',
   success: '',
-  loading: false,
-  animation: true
+  loading: false
 }
 
 export default initialState;
