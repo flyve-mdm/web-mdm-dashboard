@@ -18,10 +18,9 @@ const setFields = (ctx) => {
                 listSearchOptions[key]['field'] !== undefined) {
 
                 let name = listSearchOptions[key]['name']
-
+                // let field = listSearchOptions[key]['field']
                 fields.push({
-                    'id': key,
-                    'name': name.toLocaleLowerCase(),
+                    'name': key,//name.toLocaleLowerCase(),
                     'label': name
                 })
 
@@ -34,47 +33,50 @@ const setFields = (ctx) => {
     })
 }
 
-const getFieldId = (ctx, fieldName) => {
-    /*
-    * Get and return id of itemType
-    * @ctx -> React Component
-    * @fieldName -> Name of the field to search the id, example Manufacturer
-    */
+// const getFieldId = (ctx, fieldName) => {
+//     /*
+//     * Get and return id of itemType
+//     * @ctx -> React Component
+//     * @fieldName -> Name of the field to search the id, example Manufacturer
+//     */
 
-    let entries = Object.entries(ctx.state.listSearchOptions)
-    let id = null
+//     let entries = Object.entries(ctx.state.listSearchOptions)
+//     let id = null
 
-    entries.forEach((item, index) => {
-        var data = item[1]
-        if (data.name !== undefined) {
-            if (data.name.toLocaleLowerCase() === fieldName.toLocaleLowerCase()) {
-                id = item[0]
-                return false
-            }
-        }
-    })
+//     entries.forEach((item, index) => {
+//         var data = item[1]
+//         if (data.name !== undefined) {
+//             if (data.name.toLocaleLowerCase() === fieldName.toLocaleLowerCase()) {
+//                 id = item[0]
+//                 return false
+//             }
+//         }
+//     })
 
-    return id
-}
+//     return id
+// }
 
 const normalizeRule = (ctx, rule) => {
     /*
      * Normalize keys of rule object
      * */
-    let objectCriteria = {}
-    objectCriteria['field'] = getFieldId(ctx, rule['field'])
-    objectCriteria['searchtype'] = rule['operator']
-    objectCriteria['value'] = rule['value']
+    let objectCriteria = { 
+        field: Number(rule['field']), 
+        searchtype: rule['operator'], 
+        value: rule['value']
+    }
+
     return objectCriteria
 }
 
 const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator) => {
+
     if (typeof (query.rules) === undefined || typeof (query.field) === "string") {
         /*
          * It means that it is a rule, and it has operator, value and field
          * */
         arrayRulesExtracted.push({
-            'link': combinator, // 'AND' or 'OR'
+            link: combinator, // 'AND' or 'OR'
             ...normalizeRule(ctx, query)
         })
     } else {
@@ -94,7 +96,6 @@ const normalizeQuery = (ctx) => {
     * Process query create by QueryBuilde
     * And normalize for correct format to GLPI REST API URI
     */
-
     const query = { ...ctx.state.query }
     const arrayRules = []
 
@@ -144,6 +145,5 @@ const getTranslation = () => {
 module.exports = {
     setFields,
     getTranslation,
-    getFieldId,
     normalizeQuery
 }
