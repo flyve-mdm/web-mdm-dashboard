@@ -330,7 +330,7 @@ class Dashboard extends Component {
     console.log(this.state)
     const renderInfoBox = this.renderInfoBox()
     const renderGraphics = this.renderGraphics()
-    const renderComponent = this.state.isLoading ? <div style={{width: '100%', height: 'calc(100vh - 80px)'}}><Loading message="Loading..." /></div>:
+    const renderComponent = this.state.isLoading ? <div style={{width: '100%', height: 'calc(100vh - 80px)'}}><Loading message={`${I18n.t('commons.loading')}...`} /></div>:
     (
       <ContentPane>
         <div className="dashboard-block">

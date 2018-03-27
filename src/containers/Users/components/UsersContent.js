@@ -4,6 +4,7 @@ import ContentPane from '../../../components/ContentPane'
 import IconItemList from '../../../components/IconItemList'
 import Confirmation from '../../../components/Confirmation'
 import Loading from '../../../components/Loading'
+import { I18n } from "react-i18nify"
 
 export default class UsersContent extends Component {
 
@@ -95,7 +96,7 @@ export default class UsersContent extends Component {
     render() {
         let renderComponent 
         if (this.state.data === undefined) {
-            renderComponent = <Loading message="Loading..."/>
+            renderComponent = <Loading message={`${I18n.t('commons.loading')}...`}/>
         } else {
             let imageProfile = this.state.data.picture ? this.state.data.picture : "profile.png"
             renderComponent = (

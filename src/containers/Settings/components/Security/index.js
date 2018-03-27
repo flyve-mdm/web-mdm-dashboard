@@ -9,6 +9,7 @@ import { uiSetNotification } from '../../../../store/ui/actions'
 import { connect } from 'react-redux'
 import { fetchPasswordConfiguration } from '../../../../store/authentication/actions';
 import ContentPane from '../../../../components/ContentPane'
+import { I18n } from "react-i18nify"
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -169,7 +170,7 @@ class Security extends Component {
         if (this.props.isLoading) {
             return (
                 <div>
-                    <Loading message="Loading..."/> 
+                    <Loading message={`${I18n.t('commons.loading')}...`}/> 
                 </div>
             )
         }

@@ -4,6 +4,7 @@ import IconItemList from '../../../../components/IconItemList'
 import Confirmation from '../../../../components/Confirmation'
 import Loading from '../../../../components/Loading'
 import ContentPane from '../../../../components/ContentPane'
+import { I18n } from "react-i18nify"
 
 export default class Main extends Component {
 
@@ -130,7 +131,7 @@ export default class Main extends Component {
     render() {
         let renderComponent 
         if (this.state.data === undefined) {
-            renderComponent = <Loading message="Loading..."/>
+            renderComponent = <Loading message={`${I18n.t('commons.loading')}...`}/>
         } else {
             let imageAgent = this.state.data["mdm_type"] ? `${this.state.data["mdm_type"]}.png` : null
             let iconComponent 

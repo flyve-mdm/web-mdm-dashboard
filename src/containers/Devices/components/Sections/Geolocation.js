@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Loading from '../../../../components/Loading'
 import Map from '../Map'
 import GeolocationList from './GeolocationList'
+import { I18n } from "react-i18nify"
 
 export default class Geolocation extends Component {
     constructor() {
@@ -85,7 +86,7 @@ export default class Geolocation extends Component {
 
     render() {
         return this.state.isLoading ? 
-            <Loading message="Loading..." /> : 
+            <Loading message={`${I18n.t('commons.loading')}...`} /> : 
                 (   
                     <React.Fragment>
                         <Map markers={this.state.showLocations}/>

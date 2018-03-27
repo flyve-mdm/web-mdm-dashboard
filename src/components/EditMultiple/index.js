@@ -5,6 +5,7 @@ import Loading from '../Loading'
 import { Select, Input, DatePicker, TextArea } from '../Forms'
 import ErrorValidation from '../ErrorValidation'
 import EmptyMessage from '../EmptyMessage'
+import { I18n } from "react-i18nify"
 
 export default class EditMultiple extends Component {
 
@@ -118,7 +119,7 @@ export default class EditMultiple extends Component {
         if (this.props.selectedItems) {
             let renderComponent
             if (this.state.isLoading) {
-                renderComponent = <div style={{marginTop: 40}}><Loading message="Loading..." /></div>
+                renderComponent = <div style={{marginTop: 40}}><Loading message={`${I18n.t('commons.loading')}...`} /></div>
             } else {
                 let input
 

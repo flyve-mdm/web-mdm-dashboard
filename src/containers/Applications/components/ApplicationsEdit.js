@@ -4,6 +4,7 @@ import ApplicationsEditItemList from './ApplicationsEditItemList'
 import EmptyMessage from '../../../components/EmptyMessage'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
+import { I18n } from "react-i18nify"
 
 export default class ApplicationsEdit extends Component {
 
@@ -89,7 +90,7 @@ export default class ApplicationsEdit extends Component {
         if (this.props.selectedItems) {
 
             if (this.state.isLoading) {
-                return (<Loading message="Loading..." />)
+                return (<Loading message={`${I18n.t('commons.loading')}...`} />)
             } else {
                 let renderComponent = this.props.selectedItems.map((item, index) => {
 

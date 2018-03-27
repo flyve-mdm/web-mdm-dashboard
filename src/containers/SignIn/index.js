@@ -2,14 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
 import UsernameFieldset from './components/UsernameFieldset'
-
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-
 import {
     fetchSignIn
 } from '../../store/authentication/actions'
+import { I18n } from "react-i18nify"
 
 // Async Component
 import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
@@ -70,7 +68,7 @@ class SignIn extends Component {
                     handleOnSubmit={this.handleFormSubmit}
                 />
             }
-            return this.props.isLoading ? <Loading message="Loading..."/> : form 
+            return this.props.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> : form 
         }
     }
 }
