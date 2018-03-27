@@ -7,6 +7,7 @@ import IconItemList from '../../../components/IconItemList'
 import { usersScheme } from '../../../components/Forms/Schemas'
 import Loading from '../../../components/Loading'
 import ErrorValidation from '../../../components/ErrorValidation'
+import { I18n } from "react-i18nify"
 
 export default class UsersEditOne extends Component {
     
@@ -272,7 +273,7 @@ export default class UsersEditOne extends Component {
         let componetRender
 
         if (this.state.isLoading) {
-            componetRender = <Loading message="Loading..." />
+            componetRender = <Loading message={`${I18n.t('commons.loading')}...`} />
         } else {
             const user = usersScheme({
                 state: this.state, 

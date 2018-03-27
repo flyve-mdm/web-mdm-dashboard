@@ -15,6 +15,7 @@ import {
 } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import ContentPane from '../../../../components/ContentPane'
+import { I18n } from "react-i18nify"
 
 function mapStateToProps(state, props) {
     return {
@@ -261,7 +262,7 @@ class Profiles extends Component {
         let component = null
 
         if (this.props.isLoading || !this.state.login) {
-            component = <div style={{width: '100%', height: 'calc(100vh - 120px)'}}><Loading message="Loading..." /></div>
+            component = <div style={{width: '100%', height: 'calc(100vh - 120px)'}}><Loading message={`${I18n.t('commons.loading')}...`} /></div>
         } else {
             let user = usersScheme({
                 state: this.state, 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import FilesEditItemList from './FilesEditItemList'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
+import { I18n } from "react-i18nify"
 
 export default class FilesEdit extends Component {
 
@@ -88,7 +89,7 @@ export default class FilesEdit extends Component {
         if (this.props.selectedItems) {
 
             if (this.state.isLoading) {
-                return (<Loading message="Loading..." />)
+                return (<Loading message={`${I18n.t('commons.loading')}...`} />)
             } else {
                 let renderComponent = this.props.selectedItems.map((item, index) => {
 

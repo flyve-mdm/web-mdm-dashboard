@@ -4,6 +4,7 @@ import ContentPane from '../../../components/ContentPane'
 import ConstructInputs from '../../../components/Forms'
 import { agentScheme } from '../../../components/Forms/Schemas'
 import Loading from '../../../components/Loading'
+import { I18n } from "react-i18nify"
 
 export default class DevicesEditOne extends Component {
 
@@ -99,7 +100,7 @@ export default class DevicesEditOne extends Component {
     render() {
         const componetRender = (
             <ContentPane>
-                <Loading message="Loading..." />
+                <Loading message={`${I18n.t('commons.loading')}...`} />
             </ContentPane>
         ) 
 

@@ -5,6 +5,7 @@ import IconItemList from '../../../components/IconItemList'
 import BytesToSize from '../../../shared/bytesToSize'
 import Confirmation from '../../../components/Confirmation'
 import Loading from '../../../components/Loading'
+import { I18n } from "react-i18nify"
 
 export default class ApplicationsContent extends Component {
 
@@ -84,7 +85,7 @@ export default class ApplicationsContent extends Component {
 
     render() {
         if (this.state.isLoading || this.state.data === undefined) {
-            return (<Loading message="Loading..." />)
+            return (<Loading message={`${I18n.t('commons.loading')}...`} />)
         } else {
             let image = "data:image/png;base64, " + this.state.data["icon"]
             return (

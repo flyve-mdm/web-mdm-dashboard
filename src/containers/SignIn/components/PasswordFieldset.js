@@ -27,7 +27,7 @@ class PasswordFieldset extends Component {
         if (this.state.isLoading) {
             renderComponent = (
                 <div style={{margin: 50}}>
-                    <Loading message="Loading..." />
+                    <Loading message={`${I18n.t('commons.loading')}...`} />
                 </div>
             )
 

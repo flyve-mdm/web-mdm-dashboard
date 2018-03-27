@@ -65,7 +65,7 @@ class SignUp extends Component {
     render() {
         let renderComponent 
         if (this.props.isLoading) {
-            renderComponent = <Loading message="Loading..."/>
+            renderComponent = <Loading message={`${I18n.t('commons.loading')}...`}/>
         } else {
             const user = this.buildDataArray()
             renderComponent = (

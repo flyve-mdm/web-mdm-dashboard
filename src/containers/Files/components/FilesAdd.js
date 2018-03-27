@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { FilesUpload, FilesUploadItemList } from '../../../components/FilesUpload'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
+import { I18n } from "react-i18nify"
 
 export default class FilesAdd extends Component {
 
@@ -73,7 +74,7 @@ export default class FilesAdd extends Component {
     render() {
         let renderComponent
         if (this.state.isLoading) {
-            renderComponent = (<Loading message="Loading..." />)
+            renderComponent = (<Loading message={`${I18n.t('commons.loading')}...`} />)
         } else {
             renderComponent = (
                 <ContentPane>

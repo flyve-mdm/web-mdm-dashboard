@@ -4,6 +4,7 @@ import FleetsTaskItemList from './FleetsTaskItemList'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import Confirmation from '../../../components/Confirmation'
+import { I18n } from "react-i18nify"
 
 const POLICIES_CAN_MULTIPLE_VALUE = [
     14, // -> Deploy Application
@@ -655,7 +656,7 @@ class FleetsContent extends Component {
             policiesPerCategory = this.filterPoliciesPerCategory()
         }         
         if (this.state.isLoading) {
-            return (<Loading message="Loading..." />)
+            return (<Loading message={`${I18n.t('commons.loading')}...`} />)
         } else {
             return (
                 <ContentPane>
