@@ -2,12 +2,6 @@ import * as actionTypes from './actionTypes'
 
 // Actions
 
-export const uiToggleAnimation = () => {
-  return {
-      type: actionTypes.TOGGLE_ANIMATION
-  }
-}
-
 export const uiSetNotification = notification => {
   return {
       type: actionTypes.CHANGE_NOTIFICATION_MESSAGE,
