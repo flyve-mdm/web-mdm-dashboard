@@ -25,7 +25,6 @@
   "about": {
     "overview": "Overview",
     "system_information": "System information",
-    "help_center":"Help Center",
     "release_notes":"Release notes",
     "term_of_use":"Term of use",
     "license":"License",
@@ -41,15 +40,16 @@
       "work_with_devices_running_Android_4,4_or_higher": "Work with devices running Android 4.4 or higher",
       "simple_web_application_user_interface": "Simple web application user interface"
     },
-    "help_center_STRINGS": {
+    "help_center": {
+      "home": "Help Center Home",
+      "title": "Help Center",
       "recent_articles": "Recent articles",
       "all_articles": "All articles",
       "browse_all_articles": "Browse all articles",
       "search_an_article": "Search an article",
       "send_feedback": "Send feedback",
       "thank_you!": "Thank you!",
-      "your_submission_has_been_received": "Your submission has been received",
-      "feedback": "Feedback"
+      "your_submission_has_been_received": "Your submission has been received"
     },
     "contact": {
       "title": "Contact",
@@ -215,6 +215,8 @@
     "email_work": "Email work",
     "map_home": "Map home",
     "hours_ago": "Hours ago",
-    "Spain": "Spain"
+    "Spain": "Spain",
+    "feedback": "Feedback",
+    "article": "Article"
   }
 }

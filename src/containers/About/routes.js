@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: '/help',
-    name: I18n.t('about.help_center'),
+    name: I18n.t('about.help_center.title'),
     component: HelpCenter,
     exact: false
   },

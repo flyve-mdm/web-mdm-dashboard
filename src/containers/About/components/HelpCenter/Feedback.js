@@ -43,30 +43,31 @@ class Feedback extends Component {
     
     render() {
         if(this.state.isLoading) {
-            return <Loading message={I18n.t('commons.sending') } />
+            return <Loading message={I18n.t('commons.sending')} />
         } else if (this.state.feedbackSent) {
             return (
                 <React.Fragment>
                     <div style={{ textAlign: 'center' }}>
-                        <h3>{I18n.t('about.help_center_STRINGS.thank_you!') }</h3>
-                        <p>{I18n.t('about.help_center_STRINGS.your_submission_has_been_received') }</p>
+                        <h3>{I18n.t('about.help_center.thank_you!')}</h3>
+                        <p>{I18n.t('about.help_center.your_submission_has_been_received')}</p>
                     </div>
                 </React.Fragment>
             )
         } else {
             return (
                 <ContentPane>
-                    <h3>{I18n.t('about.help_center_STRINGS.feedback') }</h3>
+                    <h3>{I18n.t('about.help_center.feedback')}</h3>
                     <div className="feedback">
                         <form onSubmit={this.handleSubmit}>
-                        <textarea
-                        name="textarea"
-                        ref={(input) => { this.textareaInput = input; }}
-                        className="win-textbox feedback-textarea"
-                        placeholder="Write a feedback!"
-                        value={this.state.textarea}
-                        onChange={(event) => this.setState({ textarea: event.target.value })}
-                        required={true}/>
+                            <textarea
+                                name="textarea"
+                                ref={(input) => { this.textareaInput = input; }}
+                                className="win-textbox feedback-textarea"
+                                placeholder="Write a feedback!"
+                                value={this.state.textarea}
+                                onChange={(event) => this.setState({ textarea: event.target.value })}
+                                required={true}
+                            />
                             <button className="btn --primary" style={{float: 'right'}}>
                                 {I18n.t('commons.send') }
                             </button>

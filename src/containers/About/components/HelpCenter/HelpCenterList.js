@@ -25,7 +25,7 @@ class HelpCenterList extends Component {
             list: undefined,
             suggestionList: undefined,
             layout: { type: WinJS.UI.ListLayout },
-            labelList: I18n.t('about.help_center_STRINGS.recent_articles'),
+            labelList: I18n.t('about.help_center.recent_articles'),
             itemSelected: null,
             isLoading: true
         }
@@ -81,7 +81,7 @@ class HelpCenterList extends Component {
     }
 
     showAllArticles = () => {
-        this.setState({labelList: I18n.t('about.help_center_STRINGS.all_articles'), list: new WinJS.Binding.List(this.state.articles)})
+        this.setState({labelList: I18n.t('about.help_center.all_articles'), list: new WinJS.Binding.List(this.state.articles)})
     }
 
     filterArticles = (filter) => {
@@ -129,10 +129,10 @@ class HelpCenterList extends Component {
     render() {
         return (
             this.state.isLoading ? 
-                <div style={{height: "100%", marginTop: "-80px"}}><Loading message="Loading..." /></div> : 
+                <div style={{height: "100%", marginTop: "-80px"}}><Loading message={`${I18n.t('commons.loading')}...`} /></div> : 
                 (   
                     <ContentPane>
-                        <h2>Help Center</h2>
+                        <h2>{I18n.t('about.help_center.title')}</h2>
                         <br />
                         <div className="listPane" style={{ padding: 0 }}>
                             <div>
@@ -152,7 +152,7 @@ class HelpCenterList extends Component {
                                                     width: '150px',
                                                     minWidth: 'unset'
                                                 }}
-                                                placeholderText={I18n.t('about.help_center_STRINGS.search_an_article')}
+                                                placeholderText={I18n.t('about.help_center.search_an_article')}
                                                 onSuggestionsRequested={this.handleSuggestionsRequested}
                                                 onQuerySubmitted={this.handleQuerySubmitted} 
                                             />       
@@ -185,13 +185,13 @@ class HelpCenterList extends Component {
                             />
 
                             {
-                                this.state.labelList !== I18n.t('about.help_center_STRINGS.recent_articles') ? '' : 
+                                this.state.labelList !== I18n.t('about.help_center.recent_articles') ? '' : 
                                     <div>
                                         <div className="separator" />
                                         
                                         <div>
                                             <a onClick={this.showAllArticles}>
-                                                { I18n.t('about.help_center_STRINGS.browse_all_articles') }            
+                                                { I18n.t('about.help_center.browse_all_articles') }            
                                             </a>
                                         </div>
                                     </div>
@@ -201,7 +201,7 @@ class HelpCenterList extends Component {
 
                             <div className="itemList" onClick={this.redirectToFeedBack}>
                                 <span className="messageIcon" style={{marginRight: '5px'}}/>
-                                { I18n.t('about.help_center_STRINGS.send_feedback') }
+                                { I18n.t('about.help_center.send_feedback') }
                             </div>
                         </div>
                     </ContentPane>
