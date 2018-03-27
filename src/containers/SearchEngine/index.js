@@ -83,8 +83,7 @@ class SearchEngine extends Component {
         /*
         * Handle click event in the search button
         */
-
-        this.props.glpi.searchItems({ itemtype: this.state.itemType, queryString: this.normalizeQuery() }).then(
+        this.props.glpi.searchItems({ itemtype: this.state.itemType, criteria: this.normalizeQuery() }).then(
             value => {
                 this.setState({ itemResults: value.data })
             })
@@ -108,7 +107,6 @@ class SearchEngine extends Component {
                 objectField['fieldName'] = this.state.listSearchOptions[field[0]]['name']
                 objectField['fieldValue'] = field[1]
                 objectField['fieldId'] = field[0]
-
 
                 arrayResult.push(objectField)
 
