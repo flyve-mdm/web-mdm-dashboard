@@ -25,22 +25,22 @@ const withI18NTranslation = WrappedComponent => {
     findI18NString = i18nConvention => {
       let path = i18nConvention === this.props.languageDefault
         ? `./i18n/source_file`
-        : `./i18n/translations/${i18nConvention}`;
+        : `./i18n/translations/${i18nConvention}`
 
         import(`${path}.json`)
           .then(jsonModule => {
             I18n.setTranslationsGetter(() => {
-              const json = {};
-              json[i18nConvention] = jsonModule;
+              const json = {}
+              json[i18nConvention] = jsonModule
               return json
-            });
-            I18n.setLocale(i18nConvention);
-            this.forceUpdate();
+            })
+            I18n.setLocale(i18nConvention)
+            this.forceUpdate()
           }).catch((error) => {
-            I18n.setLocale(this.props.languageDefault);
-            this.forceUpdate();
-        });
-    };
+            I18n.setLocale(this.props.languageDefault)
+            this.forceUpdate()
+        })
+    }
   
     componentWillMount() {
       let json = {};
@@ -73,4 +73,4 @@ const withI18NTranslation = WrappedComponent => {
   )
 }
 
-export default withI18NTranslation;
+export default withI18NTranslation

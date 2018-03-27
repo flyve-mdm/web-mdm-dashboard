@@ -26,7 +26,6 @@
     "overview": "Overview",
     "system_information": "System information",
     "help_center":"Help Center",
-    "contact":"Contact",
     "release_notes":"Release notes",
     "term_of_use":"Term of use",
     "license":"License",
@@ -52,8 +51,9 @@
       "your_submission_has_been_received": "Your submission has been received",
       "feedback": "Feedback"
     },
-    "contact_STRINGS": {
-      "feel_free_to_contact_us_at_any_time,_selecting_your_preferred_channel_a_teclib’_expert_will_answer_your_request_and_provide_you_with_all_the_information_and_advice_you_need_about:_our_products,_partnership_programs,_training_courses_and_support_solutions": "Feel free to contact us at any time, selecting your preferred channel. A Teclib’ expert will answer your request and provide you with all the information and advice you need about: our Products, Partnership Programs, Training Courses and Support solutions."
+    "contact": {
+      "title": "Contact",
+      "description": "Feel free to contact us at any time, selecting your preferred channel. A Teclib’ expert will answer your request and provide you with all the information and advice you need about: our Products, Partnership Programs, Training Courses and Support solutions."
     },
     "term_of_use_STRINGS": {
       "definitions": "Definitions",
@@ -214,6 +214,7 @@
     "video_call": "Video call",
     "email_work": "Email work",
     "map_home": "Map home",
-    "hours_ago": "Hours ago"
+    "hours_ago": "Hours ago",
+    "Spain": "Spain"
   }
 }
