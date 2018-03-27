@@ -23,12 +23,14 @@
     "are_you_sure_you_want_to_close_your_session?": "Are you sure you want to close your session?"
   },
   "about": {
-    "overview": "Overview",
     "system_information": "System information",
     "release_notes":"Release notes",
     "term_of_use":"Term of use",
-    "license":"License",
-    "overview_STRINGS": {
+    "license": {
+      "title": "License"
+    },
+    "overview": {
+      "title": "Overview",
       "flyve_MDM_is_a_mobile_device_management_software_that_enables_you_to_secure_and_manage_all_the_mobile_devices_of_your_business_via_a_unique_web-based_console_(MDM)": "Flyve MDM is a mobile device management software that enables you to secure and manage all the mobile devices of your business via a unique web-based console (MDM).",
       "our_solution_allows_you_to_efficiently_and_easily_control_any_aspects_of_your_Android-based_mobile_fleet,_providing_a_panel_of_functionalities": "Our solution allows you to efficiently and easily control any aspects of your Android-based mobile fleet, providing a panel of functionalities:",
       "source_codes_will_be_released_during_fall_2016": "Source codes will be released during fall 2016.",
