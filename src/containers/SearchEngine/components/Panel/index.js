@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import PanelResult from './PanelResults'
-import PanelItemType from './PanelItemType'
 import PanelFields from './PanelFields'
 
 class Panel extends Component {
@@ -19,7 +18,6 @@ class Panel extends Component {
 
         return (
             <React.Fragment>
-                <PanelItemType itemType={this.props.itemType} />
                 <table style={{
                     overflow: 'auto',
                     height: '400px',
