@@ -6,6 +6,7 @@ import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
+import { I18n } from "react-i18nify"
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -48,7 +49,7 @@ class HelpCenterArticle extends Component {
     render () {
         return (
             this.state.isLoading ? 
-                <div style={{height: "100%", marginTop: "-80px"}}><Loading message="Loading..." /></div> :
+                <div style={{height: "100%", marginTop: "-80px"}}><Loading message={`${I18n.t('commons.loading')}...`} /></div> :
                     <ContentPane>
                         <h2>{this.state.article.name}</h2>
                         <div className="date">{this.state.article.date}</div>                        
