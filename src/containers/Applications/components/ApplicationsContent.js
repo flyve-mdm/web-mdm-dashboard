@@ -88,7 +88,7 @@ export default class ApplicationsContent extends Component {
         } else {
             let image = "data:image/png;base64, " + this.state.data["icon"]
             return (
-                <ContentPane updateAnimation={true}>
+                <ContentPane>
                     <div className="contentHeader">
                         <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> Application </h2>
                         <div className="itemInfo">
