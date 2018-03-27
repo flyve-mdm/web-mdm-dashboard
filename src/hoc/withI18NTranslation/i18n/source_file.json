@@ -24,7 +24,9 @@
   },
   "about": {
     "system_information": "System information",
-    "release_notes":"Release notes",
+    "release_notes": {
+      "title": "Release notes"
+    },
     "term_of_use":"Term of use",
     "license": {
       "title": "License"

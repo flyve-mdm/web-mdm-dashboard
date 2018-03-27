@@ -61,7 +61,7 @@ describe('Check if translations are available', () => {;
     expect(I18n.t('about.system_information')).toBe('System information')
     expect(I18n.t('about.help_center.title')).toBe('Help Center')
     expect(I18n.t('about.contact.title')).toBe('Contact')
-    expect(I18n.t('about.release_notes')).toBe('Release notes')
+    expect(I18n.t('about.release_notes.title')).toBe('Release notes')
     expect(I18n.t('about.term_of_use')).toBe('Term of use')
     expect(I18n.t('about.license.title')).toBe('License')
   });
