@@ -23,7 +23,7 @@ export default class DevicesContent extends Component {
 
     render() {
         return (
-            <ContentPane updateAnimation={false} >
+            <ContentPane>
                 <ReactWinJS.Pivot>
                     <ReactWinJS.Pivot.Item key="main" header="Main">
 

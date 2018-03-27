@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 class ContentPane extends Component {
 
   constructor(props) {
     super(props)
+    const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
     this.state = {
-      animate: this.props.updateAnimation ? "content-pane--animate": null
+      updateAnimation: display.animations,
+      animate: display.animations ? "content-pane--animate": ""
     }
   }
 
-  componentDidUpdate() {
-    if (this.props.updateAnimation) {
-      this.handleAnimation()
-    }
+  componentWillReceiveProps() {
+    this.handleAnimation()
   }
 
   componentDidMount() {
@@ -21,15 +20,17 @@ class ContentPane extends Component {
   }
 
   handleAnimation = () => {
-    this.setState({
-      animate: "content-pane--animate"
-    }, () => {
-      setTimeout(() => {
-        this.setState({
-          animate: null
-        })
-      }, 2000)
-    })
+    if (this.state.updateAnimation) {
+      this.setState({
+        animate: "content-pane--animate"
+      }, () => {
+        setTimeout(() => {
+          this.setState({
+            animate: ""
+          })
+        }, 2000)
+      })
+    }
   }
 
   render() {
@@ -39,17 +40,8 @@ class ContentPane extends Component {
         { this.props.children }
         </div>
       </div>
-      
     )
   }
-}
-
-ContentPane.propTypes = {
-  updateAnimation: PropTypes.bool,
-}
-
-ContentPane.defaultProps = {
-  updateAnimation: false
 }
 
 export default ContentPane

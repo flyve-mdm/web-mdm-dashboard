@@ -142,7 +142,7 @@ export default class UsersContent extends Component {
             )
         }
         return (
-            <ContentPane updateAnimation={true}>
+            <ContentPane>
                 { renderComponent }
             </ContentPane>
         ) 
