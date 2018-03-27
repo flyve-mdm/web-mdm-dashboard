@@ -133,7 +133,7 @@ class SearchEngine extends Component {
                         handleChangeQuery={this.handleChangeQuery}
                         translations={this.translations} />
                 }
-
+                <br />
                 {
                     this.state.isLoading 
                         ? <p>Loading  ... </p>
@@ -141,7 +141,6 @@ class SearchEngine extends Component {
                             ? this.state.query.rules.length ? <button className="btn --primary" onClick={this.handleOnSearch}> Search </button> : null
                             : <p>ItemType not found</p>
                 }
-
                 <Panel
                     itemType={this.state.itemType}
                     itemResults={this.state.itemResults.length > 0 ? arrayResultsWithFields : []}
