@@ -23,7 +23,7 @@ const routes = [
   },
   {
     path: '/system',
-    name: I18n.t('about.system_information'),
+    name: I18n.t('about.system_information.title'),
     component: SystemInformation,
     exact: false
   },

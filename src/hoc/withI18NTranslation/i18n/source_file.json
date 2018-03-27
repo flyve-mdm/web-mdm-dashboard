@@ -23,7 +23,9 @@
     "are_you_sure_you_want_to_close_your_session?": "Are you sure you want to close your session?"
   },
   "about": {
-    "system_information": "System information",
+    "system_information": {
+      "title": "System information"
+    },
     "release_notes": {
       "title": "Release notes"
     },
