@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: '/release',
-    name: I18n.t('about.release_notes'),
+    name: I18n.t('about.release_notes.title'),
     component: ReleaseNotes,
     exact: false
   },
