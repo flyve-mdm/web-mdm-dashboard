@@ -1,1 +1,0 @@
-import Panel from "./Panel";
