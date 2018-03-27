@@ -58,7 +58,7 @@ describe('Check if translations are available', () => {;
 
   it('about page should have english translations', () => {
     expect(I18n.t('about.overview.title')).toBe('Overview')
-    expect(I18n.t('about.system_information')).toBe('System information')
+    expect(I18n.t('about.system_information.title')).toBe('System information')
     expect(I18n.t('about.help_center.title')).toBe('Help Center')
     expect(I18n.t('about.contact.title')).toBe('Contact')
     expect(I18n.t('about.release_notes.title')).toBe('Release notes')
