@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import animations from '../../../../shared/animations'
 import { changeLanguage } from '../../../../store/i18n/actions'
 import { I18n } from 'react-i18nify'
+import ContentPane from '../../../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -51,7 +52,7 @@ class Display extends Component {
 
     render () {
         return (
-            <div>
+            <ContentPane>
                 <h2 style={{marginBottom: '20px'}}>Supervision</h2>
 
                 <div className="title"> Language </div>
@@ -215,7 +216,7 @@ class Display extends Component {
                     </div>
                 </div>
                 
-            </div>
+            </ContentPane>
         )
     }
 }
