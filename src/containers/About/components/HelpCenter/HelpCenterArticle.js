@@ -5,6 +5,7 @@ import withGLPI from "../../../../hoc/withGLPI"
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import ContentPane from '../../../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -48,11 +49,11 @@ class HelpCenterArticle extends Component {
         return (
             this.state.isLoading ? 
                 <div style={{height: "100%", marginTop: "-80px"}}><Loading message="Loading..." /></div> :
-                    <div className="listPane" style={{ padding: 0 }}>
+                    <ContentPane>
                         <h2>{this.state.article.name}</h2>
                         <div className="date">{this.state.article.date}</div>                        
                         <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(this.state.article.answer) }} />
-                    </div>
+                    </ContentPane>
         ) 
     }
 }

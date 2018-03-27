@@ -1,5 +1,6 @@
 import React from 'react'
 import plugins from '../../../../data/plugins.json'
+import ContentPane from '../../../../components/ContentPane'
 
 const SystemInformation = () => {
   let element = []
@@ -18,12 +19,12 @@ const SystemInformation = () => {
     )
   })
   return (
-    <div>
+    <ContentPane>
       <h2>System Information</h2>
       <div className="aboutPane">
         {element}
       </div>
-    </div>
+    </ContentPane>
   )
 }
 
