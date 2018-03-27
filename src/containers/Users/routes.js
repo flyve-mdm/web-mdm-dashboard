@@ -2,11 +2,12 @@ import EmptyMessage from '../../components/EmptyMessage'
 import UsersContent from './components/UsersContent'
 import UsersEditOne from './components/UsersEditOne'
 import UsersEdit from './components/UsersEdit'
+import { I18n } from 'react-i18nify'
 
 const routes = [
   {
     path: '/',
-    name: 'No selected',
+    name: I18n.t('commons.no_selection'),
     component: EmptyMessage,
     exact: true
   },

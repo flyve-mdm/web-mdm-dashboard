@@ -121,7 +121,7 @@ export default class ApplicationsEdit extends Component {
 
         } else {
             return (
-                <EmptyMessage message="No Selection"/>
+                <EmptyMessage message={I18n.t('commons.no_selection')}/>
             )
         }
     }

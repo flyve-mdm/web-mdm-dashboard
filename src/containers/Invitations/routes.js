@@ -1,11 +1,12 @@
 import EmptyMessage from '../../components/EmptyMessage'
 import InvitationsPendingPage from './components/InvitationsPendingPage'
 import Enroll from '../Devices/components/Enroll'
+import { I18n } from 'react-i18nify'
 
 const routes = [
   {
     path: '/',
-    name: 'No selected',
+    name: I18n.t('commons.no_selection'),
     component: EmptyMessage,
     exact: true
   },
