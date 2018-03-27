@@ -4,6 +4,7 @@ import Invitations from '../../containers/Invitations'
 import Files from '../../containers/Files'
 import Applications from '../../containers/Applications'
 import Users from '../../containers/Users'
+import SearchEngine from '../../containers/SearchEngine'
 import About from '../../containers/About'
 import Settings from '../../containers/Settings'
 import Fleets from '../../containers/Fleets'
@@ -49,6 +50,12 @@ const routes = [
     path: '/users',
     name: 'Users',
     component: Users,
+    exact: false
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: SearchEngine,
     exact: false
   },
   {
