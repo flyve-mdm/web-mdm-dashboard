@@ -7,6 +7,7 @@ import ConstructInputs from '../../../../components/Forms'
 import { bindActionCreators } from 'redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { connect } from 'react-redux'
+import ContentPane from '../../../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -50,7 +51,7 @@ class Supervision extends Component {
         })
 
         return (
-            <div>
+            <ContentPane>
                 <h2>Supervision</h2>
                 <div className="list-content Profiles" style={{marginTop: '20px'}}>
                     <ConstructInputs data={supervision.helpDeskInformation} icon="supervisionIcon" title="Helpdesk Information" />
@@ -59,7 +60,7 @@ class Supervision extends Component {
                     </button>
                     <br />
                 </div>
-            </div>
+            </ContentPane>
         )
     }
 }

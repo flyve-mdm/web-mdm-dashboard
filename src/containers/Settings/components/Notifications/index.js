@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
+import ContentPane from '../../../../components/ContentPane'
 
 class Notifications extends Component {
 
@@ -42,7 +43,7 @@ class Notifications extends Component {
 
     render () {
         return (
-            <div>
+            <ContentPane>
                 <h2 style={{marginBottom: '20px'}}>Notifications</h2>
                 <div className="listElement">
                     <div className="message">
@@ -76,7 +77,7 @@ class Notifications extends Component {
                     </div>
                 </div>
 
-            </div>
+            </ContentPane>
         )
     }
 }

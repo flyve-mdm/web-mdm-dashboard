@@ -14,6 +14,7 @@ import {
     uiSetNotification
 } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
+import ContentPane from '../../../../components/ContentPane'
 
 function mapStateToProps(state, props) {
     return {
@@ -333,11 +334,11 @@ class Profiles extends Component {
             )
         }       
         return (
-            <div>
+            <ContentPane>
                 <h2>Profiles</h2>
 
                 { component }
-            </div>
+            </ContentPane>
         )
     }
 }

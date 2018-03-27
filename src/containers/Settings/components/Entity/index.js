@@ -4,6 +4,7 @@ import ChangeTokenLife from './ChangeTokenLife'
 import Main from './Main'
 import validateData from '../../../../shared/validateData'
 import SettingsEntity from '../../../../data/SettingsEntity.json'
+import ContentPane from '../../../../components/ContentPane'
 
 class Entity extends Component {
 
@@ -43,35 +44,35 @@ class Entity extends Component {
 
             case 'change Token life':
                 content = (
-                    <div>
+                    <ContentPane>
                         <ChangeTokenLife 
                             changeMode={this.changeMode} 
                             tokenLife={this.state.tokenLife}
                             saveValues={this.saveValues}
                             showNotification={this.props.showNotification}
                         />
-                    </div>
+                    </ContentPane>
                 )
                 
             break
 
             case 'change download URL':
                 content = (
-                    <div>
+                    <ContentPane>
                         <ChangeDownloadURL 
                             changeMode={this.changeMode} 
                             downloadURL={this.state.downloadURL} 
                             saveValues={this.saveValues}
                             showNotification={this.props.showNotification}
                         />
-                    </div>
+                    </ContentPane>
                 )
 
             break
         
             default:
                 content = (
-                    <div>
+                    <ContentPane>
                         <Main
                             tokenLife={this.state.tokenLife} 
                             numberCategoriesForPolicies={this.state.numberCategoriesForPolicies} 
@@ -87,7 +88,7 @@ class Entity extends Component {
                             downloadURL={this.state.downloadURL} 
                             changeMode={this.changeMode}
                         />
-                    </div>
+                    </ContentPane>
                 )
         }
 
