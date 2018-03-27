@@ -53,7 +53,7 @@ const routes = [
   },
   {
     path: '/license',
-    name: I18n.t('about.license'),
+    name: I18n.t('about.license.title'),
     component: Licence,
     exact: false
   }
