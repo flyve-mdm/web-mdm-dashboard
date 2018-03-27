@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import EmptyMessage from '../../components/EmptyMessage'
 import { NavLink } from 'react-router-dom'
+import ContentPane from '../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -331,7 +332,7 @@ class Dashboard extends Component {
     const renderGraphics = this.renderGraphics()
     const renderComponent = this.state.isLoading ? <div style={{width: '100%', height: 'calc(100vh - 80px)'}}><Loading message="Loading..." /></div>:
     (
-      <React.Fragment>
+      <ContentPane>
         <div className="dashboard-block">
 
         {
@@ -356,7 +357,7 @@ class Dashboard extends Component {
         }
 
         </div>
-      </React.Fragment>
+      </ContentPane>
     )
 
     return renderComponent
