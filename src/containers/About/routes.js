@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/overview',
-    name: I18n.t('about.overview'),
+    name: I18n.t('about.overview.title'),
     component: Overview,
     exact: true
   },
