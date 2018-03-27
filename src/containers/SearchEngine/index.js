@@ -42,7 +42,7 @@ class SearchEngine extends Component {
         this.handleRequestItemType()
     }
 
-    handleRequestItemType = () => {
+    handleRequestItemType = async () => {
         /*
         * Fetch search options list of itemType
         */
@@ -50,15 +50,26 @@ class SearchEngine extends Component {
         this.setState({
             query: null,
             itemResults: [],
-            fields: []
+            fields: [],
+            isLoading: true
         })
 
-        this.props.glpi.listSearchOptions({ itemtype: this.state.itemType }).then(
-            value => {
-                this.setState({ listSearchOptions: value }, () => {
-                    this.setFields()
-                })
+        try {
+
+            const listSearchOptions = await this.props.glpi.listSearchOptions({ itemtype: this.state.itemType })
+
+            this.setState({ 
+                isLoading: false,
+                listSearchOptions: listSearchOptions 
+            }, () => {
+                this.setFields()
             })
+            
+        } catch (error) {
+            this.setState({
+                isLoading: false
+            })
+        }
     }
 
     handleChangeQuery = (query) => {
