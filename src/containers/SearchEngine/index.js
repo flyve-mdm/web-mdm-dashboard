@@ -136,15 +136,17 @@ class SearchEngine extends Component {
                         translations={this.translations} />
                 }
 
-                {this.state.query
-                    ? this.state.query.rules.length
-                        ? <button className="btn --primary" onClick={this.handleOnSearch}> Search </button>
-                        : null
-                    : <p>Loading  ... </p>}
+                {
+                    this.state.isLoading 
+                        ? <p>Loading  ... </p>
+                        : this.state.query 
+                            ? this.state.query.rules.length ? <button className="btn --primary" onClick={this.handleOnSearch}> Search </button> : null
+                            : <p>ItemType not found</p>
+                }
 
                 <Panel
                     itemType={this.state.itemType}
-                    itemResults={arrayResultsWithFields}
+                    itemResults={this.state.itemResults.length > 0 ? arrayResultsWithFields : []}
                     itemFields={this.state.fields} />
             </ContentPane>
         )
