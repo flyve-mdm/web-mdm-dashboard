@@ -11,10 +11,6 @@ class ContentPane extends Component {
     }
   }
 
-  componentWillReceiveProps() {
-    this.handleAnimation()
-  }
-
   componentDidMount() {
     this.handleAnimation()
   }
