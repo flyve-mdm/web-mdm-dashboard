@@ -29,7 +29,6 @@
     "release_notes": {
       "title": "Release notes"
     },
-    "term_of_use":"Term of use",
     "license": {
       "title": "License"
     },
@@ -61,7 +60,8 @@
       "title": "Contact",
       "description": "Feel free to contact us at any time, selecting your preferred channel. A Teclib’ expert will answer your request and provide you with all the information and advice you need about: our Products, Partnership Programs, Training Courses and Support solutions."
     },
-    "term_of_use_STRINGS": {
+    "term_of_use": {
+      "title": "Term of use",
       "definitions": "Definitions",
       "general_notes": "General Notes",
       "complaints_procedure": "Complaints Procedure",
