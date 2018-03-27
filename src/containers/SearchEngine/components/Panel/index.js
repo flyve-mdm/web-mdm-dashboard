@@ -18,15 +18,10 @@ class Panel extends Component {
 
         return (
             <React.Fragment>
-                <table style={{
-                    overflow: 'auto',
-                    height: '400px',
-                    display: 'block',
-                    borderSpacing: '6px'
-                }}>
+                <div className="searchList">
                     <PanelFields fields={fields} />
                     <PanelResult itemResults={this.props.itemResults} />
-                </table>
+                </div>
             </React.Fragment>
         )
     }

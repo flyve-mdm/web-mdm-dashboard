@@ -4,20 +4,16 @@ import PropTypes from 'prop-types';
 
 class PanelFields extends Component {
   render() { 
-    return ( 
-      <thead>
-        <tr>
-          {this.props.fields.map(field => {
-            let fieldKey = field[0];
-            let fieldName = field[1];
-            return (
-              <th key={fieldKey}>
-                { fieldName }
-              </th>
-            )
-          })}
-        </tr>
-      </thead>
+    return (
+      <div className="searchListHeader">
+        {this.props.fields.map(field => {
+          let fieldKey = `${field[0]}_${field[1]}`;
+          let fieldName = field[1];
+          return (
+            <div key={fieldKey} className="cellHeader">{fieldName}</div>
+          )
+        })}
+      </div> 
     )
   }
 }
