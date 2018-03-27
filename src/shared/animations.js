@@ -1,10 +1,11 @@
 import WinJS from 'winjs'
 
-export default function (bytes) {
-    const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
-    if (display.animations === false) {
-        WinJS.UI.disableAnimations()
-    } else {
+const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
+
+export default function (animate = display.animate) {
+    if (animate) {
         WinJS.UI.enableAnimations()
+    } else {
+        WinJS.UI.disableAnimations()
     }
 }

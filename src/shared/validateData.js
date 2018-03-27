@@ -9,4 +9,4 @@ const validateData = (data, specialReturn) => {
     return value.toString()
 }
 
-export default validateData;
+export default validateData

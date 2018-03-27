@@ -40,14 +40,11 @@ class Display extends Component {
         this.setState({
             [name]: !this.state[name]
         })
-
-        if (name === 'animations') {
-            animations()
-        }
     }
 
     componentDidUpdate  (){
         localStorage.setItem('display', JSON.stringify(this.state))
+        animations(this.state.animations)
     }
 
     render () {

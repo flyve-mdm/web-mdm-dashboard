@@ -4,11 +4,11 @@ import ContentPane from '../../../../components/ContentPane'
 
 const Contact = () => (
     <ContentPane>
-        <h2>Contact</h2>
+        <h2>{ I18n.t('about.contact.title') }</h2>
         <div className="aboutPane">
             <img src="/images/logo-teclib.png" alt="Teclib" />
             <p>
-                { I18n.t('about.contact_STRINGS.feel_free_to_contact_us_at_any_time,_selecting_your_preferred_channel_a_teclib’_expert_will_answer_your_request_and_provide_you_with_all_the_information_and_advice_you_need_about:_our_products,_partnership_programs,_training_courses_and_support_solutions') }
+                { I18n.t('about.contact.description') }                
             </p>
             <div className="separator" />
             <div className="contentInfo" >
@@ -31,7 +31,7 @@ const Contact = () => (
                         <span className="mapIcon" />
                         <div className="callContent">
                             <div>{ I18n.t('commons.map') }</div>
-                            <a href="https://goo.gl/maps/qDijeVyCUwq">Barcelona, Spain</a>
+                            <a href="https://goo.gl/maps/qDijeVyCUwq">Barcelona, { I18n.t('commons.Spain') }</a>
                         </div>
                     </li>
                 </ul>
@@ -40,4 +40,4 @@ const Contact = () => (
     </ContentPane>
 )
 
-export default Contact;
+export default Contact

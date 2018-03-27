@@ -35,7 +35,7 @@ const routes = [
   },
   {
     path: '/contact',
-    name: I18n.t('about.contact'),
+    name: I18n.t('about.contact.title'),
     component: Contact,
     exact: false
   },
