@@ -47,7 +47,7 @@ const routes = [
   },
   {
     path: '/term',
-    name: I18n.t('about.term_of_use'),
+    name: I18n.t('about.term_of_use.title'),
     component: TermsOfUse,
     exact: false
   },
