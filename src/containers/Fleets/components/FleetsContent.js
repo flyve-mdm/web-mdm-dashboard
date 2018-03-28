@@ -67,12 +67,22 @@ class FleetsContent extends Component {
             })
 
             tasksNew = tasks.map((task) => {
+
+                let taskDeploy = {
+                    plugin_flyvemdm_fleets_id: task['plugin_flyvemdm_fleets_id'],
+                    plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
+                    value: task['value']
+                }
+
+                if (task['items_id']) {
+                    taskDeploy['items_id'] = task['items_id']
+                }
+                if (task['itemtype']) {
+                    taskDeploy['itemtype'] = task['itemtype']
+                }
+
                 return {
-                    [task['plugin_flyvemdm_policies_id']]: {
-                        plugin_flyvemdm_fleets_id: task['plugin_flyvemdm_fleets_id'],
-                        plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
-                        value: task['value']
-                    }
+                    [task['plugin_flyvemdm_policies_id']]: taskDeploy
                 }
             }).reduce(function (result, item) {
                 var key = Object.keys(item)[0]
@@ -176,7 +186,11 @@ class FleetsContent extends Component {
         // Check if the current Fleet have a Task that have a relation with this Policy
         if (fleetHaveTask) {
             // Return a Object that is the Task
-            return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['value'] : policy['PluginFlyvemdmPolicy.recommended_value']
+            if (policy['PluginFlyvemdmPolicy.type'] === 'deployapp') {
+                return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['items_id'] : policy['PluginFlyvemdmPolicy.recommended_value']
+            } else {
+                return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['value'] : policy['PluginFlyvemdmPolicy.recommended_value']
+            }
         } else {
             // Return recommended value
             return policy['PluginFlyvemdmPolicy.recommended_value']
