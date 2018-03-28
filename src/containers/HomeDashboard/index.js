@@ -327,7 +327,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.state)
     const renderInfoBox = this.renderInfoBox()
     const renderGraphics = this.renderGraphics()
     const renderComponent = this.state.isLoading ? <div style={{width: '100%', height: 'calc(100vh - 80px)'}}><Loading message={`${I18n.t('commons.loading')}...`} /></div>:
@@ -353,7 +352,7 @@ class Dashboard extends Component {
                   </div> 
 
               </div>
-            ) : <EmptyMessage message="No data" />
+            ) : <EmptyMessage message={I18n.t('commons.no_data')} />
         }
 
         </div>

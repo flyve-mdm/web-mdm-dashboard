@@ -299,6 +299,7 @@
     "last_report": "Last report",
     "new_file": "New File",
     "select_an_application": "Select an application",
-    "select_a_file": "Select a file"
+    "select_a_file": "Select a file",
+    "no_data": "No data"
   }
 }
