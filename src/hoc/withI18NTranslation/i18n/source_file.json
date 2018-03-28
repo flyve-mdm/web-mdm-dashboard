@@ -27,8 +27,15 @@
     "delete": "Delete Applications",
     "edit": "Edit application",
     "new": "New Application",
-    "name": "Application name",
-    "input_edit_item_list": "Fleet name"
+    "name": "Application name"
+  },
+  "devices": {
+    "title": "Devices",
+    "enroll": {
+      "title": "Enroll new device",
+      "insert_active_email": "Please insert an active email address.",
+      "email_with_qr": "An email will be sent with a QR code."
+    }
   },
   "about": {
     "system_information": {

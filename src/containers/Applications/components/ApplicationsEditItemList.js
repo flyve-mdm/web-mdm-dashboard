@@ -39,7 +39,7 @@ export default class ApplicationsEditItemList extends Component {
                                 type="text"
                                 style={{ width: '240px' }}
                                 className="win-textbox"
-                                placeholder={I18n.t('applications.input_edit_item_list')}
+                                placeholder={I18n.t('applications.name')}
                                 name="input"
                                 value={this.state.input}
                                 onChange={this.changeInput}

@@ -60,26 +60,33 @@ export default class Enroll extends Component {
             renderComponent = (
                 <ContentPane>
                     <h2 className="win-h2 titleContentPane">
-                        Enroll new device
+                        {I18n.t('devices.enroll.title')}
                     </h2>
-                    <p>Please insert an active email address.</p>
-                    <p>An email will be sent with a QR code.</p>
+                    <p>
+                        {I18n.t('devices.enroll.insert_active_email')}
+                    </p>
+                    <p>
+                        {I18n.t('devices.enroll.email_with_qr')}
+                    </p>
                     <input
                         type="email"
                         className="win-textbox"
-                        placeholder="Email"
+                        placeholder={I18n.t('commons.email')}
                         name="email"
                         value={this.state.email}
                         onChange={this.changeInput}
                         required
                     />
                     <br />
-                    <button className="btn --secondary" onClick={() => this.props.history.goBack()}>Cancel</button>
+                    <button className="btn --secondary" onClick={() => this.props.history.goBack()}>
+                        {I18n.t('commons.cancel')}
+                    </button>
                     <button
                         className="btn --primary"
                         style={{ marginLeft: 10 }}
-                        onClick={this.inviteDevice}>
-                        Save
+                        onClick={this.inviteDevice}
+                    >
+                        {I18n.t('commons.save')}
                     </button>
                 </ContentPane >
             )
