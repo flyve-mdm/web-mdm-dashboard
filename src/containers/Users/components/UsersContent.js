@@ -11,7 +11,8 @@ export default class UsersContent extends Component {
         super(props)
         this.state = {
             id: this.props.history.location.pathname.split("/")[3],
-            data: undefined
+            data: undefined,
+            emails: []
         }
     }
 
@@ -19,6 +20,7 @@ export default class UsersContent extends Component {
         if (this.state.id !== newProps.history.location.pathname.split("/")[3]) {
             this.setState({
                 data: undefined,
+                emails: [],
                 id: newProps.history.location.pathname.split("/")[3]
             }, () => this.handleRefresh())
         }
@@ -66,11 +68,19 @@ export default class UsersContent extends Component {
 
     handleRefresh = async () => {
         try {
+            const user = await this.props.glpi.getAnItem({
+                itemtype: 'User',
+                id: this.state.id
+            }) 
+
+            const emails = await this.props.glpi.getSubItems({
+                itemtype: 'User',
+                id: this.state.id,
+                subItemtype: 'UserEmail'
+            })
             this.setState({ 
-                data: await this.props.glpi.getAnItem({ 
-                    itemtype: 'User', 
-                    id: this.state.id 
-                }) 
+                data: user,
+                emails 
             })
         } catch (error) {
             this.props.setNotification({
@@ -117,22 +127,22 @@ export default class UsersContent extends Component {
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
-                                    <a href={this.state.data.mobile ? "tel:" + this.state.data.mobile : "#"}>Call Mobile</a>
+                                    <a href={this.state.data.mobile ? "tel:" + this.state.data.mobile : "#call"}>Call Mobile</a>
                                     <div>{this.state.data.mobile ? this.state.data.mobile : "not available"}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
-                                    <a href={this.state.data.phone2 ? "tel:" + this.state.data.phone2 : "#"}>Call Work</a>
+                                    <a href={this.state.data.phone2 ? "tel:" + this.state.data.phone2 : "#call"}>Call Work</a>
                                     <div>{this.state.data.phone2 ? this.state.data.phone2 : "not available"}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="emailIcon" />
                                 <div className="callContent">
-                                    <a href={this.state.data['User.UserEmail.email'] ? "mailto:" + this.state.data['User.UserEmail.email'] : "#"}>Email</a>
-                                    <div>{this.state.data['User.UserEmail.email'] ? this.state.data['User.UserEmail.email'] : "not available"}</div>
+                                    <a href={this.state.emails.length > 0 ? "mailto:" + this.state.emails[0]["email"] : "#email"}>Email</a>
+                                    <div>{this.state.emails.length > 0 ? this.state.emails[0]["email"] : "not available"}</div>
                                 </div>
                             </li>
                         </ul>
