@@ -79,7 +79,9 @@ export default class FilesAdd extends Component {
             renderComponent = (
                 <ContentPane>
                     <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > New File </h2>
+                        <h2 className="win-h2 titleContentPane"> 
+                            {I18n.t('commons.new_file')}
+                        </h2>
                     </div>
                     <div class="separator" />
                     <div style={{ padding: '10px' }}>
@@ -94,10 +96,12 @@ export default class FilesAdd extends Component {
                             minFileSize={0}
                             clickable
                         >
-                            Drop the file here or click to upload
+                            {I18n.t('commons.drop_file')}
                         </FilesUpload>
                         <div style={{marginTop: 10}}>
-                            <button className="btn --primary" onClick={this.filesUpload}>Save</button>
+                            <button className="btn --primary" onClick={this.filesUpload}>
+                                {I18n.t('commons.save')}
+                            </button>
                             {
                                 this.state.files.length > 0
                                     ? <div>
