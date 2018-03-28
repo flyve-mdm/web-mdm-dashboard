@@ -121,15 +121,10 @@ class FleetsContent extends Component {
         /* 
         * Get Applications
         */
-        const applications = await this.props.glpi.searchItems({
-            itemtype: 'PluginFlyvemdmPackage',
-            options: {
-                uid_cols: true,
-                forcedisplay: [
-                    1, 2, 3, 4, 5, 6
-                ],
-                range: '0-50' // Can more than 50 items
-            }
+        
+        const applications = await this.props.glpi.getAllItems({ 
+            itemtype: 'PluginFlyvemdmPackage', 
+            queryString: { range: '0-50' } 
         })
 
         /* 
@@ -143,7 +138,7 @@ class FleetsContent extends Component {
                 policies: policies.data,
                 categories: categories.data, 
                 files: files.data, 
-                applications: applications.data 
+                applications: applications 
             }
         }))
 
