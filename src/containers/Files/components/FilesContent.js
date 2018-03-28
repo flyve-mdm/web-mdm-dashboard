@@ -88,7 +88,7 @@ export default class FilesContent extends Component {
                         </div>
                     </div>
                     <div className="separator" />
-                    <Confirmation title={`Delete file`} message={this.props.selectedItems[0]["PluginFlyvemdmFile.name"]} reference={el => this.contentDialog = el} />
+                    <Confirmation title={I18n.t('files.delete_one')} message={this.props.selectedItems[0]["PluginFlyvemdmFile.name"]} reference={el => this.contentDialog = el} />
                 </ContentPane>
             )
         }
