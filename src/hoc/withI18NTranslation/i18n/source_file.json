@@ -31,6 +31,7 @@
   },
   "devices": {
     "title": "Devices",
+    "delete": "Delete Devices",
     "enroll": {
       "title": "Enroll new device",
       "insert_active_email": "Please insert an active email address.",
@@ -154,6 +155,7 @@
     "device": "Device",
     "applications": "Applications",
     "files": "Files",
+    "fleet": "Fleet",
     "fleets": "Fleets",
     "invitations": "Invitations",
     "users": "Users",

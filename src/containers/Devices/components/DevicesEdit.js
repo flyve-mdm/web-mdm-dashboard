@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import EditMultiple from '../../../components/EditMultiple'
+import { I18n } from 'react-i18nify'
 
 export default class DevicesEdit extends Component {
 
@@ -8,7 +9,7 @@ export default class DevicesEdit extends Component {
         super(props)
         this.state = {
             FieldList: [{
-                name: "Fleet",
+                name: I18n.t('commons.fleet'),
                 type: "select",
                 DBName: "plugin_flyvemdm_fleets_id",
                 params: {itemtype: 'PluginFlyvemdmFleet'},
