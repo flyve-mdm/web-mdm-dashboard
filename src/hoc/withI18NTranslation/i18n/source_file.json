@@ -293,6 +293,8 @@
     "ping": "PING",
     "last_contact": "Last contact",
     "last_report": "Last report",
-    "new_file": "New File"
+    "new_file": "New File",
+    "select_an_application": "Select an application",
+    "select_a_file": "Select a file"
   }
 }
