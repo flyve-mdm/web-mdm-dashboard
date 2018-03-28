@@ -70,7 +70,7 @@ class FleetsContent extends Component {
         let tasksNew= {} 
         
         if (this.props.selectedItems.length > 0) {
-            /*
+        /*
          * Get Tasks 
          * */
             tasks = await this.props.glpi.getSubItems({
@@ -666,7 +666,7 @@ class FleetsContent extends Component {
                                 type="text"
                                 className="win-textbox"
                                 style={{fontSize:'34px', fontWeight:'200'}}
-                                placeholder="Fleet name"
+                                placeholder={I18n.t('fleets.input_name')}
                                 name="fleetName"
                                 onChange={this.handleChangeInput}
                                 value={this.state.input}
@@ -677,17 +677,21 @@ class FleetsContent extends Component {
                                 <span
                                     className="saveIcon"
                                     style={{ padding: '10px', fontSize: '20px' }}
-                                    onClick={this.handleSaveFleet} />
+                                    onClick={this.handleSaveFleet} 
+                                />
                                 <span
                                     className="deleteIcon"
                                     style={{ padding: '10px', fontSize: '20px' }}
-                                    onClick={this.handleDeleteFleet} />
+                                    onClick={this.handleDeleteFleet} 
+                                />
                             </div>
                         </div>
                     </div>
                     <div className="separator" />
                     <div className="contentInfo" style={{ padding: '20px' }} >
-                        <h3 className="win-h3" > Tasks per Category </h3>
+                        <h3 className="win-h3" > 
+                            {I18n.t('fleets.tasks_per_Category')} 
+                        </h3>
                         <div style={{ padding: '0 20px' }}>
                             {policiesPerCategory ? (
                                 policiesPerCategory.map((category) => {
@@ -716,7 +720,7 @@ class FleetsContent extends Component {
                                         )
                                         : null
                                 })
-                            ) : <h1>Loading Tasks, Policies and Categories</h1>}
+                            ) : <h1>{I18n.t('fleets.loading_tasks')}</h1>}
                         </div>
                     </div>
                     <Confirmation title={`Delete Fleets`} message={this.props.selectedItems.length + ` Fleets`} reference={el => this.contentDialog = el} />
