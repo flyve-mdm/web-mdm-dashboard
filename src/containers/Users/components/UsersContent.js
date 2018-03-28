@@ -117,22 +117,22 @@ export default class UsersContent extends Component {
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
-                                    <a href={"tel:" + this.state.data.mobile}>Call Mobile</a>
-                                    <div>{this.state.data.mobile}</div>
+                                    <a href={this.state.data.mobile ? "tel:" + this.state.data.mobile : "#"}>Call Mobile</a>
+                                    <div>{this.state.data.mobile ? this.state.data.mobile : "not available"}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
-                                    <a href={"tel:" + this.state.data.phone2}>Call Work</a>
-                                    <div>{this.state.data.phone2}</div>
+                                    <a href={this.state.data.phone2 ? "tel:" + this.state.data.phone2 : "#"}>Call Work</a>
+                                    <div>{this.state.data.phone2 ? this.state.data.phone2 : "not available"}</div>
                                 </div>
                             </li>
                             <li>
                                 <span className="emailIcon" />
                                 <div className="callContent">
-                                    <a href={"mailto:" + this.state.data['User.UserEmail.email']}>Email</a>
-                                    <div>{this.state.data['User.UserEmail.email']}</div>
+                                    <a href={this.state.data['User.UserEmail.email'] ? "mailto:" + this.state.data['User.UserEmail.email'] : "#"}>Email</a>
+                                    <div>{this.state.data['User.UserEmail.email'] ? this.state.data['User.UserEmail.email'] : "not available"}</div>
                                 </div>
                             </li>
                         </ul>
