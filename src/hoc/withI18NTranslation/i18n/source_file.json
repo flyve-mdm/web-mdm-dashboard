@@ -22,6 +22,9 @@
     "close_session": "Close session",
     "are_you_sure_you_want_to_close_your_session?": "Are you sure you want to close your session?"
   },
+  "applications": {
+    "title": "Applications"
+  },
   "about": {
     "system_information": {
       "title": "System information"
