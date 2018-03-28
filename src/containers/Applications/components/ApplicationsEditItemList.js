@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { I18n } from 'react-i18nify'
 
 export default class ApplicationsEditItemList extends Component {
     
@@ -38,7 +39,7 @@ export default class ApplicationsEditItemList extends Component {
                                 type="text"
                                 style={{ width: '240px' }}
                                 className="win-textbox"
-                                placeholder="Fleet name"
+                                placeholder={I18n.t('applications.input_edit_item_list')}
                                 name="input"
                                 value={this.state.input}
                                 onChange={this.changeInput}
