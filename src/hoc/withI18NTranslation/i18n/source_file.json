@@ -47,7 +47,8 @@
       "delete_message": "You are going to delete device"
     },
     "geolocation": {
-      "title": "Geolocation"
+      "title": "Geolocation",
+      "request_current_location": "Request current location"
     },
     "applications": {
       "title": "Applications",
