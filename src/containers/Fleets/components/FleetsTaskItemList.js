@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
 import TasksDeployAppList from './TasksDeployAppList'
 import TasksRemoveAppList from './TasksRemoveAppList'
+import { I18n } from 'react-i18nify'
 
 class FleetsTaskItemList extends Component {
     constructor(props) {
@@ -120,7 +121,9 @@ class FleetsTaskItemList extends Component {
                     <div className='files-list-content'>
                         <div className='files-list-item'>
                             <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                <div className='content-text-primary'>not available</div>
+                                <div className='content-text-primary'>
+                                    {I18n.t('commons.not_available')}
+                                </div>
                             </div>
                             <div className='item-content-secondary'>
                                 <div className='icon item-icon' onClick={this.handleAddedToggle}>
@@ -129,7 +132,8 @@ class FleetsTaskItemList extends Component {
                                         checked={this.state.alreadyAdded}
                                         onChange={() => this.handleAddedToggle}
                                         labelOn=""
-                                        labelOff="" />
+                                        labelOff="" 
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -140,9 +144,7 @@ class FleetsTaskItemList extends Component {
             switch (this.props.data["PluginFlyvemdmPolicy.type"]) {
                 case "bool":
                 let value = this.props.data['PluginFlyvemdmPolicy.default_value']
-                if(typeof(value) !== "boolean") {
-                    value = true
-                }
+                if(typeof(value) !== "boolean") { value = true }
                 return (
                     <div className='files-list fleet-list'>
                         <div className='files-list-content'>
@@ -184,24 +186,25 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
                                         <input 
-                                        type="number"
-                                        className="win-textbox" 
-                                        placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
-                                        name={this.props.data['PluginFlyvemdmPolicy.id']}
-                                        value={this.state.input}
-                                        onChange={this.handleChangeInput}
-                                        onBlur={this.handleBlurInput}
+                                            type="number"
+                                            className="win-textbox" 
+                                            placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
+                                            name={this.props.data['PluginFlyvemdmPolicy.id']}
+                                            value={this.state.input}
+                                            onChange={this.handleChangeInput}
+                                            onBlur={this.handleBlurInput}
                                         />
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
-                                <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                    <ReactWinJS.ToggleSwitch 
-                                        className="content-text-primary"
-                                        checked={this.state.alreadyAdded}
-                                        onChange={() => this.handleAddedToggle}
-                                        labelOn=""
-                                        labelOff="" />
+                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                                        <ReactWinJS.ToggleSwitch 
+                                            className="content-text-primary"
+                                            checked={this.state.alreadyAdded}
+                                            onChange={() => this.handleAddedToggle}
+                                            labelOn=""
+                                            labelOff="" 
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -262,8 +265,11 @@ class FleetsTaskItemList extends Component {
                                         <select
                                         className="win-dropdown" 
                                         name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                        onChange={this.handleChangeInput}>
-                                            <option>Select an application</option>
+                                        value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                        onChange={this.props.changeInput}>
+                                            <option>
+                                                {I18n.t('commons.select_an_application')}
+                                            </option>
                                             {
                                                 this.props.typeData.map((value, index) =>
                                                     <option
@@ -306,10 +312,14 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
                                         <select
-                                            className="win-dropdown"
-                                            name={this.props.data['PluginFlyvemdmPolicy.id']}
-                                            onChange={this.handleChangeInput}>
-                                            <option>Select an application</option>
+                                            className="win-dropdown" 
+                                            name={this.props.data['PluginFlyvemdmPolicy.id']} 
+                                            value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                            onChange={this.props.changeInput}
+                                        >
+                                            <option>
+                                                {I18n.t('commons.select_an_application')}
+                                            </option>
                                             {
                                                 this.props.typeData.map((value, index) =>
                                                     <option
@@ -352,16 +362,20 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
                                         <select 
-                                        className="win-dropdown" 
-                                        name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                        value={this.props.data['PluginFlyvemdmPolicy.default_value']}
-                                        onChange={this.props.changeInput}>
-                                            <option>Select a file</option>
+                                            className="win-dropdown" 
+                                            name={this.props.data['PluginFlyvemdmPolicy.id']} 
+                                            value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                            onChange={this.props.changeInput}
+                                        >
+                                            <option>
+                                                {I18n.t('commons.select_a_file')}
+                                            </option>
                                             {
                                                 this.props.typeData.map(value => 
                                                     <option
-                                                    key={value['PluginFlyvemdmFile.id']}
-                                                    value={value["PluginFlyvemdmFile.id"]}>
+                                                        key={value['PluginFlyvemdmFile.id']}
+                                                        value={value["PluginFlyvemdmFile.id"]}
+                                                    >
                                                         {value["PluginFlyvemdmFile.name"]}
                                                     </option>
                                                 )
@@ -376,7 +390,8 @@ class FleetsTaskItemList extends Component {
                                         checked={this.state.alreadyAdded}
                                         onChange={() => this.handleAddedToggle}
                                         labelOn=""
-                                        labelOff="" />
+                                        labelOff="" 
+                                    />
                                     </div>
                                 </div>
                             </div>
@@ -394,11 +409,14 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
                                         <select 
-                                        className="win-dropdown" 
-                                        name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                        value={this.props.data['PluginFlyvemdmPolicy.default_value']}
-                                        onChange={this.props.changeInput}>
-                                            <option>Select a file</option>
+                                            className="win-dropdown" 
+                                            name={this.props.data['PluginFlyvemdmPolicy.id']} 
+                                            value={this.props.data['PluginFlyvemdmPolicy.default_value']}
+                                            onChange={this.props.changeInput}
+                                        >
+                                            <option>
+                                                {I18n.t('commons.select_a_file')}
+                                            </option>
                                             {
                                                 this.props.typeData.map(value => 
                                                     <option
@@ -413,12 +431,13 @@ class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary '>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                    <ReactWinJS.ToggleSwitch 
-                                        className="content-text-primary"
-                                        checked={this.state.alreadyAdded}
-                                        onChange={() => this.handleAddedToggle}
-                                        labelOn=""
-                                        labelOff="" />
+                                        <ReactWinJS.ToggleSwitch 
+                                            className="content-text-primary"
+                                            checked={this.state.alreadyAdded}
+                                            onChange={() => this.handleAddedToggle}
+                                            labelOn=""
+                                            labelOff="" 
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -431,7 +450,9 @@ class FleetsTaskItemList extends Component {
                         <div className='files-list-content'>
                             <div className='files-list-item'>
                                 <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                    <div className='content-text-primary'>Not available</div>
+                                    <div className='content-text-primary'>
+                                        {I18n.t('commons.not_available')}
+                                    </div>
                                 </div>
                                 <div className='item-content-secondary '>
                                     <div className='icon item-icon'>
