@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import ContentPane from '../../../components/ContentPane'
 import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sections'
+import { I18n } from 'react-i18nify'
 
 export default class DevicesContent extends Component {
 
@@ -25,7 +26,7 @@ export default class DevicesContent extends Component {
         return (
             <ContentPane>
                 <ReactWinJS.Pivot>
-                    <ReactWinJS.Pivot.Item key="main" header="Main">
+                    <ReactWinJS.Pivot.Item key="main" header={I18n.t('devices.main.title')}>
 
                         <Main 
                             id={this.state.id}
@@ -37,7 +38,7 @@ export default class DevicesContent extends Component {
                         />
 
                     </ReactWinJS.Pivot.Item>
-                    <ReactWinJS.Pivot.Item key="systemReport" header="System Report">
+                    <ReactWinJS.Pivot.Item key="systemReport" header={I18n.t('devices.system_report.title')}>
 
                         <SystemReport 
                             id={this.state.id}
@@ -46,7 +47,7 @@ export default class DevicesContent extends Component {
                         />
 
                     </ReactWinJS.Pivot.Item>
-                    <ReactWinJS.Pivot.Item key="applications" header="Applications">
+                    <ReactWinJS.Pivot.Item key="applications" header={I18n.t('devices.applications.title')}>
                         
                         <Applications 
                             id={this.state.id}
@@ -54,14 +55,14 @@ export default class DevicesContent extends Component {
                         />
 
                     </ReactWinJS.Pivot.Item>
-                    <ReactWinJS.Pivot.Item key="geolocation" header="Geolocation">
+                    <ReactWinJS.Pivot.Item key="geolocation" header={I18n.t('devices.geolocation.title')}>
                         <Geolocation 
                             id={this.state.id}
                             setNotification={this.props.setNotification}
                             glpi={this.props.glpi}
                         />
                     </ReactWinJS.Pivot.Item>
-                    <ReactWinJS.Pivot.Item key="dangerZone" header="Danger Zone">
+                    <ReactWinJS.Pivot.Item key="dangerZone" header={I18n.t('devices.danger_zone.title')}>
 
                         <DangerZone 
                             id={this.state.id}

@@ -32,6 +32,21 @@
   "devices": {
     "title": "Devices",
     "delete": "Delete Devices",
+    "danger_zone": {
+      "title": "Danger Zone"
+    },
+    "geolocation": {
+      "title": "Geolocation"
+    },
+    "applications": {
+      "title": "Applications"
+    },
+    "system_report": {
+      "title": "System Report"
+    },
+    "main": {
+      "title": "Main"
+    },    
     "enroll": {
       "title": "Enroll new device",
       "insert_active_email": "Please insert an active email address.",
@@ -153,7 +168,9 @@
     "terms_and_conditions": "Terms and Conditions",
     "devices": "Devices",
     "device": "Device",
+    "application": "Application",
     "applications": "Applications",
+    "file": "File",
     "files": "Files",
     "fleet": "Fleet",
     "fleets": "Fleets",
