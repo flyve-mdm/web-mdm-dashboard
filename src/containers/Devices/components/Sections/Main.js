@@ -151,17 +151,17 @@ export default class Main extends Component {
 
                             <div className="message">
                                 {
-                                    this.state.data["is_online"] === 1 ? 'Online' : 'Offline'
+                                    this.state.data["is_online"] === 1 ? I18n.t('commons.online') : I18n.t('commons.offline')
                                 }
                             </div>
                             <div className="source">
                                 {this.state.data["last_contact"]} 
-                                &nbsp; last contact
+                                &nbsp; {I18n.t('devices.main.last_contact')}
                             </div>   
                             <div style={{overflow: 'auto'}}>
                                 <div>
-                                        <button className="btn --primary" style={{float:'left', marginTop: 5, marginBottom: 5}} onClick={this.ping}>
-                                        PING
+                                    <button className="btn --primary" style={{float:'left', marginTop: 5, marginBottom: 5}} onClick={this.ping}>
+                                        {I18n.t('commons.ping')}
                                     </button>
                                 </div>       
 
@@ -179,13 +179,17 @@ export default class Main extends Component {
                     <ul>
                         <li>
                             <div className="detailContent">
-                                <div className="title">Version</div>
+                                <div className="title">
+                                    {I18n.t('commons.version')}
+                                </div>
                                 <div>{this.state.data["version"]}</div>
                             </div>
                         </li>
                         <li>
                             <div className="detailContent">
-                                <div className="title">Type</div>
+                                <div className="title">
+                                    {I18n.t('commons.type')}
+                                </div>
                                 <div>{this.state.data["mdm_type"]}</div>
                             </div>
                         </li>
@@ -193,7 +197,7 @@ export default class Main extends Component {
                 </div>
                 
                 <Confirmation 
-                    title="Delete devices" 
+                    title={I18n.t('devices.delete')}
                     message={this.state.data["name"]} 
                     reference={el => this.contentDialog = el} 
                 /> 
