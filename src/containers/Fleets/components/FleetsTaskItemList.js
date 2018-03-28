@@ -163,12 +163,13 @@ class FleetsTaskItemList extends Component {
                                 </div>
                                 <div className='item-content-secondary'>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                    <ReactWinJS.ToggleSwitch 
-                                        className="content-text-primary"
-                                        checked={this.state.alreadyAdded}
-                                        onChange={() => this.handleAddedToggle}
-                                        labelOn=""
-                                        labelOff="" />
+                                        <ReactWinJS.ToggleSwitch 
+                                            className="content-text-primary"
+                                            checked={this.state.alreadyAdded}
+                                            onChange={() => this.handleAddedToggle}
+                                            labelOn=""
+                                            labelOff="" 
+                                        />
                                     </div>
                                 </div>
                             </div>

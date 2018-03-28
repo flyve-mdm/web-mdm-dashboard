@@ -87,8 +87,9 @@
     "license": {
       "title": "License"
     },
-    "fleet": {
-      "add": "Add Fleet"
+    "fleets": {
+      "add": "Add Fleet",
+      "delete": "Delete Fleets"
     },
     "overview": {
       "title": "Overview",
