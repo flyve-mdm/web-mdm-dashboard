@@ -70,13 +70,15 @@ class FleetsTaskItemList extends Component {
             case 'deployapp':
                 this.props.updateValueTask(this.props.data, this.state.input)
                 break;
+            case 'removeapp':
+                this.props.updateValueTask(this.props.data, this.state.input)
+                break;
             default:
                 break;
         }
     }
 
     handleChangeInput = (e) => {
-        console.log(e.target.value)
         this.setState({ input: e.target.value })
     }
 
@@ -221,7 +223,6 @@ class FleetsTaskItemList extends Component {
                     </div>
                 )
                 case "deployapp":
-                    console.log(this.props.typeData)
                 return (
                     <div className='files-list fleet-list'>
                         <div className='files-list-content'>
@@ -274,22 +275,16 @@ class FleetsTaskItemList extends Component {
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
-                                        <select
-                                        className="win-dropdown" 
-                                        name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                        value={this.props.data['PluginFlyvemdmPolicy.default_value']}
-                                        onChange={this.props.changeInput}>
-                                            <option>Select an application</option>
-                                            {
-                                                this.props.typeData.map((value, index) =>
-                                                    <option
-                                                    key={value['PluginFlyvemdmPackage.id']}
-                                                    value={value["PluginFlyvemdmPackage.id"]}>
-                                                        {value["PluginFlyvemdmPackage.alias"]}
-                                                    </option>
-                                                )
-                                            }
-                                        </select>
+                                        <input
+                                            type="text"
+                                            className="win-textbox"
+                                            style={{ maxWidth: '368px'}}
+                                            placeholder="Package name"
+                                            name={this.props.data['PluginFlyvemdmPolicy.id']}
+                                            value={this.state.input}
+                                            onChange={this.handleChangeInput}
+                                            onBlur={this.handleBlurInput}
+                                        />
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
