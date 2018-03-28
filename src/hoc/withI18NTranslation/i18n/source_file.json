@@ -19,6 +19,24 @@
     "title": "Search Engine",
     "itemType_not_found": "ItemType not found"
   },
+  "settings": {
+    "display": {
+      "title": "Display",
+      "show": "Show in dashboard",
+      "change_interface": "Change interface language",
+      "disable_animations": "Disable animations",
+      "enable_animations": "Enable animations",
+      "devices_managed": "Devices currently",
+      "fleets_managed": "Fleets currently",
+      "files_uploaded": "Files uploaded",
+      "applications_uploaded": "Applications uploaded",
+      "users": "Number of users",
+      "invitations_sent": "Invitations sent",
+      "pending_invitations": "Pending invitations",
+      "devices_by_users": "Devices by users",
+      "devices_by_system": "Devices by Operating System version"
+    }
+  },
   "create_account": {
     "create_account": "Create account",
     "enter_the_code_from_the_image": "Enter the code from the image",
@@ -286,7 +304,6 @@
     "modified": "Modified",
     "logout": "Logout",
     "language": "Language",
-    "animations": "Animations",
     "passwords_do_not_match": "Passwords do not match",
     "call_mobile": "Call Mobile",
     "call_work": "Call Work",
@@ -318,6 +335,11 @@
     "less_than": "Less than",
     "more_than": "More than",
     "under": "Under",
-    "not_under": "Not under"
+    "not_under": "Not under",
+    "english": "English",
+    "portuguese": "Portuguese",
+    "french": "French",
+    "spain": "Spain",
+    "animations": "Animations"
   }
 }
