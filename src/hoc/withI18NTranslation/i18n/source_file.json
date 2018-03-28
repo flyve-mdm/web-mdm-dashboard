@@ -10,6 +10,10 @@
     "enter_the_password_for": "Enter the password for",
     "forgot_my_password": "Forgot my password"
   },
+  "invitations": {
+    "pending": "Pending Invitation",
+    "no_logs": "No logs Available"
+  },
   "create_account": {
     "create_account": "Create account",
     "enter_the_code_from_the_image": "Enter the code from the image",

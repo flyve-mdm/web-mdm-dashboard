@@ -5,6 +5,7 @@ import WinJS from 'winjs'
 import EmptyMessage from '../../../components/EmptyMessage'
 import ContentPane from '../../../components/ContentPane'
 import Loader from '../../../components/Loader'
+import { I18n } from 'react-i18nify'
 
 class InvitationsPendingPage extends Component {
 
@@ -71,7 +72,9 @@ class InvitationsPendingPage extends Component {
             <ContentPane>
                 <div className="listPane" style={{ padding: 0 }}>
                     <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" >Pending Invitation</h2>
+                        <h2 className="win-h2 titleContentPane" >
+                            {I18n.t('invitations.pending')}
+                        </h2>
                     </div>
                     <Loader count={1} />
                 </div>
@@ -83,7 +86,9 @@ class InvitationsPendingPage extends Component {
                 <ContentPane>
                     <div className="listPane" style={{ padding: 0 }}>
                         <div className="contentHeader">
-                            <h2 className="win-h2 titleContentPane" >Pending Invitation</h2>
+                            <h2 className="win-h2 titleContentPane">
+                                {I18n.t('invitations.pending')}
+                            </h2>
                         </div>
                         <ReactWinJS.ListView
                             ref={(listView) => { this.listView = listView }}
@@ -100,7 +105,7 @@ class InvitationsPendingPage extends Component {
             )
         } else if (!this.state.isLoading && this.state.itemList.length === 0) {
             listComponent = (
-                <EmptyMessage message="No Logs Available"/>
+                <EmptyMessage message={I18n.t('invitations.no_logs')}/>
             )
         }
 
