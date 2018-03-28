@@ -108,10 +108,12 @@ export default class ApplicationsEdit extends Component {
                 return (
                     <ContentPane>
                         <div className="contentHeader">
-                            <h2 className="win-h2 titleContentPane" > Edit application</h2>
+                            <h2 className="win-h2 titleContentPane"> 
+                                {I18n.t('applications.edit')} 
+                            </h2>
                             <button className="btn --primary" onClick={this.handleSaveFiles}>
-                                Save
-                        </button>
+                                {I18n.t('commons.save')}
+                            </button>
                         </div>
                         <div className="separator" />
                         {renderComponent}
