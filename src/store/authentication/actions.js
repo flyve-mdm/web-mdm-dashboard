@@ -169,6 +169,12 @@ export const fetchSignUp = (data) => {
 export const fetchRecoverPassword = () => {
   return dispatch => { // TODO: Create this
     dispatch(uiTransactionStart())
+    dispatch(uiTransactionFinish())
+    dispatch(changeNotificationMessage({
+      title: config.APP_NAME,
+      body: 'feature not available',
+      type: 'warning'
+    }))
   }
 }
 
