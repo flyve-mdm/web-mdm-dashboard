@@ -33,7 +33,18 @@
     "title": "Devices",
     "delete": "Delete Devices",
     "danger_zone": {
-      "title": "Danger Zone"
+      "title": "Danger Zone",
+      "wipe": "Wipe Device",
+      "wipe_description": "Wipe will delete all data on the device",
+      "last_warning": "This is the last warning",
+      "last_warning_message": "You're about to wipe the device. Are you really certain ? (the device is going to delete all its data next time it turns on)",
+      "unenrollment": "Unenrollment Device",
+      "unenrollment_description": "Unenrollment will change the state of the device (policies are unapplied, deployed files and app will be removed)",
+      "unenroll_device": "Unenroll device",
+      "going_to_unenroll": "You are going to unenroll device",
+      "delete": "Delete Device",
+      "delete_description": "Once you delete a device, there is no going back. Please be certain",
+      "delete_message": "You are going to delete device"
     },
     "geolocation": {
       "title": "Geolocation"
@@ -264,6 +275,8 @@
     "hours_ago": "Hours ago",
     "Spain": "Spain",
     "feedback": "Feedback",
-    "article": "Article"
+    "article": "Article",
+    "wipe": "Wipe",
+    "unenroll": "Unenroll"
   }
 }
