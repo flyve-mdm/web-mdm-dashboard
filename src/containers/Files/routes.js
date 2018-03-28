@@ -13,25 +13,25 @@ const routes = [
     },
     {
         path: '/add',
-        name: 'Add',
+        name: I18n.t('commons.add'),
         component: FilesAdd,
         exact: true
     },
     {
         path: '/edit',
-        name: 'Edit',
+        name: I18n.t('commons.edit'),
         component: FilesEdit,
         exact: true
     },
     {
         path: '/:id/edit',
-        name: 'Edit one',
+        name: I18n.t('commons.edit_one'),
         component: FilesEdit,
         exact: true
     },
     {
         path: '/:id',
-        name: 'Selected',
+        name: I18n.t('commons.selected'),
         component: FilesContent,
         exact: false
     }
