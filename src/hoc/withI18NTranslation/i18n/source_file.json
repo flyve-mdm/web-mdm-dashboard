@@ -39,7 +39,11 @@
       "title": "Geolocation"
     },
     "applications": {
-      "title": "Applications"
+      "title": "Applications",
+      "empty_message": "No Applications Available",
+      "id": "Application ID",
+      "version": "Name version",
+      "category": "Category"
     },
     "system_report": {
       "title": "System Report"
