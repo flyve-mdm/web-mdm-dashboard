@@ -15,6 +15,10 @@
     "no_logs": "No logs Available",
     "delete": "Delete Invitations"
   },
+  "search_engine": {
+    "title": "Search Engine",
+    "itemType_not_found": "ItemType not found"
+  },
   "create_account": {
     "create_account": "Create account",
     "enter_the_code_from_the_image": "Enter the code from the image",
@@ -305,6 +309,15 @@
     "new_file": "New File",
     "select_an_application": "Select an application",
     "select_a_file": "Select a file",
-    "no_data": "No data"
+    "no_data": "No data",
+    "itemtype": "Itemtype",
+    "search": "Search",
+    "contains": "Contains",
+    "equals": "Equals",
+    "not_equals": "Not equals",
+    "less_than": "Less than",
+    "more_than": "More than",
+    "under": "Under",
+    "not_under": "Not under"
   }
 }
