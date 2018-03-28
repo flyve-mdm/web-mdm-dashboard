@@ -243,7 +243,7 @@ class FleetsTaskItemList extends Component {
                                                 this.props.typeData.map((value, index) =>
                                                     <option
                                                         key={`${value['id']}_${index}`}
-                                                        value={value['package_name']}>
+                                                        value={value['id']}>
                                                         {value["alias"]}
                                                     </option>
                                                 )
