@@ -12,13 +12,13 @@ const routes = [
   },
   {
     path: '/add',
-    name: 'Add',
+    name: I18n.t('commons.add'),
     component: Enroll,
     exact: true
   },
   {
     path: '/:id',
-    name: 'Selected',
+    name: I18n.t('commons.selected'),
     component: InvitationsPendingPage,
     exact: true
   }
