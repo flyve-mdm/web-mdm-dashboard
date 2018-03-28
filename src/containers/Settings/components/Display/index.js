@@ -23,7 +23,6 @@ class Display extends Component {
         const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
 
         this.state = {
-            maximumManagedDevices: display.maximumManagedDevices !== undefined ? display.maximumManagedDevices : true,
             applicationsUploaded: display.applicationsUploaded !== undefined ? display.applicationsUploaded : true,
             devicesByOperatingSystemVersion: display.devicesByOperatingSystemVersion !== undefined ? display.devicesByOperatingSystemVersion : true,
             devicesByUsers: display.devicesByUsers !== undefined ? display.devicesByUsers : true,
@@ -32,28 +31,23 @@ class Display extends Component {
             fleetsCurrentlyManaged: display.fleetsCurrentlyManaged !== undefined ? display.fleetsCurrentlyManaged : true,
             invitationsSent: display.invitationsSent !== undefined ? display.invitationsSent: true,
             numberUsers: display.numberUsers !== undefined ? display.numberUsers: true,
-            animations: display.animations !== undefined ? display.animations : true 
+            animations: display.animations !== undefined ? display.animations : true,
+            pendingInvitations: display.pendingInvitations !== undefined ? display.pendingInvitations: true,
         }
     }
 
     changeLocalStorage = (name) => {
-        let display = localStorage.getItem('display') ? localStorage.getItem('display') : '{}'
-        display = JSON.parse(display)
-
-        display = { 
-            ...display, 
-            [name]: !display[name]
-        }
-
         this.setState({
             [name]: !this.state[name]
         })
 
-        localStorage.setItem('display', JSON.stringify(display))
-
         if (name === 'animations') {
             this.props.actions.uiToggleAnimation()
         }
+    }
+
+    componentDidUpdate  (){
+        localStorage.setItem('display', JSON.stringify(this.state))
     }
 
     render () {
@@ -61,22 +55,24 @@ class Display extends Component {
             <div>
                 <h2 style={{marginBottom: '20px'}}>Supervision</h2>
 
-                <div className="win-h3"> Language </div>
+                <div className="title"> Language </div>
 
                 <div className="listElement">
                     <div className="message">
                         Change interface language
                     </div>
                     <div 
-                    className="controller" 
-                    style={{
-                        paddingTop: 10
-                    }}>
+                        className="controller" 
+                        style={{
+                            paddingTop: 10
+                        }}
+                    >
                         <span className='language__span btn' style={{margin: 0}}>
                             {I18n.t('commons.language')}
-                            <select className='language__select' onChange={
-                                event => this.props.actions.changeLanguage(event.target.value)
-                            }>
+                            <select 
+                                className='language__select' 
+                                onChange={event => this.props.actions.changeLanguage(event.target.value)}
+                            >
                                 <option value='en_GB'>English</option>
                                 <option value='pt_BR'>Portuguese</option>
                                 <option value='fr_FR'>French</option>
@@ -86,7 +82,7 @@ class Display extends Component {
                     </div>
                 </div>
 
-                <div className="win-h3"> Animations </div>
+                <div className="title"> Animations </div>
 
                     <div className="listElement">
                         <div className="message">
@@ -94,38 +90,25 @@ class Display extends Component {
                         </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch
-                        className="content-text-primary"
+                            className="content-text-primary"
                             checked={this.state.animations}
                             onChange={() => this.changeLocalStorage('animations')}
                         />
                     </div>
                 </div>
                                         
-                <div className="win-h3">Show in dashboard </div>
-
-                <div className="listElement">
-                    <div className="message">
-                        Maximum managed devices
-                    </div>
-                    <div className="controller">
-                        <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
-                            checked={this.state.maximumManagedDevices}
-                            onChange={() => this.changeLocalStorage('maximumManagedDevices')}
-                            />
-                    </div>
-                </div>
+                <div className="title">Show in dashboard </div>
                 
                 <div className="listElement">
                     <div className="message">
                         Devices currently managed
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.devicesCurrentlyManaged}
-                                onChange={() => this.changeLocalStorage('devicesCurrentlyManaged')}
-                                />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.devicesCurrentlyManaged}
+                            onChange={() => this.changeLocalStorage('devicesCurrentlyManaged')}
+                        />
                     </div>
                 </div>
                 
@@ -134,11 +117,11 @@ class Display extends Component {
                         Fleets currently managed
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.fleetsCurrentlyManaged}
-                                onChange={() => this.changeLocalStorage('fleetsCurrentlyManaged')}
-                                />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.fleetsCurrentlyManaged}
+                            onChange={() => this.changeLocalStorage('fleetsCurrentlyManaged')}
+                        />
                     </div>
                 </div>
                 
@@ -147,11 +130,11 @@ class Display extends Component {
                         Files uploaded
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.filesUploaded}
-                                onChange={() => this.changeLocalStorage('filesUploaded')}
-                                />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.filesUploaded}
+                            onChange={() => this.changeLocalStorage('filesUploaded')}
+                        />
                     </div>
                 </div>
                 
@@ -160,11 +143,11 @@ class Display extends Component {
                         Applications uploaded   
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.applicationsUploaded}
-                                onChange={() => this.changeLocalStorage('applicationsUploaded')}
-                                />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.applicationsUploaded}
+                            onChange={() => this.changeLocalStorage('applicationsUploaded')}
+                        />
                     </div>
                 </div>
                 
@@ -173,11 +156,11 @@ class Display extends Component {
                         Number of users
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.numberUsers}
-                                onChange={() => this.changeLocalStorage('numberUsers')}
-                                />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.numberUsers}
+                            onChange={() => this.changeLocalStorage('numberUsers')}
+                        />
                     </div>
                 </div>
                 
@@ -186,11 +169,24 @@ class Display extends Component {
                         Invitations sent
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.invitationsSent}
-                                onChange={() => this.changeLocalStorage('invitationsSent')}
-                                />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.invitationsSent}
+                            onChange={() => this.changeLocalStorage('invitationsSent')}
+                        />
+                    </div>
+                </div>
+
+                <div className="listElement">
+                    <div className="message">
+                        Pending invitations
+                    </div>
+                    <div className="controller">
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.pendingInvitations}
+                            onChange={() => this.changeLocalStorage('pendingInvitations')}
+                        />
                     </div>
                 </div>
                 
@@ -199,11 +195,11 @@ class Display extends Component {
                         Devices by users
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.devicesByUsers}
-                                onChange={() => this.changeLocalStorage('devicesByUsers')}
-                                />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.devicesByUsers}
+                            onChange={() => this.changeLocalStorage('devicesByUsers')}
+                        />
                     </div>
                 </div>
                 
@@ -212,11 +208,11 @@ class Display extends Component {
                         Devices by Operating System version
                     </div>
                     <div className="controller">
-                            <ReactWinJS.ToggleSwitch 
-                                className="content-text-primary"
-                                checked={this.state.devicesByOperatingSystemVersion}
-                                onChange={() => this.changeLocalStorage('devicesByOperatingSystemVersion')}
-                                />
+                        <ReactWinJS.ToggleSwitch 
+                            className="content-text-primary"
+                            checked={this.state.devicesByOperatingSystemVersion}
+                            onChange={() => this.changeLocalStorage('devicesByOperatingSystemVersion')}
+                        />
                     </div>
                 </div>
                 

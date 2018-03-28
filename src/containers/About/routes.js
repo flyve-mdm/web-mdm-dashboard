@@ -1,5 +1,5 @@
 import { I18n } from 'react-i18nify'
-
+import EmptyMessage from '../../components/EmptyMessage'
 import Overview from './components/Overview/'
 import SystemInformation from './components/SystemInformation/'
 import HelpCenter from './components/HelpCenter/'
@@ -11,6 +11,12 @@ import Licence from './components/License'
 const routes = [
   {
     path: '/',
+    name: 'No selected',
+    component: EmptyMessage,
+    exact: true
+  },
+  {
+    path: '/overview',
     name: I18n.t('about.overview'),
     component: Overview,
     exact: true

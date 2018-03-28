@@ -1,0 +1,107 @@
+.files-list {
+    padding: 20px 5px;
+    display: table;
+    width: 100%;
+    border: 0;
+
+    .files-list-content {
+        display: table-row-group;
+        
+        .files-list-item {
+            display: table-row;
+
+            .item-icon {
+                cursor: pointer;
+                display: table-cell;
+                float: left;
+                width: $list-item-icon-size;
+                height: $list-item-icon-size;
+
+                span {
+                    font-size: 32px;
+                    text-align: center;
+                    cursor: pointer;
+                }
+            }
+
+            .item-content-primary {
+                display: table-cell;
+                padding-right: 10px;
+                vertical-align: top;
+                text-align: left;
+                width: 100%;
+
+                &.deactive {
+                
+                    .content-text-primary {
+                        color: rgba(156, 156, 156, 0.726);
+                    }       
+                }
+            }
+
+            .item-content-secondary {
+                position: relative;
+
+                .item-icon {
+                    &.--fleets {
+                        width: 48px;
+                        position: absolute;
+                        right: 0;
+                        
+                        .win-toggleswitch-header {
+                            margin-bottom: 0;
+                            margin-top: 0;
+                        }
+                    }
+                }
+            }
+
+            .content-text-primary {
+                font-weight: 700;
+            }
+
+            .content-text-secondary {
+                font-size: 13px;
+                line-height: 16px;
+                font-weight: 400;
+                color: $text-detail-color;
+            }
+        }
+    }
+
+    &.fleet-list {
+        padding: 10px 5px;
+
+        .item-content-primary {
+            .content-text-primary {
+                text-transform: capitalize;
+            }
+
+            .item-list-field {
+                transition: opacity 1s ease-out;
+                opacity: 0; 
+                height: 0;
+                overflow: hidden;
+
+                &.active {
+                    opacity: 1;
+                    height: auto;
+
+                    > input.win-textbox {
+                        width: 38%;
+                    }
+                }
+
+                &.checkbox.active {
+                    display: inline-block;
+                    margin-top: 20px;
+
+                    > span {
+                        cursor: pointer;
+                        font-size: 2em;
+                    }
+                }
+            }
+        }        
+    }
+}

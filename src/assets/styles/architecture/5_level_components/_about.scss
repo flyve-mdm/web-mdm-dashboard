@@ -71,6 +71,7 @@
 
 .aboutPane {
     padding-top: 10px;
+    height: 100%;
 }
 
 .itemList {
@@ -104,4 +105,9 @@
     background: #9e9e9e;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.date {
+    font-size: 13px;
+    color: gray;
 }

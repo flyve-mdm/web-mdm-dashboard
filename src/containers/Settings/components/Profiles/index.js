@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import validateData from '../../../../shared/validateData'
-import IconItemList from '../../../../AdminDashboard/IconItemList'
+import IconItemList from '../../../../components/IconItemList'
 import { usersScheme } from '../../../../components/Forms/Schemas'
 import Loading from '../../../../components/Loading'
 import authtype from '../../../../shared/authtype'

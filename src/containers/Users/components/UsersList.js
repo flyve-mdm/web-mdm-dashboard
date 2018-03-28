@@ -34,6 +34,9 @@ export default class UsersList extends Component {
         if(this.listView && !this.state.scrolling) {
             this.listView.winControl.footer.style.height = '1px'
         }
+        if (this.toolBar) {
+            this.toolBar.winControl.forceLayout();
+        }
 
         if (this.props.action === "reload") {
             this.handleRefresh()
@@ -287,7 +290,7 @@ export default class UsersList extends Component {
 
         return (
             <React.Fragment>
-                <ReactWinJS.ToolBar className="listToolBar">
+                <ReactWinJS.ToolBar ref={(toolBar) => { this.toolBar = toolBar }} className="listToolBar">
                     <ReactWinJS.ToolBar.Button
                         key="sort"
                         icon="sort"
