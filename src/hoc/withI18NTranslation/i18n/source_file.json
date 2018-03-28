@@ -12,7 +12,8 @@
   },
   "invitations": {
     "pending": "Pending Invitation",
-    "no_logs": "No logs Available"
+    "no_logs": "No logs Available",
+    "delete": "Delete Invitations"
   },
   "create_account": {
     "create_account": "Create account",
