@@ -74,27 +74,27 @@ export default class DevicesEditOne extends Component {
             plugin_flyvemdm_fleets_id: this.state.fleet.value
         }
         this.props.glpi.updateItem({itemtype: 'PluginFlyvemdmAgent', id: this.state.id, input})
-        .then(() => {
-            this.props.setNotification({
-                title: 'Successfully',
-                body: 'changes saved successfully',
-                type: 'success'
-            })
-            this.props.changeAction('reload')
-            this.props.changeSelectionMode(false)
-        })
-        .catch((error) => {
-            this.setState({
-                isLoading: false
-            })
-            if(error.length > 1) {
+            .then(() => {
                 this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
+                    title: 'Successfully',
+                    body: 'changes saved successfully',
+                    type: 'success'
                 })
-            }
-        })
+                this.props.changeAction('reload')
+                this.props.changeSelectionMode(false)
+            })
+            .catch((error) => {
+                this.setState({
+                    isLoading: false
+                })
+                if(error.length > 1) {
+                    this.props.setNotification({
+                        title: error[0],
+                        body: error[1],
+                        type: 'alert'
+                    })
+                }
+            })
     }
     
     render() {
@@ -118,7 +118,7 @@ export default class DevicesEditOne extends Component {
                     <ContentPane>
                         <div className="contentHeader">
                             <button className="btn --primary" onClick={this.handleSaveOneDevices}>
-                                Save
+                                {I18n.t('commons.save')}
                             </button>
                         </div>
                         <div className="separator" />
