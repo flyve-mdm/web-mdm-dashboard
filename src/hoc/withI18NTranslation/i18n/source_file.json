@@ -281,6 +281,8 @@
     "article": "Article",
     "wipe": "Wipe",
     "unenroll": "Unenroll",
-    "ping": "PING"
+    "ping": "PING",
+    "last_contact": "Last contact",
+    "last_report": "Last report"
   }
 }
