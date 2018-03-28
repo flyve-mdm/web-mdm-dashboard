@@ -67,13 +67,16 @@ class FleetsTaskItemList extends Component {
             case 'int':
                 this.props.updateValueTask(this.props.data, this.state.input)
                 break;
-        
+            case 'deployapp':
+                this.props.updateValueTask(this.props.data, this.state.input)
+                break;
             default:
                 break;
         }
     }
 
     handleChangeInput = (e) => {
+        console.log(e.target.value)
         this.setState({ input: e.target.value })
     }
 
@@ -218,6 +221,7 @@ class FleetsTaskItemList extends Component {
                     </div>
                 )
                 case "deployapp":
+                    console.log(this.props.typeData)
                 return (
                     <div className='files-list fleet-list'>
                         <div className='files-list-content'>
@@ -230,15 +234,16 @@ class FleetsTaskItemList extends Component {
                                         <select
                                         className="win-dropdown" 
                                         name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                        value={this.props.data['PluginFlyvemdmPolicy.default_value']}
-                                        onChange={this.props.changeInput}>
+                                        value={this.state.input}
+                                        onChange={this.handleChangeInput}
+                                        onBlur={this.handleBlurInput}>
                                             <option>Select an application</option>
                                             {
                                                 this.props.typeData.map((value, index) =>
                                                     <option
-                                                    key={value['PluginFlyvemdmPackage.id']}
-                                                    value={value["PluginFlyvemdmPackage.id"]}>
-                                                        {value["PluginFlyvemdmPackage.alias"]}
+                                                        key={`${value['id']}_${index}`}
+                                                        value={value['package_name']}>
+                                                        {value["alias"]}
                                                     </option>
                                                 )
                                             }
