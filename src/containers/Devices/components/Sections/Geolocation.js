@@ -92,10 +92,10 @@ export default class Geolocation extends Component {
                         <Map markers={this.state.showLocations}/>
 
                         <button className="btn --primary" style={{margin: 5}} onClick={this.requestLocation}>
-                            Request current location
+                            {I18n.t('devices.geolocation.request_current_location')}
                         </button>
 
-                        <GeolocationList locations={this.state.locations} showLocations={this.showLocations} />
+                        <GeolocationList locations={this.state.locations} showLocations={this.showLocations}/>
                     </React.Fragment>
                 )
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { I18n } from "react-i18nify"
 
 class GeolocationList extends Component {
     render() {
@@ -19,7 +20,7 @@ class GeolocationList extends Component {
         } else {
             renderList = (
                 <p style={{ color: 'grey', marginLeft: 5 }}> 
-                    No locations available
+                    {I18n.t('devices.geolocation.no_locations')}
                 </p>
             )
         }
