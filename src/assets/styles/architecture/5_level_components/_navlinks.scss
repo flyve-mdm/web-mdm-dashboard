@@ -27,3 +27,7 @@ $nav-width: 320px;
     }
   }
 }
+
+.navlinks--animate {
+  @include animation('slide-up 0.1s')  
+}

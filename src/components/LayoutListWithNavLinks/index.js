@@ -7,10 +7,12 @@ import calc100PercentMinus from '../../shared/calc100PercentMinus'
 class ListWithNavLinks extends Component {
     constructor(props) {
         super(props)
+        const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
         this.state = {
             mode: getMode(),
             itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
-            styleNav: this.styleNav(getMode(), this.props.history)
+            styleNav: this.styleNav(getMode(), this.props.history),
+            animate: display.animations ? "navlinks--animate": ""
         }
     }
 
@@ -57,7 +59,7 @@ class ListWithNavLinks extends Component {
     render () {
         return (
             <div className="flex-block --with-scroll --with-content-pane">
-                <nav style={this.state.styleNav} className="flex-block-list navlinks">
+                <nav style={this.state.styleNav} className={`flex-block-list navlinks ${this.state.animate}`}>
                     <ul>
                         {this.props.routes.map((route, i) => {
                             if (route.path !== "/") {

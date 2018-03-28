@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { uiToggleAnimation } from '../../../../store/ui/actions'
+import animations from '../../../../shared/animations'
 import { changeLanguage } from '../../../../store/i18n/actions'
 import { I18n } from 'react-i18nify'
+import ContentPane from '../../../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        uiToggleAnimation: bindActionCreators(uiToggleAnimation, dispatch),
         changeLanguage: bindActionCreators(changeLanguage, dispatch) 
     }
     return { actions }
@@ -42,7 +42,7 @@ class Display extends Component {
         })
 
         if (name === 'animations') {
-            this.props.actions.uiToggleAnimation()
+            animations()
         }
     }
 
@@ -52,7 +52,7 @@ class Display extends Component {
 
     render () {
         return (
-            <div>
+            <ContentPane>
                 <h2 style={{marginBottom: '20px'}}>Supervision</h2>
 
                 <div className="title"> Language </div>
@@ -216,7 +216,7 @@ class Display extends Component {
                     </div>
                 </div>
                 
-            </div>
+            </ContentPane>
         )
     }
 }

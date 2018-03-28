@@ -1,8 +1,9 @@
 import React from 'react'
 import { I18n } from 'react-i18nify'
+import ContentPane from '../../../../components/ContentPane'
 
 const Contact = () => (
-    <div>
+    <ContentPane>
         <h2>Contact</h2>
         <div className="aboutPane">
             <img src="/images/logo-teclib.png" alt="Teclib" />
@@ -36,7 +37,7 @@ const Contact = () => (
                 </ul>
             </div>
         </div>
-    </div>
+    </ContentPane>
 )
 
 export default Contact;

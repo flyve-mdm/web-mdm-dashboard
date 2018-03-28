@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import WinJS from 'winjs'
 
 class ContentPane extends Component {
 
-  componentDidUpdate() {
-    if (this.props.updateAnimation) {
-      this.handleAnimation()
+  constructor(props) {
+    super(props)
+    const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
+    this.state = {
+      updateAnimation: display.animations,
+      animate: display.animations ? "content-pane--animate": ""
     }
   }
 
@@ -15,33 +16,28 @@ class ContentPane extends Component {
   }
 
   handleAnimation = () => {
-    WinJS.UI.Animation.enterContent(document.getElementById('content-pane-block'), {
-      top: '0px', 
-      left: '30px', 
-      rtlflip: true 
-    }, {
-      mechanism: "transition" 
-    })
+    if (this.state.updateAnimation) {
+      this.setState({
+        animate: "content-pane--animate"
+      }, () => {
+        setTimeout(() => {
+          this.setState({
+            animate: ""
+          })
+        }, 2000)
+      })
+    }
   }
 
   render() {
     return (
-      <div className="content-pane">
+      <div className={`content-pane ${this.state.animate}`}>
         <div id="content-pane-block" className="content-pane-block">
         { this.props.children }
         </div>
       </div>
-      
     )
   }
-}
-
-ContentPane.propTypes = {
-  updateAnimation: PropTypes.bool,
-}
-
-ContentPane.defaultProps = {
-  updateAnimation: false,
 }
 
 export default ContentPane

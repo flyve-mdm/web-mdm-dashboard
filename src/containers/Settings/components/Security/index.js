@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
 import Confirmation from '../../../../components/Confirmation'
 import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
@@ -9,6 +8,7 @@ import { bindActionCreators } from 'redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { connect } from 'react-redux'
 import { fetchPasswordConfiguration } from '../../../../store/authentication/actions';
+import ContentPane from '../../../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -177,7 +177,7 @@ class Security extends Component {
         switch (this.state.mode) {
             case 'Change password':
                 return (
-                    <div>
+                    <ContentPane>
                         <h2 className="win-h2"> {this.state.mode} </h2>
 
                         <form className="list-content" onSubmit={this.savePassword}>
@@ -200,11 +200,11 @@ class Security extends Component {
 
                         </form>
 
-                    </div>
+                    </ContentPane>
                 )
             default:
                 return (
-                    <div>
+                    <ContentPane>
                         <h2 style={{marginBottom: '20px'}}>Security</h2>
                         
                         <div className="listElement">
@@ -266,7 +266,7 @@ class Security extends Component {
                             message="Are you certain to delete the account?"
                             reference={el => this.deleteAccount = el} 
                         />
-                    </div>            
+                    </ContentPane>            
                 )
         }
     }

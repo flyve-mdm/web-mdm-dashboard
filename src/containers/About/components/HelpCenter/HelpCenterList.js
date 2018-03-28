@@ -8,6 +8,7 @@ import Loading from "../../../../components/Loading"
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import ContentPane from '../../../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -130,7 +131,7 @@ class HelpCenterList extends Component {
             this.state.isLoading ? 
                 <div style={{height: "100%", marginTop: "-80px"}}><Loading message="Loading..." /></div> : 
                 (   
-                    <React.Fragment>
+                    <ContentPane>
                         <h2>Help Center</h2>
                         <br />
                         <div className="listPane" style={{ padding: 0 }}>
@@ -203,7 +204,7 @@ class HelpCenterList extends Component {
                                 { I18n.t('about.help_center_STRINGS.send_feedback') }
                             </div>
                         </div>
-                    </React.Fragment>
+                    </ContentPane>
                 )
         )
     }
