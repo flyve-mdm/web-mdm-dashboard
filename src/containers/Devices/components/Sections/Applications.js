@@ -5,6 +5,7 @@ import WinJS from 'winjs'
 import EmptyMessage from '../../../../components/EmptyMessage'
 import ContentPane from '../../../../components/ContentPane'
 import Loader from '../../../../components/Loader'
+import { I18n } from 'react-i18nify'
 
 export default class Applications extends Component {
 
@@ -98,9 +99,9 @@ export default class Applications extends Component {
         const headerComponent = (
             <React.Fragment>
                 <div style={stylesHeader}>#</div>
-                <div style={stylesHeader}>Application ID</div>
-                <div style={stylesHeader}>Name version</div>
-                <div style={stylesHeader}>Category</div>
+                <div style={stylesHeader}>{I18n.t('devices.applications.id')}</div>
+                <div style={stylesHeader}>{I18n.t('devices.applications.version')}</div>
+                <div style={stylesHeader}>{I18n.t('devices.applications.category')}</div>
             </React.Fragment>
         )
 
@@ -123,7 +124,7 @@ export default class Applications extends Component {
             )
         } else if (!this.state.isLoading && this.state.itemList.length === 0) {
             listComponent = (
-                <EmptyMessage message="No Applications Available" />
+                <EmptyMessage message={I18n.t('devices.applications.empty_message')} />
             )
         }
 
