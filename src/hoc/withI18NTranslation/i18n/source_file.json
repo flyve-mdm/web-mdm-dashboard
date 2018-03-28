@@ -77,6 +77,13 @@
     "delete_message": "files",
     "input_name": "File name"
   },
+  "fleets": {
+    "add": "Add Fleet",
+    "input_name": "Fleet name",
+    "delete": "Delete Fleets",
+    "tasks_per_Category": "Tasks per Category",
+    "loading_tasks": "Loading Tasks, Policies and Categories"
+  },
   "about": {
     "system_information": {
       "title": "System information"
@@ -86,10 +93,6 @@
     },
     "license": {
       "title": "License"
-    },
-    "fleets": {
-      "add": "Add Fleet",
-      "delete": "Delete Fleets"
     },
     "overview": {
       "title": "Overview",
