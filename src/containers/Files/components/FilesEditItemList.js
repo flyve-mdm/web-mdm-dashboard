@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { I18n } from 'react-i18nify'
 
 export default class FilesEditItemList extends Component {
     constructor(props) {
@@ -37,7 +38,7 @@ export default class FilesEditItemList extends Component {
                             type="text"
                             style={{ width: '240px'}}
                             className="win-textbox" 
-                            placeholder="Fleet name"
+                            placeholder={I18n.t('files.input_name')}
                             name="input"
                             value={this.state.input}
                             onChange={this.changeInput}

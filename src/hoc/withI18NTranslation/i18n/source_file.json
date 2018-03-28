@@ -73,7 +73,8 @@
   },
   "files": {
     "delete": "Delete files",
-    "delete_message": "files"
+    "delete_message": "files",
+    "input_name": "File name"
   },
   "about": {
     "system_information": {
