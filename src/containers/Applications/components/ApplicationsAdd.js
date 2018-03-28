@@ -90,13 +90,15 @@ export default class ApplicationsAdd extends Component {
             renderComponent = (
                 <ContentPane>
                     <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > New Application </h2>
+                        <h2 className="win-h2 titleContentPane"> 
+                            {I18n.t('applications.new')} 
+                        </h2>
                     </div>
                     <div style={{ padding: '10px' }}>
                         <input
                             type="text"
                             className="win-textbox"
-                            placeholder="Application name"
+                            placeholder={I18n.t('applications.name')}
                             name="input"
                             value={this.state.input}
                             onChange={this.changeInput}
@@ -111,10 +113,12 @@ export default class ApplicationsAdd extends Component {
                             minFileSize={0}
                             clickable
                         >
-                            Drop the file here or click to upload
+                            {I18n.t('commons.drop_or_click_file')}
                         </FilesUpload>
                         <div style={{marginTop: 10}}>
-                            <button className="btn --primary" onClick={this.filesUpload}>Save</button>
+                            <button className="btn --primary" onClick={this.filesUpload}>
+                                {I18n.t('commons.save')}
+                            </button>
                             {
                                 this.state.files.length > 0
                                     ? <div>
