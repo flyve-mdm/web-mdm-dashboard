@@ -5,6 +5,7 @@ import WinJS from 'winjs'
 import FleetsItemList from './FleetsItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
+import { I18n } from 'react-i18nify'
 
 export default class FleetsList extends Component {
 
@@ -146,10 +147,8 @@ export default class FleetsList extends Component {
                     isLoading: false
                 }))
             } else {
-                // Exit selection mode
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
-
                 this.listView.winControl.selection.clear()
             }
 
@@ -246,7 +245,7 @@ export default class FleetsList extends Component {
             <ReactWinJS.ToolBar.Button
                 key="delete"
                 icon="delete"
-                label="Delete"
+                label={I18n.t('commons.delete')}
                 priority={0}
                 disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleDelete}
@@ -280,7 +279,7 @@ export default class FleetsList extends Component {
                     <ReactWinJS.ToolBar.Button
                         key="sort"
                         icon="sort"
-                        label="Sort"
+                        label={I18n.t('commons.sort')}
                         path="/"
                         priority={1}
                         onClick={this.handleSort}
@@ -288,7 +287,7 @@ export default class FleetsList extends Component {
                     <ReactWinJS.ToolBar.Button
                         key="refresh"
                         icon="refresh"
-                        label="Refresh"
+                        label={I18n.t('commons.refresh')}
                         priority={2}
                         onClick={this.handleRefresh}
                     />
@@ -296,7 +295,7 @@ export default class FleetsList extends Component {
                     <ReactWinJS.ToolBar.Button
                         key="add"
                         icon="add"
-                        label="Add"
+                        label={I18n.t('commons.add')}
                         priority={0}
                         onClick={this.handleAdd}
                     />
@@ -306,14 +305,18 @@ export default class FleetsList extends Component {
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
                         icon="bullets"
-                        label="Select"
+                        label={I18n.t('commons.select')}
                         priority={0}
                         selected={this.props.selectionMode}
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
                 {listComponent}
-                <Confirmation title={`Delete Fleets`} message={this.props.selectedItems.length + ` Fleets`} reference={el => this.contentDialog = el} />
+                <Confirmation 
+                    title={I18n.t('fleets.delete')} 
+                    message={`${this.props.selectedItems.length} ${I18n.t('commons.fleets')}}`} 
+                    reference={el => this.contentDialog = el} 
+                />
             </React.Fragment>
         )
     }

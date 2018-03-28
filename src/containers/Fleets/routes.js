@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/add',
-    name: I18n.t('fleet.add'),
+    name: I18n.t('fleets.add'),
     component: FleetsContent,
     exact: false
   }
