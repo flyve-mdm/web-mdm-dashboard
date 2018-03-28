@@ -5,6 +5,7 @@ import WinJS from 'winjs'
 import FilesItemList from './FilesItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
+import { I18n } from 'react-i18nify'
 
 export default class FilesList extends Component {
 
@@ -150,10 +151,8 @@ export default class FilesList extends Component {
                     isLoading: false
                 }))
             } else {
-                // Exit selection mode
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
-
                 this.listView.winControl.selection.clear()
             }
 
@@ -249,6 +248,7 @@ export default class FilesList extends Component {
             <ReactWinJS.ToolBar.Button
                 key="delete"
                 icon="delete"
+                label={I18n.t('commons.delete')}
                 priority={0}
                 disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleDelete}
@@ -259,7 +259,7 @@ export default class FilesList extends Component {
             <ReactWinJS.ToolBar.Button
                 key="edit"
                 icon="edit"
-                label="Edit"
+                label={I18n.t('commons.edit')}
                 priority={0}
                 disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleEdit}
@@ -293,14 +293,14 @@ export default class FilesList extends Component {
                     <ReactWinJS.ToolBar.Button
                         key="sort"
                         icon="sort"
-                        label="Sort"
+                        label={I18n.t('commons.sort')}
                         priority={1}
                         onClick={this.handleSort}
                     />
                     <ReactWinJS.ToolBar.Button
                         key="refresh"
                         icon="refresh"
-                        label="Refresh"
+                        label={I18n.t('commons.refresh')}
                         priority={1}
                         onClick={this.handleRefresh}
                     />
@@ -308,7 +308,7 @@ export default class FilesList extends Component {
                     <ReactWinJS.ToolBar.Button
                         key="add"
                         icon="add"
-                        label="Add"
+                        label={I18n.t('commons.add')}
                         priority={0}
                         onClick={this.handleAdd}
                     />
@@ -319,14 +319,18 @@ export default class FilesList extends Component {
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
                         icon="bullets"
-                        label="Select"
+                        label={I18n.t('commons.select')}
                         priority={0}
                         selected={this.props.selectionMode}
                         onClick={this.handleToggleSelectionMode}
                     />
                 </ReactWinJS.ToolBar>
                 { listComponent }
-                <Confirmation title={`Delete files`} message={this.props.selectedItems.length + ` files` } reference={el => this.contentDialog = el} />
+                <Confirmation 
+                    title={I18n.t('files.delete')} 
+                    message={`${this.props.selectedItems.length} ${I18n.t('files.delete_message')}` } 
+                    reference={el => this.contentDialog = el} 
+                />
             </React.Fragment>
         )
     }

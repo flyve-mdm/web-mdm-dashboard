@@ -71,6 +71,10 @@
       "email_with_qr": "An email will be sent with a QR code."
     }
   },
+  "files": {
+    "delete": "Delete files",
+    "delete_message": "files"
+  },
   "about": {
     "system_information": {
       "title": "System information"
