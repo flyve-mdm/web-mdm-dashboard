@@ -48,7 +48,8 @@
     },
     "geolocation": {
       "title": "Geolocation",
-      "request_current_location": "Request current location"
+      "request_current_location": "Request current location",
+      "no_locations": "No locations available"
     },
     "applications": {
       "title": "Applications",
@@ -61,7 +62,8 @@
       "title": "System Report"
     },
     "main": {
-      "title": "Main"
+      "title": "Main",
+      "last_contact": "last contact"
     },    
     "enroll": {
       "title": "Enroll new device",
@@ -278,6 +280,7 @@
     "feedback": "Feedback",
     "article": "Article",
     "wipe": "Wipe",
-    "unenroll": "Unenroll"
+    "unenroll": "Unenroll",
+    "ping": "PING"
   }
 }
