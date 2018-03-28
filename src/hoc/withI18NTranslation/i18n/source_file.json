@@ -23,7 +23,12 @@
     "are_you_sure_you_want_to_close_your_session?": "Are you sure you want to close your session?"
   },
   "applications": {
-    "title": "Applications"
+    "title": "Applications",
+    "delete": "Delete Applications",
+    "edit": "Edit application",
+    "new": "New Application",
+    "name": "Application name",
+    "input_edit_item_list": "Fleet name"
   },
   "about": {
     "system_information": {
@@ -131,6 +136,7 @@
     }
   },
   "commons": {
+    "drop_or_click_file": "Drop the file here or click to upload",
     "email": "Email",
     "name": "Name",
     "password": "Password",
@@ -161,10 +167,12 @@
     "element_successfully_removed": "Element successfully removed",
     "delete": "Delete",
     "edit": "Edit",
+    "edit_one": "Edit one",
     "sort": "Sort",
     "refresh": "Refresh",
     "add": "Add",
     "select": "Select",
+    "selected": "Selected",
     "invitation_sent": "Invitation sent",
     "resend_email": "Resend Email",
     "error": "Error",
