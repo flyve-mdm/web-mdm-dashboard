@@ -6,8 +6,8 @@ import { connect } from 'react-redux'
 import SearchQueryBuilder from './components/SearchQueryBuilder'
 import Panel from './components/Panel'
 import ContentPane from '../../components/ContentPane'
-
 import { setFields, getTranslation, normalizeQuery } from './actions'
+import { I18n } from 'react-i18nify'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -117,34 +117,45 @@ class SearchEngine extends Component {
 
         return (
             <ContentPane>
-                <h1>Search Engine</h1>
+                <h1>
+                    {I18n.t('search_engine.title')}
+                </h1>
                 <input 
-                type="text"
-                style={{marginRight:10}} 
-                className="win-textbox" 
-                placeholder="Itemtype"
-                name="itemTypeName"
-                value={this.state.itemType} 
-                onChange={this.handleChangeItemType} />
-                <button className="btn --secondary" onClick={this.handleRequestItemType}> Change </button>
+                    type="text"
+                    style={{marginRight:10}} 
+                    className="win-textbox" 
+                    placeholder="Itemtype"
+                    name="itemTypeName"
+                    value={this.state.itemType} 
+                    onChange={this.handleChangeItemType} 
+                />
+                <button className="btn --secondary" onClick={this.handleRequestItemType}> 
+                    {I18n.t('commons.change')}
+                </button>
                 {this.state.fields.length > 0 &&
                     <SearchQueryBuilder
                         fields={this.state.fields}
                         handleChangeQuery={this.handleChangeQuery}
-                        translations={this.translations} />
+                        translations={this.translations} 
+                    />
                 }
                 <br />
                 {
                     this.state.isLoading 
-                        ? <p>Loading  ... </p>
+                        ? <p>{I18n.t('commons.loading')} ... </p>
                         : this.state.query 
-                            ? this.state.query.rules.length ? <button className="btn --primary" onClick={this.handleOnSearch}> Search </button> : null
-                            : <p>ItemType not found</p>
+                            ? this.state.query.rules.length ? (
+                                <button className="btn --primary" onClick={this.handleOnSearch}> 
+                                    {I18n.t('commons.search')}
+                                </button> 
+                            ): null
+                            : <p>{I18n.t('commons.itemType_not_found')}</p>
                 }
                 <Panel
                     itemType={this.state.itemType}
                     itemResults={this.state.itemResults.length > 0 ? arrayResultsWithFields : []}
-                    itemFields={this.state.fields} />
+                    itemFields={this.state.fields} 
+                />
             </ContentPane>
         )
     }

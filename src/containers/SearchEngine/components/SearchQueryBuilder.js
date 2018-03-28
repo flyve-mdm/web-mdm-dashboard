@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import QueryBuilder from 'react-querybuilder'
 import PropTypes from 'prop-types'
-
+import { I18n } from 'react-i18nify'
 
 class SearchQueryBuilder extends Component {
     render() {
@@ -10,13 +10,13 @@ class SearchQueryBuilder extends Component {
                 <QueryBuilder
                     fields={this.props.fields}
                     operators={[
-                        { name: 'contains', label: 'Contains' },
-                        { name: 'equal', label: 'Equals' }, // equal instead equals because work it
-                        { name: 'notequals', label: 'Not equals' },
-                        { name: 'lessthan', label: 'Less Than' },
-                        { name: 'morethan', label: 'More Than' },
-                        { name: 'under', label: 'Under' },
-                        { name: 'notunder', label: 'Not Under' }
+                        { name: 'contains', label: I18n.t('commons.contains') },
+                        { name: 'equal', label: I18n.t('commons.equals') }, // equal instead equals because work it
+                        { name: 'notequals', label: I18n.t('commons.not_equals') },
+                        { name: 'lessthan', label: I18n.t('commons.less_than') },
+                        { name: 'morethan', label: I18n.t('commons.more_than') },
+                        { name: 'under', label: I18n.t('commons.under') },
+                        { name: 'notunder', label: I18n.t('commons.not_under') }
                     ]}
                     onQueryChange={this.props.handleChangeQuery} />
             </div>
