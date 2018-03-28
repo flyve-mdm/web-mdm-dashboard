@@ -50,13 +50,17 @@ class Display extends Component {
     render () {
         return (
             <ContentPane>
-                <h2 style={{marginBottom: '20px'}}>Supervision</h2>
+                <h2 style={{marginBottom: '20px'}}>
+                    {I18n.t('settings.display.title')}
+                </h2>
 
-                <div className="title"> Language </div>
+                <div className="title"> 
+                    {I18n.t('commons.language')}
+                </div>
 
                 <div className="listElement">
                     <div className="message">
-                        Change interface language
+                        {I18n.t('settings.display.change_interface')}
                     </div>
                     <div 
                         className="controller" 
@@ -70,20 +74,30 @@ class Display extends Component {
                                 className='language__select' 
                                 onChange={event => this.props.actions.changeLanguage(event.target.value)}
                             >
-                                <option value='en_GB'>English</option>
-                                <option value='pt_BR'>Portuguese</option>
-                                <option value='fr_FR'>French</option>
-                                <option value='es_ES'>Spain</option>
+                                <option value='en_GB'>
+                                    {I18n.t('commons.english')}
+                                </option>
+                                <option value='pt_BR'>
+                                    {I18n.t('commons.portuguese')}
+                                </option>
+                                <option value='fr_FR'>
+                                    {I18n.t('commons.french')}
+                                </option>
+                                <option value='es_ES'>
+                                    {I18n.t('commons.spain')}
+                                </option>
                             </select>
                         </span>
                     </div>
                 </div>
 
-                <div className="title"> Animations </div>
+                <div className="title"> 
+                    {I18n.t('commons.animations')}
+                </div>
 
                     <div className="listElement">
                         <div className="message">
-                        {this.state.animations ? 'Disable animations' : 'Enable animations' }
+                            {this.state.animations ? I18n.t('settings.display.disable_animations') : I18n.t('settings.display.enable_animations') }
                         </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch
@@ -94,11 +108,13 @@ class Display extends Component {
                     </div>
                 </div>
                                         
-                <div className="title">Show in dashboard </div>
+                <div className="title">
+                    {I18n.t('settings.display.show')}
+                </div>
                 
                 <div className="listElement">
                     <div className="message">
-                        Devices currently managed
+                        {I18n.t('settings.display.devices_managed')}
                     </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
@@ -111,7 +127,7 @@ class Display extends Component {
                 
                 <div className="listElement">
                     <div className="message">
-                        Fleets currently managed
+                        {I18n.t('settings.display.fleets_managed')}
                     </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
@@ -124,7 +140,7 @@ class Display extends Component {
                 
                 <div className="listElement">
                     <div className="message">
-                        Files uploaded
+                        {I18n.t('settings.display.files_uploaded')}
                     </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
@@ -137,7 +153,7 @@ class Display extends Component {
                 
                 <div className="listElement">
                     <div className="message">
-                        Applications uploaded   
+                        {I18n.t('settings.display.applications_uploaded')}
                     </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
@@ -150,7 +166,7 @@ class Display extends Component {
                 
                 <div className="listElement">
                     <div className="message">
-                        Number of users
+                        {I18n.t('settings.display.users')}
                     </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
@@ -163,7 +179,7 @@ class Display extends Component {
                 
                 <div className="listElement">
                     <div className="message">
-                        Invitations sent
+                        {I18n.t('settings.display.invitations_sent')}
                     </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
@@ -176,7 +192,7 @@ class Display extends Component {
 
                 <div className="listElement">
                     <div className="message">
-                        Pending invitations
+                        {I18n.t('settings.display.pending_invitations')}
                     </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
@@ -189,7 +205,7 @@ class Display extends Component {
                 
                 <div className="listElement">
                     <div className="message">
-                        Devices by users
+                        {I18n.t('settings.display.devices_by_users')}
                     </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
@@ -202,7 +218,7 @@ class Display extends Component {
                 
                 <div className="listElement">
                     <div className="message">
-                        Devices by Operating System version
+                        {I18n.t('settings.display.devices_by_system')}
                     </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
