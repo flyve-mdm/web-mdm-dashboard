@@ -87,6 +87,9 @@
     "license": {
       "title": "License"
     },
+    "fleet": {
+      "add": "Add Fleet"
+    },
     "overview": {
       "title": "Overview",
       "flyve_MDM_is_a_mobile_device_management_software_that_enables_you_to_secure_and_manage_all_the_mobile_devices_of_your_business_via_a_unique_web-based_console_(MDM)": "Flyve MDM is a mobile device management software that enables you to secure and manage all the mobile devices of your business via a unique web-based console (MDM).",
@@ -238,8 +241,8 @@
     "loading": "Loading",
     "tasks": "Tasks",
     "files_uploaded_succesfully!": "Files uploaded succesfully!",
-    "drop_files_here_or_click_to_upload": "Drop files here or click to upload",
-    "drop_file_here_or_click_to_upload": "Drop the file here or click to upload",
+    "drop_files": "Drop files here or click to upload",
+    "drop_file": "Drop the file here or click to upload",
     "remove_all_files": "Remove All Files",
     "upload": "Upload",
     "new": "New",
