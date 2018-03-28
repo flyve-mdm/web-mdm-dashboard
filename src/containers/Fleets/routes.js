@@ -11,13 +11,13 @@ const routes = [
   },
   {
     path: '/:id',
-    name: 'Fleet',
+    name: I18n.t('commons.fleet'),
     component: FleetsContent,
     exact: false
   },
   {
     path: '/add',
-    name: 'Add Fleet',
+    name: I18n.t('fleet.add'),
     component: FleetsContent,
     exact: false
   }
