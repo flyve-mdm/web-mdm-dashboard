@@ -91,7 +91,9 @@ export default class ApplicationsContent extends Component {
             return (
                 <ContentPane>
                     <div className="contentHeader">
-                        <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> Application </h2>
+                        <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> 
+                            {I18n.t('applications.title')} 
+                        </h2>
                         <div className="itemInfo">
                             <IconItemList
                                 size={72}
@@ -111,7 +113,7 @@ export default class ApplicationsContent extends Component {
                         </div>
                     </div>
                     <div className="separator" />
-                    <Confirmation title="Delete Applications" message={this.state.data["name"]} reference={el => this.contentDialog = el} />
+                    <Confirmation title={I18n.t('applications.delete')} message={this.state.data["name"]} reference={el => this.contentDialog = el} />
                 </ContentPane>
             )
         }
