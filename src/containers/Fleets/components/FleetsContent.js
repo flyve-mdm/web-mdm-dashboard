@@ -232,7 +232,7 @@ class FleetsContent extends Component {
 
     handleAddTask = (policy) => {
         if (policy) {
-            if (policy['PluginFlyvemdmPolicy.type'] !== 'deployapp') {
+            if (policy['PluginFlyvemdmPolicy.type'] !== 'deployapp' && policy['PluginFlyvemdmPolicy.type'] !== 'removeapp') {
                 let tasks = { ...this.state.data.tasksRemove }
                 delete tasks[policy['PluginFlyvemdmPolicy.id']]
 
