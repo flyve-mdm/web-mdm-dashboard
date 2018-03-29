@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { I18n } from "react-i18nify"
 
 class HeaderBreadcrumb extends React.Component {
 
@@ -39,7 +40,7 @@ class HeaderBreadcrumb extends React.Component {
         <nav className="header-breadcrumb">
           <span>
             <Link to='/app'>
-              Dashboard
+              {I18n.t('commons.dashboard')}
             </Link>
           </span>
 
