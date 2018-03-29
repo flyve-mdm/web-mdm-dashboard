@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
 import ContentPane from '../../../../components/ContentPane'
+import { I18n } from 'react-i18nify'
 
 class Notifications extends Component {
 
@@ -44,25 +45,31 @@ class Notifications extends Component {
     render () {
         return (
             <ContentPane>
-                <h2 style={{marginBottom: '20px'}}>Notifications</h2>
+                <h2 style={{marginBottom: '20px'}}>
+                    {I18n.t('settings.notifications.title')}
+                </h2>
                 <div className="listElement">
                     <div className="message">
-                        Show notifications
-                        <div className="detail">For error messages is always enabled </div>
+                        {I18n.t('settings.notifications.show')}
+                        <div className="detail">
+                            {I18n.t('settings.notifications.show_deatil')}
+                        </div>
                     </div>
                     <div className="controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
-                                checked={this.state.showNotifications}
-                                onChange={this.changeShowNotifications}
-                            />
+                            checked={this.state.showNotifications}
+                            onChange={this.changeShowNotifications}
+                        />
                     </div>
                 </div>
 
                 <div className="listElement">
                     <div className="message">
-                        Notification type
-                        <div className="detail">For native you need to grant permissions</div>
+                        {I18n.t('settings.notifications.type')}
+                        <div className="detail">
+                            {I18n.t('settings.notifications.type_detail')}
+                        </div>
                     </div>
                     <div className="controller" style={{ paddingTop: 10 }}>
                         <select 
@@ -71,8 +78,12 @@ class Notifications extends Component {
                         value={this.state.notificationType}
                         onChange={this.changeNotificationType}
                         >
-                            <option>Toast</option>
-                            <option>Native</option>
+                            <option>
+                                {I18n.t('settings.notifications.toast')}
+                            </option>
+                            <option>
+                                {I18n.t('settings.notifications.native')}
+                            </option>
                         </select>
                     </div>
                 </div>
