@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
-
 import Loading from '../../components/Loading'
 import Input from '../../components/Forms/Input'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import { fetchRecoverPassword } from '../../store/authentication/actions'
 import { handleRecover } from './actions';
+import { I18n } from 'react-i18nify'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -48,8 +47,7 @@ class ForgotPassword extends Component {
             element = (
                 <div className="authentication-forgot__div">
                     <p>
-                        We can help you reset password and security info.
-                        Please, enter your Flyve MDM account in the following text box.
+                        {I18n.t('forgot_password.help_reset_password')}
                     </p>
                     <form onSubmit={(event) => { this.handleRecover(event) }}>
                         <Input 
@@ -57,20 +55,22 @@ class ForgotPassword extends Component {
                             type="text" 
                             name="text" 
                             value={this.state.text} 
-                            placeholder="Flyve MDM account" 
+                            placeholder={I18n.t('commons.flyve_mdm_account')}
                             required
                             function={(name, value) => {this.setState({ text: value })}}
                             inputRef={(input) => { this.textInput = input }}
                         />
 
-                        <button className="btn --secondary" type="button" onClick={
-                            () => this.props.history.push('/')
-                        }>
-                            Back 
+                        <button 
+                            className="btn --secondary" 
+                            type="button" 
+                            onClick={() => this.props.history.push('/')}
+                        >
+                            {I18n.t('commons.back')}
                         </button>
 
                         <button className="btn --primary" type="submit">
-                            Sing in
+                            {I18n.t('commons.sign_in')}
                         </button>
                     </form>
                     
@@ -80,16 +80,14 @@ class ForgotPassword extends Component {
             element = (
                 <div>
                     <p>
-                        To reset your password, open your mailbox and
-                        find the email with the subject "Reset Password"
-                        and open the link to create a new password.
+                        {I18n.t('forgot_password.reset_your_password')}
                     </p>
                     <button 
                         className="win-button" 
                         type="button" 
                         onClick={() => this.props.history.push('/')}
                     >
-                        Go home
+                        {I18n.t('forgot_password.go_home')}
                     </button>
                 </div>
             )
@@ -97,14 +95,13 @@ class ForgotPassword extends Component {
 
         if (this.props.isLoading) {
             return (
-                <Loading message="Sending..." />
+                <Loading message={`${I18n.t('commons.sending')}...`} />
             )
         } else {
             return (
                 <React.Fragment>
                     <h2 className="win-h2">
-                        Recover your <br/>
-                        account
+                        {I18n.t('forgot_password.title')}
                     </h2>
 
                     { element }
