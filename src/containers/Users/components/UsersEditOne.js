@@ -314,7 +314,8 @@ export default class UsersEditOne extends Component {
                                 type={this.state.typeImageProfile}
                                 imgClick={this.openFileChooser}
                                 size={150}
-                                imgClass="clickable"/>
+                                imgClass="clickable"
+                            />
                         </div>
 
                     </div>
@@ -328,7 +329,9 @@ export default class UsersEditOne extends Component {
 
                     <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
                     <div style={{ overflow: 'auto', paddingRight: '20px'}}>
-                        <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
+                        <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>
+                            {I18n.t('commons.add_email')}
+                        </button>
                     </div>
 
                     <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
@@ -338,7 +341,7 @@ export default class UsersEditOne extends Component {
                     <ConstructInputs data={user.activityInformation} icon="documentIcon" />
 
                     <button className="btn --primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                        Save
+                        {I18n.t('commons.save')}
                     </button>
                 
                     <br/>
