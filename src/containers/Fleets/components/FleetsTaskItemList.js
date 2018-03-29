@@ -86,10 +86,10 @@ class FleetsTaskItemList extends Component {
     }
 
     handleChangeInput = (e) => {
-        if (this.props.data['PluginFlyvemdmPolicy.type'] !== 'deployapp') {
-            this.setState({ input: e.target.value })
-        } else {
+        if (this.props.data['PluginFlyvemdmPolicy.type'] === 'deployapp' || this.props.data['PluginFlyvemdmPolicy.type'] === 'removeapp') {
             this.props.updateValueTask(this.props.data, e.target.value)
+        } else {
+            this.setState({ input: e.target.value })
         }
     }
 
@@ -98,7 +98,7 @@ class FleetsTaskItemList extends Component {
     }
 
     handleRemoveTask = (task) => {
-        this.props.removeValueTask(task)
+        this.props.removeValueTask(this.props.data, task)
     }
 
     render() {

@@ -297,6 +297,26 @@ class FleetsContent extends Component {
                         })
                     }
                     break
+                case 'removeapp':
+                    newDeploy = {
+                        plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
+                        value: value
+                    }
+                    if (this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
+                        alreadyTask = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => {
+                            return item['value'] === newDeploy['value']
+                        })
+                    }
+                    tasksToRemove = { ...this.state.data.tasksRemove }
+                    if (tasksToRemove[policy['PluginFlyvemdmPolicy.id']]) {
+                        this.state.data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
+                            if (item['value'] === newDeploy['value']) {
+                                tasksToRemove[policy['PluginFlyvemdmPolicy.id']].splice(index, 1)
+                            }
+                        })
+                    }
+                    break
                 default:
                     newValue = value
                     break
@@ -305,7 +325,7 @@ class FleetsContent extends Component {
             if (alreadyTask.length === 0) {
                 this.setState((prevState, props) => {
 
-                    if (policy['PluginFlyvemdmPolicy.type'] === 'deployapp') {
+                    if (policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || policy['PluginFlyvemdmPolicy.type'] === 'removeapp') {
 
                         let newDeployAdd = []
                         if (prevState.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
@@ -348,13 +368,28 @@ class FleetsContent extends Component {
         }
     }
 
-    handleRemoveValueTask = (task) => {
+    handleRemoveValueTask = (policy, task) => {
         let newTasks
 
         if (this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']]) {
-            newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
-                return item['items_id'] !== task['items_id']
-            })
+
+            switch (policy['PluginFlyvemdmPolicy.type']) {
+                case 'deployapp':
+                    newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
+                        return item['items_id'] !== task['items_id']
+                    })
+                    break
+                case 'removeapp':
+                    newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
+                        return item['value'] !== task['value']
+                    })
+                    break
+            
+                default:
+                    break
+            }
+
+            
 
             let removePolicy = {
                 plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
@@ -375,7 +410,6 @@ class FleetsContent extends Component {
             } else {
                 newRemoveTasks = [removePolicy]
             }
-            
 
             this.setState((prevState, props) => ({
                 data: {
@@ -412,7 +446,11 @@ class FleetsContent extends Component {
                 // Check if the same Policy id is equal on object to remove
                 if (Array.isArray(this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']])) {
                     const value = this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']].filter(item => {
-                        return item['items_id'] === task['items_id'] ? true : false
+                        if (item['items_id']) {
+                            return item['items_id'] === task['items_id'] ? true : false
+                        } else {
+                            return item['value'] === task['value'] ? true : false
+                        }
                     })
                     return value.length > 0 ? true : false
                 } else {
