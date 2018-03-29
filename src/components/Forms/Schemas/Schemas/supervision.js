@@ -1,9 +1,10 @@
-export default function ({ state, changeState }) {
+import { I18n } from "react-i18nify"
 
+export default function ({ state, changeState }) {
     const helpDeskInformation = [
         [
             {
-                label: "Support name",
+                label: I18n.t('commons.support_name'),
                 type: "text",
                 name: "name",
                 value: state.name,
@@ -15,7 +16,7 @@ export default function ({ state, changeState }) {
         ],
         [
             {
-                label: "Support phone",
+                label: I18n.t('commons.support_phone'),
                 type: "text",
                 name: "phone",
                 value: state.phone,
@@ -27,7 +28,7 @@ export default function ({ state, changeState }) {
         ],
         [
             {
-                label: "Support website",
+                label: I18n.t('commons.support_website'),
                 type: "text",
                 name: "website",
                 value: state.website,
@@ -39,7 +40,7 @@ export default function ({ state, changeState }) {
         ],
         [
             {
-                label: "Support email",
+                label: I18n.t('commons.support_email'),
                 type: "text",
                 name: "email",
                 value: state.email,
@@ -51,7 +52,7 @@ export default function ({ state, changeState }) {
         ],
         [
             {
-                label: "Support address",
+                label: I18n.t('commons.support_address'),
                 type: "textArea",
                 name: "address",
                 value: state.address,

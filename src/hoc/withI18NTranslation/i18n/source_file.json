@@ -429,6 +429,8 @@
     "valid_until": "Valid until",
     "register": "Register",
     "flyve_mdm_account": "Flyve MDM account",
-    "home": "Home"
+    "home": "Home",
+    "device_name": "Device name",
+    "fleet_name": "Fleet name"
   }
 }

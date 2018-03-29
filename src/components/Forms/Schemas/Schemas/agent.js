@@ -1,13 +1,14 @@
-export default function ({state, changeState, glpi}) {
+import { I18n } from "react-i18nify"
 
+export default function ({state, changeState, glpi}) {
     const mainInformation = [
         [
             {
-                label: "Device name",
+                label: I18n.t('commons.device_name'),
                 type: "text",
                 name: "name",
                 value: state.name,
-                placeholder: "Device name",
+                placeholder: I18n.t('commons.device_name'),
                 function: changeState,
                 disabled: false,
                 style: null
@@ -15,7 +16,7 @@ export default function ({state, changeState, glpi}) {
         ],
         [
             {
-                label: "Fleet name",
+                label: I18n.t('commons.fleet_name'),
                 type: "select",
                 name: "fleet",
                 value: state.fleet.value,
