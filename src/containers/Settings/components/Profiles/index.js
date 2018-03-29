@@ -162,7 +162,7 @@ class Profiles extends Component {
         if (this.state.password !== '' || this.state.passwordConfirmation !== '') {
             if (!ErrorValidation.validation(this.state.parametersToEvaluate, this.state.password).isCorrect) {
                 correctPassword = false
-            } else if (!ErrorValidation.validation({...this.state.parametersToEvaluate, isEqualTo: {value: this.state.password, message: "Passwords do not match"}}, this.state.passwordConfirmation).isCorrect) {
+            } else if (!ErrorValidation.validation({...this.state.parametersToEvaluate, isEqualTo: {value: this.state.password, message: I18n.t('commons.passwords_not_match')}}, this.state.passwordConfirmation).isCorrect) {
                 correctPassword = false
             } else {
                 newUser = {
@@ -316,7 +316,9 @@ class Profiles extends Component {
     
                     <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
                     <div style={{ overflow: 'auto' }}>
-                        <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>Add email</button>
+                        <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>
+                            {I18n.t('commons.add_email')}
+                        </button>
                     </div>
     
                     <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
@@ -326,7 +328,7 @@ class Profiles extends Component {
                     <ConstructInputs data={user.activityInformation} icon="documentIcon" />
     
                     <button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                        Save
+                        {I18n.t('commons.save')}
                     </button>
                 
                     <br/>
@@ -336,7 +338,9 @@ class Profiles extends Component {
         }       
         return (
             <ContentPane>
-                <h2>Profiles</h2>
+                <h2>
+                    {I18n.t('commons.profiles')}
+                </h2>
 
                 { component }
             </ContentPane>
