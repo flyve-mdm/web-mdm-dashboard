@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { I18n } from 'react-i18nify'
-
 import { changeLanguage } from '../../store/i18n/actions'
 
 function mapDispatchToProps(dispatch) {
@@ -47,10 +46,18 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
                         <select className='language__select' onChange={
                             event => props.changeLanguage(event.target.value)
                         }>
-                            <option value='en_GB'>English</option>
-                            <option value='pt_BR'>Portuguese</option>
-                            <option value='fr_FR'>French</option>
-                            <option value='es_ES'>Spain</option>
+                            <option value='en_GB'>
+                                {I18n.t('commons.english')}
+                            </option>
+                            <option value='pt_BR'>
+                                {I18n.t('commons.portuguese')}
+                            </option>
+                            <option value='fr_FR'>
+                                {I18n.t('commons.french')}
+                            </option>
+                            <option value='es_ES'>
+                                {I18n.t('commons.spain')}
+                            </option>
                         </select>
                     </span>
                 </footer>
