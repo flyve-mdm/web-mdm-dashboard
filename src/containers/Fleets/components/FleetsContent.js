@@ -53,8 +53,20 @@ class FleetsContent extends Component {
             isLoading: true
         }))
 
+        /*
+         * Get Policies 
+         * */
+        const policies = await this.props.glpi.searchItems({
+            itemtype: 'PluginFlyvemdmPolicy',
+            options: {
+                uid_cols: true,
+                forcedisplay: [1, 2, 3, 4, 5, 6, 7, 8],
+                range: '0-50' // Can more than 50 items
+            }
+        })
+
         let tasks = []
-        let tasksNew = {}
+        let tasksNew= {} 
 
         if (this.props.selectedItems.length > 0) {
             /*
@@ -81,29 +93,23 @@ class FleetsContent extends Component {
                     taskDeploy['itemtype'] = task['itemtype']
                 }
 
-                if (tasksNew[task['plugin_flyvemdm_policies_id']]) {
-                    if (Array.isArray(tasksNew[task['plugin_flyvemdm_policies_id']])) {
+                const deployType = policies.data.filter(policy => {
+                    return policy['PluginFlyvemdmPolicy.type'] === 'deployapp' && (policy['PluginFlyvemdmPolicy.id'] === taskDeploy['plugin_flyvemdm_policies_id'])
+                })
+
+                if (deployType.length > 0) {
+
+                    if (tasksNew[task['plugin_flyvemdm_policies_id']]) {
                         tasksNew[task['plugin_flyvemdm_policies_id']].push(taskDeploy)
                     } else {
-                        tasksNew[task['plugin_flyvemdm_policies_id']] = [tasksNew[task['plugin_flyvemdm_policies_id']], taskDeploy]
+                        tasksNew[task['plugin_flyvemdm_policies_id']] = [taskDeploy]
                     }
+                    
                 } else {
                     tasksNew[task['plugin_flyvemdm_policies_id']] = taskDeploy
                 }
             })
         }
-
-        /*
-         * Get Policies 
-         * */
-        const policies = await this.props.glpi.searchItems({
-            itemtype: 'PluginFlyvemdmPolicy',
-            options: {
-                uid_cols: true,
-                forcedisplay: [1, 2, 3, 4, 5, 6, 7, 8],
-                range: '0-50' // Can more than 50 items
-            }
-        })
 
         /*
          * Get categories
@@ -150,7 +156,8 @@ class FleetsContent extends Component {
                 policies: policies.data,
                 categories: categories.data, 
                 files: files.data, 
-                applications: applications 
+                applications: applications,
+                tasksRemove: {}
             }
         }))
 
@@ -303,6 +310,48 @@ class FleetsContent extends Component {
         }
     }
 
+    handleRemoveValueTask = (task) => {
+        let newTasks
+
+        if (this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']]) {
+            newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
+                return item['items_id'] !== task['items_id']
+            })
+
+            let removePolicy = {
+                plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
+                value: task['value']
+            }
+
+            if (task['itemtype']) {
+                removePolicy['itemtype'] = task['itemtype']
+            }
+            if (task['items_id']) {
+                removePolicy['items_id'] = task['items_id']
+            }
+
+            let newRemoveTasks = []
+            if (this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']]) {
+                newRemoveTasks = [...this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']], removePolicy]
+            } else {
+                newRemoveTasks = [removePolicy]
+            }
+            
+
+            this.setState((prevState, props) => ({
+                data: {
+                    ...prevState.data,
+                    tasksNew: {
+                        ...prevState.data.tasksNew,
+                        [task['plugin_flyvemdm_policies_id']]: newTasks
+                    },
+                    tasksRemove: { ...prevState.data.tasksRemove, [task['plugin_flyvemdm_policies_id']]: newRemoveTasks }
+                }
+            }))
+        }        
+    }
+
     handleSaveFleet = async () => {
 
         if(this.props.selectedItems.length === 1) {
@@ -320,12 +369,19 @@ class FleetsContent extends Component {
         const fleetToUpdate = {
             name: this.state.input
         }
-
         let itemsToDelete = []
         if (this.state.data.tasksRemove) {
             itemsToDelete = this.state.data.tasks.filter(task => {
                 // Check if the same Policy id is equal on object to remove
-                return this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']] ? true : false
+                if (Array.isArray(this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']])) {
+                    const value = this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']].filter(item => {
+                        return item['items_id'] === task['items_id'] ? true : false
+                    })
+                    return value.length > 0 ? true : false
+                } else {
+                    return this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']] ? true : false
+                }
+                
             }).map((item) => {
                 return {
                     id: item["id"]
@@ -556,6 +612,7 @@ class FleetsContent extends Component {
                                                             addTask={this.handleAddTask}
                                                             removeTask={this.handleRemoveTask}
                                                             updateValueTask={this.handleUpdateValueTask}
+                                                            removeValueTask={this.handleRemoveValueTask}
                                                             typeData={this.getTypeData(policy)}
                                                         />
                                                     ))}

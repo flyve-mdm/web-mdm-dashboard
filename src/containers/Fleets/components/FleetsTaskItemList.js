@@ -87,6 +87,10 @@ class FleetsTaskItemList extends Component {
         this.handleActivePolicyToggle()
     }
 
+    handleRemoveTask = (task) => {
+        this.props.removeValueTask(task)
+    }
+
     render() {
         if (this.props.data === undefined) {
             return (   
@@ -251,8 +255,9 @@ class FleetsTaskItemList extends Component {
                                             }
                                         </select>
                                         <TasksList 
-                                        data={this.state.input}
+                                        data={this.props.value}
                                         typeData={this.props.typeData}
+                                        removeTask={this.handleRemoveTask}
                                         />
                                     </div>
                                 </div>
