@@ -16,37 +16,37 @@ const routes = [
   },
   {
     path: '/entity',
-    name: 'Entity',
+    name: I18n.t('commons.entity'),
     component: Entity,
     exact: true
   },
   {
     path: '/profiles',
-    name: 'Profiles',
+    name: I18n.t('commons.profiles'),
     component: Profiles,
     exact: false
   },
   {
     path: '/supervision',
-    name: 'Supervision',
+    name: I18n.t('commons.supervision'),
     component: Supervision,
     exact: false
   },
   {
     path: '/security',
-    name: 'Security',
+    name: I18n.t('commons.security'),
     component: Security,
     exact: false
   },
   {
     path: '/notifications',
-    name: 'Notifications',
+    name: I18n.t('commons.notifications'),
     component: Notifications,
     exact: false
   },
   {
     path: '/display',
-    name: 'Display',
+    name: I18n.t('commons.display'),
     component: Display,
     exact: false
   }
