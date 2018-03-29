@@ -70,26 +70,38 @@ class FleetsTaskItemList extends Component {
         switch (this.props.data['PluginFlyvemdmPolicy.type']) {
             case 'bool':
                 this.props.updateValueTask(this.props.data, !this.props.value)
-                break;
+                break
             case 'int':
                 this.props.updateValueTask(this.props.data, this.state.input)
-                break;
+                break
             case 'deployapp':
                 this.props.updateValueTask(this.props.data, this.state.input)
-                break;
+                break
             case 'removeapp':
                 this.props.updateValueTask(this.props.data, this.state.input)
-                break;
+                break
             default:
-                break;
+                break
         }
     }
 
     handleChangeInput = (e) => {
-        if (this.props.data['PluginFlyvemdmPolicy.type'] === 'deployapp' || this.props.data['PluginFlyvemdmPolicy.type'] === 'removeapp') {
-            this.props.updateValueTask(this.props.data, e.target.value)
-        } else {
-            this.setState({ input: e.target.value })
+        switch (this.props.data['PluginFlyvemdmPolicy.type']) {
+            case 'deployapp':
+                this.props.updateValueTask(this.props.data, e.target.value)
+                break
+            case 'removeapp':
+                const apps = this.props.typeData.filter(app => {
+                    return Number(e.target.value) === Number(app['id'])
+                })
+
+                if (apps.length > 0) {
+                    this.props.updateValueTask(this.props.data, apps[0]['package_name'])
+                }
+                break
+            default:
+                this.setState({ input: e.target.value })
+                break
         }
     }
 
