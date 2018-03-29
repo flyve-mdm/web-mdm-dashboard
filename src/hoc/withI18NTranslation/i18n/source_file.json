@@ -18,6 +18,10 @@
     "what_new_password": "What is the new password?",
     "repeat_password": "Please repeat the password"
   },
+  "validate_account": {
+    "title": "Validate Account",
+    "message": "Your user is not yet activated, please check your email and activate your account"
+  },
   "validation": {
     "required_field": "Required field",
     "insufficient_characters": "Insufficient characters, a minimum of",
