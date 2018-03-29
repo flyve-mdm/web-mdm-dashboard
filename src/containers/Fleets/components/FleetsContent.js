@@ -492,7 +492,7 @@ class FleetsContent extends Component {
 
             this.props.setNotification({
                 title: 'Successfully',
-                body: 'file successfully updated!',
+                body: 'Fleet successfully updated!',
                 type: 'success'
             })
             this.requestAllData()
@@ -542,17 +542,19 @@ class FleetsContent extends Component {
             })
             this.props.setNotification({
                 title: 'Successfully',
-                body: 'file successfully Created!',
+                body: 'Fleet successfully created!',
                 type: 'success'
             })
             this.props.changeSelectionMode(false)
             this.props.changeAction("reload")
         } catch (error) {
-            this.props.setNotification({
-                title: 'Error',
-                body: 'Error',
-                type: 'alert'
-            })
+            if (error.length > 1) {
+                this.props.setNotification({
+                    title: error[0],
+                    body: error[1][0]["message"],
+                    type: 'alert'
+                })
+            }
             this.setState({
                 isLoading: false
             })
