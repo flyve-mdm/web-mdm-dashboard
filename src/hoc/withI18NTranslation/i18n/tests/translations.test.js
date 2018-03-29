@@ -10,8 +10,8 @@ import {
 
 describe('Check if translations are available', () => {;
   beforeAll(()=> {
-    let count = 1;
-    let json  = {} ;
+    let count = 1
+    let json  = {} 
 
     json[LANGUAGE_DEFAULT] = source_file;
 
@@ -28,7 +28,7 @@ describe('Check if translations are available', () => {;
     //     }
     //   });
     // }
-  });
+  })
 
   it('login page should have english translations', () => {
     expect(I18n.t('login.use_your_account')).toBe('Use your Flyve MDM account')
@@ -40,7 +40,7 @@ describe('Check if translations are available', () => {;
     expect(I18n.t('login.enter_password')).toBe('Enter password')
     expect(I18n.t('login.enter_password_for')).toBe('Enter the password for')
     expect(I18n.t('login.forgot_my_password')).toBe('Forgot my password')
-  });
+  })
 
   it('create account page should have english translations', () => {
     expect(I18n.t('create_account.title')).toBe('Create account')
@@ -53,8 +53,7 @@ describe('Check if translations are available', () => {;
 
   it('logout modal should have english translations', () => {
     expect(I18n.t('logout.close_session')).toBe('Close session')
-    expect(I18n.t('logout.are_you_sure_you_want_to_close_your_session?')).toBe('Are you sure you want to close your session?')
-  });
+  })
 
   it('about page should have english translations', () => {
     expect(I18n.t('about.overview.title')).toBe('Overview')
@@ -64,7 +63,7 @@ describe('Check if translations are available', () => {;
     expect(I18n.t('about.release_notes.title')).toBe('Release notes')
     expect(I18n.t('about.term_of_use.title')).toBe('Term of use')
     expect(I18n.t('about.license.title')).toBe('License')
-  });
+  })
 
   it('The common words are in the commons group', () => {
     expect(I18n.t('commons.email')).toBe('Email')
@@ -89,5 +88,5 @@ describe('Check if translations are available', () => {;
     expect(I18n.t('commons.call')).toBe('Call')
     expect(I18n.t('commons.send')).toBe('Send')
     expect(I18n.t('commons.sending')).toBe('Sending')
-  });
-});
+  })
+})
