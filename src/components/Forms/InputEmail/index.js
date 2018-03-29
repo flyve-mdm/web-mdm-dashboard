@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
 import Confirmation from '../../Confirmation'
 import ErrorValidation from '../../ErrorValidation'
+import { I18n } from "react-i18nify"
 
 class InputEmail extends Component {
 
@@ -62,7 +62,7 @@ class InputEmail extends Component {
 
                 <span className="deleteIcon" style={{ margin: 10, fontSize: 18 }} onClick={deleteEmail}/>
 
-                {this.props.delete ? <Confirmation title={`Delete ${this.props.label}`} message={this.props.email.email} reference={el => this.contentDialog = el} /> : <span/>}
+                {this.props.delete ? <Confirmation title={`${I18n.t('commons.delete')} ${this.props.label}`} message={this.props.email.email} reference={el => this.contentDialog = el} /> : <span/>}
             </div>
         )
     }
