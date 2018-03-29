@@ -40,7 +40,12 @@ class FleetsTaskItemList extends Component {
             this.setState({
                 input: this.props.value ? this.props.value : ''
             })
+        } else {
+            this.setState({
+                input: this.props.value ? this.props.value : ''
+            })
         }
+
     }
 
     componentWillUpdate(nextProps, nextState) {
@@ -80,7 +85,11 @@ class FleetsTaskItemList extends Component {
     }
 
     handleChangeInput = (e) => {
-        this.setState({ input: e.target.value })
+        if (this.props.data['PluginFlyvemdmPolicy.type'] !== 'deployapp') {
+            this.setState({ input: e.target.value })
+        } else {
+            this.props.updateValueTask(this.props.data, e.target.value)
+        }
     }
 
     handleBlurInput = (e) => {
@@ -240,9 +249,7 @@ class FleetsTaskItemList extends Component {
                                         <select
                                         className="win-dropdown" 
                                         name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                        // value={this.state.input}
-                                        onChange={this.handleChangeInput}
-                                        onBlur={this.handleBlurInput}>
+                                        onChange={this.handleChangeInput}>
                                             <option>Select an application</option>
                                             {
                                                 this.props.typeData.map((value, index) =>

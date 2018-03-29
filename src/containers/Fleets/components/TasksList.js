@@ -15,7 +15,7 @@ class TasksList extends Component {
 
     refreshRender = () => {
         return (
-            this.props.data !== '' ?
+            Array.isArray(this.props.data) ?
                 this.props.data.map(item => {
                     return this.props.typeData.map((value, index) => {
                         return item['items_id'] === value['id'] ?
