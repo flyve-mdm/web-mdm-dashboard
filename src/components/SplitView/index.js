@@ -9,6 +9,7 @@ import withGLPI from '../../hoc/withGLPI'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { logout } from '../../store/authentication/actions'
+import { I18n } from "react-i18nify"
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -47,61 +48,71 @@ class SplitView extends React.Component {
                           to={'/app'}
                           alt='Flyve MDM Dashboard'
                           img='/images/dashboard.svg'
-                          title='Dashboard'
+                          title={I18n.t('commons.dashboard')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={'/app/devices'}
                           iconName='deviceIcon'
-                          title='Device'
-                          disabled={this.props.expanded}/>
+                          title={I18n.t('commons.device')}
+                          disabled={this.props.expanded}
+                        />
                         <IconWithPopper
                           to={'/app/invitations'}
                           iconName='emailIcon'
-                          title='Invitations'
-                          disabled={this.props.expanded}/>
+                          title={I18n.t('commons.invitations')}
+                          disabled={this.props.expanded}
+                        />
                         <IconWithPopper
                           to={'/app/fleets'}
                           iconName='goToStartIcon'
-                          title='Fleets'
-                          disabled={this.props.expanded}/>                
+                          title={I18n.t('commons.fleets')}
+                          disabled={this.props.expanded}
+                        />
                         <IconWithPopper
                           to={'/app/files'}
                           iconName='filesIcon'
-                          title='Files'
-                          disabled={this.props.expanded}/>  
+                          title={I18n.t('commons.files')}
+                          disabled={this.props.expanded}
+                        />
                         <IconWithPopper
                           to={'/app/applications'}
                           iconName='switchAppsIcon'
-                          title='Applications'
-                          disabled={this.props.expanded}/>
+                          title={I18n.t('commons.applications')}
+                          disabled={this.props.expanded}
+                        />
                         <IconWithPopper
                           to={'/app/users'}
                           iconName='peopleIcon'
-                          title='Users'
-                          disabled={this.props.expanded}/>  
+                          title={I18n.t('commons.users')}
+                          disabled={this.props.expanded}
+                        />
                         <IconWithPopper
                           to={'/app/search'}
                           iconName='searchIcon'
-                          title='Search devices, fleets or other item'
-                          disabled={this.props.expanded}/>  
+                          title={I18n.t('commons.search_or_other')}
+                          disabled={this.props.expanded}
+                        />
                       </section>
                       <section className="splitview-wrapped-navbar-wrapped-bottom__section">
                         <IconWithPopper
                           to={'/app/settings'}
                           iconName='settingsIcon'
-                          title='Setting of Flyve MDM'
-                          disabled={this.props.expanded}/>  
+                          title={I18n.t('commons.setting_flyve_mdm')}
+                          disabled={this.props.expanded}
+                        />
                         <IconWithPopper
                           to={'/app/about'}
                           iconName='contactInfoIcon'
-                          title='About of Flyve MDM'
-                          disabled={this.props.expanded}/> 
+                          title={I18n.t('commons.about_flyve_mdm')}
+                          disabled={this.props.expanded}
+                        />
                         <IconWithPopper
                           click={this.logout}
                           iconName='PowerButtonIcon'
-                          title='Logout'
-                          disabled={this.props.expanded}/> 
+                          title={I18n.t('commons.logout')}
+                          disabled={this.props.expanded}
+                        />
                       </section>
                     </div>
                   </ScrollSyncPane>
@@ -113,19 +124,19 @@ class SplitView extends React.Component {
                         this.props.contract && '--closing'
                       }`}>
                       <section className="splitview-wrapped-navbar-wrapped-top__section --description">
-                        <SpanWithPopper description='Dashboard' to="/app" />
-                        <SpanWithPopper description='Devices' to="/app/devices" />
-                        <SpanWithPopper description='Invitations' to="/app/invitations" />
-                        <SpanWithPopper description='Fleets' to="/app/fleets" />
-                        <SpanWithPopper description='Files' to="/app/files" />
-                        <SpanWithPopper description='Applications' to="/app/applications" />
-                        <SpanWithPopper description='Users' to="/app/users" />
-                        <SpanWithPopper description='Search' to="/app/search" />
+                        <SpanWithPopper description={I18n.t('commons.dashboard')} to="/app" />
+                        <SpanWithPopper description={I18n.t('commons.devices')} to="/app/devices" />
+                        <SpanWithPopper description={I18n.t('commons.invitations')} to="/app/invitations" />
+                        <SpanWithPopper description={I18n.t('commons.fleets')} to="/app/fleets" />
+                        <SpanWithPopper description={I18n.t('commons.files')} to="/app/files" />
+                        <SpanWithPopper description={I18n.t('commons.applications')} to="/app/applications" />
+                        <SpanWithPopper description={I18n.t('commons.users')} to="/app/users" />
+                        <SpanWithPopper description={I18n.t('commons.search')} to="/app/search" />
                       </section>
                       <section className="splitview-wrapped-navbar-wrapped-bottom__section --description">
-                        <SpanWithPopper description='Setting of Flyve MDM ' to="/app/settings" />
-                        <SpanWithPopper description='About of Flyve MDM' to="/app/about" />
-                        <SpanWithPopper description='Logout' click={this.logout} />
+                        <SpanWithPopper description={I18n.t('commons.setting_flyve_mdm')} to="/app/settings" />
+                        <SpanWithPopper description={I18n.t('commons.about_flyve_mdm')} to="/app/about" />
+                        <SpanWithPopper description={I18n.t('commons.logout')} click={this.logout} />
                       </section>
                     </div>
                   </ScrollSyncPane>
@@ -136,8 +147,8 @@ class SplitView extends React.Component {
           </ScrollSync>
 
           <Confirmation 
-            title="Close session" 
-            message='Are you sure you want to close your session?' 
+            title={I18n.t('logout.close_session')}
+            message={I18n.t('security.close_session_message')} 
             reference={el => this.contentDialog = el} 
           />
         </React.Fragment>
