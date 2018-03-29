@@ -65,8 +65,8 @@ class FleetsContent extends Component {
                 id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
                 subItemtype: 'PluginFlyvemdmTask'
             })
-
-            tasksNew = tasks.map((task) => {
+            
+            tasks.forEach((task, index) => {
 
                 let taskDeploy = {
                     plugin_flyvemdm_fleets_id: task['plugin_flyvemdm_fleets_id'],
@@ -81,14 +81,16 @@ class FleetsContent extends Component {
                     taskDeploy['itemtype'] = task['itemtype']
                 }
 
-                return {
-                    [task['plugin_flyvemdm_policies_id']]: taskDeploy
+                if (tasksNew[task['plugin_flyvemdm_policies_id']]) {
+                    if (Array.isArray(tasksNew[task['plugin_flyvemdm_policies_id']])) {
+                        tasksNew[task['plugin_flyvemdm_policies_id']].push(taskDeploy)
+                    } else {
+                        tasksNew[task['plugin_flyvemdm_policies_id']] = [tasksNew[task['plugin_flyvemdm_policies_id']], taskDeploy]
+                    }
+                } else {
+                    tasksNew[task['plugin_flyvemdm_policies_id']] = taskDeploy
                 }
-            }).reduce(function (result, item) {
-                var key = Object.keys(item)[0]
-                result[key] = item[key];
-                return result
-            }, {})
+            })
         }
 
         /*
@@ -187,6 +189,9 @@ class FleetsContent extends Component {
         if (fleetHaveTask) {
             // Return a Object that is the Task
             if (policy['PluginFlyvemdmPolicy.type'] === 'deployapp') {
+
+
+
                 return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['items_id'] : policy['PluginFlyvemdmPolicy.recommended_value']
             } else {
                 return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['value'] : policy['PluginFlyvemdmPolicy.recommended_value']
