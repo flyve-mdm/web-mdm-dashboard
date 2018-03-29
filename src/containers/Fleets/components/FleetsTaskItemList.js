@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
+import TasksList from './TasksList'
 
 class FleetsTaskItemList extends Component {
     constructor(props) {
@@ -235,7 +236,7 @@ class FleetsTaskItemList extends Component {
                                         <select
                                         className="win-dropdown" 
                                         name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                        value={this.state.input}
+                                        // value={this.state.input}
                                         onChange={this.handleChangeInput}
                                         onBlur={this.handleBlurInput}>
                                             <option>Select an application</option>
@@ -249,6 +250,10 @@ class FleetsTaskItemList extends Component {
                                                 )
                                             }
                                         </select>
+                                        <TasksList 
+                                        data={this.state.input}
+                                        typeData={this.props.typeData}
+                                        />
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>

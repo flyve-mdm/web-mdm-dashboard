@@ -189,10 +189,7 @@ class FleetsContent extends Component {
         if (fleetHaveTask) {
             // Return a Object that is the Task
             if (policy['PluginFlyvemdmPolicy.type'] === 'deployapp') {
-
-
-
-                return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['items_id'] : policy['PluginFlyvemdmPolicy.recommended_value']
+                return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
             } else {
                 return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['value'] : policy['PluginFlyvemdmPolicy.recommended_value']
             }
