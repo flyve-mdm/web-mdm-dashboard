@@ -1,17 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+import { I18n } from "react-i18nify"
 
 const ValidateAccount = () => {
     return (
         <React.Fragment>
-            <h2 className="win-h2">Validate Account</h2>
+            <h2 className="win-h2">
+                {I18n.t('validate_account.title')}
+            </h2>
             <p>
-                Your user is not yet activated, please check your email and activate your account
+                {I18n.t('validate_account.message')}
                 <br />
             </p>
-            <p><Link to='/'>Sign in</Link></p>
+            <p>
+                <Link to='/'>{I18n.t('commons.sign_in')}</Link>
+            </p>
         </React.Fragment>
     )
 }
