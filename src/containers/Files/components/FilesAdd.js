@@ -77,8 +77,11 @@ export default class FilesAdd extends Component {
         } else {
             renderComponent = (
                 <ContentPane>
-                    <button className="btn --primary" onClick={this.filesUpload}>Save</button>
-                    <div className="separator" />
+                    <div className="contentHeader">
+                        <h2 className="win-h2 titleContentPane" > New File </h2>
+                    </div>
+                    <div class="separator" />
+                    <div style={{ padding: '10px' }}>
                     <React.Fragment>
                         <FilesUpload
                             ref={(files) => { this.files = files }}
@@ -92,7 +95,8 @@ export default class FilesAdd extends Component {
                         >
                             Drop the file here or click to upload
                         </FilesUpload>
-                        <div>
+                        <div style={{marginTop: 10}}>
+                            <button className="btn --primary" onClick={this.filesUpload}>Save</button>
                             {
                                 this.state.files.length > 0
                                     ? <div>
@@ -104,6 +108,7 @@ export default class FilesAdd extends Component {
                             }
                         </div>
                     </React.Fragment>
+                    </div>
                 </ContentPane>
             )
         }
