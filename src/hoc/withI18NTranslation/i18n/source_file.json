@@ -284,6 +284,7 @@
     "files": "Files",
     "fleet": "Fleet",
     "fleets": "Fleets",
+    "settings": "Settings",
     "invitations": "Invitations",
     "users": "Users",
     "devices_by_plataform": "Devices by plataform",
@@ -319,6 +320,7 @@
     "agent": "Agent",
     "version": "Version",
     "type": "Type",
+    "about": "About",
     "offline": "Offline",
     "online": "Online",
     "loading": "Loading",
@@ -403,6 +405,7 @@
     "valid_since": "Valid since",
     "valid_until": "Valid until",
     "register": "Register",
-    "flyve_mdm_account": "Flyve MDM account" 
+    "flyve_mdm_account": "Flyve MDM account",
+    "home": "Home"
   }
 }
