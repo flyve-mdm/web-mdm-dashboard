@@ -330,11 +330,14 @@
     "months": "Months",
     "change": "Change",
     "phone": "Phone",
+    "phone_2": "Phone ",
     "mobile_phone": "Mobile phone",
+    "administrative_number": "Administrative number",
     "authentication": "Authentication",
     "category": "Category",
     "comments": "Comments",
     "entity": "Entity",
+    "default_entity": "Default entity",
     "profiles": "Profiles",
     "supervision": "Supervision",
     "security": "Security",
@@ -390,6 +393,9 @@
     "passwords_not_match": "Passwords do not match",
     "add_email": "Add email",
     "change_password": "Change password",
-    "kill_session": "Kill session"
+    "kill_session": "Kill session",
+    "default_profile": "Default profile",
+    "valid_since": "Valid since",
+    "valid_until": "Valid until"
   }
 }

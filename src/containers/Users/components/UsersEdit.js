@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import EditMultiple from '../../../components/EditMultiple'
+import { I18n } from 'react-i18nify'
 
 class DevicesEdit extends Component {
     constructor(props) {
@@ -8,42 +9,42 @@ class DevicesEdit extends Component {
         this.state = {
             FieldList: [
                 {
-                    name: "Realname",
+                    name: I18n.t('commons.realname'),
                     type: "text",
                     DBName: "realname"
                 },
                 {
-                    name: "First name",
+                    name: I18n.t('commons.first_name'),
                     type: "text",
                     DBName: "firstname"
                 },
                 {
-                    name: "Phone",
+                    name: I18n.t('commons.phone'),
                     type: "text",
                     DBName: "phone"
                 },
                 {
-                    name: "Phone 2",
+                    name: I18n.t('commons.phone_2'),
                     type: "text",
                     DBName: "phone2"
                 },
                 {
-                    name: "Mobile phone",
+                    name: I18n.t('commons.mobile_phone'),
                     type: "text",
                     DBName: "mobile"
                 },
                 {
-                    name: "Administrative number",
+                    name: I18n.t('commons.administrative_number'),
                     type: "text",
                     DBName: "registration_number"
                 },
                 {
-                    name: "Password",
+                    name: I18n.t('commons.password'),
                     type: "password",
                     DBName: ["password", "password2"]
                 },
                 {
-                    name: "Title",
+                    name: I18n.t('commons.title'),
                     type: "select",
                     DBName: "usertitles_id",
                     params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
@@ -52,7 +53,7 @@ class DevicesEdit extends Component {
                     value: "2"
                 },
                 {
-                    name: "Location",
+                    name: I18n.t('commons.location'),
                     type: "select",
                     DBName: "locations_id",
                     params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
@@ -61,7 +62,7 @@ class DevicesEdit extends Component {
                     value: "2"
                 },
                 {
-                    name: "Default profile",
+                    name: I18n.t('commons.default_profile'),
                     type: "select",
                     DBName: "profiles_id",
                     params: {},
@@ -70,7 +71,7 @@ class DevicesEdit extends Component {
                     value: "id"
                 },
                 {
-                    name: "Category",
+                    name: I18n.t('commons.category'),
                     type: "select",
                     DBName: "usercategories_id",
                     params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
@@ -79,7 +80,7 @@ class DevicesEdit extends Component {
                     value: "2"
                 },
                 {
-                    name: "Default entity",
+                    name: I18n.t('commons.default_entity'),
                     type: "select",
                     DBName: "entities_id",
                     params: {},
@@ -88,17 +89,17 @@ class DevicesEdit extends Component {
                     value: "id"
                 },
                 {
-                    name: "Valid since",
+                    name: I18n.t('commons.valid_since'),
                     type: "datePicker",
                     DBName: "begin_date"
                 },
                 {
-                    name: "Valid until",
+                    name: I18n.t('commons.valid_until'),
                     type: "datePicker",
                     DBName: "end_date"
                 },
                 {
-                    name: "Comments",
+                    name: I18n.t('commons.comments'),
                     type: "textArea",
                     DBName: "comment"
                 }
