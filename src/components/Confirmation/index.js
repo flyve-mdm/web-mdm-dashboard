@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
+import { I18n } from 'react-i18nify'
 
 class Confirmation extends Component {
 
@@ -15,8 +16,9 @@ class Confirmation extends Component {
             <ReactWinJS.ContentDialog
                 ref={this.props.reference}
                 title={this.props.title}
-                primaryCommandText="OK"
-                secondaryCommandText="Cancel">
+                primaryCommandText={I18n.t('commons.ok')}
+                secondaryCommandText={I18n.t('commons.cancel')}
+            >
                     <p>{ this.props.message }</p>
             </ReactWinJS.ContentDialog>
         )
