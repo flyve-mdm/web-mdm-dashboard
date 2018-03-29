@@ -298,6 +298,7 @@
     "password_confirmation": "Password confirmation",
     "back": "Back",
     "sign_in": "Sign in",
+    "log_out": "Log out",
     "terms_and_conditions": "Terms and Conditions",
     "devices": "Devices",
     "device": "Device",
@@ -431,6 +432,14 @@
     "flyve_mdm_account": "Flyve MDM account",
     "home": "Home",
     "device_name": "Device name",
-    "fleet_name": "Fleet name"
+    "fleet_name": "Fleet name",
+    "support_name": "Support name",
+    "support_phone": "Support phone",
+    "support_website": "Support website",
+    "support_email": "Suppor email",
+    "support_address": "Support address",
+    "search_or_other": "Search devices, fleets or other item",
+    "setting_flyve_mdm": "Setting of Flyve MDM",
+    "about_flyve_mdm": "About of Flyve MDM"
   }
 }
