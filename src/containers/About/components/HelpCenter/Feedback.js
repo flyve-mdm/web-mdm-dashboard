@@ -48,8 +48,8 @@ class Feedback extends Component {
             return (
                 <React.Fragment>
                     <div style={{ textAlign: 'center' }}>
-                        <h3>{I18n.t('about.help_center.thank_you!')}</h3>
-                        <p>{I18n.t('about.help_center.your_submission_has_been_received')}</p>
+                        <h3>{I18n.t('about.help_center.thank_you')}</h3>
+                        <p>{I18n.t('about.help_center.submission_received')}</p>
                     </div>
                 </React.Fragment>
             )
