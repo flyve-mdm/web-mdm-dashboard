@@ -254,10 +254,22 @@ class FleetsContent extends Component {
         if (policy) {
             let tasks = { ...this.state.data.tasksNew}
             delete tasks[policy['PluginFlyvemdmPolicy.id']]
-            let removePolicy = {
-                plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
-                plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
-                value: policy['PluginFlyvemdmPolicy.default_value']
+            let removePolicy
+
+            switch (policy['PluginFlyvemdmPolicy.type']) {
+                case 'deployapp':
+                    removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
+                    break
+                case 'removeapp':
+                    removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
+                    break
+                default:
+                    removePolicy = {
+                        plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
+                        value: policy['PluginFlyvemdmPolicy.default_value']
+                    }
+                    break
             }
             
             this.setState((prevState, props) => ({

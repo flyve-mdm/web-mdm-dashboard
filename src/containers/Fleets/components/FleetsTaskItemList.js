@@ -265,10 +265,10 @@ class FleetsTaskItemList extends Component {
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
                                         <select
                                         className="win-dropdown" 
-                                        name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                        value={this.props.data['PluginFlyvemdmPolicy.default_value']}
-                                        onChange={this.props.changeInput}>
-                                            <option>
+                                        name={this.props.data['PluginFlyvemdmPolicy.id']}
+                                        value = {0} 
+                                        onChange={this.handleChangeInput}>
+                                            <option value={0}>
                                                 {I18n.t('commons.select_an_application')}
                                             </option>
                                             {
@@ -313,12 +313,11 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
                                         <select
-                                            className="win-dropdown" 
-                                            name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                            value={this.props.data['PluginFlyvemdmPolicy.default_value']}
-                                            onChange={this.props.changeInput}
-                                        >
-                                            <option>
+                                            className="win-dropdown"
+                                            name={this.props.data['PluginFlyvemdmPolicy.id']}
+                                            value={0}
+                                            onChange={this.handleChangeInput}>
+                                            <option value={0}>
                                                 {I18n.t('commons.select_an_application')}
                                             </option>
                                             {
