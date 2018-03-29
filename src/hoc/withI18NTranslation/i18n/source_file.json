@@ -36,6 +36,15 @@
       "devices_by_users": "Devices by users",
       "devices_by_system": "Devices by Operating System version"
     },
+    "notifications": {
+      "title": "Notifications",
+      "show": "Show notifications",
+      "show_deatil": "For error messages is always enabled",
+      "type": "Notification type",
+      "type_detail": "For native you need to grant permissions",
+      "toast": "Toast",
+      "native": "Native"
+    },
     "entity": {
       "url": "URL of the application",
       "file_extension": "File extension as apk or upk",
