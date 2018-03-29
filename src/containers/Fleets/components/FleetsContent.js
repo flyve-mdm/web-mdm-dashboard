@@ -147,7 +147,7 @@ class FleetsContent extends Component {
             itemtype: 'PluginFlyvemdmPackage', 
             queryString: { range: '0-50' } 
         })
-        console.log(tasksNew)
+
         /* 
         * Update props
         */
@@ -429,7 +429,7 @@ class FleetsContent extends Component {
         let itemsToUpdate = []
 
         const specialPolicies = this.state.data.policies.filter(policy => {
-            return policy['PluginFlyvemdmPolicy.type'] === 'deployapp'
+            return policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || policy['PluginFlyvemdmPolicy.type'] === 'removeapp'
         })
 
         this.state.data.tasks.forEach(task => {
@@ -462,7 +462,11 @@ class FleetsContent extends Component {
             
             if (Array.isArray(itemsToAdd[task['plugin_flyvemdm_policies_id']])) {
                 this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].forEach((item, index) => {
-                    return item['items_id'] === task['items_id'] ? itemsToAdd[task['plugin_flyvemdm_policies_id']].splice(index, 1) : null
+                    if (task['items_id']) {
+                        return item['items_id'] === task['items_id'] ? itemsToAdd[task['plugin_flyvemdm_policies_id']].splice(index, 1) : null
+                    } else {
+                        return item['value'] === task['value'] ? itemsToAdd[task['plugin_flyvemdm_policies_id']].splice(index, 1) : null
+                    }
                 })
             } else {
                 return itemsToAdd[task['plugin_flyvemdm_policies_id']] ? delete itemsToAdd[task['plugin_flyvemdm_policies_id']] : null
