@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import bytesToSize from '../../shared/bytesToSize'
+import { I18n } from "react-i18nify"
 
 export default class FilesUpload extends Component {
 
@@ -57,7 +58,7 @@ export default class FilesUpload extends Component {
             if (this.state.files.length + files.length >= this.props.maxFiles) {
                 this.onError({
                     code: 4,
-                    message: 'maximum file count reached'
+                    message: I18n.t('files_upload.maximum_count')
                 }, file)
                 break
             }
@@ -117,7 +118,7 @@ export default class FilesUpload extends Component {
             }
             this.onError({
                 code: 1,
-                message: file.name + ' is not a valid file type'
+                message: `${file.name} ${I18n.t('files_upload.invalid_type')}`
             }, file)
             return false
         } else {
@@ -129,13 +130,13 @@ export default class FilesUpload extends Component {
         if (file.size > this.props.maxFileSize) {
             this.onError({
                 code: 2,
-                message: file.name + ' is too large'
+                message: `${file.name} ${I18n.t('files_upload.too_large')}`
             }, file)
             return false
         } else if (file.size < this.props.minFileSize) {
             this.onError({
                 code: 3,
-                message: file.name + ' is too small'
+                message: `${file.name} ${I18n.t('files_upload.too_small')}`
             }, file)
             return false
         } else {
