@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
+import { I18n } from 'react-i18nify'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -40,8 +41,10 @@ class ChangeDownloadURL extends Component {
         return (    
             <div>
                 <div className="listElement">
-                    URL of the application
-                    <div className="detail">File extension as apk or upk</div>
+                    {I18n.t('settings.entity.url')}
+                    <div className="detail">
+                        {I18n.t('settings.entity.file_extension')}
+                    </div>
                 </div>
                 <div className="listElement">
                     <input 
@@ -53,10 +56,10 @@ class ChangeDownloadURL extends Component {
                     />
                 </div>
                 <button className="btn --secondary" style={{marginRight: 10}} onClick={() => this.props.changeMode("")}>
-                    Cancel
+                    {I18n.t('commons.cancel')}
                 </button>
                 <button className="btn --primary" onClick={this.saveURL}>
-                    Save
+                    {I18n.t('commons.save')}
                 </button>
             </div>
         )

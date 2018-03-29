@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { I18n } from 'react-i18nify'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -40,8 +41,10 @@ class ChangeTokenLife extends Component {
         return (    
             <div>
                 <div className="listElement">
-                    Date Period
-                    <div className="detail">In number of days</div>
+                    {I18n.t('settings.entity.date_period')}
+                    <div className="detail">
+                        {I18n.t('settings.entity.number_of_days')}
+                    </div>
                 </div>
                 <div className="listElement">
                     <input 
@@ -53,10 +56,10 @@ class ChangeTokenLife extends Component {
                     />
                 </div>
                 <button className="btn --secondary" style={{marginRight: 10}} onClick={() => this.props.changeMode("")}>
-                    Cancel
+                    {I18n.t('commons.cancel')}
                 </button>
                 <button className="btn --primary" onClick={this.saveTokenLife}>
-                    Save
+                    {I18n.t('commons.save')}
                 </button>
             </div>
         )

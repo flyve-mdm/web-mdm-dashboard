@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { I18n } from 'react-i18nify'
 
 class Main extends Component {
 
     render () {
         return (    
             <React.Fragment>
-                <div className="title"> Agent </div>
+                <div className="title"> 
+                    {I18n.t('commons.agent')}
+                </div>
 
                 <div className="listElement">
                     <div className="message">
-                        Token life
+                        {I18n.t('settings.entity.token_life')}
                     </div>
                     <div className="controller">
                         <a onClick={() => this.props.changeMode("change Token life")}>{this.props.tokenLife} DAYS</a>
@@ -19,22 +22,24 @@ class Main extends Component {
 
                 <div className="listElement">
                     <div className="message">
-                        Download URL
+                        {I18n.t('settings.entity.download_url')}
                         <div className="detail">{this.props.downloadURL}</div>
                     </div>
 
                     <div className="controller">
                         <button className="btn --secondary" onClick={() => this.props.changeMode("change download URL")}>
-                            Change
+                            {I18n.t('commons.change')}
                         </button>
                     </div>
                 </div>
 
-                <div className="title"> Configuration </div>
+                <div className="title"> 
+                    {I18n.t('commons.configuration')}
+                </div>
 
                 <div className="listElement">
                     <div className="message">
-                        Entity ID
+                        {I18n.t('settings.entity.id')}
                     </div>
                     <div className="controller">
                         {this.props.entityID}
@@ -43,18 +48,20 @@ class Main extends Component {
 
                 <div className="listElement">
                     <div className="message">
-                        Maximum managed devices
+                        {I18n.t('settings.entity.maximum_devices')}
                     </div>
                     <div className="controller">
                         {this.props.maximunManagedDevices}
                     </div>
                 </div>
 
-                <div className="title"> General information </div>
+                <div className="title"> 
+                    {I18n.t('settings.entity.general_information')}
+                </div>
 
                 <div className="listElement">
                     <div className="message">
-                        Devices currently managed
+                        {I18n.t('settings.entity.devices_currently')}
                     </div>
                     <div className="controller">
                         {this.props.devicesCurretlymanaged}
@@ -63,7 +70,7 @@ class Main extends Component {
 
                 <div className="listElement">
                     <div className="message">
-                        Fleets currently managed
+                        {I18n.t('settings.entity.fleets_currently')}
                     </div>
                     <div className="controller">
                         {this.props.fleetsCurrentlyManaged}
@@ -72,7 +79,7 @@ class Main extends Component {
 
                 <div className="listElement">
                     <div className="message">
-                        Files uploaded
+                        {I18n.t('settings.entity.files_uploaded')}
                     </div>
                     <div className="controller">
                         {this.props.filesUploaded}
@@ -81,7 +88,7 @@ class Main extends Component {
 
                 <div className="listElement">
                     <div className="message">
-                        Applications uploaded
+                        {I18n.t('settings.entity.applications_uploaded')}
                     </div>
                     <div className="controller">
                         {this.props.applicationsUploaded}
@@ -90,7 +97,7 @@ class Main extends Component {
 
                 <div className="listElement">
                     <div className="message">
-                        Number of users
+                        {I18n.t('settings.entity.number_of_users')}
                     </div>
                     <div className="controller">
                         {this.props.numberUsers}
@@ -99,7 +106,7 @@ class Main extends Component {
 
                 <div className="listElement">
                     <div className="message">
-                        Invitations sent
+                        {I18n.t('settings.entity.invitations_sent')}
                     </div>
                     <div className="controller">
                         {this.props.invitationsSent}
@@ -108,7 +115,7 @@ class Main extends Component {
 
                 <div className="listElement">
                     <div className="message">
-                        Types of policies
+                        {I18n.t('settings.entity.types_of_policies')}
                     </div>
                     <div className="controller">
                         {this.props.typesPolicies}
@@ -117,7 +124,7 @@ class Main extends Component {
 
                 <div className="listElement">
                     <div className="message">
-                        Number of categories for policies
+                        {I18n.t('settings.entity.number_of_categories')}
                     </div>
                     <div className="controller">
                         {this.props.numberCategoriesForPolicies}
