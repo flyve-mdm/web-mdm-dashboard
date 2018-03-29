@@ -19,6 +19,9 @@
     "title": "Search Engine",
     "itemType_not_found": "ItemType not found"
   },
+  "users": {
+    "delete": "Delete Users"
+  },
   "settings": {
     "display": {
       "title": "Display",
