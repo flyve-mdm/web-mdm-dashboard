@@ -91,6 +91,12 @@
     "already_have_account": "Do you already have an account?",
     "full_name": "Full name"
   },
+  "forgot_password": {
+    "title": "Recover account",
+    "go_home": "Go home",
+    "help_reset_password": "We can help you reset password and security info. Please, enter your Flyve MDM account in the following text box.",
+    "reset_your_password": "To reset your password, open your mailbox an find the email with the subject \"Reset Password\" and open the link to create a new password."
+  },
   "logout": {
     "close_session": "Close session",
     "are_you_sure_you_want_to_close_your_session?": "Are you sure you want to close your session?"
@@ -399,6 +405,7 @@
     "default_profile": "Default profile",
     "valid_since": "Valid since",
     "valid_until": "Valid until",
-    "register": "Register"
+    "register": "Register",
+    "flyve_mdm_account": "Flyve MDM account" 
   }
 }
