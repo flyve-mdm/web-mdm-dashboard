@@ -31,8 +31,8 @@ class ChangeTokenLife extends Component {
         this.props.saveValues('tokenLife', this.state.tokenLife)
         this.props.changeMode('')
         this.props.actions.setNotification({
-            title: 'Successfully',
-            body: 'The Token Life changed',
+            title: I18n.t('commons.success'),
+            body: I18n.t('notifications.token_life_changed'),
             type: 'info'
         })
     }

@@ -190,8 +190,8 @@ export default class UsersEditOne extends Component {
                             newEmails: this.state.emails
                         })
                         this.props.setNotification({
-                            title: 'Success',
-                            body: 'Saved profile',
+                            title: I18n.t('commons.success'),
+                            body: I18n.t('notifications.saved_profile'),
                             type: 'success'
                         })
                         this.props.changeAction('reload')

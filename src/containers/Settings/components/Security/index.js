@@ -35,8 +35,8 @@ class Security extends Component {
         const isOK = await Confirmation.isOK(this.deleteAccount)
         if (isOK) {
             this.props.actions.setNotification({
-                title: 'Successfully',
-                body: 'User deleted!',
+                title: I18n.t('commons.success'),
+                body: I18n.t('notifications.user_deleted'),
                 type: 'info'
             })
         }
@@ -46,8 +46,8 @@ class Security extends Component {
         const isOK = await Confirmation.isOK(this.killSession)
         if (isOK) {
             this.props.actions.setNotification({
-                title: 'Successfully',
-                body: 'Session closed!',
+                title: I18n.t('commons.success'),
+                body: I18n.t('notifications.session_closed'),
                 type: 'info'
             })
         }
@@ -57,8 +57,8 @@ class Security extends Component {
         const isOK = await Confirmation.isOK(this.deleteBrowserData)
         if (isOK) {
             this.props.actions.setNotification({
-                title: 'Successfully',
-                body: 'Web storage and database indexed, cleaned',
+                title: I18n.t('commons.success'),
+                body: I18n.t('notifications.clear_local_storage'),
                 type: 'info'
             })
         }
@@ -88,8 +88,8 @@ class Security extends Component {
         if (isCorrect) {
             this.changeMode('')
             this.props.actions.setNotification({
-                title: 'Successfully',
-                body: 'New password saved!',
+                title: I18n.t('commons.success'),
+                body: I18n.t('notifications.new_password_saved'),
                 type: 'info'
             })
         } else {

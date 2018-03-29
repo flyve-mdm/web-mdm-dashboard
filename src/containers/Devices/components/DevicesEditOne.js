@@ -76,8 +76,8 @@ export default class DevicesEditOne extends Component {
         this.props.glpi.updateItem({itemtype: 'PluginFlyvemdmAgent', id: this.state.id, input})
             .then(() => {
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: 'changes saved successfully',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.changes_saved_successfully'),
                     type: 'success'
                 })
                 this.props.changeAction('reload')

@@ -140,8 +140,8 @@ export default class UsersList extends Component {
                     await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete, queryString: { force_purge: true } })
     
                     this.props.setNotification({
-                        title: 'Successfully',
-                        body: 'User successfully removed!',
+                        title: I18n.t('commons.success'),
+                        body: I18n.t('notifications.user_successfully_removed'),
                         type: 'success'
                     })
                     this.props.changeSelectionMode(false)

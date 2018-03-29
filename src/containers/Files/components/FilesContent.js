@@ -37,8 +37,8 @@ export default class FilesContent extends Component {
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmFile', input: itemListToDelete, queryString: { force_purge: true } })
 
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: 'file successfully removed!',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.file_successfully_removed'),
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)
@@ -59,7 +59,7 @@ export default class FilesContent extends Component {
                 })
             } else {
                 this.props.setNotification({
-                    title: 'Error',
+                    title: I18n.t('commons.error'),
                     body: `${error}`,
                     type: 'alert'
                 })

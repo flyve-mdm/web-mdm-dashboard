@@ -46,14 +46,14 @@ export default class FilesEdit extends Component {
 
                 if (this.state.selectedItem.length > 1) {
                     this.props.setNotification({
-                        title: 'Successfully',
-                        body: 'Edited files',
+                        title: I18n.t('commons.success'),
+                        body: I18n.t('notifications.edited_files'),
                         type: 'success'
                     })
                 } else {
                     this.props.setNotification({
-                        title: 'Successfully',
-                        body: 'Edited file',
+                        title: I18n.t('commons.success'),
+                        body: I18n.t('notifications.edited_file'),
                         type: 'success'
                     })
                 }
@@ -76,7 +76,7 @@ export default class FilesEdit extends Component {
                 })
             } else {
                 this.props.setNotification({
-                    title: 'Error',
+                    title: I18n.t('commons.error'),
                     body: `${error}`,
                     type: 'alert'
                 })

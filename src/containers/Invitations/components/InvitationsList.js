@@ -131,8 +131,8 @@ export default class InvitationsList extends Component {
                     await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmInvitation', input: itemListToDelete, queryString: { force_purge: true } })
     
                     this.props.setNotification({
-                        title: 'Successfully',
-                        body: 'Elements successfully removed',
+                        title: I18n.t('commons.success'),
+                        body: I18n.t('notifications.elements_successfully_removed'),
                         type: 'success'
                     })
                     this.props.changeSelectionMode(false)
@@ -213,8 +213,8 @@ export default class InvitationsList extends Component {
             await this.props.glpi.updateItem({itemtype: 'PluginFlyvemdmInvitation', input: itemListToSend})
 
             this.props.setNotification({
-                title: 'Successfully',
-                body: 'Invitations sent',
+                title: I18n.t('commons.success'),
+                body: I18n.t('notifications.invitation_successfully_sent'),
                 type: 'success'
             })       
             

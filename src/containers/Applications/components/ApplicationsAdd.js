@@ -56,8 +56,8 @@ export default class ApplicationsAdd extends Component {
                     isLoading: false
                 })
                 this.props.setNotification({
-                    title: 'Success',
-                    body: 'Saved file',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.saved_file'),
                     type: 'success'
                 })
                 this.props.changeAction("Reload")
@@ -71,7 +71,7 @@ export default class ApplicationsAdd extends Component {
                 })
             } else {
                 this.props.setNotification({
-                    title:'Error',
+                    title: I18n.t('commons.error'),
                     body: error,
                     type: 'alert'
                 })

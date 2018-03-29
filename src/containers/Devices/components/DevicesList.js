@@ -146,8 +146,8 @@ export default class DevicesList extends Component {
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete, queryString: { force_purge: true } })
 
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: 'Device successfully removed!',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.device_successfully_removed'),
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)

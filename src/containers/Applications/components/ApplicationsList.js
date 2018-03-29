@@ -141,8 +141,8 @@ export default class ApplicationsList extends Component {
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmPackage', input: itemListToDelete, queryString: { force_purge: true } })
 
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: 'Applications successfully removed',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.applications_successfully_removed'),
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)
