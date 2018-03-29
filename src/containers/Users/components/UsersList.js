@@ -6,6 +6,7 @@ import UsersItemList from './UsersItemList'
 import BuildItemList from '../../../components/BuildItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
+import { I18n } from 'react-i18nify'
 
 export default class UsersList extends Component {
     
@@ -148,10 +149,8 @@ export default class UsersList extends Component {
                     this.props.changeAction('reload')
                 })
             } else {
-                // Exit selection mode
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
-
                 this.listView.winControl.selection.clear()
             }
             
@@ -247,7 +246,7 @@ export default class UsersList extends Component {
             <ReactWinJS.ToolBar.Button
                 key="delete"
                 icon="delete"
-                label="Delete"
+                label={I18n.t('commons.delete')}
                 priority={0}
                 disabled={this.props.selectedItems.length === 0}
                 onClick={this.handleDelete}
@@ -258,7 +257,7 @@ export default class UsersList extends Component {
             <ReactWinJS.ToolBar.Button
                 key="edit"
                 icon="edit"
-                label="Edit"
+                label={I18n.t('commons.edit')}
                 priority={0}
                 disabled={this.props.selectedItems.length === 0}
                 onClick={() => this.handleEdit("/app/users/edit")}
@@ -294,14 +293,14 @@ export default class UsersList extends Component {
                     <ReactWinJS.ToolBar.Button
                         key="sort"
                         icon="sort"
-                        label="Sort"
+                        label={I18n.t('commons.sort')}
                         priority={1}
                         onClick={this.handleSort}
                     />
                     <ReactWinJS.ToolBar.Button
                         key="refresh"
                         icon="refresh"
-                        label="Refresh"
+                        label={I18n.t('commons.refresh')}
                         priority={1}
                         onClick={this.handleRefresh}
                     />
@@ -312,7 +311,7 @@ export default class UsersList extends Component {
                     <ReactWinJS.ToolBar.Toggle
                         key="select"
                         icon="bullets"
-                        label="Select"
+                        label={I18n.t('commons.select')}
                         priority={0}
                         selected={this.props.selectionMode}
                         onClick={this.handleToggleSelectionMode}
@@ -321,7 +320,7 @@ export default class UsersList extends Component {
 
                 { listComponent }
 
-                <Confirmation title={`Delete Users`} message={this.props.selectedItems.length +` Users`} reference={el => this.contentDialog = el} /> 
+                <Confirmation title={I18n.t('users.delete')} message={`${this.props.selectedItems.length} ${I18n.t('commons.users')}`} reference={el => this.contentDialog = el} /> 
             </React.Fragment>
         )
     }
