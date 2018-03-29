@@ -28,6 +28,12 @@
     "special_character": "At least one special character is required",
     "invalid_email": "It is not a valid email"
   },
+  "files_upload": {
+    "maximum_count": "maximum file count reached",
+    "invalid_type": "is not a valid file type",
+    "too_large": "is too large",
+    "too_small": "is too small"
+  },
   "invitations": {
     "pending": "Pending Invitation",
     "no_logs": "No logs Available",
