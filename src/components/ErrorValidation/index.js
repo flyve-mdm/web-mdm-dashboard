@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { I18n } from "react-i18nify"
 
 class ErrorValidation extends Component {
 
@@ -7,35 +8,35 @@ class ErrorValidation extends Component {
         let errorMessages = []
 
         if (parametersToEvaluate.isRequired && !value )
-            errorMessages.push( 'Required field' )
+            errorMessages.push( I18n.t('validation.required_field') )
         if (parametersToEvaluate.minimunLength) {
             if (value.length < parametersToEvaluate.minimunLength)
-                errorMessages.push( `Insufficient characters, a minimum of ${parametersToEvaluate.minimunLength} is required` )
+                errorMessages.push( `${I18n.t('validation.insufficient_characters')} ${parametersToEvaluate.minimunLength} ${I18n.t('validation.is_requiered')}` )
         }
         if (parametersToEvaluate.needDigit) {
             const myRe = /[\d]/g
             if (!myRe.test(value)) 
-                errorMessages.push( 'At least one digit is necessary' )
+                errorMessages.push( I18n.t('validation.one_digit') )
         }
         if (parametersToEvaluate.needLowercaseCharacter) {
             const myRe = /[a-z]/g
             if (!myRe.test(value))
-                errorMessages.push( 'At least one lowercase character is required' )
+                errorMessages.push( I18n.t('validation.lowercase_character') )
         }
         if (parametersToEvaluate.needUppercaseCharacter) {
             const myRe = /[A-Z]/g
             if (!myRe.test(value))
-                errorMessages.push( 'At least one uppercase character is required' )
+                errorMessages.push( I18n.t('validation.uppercase_character') )
         }
         if (parametersToEvaluate.needSymbol) {
             const myRe = /[!@#%^&*?><)(+=._\-\\[\]^~`'"˜$ˆ/:;{}|]/g
             if (!myRe.test(value))
-                errorMessages.push( 'At least one special character is required' )
+                errorMessages.push( I18n.t('validation.special_character') )
         }
         if (parametersToEvaluate.isEmail) {
             const myRe = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/g
             if (!myRe.test(value))
-                errorMessages.push('It is not a valid email')
+                errorMessages.push( I18n.t('validation.invalid_email') )
         }
         if (parametersToEvaluate.isEqualTo) {
             if(value !== parametersToEvaluate.isEqualTo.value)
