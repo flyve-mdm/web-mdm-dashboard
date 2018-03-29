@@ -119,11 +119,11 @@ class Security extends Component {
         return [
             [
                 {
-                    label: "Password",
+                    label: I18n.t('commons.password'),
                     type: "password",
                     name: "password",
                     value: this.state.password,
-                    placeholder: "Password",
+                    placeholder: I18n.t('commons.password'),
                     function: this.changeState,
                     parametersToEvaluate: { 
                         isRequired: true,
@@ -140,11 +140,11 @@ class Security extends Component {
             ],
             [
                 {
-                    label: "Password (confirmation)",
+                    label: I18n.t('commons.password_confirmation'),
                     type: "password",
                     name: "passwordConfirmation",
                     value: this.state.passwordConfirmation,
-                    placeholder: "Password confirmation",
+                    placeholder: I18n.t('commons.password_confirmation'),
                     function: this.changeState,
                     parametersToEvaluate: { 
                         isRequired: true,
@@ -155,7 +155,7 @@ class Security extends Component {
                         needSymbol: this.props.passwordConfiguration.need_symbol,
                         isEqualTo: {
                             value: this.state.password,
-                            message: "Passwords do not match"
+                            message: I18n.t('commons.passwords_not_match')
                         }
                     },
                     forceValidation: this.state.forceValidation,
@@ -176,7 +176,7 @@ class Security extends Component {
         }
 
         switch (this.state.mode) {
-            case 'Change password':
+            case I18n.t('commons.change_password'):
                 return (
                     <ContentPane>
                         <h2 className="win-h2"> {this.state.mode} </h2>
@@ -192,11 +192,11 @@ class Security extends Component {
                                 style={{marginRight: 10}} 
                                 onClick={() => this.changeMode("")}
                             >
-                                Cancel
+                                {I18n.t('commons.cancel')}
                             </button>
 
                             <button className="win-button">
-                                Save
+                                {I18n.t('commons.save')}
                             </button>
 
                         </form>
@@ -206,65 +206,81 @@ class Security extends Component {
             default:
                 return (
                     <ContentPane>
-                        <h2 style={{marginBottom: '20px'}}>Security</h2>
+                        <h2 style={{marginBottom: '20px'}}>
+                            {I18n.t('commons.security')}
+                        </h2>
                         
                         <div className="listElement">
                             <div className="message">
-                                Password
-                                <div className="detail">Change your FlyveMDM Account password</div>
+                                {I18n.t('commons.password')}
+                                <div className="detail">
+                                    {I18n.t('settings.security.change_flyve_passsword')}
+                                </div>
                             </div>
                             <div className="controller">
-                                <button className="win-button" onClick={() => this.changeMode('Change password')}>
-                                    Edit
+                                <button className="win-button" onClick={() => this.changeMode(I18n.t('commons.change_password'))}>
+                                    {I18n.t('commons.edit')}
                                 </button>
                             </div>
                         </div>
         
                         <div className="listElement">
                             <div className="message">
-                                Kill session
-                                <div className="detail">Destroy the session identified by your session token</div>
+                                {I18n.t('commons.kill_session')}
+                                <div className="detail">
+                                    {I18n.t('settings.security.destroy_session')}
+                                </div>
                             </div>
                             <div className="controller">
-                                <button className="win-button" onClick={this.closeSession}>Logout</button>
+                                <button className="win-button" onClick={this.closeSession}>
+                                    {I18n.t('commons.logout')}
+                                </button>
                             </div>
                         </div>
 
                         <Confirmation 
-                            title="Kill session"
-                            message="Are you sure you want to close your session?"
+                            title={I18n.t('commons.kill_session')}
+                            message={I18n.t('settings.security.close_session_message')}
                             reference={el => this.killSession = el} 
                         />
         
                         <div className="listElement">
                             <div className="message">
-                                Delete browser data
-                                <div className="detail">Delete Web Storage and Indexed Database</div>
+                                {I18n.t('settings.security.delete_data')}
+                                <div className="detail">
+                                    {I18n.t('settings.security.delete_data_detail')}
+                                </div>
                             </div>
                             <div className="controller">
-                                <button className="win-button" onClick={this.cleanWebStorage}>Delete</button>
+                                <button className="win-button" onClick={this.cleanWebStorage}>
+                                    {I18n.t('commons.delete')}
+                                </button>
                             </div>
                         </div>
 
                         <Confirmation 
-                            title="Delete browser data"
-                            message="Are you sure you want to delete all data/information in the web storage and indexed database?"
+                            title={I18n.t('settings.security.delete_data')}
+                            message={I18n.t('settings.security.delete_data_message')}
                             reference={el => this.deleteBrowserData = el} 
                         />
         
                         <div className="listElement">
                             <div className="message">
-                                Delete account
-                                <div className="detail">This action remove all information related to the user and the entity</div>
+                                {I18n.t('settings.security.delete_account')}
+                                <div className="detail">
+                                    {I18n.t('settings.security.delete_account_detail')}
+                                </div>
                             </div>
                             <div className="controller">
-                                <button className="win-button" onClick={this.deleteUser}>Delete</button>
+                                <button className="win-button" onClick={this.deleteUser}>
+                                    {I18n.t('commons.delete')}
+                                </button>
                             </div>
                         </div>
                         
                         <Confirmation 
-                            title="Account deletion"
-                            message="Are you certain to delete the account?"
+                            title={I18n.t('settings.security.delete_account')}
+                            message={I18n.t('settings.security.delete_account_message')}
                             reference={el => this.deleteAccount = el} 
                         />
                     </ContentPane>            

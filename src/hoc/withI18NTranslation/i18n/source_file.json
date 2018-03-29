@@ -36,6 +36,17 @@
       "devices_by_users": "Devices by users",
       "devices_by_system": "Devices by Operating System version"
     },
+    "security": {
+      "change_flyve_passsword": "Change your Flyve MDM Account password",
+      "destroy_session": "Destroy the session identified by your session token",
+      "close_session_message": "Are you sure you want to close your session?",
+      "delete_data": "Delete browser data",
+      "delete_data_detail": "Delete Web Storage and Indexed Database",
+      "delete_data_message": "Are you sure you want to delete all data/information in the web storage and indexed database?",
+      "delete_account": "Delete account",
+      "delete_account_detail": "This action remove all information related to the user and the entity",
+      "delete_account_message": "Are you certain to delete the account?"
+    },
     "notifications": {
       "title": "Notifications",
       "show": "Show notifications",
@@ -249,6 +260,7 @@
     "email": "Email",
     "name": "Name",
     "password": "Password",
+    "password_confirmation": "Password confirmation",
     "back": "Back",
     "sign_in": "Sign in",
     "terms_and_conditions": "Terms and Conditions",
@@ -332,7 +344,6 @@
     "modified": "Modified",
     "logout": "Logout",
     "language": "Language",
-    "passwords_do_not_match": "Passwords do not match",
     "call_mobile": "Call Mobile",
     "call_work": "Call Work",
     "joined": "Joined",
@@ -370,6 +381,8 @@
     "spain": "Spain",
     "animations": "Animations",
     "passwords_not_match": "Passwords do not match",
-    "add_email": "Add email"
+    "add_email": "Add email",
+    "change_password": "Change password",
+    "kill_session": "Kill session"
   }
 }
