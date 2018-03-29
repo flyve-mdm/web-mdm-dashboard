@@ -1,6 +1,7 @@
 import React from 'react'
 import renderMergedProps from '../renderMergerProps/renderMergedProps'
 import { Route } from 'react-router-dom'
+import { Redirect } from 'react-router'
 
 const isAuthenticated = () => {
   if (localStorage.getItem('sessionToken') && localStorage.getItem('sessionToken') !== undefined ) {
@@ -20,9 +21,9 @@ const PrivateRoute = ({ component, redirectTo, ...rest }) => {
           pathname: redirectTo,
           state: { from: routeProps.location }
         }}/>
-      );
+      )
     }}/>
-  );
-};
+  )
+}
 
 export default PrivateRoute

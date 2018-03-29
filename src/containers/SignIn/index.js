@@ -11,8 +11,8 @@ import { I18n } from "react-i18nify"
 
 // Async Component
 import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
-import { Redirect } from 'react-router';
-import Loading from '../../components/Loading';
+import { Redirect } from 'react-router'
+import Loading from '../../components/Loading'
 import { changeInput, changePhase, handleFormSubmit } from './actions';
 
 function mapStateToProps(state, props) {
