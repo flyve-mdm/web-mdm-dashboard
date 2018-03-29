@@ -127,7 +127,7 @@ export default class EditMultiple extends Component {
                     case "text": 
                         input = (
                             <Input
-                                label="What will be the new value?"
+                                label={I18n.t('edit_multiple.what_new_value')}
                                 type="text"
                                 name="newValue"
                                 value={this.state.newValue}
@@ -139,7 +139,7 @@ export default class EditMultiple extends Component {
                     case "password": 
                         input = [
                             <Input
-                                label="What is the new password?"
+                                label={I18n.t('edit_multiple.what_new_password')}
                                 type="password"
                                 name="newValue"
                                 value={this.state.newValue}
@@ -149,7 +149,7 @@ export default class EditMultiple extends Component {
                                 key="password-1"
                             />,
                             <Input
-                                label="Please repeat the password"
+                                label={I18n.t('edit_multiple.repeat_password')}
                                 type="password"
                                 name="passwordConfirmation"
                                 value={this.state.passwordConfirmation}
@@ -170,7 +170,7 @@ export default class EditMultiple extends Component {
                     case 'select':
                         input = (
                             <Select
-                                label= "What will be the new value?"
+                                label= {I18n.t('edit_multiple.what_new_value')}
                                 name="newValue"
                                 value={this.state.newValue}
                                 options={[]}
@@ -189,7 +189,7 @@ export default class EditMultiple extends Component {
                     case 'datePicker':
                         input = (
                             <DatePicker
-                                label="What will be the new value?"
+                                label={I18n.t('edit_multiple.what_new_value')}
                                 name="newValue"
                                 value={this.state.newValue}
                                 function={this.change}
@@ -200,7 +200,7 @@ export default class EditMultiple extends Component {
                     case 'textArea': 
                         input = (
                             <TextArea
-                                label="What will be the new value?"
+                                label={I18n.t('edit_multiple.what_new_value')}
                                 type="text"
                                 name="newValue"
                                 value={this.state.newValue}
@@ -222,9 +222,11 @@ export default class EditMultiple extends Component {
             return (
                 <ContentPane>
                     <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > Edit Users </h2>
+                        <h2 className="win-h2 titleContentPane" > 
+                            {I18n.t('edit_multiple.title')}
+                        </h2>
                         <h4  className="win-h4">
-                            Select the field that you want to update
+                            {I18n.t('edit_multiple.select_field')}
                         </h4>
                         <Select
                             name="selectedField"
@@ -241,11 +243,11 @@ export default class EditMultiple extends Component {
                                 <br/>
 
                                 <button className="btn --secondary" onClick={this.cancel}>
-                                    Cancel
+                                    {I18n.t('commons.cancel')}
                                 </button>
                                 
                                 <button className="btn --primary" onClick={this.handleSave} style={{marginLeft: 10}}>
-                                    Save
+                                    {I18n.t('commons.save')}
                                 </button>
                             </React.Fragment>
                         )}
