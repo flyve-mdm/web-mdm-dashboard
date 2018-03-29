@@ -34,9 +34,11 @@ class PasswordFieldset extends Component {
         } else {
             renderComponent = (
                 <div className="authentication-password__div">
-                    <h2 className="win-h2">Enter password</h2>
+                    <h2 className="win-h2">
+                        { I18n.t('login.enter_password') }
+                    </h2>
                     <p>
-                        { I18n.t('login.enter_the_password_for') }
+                        { I18n.t('login.enter_password_for') }
                     <br />
                         {this.props.username}
                         <br />
@@ -46,7 +48,7 @@ class PasswordFieldset extends Component {
                         <input
                             type="password"
                             name="password"
-                            ref={(input) => { this.passwordInput = input; }}
+                            ref={(input) => { this.passwordInput = input }}
                             className={this.state.classInput}
                             placeholder={I18n.t('commons.password')}
                             value={this.props.password}

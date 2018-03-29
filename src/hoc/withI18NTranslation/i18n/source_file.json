@@ -1,13 +1,14 @@
 {
   "login": {
-    "use_your_flyve_mdm_account": "Use your Flyve MDM account",
-    "what_s_this": "What's this?",
-    "username": "Username",
-    "next": "Next",
-    "no_account?": "No account?",
-    "create_one!": "Create one!",
+    "title": "Sign in",
+    "username_not_registered": "The username entered is not registered. Try a different account or",
+    "create_an_new": "create an new",
+    "use_your_account": "Use your Flyve MDM account",
+    "what_is_this": "What's this?",
+    "no_account": "No account?",
+    "create_one": "Create one!",
     "enter_password": "Enter password",
-    "enter_the_password_for": "Enter the password for",
+    "enter_password_for": "Enter the password for",
     "forgot_my_password": "Forgot my password"
   },
   "invitations": {
@@ -266,6 +267,8 @@
   "commons": {
     "drop_or_click_file": "Drop the file here or click to upload",
     "email": "Email",
+    "username": "Username",
+    "next": "Next",
     "name": "Name",
     "password": "Password",
     "password_confirmation": "Password confirmation",
