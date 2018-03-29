@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { I18n, Translate } from 'react-i18nify'
-
+import { I18n } from 'react-i18nify'
 import Loading from '../../components/Loading'
 import ConstructInputs from '../../components/Forms'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
@@ -71,7 +70,7 @@ class SignUp extends Component {
             renderComponent = (
                 <React.Fragment>
                     <h2 className="win-h2" style={{textAlign: 'center'}}>
-                        <Translate value="create_account.create_account"/>
+                        { I18n.t('create_account.title') }
                     </h2>
 
                     <form className="authentication__form" onSubmit={(event) => this.handleSubmitForm(event)}>
@@ -83,13 +82,13 @@ class SignUp extends Component {
                         </div>
                         <div style={{textAlign: 'center'}}>
                             <button className='btn --primary' style={{ margin: "20px" }}>
-                                <Translate value="create_account.register"/>
+                                { I18n.t('commons.register') }
                             </button>
                             <p>
-                                <Translate value="create_account.do_you_already_have_an_account?"/>
+                                { I18n.t('create_account.already_have_account') }
                                 &#160;
                                 <Link to='/'>
-                                    <Translate value="commons.sign_in"/>
+                                    { I18n.t('commons.sign_in') }
                                 </Link>
                             </p>
                         </div>
