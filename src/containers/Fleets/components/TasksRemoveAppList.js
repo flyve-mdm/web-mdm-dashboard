@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class TasksList extends Component {
+class TasksRemoveAppList extends Component {
 
     constructor(props) {
         super(props)
@@ -18,7 +18,7 @@ class TasksList extends Component {
             Array.isArray(this.props.data) ?
                 this.props.data.map(item => {
                     return this.props.typeData.map((value, index) => {
-                        return item['items_id'] === value['id'] ?
+                        return item['value'] === value['package_name'] ?
                             <div className='files-list' style={{ width: '320px' }} key={value['id']}>
                                 <div className='files-list-content'>
                                     <div className='files-list-item'>
@@ -47,8 +47,8 @@ class TasksList extends Component {
 
     render() {
         return this.refreshRender()
-         
+
     }
 }
 
-export default TasksList
+export default TasksRemoveAppList

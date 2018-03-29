@@ -94,7 +94,10 @@ class FleetsContent extends Component {
                 }
 
                 const deployType = policies.data.filter(policy => {
-                    return policy['PluginFlyvemdmPolicy.type'] === 'deployapp' && (policy['PluginFlyvemdmPolicy.id'] === taskDeploy['plugin_flyvemdm_policies_id'])
+                    return (
+                        policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || 
+                        policy['PluginFlyvemdmPolicy.type'] === 'removeapp') 
+                        && (policy['PluginFlyvemdmPolicy.id'] === taskDeploy['plugin_flyvemdm_policies_id'])
                 })
 
                 if (deployType.length > 0) {
@@ -144,7 +147,7 @@ class FleetsContent extends Component {
             itemtype: 'PluginFlyvemdmPackage', 
             queryString: { range: '0-50' } 
         })
-
+        console.log(tasksNew)
         /* 
         * Update props
         */
@@ -195,10 +198,13 @@ class FleetsContent extends Component {
         // Check if the current Fleet have a Task that have a relation with this Policy
         if (fleetHaveTask) {
             // Return a Object that is the Task
-            if (policy['PluginFlyvemdmPolicy.type'] === 'deployapp') {
-                return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
-            } else {
-                return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['value'] : policy['PluginFlyvemdmPolicy.recommended_value']
+            switch (policy['PluginFlyvemdmPolicy.type']) {
+                case 'deployapp':
+                    return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
+                case 'removeapp':
+                    return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
+                default:
+                    return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['value'] : policy['PluginFlyvemdmPolicy.recommended_value']
             }
         } else {
             // Return recommended value

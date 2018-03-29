@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
-import TasksList from './TasksList'
+import TasksDeployAppList from './TasksDeployAppList'
+import TasksRemoveAppList from './TasksRemoveAppList'
 
 class FleetsTaskItemList extends Component {
     constructor(props) {
@@ -261,7 +262,7 @@ class FleetsTaskItemList extends Component {
                                                 )
                                             }
                                         </select>
-                                        <TasksList 
+                                        <TasksDeployAppList 
                                         data={this.props.value}
                                         typeData={this.props.typeData}
                                         removeTask={this.handleRemoveTask}
@@ -292,26 +293,36 @@ class FleetsTaskItemList extends Component {
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
-                                        <input
-                                            type="text"
-                                            className="win-textbox"
-                                            style={{ maxWidth: '368px'}}
-                                            placeholder="Package name"
+                                        <select
+                                            className="win-dropdown"
                                             name={this.props.data['PluginFlyvemdmPolicy.id']}
-                                            value={this.state.input}
-                                            onChange={this.handleChangeInput}
-                                            onBlur={this.handleBlurInput}
+                                            onChange={this.handleChangeInput}>
+                                            <option>Select an application</option>
+                                            {
+                                                this.props.typeData.map((value, index) =>
+                                                    <option
+                                                        key={`${value['id']}_${index}`}
+                                                        value={value['id']}>
+                                                        {value["alias"]}
+                                                    </option>
+                                                )
+                                            }
+                                        </select>
+                                        <TasksRemoveAppList
+                                            data={this.props.value}
+                                            typeData={this.props.typeData}
+                                            removeTask={this.handleRemoveTask}
                                         />
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                    <ReactWinJS.ToggleSwitch 
-                                        className="content-text-primary"
-                                        checked={this.state.alreadyAdded}
-                                        onChange={() => this.handleAddedToggle}
-                                        labelOn=""
-                                        labelOff="" />
+                                        <ReactWinJS.ToggleSwitch
+                                            className="content-text-primary"
+                                            checked={this.state.alreadyAdded}
+                                            onChange={() => this.handleAddedToggle}
+                                            labelOn=""
+                                            labelOff="" />
                                     </div>
                                 </div>
                             </div>
