@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { connect } from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
+import { I18n } from 'react-i18nify'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -52,11 +53,17 @@ class Supervision extends Component {
 
         return (
             <ContentPane>
-                <h2>Supervision</h2>
+                <h2>
+                    {I18n.t('settings.supervision.title')}
+                </h2>
                 <div className="list-content Profiles" style={{marginTop: '20px'}}>
-                    <ConstructInputs data={supervision.helpDeskInformation} icon="supervisionIcon" title="Helpdesk Information" />
+                    <ConstructInputs 
+                        data={supervision.helpDeskInformation} 
+                        icon="supervisionIcon" 
+                        title={I18n.t('settings.supervision.helpdesk')} 
+                    />
                     <button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                        Save
+                        {I18n.t('commons.save')}
                     </button>
                     <br />
                 </div>
