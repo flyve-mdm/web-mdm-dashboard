@@ -425,7 +425,6 @@ class FleetsContent extends Component {
     }
 
     handleSaveFleet = async () => {
-
         if(this.props.selectedItems.length === 1) {
             this.handleUpdateFleet()
         } else {
