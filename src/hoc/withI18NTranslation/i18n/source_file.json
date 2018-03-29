@@ -18,6 +18,16 @@
     "what_new_password": "What is the new password?",
     "repeat_password": "Please repeat the password"
   },
+  "validation": {
+    "required_field": "Required field",
+    "insufficient_characters": "Insufficient characters, a minimum of",
+    "is_requiered": "is requiered",
+    "one_digit": "At least one digit is necessary",
+    "lowercase_character": "At least one lowercase character is required",
+    "uppercase_character": "At least one uppercase character is required",
+    "special_character": "At least one special character is required",
+    "invalid_email": "It is not a valid email"
+  },
   "invitations": {
     "pending": "Pending Invitation",
     "no_logs": "No logs Available",
