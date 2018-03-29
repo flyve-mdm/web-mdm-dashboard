@@ -72,11 +72,11 @@ export const buildDataArray = (ctx, I18n) => {
                 forceValidation: ctx.state.forceValidation
             },
             {
-                label: I18n.t('create_account.password_(confirmation)'),
+                label: I18n.t('commons.password_confirmation'),
                 type: "password",
                 name: "passwordConfirmation",
                 value: ctx.state.passwordConfirmation,
-                placeholder: I18n.t('create_account.password_(confirmation)'),
+                placeholder: I18n.t('commons.password_confirmation'),
                 function: ctx.changeState(),
                 disabled: false,
                 style: {
@@ -87,7 +87,7 @@ export const buildDataArray = (ctx, I18n) => {
                     ...ctx.state.configurationPassword,
                     isEqualTo: {
                         value: ctx.state.password,
-                        message: "Passwords do not match"
+                        message: I18n.t('commons.passwords_not_match')
                     }
                 },
                 forceValidation: ctx.state.forceValidation
@@ -97,7 +97,7 @@ export const buildDataArray = (ctx, I18n) => {
     captchaInformation: [
         [
             {
-                label: I18n.t('create_account.enter_the_code_from_the_image'),
+                label: I18n.t('create_account.enter_code_image'),
                 type: "text",
                 name: "captchaValue",
                 value: ctx.state.captchaValue,

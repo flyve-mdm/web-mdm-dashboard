@@ -43,11 +43,11 @@ describe('Check if translations are available', () => {;
   });
 
   it('create account page should have english translations', () => {
-    expect(I18n.t('create_account.create_account')).toBe('Create account')
-    expect(I18n.t('create_account.enter_the_code_from_the_image')).toBe('Enter the code from the image')
-    expect(I18n.t('create_account.do_you_already_have_an_account?')).toBe('Do you already have an account?')
+    expect(I18n.t('create_account.title')).toBe('Create account')
+    expect(I18n.t('create_account.enter_code_image')).toBe('Enter the code from the image')
+    expect(I18n.t('create_account.already_have_account')).toBe('Do you already have an account?')
     expect(I18n.t('create_account.full_name')).toBe('Full name')
-    expect(I18n.t('create_account.password_(confirmation)')).toBe('Password (confirmation)')
+    expect(I18n.t('commons.password_confirmation')).toBe('Password (confirmation)')
     expect(I18n.t('create_account.register')).toBe('Register')
   });
 
