@@ -47,6 +47,10 @@
       "delete_account_detail": "This action remove all information related to the user and the entity",
       "delete_account_message": "Are you certain to delete the account?"
     },
+    "supervision": {
+      "title": "Supervision",
+      "helpdesk": "Helpdesk Information"
+    },
     "notifications": {
       "title": "Notifications",
       "show": "Show notifications",
