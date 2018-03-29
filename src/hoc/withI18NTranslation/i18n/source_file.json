@@ -35,6 +35,25 @@
       "pending_invitations": "Pending invitations",
       "devices_by_users": "Devices by users",
       "devices_by_system": "Devices by Operating System version"
+    },
+    "entity": {
+      "url": "URL of the application",
+      "file_extension": "File extension as apk or upk",
+      "date_period": "Date Period",
+      "number_of_days": "In number of days",
+      "token_life": "Token life",
+      "download_url": "Download URL",
+      "id": "Entity ID",
+      "maximum_devices": "Maximum managed devices",
+      "general_information": "General information",
+      "devices_currently": "Devices currently managed",
+      "fleets_currently": "Fleets currently managed",
+      "files_uploaded": "Files uploaded",
+      "applications_uploaded": "Applications uploaded",
+      "number_of_users": "Number of users",
+      "invitations_sent": "Invitations sent",
+      "types_of_policies": "Types of policies",
+      "number_of_categories": "Number of categories for policies"
     }
   },
   "create_account": {
