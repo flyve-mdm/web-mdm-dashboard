@@ -18,6 +18,17 @@
     "what_new_password": "What is the new password?",
     "repeat_password": "Please repeat the password"
   },
+  "authtype": {
+    "glpi_internal_database": "GLPI internal database",
+    "mail_server": "Mail server",
+    "ldap_directory": "LDAP directory",
+    "other": "Other",
+    "cas": "CAS",
+    "certificate_authentication": "x509 certificate authentication",
+    "api": "API",
+    "cookie": "Cookie",
+    "not_yet_authenticated": "Not yet authenticated"
+  },
   "validate_account": {
     "title": "Validate Account",
     "message": "Your user is not yet activated, please check your email and activate your account"

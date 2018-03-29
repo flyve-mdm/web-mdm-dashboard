@@ -1,23 +1,25 @@
+import { I18n } from 'react-i18nify'
+
 const authtype = id => {
     switch (id) {
         case 1:
-            return 'GLPI internal database'
+            return I18n.t('authtype.glpi_internal_database')
         case 2:
-            return 'Mail server'
+            return I18n.t('authtype.mail_server')
         case 3:
-            return 'LDAP directory'
+            return I18n.t('authtype.ldap_directory')
         case 4:
-            return 'Other'
+            return I18n.t('authtype.other')
         case 5:
-            return 'CAS'
+            return I18n.t('authtype.cas')
         case 6:
-            return 'x509 certificate authentication'
+            return I18n.t('authtype.certificate_authentication')
         case 7:
-            return 'API'
+            return I18n.t('authtype.api')
         case 8:
-            return 'Cookie'
+            return I18n.t('authtype.cookie')
         case 0:
-            return 'Not yet authenticated'
+            return I18n.t('authtype.not_yet_authenticated')
         default:
             return ''
     }
