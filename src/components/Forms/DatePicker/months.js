@@ -1,5 +1,4 @@
 import React from 'react'
-
 import monthsList from './monthsList.json'
 
 export default () => {
