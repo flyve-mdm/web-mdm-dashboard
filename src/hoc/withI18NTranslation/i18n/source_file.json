@@ -11,6 +11,13 @@
     "enter_password_for": "Enter the password for",
     "forgot_my_password": "Forgot my password"
   },
+  "edit_multiple": {
+    "title": "Edit",
+    "select_field": "Select the field that you want to update",
+    "what_new_value": "What will be the new value?",
+    "what_new_password": "What is the new password?",
+    "repeat_password": "Please repeat the password"
+  },
   "invitations": {
     "pending": "Pending Invitation",
     "no_logs": "No logs Available",
