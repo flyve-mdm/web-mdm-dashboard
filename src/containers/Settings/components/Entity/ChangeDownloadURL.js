@@ -31,8 +31,8 @@ class ChangeDownloadURL extends Component {
         this.props.saveValues('downloadURL', this.state.downloadURL)
         this.props.changeMode('')
         this.props.actions.setNotification({
-            title: 'Successfully',
-            body: 'The Download URL was changed',
+            title: I18n.t('commons.success'),
+            body: I18n.t('notifications.download_url_changed'),
             type: 'info'
         })
     }

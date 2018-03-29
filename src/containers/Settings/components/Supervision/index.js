@@ -32,8 +32,8 @@ class Supervision extends Component {
 
     saveChanges = () => {
         this.props.actions.setNotification({
-            title: 'Successfully',
-            body: 'Helpdesk configuration saved',
+            title: I18n.t('commons.success'),
+            body: I18n.t('notifications.helpdesk_configuration_saved'),
             type: 'info'
         })
     }

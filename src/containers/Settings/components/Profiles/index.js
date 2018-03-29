@@ -191,8 +191,8 @@ class Profiles extends Component {
                     }
                 }
             , () => this.props.actions.setNotification({
-                    title: 'Successfully',
-                    body: 'The Profile data changed',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.profile_data_changed'),
                     type: 'info'
                 })
             )

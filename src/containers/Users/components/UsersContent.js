@@ -47,8 +47,8 @@ export default class UsersContent extends Component {
             try {
                 await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete })
                 this.props.setNotification({
-                    title: 'Success',
-                    body: 'Elements successfully removed',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.elements_successfully_removed'),
                     type: 'success'
                 })
                 this.props.history.push("/app/users")
@@ -85,8 +85,8 @@ export default class UsersContent extends Component {
             })
         } catch (error) {
             this.props.setNotification({
-                title: "Error",
-                body: "There was a problem loading this user's data",
+                title: I18n.t('commons.error'),
+                body: I18n.t('notifications.problems_loading_data'),
                 type: "alert"
             }) 
             this.props.history.push("/app/users")

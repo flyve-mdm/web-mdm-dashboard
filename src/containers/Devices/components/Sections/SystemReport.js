@@ -41,8 +41,8 @@ export default class SystemReport extends Component {
                 })
             } catch (error) {
                 this.props.setNotification({
-                    title: "Error",
-                    body: "There was a problem loading the data of this device",
+                    title: I18n.t('commons.error'),
+                    body: I18n.t('notifications.problems_loading_data'),
                     type: "alert"
                 }) 
             }

@@ -35,8 +35,8 @@ export default class Geolocation extends Component {
                 input: {_geolocate: ""}
             })
             this.props.setNotification({
-                title: 'Successfully',
-                body: 'Request sent',
+                title: I18n.t('commons.success'),
+                body: I18n.t('notifications.request_sent'),
                 type: 'success'
             })
             this.handleRefresh()
@@ -63,8 +63,8 @@ export default class Geolocation extends Component {
             })
         } catch (e) {
             this.props.setNotification({
-                title: 'Error',
-                body: 'Problems loading data',
+                title: I18n.t('commons.error'),
+                body: I18n.t('notifications.problems_loading_data'),
                 type: 'alert'
             })
             this.setState({  

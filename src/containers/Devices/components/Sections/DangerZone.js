@@ -15,8 +15,8 @@ class DangerZone extends Component {
                     input: {"wipe": "1"}
                 })
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: response[0].message ? response[0].message : 'Data deleted successfully',
+                    title: I18n.t('commons.success'),
+                    body: response[0].message ? response[0].message : I18n.t('notifications.data_deleted_successfully'),
                     type: 'success'
                 })
                 this.props.changeAction("reload")
@@ -41,8 +41,8 @@ class DangerZone extends Component {
                     input: {"_unenroll": "1"}
                 })
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: response[0].message ? response[0].message : 'Unenrollment device',
+                    title: I18n.t('commons.success'),
+                    body: response[0].message ? response[0].message : I18n.t('notifications.unenrollment_device'),
                     type: 'success'
                 })
                 this.props.changeAction("reload")
@@ -66,8 +66,8 @@ class DangerZone extends Component {
                     id: this.props.id,
                 })
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: response[0].message ? response[0].message : 'Devices successfully deleted',
+                    title: I18n.t('commons.success'),
+                    body: response[0].message ? response[0].message : I18n.t('notifications.devices_successfully_deleted'),
                     type: 'success'
                 })
                 this.props.changeAction("reload")

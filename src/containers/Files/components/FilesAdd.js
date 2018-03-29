@@ -51,8 +51,8 @@ export default class FilesAdd extends Component {
                     isLoading: false
                 })
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: 'Saved file',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.saved_file'),
                     type: 'success'
                 })
                 this.props.changeAction("reload")

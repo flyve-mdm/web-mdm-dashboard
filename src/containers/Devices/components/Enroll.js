@@ -29,8 +29,8 @@ export default class Enroll extends Component {
                 })
 
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: 'Invitation successfully sent!',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.invitation_successfully_sent'),
                     type: 'success'
                 })
                 this.props.history.goBack()

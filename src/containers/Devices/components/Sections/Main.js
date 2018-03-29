@@ -47,8 +47,8 @@ export default class Main extends Component {
             })
         } catch (error) {
             this.props.setNotification({
-                title: "Error",
-                body: "There was a problem loading the data of this device",
+                title: I18n.t('commons.error'),
+                body: I18n.t('notifications.problems_loading_data'),
                 type: "alert"
             }) 
             this.props.history.push("/app/devices")
@@ -72,8 +72,8 @@ export default class Main extends Component {
             this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete })
             .then((response) => {
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: 'Device successfully removed',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.device_successfully_removed'),
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)
@@ -110,8 +110,8 @@ export default class Main extends Component {
                     }
                 })
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: response[0].message ? response[0].message : "Ping sent",
+                    title: I18n.t('commons.success'),
+                    body: response[0].message ? response[0].message : I18n.t('notifications.ping_sent'),
                     type: 'success'
                 })
                 this.setState({ sendingPing: false }, () => {

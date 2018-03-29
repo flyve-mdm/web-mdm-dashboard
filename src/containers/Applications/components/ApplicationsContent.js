@@ -45,8 +45,8 @@ export default class ApplicationsContent extends Component {
             try {
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmPackage', input: itemListToDelete, queryString: { force_purge: true } })
                 this.props.setNotification({
-                    title: 'Success',
-                    body: 'Elements successfully removed',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.elements_successfully_removed'),
                     type: 'success'
                 })
                 this.props.history.push("/app/applications")
@@ -75,8 +75,8 @@ export default class ApplicationsContent extends Component {
             })
         } catch (error) {
             this.props.setNotification({
-                title: "Error",
-                body: "There was a problem loading application data",
+                title: I18n.t('commons.error'),
+                body: I18n.t('notifications.problems_loading_data'),
                 type: "alert"
             }) 
             this.props.history.push("/app/applications")

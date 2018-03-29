@@ -539,8 +539,8 @@ class FleetsContent extends Component {
             }
 
             this.props.setNotification({
-                title: 'Successfully',
-                body: 'Fleet successfully updated!',
+                title: I18n.t('commons.success'),
+                body: I18n.t('notifications.file_successfully_updated'),
                 type: 'success'
             })
             this.requestAllData()
@@ -589,8 +589,8 @@ class FleetsContent extends Component {
                 isLoading: false
             })
             this.props.setNotification({
-                title: 'Successfully',
-                body: 'Fleet successfully created!',
+                title: I18n.t('commons.success'),
+                body: I18n.t('notifications.file_successfully_created'),
                 type: 'success'
             })
             this.props.changeSelectionMode(false)
@@ -625,8 +625,8 @@ class FleetsContent extends Component {
                     isLoading: false
                 })
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: 'file successfully removed!',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.file_successfully_removed'),
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)
@@ -634,8 +634,8 @@ class FleetsContent extends Component {
 
             } catch (error) {
                 this.props.setNotification({
-                    title: 'Error',
-                    body: 'Error',
+                    title: I18n.t('commons.error'),
+                    body: I18n.t('commons.error'),
                     type: 'alert'
                 })
                 this.setState({

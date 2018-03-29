@@ -135,8 +135,8 @@ export default class FleetsList extends Component {
                 await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmFleet', input: itemListToDelete, queryString: { force_purge: true } })
 
                 this.props.setNotification({
-                    title: 'Successfully',
-                    body: 'Fleet successfully removed!',
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.fleet_successfully_removed'),
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)

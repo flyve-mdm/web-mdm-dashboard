@@ -55,8 +55,8 @@ export default class EditMultiple extends Component {
                     await this.props.glpi.updateItem({itemtype: this.props.request.itemtype, input})
                     this.setState ({isLoading: false})            
                     this.props.setNotification({
-                        title: 'Success',
-                        body: 'Elements successfully edited',
+                        title: I18n.t('commons.success'),
+                        body: I18n.t('notifications.elements_successfully_edited'),
                         type: 'success'
                     })
                     this.props.history.goBack()
