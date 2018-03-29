@@ -20,7 +20,8 @@
     "itemType_not_found": "ItemType not found"
   },
   "users": {
-    "delete": "Delete Users"
+    "delete": "Delete Users",
+    "delete_one": "Delete User"
   },
   "settings": {
     "display": {

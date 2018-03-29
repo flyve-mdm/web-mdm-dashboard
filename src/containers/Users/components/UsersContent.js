@@ -115,7 +115,9 @@ export default class UsersContent extends Component {
                                     {this.state.data.realname}
                                 </span>
                                 <br />
-                                <span className="source">Joined {this.state.data.date_creation}</span>
+                                <span className="source">
+                                    {I18n.t('commons.joined')} {this.state.data.date_creation}
+                                </span>
                                 <br />
                                 <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.history.push(`/app/users/${this.state.id}/edit`)} />
                                 <span className="deleteIcon" onClick={this.handleDelete} />
@@ -128,27 +130,39 @@ export default class UsersContent extends Component {
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
-                                    <a href={this.state.data.mobile ? "tel:" + this.state.data.mobile : "#call"}>Call Mobile</a>
-                                    <div>{this.state.data.mobile ? this.state.data.mobile : "not available"}</div>
+                                    <a href={this.state.data.mobile ? "tel:" + this.state.data.mobile : "#call"}>
+                                        {I18n.t('commons.call_mobile')}
+                                    </a>
+                                    <div>
+                                        {this.state.data.mobile ? this.state.data.mobile : I18n.t('commons.not_available')}
+                                    </div>
                                 </div>
                             </li>
                             <li>
                                 <span className="phoneIcon" />
                                 <div className="callContent">
-                                    <a href={this.state.data.phone2 ? "tel:" + this.state.data.phone2 : "#call"}>Call Work</a>
-                                    <div>{this.state.data.phone2 ? this.state.data.phone2 : "not available"}</div>
+                                    <a href={this.state.data.phone2 ? "tel:" + this.state.data.phone2 : "#call"}>
+                                        {I18n.t('commons.call_work')}
+                                    </a>
+                                    <div>
+                                        {this.state.data.phone2 ? this.state.data.phone2 : I18n.t('commons.not_available')}
+                                    </div>
                                 </div>
                             </li>
                             <li>
                                 <span className="emailIcon" />
                                 <div className="callContent">
-                                    <a href={this.state.emails.length > 0 ? "mailto:" + this.state.emails[0]["email"] : "#email"}>Email</a>
-                                    <div>{this.state.emails.length > 0 ? this.state.emails[0]["email"] : "not available"}</div>
+                                    <a href={this.state.emails.length > 0 ? "mailto:" + this.state.emails[0]["email"] : "#email"}>
+                                        {I18n.t('commons.email')}
+                                    </a>
+                                    <div>
+                                        {this.state.emails.length > 0 ? this.state.emails[0]["email"] : I18n.t('commons.not_available')}
+                                    </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <Confirmation title="Delete Users" message={this.state.data.name} reference={el => this.contentDialog = el} />
+                    <Confirmation title={I18n.t('users.delete_one')} message={this.state.data.name} reference={el => this.contentDialog = el} />
                 </div>
             )
         }
