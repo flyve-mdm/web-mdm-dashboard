@@ -1,9 +1,10 @@
-export default function ({state, changeState, changeEmail, deleteEmail, changeSelect, glpi}) {
+import { I18n } from "react-i18nify"
 
+export default function ({state, changeState, changeEmail, deleteEmail, changeSelect, glpi}) {
     const personalInformation = [
         [
             {
-                label: "Login",
+                label: I18n.t('commons.login'),
                 type: "text",
                 name: "login",
                 value: state.login,
@@ -17,7 +18,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
         ],
         [
             {
-                label: "Realname",
+                label: I18n.t('commons.realname'),
                 type: "text",
                 name: "realName",
                 value: state.realName,
@@ -27,7 +28,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 style: null
             },
             {
-                label: "First name",
+                label: I18n.t('commons.first_name'),
                 type: "text",
                 name: "firstName",
                 value: state.firstName,
@@ -39,7 +40,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
         ],
         [
             {
-                label: "Title",
+                label: I18n.t('commons.title'),
                 type: "select",
                 name: "title",
                 value: state.title.value,
@@ -49,7 +50,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 glpi
             },
             {
-                label: "Location",
+                label: I18n.t('commons.location'),
                 type: "select",
                 name: "location",
                 value: state.location.value,
@@ -59,7 +60,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 glpi
             },
             {
-                label: "Default profile",
+                label: I18n.t('commons.default_profile'),
                 type: "select",
                 name: "defaultProfile",
                 value: state.defaultProfile.value,
@@ -74,7 +75,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
     const contactInformation = [
         [
             {
-                label: "Phone",
+                label: I18n.t('commons.phone'),
                 type: "text",
                 name: "phone",
                 value: state.phone,
@@ -84,7 +85,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 style: null
             },
             {
-                label: "Mobile phone",
+                label: I18n.t('commons.mobile_phone'),
                 type: "text",
                 name: "mobilePhone",
                 value: state.mobilePhone,
@@ -96,7 +97,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
         ],
         [
             {
-                label: "Phone 2",
+                label: I18n.t('commons.phone_2'),
                 type: "text",
                 name: "phone2",
                 value: state.phone2,
@@ -106,7 +107,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 style: null
             },
             {
-                label: "Administrative number",
+                label: I18n.t('commons.administrative_number'),
                 type: "text",
                 name: "administrativeNumber",
                 value: state.administrativeNumber,
@@ -120,7 +121,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
     const passwordInformation = [
         [
             {
-                label: "Password",
+                label: I18n.t('commons.password'),
                 type: "password",
                 name: "password",
                 value: state.password,
@@ -131,7 +132,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 style: null
             },
             {
-                label: "Password (confirmation)",
+                label: I18n.t('commons.password_confirmation'),
                 type: "password",
                 name: "passwordConfirmation",
                 value: state.passwordConfirmation,
@@ -140,7 +141,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                     ...state.parametersToEvaluate,
                     isEqualTo: {
                         value: state.password,
-                        message: "Passwords do not match"
+                        message: I18n.t('commons.passwords_not_match')
                     }
                 },
                 function: changeState,
@@ -153,7 +154,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
     const activityInformation = [
         [
             {
-                label: "Last login",
+                label: I18n.t('commons.last_login'),
                 type: "text",
                 name: "lastLogin",
                 value: state.lastLogin,
@@ -165,7 +166,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 }
             },
             {
-                label: "Created",
+                label: I18n.t('commons.created'),
                 type: "text",
                 name: "created",
                 value: state.created,
@@ -177,7 +178,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 } 
             },
             {
-                label: "Modified",
+                label: I18n.t('commons.modified'),
                 type: "text",
                 name: "modified",
                 value: state.modified,
@@ -194,14 +195,14 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
     
     const validDatesInformation = [
         [{
-            label: "Valid since",
+            label: I18n.t('commons.valid_since'),
             type: "date",
             name: "validSince",
             value: state.validSince,
             function: changeState
         }],
         [{
-            label: "Valid until",
+            label: I18n.t('commons.valid_until'),
             type: "date",
             name: "validUntil",
             value: state.validUntil,
@@ -211,7 +212,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
     
     const moreInformation = [
         [{
-            label: "Authentication",
+            label: I18n.t('commons.authentication'),
             type: "text",
             name: "authentication",
             value: state.authentication,
@@ -222,7 +223,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
         }],
         [   
             {
-                label: "Category",
+                label: I18n.t('commons.category'),
                 type: "select",
                 name: "category",
                 value: state.category.value,
@@ -232,7 +233,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
                 glpi
             },
             {
-                label: "Default entity",
+                label: I18n.t('commons.default_entity'),
                 type: "select",
                 name: "defaultEntity",
                 value: state.defaultEntity.value,
@@ -244,7 +245,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
         ],
         [
             {
-                label: "Comments",
+                label: I18n.t('commons.comments'),
                 type: "textArea",
                 name: "comments",
                 value: state.comments,
@@ -263,7 +264,7 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
             ...emailsInformation,
             [{
                 index,
-                label: `Email ${index + 1}`,
+                label: `${I18n.t('commons.email')} ${index + 1}`,
                 type: "email",
                 email: state.emails[index],
                 placeholder: null,
