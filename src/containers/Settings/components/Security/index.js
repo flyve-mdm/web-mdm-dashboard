@@ -7,14 +7,14 @@ import Loading from '../../../../components/Loading'
 import { bindActionCreators } from 'redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { connect } from 'react-redux'
-import { fetchPasswordConfiguration, logout } from '../../../../store/authentication/actions'
+import { logout } from '../../../../store/authentication/actions'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
+import withGLPI from "../../../../hoc/withGLPI"
 
 function mapDispatchToProps(dispatch) {
     const actions = {
         setNotification: bindActionCreators(uiSetNotification, dispatch),
-        fetchPasswordConfiguration: bindActionCreators(fetchPasswordConfiguration, dispatch),
         logout: bindActionCreators(logout, dispatch)
     }
     return { actions }
@@ -28,7 +28,9 @@ class Security extends Component {
         this.state = {
             password: '',
             passwordConfirmation: '',
-            forceValidation: false
+            passwordConfiguration: undefined,
+            forceValidation: false,
+            isLoading: false
         }
     }
 
@@ -82,7 +84,6 @@ class Security extends Component {
                 const elements = password[key]
                 for (let index = 0; index < elements.length; index++) {
                     const element = elements[index]
-                    console.log(element.value)
                     if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect) 
                         isCorrect = false
                 }
@@ -111,12 +112,28 @@ class Security extends Component {
 
     changeMode = (mode) => {
         if (mode === 'Change password') {
-            this.props.actions.fetchPasswordConfiguration()
+            this.setState({ 
+                isLoading: true
+            }, async () => {
+                const {cfg_glpi} = await this.props.glpi.getGlpiConfig()
+                this.setState({
+                    isLoading: false,
+                    passwordConfiguration: {
+                        minimunLength: cfg_glpi.password_min_length,
+                        needDigit: cfg_glpi.password_need_number,
+                        needLowercaseCharacter: cfg_glpi.password_need_letter,
+                        needUppercaseCharacter: cfg_glpi.password_need_caps,
+                        needSymbol: cfg_glpi.password_need_symbol
+                    },
+                    forceValidation: false,
+                    password: '',
+                    passwordConfirmation: '',
+                    mode 
+                })
+            })
+        } else {
+            this.setState({ mode })
         }
-        this.setState({ 
-            forceValidation: false,
-            mode 
-        })
     }
 
     buildDataArray = () => {
@@ -131,11 +148,7 @@ class Security extends Component {
                     function: this.changeState,
                     parametersToEvaluate: { 
                         isRequired: true,
-                        minimunLength: this.props.passwordConfiguration.minimun_length,
-                        needDigit: this.props.passwordConfiguration.need_digit,
-                        needLowercaseCharacter: this.props.passwordConfiguration.need_lowercase_character,
-                        needUppercaseCharacter: this.props.passwordConfiguration.need_uppercase_character,
-                        needSymbol: this.props.passwordConfiguration.need_symbol
+                        ...this.state.passwordConfiguration
                     },
                     forceValidation: this.state.forceValidation,
                     disabled: false,
@@ -152,11 +165,7 @@ class Security extends Component {
                     function: this.changeState,
                     parametersToEvaluate: { 
                         isRequired: true,
-                        minimunLength: this.props.passwordConfiguration.minimun_length,
-                        needDigit: this.props.passwordConfiguration.need_digit,
-                        needLowercaseCharacter: this.props.passwordConfiguration.need_lowercase_character,
-                        needUppercaseCharacter: this.props.passwordConfiguration.need_uppercase_character,
-                        needSymbol: this.props.passwordConfiguration.need_symbol,
+                        ...this.state.passwordConfiguration,
                         isEqualTo: {
                             value: this.state.password,
                             message: I18n.t('commons.passwords_not_match')
@@ -171,7 +180,7 @@ class Security extends Component {
     }
 
     render () {
-        if (this.props.isLoading) {
+        if (this.state.isLoading) {
             return (
                 <div>
                     <Loading message={`${I18n.t('commons.loading')}...`}/> 
@@ -294,7 +303,8 @@ class Security extends Component {
 }
 
 Security.propTypes = {
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    glpi: PropTypes.object.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(Security)
+export default connect(null, mapDispatchToProps)(withGLPI(Security))
