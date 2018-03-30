@@ -33,27 +33,30 @@ class FleetsTaskItemList extends Component {
 
     componentDidMount = () => {
         this.updateState(this.props.fleetHaveTask)
+        let input
+        if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
+            input = ''
+        } else {
+            input = this.props.value ? this.props.value : ''
+        }
         this.setState({
-            input: this.props.value ? this.props.value : ''
+            input
         })
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.fleetHaveTask !== this.props.fleetHaveTask) {
             this.updateState(nextProps.fleetHaveTask)
-            this.setState({
-                input: this.props.value ? this.props.value : ''
-            })
-        } else {
-            this.setState({
-                input: this.props.value ? this.props.value : ''
-            })
         }
-
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-    
+        let input
+        if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
+            input = ''
+        } else {
+            input = this.props.value ? this.props.value : ''
+        }
+        this.setState({
+            input
+        })
     }
     
     handleAddedToggle = () => {
@@ -84,6 +87,9 @@ class FleetsTaskItemList extends Component {
                 this.props.updateValueTask(this.props.data, this.state.input)
                 break
             case 'deployfile':
+                this.props.updateValueTask(this.props.data, this.state.input)
+                break
+            case 'removefile':
                 this.props.updateValueTask(this.props.data, this.state.input)
                 break
             default:
