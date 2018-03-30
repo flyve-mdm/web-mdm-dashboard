@@ -148,7 +148,7 @@ class SplitView extends React.Component {
 
           <Confirmation 
             title={I18n.t('logout.close_session')}
-            message={I18n.t('security.close_session_message')} 
+            message={I18n.t('settings.security.close_session_message')} 
             reference={el => this.contentDialog = el} 
           />
         </React.Fragment>
