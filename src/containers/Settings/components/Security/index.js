@@ -220,7 +220,7 @@ class Security extends Component {
 
                             <br/>
 
-                            <button className="win-button" 
+                            <button className="btn --secondary" 
                                 type="button"
                                 style={{marginRight: 10}} 
                                 onClick={() => this.changeMode("")}
@@ -228,7 +228,7 @@ class Security extends Component {
                                 {I18n.t('commons.cancel')}
                             </button>
 
-                            <button className="win-button">
+                            <button className="btn --primary">
                                 {I18n.t('commons.save')}
                             </button>
 
