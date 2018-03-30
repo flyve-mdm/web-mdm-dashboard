@@ -191,6 +191,8 @@ class FleetsContent extends Component {
                     return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
                 case 'removeapp':
                     return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
+                case 'deployfile':
+                    return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
                 default:
                     return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]['value'] : policy['PluginFlyvemdmPolicy.recommended_value']
             }
