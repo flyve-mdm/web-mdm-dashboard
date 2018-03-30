@@ -23,8 +23,7 @@ class TasksDeployFileList extends Component {
                                 <div className='files-list-content'>
                                     <div className='files-list-item'>
                                         <div className='item-content-primary'>
-                                            <div className='content-text-primary'>{value['alias']}</div>
-                                            <div className='content-text-secondary'>{value['package_name']}</div>
+                                            <div className='content-text-primary'>{value['name']}</div>
                                         </div>
                                         <div className='item-content-secondary'>
                                             <div className='icon item-icon'>
