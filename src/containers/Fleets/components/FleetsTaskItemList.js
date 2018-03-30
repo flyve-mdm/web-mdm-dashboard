@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactWinJS from 'react-winjs'
 import TasksDeployAppList from './TasksDeployAppList'
 import TasksRemoveAppList from './TasksRemoveAppList'
+import TasksDeployFileList from './TaskDeployFileList'
 import { I18n } from 'react-i18nify'
 
 class FleetsTaskItemList extends Component {
@@ -81,6 +82,9 @@ class FleetsTaskItemList extends Component {
             case 'removeapp':
                 this.props.updateValueTask(this.props.data, this.state.input)
                 break
+            case 'deployfile':
+                this.props.updateValueTask(this.props.data, this.state.input)
+                break
             default:
                 break
         }
@@ -99,6 +103,9 @@ class FleetsTaskItemList extends Component {
                 if (apps.length > 0) {
                     this.props.updateValueTask(this.props.data, apps[0]['package_name'])
                 }
+                break
+            case 'deployfile':
+                this.props.updateValueTask(this.props.data, e.target.value)
                 break
             default:
                 this.setState({ input: e.target.value })
@@ -353,7 +360,7 @@ class FleetsTaskItemList extends Component {
                 )
                 case "deployfile":
                 return (
-                    <div className='files-list fleet-list' >
+                    <div className='files-list fleet-list'>
                         <div className='files-list-content'>
                             <div className='files-list-item'>
                                 <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
@@ -361,37 +368,39 @@ class FleetsTaskItemList extends Component {
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
-                                        <select 
-                                            className="win-dropdown" 
-                                            name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                            value={this.props.data['PluginFlyvemdmPolicy.default_value']}
-                                            onChange={this.props.changeInput}
-                                        >
-                                            <option>
+                                        <select
+                                            className="win-dropdown"
+                                            name={this.props.data['PluginFlyvemdmPolicy.id']}
+                                            value={0}
+                                            onChange={this.handleChangeInput}>
+                                            <option value={0}>
                                                 {I18n.t('commons.select_a_file')}
                                             </option>
                                             {
-                                                this.props.typeData.map(value => 
+                                                this.props.typeData.map((value, index) =>
                                                     <option
-                                                        key={value['PluginFlyvemdmFile.id']}
-                                                        value={value["PluginFlyvemdmFile.id"]}
-                                                    >
-                                                        {value["PluginFlyvemdmFile.name"]}
+                                                        key={`${value['id']}_${index}`}
+                                                        value={value['id']}>
+                                                        {value["name"]}
                                                     </option>
                                                 )
                                             }
                                         </select>
+                                        <TasksDeployFileList
+                                            data={this.props.value}
+                                            typeData={this.props.typeData}
+                                            removeTask={this.handleRemoveTask}
+                                        />
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                    <ReactWinJS.ToggleSwitch 
-                                        className="content-text-primary"
-                                        checked={this.state.alreadyAdded}
-                                        onChange={() => this.handleAddedToggle}
-                                        labelOn=""
-                                        labelOff="" 
-                                    />
+                                        <ReactWinJS.ToggleSwitch
+                                            className="content-text-primary"
+                                            checked={this.state.alreadyAdded}
+                                            onChange={() => this.handleAddedToggle}
+                                            labelOn=""
+                                            labelOff="" />
                                     </div>
                                 </div>
                             </div>
