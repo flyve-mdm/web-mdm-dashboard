@@ -37,11 +37,37 @@ class Security extends Component {
     deleteUser = async () => {
         const isOK = await Confirmation.isOK(this.deleteAccount)
         if (isOK) {
-            this.props.actions.setNotification({
-                title: I18n.t('commons.success'),
-                body: I18n.t('notifications.user_deleted'),
-                type: 'info'
-            })
+
+            this.setState(
+                { isLoading: true}, 
+                async () => {
+                    try {
+                        const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+                        await this.props.glpi.deleteItem({ 
+                            itemtype: 'User', 
+                            input: {id: currentUser.id }, 
+                            queryString: { force_purge: true } 
+                        })
+                        this.props.actions.setNotification({
+                            title: I18n.t('commons.success'),
+                            body: I18n.t('notifications.user_deleted'),
+                            type: 'info'
+                        })
+
+                        this.props.actions.logout(this.props.history)
+                        localStorage.clear()
+
+                    } catch (error) {
+                        this.props.setNotification({
+                            title: error[0],
+                            body: error[1],
+                            type: 'alert'
+                        })
+                        this.setState({ isLoading: false })
+                        this.changeMode('')
+                    } 
+                }
+            )
         }
     }
 
@@ -114,6 +140,7 @@ class Security extends Component {
                             type: 'alert'
                         })
                     } 
+                    this.setState({ isLoading: false })
                     this.changeMode('')
                 }
             )
