@@ -123,15 +123,9 @@ class FleetsContent extends Component {
         /* 
         * Get files
         */
-        const files = await this.props.glpi.searchItems({
+        const files = await this.props.glpi.getAllItems({
             itemtype: 'PluginFlyvemdmFile',
-            options: {
-                uid_cols: true,
-                forcedisplay: [
-                    1, 2, 3
-                ],
-                range: '0-50' // Can more than 50 items
-            }
+            queryString: { range: '0-50' }
         })
 
         /* 
@@ -153,7 +147,7 @@ class FleetsContent extends Component {
                 tasksNew: tasksNew,
                 policies: policies.data,
                 categories: categories.data, 
-                files: files.data, 
+                files: files, 
                 applications: applications,
                 tasksRemove: {}
             }
