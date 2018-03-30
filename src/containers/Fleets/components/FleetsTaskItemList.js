@@ -417,7 +417,7 @@ class FleetsTaskItemList extends Component {
                                         <input
                                             type="text"
                                             className="win-textbox"
-                                            placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
+                                            placeholder={I18n.t('files.input_name')}
                                             name={this.props.data['PluginFlyvemdmPolicy.id']}
                                             value={this.state.input}
                                             onChange={this.handleChangeInput}
