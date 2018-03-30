@@ -202,7 +202,7 @@ class Security extends Component {
     render () {
         if (this.state.isLoading) {
             return (
-                <div>
+                <div style={{height: '100%'}}>
                     <Loading message={`${I18n.t('commons.loading')}...`}/> 
                 </div>
             )
