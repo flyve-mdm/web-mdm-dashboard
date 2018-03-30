@@ -3,6 +3,7 @@ import ReactWinJS from 'react-winjs'
 import TasksDeployAppList from './TasksDeployAppList'
 import TasksRemoveAppList from './TasksRemoveAppList'
 import TasksDeployFileList from './TaskDeployFileList'
+import TasksRemoveFileList from './TasksRemoveFileList'
 import { I18n } from 'react-i18nify'
 
 class FleetsTaskItemList extends Component {
@@ -409,7 +410,7 @@ class FleetsTaskItemList extends Component {
                 )
                 case "removefile":
                 return (
-                    <div className='files-list fleet-list' >
+                    <div className='files-list fleet-list'>
                         <div className='files-list-content'>
                             <div className='files-list-item'>
                                 <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
@@ -417,36 +418,33 @@ class FleetsTaskItemList extends Component {
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
-                                        <select 
-                                            className="win-dropdown" 
-                                            name={this.props.data['PluginFlyvemdmPolicy.id']} 
-                                            value={this.props.data['PluginFlyvemdmPolicy.default_value']}
-                                            onChange={this.props.changeInput}
-                                        >
-                                            <option>
-                                                {I18n.t('commons.select_a_file')}
-                                            </option>
-                                            {
-                                                this.props.typeData.map(value => 
-                                                    <option
-                                                    key={value['PluginFlyvemdmFile.id']}
-                                                    value={value["PluginFlyvemdmFile.id"]}>
-                                                        {value["PluginFlyvemdmFile.name"]}
-                                                    </option>
-                                                )
-                                            }
-                                        </select>
+                                        <input
+                                            type="text"
+                                            className="win-textbox"
+                                            placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
+                                            name={this.props.data['PluginFlyvemdmPolicy.id']}
+                                            value={this.state.input}
+                                            onChange={this.handleChangeInput}
+                                        />
+                                        <span
+                                            className="addIcon"
+                                            style={{ padding: '0 10px', fontSize: '18px' }}
+                                            onClick={this.handleBlurInput}
+                                        />
+                                        <TasksRemoveFileList
+                                            data={this.props.value}
+                                            removeTask={this.handleRemoveTask}
+                                        />
                                     </div>
                                 </div>
                                 <div className='item-content-secondary '>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
-                                        <ReactWinJS.ToggleSwitch 
+                                        <ReactWinJS.ToggleSwitch
                                             className="content-text-primary"
                                             checked={this.state.alreadyAdded}
                                             onChange={() => this.handleAddedToggle}
                                             labelOn=""
-                                            labelOff="" 
-                                        />
+                                            labelOff="" />
                                     </div>
                                 </div>
                             </div>
