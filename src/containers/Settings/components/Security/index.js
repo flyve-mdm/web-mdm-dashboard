@@ -7,14 +7,15 @@ import Loading from '../../../../components/Loading'
 import { bindActionCreators } from 'redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { connect } from 'react-redux'
-import { fetchPasswordConfiguration } from '../../../../store/authentication/actions';
+import { fetchPasswordConfiguration, logout } from '../../../../store/authentication/actions'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 
 function mapDispatchToProps(dispatch) {
     const actions = {
         setNotification: bindActionCreators(uiSetNotification, dispatch),
-        fetchPasswordConfiguration: bindActionCreators(fetchPasswordConfiguration, dispatch)
+        fetchPasswordConfiguration: bindActionCreators(fetchPasswordConfiguration, dispatch),
+        logout: bindActionCreators(logout, dispatch)
     }
     return { actions }
 }
@@ -45,6 +46,7 @@ class Security extends Component {
     closeSession  = async () => {
         const isOK = await Confirmation.isOK(this.killSession)
         if (isOK) {
+            this.props.actions.logout(this.props.history)
             this.props.actions.setNotification({
                 title: I18n.t('commons.success'),
                 body: I18n.t('notifications.session_closed'),
