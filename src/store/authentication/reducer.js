@@ -30,7 +30,8 @@ const authFail = (state, action) => {
 
 const logout = async (state, action) => {
   try {
-    localStorage.clear()  
+    localStorage.removeItem('currentUser')
+    localStorage.removeItem('sessionToken')
     await glpi.killSession()
   } catch (error) {}
   return updateObject(state, {currentUser: null}, () => {action.history.push('/')})
