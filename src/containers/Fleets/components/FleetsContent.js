@@ -90,7 +90,8 @@ class FleetsContent extends Component {
                 const deployType = policies.data.filter(policy => {
                     return (
                         policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || 
-                        policy['PluginFlyvemdmPolicy.type'] === 'removeapp') 
+                        policy['PluginFlyvemdmPolicy.type'] === 'removeapp' || 
+                        policy['PluginFlyvemdmPolicy.type'] === 'deployfile') 
                         && (policy['PluginFlyvemdmPolicy.id'] === taskDeploy['plugin_flyvemdm_policies_id'])
                 })
 
