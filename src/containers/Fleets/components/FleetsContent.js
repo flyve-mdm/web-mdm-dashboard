@@ -415,7 +415,11 @@ class FleetsContent extends Component {
                         return item['value'] !== task['value']
                     })
                     break
-            
+                case 'deployfile':
+                    newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
+                        return item['items_id'] !== task['items_id']
+                    })
+                    break
                 default:
                     break
             }
