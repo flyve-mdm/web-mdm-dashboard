@@ -91,12 +91,32 @@ class Security extends Component {
         }
 
         if (isCorrect) {
-            this.changeMode('')
-            this.props.actions.setNotification({
-                title: I18n.t('commons.success'),
-                body: I18n.t('notifications.new_password_saved'),
-                type: 'info'
-            })
+            this.setState(
+                { isLoading: true}, 
+                async () => {
+                    try {
+                        await this.props.glpi.updateItem({
+                            itemtype: 'User', 
+                            input: {
+                                password: this.state.password,
+                                password2: this.state.passwordConfirmation
+                            }
+                        })
+                        this.props.actions.setNotification({
+                            title: I18n.t('commons.success'),
+                            body: I18n.t('notifications.new_password_saved'),
+                            type: 'info'
+                        })
+                    } catch (error) {
+                        this.props.setNotification({
+                            title: error[0],
+                            body: error[1],
+                            type: 'alert'
+                        })
+                    } 
+                    this.changeMode('')
+                }
+            )
         } else {
             this.setState({
                 forceValidation: true
