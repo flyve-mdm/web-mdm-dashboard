@@ -58,6 +58,8 @@ class Security extends Component {
     cleanWebStorage  = async () => {
         const isOK = await Confirmation.isOK(this.deleteBrowserData)
         if (isOK) {
+            this.props.actions.logout(this.props.history)
+            localStorage.clear()
             this.props.actions.setNotification({
                 title: I18n.t('commons.success'),
                 body: I18n.t('notifications.clear_local_storage'),
