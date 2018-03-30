@@ -34,7 +34,8 @@ class FleetsTaskItemList extends Component {
     componentDidMount = () => {
         this.updateState(this.props.fleetHaveTask)
         let input
-        if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
+        if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
+            this.props.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
             input = ''
         } else {
             input = this.props.value ? this.props.value : ''
@@ -49,7 +50,8 @@ class FleetsTaskItemList extends Component {
             this.updateState(nextProps.fleetHaveTask)
         }
         let input
-        if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
+        if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
+            this.props.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
             input = ''
         } else {
             input = this.props.value ? this.props.value : ''
@@ -94,15 +96,6 @@ class FleetsTaskItemList extends Component {
             case 'deployapp':
             case 'deployfile':
                 this.props.updateValueTask(this.props.data, e.target.value)
-                break
-            case 'removeapp':
-                const apps = this.props.typeData.filter(app => {
-                    return Number(e.target.value) === Number(app['id'])
-                })
-
-                if (apps.length > 0) {
-                    this.props.updateValueTask(this.props.data, apps[0]['package_name'])
-                }
                 break
             default:
                 this.setState({ input: e.target.value })
@@ -316,27 +309,21 @@ class FleetsTaskItemList extends Component {
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
-                                        <select
-                                            className="win-dropdown"
+                                        <input
+                                            type="text"
+                                            className="win-textbox"
+                                            placeholder={I18n.t('commons.package_name')}
                                             name={this.props.data['PluginFlyvemdmPolicy.id']}
-                                            value={0}
-                                            onChange={this.handleChangeInput}>
-                                            <option value={0}>
-                                                {I18n.t('commons.select_an_application')}
-                                            </option>
-                                            {
-                                                this.props.typeData.map((value, index) =>
-                                                    <option
-                                                        key={`${value['id']}_${index}`}
-                                                        value={value['id']}>
-                                                        {value["alias"]}
-                                                    </option>
-                                                )
-                                            }
-                                        </select>
+                                            value={this.state.input}
+                                            onChange={this.handleChangeInput}
+                                        />
+                                        <span
+                                            className="addIcon"
+                                            style={{ padding: '0 10px', fontSize: '18px' }}
+                                            onClick={this.handleBlurInput}
+                                        />
                                         <TasksRemoveAppList
                                             data={this.props.value}
-                                            typeData={this.props.typeData}
                                             removeTask={this.handleRemoveTask}
                                         />
                                     </div>
