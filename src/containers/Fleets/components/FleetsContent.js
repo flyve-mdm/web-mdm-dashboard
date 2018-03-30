@@ -324,6 +324,28 @@ class FleetsContent extends Component {
                         })
                     }
                     break
+                case 'deployfile':
+                    newDeploy = {
+                        plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
+                        value: { destination: "%DOCUMENTS%", remove_on_delete: 1 },
+                        items_id: Number(value),
+                        itemtype: 'PluginFlyvemdmFile'
+                    }
+                    if (this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
+                        alreadyTask = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => {
+                            return item['items_id'] === newDeploy['items_id']
+                        })
+                    }
+                    tasksToRemove = { ...this.state.data.tasksRemove }
+                    if (tasksToRemove[policy['PluginFlyvemdmPolicy.id']]) {
+                        this.state.data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
+                            if (item['items_id'] === newDeploy['items_id']) {
+                                tasksToRemove[policy['PluginFlyvemdmPolicy.id']].splice(index, 1)
+                            }
+                        })
+                    }
+                    break
                 default:
                     newValue = value
                     break
@@ -332,7 +354,9 @@ class FleetsContent extends Component {
             if (alreadyTask.length === 0) {
                 this.setState((prevState, props) => {
 
-                    if (policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || policy['PluginFlyvemdmPolicy.type'] === 'removeapp') {
+                    if (policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || 
+                        policy['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
+                        policy['PluginFlyvemdmPolicy.type'] === 'deployfile' ) {
 
                         let newDeployAdd = []
                         if (prevState.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
