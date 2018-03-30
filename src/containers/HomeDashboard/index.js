@@ -276,7 +276,7 @@ class Dashboard extends Component {
       )
     }
 
-    if (this.state.devicesByOperatingSystemVersion) {
+    if (this.state.pendingInvitations) {
       graphics.push(
         <div key="InvitationsChart" className="info-box">
           <VictoryPie
