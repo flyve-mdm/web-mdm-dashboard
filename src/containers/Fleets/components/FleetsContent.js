@@ -254,6 +254,9 @@ class FleetsContent extends Component {
                 case 'removeapp':
                     removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
                     break
+                case 'deployfile':
+                    removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
+                    break
                 default:
                     removePolicy = {
                         plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
