@@ -501,7 +501,7 @@ class FleetsContent extends Component {
         let itemsToUpdate = []
 
         const specialPolicies = this.state.data.policies.filter(policy => {
-            return policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || policy['PluginFlyvemdmPolicy.type'] === 'removeapp'
+            return policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || policy['PluginFlyvemdmPolicy.type'] === 'removeapp' || policy['PluginFlyvemdmPolicy.type'] === 'deployfile'
         })
 
         this.state.data.tasks.forEach(task => {
