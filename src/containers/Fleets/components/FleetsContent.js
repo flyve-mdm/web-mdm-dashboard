@@ -6,13 +6,6 @@ import Loading from '../../../components/Loading'
 import Confirmation from '../../../components/Confirmation'
 import { I18n } from "react-i18nify"
 
-const POLICIES_CAN_MULTIPLE_VALUE = [
-    14, // -> Deploy Application
-    15, // -> Remove Application
-    16, // -> Deploy File
-    17, // -> Remove File
-]
-
 class FleetsContent extends Component {
 
     constructor(props) {
@@ -176,22 +169,21 @@ class FleetsContent extends Component {
     }
 
     getTypeData = policy => {
-        const policyId = policy['PluginFlyvemdmPolicy.id']
         const policyType = policy['PluginFlyvemdmPolicy.type']
         // Check if the policy default value are applications, files or other
-        if ((POLICIES_CAN_MULTIPLE_VALUE.includes(policyId))) {
-            if (policyId === 14 || policyId === 15) {
+        switch (policyType) {
+            case 'deployapp':
                 return this.state.data.applications
-            }
-            else if (policyId === 16 || policyId === 17) {
+            case 'removeapp':
+                return this.state.data.applications
+            case 'deployfile':
                 return this.state.data.files
-            }
-        } else {
-            if (policyType === 'dropdown') {
+            case 'removefile':
+                return this.state.data.files
+            case 'dropdown':
                 return Object.entries(JSON.parse(policy['PluginFlyvemdmPolicy.type_data']))
-            } else {
+            default:
                 return JSON.parse(policy['PluginFlyvemdmPolicy.type_data'])
-            }
         }
     }
 
