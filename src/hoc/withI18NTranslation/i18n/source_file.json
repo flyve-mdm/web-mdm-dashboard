@@ -486,6 +486,7 @@
     "support_address": "Support address",
     "search_or_other": "Search devices, fleets or other item",
     "setting_flyve_mdm": "Setting of Flyve MDM",
-    "about_flyve_mdm": "About of Flyve MDM"
+    "about_flyve_mdm": "About of Flyve MDM",
+    "package_name": "Package name"
   }
 }
