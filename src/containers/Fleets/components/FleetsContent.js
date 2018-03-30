@@ -109,7 +109,7 @@ class FleetsContent extends Component {
                 }
             })
         }
-        
+
         /*
          * Get categories
          * */
@@ -169,11 +169,9 @@ class FleetsContent extends Component {
         // Check if the policy default value are applications, files or other
         switch (policyType) {
             case 'deployapp':
-                return this.state.data.applications
             case 'removeapp':
                 return this.state.data.applications
             case 'deployfile':
-                return this.state.data.files
             case 'removefile':
                 return this.state.data.files
             case 'dropdown':
@@ -189,11 +187,8 @@ class FleetsContent extends Component {
             // Return a Object that is the Task
             switch (policy['PluginFlyvemdmPolicy.type']) {
                 case 'deployapp':
-                    return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
                 case 'removeapp':
-                    return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
                 case 'deployfile':
-                    return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
                 case 'removefile':
                     return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
                 default:
@@ -253,14 +248,8 @@ class FleetsContent extends Component {
 
             switch (policy['PluginFlyvemdmPolicy.type']) {
                 case 'deployapp':
-                    removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
-                    break
                 case 'removeapp':
-                    removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
-                    break
                 case 'deployfile':
-                    removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
-                    break
                 case 'removefile':
                     removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
                     break
@@ -312,6 +301,7 @@ class FleetsContent extends Component {
                     }
                     break
                 case 'removeapp':
+                case 'removefile':
                     newDeploy = {
                         plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
@@ -348,26 +338,6 @@ class FleetsContent extends Component {
                     if (tasksToRemove[policy['PluginFlyvemdmPolicy.id']]) {
                         this.state.data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
                             if (item['items_id'] === newDeploy['items_id']) {
-                                tasksToRemove[policy['PluginFlyvemdmPolicy.id']].splice(index, 1)
-                            }
-                        })
-                    }
-                    break
-                case 'removefile':
-                    newDeploy = {
-                        plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
-                        plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
-                        value: value
-                    }
-                    if (this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
-                        alreadyTask = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => {
-                            return item['value'] === newDeploy['value']
-                        })
-                    }
-                    tasksToRemove = { ...this.state.data.tasksRemove }
-                    if (tasksToRemove[policy['PluginFlyvemdmPolicy.id']]) {
-                        this.state.data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
-                            if (item['value'] === newDeploy['value']) {
                                 tasksToRemove[policy['PluginFlyvemdmPolicy.id']].splice(index, 1)
                             }
                         })
@@ -434,20 +404,12 @@ class FleetsContent extends Component {
 
             switch (policy['PluginFlyvemdmPolicy.type']) {
                 case 'deployapp':
-                    newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
-                        return item['items_id'] !== task['items_id']
-                    })
-                    break
-                case 'removeapp':
-                    newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
-                        return item['value'] !== task['value']
-                    })
-                    break
                 case 'deployfile':
                     newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
                         return item['items_id'] !== task['items_id']
                     })
                     break
+                case 'removeapp':
                 case 'removefile':
                     newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
                         return item['value'] !== task['value']
