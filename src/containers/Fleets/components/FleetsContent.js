@@ -251,7 +251,9 @@ class FleetsContent extends Component {
                 case 'removeapp':
                 case 'deployfile':
                 case 'removefile':
-                    removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
+                    if (this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
+                        removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
+                    }
                     break
                 default:
                     removePolicy = {
@@ -261,10 +263,18 @@ class FleetsContent extends Component {
                     }
                     break
             }
-            
-            this.setState((prevState, props) => ({
-                data: { ...prevState.data, tasksNew: tasks, tasksRemove: { ...prevState.data.tasksRemove, [policy['PluginFlyvemdmPolicy.id']]: removePolicy } }
-            }))
+            if (removePolicy) {
+                this.setState((prevState, props) => ({
+                    data: {
+                        ...prevState.data,
+                        tasksNew: tasks,
+                        tasksRemove: {
+                            ...prevState.data.tasksRemove,
+                            [policy['PluginFlyvemdmPolicy.id']]: removePolicy
+                        }
+                    }
+                }))
+            }
         }
     }
 
