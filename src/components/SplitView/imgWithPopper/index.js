@@ -12,6 +12,7 @@ class imgWithPopper extends Component {
             alt={this.props.alt} 
             src={this.props.img} 
             styleNew={{ width: '20px' }}
+            title={this.props.title}
           />
         </NavLink>
       </div>
