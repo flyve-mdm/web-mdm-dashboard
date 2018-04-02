@@ -5,6 +5,7 @@ published: true
 title: Getting started
 permalink: howtos/getting-started
 description: Welcome to Flyve MDM
+category: user
 ---
 # Flyve MDM Web Dashboard
 

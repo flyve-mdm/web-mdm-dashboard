@@ -5,6 +5,8 @@ published: true
 title: Join our Community!
 permalink: howtos/contribute
 description: Be part of our awesome team
+category: contributing
+date: 2017-12-28
 ---
 
 Welcome to our ever growing community! We are more than happy to accept external contributions to the project in the form of feedback, [translations](http://flyve.org/web-mdm-dashboard/howtos/contribute-translating), bug reports and even better, pull requests!
