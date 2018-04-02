@@ -4,6 +4,7 @@ import ApplicationsEditItemList from './ApplicationsEditItemList'
 import EmptyMessage from '../../../components/EmptyMessage'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
+import itemtype from '../../../shared/itemtype'
 import { I18n } from "react-i18nify"
 
 export default class ApplicationsEdit extends Component {
@@ -43,7 +44,7 @@ export default class ApplicationsEdit extends Component {
                 this.setState({
                     isLoading: true
                 })
-                await this.props.glpi.updateItem({ itemtype: "PluginFlyvemdmPackage", input: this.state.itemListEdit })
+                await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmPackage, input: this.state.itemListEdit })
 
                 if (this.state.itemListEdit.length > 1) {
                     this.props.setNotification({

@@ -8,6 +8,7 @@ import { usersScheme } from '../../../components/Forms/Schemas'
 import Loading from '../../../components/Loading'
 import ErrorValidation from '../../../components/ErrorValidation'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../shared/itemtype'
 
 export default class UsersEditOne extends Component {
     
@@ -52,9 +53,9 @@ export default class UsersEditOne extends Component {
             isLoading: true
         }, async () => {
             try {
-                const response = await this.props.glpi.getAnItem({ itemtype: 'User', id: this.state.id})
+                const response = await this.props.glpi.getAnItem({ itemtype: itemtype.User, id: this.state.id})
                 const myEmails = await this.props.glpi.getSubItems({
-                    itemtype: 'User', 
+                    itemtype: itemtype.User, 
                     id: this.state.id, 
                     subItemtype: 'UserEmail'
                 })
@@ -89,7 +90,7 @@ export default class UsersEditOne extends Component {
                     category: {
                         value: validateData(response.usercategories_id),
                         request: {
-                            params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
+                            params: {itemtype: itemtype.UserCategory, options: {range: '0-200', forcedisplay: [2]}},
                             method: 'searchItems',
                             content: '1',
                             value: '2'
@@ -109,7 +110,7 @@ export default class UsersEditOne extends Component {
                     title: {
                         value: validateData(response.usertitles_id),
                         request: {
-                            params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
+                            params: {itemtype: itemtype.UserTitle, options: {range: '0-200', forcedisplay: [2]}},
                             method: 'searchItems',
                             content: '1',
                             value: '2'
@@ -118,7 +119,7 @@ export default class UsersEditOne extends Component {
                     location: {
                         value: validateData(response.locations_id),
                         request: {
-                            params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
+                            params: {itemtype: itemtype.Location, options: {range: '0-200', forcedisplay: [2]}},
                             method: 'searchItems',
                             content: '1',
                             value: '2'
@@ -183,7 +184,7 @@ export default class UsersEditOne extends Component {
                 { isLoading: true },
                 async () => {
                     try {
-                        await this.props.glpi.updateItem({itemtype: 'User', input: newUser})
+                        await this.props.glpi.updateItem({itemtype: itemtype.User, input: newUser})
                         await this.props.glpi.updateEmails({
                             userID: newUser.id, 
                             currentEmails: this.state.currentEmails, 

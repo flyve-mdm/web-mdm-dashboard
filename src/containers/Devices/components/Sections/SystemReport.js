@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Inventory from './Inventory'
 import Loader from '../../../../components/Loader'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../../shared/itemtype'
 
 export default class SystemReport extends Component {
 
@@ -35,7 +36,7 @@ export default class SystemReport extends Component {
                 this.setState({
                     isLoading: false,
                     data: await this.props.glpi.getAnItem({ 
-                        itemtype: 'PluginFlyvemdmAgent', 
+                        itemtype: itemtype.PluginFlyvemdmAgent, 
                         id: this.props.id 
                     })
                 })

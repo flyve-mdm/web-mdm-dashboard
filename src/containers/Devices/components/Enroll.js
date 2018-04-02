@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../shared/itemtype'
 
 export default class Enroll extends Component {
 
@@ -22,7 +23,7 @@ export default class Enroll extends Component {
                     isLoading: true
                 })
                 
-                await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmInvitation', input: { _useremails: this.state.email.trim() } })
+                await this.props.glpi.addItem({ itemtype: itemtype.PluginFlyvemdmInvitation, input: { _useremails: this.state.email.trim() } })
                 
                 this.setState({
                     isLoading: false

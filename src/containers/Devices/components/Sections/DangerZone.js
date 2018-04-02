@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Confirmation from '../../../../components/Confirmation'
 import { I18n } from 'react-i18nify'
+import itemtype from '../../../../shared/itemtype'
 
 class DangerZone extends Component {
 
@@ -10,7 +11,7 @@ class DangerZone extends Component {
         if (isOK) {
             try {
                 const response = await this.props.glpi.updateItem({
-                    itemtype: 'PluginFlyvemdmAgent',
+                    itemtype: itemtype.PluginFlyvemdmAgent,
                     id: this.props.id,
                     input: {"wipe": "1"}
                 })
@@ -36,7 +37,7 @@ class DangerZone extends Component {
         if (isOK) {
             try {
                 const response = await this.props.glpi.updateItem({
-                    itemtype: 'PluginFlyvemdmAgent',
+                    itemtype: itemtype.PluginFlyvemdmAgent,
                     id: this.props.id,
                     input: {"_unenroll": "1"}
                 })
@@ -62,7 +63,7 @@ class DangerZone extends Component {
         if (isOK) {
             try {
                 const response = await this.props.glpi.deleteItem({
-                    itemtype: 'PluginFlyvemdmAgent',
+                    itemtype: itemtype.PluginFlyvemdmAgent,
                     id: this.props.id,
                 })
                 this.props.setNotification({

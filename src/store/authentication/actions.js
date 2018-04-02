@@ -2,6 +2,7 @@ import * as actionTypes from './actionTypes'
 import glpi from '../../shared/glpiApi'
 import config from '../../config/config.json'
 import { uiTransactionFinish, uiTransactionStart } from '../ui/actions'
+import itemtype from '../../shared/itemtype'
 
 // Actions
 
@@ -102,7 +103,7 @@ export const fetchCaptcha = () => {
     try {
       const session     = await glpi.initSessionByUserToken({ userToken: config.USER_TOKEN })
       glpi.sessionToken = session.session_token
-      const {id}        = await glpi.addItem({ itemtype: 'PluginFlyvemdmdemoCaptcha', input: {}})
+      const {id}        = await glpi.addItem({ itemtype: itemtype.PluginFlyvemdmdemoCaptcha, input: {}})
       const captcha     = await glpi.genericRequest({
         path: `PluginFlyvemdmdemoCaptcha/${id}`,
         queryString: { alt: 'media' }, 
@@ -146,7 +147,7 @@ export const fetchSignUp = (data) => {
     glpi.registerUser({ 
       userToken: config.USER_TOKEN, 
       userData: data, 
-      itemtype: 'PluginFlyvemdmdemoUser' })
+      itemtype: itemtype.PluginFlyvemdmdemoUser })
     .then(() => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({

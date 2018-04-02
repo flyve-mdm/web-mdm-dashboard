@@ -6,6 +6,7 @@ import EmptyMessage from '../../../../components/EmptyMessage'
 import ContentPane from '../../../../components/ContentPane'
 import Loader from '../../../../components/Loader'
 import { I18n } from 'react-i18nify'
+import itemtype from '../../../../shared/itemtype'
 
 export default class Applications extends Component {
 
@@ -35,12 +36,12 @@ export default class Applications extends Component {
             isLoading: true
         }, async () => {
             try {
-                const {computers_id} = await this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.id })
-                const computer = await this.props.glpi.getAnItem({ itemtype: 'Computer', id: computers_id, queryString: { with_softwares: true } })
+                const {computers_id} = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.props.id })
+                const computer = await this.props.glpi.getAnItem({ itemtype: itemtype.Computer, id: computers_id, queryString: { with_softwares: true } })
                 let softwareList = []
                 for (const item of computer['_softwares']) {
-                    const software = await this.props.glpi.getAnItem({ itemtype: 'Software', id: item['softwares_id']})
-                    const softwareVersion = await this.props.glpi.getAnItem({ itemtype: 'SoftwareVersion', id: item['softwareversions_id']})
+                    const software = await this.props.glpi.getAnItem({ itemtype: itemtype.Software, id: item['softwares_id']})
+                    const softwareVersion = await this.props.glpi.getAnItem({ itemtype: itemtype.SoftwareVersion, id: item['softwareversions_id']})
     
                     let data = {
                         id: software['id'],

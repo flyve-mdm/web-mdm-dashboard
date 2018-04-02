@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import EditMultiple from '../../../components/EditMultiple'
 import { I18n } from 'react-i18nify'
+import itemtype from '../../../shared/itemtype'
 
 class DevicesEdit extends Component {
     constructor(props) {
@@ -47,7 +48,7 @@ class DevicesEdit extends Component {
                     name: I18n.t('commons.title'),
                     type: "select",
                     DBName: "usertitles_id",
-                    params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
+                    params: {itemtype: itemtype.UserTitle, options: {range: '0-200', forcedisplay: [2]}},
                     method: "searchItems",
                     content: "1",
                     value: "2"
@@ -56,7 +57,7 @@ class DevicesEdit extends Component {
                     name: I18n.t('commons.location'),
                     type: "select",
                     DBName: "locations_id",
-                    params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
+                    params: {itemtype: itemtype.Location, options: {range: '0-200', forcedisplay: [2]}},
                     method: "searchItems",
                     content: "1",
                     value: "2"
@@ -74,7 +75,7 @@ class DevicesEdit extends Component {
                     name: I18n.t('commons.category'),
                     type: "select",
                     DBName: "usercategories_id",
-                    params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
+                    params: {itemtype: itemtype.UserCategory, options: {range: '0-200', forcedisplay: [2]}},
                     method: "searchItems",
                     content: "1",
                     value: "2"
@@ -121,7 +122,7 @@ class DevicesEdit extends Component {
                 glpi={this.props.glpi}
                 request={{
                     id: 'User.id',
-                    itemtype: 'User'
+                    itemtype: itemtype.User
                 }}
             />
         )

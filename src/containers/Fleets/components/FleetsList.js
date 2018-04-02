@@ -7,6 +7,7 @@ import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
+import itemtype from '../../../shared/itemtype'
 
 export default class FleetsList extends Component {
 
@@ -72,7 +73,7 @@ export default class FleetsList extends Component {
                     count: 15
                 }
             })
-            const fleets = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFleet', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
             this.setState({
                 isLoading: false,
                 order: fleets.order,
@@ -137,7 +138,7 @@ export default class FleetsList extends Component {
                     isLoading: true
                 })
 
-                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmFleet', input: itemListToDelete, queryString: { force_purge: true } })
+                await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmFleet, input: itemListToDelete, queryString: { force_purge: true } })
 
                 this.props.setNotification({
                     title: I18n.t('commons.success'),
@@ -190,7 +191,7 @@ export default class FleetsList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const fleets = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFleet', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 6] } })
+            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 6] } })
 
             this.setState({
                 isLoading: false,
@@ -227,7 +228,7 @@ export default class FleetsList extends Component {
 
     loadMoreData = async () => {
         try {
-            const Fleets = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFleet', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            const Fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
 
             for (const item in Fleets.data) {
                 this.state.itemList.push(Fleets.data[item])

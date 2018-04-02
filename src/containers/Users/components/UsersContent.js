@@ -5,6 +5,7 @@ import IconItemList from '../../../components/IconItemList'
 import Confirmation from '../../../components/Confirmation'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../shared/itemtype'
 
 export default class UsersContent extends Component {
 
@@ -45,7 +46,7 @@ export default class UsersContent extends Component {
             this.props.changeSelectionMode(false)
             
             try {
-                await this.props.glpi.deleteItem({ itemtype: 'User', input: itemListToDelete })
+                await this.props.glpi.deleteItem({ itemtype: itemtype.User, input: itemListToDelete })
                 this.props.setNotification({
                     title: I18n.t('commons.success'),
                     body: I18n.t('notifications.elements_successfully_removed'),
@@ -70,12 +71,12 @@ export default class UsersContent extends Component {
     handleRefresh = async () => {
         try {
             const user = await this.props.glpi.getAnItem({
-                itemtype: 'User',
+                itemtype: itemtype.User,
                 id: this.state.id
             }) 
 
             const emails = await this.props.glpi.getSubItems({
-                itemtype: 'User',
+                itemtype: itemtype.User,
                 id: this.state.id,
                 subItemtype: 'UserEmail'
             })

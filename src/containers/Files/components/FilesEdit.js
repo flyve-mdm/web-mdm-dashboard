@@ -4,6 +4,7 @@ import FilesEditItemList from './FilesEditItemList'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../shared/itemtype'
 
 export default class FilesEdit extends Component {
 
@@ -42,7 +43,7 @@ export default class FilesEdit extends Component {
                 this.setState({
                     isLoading: true
                 })
-                await this.props.glpi.updateItem({ itemtype: "PluginFlyvemdmFile", input: this.state.selectedItem})
+                await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFile, input: this.state.selectedItem})
 
                 if (this.state.selectedItem.length > 1) {
                     this.props.setNotification({

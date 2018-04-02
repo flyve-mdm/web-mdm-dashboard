@@ -4,6 +4,7 @@ import { FilesUpload, FilesUploadItemList } from '../../../components/FilesUploa
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../shared/itemtype'
 
 export default class FilesAdd extends Component {
 
@@ -46,7 +47,7 @@ export default class FilesAdd extends Component {
                 this.setState({
                     isLoading: true
                 })
-                await this.props.glpi.uploadFile({ itemtype: "PluginFlyvemdmFile", input: formData })
+                await this.props.glpi.uploadFile({ itemtype: itemtype.PluginFlyvemdmFile, input: formData })
                 this.setState({
                     isLoading: false
                 })
