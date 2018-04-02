@@ -39,7 +39,7 @@ Once this is done, Congratulations you are part of Flyve MDM!
 
 ##### You can now Login and take full control of your IT infrastructure!
 
-![Dashboard](https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/dashboard.png?raw=true)
+<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/dashboard.png?raw=true" alt="Dashboard" width="900px"/>
 
 ## <a name="ea"></a>Enrolling Agents
 
@@ -100,6 +100,13 @@ The same procedures applies to the Files.
 <img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/filse-saved.png?raw=true" alt="Add file" />
 
 ##### Once this is done you will be able to use them with the Deploy policy on the fleets.
+
+<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/deploy.png?raw=true" alt="Deploy app & file" />
+
+For this:
+
+* Select the file or application desired.
+* Click on the "+" button to add it to your fleet.
 
 ## <a name="df"></a>Device's features
 
