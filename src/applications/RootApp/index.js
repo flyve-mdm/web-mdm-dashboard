@@ -4,7 +4,7 @@ import { Switch } from 'react-router-dom'
 // TODO: import PrivateRoute from '../../components/PrivateRoute'
 
 import withI18NTranslation from '../../hoc/withI18NTranslation'
-import withToastNotification from '../../hoc/withToastNotification'
+import withNotification from '../../hoc/withNotification'
 import routes from './routes'
 import GenerateRoutes from '../../components/GenerateRoutes'
 
@@ -23,6 +23,6 @@ class RootApp extends Component {
   }
 }
 
-export default withToastNotification(
+export default withNotification(
   withI18NTranslation(RootApp)
 )

@@ -5,6 +5,8 @@ import WinJS from 'winjs'
 import { withRouter } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { uiHideNotification } from '../../store/ui/actions'
+import validateNotifications from '../../shared/validateNotifications'
+import nativeNotification from '../../shared/nativeNotification'
 
 function mapStateToProps(state, props) {
   return {
@@ -22,7 +24,7 @@ function mapDispatchToProps(dispatch) {
   return { actions }
 }
 
-const withToastNotification = WrappedComponent => {
+const withNotification = WrappedComponent => {
   class ToastNotification extends Component {
     constructor (props) {
       super(props)
@@ -33,15 +35,21 @@ const withToastNotification = WrappedComponent => {
     }
 
     componentWillReceiveProps(nextProps) {
-      if ( nextProps.title !== this.props.title 
-      &&   nextProps.body !== this.props.body  ) {
-        this.setState({
-          show: true,
-          type: nextProps.type,
-          timer: setTimeout(() => {
-            this.hideNotification()
-          }, 4000)
-        })
+      if ( nextProps.title !== this.props.title || nextProps.body !== this.props.body  ) {
+        const notification = validateNotifications()
+        if (notification.show || nextProps.type === "alert") {
+          if (notification.type === "Toast") {
+            this.setState({
+              show: true,
+              type: nextProps.type,
+              timer: setTimeout(() => {
+                this.hideNotification()
+              }, 4000)
+            })
+          } else {
+            nativeNotification(nextProps.title, nextProps.body, nextProps.icon)
+          }
+        }
       }
     }
 
@@ -63,10 +71,14 @@ const withToastNotification = WrappedComponent => {
 
       if (this.state.show && this.props.show) {
         toast = (
-        <div className={`toast --${this.props.type}`}>
-            <span className="cancelIcon" style={{ float: 'right', cursor: 'pointer' }} onClick={()=> {
+          <div className={`toast --${this.props.type}`}>
+            <span 
+              className="cancelIcon" 
+              style={{ float: 'right', cursor: 'pointer' }} 
+              onClick={()=> {
                 this.hideNotification()
-            }}/>
+              }}
+            />
             <div className="toast-title">
                 { this.props.title }
             </div>
@@ -98,7 +110,6 @@ const withToastNotification = WrappedComponent => {
       mapDispatchToProps
     )(ToastNotification)
   )
-  
 }
 
-export default withToastNotification
+export default withNotification
