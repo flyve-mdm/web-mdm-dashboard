@@ -6,6 +6,7 @@ import { withRouter } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { uiHideNotification } from '../../store/ui/actions'
 import validateNotifications from '../../shared/validateNotifications'
+import nativeNotification from '../../shared/nativeNotification'
 
 function mapStateToProps(state, props) {
   return {
@@ -45,6 +46,8 @@ const withNotification = WrappedComponent => {
                 this.hideNotification()
               }, 4000)
             })
+          } else {
+            nativeNotification(nextProps.title, nextProps.body, nextProps.icon)
           }
         }
       }
