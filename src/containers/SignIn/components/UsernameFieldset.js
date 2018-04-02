@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { I18n } from 'react-i18nify';
+import { I18n } from 'react-i18nify'
+import { self_registration } from '../../../config/config.json'
 
 class UsernameFieldset extends Component {
 
@@ -35,7 +36,6 @@ class UsernameFieldset extends Component {
     }
 
     render () {
-    
         return (
             <div className="authentication-email__div">
                 <h2 className="win-h2">
@@ -67,7 +67,7 @@ class UsernameFieldset extends Component {
                     </button>
                 </form>
                 {
-                    !this.props.selfRegistration ? '' : (
+                    !self_registration ? '' : (
                         <p>
                             {I18n.t('login.no_account')}
                             &nbsp;
@@ -87,8 +87,7 @@ class UsernameFieldset extends Component {
 UsernameFieldset.propTypes = {
     username: PropTypes.string.isRequired,
     changeInput: PropTypes.func.isRequired,
-    changePhase: PropTypes.func.isRequired,
-    selfRegistration: PropTypes.bool.isRequired
+    changePhase: PropTypes.func.isRequired
 }
 
 export default UsernameFieldset

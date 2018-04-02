@@ -5,7 +5,6 @@
  */
 
 const initialState = {
-  selfRegistration: true,
   configurationPassword: {},
   captcha: {},
   currentUser: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : null,

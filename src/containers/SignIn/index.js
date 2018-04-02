@@ -4,22 +4,19 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UsernameFieldset from './components/UsernameFieldset'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import {
-    fetchSignIn
-} from '../../store/authentication/actions'
+import { fetchSignIn } from '../../store/authentication/actions'
 import { I18n } from "react-i18nify"
 
 // Async Component
 import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
 import { Redirect } from 'react-router'
 import Loading from '../../components/Loading'
-import { changeInput, changePhase, handleFormSubmit } from './actions';
+import { changeInput, changePhase, handleFormSubmit } from './actions'
 
 function mapStateToProps(state, props) {
     return {
         isAuthenticated: state.auth.currentUser ? true : false,
-        isLoading: state.ui.loading,        
-        selfRegistration: state.auth.selfRegistration
+        isLoading: state.ui.loading
     }
 }
 
@@ -56,7 +53,6 @@ class SignIn extends Component {
                         username={this.state.username} 
                         changeInput={this.changeInput}
                         changePhase={this.changePhase}
-                        selfRegistration={this.props.selfRegistration}
                     />    
             } else {
                 form = <AsyncPasswordFieldset
@@ -77,7 +73,6 @@ SignIn.propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
-    selfRegistration: PropTypes.bool.isRequired,
     actions: PropTypes.object.isRequired
 }
 
