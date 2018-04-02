@@ -4,19 +4,21 @@ import { I18n } from "react-i18nify"
 
 const EmptyMessage = props => (
     <div className="center-block-content">
-        <h1 className="win-h1" style={{ color: 'grey' }}> 
+        {props.icon && props.showIcon ? <span className={"icon-empty-message " + props.icon} /> : null}
+        <h1 className="win-h1 empty-message"> 
             { props.message } 
         </h1>
     </div>
 )
 
 EmptyMessage.propTypes = {
-    itemListPaneWidth: PropTypes.number.isRequired,
+    icon: PropTypes.string,
+    showIcon: PropTypes.bool,
     message: PropTypes.string.isRequired
 }
 
 EmptyMessage.defaultProps = {
-    itemListPaneWidth: 320,
+    showIcon :false,
     message: I18n.t('commons.no_selection')
 }
 
