@@ -9,6 +9,7 @@ import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
+import itemtype from '../../../../shared/itemtype'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -33,7 +34,7 @@ class HelpCenterList extends Component {
 
     componentDidMount = async () => {
         try {
-            const response = await this.props.glpi.getAllItems({itemtype: "KnowbaseItem"})
+            const response = await this.props.glpi.getAllItems({itemtype: itemtype.KnowbaseItem})
 
             const recentArticles = response.slice().sort((a, b) => {
                 return new Date(a).getTime() - new Date(b).getTime()

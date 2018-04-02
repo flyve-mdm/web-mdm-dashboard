@@ -7,6 +7,7 @@ import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
+import itemtype from '../../../shared/itemtype'
 
 export default class FilesList extends Component {
 
@@ -72,7 +73,7 @@ export default class FilesList extends Component {
                     count: 15
                 }
             })
-            const files = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFile', options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            const files = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFile, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
             this.setState({
                 isLoading: false,
                 order: files.order,
@@ -141,7 +142,7 @@ export default class FilesList extends Component {
                     isLoading: true
                 })
 
-                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmFile', input: itemListToDelete, queryString: { force_purge: true } })
+                await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmFile, input: itemListToDelete, queryString: { force_purge: true } })
 
                 this.props.setNotification({
                     title: I18n.t('commons.success'),
@@ -194,7 +195,7 @@ export default class FilesList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const files = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFile', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3] } })
+            const files = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFile, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3] } })
 
             this.setState({
                 isLoading: false,
@@ -231,7 +232,7 @@ export default class FilesList extends Component {
 
     loadMoreData = async () => {
         try {
-            const files = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmFile', options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            const files = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFile, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
             for (const item in files.data) {
                 this.state.itemList.push(files.data[item])
             }

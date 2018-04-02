@@ -4,6 +4,7 @@ import Loading from '../../../../components/Loading'
 import Map from '../Map'
 import GeolocationList from './GeolocationList'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../../shared/itemtype'
 
 export default class Geolocation extends Component {
     constructor() {
@@ -30,7 +31,7 @@ export default class Geolocation extends Component {
     requestLocation = async () => {
         try {
             await this.props.glpi.updateItem({
-                itemtype: 'PluginFlyvemdmAgent', 
+                itemtype: itemtype.PluginFlyvemdmAgent, 
                 id: this.props.id,
                 input: {_geolocate: ""}
             })
@@ -51,9 +52,9 @@ export default class Geolocation extends Component {
 
     handleRefresh = async () => {
         try {
-            const {computers_id} = await this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.id })
+            const {computers_id} = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.props.id })
             const response = await this.props.glpi.getSubItems({
-                itemtype: 'Computer', 
+                itemtype: itemtype.Computer, 
                 id: computers_id, 
                 subItemtype: 'PluginFlyvemdmGeolocation'
             })    

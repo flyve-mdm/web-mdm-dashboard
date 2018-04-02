@@ -8,6 +8,7 @@ import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
+import itemtype from '../../../shared/itemtype'
 
 export default class InvitationsList extends Component {
 
@@ -103,7 +104,7 @@ export default class InvitationsList extends Component {
                     count: 15
                 }
             }, async () => {
-                const response = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmInvitation', options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page)-1}` } })
+                const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page)-1}` } })
                 this.setState({
                     isLoading: false,
                     order: response.order,
@@ -131,7 +132,7 @@ export default class InvitationsList extends Component {
                 })
 
                 this.setState({ isLoading: true }, async () => {
-                    await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmInvitation', input: itemListToDelete, queryString: { force_purge: true } })
+                    await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmInvitation, input: itemListToDelete, queryString: { force_purge: true } })
     
                     this.props.setNotification({
                         title: I18n.t('commons.success'),
@@ -188,7 +189,7 @@ export default class InvitationsList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const response = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmInvitation', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3] } })
+            const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3] } })
 
             this.setState({
                 isLoading: false,
@@ -217,7 +218,7 @@ export default class InvitationsList extends Component {
                 }
             })
 
-            await this.props.glpi.updateItem({itemtype: 'PluginFlyvemdmInvitation', input: itemListToSend})
+            await this.props.glpi.updateItem({itemtype: itemtype.PluginFlyvemdmInvitation, input: itemListToSend})
 
             this.props.setNotification({
                 title: I18n.t('commons.success'),
@@ -261,7 +262,7 @@ export default class InvitationsList extends Component {
 
     loadMoreData = async () => {
         try {
-            const invitations = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmInvitation', options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            const invitations = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
 
             for (const item in invitations.data) {
                 this.state.itemList.push(invitations.data[item])

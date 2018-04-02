@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../../shared/itemtype'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -28,7 +29,7 @@ class HelpCenterArticle extends Component {
     componentDidMount = async () => {
         try {
             this.setState({
-                article: await this.props.glpi.getAnItem({itemtype: "KnowbaseItem", id: this.state.id}),
+                article: await this.props.glpi.getAnItem({itemtype: itemtype.KnowbaseItem, id: this.state.id}),
                 isLoading: false
             })
         } catch (error) {

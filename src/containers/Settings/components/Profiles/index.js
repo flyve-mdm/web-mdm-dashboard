@@ -8,14 +8,11 @@ import authtype from '../../../../shared/authtype'
 import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
 import withGLPI from '../../../../hoc/withGLPI'
-import {
-    uiTransactionStart,
-    uiTransactionFinish,
-    uiSetNotification
-} from '../../../../store/ui/actions'
+import { uiTransactionStart, uiTransactionFinish, uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../../shared/itemtype'
 
 function mapStateToProps(state, props) {
     return {
@@ -45,10 +42,10 @@ class Profiles extends Component {
         if (this.state.login === null) {
             this.props.actions.uiTransactionStart()
 
-            const myUser = await this.props.glpi.getAnItem({itemtype: 'User', id: this.props.currentUser.id})
+            const myUser = await this.props.glpi.getAnItem({itemtype: itemtype.User, id: this.props.currentUser.id})
 
             const myEmails = await this.props.glpi.getSubItems({
-                itemtype: 'User', 
+                itemtype: itemtype.User, 
                 id: this.props.currentUser.id, 
                 subItemtype: 'UserEmail'
             })
@@ -84,7 +81,7 @@ class Profiles extends Component {
                 category: {
                     value: myUser.usercategories_id,
                     request: {
-                        params: {itemtype: 'UserCategory', options: {range: '0-200', forcedisplay: [2]}},
+                        params: {itemtype: itemtype.UserCategory, options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
                         content: '1',
                         value: '2'
@@ -104,7 +101,7 @@ class Profiles extends Component {
                 title: {
                     value: myUser.usertitles_id,
                     request: {
-                        params: {itemtype: 'UserTitle', options: {range: '0-200', forcedisplay: [2]}},
+                        params: {itemtype: itemtype.UserTitle, options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
                         content: '1',
                         value: '2'
@@ -113,7 +110,7 @@ class Profiles extends Component {
                 location: {
                     value: myUser.locations_id,
                     request: {
-                        params: {itemtype: 'Location', options: {range: '0-200', forcedisplay: [2]}},
+                        params: {itemtype: itemtype.Location, options: {range: '0-200', forcedisplay: [2]}},
                         method: 'searchItems',
                         content: '1',
                         value: '2'
@@ -179,7 +176,7 @@ class Profiles extends Component {
                 async () => {
                     this.props.actions.uiTransactionStart()
                     try {
-                        await this.props.glpi.updateItem({itemtype: 'User', input: newUser})
+                        await this.props.glpi.updateItem({itemtype: itemtype.User, input: newUser})
                         await this.props.glpi.updateEmails({
                             userID: newUser.id, 
                             currentEmails: this.state.currentEmails, 

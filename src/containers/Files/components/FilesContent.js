@@ -4,6 +4,7 @@ import ContentPane from '../../../components/ContentPane'
 import Confirmation from '../../../components/Confirmation'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../shared/itemtype'
 
 export default class FilesContent extends Component {
 
@@ -34,7 +35,7 @@ export default class FilesContent extends Component {
                     isLoading: true
                 })
 
-                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmFile', input: itemListToDelete, queryString: { force_purge: true } })
+                await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmFile, input: itemListToDelete, queryString: { force_purge: true } })
 
                 this.props.setNotification({
                     title: I18n.t('commons.success'),

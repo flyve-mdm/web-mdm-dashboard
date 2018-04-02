@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import EmptyMessage from '../../components/EmptyMessage'
 import { NavLink } from 'react-router-dom'
 import ContentPane from '../../components/ContentPane'
+import itemtype from '../../shared/itemtype'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -47,7 +48,7 @@ class Dashboard extends Component {
 
   getDevices = () => new Promise(async (resolve) => {
     try {
-      const devices = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmAgent"})
+      const devices = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmAgent})
       resolve(devices)
     } catch (error) {
       this.showError(error)
@@ -88,7 +89,7 @@ class Dashboard extends Component {
 
   getInvitations = () => new Promise(async (resolve) => {
     try {
-      const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
+      const invitations = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmInvitation})
       resolve(invitations)
     } catch (error) {
       this.showError(error)
@@ -98,7 +99,7 @@ class Dashboard extends Component {
 
   getPendingInvitations = () => new Promise(async (resolve) => {
     try {
-      const invitations = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmInvitation"})
+      const invitations = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmInvitation})
       resolve(invitations.filter(invitation => invitation.status === "pending"))
     } catch (error) {
       this.showError(error)
@@ -108,7 +109,7 @@ class Dashboard extends Component {
 
   getFleets = () => new Promise(async (resolve) => {
     try {
-      const fleets = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFleet"})
+      const fleets = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFleet})
       resolve(fleets)
     } catch (error) {
       this.showError(error)
@@ -118,7 +119,7 @@ class Dashboard extends Component {
 
   getFiles = () => new Promise(async (resolve) => {
     try {
-      const files = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmFile"})
+      const files = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFile})
       resolve(files)
     } catch (error) {
       this.showError(error)
@@ -128,7 +129,7 @@ class Dashboard extends Component {
 
   getApplications = () => new Promise(async (resolve) => {
     try {
-      const applications = await this.props.glpi.getAllItems({itemtype: "PluginFlyvemdmPackage"})
+      const applications = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPackage})
       resolve(applications)
     } catch (error) {
       this.showError(error)
@@ -138,7 +139,7 @@ class Dashboard extends Component {
 
   getUsers = () => new Promise(async (resolve) => {
     try {
-      const users = await this.props.glpi.getAllItems({itemtype: "User"})
+      const users = await this.props.glpi.getAllItems({itemtype: itemtype.User})
       resolve(users)
     } catch (error) {
       this.showError(error)

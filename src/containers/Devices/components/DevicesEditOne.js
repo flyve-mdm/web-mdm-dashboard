@@ -5,6 +5,7 @@ import ConstructInputs from '../../../components/Forms'
 import { agentScheme } from '../../../components/Forms/Schemas'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../shared/itemtype'
 
 export default class DevicesEditOne extends Component {
 
@@ -18,7 +19,7 @@ export default class DevicesEditOne extends Component {
         this.setState({
             isLoading: true
         })
-        this.props.glpi.getAnItem({ itemtype: 'PluginFlyvemdmAgent', id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'] })
+        this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'] })
             .then((response) => {
                 this.setState({
                     isLoading: false,
@@ -27,7 +28,7 @@ export default class DevicesEditOne extends Component {
                     fleet: {
                         value: response["plugin_flyvemdm_fleets_id"],
                         request: {
-                            params: {itemtype: 'PluginFlyvemdmFleet'},
+                            params: {itemtype: itemtype.PluginFlyvemdmFleet},
                             method: 'getAllItems',
                             content: 'name',
                             value: 'id'
@@ -43,7 +44,7 @@ export default class DevicesEditOne extends Component {
                     fleet: {
                         value: '',
                         request: {
-                            params: {itemtype: 'PluginFlyvemdmFleet'},
+                            params: {itemtype: itemtype.PluginFlyvemdmFleet},
                             method: 'getAllItems',
                             content: 'name',
                             value: 'id'
@@ -73,7 +74,7 @@ export default class DevicesEditOne extends Component {
             name: this.state.name,
             plugin_flyvemdm_fleets_id: this.state.fleet.value
         }
-        this.props.glpi.updateItem({itemtype: 'PluginFlyvemdmAgent', id: this.state.id, input})
+        this.props.glpi.updateItem({itemtype: itemtype.PluginFlyvemdmAgent, id: this.state.id, input})
             .then(() => {
                 this.props.setNotification({
                     title: I18n.t('commons.success'),

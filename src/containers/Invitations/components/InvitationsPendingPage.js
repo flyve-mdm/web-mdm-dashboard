@@ -6,6 +6,7 @@ import EmptyMessage from '../../../components/EmptyMessage'
 import ContentPane from '../../../components/ContentPane'
 import Loader from '../../../components/Loader'
 import { I18n } from 'react-i18nify'
+import itemtype from '../../../shared/itemtype'
 
 class InvitationsPendingPage extends Component {
 
@@ -38,7 +39,7 @@ class InvitationsPendingPage extends Component {
             })
 
             const logs = await this.props.glpi.searchItems({ 
-                itemtype: 'PluginFlyvemdmInvitationlog', 
+                itemtype: itemtype.PluginFlyvemdmInvitationlog, 
                 options: { uid_cols: true, forcedisplay: [2, 3, 4, 5] }, 
                 criteria: [{ field: '4', searchtype: 'equal', value: this.state.id }] 
             })

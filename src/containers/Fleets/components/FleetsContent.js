@@ -5,6 +5,7 @@ import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import Confirmation from '../../../components/Confirmation'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../shared/itemtype'
 
 class FleetsContent extends Component {
 
@@ -51,7 +52,7 @@ class FleetsContent extends Component {
          * Get Policies 
          * */
         const policies = await this.props.glpi.searchItems({
-            itemtype: 'PluginFlyvemdmPolicy',
+            itemtype: itemtype.PluginFlyvemdmPolicy,
             options: {
                 uid_cols: true,
                 forcedisplay: [1, 2, 3, 4, 5, 6, 7, 8],
@@ -67,7 +68,7 @@ class FleetsContent extends Component {
          * Get Tasks 
          * */
             tasks = await this.props.glpi.getSubItems({
-                itemtype: 'PluginFlyvemdmFleet',
+                itemtype: itemtype.PluginFlyvemdmFleet,
                 id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
                 subItemtype: 'PluginFlyvemdmTask'
             })
@@ -114,7 +115,7 @@ class FleetsContent extends Component {
          * Get categories
          * */
         const categories = await this.props.glpi.searchItems({
-            itemtype: 'PluginFlyvemdmPolicyCategory',
+            itemtype: itemtype.PluginFlyvemdmPolicyCategory,
             options: {
                 uid_cols: true,
                 forcedisplay: [1, 2]
@@ -125,7 +126,7 @@ class FleetsContent extends Component {
         * Get files
         */
         const files = await this.props.glpi.getAllItems({
-            itemtype: 'PluginFlyvemdmFile',
+            itemtype: itemtype.PluginFlyvemdmFile,
             queryString: { range: '0-50' }
         })
 
@@ -134,7 +135,7 @@ class FleetsContent extends Component {
         */
         
         const applications = await this.props.glpi.getAllItems({ 
-            itemtype: 'PluginFlyvemdmPackage', 
+            itemtype: itemtype.PluginFlyvemdmPackage, 
             queryString: { range: '0-50' } 
         })
 
@@ -294,7 +295,7 @@ class FleetsContent extends Component {
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: {remove_on_delete:1},
                         items_id: Number(value),
-                        itemtype: 'PluginFlyvemdmPackage'
+                        itemtype: itemtype.PluginFlyvemdmPackage
                     }
                     if (this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
                         alreadyTask = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => {
@@ -337,7 +338,7 @@ class FleetsContent extends Component {
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: { destination: "%DOCUMENTS%", remove_on_delete: 1 },
                         items_id: Number(value),
-                        itemtype: 'PluginFlyvemdmFile'
+                        itemtype: itemtype.PluginFlyvemdmFile
                     }
                     if (this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
                         alreadyTask = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => {
@@ -561,18 +562,18 @@ class FleetsContent extends Component {
         console.log(itemsToSave)
         try {
 
-            await this.props.glpi.updateItem({ itemtype: 'PluginFlyvemdmFleet', id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'], input: fleetToUpdate })
+            await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFleet, id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'], input: fleetToUpdate })
 
             if (itemsToDelete.length > 0) {
-                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToDelete })
+                await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmTask, input: itemsToDelete })
             }
 
             if (itemsToUpdate.length > 0) {
-                await this.props.glpi.updateItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToUpdate })
+                await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmTask, input: itemsToUpdate })
             }
 
             if (itemsToSave.length > 0) {
-                await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToSave })
+                await this.props.glpi.addItem({ itemtype: itemtype.PluginFlyvemdmTask, input: itemsToSave })
             }
 
             this.props.setNotification({
@@ -604,7 +605,7 @@ class FleetsContent extends Component {
                 name: this.state.input
             }
 
-            const newFleet = await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmFleet', input: fleetToCreate })
+            const newFleet = await this.props.glpi.addItem({ itemtype: itemtype.PluginFlyvemdmFleet, input: fleetToCreate })
 
             let itemsToAdd = { ...this.state.data.tasksNew }
 
@@ -619,7 +620,7 @@ class FleetsContent extends Component {
             })
 
             if (itemsToSave.length > 0) {
-                await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmTask', input: itemsToSave })
+                await this.props.glpi.addItem({ itemtype: itemtype.PluginFlyvemdmTask, input: itemsToSave })
             }
 
             this.setState({
@@ -654,7 +655,7 @@ class FleetsContent extends Component {
 
             try {
                 await this.props.glpi.deleteItem({
-                    itemtype: 'PluginFlyvemdmFleet',
+                    itemtype: itemtype.PluginFlyvemdmFleet,
                     id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id']
                 })
 

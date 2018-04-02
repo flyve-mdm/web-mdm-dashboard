@@ -7,6 +7,7 @@ import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
+import itemtype from '../../../shared/itemtype'
 
 export default class ApplicationsList extends Component {
 
@@ -73,7 +74,7 @@ export default class ApplicationsList extends Component {
                     count: 15
                 }
             })
-            const response = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPackage', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmPackage, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
             this.setState({
                 isLoading: false,
                 order: response.order,
@@ -143,7 +144,7 @@ export default class ApplicationsList extends Component {
                     isLoading: true
                 })
 
-                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmPackage', input: itemListToDelete, queryString: { force_purge: true } })
+                await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmPackage, input: itemListToDelete, queryString: { force_purge: true } })
 
                 this.props.setNotification({
                     title: I18n.t('commons.success'),
@@ -196,8 +197,8 @@ export default class ApplicationsList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const response = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPackage', options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 5, 6] } })
-
+            const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmPackage, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 5, 6] } })
+            
             this.setState({
                 isLoading: false,
                 order: response.order,
@@ -233,7 +234,7 @@ export default class ApplicationsList extends Component {
 
     loadMoreData = async () => {
         try {
-            const response = await this.props.glpi.searchItems({ itemtype: 'PluginFlyvemdmPackage', options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmPackage, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
             for (const item in response.data) {
                 this.state.itemList.push(response.data[item])
             }

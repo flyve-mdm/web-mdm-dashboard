@@ -5,6 +5,7 @@ import Confirmation from '../../../../components/Confirmation'
 import Loading from '../../../../components/Loading'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../../shared/itemtype'
 
 export default class Main extends Component {
 
@@ -41,7 +42,7 @@ export default class Main extends Component {
         try {
             this.setState({ 
                 data: await this.props.glpi.getAnItem({ 
-                    itemtype: 'PluginFlyvemdmAgent', 
+                    itemtype: itemtype.PluginFlyvemdmAgent, 
                     id: this.props.id 
                 }) 
             })
@@ -69,7 +70,7 @@ export default class Main extends Component {
                 isLoading: true
             })
             
-            this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmAgent', input: itemListToDelete })
+            this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmAgent, input: itemListToDelete })
             .then((response) => {
                 this.props.setNotification({
                     title: I18n.t('commons.success'),

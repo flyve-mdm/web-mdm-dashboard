@@ -12,6 +12,7 @@ import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import withGLPI from "../../../../hoc/withGLPI"
 import { self_registration } from '../../../../config/config.json'
+import itemtype from '../../../../shared/itemtype'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -45,7 +46,7 @@ class Security extends Component {
                     try {
                         const currentUser = JSON.parse(localStorage.getItem('currentUser'))
                         await this.props.glpi.deleteItem({ 
-                            itemtype: 'User', 
+                            itemtype: itemtype.User, 
                             input: {id: currentUser.id }, 
                             queryString: { force_purge: true } 
                         })
@@ -123,7 +124,7 @@ class Security extends Component {
                 async () => {
                     try {
                         await this.props.glpi.updateItem({
-                            itemtype: 'User', 
+                            itemtype: itemtype.User, 
                             input: {
                                 password: this.state.password,
                                 password2: this.state.passwordConfirmation

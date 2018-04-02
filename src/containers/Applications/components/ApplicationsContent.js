@@ -6,6 +6,7 @@ import BytesToSize from '../../../shared/bytesToSize'
 import Confirmation from '../../../components/Confirmation'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
+import itemtype from '../../../shared/itemtype'
 
 export default class ApplicationsContent extends Component {
 
@@ -43,7 +44,7 @@ export default class ApplicationsContent extends Component {
             this.props.changeSelectionMode(false)
             
             try {
-                await this.props.glpi.deleteItem({ itemtype: 'PluginFlyvemdmPackage', input: itemListToDelete, queryString: { force_purge: true } })
+                await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmPackage, input: itemListToDelete, queryString: { force_purge: true } })
                 this.props.setNotification({
                     title: I18n.t('commons.success'),
                     body: I18n.t('notifications.elements_successfully_removed'),
@@ -69,7 +70,7 @@ export default class ApplicationsContent extends Component {
         try {
             this.setState({ 
                 data: await this.props.glpi.getAnItem({ 
-                    itemtype: 'PluginFlyvemdmPackage', 
+                    itemtype: itemtype.PluginFlyvemdmPackage, 
                     id: this.state.id 
                 }) 
             })
