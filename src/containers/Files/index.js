@@ -21,6 +21,7 @@ class Files extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            icon: "filesIcon",
             mode: getMode(),
             itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
             selectionMode: false,
@@ -65,6 +66,7 @@ class Files extends Component {
 
     propsData = () => {
         return {
+            icon: this.state.icon,
             changeSelectionMode: this.changeSelectionMode,
             selectionMode: this.state.selectionMode,
             selectedItems: this.state.selectedItems,
