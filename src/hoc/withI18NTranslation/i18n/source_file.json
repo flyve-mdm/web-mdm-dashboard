@@ -175,7 +175,8 @@
     "delete": "Delete Applications",
     "edit": "Edit application",
     "new": "New Application",
-    "name": "Application name"
+    "name": "Application name",
+    "not_found": "No Applications yet!"
   },
   "devices": {
     "title": "Devices",
