@@ -83,7 +83,8 @@
   "invitations": {
     "pending": "Pending Invitation",
     "no_logs": "No logs Available",
-    "delete": "Delete Invitations"
+    "delete": "Delete Invitations",
+    "not_found": "No Invitations yet!"
   },
   "search_engine": {
     "title": "Search Engine",
