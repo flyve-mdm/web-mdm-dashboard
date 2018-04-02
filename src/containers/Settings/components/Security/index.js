@@ -11,6 +11,7 @@ import { logout } from '../../../../store/authentication/actions'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import withGLPI from "../../../../hoc/withGLPI"
+import { self_registration } from '../../../../config/config.json'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -323,26 +324,32 @@ class Security extends Component {
                             message={I18n.t('settings.security.delete_data_message')}
                             reference={el => this.deleteBrowserData = el} 
                         />
-        
-                        <div className="listElement">
-                            <div className="message">
-                                {I18n.t('settings.security.delete_account')}
-                                <div className="detail">
-                                    {I18n.t('settings.security.delete_account_detail')}
+
+                        {
+                            !self_registration ? '' :
+                            <React.Fragment>
+                                <div className="listElement">
+                                    <div className="message">
+                                        {I18n.t('settings.security.delete_account')}
+                                        <div className="detail">
+                                            {I18n.t('settings.security.delete_account_detail')}
+                                        </div>
+                                    </div>
+                                    <div className="controller">
+                                        <button className="win-button" onClick={this.deleteUser}>
+                                            {I18n.t('commons.delete')}
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="controller">
-                                <button className="win-button" onClick={this.deleteUser}>
-                                    {I18n.t('commons.delete')}
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <Confirmation 
-                            title={I18n.t('settings.security.delete_account')}
-                            message={I18n.t('settings.security.delete_account_message')}
-                            reference={el => this.deleteAccount = el} 
-                        />
+                                
+                                <Confirmation 
+                                    title={I18n.t('settings.security.delete_account')}
+                                    message={I18n.t('settings.security.delete_account_message')}
+                                    reference={el => this.deleteAccount = el} 
+                                />
+                            </React.Fragment>
+                        }
+        
                     </ContentPane>            
                 )
         }
