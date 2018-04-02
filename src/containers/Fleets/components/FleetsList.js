@@ -5,6 +5,7 @@ import WinJS from 'winjs'
 import FleetsItemList from './FleetsItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
+import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
 
 export default class FleetsList extends Component {
@@ -90,14 +91,18 @@ export default class FleetsList extends Component {
         this.props.history.push("/app/fleets/add")
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
-        this.listView.winControl.selection.clear()
+        if (this.listView) {
+            this.listView.winControl.selection.clear()
+        }
     }
 
     handleToggleSelectionMode = () => {
         this.props.history.push('/app/fleets')
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
-        this.listView.winControl.selection.clear()
+        if (this.listView) {
+            this.listView.winControl.selection.clear()
+        }
     }
 
     handleSelectionChanged = (eventObject) => {
@@ -149,7 +154,9 @@ export default class FleetsList extends Component {
             } else {
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
-                this.listView.winControl.selection.clear()
+                if (this.listView) {
+                    this.listView.winControl.selection.clear()
+                }
             }
 
         } catch (error) {
@@ -252,25 +259,31 @@ export default class FleetsList extends Component {
             />
         )
 
-        let listComponent = <Loader count={3} />
+        let listComponent
 
-        if (!this.state.isLoading && this.state.itemList.length > 0) {
-            listComponent = (
-                <ReactWinJS.ListView
-                    ref={(listView) => { this.listView = listView }}
-                    onLoadingStateChanged={this.onLoadingStateChanged}
-                    className="contentListView win-selectionstylefilled"
-                    style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.state.itemList.dataSource}
-                    layout={this.state.layout}
-                    itemTemplate={this.ItemListRenderer}
-                    footerComponent={<Loader />}
-                    onFooterVisibilityChanged={this.showFooterList}
-                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
-                    onSelectionChanged={this.handleSelectionChanged}
-                />
-            )
+        if (this.state.isLoading) {
+            listComponent = <Loader count={3} />
+        } else {
+            if (this.state.itemList.length > 0) {
+                listComponent = (
+                    <ReactWinJS.ListView
+                        ref={(listView) => { this.listView = listView }}
+                        onLoadingStateChanged={this.onLoadingStateChanged}
+                        className="contentListView win-selectionstylefilled"
+                        style={{ height: 'calc(100% - 48px)' }}
+                        itemDataSource={this.state.itemList.dataSource}
+                        layout={this.state.layout}
+                        itemTemplate={this.ItemListRenderer}
+                        footerComponent={<Loader />}
+                        onFooterVisibilityChanged={this.showFooterList}
+                        selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                        tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
+                        onSelectionChanged={this.handleSelectionChanged}
+                    />
+                )
+            } else {
+                listComponent = <EmptyMessage message={I18n.t('fleets.not_found')} icon={this.props.icon} showIcon={true} />    
+            }
         }
 
         return (

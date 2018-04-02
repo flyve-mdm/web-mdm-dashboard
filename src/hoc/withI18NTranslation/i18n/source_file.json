@@ -233,7 +233,8 @@
     "input_name": "Fleet name",
     "delete": "Delete Fleets",
     "tasks_per_Category": "Tasks per Category",
-    "loading_tasks": "Loading Tasks, Policies and Categories"
+    "loading_tasks": "Loading Tasks, Policies and Categories",
+    "not_found": "No Fleets yet!"
   },
   "about": {
     "system_information": {
