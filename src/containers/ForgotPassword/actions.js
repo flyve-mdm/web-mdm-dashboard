@@ -3,5 +3,5 @@ export const handleRecover = (ctx, event) => {
   ctx.setState({
       isRecoverSent: true
   })
-  ctx.props.actions.fetchRecoverPassword()
+  ctx.props.actions.fetchRecoverPassword(ctx.state.text)
 }

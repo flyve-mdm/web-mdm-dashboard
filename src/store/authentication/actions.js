@@ -167,15 +167,32 @@ export const fetchSignUp = (data) => {
   }
 }
 
-export const fetchRecoverPassword = () => {
+export const fetchRecoverPassword = (email) => {
   return dispatch => { // TODO: Create this
     dispatch(uiTransactionStart())
-    dispatch(uiTransactionFinish())
-    dispatch(changeNotificationMessage({
-      title: config.appName,
-      body: 'feature not available',
-      type: 'warning'
-    }))
+    glpi.genericRequest({
+      path: 'lostPassword',
+      requestParams: {
+        method: 'PUT',
+        body: JSON.stringify({ "email": email })
+      }
+    })
+    .then(([response, json]) => {
+      dispatch(uiTransactionFinish())
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: 'Request reset password',
+        type: 'success'
+      }))
+    })
+    .catch((error) => {
+      dispatch(uiTransactionFinish())
+      dispatch(changeNotificationMessage({
+        title: config.APP_NAME,
+        body: 'feature not available',
+        type: 'warning'
+      }))
+    })
   }
 }
 
