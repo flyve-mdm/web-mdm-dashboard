@@ -288,25 +288,29 @@ export default class DevicesList extends Component {
         if (this.state.isLoading) {
             listComponent = <Loader count={3} />
         } else {
-            if (this.state.itemList.groups !== undefined) {
-                listComponent = (
-                    <ReactWinJS.ListView
-                        ref={(listView) => { this.listView = listView }}
-                        onLoadingStateChanged={this.onLoadingStateChanged}
-                        className="contentListView win-selectionstylefilled"
-                        style={{ height: 'calc(100% - 48px)' }}
-                        itemDataSource={this.state.itemList.dataSource}
-                        groupDataSource={this.state.itemList.groups.dataSource}
-                        layout={this.state.layout}
-                        itemTemplate={this.ItemListRenderer}
-                        groupHeaderTemplate={this.groupHeaderRenderer}
-                        footerComponent={<Loader />}
-                        onFooterVisibilityChanged={this.showFooterList}
-                        selectionMode={this.props.selectionMode ? 'multi' : 'single'}
-                        tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
-                        onSelectionChanged={this.handleSelectionChanged}
-                    />
-                )
+            if (this.state.itemList) {
+                if (this.state.itemList.length > 0) {
+                    listComponent = (
+                        <ReactWinJS.ListView
+                            ref={(listView) => { this.listView = listView }}
+                            onLoadingStateChanged={this.onLoadingStateChanged}
+                            className="contentListView win-selectionstylefilled"
+                            style={{ height: 'calc(100% - 48px)' }}
+                            itemDataSource={this.state.itemList.dataSource}
+                            groupDataSource={this.state.itemList.groups.dataSource}
+                            layout={this.state.layout}
+                            itemTemplate={this.ItemListRenderer}
+                            groupHeaderTemplate={this.groupHeaderRenderer}
+                            footerComponent={<Loader />}
+                            onFooterVisibilityChanged={this.showFooterList}
+                            selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                            tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
+                            onSelectionChanged={this.handleSelectionChanged}
+                        />
+                    )
+                } else {
+                    listComponent = <EmptyMessage message={I18n.t('devices.not_found')} icon={this.props.icon} showIcon={true} />
+                }
             } else {
                 listComponent = <EmptyMessage message={I18n.t('devices.not_found')} icon={this.props.icon} showIcon={true} />
             }
