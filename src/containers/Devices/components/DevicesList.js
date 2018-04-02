@@ -6,6 +6,7 @@ import DevicesItemList from './DevicesItemList'
 import BuildItemList from '../../../components/BuildItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
+import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
 
 export default class DevicesList extends Component {
@@ -101,14 +102,18 @@ export default class DevicesList extends Component {
         this.props.history.push("/app/devices/add")
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
-        this.listView.winControl.selection.clear()
+        if (this.listView) {
+            this.listView.winControl.selection.clear()
+        }
     }
 
     handleToggleSelectionMode = () => {
         this.props.history.push('/app/devices')
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
-        this.listView.winControl.selection.clear()
+        if (this.listView) {
+            this.listView.winControl.selection.clear()
+        }
     }
 
     handleSelectionChanged = (eventObject) => {
@@ -162,7 +167,9 @@ export default class DevicesList extends Component {
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
 
-                this.listView.winControl.selection.clear()
+                if (this.listView) {
+                    this.listView.winControl.selection.clear()
+                }
             }
             
         } catch (error) {
@@ -276,27 +283,33 @@ export default class DevicesList extends Component {
             />
         )
 
-        let listComponent = <Loader count={3} />
+        let listComponent
 
-        if (!this.state.isLoading && this.state.itemList.groups !== undefined ) {
-            listComponent = (
-                <ReactWinJS.ListView
-                    ref={(listView) => { this.listView = listView }}
-                    onLoadingStateChanged={this.onLoadingStateChanged}
-                    className="contentListView win-selectionstylefilled"
-                    style={{ height: 'calc(100% - 48px)' }}
-                    itemDataSource={this.state.itemList.dataSource}
-                    groupDataSource={this.state.itemList.groups.dataSource}
-                    layout={this.state.layout}
-                    itemTemplate={this.ItemListRenderer}
-                    groupHeaderTemplate={this.groupHeaderRenderer}
-                    footerComponent={<Loader />}
-                    onFooterVisibilityChanged={this.showFooterList}
-                    selectionMode={this.props.selectionMode ? 'multi' : 'single'}
-                    tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
-                    onSelectionChanged={this.handleSelectionChanged}
-                />
-            )
+        if (this.state.isLoading) {
+            listComponent = <Loader count={3} />
+        } else {
+            if (this.state.itemList.groups !== undefined) {
+                listComponent = (
+                    <ReactWinJS.ListView
+                        ref={(listView) => { this.listView = listView }}
+                        onLoadingStateChanged={this.onLoadingStateChanged}
+                        className="contentListView win-selectionstylefilled"
+                        style={{ height: 'calc(100% - 48px)' }}
+                        itemDataSource={this.state.itemList.dataSource}
+                        groupDataSource={this.state.itemList.groups.dataSource}
+                        layout={this.state.layout}
+                        itemTemplate={this.ItemListRenderer}
+                        groupHeaderTemplate={this.groupHeaderRenderer}
+                        footerComponent={<Loader />}
+                        onFooterVisibilityChanged={this.showFooterList}
+                        selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                        tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
+                        onSelectionChanged={this.handleSelectionChanged}
+                    />
+                )
+            } else {
+                listComponent = <EmptyMessage message={I18n.t('devices.not_found')} icon={this.props.icon} showIcon={true} />
+            }
         }
 
         return (

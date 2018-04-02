@@ -181,6 +181,7 @@
   "devices": {
     "title": "Devices",
     "delete": "Delete Devices",
+    "not_found": "No Devices yet!",
     "danger_zone": {
       "title": "Danger Zone",
       "wipe": "Wipe Device",
