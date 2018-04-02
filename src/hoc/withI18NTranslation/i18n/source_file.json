@@ -92,7 +92,8 @@
   },
   "users": {
     "delete": "Delete Users",
-    "delete_one": "Delete User"
+    "delete_one": "Delete User",
+    "not_found": "No Users yet!"
   },
   "settings": {
     "display": {
