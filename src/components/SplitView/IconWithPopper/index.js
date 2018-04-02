@@ -8,7 +8,7 @@ class iconWithPopper extends Component {
       return (
         <div>
           <NavLink to={this.props.to} activeClassName="selected">
-            <span className={this.props.iconName}/>
+            <span className={this.props.iconName} title={this.props.title}/>
           </NavLink>
         </div>
       )
@@ -16,7 +16,7 @@ class iconWithPopper extends Component {
       return (
         <div onClick={this.props.click}>
           <a>
-            <span className={this.props.iconName}/>
+            <span className={this.props.iconName} title={this.props.title}/>
           </a>
         </div>
       )

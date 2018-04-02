@@ -7,8 +7,8 @@ let style = {
   height: 'auto'
 }
 
-const imageResponsive = ({src, alt, styleNew={}}) => (
-  <img style={updateObject(style, styleNew)} src={src} alt={alt} />
+const imageResponsive = ({src, alt, styleNew={}, title}) => (
+  <img style={updateObject(style, styleNew)} src={src} alt={alt} title={title} />
 )
 
 export default imageResponsive;
