@@ -1,5 +1,3 @@
-image: kkarczmarczyk/node-yarn
-
 before_script:
 - source ci/scripts/install.sh
 
