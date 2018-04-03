@@ -9,7 +9,8 @@
     "create_one": "Create one!",
     "enter_password": "Enter password",
     "enter_password_for": "Enter the password for",
-    "forgot_my_password": "Forgot my password"
+    "forgot_my_password": "Forgot my password",
+    "reset_password": "Reset Password"
   },
   "edit_multiple": {
     "title": "Edit",
