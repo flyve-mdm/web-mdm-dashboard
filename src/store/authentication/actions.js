@@ -189,10 +189,39 @@ export const fetchRecoverPassword = (email) => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
         title: config.APP_NAME,
-        body: 'feature not available',
+        body: `${error[0]}\n${error[1]}`,
         type: 'warning'
       }))
     })
+  }
+}
+
+export const fetchResetPassword = ({email, token, newPassword}) => {
+  return dispatch => { // TODO: Create this
+    dispatch(uiTransactionStart())
+    glpi.genericRequest({
+      path: 'lostPassword',
+      requestParams: {
+        method: 'PUT',
+        body: JSON.stringify({ "email": email, "password_forget_token": token, "password": newPassword })
+      }
+    })
+      .then(([response, json]) => {
+        dispatch(uiTransactionFinish())
+        dispatch(changeNotificationMessage({
+          title: config.APP_NAME,
+          body: json[0],
+          type: 'success'
+        }))
+      })
+      .catch((error) => {
+        dispatch(uiTransactionFinish())
+        dispatch(changeNotificationMessage({
+          title: config.APP_NAME,
+          body: `${error[0]}\n${error[1]}`,
+          type: 'warning'
+        }))
+      })
   }
 }
 
