@@ -20,8 +20,7 @@ class Entity extends Component {
             buttonSaveClassName: "win-button hidden",
             tokenLife: validateData(SettingsEntity["tokenLife"]),
             downloadURL: validateData(SettingsEntity["downloadURL"], "https://"),
-            entityID: validateData(SettingsEntity["entityID"]),
-            maximunManagedDevices: validateData(SettingsEntity["maximunManagedDevices"]),
+            entityID: undefined,
             devicesCurretlymanaged: undefined,
             fleetsCurrentlyManaged: undefined,
             filesUploaded: undefined,
@@ -41,6 +40,7 @@ class Entity extends Component {
             const invitations = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmInvitation})
             const files = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFile})
             const fleets = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFleet})
+            const { active_profile } = await this.props.glpi.getActiveProfile()
             this.setState({
                 isLoading: false,
                 devicesCurretlymanaged: devices.length,
@@ -48,7 +48,8 @@ class Entity extends Component {
                 numberUsers: users.length,
                 invitationsSent: invitations.length,
                 filesUploaded: files.length,
-                fleetsCurrentlyManaged: fleets.length
+                fleetsCurrentlyManaged: fleets.length,
+                entityID: active_profile.entities[0].id
             })
         } catch (error) {
             console.log(error)
@@ -115,7 +116,6 @@ class Entity extends Component {
                             filesUploaded={this.state.filesUploaded} 
                             fleetsCurrentlyManaged={this.state.fleetsCurrentlyManaged} 
                             devicesCurretlymanaged={this.state.devicesCurretlymanaged} 
-                            maximunManagedDevices={this.state.maximunManagedDevices} 
                             entityID={this.state.entityID}  
                             downloadURL={this.state.downloadURL} 
                             changeMode={this.changeMode}
@@ -128,7 +128,7 @@ class Entity extends Component {
             this.state.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> :
             (
                 <div>
-                    <h2>{ I18n.t('entity.title') }</h2> 
+                    <h2>{ I18n.t('settings.entity.title') }</h2> 
                     <div style={{marginTop: '20px'}}>
                         {content}
                     </div>
