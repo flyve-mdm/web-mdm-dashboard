@@ -1,14 +1,22 @@
 import React, { Component } from 'react'
-import plugins from '../../../../data/plugins.json'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import Loading from '../../../../components/Loading'
 import withGLPI from "../../../../hoc/withGLPI"
 import PropTypes from 'prop-types'
 import itemtype from '../../../../shared/itemtype'
+import { uiSetNotification } from '../../../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+function mapDispatchToProps(dispatch) {
+  const actions = {
+    setNotification: bindActionCreators(uiSetNotification, dispatch)
+  }
+  return { actions }
+}
 
 class SystemInformation extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -25,27 +33,33 @@ class SystemInformation extends Component {
         plugins: plugins
       })
     } catch (error) {
-      
+      this.props.actions.setNotification({
+        title: error[0],
+        body: error[1],
+        type: 'alert'
+      })
     }
   }
 
   render () {
     let element = []
 
-    plugins.forEach(plugin => {
-      element.push(
-        <div className="plugins" key={plugin.id}>
-          <div className="pluginLeft">
-            <div className="pluginTitle">{ plugin.name }</div>
-            <div className="pluginDetail" dangerouslySetInnerHTML={{__html: plugin.author}}></div>
+    if (this.state.plugins) {
+      this.state.plugins.forEach(plugin => {
+        element.push(
+          <div className="plugins" key={plugin.id}>
+            <div className="pluginLeft">
+              <div className="pluginTitle">{ plugin.name }</div>
+              <div className="pluginDetail" dangerouslySetInnerHTML={{__html: plugin.author}}></div>
+            </div>
+            <div className="pluginRight">
+              <span className="pluginTitle">{ plugin.version }</span>
+              <div className="pluginDetail">{ plugin.license }</div>
+            </div>
           </div>
-          <div className="pluginRight">
-            <span className="pluginTitle">{ plugin.version }</span>
-            <div className="pluginDetail">{ plugin.license }</div>
-          </div>
-        </div>
-      )
-    })
+        )
+      })
+    }
 
     return (
       this.state.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> :
@@ -65,4 +79,4 @@ SystemInformation.propTypes = {
   glpi: PropTypes.object.isRequired
 }
 
-export default withGLPI(SystemInformation)
+export default connect(null, mapDispatchToProps)(withGLPI(SystemInformation))
