@@ -11,7 +11,7 @@ import { logout } from '../../../../store/authentication/actions'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import withGLPI from "../../../../hoc/withGLPI"
-import { self_registration } from '../../../../config/config.json'
+import { selfRegistration } from '../../../../config/config.json'
 import itemtype from '../../../../shared/itemtype'
 
 function mapDispatchToProps(dispatch) {
@@ -327,7 +327,7 @@ class Security extends Component {
                         />
 
                         {
-                            !self_registration ? '' :
+                            !selfRegistration ? '' :
                             <React.Fragment>
                                 <div className="listElement">
                                     <div className="message">
