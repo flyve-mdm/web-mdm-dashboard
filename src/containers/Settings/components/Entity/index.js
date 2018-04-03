@@ -23,7 +23,7 @@ class Entity extends Component {
             entityID: validateData(SettingsEntity["entityID"]),
             maximunManagedDevices: validateData(SettingsEntity["maximunManagedDevices"]),
             devicesCurretlymanaged: undefined,
-            fleetsCurrentlyManaged: validateData(SettingsEntity["fleetsCurrentlyManaged"]),
+            fleetsCurrentlyManaged: undefined,
             filesUploaded: undefined,
             applicationsUploaded: undefined,
             numberUsers: undefined,
@@ -40,20 +40,23 @@ class Entity extends Component {
             const users = await this.props.glpi.getAllItems({itemtype: itemtype.User})
             const invitations = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmInvitation})
             const files = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFile})
+            const fleets = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFleet})
             this.setState({
                 isLoading: false,
                 devicesCurretlymanaged: devices.length,
                 applicationsUploaded: applications.length,
                 numberUsers: users.length,
                 invitationsSent: invitations.length,
-                filesUploaded: files.length
+                filesUploaded: files.length,
+                fleetsCurrentlyManaged: fleets.length
             })
         } catch (error) {
-            this.props.actions.setNotification({
-                title: error[0],
-                body: error[1],
-                type: 'alert'
-            })
+            console.log(error)
+            // this.props.actions.setNotification({
+            //     title: error[0],
+            //     body: error[1],
+            //     type: 'alert'
+            // })
         }
     }
 
