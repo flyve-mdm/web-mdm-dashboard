@@ -1,0 +1,16 @@
+image: kkarczmarczyk/node-yarn
+
+before_script:
+- source ci/scripts/install.sh
+
+stages:
+  - deploy
+
+deployment:
+  stage: deploy
+  script:
+    - yarn build
+    - source ci/scripts/build_deploy.sh
+  only:
+    - develop
+    
