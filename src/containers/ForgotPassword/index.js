@@ -70,7 +70,7 @@ class ForgotPassword extends Component {
                         </button>
 
                         <button className="btn --primary" type="submit">
-                            {I18n.t('commons.sign_in')}
+                            {I18n.t('login.reset_password')}
                         </button>
                     </form>
                     
