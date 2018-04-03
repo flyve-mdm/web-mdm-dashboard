@@ -6,5 +6,6 @@ export default {
     PluginFlyvemdmFile: "PluginFlyvemdmFile",
     PluginFlyvemdmInvitation: "PluginFlyvemdmInvitation",
     PluginFlyvemdmPackage: "PluginFlyvemdmPackage",
-    PluginFlyvemdmdemoCaptcha: "PluginFlyvemdmdemoCaptcha"
+    PluginFlyvemdmdemoCaptcha: "PluginFlyvemdmdemoCaptcha",
+    PluginFlyvemdmdemoUser: "PluginFlyvemdmdemoUser"
 }
