@@ -25,7 +25,7 @@ class Entity extends Component {
             devicesCurretlymanaged: undefined,
             fleetsCurrentlyManaged: validateData(SettingsEntity["fleetsCurrentlyManaged"]),
             filesUploaded: validateData(SettingsEntity["filesUploaded"]),
-            applicationsUploaded: validateData(SettingsEntity["applicationsUploaded"]),
+            applicationsUploaded: undefined,
             numberUsers: validateData(SettingsEntity["numberUsers"]),
             invitationsSent: validateData(SettingsEntity["invitationsSent"]),
             typesPolicies: validateData(SettingsEntity["typesPolicies"]),
@@ -36,9 +36,11 @@ class Entity extends Component {
     componentDidMount = async () => {
         try {
             const devices = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmAgent})
+            const applications = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPackage})
             this.setState({
                 isLoading: false,
-                devicesCurretlymanaged: devices.length
+                devicesCurretlymanaged: devices.length,
+                applicationsUploaded: applications.length
             })
         } catch (error) {
             this.props.actions.setNotification({
