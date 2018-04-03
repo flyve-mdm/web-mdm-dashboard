@@ -79,14 +79,14 @@ export const fetchSignIn = (username, password) => {
       dispatch(uiTransactionFinish())
       dispatch(authSuccess(user))
       dispatch(changeNotificationMessage({
-        title: config.APP_NAME,
+        title: config.appName,
         body: 'Welcome!',
         type: 'success'
       }))
     }).catch( error => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
-        title: config.APP_NAME,
+        title: config.appName,
         body: `${error[0]}\n${error[1]}`,
         type: 'warning'
       }))
@@ -101,7 +101,7 @@ export const fetchCaptcha = () => {
   return async dispatch => {
     dispatch(uiTransactionStart())
     try {
-      const session     = await glpi.initSessionByUserToken({ userToken: config.USER_TOKEN })
+      const session     = await glpi.initSessionByUserToken({ userToken: config.userToken })
       glpi.sessionToken = session.session_token
       const {id}        = await glpi.addItem({ itemtype: itemtype.PluginFlyvemdmdemoCaptcha, input: {}})
       const captcha     = await glpi.genericRequest({
@@ -130,7 +130,7 @@ export const fetchCaptcha = () => {
     } catch (error) {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
-        title: config.APP_NAME,
+        title: config.appName,
         body: `${error[0]}\n${error[1]}`,
         type: 'warning'
       }))
@@ -145,13 +145,13 @@ export const fetchSignUp = (data) => {
   return dispatch => {
     dispatch(uiTransactionStart())
     glpi.registerUser({ 
-      userToken: config.USER_TOKEN, 
+      userToken: config.userToken, 
       userData: data, 
       itemtype: itemtype.PluginFlyvemdmdemoUser })
     .then(() => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
-        title: config.APP_NAME,
+        title: config.appName,
         body: 'Successfully registered user',
         type: 'success'
       }))
@@ -159,7 +159,7 @@ export const fetchSignUp = (data) => {
     .catch((error) => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
-        title: config.APP_NAME,
+        title: config.appName,
         body: `${error[0]}\n${error[1]}`,
         type: 'warning' 
       }))
@@ -172,7 +172,7 @@ export const fetchRecoverPassword = () => {
     dispatch(uiTransactionStart())
     dispatch(uiTransactionFinish())
     dispatch(changeNotificationMessage({
-      title: config.APP_NAME,
+      title: config.appName,
       body: 'feature not available',
       type: 'warning'
     }))
@@ -190,7 +190,7 @@ export const fetchPasswordConfiguration = () => {
     .catch((error) => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
-        title: config.APP_NAME,
+        title: config.appName,
         body: 'Error, password configuration no fetched',
         type: 'warning'
       }))
@@ -208,7 +208,7 @@ export function fetchSendFeedback (data) {
     .then(([response, json]) => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
-        title: config.APP_NAME,
+        title: config.appName,
         body: 'Successfully send feedback',
         type: 'success'
       }))
@@ -216,7 +216,7 @@ export function fetchSendFeedback (data) {
     .catch((error) => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
-        title: config.APP_NAME,
+        title: config.appName,
         body: 'Error, feedback no send',
         type: 'warning'
       }))
