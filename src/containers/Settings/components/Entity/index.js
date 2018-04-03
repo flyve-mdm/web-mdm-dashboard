@@ -5,19 +5,24 @@ import Main from './Main'
 import validateData from '../../../../shared/validateData'
 import SettingsEntity from '../../../../data/SettingsEntity.json'
 import ContentPane from '../../../../components/ContentPane'
+import Loading from '../../../../components/Loading'
+import { I18n } from 'react-i18nify'
+import withGLPI from '../../../../hoc/withGLPI'
+import itemtype from '../../../../shared/itemtype'
 
 class Entity extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
+            isLoading: true,
             mode: '', 
             buttonSaveClassName: "win-button hidden",
             tokenLife: validateData(SettingsEntity["tokenLife"]),
             downloadURL: validateData(SettingsEntity["downloadURL"], "https://"),
             entityID: validateData(SettingsEntity["entityID"]),
             maximunManagedDevices: validateData(SettingsEntity["maximunManagedDevices"]),
-            devicesCurretlymanaged: validateData(SettingsEntity["devicesCurretlymanaged"]),
+            devicesCurretlymanaged: undefined,
             fleetsCurrentlyManaged: validateData(SettingsEntity["fleetsCurrentlyManaged"]),
             filesUploaded: validateData(SettingsEntity["filesUploaded"]),
             applicationsUploaded: validateData(SettingsEntity["applicationsUploaded"]),
@@ -25,6 +30,22 @@ class Entity extends Component {
             invitationsSent: validateData(SettingsEntity["invitationsSent"]),
             typesPolicies: validateData(SettingsEntity["typesPolicies"]),
             numberCategoriesForPolicies: validateData(SettingsEntity["numberCategoriesForPolicies"])
+        }
+    }
+
+    componentDidMount = async () => {
+        try {
+            const devices = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmAgent})
+            this.setState({
+                isLoading: false,
+                devicesCurretlymanaged: devices.length
+            })
+        } catch (error) {
+            this.props.actions.setNotification({
+                title: error[0],
+                body: error[1],
+                type: 'alert'
+            })
         }
     }
 
@@ -93,15 +114,17 @@ class Entity extends Component {
         }
 
         return (
-            <div>
-                <h2>Entity</h2> 
-                <div style={{marginTop: '20px'}}>
-                    {content}
+            this.state.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> :
+            (
+                <div>
+                    <h2>{ I18n.t('entity.title') }</h2> 
+                    <div style={{marginTop: '20px'}}>
+                        {content}
+                    </div>
                 </div>
-            </div>
+            )
         )
-
     }
 }
 
-export default Entity
+export default withGLPI(Entity)
