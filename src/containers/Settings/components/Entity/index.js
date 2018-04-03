@@ -24,7 +24,7 @@ class Entity extends Component {
             maximunManagedDevices: validateData(SettingsEntity["maximunManagedDevices"]),
             devicesCurretlymanaged: undefined,
             fleetsCurrentlyManaged: validateData(SettingsEntity["fleetsCurrentlyManaged"]),
-            filesUploaded: validateData(SettingsEntity["filesUploaded"]),
+            filesUploaded: undefined,
             applicationsUploaded: undefined,
             numberUsers: undefined,
             invitationsSent: undefined,
@@ -39,12 +39,14 @@ class Entity extends Component {
             const applications = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPackage})
             const users = await this.props.glpi.getAllItems({itemtype: itemtype.User})
             const invitations = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmInvitation})
+            const files = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFile})
             this.setState({
                 isLoading: false,
                 devicesCurretlymanaged: devices.length,
                 applicationsUploaded: applications.length,
                 numberUsers: users.length,
-                invitationsSent: invitations.length
+                invitationsSent: invitations.length,
+                filesUploaded: files.length
             })
         } catch (error) {
             this.props.actions.setNotification({
