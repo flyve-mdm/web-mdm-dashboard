@@ -10,5 +10,6 @@ export default {
     PluginFlyvemdmdemoUser: "PluginFlyvemdmdemoUser",
     PluginFlyvemdmFleet: "PluginFlyvemdmFleet",
     PluginFlyvemdmPolicy: "PluginFlyvemdmPolicy",
-    PluginFlyvemdmPolicyCategory: "PluginFlyvemdmPolicyCategory"
+    PluginFlyvemdmPolicyCategory: "PluginFlyvemdmPolicyCategory",
+    PluginFlyvemdmTask: "PluginFlyvemdmTask"
 }
