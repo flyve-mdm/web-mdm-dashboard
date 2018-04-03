@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { supervisionScheme } from '../../../../components/Forms/Schemas'
 import validateData from '../../../../shared/validateData'
-import supervision from '../../../../data/supervision.json'
 import ConstructInputs from '../../../../components/Forms'
 import { bindActionCreators } from 'redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
@@ -25,11 +24,11 @@ class Supervision extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: validateData(supervision["Supervision.name"]),
-            phone: validateData(supervision["Supervision.phone"]),
-            website: validateData(supervision["Supervision.website"]),
-            email: validateData(supervision["Supervision.email"]),
-            address: validateData(supervision["Supervision.address"]),
+            name: undefined,
+            phone: undefined,
+            website: undefined,
+            email: undefined,
+            address: undefined,
             isLoading: true
         }
     }
@@ -52,7 +51,14 @@ class Supervision extends Component {
         try {
             const { active_profile } = await this.props.glpi.getActiveProfile()
             const entity = await this.props.glpi.getAnItem({itemtype: itemtype.Entity, id: active_profile.entities[0].id})
-            this.setState ({isLoading: false})            
+            this.setState ({
+                isLoading: false,
+                name: validateData(entity.completename),
+                phone: validateData(entity.phonenumber),
+                website: validateData(entity.website),
+                email: validateData(entity.email),
+                address: validateData(entity.address),
+            })            
         } catch (error) {
             this.setState ({isLoading: false})            
             this.props.setNotification({
