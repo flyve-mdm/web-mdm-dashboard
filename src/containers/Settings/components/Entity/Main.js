@@ -46,15 +46,6 @@ class Main extends Component {
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
-                        {I18n.t('settings.entity.maximum_devices')}
-                    </div>
-                    <div className="controller">
-                        {this.props.maximunManagedDevices}
-                    </div>
-                </div>
-
                 <div className="title"> 
                     {I18n.t('settings.entity.general_information')}
                 </div>
@@ -145,7 +136,6 @@ Main.propTypes = {
     filesUploaded: PropTypes.string.isRequired,
     fleetsCurrentlyManaged: PropTypes.string.isRequired,
     devicesCurretlymanaged: PropTypes.string.isRequired,
-    maximunManagedDevices: PropTypes.string.isRequired,
     entityID: PropTypes.string.isRequired, 
     downloadURL: PropTypes.string.isRequired,
     changeMode: PropTypes.func.isRequired
