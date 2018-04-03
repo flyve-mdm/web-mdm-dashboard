@@ -29,15 +29,39 @@ class Supervision extends Component {
             website: undefined,
             email: undefined,
             address: undefined,
+            entityID: undefined,
             isLoading: true
         }
     }
 
     saveChanges = () => {
-        this.props.actions.setNotification({
-            title: I18n.t('commons.success'),
-            body: I18n.t('notifications.helpdesk_configuration_saved'),
-            type: 'info'
+        this.setState ({isLoading: true}, async () => {
+            try {
+                await this.props.glpi.updateItem({ 
+                    itemtype: itemtype.Entity, 
+                    id: `${this.state.entityID}`,                    
+                    input: {
+                        name: this.state.name,
+                        phonenumber: this.state.phone,
+                        website: this.state.website,
+                        email: this.state.email,
+                        address: this.state.address
+                    }
+                })
+                this.setState ({isLoading: false})            
+                this.props.actions.setNotification({
+                    title: I18n.t('commons.success'),
+                    body: I18n.t('notifications.helpdesk_configuration_saved'),
+                    type: 'success'
+                })
+            } catch (error) {
+                this.setState ({isLoading: false})            
+                this.props.actions.setNotification({
+                    title: error[0],
+                    body: error[1],
+                    type: 'alert'
+                })
+            }
         })
     }
 
@@ -53,15 +77,16 @@ class Supervision extends Component {
             const entity = await this.props.glpi.getAnItem({itemtype: itemtype.Entity, id: active_profile.entities[0].id})
             this.setState ({
                 isLoading: false,
-                name: validateData(entity.completename),
+                entityID: active_profile.entities[0].id,
+                name: validateData(entity.name),
                 phone: validateData(entity.phonenumber),
                 website: validateData(entity.website),
                 email: validateData(entity.email),
-                address: validateData(entity.address),
+                address: validateData(entity.address)
             })            
         } catch (error) {
             this.setState ({isLoading: false})            
-            this.props.setNotification({
+            this.props.actions.setNotification({
                 title: error[0],
                 body: error[1],
                 type: 'alert'
@@ -77,7 +102,7 @@ class Supervision extends Component {
         })
 
         return (
-            this.state.isLoading ? <Loading/> : 
+            this.state.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> : 
                 (
                     <ContentPane>
                         <h2>
