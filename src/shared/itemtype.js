@@ -9,5 +9,6 @@ export default {
     PluginFlyvemdmdemoCaptcha: "PluginFlyvemdmdemoCaptcha",
     PluginFlyvemdmdemoUser: "PluginFlyvemdmdemoUser",
     PluginFlyvemdmFleet: "PluginFlyvemdmFleet",
-    PluginFlyvemdmPolicy: "PluginFlyvemdmPolicy"
+    PluginFlyvemdmPolicy: "PluginFlyvemdmPolicy",
+    PluginFlyvemdmPolicyCategory: "PluginFlyvemdmPolicyCategory"
 }
