@@ -1,5 +1,6 @@
 before_script:
-- source ci/scripts/install.sh
+- npm rebuild node-sass
+- yarn install
 
 stages:
   - deploy
