@@ -27,7 +27,7 @@ class Entity extends Component {
             filesUploaded: validateData(SettingsEntity["filesUploaded"]),
             applicationsUploaded: undefined,
             numberUsers: undefined,
-            invitationsSent: validateData(SettingsEntity["invitationsSent"]),
+            invitationsSent: undefined,
             typesPolicies: validateData(SettingsEntity["typesPolicies"]),
             numberCategoriesForPolicies: validateData(SettingsEntity["numberCategoriesForPolicies"])
         }
@@ -38,11 +38,13 @@ class Entity extends Component {
             const devices = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmAgent})
             const applications = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPackage})
             const users = await this.props.glpi.getAllItems({itemtype: itemtype.User})
+            const invitations = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmInvitation})
             this.setState({
                 isLoading: false,
                 devicesCurretlymanaged: devices.length,
                 applicationsUploaded: applications.length,
-                numberUsers: users.length
+                numberUsers: users.length,
+                invitationsSent: invitations.length
             })
         } catch (error) {
             this.props.actions.setNotification({
