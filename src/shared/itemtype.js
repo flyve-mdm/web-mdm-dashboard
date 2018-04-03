@@ -5,5 +5,8 @@ export default {
     PluginFlyvemdmAgent: "PluginFlyvemdmAgent",
     PluginFlyvemdmFile: "PluginFlyvemdmFile",
     PluginFlyvemdmInvitation: "PluginFlyvemdmInvitation",
-    PluginFlyvemdmPackage: "PluginFlyvemdmPackage"
+    PluginFlyvemdmPackage: "PluginFlyvemdmPackage",
+    PluginFlyvemdmdemoCaptcha: "PluginFlyvemdmdemoCaptcha",
+    PluginFlyvemdmdemoUser: "PluginFlyvemdmdemoUser",
+    PluginFlyvemdmFleet: "PluginFlyvemdmFleet"
 }
