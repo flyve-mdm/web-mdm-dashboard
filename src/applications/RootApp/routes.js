@@ -3,6 +3,7 @@ import asyncSignUp from '../../async/asyncSignUp'
 import asyncAdminDashboard from '../../async/asyncAdminDashboard'
 import asyncValidateAccount from '../../async/asyncValidateAccount'
 import asyncForgotPassword from '../../async/asyncForgotPassword'
+import asyncResetPassword from '../../async/asyncResetPassword'
 
 const routes = [
   {
@@ -26,6 +27,12 @@ const routes = [
   {
     path: '/forgotPassword',
     component: asyncForgotPassword,
+    exact: false,
+    private: false
+  },
+  {
+    path: '/resetPassword',
+    component: asyncResetPassword,
     exact: false,
     private: false
   },
