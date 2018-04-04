@@ -64,7 +64,7 @@ export default class ApplicationsList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push('/app/applications')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/applications`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -104,7 +104,7 @@ export default class ApplicationsList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.props.history.push('/app/applications')
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/applications`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -122,10 +122,10 @@ export default class ApplicationsList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`/app/applications/${itemSelected[0]["PluginFlyvemdmPackage.id"]}`)
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/applications/${itemSelected[0]["PluginFlyvemdmPackage.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push('/app/applications/edit/')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/applications/edit/`)
         }
     }
 
@@ -204,7 +204,7 @@ export default class ApplicationsList extends Component {
                 order: response.order,
                 itemList: new WinJS.Binding.List(response.data)
             })
-            this.props.history.push('/app/applications')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/applications`)
 
         } catch (error) {
             this.setState({

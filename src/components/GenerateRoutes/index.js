@@ -8,6 +8,11 @@ import NotFound from '../../components/NotFound'
 const GenerateRoutes = ({ routes, rootPath, withNotFound, data }) => {
   console.log(withNotFound)
   let r = routes.map(({ exact, path, component }, i) => {
+    console.log(typeof (rootPath) === "string"
+      ? path === '/'
+        ? rootPath
+        : rootPath + path
+      : path)
     if (typeof (data) === 'object') {
       return (
         <PropsRoute

@@ -21,7 +21,7 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction("reload")
-                this.props.history.push('/app/devices')
+                this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
             } catch (error) {
                 this.props.setNotification({
                     title: error[0],
@@ -47,7 +47,7 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction("reload")
-                this.props.history.push('/app/devices')
+                this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
             } catch (error) {
                 this.props.setNotification({
                     title: error[0],
@@ -72,7 +72,7 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction("reload")
-                this.props.history.push('/app/devices')
+                this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
             } catch (error) {
                 this.props.setNotification({
                     title: error[0],

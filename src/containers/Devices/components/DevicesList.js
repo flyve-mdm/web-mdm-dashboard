@@ -70,7 +70,7 @@ export default class DevicesList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push('/app/devices')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -109,7 +109,7 @@ export default class DevicesList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.props.history.push('/app/devices')
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -130,7 +130,7 @@ export default class DevicesList extends Component {
             this.props.history.push(`/app/devices/${itemSelected[0]["PluginFlyvemdmAgent.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push('/app/devices/edit/')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/devices/edit/`)
         }
     }
 
@@ -211,7 +211,7 @@ export default class DevicesList extends Component {
                 order: devices.order,
                 itemList: BuildItemList(devices)
             })
-            this.props.history.push('/app/devices')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
 
         } catch (error) {
             this.setState({

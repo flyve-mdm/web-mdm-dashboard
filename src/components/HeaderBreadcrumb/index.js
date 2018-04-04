@@ -9,7 +9,7 @@ class HeaderBreadcrumb extends React.Component {
     let breadcrumbs = []
     const addresses = this.props.history.location.pathname.split("/")
     for (let index = 2; index < addresses.length; index++) {
-      let path = '/app'
+      let path = `${process.env.PUBLIC_URL}/app`
       for (let i = 2; i < index + 1; i++) {
         path += `/${addresses[i]}`
       }
@@ -39,7 +39,7 @@ class HeaderBreadcrumb extends React.Component {
   
         <nav className="header-breadcrumb">
           <span>
-            <Link to='/app'>
+            <Link to={`${process.env.PUBLIC_URL}/app`}>
               {I18n.t('commons.dashboard')}
             </Link>
           </span>

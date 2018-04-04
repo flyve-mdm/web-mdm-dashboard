@@ -34,7 +34,7 @@ const logout = async (state, action) => {
     localStorage.removeItem('sessionToken')
     await glpi.killSession()
   } catch (error) {}
-  return updateObject(state, {currentUser: null}, () => {action.history.push('/')})
+  return updateObject(state, { currentUser: null }, () => { action.history.push(`${process.env.PUBLIC_URL}`)})
 }
 
 const authRefreshCaptcha = (state, action) => {

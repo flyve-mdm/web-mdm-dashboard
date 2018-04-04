@@ -63,7 +63,7 @@ export default class FleetsList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push('/app/fleets')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/fleets`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -98,7 +98,7 @@ export default class FleetsList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.props.history.push('/app/fleets')
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/fleets`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -119,7 +119,7 @@ export default class FleetsList extends Component {
             this.props.history.push(`/app/fleets/${itemSelected[0]["PluginFlyvemdmFleet.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push('/app/fleets/edit/')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/fleets/edit/`)
         }
     }
 
@@ -198,7 +198,7 @@ export default class FleetsList extends Component {
                 order: fleets.order,
                 itemList: new WinJS.Binding.List(fleets.data)
             })
-            this.props.history.push('/app/fleets')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/fleets`)
 
         } catch (error) {
             this.setState({

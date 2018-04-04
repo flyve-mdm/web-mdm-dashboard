@@ -58,11 +58,11 @@ class HelpCenterList extends Component {
     }
 
     redirectToArticle = article => (
-        this.props.history.push(`/app/about/help/${article}`)
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/about/help/${article}`)
     )
 
     redirectToFeedBack = () => {
-        this.props.history.push('/app/about/help/feedback')
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/about/help/feedback`)
     }
 
     itemRenderer = ReactWinJS.reactRenderer((item) => {

@@ -44,7 +44,7 @@ class SignIn extends Component {
 
     render () {
         if (this.props.isAuthenticated) {
-            return <Redirect to='/app'/>
+            return <Redirect to={`${process.env.PUBLIC_URL}/app`}/>
         } else {
             let form
             if (this.state.phase === 1) {
