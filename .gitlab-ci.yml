@@ -9,7 +9,8 @@ deployment:
   stage: deploy
   script:
     - yarn build
-    - cp -r ./build/. /var/www/public/dashboard
+    - rm -r /var/www/public/dashboard
+    - cp -r ./build /var/www/public/dashboard
   only:
     - develop
     
