@@ -49,7 +49,7 @@ class ResetPassword extends Component {
         if (token) {
             this.setState({ token })
         } else {
-            this.props.history.push(process.env.PUBLIC_URL)
+            this.props.history.push(`${process.env.PUBLIC_URL}/`)
         }
     }
 
@@ -79,7 +79,7 @@ class ResetPassword extends Component {
                     <button
                         className="win-button"
                         type="button"
-                        onClick={() => this.props.history.push(process.env.PUBLIC_URL)}
+                        onClick={() => this.props.history.push(`${process.env.PUBLIC_URL}/`)}
                     >
                         {I18n.t('forgot_password.go_home')}
                     </button>

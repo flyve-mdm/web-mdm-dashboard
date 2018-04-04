@@ -67,7 +67,7 @@ class PasswordFieldset extends Component {
                     </form>
                     
                     <p>
-                        <Link to="/forgotPassword">
+                        <Link to={`${process.env.PUBLIC_URL}/forgotPassword`}>
                             { I18n.t('login.forgot_my_password') }
                         </Link>
                     </p>
