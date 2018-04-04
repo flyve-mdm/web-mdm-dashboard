@@ -9,7 +9,7 @@ deployment:
   stage: deploy
   script:
     - yarn build
-    - source ci/scripts/copy_build.sh
+    - cp -r ./build/. /var/www/public/dashboard
   only:
     - develop
     
