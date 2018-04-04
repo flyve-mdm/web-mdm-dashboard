@@ -59,7 +59,7 @@ class Invitations extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.history.location.pathname === '/app/invitations' && this.state.selectedItems.length > 0) {
+        if(this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/invitations` && this.state.selectedItems.length > 0) {
             this.changeSelectedItems([])
         }
     }
@@ -90,9 +90,9 @@ class Invitations extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/invitations' )  || 
-                this.props.history.location.pathname === '/app/invitations' || 
-                (this.props.history.location.pathname === '/app/invitations' &&
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/invitations` )  || 
+                this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/invitations` || 
+                (this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/invitations` &&
                  this.state.selectionMode )) {
                      styles.display = 'inline-block'
             } else {
@@ -115,9 +115,9 @@ class Invitations extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === '/app/invitations' )  || 
-                this.props.history.location.pathname === '/app/invitations' || 
-                (this.props.history.location.pathname === '/app/invitations' &&
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/invitations` )  || 
+                this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/invitations` || 
+                (this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/invitations` &&
                  this.state.selectionMode )) {
                      styles.display = 'none'
             } else {

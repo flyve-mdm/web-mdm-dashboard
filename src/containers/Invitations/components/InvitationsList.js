@@ -69,7 +69,7 @@ export default class InvitationsList extends Component {
     })
 
     handleToggleSelectionMode = () => {
-        this.props.history.push('/app/invitations')
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/invitations`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -94,7 +94,7 @@ export default class InvitationsList extends Component {
 
     handleRefresh = () => {
         try {
-            this.props.history.push('/app/invitations')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/invitations`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -196,7 +196,7 @@ export default class InvitationsList extends Component {
                 order: response.order,
                 itemList: BuildItemList(response)
             })
-            this.props.history.push('/app/invitations')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/invitations`)
 
         } catch (error) {
             this.setState({

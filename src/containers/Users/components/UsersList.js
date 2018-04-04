@@ -71,7 +71,7 @@ export default class UsersList extends Component {
     })
 
     handleToggleSelectionMode = () => {
-        this.props.history.push('/app/users')
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/users`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -92,13 +92,13 @@ export default class UsersList extends Component {
             this.props.history.push(`/app/users/${itemSelected[0]["User.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push('/app/users/edit/')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/users/edit/`)
         }
     }
 
     handleRefresh = async () => {
         try {
-            this.props.history.push('/app/users')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/users`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -199,7 +199,7 @@ export default class UsersList extends Component {
                 order: response.order,
                 itemList: BuildItemList(response)
             })
-            this.props.history.push('/app/users')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/users`)
 
         } catch (error) {
             this.setState({

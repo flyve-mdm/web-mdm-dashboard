@@ -63,7 +63,7 @@ export default class FilesList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push('/app/files')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/files`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -89,7 +89,7 @@ export default class FilesList extends Component {
     }
 
     handleEdit = () => {
-        this.props.history.push('/app/files/edit')
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/files/edit`)
     }
 
     handleAdd = (eventObject) => {
@@ -102,7 +102,7 @@ export default class FilesList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.props.history.push('/app/files')
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/files`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -123,7 +123,7 @@ export default class FilesList extends Component {
             this.props.history.push(`/app/files/${itemSelected[0]["PluginFlyvemdmFile.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push('/app/files/edit/')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/files/edit/`)
         }
     }
 
@@ -202,7 +202,7 @@ export default class FilesList extends Component {
                 order: files.order,
                 itemList: new WinJS.Binding.List(files.data)
             })
-            this.props.history.push('/app/files')
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/files`)
 
         } catch (error) {
             this.setState({
