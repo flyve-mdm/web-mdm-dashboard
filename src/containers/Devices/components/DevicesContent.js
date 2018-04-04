@@ -4,20 +4,21 @@ import ReactWinJS from 'react-winjs'
 import ContentPane from '../../../components/ContentPane'
 import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sections'
 import { I18n } from 'react-i18nify'
+import getID from '../../../shared/getID'
 
 export default class DevicesContent extends Component {
 
     constructor (props) {
         super(props)
         this.state = {
-            id: this.props.history.location.pathname.split("/")[3]
+            id: getID(this.props.history.location.pathname)
         }
     }
 
     componentWillReceiveProps(newProps) {
-        if (this.state.id !== newProps.history.location.pathname.split("/")[3]) {
+        if (this.state.id !== getID(this.props.history.location.pathname)) {
             this.setState({
-                id: newProps.history.location.pathname.split("/")[3]
+                id: getID(this.props.history.location.pathname)
             })
         }
     }

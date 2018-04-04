@@ -9,6 +9,7 @@ import Loading from '../../../components/Loading'
 import ErrorValidation from '../../../components/ErrorValidation'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
+import getID from '../../../shared/getID'
 
 export default class UsersEditOne extends Component {
     
@@ -16,7 +17,7 @@ export default class UsersEditOne extends Component {
         super(props)
         this.state = {
             isLoading: true,
-            id: this.props.history.location.pathname.split("/")[3],
+            id: getID(this.props.history.location.pathname),
             login: undefined,
             firstName: undefined,
             realName: undefined,
