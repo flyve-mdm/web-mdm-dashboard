@@ -8,7 +8,7 @@ class HeaderBreadcrumb extends React.Component {
   breadcrumbs () {
     let breadcrumbs = []
     const addresses = this.props.history.location.pathname.split("/")
-    for (let index = 2; index < addresses.length; index++) {
+    for (let index = (process.env.PUBLIC_URL === '') ? 2 : 3; index < addresses.length; index++) {
       let path = `${process.env.PUBLIC_URL}/app`
       for (let i = 2; i < index + 1; i++) {
         path += `/${addresses[i]}`
