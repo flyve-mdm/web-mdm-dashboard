@@ -10,7 +10,7 @@ import itemtype from '../../../shared/itemtype'
 export default class DevicesEditOne extends Component {
 
     componentDidMount() {
-        if (this.props.selectedItems) {
+        if (this.props.selectedItems.length > 0) {
             this.handleRefresh()
         }
     }

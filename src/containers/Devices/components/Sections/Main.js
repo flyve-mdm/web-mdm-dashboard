@@ -94,7 +94,7 @@ export default class Main extends Component {
     }
 
     handleEdit = () => {
-        const location = `${process.env.PUBLIC_URL}/${this.props.history.location.pathname}/edit`
+        const location = `${process.env.PUBLIC_URL}/app/devices/${this.props.id}/edit`
         this.props.history.push(location)
     }
 
