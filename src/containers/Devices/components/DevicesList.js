@@ -95,8 +95,9 @@ export default class DevicesList extends Component {
         }
     }
 
-    handleEdit(eventObject, path) {
-        this.props.history.push(`${process.env.PUBLIC_URL}/${path}`)
+    handleEdit(eventObject) {
+        const location = `${process.env.PUBLIC_URL}/app/devices/edit`
+        this.props.history.push(location)
     }
 
     handleAdd = () => {
@@ -280,7 +281,7 @@ export default class DevicesList extends Component {
                 label={I18n.t('commons.edit')}
                 priority={0}
                 disabled={this.props.selectedItems.length === 0}
-                onClick={(e) => this.handleEdit(e, "/app/devices/edit")}
+                onClick={(e) => this.handleEdit(e)}
             />
         )
 
