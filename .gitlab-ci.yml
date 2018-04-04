@@ -1,6 +1,6 @@
 before_script:
   - npm rebuild node-sass
-  - npm install
+  - yarn install
 
 stages:
   - deploy
@@ -8,7 +8,7 @@ stages:
 deployment:
   stage: deploy
   script:
-    - npm run build
+    - yarn build
     - source ci/scripts/copy_build.sh
   only:
     - develop
