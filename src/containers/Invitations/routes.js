@@ -5,19 +5,19 @@ import { I18n } from 'react-i18nify'
 
 const routes = [
   {
-    path: `${process.env.PUBLIC_URL}/`,
+    path: '/',
     name: I18n.t('commons.no_selection'),
     component: EmptyMessage,
     exact: true
   },
   {
-    path: `${process.env.PUBLIC_URL}/add`,
+    path: '/add',
     name: I18n.t('commons.add'),
     component: Enroll,
     exact: true
   },
   {
-    path: `${process.env.PUBLIC_URL}/:id`,
+    path: '/:id',
     name: I18n.t('commons.selected'),
     component: InvitationsPendingPage,
     exact: true

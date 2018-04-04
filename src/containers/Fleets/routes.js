@@ -4,19 +4,19 @@ import { I18n } from 'react-i18nify'
 
 const routes = [
   {
-    path: `${process.env.PUBLIC_URL}/`,
+    path: '/',
     name: I18n.t('commons.no_selection'),
     component: EmptyMessage,
     exact: true
   },
   {
-    path: `${process.env.PUBLIC_URL}/:id`,
+    path: '/:id',
     name: I18n.t('commons.fleet'),
     component: FleetsContent,
     exact: false
   },
   {
-    path: `${process.env.PUBLIC_URL}/add`,
+    path: '/add',
     name: I18n.t('fleets.add'),
     component: FleetsContent,
     exact: false
