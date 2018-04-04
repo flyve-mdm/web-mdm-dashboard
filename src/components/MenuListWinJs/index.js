@@ -157,7 +157,7 @@ export default class ListWinJs extends Component {
                 }
                 if (index.length === 1 && !this.props.selectionMode) {
                     this.props.history.replace(
-                        `/app/devices/${this.state.selectedItemList[0]['PluginFlyvemdmAgent.id']}`
+                        `${process.env.PUBLIC_URL}/app/devices/${this.state.selectedItemList[0]['PluginFlyvemdmAgent.id']}`
                     )
                 }
             }, 0)

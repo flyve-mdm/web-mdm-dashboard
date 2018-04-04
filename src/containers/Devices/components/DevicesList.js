@@ -96,11 +96,11 @@ export default class DevicesList extends Component {
     }
 
     handleEdit(eventObject, path) {
-        this.props.history.push(path)
+        this.props.history.push(`${process.env.PUBLIC_URL}/${path}`)
     }
 
     handleAdd = () => {
-        this.props.history.push("/app/devices/add")
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/devices/add`)
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -127,7 +127,7 @@ export default class DevicesList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`/app/devices/${itemSelected[0]["PluginFlyvemdmAgent.id"]}`)
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/devices/${itemSelected[0]["PluginFlyvemdmAgent.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
             this.props.history.push(`${process.env.PUBLIC_URL}/app/devices/edit/`)

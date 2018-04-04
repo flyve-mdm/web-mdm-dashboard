@@ -57,7 +57,7 @@ class SignUp extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.type === 'success') {
-            this.props.history.push('/validateAccount')
+            this.props.history.push(`${process.env.PUBLIC_URL}/validateAccount`)
         }
     }
 

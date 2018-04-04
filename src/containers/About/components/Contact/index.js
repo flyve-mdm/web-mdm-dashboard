@@ -6,7 +6,7 @@ const Contact = () => (
     <ContentPane>
         <h2>{ I18n.t('about.contact.title') }</h2>
         <div className="aboutPane">
-            <img src="/images/logo-teclib.png" alt="Teclib" />
+            <img src="images/logo-teclib.png" alt="Teclib" />
             <p>
                 { I18n.t('about.contact.description') }                
             </p>

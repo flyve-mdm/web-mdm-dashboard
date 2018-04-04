@@ -58,13 +58,13 @@ class SplitView extends React.Component {
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/appinvitations`}
+                          to={`${process.env.PUBLIC_URL}/app/invitations`}
                           iconName='emailIcon'
                           title={I18n.t('commons.invitations')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/appfleets`}
+                          to={`${process.env.PUBLIC_URL}/app/fleets`}
                           iconName='goToStartIcon'
                           title={I18n.t('commons.fleets')}
                           disabled={this.props.expanded}

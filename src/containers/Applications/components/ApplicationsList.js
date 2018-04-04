@@ -91,11 +91,11 @@ export default class ApplicationsList extends Component {
 
 
     handleEdit(path) {
-        this.props.history.push(path)
+        this.props.history.push(`${process.env.PUBLIC_URL}/${path}`)
     }
 
     handleAdd = () => {
-        this.props.history.push("/app/applications/add")
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/applications/add`)
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -254,7 +254,7 @@ export default class ApplicationsList extends Component {
     }
 
     handleAdd = () => {
-        this.props.history.push("/app/applications/add")
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/applications/add`)
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         if (this.listView) {

@@ -88,7 +88,7 @@ export default class InvitationsList extends Component {
         this.props.changeSelectedItems(itemSelected)
 
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`/app/invitations/${itemSelected[0]["PluginFlyvemdmInvitation.id"]}`)
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/invitations/${itemSelected[0]["PluginFlyvemdmInvitation.id"]}`)
         }
     }
 
@@ -283,7 +283,7 @@ export default class InvitationsList extends Component {
     }
 
     handleAdd = () => {
-        this.props.history.push("/app/invitations/add")
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/invitations/add`)
         this.props.changeSelectionMode(false)
         this.setState({ selectedItems: [] })
         if (this.listView) {
