@@ -123,8 +123,9 @@ export default class UsersList extends Component {
         }
     }
 
-    handleEdit (path) { 
-        this.props.history.push(`${process.env.PUBLIC_URL}/${path}`) 
+    handleEdit = () => {
+        const location = `${process.env.PUBLIC_URL}/app/users/edit`
+        this.props.history.push(location)
     }
 
     handleDelete = async (eventObject) => {
@@ -267,7 +268,7 @@ export default class UsersList extends Component {
                 label={I18n.t('commons.edit')}
                 priority={0}
                 disabled={this.props.selectedItems.length === 0}
-                onClick={() => this.handleEdit("/app/users/edit")}
+                onClick={this.handleEdit}
             />
         )
 
