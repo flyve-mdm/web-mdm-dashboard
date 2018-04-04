@@ -84,7 +84,7 @@ export default class FilesAdd extends Component {
                             {I18n.t('commons.new_file')}
                         </h2>
                     </div>
-                    <div class="separator" />
+                    <div className="separator" />
                     <div style={{ padding: '10px' }}>
                     <React.Fragment>
                         <FilesUpload
