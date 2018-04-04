@@ -10,49 +10,49 @@ import Licence from './components/License'
 
 const routes = [
   {
-    path: '/',
+    path: `${process.env.PUBLIC_URL}/`,
     name: I18n.t('commons.no_selection'),
     component: EmptyMessage,
     exact: true
   },
   {
-    path: '/overview',
+    path: `${process.env.PUBLIC_URL}/overview`,
     name: I18n.t('about.overview.title'),
     component: Overview,
     exact: true
   },
   {
-    path: '/system',
+    path: `${process.env.PUBLIC_URL}/system`,
     name: I18n.t('about.system_information.title'),
     component: SystemInformation,
     exact: false
   },
   {
-    path: '/help',
+    path: `${process.env.PUBLIC_URL}/help`,
     name: I18n.t('about.help_center.title'),
     component: HelpCenter,
     exact: false
   },
   {
-    path: '/contact',
+    path: `${process.env.PUBLIC_URL}/contact`,
     name: I18n.t('about.contact.title'),
     component: Contact,
     exact: false
   },
   {
-    path: '/release',
+    path: `${process.env.PUBLIC_URL}/release`,
     name: I18n.t('about.release_notes.title'),
     component: ReleaseNotes,
     exact: false
   },
   {
-    path: '/term',
+    path: `${process.env.PUBLIC_URL}/term`,
     name: I18n.t('about.term_of_use.title'),
     component: TermsOfUse,
     exact: false
   },
   {
-    path: '/license',
+    path: `${process.env.PUBLIC_URL}/license`,
     name: I18n.t('about.license.title'),
     component: Licence,
     exact: false
