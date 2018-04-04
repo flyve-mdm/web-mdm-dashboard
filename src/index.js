@@ -25,7 +25,7 @@ ReactDOM.render(
                 applyMiddleware(thunk)
             ))
         }>
-            <BrowserRouter>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <RootApp />
             </BrowserRouter>
         </Provider>

@@ -15,9 +15,10 @@ import GenerateRoutes from '../../components/GenerateRoutes'
  */
 class RootApp extends Component {
   render () {
+    const rootPath = window.location.pathname.split('/')[1]
     return (
       <Switch>
-        <GenerateRoutes routes={routes} withNotFound />
+        <GenerateRoutes routes={routes} rootPath={rootPath} withNotFound />
       </Switch>    
     )
   }
