@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import RootApp from './applications/RootApp'
+import { unregister } from './registerServiceWorker'
 import { Provider } from 'react-redux'
 import {
     createStore,
@@ -31,3 +32,4 @@ ReactDOM.render(
     ),
     document.getElementById('root')
 )
+unregister()
