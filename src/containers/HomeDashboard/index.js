@@ -310,7 +310,7 @@ class Dashboard extends Component {
                   <li key={`device${id}`}>
                     <NavLink 
                       exact
-                      to={`/app/devices/${device.id}`}
+                      to={`${process.env.PUBLIC_URL}/app/devices/${device.id}`}
                     >
                       {device.name}
                     </NavLink>
