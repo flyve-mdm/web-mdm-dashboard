@@ -1,9 +1,6 @@
 before_script:
-  - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-  - sudo apt-get update && sudo apt-get install yarn
   - npm rebuild node-sass
-  - yarn cache clean
-  - yarn install
+  - npm install
 
 stages:
   - deploy
@@ -11,7 +8,7 @@ stages:
 deployment:
   stage: deploy
   script:
-    - yarn build
+    - npm run build
     - source ci/scripts/copy_build.sh
   only:
     - develop
