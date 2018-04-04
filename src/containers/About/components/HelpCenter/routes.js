@@ -5,19 +5,19 @@ import { I18n } from 'react-i18nify'
 
 const routes = [
   {
-    path: '/',
+    path: `${process.env.PUBLIC_URL}/`,
     name: I18n.t('about.help_center.home'),
     component: HelpCenterList,
     exact: true
   },
   {
-    path: '/feedback',
+    path: `${process.env.PUBLIC_URL}/feedback`,
     name: I18n.t('commons.feedback'),
     component: Feedback,
     exact: true
   },
   {
-    path: '/:article',
+    path: `${process.env.PUBLIC_URL}/:article`,
     name: I18n.t('commons.article'),
     component: HelpCenterArticle,
     exact: false

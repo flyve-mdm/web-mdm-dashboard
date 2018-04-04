@@ -7,37 +7,37 @@ import asyncResetPassword from '../../async/asyncResetPassword'
 
 const routes = [
   {
-    path: '/',
+    path: `${process.env.PUBLIC_URL}/`,
     component: SignIn,
     exact: true,
     private: false
   },
   {
-    path: '/signUp',
+    path: `${process.env.PUBLIC_URL}/signUp`,
     component: asyncSignUp,
     exact: false,
     private: false
   },
   {
-    path: '/validateAccount',
+    path: `${process.env.PUBLIC_URL}/validateAccount`,
     component: asyncValidateAccount,
     exact: false,
     private: false
   },
   {
-    path: '/forgotPassword',
+    path: `${process.env.PUBLIC_URL}/forgotPassword`,
     component: asyncForgotPassword,
     exact: false,
     private: false
   },
   {
-    path: '/resetPassword',
+    path: `${process.env.PUBLIC_URL}/resetPassword`,
     component: asyncResetPassword,
     exact: false,
     private: false
   },
   {
-    path: '/app',
+    path: `${process.env.PUBLIC_URL}/app`,
     component: asyncAdminDashboard,
     exact: false,
     private: false

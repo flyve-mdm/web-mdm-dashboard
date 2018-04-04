@@ -9,43 +9,43 @@ import { I18n } from 'react-i18nify'
 
 const routes = [
   {
-    path: '/',
+    path: `${process.env.PUBLIC_URL}/`,
     name: I18n.t('commons.no_selection'),
     component: EmptyMessage,
     exact: true
   },
   {
-    path: '/entity',
+    path: `${process.env.PUBLIC_URL}/entity`,
     name: I18n.t('commons.entity'),
     component: Entity,
     exact: true
   },
   {
-    path: '/profiles',
+    path: `${process.env.PUBLIC_URL}/profiles`,
     name: I18n.t('commons.profiles'),
     component: Profiles,
     exact: false
   },
   {
-    path: '/supervision',
+    path: `${process.env.PUBLIC_URL}/supervision`,
     name: I18n.t('commons.supervision'),
     component: Supervision,
     exact: false
   },
   {
-    path: '/security',
+    path: `${process.env.PUBLIC_URL}/security`,
     name: I18n.t('commons.security'),
     component: Security,
     exact: false
   },
   {
-    path: '/notifications',
+    path: `${process.env.PUBLIC_URL}/notifications`,
     name: I18n.t('commons.notifications'),
     component: Notifications,
     exact: false
   },
   {
-    path: '/display',
+    path: `${process.env.PUBLIC_URL}/display`,
     name: I18n.t('commons.display'),
     component: Display,
     exact: false

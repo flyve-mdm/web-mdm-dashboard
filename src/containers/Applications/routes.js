@@ -6,31 +6,31 @@ import { I18n } from 'react-i18nify'
 
 const routes = [
   {
-    path: '/',
+    path: `${process.env.PUBLIC_URL}/`,
     name: I18n.t('commons.no_selection'),
     component: EmptyMessage,
     exact: true
   },
   {
-    path: '/add',
+    path: `${process.env.PUBLIC_URL}/add`,
     name: I18n.t('commons.add'),
     component: ApplicationsAdd,
     exact: true
   },
   {
-    path: '/edit',
+    path: `${process.env.PUBLIC_URL}/edit`,
     name: I18n.t('commons.edit'),
     component: ApplicationsEdit,
     exact: true
   },
   {
-    path: '/:id/edit',
+    path: `${process.env.PUBLIC_URL}/:id/edit`,
     name: I18n.t('commons.edit_one'),
     component: ApplicationsEdit,
     exact: true
   },
   {
-    path: '/:id',
+    path: `${process.env.PUBLIC_URL}/:id`,
     name: I18n.t('commons.edit_one'),
     component: DevicesContent,
     exact: true

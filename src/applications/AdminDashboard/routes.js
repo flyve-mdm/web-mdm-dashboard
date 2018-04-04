@@ -12,61 +12,61 @@ import { I18n } from 'react-i18nify'
 
 const routes = [
   {
-    path: '/',
+    path: `${process.env.PUBLIC_URL}/`,
     name: I18n.t('commons.home'),
     component: Dashboard,
     exact: true
   },
   {
-    path: '/devices',
+    path: `${process.env.PUBLIC_URL}/devices`,
     name: I18n.t('commons.devices'),
     component: Devices,
     exact: false
   },
   {
-    path: '/invitations',
+    path: `${process.env.PUBLIC_URL}/invitations`,
     name: I18n.t('commons.invitations'),
     component: Invitations,
     exact: false
   },
   {
-    path: '/files',
+    path: `${process.env.PUBLIC_URL}/files`,
     name: I18n.t('commons.files'),
     component: Files,
     exact: false
   },
   {
-    path: '/fleets',
+    path: `${process.env.PUBLIC_URL}/fleets`,
     name: I18n.t('commons.fleets'),
     component: Fleets,
     exact: false
   },
   {
-    path: '/applications',
+    path: `${process.env.PUBLIC_URL}/applications`,
     name: I18n.t('commons.applications'),
     component: Applications,
     exact: false
   },
   {
-    path: '/users',
+    path: `${process.env.PUBLIC_URL}/users`,
     name: I18n.t('commons.users'),
     component: Users,
     exact: false
   },
   {
-    path: '/search',
+    path: `${process.env.PUBLIC_URL}/search`,
     name: I18n.t('commons.search'),
     component: SearchEngine,
     exact: false
   },
   {
-    path: '/about',
+    path: `${process.env.PUBLIC_URL}/about`,
     name: I18n.t('commons.about'),
     component: About,
     exact: false
   },
   {
-    path: '/Settings',
+    path: `${process.env.PUBLIC_URL}/Settings`,
     name: I18n.t('commons.settings'),
     component: Settings,
     exact: false
