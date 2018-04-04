@@ -15,8 +15,15 @@ export default class FilesContent extends Component {
         }
     }
 
+    componentWillMount() {
+        if (this.props.selectedItems.length === 0) {
+            const location = `${process.env.PUBLIC_URL}/app/files`
+            this.props.history.push(location)
+        }
+    }
+
     handleEdit = () => {
-        const location = `${process.env.PUBLIC_URL}/${this.props.history.location.pathname}/edit`
+        const location = `${this.props.history.location.pathname}/edit`
         this.props.history.push(location)
     }
 
@@ -75,13 +82,14 @@ export default class FilesContent extends Component {
         if (this.state.isLoading) {
             return (<Loading message={`${I18n.t('commons.loading')}...`} />)
         } else {
+            const fileName = this.props.selectedItems.length > 0 ? this.props.selectedItems[0]["PluginFlyvemdmFile.name"] : ''
             return (
                 <ContentPane>
                     <div className="contentHeader">
                         <div className="itemInfo">
                             <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} />
                             <div className="contentStatus">
-                                <div className="name">{this.props.selectedItems[0]["PluginFlyvemdmFile.name"]}</div>
+                                <div className="name">{fileName}</div>
                                 <br />
                                 <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
                                 <span className="deleteIcon" onClick={this.handleDelete} />
@@ -89,7 +97,7 @@ export default class FilesContent extends Component {
                         </div>
                     </div>
                     <div className="separator" />
-                    <Confirmation title={I18n.t('files.delete_one')} message={this.props.selectedItems[0]["PluginFlyvemdmFile.name"]} reference={el => this.contentDialog = el} />
+                    <Confirmation title={I18n.t('files.delete_one')} message={fileName} reference={el => this.contentDialog = el} />
                 </ContentPane>
             )
         }
