@@ -71,7 +71,7 @@ class UsernameFieldset extends Component {
                         <p>
                             {I18n.t('login.no_account')}
                             &nbsp;
-                            <Link to='/signUp'>
+                            <Link to={`${process.env.PUBLIC_URL}/signUp`}>
                                 {I18n.t('login.create_one')}
                             </Link>
                         </p>

@@ -87,7 +87,7 @@ class SignUp extends Component {
                             <p>
                                 { I18n.t('create_account.already_have_account') }
                                 &#160;
-                                <Link to='/'>
+                                <Link to={`${process.env.PUBLIC_URL}`}>
                                     { I18n.t('commons.sign_in') }
                                 </Link>
                             </p>

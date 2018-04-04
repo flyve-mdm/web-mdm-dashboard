@@ -64,7 +64,7 @@ class ForgotPassword extends Component {
                         <button 
                             className="btn --secondary" 
                             type="button" 
-                            onClick={() => this.props.history.push(process.env.PUBLIC_URL)}
+                            onClick={() => this.props.history.push(`${process.env.PUBLIC_URL}/`)}
                         >
                             {I18n.t('commons.back')}
                         </button>
@@ -85,7 +85,7 @@ class ForgotPassword extends Component {
                     <button 
                         className="win-button" 
                         type="button" 
-                        onClick={() => this.props.history.push(process.env.PUBLIC_URL)}
+                        onClick={() => this.props.history.push(`${process.env.PUBLIC_URL}/`)}
                     >
                         {I18n.t('forgot_password.go_home')}
                     </button>
