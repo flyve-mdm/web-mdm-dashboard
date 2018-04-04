@@ -90,8 +90,9 @@ export default class ApplicationsList extends Component {
     }
 
 
-    handleEdit(path) {
-        this.props.history.push(`${process.env.PUBLIC_URL}/${path}`)
+    handleEdit = () => {
+        const location = `${this.props.history.location.pathname}/edit`
+        this.props.history.push(location)
     }
 
     handleAdd = () => {
@@ -281,7 +282,7 @@ export default class ApplicationsList extends Component {
                 label={I18n.t('commons.edit')}
                 priority={0}
                 disabled={this.props.selectedItems.length === 0}
-                onClick={() => this.handleEdit("/app/applications/edit")}
+                onClick={this.handleEdit}
             />
         )
 
