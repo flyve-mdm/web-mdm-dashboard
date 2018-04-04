@@ -93,7 +93,7 @@ export default class FilesList extends Component {
     }
 
     handleAdd = (eventObject) => {
-        this.props.history.push("/app/files/add")
+        this.props.history.push(`${process.env.PUBLIC_URL}/app/files/add`)
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -120,7 +120,7 @@ export default class FilesList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`/app/files/${itemSelected[0]["PluginFlyvemdmFile.id"]}`)
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/files/${itemSelected[0]["PluginFlyvemdmFile.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
             this.props.history.push(`${process.env.PUBLIC_URL}/app/files/edit/`)

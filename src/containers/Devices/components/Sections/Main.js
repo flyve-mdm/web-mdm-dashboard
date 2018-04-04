@@ -52,7 +52,7 @@ export default class Main extends Component {
                 body: I18n.t('notifications.problems_loading_data'),
                 type: "alert"
             }) 
-            this.props.history.push("/app/devices")
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
         }
     }
 
@@ -94,7 +94,7 @@ export default class Main extends Component {
     }
 
     handleEdit = () => {
-        const location = `${this.props.history.location.pathname}/edit`
+        const location = `${process.env.PUBLIC_URL}/${this.props.history.location.pathname}/edit`
         this.props.history.push(location)
     }
 

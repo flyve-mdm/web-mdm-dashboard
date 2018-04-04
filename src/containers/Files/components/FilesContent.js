@@ -16,7 +16,7 @@ export default class FilesContent extends Component {
     }
 
     handleEdit = () => {
-        const location = `${this.props.history.location.pathname}/edit`
+        const location = `${process.env.PUBLIC_URL}/${this.props.history.location.pathname}/edit`
         this.props.history.push(location)
     }
 

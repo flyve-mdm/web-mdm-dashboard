@@ -89,7 +89,7 @@ export default class UsersList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`/app/users/${itemSelected[0]["User.id"]}`)
+            this.props.history.push(`${process.env.PUBLIC_URL}/app/users/${itemSelected[0]["User.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
             this.props.history.push(`${process.env.PUBLIC_URL}/app/users/edit/`)
@@ -124,7 +124,7 @@ export default class UsersList extends Component {
     }
 
     handleEdit (path) { 
-        this.props.history.push(path) 
+        this.props.history.push(`${process.env.PUBLIC_URL}/${path}`) 
     }
 
     handleDelete = async (eventObject) => {
