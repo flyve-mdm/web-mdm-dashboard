@@ -1,10 +1,12 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import PropsRoute from './PropsRoute'
+import NotFound from '../../components/NotFound'
 
 // TODO: Enable PrivateRoute if route if private
 
 const GenerateRoutes = ({ routes, rootPath, withNotFound, data }) => {
+  console.log(withNotFound)
   let r = routes.map(({ exact, path, component }, i) => {
     if (typeof (data) === 'object') {
       return (
@@ -39,9 +41,9 @@ const GenerateRoutes = ({ routes, rootPath, withNotFound, data }) => {
     }
   });
 
-  // withNotFound && r.push(
-  //   <Route key={routes.length + 1} render={() => <h1 style={{textAlign: 'center'}}>Not Found</h1>} />
-  // )
+  withNotFound && r.push(
+    <Route key={routes.length + 1} render={() => <NotFound />} />
+  )
 
   return (
     <Switch>
