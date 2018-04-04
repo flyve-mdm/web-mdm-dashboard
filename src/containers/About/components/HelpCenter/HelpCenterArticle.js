@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
+import getID from '../../../../shared/getID'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -21,7 +22,7 @@ class HelpCenterArticle extends Component {
         super(props)
         this.state = {
             article: undefined,
-            id: this.props.history.location.pathname.split("/")[4],
+            id: getID(this.props.history.location.pathname, 4),
             isLoading: true
         }
     }

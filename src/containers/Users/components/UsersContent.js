@@ -6,24 +6,25 @@ import Confirmation from '../../../components/Confirmation'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
+import getID from '../../../shared/getID'
 
 export default class UsersContent extends Component {
 
     constructor (props) {
         super(props)
         this.state = {
-            id: this.props.history.location.pathname.split("/")[3],
+            id: getID(this.props.history.location.pathname),
             data: undefined,
             emails: []
         }
     }
 
     componentWillReceiveProps(newProps) {
-        if (this.state.id !== newProps.history.location.pathname.split("/")[3]) {
+        if (this.state.id !== getID(this.props.history.location.pathname)) {
             this.setState({
                 data: undefined,
                 emails: [],
-                id: newProps.history.location.pathname.split("/")[3]
+                id: getID(this.props.history.location.pathname)
             }, () => this.handleRefresh())
         }
     }
