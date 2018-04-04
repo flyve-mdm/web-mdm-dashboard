@@ -89,7 +89,8 @@ export default class FilesList extends Component {
     }
 
     handleEdit = () => {
-        this.props.history.push(`${process.env.PUBLIC_URL}/app/files/edit`)
+        const location = `${process.env.PUBLIC_URL}/app/files/edit`
+        this.props.history.push(location)
     }
 
     handleAdd = (eventObject) => {
