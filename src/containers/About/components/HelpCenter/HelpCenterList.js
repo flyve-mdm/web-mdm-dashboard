@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
 import itemtype from '../../../../shared/itemtype'
+import location from '../../../../shared/location'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -58,11 +59,11 @@ class HelpCenterList extends Component {
     }
 
     redirectToArticle = article => (
-        this.props.history.push(`${process.env.PUBLIC_URL}/app/about/help/${article}`)
+        this.props.history.push(`${location.pathname}/app/about/help/${article}`)
     )
 
     redirectToFeedBack = () => {
-        this.props.history.push(`${process.env.PUBLIC_URL}/app/about/help/feedback`)
+        this.props.history.push(`${location.pathname}/app/about/help/feedback`)
     }
 
     itemRenderer = ReactWinJS.reactRenderer((item) => {

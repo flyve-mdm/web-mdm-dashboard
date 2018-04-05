@@ -8,6 +8,7 @@ import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import { fetchResetPassword } from '../../store/authentication/actions'
 import { resetPassword, changeState, buildDataArray } from './actions';
 import { I18n } from 'react-i18nify'
+import location from '../../shared/location'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -49,7 +50,7 @@ class ResetPassword extends Component {
         if (token) {
             this.setState({ token })
         } else {
-            this.props.history.push(`${process.env.PUBLIC_URL}/`)
+            this.props.history.push(`${location.pathname}/`)
         }
     }
 
@@ -79,7 +80,7 @@ class ResetPassword extends Component {
                     <button
                         className="win-button"
                         type="button"
-                        onClick={() => this.props.history.push(`${process.env.PUBLIC_URL}/`)}
+                        onClick={() => this.props.history.push(`${location.pathname}/`)}
                     >
                         {I18n.t('forgot_password.go_home')}
                     </button>

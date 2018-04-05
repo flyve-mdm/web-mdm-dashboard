@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Confirmation from '../../../../components/Confirmation'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../../shared/itemtype'
+import location from '../../../../shared/location'
 
 class DangerZone extends Component {
 
@@ -21,7 +22,7 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction("reload")
-                this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
+                this.props.history.push(`${location.pathname}/app/devices`)
             } catch (error) {
                 this.props.setNotification({
                     title: error[0],
@@ -47,7 +48,7 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction("reload")
-                this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
+                this.props.history.push(`${location.pathname}/app/devices`)
             } catch (error) {
                 this.props.setNotification({
                     title: error[0],
@@ -72,7 +73,7 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction("reload")
-                this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
+                this.props.history.push(`${location.pathname}/app/devices`)
             } catch (error) {
                 this.props.setNotification({
                     title: error[0],

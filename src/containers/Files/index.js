@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
+import location from '../../shared/location'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -59,7 +60,7 @@ class Files extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/files` && this.state.selectedItems.length > 0) {
+        if (this.props.history.location.pathname === `${location.pathname}/app/files` && this.state.selectedItems.length > 0) {
             this.changeSelectedItems([])
         }
     }
@@ -90,9 +91,9 @@ class Files extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/files`) ||
-                this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/files` ||
-                (this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/files` &&
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${location.pathname}/app/files`) ||
+                this.props.history.location.pathname === `${location.pathname}/app/files` ||
+                (this.props.history.location.pathname === `${location.pathname}/app/files` &&
                     this.state.selectionMode)) {
                 styles.display = 'inline-block'
             } else {
@@ -115,9 +116,9 @@ class Files extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/files`) ||
-                this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/files` ||
-                (this.props.history.location.pathname === `${process.env.PUBLIC_URL}/app/files` &&
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${location.pathname}/app/files`) ||
+                this.props.history.location.pathname === `${location.pathname}/app/files` ||
+                (this.props.history.location.pathname === `${location.pathname}/app/files` &&
                     this.state.selectionMode)) {
                 styles.display = 'none'
             } else {

@@ -9,6 +9,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
+import location from '../../../shared/location'
 
 export default class DevicesList extends Component {
 
@@ -70,7 +71,7 @@ export default class DevicesList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
+            this.props.history.push(`${location.pathname}/app/devices`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -96,12 +97,12 @@ export default class DevicesList extends Component {
     }
 
     handleEdit(eventObject) {
-        const location = `${process.env.PUBLIC_URL}/app/devices/edit`
-        this.props.history.push(location)
+        const path = `${location.pathname}/app/devices/edit`
+        this.props.history.push(path)
     }
 
     handleAdd = () => {
-        this.props.history.push(`${process.env.PUBLIC_URL}/app/devices/add`)
+        this.props.history.push(`${location.pathname}/app/devices/add`)
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -110,7 +111,7 @@ export default class DevicesList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
+        this.props.history.push(`${location.pathname}/app/devices`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -128,10 +129,10 @@ export default class DevicesList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/devices/${itemSelected[0]["PluginFlyvemdmAgent.id"]}`)
+            this.props.history.push(`${location.pathname}/app/devices/${itemSelected[0]["PluginFlyvemdmAgent.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/devices/edit/`)
+            this.props.history.push(`${location.pathname}/app/devices/edit/`)
         }
     }
 
@@ -212,7 +213,7 @@ export default class DevicesList extends Component {
                 order: devices.order,
                 itemList: BuildItemList(devices)
             })
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
+            this.props.history.push(`${location.pathname}/app/devices`)
 
         } catch (error) {
             this.setState({

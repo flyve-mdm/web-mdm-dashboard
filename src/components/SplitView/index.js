@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { logout } from '../../store/authentication/actions'
 import { I18n } from "react-i18nify"
+import location from '../../shared/location'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -45,50 +46,50 @@ class SplitView extends React.Component {
                     <div className="splitview-wrapper-wrapper__div">
                       <section className="splitview-wrapped-navbar-wrapped-top__section">
                         <ImgWithPopper
-                          to={`${process.env.PUBLIC_URL}/app`}
+                          to={`${location.pathname}/app`}
                           alt='Flyve MDM Dashboard'
                           img={require('../../assets/images/dashboard.svg')}
                           title={I18n.t('commons.dashboard')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/app/devices`}
+                          to={`${location.pathname}/app/devices`}
                           iconName='deviceIcon'
                           title={I18n.t('commons.device')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/app/invitations`}
+                          to={`${location.pathname}/app/invitations`}
                           iconName='emailIcon'
                           title={I18n.t('commons.invitations')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/app/fleets`}
+                          to={`${location.pathname}/app/fleets`}
                           iconName='goToStartIcon'
                           title={I18n.t('commons.fleets')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/app/files`}
+                          to={`${location.pathname}/app/files`}
                           iconName='filesIcon'
                           title={I18n.t('commons.files')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/app/applications`}
+                          to={`${location.pathname}/app/applications`}
                           iconName='switchAppsIcon'
                           title={I18n.t('commons.applications')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/app/users`}
+                          to={`${location.pathname}/app/users`}
                           iconName='peopleIcon'
                           title={I18n.t('commons.users')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/app/search`}
+                          to={`${location.pathname}/app/search`}
                           iconName='searchIcon'
                           title={I18n.t('commons.search_or_other')}
                           disabled={this.props.expanded}
@@ -96,13 +97,13 @@ class SplitView extends React.Component {
                       </section>
                       <section className="splitview-wrapped-navbar-wrapped-bottom__section">
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/app/settings`}
+                          to={`${location.pathname}/app/settings`}
                           iconName='settingsIcon'
                           title={I18n.t('commons.setting_flyve_mdm')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${process.env.PUBLIC_URL}/app/about`}
+                          to={`${location.pathname}/app/about`}
                           iconName='contactInfoIcon'
                           title={I18n.t('commons.about_flyve_mdm')}
                           disabled={this.props.expanded}

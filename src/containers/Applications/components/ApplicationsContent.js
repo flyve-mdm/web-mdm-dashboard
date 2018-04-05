@@ -8,6 +8,7 @@ import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
+import location from '../../../shared/location'
 
 export default class ApplicationsContent extends Component {
 
@@ -51,7 +52,7 @@ export default class ApplicationsContent extends Component {
                     body: I18n.t('notifications.elements_successfully_removed'),
                     type: 'success'
                 })
-                this.props.history.push(`${process.env.PUBLIC_URL}/app/applications`)
+                this.props.history.push(`${location.pathname}/app/applications`)
             } catch (error) {                
                 this.props.setNotification({
                     title: error[0],
@@ -81,7 +82,7 @@ export default class ApplicationsContent extends Component {
                 body: I18n.t('notifications.problems_loading_data'),
                 type: "alert"
             }) 
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/applications`)
+            this.props.history.push(`${location.pathname}/app/applications`)
         }
     }
 
@@ -109,7 +110,7 @@ export default class ApplicationsContent extends Component {
                                 <div className="detail">{BytesToSize(this.state.data["filesize"])}</div>
                                 <span className="source">{this.state.data["source"]}</span>
                                 <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.history.push(`${process.env.PUBLIC_URL}/app/applications/${this.state.id}/edit`)} />
+                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.history.push(`${location.pathname}/app/applications/${this.state.id}/edit`)} />
                                 <span className="deleteIcon" onClick={this.handleDelete} />
                             </div>
                         </div>
