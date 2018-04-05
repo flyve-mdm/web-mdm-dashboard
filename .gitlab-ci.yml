@@ -11,6 +11,7 @@ deployment:
     - yarn build
     - rm -r /var/www/public/dashboard
     - cp -r ./build /var/www/public/dashboard
+    - cp -f ./htaccess_dev /var/www/public/dashboard/.htaccess
   only:
     - develop
     
