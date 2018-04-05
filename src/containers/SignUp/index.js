@@ -13,6 +13,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { buildDataArray, changeState, handleSubmitForm } from './actions';
+import location from '../../shared/location'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -57,7 +58,7 @@ class SignUp extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.type === 'success') {
-            this.props.history.push(`${process.env.PUBLIC_URL}/validateAccount`)
+            this.props.history.push(`${location.pathname}/validateAccount`)
         }
     }
 
@@ -87,7 +88,7 @@ class SignUp extends Component {
                             <p>
                                 { I18n.t('create_account.already_have_account') }
                                 &#160;
-                                <Link to={`${process.env.PUBLIC_URL}`}>
+                                <Link to={`${location.pathname}`}>
                                     { I18n.t('commons.sign_in') }
                                 </Link>
                             </p>

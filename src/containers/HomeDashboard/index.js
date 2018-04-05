@@ -12,6 +12,7 @@ import EmptyMessage from '../../components/EmptyMessage'
 import { NavLink } from 'react-router-dom'
 import ContentPane from '../../components/ContentPane'
 import itemtype from '../../shared/itemtype'
+import location from '../../shared/location'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -310,7 +311,7 @@ class Dashboard extends Component {
                   <li key={`device${id}`}>
                     <NavLink 
                       exact
-                      to={`${process.env.PUBLIC_URL}/app/devices/${device.id}`}
+                      to={`${location.pathname}/app/devices/${device.id}`}
                     >
                       {device.name}
                     </NavLink>

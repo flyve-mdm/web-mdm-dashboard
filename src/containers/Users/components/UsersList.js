@@ -9,6 +9,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
+import location from '../../../shared/location'
 
 export default class UsersList extends Component {
     
@@ -71,7 +72,7 @@ export default class UsersList extends Component {
     })
 
     handleToggleSelectionMode = () => {
-        this.props.history.push(`${process.env.PUBLIC_URL}/app/users`)
+        this.props.history.push(`${location.pathname}/app/users`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -89,16 +90,16 @@ export default class UsersList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/users/${itemSelected[0]["User.id"]}`)
+            this.props.history.push(`${location.pathname}/app/users/${itemSelected[0]["User.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/users/edit/`)
+            this.props.history.push(`${location.pathname}/app/users/edit/`)
         }
     }
 
     handleRefresh = async () => {
         try {
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/users`)
+            this.props.history.push(`${location.pathname}/app/users`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -124,8 +125,8 @@ export default class UsersList extends Component {
     }
 
     handleEdit = () => {
-        const location = `${process.env.PUBLIC_URL}/app/users/edit`
-        this.props.history.push(location)
+        const path = `${location.pathname}/app/users/edit`
+        this.props.history.push(path)
     }
 
     handleDelete = async (eventObject) => {
@@ -200,7 +201,7 @@ export default class UsersList extends Component {
                 order: response.order,
                 itemList: BuildItemList(response)
             })
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/users`)
+            this.props.history.push(`${location.pathname}/app/users`)
 
         } catch (error) {
             this.setState({

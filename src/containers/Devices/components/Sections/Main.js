@@ -6,6 +6,7 @@ import Loading from '../../../../components/Loading'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
+import location from '../../../../shared/location'
 
 export default class Main extends Component {
 
@@ -52,7 +53,7 @@ export default class Main extends Component {
                 body: I18n.t('notifications.problems_loading_data'),
                 type: "alert"
             }) 
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/devices`)
+            this.props.history.push(`${location.pathname}/app/devices`)
         }
     }
 
@@ -94,8 +95,8 @@ export default class Main extends Component {
     }
 
     handleEdit = () => {
-        const location = `${process.env.PUBLIC_URL}/app/devices/${this.props.id}/edit`
-        this.props.history.push(location)
+        const path = `${location.pathname}/app/devices/${this.props.id}/edit`
+        this.props.history.push(path)
     }
 
     ping = () => {

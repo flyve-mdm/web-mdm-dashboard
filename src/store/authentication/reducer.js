@@ -2,6 +2,7 @@ import * as actionTypes from './actionTypes'
 import initialState from "./initialState"
 import { updateObject } from "../../shared/updateObject"
 import glpi from '../../shared/glpiApi'
+import location from '../../shared/location'
 
 // Sugar Functions
 
@@ -34,7 +35,7 @@ const logout = async (state, action) => {
     localStorage.removeItem('sessionToken')
     await glpi.killSession()
   } catch (error) {}
-  return updateObject(state, { currentUser: null }, () => { action.history.push(`${process.env.PUBLIC_URL}`)})
+  return updateObject(state, { currentUser: null }, () => { action.history.push(`${location.pathname}`)})
 }
 
 const authRefreshCaptcha = (state, action) => {

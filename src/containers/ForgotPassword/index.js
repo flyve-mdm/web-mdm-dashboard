@@ -8,6 +8,7 @@ import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import { fetchRecoverPassword } from '../../store/authentication/actions'
 import { handleRecover } from './actions';
 import { I18n } from 'react-i18nify'
+import location from '../../shared/location'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -64,7 +65,7 @@ class ForgotPassword extends Component {
                         <button 
                             className="btn --secondary" 
                             type="button" 
-                            onClick={() => this.props.history.push(`${process.env.PUBLIC_URL}/`)}
+                            onClick={() => this.props.history.push(`${location.pathname}/`)}
                         >
                             {I18n.t('commons.back')}
                         </button>
@@ -85,7 +86,7 @@ class ForgotPassword extends Component {
                     <button 
                         className="win-button" 
                         type="button" 
-                        onClick={() => this.props.history.push(`${process.env.PUBLIC_URL}/`)}
+                        onClick={() => this.props.history.push(`${location.pathname}/`)}
                     >
                         {I18n.t('forgot_password.go_home')}
                     </button>
