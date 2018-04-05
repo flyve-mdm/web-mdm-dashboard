@@ -300,7 +300,8 @@ class Profiles extends Component {
                                 type={this.state.typeImageProfile}
                                 imgClick={this.openFileChooser}
                                 size={150}
-                                imgClass="clickable"/>
+                                imgClass="clickable"
+                            />
                         </div>
     
                     </div>

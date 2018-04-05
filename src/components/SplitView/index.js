@@ -47,7 +47,7 @@ class SplitView extends React.Component {
                         <ImgWithPopper
                           to={`${process.env.PUBLIC_URL}/app`}
                           alt='Flyve MDM Dashboard'
-                          img='/images/dashboard.svg'
+                          img={require('../../assets/images/dashboard.svg')}
                           title={I18n.t('commons.dashboard')}
                           disabled={this.props.expanded}
                         />

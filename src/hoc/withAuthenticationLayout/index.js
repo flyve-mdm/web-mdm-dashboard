@@ -28,7 +28,7 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
             <div className="authentication-block " style={style} >
                 <section className="authentication__section">
                     <figure className="authentication__figure">
-                        <img alt="Flyve MDM Dashboard" src={`../images/dashboard.svg`} />
+                        <img alt="Flyve MDM Dashboard" src={require('../../assets/images/dashboard.svg')} />
                     </figure>
                     <WrappedComponent {...props} />
                 </section>
