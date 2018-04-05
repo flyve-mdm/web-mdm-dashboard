@@ -28,7 +28,7 @@ class Entity extends Component {
             numberUsers: undefined,
             invitationsSent: undefined,
             typesPolicies: undefined,
-            numberCategoriesForPolicies: validateData(SettingsEntity["numberCategoriesForPolicies"])
+            numberCategoriesForPolicies: undefined
         }
     }
 
@@ -42,6 +42,7 @@ class Entity extends Component {
             const fleets = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFleet})
             const { active_profile } = await this.props.glpi.getActiveProfile()
             const policies = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPolicy})
+            const policyCategories = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPolicyCategory})
             this.setState({
                 isLoading: false,
                 devicesCurretlymanaged: devices.length,
@@ -51,7 +52,8 @@ class Entity extends Component {
                 filesUploaded: files.length,
                 fleetsCurrentlyManaged: fleets.length,
                 entityID: active_profile.entities[0].id,
-                typesPolicies: policies.length
+                typesPolicies: policies.length,
+                numberCategoriesForPolicies: policyCategories.length
             })
         } catch (error) {
             console.log(error)
