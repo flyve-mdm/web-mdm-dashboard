@@ -5,26 +5,63 @@ import Main from './Main'
 import validateData from '../../../../shared/validateData'
 import SettingsEntity from '../../../../data/SettingsEntity.json'
 import ContentPane from '../../../../components/ContentPane'
+import Loading from '../../../../components/Loading'
+import { I18n } from 'react-i18nify'
+import withGLPI from '../../../../hoc/withGLPI'
+import itemtype from '../../../../shared/itemtype'
 
 class Entity extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
+            isLoading: true,
             mode: '', 
             buttonSaveClassName: "win-button hidden",
             tokenLife: validateData(SettingsEntity["tokenLife"]),
             downloadURL: validateData(SettingsEntity["downloadURL"], "https://"),
-            entityID: validateData(SettingsEntity["entityID"]),
-            maximunManagedDevices: validateData(SettingsEntity["maximunManagedDevices"]),
-            devicesCurretlymanaged: validateData(SettingsEntity["devicesCurretlymanaged"]),
-            fleetsCurrentlyManaged: validateData(SettingsEntity["fleetsCurrentlyManaged"]),
-            filesUploaded: validateData(SettingsEntity["filesUploaded"]),
-            applicationsUploaded: validateData(SettingsEntity["applicationsUploaded"]),
-            numberUsers: validateData(SettingsEntity["numberUsers"]),
-            invitationsSent: validateData(SettingsEntity["invitationsSent"]),
-            typesPolicies: validateData(SettingsEntity["typesPolicies"]),
-            numberCategoriesForPolicies: validateData(SettingsEntity["numberCategoriesForPolicies"])
+            entityID: undefined,
+            devicesCurretlymanaged: undefined,
+            fleetsCurrentlyManaged: undefined,
+            filesUploaded: undefined,
+            applicationsUploaded: undefined,
+            numberUsers: undefined,
+            invitationsSent: undefined,
+            typesPolicies: undefined,
+            numberCategoriesForPolicies: undefined
+        }
+    }
+
+    componentDidMount = async () => {
+        try {
+            const devices = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmAgent})
+            const applications = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPackage})
+            const users = await this.props.glpi.getAllItems({itemtype: itemtype.User})
+            const invitations = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmInvitation})
+            const files = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFile})
+            const fleets = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFleet})
+            const { active_profile } = await this.props.glpi.getActiveProfile()
+            const policies = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPolicy})
+            const policyCategories = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPolicyCategory})
+            this.setState({
+                isLoading: false,
+                devicesCurretlymanaged: devices.length,
+                applicationsUploaded: applications.length,
+                numberUsers: users.length,
+                invitationsSent: invitations.length,
+                filesUploaded: files.length,
+                fleetsCurrentlyManaged: fleets.length,
+                entityID: active_profile.entities[0].id,
+                typesPolicies: policies.length,
+                numberCategoriesForPolicies: policyCategories.length
+            })
+        } catch (error) {
+            console.log(error)
+            // this.props.actions.setNotification({
+            //     title: error[0],
+            //     body: error[1],
+            //     type: 'alert'
+            // })
         }
     }
 
@@ -83,7 +120,6 @@ class Entity extends Component {
                             filesUploaded={this.state.filesUploaded} 
                             fleetsCurrentlyManaged={this.state.fleetsCurrentlyManaged} 
                             devicesCurretlymanaged={this.state.devicesCurretlymanaged} 
-                            maximunManagedDevices={this.state.maximunManagedDevices} 
                             entityID={this.state.entityID}  
                             downloadURL={this.state.downloadURL} 
                             changeMode={this.changeMode}
@@ -93,15 +129,17 @@ class Entity extends Component {
         }
 
         return (
-            <div>
-                <h2>Entity</h2> 
-                <div style={{marginTop: '20px'}}>
-                    {content}
+            this.state.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> :
+            (
+                <div>
+                    <h2>{ I18n.t('settings.entity.title') }</h2> 
+                    <div style={{marginTop: '20px'}}>
+                        {content}
+                    </div>
                 </div>
-            </div>
+            )
         )
-
     }
 }
 
-export default Entity
+export default withGLPI(Entity)

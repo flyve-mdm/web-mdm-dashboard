@@ -6,7 +6,7 @@ import UsernameFieldset from './components/UsernameFieldset'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import { fetchSignIn } from '../../store/authentication/actions'
 import { I18n } from "react-i18nify"
-
+import location from '../../shared/location'
 // Async Component
 import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
 import { Redirect } from 'react-router'
@@ -44,7 +44,7 @@ class SignIn extends Component {
 
     render () {
         if (this.props.isAuthenticated) {
-            return <Redirect to={`${process.env.PUBLIC_URL}/app`}/>
+            return <Redirect to={`${location.pathname}/app`}/>
         } else {
             let form
             if (this.state.phase === 1) {

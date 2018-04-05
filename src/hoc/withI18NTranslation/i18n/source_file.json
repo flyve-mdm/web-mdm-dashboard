@@ -138,6 +138,7 @@
       "native": "Native"
     },
     "entity": {
+      "title": "Entity",
       "url": "URL of the application",
       "file_extension": "File extension as apk or upk",
       "date_period": "Date Period",

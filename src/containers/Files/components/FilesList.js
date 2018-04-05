@@ -8,6 +8,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
+import location from '../../../shared/location'
 
 export default class FilesList extends Component {
 
@@ -63,7 +64,7 @@ export default class FilesList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/files`)
+            this.props.history.push(`${location.pathname}/app/files`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -89,12 +90,12 @@ export default class FilesList extends Component {
     }
 
     handleEdit = () => {
-        const location = `${process.env.PUBLIC_URL}/app/files/edit`
-        this.props.history.push(location)
+        const path = `${location.pathname}/app/files/edit`
+        this.props.history.push(path)
     }
 
     handleAdd = (eventObject) => {
-        this.props.history.push(`${process.env.PUBLIC_URL}/app/files/add`)
+        this.props.history.push(`${location.pathname}/app/files/add`)
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -103,7 +104,7 @@ export default class FilesList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.props.history.push(`${process.env.PUBLIC_URL}/app/files`)
+        this.props.history.push(`${location.pathname}/app/files`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -121,10 +122,10 @@ export default class FilesList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/files/${itemSelected[0]["PluginFlyvemdmFile.id"]}`)
+            this.props.history.push(`${location.pathname}/app/files/${itemSelected[0]["PluginFlyvemdmFile.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/files/edit/`)
+            this.props.history.push(`${location.pathname}/app/files/edit/`)
         }
     }
 
@@ -203,7 +204,7 @@ export default class FilesList extends Component {
                 order: files.order,
                 itemList: new WinJS.Binding.List(files.data)
             })
-            this.props.history.push(`${process.env.PUBLIC_URL}/app/files`)
+            this.props.history.push(`${location.pathname}/app/files`)
 
         } catch (error) {
             this.setState({
