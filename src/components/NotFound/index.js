@@ -7,7 +7,7 @@ const NotFound = props => {
         <div className="authentication-block " style={{ textAlign: 'center'}} >
             <section className="authentication__section">
                 <figure className="authentication__figure">
-                    <img alt="Flyve MDM Dashboard" src="/images/dashboard.svg" />
+                    <img alt="Flyve MDM Dashboard" src={require('../../assets/images/dashboard.svg')} />
                 </figure>
                 <h1>{I18n.t('commons.not_found')}</h1>
                 <h1>404</h1>
