@@ -93,7 +93,7 @@ export default class InvitationsList extends Component {
         }
     }
 
-    handleRefresh = () => {
+    handleRefresh = async () => {
         try {
             this.props.history.push(`${location.pathname}/app/invitations`)
             this.setState({
@@ -104,14 +104,12 @@ export default class InvitationsList extends Component {
                     page: 1,
                     count: 15
                 }
-            }, async () => {
-                const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page)-1}` } })
-                this.setState({
-                    isLoading: false,
-                    order: response.order,
-                    itemList: BuildItemList(response)
-                })
-                this.props.changeSelectedItems([])
+            })
+            const invitations = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            this.setState({
+                isLoading: false,
+                order: invitations.order,
+                itemList: BuildItemList(invitations)
             })
         } catch (e) {
             this.setState({
@@ -190,12 +188,12 @@ export default class InvitationsList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3] } })
+            const invitations = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3] } })
 
             this.setState({
                 isLoading: false,
-                order: response.order,
-                itemList: BuildItemList(response)
+                order: invitations.order,
+                itemList: BuildItemList(invitations)
             })
             this.props.history.push(`${location.pathname}/app/invitations`)
 
@@ -321,24 +319,28 @@ export default class InvitationsList extends Component {
             listComponent = <Loader count={3} />
         } else {
             if (this.state.itemList !== undefined) {
-                listComponent = (
-                    <ReactWinJS.ListView
-                        ref={(listView) => { this.listView = listView }}
-                        onLoadingStateChanged={this.onLoadingStateChanged}
-                        className="contentListView win-selectionstylefilled"
-                        style={{ height: 'calc(100% - 48px)' }}
-                        itemDataSource={this.state.itemList.dataSource}
-                        groupDataSource={this.state.itemList.groups.dataSource}
-                        layout={this.state.layout}
-                        itemTemplate={this.ItemListRenderer}
-                        groupHeaderTemplate={this.groupHeaderRenderer}
-                        footerComponent={<Loader />}
-                        onFooterVisibilityChanged={this.showFooterList}
-                        selectionMode={this.props.selectionMode ? 'multi' : 'single'}
-                        tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
-                        onSelectionChanged={this.handleSelectionChanged}
-                    />
-                )
+                if (this.state.itemList.length > 0) {
+                    listComponent = (
+                        <ReactWinJS.ListView
+                            ref={(listView) => { this.listView = listView }}
+                            onLoadingStateChanged={this.onLoadingStateChanged}
+                            className="contentListView win-selectionstylefilled"
+                            style={{ height: 'calc(100% - 48px)' }}
+                            itemDataSource={this.state.itemList.dataSource}
+                            groupDataSource={this.state.itemList.groups.dataSource}
+                            layout={this.state.layout}
+                            itemTemplate={this.ItemListRenderer}
+                            groupHeaderTemplate={this.groupHeaderRenderer}
+                            footerComponent={<Loader />}
+                            onFooterVisibilityChanged={this.showFooterList}
+                            selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                            tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
+                            onSelectionChanged={this.handleSelectionChanged}
+                        />
+                    )
+                } else {
+                    listComponent = <EmptyMessage message={I18n.t('invitations.not_found')} icon={this.props.icon} showIcon={true} />
+                }
             } else {
                 listComponent = <EmptyMessage message={I18n.t('invitations.not_found')} icon={this.props.icon} showIcon={true} />
             }
