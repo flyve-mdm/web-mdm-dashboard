@@ -25,15 +25,14 @@ class Notifications extends Component {
     changeNotificationType = (e) => {
         const newNotificationType = e.target.value
         if (Notification) {
-            Notification.requestPermission()
-                .then((permission) => {
-                    if(permission === "granted") {
-                        localStorage.setItem('notificationType', newNotificationType)
-                        this.setState({
-                            notificationType: newNotificationType
-                        })
-                    }
-                })
+            Notification.requestPermission(permission => {
+                if(permission === "granted") {
+                    localStorage.setItem('notificationType', newNotificationType)
+                    this.setState({
+                        notificationType: newNotificationType
+                    })
+                }
+            })
         }
     } 
 
