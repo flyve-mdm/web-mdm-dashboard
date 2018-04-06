@@ -44,7 +44,7 @@ export default class UsersContent extends Component {
                 isLoading: true
             })
 
-            this.props.changeAction("reload")            
+            this.props.changeAction('reload')            
             this.props.changeSelectionMode(false)
             
             try {

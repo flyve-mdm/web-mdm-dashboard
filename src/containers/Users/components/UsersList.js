@@ -42,7 +42,7 @@ export default class UsersList extends Component {
             this.toolBar.winControl.forceLayout();
         }
 
-        if (this.props.action === "reload") {
+        if (this.props.action === 'reload') {
             this.handleRefresh()
             this.props.changeAction(null)
         }

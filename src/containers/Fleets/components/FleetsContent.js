@@ -632,7 +632,7 @@ class FleetsContent extends Component {
                 type: 'success'
             })
             this.props.changeSelectionMode(false)
-            this.props.changeAction("reload")
+            this.props.changeAction('reload')
         } catch (error) {
             if (error.length > 1) {
                 this.props.setNotification({
@@ -668,7 +668,7 @@ class FleetsContent extends Component {
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)
-                this.props.changeAction("reload")    
+                this.props.changeAction('reload')    
 
             } catch (error) {
                 this.props.setNotification({

@@ -51,7 +51,7 @@ export default class FilesContent extends Component {
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)
-                this.props.changeAction("reload")
+                this.props.changeAction('reload')
         
             } else {
                 this.setState({

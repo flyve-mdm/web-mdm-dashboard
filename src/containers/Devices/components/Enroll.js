@@ -35,6 +35,7 @@ export default class Enroll extends Component {
                     type: 'success'
                 })
                 this.props.history.goBack()
+                this.props.changeAction('reload')
             }
         } catch (error) {
             if (error.length > 1) {

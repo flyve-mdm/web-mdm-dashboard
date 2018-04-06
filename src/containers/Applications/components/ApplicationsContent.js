@@ -41,10 +41,6 @@ export default class ApplicationsContent extends Component {
             this.setState({
                 isLoading: true
             })
-
-            this.props.changeAction("reload")            
-            this.props.changeSelectionMode(false)
-            
             try {
                 await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmPackage, input: itemListToDelete, queryString: { force_purge: true } })
                 this.props.setNotification({
@@ -52,7 +48,8 @@ export default class ApplicationsContent extends Component {
                     body: I18n.t('notifications.elements_successfully_removed'),
                     type: 'success'
                 })
-                this.props.history.push(`${location.pathname}/app/applications`)
+                this.props.changeAction('reload')
+                this.props.changeSelectionMode(false)
             } catch (error) {                
                 this.props.setNotification({
                     title: error[0],

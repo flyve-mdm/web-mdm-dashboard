@@ -21,7 +21,7 @@ class DangerZone extends Component {
                     body: response[0].message ? response[0].message : I18n.t('notifications.data_deleted_successfully'),
                     type: 'success'
                 })
-                this.props.changeAction("reload")
+                this.props.changeAction('reload')
                 this.props.history.push(`${location.pathname}/app/devices`)
             } catch (error) {
                 this.props.setNotification({
@@ -47,7 +47,7 @@ class DangerZone extends Component {
                     body: response[0].message ? response[0].message : I18n.t('notifications.unenrollment_device'),
                     type: 'success'
                 })
-                this.props.changeAction("reload")
+                this.props.changeAction('reload')
                 this.props.history.push(`${location.pathname}/app/devices`)
             } catch (error) {
                 this.props.setNotification({
@@ -72,7 +72,7 @@ class DangerZone extends Component {
                     body: response[0].message ? response[0].message : I18n.t('notifications.devices_successfully_deleted'),
                     type: 'success'
                 })
-                this.props.changeAction("reload")
+                this.props.changeAction('reload')
                 this.props.history.push(`${location.pathname}/app/devices`)
             } catch (error) {
                 this.props.setNotification({
