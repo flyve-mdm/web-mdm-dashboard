@@ -125,18 +125,18 @@ class SplitView extends React.Component {
                         this.props.contract && '--closing'
                       }`}>
                       <section className="splitview-wrapped-navbar-wrapped-top__section --description">
-                        <SpanWithPopper description={I18n.t('commons.dashboard')} to="/app" />
-                        <SpanWithPopper description={I18n.t('commons.devices')} to="/app/devices" />
-                        <SpanWithPopper description={I18n.t('commons.invitations')} to="/app/invitations" />
-                        <SpanWithPopper description={I18n.t('commons.fleets')} to="/app/fleets" />
-                        <SpanWithPopper description={I18n.t('commons.files')} to="/app/files" />
-                        <SpanWithPopper description={I18n.t('commons.applications')} to="/app/applications" />
-                        <SpanWithPopper description={I18n.t('commons.users')} to="/app/users" />
-                        <SpanWithPopper description={I18n.t('commons.search')} to="/app/search" />
+                        <SpanWithPopper description={I18n.t('commons.dashboard')} to={`${location.pathname}/app`} />
+                        <SpanWithPopper description={I18n.t('commons.devices')} to={`${location.pathname}/app/devices`} />
+                        <SpanWithPopper description={I18n.t('commons.invitations')} to={`${location.pathname}/app/invitations`} />
+                        <SpanWithPopper description={I18n.t('commons.fleets')} to={`${location.pathname}/app/fleets`} />
+                        <SpanWithPopper description={I18n.t('commons.files')} to={`${location.pathname}/app/files`} />
+                        <SpanWithPopper description={I18n.t('commons.applications')} to={`${location.pathname}/app/applications`} />
+                        <SpanWithPopper description={I18n.t('commons.users')} to={`${location.pathname}/app/users`} />
+                        <SpanWithPopper description={I18n.t('commons.search')} to={`${location.pathname}/app/search`} />
                       </section>
                       <section className="splitview-wrapped-navbar-wrapped-bottom__section --description">
-                        <SpanWithPopper description={I18n.t('commons.setting_flyve_mdm')} to="/app/settings" />
-                        <SpanWithPopper description={I18n.t('commons.about_flyve_mdm')} to="/app/about" />
+                        <SpanWithPopper description={I18n.t('commons.setting_flyve_mdm')} to={`${location.pathname}/app/settings`} />
+                        <SpanWithPopper description={I18n.t('commons.about_flyve_mdm')} to={`${location.pathname}/app/about`} />
                         <SpanWithPopper description={I18n.t('commons.logout')} click={this.logout} />
                       </section>
                     </div>
