@@ -10,7 +10,8 @@ import { connect } from 'react-redux'
 import { logout } from '../../../../store/authentication/actions'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
-import withGLPI from "../../../../hoc/withGLPI"
+import withGLPI from '../../../../hoc/withGLPI'
+import withHandleError from '../../../../hoc/withHandleError'
 import { selfRegistration } from '../../../../config/config.json'
 import itemtype from '../../../../shared/itemtype'
 
@@ -362,4 +363,4 @@ Security.propTypes = {
     glpi: PropTypes.object.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(Security))
+export default connect(null, mapDispatchToProps)(withGLPI(withHandleError(Security)))

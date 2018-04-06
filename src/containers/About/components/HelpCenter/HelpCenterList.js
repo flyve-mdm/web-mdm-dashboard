@@ -2,9 +2,10 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import { I18n } from "react-i18nify"
-import withGLPI from "../../../../hoc/withGLPI"
-import Loading from "../../../../components/Loading"
+import { I18n } from 'react-i18nify'
+import withGLPI from '../../../../hoc/withGLPI'
+import withHandleError from '../../../../hoc/withHandleError'
+import Loading from '../../../../components/Loading'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -221,4 +222,4 @@ HelpCenterList.propTypes = {
 export default connect (
     null,
     mapDispatchToProps
-)(withGLPI(HelpCenterList))
+)(withGLPI(withHandleError(HelpCenterList)))

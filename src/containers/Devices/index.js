@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
+import withHandleError from '../../hoc/withHandleError'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import DevicesList from './components/DevicesList'
 import { uiSetNotification } from '../../store/ui/actions'
@@ -76,7 +77,8 @@ class Devices extends Component {
             changeAction: this.changeAction,
             setNotification: this.props.actions.setNotification,
             history: this.props.history,
-            glpi: this.props.glpi
+            glpi: this.props.glpi,
+            handleError: this.props.handleError
         }
     }
 
@@ -164,4 +166,4 @@ class Devices extends Component {
 export default connect(
     null,
     mapDispatchToProps
-)(withGLPI(Devices))
+)(withGLPI(withHandleError(Devices)))

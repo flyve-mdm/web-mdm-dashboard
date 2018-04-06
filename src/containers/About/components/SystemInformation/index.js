@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import Loading from '../../../../components/Loading'
-import withGLPI from "../../../../hoc/withGLPI"
+import withGLPI from '../../../../hoc/withGLPI'
+import withHandleError from '../../../../hoc/withHandleError'
 import PropTypes from 'prop-types'
 import itemtype from '../../../../shared/itemtype'
 import { uiSetNotification } from '../../../../store/ui/actions'
@@ -79,4 +80,4 @@ SystemInformation.propTypes = {
   glpi: PropTypes.object.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(SystemInformation))
+export default connect(null, mapDispatchToProps)(withGLPI(withHandleError(SystemInformation)))

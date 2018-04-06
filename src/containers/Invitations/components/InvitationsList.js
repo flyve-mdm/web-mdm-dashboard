@@ -112,6 +112,7 @@ export default class InvitationsList extends Component {
                 itemList: BuildItemList(invitations)
             })
         } catch (e) {
+            this.props.handleError({notification: this.props.setNotification, error: e, type:'alert'})
             this.setState({
                 isLoading: false,
                 order: "ASC"

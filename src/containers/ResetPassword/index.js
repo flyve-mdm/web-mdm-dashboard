@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import Loading from '../../components/Loading'
 import ConstructInputs from '../../components/Forms'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+import withHandleError from '../../hoc/withHandleError'
 import { fetchResetPassword } from '../../store/authentication/actions'
 import { resetPassword, changeState, buildDataArray } from './actions';
 import { I18n } from 'react-i18nify'
@@ -117,7 +118,7 @@ ResetPassword.defaultProps = {
 }
 
 export default withAuthenticationLayout(
-    connect(mapStateToProps, mapDispatchToProps)(ResetPassword), {
+    connect(mapStateToProps, mapDispatchToProps)(withHandleError(ResetPassword)), {
         centerContent: true
     }
 )
