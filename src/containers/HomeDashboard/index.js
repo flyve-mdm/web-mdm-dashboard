@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { VictoryPie } from 'victory'
 import { I18n } from 'react-i18nify'
 import withGLPI from '../../hoc/withGLPI'
+import withHandleError from '../../hoc/withHandleError'
 import Loading from '../../components/Loading'
 import InfoBox from '../../components/InfoBox'
 import { uiSetNotification } from '../../store/ui/actions'
@@ -373,4 +374,4 @@ Dashboard.propTypes = {
 export default connect(
   null,
   mapDispatchToProps
-)(withGLPI(Dashboard))
+)(withGLPI(withHandleError(Dashboard)))

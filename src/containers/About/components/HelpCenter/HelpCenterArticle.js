@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Loading from "../../../../components/Loading"
-import withGLPI from "../../../../hoc/withGLPI"
+import Loading from '../../../../components/Loading'
+import withGLPI from '../../../../hoc/withGLPI'
+import withHandleError from '../../../../hoc/withHandleError'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
-import { I18n } from "react-i18nify"
+import { I18n } from 'react-i18nify'
 import itemtype from '../../../../shared/itemtype'
 import getID from '../../../../shared/getID'
 
@@ -69,4 +70,4 @@ HelpCenterArticle.propTypes = {
 export default connect(
     null,
     mapDispatchToProps
-)(withGLPI(HelpCenterArticle))
+)(withGLPI(withHandleError(HelpCenterArticle)))

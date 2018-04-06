@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import Loading from '../../components/Loading'
 import Input from '../../components/Forms/Input'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+import withHandleError from '../../hoc/withHandleError'
 import { fetchRecoverPassword } from '../../store/authentication/actions'
 import { handleRecover } from './actions';
 import { I18n } from 'react-i18nify'
@@ -120,7 +121,7 @@ ForgotPassword.propTypes = {
 }
 
 export default withAuthenticationLayout(
-    connect(mapStateToProps, mapDispatchToProps)(ForgotPassword), {
+    connect(mapStateToProps, mapDispatchToProps)(withHandleError(ForgotPassword)), {
         centerContent: true 
     }
 )

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UsernameFieldset from './components/UsernameFieldset'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+import withHandleError from '../../hoc/withHandleError'
 import { fetchSignIn } from '../../store/authentication/actions'
 import { I18n } from "react-i18nify"
 import location from '../../shared/location'
@@ -79,4 +80,4 @@ SignIn.propTypes = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withAuthenticationLayout(SignIn, { centerContent: true }))
+)(withAuthenticationLayout(withHandleError(SignIn), { centerContent: true }))

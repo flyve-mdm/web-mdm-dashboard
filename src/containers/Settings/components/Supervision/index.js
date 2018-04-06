@@ -10,6 +10,7 @@ import ContentPane from '../../../../components/ContentPane'
 import { I18n } from 'react-i18nify'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
+import withHandleError from '../../../../hoc/withHandleError'
 import itemtype from '../../../../shared/itemtype'
 
 function mapDispatchToProps(dispatch) {
@@ -131,4 +132,4 @@ Supervision.propTypes = {
     glpi: PropTypes.object.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(Supervision))
+export default connect(null, mapDispatchToProps)(withGLPI(withHandleError(Supervision)))

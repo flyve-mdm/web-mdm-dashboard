@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
+import withHandleError from '../../hoc/withHandleError'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import UsersList from './components/UsersList'
 import { uiSetNotification } from '../../store/ui/actions'
@@ -76,7 +77,8 @@ class Users extends Component {
             changeAction: this.changeAction,
             setNotification: this.props.actions.setNotification,
             history: this.props.history,
-            glpi: this.props.glpi
+            glpi: this.props.glpi,
+            handleError: this.props.handleError
         }
     }
 
@@ -165,4 +167,4 @@ class Users extends Component {
 export default connect(
     null,
     mapDispatchToProps
-)(withGLPI(Users))
+)(withGLPI(withHandleError(Users)))

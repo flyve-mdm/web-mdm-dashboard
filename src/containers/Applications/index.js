@@ -5,6 +5,7 @@ import { uiSetNotification } from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import withGLPI from '../../hoc/withGLPI'
+import withHandleError from '../../hoc/withHandleError'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import routes from './routes'
@@ -76,7 +77,8 @@ class Applications extends Component {
             changeAction: this.changeAction,
             setNotification: this.props.actions.setNotification,
             history: this.props.history,
-            glpi: this.props.glpi
+            glpi: this.props.glpi,
+            handleError: this.props.handleError
         }
     }
 
@@ -165,4 +167,4 @@ class Applications extends Component {
 export default connect(
     null,
     mapDispatchToProps
-)(withGLPI(Applications))
+)(withGLPI(withHandleError(Applications)))

@@ -1,10 +1,11 @@
 import React, { Component } from "react"
 import PropTypes from 'prop-types'
-import { I18n } from "react-i18nify"
+import { I18n } from 'react-i18nify'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Loading from '../../../../components/Loading'
 import { uiSetNotification } from '../../../../store/ui/actions'
+import withHandleError from '../../../../hoc/withHandleError'
 import ContentPane from '../../../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
@@ -86,4 +87,4 @@ Feedback.propTypes = {
 export default connect(
     null,
     mapDispatchToProps
-)(Feedback)
+)(withHandleError(Feedback))
