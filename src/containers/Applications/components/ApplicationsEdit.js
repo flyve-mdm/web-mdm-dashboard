@@ -61,7 +61,7 @@ export default class ApplicationsEdit extends Component {
                 }
 
                 this.props.changeSelectionMode(false)
-                this.props.changeAction("reload")
+                this.props.changeAction('reload')
             }
 
         } catch (error) {

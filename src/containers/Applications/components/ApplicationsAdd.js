@@ -61,7 +61,7 @@ export default class ApplicationsAdd extends Component {
                     body: I18n.t('notifications.saved_file'),
                     type: 'success'
                 })
-                this.props.changeAction("Reload")
+                this.props.changeAction('reload')
             })
         } catch (error) {
             if (Array.isArray(error)) {

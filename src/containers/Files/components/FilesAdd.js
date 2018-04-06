@@ -56,7 +56,7 @@ export default class FilesAdd extends Component {
                     body: I18n.t('notifications.saved_file'),
                     type: 'success'
                 })
-                this.props.changeAction("reload")
+                this.props.changeAction('reload')
             })
         } catch (error) {
             if (error.length > 1) {

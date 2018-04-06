@@ -41,7 +41,7 @@ export default class ListWinJs extends Component {
             this.handleRefresh()
         }
 
-        if (this.props.action === "reload") {
+        if (this.props.action === 'reload') {
             this.handleRefresh()
             this.props.changeAction(null)            
         }
