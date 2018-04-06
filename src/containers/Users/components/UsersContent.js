@@ -56,11 +56,7 @@ export default class UsersContent extends Component {
                 })
                 this.props.history.push(`${location.pathname}/app/users`)
             } catch (error) {                
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
+                this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
             }
             
         }
@@ -87,11 +83,7 @@ export default class UsersContent extends Component {
                 emails 
             })
         } catch (error) {
-            this.props.setNotification({
-                title: I18n.t('commons.error'),
-                body: I18n.t('notifications.problems_loading_data'),
-                type: "alert"
-            }) 
+            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
             this.props.history.push(`${location.pathname}/app/users`)
         }
     }

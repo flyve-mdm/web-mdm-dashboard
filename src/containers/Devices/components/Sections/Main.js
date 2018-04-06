@@ -48,11 +48,7 @@ export default class Main extends Component {
                 }) 
             })
         } catch (error) {
-            this.props.setNotification({
-                title: I18n.t('commons.error'),
-                body: I18n.t('notifications.problems_loading_data'),
-                type: "alert"
-            }) 
+            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
             this.props.history.push(`${location.pathname}/app/devices`)
         }
     }
@@ -83,13 +79,7 @@ export default class Main extends Component {
                 this.props.changeAction('reload')
             })
             .catch((error) => {
-                if (error.length > 1) {
-                    this.props.setNotification({
-                        title: error[0],
-                        body: error[1],
-                        type: 'alert'
-                    })
-                }
+                this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
             })
         }
     }
@@ -120,11 +110,7 @@ export default class Main extends Component {
                     this.handleRefresh()
                 })
             } catch (error) {
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
+                this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
                 this.setState({ sendingPing: false })
             }
         })

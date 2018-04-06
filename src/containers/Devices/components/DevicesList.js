@@ -176,15 +176,7 @@ export default class DevicesList extends Component {
             }
             
         } catch (error) {
-            if (error.length > 1) {
-
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
-            }
-
+            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
             this.props.changeSelectionMode(false)
             this.props.changeSelectedItems([])
 

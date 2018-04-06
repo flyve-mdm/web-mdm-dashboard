@@ -42,11 +42,7 @@ export default class Geolocation extends Component {
             })
             this.handleRefresh()
         } catch (error) {
-            this.props.setNotification({
-                title: error[0],
-                body: error[1],
-                type: 'alert'
-            })
+            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
         }
     }
 
@@ -62,12 +58,8 @@ export default class Geolocation extends Component {
                 locations: response,
                 isLoading: false
             })
-        } catch (e) {
-            this.props.setNotification({
-                title: I18n.t('commons.error'),
-                body: I18n.t('notifications.problems_loading_data'),
-                type: 'alert'
-            })
+        } catch (error) {
+            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
             this.setState({  
                 isLoading: false 
             })

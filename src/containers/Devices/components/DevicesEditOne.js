@@ -85,16 +85,10 @@ export default class DevicesEditOne extends Component {
                 this.props.changeSelectionMode(false)
             })
             .catch((error) => {
+                this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
                 this.setState({
                     isLoading: false
                 })
-                if(error.length > 1) {
-                    this.props.setNotification({
-                        title: error[0],
-                        body: error[1],
-                        type: 'alert'
-                    })
-                }
             })
     }
     

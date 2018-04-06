@@ -57,12 +57,7 @@ class Entity extends Component {
                 numberCategoriesForPolicies: policyCategories.length
             })
         } catch (error) {
-            console.log(error)
-            // this.props.actions.setNotification({
-            //     title: error[0],
-            //     body: error[1],
-            //     type: 'alert'
-            // })
+            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
         }
     }
 
