@@ -56,12 +56,8 @@ class Supervision extends Component {
                     type: 'success'
                 })
             } catch (error) {
-                this.setState ({isLoading: false})            
-                this.props.actions.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
+                this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
+                this.setState ({isLoading: false})
             }
         })
     }
@@ -86,12 +82,8 @@ class Supervision extends Component {
                 address: validateData(entity.address)
             })            
         } catch (error) {
-            this.setState ({isLoading: false})            
-            this.props.actions.setNotification({
-                title: error[0],
-                body: error[1],
-                type: 'alert'
-            })
+            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
+            this.setState ({isLoading: false})
         }
     }
 

@@ -583,14 +583,7 @@ class FleetsContent extends Component {
             })
             this.requestAllData()
         } catch (error) {
-            if (error.length > 1) {
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1][0]["message"],
-                    type: 'alert'
-                })
-            }
-            
+            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
             this.requestAllData()
         }
     }
@@ -634,13 +627,7 @@ class FleetsContent extends Component {
             this.props.changeSelectionMode(false)
             this.props.changeAction('reload')
         } catch (error) {
-            if (error.length > 1) {
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1][0]["message"],
-                    type: 'alert'
-                })
-            }
+            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
             this.setState({
                 isLoading: false
             })
@@ -671,11 +658,7 @@ class FleetsContent extends Component {
                 this.props.changeAction('reload')    
 
             } catch (error) {
-                this.props.setNotification({
-                    title: I18n.t('commons.error'),
-                    body: I18n.t('commons.error'),
-                    type: 'alert'
-                })
+                this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
                 this.setState({
                     isLoading: false
                 })

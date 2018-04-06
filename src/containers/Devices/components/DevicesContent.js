@@ -34,6 +34,7 @@ export default class DevicesContent extends Component {
                             changeAction={this.props.changeAction}
                             changeSelectionMode={this.props.changeSelectionMode}
                             setNotification={this.props.setNotification}
+                            handleError={this.props.handleError}
                             history={this.props.history}
                             glpi={this.props.glpi}
                         />
@@ -45,6 +46,7 @@ export default class DevicesContent extends Component {
                             id={this.state.id}
                             glpi={this.props.glpi}
                             setNotification={this.props.setNotification}
+                            handleError={this.props.handleError}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -53,6 +55,7 @@ export default class DevicesContent extends Component {
                         <Applications 
                             id={this.state.id}
                             glpi={this.props.glpi}
+                            handleError={this.props.handleError}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -60,6 +63,7 @@ export default class DevicesContent extends Component {
                         <Geolocation 
                             id={this.state.id}
                             setNotification={this.props.setNotification}
+                            handleError={this.props.handleError}
                             glpi={this.props.glpi}
                         />
                     </ReactWinJS.Pivot.Item>
@@ -69,6 +73,7 @@ export default class DevicesContent extends Component {
                             id={this.state.id}
                             changeAction={this.props.changeAction}
                             setNotification={this.props.setNotification}
+                            handleError={this.props.handleError}
                             glpi={this.props.glpi}
                             history={this.props.history}
                         />

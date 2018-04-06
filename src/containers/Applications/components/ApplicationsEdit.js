@@ -65,24 +65,10 @@ export default class ApplicationsEdit extends Component {
             }
 
         } catch (error) {
-
+            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
             this.setState({
                 isLoading: false
             })
-
-            if (Array.isArray(error)) {
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
-            } else {
-                this.props.setNotification({
-                    title: I18n.t('commons.error'),
-                    body: error,
-                    type: 'alert'
-                })
-            }
         }
     }
 

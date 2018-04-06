@@ -41,11 +41,7 @@ class Dashboard extends Component {
   }
 
   showError = (error) => {
-    this.props.actions.setNotification({
-      title: error[0],
-      body: error[1],
-      type: 'alert'
-    })
+    this.props.actions.setNotification(this.props.handleError({ type: 'alert', error: error }))
   }
 
   getDevices = () => new Promise(async (resolve) => {
