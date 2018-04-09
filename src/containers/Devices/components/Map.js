@@ -68,7 +68,7 @@ class Map extends Component {
 }
 
 Map.defaultProps = {
-    style: { height: '250px' },
+    style: { height: '40%' },
     markers: []
 }
 
