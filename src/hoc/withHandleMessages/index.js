@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import handleError from '../../shared/handleError'
+import handleMessage from '../../shared/handleMessage'
 
 /**
  * 
@@ -7,7 +7,7 @@ import handleError from '../../shared/handleError'
  * 
  */
 
-const withHandleError = (WrappedComponent) => {
+const withHandleMessages = (WrappedComponent) => {
     class HandleError extends Component {
 
         render() {
@@ -16,10 +16,10 @@ const withHandleError = (WrappedComponent) => {
     }
 
     HandleError.defaultProps = {
-        handleError: handleError
+        handleMessage: handleMessage
     }
 
     return HandleError
 }
 
-export default withHandleError
+export default withHandleMessages

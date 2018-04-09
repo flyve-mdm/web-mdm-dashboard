@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleError from '../../../../hoc/withHandleError'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -35,7 +35,7 @@ class HelpCenterArticle extends Component {
                 isLoading: false
             })
         } catch (error) {
-            this.props.actions.setNotification(this.props.handleError({ type: 'alert', error: error }))
+            this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
             this.setState({
                 isLoading: false
             })
@@ -69,4 +69,4 @@ HelpCenterArticle.propTypes = {
 export default connect(
     null,
     mapDispatchToProps
-)(withGLPI(withHandleError(HelpCenterArticle)))
+)(withGLPI(withHandleMessages(HelpCenterArticle)))

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleError from '../../hoc/withHandleError'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import FleetsList from './components/FleetsList'
 import { uiSetNotification } from '../../store/ui/actions'
@@ -78,7 +78,7 @@ class Fleets extends Component {
       setNotification: this.props.actions.setNotification,
       history: this.props.history,
       glpi: this.props.glpi,
-      handleError: this.props.handleError
+      handleMessage: this.props.handleMessage
     }
   }
 
@@ -166,4 +166,4 @@ class Fleets extends Component {
 export default connect(
   null,
   mapDispatchToProps
-)(withGLPI(withHandleError(Fleets)))
+)(withGLPI(withHandleMessages(Fleets)))

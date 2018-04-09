@@ -10,21 +10,21 @@ export default ({type='info', error}) => {
         case (error.status === 0):
             message.title = error.data[0][0]
             message.body = 'No Internet Connection'
-            break;
+            break
         case (error.status === 401):
             message.title = error.data[0][0]
             message.body = error.data[0][1] !== '' ? error.data[0][1] : error.statusText
-            break;
+            break
         case (error.status === 404):
             message.title = error.data[0][0]
             message.body = error.data[0][1] !== '' ? error.data[0][1] : error.statusText
-            break;
+            break
         case (error.status >= 400 && error.status < 500 && error.status !== 401):
             message.title = error.data[0]
-            message.body = error.data[1][0].message ? error.data[0][1] : error.statusText
-            break;
+            message.body = error.data[0][0].message ? error.data[0][1] : error.statusText
+            break
         default:
-            break;
+            break
     }
     return message
 }

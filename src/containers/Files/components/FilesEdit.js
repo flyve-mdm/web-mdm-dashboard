@@ -64,7 +64,7 @@ export default class FilesEdit extends Component {
             }
             
         } catch (error) {
-            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
             this.setState({
                 isLoading: false
             })

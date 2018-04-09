@@ -112,7 +112,7 @@ export default class InvitationsList extends Component {
                 itemList: BuildItemList(invitations)
             })
         } catch (e) {
-            this.props.handleError({notification: this.props.setNotification, error: e, type:'alert'})
+            this.props.handleMessage({notification: this.props.setNotification, error: e, type:'alert'})
             this.setState({
                 isLoading: false,
                 order: "ASC"
@@ -159,7 +159,7 @@ export default class InvitationsList extends Component {
             }
             
         } catch (error) {
-            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
             this.props.changeSelectionMode(false)
             this.props.changeSelectedItems([])
 
@@ -222,7 +222,7 @@ export default class InvitationsList extends Component {
                 isLoading: false
             })
         } catch (error) {
-            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
             this.handleToggleSelectionMode()
             this.setState({
                 isLoading: false

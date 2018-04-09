@@ -8,7 +8,7 @@ import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import { I18n } from 'react-i18nify'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleError from '../../../../hoc/withHandleError'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
 
 class Entity extends Component {
@@ -57,7 +57,7 @@ class Entity extends Component {
                 numberCategoriesForPolicies: policyCategories.length
             })
         } catch (error) {
-            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
         }
     }
 
@@ -83,7 +83,7 @@ class Entity extends Component {
                             tokenLife={this.state.tokenLife}
                             saveValues={this.saveValues}
                             showNotification={this.props.showNotification}
-                            handleError={this.props.handleError}
+                            handleMessage={this.props.handleMessage}
                         />
                     </ContentPane>
                 )
@@ -98,7 +98,7 @@ class Entity extends Component {
                             downloadURL={this.state.downloadURL} 
                             saveValues={this.saveValues}
                             showNotification={this.props.showNotification}
-                            handleError={this.props.handleError}
+                            handleMessage={this.props.handleMessage}
                         />
                     </ContentPane>
                 )
@@ -121,7 +121,7 @@ class Entity extends Component {
                             entityID={this.state.entityID}  
                             downloadURL={this.state.downloadURL} 
                             changeMode={this.changeMode}
-                            handleError={this.props.handleError}
+                            handleMessage={this.props.handleMessage}
                         />
                     </ContentPane>
                 )
@@ -141,4 +141,4 @@ class Entity extends Component {
     }
 }
 
-export default withGLPI(withHandleError(Entity))
+export default withGLPI(withHandleMessages(Entity))

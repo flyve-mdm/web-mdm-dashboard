@@ -8,7 +8,7 @@ import authtype from '../../../../shared/authtype'
 import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleError from '../../../../hoc/withHandleError'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
 import { uiTransactionStart, uiTransactionFinish, uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import ContentPane from '../../../../components/ContentPane'
@@ -350,4 +350,4 @@ class Profiles extends Component {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withGLPI(withHandleError(Profiles)))
+)(withGLPI(withHandleMessages(Profiles)))

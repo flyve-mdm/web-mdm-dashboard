@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleError from '../../hoc/withHandleError'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import { uiSetNotification } from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -174,4 +174,4 @@ class SearchEngine extends Component {
 export default connect(
     null,
     mapDispatchToProps
-)(withGLPI(withHandleError(SearchEngine)))
+)(withGLPI(withHandleMessages(SearchEngine)))
