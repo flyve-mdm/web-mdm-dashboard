@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import handleMessage from '../../shared/handleMessage'
+import PropTypes from 'prop-types'
 
 /**
  * 
@@ -8,18 +9,22 @@ import handleMessage from '../../shared/handleMessage'
  */
 
 const withHandleMessages = (WrappedComponent) => {
-    class HandleError extends Component {
+    class HandleMessages extends Component {
 
         render() {
             return <WrappedComponent {...this.props} />
         }
     }
 
-    HandleError.defaultProps = {
+    HandleMessages.defaultProps = {
         handleMessage: handleMessage
     }
 
-    return HandleError
+    HandleMessages.propTypes = {
+        history: PropTypes.object.isRequired
+    }
+
+    return HandleMessages
 }
 
 export default withHandleMessages
