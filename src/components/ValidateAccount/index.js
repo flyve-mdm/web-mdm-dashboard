@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+import location from '../../shared/location'
 import { I18n } from "react-i18nify"
 
 const ValidateAccount = () => {
@@ -14,7 +15,7 @@ const ValidateAccount = () => {
                 <br />
             </p>
             <p>
-                <Link to='/'>{I18n.t('commons.sign_in')}</Link>
+                <Link to={`${location.pathname}/`}>{I18n.t('commons.sign_in')}</Link>
             </p>
         </React.Fragment>
     )
