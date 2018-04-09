@@ -34,7 +34,7 @@ class SystemInformation extends Component {
         plugins: plugins
       })
     } catch (error) {
-      this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+      this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
       this.setState({
         isLoading: false
       })

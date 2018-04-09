@@ -51,7 +51,7 @@ export default class ApplicationsContent extends Component {
                 this.props.changeAction('reload')
                 this.props.changeSelectionMode(false)
             } catch (error) {
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
                 this.setState({
                     isLoading: false
                 })
@@ -72,7 +72,7 @@ export default class ApplicationsContent extends Component {
                 }) 
             })
         } catch (error) {
-            this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.props.history.push(`${location.pathname}/app/applications`)
         }
     }

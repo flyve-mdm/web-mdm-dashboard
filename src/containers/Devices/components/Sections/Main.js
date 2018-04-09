@@ -48,7 +48,7 @@ export default class Main extends Component {
                 }) 
             })
         } catch (error) {
-            this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.props.history.push(`${location.pathname}/app/devices`)
         }
     }
@@ -79,7 +79,7 @@ export default class Main extends Component {
                 this.props.changeAction('reload')
             })
             .catch((error) => {
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             })
         }
     }
@@ -110,7 +110,7 @@ export default class Main extends Component {
                     this.handleRefresh()
                 })
             } catch (error) {
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
                 this.setState({ sendingPing: false })
             }
         })

@@ -35,7 +35,7 @@ class HelpCenterArticle extends Component {
                 isLoading: false
             })
         } catch (error) {
-            this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+            this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.setState({
                 isLoading: false
             })

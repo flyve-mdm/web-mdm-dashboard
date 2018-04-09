@@ -24,7 +24,7 @@ class DangerZone extends Component {
                 this.props.changeAction('reload')
                 this.props.history.push(`${location.pathname}/app/devices`)
             } catch (error) {
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
         }
     }
@@ -46,7 +46,7 @@ class DangerZone extends Component {
                 this.props.changeAction('reload')
                 this.props.history.push(`${location.pathname}/app/devices`)
             } catch (error) {
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
         }
     }
@@ -67,7 +67,7 @@ class DangerZone extends Component {
                 this.props.changeAction('reload')
                 this.props.history.push(`${location.pathname}/app/devices`)
             } catch (error) {
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
         }
     }

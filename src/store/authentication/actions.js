@@ -86,7 +86,7 @@ export const fetchSignIn = (username, password) => {
       }))
     }).catch( error => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleMessage({type: 'warning', error: error})))
+      dispatch(changeNotificationMessage(handleMessage({type: 'warning', message: error})))
     })
   }
 }
@@ -126,7 +126,7 @@ export const fetchCaptcha = () => {
       dispatch(uiTransactionFinish())
     } catch (error) {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
     }
   }
 }
@@ -151,7 +151,7 @@ export const fetchSignUp = (data) => {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
     })
   }
 }
@@ -176,7 +176,7 @@ export const fetchRecoverPassword = (email) => {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
     })
   }
 }
@@ -201,7 +201,7 @@ export const fetchResetPassword = ({email, token, newPassword}) => {
       })
       .catch((error) => {
         dispatch(uiTransactionFinish())
-        dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
+        dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
       })
   }
 }
@@ -216,7 +216,7 @@ export const fetchPasswordConfiguration = () => {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
     })
   }
 }
@@ -238,7 +238,7 @@ export function fetchSendFeedback (data) {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
     })
   }
 }
