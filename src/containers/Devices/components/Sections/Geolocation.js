@@ -52,7 +52,7 @@ export default class Geolocation extends Component {
             const response = await this.props.glpi.getSubItems({
                 itemtype: itemtype.Computer, 
                 id: computers_id, 
-                subItemtype: 'PluginFlyvemdmGeolocation'
+                subItemtype: itemtype.PluginFlyvemdmGeolocation
             })    
             this.setState({
                 locations: response,
@@ -68,7 +68,7 @@ export default class Geolocation extends Component {
 
     showLocations = (location) => {
         let showLocations = this.state.showLocations.map(element => element)
-        const index = showLocations.map((e) => { return e['PluginFlyvemdmGeolocation.id'] }).indexOf(location['PluginFlyvemdmGeolocation.id'])
+        const index = showLocations.map((e) => { return e.id }).indexOf(location.id)
         if (index === -1) {
             showLocations.push(location)
         } else {
