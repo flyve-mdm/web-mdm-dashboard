@@ -1,6 +1,9 @@
 import config from '../config/config.json'
+import history from './history'
+import glpi from './glpiApi'
+import location from './location'
 
-export default ({type='info', message}) => {
+export default async ({type='info', message}) => {
     let response = {
         type: type,
         title: config.appName,
@@ -15,6 +18,14 @@ export default ({type='info', message}) => {
             case (message.status === 401):
                 response.title = message.data[0][0]
                 response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText
+                if (message.data[0][1] === 'session_token seems invalid') {
+                    try {
+                        localStorage.removeItem('currentUser')
+                        localStorage.removeItem('sessionToken')
+                        await glpi.killSession()
+                    } catch (error) {}
+                    history.push(`${location.pathname}`)
+                }
                 break
             case (message.status === 404):
                 response.title = message.data[0][0]

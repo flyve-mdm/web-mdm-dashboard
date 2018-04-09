@@ -198,7 +198,7 @@ export default class UsersEditOne extends Component {
                         })
                         this.props.changeAction('reload')
                     } catch (error) {
-                        this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                        this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
                         this.setState ({isLoading: false})
                     }
                 }

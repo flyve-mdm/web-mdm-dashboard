@@ -56,7 +56,7 @@ export default class UsersContent extends Component {
                 })
                 this.props.history.push(`${location.pathname}/app/users`)
             } catch (error) {                
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
             
         }
@@ -83,7 +83,7 @@ export default class UsersContent extends Component {
                 emails 
             })
         } catch (error) {
-            this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.props.history.push(`${location.pathname}/app/users`)
         }
     }

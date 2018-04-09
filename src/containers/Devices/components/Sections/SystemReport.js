@@ -41,7 +41,7 @@ export default class SystemReport extends Component {
                     })
                 })
             } catch (error) {
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
         })
     }            

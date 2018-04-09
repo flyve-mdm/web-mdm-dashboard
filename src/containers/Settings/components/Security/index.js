@@ -61,7 +61,7 @@ class Security extends Component {
                         localStorage.clear()
 
                     } catch (error) {
-                        this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                        this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
                         this.setState({ isLoading: false })
                         this.changeMode('')
                     } 
@@ -133,7 +133,7 @@ class Security extends Component {
                             type: 'info'
                         })
                     } catch (error) {
-                        this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
+                        this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
                     } 
                     this.setState({ isLoading: false })
                     this.changeMode('')
