@@ -4,7 +4,7 @@ import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import { I18n } from 'react-i18nify'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleError from '../../../../hoc/withHandleError'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
 import Loading from '../../../../components/Loading'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
@@ -51,7 +51,7 @@ class HelpCenterList extends Component {
                 isLoading: false
             })
         } catch (error) {
-            this.props.actions.setNotification(this.props.handleError({ type: 'alert', error: error }))
+            this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
             this.setState({
                 isLoading: false
             })
@@ -221,4 +221,4 @@ HelpCenterList.propTypes = {
 export default connect (
     null,
     mapDispatchToProps
-)(withGLPI(withHandleError(HelpCenterList)))
+)(withGLPI(withHandleMessages(HelpCenterList)))

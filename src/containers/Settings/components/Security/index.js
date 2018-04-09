@@ -11,7 +11,7 @@ import { logout } from '../../../../store/authentication/actions'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleError from '../../../../hoc/withHandleError'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
 import { selfRegistration } from '../../../../config/config.json'
 import itemtype from '../../../../shared/itemtype'
 
@@ -61,7 +61,7 @@ class Security extends Component {
                         localStorage.clear()
 
                     } catch (error) {
-                        this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
+                        this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
                         this.setState({ isLoading: false })
                         this.changeMode('')
                     } 
@@ -133,7 +133,7 @@ class Security extends Component {
                             type: 'info'
                         })
                     } catch (error) {
-                        this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
+                        this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
                     } 
                     this.setState({ isLoading: false })
                     this.changeMode('')
@@ -355,4 +355,4 @@ Security.propTypes = {
     glpi: PropTypes.object.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(withHandleError(Security)))
+export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(Security)))

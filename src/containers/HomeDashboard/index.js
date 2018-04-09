@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { VictoryPie } from 'victory'
 import { I18n } from 'react-i18nify'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleError from '../../hoc/withHandleError'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import Loading from '../../components/Loading'
 import InfoBox from '../../components/InfoBox'
 import { uiSetNotification } from '../../store/ui/actions'
@@ -41,7 +41,7 @@ class Dashboard extends Component {
   }
 
   showError = (error) => {
-    this.props.actions.setNotification(this.props.handleError({ type: 'alert', error: error }))
+    this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
   }
 
   getDevices = () => new Promise(async (resolve) => {
@@ -370,4 +370,4 @@ Dashboard.propTypes = {
 export default connect(
   null,
   mapDispatchToProps
-)(withGLPI(withHandleError(Dashboard)))
+)(withGLPI(withHandleMessages(Dashboard)))

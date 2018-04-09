@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleError from '../../hoc/withHandleError'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import InvitationsList from './components/InvitationsList'
 import { uiSetNotification } from '../../store/ui/actions'
@@ -78,7 +78,7 @@ class Invitations extends Component {
             setNotification: this.props.actions.setNotification,
             history: this.props.history,
             glpi: this.props.glpi,
-            handleError: this.props.handleError
+            handleMessage: this.props.handleMessage
         }
     }
 
@@ -167,4 +167,4 @@ class Invitations extends Component {
 export default connect(
     null,
     mapDispatchToProps
-)(withGLPI(withHandleError(Invitations)))
+)(withGLPI(withHandleMessages(Invitations)))

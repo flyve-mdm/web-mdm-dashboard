@@ -3,7 +3,7 @@ import glpi from '../../shared/glpiApi'
 import config from '../../config/config.json'
 import { uiTransactionFinish, uiTransactionStart } from '../ui/actions'
 import itemtype from '../../shared/itemtype'
-import handleError from '../../shared/handleError'
+import handleMessage from '../../shared/handleMessage'
 
 // Actions
 
@@ -86,7 +86,7 @@ export const fetchSignIn = (username, password) => {
       }))
     }).catch( error => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleError({type: 'warning', error: error})))
+      dispatch(changeNotificationMessage(handleMessage({type: 'warning', error: error})))
     })
   }
 }
@@ -126,7 +126,7 @@ export const fetchCaptcha = () => {
       dispatch(uiTransactionFinish())
     } catch (error) {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleError({ type: 'warning', error: error })))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
     }
   }
 }
@@ -151,7 +151,7 @@ export const fetchSignUp = (data) => {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleError({ type: 'warning', error: error })))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
     })
   }
 }
@@ -176,7 +176,7 @@ export const fetchRecoverPassword = (email) => {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleError({ type: 'warning', error: error })))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
     })
   }
 }
@@ -201,7 +201,7 @@ export const fetchResetPassword = ({email, token, newPassword}) => {
       })
       .catch((error) => {
         dispatch(uiTransactionFinish())
-        dispatch(changeNotificationMessage(handleError({ type: 'warning', error: error })))
+        dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
       })
   }
 }
@@ -216,7 +216,7 @@ export const fetchPasswordConfiguration = () => {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleError({ type: 'warning', error: error })))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
     })
   }
 }
@@ -238,7 +238,7 @@ export function fetchSendFeedback (data) {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage(handleError({ type: 'warning', error: error })))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', error: error })))
     })
   }
 }

@@ -167,7 +167,7 @@ export default class FilesList extends Component {
             }
 
         } catch (error) {
-            this.props.setNotification(this.props.handleError({ type: 'alert', error: error }))
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', error: error }))
             this.props.changeSelectionMode(false)
             this.props.changeSelectedItems([])
 

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Loading from '../../../../components/Loading'
 import { uiSetNotification } from '../../../../store/ui/actions'
-import withHandleError from '../../../../hoc/withHandleError'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
 import ContentPane from '../../../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
@@ -87,4 +87,4 @@ Feedback.propTypes = {
 export default connect(
     null,
     mapDispatchToProps
-)(withHandleError(Feedback))
+)(withHandleMessages(Feedback))

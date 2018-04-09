@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 const withAsyncComponent = importComponent => {
   return class AsyncComponent extends Component {
@@ -16,9 +16,9 @@ const withAsyncComponent = importComponent => {
     render() {
       const C = this.state.component;
 
-      return C ? <C {...this.props} /> : null;
+      return C ? <C {...this.props} /> : null
     }
   }
 }
 
-export default withAsyncComponent;
+export default withAsyncComponent
