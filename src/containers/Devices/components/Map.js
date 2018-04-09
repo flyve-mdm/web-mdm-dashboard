@@ -11,7 +11,6 @@ L.Icon.Default.mergeOptions({
 })
 
 class Map extends Component {
-
     constructor (props) {
         super(props)
         this.state = {
@@ -23,17 +22,17 @@ class Map extends Component {
     addMarkers = () => {
         this.state.markerGroup.clearLayers()
         for (let index = 0; index < this.props.markers.length; index++) {
-            L.marker(
-                this.props.markers[index]['PluginFlyvemdmGeolocation.latitude'], 
-                this.props.markers[index]['PluginFlyvemdmGeolocation.longitude']
-            ).addTo(this.state.markerGroup)
+            L.marker([
+                this.props.markers[index].latitude, 
+                this.props.markers[index].longitude
+            ]).addTo(this.state.markerGroup)
         }
         if (this.props.markers[0]) {
             this.state.map.setZoom(10)
             this.state.map.panTo(
                 new L.LatLng(
-                    this.props.markers[this.props.markers.length - 1]['PluginFlyvemdmGeolocation.latitude'], 
-                    this.props.markers[this.props.markers.length - 1]['PluginFlyvemdmGeolocation.longitude']
+                    this.props.markers[this.props.markers.length - 1].latitude, 
+                    this.props.markers[this.props.markers.length - 1].longitude
                 )
             )
         }
