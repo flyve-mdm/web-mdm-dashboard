@@ -130,19 +130,19 @@ export default class UsersList extends Component {
     }
 
     handleDelete = async (eventObject) => {
-        try {
-            const isOK = await Confirmation.isOK(this.contentDialog)
-            if (isOK) {
-
-                let itemListToDelete = this.props.selectedItems.map((item) => {
-                    return {
-                        id: item["User.id"]
-                    }
-                })
-
-                this.setState({
-                    isLoading: true
-                }, async () => {
+        const isOK = await Confirmation.isOK(this.contentDialog)
+        if (isOK) {
+            
+            let itemListToDelete = this.props.selectedItems.map((item) => {
+                return {
+                    id: item["User.id"]
+                }
+            })
+            
+            this.setState({
+                isLoading: true
+            }, async () => {
+                try {
                     await this.props.glpi.deleteItem({ itemtype: itemtype.User, input: itemListToDelete, queryString: { force_purge: true } })
     
                     this.props.setNotification({
@@ -153,24 +153,22 @@ export default class UsersList extends Component {
                     this.props.changeSelectionMode(false)
                     this.props.changeSelectedItems([])
                     this.props.changeAction('reload')
-                })
-            } else {
-                this.props.changeSelectionMode(false)
-                this.props.changeSelectedItems([])
-                this.listView.winControl.selection.clear()
-            }
-            
-        } catch (error) {
-            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                } catch (error) {
+                    this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                    this.props.changeSelectionMode(false)
+                    this.props.changeSelectedItems([])
+                    if (this.listView) {
+                        this.listView.winControl.selection.clear()
+                    }
+                    this.setState((prevState, props) => ({
+                        isLoading: false
+                    }))
+                }
+            })
+        } else {
             this.props.changeSelectionMode(false)
             this.props.changeSelectedItems([])
-            if (this.listView) {
-                this.listView.winControl.selection.clear()
-            }
-
-            this.setState((prevState, props) => ({
-                isLoading: false
-            }))
+            this.listView.winControl.selection.clear()
         }
     }
 
