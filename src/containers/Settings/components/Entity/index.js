@@ -10,9 +10,19 @@ import { I18n } from 'react-i18nify'
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
+import { bindActionCreators } from 'redux'
+import { uiSetNotification } from '../../../../store/ui/actions'
+import { connect } from 'react-redux'
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
+
 
 class Entity extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -42,22 +52,32 @@ class Entity extends Component {
             const files = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFile})
             const fleets = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFleet})
             const { active_profile } = await this.props.glpi.getActiveProfile()
+            let entityID
+            if (Array.isArray(active_profile.entities)) {
+                entityID = active_profile.entities[0].id
+            } else {
+                for (const key in active_profile.entities) {
+                    if (active_profile.entities.hasOwnProperty(key)) {
+                        entityID = active_profile.entities[key].id
+                    }
+                }
+            }
             const policies = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPolicy})
             const policyCategories = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPolicyCategory})
             this.setState({
                 isLoading: false,
+                entityID,
                 devicesCurretlymanaged: devices.length,
                 applicationsUploaded: applications.length,
                 numberUsers: users.length,
                 invitationsSent: invitations.length,
                 filesUploaded: files.length,
                 fleetsCurrentlyManaged: fleets.length,
-                entityID: active_profile.entities[0].id,
                 typesPolicies: policies.length,
                 numberCategoriesForPolicies: policyCategories.length
             })
         } catch (error) {
-            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+            this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
         }
     }
 
@@ -141,4 +161,4 @@ class Entity extends Component {
     }
 }
 
-export default withGLPI(withHandleMessages(Entity))
+export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(Entity)))

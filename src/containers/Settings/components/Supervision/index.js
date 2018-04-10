@@ -21,7 +21,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Supervision extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -71,10 +70,20 @@ class Supervision extends Component {
     componentDidMount = async () => {
         try {
             const { active_profile } = await this.props.glpi.getActiveProfile()
-            const entity = await this.props.glpi.getAnItem({itemtype: itemtype.Entity, id: active_profile.entities[0].id})
+            let entityID
+            if (Array.isArray(active_profile.entities)) {
+                entityID = active_profile.entities[0].id
+            } else {
+                for (const key in active_profile.entities) {
+                    if (active_profile.entities.hasOwnProperty(key)) {
+                        entityID = active_profile.entities[key].id
+                    }
+                }
+            }
+            const entity = await this.props.glpi.getAnItem({itemtype: itemtype.Entity, id: entityID})
             this.setState ({
                 isLoading: false,
-                entityID: active_profile.entities[0].id,
+                entityID,
                 name: validateData(entity.name),
                 phone: validateData(entity.phonenumber),
                 website: validateData(entity.website),
