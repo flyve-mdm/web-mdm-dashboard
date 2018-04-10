@@ -1,50 +1,112 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import withGLPI from '../../hoc/withGLPI'
+import { uiSetNotification } from '../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import config from '../../config/config.json'
 import location from '../../shared/location'
+import itemtype from '../../shared/itemtype'
 import { I18n } from "react-i18nify"
+import Loading from '../../components/Loading'
+
+function mapDispatchToProps(dispatch) {
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
+}
 
 class ValidateAccount extends Component {
 
-    componentWillMount() {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            isValidated: false,
+            isLoading: false
+        }
+
+    }
+
+    componentDidMount() {
     
         if (this.props.location.pathname.lastIndexOf('validation/') !== -1) {
             const path = this.props.location.pathname.split('validation/')
             const validation = path[path.length-1] ? path[path.length-1] : undefined
             
             if (validation) {
+                this.setState({ isLoading: true })
                 this.requestValidation(validation)
             }
         }
     }
 
     requestValidation = async (validation) => {
-        const session = await this.props.glpi.initSessionByUserToken({ userToken: config.userToken })
-        this.props.glpi.sessionToken = session.session_token
-        const validate = await this.props.glpi.addItem({ itemtype: 'PluginFlyvemdmdemoAccountvalidation', input: {_validate: validation}})
-        console.log(validate)
+        try {
+            const session = await this.props.glpi.initSessionByUserToken({ userToken: config.userToken })
+            this.props.glpi.sessionToken = session.session_token
+            const response = await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmdemoAccountvalidation, input: { _validate: validation } })
+            let isValidated = false
+            if (Array.isArray(response)) {
+                if (response[0].length > 0) {
+                    isValidated = true
+                }
+            }
+            this.setState({ isLoading: false, isValidated })
+
+        } catch (error) {
+            this.actions.setNotification(this.props.handleMessage({message: error}))
+            this.setState({ isLoading: false, isValidated: false })
+        }
+        
     }
 
     render() {
-        return (
-            <React.Fragment>
-                <h2 className="win-h2">
-                    {I18n.t('validate_account.title')}
-                </h2>
-                <p>
-                    {I18n.t('validate_account.message')}
-                    <br />
-                </p>
-                <p>
-                    <Link to={`${location.pathname}/`}>{I18n.t('commons.sign_in')}</Link>
-                </p>
-            </React.Fragment>
-        )
+        let renderComponent
+        if (this.state.isLoading) {
+            renderComponent = <Loading message={`${I18n.t('commons.loading')}...`} />
+        } else {
+            if (this.state.isValidated) {
+                renderComponent = (
+                    <React.Fragment>
+                        <h2 className="win-h2">
+                            {I18n.t('validate_account.title')}
+                        </h2>
+                        <p>
+                            {I18n.t('validate_account.is_validated')}
+                            <br />
+                        </p>
+                        <p>
+                            <Link to={`${location.pathname}/`}>{I18n.t('commons.sign_in')}</Link>
+                        </p>
+                    </React.Fragment>
+                )
+
+            } else {
+                renderComponent = (
+                    <React.Fragment>
+                        <h2 className="win-h2">
+                            {I18n.t('validate_account.title')}
+                        </h2>
+                        <p>
+                            {I18n.t('validate_account.message')}
+                            <br />
+                        </p>
+                    </React.Fragment>
+                )
+            }
+        }
+
+        return renderComponent
     }
 }
 
-export default withAuthenticationLayout(withGLPI(ValidateAccount), {
+export default connect(
+    null,
+    mapDispatchToProps
+)(withAuthenticationLayout(withGLPI(withHandleMessages(ValidateAccount)), {
     centerContent: true
-})
+}))
