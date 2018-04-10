@@ -31,7 +31,7 @@ export default ({type='info', message}) => {
                 break
             case (message.status >= 400 && message.status < 500 && message.status !== 401):
                 response.title = message.data[0]
-                response.body = message.data[0][1] ? message.data[0][1] : message.statusText
+                response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? message.data[1][0].message : message.data[0][1] : message.statusText
                 break
             default:
                 break
