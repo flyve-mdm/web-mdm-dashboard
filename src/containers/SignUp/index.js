@@ -103,6 +103,10 @@ class SignUp extends Component {
     }
 }
 
+SignUp.defaultProps = {
+    captcha: {}
+}
+
 SignUp.propTypes = {
     history: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
