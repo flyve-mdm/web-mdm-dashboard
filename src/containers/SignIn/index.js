@@ -70,7 +70,6 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
