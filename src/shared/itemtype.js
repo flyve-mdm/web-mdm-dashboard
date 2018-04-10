@@ -12,5 +12,6 @@ export default {
     PluginFlyvemdmPolicy: "PluginFlyvemdmPolicy",
     PluginFlyvemdmPolicyCategory: "PluginFlyvemdmPolicyCategory",
     PluginFlyvemdmTask: "PluginFlyvemdmTask",
-    PluginFlyvemdmGeolocation: "PluginFlyvemdmGeolocation"
+    PluginFlyvemdmGeolocation: "PluginFlyvemdmGeolocation",
+    PluginFlyvemdmdemoAccountvalidation: "PluginFlyvemdmdemoAccountvalidation"
 }
