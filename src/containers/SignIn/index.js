@@ -16,7 +16,6 @@ import { changeInput, changePhase, handleFormSubmit } from './actions'
 
 function mapStateToProps(state, props) {
     return {
-        isAuthenticated: state.auth.currentUser ? true : false,
         isLoading: state.ui.loading
     }
 }
@@ -44,7 +43,7 @@ class SignIn extends Component {
     }
 
     render () {
-        if (this.props.isAuthenticated) {
+        if (localStorage.getItem('currentUser') && localStorage.getItem('sessionToken')) {
             return <Redirect to={`${location.pathname}/app`}/>
         } else {
             let form
