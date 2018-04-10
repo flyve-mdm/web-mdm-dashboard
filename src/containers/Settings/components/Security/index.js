@@ -33,7 +33,8 @@ class Security extends Component {
             passwordConfirmation: '',
             passwordConfiguration: undefined,
             forceValidation: false,
-            isLoading: false
+            isLoading: false,
+            currentUser: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : {}
         }
     }
 
@@ -45,10 +46,9 @@ class Security extends Component {
                 { isLoading: true}, 
                 async () => {
                     try {
-                        const currentUser = JSON.parse(localStorage.getItem('currentUser'))
                         await this.props.glpi.deleteItem({ 
                             itemtype: itemtype.User, 
-                            input: {id: currentUser.id }, 
+                            input: {id: this.state.currentUser.id}, 
                             queryString: { force_purge: true } 
                         })
                         this.props.actions.setNotification({
@@ -101,49 +101,52 @@ class Security extends Component {
 
     savePassword = (e) => {
         e.preventDefault()
-        const password = this.buildDataArray()
-        let isCorrect = true
-
-        for (const key in password) {
-            if (password.hasOwnProperty(key)) {
-                const elements = password[key]
-                for (let index = 0; index < elements.length; index++) {
-                    const element = elements[index]
-                    if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect) 
-                        isCorrect = false
+        this.setState({ forceValidation: true }, () => {
+            const password = this.buildDataArray()
+            let isCorrect = true
+    
+            for (const key in password) {
+                if (password.hasOwnProperty(key)) {
+                    const elements = password[key]
+                    for (let index = 0; index < elements.length; index++) {
+                        const element = elements[index]
+                        if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect) 
+                            isCorrect = false
+                    }
                 }
             }
-        }
-
-        if (isCorrect) {
-            this.setState(
-                { isLoading: true}, 
-                async () => {
-                    try {
-                        await this.props.glpi.updateItem({
-                            itemtype: itemtype.User, 
-                            input: {
-                                password: this.state.password,
-                                password2: this.state.passwordConfirmation
-                            }
-                        })
-                        this.props.actions.setNotification({
-                            title: I18n.t('commons.success'),
-                            body: I18n.t('notifications.new_password_saved'),
-                            type: 'info'
-                        })
-                    } catch (error) {
-                        this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
-                    } 
-                    this.setState({ isLoading: false })
-                    this.changeMode('')
-                }
-            )
-        } else {
-            this.setState({
-                forceValidation: true
-            })
-        }
+    
+            if (isCorrect) {
+                this.setState(
+                    { isLoading: true}, 
+                    async () => {
+                        try {
+                            await this.props.glpi.updateItem({
+                                itemtype: itemtype.User, 
+                                id: this.state.currentUser.id,
+                                input: {
+                                    password: this.state.password,
+                                    password2: this.state.passwordConfirmation
+                                }
+                            })
+                            this.props.actions.setNotification({
+                                title: I18n.t('commons.success'),
+                                body: I18n.t('notifications.new_password_saved'),
+                                type: 'success'
+                            })
+                        } catch (error) {
+                            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                        } 
+                        this.setState({ isLoading: false })
+                        this.changeMode('')
+                    }
+                )
+            } else {
+                this.setState({
+                    forceValidation: true
+                })
+            }
+        })
     }
 
     changeState = (name, value) => { 

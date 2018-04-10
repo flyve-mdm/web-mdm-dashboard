@@ -5,7 +5,6 @@ import { updateObject } from '../../shared/updateObject'
 // Sugar Functions
 
 const uiSetNotification = (state, action) => {
-  console.log(action)
   return updateObject(state, {notification: {
     show: true,
     ...action.notification
