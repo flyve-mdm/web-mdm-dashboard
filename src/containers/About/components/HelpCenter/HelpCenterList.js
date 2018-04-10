@@ -25,7 +25,7 @@ class HelpCenterList extends Component {
         super(props)
         this.state = {
             articles: undefined,
-            list: undefined,
+            list: {},
             suggestionList: undefined,
             layout: { type: WinJS.UI.ListLayout },
             labelList: I18n.t('about.help_center.recent_articles'),
