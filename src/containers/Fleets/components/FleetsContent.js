@@ -67,11 +67,17 @@ class FleetsContent extends Component {
         /*
          * Get Tasks 
          * */
-            tasks = await this.props.glpi.getSubItems({
-                itemtype: itemtype.PluginFlyvemdmFleet,
-                id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
-                subItemtype: 'PluginFlyvemdmTask'
-            })
+            try {
+                tasks = await this.props.glpi.getSubItems({
+                    itemtype: itemtype.PluginFlyvemdmFleet,
+                    id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
+                    subItemtype: 'PluginFlyvemdmTask'
+                })
+            } catch (error) {
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                this.props.changeSelectionMode(false)
+                this.props.changeAction('reload')         
+            }
             
             tasks.forEach((task, index) => {
 
@@ -501,7 +507,6 @@ class FleetsContent extends Component {
                 }
             })
         }
-        console.log(itemsToDelete)
         let itemsToUpdate = []
 
         const specialPolicies = this.state.data.policies.filter(policy => {
@@ -531,7 +536,6 @@ class FleetsContent extends Component {
                 }
             }
         })
-        console.log(itemsToUpdate)
         let itemsToAdd = { ...this.state.data.tasksNew }
 
         this.state.data.tasks.forEach(task => {
@@ -559,7 +563,6 @@ class FleetsContent extends Component {
                 itemsToSave.push(item)
             }
         })
-        console.log(itemsToSave)
         try {
 
             await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFleet, id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'], input: fleetToUpdate })
