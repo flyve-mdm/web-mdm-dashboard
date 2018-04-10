@@ -24,12 +24,12 @@ class Supervision extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: undefined,
-            phone: undefined,
-            website: undefined,
-            email: undefined,
-            address: undefined,
-            entityID: undefined,
+            name: '',
+            phone: '',
+            website: '',
+            email: '',
+            address: '',
+            entityID: '',
             isLoading: true
         }
     }
