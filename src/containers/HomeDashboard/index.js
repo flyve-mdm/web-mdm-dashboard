@@ -155,8 +155,8 @@ class Dashboard extends Component {
     const devices = (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion || this.state.display.devicesByUsers) ?
       await this.getDevices() : undefined
     const devicesCurrentlyManaged = this.state.display.devicesCurrentlyManaged ? devices : undefined
-    const devicesByOperatingSystemVersion = (this.state.display.devicesByOperatingSystemVersion && devices) ? await this.getDevicesByOperatingSystemVersion(devices) : undefined 
-    const devicesByUsers = (this.state.display.devicesByUsers && devices)  ?  await this.getDevicesByUsers(devices) : undefined
+    const devicesByOperatingSystemVersion = (this.state.display.devicesByOperatingSystemVersion && devices && devices.length > 0) ? await this.getDevicesByOperatingSystemVersion(devices) : undefined 
+    const devicesByUsers = (this.state.display.devicesByUsers && devices && devices.length > 0) ?  await this.getDevicesByUsers(devices) : undefined
 
     this.setState({
       applicationsUploaded: applicationsUploaded ? applicationsUploaded.length : applicationsUploaded,
