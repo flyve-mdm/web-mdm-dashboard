@@ -31,15 +31,15 @@ class Entity extends Component {
             buttonSaveClassName: "win-button hidden",
             tokenLife: validateData(SettingsEntity["tokenLife"]),
             downloadURL: validateData(SettingsEntity["downloadURL"], "https://"),
-            entityID: undefined,
-            devicesCurretlymanaged: undefined,
-            fleetsCurrentlyManaged: undefined,
-            filesUploaded: undefined,
-            applicationsUploaded: undefined,
-            numberUsers: undefined,
-            invitationsSent: undefined,
-            typesPolicies: undefined,
-            numberCategoriesForPolicies: undefined
+            entityID: '',
+            devicesCurretlymanaged: '',
+            fleetsCurrentlyManaged: '',
+            filesUploaded: '',
+            applicationsUploaded: '',
+            numberUsers: '',
+            invitationsSent: '',
+            typesPolicies: '',
+            numberCategoriesForPolicies: ''
         }
     }
 
@@ -58,7 +58,7 @@ class Entity extends Component {
             } else {
                 for (const key in active_profile.entities) {
                     if (active_profile.entities.hasOwnProperty(key)) {
-                        entityID = active_profile.entities[key].id
+                        entityID = `${active_profile.entities[key].id}`
                     }
                 }
             }
@@ -67,14 +67,14 @@ class Entity extends Component {
             this.setState({
                 isLoading: false,
                 entityID,
-                devicesCurretlymanaged: devices.length,
-                applicationsUploaded: applications.length,
-                numberUsers: users.length,
-                invitationsSent: invitations.length,
-                filesUploaded: files.length,
-                fleetsCurrentlyManaged: fleets.length,
-                typesPolicies: policies.length,
-                numberCategoriesForPolicies: policyCategories.length
+                devicesCurretlymanaged: `${devices.length}`,
+                applicationsUploaded: `${applications.length}`,
+                numberUsers: `${users.length}`,
+                invitationsSent: `${invitations.length}`,
+                filesUploaded: `${files.length}`,
+                fleetsCurrentlyManaged: `${fleets.length}`,
+                typesPolicies: `${policies.length}`,
+                numberCategoriesForPolicies: `${policyCategories.length}`
             })
         } catch (error) {
             this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
