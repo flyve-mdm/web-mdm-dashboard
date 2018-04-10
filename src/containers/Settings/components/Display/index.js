@@ -84,7 +84,7 @@ class Display extends Component {
                                     {I18n.t('commons.french')}
                                 </option>
                                 <option value='es_ES'>
-                                    {I18n.t('commons.spain')}
+                                    {I18n.t('commons.spanish')}
                                 </option>
                             </select>
                         </span>
