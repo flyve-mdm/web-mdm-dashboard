@@ -34,6 +34,11 @@ class ForgotPassword extends Component {
             this.setState({
                 isLoading: true
             }, async () => {
+                if (this.props.glpi.sessionToken) {
+                    try {
+                        await this.props.glpi.killSession()
+                    } catch (error) {}
+                }
                 try {
                     await this.props.glpi.genericRequest({
                         path: 'lostPassword',
@@ -51,6 +56,7 @@ class ForgotPassword extends Component {
                         message: I18n.t('notifications.request_sent')
                     }))
                 } catch (error) {
+                    console.log(error)
                     this.setState({
                         isLoading: false
                     })
