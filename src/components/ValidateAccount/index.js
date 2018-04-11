@@ -32,33 +32,29 @@ class ValidateAccount extends Component {
     }
 
     componentDidMount() {
-    
-        if (this.props.location.pathname.lastIndexOf('validation/') !== -1) {
-            const path = this.props.location.pathname.split('validation/')
-            const validation = path[path.length-1] ? path[path.length-1] : undefined
-            
-            if (validation) {
-                this.setState({ isLoading: true })
-                this.requestValidation(validation)
-            }
+
+        let path = this.props.location.pathname.replace("/validateAccount/", "&validateAccount=")
+        path = path.replace("/validation/", "&validation=")
+        const params = new URLSearchParams(path)
+        const account = params.get('validateAccount')
+        const validation = params.get('validation')
+
+        if (account && validation) {
+            this.setState({ isLoading: true })
+            this.requestValidation(account, validation)
         }
     }
 
-    requestValidation = async (validation) => {
         try {
             const session = await this.props.glpi.initSessionByUserToken({ userToken: config.userToken })
             this.props.glpi.sessionToken = session.session_token
-            const response = await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmdemoAccountvalidation, input: { _validate: validation } })
             let isValidated = false
             if (Array.isArray(response)) {
-                if (response[0].length > 0) {
-                    isValidated = true
                 }
             }
             this.setState({ isLoading: false, isValidated })
 
         } catch (error) {
-            this.actions.setNotification(this.props.handleMessage({message: error}))
             this.setState({ isLoading: false, isValidated: false })
         }
         
