@@ -14,6 +14,7 @@ class FleetsContent extends Component {
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
             isLoading: false,
+            notManaged: false,
             input: '',
             data: {
                 policies: undefined,
@@ -28,17 +29,25 @@ class FleetsContent extends Component {
     }
 
     componentDidMount = () => {
-        this.requestAllData()
         this.setState({
-            input: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Feet'
+            input: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Feet',
+            notManaged: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.is_default"] === 1 ? true : false : false
+        }, () => {
+            if (!this.state.notManaged) {
+                this.requestAllData()
+            }
         })
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.selectedItems && (prevProps.selectedItems !== this.props.selectedItems)) {
-            this.requestAllData()
             this.setState({
-                input: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Fleet'
+                input: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Fleet',
+                notManaged: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.is_default"] === 1 ? true : false : false
+            }, () => {
+                if (!this.state.notManaged) {
+                    this.requestAllData()
+                }
             })
         }
     }
@@ -471,7 +480,6 @@ class FleetsContent extends Component {
 
     handleSaveFleet = async () => {
         if(this.props.selectedItems.length === 1) {
-            this.handleUpdateFleet()
         } else {
             this.handleCreateFleet()
         }
@@ -744,7 +752,7 @@ class FleetsContent extends Component {
                                         )
                                         : null
                                 })
-                            ) : <h1>{I18n.t('fleets.loading_tasks')}</h1>}
+                            ) : this.state.notManaged ? <h1>{ I18n.t('fleets.not_managed') }</h1> : <h1>{I18n.t('fleets.loading_tasks')}</h1>}
                         </div>
                     </div>
                     <Confirmation title={`Delete Fleets`} message={this.props.selectedItems.length + ` Fleets`} reference={el => this.contentDialog = el} />
