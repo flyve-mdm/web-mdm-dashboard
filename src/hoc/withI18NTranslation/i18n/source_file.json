@@ -63,7 +63,8 @@
   },
   "validate_account": {
     "title": "Validate Account",
-    "message": "Your user is not yet activated, please check your email and activate your account"
+    "message": "Your user is not yet activated, please check your email and activate your account",
+    "is_validated": "Your account is activated"
   },
   "validation": {
     "required_field": "Required field",
@@ -345,6 +346,8 @@
     }
   },
   "commons": {
+    "info": "Info",
+    "warning": "Warning",
     "email": "Email",
     "username": "Username",
     "next": "Next",
