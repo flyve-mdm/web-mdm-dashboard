@@ -239,7 +239,8 @@
     "delete": "Delete Fleets",
     "tasks_per_Category": "Tasks per Category",
     "loading_tasks": "Loading Tasks, Policies and Categories",
-    "not_found": "No Fleets yet!"
+    "not_found": "No Fleets yet!",
+    "not_managed": "This fleet doesn't allow policies"
   },
   "about": {
     "system_information": {
