@@ -5,7 +5,7 @@ import Confirmation from '../../../components/Confirmation'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 export default class FilesContent extends Component {
 
@@ -18,7 +18,7 @@ export default class FilesContent extends Component {
 
     componentWillMount() {
         if (this.props.selectedItems.length === 0) {
-            const path = `${location.pathname}/app/files`
+            const path = `${publicURL}/app/files`
             this.props.history.push(path)
         }
     }

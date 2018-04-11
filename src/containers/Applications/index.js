@@ -9,7 +9,7 @@ import withHandleMessages from '../../hoc/withHandleMessages'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import routes from './routes'
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -61,7 +61,7 @@ class Applications extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.history.location.pathname === `${location.pathname}/app/applications` && this.state.selectedItems.length > 0) {
+        if (this.props.history.location.pathname === `${publicURL}/app/applications` && this.state.selectedItems.length > 0) {
             this.changeSelectedItems([])
         }
     }
@@ -93,9 +93,9 @@ class Applications extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${location.pathname}/app/applications` )  || 
-                this.props.history.location.pathname === `${location.pathname}/app/applications` || 
-                (this.props.history.location.pathname === `${location.pathname}/app/applications` &&
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/applications` )  || 
+                this.props.history.location.pathname === `${publicURL}/app/applications` || 
+                (this.props.history.location.pathname === `${publicURL}/app/applications` &&
                  this.state.selectionMode )) {
                      styles.display = 'inline-block'
             } else {
@@ -118,9 +118,9 @@ class Applications extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${location.pathname}/app/applications` )  || 
-                this.props.history.location.pathname === `${location.pathname}/app/applications` || 
-                (this.props.history.location.pathname === `${location.pathname}/app/applications` &&
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/applications` )  || 
+                this.props.history.location.pathname === `${publicURL}/app/applications` || 
+                (this.props.history.location.pathname === `${publicURL}/app/applications` &&
                  this.state.selectionMode )) {
                      styles.display = 'none'
             } else {

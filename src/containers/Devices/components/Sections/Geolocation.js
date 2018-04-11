@@ -66,11 +66,11 @@ export default class Geolocation extends Component {
         }
     }
 
-    showLocations = (location) => {
+    showLocations = (publicURL) => {
         let showLocations = this.state.showLocations.map(element => element)
-        const index = showLocations.map((e) => { return e.id }).indexOf(location.id)
+        const index = showLocations.map((e) => { return e.id }).indexOf(publicURL.id)
         if (index === -1) {
-            showLocations.push(location)
+            showLocations.push(publicURL)
         } else {
             showLocations.splice(index, 1)
         }

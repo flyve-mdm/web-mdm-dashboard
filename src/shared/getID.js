@@ -1,8 +1,8 @@
-import location from './location'
+import publicURL from './publicURL'
 export default (path, position = 3) => {
     let id
-    if (location.pathname !== "") {
-        id = path.split(location.pathname)[1].split("/")[position]
+    if (publicURL !== "") {
+        id = path.split(publicURL)[1].split("/")[position]
     } else {
         id = path.split("/")[position]
     }

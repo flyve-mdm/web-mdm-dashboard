@@ -8,7 +8,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 export default class FleetsList extends Component {
 
@@ -64,7 +64,7 @@ export default class FleetsList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push(`${location.pathname}/app/fleets`)
+            this.props.history.push(`${publicURL}/app/fleets`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -91,7 +91,7 @@ export default class FleetsList extends Component {
     }
 
     handleAdd = () => {
-        this.props.history.push(`${location.pathname}/app/fleets/add`)
+        this.props.history.push(`${publicURL}/app/fleets/add`)
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -100,7 +100,7 @@ export default class FleetsList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.props.history.push(`${location.pathname}/app/fleets`)
+        this.props.history.push(`${publicURL}/app/fleets`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -118,10 +118,10 @@ export default class FleetsList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`${location.pathname}/app/fleets/${itemSelected[0]["PluginFlyvemdmFleet.id"]}`)
+            this.props.history.push(`${publicURL}/app/fleets/${itemSelected[0]["PluginFlyvemdmFleet.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push(`${location.pathname}/app/fleets/edit/`)
+            this.props.history.push(`${publicURL}/app/fleets/edit/`)
         }
     }
 
@@ -192,7 +192,7 @@ export default class FleetsList extends Component {
                 order: fleets.order,
                 itemList: new WinJS.Binding.List(fleets.data)
             })
-            this.props.history.push(`${location.pathname}/app/fleets`)
+            this.props.history.push(`${publicURL}/app/fleets`)
 
         } catch (error) {
             this.setState({
