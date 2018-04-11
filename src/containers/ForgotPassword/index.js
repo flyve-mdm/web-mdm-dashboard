@@ -6,23 +6,17 @@ import Loading from '../../components/Loading'
 import Input from '../../components/Forms/Input'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
-import { fetchRecoverPassword } from '../../store/authentication/actions'
-import { handleRecover } from './actions';
+import { uiSetNotification } from '../../store/ui/actions'
+import withGLPI from '../../hoc/withGLPI'
 import { I18n } from 'react-i18nify'
 import location from '../../shared/location'
+import handleMessage from '../../shared/handleMessage'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        fetchRecoverPassword: bindActionCreators(fetchRecoverPassword, dispatch),
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
     }
     return { actions }
-}
-
-function mapStateToProps(state, props) {
-    return {
-        isLoading: state.ui.loading,
-        type: state.ui.notification.type
-    }
 }
 
 class ForgotPassword extends Component {
@@ -30,15 +24,47 @@ class ForgotPassword extends Component {
     constructor (props) {
         super(props)
         this.state = {
+            isLoading: false,
             isRecoverSent: false,
             text: ''
         }
 
-        this.handleRecover = event => handleRecover(this, event)
+        this.handleRecover = (event) => {
+            event.preventDefault()
+            this.setState({
+                isLoading: true
+            }, async () => {
+                try {
+                    await this.props.glpi.genericRequest({
+                        path: 'lostPassword',
+                        requestParams: {
+                          method: 'PUT',
+                          body: JSON.stringify({ "email": this.state.text })
+                        }
+                    })
+                    this.setState({
+                        isRecoverSent: true,
+                        isLoading: false
+                    })
+                    this.props.actions.setNotification(handleMessage({
+                        type: 'success',
+                        message: I18n.t('notifications.request_sent')
+                    }))
+                } catch (error) {
+                    this.setState({
+                        isLoading: false
+                    })
+                    this.props.actions.setNotification(handleMessage({
+                        type: 'warning', 
+                        message: error
+                    }))
+                }
+            })
+        }
     }
 
     componentDidMount() {
-        this.textInput.focus();
+        this.textInput.focus()
     }
 
     render() {
@@ -95,7 +121,7 @@ class ForgotPassword extends Component {
             )
         }
 
-        if (this.props.isLoading) {
+        if (this.state.isLoading) {
             return (
                 <Loading message={`${I18n.t('commons.sending')}...`} />
             )
@@ -116,12 +142,11 @@ class ForgotPassword extends Component {
 ForgotPassword.propTypes = {
     history: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
-    type: PropTypes.string.isRequired,
-    isLoading: PropTypes.bool.isRequired
+    glpi: PropTypes.object.isRequired
 }
 
-export default withAuthenticationLayout(
-    connect(mapStateToProps, mapDispatchToProps)(withHandleMessages(ForgotPassword)), {
+export default withGLPI(withAuthenticationLayout(
+    connect(null, mapDispatchToProps)(withHandleMessages(ForgotPassword)), {
         centerContent: true 
     }
-)
+))
