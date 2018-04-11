@@ -205,7 +205,7 @@ class Dashboard extends Component {
         <InfoBox
           to='app/devices'
           count={this.state.devicesCurrentlyManaged}
-          name={I18n.t('commons.devices')}
+          name={(this.state.devicesCurrentlyManaged === 1) ? I18n.t('commons.device') : I18n.t('commons.devices')}
           icon="deviceIcon"
           key="devicesCurrentlyManaged"
         />
@@ -217,7 +217,7 @@ class Dashboard extends Component {
         <InfoBox
           to='app/invitations'
           count={this.state.invitationsSent}
-          name={I18n.t('commons.invitations')}
+          name={(this.state.invitationsSent === 1) ? I18n.t('commons.invitation') : I18n.t('commons.invitations')}
           icon="emailIcon"
           key="invitationsSent"
         />
@@ -229,7 +229,7 @@ class Dashboard extends Component {
         <InfoBox
           to='app/fleets'
           count={this.state.fleetsCurrentlyManaged}
-          name={I18n.t('commons.fleets')}
+          name={(this.state.fleetsCurrentlyManaged === 1) ? I18n.t('commons.fleet') : I18n.t('commons.fleets')}
           icon="goToStartIcon"
           key="fleetsCurrentlyManaged"
         />
@@ -241,7 +241,7 @@ class Dashboard extends Component {
         <InfoBox
           to='app/files'
           count={this.state.filesUploaded}
-          name={I18n.t('commons.files')}
+          name={(this.state.filesUploaded === 1) ? I18n.t('commons.file') : I18n.t('commons.files')}
           icon="filesIcon"
           key="filesUploaded"
         />
@@ -253,7 +253,7 @@ class Dashboard extends Component {
         <InfoBox
           to='app/applications'
           count={this.state.applicationsUploaded}
-          name={I18n.t('commons.applications')}
+          name={(this.state.applicationsUploaded === 1) ? I18n.t('commons.application') : I18n.t('commons.applications')}
           icon="switchAppsIcon"
           key="applicationsUploaded"
         />
@@ -265,7 +265,7 @@ class Dashboard extends Component {
         <InfoBox
           to='app/users'
           count={this.state.numberUsers}
-          name={I18n.t('commons.users')}
+          name={(this.state.numberUsers === 1) ? I18n.t('commons.user') : I18n.t('commons.users')}
           icon="peopleIcon"
           key="numberUsers"
         />
