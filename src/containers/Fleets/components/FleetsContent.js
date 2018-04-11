@@ -480,8 +480,41 @@ class FleetsContent extends Component {
 
     handleSaveFleet = async () => {
         if(this.props.selectedItems.length === 1) {
+            if (!this.state.notManaged) {
+                this.handleUpdateFleet()
+            } else {
+                this.handleUpdateFleetName()
+            }
+            
         } else {
             this.handleCreateFleet()
+        }
+    }
+
+    handleUpdateFleetName = async () => {
+        try {
+            this.setState({
+                isLoading: true
+            })
+            const fleetToUpdate = {
+                name: this.state.input
+            }
+
+            await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFleet, id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'], input: fleetToUpdate })
+            this.props.setNotification({
+                title: I18n.t('commons.success'),
+                body: I18n.t('notifications.file_successfully_updated'),
+                type: 'success'
+            })
+            this.props.changeAction('reload')
+            this.setState({
+                isLoading: false
+            })
+        } catch (error) {
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+            this.setState({
+                isLoading: false
+            })
         }
     }
 
