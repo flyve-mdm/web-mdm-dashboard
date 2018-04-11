@@ -45,16 +45,26 @@ class ValidateAccount extends Component {
         }
     }
 
+    requestValidation = async (account, validation) => {
         try {
             const session = await this.props.glpi.initSessionByUserToken({ userToken: config.userToken })
             this.props.glpi.sessionToken = session.session_token
+            const response = await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmdemoAccountvalidation, id: account, input: { _validate: validation } })
             let isValidated = false
+            
             if (Array.isArray(response)) {
+                for (let item of response) {
+                    if (item[account]) {
+                        isValidated = true
+                        break
+                    }
                 }
             }
+            
             this.setState({ isLoading: false, isValidated })
 
         } catch (error) {
+            this.props.actions.setNotification(this.props.handleMessage({type: 'warning', message: error}))
             this.setState({ isLoading: false, isValidated: false })
         }
         
