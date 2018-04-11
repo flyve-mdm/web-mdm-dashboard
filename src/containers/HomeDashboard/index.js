@@ -46,7 +46,13 @@ class Dashboard extends Component {
 
   getDevices = () => new Promise(async (resolve) => {
     try {
-      const devices = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmAgent})
+      const devices = await this.props.glpi.searchItems({ 
+        itemtype: itemtype.PluginFlyvemdmAgent,
+        options: { 
+          uid_cols: true, 
+          forcedisplay: [2, 12]
+        }
+      })
       resolve(devices)
     } catch (error) {
       this.showError(error)
@@ -56,9 +62,9 @@ class Dashboard extends Component {
 
   getDevicesByOperatingSystemVersion = (devices) => new Promise(async (resolve) => {
     try {
-      const devicesAndroid = devices.filter(device => device.mdm_type === "android").length
-      const devicesiOS = devices.filter(device => device.mdm_type === "ios").length
-      const devicesWindows = devices.filter(device => device.mdm_type === "windows").length
+      const devicesAndroid = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] === "android").length
+      const devicesiOS = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] === "ios").length
+      const devicesWindows = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] === "windows").length
       let devicesByOperatingSystemVersion = []
       if (devicesAndroid) devicesByOperatingSystemVersion.push({ x: 'Android', y: devicesAndroid })
       if (devicesiOS) devicesByOperatingSystemVersion.push({ x: 'iOS', y: devicesiOS })
@@ -72,10 +78,10 @@ class Dashboard extends Component {
 
   getDevicesByUsers = (devices) => new Promise(async (resolve) => {
     try {
-      const devicesByUsers = devices.map(device => {
+      const devicesByUsers = devices.data.map(device => {
         return ({
-          name: device.name,
-          id: device.id
+          name: device[`${itemtype.PluginFlyvemdmAgent}.name`],
+          id: device[`${itemtype.PluginFlyvemdmAgent}.id`]
         }) 
       })
       resolve(devicesByUsers)
@@ -87,8 +93,10 @@ class Dashboard extends Component {
 
   getInvitations = () => new Promise(async (resolve) => {
     try {
-      const invitations = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmInvitation})
-      resolve(invitations)
+      const invitations = await this.props.glpi.searchItems({ 
+        itemtype: itemtype.PluginFlyvemdmInvitation
+      })
+      resolve(invitations.totalcount)
     } catch (error) {
       this.showError(error)
       resolve(null)
@@ -97,8 +105,16 @@ class Dashboard extends Component {
 
   getPendingInvitations = () => new Promise(async (resolve) => {
     try {
-      const invitations = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmInvitation})
-      resolve(invitations.filter(invitation => invitation.status === "pending"))
+      const pendingInvitations = await this.props.glpi.searchItems({ 
+        itemtype: itemtype.PluginFlyvemdmInvitation,
+        criteria: [{
+          field: 3,
+          link: "and",
+          searchtype: "equal",
+          value: "pending"
+        }]
+      })
+      resolve(pendingInvitations.totalcount)
     } catch (error) {
       this.showError(error)
       resolve(null)
@@ -107,8 +123,10 @@ class Dashboard extends Component {
 
   getFleets = () => new Promise(async (resolve) => {
     try {
-      const fleets = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFleet})
-      resolve(fleets)
+      const fleets = await this.props.glpi.searchItems({ 
+        itemtype: itemtype.PluginFlyvemdmFleet
+      })
+      resolve(fleets.totalcount)
     } catch (error) {
       this.showError(error)
       resolve(null)
@@ -117,8 +135,11 @@ class Dashboard extends Component {
 
   getFiles = () => new Promise(async (resolve) => {
     try {
-      const files = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFile})
-      resolve(files)
+      const files = 
+      await this.props.glpi.searchItems({ 
+        itemtype: itemtype.PluginFlyvemdmFile
+      })
+      resolve(files.totalcount)
     } catch (error) {
       this.showError(error)
       resolve(null)
@@ -127,8 +148,10 @@ class Dashboard extends Component {
 
   getApplications = () => new Promise(async (resolve) => {
     try {
-      const applications = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPackage})
-      resolve(applications)
+      const applications = await this.props.glpi.searchItems({ 
+        itemtype: itemtype.PluginFlyvemdmPackage
+      })
+      resolve(applications.totalcount)
     } catch (error) {
       this.showError(error)
       resolve(null)
@@ -137,8 +160,10 @@ class Dashboard extends Component {
 
   getUsers = () => new Promise(async (resolve) => {
     try {
-      const users = await this.props.glpi.getAllItems({itemtype: itemtype.User})
-      resolve(users)
+      const users = await this.props.glpi.searchItems({ 
+        itemtype: itemtype.User
+      })
+      resolve(users.totalcount)
     } catch (error) {
       this.showError(error)
       resolve(null)
@@ -149,23 +174,23 @@ class Dashboard extends Component {
     const applicationsUploaded = this.state.display.applicationsUploaded ? await this.getApplications() : undefined
     const filesUploaded = this.state.display.filesUploaded ? await this.getFiles(): undefined
     const fleetsCurrentlyManaged = this.state.display.fleetsCurrentlyManaged ? await this.getFleets() : undefined
-    const invitationsSent = this.state.display.invitationsSent ? await this.getInvitations() : undefined
-    const pendingInvitations = this.state.display.pendingInvitations ? await this.getPendingInvitations() : undefined
+    const invitations = this.state.display.invitationsSent ? await this.getInvitations() : undefined
+    const pendingInvitations = this.state.display.pendingInvitations ? await this.getPendingInvitations(invitations) : undefined
     const numberUsers = this.state.display.numberUsers ? await this.getUsers() : undefined
     const devices = (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion || this.state.display.devicesByUsers) ?
       await this.getDevices() : undefined
-    const devicesCurrentlyManaged = this.state.display.devicesCurrentlyManaged ? devices : undefined
-    const devicesByOperatingSystemVersion = (this.state.display.devicesByOperatingSystemVersion && devices && devices.length > 0) ? await this.getDevicesByOperatingSystemVersion(devices) : undefined 
-    const devicesByUsers = (this.state.display.devicesByUsers && devices && devices.length > 0) ?  await this.getDevicesByUsers(devices) : undefined
+    const devicesCurrentlyManaged = this.state.display.devicesCurrentlyManaged ? devices.totalcount : undefined
+    const devicesByOperatingSystemVersion = (this.state.display.devicesByOperatingSystemVersion && devices && devices.totalcount > 0) ? await this.getDevicesByOperatingSystemVersion(devices) : undefined 
+    const devicesByUsers = (this.state.display.devicesByUsers && devices && devices.totalcount > 0) ?  await this.getDevicesByUsers(devices) : undefined
 
     this.setState({
-      applicationsUploaded: applicationsUploaded ? applicationsUploaded.length : applicationsUploaded,
-      filesUploaded: filesUploaded ? filesUploaded.length : filesUploaded,
-      fleetsCurrentlyManaged: fleetsCurrentlyManaged ? fleetsCurrentlyManaged.length : fleetsCurrentlyManaged,
-      invitationsSent: invitationsSent ? invitationsSent.length : invitationsSent,
-      pendingInvitations: pendingInvitations ? pendingInvitations.length : pendingInvitations,
-      numberUsers: numberUsers ? numberUsers.length : numberUsers,
-      devicesCurrentlyManaged: devicesCurrentlyManaged ? devicesCurrentlyManaged.length : devicesCurrentlyManaged,
+      applicationsUploaded: applicationsUploaded,
+      filesUploaded: filesUploaded,
+      fleetsCurrentlyManaged: fleetsCurrentlyManaged,
+      invitationsSent: invitations,
+      pendingInvitations: pendingInvitations,
+      numberUsers: numberUsers,
+      devicesCurrentlyManaged: devicesCurrentlyManaged,
       devicesByOperatingSystemVersion,
       devicesByUsers,
       isLoading: false
