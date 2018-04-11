@@ -345,6 +345,8 @@
     }
   },
   "commons": {
+    "info": "Info",
+    "warning": "Warning",
     "email": "Email",
     "username": "Username",
     "next": "Next",
