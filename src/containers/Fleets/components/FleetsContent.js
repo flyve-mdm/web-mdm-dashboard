@@ -724,72 +724,76 @@ class FleetsContent extends Component {
             return (<Loading message={`${I18n.t('commons.loading')}...`} />)
         } else {
             return (
-                <ContentPane>
-                    <div className="contentHeader" style={{ display: 'table' }}>
-                        <h1 className="win-h1 titleContentPane" style={{ display: 'table-cell', verticalAlign: 'middle', padding: '0 20px' }}> 
-                            <input
-                                type="text"
-                                className="win-textbox"
-                                style={{fontSize:'34px', fontWeight:'200'}}
-                                placeholder={I18n.t('fleets.input_name')}
-                                name="fleetName"
-                                onChange={this.handleChangeInput}
-                                value={this.state.input}
-                            />                           
-                        </h1>
-                        <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-                            <div className="contentStatus">
-                                <span
-                                    className="saveIcon"
-                                    style={{ padding: '10px', fontSize: '20px' }}
-                                    onClick={this.handleSaveFleet} 
-                                />
-                                <span
-                                    className="deleteIcon"
-                                    style={{ padding: '10px', fontSize: '20px' }}
-                                    onClick={this.handleDeleteFleet} 
-                                />
+                <div style={{ display: 'flex'}}>
+                    <div style={{ overflow: 'hidden', position: 'fixed', top: 'auto', width:'100%', background: '#ffffff', zIndex:1}}>
+                        <div className="contentHeader" style={{ display: 'table' }}>
+                            <h1 className="win-h1 titleContentPane" style={{ display: 'table-cell', verticalAlign: 'middle', padding: '0 20px' }}> 
+                                <input
+                                    type="text"
+                                    className="win-textbox"
+                                    style={{fontSize:'34px', fontWeight:'200'}}
+                                    placeholder={I18n.t('fleets.input_name')}
+                                    name="fleetName"
+                                    onChange={this.handleChangeInput}
+                                    value={this.state.input}
+                                />                           
+                            </h1>
+                            <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+                                <div className="contentStatus">
+                                    <span
+                                        className="saveIcon"
+                                        style={{ padding: '10px', fontSize: '20px' }}
+                                        onClick={this.handleSaveFleet} 
+                                    />
+                                    <span
+                                        className="deleteIcon"
+                                        style={{ padding: '10px', fontSize: '20px' }}
+                                        onClick={this.handleDeleteFleet} 
+                                    />
+                                </div>
                             </div>
                         </div>
+                        <div className="separator"/>
                     </div>
-                    <div className="separator" />
-                    <div className="contentInfo" style={{ padding: '20px' }} >
-                        <h3 className="win-h3" > 
-                            {I18n.t('fleets.tasks_per_Category')} 
-                        </h3>
-                        <div style={{ padding: '0 20px' }}>
-                            {policiesPerCategory ? (
-                                policiesPerCategory.map((category) => {
-                                    return category['policies'].length > 0
-                                        ? (
-                                            <div key={category['id']}>
-                                                <h2>
-                                                    {category['name']}
-                                                </h2>
-                                                <div>
-                                                    {category['policies'].map((policy, index) => (
-                                                        <FleetsTaskItemList
-                                                            key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
-                                                            fleetHaveTask={this.handleFleetHaveTask(policy)}
-                                                            data={policy}
-                                                            value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
-                                                            addTask={this.handleAddTask}
-                                                            removeTask={this.handleRemoveTask}
-                                                            updateValueTask={this.handleUpdateValueTask}
-                                                            removeValueTask={this.handleRemoveValueTask}
-                                                            typeData={this.getTypeData(policy)}
-                                                        />
-                                                    ))}
+                    <ContentPane>
+                        <div className="contentInfo" style={{ padding: '20px', marginTop: '100px' }} >
+                            <h3 className="win-h3" >
+                                {I18n.t('fleets.tasks_per_Category')}
+                            </h3>
+                            <div style={{ padding: '0 20px' }}>
+                                {policiesPerCategory ? (
+                                    policiesPerCategory.map((category) => {
+                                        return category['policies'].length > 0
+                                            ? (
+                                                <div key={category['id']}>
+                                                    <h2>
+                                                        {category['name']}
+                                                    </h2>
+                                                    <div>
+                                                        {category['policies'].map((policy, index) => (
+                                                            <FleetsTaskItemList
+                                                                key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
+                                                                fleetHaveTask={this.handleFleetHaveTask(policy)}
+                                                                data={policy}
+                                                                value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
+                                                                addTask={this.handleAddTask}
+                                                                removeTask={this.handleRemoveTask}
+                                                                updateValueTask={this.handleUpdateValueTask}
+                                                                removeValueTask={this.handleRemoveValueTask}
+                                                                typeData={this.getTypeData(policy)}
+                                                            />
+                                                        ))}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        )
-                                        : null
-                                })
-                            ) : this.state.notManaged ? <h1>{ I18n.t('fleets.not_managed') }</h1> : <h1>{I18n.t('fleets.loading_tasks')}</h1>}
+                                            )
+                                            : null
+                                    })
+                                ) : this.state.notManaged ? <h1>{I18n.t('fleets.not_managed')}</h1> : <h1>{I18n.t('fleets.loading_tasks')}</h1>}
+                            </div>
                         </div>
-                    </div>
-                    <Confirmation title={`Delete Fleets`} message={this.props.selectedItems.length + ` Fleets`} reference={el => this.contentDialog = el} />
-                </ContentPane>
+                        <Confirmation title={`Delete Fleets`} message={this.props.selectedItems.length + ` Fleets`} reference={el => this.contentDialog = el} />
+                    </ContentPane>
+                </div>
             )
         }
     }
