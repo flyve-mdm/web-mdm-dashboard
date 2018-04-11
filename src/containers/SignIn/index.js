@@ -7,7 +7,7 @@ import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import { fetchSignIn } from '../../store/authentication/actions'
 import { I18n } from "react-i18nify"
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 // Async Component
 import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
 import { Redirect } from 'react-router'
@@ -44,7 +44,7 @@ class SignIn extends Component {
 
     render () {
         if (localStorage.getItem('currentUser') && localStorage.getItem('sessionToken')) {
-            return <Redirect to={`${location.pathname}/app`}/>
+            return <Redirect to={`${publicURL}/app`}/>
         } else {
             let form
             if (this.state.phase === 1) {

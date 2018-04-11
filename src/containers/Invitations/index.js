@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -61,7 +61,7 @@ class Invitations extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.history.location.pathname === `${location.pathname}/app/invitations` && this.state.selectedItems.length > 0) {
+        if(this.props.history.location.pathname === `${publicURL}/app/invitations` && this.state.selectedItems.length > 0) {
             this.changeSelectedItems([])
         }
     }
@@ -93,9 +93,9 @@ class Invitations extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${location.pathname}/app/invitations` )  || 
-                this.props.history.location.pathname === `${location.pathname}/app/invitations` || 
-                (this.props.history.location.pathname === `${location.pathname}/app/invitations` &&
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/invitations` )  || 
+                this.props.history.location.pathname === `${publicURL}/app/invitations` || 
+                (this.props.history.location.pathname === `${publicURL}/app/invitations` &&
                  this.state.selectionMode )) {
                      styles.display = 'inline-block'
             } else {
@@ -118,9 +118,9 @@ class Invitations extends Component {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${location.pathname}/app/invitations` )  || 
-                this.props.history.location.pathname === `${location.pathname}/app/invitations` || 
-                (this.props.history.location.pathname === `${location.pathname}/app/invitations` &&
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/invitations` )  || 
+                this.props.history.location.pathname === `${publicURL}/app/invitations` || 
+                (this.props.history.location.pathname === `${publicURL}/app/invitations` &&
                  this.state.selectionMode )) {
                      styles.display = 'none'
             } else {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { I18n } from 'react-i18nify'
 import Loading from '../../../components/Loading'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 class PasswordFieldset extends Component {
     
@@ -68,7 +68,7 @@ class PasswordFieldset extends Component {
                     </form>
                     
                     <p>
-                        <Link to={`${location.pathname}/forgotPassword`}>
+                        <Link to={`${publicURL}/forgotPassword`}>
                             { I18n.t('login.forgot_my_password') }
                         </Link>
                     </p>

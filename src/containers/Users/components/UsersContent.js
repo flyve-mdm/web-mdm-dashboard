@@ -7,7 +7,7 @@ import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 export default class UsersContent extends Component {
 
@@ -54,7 +54,7 @@ export default class UsersContent extends Component {
                     body: I18n.t('notifications.elements_successfully_removed'),
                     type: 'success'
                 })
-                this.props.history.push(`${location.pathname}/app/users`)
+                this.props.history.push(`${publicURL}/app/users`)
             } catch (error) {                
                 this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
@@ -84,7 +84,7 @@ export default class UsersContent extends Component {
             })
         } catch (error) {
             this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
-            this.props.history.push(`${location.pathname}/app/users`)
+            this.props.history.push(`${publicURL}/app/users`)
         }
     }
 
@@ -114,7 +114,7 @@ export default class UsersContent extends Component {
                                     {I18n.t('commons.joined')} {this.state.data.date_creation}
                                 </span>
                                 <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.history.push(`${location.pathname}/app/users/${this.state.id}/edit`)} />
+                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.history.push(`${publicURL}/app/users/${this.state.id}/edit`)} />
                                 <span className="deleteIcon" onClick={this.handleDelete} />
                             </div>
                         </div>

@@ -7,7 +7,7 @@ import { uiSetNotification } from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import config from '../../config/config.json'
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 import itemtype from '../../shared/itemtype'
 import { I18n } from "react-i18nify"
 import Loading from '../../components/Loading'
@@ -86,7 +86,7 @@ class ValidateAccount extends Component {
                             <br />
                         </p>
                         <p>
-                            <Link to={`${location.pathname}/`}>{I18n.t('commons.sign_in')}</Link>
+                            <Link to={`${publicURL}/`}>{I18n.t('commons.sign_in')}</Link>
                         </p>
                     </React.Fragment>
                 )

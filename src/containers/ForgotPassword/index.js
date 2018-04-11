@@ -9,7 +9,7 @@ import withHandleMessages from '../../hoc/withHandleMessages'
 import { uiSetNotification } from '../../store/ui/actions'
 import withGLPI from '../../hoc/withGLPI'
 import { I18n } from 'react-i18nify'
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 import handleMessage from '../../shared/handleMessage'
 
 function mapDispatchToProps(dispatch) {
@@ -98,7 +98,7 @@ class ForgotPassword extends Component {
                         <button 
                             className="btn --secondary" 
                             type="button" 
-                            onClick={() => this.props.history.push(`${location.pathname}/`)}
+                            onClick={() => this.props.history.push(`${publicURL}/`)}
                         >
                             {I18n.t('commons.back')}
                         </button>
@@ -119,7 +119,7 @@ class ForgotPassword extends Component {
                     <button 
                         className="win-button" 
                         type="button" 
-                        onClick={() => this.props.history.push(`${location.pathname}/`)}
+                        onClick={() => this.props.history.push(`${publicURL}/`)}
                     >
                         {I18n.t('forgot_password.go_home')}
                     </button>
