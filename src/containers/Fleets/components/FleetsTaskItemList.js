@@ -97,6 +97,7 @@ class FleetsTaskItemList extends Component {
         switch (this.props.data['PluginFlyvemdmPolicy.type']) {
             case 'deployapp':
             case 'deployfile':
+            case 'dropdown':
                 if(e.target.value.trim()) {
                     this.props.updateValueTask(this.props.data, e.target.value)
                 }
