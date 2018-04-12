@@ -80,6 +80,14 @@ class Entity extends Component {
                     }
                 }
             }
+
+            const entityconfig = await this.props.glpi.getAnItem({ 
+                itemtype: itemtype.PluginFlyvemdmEntityconfig,
+                id: entityID
+            })
+
+            const tokenLifeMatch = entityconfig[0].agent_token_life.match(/\d+/)
+
             this.setState({
                 isLoading: false,
                 entityID: `${entityID}`,
@@ -90,7 +98,8 @@ class Entity extends Component {
                 filesUploaded: `${files.totalcount}`,
                 fleetsCurrentlyManaged: `${fleets.totalcount}`,
                 typesPolicies: `${policies.totalcount}`,
-                numberCategoriesForPolicies: `${policyCategories.totalcount}`
+                numberCategoriesForPolicies: `${policyCategories.totalcount}`,
+                tokenLife: tokenLifeMatch ? tokenLifeMatch[0] : 0
             })
         } catch (error) {
             this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
