@@ -147,13 +147,12 @@ export default class FleetsList extends Component {
                     body: I18n.t('notifications.fleet_successfully_removed'),
                     type: 'success'
                 })
+                this.props.changeAction('reload')
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
-                this.props.changeAction('reload')
-
-                this.setState((prevState, props) => ({
-                    isLoading: false
-                }))
+                this.setState({
+                    isLoading: true
+                })
             } else {
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
