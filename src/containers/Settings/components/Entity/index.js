@@ -78,14 +78,16 @@ class Entity extends Component {
                 }
             }
 
-            const entityconfig = await this.props.glpi.getAnItem({ 
+            let entityconfig = await this.props.glpi.getAnItem({ 
                 itemtype: itemtype.PluginFlyvemdmEntityconfig,
                 id: entityID
             })
 
-            const tokenLifeMatch = entityconfig[0].agent_token_life.match(/\d+/)
+            if (Array.isArray(entityconfig)) entityconfig = entityconfig[0]
 
-            const downloadURL = entityconfig[0].download_url
+            const tokenLifeMatch = entityconfig.agent_token_life.match(/\d+/)
+
+            const downloadURL = entityconfig.download_url
 
             this.setState({
                 isLoading: false,
@@ -137,15 +139,15 @@ class Entity extends Component {
 
             case 'change download URL':
                 content = (
-                    <ContentPane>
-                        <ChangeDownloadURL 
-                            changeMode={this.changeMode} 
-                            downloadURL={this.state.downloadURL} 
-                            saveValues={this.saveValues}
-                            showNotification={this.props.showNotification}
-                            handleMessage={this.props.handleMessage}
-                        />
-                    </ContentPane>
+                    <ChangeDownloadURL 
+                        changeMode={this.changeMode} 
+                        downloadURL={this.state.downloadURL} 
+                        saveValues={this.saveValues}
+                        showNotification={this.props.showNotification}
+                        handleMessage={this.props.handleMessage}
+                        glpi={this.props.glpi}
+                        entityID={this.state.entityID}
+                    />
                 )
 
             break
