@@ -521,7 +521,7 @@ class FleetsContent extends Component {
             await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFleet, id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'], input: fleetToUpdate })
             this.props.setNotification({
                 title: I18n.t('commons.success'),
-                body: I18n.t('notifications.file_successfully_updated'),
+                body: I18n.t('notifications.fleet_successfully_updated'),
                 type: 'success'
             })
             this.props.changeAction('reload')
@@ -640,7 +640,7 @@ class FleetsContent extends Component {
 
             this.props.setNotification({
                 title: I18n.t('commons.success'),
-                body: I18n.t('notifications.file_successfully_updated'),
+                body: I18n.t('notifications.fleet_successfully_updated'),
                 type: 'success'
             })
             this.requestAllData()
@@ -691,7 +691,7 @@ class FleetsContent extends Component {
             })
             this.props.setNotification({
                 title: I18n.t('commons.success'),
-                body: I18n.t('notifications.file_successfully_created'),
+                body: I18n.t('notifications.fleet_successfully_created'),
                 type: 'success'
             })
             this.props.changeSelectionMode(false)
@@ -721,7 +721,7 @@ class FleetsContent extends Component {
                 })
                 this.props.setNotification({
                     title: I18n.t('commons.success'),
-                    body: I18n.t('notifications.file_successfully_removed'),
+                    body: I18n.t('notifications.fleet_successfully_removed'),
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)
