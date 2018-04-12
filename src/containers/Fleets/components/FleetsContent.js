@@ -35,6 +35,8 @@ class FleetsContent extends Component {
         }, () => {
             if (!this.state.notManaged) {
                 this.requestAllData()
+            } else {
+                this.resetData()
             }
         })
     }
@@ -47,9 +49,25 @@ class FleetsContent extends Component {
             }, () => {
                 if (!this.state.notManaged) {
                     this.requestAllData()
+                } else {
+                    this.resetData()
                 }
             })
         }
+    }
+
+    resetData = () => {
+        this.setState({
+            data: {
+                policies: undefined,
+                tasks: undefined,
+                categories: undefined,
+                files: undefined,
+                applications: undefined,
+                tasksNew: {},
+                tasksRemove: {}
+            }
+        })
     }
 
     requestAllData = async () => {
