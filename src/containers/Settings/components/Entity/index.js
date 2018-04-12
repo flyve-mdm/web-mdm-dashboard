@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import ChangeDownloadURL from './ChangeDownloadURL'
 import ChangeTokenLife from './ChangeTokenLife'
 import Main from './Main'
-import validateData from '../../../../shared/validateData'
-import SettingsEntity from '../../../../data/SettingsEntity.json'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import { I18n } from 'react-i18nify'
@@ -29,7 +27,7 @@ class Entity extends Component {
             isLoading: true,
             mode: '', 
             tokenLife: '',
-            downloadURL: validateData(SettingsEntity["downloadURL"], "https://"),
+            downloadURL: '',
             entityID: '',
             devicesCurretlymanaged: '',
             fleetsCurrentlyManaged: '',
@@ -87,6 +85,8 @@ class Entity extends Component {
 
             const tokenLifeMatch = entityconfig[0].agent_token_life.match(/\d+/)
 
+            const downloadURL = entityconfig[0].download_url
+
             this.setState({
                 isLoading: false,
                 entityID: `${entityID}`,
@@ -98,7 +98,8 @@ class Entity extends Component {
                 fleetsCurrentlyManaged: `${fleets.totalcount}`,
                 typesPolicies: `${policies.totalcount}`,
                 numberCategoriesForPolicies: `${policyCategories.totalcount}`,
-                tokenLife: tokenLifeMatch ? tokenLifeMatch[0] : 0
+                tokenLife: tokenLifeMatch ? tokenLifeMatch[0] : 0,
+                downloadURL: downloadURL ? downloadURL : "https://"
             })
         } catch (error) {
             this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
