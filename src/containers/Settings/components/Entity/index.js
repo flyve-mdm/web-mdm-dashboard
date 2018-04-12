@@ -28,8 +28,7 @@ class Entity extends Component {
         this.state = {
             isLoading: true,
             mode: '', 
-            buttonSaveClassName: "win-button hidden",
-            tokenLife: validateData(SettingsEntity["tokenLife"]),
+            tokenLife: '',
             downloadURL: validateData(SettingsEntity["downloadURL"], "https://"),
             entityID: '',
             devicesCurretlymanaged: '',
@@ -122,15 +121,15 @@ class Entity extends Component {
 
             case 'change Token life':
                 content = (
-                    <ContentPane>
-                        <ChangeTokenLife 
-                            changeMode={this.changeMode} 
-                            tokenLife={this.state.tokenLife}
-                            saveValues={this.saveValues}
-                            showNotification={this.props.showNotification}
-                            handleMessage={this.props.handleMessage}
-                        />
-                    </ContentPane>
+                    <ChangeTokenLife 
+                        changeMode={this.changeMode} 
+                        tokenLife={this.state.tokenLife}
+                        saveValues={this.saveValues}
+                        showNotification={this.props.showNotification}
+                        handleMessage={this.props.handleMessage}
+                        glpi={this.props.glpi}
+                        entityID={this.state.entityID}
+                    />
                 )
                 
             break
@@ -175,12 +174,12 @@ class Entity extends Component {
         return (
             this.state.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> :
             (
-                <div>
+                <React.Fragment>
                     <h2>{ I18n.t('settings.entity.title') }</h2> 
-                    <div style={{marginTop: '20px'}}>
+                    <div style={{marginTop: '20px', height: "100%"}}>
                         {content}
                     </div>
-                </div>
+                </React.Fragment>
             )
         )
     }
