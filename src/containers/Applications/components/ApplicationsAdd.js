@@ -42,10 +42,9 @@ export default class ApplicationsAdd extends Component {
     }
 
     filesUpload = () => {
-
-        try {
-            const formData = new FormData()
-            Object.keys(this.state.files).forEach(async (key) => {
+        const formData = new FormData()
+        Object.keys(this.state.files).forEach(async (key) => {
+            try {
                 const file = this.state.files[key]
                 formData.append("file", file)
                 formData.append("uploadManifest", `{"input":{"name":"${file.name}","alias":"${this.state.input}"}}`)
@@ -62,13 +61,13 @@ export default class ApplicationsAdd extends Component {
                     type: 'success'
                 })
                 this.props.changeAction('reload')
-            })
-        } catch (error) {
-            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
-            this.setState({
-                isLoading: false
-            })
-        }
+            } catch (error) {
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                this.setState({
+                    isLoading: false
+                })
+            }
+        })
     }
 
     render() {
