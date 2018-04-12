@@ -1,1 +1,7 @@
-export default process.env.PUBLIC_URL
+const path = () => {
+    var location = document.createElement("a")
+    location.href = process.env.PUBLIC_URL
+    return location.pathname
+}
+
+export default path()
