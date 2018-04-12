@@ -181,7 +181,7 @@ class Dashboard extends Component {
       const numberUsers = (this.props.glpi.sessionToken && this.state.display.numberUsers) ? await this.getUsers() : undefined
       const devices = (this.props.glpi.sessionToken && (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion || this.state.display.devicesByUsers)) ?
         await this.getDevices() : undefined
-      const devicesCurrentlyManaged = this.state.display.devicesCurrentlyManaged ? devices.totalcount : undefined
+      const devicesCurrentlyManaged = (this.state.display.devicesCurrentlyManaged && devices) ? devices.totalcount : undefined
       const devicesByOperatingSystemVersion = (this.state.display.devicesByOperatingSystemVersion && devices && devices.totalcount > 0) ? await this.getDevicesByOperatingSystemVersion(devices) : undefined 
       const devicesByUsers = (this.state.display.devicesByUsers && devices && devices.totalcount > 0) ?  await this.getDevicesByUsers(devices) : undefined
       this.setState({
