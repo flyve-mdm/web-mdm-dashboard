@@ -23,7 +23,7 @@ export default class FleetsList extends Component {
             pagination: {
                 start: 0,
                 page: 1,
-                count: 15
+                count: 30
             }
         }
     }
@@ -71,7 +71,7 @@ export default class FleetsList extends Component {
                 pagination: {
                     start: 0,
                     page: 1,
-                    count: 15
+                    count: 30
                 }
             })
             const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
@@ -180,7 +180,7 @@ export default class FleetsList extends Component {
                 pagination: {
                     start: 0,
                     page: 1,
-                    count: 15
+                    count: 30
                 }
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
