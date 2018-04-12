@@ -669,9 +669,17 @@ class FleetsContent extends Component {
                 return itemsToAdd[task['plugin_flyvemdm_policies_id']] ? delete itemsToAdd[task['plugin_flyvemdm_policies_id']] : null
             })
 
-            const itemsToSave = Object.values(itemsToAdd).map(item => {
-                item['plugin_flyvemdm_fleets_id'] = newFleet['id']
-                return item
+            let itemsToSave = []
+            Object.values(itemsToAdd).forEach(item => {
+                if (Array.isArray(item)) {
+                    item.forEach(deploy => {
+                        deploy['plugin_flyvemdm_fleets_id'] = newFleet['id']
+                        itemsToSave.push(deploy)
+                    })
+                } else {
+                    item['plugin_flyvemdm_fleets_id'] = newFleet['id']
+                    itemsToSave.push(item)
+                }
             })
 
             if (itemsToSave.length > 0) {
