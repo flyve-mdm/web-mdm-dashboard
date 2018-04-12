@@ -2,16 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { I18n } from "react-i18nify"
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 
 class HeaderBreadcrumb extends React.Component {
 
   breadcrumbs () {
     let breadcrumbs = []
     const addresses = this.props.history.location.pathname.split("/")
-    for (let index = (location.pathname === '') ? 2 : 3; index < addresses.length; index++) {
-      let path = `${location.pathname}/app`
-      for (let i = (location.pathname === '') ? 2 : 3; i < index + 1; i++) {
+    for (let index = (publicURL === '') ? 2 : 3; index < addresses.length; index++) {
+      let path = `${publicURL}/app`
+      for (let i = (publicURL === '') ? 2 : 3; i < index + 1; i++) {
         path += `/${addresses[i]}`
       }
       breadcrumbs.push (
@@ -40,7 +40,7 @@ class HeaderBreadcrumb extends React.Component {
   
         <nav className="header-breadcrumb">
           <span>
-            <Link to={`${location.pathname}/app`}>
+            <Link to={`${publicURL}/app`}>
               {I18n.t('commons.dashboard')}
             </Link>
           </span>

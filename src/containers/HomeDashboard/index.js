@@ -13,7 +13,8 @@ import EmptyMessage from '../../components/EmptyMessage'
 import { NavLink } from 'react-router-dom'
 import ContentPane from '../../components/ContentPane'
 import itemtype from '../../shared/itemtype'
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
+import logout from '../../shared/logout'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -171,30 +172,33 @@ class Dashboard extends Component {
   })
 
   componentDidMount = async () => {
-    const applicationsUploaded = this.state.display.applicationsUploaded ? await this.getApplications() : undefined
-    const filesUploaded = this.state.display.filesUploaded ? await this.getFiles(): undefined
-    const fleetsCurrentlyManaged = this.state.display.fleetsCurrentlyManaged ? await this.getFleets() : undefined
-    const invitations = this.state.display.invitationsSent ? await this.getInvitations() : undefined
-    const pendingInvitations = this.state.display.pendingInvitations ? await this.getPendingInvitations(invitations) : undefined
-    const numberUsers = this.state.display.numberUsers ? await this.getUsers() : undefined
-    const devices = (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion || this.state.display.devicesByUsers) ?
-      await this.getDevices() : undefined
-    const devicesCurrentlyManaged = this.state.display.devicesCurrentlyManaged ? devices.totalcount : undefined
-    const devicesByOperatingSystemVersion = (this.state.display.devicesByOperatingSystemVersion && devices && devices.totalcount > 0) ? await this.getDevicesByOperatingSystemVersion(devices) : undefined 
-    const devicesByUsers = (this.state.display.devicesByUsers && devices && devices.totalcount > 0) ?  await this.getDevicesByUsers(devices) : undefined
-
-    this.setState({
-      applicationsUploaded: applicationsUploaded,
-      filesUploaded: filesUploaded,
-      fleetsCurrentlyManaged: fleetsCurrentlyManaged,
-      invitationsSent: invitations,
-      pendingInvitations: pendingInvitations,
-      numberUsers: numberUsers,
-      devicesCurrentlyManaged: devicesCurrentlyManaged,
-      devicesByOperatingSystemVersion,
-      devicesByUsers,
-      isLoading: false
-    })
+    if (this.props.glpi.sessionToken) {
+      const applicationsUploaded = (this.props.glpi.sessionToken && this.state.display.applicationsUploaded) ? await this.getApplications() : undefined
+      const filesUploaded = (this.props.glpi.sessionToken && this.state.display.filesUploaded) ? await this.getFiles(): undefined
+      const fleetsCurrentlyManaged = (this.props.glpi.sessionToken && this.state.display.fleetsCurrentlyManaged) ? await this.getFleets() : undefined
+      const invitations = (this.props.glpi.sessionToken && this.state.display.invitationsSent) ? await this.getInvitations() : undefined
+      const pendingInvitations = (this.props.glpi.sessionToken && this.state.display.pendingInvitations) ? await this.getPendingInvitations(invitations) : undefined
+      const numberUsers = (this.props.glpi.sessionToken && this.state.display.numberUsers) ? await this.getUsers() : undefined
+      const devices = (this.props.glpi.sessionToken && (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion || this.state.display.devicesByUsers)) ?
+        await this.getDevices() : undefined
+      const devicesCurrentlyManaged = this.state.display.devicesCurrentlyManaged ? devices.totalcount : undefined
+      const devicesByOperatingSystemVersion = (this.state.display.devicesByOperatingSystemVersion && devices && devices.totalcount > 0) ? await this.getDevicesByOperatingSystemVersion(devices) : undefined 
+      const devicesByUsers = (this.state.display.devicesByUsers && devices && devices.totalcount > 0) ?  await this.getDevicesByUsers(devices) : undefined
+      this.setState({
+        applicationsUploaded: applicationsUploaded,
+        filesUploaded: filesUploaded,
+        fleetsCurrentlyManaged: fleetsCurrentlyManaged,
+        invitationsSent: invitations,
+        pendingInvitations: pendingInvitations,
+        numberUsers: numberUsers,
+        devicesCurrentlyManaged: devicesCurrentlyManaged,
+        devicesByOperatingSystemVersion,
+        devicesByUsers,
+        isLoading: false
+      })
+    } else {
+      logout()
+    }
   }
 
   renderInfoBox () {
@@ -333,7 +337,7 @@ class Dashboard extends Component {
                   <li key={`device${id}`}>
                     <NavLink 
                       exact
-                      to={`${location.pathname}/app/devices/${device.id}`}
+                      to={`${publicURL}/app/devices/${device.id}`}
                     >
                       {device.name}
                     </NavLink>

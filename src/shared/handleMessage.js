@@ -1,6 +1,6 @@
 import history from './history'
 import glpi from './glpiApi'
-import location from './location'
+import publicURL from './publicURL'
 import { I18n } from "react-i18nify"
 
 export default ({type='info', message}) => {
@@ -33,7 +33,7 @@ export default ({type='info', message}) => {
                     localStorage.removeItem('currentUser')
                     localStorage.removeItem('sessionToken')
                     glpi.killSession()
-                    history.push(`${location.pathname}`)
+                    history.push(`${publicURL}/`)
                 }
                 break
             case (message.status === 404):

@@ -6,7 +6,7 @@ import Loading from '../../../../components/Loading'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
-import location from '../../../../shared/location'
+import publicURL from '../../../../shared/publicURL'
 
 export default class Main extends Component {
 
@@ -49,7 +49,7 @@ export default class Main extends Component {
             })
         } catch (error) {
             this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
-            this.props.history.push(`${location.pathname}/app/devices`)
+            this.props.history.push(`${publicURL}/app/devices`)
         }
     }
 
@@ -85,7 +85,7 @@ export default class Main extends Component {
     }
 
     handleEdit = () => {
-        const path = `${location.pathname}/app/devices/${this.props.id}/edit`
+        const path = `${publicURL}/app/devices/${this.props.id}/edit`
         this.props.history.push(path)
     }
 

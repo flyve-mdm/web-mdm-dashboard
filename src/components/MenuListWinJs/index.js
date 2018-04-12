@@ -7,7 +7,7 @@ import Loader from '../Loader'
 import Confirmation from '../Confirmation'
 import { AboutItemList, ApplicationsItemList, DevicesItemList, InvitationsItemList, SettingsItemList, FilesItemList, FleetsItemList, UsersItemList} from './ItemList'
 import GLPI from '../../shared/glpiApi'
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 
 export default class ListWinJs extends Component {
 
@@ -93,7 +93,7 @@ export default class ListWinJs extends Component {
                 }
             })
 
-            this.props.history.replace(`${location.pathname}/app/devices`)
+            this.props.history.replace(`${publicURL}/app/devices`)
 
             const devices = await GLPI.searchItems({ 
                 itemtype: this.props.handleRefreshRequest.itemtype, 
@@ -119,19 +119,19 @@ export default class ListWinJs extends Component {
     }
 
     handleEdit = () => {
-        this.props.history.replace(`${location.pathname}/app/devices/edit`)        
+        this.props.history.replace(`${publicURL}/app/devices/edit`)        
     }
 
     handlePanel = (eventObject) => {
         this.listView.winControl.selection.clear()
         this.props.changeSelectionMode(false)
-        this.props.history.replace(`${location.pathname}/app/devices/add`)
+        this.props.history.replace(`${publicURL}/app/devices/add`)
     }
 
     handleToggleSelectionMode = () => {
         this.listView.winControl.selection.clear()
         this.props.changeSelectionMode(!this.props.selectionMode)
-        this.props.history.replace(`${location.pathname}/app/devices`)
+        this.props.history.replace(`${publicURL}/app/devices`)
         this.setState({
             selectedItemList: []
         })
@@ -158,7 +158,7 @@ export default class ListWinJs extends Component {
                 }
                 if (index.length === 1 && !this.props.selectionMode) {
                     this.props.history.replace(
-                        `${location.pathname}/app/devices/${this.state.selectedItemList[0]['PluginFlyvemdmAgent.id']}`
+                        `${publicURL}/app/devices/${this.state.selectedItemList[0]['PluginFlyvemdmAgent.id']}`
                     )
                 }
             }, 0)
@@ -219,7 +219,7 @@ export default class ListWinJs extends Component {
 
     handleSort = async () => {
         try {
-            this.props.history.replace(`${location.pathname}/app/devices`)
+            this.props.history.replace(`${publicURL}/app/devices`)
             this.setState({
                 isLoading: true,
                 pagination: {
