@@ -18,12 +18,14 @@ export default class FleetsList extends Component {
             layout: { type: WinJS.UI.ListLayout },
             scrolling: false,
             isLoading: false,
+            isLoadingMore: false,
             itemList: new WinJS.Binding.List([]),
             order: "ASC",
+            totalcount: 0,
             pagination: {
                 start: 0,
                 page: 1,
-                count: 30
+                count: 15
             }
         }
     }
@@ -33,8 +35,8 @@ export default class FleetsList extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.listView && !this.state.scrolling) {
-            this.listView.winControl.footer.style.height = '1px'
+        if (this.listView) {
+            this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? '100px' : '1px' 
         }
         if (this.toolBar) {
             this.toolBar.winControl.forceLayout();
@@ -68,16 +70,18 @@ export default class FleetsList extends Component {
             this.setState({
                 isLoading: true,
                 scrolling: false,
+                totalcount: 0,
                 pagination: {
                     start: 0,
                     page: 1,
-                    count: 30
+                    count: 15
                 }
             })
             const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
             this.setState({
                 isLoading: false,
                 order: fleets.order,
+                totalcount: fleets.totalcount,
                 itemList: new WinJS.Binding.List(fleets.data)
             })
 
@@ -175,20 +179,16 @@ export default class FleetsList extends Component {
     handleSort = async () => {
         try {
             this.setState({
-                isLoading: true,
-                pagination: {
-                    start: 0,
-                    page: 1,
-                    count: 30
-                }
+                isLoading: true
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 5, 6] } })
+            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 5, 6], range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
 
             this.setState({
                 isLoading: false,
                 order: fleets.order,
+                totalcount: fleets.totalcount,
                 itemList: new WinJS.Binding.List(fleets.data)
             })
             this.props.history.push(`${publicURL}/app/fleets`)
@@ -211,33 +211,31 @@ export default class FleetsList extends Component {
         }
     }
 
-    showFooterList = (eventObject) => {
-        let listView = eventObject.currentTarget.winControl
-        if (eventObject.detail.visible && this.state.scrolling) {
-            listView.footer.style.height = '100px'
-            this.loadMoreData()
-        }
-    }
-
     loadMoreData = async () => {
         try {
-            const Fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            this.setState({
+                isLoadingMore: true
+            })
+            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
 
-            for (const item in Fleets.data) {
-                this.state.itemList.push(Fleets.data[item])
+            for (const item in fleets.data) {
+                this.state.itemList.push(fleets.data[item])
             }
 
             this.setState({
+                isLoadingMore: false,
+                totalcount: fleets.totalcount,
                 pagination: {
                     ...this.state.pagination,
                     page: this.state.pagination.page + 1
                 }
             })
 
-            this.listView.winControl.footer.style.height = '1px'
-
         } catch (error) {
-            this.listView.winControl.footer.style.height = '1px'
+
+            this.setState({
+                isLoadingMore: false
+            })
         }
     }
 
@@ -252,6 +250,15 @@ export default class FleetsList extends Component {
                 onClick={this.handleDelete}
             />
         )
+
+        let footerComponent = this.state.isLoadingMore ? <Loader /> : 
+            (<div onClick={this.loadMoreData} style={{ cursor: 'pointer', color:'#158784'}}>
+            <span
+                className="refreshIcon"
+                style={{ padding: '10px', fontSize: '20px' }}
+                onClick={this.loadMoreData}/>
+            <span>{I18n.t('commons.load_more')}</span>
+            </div>)
 
         let listComponent
 
@@ -268,8 +275,7 @@ export default class FleetsList extends Component {
                         itemDataSource={this.state.itemList.dataSource}
                         layout={this.state.layout}
                         itemTemplate={this.ItemListRenderer}
-                        footerComponent={<Loader />}
-                        onFooterVisibilityChanged={this.showFooterList}
+                        footerComponent={footerComponent}
                         selectionMode={this.props.selectionMode ? 'multi' : 'single'}
                         tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
                         onSelectionChanged={this.handleSelectionChanged}
