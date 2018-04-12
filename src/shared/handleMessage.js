@@ -7,7 +7,7 @@ export default ({type='info', message}) => {
     let response = {
         type: type,
         title: I18n.t('commons.info'),
-        body: message ? message.statusText : ''
+        body: message ? (typeof message === 'string' || message instanceof String) ? message : message.statusText : ''
     }
     switch (type) {
         case 'success':
