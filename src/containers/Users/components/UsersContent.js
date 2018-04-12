@@ -43,9 +43,6 @@ export default class UsersContent extends Component {
             this.setState({
                 isLoading: true
             })
-
-            this.props.changeAction('reload')            
-            this.props.changeSelectionMode(false)
             
             try {
                 await this.props.glpi.deleteItem({ itemtype: itemtype.User, input: itemListToDelete })
@@ -54,6 +51,8 @@ export default class UsersContent extends Component {
                     body: I18n.t('notifications.elements_successfully_removed'),
                     type: 'success'
                 })
+                this.props.changeAction('reload')            
+                this.props.changeSelectionMode(false)
                 this.props.history.push(`${publicURL}/app/users`)
             } catch (error) {                
                 this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
