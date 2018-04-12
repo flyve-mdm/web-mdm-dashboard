@@ -503,6 +503,7 @@
     "setting_flyve_mdm": "Setting of Flyve MDM",
     "about_flyve_mdm": "About of Flyve MDM",
     "package_name": "Package name",
-    "not_found": "Not Found"
+    "not_found": "Not Found",
+    "load_more": "load more data"
   }
 }
