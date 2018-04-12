@@ -18,7 +18,7 @@ class TasksRemoveFileList extends Component {
             Array.isArray(this.props.data) ?
                 this.props.data.map((item, index) => {
                     return (
-                        <div className='files-list' style={{ width: '320px' }} key={item['value'].concat(index)}>
+                        <div className='files-list' style={{ width: '320px' }} key={[item['value'], index].join("_")}>
                             <div className='files-list-content'>
                                 <div className='files-list-item'>
                                     <div className='item-content-primary'>
