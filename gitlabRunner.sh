@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
+# set transifex credentials and update the translations
 cat /dev/null > ~/.transifexrc
-echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_API_TOKEN"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'' > ~/.transifexrc
+echo "[https://www.transifex.com]" >> ~/.transifexrc
+echo "hostname = https://www.transifex.com" >> ~/.transifexrc
+echo "username = ${TRANSIFEX_USER}" >> ~/.transifexrc
+echo "password = ${TRANSIFEX_API_TOKEN}" >> ~/.transifexrc
+echo "token = ${TRANSIFEX_API_TOKEN}" >> ~/.transifexrc
 tx pull -a
+
+# build the dashboard
 yarn build
 rm -r /var/www/public/dashboard
 cp -r ./build /var/www/public/dashboard
