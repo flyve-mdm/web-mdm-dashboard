@@ -45,12 +45,30 @@ class Entity extends Component {
 
     componentDidMount = async () => {
         try {
-            const devices = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmAgent})
-            const applications = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPackage})
-            const users = await this.props.glpi.getAllItems({itemtype: itemtype.User})
-            const invitations = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmInvitation})
-            const files = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFile})
-            const fleets = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmFleet})
+            const devices = await this.props.glpi.searchItems({ 
+                itemtype: itemtype.PluginFlyvemdmAgent
+            })
+            const applications = await this.props.glpi.searchItems({ 
+                itemtype: itemtype.PluginFlyvemdmPackage
+            })
+            const users = await this.props.glpi.searchItems({ 
+                itemtype: itemtype.User
+            })
+            const invitations = await this.props.glpi.searchItems({ 
+                itemtype: itemtype.PluginFlyvemdmInvitation
+            })
+            const files = await this.props.glpi.searchItems({ 
+                itemtype: itemtype.PluginFlyvemdmFile
+            })
+            const fleets = await this.props.glpi.searchItems({ 
+                itemtype: itemtype.PluginFlyvemdmFleet
+            })
+            const policies = await this.props.glpi.searchItems({ 
+                itemtype: itemtype.PluginFlyvemdmPolicy
+            })
+            const policyCategories = await this.props.glpi.searchItems({ 
+                itemtype: itemtype.PluginFlyvemdmPolicyCategory
+            })
             const { active_profile } = await this.props.glpi.getActiveProfile()
             let entityID
             if (Array.isArray(active_profile.entities)) {
@@ -62,19 +80,17 @@ class Entity extends Component {
                     }
                 }
             }
-            const policies = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPolicy})
-            const policyCategories = await this.props.glpi.getAllItems({itemtype: itemtype.PluginFlyvemdmPolicyCategory})
             this.setState({
                 isLoading: false,
-                entityID,
-                devicesCurretlymanaged: `${devices.length}`,
-                applicationsUploaded: `${applications.length}`,
-                numberUsers: `${users.length}`,
-                invitationsSent: `${invitations.length}`,
-                filesUploaded: `${files.length}`,
-                fleetsCurrentlyManaged: `${fleets.length}`,
-                typesPolicies: `${policies.length}`,
-                numberCategoriesForPolicies: `${policyCategories.length}`
+                entityID: `${entityID}`,
+                devicesCurretlymanaged: `${devices.totalcount}`,
+                applicationsUploaded: `${applications.totalcount}`,
+                numberUsers: `${users.totalcount}`,
+                invitationsSent: `${invitations.totalcount}`,
+                filesUploaded: `${files.totalcount}`,
+                fleetsCurrentlyManaged: `${fleets.totalcount}`,
+                typesPolicies: `${policies.totalcount}`,
+                numberCategoriesForPolicies: `${policyCategories.totalcount}`
             })
         } catch (error) {
             this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
