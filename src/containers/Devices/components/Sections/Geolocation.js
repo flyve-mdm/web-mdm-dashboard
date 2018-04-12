@@ -42,11 +42,7 @@ export default class Geolocation extends Component {
             })
             this.handleRefresh()
         } catch (error) {
-            this.props.setNotification({
-                title: error[0],
-                body: error[1],
-                type: 'alert'
-            })
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
         }
     }
 
@@ -56,29 +52,25 @@ export default class Geolocation extends Component {
             const response = await this.props.glpi.getSubItems({
                 itemtype: itemtype.Computer, 
                 id: computers_id, 
-                subItemtype: 'PluginFlyvemdmGeolocation'
+                subItemtype: itemtype.PluginFlyvemdmGeolocation
             })    
             this.setState({
                 locations: response,
                 isLoading: false
             })
-        } catch (e) {
-            this.props.setNotification({
-                title: I18n.t('commons.error'),
-                body: I18n.t('notifications.problems_loading_data'),
-                type: 'alert'
-            })
+        } catch (error) {
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.setState({  
                 isLoading: false 
             })
         }
     }
 
-    showLocations = (location) => {
+    showLocations = (publicURL) => {
         let showLocations = this.state.showLocations.map(element => element)
-        const index = showLocations.map((e) => { return e['PluginFlyvemdmGeolocation.id'] }).indexOf(location['PluginFlyvemdmGeolocation.id'])
+        const index = showLocations.map((e) => { return e.id }).indexOf(publicURL.id)
         if (index === -1) {
-            showLocations.push(location)
+            showLocations.push(publicURL)
         } else {
             showLocations.splice(index, 1)
         }

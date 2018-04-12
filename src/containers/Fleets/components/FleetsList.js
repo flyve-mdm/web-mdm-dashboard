@@ -8,7 +8,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 export default class FleetsList extends Component {
 
@@ -64,7 +64,7 @@ export default class FleetsList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push(`${location.pathname}/app/fleets`)
+            this.props.history.push(`${publicURL}/app/fleets`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -74,7 +74,7 @@ export default class FleetsList extends Component {
                     count: 15
                 }
             })
-            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
             this.setState({
                 isLoading: false,
                 order: fleets.order,
@@ -82,6 +82,7 @@ export default class FleetsList extends Component {
             })
 
         } catch (error) {
+            this.props.handleMessage({notification: this.props.setNotification, type: 'alert', error: error})
             this.setState({
                 isLoading: false,
                 order: "ASC"
@@ -90,7 +91,7 @@ export default class FleetsList extends Component {
     }
 
     handleAdd = () => {
-        this.props.history.push(`${location.pathname}/app/fleets/add`)
+        this.props.history.push(`${publicURL}/app/fleets/add`)
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -99,7 +100,7 @@ export default class FleetsList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.props.history.push(`${location.pathname}/app/fleets`)
+        this.props.history.push(`${publicURL}/app/fleets`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -117,10 +118,10 @@ export default class FleetsList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`${location.pathname}/app/fleets/${itemSelected[0]["PluginFlyvemdmFleet.id"]}`)
+            this.props.history.push(`${publicURL}/app/fleets/${itemSelected[0]["PluginFlyvemdmFleet.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push(`${location.pathname}/app/fleets/edit/`)
+            this.props.history.push(`${publicURL}/app/fleets/edit/`)
         }
     }
 
@@ -162,15 +163,7 @@ export default class FleetsList extends Component {
             }
 
         } catch (error) {
-            if (error.length > 1) {
-
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
-            }
-
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.props.changeSelectionMode(false)
             this.props.changeSelectedItems([])
 
@@ -192,14 +185,14 @@ export default class FleetsList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 6] } })
+            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 5, 6] } })
 
             this.setState({
                 isLoading: false,
                 order: fleets.order,
                 itemList: new WinJS.Binding.List(fleets.data)
             })
-            this.props.history.push(`${location.pathname}/app/fleets`)
+            this.props.history.push(`${publicURL}/app/fleets`)
 
         } catch (error) {
             this.setState({
@@ -229,7 +222,7 @@ export default class FleetsList extends Component {
 
     loadMoreData = async () => {
         try {
-            const Fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            const Fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
 
             for (const item in Fleets.data) {
                 this.state.itemList.push(Fleets.data[item])

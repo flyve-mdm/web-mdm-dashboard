@@ -8,7 +8,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 export default class ApplicationsList extends Component {
 
@@ -65,7 +65,7 @@ export default class ApplicationsList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push(`${location.pathname}/app/applications`)
+            this.props.history.push(`${publicURL}/app/applications`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -97,7 +97,7 @@ export default class ApplicationsList extends Component {
     }
 
     handleAdd = () => {
-        this.props.history.push(`${location.pathname}/app/applications/add`)
+        this.props.history.push(`${publicURL}/app/applications/add`)
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -106,7 +106,7 @@ export default class ApplicationsList extends Component {
     }
 
     handleToggleSelectionMode = () => {
-        this.props.history.push(`${location.pathname}/app/applications`)
+        this.props.history.push(`${publicURL}/app/applications`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -124,10 +124,10 @@ export default class ApplicationsList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`${location.pathname}/app/applications/${itemSelected[0]["PluginFlyvemdmPackage.id"]}`)
+            this.props.history.push(`${publicURL}/app/applications/${itemSelected[0]["PluginFlyvemdmPackage.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push(`${location.pathname}/app/applications/edit/`)
+            this.props.history.push(`${publicURL}/app/applications/edit/`)
         }
     }
 
@@ -169,15 +169,7 @@ export default class ApplicationsList extends Component {
             }
             
         } catch (error) {
-            if (error.length > 1) {
-
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
-            }
-
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.props.changeSelectionMode(false)
             this.props.changeSelectedItems([])
 
@@ -206,7 +198,7 @@ export default class ApplicationsList extends Component {
                 order: response.order,
                 itemList: new WinJS.Binding.List(response.data)
             })
-            this.props.history.push(`${location.pathname}/app/applications`)
+            this.props.history.push(`${publicURL}/app/applications`)
 
         } catch (error) {
             this.setState({
@@ -256,7 +248,7 @@ export default class ApplicationsList extends Component {
     }
 
     handleAdd = () => {
-        this.props.history.push(`${location.pathname}/app/applications/add`)
+        this.props.history.push(`${publicURL}/app/applications/add`)
         this.props.changeSelectionMode(false)
         this.props.changeSelectedItems([])
         if (this.listView) {

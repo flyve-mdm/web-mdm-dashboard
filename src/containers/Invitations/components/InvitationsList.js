@@ -9,7 +9,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 export default class InvitationsList extends Component {
 
@@ -70,7 +70,7 @@ export default class InvitationsList extends Component {
     })
 
     handleToggleSelectionMode = () => {
-        this.props.history.push(`${location.pathname}/app/invitations`)
+        this.props.history.push(`${publicURL}/app/invitations`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -89,13 +89,13 @@ export default class InvitationsList extends Component {
         this.props.changeSelectedItems(itemSelected)
 
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`${location.pathname}/app/invitations/${itemSelected[0]["PluginFlyvemdmInvitation.id"]}`)
+            this.props.history.push(`${publicURL}/app/invitations/${itemSelected[0]["PluginFlyvemdmInvitation.id"]}`)
         }
     }
 
-    handleRefresh = () => {
+    handleRefresh = async () => {
         try {
-            this.props.history.push(`${location.pathname}/app/invitations`)
+            this.props.history.push(`${publicURL}/app/invitations`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -104,16 +104,15 @@ export default class InvitationsList extends Component {
                     page: 1,
                     count: 15
                 }
-            }, async () => {
-                const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page)-1}` } })
-                this.setState({
-                    isLoading: false,
-                    order: response.order,
-                    itemList: BuildItemList(response)
-                })
-                this.props.changeSelectedItems([])
+            })
+            const invitations = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            this.setState({
+                isLoading: false,
+                order: invitations.order,
+                itemList: BuildItemList(invitations)
             })
         } catch (e) {
+            this.props.handleMessage({notification: this.props.setNotification, error: e, type:'alert'})
             this.setState({
                 isLoading: false,
                 order: "ASC"
@@ -160,15 +159,7 @@ export default class InvitationsList extends Component {
             }
             
         } catch (error) {
-            if (error.length > 1) {
-
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
-            }
-
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.props.changeSelectionMode(false)
             this.props.changeSelectedItems([])
 
@@ -190,14 +181,14 @@ export default class InvitationsList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3] } })
+            const invitations = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3] } })
 
             this.setState({
                 isLoading: false,
-                order: response.order,
-                itemList: BuildItemList(response)
+                order: invitations.order,
+                itemList: BuildItemList(invitations)
             })
-            this.props.history.push(`${location.pathname}/app/invitations`)
+            this.props.history.push(`${publicURL}/app/invitations`)
 
         } catch (error) {
             this.setState({
@@ -231,11 +222,7 @@ export default class InvitationsList extends Component {
                 isLoading: false
             })
         } catch (error) {
-            this.props.setNotification({
-                title: error[0],
-                body: error[1],
-                type: 'alert'
-            })
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.handleToggleSelectionMode()
             this.setState({
                 isLoading: false
@@ -284,7 +271,7 @@ export default class InvitationsList extends Component {
     }
 
     handleAdd = () => {
-        this.props.history.push(`${location.pathname}/app/invitations/add`)
+        this.props.history.push(`${publicURL}/app/invitations/add`)
         this.props.changeSelectionMode(false)
         this.setState({ selectedItems: [] })
         if (this.listView) {
@@ -321,24 +308,28 @@ export default class InvitationsList extends Component {
             listComponent = <Loader count={3} />
         } else {
             if (this.state.itemList !== undefined) {
-                listComponent = (
-                    <ReactWinJS.ListView
-                        ref={(listView) => { this.listView = listView }}
-                        onLoadingStateChanged={this.onLoadingStateChanged}
-                        className="contentListView win-selectionstylefilled"
-                        style={{ height: 'calc(100% - 48px)' }}
-                        itemDataSource={this.state.itemList.dataSource}
-                        groupDataSource={this.state.itemList.groups.dataSource}
-                        layout={this.state.layout}
-                        itemTemplate={this.ItemListRenderer}
-                        groupHeaderTemplate={this.groupHeaderRenderer}
-                        footerComponent={<Loader />}
-                        onFooterVisibilityChanged={this.showFooterList}
-                        selectionMode={this.props.selectionMode ? 'multi' : 'single'}
-                        tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
-                        onSelectionChanged={this.handleSelectionChanged}
-                    />
-                )
+                if (this.state.itemList.length > 0) {
+                    listComponent = (
+                        <ReactWinJS.ListView
+                            ref={(listView) => { this.listView = listView }}
+                            onLoadingStateChanged={this.onLoadingStateChanged}
+                            className="contentListView win-selectionstylefilled"
+                            style={{ height: 'calc(100% - 48px)' }}
+                            itemDataSource={this.state.itemList.dataSource}
+                            groupDataSource={this.state.itemList.groups.dataSource}
+                            layout={this.state.layout}
+                            itemTemplate={this.ItemListRenderer}
+                            groupHeaderTemplate={this.groupHeaderRenderer}
+                            footerComponent={<Loader />}
+                            onFooterVisibilityChanged={this.showFooterList}
+                            selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+                            tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
+                            onSelectionChanged={this.handleSelectionChanged}
+                        />
+                    )
+                } else {
+                    listComponent = <EmptyMessage message={I18n.t('invitations.not_found')} icon={this.props.icon} showIcon={true} />
+                }
             } else {
                 listComponent = <EmptyMessage message={I18n.t('invitations.not_found')} icon={this.props.icon} showIcon={true} />
             }

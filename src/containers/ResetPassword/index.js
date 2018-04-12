@@ -5,10 +5,11 @@ import { bindActionCreators } from 'redux'
 import Loading from '../../components/Loading'
 import ConstructInputs from '../../components/Forms'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import { fetchResetPassword } from '../../store/authentication/actions'
 import { resetPassword, changeState, buildDataArray } from './actions';
 import { I18n } from 'react-i18nify'
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -50,7 +51,7 @@ class ResetPassword extends Component {
         if (token) {
             this.setState({ token })
         } else {
-            this.props.history.push(`${location.pathname}/`)
+            this.props.history.push(`${publicURL}/`)
         }
     }
 
@@ -80,7 +81,7 @@ class ResetPassword extends Component {
                     <button
                         className="win-button"
                         type="button"
-                        onClick={() => this.props.history.push(`${location.pathname}/`)}
+                        onClick={() => this.props.history.push(`${publicURL}/`)}
                     >
                         {I18n.t('forgot_password.go_home')}
                     </button>
@@ -117,7 +118,7 @@ ResetPassword.defaultProps = {
 }
 
 export default withAuthenticationLayout(
-    connect(mapStateToProps, mapDispatchToProps)(ResetPassword), {
+    connect(mapStateToProps, mapDispatchToProps)(withHandleMessages(ResetPassword)), {
         centerContent: true
     }
 )

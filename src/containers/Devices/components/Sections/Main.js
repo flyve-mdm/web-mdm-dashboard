@@ -6,7 +6,7 @@ import Loading from '../../../../components/Loading'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
-import location from '../../../../shared/location'
+import publicURL from '../../../../shared/publicURL'
 
 export default class Main extends Component {
 
@@ -48,12 +48,8 @@ export default class Main extends Component {
                 }) 
             })
         } catch (error) {
-            this.props.setNotification({
-                title: I18n.t('commons.error'),
-                body: I18n.t('notifications.problems_loading_data'),
-                type: "alert"
-            }) 
-            this.props.history.push(`${location.pathname}/app/devices`)
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+            this.props.history.push(`${publicURL}/app/devices`)
         }
     }
 
@@ -83,19 +79,13 @@ export default class Main extends Component {
                 this.props.changeAction('reload')
             })
             .catch((error) => {
-                if (error.length > 1) {
-                    this.props.setNotification({
-                        title: error[0],
-                        body: error[1],
-                        type: 'alert'
-                    })
-                }
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             })
         }
     }
 
     handleEdit = () => {
-        const path = `${location.pathname}/app/devices/${this.props.id}/edit`
+        const path = `${publicURL}/app/devices/${this.props.id}/edit`
         this.props.history.push(path)
     }
 
@@ -120,11 +110,7 @@ export default class Main extends Component {
                     this.handleRefresh()
                 })
             } catch (error) {
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
                 this.setState({ sendingPing: false })
             }
         })

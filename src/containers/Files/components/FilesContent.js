@@ -5,7 +5,7 @@ import Confirmation from '../../../components/Confirmation'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 export default class FilesContent extends Component {
 
@@ -18,7 +18,7 @@ export default class FilesContent extends Component {
 
     componentWillMount() {
         if (this.props.selectedItems.length === 0) {
-            const path = `${location.pathname}/app/files`
+            const path = `${publicURL}/app/files`
             this.props.history.push(path)
         }
     }
@@ -60,19 +60,7 @@ export default class FilesContent extends Component {
             }
 
         } catch (error) {
-            if (error.length > 1) {
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
-            } else {
-                this.props.setNotification({
-                    title: I18n.t('commons.error'),
-                    body: `${error}`,
-                    type: 'alert'
-                })
-            }
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.setState({
                 isLoading: false
             })

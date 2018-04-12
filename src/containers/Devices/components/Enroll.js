@@ -38,13 +38,10 @@ export default class Enroll extends Component {
                 this.props.changeAction('reload')
             }
         } catch (error) {
-            if (error.length > 1) {
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
-            }
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+            this.setState({
+                isLoading: false
+            })
         }
     }
 

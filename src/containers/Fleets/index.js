@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import FleetsList from './components/FleetsList'
 import { uiSetNotification } from '../../store/ui/actions'
@@ -8,7 +9,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -60,7 +61,7 @@ class Fleets extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.history.location.pathname === `${location.pathname}/app/fleets` && this.state.selectedItems.length > 0) {
+    if (this.props.history.location.pathname === `${publicURL}/app/fleets` && this.state.selectedItems.length > 0) {
       this.changeSelectedItems([])
     }
   }
@@ -76,7 +77,8 @@ class Fleets extends Component {
       changeAction: this.changeAction,
       setNotification: this.props.actions.setNotification,
       history: this.props.history,
-      glpi: this.props.glpi
+      glpi: this.props.glpi,
+      handleMessage: this.props.handleMessage
     }
   }
 
@@ -91,9 +93,9 @@ class Fleets extends Component {
     }
 
     if (this.state.mode === 'small') {
-      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${location.pathname}/app/fleets`) ||
-        this.props.history.location.pathname === `${location.pathname}/app/fleets` ||
-        (this.props.history.location.pathname === `${location.pathname}/app/fleets` &&
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/fleets`) ||
+        this.props.history.location.pathname === `${publicURL}/app/fleets` ||
+        (this.props.history.location.pathname === `${publicURL}/app/fleets` &&
           this.state.selectionMode)) {
         styles.display = 'inline-block'
       } else {
@@ -116,9 +118,9 @@ class Fleets extends Component {
     }
 
     if (this.state.mode === 'small') {
-      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${location.pathname}/app/fleets`) ||
-        this.props.history.location.pathname === `${location.pathname}/app/fleets` ||
-        (this.props.history.location.pathname === `${location.pathname}/app/fleets` &&
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/fleets`) ||
+        this.props.history.location.pathname === `${publicURL}/app/fleets` ||
+        (this.props.history.location.pathname === `${publicURL}/app/fleets` &&
           this.state.selectionMode)) {
         styles.display = 'none'
       } else {
@@ -164,4 +166,4 @@ class Fleets extends Component {
 export default connect(
   null,
   mapDispatchToProps
-)(withGLPI(Fleets))
+)(withGLPI(withHandleMessages(Fleets)))

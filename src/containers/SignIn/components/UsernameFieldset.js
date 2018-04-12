@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { I18n } from 'react-i18nify'
 import { selfRegistration } from '../../../config/config.json'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 class UsernameFieldset extends Component {
 
@@ -72,7 +72,7 @@ class UsernameFieldset extends Component {
                         <p>
                             {I18n.t('login.no_account')}
                             &nbsp;
-                            <Link to={`${location.pathname}/signUp`}>
+                            <Link to={`${publicURL}/signUp`}>
                                 {I18n.t('login.create_one')}
                             </Link>
                         </p>

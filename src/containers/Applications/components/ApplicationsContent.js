@@ -8,7 +8,7 @@ import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 export default class ApplicationsContent extends Component {
 
@@ -50,14 +50,12 @@ export default class ApplicationsContent extends Component {
                 })
                 this.props.changeAction('reload')
                 this.props.changeSelectionMode(false)
-            } catch (error) {                
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
+            } catch (error) {
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                this.setState({
+                    isLoading: false
                 })
             }
-            
         }
     }
 
@@ -74,12 +72,8 @@ export default class ApplicationsContent extends Component {
                 }) 
             })
         } catch (error) {
-            this.props.setNotification({
-                title: I18n.t('commons.error'),
-                body: I18n.t('notifications.problems_loading_data'),
-                type: "alert"
-            }) 
-            this.props.history.push(`${location.pathname}/app/applications`)
+            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+            this.props.history.push(`${publicURL}/app/applications`)
         }
     }
 
@@ -107,7 +101,7 @@ export default class ApplicationsContent extends Component {
                                 <div className="detail">{BytesToSize(this.state.data["filesize"])}</div>
                                 <span className="source">{this.state.data["source"]}</span>
                                 <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.history.push(`${location.pathname}/app/applications/${this.state.id}/edit`)} />
+                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)} />
                                 <span className="deleteIcon" onClick={this.handleDelete} />
                             </div>
                         </div>

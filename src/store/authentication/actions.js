@@ -3,6 +3,7 @@ import glpi from '../../shared/glpiApi'
 import config from '../../config/config.json'
 import { uiTransactionFinish, uiTransactionStart } from '../ui/actions'
 import itemtype from '../../shared/itemtype'
+import handleMessage from '../../shared/handleMessage'
 
 // Actions
 
@@ -85,11 +86,7 @@ export const fetchSignIn = (username, password) => {
       }))
     }).catch( error => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage({
-        title: config.appName,
-        body: `${error[0]}\n${error[1]}`,
-        type: 'warning'
-      }))
+      dispatch(changeNotificationMessage(handleMessage({type: 'warning', message: error})))
     })
   }
 }
@@ -129,11 +126,7 @@ export const fetchCaptcha = () => {
       dispatch(uiTransactionFinish())
     } catch (error) {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage({
-        title: config.appName,
-        body: `${error[0]}\n${error[1]}`,
-        type: 'warning'
-      }))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
     }
   }
 }
@@ -158,11 +151,7 @@ export const fetchSignUp = (data) => {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage({
-        title: config.appName,
-        body: `${error[0]}\n${error[1]}`,
-        type: 'warning' 
-      }))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
     })
   }
 }
@@ -187,11 +176,7 @@ export const fetchRecoverPassword = (email) => {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage({
-        title: config.APP_NAME,
-        body: `${error[0]}\n${error[1]}`,
-        type: 'warning'
-      }))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
     })
   }
 }
@@ -216,11 +201,7 @@ export const fetchResetPassword = ({email, token, newPassword}) => {
       })
       .catch((error) => {
         dispatch(uiTransactionFinish())
-        dispatch(changeNotificationMessage({
-          title: config.APP_NAME,
-          body: `${error[0]}\n${error[1]}`,
-          type: 'warning'
-        }))
+        dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
       })
   }
 }
@@ -235,11 +216,7 @@ export const fetchPasswordConfiguration = () => {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage({
-        title: config.appName,
-        body: 'Error, password configuration no fetched',
-        type: 'warning'
-      }))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
     })
   }
 }
@@ -261,11 +238,7 @@ export function fetchSendFeedback (data) {
     })
     .catch((error) => {
       dispatch(uiTransactionFinish())
-      dispatch(changeNotificationMessage({
-        title: config.appName,
-        body: 'Error, feedback no send',
-        type: 'warning'
-      }))
+      dispatch(changeNotificationMessage(handleMessage({ type: 'warning', message: error })))
     })
   }
 }

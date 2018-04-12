@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import withGLPI from '../../hoc/withGLPI'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import { uiSetNotification } from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -23,7 +24,7 @@ class SearchEngine extends Component {
         this.state = {
             query: null,
             itemType: 'computer',
-            itemResults: [],
+            itemResults: undefined,
             fields: [],
             isLoading: true
         }
@@ -49,7 +50,7 @@ class SearchEngine extends Component {
 
         this.setState({
             query: null,
-            itemResults: [],
+            itemResults: undefined,
             fields: [],
             isLoading: true
         })
@@ -79,15 +80,17 @@ class SearchEngine extends Component {
         this.setState({ query: query })
     }
 
-    handleOnSearch = () => {
+    handleOnSearch = async () => {
         /*
         * Handle click event in the search button
         */
-        this.props.glpi.searchItems({ itemtype: this.state.itemType, criteria: this.normalizeQuery() }).then(
-            value => {
-                this.setState({ itemResults: value.data })
-            })
-
+       try {
+           const search = await this.props.glpi.searchItems({ itemtype: this.state.itemType, criteria: this.normalizeQuery() })
+           this.setState({ itemResults: search.data ? search.data : [] }) 
+           
+       } catch (error) {
+           this.setState({ itemResults: [] })
+       }
     }
 
     render() {
@@ -149,13 +152,20 @@ class SearchEngine extends Component {
                                     {I18n.t('commons.search')}
                                 </button> 
                             ): null
-                            : <p>{I18n.t('commons.itemType_not_found')}</p>
+                            : <p>{I18n.t('search_engine.itemType_not_found')}</p>
                 }
-                <Panel
-                    itemType={this.state.itemType}
-                    itemResults={this.state.itemResults.length > 0 ? arrayResultsWithFields : []}
-                    itemFields={this.state.fields} 
-                />
+                {
+                    this.state.itemResults ?
+                        this.state.itemResults.length > 0 ?
+                            <Panel
+                                itemType={this.state.itemType}
+                                itemResults={this.state.itemResults.length > 0 ? arrayResultsWithFields : []}
+                                itemFields={this.state.fields}
+                            />
+                            : <p>{I18n.t('search_engine.item_not_found')}</p>
+                    : null
+                }
+                
             </ContentPane>
         )
     }
@@ -164,4 +174,4 @@ class SearchEngine extends Component {
 export default connect(
     null,
     mapDispatchToProps
-)(withGLPI(SearchEngine))
+)(withGLPI(withHandleMessages(SearchEngine)))

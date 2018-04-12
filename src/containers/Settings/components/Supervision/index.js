@@ -10,6 +10,7 @@ import ContentPane from '../../../../components/ContentPane'
 import { I18n } from 'react-i18nify'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
 
 function mapDispatchToProps(dispatch) {
@@ -20,16 +21,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Supervision extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
-            name: undefined,
-            phone: undefined,
-            website: undefined,
-            email: undefined,
-            address: undefined,
-            entityID: undefined,
+            name: '',
+            phone: '',
+            website: '',
+            email: '',
+            address: '',
+            entityID: '',
             isLoading: true
         }
     }
@@ -55,12 +55,8 @@ class Supervision extends Component {
                     type: 'success'
                 })
             } catch (error) {
-                this.setState ({isLoading: false})            
-                this.props.actions.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
+                this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                this.setState ({isLoading: false})
             }
         })
     }
@@ -74,10 +70,20 @@ class Supervision extends Component {
     componentDidMount = async () => {
         try {
             const { active_profile } = await this.props.glpi.getActiveProfile()
-            const entity = await this.props.glpi.getAnItem({itemtype: itemtype.Entity, id: active_profile.entities[0].id})
+            let entityID
+            if (Array.isArray(active_profile.entities)) {
+                entityID = active_profile.entities[0].id
+            } else {
+                for (const key in active_profile.entities) {
+                    if (active_profile.entities.hasOwnProperty(key)) {
+                        entityID = active_profile.entities[key].id
+                    }
+                }
+            }
+            const entity = await this.props.glpi.getAnItem({itemtype: itemtype.Entity, id: entityID})
             this.setState ({
                 isLoading: false,
-                entityID: active_profile.entities[0].id,
+                entityID,
                 name: validateData(entity.name),
                 phone: validateData(entity.phonenumber),
                 website: validateData(entity.website),
@@ -85,12 +91,8 @@ class Supervision extends Component {
                 address: validateData(entity.address)
             })            
         } catch (error) {
-            this.setState ({isLoading: false})            
-            this.props.actions.setNotification({
-                title: error[0],
-                body: error[1],
-                type: 'alert'
-            })
+            this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+            this.setState ({isLoading: false})
         }
     }
 
@@ -131,4 +133,4 @@ Supervision.propTypes = {
     glpi: PropTypes.object.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(Supervision))
+export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(Supervision)))

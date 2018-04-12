@@ -10,7 +10,8 @@ import { connect } from 'react-redux'
 import { logout } from '../../../../store/authentication/actions'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
-import withGLPI from "../../../../hoc/withGLPI"
+import withGLPI from '../../../../hoc/withGLPI'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
 import { selfRegistration } from '../../../../config/config.json'
 import itemtype from '../../../../shared/itemtype'
 
@@ -32,7 +33,8 @@ class Security extends Component {
             passwordConfirmation: '',
             passwordConfiguration: undefined,
             forceValidation: false,
-            isLoading: false
+            isLoading: false,
+            currentUser: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : {}
         }
     }
 
@@ -44,10 +46,9 @@ class Security extends Component {
                 { isLoading: true}, 
                 async () => {
                     try {
-                        const currentUser = JSON.parse(localStorage.getItem('currentUser'))
                         await this.props.glpi.deleteItem({ 
                             itemtype: itemtype.User, 
-                            input: {id: currentUser.id }, 
+                            input: {id: this.state.currentUser.id}, 
                             queryString: { force_purge: true } 
                         })
                         this.props.actions.setNotification({
@@ -60,11 +61,7 @@ class Security extends Component {
                         localStorage.clear()
 
                     } catch (error) {
-                        this.props.setNotification({
-                            title: error[0],
-                            body: error[1],
-                            type: 'alert'
-                        })
+                        this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
                         this.setState({ isLoading: false })
                         this.changeMode('')
                     } 
@@ -104,53 +101,52 @@ class Security extends Component {
 
     savePassword = (e) => {
         e.preventDefault()
-        const password = this.buildDataArray()
-        let isCorrect = true
-
-        for (const key in password) {
-            if (password.hasOwnProperty(key)) {
-                const elements = password[key]
-                for (let index = 0; index < elements.length; index++) {
-                    const element = elements[index]
-                    if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect) 
-                        isCorrect = false
+        this.setState({ forceValidation: true }, () => {
+            const password = this.buildDataArray()
+            let isCorrect = true
+    
+            for (const key in password) {
+                if (password.hasOwnProperty(key)) {
+                    const elements = password[key]
+                    for (let index = 0; index < elements.length; index++) {
+                        const element = elements[index]
+                        if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect) 
+                            isCorrect = false
+                    }
                 }
             }
-        }
-
-        if (isCorrect) {
-            this.setState(
-                { isLoading: true}, 
-                async () => {
-                    try {
-                        await this.props.glpi.updateItem({
-                            itemtype: itemtype.User, 
-                            input: {
-                                password: this.state.password,
-                                password2: this.state.passwordConfirmation
-                            }
-                        })
-                        this.props.actions.setNotification({
-                            title: I18n.t('commons.success'),
-                            body: I18n.t('notifications.new_password_saved'),
-                            type: 'info'
-                        })
-                    } catch (error) {
-                        this.props.setNotification({
-                            title: error[0],
-                            body: error[1],
-                            type: 'alert'
-                        })
-                    } 
-                    this.setState({ isLoading: false })
-                    this.changeMode('')
-                }
-            )
-        } else {
-            this.setState({
-                forceValidation: true
-            })
-        }
+    
+            if (isCorrect) {
+                this.setState(
+                    { isLoading: true}, 
+                    async () => {
+                        try {
+                            await this.props.glpi.updateItem({
+                                itemtype: itemtype.User, 
+                                id: this.state.currentUser.id,
+                                input: {
+                                    password: this.state.password,
+                                    password2: this.state.passwordConfirmation
+                                }
+                            })
+                            this.props.actions.setNotification({
+                                title: I18n.t('commons.success'),
+                                body: I18n.t('notifications.new_password_saved'),
+                                type: 'success'
+                            })
+                        } catch (error) {
+                            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                        } 
+                        this.setState({ isLoading: false })
+                        this.changeMode('')
+                    }
+                )
+            } else {
+                this.setState({
+                    forceValidation: true
+                })
+            }
+        })
     }
 
     changeState = (name, value) => { 
@@ -362,4 +358,4 @@ Security.propTypes = {
     glpi: PropTypes.object.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(Security))
+export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(Security)))

@@ -4,9 +4,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UsernameFieldset from './components/UsernameFieldset'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import { fetchSignIn } from '../../store/authentication/actions'
 import { I18n } from "react-i18nify"
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 // Async Component
 import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
 import { Redirect } from 'react-router'
@@ -15,7 +16,6 @@ import { changeInput, changePhase, handleFormSubmit } from './actions'
 
 function mapStateToProps(state, props) {
     return {
-        isAuthenticated: state.auth.currentUser ? true : false,
         isLoading: state.ui.loading
     }
 }
@@ -43,8 +43,8 @@ class SignIn extends Component {
     }
 
     render () {
-        if (this.props.isAuthenticated) {
-            return <Redirect to={`${location.pathname}/app`}/>
+        if (localStorage.getItem('currentUser') && localStorage.getItem('sessionToken')) {
+            return <Redirect to={`${publicURL}/app`}/>
         } else {
             let form
             if (this.state.phase === 1) {
@@ -70,7 +70,6 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
@@ -79,4 +78,4 @@ SignIn.propTypes = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withAuthenticationLayout(SignIn, { centerContent: true }))
+)(withAuthenticationLayout(withHandleMessages(SignIn), { centerContent: true }))

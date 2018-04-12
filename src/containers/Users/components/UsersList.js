@@ -9,7 +9,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
-import location from '../../../shared/location'
+import publicURL from '../../../shared/publicURL'
 
 export default class UsersList extends Component {
     
@@ -72,7 +72,7 @@ export default class UsersList extends Component {
     })
 
     handleToggleSelectionMode = () => {
-        this.props.history.push(`${location.pathname}/app/users`)
+        this.props.history.push(`${publicURL}/app/users`)
         this.props.changeSelectionMode(!this.props.selectionMode)
         this.props.changeSelectedItems([])
         if (this.listView) {
@@ -90,16 +90,16 @@ export default class UsersList extends Component {
         }
         this.props.changeSelectedItems(itemSelected)
         if (index.length === 1 && !this.props.selectionMode) {
-            this.props.history.push(`${location.pathname}/app/users/${itemSelected[0]["User.id"]}`)
+            this.props.history.push(`${publicURL}/app/users/${itemSelected[0]["User.id"]}`)
         }
         if (index.length > 1 && !this.props.selectionMode) {
-            this.props.history.push(`${location.pathname}/app/users/edit/`)
+            this.props.history.push(`${publicURL}/app/users/edit/`)
         }
     }
 
     handleRefresh = async () => {
         try {
-            this.props.history.push(`${location.pathname}/app/users`)
+            this.props.history.push(`${publicURL}/app/users`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -125,24 +125,24 @@ export default class UsersList extends Component {
     }
 
     handleEdit = () => {
-        const path = `${location.pathname}/app/users/edit`
+        const path = `${publicURL}/app/users/edit`
         this.props.history.push(path)
     }
 
     handleDelete = async (eventObject) => {
-        try {
-            const isOK = await Confirmation.isOK(this.contentDialog)
-            if (isOK) {
-
-                let itemListToDelete = this.props.selectedItems.map((item) => {
-                    return {
-                        id: item["User.id"]
-                    }
-                })
-
-                this.setState({
-                    isLoading: true
-                }, async () => {
+        const isOK = await Confirmation.isOK(this.contentDialog)
+        if (isOK) {
+            
+            let itemListToDelete = this.props.selectedItems.map((item) => {
+                return {
+                    id: item["User.id"]
+                }
+            })
+            
+            this.setState({
+                isLoading: true
+            }, async () => {
+                try {
                     await this.props.glpi.deleteItem({ itemtype: itemtype.User, input: itemListToDelete, queryString: { force_purge: true } })
     
                     this.props.setNotification({
@@ -153,32 +153,22 @@ export default class UsersList extends Component {
                     this.props.changeSelectionMode(false)
                     this.props.changeSelectedItems([])
                     this.props.changeAction('reload')
-                })
-            } else {
-                this.props.changeSelectionMode(false)
-                this.props.changeSelectedItems([])
-                this.listView.winControl.selection.clear()
-            }
-            
-        } catch (error) {
-            if (error.length > 1) {
-
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
-            }
-
+                } catch (error) {
+                    this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                    this.props.changeSelectionMode(false)
+                    this.props.changeSelectedItems([])
+                    if (this.listView) {
+                        this.listView.winControl.selection.clear()
+                    }
+                    this.setState((prevState, props) => ({
+                        isLoading: false
+                    }))
+                }
+            })
+        } else {
             this.props.changeSelectionMode(false)
             this.props.changeSelectedItems([])
-            if (this.listView) {
-                this.listView.winControl.selection.clear()
-            }
-
-            this.setState((prevState, props) => ({
-                isLoading: false
-            }))
+            this.listView.winControl.selection.clear()
         }
     }
 
@@ -201,7 +191,7 @@ export default class UsersList extends Component {
                 order: response.order,
                 itemList: BuildItemList(response)
             })
-            this.props.history.push(`${location.pathname}/app/users`)
+            this.props.history.push(`${publicURL}/app/users`)
 
         } catch (error) {
             this.setState({

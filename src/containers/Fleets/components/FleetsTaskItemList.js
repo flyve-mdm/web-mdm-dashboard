@@ -84,7 +84,9 @@ class FleetsTaskItemList extends Component {
             case 'removeapp':
             case 'deployfile':
             case 'removefile':
-                this.props.updateValueTask(this.props.data, this.state.input)
+                if(this.state.input.trim()) {
+                    this.props.updateValueTask(this.props.data, this.state.input)
+                }
                 break
             default:
                 break
@@ -95,7 +97,10 @@ class FleetsTaskItemList extends Component {
         switch (this.props.data['PluginFlyvemdmPolicy.type']) {
             case 'deployapp':
             case 'deployfile':
-                this.props.updateValueTask(this.props.data, e.target.value)
+            case 'dropdown':
+                if(e.target.value.trim()) {
+                    this.props.updateValueTask(this.props.data, e.target.value)
+                }
                 break
             default:
                 this.setState({ input: e.target.value })

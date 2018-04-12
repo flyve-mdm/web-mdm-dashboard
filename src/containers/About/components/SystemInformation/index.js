@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import Loading from '../../../../components/Loading'
-import withGLPI from "../../../../hoc/withGLPI"
+import withGLPI from '../../../../hoc/withGLPI'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
 import PropTypes from 'prop-types'
 import itemtype from '../../../../shared/itemtype'
 import { uiSetNotification } from '../../../../store/ui/actions'
@@ -33,10 +34,9 @@ class SystemInformation extends Component {
         plugins: plugins
       })
     } catch (error) {
-      this.props.actions.setNotification({
-        title: error[0],
-        body: error[1],
-        type: 'alert'
+      this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+      this.setState({
+        isLoading: false
       })
     }
   }
@@ -79,4 +79,4 @@ SystemInformation.propTypes = {
   glpi: PropTypes.object.isRequired
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(SystemInformation))
+export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(SystemInformation)))

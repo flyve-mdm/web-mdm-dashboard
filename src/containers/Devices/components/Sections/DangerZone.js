@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Confirmation from '../../../../components/Confirmation'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../../shared/itemtype'
-import location from '../../../../shared/location'
+import publicURL from '../../../../shared/publicURL'
 
 class DangerZone extends Component {
 
@@ -22,13 +22,9 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction('reload')
-                this.props.history.push(`${location.pathname}/app/devices`)
+                this.props.history.push(`${publicURL}/app/devices`)
             } catch (error) {
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
         }
     }
@@ -48,13 +44,9 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction('reload')
-                this.props.history.push(`${location.pathname}/app/devices`)
+                this.props.history.push(`${publicURL}/app/devices`)
             } catch (error) {
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
         }
     }
@@ -73,13 +65,9 @@ class DangerZone extends Component {
                     type: 'success'
                 })
                 this.props.changeAction('reload')
-                this.props.history.push(`${location.pathname}/app/devices`)
+                this.props.history.push(`${publicURL}/app/devices`)
             } catch (error) {
-                this.props.setNotification({
-                    title: error[0],
-                    body: error[1],
-                    type: 'alert'
-                })
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
         }
     }

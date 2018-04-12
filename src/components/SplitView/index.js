@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { logout } from '../../store/authentication/actions'
 import { I18n } from "react-i18nify"
-import location from '../../shared/location'
+import publicURL from '../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -46,50 +46,50 @@ class SplitView extends React.Component {
                     <div className="splitview-wrapper-wrapper__div">
                       <section className="splitview-wrapped-navbar-wrapped-top__section">
                         <ImgWithPopper
-                          to={`${location.pathname}/app`}
+                          to={`${publicURL}/app`}
                           alt='Flyve MDM Dashboard'
                           img={require('../../assets/images/dashboard.svg')}
                           title={I18n.t('commons.dashboard')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${location.pathname}/app/devices`}
+                          to={`${publicURL}/app/devices`}
                           iconName='deviceIcon'
                           title={I18n.t('commons.device')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${location.pathname}/app/invitations`}
+                          to={`${publicURL}/app/invitations`}
                           iconName='emailIcon'
                           title={I18n.t('commons.invitations')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${location.pathname}/app/fleets`}
+                          to={`${publicURL}/app/fleets`}
                           iconName='goToStartIcon'
                           title={I18n.t('commons.fleets')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${location.pathname}/app/files`}
+                          to={`${publicURL}/app/files`}
                           iconName='filesIcon'
                           title={I18n.t('commons.files')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${location.pathname}/app/applications`}
+                          to={`${publicURL}/app/applications`}
                           iconName='switchAppsIcon'
                           title={I18n.t('commons.applications')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${location.pathname}/app/users`}
+                          to={`${publicURL}/app/users`}
                           iconName='peopleIcon'
                           title={I18n.t('commons.users')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${location.pathname}/app/search`}
+                          to={`${publicURL}/app/search`}
                           iconName='searchIcon'
                           title={I18n.t('commons.search_or_other')}
                           disabled={this.props.expanded}
@@ -97,13 +97,13 @@ class SplitView extends React.Component {
                       </section>
                       <section className="splitview-wrapped-navbar-wrapped-bottom__section">
                         <IconWithPopper
-                          to={`${location.pathname}/app/settings`}
+                          to={`${publicURL}/app/settings`}
                           iconName='settingsIcon'
                           title={I18n.t('commons.setting_flyve_mdm')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
-                          to={`${location.pathname}/app/about`}
+                          to={`${publicURL}/app/about`}
                           iconName='contactInfoIcon'
                           title={I18n.t('commons.about_flyve_mdm')}
                           disabled={this.props.expanded}
@@ -125,18 +125,18 @@ class SplitView extends React.Component {
                         this.props.contract && '--closing'
                       }`}>
                       <section className="splitview-wrapped-navbar-wrapped-top__section --description">
-                        <SpanWithPopper description={I18n.t('commons.dashboard')} to={`${location.pathname}/app`} />
-                        <SpanWithPopper description={I18n.t('commons.devices')} to={`${location.pathname}/app/devices`} />
-                        <SpanWithPopper description={I18n.t('commons.invitations')} to={`${location.pathname}/app/invitations`} />
-                        <SpanWithPopper description={I18n.t('commons.fleets')} to={`${location.pathname}/app/fleets`} />
-                        <SpanWithPopper description={I18n.t('commons.files')} to={`${location.pathname}/app/files`} />
-                        <SpanWithPopper description={I18n.t('commons.applications')} to={`${location.pathname}/app/applications`} />
-                        <SpanWithPopper description={I18n.t('commons.users')} to={`${location.pathname}/app/users`} />
-                        <SpanWithPopper description={I18n.t('commons.search')} to={`${location.pathname}/app/search`} />
+                        <SpanWithPopper description={I18n.t('commons.dashboard')} to={`${publicURL}/app`} />
+                        <SpanWithPopper description={I18n.t('commons.devices')} to={`${publicURL}/app/devices`} />
+                        <SpanWithPopper description={I18n.t('commons.invitations')} to={`${publicURL}/app/invitations`} />
+                        <SpanWithPopper description={I18n.t('commons.fleets')} to={`${publicURL}/app/fleets`} />
+                        <SpanWithPopper description={I18n.t('commons.files')} to={`${publicURL}/app/files`} />
+                        <SpanWithPopper description={I18n.t('commons.applications')} to={`${publicURL}/app/applications`} />
+                        <SpanWithPopper description={I18n.t('commons.users')} to={`${publicURL}/app/users`} />
+                        <SpanWithPopper description={I18n.t('commons.search')} to={`${publicURL}/app/search`} />
                       </section>
                       <section className="splitview-wrapped-navbar-wrapped-bottom__section --description">
-                        <SpanWithPopper description={I18n.t('commons.setting_flyve_mdm')} to={`${location.pathname}/app/settings`} />
-                        <SpanWithPopper description={I18n.t('commons.about_flyve_mdm')} to={`${location.pathname}/app/about`} />
+                        <SpanWithPopper description={I18n.t('commons.setting_flyve_mdm')} to={`${publicURL}/app/settings`} />
+                        <SpanWithPopper description={I18n.t('commons.about_flyve_mdm')} to={`${publicURL}/app/about`} />
                         <SpanWithPopper description={I18n.t('commons.logout')} click={this.logout} />
                       </section>
                     </div>

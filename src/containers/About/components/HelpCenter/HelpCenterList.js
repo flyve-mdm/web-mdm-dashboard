@@ -2,15 +2,16 @@ import React, { Component } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import { I18n } from "react-i18nify"
-import withGLPI from "../../../../hoc/withGLPI"
-import Loading from "../../../../components/Loading"
+import { I18n } from 'react-i18nify'
+import withGLPI from '../../../../hoc/withGLPI'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
+import Loading from '../../../../components/Loading'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
 import itemtype from '../../../../shared/itemtype'
-import location from '../../../../shared/location'
+import publicURL from '../../../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -24,7 +25,7 @@ class HelpCenterList extends Component {
         super(props)
         this.state = {
             articles: undefined,
-            list: undefined,
+            list: {},
             suggestionList: undefined,
             layout: { type: WinJS.UI.ListLayout },
             labelList: I18n.t('about.help_center.recent_articles'),
@@ -50,20 +51,19 @@ class HelpCenterList extends Component {
                 isLoading: false
             })
         } catch (error) {
-            this.props.actions.setNotification({
-                title: error[0],
-                body: error[1],
-                type: 'alert'
+            this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+            this.setState({
+                isLoading: false
             })
         }
     }
 
     redirectToArticle = article => (
-        this.props.history.push(`${location.pathname}/app/about/help/${article}`)
+        this.props.history.push(`${publicURL}/app/about/help/${article}`)
     )
 
     redirectToFeedBack = () => {
-        this.props.history.push(`${location.pathname}/app/about/help/feedback`)
+        this.props.history.push(`${publicURL}/app/about/help/feedback`)
     }
 
     itemRenderer = ReactWinJS.reactRenderer((item) => {
@@ -221,4 +221,4 @@ HelpCenterList.propTypes = {
 export default connect (
     null,
     mapDispatchToProps
-)(withGLPI(HelpCenterList))
+)(withGLPI(withHandleMessages(HelpCenterList)))

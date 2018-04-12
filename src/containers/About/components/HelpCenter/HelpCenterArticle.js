@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Loading from "../../../../components/Loading"
-import withGLPI from "../../../../hoc/withGLPI"
+import Loading from '../../../../components/Loading'
+import withGLPI from '../../../../hoc/withGLPI'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
-import { I18n } from "react-i18nify"
+import { I18n } from 'react-i18nify'
 import itemtype from '../../../../shared/itemtype'
 import getID from '../../../../shared/getID'
 
@@ -34,10 +35,9 @@ class HelpCenterArticle extends Component {
                 isLoading: false
             })
         } catch (error) {
-            this.props.actions.setNotification({
-                title: error[0],
-                body: error[1],
-                type: 'alert'
+            this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+            this.setState({
+                isLoading: false
             })
         }
     }
@@ -69,4 +69,4 @@ HelpCenterArticle.propTypes = {
 export default connect(
     null,
     mapDispatchToProps
-)(withGLPI(HelpCenterArticle))
+)(withGLPI(withHandleMessages(HelpCenterArticle)))

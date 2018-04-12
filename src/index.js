@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { Router } from 'react-router-dom'
+import history from './shared/history'
 import RootApp from './applications/RootApp'
 import { unregister } from './registerServiceWorker'
 import { Provider } from 'react-redux'
@@ -25,9 +26,9 @@ ReactDOM.render(
                 applyMiddleware(thunk)
             ))
         }>
-            <BrowserRouter >
+            <Router history={history}>
                 <RootApp />
-            </BrowserRouter>
+            </Router>
         </Provider>
     ),
     document.getElementById('root')
