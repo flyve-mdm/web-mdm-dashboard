@@ -25,7 +25,7 @@ export default class FilesAdd extends Component {
     }
 
     onFilesError = (error, file) => {
-        console.log('error code ' + error.code + ': ' + error.message)
+        this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error.message }))
     }
 
     filesRemoveOne = (file) => {
