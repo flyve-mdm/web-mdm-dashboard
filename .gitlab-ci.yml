@@ -8,7 +8,7 @@ stages:
 deployment:
   stage: deploy
   script:
-    - gitlabRunner.sh
+    - ./gitlabRunner.sh
   only:
     - develop
     
