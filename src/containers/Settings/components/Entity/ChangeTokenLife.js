@@ -40,7 +40,7 @@ class ChangeTokenLife extends Component {
                     itemtype: itemtype.PluginFlyvemdmEntityconfig,
                     id: this.props.entityID,
                     input: {
-                        gent_token_life: `P${this.state.tokenLife}D`
+                        agent_token_life: `P${this.state.tokenLife}D`
                     }
                 })
                 this.props.saveValues('tokenLife', this.state.tokenLife)
@@ -52,6 +52,7 @@ class ChangeTokenLife extends Component {
                 })
             } catch (error) {
                 this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                this.setState({ isLoading: false })
             }
         })
     }
