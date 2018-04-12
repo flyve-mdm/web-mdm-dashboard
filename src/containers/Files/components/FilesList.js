@@ -62,31 +62,31 @@ export default class FilesList extends Component {
         )
     })
 
-    handleRefresh = async () => {
-        try {
-            this.props.history.push(`${publicURL}/app/files`)
-            this.setState({
-                isLoading: true,
-                scrolling: false,
-                pagination: {
-                    start: 0,
-                    page: 1,
-                    count: 15
-                }
-            })
-            const files = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFile, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
-            this.setState({
-                isLoading: false,
-                order: files.order,
-                itemList: new WinJS.Binding.List(files.data)
-            })
-
-        } catch (error) {
-            this.setState({
-                isLoading: false,
-                order: "ASC"
-            })
-        }
+    handleRefresh = () => {
+        this.props.history.push(`${publicURL}/app/files`)
+        this.setState({
+            isLoading: true,
+            scrolling: false,
+            pagination: {
+                start: 0,
+                page: 1,
+                count: 15
+            }
+        }, async () => {
+            try {
+                const files = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFile, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+                this.setState({
+                    order: files.order,
+                    itemList: new WinJS.Binding.List(files.data),
+                    isLoading: false
+                })
+            } catch (error) {
+                this.setState({
+                    isLoading: false,
+                    order: "ASC"
+                })
+            }
+        })
     }
 
     handleEdit = () => {
@@ -130,50 +130,45 @@ export default class FilesList extends Component {
     }
 
     handleDelete = async (eventObject) => {
-        try {
-            const isOK = await Confirmation.isOK(this.contentDialog)
-            if (isOK) {
-
-                let itemListToDelete = this.props.selectedItems.map((item) => {
-                    return {
-                        id: item["PluginFlyvemdmFile.id"]
-                    }
-                })
-
-                this.setState({
-                    isLoading: true
-                })
-
-                await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmFile, input: itemListToDelete, queryString: { force_purge: true } })
-
-                this.props.setNotification({
-                    title: I18n.t('commons.success'),
-                    body: I18n.t('notifications.device_successfully_removed'),
-                    type: 'success'
-                })
-                this.props.changeSelectionMode(false)
-                this.props.changeSelectedItems([])
-                this.props.changeAction('reload')
-
-                this.setState((prevState, props) => ({
-                    isLoading: false
-                }))
-            } else {
-                this.props.changeSelectionMode(false)
-                this.props.changeSelectedItems([])
-                if (this.listView) {
-                    this.listView.winControl.selection.clear()
+        const isOK = await Confirmation.isOK(this.contentDialog)
+        if (isOK) {
+            
+            let itemListToDelete = this.props.selectedItems.map((item) => {
+                return {
+                    id: item["PluginFlyvemdmFile.id"]
                 }
-            }
+            })
+            
+            this.setState({
+                isLoading: true
+            }, async () => {
+                try {
+                    await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmFile, input: itemListToDelete, queryString: { force_purge: true } })
 
-        } catch (error) {
-            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                    this.props.setNotification({
+                        title: I18n.t('commons.success'),
+                        body: I18n.t('notifications.device_successfully_removed'),
+                        type: 'success'
+                    })
+                    this.props.changeSelectionMode(false)
+                    this.props.changeSelectedItems([])
+                    this.props.changeAction('reload')
+    
+                    this.setState({ isLoading: false })
+                } catch (error) {
+                    this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                    this.props.changeSelectionMode(false)
+                    this.props.changeSelectedItems([])
+        
+                    this.setState({ isLoading: false })
+                }
+            })
+        } else {
             this.props.changeSelectionMode(false)
             this.props.changeSelectedItems([])
-
-            this.setState((prevState, props) => ({
-                isLoading: false
-            }))
+            if (this.listView) {
+                this.listView.winControl.selection.clear()
+            }
         }
     }
 
