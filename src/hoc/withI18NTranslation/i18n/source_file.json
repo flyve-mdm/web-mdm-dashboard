@@ -28,6 +28,8 @@
     "edited_files": "Edited files",
     "edited_file": "Edited file",
     "fleet_successfully_removed": "Fleet successfully removed",
+    "fleet_successfully_created": "Fleet successfully created",
+    "fleet_successfully_updated": "Fleet successfully updated",
     "file_successfully_updated": "File successfully updated",
     "file_successfully_created": "File successfully created",
     "file_successfully_removed": "File successfully removed",
