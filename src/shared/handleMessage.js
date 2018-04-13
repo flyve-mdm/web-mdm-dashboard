@@ -1,7 +1,5 @@
-import history from './history'
-import glpi from './glpiApi'
-import publicURL from './publicURL'
 import { I18n } from "react-i18nify"
+import logout from './logout'
 
 export default ({type='info', message}) => {
     let response = {
@@ -30,10 +28,7 @@ export default ({type='info', message}) => {
             case (message.status === 401):
                 response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText
                 if (message.data[0][1] === 'session_token seems invalid') {
-                    localStorage.removeItem('currentUser')
-                    localStorage.removeItem('sessionToken')
-                    glpi.killSession()
-                    history.push(`${publicURL}/`)
+                    logout()
                 }
                 break
             case (message.status === 404):
