@@ -83,7 +83,7 @@ class SignUp extends Component {
                         </div>
                         <div style={{ textAlign: 'center', marginTop: '15px', color: '#158784', cursor: 'pointer' }} onClick={this.props.actions.fetchCaptcha} >
                             <span style={{ paddingRight: '5px' }} className="refreshIcon" />
-                            <span>refresh captcha</span>
+                            <span>{I18n.t('login.refresh_captcha')}</span>
                         </div>
                         <div style={{textAlign: 'center'}}>
                             <button className='btn --primary' style={{ margin: "20px" }}>
