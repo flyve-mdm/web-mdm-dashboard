@@ -45,7 +45,7 @@ class Dashboard extends Component {
     this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
   }
 
-  getDevices = () => new Promise(async (resolve) => {
+  getDevices = () => new Promise(async (resolve, reject) => {
     try {
       const devices = await this.props.glpi.searchItems({ 
         itemtype: itemtype.PluginFlyvemdmAgent,
@@ -57,11 +57,11 @@ class Dashboard extends Component {
       resolve(devices)
     } catch (error) {
       this.showError(error)
-      resolve(null)
+      reject(error)
     }
   })
 
-  getDevicesByOperatingSystemVersion = (devices) => new Promise(async (resolve) => {
+  getDevicesByOperatingSystemVersion = (devices) => new Promise(async (resolve, reject) => {
     try {
       const devicesAndroid = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] === "android").length
       const devicesiOS = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] === "ios").length
@@ -73,11 +73,11 @@ class Dashboard extends Component {
       resolve(devicesByOperatingSystemVersion)
     } catch (error) {
       this.showError(error)
-      resolve(null)
+      reject(error)
     }
   })
 
-  getDevicesByUsers = (devices) => new Promise(async (resolve) => {
+  getDevicesByUsers = (devices) => new Promise(async (resolve, reject) => {
     try {
       const devicesByUsers = devices.data.map(device => {
         return ({
@@ -88,11 +88,11 @@ class Dashboard extends Component {
       resolve(devicesByUsers)
     } catch (error) {
       this.showError(error)
-      resolve(null)
+      reject(error)
     }
   })
 
-  getInvitations = () => new Promise(async (resolve) => {
+  getInvitations = () => new Promise(async (resolve, reject) => {
     try {
       const invitations = await this.props.glpi.searchItems({ 
         itemtype: itemtype.PluginFlyvemdmInvitation
@@ -100,11 +100,11 @@ class Dashboard extends Component {
       resolve(invitations.totalcount)
     } catch (error) {
       this.showError(error)
-      resolve(null)
+      reject(error)
     }
   })
 
-  getPendingInvitations = () => new Promise(async (resolve) => {
+  getPendingInvitations = () => new Promise(async (resolve, reject) => {
     try {
       const pendingInvitations = await this.props.glpi.searchItems({ 
         itemtype: itemtype.PluginFlyvemdmInvitation,
@@ -118,11 +118,11 @@ class Dashboard extends Component {
       resolve(pendingInvitations.totalcount)
     } catch (error) {
       this.showError(error)
-      resolve(null)
+      reject(error)
     }
   })
 
-  getFleets = () => new Promise(async (resolve) => {
+  getFleets = () => new Promise(async (resolve, reject) => {
     try {
       const fleets = await this.props.glpi.searchItems({ 
         itemtype: itemtype.PluginFlyvemdmFleet
@@ -130,11 +130,11 @@ class Dashboard extends Component {
       resolve(fleets.totalcount)
     } catch (error) {
       this.showError(error)
-      resolve(null)
+      reject(error)
     }
   })
 
-  getFiles = () => new Promise(async (resolve) => {
+  getFiles = () => new Promise(async (resolve, reject) => {
     try {
       const files = 
       await this.props.glpi.searchItems({ 
@@ -143,11 +143,11 @@ class Dashboard extends Component {
       resolve(files.totalcount)
     } catch (error) {
       this.showError(error)
-      resolve(null)
+      reject(error)
     }
   })
 
-  getApplications = () => new Promise(async (resolve) => {
+  getApplications = () => new Promise(async (resolve, reject) => {
     try {
       const applications = await this.props.glpi.searchItems({ 
         itemtype: itemtype.PluginFlyvemdmPackage
@@ -155,11 +155,11 @@ class Dashboard extends Component {
       resolve(applications.totalcount)
     } catch (error) {
       this.showError(error)
-      resolve(null)
+      reject(error)
     }
   })
 
-  getUsers = () => new Promise(async (resolve) => {
+  getUsers = () => new Promise(async (resolve, reject) => {
     try {
       const users = await this.props.glpi.searchItems({ 
         itemtype: itemtype.User
@@ -167,33 +167,109 @@ class Dashboard extends Component {
       resolve(users.totalcount)
     } catch (error) {
       this.showError(error)
-      resolve(null)
+      reject(error)
     }
   })
+  
+  validateError = error => {
+    return ((error && error.data && error.data[0] && (error.data[0][1] === 'session_token seems invalid')) ? false : true)
+  }
 
   componentDidMount = async () => {
     if (this.props.glpi.sessionToken) {
-      const applicationsUploaded = (this.props.glpi.sessionToken && this.state.display.applicationsUploaded) ? await this.getApplications() : undefined
-      const filesUploaded = (this.props.glpi.sessionToken && this.state.display.filesUploaded) ? await this.getFiles(): undefined
-      const fleetsCurrentlyManaged = (this.props.glpi.sessionToken && this.state.display.fleetsCurrentlyManaged) ? await this.getFleets() : undefined
-      const invitations = (this.props.glpi.sessionToken && this.state.display.invitationsSent) ? await this.getInvitations() : undefined
-      const pendingInvitations = (this.props.glpi.sessionToken && this.state.display.pendingInvitations) ? await this.getPendingInvitations(invitations) : undefined
-      const numberUsers = (this.props.glpi.sessionToken && this.state.display.numberUsers) ? await this.getUsers() : undefined
-      const devices = (this.props.glpi.sessionToken && (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion || this.state.display.devicesByUsers)) ?
-        await this.getDevices() : undefined
-      const devicesCurrentlyManaged = (this.state.display.devicesCurrentlyManaged && devices) ? devices.totalcount : undefined
-      const devicesByOperatingSystemVersion = (this.state.display.devicesByOperatingSystemVersion && devices && devices.totalcount > 0) ? await this.getDevicesByOperatingSystemVersion(devices) : undefined 
-      const devicesByUsers = (this.state.display.devicesByUsers && devices && devices.totalcount > 0) ?  await this.getDevicesByUsers(devices) : undefined
+      let isValid = true
+      let newState = {
+        applicationsUploaded: undefined,
+        filesUploaded: undefined,
+        fleetsCurrentlyManaged: undefined,
+        invitationsSent: undefined,
+        pendingInvitations: undefined,
+        numberUsers: undefined,
+        devicesCurrentlyManaged: undefined,
+        devicesByOperatingSystemVersion: undefined,
+        devicesByUsers: undefined
+      }
+      if (isValid && this.state.display.applicationsUploaded) {
+        try {
+          newState.applicationsUploaded = await this.getApplications()
+        } catch (error) {
+          isValid = this.validateError(error)
+        }
+      }
+      if (isValid && this.state.display.filesUploaded) {
+        try {
+          newState.filesUploaded = await this.getFiles()
+        } catch (error) {
+          isValid = this.validateError(error)
+        } 
+      }
+      if (isValid && this.state.display.fleetsCurrentlyManaged) {
+        try {
+          newState.fleetsCurrentlyManaged = await this.getFleets()
+        } catch (error) {
+          isValid = this.validateError(error)
+        }
+      }
+      if (isValid && this.state.display.invitationsSent) {
+        try {
+          newState.invitationsSent = await this.getInvitations()
+        } catch (error) {
+          isValid = this.validateError(error)
+        }
+      }
+      if (isValid && this.state.display.pendingInvitations) {
+        try {
+          newState.pendingInvitations = await this.getPendingInvitations()
+        } catch (error) {
+          isValid = this.validateError(error)
+        }
+      }
+      if (isValid && this.state.display.numberUsers) {
+        try {
+          newState.numberUsers = await this.getUsers()
+        } catch (error) {
+          isValid = this.validateError(error)
+        }
+      } 
+      if (isValid && (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion || this.state.display.devicesByUsers)) {
+        try {
+          newState.devices = await this.getDevices()
+        } catch (error) {
+          isValid = this.validateError(error)
+        }
+      }
+      if (this.state.display.devicesCurrentlyManaged && newState.devices) {
+        try {
+          newState.devicesCurrentlyManaged = newState.devices.totalcount
+        } catch (error) {
+          isValid = this.validateError(error)
+        }
+      }
+      if (this.state.display.devicesByOperatingSystemVersion && newState.devices && newState.devices.totalcount > 0) {
+        try {
+          newState.devicesByOperatingSystemVersion = await this.getDevicesByOperatingSystemVersion(newState.devices)
+        } catch (error) {
+          isValid = this.validateError(error)
+        }
+      } 
+      if (this.state.display.devicesByUsers && newState.devices && newState.devices.totalcount > 0) {
+        try {
+          newState.devicesByUsers = await this.getDevicesByUsers(newState.devices)
+        } catch (error) {
+          isValid = this.validateError(error)
+        }
+      }
+      
       this.setState({
-        applicationsUploaded: applicationsUploaded,
-        filesUploaded: filesUploaded,
-        fleetsCurrentlyManaged: fleetsCurrentlyManaged,
-        invitationsSent: invitations,
-        pendingInvitations: pendingInvitations,
-        numberUsers: numberUsers,
-        devicesCurrentlyManaged: devicesCurrentlyManaged,
-        devicesByOperatingSystemVersion,
-        devicesByUsers,
+        applicationsUploaded: newState.applicationsUploaded,
+        filesUploaded: newState.filesUploaded,
+        fleetsCurrentlyManaged: newState.fleetsCurrentlyManaged,
+        invitationsSent: newState.invitationsSent,
+        pendingInvitations: newState.pendingInvitations,
+        numberUsers: newState.numberUsers,
+        devicesCurrentlyManaged: newState.devicesCurrentlyManaged,
+        devicesByOperatingSystemVersion: newState.devicesByOperatingSystemVersion,
+        devicesByUsers: newState.devicesByUsers,
         isLoading: false
       })
     } else {
