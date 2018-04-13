@@ -52,7 +52,7 @@ jobs:
  
   deploy:
     docker:
-      - image: circleci/node
+      - image: kkarczmarczyk/node-yarn
     working_directory: ~/repo
     steps:
       - checkout
