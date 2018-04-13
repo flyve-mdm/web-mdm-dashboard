@@ -148,7 +148,7 @@ export default class Main extends Component {
                             </div>   
                             <div style={{overflow: 'auto'}}>
                                 <div>
-                                    <button className="btn --primary" style={{float:'left', marginTop: 5, marginBottom: 5}} onClick={this.ping}>
+                                    <button className="btn --secondary" style={{float:'left', marginTop: 5, marginBottom: 5}} onClick={this.ping}>
                                         {I18n.t('commons.ping')}
                                     </button>
                                 </div>       
