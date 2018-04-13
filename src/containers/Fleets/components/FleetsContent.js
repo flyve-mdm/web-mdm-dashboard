@@ -752,7 +752,7 @@ class FleetsContent extends Component {
             return (
             <ContentPane>
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%'}}>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div style={{ display: '-moz-flex', flexDirection: 'row' }}>
                     <div className="contentHeader" style={{ display: 'table' }}>
                         <h1 className="win-h1 titleContentPane" style={{ display: 'table-cell', verticalAlign: 'middle', padding: '0 20px' }}>
                             <input
@@ -781,7 +781,7 @@ class FleetsContent extends Component {
                         </div>
                     </div>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <div style={{ display: '-moz-flex', flexDirection: 'row' }}>
                     <div className="separator" style={{ width: '100%'}} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', overflowY: 'auto' }}>
