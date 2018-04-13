@@ -83,7 +83,7 @@ class DangerZone extends Component {
                         </div>
                     </div>
                     <div className="controller">
-                        <button className="btn --primary" onClick={this.wipe}>
+                        <button className="btn --secondary" onClick={this.wipe}>
                             {I18n.t('commons.wipe')}
                         </button>
                     </div>
@@ -102,7 +102,7 @@ class DangerZone extends Component {
                         </div>
                     </div>
                     <div className="controller">
-                        <button className="btn --primary" onClick={this.unenroll}>
+                        <button className="btn --secondary" onClick={this.unenroll}>
                             {I18n.t('commons.unenroll')}
                         </button>
                     </div>
@@ -121,7 +121,7 @@ class DangerZone extends Component {
                         </div>
                     </div>
                     <div className="controller">
-                        <button className="btn --primary" onClick={this.delete}>
+                        <button className="btn --secondary" onClick={this.delete}>
                             {I18n.t('commons.delete')}
                         </button>
                     </div>

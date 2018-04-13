@@ -276,7 +276,7 @@ class Security extends Component {
                                 </div>
                             </div>
                             <div className="controller">
-                                <button className="win-button" onClick={() => this.changeMode(I18n.t('commons.change_password'))}>
+                                <button className="btn --secondary" onClick={() => this.changeMode(I18n.t('commons.change_password'))}>
                                     {I18n.t('commons.edit')}
                                 </button>
                             </div>
@@ -290,7 +290,7 @@ class Security extends Component {
                                 </div>
                             </div>
                             <div className="controller">
-                                <button className="win-button" onClick={this.closeSession}>
+                                <button className="btn --secondary" onClick={this.closeSession}>
                                     {I18n.t('commons.logout')}
                                 </button>
                             </div>
@@ -310,7 +310,7 @@ class Security extends Component {
                                 </div>
                             </div>
                             <div className="controller">
-                                <button className="win-button" onClick={this.cleanWebStorage}>
+                                <button className="btn --secondary" onClick={this.cleanWebStorage}>
                                     {I18n.t('commons.delete')}
                                 </button>
                             </div>
@@ -333,7 +333,7 @@ class Security extends Component {
                                         </div>
                                     </div>
                                     <div className="controller">
-                                        <button className="win-button" onClick={this.deleteUser}>
+                                        <button className="btn --secondary" onClick={this.deleteUser}>
                                             {I18n.t('commons.delete')}
                                         </button>
                                     </div>
