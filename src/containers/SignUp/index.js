@@ -79,7 +79,11 @@ class SignUp extends Component {
                         <ConstructInputs data={user.passwordInformation} />
                         <ConstructInputs data={user.captchaInformation } />
                         <div style={{ textAlign: 'center', marginTop: '15px' }}>
-                            <img src={this.props.captcha.img} alt='Captcha' />
+                            <img src={this.props.captcha ? this.props.captcha.img : null } alt='Captcha' />
+                        </div>
+                        <div style={{ textAlign: 'center', marginTop: '15px', color: '#158784', cursor: 'pointer' }} onClick={this.props.actions.fetchCaptcha} >
+                            <span style={{ paddingRight: '5px' }} className="refreshIcon" />
+                            <span>refresh captcha</span>
                         </div>
                         <div style={{textAlign: 'center'}}>
                             <button className='btn --primary' style={{ margin: "20px" }}>
