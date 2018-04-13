@@ -164,24 +164,14 @@ export default class Main extends Component {
                 </div>
                 <div className="separator" />
                 <div className="contentInfo">
-                    <ul>
-                        <li>
-                            <div className="detailContent">
-                                <div className="title">
-                                    {I18n.t('commons.version')}
-                                </div>
-                                <div>{this.state.data["version"]}</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="detailContent">
-                                <div className="title">
-                                    {I18n.t('commons.type')}
-                                </div>
-                                <div>{this.state.data["mdm_type"]}</div>
-                            </div>
-                        </li>
-                    </ul>
+                    <div className="title">
+                        {I18n.t('commons.version')}
+                    </div>
+                    <div>{this.state.data["version"]}</div>
+                    <div className="title">
+                        {I18n.t('commons.type')}
+                    </div>
+                    <div>{this.state.data["mdm_type"]}</div>
                 </div>
                 
                 <Confirmation 
