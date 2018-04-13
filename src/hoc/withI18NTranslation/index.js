@@ -29,27 +29,25 @@ const withI18NTranslation = WrappedComponent => {
 
         import(`${path}.json`)
           .then(jsonModule => {
-            I18n.setTranslationsGetter(() => {
-              const json = {}
-              json[i18nConvention] = jsonModule
-              return json
+            I18n.setTranslations({
+              [i18nConvention]: jsonModule
             })
             I18n.setLocale(i18nConvention)
             this.forceUpdate()
           }).catch((error) => {
-            I18n.setLocale(this.props.languageDefault)
+            I18n.setTranslations(this.props.languageDefault)
             this.forceUpdate()
         })
     }
   
     componentWillMount() {
-      let json = {};
-      json[this.props.languageDefault] = source_file_translation
-      I18n.setTranslations(json);
+      I18n.setTranslations({
+        [this.props.languageDefault]: source_file_translation
+      })
     }
 
     componentDidMount() {
-      this.findI18NString(this.props.languageCurrent);
+      this.findI18NString(this.props.languageCurrent)
     }
 
     componentWillReceiveProps(nextProps) {
