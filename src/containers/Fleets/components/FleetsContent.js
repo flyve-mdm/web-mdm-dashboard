@@ -674,6 +674,12 @@ class FleetsContent extends Component {
                 if (Array.isArray(item)) {
                     item.forEach(deploy => {
                         deploy['plugin_flyvemdm_fleets_id'] = newFleet['id']
+
+                        try {
+                            const objValue = JSON.parse(deploy['value'])
+                            deploy['value'] = objValue
+                        } catch (e) {}
+
                         itemsToSave.push(deploy)
                     })
                 } else {
