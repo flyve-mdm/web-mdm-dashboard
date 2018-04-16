@@ -780,11 +780,12 @@ class FleetsContent extends Component {
                                 />
                                 <span
                                     className="copyIcon"
-                                    style={{ padding: '10px', fontSize: '20px' }}
+                                    style={{ padding: '10px', fontSize: '20px', display: this.props.selectedItems.length === 0 ? 'none' : '' }}
+                                    onClick={this.handleDuplicateFleet}
                                 />
                                 <span
                                     className="deleteIcon"
-                                    style={{ padding: '10px', fontSize: '20px' }}
+                                    style={{ padding: '10px', fontSize: '20px', display: this.props.selectedItems.length === 0 ? 'none' : '' }}
                                     onClick={this.handleDeleteFleet}
                                 />
                             </div>
