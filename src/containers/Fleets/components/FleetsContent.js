@@ -773,6 +773,10 @@ class FleetsContent extends Component {
                                     onClick={this.handleSaveFleet}
                                 />
                                 <span
+                                    className="copyIcon"
+                                    style={{ padding: '10px', fontSize: '20px' }}
+                                />
+                                <span
                                     className="deleteIcon"
                                     style={{ padding: '10px', fontSize: '20px' }}
                                     onClick={this.handleDeleteFleet}
