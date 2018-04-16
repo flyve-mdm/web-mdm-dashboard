@@ -742,6 +742,23 @@ class FleetsContent extends Component {
         }
     }
 
+    handleDuplicateFleet = () => {
+        this.setState((prevState, props) => ({
+            input: prevState.input !== '' ? prevState.input.concat(' copy') : 'Copy',
+            data: {
+                tasks: [],
+                tasksNew: prevState.data.tasksNew,
+                policies: prevState.data.policies,
+                categories: prevState.data.categories,
+                files: prevState.data.files,
+                applications: prevState.data.applications,
+                tasksRemove: {}
+            }
+        }), () => {
+            this.handleCreateFleet()
+        })
+    }
+
     render() {
         let policiesPerCategory
 
