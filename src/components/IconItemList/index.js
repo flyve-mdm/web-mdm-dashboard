@@ -12,18 +12,25 @@ export default class IconItemList extends React.Component {
 
     getImage = async () => {
         try {
-            if (this.props.image === 'profile.png') {
-                this.setState({
-                    image: require(`../../assets/images/${this.props.image}`)
-                })
-            } else {
-                const { cfg_glpi } = await glpi.getGlpiConfig()
-                this.setState({
-                    image: await fetch(`https://${cfg_glpi.url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`, {
-                        method: 'GET',
-                        credentials: 'same-origin'
+            switch (this.props.image) {
+                case 'profile.png':
+                case 'android.png':
+                case 'apple.png':
+                case 'Phone.png':
+                    this.setState({
+                        image: require(`../../assets/images/${this.props.image}`)
                     })
-                })
+                break
+            
+                default:
+                    const { cfg_glpi } = await glpi.getGlpiConfig()
+                    this.setState({
+                        image: await fetch(`https://${cfg_glpi.url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`, {
+                            method: 'GET',
+                            credentials: 'same-origin'
+                        })
+                    })    
+                break
             }
         } catch (error) {}
     }
