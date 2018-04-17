@@ -3,7 +3,9 @@ import SplitView from "../../components/SplitView"
 import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
 import getMode from '../../shared/getMode'
 import configureDisplay from '../../shared/configureDisplay'
+import setGlpiCookie from '../../shared/setGlpiCookie'
 import animations from '../../shared/animations'
+import glpi from '../../shared/glpiApi'
 
 // TODO: Passing Routes to props for generate NavLink in SplitView component
 
@@ -16,7 +18,8 @@ const withAdminDashboardLayout = WrappedComponent => {
       this.state = {
         expanded: false,
         contract: false,
-        mode: getMode()
+        mode: getMode(),
+        iframe: ''
       }
     }
 
@@ -33,6 +36,14 @@ const withAdminDashboardLayout = WrappedComponent => {
       window.addEventListener('resize', this.handleResize)
       configureDisplay()
       animations()
+    }
+
+    componentDidMount = async () => {
+      const { cfg_glpi } = await glpi.getGlpiConfig()
+      this.setState(
+        { iframe: <iframe title="glpi-backend" height="0" src={cfg_glpi.url_base}></iframe> }, 
+        setGlpiCookie()
+      )
     }
 
     componentWillUnmount () {
@@ -74,6 +85,8 @@ const withAdminDashboardLayout = WrappedComponent => {
             history={this.props.history}
           /> 
 
+          {this.state.iframe}
+
           <div className="flex-block">
             <SplitView
               expanded={this.state.expanded}
@@ -96,4 +109,4 @@ const withAdminDashboardLayout = WrappedComponent => {
   return AdminDashboardLayout
 }
 
-export default withAdminDashboardLayout
+export default  withAdminDashboardLayout
