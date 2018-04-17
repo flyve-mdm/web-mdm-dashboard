@@ -24,12 +24,26 @@ export default class IconItemList extends React.Component {
             
                 default:
                     const { cfg_glpi } = await glpi.getGlpiConfig()
-                    this.setState({
-                        image: URL.createObjectURL(await fetch(`https://${cfg_glpi.url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`, {
-                            method: 'GET',
-                            credentials: 'same-origin'
-                        }).blob())
-                    })    
+
+                    fetch(`https://${cfg_glpi.url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`, {
+                        method: 'GET',
+                        credentials: 'same-origin'
+                    }).then((response) => {
+                        response.arrayBuffer().then((buffer) => {
+                            this.setState({
+                                image: 'data:image/jpeg;base64,' + arrayBufferToBase64(buffer)
+                            })
+                        })
+                    })
+                      
+                    function arrayBufferToBase64(buffer) {
+                        let binary = ''
+                        let bytes = [].slice.call(new Uint8Array(buffer))
+                      
+                        bytes.forEach((b) => binary += String.fromCharCode(b))
+                      
+                        return window.btoa(binary)
+                    }
                 break
             }
         } catch (error) {}
