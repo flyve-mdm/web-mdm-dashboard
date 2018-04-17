@@ -19,7 +19,7 @@ export default class IconItemList extends React.Component {
             } else {
                 const { cfg_glpi } = await glpi.getGlpiConfig()
                 this.setState({
-                    image: await fetch(`${cfg_glpi.url_base}/front/document.send.php?file=_pictures/${this.props.image}`, {
+                    image: await fetch(`https://${cfg_glpi.url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`, {
                         method: 'GET',
                         credentials: 'same-origin'
                     })
