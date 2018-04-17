@@ -14,5 +14,6 @@ export default {
     PluginFlyvemdmTask: "PluginFlyvemdmTask",
     PluginFlyvemdmGeolocation: "PluginFlyvemdmGeolocation",
     PluginFlyvemdmdemoAccountvalidation: "PluginFlyvemdmdemoAccountvalidation",
-    PluginFlyvemdmEntityconfig: "PluginFlyvemdmEntityconfig"
+    PluginFlyvemdmEntityconfig: "PluginFlyvemdmEntityconfig",
+    PluginFlyvemdmInvitationlog: "PluginFlyvemdmInvitationlog"
 }
