@@ -6,10 +6,22 @@ import configureDisplay from '../../shared/configureDisplay'
 import setGlpiCookie from '../../shared/setGlpiCookie'
 import animations from '../../shared/animations'
 import glpi from '../../shared/glpiApi'
+import { I18n } from "react-i18nify"
+import Confirmation from '../../components/Confirmation'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { logout } from '../../store/authentication/actions'
 
 // TODO: Passing Routes to props for generate NavLink in SplitView component
 
 const TIMEOUT_CONTRACT = 250
+
+function mapDispatchToProps(dispatch) {
+  const actions = {
+    logout: bindActionCreators(logout, dispatch)
+  }
+  return { actions }
+}
 
 const withAdminDashboardLayout = WrappedComponent => {
   class AdminDashboardLayout extends Component {
@@ -20,6 +32,13 @@ const withAdminDashboardLayout = WrappedComponent => {
         contract: false,
         mode: getMode(),
         iframe: ''
+      }
+    }
+
+    logout = async () => {
+      const isOK = await Confirmation.isOK(this.contentDialog)
+      if (isOK) {
+        this.props.actions.logout(this.props.history)
       }
     }
 
@@ -97,16 +116,25 @@ const withAdminDashboardLayout = WrappedComponent => {
               handleToggleExpand={this.handleToggleExpand}
               mode={this.state.mode}
               history={this.props.history}
+              logout={this.logout}
             />
             <WrappedComponent {...this.props} mode={this.state.mode} />
+            <Confirmation 
+            title={I18n.t('logout.close_session')}
+            message={I18n.t('settings.security.close_session_message')} 
+            reference={el => this.contentDialog = el} 
+            />
           </div>
         
         </main>
       )
     }
   }
-
-  return AdminDashboardLayout
+  
+  return connect(
+      null,
+      mapDispatchToProps
+    )(AdminDashboardLayout)
 }
 
 export default  withAdminDashboardLayout
