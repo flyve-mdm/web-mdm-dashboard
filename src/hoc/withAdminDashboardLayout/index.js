@@ -42,7 +42,7 @@ const withAdminDashboardLayout = WrappedComponent => {
       const { cfg_glpi } = await glpi.getGlpiConfig()
       this.setState(
         { iframe: <iframe title="glpi-backend" height="0" src={cfg_glpi.url_base}></iframe> }, 
-        setGlpiCookie()
+        () => setGlpiCookie()
       )
     }
 

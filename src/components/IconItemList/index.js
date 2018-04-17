@@ -1,18 +1,50 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import glpi from '../../shared/glpiApi'
 
 export default class IconItemList extends React.Component {
-    render() {
-        let image 
-        try {
-            if (this.props.type === 'file' && this.props.image !== '') {
-                image = require(`../../assets/images/${this.props.image}`)
-            } else {
-                image = this.props.image
-            }
-        } catch (error) {
-            image = ''
+    constructor (props) {
+        super(props)
+        this.state = {
+            image: ''
         }
+    }
+
+    getImage = async () => {
+        try {
+            if (this.props.image === 'profile.png') {
+                this.setState({
+                    image: require(`../../assets/images/${this.props.image}`)
+                })
+            } else {
+                const { cfg_glpi } = await glpi.getGlpiConfig()
+                this.setState({
+                    image: await fetch(`${cfg_glpi.url_base}/front/document.send.php?file=_pictures/${this.props.image}`, {
+                        method: 'GET',
+                        credentials: 'same-origin'
+                    })
+                })
+            }
+        } catch (error) {}
+    }
+
+    componentWillMount() {
+        this.getImage()
+        if (this.props.type !== 'file' || this.props.image === '') {
+            this.setState({
+                image: this.props.image
+            })
+        }
+    }
+
+    componentDidMount () {
+        if (this.props.type === 'file' && this.props.image !== '') {
+            this.getImage()
+        }
+    }
+
+    render() {
+        
         let style = {
             backgroundColor: this.props.backgroundColor,
             width: this.props.size,
@@ -34,7 +66,7 @@ export default class IconItemList extends React.Component {
         return (
             <div className={className} style={style}>
                 <div className={this.props.imgClass} >
-                    <img alt="" src={image} style={style} onClick={this.props.imgClick}/>
+                    <img alt="" src={this.state.image} style={style} onClick={this.props.imgClick}/>
                 </div>
             </div>
         )

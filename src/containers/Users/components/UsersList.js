@@ -110,7 +110,7 @@ export default class UsersList extends Component {
                     count: 15
                 }
             })
-            const response = await this.props.glpi.searchItems({ itemtype: itemtype.User, options: { uid_cols: true, forcedisplay: [1, 2, 5, 34] } })        
+            const response = await this.props.glpi.searchItems({ itemtype: itemtype.User, options: { uid_cols: true, forcedisplay: [1, 2, 5, 34, 150] } })        
             this.setState({
                 isLoading: false,
                 order: response.order,
@@ -184,7 +184,7 @@ export default class UsersList extends Component {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const response = await this.props.glpi.searchItems({ itemtype: itemtype.User, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 5, 34] } })
+            const response = await this.props.glpi.searchItems({ itemtype: itemtype.User, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 5, 34, 150] } })
 
             this.setState({
                 isLoading: false,
@@ -219,7 +219,7 @@ export default class UsersList extends Component {
 
     loadMoreData = async () => {
         try {
-            const devices = await this.props.glpi.searchItems({ itemtype: itemtype.User, options: { uid_cols: true, forcedisplay: [1, 2, 5, 34], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+            const devices = await this.props.glpi.searchItems({ itemtype: itemtype.User, options: { uid_cols: true, forcedisplay: [1, 2, 5, 34, 150], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
             
             for (const item in devices.data) {
                 this.state.itemList.push(devices.data[item])
