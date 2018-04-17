@@ -4,29 +4,14 @@ import IconWithPopper from './IconWithPopper'
 import ImgWithPopper from './imgWithPopper'
 import SpanWithPopper from './spanWithAnchor'
 import { ScrollSync, ScrollSyncPane } from '../ScrollSync'
-import Confirmation from '../../components/Confirmation'
 import withGLPI from '../../hoc/withGLPI'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { logout } from '../../store/authentication/actions'
 import { I18n } from "react-i18nify"
 import publicURL from '../../shared/publicURL'
 
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    logout: bindActionCreators(logout, dispatch)
-  }
-  return { actions }
-}
-
-
 class SplitView extends React.Component {
 
-  logout = async () => {
-    const isOK = await Confirmation.isOK(this.contentDialog)
-    if (isOK) {
-      this.props.actions.logout(this.props.history)
-    }
+  logout = () => {
+    this.props.logout()
   }
 
   render () {
@@ -146,12 +131,6 @@ class SplitView extends React.Component {
               </div>
             </div>
           </ScrollSync>
-
-          <Confirmation 
-            title={I18n.t('logout.close_session')}
-            message={I18n.t('settings.security.close_session_message')} 
-            reference={el => this.contentDialog = el} 
-          />
         </React.Fragment>
       )
     }
@@ -171,7 +150,4 @@ SplitView.propTypes = {
   glpi: PropTypes.object.isRequired
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withGLPI(SplitView))
+export default withGLPI(SplitView)
