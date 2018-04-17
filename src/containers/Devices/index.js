@@ -89,7 +89,7 @@ class Devices extends Component {
     stylesList = () => {
 
         let styles = {
-            width: this.state.itemListPaneWidth   
+            width: this.state.itemListPaneWidth
         }
 
         if (this.state.mode === 'small') {
