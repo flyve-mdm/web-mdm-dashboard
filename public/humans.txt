@@ -1,0 +1,5 @@
+The main developers of this project are:
+
+* Alexander Salas Bastidas. Coder with good taste and ubergeek <asalas@teclib.com>
+* Gianfranco Manganiello. Front-End Developer <gmanganiello@teclib.com>
+* Hector Rondon. Full Stack iOS Developer <hrondon@teclib.com>
