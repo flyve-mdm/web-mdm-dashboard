@@ -1,4 +1,5 @@
 import glpi from './glpiApi'
+import { setCookie } from './cookies'
 
 export default async () => {
     const cookies = document.cookie.split(';')
@@ -8,5 +9,5 @@ export default async () => {
             glpiCookieName = cookies[index].split("=")[0]
         }
     }
-    document.cookie = `${glpiCookieName}=${glpi.sessionToken}`
+    setCookie(glpiCookieName, glpi.sessionToken)
 }
