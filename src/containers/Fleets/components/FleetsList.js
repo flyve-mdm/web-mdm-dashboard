@@ -327,7 +327,7 @@ export default class FleetsList extends Component {
                 {listComponent}
                 <Confirmation 
                     title={I18n.t('fleets.delete')} 
-                    message={`${this.props.selectedItems.length} ${I18n.t('commons.fleets')}}`} 
+                    message={`${this.props.selectedItems.length} ${I18n.t('commons.fleets')}`} 
                     reference={el => this.contentDialog = el} 
                 />
             </React.Fragment>
