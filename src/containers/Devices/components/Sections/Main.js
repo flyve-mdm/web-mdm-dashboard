@@ -156,10 +156,18 @@ export default class Main extends Component {
                                 { this.state.sendingPing ? <Loading small/> : '' }
                             </div>
                             <div>
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
-                                <span className="deleteIcon" onClick={this.handleDelete} />
+                                <span
+                                    className="editIcon"
+                                    style={{ marginRight: '20px', fontSize: '20px' }}
+                                        onClick={this.handleEdit}
+                                />
+                                <span
+                                    className="deleteIcon"
+                                        style={{ marginRight: '20px', fontSize: '20px' }}
+                                    onClick={this.handleDelete}
+                                />
                             </div>
-                        </div>                        
+                        </div>         
                     </div>
                 </div>
                 <div className="separator" />
