@@ -53,9 +53,9 @@ class HelpCenterArticle extends Component {
             this.state.isLoading ? 
                 <div style={{height: "100%", marginTop: "-80px"}}><Loading message={`${I18n.t('commons.loading')}...`} /></div> :
                     <ContentPane>
-                        <h2>{this.state.article.name}</h2>
-                        <div className="date">{this.state.article.date}</div>                        
-                        <div dangerouslySetInnerHTML={{ __html: this.htmlDecode(this.state.article.answer) }} />
+                        <h2 style={{ margin: '10px' }}>{this.state.article.name}</h2>
+                        <div className="date" style={{ margin: '10px' }}>{this.state.article.date}</div>                        
+                        <div style={{ margin: '10px' }} dangerouslySetInnerHTML={{ __html: this.htmlDecode(this.state.article.answer) }} />
                     </ContentPane>
         ) 
     }

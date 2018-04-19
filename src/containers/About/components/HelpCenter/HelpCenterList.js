@@ -134,8 +134,7 @@ class HelpCenterList extends Component {
                 <div style={{height: "100%", marginTop: "-80px"}}><Loading message={`${I18n.t('commons.loading')}...`} /></div> : 
                 (   
                     <ContentPane>
-                        <h2>{I18n.t('about.help_center.title')}</h2>
-                        <br />
+                        <h2 style={{ margin: '10px' }}>{I18n.t('about.help_center.title')}</h2>
                         <div className="listPane" style={{ padding: 0 }}>
                             <div>
                                 <div style={{
@@ -143,7 +142,7 @@ class HelpCenterList extends Component {
                                     justifyContent: 'space-between'
                                 }}>
                                     <div>
-                                        <h3>{this.state.labelList}</h3>
+                                        <h3 style={{ margin: '10px' }}>{this.state.labelList}</h3>
                                     </div>
                                     <div>
                                         <div>
