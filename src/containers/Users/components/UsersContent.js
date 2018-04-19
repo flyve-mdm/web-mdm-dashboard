@@ -113,8 +113,16 @@ export default class UsersContent extends Component {
                                     {I18n.t('commons.joined')} {this.state.data.date_creation}
                                 </span>
                                 <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.history.push(`${publicURL}/app/users/${this.state.id}/edit`)} />
-                                <span className="deleteIcon" onClick={this.handleDelete} />
+                                <span
+                                    className="editIcon"
+                                    style={{ padding: '0 10px', fontSize: '20px' }}
+                                    onClick={() => this.props.history.push(`${publicURL}/app/users/${this.state.id}/edit`)}
+                                />
+                                <span
+                                    className="deleteIcon"
+                                    style={{ padding: '0 10px', fontSize: '20px', display: this.props.selectedItems.length === 0 ? 'none' : '' }}
+                                    onClick={this.handleDelete}
+                                />
                             </div>
                         </div>
                     </div>
