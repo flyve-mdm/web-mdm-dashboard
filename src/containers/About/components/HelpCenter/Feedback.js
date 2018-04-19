@@ -57,8 +57,8 @@ class Feedback extends Component {
         } else {
             return (
                 <ContentPane>
-                    <h3>{I18n.t('about.help_center.feedback')}</h3>
-                    <div className="feedback">
+                    <h3 style={{ margin: '10px' }}>{I18n.t('about.help_center.feedback')}</h3>
+                    <div className="feedback" style={{ margin: '10px' }}>
                         <form onSubmit={this.handleSubmit}>
                             <textarea
                                 name="textarea"

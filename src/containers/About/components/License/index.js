@@ -6,8 +6,8 @@ import { I18n } from "react-i18nify"
 
 const Licence = () => (
   <ContentPane>
-    <h2>{I18n.t('about.license.title')}</h2>
-    <div className="aboutPane">
+    <h2 style={{ margin: '10px' }}>{I18n.t('about.license.title')}</h2>
+    <div className="aboutPane" style={{ margin: '10px' }}>
       <ReactMarkdown source={LICENCE} />
     </div>
   </ContentPane>

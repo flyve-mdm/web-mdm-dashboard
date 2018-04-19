@@ -65,8 +65,8 @@ class SystemInformation extends Component {
       this.state.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> :
       (
         <ContentPane>
-          <h2>{I18n.t('about.system_information.title')}</h2>
-          <div className="aboutPane">
+          <h2 style={{ margin: '10px' }}>{I18n.t('about.system_information.title')}</h2>
+          <div className="aboutPane" style={{ margin: '10px' }}>
             {element}
           </div>
         </ContentPane>
