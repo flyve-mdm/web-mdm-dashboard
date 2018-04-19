@@ -178,8 +178,8 @@ class Entity extends Component {
             this.state.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> :
             (
                 <React.Fragment>
-                    <h2>{ I18n.t('settings.entity.title') }</h2> 
-                    <div style={{marginTop: '20px', height: "100%"}}>
+                    <h2 style={{margin:10}}>{ I18n.t('settings.entity.title') }</h2> 
+                    <div style={{marginTop: '10px', height: "100%"}}>
                         {content}
                     </div>
                 </React.Fragment>

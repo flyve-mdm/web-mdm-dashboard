@@ -107,10 +107,10 @@ class Supervision extends Component {
             this.state.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> : 
                 (
                     <ContentPane>
-                        <h2>
+                        <h2 style={{ margin: '10px' }}>
                             {I18n.t('settings.supervision.title')}
                         </h2>
-                        <div className="list-content Profiles" style={{marginTop: '20px'}}>
+                        <div className="list-content Profiles" style={{ margin: '10px' }}>
                             <ConstructInputs 
                                 data={supervision.helpDeskInformation} 
                                 icon="supervisionIcon" 

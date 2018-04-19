@@ -337,10 +337,9 @@ class Profiles extends Component {
         }       
         return (
             <ContentPane>
-                <h2>
+                <h2 style={{ margin: '10px' }}>
                     {I18n.t('commons.profiles')}
                 </h2>
-
                 { component }
             </ContentPane>
         )

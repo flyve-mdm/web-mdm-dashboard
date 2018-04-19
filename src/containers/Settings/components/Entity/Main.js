@@ -7,7 +7,7 @@ class Main extends Component {
     render () {
         return (    
             <React.Fragment>
-                <div className="title"> 
+                <div className="title" style={{ padding: '0 10px'}}> 
                     {I18n.t('commons.agent')}
                 </div>
 
