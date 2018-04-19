@@ -74,7 +74,7 @@ const withNotification = WrappedComponent => {
           <div className={`toast --${this.props.type}`}>
             <span 
               className="cancelIcon" 
-              style={{ float: 'right', cursor: 'pointer' }} 
+              style={{ float: 'right', cursor: 'pointer', color: '#ffffff' }} 
               onClick={()=> {
                 this.hideNotification()
               }}
