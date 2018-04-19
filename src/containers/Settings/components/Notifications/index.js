@@ -44,7 +44,7 @@ class Notifications extends Component {
     render () {
         return (
             <ContentPane>
-                <h2 style={{marginBottom: '20px'}}>
+                <h2 style={{ margin: '10px' }}>
                     {I18n.t('settings.notifications.title')}
                 </h2>
                 <div className="listElement">

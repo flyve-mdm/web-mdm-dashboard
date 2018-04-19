@@ -8,7 +8,7 @@ class GeolocationList extends Component {
         if (this.props.locations.length > 0) {
             renderList = this.props.locations.map((location, index) => {
                 return (
-                    <div key={`location-${index}`}>
+                    <div key={`location-${index}`} style={{paddingLeft:5}}>
                         <input 
                             type="checkbox" 
                             className="win-checkbox" 
@@ -21,7 +21,7 @@ class GeolocationList extends Component {
             })
         } else {
             renderList = (
-                <p style={{ color: 'grey', marginLeft: 5 }}> 
+                <p style={{ color: 'grey', marginLeft:5}}> 
                     {I18n.t('devices.geolocation.no_locations')}
                 </p>
             )

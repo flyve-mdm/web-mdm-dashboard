@@ -73,16 +73,16 @@
 %content-pane {
   .content-pane-block {
     overflow-y: auto;
-    padding: 0 20px;
+    padding: 0;
     width: auto;
     height: 100%;
 
     .contentHeader {
       line-height: 1.5;
       .name {
-          font-size: 24px;
+          font-size: 18px;
           line-height: 28px;
-          font-weight: 300;
+          font-weight: 400;
           padding-top: 6px;
       }
 
@@ -91,7 +91,7 @@
 
           .contentStatus {
               .message {
-                  font-size: 15px;
+                  font-size: 14px;
                   line-height: 20px;
                   font-weight: 500;
               }
@@ -99,7 +99,7 @@
               .source {
                   display:block;
                   color: $text-detail-color;
-                  font-size: 13px;
+                  font-size: 12px;
                   line-height: 16px;
                   font-weight: 400;
               }

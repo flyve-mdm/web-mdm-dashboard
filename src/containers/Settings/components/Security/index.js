@@ -264,7 +264,7 @@ class Security extends Component {
             default:
                 return (
                     <ContentPane>
-                        <h2 style={{marginBottom: '20px'}}>
+                        <h2 style={{ margin: '10px' }}>
                             {I18n.t('commons.security')}
                         </h2>
                         

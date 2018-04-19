@@ -776,35 +776,38 @@ class FleetsContent extends Component {
             <ContentPane>
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%'}}>
                 <div style={{ display: '-moz-flex', flexDirection: 'row' }}>
-                    <div className="contentHeader" style={{ display: 'table' }}>
+                    <div className="contentHeader">
                         <h1 className="win-h1 titleContentPane" style={{ display: 'table-cell', verticalAlign: 'middle', padding: '0 20px' }}>
                             <input
                                 type="text"
                                 className="win-textbox"
-                                style={{ fontSize: '34px', fontWeight: '200' }}
+                                style={{ fontSize: '24px', fontWeight: '200' }}
                                 placeholder={I18n.t('fleets.input_name')}
                                 name="fleetName"
                                 onChange={this.handleChangeInput}
                                 value={this.state.input}
                             />
                         </h1>
+                        <div className="itemInfo" style={{ padding: '0 20px', verticalAlign: 'middle' }}>
+                            <span
+                                className="saveIcon"
+                                style={{ padding: '0 10px', fontSize: '20px' }}
+                                onClick={this.handleSaveFleet}
+                            />
+                            <span
+                                className="copyIcon"
+                                style={{ padding: '0 10px', fontSize: '20px', display: this.props.selectedItems.length === 0 ? 'none' : '' }}
+                                onClick={this.handleDuplicateFleet}
+                            />
+                            <span
+                                className="deleteIcon"
+                                style={{ padding: '0 10px', fontSize: '20px', display: this.props.selectedItems.length === 0 ? 'none' : '' }}
+                                onClick={this.handleDeleteFleet}
+                            />
+                        </div>
                         <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
                             <div className="contentStatus">
-                                <span
-                                    className="saveIcon"
-                                    style={{ padding: '10px', fontSize: '20px' }}
-                                    onClick={this.handleSaveFleet}
-                                />
-                                <span
-                                    className="copyIcon"
-                                    style={{ padding: '10px', fontSize: '20px', display: this.props.selectedItems.length === 0 ? 'none' : '' }}
-                                    onClick={this.handleDuplicateFleet}
-                                />
-                                <span
-                                    className="deleteIcon"
-                                    style={{ padding: '10px', fontSize: '20px', display: this.props.selectedItems.length === 0 ? 'none' : '' }}
-                                    onClick={this.handleDeleteFleet}
-                                />
+                                
                             </div>
                         </div>
                     </div>
@@ -813,8 +816,8 @@ class FleetsContent extends Component {
                     <div className="separator" style={{ width: '100%'}} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', overflowY: 'auto' }}>
-                    <div className="contentInfo" style={{ padding: '10px', width: '100%' }} >
-                        <h3 className="win-h3" >
+                    <div className="contentInfo" >
+                        <h3 className="win-h3" style={{ margin: '10px' }}>
                             {I18n.t('fleets.tasks_per_Category')}
                         </h3>
                         <div>
@@ -823,9 +826,9 @@ class FleetsContent extends Component {
                                     return category['policies'].length > 0
                                         ? (
                                             <div key={category['id']}>
-                                                <h2>
+                                                <div className="title">
                                                     {category['name']}
-                                                </h2>
+                                                </div>
                                                 <div>
                                                     {category['policies'].map((policy, index) => (
                                                         <FleetsTaskItemList
