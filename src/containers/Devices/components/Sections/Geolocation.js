@@ -82,7 +82,10 @@ export default class Geolocation extends Component {
             <Loading message={`${I18n.t('commons.loading')}...`} /> : 
                 (   
                     <React.Fragment>
-                        <Map markers={this.state.showLocations}/>
+                        <div style={{ margin: '0 5px' }}>
+                        <Map markers={this.state.showLocations} />
+                        </div>
+                        
 
                         <button className="btn --secondary" style={{margin: 5}} onClick={this.requestLocation}>
                             {I18n.t('devices.geolocation.request_current_location')}
