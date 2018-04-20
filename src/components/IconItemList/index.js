@@ -23,7 +23,7 @@ export default class IconItemList extends React.Component {
             
                 default:
                     const url_base = localStorage.getItem('baseURL')
-                    let url
+                    let url 
                     if (this.props.isMin) {
                         const image = this.props.image.split(".")
                         url = `//${url_base.split("//")[1]}/front/document.send.php?file=_pictures/${image[0]}_min.${image[1]}`
