@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import glpi from '../../shared/glpiApi'
 
 export default class IconItemList extends React.Component {
     constructor (props) {
@@ -23,9 +22,9 @@ export default class IconItemList extends React.Component {
                 break
             
                 default:
-                    const { cfg_glpi } = await glpi.getGlpiConfig()
+                    const url_base = localStorage.getItem('baseURL')
 
-                    fetch(`https://${cfg_glpi.url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`, {
+                    fetch(`//${url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`, {
                         method: 'GET',
                         credentials: 'same-origin'
                     }).then((response) => {
