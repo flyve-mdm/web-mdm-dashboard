@@ -23,8 +23,15 @@ export default class IconItemList extends React.Component {
             
                 default:
                     const url_base = localStorage.getItem('baseURL')
+                    let url
+                    if (this.props.isMin) {
+                        const image = this.props.image.split(".")
+                        url = `//${url_base.split("//")[1]}/front/document.send.php?file=_pictures/${image[0]}_min.${image[1]}`
+                    } else {
+                        url = `//${url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`
+                    }
 
-                    fetch(`//${url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`, {
+                    fetch (url, {
                         method: 'GET',
                         credentials: 'same-origin'
                     }).then((response) => {
@@ -105,6 +112,7 @@ IconItemList.propTypes = {
     backgroundColor: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     type: PropTypes.oneOf(["file", "base64", "localFile"]).isRequired,
+    isMin: PropTypes.bool,
     imgClick: PropTypes.func,
     imgClass: PropTypes.string
 }
