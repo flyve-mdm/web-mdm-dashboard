@@ -80,8 +80,18 @@ export default class FilesContent extends Component {
                             <div className="contentStatus">
                                 <div className="name">{fileName}</div>
                                 <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
-                                <span className="deleteIcon" onClick={this.handleDelete} />
+                                <div>
+                                    <span
+                                        className="editIcon"
+                                        style={{ marginRight: '20px', fontSize: '20px' }}
+                                        onClick={this.handleEdit}
+                                    />
+                                    <span
+                                        className="deleteIcon"
+                                        style={{ marginRight: '20px', fontSize: '20px' }}
+                                        onClick={this.handleDelete}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
