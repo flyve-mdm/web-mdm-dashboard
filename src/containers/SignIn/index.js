@@ -64,7 +64,7 @@ class SignIn extends Component {
                     handleOnSubmit={this.handleFormSubmit}
                 />
             }
-            return this.props.isLoading ? <Loading message={`${I18n.t('commons.loading')}...`}/> : form 
+            return this.props.isLoading ? <div style={{ height: '140px' }}><Loading message={`${I18n.t('commons.loading')}...`} /></div> : form 
         }
     }
 }
