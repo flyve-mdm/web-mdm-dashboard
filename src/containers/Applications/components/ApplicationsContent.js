@@ -101,8 +101,18 @@ export default class ApplicationsContent extends Component {
                                 <div className="detail">{BytesToSize(this.state.data["filesize"])}</div>
                                 <span className="source">{this.state.data["source"]}</span>
                                 <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)} />
-                                <span className="deleteIcon" onClick={this.handleDelete} />
+                                <div>
+                                    <span
+                                        className="editIcon"
+                                        style={{ marginRight: '20px', fontSize: '20px' }}
+                                        onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)}
+                                    />
+                                    <span
+                                        className="deleteIcon"
+                                        style={{ marginRight: '20px', fontSize: '20px' }}
+                                        onClick={this.handleDelete}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
