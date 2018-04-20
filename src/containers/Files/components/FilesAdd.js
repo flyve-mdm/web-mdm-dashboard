@@ -72,41 +72,43 @@ export default class FilesAdd extends Component {
         } else {
             renderComponent = (
                 <ContentPane>
-                    <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane"> 
-                            {I18n.t('commons.new_file')}
-                        </h2>
-                    </div>
-                    <div className="separator" />
-                    <div style={{ padding: '10px' }}>
-                    <React.Fragment>
-                        <FilesUpload
-                            ref={(files) => { this.files = files }}
-                            className='files-dropzone'
-                            onChange={this.onFilesChange}
-                            onError={this.onFilesError}
-                            maxFiles={1}
-                            maxFileSize={10000000}
-                            minFileSize={0}
-                            clickable
-                        >
-                            {I18n.t('commons.drop_file')}
-                        </FilesUpload>
-                        <div style={{marginTop: 10}}>
-                            <button className="btn --primary" onClick={this.filesUpload}>
-                                {I18n.t('commons.save')}
-                            </button>
-                            {
-                                this.state.files.length > 0
-                                    ? <div>
-                                        {this.state.files.map((file) =>
-                                            <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
-                                        )}
-                                    </div>
-                                    : null
-                            }
+                    <div className="contentHeader" style={{ margin: '0 10px' }}>
+                        <div className="contentHeader">
+                            <h2 className="win-h2 titleContentPane">
+                                {I18n.t('commons.new_file')}
+                            </h2>
                         </div>
-                    </React.Fragment>
+                        <div className="separator" />
+                        <div style={{ padding: '10px' }}>
+                            <React.Fragment>
+                                <FilesUpload
+                                    ref={(files) => { this.files = files }}
+                                    className='files-dropzone'
+                                    onChange={this.onFilesChange}
+                                    onError={this.onFilesError}
+                                    maxFiles={1}
+                                    maxFileSize={10000000}
+                                    minFileSize={0}
+                                    clickable
+                                >
+                                    {I18n.t('commons.drop_file')}
+                                </FilesUpload>
+                                <div style={{ marginTop: 10 }}>
+                                    <button className="btn --primary" onClick={this.filesUpload}>
+                                        {I18n.t('commons.save')}
+                                    </button>
+                                    {
+                                        this.state.files.length > 0
+                                            ? <div>
+                                                {this.state.files.map((file) =>
+                                                    <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
+                                                )}
+                                            </div>
+                                            : null
+                                    }
+                                </div>
+                            </React.Fragment>
+                        </div>
                     </div>
                 </ContentPane>
             )

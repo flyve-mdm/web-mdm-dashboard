@@ -72,7 +72,7 @@ class InvitationsPendingPage extends Component {
 
         let listComponent = (
             <ContentPane>
-                <div className="listPane" style={{ padding: 10 }}>
+                <div className="listPane" style={{ margin: '0 10px' }}>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane" >
                             {I18n.t('invitations.pending')}
@@ -86,7 +86,7 @@ class InvitationsPendingPage extends Component {
         if (!this.state.isLoading && this.state.itemList.length > 0) {
             listComponent = (
                 <ContentPane>
-                    <div className="listPane" style={{ padding: 10 }}>
+                    <div className="listPane" style={{ margin: '0 10px' }}>
                         <div className="contentHeader">
                             <h2 className="win-h2 titleContentPane">
                                 {I18n.t('invitations.pending')}

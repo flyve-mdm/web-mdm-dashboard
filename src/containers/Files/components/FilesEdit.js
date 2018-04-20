@@ -91,11 +91,13 @@ export default class FilesEdit extends Component {
 
                 return (
                     <ContentPane>
-                        <button className="btn --primary" onClick={this.handleSaveFiles}>
-                            {I18n.t('commons.save')}
-                        </button>
-                        <div className="separator" />
-                        {renderComponent}
+                        <div className="contentHeader" style={{ margin: '0 10px' }}>
+                            <button className="btn --primary" onClick={this.handleSaveFiles}>
+                                {I18n.t('commons.save')}
+                            </button>
+                            <div className="separator" />
+                            {renderComponent}
+                        </div>
                     </ContentPane>
                 )
             }
