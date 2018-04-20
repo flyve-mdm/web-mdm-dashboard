@@ -63,7 +63,7 @@ class Map extends Component {
     }
 
     render () {
-        return <div id="map" style={this.props.style} />
+        return <div id="map" style={{...this.props.style, zIndex: 0}} />
     }
 }
 
