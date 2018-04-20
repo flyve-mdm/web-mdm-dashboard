@@ -1,0 +1,6 @@
+{
+    "selfRegistration": true,
+    "glpiApiLink": "your_URL",
+    "userToken": "your_token",
+    "appName": "MDM Dashboard"
+}
