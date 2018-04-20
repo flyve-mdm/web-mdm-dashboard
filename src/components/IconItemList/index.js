@@ -56,7 +56,6 @@ export default class IconItemList extends React.Component {
     }
 
     componentWillMount() {
-        this.getImage()
         if (this.props.type !== 'file' || this.props.image === '') {
             this.setState({
                 image: this.props.image
