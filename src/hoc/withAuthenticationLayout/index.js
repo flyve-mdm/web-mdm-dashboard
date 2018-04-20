@@ -41,25 +41,22 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
                         © 2017 - 2018 Teclib'.
                     </span>
                     <br/>
-                    <span className='language__span btn'>
-                        {I18n.t('commons.language')}
-                        <select className='language__select' onChange={
-                            event => props.changeLanguage(event.target.value)
-                        }>
-                            <option value='en_GB'>
-                                {I18n.t('commons.english')}
-                            </option>
-                            <option value='pt_BR'>
-                                {I18n.t('commons.portuguese')}
-                            </option>
-                            <option value='fr_FR'>
-                                {I18n.t('commons.french')}
-                            </option>
-                            <option value='es_ES'>
-                                {I18n.t('commons.spanish')}
-                            </option>
-                        </select>
-                    </span>
+                    <select onChange={
+                        event => props.changeLanguage(event.target.value)
+                    }>
+                        <option value='en_GB'>
+                            {I18n.t('commons.english')}
+                        </option>
+                        <option value='pt_BR'>
+                            {I18n.t('commons.portuguese')}
+                        </option>
+                        <option value='fr_FR'>
+                            {I18n.t('commons.french')}
+                        </option>
+                        <option value='es_ES'>
+                            {I18n.t('commons.spanish')}
+                        </option>
+                    </select>
                 </footer>
             </div>
         )
