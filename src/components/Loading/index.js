@@ -8,7 +8,7 @@ const Loading = props => {
         <div className="loading" style={{
             display: 'inline-block',
             verticalAlign: 'middle', 
-            marginLeft: '10px'
+            margin: '10px'
         }}>
             <div>
                 <div className='small-loader'>

@@ -151,8 +151,7 @@ export default class Main extends Component {
                                     <button className="btn --secondary" style={{float:'left', marginTop: 5, marginBottom: 5}} onClick={this.ping}>
                                         {I18n.t('commons.ping')}
                                     </button>
-                                </div>       
-
+                                </div>
                                 { this.state.sendingPing ? <Loading small/> : '' }
                             </div>
                             <div>
