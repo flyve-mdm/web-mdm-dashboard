@@ -127,7 +127,7 @@ class Select extends Component {
         return (
             <div className="froms__col">
                 <p>{this.props.label}</p>
-                <select className="win-dropdown" name={this.props.name} value={this.props.value} onChange={this.change}>
+                <select name={this.props.name} value={this.props.value} onChange={this.change}>
                         <option>
                             ---
                         </option>
