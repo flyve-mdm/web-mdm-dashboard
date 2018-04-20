@@ -94,7 +94,7 @@ export default class ApplicationsEdit extends Component {
 
                 return (
                     <ContentPane>
-                        <div className="contentHeader">
+                        <div className="contentHeader" style={{ margin: '0 10px' }}>
                             <h2 className="win-h2 titleContentPane"> 
                                 {I18n.t('applications.edit')} 
                             </h2>

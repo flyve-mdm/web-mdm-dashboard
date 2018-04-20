@@ -84,7 +84,7 @@ export default class ApplicationsContent extends Component {
             let image = "data:image/png;base64, " + this.state.data["icon"]
             return (
                 <ContentPane>
-                    <div className="contentHeader">
+                    <div className="contentHeader" style={{ margin: '0 10px' }}>
                         <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> 
                             {I18n.t('applications.title')} 
                         </h2>

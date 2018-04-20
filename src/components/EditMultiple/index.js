@@ -221,8 +221,8 @@ export default class EditMultiple extends Component {
             
             return (
                 <ContentPane>
-                    <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" > 
+                    <div className="contentHeader" style={{ margin: '0 10px' }}>
+                        <h2 className="win-h2 titleContentPane"> 
                             {I18n.t('edit_multiple.title')}
                         </h2>
                         <h4  className="win-h4">

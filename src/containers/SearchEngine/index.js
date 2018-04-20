@@ -120,6 +120,7 @@ class SearchEngine extends Component {
 
         return (
             <ContentPane>
+                <div className="contentHeader" style={{ margin: '0 10px' }}>
                 <h1>
                     {I18n.t('search_engine.title')}
                 </h1>
@@ -135,6 +136,7 @@ class SearchEngine extends Component {
                 <button className="btn --secondary" onClick={this.handleRequestItemType}> 
                     {I18n.t('commons.change')}
                 </button>
+                </div>
                 {this.state.fields.length > 0 &&
                     <SearchQueryBuilder
                         fields={this.state.fields}
@@ -143,9 +145,10 @@ class SearchEngine extends Component {
                     />
                 }
                 <br />
+                <div className="contentHeader" style={{ margin: '0 10px' }}>
                 {
                     this.state.isLoading 
-                        ? <p>{I18n.t('commons.loading')} ... </p>
+                        ? <p >{I18n.t('commons.loading')} ... </p>
                         : this.state.query 
                             ? this.state.query.rules.length ? (
                                 <button className="btn --primary" onClick={this.handleOnSearch}> 
@@ -165,7 +168,7 @@ class SearchEngine extends Component {
                             : <p>{I18n.t('search_engine.item_not_found')}</p>
                     : null
                 }
-                
+                </div>
             </ContentPane>
         )
     }
