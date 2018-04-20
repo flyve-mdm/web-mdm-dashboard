@@ -81,7 +81,31 @@ export default class ApplicationsContent extends Component {
         if (this.state.isLoading || this.state.data === undefined) {
             return (<Loading message={`${I18n.t('commons.loading')}...`} />)
         } else {
-            let image = "data:image/png;base64, " + this.state.data["icon"]
+            let image
+            if (this.state.data["icon"]) {
+                image = (
+                    <IconItemList 
+                        size={this.props.size} 
+                        image={"data:image/png;base64, " + this.state.data["icon"]} 
+                        type="base64"
+                        backgroundColor="transparent"
+                    />
+                )
+            } else {
+                image = (
+                    <div 
+                        style={{ 
+                            display: 'inline-block',
+                            width: 72, 
+                            height: 72,
+                            fontSize: '40px',
+                            textAlign: 'center'
+                        }}
+                    >
+                        <span className="documentIcon"/>
+                    </div>
+                )
+            }
             return (
                 <ContentPane>
                     <div className="contentHeader" style={{ margin: '0 10px' }}>
@@ -89,12 +113,7 @@ export default class ApplicationsContent extends Component {
                             {I18n.t('applications.title')} 
                         </h2>
                         <div className="itemInfo">
-                            <IconItemList
-                                size={72}
-                                image={image}
-                                type="base64"
-                                backgroundColor="transparent"
-                            />
+                            {image}
                             <div className="contentStatus">
                                 <div className="name">{this.state.data["alias"]}</div>
                                 <div className="detail">{this.state.data["name"]}</div>
