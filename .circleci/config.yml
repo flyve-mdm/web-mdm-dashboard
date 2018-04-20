@@ -23,7 +23,9 @@ jobs:
       
       - run: 
           name: "Build application"
-          command: yarn build
+          command: |
+            source ci/scripts/create_config_file.sh
+            yarn build
  
   test:
     docker:
@@ -48,7 +50,9 @@ jobs:
       
       - run: 
           name: "Run tests"
-          command: yarn test
+          command: |
+            source ci/scripts/create_config_file.sh
+            yarn test
  
   deploy:
     docker:
@@ -74,10 +78,12 @@ jobs:
       - run: 
           name: "Install Transifex Client and Files"
           command: source ci/scripts/transifex.sh
-      
+
       - run: 
           name: "Build application"
-          command: yarn build
+          command: |
+            source ci/scripts/create_config_file.sh
+            yarn build
       
       - run:
           name: "Create artifact"

@@ -9,6 +9,9 @@ echo "password = ${TRANSIFEX_API_TOKEN}" >> ~/.transifexrc
 echo "token = ${TRANSIFEX_API_TOKEN}" >> ~/.transifexrc
 tx pull -a
 
+# set configuration
+source ci/scripts/create_config_file.sh
+
 # build the dashboard
 yarn build
 rm -r /var/www/public/dashboard
