@@ -73,7 +73,7 @@ class ValidateAccount extends Component {
     render() {
         let renderComponent
         if (this.state.isLoading) {
-            renderComponent = <Loading message={`${I18n.t('commons.loading')}...`} />
+            renderComponent = <div style={{ height: '140px' }}><Loading message={`${I18n.t('commons.loading')}...`} /></div>
         } else {
             if (this.state.isValidated) {
                 renderComponent = (

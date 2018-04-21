@@ -108,7 +108,7 @@ export default class ApplicationsContent extends Component {
             }
             return (
                 <ContentPane>
-                    <div className="contentHeader">
+                    <div className="contentHeader" style={{ margin: '0 10px' }}>
                         <h2 className="win-h2" style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> 
                             {I18n.t('applications.title')} 
                         </h2>
@@ -120,8 +120,18 @@ export default class ApplicationsContent extends Component {
                                 <div className="detail">{BytesToSize(this.state.data["filesize"])}</div>
                                 <span className="source">{this.state.data["source"]}</span>
                                 <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)} />
-                                <span className="deleteIcon" onClick={this.handleDelete} />
+                                <div>
+                                    <span
+                                        className="editIcon"
+                                        style={{ marginRight: '20px', fontSize: '20px' }}
+                                        onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)}
+                                    />
+                                    <span
+                                        className="deleteIcon"
+                                        style={{ marginRight: '20px', fontSize: '20px' }}
+                                        onClick={this.handleDelete}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

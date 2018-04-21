@@ -58,35 +58,37 @@ export default class Enroll extends Component {
         } else {
             renderComponent = (
                 <ContentPane>
-                    <h2 className="win-h2 titleContentPane">
-                        {I18n.t('devices.enroll.title')}
-                    </h2>
-                    <p>
-                        {I18n.t('devices.enroll.insert_active_email')}
-                    </p>
-                    <p>
-                        {I18n.t('devices.enroll.email_with_qr')}
-                    </p>
-                    <input
-                        type="email"
-                        className="win-textbox"
-                        placeholder={I18n.t('commons.email')}
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.changeInput}
-                        required
-                    />
-                    <br />
-                    <button className="btn --secondary" onClick={() => this.props.history.goBack()}>
-                        {I18n.t('commons.cancel')}
-                    </button>
-                    <button
-                        className="btn --primary"
-                        style={{ marginLeft: 10 }}
-                        onClick={this.inviteDevice}
-                    >
-                        {I18n.t('commons.save')}
-                    </button>
+                    <div className="contentHeader" style={{ margin: '0 10px' }}>
+                        <h2 className="win-h2 titleContentPane">
+                            {I18n.t('devices.enroll.title')}
+                        </h2>
+                        <p>
+                            {I18n.t('devices.enroll.insert_active_email')}
+                        </p>
+                        <p>
+                            {I18n.t('devices.enroll.email_with_qr')}
+                        </p>
+                        <input
+                            type="email"
+                            className="win-textbox"
+                            placeholder={I18n.t('commons.email')}
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.changeInput}
+                            required
+                        />
+                        <br />
+                        <button className="btn --secondary" onClick={() => this.props.history.goBack()}>
+                            {I18n.t('commons.cancel')}
+                        </button>
+                        <button
+                            className="btn --primary"
+                            style={{ marginLeft: 10 }}
+                            onClick={this.inviteDevice}
+                        >
+                            {I18n.t('commons.save')}
+                        </button>
+                    </div>
                 </ContentPane >
             )
         }

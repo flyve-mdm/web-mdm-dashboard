@@ -39,21 +39,21 @@ class DatePicker extends Component {
                 <p>{this.props.label}</p>
 
                 <div className="win-disposable win-datepicker">
-                    <select className="win-datepicker-month win-dropdown win-order0" name="month" value={this.state.month} onChange={this.change}>
+                    <select className="win-datepicker-month win-order0" name="month" value={this.state.month} onChange={this.change}>
                         <option>
                             ---
                         </option>
                         { MONTHS () }
                     </select>
 
-                    <select className="win-datepicker-date win-dropdown win-order1" name="day" value={this.state.day} onChange={this.change}>
+                    <select className="win-datepicker-date win-order1" name="day" value={this.state.day} onChange={this.change}>
                         <option>
                             ---
                         </option>
                         { DAYS (this.state.year, this.state.month) }
                     </select>
 
-                    <select className="win-datepicker-year win-dropdown win-order2" name="year" value={this.state.year} onChange={this.change}>
+                    <select className="win-datepicker-year win-order2" name="year" value={this.state.year} onChange={this.change}>
                         <option>
                             ---
                         </option>

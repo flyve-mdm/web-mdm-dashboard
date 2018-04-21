@@ -74,14 +74,24 @@ export default class FilesContent extends Component {
             const fileName = this.props.selectedItems.length > 0 ? this.props.selectedItems[0]["PluginFlyvemdmFile.name"] : ''
             return (
                 <ContentPane>
-                    <div className="contentHeader">
+                    <div className="contentHeader" style={{ margin: '0 10px' }}>
                         <div className="itemInfo">
                             <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} />
                             <div className="contentStatus">
                                 <div className="name">{fileName}</div>
                                 <br />
-                                <span className="editIcon" style={{ marginRight: '20px' }} onClick={this.handleEdit} />
-                                <span className="deleteIcon" onClick={this.handleDelete} />
+                                <div>
+                                    <span
+                                        className="editIcon"
+                                        style={{ marginRight: '20px', fontSize: '20px' }}
+                                        onClick={this.handleEdit}
+                                    />
+                                    <span
+                                        className="deleteIcon"
+                                        style={{ marginRight: '20px', fontSize: '20px' }}
+                                        onClick={this.handleDelete}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -91,7 +91,7 @@ class ResetPassword extends Component {
 
         if (this.props.isLoading) {
             return (
-                <Loading message={`${I18n.t('commons.sending')}...`} />
+                <div style={{ height: '140px' }}><Loading message={`${I18n.t('commons.sending')}...`} /></div>
             )
         } else {
             return (

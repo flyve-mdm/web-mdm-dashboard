@@ -225,7 +225,6 @@ class FleetsTaskItemList extends Component {
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
                                         <select
-                                            className="win-dropdown"
                                             name={this.props.data['PluginFlyvemdmPolicy.id']}
                                             value={this.props.value}
                                             onChange={this.handleChangeInput}>
@@ -265,8 +264,7 @@ class FleetsTaskItemList extends Component {
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
-                                        <select
-                                        className="win-dropdown" 
+                                        <select 
                                         name={this.props.data['PluginFlyvemdmPolicy.id']}
                                         value = {0} 
                                         onChange={this.handleChangeInput}>
@@ -357,8 +355,7 @@ class FleetsTaskItemList extends Component {
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
                                     <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
-                                        <select
-                                            className="win-dropdown"
+                                        <select 
                                             name={this.props.data['PluginFlyvemdmPolicy.id']}
                                             value={0}
                                             onChange={this.handleChangeInput}>

@@ -77,6 +77,7 @@ export default class ApplicationsAdd extends Component {
         } else {
             renderComponent = (
                 <ContentPane>
+                    <div className="contentHeader" style={{ margin: '0 10px' }}>
                     <div className="contentHeader">
                         <h2 className="win-h2 titleContentPane"> 
                             {I18n.t('applications.new')} 
@@ -117,6 +118,7 @@ export default class ApplicationsAdd extends Component {
                                     : null
                             }
                         </div>
+                    </div>
                     </div>
                 </ContentPane>
             )

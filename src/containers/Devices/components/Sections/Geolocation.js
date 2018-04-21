@@ -11,6 +11,7 @@ export default class Geolocation extends Component {
         super()
         this.state ={
           isLoading: true,
+          isLoadingGeolocation: false,
           locations: [],
           showLocations: []
         }
@@ -30,6 +31,7 @@ export default class Geolocation extends Component {
 
     requestLocation = async () => {
         try {
+            this.setState({ isLoadingGeolocation: true})
             await this.props.glpi.updateItem({
                 itemtype: itemtype.PluginFlyvemdmAgent, 
                 id: this.props.id,
@@ -42,6 +44,7 @@ export default class Geolocation extends Component {
             })
             this.handleRefresh()
         } catch (error) {
+            this.setState({ isLoadingGeolocation: false })
             this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
         }
     }
@@ -56,12 +59,14 @@ export default class Geolocation extends Component {
             })    
             this.setState({
                 locations: response,
-                isLoading: false
+                isLoading: false,
+                isLoadingGeolocation: false
             })
         } catch (error) {
             this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             this.setState({  
-                isLoading: false 
+                isLoading: false,
+                isLoadingGeolocation: false
             })
         }
     }
@@ -86,11 +91,14 @@ export default class Geolocation extends Component {
                         <Map markers={this.state.showLocations} />
                         </div>
                         
-
-                        <button className="btn --secondary" style={{margin: 5}} onClick={this.requestLocation}>
-                            {I18n.t('devices.geolocation.request_current_location')}
-                        </button>
-
+                        <div style={{ display: 'flex', overflow: 'auto' }}>
+                        <div>
+                            <button className="btn --secondary" style={{ margin: 5 }} onClick={this.requestLocation}>
+                                {I18n.t('devices.geolocation.request_current_location')}
+                            </button>
+                        </div>
+                        {this.state.isLoadingGeolocation ? <Loading small /> : ''}
+                        </div>
                         <GeolocationList locations={this.state.locations} showLocations={this.showLocations}/>
                     </React.Fragment>
                 )

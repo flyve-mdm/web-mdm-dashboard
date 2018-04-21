@@ -72,7 +72,6 @@ class Notifications extends Component {
                     </div>
                     <div className="controller" style={{ paddingTop: 10 }}>
                         <select 
-                        className="win-dropdown" 
                         name='notificationType' 
                         value={this.state.notificationType}
                         onChange={this.changeNotificationType}
