@@ -39,8 +39,6 @@ $chart-size: 310px;
                 height: $box-size;
                 cursor: pointer;
 
-                @include transition(all .1s);
-
                 @extend %box-shadow;
 
                 .title-box {

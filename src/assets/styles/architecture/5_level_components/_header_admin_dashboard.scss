@@ -1,6 +1,4 @@
 .header-block {
-  @include animation('fade-in .5s');
-
   background: transparent;
   height: $header-height;
 
