@@ -15,6 +15,7 @@ import ContentPane from '../../components/ContentPane'
 import itemtype from '../../shared/itemtype'
 import publicURL from '../../shared/publicURL'
 import logout from '../../shared/logout'
+import { slideTop } from '../../shared/animations'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -271,6 +272,9 @@ class Dashboard extends Component {
         devicesByOperatingSystemVersion: newState.devicesByOperatingSystemVersion,
         devicesByUsers: newState.devicesByUsers,
         isLoading: false
+      }, () => {
+        // Play the animation
+        slideTop(this.home).play()
       })
     } else {
       logout()
@@ -436,7 +440,7 @@ class Dashboard extends Component {
     const renderComponent = this.state.isLoading ? <div style={{width: '100%', height: 'calc(100vh - 80px)'}}><Loading message={`${I18n.t('commons.loading')}...`} /></div>:
     (
       <ContentPane>
-        <div className="dashboard-block">
+        <div className="dashboard-block" ref={home => this.home = home}>
 
         {
           (renderInfoBox.length > 0 || renderGraphics.length > 0) ?
