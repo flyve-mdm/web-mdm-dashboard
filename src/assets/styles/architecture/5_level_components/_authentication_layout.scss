@@ -32,8 +32,6 @@
         .authentication-email__div,
         .authentication-forgot__div {
             min-height: 18vw;
-
-            @include animation('fade-in .5s ease-out');
         }
 
         .authentication-email__div {
