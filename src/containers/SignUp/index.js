@@ -9,10 +9,10 @@ import {
     changeNotificationMessage,
     fetchCaptcha,
     fetchSignUp
-} from '../../store/authentication/actions';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { buildDataArray, changeState, handleSubmitForm } from './actions';
+} from '../../store/authentication/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { buildDataArray, changeState, handleSubmitForm } from './actions'
 import publicURL from '../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
