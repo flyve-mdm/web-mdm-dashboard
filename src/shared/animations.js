@@ -11,7 +11,7 @@ export default function (animate = display.animate) {
     }
 }
 
-const slideTop = element => new AnimateFrom(element, { y: 20 }, { duration: 300 })
+const slideTop = element => new AnimateFrom(element, { y: 20 }, { duration: 100 })
 
 export {
     slideTop

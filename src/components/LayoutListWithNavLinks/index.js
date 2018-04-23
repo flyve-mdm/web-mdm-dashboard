@@ -3,16 +3,15 @@ import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
+import { slideTop } from '../../shared/animations'
 
 class ListWithNavLinks extends Component {
     constructor(props) {
         super(props)
-        const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
         this.state = {
             mode: getMode(),
             itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
-            styleNav: this.styleNav(getMode(), this.props.history),
-            animate: display.animations ? "navlinks--animate": ""
+            styleNav: this.styleNav(getMode(), this.props.history)
         }
     }
 
@@ -56,10 +55,18 @@ class ListWithNavLinks extends Component {
         })
     }
 
+    componentDidMount () {
+        slideTop(this.nav).play()
+    }
+
     render () {
         return (
             <div className="flex-block --with-scroll --with-content-pane">
-                <nav style={this.state.styleNav} className={`flex-block-list navlinks ${this.state.animate}`}>
+                <nav 
+                    style={this.state.styleNav} 
+                    className="flex-block-list navlinks" 
+                    ref={nav => this.nav = nav}
+                >
                     <ul>
                         {this.props.routes.map((route, i) => {
                             if (route.path !== "/") {
