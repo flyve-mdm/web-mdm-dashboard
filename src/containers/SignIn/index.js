@@ -6,7 +6,7 @@ import UsernameFieldset from './components/UsernameFieldset'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import { fetchSignIn } from '../../store/authentication/actions'
-import { I18n } from "react-i18nify"
+import { I18n } from 'react-i18nify'
 import publicURL from '../../shared/publicURL'
 // Async Component
 import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
