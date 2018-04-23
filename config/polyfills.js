@@ -20,3 +20,6 @@ Object.assign = require('object-assign');
 if (process.env.NODE_ENV === 'test') {
   require('raf').polyfill(global);
 }
+
+// web animations js
+require('../node_modules/web-animations-js/web-animations-next-lite.min.js')
