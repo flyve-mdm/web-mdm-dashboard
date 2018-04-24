@@ -7,11 +7,18 @@ import { ScrollSync, ScrollSyncPane } from '../ScrollSync'
 import withGLPI from '../../hoc/withGLPI'
 import { I18n } from "react-i18nify"
 import publicURL from '../../shared/publicURL'
+import { splitview } from '../../shared/animations'
 
 class SplitView extends React.Component {
 
   logout = () => {
     this.props.logout()
+  }
+
+  componentDidUpdate () {
+    if (this.props.expanded) {
+      splitview(this.splitview, !this.props.contract).play()
+    }
   }
 
   render () {
@@ -103,31 +110,35 @@ class SplitView extends React.Component {
                     </div>
                   </ScrollSyncPane>
                 </nav>
-                { this.props.expanded && (
-                <nav className="splitview-wrapped__navbar" onClick={this.props.handleContract}>
-                  <ScrollSyncPane>
-                    <div className={`splitview-wrapper-wrapper__div --large --end --opening ${
-                        this.props.contract && '--closing'
-                      }`}>
-                      <section className="splitview-wrapped-navbar-wrapped-top__section --description">
-                        <SpanWithPopper description={I18n.t('commons.dashboard')} to={`${publicURL}/app`} />
-                        <SpanWithPopper description={I18n.t('commons.devices')} to={`${publicURL}/app/devices`} />
-                        <SpanWithPopper description={I18n.t('commons.invitations')} to={`${publicURL}/app/invitations`} />
-                        <SpanWithPopper description={I18n.t('commons.fleets')} to={`${publicURL}/app/fleets`} />
-                        <SpanWithPopper description={I18n.t('commons.files')} to={`${publicURL}/app/files`} />
-                        <SpanWithPopper description={I18n.t('commons.applications')} to={`${publicURL}/app/applications`} />
-                        <SpanWithPopper description={I18n.t('commons.users')} to={`${publicURL}/app/users`} />
-                        <SpanWithPopper description={I18n.t('commons.search')} to={`${publicURL}/app/search`} />
-                      </section>
-                      <section className="splitview-wrapped-navbar-wrapped-bottom__section --description">
-                        <SpanWithPopper description={I18n.t('commons.setting_flyve_mdm')} to={`${publicURL}/app/settings`} />
-                        <SpanWithPopper description={I18n.t('commons.about_flyve_mdm')} to={`${publicURL}/app/about`} />
-                        <SpanWithPopper description={I18n.t('commons.logout')} click={this.logout} />
-                      </section>
-                    </div>
-                  </ScrollSyncPane>
-                </nav>
-                )}
+                { this.props.expanded ? 
+                  (
+                    <nav 
+                      className="splitview-wrapped__navbar"
+                      onClick={() => this.props.handleContract()}
+                      ref={nav => this.splitview = nav}
+                    >
+                      <ScrollSyncPane>
+                        <div className="splitview-wrapper-wrapper__div --large --end">
+                          <section className="splitview-wrapped-navbar-wrapped-top__section --description">
+                            <SpanWithPopper description={I18n.t('commons.dashboard')} to={`${publicURL}/app`} />
+                            <SpanWithPopper description={I18n.t('commons.devices')} to={`${publicURL}/app/devices`} />
+                            <SpanWithPopper description={I18n.t('commons.invitations')} to={`${publicURL}/app/invitations`} />
+                            <SpanWithPopper description={I18n.t('commons.fleets')} to={`${publicURL}/app/fleets`} />
+                            <SpanWithPopper description={I18n.t('commons.files')} to={`${publicURL}/app/files`} />
+                            <SpanWithPopper description={I18n.t('commons.applications')} to={`${publicURL}/app/applications`} />
+                            <SpanWithPopper description={I18n.t('commons.users')} to={`${publicURL}/app/users`} />
+                            <SpanWithPopper description={I18n.t('commons.search')} to={`${publicURL}/app/search`} />
+                          </section>
+                          <section className="splitview-wrapped-navbar-wrapped-bottom__section --description">
+                            <SpanWithPopper description={I18n.t('commons.setting_flyve_mdm')} to={`${publicURL}/app/settings`} />
+                            <SpanWithPopper description={I18n.t('commons.about_flyve_mdm')} to={`${publicURL}/app/about`} />
+                            <SpanWithPopper description={I18n.t('commons.logout')} click={this.logout} />
+                          </section>
+                        </div>
+                      </ScrollSyncPane>
+                    </nav>
+                  ) : ""
+                } 
               </div>
             </div>
           </ScrollSync>
