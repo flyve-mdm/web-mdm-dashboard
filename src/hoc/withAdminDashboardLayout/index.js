@@ -14,7 +14,7 @@ import { logout } from '../../store/authentication/actions'
 
 // TODO: Passing Routes to props for generate NavLink in SplitView component
 
-const TIMEOUT_CONTRACT = 250
+const TIMEOUT_CONTRACT = 150
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -84,16 +84,20 @@ const withAdminDashboardLayout = WrappedComponent => {
     handleContract = () => {
       this.setState({
         contract: true
+      }, () => {
+        this.handleSetTimeOut()
       })
     }
 
     handleSetTimeOut = () => {
-      this.state.contract && setTimeout(() => {
-        this.setState({
-          contract: false,
-          expanded: false
-        })
-      }, TIMEOUT_CONTRACT)
+      if (this.state.contract) {
+        setTimeout(() => {
+          this.setState({
+            expanded: false,
+            contract: false
+          })
+        }, TIMEOUT_CONTRACT)
+      }
     }
 
     render() {
