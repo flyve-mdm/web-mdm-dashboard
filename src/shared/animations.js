@@ -25,7 +25,21 @@ const splitview = (element, expanded) => {
     return animation 
 }
 
+const slideLeft = element => {
+    const animation = new AnimateFrom(element, { x: 60 }, { duration: 100 })
+    if (!animate()) animation.play = () => {}
+    return animation
+}
+
+const slideRight = element => {
+    const animation = new AnimateFrom(element, { x: -60 }, { duration: 100 })
+    if (!animate()) animation.play = () => {}
+    return animation
+}
+
 export {
     slideTop,
-    splitview
+    splitview,
+    slideLeft,
+    slideRight
 }
