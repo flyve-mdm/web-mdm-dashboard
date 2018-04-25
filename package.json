@@ -89,7 +89,7 @@
   "devDependencies": {
     "@sonarwhal/formatter-summary": "^2.0.2",
     "@sonarwhal/rule-axe": "^4.0.1",
-    "@sonarwhal/rule-content-type": "^3.0.3",
+    "@sonarwhal/rule-content-type": "^3.0.4",
     "@sonarwhal/rule-disown-opener": "^3.0.3",
     "@sonarwhal/rule-highest-available-document-mode": "^3.0.3",
     "@sonarwhal/rule-html-checker": "^4.0.0",
@@ -104,7 +104,7 @@
     "node-sass": "^4.7.2",
     "raw-loader": "^0.5.1",
     "sass-loader": "^7.0.0",
-    "sonarwhal": "^1.7.0",
+    "sonarwhal": "^1.8.0",
     "standard-version": "^4.2.0"
   },
   "homepage": "https://dev.flyve.org/dashboard",

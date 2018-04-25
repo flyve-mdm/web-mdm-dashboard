@@ -53,6 +53,10 @@ jobs:
           command: |
             source ci/scripts/create_config_file.sh
             yarn test
+
+      - run: 
+          name: "Run sonarwhal"
+          command: source ci/scripts/sonarwhal.sh
  
   deploy:
     docker:
@@ -101,7 +105,9 @@ jobs:
       
       - run: 
           name: "Deploy application"
-          command: source ci/scripts/deploy.sh
+          command: |
+            source ci/scripts/deploy.sh
+            sonarwhal https://dev.flyve.org/dashboard/
 
 workflows:
   version: 2
