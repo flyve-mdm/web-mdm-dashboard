@@ -100,6 +100,7 @@ export default class InvitationsList extends Component {
             this.setState({
                 isLoading: true,
                 scrolling: false,
+                totalcount: 0,
                 pagination: {
                     start: 0,
                     page: 1,
@@ -263,9 +264,8 @@ export default class InvitationsList extends Component {
                             range[key] = this.state.totalcount - 1
                     }
                 }
-                const invitations = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: range}})
-
-                
+                const invitations = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${range.from}-${range.to}`}})
+        
                 for (const item in invitations.data) {
                     this.state.itemList.push(invitations.data[item])
                 }
