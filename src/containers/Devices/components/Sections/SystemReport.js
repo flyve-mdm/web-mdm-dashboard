@@ -11,7 +11,8 @@ export default class SystemReport extends Component {
         super(props)
         this.state = {
             data: undefined,
-            isLoading: false
+            isLoading: false,
+            requestingInventory: false
         }
     }
 
@@ -28,9 +29,10 @@ export default class SystemReport extends Component {
         this.handleRefresh()
     }
 
-    handleRefresh =  () => {
+    handleRefresh = () => {
         this.setState({
-            isLoading: true
+            isLoading: true,
+            requestingInventory: false
         }, async () => {
             try {
                 this.setState({
@@ -44,7 +46,26 @@ export default class SystemReport extends Component {
                 this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
         })
-    }            
+    }      
+    
+    requestInventory = () => {
+        this.setState({
+            requestingInventory: true
+        }, async () => {
+            try {
+                await this.props.glpi.genericRequest({
+                    path: `${itemtype.PluginFlyvemdmAgent}/${this.props.id}`,
+                    requestParams: {
+                        method: 'PUT',
+                        body: JSON.stringify({"input":{"_inventory": ""}})
+                    }
+                })
+                this.handleRefresh() 
+            } catch (error) {
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))                
+            }
+        })
+    }
 
     render() {
         if (this.state.isLoading && !this.state.data) {
@@ -54,7 +75,7 @@ export default class SystemReport extends Component {
                 <div className="devices">
                     <div className="system-report">
                         <div style={{overflow: 'auto'}}>
-                            <button className="btn --secondary" style={{float:'right', marginRight: 10}} onClick={this.ping}>
+                            <button className="btn --secondary" style={{float:'right', marginRight: 10}} onClick={this.requestInventory}>
                                 {I18n.t('devices.system_report.request_inventory')}
                             </button>
                         </div>
