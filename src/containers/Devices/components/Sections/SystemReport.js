@@ -54,13 +54,18 @@ export default class SystemReport extends Component {
             requestingInventory: true
         }, async () => {
             try {
-                await this.props.glpi.genericRequest({
+                const response = await this.props.glpi.genericRequest({
                     path: `${itemtype.PluginFlyvemdmAgent}/${this.props.id}`,
                     requestParams: {
                         method: 'PUT',
                         body: JSON.stringify({"input":{"_inventory": ""}})
                     }
                 })
+                this.props.setNotification({
+                    title: I18n.t('commons.success'),
+                    body: response[0].message,
+                    type: 'success'
+                }) 
                 this.handleRefresh() 
             } catch (error) {
                 this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))   
