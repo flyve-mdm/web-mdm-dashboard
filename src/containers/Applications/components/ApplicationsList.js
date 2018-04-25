@@ -20,6 +20,7 @@ export default class ApplicationsList extends Component {
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
             order: "ASC",
+            totalcount: 0,
             pagination: {
                 start: 0,
                 page: 1,
@@ -69,6 +70,7 @@ export default class ApplicationsList extends Component {
             this.setState({
                 isLoading: true,
                 scrolling: false,
+                totalcount: 0,
                 pagination: {
                     start: 0,
                     page: 1,
@@ -79,7 +81,8 @@ export default class ApplicationsList extends Component {
             this.setState({
                 isLoading: false,
                 order: response.order,
-                itemList: new WinJS.Binding.List(response.data)
+                itemList: new WinJS.Binding.List(response.data),
+                totalcount: response.totalcount
             })
             
         } catch (error) {
@@ -228,17 +231,31 @@ export default class ApplicationsList extends Component {
 
     loadMoreData = async () => {
         try {
-            const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmPackage, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
-            for (const item in response.data) {
-                this.state.itemList.push(response.data[item])
+            let range = {
+                from: this.state.pagination.count * this.state.pagination.page,
+                to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1
             }
-
-            this.setState({
-                pagination: {
-                    ...this.state.pagination,
-                    page: this.state.pagination.page + 1
+            
+            if (range.from <= this.state.totalcount) {
+                for (const key in range) {
+                    if (range.hasOwnProperty(key)) {
+                        if (range[key] >= this.state.totalcount)
+                            range[key] = this.state.totalcount - 1
+                    }
                 }
-            })
+                const response = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmPackage, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${range.from}-${range.to}` } })
+                
+                for (const item in response.data) {
+                    this.state.itemList.push(response.data[item])
+                }
+
+                this.setState({
+                    pagination: {
+                        ...this.state.pagination,
+                        page: this.state.pagination.page + 1
+                    }
+                })
+            }
 
             this.listView.winControl.footer.style.height = '1px'
 
