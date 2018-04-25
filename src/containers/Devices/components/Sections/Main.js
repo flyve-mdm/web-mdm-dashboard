@@ -59,7 +59,7 @@ export default class Main extends Component {
 
             let itemListToDelete = this.props.selectedItems.map((item) => {
                 return {
-                    id: item["PluginFlyvemdmAgent.id"]
+                    id: item[`${itemtype.PluginFlyvemdmAgent}.id`]
                 }
             })
 
@@ -95,7 +95,7 @@ export default class Main extends Component {
         }, async () => {
             try {
                 const response = await this.props.glpi.genericRequest({
-                    path: `PluginFlyvemdmAgent/${this.props.id}`,
+                    path: `${itemtype.PluginFlyvemdmAgent}/${this.props.id}`,
                     requestParams: {
                         method: 'PUT',
                         body: JSON.stringify({"input":{"_ping": ""}})
