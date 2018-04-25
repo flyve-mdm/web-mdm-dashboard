@@ -117,7 +117,7 @@ class Security extends Component {
     
             if (isCorrect) {
                 this.setState(
-                    { isLoading: true}, 
+                    { isLoading: true},
                     async () => {
                         try {
                             await this.props.glpi.updateItem({

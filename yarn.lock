@@ -135,7 +135,7 @@
   dependencies:
     axe-core "^3.0.1"
 
-"@sonarwhal/rule-content-type@^3.0.3":
+"@sonarwhal/rule-content-type@^3.0.4":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@sonarwhal/rule-content-type/-/rule-content-type-3.0.4.tgz#711d570ca8424395a8d03554c94b09b1227733bc"
   dependencies:
@@ -8574,7 +8574,7 @@ socks@~2.2.0:
     ip "^1.1.5"
     smart-buffer "^4.0.1"
 
-sonarwhal@^1.7.0:
+sonarwhal@^1.8.0:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/sonarwhal/-/sonarwhal-1.8.1.tgz#303c52520de99b188f0ad9e23f9505bdbb9a61e2"
   dependencies:
