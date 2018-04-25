@@ -105,6 +105,7 @@ export default class UsersList extends Component {
                 isLoading: true,
                 scrolling: false,
                 selectedItems: [],
+                totalcount: 0,
                 pagination: {
                     start: 0,
                     page: 1,

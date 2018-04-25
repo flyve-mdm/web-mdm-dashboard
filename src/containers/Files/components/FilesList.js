@@ -20,6 +20,7 @@ export default class FilesList extends Component {
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
             order: "ASC",
+            totalcount: 0,
             pagination: {
                 start: 0,
                 page: 1,
@@ -67,6 +68,7 @@ export default class FilesList extends Component {
         this.setState({
             isLoading: true,
             scrolling: false,
+            totalcount: 0,
             pagination: {
                 start: 0,
                 page: 1,
@@ -78,7 +80,8 @@ export default class FilesList extends Component {
                 this.setState({
                     order: files.order,
                     itemList: new WinJS.Binding.List(files.data),
-                    isLoading: false
+                    isLoading: false,
+                    totalcount: files.totalcount
                 })
             } catch (error) {
                 this.setState({
@@ -220,18 +223,31 @@ export default class FilesList extends Component {
     }
 
     loadMoreData = async () => {
-        try {
-            const files = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFile, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
-            for (const item in files.data) {
-                this.state.itemList.push(files.data[item])
+        try {            
+            let range = {
+                from: this.state.pagination.count * this.state.pagination.page,
+                to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1
             }
-
-            this.setState({
-                pagination: {
-                    ...this.state.pagination,
-                    page: this.state.pagination.page + 1
+            if (range.from <= this.state.totalcount) {
+                for (const key in range) {
+                    if (range.hasOwnProperty(key)) {
+                        if (range[key] >= this.state.totalcount)
+                            range[key] = this.state.totalcount - 1
+                    }
                 }
-            })
+                const files = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFile, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${range.from}-${range.to}` } })
+                
+                for (const item in files.data) {
+                    this.state.itemList.push(files.data[item])
+                }
+
+                this.setState({
+                    pagination: {
+                        ...this.state.pagination,
+                        page: this.state.pagination.page + 1
+                    }
+                })
+            }
 
             this.listView.winControl.footer.style.height = '1px'
 
