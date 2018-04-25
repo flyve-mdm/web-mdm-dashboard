@@ -21,6 +21,7 @@ export default class InvitationsList extends Component {
             isLoading: true,
             itemList: new WinJS.Binding.List([]),
             order: "ASC",
+            totalcount: 0,
             pagination: {
                 start: 0,
                 page: 1,
@@ -109,7 +110,8 @@ export default class InvitationsList extends Component {
             this.setState({
                 isLoading: false,
                 order: invitations.order,
-                itemList: BuildItemList(invitations)
+                itemList: BuildItemList(invitations),
+                totalcount: invitations.totalcount
             })
         } catch (e) {
             this.props.handleMessage({notification: this.props.setNotification, error: e, type:'alert'})
@@ -249,19 +251,32 @@ export default class InvitationsList extends Component {
     }
 
     loadMoreData = async () => {
-        try {
-            const invitations = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
-
-            for (const item in invitations.data) {
-                this.state.itemList.push(invitations.data[item])
+        try {            
+            let range = {
+                from: this.state.pagination.count * this.state.pagination.page,
+                to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1
             }
-
-            this.setState({
-                pagination: {
-                    ...this.state.pagination,
-                    page: this.state.pagination.page + 1
+            if (range.from <= this.state.totalcount) {
+                for (const key in range) {
+                    if (range.hasOwnProperty(key)) {
+                        if (range[key] >= this.state.totalcount)
+                            range[key] = this.state.totalcount - 1
+                    }
                 }
-            })
+                const invitations = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: range}})
+
+                
+                for (const item in invitations.data) {
+                    this.state.itemList.push(invitations.data[item])
+                }
+    
+                this.setState({
+                    pagination: {
+                        ...this.state.pagination,
+                        page: this.state.pagination.page + 1
+                    }
+                })
+            }
 
             this.listView.winControl.footer.style.height = '1px'
             
