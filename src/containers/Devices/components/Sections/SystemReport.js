@@ -53,6 +53,11 @@ export default class SystemReport extends Component {
             return (
                 <div className="devices">
                     <div className="system-report">
+                        <div style={{overflow: 'auto'}}>
+                            <button className="btn --secondary" style={{float:'right', marginRight: 10}} onClick={this.ping}>
+                                {I18n.t('devices.system_report.request_inventory')}
+                            </button>
+                        </div>
                         <div className="title">
                             {I18n.t('commons.agent')}
                         </div>

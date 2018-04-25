@@ -217,7 +217,8 @@
       "category": "Category"
     },
     "system_report": {
-      "title": "System Report"
+      "title": "System Report",
+      "request_inventory": "Request inventory"
     },
     "main": {
       "title": "Main",
