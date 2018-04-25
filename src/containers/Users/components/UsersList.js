@@ -22,6 +22,7 @@ export default class UsersList extends Component {
             isLoading: false,
             itemList: new WinJS.Binding.List([]),
             order: "ASC",
+            totalcount: 0,
             pagination: {
                 start: 0,
                 page: 1,
@@ -110,11 +111,14 @@ export default class UsersList extends Component {
                     count: 15
                 }
             })
+            
             const response = await this.props.glpi.searchItems({ itemtype: itemtype.User, options: { uid_cols: true, forcedisplay: [1, 2, 5, 34, 150] } })        
+
             this.setState({
                 isLoading: false,
                 order: response.order,
-                itemList: BuildItemList(response)
+                itemList: BuildItemList(response),
+                totalcount: response.totalcount
             })
         } catch (e) {
             this.setState({
@@ -219,18 +223,30 @@ export default class UsersList extends Component {
 
     loadMoreData = async () => {
         try {
-            const devices = await this.props.glpi.searchItems({ itemtype: itemtype.User, options: { uid_cols: true, forcedisplay: [1, 2, 5, 34, 150], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
-            
-            for (const item in devices.data) {
-                this.state.itemList.push(devices.data[item])
+            let range = {
+                from: this.state.pagination.count * this.state.pagination.page,
+                to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1
             }
-
-            this.setState({
-                pagination: {
-                    ...this.state.pagination,
-                    page: this.state.pagination.page + 1
+            if (range.from <= this.state.totalcount) {
+                for (const key in range) {
+                    if (range.hasOwnProperty(key)) {
+                        if (range[key] >= this.state.totalcount)
+                            range[key] = this.state.totalcount - 1
+                    }
                 }
-            })
+                const response = await this.props.glpi.searchItems({ itemtype: itemtype.User, options: { uid_cols: true, forcedisplay: [1, 2, 5, 34, 150], order: this.state.order, range: `${range.from}-${range.to}` } })
+                
+                for (const item in response.data) {
+                    this.state.itemList.push(response.data[item])
+                }
+    
+                this.setState({
+                    pagination: {
+                        ...this.state.pagination,
+                        page: this.state.pagination.page + 1
+                    }
+                })
+            }
 
             this.listView.winControl.footer.style.height = '1px'
 
