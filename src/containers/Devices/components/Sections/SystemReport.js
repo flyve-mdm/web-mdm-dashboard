@@ -4,6 +4,7 @@ import Inventory from './Inventory'
 import Loader from '../../../../components/Loader'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
+import Loading from '../../../../components/Loading'
 
 export default class SystemReport extends Component {
 
@@ -62,7 +63,10 @@ export default class SystemReport extends Component {
                 })
                 this.handleRefresh() 
             } catch (error) {
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))                
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))   
+                this.setState({
+                    requestingInventory: false
+                })             
             }
         })
     }
@@ -74,10 +78,11 @@ export default class SystemReport extends Component {
             return (
                 <div className="devices">
                     <div className="system-report">
-                        <div style={{overflow: 'auto'}}>
-                            <button className="btn --secondary" style={{float:'right', marginRight: 10}} onClick={this.requestInventory}>
+                        <div className="request-inventory">
+                            <button className="btn --secondary" onClick={this.requestInventory}>
                                 {I18n.t('devices.system_report.request_inventory')}
                             </button>
+                            {this.state.requestingInventory ? <Loading small style={{float:'right'}}/> : ""}
                         </div>
                         <div className="title">
                             {I18n.t('commons.agent')}
