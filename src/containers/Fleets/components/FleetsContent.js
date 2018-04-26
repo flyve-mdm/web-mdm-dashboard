@@ -6,6 +6,7 @@ import Loading from '../../../components/Loading'
 import Confirmation from '../../../components/Confirmation'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
+import publicURL from '../../../shared/publicURL'
 
 class FleetsContent extends Component {
 
@@ -778,6 +779,10 @@ class FleetsContent extends Component {
         })
     }
 
+    goToList = () => {
+        this.props.history.push(`${publicURL}/app/fleets/${this.props.selectedItems[0]['PluginFlyvemdmFleet.id']}/list`)
+    }
+
     render() {
         let policiesPerCategory
 
@@ -806,7 +811,7 @@ class FleetsContent extends Component {
                                         value={this.state.input}
                                     />
                                 </h1>
-                                <div className="devicesLength">
+                                <div className="devicesLength" onClick={this.goToList}>
                                     <div>
                                         {this.state.devicesLength} 
                                     </div>

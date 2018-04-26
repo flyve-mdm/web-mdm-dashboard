@@ -1,5 +1,6 @@
 import FleetsContent from './components/FleetsContent'
 import EmptyMessage from '../../components/EmptyMessage'
+import DevicesAssociates from './components/DevicesAssociates'
 import { I18n } from 'react-i18nify'
 
 const routes = [
@@ -13,13 +14,19 @@ const routes = [
     path: '/:id',
     name: I18n.t('commons.fleet'),
     component: FleetsContent,
-    exact: false
+    exact: true
+  },
+  {
+    path: '/:id/list',
+    name: I18n.t('commons.list'),
+    component: DevicesAssociates,
+    exact: true
   },
   {
     path: '/add',
     name: I18n.t('fleets.add'),
     component: FleetsContent,
-    exact: false
+    exact: true
   }
 ]
 

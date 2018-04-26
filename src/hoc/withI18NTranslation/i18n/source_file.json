@@ -244,6 +244,7 @@
     "tasks_per_Category": "Tasks per Category",
     "loading_tasks": "Loading Tasks, Policies and Categories",
     "not_found": "No Fleets yet!",
+    "no_associated_devices": "No associated devices",
     "not_managed": "This fleet doesn't allow policies"
   },
   "about": {
@@ -452,6 +453,7 @@
     "language": "Language",
     "call_mobile": "Call Mobile",
     "call_work": "Call Work",
+    "list": "List",
     "joined": "Joined",
     "favorite": "Favorite",
     "message": "Message",
