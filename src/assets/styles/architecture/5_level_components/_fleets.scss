@@ -57,5 +57,20 @@
                 padding: 0 20px !important;
             }
         }
+
+        .win-headercontainer {
+            padding: 8px 0 8px 12px
+        }
+
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .id {
+            width: 20%;
+        }
+        .name {
+            width: 80%;
+        }
     }
 }

@@ -245,7 +245,8 @@
     "loading_tasks": "Loading Tasks, Policies and Categories",
     "not_found": "No Fleets yet!",
     "no_associated_devices": "No associated devices",
-    "not_managed": "This fleet doesn't allow policies"
+    "not_managed": "This fleet doesn't allow policies",
+    "devices_of": "Devices of"
   },
   "about": {
     "system_information": {
