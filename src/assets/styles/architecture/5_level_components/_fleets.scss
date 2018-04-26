@@ -3,6 +3,39 @@
 
     .contentHeader {
 
+        .titleContentPane {
+            display: inline-block;
+            padding: 0 10px 0 20px;
+
+            input {
+                font-size: 24px;
+                font-weight: 200;
+            }
+        }
+
+        .devicesLength {
+            cursor: pointer;
+            display: inline-block;
+            div {
+                display: inline-block;
+                vertical-align: 5px;
+            }
+            span {
+                padding-left: 5px;
+            }
+        }
+
+        .itemInfo {
+            padding: 0 20px; 
+            vertical-align: middle;
+        }
+
+        span {
+            padding: 0 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
         button {
             float: right;
             height: 20px;
