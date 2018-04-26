@@ -39,7 +39,7 @@ export default class DevicesList extends Component {
             this.listView.winControl.footer.style.height = '1px'
         }
         if(this.toolBar) {
-            this.toolBar.winControl.forceLayout();
+            this.toolBar.winControl.forceLayout()
         }
 
         if (this.props.action === 'reload') {
@@ -72,7 +72,6 @@ export default class DevicesList extends Component {
 
     handleRefresh = async () => {
         try {
-            this.props.history.push(`${publicURL}/app/devices`)
             this.setState({
                 isLoading: true,
                 scrolling: false,
@@ -100,8 +99,7 @@ export default class DevicesList extends Component {
     }
 
     handleEdit(eventObject) {
-        const path = `${publicURL}/app/devices/edit`
-        this.props.history.push(path)
+        this.props.history.push(`${publicURL}/app/devices/edit`)
     }
 
     handleAdd = () => {
@@ -208,7 +206,6 @@ export default class DevicesList extends Component {
                 order: devices.order,
                 itemList: BuildItemList(devices)
             })
-            this.props.history.push(`${publicURL}/app/devices`)
 
         } catch (error) {
             this.setState({
