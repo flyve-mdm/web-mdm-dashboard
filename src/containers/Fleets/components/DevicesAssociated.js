@@ -9,6 +9,7 @@ import getID from '../../../shared/getID'
 import EmptyMessage from '../../../components/EmptyMessage'
 import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
+import publicURL from '../../../shared/publicURL'
 
 class DevicesAssociated extends Component {
 
@@ -65,10 +66,10 @@ class DevicesAssociated extends Component {
 
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
-            <React.Fragment>
+            <div style={{cursor: 'pointer'}} onClick={() => this.props.history.push(`${publicURL}/app/devices/${ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}`)}>
                 <span className="id">{ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}</span>
                 <span className="name">{ItemList.data[`${itemtype.PluginFlyvemdmAgent}.name`]}</span>
-            </React.Fragment>
+            </div>
         )
     })
 
