@@ -24,7 +24,8 @@ class FleetsContent extends Component {
                 applications: undefined,
                 tasksNew: {},
                 tasksRemove: {}
-            }
+            },
+            devicesLength: 0
         }
     }
 
@@ -66,7 +67,8 @@ class FleetsContent extends Component {
                 applications: undefined,
                 tasksNew: {},
                 tasksRemove: {}
-            }
+            },
+            devicesLength: 0
         })
     }
 
@@ -75,7 +77,21 @@ class FleetsContent extends Component {
             isLoading: true
         }))
 
-
+        /*
+         * Get Devices 
+         * */
+        const devices = await this.props.glpi.searchItems({
+            itemtype: itemtype.PluginFlyvemdmAgent,
+            criteria: 
+            [
+                {
+                    link: 'and',
+                    field: 3,
+                    searchtype: 'contains',
+                    value: this.state.input
+                }
+            ]
+        })
 
         /*
          * Get Policies 
@@ -790,7 +806,15 @@ class FleetsContent extends Component {
                                         value={this.state.input}
                                     />
                                 </h1>
-
+                                <div className="devicesLength">
+                                    <div>
+                                        {this.state.devicesLength} 
+                                    </div>
+                                    
+                                    <span
+                                        className="deviceIcon"
+                                    />
+                                </div>
                                 <div className="itemInfo">
                                     <span
                                         className="saveIcon"
