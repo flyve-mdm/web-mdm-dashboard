@@ -7,7 +7,7 @@ import Loading from '../../../../components/Loading'
 import { bindActionCreators } from 'redux'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { connect } from 'react-redux'
-import { logout } from '../../../../store/authentication/actions'
+import logout from '../../../../shared/logout'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import withGLPI from '../../../../hoc/withGLPI'
@@ -17,8 +17,7 @@ import itemtype from '../../../../shared/itemtype'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
-        setNotification: bindActionCreators(uiSetNotification, dispatch),
-        logout: bindActionCreators(logout, dispatch)
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
     }
     return { actions }
 }
@@ -54,10 +53,10 @@ class Security extends Component {
                         this.props.actions.setNotification({
                             title: I18n.t('commons.success'),
                             body: I18n.t('notifications.user_deleted'),
-                            type: 'info'
+                            type: 'success'
                         })
 
-                        this.props.actions.logout(this.props.history)
+                        logout()
                         localStorage.clear()
 
                     } catch (error) {
@@ -73,11 +72,11 @@ class Security extends Component {
     closeSession  = async () => {
         const isOK = await Confirmation.isOK(this.killSession)
         if (isOK) {
-            this.props.actions.logout(this.props.history)
+            logout()            
             this.props.actions.setNotification({
                 title: I18n.t('commons.success'),
                 body: I18n.t('notifications.session_closed'),
-                type: 'info'
+                type: 'success'
             })
         }
     }
@@ -85,12 +84,12 @@ class Security extends Component {
     cleanWebStorage  = async () => {
         const isOK = await Confirmation.isOK(this.deleteBrowserData)
         if (isOK) {
-            this.props.actions.logout(this.props.history)
             localStorage.clear()
+            logout()            
             this.props.actions.setNotification({
                 title: I18n.t('commons.success'),
                 body: I18n.t('notifications.clear_local_storage'),
-                type: 'info'
+                type: 'success'
             })
         }
     }
