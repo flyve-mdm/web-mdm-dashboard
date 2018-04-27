@@ -11,7 +11,8 @@ export default class DevicesContent extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            id: getID(this.props.history.location.pathname)
+            id: getID(this.props.history.location.pathname),
+            selectedIndex: 0
         }
     }
 
@@ -23,10 +24,21 @@ export default class DevicesContent extends Component {
         }
     }
 
+    changeselectedItem = (pivot) => {
+        if (pivot) {
+            if (pivot.winControl.selectedIndex !== this.state.selectedIndex) {
+                this.setState({selectedIndex: pivot.winControl.selectedIndex})
+            }
+            pivot.winControl.onselectionchanged = (event) => {
+                this.setState({selectedIndex: event.detail.index})
+            }
+        }
+    }
+
     render() {
         return (
             <ContentPane>
-                <ReactWinJS.Pivot>
+                <ReactWinJS.Pivot ref={this.changeselectedItem}>
                     <ReactWinJS.Pivot.Item key="main" header={I18n.t('devices.main.title')}>
 
                         <Main 
@@ -37,6 +49,7 @@ export default class DevicesContent extends Component {
                             handleMessage={this.props.handleMessage}
                             history={this.props.history}
                             glpi={this.props.glpi}
+                            update={this.state.selectedIndex === 0}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -47,6 +60,7 @@ export default class DevicesContent extends Component {
                             glpi={this.props.glpi}
                             setNotification={this.props.setNotification}
                             handleMessage={this.props.handleMessage}
+                            update={this.state.selectedIndex === 1}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -56,6 +70,7 @@ export default class DevicesContent extends Component {
                             id={this.state.id}
                             glpi={this.props.glpi}
                             handleMessage={this.props.handleMessage}
+                            update={this.state.selectedIndex === 2}
                         />
 
                     </ReactWinJS.Pivot.Item>
@@ -65,6 +80,7 @@ export default class DevicesContent extends Component {
                             setNotification={this.props.setNotification}
                             handleMessage={this.props.handleMessage}
                             glpi={this.props.glpi}
+                            update={this.state.selectedIndex === 3}
                         />
                     </ReactWinJS.Pivot.Item>
                     <ReactWinJS.Pivot.Item key="dangerZone" header={I18n.t('devices.danger_zone.title')}>
@@ -76,6 +92,7 @@ export default class DevicesContent extends Component {
                             handleMessage={this.props.handleMessage}
                             glpi={this.props.glpi}
                             history={this.props.history}
+                            update={this.state.selectedIndex === 4}
                         />
 
                     </ReactWinJS.Pivot.Item>

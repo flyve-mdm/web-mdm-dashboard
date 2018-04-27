@@ -17,7 +17,6 @@ export default class Inventory extends Component {
     }
 
     handleRefresh = () => {
-        
         this.setState({
             isLoading: true
         }, async () => {
@@ -69,6 +68,11 @@ export default class Inventory extends Component {
         }
     }
 }
+
+Inventory.defaultProps = {
+    parameters: {}
+}
+
 Inventory.propTypes = {
     title: PropTypes.string.isRequired,
     itemType: PropTypes.string.isRequired,
@@ -76,7 +80,4 @@ Inventory.propTypes = {
     fields: PropTypes.object.isRequired,
     parameters: PropTypes.object,
     glpi: PropTypes.object.isRequired
-}
-Inventory.defaultProps = {
-    parameters: {}
 }

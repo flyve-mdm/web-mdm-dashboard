@@ -4,6 +4,7 @@ import Confirmation from '../../../../components/Confirmation'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
+import ContentPane from '../../../../components/ContentPane'
 
 class DangerZone extends Component {
 
@@ -74,7 +75,7 @@ class DangerZone extends Component {
 
     render() {
         return ( 
-            <div>
+            <ContentPane>
                 <div className="listElement">
                     <div className="message">
                         {I18n.t('devices.danger_zone.wipe')}
@@ -131,7 +132,7 @@ class DangerZone extends Component {
                         reference={el => this.deleteDevice = el} 
                     /> 
                 </div>
-            </div>
+            </ContentPane>
         )
     }
 }
@@ -141,7 +142,8 @@ DangerZone.propTypes = {
     setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    changeAction: PropTypes.func.isRequired
+    changeAction: PropTypes.func.isRequired,
+    update: PropTypes.bool.isRequired
 }
 
 export default DangerZone
