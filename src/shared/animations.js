@@ -12,7 +12,7 @@ export default function (isAnimate = animate()) {
 }
 
 const slideTop = element => {
-    const animation = new AnimateFrom(element, { y: 20 }, { duration: 100 })
+    const animation = new AnimateFrom(element, { y: 20 }, { duration: 150 })
     if (!animate()) animation.play = () => {}
     return animation
 }

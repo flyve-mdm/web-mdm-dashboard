@@ -73,9 +73,15 @@ class DangerZone extends Component {
         }
     }
 
+    componentWillReceiveProps (newProps) {
+        if (this.props.id !== newProps.id || this.props.update !== newProps.update) {
+            this.pane.forceAnimation()
+        }
+    }
+
     render() {
         return ( 
-            <ContentPane>
+            <ContentPane ref={pane => this.pane = pane}>
                 <div className="listElement">
                     <div className="message">
                         {I18n.t('devices.danger_zone.wipe')}

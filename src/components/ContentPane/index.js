@@ -7,6 +7,10 @@ class ContentPane extends Component {
   componentDidMount() {
     slideTop(this.pane).play()
   }
+  
+  forceAnimation () {
+    slideTop(this.pane).play()
+  }
 
   render() {
     return (
