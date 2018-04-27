@@ -12,13 +12,13 @@ export default class SystemReport extends Component {
         super(props)
         this.state = {
             data: undefined,
-            isLoading: false,
+            isLoading: true,
             requestingInventory: false
         }
     }
 
     componentWillReceiveProps(newProps) {
-        if (this.props.id !== newProps.id) {
+        if (this.props.id !== newProps.id || this.props.update !== newProps.update) {
             this.setState({
                 data: undefined,
                 isLoading: false
@@ -31,22 +31,24 @@ export default class SystemReport extends Component {
     }
 
     handleRefresh = () => {
-        this.setState({
-            isLoading: true,
-            requestingInventory: false
-        }, async () => {
-            try {
-                this.setState({
-                    isLoading: false,
-                    data: await this.props.glpi.getAnItem({ 
-                        itemtype: itemtype.PluginFlyvemdmAgent, 
-                        id: this.props.id 
+        if (this.props.update) {
+            this.setState({
+                isLoading: true,
+                requestingInventory: false
+            }, async () => {
+                try {
+                    this.setState({
+                        isLoading: false,
+                        data: await this.props.glpi.getAnItem({ 
+                            itemtype: itemtype.PluginFlyvemdmAgent, 
+                            id: this.props.id 
+                        })
                     })
-                })
-            } catch (error) {
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
-            }
-        })
+                } catch (error) {
+                    this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                }
+            })
+        }
     }      
     
     requestInventory = () => {
@@ -167,5 +169,6 @@ export default class SystemReport extends Component {
 SystemReport.propTypes = {
     id: PropTypes.string.isRequired,
     glpi: PropTypes.object.isRequired,
-    setNotification: PropTypes.func.isRequired
+    setNotification: PropTypes.func.isRequired,
+    update: PropTypes.bool.isRequired
 }

@@ -28,7 +28,7 @@ export default class Main extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (this.props.id !== newProps.id) {
+        if (this.props.id !== newProps.id || this.props.update !== newProps.update) {
             this.setState({
                 data: undefined
             }, () => this.handleRefresh())
@@ -40,16 +40,18 @@ export default class Main extends Component {
     }
 
     handleRefresh = async () => {
-        try {
-            this.setState({ 
-                data: await this.props.glpi.getAnItem({ 
-                    itemtype: itemtype.PluginFlyvemdmAgent, 
-                    id: this.props.id 
-                }) 
-            })
-        } catch (error) {
-            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
-            this.props.history.push(`${publicURL}/app/devices`)
+        if (this.props.update) {
+            try {
+                this.setState({ 
+                    data: await this.props.glpi.getAnItem({ 
+                        itemtype: itemtype.PluginFlyvemdmAgent, 
+                        id: this.props.id 
+                    }) 
+                })
+            } catch (error) {
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                this.props.history.push(`${publicURL}/app/devices`)
+            }
         }
     }
 
@@ -198,5 +200,6 @@ Main.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    glpi: PropTypes.object.isRequired
+    glpi: PropTypes.object.isRequired,
+    update: PropTypes.bool.isRequired
 }

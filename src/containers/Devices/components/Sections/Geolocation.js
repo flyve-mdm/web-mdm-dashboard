@@ -22,7 +22,7 @@ export default class Geolocation extends Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (this.props.id !== newProps.id) {
+        if (this.props.id !== newProps.id || this.props.update !== newProps.update) {
             this.setState({
                 isLoading: true
             }, () => this.handleRefresh())
@@ -50,24 +50,26 @@ export default class Geolocation extends Component {
     }
 
     handleRefresh = async () => {
-        try {
-            const {computers_id} = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.props.id })
-            const response = await this.props.glpi.getSubItems({
-                itemtype: itemtype.Computer, 
-                id: computers_id, 
-                subItemtype: itemtype.PluginFlyvemdmGeolocation
-            })    
-            this.setState({
-                locations: response,
-                isLoading: false,
-                isLoadingGeolocation: false
-            })
-        } catch (error) {
-            this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
-            this.setState({  
-                isLoading: false,
-                isLoadingGeolocation: false
-            })
+        if (this.props.update) {
+            try {
+                const {computers_id} = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.props.id })
+                const response = await this.props.glpi.getSubItems({
+                    itemtype: itemtype.Computer, 
+                    id: computers_id, 
+                    subItemtype: itemtype.PluginFlyvemdmGeolocation
+                })    
+                this.setState({
+                    locations: response,
+                    isLoading: false,
+                    isLoadingGeolocation: false
+                })
+            } catch (error) {
+                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+                this.setState({  
+                    isLoading: false,
+                    isLoadingGeolocation: false
+                })
+            }
         }
     }
 
@@ -108,5 +110,6 @@ export default class Geolocation extends Component {
 Geolocation.propTypes = {
     id: PropTypes.string.isRequired,
     setNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
+    glpi: PropTypes.object.isRequired,
+    update: PropTypes.bool.isRequired    
 }
