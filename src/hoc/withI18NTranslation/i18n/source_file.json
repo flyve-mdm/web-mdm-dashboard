@@ -512,6 +512,9 @@
     "package_name": "Package name",
     "not_found": "Not Found",
     "load_more": "load more data",
-    "saving": "Saving"
+    "saving": "Saving",
+    "child_entities": "Child entities",
+    "yes": "Yes",
+    "no": "No"
   }
 }

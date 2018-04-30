@@ -239,6 +239,10 @@ export default class FleetsList extends Component {
         }
     }
 
+    handleEdit = () => {
+        this.props.history.push(`${publicURL}/app/fleets/edit`)
+    }
+
     render() {
         let deleteCommand = (
             <ReactWinJS.ToolBar.Button
@@ -250,15 +254,28 @@ export default class FleetsList extends Component {
                 onClick={this.handleDelete}
             />
         )
+        let editCommand = (
+            <ReactWinJS.ToolBar.Button
+                key="edit"
+                icon="edit"
+                label={I18n.t('commons.edit')}
+                priority={0}
+                disabled={this.props.selectedItems.length === 0}
+                onClick={this.handleEdit}
+            />
+        )
 
-        let footerComponent = this.state.isLoadingMore ? <Loader /> : 
-            (<div onClick={this.loadMoreData} style={{ cursor: 'pointer', color:'#158784'}}>
-            <span
-                className="refreshIcon"
-                style={{ padding: '10px', fontSize: '20px' }}
-                onClick={this.loadMoreData}/>
-            <span>{I18n.t('commons.load_more')}</span>
-            </div>)
+        let footerComponent = this.state.isLoadingMore ? 
+            <Loader /> : 
+            (
+                <div onClick={this.loadMoreData} style={{ cursor: 'pointer', color:'#158784'}}>
+                    <span
+                        className="refreshIcon"
+                        style={{ padding: '10px', fontSize: '20px' }}
+                        onClick={this.loadMoreData}/>
+                    <span>{I18n.t('commons.load_more')}</span>
+                </div>
+            )
 
         let listComponent
 
@@ -313,6 +330,7 @@ export default class FleetsList extends Component {
                         onClick={this.handleAdd}
                     />
                     
+                    {this.props.selectionMode ? editCommand : null}
                     {this.props.selectionMode ? deleteCommand : null}
 
                     <ReactWinJS.ToolBar.Toggle
