@@ -9,7 +9,7 @@ import ContentPane from '../../../../components/ContentPane'
 class DangerZone extends Component {
 
     wipe = async () => {
-        const isOK = await Confirmation.isOK(this.wipeDevice)
+        const isOK = await Confirmation.isOK(this.props.wipeDevice)
         if (isOK) {
             try {
                 const response = await this.props.glpi.updateItem({
@@ -31,7 +31,7 @@ class DangerZone extends Component {
     }
 
     unenroll = async () => {
-        const isOK = await Confirmation.isOK(this.unenrollmentDevice)
+        const isOK = await Confirmation.isOK(this.props.unenrollmentDevice)
         if (isOK) {
             try {
                 const response = await this.props.glpi.updateItem({
@@ -53,7 +53,7 @@ class DangerZone extends Component {
     }
 
     delete = async () => {
-        const isOK = await Confirmation.isOK(this.deleteDevice)
+        const isOK = await Confirmation.isOK(this.props.deleteDevice)
         if (isOK) {
             try {
                 const response = await this.props.glpi.deleteItem({
@@ -81,64 +81,54 @@ class DangerZone extends Component {
 
     render() {
         return ( 
-            <ContentPane ref={pane => this.pane = pane}>
-                <div className="listElement">
-                    <div className="message">
-                        {I18n.t('devices.danger_zone.wipe')}
-                        <div className="detail">
-                            {I18n.t('devices.danger_zone.wipe_description')}
-                        </div>
-                    </div>
-                    <div className="controller">
-                        <button className="btn --secondary" onClick={this.wipe}>
-                            {I18n.t('commons.wipe')}
-                        </button>
-                    </div>
-                    <Confirmation 
-                        title={I18n.t('devices.danger_zone.last_warning')}
-                        message={I18n.t('devices.danger_zone.last_warning_message')}
-                        reference={el => this.wipeDevice = el} 
-                    /> 
-                </div>
+            <React.Fragment>
 
-                <div className="listElement">
-                    <div className="message">
-                        {I18n.t('devices.danger_zone.unenrollment')}
-                        <div className="detail">
-                            {I18n.t('devices.danger_zone.unenrollment_description')}
+                <ContentPane ref={pane => this.pane = pane}>
+                    <div className="listElement">
+                        <div className="message">
+                            {I18n.t('devices.danger_zone.wipe')}
+                            <div className="detail">
+                                {I18n.t('devices.danger_zone.wipe_description')}
+                            </div>
+                        </div>
+                        <div className="controller">
+                            <button className="btn --secondary" onClick={this.wipe}>
+                                {I18n.t('commons.wipe')}
+                            </button>
                         </div>
                     </div>
-                    <div className="controller">
-                        <button className="btn --secondary" onClick={this.unenroll}>
-                            {I18n.t('commons.unenroll')}
-                        </button>
-                    </div>
-                    <Confirmation 
-                        title={`${I18n.t('devices.danger_zone.unenroll_device')} # ${this.props.id}`} 
-                        message={`${I18n.t('devices.danger_zone.going_to_unenroll')} ${this.props.id}`} 
-                        reference={el => this.unenrollmentDevice = el} 
-                    /> 
-                </div>
-
-                <div className="listElement">
-                    <div className="message">
-                        {I18n.t('devices.danger_zone.delete')}
-                        <div className="detail">
-                            {I18n.t('devices.danger_zone.delete_description')}
+    
+                    <div className="listElement">
+                        <div className="message">
+                            {I18n.t('devices.danger_zone.unenrollment')}
+                            <div className="detail">
+                                {I18n.t('devices.danger_zone.unenrollment_description')}
+                            </div>
                         </div>
+                        <div className="controller">
+                            <button className="btn --secondary" onClick={this.unenroll}>
+                                {I18n.t('commons.unenroll')}
+                            </button>
+                        </div>
+                        
                     </div>
-                    <div className="controller">
-                        <button className="btn --secondary" onClick={this.delete}>
-                            {I18n.t('commons.delete')}
-                        </button>
+    
+                    <div className="listElement">
+                        <div className="message">
+                            {I18n.t('devices.danger_zone.delete')}
+                            <div className="detail">
+                                {I18n.t('devices.danger_zone.delete_description')}
+                            </div>
+                        </div>
+                        <div className="controller">
+                            <button className="btn --secondary" onClick={this.delete}>
+                                {I18n.t('commons.delete')}
+                            </button>
+                        </div>
+    
                     </div>
-                    <Confirmation 
-                        title={`${I18n.t('devices.danger_zone.delete')} # ${this.props.id}`} 
-                        message={`${I18n.t('devices.danger_zone.delete_message')} ${this.props.id}`} 
-                        reference={el => this.deleteDevice = el} 
-                    /> 
-                </div>
-            </ContentPane>
+                </ContentPane>
+            </React.Fragment>
         )
     }
 }
@@ -149,7 +139,10 @@ DangerZone.propTypes = {
     glpi: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     changeAction: PropTypes.func.isRequired,
-    update: PropTypes.bool.isRequired
+    update: PropTypes.bool.isRequired,
+    wipeDevice: PropTypes.object,
+    unenrollmentDevice: PropTypes.object,
+    deleteDevice: PropTypes.object
 }
 
 export default DangerZone

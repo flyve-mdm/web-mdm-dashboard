@@ -262,91 +262,96 @@ class Security extends Component {
                 )
             default:
                 return (
-                    <ContentPane>
-                        <h2 style={{ margin: '10px' }}>
-                            {I18n.t('commons.security')}
-                        </h2>
-                        
-                        <div className="listElement">
-                            <div className="message">
-                                {I18n.t('commons.password')}
-                                <div className="detail">
-                                    {I18n.t('settings.security.change_flyve_passsword')}
-                                </div>
-                            </div>
-                            <div className="controller">
-                                <button className="btn --secondary" onClick={() => this.changeMode(I18n.t('commons.change_password'))}>
-                                    {I18n.t('commons.edit')}
-                                </button>
-                            </div>
-                        </div>
-        
-                        <div className="listElement">
-                            <div className="message">
-                                {I18n.t('commons.kill_session')}
-                                <div className="detail">
-                                    {I18n.t('settings.security.destroy_session')}
-                                </div>
-                            </div>
-                            <div className="controller">
-                                <button className="btn --secondary" onClick={this.closeSession}>
-                                    {I18n.t('commons.logout')}
-                                </button>
-                            </div>
-                        </div>
-
+                    <React.Fragment>
                         <Confirmation 
                             title={I18n.t('commons.kill_session')}
                             message={I18n.t('settings.security.close_session_message')}
                             reference={el => this.killSession = el} 
                         />
-        
-                        <div className="listElement">
-                            <div className="message">
-                                {I18n.t('settings.security.delete_data')}
-                                <div className="detail">
-                                    {I18n.t('settings.security.delete_data_detail')}
-                                </div>
-                            </div>
-                            <div className="controller">
-                                <button className="btn --secondary" onClick={this.cleanWebStorage}>
-                                    {I18n.t('commons.delete')}
-                                </button>
-                            </div>
-                        </div>
-
+          
                         <Confirmation 
                             title={I18n.t('settings.security.delete_data')}
                             message={I18n.t('settings.security.delete_data_message')}
                             reference={el => this.deleteBrowserData = el} 
-                        />
-
-                        {
-                            !selfRegistration ? '' :
-                            <React.Fragment>
-                                <div className="listElement">
-                                    <div className="message">
-                                        {I18n.t('settings.security.delete_account')}
-                                        <div className="detail">
-                                            {I18n.t('settings.security.delete_account_detail')}
-                                        </div>
-                                    </div>
-                                    <div className="controller">
-                                        <button className="btn --secondary" onClick={this.deleteUser}>
-                                            {I18n.t('commons.delete')}
-                                        </button>
+                        />          
+                        
+                        <Confirmation 
+                            title={I18n.t('settings.security.delete_account')}
+                            message={I18n.t('settings.security.delete_account_message')}
+                            reference={el => this.deleteAccount = el} 
+                        />                  
+                        <ContentPane>
+                            <h2 style={{ margin: '10px' }}>
+                                {I18n.t('commons.security')}
+                            </h2>
+                            
+                            <div className="listElement">
+                                <div className="message">
+                                    {I18n.t('commons.password')}
+                                    <div className="detail">
+                                        {I18n.t('settings.security.change_flyve_passsword')}
                                     </div>
                                 </div>
-                                
-                                <Confirmation 
-                                    title={I18n.t('settings.security.delete_account')}
-                                    message={I18n.t('settings.security.delete_account_message')}
-                                    reference={el => this.deleteAccount = el} 
-                                />
-                            </React.Fragment>
-                        }
-        
-                    </ContentPane>            
+                                <div className="controller">
+                                    <button className="btn --secondary" onClick={() => this.changeMode(I18n.t('commons.change_password'))}>
+                                        {I18n.t('commons.edit')}
+                                    </button>
+                                </div>
+                            </div>
+            
+                            <div className="listElement">
+                                <div className="message">
+                                    {I18n.t('commons.kill_session')}
+                                    <div className="detail">
+                                        {I18n.t('settings.security.destroy_session')}
+                                    </div>
+                                </div>
+                                <div className="controller">
+                                    <button className="btn --secondary" onClick={this.closeSession}>
+                                        {I18n.t('commons.logout')}
+                                    </button>
+                                </div>
+                            </div>
+            
+                            <div className="listElement">
+                                <div className="message">
+                                    {I18n.t('settings.security.delete_data')}
+                                    <div className="detail">
+                                        {I18n.t('settings.security.delete_data_detail')}
+                                    </div>
+                                </div>
+                                <div className="controller">
+                                    <button className="btn --secondary" onClick={this.cleanWebStorage}>
+                                        {I18n.t('commons.delete')}
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            {
+                                !selfRegistration ? '' :
+                                <React.Fragment>
+                                    <div className="listElement">
+                                        <div className="message">
+                                            {I18n.t('settings.security.delete_account')}
+                                            <div className="detail">
+                                                {I18n.t('settings.security.delete_account_detail')}
+                                            </div>
+                                        </div>
+                                        <div className="controller">
+                                            <button className="btn --secondary" onClick={this.deleteUser}>
+                                                {I18n.t('commons.delete')}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+
+                                </React.Fragment>
+                            }
+            
+                        </ContentPane>            
+                    </React.Fragment>
+                    
                 )
         }
     }

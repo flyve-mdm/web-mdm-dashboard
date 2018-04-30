@@ -125,9 +125,9 @@ const withAdminDashboardLayout = WrappedComponent => {
             />
             <WrappedComponent {...this.props} mode={this.state.mode} />
             <Confirmation 
-            title={I18n.t('logout.close_session')}
-            message={I18n.t('settings.security.close_session_message')} 
-            reference={el => this.contentDialog = el} 
+              title={I18n.t('logout.close_session')}
+              message={I18n.t('settings.security.close_session_message')} 
+              reference={el => this.contentDialog = el} 
             />
           </div>
         
