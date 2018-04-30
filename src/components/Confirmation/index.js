@@ -19,7 +19,7 @@ class Confirmation extends Component {
                 primaryCommandText={I18n.t('commons.ok')}
                 secondaryCommandText={I18n.t('commons.cancel')}
             >
-                    <p>{ this.props.message }</p>
+                <p>{ this.props.message }</p>
             </ReactWinJS.ContentDialog>
         )
     }
