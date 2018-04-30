@@ -38,7 +38,12 @@ export default class EditMultiple extends Component {
                 isLoading: true
             }, async () => {
                 let input = this.state.selectedField.DBName !== "password" ?  
-                    {[this.state.selectedField.DBName]: this.state.newValue} :
+                    {
+                        [this.state.selectedField.DBName]: 
+                            (this.state.newValue === "true") ? 
+                                true : (this.state.newValue === "false") ? 
+                                    false : this.state.newValue
+                    } :
                     {
                         [this.state.selectedField.DBName[0]]: this.state.newValue,
                         [this.state.selectedField.DBName[1]]: this.state.passwordConfirmation
@@ -168,22 +173,34 @@ export default class EditMultiple extends Component {
                     break
 
                     case 'select':
-                        input = (
-                            <Select
-                                label= {I18n.t('edit_multiple.what_new_value')}
-                                name="newValue"
-                                value={this.state.newValue}
-                                options={[]}
-                                function={this.change}
-                                glpi={this.props.glpi}
-                                request={{
-                                    params: this.state.selectedField.params,
-                                    method: this.state.selectedField.method,
-                                    content: this.state.selectedField.content,
-                                    value: this.state.selectedField.value
-                                }}
-                            />
-                        )
+                        if (this.state.selectedField.options) {
+                            input = (
+                                <Select
+                                    label= {I18n.t('edit_multiple.what_new_value')}
+                                    name="newValue"
+                                    value={this.state.newValue}
+                                    options={this.state.selectedField.options}
+                                    function={this.change}
+                                />
+                            )
+                        } else {
+                            input = (
+                                <Select
+                                    label= {I18n.t('edit_multiple.what_new_value')}
+                                    name="newValue"
+                                    value={this.state.newValue}
+                                    options={[]}
+                                    function={this.change}
+                                    glpi={this.props.glpi}
+                                    request={{
+                                        params: this.state.selectedField.params,
+                                        method: this.state.selectedField.method,
+                                        content: this.state.selectedField.content,
+                                        value: this.state.selectedField.value
+                                    }}
+                                />
+                            )                          
+                        }
                     break
 
                     case 'datePicker':
