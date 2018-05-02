@@ -20,6 +20,12 @@
     }
 
     .applications {
+        .listPane {
+            height: 100%;
+            .contentListView {
+                height: 100%;
+            }
+        }
         .win-listview > .win-vertical .win-container {
             margin: 0;
         }

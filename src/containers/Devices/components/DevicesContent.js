@@ -54,7 +54,7 @@ export default class DevicesContent extends Component {
                     message={`${I18n.t('devices.danger_zone.delete_message')} ${this.props.id}`} 
                     reference={el => this.deleteDevice = el} 
                 /> 
-                <ContentPane>
+                <ContentPane className="devices">
                     <ReactWinJS.Pivot ref={this.changeselectedItem}>
                         <ReactWinJS.Pivot.Item key="main" header={I18n.t('devices.main.title')}>
 

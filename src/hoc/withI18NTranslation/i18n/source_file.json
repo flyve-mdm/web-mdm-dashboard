@@ -213,8 +213,7 @@
       "title": "Applications",
       "empty_message": "No Applications Available",
       "id": "Application ID",
-      "version": "Name version",
-      "category": "Category"
+      "last_modification": "Last modification"
     },
     "system_report": {
       "title": "System Report",
