@@ -117,17 +117,16 @@
     edge-diagnostics-adapter "^0.6.0"
     node-windows "^0.1.14"
 
-"@sonarwhal/formatter-summary@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@sonarwhal/formatter-summary/-/formatter-summary-2.0.2.tgz#fd0a745b57102180dc265140f4175f136b3886fb"
+"@sonarwhal/formatter-codeframe@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@sonarwhal/formatter-codeframe/-/formatter-codeframe-2.0.3.tgz#31261a20bba37236f338c102cc1a3bad8d1cfb7f"
   dependencies:
-    chalk "^2.3.2"
-    lodash.defaultto "^4.14.0"
+    chalk "^2.4.0"
     lodash.foreach "^4.5.0"
     lodash.groupby "^4.6.0"
+    lodash.sortby "^4.7.0"
     log-symbols "^2.2.0"
     pluralize "^7.0.0"
-    text-table "^0.2.0"
 
 "@sonarwhal/rule-axe@^4.0.1":
   version "4.0.1"
@@ -1755,7 +1754,7 @@ chalk@2.4.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1, chalk@^2.3.2, chalk@^2.4.1:
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1, chalk@^2.4.0, chalk@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.1.tgz#18c49ab16a037b6eb0152cc83e3471338215b66e"
   dependencies:
@@ -5795,10 +5794,6 @@ lodash.clonedeep@^4.3.2:
 lodash.defaults@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
-
-lodash.defaultto@^4.14.0:
-  version "4.14.0"
-  resolved "https://registry.yarnpkg.com/lodash.defaultto/-/lodash.defaultto-4.14.0.tgz#38bd3d425acee733e0e2bbbd4e4b29711cc2ee11"
 
 lodash.foreach@^4.5.0:
   version "4.5.0"
