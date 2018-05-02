@@ -40,18 +40,15 @@ export default class Applications extends Component {
                     const {computers_id} = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.props.id })
                     const computer = await this.props.glpi.getAnItem({ itemtype: itemtype.Computer, id: computers_id, queryString: { with_softwares: true } })
                     let softwareList = []
-                    for (const item of computer['_softwares']) {
-                        const software = await this.props.glpi.getAnItem({ itemtype: itemtype.Software, id: item['softwares_id']})
-                        const softwareVersion = await this.props.glpi.getAnItem({ itemtype: itemtype.SoftwareVersion, id: item['softwareversions_id']})
-        
-                        let data = {
-                            id: software['id'],
-                            name: software['name'],
-                            alias: software['name'],
-                            version: softwareVersion['name'],
-                            filesize: 0
-                        }
-                        softwareList.push(data)
+                    for (let index = 0; index < computer['_softwares'].length; index++) {
+                        try {
+                            const software = await this.props.glpi.getAnItem({ itemtype: itemtype.Software, id: computer['_softwares'][index]['softwares_id']})
+                            softwareList.push({
+                                id: software['id'],
+                                name: software['name'],
+                                date_mod: software['date_mod']
+                            })
+                        } catch (e) {}
                     }
         
                     this.setState({
@@ -74,16 +71,16 @@ export default class Applications extends Component {
         const styles = {
             boxSizing: 'border-box',
             padding: '15px',
-            width: '25%',
-            float: 'left'
+            width: '33%',
+            float: 'left',
+            overflow: 'auto'
         }
 
         return (
             <React.Fragment>
                 <div style={styles}>{ItemList.data['id']}</div>
                 <div style={styles}>{ItemList.data['name']}</div>
-                <div style={styles}>{ItemList.data['version']}</div>
-                <div style={styles}>N/A</div>
+                <div style={styles}>{ItemList.data['date_mod']}</div>
             </React.Fragment>
         )
     })
@@ -95,22 +92,22 @@ export default class Applications extends Component {
         const stylesHeader = {
             boxSizing: 'border-box',
             padding: '15px',
-            width: '25%',
-            float: 'left'
+            width: '33%',
+            float: 'left',
+            overflow: 'auto'
         }
 
         const headerComponent = (
             <React.Fragment>
                 <div style={stylesHeader}>#</div>
                 <div style={stylesHeader}>{I18n.t('devices.applications.id')}</div>
-                <div style={stylesHeader}>{I18n.t('devices.applications.version')}</div>
-                <div style={stylesHeader}>{I18n.t('devices.applications.category')}</div>
+                <div style={stylesHeader}>{I18n.t('devices.applications.last_modification')}</div>
             </React.Fragment>
         )
 
         if (!this.state.isLoading && this.state.itemList.length > 0) {
             listComponent = (
-                <ContentPane>
+                <ContentPane className="applications">
                     <div className="listPane" style={{ padding: 0 }}>
                         <ReactWinJS.ListView
                             ref={(listView) => { this.listView = listView }}
