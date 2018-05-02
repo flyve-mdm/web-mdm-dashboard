@@ -1,9 +1,13 @@
 import WinJS from 'winjs'
+import { I18n } from 'react-i18nify'
 
 export default function (dataSource) {
-
     const groupKey = function (data) {
-        return (data[Object.keys(data)[0]])[0].toUpperCase()
+        try {
+            return (data[Object.keys(data)[0]])[0].toUpperCase()
+        } catch (error) {
+            return (I18n.t('commons.null.min'))
+        }
     }
 
     const groupData = function (data) {
