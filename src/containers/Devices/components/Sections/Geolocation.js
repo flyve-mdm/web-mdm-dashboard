@@ -66,6 +66,7 @@ export default class Geolocation extends Component {
             } catch (error) {
                 this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
                 this.setState({  
+                    locations: [],
                     isLoading: false,
                     isLoadingGeolocation: false
                 })
