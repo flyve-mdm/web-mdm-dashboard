@@ -515,6 +515,10 @@
     "saving": "Saving",
     "child_entities": "Child entities",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "null": {
+      "default": "Null",
+      "min": "null"
+    }
   }
 }
