@@ -6,7 +6,7 @@
         }
     },
     "formatters": [
-        "summary"
+        "codeframe"
     ],
     "rules": {
         "axe": "error",
