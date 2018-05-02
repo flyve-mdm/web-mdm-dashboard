@@ -265,7 +265,7 @@ export default class InvitationsList extends Component {
                     }
                 }
                 const invitations = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmInvitation, options: { uid_cols: true, forcedisplay: [1, 2, 3], order: this.state.order, range: `${range.from}-${range.to}`}})
-        
+                
                 for (const item in invitations.data) {
                     this.state.itemList.push(invitations.data[item])
                 }
