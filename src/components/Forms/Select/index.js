@@ -16,7 +16,7 @@ class Select extends Component {
 
     listRequest = async (props) => {
         let options = []
-        const response = await props.glpi[props.request.method](props.request.params)
+        let response = await props.glpi[props.request.method](props.request.params)
 
         switch (props.request.method) {
             case 'getMyProfiles':
@@ -32,6 +32,17 @@ class Select extends Component {
             
             case 'searchItems':
                 if (response.data) {
+                    if (response.totalcount !== response.count) {
+                        let params = {
+                            itemtype: props.request.params.itemtype, 
+                            options: {
+                                ...props.request.params.options,
+                                range: `0-${response.totalcount - 1}`
+                            }
+                        }
+                        response = await props.glpi[props.request.method](params) 
+                    }
+
                     response.data.forEach(element => {
                         options.push(
                             {
