@@ -28,10 +28,10 @@ export default class DevicesEditOne extends Component {
                     fleet: {
                         value: response["plugin_flyvemdm_fleets_id"],
                         request: {
-                            params: {itemtype: itemtype.PluginFlyvemdmFleet},
-                            method: 'getAllItems',
-                            content: 'name',
-                            value: 'id'
+                            params: {itemtype: itemtype.PluginFlyvemdmFleet, options: {forcedisplay: [2]}},
+                            method: 'searchItems',
+                            content: '1',
+                            value: '2'
                         }
                     }
                 })
@@ -44,10 +44,10 @@ export default class DevicesEditOne extends Component {
                     fleet: {
                         value: '',
                         request: {
-                            params: {itemtype: itemtype.PluginFlyvemdmFleet},
-                            method: 'getAllItems',
-                            content: 'name',
-                            value: 'id'
+                            params: {itemtype: itemtype.PluginFlyvemdmFleet, options: {forcedisplay: [2]}},
+                            method: 'searchItems',
+                            content: '1',
+                            value: '2'
                         }
                     }
                 })
