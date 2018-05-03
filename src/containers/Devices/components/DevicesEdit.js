@@ -13,10 +13,10 @@ export default class DevicesEdit extends Component {
                 name: I18n.t('commons.fleet'),
                 type: "select",
                 DBName: "plugin_flyvemdm_fleets_id",
-                params: {itemtype: itemtype.PluginFlyvemdmFleet},
-                method: 'getAllItems',
-                content: 'name',
-                value: 'id'
+                params: {itemtype: itemtype.PluginFlyvemdmFleet, options: {forcedisplay: [2]}},
+                method: 'searchItems',
+                content: '1',
+                value: '2'
             }]
         }
     }
