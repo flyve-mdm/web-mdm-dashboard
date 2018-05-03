@@ -6,7 +6,7 @@ export default function (dataSource) {
         try {
             return (data[Object.keys(data)[0]])[0].toUpperCase()
         } catch (error) {
-            return (I18n.t('commons.null.min'))
+            return (I18n.t('commons.n/a'))
         }
     }
 
