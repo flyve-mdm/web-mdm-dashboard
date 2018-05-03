@@ -57,6 +57,12 @@ jobs:
       - run: 
           name: "Run sonarwhal"
           command: source ci/scripts/sonarwhal.sh
+          
+      - run:
+          name: "Validate HTML"
+          command: |
+            yarn build
+            html5validator --root build/ --show-warnings
  
   deploy:
     docker:
