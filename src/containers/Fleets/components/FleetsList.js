@@ -36,6 +36,7 @@ export default class FleetsList extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.listView) {
+            this.listView.winControl.footer.style.outline = 'none'
             this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
         }
         if (this.toolBar) {
@@ -216,7 +217,13 @@ export default class FleetsList extends Component {
             this.setState({
                 isLoadingMore: true
             })
-            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.count * this.state.pagination.page}-${(this.state.pagination.count * (this.state.pagination.page + 1)) - 1}` } })
+
+            const range = {
+                from: this.state.pagination.count * this.state.pagination.page,
+                to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1
+            }
+            
+            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${range.from}-${range.to}` } })
 
             for (const item in fleets.data) {
                 this.state.itemList.push(fleets.data[item])
