@@ -38,10 +38,10 @@ class ChangeTokenLife extends Component {
             try {
                 await this.props.glpi.updateItem({
                     itemtype: itemtype.PluginFlyvemdmEntityconfig,
-                    id: this.props.entityID,
-                    input: {
+                    input: [{
+                        id: this.props.entityID,
                         agent_token_life: `P${this.state.tokenLife}D`
-                    }
+                    }]
                 })
                 this.props.saveValues('tokenLife', this.state.tokenLife)
                 this.props.changeMode('')
