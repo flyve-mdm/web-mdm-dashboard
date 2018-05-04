@@ -38,10 +38,10 @@ class ChangeDownloadURL extends Component {
             try {
                 await this.props.glpi.updateItem({
                     itemtype: itemtype.PluginFlyvemdmEntityconfig,
-                    id: this.props.entityID,
-                    input: {
+                    input: [{
+                        id: this.props.entityID,
                         download_url: this.state.downloadURL
-                    }
+                    }]
                 })
                 this.props.saveValues('downloadURL', this.state.downloadURL)
                 this.props.changeMode('')
