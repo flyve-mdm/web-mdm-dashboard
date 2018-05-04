@@ -96,14 +96,14 @@ class ForgotPassword extends PureComponent {
                         />
 
                         <button 
-                            className="btn --secondary" 
+                            className="btn btn--secondary" 
                             type="button" 
                             onClick={() => this.props.history.push(`${publicURL}/`)}
                         >
                             {I18n.t('commons.back')}
                         </button>
 
-                        <button className="btn --primary" type="submit">
+                        <button className="btn btn--primary" type="submit">
                             {I18n.t('login.reset_password')}
                         </button>
                     </form>

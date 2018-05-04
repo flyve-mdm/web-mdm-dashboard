@@ -69,7 +69,7 @@ class Feedback extends PureComponent {
                                 onChange={(event) => this.setState({ textarea: event.target.value })}
                                 required={true}
                             />
-                            <button className="btn --primary" style={{float: 'right'}}>
+                            <button className="btn btn--primary" style={{float: 'right'}}>
                                 {I18n.t('commons.send') }
                             </button>
                         </form>

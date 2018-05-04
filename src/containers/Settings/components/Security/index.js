@@ -244,7 +244,7 @@ class Security extends PureComponent {
 
                             <br/>
 
-                            <button className="btn --secondary" 
+                            <button className="btn btn--secondaryaryary" 
                                 type="button"
                                 style={{marginRight: 10}} 
                                 onClick={() => this.changeMode("")}
@@ -252,7 +252,7 @@ class Security extends PureComponent {
                                 {I18n.t('commons.cancel')}
                             </button>
 
-                            <button className="btn --primary">
+                            <button className="btnbtn--primaryryry">
                                 {I18n.t('commons.save')}
                             </button>
 
@@ -293,7 +293,7 @@ class Security extends PureComponent {
                                     </div>
                                 </div>
                                 <div className="controller">
-                                    <button className="btn --secondary" onClick={() => this.changeMode(I18n.t('commons.change_password'))}>
+                                    <button className="btn btn--secondaryaryary" onClick={() => this.changeMode(I18n.t('commons.change_password'))}>
                                         {I18n.t('commons.edit')}
                                     </button>
                                 </div>
@@ -307,7 +307,7 @@ class Security extends PureComponent {
                                     </div>
                                 </div>
                                 <div className="controller">
-                                    <button className="btn --secondary" onClick={this.closeSession}>
+                                    <button className="btn btn--secondaryaryary" onClick={this.closeSession}>
                                         {I18n.t('commons.logout')}
                                     </button>
                                 </div>
@@ -321,7 +321,7 @@ class Security extends PureComponent {
                                     </div>
                                 </div>
                                 <div className="controller">
-                                    <button className="btn --secondary" onClick={this.cleanWebStorage}>
+                                    <button className="btn btn--secondaryaryary" onClick={this.cleanWebStorage}>
                                         {I18n.t('commons.delete')}
                                     </button>
                                 </div>
@@ -339,7 +339,7 @@ class Security extends PureComponent {
                                             </div>
                                         </div>
                                         <div className="controller">
-                                            <button className="btn --secondary" onClick={this.deleteUser}>
+                                            <button className="btn btn--secondaryaryary" onClick={this.deleteUser}>
                                                 {I18n.t('commons.delete')}
                                             </button>
                                         </div>

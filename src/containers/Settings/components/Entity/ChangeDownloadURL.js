@@ -76,10 +76,10 @@ class ChangeDownloadURL extends PureComponent {
                             onChange={this.changeState}
                         />
                     </div>
-                    <button className="btn --secondary" style={{marginRight: 10}} onClick={() => this.props.changeMode("")}>
+                    <button className="btn btn--secondary" style={{marginRight: 10}} onClick={() => this.props.changeMode("")}>
                         {I18n.t('commons.cancel')}
                     </button>
-                    <button className="btn --primary" onClick={this.saveURL}>
+                    <button className="btnbtn--primaryryry" onClick={this.saveURL}>
                         {I18n.t('commons.save')}
                     </button>
                 </ContentPane>

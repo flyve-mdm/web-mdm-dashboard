@@ -63,7 +63,7 @@ class UsernameFieldset extends PureComponent {
                         onChange={this.props.changeInput} 
                         required={true}
                     />
-                    <button className="btn --primary">
+                    <button className="btn btn--primary">
                         {I18n.t('commons.next')}
                     </button>
                 </form>

@@ -338,7 +338,7 @@ export default class UsersEditOne extends PureComponent {
 
                     <ConstructInputs data={user.activityInformation} icon="documentIcon" />
 
-                    <button className="btn --primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                    <button className="btn btn--primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                         {I18n.t('commons.save')}
                     </button>
                 

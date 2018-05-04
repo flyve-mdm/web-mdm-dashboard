@@ -116,7 +116,7 @@ class Supervision extends PureComponent {
                                 icon="supervisionIcon" 
                                 title={I18n.t('settings.supervision.helpdesk')} 
                             />
-                            <button className="btn --primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                            <button className="btn btn--primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
                                 {I18n.t('commons.save')}
                             </button>
                             <br />

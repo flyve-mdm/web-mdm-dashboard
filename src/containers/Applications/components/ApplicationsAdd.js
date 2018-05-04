@@ -105,7 +105,7 @@ export default class ApplicationsAdd extends PureComponent {
                             {I18n.t('commons.drop_or_click_file')}
                         </FilesUpload>
                         <div style={{marginTop: 10}}>
-                            <button className="btn --primary" onClick={this.filesUpload}>
+                            <button className="btn btn--primary" onClick={this.filesUpload}>
                                 {I18n.t('commons.save')}
                             </button>
                             {

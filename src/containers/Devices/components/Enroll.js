@@ -82,7 +82,7 @@ export default class Enroll extends PureComponent {
                             {I18n.t('commons.cancel')}
                         </button>
                         <button
-                            className="btn --primary"
+                            className="btn btn--primary"
                             style={{ marginLeft: 10 }}
                             onClick={this.inviteDevice}
                         >
