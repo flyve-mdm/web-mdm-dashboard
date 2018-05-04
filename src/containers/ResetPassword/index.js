@@ -66,7 +66,7 @@ class ResetPassword extends PureComponent {
                     <ConstructInputs data={reset.resetInformation} />
                 </div>
                 <div style={{ textAlign: 'center' }}>
-                    <button className='btn --primary' style={{ margin: "20px" }} onClick={this.handleResetPassword}>
+                    <button className='btn btn--primary' style={{ margin: "20px" }} onClick={this.handleResetPassword}>
                         {I18n.t('login.reset_password')}
                     </button>
                 </div>

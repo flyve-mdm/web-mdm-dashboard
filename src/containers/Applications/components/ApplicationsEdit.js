@@ -98,7 +98,7 @@ export default class ApplicationsEdit extends PureComponent {
                             <h2 className="win-h2 titleContentPane"> 
                                 {I18n.t('applications.edit')} 
                             </h2>
-                            <button className="btn --primary" onClick={this.handleSaveFiles}>
+                            <button className="btn btn--primary" onClick={this.handleSaveFiles}>
                                 {I18n.t('commons.save')}
                             </button>
                         </div>

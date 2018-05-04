@@ -56,13 +56,13 @@ class PasswordFieldset extends PureComponent {
                             required={true}
                         />
 
-                        <button className="btn --secondary" type="button" onClick={
+                        <button className="btn btn--secondary" type="button" onClick={
                             () => this.props.changePhase(1)
                         }>
                             { I18n.t('commons.back') }
                         </button>
 
-                        <button type="submit" className="btn --primary">
+                        <button type="submit" className="btn btn--primary">
                             { I18n.t('commons.sign_in') }
                         </button>
                     </form>

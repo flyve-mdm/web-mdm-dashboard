@@ -86,7 +86,7 @@ class SignUp extends PureComponent {
                             <span>{I18n.t('login.refresh_captcha')}</span>
                         </div>
                         <div style={{textAlign: 'center'}}>
-                            <button className='btn --primary' style={{ margin: "20px" }}>
+                            <button className='btn btn--primary' style={{ margin: "20px" }}>
                                 { I18n.t('commons.register') }
                             </button>
                             <p>
