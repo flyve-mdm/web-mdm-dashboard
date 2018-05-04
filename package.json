@@ -63,7 +63,7 @@
     "url-loader": "1.0.0",
     "victory": "^0.26.0",
     "web-animations-js": "^2.3.1",
-    "webpack": "3.11.0",
+    "webpack": "4.7.0",
     "webpack-dev-server": "^2.11.2",
     "webpack-manifest-plugin": "2.0.2",
     "whatwg-fetch": "2.0.3",
