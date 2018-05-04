@@ -6,7 +6,7 @@ class Select extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            options: this.props.options ? this.props.options : []
+            options: this.props.options
         }
     }
 
@@ -14,17 +14,17 @@ class Select extends Component {
         this.props.function(this.props.name, eventObject.target.value)
     }
 
-    listRequest = async (props) => {
+    listRequest = async () => {
         let options = []
-        let response = await props.glpi[props.request.method](props.request.params)
+        let response = await this.props.glpi[this.props.request.method](this.props.request.params)
 
-        switch (props.request.method) {
+        switch (this.props.request.method) {
             case 'getMyProfiles':
                 response.myprofiles.forEach(element => {
                     options.push(
                         {
-                            content: element[props.request.content],
-                            value: element[props.request.value]
+                            content: element[this.props.request.content],
+                            value: element[this.props.request.value]
                         }
                     )
                 })
@@ -34,20 +34,20 @@ class Select extends Component {
                 if (response.data) {
                     if (response.totalcount !== response.count) {
                         let params = {
-                            itemtype: props.request.params.itemtype, 
+                            itemtype: this.props.request.params.itemtype, 
                             options: {
-                                ...props.request.params.options,
+                                ...this.props.request.params.options,
                                 range: `0-${response.totalcount - 1}`
                             }
                         }
-                        response = await props.glpi[props.request.method](params) 
+                        response = await this.props.glpi[this.props.request.method](params) 
                     }
 
                     response.data.forEach(element => {
                         options.push(
                             {
-                                content: element[props.request.content],
-                                value: element[props.request.value]
+                                content: element[this.props.request.content],
+                                value: element[this.props.request.value]
                             }
                         )
                     })
@@ -58,8 +58,8 @@ class Select extends Component {
                     response.forEach(element => {
                         options.push(
                             {
-                                content: element[props.request.content],
-                                value: element[props.request.value]
+                                content: element[this.props.request.content],
+                                value: element[this.props.request.value]
                             }
                         )
                     })
@@ -70,8 +70,8 @@ class Select extends Component {
                 response.forEach(element => {
                     options.push(
                         {
-                            content: element[props.request.content],
-                            value: element[props.request.value]
+                            content: element[this.props.request.content],
+                            value: element[this.props.request.value]
                         }
                     )
                 })    
@@ -80,8 +80,8 @@ class Select extends Component {
                 response.myentities.forEach(element => {
                     options.push(
                         {
-                            content: element[props.request.content],
-                            value: element[props.request.value]
+                            content: element[this.props.request.content],
+                            value: element[this.props.request.value]
                         }
                     )
                 }) 
@@ -90,48 +90,48 @@ class Select extends Component {
                 break
         }
 
-        return options
+        this.setState({ options })
     }
 
     componentDidMount = () => {
-        this.handleRefresh(this.props)
-    }
-
-    componentWillReceiveProps = (nextProps) => {
-        if (nextProps !== this.props) {
-            this.handleRefresh(nextProps)
-        }
-    }
-
-    handleRefresh = async (props) => {
-        if (props.glpi && props.request) {
-
-            this.setState ({
-                options: await this.listRequest(props)
-            })
-
+        if (this.props.glpi && this.props.request) {
+            this.listRequest()
         } else {
-            let options = []
-            props.options.forEach(element => {
-                if (!element.name) {
-                    options.push(
-                        {
-                            value: element,
-                            content: element
-                        }
-                    )
-                } else {
-                    options.push(
-                        {
-                            value: element.value,
-                            content: element.name
-                        }
-                    )
-                }
-            })
-
-            this.setState ({ options })
+            this.handleRefresh(this.state.options)
         }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.options !== nextProps.options) {
+            this.handleRefresh(nextProps.options)
+            return true
+        }
+        if (this.state.options !== nextState.options) {
+            return true
+        }
+        return false
+    }
+
+    handleRefresh = async (options) => {
+        let optionsList = []
+        options.forEach(element => {
+            if (!element.name) {
+                optionsList.push(
+                    {
+                        value: element,
+                        content: element
+                    }
+                )
+            } else {
+                optionsList.push(
+                    {
+                        value: element.value,
+                        content: element.name
+                    }
+                )
+            }
+        })
+        this.setState ({ options: optionsList })
     }
 
     render() {
