@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify'
 import { connect } from 'react-redux'
@@ -18,7 +18,7 @@ function mapStateToProps(state, props) {
  * @param {*} WrappedComponent -> React Component
  */
 const withI18NTranslation = WrappedComponent => {
-  class I18NTranslation extends Component {
+  class I18NTranslation extends PureComponent {
     /**
      * @param {*} i18nConvention -> String, e.g: 'pt_BR'
      */

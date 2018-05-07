@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import handleMessage from '../../shared/handleMessage'
 import PropTypes from 'prop-types'
 
@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
  */
 
 const withHandleMessages = (WrappedComponent) => {
-    class HandleMessages extends Component {
+    class HandleMessages extends PureComponent {
 
         render() {
             return <WrappedComponent {...this.props} />

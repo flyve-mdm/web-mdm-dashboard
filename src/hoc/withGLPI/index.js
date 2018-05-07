@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { withRouter } from 'react-router'
 import glpi from '../../shared/glpiApi'
 
@@ -8,7 +8,7 @@ import glpi from '../../shared/glpiApi'
  * @param { Object with method and parameters strings} fetch 
  */
 const withGLPI = (WrappedComponent, fetch) => {
-  class GLPIClient extends Component {
+  class GLPIClient extends PureComponent {
     constructor (props) {
       super(props)
 
