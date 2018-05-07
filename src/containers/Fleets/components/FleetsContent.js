@@ -853,7 +853,7 @@ class FleetsContent extends PureComponent {
                             <div className="separator" style={{ width: '100%'}} />
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'row', overflowY: 'auto' }}>
-                            <div className="contentInfo" >
+                            <div className="content-info" >
                                 <h3 style={{ margin: '10px' }}>
                                     {I18n.t('fleets.tasks_per_Category')}
                                 </h3>

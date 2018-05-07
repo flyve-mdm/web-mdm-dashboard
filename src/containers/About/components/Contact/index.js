@@ -11,7 +11,7 @@ const Contact = () => (
                 { I18n.t('about.contact.description') }                
             </p>
             <div className="separator" />
-            <div className="contentInfo" >
+            <div className="content-info" >
                 <ul className="contact-list__ul">
                     <li>
                         <span className="phoneIcon" />
