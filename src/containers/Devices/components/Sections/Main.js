@@ -172,7 +172,7 @@ export default class Main extends PureComponent {
                     </div>
                 </div>
                 <div className="separator" />
-                <div className="contentInfo">
+                <div className="content-info">
                     <div className="title">
                         {I18n.t('commons.version')}
                     </div>

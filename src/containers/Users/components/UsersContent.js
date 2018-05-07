@@ -127,7 +127,7 @@ export default class UsersContent extends PureComponent {
                         </div>
                     </div>
                     <div className="separator" />
-                    <div className="contentInfo">
+                    <div className="content-info">
                         <ul>
                             <li>
                                 <span className="phoneIcon" />
