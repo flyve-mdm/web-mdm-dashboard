@@ -15,21 +15,21 @@ const Contact = () => (
                 <ul className="contact-list">
                     <li>
                         <span className="phoneIcon" />
-                        <div className="callContent">
+                        <div>
                             <div>{ I18n.t('commons.email') }</div>
                             <a href="mailto:contact@teclib.com">contact@teclib.com</a>
                         </div>
                     </li>
                     <li>
                         <span className="phoneIcon" />
-                        <div className="callContent">
+                        <div>
                             <div>{ I18n.t('commons.call') }</div>
                             <a href="tel:+34512702140">+34512702140</a>
                         </div>
                     </li>
                     <li>
                         <span className="mapIcon" />
-                        <div className="callContent">
+                        <div>
                             <div>{ I18n.t('commons.map') }</div>
                             <a href="https://goo.gl/maps/qDijeVyCUwq">Barcelona, { I18n.t('commons.Spain') }</a>
                         </div>

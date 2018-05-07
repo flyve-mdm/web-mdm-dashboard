@@ -131,7 +131,7 @@ export default class UsersContent extends PureComponent {
                         <ul>
                             <li>
                                 <span className="phoneIcon" />
-                                <div className="callContent">
+                                <div>
                                     <a href={this.state.data.mobile ? "tel:" + this.state.data.mobile : "#call"}>
                                         {I18n.t('commons.call_mobile')}
                                     </a>
@@ -142,7 +142,7 @@ export default class UsersContent extends PureComponent {
                             </li>
                             <li>
                                 <span className="phoneIcon" />
-                                <div className="callContent">
+                                <div>
                                     <a href={this.state.data.phone2 ? "tel:" + this.state.data.phone2 : "#call"}>
                                         {I18n.t('commons.call_work')}
                                     </a>
@@ -153,7 +153,7 @@ export default class UsersContent extends PureComponent {
                             </li>
                             <li>
                                 <span className="emailIcon" />
-                                <div className="callContent">
+                                <div>
                                     <a href={this.state.emails.length > 0 ? "mailto:" + this.state.emails[0]["email"] : "#email"}>
                                         {I18n.t('commons.email')}
                                     </a>
