@@ -25,14 +25,14 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
         }
 
         return (
-            <div className="authentication-block " style={style} >
-                <section className="authentication__section">
-                    <figure className="authentication__figure">
+            <div className="authentication" style={style} >
+                <section>
+                    <figure>
                         <img alt="Flyve MDM Dashboard" src={require('../../assets/images/dashboard.svg')} />
                     </figure>
                     <WrappedComponent {...props} />
                 </section>
-                <footer className="authenticaton__footer">
+                <footer>
                     <a href="https://flyve-mdm.com/privacy-policy/">
                         {I18n.t('commons.terms_and_conditions')}
                     </a>

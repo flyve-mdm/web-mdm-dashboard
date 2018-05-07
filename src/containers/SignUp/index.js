@@ -74,15 +74,15 @@ class SignUp extends PureComponent {
                         { I18n.t('create_account.title') }
                     </h2>
 
-                    <form className="authentication__form" onSubmit={(event) => this.handleSubmitForm(event)}>
+                    <form onSubmit={(event) => this.handleSubmitForm(event)}>
                         <ConstructInputs data={user.personalInformation} />
                         <ConstructInputs data={user.passwordInformation} />
                         <ConstructInputs data={user.captchaInformation } />
-                        <div style={{ textAlign: 'center', marginTop: '15px' }}>
+                        <div className="authentication__captcha-img">
                             <img src={this.props.captcha ? this.props.captcha.img : null } alt='Captcha' />
                         </div>
-                        <div style={{ textAlign: 'center', marginTop: '15px', color: '#158784', cursor: 'pointer' }} onClick={this.props.actions.fetchCaptcha} >
-                            <span style={{ paddingRight: '5px' }} className="refreshIcon" />
+                        <div className="authentication__captcha-refresh" onClick={this.props.actions.fetchCaptcha} >
+                            <span className="refreshIcon" />
                             <span>{I18n.t('login.refresh_captcha')}</span>
                         </div>
                         <div style={{textAlign: 'center'}}>

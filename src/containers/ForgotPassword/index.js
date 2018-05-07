@@ -79,7 +79,7 @@ class ForgotPassword extends PureComponent {
         
         if (!this.state.isRecoverSent) {
             element = (
-                <div className="authentication-forgot__div">
+                <div className="authentication__forgot-password">
                     <p>
                         {I18n.t('forgot_password.help_reset_password')}
                     </p>
