@@ -135,7 +135,7 @@ class HelpCenterList extends PureComponent {
                 (   
                     <ContentPane>
                         <h2 style={{ margin: '10px' }}>{I18n.t('about.help_center.title')}</h2>
-                        <div className="listPane" style={{ padding: 0 }}>
+                        <div className="list-pane" style={{ padding: 0 }}>
                             <div>
                                 <div style={{
                                     display: 'flex',
@@ -175,7 +175,7 @@ class HelpCenterList extends PureComponent {
                             </div>
                             <ReactWinJS.ListView
                                 ref="listView"
-                                className="contentListView win-selectionstylefilled"
+                                className="list-pane__content win-selectionstylefilled"
                                 style={{ height: 'calc(100% - 48px)' }}
                                 itemDataSource={this.state.list.dataSource}
                                 itemTemplate={this.itemRenderer}

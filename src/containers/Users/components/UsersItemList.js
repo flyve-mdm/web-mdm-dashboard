@@ -9,8 +9,8 @@ export default class UsersItemList extends PureComponent {
             <div>
                 <IconItemList image={imageProfile} size={42} />
                 <div style={{ display: 'inline-block' }}>
-                    <div className="name">{this.props.itemList['User.name']}</div>
-                    <div className="detail">{this.props.itemList['User.realname']}</div>
+                    <div className="list-pane__name">{this.props.itemList['User.name']}</div>
+                    <div className="list-pane__detail">{this.props.itemList['User.realname']}</div>
                 </div>
             </div>
         )

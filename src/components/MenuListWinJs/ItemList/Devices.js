@@ -16,9 +16,9 @@ export default class DevicesItemList extends PureComponent {
             <div>
                 {iconComponent}
                 <div style={{ display: 'inline-block'}}>
-                    <div className="name">{this.props.itemList["PluginFlyvemdmAgent.name"]}</div>
-                    <div className="detail">{this.props.itemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"]}</div>
-                    <div className="detail">{this.props.itemList["PluginFlyvemdmAgent.mdm_type"].toUpperCase()}</div>
+                    <div className="list-pane__name">{this.props.itemList["PluginFlyvemdmAgent.name"]}</div>
+                    <div className="list-pane__detail">{this.props.itemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"]}</div>
+                    <div className="list-pane__detail">{this.props.itemList["PluginFlyvemdmAgent.mdm_type"].toUpperCase()}</div>
                 </div>
             </div>
         )

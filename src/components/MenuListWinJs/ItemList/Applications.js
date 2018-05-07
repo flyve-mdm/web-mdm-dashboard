@@ -13,8 +13,8 @@ export default class ApplicationsItemList extends PureComponent {
                     backgroundColor="transparent"
                 />
                 <div style={{ marginLeft: 5, display: 'inline-block' }}>
-                    <div className="name">{this.props.itemList["PluginFlyvemdmPackage.alias"]}</div>
-                    <div className="detail">{this.props.itemList["PluginFlyvemdmPackage.name"]}</div>
+                    <div className="list-pane__name">{this.props.itemList["PluginFlyvemdmPackage.alias"]}</div>
+                    <div className="list-pane__detail">{this.props.itemList["PluginFlyvemdmPackage.name"]}</div>
                 </div>
             </div>
         )

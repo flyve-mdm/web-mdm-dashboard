@@ -294,7 +294,7 @@ export default class FleetsList extends PureComponent {
                     <ReactWinJS.ListView
                         ref={(listView) => { this.listView = listView }}
                         onLoadingStateChanged={this.onLoadingStateChanged}
-                        className="contentListView win-selectionstylefilled"
+                        className="list-pane__content win-selectionstylefilled"
                         style={{ height: 'calc(100% - 48px)' }}
                         itemDataSource={this.state.itemList.dataSource}
                         layout={this.state.layout}

@@ -85,10 +85,10 @@ class DevicesAssociated extends PureComponent {
                                 (
                                     <React.Fragment>
                                         <h2>{I18n.t('fleets.devices_of')} '{this.state.name}'</h2>
-                                        <div className="listPane">
+                                        <div className="list-pane">
                                             <ReactWinJS.ListView
                                                 ref={(listView) => { this.listView = listView }}
-                                                className="contentListView win-selectionstylefilled"
+                                                className="list-pane__content win-selectionstylefilled"
                                                 itemDataSource={this.state.itemList.dataSource}
                                                 itemTemplate={this.ItemListRenderer}
                                                 headerComponent={this.headerComponent}

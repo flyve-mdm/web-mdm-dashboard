@@ -138,7 +138,7 @@ class Applications extends PureComponent {
         let renderComponents = (
 
             <React.Fragment>
-                <div className="listPane flex-block-list" style={{...this.stylesList()}}>
+                <div className="list-pane flex-block-list" style={{...this.stylesList()}}>
                 <ApplicationsList
                     key="list"
                     {...this.propsData()}

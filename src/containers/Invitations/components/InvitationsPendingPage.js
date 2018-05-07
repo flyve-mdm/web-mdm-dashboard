@@ -72,7 +72,7 @@ class InvitationsPendingPage extends PureComponent {
 
         let listComponent = (
             <ContentPane>
-                <div className="listPane" style={{ margin: '0 10px' }}>
+                <div className="list-pane" style={{ margin: '0 10px' }}>
                     <div className="content-header">
                         <h2 className="content-header__title" >
                             {I18n.t('invitations.pending')}
@@ -86,7 +86,7 @@ class InvitationsPendingPage extends PureComponent {
         if (!this.state.isLoading && this.state.itemList.length > 0) {
             listComponent = (
                 <ContentPane>
-                    <div className="listPane" style={{ margin: '0 10px' }}>
+                    <div className="list-pane" style={{ margin: '0 10px' }}>
                         <div className="content-header">
                             <h2 className="content-header__title">
                                 {I18n.t('invitations.pending')}
@@ -94,7 +94,7 @@ class InvitationsPendingPage extends PureComponent {
                         </div>
                         <ReactWinJS.ListView
                             ref={(listView) => { this.listView = listView }}
-                            className="contentListView win-selectionstylefilled"
+                            className="list-pane__content win-selectionstylefilled"
                             style={{ height: 'calc(100% - 48px)' }}
                             itemDataSource={this.state.itemList.dataSource}
                             itemTemplate={this.ItemListRenderer}

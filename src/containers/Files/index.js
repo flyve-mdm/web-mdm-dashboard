@@ -139,7 +139,7 @@ class Files extends PureComponent {
         let renderComponents = (
 
             <React.Fragment>
-                <div className="listPane flex-block-list" style={{ ...this.stylesList() }}>
+                <div className="list-pane flex-block-list" style={{ ...this.stylesList() }}>
                     <FilesList
                         key="list"
                         {...this.propsData()}
