@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import IconWithPopper from './IconWithPopper'
 import ImgWithPopper from './imgWithPopper'
@@ -9,7 +9,7 @@ import { I18n } from "react-i18nify"
 import publicURL from '../../shared/publicURL'
 import { splitview } from '../../shared/animations'
 
-class SplitView extends React.Component {
+class SplitView extends PureComponent {
 
   logout = () => {
     this.props.logout()

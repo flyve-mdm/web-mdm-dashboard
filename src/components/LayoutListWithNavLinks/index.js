@@ -1,11 +1,11 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import { slideTop } from '../../shared/animations'
 
-class ListWithNavLinks extends Component {
+class ListWithNavLinks extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {

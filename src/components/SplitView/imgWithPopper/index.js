@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import ImageResponsive from '../../ImageResponsive'
 import PropTypes from 'prop-types'
 
-class imgWithPopper extends Component {
+class imgWithPopper extends PureComponent {
   render () {
     return (
       <div>

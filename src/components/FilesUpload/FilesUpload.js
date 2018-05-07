@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import bytesToSize from '../../shared/bytesToSize'
 import { I18n } from "react-i18nify"
 
-export default class FilesUpload extends Component {
+export default class FilesUpload extends PureComponent {
 
     constructor(props, context) {
         super(props, context)

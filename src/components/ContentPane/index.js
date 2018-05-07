@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { slideTop } from '../../shared/animations'
 
-class ContentPane extends Component {
+class ContentPane extends PureComponent {
 
   componentDidMount() {
     slideTop(this.pane).play()

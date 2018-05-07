@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import IconItemList from '../../IconItemList'
 
-export default class ApplicationsItemList extends Component {
+export default class ApplicationsItemList extends PureComponent {
     render() {
         let image = "data:image/png;base64, " + this.props.itemList["PluginFlyvemdmPackage.icon"]
         return (

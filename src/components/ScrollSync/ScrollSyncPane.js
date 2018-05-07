@@ -1,8 +1,8 @@
-import { Component } from 'react'
+import { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-class ScrollSyncPane extends Component {
+class ScrollSyncPane extends PureComponent {
 
   static propTypes = {
     children: PropTypes.node.isRequired,

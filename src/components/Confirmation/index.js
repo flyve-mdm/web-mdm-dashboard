@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import { I18n } from 'react-i18nify'
 
-class Confirmation extends Component {
+class Confirmation extends PureComponent {
 
     static isOK = async (contentDialog) => {
         return await contentDialog.winControl.show().then(({ result }) => {

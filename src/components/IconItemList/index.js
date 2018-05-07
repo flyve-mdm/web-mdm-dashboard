@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-export default class IconItemList extends React.Component {
+export default class IconItemList extends PureComponent {
     constructor (props) {
         super(props)
         this.state = {
