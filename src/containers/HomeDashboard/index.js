@@ -440,20 +440,20 @@ class Dashboard extends PureComponent {
     const renderComponent = this.state.isLoading ? <div style={{width: '100%', height: 'calc(100vh - 80px)'}}><Loading message={`${I18n.t('commons.loading')}...`} /></div>:
     (
       <ContentPane>
-        <div className="dashboard-block" ref={home => this.home = home}>
+        <div className="dashboard" ref={home => this.home = home}>
 
         {
           (renderInfoBox.length > 0 || renderGraphics.length > 0) ?
             (
-              <div className="dashboard-wrapper__div">
+              <div className="dashboard__wrapper">
 
-                  <div className="dashboard-infobox-wraper__div">
+                  <div className="dashboard__infobox">
 
                     {renderInfoBox}
 
                   </div>
 
-                  <div className="dashboard-chart-wraper__div">
+                  <div className="dashboard__chart">
 
                     {renderGraphics}
 
