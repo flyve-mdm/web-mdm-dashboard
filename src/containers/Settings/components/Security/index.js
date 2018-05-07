@@ -244,7 +244,7 @@ class Security extends PureComponent {
 
                             <br/>
 
-                            <button className="btn btn--secondaryaryary" 
+                            <button className="btn btn--secondary" 
                                 type="button"
                                 style={{marginRight: 10}} 
                                 onClick={() => this.changeMode("")}
@@ -252,7 +252,7 @@ class Security extends PureComponent {
                                 {I18n.t('commons.cancel')}
                             </button>
 
-                            <button className="btnbtn--primaryryry">
+                            <button className="btnbtn--primary">
                                 {I18n.t('commons.save')}
                             </button>
 
@@ -285,43 +285,43 @@ class Security extends PureComponent {
                                 {I18n.t('commons.security')}
                             </h2>
                             
-                            <div className="listElement">
-                                <div className="message">
+                            <div className="list-element">
+                                <div className="list-element__message">
                                     {I18n.t('commons.password')}
-                                    <div className="detail">
+                                    <div className="list-element__detail">
                                         {I18n.t('settings.security.change_flyve_passsword')}
                                     </div>
                                 </div>
-                                <div className="controller">
-                                    <button className="btn btn--secondaryaryary" onClick={() => this.changeMode(I18n.t('commons.change_password'))}>
+                                <div className="list-element__controller">
+                                    <button className="btn btn--secondary" onClick={() => this.changeMode(I18n.t('commons.change_password'))}>
                                         {I18n.t('commons.edit')}
                                     </button>
                                 </div>
                             </div>
             
-                            <div className="listElement">
-                                <div className="message">
+                            <div className="list-element">
+                                <div className="list-element__message">
                                     {I18n.t('commons.kill_session')}
-                                    <div className="detail">
+                                    <div className="list-element__detail">
                                         {I18n.t('settings.security.destroy_session')}
                                     </div>
                                 </div>
-                                <div className="controller">
-                                    <button className="btn btn--secondaryaryary" onClick={this.closeSession}>
+                                <div className="list-element__controller">
+                                    <button className="btn btn--secondary" onClick={this.closeSession}>
                                         {I18n.t('commons.logout')}
                                     </button>
                                 </div>
                             </div>
             
-                            <div className="listElement">
-                                <div className="message">
+                            <div className="list-element">
+                                <div className="list-element__message">
                                     {I18n.t('settings.security.delete_data')}
-                                    <div className="detail">
+                                    <div className="list-element__detail">
                                         {I18n.t('settings.security.delete_data_detail')}
                                     </div>
                                 </div>
-                                <div className="controller">
-                                    <button className="btn btn--secondaryaryary" onClick={this.cleanWebStorage}>
+                                <div className="list-element__controller">
+                                    <button className="btn btn--secondary" onClick={this.cleanWebStorage}>
                                         {I18n.t('commons.delete')}
                                     </button>
                                 </div>
@@ -331,15 +331,15 @@ class Security extends PureComponent {
                             {
                                 !selfRegistration ? '' :
                                 <React.Fragment>
-                                    <div className="listElement">
-                                        <div className="message">
+                                    <div className="list-element">
+                                        <div className="list-element__message">
                                             {I18n.t('settings.security.delete_account')}
-                                            <div className="detail">
+                                            <div className="list-element__detail">
                                                 {I18n.t('settings.security.delete_account_detail')}
                                             </div>
                                         </div>
-                                        <div className="controller">
-                                            <button className="btn btn--secondaryaryary" onClick={this.deleteUser}>
+                                        <div className="list-element__controller">
+                                            <button className="btn btn--secondary" onClick={this.deleteUser}>
                                                 {I18n.t('commons.delete')}
                                             </button>
                                         </div>

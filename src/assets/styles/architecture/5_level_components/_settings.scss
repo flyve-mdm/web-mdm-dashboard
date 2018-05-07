@@ -1,8 +1,8 @@
-.listElement {
+.list-element {
     display: block;
     overflow: auto;
 
-    .message {
+    .list-element__message {
         display: inline-block;
         padding: 18px 0px 15px 15px;
         width: 50%;
@@ -13,13 +13,13 @@
         }
     }
 
-    .detail {
+    .list-element__detail {
         color: darken($text-detail-color, 35);
         font-size: 13px;
         line-height: 16px;
     }
 
-    .controller {
+    .list-element__controller {
         padding: 15px 15px 15px 0;                
         float: right;
         display: inline-block;

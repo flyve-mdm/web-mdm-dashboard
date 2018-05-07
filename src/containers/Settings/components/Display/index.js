@@ -58,12 +58,12 @@ class Display extends PureComponent {
                     {I18n.t('commons.language')}
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.display.change_interface')}
                     </div>
                     <div 
-                        className="controller" 
+                        className="list-element__controller" 
                         style={{
                             paddingTop: 10
                         }}
@@ -95,11 +95,11 @@ class Display extends PureComponent {
                     {I18n.t('commons.animations')}
                 </div>
 
-                    <div className="listElement">
-                        <div className="message">
+                    <div className="list-element">
+                        <div className="list-element__message">
                             {this.state.animations ? I18n.t('settings.display.disable_animations') : I18n.t('settings.display.enable_animations') }
                         </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch
                             className="content-text-primary"
                             checked={this.state.animations}
@@ -112,11 +112,11 @@ class Display extends PureComponent {
                     {I18n.t('settings.display.show')}
                 </div>
                 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.display.devices_managed')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
                             checked={this.state.devicesCurrentlyManaged}
@@ -125,11 +125,11 @@ class Display extends PureComponent {
                     </div>
                 </div>
                 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.display.fleets_managed')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
                             checked={this.state.fleetsCurrentlyManaged}
@@ -138,11 +138,11 @@ class Display extends PureComponent {
                     </div>
                 </div>
                 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.display.files_uploaded')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
                             checked={this.state.filesUploaded}
@@ -151,11 +151,11 @@ class Display extends PureComponent {
                     </div>
                 </div>
                 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.display.applications_uploaded')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
                             checked={this.state.applicationsUploaded}
@@ -164,11 +164,11 @@ class Display extends PureComponent {
                     </div>
                 </div>
                 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.display.users')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
                             checked={this.state.numberUsers}
@@ -177,11 +177,11 @@ class Display extends PureComponent {
                     </div>
                 </div>
                 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.display.invitations_sent')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
                             checked={this.state.invitationsSent}
@@ -190,11 +190,11 @@ class Display extends PureComponent {
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.display.pending_invitations')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
                             checked={this.state.pendingInvitations}
@@ -203,11 +203,11 @@ class Display extends PureComponent {
                     </div>
                 </div>
                 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.display.devices_by_users')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
                             checked={this.state.devicesByUsers}
@@ -216,11 +216,11 @@ class Display extends PureComponent {
                     </div>
                 </div>
                 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.display.devices_by_system')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
                             checked={this.state.devicesByOperatingSystemVersion}
