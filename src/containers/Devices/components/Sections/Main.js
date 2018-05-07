@@ -134,17 +134,17 @@ export default class Main extends PureComponent {
             renderComponent = (
             <ContentPane className="devices">
                 <div className="content-header">
-                    <div className="itemInfo">
+                    <div className="item-info">
                         {iconComponent}
-                        <div className="contentStatus">
-                            <div className="name">{this.state.data["name"]}</div>
+                        <div>
+                            <div className="item-info__name">{this.state.data["name"]}</div>
 
-                            <div className="message">
+                            <div className="item-info__message">
                                 {
                                     this.state.data["is_online"] === 1 ? I18n.t('commons.online') : I18n.t('commons.offline')
                                 }
                             </div>
-                            <div className="source">
+                            <div className="item-info__source">
                                 {this.state.data["last_contact"]} 
                                 &nbsp; {I18n.t('devices.main.last_contact')}
                             </div>   

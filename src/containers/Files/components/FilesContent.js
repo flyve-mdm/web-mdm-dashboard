@@ -75,10 +75,10 @@ export default class FilesContent extends PureComponent {
             return (
                 <ContentPane>
                     <div className="content-header" style={{ margin: '0 10px' }}>
-                        <div className="itemInfo">
+                        <div className="item-info">
                             <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} />
-                            <div className="contentStatus">
-                                <div className="name">{fileName}</div>
+                            <div>
+                                <div className="item-info__name">{fileName}</div>
                                 <br />
                                 <div>
                                     <span

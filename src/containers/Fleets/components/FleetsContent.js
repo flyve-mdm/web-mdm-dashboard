@@ -820,7 +820,7 @@ class FleetsContent extends PureComponent {
                                         className="deviceIcon"
                                     />
                                 </div>
-                                <div className="itemInfo">
+                                <div className="item-info">
                                     <span
                                         className="saveIcon"
                                         onClick={this.handleSaveFleet}
@@ -842,8 +842,8 @@ class FleetsContent extends PureComponent {
                                     }
 
                                 </div>
-                                <div className="itemInfo" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-                                    <div className="contentStatus">
+                                <div className="item-info" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+                                    <div>
                                         
                                     </div>
                                 </div>

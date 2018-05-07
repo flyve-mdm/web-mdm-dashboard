@@ -112,13 +112,13 @@ export default class ApplicationsContent extends PureComponent {
                         <h2 style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}> 
                             {I18n.t('applications.title')} 
                         </h2>
-                        <div className="itemInfo">
+                        <div className="item-info">
                             {image}
-                            <div className="contentStatus">
-                                <div className="name">{this.state.data["alias"]}</div>
-                                <div className="detail">{this.state.data["name"]}</div>
-                                <div className="detail">{BytesToSize(this.state.data["filesize"])}</div>
-                                <span className="source">{this.state.data["source"]}</span>
+                            <div>
+                                <div className="item-info__name">{this.state.data["alias"]}</div>
+                                <div className="item-info__detail">{this.state.data["name"]}</div>
+                                <div className="item-info__detail">{BytesToSize(this.state.data["filesize"])}</div>
+                                <span className="item-info__source">{this.state.data["source"]}</span>
                                 <br />
                                 <div>
                                     <span

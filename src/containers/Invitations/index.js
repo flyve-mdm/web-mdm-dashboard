@@ -139,13 +139,13 @@ class Invitations extends PureComponent {
         let renderComponents = (
 
             <React.Fragment>
-                <div className="list-pane flex-block-list" style={{...this.stylesList()}}>
+                <div className="list-pane flex-block__list" style={{...this.stylesList()}}>
                 <InvitationsList
                     key="list"
                     {...this.propsData()}
                 />
                 </div>
-                <div className="flex-block-content" style={{...this.stylesContent()}}>
+                <div className="flex-block__content" style={{...this.stylesContent()}}>
                 <GenerateRoutes 
                     key="content" 
                     routes={routes} 

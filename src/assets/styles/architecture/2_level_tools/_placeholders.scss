@@ -43,24 +43,22 @@
       margin-top: -30px;
     }
 
-    .itemInfo {
-        display: flex;
+    .item-info {
+      display: flex;
 
-        .contentStatus {
-            .message {
-                font-size: 14px;
-                line-height: 20px;
-                font-weight: 500;
-            }
+      .item-info__message {
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 500;
+      }
 
-            .source {
-                display:block;
-                color: $text-detail-color;
-                font-size: 12px;
-                line-height: 16px;
-                font-weight: 400;
-            }
-        }
+      .item-info__source {
+          display:block;
+          color: $text-detail-color;
+          font-size: 12px;
+          line-height: 16px;
+          font-weight: 400;
+      }
     }
 
     .list-pane__picture {

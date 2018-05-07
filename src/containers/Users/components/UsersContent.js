@@ -96,20 +96,20 @@ export default class UsersContent extends PureComponent {
             renderComponent = (
                 <div>
                     <div className="content-header">
-                        <div className="itemInfo">
+                        <div className="item-info">
                             <IconItemList image={imageProfile} size={100} />
-                            <div className="contentStatus">
-                                <div className="name">
+                            <div>
+                                <div className="item-info__name">
                                     <b>
                                         {this.state.data.name}
                                     </b>
                                 </div>
                                 
-                                <span className="message" >
+                                <span className="item-info__message" >
                                     {this.state.data.realname}
                                 </span>
                                 <br />
-                                <span className="source">
+                                <span className="item-info__source">
                                     {I18n.t('commons.joined')} {this.state.data.date_creation}
                                 </span>
                                 <br />
