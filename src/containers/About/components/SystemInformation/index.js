@@ -48,13 +48,13 @@ class SystemInformation extends PureComponent {
       this.state.plugins.forEach(plugin => {
         element.push(
           <div className="plugins" key={plugin.id}>
-            <div className="pluginLeft">
-              <div className="pluginTitle">{ plugin.name }</div>
-              <div className="pluginDetail" dangerouslySetInnerHTML={{__html: plugin.author}}></div>
+            <div className="plugins--left">
+              <div className="plugin__title">{ plugin.name }</div>
+              <div className="plugin__detail" dangerouslySetInnerHTML={{__html: plugin.author}}></div>
             </div>
-            <div className="pluginRight">
-              <span className="pluginTitle">{ plugin.version }</span>
-              <div className="pluginDetail">{ plugin.license }</div>
+            <div className="plugin--right">
+              <span className="plugin__title">{ plugin.version }</span>
+              <div className="plugin__detail">{ plugin.license }</div>
             </div>
           </div>
         )

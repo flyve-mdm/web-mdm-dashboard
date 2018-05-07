@@ -37,30 +37,30 @@
     margin: 15px 0;
 }
 
-.pluginLeft {
+.plugins--left {
     display: inline-block;
     width: 350px;
     text-overflow: ellipsis;
 }
-.pluginRight {
+.plugin--right {
     display: inline-block;
     text-align: right;
     width: 100px;
 }
-.pluginTitle {
+.plugin__title {
     font-weight: 400;
 }
-.pluginDetail {
+.plugin__detail {
     font-weight: 200;
 }
 @media (max-width: 840px) {
-    .pluginLeft {
+    .plugins--left {
         display: inline-block;
         width: 200px;
         overflow-x: hidden;
         text-overflow: ellipsis;
     }
-    .pluginRight {
+    .plugin--right {
         display: inline-block;
         text-align: right;
         width: 100px;
