@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify'
 
-export default class ApplicationsEditItemList extends Component {
+export default class ApplicationsEditItemList extends PureComponent {
     
     constructor(props) {
         super(props)

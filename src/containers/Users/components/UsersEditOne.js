@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ConstructInputs from '../../../components/Forms'
 import ContentPane from '../../../components/ContentPane'
@@ -11,7 +11,7 @@ import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
 
-export default class UsersEditOne extends Component {
+export default class UsersEditOne extends PureComponent {
     
     constructor(props) {
         super(props)

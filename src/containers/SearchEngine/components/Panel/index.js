@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import PanelResult from './PanelResults'
 import PanelFields from './PanelFields'
 
-class Panel extends Component {
+class Panel extends PureComponent {
     render() {
         const fields = []
 

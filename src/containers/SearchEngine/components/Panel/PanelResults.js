@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 
-class PanelResults extends Component {
+class PanelResults extends PureComponent {
   render() { 
     let bodyContent = null
 

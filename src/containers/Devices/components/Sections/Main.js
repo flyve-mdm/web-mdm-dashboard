@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import IconItemList from '../../../../components/IconItemList'
 import Confirmation from '../../../../components/Confirmation'
@@ -8,7 +8,7 @@ import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
 
-export default class Main extends Component {
+export default class Main extends PureComponent {
 
     constructor(props) {
         super(props)

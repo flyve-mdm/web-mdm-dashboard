@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import { bindActionCreators } from 'redux'
@@ -15,7 +15,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class ChangeTokenLife extends Component {
+class ChangeTokenLife extends PureComponent {
 
     constructor (props) {
         super (props)

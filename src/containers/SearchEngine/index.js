@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import { uiSetNotification } from '../../store/ui/actions'
@@ -17,7 +17,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class SearchEngine extends Component {
+class SearchEngine extends PureComponent {
     constructor(props) {
         super(props)
 

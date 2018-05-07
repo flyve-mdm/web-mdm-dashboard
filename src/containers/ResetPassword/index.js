@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -25,7 +25,7 @@ function mapStateToProps(state, props) {
     }
 }
 
-class ResetPassword extends Component {
+class ResetPassword extends PureComponent {
 
     constructor(props) {
         super(props)

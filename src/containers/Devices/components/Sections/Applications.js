@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
@@ -8,7 +8,7 @@ import Loader from '../../../../components/Loader'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../../shared/itemtype'
 
-export default class Applications extends Component {
+export default class Applications extends PureComponent {
 
     constructor(props) {
         super(props)

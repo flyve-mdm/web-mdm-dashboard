@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { VictoryPie } from 'victory'
 import { I18n } from 'react-i18nify'
@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch) {
   return { actions }
 }
 
-class Dashboard extends Component {
+class Dashboard extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {

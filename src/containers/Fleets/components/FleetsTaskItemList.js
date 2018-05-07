@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ReactWinJS from 'react-winjs'
 import TasksDeployAppList from './TasksDeployAppList'
 import TasksRemoveAppList from './TasksRemoveAppList'
@@ -6,7 +6,7 @@ import TasksDeployFileList from './TaskDeployFileList'
 import TasksRemoveFileList from './TasksRemoveFileList'
 import { I18n } from 'react-i18nify'
 
-class FleetsTaskItemList extends Component {
+class FleetsTaskItemList extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {

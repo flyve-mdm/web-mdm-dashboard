@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
 import ContentPane from '../../../components/ContentPane'
@@ -8,7 +8,7 @@ import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 
-class FleetsContent extends Component {
+class FleetsContent extends PureComponent {
 
     constructor(props) {
         super(props)

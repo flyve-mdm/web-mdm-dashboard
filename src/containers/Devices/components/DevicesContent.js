@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import ContentPane from '../../../components/ContentPane'
@@ -7,7 +7,7 @@ import { I18n } from 'react-i18nify'
 import getID from '../../../shared/getID'
 import Confirmation from '../../../components/Confirmation'
 
-export default class DevicesContent extends Component {
+export default class DevicesContent extends PureComponent {
 
     constructor (props) {
         super(props)

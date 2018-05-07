@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -15,7 +15,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class ChangeDownloadURL extends Component {
+class ChangeDownloadURL extends PureComponent {
 
     constructor (props) {
         super (props)

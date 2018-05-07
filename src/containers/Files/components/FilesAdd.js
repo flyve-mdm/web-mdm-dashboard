@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { FilesUpload, FilesUploadItemList } from '../../../components/FilesUpload'
 import ContentPane from '../../../components/ContentPane'
@@ -6,7 +6,7 @@ import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 
-export default class FilesAdd extends Component {
+export default class FilesAdd extends PureComponent {
 
     constructor (props) {
         super(props)

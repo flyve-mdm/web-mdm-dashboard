@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import IconItemList from '../../../components/IconItemList'
 
-export default class DevicesItemList extends Component {
+export default class DevicesItemList extends PureComponent {
     render() {
         let size = this.props.size
         let imageAgent = this.props.itemList["PluginFlyvemdmAgent.mdm_type"] ? `${this.props.itemList["PluginFlyvemdmAgent.mdm_type"]}.png` : null

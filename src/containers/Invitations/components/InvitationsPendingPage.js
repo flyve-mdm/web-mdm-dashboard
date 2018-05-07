@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
@@ -9,7 +9,7 @@ import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
 
-class InvitationsPendingPage extends Component {
+class InvitationsPendingPage extends PureComponent {
 
     constructor(props) {
         super(props)

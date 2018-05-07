@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Inventory from './Inventory'
 import Loader from '../../../../components/Loader'
@@ -6,7 +6,7 @@ import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
 import Loading from '../../../../components/Loading'
 
-export default class SystemReport extends Component {
+export default class SystemReport extends PureComponent {
 
     constructor(props) {
         super(props)

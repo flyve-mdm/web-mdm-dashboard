@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../../components/ContentPane'
 import IconItemList from '../../../components/IconItemList'
@@ -9,7 +9,7 @@ import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
 import publicURL from '../../../shared/publicURL'
 
-export default class UsersContent extends Component {
+export default class UsersContent extends PureComponent {
 
     constructor (props) {
         super(props)

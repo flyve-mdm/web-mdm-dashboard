@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class ForgotPassword extends Component {
+class ForgotPassword extends PureComponent {
 
     constructor (props) {
         super(props)

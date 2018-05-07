@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-class TasksRemoveAppList extends Component {
+class TasksRemoveAppList extends PureComponent {
 
     constructor(props) {
         super(props)

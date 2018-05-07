@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify'
 
-class Main extends Component {
+class Main extends PureComponent {
 
     render () {
         return (    

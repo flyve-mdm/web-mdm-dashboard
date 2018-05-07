@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Confirmation from '../../../../components/Confirmation'
 import ErrorValidation from '../../../../components/ErrorValidation'
@@ -22,7 +22,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class Security extends Component {
+class Security extends PureComponent {
 
     constructor(props) {
         super(props)

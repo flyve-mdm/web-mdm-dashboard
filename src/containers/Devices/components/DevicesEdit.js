@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import EditMultiple from '../../../components/EditMultiple'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 
-export default class DevicesEdit extends Component {
+export default class DevicesEdit extends PureComponent {
 
     constructor(props) {
         super(props)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import InvitationsItemList from './InvitationsItemList'
@@ -11,7 +11,7 @@ import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 
-export default class InvitationsList extends Component {
+export default class InvitationsList extends PureComponent {
 
     constructor(props) {
         super(props)

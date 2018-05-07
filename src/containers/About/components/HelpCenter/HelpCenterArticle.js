@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
@@ -18,7 +18,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class HelpCenterArticle extends Component {
+class HelpCenterArticle extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {

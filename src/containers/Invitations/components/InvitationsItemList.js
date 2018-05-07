@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify'
 
-export default class InvitationsItemList extends Component {
+export default class InvitationsItemList extends PureComponent {
     render() {
         return (
             <div style={{ display: 'inline-block' }}>
