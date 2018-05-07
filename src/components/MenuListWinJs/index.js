@@ -329,7 +329,7 @@ export default class ListWinJs extends PureComponent {
                 <ReactWinJS.ListView
                     ref={(listView) => { this.listView = listView }}
                     onLoadingStateChanged={this.onLoadingStateChanged}
-                    className="contentListView win-selectionstylefilled"
+                    className="list-pane__content win-selectionstylefilled"
                     style={{ height: 'calc(100% - 48px)' }}
                     itemDataSource={this.state.itemList.dataSource}
                     groupDataSource={this.state.itemList.groups.dataSource}
@@ -347,7 +347,7 @@ export default class ListWinJs extends PureComponent {
 
         return (
             <React.Fragment>
-                <div className="listPane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
+                <div className="list-pane" style={{ height: '100%', width: this.props.itemListPaneWidth, display: 'inline-block', verticalAlign: 'top' }}>
                     <ReactWinJS.ToolBar className="listToolBar">
                         <ReactWinJS.ToolBar.Button
                             key="sort"

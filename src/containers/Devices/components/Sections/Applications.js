@@ -108,10 +108,10 @@ export default class Applications extends PureComponent {
         if (!this.state.isLoading && this.state.itemList.length > 0) {
             listComponent = (
                 <ContentPane className="applications">
-                    <div className="listPane" style={{ padding: 0 }}>
+                    <div className="list-pane" style={{ padding: 0 }}>
                         <ReactWinJS.ListView
                             ref={(listView) => { this.listView = listView }}
-                            className="contentListView win-selectionstylefilled"
+                            className="list-pane__content win-selectionstylefilled"
                             headerComponent={headerComponent}
                             itemDataSource={this.state.itemList.dataSource}
                             itemTemplate={this.ItemListRenderer}

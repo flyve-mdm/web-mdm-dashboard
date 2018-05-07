@@ -139,7 +139,7 @@ class Invitations extends PureComponent {
         let renderComponents = (
 
             <React.Fragment>
-                <div className="listPane flex-block-list" style={{...this.stylesList()}}>
+                <div className="list-pane flex-block-list" style={{...this.stylesList()}}>
                 <InvitationsList
                     key="list"
                     {...this.propsData()}

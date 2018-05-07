@@ -80,7 +80,7 @@ export default class IconItemList extends PureComponent {
         }
         let className = ''
         if (this.props.type !== 'base64') {
-            className = 'contentPicture'
+            className = 'list-pane__picture'
             style = {
                 ...style,
                 WebkitBorderRadius: this.props.size,
