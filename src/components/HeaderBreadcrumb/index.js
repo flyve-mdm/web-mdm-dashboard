@@ -8,7 +8,7 @@ class HeaderBreadcrumb extends PureComponent {
 
   breadcrumbs () {
     let breadcrumbs = []
-    const addresses = this.props.history.location.pathname.split("/")
+    const addresses = this.props.location.pathname.split("/")
     for (let index = (publicURL === '') ? 2 : 3; index < addresses.length; index++) {
       let path = `${publicURL}/app`
       for (let i = (publicURL === '') ? 2 : 3; i < index + 1; i++) {
@@ -30,7 +30,6 @@ class HeaderBreadcrumb extends PureComponent {
   }
   
   render () {
-
     return (
       <header className="header-block">
   
@@ -56,7 +55,7 @@ class HeaderBreadcrumb extends PureComponent {
 
 HeaderBreadcrumb.propTypes = {
   handleToggleExpand: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired
 }
  
 export default HeaderBreadcrumb
