@@ -42,7 +42,7 @@ class UsernameFieldset extends PureComponent {
                 <h2 className="win-h2">
                     {I18n.t('login.title')}
                 </h2>
-                <p className="paragraph__p --description">
+                <p>
                     {I18n.t('login.use_your_account')}
                     <br/>
                     <a href="https://flyve-mdm.com/">
