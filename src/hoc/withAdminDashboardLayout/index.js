@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import SplitView from "../../components/SplitView"
 import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
 import getMode from '../../shared/getMode'
@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const withAdminDashboardLayout = WrappedComponent => {
-  class AdminDashboardLayout extends Component {
+  class AdminDashboardLayout extends PureComponent {
     constructor (props) {
       super(props)
       this.state = {

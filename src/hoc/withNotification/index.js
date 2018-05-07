@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import WinJS from 'winjs'
@@ -25,7 +25,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const withNotification = WrappedComponent => {
-  class ToastNotification extends Component {
+  class ToastNotification extends PureComponent {
     constructor (props) {
       super(props)
       this.state = {
