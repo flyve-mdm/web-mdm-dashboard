@@ -61,13 +61,13 @@ class ChangeTokenLife extends PureComponent {
         return this.state.isLoading ? <Loading message={`${I18n.t('commons.saving')}...`}/>: 
             ( 
                 <ContentPane>
-                    <div className="listElement">
+                    <div className="list-element">
                         {I18n.t('settings.entity.date_period')}
-                        <div className="detail">
+                        <div className="list-element__detail">
                             {I18n.t('settings.entity.number_of_days')}
                         </div>
                     </div>
-                    <div className="listElement">
+                    <div className="list-element">
                         <input 
                             type="number" 
                             className="win-textbox" 

@@ -11,22 +11,22 @@ class Main extends PureComponent {
                     {I18n.t('commons.agent')}
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.token_life')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <a onClick={() => this.props.changeMode("change Token life")}>{this.props.tokenLife} DAYS</a>
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.download_url')}
-                        <div className="detail">{this.props.downloadURL}</div>
+                        <div className="list-element__detail">{this.props.downloadURL}</div>
                     </div>
 
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <button className="btn --secondary" onClick={() => this.props.changeMode("change download URL")}>
                             {I18n.t('commons.change')}
                         </button>
@@ -37,11 +37,11 @@ class Main extends PureComponent {
                     {I18n.t('commons.configuration')}
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.id')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         {this.props.entityID}
                     </div>
                 </div>
@@ -50,74 +50,74 @@ class Main extends PureComponent {
                     {I18n.t('settings.entity.general_information')}
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.devices_currently')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         {this.props.devicesCurretlymanaged}
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.fleets_currently')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         {this.props.fleetsCurrentlyManaged}
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.files_uploaded')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         {this.props.filesUploaded}
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.applications_uploaded')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         {this.props.applicationsUploaded}
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.number_of_users')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         {this.props.numberUsers}
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.invitations_sent')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         {this.props.invitationsSent}
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.types_of_policies')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         {this.props.typesPolicies}
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.entity.number_of_categories')}
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         {this.props.numberCategoriesForPolicies}
                     </div>
                 </div>

@@ -47,14 +47,14 @@ class Notifications extends PureComponent {
                 <h2 style={{ margin: '10px' }}>
                     {I18n.t('settings.notifications.title')}
                 </h2>
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.notifications.show')}
-                        <div className="detail">
+                        <div className="list-element__detail">
                             {I18n.t('settings.notifications.show_deatil')}
                         </div>
                     </div>
-                    <div className="controller">
+                    <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
                             className="content-text-primary"
                             checked={this.state.showNotifications}
@@ -63,14 +63,14 @@ class Notifications extends PureComponent {
                     </div>
                 </div>
 
-                <div className="listElement">
-                    <div className="message">
+                <div className="list-element">
+                    <div className="list-element__message">
                         {I18n.t('settings.notifications.type')}
-                        <div className="detail">
+                        <div className="list-element__detail">
                             {I18n.t('settings.notifications.type_detail')}
                         </div>
                     </div>
-                    <div className="controller" style={{ paddingTop: 10 }}>
+                    <div className="list-element__controller" style={{ paddingTop: 10 }}>
                         <select 
                         name='notificationType' 
                         value={this.state.notificationType}

@@ -84,24 +84,24 @@ class DangerZone extends PureComponent {
             <React.Fragment>
 
                 <ContentPane ref={pane => this.pane = pane}>
-                    <div className="listElement">
-                        <div className="message">
+                    <div className="list-element">
+                        <div className="list-element__message">
                             {I18n.t('devices.danger_zone.wipe')}
-                            <div className="detail">
+                            <div className="list-element__detail">
                                 {I18n.t('devices.danger_zone.wipe_description')}
                             </div>
                         </div>
-                        <div className="controller">
+                        <div className="list-element__controller">
                             <button className="btn --secondary" onClick={this.wipe}>
                                 {I18n.t('commons.wipe')}
                             </button>
                         </div>
                     </div>
     
-                    <div className="listElement">
-                        <div className="message">
+                    <div className="list-element">
+                        <div className="list-element__message">
                             {I18n.t('devices.danger_zone.unenrollment')}
-                            <div className="detail">
+                            <div className="list-element__detail">
                                 {I18n.t('devices.danger_zone.unenrollment_description')}
                             </div>
                         </div>
@@ -113,14 +113,14 @@ class DangerZone extends PureComponent {
                         
                     </div>
     
-                    <div className="listElement">
-                        <div className="message">
+                    <div className="list-element">
+                        <div className="list-element__message">
                             {I18n.t('devices.danger_zone.delete')}
-                            <div className="detail">
+                            <div className="list-element__detail">
                                 {I18n.t('devices.danger_zone.delete_description')}
                             </div>
                         </div>
-                        <div className="controller">
+                        <div className="list-element__controller">
                             <button className="btn --secondary" onClick={this.delete}>
                                 {I18n.t('commons.delete')}
                             </button>

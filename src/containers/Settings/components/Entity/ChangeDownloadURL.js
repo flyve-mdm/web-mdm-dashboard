@@ -61,13 +61,13 @@ class ChangeDownloadURL extends PureComponent {
         return this.state.isLoading ? <Loading message={`${I18n.t('commons.saving')}...`}/>:
             (    
                 <ContentPane>
-                    <div className="listElement">
+                    <div className="list-element">
                         {I18n.t('settings.entity.url')}
-                        <div className="detail">
+                        <div className="list-element__detail">
                             {I18n.t('settings.entity.file_extension')}
                         </div>
                     </div>
-                    <div className="listElement">
+                    <div className="list-element">
                         <input 
                             type="text" 
                             className="win-textbox" 
@@ -79,7 +79,7 @@ class ChangeDownloadURL extends PureComponent {
                     <button className="btn btn--secondary" style={{marginRight: 10}} onClick={() => this.props.changeMode("")}>
                         {I18n.t('commons.cancel')}
                     </button>
-                    <button className="btnbtn--primaryryry" onClick={this.saveURL}>
+                    <button className="btnbtn--primary" onClick={this.saveURL}>
                         {I18n.t('commons.save')}
                     </button>
                 </ContentPane>
