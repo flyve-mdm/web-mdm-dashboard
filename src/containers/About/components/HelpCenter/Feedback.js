@@ -62,8 +62,8 @@ class Feedback extends PureComponent {
                         <form onSubmit={this.handleSubmit}>
                             <textarea
                                 name="textarea"
-                                ref={(input) => { this.textareaInput = input; }}
-                                className="win-textbox feedback-textarea"
+                                ref={(input) => { this.textareaInput = input }}
+                                className="win-textbox feedback__textarea"
                                 placeholder="Write a feedback!"
                                 value={this.state.textarea}
                                 onChange={(event) => this.setState({ textarea: event.target.value })}
