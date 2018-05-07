@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class ValidateAccount extends Component {
+class ValidateAccount extends PureComponent {
 
     constructor(props) {
         super(props)

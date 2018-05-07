@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
@@ -9,7 +9,7 @@ import { AboutItemList, ApplicationsItemList, DevicesItemList, InvitationsItemLi
 import GLPI from '../../shared/glpiApi'
 import publicURL from '../../shared/publicURL'
 
-export default class ListWinJs extends Component {
+export default class ListWinJs extends PureComponent {
 
     constructor(props) {
         super(props)

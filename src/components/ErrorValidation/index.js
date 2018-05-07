@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from "react-i18nify"
 
-class ErrorValidation extends Component {
+class ErrorValidation extends PureComponent {
 
     static validation = (parametersToEvaluate, value) => {
         let errorMessages = []

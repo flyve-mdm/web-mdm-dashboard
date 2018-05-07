@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-export default class AboutItemList extends Component {
+export default class AboutItemList extends PureComponent {
     render() {
         return (
             <div style={{ padding: '14px', width: '100%' }}>

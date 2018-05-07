@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
-class iconWithPopper extends Component {
+class iconWithPopper extends PureComponent {
   render () {
     if (this.props.to) {
       return (

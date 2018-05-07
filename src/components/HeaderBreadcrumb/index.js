@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { I18n } from "react-i18nify"
 import publicURL from '../../shared/publicURL'
 
-class HeaderBreadcrumb extends React.Component {
+class HeaderBreadcrumb extends PureComponent {
 
   breadcrumbs () {
     let breadcrumbs = []

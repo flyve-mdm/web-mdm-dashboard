@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-export default class FilesItemList extends Component {
+export default class FilesItemList extends PureComponent {
     render() {
         return (
             <div style={{ display: 'inline-block' }}>

@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import IconItemList from '../../IconItemList'
 
-export default class UsersItemList extends Component {
+export default class UsersItemList extends PureComponent {
     render() {
         const imageProfile = this.props.itemList['User.picture'] ? this.props.itemList['User.picture'] : "profile.png"
         return (

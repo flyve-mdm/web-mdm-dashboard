@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-export default class FleetsItemList extends Component {
+export default class FleetsItemList extends PureComponent {
     render() {
         return (
             <div style={{ display: 'inline-block' }}>

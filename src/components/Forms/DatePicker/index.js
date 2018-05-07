@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import YEARS from './years'
 import MONTHS from './months'
 import DAYS from './days'
 import monthsList from './monthsList.json'
 
-class DatePicker extends Component {
+class DatePicker extends PureComponent {
 
     constructor (props) {
         super(props)

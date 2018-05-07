@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Confirmation from '../../Confirmation'
 import ErrorValidation from '../../ErrorValidation'
 import { I18n } from "react-i18nify"
 
-class Input extends Component {
+class Input extends PureComponent {
 
     constructor(props) {
         super(props)
