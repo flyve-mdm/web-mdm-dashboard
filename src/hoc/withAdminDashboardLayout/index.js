@@ -106,7 +106,7 @@ const withAdminDashboardLayout = WrappedComponent => {
 
           <HeaderBreadcrumb 
             handleToggleExpand={this.handleToggleExpand} 
-            history={this.props.history}
+            location={this.props.history.location}
           /> 
 
           {this.state.iframe}
@@ -120,7 +120,6 @@ const withAdminDashboardLayout = WrappedComponent => {
               handleSetTimeOut={this.handleSetTimeOut}
               handleToggleExpand={this.handleToggleExpand}
               mode={this.state.mode}
-              history={this.props.history}
               logout={this.logout}
             />
             <WrappedComponent {...this.props} mode={this.state.mode} />
