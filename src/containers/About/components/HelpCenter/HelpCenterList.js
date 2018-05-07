@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
@@ -20,7 +20,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class HelpCenterList extends Component {
+class HelpCenterList extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {

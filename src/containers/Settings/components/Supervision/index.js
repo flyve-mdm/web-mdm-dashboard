@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { supervisionScheme } from '../../../../components/Forms/Schemas'
 import validateData from '../../../../shared/validateData'
@@ -20,7 +20,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class Supervision extends Component {
+class Supervision extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {

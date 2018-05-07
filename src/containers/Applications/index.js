@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ApplicationsList from './components/ApplicationsList'
 import getMode from '../../shared/getMode'
 import { uiSetNotification } from '../../store/ui/actions'
@@ -18,7 +18,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class Applications extends Component {
+class Applications extends PureComponent {
 
     constructor(props) {
         super(props)

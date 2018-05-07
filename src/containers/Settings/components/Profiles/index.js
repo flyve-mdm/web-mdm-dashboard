@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import validateData from '../../../../shared/validateData'
 import IconItemList from '../../../../components/IconItemList'
@@ -31,7 +31,7 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-class Profiles extends Component {
+class Profiles extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {

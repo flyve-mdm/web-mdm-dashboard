@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../../components/ContentPane'
 import ConstructInputs from '../../../components/Forms'
@@ -7,7 +7,7 @@ import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 
-export default class DevicesEditOne extends Component {
+export default class DevicesEditOne extends PureComponent {
 
     componentDidMount() {
         if (this.props.selectedItems.length > 0) {

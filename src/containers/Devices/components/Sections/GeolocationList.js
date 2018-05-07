@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from "react-i18nify"
 
-class GeolocationList extends Component {
+class GeolocationList extends PureComponent {
     render() {
         let renderList
         if (this.props.locations.length > 0) {

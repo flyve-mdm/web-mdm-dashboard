@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ChangeDownloadURL from './ChangeDownloadURL'
 import ChangeTokenLife from './ChangeTokenLife'
 import Main from './Main'
@@ -20,7 +20,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-class Entity extends Component {
+class Entity extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {

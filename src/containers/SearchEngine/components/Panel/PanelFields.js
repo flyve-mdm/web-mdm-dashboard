@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 
-class PanelFields extends Component {
+class PanelFields extends PureComponent {
   render() { 
     return (
       <div className="searchListHeader">

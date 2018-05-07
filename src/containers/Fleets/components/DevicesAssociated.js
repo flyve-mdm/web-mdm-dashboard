@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
@@ -11,7 +11,7 @@ import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
 import publicURL from '../../../shared/publicURL'
 
-class DevicesAssociated extends Component {
+class DevicesAssociated extends PureComponent {
 
     constructor(props) {
         super(props)

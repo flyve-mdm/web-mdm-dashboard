@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Confirmation from '../../../../components/Confirmation'
 import { I18n } from 'react-i18nify'
@@ -6,7 +6,7 @@ import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
 import ContentPane from '../../../../components/ContentPane'
 
-class DangerZone extends Component {
+class DangerZone extends PureComponent {
 
     wipe = async () => {
         const isOK = await Confirmation.isOK(this.props.wipeDevice)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { I18n } from 'react-i18nify'
@@ -33,7 +33,7 @@ function mapStateToProps(state, props) {
     }
 }
 
-class SignUp extends Component {
+class SignUp extends PureComponent {
 
     constructor (props) {
         super(props)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import L from 'leaflet'
 
@@ -10,7 +10,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('../../../../node_modules/leaflet/dist/images/marker-shadow.png')
 })
 
-class Map extends Component {
+class Map extends PureComponent {
     constructor (props) {
         super(props)
         this.state = {

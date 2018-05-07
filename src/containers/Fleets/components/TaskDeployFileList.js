@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-class TasksDeployFileList extends Component {
+class TasksDeployFileList extends PureComponent {
 
     constructor(props) {
         super(props)

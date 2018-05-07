@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
@@ -18,7 +18,7 @@ function mapDispatchToProps(dispatch) {
   return { actions }
 }
 
-class Fleets extends Component {
+class Fleets extends PureComponent {
 
   constructor(props) {
     super(props)

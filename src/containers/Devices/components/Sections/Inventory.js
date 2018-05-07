@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Loader from '../../../../components/Loader'
 
-export default class Inventory extends Component {
+export default class Inventory extends PureComponent {
 
     constructor(props) {
         super(props)

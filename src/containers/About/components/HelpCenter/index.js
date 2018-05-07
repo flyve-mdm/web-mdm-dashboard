@@ -1,8 +1,8 @@
-import React, { Component } from "react"
+import React, { PureComponent } from "react"
 import GenerateRoutes from '../../../../components/GenerateRoutes'
 import routes from './routes'
 
-class HelpCenter extends Component {
+class HelpCenter extends PureComponent {
     render() {
         return (
             <React.Fragment>

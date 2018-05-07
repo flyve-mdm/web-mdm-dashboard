@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Loading from '../../../../components/Loading'
 import Map from '../Map'
@@ -6,7 +6,7 @@ import GeolocationList from './GeolocationList'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
 
-export default class Geolocation extends Component {
+export default class Geolocation extends PureComponent {
     constructor() {
         super()
         this.state ={

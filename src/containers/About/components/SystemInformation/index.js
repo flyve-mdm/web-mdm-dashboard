@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import Loading from '../../../../components/Loading'
@@ -17,7 +17,7 @@ function mapDispatchToProps(dispatch) {
   return { actions }
 }
 
-class SystemInformation extends Component {
+class SystemInformation extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {

@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import QueryBuilder from 'react-querybuilder'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify'
 
-class SearchQueryBuilder extends Component {
+class SearchQueryBuilder extends PureComponent {
     render() {
         return (
             <div className="queryBuilder">

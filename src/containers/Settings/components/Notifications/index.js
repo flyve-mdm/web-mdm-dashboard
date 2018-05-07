@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ReactWinJS from 'react-winjs'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from 'react-i18nify'
 
-class Notifications extends Component {
+class Notifications extends PureComponent {
 
     constructor (props) {
         super(props)

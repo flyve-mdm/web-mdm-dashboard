@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import IconItemList from '../../../components/IconItemList'
 
-export default class ApplicationsItemList extends Component {
+export default class ApplicationsItemList extends PureComponent {
     render() {
         let image
         if (this.props.itemList["PluginFlyvemdmPackage.icon"]) {
