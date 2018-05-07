@@ -134,7 +134,7 @@ class ForgotPassword extends PureComponent {
         } else {
             return (
                 <React.Fragment>
-                    <h2 className="win-h2">
+                    <h2>
                         {I18n.t('forgot_password.title')}
                     </h2>
 

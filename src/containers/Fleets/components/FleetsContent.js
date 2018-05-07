@@ -800,8 +800,8 @@ class FleetsContent extends PureComponent {
                 <ContentPane>
                     <div className="fleets" style={{ display: 'flex', flexDirection: 'column', height: '100%'}}>
                         <div style={{ display: '-moz-flex', flexDirection: 'row' }}>
-                            <div className="contentHeader">
-                                <h1 className="titleContentPane">
+                            <div className="content-header">
+                                <h1 className="content-header__title">
                                     <input
                                         type="text"
                                         className="win-textbox"
@@ -854,7 +854,7 @@ class FleetsContent extends PureComponent {
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'row', overflowY: 'auto' }}>
                             <div className="contentInfo" >
-                                <h3 className="win-h3" style={{ margin: '10px' }}>
+                                <h3 style={{ margin: '10px' }}>
                                     {I18n.t('fleets.tasks_per_Category')}
                                 </h3>
                                 <div>

@@ -96,7 +96,7 @@ class ResetPassword extends PureComponent {
         } else {
             return (
                 <React.Fragment>
-                    <h2 className="win-h2" style={{ textAlign: 'center' }}>
+                    <h2 style={{ textAlign: 'center' }}>
                         {I18n.t('login.reset_password')}
                     </h2>
 

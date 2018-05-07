@@ -157,7 +157,7 @@ class Devices extends PureComponent {
         )
 
         return (
-            <div className="flex-block --with-scroll">
+            <div className="flex-block flex-block--with-scroll">
                 {renderComponents}
             </div>
         )

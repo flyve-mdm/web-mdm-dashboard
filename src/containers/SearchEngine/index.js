@@ -120,7 +120,7 @@ class SearchEngine extends PureComponent {
 
         return (
             <ContentPane>
-                <div className="contentHeader" style={{ margin: '0 10px' }}>
+                <div className="content-header" style={{ margin: '0 10px' }}>
                 <h1>
                     {I18n.t('search_engine.title')}
                 </h1>
@@ -145,7 +145,7 @@ class SearchEngine extends PureComponent {
                     />
                 }
                 <br />
-                <div className="contentHeader" style={{ margin: '0 10px' }}>
+                <div className="content-header" style={{ margin: '0 10px' }}>
                 {
                     this.state.isLoading 
                         ? <p >{I18n.t('commons.loading')} ... </p>

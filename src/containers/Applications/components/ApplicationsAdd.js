@@ -77,9 +77,9 @@ export default class ApplicationsAdd extends PureComponent {
         } else {
             renderComponent = (
                 <ContentPane>
-                    <div className="contentHeader" style={{ margin: '0 10px' }}>
-                    <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane"> 
+                    <div className="content-header" style={{ margin: '0 10px' }}>
+                    <div className="content-header">
+                        <h2 className="content-header__title"> 
                             {I18n.t('applications.new')} 
                         </h2>
                     </div>

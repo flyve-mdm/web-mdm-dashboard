@@ -70,7 +70,7 @@ class SignUp extends PureComponent {
             const user = this.buildDataArray()
             renderComponent = (
                 <React.Fragment>
-                    <h2 className="win-h2" style={{textAlign: 'center'}}>
+                    <h2 style={{textAlign: 'center'}}>
                         { I18n.t('create_account.title') }
                     </h2>
 

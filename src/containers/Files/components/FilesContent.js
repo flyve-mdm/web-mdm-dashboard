@@ -74,7 +74,7 @@ export default class FilesContent extends PureComponent {
             const fileName = this.props.selectedItems.length > 0 ? this.props.selectedItems[0]["PluginFlyvemdmFile.name"] : ''
             return (
                 <ContentPane>
-                    <div className="contentHeader" style={{ margin: '0 10px' }}>
+                    <div className="content-header" style={{ margin: '0 10px' }}>
                         <div className="itemInfo">
                             <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} />
                             <div className="contentStatus">

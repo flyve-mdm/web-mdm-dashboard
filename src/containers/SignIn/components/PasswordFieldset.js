@@ -34,7 +34,7 @@ class PasswordFieldset extends PureComponent {
         } else {
             renderComponent = (
                 <div className="authentication__password">
-                    <h2 className="win-h2">
+                    <h2>
                         { I18n.t('login.enter_password') }
                     </h2>
                     <p>

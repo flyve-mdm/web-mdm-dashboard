@@ -61,7 +61,7 @@ class ListWithNavLinks extends PureComponent {
 
     render () {
         return (
-            <div className="flex-block --with-scroll --with-content-pane">
+            <div className="flex-block flex-block--with-scroll flex-block--with-content-pane">
                 <nav 
                     style={this.state.styleNav} 
                     className="flex-block-list navlinks" 
@@ -89,7 +89,7 @@ class ListWithNavLinks extends PureComponent {
                 {
                     (this.state.mode === "small" && !this.state.styleNav.display) ? 
                         "" : (
-                            <div className="content-pane-block" style={this.stylesArticle()}>
+                            <div style={this.stylesArticle()}>
                                 {this.props.children}
                             </div>
                         )

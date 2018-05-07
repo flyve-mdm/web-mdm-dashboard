@@ -17,7 +17,7 @@ const EmptyList = props => {
                 flexDirection: 'column'
             }}
         >
-            <h4 className="win-h4" style={{ color: 'grey' }}>
+            <h4 style={{ color: 'grey' }}>
                 <span className={icon} style={{fontSize: "40px", lineHeight: "60px"}}/> <br/>
                 { props.message } 
             </h4>

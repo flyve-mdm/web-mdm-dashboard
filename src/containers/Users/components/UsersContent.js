@@ -95,7 +95,7 @@ export default class UsersContent extends PureComponent {
             let imageProfile = this.state.data.picture ? this.state.data.picture : "profile.png"
             renderComponent = (
                 <div>
-                    <div className="contentHeader">
+                    <div className="content-header">
                         <div className="itemInfo">
                             <IconItemList image={imageProfile} size={100} />
                             <div className="contentStatus">

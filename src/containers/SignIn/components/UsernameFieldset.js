@@ -39,7 +39,7 @@ class UsernameFieldset extends PureComponent {
     render () {
         return (
             <div className="authentication__email">
-                <h2 className="win-h2">
+                <h2>
                     {I18n.t('login.title')}
                 </h2>
                 <p>

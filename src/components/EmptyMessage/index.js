@@ -5,7 +5,7 @@ import { I18n } from "react-i18nify"
 const EmptyMessage = props => (
     <div className="center-block-content">
         {props.icon && props.showIcon ? <span className={"icon-empty-message " + props.icon} /> : null}
-        <h1 className="win-h1 empty-message"> 
+        <h1 className="empty-message"> 
             { props.message } 
         </h1>
     </div>

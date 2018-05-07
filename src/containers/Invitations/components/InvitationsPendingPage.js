@@ -73,8 +73,8 @@ class InvitationsPendingPage extends PureComponent {
         let listComponent = (
             <ContentPane>
                 <div className="listPane" style={{ margin: '0 10px' }}>
-                    <div className="contentHeader">
-                        <h2 className="win-h2 titleContentPane" >
+                    <div className="content-header">
+                        <h2 className="content-header__title" >
                             {I18n.t('invitations.pending')}
                         </h2>
                     </div>
@@ -87,8 +87,8 @@ class InvitationsPendingPage extends PureComponent {
             listComponent = (
                 <ContentPane>
                     <div className="listPane" style={{ margin: '0 10px' }}>
-                        <div className="contentHeader">
-                            <h2 className="win-h2 titleContentPane">
+                        <div className="content-header">
+                            <h2 className="content-header__title">
                                 {I18n.t('invitations.pending')}
                             </h2>
                         </div>

@@ -133,7 +133,7 @@ export default class Main extends PureComponent {
             }
             renderComponent = (
             <ContentPane className="devices">
-                <div className="contentHeader">
+                <div className="content-header">
                     <div className="itemInfo">
                         {iconComponent}
                         <div className="contentStatus">
