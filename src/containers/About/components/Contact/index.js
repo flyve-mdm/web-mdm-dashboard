@@ -5,7 +5,7 @@ import ContentPane from '../../../../components/ContentPane'
 const Contact = () => (
     <ContentPane>
         <h2 style={{ margin: '10px' }}>{ I18n.t('about.contact.title') }</h2>
-        <div className="aboutPane" style={{ margin: '10px' }}>
+        <div className="about-pane" style={{ margin: '10px' }}>
             <img src={require('../../../../assets/images/logo-teclib.png')} alt="Teclib" />
             <p>
                 { I18n.t('about.contact.description') }                

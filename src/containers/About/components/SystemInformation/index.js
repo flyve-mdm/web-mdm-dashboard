@@ -66,7 +66,7 @@ class SystemInformation extends PureComponent {
       (
         <ContentPane>
           <h2 style={{ margin: '10px' }}>{I18n.t('about.system_information.title')}</h2>
-          <div className="aboutPane" style={{ margin: '10px' }}>
+          <div className="about-pane" style={{ margin: '10px' }}>
             {element}
           </div>
         </ContentPane>

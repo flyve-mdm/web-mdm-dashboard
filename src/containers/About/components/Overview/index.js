@@ -6,7 +6,7 @@ const Overview = () => {
   return (
     <ContentPane>
       <h2 style={{ margin: '10px' }}>{I18n.t('about.overview.title')}</h2>
-      <div className="aboutPane" style={{ margin: '10px' }}>
+      <div className="about-pane" style={{ margin: '10px' }}>
             <p>{I18n.t('about.overview.flyve_mdm_is')}</p>
             <p>{I18n.t('about.overview.our_solution')}</p>
             <ul>
