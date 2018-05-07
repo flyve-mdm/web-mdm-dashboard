@@ -94,8 +94,8 @@ export default class ApplicationsEdit extends PureComponent {
 
                 return (
                     <ContentPane>
-                        <div className="contentHeader" style={{ margin: '0 10px' }}>
-                            <h2 className="win-h2 titleContentPane"> 
+                        <div className="content-header" style={{ margin: '0 10px' }}>
+                            <h2 className="content-header__title"> 
                                 {I18n.t('applications.edit')} 
                             </h2>
                             <button className="btn btn--primary" onClick={this.handleSaveFiles}>

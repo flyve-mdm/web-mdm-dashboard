@@ -1,9 +1,9 @@
 .fleets {
     height: 100%;
 
-    .contentHeader {
+    .content-header {
 
-        .titleContentPane {
+        .content-header__title {
             display: inline-block;
             padding: 0 10px 0 20px;
 
@@ -34,12 +34,6 @@
             padding: 0 10px;
             font-size: 20px;
             cursor: pointer;
-        }
-
-        button {
-            float: right;
-            height: 20px;
-            margin-top: -30px;
         }
     }
 

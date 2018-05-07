@@ -91,7 +91,7 @@ export default class FilesEdit extends PureComponent {
 
                 return (
                     <ContentPane>
-                        <div className="contentHeader" style={{ margin: '0 10px' }}>
+                        <div className="content-header" style={{ margin: '0 10px' }}>
                             <button className="btn btn--primary" onClick={this.handleSaveFiles}>
                                 {I18n.t('commons.save')}
                             </button>

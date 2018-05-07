@@ -236,7 +236,7 @@ class Security extends PureComponent {
             case I18n.t('commons.change_password'):
                 return (
                     <ContentPane>
-                        <h2 className="win-h2"> {this.state.mode} </h2>
+                        <h2> {this.state.mode} </h2>
 
                         <form className="list-content" onSubmit={this.savePassword}>
     

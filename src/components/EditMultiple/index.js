@@ -238,11 +238,11 @@ export default class EditMultiple extends PureComponent {
             
             return (
                 <ContentPane>
-                    <div className="contentHeader" style={{ margin: '0 10px' }}>
-                        <h2 className="win-h2 titleContentPane"> 
+                    <div className="content-header" style={{ margin: '0 10px' }}>
+                        <h2 className="content-header__title"> 
                             {I18n.t('edit_multiple.title')}
                         </h2>
-                        <h4  className="win-h4">
+                        <h4>
                             {I18n.t('edit_multiple.select_field')}
                         </h4>
                         <Select

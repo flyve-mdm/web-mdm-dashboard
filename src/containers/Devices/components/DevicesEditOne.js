@@ -111,7 +111,7 @@ export default class DevicesEditOne extends PureComponent {
             if(agent && !this.state.isLoading) {
                 return (
                     <ContentPane>
-                        <div className="contentHeader">
+                        <div className="content-header">
                             <button className="btn btn--primary" onClick={this.handleSaveOneDevices}>
                                 {I18n.t('commons.save')}
                             </button>

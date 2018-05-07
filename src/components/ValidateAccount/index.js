@@ -78,7 +78,7 @@ class ValidateAccount extends PureComponent {
             if (this.state.isValidated) {
                 renderComponent = (
                     <React.Fragment>
-                        <h2 className="win-h2">
+                        <h2>
                             {I18n.t('validate_account.title')}
                         </h2>
                         <p>
@@ -94,7 +94,7 @@ class ValidateAccount extends PureComponent {
             } else {
                 renderComponent = (
                     <React.Fragment>
-                        <h2 className="win-h2">
+                        <h2>
                             {I18n.t('validate_account.title')}
                         </h2>
                         <p>
