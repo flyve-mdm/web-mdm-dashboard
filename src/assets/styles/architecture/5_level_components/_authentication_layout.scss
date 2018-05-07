@@ -1,7 +1,7 @@
-.authentication-block {
+.authentication {
     margin: auto;
     
-    .authentication__section {
+    section {
         padding-top: 20px;
         padding-bottom: 20px;
         min-height: 75vh;
@@ -10,7 +10,7 @@
             margin-top: 100px !important;
         }
 
-        .authentication__figure {
+        figure {
             text-align: center;
             
             img {
@@ -18,37 +18,44 @@
             }
         }
 
-        .authentication__form {
-            .fields-block {     
-                .field__div {  
-                    p {
-                        margin: 10px 0 0 0
-                    }
+        form {
+            .authentication__captcha-img {
+                text-align: center;
+                margin-top: 15px;
+            }
+            .authentication__captcha-refresh {
+                text-align: center;
+                margin-top: 15px;
+                color: $color-1-primary;
+                cursor: pointer;
+                
+                .refreshIcon {
+                    padding-right: 5px;
                 }
             }
         }
 
-        .authentication-password__div,
-        .authentication-email__div,
-        .authentication-forgot__div {
+        .authentication__password,
+        .authentication__email,
+        .authentication__forgot-password {
             min-height: 18vw;
         }
 
-        .authentication-email__div {
+        .authentication__email {
             .btn {
                 width: 270px;
             }
         }
 
-        .authentication-password__div,
-        .authentication-forgot__div {
+        .authentication__password,
+        .authentication__forgot-password {
             .btn--primary {
                 margin-left: 30px
             }
         }
     }
 
-    .authenticaton__footer {
+    footer {
         text-align: center;
     }
 }
