@@ -7,18 +7,18 @@
   width: 100%;
   height: 100%;
 
-  .flex-block-list {
+  .flex-block__list {
     height: 100%; 
     display: inline-block;
     vertical-align: top;
   }
 
-  .flex-block-content {
+  .flex-block__content {
     display: inline-block;
   }
 
 
-  flex-block--with-scroll {
+  .flex-block--with-scroll {
     @extend %content-with-scroll;
   }
 

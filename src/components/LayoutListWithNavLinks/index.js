@@ -64,7 +64,7 @@ class ListWithNavLinks extends PureComponent {
             <div className="flex-block flex-block--with-scroll flex-block--with-content-pane">
                 <nav 
                     style={this.state.styleNav} 
-                    className="flex-block-list navlinks" 
+                    className="flex-block__list navlinks" 
                     ref={nav => this.nav = nav}
                 >
                     <ul>
