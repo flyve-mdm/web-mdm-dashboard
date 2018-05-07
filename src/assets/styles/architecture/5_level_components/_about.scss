@@ -92,7 +92,7 @@
     max-width: 100%;
 }
 
-.contact-list__ul {
+.contact-list {
     @extend %normalize-list;
 
     > li {

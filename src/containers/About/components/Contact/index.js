@@ -12,7 +12,7 @@ const Contact = () => (
             </p>
             <div className="separator" />
             <div className="content-info" >
-                <ul className="contact-list__ul">
+                <ul className="contact-list">
                     <li>
                         <span className="phoneIcon" />
                         <div className="callContent">
