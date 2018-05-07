@@ -5,7 +5,7 @@ import ContentPane from '../../../../components/ContentPane'
 const TermsOfUse = () => (
   <ContentPane>
     <h2 style={{ margin: '10px' }}>{I18n.t('about.term_of_use.title')}</h2>
-    <div className="aboutPane" style={{ margin: '10px' }}>
+    <div className="about-pane" style={{ margin: '10px' }}>
       <p>
         {I18n.t('about.term_of_use.using_our_website')}
       </p>
