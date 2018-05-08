@@ -15,12 +15,14 @@ class ContentPane extends PureComponent {
   render() {
     return (
       <div className={`content-pane ${this.props.className}`} ref={pane => this.pane = pane}>
-        <div id="content-pane-block">
         { this.props.children }
-        </div>
       </div>
     )
   }
+}
+
+ContentPane.defaultProps = {
+  className: ''
 }
 
 ContentPane.propTypes = {

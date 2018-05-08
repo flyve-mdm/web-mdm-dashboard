@@ -90,7 +90,7 @@ export default class Geolocation extends PureComponent {
             <Loading message={`${I18n.t('commons.loading')}...`} /> : 
                 (   
                     <React.Fragment>
-                        <Map markers={this.state.showLocations} style={{ margin: '0 5px', height: '40%' }} />
+                        <Map markers={this.state.showLocations} style={{ margin: '0 5px', height: '300px', maxWidth: '800px' }} />
                         <div style={{ display: 'flex', overflow: 'auto' }}>
                             <div>
                                 <button className="btn btn--secondary" style={{ margin: 5 }} onClick={this.requestLocation}>
