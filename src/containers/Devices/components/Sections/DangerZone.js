@@ -92,7 +92,7 @@ class DangerZone extends PureComponent {
                             </div>
                         </div>
                         <div className="list-element__controller">
-                            <button className="btn --secondary" onClick={this.wipe}>
+                            <button className="btn btn--secondary" onClick={this.wipe}>
                                 {I18n.t('commons.wipe')}
                             </button>
                         </div>
@@ -106,7 +106,7 @@ class DangerZone extends PureComponent {
                             </div>
                         </div>
                         <div className="controller">
-                            <button className="btn --secondary" onClick={this.unenroll}>
+                            <button className="btn btn--secondary" onClick={this.unenroll}>
                                 {I18n.t('commons.unenroll')}
                             </button>
                         </div>
@@ -121,7 +121,7 @@ class DangerZone extends PureComponent {
                             </div>
                         </div>
                         <div className="list-element__controller">
-                            <button className="btn --secondary" onClick={this.delete}>
+                            <button className="btn btn--secondary" onClick={this.delete}>
                                 {I18n.t('commons.delete')}
                             </button>
                         </div>

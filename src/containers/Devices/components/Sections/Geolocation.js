@@ -93,7 +93,7 @@ export default class Geolocation extends PureComponent {
                         <Map markers={this.state.showLocations} style={{ margin: '0 5px', height: '40%' }} />
                         <div style={{ display: 'flex', overflow: 'auto' }}>
                             <div>
-                                <button className="btn --secondary" style={{ margin: 5 }} onClick={this.requestLocation}>
+                                <button className="btn btn--secondary" style={{ margin: 5 }} onClick={this.requestLocation}>
                                     {I18n.t('devices.geolocation.request_current_location')}
                                 </button>
                             </div>
