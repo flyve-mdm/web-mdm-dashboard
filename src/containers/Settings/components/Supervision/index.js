@@ -110,16 +110,17 @@ class Supervision extends PureComponent {
                         <h2 style={{ margin: '10px' }}>
                             {I18n.t('settings.supervision.title')}
                         </h2>
-                        <div className="list-content Profiles" style={{ margin: '10px' }}>
+                        <div className="list-content" style={{ margin: '10px' }}>
                             <ConstructInputs 
                                 data={supervision.helpDeskInformation} 
                                 icon="supervisionIcon" 
                                 title={I18n.t('settings.supervision.helpdesk')} 
                             />
-                            <button className="btn btn--primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                                {I18n.t('commons.save')}
-                            </button>
-                            <br />
+                            <div style={{overflow: 'auto', paddingBottom: 40}}>
+                                    <button className="btn btn--primary" style={{ marginRight: "20px", float: "right" }} onClick={this.saveChanges}>
+                                        {I18n.t('commons.save')}
+                                    </button>
+                            </div>
                         </div>
                     </ContentPane>
                 )
