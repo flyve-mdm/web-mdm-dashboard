@@ -101,7 +101,7 @@ class Display extends PureComponent {
                         </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.animations}
                             onChange={() => this.changeLocalStorage('animations')}
                         />
@@ -118,7 +118,7 @@ class Display extends PureComponent {
                     </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.devicesCurrentlyManaged}
                             onChange={() => this.changeLocalStorage('devicesCurrentlyManaged')}
                         />
@@ -131,7 +131,7 @@ class Display extends PureComponent {
                     </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.fleetsCurrentlyManaged}
                             onChange={() => this.changeLocalStorage('fleetsCurrentlyManaged')}
                         />
@@ -144,7 +144,7 @@ class Display extends PureComponent {
                     </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.filesUploaded}
                             onChange={() => this.changeLocalStorage('filesUploaded')}
                         />
@@ -157,7 +157,7 @@ class Display extends PureComponent {
                     </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.applicationsUploaded}
                             onChange={() => this.changeLocalStorage('applicationsUploaded')}
                         />
@@ -170,7 +170,7 @@ class Display extends PureComponent {
                     </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.numberUsers}
                             onChange={() => this.changeLocalStorage('numberUsers')}
                         />
@@ -183,7 +183,7 @@ class Display extends PureComponent {
                     </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.invitationsSent}
                             onChange={() => this.changeLocalStorage('invitationsSent')}
                         />
@@ -196,7 +196,7 @@ class Display extends PureComponent {
                     </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.pendingInvitations}
                             onChange={() => this.changeLocalStorage('pendingInvitations')}
                         />
@@ -209,7 +209,7 @@ class Display extends PureComponent {
                     </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.devicesByUsers}
                             onChange={() => this.changeLocalStorage('devicesByUsers')}
                         />
@@ -222,7 +222,7 @@ class Display extends PureComponent {
                     </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.devicesByOperatingSystemVersion}
                             onChange={() => this.changeLocalStorage('devicesByOperatingSystemVersion')}
                         />

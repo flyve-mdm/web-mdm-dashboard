@@ -56,7 +56,7 @@ class Notifications extends PureComponent {
                     </div>
                     <div className="list-element__controller">
                         <ReactWinJS.ToggleSwitch 
-                            className="content-text-primary"
+                            className="files-list__content-text-primary"
                             checked={this.state.showNotifications}
                             onChange={this.changeShowNotifications}
                         />

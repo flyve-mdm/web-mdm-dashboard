@@ -120,17 +120,17 @@ class FleetsTaskItemList extends PureComponent {
         if (this.props.data === undefined) {
             return (   
                 <div className='files-list fleet-list' >
-                    <div className='files-list-content'>
-                        <div className='files-list-item'>
-                            <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                <div className='content-text-primary'>
+                    <div className='files-list__content'>
+                        <div className='files-list__item'>
+                            <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
+                                <div className='files-list__content-text-primary'>
                                     {I18n.t('commons.not_available')}
                                 </div>
                             </div>
-                            <div className='item-content-secondary'>
-                                <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                            <div className='files-list__item-content-secondary'>
+                                <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch
-                                        className="content-text-primary"
+                                        className="files-list__content-text-primary"
                                         checked={this.state.alreadyAdded}
                                         onChange={() => this.handleAddedToggle}
                                         labelOn=""
@@ -149,24 +149,24 @@ class FleetsTaskItemList extends PureComponent {
                 if(typeof(value) !== "boolean") { value = true }
                 return (
                     <div className='files-list fleet-list'>
-                        <div className='files-list-content'>
-                            <div className='files-list-item'>
-                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`} >
-                                    <div className='content-text-primary'>
+                        <div className='files-list__content'>
+                            <div className='files-list__item'>
+                                <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`} >
+                                    <div className='files-list__content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
                                     <div
-                                    className={`item-list-field checkbox ${this.state.alreadyAdded && 'active'}`}
+                                    className={`files-list__item-list-field files-list__checkbox ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`}
                                     onClick={this.handleActivePolicyToggle}>
                                         {this.props.value === 1 ? 
                                             <span className='selectIcon'></span> :
                                             <span className='unselectIcon'></span> }
                                     </div>
                                 </div>
-                                <div className='item-content-secondary'>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                                <div className='files-list__item-content-secondary'>
+                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch 
-                                            className="content-text-primary"
+                                            className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
                                             onChange={() => this.handleAddedToggle}
                                             labelOn=""
@@ -181,13 +181,13 @@ class FleetsTaskItemList extends PureComponent {
                 case "int":
                 return (
                     <div className='files-list fleet-list'>
-                        <div className='files-list-content'>
-                            <div className='files-list-item'>
-                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                    <div className='content-text-primary'>
+                        <div className='files-list__content'>
+                            <div className='files-list__item'>
+                                <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
+                                    <div className='files-list__content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
-                                    <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
+                                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
                                         <input 
                                             type="number"
                                             className="win-textbox" 
@@ -199,10 +199,10 @@ class FleetsTaskItemList extends PureComponent {
                                         />
                                     </div>
                                 </div>
-                                <div className='item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                                <div className='files-list__item-content-secondary '>
+                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch 
-                                            className="content-text-primary"
+                                            className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
                                             onChange={() => this.handleAddedToggle}
                                             labelOn=""
@@ -217,13 +217,13 @@ class FleetsTaskItemList extends PureComponent {
                 case "dropdown":
                 return (
                     <div className='files-list fleet-list'>
-                        <div className='files-list-content'>
-                            <div className='files-list-item'>
-                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                    <div className='content-text-primary'>
+                        <div className='files-list__content'>
+                            <div className='files-list__item'>
+                                <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
+                                    <div className='files-list__content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
-                                    <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
+                                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
                                         <select
                                             name={this.props.data['PluginFlyvemdmPolicy.id']}
                                             value={this.props.value}
@@ -240,10 +240,10 @@ class FleetsTaskItemList extends PureComponent {
                                         </select>
                                     </div>
                                 </div>
-                                <div className='item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                                <div className='files-list__item-content-secondary '>
+                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch
-                                            className="content-text-primary"
+                                            className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
                                             onChange={() => this.handleAddedToggle}
                                             labelOn=""
@@ -257,13 +257,13 @@ class FleetsTaskItemList extends PureComponent {
                 case "deployapp":
                 return (
                     <div className='files-list fleet-list'>
-                        <div className='files-list-content'>
-                            <div className='files-list-item'>
-                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                    <div className='content-text-primary'>
+                        <div className='files-list__content'>
+                            <div className='files-list__item'>
+                                <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
+                                    <div className='files-list__content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
-                                    <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
+                                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
                                         <select 
                                         name={this.props.data['PluginFlyvemdmPolicy.id']}
                                         value = {0} 
@@ -288,10 +288,10 @@ class FleetsTaskItemList extends PureComponent {
                                         />
                                     </div>
                                 </div>
-                                <div className='item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                                <div className='files-list__item-content-secondary '>
+                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch 
-                                        className="content-text-primary"
+                                        className="files-list__content-text-primary"
                                         checked={this.state.alreadyAdded}
                                         onChange={() => this.handleAddedToggle}
                                         labelOn=""
@@ -305,13 +305,13 @@ class FleetsTaskItemList extends PureComponent {
                 case "removeapp":
                 return (
                     <div className='files-list fleet-list'>
-                        <div className='files-list-content'>
-                            <div className='files-list-item'>
-                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                    <div className='content-text-primary'>
+                        <div className='files-list__content'>
+                            <div className='files-list__item'>
+                                <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
+                                    <div className='files-list__content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
-                                    <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
+                                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
                                         <input
                                             type="text"
                                             className="win-textbox"
@@ -331,10 +331,10 @@ class FleetsTaskItemList extends PureComponent {
                                         />
                                     </div>
                                 </div>
-                                <div className='item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                                <div className='files-list__item-content-secondary '>
+                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch
-                                            className="content-text-primary"
+                                            className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
                                             onChange={() => this.handleAddedToggle}
                                             labelOn=""
@@ -348,13 +348,13 @@ class FleetsTaskItemList extends PureComponent {
                 case "deployfile":
                 return (
                     <div className='files-list fleet-list'>
-                        <div className='files-list-content'>
-                            <div className='files-list-item'>
-                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                    <div className='content-text-primary'>
+                        <div className='files-list__content'>
+                            <div className='files-list__item'>
+                                <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
+                                    <div className='files-list__content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
-                                    <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
+                                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
                                         <select 
                                             name={this.props.data['PluginFlyvemdmPolicy.id']}
                                             value={0}
@@ -379,10 +379,10 @@ class FleetsTaskItemList extends PureComponent {
                                         />
                                     </div>
                                 </div>
-                                <div className='item-content-secondary '>
+                                <div className='files-list__item-content-secondary '>
                                     <div className='icon item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch
-                                            className="content-text-primary"
+                                            className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
                                             onChange={() => this.handleAddedToggle}
                                             labelOn=""
@@ -396,13 +396,13 @@ class FleetsTaskItemList extends PureComponent {
                 case "removefile":
                 return (
                     <div className='files-list fleet-list'>
-                        <div className='files-list-content'>
-                            <div className='files-list-item'>
-                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                    <div className='content-text-primary'>
+                        <div className='files-list__content'>
+                            <div className='files-list__item'>
+                                <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
+                                    <div className='files-list__content-text-primary'>
                                         {this.props.data['PluginFlyvemdmPolicy.name']}
                                     </div>
-                                    <div className={`item-list-field ${this.state.alreadyAdded && 'active'}`} >
+                                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
                                         <input
                                             type="text"
                                             className="win-textbox"
@@ -422,10 +422,10 @@ class FleetsTaskItemList extends PureComponent {
                                         />
                                     </div>
                                 </div>
-                                <div className='item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                                <div className='files-list__item-content-secondary '>
+                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch
-                                            className="content-text-primary"
+                                            className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
                                             onChange={() => this.handleAddedToggle}
                                             labelOn=""
@@ -439,17 +439,17 @@ class FleetsTaskItemList extends PureComponent {
                 default:
                 return (
                     <div className='files-list fleet-list' >
-                        <div className='files-list-content'>
-                            <div className='files-list-item'>
-                                <div className={`item-content-primary ${this.state.alreadyAdded || 'deactive'}`}>
-                                    <div className='content-text-primary'>
+                        <div className='files-list__content'>
+                            <div className='files-list__item'>
+                                <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
+                                    <div className='files-list__content-text-primary'>
                                         {I18n.t('commons.not_available')}
                                     </div>
                                 </div>
-                                <div className='item-content-secondary '>
-                                    <div className='icon item-icon'>
+                                <div className='files-list__item-content-secondary '>
+                                    <div className='icon files-list__item-icon'>
                                     <ReactWinJS.ToggleSwitch 
-                                        className="content-text-primary"
+                                        className="files-list__content-text-primary"
                                         checked={false}
                                         disabled
                                         labelOn=""

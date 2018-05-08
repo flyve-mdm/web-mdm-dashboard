@@ -32,9 +32,9 @@ export default class ApplicationsEditItemList extends PureComponent {
         return (
 
             <div className='files-list' >
-                <div className='files-list-content'>
-                    <div className='files-list-item'>
-                        <div className='item-content-primary'>
+                <div className='files-list__content'>
+                    <div className='files-list__item'>
+                        <div className='files-list__item-content-primary'>
                             <input
                                 type="text"
                                 style={{ width: '240px' }}

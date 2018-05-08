@@ -4,13 +4,13 @@
     width: 100%;
     border: 0;
 
-    .files-list-content {
+    .files-list__content {
         display: table-row-group;
         
-        .files-list-item {
+        .files-list__item {
             display: table-row;
 
-            .item-icon {
+            .files-list__item-icon {
                 cursor: pointer;
                 display: table-cell;
                 float: left;
@@ -24,25 +24,24 @@
                 }
             }
 
-            .item-content-primary {
+            .files-list__item-content-primary {
                 display: table-cell;
                 padding-right: 10px;
                 vertical-align: top;
                 text-align: left;
                 width: 100%;
-
-                &.deactive {
-                
-                    .content-text-primary {
-                        color: rgba(156, 156, 156, 0.726);
-                    }       
-                }
             }
 
-            .item-content-secondary {
+            .files-list__item--deactive {
+                .files-list__content-text-primary {
+                    color: rgba(156, 156, 156, 0.726);
+                }       
+            }
+
+            .files-list__item-content-secondary {
                 position: relative;
 
-                .item-icon {
+                .files-list__item-icon {
                     &.--fleets {
                         width: 48px;
                         position: absolute;
@@ -56,11 +55,11 @@
                 }
             }
 
-            .content-text-primary {
+            .files-list__content-text-primary {
                 font-weight: 700;
             }
 
-            .content-text-secondary {
+            .files-list__content-text-secondary {
                 font-size: 13px;
                 line-height: 16px;
                 font-weight: 400;
@@ -72,34 +71,34 @@
     &.fleet-list {
         padding: 10px 5px;
 
-        .item-content-primary {
-            .content-text-primary {
+        .files-list__item-content-primary {
+            .files-list__content-text-primary {
                 text-transform: capitalize;
             }
 
-            .item-list-field {
+            .files-list__item-list-field {
                 transition: opacity 1s ease-out;
                 opacity: 0; 
                 height: 0;
                 overflow: hidden;
+            }
 
-                &.active {
-                    opacity: 1;
-                    height: auto;
+            .files-list__checkbox.files-list__item-list-field--active {
+                display: inline-block;
+                margin-top: 20px;
 
-                    > input.win-textbox {
-                        width: 38%;
-                    }
+                > span {
+                    cursor: pointer;
+                    font-size: 2em;
                 }
+            }
 
-                &.checkbox.active {
-                    display: inline-block;
-                    margin-top: 20px;
+            .files-list__item-list-field--active {
+                opacity: 1;
+                height: auto;
 
-                    > span {
-                        cursor: pointer;
-                        font-size: 2em;
-                    }
+                > input.win-textbox {
+                    width: 38%;
                 }
             }
         }        
