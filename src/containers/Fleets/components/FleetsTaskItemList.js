@@ -128,7 +128,7 @@ class FleetsTaskItemList extends PureComponent {
                                 </div>
                             </div>
                             <div className='files-list__item-content-secondary'>
-                                <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
+                                <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch
                                         className="files-list__content-text-primary"
                                         checked={this.state.alreadyAdded}
@@ -164,7 +164,7 @@ class FleetsTaskItemList extends PureComponent {
                                     </div>
                                 </div>
                                 <div className='files-list__item-content-secondary'>
-                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
+                                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch 
                                             className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
@@ -200,7 +200,7 @@ class FleetsTaskItemList extends PureComponent {
                                     </div>
                                 </div>
                                 <div className='files-list__item-content-secondary '>
-                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
+                                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch 
                                             className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
@@ -241,7 +241,7 @@ class FleetsTaskItemList extends PureComponent {
                                     </div>
                                 </div>
                                 <div className='files-list__item-content-secondary '>
-                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
+                                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch
                                             className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
@@ -289,7 +289,7 @@ class FleetsTaskItemList extends PureComponent {
                                     </div>
                                 </div>
                                 <div className='files-list__item-content-secondary '>
-                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
+                                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
                                     <ReactWinJS.ToggleSwitch 
                                         className="files-list__content-text-primary"
                                         checked={this.state.alreadyAdded}
@@ -332,7 +332,7 @@ class FleetsTaskItemList extends PureComponent {
                                     </div>
                                 </div>
                                 <div className='files-list__item-content-secondary '>
-                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
+                                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch
                                             className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
@@ -380,7 +380,7 @@ class FleetsTaskItemList extends PureComponent {
                                     </div>
                                 </div>
                                 <div className='files-list__item-content-secondary '>
-                                    <div className='icon item-icon' onClick={this.handleAddedToggle}>
+                                    <div className='item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch
                                             className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
@@ -423,7 +423,7 @@ class FleetsTaskItemList extends PureComponent {
                                     </div>
                                 </div>
                                 <div className='files-list__item-content-secondary '>
-                                    <div className='icon files-list__item-icon' onClick={this.handleAddedToggle}>
+                                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
                                         <ReactWinJS.ToggleSwitch
                                             className="files-list__content-text-primary"
                                             checked={this.state.alreadyAdded}
@@ -447,7 +447,7 @@ class FleetsTaskItemList extends PureComponent {
                                     </div>
                                 </div>
                                 <div className='files-list__item-content-secondary '>
-                                    <div className='icon files-list__item-icon'>
+                                    <div className='files-list__item-icon'>
                                     <ReactWinJS.ToggleSwitch 
                                         className="files-list__content-text-primary"
                                         checked={false}
