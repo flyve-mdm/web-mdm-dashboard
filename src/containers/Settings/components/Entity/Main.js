@@ -27,7 +27,7 @@ class Main extends PureComponent {
                     </div>
 
                     <div className="list-element__controller">
-                        <button className="btn --secondary" onClick={() => this.props.changeMode("change download URL")}>
+                        <button className="btn btn--secondary" onClick={() => this.props.changeMode("change download URL")}>
                             {I18n.t('commons.change')}
                         </button>
                     </div>

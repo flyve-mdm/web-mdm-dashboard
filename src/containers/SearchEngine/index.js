@@ -120,22 +120,22 @@ class SearchEngine extends PureComponent {
 
         return (
             <ContentPane>
-                <div className="content-header" style={{ margin: '0 10px' }}>
-                <h1>
-                    {I18n.t('search_engine.title')}
-                </h1>
-                <input 
-                    type="text"
-                    style={{marginRight:10}} 
-                    className="win-textbox" 
-                    placeholder="Itemtype"
-                    name="itemTypeName"
-                    value={this.state.itemType} 
-                    onChange={this.handleChangeItemType} 
-                />
-                <button className="btn --secondary" onClick={this.handleRequestItemType}> 
-                    {I18n.t('commons.change')}
-                </button>
+                <div style={{ margin: '0 10px' }}>
+                    <h1>
+                        {I18n.t('search_engine.title')}
+                    </h1>
+                    <input 
+                        type="text"
+                        style={{marginRight:10}} 
+                        className="win-textbox" 
+                        placeholder="Itemtype"
+                        name="itemTypeName"
+                        value={this.state.itemType} 
+                        onChange={this.handleChangeItemType} 
+                    />
+                    <button className="btn btn--secondary" onClick={this.handleRequestItemType}> 
+                        {I18n.t('commons.change')}
+                    </button>
                 </div>
                 {this.state.fields.length > 0 &&
                     <SearchQueryBuilder
@@ -145,29 +145,29 @@ class SearchEngine extends PureComponent {
                     />
                 }
                 <br />
-                <div className="content-header" style={{ margin: '0 10px' }}>
-                {
-                    this.state.isLoading 
-                        ? <p >{I18n.t('commons.loading')} ... </p>
-                        : this.state.query 
-                            ? this.state.query.rules.length ? (
-                                <button className="btn btn--primary" onClick={this.handleOnSearch}> 
-                                    {I18n.t('commons.search')}
-                                </button> 
-                            ): null
-                            : <p>{I18n.t('search_engine.itemType_not_found')}</p>
-                }
-                {
-                    this.state.itemResults ?
-                        this.state.itemResults.length > 0 ?
-                            <Panel
-                                itemType={this.state.itemType}
-                                itemResults={this.state.itemResults.length > 0 ? arrayResultsWithFields : []}
-                                itemFields={this.state.fields}
-                            />
-                            : <p>{I18n.t('search_engine.item_not_found')}</p>
-                    : null
-                }
+                <div style={{ margin: '0 10px' }}>
+                    {
+                        this.state.isLoading 
+                            ? <p >{I18n.t('commons.loading')} ... </p>
+                            : this.state.query 
+                                ? this.state.query.rules.length ? (
+                                    <button className="btn btn--primary" onClick={this.handleOnSearch}> 
+                                        {I18n.t('commons.search')}
+                                    </button> 
+                                ): null
+                                : <p>{I18n.t('search_engine.itemType_not_found')}</p>
+                    }
+                    {
+                        this.state.itemResults ?
+                            this.state.itemResults.length > 0 ?
+                                <Panel
+                                    itemType={this.state.itemType}
+                                    itemResults={this.state.itemResults.length > 0 ? arrayResultsWithFields : []}
+                                    itemFields={this.state.fields}
+                                />
+                                : <p>{I18n.t('search_engine.item_not_found')}</p>
+                        : null
+                    }
                 </div>
             </ContentPane>
         )

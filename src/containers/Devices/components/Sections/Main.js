@@ -150,7 +150,7 @@ export default class Main extends PureComponent {
                             </div>   
                             <div style={{overflow: 'auto'}}>
                                 <div>
-                                    <button className="btn --secondary" style={{float:'left', marginTop: 5, marginBottom: 5}} onClick={this.ping}>
+                                    <button className="btn btn--secondary" style={{float:'left', marginTop: 5, marginBottom: 5}} onClick={this.ping}>
                                         {I18n.t('commons.ping')}
                                     </button>
                                     { this.state.sendingPing ? <Loading small/> : '' }
