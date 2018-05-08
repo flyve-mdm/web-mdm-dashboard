@@ -77,48 +77,48 @@ export default class ApplicationsAdd extends PureComponent {
         } else {
             renderComponent = (
                 <ContentPane>
-                    <div className="content-header" style={{ margin: '0 10px' }}>
-                    <div className="content-header">
-                        <h2 className="content-header__title"> 
-                            {I18n.t('applications.new')} 
-                        </h2>
-                    </div>
-                    <div style={{ padding: '10px' }}>
-                        <input
-                            type="text"
-                            className="win-textbox"
-                            placeholder={I18n.t('applications.name')}
-                            name="input"
-                            value={this.state.input}
-                            onChange={this.changeInput}
-                        />
-                        <FilesUpload
-                            ref='files'
-                            className='files-dropzone'
-                            onChange={this.onFilesChange}
-                            onError={this.onFilesError}
-                            maxFiles={1}
-                            maxFileSize={10000000}
-                            minFileSize={0}
-                            clickable
-                        >
-                            {I18n.t('commons.drop_or_click_file')}
-                        </FilesUpload>
-                        <div style={{marginTop: 10}}>
-                            <button className="btn btn--primary" onClick={this.filesUpload}>
-                                {I18n.t('commons.save')}
-                            </button>
-                            {
-                                this.state.files.length > 0
-                                    ? <div>
-                                        {this.state.files.map((file) =>
-                                            <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
-                                        )}
-                                    </div>
-                                    : null
-                            }
+                    <div style={{ margin: '0 10px' }}>
+                        <div className="content-header">
+                            <h2 className="content-header__title"> 
+                                {I18n.t('applications.new')} 
+                            </h2>
                         </div>
-                    </div>
+                        <div style={{ padding: '10px' }}>
+                            <input
+                                type="text"
+                                className="win-textbox"
+                                placeholder={I18n.t('applications.name')}
+                                name="input"
+                                value={this.state.input}
+                                onChange={this.changeInput}
+                            />
+                            <FilesUpload
+                                ref='files'
+                                className='files-dropzone'
+                                onChange={this.onFilesChange}
+                                onError={this.onFilesError}
+                                maxFiles={1}
+                                maxFileSize={10000000}
+                                minFileSize={0}
+                                clickable
+                            >
+                                {I18n.t('commons.drop_or_click_file')}
+                            </FilesUpload>
+                            <div style={{marginTop: 10}}>
+                                <button className="btn btn--primary" onClick={this.filesUpload}>
+                                    {I18n.t('commons.save')}
+                                </button>
+                                {
+                                    this.state.files.length > 0
+                                        ? <div>
+                                            {this.state.files.map((file) =>
+                                                <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
+                                            )}
+                                        </div>
+                                        : null
+                                }
+                            </div>
+                        </div>
                     </div>
                 </ContentPane>
             )

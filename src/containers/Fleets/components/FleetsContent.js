@@ -26,7 +26,7 @@ class FleetsContent extends PureComponent {
                 tasksNew: {},
                 tasksRemove: {}
             },
-            devicesLength: 0
+            devices__length: 0
         }
     }
 
@@ -69,7 +69,7 @@ class FleetsContent extends PureComponent {
                 tasksNew: {},
                 tasksRemove: {}
             },
-            devicesLength: 0
+            devices__length: 0
         })
     }
 
@@ -205,7 +205,7 @@ class FleetsContent extends PureComponent {
                 applications: applications,
                 tasksRemove: {}
             },
-            devicesLength: devices.totalcount
+            devices__length: devices.totalcount
         }))
 
     }
@@ -811,14 +811,11 @@ class FleetsContent extends PureComponent {
                                         value={this.state.input}
                                     />
                                 </h1>
-                                <div className="devicesLength" onClick={this.goToList}>
+                                <div className="devices__length" onClick={this.goToList}>
                                     <div>
-                                        {this.state.devicesLength} 
+                                        {this.state.devices__length} 
                                     </div>
-                                    
-                                    <span
-                                        className="deviceIcon"
-                                    />
+                                    <span className="deviceIcon" />
                                 </div>
                                 <div className="item-info">
                                     <span

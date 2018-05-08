@@ -26,7 +26,7 @@ class TasksDeployFileList extends PureComponent {
                                             <div className='files-list__content-text-primary'>{value['name']}</div>
                                         </div>
                                         <div className='files-list__item-content-secondary'>
-                                            <div className='icon files-list__item-icon'>
+                                            <div className='files-list__item-icon'>
                                                 <span className='deleteIcon' style={{ fontSize: '18px' }} onClick={this.handleRemove.bind(this, item)}></span>
                                             </div>
                                         </div>
