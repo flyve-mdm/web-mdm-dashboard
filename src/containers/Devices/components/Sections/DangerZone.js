@@ -105,7 +105,7 @@ class DangerZone extends PureComponent {
                                 {I18n.t('devices.danger_zone.unenrollment_description')}
                             </div>
                         </div>
-                        <div className="controller">
+                        <div className="list-element__controller">
                             <button className="btn btn--secondary" onClick={this.unenroll}>
                                 {I18n.t('commons.unenroll')}
                             </button>

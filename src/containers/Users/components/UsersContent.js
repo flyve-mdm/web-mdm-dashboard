@@ -89,12 +89,12 @@ export default class UsersContent extends PureComponent {
 
     render() {
         let renderComponent 
-        if (this.state.data === undefined) {
+        if (!this.state.data) {
             renderComponent = <Loading message={`${I18n.t('commons.loading')}...`}/>
         } else {
             let imageProfile = this.state.data.picture ? this.state.data.picture : "profile.png"
             renderComponent = (
-                <div>
+                <React.Fragment>
                     <div className="content-header">
                         <div className="item-info">
                             <IconItemList image={imageProfile} size={100} />
@@ -165,7 +165,7 @@ export default class UsersContent extends PureComponent {
                         </ul>
                     </div>
                     <Confirmation title={I18n.t('users.delete_one')} message={this.state.data.name} reference={el => this.contentDialog = el} />
-                </div>
+                </React.Fragment>
             )
         }
         return (
