@@ -252,7 +252,7 @@ class Security extends PureComponent {
                                 {I18n.t('commons.cancel')}
                             </button>
 
-                            <button className="btnbtn--primary">
+                            <button className="btn btn--primary">
                                 {I18n.t('commons.save')}
                             </button>
 

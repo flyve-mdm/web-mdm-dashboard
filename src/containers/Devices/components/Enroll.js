@@ -62,6 +62,7 @@ export default class Enroll extends PureComponent {
                         <h2 className="content-header__title">
                             {I18n.t('devices.enroll.title')}
                         </h2>
+                    </div>
                         <p>
                             {I18n.t('devices.enroll.insert_active_email')}
                         </p>
@@ -78,7 +79,7 @@ export default class Enroll extends PureComponent {
                             required
                         />
                         <br />
-                        <button className="btn --secondary" onClick={() => this.props.history.goBack()}>
+                        <button className="btn btn--secondary" onClick={() => this.props.history.goBack()}>
                             {I18n.t('commons.cancel')}
                         </button>
                         <button
@@ -88,7 +89,6 @@ export default class Enroll extends PureComponent {
                         >
                             {I18n.t('commons.save')}
                         </button>
-                    </div>
                 </ContentPane >
             )
         }

@@ -71,7 +71,7 @@ const withNotification = WrappedComponent => {
 
       if (this.state.show && this.props.show) {
         toast = (
-          <div className={`toast --${this.props.type}`}>
+          <div className={`toast toast--${this.props.type}`}>
             <span 
               className="cancelIcon" 
               style={{ float: 'right', cursor: 'pointer', color: '#ffffff' }} 
@@ -79,10 +79,10 @@ const withNotification = WrappedComponent => {
                 this.hideNotification()
               }}
             />
-            <div className="toast-title">
+            <div className="toast__title">
                 { this.props.title }
             </div>
-            <div className="toast-body">
+            <div className="toast__body">
                 { this.props.body }
             </div>
           </div>

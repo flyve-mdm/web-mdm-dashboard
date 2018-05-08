@@ -151,7 +151,7 @@ class SearchEngine extends PureComponent {
                         ? <p >{I18n.t('commons.loading')} ... </p>
                         : this.state.query 
                             ? this.state.query.rules.length ? (
-                                <button className="btnbtn--primary" onClick={this.handleOnSearch}> 
+                                <button className="btn btn--primary" onClick={this.handleOnSearch}> 
                                     {I18n.t('commons.search')}
                                 </button> 
                             ): null

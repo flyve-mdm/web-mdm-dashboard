@@ -9,48 +9,47 @@
     width: 200px;
     min-height: 48px;
 
-    .toast-body {
+    .toast__body {
         margin-top: 8px;
         font-size: 13px;
         line-height: 16px;
     }
 
-    &.--alert {
-        background-color: $alert;
-
-        .toast-body,
-        .toast-title {
-            color: white
-        }
-    }
-
-    &.--warning {
-        background-color: $warning;
-
-        .toast-body,
-        .toast-title {
-            color: white
-        }
-    }
-    
-    &.--success {
-        background-color: $success;
-
-        .toast-body,
-        .toast-title {
-            color: darken($color-2-primary, 5)
-        }
-    }
-
-    &.--info {
-        background-color: $info;
-
-        .toast-body,
-        .toast-title {
-            color: darken($color-2-primary, 5)
-        }
-    }
-
     @extend %box-shadow;
+}
 
+.toast--alert {
+    background-color: $alert;
+
+    .toast__body,
+    .toast__title {
+        color: white
+    }
+}
+
+.toast--warning {
+    background-color: $warning;
+
+    .toast__body,
+    .toast__title {
+        color: white
+    }
+}
+
+.toast--success {
+    background-color: $success;
+
+    .toast__body,
+    .toast__title {
+        color: darken($color-2-primary, 5)
+    }
+}
+
+.toast--info {
+    background-color: $info;
+
+    .toast__body,
+    .toast__title {
+        color: darken($color-2-primary, 5)
+    }
 }
