@@ -92,12 +92,14 @@ export default class FilesEdit extends PureComponent {
                 return (
                     <ContentPane>
                         <div className="content-header" style={{ margin: '0 10px' }}>
-                            <button className="btn btn--primary" onClick={this.handleSaveFiles}>
-                                {I18n.t('commons.save')}
-                            </button>
-                            <div className="separator" />
-                            {renderComponent}
+                            <div style={{overflow: 'auto'}}>
+                                <button className="btn btn--primary" style={{marginTop: 0}} onClick={this.handleSaveFiles}>
+                                    {I18n.t('commons.save')}
+                                </button>
+                            </div>
                         </div>
+                        <div className="separator" />
+                        {renderComponent}
                     </ContentPane>
                 )
             }

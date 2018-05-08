@@ -72,7 +72,7 @@ export default class FilesAdd extends PureComponent {
         } else {
             renderComponent = (
                 <ContentPane>
-                    <div className="content-header" style={{ margin: '0 10px' }}>
+                    <div style={{ margin: '0 10px' }}>
                         <div className="content-header">
                             <h2 className="content-header__title">
                                 {I18n.t('commons.new_file')}
