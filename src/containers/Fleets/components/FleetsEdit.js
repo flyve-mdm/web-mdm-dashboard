@@ -21,8 +21,6 @@ class FleetsEdit extends PureComponent {
             ]
         }
     }
-    
-    
 
     render () {
         return (
