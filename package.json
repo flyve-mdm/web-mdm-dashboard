@@ -51,7 +51,9 @@
     "gh-pages-reports": "gh-pages --dist reports --dest reports",
     "gh-pages-changelog": "gh-pages --dist ./ --src '{./C*.md,CHANGELOG.md}' --dest ./ --add",
     "test": "NODE_ENV='test' BABEL_ENV='test' PUBLIC_URL='' mocha --require babel-core/register --requiere  --require ./test/helpers.js --require ./test/dom.js 'src/**/*.spec.js'",
-    "test:watch": "yarn test --watch"
+    "test:watch": "yarn test --watch",
+    "test:snapshot": "jest --config ./test/jest.config.json",
+    "test:snapshot:watch": "yarn test:snapshot --watch"
   },
   "devDependencies": {
     "@sonarwhal/formatter-codeframe": "^2.0.3",
@@ -63,6 +65,7 @@
     "autoprefixer": "8.5.0",
     "babel-core": "6.26.0",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^22.4.3",
     "babel-loader": "7.1.4",
     "babel-preset-react-app": "^3.1.1",
     "babel-runtime": "6.26.0",
@@ -86,6 +89,7 @@
     "gh-pages": "^1.0.0",
     "html-webpack-plugin": "3.2.0",
     "ignore-styles": "^5.0.1",
+    "jest": "^22.4.3",
     "jsdoc": "^3.5.5",
     "jsdom": "^11.10.0",
     "json-server": "^0.12.1",
@@ -95,6 +99,7 @@
     "postcss-flexbugs-fixes": "3.3.1",
     "postcss-loader": "2.1.5",
     "raw-loader": "^0.5.1",
+    "react-test-renderer": "^16.3.2",
     "redux-devtools-extension": "^2.13.2",
     "sass-loader": "^7.0.0",
     "sinon": "^5.0.7",
