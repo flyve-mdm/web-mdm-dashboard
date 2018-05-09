@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="268cc822-1557-43b1-aae2-e24255a8f18d" name="Default" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/src/components/Loading/Loading.snapshot.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/components/Loading/__snapshots__/Loading.snapshot.js.snap" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/test/jest.config.json" afterDir="false" />
@@ -9,6 +10,9 @@
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Loading/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Loading/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.circleci/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.circleci/config.yml" afterDir="false" />
+>>>>>>> 11c2490c... ci(snapshot): run snapshot tests
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -25,11 +29,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="160">
               <caret line="59" column="46" selection-start-line="59" selection-start-column="46" selection-end-line="59" selection-end-column="46" />
+=======
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="54" column="10" selection-start-line="54" selection-start-column="10" selection-end-line="54" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Loading.snapshot.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Loading/Loading.snapshot.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Loading/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+>>>>>>> 11c2490c... ci(snapshot): run snapshot tests
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="244">
+              <caret line="55" column="30" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -77,6 +121,7 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/test/jest.config.json" />
         <option value="$PROJECT_DIR$/src/components/Loading/index.js" />
+        <option value="$PROJECT_DIR$/.circleci/config.yml" />
       </list>
     </option>
   </component>
@@ -125,6 +170,11 @@
             <path>
               <item name="web-admin-dashboard" type="b2602c69:ProjectViewProjectNode" />
               <item name="web-admin-dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web-admin-dashboard" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web-admin-dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name=".circleci" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="web-admin-dashboard" type="b2602c69:ProjectViewProjectNode" />
@@ -226,7 +276,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="14764000" />
+=======
+    <option name="totallyTimeSpent" value="14937000" />
+>>>>>>> 11c2490c... ci(snapshot): run snapshot tests
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -240,6 +294,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="0" />
     <layout>
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="3" sideWeight="0.49926144" visible="true" weight="0.22859271" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
@@ -252,6 +307,19 @@
       <window_info active="true" anchor="bottom" id="Terminal" order="1" visible="true" weight="0.32791728" />
       <window_info id="Favorites" order="1" sideWeight="0.50073856" side_tool="true" weight="0.24944155" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.70901036" visible="true" weight="0.21189591" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3293944" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293944" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3293944" />
+      <window_info id="npm" order="2" sideWeight="0.29098967" side_tool="true" weight="0.13030529" />
+      <window_info id="Structure" order="1" sideWeight="0.044313148" side_tool="true" weight="0.13030529" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.25849336" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3988183" />
+>>>>>>> 11c2490c... ci(snapshot): run snapshot tests
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info id="npm" order="2" sideWeight="0.29098967" side_tool="true" weight="0.13030529" />
@@ -299,8 +367,11 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/node_modules/chai/lib/chai.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/chai/index.js" />
+=======
+>>>>>>> 11c2490c... ci(snapshot): run snapshot tests
     <entry file="file://$PROJECT_DIR$/scripts/test.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/babel-preset-react-app/index.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -552,6 +623,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -559,6 +631,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 11c2490c... ci(snapshot): run snapshot tests
     <entry file="file://$PROJECT_DIR$/src/components/Loading/Loading.spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -580,13 +654,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Loading/__snapshots__/Loading.snapshot.js.snap">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="54" column="10" selection-start-line="54" selection-start-column="10" selection-end-line="54" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Loading/Loading.snapshot.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Loading/index.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="210">
           <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+=======
+        <state relative-caret-position="202">
+          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+>>>>>>> 11c2490c... ci(snapshot): run snapshot tests
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="55" column="30" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
         </state>
       </provider>
     </entry>
