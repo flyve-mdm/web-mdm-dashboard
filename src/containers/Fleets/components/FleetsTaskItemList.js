@@ -8,8 +8,10 @@ import { I18n } from 'react-i18nify'
 
 class FleetsTaskItemList extends PureComponent {
     constructor(props) {
+        console.log('constructor')
         super(props)
         this.state = {
+            fleetHaveTask: this.props.fleetHaveTask,
             alreadyAdded: false,
             active: false,
             input:''
@@ -31,24 +33,41 @@ class FleetsTaskItemList extends PureComponent {
         }
     }
 
-    componentDidMount = () => {
-        this.updateState(this.props.fleetHaveTask)
+    static getDerivedStateFromProps(nextProps, prevState) {
         let input
-        if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
-            this.props.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
+        if (nextProps.data['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
+            nextProps.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
             input = ''
         } else {
-            input = this.props.value ? this.props.value : ''
+            input = nextProps.value ? nextProps.value : ''
         }
-        this.setState({
-            input
-        })
+
+        if (nextProps.fleetHaveTask !== prevState.fleetHaveTask) {
+            if(nextProps.fleetHaveTask) {
+                return {
+                    fleetHaveTask: nextProps.fleetHaveTask,
+                    alreadyAdded: true,
+                    active: true,
+                    input: input
+                }
+            } else {
+                return {
+                    fleetHaveTask: nextProps.fleetHaveTask,
+                    alreadyAdded: false,
+                    active: false,
+                    input: input
+                }
+            }
+        } else {
+            return {
+                ...prevState
+            }
+        }
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.fleetHaveTask !== this.props.fleetHaveTask) {
-            this.updateState(nextProps.fleetHaveTask)
-        }
+    componentDidMount = () => {
+        console.log('componentDidMount')
+        this.updateState(this.props.fleetHaveTask)
         let input
         if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
             this.props.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
