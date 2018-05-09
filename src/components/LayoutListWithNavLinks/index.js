@@ -47,10 +47,12 @@ class ListWithNavLinks extends PureComponent {
         window.removeEventListener('resize', this.handleResize)
     }
 
-    componentWillReceiveProps (nextProps) {
-        this.setState({
-            styleNav: this.styleNav(this.state.mode, nextProps.history)
-        })
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        return {
+            ...prevState,
+            styleNav: this.styleNav(prevState.mode, nextProps.history)
+        }
     }
 
     componentDidMount () {

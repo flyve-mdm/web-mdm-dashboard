@@ -19,9 +19,25 @@ class Input extends PureComponent {
         this.props.function(this.props.name, eventObject.target.value)
     }
 
-    componentWillReceiveProps = (newProps) => {
-        if (!this.state.isCorrect || newProps.forceValidation) {
-            this.validate(newProps.parametersToEvaluate, newProps.value)
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (!prevState.isCorrect || nextProps.forceValidation) {
+            if (nextProps.parametersToEvaluate) {
+
+                const validation = ErrorValidation.validation(nextProps.parametersToEvaluate, nextProps.value)
+                return {
+                    isCorrect: validation.isCorrect,
+                    errors: validation.errors,
+                    className: validation.isCorrect ? 'win-textbox' : 'win-textbox error-input'
+                }
+            } else {
+                return {
+                    ...prevState
+                }
+            }
+        } else {
+            return {
+                ...prevState
+            }
         }
     }
 
