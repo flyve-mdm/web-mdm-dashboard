@@ -4,7 +4,7 @@ import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
 import getMode from '../../shared/getMode'
 import configureDisplay from '../../shared/configureDisplay'
 import setGlpiCookie from '../../shared/setGlpiCookie'
-import animations from '../../shared/animations'
+import animations from '../../shared/animations/index'
 import glpi from '../../shared/glpiApi'
 import { I18n } from "react-i18nify"
 import Confirmation from '../../components/Confirmation'

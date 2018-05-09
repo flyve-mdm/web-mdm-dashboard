@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { slideTop } from '../../shared/animations'
+import { slideTop } from '../../shared/animations/index'
 
 class ContentPane extends PureComponent {
 
