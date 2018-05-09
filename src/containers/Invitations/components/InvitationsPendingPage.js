@@ -7,7 +7,7 @@ import ContentPane from '../../../components/ContentPane'
 import Loader from '../../../components/Loader'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
-import getID from '../../../shared/getID'
+import getID from '../../../shared/getID/index'
 
 class InvitationsPendingPage extends PureComponent {
 

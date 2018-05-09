@@ -10,7 +10,7 @@ import glpi from '../../shared/glpiApi'
 const withGLPI = (WrappedComponent, fetch) => {
   class GLPIClient extends PureComponent {
     constructor (props) {
-      super(props)
+      super(props);
 
       this.state = {
           data: null
@@ -18,10 +18,9 @@ const withGLPI = (WrappedComponent, fetch) => {
     }
 
     componentDidMount() {
-      if (typeof(fetch) === 'object') {
-        // TODO: Si GLPI Tiene el metodo dentro de fetch.method
-        // TODO: Llamarlo usando los parametros de fetch.parameters
-      }
+        if (typeof(fetch) !== 'object') {
+
+        }
     }
 
     render () { 

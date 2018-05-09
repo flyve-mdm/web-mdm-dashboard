@@ -7,7 +7,7 @@ import { ScrollSync, ScrollSyncPane } from '../ScrollSync'
 import withGLPI from '../../hoc/withGLPI'
 import { I18n } from "react-i18nify"
 import publicURL from '../../shared/publicURL'
-import { splitview } from '../../shared/animations'
+import { splitview } from '../../shared/animations/index'
 
 class SplitView extends PureComponent {
 

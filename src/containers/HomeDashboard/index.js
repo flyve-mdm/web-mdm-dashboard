@@ -15,7 +15,7 @@ import ContentPane from '../../components/ContentPane'
 import itemtype from '../../shared/itemtype'
 import publicURL from '../../shared/publicURL'
 import logout from '../../shared/logout'
-import { slideTop } from '../../shared/animations'
+import { slideTop } from '../../shared/animations/index'
 
 function mapDispatchToProps(dispatch) {
   const actions = {

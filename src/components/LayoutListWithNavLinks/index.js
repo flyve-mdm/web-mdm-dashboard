@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
-import { slideTop } from '../../shared/animations'
+import { slideTop } from '../../shared/animations/index'
 
 class ListWithNavLinks extends PureComponent {
     constructor(props) {

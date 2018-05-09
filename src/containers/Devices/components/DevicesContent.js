@@ -4,7 +4,7 @@ import ReactWinJS from 'react-winjs'
 import ContentPane from '../../../components/ContentPane'
 import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sections'
 import { I18n } from 'react-i18nify'
-import getID from '../../../shared/getID'
+import getID from '../../../shared/getID/index'
 import Confirmation from '../../../components/Confirmation'
 
 export default class DevicesContent extends PureComponent {

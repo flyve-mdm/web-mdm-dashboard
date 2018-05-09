@@ -13,7 +13,7 @@ import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
 import { Redirect } from 'react-router'
 import Loading from '../../components/Loading'
 import { changeInput, changePhase, handleFormSubmit } from './actions'
-import { slideLeft, slideRight } from '../../shared/animations'
+import { slideLeft, slideRight } from '../../shared/animations/index'
 
 function mapStateToProps(state, props) {
     return {
