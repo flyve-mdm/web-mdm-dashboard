@@ -12,10 +12,20 @@ function copyProps(src, target) {
   Object.defineProperties(target, props)
 }
 
+window.localStorage = window.sessionStorage = {
+    getItem: function (key) {
+        return this[key]
+    },
+    setItem: function (key, value) {
+        this[key] = value
+    }
+}
+
 global.window = window
 global.document = window.document
 global.navigator = {
   userAgent: 'node.js',
 }
+
 
 copyProps(window, global)
