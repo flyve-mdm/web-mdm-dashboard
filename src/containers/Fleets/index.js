@@ -12,158 +12,156 @@ import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
-  }
-  return { actions }
+    const actions = {
+        setNotification: bindActionCreators(uiSetNotification, dispatch)
+    }
+    return { actions }
 }
 
 class Fleets extends PureComponent {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      icon: "goToStartIcon",
-      mode: getMode(),
-      itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
-      selectionMode: false,
-      action: null,
-      selectedItems: []
-    }
-  }
+    constructor(props) {
+        super(props)
+        this.state = {
+            icon: "goToStartIcon",
+            mode: getMode(),
+            itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
+            selectionMode: false,
+            action: null,
+            selectedItems: []
+        }
 
-  handleResize = () => {
-    let nextMode = getMode()
-
-    if (nextMode === 'small') {
-      this.setState({
-        itemListPaneWidth: '100%'
-      })
-    } else {
-      this.setState({
-        itemListPaneWidth: 320
-      })
+        window.addEventListener('resize', this.handleResize)
     }
 
-    if (this.state.mode !== nextMode) {
-      this.setState({
-        mode: nextMode
-      })
-    }
-  }
+    handleResize = () => {
+        let nextMode = getMode()
 
-  componentWillMount() {
-    window.addEventListener('resize', this.handleResize)
-  }
+        if (nextMode === 'small') {
+            this.setState({
+                itemListPaneWidth: '100%'
+            })
+        } else {
+            this.setState({
+                itemListPaneWidth: 320
+            })
+        }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.history.location.pathname === `${publicURL}/app/fleets` && this.state.selectedItems.length > 0) {
-      this.changeSelectedItems([])
-    }
-  }
-
-  propsData = () => {
-    return {
-      icon: this.state.icon,
-      changeSelectionMode: this.changeSelectionMode,
-      selectionMode: this.state.selectionMode,
-      selectedItems: this.state.selectedItems,
-      changeSelectedItems: this.changeSelectedItems,
-      action: this.state.action,
-      changeAction: this.changeAction,
-      setNotification: this.props.actions.setNotification,
-      history: this.props.history,
-      glpi: this.props.glpi,
-      handleMessage: this.props.handleMessage
-    }
-  }
-
-  changeSelectedItems = selectedItems => this.setState({ selectedItems })
-  changeAction = action => this.setState({ action })
-  changeSelectionMode = selectionMode => this.setState({ selectionMode })
-
-  stylesList = () => {
-
-    let styles = {
-      width: this.state.itemListPaneWidth
+        if (this.state.mode !== nextMode) {
+            this.setState({
+                mode: nextMode
+            })
+        }
     }
 
-    if (this.state.mode === 'small') {
-      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/fleets`) ||
-        this.props.history.location.pathname === `${publicURL}/app/fleets` ||
-        (this.props.history.location.pathname === `${publicURL}/app/fleets` &&
-          this.state.selectionMode)) {
-        styles.display = 'inline-block'
-      } else {
-        styles.display = 'none'
-      }
-
-    } else {
-      styles.display = 'inline-block'
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize)
     }
 
-    return styles
-  }
-
-  stylesContent = () => {
-
-    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
-    let styles = {
-      width: calc100PercentMinus(validWidth),
-      height: '100%'
+    componentWillReceiveProps(nextProps) {
+        if (this.props.history.location.pathname === `${publicURL}/app/fleets` && this.state.selectedItems.length > 0) {
+            this.changeSelectedItems([])
+        }
     }
 
-    if (this.state.mode === 'small') {
-      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/fleets`) ||
-        this.props.history.location.pathname === `${publicURL}/app/fleets` ||
-        (this.props.history.location.pathname === `${publicURL}/app/fleets` &&
-          this.state.selectionMode)) {
-        styles.display = 'none'
-      } else {
-        styles.display = 'inline-flex'
-      }
-
-    } else {
-      styles.display = 'inline-flex'
+    propsData = () => {
+        return {
+            icon: this.state.icon,
+            changeSelectionMode: this.changeSelectionMode,
+            selectionMode: this.state.selectionMode,
+            selectedItems: this.state.selectedItems,
+            changeSelectedItems: this.changeSelectedItems,
+            action: this.state.action,
+            changeAction: this.changeAction,
+            setNotification: this.props.actions.setNotification,
+            history: this.props.history,
+            glpi: this.props.glpi,
+            handleMessage: this.props.handleMessage
+        }
     }
 
-    return styles
-  }
+    changeSelectedItems = selectedItems => this.setState({ selectedItems })
+    changeAction = action => this.setState({ action })
+    changeSelectionMode = selectionMode => this.setState({ selectionMode })
 
-  render() {
-    let renderComponents = (
+    stylesList = () => {
 
-      <React.Fragment>
-        <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
-          <FleetsList
-            key="list"
-            {...this.propsData()}
-          />
-        </div>
-        <div className="flex-block__content" style={{ ...this.stylesContent() }}>
-          <GenerateRoutes
-            key="content"
-            routes={routes}
-            rootPath={this.props.match.url}
-            data={{ ...this.propsData() }}
-          />
-        </div>
-      </React.Fragment>
+        let styles = {
+            width: this.state.itemListPaneWidth
+        }
 
-    )
+        if (this.state.mode === 'small') {
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/fleets`) ||
+                this.props.history.location.pathname === `${publicURL}/app/fleets` ||
+                (this.props.history.location.pathname === `${publicURL}/app/fleets` &&
+                    this.state.selectionMode)) {
+                styles.display = 'inline-block'
+            } else {
+                styles.display = 'none'
+            }
 
-    return (
-      <div className="flex-block flex-block--with-scroll">
-        {renderComponents}
-      </div>
-    )
-  }
+        } else {
+            styles.display = 'inline-block'
+        }
+
+        return styles
+    }
+
+    stylesContent = () => {
+
+        const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
+        let styles = {
+            width: calc100PercentMinus(validWidth),
+            height: '100%'
+        }
+
+        if (this.state.mode === 'small') {
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/fleets`) ||
+                this.props.history.location.pathname === `${publicURL}/app/fleets` ||
+                (this.props.history.location.pathname === `${publicURL}/app/fleets` &&
+                    this.state.selectionMode)) {
+                styles.display = 'none'
+            } else {
+                styles.display = 'inline-flex'
+            }
+
+        } else {
+            styles.display = 'inline-flex'
+        }
+
+        return styles
+    }
+
+    render() {
+        let renderComponents = (
+
+            <React.Fragment>
+                <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
+                    <FleetsList
+                        key="list"
+                        {...this.propsData()}
+                    />
+                </div>
+                <div className="flex-block__content" style={{ ...this.stylesContent() }}>
+                    <GenerateRoutes
+                        key="content"
+                        routes={routes}
+                        rootPath={this.props.match.url}
+                        data={{ ...this.propsData() }}
+                    />
+                </div>
+            </React.Fragment>
+
+        )
+
+        return (
+            <div className="flex-block flex-block--with-scroll">
+                {renderComponents}
+            </div>
+        )
+    }
 }
 export default connect(
-  null,
-  mapDispatchToProps
+    null,
+    mapDispatchToProps
 )(withGLPI(withHandleMessages(Fleets)))

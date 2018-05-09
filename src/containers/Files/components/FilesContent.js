@@ -14,9 +14,7 @@ export default class FilesContent extends PureComponent {
         this.state = {
             isLoading: false
         }
-    }
 
-    componentWillMount() {
         if (this.props.selectedItems.length === 0) {
             const path = `${publicURL}/app/files`
             this.props.history.push(path)
