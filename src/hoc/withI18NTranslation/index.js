@@ -46,14 +46,14 @@ const withI18NTranslation = WrappedComponent => {
                 })
         }
 
-        componentDidMount() {
-            this.findI18NString(this.props.languageCurrent)
+        componentDidUpdate(prevProps, prevState, prevContext) {
+            if (this.props.languageCurrent !== prevProps.languageCurrent) {
+                this.findI18NString(this.props.languageCurrent)
+            }
         }
 
-        componentWillReceiveProps(nextProps) {
-            if (nextProps.languageCurrent !== this.props.languageCurrent) {
-                this.findI18NString(nextProps.languageCurrent)
-            }
+        componentDidMount() {
+            this.findI18NString(this.props.languageCurrent)
         }
 
         render() {
