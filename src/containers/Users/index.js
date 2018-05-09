@@ -58,9 +58,16 @@ class Users extends PureComponent {
         window.removeEventListener('resize', this.handleResize)
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(this.props.history.location.pathname === `${publicURL}/app/users` && this.state.selectedItems.length > 0) {
-            this.changeSelectedItems([])
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.history.location.pathname === `${publicURL}/app/users` && prevState.selectedItems.length > 0) {
+            return {
+                ...prevState,
+                selectedItems: []
+            }
+        } else {
+            return {
+                ...prevState
+            }
         }
     }
 
