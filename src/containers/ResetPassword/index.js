@@ -38,21 +38,19 @@ class ResetPassword extends PureComponent {
             forceValidation: false
         }
 
-        this.handleResetPassword = () => resetPassword(this)
-        this.changeState = () => changeState(this)
-        this.buildDataArray = () => buildDataArray(this, I18n)
-    }
-
-    componentWillMount() {
         const search = this.props.location.search
         const params = new URLSearchParams(search)
         const token = params.get('token')
-        
+
         if (token) {
             this.setState({ token })
         } else {
             this.props.history.push(`${publicURL}/`)
         }
+
+        this.handleResetPassword = () => resetPassword(this)
+        this.changeState = () => changeState(this)
+        this.buildDataArray = () => buildDataArray(this, I18n)
     }
 
     render() {

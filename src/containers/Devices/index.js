@@ -30,6 +30,8 @@ class Devices extends PureComponent {
             action: null,
             selectedItems: []
         }
+
+        window.addEventListener('resize', this.handleResize)
     }
 
     handleResize = () => {
@@ -50,10 +52,6 @@ class Devices extends PureComponent {
                 mode: nextMode 
             })
         }
-    }
-
-    componentWillMount () {
-        window.addEventListener('resize', this.handleResize)
     }
 
     componentWillUnmount () {
