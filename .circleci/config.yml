@@ -53,6 +53,7 @@ jobs:
           command: |
             source ci/scripts/create_config_file.sh
             yarn test
+            yarn test:snapshot
 
       - run: 
           name: "Run sonarwhal"
