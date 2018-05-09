@@ -13,6 +13,8 @@ class ListWithNavLinks extends PureComponent {
             itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
             styleNav: this.styleNav(getMode(), this.props.history)
         }
+
+        window.addEventListener('resize', this.handleResize)
     }
 
     handleResize = () => {
@@ -39,10 +41,6 @@ class ListWithNavLinks extends PureComponent {
         return ({
             width: calc100PercentMinus(validWidth)
         })
-    }
-
-    componentWillMount () {
-        window.addEventListener('resize', this.handleResize)
     }
 
     componentWillUnmount () {
