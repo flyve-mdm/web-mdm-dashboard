@@ -1,7 +1,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import Loading from "./index"
+import Loading from "../index"
 
 describe('Loading', () => {
     test('renders loading', () => {

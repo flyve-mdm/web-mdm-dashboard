@@ -20,7 +20,7 @@ const NotFound = props => {
 
                 <span>
                     © 2017 - 2018 Teclib'.
-                    </span>
+                </span>
                 <br />
             </footer>
         </div>
