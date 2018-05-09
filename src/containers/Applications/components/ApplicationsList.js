@@ -34,7 +34,7 @@ export default class ApplicationsList extends PureComponent {
         this.handleRefresh()
     }
 
-    componentDidUpdate(prevProps) {    
+    componentDidUpdate(prevProps, prevState, prevContext) {
         if(this.listView) {
             this.listView.winControl.footer.style.outline = 'none'
             this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
@@ -64,7 +64,6 @@ export default class ApplicationsList extends PureComponent {
             <ApplicationsItemList itemList={ItemList.data} size={42} />
         )
     })
-
 
     handleRefresh = async () => {
         try {

@@ -20,14 +20,25 @@ export default class ApplicationsContent extends PureComponent {
         }
     }
 
-    componentWillReceiveProps(newProps) {
-        if (this.state.id !== getID(this.props.history.location.pathname)) {
-            this.setState({
-                data: undefined,
-                id: getID(this.props.history.location.pathname)
-            }, () => this.handleRefresh())
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.id !== getID(nextProps.history.location.pathname)) {
+            return {
+                id: getID(nextProps.history.location.pathname),
+                data: undefined
+            }
+        } else {
+            return {
+                ...prevState
+            }
         }
     }
+
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (this.state.id !== prevState.id) {
+            this.handleRefresh()
+        }
+    }
+
     handleDelete = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
