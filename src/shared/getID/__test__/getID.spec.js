@@ -1,4 +1,4 @@
-import getID from './index.js'
+import getID from '../index.js'
 
 describe('getID', () => {
   it('should get user id', () => {
