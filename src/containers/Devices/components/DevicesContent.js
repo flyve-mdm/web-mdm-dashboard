@@ -17,11 +17,16 @@ export default class DevicesContent extends PureComponent {
         }
     }
 
-    componentWillReceiveProps(newProps) {
-        if (this.state.id !== getID(this.props.history.location.pathname)) {
-            this.setState({
-                id: getID(this.props.history.location.pathname)
-            })
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.id !== getID(nextProps.history.location.pathname)) {
+            return {
+                ...prevState,
+                id: getID(nextProps.history.location.pathname)
+            }
+        } else {
+            return {
+                ...prevState
+            }
         }
     }
 

@@ -7,26 +7,42 @@ import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
 
 export default class Geolocation extends PureComponent {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state ={
-          isLoading: true,
-          isLoadingGeolocation: false,
-          locations: [],
-          showLocations: []
+            id: this.props.id,
+            update: this.props.update,
+            isLoading: true,
+            isLoadingGeolocation: false,
+            locations: [],
+            showLocations: []
         }
-      }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.id !== nextProps.id || prevState.update !== nextProps.update) {
+            return {
+                ...prevState,
+                id: nextProps.id,
+                update: nextProps.update,
+                isLoading: true,
+                isLoadingGeolocation: false
+            }
+        } else {
+            return {
+                ...prevState
+            }
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
+            this.handleRefresh()
+        }
+    }
     
     componentDidMount () {
         this.handleRefresh()
-    }
-
-    componentWillReceiveProps(newProps) {
-        if (this.props.id !== newProps.id || this.props.update !== newProps.update) {
-            this.setState({
-                isLoading: true
-            }, () => this.handleRefresh())
-        }
     }
 
     requestLocation = async () => {
@@ -34,7 +50,7 @@ export default class Geolocation extends PureComponent {
             this.setState({ isLoadingGeolocation: true})
             await this.props.glpi.updateItem({
                 itemtype: itemtype.PluginFlyvemdmAgent, 
-                id: this.props.id,
+                id: this.state.id,
                 input: {_geolocate: ""}
             })
             this.props.setNotification({
@@ -50,9 +66,9 @@ export default class Geolocation extends PureComponent {
     }
 
     handleRefresh = async () => {
-        if (this.props.update) {
+        if (this.state.update) {
             try {
-                const {computers_id} = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.props.id })
+                const {computers_id} = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.state.id })
                 const response = await this.props.glpi.getSubItems({
                     itemtype: itemtype.Computer, 
                     id: computers_id, 

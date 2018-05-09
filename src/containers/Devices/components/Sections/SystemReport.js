@@ -11,18 +11,33 @@ export default class SystemReport extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
+            id: this.props.id,
+            update: this.props.update,
             data: undefined,
             isLoading: true,
             requestingInventory: false
         }
     }
 
-    componentWillReceiveProps(newProps) {
-        if (this.props.id !== newProps.id || this.props.update !== newProps.update) {
-            this.setState({
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.id !== nextProps.id || prevState.update !== nextProps.update) {
+            return {
+                ...prevState,
+                id: nextProps.id,
+                update: nextProps.update,
                 data: undefined,
-                isLoading: false
-            }, () => this.handleRefresh())
+                isLoading: true
+            }
+        } else {
+            return {
+                ...prevState
+            }
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
+            this.handleRefresh()
         }
     }
 
@@ -31,7 +46,7 @@ export default class SystemReport extends PureComponent {
     }
 
     handleRefresh = () => {
-        if (this.props.update) {
+        if (this.state.update) {
             this.setState({
                 isLoading: true,
                 requestingInventory: false
@@ -41,7 +56,7 @@ export default class SystemReport extends PureComponent {
                         isLoading: false,
                         data: await this.props.glpi.getAnItem({ 
                             itemtype: itemtype.PluginFlyvemdmAgent, 
-                            id: this.props.id 
+                            id: this.state.id 
                         })
                     })
                 } catch (error) {
@@ -57,7 +72,7 @@ export default class SystemReport extends PureComponent {
         }, async () => {
             try {
                 const response = await this.props.glpi.genericRequest({
-                    path: `${itemtype.PluginFlyvemdmAgent}/${this.props.id}`,
+                    path: `${itemtype.PluginFlyvemdmAgent}/${this.state.id}`,
                     requestParams: {
                         method: 'PUT',
                         body: JSON.stringify({"input":{"_inventory": ""}})

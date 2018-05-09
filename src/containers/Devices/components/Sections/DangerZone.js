@@ -8,13 +8,41 @@ import ContentPane from '../../../../components/ContentPane'
 
 class DangerZone extends PureComponent {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            id: this.props.id,
+            update: this.props.update
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.id !== nextProps.id || prevState.update !== nextProps.update) {
+            return {
+                ...prevState,
+                id: nextProps.id,
+                update: nextProps.update
+            }
+        } else {
+            return {
+                ...prevState
+            }
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
+            this.pane.forceAnimation()
+        }
+    }
+
     wipe = async () => {
         const isOK = await Confirmation.isOK(this.props.wipeDevice)
         if (isOK) {
             try {
                 const response = await this.props.glpi.updateItem({
                     itemtype: itemtype.PluginFlyvemdmAgent,
-                    id: this.props.id,
+                    id: this.state.id,
                     input: {"wipe": "1"}
                 })
                 this.props.setNotification({
@@ -36,7 +64,7 @@ class DangerZone extends PureComponent {
             try {
                 const response = await this.props.glpi.updateItem({
                     itemtype: itemtype.PluginFlyvemdmAgent,
-                    id: this.props.id,
+                    id: this.state.id,
                     input: {"_unenroll": "1"}
                 })
                 this.props.setNotification({
@@ -58,7 +86,7 @@ class DangerZone extends PureComponent {
             try {
                 const response = await this.props.glpi.deleteItem({
                     itemtype: itemtype.PluginFlyvemdmAgent,
-                    id: this.props.id,
+                    id: this.state.id,
                 })
                 this.props.setNotification({
                     title: I18n.t('commons.success'),
@@ -70,12 +98,6 @@ class DangerZone extends PureComponent {
             } catch (error) {
                 this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
             }
-        }
-    }
-
-    componentWillReceiveProps (newProps) {
-        if (this.props.id !== newProps.id || this.props.update !== newProps.update) {
-            this.pane.forceAnimation()
         }
     }
 
