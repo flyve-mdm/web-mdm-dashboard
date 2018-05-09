@@ -13,25 +13,31 @@ export default class Main extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
+            id: this.props.id,
+            update: this.props.update,
             data: undefined,
             sendingPing: false
         }
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.selectedItems !== prevProps.selectedItems) {
-            this.setState({
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.id !== nextProps.id || prevState.update !== nextProps.update) {
+            return {
+                ...prevState,
+                id: nextProps.id,
+                update: nextProps.update,
                 data: undefined
-            })
-            this.handleRefresh()
+            }
+        } else {
+            return {
+                ...prevState
+            }
         }
     }
 
-    componentWillReceiveProps(newProps) {
-        if (this.props.id !== newProps.id || this.props.update !== newProps.update) {
-            this.setState({
-                data: undefined
-            }, () => this.handleRefresh())
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
+            this.handleRefresh()
         }
     }
 
@@ -40,12 +46,12 @@ export default class Main extends PureComponent {
     }
 
     handleRefresh = async () => {
-        if (this.props.update) {
+        if (this.state.update) {
             try {
                 this.setState({ 
                     data: await this.props.glpi.getAnItem({ 
                         itemtype: itemtype.PluginFlyvemdmAgent, 
-                        id: this.props.id 
+                        id: this.state.id 
                     }) 
                 })
             } catch (error) {
@@ -87,7 +93,7 @@ export default class Main extends PureComponent {
     }
 
     handleEdit = () => {
-        const path = `${publicURL}/app/devices/${this.props.id}/edit`
+        const path = `${publicURL}/app/devices/${this.state.id}/edit`
         this.props.history.push(path)
     }
 
@@ -97,7 +103,7 @@ export default class Main extends PureComponent {
         }, async () => {
             try {
                 const response = await this.props.glpi.genericRequest({
-                    path: `${itemtype.PluginFlyvemdmAgent}/${this.props.id}`,
+                    path: `${itemtype.PluginFlyvemdmAgent}/${this.state.id}`,
                     requestParams: {
                         method: 'PUT',
                         body: JSON.stringify({"input":{"_ping": ""}})

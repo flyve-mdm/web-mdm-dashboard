@@ -13,17 +13,32 @@ export default class Applications extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
+            id: this.props.id,
+            update: this.props.update,
             layout: { type: WinJS.UI.ListLayout },
-            isLoading: false,
+            isLoading: true,
             itemList: new WinJS.Binding.List([])
         }
     }
 
-    componentWillReceiveProps(newProps) {
-        if (this.props.id !== newProps.id || this.props.update !== newProps.update) {
-            this.setState({
-                isLoading: false
-            }, () => this.handleRefresh())
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.id !== nextProps.id || prevState.update !== nextProps.update) {
+            return {
+                ...prevState,
+                id: nextProps.id,
+                update: nextProps.update,
+                isLoading: true
+            }
+        } else {
+            return {
+                ...prevState
+            }
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
+            this.handleRefresh()
         }
     }
 
@@ -31,38 +46,34 @@ export default class Applications extends PureComponent {
         this.handleRefresh()
     }
 
-    handleRefresh = () => {
-        if (this.props.update) {
-            this.setState({
-                isLoading: true
-            }, async () => {
-                try {
-                    const {computers_id} = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.props.id })
-                    const computer = await this.props.glpi.getAnItem({ itemtype: itemtype.Computer, id: computers_id, queryString: { with_softwares: true } })
-                    let softwareList = []
-                    for (let index = 0; index < computer['_softwares'].length; index++) {
-                        try {
-                            const software = await this.props.glpi.getAnItem({ itemtype: itemtype.Software, id: computer['_softwares'][index]['softwares_id']})
-                            softwareList.push({
-                                id: software['id'],
-                                name: software['name'],
-                                date_mod: software['date_mod']
-                            })
-                        } catch (e) {}
-                    }
-        
-                    this.setState({
-                        isLoading: false,
-                        itemList: new WinJS.Binding.List(softwareList)
-                    })
-        
-                } catch (error) {
-                    this.setState({
-                        isLoading: false,
-                        itemList: new WinJS.Binding.List([])
-                    })
+    handleRefresh = async () => {
+        if (this.state.update) {
+            try {
+                const { computers_id } = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.state.id })
+                const computer = await this.props.glpi.getAnItem({ itemtype: itemtype.Computer, id: computers_id, queryString: { with_softwares: true } })
+                let softwareList = []
+                for (let index = 0; index < computer['_softwares'].length; index++) {
+                    try {
+                        const software = await this.props.glpi.getAnItem({ itemtype: itemtype.Software, id: computer['_softwares'][index]['softwares_id'] })
+                        softwareList.push({
+                            id: software['id'],
+                            name: software['name'],
+                            date_mod: software['date_mod']
+                        })
+                    } catch (e) { }
                 }
-            })
+
+                this.setState({
+                    isLoading: false,
+                    itemList: new WinJS.Binding.List(softwareList)
+                })
+
+            } catch (error) {
+                this.setState({
+                    isLoading: false,
+                    itemList: new WinJS.Binding.List([])
+                })
+            }
         }
     }
 
