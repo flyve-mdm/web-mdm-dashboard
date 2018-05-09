@@ -15,17 +15,30 @@ class InvitationsPendingPage extends PureComponent {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            isLoading: false,
+            isLoading: true,
             itemList: new WinJS.Binding.List([]),
             id: getID(this.props.history.location.pathname)
         }
     }
 
-    componentWillReceiveProps(newProps) {
-        if (this.state.id !== getID(this.props.history.location.pathname)) {
-            this.setState({
-                id: getID(this.props.history.location.pathname)
-            }, () => this.handleRefresh())
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.id !== getID(nextProps.history.location.pathname)) {
+            return {
+                ...prevState,
+                id: getID(nextProps.history.location.pathname),
+                itemList: new WinJS.Binding.List([]),
+                isLoading: true
+            }
+        } else {
+            return {
+                ...prevState
+            }
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (prevState.id !== this.state.id) {
+            this.handleRefresh()
         }
     }
 
@@ -35,10 +48,6 @@ class InvitationsPendingPage extends PureComponent {
 
     handleRefresh = async () => {
         try {
-            this.setState({
-                isLoading: true
-            })
-
             const logs = await this.props.glpi.searchItems({ 
                 itemtype: itemtype.PluginFlyvemdmInvitationlog, 
                 options: { uid_cols: true, forcedisplay: [2, 3, 4, 5] }, 
