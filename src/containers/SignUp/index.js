@@ -52,14 +52,14 @@ class SignUp extends PureComponent {
         this.buildDataArray = () => buildDataArray(this, I18n)
     }
 
-    componentDidMount() {
-        this.props.actions.fetchCaptcha()
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.type === 'success') {
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (this.props.type === 'success') {
             this.props.history.push(`${publicURL}/validateAccount`)
         }
+    }
+    
+    componentDidMount() {
+        this.props.actions.fetchCaptcha()
     }
 
     render() {
