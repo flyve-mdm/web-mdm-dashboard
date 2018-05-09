@@ -5,11 +5,14 @@ const Loading = props => {
     const headerSize = props.headerSize ? props.headerSize : 0
 
     const loadComponent = props.small ? (
-        <div className="loading" style={{
-            display: 'inline-block',
-            verticalAlign: 'middle', 
-            margin: '10px'
-        }}>
+        <div
+            className="loading"
+            style={{
+                display: 'inline-block',
+                verticalAlign: 'middle',
+                margin: '10px'
+            }}
+        >
             <div>
                 <div className='small-loader'>
                     <div className='circle'></div>

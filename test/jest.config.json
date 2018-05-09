@@ -1,0 +1,14 @@
+{
+  "verbose": true,
+  "testRegex": "((\\.|/*.)(snapshot))\\.js?$",
+  "rootDir": "..",
+  "globals": {
+    "NODE_ENV": "test",
+    "BABEL_ENV": "test",
+    "PUBLIC_URL": ""
+  },
+  "transform": {
+    "^.+\\.jsx$": "babel-jest",
+    "^.+\\.js$": "babel-jest"
+  }
+}

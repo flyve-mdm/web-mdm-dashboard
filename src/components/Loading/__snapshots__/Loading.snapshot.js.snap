@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading renders loading 1`] = `
+<div
+  className="loading"
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+      "height": "100%",
+      "justifyContent": "center",
+      "marginTop": -0,
+      "textAlign": "center",
+      "width": "100%",
+    }
+  }
+>
+  <div>
+    <div
+      className="loader"
+    >
+      <div
+        className="circle"
+      />
+      <div
+        className="circle"
+      />
+      <div
+        className="circle"
+      />
+      <div
+        className="circle"
+      />
+      <div
+        className="circle"
+      />
+    </div>
+    <p />
+  </div>
+</div>
+`;
+
+exports[`Loading renders small loading 1`] = `
+<div
+  className="loading"
+  style={
+    Object {
+      "display": "inline-block",
+      "margin": "10px",
+      "verticalAlign": "middle",
+    }
+  }
+>
+  <div>
+    <div
+      className="small-loader"
+    >
+      <div
+        className="circle"
+      />
+      <div
+        className="circle"
+      />
+      <div
+        className="circle"
+      />
+      <div
+        className="circle"
+      />
+      <div
+        className="circle"
+      />
+    </div>
+  </div>
+</div>
+`;
