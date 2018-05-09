@@ -20,13 +20,23 @@ export default class UsersContent extends PureComponent {
         }
     }
 
-    componentWillReceiveProps(newProps) {
-        if (this.state.id !== getID(this.props.history.location.pathname)) {
-            this.setState({
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.id !== getID(nextProps.history.location.pathname)) {
+            return {
+                id: getID(nextProps.history.location.pathname),
                 data: undefined,
-                emails: [],
-                id: getID(this.props.history.location.pathname)
-            }, () => this.handleRefresh())
+                emails: []
+            }
+        } else {
+            return {
+                ...prevState
+            }
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (prevState.id !== this.state.id) {
+            this.handleRefresh()
         }
     }
 
