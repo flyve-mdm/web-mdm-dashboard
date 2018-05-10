@@ -8,7 +8,6 @@ import { I18n } from 'react-i18nify'
 
 class FleetsTaskItemList extends PureComponent {
     constructor(props) {
-        console.log('constructor')
         super(props)
         this.state = {
             fleetHaveTask: this.props.fleetHaveTask,
@@ -66,7 +65,6 @@ class FleetsTaskItemList extends PureComponent {
     }
 
     componentDidMount = () => {
-        console.log('componentDidMount')
         this.updateState(this.props.fleetHaveTask)
         let input
         if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
