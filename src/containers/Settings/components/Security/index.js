@@ -12,8 +12,8 @@ import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
-import { selfRegistration } from '../../../../config/config.json'
 import itemtype from '../../../../shared/itemtype'
+import appConfig from '../../../../../public/config.json'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -329,7 +329,7 @@ class Security extends PureComponent {
 
 
                             {
-                                !selfRegistration ? '' :
+                                !appConfig.selfRegistration ? '' :
                                 <React.Fragment>
                                     <div className="list-element">
                                         <div className="list-element__message">

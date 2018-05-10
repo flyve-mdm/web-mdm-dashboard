@@ -6,11 +6,11 @@ import withGLPI from '../../hoc/withGLPI'
 import { uiSetNotification } from '../../store/ui/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import config from '../../config/config.json'
 import publicURL from '../../shared/publicURL'
 import itemtype from '../../shared/itemtype'
 import { I18n } from "react-i18nify"
 import Loading from '../../components/Loading'
+import appConfig from '../../../public/config.json'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -47,7 +47,7 @@ class ValidateAccount extends PureComponent {
 
     requestValidation = async (account, validation) => {
         try {
-            const session = await this.props.glpi.initSessionByUserToken({ userToken: config.userToken })
+            const session = await this.props.glpi.initSessionByUserToken({ userToken: appConfig.userToken })
             this.props.glpi.sessionToken = session.session_token
             const response = await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmdemoAccountvalidation, id: account, input: { _validate: validation } })
             let isValidated = false
