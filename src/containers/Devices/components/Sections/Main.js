@@ -65,17 +65,11 @@ export default class Main extends PureComponent {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
 
-            let itemListToDelete = this.props.selectedItems.map((item) => {
-                return {
-                    id: item[`${itemtype.PluginFlyvemdmAgent}.id`]
-                }
-            })
-
             this.setState({
                 isLoading: true
             })
             
-            this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmAgent, input: itemListToDelete })
+            this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.state.id })
             .then((response) => {
                 this.props.setNotification({
                     title: I18n.t('commons.success'),
@@ -83,7 +77,7 @@ export default class Main extends PureComponent {
                     type: 'success'
                 })
                 this.props.changeSelectionMode(false)
-                this.props.history.goBack()
+                this.props.history.push(`${publicURL}/app/devices`)
                 this.props.changeAction('reload')
             })
             .catch((error) => {
@@ -126,7 +120,7 @@ export default class Main extends PureComponent {
     
     render() {
         let renderComponent 
-        if (this.state.data === undefined) {
+        if (this.state.data === undefined || this.state.isLoading) {
             renderComponent = <Loading message={`${I18n.t('commons.loading')}...`}/>
         } else {
             let imageAgent = this.state.data["mdm_type"] ? `${this.state.data["mdm_type"]}.png` : null
