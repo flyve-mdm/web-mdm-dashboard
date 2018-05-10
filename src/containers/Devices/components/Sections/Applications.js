@@ -50,22 +50,22 @@ export default class Applications extends PureComponent {
         if (this.state.update) {
             try {
                 const { computers_id } = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.state.id })
-                const computer = await this.props.glpi.getAnItem({ itemtype: itemtype.Computer, id: computers_id, queryString: { with_softwares: true } })
-                let softwareList = []
-                for (let index = 0; index < computer['_softwares'].length; index++) {
-                    try {
-                        const software = await this.props.glpi.getAnItem({ itemtype: itemtype.Software, id: computer['_softwares'][index]['softwares_id'] })
-                        softwareList.push({
-                            id: software['id'],
-                            name: software['name'],
-                            date_mod: software['date_mod']
-                        })
-                    } catch (e) { }
-                }
+                const { totalcount } = await this.props.glpi.searchItems({
+                    itemtype: itemtype.Software,
+                    options: { uid_cols: true, forcedisplay: [2]},
+                    range: '0-0',
+                    metacriteria: [{ link: 'AND', itemtype: itemtype.Computer, field: 2, searchtype: 'equals', value: computers_id }]
+                })
+                const softwareList = await this.props.glpi.searchItems({
+                    itemtype: itemtype.Software,
+                    options: { uid_cols: true, forcedisplay: [1, 2, 19]},
+                    range: `0-${totalcount}`,
+                    metacriteria: [{ link: 'AND', itemtype: itemtype.Computer, field: 2, searchtype: 'equals', value: computers_id }]
+                })
 
                 this.setState({
                     isLoading: false,
-                    itemList: new WinJS.Binding.List(softwareList)
+                    itemList: new WinJS.Binding.List(softwareList.data)
                 })
 
             } catch (error) {
@@ -89,9 +89,9 @@ export default class Applications extends PureComponent {
 
         return (
             <React.Fragment>
-                <div style={styles}>{ItemList.data['id']}</div>
-                <div style={styles}>{ItemList.data['name']}</div>
-                <div style={styles}>{ItemList.data['date_mod']}</div>
+                <div style={styles}>{ItemList.data['Software.id']}</div>
+                <div style={styles}>{ItemList.data['Software.name']}</div>
+                <div style={styles}>{ItemList.data['Software.date_mod']}</div>
             </React.Fragment>
         )
     })
