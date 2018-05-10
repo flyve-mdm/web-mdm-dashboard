@@ -1,9 +1,9 @@
 import * as actionTypes from './actionTypes'
 import glpi from '../../shared/glpiApi'
-import config from '../../config/config.json'
 import { uiTransactionFinish, uiTransactionStart } from '../ui/actions'
 import itemtype from '../../shared/itemtype'
 import handleMessage from '../../shared/handleMessage'
+import appConfig from '../../../public/config.json'
 
 // Actions
 
@@ -80,7 +80,7 @@ export const fetchSignIn = (username, password) => {
       dispatch(uiTransactionFinish())
       dispatch(authSuccess(user))
       dispatch(changeNotificationMessage({
-        title: config.appName,
+        title: appConfig.appName,
         body: 'Welcome!',
         type: 'success'
       }))
@@ -98,7 +98,7 @@ export const fetchCaptcha = () => {
   return async dispatch => {
     dispatch(uiTransactionStart())
     try {
-      const session     = await glpi.initSessionByUserToken({ userToken: config.userToken })
+      const session     = await glpi.initSessionByUserToken({ userToken: appConfig.userToken })
       glpi.sessionToken = session.session_token
       const {id}        = await glpi.addItem({ itemtype: itemtype.PluginFlyvemdmdemoCaptcha, input: {}})
       const captcha     = await glpi.genericRequest({
@@ -138,13 +138,13 @@ export const fetchSignUp = (data) => {
   return dispatch => {
     dispatch(uiTransactionStart())
     glpi.registerUser({ 
-      userToken: config.userToken, 
+      userToken: appConfig.userToken,
       userData: data, 
       itemtype: itemtype.PluginFlyvemdmdemoUser })
     .then(() => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
-        title: config.appName,
+        title: appConfig.appName,
         body: 'Successfully registered user',
         type: 'success'
       }))
@@ -169,7 +169,7 @@ export const fetchRecoverPassword = (email) => {
     .then(([response, json]) => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
-        title: config.APP_NAME,
+        title: appConfig.APP_NAME,
         body: 'Request reset password',
         type: 'success'
       }))
@@ -194,7 +194,7 @@ export const fetchResetPassword = ({email, token, newPassword}) => {
       .then(([response, json]) => {
         dispatch(uiTransactionFinish())
         dispatch(changeNotificationMessage({
-          title: config.APP_NAME,
+          title: appConfig.APP_NAME,
           body: json[0],
           type: 'success'
         }))
@@ -231,7 +231,7 @@ export function fetchSendFeedback (data) {
     .then(([response, json]) => {
       dispatch(uiTransactionFinish())
       dispatch(changeNotificationMessage({
-        title: config.appName,
+        title: appConfig.appName,
         body: 'Successfully send feedback',
         type: 'success'
       }))

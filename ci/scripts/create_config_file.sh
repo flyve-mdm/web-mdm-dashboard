@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat <<EOF >src/config/config.json
+cat <<EOF >public/config.json
 {
     "selfRegistration": true,
     "glpiApiLink": "$API_LINK",
