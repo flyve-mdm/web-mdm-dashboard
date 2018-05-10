@@ -1,12 +1,12 @@
 import validateNotifications from '../index.js'
 
 describe('validateNotifications', () => {
-    before(() => {
+    beforeEach(() => {
         localStorage.setItem('showNotifications', 'true')
         localStorage.setItem('notificationType', 'Toast')
     })
 
     it('should validate notifications', () => {
-        expect(validateNotifications()).deep.equal({show: true, type: "Toast"})
+        expect(validateNotifications()).toEqual({show: true, type: "Toast"})
     })
 })

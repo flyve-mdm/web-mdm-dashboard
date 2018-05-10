@@ -18,7 +18,24 @@ Object.assign = require('object-assign');
 // In tests, polyfill requestAnimationFrame since jsdom doesn't provide it yet.
 // We don't polyfill it in the browser--this is user's responsibility.
 if (process.env.NODE_ENV === 'test') {
-  require('raf').polyfill(global);
+    let enzyme = require('enzyme');
+    let Adapter = require('enzyme-adapter-react-16');
+    let sinon = require('sinon');
+
+    enzyme.configure({ adapter: new Adapter() });
+
+    process.on('unhandledRejection', err => {
+        throw err
+    });
+
+    global.sinon = sinon;
+
+    global.mount = enzyme.mount;
+    global.render = enzyme.render;
+    global.shallow = enzyme.shallow;
+
+    require('raf').polyfill(global);
+
 }
 
 // web animations js
