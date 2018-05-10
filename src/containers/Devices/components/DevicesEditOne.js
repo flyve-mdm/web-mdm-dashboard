@@ -6,20 +6,29 @@ import { agentScheme } from '../../../components/Forms/Schemas'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
+import publicURL from "../../../shared/publicURL"
+import getID from "../../../shared/getID"
 
 export default class DevicesEditOne extends PureComponent {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            isLoading: true,
+            id: getID(this.props.history.location.pathname, 3)
+        }
+    }
+
     componentDidMount() {
-        if (this.props.selectedItems.length > 0) {
+        if (Number(this.state.id)) {
             this.handleRefresh()
+        } else {
+            this.props.history.push(`${publicURL}/app/devices`);
         }
     }
 
     handleRefresh = () => {
-        this.setState({
-            isLoading: true
-        })
-        this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.props.selectedItems[0]['PluginFlyvemdmAgent.id'] })
+        this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.state.id })
             .then((response) => {
                 this.setState({
                     isLoading: false,
@@ -82,7 +91,8 @@ export default class DevicesEditOne extends PureComponent {
                     type: 'success'
                 })
                 this.props.changeAction('reload')
-                this.props.changeSelectionMode(false)
+                this.props.changeSelectionMode(false);
+                this.props.history.push(`${publicURL}/app/devices/${this.state.id}`);
             })
             .catch((error) => {
                 this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
