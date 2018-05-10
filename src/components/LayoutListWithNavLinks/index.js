@@ -51,7 +51,10 @@ class ListWithNavLinks extends PureComponent {
     static getDerivedStateFromProps(nextProps, prevState) {
         return {
             ...prevState,
-            styleNav: this.styleNav(prevState.mode, nextProps.history)
+            styleNav: (
+                getMode() === "small" ? nextProps.history.location.pathname.split("/").length > 3 ?
+                    { display: 'none' } : { width: '100%' } : {}
+            )
         }
     }
 
