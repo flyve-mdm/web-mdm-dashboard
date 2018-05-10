@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-class Select extends Component {
+class Select extends PureComponent {
 
     constructor (props) {
         super(props)
@@ -99,17 +99,6 @@ class Select extends Component {
         } else {
             this.handleRefresh(this.state.options)
         }
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.options !== nextProps.options) {
-            this.handleRefresh(nextProps.options)
-            return true
-        }
-        if (this.state.options !== nextState.options) {
-            return true
-        }
-        return false
     }
 
     handleRefresh = async (options) => {
