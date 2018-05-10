@@ -1,7 +1,11 @@
 {
   "verbose": true,
-  "testRegex": "((\\.|/*.)(snapshot))\\.js?$",
-  "rootDir": "..",
+  "testMatch": [
+    "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
+    "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
+  ],
+  "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setup.js",
+  "rootDir": "../..",
   "globals": {
     "NODE_ENV": "test",
     "BABEL_ENV": "test",
