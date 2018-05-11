@@ -28,6 +28,7 @@
 
 /** import dependencies */
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import { uiSetNotification } from '../../store/ui/actions'
@@ -148,6 +149,7 @@ class SearchEngine extends PureComponent {
         const resultsWithFields = []
 
         this.state.itemResults && this.state.itemResults.forEach((result, index) => {
+            console.log(123)
             let arrayResult = []
             let arrayOfArraysIdAndData = Object.entries(result)
 
@@ -170,6 +172,7 @@ class SearchEngine extends PureComponent {
      * @function render
      */ 
     render() {
+        console.log('rener')
         return (
             <ContentPane>
                 <div style={{ margin: '0 10px' }}>
@@ -224,6 +227,10 @@ class SearchEngine extends PureComponent {
             </ContentPane>
         )
     }
+}
+
+SearchEngine.propTypes = {
+    glpi: PropTypes.object.isRequired
 }
 
 export default connect(
