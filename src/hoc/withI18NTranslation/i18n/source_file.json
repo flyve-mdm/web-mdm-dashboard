@@ -213,7 +213,8 @@
       "title": "Applications",
       "empty_message": "No Applications Available",
       "id": "Application ID",
-      "last_modification": "Last modification"
+      "last_modification": "Last modification",
+      "technician": "Technician in charge of the software"
     },
     "system_report": {
       "title": "System Report",
@@ -521,6 +522,7 @@
     },
     "n/a": "n/a",
     "name_not_available": "Name not available",
-    "problems_loading_data": "Problems loading data"
+    "problems_loading_data": "Problems loading data",
+    "software": "Software"
   }
 }
