@@ -86,16 +86,15 @@ export default class Applications extends PureComponent {
         const styles = {
             boxSizing: 'border-box',
             padding: '15px',
-            width: '33%',
             float: 'left',
             overflow: 'auto'
         }
 
         return (
             <div onClick={() => this.selectApplication(ItemList.data['Software.id'])}>
-                <div style={styles}>{ItemList.data['Software.id']}</div>
-                <div style={styles}>{ItemList.data['Software.name']}</div>
-                <div style={styles}>{ItemList.data['Software.date_mod']}</div>
+                <div style={{...styles, width: '15%'}}>{ItemList.data['Software.id']}</div>
+                <div style={{...styles, width: '40%'}}>{ItemList.data['Software.name']}</div>
+                <div style={{...styles, width: '35%'}}>{ItemList.data['Software.date_mod']}</div>
             </div>
         )
     })
@@ -116,15 +115,14 @@ export default class Applications extends PureComponent {
             const stylesHeader = {
                 boxSizing: 'border-box',
                 padding: '15px',
-                width: '33%',
                 float: 'left',
                 overflow: 'auto'
             }
             const header = (
                 <React.Fragment>
-                    <div style={stylesHeader}>#</div>
-                    <div style={stylesHeader}>{I18n.t('devices.applications.id')}</div>
-                    <div style={stylesHeader}>{I18n.t('devices.applications.last_modification')}</div>
+                    <div style={{...stylesHeader, width: '15%'}}>#</div>
+                    <div style={{...stylesHeader, width: '40%'}}>{I18n.t('devices.applications.id')}</div>
+                    <div style={{...stylesHeader, width: '35%'}}>{I18n.t('devices.applications.last_modification')}</div>
                 </React.Fragment>
             )
             renderComponent = (
