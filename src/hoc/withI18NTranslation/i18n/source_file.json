@@ -523,6 +523,8 @@
     "n/a": "n/a",
     "name_not_available": "Name not available",
     "problems_loading_data": "Problems loading data",
-    "software": "Software"
+    "software": "Software",
+    "date_creation": "Date creation",
+    "date_mod": "Date modification"
   }
 }
