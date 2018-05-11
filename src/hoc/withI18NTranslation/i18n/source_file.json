@@ -520,6 +520,7 @@
       "min": "null"
     },
     "n/a": "n/a",
-    "name_not_available": "Name not available"
+    "name_not_available": "Name not available",
+    "problems_loading_data": "Problems loading data"
   }
 }
