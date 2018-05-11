@@ -78,13 +78,14 @@ export default class FleetsList extends PureComponent {
                     count: 15
                 }
             })
-            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [2], order: this.state.order, range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`} })
             this.setState({
                 isLoading: false,
                 order: fleets.order,
                 totalcount: fleets.totalcount,
                 itemList: new WinJS.Binding.List(fleets.data)
             })
+
 
         } catch (error) {
             this.props.handleMessage({notification: this.props.setNotification, type: 'alert', error: error})
@@ -184,7 +185,7 @@ export default class FleetsList extends PureComponent {
             })
             let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, order: newOrder, forcedisplay: [1, 2, 3, 4, 5, 6], range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
+            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, order: newOrder, forcedisplay: [2], range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}` } })
 
             this.setState({
                 isLoading: false,
@@ -223,7 +224,7 @@ export default class FleetsList extends PureComponent {
                 to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1
             }
             
-            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [1, 2, 3, 4, 5, 6], order: this.state.order, range: `${range.from}-${range.to}` } })
+            const fleets = await this.props.glpi.searchItems({ itemtype: itemtype.PluginFlyvemdmFleet, options: { uid_cols: true, forcedisplay: [2], order: this.state.order, range: `${range.from}-${range.to}` } })
 
             for (const item in fleets.data) {
                 this.state.itemList.push(fleets.data[item])
