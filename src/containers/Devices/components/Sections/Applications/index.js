@@ -2,11 +2,12 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import EmptyMessage from '../../../../components/EmptyMessage'
-import ContentPane from '../../../../components/ContentPane'
-import Loader from '../../../../components/Loader'
+import EmptyMessage from '../../../../../components/EmptyMessage'
+import ContentPane from '../../../../../components/ContentPane'
+import Loader from '../../../../../components/Loader'
 import { I18n } from 'react-i18nify'
-import itemtype from '../../../../shared/itemtype'
+import itemtype from '../../../../../shared/itemtype'
+import ApplicationDetail from './ApplicationDetail'
 
 export default class Applications extends PureComponent {
 
@@ -17,7 +18,8 @@ export default class Applications extends PureComponent {
             update: this.props.update,
             layout: { type: WinJS.UI.ListLayout },
             isLoading: true,
-            itemList: new WinJS.Binding.List([])
+            itemList: new WinJS.Binding.List([]),
+            applicationSelected: null
         }
     }
 
@@ -77,6 +79,8 @@ export default class Applications extends PureComponent {
         }
     }
 
+    selectApplication = (applicationSelected) => this.setState({applicationSelected})
+
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
 
         const styles = {
@@ -88,42 +92,48 @@ export default class Applications extends PureComponent {
         }
 
         return (
-            <React.Fragment>
+            <div onClick={() => this.selectApplication(ItemList.data['Software.id'])}>
                 <div style={styles}>{ItemList.data['Software.id']}</div>
                 <div style={styles}>{ItemList.data['Software.name']}</div>
                 <div style={styles}>{ItemList.data['Software.date_mod']}</div>
-            </React.Fragment>
+            </div>
         )
     })
 
     render() {
 
-        let listComponent = (<div style={{padding:'20px'}}><Loader type="content"/></div>)
+        let renderComponent
 
-        const stylesHeader = {
-            boxSizing: 'border-box',
-            padding: '15px',
-            width: '33%',
-            float: 'left',
-            overflow: 'auto'
-        }
-
-        const headerComponent = (
-            <React.Fragment>
-                <div style={stylesHeader}>#</div>
-                <div style={stylesHeader}>{I18n.t('devices.applications.id')}</div>
-                <div style={stylesHeader}>{I18n.t('devices.applications.last_modification')}</div>
-            </React.Fragment>
-        )
-
-        if (!this.state.isLoading && this.state.itemList.length > 0) {
-            listComponent = (
+        if (this.state.applicationSelected) {
+            renderComponent = <ApplicationDetail id={this.state.applicationSelected} glpi={this.props.glpi}/>
+        } else if (this.state.isLoading) {
+            renderComponent = (
+                <div style={{padding:'20px'}}>
+                    <Loader type="content"/>
+                </div>
+            )
+        } else if (this.state.itemList.length > 0){
+            const stylesHeader = {
+                boxSizing: 'border-box',
+                padding: '15px',
+                width: '33%',
+                float: 'left',
+                overflow: 'auto'
+            }
+            const header = (
+                <React.Fragment>
+                    <div style={stylesHeader}>#</div>
+                    <div style={stylesHeader}>{I18n.t('devices.applications.id')}</div>
+                    <div style={stylesHeader}>{I18n.t('devices.applications.last_modification')}</div>
+                </React.Fragment>
+            )
+            renderComponent = (
                 <ContentPane className="applications">
                     <div className="list-pane" style={{ padding: 0 }}>
                         <ReactWinJS.ListView
                             ref={(listView) => { this.listView = listView }}
                             className="list-pane__content win-selectionstylefilled"
-                            headerComponent={headerComponent}
+                            headerComponent={header}
                             itemDataSource={this.state.itemList.dataSource}
                             itemTemplate={this.ItemListRenderer}
                             layout={this.state.layout}
@@ -131,15 +141,14 @@ export default class Applications extends PureComponent {
                         />
                     </div>
                 </ContentPane>
-
             )
-        } else if (!this.state.isLoading && this.state.itemList.length === 0) {
-            listComponent = (
+        } else {
+            renderComponent = (
                 <EmptyMessage message={I18n.t('devices.applications.empty_message')} />
             )
         }
 
-        return listComponent
+        return renderComponent
     }
 }
 Applications.propTypes = {
