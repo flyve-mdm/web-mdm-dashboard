@@ -4,9 +4,7 @@ import itemtype from '../../../../../shared/itemtype'
 import Loading from '../../../../../components/Loading'
 import { I18n } from 'react-i18nify'
 import EmptyMessage from '../../../../../components/EmptyMessage'
-import ConstructInputs from '../../../../../components/Forms'
-import { softwareScheme } from '../../../../../components/Forms/Schemas'
-import validateData from "../../../../../shared/validateData"
+import { Input } from '../../../../../components/Forms'
 
 export default class Applications extends PureComponent {
 
@@ -14,48 +12,30 @@ export default class Applications extends PureComponent {
         super(props)
         this.state = {
             isLoading: true,
-            error: false
+            software: undefined
         }
     }
 
     componentDidMount = async () => {
         try {
             const software = await this.props.glpi.getAnItem({itemtype: itemtype.Software, id: this.props.id})
+            const x = await this.props.glpi.getSubItems({
+                itemtype: itemtype.Computer,
+                id: this.props.id,
+                subItemtype: itemtype.Computer_SoftwareVersion
+            })
+            // const softwareVersion = await  this.props.glpi.getAnItem({itemtype: itemtype.SoftwareVersion, id: 3})
             console.log(software)
+            console.log(x)
             this.setState({
-                name: validateData(software.name),
-                location: {
-                    value: validateData(software.locations_id),
-                    request: {
-                        params: {itemtype: itemtype.Location, options: {forcedisplay: [2]}},
-                        method: 'searchItems',
-                            content: '1',
-                            value: '2'
-                    }
-                }
+                software,
                 isLoading: false
             })
         } catch (error) {
             this.setState({
-                isLoading: false,
-                error: true
+                isLoading: false
             })
         }
-    }
-
-    changeState = (name, value) => {
-        this.setState({
-            [name]: value
-        })
-    }
-
-    changeSelect = (name, value) => {
-        this.setState({
-            [name]: {
-                ...this.state[name],
-                value
-            }
-        })
     }
 
     render() {
@@ -63,11 +43,14 @@ export default class Applications extends PureComponent {
             this.state.isLoading ?
                 <Loading message={`${I18n.t('commons.loading')}...`}/> :
                 (
-                    !this.state.error ?
+                    this.state.software ?
                         (
                             <React.Fragment>
                                 <h3>{`${I18n.t('commons.application')} ${this.props.id}`}</h3>
-                                <ConstructInputs data={softwareScheme({state: this.state, changeState: this.changeState, changeSelect: this.changeSelect, glpi: this.props.glpi}).softwareInformation} />
+                                <Input label={I18n.t('commons.name')} name="name" type="text" value={this.state.software.name} disabled />
+                                <Input label={I18n.t('commons.date_creation')} name="comment" type="date" value={new Date (this.state.software.date_creation)} disabled />
+                                <Input label={I18n.t('commons.date_mod')} name="comment" type="date" value={new Date (this.state.software.date_mod)} disabled />
+                                <Input label={I18n.t('commons.comments')} name="comment" type="textArea" value={this.state.software.comment} disabled />
                                 <button className="btn btn--secondary">{I18n.t('commons.back')}</button>
                             </React.Fragment>
                         ):
