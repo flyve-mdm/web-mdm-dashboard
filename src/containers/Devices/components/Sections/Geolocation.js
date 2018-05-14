@@ -77,6 +77,7 @@ export default class Geolocation extends PureComponent {
                 })    
                 this.setState({
                     locations: response,
+                    showLocations: [],
                     isLoading: false,
                     isLoadingGeolocation: false
                 })
@@ -84,6 +85,7 @@ export default class Geolocation extends PureComponent {
                 this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
                 this.setState({  
                     locations: [],
+                    showLocations: [],
                     isLoading: false,
                     isLoadingGeolocation: false
                 })
