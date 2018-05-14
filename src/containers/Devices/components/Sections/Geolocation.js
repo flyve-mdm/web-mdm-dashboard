@@ -6,6 +6,7 @@ import GeolocationList from './GeolocationList'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
 import GeolocationRange from './GeolocationRange'
+import validateDate from '../../../../shared/validateDate'
 
 export default class Geolocation extends PureComponent {
     constructor(props) {
@@ -37,12 +38,29 @@ export default class Geolocation extends PureComponent {
         }
     }
 
+    applyRange = (min, max) => {
+        this.setState({
+            showLocations: this.state.locations.filter(location => validateDate(new Date(location.date), min, max))
+        })
+    }
+
+    showLocations = (publicURL) => {
+        let showLocations = this.state.showLocations.map(element => element)
+        const index = showLocations.map((e) => { return e.id }).indexOf(publicURL.id)
+        if (index === -1) {
+            showLocations.push(publicURL)
+        } else {
+            showLocations.splice(index, 1)
+        }
+        this.setState({ showLocations })
+    }
+
     componentDidUpdate(prevProps, prevState, prevContext) {
         if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
             this.handleRefresh()
         }
     }
-    
+
     componentDidMount () {
         this.handleRefresh()
     }
@@ -51,7 +69,7 @@ export default class Geolocation extends PureComponent {
         try {
             this.setState({ isLoadingGeolocation: true})
             await this.props.glpi.updateItem({
-                itemtype: itemtype.PluginFlyvemdmAgent, 
+                itemtype: itemtype.PluginFlyvemdmAgent,
                 id: this.state.id,
                 input: {_geolocate: ""}
             })
@@ -72,10 +90,10 @@ export default class Geolocation extends PureComponent {
             try {
                 const {computers_id} = await this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.state.id })
                 const response = await this.props.glpi.getSubItems({
-                    itemtype: itemtype.Computer, 
-                    id: computers_id, 
+                    itemtype: itemtype.Computer,
+                    id: computers_id,
                     subItemtype: itemtype.PluginFlyvemdmGeolocation
-                })    
+                })
                 this.setState({
                     locations: response,
                     showLocations: [],
@@ -84,7 +102,7 @@ export default class Geolocation extends PureComponent {
                 })
             } catch (error) {
                 this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
-                this.setState({  
+                this.setState({
                     locations: [],
                     showLocations: [],
                     isLoading: false,
@@ -94,22 +112,8 @@ export default class Geolocation extends PureComponent {
         }
     }
 
-    showLocations = (publicURL) => {
-        let showLocations = this.state.showLocations.map(element => element)
-        const index = showLocations.map((e) => { return e.id }).indexOf(publicURL.id)
-        if (index === -1) {
-            showLocations.push(publicURL)
-        } else {
-            showLocations.splice(index, 1)
-        }
-        this.setState({ showLocations })
-    }
 
     goToLocation = (selectedLocation) => this.setState({ selectedLocation })
-
-    applyRange() {
-
-    }
 
     render() {
         return this.state.isLoading ? 

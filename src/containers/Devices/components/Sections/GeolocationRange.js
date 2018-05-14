@@ -33,7 +33,16 @@ export default class GeolocationRange extends PureComponent {
                     function={this.changeRange}
                     value={this.state.max}
                 />
-                <button className="btn btn--primary" style={{margin: '20px 0'}}>Filter</button>
+                <button
+                    className="btn btn--primary"
+                    style={{margin: '20px 0'}}
+                    onClick={() => this.props.applyRange(
+                        this.state.min,
+                        this.state.max
+                    )}
+                >
+                    Filter
+                </button>
             </React.Fragment>
         )
     }
