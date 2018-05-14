@@ -8,14 +8,14 @@ class GeolocationList extends PureComponent {
         if (this.props.locations.length > 0) {
             renderList = this.props.locations.map((location, index) => {
                 return (
-                    <div key={`location-${index}`} style={{paddingLeft:5}}>
+                    <div key={`location-${index}`} style={{paddingLeft:5, cursor: 'pointer'}} onClick={() => this.props.goToLocation(location)}>
                         <input 
                             type="checkbox" 
                             className="win-checkbox" 
-                            style={{width: 'auto'}} 
+                            style={{width: 'auto', cursor: 'pointer'}}
                             onChange={() => this.props.showLocations(location)} 
                         /> 
-                        <label>{ location.date }</label>
+                        <label style={{cursor: 'pointer'}}>{ location.date }</label>
                     </div>
                 )
             })
@@ -32,7 +32,8 @@ class GeolocationList extends PureComponent {
 
 GeolocationList.propTypes = {
     locations: PropTypes.array.isRequired,
-    showLocations: PropTypes.func.isRequired
+    showLocations: PropTypes.func.isRequired,
+    goToLocation: PropTypes.func.isRequired
 }
 
 export default GeolocationList

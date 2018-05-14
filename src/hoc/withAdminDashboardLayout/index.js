@@ -12,8 +12,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { logout } from '../../store/authentication/actions'
 
-// TODO: Passing Routes to props for generate NavLink in SplitView component
-
 const TIMEOUT_CONTRACT = 150
 
 function mapDispatchToProps(dispatch) {
