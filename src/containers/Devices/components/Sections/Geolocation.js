@@ -5,6 +5,7 @@ import Map from '../Map'
 import GeolocationList from './GeolocationList'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
+import GeolocationRange from './GeolocationRange'
 
 export default class Geolocation extends PureComponent {
     constructor(props) {
@@ -106,6 +107,10 @@ export default class Geolocation extends PureComponent {
 
     goToLocation = (selectedLocation) => this.setState({ selectedLocation })
 
+    applyRange() {
+
+    }
+
     render() {
         return this.state.isLoading ? 
             <Loading message={`${I18n.t('commons.loading')}...`} /> : 
@@ -124,6 +129,9 @@ export default class Geolocation extends PureComponent {
                             </div>
                             {this.state.isLoadingGeolocation ? <Loading small /> : ''}
                         </div>
+                        <GeolocationRange
+                            applyRange={this.applyRange}
+                        />
                         <GeolocationList locations={this.state.locations} showLocations={this.showLocations} goToLocation={this.goToLocation}/>
                     </React.Fragment>
                 )
