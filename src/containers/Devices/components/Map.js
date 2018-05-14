@@ -56,9 +56,16 @@ class Map extends PureComponent {
         }, 0)
     }
 
-    componentDidUpdate = () => {
+    componentDidUpdate = (prevProps) => {
         if (this.state.map) {
             this.addMarkers()
+            if (prevProps.selectedLocation !== this.props.selectedLocation) {
+                this.state.map.panTo([
+                    this.props.selectedLocation.latitude,
+                    this.props.selectedLocation.longitude
+                ])
+                this.state.map.setZoom(10)
+            }
         }
     }
 
@@ -69,13 +76,15 @@ class Map extends PureComponent {
 
 Map.defaultProps = {
     style: { height: '40%' },
-    markers: []
+    markers: [],
+    selectedLocation: null
 }
 
 
 Map.propTypes = {
     style: PropTypes.object,
-    markers: PropTypes.array
+    markers: PropTypes.array,
+    selectedLocation: PropTypes.object
 }
 
 export default Map

@@ -15,7 +15,8 @@ export default class Geolocation extends PureComponent {
             isLoading: true,
             isLoadingGeolocation: false,
             locations: [],
-            showLocations: []
+            showLocations: [],
+            selectedLocation: undefined
         }
     }
 
@@ -101,12 +102,18 @@ export default class Geolocation extends PureComponent {
         this.setState({ showLocations })
     }
 
+    goToLocation = (selectedLocation) => this.setState({ selectedLocation })
+
     render() {
         return this.state.isLoading ? 
             <Loading message={`${I18n.t('commons.loading')}...`} /> : 
                 (   
                     <React.Fragment>
-                        <Map markers={this.state.showLocations} style={{ margin: '0 5px', height: '300px', maxWidth: '800px' }} />
+                        <Map
+                            markers={this.state.showLocations}
+                            style={{ margin: '0 5px', height: '300px', maxWidth: '800px' }}
+                            selectedLocation={this.state.selectedLocation}
+                        />
                         <div style={{ display: 'flex', overflow: 'auto' }}>
                             <div>
                                 <button className="btn btn--secondary" style={{ margin: 5 }} onClick={this.requestLocation}>
@@ -115,7 +122,7 @@ export default class Geolocation extends PureComponent {
                             </div>
                             {this.state.isLoadingGeolocation ? <Loading small /> : ''}
                         </div>
-                        <GeolocationList locations={this.state.locations} showLocations={this.showLocations}/>
+                        <GeolocationList locations={this.state.locations} showLocations={this.showLocations} goToLocation={this.goToLocation}/>
                     </React.Fragment>
                 )
     }
