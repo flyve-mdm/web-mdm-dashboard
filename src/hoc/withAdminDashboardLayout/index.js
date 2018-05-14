@@ -31,7 +31,7 @@ const withAdminDashboardLayout = WrappedComponent => {
                 expanded: false,
                 contract: false,
                 mode: getMode(),
-                iframe: ''
+                iframe: undefined
             }
 
             window.addEventListener('resize', this.handleResize)
@@ -60,7 +60,11 @@ const withAdminDashboardLayout = WrappedComponent => {
             localStorage.setItem('baseURL', cfg_glpi.url_base)
             this.setState(
                 { iframe: <iframe title="glpi-backend" src={`//${cfg_glpi.url_base.split("//")[1]}`} style={{ height: 0, width: 0, opacity: 0, position: 'absolute' }}></iframe> },
-                () => setGlpiCookie()
+                () => setGlpiCookie(
+                    this.setState({
+                        iframe: undefined
+                    })
+                )
             )
         }
 
@@ -107,7 +111,7 @@ const withAdminDashboardLayout = WrappedComponent => {
                         location={this.props.history.location}
                     />
 
-                    {this.state.iframe}
+                    {(this.state.iframe || '')}
 
                     <div className="flex-block">
                         <SplitView
