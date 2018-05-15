@@ -128,21 +128,19 @@ export default class Geolocation extends PureComponent {
                         />
                         <div style={{ display: 'flex', overflow: 'auto' }}>
                             <div>
-
-                                {
-                                    !this.state.filter ?
-                                        (
-                                            <button
-                                                className="btn btn--secondary"
-                                                style={{ margin: 5 }}
-                                                onClick={() => this.setState({
-                                                    filter: true
-                                                })}
-                                            >
-                                                {I18n.t('devices.geolocation.filter_range')}
-                                            </button>
-                                        ) : ''
-                                }
+                                <button
+                                    className="btn btn--secondary"
+                                    style={{ margin: 5 }}
+                                    onClick={() => this.setState({
+                                        filter: !this.state.filter
+                                    })}
+                                >
+                                    {
+                                        this.state.filter ?
+                                            I18n.t('devices.geolocation.hide_filter'):
+                                            I18n.t('devices.geolocation.filter_range')
+                                    }
+                                </button>
 
                                 <button className="btn btn--secondary" style={{ margin: 5 }} onClick={this.requestLocation}>
                                     {I18n.t('devices.geolocation.request_current_location')}
