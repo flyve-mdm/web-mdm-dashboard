@@ -44,11 +44,11 @@ export default class Geolocation extends PureComponent {
         })
     }
 
-    showLocations = (publicURL) => {
+    showLocation = (location) => {
         let showLocations = this.state.showLocations.map(element => element)
-        const index = showLocations.map((e) => { return e.id }).indexOf(publicURL.id)
+        const index = showLocations.map((e) => { return e.id }).indexOf(location.id)
         if (index === -1) {
-            showLocations.push(publicURL)
+            showLocations.push(location)
         } else {
             showLocations.splice(index, 1)
         }
@@ -136,7 +136,12 @@ export default class Geolocation extends PureComponent {
                         <GeolocationRange
                             applyRange={this.applyRange}
                         />
-                        <GeolocationList locations={this.state.locations} showLocations={this.showLocations} goToLocation={this.goToLocation}/>
+                        <GeolocationList
+                            locations={this.state.locations}
+                            showLocation={this.showLocation}
+                            goToLocation={this.goToLocation}
+                            markers={this.state.showLocations}
+                        />
                     </React.Fragment>
                 )
     }

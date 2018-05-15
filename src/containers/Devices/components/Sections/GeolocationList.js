@@ -13,7 +13,8 @@ class GeolocationList extends PureComponent {
                             type="checkbox" 
                             className="win-checkbox" 
                             style={{width: 'auto', cursor: 'pointer'}}
-                            onChange={() => this.props.showLocations(location)} 
+                            onChange={() => this.props.showLocation(location)}
+                            checked={(this.props.markers.indexOf(location) !== -1)}
                         /> 
                         <label style={{cursor: 'pointer'}}>{ location.date }</label>
                     </div>
@@ -30,9 +31,15 @@ class GeolocationList extends PureComponent {
     }
 }
 
+GeolocationList.defaultProps = {
+    locations: [],
+    markers: []
+}
+
 GeolocationList.propTypes = {
-    locations: PropTypes.array.isRequired,
-    showLocations: PropTypes.func.isRequired,
+    locations: PropTypes.array,
+    showLocation: PropTypes.func,
+    markers: PropTypes.array,
     goToLocation: PropTypes.func.isRequired
 }
 
