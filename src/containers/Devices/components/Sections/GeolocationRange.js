@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { DatePicker } from '../../../../components/Forms'
+import { I18n } from "react-i18nify"
 
 export default class GeolocationRange extends PureComponent {
     constructor(props) {
@@ -20,15 +21,15 @@ export default class GeolocationRange extends PureComponent {
     render() {
         return (
             <React.Fragment>
-                <p>Show locations in a range of dates</p>
+                <p>{I18n.t('devices.geolocation.filter_range')}</p>
                 <DatePicker
-                    label="min"
+                    label={I18n.t('commons.min')}
                     name="min"
                     function={this.changeRange}
                     value={this.state.min}
                 />
                 <DatePicker
-                    label="max"
+                    label={I18n.t('commons.max')}
                     name="max"
                     function={this.changeRange}
                     value={this.state.max}
@@ -41,7 +42,7 @@ export default class GeolocationRange extends PureComponent {
                         this.state.max
                     )}
                 >
-                    Filter
+                    {I18n.t('commons.filter')}
                 </button>
             </React.Fragment>
         )
