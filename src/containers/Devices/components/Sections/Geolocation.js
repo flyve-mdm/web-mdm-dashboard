@@ -139,7 +139,7 @@ export default class Geolocation extends PureComponent {
                                                     filter: true
                                                 })}
                                             >
-                                                Filter locations in a range of dates
+                                                {I18n.t('devices.geolocation.filter_range')}
                                             </button>
                                         ) : ''
                                 }
