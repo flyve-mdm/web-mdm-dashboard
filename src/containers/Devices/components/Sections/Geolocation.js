@@ -18,7 +18,8 @@ export default class Geolocation extends PureComponent {
             isLoadingGeolocation: false,
             locations: [],
             showLocations: [],
-            selectedLocation: undefined
+            selectedLocation: undefined,
+            filter: false
         }
     }
 
@@ -127,15 +128,34 @@ export default class Geolocation extends PureComponent {
                         />
                         <div style={{ display: 'flex', overflow: 'auto' }}>
                             <div>
+
+                                {
+                                    !this.state.filter ?
+                                        (
+                                            <button
+                                                className="btn btn--secondary"
+                                                style={{ margin: 5 }}
+                                                onClick={() => this.setState({
+                                                    filter: true
+                                                })}
+                                            >
+                                                Filter locations in a range of dates
+                                            </button>
+                                        ) : ''
+                                }
+
                                 <button className="btn btn--secondary" style={{ margin: 5 }} onClick={this.requestLocation}>
                                     {I18n.t('devices.geolocation.request_current_location')}
                                 </button>
                             </div>
                             {this.state.isLoadingGeolocation ? <Loading small /> : ''}
                         </div>
-                        <GeolocationRange
-                            applyRange={this.applyRange}
-                        />
+
+                        {
+                            this.state.filter ?
+                                <GeolocationRange applyRange={this.applyRange} /> : ''
+                        }
+
                         <GeolocationList
                             locations={this.state.locations}
                             showLocation={this.showLocation}
