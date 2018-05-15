@@ -104,7 +104,7 @@ export default class Applications extends PureComponent {
         let renderComponent
 
         if (this.state.applicationSelected) {
-            renderComponent = <ApplicationDetail id={this.state.applicationSelected} glpi={this.props.glpi}/>
+            renderComponent = <ApplicationDetail id={this.state.applicationSelected} glpi={this.props.glpi} selectApplication={this.selectApplication}/>
         } else if (this.state.isLoading) {
             renderComponent = (
                 <div style={{padding:'20px'}}>
