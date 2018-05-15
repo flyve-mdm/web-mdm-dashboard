@@ -45,7 +45,14 @@ export default class Applications extends PureComponent {
                                 <Input label={I18n.t('commons.date_creation')} name="comment" type="date" value={validateData(toDateInputValue(this.state.software.date_creation))} disabled />
                                 <Input label={I18n.t('commons.date_mod')} name="comment" type="date" value={validateData(toDateInputValue(this.state.software.date_mod))} disabled />
                                 <TextArea label={I18n.t('commons.comments')} name="comment" type="textArea" value={validateData(this.state.software.comment)} disabled />
-                                <button className="btn btn--secondary">{I18n.t('commons.back')}</button>
+                                <button
+                                    className="btn btn--secondary"
+                                    onClick={() => {
+                                        this.props.selectApplication(undefined)
+                                    }}
+                                >
+                                    {I18n.t('commons.back')}
+                                </button>
                             </React.Fragment>
                         ):
                         <EmptyMessage message={I18n.t('commons.problems_loading_data')}/>
@@ -55,5 +62,6 @@ export default class Applications extends PureComponent {
 }
 Applications.propTypes = {
     id: PropTypes.number.isRequired,
-    glpi: PropTypes.object.isRequired
+    glpi: PropTypes.object.isRequired,
+    selectApplication: PropTypes.func.isRequired
 }
