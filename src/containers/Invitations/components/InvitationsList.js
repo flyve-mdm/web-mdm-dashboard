@@ -113,7 +113,7 @@ export default class InvitationsList extends PureComponent {
             this.setState({
                 isLoading: false,
                 order: invitations.order,
-                itemList: BuildItemList(invitations),
+                itemList: BuildItemList(invitations, 2),
                 totalcount: invitations.totalcount
             })
         } catch (e) {
@@ -192,7 +192,7 @@ export default class InvitationsList extends PureComponent {
                 isLoading: false,
                 order: invitations.order,
                 totalcount: invitations.totalcount,
-                itemList: BuildItemList(invitations)
+                itemList: BuildItemList(invitations, 2)
             })
             this.props.history.push(`${publicURL}/app/invitations`)
 
