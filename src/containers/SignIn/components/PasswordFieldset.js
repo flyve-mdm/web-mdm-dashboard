@@ -12,14 +12,14 @@ class PasswordFieldset extends PureComponent {
         this.state = {
             classInput: 'win-textbox',
             errorMessage: '',
-            isLoading: false
+            isLoading: true
         }
     }
 
-    componentDidMount() {
+    componentDidMount () {
         if (this.passwordInput) {
             this.passwordInput.focus()
-        }        
+        }      
     }
 
     render () { 

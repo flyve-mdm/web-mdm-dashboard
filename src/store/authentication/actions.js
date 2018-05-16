@@ -98,7 +98,7 @@ export const fetchCaptcha = () => {
   return async dispatch => {
     dispatch(uiTransactionStart())
     try {
-      const session     = await glpi.initSessionByUserToken({ userToken: appConfig.userToken })
+      const session     = await glpi.initSessionByUserToken({ userToken: appConfig.userDemoToken })
       glpi.sessionToken = session.session_token
       const {id}        = await glpi.addItem({ itemtype: itemtype.PluginFlyvemdmdemoCaptcha, input: {}})
       const captcha     = await glpi.genericRequest({
@@ -138,7 +138,7 @@ export const fetchSignUp = (data) => {
   return dispatch => {
     dispatch(uiTransactionStart())
     glpi.registerUser({ 
-      userToken: appConfig.userToken,
+      userToken: appConfig.userDemoToken,
       userData: data, 
       itemtype: itemtype.PluginFlyvemdmdemoUser })
     .then(() => {

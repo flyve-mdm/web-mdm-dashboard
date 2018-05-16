@@ -47,7 +47,7 @@ class ValidateAccount extends PureComponent {
 
     requestValidation = async (account, validation) => {
         try {
-            const session = await this.props.glpi.initSessionByUserToken({ userToken: appConfig.userToken })
+            const session = await this.props.glpi.initSessionByUserToken({ userToken: appConfig.userDemoToken })
             this.props.glpi.sessionToken = session.session_token
             const response = await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmdemoAccountvalidation, id: account, input: { _validate: validation } })
             let isValidated = false

@@ -1,6 +1,7 @@
 {
   "selfRegistration": true,
   "glpiApiLink": "https://dev.flyve.org/glpi/apirest.php",
-  "userToken": "pe90W27ebPXIeYXsj2mYE0nMrRz9q1AlguKhbhcI",
+  "userDemoToken": "pe90W27ebPXIeYXsj2mYE0nMrRz9q1AlguKhbhcI",
+  "pluginDemoToken": "2JoAOqcPcqkMZDf2QeeQBAVjERO2LamlZghkvWPB",
   "appName": "MDM Dashboard"
 }
