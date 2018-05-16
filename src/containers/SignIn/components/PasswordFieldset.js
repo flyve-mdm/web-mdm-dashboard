@@ -12,7 +12,7 @@ class PasswordFieldset extends PureComponent {
         this.state = {
             classInput: 'win-textbox',
             errorMessage: '',
-            isLoading: true
+            isLoading: false
         }
     }
 

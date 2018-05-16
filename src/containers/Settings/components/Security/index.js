@@ -13,7 +13,6 @@ import { I18n } from "react-i18nify"
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
-import appConfig from '../../../../../public/config.json'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -32,12 +31,32 @@ class Security extends PureComponent {
             passwordConfirmation: '',
             passwordConfiguration: undefined,
             forceValidation: false,
-            isLoading: false,
+            isLoading: true,
+            selfRegistration: null,
             currentUser: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : {}
         }
     }
 
-    deleteUser = async () => {
+    componentDidMount = async () => {
+        try {
+            const plugins = await this.props.glpi.getAllItems({ itemtype: 'Plugin' })
+            const pluginDemo = plugins.filter(plugin => plugin.name === "Flyve MDM Demo")
+            if (pluginDemo.length < 1 || pluginDemo[0].status !== 1) {
+                throw new Error()
+            }
+            this.setState({
+                isLoading: false,
+                selfRegistration: true
+            })
+        } catch (e) {
+            this.setState({
+                isLoading: false,
+                selfRegistration: false
+            })
+        }
+    }
+
+        deleteUser = async () => {
         const isOK = await Confirmation.isOK(this.deleteAccount)
         if (isOK) {
 
@@ -329,7 +348,7 @@ class Security extends PureComponent {
 
 
                             {
-                                !appConfig.selfRegistration ? '' :
+                                !this.state.selfRegistration ? '' :
                                 <React.Fragment>
                                     <div className="list-element">
                                         <div className="list-element__message">
