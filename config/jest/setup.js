@@ -1,10 +1,15 @@
-const storage = {
-    getItem: function (key) {
-        return this[key]
-    },
-    setItem: function (key, value) {
-        this[key] = value
-    }
-}
+let enzyme = require('enzyme');
+let Adapter = require('enzyme-adapter-react-16');
+let sinon = require('sinon');
 
-window.localStorage = window.sessionStorage = storage
+enzyme.configure({ adapter: new Adapter() });
+
+process.on('unhandledRejection', err => {
+    throw err
+});
+
+global.sinon = sinon;
+
+global.mount = enzyme.mount;
+global.render = enzyme.render;
+global.shallow = enzyme.shallow;

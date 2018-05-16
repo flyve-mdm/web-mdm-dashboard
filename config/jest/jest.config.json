@@ -4,7 +4,7 @@
     "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
     "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
   ],
-  "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setup.js",
+  "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setupTestFramework.js",
   "rootDir": "../..",
   "globals": {
     "NODE_ENV": "test",
@@ -12,7 +12,7 @@
     "PUBLIC_URL": ""
   },
   "setupFiles": [
-    "<rootDir>/config/polyfills.js"
+    "<rootDir>/config/jest/setup.js"
   ],
   "transform": {
     "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
@@ -24,5 +24,6 @@
   ],
   "collectCoverageFrom": [
     "src/**/*.{js,jsx,mjs}"
-  ]
+  ],
+  "snapshotSerializers": ["enzyme-to-json/serializer"]
 }
