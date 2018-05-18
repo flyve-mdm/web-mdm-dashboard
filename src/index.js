@@ -13,7 +13,14 @@ import bugsnag from 'bugsnag-js'
 import createPlugin from 'bugsnag-react'
 import appConfig from '../public/config.json'
 
-const bugsnagClient = bugsnag(appConfig.bugsnag)
+const bugsnagClient = bugsnag({
+    apiKey: appConfig.bugsnag,
+    beforeSend: () => {
+        if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test")
+            return false
+    }
+})
+
 const ErrorBoundary = bugsnagClient.use(createPlugin(React))
 
 ReactDOM.render(
