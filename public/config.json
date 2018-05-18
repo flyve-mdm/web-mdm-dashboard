@@ -3,5 +3,6 @@
   "glpiApiLink": "https://dev.flyve.org/glpi/apirest.php",
   "demoToken": "pe90W27ebPXIeYXsj2mYE0nMrRz9q1AlguKhbhcI",
   "pluginToken": "2JoAOqcPcqkMZDf2QeeQBAVjERO2LamlZghkvWPB",
-  "appName": "MDM Dashboard"
+  "appName": "MDM Dashboard",
+  "bugsnag": "your_bugsnag_key"
 }
