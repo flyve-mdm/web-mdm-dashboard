@@ -7,6 +7,7 @@ import Loading from '../../../../components/Loading'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import ContentPane from '../../../../components/ContentPane'
+import { TextArea } from  '../../../../components/Forms'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -41,6 +42,12 @@ class Feedback extends PureComponent {
             this.textareaInput.focus()
         }        
     }
+
+    changeMessage = (name, value) => {
+        this.setState({
+            [name]: value
+        })
+    }
     
     render() {
         if(this.state.isLoading) {
@@ -56,20 +63,18 @@ class Feedback extends PureComponent {
             )
         } else {
             return (
-                <ContentPane>
-                    <h3 style={{ margin: '10px' }}>{I18n.t('about.help_center.feedback')}</h3>
-                    <div className="feedback" style={{ margin: '10px' }}>
+                <ContentPane className="feedback">
+                    <h3>{I18n.t('about.help_center.feedback')}</h3>
+                    <div>
                         <form onSubmit={this.handleSubmit}>
-                            <textarea
+                            <TextArea
                                 name="textarea"
-                                ref={(input) => { this.textareaInput = input }}
-                                className="win-textbox feedback__textarea"
-                                placeholder="Write a feedback!"
                                 value={this.state.textarea}
-                                onChange={(event) => this.setState({ textarea: event.target.value })}
-                                required={true}
+                                function={this.changeMessage}
+                                placeholder={I18n.t('about.help_center.write_feedback')}
+                                required
                             />
-                            <button className="btn btn--primary" style={{float: 'right'}}>
+                            <button className="btn btn--primary">
                                 {I18n.t('commons.send') }
                             </button>
                         </form>

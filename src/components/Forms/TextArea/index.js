@@ -7,7 +7,6 @@ const TextArea = props =>  {
             <p>{props.label}</p>
             <textarea
                 rows="6"
-                type={props.type}
                 className="win-textarea"
                 name={props.name}
                 value={props.value}
@@ -15,14 +14,19 @@ const TextArea = props =>  {
                 onChange={(event) => props.function(props.name, event.target.value)}
                 disabled={props.disabled}
                 style={props.style}
+                required={props.required}
             />
         </div>
     )
 }
 
+TextArea.defaultProps = {
+    label: '',
+    required: false
+}
+
 TextArea.propTypes = {
-    label: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    label: PropTypes.string,
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
@@ -32,7 +36,8 @@ TextArea.propTypes = {
     function: PropTypes.func,
     disabled: PropTypes.bool,
     style: PropTypes.object,
-    delete: PropTypes.func
+    delete: PropTypes.func,
+    required: PropTypes.bool
 }
 
 export default TextArea
