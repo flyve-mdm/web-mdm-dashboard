@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../../shared/itemtype'
-import getID from '../../../../shared/getID/index'
+import getID from '../../../../shared/getID'
 
 function mapDispatchToProps(dispatch) {
     const actions = {

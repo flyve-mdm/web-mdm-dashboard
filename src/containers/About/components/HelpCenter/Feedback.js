@@ -8,6 +8,8 @@ import { uiSetNotification } from '../../../../store/ui/actions'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import ContentPane from '../../../../components/ContentPane'
 import { TextArea } from  '../../../../components/Forms'
+import itemtype from "../../../../shared/itemtype";
+import withGLPI from '../../../../hoc/withGLPI'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -30,10 +32,39 @@ class Feedback extends PureComponent {
 
     handleSubmit = (event) => {
         event.preventDefault()
-
-        // TODO: send feedback
         this.setState({
-            feedbackSent: true
+            isLoading: true
+        }, async () => {
+            const { active_profile } = await this.props.glpi.getActiveProfile()
+            let entityID
+            if (Array.isArray(active_profile.entities)) {
+                entityID = active_profile.entities[0].id
+            } else {
+                for (const key in active_profile.entities) {
+                    if (active_profile.entities.hasOwnProperty(key)) {
+                        entityID = `${active_profile.entities[key].id}`
+                    }
+                }
+            }
+
+            let entityconfig = await this.props.glpi.getAnItem({
+                itemtype: itemtype.PluginFlyvemdmEntityconfig,
+                id: entityID
+            })
+
+            if (Array.isArray(entityconfig)) entityconfig = entityconfig[0]
+
+            const link = `mailto:${entityconfig.support_email}`
+                + `?subject=${escape(I18n.t('about.help_center.feedback'))}`
+                + `&body=${escape(this.state.textarea)}`
+
+            window.location.href = link
+            setTimeout(() => {
+                this.setState({
+                    feedbackSent: true,
+                    isLoading: false
+                })
+            }, 2000)
         })
     }
 
@@ -86,10 +117,11 @@ class Feedback extends PureComponent {
 }
 
 Feedback.propTypes = {
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    glpi: PropTypes.object.isRequired
 }
 
 export default connect(
     null,
     mapDispatchToProps
-)(withHandleMessages(Feedback))
+)(withGLPI(withHandleMessages(Feedback)))

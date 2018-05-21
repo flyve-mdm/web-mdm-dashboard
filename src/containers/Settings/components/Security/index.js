@@ -56,7 +56,7 @@ class Security extends PureComponent {
         }
     }
 
-        deleteUser = async () => {
+    deleteUser = async () => {
         const isOK = await Confirmation.isOK(this.deleteAccount)
         if (isOK) {
 

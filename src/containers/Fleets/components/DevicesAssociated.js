@@ -5,7 +5,7 @@ import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import withGLPI from '../../../hoc/withGLPI'
 import itemtype from '../../../shared/itemtype'
-import getID from '../../../shared/getID/index'
+import getID from '../../../shared/getID'
 import EmptyMessage from '../../../components/EmptyMessage'
 import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
