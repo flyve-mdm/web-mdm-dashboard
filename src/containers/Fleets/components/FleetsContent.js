@@ -214,11 +214,19 @@ class FleetsContent extends PureComponent {
         /*
          * Get categories
          * */
+        const countCategories = await this.props.glpi.searchItems({
+            itemtype: itemtype.PluginFlyvemdmPolicyCategory,
+            options: {
+                uid_cols: true,
+                range: '0-0'
+            }
+        })
         const categories = await this.props.glpi.searchItems({
             itemtype: itemtype.PluginFlyvemdmPolicyCategory,
             options: {
                 uid_cols: true,
-                forcedisplay: [1, 2]
+                forcedisplay: [1, 2],
+                range: `0-${countCategories.totalcount}`
             }
         })
 
