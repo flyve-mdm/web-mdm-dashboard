@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Confirmation from '../../Confirmation'
 import ErrorValidation from '../../ErrorValidation'
 import { I18n } from "react-i18nify"
+import TextArea from "../TextArea";
 
 class Input extends PureComponent {
 
@@ -70,14 +71,14 @@ class Input extends PureComponent {
                     type={this.props.type}
                     className={this.state.className}
                     name={this.props.name}
-                    value={this.props.value ? this.props.value : ''}
+                    value={this.props.value}
                     placeholder={this.props.placeholder}
                     onChange={this.change}
                     onBlur={() => this.validate(this.props.parametersToEvaluate, this.props.value)}
                     disabled={this.props.disabled}
                     style={this.props.style}
                     ref={this.props.inputRef}
-                    required={this.props.required ? true : false}
+                    required={this.props.required}
                 />
                 <ErrorValidation errors={this.state.errors} />
                 { deleteIcon }
@@ -87,9 +88,16 @@ class Input extends PureComponent {
     }
 }
 
+TextArea.defaultProps = {
+    label: '',
+    value: '',
+    type: 'text',
+    required: false
+}
+
 Input.propTypes = {
-    label: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    type: PropTypes.string,
     name: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
@@ -101,7 +109,8 @@ Input.propTypes = {
     style: PropTypes.object,
     delete: PropTypes.func,
     parametersToEvaluate: PropTypes.object,
-    forceValidation: PropTypes.bool
+    forceValidation: PropTypes.bool,
+    required: PropTypes.bool
 }
 
 export default Input
