@@ -158,13 +158,10 @@ export default class FilesList extends PureComponent {
                     this.props.changeSelectionMode(false)
                     this.props.changeSelectedItems([])
                     this.props.changeAction('reload')
-    
-                    this.setState({ isLoading: false })
                 } catch (error) {
                     this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
                     this.props.changeSelectionMode(false)
                     this.props.changeSelectedItems([])
-        
                     this.setState({ isLoading: false })
                 }
             })
