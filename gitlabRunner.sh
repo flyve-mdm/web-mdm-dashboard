@@ -9,6 +9,7 @@ echo "password = ${TRANSIFEX_API_TOKEN}" >> ~/.transifexrc
 echo "token = ${TRANSIFEX_API_TOKEN}" >> ~/.transifexrc
 tx pull -a
 
+
 # install dependencies
 apt-get -y update
 apt-get -y install jq wget
