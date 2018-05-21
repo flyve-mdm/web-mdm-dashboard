@@ -125,7 +125,7 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
-    handleDelete = async (eventObject) => {
+    handleDelete = async () => {
         try {
             const isOK = await Confirmation.isOK(this.contentDialog)
             if (isOK) {
@@ -147,10 +147,6 @@ export default class InvitationsList extends PureComponent {
                     this.props.changeSelectionMode(false)
                     this.props.changeSelectedItems([])
                     this.props.changeAction('reload')
-
-                    this.setState((prevState, props) => ({
-                        isLoading: false
-                    }))
                 })
 
             } else {
