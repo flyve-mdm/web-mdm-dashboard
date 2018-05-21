@@ -7,7 +7,7 @@ import Confirmation from '../../../components/Confirmation'
 import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
-import getID from '../../../shared/getID/index'
+import getID from '../../../shared/getID'
 import publicURL from '../../../shared/publicURL'
 
 export default class ApplicationsContent extends PureComponent {

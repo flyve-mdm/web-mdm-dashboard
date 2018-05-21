@@ -8,7 +8,6 @@ class HelpCenter extends PureComponent {
             <React.Fragment>
                 <GenerateRoutes routes={routes} rootPath={this.props.match.url}/>
             </React.Fragment>
-            
         )
     }
 }

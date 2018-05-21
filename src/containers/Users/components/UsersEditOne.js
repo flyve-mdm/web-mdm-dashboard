@@ -9,7 +9,7 @@ import Loading from '../../../components/Loading'
 import ErrorValidation from '../../../components/ErrorValidation'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
-import getID from '../../../shared/getID/index'
+import getID from '../../../shared/getID'
 
 export default class UsersEditOne extends PureComponent {
     
