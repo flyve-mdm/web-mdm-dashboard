@@ -234,8 +234,7 @@ class FleetsContent extends PureComponent {
         * Get files
         */
         const files = await this.props.glpi.getAllItems({
-            itemtype: itemtype.PluginFlyvemdmFile,
-            queryString: { range: '0-50' }
+            itemtype: itemtype.PluginFlyvemdmFile
         })
 
         /* 
@@ -243,8 +242,7 @@ class FleetsContent extends PureComponent {
         */
         
         const applications = await this.props.glpi.getAllItems({ 
-            itemtype: itemtype.PluginFlyvemdmPackage, 
-            queryString: { range: '0-50' } 
+            itemtype: itemtype.PluginFlyvemdmPackage,
         })
 
         /* 
