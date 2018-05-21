@@ -164,10 +164,6 @@ export default class DevicesList extends PureComponent {
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
                 this.props.changeAction('reload')
-
-                this.setState((prevState, props) => ({
-                    isLoading: false
-                }))
             } else {
                 // Exit selection mode
                 this.props.changeSelectionMode(false)
