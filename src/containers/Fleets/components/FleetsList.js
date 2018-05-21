@@ -156,9 +156,6 @@ export default class FleetsList extends PureComponent {
                 this.props.changeAction('reload')
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
-                this.setState({
-                    isLoading: true
-                })
             } else {
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
