@@ -114,10 +114,28 @@ class FleetsContent extends PureComponent {
          * Get Tasks 
          * */
             try {
-                tasks = await this.props.glpi.getSubItems({
-                    itemtype: itemtype.PluginFlyvemdmFleet,
-                    id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'],
-                    subItemtype: 'PluginFlyvemdmTask'
+                tasks = await this.props.glpi.searchItems({
+                    itemtype: itemtype.PluginFlyvemdmTask,
+                    options: {
+                        uid_cols: true,
+                        forcedisplay: [1, 2, 3, 5],
+                        range: '0-50' // Can more than 50 items
+                    },
+                    criteria:
+                        [
+                            {
+                                link: 'and',
+                                field: 9,
+                                searchtype: 'equals',
+                                value: itemtype.PluginFlyvemdmFleet
+                            },
+                            {
+                                link: 'and',
+                                field: 10,
+                                searchtype: 'equals',
+                                value: this.props.selectedItems[0]['PluginFlyvemdmFleet.id']
+                            }
+                        ]
                 })
             } catch (error) {
                 this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
@@ -125,19 +143,19 @@ class FleetsContent extends PureComponent {
                 this.props.changeAction('reload')         
             }
             
-            tasks.forEach((task, index) => {
+            tasks.data.forEach((task, index) => {
 
                 let taskDeploy = {
-                    plugin_flyvemdm_fleets_id: task['plugin_flyvemdm_fleets_id'],
-                    plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
-                    value: task['value']
+                    plugin_flyvemdm_fleets_id: task['PluginFlyvemdmTask.items_id_applied'],
+                    plugin_flyvemdm_policies_id: task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id'],
+                    value: task['PluginFlyvemdmTask.value']
                 }
 
-                if (task['items_id']) {
-                    taskDeploy['items_id'] = task['items_id']
+                if (task['PluginFlyvemdmTask.items_id']) {
+                    taskDeploy['items_id'] = task['PluginFlyvemdmTask.items_id']
                 }
-                if (task['itemtype']) {
-                    taskDeploy['itemtype'] = task['itemtype']
+                if (task['PluginFlyvemdmTask.itemtype']) {
+                    taskDeploy['itemtype'] = task['PluginFlyvemdmTask.itemtype']
                 }
 
                 const deployType = policies.data.filter(policy => {
@@ -151,14 +169,14 @@ class FleetsContent extends PureComponent {
 
                 if (deployType.length > 0) {
 
-                    if (tasksNew[task['plugin_flyvemdm_policies_id']]) {
-                        tasksNew[task['plugin_flyvemdm_policies_id']].push(taskDeploy)
+                    if (tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]) {
+                        tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].push(taskDeploy)
                     } else {
-                        tasksNew[task['plugin_flyvemdm_policies_id']] = [taskDeploy]
+                        tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] = [taskDeploy]
                     }
                     
                 } else {
-                    tasksNew[task['plugin_flyvemdm_policies_id']] = taskDeploy
+                    tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] = taskDeploy
                 }
             })
         }
@@ -197,7 +215,7 @@ class FleetsContent extends PureComponent {
         this.setState((prevState, props) => ({
             isLoading: false,
             data: {
-                tasks, 
+                tasks: tasks.data, 
                 tasksNew: tasksNew,
                 policies: policies.data,
                 categories: categories.data, 
