@@ -94,7 +94,6 @@ export default class ApplicationsList extends PureComponent {
         }
     }
 
-
     handleEdit = () => {
         const location = `${this.props.history.location.pathname}/edit`
         this.props.history.push(location)
@@ -160,10 +159,6 @@ export default class ApplicationsList extends PureComponent {
                 this.props.changeSelectionMode(false)
                 this.props.changeSelectedItems([])
                 this.props.changeAction('reload')
-
-                this.setState((prevState, props) => ({
-                    isLoading: false
-                }))
             } else {
                 // Exit selection mode
                 this.props.changeSelectionMode(false)
