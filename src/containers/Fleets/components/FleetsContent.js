@@ -101,7 +101,7 @@ class FleetsContent extends PureComponent {
             itemtype: itemtype.PluginFlyvemdmPolicy,
             options: {
                 uid_cols: true,
-                range: '0-0' // Can more than 50 items
+                range: '0-0'
             }
         })
         const policies = await this.props.glpi.searchItems({
@@ -121,12 +121,35 @@ class FleetsContent extends PureComponent {
          * Get Tasks 
          * */
             try {
+                const countTasks = await this.props.glpi.searchItems({
+                    itemtype: itemtype.PluginFlyvemdmTask,
+                    options: {
+                        uid_cols: true,
+                        range: '0-0'
+                    },
+                    criteria:
+                        [
+                            {
+                                link: 'and',
+                                field: 9,
+                                searchtype: 'equals',
+                                value: itemtype.PluginFlyvemdmFleet
+                            },
+                            {
+                                link: 'and',
+                                field: 10,
+                                searchtype: 'equals',
+                                value: this.props.selectedItems[0]['PluginFlyvemdmFleet.id']
+                            }
+                        ]
+                })
+
                 tasks = await this.props.glpi.searchItems({
                     itemtype: itemtype.PluginFlyvemdmTask,
                     options: {
                         uid_cols: true,
                         forcedisplay: [1, 2, 3, 5],
-                        range: '0-50' // Can more than 50 items
+                        range: `0-${countTasks.totalcount}`
                     },
                     criteria:
                         [
