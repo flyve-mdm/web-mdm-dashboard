@@ -7,8 +7,8 @@ import Loading from '../../../../components/Loading'
 import { uiSetNotification } from '../../../../store/ui/actions'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import ContentPane from '../../../../components/ContentPane'
-import { TextArea } from  '../../../../components/Forms'
-import itemtype from "../../../../shared/itemtype";
+import { TextArea, Input } from  '../../../../components/Forms'
+import itemtype from "../../../../shared/itemtype"
 import withGLPI from '../../../../hoc/withGLPI'
 
 function mapDispatchToProps(dispatch) {
@@ -26,6 +26,7 @@ class Feedback extends PureComponent {
         this.state = {
             feedbackSent: false,
             textarea: '',
+            subject: I18n.t('about.help_center.feedback'),
             isLoading: false
         }
     }
@@ -55,7 +56,7 @@ class Feedback extends PureComponent {
             if (Array.isArray(entityconfig)) entityconfig = entityconfig[0]
 
             const link = `mailto:${entityconfig.support_email}`
-                + `?subject=${escape(I18n.t('about.help_center.feedback'))}`
+                + `?subject=${escape(this.state.subject)}`
                 + `&body=${escape(this.state.textarea)}`
 
             window.location.href = link
@@ -98,7 +99,15 @@ class Feedback extends PureComponent {
                     <h3>{I18n.t('about.help_center.feedback')}</h3>
                     <div>
                         <form onSubmit={this.handleSubmit}>
+                            <Input
+                                label={I18n.t('commons.subject')}
+                                name="subject"
+                                value={this.state.subject}
+                                function={this.changeMessage}
+                                required
+                            />
                             <TextArea
+                                label={I18n.t('commons.message')}
                                 name="textarea"
                                 value={this.state.textarea}
                                 function={this.changeMessage}
