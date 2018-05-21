@@ -281,7 +281,9 @@
       "search_an_article": "Search an article",
       "send_feedback": "Send feedback",
       "thank_you": "Thank you!",
-      "submission_received": "Your submission has been received"
+      "write_feedback": "Write a feedback!",
+      "submission_received": "Your submission has been received",
+      "feedback": "Feedback"
     },
     "contact": {
       "title": "Contact",
