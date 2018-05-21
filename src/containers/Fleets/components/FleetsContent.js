@@ -97,12 +97,19 @@ class FleetsContent extends PureComponent {
         /*
          * Get Policies 
          * */
+        const countPolicies = await this.props.glpi.searchItems({
+            itemtype: itemtype.PluginFlyvemdmPolicy,
+            options: {
+                uid_cols: true,
+                range: '0-0' // Can more than 50 items
+            }
+        })
         const policies = await this.props.glpi.searchItems({
             itemtype: itemtype.PluginFlyvemdmPolicy,
             options: {
                 uid_cols: true,
                 forcedisplay: [1, 2, 3, 4, 5, 6, 7, 8],
-                range: '0-50' // Can more than 50 items
+                range: `0-${countPolicies.totalcount}`
             }
         })
 
