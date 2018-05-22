@@ -149,7 +149,7 @@ class FleetsContent extends PureComponent {
                     itemtype: itemtype.PluginFlyvemdmTask,
                     options: {
                         uid_cols: true,
-                        forcedisplay: [1, 2, 3, 5],
+                        forcedisplay: [1, 2, 3, 5, 6, 7],
                         range: `0-${countTasks.totalcount}`
                     },
                     criteria:
