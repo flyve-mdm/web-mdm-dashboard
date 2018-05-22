@@ -3394,9 +3394,9 @@ eslint-module-utils@^2.2.0:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-flowtype@2.46.3:
-  version "2.46.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.46.3.tgz#7e84131d87ef18b496b1810448593374860b4e8e"
+eslint-plugin-flowtype@2.47.0:
+  version "2.47.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.47.0.tgz#75bba03f76264f3b9be5df2a17203541e183ae90"
   dependencies:
     lodash "^4.15.0"
 
