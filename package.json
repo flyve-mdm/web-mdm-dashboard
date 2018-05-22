@@ -110,7 +110,7 @@
     "url-loader": "1.0.0",
     "webpack": "3.11.0",
     "webpack-dev-server": "^2.11.2",
-    "webpack-manifest-plugin": "2.0.2"
+    "webpack-manifest-plugin": "2.0.3"
   },
   "homepage": ".",
   "babel": {
