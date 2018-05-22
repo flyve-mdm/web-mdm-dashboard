@@ -10,10 +10,25 @@ import publicURL from '../../../shared/publicURL'
 
 class FleetsContent extends PureComponent {
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.selectedItems && (prevState.selectedItems !== nextProps.selectedItems)) {
+            return {
+                ...prevState,
+                isLoading: true,
+                input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Feet',
+                notManaged: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]["PluginFlyvemdmFleet.is_default"] === 1 ? true : false : false,
+                selectedItems: nextProps.selectedItems
+            }
+        }
+        
+        return null
+    }
+
     constructor(props) {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
+            selectedItems: this.props.selectedItems,
             isLoading: false,
             notManaged: false,
             input: '',
@@ -74,10 +89,6 @@ class FleetsContent extends PureComponent {
     }
 
     requestAllData = async () => {
-        this.setState((prevState, props) => ({
-            isLoading: true
-        }))
-
         /*
          * Get Devices 
          * */
