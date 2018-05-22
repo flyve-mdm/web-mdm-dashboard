@@ -177,16 +177,17 @@ class FleetsContent extends PureComponent {
             tasks.data.forEach((task, index) => {
 
                 let taskDeploy = {
-                    plugin_flyvemdm_fleets_id: task['PluginFlyvemdmTask.items_id_applied'],
+                    itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                    items_id_applied: task['PluginFlyvemdmTask.items_id_applied'],
                     plugin_flyvemdm_policies_id: task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id'],
                     value: task['PluginFlyvemdmTask.value']
                 }
 
-                if (task['PluginFlyvemdmTask.items_id']) {
-                    taskDeploy['items_id'] = task['PluginFlyvemdmTask.items_id']
-                }
                 if (task['PluginFlyvemdmTask.itemtype']) {
                     taskDeploy['itemtype'] = task['PluginFlyvemdmTask.itemtype']
+                }
+                if (task['PluginFlyvemdmTask.items_id']) {
+                    taskDeploy['items_id'] = task['PluginFlyvemdmTask.items_id']
                 }
 
                 const deployType = policies.data.filter(policy => {
@@ -337,7 +338,8 @@ class FleetsContent extends PureComponent {
                 delete tasks[policy['PluginFlyvemdmPolicy.id']]
 
                 let addPolicy = {
-                    plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                    itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                    items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                     plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                     value: policy['PluginFlyvemdmPolicy.recommended_value']
                 }
@@ -366,7 +368,8 @@ class FleetsContent extends PureComponent {
                     break
                 default:
                     removePolicy = {
-                        plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                        items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: policy['PluginFlyvemdmPolicy.default_value']
                     }
@@ -399,7 +402,8 @@ class FleetsContent extends PureComponent {
                     break
                 case 'deployapp':
                     newDeploy = {
-                        plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                        items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: {remove_on_delete:1},
                         items_id: Number(value),
@@ -413,7 +417,7 @@ class FleetsContent extends PureComponent {
                     tasksToRemove = { ...this.state.data.tasksRemove }
                     if (tasksToRemove[policy['PluginFlyvemdmPolicy.id']]) {
                         this.state.data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
-                            if (item['items_id'] === newDeploy['items_id']) {
+                            if (item['itemtype'] === newDeploy['itemtype']) {
                                 tasksToRemove[policy['PluginFlyvemdmPolicy.id']].splice(index, 1)
                             }
                         })
@@ -422,7 +426,8 @@ class FleetsContent extends PureComponent {
                 case 'removeapp':
                 case 'removefile':
                     newDeploy = {
-                        plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                        items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: value
                     }
@@ -442,7 +447,8 @@ class FleetsContent extends PureComponent {
                     break
                 case 'deployfile':
                     newDeploy = {
-                        plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                        items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: { destination: "%DOCUMENTS%", remove_on_delete: 1 },
                         items_id: Number(value),
@@ -539,7 +545,8 @@ class FleetsContent extends PureComponent {
             }
 
             let removePolicy = {
-                plugin_flyvemdm_fleets_id: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                 plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
                 value: task['value']
             }
@@ -572,6 +579,7 @@ class FleetsContent extends PureComponent {
     }
 
     handleSaveFleet = async () => {
+        console.log(this.state)
         if(this.props.selectedItems.length === 1) {
             if (!this.state.notManaged) {
                 this.handleUpdateFleet()
@@ -622,17 +630,17 @@ class FleetsContent extends PureComponent {
         if (this.state.data.tasksRemove) {
             itemsToDelete = this.state.data.tasks.filter(task => {
                 // Check if the same Policy id is equal on object to remove
-                if (Array.isArray(this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']])) {
-                    const value = this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']].filter(item => {
+                if (Array.isArray(this.state.data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']])) {
+                    const value = this.state.data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].filter(item => {
                         if (item['items_id']) {
                             return item['items_id'] === task['items_id'] ? true : false
                         } else {
-                            return item['value'] === task['value'] ? true : false
+                            return item['value'] === task['PluginFlyvemdmTask.value'] ? true : false
                         }
                     })
                     return value.length > 0 ? true : false
                 } else {
-                    return this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']] ? true : false
+                    return this.state.data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] ? true : false
                 }
                 
             }).map((item) => {
@@ -649,21 +657,21 @@ class FleetsContent extends PureComponent {
 
         this.state.data.tasks.forEach(task => {
 
-            if (this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']]) {
+            if (this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]) {
                 let idDeployApp
 
                 for (let element of specialPolicies) {
-                    if (element['PluginFlyvemdmPolicy.id'] === task['plugin_flyvemdm_policies_id']) {
+                    if (element['PluginFlyvemdmPolicy.id'] === task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']) {
                         idDeployApp = element['PluginFlyvemdmPolicy.id']
                         break
                     }
                 }
 
                 if (!idDeployApp) {
-                    if (this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']]['value'] !== task['value']) {
+                    if (this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]['value'] !== task['PluginFlyvemdmTask.value']) {
                         itemsToUpdate.push({
                             id: task['id'],
-                            value: this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']]['value']
+                            value: this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]['value']
                         })
                     }
 
@@ -676,14 +684,14 @@ class FleetsContent extends PureComponent {
             
             if (Array.isArray(itemsToAdd[task['plugin_flyvemdm_policies_id']])) {
                 this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].forEach((item, index) => {
-                    if (task['items_id']) {
-                        return item['items_id'] === task['items_id'] ? itemsToAdd[task['plugin_flyvemdm_policies_id']].splice(index, 1) : null
+                    if (task['PluginFlyvemdmTask.itemtype']) {
+                        return item['itemtype'] === task['PluginFlyvemdmTask.itemtype'] ? itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].splice(index, 1) : null
                     } else {
-                        return item['value'] === task['value'] ? itemsToAdd[task['plugin_flyvemdm_policies_id']].splice(index, 1) : null
+                        return item['value'] === task['PluginFlyvemdmTask.value'] ? itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].splice(index, 1) : null
                     }
                 })
             } else {
-                return itemsToAdd[task['plugin_flyvemdm_policies_id']] ? delete itemsToAdd[task['plugin_flyvemdm_policies_id']] : null
+                return itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] ? delete itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] : null
             }
         })
 
@@ -741,14 +749,14 @@ class FleetsContent extends PureComponent {
 
             this.state.data.tasks.map(task => {
                 // Check if the same Policy id is equal on object to remove
-                return itemsToAdd[task['plugin_flyvemdm_policies_id']] ? delete itemsToAdd[task['plugin_flyvemdm_policies_id']] : null
+                return itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] ? delete itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] : null
             })
 
             let itemsToSave = []
             Object.values(itemsToAdd).forEach(item => {
                 if (Array.isArray(item)) {
                     item.forEach(deploy => {
-                        deploy['plugin_flyvemdm_fleets_id'] = newFleet['id']
+                        deploy['items_id_applied'] = newFleet['id']
 
                         try {
                             const objValue = JSON.parse(deploy['value'])
@@ -758,7 +766,7 @@ class FleetsContent extends PureComponent {
                         itemsToSave.push(deploy)
                     })
                 } else {
-                    item['plugin_flyvemdm_fleets_id'] = newFleet['id']
+                    item['items_id_applied'] = newFleet['id']
                     itemsToSave.push(item)
                 }
             })
