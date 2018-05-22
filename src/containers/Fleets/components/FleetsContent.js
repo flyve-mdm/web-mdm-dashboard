@@ -28,7 +28,7 @@ class FleetsContent extends PureComponent {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
-            selectedItems: this.props.selectedItems,
+            selectedItems: [],
             isLoading: false,
             notManaged: false,
             input: '',
@@ -46,30 +46,20 @@ class FleetsContent extends PureComponent {
     }
 
     componentDidMount = () => {
-        this.setState({
-            input: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Feet',
-            notManaged: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.is_default"] === 1 ? true : false : false
-        }, () => {
             if (!this.state.notManaged) {
                 this.requestAllData()
             } else {
                 this.resetData()
             }
-        })
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.selectedItems && (prevProps.selectedItems !== this.props.selectedItems)) {
-            this.setState({
-                input: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Fleet',
-                notManaged: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]["PluginFlyvemdmFleet.is_default"] === 1 ? true : false : false
-            }, () => {
-                if (!this.state.notManaged) {
-                    this.requestAllData()
-                } else {
-                    this.resetData()
-                }
-            })
+    componentDidUpdate(prevProps, prevState, prevContext) {
+        if (prevState.selectedItems && (prevState.selectedItems !== this.state.selectedItems)) {
+            if (!this.state.notManaged) {
+                this.requestAllData()
+            } else {
+                this.resetData()
+            }
         }
     }
 
