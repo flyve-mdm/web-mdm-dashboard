@@ -52,7 +52,7 @@
     "gh-pages-changelog": "gh-pages --dist ./ --src '{./C*.md,CHANGELOG.md}' --dest ./ --add",
     "test": "jest --config ./config/jest/jest.config.json",
     "test:watch": "yarn test --watch",
-    "test:cypress": "cypress open"
+    "test:cypress": "cypress run"
   },
   "devDependencies": {
     "@sonarwhal/formatter-codeframe": "^2.0.3",
