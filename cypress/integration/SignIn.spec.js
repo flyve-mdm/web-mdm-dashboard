@@ -12,13 +12,13 @@ describe('SignIn', () => {
       method: 'GET',
       url: 'https://dev.flyve.org/glpi/apirest.php/search/Plugin/?range=0-0&',
       response: {
-        totalcount: 1
+        totalcount: 5
       }
     })
 
     cy.route({
       method: 'GET',
-      url: 'https://dev.flyve.org/glpi/apirest.php/Plugin/?range=0-1&',
+      url: 'https://dev.flyve.org/glpi/apirest.php/Plugin/?range=0-5&',
       response: [
         {"id":1,"directory":"flyvemdmdemo","name":"Flyve MDM Demo","version":"1.0.0-dev","state":1,"author":"<a href='http://www.teclib.com'>Teclib</a>","homepage":"","license":"AGPLv3+"},
       ]

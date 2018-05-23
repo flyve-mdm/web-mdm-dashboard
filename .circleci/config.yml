@@ -47,16 +47,27 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      
+
+      - run:
+          name: "Start server in background"
+          command: yarn start > ../yarn.log
+          background: true
+
       - run: 
           name: "Run tests"
+          command: yarn test
+
+      - run: 
+          name: "Run end to end tests"
           command: |
-            source ci/scripts/create_config_file.sh
-            yarn test
+            until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
+            yarn test:cypress
 
       - run: 
           name: "Run sonarwhal"
-          command: source ci/scripts/sonarwhal.sh
+          command: |
+            until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
+            yarn test:sonarwhal
           
       - run:
           name: "Validate HTML"
@@ -64,6 +75,9 @@ jobs:
             yarn build
             html5validator --root build/ --show-warnings
  
+      - store_artifacts:
+          path: cypress/screenshots
+
   deploy:
     docker:
       - image: kkarczmarczyk/node-yarn
