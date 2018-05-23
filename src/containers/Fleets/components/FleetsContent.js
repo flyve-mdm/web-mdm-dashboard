@@ -173,44 +173,46 @@ class FleetsContent extends PureComponent {
                 this.props.changeSelectionMode(false)
                 this.props.changeAction('reload')         
             }
-            
-            tasks.data.forEach((task, index) => {
 
-                let taskDeploy = {
-                    itemtype_applied: itemtype.PluginFlyvemdmFleet,
-                    items_id_applied: task['PluginFlyvemdmTask.items_id_applied'],
-                    plugin_flyvemdm_policies_id: task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id'],
-                    value: task['PluginFlyvemdmTask.value']
-                }
+            if (tasks.data) {
+                tasks.data.forEach((task, index) => {
 
-                if (task['PluginFlyvemdmTask.itemtype']) {
-                    taskDeploy['itemtype'] = task['PluginFlyvemdmTask.itemtype']
-                }
-                if (task['PluginFlyvemdmTask.items_id']) {
-                    taskDeploy['items_id'] = task['PluginFlyvemdmTask.items_id']
-                }
-
-                const deployType = policies.data.filter(policy => {
-                    return (
-                        policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || 
-                        policy['PluginFlyvemdmPolicy.type'] === 'removeapp' || 
-                        policy['PluginFlyvemdmPolicy.type'] === 'deployfile' ||
-                        policy['PluginFlyvemdmPolicy.type'] === 'removefile') 
-                        && (policy['PluginFlyvemdmPolicy.id'] === taskDeploy['plugin_flyvemdm_policies_id'])
-                })
-
-                if (deployType.length > 0) {
-
-                    if (tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]) {
-                        tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].push(taskDeploy)
-                    } else {
-                        tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] = [taskDeploy]
+                    let taskDeploy = {
+                        itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                        items_id_applied: task['PluginFlyvemdmTask.items_id_applied'],
+                        plugin_flyvemdm_policies_id: task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id'],
+                        value: task['PluginFlyvemdmTask.value']
                     }
-                    
-                } else {
-                    tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] = taskDeploy
-                }
-            })
+
+                    if (task['PluginFlyvemdmTask.itemtype']) {
+                        taskDeploy['itemtype'] = task['PluginFlyvemdmTask.itemtype']
+                    }
+                    if (task['PluginFlyvemdmTask.items_id']) {
+                        taskDeploy['items_id'] = task['PluginFlyvemdmTask.items_id']
+                    }
+
+                    const deployType = policies.data.filter(policy => {
+                        return (
+                            policy['PluginFlyvemdmPolicy.type'] === 'deployapp' ||
+                            policy['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
+                            policy['PluginFlyvemdmPolicy.type'] === 'deployfile' ||
+                            policy['PluginFlyvemdmPolicy.type'] === 'removefile')
+                            && (policy['PluginFlyvemdmPolicy.id'] === taskDeploy['plugin_flyvemdm_policies_id'])
+                    })
+
+                    if (deployType.length > 0) {
+
+                        if (tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]) {
+                            tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].push(taskDeploy)
+                        } else {
+                            tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] = [taskDeploy]
+                        }
+
+                    } else {
+                        tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] = taskDeploy
+                    }
+                })
+            }
         }
 
         /*
@@ -253,12 +255,12 @@ class FleetsContent extends PureComponent {
         this.setState((prevState, props) => ({
             isLoading: false,
             data: {
-                tasks: tasks.data, 
+                tasks: tasks.data ? tasks.data : [], 
                 tasksNew: tasksNew,
-                policies: policies.data,
-                categories: categories.data, 
-                files: files, 
-                applications: applications,
+                policies: policies.data ? policies.data : [],
+                categories: categories.data ? categories.data : [], 
+                files: files ? files : [], 
+                applications: applications ? applications : [],
                 tasksRemove: {}
             },
             devices__length: devices.totalcount
