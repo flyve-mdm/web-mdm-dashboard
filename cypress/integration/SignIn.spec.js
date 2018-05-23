@@ -25,6 +25,19 @@ describe('SignIn', () => {
       url: 'https://dev.flyve.org/glpi/apirest.php/killSession',
       response: {}
     })
+
+    localStorage.setItem('display', JSON.stringify({
+      applicationsUploaded: false,
+      devicesByOperatingSystemVersion: false,
+      devicesByUsers: false,
+      devicesCurrentlyManaged: false,
+      filesUploaded: false,
+      fleetsCurrentlyManaged: false,
+      invitationsSent: false,
+      numberUsers: false,
+      animations: true,
+      pendingInvitations: false
+    }))
   })
 
   it('should assert that true is equal to true', () => {
