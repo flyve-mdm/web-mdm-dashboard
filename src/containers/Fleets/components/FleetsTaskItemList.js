@@ -102,7 +102,9 @@ class FleetsTaskItemList extends PureComponent {
             case 'deployfile':
             case 'removefile':
                 if(this.state.input.trim()) {
-                    this.props.updateValueTask(this.props.data, this.state.input)
+                    const value =  this.state.input
+                    this.props.updateValueTask(this.props.data, value)
+                    this.setState({input:''})
                 }
                 break
             default:
