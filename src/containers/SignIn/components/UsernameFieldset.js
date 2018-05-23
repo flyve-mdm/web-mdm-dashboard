@@ -24,7 +24,7 @@ class UsernameFieldset extends PureComponent {
             await this.props.glpi.initSessionByUserToken({ userToken: appConfig.pluginToken })
             const plugins = await this.props.glpi.getAllItems({ itemtype: 'Plugin' })
             const pluginDemo = plugins.filter(plugin => plugin.name === "Flyve MDM Demo")
-            if (pluginDemo.length < 1 || pluginDemo[0].status !== 1) {
+            if (pluginDemo.length < 1 || pluginDemo[0].state !== 1) {
                 throw new Error()
             }
             this.setState(
