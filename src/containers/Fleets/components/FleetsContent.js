@@ -419,7 +419,7 @@ class FleetsContent extends PureComponent {
                     tasksToRemove = { ...this.state.data.tasksRemove }
                     if (tasksToRemove[policy['PluginFlyvemdmPolicy.id']]) {
                         this.state.data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
-                            if (item['itemtype'] === newDeploy['itemtype']) {
+                            if (item['items_id'] === newDeploy['items_id']) {
                                 tasksToRemove[policy['PluginFlyvemdmPolicy.id']].splice(index, 1)
                             }
                         })
@@ -581,7 +581,7 @@ class FleetsContent extends PureComponent {
     }
 
     handleSaveFleet = async () => {
-        console.log(this.state)
+        console.log(this.state.data)
         if(this.props.selectedItems.length === 1) {
             if (!this.state.notManaged) {
                 this.handleUpdateFleet()
@@ -629,17 +629,20 @@ class FleetsContent extends PureComponent {
             name: this.state.input
         }
         let itemsToDelete = []
+
         if (this.state.data.tasksRemove) {
             itemsToDelete = this.state.data.tasks.filter(task => {
                 // Check if the same Policy id is equal on object to remove
                 if (Array.isArray(this.state.data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']])) {
+                    
                     const value = this.state.data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].filter(item => {
                         if (item['items_id']) {
-                            return item['items_id'] === task['items_id'] ? true : false
+                            return item['items_id'] === task['PluginFlyvemdmTask.items_id'] ? true : false
                         } else {
                             return item['value'] === task['PluginFlyvemdmTask.value'] ? true : false
                         }
                     })
+
                     return value.length > 0 ? true : false
                 } else {
                     return this.state.data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] ? true : false
@@ -647,7 +650,7 @@ class FleetsContent extends PureComponent {
                 
             }).map((item) => {
                 return {
-                    id: item["id"]
+                    id: item['PluginFlyvemdmTask.id']
                 }
             })
         }
@@ -672,7 +675,7 @@ class FleetsContent extends PureComponent {
                 if (!idDeployApp) {
                     if (this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]['value'] !== task['PluginFlyvemdmTask.value']) {
                         itemsToUpdate.push({
-                            id: task['id'],
+                            id: task['PluginFlyvemdmTask.id'],
                             value: this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]['value']
                         })
                     }
@@ -684,8 +687,8 @@ class FleetsContent extends PureComponent {
 
         this.state.data.tasks.forEach(task => {
             
-            if (Array.isArray(itemsToAdd[task['plugin_flyvemdm_policies_id']])) {
-                this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].forEach((item, index) => {
+            if (Array.isArray(itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']])) {
+                this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].forEach((item, index) => {
                     if (task['PluginFlyvemdmTask.itemtype']) {
                         return item['itemtype'] === task['PluginFlyvemdmTask.itemtype'] ? itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].splice(index, 1) : null
                     } else {
@@ -708,9 +711,11 @@ class FleetsContent extends PureComponent {
             }
         })
         try {
-
+            console.log(itemsToDelete)
+            console.log(itemsToUpdate)
+            console.log(itemsToSave)
             await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFleet, id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'], input: fleetToUpdate })
-
+            
             if (itemsToDelete.length > 0) {
                 await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmTask, input: itemsToDelete })
             }
