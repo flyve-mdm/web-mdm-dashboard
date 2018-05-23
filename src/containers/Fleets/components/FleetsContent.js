@@ -581,7 +581,6 @@ class FleetsContent extends PureComponent {
     }
 
     handleSaveFleet = async () => {
-        console.log(this.state.data)
         if(this.props.selectedItems.length === 1) {
             if (!this.state.notManaged) {
                 this.handleUpdateFleet()
@@ -689,8 +688,8 @@ class FleetsContent extends PureComponent {
             
             if (Array.isArray(itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']])) {
                 this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].forEach((item, index) => {
-                    if (task['PluginFlyvemdmTask.itemtype']) {
-                        return item['itemtype'] === task['PluginFlyvemdmTask.itemtype'] ? itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].splice(index, 1) : null
+                    if (task['PluginFlyvemdmTask.items_id']) {
+                        return item['items_id'] === task['PluginFlyvemdmTask.items_id'] ? itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].splice(index, 1) : null
                     } else {
                         return item['value'] === task['PluginFlyvemdmTask.value'] ? itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].splice(index, 1) : null
                     }
@@ -711,9 +710,7 @@ class FleetsContent extends PureComponent {
             }
         })
         try {
-            console.log(itemsToDelete)
-            console.log(itemsToUpdate)
-            console.log(itemsToSave)
+
             await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFleet, id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'], input: fleetToUpdate })
             
             if (itemsToDelete.length > 0) {
