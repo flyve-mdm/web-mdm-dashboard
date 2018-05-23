@@ -19,7 +19,7 @@ describe('SignIn', () => {
       response: [
         {"id":1,"directory":"flyvemdmdemo","name":"Flyve MDM Demo","version":"1.0.0-dev","state":1,"author":"<a href='http://www.teclib.com'>Teclib</a>","homepage":"","license":"AGPLv3+"},
       ]
-    })
+    }).as('getFlyveDemo')
     cy.route({
       method: 'GET',
       url: 'https://dev.flyve.org/glpi/apirest.php/killSession',
@@ -29,6 +29,14 @@ describe('SignIn', () => {
 
   it('should assert that true is equal to true', () => {
     cy.visit('/')
+    cy.wait('@getFlyveDemo')
+    cy.get('a[href="/signUp"]')
+    cy.get('.win-textbox')
+      .type('example name')
+      .type('{enter}')
+    cy.get('.win-textbox')
+      .type('12345678')
+      .type('{enter}')
     expect(true).to.equal(true)
   })
 })
