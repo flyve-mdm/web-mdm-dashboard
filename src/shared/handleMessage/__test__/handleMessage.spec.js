@@ -65,3 +65,17 @@ describe('handleMessage', () => {
     )
   })
 }) 
+
+it('should set a 400 error message', () => {
+  expect(
+    handleMessage({
+      type: 'alert', 
+      message: { 
+        status: 400,
+        data: [['Error', 'error 400']]
+      } 
+    })
+  ).toEqual(
+    {body: "error 400", title: "error", type: "alert"}
+  )
+})
