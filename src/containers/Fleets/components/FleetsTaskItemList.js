@@ -135,6 +135,62 @@ class FleetsTaskItemList extends PureComponent {
         this.props.removeValueTask(this.props.data, task)
     }
 
+    renderMinMaxVersion = () => {
+
+        let renderComponent = []
+
+        if (this.props.data['PluginFlyvemdmPolicy.android_min_version'] !== 0) {
+            renderComponent.push(
+                <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_android_min`}>
+                    <span className="badge android">
+                        Android
+                        <span className="tooltip">
+                            {`> ${this.props.data['PluginFlyvemdmPolicy.android_min_version']} `}
+                            {this.props.data['PluginFlyvemdmPolicy.android_max_version'] !== 0 ?
+                                `< ${this.props.data['PluginFlyvemdmPolicy.android_max_version']} ` :
+                                ''}
+                        </span>
+                    </span>
+                </React.Fragment>
+            )
+        } else {
+            renderComponent.push(
+                <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_android_min`}>
+                    <span className="badge not_available">
+                        Android
+                    <span className="tooltip">{I18n.t('commons.not_available')}</span>
+                    </span>
+                </React.Fragment>
+            )
+        }
+
+        if (this.props.data['PluginFlyvemdmPolicy.apple_min_version'] !== 0) {
+            renderComponent.push(
+                <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_apple_min`}>
+                    <span className="badge apple">
+                        iOS
+                        <span className="tooltip">
+                            {`> ${this.props.data['PluginFlyvemdmPolicy.apple_min_version']} `}
+                            {this.props.data['PluginFlyvemdmPolicy.apple_max_version'] !== 0 ? 
+                            `< ${this.props.data['PluginFlyvemdmPolicy.apple_max_version']} ` :
+                            ''}
+                        </span>
+                    </span>
+                </React.Fragment>
+            )
+        } else {
+            renderComponent.push(
+                <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_apple_min`}>
+                    <span className="badge not_available">
+                        iOS
+                    <span className="tooltip">{I18n.t('commons.not_available')}</span>
+                    </span>
+                </React.Fragment>
+            )
+        }
+        return renderComponent
+    }
+
     render() {
         if (this.props.data === undefined) {
             return (   
