@@ -36,6 +36,21 @@ describe('handleMessage', () => {
     )
   })
 
+  it('should set a 404 error message', () => {
+    expect(
+      handleMessage({
+        type: 'alert', 
+        message: { 
+          status: 404,
+          statusText: "error 404",
+          data: [['Error', '']]
+        } 
+      })
+    ).toEqual(
+      {body: "error 404", title: "error", type: "alert"}
+    )
+  })
+
   it('should set a 401 error message', () => {
     expect(
       handleMessage({
