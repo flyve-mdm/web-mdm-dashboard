@@ -3,9 +3,8 @@ import handleMessage from '../../shared/handleMessage'
 import PropTypes from 'prop-types'
 
 /**
- * 
- * @param { React Component } WrappedComponent 
- * @param { Object with method and parameters strings} fetch 
+ * Wrapper component to pass to the props the 'handleMessage' function
+ * @param { component } WrappedComponent - Component to wrap 
  */
 const withHandleMessages = (WrappedComponent) => {
     class HandleMessages extends PureComponent {
