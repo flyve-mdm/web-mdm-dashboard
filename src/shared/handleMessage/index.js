@@ -1,29 +1,16 @@
 import { I18n } from "react-i18nify"
-import logout from './logout'
+import logout from '../logout'
 
-export default ({type='info', message}) => {
+export default ({type='info', message, title}) => {
     let response = {
         type: type,
-        title: I18n.t('commons.info'),
+        title: (title || I18n.t(`commons.${(type !== 'alert') ? type : 'error'}`)),
         body: message ? (typeof message === 'string' || message instanceof String) ? message : message.statusText : ''
-    }
-    switch (type) {
-        case 'success':
-            response.title = I18n.t('commons.success')
-            break
-        case 'alert':
-            response.title = I18n.t('commons.error')
-            break
-        case 'warning':
-            response.title = I18n.t('commons.warning')
-            break
-        default:
-            break
     }
     if (message) {
         switch (true) {
             case (message.status === 0):
-                response.body = 'No Internet Connection'
+                response.body = I18n.t('notifications.no_internet_connection')
                 break
             case (message.status === 401):
                 response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText

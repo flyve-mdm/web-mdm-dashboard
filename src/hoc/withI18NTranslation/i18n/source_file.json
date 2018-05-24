@@ -51,7 +51,8 @@
     "clear_local_storage": "Web storage and database indexed, cleaned",
     "new_password_saved": "New password saved",
     "helpdesk_configuration_saved": "Helpdesk configuration saved",
-    "user_successfully_removed": "User successfully removed"
+    "user_successfully_removed": "User successfully removed",
+    "no_internet_connection": "No Internet Connection"
   },
   "authtype": {
     "glpi_internal_database": "GLPI internal database",
