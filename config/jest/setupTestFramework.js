@@ -4,6 +4,9 @@ const storage = {
     },
     setItem: function (key, value) {
         this[key] = value
+    },
+    removeItem: function(key) {
+        delete storage[key]
     }
 }
 
