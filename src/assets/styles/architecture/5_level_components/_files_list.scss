@@ -53,6 +53,13 @@
                         }
                     }
                 }
+
+                &.version {
+                    display: table-cell;
+                    vertical-align: top;
+                    padding-right: 10px;
+                    width: 100%;
+                }
             }
 
             .files-list__content-text-primary {
