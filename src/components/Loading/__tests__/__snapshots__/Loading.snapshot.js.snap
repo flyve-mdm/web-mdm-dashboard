@@ -5,14 +5,7 @@ exports[`Loading renders loading 1`] = `
   className="loading"
   style={
     Object {
-      "alignItems": "center",
-      "display": "flex",
-      "flexDirection": "column",
-      "height": "100%",
-      "justifyContent": "center",
       "marginTop": -0,
-      "textAlign": "center",
-      "width": "100%",
     }
   }
 >
@@ -36,25 +29,22 @@ exports[`Loading renders loading 1`] = `
         className="circle"
       />
     </div>
-    <p />
+    <p>
+      
+    </p>
   </div>
 </div>
 `;
 
 exports[`Loading renders small loading 1`] = `
 <div
-  className="loading"
-  style={
-    Object {
-      "display": "inline-block",
-      "margin": "10px",
-      "verticalAlign": "middle",
-    }
-  }
+  className="loading loading--small"
+  style={Object {}}
 >
   <div>
+     
     <div
-      className="small-loader"
+      className="loader"
     >
       <div
         className="circle"
@@ -72,6 +62,7 @@ exports[`Loading renders small loading 1`] = `
         className="circle"
       />
     </div>
+     
   </div>
 </div>
 `;
