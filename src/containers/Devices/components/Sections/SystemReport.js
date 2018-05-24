@@ -104,7 +104,7 @@ export default class SystemReport extends PureComponent {
                             <button className="btn btn--secondary" onClick={this.requestInventory}>
                                 {I18n.t('devices.system_report.request_inventory')}
                             </button>
-                            {this.state.requestingInventory ? <Loading small style={{float:'right'}}/> : ""}
+                            {this.state.requestingInventory ? <Loading small style={{paddingTop: '6px'}}/> : ""}
                         </div>
                         <div className="title">
                             {I18n.t('commons.agent')}

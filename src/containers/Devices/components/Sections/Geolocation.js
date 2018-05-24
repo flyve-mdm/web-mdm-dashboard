@@ -126,27 +126,24 @@ export default class Geolocation extends PureComponent {
                             style={{ margin: '0 5px', height: '300px', maxWidth: '800px' }}
                             selectedLocation={this.state.selectedLocation}
                         />
-                        <div style={{ display: 'flex', overflow: 'auto' }}>
-                            <div>
-                                <button
-                                    className="btn btn--secondary"
-                                    style={{ margin: 5 }}
-                                    onClick={() => this.setState({
-                                        filter: !this.state.filter
-                                    })}
-                                >
-                                    {
-                                        this.state.filter ?
-                                            I18n.t('devices.geolocation.hide_filter'):
-                                            I18n.t('devices.geolocation.filter_range')
-                                    }
-                                </button>
-
-                                <button className="btn btn--secondary" style={{ margin: 5 }} onClick={this.requestLocation}>
-                                    {I18n.t('devices.geolocation.request_current_location')}
-                                </button>
-                            </div>
-                            {this.state.isLoadingGeolocation ? <Loading small /> : ''}
+                        <button
+                            className="btn btn--secondary"
+                            style={{ margin: 5 }}
+                            onClick={() => this.setState({
+                                filter: !this.state.filter
+                            })}
+                        >
+                            {
+                                this.state.filter ?
+                                    I18n.t('devices.geolocation.hide_filter'):
+                                    I18n.t('devices.geolocation.filter_range')
+                            }
+                        </button>
+                        <div style={{display: 'inline-block'}}>
+                            <button className="btn btn--secondary" style={{ margin: 5 }} onClick={this.requestLocation}>
+                                {I18n.t('devices.geolocation.request_current_location')}
+                            </button>
+                            {this.state.isLoadingGeolocation ? <Loading small style={{paddingBottom: '20px'}} /> : ''}
                         </div>
 
                         {
