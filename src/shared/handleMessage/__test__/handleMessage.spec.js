@@ -7,4 +7,10 @@ describe('handleMessage', () => {
         {body: "error message", title: "error", type: "alert"}
       )
   })
+  it('should set a generic message', () => {
+    expect(handleMessage({message: 'message' }))
+    .toEqual(
+      {"body": "message", "title": "info", "type": "info"}
+    )
+  })
 })
