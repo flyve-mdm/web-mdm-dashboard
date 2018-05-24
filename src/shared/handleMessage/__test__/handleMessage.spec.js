@@ -1,6 +1,16 @@
 import handleMessage from '../index.js'
+import history from '../../history'
 
 describe('handleMessage', () => {
+
+  beforeEach(() => {
+    sinon.stub(history, 'push').returns({})
+  })
+
+  afterEach(() => {
+    history.push.restore()
+  })
+
   it('should set a generic error message', () => {
      expect(handleMessage({ type: 'alert', message: 'error message' }))
       .toEqual(
@@ -13,4 +23,18 @@ describe('handleMessage', () => {
       {"body": "message", "title": "info", "type": "info"}
     )
   })
-})
+  it('should set a 401 error message', () => {
+    expect(
+      handleMessage({
+        type: 'alert', 
+        message: {
+          status: 401,
+          data: [["ERROR_SESSION_TOKEN_INVALID","session_token seems invalid"]]
+        } 
+      })
+    )
+    .toEqual(
+      {body: "session_token seems invalid", title: "error", type: "alert"}
+    )
+  })
+}) 
