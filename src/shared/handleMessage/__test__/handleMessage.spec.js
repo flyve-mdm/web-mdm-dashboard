@@ -17,12 +17,25 @@ describe('handleMessage', () => {
         {body: "error message", title: "error", type: "alert"}
       )
   })
+
   it('should set a generic message', () => {
     expect(handleMessage({message: 'message' }))
     .toEqual(
       {"body": "message", "title": "info", "type": "info"}
     )
   })
+
+  it('should set a "no internet connection" message', () => {
+    expect(
+      handleMessage({
+        type: 'alert', 
+        message: { status: 0 } 
+      })
+    ).toEqual(
+      {body: "no_internet_connection", title: "error", type: "alert"}
+    )
+  })
+
   it('should set a 401 error message', () => {
     expect(
       handleMessage({
@@ -32,8 +45,7 @@ describe('handleMessage', () => {
           data: [["ERROR_SESSION_TOKEN_INVALID","session_token seems invalid"]]
         } 
       })
-    )
-    .toEqual(
+    ).toEqual(
       {body: "session_token seems invalid", title: "error", type: "alert"}
     )
   })
