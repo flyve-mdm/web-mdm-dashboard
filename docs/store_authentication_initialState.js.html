@@ -9,32 +9,30 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: store/authentication/initialState.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Initial State
+ * - Username, email and data of User logged
+ * - Configuration metadata (TODO: Is that needly?)
+ */
 
+const initialState = {
+  configurationPassword: {},
+  captcha: {},
+  currentUser: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : null,
+}
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default initialState</code></pre>
+        </article>
+    </section>
 
 
 

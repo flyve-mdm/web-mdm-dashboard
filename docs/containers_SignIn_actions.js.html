@@ -9,32 +9,43 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: containers/SignIn/actions.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Actions Pattern for Form SignIn Data Flow
+ * 
+ */
 
+export const changeInput = (ctx, input) => {
+  ctx.setState({
+      [input.name]: input.value
+  })
+}
 
-    <h3> </h3>
+export const changePhase = (ctx, newPhase) => {
+  ctx.setState({
+      phase: newPhase
+  })
+}
 
+export const handleFormSubmit = (ctx, event) => {
+  event.preventDefault()
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+  ctx.props.actions.fetchSignIn(
+      ctx.state.username,
+      ctx.state.password
+  )
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

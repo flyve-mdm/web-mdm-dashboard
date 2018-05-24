@@ -1,0 +1,184 @@
+---
+layout: container
+---
+
+<div class="row">
+  <div class="col-md-6">
+        <a class="btn btn-lightweight no-outline navigation-btn">Index</a><ul role="navigation" id="sidenav-small" class="nav side-navigation side-navigation-small theme-default"><button type="button" class="close" data-dismiss="side-navigation" aria-label="close"><i class="glyph glyph-cancel"></i></button><li class="active side-nav-c2">Classes</li><ul class="nav collapse in" id="father-john-misty"><li><a href="I18NTranslation.html">I18NTranslation</a></li><li><a href="RootApp.html">RootApp</a></li></ul><li class="active side-nav-c2"><a href="global.html">Global</a><ul class="nav collapse in" id="father-john-misty"><li><a href="global.html#changeInput">changeInput</a></li><li><a href="global.html#changeState">changeState</a></li><li><a href="global.html#fetchCaptcha">fetchCaptcha</a></li><li><a href="global.html#fetchSignIn">fetchSignIn</a></li><li><a href="global.html#fetchSignUp">fetchSignUp</a></li><li><a href="global.html#initialState">initialState</a></li><li><a href="global.html#withAuthenticationLayout">withAuthenticationLayout</a></li><li><a href="global.html#withGLPI">withGLPI</a></li><li><a href="global.html#withHandleMessages">withHandleMessages</a></li><li><a href="global.html#withI18NTranslation">withI18NTranslation</a></li></ul></li></ul>
+  </div>
+    <div class="col-md-18 navigation-section">
+    <div id="main">
+
+        <h1 class="page-title">Source: containers/SignUp/actions.js</h1>
+
+        
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import ErrorValidation from '../../components/ErrorValidation';
+
+/**
+ * Actions Pattern for Form SignUp Data Flow
+ * 
+ */
+
+export const changeState = (ctx) => {
+    return (name, value) => {
+        ctx.setState({
+            [name]: value
+        })
+    }
+}
+
+export const buildDataArray = (ctx, I18n) => {
+  const dataArray = {
+    personalInformation: [
+        [
+            {
+                label: I18n.t('commons.email'),
+                type: "text",
+                name: "email",
+                value: ctx.state.email,
+                placeholder: I18n.t('commons.email'),
+                function: ctx.changeState(),
+                disabled: false,
+                style: {
+                    width: 340
+                },
+                parametersToEvaluate: {
+                    isRequired: true,
+                    isEmail: true
+                },
+                forceValidation: ctx.state.forceValidation
+            },
+            {
+                label: I18n.t('create_account.full_name'),
+                type: "text",
+                name: "realName",
+                value: ctx.state.realName,
+                placeholder: I18n.t('create_account.full_name'),
+                function: ctx.changeState(),
+                disabled: false,
+                style: {
+                    width: 340
+                },
+                parametersToEvaluate: {
+                    isRequired: true
+                },
+                forceValidation: ctx.state.forceValidation
+            }
+        ]
+    ],
+    passwordInformation: [
+        [
+            {
+                label: I18n.t('commons.password'),
+                type: "password",
+                name: "password",
+                value: ctx.state.password,
+                placeholder: I18n.t('commons.password'),
+                function: ctx.changeState(),
+                disabled: false,
+                style: {
+                    width: 340
+                },
+                parametersToEvaluate: {
+                    isRequired: true,
+                    ...ctx.state.configurationPassword
+                },
+                forceValidation: ctx.state.forceValidation
+            },
+            {
+                label: I18n.t('commons.password_confirmation'),
+                type: "password",
+                name: "passwordConfirmation",
+                value: ctx.state.passwordConfirmation,
+                placeholder: I18n.t('commons.password_confirmation'),
+                function: ctx.changeState(),
+                disabled: false,
+                style: {
+                    width: 340
+                },
+                parametersToEvaluate: {
+                    isRequired: true,
+                    ...ctx.state.configurationPassword,
+                    isEqualTo: {
+                        value: ctx.state.password,
+                        message: I18n.t('commons.passwords_not_match')
+                    }
+                },
+                forceValidation: ctx.state.forceValidation
+            }
+        ]
+    ],
+    captchaInformation: [
+        [
+            {
+                label: I18n.t('create_account.enter_code_image'),
+                type: "text",
+                name: "captchaValue",
+                value: ctx.state.captchaValue,
+                placeholder: null,
+                function: ctx.changeState(),
+                disabled: false,
+                style: {
+                    width: 340
+                },
+                parametersToEvaluate: {
+                    isRequired: true
+                },
+                forceValidation: ctx.state.forceValidation
+            }
+        ]
+    ]  
+  }
+  return dataArray
+}
+
+export const handleSubmitForm = (ctx, event) => {
+    event.preventDefault()
+
+    const user = ctx.buildDataArray()
+    
+    let isCorrect = true
+
+    for (const key in user) {
+        if (user.hasOwnProperty(key)) {
+            const elements = user[key]
+            for (let index = 0; index &lt; elements[0].length; index++) {
+                const element = elements[0][index]
+                if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect) 
+                    isCorrect = false
+            }
+        }
+    }
+    
+    if (isCorrect) {
+        ctx.props.actions.fetchSignUp({
+            "name": ctx.state.email,
+            "realname": ctx.state.realName,
+            "password": ctx.state.password,
+            "password2": ctx.state.passwordConfirmation,
+            "_useremails": [ctx.state.email],
+            "_plugin_flyvemdmdemo_captchas_id": ctx.props.captcha.id,
+            "_answer": ctx.state.captchaValue
+        })
+    } else {
+        ctx.setState({
+            forceValidation: true
+        })
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+    </div>
+  </div>
+
+<br class="clear">

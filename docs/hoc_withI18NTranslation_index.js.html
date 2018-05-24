@@ -1,0 +1,104 @@
+---
+layout: container
+---
+
+<div class="row">
+  <div class="col-md-6">
+        <a class="btn btn-lightweight no-outline navigation-btn">Index</a><ul role="navigation" id="sidenav-small" class="nav side-navigation side-navigation-small theme-default"><button type="button" class="close" data-dismiss="side-navigation" aria-label="close"><i class="glyph glyph-cancel"></i></button><li class="active side-nav-c2">Classes</li><ul class="nav collapse in" id="father-john-misty"><li><a href="I18NTranslation.html">I18NTranslation</a></li><li><a href="RootApp.html">RootApp</a></li></ul><li class="active side-nav-c2"><a href="global.html">Global</a><ul class="nav collapse in" id="father-john-misty"><li><a href="global.html#changeInput">changeInput</a></li><li><a href="global.html#changeState">changeState</a></li><li><a href="global.html#fetchCaptcha">fetchCaptcha</a></li><li><a href="global.html#fetchSignIn">fetchSignIn</a></li><li><a href="global.html#fetchSignUp">fetchSignUp</a></li><li><a href="global.html#initialState">initialState</a></li><li><a href="global.html#withAuthenticationLayout">withAuthenticationLayout</a></li><li><a href="global.html#withGLPI">withGLPI</a></li><li><a href="global.html#withHandleMessages">withHandleMessages</a></li><li><a href="global.html#withI18NTranslation">withI18NTranslation</a></li></ul></li></ul>
+  </div>
+    <div class="col-md-18 navigation-section">
+    <div id="main">
+
+        <h1 class="page-title">Source: hoc/withI18NTranslation/index.js</h1>
+
+        
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { I18n } from 'react-i18nify'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+
+import source_file_translation from './i18n/source_file.json'
+
+function mapStateToProps(state, props) {
+    return {
+        languageDefault: state.language.languageDefault,
+        languageCurrent: state.language.languageCurrent
+    }
+}
+
+/**
+ * Translations HOC
+ * @param {*} WrappedComponent -> React Component
+ */
+const withI18NTranslation = WrappedComponent => {
+    class I18NTranslation extends PureComponent {
+        /**
+         * @param {*} i18nConvention -> String, e.g: 'pt_BR'
+         */
+        constructor(props) {
+            super(props)
+            I18n.setTranslations({
+                [this.props.languageDefault]: source_file_translation
+            })
+        }
+        findI18NString = i18nConvention => {
+            let path = i18nConvention === this.props.languageDefault
+                ? `./i18n/source_file`
+                : `./i18n/translations/${i18nConvention}`
+
+            import(`${path}.json`)
+                .then(jsonModule => {
+                    I18n.setTranslations({
+                        [i18nConvention]: jsonModule
+                    })
+                    I18n.setLocale(i18nConvention)
+                    this.forceUpdate()
+                }).catch((error) => {
+                    I18n.setTranslations(this.props.languageDefault)
+                    this.forceUpdate()
+                })
+        }
+
+        componentDidUpdate(prevProps, prevState, prevContext) {
+            if (this.props.languageCurrent !== prevProps.languageCurrent) {
+                this.findI18NString(this.props.languageCurrent)
+            }
+        }
+
+        componentDidMount() {
+            this.findI18NString(this.props.languageCurrent)
+        }
+
+        render() {
+            return &lt;WrappedComponent {...this.props} />
+        }
+    }
+
+    I18NTranslation.propTypes = {
+        languageDefault: PropTypes.string.isRequired,
+        languageCurrent: PropTypes.string.isRequired
+    }
+
+    return withRouter(
+        connect(mapStateToProps, null)(I18NTranslation)
+    )
+}
+
+export default withI18NTranslation</code></pre>
+        </article>
+    </section>
+
+
+
+
+    </div>
+  </div>
+
+<br class="clear">

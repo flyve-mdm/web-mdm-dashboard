@@ -1,0 +1,113 @@
+---
+layout: container
+---
+
+<div class="row">
+  <div class="col-md-6">
+        <a class="btn btn-lightweight no-outline navigation-btn">Index</a><ul role="navigation" id="sidenav-small" class="nav side-navigation side-navigation-small theme-default"><button type="button" class="close" data-dismiss="side-navigation" aria-label="close"><i class="glyph glyph-cancel"></i></button><li class="active side-nav-c2">Classes</li><ul class="nav collapse in" id="father-john-misty"><li><a href="I18NTranslation.html">I18NTranslation</a></li><li><a href="RootApp.html">RootApp</a></li></ul><li class="active side-nav-c2"><a href="global.html">Global</a><ul class="nav collapse in" id="father-john-misty"><li><a href="global.html#changeInput">changeInput</a></li><li><a href="global.html#changeState">changeState</a></li><li><a href="global.html#fetchCaptcha">fetchCaptcha</a></li><li><a href="global.html#fetchSignIn">fetchSignIn</a></li><li><a href="global.html#fetchSignUp">fetchSignUp</a></li><li><a href="global.html#initialState">initialState</a></li><li><a href="global.html#withAuthenticationLayout">withAuthenticationLayout</a></li><li><a href="global.html#withGLPI">withGLPI</a></li><li><a href="global.html#withHandleMessages">withHandleMessages</a></li><li><a href="global.html#withI18NTranslation">withI18NTranslation</a></li></ul></li></ul>
+  </div>
+    <div class="col-md-18 navigation-section">
+    <div id="main">
+
+        <h1 class="page-title">Source: hoc/withAuthenticationLayout/index.js</h1>
+
+        
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react'
+import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { I18n } from 'react-i18nify'
+import { changeLanguage } from '../../store/i18n/actions'
+
+function mapDispatchToProps(dispatch) {
+    return { 
+        changeLanguage: bindActionCreators(changeLanguage, dispatch) 
+    }
+}
+
+/**
+ * Wrapper component with the basic structure of the authentication pages 
+ * (Flyve MDM logo in the header and a footer with a drop-down of languages)
+ * @param { component } WrappedComponent - Component to wrap 
+ * @param { object } stylesConfiguration - Config styles of wrapper div
+ */
+const withAuthenticationLayout = (WrappedComponent, configStyles) => {
+    const authenticationLayout = props => {
+        const style = {
+            textAlign: configStyles.centerContent ? 'center' : null,
+            width: props.width
+        }
+
+        return (
+            &lt;div className="authentication" style={style} >
+                &lt;section>
+                    &lt;figure>
+                        &lt;img alt="Flyve MDM Dashboard" src={require('../../assets/images/dashboard.svg')} />
+                    &lt;/figure>
+                    &lt;WrappedComponent {...props} />
+                &lt;/section>
+                &lt;footer>
+                    &lt;a href="https://flyve-mdm.com/privacy-policy/">
+                        {I18n.t('commons.terms_and_conditions')}
+                    &lt;/a>
+                    &lt;br />
+                    &lt;span>
+                        © 2017 - 2018 Teclib'.
+                    &lt;/span>
+                    &lt;br/>
+                    &lt;select onChange={
+                        event => props.changeLanguage(event.target.value)
+                    }>
+                        &lt;option value='en_GB'>
+                            {I18n.t('commons.english')}
+                        &lt;/option>
+                        &lt;option value='pt_BR'>
+                            {I18n.t('commons.portuguese')}
+                        &lt;/option>
+                        &lt;option value='fr_FR'>
+                            {I18n.t('commons.french')}
+                        &lt;/option>
+                        &lt;option value='es_ES'>
+                            {I18n.t('commons.spanish')}
+                        &lt;/option>
+                    &lt;/select>
+                &lt;/footer>
+            &lt;/div>
+        )
+    }
+
+    authenticationLayout.defaultProps = {
+        centerContent: true,
+        width: 340
+    }
+    
+    authenticationLayout.propTypes = {
+        centerContent: PropTypes.bool.isRequired,
+        width: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]).isRequired
+    }
+
+    return connect(null, mapDispatchToProps)(authenticationLayout)
+}
+
+
+
+export default withAuthenticationLayout</code></pre>
+        </article>
+    </section>
+
+
+
+
+    </div>
+  </div>
+
+<br class="clear">

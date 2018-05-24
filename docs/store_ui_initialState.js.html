@@ -9,32 +9,35 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: store/ui/initialState.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Initial State for management the state of UI:
+ * - Nofications, Error and Succes messages states
+ * - Loading state for show / hiden Loaders, Sppiners etc.
+ */
 
+const initialState = {
+  notification: {
+    title: '',
+    body: '',
+    type: 'info'
+  },
+  error: '',
+  success: '',
+  loading: false
+}
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default initialState;</code></pre>
+        </article>
+    </section>
 
 
 

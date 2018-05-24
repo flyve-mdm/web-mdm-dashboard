@@ -9,32 +9,45 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: applications/RootApp/index.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react'
+import { Switch } from 'react-router-dom'
 
+// TODO: import PrivateRoute from '../../components/PrivateRoute'
 
-    <h3> </h3>
+import withI18NTranslation from '../../hoc/withI18NTranslation'
+import withNotification from '../../hoc/withNotification'
+import routes from './routes'
+import GenerateRoutes from '../../components/GenerateRoutes'
 
+/**
+ * Main Component in the React Tree
+ * This Render each route of the containers or / and components like 404
+ * TODO: Use PrivateRoute if the `private attribute of route is true
+ */
+class RootApp extends Component {
+  render () {
+    return (
+      &lt;Switch>
+        &lt;GenerateRoutes routes={routes} withNotFound />
+      &lt;/Switch>    
+    )
+  }
+}
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default withNotification(
+  withI18NTranslation(RootApp)
+)</code></pre>
+        </article>
+    </section>
 
 
 

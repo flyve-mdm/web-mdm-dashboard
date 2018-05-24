@@ -9,32 +9,41 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: hoc/withHandleMessages/index.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { PureComponent } from 'react'
+import handleMessage from '../../shared/handleMessage'
+import PropTypes from 'prop-types'
 
+/**
+ * Wrapper component to pass to the props the 'handleMessage' function
+ * @param { component } WrappedComponent - Component to wrap 
+ */
+const withHandleMessages = (WrappedComponent) => {
+    class HandleMessages extends PureComponent {
 
-    <h3> </h3>
+        render() {
+            return &lt;WrappedComponent handleMessage={handleMessage} {...this.props} />
+        }
+    }
 
+    HandleMessages.propTypes = {
+        history: PropTypes.object.isRequired
+    }
 
+    return HandleMessages
+}
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default withHandleMessages</code></pre>
+        </article>
+    </section>
 
 
 

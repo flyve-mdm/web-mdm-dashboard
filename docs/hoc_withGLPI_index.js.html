@@ -9,32 +9,35 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: hoc/withGLPI/index.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { PureComponent } from 'react'
+import { withRouter } from 'react-router'
+import glpi from '../../shared/glpiApi'
 
+/**
+ * Wrapper component to pass to the props the glpi object
+ * @param { component } WrappedComponent - Component to wrap 
+ */
+const withGLPI = (WrappedComponent) => {
+  class GLPIClient extends PureComponent {
+    render () { 
+      return &lt;WrappedComponent glpi={glpi} {...this.props} /> 
+    }
+  }
+  return withRouter(GLPIClient)
+}
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default withGLPI</code></pre>
+        </article>
+    </section>
 
 
 
