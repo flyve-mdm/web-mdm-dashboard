@@ -5,19 +5,14 @@ import PropTypes from 'prop-types'
 /**
  * 
  * @param { React Component } WrappedComponent 
- * 
+ * @param { Object with method and parameters strings} fetch 
  */
-
 const withHandleMessages = (WrappedComponent) => {
     class HandleMessages extends PureComponent {
 
         render() {
-            return <WrappedComponent {...this.props} />
+            return <WrappedComponent handleMessage={handleMessage} {...this.props} />
         }
-    }
-
-    HandleMessages.defaultProps = {
-        handleMessage: handleMessage
     }
 
     HandleMessages.propTypes = {

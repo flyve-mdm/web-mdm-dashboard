@@ -12,10 +12,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 /**
- * Wrapper a component with divs's stylizeds
- * With a select input to change language
- * @param {* component} WrappedComponent   - Component to wrapper it
- * @param {* object } stylesConfiguration  - Config styles of wrapper div
+ * Wrapper component with the basic structure of the authentication pages 
+ * (Flyve MDM logo in the header and a footer with a drop-down of languages)
+ * @param { component } WrappedComponent - Component to wrap 
+ * @param { object } stylesConfiguration - Config styles of wrapper div
  */
 const withAuthenticationLayout = (WrappedComponent, configStyles) => {
     const authenticationLayout = props => {
