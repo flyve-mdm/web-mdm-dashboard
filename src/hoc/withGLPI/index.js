@@ -3,9 +3,8 @@ import { withRouter } from 'react-router'
 import glpi from '../../shared/glpiApi'
 
 /**
- * 
- * @param { React Component } WrappedComponent 
- * @param { Object with method and parameters strings} fetch 
+ * Wrapper component to pass to the props the glpi object
+ * @param { component } WrappedComponent - Component to wrap 
  */
 const withGLPI = (WrappedComponent) => {
   class GLPIClient extends PureComponent {
