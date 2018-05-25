@@ -4,6 +4,10 @@ describe('configureDisplay', () => {
   beforeEach(() => {
     localStorage.removeItem('display')
   })
+  
+  afterEach(() => {
+    localStorage.removeItem('display')
+  })
 
   it('should get the default "display"', () => {
     const defaultValues = {
