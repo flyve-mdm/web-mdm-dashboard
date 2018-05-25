@@ -1,6 +1,6 @@
-import history from './history'
-import glpi from './glpiApi'
-import publicURL from './publicURL'
+import history from '../history'
+import glpi from '../glpiApi'
+import publicURL from '../publicURL'
 
 export default () => {
     localStorage.removeItem('currentUser')
