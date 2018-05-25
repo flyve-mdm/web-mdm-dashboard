@@ -16,4 +16,8 @@ describe('authtype', () => {
   it('should return "other"', () => {
     expect(authtype(4)).toEqual('other')
   })
+
+  it('should return "cas"', () => {
+    expect(authtype(5)).toEqual('cas')
+  })
 })
