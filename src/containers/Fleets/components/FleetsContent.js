@@ -28,6 +28,7 @@ class FleetsContent extends PureComponent {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
+            itemType: this.props.itemType,
             selectedItems: [],
             isLoading: false,
             notManaged: false,
@@ -134,7 +135,7 @@ class FleetsContent extends PureComponent {
                                 link: 'and',
                                 field: 9,
                                 searchtype: 'equals',
-                                value: itemtype.PluginFlyvemdmFleet
+                                value: this.state.itemType
                             },
                             {
                                 link: 'and',
@@ -158,7 +159,7 @@ class FleetsContent extends PureComponent {
                                 link: 'and',
                                 field: 9,
                                 searchtype: 'equals',
-                                value: itemtype.PluginFlyvemdmFleet
+                                value: this.state.itemType
                             },
                             {
                                 link: 'and',
@@ -178,7 +179,7 @@ class FleetsContent extends PureComponent {
                 tasks.data.forEach((task, index) => {
 
                     let taskDeploy = {
-                        itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                        itemtype_applied: this.state.itemType,
                         items_id_applied: task['PluginFlyvemdmTask.items_id_applied'],
                         plugin_flyvemdm_policies_id: task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id'],
                         value: task['PluginFlyvemdmTask.value']
@@ -340,7 +341,7 @@ class FleetsContent extends PureComponent {
                 delete tasks[policy['PluginFlyvemdmPolicy.id']]
 
                 let addPolicy = {
-                    itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                    itemtype_applied: this.state.itemType,
                     items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                     plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                     value: policy['PluginFlyvemdmPolicy.recommended_value']
@@ -370,7 +371,7 @@ class FleetsContent extends PureComponent {
                     break
                 default:
                     removePolicy = {
-                        itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                        itemtype_applied: this.state.itemType,
                         items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: policy['PluginFlyvemdmPolicy.default_value']
@@ -404,7 +405,7 @@ class FleetsContent extends PureComponent {
                     break
                 case 'deployapp':
                     newDeploy = {
-                        itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                        itemtype_applied: this.state.itemType,
                         items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: {remove_on_delete:1},
@@ -428,7 +429,7 @@ class FleetsContent extends PureComponent {
                 case 'removeapp':
                 case 'removefile':
                     newDeploy = {
-                        itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                        itemtype_applied: this.state.itemType,
                         items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: value
@@ -449,7 +450,7 @@ class FleetsContent extends PureComponent {
                     break
                 case 'deployfile':
                     newDeploy = {
-                        itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                        itemtype_applied: this.state.itemType,
                         items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: { destination: "%DOCUMENTS%", remove_on_delete: 1 },
@@ -547,7 +548,7 @@ class FleetsContent extends PureComponent {
             }
 
             let removePolicy = {
-                itemtype_applied: itemtype.PluginFlyvemdmFleet,
+                itemtype_applied: this.state.itemType,
                 items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
                 plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
                 value: task['value']
