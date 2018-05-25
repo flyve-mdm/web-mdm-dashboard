@@ -32,4 +32,8 @@ describe('authtype', () => {
   it('should return "cookie"', () => {
     expect(authtype(8)).toEqual('cookie')
   })
+
+  it('should return "not_yet_authenticated"', () => {
+    expect(authtype(0)).toEqual('not_yet_authenticated')
+  })
 })
