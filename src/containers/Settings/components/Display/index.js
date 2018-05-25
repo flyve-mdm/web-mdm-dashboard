@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import animations from '../../../../shared/animations/index'
+import animationsWinJs from '../../../../shared/animationsWinJs'
 import { changeLanguage } from '../../../../store/i18n/actions'
 import { I18n } from 'react-i18nify'
 import ContentPane from '../../../../components/ContentPane'
@@ -44,7 +44,7 @@ class Display extends PureComponent {
 
     componentDidUpdate  (){
         localStorage.setItem('display', JSON.stringify(this.state))
-        animations(this.state.animations)
+        animationsWinJs(this.state.animations)
     }
 
     render () {
