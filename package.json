@@ -62,7 +62,7 @@
     "@sonarwhal/rule-html-checker": "^4.0.0",
     "@sonarwhal/rule-http-cache": "^3.0.3",
     "@sonarwhal/rule-http-compression": "^4.0.1",
-    "autoprefixer": "8.5.0",
+    "autoprefixer": "8.5.1",
     "babel-core": "6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^23.0.0",
