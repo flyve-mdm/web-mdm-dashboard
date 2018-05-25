@@ -20,4 +20,8 @@ describe('authtype', () => {
   it('should return "cas"', () => {
     expect(authtype(5)).toEqual('cas')
   })
+
+  it('should return "certificate_authentication"', () => {
+    expect(authtype(6)).toEqual('certificate_authentication')
+  })
 })
