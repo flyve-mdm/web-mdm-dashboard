@@ -10,4 +10,9 @@ describe('getMode', () => {
     window.innerWidth = 772
     expect(getMode()).toEqual('medium')
   })
+
+  it('should return "small"', () => {
+    window.innerWidth = 360
+    expect(getMode()).toEqual('small')
+  })
 })
