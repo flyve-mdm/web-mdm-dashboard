@@ -219,6 +219,9 @@
       "last_modification": "Last modification",
       "technician": "Technician in charge of the software"
     },
+    "policies": {
+      "title": "Policies"
+    },
     "system_report": {
       "title": "System Report",
       "request_inventory": "Request inventory"
