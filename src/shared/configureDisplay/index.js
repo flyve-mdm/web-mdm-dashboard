@@ -15,4 +15,5 @@ export default () => {
     if (currentDisplay !== newtDisplay) {
         localStorage.setItem('display', JSON.stringify(newtDisplay))    
     }
+    return(newtDisplay)
 }
