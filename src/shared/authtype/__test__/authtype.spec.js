@@ -24,4 +24,8 @@ describe('authtype', () => {
   it('should return "certificate_authentication"', () => {
     expect(authtype(6)).toEqual('certificate_authentication')
   })
+
+  it('should return "api"', () => {
+    expect(authtype(7)).toEqual('api')
+  })
 })
