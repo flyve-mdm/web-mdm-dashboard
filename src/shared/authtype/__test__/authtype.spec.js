@@ -8,4 +8,8 @@ describe('authtype', () => {
   it('should return "mail_server"', () => {
     expect(authtype(2)).toEqual('mail_server')
   })
+
+  it('should return "ldap_directory"', () => {
+    expect(authtype(3)).toEqual('ldap_directory')
+  })
 })
