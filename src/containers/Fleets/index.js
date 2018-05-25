@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
+import itemtype from '../../shared/itemtype'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -83,7 +84,8 @@ class Fleets extends PureComponent {
             setNotification: this.props.actions.setNotification,
             history: this.props.history,
             glpi: this.props.glpi,
-            handleMessage: this.props.handleMessage
+            handleMessage: this.props.handleMessage,
+            itemType: itemtype.PluginFlyvemdmFleet
         }
     }
 
