@@ -96,6 +96,12 @@ export default class DevicesContent extends PureComponent {
                             />
 
                         </ReactWinJS.Pivot.Item>
+                        <ReactWinJS.Pivot.Item key="policies" header={I18n.t('devices.policies.title')}>
+
+                            <React.Fragment>
+                            </React.Fragment>
+
+                        </ReactWinJS.Pivot.Item>
                         <ReactWinJS.Pivot.Item key="geolocation" header={I18n.t('devices.geolocation.title')}>
                             <Geolocation 
                                 id={this.state.id}
