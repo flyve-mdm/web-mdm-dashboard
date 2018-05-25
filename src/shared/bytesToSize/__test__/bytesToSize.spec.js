@@ -16,4 +16,8 @@ describe('bytesToSize', () => {
   it('should return "1 GB"', () => {
     expect(bytesToSize(1073741824)).toEqual('1 GB')
   })
+
+  it('should return "1 TB"', () => {
+    expect(bytesToSize(1099511627776)).toEqual('1 TB')
+  })
 })
