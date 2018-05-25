@@ -44,6 +44,7 @@ class FleetsContent extends PureComponent {
             },
             devices__length: 0
         }
+        console.log(this.props.itemType)
     }
 
     componentDidMount = () => {
@@ -869,29 +870,36 @@ class FleetsContent extends PureComponent {
                     <div className="fleets" style={{ display: 'flex', flexDirection: 'column', height: '100%'}}>
                         <div style={{ display: '-moz-flex', flexDirection: 'row' }}>
                             <div className="content-header">
-                                <h1 className="content-header__title">
-                                    <input
-                                        type="text"
-                                        className="win-textbox"
-                                        placeholder={I18n.t('fleets.input_name')}
-                                        name="fleetName"
-                                        onChange={this.handleChangeInput}
-                                        value={this.state.input}
-                                    />
-                                </h1>
-                                <div className="devices__length" onClick={this.goToList}>
-                                    <div>
-                                        {this.state.devices__length} 
-                                    </div>
-                                    <span className="deviceIcon" />
-                                </div>
+                                {
+                                    this.state.itemType === itemtype.PluginFlyvemdmFleet ?
+                                    (
+                                        <React.Fragment>
+                                            <h1 className="content-header__title">
+                                                <input
+                                                    type="text"
+                                                    className="win-textbox"
+                                                    placeholder={I18n.t('fleets.input_name')}
+                                                    name="fleetName"
+                                                    onChange={this.handleChangeInput}
+                                                    value={this.state.input}
+                                                />
+                                            </h1>
+                                            <div className="devices__length" onClick={this.goToList}>
+                                                <div>
+                                                    {this.state.devices__length}
+                                                </div>
+                                                <span className="deviceIcon" />
+                                            </div>
+                                        </React.Fragment>
+                                    ) : ''
+                                }
                                 <div className="item-info">
                                     <span
                                         className="saveIcon"
                                         onClick={this.handleSaveFleet}
                                     />
                                     {
-                                        this.props.selectedItems.length !== 0 ? 
+                                        this.props.selectedItems.length !== 0 && this.state.itemType === itemtype.PluginFlyvemdmFleet ? 
                                         (   
                                             <React.Fragment>
                                                 <span
