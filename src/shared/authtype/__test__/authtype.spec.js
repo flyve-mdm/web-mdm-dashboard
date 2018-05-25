@@ -28,4 +28,8 @@ describe('authtype', () => {
   it('should return "api"', () => {
     expect(authtype(7)).toEqual('api')
   })
+
+  it('should return "cookie"', () => {
+    expect(authtype(8)).toEqual('cookie')
+  })
 })
