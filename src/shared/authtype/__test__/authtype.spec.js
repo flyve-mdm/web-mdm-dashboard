@@ -12,4 +12,8 @@ describe('authtype', () => {
   it('should return "ldap_directory"', () => {
     expect(authtype(3)).toEqual('ldap_directory')
   })
+
+  it('should return "other"', () => {
+    expect(authtype(4)).toEqual('other')
+  })
 })
