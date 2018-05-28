@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderBreadcrumb renders HeaderBreadcrumb 1`] = `
+<header
+  className="header-block"
+>
+  <div
+    className="header-icon"
+  >
+    <span
+      className="burgerIcon"
+      onClick={[Function]}
+    />
+  </div>
+  <nav
+    className="header-breadcrumb"
+  >
+    <span>
+      <a
+        href="/app"
+        onClick={[Function]}
+      >
+        dashboard
+      </a>
+    </span>
+    <span
+      className="header-breadcrumb-separator"
+    >
+      /
+    </span>
+    <span>
+      <a
+        href="/app/devices"
+        onClick={[Function]}
+      >
+        Devices
+      </a>
+    </span>
+    <span
+      className="header-breadcrumb-separator"
+    >
+      /
+    </span>
+    <span>
+      <a
+        href="/app/devices/309"
+        onClick={[Function]}
+      >
+        309
+      </a>
+    </span>
+  </nav>
+</header>
+`;
