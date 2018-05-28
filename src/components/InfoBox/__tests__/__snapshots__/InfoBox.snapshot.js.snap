@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InfoBox renders InfoBox 1`] = `
+<a
+  href="test/"
+  onClick={[Function]}
+>
+  <div
+    className="info-box"
+  >
+    <span
+      className="content-box"
+    >
+      3
+    </span>
+    <span
+      className="icon-box filesIcon"
+    />
+    <span
+      className="title-box"
+    >
+      TEST
+    </span>
+  </div>
+</a>
+`;
