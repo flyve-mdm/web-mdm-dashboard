@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select renders Select 1`] = `
+<div
+  className="froms__col"
+>
+  <p>
+    test
+  </p>
+  <select
+    name="test"
+    onChange={[Function]}
+    required={true}
+    value="test"
+  >
+    <option>
+      ---
+    </option>
+    <option
+      value={1234}
+    >
+      test
+    </option>
+    <option
+      value={5678}
+    >
+      test2
+    </option>
+  </select>
+</div>
+`;
