@@ -39,7 +39,7 @@ class DatePicker extends PureComponent {
                 <p>{this.props.label}</p>
 
                 <div className="win-disposable win-datepicker">
-                    <select className="win-datepicker-month win-order0" name="month" value={this.state.month} onChange={this.change}>
+                    <select required={this.props.required} className="win-datepicker-month win-order0" name="month" value={this.state.month} onChange={this.change}>
                         <option>
                             ---
                         </option>
@@ -65,6 +65,10 @@ class DatePicker extends PureComponent {
     }
 }
 
+DatePicker.defaultProps = {
+    required: false 
+}
+
 DatePicker.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.oneOfType([
@@ -72,7 +76,8 @@ DatePicker.propTypes = {
         PropTypes.number
     ]).isRequired,
     value: PropTypes.instanceOf(Date),
-    function: PropTypes.func.isRequired
+    function: PropTypes.func.isRequired,
+    required: PropTypes.bool
 }
 
 export default DatePicker
