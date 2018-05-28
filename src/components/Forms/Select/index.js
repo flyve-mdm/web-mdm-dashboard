@@ -127,7 +127,12 @@ class Select extends PureComponent {
         return (
             <div className="froms__col">
                 <p>{this.props.label}</p>
-                <select name={this.props.name} value={this.props.value} onChange={this.change}>
+                <select 
+                    name={this.props.name} 
+                    value={this.props.value} 
+                    onChange={this.change}
+                    required={this.props.required}
+                >
                         <option>
                             ---
                         </option>
@@ -147,7 +152,8 @@ class Select extends PureComponent {
 }
 
 Select.defaultProps = {
-    options: []
+    options: [],
+    required: false
 }
 
 Select.propTypes = {
@@ -160,7 +166,8 @@ Select.propTypes = {
     options: PropTypes.array,
     function: PropTypes.func,
     glpi: PropTypes.object,
-    request: PropTypes.object
+    request: PropTypes.object,
+    required: PropTypes.bool
 }
 
 export default Select
