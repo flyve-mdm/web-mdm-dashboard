@@ -102,7 +102,7 @@ IconItemList.propTypes = {
     size: PropTypes.number.isRequired,
     backgroundColor: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(["file", "base64", "localFile"]).isRequired,
+    type: PropTypes.oneOf(["file", "base64"]).isRequired,
     isMin: PropTypes.bool,
     imgClick: PropTypes.func,
     imgClass: PropTypes.string

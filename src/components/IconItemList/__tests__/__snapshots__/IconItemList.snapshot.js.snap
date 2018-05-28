@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconItemList renders IconItemList 1`] = `
+<div
+  className="list-pane__picture"
+  style={
+    Object {
+      "MozBorderRadius": 100,
+      "WebkitBorderRadius": 100,
+      "backgroundColor": "#e6e6e6",
+      "backgroundSize": "cover",
+      "borderRadius": 100,
+      "display": "inline-block",
+      "height": 100,
+      "width": 100,
+    }
+  }
+>
+  <div
+    className={undefined}
+  >
+    <img
+      alt=""
+      onClick={undefined}
+      src="profile.png"
+      style={
+        Object {
+          "MozBorderRadius": 100,
+          "WebkitBorderRadius": 100,
+          "backgroundColor": "#e6e6e6",
+          "backgroundSize": "cover",
+          "borderRadius": 100,
+          "display": "inline-block",
+          "height": 100,
+          "width": 100,
+        }
+      }
+    />
+  </div>
+</div>
+`;
