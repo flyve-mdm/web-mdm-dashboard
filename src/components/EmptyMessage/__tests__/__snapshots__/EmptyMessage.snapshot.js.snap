@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmptyMessage renders EmptyMessage 1`] = `
+<div
+  className="center-block-content"
+>
+  <h1
+    className="empty-message"
+  >
+    no_selection
+  </h1>
+</div>
+`;
