@@ -24,8 +24,6 @@ export default class ApplicationsAdd extends PureComponent {
     onFilesChange = (files) => {
         this.setState({
             files
-        }, () => {
-            //   console.log(this.state.files)
         })
     }
 

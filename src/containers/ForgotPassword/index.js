@@ -56,7 +56,6 @@ class ForgotPassword extends PureComponent {
                         message: I18n.t('notifications.request_sent')
                     }))
                 } catch (error) {
-                    console.log(error)
                     this.setState({
                         isLoading: false
                     })
