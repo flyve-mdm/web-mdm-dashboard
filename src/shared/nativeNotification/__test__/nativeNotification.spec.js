@@ -1,5 +1,4 @@
 import nativeNotification from '../index.js'
-import publicURL from '../../publicURL'
 
 describe('nativeNotification', () => {
   beforeEach(() => {
