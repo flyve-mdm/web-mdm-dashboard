@@ -1,6 +1,4 @@
-import publicURL from '../publicURL'
-
-export default function (title, body, icon = `${publicURL}/images/dashboard.png`) {
+export default function (title, body, icon = require('../../assets/images/logo2.png')) {
     let newNotification = null
     if (Notification && Notification.permission !== "denied") {
         Notification.requestPermission(permission => {
