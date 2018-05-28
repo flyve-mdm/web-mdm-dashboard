@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Confirmation from '../../Confirmation'
 import ErrorValidation from '../../ErrorValidation'
 import { I18n } from "react-i18nify"
-import TextArea from "../TextArea";
 
 class Input extends PureComponent {
 
@@ -70,7 +69,7 @@ class Input extends PureComponent {
                 <input
                     type={this.props.type}
                     className={this.state.className}
-                    name={this.props.name}
+                    name={`${this.props.type}-${this.props.name}`}
                     value={this.props.value}
                     placeholder={this.props.placeholder}
                     onChange={this.change}
@@ -88,7 +87,7 @@ class Input extends PureComponent {
     }
 }
 
-TextArea.defaultProps = {
+Input.defaultProps = {
     label: '',
     value: '',
     type: 'text',
@@ -102,6 +101,7 @@ Input.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
+    email: PropTypes.string,
     value: PropTypes.string,
     placeholder: PropTypes.string,
     function: PropTypes.func,

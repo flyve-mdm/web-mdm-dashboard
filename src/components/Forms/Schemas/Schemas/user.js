@@ -263,10 +263,10 @@ export default function ({state, changeState, changeEmail, deleteEmail, changeSe
         emailsInformation = [
             ...emailsInformation,
             [{
-                index,
+                name: index,
                 label: `${I18n.t('commons.email')} ${index + 1}`,
                 type: "email",
-                email: state.emails[index],
+                value: state.emails[index].email,
                 placeholder: null,
                 function: changeEmail,
                 disabled: false,

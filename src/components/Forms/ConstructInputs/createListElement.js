@@ -3,7 +3,6 @@ import Select from '../Select'
 import DatePicker from '../DatePicker'
 import TextArea from '../TextArea'
 import Input from '../Input'
-import InputEmail from '../InputEmail'
 
 const createListElement = ({icon, elements, index}) => {
   let style = icon ? { marginLeft: 30, overflow: 'hidden' } : { overflow: 'hidden' }
@@ -46,18 +45,6 @@ const createListElement = ({icon, elements, index}) => {
                           style={element.style}
                           delete={element.delete}
                           key={element.name}/>
-                      )
-                  } else if (element.type === 'email') {
-                      renderElement = (
-                          <InputEmail
-                          index={element.index}
-                          label={element.label}
-                          email={element.email}
-                          function={element.function}
-                          disabled={element.disabled}
-                          style={element.style}
-                          delete={element.delete}                                
-                          key={`email${element.index}`}/>
                       )
                   } else {
                       renderElement = (
