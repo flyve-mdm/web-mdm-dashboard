@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextArea renders TextArea 1`] = `
+<div
+  className="froms__col"
+>
+  <p>
+    test
+  </p>
+  <textarea
+    className="win-textarea"
+    disabled={undefined}
+    name="test"
+    onChange={[Function]}
+    placeholder="test"
+    required={true}
+    rows={8}
+    style={
+      Object {
+        "height": "40px",
+      }
+    }
+    value="test"
+  />
+</div>
+`;
