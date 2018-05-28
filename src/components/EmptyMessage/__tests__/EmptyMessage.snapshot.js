@@ -1,12 +1,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import ValidateAccount from "../index"
+import EmptyMessage from "../index"
 
-describe('ValidateAccount', () => {
-    test('renders ValidateAccount', () => {
+describe('EmptyMessage', () => {
+    test('renders EmptyMessage', () => {
         const component = renderer.create(
-            <ValidateAccount />
+            <EmptyMessage />
         )
         let tree = component.toJSON()
         expect(tree).toMatchSnapshot()
