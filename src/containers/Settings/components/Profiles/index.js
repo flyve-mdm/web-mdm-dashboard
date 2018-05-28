@@ -243,7 +243,7 @@ class Profiles extends PureComponent {
                 return (e) => {
                 this.setState({
                     imageProfile: e.target.result,
-                    typeImageProfile: 'localFile'
+                    typeImageProfile: 'file'
                 })
             }})(file)
 
