@@ -65,6 +65,10 @@ class ErrorValidation extends PureComponent {
     }
 }
 
+ErrorValidation.defaultProps = {
+    errors: []
+}
+
 ErrorValidation.propTypes = {
     errors: PropTypes.array
 }
