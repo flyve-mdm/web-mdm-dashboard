@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilesUpload renders FilesUpload 1`] = `
+<div
+  className="file-upload"
+>
+  <input
+    accept=""
+    multiple={true}
+    name="file"
+    onChange={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="file"
+  />
+  <div
+    className="files-dropzone"
+    onClick={[Function]}
+    onDragEnter={[Function]}
+    onDragLeave={[Function]}
+    onDragOver={[Function]}
+    onDrop={[Function]}
+    style={undefined}
+  >
+    <div />
+  </div>
+</div>
+`;
