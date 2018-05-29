@@ -7,10 +7,12 @@ describe('IconItemList', () => {
         mount(<IconItemList image="profile.png"/>)
         expect(IconItemList.prototype.componentDidMount.calledOnce).toBeTruthy()
     })
+
     it('should get a local image', () => {
         const wrapper = mount(<IconItemList image="profile.png"/>)
         expect(wrapper.find('img').prop('src')).toEqual('profile.png')
     })
+    
     it('should mount a base64 image', () => {
         const wrapper = mount(
             <IconItemList 
