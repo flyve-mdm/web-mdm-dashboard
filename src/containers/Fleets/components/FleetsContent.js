@@ -7,14 +7,17 @@ import Confirmation from '../../../components/Confirmation'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
+import getID from '../../../shared/getID'
 
 class FleetsContent extends PureComponent {
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (prevState.selectedItems && (prevState.selectedItems !== nextProps.selectedItems)) {
+        if (prevState.itemID !== getID(nextProps.history.location.pathname)) {
+
             return {
                 ...prevState,
                 isLoading: true,
+                itemID: Number(getID(nextProps.history.location.pathname)),
                 input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Feet',
                 notManaged: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]["PluginFlyvemdmFleet.is_default"] === 1 ? true : false : false,
                 selectedItems: nextProps.selectedItems
@@ -28,6 +31,7 @@ class FleetsContent extends PureComponent {
         super(props)
         this.state = {
             layout: { type: WinJS.UI.ListLayout },
+            itemID: undefined,
             itemType: this.props.itemType,
             selectedItems: [],
             isLoading: false,
@@ -44,7 +48,6 @@ class FleetsContent extends PureComponent {
             },
             devices__length: 0
         }
-        console.log(this.props.itemType)
     }
 
     componentDidMount = () => {
@@ -56,7 +59,7 @@ class FleetsContent extends PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState, prevContext) {
-        if (prevState.selectedItems && (prevState.selectedItems !== this.state.selectedItems)) {
+        if (prevState.itemID !== this.state.itemID) {
             if (!this.state.notManaged) {
                 this.requestAllData()
             } else {
@@ -119,7 +122,7 @@ class FleetsContent extends PureComponent {
         let tasks = []
         let tasksNew= {} 
         
-        if (this.props.selectedItems.length > 0) {
+        if (Number(this.state.itemID)) {
         /*
          * Get Tasks 
          * */
@@ -142,7 +145,7 @@ class FleetsContent extends PureComponent {
                                 link: 'and',
                                 field: 10,
                                 searchtype: 'equals',
-                                value: this.props.selectedItems[0]['PluginFlyvemdmFleet.id']
+                                value: this.state.itemID
                             }
                         ]
                 })
@@ -166,7 +169,7 @@ class FleetsContent extends PureComponent {
                                 link: 'and',
                                 field: 10,
                                 searchtype: 'equals',
-                                value: this.props.selectedItems[0]['PluginFlyvemdmFleet.id']
+                                value: this.state.itemID
                             }
                         ]
                 })
@@ -343,7 +346,7 @@ class FleetsContent extends PureComponent {
 
                 let addPolicy = {
                     itemtype_applied: this.state.itemType,
-                    items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                    items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
                     plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                     value: policy['PluginFlyvemdmPolicy.recommended_value']
                 }
@@ -373,7 +376,7 @@ class FleetsContent extends PureComponent {
                 default:
                     removePolicy = {
                         itemtype_applied: this.state.itemType,
-                        items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: policy['PluginFlyvemdmPolicy.default_value']
                     }
@@ -407,7 +410,7 @@ class FleetsContent extends PureComponent {
                 case 'deployapp':
                     newDeploy = {
                         itemtype_applied: this.state.itemType,
-                        items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: {remove_on_delete:1},
                         items_id: Number(value),
@@ -431,7 +434,7 @@ class FleetsContent extends PureComponent {
                 case 'removefile':
                     newDeploy = {
                         itemtype_applied: this.state.itemType,
-                        items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: value
                     }
@@ -452,7 +455,7 @@ class FleetsContent extends PureComponent {
                 case 'deployfile':
                     newDeploy = {
                         itemtype_applied: this.state.itemType,
-                        items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                        items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
                         plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
                         value: { destination: "%DOCUMENTS%", remove_on_delete: 1 },
                         items_id: Number(value),
@@ -550,7 +553,7 @@ class FleetsContent extends PureComponent {
 
             let removePolicy = {
                 itemtype_applied: this.state.itemType,
-                items_id_applied: this.props.selectedItems.length === 1 ? this.props.selectedItems[0]['PluginFlyvemdmFleet.id'] : null,
+                items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
                 plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
                 value: task['value']
             }
@@ -583,16 +586,21 @@ class FleetsContent extends PureComponent {
     }
 
     handleSaveFleet = async () => {
-        if(this.props.selectedItems.length === 1) {
-            if (!this.state.notManaged) {
-                this.handleUpdateFleet()
+        if(this.state.itemType === itemtype.PluginFlyvemdmFleet) {
+            if (this.props.selectedItems.length === 1) {
+                if (!this.state.notManaged) {
+                    this.handleUpdateFleet()
+                } else {
+                    this.handleUpdateFleetName()
+                }
+
             } else {
-                this.handleUpdateFleetName()
+                this.handleCreateFleet()
             }
-            
         } else {
-            this.handleCreateFleet()
+            this.handleUpdateFleet()
         }
+        
     }
 
     handleUpdateFleetName = async () => {
@@ -604,7 +612,7 @@ class FleetsContent extends PureComponent {
                 name: this.state.input
             }
 
-            await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFleet, id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'], input: fleetToUpdate })
+            await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFleet, id: this.state.itemID, input: fleetToUpdate })
             this.props.setNotification({
                 title: I18n.t('commons.success'),
                 body: I18n.t('notifications.fleet_successfully_updated'),
@@ -712,9 +720,9 @@ class FleetsContent extends PureComponent {
             }
         })
         try {
-
-            await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFleet, id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id'], input: fleetToUpdate })
-            
+            if (this.state.itemType === itemtype.PluginFlyvemdmFleet) {
+                await this.props.glpi.updateItem({ itemtype: itemtype.PluginFlyvemdmFleet, id: this.state.itemID, input: fleetToUpdate })
+            }
             if (itemsToDelete.length > 0) {
                 await this.props.glpi.deleteItem({ itemtype: itemtype.PluginFlyvemdmTask, input: itemsToDelete })
             }
@@ -808,7 +816,7 @@ class FleetsContent extends PureComponent {
             try {
                 await this.props.glpi.deleteItem({
                     itemtype: itemtype.PluginFlyvemdmFleet,
-                    id: this.props.selectedItems[0]['PluginFlyvemdmFleet.id']
+                    id: this.state.itemID
                 })
 
                 this.setState({
@@ -849,7 +857,7 @@ class FleetsContent extends PureComponent {
     }
 
     goToList = () => {
-        this.props.history.push(`${publicURL}/app/fleets/${this.props.selectedItems[0]['PluginFlyvemdmFleet.id']}/list`)
+        this.props.history.push(`${publicURL}/app/fleets/${this.state.itemID}/list`)
     }
 
     render() {
