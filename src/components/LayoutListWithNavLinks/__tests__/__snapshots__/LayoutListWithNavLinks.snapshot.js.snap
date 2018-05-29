@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LayoutListWithNavLinks renders LayoutListWithNavLinks 1`] = `
+<div
+  className="flex-block flex-block--with-scroll flex-block--with-content-pane"
+>
+  <nav
+    className="flex-block__list navlinks"
+    style={Object {}}
+  >
+    <ul>
+      
+      <li>
+        <a
+          aria-current={false}
+          className={undefined}
+          href="test//test"
+          onClick={[Function]}
+          style={undefined}
+        >
+          test 2
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div
+    style={
+      Object {
+        "width": "calc(100% - 320px)",
+      }
+    }
+  >
+    <div />
+  </div>
+</div>
+`;
