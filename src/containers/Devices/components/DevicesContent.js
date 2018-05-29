@@ -6,6 +6,8 @@ import { DangerZone, Main, SystemReport, Applications, Geolocation } from './Sec
 import { I18n } from 'react-i18nify'
 import getID from '../../../shared/getID'
 import Confirmation from '../../../components/Confirmation'
+import FleetsContent from '../../Fleets/components/FleetsContent'
+import itemtype from '../../../shared/itemtype'
 
 export default class DevicesContent extends PureComponent {
 
@@ -98,8 +100,7 @@ export default class DevicesContent extends PureComponent {
                         </ReactWinJS.Pivot.Item>
                         <ReactWinJS.Pivot.Item key="policies" header={I18n.t('devices.policies.title')}>
 
-                            <React.Fragment>
-                            </React.Fragment>
+                            <FleetsContent {...this.props} itemType={itemtype.PluginFlyvemdmAgent} selectedItems={this.props.selectedItems}/>
 
                         </ReactWinJS.Pivot.Item>
                         <ReactWinJS.Pivot.Item key="geolocation" header={I18n.t('devices.geolocation.title')}>
