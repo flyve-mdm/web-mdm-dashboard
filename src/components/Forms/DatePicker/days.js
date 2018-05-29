@@ -16,7 +16,7 @@ export default (year, month) => {
         December: 31
     }
 
-    if(year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)){
+    if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
         daysList.February = 29
     }
     
