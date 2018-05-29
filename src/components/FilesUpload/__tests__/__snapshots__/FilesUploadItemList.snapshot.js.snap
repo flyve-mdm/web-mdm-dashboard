@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilesUploadItemList renders FilesUploadItemList 1`] = `
+<div
+  className="files-list"
+>
+  <div
+    className="files-list__content"
+  >
+    <div
+      className="files-list__item"
+    >
+      <div
+        className="icon files-list__item-icon"
+      >
+        <span
+          className="documentIcon"
+        />
+      </div>
+      <div
+        className="files-list__item-content-primary"
+      >
+        <div
+          className="files-list__content-text-primary"
+        >
+          test
+        </div>
+        <div
+          className="files-list__content-text-secondary"
+        >
+          png
+        </div>
+        <div
+          className="files-list__content-text-secondary"
+        >
+          10 kb
+        </div>
+      </div>
+      <div
+        className="files-list__item-content-secondary"
+      >
+        <div
+          className="icon files-list__item-icon"
+        >
+          <span
+            className="deleteIcon"
+            onClick={[Function]}
+            style={
+              Object {
+                "fontSize": "18px",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

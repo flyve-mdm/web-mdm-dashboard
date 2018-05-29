@@ -28,7 +28,8 @@ class FilesUploadItemList extends PureComponent {
 }
 
 FilesUploadItemList.propTypes = {
-    fileData: PropTypes.object.isRequired
+    fileData: PropTypes.object.isRequired,
+    onRemove: PropTypes.func.isRequired
 }
 
 export default FilesUploadItemList
