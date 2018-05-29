@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-export default class FilesUploadItemList extends PureComponent {
+class FilesUploadItemList extends PureComponent {
     render() {
         return (
             <div className='files-list' >
@@ -25,3 +26,9 @@ export default class FilesUploadItemList extends PureComponent {
         )
     }
 }
+
+FilesUploadItemList.propTypes = {
+    fileData: PropTypes.object.isRequired
+}
+
+export default FilesUploadItemList
