@@ -6,10 +6,10 @@ const InfoBox = ({to, icon, count, name}) => {
     return (
         <Link to={to}>
             <div className="info-box">
+                <span className={'icon-box ' + icon} />
                 <span className="content-box">
                     {count}
                 </span>
-                <span className={'icon-box ' + icon} />
                 <span className="title-box">
                     { name.toUpperCase() }
                 </span>
