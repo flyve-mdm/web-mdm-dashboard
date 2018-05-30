@@ -11,9 +11,9 @@ class DatePicker extends PureComponent {
         super(props)
         const date = new Date (this.props.value)
         this.state = {
-            year: this.props.value ? date.getFullYear() : undefined,
-            month: this.props.value ? monthsList[date.getMonth()] : undefined,
-            day: this.props.value ? date.getDate() : undefined
+            year: this.props.value ? date.getFullYear() : null,
+            month: this.props.value ? monthsList[date.getMonth()] : null,
+            day: this.props.value ? date.getDate() : null
         }
     }
 
