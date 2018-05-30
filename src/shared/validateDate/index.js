@@ -4,7 +4,6 @@ export default (value, min, max) => {
         min.setHours(0)
         max.setHours(1)
         return (value.getTime() >= min && value.getTime() <= max)
-    } else {
-        return false
-    }
+    } 
+    return false
 }
