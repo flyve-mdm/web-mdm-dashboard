@@ -36,4 +36,8 @@ describe('authtype', () => {
   it('should return "not_yet_authenticated"', () => {
     expect(authtype(0)).toEqual('not_yet_authenticated')
   })
+
+  it('should return "not_available"', () => {
+    expect(authtype(-1)).toEqual('not_available')
+  })
 })
