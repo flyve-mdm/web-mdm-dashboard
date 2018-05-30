@@ -1,6 +1,10 @@
 import bytesToSize from '../index.js'
 
 describe('bytesToSize', () => {
+  it('should return "0 Bytes"', () => {
+    expect(bytesToSize(0)).toEqual('0 Bytes')
+  })
+  
   it('should return "1 Bytes"', () => {
     expect(bytesToSize(1)).toEqual('1 Bytes')
   })
