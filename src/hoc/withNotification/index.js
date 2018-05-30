@@ -39,38 +39,31 @@ const withNotification = WrappedComponent => {
 
         static getDerivedStateFromProps(nextProps, prevState) {
             if (nextProps.title !== prevState.title || nextProps.body !== prevState.body) {
-                const notification = validateNotifications()
-                if (notification.show || nextProps.type === "alert") {
-                    if (notification.type === "Toast") {
-                        return {
-                            show: true,
-                            type: nextProps.type,
-                            title: nextProps.title,
-                            body: nextProps.body,
-                        }
-                    } else {
-                        nativeNotification(nextProps.title, nextProps.body, nextProps.icon)
-                        return {
-                            ...prevState,
-                            show: false
-                        }
-                    }
-                }
-
-            } else {
                 return {
-                    ...prevState
+                    show: true,
+                    type: nextProps.type,
+                    title: nextProps.title,
+                    body: nextProps.body,
                 }
             }
+            return null
         }
 
         componentDidUpdate(prevProps, prevState, prevContext) {
             if (prevProps.title !== this.props.title || prevProps.body !== this.props.body) {
-                this.setState({
-                    timer: setTimeout(() => {
-                        this.hideNotification()
-                    }, 4000)
-                })
+                const notification = validateNotifications()
+                if ((notification.show || this.state.type === "alert") && this.state.show) {
+                    if (notification.type === "Native") {
+                        nativeNotification(this.state.title, this.state.body, this.state.icon)
+                    }
+                    this.setState({
+                        timer: setTimeout(() => {
+                            this.hideNotification()
+                        }, 4000)
+                    })
+                }
+
+                
             }
         }
 
@@ -79,7 +72,9 @@ const withNotification = WrappedComponent => {
                 document.getElementsByClassName('toast'), { top: '0px', left: '20px' }
             ).then(() => {
                 this.setState({
-                    show: false
+                    show: false,
+                    title: undefined,
+                    body: undefined
                 }, () => {
                     clearTimeout(this.state.timer)
                     this.props.actions.uiHideNotification()
@@ -89,8 +84,8 @@ const withNotification = WrappedComponent => {
 
         render() {
             let toast = null
-
-            if (this.state.show && this.props.show) {
+            const notification = validateNotifications()
+            if (this.state.show && notification.type === 'Toast') {
                 toast = (
                     <div className={`toast toast--${this.props.type}`}>
                         <span
