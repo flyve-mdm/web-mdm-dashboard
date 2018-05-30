@@ -125,9 +125,7 @@ jobs:
       
       - run: 
           name: "Deploy application"
-          command: |
-            source ci/scripts/deploy.sh
-            sonarwhal https://dev.flyve.org/dashboard/
+          command: source ci/scripts/deploy.sh
 
 workflows:
   version: 2
