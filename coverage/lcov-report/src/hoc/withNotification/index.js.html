@@ -27,7 +27,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/18</span>
+        <span class='fraction'>0/19</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -176,12 +176,7 @@
 <a name='L128'></a><a href='#L128'>128</a>
 <a name='L129'></a><a href='#L129'>129</a>
 <a name='L130'></a><a href='#L130'>130</a>
-<a name='L131'></a><a href='#L131'>131</a>
-<a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a>
-<a name='L134'></a><a href='#L134'>134</a>
-<a name='L135'></a><a href='#L135'>135</a>
-<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L131'></a><a href='#L131'>131</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -223,18 +218,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -245,13 +228,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -264,15 +252,17 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -357,38 +347,31 @@ const withNotification = <span class="cstat-no" title="statement not covered" ><
 &nbsp;
 <span class="fstat-no" title="function not covered" >        static </span>getDerivedStateFromProps(nextProps, prevState) {
 <span class="cstat-no" title="statement not covered" >            if (nextProps.title !== prevState.title || nextProps.body !== prevState.body) {</span>
-                const notification = <span class="cstat-no" title="statement not covered" >validateNotifications()</span>
-<span class="cstat-no" title="statement not covered" >                if (notification.show || nextProps.type === "alert") {</span>
-<span class="cstat-no" title="statement not covered" >                    if (notification.type === "Toast") {</span>
-<span class="cstat-no" title="statement not covered" >                        return {</span>
-                            show: true,
-                            type: nextProps.type,
-                            title: nextProps.title,
-                            body: nextProps.body,
-                        }
-                    } else {
-<span class="cstat-no" title="statement not covered" >                        nativeNotification(nextProps.title, nextProps.body, nextProps.icon)</span>
-<span class="cstat-no" title="statement not covered" >                        return {</span>
-                            ...prevState,
-                            show: false
-                        }
-                    }
-                }
-&nbsp;
-            } else {
 <span class="cstat-no" title="statement not covered" >                return {</span>
-                    ...prevState
+                    show: true,
+                    type: nextProps.type,
+                    title: nextProps.title,
+                    body: nextProps.body,
                 }
             }
+<span class="cstat-no" title="statement not covered" >            return null</span>
         }
 &nbsp;
 <span class="fstat-no" title="function not covered" >        componentDidUpdate(</span>prevProps, prevState, prevContext) {
 <span class="cstat-no" title="statement not covered" >            if (prevProps.title !== this.props.title || prevProps.body !== this.props.body) {</span>
-<span class="cstat-no" title="statement not covered" >                this.setState({</span>
-                    timer: setTimeout(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >                        this.hideNotification()</span>
-                    }, 4000)
-                })
+                const notification = <span class="cstat-no" title="statement not covered" >validateNotifications()</span>
+<span class="cstat-no" title="statement not covered" >                if ((notification.show || this.state.type === "alert") &amp;&amp; this.state.show) {</span>
+<span class="cstat-no" title="statement not covered" >                    if (notification.type === "Native") {</span>
+<span class="cstat-no" title="statement not covered" >                        nativeNotification(this.state.title, this.state.body, this.state.icon)</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    this.setState({</span>
+                        timer: setTimeout(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
+<span class="cstat-no" title="statement not covered" >                            this.hideNotification()</span>
+                        }, 4000)
+                    })
+                }
+&nbsp;
+                
             }
         }
 &nbsp;
@@ -397,7 +380,9 @@ const withNotification = <span class="cstat-no" title="statement not covered" ><
                 document.getElementsByClassName('toast'), { top: '0px', left: '20px' }
             ).then(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
 <span class="cstat-no" title="statement not covered" >                this.setState({</span>
-                    show: false
+                    show: false,
+                    title: undefined,
+                    body: undefined
                 }, <span class="fstat-no" title="function not covered" >() =&gt; </span>{
 <span class="cstat-no" title="statement not covered" >                    clearTimeout(this.state.timer)</span>
 <span class="cstat-no" title="statement not covered" >                    this.props.actions.uiHideNotification()</span>
@@ -407,8 +392,8 @@ const withNotification = <span class="cstat-no" title="statement not covered" ><
 &nbsp;
 <span class="fstat-no" title="function not covered" >        render() </span>{
             let toast = <span class="cstat-no" title="statement not covered" >null</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >            if (this.state.show &amp;&amp; this.props.show) {</span>
+            const notification = <span class="cstat-no" title="statement not covered" >validateNotifications()</span>
+<span class="cstat-no" title="statement not covered" >            if (this.state.show &amp;&amp; notification.type === 'Toast') {</span>
 <span class="cstat-no" title="statement not covered" >                toast = (</span>
                     &lt;div className={`toast toast--${this.props.type}`}&gt;
                         &lt;span
@@ -457,7 +442,7 @@ export default withNotification</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed May 30 2018 20:07:08 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed May 30 2018 22:25:46 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
