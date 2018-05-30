@@ -9,13 +9,13 @@ exports[`InfoBox renders InfoBox 1`] = `
     className="info-box"
   >
     <span
+      className="icon-box filesIcon"
+    />
+    <span
       className="content-box"
     >
       3
     </span>
-    <span
-      className="icon-box filesIcon"
-    />
     <span
       className="title-box"
     >
