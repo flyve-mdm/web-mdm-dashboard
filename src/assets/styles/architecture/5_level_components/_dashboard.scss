@@ -33,7 +33,12 @@ $chart-size: 310px;
         }
         
         .info-box {
-            display: inline-block;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            -webkit-order: 0;
+            order: 0;
             background: #E1E1E1;
             position: relative;
             width: $box-size;
@@ -42,26 +47,28 @@ $chart-size: 310px;
 
             @extend %box-shadow;
 
-            .title-box {
-                padding: 10px;
-                position: absolute;
-                bottom: 0;
-                left: 0;
+            .icon-box {
+                -webkit-order: 1;
+                order: 1;
+                margin: 10px 10px 0;
+                font-size: 32px;
+                text-align: right;
             }
             .content-box {
-                display: inline-block;
-                margin: 10px;
-                vertical-align: middle;
-                line-height: $box-size;
+                -webkit-order: 2;
+                order: 2;
+                margin: 0 10px;
                 font-size: 64px;
-                font-weight: 200
+                font-weight: 200;
+                line-height: 90%;
+                
             }
-            .icon-box {
-                display: inline-block;
-                float: right; 
+            .title-box {
+                -webkit-order: 3;
+                order: 3;
                 margin: 10px;
-                font-size: 32px
             }
+            
         }
     }
 
