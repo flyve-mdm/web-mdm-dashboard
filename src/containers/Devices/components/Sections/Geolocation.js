@@ -113,7 +113,6 @@ export default class Geolocation extends PureComponent {
         }
     }
 
-
     goToLocation = (selectedLocation) => this.setState({ selectedLocation })
 
     render() {

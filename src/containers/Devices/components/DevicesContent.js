@@ -100,7 +100,12 @@ export default class DevicesContent extends PureComponent {
                         </ReactWinJS.Pivot.Item>
                         <ReactWinJS.Pivot.Item key="policies" header={I18n.t('devices.policies.title')}>
 
-                            <FleetsContent {...this.props} itemType={itemtype.PluginFlyvemdmAgent} selectedItems={this.props.selectedItems}/>
+                            <FleetsContent 
+                                {...this.props} 
+                                itemType={itemtype.PluginFlyvemdmAgent} 
+                                selectedItems={this.props.selectedItems}
+                                update={this.state.selectedIndex === 3}
+                            />
 
                         </ReactWinJS.Pivot.Item>
                         <ReactWinJS.Pivot.Item key="geolocation" header={I18n.t('devices.geolocation.title')}>
@@ -109,7 +114,7 @@ export default class DevicesContent extends PureComponent {
                                 setNotification={this.props.setNotification}
                                 handleMessage={this.props.handleMessage}
                                 glpi={this.props.glpi}
-                                update={this.state.selectedIndex === 3}
+                                update={this.state.selectedIndex === 4}
                             />
                         </ReactWinJS.Pivot.Item>
                         <ReactWinJS.Pivot.Item key="dangerZone" header={I18n.t('devices.danger_zone.title')}>
@@ -124,7 +129,7 @@ export default class DevicesContent extends PureComponent {
                                 wipeDevice={this.wipeDevice}
                                 unenrollmentDevice={this.unenrollmentDevice}
                                 deleteDevice={this.deleteDevice}
-                                update={this.state.selectedIndex === 4}
+                                update={this.state.selectedIndex === 5}
                             />
 
                         </ReactWinJS.Pivot.Item>
