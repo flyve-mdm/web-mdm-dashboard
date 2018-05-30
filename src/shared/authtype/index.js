@@ -21,7 +21,7 @@ const authtype = id => {
         case 0:
             return I18n.t('authtype.not_yet_authenticated')
         default:
-            return ''
+            return I18n.t('commons.not_available')
     }
 }
 
