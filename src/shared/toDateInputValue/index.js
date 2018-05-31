@@ -26,6 +26,13 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module toDateInputValue */
+
+/**
+ * Get date next month
+ * @param {date} date current 
+ * @returns {date} next month
+ */
 export default (date) => {
     date = new Date(date)
     let month = (date.getMonth() + 1)

@@ -26,9 +26,17 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module setGlpiCookie */
+
+/** import dependencies */
 import glpi from '../glpiApi'
 import { setCookie } from '../cookies'
 
+/**
+ * Get cookie from Glpi
+ * @param {callback}
+ * @returns {object} glpi cookie name
+ */
 export default async (callback) => {
     const cookies = document.cookie.split(';')
     let glpiCookieName

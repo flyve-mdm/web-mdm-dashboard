@@ -26,6 +26,15 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module nativeNotification */
+
+/**
+ * Get one new native notification 
+ * @param {string} title message for notification
+ * @param {string} body message content for notification
+ * @param {string} icon for notification
+ * @returns {object} of native notification type
+ */
 export default function (title, body, icon = require('../../assets/images/logo2.png')) {
     let newNotification = null
     if (Notification && Notification.permission !== "denied") {

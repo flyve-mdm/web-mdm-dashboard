@@ -26,6 +26,9 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module publicURL */
+
+/** Get path without URL base */
 const path = () => {
   let location = document.createElement("a")
     location.href = process.env.PUBLIC_URL

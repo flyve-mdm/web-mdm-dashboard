@@ -26,15 +26,22 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module logout */
+
+/** import dependencies */
 import history from '../history'
 import glpi from '../glpiApi'
 import publicURL from '../publicURL'
 
+/**  Export fuction to logout user*/
 export default () => {
+    /** Remove current user and session token from local store*/
     localStorage.removeItem('currentUser')
     localStorage.removeItem('sessionToken')
+    /** if exists a session token kill session */
     if (glpi.sessionToken) {
         glpi.killSession()
     }
+    /** go to URL base */
     history.push(`${publicURL}/`)
 }

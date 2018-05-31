@@ -26,6 +26,12 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module validateNotification */
+
+/** 
+ * Validate notification type
+ * @returns {object} if the notification should be shown and type
+ */
 export default () => {
     let show = localStorage.getItem('showNotifications') ? (localStorage.getItem('showNotifications') === "true") : undefined
     let type = localStorage.getItem('notificationType')

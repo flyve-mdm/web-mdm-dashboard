@@ -26,8 +26,16 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module animations WinJS */
+
+/** Import dependencies */
 import { I18n } from 'react-i18nify'
 
+/**
+ * Replace a status code with string associated
+ * @param {int} id Status code authentication
+ * @returns {string} string associated with a staus code
+ */
 const authtype = id => {
     switch (id) {
         case 1:
@@ -53,5 +61,5 @@ const authtype = id => {
     }
 }
 
-
+/** Export authType animation */
 export default authtype

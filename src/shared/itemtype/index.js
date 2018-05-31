@@ -26,8 +26,12 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module itemtype */
+
+/** import dependencies */
 import { itemtype } from '@glpi-project/javascript-library-glpi'
 
+/** Add custom itemTypes and export */
 export default {
     ...itemtype,
     PluginFlyvemdmAgent: "PluginFlyvemdmAgent",
