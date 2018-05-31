@@ -42,16 +42,21 @@ function mapDispatchToProps(dispatch) {
 /**
  * Wrapper component with the basic structure of the authentication pages 
  * (Flyve MDM logo in the header and a footer with a drop-down of languages)
- * @param { component } WrappedComponent - Component to wrap 
- * @param { object } stylesConfiguration - Config styles of wrapper div
+ * @param {component} WrappedComponent Component to wrap 
+ * @param {object} stylesConfiguration Config styles of wrapper div
+ * @return {component} The component with the authentication layout
  */
 const withAuthenticationLayout = (WrappedComponent, configStyles) => {
+    /** 
+     * Create authenticationLayout
+     * @param {object} props
+     */    
     const authenticationLayout = props => {
         const style = {
             textAlign: configStyles.centerContent ? 'center' : null,
             width: props.width
         }
-
+        /** Render component */   
         return (
             <div className="authentication" style={style} >
                 <section>

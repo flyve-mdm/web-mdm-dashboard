@@ -42,13 +42,15 @@ function mapStateToProps(state, props) {
 }
 
 /**
- * Translations HOC
- * @param {*} WrappedComponent -> React Component
+ * Wrapper component to add the translations
+ * @param {component} WrappedComponent React Component
+ * @return {component} The translated component
  */
 const withI18NTranslation = WrappedComponent => {
     class I18NTranslation extends PureComponent {
-        /**
-         * @param {*} i18nConvention -> String, e.g: 'pt_BR'
+        /** 
+         * Create I18NTranslation
+         * @param {object} props
          */
         constructor(props) {
             super(props)
@@ -56,7 +58,12 @@ const withI18NTranslation = WrappedComponent => {
                 [this.props.languageDefault]: source_file_translation
             })
         }
-        findI18NString = i18nConvention => {
+
+        /**
+         * Find translation
+         * @param {string} i18nConvention
+         */
+       findI18NString = i18nConvention => {
             let path = i18nConvention === this.props.languageDefault
                 ? `./i18n/source_file`
                 : `./i18n/translations/${i18nConvention}`
@@ -74,16 +81,22 @@ const withI18NTranslation = WrappedComponent => {
                 })
         }
 
-        componentDidUpdate(prevProps, prevState, prevContext) {
+        /**
+         * Execute findI18NString if it's necessary
+         * @param {object} prevProps
+         */
+        componentDidUpdate(prevProps) {
             if (this.props.languageCurrent !== prevProps.languageCurrent) {
                 this.findI18NString(this.props.languageCurrent)
             }
         }
 
+        /** Execute componentDidMount */
         componentDidMount() {
             this.findI18NString(this.props.languageCurrent)
         }
 
+        /** Render component */
         render() {
             return <WrappedComponent {...this.props} />
         }

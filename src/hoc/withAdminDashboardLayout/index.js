@@ -40,6 +40,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { logout } from '../../store/authentication/actions'
 
+/** timeout to contract the lateral menu */
 const TIMEOUT_CONTRACT = 150
 
 function mapDispatchToProps(dispatch) {
@@ -49,8 +50,17 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Wrapper component with the basic structure of the admin dashboard layout 
+ * @param {component} WrappedComponent Component to wrap 
+ * @return {component} The component with the admin dashboard layout
+ */
 const withAdminDashboardLayout = WrappedComponent => {
     class AdminDashboardLayout extends PureComponent {
+        /** 
+         * Create AdminDashboardLayout
+         * @param {object} props
+         */ 
         constructor(props) {
             super(props)
             this.state = {
@@ -65,6 +75,7 @@ const withAdminDashboardLayout = WrappedComponent => {
             animationsWinJs()
         }
 
+        /** Close current session */ 
         logout = async () => {
             const isOK = await Confirmation.isOK(this.contentDialog)
             if (isOK) {
@@ -72,6 +83,7 @@ const withAdminDashboardLayout = WrappedComponent => {
             }
         }
 
+        /** Change 'mode' according to the resolution of the screen */
         handleResize = () => {
             let prevMode = this.state.mode
             let nextMode = getMode()
@@ -81,6 +93,7 @@ const withAdminDashboardLayout = WrappedComponent => {
             }
         }
 
+        /** Configure 'baseURL' and the cookies of glpi */
         componentDidMount = async () => {
             const { cfg_glpi } = await glpi.getGlpiConfig()
             localStorage.setItem('baseURL', cfg_glpi.url_base)
@@ -94,14 +107,17 @@ const withAdminDashboardLayout = WrappedComponent => {
             )
         }
 
+        /** Remove 'resize' event listener */
         componentWillUnmount() {
             window.removeEventListener('resize', this.handleResize)
         }
 
+        /** Expand and collapse the side menu */
         handleToggleExpand = () => {
             this.state.expanded === false ? this.handleExpand() : this.handleContract()
         }
 
+        /** Expand side menu */
         handleExpand = () => {
             this.setState({
                 expanded: true,
@@ -109,6 +125,7 @@ const withAdminDashboardLayout = WrappedComponent => {
             })
         }
 
+        /** Collapse the side menu */
         handleContract = () => {
             this.setState({
                 contract: true
@@ -117,6 +134,7 @@ const withAdminDashboardLayout = WrappedComponent => {
             })
         }
 
+        /** Collapse the side menu after of the timeout */        
         handleSetTimeOut = () => {
             if (this.state.contract) {
                 setTimeout(() => {
@@ -127,7 +145,7 @@ const withAdminDashboardLayout = WrappedComponent => {
                 }, TIMEOUT_CONTRACT)
             }
         }
-
+        /** Render component */ 
         render() {
             return (
                 <main>
