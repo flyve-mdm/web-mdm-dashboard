@@ -16,6 +16,8 @@ yarn gh-pages-docs -m "ci(docs): generate documentation with jsdoc for version $
 yarn coverage
 # Add headers to all HTML files of the coverage
 ruby ci/scripts/add_header.rb
+# Add spaces between '{{' and '}}' characters in the coverage
+ruby ci/scripts/add_space.rb
 # Add docs folder
 git add coverage -f
 # Create commit, NOTICE: this commit is not sent
