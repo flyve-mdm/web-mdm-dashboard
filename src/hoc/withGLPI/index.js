@@ -32,10 +32,12 @@ import glpi from '../../shared/glpiApi'
 
 /**
  * Wrapper component to pass to the props the glpi object
- * @param { component } WrappedComponent - Component to wrap 
+ * @param {component} WrappedComponent Component to wrap 
+ * @return {component} The component with glpi
  */
 const withGLPI = (WrappedComponent) => {
   class GLPIClient extends PureComponent {
+    /** Render component */    
     render () { 
       return <WrappedComponent glpi={glpi} {...this.props} /> 
     }

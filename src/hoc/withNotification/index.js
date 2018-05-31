@@ -52,9 +52,17 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Wrapper component to add notifications (Toast and Native)
+ * @param {component} WrappedComponent Component to wrap 
+ * @return {component} The component with the notifications
+ */
 const withNotification = WrappedComponent => {
     class ToastNotification extends PureComponent {
-
+        /** 
+         * Create ToastNotification
+         * @param {object} props
+         */
         constructor(props) {
             super(props)
             this.state = {
@@ -65,6 +73,11 @@ const withNotification = WrappedComponent => {
             }
         }
 
+        /**
+         * Make sure that the state and props are in sync for when it is required
+         * @param {object} nextProps
+         * @param {object} prevState
+         */
         static getDerivedStateFromProps(nextProps, prevState) {
             if (nextProps.title !== prevState.title || nextProps.body !== prevState.body) {
                 return {
@@ -77,7 +90,11 @@ const withNotification = WrappedComponent => {
             return null
         }
 
-        componentDidUpdate(prevProps, prevState, prevContext) {
+        /**
+         * Display the notifications if it's necessary
+         * @param {object} prevProps
+         */
+        componentDidUpdate(prevProps) {
             if (prevProps.title !== this.props.title || prevProps.body !== this.props.body) {
                 const notification = validateNotifications()
                 if ((notification.show || this.state.type === "alert") && this.state.show) {
@@ -90,11 +107,10 @@ const withNotification = WrappedComponent => {
                         }, 4000)
                     })
                 }
-
-                
             }
         }
 
+        /** Hide 'Toast' notifications */
         hideNotification = () => {
             WinJS.UI.Animation.exitContent(
                 document.getElementsByClassName('toast'), { top: '0px', left: '20px' }
@@ -110,6 +126,7 @@ const withNotification = WrappedComponent => {
             })
         }
 
+        /** Render component */   
         render() {
             let toast = null
             const notification = validateNotifications()
