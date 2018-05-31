@@ -14,6 +14,8 @@ git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
 yarn gh-pages-docs -m "ci(docs): generate documentation with jsdoc for version ${GIT_TAG}"
 # Genarate coverage
 yarn coverage
+# Add headers to all HTML files of the coverage
+ruby ci/scripts/add_header.rb
 # Add docs folder
 git add coverage -f
 # Create commit, NOTICE: this commit is not sent

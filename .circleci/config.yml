@@ -26,7 +26,6 @@ jobs:
           command: |
             source ci/scripts/create_config_file.sh
             yarn build
- 
   test:
     docker:
       - image: kkarczmarczyk/node-yarn
