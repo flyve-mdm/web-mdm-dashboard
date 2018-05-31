@@ -26,9 +26,19 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module handleMessage */
+
+/** import dependencies */
 import { I18n } from "react-i18nify"
 import logout from '../logout'
 
+/** 
+ * Add format to error message
+ * @param {string} type of message
+ * @param {string} message content
+ * @param {string} title of message
+ * @returns {string} Get error message
+ */
 export default ({type='info', message, title}) => {
     let response = {
         type: type,

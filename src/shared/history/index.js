@@ -26,8 +26,13 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module history */
+
+/** import dependencies */
 import {createBrowserHistory as createHistory } from 'history'
 
+/** Get browser history */
 let history = createHistory()
 
+/** Export history object */
 export default history

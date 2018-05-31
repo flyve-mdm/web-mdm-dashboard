@@ -26,9 +26,17 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module BuildItemList */
+
+/** Import dependencies */
 import WinJS from 'winjs'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Sort elements ascending / descending
+ * @param {object} dataSource 
+ * @param {int} index 
+ */
 export default function (dataSource, index = 0) {
     const groupKey = function (data) {
         try {

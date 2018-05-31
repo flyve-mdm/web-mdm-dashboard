@@ -26,6 +26,12 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module bytesToSize */
+
+/**
+ * Format size to bytes
+ * @param {int} bytes Size in bytes
+ */
 export default function (bytes) {
     const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
     if (bytes === 0) return '0 Bytes'

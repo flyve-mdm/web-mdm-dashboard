@@ -26,6 +26,14 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module validateData */
+
+/** 
+ * Validate data
+ * @param {string} data to validate
+ * @param {string} specialReturn set a return value other than an empty string
+ * @returns {string} valid data
+ */
 export default (data, specialReturn) => {
     let value
 

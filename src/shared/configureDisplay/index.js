@@ -26,6 +26,9 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module configureDisplay */
+
+/** Set the cards to display on Home page */
 export default () => {
     const currentDisplay = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
     const newtDisplay = {

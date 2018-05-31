@@ -26,6 +26,14 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module cookie */
+
+/**
+ * Set cookie using arguments
+ * @param {string} name
+ * @param {string} value
+ * @param {string} days
+ */
 function setCookie (name, value, days) {
     let expires = ""
     if (days) {
@@ -36,6 +44,12 @@ function setCookie (name, value, days) {
     document.cookie = name + "=" + (value || "")  + expires + "; path=/"
 }
 
+/**
+ * Get cookie using name value
+ * @param {string} name cookie
+ * @param {string} value cookie
+ * @param {string} days to expire the cookie
+ */
 function getCookie (name) {
     let nameEQ = name + "="
     let ca = document.cookie.split(';')
@@ -47,10 +61,15 @@ function getCookie (name) {
     return null
 }
 
+/**
+ * Remove cookie using name value
+ * @param {string} name cookie
+ */
 function eraseCookie(name) {   
     document.cookie = name+'=; Max-Age=-99999999;'
 }
 
+/** Export methods to handle cookie */
 export {
     setCookie,
     getCookie,

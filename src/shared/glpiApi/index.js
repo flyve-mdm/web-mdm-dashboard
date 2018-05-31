@@ -26,10 +26,15 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module glpiApi */
+
+/** import dependencies */
 import Glpi from '@glpi-project/javascript-library-glpi'
 import appConfig from '../../../public/config.json'
 
+/** Initialize Glpi object using global config */
 let glpi = new Glpi({ url: appConfig.glpiApiLink })
+/** Get session token fron local store */
 glpi.sessionToken = localStorage.getItem('sessionToken')
-
+/** Export Glpi object */
 export default glpi

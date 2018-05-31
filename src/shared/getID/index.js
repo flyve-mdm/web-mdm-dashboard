@@ -26,7 +26,16 @@
 * ------------------------------------------------------------------------------
 */
 
+/** @module publicURL */
+
+/** import dependencies */
 import publicURL from '../publicURL'
+
+/**
+ * Get element ID from URL
+ * @param {string} path
+ * @param {int} position
+ */
 export default (path, position = 3) => {
     let id
     if (publicURL !== "") {
