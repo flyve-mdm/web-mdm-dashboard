@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: store/ui/initialState.js</h1>
+        <h1 class="page-title">Source: shared/handleMessage/index.js</h1>
 
         
 
@@ -46,24 +46,48 @@ layout: container
 * ------------------------------------------------------------------------------
 */
 
-/**
- * Initial State for management the state of UI:
- * - Nofications, Error and Succes messages states
- * - Loading state for show / hiden Loaders, Sppiners etc.
+/** @module handleMessage */
+
+/** import dependencies */
+import { I18n } from "react-i18nify"
+import logout from '../logout'
+
+/** 
+ * Add format to error message
+ * @param {string} type of message
+ * @param {string} message content
+ * @param {string} title of message
+ * @returns {string} Get error message
  */
-
-const initialState = {
-  notification: {
-    title: '',
-    body: '',
-    type: 'info'
-  },
-  error: '',
-  success: '',
-  loading: false
-}
-
-export default initialState;</code></pre>
+export default ({type='info', message, title}) => {
+    let response = {
+        type: type,
+        title: (title || I18n.t(`commons.${(type !== 'alert') ? type : 'error'}`)),
+        body: message ? (typeof message === 'string' || message instanceof String) ? message : message.statusText : ''
+    }
+    if (message) {
+        switch (true) {
+            case (message.status === 0):
+                response.body = I18n.t('notifications.no_internet_connection')
+                break
+            case (message.status === 401):
+                response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText
+                if (message.data[0][1] === 'session_token seems invalid') {
+                    logout()
+                }
+                break
+            case (message.status === 404):
+                response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText
+                break
+            case (message.status >= 400 &amp;&amp; message.status &lt; 500 &amp;&amp; message.status !== 401):
+                response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? message.data[1][0].message : message.data[0][1] : message.statusText
+                break
+            default:
+                break
+        }
+    }
+    return response
+}</code></pre>
         </article>
     </section>
 

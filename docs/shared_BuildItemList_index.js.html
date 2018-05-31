@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: store/ui/initialState.js</h1>
+        <h1 class="page-title">Source: shared/BuildItemList/index.js</h1>
 
         
 
@@ -46,24 +46,66 @@ layout: container
 * ------------------------------------------------------------------------------
 */
 
+/** @module BuildItemList */
+
+/** Import dependencies */
+import WinJS from 'winjs'
+import { I18n } from 'react-i18nify'
+
 /**
- * Initial State for management the state of UI:
- * - Nofications, Error and Succes messages states
- * - Loading state for show / hiden Loaders, Sppiners etc.
+ * Sort elements ascending / descending
+ * @param {object} dataSource 
+ * @param {int} index 
  */
+export default function (dataSource, index = 0) {
+    const groupKey = function (data) {
+        try {
+            return (data[Object.keys(data)[index]])[0].toUpperCase()
+        } catch (error) {
+            return (I18n.t('commons.n/a'))
+        }
+    }
 
-const initialState = {
-  notification: {
-    title: '',
-    body: '',
-    type: 'info'
-  },
-  error: '',
-  success: '',
-  loading: false
-}
+    const groupData = function (data) {
+        return { title: groupKey(data) }
+    }
 
-export default initialState;</code></pre>
+    const groupSorted = function (a, b) {
+        if (dataSource.order === 'ASC') {
+            if (a &lt; b) {
+                return -1
+            } else if (a > b) {
+                return 1
+            } else {
+                return 0
+            }
+        } else {
+            if (a > b) {
+                return -1
+            } else if (a &lt; b) {
+                return 1
+            } else {
+                return 0
+            }
+        }
+    }
+
+    const sorter = (a, b) => {
+        if (a[Object.keys(a)[0]] &lt; b[Object.keys(b)[0]]) {
+            return -1
+        } else if (a[Object.keys(a)[0]] > b[Object.keys(b)[0]]) {
+            return 1
+        } else {
+            return 0
+        }
+    }
+
+    if (dataSource.data) {
+        return new WinJS.Binding.List(dataSource.data)
+            .createSorted(sorter)
+            .createGrouped(groupKey, groupData, groupSorted)
+    }
+}</code></pre>
         </article>
     </section>
 
