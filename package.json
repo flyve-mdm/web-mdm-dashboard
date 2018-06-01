@@ -74,7 +74,7 @@
     "canvas-prebuilt": "^1.6.5-prerelease.1",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.4.0",
-    "conventional-github-releaser": "^2.0.0",
+    "conventional-github-releaser": "^3.0.0",
     "css-loader": "0.28.11",
     "cypress": "^2.1.0",
     "dotenv": "5.0.1",
