@@ -26,10 +26,35 @@
 * ------------------------------------------------------------------------------
 */
 
-// ui Actions Types
+/** ui Actions Types */
 
+/**
+ * CHANGE_NOTIFICATION_MESSAGE
+ * @constant
+ * @type {string}
+ */
 export const CHANGE_NOTIFICATION_MESSAGE = 'CHANGE_NOTIFICATION_MESSAGE'
+/**
+ * HIDE_NOTIFICATION
+ * @constant
+ * @type {string}
+ */
 export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION'
+/**
+ * UI_TRANSACTION_START
+ * @constant
+ * @type {string}
+ */
 export const UI_TRANSACTION_START = 'UI_TRANSACTION_START'
+/**
+ * UI_TRANSACTION_FINISH
+ * @constant
+ * @type {string}
+ */
 export const UI_TRANSACTION_FINISH = 'UI_TRANSACTION_FINISH'
+/**
+ * UI_TRANSACTION_FAIL
+ * @constant
+ * @type {string}
+ */
 export const UI_TRANSACTION_FAIL = 'UI_TRANSACTION_FAIL'

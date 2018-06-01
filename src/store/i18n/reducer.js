@@ -26,22 +26,34 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import * as actionTypes from './actionTypes'
 import initialState from "./initialState"
 import { updateObject } from '../../shared/updateObject'
 
-// Sugar Functions
-
+/**
+ * Change language
+ * @param {objec} state 
+ * @param {object} action 
+ */
 const changeLanguage = (state, action) => {
   return updateObject(state, {languageCurrent: action.languageCurrent})
 }
 
+/**
+ * Change fallback language default
+ * @param {objec} state 
+ * @param {object} action 
+ */
 const changeLanguageFallBack = (state, action) => {
   return updateObject(state, {languageCurrent: action.languageDefault})
 }
 
-// Reducer
-
+/**
+ * Define reducers
+ * @param {object} state 
+ * @param {object} action 
+ */
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_LANGUAGE: return changeLanguage(state, action);
