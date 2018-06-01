@@ -26,14 +26,59 @@
 * ------------------------------------------------------------------------------
 */
 
-// Authentication Actions Types
+/** Authentication Actions Types */
 
+/**
+ * AUTH_START
+ * @constant
+ * @type {string}
+ */
 export const AUTH_START = 'AUTH_START'
+/**
+ * AUTH_FINISH
+ * @constant
+ * @type {string}
+ */
 export const AUTH_FINISH = 'AUTH_FINISH'
+/**
+ * AUTH_SUCCESS
+ * @constant
+ * @type {string}
+ */
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
+/**
+ * AUTH_FAIL
+ * @constant
+ * @type {string}
+ */
 export const AUTH_FAIL = 'AUTH_FAIL'
+/**
+ * AUTH_REFRESH_CAPTCHA
+ * @constant
+ * @type {string}
+ */
 export const AUTH_REFRESH_CAPTCHA = 'AUTH_REFRESH_CAPTCHA'
+/**
+ * CHANGE_NOTIFICATION_MESSAGE
+ * @constant
+ * @type {string}
+ */
 export const CHANGE_NOTIFICATION_MESSAGE = 'CHANGE_NOTIFICATION_MESSAGE'
+/**
+ * FETCH_SIGNIN
+ * @constant
+ * @type {string}
+ */
 export const FETCH_SIGNIN = 'FETCH_SIGNIN'
+/**
+ * CHANGE_PASSWORD_CONFIGURATION
+ * @constant
+ * @type {string}
+ */
 export const CHANGE_PASSWORD_CONFIGURATION = 'CHANGE_PASSWORD_CONFIGURATION'
+/**
+ * LOGOUT
+ * @constant
+ * @type {string}
+ */
 export const LOGOUT = 'LOGOUT'

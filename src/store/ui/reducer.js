@@ -26,12 +26,16 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import * as actionTypes from './actionTypes'
 import initialState from "./initialState"
 import { updateObject } from '../../shared/updateObject'
 
-// Sugar Functions
-
+/**
+ * Set notification
+ * @param {objec} state 
+ * @param {object} action 
+ */
 const uiSetNotification = (state, action) => {
   return updateObject(state, {notification: {
     show: true,
@@ -39,20 +43,40 @@ const uiSetNotification = (state, action) => {
   }})
 }
 
+/**
+ * Hide notification
+ * @param {objec} state 
+ * @param {object} action 
+ */
 const uiHideNotification = (state) => {
   return updateObject(state, {notification: {
     show: false
   }})
 }
 
+/**
+ * Start transaction
+ * @param {objec} state 
+ * @param {object} action 
+ */
 const uiTransactionStart = (state, action) => {
   return updateObject(state, {error: null, loading: true})
 }
 
+/**
+ * Fail transaction
+ * @param {objec} state 
+ * @param {object} action 
+ */
 const uiTransactionFail = (state, action) => {
   return updateObject(state, {error: action.error, loading: false})
 }
 
+/**
+ * Finish transaction
+ * @param {objec} state 
+ * @param {object} action 
+ */
 const uiTransactionFinish = (state, action) => {
   return updateObject(state, {
     error: null,
@@ -61,8 +85,11 @@ const uiTransactionFinish = (state, action) => {
   })
 }
 
-// Reducer
-
+/**
+ * Define reducers
+ * @param {object} state 
+ * @param {object} action 
+ */
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_NOTIFICATION_MESSAGE: return uiSetNotification(state, action)

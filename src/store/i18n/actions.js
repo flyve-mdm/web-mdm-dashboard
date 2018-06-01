@@ -26,11 +26,16 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import * as actionTypes from './actionTypes'
 import initialState from "./initialState"
 
 // Actions
-
+/**
+ * Action change current language
+ * @param {string} languageName
+ * @returns {object} language
+ */
 export const changeLanguage = languageName => {
   return {
       type: actionTypes.CHANGE_LANGUAGE,
@@ -38,6 +43,10 @@ export const changeLanguage = languageName => {
   }
 }
 
+/**
+ * Action change fallback language default
+ * @returns {object} language
+ */
 export const changeLanguageFallBack = () => {
   return {
       type: actionTypes.CHANGE_LANGUAGE_FALLBACK,
