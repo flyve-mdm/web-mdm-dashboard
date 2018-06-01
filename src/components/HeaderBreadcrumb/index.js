@@ -32,8 +32,13 @@ import { Link } from 'react-router-dom'
 import { I18n } from "react-i18nify"
 import publicURL from '../../shared/publicURL'
 
+/** Component with the breadcrumb menu of the header */
 class HeaderBreadcrumb extends PureComponent {
 
+  /** 
+   * Create the breadcrumb menu
+   * @return {array} Breadcrumb menu
+   */
   breadcrumbs () {
     let breadcrumbs = []
     const addresses = this.props.location.pathname.split("/")
@@ -57,6 +62,7 @@ class HeaderBreadcrumb extends PureComponent {
     return breadcrumbs
   }
   
+  /** Render component */
   render () {
     return (
       <header className="header-block">
