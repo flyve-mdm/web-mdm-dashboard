@@ -33,7 +33,12 @@ import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import { slideTop } from '../../shared/animations/index'
 
+/** List of nav links */
 class ListWithNavLinks extends PureComponent {
+    /** 
+     * Create ListWithNavLinks
+     * @param {object} props
+     */ 
     constructor(props) {
         super(props)
         this.state = {
@@ -45,6 +50,7 @@ class ListWithNavLinks extends PureComponent {
         window.addEventListener('resize', this.handleResize)
     }
 
+    /** Change state according to the resolution of the screen */
     handleResize = () => {
         const nextMode = getMode()
         if (this.state.mode !== nextMode) {
@@ -56,6 +62,7 @@ class ListWithNavLinks extends PureComponent {
         }
     }
 
+    /** Change render of the menu according to the screen resolution */
     styleNav (mode, history) {
         return (
             mode === "small" ? 
@@ -64,6 +71,7 @@ class ListWithNavLinks extends PureComponent {
         )
     }
 
+    /** Change render of the child according to the screen resolution */
     stylesArticle () {
         const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
         return ({
@@ -71,11 +79,16 @@ class ListWithNavLinks extends PureComponent {
         })
     }
 
+    /** Remove 'resize' event listener */
     componentWillUnmount () {
         window.removeEventListener('resize', this.handleResize)
     }
 
-
+    /**
+     * Make sure that the state and props are in sync for when it is required
+     * @param {object} nextProps
+     * @param {object} prevState
+     */
     static getDerivedStateFromProps(nextProps, prevState) {
         return {
             ...prevState,
@@ -86,10 +99,12 @@ class ListWithNavLinks extends PureComponent {
         }
     }
 
+    /** Run the 'slideTop' animation */
     componentDidMount () {
         slideTop(this.nav).play()
     }
-
+    
+    /** Render component */
     render () {
         return (
             <div className="flex-block flex-block--with-scroll flex-block--with-content-pane">
