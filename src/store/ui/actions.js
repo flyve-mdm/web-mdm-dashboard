@@ -26,10 +26,15 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import * as actionTypes from './actionTypes'
 
 // Actions
-
+/**
+ * Action set notification
+ * @param {string} notification
+ * @returns {object} action notification
+ */
 export const uiSetNotification = notification => {
   return {
       type: actionTypes.CHANGE_NOTIFICATION_MESSAGE,
@@ -37,18 +42,30 @@ export const uiSetNotification = notification => {
   }
 }
 
+/**
+ * Action hide notification
+ * @returns {object} action hide notification
+ */
 export const uiHideNotification = () => {
   return {
     type: actionTypes.HIDE_NOTIFICATION    
   }
 }
 
+/**
+ * Action start transaction
+ * @returns {object} action start transaction
+ */
 export const uiTransactionStart = () => {
   return {
       type: actionTypes.UI_TRANSACTION_START
   };
 };
 
+/**
+ * Action finish transaction
+ * @returns {object} action finish transaction
+ */
 export const uiTransactionFinish = success => {
   return {
       type: actionTypes.UI_TRANSACTION_FINISH,
@@ -56,6 +73,10 @@ export const uiTransactionFinish = success => {
   };
 };
 
+/**
+ * Action Fail transaction
+ * @returns {object} action Fail transaction
+ */
 export const uiTransactionFail = error => {
   return {
       type: actionTypes.UI_TRANSACTION_FAIL,
