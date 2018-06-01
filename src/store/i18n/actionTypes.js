@@ -26,7 +26,17 @@
 * ------------------------------------------------------------------------------
 */
 
-// I18N Actions Types
+/** I18N Actions Types */
 
+/**
+ * CHANGE_LANGUAGE
+ * @constant
+ * @type {string}
+ */
 export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE'
+/**
+ * CHANGE_LANGUAGE_FALLBACK
+ * @constant
+ * @type {string}
+ */
 export const CHANGE_LANGUAGE_FALLBACK = 'CHANGE_LANGUAGE_FALLBACK'
