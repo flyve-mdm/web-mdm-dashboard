@@ -26,8 +26,14 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import withAsyncComponent from '../hoc/withAsyncComponent'
 
+/**
+ * Calls asynchronous Logout component
+ * @constant
+ * @type {component}
+ */
 const asyncLogout = withAsyncComponent(() => {
   return import('../containers/Logout')
 })

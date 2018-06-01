@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import * as actionTypes from './actionTypes'
 import glpi from '../../shared/glpiApi'
 import { uiTransactionFinish, uiTransactionStart } from '../ui/actions'
@@ -35,6 +36,11 @@ import appConfig from '../../../public/config.json'
 
 // Actions
 
+/**
+ * Action change notification message
+ * @param {object} notification
+ * @returns {object} notification
+ */
 export const changeNotificationMessage = notification => {
   return {
       type: actionTypes.CHANGE_NOTIFICATION_MESSAGE,
@@ -42,6 +48,11 @@ export const changeNotificationMessage = notification => {
   }
 }
 
+/**
+ * Action auth success 
+ * @param {object} user
+ * @returns {object} current user
+ */
 export const authSuccess = user => {
   return {
       type: actionTypes.AUTH_SUCCESS,
@@ -49,6 +60,11 @@ export const authSuccess = user => {
   }
 }
 
+/**
+ * Action auth fail
+ * @param {object} error
+ * @returns {object} current error
+ */
 export const authFail = error => {
   return {
       type: actionTypes.AUTH_FAIL,
@@ -56,6 +72,11 @@ export const authFail = error => {
   }
 }
 
+/**
+ * Action logout current history
+ * @param {object} history
+ * @returns {object} current history
+ */
 export const logout = history => {
   return {
       type: actionTypes.LOGOUT,
@@ -63,6 +84,13 @@ export const logout = history => {
   }
 }
 
+/**
+ * Action refresh captcha
+ * @param {object} idCaptcha
+ * @param {object} imgCaptcha
+ * @param {object} configurationPassword
+ * @returns {object} new captcha
+ */
 export const authRefreshCaptcha = ({ idCaptcha, imgCaptcha, configurationPassword }) => {
   return {
     type: actionTypes.AUTH_REFRESH_CAPTCHA,
@@ -74,6 +102,11 @@ export const authRefreshCaptcha = ({ idCaptcha, imgCaptcha, configurationPasswor
   }
 }
 
+/**
+ * Action change password configuration
+ * @param {object} newConfiguration
+ * @returns {object} new password configuration
+ */
 export function changePasswordConfiguration (newConfiguration) {
   return {
       type: actionTypes.CHANGE_PASSWORD_CONFIGURATION,
@@ -158,8 +191,9 @@ export const fetchCaptcha = () => {
     }
   }
 }
+
 /**
- * 
+ * Fetch and Sign up user
  * @param {Object} data
  */
 export const fetchSignUp = (data) => {
@@ -184,6 +218,10 @@ export const fetchSignUp = (data) => {
   }
 }
 
+/**
+ * Fetch recover password
+ * @param {string} email
+ */
 export const fetchRecoverPassword = (email) => {
   return dispatch => { // TODO: Create this
     dispatch(uiTransactionStart())
@@ -209,8 +247,14 @@ export const fetchRecoverPassword = (email) => {
   }
 }
 
+/**
+ * Fetch reset password
+ * @param {string} email
+ * @param {string} token
+ * @param {string} newPassword
+ */
 export const fetchResetPassword = ({email, token, newPassword}) => {
-  return dispatch => { // TODO: Create this
+  return dispatch => {
     dispatch(uiTransactionStart())
     glpi.genericRequest({
       path: 'lostPassword',
@@ -234,6 +278,9 @@ export const fetchResetPassword = ({email, token, newPassword}) => {
   }
 }
 
+/**
+ * Fetch password configuration
+ */
 export const fetchPasswordConfiguration = () => {
   return (dispatch) => {
     dispatch(uiTransactionStart())
@@ -249,6 +296,10 @@ export const fetchPasswordConfiguration = () => {
   }
 }
 
+/**
+ * Fetch send feedback
+ * @param {object} data
+ */
 export function fetchSendFeedback (data) {
   return (dispatch) => {
     dispatch(uiTransactionStart())
