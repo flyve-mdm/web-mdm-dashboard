@@ -30,7 +30,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
-class spanWithPopper extends PureComponent {
+/** Component with the nav links of the side menu */
+class SpanWithPopper extends PureComponent {
+  /** Render component */
   render () {
     if (this.props.to) {
       return (
@@ -50,10 +52,10 @@ class spanWithPopper extends PureComponent {
   }
 }
  
-spanWithPopper.propTypes = {
+SpanWithPopper.propTypes = {
   description: PropTypes.string.isRequired,
   to: PropTypes.string,
   click: PropTypes.func
 }
 
-export default spanWithPopper
+export default SpanWithPopper

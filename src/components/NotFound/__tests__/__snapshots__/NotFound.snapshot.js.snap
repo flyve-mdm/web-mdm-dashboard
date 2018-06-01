@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ValidateAccount renders ValidateAccount 1`] = `
+exports[`NotFound renders NotFound 1`] = `
 <div
   className="authentication"
   style={
