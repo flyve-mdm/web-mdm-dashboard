@@ -29,7 +29,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
+/** Component to get the icons for the lists */
 export default class IconItemList extends PureComponent {
+    /** 
+     * Create IconItemList
+     * @param {object} props
+     */ 
     constructor (props) {
         super(props)
         this.state = {
@@ -37,12 +42,14 @@ export default class IconItemList extends PureComponent {
         }
     }
 
+    /** Request an image if it's necessary */
     componentDidMount() {
         if (this.props.type === 'file' && this.props.image !== '') {
             this.getImage()
         }
     }
 
+    /** Asynchronous function to get a requested image */
     getImage = async () => {
         try {
             switch (this.props.image) {
@@ -89,6 +96,7 @@ export default class IconItemList extends PureComponent {
         } catch (error) {}
     }
 
+    /** Render component */
     render() {
         
         let style = {
