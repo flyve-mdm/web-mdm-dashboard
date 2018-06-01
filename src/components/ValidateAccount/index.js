@@ -58,7 +58,6 @@ class ValidateAccount extends PureComponent {
     }
 
     componentDidMount() {
-
         let path = this.props.location.pathname.replace("/validateAccount/", "&validateAccount=")
         path = path.replace("/validation/", "&validation=")
         const params = new URLSearchParams(path)
