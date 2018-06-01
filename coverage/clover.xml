@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1527866475929" clover="3.2.0">
-  <project timestamp="1527866475929" name="All files">
+<coverage generated="1527867469208" clover="3.2.0">
+  <project timestamp="1527867469208" name="All files">
     <metrics statements="4570" coveredstatements="241" conditionals="1986" coveredconditionals="145" methods="1111" coveredmethods="63" elements="7667" coveredelements="449" complexity="0" loc="4570" ncloc="4570" packages="108" files="198" classes="198">
       <package name="src">
         <metrics statements="50" coveredstatements="0" conditionals="29" coveredconditionals="0" methods="16" coveredmethods="0"/>
@@ -65,15 +65,14 @@
         <metrics statements="17" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/applications/AdminDashboard/index.js">
           <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-          <line num="29" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
-          <line num="37" count="0" type="stmt"/>
+          <line num="34" count="0" type="stmt"/>
+          <line num="42" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/repo/src/applications/AdminDashboard/routes.js">
           <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-          <line num="29" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
           <line num="31" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
@@ -84,31 +83,32 @@
           <line num="37" count="0" type="stmt"/>
           <line num="38" count="0" type="stmt"/>
           <line num="39" count="0" type="stmt"/>
-          <line num="41" count="0" type="stmt"/>
+          <line num="40" count="0" type="stmt"/>
+          <line num="47" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.applications.RootApp">
         <metrics statements="15" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/applications/RootApp/index.js">
           <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-          <line num="29" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
+          <line num="31" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
           <line num="35" count="0" type="stmt"/>
           <line num="36" count="0" type="stmt"/>
           <line num="37" count="0" type="stmt"/>
-          <line num="46" count="0" type="stmt"/>
+          <line num="47" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/repo/src/applications/RootApp/routes.js">
           <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-          <line num="29" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
           <line num="31" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
           <line num="35" count="0" type="stmt"/>
-          <line num="37" count="0" type="stmt"/>
+          <line num="36" count="0" type="stmt"/>
+          <line num="43" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.async">
