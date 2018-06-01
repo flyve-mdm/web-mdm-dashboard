@@ -126,7 +126,7 @@ const withNotification = WrappedComponent => {
             })
         }
 
-        /** Render component */   
+        /** Render component */
         render() {
             let toast = null
             const notification = validateNotifications()
