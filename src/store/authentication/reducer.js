@@ -26,22 +26,36 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import * as actionTypes from './actionTypes'
 import initialState from "./initialState"
 import { updateObject } from "../../shared/updateObject"
 import glpi from '../../shared/glpiApi'
 import publicURL from '../../shared/publicURL'
 
-// Sugar Functions
-
+/**
+ * Change notification message
+ * @param {objec} state 
+ * @param {object} action 
+ */
 const changeNotificationMessage = (state, action) => {
   return updateObject(state, {notification: action.notification})
 }
 
+/**
+ * Change password configuration
+ * @param {objec} state
+ * @param {object} action
+ */
 const changePasswordConfiguration = (state, action) => {
   return updateObject(state, {configurationPassword: action.configurationPassword})
 }
 
+/**
+ * Success authentication user
+ * @param {object} state 
+ * @param {object} action 
+ */
 const authSuccess = (state, action) => {
   return updateObject(state, {
     currentUser: {
@@ -53,10 +67,20 @@ const authSuccess = (state, action) => {
   })
 }
 
+/**
+ * Fail authentication user
+ * @param {object} state 
+ * @param {object} action 
+ */
 const authFail = (state, action) => {
   return updateObject(state, {error: action.error, loading: false})
 }
 
+/**
+ * Logout current user
+ * @param {object} state 
+ * @param {object} action 
+ */
 const logout = async (state, action) => {
   try {
     localStorage.removeItem('currentUser')
@@ -66,6 +90,11 @@ const logout = async (state, action) => {
   return updateObject(state, { currentUser: null }, () => { action.history.push(`${publicURL}/`)})
 }
 
+/**
+ * Refresh captcha authentication
+ * @param {object} state 
+ * @param {object} action 
+ */
 const authRefreshCaptcha = (state, action) => {
   return updateObject(state, {
     captcha: action.captcha,
@@ -73,8 +102,11 @@ const authRefreshCaptcha = (state, action) => {
   })
 }
 
-// Reducer
-
+/**
+ * Define reducers
+ * @param {object} state 
+ * @param {object} action 
+ */
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
