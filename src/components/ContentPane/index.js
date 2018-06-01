@@ -30,16 +30,21 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { slideTop } from '../../shared/animations/index'
 
+
+/** Wrapper component to add the CSS class "content-pane" and the animation "slideTop" */
 class ContentPane extends PureComponent {
 
+  /** Run the "slideTop" animation when the component is mounted */
   componentDidMount() {
-    slideTop(this.pane).play()
+    this.forceAnimation()
   }
   
+  /** Run the "slideTop" animation */  
   forceAnimation () {
     slideTop(this.pane).play()
   }
 
+  /** Render component */
   render() {
     return (
       <div className={`content-pane ${this.props.className}`} ref={pane => this.pane = pane}>
