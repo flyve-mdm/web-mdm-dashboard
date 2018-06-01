@@ -30,9 +30,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import listRender from './listRender'
 
+/** Component with the leader of content */
 const Loader = props => {
+    
+    /** Create the array of loaders */
     let content = []
-
     for (let index = 0; index < props.count; index++) {
         content = [
             ...content,
@@ -43,6 +45,7 @@ const Loader = props => {
         ]
     }
         
+    /** Render component */
     return (
         <div>{ content }</div>
     )
