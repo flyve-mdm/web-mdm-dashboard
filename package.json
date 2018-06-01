@@ -76,7 +76,7 @@
     "chalk": "2.4.0",
     "conventional-github-releaser": "^2.0.0",
     "css-loader": "0.28.11",
-    "cypress": "^2.1.0",
+    "cypress": "^3.0.1",
     "dotenv": "5.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
