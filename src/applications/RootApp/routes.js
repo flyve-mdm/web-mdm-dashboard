@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import publicURL from '../../shared/publicURL'
 import SignIn from '../../containers/SignIn'
 import asyncSignUp from '../../async/asyncSignUp'
@@ -34,6 +35,11 @@ import asyncValidateAccount from '../../async/asyncValidateAccount'
 import asyncForgotPassword from '../../async/asyncForgotPassword'
 import asyncResetPassword from '../../async/asyncResetPassword'
 
+/**
+ * Represents all public routes
+ * @constant
+ * @type {Array}
+ */
 const routes = [
   {
     path: `${publicURL}/`,
