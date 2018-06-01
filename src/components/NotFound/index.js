@@ -29,8 +29,13 @@
 import React from 'react'
 import { I18n } from 'react-i18nify'
 
-const NotFound = props => {
 
+/**
+ * Component used in the page of error 404
+ * @return {component} Page of error 404
+ */
+const NotFound = () => {
+    /** Render component */ 
     return (
         <div className="authentication" style={{ textAlign: 'center'}} >
             <section>
