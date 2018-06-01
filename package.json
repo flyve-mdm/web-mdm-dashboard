@@ -96,7 +96,7 @@
     "jest": "^22.4.3",
     "jsdoc": "^3.5.5",
     "jsdom": "^11.10.0",
-    "json-server": "^0.12.1",
+    "json-server": "^0.13.0",
     "node-github-release": "^0.2.1",
     "node-sass": "^4.7.2",
     "postcss-flexbugs-fixes": "3.3.1",
