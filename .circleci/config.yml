@@ -72,7 +72,7 @@ jobs:
           name: "Validate HTML"
           command: |
             yarn build
-            html5validator --root build/ --show-warnings
+            html5validator --root build/
  
       - store_artifacts:
           path: cypress/screenshots
