@@ -29,7 +29,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+/**
+ * Component of loading
+ * @param {object} props
+ * @return {component} loading component
+ */
 const Loading = props => {
+    /** Create loader */
     const loader = (
         <div className='loader'>
             <div className='circle'></div>
@@ -39,6 +45,8 @@ const Loading = props => {
             <div className='circle'></div>
         </div>  
     )
+
+    /** Create a small or normal load component, according to what was requested */
     const loadComponent = props.small ? (
         <div className="loading loading--small" style={props.style}>
             <div> { loader } </div>
@@ -52,6 +60,7 @@ const Loading = props => {
         </div>
     )
 
+    /** Render component */
     return loadComponent
 }
 
