@@ -30,7 +30,9 @@ import React, { PureComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-class imgWithPopper extends PureComponent {
+/** Component with the images of the side menu */
+class ImgWithPopper extends PureComponent {
+  /** Render component */ 
   render () {
     return (
       <div>
@@ -51,15 +53,15 @@ class imgWithPopper extends PureComponent {
   }
 }
  
-imgWithPopper.defaultProps = {
+ImgWithPopper.defaultProps = {
   alt: ""
 }
 
-imgWithPopper.propTypes = {
+ImgWithPopper.propTypes = {
   to: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
   alt: PropTypes.string,
   title: PropTypes.string
 }
 
-export default imgWithPopper
+export default ImgWithPopper

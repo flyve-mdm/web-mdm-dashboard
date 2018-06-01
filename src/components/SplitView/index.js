@@ -29,26 +29,29 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import IconWithPopper from './IconWithPopper'
-import ImgWithPopper from './imgWithPopper'
-import SpanWithPopper from './spanWithAnchor'
+import ImgWithPopper from './ImgWithPopper'
+import SpanWithPopper from './SpanWithPopper'
 import { ScrollSync, ScrollSyncPane } from '../ScrollSync'
 import withGLPI from '../../hoc/withGLPI'
 import { I18n } from "react-i18nify"
 import publicURL from '../../shared/publicURL'
 import { splitview } from '../../shared/animationsWinJs'
 
+/** Component with side menu */
 class SplitView extends PureComponent {
-
+  /** Close session */ 
   logout = () => {
     this.props.logout()
   }
 
+  /** Run 'splitview' animation */ 
   componentDidUpdate () {
     if (this.props.expanded) {
       splitview(this.splitview, !this.props.contract).play()
     }
   }
-
+  
+  /** Render component */ 
   render () {
     this.props.handleSetTimeOut()
 
