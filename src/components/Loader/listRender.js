@@ -29,6 +29,7 @@
 import React from 'react'
 import ContentLoader, { BulletList } from 'react-content-loader'
 
+/** Render of loaders */
 const listRender = ({props, index}) => {
     if (props.type === "list") {
         return (
