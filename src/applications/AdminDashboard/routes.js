@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import Dashboard from '../../containers/HomeDashboard'
 import Devices from '../../containers/Devices'
 import Invitations from '../../containers/Invitations'
@@ -38,6 +39,11 @@ import Settings from '../../containers/Settings'
 import Fleets from '../../containers/Fleets'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Represents all private routes
+ * @constant
+ * @type {Array}
+ */
 const routes = [
   {
     path: '/',

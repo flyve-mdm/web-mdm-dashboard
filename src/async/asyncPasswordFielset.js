@@ -26,8 +26,14 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import withAsyncComponent from '../hoc/withAsyncComponent'
 
+/**
+ * Calls asynchronous PasswordFieldset component
+ * @constant
+ * @type {component}
+ */
 const asyncPasswordFieldset = withAsyncComponent(() => {
   return import('../containers/SignIn/components/PasswordFieldset.js')
 })

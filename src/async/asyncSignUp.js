@@ -26,8 +26,14 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import withAsyncComponent from '../hoc/withAsyncComponent'
 
+/**
+ * Calls asynchronous SignUp component
+ * @constant
+ * @type {component}
+ */
 const asyncSignUp = withAsyncComponent(() => {
   return import('../containers/SignUp')
 })
