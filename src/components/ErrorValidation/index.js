@@ -30,8 +30,13 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from "react-i18nify"
 
+/** Component to errors of a form field */
 class ErrorValidation extends PureComponent {
 
+    /** 
+     * Validate a data according to determined parameters
+     * @return {object} shows if there are errors or not, and what are these
+     */
     static validation = (parametersToEvaluate, value) => {
         let errorMessages = []
 
@@ -80,6 +85,7 @@ class ErrorValidation extends PureComponent {
         return result
     }
 
+    /** Render component */
     render() {
         return (
             <div className="error-message">
