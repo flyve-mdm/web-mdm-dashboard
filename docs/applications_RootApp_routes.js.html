@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: shared/nativeNotification/index.js</h1>
+        <h1 class="page-title">Source: applications/RootApp/routes.js</h1>
 
         
 
@@ -46,25 +46,60 @@ layout: container
 * ------------------------------------------------------------------------------
 */
 
-/** @module nativeNotification */
+/** import dependencies */
+import publicURL from '../../shared/publicURL'
+import SignIn from '../../containers/SignIn'
+import asyncSignUp from '../../async/asyncSignUp'
+import asyncAdminDashboard from '../../async/asyncAdminDashboard'
+import asyncValidateAccount from '../../async/asyncValidateAccount'
+import asyncForgotPassword from '../../async/asyncForgotPassword'
+import asyncResetPassword from '../../async/asyncResetPassword'
 
 /**
- * Get one new native notification 
- * @param {string} title message for notification
- * @param {string} body message content for notification
- * @param {string} icon for notification
- * @returns {object} of native notification type
+ * Represents all public routes
+ * @constant
+ * @type {Array}
  */
-export default function (title, body, icon = require('../../assets/images/logo2.png')) {
-    let newNotification = null
-    if (Notification &amp;&amp; Notification.permission !== "denied") {
-        Notification.requestPermission(permission => {
-            newNotification = new Notification(title, { body, icon })
-        })
-    }
-    return newNotification
-} 
-</code></pre>
+const routes = [
+  {
+    path: `${publicURL}/`,
+    component: SignIn,
+    exact: true,
+    private: false
+  },
+  {
+    path: `${publicURL}/signUp`,
+    component: asyncSignUp,
+    exact: false,
+    private: false
+  },
+  {
+    path: `${publicURL}/validateAccount`,
+    component: asyncValidateAccount,
+    exact: false,
+    private: false
+  },
+  {
+    path: `${publicURL}/forgotPassword`,
+    component: asyncForgotPassword,
+    exact: false,
+    private: false
+  },
+  {
+    path: `${publicURL}/resetPassword`,
+    component: asyncResetPassword,
+    exact: false,
+    private: false
+  },
+  {
+    path: `${publicURL}/app`,
+    component: asyncAdminDashboard,
+    exact: false,
+    private: false
+  }
+]
+
+export default routes</code></pre>
         </article>
     </section>
 

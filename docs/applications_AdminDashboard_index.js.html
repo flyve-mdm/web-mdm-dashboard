@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: shared/nativeNotification/index.js</h1>
+        <h1 class="page-title">Source: applications/AdminDashboard/index.js</h1>
 
         
 
@@ -46,25 +46,24 @@ layout: container
 * ------------------------------------------------------------------------------
 */
 
-/** @module nativeNotification */
+/** import dependencies */
+import React, { Component } from 'react'
+import withAdminDashboardLayout from '../../hoc/withAdminDashboardLayout'
+
+import routes from './routes'
+import GenerateRoutes from '../../components/GenerateRoutes';
 
 /**
- * Get one new native notification 
- * @param {string} title message for notification
- * @param {string} body message content for notification
- * @param {string} icon for notification
- * @returns {object} of native notification type
+ * Represents internal routes
+ * @class AdminDashboard
  */
-export default function (title, body, icon = require('../../assets/images/logo2.png')) {
-    let newNotification = null
-    if (Notification &amp;&amp; Notification.permission !== "denied") {
-        Notification.requestPermission(permission => {
-            newNotification = new Notification(title, { body, icon })
-        })
-    }
-    return newNotification
-} 
-</code></pre>
+class AdminDashboard extends Component {
+  render() { 
+    return &lt;GenerateRoutes routes={routes} rootPath={this.props.match.url} />
+  }
+}
+
+export default withAdminDashboardLayout(AdminDashboard)</code></pre>
         </article>
     </section>
 

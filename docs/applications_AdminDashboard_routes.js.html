@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: shared/nativeNotification/index.js</h1>
+        <h1 class="page-title">Source: applications/AdminDashboard/routes.js</h1>
 
         
 
@@ -46,25 +46,88 @@ layout: container
 * ------------------------------------------------------------------------------
 */
 
-/** @module nativeNotification */
+/** import dependencies */
+import Dashboard from '../../containers/HomeDashboard'
+import Devices from '../../containers/Devices'
+import Invitations from '../../containers/Invitations'
+import Files from '../../containers/Files'
+import Applications from '../../containers/Applications'
+import Users from '../../containers/Users'
+import SearchEngine from '../../containers/SearchEngine'
+import About from '../../containers/About'
+import Settings from '../../containers/Settings'
+import Fleets from '../../containers/Fleets'
+import { I18n } from 'react-i18nify'
 
 /**
- * Get one new native notification 
- * @param {string} title message for notification
- * @param {string} body message content for notification
- * @param {string} icon for notification
- * @returns {object} of native notification type
+ * Represents all private routes
+ * @constant
+ * @type {Array}
  */
-export default function (title, body, icon = require('../../assets/images/logo2.png')) {
-    let newNotification = null
-    if (Notification &amp;&amp; Notification.permission !== "denied") {
-        Notification.requestPermission(permission => {
-            newNotification = new Notification(title, { body, icon })
-        })
-    }
-    return newNotification
-} 
-</code></pre>
+const routes = [
+  {
+    path: '/',
+    name: I18n.t('commons.home'),
+    component: Dashboard,
+    exact: true
+  },
+  {
+    path: '/devices',
+    name: I18n.t('commons.devices'),
+    component: Devices,
+    exact: false
+  },
+  {
+    path: '/invitations',
+    name: I18n.t('commons.invitations'),
+    component: Invitations,
+    exact: false
+  },
+  {
+    path: '/files',
+    name: I18n.t('commons.files'),
+    component: Files,
+    exact: false
+  },
+  {
+    path: '/fleets',
+    name: I18n.t('commons.fleets'),
+    component: Fleets,
+    exact: false
+  },
+  {
+    path: '/applications',
+    name: I18n.t('commons.applications'),
+    component: Applications,
+    exact: false
+  },
+  {
+    path: '/users',
+    name: I18n.t('commons.users'),
+    component: Users,
+    exact: false
+  },
+  {
+    path: '/search',
+    name: I18n.t('commons.search'),
+    component: SearchEngine,
+    exact: false
+  },
+  {
+    path: '/about',
+    name: I18n.t('commons.about'),
+    component: About,
+    exact: false
+  },
+  {
+    path: '/settings',
+    name: I18n.t('commons.settings'),
+    component: Settings,
+    exact: false
+  }
+]
+
+export default routes</code></pre>
         </article>
     </section>
 
