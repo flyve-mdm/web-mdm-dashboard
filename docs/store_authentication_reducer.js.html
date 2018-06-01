@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: async/asyncForgotPassword.js</h1>
+        <h1 class="page-title">Source: store/authentication/reducer.js</h1>
 
         
 
@@ -47,18 +47,99 @@ layout: container
 */
 
 /** import dependencies */
-import withAsyncComponent from '../hoc/withAsyncComponent'
+import * as actionTypes from './actionTypes'
+import initialState from "./initialState"
+import { updateObject } from "../../shared/updateObject"
+import glpi from '../../shared/glpiApi'
+import publicURL from '../../shared/publicURL'
 
 /**
- * Calls asynchronous ForgotPassword component
- * @constant
- * @type {component}
+ * Change notification message
+ * @param {objec} state 
+ * @param {object} action 
  */
-const asyncForgotPassword = withAsyncComponent(() => {
-  return import('../containers/ForgotPassword')
-})
+const changeNotificationMessage = (state, action) => {
+  return updateObject(state, {notification: action.notification})
+}
 
-export default asyncForgotPassword</code></pre>
+/**
+ * Change password configuration
+ * @param {objec} state
+ * @param {object} action
+ */
+const changePasswordConfiguration = (state, action) => {
+  return updateObject(state, {configurationPassword: action.configurationPassword})
+}
+
+/**
+ * Success authentication user
+ * @param {object} state 
+ * @param {object} action 
+ */
+const authSuccess = (state, action) => {
+  return updateObject(state, {
+    currentUser: {
+      id: action.user.id,
+      username: action.user.username,
+      email: action.user.email,
+      picture: action.user.picture
+    }
+  })
+}
+
+/**
+ * Fail authentication user
+ * @param {object} state 
+ * @param {object} action 
+ */
+const authFail = (state, action) => {
+  return updateObject(state, {error: action.error, loading: false})
+}
+
+/**
+ * Logout current user
+ * @param {object} state 
+ * @param {object} action 
+ */
+const logout = async (state, action) => {
+  try {
+    localStorage.removeItem('currentUser')
+    localStorage.removeItem('sessionToken')
+    await glpi.killSession()
+  } catch (error) {}
+  return updateObject(state, { currentUser: null }, () => { action.history.push(`${publicURL}/`)})
+}
+
+/**
+ * Refresh captcha authentication
+ * @param {object} state 
+ * @param {object} action 
+ */
+const authRefreshCaptcha = (state, action) => {
+  return updateObject(state, {
+    captcha: action.captcha,
+    configurationPassword: action.configurationPassword
+  })
+}
+
+/**
+ * Define reducers
+ * @param {object} state 
+ * @param {object} action 
+ */
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actionTypes.AUTH_SUCCESS: return authSuccess(state, action)
+    case actionTypes.AUTH_FAIL: return authFail(state, action)
+    case actionTypes.AUTH_REFRESH_CAPTCHA: return authRefreshCaptcha(state, action)
+    case actionTypes.CHANGE_NOTIFICATION_MESSAGE: return changeNotificationMessage(state, action)
+    case actionTypes.CHANGE_PASSWORD_CONFIGURATION: return changePasswordConfiguration(state, action)
+    case actionTypes.LOGOUT: return logout(state, action)
+    default: return state
+  }
+}
+
+export default reducer</code></pre>
         </article>
     </section>
 

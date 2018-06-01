@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: async/asyncForgotPassword.js</h1>
+        <h1 class="page-title">Source: store/ui/actionTypes.js</h1>
 
         
 
@@ -46,19 +46,38 @@ layout: container
 * ------------------------------------------------------------------------------
 */
 
-/** import dependencies */
-import withAsyncComponent from '../hoc/withAsyncComponent'
+/** ui Actions Types */
 
 /**
- * Calls asynchronous ForgotPassword component
+ * CHANGE_NOTIFICATION_MESSAGE
  * @constant
- * @type {component}
+ * @type {string}
  */
-const asyncForgotPassword = withAsyncComponent(() => {
-  return import('../containers/ForgotPassword')
-})
-
-export default asyncForgotPassword</code></pre>
+export const CHANGE_NOTIFICATION_MESSAGE = 'CHANGE_NOTIFICATION_MESSAGE'
+/**
+ * HIDE_NOTIFICATION
+ * @constant
+ * @type {string}
+ */
+export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION'
+/**
+ * UI_TRANSACTION_START
+ * @constant
+ * @type {string}
+ */
+export const UI_TRANSACTION_START = 'UI_TRANSACTION_START'
+/**
+ * UI_TRANSACTION_FINISH
+ * @constant
+ * @type {string}
+ */
+export const UI_TRANSACTION_FINISH = 'UI_TRANSACTION_FINISH'
+/**
+ * UI_TRANSACTION_FAIL
+ * @constant
+ * @type {string}
+ */
+export const UI_TRANSACTION_FAIL = 'UI_TRANSACTION_FAIL'</code></pre>
         </article>
     </section>
 

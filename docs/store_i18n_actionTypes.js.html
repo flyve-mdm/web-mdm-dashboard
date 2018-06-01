@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: async/asyncForgotPassword.js</h1>
+        <h1 class="page-title">Source: store/i18n/actionTypes.js</h1>
 
         
 
@@ -46,19 +46,20 @@ layout: container
 * ------------------------------------------------------------------------------
 */
 
-/** import dependencies */
-import withAsyncComponent from '../hoc/withAsyncComponent'
+/** I18N Actions Types */
 
 /**
- * Calls asynchronous ForgotPassword component
+ * CHANGE_LANGUAGE
  * @constant
- * @type {component}
+ * @type {string}
  */
-const asyncForgotPassword = withAsyncComponent(() => {
-  return import('../containers/ForgotPassword')
-})
-
-export default asyncForgotPassword</code></pre>
+export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE'
+/**
+ * CHANGE_LANGUAGE_FALLBACK
+ * @constant
+ * @type {string}
+ */
+export const CHANGE_LANGUAGE_FALLBACK = 'CHANGE_LANGUAGE_FALLBACK'</code></pre>
         </article>
     </section>
 

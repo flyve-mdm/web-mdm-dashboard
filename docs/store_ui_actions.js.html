@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: async/asyncForgotPassword.js</h1>
+        <h1 class="page-title">Source: store/ui/actions.js</h1>
 
         
 
@@ -47,18 +47,62 @@ layout: container
 */
 
 /** import dependencies */
-import withAsyncComponent from '../hoc/withAsyncComponent'
+import * as actionTypes from './actionTypes'
+
+// Actions
+/**
+ * Action set notification
+ * @param {string} notification
+ * @returns {object} action notification
+ */
+export const uiSetNotification = notification => {
+  return {
+      type: actionTypes.CHANGE_NOTIFICATION_MESSAGE,
+      notification
+  }
+}
 
 /**
- * Calls asynchronous ForgotPassword component
- * @constant
- * @type {component}
+ * Action hide notification
+ * @returns {object} action hide notification
  */
-const asyncForgotPassword = withAsyncComponent(() => {
-  return import('../containers/ForgotPassword')
-})
+export const uiHideNotification = () => {
+  return {
+    type: actionTypes.HIDE_NOTIFICATION    
+  }
+}
 
-export default asyncForgotPassword</code></pre>
+/**
+ * Action start transaction
+ * @returns {object} action start transaction
+ */
+export const uiTransactionStart = () => {
+  return {
+      type: actionTypes.UI_TRANSACTION_START
+  };
+};
+
+/**
+ * Action finish transaction
+ * @returns {object} action finish transaction
+ */
+export const uiTransactionFinish = success => {
+  return {
+      type: actionTypes.UI_TRANSACTION_FINISH,
+      success
+  };
+};
+
+/**
+ * Action Fail transaction
+ * @returns {object} action Fail transaction
+ */
+export const uiTransactionFail = error => {
+  return {
+      type: actionTypes.UI_TRANSACTION_FAIL,
+      error: error
+  };
+};</code></pre>
         </article>
     </section>
 

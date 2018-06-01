@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: async/asyncForgotPassword.js</h1>
+        <h1 class="page-title">Source: store/ui/reducer.js</h1>
 
         
 
@@ -47,18 +47,81 @@ layout: container
 */
 
 /** import dependencies */
-import withAsyncComponent from '../hoc/withAsyncComponent'
+import * as actionTypes from './actionTypes'
+import initialState from "./initialState"
+import { updateObject } from '../../shared/updateObject'
 
 /**
- * Calls asynchronous ForgotPassword component
- * @constant
- * @type {component}
+ * Set notification
+ * @param {objec} state 
+ * @param {object} action 
  */
-const asyncForgotPassword = withAsyncComponent(() => {
-  return import('../containers/ForgotPassword')
-})
+const uiSetNotification = (state, action) => {
+  return updateObject(state, {notification: {
+    show: true,
+    ...action.notification
+  }})
+}
 
-export default asyncForgotPassword</code></pre>
+/**
+ * Hide notification
+ * @param {objec} state 
+ * @param {object} action 
+ */
+const uiHideNotification = (state) => {
+  return updateObject(state, {notification: {
+    show: false
+  }})
+}
+
+/**
+ * Start transaction
+ * @param {objec} state 
+ * @param {object} action 
+ */
+const uiTransactionStart = (state, action) => {
+  return updateObject(state, {error: null, loading: true})
+}
+
+/**
+ * Fail transaction
+ * @param {objec} state 
+ * @param {object} action 
+ */
+const uiTransactionFail = (state, action) => {
+  return updateObject(state, {error: action.error, loading: false})
+}
+
+/**
+ * Finish transaction
+ * @param {objec} state 
+ * @param {object} action 
+ */
+const uiTransactionFinish = (state, action) => {
+  return updateObject(state, {
+    error: null,
+    success: action.success || null,
+    loading: false
+  })
+}
+
+/**
+ * Define reducers
+ * @param {object} state 
+ * @param {object} action 
+ */
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actionTypes.CHANGE_NOTIFICATION_MESSAGE: return uiSetNotification(state, action)
+    case actionTypes.HIDE_NOTIFICATION: return uiHideNotification(state)
+    case actionTypes.UI_TRANSACTION_START: return uiTransactionStart(state, action)
+    case actionTypes.UI_TRANSACTION_FAIL: return uiTransactionFail(state, action)
+    case actionTypes.UI_TRANSACTION_FINISH: return uiTransactionFinish(state, action)
+    default: return state
+  }
+}
+
+export default reducer</code></pre>
         </article>
     </section>
 
