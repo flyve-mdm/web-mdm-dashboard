@@ -35,8 +35,13 @@ import ErrorValidation from '../ErrorValidation'
 import EmptyMessage from '../EmptyMessage'
 import { I18n } from "react-i18nify"
 
+/** Component with the menu for multiple edition */
 export default class EditMultiple extends PureComponent {
 
+    /** 
+     * Create EditMultiple
+     * @param {object} props
+     */
     constructor(props) {
         super(props)
         this.state = {
@@ -50,6 +55,7 @@ export default class EditMultiple extends PureComponent {
         }
     }
 
+    /** asynchronous function to save the new values in glpi */
     handleSave = async () => {
         let isCorrect = true
 
@@ -111,6 +117,7 @@ export default class EditMultiple extends PureComponent {
         }
     }
 
+    /** Change state and request the password configuration */
     change = (name, value) => {
         if(name === "selectedField") {
             this.setState({
@@ -142,12 +149,14 @@ export default class EditMultiple extends PureComponent {
         }
     }
 
+    /** Leave the screen */    
     cancel = () => {
         this.props.history.goBack()
         this.props.changeAction('reload')
         this.props.changeSelectionMode(false)
     }
 
+    /** Render component */
     render() {
         if (this.props.selectedItems) {
             let renderComponent
