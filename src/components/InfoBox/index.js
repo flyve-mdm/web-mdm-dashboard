@@ -30,7 +30,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+/**
+ * Information boxes used on the home
+ * @param {string} to
+ * @param {string} icon
+ * @param {number} count
+ * @param {string} name
+ * @return {component} Infobox with the data
+ */
 const InfoBox = ({to, icon, count, name}) => {
+    /** Render component */
     return (
         <Link to={to}>
             <div className="info-box">
