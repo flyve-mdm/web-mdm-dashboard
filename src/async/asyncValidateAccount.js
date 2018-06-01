@@ -26,8 +26,14 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import withAsyncComponent from '../hoc/withAsyncComponent'
 
+/**
+ * Calls asynchronous ValidateAccount component
+ * @constant
+ * @type {component}
+ */
 const asyncValidateAccount = withAsyncComponent(() => {
   return import('../components/ValidateAccount')
 })
