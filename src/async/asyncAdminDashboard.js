@@ -26,8 +26,14 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import withAsyncComponent from '../hoc/withAsyncComponent';
 
+/**
+ * Calls asynchronous private routes
+ * @constant
+ * @type {component}
+ */
 const asyncAdminDashboard = withAsyncComponent(() => {
   return import('../applications/AdminDashboard')
 })
