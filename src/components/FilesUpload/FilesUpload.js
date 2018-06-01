@@ -31,10 +31,14 @@ import PropTypes from 'prop-types'
 import bytesToSize from '../../shared/bytesToSize'
 import { I18n } from "react-i18nify"
 
+/** Component used to upload files */
 export default class FilesUpload extends PureComponent {
-
-    constructor(props, context) {
-        super(props, context)
+    /** 
+     * Create FilesUpload
+     * @param {object} props
+     */ 
+    constructor(props) {
+        super(props)
         this.onDrop = this.onDrop.bind(this)
         this.onDragEnter = this.onDragEnter.bind(this)
         this.onDragLeave = this.onDragLeave.bind(this)
@@ -44,15 +48,20 @@ export default class FilesUpload extends PureComponent {
         this.state = { files: [] }
     }
 
+    /** 
+     * change the native behavior of the browser to add files to a list in the state
+     * @param {*} event
+     */
     onDrop(event) {
         event.preventDefault()
         this.onDragLeave(event)
 
-        // Collect added files, perform checking, cast pseudo-array to Array,
-        // then return to method
+        /** Collect added files, perform checking, cast pseudo-array to Array,
+         * then return to method
+         */
         let filesAdded = event.dataTransfer ? event.dataTransfer.files : event.target.files
 
-        // Multiple files dropped when not allowed
+        /** Multiple files dropped when not allowed */
         if (this.props.multiple === false && filesAdded.length > 1) {
             filesAdded = [filesAdded[0]]
         }
@@ -61,15 +70,15 @@ export default class FilesUpload extends PureComponent {
         for (let i = 0; i < filesAdded.length; i++) {
             let file = filesAdded[i]
 
-            // Assign file an id
+            /** Assign file an id */
             file.id = 'files-' + this.id++
-            // Tell file it's own extension
+            /** Tell file it's own extension */
             file.extension = this.fileExtension(file)
-            // Tell file it's own size
+            /** Tell file it's own size */
             file.filesize = file.size
-            // Tell file it's own readable size
+            /** Tell file it's own readable size */
             file.sizeReadable = bytesToSize(file.size)
-            // Add preview, either image or file extension
+            /** Add preview, either image or file extension */
 
             if (file.type && this.mimeTypeLeft(file.type) === 'image') {
                 file.preview = {
@@ -82,7 +91,7 @@ export default class FilesUpload extends PureComponent {
                 }
             }
 
-            // Check for file max limit
+            /** Check for file max limit */
             if (this.state.files.length + files.length >= this.props.maxFiles) {
                 this.onError({
                     code: 4,
@@ -91,7 +100,7 @@ export default class FilesUpload extends PureComponent {
                 break
             }
 
-            // If file is acceptable, push or replace
+            /** If file is acceptable, push or replace */
             if (this.fileTypeAcceptable(file) && this.fileSizeAcceptable(file)) {
                 files.push(file)
             }
@@ -104,26 +113,43 @@ export default class FilesUpload extends PureComponent {
         })
     }
 
+    /** 
+     * Change the native behavior of the browser by 'stopPropagation' 
+     * @param {*} event
+     */
     onDragOver(event) {
         event.preventDefault()
         event.stopPropagation()
     }
 
-    onDragEnter(event) {
+    /**
+     * Change the styles of the Dropbox when the file enters it
+     */
+    onDragEnter() {
         let el = this.dropzone
         el.className += ' ' + this.props.dropActiveClassName
     }
 
-    onDragLeave(event) {
+    /**
+     * Change the styles of the Dropbox when the file leaves it
+     */
+    onDragLeave() {
         let el = this.dropzone
         this.dropzone.className = el.className.replace(' ' + this.props.dropActiveClassName, '')
     }
 
+    /**
+     * Open the windows to select the files
+     */
     openFileChooser() {
         this.inputElement.value = null
         this.inputElement.click()
     }
 
+    /** 
+     * Validate the type of the file 
+     * @param {object} file
+     */   
     fileTypeAcceptable(file) {
         let accepts = this.props.accepts
         if (accepts) {
@@ -154,6 +180,10 @@ export default class FilesUpload extends PureComponent {
         }
     }
 
+    /** 
+     * Validate the size of the file 
+     * @param {object} file
+     */   
     fileSizeAcceptable(file) {
         if (file.size > this.props.maxFileSize) {
             this.onError({
@@ -172,14 +202,26 @@ export default class FilesUpload extends PureComponent {
         }
     }
 
+    /** 
+     * Get mime type left 
+     * @param {string} mime
+     */   
     mimeTypeLeft(mime) {
         return mime.split('/')[0]
     }
 
+    /** 
+     * Get mime type right 
+     * @param {string} mime
+     */   
     mimeTypeRight(mime) {
         return mime.split('/')[1]
     }
 
+    /** 
+     * Get the extension of the file 
+     * @param {object} file
+     */   
     fileExtension(file) {
         let extensionSplit = file.name.split('.')
         if (extensionSplit.length > 1) {
@@ -189,10 +231,19 @@ export default class FilesUpload extends PureComponent {
         }
     }
 
+    /** 
+     * Execute the function to handle the errors 
+     * @param {*} error
+     * @param {object} file
+     */     
     onError(error, file) {
         this.props.onError.call(this, error, file)
     }
 
+    /** 
+     * Remove a file of the list 
+     * @param {object} fileToRemove
+     */     
     removeFile(fileToRemove) {
         this.setState({
             files: this.state.files.filter(file => file.id !== fileToRemove.id)
@@ -201,6 +252,7 @@ export default class FilesUpload extends PureComponent {
         })
     }
 
+    /** Remove all files of the list */     
     removeFiles() {
         this.setState({
             files: []
@@ -209,6 +261,7 @@ export default class FilesUpload extends PureComponent {
         })
     }
 
+    /** Render component */ 
     render() {
         const inputAttributes = {
             type: 'file',
