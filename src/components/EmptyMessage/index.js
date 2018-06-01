@@ -30,14 +30,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from "react-i18nify"
 
-const EmptyMessage = props => (
-    <div className="center-block-content">
-        {props.icon && props.showIcon ? <span className={"icon-empty-message " + props.icon} /> : null}
-        <h1 className="empty-message"> 
-            { props.message } 
-        </h1>
-    </div>
-)
+/**
+ * Component to show a message when the screen is void
+ * @param {object} props
+ * @return {component} Message to show
+ */
+const EmptyMessage = props => {
+    /** Render component */
+    return (
+        <div className="center-block-content">
+            {props.icon && props.showIcon ? <span className={"icon-empty-message " + props.icon} /> : null}
+            <h1 className="empty-message"> 
+                { props.message } 
+            </h1>
+        </div>
+    )
+}
 
 EmptyMessage.propTypes = {
     icon: PropTypes.string,
