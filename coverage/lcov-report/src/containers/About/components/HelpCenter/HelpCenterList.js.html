@@ -650,10 +650,10 @@ class HelpCenterList extends PureComponent {
     itemRenderer = ReactWinJS.reactRenderer((<span class="fstat-no" title="function not covered" >item) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        return (</span>
             &lt;div 
-                style={{ padding: '14px', width: '100%' }}
+                style={ { padding: '14px', width: '100%' } }
                 onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.redirectToArticle(item.data.id)}</span>
             &gt;
-                &lt;span className="documentIcon" style={{marginRight: '5px'}}/&gt;
+                &lt;span className="documentIcon" style={ {marginRight: '5px'} }/&gt;
                 {item.data.name}
             &lt;/div&gt;
         )
@@ -712,28 +712,28 @@ class HelpCenterList extends PureComponent {
 <span class="fstat-no" title="function not covered" >    render() </span>{
 <span class="cstat-no" title="statement not covered" >        return (</span>
             this.state.isLoading ? 
-                &lt;div style={{height: "100%", marginTop: "-80px"}}&gt;&lt;Loading message={`${I18n.t('commons.loading')}...`} /&gt;&lt;/div&gt; : 
+                &lt;div style={ {height: "100%", marginTop: "-80px"} }&gt;&lt;Loading message={`${I18n.t('commons.loading')}...`} /&gt;&lt;/div&gt; : 
                 (   
                     &lt;ContentPane&gt;
-                        &lt;h2 style={{ margin: '10px' }}&gt;{I18n.t('about.help_center.title')}&lt;/h2&gt;
-                        &lt;div className="list-pane" style={{ padding: 0 }}&gt;
+                        &lt;h2 style={ { margin: '10px' } }&gt;{I18n.t('about.help_center.title')}&lt;/h2&gt;
+                        &lt;div className="list-pane" style={ { padding: 0 } }&gt;
                             &lt;div&gt;
-                                &lt;div style={{
+                                &lt;div style={ {
                                     display: 'flex',
                                     justifyContent: 'space-between'
-                                }}&gt;
+                                } }&gt;
                                     &lt;div&gt;
-                                        &lt;h3 style={{ margin: '10px' }}&gt;{this.state.labelList}&lt;/h3&gt;
+                                        &lt;h3 style={ { margin: '10px' } }&gt;{this.state.labelList}&lt;/h3&gt;
                                     &lt;/div&gt;
                                     &lt;div&gt;
                                         &lt;div&gt;
                                             &lt;ReactWinJS.AutoSuggestBox
-                                                style={{
+                                                style={ {
                                                     marginTop: '20px',
                                                     marginRight: '50px',
                                                     width: '150px',
                                                     minWidth: 'unset'
-                                                }}
+                                                } }
                                                 placeholderText={I18n.t('about.help_center.search_an_article')}
                                                 onSuggestionsRequested={this.handleSuggestionsRequested}
                                                 onQuerySubmitted={this.handleQuerySubmitted} 
@@ -741,13 +741,13 @@ class HelpCenterList extends PureComponent {
                                         &lt;/div&gt;
                                         &lt;div 
                                             onClick={this.handleSearch} 
-                                            style={{
+                                            style={ {
                                                 fontSize: '20px',
                                                 float: 'right',
                                                 marginTop: '-26px',
                                                 marginRight: '20px',
                                                 cursor: 'pointer'
-                                            }}
+                                            } }
                                         &gt;
                                             &lt;span className="searchIcon"&gt;&lt;/span&gt;
                                         &lt;/div&gt;
@@ -757,7 +757,7 @@ class HelpCenterList extends PureComponent {
                             &lt;ReactWinJS.ListView
                                 ref="listView"
                                 className="list-pane__content win-selectionstylefilled"
-                                style={{ height: 'calc(100% - 48px)' }}
+                                style={ { height: 'calc(100% - 48px)' } }
                                 itemDataSource={this.state.list.dataSource}
                                 itemTemplate={this.itemRenderer}
                                 layout={this.state.layout}
@@ -782,7 +782,7 @@ class HelpCenterList extends PureComponent {
                             &lt;div className="separator" /&gt;
 &nbsp;
                             &lt;div className="itemList" onClick={this.redirectToFeedBack}&gt;
-                                &lt;span className="messageIcon" style={{marginRight: '5px'}}/&gt;
+                                &lt;span className="messageIcon" style={ {marginRight: '5px'} }/&gt;
                                 { I18n.t('about.help_center.send_feedback') }
                             &lt;/div&gt;
                         &lt;/div&gt;
@@ -808,7 +808,7 @@ export default connect (
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu May 31 2018 15:52:51 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 01 2018 15:21:15 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

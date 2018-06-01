@@ -921,7 +921,7 @@ class Profiles extends PureComponent {
                 category: {
                     value: myUser.usercategories_id,
                     request: {
-                        params: {itemtype: itemtype.UserCategory, options: {range: '0-200', forcedisplay: [2]}},
+                        params: {itemtype: itemtype.UserCategory, options: {range: '0-200', forcedisplay: [2]} },
                         method: 'searchItems',
                         content: '1',
                         value: '2'
@@ -941,7 +941,7 @@ class Profiles extends PureComponent {
                 title: {
                     value: myUser.usertitles_id,
                     request: {
-                        params: {itemtype: itemtype.UserTitle, options: {range: '0-200', forcedisplay: [2]}},
+                        params: {itemtype: itemtype.UserTitle, options: {range: '0-200', forcedisplay: [2]} },
                         method: 'searchItems',
                         content: '1',
                         value: '2'
@@ -950,7 +950,7 @@ class Profiles extends PureComponent {
                 location: {
                     value: myUser.locations_id,
                     request: {
-                        params: {itemtype: itemtype.Location, options: {range: '0-200', forcedisplay: [2]}},
+                        params: {itemtype: itemtype.Location, options: {range: '0-200', forcedisplay: [2]} },
                         method: 'searchItems',
                         content: '1',
                         value: '2'
@@ -999,7 +999,7 @@ class Profiles extends PureComponent {
 <span class="cstat-no" title="statement not covered" >        if (this.state.password !== '' || this.state.passwordConfirmation !== '') {</span>
 <span class="cstat-no" title="statement not covered" >            if (!ErrorValidation.validation(this.state.parametersToEvaluate, this.state.password).isCorrect) {</span>
 <span class="cstat-no" title="statement not covered" >                correctPassword = false</span>
-            } else <span class="cstat-no" title="statement not covered" >if (!ErrorValidation.validation({...this.state.parametersToEvaluate, isEqualTo: {value: this.state.password, message: I18n.t('commons.passwords_not_match')}}, this.state.passwordConfirmation).isCorrect) {</span>
+            } else <span class="cstat-no" title="statement not covered" >if (!ErrorValidation.validation({...this.state.parametersToEvaluate, isEqualTo: {value: this.state.password, message: I18n.t('commons.passwords_not_match')} }, this.state.passwordConfirmation).isCorrect) {</span>
 <span class="cstat-no" title="statement not covered" >                correctPassword = false</span>
             } else {
 <span class="cstat-no" title="statement not covered" >                newUser = {</span>
@@ -1084,7 +1084,7 @@ class Profiles extends PureComponent {
                     imageProfile: e.target.result,
                     typeImageProfile: 'file'
                 })
-            }})(file)
+            } })(file)
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            reader.readAsDataURL(file)</span>
         }
@@ -1099,7 +1099,7 @@ class Profiles extends PureComponent {
         let component = <span class="cstat-no" title="statement not covered" >null</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        if (this.props.isLoading || !this.state.login) {</span>
-<span class="cstat-no" title="statement not covered" >            component = &lt;div style={{width: '100%', height: 'calc(100vh - 120px)'}}&gt;&lt;Loading message={`${I18n.t('commons.loading')}...`} /&gt;&lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >            component = &lt;div style={ {width: '100%', height: 'calc(100vh - 120px)'} }&gt;&lt;Loading message={`${I18n.t('commons.loading')}...`} /&gt;&lt;/div&gt;</span>
         } else {
             let user = <span class="cstat-no" title="statement not covered" >usersScheme({</span>
                 state: this.state, 
@@ -1122,7 +1122,7 @@ class Profiles extends PureComponent {
             }    
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            component = (</span>
-                &lt;div className="froms Profiles" style={{marginTop: '20px'}}&gt;
+                &lt;div className="froms Profiles" style={ {marginTop: '20px'} }&gt;
 &nbsp;
                     &lt;div className="froms__row froms__row--icon"&gt;
                         &lt;span className="viewIcon"/&gt;
@@ -1131,7 +1131,7 @@ class Profiles extends PureComponent {
     
                     &lt;div className="froms__row"&gt;
     
-                        &lt;div style={{ overflow: 'hidden' }}&gt;
+                        &lt;div style={ { overflow: 'hidden' } }&gt;
                             &lt;input
                                 {...inputAttributes}
                             /&gt;
@@ -1153,8 +1153,8 @@ class Profiles extends PureComponent {
                     &lt;ConstructInputs data={user.validDatesInformation} icon="monthIcon" /&gt;
     
                     &lt;ConstructInputs data={user.emailsInformation} icon="emailIcon" /&gt;
-                    &lt;div style={{ overflow: 'auto' }}&gt;
-                        &lt;button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}&gt;
+                    &lt;div style={ { overflow: 'auto' } }&gt;
+                        &lt;button className="win-button" style={ { float: 'right'} } onClick={this.addEmail}&gt;
                             {I18n.t('commons.add_email')}
                         &lt;/button&gt;
                     &lt;/div&gt;
@@ -1165,7 +1165,7 @@ class Profiles extends PureComponent {
     
                     &lt;ConstructInputs data={user.activityInformation} icon="documentIcon" /&gt;
     
-                    &lt;button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}&gt;
+                    &lt;button className="win-button" style={ { margin: "20px", float: "right" } } onClick={this.saveChanges}&gt;
                         {I18n.t('commons.save')}
                     &lt;/button&gt;
                 
@@ -1176,7 +1176,7 @@ class Profiles extends PureComponent {
         }       
 <span class="cstat-no" title="statement not covered" >        return (</span>
             &lt;ContentPane&gt;
-                &lt;h2 style={{ margin: '10px' }}&gt;
+                &lt;h2 style={ { margin: '10px' } }&gt;
                     {I18n.t('commons.profiles')}
                 &lt;/h2&gt;
                 { component }
@@ -1195,7 +1195,7 @@ export default connect(
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu May 31 2018 15:52:51 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 01 2018 15:21:15 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

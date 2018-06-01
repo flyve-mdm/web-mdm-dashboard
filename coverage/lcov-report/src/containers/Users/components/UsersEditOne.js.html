@@ -952,7 +952,7 @@ export default class UsersEditOne extends PureComponent {
                     category: {
                         value: validateData(response.usercategories_id),
                         request: {
-                            params: {itemtype: itemtype.UserCategory, options: {range: '0-200', forcedisplay: [2]}},
+                            params: {itemtype: itemtype.UserCategory, options: {range: '0-200', forcedisplay: [2]} },
                             method: 'searchItems',
                             content: '1',
                             value: '2'
@@ -972,7 +972,7 @@ export default class UsersEditOne extends PureComponent {
                     title: {
                         value: validateData(response.usertitles_id),
                         request: {
-                            params: {itemtype: itemtype.UserTitle, options: {range: '0-200', forcedisplay: [2]}},
+                            params: {itemtype: itemtype.UserTitle, options: {range: '0-200', forcedisplay: [2]} },
                             method: 'searchItems',
                             content: '1',
                             value: '2'
@@ -981,7 +981,7 @@ export default class UsersEditOne extends PureComponent {
                     location: {
                         value: validateData(response.locations_id),
                         request: {
-                            params: {itemtype: itemtype.Location, options: {range: '0-200', forcedisplay: [2]}},
+                            params: {itemtype: itemtype.Location, options: {range: '0-200', forcedisplay: [2]} },
                             method: 'searchItems',
                             content: '1',
                             value: '2'
@@ -1030,7 +1030,7 @@ export default class UsersEditOne extends PureComponent {
 <span class="cstat-no" title="statement not covered" >        if (this.state.password !== '' || this.state.passwordConfirmation !== '') {</span>
 <span class="cstat-no" title="statement not covered" >            if (!ErrorValidation.validation(this.state.parametersToEvaluate, this.state.password).isCorrect) {</span>
 <span class="cstat-no" title="statement not covered" >                correctPassword = false</span>
-            } else <span class="cstat-no" title="statement not covered" >if (!ErrorValidation.validation({...this.state.parametersToEvaluate, isEqualTo: {value: this.state.password, message: "Passwords do not match"}}, this.state.passwordConfirmation).isCorrect) {</span>
+            } else <span class="cstat-no" title="statement not covered" >if (!ErrorValidation.validation({...this.state.parametersToEvaluate, isEqualTo: {value: this.state.password, message: "Passwords do not match"} }, this.state.passwordConfirmation).isCorrect) {</span>
 <span class="cstat-no" title="statement not covered" >                correctPassword = false</span>
             } else {
 <span class="cstat-no" title="statement not covered" >                newUser = {</span>
@@ -1116,7 +1116,7 @@ export default class UsersEditOne extends PureComponent {
                     imageProfile: e.target.result,
                     typeImageProfile: 'file'
                 })
-            }})(file)
+            } })(file)
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            reader.readAsDataURL(file)</span>
         }
@@ -1164,7 +1164,7 @@ export default class UsersEditOne extends PureComponent {
 &nbsp;
                     &lt;div className="froms__row"&gt;
 &nbsp;
-                        &lt;div style={{ overflow: 'hidden', paddingLeft: '20px'}}&gt;
+                        &lt;div style={ { overflow: 'hidden', paddingLeft: '20px'} }&gt;
                             &lt;input
                                 {...inputAttributes}
                             /&gt;
@@ -1187,8 +1187,8 @@ export default class UsersEditOne extends PureComponent {
                     &lt;ConstructInputs data={user.validDatesInformation} icon="monthIcon" /&gt;
 &nbsp;
                     &lt;ConstructInputs data={user.emailsInformation} icon="emailIcon" /&gt;
-                    &lt;div style={{ overflow: 'auto', paddingRight: '20px'}}&gt;
-                        &lt;button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}&gt;
+                    &lt;div style={ { overflow: 'auto', paddingRight: '20px'} }&gt;
+                        &lt;button className="win-button" style={ { float: 'right'} } onClick={this.addEmail}&gt;
                             {I18n.t('commons.add_email')}
                         &lt;/button&gt;
                     &lt;/div&gt;
@@ -1199,7 +1199,7 @@ export default class UsersEditOne extends PureComponent {
 &nbsp;
                     &lt;ConstructInputs data={user.activityInformation} icon="documentIcon" /&gt;
 &nbsp;
-                    &lt;button className="btn btn--primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}&gt;
+                    &lt;button className="btn btn--primary" style={ { margin: "20px", float: "right" } } onClick={this.saveChanges}&gt;
                         {I18n.t('commons.save')}
                     &lt;/button&gt;
                 
@@ -1228,7 +1228,7 @@ export default class UsersEditOne extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu May 31 2018 15:52:51 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 01 2018 15:21:15 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>
