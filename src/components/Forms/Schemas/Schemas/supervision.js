@@ -28,6 +28,13 @@
 
 import { I18n } from "react-i18nify"
 
+/**
+ * Supervision data schema
+ * @function agent
+ * @param {object} state 
+ * @param {function} changeState
+ * @return {array}
+ */
 export default function ({ state, changeState }) {
     const helpDeskInformation = [
         [

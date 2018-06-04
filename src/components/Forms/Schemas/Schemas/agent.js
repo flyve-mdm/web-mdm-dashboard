@@ -28,6 +28,14 @@
 
 import { I18n } from "react-i18nify"
 
+/**
+ * Agent data schema
+ * @function agent
+ * @param {object} state 
+ * @param {function} changeState 
+ * @param {object} glpi 
+ * @return {array}
+ */
 export default function ({state, changeState, glpi}) {
     const mainInformation = [
         [

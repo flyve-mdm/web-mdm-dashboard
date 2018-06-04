@@ -28,6 +28,17 @@
 
 import { I18n } from "react-i18nify"
 
+/**
+ * User data schema
+ * @function agent
+ * @param {object} state 
+ * @param {function} changeState 
+ * @param {function} changeEmail 
+ * @param {function} deleteEmail 
+ * @param {function} changeSelect 
+ * @param {object} glpi 
+ * @return {array}
+ */
 export default function ({state, changeState, changeEmail, deleteEmail, changeSelect, glpi}) {
     const personalInformation = [
         [
