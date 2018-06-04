@@ -29,7 +29,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+/** 
+ * Component to create a textArea input 
+ * @param {object} props
+ */
 const TextArea = props =>  {
+    /** Render component */ 
     return (
         <div className="froms__col">
             <p>{props.label}</p>
