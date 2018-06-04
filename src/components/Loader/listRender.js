@@ -34,6 +34,7 @@ import ContentLoader, { BulletList } from 'react-content-loader'
  * @function listRender
  * @param {object} props
  * @param {number} index
+ * @return {component}
  */
 const listRender = ({props, index}) => {
     if (props.type === "list") {

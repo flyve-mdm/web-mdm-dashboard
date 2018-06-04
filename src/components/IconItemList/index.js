@@ -43,7 +43,10 @@ export default class IconItemList extends PureComponent {
         }
     }
 
-    /** Request an image if it's necessary */
+    /** 
+     * Request an image if it's necessary 
+     * @function componentDidMount
+     */
     componentDidMount() {
         if (this.props.type === 'file' && this.props.image !== '') {
             this.getImage()
@@ -101,7 +104,10 @@ export default class IconItemList extends PureComponent {
         } catch (error) {}
     }
 
-    /** Render component */
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         let style = {
             backgroundColor: this.props.backgroundColor,

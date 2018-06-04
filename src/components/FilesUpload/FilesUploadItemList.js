@@ -35,7 +35,10 @@ import PropTypes from 'prop-types'
  * @extends PureComponent
  */
 class FilesUploadItemList extends PureComponent {
-    /** Render component */ 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         return (
             <div className='files-list' >

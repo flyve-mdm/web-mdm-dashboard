@@ -169,7 +169,10 @@ export default class EditMultiple extends PureComponent {
         this.props.changeSelectionMode(false)
     }
 
-    /** Render component */
+    /** 
+     * Render component 
+     * @function render
+     */
     render() {
         if (this.props.selectedItems) {
             let renderComponent

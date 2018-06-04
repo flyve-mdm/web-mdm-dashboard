@@ -49,7 +49,6 @@ const ConstructInputs = props => {
         )
     }
 
-    /** Render component */ 
     return (
         <React.Fragment>
             { icon }

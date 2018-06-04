@@ -37,7 +37,10 @@ import glpi from '../../shared/glpiApi'
  */
 const withGLPI = (WrappedComponent) => {
   class GLPIClient extends PureComponent {
-    /** Render component */    
+    /** 
+     * Render component 
+     * @function render
+     */    
     render () { 
       return <WrappedComponent glpi={glpi} {...this.props} /> 
     }

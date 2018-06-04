@@ -145,7 +145,11 @@ const withAdminDashboardLayout = WrappedComponent => {
                 }, TIMEOUT_CONTRACT)
             }
         }
-        /** Render component */ 
+        
+        /** 
+         * Render component 
+         * @function render
+         */ 
         render() {
             return (
                 <main>

@@ -39,6 +39,7 @@ const Loading = props => {
     /** 
      * Create loader 
      * @constant loader
+     * @type {component}
      */
     const loader = (
         <div className='loader'>
@@ -53,6 +54,7 @@ const Loading = props => {
     /** 
      * Create a small or normal load component, according to what was requested 
      * @constant loadComponent
+     * @type {component}
      */
     const loadComponent = props.small ? (
         <div className="loading loading--small" style={props.style}>
@@ -67,7 +69,6 @@ const Loading = props => {
         </div>
     )
 
-    /** Render component */
     return loadComponent
 }
 

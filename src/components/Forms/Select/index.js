@@ -171,7 +171,10 @@ class Select extends PureComponent {
         this.setState ({ options: optionsList })
     }
 
-    /** Render component */ 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         return (
             <div className="froms__col">

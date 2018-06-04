@@ -39,6 +39,7 @@ class ErrorValidation extends PureComponent {
 
     /** 
      * Validate a data according to determined parameters
+     * @static
      * @function validation
      * @param {object} parametersToEvaluate
      * @param {*} value
@@ -92,14 +93,17 @@ class ErrorValidation extends PureComponent {
         return result
     }
 
-    /** Render component */
+    /** 
+     * Render component 
+     * @function render
+     */
     render() {
         return (
             <div className="error-message">
                 <ul>
                     { this.props.errors.map((element, index) => {
                         return <li key={index}>- {element}</li>
-                    }) }
+                    })}
                 </ul>
             </div>
         )

@@ -40,6 +40,7 @@ class Confirmation extends PureComponent {
 
     /** 
      * Asynchronous function that waits for a user's response
+     * @static
      * @async
      * @function isOK
      * @param {object} contentDialog
@@ -51,7 +52,10 @@ class Confirmation extends PureComponent {
         })
     }
     
-    /** Render component */
+    /** 
+     * Render component 
+     * @function render
+     */
     render () {
         return (
             <ReactWinJS.ContentDialog

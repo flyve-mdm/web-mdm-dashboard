@@ -31,7 +31,7 @@ import PropTypes from 'prop-types'
 import IconWithPopper from './IconWithPopper'
 import ImgWithPopper from './ImgWithPopper'
 import SpanWithPopper from './SpanWithPopper'
-import { ScrollSync, ScrollSyncPane } from '../ScrollSync'
+import { ScrollSync, ScrollSyncPanel } from '../ScrollSync'
 import withGLPI from '../../hoc/withGLPI'
 import { I18n } from "react-i18nify"
 import publicURL from '../../shared/publicURL'
@@ -51,14 +51,20 @@ class SplitView extends PureComponent {
     this.props.logout()
   }
 
-  /** Run 'splitview' animation */ 
+  /** 
+   * Run 'splitview' animation 
+   * @function componentDidUpdate
+   */ 
   componentDidUpdate () {
     if (this.props.expanded) {
       splitview(this.splitview, !this.props.contract).play()
     }
   }
   
-  /** Render component */ 
+  /** 
+   * Render component 
+   * @function render
+   */
   render () {
     this.props.handleSetTimeOut()
 
@@ -72,7 +78,7 @@ class SplitView extends PureComponent {
               <div className="splitview-wrapper__div">
                 <nav className="splitview-wrapped__navbar">
       
-                  <ScrollSyncPane>
+                  <ScrollSyncPanel>
                     <div className="splitview-wrapper-wrapper__div">
                       <section className="splitview-wrapped-navbar-wrapped-top__section">
                         <ImgWithPopper
@@ -146,7 +152,7 @@ class SplitView extends PureComponent {
                         />
                       </section>
                     </div>
-                  </ScrollSyncPane>
+                  </ScrollSyncPanel>
                 </nav>
                 { this.props.expanded ? 
                   (
@@ -155,7 +161,7 @@ class SplitView extends PureComponent {
                       onClick={() => this.props.handleContract()}
                       ref={nav => this.splitview = nav}
                     >
-                      <ScrollSyncPane>
+                      <ScrollSyncPanel>
                         <div className="splitview-wrapper-wrapper__div --large --end">
                           <section className="splitview-wrapped-navbar-wrapped-top__section --description">
                             <SpanWithPopper description={I18n.t('commons.dashboard')} to={`${publicURL}/app`} />
@@ -173,7 +179,7 @@ class SplitView extends PureComponent {
                             <SpanWithPopper description={I18n.t('commons.logout')} click={this.logout} />
                           </section>
                         </div>
-                      </ScrollSyncPane>
+                      </ScrollSyncPanel>
                     </nav>
                   ) : ""
                 } 

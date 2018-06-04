@@ -37,7 +37,10 @@ import PropTypes from 'prop-types'
  */
 const withHandleMessages = (WrappedComponent) => {
     class HandleMessages extends PureComponent {
-        /**  Render component */
+        /** 
+         * Render component 
+         * @function render
+         */
         render() {
             return <WrappedComponent handleMessage={handleMessage} {...this.props} />
         }

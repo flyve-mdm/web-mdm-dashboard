@@ -70,7 +70,10 @@ class DatePicker extends PureComponent {
         )
     }
 
-    /** Render component */ 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         return (
             <div className="froms__col">

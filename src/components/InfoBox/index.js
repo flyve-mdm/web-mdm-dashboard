@@ -40,7 +40,6 @@ import { Link } from 'react-router-dom'
  * @return {component} Infobox with the data
  */
 const InfoBox = ({to, icon, count, name}) => {
-    /** Render component */
     return (
         <Link to={to}>
             <div className="info-box">

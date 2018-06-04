@@ -37,7 +37,6 @@ import { I18n } from "react-i18nify"
  * @return {component} Message to show
  */
 const EmptyMessage = props => {
-    /** Render component */
     return (
         <div className="center-block-content">
             {props.icon && props.showIcon ? <span className={"icon-empty-message " + props.icon} /> : null}
