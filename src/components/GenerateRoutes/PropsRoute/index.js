@@ -27,15 +27,22 @@
 */
 
 import React from 'react'
-import renderMergedProps from '../renderMergerProps/renderMergedProps'
 import { Route } from 'react-router-dom'
 
+/**
+ * Generate route with props
+ * @function PropsRoute
+ * @param {component} component 
+ * @param {*} rest 
+ * @return {component} 
+ */
 const PropsRoute = ({ component, ...rest }) => {
   return (
-    <Route {...rest} render={routeProps => {
-      return renderMergedProps(component, routeProps, rest);
-    }}/>
-  );
+    <Route 
+      {...rest} 
+      render={routeProps => React.createElement(component, {...routeProps, ...rest})}
+    />
+  )
 }
 
 export default PropsRoute
