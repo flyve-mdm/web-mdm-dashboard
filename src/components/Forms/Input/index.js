@@ -32,12 +32,13 @@ import Confirmation from '../../Confirmation'
 import ErrorValidation from '../../ErrorValidation'
 import { I18n } from "react-i18nify"
 
-/** Component to create a custom input */
+/** 
+ * Component to create a custom input 
+ * @class Input
+ * @extends PureComponent
+ */
 class Input extends PureComponent {
-    /** 
-     * Create Input
-     * @param {object} props
-     */ 
+    /** @constructor */ 
     constructor(props) {
         super(props)
         this.state = {
@@ -49,6 +50,7 @@ class Input extends PureComponent {
 
     /**
      * Return the name and value to the father
+     * @function change
      * @param {object} eventObject
      */
     change = (eventObject) => {
@@ -57,6 +59,7 @@ class Input extends PureComponent {
 
     /**
      * Make sure that the state and props are in sync for when it is required
+     * @function getDerivedStateFromProps
      * @param {object} nextProps
      * @param {object} prevState
      */
@@ -84,6 +87,7 @@ class Input extends PureComponent {
 
     /**
      * Validate if the entered data are valid
+     * @function validate
      * @param {object} parametersToEvaluate
      * @param {string} value
      */
@@ -100,7 +104,11 @@ class Input extends PureComponent {
         }
     }
 
-    /** Delete an email of the list */
+    /** 
+     * Delete an email of the list 
+     * @async
+     * @function deleteEmail
+     */
     deleteEmail = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if(isOK) this.props.delete(this.props.name)

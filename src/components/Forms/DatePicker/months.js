@@ -31,6 +31,7 @@ import monthsList from './monthsList.json'
 
 /**
  * List months of the year
+ * @function months
  * @return {component} List of options for a select
  */
 export default () => {

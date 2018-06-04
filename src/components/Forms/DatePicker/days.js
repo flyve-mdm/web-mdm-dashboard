@@ -30,6 +30,7 @@ import React from 'react'
 
 /**
  * List of days depending on the month and the year
+ * @function days
  * @return {component} List of options for a select
  */
 export default (year, month) => {

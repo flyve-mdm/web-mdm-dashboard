@@ -32,6 +32,7 @@ import { I18n } from "react-i18nify"
 
 /**
  * Component to show a message when the screen is void
+ * @function EmptyMessage
  * @param {object} props
  * @return {component} Message to show
  */

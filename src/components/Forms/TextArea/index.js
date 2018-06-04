@@ -31,6 +31,7 @@ import PropTypes from 'prop-types'
 
 /** 
  * Component to create a textArea input 
+ * @function TextArea
  * @param {object} props
  */
 const TextArea = props =>  {

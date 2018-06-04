@@ -31,6 +31,7 @@ import ContentLoader, { BulletList } from 'react-content-loader'
 
 /** 
  * Render of loaders 
+ * @function listRender
  * @param {object} props
  * @param {number} index
  */

@@ -31,12 +31,13 @@ import PropTypes from 'prop-types'
 import bytesToSize from '../../shared/bytesToSize'
 import { I18n } from "react-i18nify"
 
-/** Component used to upload files */
+/** 
+ * Component used to upload files 
+ * @class FilesUpload
+ * @extends PureComponent
+ */
 export default class FilesUpload extends PureComponent {
-    /** 
-     * Create FilesUpload
-     * @param {object} props
-     */ 
+    /** @constructor */ 
     constructor(props) {
         super(props)
         this.onDrop = this.onDrop.bind(this)
@@ -50,7 +51,8 @@ export default class FilesUpload extends PureComponent {
 
     /** 
      * change the native behavior of the browser to add files to a list in the state
-     * @param {*} event
+     * @function onDrop
+     * @param {object} event
      */
     onDrop(event) {
         event.preventDefault()
@@ -115,6 +117,7 @@ export default class FilesUpload extends PureComponent {
 
     /** 
      * Change the native behavior of the browser by 'stopPropagation' 
+     * @function onDragOver
      * @param {*} event
      */
     onDragOver(event) {
@@ -124,6 +127,7 @@ export default class FilesUpload extends PureComponent {
 
     /**
      * Change the styles of the Dropbox when the file enters it
+     * @function onDragEnter
      */
     onDragEnter() {
         let el = this.dropzone
@@ -132,6 +136,7 @@ export default class FilesUpload extends PureComponent {
 
     /**
      * Change the styles of the Dropbox when the file leaves it
+     * @function onDragLeave
      */
     onDragLeave() {
         let el = this.dropzone
@@ -140,6 +145,7 @@ export default class FilesUpload extends PureComponent {
 
     /**
      * Open the windows to select the files
+     * @function openFileChooser
      */
     openFileChooser() {
         this.inputElement.value = null
@@ -148,6 +154,7 @@ export default class FilesUpload extends PureComponent {
 
     /** 
      * Validate the type of the file 
+     * @function fileTypeAcceptable
      * @param {object} file
      */   
     fileTypeAcceptable(file) {
@@ -182,6 +189,7 @@ export default class FilesUpload extends PureComponent {
 
     /** 
      * Validate the size of the file 
+     * @function fileSizeAcceptable
      * @param {object} file
      */   
     fileSizeAcceptable(file) {
@@ -204,6 +212,7 @@ export default class FilesUpload extends PureComponent {
 
     /** 
      * Get mime type left 
+     * @function mimeTypeLeft
      * @param {string} mime
      */   
     mimeTypeLeft(mime) {
@@ -212,6 +221,7 @@ export default class FilesUpload extends PureComponent {
 
     /** 
      * Get mime type right 
+     * @function mimeTypeRight
      * @param {string} mime
      */   
     mimeTypeRight(mime) {
@@ -220,6 +230,7 @@ export default class FilesUpload extends PureComponent {
 
     /** 
      * Get the extension of the file 
+     * @function fileExtension
      * @param {object} file
      */   
     fileExtension(file) {
@@ -233,6 +244,7 @@ export default class FilesUpload extends PureComponent {
 
     /** 
      * Execute the function to handle the errors 
+     * @function onError
      * @param {*} error
      * @param {object} file
      */     
@@ -242,6 +254,7 @@ export default class FilesUpload extends PureComponent {
 
     /** 
      * Remove a file of the list 
+     * @function removeFile
      * @param {object} fileToRemove
      */     
     removeFile(fileToRemove) {
@@ -252,7 +265,10 @@ export default class FilesUpload extends PureComponent {
         })
     }
 
-    /** Remove all files of the list */     
+    /** 
+     * Remove all files of the list 
+     * @function removeFiles
+     */     
     removeFiles() {
         this.setState({
             files: []
