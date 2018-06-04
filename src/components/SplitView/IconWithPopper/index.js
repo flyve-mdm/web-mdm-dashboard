@@ -36,7 +36,10 @@ import { NavLink } from 'react-router-dom'
  * @extends PureComponent
  */
 class IconWithPopper extends PureComponent {
-  /** Render component */ 
+  /** 
+   * Render component 
+   * @function render
+   */ 
   render () {
     if (this.props.to) {
       return (

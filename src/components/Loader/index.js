@@ -34,6 +34,7 @@ import listRender from './listRender'
  * Component with the leader of content
  * @function Loader
  * @param {object} props
+ * @return {component}
  */
 const Loader = props => {
     
@@ -49,10 +50,7 @@ const Loader = props => {
         ]
     }
         
-    /** Render component */
-    return (
-        <div>{ content }</div>
-    )
+    return ( <div>{content}</div> )
 }
 
 Loader.propTypes = {

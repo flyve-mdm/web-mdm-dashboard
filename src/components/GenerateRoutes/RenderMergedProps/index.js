@@ -26,46 +26,20 @@
 * ------------------------------------------------------------------------------
 */
 
-import { PureComponent } from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
+import React from 'react'
 
-class ScrollSyncPane extends PureComponent {
-
-    static propTypes = {
-        children: PropTypes.node.isRequired,
-        attachTo: PropTypes.object,
-        group: PropTypes.string
-    }
-
-    static defaultProps = {
-        group: 'default'
-    }
-
-    static contextTypes = {
-        registerPane: PropTypes.func.isRequired,
-        unregisterPane: PropTypes.func.isRequired
-    }
-
-    componentDidMount() {
-        this.node = this.props.attachTo || ReactDOM.findDOMNode(this)
-        this.context.registerPane(this.node, this.props.group)
-    }
-
-    componentDidUpdate(prevProps, prevState, prevContext) {
-        if (this.props.group !== prevProps.group) {
-            this.context.unregisterPane(this.node, prevProps.group)
-            this.context.registerPane(this.node, this.props.group)
-        }
-    }
-
-    componentWillUnmount() {
-        this.context.unregisterPane(this.node, this.props.group)
-    }
-
-    render() {
-        return this.props.children
-    }
+/**
+ * Create element with all props
+ * @function RenderMergedProps
+ * @param {component} component 
+ * @param {*} rest 
+ * @return {component} 
+ */
+const RenderMergedProps = (component, ...rest) => {
+  const finalProps = Object.assign({}, ...rest)
+  return (
+    React.createElement(component, finalProps)
+  )
 }
 
-export default ScrollSyncPane
+export default RenderMergedProps

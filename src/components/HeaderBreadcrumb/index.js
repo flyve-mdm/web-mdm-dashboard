@@ -67,7 +67,10 @@ class HeaderBreadcrumb extends PureComponent {
     return breadcrumbs
   }
   
-  /** Render component */
+  /** 
+   * Render component 
+   * @function render
+   */ 
   render () {
     return (
       <header className="header-block">

@@ -38,7 +38,10 @@ import { slideTop } from '../../shared/animations/index'
  */
 class ContentPane extends PureComponent {
 
-  /** Run the "slideTop" animation when the component is mounted */
+  /** 
+   * Run the "slideTop" animation when the component is mounted 
+   * @function componentDidMount
+   */
   componentDidMount() {
     this.forceAnimation()
   }
@@ -51,7 +54,10 @@ class ContentPane extends PureComponent {
     slideTop(this.pane).play()
   }
 
-  /** Render component */
+  /** 
+   * Render component 
+   * @function render
+   */
   render() {
     return (
       <div className={`content-pane ${this.props.className}`} ref={pane => this.pane = pane}>

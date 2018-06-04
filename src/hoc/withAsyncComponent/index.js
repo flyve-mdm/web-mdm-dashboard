@@ -46,7 +46,11 @@ const withAsyncComponent = importComponent => {
           this.setState({component: cmp.default})
         })
     }
-    /** Render component */ 
+    
+    /** 
+     * Render component 
+     * @function render
+     */
     render() {
       const C = this.state.component;
 

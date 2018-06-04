@@ -27,9 +27,9 @@
 */
 
 import ScrollSync from './ScrollSync'
-import ScrollSyncPane from './ScrollSyncPane'
+import ScrollSyncPanel from './ScrollSyncPanel'
 
 export {
   ScrollSync,
-  ScrollSyncPane
+  ScrollSyncPanel
 }

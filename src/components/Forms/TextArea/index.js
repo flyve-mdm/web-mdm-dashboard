@@ -33,9 +33,9 @@ import PropTypes from 'prop-types'
  * Component to create a textArea input 
  * @function TextArea
  * @param {object} props
+ * @return {component}
  */
-const TextArea = props =>  {
-    /** Render component */ 
+const TextArea = props => {
     return (
         <div className="froms__col">
             <p>{props.label}</p>

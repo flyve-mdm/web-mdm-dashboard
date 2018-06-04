@@ -36,7 +36,10 @@ import PropTypes from 'prop-types'
  * @extends PureComponent
  */
 class ImgWithPopper extends PureComponent {
-  /** Render component */ 
+  /** 
+   * Render component 
+   * @function render
+   */
   render () {
     return (
       <div>

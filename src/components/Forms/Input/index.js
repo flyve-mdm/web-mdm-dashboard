@@ -59,6 +59,7 @@ class Input extends PureComponent {
 
     /**
      * Make sure that the state and props are in sync for when it is required
+     * @static
      * @function getDerivedStateFromProps
      * @param {object} nextProps
      * @param {object} prevState
@@ -114,7 +115,10 @@ class Input extends PureComponent {
         if(isOK) this.props.delete(this.props.name)
     }
 
-    /** Render component */ 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         let deleteIcon = this.props.delete ? 
             <span className="deleteIcon" style={{ margin: 10, fontSize: 18 }} onClick={this.deleteEmail}/> :

@@ -277,7 +277,10 @@ export default class FilesUpload extends PureComponent {
         })
     }
 
-    /** Render component */ 
+    /** 
+     * Render component 
+     * @function render
+     */
     render() {
         const inputAttributes = {
             type: 'file',

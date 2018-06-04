@@ -41,8 +41,7 @@ import Input from '../Input'
  * @return {component} Form entry
  */
 const createListElement = ({icon, elements, index}) => {
-    let style = icon ? { marginLeft: 30, overflow: 'hidden' } : { overflow: 'hidden' }    
-    /** Render component */ 
+    let style = icon ? { marginLeft: 30, overflow: 'hidden' } : { overflow: 'hidden' }
     return (
         <div className="froms__row" style={style} key={index}>
             {

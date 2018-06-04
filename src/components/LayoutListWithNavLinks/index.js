@@ -91,7 +91,10 @@ class ListWithNavLinks extends PureComponent {
         })
     }
 
-    /** Remove 'resize' event listener */
+    /** 
+     * Remove 'resize' event listener 
+     * @function componentWillUnmount
+     */
     componentWillUnmount () {
         window.removeEventListener('resize', this.handleResize)
     }
@@ -111,12 +114,18 @@ class ListWithNavLinks extends PureComponent {
         }
     }
 
-    /** Run the 'slideTop' animation */
+    /** 
+     * Run the 'slideTop' animation 
+     * @function componentDidMount
+     */
     componentDidMount () {
         slideTop(this.nav).play()
     }
     
-    /** Render component */
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         return (
             <div className="flex-block flex-block--with-scroll flex-block--with-content-pane">

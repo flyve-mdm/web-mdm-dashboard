@@ -62,7 +62,10 @@ class ValidateAccount extends PureComponent {
         }
     }
 
-    /** Prepare the parameters of the validation request */
+    /** 
+     * Prepare the parameters of the validation request 
+     * @function componentDidMount
+     */
     componentDidMount() {
         let path = this.props.location.pathname.replace("/validateAccount/", "&validateAccount=")
         path = path.replace("/validation/", "&validation=")
@@ -107,7 +110,10 @@ class ValidateAccount extends PureComponent {
         }
     }
 
-    /** Render component */     
+    /** 
+     * Render component 
+     * @function render
+     */   
     render() {
         let renderComponent
         if (this.state.isLoading) {

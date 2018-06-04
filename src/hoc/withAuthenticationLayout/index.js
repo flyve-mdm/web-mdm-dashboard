@@ -56,7 +56,6 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
             textAlign: configStyles.centerContent ? 'center' : null,
             width: props.width
         }
-        /** Render component */   
         return (
             <div className="authentication" style={style} >
                 <section>

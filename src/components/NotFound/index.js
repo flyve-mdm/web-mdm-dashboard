@@ -36,7 +36,6 @@ import { I18n } from 'react-i18nify'
  * @return {component} Page of error 404
  */
 const NotFound = () => {
-    /** Render component */ 
     return (
         <div className="authentication" style={{ textAlign: 'center'}} >
             <section>

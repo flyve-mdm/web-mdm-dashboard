@@ -96,7 +96,10 @@ const withI18NTranslation = WrappedComponent => {
             this.findI18NString(this.props.languageCurrent)
         }
 
-        /** Render component */
+        /** 
+         * Render component 
+         * @function render
+         */
         render() {
             return <WrappedComponent {...this.props} />
         }

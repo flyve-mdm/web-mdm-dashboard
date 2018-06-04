@@ -28,6 +28,7 @@
 
 import React from 'react'
 import { Route } from 'react-router-dom'
+import RenderMergedProps from '../RenderMergedProps'
 
 /**
  * Generate route with props
@@ -40,7 +41,7 @@ const PropsRoute = ({ component, ...rest }) => {
   return (
     <Route 
       {...rest} 
-      render={routeProps => React.createElement(component, {...routeProps, ...rest})}
+      render={routeProps => RenderMergedProps(component, routeProps, rest)}
     />
   )
 }
