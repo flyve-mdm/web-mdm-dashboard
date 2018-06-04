@@ -29,8 +29,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
+/** Component to create a select input */
 class Select extends PureComponent {
-
+    /** 
+     * Create Select
+     * @param {object} props
+     */ 
     constructor (props) {
         super(props)
         this.state = {
@@ -38,10 +42,15 @@ class Select extends PureComponent {
         }
     }
 
+    /**
+     * Return the name and value to the father
+     * @param {object} eventObject
+     */
     change = (eventObject) => {
         this.props.function(this.props.name, eventObject.target.value)
     }
 
+    /** Make the necessary requests to glpi */
     listRequest = async () => {
         let options = []
         let response = await this.props.glpi[this.props.request.method](this.props.request.params)
@@ -120,7 +129,7 @@ class Select extends PureComponent {
 
         this.setState({ options })
     }
-
+    /** Validate the needs of the list of options */
     componentDidMount = () => {
         if (this.props.glpi && this.props.request) {
             this.listRequest()
@@ -129,6 +138,7 @@ class Select extends PureComponent {
         }
     }
 
+    /** Update the list of options */
     handleRefresh = async (options) => {
         let optionsList = []
         options.forEach(element => {
@@ -151,6 +161,7 @@ class Select extends PureComponent {
         this.setState ({ options: optionsList })
     }
 
+    /** Render component */ 
     render() {
         return (
             <div className="froms__col">

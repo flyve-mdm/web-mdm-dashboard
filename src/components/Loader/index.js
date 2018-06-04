@@ -30,7 +30,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import listRender from './listRender'
 
-/** Component with the leader of content */
+/** 
+ * Component with the leader of content 
+ * @param {object} props
+ */
 const Loader = props => {
     
     /** Create the array of loaders */

@@ -117,7 +117,11 @@ export default class EditMultiple extends PureComponent {
         }
     }
 
-    /** Change state and request the password configuration */
+    /** 
+     * Change state and request the password configuration 
+     * @param {string} name
+     * @param {string} value
+     */
     change = (name, value) => {
         if(name === "selectedField") {
             this.setState({

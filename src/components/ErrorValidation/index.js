@@ -35,6 +35,8 @@ class ErrorValidation extends PureComponent {
 
     /** 
      * Validate a data according to determined parameters
+     * @param {object} parametersToEvaluate
+     * @param {*} value
      * @return {object} shows if there are errors or not, and what are these
      */
     static validation = (parametersToEvaluate, value) => {
