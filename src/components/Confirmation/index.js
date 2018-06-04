@@ -36,6 +36,7 @@ class Confirmation extends PureComponent {
 
     /** 
      * Asynchronous function that waits for a user's response
+     * @param {object} contentDialog
      * @return {boolean} User's response
      */
     static isOK = async (contentDialog) => {

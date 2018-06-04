@@ -29,7 +29,11 @@
 import React from 'react'
 import ContentLoader, { BulletList } from 'react-content-loader'
 
-/** Render of loaders */
+/** 
+ * Render of loaders 
+ * @param {object} props
+ * @param {number} index
+ */
 const listRender = ({props, index}) => {
     if (props.type === "list") {
         return (

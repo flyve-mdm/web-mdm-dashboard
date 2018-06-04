@@ -98,7 +98,6 @@ export default class IconItemList extends PureComponent {
 
     /** Render component */
     render() {
-        
         let style = {
             backgroundColor: this.props.backgroundColor,
             width: this.props.size,

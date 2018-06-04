@@ -29,7 +29,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
+/** Component with the layout of the list of files to upload */
 class FilesUploadItemList extends PureComponent {
+    /** Render component */ 
     render() {
         return (
             <div className='files-list' >

@@ -62,7 +62,11 @@ class ListWithNavLinks extends PureComponent {
         }
     }
 
-    /** Change render of the menu according to the screen resolution */
+    /** 
+     * Change render of the menu according to the screen resolution 
+     * @param {string} mode
+     * @param {object} history
+     */
     styleNav (mode, history) {
         return (
             mode === "small" ? 
