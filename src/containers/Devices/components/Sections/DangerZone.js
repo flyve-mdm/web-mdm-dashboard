@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Confirmation from '../../../../components/Confirmation'
@@ -34,8 +35,12 @@ import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
 import ContentPane from '../../../../components/ContentPane'
 
+/**
+ * @class DangerZone
+ * @extends PureComponent
+ */
 class DangerZone extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -64,6 +69,11 @@ class DangerZone extends PureComponent {
         }
     }
 
+    /**
+     * handle device wipe
+     * @async
+     * @function wipe
+     */
     wipe = async () => {
         const isOK = await Confirmation.isOK(this.props.wipeDevice)
         if (isOK) {
@@ -86,6 +96,11 @@ class DangerZone extends PureComponent {
         }
     }
 
+    /**
+     * handle device unenroll
+     * @async
+     * @function unenroll
+     */
     unenroll = async () => {
         const isOK = await Confirmation.isOK(this.props.unenrollmentDevice)
         if (isOK) {
@@ -108,6 +123,11 @@ class DangerZone extends PureComponent {
         }
     }
 
+    /**
+     * handle device delete
+     * @async
+     * @function delete
+     */
     delete = async () => {
         const isOK = await Confirmation.isOK(this.props.deleteDevice)
         if (isOK) {
@@ -182,7 +202,7 @@ class DangerZone extends PureComponent {
         )
     }
 }
-
+/** DangerZone propTypes */
 DangerZone.propTypes = {
     id: PropTypes.string.isRequired,
     setNotification: PropTypes.func.isRequired,

@@ -26,10 +26,15 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from "react-i18nify"
 
+/**
+ * @class GeolocationList
+ * @extends PureComponent
+ */
 class GeolocationList extends PureComponent {
     render() {
         let renderList
@@ -58,12 +63,12 @@ class GeolocationList extends PureComponent {
         return renderList
     }
 }
-
+/** GeolocationList defaultProps */
 GeolocationList.defaultProps = {
     locations: [],
     markers: []
 }
-
+/** GeolocationList propTypes */
 GeolocationList.propTypes = {
     locations: PropTypes.array,
     showLocation: PropTypes.func,

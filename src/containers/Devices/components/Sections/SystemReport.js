@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Inventory from './Inventory'
@@ -34,8 +35,12 @@ import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
 import Loading from '../../../../components/Loading'
 
+/**
+ * @class SystemReport
+ * @extends PureComponent
+ */
 export default class SystemReport extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -73,6 +78,10 @@ export default class SystemReport extends PureComponent {
         this.handleRefresh()
     }
 
+    /**
+     * handle refresh system report
+     * @function handleRefresh
+     */
     handleRefresh = () => {
         if (this.state.update) {
             this.setState({
@@ -94,6 +103,10 @@ export default class SystemReport extends PureComponent {
         }
     }      
     
+    /**
+     * handle request inventory
+     * @function requestInventory
+     */
     requestInventory = () => {
         this.setState({
             requestingInventory: true
@@ -209,6 +222,7 @@ export default class SystemReport extends PureComponent {
         }
     }
 }
+/** SystemReport propTypes */
 SystemReport.propTypes = {
     id: PropTypes.string.isRequired,
     glpi: PropTypes.object.isRequired,

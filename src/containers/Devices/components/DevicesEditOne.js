@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../../components/ContentPane'
@@ -37,8 +38,12 @@ import itemtype from '../../../shared/itemtype'
 import publicURL from "../../../shared/publicURL"
 import getID from "../../../shared/getID"
 
+/**
+ * @class DevicesEditOne
+ * @extends PureComponent
+ */
 export default class DevicesEditOne extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -55,6 +60,10 @@ export default class DevicesEditOne extends PureComponent {
         }
     }
 
+    /**
+     * handle refresh selected device
+     * @function handleRefresh
+     */
     handleRefresh = () => {
         this.props.glpi.getAnItem({ itemtype: itemtype.PluginFlyvemdmAgent, id: this.state.id })
             .then((response) => {
@@ -91,6 +100,12 @@ export default class DevicesEditOne extends PureComponent {
             })
     }
 
+    /**
+     * handle set state
+     * @function changeState
+     * @param {string} name
+     * @param {object} value
+     */
     changeState = (name, value) => {
         if(name === 'fleet') {
             this.setState({
@@ -103,6 +118,10 @@ export default class DevicesEditOne extends PureComponent {
         }   
     }
 
+    /** 
+     * handle save one device
+     * @function handleSaveOneDevices
+     */
     handleSaveOneDevices = () => {
         this.setState({
             isLoading: true
@@ -164,6 +183,7 @@ export default class DevicesEditOne extends PureComponent {
         }
     }
 }
+/** DevicesEditOne propTypes */
 DevicesEditOne.propTypes = {
     selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,

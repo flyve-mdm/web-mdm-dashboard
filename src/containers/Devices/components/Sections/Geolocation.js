@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Loading from '../../../../components/Loading'
@@ -36,6 +37,10 @@ import itemtype from '../../../../shared/itemtype'
 import GeolocationRange from './GeolocationRange'
 import validateDate from '../../../../shared/validateDate'
 
+/**
+ * @class Geolocation
+ * @extends PureComponent
+ */
 export default class Geolocation extends PureComponent {
     constructor(props) {
         super(props)
@@ -67,12 +72,23 @@ export default class Geolocation extends PureComponent {
         }
     }
 
+    /**
+     * Set date range to get locations
+     * @function applyRange
+     * @param {date}
+     * @param {date}
+     */
     applyRange = (min, max) => {
         this.setState({
             showLocations: this.state.locations.filter(location => validateDate(new Date(location.date), min, max))
         })
     }
 
+    /**
+     * Show locations
+     * @function showLocation
+     * @param {location}
+     */
     showLocation = (location) => {
         let showLocations = this.state.showLocations.map(element => element)
         const index = showLocations.map((e) => { return e.id }).indexOf(location.id)
@@ -94,6 +110,11 @@ export default class Geolocation extends PureComponent {
         this.handleRefresh()
     }
 
+    /**
+     * handle request locations
+     * @async
+     * @function requestLocation
+     */
     requestLocation = async () => {
         try {
             this.setState({ isLoadingGeolocation: true})
@@ -114,6 +135,11 @@ export default class Geolocation extends PureComponent {
         }
     }
 
+    /**
+     * handle refresh locations
+     * @async
+     * @function handleRefresh
+     */
     handleRefresh = async () => {
         if (this.state.update) {
             try {
@@ -141,6 +167,11 @@ export default class Geolocation extends PureComponent {
         }
     }
 
+    /**
+     * handle go to selected location
+     * @function goToLocation
+     * @param {object} selectedLocation
+     */
     goToLocation = (selectedLocation) => this.setState({ selectedLocation })
 
     render() {
@@ -188,7 +219,7 @@ export default class Geolocation extends PureComponent {
                 )
     }
 }
-
+/** Geolocation propTypes */
 Geolocation.propTypes = {
     id: PropTypes.string.isRequired,
     setNotification: PropTypes.func.isRequired,

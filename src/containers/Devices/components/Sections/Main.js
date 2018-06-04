@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import IconItemList from '../../../../components/IconItemList'
@@ -36,8 +37,12 @@ import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
 
+/**
+ * @class Main
+ * @extends PureComponent
+ */
 export default class Main extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -73,6 +78,11 @@ export default class Main extends PureComponent {
         this.handleRefresh()
     }
 
+    /**
+     * handle refresh detail devices information
+     * @async
+     * @function handleRefresh
+     */
     handleRefresh = async () => {
         if (this.state.update) {
             try {
@@ -89,6 +99,11 @@ export default class Main extends PureComponent {
         }
     }
 
+    /**
+     * handle delete selected device
+     * @async
+     * @function handleRefresh
+     */
     handleDelete = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
@@ -114,11 +129,19 @@ export default class Main extends PureComponent {
         }
     }
 
+    /** 
+     * handle edit selected device
+     * @function handleEdit
+     */
     handleEdit = () => {
         const path = `${publicURL}/app/devices/${this.state.id}/edit`
         this.props.history.push(path)
     }
 
+    /**
+     * handle ping to device
+     * @function ping
+     */
     ping = () => {
         this.setState({
             sendingPing: true
@@ -222,6 +245,7 @@ export default class Main extends PureComponent {
         return renderComponent
     }
 }
+/** Main propTypes */
 Main.propTypes = {
     id: PropTypes.string.isRequired,
     changeAction: PropTypes.func.isRequired,

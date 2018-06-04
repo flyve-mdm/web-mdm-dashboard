@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -37,8 +38,13 @@ import { I18n } from 'react-i18nify'
 import itemtype from '../../../../../shared/itemtype'
 import ApplicationDetail from './ApplicationDetail'
 
+/**
+ * @class Applications
+ * @extends PureComponent
+ */
 export default class Applications extends PureComponent {
 
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -76,6 +82,11 @@ export default class Applications extends PureComponent {
         this.handleRefresh()
     }
 
+    /**
+     * handle fetch devices
+     * @async
+     * @function handleRefresh
+     */
     handleRefresh = async () => {
         if (this.state.update) {
             try {
@@ -107,8 +118,17 @@ export default class Applications extends PureComponent {
         }
     }
 
+    /**
+     * handle select applications
+     * @function handleRefresh
+     * @param {object} applicationSelected
+     */
     selectApplication = (applicationSelected) => this.setState({applicationSelected})
 
+    /**
+     * handle item list render
+     * @function ItemListRenderer
+     */
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
 
         const styles = {
@@ -177,6 +197,7 @@ export default class Applications extends PureComponent {
         return renderComponent
     }
 }
+/** Applications propTypes */
 Applications.propTypes = {
     id: PropTypes.string.isRequired,
     glpi: PropTypes.object.isRequired,

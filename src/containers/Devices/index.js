@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
@@ -46,6 +47,10 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * @class Devices
+ * @extends PureComponent
+ */
 class Devices extends PureComponent {
 
     constructor(props) {
@@ -62,6 +67,10 @@ class Devices extends PureComponent {
         window.addEventListener('resize', this.handleResize)
     }
 
+    /**
+     * handle page resize
+     * @function handleResize
+     */
     handleResize = () => {
         let nextMode = getMode()
 
@@ -99,6 +108,11 @@ class Devices extends PureComponent {
         }
     }
 
+    /**
+     * Build props
+     * @function propsData
+     * @returns {object}
+     */
     propsData = () => {
         return {
             icon: this.state.icon,
@@ -115,10 +129,27 @@ class Devices extends PureComponent {
         }
     }
 
+    /**
+     * Change selected items
+     * @function changeSelectedItems
+     */
     changeSelectedItems = selectedItems => this.setState({ selectedItems })
+    /**
+     * Change action
+     * @function changeAction
+     */
     changeAction = action => this.setState({ action })
+    /**
+     * Change selection mode
+     * @function changeSelectionMode
+     */
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
 
+    /**
+     * Build list styles
+     * @function stylesList
+     * @returns {object}
+     */
     stylesList = () => {
 
         let styles = {
@@ -142,6 +173,11 @@ class Devices extends PureComponent {
         return styles
     }
 
+    /**
+     * Build content styles
+     * @function stylesContent
+     * @returns {object}
+     */
     stylesContent = () => {
 
         const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
