@@ -47,8 +47,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with page of 'validate account'
+ * @class ValidateAccount
+ * @extends PureComponent
+ */
 class ValidateAccount extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -57,6 +62,7 @@ class ValidateAccount extends PureComponent {
         }
     }
 
+    /** Prepare the parameters of the validation request */
     componentDidMount() {
         let path = this.props.location.pathname.replace("/validateAccount/", "&validateAccount=")
         path = path.replace("/validation/", "&validation=")
@@ -70,6 +76,13 @@ class ValidateAccount extends PureComponent {
         }
     }
 
+    /**
+     * Validation request
+     * @async
+     * @function requestValidation
+     * @param {string} account
+     * @param {*} validation
+     */
     requestValidation = async (account, validation) => {
         try {
             const session = await this.props.glpi.initSessionByUserToken({ userToken: appConfig.demoToken })
@@ -92,9 +105,9 @@ class ValidateAccount extends PureComponent {
             this.props.actions.setNotification(this.props.handleMessage({type: 'warning', message: error}))
             this.setState({ isLoading: false, isValidated: false })
         }
-        
     }
 
+    /** Render component */     
     render() {
         let renderComponent
         if (this.state.isLoading) {

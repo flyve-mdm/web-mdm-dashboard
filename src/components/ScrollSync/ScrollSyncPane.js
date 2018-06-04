@@ -45,7 +45,7 @@ class ScrollSyncPane extends PureComponent {
     static contextTypes = {
         registerPane: PropTypes.func.isRequired,
         unregisterPane: PropTypes.func.isRequired
-    };
+    }
 
     componentDidMount() {
         this.node = this.props.attachTo || ReactDOM.findDOMNode(this)
