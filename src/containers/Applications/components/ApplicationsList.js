@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -38,8 +39,12 @@ import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 
+/**
+ * @class ApplicationsList
+ * @extends PureComponent
+ */
 export default class ApplicationsList extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -87,12 +92,18 @@ export default class ApplicationsList extends PureComponent {
         this.props.changeSelectionMode(false)
     }
 
+    /** Item list render */
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <ApplicationsItemList itemList={ItemList.data} size={42} />
         )
     })
 
+    /**
+     * handle fetch applications
+     * @async 
+     * @function handleRefresh
+     */
     handleRefresh = async () => {
         try {
             this.props.history.push(`${publicURL}/app/applications`)
@@ -122,11 +133,19 @@ export default class ApplicationsList extends PureComponent {
         }
     }
 
+    /**
+     * handle edit selected application
+     * @function handleEdit
+     */
     handleEdit = () => {
         const location = `${this.props.history.location.pathname}/edit`
         this.props.history.push(location)
     }
 
+    /**
+     * handle add new application
+     * @function handleAdd
+     */
     handleAdd = () => {
         this.props.history.push(`${publicURL}/app/applications/add`)
         this.props.changeSelectionMode(false)
@@ -136,6 +155,10 @@ export default class ApplicationsList extends PureComponent {
         }
     }
 
+    /**
+     * handle change selection mode
+     * @function handleToggleSelectionMode
+     */
     handleToggleSelectionMode = () => {
         this.props.history.push(`${publicURL}/app/applications`)
         this.props.changeSelectionMode(!this.props.selectionMode)
@@ -145,6 +168,11 @@ export default class ApplicationsList extends PureComponent {
         }
     }
 
+    /**
+     * handle show datail selected application
+     * @function handleSelectionChanged
+     * @param {object} eventObject
+     */
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
@@ -162,6 +190,11 @@ export default class ApplicationsList extends PureComponent {
         }
     }
 
+    /**
+     * handle delete selected application
+     * @function handleSelectionChanged
+     * @param {object} eventObject
+     */
     handleDelete = async (eventObject) => {
         try {
             const isOK = await Confirmation.isOK(this.contentDialog)
@@ -206,6 +239,11 @@ export default class ApplicationsList extends PureComponent {
         }
     }
 
+    /**
+     * handle sort item list applications
+     * @async
+     * @function handleSort
+     */
     handleSort = async () => {
         try {
             this.setState({
@@ -236,6 +274,11 @@ export default class ApplicationsList extends PureComponent {
         }
     }
 
+    /** 
+     * handle change loading state
+     * @function onLoadingStateChanged
+     * @param {object} eventObject
+    */
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {
             setTimeout(() => {
@@ -246,6 +289,12 @@ export default class ApplicationsList extends PureComponent {
         }
     }
 
+    /** 
+     * handle load more data
+     * @async
+     * @function loadMoreData
+     * @param {object} eventObject
+    */
     loadMoreData = async () => {
         try {
             this.setState({
@@ -286,6 +335,10 @@ export default class ApplicationsList extends PureComponent {
         }
     }
 
+    /** 
+     * handle add new application
+     * @function handleAdd
+    */
     handleAdd = () => {
         this.props.history.push(`${publicURL}/app/applications/add`)
         this.props.changeSelectionMode(false)
@@ -401,6 +454,7 @@ export default class ApplicationsList extends PureComponent {
         )
     }
 }
+/** ApplicationsList propTypes */
 ApplicationsList.propTypes = {
     history: PropTypes.object.isRequired,
     selectionMode: PropTypes.bool.isRequired,

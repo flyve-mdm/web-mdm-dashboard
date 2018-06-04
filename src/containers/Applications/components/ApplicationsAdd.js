@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { FilesUpload, FilesUploadItemList } from '../../../components/FilesUpload'
@@ -34,8 +35,12 @@ import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 
+/**
+ * @class ApplicationsAdd
+ * @extends PureComponent
+ */
 export default class ApplicationsAdd extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -45,28 +50,57 @@ export default class ApplicationsAdd extends PureComponent {
         }
     }
 
+    /**
+     * Handle change input
+     * @function changeInput
+     * @param {object} e
+     */
     changeInput = (e) => {
         this.setState({ input: e.target.value })
     }
 
+    /**
+     * Handle change file
+     * @function onFilesChange
+     * @param {object} files
+     */
     onFilesChange = (files) => {
         this.setState({
             files
         })
     }
 
+    /**
+     * Handle show file errors
+     * @function onFilesError
+     * @param {object} file
+     * @param {object} error
+     */
     onFilesError = (error, file) => {
         this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error.message }))
     }
 
+    /**
+     * Handle remove files from list
+     * @function filesRemoveOne
+     * @param {object} file
+     */
     filesRemoveOne = (file) => {
         this.refs.files.removeFile(file)
     }
 
+    /**
+     * Handle remove all files from list
+     * @function filesRemoveAll
+     */
     filesRemoveAll = () => {
         this.refs.files.removeFiles()
     }
 
+    /**
+     * Handle upload files
+     * @function filesUpload
+     */
     filesUpload = () => {
         const formData = new FormData()
         Object.keys(this.state.files).forEach(async (key) => {
@@ -152,6 +186,8 @@ export default class ApplicationsAdd extends PureComponent {
         return renderComponent
     }
 }
+
+/** ApplicationsAdd propTypes */
 ApplicationsAdd.propTypes = {
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,
