@@ -32,8 +32,12 @@ import Confirmation from '../../Confirmation'
 import ErrorValidation from '../../ErrorValidation'
 import { I18n } from "react-i18nify"
 
+/** Component to create a custom input */
 class Input extends PureComponent {
-
+    /** 
+     * Create Input
+     * @param {object} props
+     */ 
     constructor(props) {
         super(props)
         this.state = {
@@ -43,10 +47,19 @@ class Input extends PureComponent {
         }
     }
 
+    /**
+     * Return the name and value to the father
+     * @param {object} eventObject
+     */
     change = (eventObject) => {
         this.props.function(this.props.name, eventObject.target.value)
     }
 
+    /**
+     * Make sure that the state and props are in sync for when it is required
+     * @param {object} nextProps
+     * @param {object} prevState
+     */
     static getDerivedStateFromProps(nextProps, prevState) {
         if (!prevState.isCorrect || nextProps.forceValidation) {
             if (nextProps.parametersToEvaluate) {
@@ -69,6 +82,11 @@ class Input extends PureComponent {
         }
     }
 
+    /**
+     * Validate if the entered data are valid
+     * @param {object} parametersToEvaluate
+     * @param {string} value
+     */
     validate = (parametersToEvaluate, value) => {
         if (parametersToEvaluate) {
             
@@ -82,15 +100,17 @@ class Input extends PureComponent {
         }
     }
 
+    /** Delete an email of the list */
+    deleteEmail = async () => {
+        const isOK = await Confirmation.isOK(this.contentDialog)
+        if(isOK) this.props.delete(this.props.name)
+    }
 
+    /** Render component */ 
     render() {
-        let deleteIcon 
-        const deleteEmail = async () => {
-            const isOK = await Confirmation.isOK(this.contentDialog)
-            if(isOK) this.props.delete(this.props.name)
-        }
-        if (this.props.delete) deleteIcon = <span className="deleteIcon" style={{ margin: 10, fontSize: 18 }} onClick={deleteEmail}/>
-
+        let deleteIcon = this.props.delete ? 
+            <span className="deleteIcon" style={{ margin: 10, fontSize: 18 }} onClick={this.deleteEmail}/> :
+            undefined
         return (
             <div className="froms__col">
                 <p>{this.props.label}</p>
