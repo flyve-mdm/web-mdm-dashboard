@@ -26,10 +26,15 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import IconItemList from '../../../components/IconItemList'
 
+/**
+ * @class ApplicationsItemList
+ * @extends PureComponent
+ */
 export default class ApplicationsItemList extends PureComponent {
     render() {
         let image
@@ -69,6 +74,7 @@ export default class ApplicationsItemList extends PureComponent {
     }
 }
 
+/** ApplicationsItemList propTypes */
 ApplicationsItemList.propTypes = {
     itemList: PropTypes.object
 }

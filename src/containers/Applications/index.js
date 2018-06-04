@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import ApplicationsList from './components/ApplicationsList'
 import getMode from '../../shared/getMode'
@@ -46,8 +47,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * @class Applications
+ * @extends PureComponent
+ */
 class Applications extends PureComponent {
 
+    /** @constructs */
     constructor(props) {
         super(props)
         this.state = {
@@ -62,6 +68,10 @@ class Applications extends PureComponent {
         window.addEventListener('resize', this.handleResize)
     }
 
+    /**
+     * handle page resize
+     * @function handleResize
+     */
     handleResize = () => {
         let nextMode = getMode()
 
@@ -99,6 +109,11 @@ class Applications extends PureComponent {
         }
     }
 
+    /**
+     * Build props
+     * @function propsData
+     * @returns {object}
+     */
     propsData = () => {
         return {
             icon: this.state.icon,
@@ -115,10 +130,27 @@ class Applications extends PureComponent {
         }
     }
 
+    /**
+     * Change selected items
+     * @function changeSelectedItems
+     */
     changeSelectedItems = selectedItems => this.setState({ selectedItems })
+    /**
+     * Change action
+     * @function changeAction
+     */
     changeAction = action => this.setState({ action })
+    /**
+     * Change selection mode
+     * @function changeSelectionMode
+     */
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
 
+    /**
+     * Build list styles
+     * @function stylesList
+     * @returns {object}
+     */
     stylesList = () => {
 
         let styles = {
@@ -142,6 +174,11 @@ class Applications extends PureComponent {
         return styles
     }
 
+    /**
+     * Build content styles
+     * @function stylesContent
+     * @returns {object}
+     */
     stylesContent = () => {
 
         const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth

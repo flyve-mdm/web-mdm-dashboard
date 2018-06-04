@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../../components/ContentPane'
@@ -38,8 +39,12 @@ import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
 import publicURL from '../../../shared/publicURL'
 
+/**
+ * @class ApplicationsContent
+ * @extends PureComponent
+ */
 export default class ApplicationsContent extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -67,6 +72,11 @@ export default class ApplicationsContent extends PureComponent {
         }
     }
 
+    /**
+     * Handle delete current application
+     * @async
+     * @function handleDelete
+     */
     handleDelete = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
@@ -102,6 +112,11 @@ export default class ApplicationsContent extends PureComponent {
         this.handleRefresh()
     }
 
+    /**
+     * Handle refresh selected application
+     * @async
+     * @function handleRefresh
+     */
     handleRefresh = async () => {
         try {
             this.setState({ 
@@ -181,6 +196,8 @@ export default class ApplicationsContent extends PureComponent {
         }
     }
 }
+
+/** ApplicationsContent propTypes */
 ApplicationsContent.propTypes = {
     selectedItems: PropTypes.array,
     changeAction: PropTypes.func.isRequired,
@@ -188,6 +205,7 @@ ApplicationsContent.propTypes = {
     setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
+/** ApplicationsContent defaultProps */
 ApplicationsContent.defaultProps = {
     selectedItems: []
 }

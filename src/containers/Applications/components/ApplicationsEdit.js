@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ApplicationsEditItemList from './ApplicationsEditItemList'
@@ -35,8 +36,12 @@ import Loading from '../../../components/Loading'
 import itemtype from '../../../shared/itemtype'
 import { I18n } from "react-i18nify"
 
+/**
+ * @class ApplicationsEdit
+ * @extends PureComponent
+ */
 export default class ApplicationsEdit extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -45,6 +50,11 @@ export default class ApplicationsEdit extends PureComponent {
         }
     }
 
+    /**
+     * @function updateItemList
+     * @param {int} index
+     * @param {name} name
+    */
     updateItemList = (index, name) => {
         let newItem = [...this.state.itemListEdit]
 
@@ -64,6 +74,11 @@ export default class ApplicationsEdit extends PureComponent {
         })
     }
 
+    /**
+     * Handle files save
+     * @async
+     * @function handleSaveFiles
+    */
     handleSaveFiles = async () => {
 
         try {
@@ -143,6 +158,7 @@ export default class ApplicationsEdit extends PureComponent {
         }
     }
 }
+/** ApplicationsEdit propTypes */
 ApplicationsEdit.propTypes = {
     selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,
@@ -151,6 +167,7 @@ ApplicationsEdit.propTypes = {
     setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired
 }
+/** ApplicationsEdit defaultProps */
 ApplicationsEdit.defaultProps = {
     selectedItems: [],
     action: null

@@ -26,12 +26,18 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import EmptyMessage from '../../components/EmptyMessage'
 import DevicesContent from './components/ApplicationsContent'
 import ApplicationsAdd from './components/ApplicationsAdd'
 import ApplicationsEdit from './components/ApplicationsEdit'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Represents all routes from Applications section
+ * @constant
+ * @type {Array}
+ */
 const routes = [
   {
     path: '/',
