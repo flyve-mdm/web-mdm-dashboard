@@ -1,4 +1,4 @@
-/*
+/**
 *   Copyright © 2018 Teclib. All rights reserved.
 *
 *   This file is part of web-mdm-dashboard
@@ -36,13 +36,13 @@ class ScrollSync extends PureComponent {
     proportional: PropTypes.bool,
     vertical: PropTypes.bool,
     horizontal: PropTypes.bool
-  };
+  }
 
   static defaultProps = {
     proportional: true,
     vertical: true,
     horizontal: true
-  };
+  }
 
   static childContextTypes = {
     registerPane: PropTypes.func,
@@ -77,12 +77,12 @@ class ScrollSync extends PureComponent {
   }
 
   addEvents = (node, group) => {
-    /* For some reason element.addEventListener doesnt work with document.body */
+    /** For some reason element.addEventListener doesnt work with document.body */
     node.onscroll = this.handlePaneScroll.bind(this, node, group) // eslint-disable-line
   }
 
   removeEvents = (node) => {
-    /* For some reason element.removeEventListener doesnt work with document.body */
+    /** For some reason element.removeEventListener doesnt work with document.body */
     node.onscroll = null // eslint-disable-line
   }
 
@@ -116,21 +116,21 @@ class ScrollSync extends PureComponent {
     const { proportional, vertical, horizontal } = this.props
 
     this.panes[group].forEach((pane) => {
-      /* For all panes beside the currently scrolling one */
+      /** For all panes beside the currently scrolling one */
       if (scrolledPane !== pane) {
-        /* Remove event listeners from the node that we'll manipulate */
+        /** Remove event listeners from the node that we'll manipulate */
         this.removeEvents(pane, group)
-        /* Calculate the actual pane height */
+        /** Calculate the actual pane height */
         const paneHeight = pane.scrollHeight - clientHeight
         const paneWidth = pane.scrollWidth - clientWidth
-        /* Adjust the scrollTop position of it accordingly */
+        /** Adjust the scrollTop position of it accordingly */
         if (vertical && scrollTopOffset > 0) {
           pane.scrollTop = proportional ? (paneHeight * scrollTop) / scrollTopOffset : scrollTop // eslint-disable-line
         }
         if (horizontal && scrollLeftOffset > 0) {
           pane.scrollLeft = proportional ? (paneWidth * scrollLeft) / scrollLeftOffset : scrollLeft // eslint-disable-line
         }
-        /* Re-attach event listeners after we're done scrolling */
+        /** Re-attach event listeners after we're done scrolling */
         window.requestAnimationFrame(() => {
           this.addEvents(pane, group)
         })
