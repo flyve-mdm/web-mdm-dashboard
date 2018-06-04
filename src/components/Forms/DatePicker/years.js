@@ -28,6 +28,10 @@
 
 import React from 'react'
 
+/**
+ * List of years between 1980 and 2100
+ * @return {component} List of options for a select
+ */
 export default () => {
     let years = []
     for (let index = 1980; index <= 2100; index++) {
