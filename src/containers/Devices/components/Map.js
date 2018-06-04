@@ -26,10 +26,12 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import L from 'leaflet'
 
+/** set icons leaflet */
 delete L.Icon.Default.prototype._getIconUrl
 
 L.Icon.Default.mergeOptions({
@@ -38,7 +40,12 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('../../../../node_modules/leaflet/dist/images/marker-shadow.png')
 })
 
+/**
+ * @class Map
+ * @extends PureComponent
+ */
 class Map extends PureComponent {
+    /** @constructor */
     constructor (props) {
         super(props)
         this.state = {
@@ -47,6 +54,10 @@ class Map extends PureComponent {
         }
     }
 
+    /**
+     * handle add mark to location
+     * @function addMarkers
+     */
     addMarkers = () => {
         this.state.markerGroup.clearLayers()
         for (let index = 0; index < this.props.markers.length; index++) {
@@ -101,14 +112,13 @@ class Map extends PureComponent {
         return <div id="map" style={{...this.props.style, zIndex: 0}} />
     }
 }
-
+/** Map defaultProps */
 Map.defaultProps = {
     style: { height: '40%' },
     markers: [],
     selectedLocation: null
 }
-
-
+/** Map propTypes */
 Map.propTypes = {
     style: PropTypes.object,
     markers: PropTypes.array,

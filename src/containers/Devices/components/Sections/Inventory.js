@@ -26,12 +26,17 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Loader from '../../../../components/Loader'
 
+/**
+ * @class Inventory
+ * @extends PureComponent
+ */
 export default class Inventory extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -44,6 +49,10 @@ export default class Inventory extends PureComponent {
         this.handleRefresh()
     }
 
+    /** 
+     * handle request refresh inventory
+     * @function handleRefresh 
+     * */
     handleRefresh = () => {
         this.setState({
             isLoading: true
@@ -66,6 +75,11 @@ export default class Inventory extends PureComponent {
         })
     }
 
+    /**
+     * handle build inventory list
+     * @function buildList
+     * @param {object} value
+     */
     buildList = (value) => {
         return Object.keys(value).map((element, index) => {
             return (
@@ -96,11 +110,11 @@ export default class Inventory extends PureComponent {
         }
     }
 }
-
+/** Inventory defaultProps */
 Inventory.defaultProps = {
     parameters: {}
 }
-
+/** Inventory propTypes */
 Inventory.propTypes = {
     title: PropTypes.string.isRequired,
     itemType: PropTypes.string.isRequired,

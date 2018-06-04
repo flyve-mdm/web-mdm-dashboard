@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -39,8 +40,12 @@ import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 
+/** 
+ * @class DevicesList
+ * @extends PureComponent
+ */
 export default class DevicesList extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -88,18 +93,31 @@ export default class DevicesList extends PureComponent {
         this.props.changeSelectionMode(false)
     }
 
+    /**
+     * handle item list render
+     * @function ItemListRenderer
+     */
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <DevicesItemList itemList={ItemList.data} size={42} />
         )
     })
 
+    /** 
+     * handle list header render
+     * @function groupHeaderRenderer
+     */
     groupHeaderRenderer = ReactWinJS.reactRenderer((item) => {
         return (
             <div>{item.data.title}</div>
         )
     })
 
+    /**
+     * handle refresh devices list
+     * @async
+     * @function handleRefresh
+     */
     handleRefresh = async () => {
         try {
             this.setState({
@@ -128,10 +146,19 @@ export default class DevicesList extends PureComponent {
         }
     }
 
+    /**
+     * handle edit selected device
+     * @function handleEdit
+     * @param {object} eventObject 
+     */
     handleEdit(eventObject) {
         this.props.history.push(`${publicURL}/app/devices/edit`)
     }
 
+    /** 
+     * handle add new device
+     * @function handleAdd
+    */
     handleAdd = () => {
         this.props.history.push(`${publicURL}/app/devices/add`)
         this.props.changeSelectionMode(false)
@@ -141,6 +168,10 @@ export default class DevicesList extends PureComponent {
         }
     }
 
+    /**
+     * handle change selection mode
+     * @function handleToggleSelectionMode
+     */
     handleToggleSelectionMode = () => {
         this.props.history.push(`${publicURL}/app/devices`)
         this.props.changeSelectionMode(!this.props.selectionMode)
@@ -150,6 +181,11 @@ export default class DevicesList extends PureComponent {
         }
     }
 
+    /** 
+     * handle change to selected device
+     * @function handleSelectionChanged
+     * @param {object} eventObject
+     */
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
@@ -167,6 +203,11 @@ export default class DevicesList extends PureComponent {
         }
     }
 
+    /** 
+     * handle delete to selected device
+     * @function handleDelete
+     * @param {object} eventObject
+     */
     handleDelete = async (eventObject) => {
         try {
             const isOK = await Confirmation.isOK(this.contentDialog)
@@ -213,6 +254,12 @@ export default class DevicesList extends PureComponent {
         }
     }
 
+    /** 
+     * @async
+     * handle list sort
+     * @function handleSort
+     * @param {object} eventObject
+     */
     handleSort = async () => {
         try {
             this.setState({
@@ -242,6 +289,11 @@ export default class DevicesList extends PureComponent {
         }
     }
 
+    /**
+     * handle change loading state
+     * @function onLoadingStateChanged
+     * @param {object} eventObject
+     */
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {
              setTimeout(() => {
@@ -252,6 +304,11 @@ export default class DevicesList extends PureComponent {
         }
     }
 
+    /**
+     * handle load more data
+     * @async
+     * @function loadMoreData
+     */
     loadMoreData = async () => {
         try {
             this.setState({
@@ -403,6 +460,7 @@ export default class DevicesList extends PureComponent {
         )
     }
 }
+/** DevicesList propTypes */
 DevicesList.propTypes = {
     selectionMode: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,

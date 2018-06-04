@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../../components/ContentPane'
@@ -33,8 +34,12 @@ import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 
+/**
+ * @class Enroll
+ * @extends PureComponent
+ */
 export default class Enroll extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -43,6 +48,11 @@ export default class Enroll extends PureComponent {
         }
     }
 
+    /**
+     * handle send invitation to enroll device
+     * @async
+     * @function inviteDevice
+     */
     inviteDevice = async () => {
         try {
             if (this.state.email.trim() !== "") {
@@ -73,6 +83,11 @@ export default class Enroll extends PureComponent {
         }
     }
 
+    /**
+     * handle change input value
+     * @function changeInput
+     * @param {object} e
+     */
     changeInput = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
@@ -124,6 +139,7 @@ export default class Enroll extends PureComponent {
         return renderComponent
     }
 }
+/** Enroll propTypes */
 Enroll.propTypes = {
     setNotification: PropTypes.func.isRequired,
     glpi: PropTypes.object.isRequired

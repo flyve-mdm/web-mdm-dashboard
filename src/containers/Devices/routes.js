@@ -33,6 +33,11 @@ import DevicesEditOne from './components/DevicesEditOne'
 import DevicesEdit from './components/DevicesEdit'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Represents all routes from Devices section
+ * @constant
+ * @type {Array}
+ */
 const routes = [
   {
     path: '/',

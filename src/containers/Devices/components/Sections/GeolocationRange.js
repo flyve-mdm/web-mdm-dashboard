@@ -26,12 +26,18 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { DatePicker } from '../../../../components/Forms'
 import { I18n } from "react-i18nify"
 
+/**
+ * @class GeolocationRange
+ * @extends PureComponent
+*/
 export default class GeolocationRange extends PureComponent {
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -40,6 +46,12 @@ export default class GeolocationRange extends PureComponent {
         }
     }
 
+    /** 
+     * handle change date range
+     * @function changeRange
+     * @param {string} name
+     * @param {date} value
+     */
     changeRange = (name, value) => {
         this.setState({
             [name]: value
@@ -76,7 +88,7 @@ export default class GeolocationRange extends PureComponent {
         )
     }
 }
-
+/** GeolocationRange propTypes */
 GeolocationRange.propTypes = {
     min: PropTypes.string,
     max: PropTypes.string,

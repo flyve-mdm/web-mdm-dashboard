@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -37,8 +38,12 @@ import Confirmation from '../../../components/Confirmation'
 import FleetsContent from '../../Fleets/components/FleetsContent'
 import itemtype from '../../../shared/itemtype'
 
+/**
+ * @class DevicesContent
+ * @extends PureComponent
+ */
 export default class DevicesContent extends PureComponent {
-
+    /** @constructor */
     constructor (props) {
         super(props)
         this.state = {
@@ -60,6 +65,11 @@ export default class DevicesContent extends PureComponent {
         }
     }
 
+    /**
+     * handle change selected item
+     * @function changeselectedItem
+     * @param {object} pivot
+     */
     changeselectedItem = (pivot) => {
         if (pivot) {
             if (pivot.winControl.selectedIndex !== this.state.selectedIndex) {
@@ -167,6 +177,7 @@ export default class DevicesContent extends PureComponent {
         )
     }
 }
+/** DevicesContent propTypes */
 DevicesContent.propTypes = {
     changeSelectionMode: PropTypes.func.isRequired,
     changeAction: PropTypes.func.isRequired,

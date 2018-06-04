@@ -26,14 +26,19 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import EditMultiple from '../../../components/EditMultiple'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 
+/**
+ * @class DevicesEdit
+ * @extends PureComponent
+ */
 export default class DevicesEdit extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -66,6 +71,7 @@ export default class DevicesEdit extends PureComponent {
         )
     }
 }
+/** DevicesEdit propTypes */
 DevicesEdit.propTypes = {
     selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,

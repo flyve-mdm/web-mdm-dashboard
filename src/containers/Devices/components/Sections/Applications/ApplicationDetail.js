@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import itemtype from '../../../../../shared/itemtype'
@@ -36,8 +37,12 @@ import { Input, TextArea } from '../../../../../components/Forms'
 import toDateInputValue from '../../../../../shared/toDateInputValue'
 import validateData from '../../../../../shared/validateData'
 
+/**
+ * @class Applications
+ * @extends PureComponent
+ */
 export default class Applications extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -88,6 +93,7 @@ export default class Applications extends PureComponent {
         )
     }
 }
+/** Applications propTypes */
 Applications.propTypes = {
     id: PropTypes.number.isRequired,
     glpi: PropTypes.object.isRequired,

@@ -26,10 +26,15 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import IconItemList from '../../../components/IconItemList'
 
+/** 
+ * @class DevicesItemList
+ * @extends PureComponent
+ */
 export default class DevicesItemList extends PureComponent {
     render() {
         let size = this.props.size
@@ -54,6 +59,7 @@ export default class DevicesItemList extends PureComponent {
         )
     }
 }
+/** DevicesItemList propTypes */
 DevicesItemList.propTypes = {
     itemList: PropTypes.object.isRequired,
     size: PropTypes.number.isRequired
