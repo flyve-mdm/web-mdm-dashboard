@@ -26,10 +26,16 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React from 'react'
 import { I18n } from 'react-i18nify'
 import ContentPane from '../../../../components/ContentPane'
 
+/** 
+ * Contant information
+ * @constant Contant
+ * @type {component}
+ */
 const Contact = () => (
     <ContentPane>
         <h2 style={{ margin: '10px' }}>{ I18n.t('about.contact.title') }</h2>

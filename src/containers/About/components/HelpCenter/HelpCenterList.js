@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -48,6 +49,9 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * @class HelpCenterList
+ */
 class HelpCenterList extends PureComponent {
     constructor(props) {
         super(props)
@@ -239,7 +243,7 @@ class HelpCenterList extends PureComponent {
     }
 }
 
-
+/** HelpCenterList propTypes */
 HelpCenterList.propTypes = {
     history: PropTypes.object.isRequired,
     glpi: PropTypes.object.isRequired

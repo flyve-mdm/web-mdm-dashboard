@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Loading from '../../../../components/Loading'
@@ -46,6 +47,9 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * @class HelpCenterArticle
+ */
 class HelpCenterArticle extends PureComponent {
     constructor(props) {
         super(props)
@@ -89,6 +93,7 @@ class HelpCenterArticle extends PureComponent {
     }
 }
 
+/** HelpCenterArticle propTypes */
 HelpCenterArticle.propTypes = {
     history: PropTypes.object.isRequired,
     glpi: PropTypes.object.isRequired

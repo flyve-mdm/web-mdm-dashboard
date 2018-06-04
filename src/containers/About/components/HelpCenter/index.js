@@ -26,10 +26,14 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from "react"
 import GenerateRoutes from '../../../../components/GenerateRoutes'
 import routes from './routes'
 
+/**
+ * @class HelpCenter
+ */
 class HelpCenter extends PureComponent {
     render() {
         return (

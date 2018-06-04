@@ -26,10 +26,15 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React from 'react'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
 
+/**
+ * @constant Overview
+ * @type {component}
+ */
 const Overview = () => {
   return (
     <ContentPane>

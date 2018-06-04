@@ -26,10 +26,15 @@
 * ------------------------------------------------------------------------------
 */
 
+/** impport dependencies */
 import React from 'react'
 import { I18n } from 'react-i18nify'
 import ContentPane from '../../../../components/ContentPane'
 
+/**
+ * @constant TermsOfUse
+ * @type {component}
+ */
 const TermsOfUse = () => (
   <ContentPane>
     <h2 style={{ margin: '10px' }}>{I18n.t('about.term_of_use.title')}</h2>
