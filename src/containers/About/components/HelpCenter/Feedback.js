@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from "react"
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify'
@@ -46,7 +47,9 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-
+/**
+ * @class Feedback
+ */
 class Feedback extends PureComponent {
     constructor(props) {
         super(props)
@@ -153,6 +156,7 @@ class Feedback extends PureComponent {
     }
 }
 
+/** Feedback propTypes */
 Feedback.propTypes = {
     actions: PropTypes.object.isRequired,
     glpi: PropTypes.object.isRequired

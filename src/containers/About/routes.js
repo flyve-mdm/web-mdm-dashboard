@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import { I18n } from 'react-i18nify'
 import EmptyMessage from '../../components/EmptyMessage'
 import Overview from './components/Overview/'
@@ -36,6 +37,11 @@ import ReleaseNotes from './components/ReleaseNotes'
 import TermsOfUse from './components/TermsOfUse'
 import Licence from './components/License'
 
+/**
+ * Represents all private routes from About
+ * @constant
+ * @type {Array}
+ */
 const routes = [
   {
     path: '/',

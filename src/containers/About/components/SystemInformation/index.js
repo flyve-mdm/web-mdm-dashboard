@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** impport dependencies */
 import React, { PureComponent } from 'react'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
@@ -45,6 +46,10 @@ function mapDispatchToProps(dispatch) {
   return { actions }
 }
 
+/**
+ * Show System Information
+ * @class SystemInformation
+ */
 class SystemInformation extends PureComponent {
   constructor(props) {
     super(props)
@@ -103,6 +108,7 @@ class SystemInformation extends PureComponent {
   }
 }
 
+/** SystemInformation propsTypes */
 SystemInformation.propTypes = {
   glpi: PropTypes.object.isRequired
 }

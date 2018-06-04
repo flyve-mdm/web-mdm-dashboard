@@ -26,11 +26,17 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import HelpCenterArticle from './HelpCenterArticle'
 import HelpCenterList from './HelpCenterList'
 import Feedback from './Feedback'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Represents all private routes from HelpCenter
+ * @constant routes
+ * @type {Array}
+ */
 const routes = [
   {
     path: '/',

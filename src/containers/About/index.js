@@ -26,12 +26,17 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from "react"
 import PropTypes from 'prop-types'
 import LayoutListWithNavLinks from '../../components/LayoutListWithNavLinks'
 import routes from './routes'
 import GenerateRoutes from '../../components/GenerateRoutes'
 
+/**
+ * About
+ * @class
+ */
 class About extends PureComponent {
     render() {
         return (
@@ -42,6 +47,7 @@ class About extends PureComponent {
     }
 }
 
+/** About propTypes */
 About.propTypes = {
     match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
