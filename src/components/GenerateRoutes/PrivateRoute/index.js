@@ -31,6 +31,11 @@ import renderMergedProps from '../renderMergerProps/renderMergedProps'
 import { Route } from 'react-router-dom'
 import { Redirect } from 'react-router'
 
+/**
+ * Validate if a user is authenticated
+ * @function isAuthenticated
+ * @return {boolean}
+ */
 const isAuthenticated = () => {
   if (localStorage.getItem('sessionToken') && localStorage.getItem('sessionToken') !== undefined ) {
       return true
@@ -39,6 +44,14 @@ const isAuthenticated = () => {
   }
 }
 
+/**
+ * Generate private route
+ * @function PrivateRoute
+ * @param {component} component
+ * @param {string} redirectTo
+ * @param {*} rest 
+ * @return {component}
+ */
 const PrivateRoute = ({ component, redirectTo, ...rest }) => {
   return (
     <Route {...rest} render={routeProps => {

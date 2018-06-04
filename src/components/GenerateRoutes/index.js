@@ -33,6 +33,15 @@ import NotFound from '../../components/NotFound'
 
 // TODO: Enable PrivateRoute if route if private
 
+/**
+ * Generate routes
+ * @function GenerateRoutes
+ * @param {array} routes 
+ * @param {string} rootPath 
+ * @param {*} withNotFound 
+ * @param {object} data 
+ * @return {component}
+ */
 const GenerateRoutes = ({ routes, rootPath, withNotFound, data }) => {
   let r = routes.map(({ exact, path, component }, i) => {
     if (typeof (data) === 'object') {
@@ -48,7 +57,8 @@ const GenerateRoutes = ({ routes, rootPath, withNotFound, data }) => {
                 ? rootPath
                 : rootPath + path
               : path
-          } />
+          } 
+        />
       )
     }
     else {
@@ -63,10 +73,11 @@ const GenerateRoutes = ({ routes, rootPath, withNotFound, data }) => {
                 ? rootPath
                 : rootPath + path
               : path
-          } />
+          } 
+        />
       )
     }
-  });
+  })
 
   withNotFound && r.push(
     <Route key={routes.length + 1} render={() => <NotFound />} />
