@@ -37,9 +37,16 @@ import { I18n } from "react-i18nify"
 import publicURL from '../../shared/publicURL'
 import { splitview } from '../../shared/animationsWinJs'
 
-/** Component with side menu */
+/** 
+ * Component with side menu 
+ * @class SplitView
+ * @extends PureComponent
+ */
 class SplitView extends PureComponent {
-  /** Close session */ 
+  /** 
+   * Close session 
+   * @function logout
+   */ 
   logout = () => {
     this.props.logout()
   }

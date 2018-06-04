@@ -32,8 +32,17 @@ import DatePicker from '../DatePicker'
 import TextArea from '../TextArea'
 import Input from '../Input'
 
+/**
+ * Component to select the type of the form entry
+ * @function createListElement
+ * @param {string} icon
+ * @param {array} elements
+ * @param {number} index
+ * @return {component} Form entry
+ */
 const createListElement = ({icon, elements, index}) => {
-    let style = icon ? { marginLeft: 30, overflow: 'hidden' } : { overflow: 'hidden' }
+    let style = icon ? { marginLeft: 30, overflow: 'hidden' } : { overflow: 'hidden' }    
+    /** Render component */ 
     return (
         <div className="froms__row" style={style} key={index}>
             {

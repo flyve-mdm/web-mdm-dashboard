@@ -33,12 +33,13 @@ import MONTHS from './months'
 import DAYS from './days'
 import monthsList from './monthsList.json'
 
-/** Component to create a date picker */
+/** 
+ * Component to create a date picker 
+ * @class DatePicker
+ * @extends PureComponent
+ */
 class DatePicker extends PureComponent {
-    /** 
-     * Create DatePicker
-     * @param {object} props
-     */ 
+    /** @constructor */ 
     constructor (props) {
         super(props)
         const date = new Date (this.props.value)
@@ -51,6 +52,7 @@ class DatePicker extends PureComponent {
 
     /**
      * Return the name and value to the father
+     * @function change
      * @param {object} eventObject
      */
     change = (eventObject) => {

@@ -32,6 +32,7 @@ import { Link } from 'react-router-dom'
 
 /**
  * Information boxes used on the home
+ * @function InfoBox
  * @param {string} to
  * @param {string} icon
  * @param {number} count

@@ -31,7 +31,11 @@ import PropTypes from 'prop-types'
 import { slideTop } from '../../shared/animations/index'
 
 
-/** Wrapper component to add the CSS class "content-pane" and the animation "slideTop" */
+/** 
+ * Wrapper component to add the CSS class "content-pane" and the animation "slideTop" 
+ * @class ContentPane
+ * @extends PureComponent
+ */
 class ContentPane extends PureComponent {
 
   /** Run the "slideTop" animation when the component is mounted */
@@ -39,7 +43,10 @@ class ContentPane extends PureComponent {
     this.forceAnimation()
   }
   
-  /** Run the "slideTop" animation */  
+  /** 
+   * Run the "slideTop" animation
+   * @function forceAnimation
+   */  
   forceAnimation () {
     slideTop(this.pane).play()
   }

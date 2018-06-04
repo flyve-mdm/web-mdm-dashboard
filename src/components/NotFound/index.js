@@ -32,6 +32,7 @@ import { I18n } from 'react-i18nify'
 
 /**
  * Component used in the page of error 404
+ * @function NotFound
  * @return {component} Page of error 404
  */
 const NotFound = () => {

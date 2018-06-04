@@ -33,12 +33,13 @@ import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import { slideTop } from '../../shared/animations/index'
 
-/** List of nav links */
+/** 
+ * List of nav links 
+ * @class ListWithNavLinks
+ * @extends PureComponent
+ */
 class ListWithNavLinks extends PureComponent {
-    /** 
-     * Create ListWithNavLinks
-     * @param {object} props
-     */ 
+    /** @constructor */ 
     constructor(props) {
         super(props)
         this.state = {
@@ -50,7 +51,10 @@ class ListWithNavLinks extends PureComponent {
         window.addEventListener('resize', this.handleResize)
     }
 
-    /** Change state according to the resolution of the screen */
+    /** 
+     * Change state according to the resolution of the screen 
+     * @function handleResize
+     */
     handleResize = () => {
         const nextMode = getMode()
         if (this.state.mode !== nextMode) {
@@ -64,6 +68,7 @@ class ListWithNavLinks extends PureComponent {
 
     /** 
      * Change render of the menu according to the screen resolution 
+     * @function styleNav
      * @param {string} mode
      * @param {object} history
      */
@@ -75,7 +80,10 @@ class ListWithNavLinks extends PureComponent {
         )
     }
 
-    /** Change render of the child according to the screen resolution */
+    /** 
+     * Change render of the child according to the screen resolution 
+     * @function stylesArticle
+     */
     stylesArticle () {
         const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
         return ({

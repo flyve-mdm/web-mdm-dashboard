@@ -30,7 +30,11 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
-/** Component with the icons of the side menu */
+/** 
+ * Component with the icons of the side menu 
+ * @class IconWithPopper
+ * @extends PureComponent
+ */
 class IconWithPopper extends PureComponent {
   /** Render component */ 
   render () {

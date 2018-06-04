@@ -30,6 +30,7 @@ import React from 'react'
 
 /**
  * List of years between 1980 and 2100
+ * @function years
  * @return {component} List of options for a select
  */
 export default () => {

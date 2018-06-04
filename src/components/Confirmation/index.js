@@ -31,11 +31,17 @@ import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import { I18n } from 'react-i18nify'
 
-/** Component with a dialogue box */
+/** 
+ * Component with a dialogue box 
+ * @class Confirmation
+ * @extends PureComponent
+ */
 class Confirmation extends PureComponent {
 
     /** 
      * Asynchronous function that waits for a user's response
+     * @async
+     * @function isOK
      * @param {object} contentDialog
      * @return {boolean} User's response
      */

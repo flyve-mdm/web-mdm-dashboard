@@ -32,11 +32,16 @@ import { Link } from 'react-router-dom'
 import { I18n } from "react-i18nify"
 import publicURL from '../../shared/publicURL'
 
-/** Component with the breadcrumb menu of the header */
+/** 
+ * Component with the breadcrumb menu of the header 
+ * @class HeaderBreadcrumb
+ * @extends PureComponent
+ */
 class HeaderBreadcrumb extends PureComponent {
 
   /** 
    * Create the breadcrumb menu
+   * @function breadcrumbs
    * @return {array} Breadcrumb menu
    */
   breadcrumbs () {

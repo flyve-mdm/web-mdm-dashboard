@@ -30,11 +30,16 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from "react-i18nify"
 
-/** Component to errors of a form field */
+/** 
+ * Component to errors of a form field 
+ * @class ErrorValidation
+ * @extends PureComponent
+ */
 class ErrorValidation extends PureComponent {
 
     /** 
      * Validate a data according to determined parameters
+     * @function validation
      * @param {object} parametersToEvaluate
      * @param {*} value
      * @return {object} shows if there are errors or not, and what are these

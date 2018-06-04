@@ -30,7 +30,11 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
-/** Component with the nav links of the side menu */
+/** 
+ * Component with the nav links of the side menu 
+ * @class SpanWithPopper
+ * @extends PureComponent
+ */
 class SpanWithPopper extends PureComponent {
   /** Render component */
   render () {

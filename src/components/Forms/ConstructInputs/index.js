@@ -31,6 +31,12 @@ import PropTypes from 'prop-types'
 
 import createListElement from './createListElement'
 
+/**
+ * Component to create a list of form entries
+ * @function ConstructInputs
+ * @param {object} props
+ * @return {component} List of form entries
+ */
 const ConstructInputs = props => {
     let icon
     
@@ -43,6 +49,7 @@ const ConstructInputs = props => {
         )
     }
 
+    /** Render component */ 
     return (
         <React.Fragment>
             { icon }

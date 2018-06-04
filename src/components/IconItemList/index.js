@@ -29,12 +29,13 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-/** Component to get the icons for the lists */
+/** 
+ * Component to get the icons for the lists 
+ * @class IconItemList
+ * @extends PureComponent
+ */
 export default class IconItemList extends PureComponent {
-    /** 
-     * Create IconItemList
-     * @param {object} props
-     */ 
+    /** @constructor */ 
     constructor (props) {
         super(props)
         this.state = {
@@ -49,7 +50,11 @@ export default class IconItemList extends PureComponent {
         }
     }
 
-    /** Asynchronous function to get a requested image */
+    /** 
+     * Asynchronous function to get a requested image 
+     * @async
+     * @function getImage
+     */
     getImage = async () => {
         try {
             switch (this.props.image) {
