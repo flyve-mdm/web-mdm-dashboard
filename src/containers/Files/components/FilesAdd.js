@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { FilesUpload, FilesUploadItemList } from '../../../components/FilesUpload'
@@ -34,8 +35,12 @@ import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 
+/**
+ * @class FilesAdd
+ * @extends PureComponent
+ */
 export default class FilesAdd extends PureComponent {
-
+    /** @constructor */
     constructor (props) {
         super(props)
         this.state = {
@@ -44,24 +49,48 @@ export default class FilesAdd extends PureComponent {
         }
     }
     
+    /**
+     * Handle change file
+     * @function onFilesChange
+     * @param {object} files
+     */
     onFilesChange = (files) => {
         this.setState({
             files
         })
     }
 
+    /**
+     * Handle show file errors
+     * @function onFilesError
+     * @param {object} file
+     * @param {object} error
+     */
     onFilesError = (error, file) => {
         this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error.message }))
     }
 
+    /**
+     * Handle remove files from list
+     * @function filesRemoveOne
+     * @param {object} file
+     */
     filesRemoveOne = (file) => {
         this.files.removeFile(file)
     }
 
+    /**
+     * Handle remove all files from list
+     * @function filesRemoveAll
+     */
     filesRemoveAll = () => {
         this.files.removeFiles()
     }
 
+    /**
+     * Handle upload files
+     * @function filesUpload
+     */
     filesUpload = () => {
         const formData = new FormData()
         Object.keys(this.state.files).forEach(async(key) => {
@@ -142,6 +171,7 @@ export default class FilesAdd extends PureComponent {
         return renderComponent
     }
 }
+/** FilesAdd propTypes */
 FilesAdd.propTypes = {
     changeAction: PropTypes.func.isRequired,
     setNotification: PropTypes.func.isRequired,

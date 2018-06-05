@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -38,8 +39,12 @@ import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 
+/**
+ * @class FilesList
+ * @extends PureComponent
+ */
 export default class FilesList extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -87,12 +92,18 @@ export default class FilesList extends PureComponent {
         this.props.changeSelectionMode(false)
     }
 
+    /** Item list render */
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <FilesItemList itemList={ItemList.data} size={42} />
         )
     })
 
+    /**
+     * handle fetch files
+     * @async 
+     * @function handleRefresh
+     */
     handleRefresh = () => {
         this.props.history.push(`${publicURL}/app/files`)
         this.setState({
@@ -122,11 +133,19 @@ export default class FilesList extends PureComponent {
         })
     }
 
+    /**
+     * handle edit selected files
+     * @function handleEdit
+     */
     handleEdit = () => {
         const path = `${publicURL}/app/files/edit`
         this.props.history.push(path)
     }
 
+    /**
+     * handle add new files
+     * @function handleAdd
+     */
     handleAdd = (eventObject) => {
         this.props.history.push(`${publicURL}/app/files/add`)
         this.props.changeSelectionMode(false)
@@ -136,6 +155,10 @@ export default class FilesList extends PureComponent {
         }
     }
 
+    /**
+     * handle change selection mode
+     * @function handleToggleSelectionMode
+     */
     handleToggleSelectionMode = () => {
         this.props.history.push(`${publicURL}/app/files`)
         this.props.changeSelectionMode(!this.props.selectionMode)
@@ -145,6 +168,11 @@ export default class FilesList extends PureComponent {
         }
     }
 
+    /**
+     * handle show datail selected files
+     * @function handleSelectionChanged
+     * @param {object} eventObject
+     */
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
@@ -162,6 +190,11 @@ export default class FilesList extends PureComponent {
         }
     }
 
+    /**
+     * handle delete selected files
+     * @function handleSelectionChanged
+     * @param {object} eventObject
+     */
     handleDelete = async (eventObject) => {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
@@ -202,6 +235,11 @@ export default class FilesList extends PureComponent {
         }
     }
 
+    /**
+     * handle sort item list files
+     * @async
+     * @function handleSort
+     */
     handleSort = async () => {
         try {
             this.setState({
@@ -232,6 +270,11 @@ export default class FilesList extends PureComponent {
         }
     }
 
+    /** 
+     * handle change loading state
+     * @function onLoadingStateChanged
+     * @param {object} eventObject
+    */
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {
             setTimeout(() => {
@@ -242,6 +285,12 @@ export default class FilesList extends PureComponent {
         }
     }
 
+    /** 
+     * handle load more data
+     * @async
+     * @function loadMoreData
+     * @param {object} eventObject
+    */
     loadMoreData = async () => {
         try {   
             this.setState({
@@ -390,6 +439,7 @@ export default class FilesList extends PureComponent {
         )
     }
 }
+/** FilesList propTypes */
 FilesList.propTypes = {
     selectedItems: PropTypes.array.isRequired,
     changeSelectedItems: PropTypes.func.isRequired,

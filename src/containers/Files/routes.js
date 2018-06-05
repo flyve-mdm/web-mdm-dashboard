@@ -26,12 +26,18 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import EmptyMessage from '../../components/EmptyMessage'
 import FilesAdd from './components/FilesAdd'
 import FilesEdit from './components/FilesEdit'
 import FilesContent from './components/FilesContent'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Represents all routes from Files section
+ * @constant
+ * @type {Array}
+ */
 const routes = [
     {
         path: '/',

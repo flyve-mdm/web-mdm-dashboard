@@ -26,8 +26,13 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 
+/**
+ * @class FilesItemList
+ * @extends PureComponent
+ */
 export default class FilesItemList extends PureComponent {
     render() {
         return (
