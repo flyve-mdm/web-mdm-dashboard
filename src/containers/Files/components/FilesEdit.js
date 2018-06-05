@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import FilesEditItemList from './FilesEditItemList'
@@ -34,8 +35,12 @@ import Loading from '../../../components/Loading'
 import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 
+/**
+ * @class FilesEdit
+ * @extends PureComponent
+ */
 export default class FilesEdit extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -44,6 +49,11 @@ export default class FilesEdit extends PureComponent {
         }
     } 
 
+    /**
+     * @function updateItemList
+     * @param {int} index
+     * @param {name} name
+    */
     updateItemList = (index, name) => {
         let newItem = [...this.state.selectedItem]
 
@@ -63,6 +73,11 @@ export default class FilesEdit extends PureComponent {
         })
     }
 
+    /**
+     * Handle files save
+     * @async
+     * @function handleSaveFiles
+    */
     handleSaveFiles = async () => {
         
         try {
@@ -137,6 +152,7 @@ export default class FilesEdit extends PureComponent {
         }
     }
 }
+/** FilesEdit propTypes */
 FilesEdit.propTypes = {
     selectedItems: PropTypes.array,
     changeSelectionMode: PropTypes.func.isRequired,

@@ -26,11 +26,17 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify'
 
+/**
+ * @class FilesEditItemList
+ * @extends PureComponent
+ */
 export default class FilesEditItemList extends PureComponent {
+    /** @constructor */
     constructor(props) {
         super(props)
 
@@ -45,10 +51,20 @@ export default class FilesEditItemList extends PureComponent {
         })
     }
 
+    /**
+     * handle change input value
+     * @function changeInput
+     * @param {object} e
+     */
     changeInput = (e) => {
         this.setState({input: e.target.value})
     }
 
+    /** 
+     * Update item list when blur input
+     * @function blurInput
+     * @param {object} e
+     */
     blurInput = (e) => {
         if (e.target.value.trim() !== "") {
             this.props.updateItemList(this.props.selectedItem["PluginFlyvemdmFile.id"], e.target.value)
@@ -79,6 +95,7 @@ export default class FilesEditItemList extends PureComponent {
     )
   }
 }
+/** FilesEditItemList propTypes */
 FilesEditItemList.propTypes = {
     selectedItem: PropTypes.object.isRequired,
     updateItemList: PropTypes.func.isRequired

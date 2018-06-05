@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../../components/ContentPane'
@@ -35,8 +36,12 @@ import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 
+/**
+ * @class FilesContent
+ * @extends PureComponent
+ */
 export default class FilesContent extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -49,11 +54,21 @@ export default class FilesContent extends PureComponent {
         }
     }
 
+    /**
+     * Handle edit selected file
+     * @async
+     * @function handleEdit
+     */
     handleEdit = () => {
         const location = `${this.props.history.location.pathname}/edit`
         this.props.history.push(location)
     }
 
+    /**
+     * Handle delete current file
+     * @async
+     * @function handleDelete
+     */
     handleDelete = async () => {
         try {
             const isOK = await Confirmation.isOK(this.contentDialog)
@@ -128,6 +143,7 @@ export default class FilesContent extends PureComponent {
         }
     }
 }
+/** FilesContent propTypes */
 FilesContent.propTypes = {
     selectedItems: PropTypes.array,
     changeAction: PropTypes.func.isRequired,
