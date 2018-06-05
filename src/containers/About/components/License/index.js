@@ -26,19 +26,85 @@
 * ------------------------------------------------------------------------------
 */
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import ReactMarkdown from 'react-markdown'
-import LICENCE from './LICENCE.md'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from "react-i18nify"
+import Loading from "../../../../components/Loading"
+import EmptyMessage from "../../../../components/EmptyMessage"
+import withHandleMessages from '../../../../hoc/withHandleMessages'
+import { uiSetNotification } from '../../../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-const Licence = () => (
-  <ContentPane>
-    <h2 style={{ margin: '10px' }}>{I18n.t('about.license.title')}</h2>
-    <div className="about-pane" style={{ margin: '10px' }}>
-      <ReactMarkdown source={LICENCE} />
-    </div>
-  </ContentPane>
-)
+function mapDispatchToProps(dispatch) {
+  const actions = {
+      setNotification: bindActionCreators(uiSetNotification, dispatch)
+  }
+  return { actions }
+}
 
-export default Licence 
+/**
+ * Component to show the license information
+ * @class License
+ * @extends PureComponent
+ */
+class License extends PureComponent {
+  /** @constructor */
+  constructor(props) {
+    super(props)
+    this.state = {
+      license: undefined
+    }
+  }
+
+  /**
+   * Get license information
+   * @function componentDidMount
+   * @async
+   */
+  componentDidMount = async () => {
+    try {
+      const response = await fetch ('https://raw.githubusercontent.com/flyve-mdm/web-mdm-dashboard/develop/LICENSE.md')
+      this.setState({
+        license: await response.text()
+      })
+    } catch (error) {
+      this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+      this.setState({
+        license: 'no data'
+      })
+    }
+  }
+   
+  /** 
+   * Render component 
+   * @function render
+   */
+  render() {
+    let renderComponent 
+    if (this.state.license) {
+      if (this.state.license === 'no data') {
+        renderComponent = <EmptyMessage message={I18n.t('commons.no_data')}/>
+      } else {
+        renderComponent = (
+          <ContentPane>
+            <h2 style={{ margin: '10px' }}>{I18n.t('about.license.title')}</h2>
+            <div className="about-pane" style={{ margin: '10px' }}>
+              <ReactMarkdown source={this.state.license} />
+            </div>
+          </ContentPane>
+        )
+      }
+    } else {
+      renderComponent = <Loading message={`${I18n.t('commons.loading')}...`}/>
+    }
+
+    return renderComponent
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withHandleMessages(License))
