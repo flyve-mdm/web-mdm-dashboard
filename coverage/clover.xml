@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1528155902189" clover="3.2.0">
-  <project timestamp="1528155902189" name="All files">
-    <metrics statements="4570" coveredstatements="241" conditionals="1986" coveredconditionals="145" methods="1111" coveredmethods="63" elements="7667" coveredelements="449" complexity="0" loc="4570" ncloc="4570" packages="108" files="198" classes="198">
+<coverage generated="1528236824950" clover="3.2.0">
+  <project timestamp="1528236824950" name="All files">
+    <metrics statements="4608" coveredstatements="241" conditionals="1994" coveredconditionals="145" methods="1117" coveredmethods="63" elements="7719" coveredelements="449" complexity="0" loc="4608" ncloc="4608" packages="108" files="198" classes="198">
       <package name="src">
         <metrics statements="50" coveredstatements="0" conditionals="29" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -1172,16 +1172,35 @@
         </file>
       </package>
       <package name="src.containers.About.components.License">
-        <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="26" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/containers/About/components/License/index.js">
-          <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="26" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
           <line num="29" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
           <line num="31" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
+          <line num="34" count="0" type="stmt"/>
           <line num="35" count="0" type="stmt"/>
           <line num="36" count="0" type="stmt"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="38" count="0" type="stmt"/>
+          <line num="41" count="0" type="stmt"/>
+          <line num="44" count="0" type="stmt"/>
+          <line num="54" count="0" type="stmt"/>
+          <line num="55" count="0" type="stmt"/>
+          <line num="56" count="0" type="stmt"/>
+          <line num="67" count="0" type="stmt"/>
+          <line num="68" count="0" type="stmt"/>
+          <line num="69" count="0" type="stmt"/>
+          <line num="73" count="0" type="stmt"/>
+          <line num="74" count="0" type="stmt"/>
+          <line num="86" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="87" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="88" count="0" type="stmt"/>
+          <line num="90" count="0" type="stmt"/>
+          <line num="100" count="0" type="stmt"/>
+          <line num="103" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.About.components.Overview">
@@ -1196,16 +1215,35 @@
         </file>
       </package>
       <package name="src.containers.About.components.ReleaseNotes">
-        <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="26" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/containers/About/components/ReleaseNotes/index.js">
-          <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="26" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
           <line num="29" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
           <line num="31" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
+          <line num="34" count="0" type="stmt"/>
           <line num="35" count="0" type="stmt"/>
           <line num="36" count="0" type="stmt"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="38" count="0" type="stmt"/>
+          <line num="41" count="0" type="stmt"/>
+          <line num="44" count="0" type="stmt"/>
+          <line num="54" count="0" type="stmt"/>
+          <line num="55" count="0" type="stmt"/>
+          <line num="56" count="0" type="stmt"/>
+          <line num="67" count="0" type="stmt"/>
+          <line num="68" count="0" type="stmt"/>
+          <line num="69" count="0" type="stmt"/>
+          <line num="73" count="0" type="stmt"/>
+          <line num="74" count="0" type="stmt"/>
+          <line num="86" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="87" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="88" count="0" type="stmt"/>
+          <line num="90" count="0" type="stmt"/>
+          <line num="100" count="0" type="stmt"/>
+          <line num="103" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.About.components.SystemInformation">
