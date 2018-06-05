@@ -76,8 +76,7 @@ class ReleaseNotes extends PureComponent {
       })
     }
   }
-
-      
+   
   /** 
    * Render component 
    * @function render
