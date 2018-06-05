@@ -49,7 +49,7 @@ jobs:
 
       - run:
           name: "Start server in background"
-          command: yarn start > ../yarn.log
+          command: node scripts/start.js > ../yarn.log
           background: true
 
       - run: 
