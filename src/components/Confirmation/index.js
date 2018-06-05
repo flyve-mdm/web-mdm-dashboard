@@ -38,7 +38,7 @@ import { I18n } from 'react-i18nify'
  */
 class Confirmation extends PureComponent {
 
-    /** 
+    /**
      * Asynchronous function that waits for a user's response
      * @static
      * @async
