@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: shared/animationsWinJs/index.js</h1>
+        <h1 class="page-title">Source: containers/About/components/ReleaseNotes/index.js</h1>
 
         
 
@@ -46,41 +46,88 @@ layout: container
 * ------------------------------------------------------------------------------
 */
 
-/** @module animations WinJS */
+import React, { PureComponent } from 'react'
+import ReactMarkdown from 'react-markdown'
+import ContentPane from '../../../../components/ContentPane'
+import { I18n } from "react-i18nify"
+import Loading from "../../../../components/Loading"
+import EmptyMessage from "../../../../components/EmptyMessage"
+import withHandleMessages from '../../../../hoc/withHandleMessages'
+import { uiSetNotification } from '../../../../store/ui/actions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-/** Import dependencies */
-import WinJS from 'winjs'
+function mapDispatchToProps(dispatch) {
+  const actions = {
+      setNotification: bindActionCreators(uiSetNotification, dispatch)
+  }
+  return { actions }
+}
 
 /**
- * Enable / Disable WinJS animations
- * @param {boolean} isAnimate 
+ * Component to show the release notes
+ * @class ReleaseNotes
+ * @extends PureComponent
  */
-export default function (isAnimate) {
-    if (isAnimate) {
-        WinJS.UI.enableAnimations()
-    } else {
-        WinJS.UI.disableAnimations()
+class ReleaseNotes extends PureComponent {
+  /** @constructor */
+  constructor(props) {
+    super(props)
+    this.state = {
+      release: undefined
     }
+  }
+
+  /**
+   * Get release notes
+   * @function componentDidMount
+   * @async
+   */
+  componentDidMount = async () => {
+    try {
+      const response = await fetch ('https://raw.githubusercontent.com/flyve-mdm/web-mdm-dashboard/gh-pages/CHANGELOG.md')
+      this.setState({
+        release: await response.text()
+      })
+    } catch (error) {
+      this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+      this.setState({
+        release: 'no data'
+      })
+    }
+  }
+   
+  /** 
+   * Render component 
+   * @function render
+   */
+  render() {
+    let renderComponent 
+    if (this.state.release) {
+      if (this.state.release === 'no data') {
+        renderComponent = &lt;EmptyMessage message={I18n.t('commons.no_data')}/>
+      } else {
+        renderComponent = (
+          &lt;ContentPane>
+            &lt;h2 style={{ margin: '10px' }}>{I18n.t('about.release_notes.title')}&lt;/h2>
+            &lt;div className="about-pane" style={{ margin: '10px' }}>
+              &lt;ReactMarkdown source={this.state.release} />
+            &lt;/div>
+          &lt;/ContentPane>
+        )
+      }
+    } else {
+      renderComponent = &lt;Loading message={`${I18n.t('commons.loading')}...`}/>
+    }
+
+    return renderComponent
+  }
 }
 
-/** Get WinJS animations configuration from local store */
-const animate = () => localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')).animations : {}
-
-/**
- * Execute animation expanded or contract splitview
- * @param {object} element 
- * @param {boolean} expanded 
- */
-const splitview = (element, expanded) => {
-    const animation = element.animate({
-        width: expanded ? ['0px', '200px'] : ['200px', '0px']
-    }, 150)
-    if (!animate()) animation.play = () => {}
-    return animation 
-}
-
-/** Export SplitView animation */
-export { splitview }</code></pre>
+export default connect(
+  null,
+  mapDispatchToProps
+)(withHandleMessages(ReleaseNotes))</code></pre>
         </article>
     </section>
 
