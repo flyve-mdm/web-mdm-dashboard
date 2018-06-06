@@ -26,11 +26,21 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import IconItemList from '../../../components/IconItemList'
 
+/**
+ * Component with the template of the items of the user lists
+ * @class UsersItemList
+ * @extends PureComponent
+ */
 export default class UsersItemList extends PureComponent {
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         const imageProfile = this.props.itemList['User.picture'] ? this.props.itemList['User.picture'] : "profile.png"
         return (
@@ -44,6 +54,7 @@ export default class UsersItemList extends PureComponent {
         )
     }
 }
+
 UsersItemList.propTypes = {
     itemList: PropTypes.object.isRequired
 }

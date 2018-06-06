@@ -26,12 +26,18 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import EmptyMessage from '../../components/EmptyMessage'
 import UsersContent from './components/UsersContent'
 import UsersEditOne from './components/UsersEditOne'
 import UsersEdit from './components/UsersEdit'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Represents all private routes from Users
+ * @constant routes
+ * @type {Array}
+ */
 const routes = [
   {
     path: '/',

@@ -26,13 +26,20 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import EditMultiple from '../../../components/EditMultiple'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 
+/**
+ * Component with the form of massive edition of users
+ * @class DevicesEdit
+ * @extends PureComponent
+ */
 class DevicesEdit extends PureComponent {
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -135,9 +142,11 @@ class DevicesEdit extends PureComponent {
             ]
         }
     }
-    
-    
-
+   
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         return (
             <EditMultiple 
