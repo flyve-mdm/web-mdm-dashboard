@@ -26,13 +26,23 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import LayoutListWithNavLinks from '../../components/LayoutListWithNavLinks'
 import routes from './routes'
 import GenerateRoutes from '../../components/GenerateRoutes'
 
+/**
+ * Component with the settings section
+ * @class Settings
+ * @extends PureComponent
+ */
 class Settings extends PureComponent {
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         return (
             <LayoutListWithNavLinks routes={routes} rootPath={this.props.match.url} history={this.props.history}>
