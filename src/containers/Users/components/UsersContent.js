@@ -250,6 +250,7 @@ export default class UsersContent extends PureComponent {
         ) 
     }
 }
+
 UsersContent.propTypes = {
     selectedItems: PropTypes.array,
     changeAction: PropTypes.func.isRequired,

@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -33,11 +34,7 @@ import { I18n } from 'react-i18nify'
 import Loading from '../../components/Loading'
 import ConstructInputs from '../../components/Forms'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import {
-    changeNotificationMessage,
-    fetchCaptcha,
-    fetchSignUp
-} from '../../store/authentication/actions'
+import { changeNotificationMessage, fetchCaptcha, fetchSignUp } from '../../store/authentication/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { buildDataArray, changeState, handleSubmitForm } from './actions'
@@ -61,8 +58,13 @@ function mapStateToProps(state, props) {
     }
 }
 
+/**
+ * Component with the registration form
+ * @class SignUp
+ * @extends PureComponent
+ */
 class SignUp extends PureComponent {
-
+    /** @constructor */
     constructor (props) {
         super(props)
         this.state = {
@@ -80,16 +82,28 @@ class SignUp extends PureComponent {
         this.buildDataArray = () => buildDataArray(this, I18n)
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
+    /**
+     * redirect to '/validateAccount' when the registration is success
+     * @function componentDidUpdate
+     */
+    componentDidUpdate() {
         if (this.props.type === 'success') {
             this.props.history.push(`${publicURL}/validateAccount`)
         }
     }
     
+    /**
+     * Fetch the captcha
+     * @function componentDidMount
+     */
     componentDidMount() {
         this.props.actions.fetchCaptcha()
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         let renderComponent 
         if (this.props.isLoading) {

@@ -26,13 +26,14 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import ErrorValidation from '../../components/ErrorValidation';
 
 /**
- * Actions Pattern for Form SignUp Data Flow
- * 
+ * Handle change state
+ * @function changeState
+ * @param {object} ctx
  */
-
 export const changeState = (ctx) => {
     return (name, value) => {
         ctx.setState({
@@ -41,6 +42,13 @@ export const changeState = (ctx) => {
     }
 }
 
+/**
+ * Build data array
+ * @function buildDataArray
+ * @param {object} ctx
+ * @param {*} I18n
+ * @return {array}
+ */
 export const buildDataArray = (ctx, I18n) => {
   const dataArray = {
     personalInformation: [
@@ -146,9 +154,14 @@ export const buildDataArray = (ctx, I18n) => {
   return dataArray
 }
 
+/**
+ * Handle submit form
+ * @function handleSubmitForm
+ * @param {*} ctx 
+ * @param {*} event 
+ */
 export const handleSubmitForm = (ctx, event) => {
     event.preventDefault()
-
     const user = ctx.buildDataArray()
     
     let isCorrect = true
