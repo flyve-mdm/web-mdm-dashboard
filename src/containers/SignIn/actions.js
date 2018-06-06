@@ -27,22 +27,35 @@
 */
 
 /**
- * Actions Pattern for Form SignIn Data Flow
- * 
+ * Handle change input value
+ * @function changeInput
+ * @param {object} ctx
+ * @param {object} input
  */
-
 export const changeInput = (ctx, input) => {
   ctx.setState({
       [input.name]: input.value
   })
 }
 
+/**
+ * Handle change phase
+ * @function changePhase
+ * @param {object} ctx
+ * @param {number} newPhase
+ */
 export const changePhase = (ctx, newPhase) => {
   ctx.setState({
       phase: newPhase
   })
 }
 
+/**
+ * Handle form submit
+ * @function handleFormSubmit
+ * @param {object} ctx
+ * @param {object} event
+ */
 export const handleFormSubmit = (ctx, event) => {
   event.preventDefault()
 

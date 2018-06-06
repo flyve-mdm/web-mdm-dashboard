@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
@@ -56,8 +57,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with the login form
+ * @class SignIn
+ * @extends PureComponent
+ */
 class SignIn extends PureComponent {
-
+    /** @constructor */
     constructor (props) {
         super(props)
         this.state = {
@@ -65,12 +71,35 @@ class SignIn extends PureComponent {
             password: '',
             phase: 1
         }
-
-        this.changeInput = event => changeInput(this, event.target)
-        this.changePhase = newPhase => changePhase(this, newPhase)
-        this.handleFormSubmit = event => handleFormSubmit(this, event)
     }
-
+    
+    /**
+     * Handle change input value
+     * @function changeInput
+     * @param {} event
+     */
+    changeInput = event => changeInput(this, event.target)
+    
+    /**
+     * Handle change phase
+     * @function changePhase
+     * @param {number} newPhase
+     */
+    changePhase = newPhase => changePhase(this, newPhase)
+    
+    /**
+     * Handle form submit
+     * @function handleFormSubmit
+     * @param {object} event
+     */
+    handleFormSubmit = event => handleFormSubmit(this, event)
+    
+    /**
+     * Play slide animation
+     * @function componentDidUpdate
+     * @param {object} prevProds 
+     * @param {object} prevState 
+     */
     componentDidUpdate (prevProds, prevState) {
         if (prevState.phase !== this.state.phase) {
             if (this.state.phase === 2 && this.form) {
@@ -82,6 +111,10 @@ class SignIn extends PureComponent {
         }
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         if (localStorage.getItem('currentUser') && localStorage.getItem('sessionToken')) {
             return <Redirect to={`${publicURL}/app`}/>

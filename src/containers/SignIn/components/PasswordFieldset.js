@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -33,8 +34,13 @@ import { I18n } from 'react-i18nify'
 import Loading from '../../../components/Loading'
 import publicURL from '../../../shared/publicURL'
 
+/**
+ * Component with the step 2 (the user password) of the login
+ * @class PasswordFieldset
+ * @extends PureComponent
+ */
 class PasswordFieldset extends PureComponent {
-    
+    /** @constructor */
     constructor (props) {
         super(props)
         this.state = {
@@ -44,12 +50,20 @@ class PasswordFieldset extends PureComponent {
         }
     }
 
+    /**
+     * Focus the password field 
+     * @function componentDidMount
+     */
     componentDidMount () {
         if (this.passwordInput) {
             this.passwordInput.focus()
         }      
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () { 
         let renderComponent
         if (this.state.isLoading) {
