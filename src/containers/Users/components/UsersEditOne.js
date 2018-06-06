@@ -316,7 +316,7 @@ export default class UsersEditOne extends PureComponent {
     }
 
     /**
-     * Upload a preview of the profile image
+     * Preview of the profile image
      * @function previewFile
      * @param {component} evt
      */

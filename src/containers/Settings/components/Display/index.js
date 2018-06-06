@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -43,13 +44,16 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with the display section
+ * @class Display
+ * @extends PureComponent
+ */
 class Display extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
-
         const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
-
         this.state = {
             applicationsUploaded: display.applicationsUploaded !== undefined ? display.applicationsUploaded : true,
             devicesByOperatingSystemVersion: display.devicesByOperatingSystemVersion !== undefined ? display.devicesByOperatingSystemVersion : true,
@@ -64,17 +68,30 @@ class Display extends PureComponent {
         }
     }
 
+    /**
+     * Handle change state
+     * @function changeLocalStorage
+     * @param {string} name
+     */
     changeLocalStorage = (name) => {
         this.setState({
             [name]: !this.state[name]
         })
     }
 
-    componentDidUpdate  (){
+    /**
+     * Change local storage
+     * @function componentDidUpdate
+     */
+    componentDidUpdate() {
         localStorage.setItem('display', JSON.stringify(this.state))
         animationsWinJs(this.state.animations)
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         return (
             <ContentPane>
