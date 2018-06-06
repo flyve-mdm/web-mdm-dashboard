@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Confirmation from '../../../../components/Confirmation'
@@ -49,11 +50,15 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with the security section
+ * @class Security
+ * @extends PureComponent
+ */
 class Security extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
-
         this.state = {
             password: '',
             passwordConfirmation: '',
@@ -65,6 +70,11 @@ class Security extends PureComponent {
         }
     }
 
+    /**
+     * Check if self-registration is enabled
+     * @function componentDidMount
+     * @async
+     */
     componentDidMount = async () => {
         try {
             const plugins = await this.props.glpi.getAllItems({ itemtype: 'Plugin' })
@@ -84,6 +94,11 @@ class Security extends PureComponent {
         }
     }
 
+    /**
+     * Delete the current user
+     * @function deleteUser
+     * @async
+     */
     deleteUser = async () => {
         const isOK = await Confirmation.isOK(this.deleteAccount)
         if (isOK) {
@@ -116,7 +131,12 @@ class Security extends PureComponent {
         }
     }
 
-    closeSession  = async () => {
+    /**
+     * Close session
+     * @function closeSession
+     * @async
+     */
+    closeSession = async () => {
         const isOK = await Confirmation.isOK(this.killSession)
         if (isOK) {
             logout()            
@@ -128,7 +148,12 @@ class Security extends PureComponent {
         }
     }
 
-    cleanWebStorage  = async () => {
+    /**
+     * Clean web storage and close session
+     * @function cleanWebStorage
+     * @async
+     */
+    cleanWebStorage = async () => {
         const isOK = await Confirmation.isOK(this.deleteBrowserData)
         if (isOK) {
             localStorage.clear()
@@ -141,10 +166,11 @@ class Security extends PureComponent {
         }
     }
 
-    savePassword = () => {
-        this.setState({ forceValidation: true })
-    }
-
+    /**
+     * Validate the form data and save the new password
+     * @function savePassword
+     * @param {object} e
+     */
     savePassword = (e) => {
         e.preventDefault()
         this.setState({ forceValidation: true }, () => {
@@ -195,12 +221,23 @@ class Security extends PureComponent {
         })
     }
 
+    /**
+     * Handle set state
+     * @function changeState
+     * @param {strinf} name
+     * @param {strinf} value
+     */
     changeState = (name, value) => { 
         this.setState({
             [name]: value
         })
     }
 
+    /**
+     * Change mode and request the password restrictions if it's necessary
+     * @function changeMode
+     * @param {string} mode
+     */
     changeMode = (mode) => {
         if (mode === 'Change password') {
             this.setState({ 
@@ -227,6 +264,10 @@ class Security extends PureComponent {
         }
     }
 
+    /**
+     * Build the data array for the password change form
+     * @function buildDataArray
+     */
     buildDataArray = () => {
         return [
             [
@@ -270,6 +311,10 @@ class Security extends PureComponent {
         ]
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         if (this.state.isLoading) {
             return (
