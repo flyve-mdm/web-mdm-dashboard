@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -35,8 +36,13 @@ import appConfig from '../../../../public/config.json'
 import withGLPI from '../../../hoc/withGLPI'
 import Loading from '../../../components/Loading'
 
+/**
+ * Component with the step 1 (the user name) of the login
+ * @function UsernameFieldset
+ * @extends PureComponent
+ */
 class UsernameFieldset extends PureComponent {
-
+    /** @constructor */
     constructor (props) {
         super(props)
         this.state = {
@@ -47,6 +53,11 @@ class UsernameFieldset extends PureComponent {
         }
     }
 
+    /**
+     * Validate if the self-registration is avidated
+     * @function componentDidMount
+     * @async
+     */
     componentDidMount = async () => {
         try {
             await this.props.glpi.initSessionByUserToken({ userToken: appConfig.pluginToken })
@@ -76,9 +87,12 @@ class UsernameFieldset extends PureComponent {
                 }
             )
         }
-
     }
 
+    /**
+     * @function LogInServer
+     * @param {object} e
+     */
     LogInServer = (e) => {
         e.preventDefault()
         if (this.props.username) {
@@ -100,6 +114,10 @@ class UsernameFieldset extends PureComponent {
         }
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         return (
             this.state.isLoading ?
@@ -152,7 +170,6 @@ class UsernameFieldset extends PureComponent {
 
                     </div>
                 )
-
         )
     }
 }
