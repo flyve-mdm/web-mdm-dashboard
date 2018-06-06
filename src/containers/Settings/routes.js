@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import EmptyMessage from '../../components/EmptyMessage'
 import Entity from './components/Entity'
 import Profiles from './components/Profiles'
@@ -35,6 +36,11 @@ import Notifications from './components/Notifications'
 import Display from './components/Display'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Represents all private routes from Settings
+ * @constant routes
+ * @type {Array}
+ */
 const routes = [
   {
     path: '/',
