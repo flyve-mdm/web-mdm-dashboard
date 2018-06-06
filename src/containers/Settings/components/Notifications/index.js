@@ -26,13 +26,19 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import ReactWinJS from 'react-winjs'
 import ContentPane from '../../../../components/ContentPane'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Component with the notifications section
+ * @class Notifications
+ * @extends PureComponent
+ */
 class Notifications extends PureComponent {
-
+    /** @constructor */
     constructor (props) {
         super(props)
 
@@ -50,6 +56,11 @@ class Notifications extends PureComponent {
         }
     }
 
+    /**
+     * Change notification type
+     * @function changeNotificationType
+     * @param {object} e
+     */
     changeNotificationType = (e) => {
         const newNotificationType = e.target.value
         if (Notification) {
@@ -64,11 +75,19 @@ class Notifications extends PureComponent {
         }
     } 
 
+    /**
+     * Change show notifications
+     * @function changeShowNotifications
+     */
     changeShowNotifications = () => {
         localStorage.setItem('showNotifications', !this.state.showNotifications)
         this.setState({showNotifications: !this.state.showNotifications})
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         return (
             <ContentPane>
