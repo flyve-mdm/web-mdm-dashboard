@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import validateData from '../../../../shared/validateData'
@@ -59,7 +60,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with the profiles section
+ * @class Profiles
+ * @extends PureComponent
+ */
 class Profiles extends PureComponent {
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -67,6 +74,11 @@ class Profiles extends PureComponent {
         }
     }
 
+    /**
+     * Get the user information from glpi
+     * @function componentDidMount
+     * @async
+     */
     componentDidMount = async () => {
         if (this.state.login === null) {
             this.props.actions.uiTransactionStart()
@@ -162,8 +174,11 @@ class Profiles extends PureComponent {
         }
     }
 
+    /**
+     * Save the new values in glpi
+     * @function saveChanges
+     */
     saveChanges = () => {
-
         let newUser = { 
             id: this.props.currentUser.id,
             firstname: this.state.firstName,
@@ -225,18 +240,36 @@ class Profiles extends PureComponent {
         }
     }
 
+    /**
+     * Handle set state
+     * @function changeState
+     * @param {string} name
+     * @param {string} value
+     */
     changeState = (name, value) => {
         this.setState({
             [name]: value
         })
     }
 
+    /**
+     * Handle set of the emails
+     * @function changeEmail
+     * @param {number} index
+     * @param {string} value
+     */
     changeEmail = (index, value) => {
         let emails = [...this.state.emails]
         emails[index].email = value
         this.setState({emails})
     }
 
+    /**
+     * Handle set state
+     * @function changeSelect
+     * @param {string} name
+     * @param {string} value
+     */
     changeSelect = (name, value) => {
         this.setState({
             [name]: {
@@ -246,12 +279,21 @@ class Profiles extends PureComponent {
         })
     }
 
+    /**
+     * Delete an email
+     * @function deleteEmail
+     * @param {number} index
+     */
     deleteEmail = (index) => {
         this.setState({
             emails: this.state.emails.slice(0,index).concat(this.state.emails.slice(index+1))
         })
     }
 
+    /**
+     * Add an email
+     * @function addEmail
+     */
     addEmail = () => {
         this.setState({
             emails: [
@@ -261,8 +303,12 @@ class Profiles extends PureComponent {
         })
     }
 
+    /**
+     * Preview of the profile image
+     * @function previewFile
+     * @param {object} evt
+     */
     previewFile = (evt) => {
-
         const file = evt.target.files[0]
         if (file.type.match('image.*')) {
             let reader = new FileReader()
@@ -277,13 +323,21 @@ class Profiles extends PureComponent {
 
             reader.readAsDataURL(file)
         }
-   }
+    }
 
+    /**
+     * Handle set of the profile image
+     * @function openFileChooser
+     */
     openFileChooser = () => {
         this.inputElement.value = null
         this.inputElement.click()
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {        
         let component = null
 
