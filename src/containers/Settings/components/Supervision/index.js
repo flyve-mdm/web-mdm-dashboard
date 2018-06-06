@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { supervisionScheme } from '../../../../components/Forms/Schemas'
@@ -48,7 +49,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with the supervision section
+ * @class Supervision
+ * @extends PureComponent
+ */
 class Supervision extends PureComponent {
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -62,6 +69,10 @@ class Supervision extends PureComponent {
         }
     }
 
+    /**
+     * Save the new values in glpi
+     * @function saveChanges
+     */
     saveChanges = () => {
         this.setState ({isLoading: true}, async () => {
             try {
@@ -89,12 +100,23 @@ class Supervision extends PureComponent {
         })
     }
 
+    /**
+     * Handle set state
+     * @function changeState 
+     * @param {string} name
+     * @param {string} value
+     */
     changeState = (name, value) => {
         this.setState({
             [name]: value
         })
     }
 
+    /**
+     * Get the supervision information from glpi
+     * @function componentDidMount
+     * @async
+     */
     componentDidMount = async () => {
         try {
             const { active_profile } = await this.props.glpi.getActiveProfile()
@@ -124,8 +146,11 @@ class Supervision extends PureComponent {
         }
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
-
         const supervision = supervisionScheme({
             state: this.state,
             changeState: this.changeState
