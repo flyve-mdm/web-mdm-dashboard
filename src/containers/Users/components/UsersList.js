@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from "react"
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -39,8 +40,13 @@ import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 
+/**
+ * Component with the list of users
+ * @class UsersList
+ * @extends PureComponent
+ */
 export default class UsersList extends PureComponent {
-    
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -60,17 +66,25 @@ export default class UsersList extends PureComponent {
         }
     }
 
+    /**
+     * Make the call to update the list
+     * @function componentDidMount
+     */
     componentDidMount() {
         this.handleRefresh()
     }
     
+    /**
+     * @function componentDidUpdate
+     * @param {object} prevProps 
+     */
     componentDidUpdate(prevProps) {    
         if(this.listView) {
             this.listView.winControl.footer.style.outline = 'none'
             this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
         }
         if (this.toolBar) {
-            this.toolBar.winControl.forceLayout();
+            this.toolBar.winControl.forceLayout()
         }
 
         if (this.props.action === 'reload') {
@@ -85,23 +99,41 @@ export default class UsersList extends PureComponent {
         }
     }
 
+    /**
+     * Clean the list
+     * @function componentWillUnmount
+     */
     componentWillUnmount() {
         this.setState({ selectedItems: [] })
         this.props.changeSelectionMode(false)
     }
 
+    /**
+     * Handle item list render
+     * @constant ItemListRenderer
+     * @type {component}
+     */
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <UsersItemList itemList={ItemList.data}/>
         )
     })
 
+    /**
+     * Handle list header render
+     * @constant groupHeaderRenderer
+     * @type {component}
+     */
     groupHeaderRenderer = ReactWinJS.reactRenderer((item) => {
         return (
             <div>{item.data.title}</div>
         )
     })
 
+    /**
+     * Handle change selection mode
+     * @function handleToggleSelectionMode
+     */
     handleToggleSelectionMode = () => {
         this.props.history.push(`${publicURL}/app/users`)
         this.props.changeSelectionMode(!this.props.selectionMode)
@@ -111,6 +143,11 @@ export default class UsersList extends PureComponent {
         }
     }
 
+    /**
+     * Handle selection changed
+     * @function handleRefresh
+     * @param {component} eventObject
+     */
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
@@ -128,6 +165,11 @@ export default class UsersList extends PureComponent {
         }
     }
 
+    /**
+     * Get users information and reload the list
+     * @function handleRefresh
+     * @async
+     */
     handleRefresh = async () => {
         try {
             this.props.history.push(`${publicURL}/app/users`)
@@ -159,11 +201,20 @@ export default class UsersList extends PureComponent {
         }
     }
 
+    /**
+     * Open the mass edition page
+     * @function handleEdit
+     */
     handleEdit = () => {
         const path = `${publicURL}/app/users/edit`
         this.props.history.push(path)
     }
 
+    /**
+     * Delete users
+     * @function handleDelete
+     * @async
+     */
     handleDelete = async (eventObject) => {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
@@ -207,6 +258,11 @@ export default class UsersList extends PureComponent {
         }
     }
 
+    /**
+     * Change the order of the elements
+     * @function handleSort
+     * @async
+     */
     handleSort = async () => {
         try {
             this.setState({
@@ -237,6 +293,9 @@ export default class UsersList extends PureComponent {
         }
     }
 
+    /**
+     * @function onLoadingStateChanged
+     */
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {
             setTimeout(() => {
@@ -245,6 +304,11 @@ export default class UsersList extends PureComponent {
         }
     }
 
+    /**
+     * Load more data
+     * @function loadMoreData
+     * @async
+     */
     loadMoreData = async () => {
         try {
             this.setState({
@@ -284,8 +348,11 @@ export default class UsersList extends PureComponent {
         }
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
-    
         let deleteCommand = (
             <ReactWinJS.ToolBar.Button
                 key="delete"
@@ -390,6 +457,7 @@ export default class UsersList extends PureComponent {
         )
     }
 }
+
 UsersList.propTypes = {
     selectedItems: PropTypes.array.isRequired,
     changeSelectedItems: PropTypes.func.isRequired,

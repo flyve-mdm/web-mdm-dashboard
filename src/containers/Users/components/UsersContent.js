@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../../components/ContentPane'
@@ -37,8 +38,13 @@ import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
 import publicURL from '../../../shared/publicURL'
 
+/**
+ * Component with the content of the users
+ * @class UsersContent
+ * @extends PureComponent
+ */
 export default class UsersContent extends PureComponent {
-
+    /** @constructor */
     constructor (props) {
         super(props)
         this.state = {
@@ -48,6 +54,13 @@ export default class UsersContent extends PureComponent {
         }
     }
 
+    /**
+     * Make sure that the state and props are in sync for when it is required
+     * @static
+     * @function getDerivedStateFromProps
+     * @param {object} nextProps
+     * @param {object} prevState
+     */
     static getDerivedStateFromProps(nextProps, prevState) {
         if (prevState.id !== getID(nextProps.history.location.pathname)) {
             return {
@@ -62,12 +75,23 @@ export default class UsersContent extends PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
+    /**
+     * Update the content if necessary
+     * @function componentDidUpdate
+     * @param {object} prevProps 
+     * @param {object} prevState 
+     */
+    componentDidUpdate(prevProps, prevState) {
         if (prevState.id !== this.state.id) {
             this.handleRefresh()
         }
     }
 
+    /**
+     * Delete user
+     * @function handleDelete
+     * @async
+     */
     handleDelete = async () => {
         const isOK = await Confirmation.isOK(this.contentDialog)
         if (isOK) {
@@ -99,10 +123,19 @@ export default class UsersContent extends PureComponent {
         }
     }
 
+    /**
+     * Make the call to update the content
+     * @function componentDidMount
+     */
     componentDidMount() {
         this.handleRefresh()
     }
 
+    /**
+     * Update the content
+     * @function handleRefresh
+     * @async
+     */
     handleRefresh = async () => {
         try {
             const user = await this.props.glpi.getAnItem({
@@ -125,6 +158,10 @@ export default class UsersContent extends PureComponent {
         }
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         let renderComponent 
         if (!this.state.data) {

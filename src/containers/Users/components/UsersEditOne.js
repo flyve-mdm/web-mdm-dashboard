@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ConstructInputs from '../../../components/Forms'
@@ -39,8 +40,13 @@ import { I18n } from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
 
+/**
+ * Component with the user edit form
+ * @class UsersEditOne
+ * @extends PureComponent
+ */
 export default class UsersEditOne extends PureComponent {
-    
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -73,10 +79,18 @@ export default class UsersEditOne extends PureComponent {
         }
     }
 
+    /**
+     * Make the call to update the content
+     * @function componentDidMount
+     */
     componentDidMount() {
         this.handleRefresh()
     }
 
+    /**
+     * Update the content
+     * @function handleRefresh
+     */
     handleRefresh = () => {
         this.setState({
             isLoading: true
@@ -172,6 +186,10 @@ export default class UsersEditOne extends PureComponent {
         })
     } 
 
+    /**
+     * Validate data and save the new information in glpi
+     * @function saveChanges
+     */
     saveChanges = () => {
         let newUser = { 
             id: this.state.id,
@@ -234,19 +252,36 @@ export default class UsersEditOne extends PureComponent {
         }
     }
 
-
+    /**
+     * Handle set state
+     * @function changeState
+     * @param {string} name
+     * @param {string} value
+     */
     changeState = (name, value) => {
         this.setState({
             [name]: value
         })
     }
 
+    /**
+     * Handle set of the emails
+     * @function changeEmail
+     * @param {number} index
+     * @param {string} value
+     */
     changeEmail = (index, value) => {
         let emails = [...this.state.emails]
         emails[index].email = value
         this.setState({emails})
     }
 
+    /**
+     * Handle set state
+     * @function changeSelect
+     * @param {string} name
+     * @param {string} value
+     */
     changeSelect = (name, value) => {
         this.setState({
             [name]: {
@@ -256,12 +291,21 @@ export default class UsersEditOne extends PureComponent {
         })
     }
 
+    /**
+     * Delete an email
+     * @function deleteEmail
+     * @param {number} index
+     */
     deleteEmail = (index) => {
         this.setState({
             emails: this.state.emails.slice(0,index).concat(this.state.emails.slice(index+1))
         })
     }
 
+    /**
+     * Add an email
+     * @function addEmail
+     */
     addEmail = () => {
         this.setState({
             emails: [
@@ -271,8 +315,12 @@ export default class UsersEditOne extends PureComponent {
         })
     }
 
+    /**
+     * Upload a preview of the profile image
+     * @function previewFile
+     * @param {component} evt
+     */
     previewFile = (evt) => {
-
         const file = evt.target.files[0]
         if (file.type.match('image.*')) {
             let reader = new FileReader()
@@ -289,13 +337,20 @@ export default class UsersEditOne extends PureComponent {
         }
    }
 
+    /**
+     * Handle set of the profile image
+     * @function openFileChooser
+     */
     openFileChooser = () => {
         this.inputElement.value = null
         this.inputElement.click()
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
-
         let componetRender
 
         if (this.state.isLoading) {
