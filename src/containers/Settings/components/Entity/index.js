@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import ChangeDownloadURL from './ChangeDownloadURL'
 import ChangeTokenLife from './ChangeTokenLife'
@@ -47,8 +48,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
-
+/**
+ * Component with the entity section
+ * @class Entity
+ * @extends PureComponent
+ */
 class Entity extends PureComponent {
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -68,6 +74,11 @@ class Entity extends PureComponent {
         }
     }
 
+    /**
+     * Get all necessary data from glpi
+     * @function componentDidMount
+     * @async
+     */
     componentDidMount = async () => {
         try {
             const devices = await this.props.glpi.searchItems({ 
@@ -136,16 +147,31 @@ class Entity extends PureComponent {
         }
     }
 
+    /**
+     * Change mode
+     * @function changeMode
+     * @param {string} mode
+     */
     changeMode = (mode) => {
         this.setState({ mode })
     }
 
+    /**
+     * Handle set state
+     * @function saveValues
+     * @param {string} name
+     * @param {string} value
+     */
     saveValues = (name, value) => {
         this.setState({
             [name]: value
         })
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         let content
         switch (this.state.mode) {

@@ -26,6 +26,8 @@
 * ------------------------------------------------------------------------------
 */
 
+
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
@@ -43,8 +45,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with the form of change the download url
+ * @class ChangeDownloadURL
+ * @extends PureComponent
+ */
 class ChangeDownloadURL extends PureComponent {
-
+    /** @constructor */
     constructor (props) {
         super (props)
         this.state = {
@@ -53,12 +60,21 @@ class ChangeDownloadURL extends PureComponent {
         }
     }
 
+    /**
+     * Handle set state
+     * @function changeState
+     * @param {object} e
+     */
     changeState = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
+    /**
+     * Save the new value of 'download url' in glpi
+     * @function saveURL
+     */
     saveURL = () => {
         this.setState({
             isLoading: true
@@ -85,6 +101,10 @@ class ChangeDownloadURL extends PureComponent {
         })
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         return this.state.isLoading ? <Loading message={`${I18n.t('commons.saving')}...`}/>:
             (    

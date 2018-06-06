@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { uiSetNotification } from '../../../../store/ui/actions'
@@ -43,8 +44,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with the form of change the token life
+ * @class ChangeTokenLife
+ * @extends PureComponent
+ */
 class ChangeTokenLife extends PureComponent {
-
+    /** @constructor */
     constructor (props) {
         super (props)
         this.state = {
@@ -53,12 +59,21 @@ class ChangeTokenLife extends PureComponent {
         }
     }
 
+    /**
+     * Handle set state
+     * @function changeState
+     * @param {object} e
+     */
     changeState = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
+    /**
+     * Save the new value of 'token life' in glpi
+     * @function saveTokenLife
+     */
     saveTokenLife = () => {
         this.setState({
             isLoading: true
@@ -85,6 +100,10 @@ class ChangeTokenLife extends PureComponent {
         })
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         return this.state.isLoading ? <Loading message={`${I18n.t('commons.saving')}...`}/>: 
             ( 

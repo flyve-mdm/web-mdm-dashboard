@@ -26,12 +26,21 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Component with the 'Main' page of the entity section
+ * @class Main
+ * @extends PureComponent
+ */
 class Main extends PureComponent {
-
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render () {
         return (    
             <React.Fragment>
