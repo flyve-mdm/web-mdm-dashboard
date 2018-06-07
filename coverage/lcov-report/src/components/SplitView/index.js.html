@@ -239,7 +239,23 @@ layout: coverage
 <a name='L188'></a><a href='#L188'>188</a>
 <a name='L189'></a><a href='#L189'>189</a>
 <a name='L190'></a><a href='#L190'>190</a>
-<a name='L191'></a><a href='#L191'>191</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a>
+<a name='L205'></a><a href='#L205'>205</a>
+<a name='L206'></a><a href='#L206'>206</a>
+<a name='L207'></a><a href='#L207'>207</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -278,15 +294,31 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -460,26 +492,42 @@ layout: coverage
 <span class="cstat-no" title="statement not covered" >import React, { PureComponent } from 'react'</span>
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 <span class="cstat-no" title="statement not covered" >import IconWithPopper from './IconWithPopper'</span>
-<span class="cstat-no" title="statement not covered" >import ImgWithPopper from './imgWithPopper'</span>
-<span class="cstat-no" title="statement not covered" >import SpanWithPopper from './spanWithAnchor'</span>
-<span class="cstat-no" title="statement not covered" >import { ScrollSync, ScrollSyncPane } from '../ScrollSync'</span>
+<span class="cstat-no" title="statement not covered" >import ImgWithPopper from './ImgWithPopper'</span>
+<span class="cstat-no" title="statement not covered" >import SpanWithPopper from './SpanWithPopper'</span>
+<span class="cstat-no" title="statement not covered" >import { ScrollSync, ScrollSyncPanel } from '../ScrollSync'</span>
 <span class="cstat-no" title="statement not covered" >import withGLPI from '../../hoc/withGLPI'</span>
 <span class="cstat-no" title="statement not covered" >import { I18n } from "react-i18nify"</span>
 <span class="cstat-no" title="statement not covered" >import publicURL from '../../shared/publicURL'</span>
 <span class="cstat-no" title="statement not covered" >import { splitview } from '../../shared/animationsWinJs'</span>
 &nbsp;
+/** 
+ * Component with side menu 
+ * @class SplitView
+ * @extends PureComponent
+ */
 class SplitView extends PureComponent <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
-&nbsp;
+  /** 
+   * Close session 
+   * @function logout
+   */ 
   logout = <span class="fstat-no" title="function not covered" >() =&gt; </span>{
 <span class="cstat-no" title="statement not covered" >    this.props.logout()</span>
   }
 &nbsp;
+  /** 
+   * Run 'splitview' animation 
+   * @function componentDidUpdate
+   */ 
 <span class="fstat-no" title="function not covered" >  componentDidUpdate () </span>{
 <span class="cstat-no" title="statement not covered" >    if (this.props.expanded) {</span>
 <span class="cstat-no" title="statement not covered" >      splitview(this.splitview, !this.props.contract).play()</span>
     }
   }
-&nbsp;
+  
+  /** 
+   * Render component 
+   * @function render
+   */
 <span class="fstat-no" title="function not covered" >  render () </span>{
 <span class="cstat-no" title="statement not covered" >    this.props.handleSetTimeOut()</span>
 &nbsp;
@@ -493,7 +541,7 @@ class SplitView extends PureComponent <span class="cstat-no" title="statement no
               &lt;div className="splitview-wrapper__div"&gt;
                 &lt;nav className="splitview-wrapped__navbar"&gt;
       
-                  &lt;ScrollSyncPane&gt;
+                  &lt;ScrollSyncPanel&gt;
                     &lt;div className="splitview-wrapper-wrapper__div"&gt;
                       &lt;section className="splitview-wrapped-navbar-wrapped-top__section"&gt;
                         &lt;ImgWithPopper
@@ -567,7 +615,7 @@ class SplitView extends PureComponent <span class="cstat-no" title="statement no
                         /&gt;
                       &lt;/section&gt;
                     &lt;/div&gt;
-                  &lt;/ScrollSyncPane&gt;
+                  &lt;/ScrollSyncPanel&gt;
                 &lt;/nav&gt;
                 { this.props.expanded ? 
                   (
@@ -576,7 +624,7 @@ class SplitView extends PureComponent <span class="cstat-no" title="statement no
                       onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.props.handleContract()}</span>
                       ref={<span class="fstat-no" title="function not covered" >nav =&gt; <span class="cstat-no" title="statement not covered" ></span>this.splitview = nav}</span>
                     &gt;
-                      &lt;ScrollSyncPane&gt;
+                      &lt;ScrollSyncPanel&gt;
                         &lt;div className="splitview-wrapper-wrapper__div --large --end"&gt;
                           &lt;section className="splitview-wrapped-navbar-wrapped-top__section --description"&gt;
                             &lt;SpanWithPopper description={I18n.t('commons.dashboard')} to={`${publicURL}/app`} /&gt;
@@ -594,7 +642,7 @@ class SplitView extends PureComponent <span class="cstat-no" title="statement no
                             &lt;SpanWithPopper description={I18n.t('commons.logout')} click={this.logout} /&gt;
                           &lt;/section&gt;
                         &lt;/div&gt;
-                      &lt;/ScrollSyncPane&gt;
+                      &lt;/ScrollSyncPanel&gt;
                     &lt;/nav&gt;
                   ) : ""
                 } 
@@ -625,7 +673,7 @@ export default withGLPI(SplitView)</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jun 05 2018 22:13:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jun 07 2018 14:20:15 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -130,7 +130,18 @@ layout: coverage
 <a name='L79'></a><a href='#L79'>79</a>
 <a name='L80'></a><a href='#L80'>80</a>
 <a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -165,16 +176,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -185,6 +186,27 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -246,6 +268,15 @@ layout: coverage
 &nbsp;
 // TODO: Enable PrivateRoute if route if private
 &nbsp;
+/**
+ * Generate routes
+ * @function GenerateRoutes
+ * @param {array} routes 
+ * @param {string} rootPath 
+ * @param {*} withNotFound 
+ * @param {object} data 
+ * @return {component}
+ */
 const GenerateRoutes = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> routes, rootPath, withNotFound, data }) =&gt; {</span>
   let r = <span class="cstat-no" title="statement not covered" >routes.map(<span class="fstat-no" title="function not covered" >({</span> exact, path, component }, i) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    if (typeof (data) === 'object') {</span>
@@ -261,7 +292,8 @@ const GenerateRoutes = <span class="cstat-no" title="statement not covered" ><sp
                 ? rootPath
                 : rootPath + path
               : path
-          } /&gt;
+          } 
+        /&gt;
       )
     }
     else {
@@ -276,10 +308,11 @@ const GenerateRoutes = <span class="cstat-no" title="statement not covered" ><sp
                 ? rootPath
                 : rootPath + path
               : path
-          } /&gt;
+          } 
+        /&gt;
       )
     }
-  });
+  })
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  withNotFound &amp;&amp; r.push(</span>
     &lt;Route key={routes.length + 1} render={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>&lt;NotFound /&gt;} /&gt;</span>
@@ -298,7 +331,7 @@ export default GenerateRoutes</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jun 05 2018 22:13:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jun 07 2018 14:20:15 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
