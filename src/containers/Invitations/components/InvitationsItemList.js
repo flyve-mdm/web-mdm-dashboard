@@ -26,11 +26,21 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Component with the template of the items of the invitations lists
+ * @class InvitationsItemList
+ * @extends PureComponent
+ */
 export default class InvitationsItemList extends PureComponent {
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         return (
             <div style={{ display: 'inline-block' }}>
@@ -40,6 +50,7 @@ export default class InvitationsItemList extends PureComponent {
         )
     }
 }
+
 InvitationsItemList.propTypes = {
     itemList: PropTypes.object.isRequired
 }

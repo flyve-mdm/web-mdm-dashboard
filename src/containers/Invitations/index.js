@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
@@ -46,8 +47,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with the Invitations section
+ * @class Invitations
+ * @extends PureComponent
+ */
 class Invitations extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -58,10 +64,13 @@ class Invitations extends PureComponent {
             action: null,
             selectedItems: []
         }
-
         window.addEventListener('resize', this.handleResize)
     }
 
+    /**
+     * Change state according to the resolution of the screen 
+     * @function handleResize
+     */
     handleResize = () => {
         let nextMode = getMode()
 
@@ -74,7 +83,6 @@ class Invitations extends PureComponent {
                 itemListPaneWidth: 320
             })
         }
-
         if (this.state.mode !== nextMode) {
             this.setState({
                 mode: nextMode 
@@ -82,10 +90,21 @@ class Invitations extends PureComponent {
         }
     }
 
+    /**
+     * Remove event listener 'resize'
+     * @function componentWillUnmount
+     */
     componentWillUnmount () {
         window.removeEventListener('resize', this.handleResize)
     }
 
+    /**
+     * Make sure that the state and props are in sync for when it is required
+     * @function getDerivedStateFromProps
+     * @static
+     * @param {object} nextProps
+     * @param {object} prevState
+     */
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.history.location.pathname === `${publicURL}/app/invitations` && prevState.selectedItems.length > 0) {
             return {
@@ -99,6 +118,11 @@ class Invitations extends PureComponent {
         }
     }
 
+    /**
+     * Construct the props data
+     * @function propsData
+     * @return {object}
+     */
     propsData = () => {
         return {
             icon: this.state.icon,
@@ -115,16 +139,36 @@ class Invitations extends PureComponent {
         }
     }
 
+    /**
+     * Change selected items
+     * @function changeSelectedItems
+     * @param {array} selectedItems
+     */
     changeSelectedItems = selectedItems => this.setState({ selectedItems })
+    
+    /**
+     * Change action
+     * @function changeAction
+     * @param {*} action
+     */
     changeAction = action => this.setState({ action })
+    
+    /**
+     * Change selection mode
+     * @function changeSelectionMode
+     * @param {boolean} selectionMode
+     */
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
 
+    /**
+     * Construct the styles of the list
+     * @function stylesList
+     * @return {object}
+     */
     stylesList = () => {
-
         let styles = {
             width: this.state.itemListPaneWidth   
         }
-
         if (this.state.mode === 'small') {
             if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/invitations` )  || 
                 this.props.history.location.pathname === `${publicURL}/app/invitations` || 
@@ -142,8 +186,12 @@ class Invitations extends PureComponent {
         return styles
     }
 
+    /**
+     * Construct the styles of the content
+     * @function stylesContent
+     * @return {object}
+     */
     stylesContent = () => {
-
         const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
         let styles = {
             width: calc100PercentMinus(validWidth),
@@ -167,10 +215,12 @@ class Invitations extends PureComponent {
         return styles
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
-
         let renderComponents = (
-
             <React.Fragment>
                 <div className="list-pane flex-block__list" style={{...this.stylesList()}}>
                 <InvitationsList
@@ -187,7 +237,6 @@ class Invitations extends PureComponent {
                 />
                 </div>
             </React.Fragment>
-
         )
 
         return (
@@ -197,6 +246,7 @@ class Invitations extends PureComponent {
         )
     }
 }
+
 export default connect(
     null,
     mapDispatchToProps
