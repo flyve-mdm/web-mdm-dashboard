@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
@@ -45,7 +46,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with the SearchEngine section
+ * @class SearchEngine
+ * @extends PureComponent
+ */
 class SearchEngine extends PureComponent {
+    /** @constructor */
     constructor(props) {
         super(props)
 
@@ -58,33 +65,40 @@ class SearchEngine extends PureComponent {
         }
 
         this.translations = getTranslation() // Friendly translations of each QueryBuilder input
-
         this.setFields = () => setFields(this)
         this.normalizeQuery = () => normalizeQuery(this)
     }
 
+    /**
+     * Handle change itemType
+     * @function handleChangeItemType
+     * @param {object} e
+     */
     handleChangeItemType = (e) => {
         this.setState({ itemType: e.target.value })
     }
 
+    /**
+     * Make the call to fetch search options list of itemType
+     * @function componentDidMount
+     */
     componentDidMount() {
         this.handleRequestItemType()
     }
 
+    /**
+     * Fetch search options list of itemType
+     * @function handleRequestItemType
+     * @async
+     */
     handleRequestItemType = async () => {
-        /*
-        * Fetch search options list of itemType
-        */
-
         this.setState({
             query: null,
             itemResults: undefined,
             fields: [],
             isLoading: true
         })
-
         try {
-
             const listSearchOptions = await this.props.glpi.listSearchOptions({ itemtype: this.state.itemType })
 
             this.setState({ 
@@ -101,17 +115,21 @@ class SearchEngine extends PureComponent {
         }
     }
 
+    /**
+     * Update the query state each time that the QueryBuilde query change 
+     * @function handleChangeQuery
+     * @param {string} query
+     */
     handleChangeQuery = (query) => {
-        /*
-        * Update the query state each time that the QueryBuilde query change 
-        */
         this.setState({ query: query })
     }
 
+    /**
+     * Handle click event in the search button
+     * @function handleOnSearch
+     * @async
+     */
     handleOnSearch = async () => {
-        /*
-        * Handle click event in the search button
-        */
        try {
            const search = await this.props.glpi.searchItems({ itemtype: this.state.itemType, criteria: this.normalizeQuery() })
            this.setState({ itemResults: search.data ? search.data : [] }) 
@@ -121,31 +139,37 @@ class SearchEngine extends PureComponent {
        }
     }
 
-    render() {
-
-        // Create Array of objects with the result of the search
-        // Field name instead the field id
-        const arrayResultsWithFields = []
+    /**
+     * Create Array of objects with the result of the search
+     * @function arrayResultsWithFields
+     * @return {array}
+     */
+    arrayResultsWithFields = () => {
+        const resultsWithFields = []
 
         this.state.itemResults && this.state.itemResults.forEach((result, index) => {
             let arrayResult = []
             let arrayOfArraysIdAndData = Object.entries(result)
 
             arrayOfArraysIdAndData.forEach((field, indexField) => {
-                // @field -> [fieldId, fieldValue]
-                let objectField = {}
-
-                objectField['fieldName'] = this.state.listSearchOptions[field[0]]['name']
-                objectField['fieldValue'] = field[1]
-                objectField['fieldId'] = field[0]
-
+                const objectField = {
+                    fieldName: this.state.listSearchOptions[field[0]]['name'],
+                    fieldValue: field[1],
+                    fieldId: field[0]
+                }
                 arrayResult.push(objectField)
-
             })
-
-            arrayResultsWithFields.push(arrayResult)
+            resultsWithFields.push(arrayResult)
         })
 
+        return resultsWithFields
+    }
+
+    /** 
+     * Render component 
+     * @function render
+     */ 
+    render() {
         return (
             <ContentPane>
                 <div style={{ margin: '0 10px' }}>
@@ -190,7 +214,7 @@ class SearchEngine extends PureComponent {
                             this.state.itemResults.length > 0 ?
                                 <Panel
                                     itemType={this.state.itemType}
-                                    itemResults={this.state.itemResults.length > 0 ? arrayResultsWithFields : []}
+                                    itemResults={this.state.itemResults.length > 0 ? this.arrayResultsWithFields() : []}
                                     itemFields={this.state.fields}
                                 />
                                 : <p>{I18n.t('search_engine.item_not_found')}</p>
