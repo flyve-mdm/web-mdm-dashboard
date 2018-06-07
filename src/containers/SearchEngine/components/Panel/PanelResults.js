@@ -26,11 +26,20 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-
+/**
+ * Component con the results of the search
+ * @class PanelResults
+ * @extends PureComponent
+ */
 class PanelResults extends PureComponent {
+  /** 
+   * Render component 
+   * @function render
+   */ 
   render() { 
     let bodyContent = null
 

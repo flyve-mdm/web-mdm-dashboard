@@ -26,17 +26,26 @@
 * ------------------------------------------------------------------------------
 */
 
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+/** import dependencies */
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-
+/**
+ * Component con the fields of the search
+ * @class PanelFields
+ * @extends PureComponent
+ */
 class PanelFields extends PureComponent {
+  /** 
+   * Render component 
+   * @function render
+   */ 
   render() { 
     return (
       <div className="searchListHeader">
         {this.props.fields.map(field => {
-          let fieldKey = `${field[0]}_${field[1]}`;
-          let fieldName = field[1];
+          const fieldKey = `${field[0]}_${field[1]}`
+          const fieldName = field[1]
           return (
             <div key={fieldKey} className="cellHeader">{fieldName}</div>
           )

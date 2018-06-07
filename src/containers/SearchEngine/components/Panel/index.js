@@ -26,15 +26,25 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import PanelResult from './PanelResults'
 import PanelFields from './PanelFields'
 
+/**
+ * Component with the panel with the search results
+ * @class Panel
+ * @extends PureComponent
+ */
 class Panel extends PureComponent {
-    render() {
+    /**
+     * Create array of fields
+     * @function createFields
+     * @return {array}
+     */
+    createFields = () => {
         const fields = []
-
         this.props.itemResults.length && fields.push.apply(
             fields, this.props.itemResults[0].map(field => {
                 return [
@@ -43,11 +53,18 @@ class Panel extends PureComponent {
                 ]
             })
         )
+        return fields
+    }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
+    render() {
         return (
             <React.Fragment>
                 <div className="searchList">
-                    <PanelFields fields={fields} />
+                    <PanelFields fields={this.createFields()} />
                     <PanelResult itemResults={this.props.itemResults} />
                 </div>
             </React.Fragment>

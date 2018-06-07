@@ -26,18 +26,13 @@
 * ------------------------------------------------------------------------------
 */
 
-// React Actions Pattern
-// Separate functions of the SearchEngine Component class 
-
+/**
+ * Set state for render field in the QueryBuilder component
+ * @function setFields
+ * @param {object} ctx 
+ */
 const setFields = (ctx) => {
-    /*
-    * Set state for render field in the QueryBuilder component
-    * @ctx -> React Component
-    * @State Change -> fields
-    */
-
     const fields = []
-
     const listSearchOptions = ctx.state.listSearchOptions
 
     for (var key in listSearchOptions) {
@@ -46,63 +41,48 @@ const setFields = (ctx) => {
                 listSearchOptions[key]['field'] !== undefined) {
 
                 let name = listSearchOptions[key]['name']
-                // let field = listSearchOptions[key]['field']
                 fields.push({
-                    'name': key,//name.toLocaleLowerCase(),
+                    'name': key,
                     'label': name
                 })
 
             }
         }
     }
-
     ctx.setState({
         fields: fields
     })
 }
 
-// const getFieldId = (ctx, fieldName) => {
-//     /*
-//     * Get and return id of itemType
-//     * @ctx -> React Component
-//     * @fieldName -> Name of the field to search the id, example Manufacturer
-//     */
-
-//     let entries = Object.entries(ctx.state.listSearchOptions)
-//     let id = null
-
-//     entries.forEach((item, index) => {
-//         var data = item[1]
-//         if (data.name !== undefined) {
-//             if (data.name.toLocaleLowerCase() === fieldName.toLocaleLowerCase()) {
-//                 id = item[0]
-//                 return false
-//             }
-//         }
-//     })
-
-//     return id
-// }
-
+/**
+ * Normalize keys of rule object
+ * @param {object} ctx 
+ * @param {object} rule 
+ * @return {object}
+ */
 const normalizeRule = (ctx, rule) => {
-    /*
-     * Normalize keys of rule object
-     * */
-    let objectCriteria = { 
+    return { 
         field: Number(rule['field']), 
         searchtype: rule['operator'], 
         value: rule['value']
     }
-
-    return objectCriteria
 }
 
+/**
+ * Create the array of rules extracted
+ * @function recursiveExtractQueryRules
+ * @param {object} query
+ * @param {object} ctx
+ * @param {array} arrayRulesExtracted
+ * @param {string} combinator
+ * @return {array}
+ */
 const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator) => {
 
     if (typeof (query.rules) === undefined || typeof (query.field) === "string") {
         /*
          * It means that it is a rule, and it has operator, value and field
-         * */
+         */
         arrayRulesExtracted.push({
             link: combinator, // 'AND' or 'OR'
             ...normalizeRule(ctx, query)
@@ -110,7 +90,7 @@ const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator)
     } else {
         /*
          * It means that it is a group and you have rules and combinator
-         * */
+         */
         query.rules.forEach((rule) => {
             recursiveExtractQueryRules(rule, ctx, arrayRulesExtracted, query.combinator)
         })
@@ -119,11 +99,14 @@ const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator)
     return arrayRulesExtracted
 }
 
+/**
+ * Process query create by QueryBuilde.
+ * And normalize for correct format to GLPI REST API URI
+ * @function normalizeQuery
+ * @param {object} ctx 
+ * @return {array}
+ */
 const normalizeQuery = (ctx) => {
-    /*
-    * Process query create by QueryBuilde
-    * And normalize for correct format to GLPI REST API URI
-    */
     const query = { ...ctx.state.query }
     const arrayRules = []
 
@@ -134,10 +117,12 @@ const normalizeQuery = (ctx) => {
     return arrayRulesExtracted
 }
 
+/**
+ * Friendly translation for each QueryBuilder input
+ * @function getTranslation
+ * @return {object}
+ */
 const getTranslation = () => {
-    /*
-    * Friendly translation for each QueryBuilder input
-    */
     return {
         fields: {
             title: "Fields"

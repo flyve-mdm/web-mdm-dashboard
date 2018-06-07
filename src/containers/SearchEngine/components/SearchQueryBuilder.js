@@ -26,12 +26,22 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import QueryBuilder from 'react-querybuilder'
 import PropTypes from 'prop-types'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Componente with the query builder
+ * @class SearchQueryBuilder
+ * @extends PureComponent
+ */
 class SearchQueryBuilder extends PureComponent {
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         return (
             <div className="queryBuilder">
