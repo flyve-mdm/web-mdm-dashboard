@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -53,8 +54,13 @@ function mapStateToProps(state, props) {
     }
 }
 
+/**
+ * Component with the reset password section
+ * @class ResetPassword
+ * @extends PureComponent
+ */
 class ResetPassword extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -81,8 +87,11 @@ class ResetPassword extends PureComponent {
         this.buildDataArray = () => buildDataArray(this, I18n)
     }
 
-    render() {
-
+    /**
+     * Create the element to render
+     * @function createRenderElament
+     */
+    createRenderElament = () => {
         let element 
         if (!this.state.isResetSent) {
             const reset = this.buildDataArray()
@@ -114,10 +123,19 @@ class ResetPassword extends PureComponent {
                 </div>
             )
         }
+        return element
+    }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
+    render() {
         if (this.props.isLoading) {
             return (
-                <div style={{ height: '140px' }}><Loading message={`${I18n.t('commons.sending')}...`} /></div>
+                <div style={{ height: '140px' }}>
+                    <Loading message={`${I18n.t('commons.sending')}...`} />
+                </div>
             )
         } else {
             return (
@@ -126,7 +144,7 @@ class ResetPassword extends PureComponent {
                         {I18n.t('login.reset_password')}
                     </h2>
 
-                    {element}
+                    {this.createRenderElament()}
                 </React.Fragment>
             )
         }
