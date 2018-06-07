@@ -76,7 +76,7 @@ export default class UsersContent extends PureComponent {
     }
 
     /**
-     * Update the content if necessary
+     * Update the content when it's necessary
      * @function componentDidUpdate
      * @param {object} prevProps 
      * @param {object} prevState 

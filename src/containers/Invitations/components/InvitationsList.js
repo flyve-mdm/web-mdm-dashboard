@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -39,8 +40,13 @@ import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 
+/**
+ * Component with the list of invitations
+ * @class InvitationsList
+ * @extends PureComponent
+ */
 export default class InvitationsList extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -49,6 +55,7 @@ export default class InvitationsList extends PureComponent {
             isLoading: false,
             isLoadingMore: false,
             itemList: new WinJS.Binding.List([]),
+            
             order: "ASC",
             totalcount: 0,
             pagination: {
@@ -59,17 +66,27 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /**
+     * Make the call to update the list
+     * @function componentDidMount
+     */
     componentDidMount() {
         this.handleRefresh()
     }
 
+    /**
+     * Validate if 'load more data' button is necessary. 
+     * And force layout of the toolBar
+     * @function componentDidUpdate
+     * @param {object} prevProps 
+     */
     componentDidUpdate(prevProps) {
-        if(this.listView) {
+        if (this.listView) {
             this.listView.winControl.footer.style.outline = 'none'
             this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
         }
         if (this.toolBar) {
-            this.toolBar.winControl.forceLayout();
+            this.toolBar.winControl.forceLayout()
         }
 
         if (this.props.action === 'reload') {
@@ -84,22 +101,40 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /**
+     * Clean the list
+     * @constant componentWillUnmount
+     */   
     componentWillUnmount() {
         this.props.changeSelectionMode(false)
     }
 
+    /**
+     * Handle item list render
+     * @constant ItemListRenderer
+     * @type {component}  
+     */
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <InvitationsItemList itemList={ItemList.data} size={42} />
         )
     })
 
+    /**
+     * Handle list header render
+     * @constant groupHeaderRenderer
+     * @type {component}  
+     */
     groupHeaderRenderer = ReactWinJS.reactRenderer((item) => {
         return (
             <div>{item.data.title}</div>
         )
     })
 
+    /**
+     * Handle change selection mode
+     * @function handleToggleSelectionMode
+     */
     handleToggleSelectionMode = () => {
         this.props.history.push(`${publicURL}/app/invitations`)
         this.props.changeSelectionMode(!this.props.selectionMode)
@@ -109,6 +144,11 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /**
+     * Handle selection changed
+     * @function handleSelectionChanged
+     * @param {object} eventObject
+     */
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
@@ -124,6 +164,11 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /**
+     * Get invitations information and reload the list
+     * @function handleRefresh
+     * @async
+     */
     handleRefresh = async () => {
         try {
             this.props.history.push(`${publicURL}/app/invitations`)
@@ -153,6 +198,11 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /**
+     * Delete invitatios
+     * @function handleDelete
+     * @async
+     */
     handleDelete = async () => {
         try {
             const isOK = await Confirmation.isOK(this.contentDialog)
@@ -198,6 +248,11 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /**
+     * Change the order of the elements
+     * @function handleSort
+     * @async
+     */
     handleSort = async () => {
         try {
             this.setState({
@@ -228,20 +283,26 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /**
+     * Resend invitations
+     * @function handleResendEmail
+     * @async
+     */
     handleResendEmail = async () => {
         try {
             this.setState({
                 isLoading: true
             })
-            const itemListToSend= this.props.selectedItems.map((item) => {
+            const itemListToSend = this.props.selectedItems.map((item) => {
                 return {
                     id: item["PluginFlyvemdmInvitation.id"],
                     _notify: item["PluginFlyvemdmInvitation.User.name"]
                 }
             })
-
-            await this.props.glpi.updateItem({itemtype: itemtype.PluginFlyvemdmInvitation, input: itemListToSend})
-
+            await this.props.glpi.updateItem({
+                itemtype: itemtype.PluginFlyvemdmInvitation, 
+                input: itemListToSend
+            })
             this.props.setNotification({
                 title: I18n.t('commons.success'),
                 body: I18n.t('notifications.invitation_successfully_sent'),
@@ -260,6 +321,11 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /**
+     * change state of 'scrolling' when it's necessary
+     * @function onLoadingStateChanged
+     * @param {object} eventObject
+     */
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {
             setTimeout(() => {
@@ -270,6 +336,11 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /**
+     * Load more data
+     * @function loadMoreData
+     * @async
+     */
     loadMoreData = async () => {
         try {  
             this.setState({
@@ -309,6 +380,10 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /**
+     * Open page to create a new invitation
+     * @function handleAdd
+     */
     handleAdd = () => {
         this.props.history.push(`${publicURL}/app/invitations/add`)
         this.props.changeSelectionMode(false)
@@ -318,6 +393,10 @@ export default class InvitationsList extends PureComponent {
         }
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         let deleteCommand = (
             <ReactWinJS.ToolBar.Button
@@ -434,6 +513,7 @@ export default class InvitationsList extends PureComponent {
         )
     }
 }
+
 InvitationsList.propTypes = {
     selectionMode: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,

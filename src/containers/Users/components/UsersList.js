@@ -75,6 +75,8 @@ export default class UsersList extends PureComponent {
     }
     
     /**
+     * Validate if 'load more data' button is necessary. 
+     * And force layout of the toolBar
      * @function componentDidUpdate
      * @param {object} prevProps 
      */
@@ -294,7 +296,9 @@ export default class UsersList extends PureComponent {
     }
 
     /**
+     * change state of 'scrolling' when it's necessary
      * @function onLoadingStateChanged
+     * @param {object} eventObject
      */
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {

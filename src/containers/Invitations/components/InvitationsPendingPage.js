@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -37,8 +38,12 @@ import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
 
+/**
+ * @class InvitationsPendingPage
+ * @extends PureComponent
+ */
 class InvitationsPendingPage extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -49,6 +54,13 @@ class InvitationsPendingPage extends PureComponent {
         }
     }
 
+    /**
+     * Make sure that the state and props are in sync for when it is required
+     * @static
+     * @function getDerivedStateFromProps
+     * @param {object} nextProps
+     * @param {object} prevState
+     */
     static getDerivedStateFromProps(nextProps, prevState) {
         if (prevState.id !== getID(nextProps.history.location.pathname)) {
             return {
@@ -64,16 +76,31 @@ class InvitationsPendingPage extends PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
+    /**
+     * Make the call to update the list when it's necessary
+     * @function componentDidUpdate
+     * @param {object} prevProps 
+     * @param {object} prevState 
+     */
+    componentDidUpdate(prevProps, prevState) {
         if (prevState.id !== this.state.id) {
             this.handleRefresh()
         }
     }
 
+    /**
+     * Make the call to update the list
+     * @function componentDidMount
+     */
     componentDidMount() {
         this.handleRefresh()
     }
 
+    /**
+     * Get the logs of the invitation and reload the list
+     * @function handleRefresh
+     * @async
+     */
     handleRefresh = async () => {
         try {
             const logs = await this.props.glpi.searchItems({ 
@@ -81,12 +108,10 @@ class InvitationsPendingPage extends PureComponent {
                 options: { uid_cols: true, forcedisplay: [2, 3, 4, 5] }, 
                 criteria: [{ field: '4', searchtype: 'equal', value: this.state.id }] 
             })
-
             this.setState({
                 isLoading: false,
                 itemList: new WinJS.Binding.List(logs.data)
             })
-            
         } catch (error) {
             this.setState({
                 isLoading: false,
@@ -95,6 +120,11 @@ class InvitationsPendingPage extends PureComponent {
         }
     }
 
+    /**
+     * Handle item list render
+     * @constant ItemListRenderer
+     * @type {component}
+     */
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <div style={{ padding: '14px', width: '100%' }}>
@@ -105,13 +135,16 @@ class InvitationsPendingPage extends PureComponent {
         )
     })
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
-
         let listComponent = (
             <ContentPane>
                 <div className="list-pane" style={{ margin: '0 10px' }}>
                     <div className="content-header">
-                        <h2 className="content-header__title" >
+                        <h2 className="content-header__title">
                             {I18n.t('invitations.pending')}
                         </h2>
                     </div>

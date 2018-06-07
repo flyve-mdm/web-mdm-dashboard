@@ -26,11 +26,17 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import EmptyMessage from '../../components/EmptyMessage'
 import InvitationsPendingPage from './components/InvitationsPendingPage'
 import Enroll from '../Devices/components/Enroll'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Represents all private routes from Invitations
+ * @constant routes
+ * @type {Array}
+ */
 const routes = [
   {
     path: '/',

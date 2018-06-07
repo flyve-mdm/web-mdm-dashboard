@@ -90,6 +90,7 @@ class ResetPassword extends PureComponent {
     /**
      * Create the element to render
      * @function createRenderElament
+     * @return {component}
      */
     createRenderElament = () => {
         let element 

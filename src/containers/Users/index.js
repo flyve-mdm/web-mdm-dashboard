@@ -157,7 +157,7 @@ class Users extends PureComponent {
     /**
      * Change selection mode
      * @function changeSelectionMode
-     * @param selectionMode
+     * @param {boolean} selectionMode
      */
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
 
