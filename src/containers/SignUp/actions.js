@@ -33,6 +33,7 @@ import ErrorValidation from '../../components/ErrorValidation';
  * Handle change state
  * @function changeState
  * @param {object} ctx
+ * @return {function}
  */
 export const changeState = (ctx) => {
     return (name, value) => {
@@ -43,7 +44,7 @@ export const changeState = (ctx) => {
 }
 
 /**
- * Build data array
+ * Build the array to generate the form
  * @function buildDataArray
  * @param {object} ctx
  * @param {*} I18n

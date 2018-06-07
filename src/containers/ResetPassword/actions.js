@@ -26,12 +26,16 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import ErrorValidation from '../../components/ErrorValidation';
 
+/**
+ * Validate new password and save this in glpi
+ * @function resetPassword
+ * @param {object} ctx 
+ */
 export const resetPassword = (ctx) => {
-
     const user = ctx.buildDataArray()
-
     let isCorrect = true
 
     for (const key in user) {
@@ -44,7 +48,6 @@ export const resetPassword = (ctx) => {
             }
         }
     }
-
     if (isCorrect) {
         ctx.setState({
             isResetSent: true
@@ -57,6 +60,12 @@ export const resetPassword = (ctx) => {
     }
 }
 
+/**
+ * Handle change state
+ * @function changeState
+ * @param {object} ctx 
+ * @return {function}
+ */
 export const changeState = (ctx) => {
     return (name, value) => {
         ctx.setState({
@@ -65,6 +74,12 @@ export const changeState = (ctx) => {
     }
 }
 
+/**
+ * Build the array to generate the form
+ * @param {object} ctx 
+ * @param {object} I18n 
+ * @return {array}
+ */
 export const buildDataArray = (ctx, I18n) => {
     const dataArray = {
         resetInformation: [
