@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { VictoryPie } from 'victory'
@@ -52,7 +53,13 @@ function mapDispatchToProps(dispatch) {
   return { actions }
 }
 
+/**
+ * Component with the Home section
+ * @class Dashboard
+ * @extends PureComponent
+ */
 class Dashboard extends PureComponent {
+  /** @constructor */
   constructor (props) {
     super(props)
     this.state = {
@@ -70,10 +77,21 @@ class Dashboard extends PureComponent {
     }
   }
 
+  /**
+   * Show the error notifications
+   * @function showError
+   * @param {*} error
+   */
   showError = (error) => {
     this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
   }
 
+  /**
+   * Get devices
+   * @function getDevices
+   * @async
+   * @return {promise}
+   */
   getDevices = () => new Promise(async (resolve, reject) => {
     try {
       const devices = await this.props.glpi.searchItems({ 
@@ -90,6 +108,13 @@ class Dashboard extends PureComponent {
     }
   })
 
+  /**
+   * Get devices by operating system version
+   * @function getDevicesByOperatingSystemVersion
+   * @async
+   * @param {object} devices
+   * @return {promise}
+   */
   getDevicesByOperatingSystemVersion = (devices) => new Promise(async (resolve, reject) => {
     try {
       const devicesAndroid = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] === "android").length
@@ -106,6 +131,13 @@ class Dashboard extends PureComponent {
     }
   })
 
+  /**
+   * Get devices by users
+   * @function getDevicesByUsers
+   * @async
+   * @param {object} devices
+   * @return {promise}
+   */
   getDevicesByUsers = (devices) => new Promise(async (resolve, reject) => {
     try {
       const devicesByUsers = devices.data.map(device => {
@@ -121,6 +153,12 @@ class Dashboard extends PureComponent {
     }
   })
 
+  /**
+   * Get invitations
+   * @function getInvitations
+   * @async
+   * @return {promise}
+   */
   getInvitations = () => new Promise(async (resolve, reject) => {
     try {
       const invitations = await this.props.glpi.searchItems({ 
@@ -133,6 +171,12 @@ class Dashboard extends PureComponent {
     }
   })
 
+  /**
+   * Get pending invitations
+   * @function getPendingInvitations
+   * @async
+   * @return {promise}
+   */
   getPendingInvitations = () => new Promise(async (resolve, reject) => {
     try {
       const pendingInvitations = await this.props.glpi.searchItems({ 
@@ -151,6 +195,12 @@ class Dashboard extends PureComponent {
     }
   })
 
+  /**
+   * Get fleets
+   * @function getFleets
+   * @async
+   * @return {promise}
+   */
   getFleets = () => new Promise(async (resolve, reject) => {
     try {
       const fleets = await this.props.glpi.searchItems({ 
@@ -163,6 +213,12 @@ class Dashboard extends PureComponent {
     }
   })
 
+  /**
+   * Get files
+   * @function getFiles
+   * @async
+   * @return {promise}
+   */
   getFiles = () => new Promise(async (resolve, reject) => {
     try {
       const files = 
@@ -176,6 +232,12 @@ class Dashboard extends PureComponent {
     }
   })
 
+  /**
+   * Get applications
+   * @function getApplications
+   * @async
+   * @return {promise}
+   */
   getApplications = () => new Promise(async (resolve, reject) => {
     try {
       const applications = await this.props.glpi.searchItems({ 
@@ -188,6 +250,12 @@ class Dashboard extends PureComponent {
     }
   })
 
+  /**
+   * Get users
+   * @function getUsers
+   * @async
+   * @return {promise}
+   */
   getUsers = () => new Promise(async (resolve, reject) => {
     try {
       const users = await this.props.glpi.searchItems({ 
@@ -200,10 +268,21 @@ class Dashboard extends PureComponent {
     }
   })
   
+  /**
+   * Validate if an invalid session exists
+   * @function validateError
+   * @param {*} error
+   * @return {boolean}
+   */
   validateError = error => {
     return ((error && error.data && error.data[0] && (error.data[0][1] === 'session_token seems invalid')) ? false : true)
   }
 
+  /**
+   * Get all necessary data
+   * @function componentDidMount
+   * @async
+   */
   componentDidMount = async () => {
     if (this.props.glpi.sessionToken) {
       let isValid = true
@@ -309,6 +388,11 @@ class Dashboard extends PureComponent {
     }
   }
 
+  /**
+   * Build the necessary infoboxes
+   * @function renderInfoBox
+   * @return {array}
+   */
   renderInfoBox () {
     let boxes = []
 
@@ -385,9 +469,13 @@ class Dashboard extends PureComponent {
     }
 
     return boxes
-
   }
 
+  /**
+   * Build the necessary graphics
+   * @function renderGraphics
+   * @return {array}
+   */
   renderGraphics () {
     let graphics = []
 
@@ -462,6 +550,10 @@ class Dashboard extends PureComponent {
     return graphics
   }
 
+  /** 
+   * Render component 
+   * @function render
+   */ 
   render() {
     const renderInfoBox = this.renderInfoBox()
     const renderGraphics = this.renderGraphics()
