@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -38,8 +39,12 @@ import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 
+/**
+ * @class FleetsList
+ * @extends PureComponent
+ */
 export default class FleetsList extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -58,10 +63,17 @@ export default class FleetsList extends PureComponent {
         }
     }
 
+    /**
+     * @function componentDidMount
+     */
     componentDidMount() {
         this.handleRefresh()
     }
 
+    /**
+     * @function componentDidUpdate
+     * @param {object} prevProps 
+     */
     componentDidUpdate(prevProps) {
         if (this.listView) {
             this.listView.winControl.footer.style.outline = 'none'
@@ -83,16 +95,27 @@ export default class FleetsList extends PureComponent {
         }
     }
 
+    /**
+     * @function componentWillUnmount
+     */
     componentWillUnmount() {
         this.props.changeSelectionMode(false)
     }
 
+    /**
+     * @constant ItemListRenderer
+     * @type {component}
+     */
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <FleetsItemList itemList={ItemList.data} size={42} />
         )
     })
 
+    /**
+     * @function handleRefresh
+     * @async
+     */
     handleRefresh = async () => {
         try {
             this.props.history.push(`${publicURL}/app/fleets`)
@@ -124,6 +147,9 @@ export default class FleetsList extends PureComponent {
         }
     }
 
+    /**
+     * @function handleAdd
+     */
     handleAdd = () => {
         this.props.history.push(`${publicURL}/app/fleets/add`)
         this.props.changeSelectionMode(false)
@@ -133,6 +159,9 @@ export default class FleetsList extends PureComponent {
         }
     }
 
+    /**
+     * @function handleToggleSelectionMode
+     */
     handleToggleSelectionMode = () => {
         this.props.history.push(`${publicURL}/app/fleets`)
         this.props.changeSelectionMode(!this.props.selectionMode)
@@ -142,6 +171,10 @@ export default class FleetsList extends PureComponent {
         }
     }
 
+    /**
+     * @function handleSelectionChanged
+     * @param {object} eventObject
+     */
     handleSelectionChanged = (eventObject) => {
         let listView = eventObject.currentTarget.winControl
         let index = listView.selection.getIndices()
@@ -159,6 +192,11 @@ export default class FleetsList extends PureComponent {
         }
     }
 
+    /**
+     * @function handleDelete
+     * @async
+     * @param {object} eventObject
+     */
     handleDelete = async (eventObject) => {
         try {
             const isOK = await Confirmation.isOK(this.contentDialog)
@@ -203,6 +241,10 @@ export default class FleetsList extends PureComponent {
         }
     }
 
+    /**
+     * @function handleSort
+     * @async
+     */
     handleSort = async () => {
         try {
             this.setState({
@@ -228,6 +270,10 @@ export default class FleetsList extends PureComponent {
         }
     }
 
+    /**
+     * @function onLoadingStateChanged
+     * @param {object} eventObject
+     */
     onLoadingStateChanged = (eventObject) => {
         if (eventObject.detail.scrolling === true) {
             setTimeout(() => {
@@ -238,6 +284,10 @@ export default class FleetsList extends PureComponent {
         }
     }
 
+    /**
+     * @function loadMoreData
+     * @async
+     */
     loadMoreData = async () => {
         try {
             this.setState({
@@ -272,10 +322,17 @@ export default class FleetsList extends PureComponent {
         }
     }
 
+    /**
+     * @function handleEdit
+     */
     handleEdit = () => {
         this.props.history.push(`${publicURL}/app/fleets/edit`)
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */
     render() {
         let deleteCommand = (
             <ReactWinJS.ToolBar.Button
@@ -385,6 +442,7 @@ export default class FleetsList extends PureComponent {
         )
     }
 }
+
 FleetsList.propTypes = {
     selectionMode: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,

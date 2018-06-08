@@ -26,12 +26,18 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import FleetsContent from './components/FleetsContent'
 import EmptyMessage from '../../components/EmptyMessage'
 import DevicesAssociated from './components/DevicesAssociated'
 import FleetsEdit from './components/FleetsEdit'
 import { I18n } from 'react-i18nify'
 
+/**
+ * Represents all private routes from Fleets
+ * @constant routes
+ * @type {Array}
+ */
 const routes = [
   {
     path: '/',
