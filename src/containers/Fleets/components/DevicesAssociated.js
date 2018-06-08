@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../../../components/ContentPane'
@@ -39,8 +40,12 @@ import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
 import publicURL from '../../../shared/publicURL'
 
+/**
+ * @class DevicesAssociated
+ * @extends PureComponent
+ */
 class DevicesAssociated extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -52,6 +57,10 @@ class DevicesAssociated extends PureComponent {
         }
     }
 
+    /**
+     * @function componentDidMount
+     * @async
+     */
     componentDidMount = async () => {
         try {
             const { name } = await this.props.glpi.getAnItem({itemtype: itemtype.PluginFlyvemdmFleet, id: getID(this.props.history.location.pathname)})
@@ -85,6 +94,10 @@ class DevicesAssociated extends PureComponent {
         }
     }
 
+    /**
+     * @constant headerComponent
+     * @type {component}
+     */
     headerComponent = (
         <React.Fragment>
             <span className="id">#</span>
@@ -92,6 +105,10 @@ class DevicesAssociated extends PureComponent {
         </React.Fragment>
     )
 
+    /**
+     * @constant ItemListRenderer
+     * @type {component}
+     */
     ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
         return (
             <div style={{cursor: 'pointer'}} onClick={() => this.props.history.push(`${publicURL}/app/devices/${ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}`)}>
@@ -101,6 +118,10 @@ class DevicesAssociated extends PureComponent {
         )
     })
 
+    /** 
+     * Render component 
+     * @function render
+     */
     render () {
         return (
             <ContentPane className="fleets">

@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import ReactWinJS from 'react-winjs'
 import TasksDeployAppList from './TasksDeployAppList'
@@ -34,7 +35,12 @@ import TasksDeployFileList from './TaskDeployFileList'
 import TasksRemoveFileList from './TasksRemoveFileList'
 import { I18n } from 'react-i18nify'
 
+/**
+ * @class FleetsTaskItemList
+ * @extends PureComponent
+ */
 class FleetsTaskItemList extends PureComponent {
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -45,6 +51,10 @@ class FleetsTaskItemList extends PureComponent {
         }
     }
 
+    /**
+     * @function updateState
+     * @param {*} fleetHaveTask
+     */
     updateState = (fleetHaveTask) => {
         if (fleetHaveTask) { 
             this.setState({
@@ -60,6 +70,13 @@ class FleetsTaskItemList extends PureComponent {
         }
     }
 
+    /**
+     * Make sure that the state and props are in sync for when it is required
+     * @static
+     * @function getDerivedStateFromProps
+     * @param {object} nextProps
+     * @param {object} prevState
+     */
     static getDerivedStateFromProps(nextProps, prevState) {
         let input
         if (nextProps.data['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
@@ -92,6 +109,9 @@ class FleetsTaskItemList extends PureComponent {
         }
     }
 
+    /**
+     * @function componentDidMount
+     */
     componentDidMount = () => {
         this.updateState(this.props.fleetHaveTask)
         let input
@@ -106,6 +126,9 @@ class FleetsTaskItemList extends PureComponent {
         })
     }
     
+    /**
+     * @function handleAddedToggle
+     */
     handleAddedToggle = () => {
         if (!this.state.alreadyAdded) {
             this.props.addTask(this.props.data)
@@ -119,6 +142,9 @@ class FleetsTaskItemList extends PureComponent {
         }) 
     }
 
+    /**
+     * @function handleActivePolicyToggle
+     */
     handleActivePolicyToggle = () => {
         switch (this.props.data['PluginFlyvemdmPolicy.type']) {
             case 'bool':
@@ -140,6 +166,10 @@ class FleetsTaskItemList extends PureComponent {
         }
     }
 
+    /**
+     * @function handleChangeInput
+     * @param {object} e
+     */
     handleChangeInput = (e) => {
         switch (this.props.data['PluginFlyvemdmPolicy.type']) {
             case 'deployapp':
@@ -155,16 +185,27 @@ class FleetsTaskItemList extends PureComponent {
         }
     }
 
+    /**
+     * @function handleBlurInput
+     * @param {object} e
+     */
     handleBlurInput = (e) => {
         this.handleActivePolicyToggle()
     }
 
+    /**
+     * @function handleRemoveTask
+     * @param {*} task
+     */
     handleRemoveTask = (task) => {
         this.props.removeValueTask(this.props.data, task)
     }
 
+    /**
+     * @function renderMinMaxVersion
+     * @return {array}
+     */
     renderMinMaxVersion = () => {
-
         let renderComponent = []
 
         if (this.props.data['PluginFlyvemdmPolicy.android_min_version'] !== 0) {
@@ -219,6 +260,10 @@ class FleetsTaskItemList extends PureComponent {
         return renderComponent
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         if (this.props.data === undefined) {
             return (   

@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
@@ -47,8 +48,12 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * @class Fleets
+ * @extends PureComponent
+ */
 class Fleets extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -63,6 +68,10 @@ class Fleets extends PureComponent {
         window.addEventListener('resize', this.handleResize)
     }
 
+    /** 
+     * Change state according to the resolution of the screen 
+     * @function handleResize
+     */
     handleResize = () => {
         let nextMode = getMode()
 
@@ -83,10 +92,21 @@ class Fleets extends PureComponent {
         }
     }
 
+    /**
+     * Remove event listener 'resize'
+     * @function componentWillUnmount
+     */
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleResize)
     }
 
+    /**
+     * Make sure that the state and props are in sync for when it is required
+     * @static
+     * @function getDerivedStateFromProps
+     * @param {object} nextProps
+     * @param {object} prevState
+     */
     static getDerivedStateFromProps(nextProps, prevState) {
         if (nextProps.history.location.pathname === `${publicURL}/app/fleets` && prevState.selectedItems.length > 0) {
             return {
@@ -100,6 +120,11 @@ class Fleets extends PureComponent {
         }
     }
 
+    /**
+     * Construct the props data
+     * @function propsData
+     * @return {object}
+     */
     propsData = () => {
         return {
             icon: this.state.icon,
@@ -117,10 +142,32 @@ class Fleets extends PureComponent {
         }
     }
 
+    /**
+     * Change selected items
+     * @function changeSelectedItems
+     * @param {array} selectedItems
+     */
     changeSelectedItems = selectedItems => this.setState({ selectedItems })
+
+    /**
+     * Change action
+     * @function changeAction
+     * @param {string} action
+     */
     changeAction = action => this.setState({ action })
+
+    /**
+     * Change selection mode
+     * @function changeSelectionMode
+     * @param {boolean} selectionMode
+     */
     changeSelectionMode = selectionMode => this.setState({ selectionMode })
 
+    /**
+     * Construct the styles of the list
+     * @function stylesList
+     * @return {object}
+     */
     stylesList = () => {
 
         let styles = {
@@ -144,8 +191,12 @@ class Fleets extends PureComponent {
         return styles
     }
 
+    /**
+     * Construct the styles of the content
+     * @function stylesContent
+     * @return {object}
+     */
     stylesContent = () => {
-
         const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
         let styles = {
             width: calc100PercentMinus(validWidth),
@@ -169,6 +220,10 @@ class Fleets extends PureComponent {
         return styles
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         let renderComponents = (
 
@@ -198,6 +253,7 @@ class Fleets extends PureComponent {
         )
     }
 }
+
 export default connect(
     null,
     mapDispatchToProps

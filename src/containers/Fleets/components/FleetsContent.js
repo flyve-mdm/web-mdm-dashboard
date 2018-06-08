@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import WinJS from 'winjs'
 import FleetsTaskItemList from './FleetsTaskItemList'
@@ -37,24 +38,12 @@ import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 import getID from '../../../shared/getID'
 
+/**
+ * @class FleetsContent
+ * @extends PureComponent
+ */
 class FleetsContent extends PureComponent {
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (prevState.itemID !== getID(nextProps.history.location.pathname)) {
-
-            return {
-                ...prevState,
-                isLoading: true,
-                itemID: Number(getID(nextProps.history.location.pathname)),
-                input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Feet',
-                notManaged: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]["PluginFlyvemdmFleet.is_default"] === 1 ? true : false : false,
-                selectedItems: nextProps.selectedItems
-            }
-        }
-        
-        return null
-    }
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -78,6 +67,30 @@ class FleetsContent extends PureComponent {
         }
     }
 
+    /**
+     * Make sure that the state and props are in sync for when it is required
+     * @static
+     * @function getDerivedStateFromProps
+     * @param {object} nextProps
+     * @param {object} prevState
+     */
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.itemID !== getID(nextProps.history.location.pathname)) {
+            return {
+                ...prevState,
+                isLoading: true,
+                itemID: Number(getID(nextProps.history.location.pathname)),
+                input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Feet',
+                notManaged: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]["PluginFlyvemdmFleet.is_default"] === 1 ? true : false : false,
+                selectedItems: nextProps.selectedItems
+            }
+        }
+        return null
+    }
+
+    /**
+     * @function componentDidMount 
+     */
     componentDidMount = () => {
             if (!this.state.notManaged) {
                 this.requestAllData()
@@ -86,7 +99,12 @@ class FleetsContent extends PureComponent {
             }
     }
 
-    componentDidUpdate(prevProps, prevState, prevContext) {
+    /**
+     * @function componentDidUpdate
+     * @param {object} prevProps 
+     * @param {object} prevState 
+     */
+    componentDidUpdate(prevProps, prevState) {
         if (prevState.itemID !== this.state.itemID) {
             if (!this.state.notManaged) {
                 this.requestAllData()
@@ -96,6 +114,9 @@ class FleetsContent extends PureComponent {
         }
     }
 
+    /**
+     * @function resetData
+     */
     resetData = () => {
         this.setState({
             data: {
@@ -111,6 +132,10 @@ class FleetsContent extends PureComponent {
         })
     }
 
+    /**
+     * @function requestAllData
+     * @async
+     */
     requestAllData = async () => {
         /*
          * Get Devices 
@@ -301,14 +326,26 @@ class FleetsContent extends PureComponent {
 
     }
 
+    /**
+     * @function handleChangeInput
+     * @param {object} e
+     */
     handleChangeInput = (e) => {
         this.setState({ input: e.target.value })
     }
     
+    /**
+     * @function handleFleetHaveTask
+     * @param {object} policy
+     */
     handleFleetHaveTask = policy => {
         return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? true : false
     }
 
+    /**
+     * @function getTypeData
+     * @param {object} policy
+     */
     getTypeData = policy => {
         const policyType = policy['PluginFlyvemdmPolicy.type']
         // Check if the policy default value are applications, files or other
@@ -326,6 +363,11 @@ class FleetsContent extends PureComponent {
         }
     }
 
+    /**
+     * @function getValueOfTask
+     * @param {object} policy
+     * @param {*} fleetHaveTask
+     */
     getValueOfTask = (policy, fleetHaveTask) => {
         // Check if the current Fleet have a Task that have a relation with this Policy
         if (fleetHaveTask) {
@@ -345,6 +387,10 @@ class FleetsContent extends PureComponent {
         }
     }
 
+    /**
+     * @function filterPoliciesPerCategory
+     * @return {array}
+     */
     filterPoliciesPerCategory = () => {
         const policiesPerCategory = []
 
@@ -363,6 +409,10 @@ class FleetsContent extends PureComponent {
         return policiesPerCategory
     }
 
+    /**
+     * @function handleAddTask
+     * @param {object} policy
+     */
     handleAddTask = (policy) => {
         if (policy) {
             if (policy['PluginFlyvemdmPolicy.type'] !== 'deployapp' && 
@@ -386,7 +436,11 @@ class FleetsContent extends PureComponent {
         }
     }
 
-    handleRemoveTask = (policy) => {
+    /**
+     * @function handleRemoveTask
+     * @param {object} policy
+     */
+    handleRemoveTask = policy => {
         if (policy) {
             let tasks = { ...this.state.data.tasksNew}
             delete tasks[policy['PluginFlyvemdmPolicy.id']]
@@ -425,6 +479,11 @@ class FleetsContent extends PureComponent {
         }
     }
 
+    /**
+     * @function handleUpdateValueTask
+     * @param {object} policy
+     * @param {*} value
+     */
     handleUpdateValueTask = (policy, value) => {
         if (policy) {
             let newDeploy
@@ -557,6 +616,11 @@ class FleetsContent extends PureComponent {
         }
     }
 
+    /**
+     * @function handleRemoveValueTask
+     * @param {object} policy
+     * @param {object} task
+     */
     handleRemoveValueTask = (policy, task) => {
         let newTasks
 
@@ -613,6 +677,10 @@ class FleetsContent extends PureComponent {
         }        
     }
 
+    /**
+     * @function handleSaveFleet
+     * @async
+     */
     handleSaveFleet = async () => {
         if(this.state.itemType === itemtype.PluginFlyvemdmFleet) {
             if (this.props.selectedItems.length === 1) {
@@ -631,6 +699,10 @@ class FleetsContent extends PureComponent {
         
     }
 
+    /**
+     * @function handleUpdateFleetName
+     * @async
+     */
     handleUpdateFleetName = async () => {
         try {
             this.setState({
@@ -658,6 +730,10 @@ class FleetsContent extends PureComponent {
         }
     }
 
+    /**
+     * @function handleUpdateFleet
+     * @async
+     */
     handleUpdateFleet = async () => {
         this.setState({
             isLoading: true
@@ -775,6 +851,10 @@ class FleetsContent extends PureComponent {
         }
     }
 
+    /**
+     * @function handleCreateFleet
+     * @async
+     */
     handleCreateFleet = async () => {
         this.setState({
             isLoading: true
@@ -835,6 +915,11 @@ class FleetsContent extends PureComponent {
         }
     }
 
+    /**
+     * @function handleDeleteFleet
+     * @async
+     * @param {object} eventObject
+     */
     handleDeleteFleet = async (eventObject) => {
         if (this.props.selectedItems.length === 1) {
             this.setState({
@@ -867,6 +952,9 @@ class FleetsContent extends PureComponent {
         }
     }
 
+    /**
+     * @function handleDuplicateFleet
+     */
     handleDuplicateFleet = () => {
         this.setState((prevState, props) => ({
             input: prevState.input !== '' ? prevState.input.concat(' copy') : 'Copy',
@@ -884,10 +972,17 @@ class FleetsContent extends PureComponent {
         })
     }
 
+    /**
+     * @function goToList
+     */
     goToList = () => {
         this.props.history.push(`${publicURL}/app/fleets/${this.state.itemID}/list`)
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */
     render() {
         let policiesPerCategory
 

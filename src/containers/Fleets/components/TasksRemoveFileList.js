@@ -26,10 +26,15 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 
+/**
+ * @class TasksRemoveFileList
+ * @extends PureComponent
+ */
 class TasksRemoveFileList extends PureComponent {
-
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -37,10 +42,17 @@ class TasksRemoveFileList extends PureComponent {
         }
     }
 
+    /**
+     * @function componentDidMount
+     */
     componentDidMount() {
         this.refreshRender()
     }
 
+    /**
+     * @function refreshRender
+     * @return {*}
+     */
     refreshRender = () => {
         return (
             Array.isArray(this.props.data) ?
@@ -66,10 +78,18 @@ class TasksRemoveFileList extends PureComponent {
         )
     }
 
+    /**
+     * @function handleRemove
+     * @param {*} task
+     */
     handleRemove = (task) => {
         this.props.removeTask(task)
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */ 
     render() {
         return this.refreshRender()
 

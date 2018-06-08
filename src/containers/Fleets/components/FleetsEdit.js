@@ -26,13 +26,19 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import EditMultiple from '../../../components/EditMultiple'
 import { I18n } from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 
+/**
+ * @class FleetsEdit
+ * @extends PureComponent
+ */
 class FleetsEdit extends PureComponent {
+    /** @constructor */
     constructor(props) {
         super(props)
         this.state = {
@@ -50,6 +56,10 @@ class FleetsEdit extends PureComponent {
         }
     }
 
+    /** 
+     * Render component 
+     * @function render
+     */
     render () {
         return (
             <EditMultiple 
