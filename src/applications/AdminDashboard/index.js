@@ -36,6 +36,7 @@ import GenerateRoutes from '../../components/GenerateRoutes';
 /**
  * Represents internal routes
  * @class AdminDashboard
+ * @extends Component
  */
 class AdminDashboard extends Component {
   render() { 

@@ -37,8 +37,8 @@ import asyncResetPassword from '../../async/asyncResetPassword'
 
 /**
  * Represents all public routes
- * @constant
- * @type {Array}
+ * @constant routes
+ * @type {array}
  */
 const routes = [
   {
