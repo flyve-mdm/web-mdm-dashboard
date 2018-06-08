@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -47,8 +48,13 @@ function mapDispatchToProps(dispatch) {
     return { actions }
 }
 
+/**
+ * Component with the ForgotPassword section
+ * @class ForgotPassword
+ * @extends PureComponent
+ */
 class ForgotPassword extends PureComponent {
-
+    /** @constructor */
     constructor (props) {
         super(props)
         this.state = {
@@ -56,61 +62,73 @@ class ForgotPassword extends PureComponent {
             isRecoverSent: false,
             text: ''
         }
+    }
 
-        this.handleRecover = (event) => {
-            event.preventDefault()
-            this.setState({
-                isLoading: true
-            }, async () => {
-                if (this.props.glpi.sessionToken) {
-                    try {
-                        await this.props.glpi.killSession()
-                    } catch (error) {}
-                }
-                try {
-                    await this.props.glpi.genericRequest({
-                        path: 'lostPassword',
-                        requestParams: {
-                          method: 'PUT',
-                          body: JSON.stringify({ "email": this.state.text })
-                        }
-                    })
-                    this.setState({
-                        isRecoverSent: true,
-                        isLoading: false
-                    })
-                    this.props.actions.setNotification(handleMessage({
-                        type: 'success',
-                        message: I18n.t('notifications.request_sent')
-                    }))
-                } catch (error) {
-                    this.setState({
-                        isLoading: false
-                    })
-                    this.props.actions.setNotification(handleMessage({
-                        type: 'warning', 
-                        message: error
-                    }))
+    /**
+     * Close the active session (if it exists) and make the request to recover password
+     * @function handleRecover
+     * @async
+     * @param {object} event
+     */
+    handleRecover = async (event) => {
+        event.preventDefault()
+        this.setState({
+            isLoading: true
+        })
+        if (this.props.glpi.sessionToken) {
+            try {
+                await this.props.glpi.killSession()
+            } catch (error) {}
+        }
+        try {
+            await this.props.glpi.genericRequest({
+                path: 'lostPassword',
+                requestParams: {
+                    method: 'PUT',
+                    body: JSON.stringify({ "email": this.state.text })
                 }
             })
+            this.setState({
+                isRecoverSent: true,
+                isLoading: false
+            })
+            this.props.actions.setNotification(handleMessage({
+                type: 'success',
+                message: I18n.t('notifications.request_sent')
+            }))
+        } catch (error) {
+            this.setState({
+                isLoading: false
+            })
+            this.props.actions.setNotification(handleMessage({
+                type: 'warning', 
+                message: error
+            }))
         }
     }
 
+    /**
+     * Focus the form input
+     * @function componentDidMount
+     */
     componentDidMount() {
-        this.textInput.focus()
+        if (this.textInput) this.textInput.focus()
     }
 
-    render() {
-        
+    /**
+     * Validate if necessary the form or the button to go home
+     * @function renderElement
+     * @return {component}
+     */
+    renderElement = () => {
         let element
-        
         if (!this.state.isRecoverSent) {
             element = (
                 <div className="authentication__forgot-password">
                     <p>
                         {I18n.t('forgot_password.help_reset_password')}
                     </p>
-                    <form onSubmit={(event) => { this.handleRecover(event) }}>
+                    <form onSubmit={this.handleRecover}>
                         <Input 
                             label="" 
                             type="text" 
@@ -154,6 +172,14 @@ class ForgotPassword extends PureComponent {
             )
         }
 
+        return element
+    }
+
+    /** 
+     * Render component 
+     * @function render
+     */ 
+    render() {
         if (this.state.isLoading) {
             return (
                 <div style={{ height: '140px' }}><Loading message={`${I18n.t('commons.sending')}...`} /></div>
@@ -165,7 +191,7 @@ class ForgotPassword extends PureComponent {
                         {I18n.t('forgot_password.title')}
                     </h2>
 
-                    { element }
+                    { this.renderElement() }
                 </React.Fragment>
             )
         }

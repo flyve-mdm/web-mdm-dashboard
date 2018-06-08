@@ -39,6 +39,7 @@ import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
 
 /**
+ * Component with the list of pending invitations
  * @class InvitationsPendingPage
  * @extends PureComponent
  */
