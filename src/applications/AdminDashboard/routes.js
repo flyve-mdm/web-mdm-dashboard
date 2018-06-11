@@ -41,8 +41,8 @@ import { I18n } from 'react-i18nify'
 
 /**
  * Represents all private routes
- * @constant
- * @type {Array}
+ * @constant routes
+ * @type {array}
  */
 const routes = [
   {
