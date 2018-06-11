@@ -102,6 +102,17 @@ jobs:
           name: "Install Transifex Client and Files"
           command: source ci/scripts/transifex.sh
 
+      - run:
+          name: "Start server in background"
+          command: node scripts/start.js > ../yarn.log
+          background: true
+
+      - run: 
+          name: "Take screenshots"
+          command: |
+            until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
+            yarn test:cypress
+
       - run: 
           name: "Build application"
           command: |
