@@ -105,7 +105,7 @@
     "react-test-renderer": "^16.3.2",
     "redux-devtools-extension": "^2.13.2",
     "sass-loader": "^7.0.0",
-    "sinon": "^5.0.7",
+    "sinon": "^6.0.0",
     "sonarwhal": "^1.8.0",
     "standard-version": "^4.2.0",
     "style-loader": "0.21.0",
