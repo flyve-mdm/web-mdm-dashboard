@@ -95,6 +95,7 @@ class DevicesAssociated extends PureComponent {
     }
 
     /**
+     * Get header render devices list
      * @constant headerComponent
      * @type {component}
      */
@@ -106,6 +107,7 @@ class DevicesAssociated extends PureComponent {
     )
 
     /**
+     * Get content render devices list
      * @constant ItemListRenderer
      * @type {component}
      */

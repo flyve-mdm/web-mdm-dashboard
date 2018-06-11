@@ -52,6 +52,7 @@ class FleetsTaskItemList extends PureComponent {
     }
 
     /**
+     * Update state fleets
      * @function updateState
      * @param {*} fleetHaveTask
      */
@@ -110,6 +111,7 @@ class FleetsTaskItemList extends PureComponent {
     }
 
     /**
+     * Set state from fleets
      * @function componentDidMount
      */
     componentDidMount = () => {
@@ -127,6 +129,7 @@ class FleetsTaskItemList extends PureComponent {
     }
     
     /**
+     * handle when enable/disable policies
      * @function handleAddedToggle
      */
     handleAddedToggle = () => {
@@ -143,6 +146,7 @@ class FleetsTaskItemList extends PureComponent {
     }
 
     /**
+     * Update task value
      * @function handleActivePolicyToggle
      */
     handleActivePolicyToggle = () => {
@@ -167,6 +171,7 @@ class FleetsTaskItemList extends PureComponent {
     }
 
     /**
+     * Update task value when input change
      * @function handleChangeInput
      * @param {object} e
      */
@@ -186,6 +191,7 @@ class FleetsTaskItemList extends PureComponent {
     }
 
     /**
+     * request update task value
      * @function handleBlurInput
      * @param {object} e
      */
@@ -194,6 +200,7 @@ class FleetsTaskItemList extends PureComponent {
     }
 
     /**
+     * Request task remove
      * @function handleRemoveTask
      * @param {*} task
      */
@@ -202,6 +209,7 @@ class FleetsTaskItemList extends PureComponent {
     }
 
     /**
+     * Get render show max/min version os
      * @function renderMinMaxVersion
      * @return {array}
      */
