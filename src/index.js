@@ -26,6 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
+/** import dependencies */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router } from 'react-router-dom'
@@ -41,6 +42,12 @@ import bugsnag from 'bugsnag-js'
 import createPlugin from 'bugsnag-react'
 import appConfig from '../public/config.json'
 
+/**
+ * Create the bugsnag client 
+ * and disable its 'beforeSend' function by being in a test or development environment
+ * @constant bugsnagClient
+ * @type {object}
+ */
 const bugsnagClient = bugsnag({
     apiKey: appConfig.bugsnag,
     beforeSend: () => {
@@ -49,8 +56,17 @@ const bugsnagClient = bugsnag({
     }
 })
 
+/**
+ * Wrapper component with the errors monitor of bugsnag
+ * @constant ErrorBoundary
+ * @type {component}
+ */
 const ErrorBoundary = bugsnagClient.use(createPlugin(React))
 
+/**
+ * Mount the application in the DOM 
+ * and synchronize it with the routes, the redux provider and the bugsnag error monitor
+ */
 ReactDOM.render(
     (
         <ErrorBoundary>
@@ -72,4 +88,6 @@ ReactDOM.render(
     ),
     document.getElementById('root') 
 )
+
+/** Disable service worker */
 unregister()
