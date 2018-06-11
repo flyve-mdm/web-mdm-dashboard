@@ -6,6 +6,7 @@
 # testing
 /coverage
 /docs
+/cypress/screenshots
 
 # production
 /build
@@ -17,8 +18,6 @@
 .env.development.local
 .env.test.local
 .env.production.local
-/.idea
-
 /.idea
 
 # configuration 
