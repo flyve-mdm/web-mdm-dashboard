@@ -115,6 +115,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * Reset state
      * @function resetData
      */
     resetData = () => {
@@ -133,6 +134,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * handle request all data to show fleet policies
      * @function requestAllData
      * @async
      */
@@ -234,7 +236,7 @@ class FleetsContent extends PureComponent {
 
             if (tasks.data) {
                 tasks.data.forEach((task, index) => {
-
+                    
                     let taskDeploy = {
                         itemtype_applied: this.state.itemType,
                         items_id_applied: task['PluginFlyvemdmTask.items_id_applied'],
@@ -327,6 +329,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * Set value when input change
      * @function handleChangeInput
      * @param {object} e
      */
@@ -335,14 +338,17 @@ class FleetsContent extends PureComponent {
     }
     
     /**
+     * Get if task is enable/disable
      * @function handleFleetHaveTask
      * @param {object} policy
+     * @returns {boolean}
      */
     handleFleetHaveTask = policy => {
         return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? true : false
     }
 
     /**
+     * Get policy type
      * @function getTypeData
      * @param {object} policy
      */
@@ -364,6 +370,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * Get Task value
      * @function getValueOfTask
      * @param {object} policy
      * @param {*} fleetHaveTask
@@ -388,6 +395,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * filter Policies by categorie
      * @function filterPoliciesPerCategory
      * @return {array}
      */
@@ -410,6 +418,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * handle add task from fleet
      * @function handleAddTask
      * @param {object} policy
      */
@@ -437,6 +446,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * handle remove task from fleet
      * @function handleRemoveTask
      * @param {object} policy
      */
@@ -480,6 +490,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * handle update task value
      * @function handleUpdateValueTask
      * @param {object} policy
      * @param {*} value
@@ -617,6 +628,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * Handle remove task value
      * @function handleRemoveValueTask
      * @param {object} policy
      * @param {object} task
@@ -678,6 +690,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * Handle save Fleet
      * @function handleSaveFleet
      * @async
      */
@@ -700,6 +713,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * Handle update fleet name
      * @function handleUpdateFleetName
      * @async
      */
@@ -731,6 +745,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * handle update fleet
      * @function handleUpdateFleet
      * @async
      */
@@ -852,6 +867,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * handle create new fleet
      * @function handleCreateFleet
      * @async
      */
@@ -916,6 +932,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * Handle remove fleet
      * @function handleDeleteFleet
      * @async
      * @param {object} eventObject
@@ -953,6 +970,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * handle duplicate selected fleet
      * @function handleDuplicateFleet
      */
     handleDuplicateFleet = () => {
@@ -973,6 +991,7 @@ class FleetsContent extends PureComponent {
     }
 
     /**
+     * Go to devices list
      * @function goToList
      */
     goToList = () => {

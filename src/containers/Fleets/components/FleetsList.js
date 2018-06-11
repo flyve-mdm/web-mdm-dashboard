@@ -64,6 +64,7 @@ export default class FleetsList extends PureComponent {
     }
 
     /**
+     * Refresh fleets list
      * @function componentDidMount
      */
     componentDidMount() {
@@ -71,6 +72,7 @@ export default class FleetsList extends PureComponent {
     }
 
     /**
+     * Setup Listview
      * @function componentDidUpdate
      * @param {object} prevProps 
      */
@@ -96,6 +98,7 @@ export default class FleetsList extends PureComponent {
     }
 
     /**
+     * Disable selection when component is unmount
      * @function componentWillUnmount
      */
     componentWillUnmount() {
@@ -103,6 +106,7 @@ export default class FleetsList extends PureComponent {
     }
 
     /**
+     * Get render item list
      * @constant ItemListRenderer
      * @type {component}
      */
@@ -113,6 +117,7 @@ export default class FleetsList extends PureComponent {
     })
 
     /**
+     * handle refresh fleets in list
      * @function handleRefresh
      * @async
      */
@@ -148,6 +153,7 @@ export default class FleetsList extends PureComponent {
     }
 
     /**
+     * Go to add new fleet
      * @function handleAdd
      */
     handleAdd = () => {
@@ -160,6 +166,7 @@ export default class FleetsList extends PureComponent {
     }
 
     /**
+     * handle change selection mode
      * @function handleToggleSelectionMode
      */
     handleToggleSelectionMode = () => {
@@ -172,6 +179,7 @@ export default class FleetsList extends PureComponent {
     }
 
     /**
+     * handle selection changed
      * @function handleSelectionChanged
      * @param {object} eventObject
      */
@@ -193,6 +201,7 @@ export default class FleetsList extends PureComponent {
     }
 
     /**
+     * handle remove fleets from list
      * @function handleDelete
      * @async
      * @param {object} eventObject
@@ -242,6 +251,7 @@ export default class FleetsList extends PureComponent {
     }
 
     /**
+     * handle sort fleets list
      * @function handleSort
      * @async
      */
@@ -323,6 +333,7 @@ export default class FleetsList extends PureComponent {
     }
 
     /**
+     * Go to Edit fleet
      * @function handleEdit
      */
     handleEdit = () => {
