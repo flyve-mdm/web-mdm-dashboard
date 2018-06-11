@@ -79,7 +79,7 @@ describe('Users', () => {
         )
     })
   
-    it('should log in without problems', () => {
+    it('should navigate in users without problemss', () => {
         cy.visit('/app/users')
         cy.contains('No selection')
         cy.get('main').screenshot('users_noSelection', {capture: 'viewport'})

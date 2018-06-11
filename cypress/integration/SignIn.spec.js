@@ -82,7 +82,7 @@ describe('SignIn', () => {
     }))
   })
 
-  it('should log in without problems', () => {
+  it('should login without problems', () => {
     cy.visit('/')
     cy.wait('@getFlyveDemo')
     cy.get('a[href="/signUp"]').should('be.visible') 

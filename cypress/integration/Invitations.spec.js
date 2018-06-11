@@ -102,7 +102,7 @@ describe('SignIn', () => {
         )
     })
   
-    it('should log in without problems', () => {
+    it('should navigate in invitations without problemss', () => {
         cy.visit('/app/invitations')
         cy.contains('No selection')
         cy.get('main').screenshot('invitations_noSelection', {capture: 'viewport'})
