@@ -1,12 +1,3 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /dashboard
-    RewriteRule ^index\.html$ - [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule . /dashboard/index.html [L]
-</IfModule>
-
 # DISABLE ALL CACHING WHILE DEVELOPING
 <FilesMatch "\.(html|htm|js|css|json)$">
   FileETag None
