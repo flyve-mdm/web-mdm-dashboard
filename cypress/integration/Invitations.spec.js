@@ -17,7 +17,7 @@ describe('SignIn', () => {
                     {"PluginFlyvemdmInvitation.name":"Invitation","PluginFlyvemdmInvitation.id":3,"PluginFlyvemdmInvitation.User.name":"invitation3@teclib.com"}
                 ]
             }
-        }).as('getInvitations')
+        })
 
         cy.route({
             method: 'GET',
@@ -31,6 +31,19 @@ describe('SignIn', () => {
                     password_need_symbol: 1,
                     url_base: "https://your-url.com/glpi"
                 }  
+            }
+        })
+
+        cy.route({
+            method: 'GET',
+            url: 'https://dev.flyve.org/glpi/apirest.php/search/PluginFlyvemdmInvitationlog/?criteria[0][field]=4&criteria[0][searchtype]=equal&criteria[0][value]=3&uid_cols=true&forcedisplay[0]=2&forcedisplay[1]=3&forcedisplay[2]=4&forcedisplay[3]=5&',
+            response: {
+                "totalcount":0,
+                "count":0,
+                "sort":1,
+                "order":"ASC",
+                "content-range":"0-0/0",
+                "data":[]
             }
         })
 
@@ -91,7 +104,7 @@ describe('SignIn', () => {
   
     it('should log in without problems', () => {
         cy.visit('/app/invitations')
-        cy.contains('invitation')
+        cy.contains('No selection')
         cy.get('main').screenshot('invitations_noSelection', {capture: 'viewport'})
         cy.get('.win-itemscontainer').click('top')
         cy.contains('Bad agent version')
