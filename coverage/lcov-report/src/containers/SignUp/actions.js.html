@@ -230,7 +230,22 @@ layout: coverage
 <a name='L179'></a><a href='#L179'>179</a>
 <a name='L180'></a><a href='#L180'>180</a>
 <a name='L181'></a><a href='#L181'>181</a>
-<a name='L182'></a><a href='#L182'>182</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -265,14 +280,8 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -287,6 +296,20 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -378,9 +401,14 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -439,13 +467,15 @@ layout: coverage
 * ------------------------------------------------------------------------------
 */
 &nbsp;
+/** import dependencies */
 <span class="cstat-no" title="statement not covered" >import ErrorValidation from '../../components/ErrorValidation';</span>
 &nbsp;
 /**
- * Actions Pattern for Form SignUp Data Flow
- * 
+ * Handle change state
+ * @function changeState
+ * @param {object} ctx
+ * @return {function}
  */
-&nbsp;
 export const <span class="cstat-no" title="statement not covered" >changeState = (<span class="fstat-no" title="function not covered" >ctx) =&gt; {</span></span>
 <span class="cstat-no" title="statement not covered" >    return <span class="fstat-no" title="function not covered" >(n</span>ame, value) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        ctx.setState({</span>
@@ -454,6 +484,13 @@ export const <span class="cstat-no" title="statement not covered" >changeState =
     }
 }
 &nbsp;
+/**
+ * Build the array to generate the form
+ * @function buildDataArray
+ * @param {object} ctx
+ * @param {*} I18n
+ * @return {array}
+ */
 export const <span class="cstat-no" title="statement not covered" >buildDataArray = <span class="fstat-no" title="function not covered" >(c</span>tx, I18n) =&gt; {</span>
   const dataArray = <span class="cstat-no" title="statement not covered" >{</span>
     personalInformation: [
@@ -559,9 +596,14 @@ export const <span class="cstat-no" title="statement not covered" >buildDataArra
 <span class="cstat-no" title="statement not covered" >  return dataArray</span>
 }
 &nbsp;
+/**
+ * Handle submit form
+ * @function handleSubmitForm
+ * @param {*} ctx 
+ * @param {*} event 
+ */
 export const <span class="cstat-no" title="statement not covered" >handleSubmitForm = <span class="fstat-no" title="function not covered" >(c</span>tx, event) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    event.preventDefault()</span>
-&nbsp;
     const user = <span class="cstat-no" title="statement not covered" >ctx.buildDataArray()</span>
     
     let isCorrect = <span class="cstat-no" title="statement not covered" >true</span>
@@ -598,7 +640,7 @@ export const <span class="cstat-no" title="statement not covered" >handleSubmitF
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jun 11 2018 16:16:41 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jun 12 2018 00:25:13 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
