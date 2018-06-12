@@ -90,7 +90,9 @@ class Feedback extends PureComponent {
                 + `?subject=${escape(this.state.subject)}`
                 + `&body=${escape(this.state.textarea)}`
 
-            window.location.href = link
+            if (process.env.NODE_ENV !== 'test')  window.location.href = link
+            console.log(process.env.NODE_ENV)
+
             setTimeout(() => {
                 this.setState({
                     feedbackSent: true,
