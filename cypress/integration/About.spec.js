@@ -51,6 +51,18 @@ describe('SignIn', () => {
 
         cy.route({
             method: 'GET',
+            url: `${glpiApiLink}/search/Plugin/?range=0-0&`,
+            response: {"totalcount":5,"count":1,"sort":1,"order":"ASC","data":[{"1":"armaditoscan"}],"content-range":"0-0/5"}
+        })
+
+        cy.route({
+            method: 'GET',
+            url: `${glpiApiLink}/search/Plugin/?range=0-5&`,
+            response: [{"id":1,"directory":"flyvemdm","name":"Flyve Mobile Device Management","version":"2.0.0-dev","state":1,"author":"<a href=\"http://www.teclib.com\">Teclib</a>","homepage":"","license":"AGPLv3+"},{"id":2,"directory":"flyvemdmdemo","name":"Flyve MDM Demo","version":"1.0.0-dev","state":1,"author":"<a href='http://www.teclib.com'>Teclib</a>","homepage":"","license":"AGPLv3+"},{"id":3,"directory":"fusioninventory","name":"FusionInventory","version":"9.2+1.0","state":1,"author":"<a href=\"mailto:david@durieux.family\">David DURIEUX</a>\n                                & FusionInventory team","homepage":"http://forge.fusioninventory.org/projects/fusioninventory-for-glpi/","license":"AGPLv3+"},{"id":4,"directory":"orion","name":"orion","version":"0.1-dev","state":1,"author":"<a href=\"http://www.teclib.com\">Teclib'</a>","homepage":"","license":""},{"id":5,"directory":"armaditoscan","name":"armaditoscan","version":"0.1-dev","state":4,"author":"<a href=\"http://www.teclib.com\">Teclib'</a>","homepage":"","license":""}]
+        })
+
+        cy.route({
+            method: 'GET',
             url: `${glpiApiLink}/search/PluginFlyvemdmInvitationlog/?criteria[0][field]=4&criteria[0][searchtype]=equal&criteria[0][value]=1&uid_cols=true&forcedisplay[0]=2&forcedisplay[1]=3&forcedisplay[2]=4&forcedisplay[3]=5&`,
             response: {
                 "totalcount":2,
@@ -111,5 +123,7 @@ describe('SignIn', () => {
         cy.visit('/app/about/overview')
         cy.get('.content-pane > h2')
         cy.get('main').screenshot('about_overview', {capture: 'viewport'})
+        cy.visit('/app/about/contact')
+        cy.get('main').screenshot('about_contact', {capture: 'viewport'})
     })
   })
