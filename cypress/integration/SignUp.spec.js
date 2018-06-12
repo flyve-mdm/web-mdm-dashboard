@@ -1,16 +1,18 @@
+import { glpiApiLink } from '../../public/config.json'
+
 describe('SignIn', () => {
     beforeEach(function () {
         cy.server()
         
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/initSession',
+            url: `${glpiApiLink}/initSession`,
             response: { session_token: "12345678" }
         })
 
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/search/Plugin/?range=0-0&',
+            url: `${glpiApiLink}/search/Plugin/?range=0-0&`,
             response: {
                 totalcount: 5
             }
@@ -18,31 +20,31 @@ describe('SignIn', () => {
 
         cy.route({
             method: 'POST',
-            url: 'https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmdemoUser',
+            url: `${glpiApiLink}/PluginFlyvemdmdemoUser`,
             response: {"id":600,"message":"You are not allowed to change the invitation token life"}
         })
 
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/killSession',
+            url: `${glpiApiLink}/killSession`,
             response: {}
         })
 
         cy.route({
             method: 'POST',
-            url: 'https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmdemoCaptcha',
+            url: `${glpiApiLink}/PluginFlyvemdmdemoCaptcha`,
             response: {"id":603,"message":""}
         })
 
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/PluginFlyvemdmdemoCaptcha/603?alt=media&',
+            url: `${glpiApiLink}/PluginFlyvemdmdemoCaptcha/603?alt=media&`,
             response: cy.fixture("images/captcha.jpg")
         })
     
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/Plugin/?range=0-5&',
+            url: `${glpiApiLink}/Plugin/?range=0-5&`,
             response: [
             {"id":1,"directory":"flyvemdmdemo","name":"Flyve MDM Demo","version":"1.0.0-dev","state":1,"author":"<a href='http://www.teclib.com'>Teclib</a>","homepage":"","license":"AGPLv3+"},
             ]
@@ -50,7 +52,7 @@ describe('SignIn', () => {
 
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/getGlpiConfig',
+            url: `${glpiApiLink}/getGlpiConfig`,
             response: {
                 "cfg_glpi": {
                     password_min_length: 10,

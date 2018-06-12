@@ -1,10 +1,12 @@
+import { glpiApiLink } from '../../public/config.json'
+
 describe('SignIn', () => {
     beforeEach(function () {
         cy.server()
     
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/search/PluginFlyvemdmInvitation/?uid_cols=true&forcedisplay[0]=1&forcedisplay[1]=2&forcedisplay[2]=3&order=ASC&range=0-14&',
+            url: `${glpiApiLink}/search/PluginFlyvemdmInvitation/?uid_cols=true&forcedisplay[0]=1&forcedisplay[1]=2&forcedisplay[2]=3&order=ASC&range=0-14&`,
             response: { 
                 "totalcount": 3,
                 "count": 3,
@@ -21,7 +23,7 @@ describe('SignIn', () => {
 
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/getGlpiConfig',
+            url: `${glpiApiLink}/getGlpiConfig`,
             response: {
                 "cfg_glpi":{
                     password_min_length: 10,
@@ -36,7 +38,7 @@ describe('SignIn', () => {
 
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/search/PluginFlyvemdmInvitationlog/?criteria[0][field]=4&criteria[0][searchtype]=equal&criteria[0][value]=3&uid_cols=true&forcedisplay[0]=2&forcedisplay[1]=3&forcedisplay[2]=4&forcedisplay[3]=5&',
+            url: `${glpiApiLink}/search/PluginFlyvemdmInvitationlog/?criteria[0][field]=4&criteria[0][searchtype]=equal&criteria[0][value]=3&uid_cols=true&forcedisplay[0]=2&forcedisplay[1]=3&forcedisplay[2]=4&forcedisplay[3]=5&`,
             response: {
                 "totalcount":0,
                 "count":0,
@@ -49,7 +51,7 @@ describe('SignIn', () => {
 
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/search/PluginFlyvemdmInvitationlog/?criteria[0][field]=4&criteria[0][searchtype]=equal&criteria[0][value]=1&uid_cols=true&forcedisplay[0]=2&forcedisplay[1]=3&forcedisplay[2]=4&forcedisplay[3]=5&',
+            url: `${glpiApiLink}/search/PluginFlyvemdmInvitationlog/?criteria[0][field]=4&criteria[0][searchtype]=equal&criteria[0][value]=1&uid_cols=true&forcedisplay[0]=2&forcedisplay[1]=3&forcedisplay[2]=4&forcedisplay[3]=5&`,
             response: {
                 "totalcount":2,
                 "count":2,

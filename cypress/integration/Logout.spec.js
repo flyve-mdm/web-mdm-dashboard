@@ -1,10 +1,12 @@
+import { glpiApiLink } from '../../public/config.json'
+
 describe('Users', () => {
     beforeEach(function () {
         cy.server()
 
         cy.route({
             method: 'GET',
-            url: 'https://dev.flyve.org/glpi/apirest.php/getGlpiConfig',
+            url: `${glpiApiLink}/getGlpiConfig`,
             response: {
                 "cfg_glpi":{
                     password_min_length: 10,
