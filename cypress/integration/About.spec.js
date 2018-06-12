@@ -127,5 +127,8 @@ describe('SignIn', () => {
         cy.get('main').screenshot('about_contact', {capture: 'viewport'})
         cy.visit('/app/about/term')
         cy.get('main').screenshot('about_term', {capture: 'viewport'})
+        cy.visit('/app/about/release')
+        cy.get('.content-pane > h2')
+        cy.get('main').screenshot('about_release', {capture: 'viewport'})
     })
   })
