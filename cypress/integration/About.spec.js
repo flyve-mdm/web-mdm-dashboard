@@ -108,5 +108,8 @@ describe('SignIn', () => {
         cy.visit('/app/about')
         cy.contains('No selection')
         cy.get('main').screenshot('about_noSelection', {capture: 'viewport'})
+        cy.visit('/app/about/overview')
+        cy.get('.content-pane > h2')
+        cy.get('main').screenshot('about_overview', {capture: 'viewport'})
     })
   })
