@@ -163,7 +163,7 @@ class HelpCenterList extends PureComponent {
     render() {
         return (
             this.state.isLoading ? 
-                <div style={{height: "100%", marginTop: "-80px"}}><Loading message={`${I18n.t('commons.loading')}...`} /></div> : 
+                <Loading message={`${I18n.t('commons.loading')}...`} />: 
                 (   
                     <ContentPane>
                         <h2 style={{ margin: '10px' }}>{I18n.t('about.help_center.title')}</h2>
