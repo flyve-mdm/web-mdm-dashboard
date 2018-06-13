@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NotFound renders NotFound 1`] = `
+exports[`ErrorPage renders ErrorPage 1`] = `
 <div
-  className="authentication"
+  className="authentication error"
   style={
     Object {
       "textAlign": "center",
@@ -17,11 +17,16 @@ exports[`NotFound renders NotFound 1`] = `
       />
     </figure>
     <h1>
-      Not Found
-    </h1>
-    <h1>
+      Error
+       
       404
     </h1>
+    <h3>
+      Oops! Page not Found.
+    </h3>
+    <p>
+      We could not find the page you were looking for. Meanwhile, you may return to the dashboard.
+    </p>
   </section>
   <footer>
     <a

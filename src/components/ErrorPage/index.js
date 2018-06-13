@@ -26,17 +26,39 @@
  * ------------------------------------------------------------------------------
  */
 
-import React from 'react'
-import renderer from 'react-test-renderer'
+import React from "react"
+import history from "../../shared/history"
+import getQueryString from "../../shared/getQueryString"
+import I18n from '../../shared/i18n'
 
-import NotFound from '../index'
+export default () => {
+  const errorCode = (getQueryString(history).code || "404")
+  const title = I18n.t(`error.${errorCode}.title`)
+  const message = I18n.t(`error.${errorCode}.message`)
+  return (
+    <div className="authentication error" style={{ textAlign: 'center'}} >
+      <section>
+        <figure>
+          <img
+            alt="Flyve MDM Dashboard"
+            src={require('../../assets/images/dashboard.svg')}
+          />
+        </figure>
+        <h1>{I18n.t('commons.error')} {errorCode}</h1>
+        <h3>{title}</h3>
+        <p>{message}</p>
+      </section>
+      <footer>
+        <a href="https://flyve-mdm.com/privacy-policy/">
+          {I18n.t('commons.terms_and_conditions')}
+        </a>
+        <br />
 
-describe('NotFound', () => {
-  test('renders NotFound', () => {
-    const component = renderer.create(
-      <NotFound />,
-    )
-    const tree = component.toJSON()
-    expect(tree).toMatchSnapshot()
-  })
-})
+        <span>
+          © 2017 - 2018 Teclib'.
+        </span>
+        <br />
+      </footer>
+    </div>
+  )
+}
