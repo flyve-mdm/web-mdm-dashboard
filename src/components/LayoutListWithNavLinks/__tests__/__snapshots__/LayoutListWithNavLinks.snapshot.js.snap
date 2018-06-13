@@ -26,6 +26,7 @@ exports[`LayoutListWithNavLinks renders LayoutListWithNavLinks 1`] = `
   <div
     style={
       Object {
+        "overflowY": "auto",
         "width": "calc(100% - 320px)",
       }
     }
