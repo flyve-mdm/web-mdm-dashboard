@@ -18,7 +18,7 @@ describe('Settings', () => {
                 }  
             }
         })
-        
+
         localStorage.setItem('currentUser',
             JSON.stringify({
                 id:123,
@@ -45,8 +45,10 @@ describe('Settings', () => {
   })
 
   it('should login without problems', () => {
-    cy.visit('/app/about')
+    cy.visit('/app/settings')
     cy.contains('No selection')
     cy.get('main').screenshot('settings_noSelection', {capture: 'viewport'})
+    cy.get('ul > :nth-child(6) > a').click()
+    cy.get('main').screenshot('D_noSelection', {capture: 'viewport'})
   })
 })
