@@ -365,63 +365,65 @@ class Profiles extends PureComponent {
             }    
 
             component = (
-                <div className="froms Profiles" style={{marginTop: '20px'}}>
+                <React.Fragment>
+                    <h2 style={{ margin: '10px' }}>
+                        {I18n.t('commons.profiles')}
+                    </h2>
+                    <div className="froms Profiles" style={{marginTop: '20px'}}>
 
-                    <div className="froms__row froms__row--icon">
-                        <span className="viewIcon"/>
-                    </div>
-                    
-    
-                    <div className="froms__row">
-    
-                        <div style={{ overflow: 'hidden' }}>
-                            <input
-                                {...inputAttributes}
-                            />
-                            <IconItemList 
-                                image={this.state.imageProfile} 
-                                type={this.state.typeImageProfile}
-                                imgClick={this.openFileChooser}
-                                size={150}
-                                imgClass="clickable"
-                            />
+                        <div className="froms__row froms__row--icon">
+                            <span className="viewIcon"/>
                         </div>
-    
-                    </div>
-    
-                    <ConstructInputs data={user.personalInformation} icon="contactIcon" />
-    
-                    <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
-                
-                    <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
-    
-                    <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
-                    <div style={{ overflow: 'auto' }}>
-                        <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>
-                            {I18n.t('commons.add_email')}
+                        
+        
+                        <div className="froms__row">
+        
+                            <div style={{ overflow: 'hidden' }}>
+                                <input
+                                    {...inputAttributes}
+                                />
+                                <IconItemList 
+                                    image={this.state.imageProfile} 
+                                    type={this.state.typeImageProfile}
+                                    imgClick={this.openFileChooser}
+                                    size={150}
+                                    imgClass="clickable"
+                                />
+                            </div>
+        
+                        </div>
+        
+                        <ConstructInputs data={user.personalInformation} icon="contactIcon" />
+        
+                        <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
+                    
+                        <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
+        
+                        <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
+                        <div style={{ overflow: 'auto' }}>
+                            <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>
+                                {I18n.t('commons.add_email')}
+                            </button>
+                        </div>
+        
+                        <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
+                    
+                        <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
+        
+                        <ConstructInputs data={user.activityInformation} icon="documentIcon" />
+        
+                        <button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                            {I18n.t('commons.save')}
                         </button>
-                    </div>
-    
-                    <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
-                
-                    <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
-    
-                    <ConstructInputs data={user.activityInformation} icon="documentIcon" />
-    
-                    <button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                        {I18n.t('commons.save')}
-                    </button>
-                
-                    <br/>
-    
-                </div>   
+                        
+                        <br/>
+                        
+                    </div>   
+                </React.Fragment>
             )
         }       
         return (
             <ContentPane>
-                <h2 style={{ margin: '10px' }}>
-                    {I18n.t('commons.profiles')}
-                </h2>
                 { component }
             </ContentPane>
         )
