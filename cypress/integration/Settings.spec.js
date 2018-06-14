@@ -96,11 +96,53 @@ describe('Settings', () => {
             url: `${glpiApiLink}/PluginFlyvemdmEntityconfig/0`,
             response: [{"id":0,"entities_id":0,"enroll_token":null,"agent_token_life":"P8D","support_name":"Great support","support_phone":"+33 123456789","support_website":"https://mygreatsupport.com","support_email":"greatsupport@example.com","support_address":"Great Support\r\n1 Support Avenue\r\nNot Cupertino\r\n123456 Somewhere in the world","managed":0,"download_url":"https://play.google.com/store/apps/details?id=com.teclib.flyvemdm","device_limit":0,"links":[{"rel":"Entity","href":"https://dev.flyve.org/glpi/apirest.php/Entity/0"}]}]
         })
+
+        cy.route({
+            method: 'GET',
+            url: `${glpiApiLink}/User/534`,
+            response: {"id":534,"name":"gianfranco","phone":"","phone2":"","mobile":"","realname":"Gianfranco","firstname":"gian","locations_id":0,"language":null,"use_mode":2,"list_limit":null,"is_active":1,"comment":"","auths_id":0,"authtype":1,"last_login":"2018-06-14 14:44:08","date_mod":"2018-05-11 21:23:35","date_sync":null,"is_deleted":0,"profiles_id":0,"entities_id":0,"usertitles_id":1,"usercategories_id":0,"date_format":null,"number_format":null,"names_format":null,"csv_delimiter":null,"is_ids_visible":null,"use_flat_dropdowntree":null,"show_jobs_at_login":null,"priority_1":null,"priority_2":null,"priority_3":null,"priority_4":null,"priority_5":null,"priority_6":null,"followup_private":null,"task_private":null,"default_requesttypes_id":null,"password_forget_token":null,"password_forget_token_date":null,"user_dn":null,"registration_number":"","show_count_on_tabs":null,"refresh_ticket_list":null,"set_default_tech":null,"personal_token":"aPhm1qRu4E7bykyYkCdBKO4bjbuCvc9kJcZLpktW","personal_token_date":"2018-05-10 15:34:17","display_count_on_home":null,"notification_to_myself":null,"duedateok_color":null,"duedatewarning_color":null,"duedatecritical_color":null,"duedatewarning_less":null,"duedatecritical_less":null,"duedatewarning_unit":null,"duedatecritical_unit":null,"display_options":null,"is_deleted_ldap":0,"pdffont":null,"picture":"profile.png","begin_date":null,"end_date":null,"keep_devices_when_purging_item":null,"privatebookmarkorder":null,"backcreated":null,"task_state":null,"layout":null,"palette":null,"ticket_timeline":null,"ticket_timeline_keep_replaced_tabs":null,"set_default_requester":null,"lock_autolock_mode":null,"lock_directunlock_notification":null,"date_creation":"2018-04-27 23:29:58","highcontrast_css":null,"plannings":null,"api_token":null,"api_token_date":null,"sync_field":null,"links":[{"rel":"Entity","href":"https://dev.flyve.org/glpi/apirest.php/Entity/0"},{"rel":"UserTitle","href":"https://dev.flyve.org/glpi/apirest.php/UserTitle/1"},{"rel":"Document_Item","href":"https://dev.flyve.org/glpi/apirest.php/User/534/Document_Item/"}]}
+        })
+
+        cy.route({
+            method: 'GET',
+            url: `${glpiApiLink}/User/534/UserEmail`,
+            response: []
+        })
+
+        cy.route({
+            method: 'GET',
+            url: `${glpiApiLink}/search/Location/?range=0-200&forcedisplay[0]=2&v`,
+            response: {"id":534,"name":"gianfranco","phone":"","phone2":"","mobile":"","realname":"Gianfranco","firstname":"gian","locations_id":0,"language":null,"use_mode":2,"list_limit":null,"is_active":1,"comment":"","auths_id":0,"authtype":1,"last_login":"2018-06-14 14:44:08","date_mod":"2018-05-11 21:23:35","date_sync":null,"is_deleted":0,"profiles_id":0,"entities_id":0,"usertitles_id":1,"usercategories_id":0,"date_format":null,"number_format":null,"names_format":null,"csv_delimiter":null,"is_ids_visible":null,"use_flat_dropdowntree":null,"show_jobs_at_login":null,"priority_1":null,"priority_2":null,"priority_3":null,"priority_4":null,"priority_5":null,"priority_6":null,"followup_private":null,"task_private":null,"default_requesttypes_id":null,"password_forget_token":null,"password_forget_token_date":null,"user_dn":null,"registration_number":"","show_count_on_tabs":null,"refresh_ticket_list":null,"set_default_tech":null,"personal_token":"aPhm1qRu4E7bykyYkCdBKO4bjbuCvc9kJcZLpktW","personal_token_date":"2018-05-10 15:34:17","display_count_on_home":null,"notification_to_myself":null,"duedateok_color":null,"duedatewarning_color":null,"duedatecritical_color":null,"duedatewarning_less":null,"duedatecritical_less":null,"duedatewarning_unit":null,"duedatecritical_unit":null,"display_options":null,"is_deleted_ldap":0,"pdffont":null,"picture":"profile.png","begin_date":null,"end_date":null,"keep_devices_when_purging_item":null,"privatebookmarkorder":null,"backcreated":null,"task_state":null,"layout":null,"palette":null,"ticket_timeline":null,"ticket_timeline_keep_replaced_tabs":null,"set_default_requester":null,"lock_autolock_mode":null,"lock_directunlock_notification":null,"date_creation":"2018-04-27 23:29:58","highcontrast_css":null,"plannings":null,"api_token":null,"api_token_date":null,"sync_field":null,"links":[{"rel":"Entity","href":"https://dev.flyve.org/glpi/apirest.php/Entity/0"},{"rel":"UserTitle","href":"https://dev.flyve.org/glpi/apirest.php/UserTitle/1"},{"rel":"Document_Item","href":"https://dev.flyve.org/glpi/apirest.php/User/534/Document_Item/"}]}
+        })
+
+        cy.route({
+            method: 'GET',
+            url: `${glpiApiLink}/getMyProfiles`,
+            response: {"myprofiles":[{"id":4,"name":"Super-Admin","entities":[{"id":0,"name":"Root entity","is_recursive":0}]}]}
+        })
+
+        cy.route({
+            method: 'GET',
+            url: `${glpiApiLink}/search/UserTitle/?range=0-200&forcedisplay[0]=2&`,
+            response: {"totalcount":1,"count":1,"sort":1,"order":"ASC","data":[{"1":"Example location","80":"Root entity","2":1}],"content-range":"0-0/1"}
+        })
         
-        
+        cy.route({
+            method: 'GET',
+            url: `${glpiApiLink}/search/UserCategory/?range=0-200&forcedisplay[0]=2&`,
+            response: {"totalcount":2,"count":2,"sort":1,"order":"ASC","data":[{"1":"user category 1","2":1},{"1":"www","2":2}],"content-range":"0-1/2"}
+        })
+
+        cy.route({
+            method: 'GET',
+            url: `${glpiApiLink}/getMyEntities`,
+            response: {"myentities":[{"id":0,"name":"Root entity"}]}
+        })
+
+
         localStorage.setItem('currentUser',
             JSON.stringify({
-                id:123,
+                id:534,
                 name:"exampleName",
                 email: "example@teclib.com",
                 picture: null
@@ -148,5 +190,8 @@ describe('Settings', () => {
         cy.get('ul > :nth-child(1) > a').click()
         cy.get('[style="width: calc(100% - 320px);"] > h2')
         cy.get('main').screenshot('settings_entity', {capture: 'viewport'})
+        cy.get('ul > :nth-child(2) > a').click()
+        cy.get('.content-pane > h2')
+        cy.get('main').screenshot('settings_profiles', {capture: 'viewport'})
     })
 })
