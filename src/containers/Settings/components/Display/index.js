@@ -36,6 +36,7 @@ import animationsWinJs from '../../../../shared/animationsWinJs'
 import { changeLanguage } from '../../../../store/i18n/actions'
 import { I18n } from 'react-i18nify'
 import ContentPane from '../../../../components/ContentPane'
+import tractionsList from '../../../../hoc/withI18NTranslation/i18n/languages'
 
 function mapDispatchToProps(dispatch) {
     const actions = {
@@ -119,18 +120,7 @@ class Display extends PureComponent {
                                 className='language__select' 
                                 onChange={event => this.props.actions.changeLanguage(event.target.value)}
                             >
-                                <option value='en_GB'>
-                                    {I18n.t('commons.english')}
-                                </option>
-                                <option value='pt_BR'>
-                                    {I18n.t('commons.portuguese')}
-                                </option>
-                                <option value='fr_FR'>
-                                    {I18n.t('commons.french')}
-                                </option>
-                                <option value='es_ES'>
-                                    {I18n.t('commons.spanish')}
-                                </option>
+                                {tractionsList()}
                             </select>
                         </span>
                     </div>
