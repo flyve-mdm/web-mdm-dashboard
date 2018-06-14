@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1528763114126" clover="3.2.0">
-  <project timestamp="1528763114126" name="All files">
+<coverage generated="1528974950464" clover="3.2.0">
+  <project timestamp="1528974950464" name="All files">
     <metrics statements="4607" coveredstatements="241" conditionals="1998" coveredconditionals="145" methods="1119" coveredmethods="63" elements="7724" coveredelements="449" complexity="0" loc="4607" ncloc="4607" packages="108" files="198" classes="198">
       <package name="src">
         <metrics statements="50" coveredstatements="0" conditionals="29" coveredconditionals="0" methods="16" coveredmethods="0"/>
@@ -4167,7 +4167,7 @@
           <line num="356" count="0" type="stmt"/>
           <line num="362" count="0" type="stmt"/>
           <line num="367" count="0" type="stmt"/>
-          <line num="420" count="0" type="stmt"/>
+          <line num="425" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Settings.components.Security">

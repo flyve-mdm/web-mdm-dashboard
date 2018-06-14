@@ -483,7 +483,9 @@ layout: coverage
 <a name='L432'></a><a href='#L432'>432</a>
 <a name='L433'></a><a href='#L433'>433</a>
 <a name='L434'></a><a href='#L434'>434</a>
-<a name='L435'></a><a href='#L435'>435</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L435'></a><a href='#L435'>435</a>
+<a name='L436'></a><a href='#L436'>436</a>
+<a name='L437'></a><a href='#L437'>437</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -902,10 +904,12 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1284,63 +1288,65 @@ class Profiles extends PureComponent {
             }    
 &nbsp;
 <span class="cstat-no" title="statement not covered" >            component = (</span>
-                &lt;div className="froms Profiles" style={ {marginTop: '20px'} }&gt;
+                &lt;React.Fragment&gt;
+                    &lt;h2 style={ { margin: '10px' } }&gt;
+                        {I18n.t('commons.profiles')}
+                    &lt;/h2&gt;
+                    &lt;div className="froms Profiles" style={ {marginTop: '20px'} }&gt;
 &nbsp;
-                    &lt;div className="froms__row froms__row--icon"&gt;
-                        &lt;span className="viewIcon"/&gt;
-                    &lt;/div&gt;
-                    
-    
-                    &lt;div className="froms__row"&gt;
-    
-                        &lt;div style={ { overflow: 'hidden' } }&gt;
-                            &lt;input
-                                {...inputAttributes}
-                            /&gt;
-                            &lt;IconItemList 
-                                image={this.state.imageProfile} 
-                                type={this.state.typeImageProfile}
-                                imgClick={this.openFileChooser}
-                                size={150}
-                                imgClass="clickable"
-                            /&gt;
+                        &lt;div className="froms__row froms__row--icon"&gt;
+                            &lt;span className="viewIcon"/&gt;
                         &lt;/div&gt;
-    
-                    &lt;/div&gt;
-    
-                    &lt;ConstructInputs data={user.personalInformation} icon="contactIcon" /&gt;
-    
-                    &lt;ConstructInputs data={user.passwordInformation} icon="permissionsIcon" /&gt;
-                
-                    &lt;ConstructInputs data={user.validDatesInformation} icon="monthIcon" /&gt;
-    
-                    &lt;ConstructInputs data={user.emailsInformation} icon="emailIcon" /&gt;
-                    &lt;div style={ { overflow: 'auto' } }&gt;
-                        &lt;button className="win-button" style={ { float: 'right'} } onClick={this.addEmail}&gt;
-                            {I18n.t('commons.add_email')}
+                        
+        
+                        &lt;div className="froms__row"&gt;
+        
+                            &lt;div style={ { overflow: 'hidden' } }&gt;
+                                &lt;input
+                                    {...inputAttributes}
+                                /&gt;
+                                &lt;IconItemList 
+                                    image={this.state.imageProfile} 
+                                    type={this.state.typeImageProfile}
+                                    imgClick={this.openFileChooser}
+                                    size={150}
+                                    imgClass="clickable"
+                                /&gt;
+                            &lt;/div&gt;
+        
+                        &lt;/div&gt;
+        
+                        &lt;ConstructInputs data={user.personalInformation} icon="contactIcon" /&gt;
+        
+                        &lt;ConstructInputs data={user.passwordInformation} icon="permissionsIcon" /&gt;
+                    
+                        &lt;ConstructInputs data={user.validDatesInformation} icon="monthIcon" /&gt;
+        
+                        &lt;ConstructInputs data={user.emailsInformation} icon="emailIcon" /&gt;
+                        &lt;div style={ { overflow: 'auto' } }&gt;
+                            &lt;button className="win-button" style={ { float: 'right'} } onClick={this.addEmail}&gt;
+                                {I18n.t('commons.add_email')}
+                            &lt;/button&gt;
+                        &lt;/div&gt;
+        
+                        &lt;ConstructInputs data={user.contactInformation} icon="phoneIcon" /&gt;
+                    
+                        &lt;ConstructInputs data={user.moreInformation} icon="detailsIcon" /&gt;
+        
+                        &lt;ConstructInputs data={user.activityInformation} icon="documentIcon" /&gt;
+        
+                        &lt;button className="win-button" style={ { margin: "20px", float: "right" } } onClick={this.saveChanges}&gt;
+                            {I18n.t('commons.save')}
                         &lt;/button&gt;
-                    &lt;/div&gt;
-    
-                    &lt;ConstructInputs data={user.contactInformation} icon="phoneIcon" /&gt;
-                
-                    &lt;ConstructInputs data={user.moreInformation} icon="detailsIcon" /&gt;
-    
-                    &lt;ConstructInputs data={user.activityInformation} icon="documentIcon" /&gt;
-    
-                    &lt;button className="win-button" style={ { margin: "20px", float: "right" } } onClick={this.saveChanges}&gt;
-                        {I18n.t('commons.save')}
-                    &lt;/button&gt;
-                
-                    &lt;br/&gt;
-    
-                &lt;/div&gt;   
+                        
+                        &lt;br/&gt;
+                        
+                    &lt;/div&gt;   
+                &lt;/React.Fragment&gt;
             )
         }       
 <span class="cstat-no" title="statement not covered" >        return (</span>
             &lt;ContentPane&gt;
-                &lt;h2 style={ { margin: '10px' } }&gt;
-                    {I18n.t('commons.profiles')}
-                &lt;/h2&gt;
                 { component }
             &lt;/ContentPane&gt;
         )
@@ -1357,7 +1363,7 @@ export default connect(
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jun 12 2018 00:25:13 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jun 14 2018 11:15:49 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>
