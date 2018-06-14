@@ -107,7 +107,8 @@ class ListWithNavLinks extends PureComponent {
     stylesArticle () {
         const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
         return ({
-            width: calc100PercentMinus(validWidth)
+            width: calc100PercentMinus(validWidth),
+            overflowY: 'auto'
         })
     }
 
