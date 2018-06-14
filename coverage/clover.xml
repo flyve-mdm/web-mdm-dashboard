@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1528977730343" clover="3.2.0">
-  <project timestamp="1528977730343" name="All files">
-    <metrics statements="4607" coveredstatements="241" conditionals="1998" coveredconditionals="145" methods="1119" coveredmethods="63" elements="7724" coveredelements="449" complexity="0" loc="4607" ncloc="4607" packages="108" files="198" classes="198">
+<coverage generated="1529002102766" clover="3.2.0">
+  <project timestamp="1529002102766" name="All files">
+    <metrics statements="4617" coveredstatements="241" conditionals="2000" coveredconditionals="145" methods="1120" coveredmethods="63" elements="7737" coveredelements="449" complexity="0" loc="4617" ncloc="4617" packages="109" files="199" classes="199">
       <package name="src">
         <metrics statements="50" coveredstatements="0" conditionals="29" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -3910,9 +3910,9 @@
         </file>
       </package>
       <package name="src.containers.Settings.components.Display">
-        <metrics statements="31" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="16" coveredmethods="0"/>
+        <metrics statements="32" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/containers/Settings/components/Display/index.js">
-          <metrics statements="31" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="16" coveredmethods="0"/>
+          <metrics statements="32" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="16" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="31" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
@@ -3922,28 +3922,29 @@
           <line num="36" count="0" type="stmt"/>
           <line num="37" count="0" type="stmt"/>
           <line num="38" count="0" type="stmt"/>
-          <line num="41" count="0" type="stmt"/>
-          <line num="44" count="0" type="stmt"/>
-          <line num="54" count="0" type="stmt"/>
+          <line num="39" count="0" type="stmt"/>
+          <line num="42" count="0" type="stmt"/>
+          <line num="45" count="0" type="stmt"/>
           <line num="55" count="0" type="stmt"/>
-          <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="57" count="0" type="stmt"/>
-          <line num="77" count="0" type="stmt"/>
-          <line num="87" count="0" type="stmt"/>
+          <line num="56" count="0" type="stmt"/>
+          <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="58" count="0" type="stmt"/>
+          <line num="78" count="0" type="stmt"/>
           <line num="88" count="0" type="stmt"/>
-          <line num="96" count="0" type="stmt"/>
-          <line num="120" count="0" type="stmt"/>
-          <line num="151" count="0" type="stmt"/>
-          <line num="168" count="0" type="stmt"/>
-          <line num="181" count="0" type="stmt"/>
-          <line num="194" count="0" type="stmt"/>
-          <line num="207" count="0" type="stmt"/>
-          <line num="220" count="0" type="stmt"/>
-          <line num="233" count="0" type="stmt"/>
-          <line num="246" count="0" type="stmt"/>
-          <line num="259" count="0" type="stmt"/>
+          <line num="89" count="0" type="stmt"/>
+          <line num="97" count="0" type="stmt"/>
+          <line num="121" count="0" type="stmt"/>
+          <line num="141" count="0" type="stmt"/>
+          <line num="158" count="0" type="stmt"/>
+          <line num="171" count="0" type="stmt"/>
+          <line num="184" count="0" type="stmt"/>
+          <line num="197" count="0" type="stmt"/>
+          <line num="210" count="0" type="stmt"/>
+          <line num="223" count="0" type="stmt"/>
+          <line num="236" count="0" type="stmt"/>
+          <line num="249" count="0" type="stmt"/>
+          <line num="262" count="0" type="stmt"/>
           <line num="272" count="0" type="stmt"/>
-          <line num="282" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Settings.components.Entity">
@@ -4863,24 +4864,25 @@
         </file>
       </package>
       <package name="src.hoc.withAuthenticationLayout">
-        <metrics statements="15" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <metrics statements="16" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/hoc/withAuthenticationLayout/index.js">
-          <metrics statements="15" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+          <metrics statements="16" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
           <line num="29" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
           <line num="31" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
-          <line num="37" count="0" type="stmt"/>
-          <line num="49" count="0" type="stmt"/>
-          <line num="54" count="0" type="stmt"/>
+          <line num="35" count="0" type="stmt"/>
+          <line num="38" count="0" type="stmt"/>
+          <line num="50" count="0" type="stmt"/>
           <line num="55" count="0" type="stmt"/>
-          <line num="59" count="0" type="stmt"/>
-          <line num="77" count="0" type="stmt"/>
-          <line num="97" count="0" type="stmt"/>
-          <line num="102" count="0" type="stmt"/>
-          <line num="110" count="0" type="stmt"/>
+          <line num="56" count="0" type="stmt"/>
+          <line num="60" count="0" type="stmt"/>
+          <line num="78" count="0" type="stmt"/>
+          <line num="87" count="0" type="stmt"/>
+          <line num="92" count="0" type="stmt"/>
+          <line num="100" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.hoc.withGLPI">
@@ -4936,6 +4938,20 @@
           <line num="104" count="0" type="stmt"/>
           <line num="108" count="0" type="stmt"/>
           <line num="113" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.hoc.withI18NTranslation.i18n">
+        <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <file name="languages.js" path="/root/repo/src/hoc/withI18NTranslation/i18n/languages.js">
+          <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="stmt"/>
+          <line num="11" count="0" type="stmt"/>
+          <line num="158" count="0" type="stmt"/>
+          <line num="159" count="0" type="stmt"/>
+          <line num="160" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="161" count="0" type="stmt"/>
+          <line num="168" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.hoc.withI18NTranslation.i18n.tests">
