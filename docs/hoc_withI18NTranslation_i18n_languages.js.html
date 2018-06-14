@@ -9,7 +9,7 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: containers/Files/components/FilesAdd.js</h1>
+        <h1 class="page-title">Source: hoc/withI18NTranslation/i18n/languages.js</h1>
 
         
 
@@ -18,185 +18,176 @@ layout: container
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
-
-/** import dependencies */
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { FilesUpload, FilesUploadItemList } from '../../../components/FilesUpload'
-import ContentPane from '../../../components/ContentPane'
-import Loading from '../../../components/Loading'
-import { I18n } from "react-i18nify"
-import itemtype from '../../../shared/itemtype'
+            <pre class="prettyprint source linenums"><code>/** import dependencies */
+import React from 'react'
+import { I18n } from 'react-i18nify'
 
 /**
- * @class FilesAdd
- * @extends PureComponent
+ * Generate array with the different available language options
+ * @function languages
+ * @return {array}
  */
-export default class FilesAdd extends PureComponent {
-    /** @constructor */
-    constructor (props) {
-        super(props)
-        this.state = {
-            files: [],
-            isLoading: false
-        }
-    }
-    
-    /**
-     * Handle change file
-     * @function onFilesChange
-     * @param {object} files
-     */
-    onFilesChange = (files) => {
-        this.setState({
-            files
-        })
-    }
+export default () => {
+    const languages = [
+        {
+            abbreviation: 'en_GB',
+            name: I18n.t('commons.english'),
+            country: I18n.t('commons.Britain'),
+            isAvailable: true
+        },
+        {
+            abbreviation: 'cs_CZ',
+            name: I18n.t('commons.czech'),
+            country: I18n.t('commons.Czech_Republic'),
+            isAvailable: true
+        },
+        {
+            abbreviation: 'fr_FR',
+            name: I18n.t('commons.french'),
+            country: I18n.t('commons.France'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'es_MX',
+            name: I18n.t('commons.spanish'),
+            country: I18n.t('commons.Mexico'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'es_AR',
+            name: I18n.t('commons.spanish'),
+            country: I18n.t('commons.Argentina'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'es_ES',
+            name: I18n.t('commons.spanish'),
+            country: I18n.t('commons.Spain'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'ar_EG',
+            name: I18n.t('commons.arabic'),
+            country: I18n.t('commons.Egypt'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'ar_SA',
+            name: I18n.t('commons.arabic'),
+            country: I18n.t('commons.Saudi_Arabia'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'ca_ES',
+            name: I18n.t('commons.catalan'),
+            country: I18n.t('commons.Spain'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'gl_ES',
+            name: I18n.t('commons.galician'),
+            country: I18n.t('commons.Spain'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'de_DE',
+            name: I18n.t('commons.german'),
+            country: I18n.t('commons.Germany'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'he_IL',
+            name: I18n.t('commons.hebrew'),
+            country: I18n.t('commons.Israel'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'hi_IN',
+            name: I18n.t('commons.hindi'),
+            country: I18n.t('commons.India'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'hu_HU',
+            name: I18n.t('commons.hungarian'),
+            country: I18n.t('commons.Hungary'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'it_IT',
+            name: I18n.t('commons.italian'),
+            country: I18n.t('commons.Italy'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'ko_KR',
+            name: I18n.t('commons.korean'),
+            country: I18n.t('commons.Korea'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'pl_PL',
+            name: I18n.t('commons.polish'),
+            country: I18n.t('commons.Poland'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'pt_BR',
+            name: I18n.t('commons.portuguese'),
+            country: I18n.t('commons.Brazil'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'pt_PT',
+            name: I18n.t('commons.portuguese'),
+            country: I18n.t('commons.Portugal'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'ja_JP',
+            name: I18n.t('commons.japanese'),
+            country: I18n.t('commons.Japon'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'ru_RU',
+            name: I18n.t('commons.russian'),
+            country: I18n.t('commons.Russia'),
+            isAvailable: false
+        },
 
-    /**
-     * Handle show file errors
-     * @function onFilesError
-     * @param {object} file
-     * @param {object} error
-     */
-    onFilesError = (error, file) => {
-        this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error.message }))
-    }
-
-    /**
-     * Handle remove files from list
-     * @function filesRemoveOne
-     * @param {object} file
-     */
-    filesRemoveOne = (file) => {
-        this.files.removeFile(file)
-    }
-
-    /**
-     * Handle remove all files from list
-     * @function filesRemoveAll
-     */
-    filesRemoveAll = () => {
-        this.files.removeFiles()
-    }
-
-    /**
-     * Handle upload files
-     * @function filesUpload
-     */
-    filesUpload = () => {
-        const formData = new FormData()
-        Object.keys(this.state.files).forEach(async(key) => {
-            try {
-                const file = this.state.files[key]
-                formData.append("file", file)
-                formData.append("uploadManifest", `{"input":{"name":"${file.name}"}}`)
-                this.setState({
-                    isLoading: true
-                })
-                await this.props.glpi.uploadFile({ itemtype: itemtype.PluginFlyvemdmFile, input: formData })
-                this.setState({
-                    isLoading: false
-                })
-                this.props.setNotification({
-                    title: I18n.t('commons.success'),
-                    body: I18n.t('notifications.saved_file'),
-                    type: 'success'
-                })
-                this.props.changeAction('reload')
-            } catch (error) {
-                this.props.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
-                this.setState({
-                    isLoading: false
-                })
-            }
-        })
-    }
-
-    render() {
-        let renderComponent
-        if (this.state.isLoading) {
-            renderComponent = (&lt;Loading message={`${I18n.t('commons.loading')}...`} />)
-        } else {
-            renderComponent = (
-                &lt;ContentPane>
-                    &lt;div style={{ margin: '0 10px' }}>
-                        &lt;div className="content-header">
-                            &lt;h2 className="content-header__title">
-                                {I18n.t('commons.new_file')}
-                            &lt;/h2>
-                        &lt;/div>
-                        &lt;div className="separator" />
-                        &lt;div style={{ padding: '10px' }}>
-                            &lt;React.Fragment>
-                                &lt;FilesUpload
-                                    ref={(files) => { this.files = files }}
-                                    className='files-dropzone'
-                                    onChange={this.onFilesChange}
-                                    onError={this.onFilesError}
-                                    maxFiles={1}
-                                    maxFileSize={10000000}
-                                    minFileSize={0}
-                                    clickable
-                                >
-                                    {I18n.t('commons.drop_file')}
-                                &lt;/FilesUpload>
-                                &lt;div style={{ marginTop: 10 }}>
-                                    &lt;button className="btn btn--primary" onClick={this.filesUpload}>
-                                        {I18n.t('commons.save')}
-                                    &lt;/button>
-                                    {
-                                        this.state.files.length > 0
-                                            ? &lt;div>
-                                                {this.state.files.map((file) =>
-                                                    &lt;FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
-                                                )}
-                                            &lt;/div>
-                                            : null
-                                    }
-                                &lt;/div>
-                            &lt;/React.Fragment>
-                        &lt;/div>
-                    &lt;/div>
-                &lt;/ContentPane>
+        {
+            abbreviation: 'ur_PK',
+            name: I18n.t('commons.China'),
+            country: I18n.t('commons.Pakistanxx'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'zh_CN',
+            name: I18n.t('commons.chinese'),
+            country: I18n.t('commons.China'),
+            isAvailable: false
+        },
+        {
+            abbreviation: 'th_TH',
+            name: I18n.t('commons.thai'),
+            country: I18n.t('commons.Thailand'),
+            isAvailable: false
+        },
+    ]
+    let renderList = []
+    languages.forEach(language => {
+        if (language.isAvailable) {
+            renderList.push(
+                &lt;option value={language.abbreviation} key={language.abbreviation}>
+                    {language.name} - {language.country}
+                &lt;/option>
             )
-        }
-        return renderComponent
-    }
+        }  
+    })
+    return(renderList)
 }
-/** FilesAdd propTypes */
-FilesAdd.propTypes = {
-    changeAction: PropTypes.func.isRequired,
-    setNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
-}</code></pre>
+</code></pre>
         </article>
     </section>
 
