@@ -385,63 +385,65 @@ class Profiles extends PureComponent {
             }    
 
             component = (
-                &lt;div className="froms Profiles" style={{marginTop: '20px'}}>
+                &lt;React.Fragment>
+                    &lt;h2 style={{ margin: '10px' }}>
+                        {I18n.t('commons.profiles')}
+                    &lt;/h2>
+                    &lt;div className="froms Profiles" style={{marginTop: '20px'}}>
 
-                    &lt;div className="froms__row froms__row--icon">
-                        &lt;span className="viewIcon"/>
-                    &lt;/div>
-                    
-    
-                    &lt;div className="froms__row">
-    
-                        &lt;div style={{ overflow: 'hidden' }}>
-                            &lt;input
-                                {...inputAttributes}
-                            />
-                            &lt;IconItemList 
-                                image={this.state.imageProfile} 
-                                type={this.state.typeImageProfile}
-                                imgClick={this.openFileChooser}
-                                size={150}
-                                imgClass="clickable"
-                            />
+                        &lt;div className="froms__row froms__row--icon">
+                            &lt;span className="viewIcon"/>
                         &lt;/div>
-    
-                    &lt;/div>
-    
-                    &lt;ConstructInputs data={user.personalInformation} icon="contactIcon" />
-    
-                    &lt;ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
-                
-                    &lt;ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
-    
-                    &lt;ConstructInputs data={user.emailsInformation} icon="emailIcon" />
-                    &lt;div style={{ overflow: 'auto' }}>
-                        &lt;button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>
-                            {I18n.t('commons.add_email')}
+                        
+        
+                        &lt;div className="froms__row">
+        
+                            &lt;div style={{ overflow: 'hidden' }}>
+                                &lt;input
+                                    {...inputAttributes}
+                                />
+                                &lt;IconItemList 
+                                    image={this.state.imageProfile} 
+                                    type={this.state.typeImageProfile}
+                                    imgClick={this.openFileChooser}
+                                    size={150}
+                                    imgClass="clickable"
+                                />
+                            &lt;/div>
+        
+                        &lt;/div>
+        
+                        &lt;ConstructInputs data={user.personalInformation} icon="contactIcon" />
+        
+                        &lt;ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
+                    
+                        &lt;ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
+        
+                        &lt;ConstructInputs data={user.emailsInformation} icon="emailIcon" />
+                        &lt;div style={{ overflow: 'auto' }}>
+                            &lt;button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>
+                                {I18n.t('commons.add_email')}
+                            &lt;/button>
+                        &lt;/div>
+        
+                        &lt;ConstructInputs data={user.contactInformation} icon="phoneIcon" />
+                    
+                        &lt;ConstructInputs data={user.moreInformation} icon="detailsIcon" />
+        
+                        &lt;ConstructInputs data={user.activityInformation} icon="documentIcon" />
+        
+                        &lt;button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+                            {I18n.t('commons.save')}
                         &lt;/button>
-                    &lt;/div>
-    
-                    &lt;ConstructInputs data={user.contactInformation} icon="phoneIcon" />
-                
-                    &lt;ConstructInputs data={user.moreInformation} icon="detailsIcon" />
-    
-                    &lt;ConstructInputs data={user.activityInformation} icon="documentIcon" />
-    
-                    &lt;button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                        {I18n.t('commons.save')}
-                    &lt;/button>
-                
-                    &lt;br/>
-    
-                &lt;/div>   
+                        
+                        &lt;br/>
+                        
+                    &lt;/div>   
+                &lt;/React.Fragment>
             )
         }       
         return (
             &lt;ContentPane>
-                &lt;h2 style={{ margin: '10px' }}>
-                    {I18n.t('commons.profiles')}
-                &lt;/h2>
                 { component }
             &lt;/ContentPane>
         )
