@@ -32,6 +32,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { I18n } from 'react-i18nify'
 import { changeLanguage } from '../../store/i18n/actions'
+import tractionsList from '../../hoc/withI18NTranslation/i18n/languages'
 
 function mapDispatchToProps(dispatch) {
     return { 
@@ -76,18 +77,7 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
                     <select onChange={
                         event => props.changeLanguage(event.target.value)
                     }>
-                        <option value='en_GB'>
-                            {I18n.t('commons.english')}
-                        </option>
-                        <option value='pt_BR'>
-                            {I18n.t('commons.portuguese')}
-                        </option>
-                        <option value='fr_FR'>
-                            {I18n.t('commons.french')}
-                        </option>
-                        <option value='es_ES'>
-                            {I18n.t('commons.spanish')}
-                        </option>
+                       {tractionsList()}
                     </select>
                 </footer>
             </div>
