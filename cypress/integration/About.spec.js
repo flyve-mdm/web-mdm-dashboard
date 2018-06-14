@@ -169,4 +169,4 @@ describe('SignIn', () => {
         cy.get('.itemList').click()
         cy.get('main').screenshot('about_helpCenter_feedback', {capture: 'viewport'})
     })
-  })
+})
