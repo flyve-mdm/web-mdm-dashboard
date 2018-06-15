@@ -58,5 +58,8 @@ describe('Files', () => {
         cy.visit('/app/files')
         cy.contains('No selection')
         cy.get('main').screenshot('files_noSelection', {capture: 'viewport'})
+        cy.get('.win-itemscontainer').click('top')
+        cy.get('.header-block').click('topRight')
+        cy.get('main').screenshot('files_content', {capture: 'viewport'})
     })
 })

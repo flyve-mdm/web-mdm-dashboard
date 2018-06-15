@@ -65,6 +65,6 @@ describe('Applications', () => {
         cy.contains('No selection')
         cy.get('main').screenshot('applications_noSelection', {capture: 'viewport'})
         cy.get('.win-itemscontainer').click('top')
-        cy.get('main').screenshot('files_content', {capture: 'viewport'})
+        cy.get('main').screenshot('applications_content', {capture: 'viewport'})
     })
 })
