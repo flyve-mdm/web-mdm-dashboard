@@ -51,7 +51,6 @@ describe('Users', () => {
             }
         })
 
-  
         localStorage.setItem('sessionToken', 'token1234')
         localStorage.setItem('showNotifications', 'true')
         localStorage.setItem('notificationType', 'Toast')
@@ -94,4 +93,4 @@ describe('Users', () => {
         cy.get('.header-block').click('topRight')
         cy.get('main').screenshot('users_edit', {capture: 'fullPage'})
     })
-  })
+})
