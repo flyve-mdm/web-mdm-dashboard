@@ -130,7 +130,8 @@ class FleetsContent extends PureComponent {
                 tasksNew: {},
                 tasksRemove: {}
             },
-            devices__length: 0
+            devices__length: 0,
+            isLoading: false,
         })
     }
 
