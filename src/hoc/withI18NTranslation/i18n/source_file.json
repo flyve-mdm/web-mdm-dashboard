@@ -2,7 +2,7 @@
   "login": {
     "title": "Sign in",
     "username_not_registered": "The username entered is not registered. Try a different account or",
-    "create_an_new": "create an new",
+    "create_a_new": "create a new",
     "use_your_account": "Use your Flyve MDM account",
     "what_is_this": "What's this?",
     "no_account": "No account?",
@@ -39,7 +39,7 @@
     "device_successfully_removed": "Device successfully removed",
     "invitation_successfully_sent": "Invitation successfully sent",
     "data_deleted_successfully": "Data deleted successfully",
-    "unenrollment_device": "Unenrollment_device",
+    "unenrollment_device": "Unenrollment device",
     "devices_successfully_deleted": "Devices successfully deleted",
     "request_sent": "Request sent",
     "ping_sent": "Ping sent",
