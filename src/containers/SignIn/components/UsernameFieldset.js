@@ -105,7 +105,7 @@ class UsernameFieldset extends PureComponent {
                         <span> {I18n.t('login.username_not_registered')} </span> 
                         {
                             this.state.selfRegistration ?
-                                <Link to={`${publicURL}/signUp`}>{I18n.t('login.create_an_new')}</Link>
+                                <Link to={`${publicURL}/signUp`}>{I18n.t('login.create_a_new')}</Link>
                                 : null
                         }
                     </p>
