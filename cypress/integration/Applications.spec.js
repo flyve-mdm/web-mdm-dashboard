@@ -12,6 +12,12 @@ describe('Applications', () => {
 
         cy.route({
             method: 'GET',
+            url: `${glpiApiLink}/PluginFlyvemdmPackage/6`,
+            response: {"id":6,"name":"com.uberspot.a2048","package_name":"com.uberspot.a2048","alias":2048,"version":2,"version_code":20,"icon":"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","filename":"flyvemdm/package//var/www/public/glpi/files/var/www/public/glpi/files/var/www/public/glpi/files/var/www/public/glpi/files/var/www/public/glpi/files/var/www/public/glpi/files/var/www/public/glpi/files/var/www/public/glpi/files/var/www/public/glpi/files/var","entities_id":0,"dl_filename":"5a172764898a95.5484936756fa7aa5ed741_com.uberspot.a2048_20.apk","plugin_orion_tasks_id":0,"parse_status":"parsed","filesize":0,"mime_type":"","links":[{"rel":"Entity","href":"https://dev.flyve.org/glpi/apirest.php/Entity/0"}]}
+        })
+
+        cy.route({
+            method: 'GET',
             url: `${glpiApiLink}/getGlpiConfig`,
             response: {
                 "cfg_glpi":{
@@ -58,5 +64,7 @@ describe('Applications', () => {
         cy.visit('/app/applications')
         cy.contains('No selection')
         cy.get('main').screenshot('applications_noSelection', {capture: 'viewport'})
+        cy.get('.win-itemscontainer').click('top')
+        cy.get('main').screenshot('files_content', {capture: 'viewport'})
     })
 })
