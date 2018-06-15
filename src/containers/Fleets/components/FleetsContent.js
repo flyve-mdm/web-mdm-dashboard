@@ -51,7 +51,7 @@ class FleetsContent extends PureComponent {
             itemID: undefined,
             itemType: this.props.itemType,
             selectedItems: [],
-            isLoading: false,
+            isLoading: true,
             notManaged: false,
             input: '',
             data: {
@@ -93,11 +93,11 @@ class FleetsContent extends PureComponent {
      * @function componentDidMount 
      */
     componentDidMount = () => {
-            if (!this.state.notManaged) {
-                this.requestAllData()
-            } else {
-                this.resetData()
-            }
+        if (!this.state.notManaged) {
+            this.requestAllData()
+        } else {
+            this.resetData()
+        }
     }
 
     /**
