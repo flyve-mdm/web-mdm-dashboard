@@ -186,6 +186,7 @@ describe('Devices', () => {
     it('should navigate in users without problemss', () => {
         cy.visit('/app/devices')
         cy.contains('No selection')
+        cy.get('#element__11')
         cy.get('main').screenshot('devices_noSelection', {capture: 'viewport'})
         cy.get('.win-itemscontainer').click('top')
         cy.get('.content-info > :nth-child(1)')
@@ -203,6 +204,7 @@ describe('Devices', () => {
         cy.get('main').screenshot('devices_polices', {capture: 'viewport'})
         cy.get('.win-pivot-headers > :nth-child(5)').click()
         cy.wait('@geolocation')
+        cy.wait(1000)
         cy.get('main').screenshot('devices_geolocation', {capture: 'viewport'})
         cy.get('.win-pivot-headers > :nth-child(6)').click()
         cy.get('main').screenshot('devices_dangerZone', {capture: 'viewport'})
