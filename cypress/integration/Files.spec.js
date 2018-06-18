@@ -61,5 +61,8 @@ describe('Files', () => {
         cy.get('.win-itemscontainer').click('top')
         cy.get('.header-block').click('topRight')
         cy.get('main').screenshot('files_content', {capture: 'viewport'})
+        cy.get('.editIcon').click()
+        cy.get('.header-block').click('topRight')
+        cy.get('main').screenshot('files_edit', {capture: 'viewport'})
     })
 })
