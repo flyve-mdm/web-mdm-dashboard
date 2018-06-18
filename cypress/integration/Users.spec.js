@@ -83,6 +83,7 @@ describe('Users', () => {
     it('should navigate in users without problemss', () => {
         cy.visit('/app/users')
         cy.contains('No selection')
+        cy.get('#element__11')
         cy.get('main').screenshot('users_noSelection', {capture: 'viewport'})
         cy.get('.win-itemscontainer').click('top')
         cy.get('.item-info__name')

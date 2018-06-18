@@ -129,6 +129,7 @@ describe('Applications', () => {
     it('should navigate in users without problemss', () => {
         cy.visit('/app/fleets')
         cy.contains('No selection')
+        cy.get('#element__11')
         cy.get('main').screenshot('fleets_noSelection', {capture: 'viewport'})
         cy.get('.win-itemscontainer').click('top')
         cy.get('.content-info')
