@@ -39,7 +39,7 @@ describe('configureDisplay', () => {
 
   it('should get the default "display"', () => {
     const defaultValues = {
-      animations: true,
+      animations: false,
       applicationsUploaded: true, 
       devicesByOperatingSystemVersion: true, 
       devicesByUsers: true, 
