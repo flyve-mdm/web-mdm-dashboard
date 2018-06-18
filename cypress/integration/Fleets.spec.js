@@ -1,13 +1,13 @@
 import { glpiApiLink } from '../../public/config.json'
 
-describe('Files', () => {
+describe('Applications', () => {
     beforeEach(function () {
         cy.server()
 
         cy.route({
             method: 'GET',
-            url: `${glpiApiLink}/search/PluginFlyvemdmFile/?uid_cols=true&forcedisplay[0]=1&forcedisplay[1]=2&forcedisplay[2]=3&order=ASC&range=0-14&`,
-            response: {"totalcount":4,"count":4,"sort":1,"order":"ASC","data":[{"PluginFlyvemdmFile.name":"decoded.jpeg","PluginFlyvemdmFile.id":78,"PluginFlyvemdmFile.source":"0/5b11be1376218_decoded.jpeg"},{"PluginFlyvemdmFile.name":"IMG.jpg","PluginFlyvemdmFile.id":79,"PluginFlyvemdmFile.source":"0/5b11be206c719_IMG_20180330_110129.jpg"},{"PluginFlyvemdmFile.name":"logo-plugin.png","PluginFlyvemdmFile.id":48,"PluginFlyvemdmFile.source":"0/5acb72372edb7_logo-plugin.png"},{"PluginFlyvemdmFile.name":"logo2.png","PluginFlyvemdmFile.id":43,"PluginFlyvemdmFile.source":"0/5abd12701feb2_logo2.png"}],"content-range":"0-3/4"}
+            url: `${glpiApiLink}/search/PluginFlyvemdmFleet/?uid_cols=true&forcedisplay[0]=2&order=ASC&range=0-14&`,
+            response: {"totalcount":3,"count":3,"sort":1,"order":"ASC","data":[{"PluginFlyvemdmFleet.name":"demo fleet","PluginFlyvemdmFleet.id":58},{"PluginFlyvemdmFleet.name":"DIOHz0r Tests","PluginFlyvemdmFleet.id":173},{"PluginFlyvemdmFleet.name":"Files&Apk","PluginFlyvemdmFleet.id":57}],"content-range":"0-2/3"}
         })
 
         cy.route({
@@ -55,17 +55,8 @@ describe('Files', () => {
     })
 
     it('should navigate in users without problemss', () => {
-        cy.visit('/app/files')
+        cy.visit('/app/fleets')
         cy.contains('No selection')
-        cy.get('main').screenshot('files_noSelection', {capture: 'viewport'})
-        cy.get('.win-itemscontainer').click('top')
-        cy.get('.header-block').click('topRight')
-        cy.get('main').screenshot('files_content', {capture: 'viewport'})
-        cy.get('.editIcon').click()
-        cy.get('.header-block').click('topRight')
-        cy.get('main').screenshot('files_edit', {capture: 'viewport'})
-        cy.get('[aria-label="Add"] > .win-commandicon > .win-commandimage').click()
-        cy.get('.header-block').click('topRight')
-        cy.get('main').screenshot('files_add', {capture: 'viewport'})
+        cy.get('main').screenshot('fleets_noSelection', {capture: 'viewport'})
     })
 })

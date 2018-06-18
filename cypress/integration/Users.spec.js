@@ -74,7 +74,7 @@ describe('Users', () => {
                 fleetsCurrentlyManaged: false,
                 invitationsSent: false,
                 numberUsers: false,
-                animations: true,
+                animations: false,
                 pendingInvitations: false
             })
         )
