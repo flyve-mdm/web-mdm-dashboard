@@ -69,5 +69,8 @@ describe('Applications', () => {
         cy.get('.editIcon').click()
         cy.get('.header-block').click('topRight')
         cy.get('main').screenshot('applications_edit', {capture: 'viewport'})
+        cy.get('[aria-label="Add"] > .win-commandicon > .win-commandimage').click()
+        cy.get('.header-block').click('topRight')
+        cy.get('main').screenshot('applications_add', {capture: 'viewport'})
     })
 })
