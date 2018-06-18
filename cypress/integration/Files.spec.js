@@ -64,5 +64,8 @@ describe('Files', () => {
         cy.get('.editIcon').click()
         cy.get('.header-block').click('topRight')
         cy.get('main').screenshot('files_edit', {capture: 'viewport'})
+        cy.get('[aria-label="Add"] > .win-commandicon > .win-commandimage').click()
+        cy.get('.header-block').click('topRight')
+        cy.get('main').screenshot('files_add', {capture: 'viewport'})
     })
 })
