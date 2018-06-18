@@ -57,6 +57,7 @@ describe('Files', () => {
     it('should navigate in users without problemss', () => {
         cy.visit('/app/files')
         cy.contains('No selection')
+        cy.get('#element__11')
         cy.get('main').screenshot('files_noSelection', {capture: 'viewport'})
         cy.get('.win-itemscontainer').click('top')
         cy.get('.header-block').click('topRight')

@@ -1,6 +1,6 @@
 import { glpiApiLink } from '../../public/config.json'
 
-describe('SignIn', () => {
+describe('Invitations', () => {
     beforeEach(function () {
         cy.server()
     
@@ -107,6 +107,7 @@ describe('SignIn', () => {
     it('should navigate in invitations without problemss', () => {
         cy.visit('/app/invitations')
         cy.contains('No selection')
+        cy.get('#element__11')
         cy.get('main').screenshot('invitations_noSelection', {capture: 'viewport'})
         cy.get('.win-itemscontainer').click('top')
         cy.contains('Bad agent version')

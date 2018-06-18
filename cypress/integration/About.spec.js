@@ -1,6 +1,6 @@
 import { glpiApiLink } from '../../public/config.json'
 
-describe('SignIn', () => {
+describe('About', () => {
     beforeEach(function () {
         cy.server()
     
