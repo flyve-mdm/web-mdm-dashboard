@@ -66,5 +66,8 @@ describe('Applications', () => {
         cy.get('main').screenshot('applications_noSelection', {capture: 'viewport'})
         cy.get('.win-itemscontainer').click('top')
         cy.get('main').screenshot('applications_content', {capture: 'viewport'})
+        cy.get('.editIcon').click()
+        cy.get('.header-block').click('topRight')
+        cy.get('main').screenshot('applications_edit', {capture: 'viewport'})
     })
 })
