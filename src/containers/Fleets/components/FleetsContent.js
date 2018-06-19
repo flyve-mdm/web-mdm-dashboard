@@ -75,7 +75,8 @@ class FleetsContent extends PureComponent {
      * @param {object} prevState
      */
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (prevState.itemID !== getID(nextProps.history.location.pathname)) {
+        if (Number(prevState.itemID) !== Number(getID(nextProps.history.location.pathname))) {
+
             return {
                 ...prevState,
                 isLoading: true,
