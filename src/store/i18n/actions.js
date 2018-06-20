@@ -37,10 +37,10 @@ import initialState from "./initialState"
  * @returns {object} language
  */
 export const changeLanguage = languageName => {
-    return {
-        type: actionTypes.CHANGE_LANGUAGE,
-        languageCurrent: languageName
-    }
+  return {
+    type: actionTypes.CHANGE_LANGUAGE,
+    languageCurrent: languageName
+  }
 }
 
 /**
@@ -48,8 +48,8 @@ export const changeLanguage = languageName => {
  * @returns {object} language
  */
 export const changeLanguageFallBack = () => {
-    return {
-        type: actionTypes.CHANGE_LANGUAGE_FALLBACK,
-        languageDefault: initialState.languageDefault
-    }
+  return {
+    type: actionTypes.CHANGE_LANGUAGE_FALLBACK,
+    languageDefault: initialState.languageDefault
+  }
 }

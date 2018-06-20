@@ -33,14 +33,14 @@
  */
 
 const initialState = {
-    notification: {
-        title: '',
-        body: '',
-        type: 'info'
-    },
-    error: '',
-    success: '',
-    loading: false
+  notification: {
+    title: '',
+    body: '',
+    type: 'info'
+  },
+  error: '',
+  success: '',
+  loading: false
 }
 
 export default initialState

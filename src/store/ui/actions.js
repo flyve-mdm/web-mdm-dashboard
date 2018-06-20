@@ -36,10 +36,10 @@ import * as actionTypes from './actionTypes'
  * @returns {object} action notification
  */
 export const uiSetNotification = notification => {
-    return {
-        type: actionTypes.CHANGE_NOTIFICATION_MESSAGE,
-        notification
-    }
+  return {
+    type: actionTypes.CHANGE_NOTIFICATION_MESSAGE,
+    notification
+  }
 }
 
 /**
@@ -47,9 +47,9 @@ export const uiSetNotification = notification => {
  * @returns {object} action hide notification
  */
 export const uiHideNotification = () => {
-    return {
-        type: actionTypes.HIDE_NOTIFICATION
-    }
+  return {
+    type: actionTypes.HIDE_NOTIFICATION
+  }
 }
 
 /**
@@ -57,9 +57,9 @@ export const uiHideNotification = () => {
  * @returns {object} action start transaction
  */
 export const uiTransactionStart = () => {
-    return {
-        type: actionTypes.UI_TRANSACTION_START
-    };
+  return {
+    type: actionTypes.UI_TRANSACTION_START
+  };
 };
 
 /**
@@ -67,10 +67,10 @@ export const uiTransactionStart = () => {
  * @returns {object} action finish transaction
  */
 export const uiTransactionFinish = success => {
-    return {
-        type: actionTypes.UI_TRANSACTION_FINISH,
-        success
-    }
+  return {
+    type: actionTypes.UI_TRANSACTION_FINISH,
+    success
+  }
 }
 
 /**
@@ -78,8 +78,8 @@ export const uiTransactionFinish = success => {
  * @returns {object} action Fail transaction
  */
 export const uiTransactionFail = error => {
-    return {
-        type: actionTypes.UI_TRANSACTION_FAIL,
-        error: error
-    }
+  return {
+    type: actionTypes.UI_TRANSACTION_FAIL,
+    error: error
+  }
 }

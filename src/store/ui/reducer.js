@@ -30,7 +30,7 @@
 import * as actionTypes from './actionTypes'
 import initialState from "./initialState"
 import {
-    updateObject
+  updateObject
 } from '../../shared/updateObject'
 
 /**
@@ -39,12 +39,12 @@ import {
  * @param {object} action
  */
 const uiSetNotification = (state, action) => {
-    return updateObject(state, {
-        notification: {
-            show: true,
-            ...action.notification
-        }
-    })
+  return updateObject(state, {
+    notification: {
+      show: true,
+      ...action.notification
+    }
+  })
 }
 
 /**
@@ -53,11 +53,11 @@ const uiSetNotification = (state, action) => {
  * @param {object} action
  */
 const uiHideNotification = (state) => {
-    return updateObject(state, {
-        notification: {
-            show: false
-        }
-    })
+  return updateObject(state, {
+    notification: {
+      show: false
+    }
+  })
 }
 
 /**
@@ -66,10 +66,10 @@ const uiHideNotification = (state) => {
  * @param {object} action
  */
 const uiTransactionStart = (state, action) => {
-    return updateObject(state, {
-        error: null,
-        loading: true
-    })
+  return updateObject(state, {
+    error: null,
+    loading: true
+  })
 }
 
 /**
@@ -78,10 +78,10 @@ const uiTransactionStart = (state, action) => {
  * @param {object} action
  */
 const uiTransactionFail = (state, action) => {
-    return updateObject(state, {
-        error: action.error,
-        loading: false
-    })
+  return updateObject(state, {
+    error: action.error,
+    loading: false
+  })
 }
 
 /**
@@ -90,11 +90,11 @@ const uiTransactionFail = (state, action) => {
  * @param {object} action
  */
 const uiTransactionFinish = (state, action) => {
-    return updateObject(state, {
-        error: null,
-        success: action.success || null,
-        loading: false
-    })
+  return updateObject(state, {
+    error: null,
+    success: action.success || null,
+    loading: false
+  })
 }
 
 /**
@@ -103,20 +103,20 @@ const uiTransactionFinish = (state, action) => {
  * @param {object} action
  */
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case actionTypes.CHANGE_NOTIFICATION_MESSAGE:
-            return uiSetNotification(state, action)
-        case actionTypes.HIDE_NOTIFICATION:
-            return uiHideNotification(state)
-        case actionTypes.UI_TRANSACTION_START:
-            return uiTransactionStart(state, action)
-        case actionTypes.UI_TRANSACTION_FAIL:
-            return uiTransactionFail(state, action)
-        case actionTypes.UI_TRANSACTION_FINISH:
-            return uiTransactionFinish(state, action)
-        default:
-            return state
-    }
+  switch (action.type) {
+    case actionTypes.CHANGE_NOTIFICATION_MESSAGE:
+      return uiSetNotification(state, action)
+    case actionTypes.HIDE_NOTIFICATION:
+      return uiHideNotification(state)
+    case actionTypes.UI_TRANSACTION_START:
+      return uiTransactionStart(state, action)
+    case actionTypes.UI_TRANSACTION_FAIL:
+      return uiTransactionFail(state, action)
+    case actionTypes.UI_TRANSACTION_FINISH:
+      return uiTransactionFinish(state, action)
+    default:
+      return state
+  }
 }
 
 export default reducer
