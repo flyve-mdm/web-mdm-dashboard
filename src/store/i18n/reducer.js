@@ -30,7 +30,7 @@
 import * as actionTypes from './actionTypes'
 import initialState from "./initialState"
 import {
-    updateObject
+  updateObject
 } from '../../shared/updateObject'
 
 /**
@@ -39,9 +39,9 @@ import {
  * @param {object} action
  */
 const changeLanguage = (state, action) => {
-    return updateObject(state, {
-        languageCurrent: action.languageCurrent
-    })
+  return updateObject(state, {
+    languageCurrent: action.languageCurrent
+  })
 }
 
 /**
@@ -50,9 +50,9 @@ const changeLanguage = (state, action) => {
  * @param {object} action
  */
 const changeLanguageFallBack = (state, action) => {
-    return updateObject(state, {
-        languageCurrent: action.languageDefault
-    })
+  return updateObject(state, {
+    languageCurrent: action.languageDefault
+  })
 }
 
 /**
@@ -61,14 +61,14 @@ const changeLanguageFallBack = (state, action) => {
  * @param {object} action
  */
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case actionTypes.CHANGE_LANGUAGE:
-            return changeLanguage(state, action);
-        case actionTypes.CHANGE_LANGUAGE_FALLBACK:
-            return changeLanguageFallBack(state, action);
-        default:
-            return state
-    }
+  switch (action.type) {
+    case actionTypes.CHANGE_LANGUAGE:
+      return changeLanguage(state, action);
+    case actionTypes.CHANGE_LANGUAGE_FALLBACK:
+      return changeLanguageFallBack(state, action);
+    default:
+      return state
+  }
 }
 
 export default reducer

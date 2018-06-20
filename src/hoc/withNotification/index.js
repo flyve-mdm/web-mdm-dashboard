@@ -1,38 +1,48 @@
 /*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
-import React, { PureComponent } from 'react'
+import React, {
+    PureComponent
+} from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import {
+    connect
+} from 'react-redux'
 import WinJS from 'winjs'
-import { withRouter } from 'react-router'
-import { bindActionCreators } from 'redux'
-import { uiHideNotification } from '../../store/ui/actions'
+import {
+    withRouter
+} from 'react-router'
+import {
+    bindActionCreators
+} from 'redux'
+import {
+    uiHideNotification
+} from '../../store/ui/actions'
 import validateNotifications from '../../shared/validateNotifications'
 import nativeNotification from '../../shared/nativeNotification'
 
@@ -49,17 +59,19 @@ function mapDispatchToProps(dispatch) {
     const actions = {
         uiHideNotification: bindActionCreators(uiHideNotification, dispatch)
     }
-    return { actions }
+    return {
+        actions
+    }
 }
 
 /**
  * Wrapper component to add notifications (Toast and Native)
- * @param {component} WrappedComponent Component to wrap 
+ * @param {component} WrappedComponent Component to wrap
  * @return {component} The component with the notifications
  */
 const withNotification = WrappedComponent => {
     class ToastNotification extends PureComponent {
-        /** 
+        /**
          * Create ToastNotification
          * @param {object} props
          */
@@ -113,7 +125,10 @@ const withNotification = WrappedComponent => {
         /** Hide 'Toast' notifications */
         hideNotification = () => {
             WinJS.UI.Animation.exitContent(
-                document.getElementsByClassName('toast'), { top: '0px', left: '20px' }
+                document.getElementsByClassName('toast'), {
+                    top: '0px',
+                    left: '20px'
+                }
             ).then(() => {
                 this.setState({
                     show: false,
@@ -126,8 +141,8 @@ const withNotification = WrappedComponent => {
             })
         }
 
-        /** 
-         * Render component 
+        /**
+         * Render component
          * @function render
          */
         render() {
@@ -135,28 +150,11 @@ const withNotification = WrappedComponent => {
             const notification = validateNotifications()
             if (this.state.show && notification.type === 'Toast') {
                 toast = (
-                    <div className={`toast toast--${this.props.type}`}>
-                        <span
-                            className="cancelIcon"
-                            style={{ float: 'right', cursor: 'pointer', color: '#ffffff' }}
-                            onClick={() => {
-                                this.hideNotification()
-                            }}
-                        />
-                        <div className="toast__title">
-                            {this.props.title}
-                        </div>
-                        <div className="toast__body">
-                            {this.props.body}
-                        </div>
-                    </div>
+
                 )
             }
             return (
-                <React.Fragment>
-                    {toast}
-                    <WrappedComponent {...this.props} />
-                </React.Fragment>
+
             )
         }
     }

@@ -33,9 +33,9 @@
  */
 
 const initialState = {
-    configurationPassword: {},
-    captcha: {},
-    currentUser: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : null,
+  configurationPassword: {},
+  captcha: {},
+  currentUser: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : null,
 }
 
 export default initialState
