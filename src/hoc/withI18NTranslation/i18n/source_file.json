@@ -229,7 +229,7 @@
     "main": {
       "title": "Main",
       "last_contact": "last contact"
-    },    
+    },
     "enroll": {
       "title": "Enroll new device",
       "insert_active_email": "Please insert an active email address.",
@@ -357,7 +357,7 @@
         "relationship": "These Terms and Conditions and our relationship with you shall be governed by and construed in accordance with the laws of Spain and will be subject to the exclusive jurisdiction of the Spanish Courts.",
         "privacy_policy": "Privacy Policy",
         "you_agree": "You agree that we may collect, store, and use information about you in accordance with our Privacy Policy. You acknowledge and agree to be bound by the terms of our Privacy Policy."
-      } 
+      }
     }
   },
   "commons": {
@@ -392,13 +392,13 @@
     "dashboard": "Dashboard",
     "ok": "Ok",
     "cancel": "Cancel",
-    "no_selection":"No selection",
+    "no_selection": "No selection",
     "map": "Map",
     "call": "Call",
     "save": "Save",
     "send": "Send",
     "sending": "Sending",
-    "success": "Success", 
+    "success": "Success",
     "elements_successfully_removed": "Elements successfully removed",
     "element_successfully_removed": "Element successfully removed",
     "delete": "Delete",
