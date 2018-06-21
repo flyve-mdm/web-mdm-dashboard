@@ -101,13 +101,10 @@ export default class FilesList extends PureComponent {
 
   /** Item list render */
   ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-    return ( <
-      FilesItemList itemList = {
-        ItemList.data
-      }
-      size = {
-        42
-      }
+    return (
+      <FilesItemList
+        itemList={ItemList.data}
+        size={42}
       />
     )
   })

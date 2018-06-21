@@ -1,71 +1,80 @@
 /*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
-import React, { PureComponent } from 'react'
+import React, {
+  PureComponent
+} from 'react'
 import PropTypes from 'prop-types'
 import IconWithPopper from './IconWithPopper'
 import ImgWithPopper from './ImgWithPopper'
 import SpanWithPopper from './SpanWithPopper'
-import { ScrollSync, ScrollSyncPanel } from '../ScrollSync'
+import {
+  ScrollSync,
+  ScrollSyncPanel
+} from '../ScrollSync'
 import withGLPI from '../../hoc/withGLPI'
-import { I18n } from "react-i18nify"
+import {
+  I18n
+} from "react-i18nify"
 import publicURL from '../../shared/publicURL'
-import { splitview } from '../../shared/animationsWinJs'
+import {
+  splitview
+} from '../../shared/animationsWinJs'
 
-/** 
- * Component with side menu 
+/**
+ * Component with side menu
  * @class SplitView
  * @extends PureComponent
  */
 class SplitView extends PureComponent {
-  /** 
-   * Close session 
+  /**
+   * Close session
    * @function logout
-   */ 
+   */
   logout = () => {
     this.props.logout()
   }
 
-  /** 
-   * Run 'splitview' animation 
+  /**
+   * Run 'splitview' animation
    * @function componentDidUpdate
-   */ 
-  componentDidUpdate () {
+   */
+  componentDidUpdate() {
     if (this.props.expanded) {
       splitview(this.splitview, !this.props.contract).play()
     }
   }
-  
-  /** 
-   * Render component 
+
+  /**
+   * Render component
    * @function render
    */
-  render () {
+  render() {
     this.props.handleSetTimeOut()
 
     let toRender = ""
@@ -77,7 +86,6 @@ class SplitView extends PureComponent {
             <div className="splitview-block">
               <div className="splitview-wrapper__div">
                 <nav className="splitview-wrapped__navbar">
-      
                   <ScrollSyncPanel>
                     <div className="splitview-wrapper-wrapper__div">
                       <section className="splitview-wrapped-navbar-wrapped-top__section">
@@ -154,9 +162,9 @@ class SplitView extends PureComponent {
                     </div>
                   </ScrollSyncPanel>
                 </nav>
-                { this.props.expanded ? 
+                { this.props.expanded ?
                   (
-                    <nav 
+                    <nav
                       className="splitview-wrapped__navbar"
                       onClick={() => this.props.handleContract()}
                       ref={nav => this.splitview = nav}
@@ -182,20 +190,20 @@ class SplitView extends PureComponent {
                       </ScrollSyncPanel>
                     </nav>
                   ) : ""
-                } 
+                }
               </div>
             </div>
           </ScrollSync>
         </React.Fragment>
       )
     }
-    
+
     return toRender
   }
 }
 
 SplitView.propTypes = {
-  expanded: PropTypes.bool.isRequired,  
+  expanded: PropTypes.bool.isRequired,
   contract: PropTypes.bool.isRequired,
   handleExpand: PropTypes.func.isRequired,
   handleContract: PropTypes.func.isRequired,
