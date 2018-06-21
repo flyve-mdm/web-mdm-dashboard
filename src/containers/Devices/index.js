@@ -86,7 +86,7 @@ class Devices extends PureComponent {
 
         if (this.state.mode !== nextMode) {
             this.setState({
-                mode: nextMode 
+                mode: nextMode
             })
         }
     }
@@ -96,10 +96,10 @@ class Devices extends PureComponent {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.history.location.pathname === `${publicURL}/app/devices` && prevState.selectedItems.length > 0) {
+        if (nextProps.history.location.pathname === `${publicURL}/app/devices` && prevState.selectedItems.length > 0 && prevState.selectionMode === false) {
             return {
                 ...prevState,
-                selectedItems: []                
+                selectedItems: []
             }
         } else {
             return {
@@ -157,8 +157,8 @@ class Devices extends PureComponent {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/devices` )  || 
-                this.props.history.location.pathname === `${publicURL}/app/devices` || 
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/devices` )  ||
+                this.props.history.location.pathname === `${publicURL}/app/devices` ||
                 (this.props.history.location.pathname === `${publicURL}/app/devices` &&
                  this.state.selectionMode )) {
                      styles.display = 'inline-block'
@@ -168,7 +168,7 @@ class Devices extends PureComponent {
 
         } else {
             styles.display = 'inline-block'
-        } 
+        }
 
         return styles
     }
@@ -187,18 +187,18 @@ class Devices extends PureComponent {
         }
 
         if (this.state.mode === 'small') {
-            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/devices` )  || 
-                this.props.history.location.pathname === `${publicURL}/app/devices` || 
+            if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/devices` )  ||
+                this.props.history.location.pathname === `${publicURL}/app/devices` ||
                 (this.props.history.location.pathname === `${publicURL}/app/devices` &&
                  this.state.selectionMode )) {
                      styles.display = 'none'
             } else {
                 styles.display = 'inline-flex'
             }
-            
+
         } else {
             styles.display = 'inline-flex'
-        } 
+        }
 
         return styles
     }
@@ -214,11 +214,11 @@ class Devices extends PureComponent {
                 />
                 </div>
                 <div className="flex-block__content" style={{...this.stylesContent()}}>
-                <GenerateRoutes 
-                    key="content" 
-                    routes={routes} 
-                    rootPath={this.props.match.url} 
-                    data={{...this.propsData()}} 
+                <GenerateRoutes
+                    key="content"
+                    routes={routes}
+                    rootPath={this.props.match.url}
+                    data={{...this.propsData()}}
                 />
                 </div>
             </React.Fragment>

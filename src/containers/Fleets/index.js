@@ -108,7 +108,7 @@ class Fleets extends PureComponent {
      * @param {object} prevState
      */
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.history.location.pathname === `${publicURL}/app/fleets` && prevState.selectedItems.length > 0) {
+        if (nextProps.history.location.pathname === `${publicURL}/app/fleets` && prevState.selectedItems.length > 0 && prevState.selectionMode === false) {
             return {
                 ...prevState,
                 selectedItems: []
