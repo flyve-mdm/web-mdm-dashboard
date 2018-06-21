@@ -1,56 +1,74 @@
 /*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
 /** import dependencies */
-import React, { PureComponent } from 'react'
+import React, {
+  PureComponent
+} from 'react'
 import PropTypes from 'prop-types'
-import { VictoryPie } from 'victory'
-import { I18n } from 'react-i18nify'
+import {
+  VictoryPie
+} from 'victory'
+import {
+  I18n
+} from 'react-i18nify'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import Loading from '../../components/Loading'
 import InfoBox from '../../components/InfoBox'
-import { uiSetNotification } from '../../store/ui/actions'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import {
+  uiSetNotification
+} from '../../store/ui/actions'
+import {
+  bindActionCreators
+} from 'redux'
+import {
+  connect
+} from 'react-redux'
 import EmptyMessage from '../../components/EmptyMessage'
-import { NavLink } from 'react-router-dom'
+import {
+  NavLink
+} from 'react-router-dom'
 import ContentPane from '../../components/ContentPane'
 import itemtype from '../../shared/itemtype'
 import publicURL from '../../shared/publicURL'
 import logout from '../../shared/logout'
-import { slideTop } from '../../shared/animations/index'
+import {
+  slideTop
+} from '../../shared/animations/index'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-      setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch)
   }
-  return { actions }
+  return {
+    actions
+  }
 }
 
 /**
@@ -60,7 +78,7 @@ function mapDispatchToProps(dispatch) {
  */
 class Dashboard extends PureComponent {
   /** @constructor */
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       isLoading: true,
@@ -83,7 +101,10 @@ class Dashboard extends PureComponent {
    * @param {*} error
    */
   showError = (error) => {
-    this.props.actions.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
+    this.props.actions.setNotification(this.props.handleMessage({
+      type: 'alert',
+      message: error
+    }))
   }
 
   /**
@@ -94,10 +115,10 @@ class Dashboard extends PureComponent {
    */
   getDevices = () => new Promise(async (resolve, reject) => {
     try {
-      const devices = await this.props.glpi.searchItems({ 
+      const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
-        options: { 
-          uid_cols: true, 
+        options: {
+          uid_cols: true,
           forcedisplay: [2, 12]
         }
       })
@@ -117,13 +138,25 @@ class Dashboard extends PureComponent {
    */
   getDevicesByOperatingSystemVersion = (devices) => new Promise(async (resolve, reject) => {
     try {
-      const devicesAndroid = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] === "android").length
-      const devicesiOS = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] === "ios").length
-      const devicesWindows = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] === "windows").length
+      const devicesAndroid = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] ===
+        "android").length
+      const devicesiOS = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] === "ios")
+        .length
+      const devicesWindows = devices.data.filter(device => device[`${itemtype.PluginFlyvemdmAgent}.mdm_type`] ===
+        "windows").length
       let devicesByOperatingSystemVersion = []
-      if (devicesAndroid) devicesByOperatingSystemVersion.push({ x: 'Android', y: devicesAndroid })
-      if (devicesiOS) devicesByOperatingSystemVersion.push({ x: 'iOS', y: devicesiOS })
-      if (devicesWindows) devicesByOperatingSystemVersion.push({ x: 'Windows', y: devicesWindows })
+      if (devicesAndroid) devicesByOperatingSystemVersion.push({
+        x: 'Android',
+        y: devicesAndroid
+      })
+      if (devicesiOS) devicesByOperatingSystemVersion.push({
+        x: 'iOS',
+        y: devicesiOS
+      })
+      if (devicesWindows) devicesByOperatingSystemVersion.push({
+        x: 'Windows',
+        y: devicesWindows
+      })
       resolve(devicesByOperatingSystemVersion)
     } catch (error) {
       this.showError(error)
@@ -144,7 +177,7 @@ class Dashboard extends PureComponent {
         return ({
           name: device[`${itemtype.PluginFlyvemdmAgent}.name`],
           id: device[`${itemtype.PluginFlyvemdmAgent}.id`]
-        }) 
+        })
       })
       resolve(devicesByUsers)
     } catch (error) {
@@ -161,7 +194,7 @@ class Dashboard extends PureComponent {
    */
   getInvitations = () => new Promise(async (resolve, reject) => {
     try {
-      const invitations = await this.props.glpi.searchItems({ 
+      const invitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation
       })
       resolve(invitations.totalcount)
@@ -179,7 +212,7 @@ class Dashboard extends PureComponent {
    */
   getPendingInvitations = () => new Promise(async (resolve, reject) => {
     try {
-      const pendingInvitations = await this.props.glpi.searchItems({ 
+      const pendingInvitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
         criteria: [{
           field: 3,
@@ -203,7 +236,7 @@ class Dashboard extends PureComponent {
    */
   getFleets = () => new Promise(async (resolve, reject) => {
     try {
-      const fleets = await this.props.glpi.searchItems({ 
+      const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet
       })
       resolve(fleets.totalcount)
@@ -221,10 +254,10 @@ class Dashboard extends PureComponent {
    */
   getFiles = () => new Promise(async (resolve, reject) => {
     try {
-      const files = 
-      await this.props.glpi.searchItems({ 
-        itemtype: itemtype.PluginFlyvemdmFile
-      })
+      const files =
+        await this.props.glpi.searchItems({
+          itemtype: itemtype.PluginFlyvemdmFile
+        })
       resolve(files.totalcount)
     } catch (error) {
       this.showError(error)
@@ -240,7 +273,7 @@ class Dashboard extends PureComponent {
    */
   getApplications = () => new Promise(async (resolve, reject) => {
     try {
-      const applications = await this.props.glpi.searchItems({ 
+      const applications = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPackage
       })
       resolve(applications.totalcount)
@@ -258,7 +291,7 @@ class Dashboard extends PureComponent {
    */
   getUsers = () => new Promise(async (resolve, reject) => {
     try {
-      const users = await this.props.glpi.searchItems({ 
+      const users = await this.props.glpi.searchItems({
         itemtype: itemtype.User
       })
       resolve(users.totalcount)
@@ -267,7 +300,7 @@ class Dashboard extends PureComponent {
       reject(error)
     }
   })
-  
+
   /**
    * Validate if an invalid session exists
    * @function validateError
@@ -275,7 +308,11 @@ class Dashboard extends PureComponent {
    * @return {boolean}
    */
   validateError = error => {
-    return ((error && error.data && error.data[0] && (error.data[0][1] === 'session_token seems invalid')) ? false : true)
+    return (
+      (error && error.data && error.data[0] && (error.data[0][1] === 'session_token seems invalid')) ?
+        false
+        : true
+    )
   }
 
   /**
@@ -309,7 +346,7 @@ class Dashboard extends PureComponent {
           newState.filesUploaded = await this.getFiles()
         } catch (error) {
           isValid = this.validateError(error)
-        } 
+        }
       }
       if (isValid && this.state.display.fleetsCurrentlyManaged) {
         try {
@@ -338,8 +375,9 @@ class Dashboard extends PureComponent {
         } catch (error) {
           isValid = this.validateError(error)
         }
-      } 
-      if (isValid && (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion || this.state.display.devicesByUsers)) {
+      }
+      if (isValid && (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion ||
+          this.state.display.devicesByUsers)) {
         try {
           newState.devices = await this.getDevices()
         } catch (error) {
@@ -359,7 +397,7 @@ class Dashboard extends PureComponent {
         } catch (error) {
           isValid = this.validateError(error)
         }
-      } 
+      }
       if (this.state.display.devicesByUsers && newState.devices && newState.devices.totalcount > 0) {
         try {
           newState.devicesByUsers = await this.getDevicesByUsers(newState.devices)
@@ -367,7 +405,7 @@ class Dashboard extends PureComponent {
           isValid = this.validateError(error)
         }
       }
-      
+
       this.setState({
         applicationsUploaded: newState.applicationsUploaded,
         filesUploaded: newState.filesUploaded,
@@ -393,7 +431,7 @@ class Dashboard extends PureComponent {
    * @function renderInfoBox
    * @return {array}
    */
-  renderInfoBox () {
+  renderInfoBox() {
     let boxes = []
 
     if (this.state.devicesCurrentlyManaged) {
@@ -476,7 +514,7 @@ class Dashboard extends PureComponent {
    * @function renderGraphics
    * @return {array}
    */
-  renderGraphics () {
+  renderGraphics() {
     let graphics = []
 
     if (this.state.devicesByOperatingSystemVersion) {
@@ -495,7 +533,9 @@ class Dashboard extends PureComponent {
             data={this.state.devicesByOperatingSystemVersion}
             style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
           />
-          <span className="title-box">{I18n.t('commons.devices_by_plataform').toUpperCase()}</span>
+          <span className="title-box">
+            {I18n.t('commons.devices_by_plataform').toUpperCase()}
+          </span>
         </div>
       )
     }
@@ -504,21 +544,23 @@ class Dashboard extends PureComponent {
       graphics.push(
         <div key="InvitationsChart" className="info-box">
           <VictoryPie
-              colorScale={[
-                "#969696",
-                "#bdbdbd",
-                "#d9d9d9"
-              ]}
-              innerRadius={50}
-              padAngle={5}
-              labelRadius={90}
-              labels={(d) => `${d.x} ${d.y}`}
-              data={[
-                { x: I18n.t('commons.invitations'), y: this.state.pendingInvitations }
-              ]}
-              style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
+            colorScale={[
+              "#969696",
+              "#bdbdbd",
+              "#d9d9d9"
+            ]}
+            innerRadius={50}
+            padAngle={5}
+            labelRadius={90}
+            labels={(d) => `${d.x} ${d.y}`}
+            data={[
+              { x: I18n.t('commons.invitations'), y: this.state.pendingInvitations }
+            ]}
+            style={{ labels: { fill: "#000", fontSize: 24, fontWeight: 300 } }}
           />
-          <span className="title-box">{I18n.t('commons.pending_invitations').toUpperCase()}</span>
+          <span className="title-box">
+            {I18n.t('commons.pending_invitations').toUpperCase()}
+          </span>
         </div>
       )
     }
@@ -527,11 +569,11 @@ class Dashboard extends PureComponent {
       graphics.push(
         <div key="devicesByUsersChart" className="info-box navlinks">
           <ul>
-            { 
+            {
               this.state.devicesByUsers.map((device, id) => {
                 return (
                   <li key={`device${id}`}>
-                    <NavLink 
+                    <NavLink
                       exact
                       to={`${publicURL}/app/devices/${device.id}`}
                     >
@@ -539,54 +581,53 @@ class Dashboard extends PureComponent {
                     </NavLink>
                   </li>
                 )
-              }) 
+              })
             }
           </ul>
-          <span className="title-box">{I18n.t('commons.devices_by_users').toUpperCase()}</span>
+          <span className="title-box">
+            {I18n.t('commons.devices_by_users').toUpperCase()}
+          </span>
         </div>
       )
     }
-    
+
     return graphics
   }
 
-  /** 
-   * Render component 
+  /**
+   * Render component
    * @function render
-   */ 
+   */
   render() {
     const renderInfoBox = this.renderInfoBox()
     const renderGraphics = this.renderGraphics()
-    const renderComponent = this.state.isLoading ? <div style={{width: '100%', height: 'calc(100vh - 80px)'}}><Loading message={`${I18n.t('commons.loading')}...`} /></div>:
-    (
-      <ContentPane>
-        <div className="dashboard" ref={home => this.home = home}>
-
-        {
-          (renderInfoBox.length > 0 || renderGraphics.length > 0) ?
-            (
-              <div className="dashboard__wrapper">
-
-                  <div className="dashboard__infobox">
-
-                    {renderInfoBox}
-
-                  </div>
-
-                  <div className="dashboard__chart">
-
-                    {renderGraphics}
-
-                  </div> 
-
-              </div>
-            ) : <EmptyMessage message={I18n.t('commons.no_data')} />
-        }
-
+    const renderComponent = this.state.isLoading ?
+      (
+        <div style={{width: '100%', height: 'calc(100vh - 80px)'}}>
+          <Loading message={`${I18n.t('commons.loading')}...`} />
         </div>
-      </ContentPane>
-    )
+      )
+      : (
+          <ContentPane>
+            <div className="dashboard" ref={home => this.home = home}>
+              {
+                (renderInfoBox.length > 0 || renderGraphics.length > 0) ?
+                  (
+                    <div className="dashboard__wrapper">
+                      <div className="dashboard__infobox">
+                        {renderInfoBox}
+                      </div>
 
+                      <div className="dashboard__chart">
+                        {renderGraphics}
+                      </div>
+                    </div>
+                  )
+                  : <EmptyMessage message={I18n.t('commons.no_data')} />
+              }
+            </div>
+          </ContentPane>
+        )
     return renderComponent
   }
 }
