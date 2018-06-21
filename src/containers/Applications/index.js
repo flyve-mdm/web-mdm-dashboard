@@ -97,7 +97,7 @@ class Applications extends PureComponent {
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.history.location.pathname === `${publicURL}/app/applications` && prevState.selectedItems.length > 0) {
+        if (nextProps.history.location.pathname === `${publicURL}/app/applications` && prevState.selectedItems.length > 0 && prevState.selectionMode === false) {
             return {
                 ...prevState,
                 selectedItems: []
