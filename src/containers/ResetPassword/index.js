@@ -93,60 +93,63 @@ class ResetPassword extends PureComponent {
      * @return {component}
      */
     createRenderElament = () => {
-        let element 
+        let element
         if (!this.state.isResetSent) {
             const reset = this.buildDataArray()
             element = (
-                <React.Fragment>
-                    <div style={{ textAlign: 'left' }}>
-                    <ConstructInputs data={reset.resetInformation} />
+              <React.Fragment>
+                <div style={{ textAlign: 'left' }}>
+                  <ConstructInputs data={reset.resetInformation} />
                 </div>
                 <div style={{ textAlign: 'center' }}>
-                    <button className='btn btn--primary' style={{ margin: "20px" }} onClick={this.handleResetPassword}>
-                        {I18n.t('login.reset_password')}
-                    </button>
+                  <button
+                    className='btn btn--primary'
+                    style={{ margin: "20px" }}
+                    onClick={this.handleResetPassword}
+                  >
+                    {I18n.t('login.reset_password')}
+                  </button>
                 </div>
-                </React.Fragment>
-            ) 
+              </React.Fragment>
+            )
         } else {
             element = (
-                <div>
-                    <p>
-                        {I18n.t('forgot_password.reset_your_password')}
-                    </p>
-                    <button
-                        className="win-button"
-                        type="button"
-                        onClick={() => this.props.history.push(`${publicURL}/`)}
-                    >
-                        {I18n.t('forgot_password.go_home')}
-                    </button>
-                </div>
+              <div>
+                <p>
+                  {I18n.t('forgot_password.reset_your_password')}
+                </p>
+                <button
+                  className="win-button"
+                  type="button"
+                  onClick={() => this.props.history.push(`${publicURL}/`)}
+                >
+                  {I18n.t('forgot_password.go_home')}
+                </button>
+              </div>
             )
         }
         return element
     }
 
-    /** 
-     * Render component 
+    /**
+     * Render component
      * @function render
-     */ 
+     */
     render() {
         if (this.props.isLoading) {
             return (
-                <div style={{ height: '140px' }}>
-                    <Loading message={`${I18n.t('commons.sending')}...`} />
-                </div>
+              <div style={{ height: '140px' }}>
+                <Loading message={`${I18n.t('commons.sending')}...`} />
+              </div>
             )
         } else {
             return (
-                <React.Fragment>
-                    <h2 style={{ textAlign: 'center' }}>
-                        {I18n.t('login.reset_password')}
-                    </h2>
-
-                    {this.createRenderElament()}
-                </React.Fragment>
+              <React.Fragment>
+                <h2 style={{ textAlign: 'center' }}>
+                  {I18n.t('login.reset_password')}
+                </h2>
+                {this.createRenderElament()}
+              </React.Fragment>
             )
         }
     }
