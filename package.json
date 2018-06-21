@@ -11,6 +11,7 @@
     "@microsoft/fast-animation": "^0.0.12-beta.0",
     "bugsnag-js": "^4.6.3",
     "bugsnag-react": "^1.1.1",
+    "clang-format": "^1.2.3",
     "file-loader": "1.1.11",
     "fs-extra": "6.0.0",
     "history": "^4.7.2",

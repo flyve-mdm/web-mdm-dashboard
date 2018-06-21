@@ -105,19 +105,6 @@ class Files extends PureComponent {
     window.removeEventListener('resize', this.handleResize)
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.history.location.pathname === `${publicURL}/app/files` && prevState.selectedItems.length > 0 && prevState.selectionMode === false) {
-      return {
-        ...prevState,
-        selectedItems: []
-      }
-    } else {
-      return {
-        ...prevState
-      }
-    }
-  }
-
   /**
    * Build props
    * @function propsData

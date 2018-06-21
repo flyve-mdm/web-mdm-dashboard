@@ -42,7 +42,6 @@ exports[`Loading renders small loading 1`] = `
   style={Object {}}
 >
   <div>
-     
     <div
       className="loader"
     >
@@ -62,7 +61,6 @@ exports[`Loading renders small loading 1`] = `
         className="circle"
       />
     </div>
-     
   </div>
 </div>
 `;

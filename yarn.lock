@@ -2067,6 +2067,14 @@ circular-json@^0.3.1:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.3.tgz#815c99ea84f6809529d2f45791bdf82711352d66"
 
+clang-format@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/clang-format/-/clang-format-1.2.3.tgz#2763561aa7449c43737480f8df3a2b5b66e6cf37"
+  dependencies:
+    async "^1.5.2"
+    glob "^7.0.0"
+    resolve "^1.1.6"
+
 clap@^1.0.9:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/clap/-/clap-1.2.3.tgz#4f36745b32008492557f46412d66d50cb99bce51"
@@ -7081,8 +7089,8 @@ nan@^2.10.0, nan@^2.9.2:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
 nanoid@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-1.0.3.tgz#3ff31779301f481baa52a6a31a67c8f6e91949d2"
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-1.0.4.tgz#29ffb9a4fcbb671fca98da5e14e5c5e21ba76cd4"
 
 nanomatch@^1.2.9:
   version "1.2.9"
@@ -10320,8 +10328,8 @@ trough@^1.0.0:
     glob "^6.0.4"
 
 tslib@^1.9.0:
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.2.tgz#8be0cc9a1f6dc7727c38deb16c2ebd1a2892988e"
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
 tty-browserify@0.0.0:
   version "0.0.0"
@@ -10710,7 +10718,7 @@ vfile@^2.0.0:
     unist-util-stringify-position "^1.0.0"
     vfile-message "^1.0.0"
 
-victory-chart@^27.0.0:
+victory-chart@^27.1.0:
   version "27.1.0"
   resolved "https://registry.yarnpkg.com/victory-chart/-/victory-chart-27.1.0.tgz#05026852b08ae96ef74c674da31e4a44d0c60cf6"
   dependencies:
@@ -10719,21 +10727,9 @@ victory-chart@^27.0.0:
     react-fast-compare "^2.0.0"
     victory-core "^24.0.0"
 
-victory-core@^23.0.2:
-  version "23.0.7"
-  resolved "https://registry.yarnpkg.com/victory-core/-/victory-core-23.0.7.tgz#1075e1b9f2660db03753fc9c79c00c62c6a24644"
-  dependencies:
-    d3-ease "^1.0.0"
-    d3-interpolate "^1.1.1"
-    d3-scale "^1.0.0"
-    d3-shape "^1.2.0"
-    d3-timer "^1.0.0"
-    lodash "^4.17.5"
-    react-fast-compare "^2.0.0"
-
 victory-core@^24.0.0:
-  version "24.0.0"
-  resolved "https://registry.yarnpkg.com/victory-core/-/victory-core-24.0.0.tgz#ceabf7e1552e5b07aef9d0cce49c137f8f0c12af"
+  version "24.0.1"
+  resolved "https://registry.yarnpkg.com/victory-core/-/victory-core-24.0.1.tgz#a0b377821fe62be8dfcb0d7c35a628fee4e16616"
   dependencies:
     d3-ease "^1.0.0"
     d3-interpolate "^1.1.1"
@@ -10743,21 +10739,21 @@ victory-core@^24.0.0:
     lodash "^4.17.5"
     react-fast-compare "^2.0.0"
 
-victory-pie@^16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/victory-pie/-/victory-pie-16.0.0.tgz#e3cbd36cd2059f094d6b1689b61c920cf70f50db"
+victory-pie@^16.0.1:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/victory-pie/-/victory-pie-16.0.1.tgz#616ba361968b618dc59d270f1bf899368552c7f4"
   dependencies:
     d3-shape "^1.0.0"
     lodash "^4.17.5"
-    victory-core "^23.0.2"
+    victory-core "^24.0.0"
 
 victory@^0.27.0:
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/victory/-/victory-0.27.0.tgz#4e17f50ecfedf87f5036884ac7818d64f3dc8bfe"
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/victory/-/victory-0.27.1.tgz#9654f6cb260f3ab3030090668db2e02790bf2b86"
   dependencies:
-    victory-chart "^27.0.0"
-    victory-core "^23.0.2"
-    victory-pie "^16.0.0"
+    victory-chart "^27.1.0"
+    victory-core "^24.0.0"
+    victory-pie "^16.0.1"
 
 viewport-dimensions@^0.2.0:
   version "0.2.0"

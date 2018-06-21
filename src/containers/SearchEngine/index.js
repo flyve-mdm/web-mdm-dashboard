@@ -30,6 +30,7 @@
 import React, {
   PureComponent
 } from 'react'
+import PropTypes from 'prop-types'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import {

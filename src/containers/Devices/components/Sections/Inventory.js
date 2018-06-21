@@ -101,13 +101,8 @@ export default class Inventory extends PureComponent {
   render() {
     if (this.state.isLoading && !this.state.data) {
       return (
-        <div key={index} className="list-content">
-          <div className="list-col">
-            {element}
-          </div>
-          <div className="list-col">
-            {value[element]}
-          </div>
+        <div style={{padding:'20px'}}>
+          <Loader type="content"/>
         </div>
       )
     } else if (!this.state.isLoading && this.state.data) {
