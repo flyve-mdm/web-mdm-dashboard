@@ -114,7 +114,12 @@ layout: coverage
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -169,88 +174,98 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 &nbsp;
 <span class="cstat-no" title="statement not covered" >import React from 'react'</span>
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 <span class="cstat-no" title="statement not covered" >import listRender from './listRender'</span>
 &nbsp;
-/** 
+/**
  * Component with the leader of content
  * @function Loader
  * @param {object} props
  * @return {component}
  */
 const Loader = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >props =&gt; </span>{</span>
-    
-    /** Create the array of loaders */
-    let content = <span class="cstat-no" title="statement not covered" >[]</span>
-<span class="cstat-no" title="statement not covered" >    for (let index = 0; index &lt; props.count; index++) {</span>
-<span class="cstat-no" title="statement not covered" >        content = [</span>
-            ...content,
-            listRender({
-                props: props,
-                index: index
-            })
-        ]
-    }
-        
-<span class="cstat-no" title="statement not covered" >    return ( &lt;div&gt;{content}&lt;/div&gt; )</span>
+&nbsp;
+  /** Create the array of loaders */
+  let content = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >  for (let index = 0; index &lt; props.count; index++) {</span>
+<span class="cstat-no" title="statement not covered" >    content = [</span>
+      ...content,
+      listRender({
+        props: props,
+        index: index
+      })
+    ]
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    &lt;div&gt;
+      {content}
+    &lt;/div&gt;
+  )
 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >Loader.propTypes = {</span>
-    count: PropTypes.number,
-    type: PropTypes.oneOf(["list", "content"])
+  count: PropTypes.number,
+  type: PropTypes.oneOf(["list", "content"])
 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >Loader.defaultProps = {</span>
-    count: 1,
-    type: "list"
+  count: 1,
+  type: "list"
 }
 &nbsp;
-export default Loader</pre></td></tr>
+export default Loader
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jun 20 2018 05:58:59 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 22 2018 17:15:14 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

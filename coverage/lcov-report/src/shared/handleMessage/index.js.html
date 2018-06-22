@@ -118,7 +118,21 @@ layout: coverage
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -181,88 +195,98 @@ layout: coverage
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 &nbsp;
 /** @module handleMessage */
 &nbsp;
 /** import dependencies */
-import { I18n } from "react-i18nify"
+import {
+  I18n
+} from "react-i18nify"
 import logout from '../logout'
 &nbsp;
-/** 
+/**
  * Add format to error message
  * @param {string} type of message
  * @param {string} message content
  * @param {string} title of message
  * @returns {string} Get error message
  */
-export default ({type='info', message, title}) =&gt; {
-    let response = {
-        type: type,
-        title: (title || I18n.t(`commons.${(type !== 'alert') ? type : 'error'}`)),
-        body: message ? (typeof message === 'string' || message instanceof String) ? message : message.statusText : <span class="branch-1 cbranch-no" title="branch not covered" >''</span>
-    }
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (message) {
-        switch (true) {
-            case (message.status === 0):
-                response.body = I18n.t('notifications.no_internet_connection')
-                break
-            case (message.status === 401):
-                response.body = message.data[0][1] !== '' ? message.data[0][1] : <span class="branch-1 cbranch-no" title="branch not covered" >message.statusText</span>
-                <span class="missing-if-branch" title="else path not taken" >E</span>if (message.data[0][1] === 'session_token seems invalid') {
-                    logout()
-                }
-                break
-            case (message.status === 404):
-                response.body = message.data[0][1] !== '' ? <span class="branch-0 cbranch-no" title="branch not covered" >message.data[0][1] </span>: message.statusText
-                break
-            case (message.status &gt;= 400 &amp;&amp; message.status &lt; 500 &amp;&amp; message.status !== 401):
-                response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? <span class="branch-0 cbranch-no" title="branch not covered" >message.data[1][0].message </span>: message.data[0][1] : <span class="branch-1 cbranch-no" title="branch not covered" >message.statusText</span>
-                break
-            default:
-                break
+export default ({
+  type = 'info',
+  message,
+  title
+}) =&gt; {
+  let response = {
+    type: type,
+    title: (title || I18n.t(`commons.${(type !== 'alert') ? type : 'error'}`)),
+    body: message ? (typeof message === 'string' || message instanceof String) ? message : message.statusText : <span class="branch-1 cbranch-no" title="branch not covered" >''</span>
+  }
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (message) {
+    switch (true) {
+      case (message.status === 0):
+        response.body = I18n.t('notifications.no_internet_connection')
+        break
+      case (message.status === 401):
+        response.body = message.data[0][1] !== '' ? message.data[0][1] : <span class="branch-1 cbranch-no" title="branch not covered" >message.statusText</span>
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (message.data[0][1] === 'session_token seems invalid') {
+          logout()
         }
+        break
+      case (message.status === 404):
+        response.body = message.data[0][1] !== '' ? <span class="branch-0 cbranch-no" title="branch not covered" >message.data[0][1] </span>: message.statusText
+        break
+      case (message.status &gt;= 400 &amp;&amp; message.status &lt; 500 &amp;&amp; message.status !== 401):
+        response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? <span class="branch-0 cbranch-no" title="branch not covered" >message.data[1][0].message </span>:
+          message.data[0][1] : <span class="branch-1 cbranch-no" title="branch not covered" >message.statusText</span>
+        break
+      default:
+        break
     }
-    return response
-}</pre></td></tr>
+  }
+  return response
+}
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jun 20 2018 05:58:59 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 22 2018 17:15:14 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

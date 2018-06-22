@@ -104,7 +104,10 @@ layout: coverage
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,14 +136,9 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,75 +150,86 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import React, { PureComponent } from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import React, {</span>
+  PureComponent
+} from 'react'
 <span class="cstat-no" title="statement not covered" >import handleMessage from '../../shared/handleMessage'</span>
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 &nbsp;
 /**
  * Wrapper component to pass to the props the 'handleMessage' function
- * @param {component} WrappedComponent Component to wrap 
+ * @param {component} WrappedComponent Component to wrap
  * @return {component} The component with the message function
  */
 const withHandleMessages = (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >WrappedComponent) =&gt; {</span></span>
-    class HandleMessages extends PureComponent {
-        /** 
-         * Render component 
-         * @function render
-         */
-<span class="fstat-no" title="function not covered" >        render() </span>{
-<span class="cstat-no" title="statement not covered" >            return &lt;WrappedComponent handleMessage={handleMessage} {...this.props} /&gt;</span>
-        }
+  class HandleMessages extends PureComponent {
+    /**
+     * Render component
+     * @function render
+     */
+<span class="fstat-no" title="function not covered" >    render() </span>{
+<span class="cstat-no" title="statement not covered" >      return &lt;WrappedComponent handleMessage={handleMessage} {...this.props} /&gt;</span>
     }
+  }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    HandleMessages.propTypes = {</span>
-        history: PropTypes.object.isRequired
-    }
+<span class="cstat-no" title="statement not covered" >  HandleMessages.propTypes = {</span>
+    history: PropTypes.object.isRequired
+  }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return HandleMessages</span>
+<span class="cstat-no" title="statement not covered" >  return HandleMessages</span>
 }
 &nbsp;
-export default withHandleMessages</pre></td></tr>
+export default withHandleMessages
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jun 20 2018 05:58:59 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 22 2018 17:15:14 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

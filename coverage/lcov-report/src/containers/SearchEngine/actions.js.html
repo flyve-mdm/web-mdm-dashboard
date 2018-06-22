@@ -210,7 +210,9 @@ layout: coverage
 <a name='L159'></a><a href='#L159'>159</a>
 <a name='L160'></a><a href='#L160'>160</a>
 <a name='L161'></a><a href='#L161'>161</a>
-<a name='L162'></a><a href='#L162'>162</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L162'></a><a href='#L162'>162</a>
+<a name='L163'></a><a href='#L163'>163</a>
+<a name='L164'></a><a href='#L164'>164</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -320,21 +322,13 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -343,6 +337,15 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -368,77 +371,78 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 &nbsp;
 /**
  * Set state for render field in the QueryBuilder component
  * @function setFields
- * @param {object} ctx 
+ * @param {object} ctx
  */
 const setFields = (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >ctx) =&gt; {</span></span>
-    const fields = <span class="cstat-no" title="statement not covered" >[]</span>
-    const listSearchOptions = <span class="cstat-no" title="statement not covered" >ctx.state.listSearchOptions</span>
+  const fields = <span class="cstat-no" title="statement not covered" >[]</span>
+  const listSearchOptions = <span class="cstat-no" title="statement not covered" >ctx.state.listSearchOptions</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    for (var key in listSearchOptions) {</span>
-<span class="cstat-no" title="statement not covered" >        if (listSearchOptions.hasOwnProperty(key)) {</span>
-<span class="cstat-no" title="statement not covered" >            if (listSearchOptions[key]['name'] !== undefined &amp;&amp;</span>
-                listSearchOptions[key]['field'] !== undefined) {
+<span class="cstat-no" title="statement not covered" >  for (var key in listSearchOptions) {</span>
+<span class="cstat-no" title="statement not covered" >    if (listSearchOptions.hasOwnProperty(key)) {</span>
+<span class="cstat-no" title="statement not covered" >      if (listSearchOptions[key]['name'] !== undefined &amp;&amp;</span>
+        listSearchOptions[key]['field'] !== undefined) {
 &nbsp;
-                let name = <span class="cstat-no" title="statement not covered" >listSearchOptions[key]['name']</span>
-<span class="cstat-no" title="statement not covered" >                fields.push({</span>
-                    'name': key,
-                    'label': name
-                })
+        let name = <span class="cstat-no" title="statement not covered" >listSearchOptions[key]['name']</span>
+<span class="cstat-no" title="statement not covered" >        fields.push({</span>
+          'name': key,
+          'label': name
+        })
 &nbsp;
-            }
-        }
+      }
     }
-<span class="cstat-no" title="statement not covered" >    ctx.setState({</span>
-        fields: fields
-    })
+  }
+<span class="cstat-no" title="statement not covered" >  ctx.setState({</span>
+    fields: fields
+  })
 }
 &nbsp;
 /**
  * Normalize keys of rule object
- * @param {object} ctx 
- * @param {object} rule 
+ * @param {object} ctx
+ * @param {object} rule
  * @return {object}
  */
 const normalizeRule = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(c</span>tx, rule) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    return { </span>
-        field: Number(rule['field']), 
-        searchtype: rule['operator'], 
-        value: rule['value']
-    }
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    field: Number(rule['field']),
+    searchtype: rule['operator'],
+    value: rule['value']
+  }
 }
 &nbsp;
 /**
@@ -452,42 +456,43 @@ const normalizeRule = <span class="cstat-no" title="statement not covered" ><spa
  */
 const recursiveExtractQueryRules = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(q</span>uery, ctx, arrayRulesExtracted, combinator) =&gt; {</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (typeof (query.rules) === undefined || typeof (query.field) === "string") {</span>
-        /*
-         * It means that it is a rule, and it has operator, value and field
-         */
-<span class="cstat-no" title="statement not covered" >        arrayRulesExtracted.push({</span>
-            link: combinator, // 'AND' or 'OR'
-            ...normalizeRule(ctx, query)
-        })
-    } else {
-        /*
-         * It means that it is a group and you have rules and combinator
-         */
-<span class="cstat-no" title="statement not covered" >        query.rules.forEach((<span class="fstat-no" title="function not covered" >rule) =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >            recursiveExtractQueryRules(rule, ctx, arrayRulesExtracted, query.combinator)</span>
-        })
-    }
+<span class="cstat-no" title="statement not covered" >  if (typeof (query.rules) === undefined || typeof (query.field) === "string") {</span>
+    /*
+     * It means that it is a rule, and it has operator, value and field
+     */
+<span class="cstat-no" title="statement not covered" >    arrayRulesExtracted.push({</span>
+      link: combinator, // 'AND' or 'OR'
+      ...normalizeRule(ctx, query)
+    })
+  } else {
+    /*
+     * It means that it is a group and you have rules and combinator
+     */
+<span class="cstat-no" title="statement not covered" >    query.rules.forEach((<span class="fstat-no" title="function not covered" >rule) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >      recursiveExtractQueryRules(rule, ctx, arrayRulesExtracted, query.combinator)</span>
+    })
+  }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return arrayRulesExtracted</span>
+<span class="cstat-no" title="statement not covered" >  return arrayRulesExtracted</span>
 }
 &nbsp;
 /**
  * Process query create by QueryBuilde.
  * And normalize for correct format to GLPI REST API URI
  * @function normalizeQuery
- * @param {object} ctx 
+ * @param {object} ctx
  * @return {array}
  */
 const normalizeQuery = (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >ctx) =&gt; {</span></span>
-    const <span class="cstat-no" title="statement not covered" >query = { ...ctx.state.query }</span>
-    const arrayRules = <span class="cstat-no" title="statement not covered" >[]</span>
+  const <span class="cstat-no" title="statement not covered" >query = { ...ctx.state.query</span>
+  }
+  const arrayRules = <span class="cstat-no" title="statement not covered" >[]</span>
 &nbsp;
-    const arrayRulesExtracted = <span class="cstat-no" title="statement not covered" >recursiveExtractQueryRules(</span>
-        query, ctx, arrayRules, query.combinator
-    )
+  const arrayRulesExtracted = <span class="cstat-no" title="statement not covered" >recursiveExtractQueryRules(</span>
+    query, ctx, arrayRules, query.combinator
+  )
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return arrayRulesExtracted</span>
+<span class="cstat-no" title="statement not covered" >  return arrayRulesExtracted</span>
 }
 &nbsp;
 /**
@@ -496,49 +501,50 @@ const normalizeQuery = (<span class="cstat-no" title="statement not covered" ><s
  * @return {object}
  */
 const getTranslation = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; </span>{</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
-        fields: {
-            title: "Fields"
-        },
-        operators: {
-            title: "Operators"
-        },
-        value: {
-            title: "Value"
-        },
-        removeRule: {
-            label: "x",
-            title: "Remove rule"
-        },
-        removeGroup: {
-            label: "x",
-            title: "Remove group"
-        },
-        addRule: {
-            label: "+Rule",
-            title: "Add rule"
-        },
-        addGroup: {
-            label: "+Group",
-            title: "Add group"
-        },
-        combinators: {
-            title: "Combinators"
-        }
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    fields: {
+      title: "Fields"
+    },
+    operators: {
+      title: "Operators"
+    },
+    value: {
+      title: "Value"
+    },
+    removeRule: {
+      label: "x",
+      title: "Remove rule"
+    },
+    removeGroup: {
+      label: "x",
+      title: "Remove group"
+    },
+    addRule: {
+      label: "+Rule",
+      title: "Add rule"
+    },
+    addGroup: {
+      label: "+Group",
+      title: "Add group"
+    },
+    combinators: {
+      title: "Combinators"
     }
+  }
 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >module.exports = {</span>
-    setFields,
-    getTranslation,
-    normalizeQuery
-}</pre></td></tr>
+  setFields,
+  getTranslation,
+  normalizeQuery
+}
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jun 20 2018 05:58:59 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 22 2018 17:15:14 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

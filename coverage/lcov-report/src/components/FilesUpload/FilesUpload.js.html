@@ -407,7 +407,19 @@ layout: coverage
 <a name='L356'></a><a href='#L356'>356</a>
 <a name='L357'></a><a href='#L357'>357</a>
 <a name='L358'></a><a href='#L358'>358</a>
-<a name='L359'></a><a href='#L359'>359</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L359'></a><a href='#L359'>359</a>
+<a name='L360'></a><a href='#L360'>360</a>
+<a name='L361'></a><a href='#L361'>361</a>
+<a name='L362'></a><a href='#L362'>362</a>
+<a name='L363'></a><a href='#L363'>363</a>
+<a name='L364'></a><a href='#L364'>364</a>
+<a name='L365'></a><a href='#L365'>365</a>
+<a name='L366'></a><a href='#L366'>366</a>
+<a name='L367'></a><a href='#L367'>367</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -464,6 +476,8 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -692,6 +706,8 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -766,362 +782,370 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 &nbsp;
-import React, { PureComponent } from 'react'
+import React, {
+  PureComponent
+} from 'react'
 import PropTypes from 'prop-types'
 import bytesToSize from '../../shared/bytesToSize'
-import { I18n } from "react-i18nify"
+import {
+  I18n
+} from "react-i18nify"
 &nbsp;
-/** 
- * Component used to upload files 
+/**
+ * Component used to upload files
  * @class FilesUpload
  * @extends PureComponent
  */
 export default class FilesUpload extends PureComponent {
-    /** @constructor */ 
-    constructor(props) {
-        super(props)
-        this.onDrop = this.onDrop.bind(this)
-        this.onDragEnter = this.onDragEnter.bind(this)
-        this.onDragLeave = this.onDragLeave.bind(this)
-        this.openFileChooser = this.openFileChooser.bind(this)
+  /** @constructor */
+  constructor(props) {
+    super(props)
+    this.onDrop = this.onDrop.bind(this)
+    this.onDragEnter = this.onDragEnter.bind(this)
+    this.onDragLeave = this.onDragLeave.bind(this)
+    this.openFileChooser = this.openFileChooser.bind(this)
 &nbsp;
-        this.id = 1
-        this.state = { files: [] }
+    this.id = 1
+    this.state = {
+      files: []
+    }
+  }
+&nbsp;
+  /**
+   * change the native behavior of the browser to add files to a list in the state
+   * @function onDrop
+   * @param {object} event
+   */
+<span class="fstat-no" title="function not covered" >  on</span>Drop(event) {
+<span class="cstat-no" title="statement not covered" >    event.preventDefault()</span>
+<span class="cstat-no" title="statement not covered" >    this.onDragLeave(event)</span>
+&nbsp;
+    /** Collect added files, perform checking, cast pseudo-array to Array,
+     * then return to method
+     */
+    let filesAdded = <span class="cstat-no" title="statement not covered" >event.dataTransfer ? event.dataTransfer.files : event.target.files</span>
+&nbsp;
+    /** Multiple files dropped when not allowed */
+<span class="cstat-no" title="statement not covered" >    if (this.props.multiple === false &amp;&amp; filesAdded.length &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >      filesAdded = [filesAdded[0]]</span>
     }
 &nbsp;
-    /** 
-     * change the native behavior of the browser to add files to a list in the state
-     * @function onDrop
-     * @param {object} event
-     */
-<span class="fstat-no" title="function not covered" >    on</span>Drop(event) {
-<span class="cstat-no" title="statement not covered" >        event.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >        this.onDragLeave(event)</span>
+    let files = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; filesAdded.length; i++) {</span>
+      let file = <span class="cstat-no" title="statement not covered" >filesAdded[i]</span>
 &nbsp;
-        /** Collect added files, perform checking, cast pseudo-array to Array,
-         * then return to method
-         */
-        let filesAdded = <span class="cstat-no" title="statement not covered" >event.dataTransfer ? event.dataTransfer.files : event.target.files</span>
+      /** Assign file an id */
+<span class="cstat-no" title="statement not covered" >      file.id = 'files-' + this.id++</span>
+        /** Tell file it's own extension */
+<span class="cstat-no" title="statement not covered" >        file.extension = this.fileExtension(file)</span>
+      /** Tell file it's own size */
+<span class="cstat-no" title="statement not covered" >      file.filesize = file.size</span>
+      /** Tell file it's own readable size */
+<span class="cstat-no" title="statement not covered" >      file.sizeReadable = bytesToSize(file.size)</span>
+      /** Add preview, either image or file extension */
 &nbsp;
-        /** Multiple files dropped when not allowed */
-<span class="cstat-no" title="statement not covered" >        if (this.props.multiple === false &amp;&amp; filesAdded.length &gt; 1) {</span>
-<span class="cstat-no" title="statement not covered" >            filesAdded = [filesAdded[0]]</span>
+<span class="cstat-no" title="statement not covered" >      if (file.type &amp;&amp; this.mimeTypeLeft(file.type) === 'image') {</span>
+<span class="cstat-no" title="statement not covered" >        file.preview = {</span>
+          type: 'image',
+          url: window.URL.createObjectURL(file)
         }
+      } else {
+<span class="cstat-no" title="statement not covered" >        file.preview = {</span>
+          type: 'file'
+        }
+      }
 &nbsp;
-        let files = <span class="cstat-no" title="statement not covered" >[]</span>
-<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; filesAdded.length; i++) {</span>
-            let file = <span class="cstat-no" title="statement not covered" >filesAdded[i]</span>
+      /** Check for file max limit */
+<span class="cstat-no" title="statement not covered" >      if (this.state.files.length + files.length &gt;= this.props.maxFiles) {</span>
+<span class="cstat-no" title="statement not covered" >        this.onError({</span>
+          code: 4,
+          message: I18n.t('files_upload.maximum_count')
+        }, file)
+<span class="cstat-no" title="statement not covered" >        break</span>
+      }
 &nbsp;
-            /** Assign file an id */
-<span class="cstat-no" title="statement not covered" >            file.id = 'files-' + this.id++</span>
-            /** Tell file it's own extension */
-<span class="cstat-no" title="statement not covered" >            file.extension = this.fileExtension(file)</span>
-            /** Tell file it's own size */
-<span class="cstat-no" title="statement not covered" >            file.filesize = file.size</span>
-            /** Tell file it's own readable size */
-<span class="cstat-no" title="statement not covered" >            file.sizeReadable = bytesToSize(file.size)</span>
-            /** Add preview, either image or file extension */
+      /** If file is acceptable, push or replace */
+<span class="cstat-no" title="statement not covered" >      if (this.fileTypeAcceptable(file) &amp;&amp; this.fileSizeAcceptable(file)) {</span>
+<span class="cstat-no" title="statement not covered" >        files.push(file)</span>
+      }
+    }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            if (file.type &amp;&amp; this.mimeTypeLeft(file.type) === 'image') {</span>
-<span class="cstat-no" title="statement not covered" >                file.preview = {</span>
-                    type: 'image',
-                    url: window.URL.createObjectURL(file)
-                }
-            } else {
-<span class="cstat-no" title="statement not covered" >                file.preview = {</span>
-                    type: 'file'
-                }
+<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+      files: this.props.multiple === false ? files : [...this.state.files, ...files]
+    }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >      this.props.onChange.call(this, this.state.files)</span>
+    })
+  }
+&nbsp;
+  /**
+   * Change the native behavior of the browser by 'stopPropagation'
+   * @function onDragOver
+   * @param {*} event
+   */
+<span class="fstat-no" title="function not covered" >  on</span>DragOver(event) {
+<span class="cstat-no" title="statement not covered" >    event.preventDefault()</span>
+<span class="cstat-no" title="statement not covered" >    event.stopPropagation()</span>
+  }
+&nbsp;
+  /**
+   * Change the styles of the Dropbox when the file enters it
+   * @function onDragEnter
+   */
+<span class="fstat-no" title="function not covered" >  on</span>DragEnter() {
+    let el = <span class="cstat-no" title="statement not covered" >this.dropzone</span>
+<span class="cstat-no" title="statement not covered" >    el.className += ' ' + this.props.dropActiveClassName</span>
+  }
+&nbsp;
+  /**
+   * Change the styles of the Dropbox when the file leaves it
+   * @function onDragLeave
+   */
+<span class="fstat-no" title="function not covered" >  on</span>DragLeave() {
+    let el = <span class="cstat-no" title="statement not covered" >this.dropzone</span>
+<span class="cstat-no" title="statement not covered" >    this.dropzone.className = el.className.replace(' ' + this.props.dropActiveClassName, '')</span>
+  }
+&nbsp;
+  /**
+   * Open the windows to select the files
+   * @function openFileChooser
+   */
+<span class="fstat-no" title="function not covered" >  op</span>enFileChooser() {
+<span class="cstat-no" title="statement not covered" >    this.inputElement.value = null</span>
+<span class="cstat-no" title="statement not covered" >    this.inputElement.click()</span>
+  }
+&nbsp;
+  /**
+   * Validate the type of the file
+   * @function fileTypeAcceptable
+   * @param {object} file
+   */
+<span class="fstat-no" title="function not covered" >  fi</span>leTypeAcceptable(file) {
+    let accepts = <span class="cstat-no" title="statement not covered" >this.props.accepts</span>
+<span class="cstat-no" title="statement not covered" >    if (accepts) {</span>
+<span class="cstat-no" title="statement not covered" >      if (file.type) {</span>
+        let typeLeft = <span class="cstat-no" title="statement not covered" >this.mimeTypeLeft(file.type)</span>
+        let typeRight = <span class="cstat-no" title="statement not covered" >this.mimeTypeRight(file.type)</span>
+<span class="cstat-no" title="statement not covered" >        for (let i = 0; i &lt; accepts.length; i++) {</span>
+          let accept = <span class="cstat-no" title="statement not covered" >accepts[i]</span>
+          let acceptLeft = <span class="cstat-no" title="statement not covered" >accept.split('/')[0]</span>
+          let acceptRight = <span class="cstat-no" title="statement not covered" >accept.split('/')[1]</span>
+<span class="cstat-no" title="statement not covered" >          if (acceptLeft &amp;&amp; acceptRight) {</span>
+<span class="cstat-no" title="statement not covered" >            if (acceptLeft === typeLeft &amp;&amp; acceptRight === '*') {</span>
+<span class="cstat-no" title="statement not covered" >              return true</span>
             }
-&nbsp;
-            /** Check for file max limit */
-<span class="cstat-no" title="statement not covered" >            if (this.state.files.length + files.length &gt;= this.props.maxFiles) {</span>
-<span class="cstat-no" title="statement not covered" >                this.onError({</span>
-                    code: 4,
-                    message: I18n.t('files_upload.maximum_count')
-                }, file)
-<span class="cstat-no" title="statement not covered" >                break</span>
+<span class="cstat-no" title="statement not covered" >            if (acceptLeft === typeLeft &amp;&amp; acceptRight === typeRight) {</span>
+<span class="cstat-no" title="statement not covered" >              return true</span>
             }
-&nbsp;
-            /** If file is acceptable, push or replace */
-<span class="cstat-no" title="statement not covered" >            if (this.fileTypeAcceptable(file) &amp;&amp; this.fileSizeAcceptable(file)) {</span>
-<span class="cstat-no" title="statement not covered" >                files.push(file)</span>
-            }
+          }
         }
+      }
+<span class="cstat-no" title="statement not covered" >      this.onError({</span>
+        code: 1,
+        message: `${file.name} ${I18n.t('files_upload.invalid_type')}`
+      }, file)
+<span class="cstat-no" title="statement not covered" >      return false</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      return true</span>
+    }
+  }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        this.setState({</span>
-            files: this.props.multiple === false ? files : [...this.state.files, ...files]
-        }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >            this.props.onChange.call(this, this.state.files)</span>
-        })
+  /**
+   * Validate the size of the file
+   * @function fileSizeAcceptable
+   * @param {object} file
+   */
+<span class="fstat-no" title="function not covered" >  fi</span>leSizeAcceptable(file) {
+<span class="cstat-no" title="statement not covered" >    if (file.size &gt; this.props.maxFileSize) {</span>
+<span class="cstat-no" title="statement not covered" >      this.onError({</span>
+        code: 2,
+        message: `${file.name} ${I18n.t('files_upload.too_large')}`
+      }, file)
+<span class="cstat-no" title="statement not covered" >      return false</span>
+    } else <span class="cstat-no" title="statement not covered" >if (file.size &lt; this.props.minFileSize) {</span>
+<span class="cstat-no" title="statement not covered" >      this.onError({</span>
+        code: 3,
+        message: `${file.name} ${I18n.t('files_upload.too_small')}`
+      }, file)
+<span class="cstat-no" title="statement not covered" >      return false</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      return true</span>
+    }
+  }
+&nbsp;
+  /**
+   * Get mime type left
+   * @function mimeTypeLeft
+   * @param {string} mime
+   */
+<span class="fstat-no" title="function not covered" >  mi</span>meTypeLeft(mime) {
+<span class="cstat-no" title="statement not covered" >    return mime.split('/')[0]</span>
+  }
+&nbsp;
+  /**
+   * Get mime type right
+   * @function mimeTypeRight
+   * @param {string} mime
+   */
+<span class="fstat-no" title="function not covered" >  mi</span>meTypeRight(mime) {
+<span class="cstat-no" title="statement not covered" >    return mime.split('/')[1]</span>
+  }
+&nbsp;
+  /**
+   * Get the extension of the file
+   * @function fileExtension
+   * @param {object} file
+   */
+<span class="fstat-no" title="function not covered" >  fi</span>leExtension(file) {
+    let extensionSplit = <span class="cstat-no" title="statement not covered" >file.name.split('.')</span>
+<span class="cstat-no" title="statement not covered" >    if (extensionSplit.length &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >      return extensionSplit[extensionSplit.length - 1]</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      return 'none'</span>
+    }
+  }
+&nbsp;
+  /**
+   * Execute the function to handle the errors
+   * @function onError
+   * @param {*} error
+   * @param {object} file
+   */
+<span class="fstat-no" title="function not covered" >  on</span>Error(error, file) {
+<span class="cstat-no" title="statement not covered" >    this.props.onError.call(this, error, file)</span>
+  }
+&nbsp;
+  /**
+   * Remove a file of the list
+   * @function removeFile
+   * @param {object} fileToRemove
+   */
+<span class="fstat-no" title="function not covered" >  re</span>moveFile(fileToRemove) {
+<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+      files: this.state.files.filter(<span class="fstat-no" title="function not covered" >fi</span>le =&gt; <span class="cstat-no" title="statement not covered" >file.id !== fileToRemove.id)</span>
+    }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >      this.props.onChange.call(this, this.state.files)</span>
+    })
+  }
+&nbsp;
+  /**
+   * Remove all files of the list
+   * @function removeFiles
+   */
+<span class="fstat-no" title="function not covered" >  re</span>moveFiles() {
+<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+      files: []
+    }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >      this.props.onChange.call(this, this.state.files)</span>
+    })
+  }
+&nbsp;
+  /**
+   * Render component
+   * @function render
+   */
+  render() {
+    const inputAttributes = {
+      type: 'file',
+      accept: this.props.accepts ? <span class="branch-0 cbranch-no" title="branch not covered" >this.props.accepts.join() </span>: '',
+      multiple: this.props.multiple,
+      name: this.props.name,
+      style: {
+        display: 'none'
+      },
+      ref: (element) =&gt; {
+        this.inputElement = element
+      },
+      onChange: this.onDrop
     }
 &nbsp;
-    /** 
-     * Change the native behavior of the browser by 'stopPropagation' 
-     * @function onDragOver
-     * @param {*} event
-     */
-<span class="fstat-no" title="function not covered" >    on</span>DragOver(event) {
-<span class="cstat-no" title="statement not covered" >        event.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >        event.stopPropagation()</span>
-    }
-&nbsp;
-    /**
-     * Change the styles of the Dropbox when the file enters it
-     * @function onDragEnter
-     */
-<span class="fstat-no" title="function not covered" >    on</span>DragEnter() {
-        let el = <span class="cstat-no" title="statement not covered" >this.dropzone</span>
-<span class="cstat-no" title="statement not covered" >        el.className += ' ' + this.props.dropActiveClassName</span>
-    }
-&nbsp;
-    /**
-     * Change the styles of the Dropbox when the file leaves it
-     * @function onDragLeave
-     */
-<span class="fstat-no" title="function not covered" >    on</span>DragLeave() {
-        let el = <span class="cstat-no" title="statement not covered" >this.dropzone</span>
-<span class="cstat-no" title="statement not covered" >        this.dropzone.className = el.className.replace(' ' + this.props.dropActiveClassName, '')</span>
-    }
-&nbsp;
-    /**
-     * Open the windows to select the files
-     * @function openFileChooser
-     */
-<span class="fstat-no" title="function not covered" >    op</span>enFileChooser() {
-<span class="cstat-no" title="statement not covered" >        this.inputElement.value = null</span>
-<span class="cstat-no" title="statement not covered" >        this.inputElement.click()</span>
-    }
-&nbsp;
-    /** 
-     * Validate the type of the file 
-     * @function fileTypeAcceptable
-     * @param {object} file
-     */   
-<span class="fstat-no" title="function not covered" >    fi</span>leTypeAcceptable(file) {
-        let accepts = <span class="cstat-no" title="statement not covered" >this.props.accepts</span>
-<span class="cstat-no" title="statement not covered" >        if (accepts) {</span>
-<span class="cstat-no" title="statement not covered" >            if (file.type) {</span>
-                let typeLeft = <span class="cstat-no" title="statement not covered" >this.mimeTypeLeft(file.type)</span>
-                let typeRight = <span class="cstat-no" title="statement not covered" >this.mimeTypeRight(file.type)</span>
-<span class="cstat-no" title="statement not covered" >                for (let i = 0; i &lt; accepts.length; i++) {</span>
-                    let accept = <span class="cstat-no" title="statement not covered" >accepts[i]</span>
-                    let acceptLeft = <span class="cstat-no" title="statement not covered" >accept.split('/')[0]</span>
-                    let acceptRight = <span class="cstat-no" title="statement not covered" >accept.split('/')[1]</span>
-<span class="cstat-no" title="statement not covered" >                    if (acceptLeft &amp;&amp; acceptRight) {</span>
-<span class="cstat-no" title="statement not covered" >                        if (acceptLeft === typeLeft &amp;&amp; acceptRight === '*') {</span>
-<span class="cstat-no" title="statement not covered" >                            return true</span>
-                        }
-<span class="cstat-no" title="statement not covered" >                        if (acceptLeft === typeLeft &amp;&amp; acceptRight === typeRight) {</span>
-<span class="cstat-no" title="statement not covered" >                            return true</span>
-                        }
-                    }
-                }
-            }
-<span class="cstat-no" title="statement not covered" >            this.onError({</span>
-                code: 1,
-                message: `${file.name} ${I18n.t('files_upload.invalid_type')}`
-            }, file)
-<span class="cstat-no" title="statement not covered" >            return false</span>
-        } else {
-<span class="cstat-no" title="statement not covered" >            return true</span>
-        }
-    }
-&nbsp;
-    /** 
-     * Validate the size of the file 
-     * @function fileSizeAcceptable
-     * @param {object} file
-     */   
-<span class="fstat-no" title="function not covered" >    fi</span>leSizeAcceptable(file) {
-<span class="cstat-no" title="statement not covered" >        if (file.size &gt; this.props.maxFileSize) {</span>
-<span class="cstat-no" title="statement not covered" >            this.onError({</span>
-                code: 2,
-                message: `${file.name} ${I18n.t('files_upload.too_large')}`
-            }, file)
-<span class="cstat-no" title="statement not covered" >            return false</span>
-        } else <span class="cstat-no" title="statement not covered" >if (file.size &lt; this.props.minFileSize) {</span>
-<span class="cstat-no" title="statement not covered" >            this.onError({</span>
-                code: 3,
-                message: `${file.name} ${I18n.t('files_upload.too_small')}`
-            }, file)
-<span class="cstat-no" title="statement not covered" >            return false</span>
-        } else {
-<span class="cstat-no" title="statement not covered" >            return true</span>
-        }
-    }
-&nbsp;
-    /** 
-     * Get mime type left 
-     * @function mimeTypeLeft
-     * @param {string} mime
-     */   
-<span class="fstat-no" title="function not covered" >    mi</span>meTypeLeft(mime) {
-<span class="cstat-no" title="statement not covered" >        return mime.split('/')[0]</span>
-    }
-&nbsp;
-    /** 
-     * Get mime type right 
-     * @function mimeTypeRight
-     * @param {string} mime
-     */   
-<span class="fstat-no" title="function not covered" >    mi</span>meTypeRight(mime) {
-<span class="cstat-no" title="statement not covered" >        return mime.split('/')[1]</span>
-    }
-&nbsp;
-    /** 
-     * Get the extension of the file 
-     * @function fileExtension
-     * @param {object} file
-     */   
-<span class="fstat-no" title="function not covered" >    fi</span>leExtension(file) {
-        let extensionSplit = <span class="cstat-no" title="statement not covered" >file.name.split('.')</span>
-<span class="cstat-no" title="statement not covered" >        if (extensionSplit.length &gt; 1) {</span>
-<span class="cstat-no" title="statement not covered" >            return extensionSplit[extensionSplit.length - 1]</span>
-        } else {
-<span class="cstat-no" title="statement not covered" >            return 'none'</span>
-        }
-    }
-&nbsp;
-    /** 
-     * Execute the function to handle the errors 
-     * @function onError
-     * @param {*} error
-     * @param {object} file
-     */     
-<span class="fstat-no" title="function not covered" >    on</span>Error(error, file) {
-<span class="cstat-no" title="statement not covered" >        this.props.onError.call(this, error, file)</span>
-    }
-&nbsp;
-    /** 
-     * Remove a file of the list 
-     * @function removeFile
-     * @param {object} fileToRemove
-     */     
-<span class="fstat-no" title="function not covered" >    re</span>moveFile(fileToRemove) {
-<span class="cstat-no" title="statement not covered" >        this.setState({</span>
-            files: this.state.files.filter(<span class="fstat-no" title="function not covered" >fi</span>le =&gt; <span class="cstat-no" title="statement not covered" >file.id !== fileToRemove.id)</span>
-        }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >            this.props.onChange.call(this, this.state.files)</span>
-        })
-    }
-&nbsp;
-    /** 
-     * Remove all files of the list 
-     * @function removeFiles
-     */     
-<span class="fstat-no" title="function not covered" >    re</span>moveFiles() {
-<span class="cstat-no" title="statement not covered" >        this.setState({</span>
-            files: []
-        }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >            this.props.onChange.call(this, this.state.files)</span>
-        })
-    }
-&nbsp;
-    /** 
-     * Render component 
-     * @function render
-     */
-    render() {
-        const inputAttributes = {
-            type: 'file',
-            accept: this.props.accepts ? <span class="branch-0 cbranch-no" title="branch not covered" >this.props.accepts.join() </span>: '',
-            multiple: this.props.multiple,
-            name: this.props.name,
-            style: { display: 'none' },
-            ref: (element) =&gt; {
-                this.inputElement = element
-            },
-            onChange: this.onDrop
-        }
-&nbsp;
-        return (
-            &lt;div className="file-upload"&gt;
-                &lt;input
-                    {...inputAttributes}
-                /&gt;
-                &lt;div
-                    className={this.props.className}
-                    onClick={
-                        this.props.clickable === true
-                            ? this.openFileChooser
-                            : <span class="branch-1 cbranch-no" title="branch not covered" >null</span>
-                    }
-                    onDrop={this.onDrop}
-                    onDragOver={this.onDragOver}
-                    onDragEnter={this.onDragEnter}
-                    onDragLeave={this.onDragLeave}
-                    ref={dropzone =&gt; { this.dropzone = dropzone } }
-                    style={this.props.style}
-                &gt;
-                    {this.props.children}
-                &lt;/div&gt;
-            &lt;/div&gt;
-        )
-    }
+    return (
+      &lt;div className="file-upload"&gt;
+        &lt;input
+          {...inputAttributes}
+        /&gt;
+        &lt;div
+          className={this.props.className}
+          onClick={
+            this.props.clickable === true ?
+              this.openFileChooser
+              : <span class="branch-1 cbranch-no" title="branch not covered" >null</span>
+          }
+          onDrop={this.onDrop}
+          onDragOver={this.onDragOver}
+          onDragEnter={this.onDragEnter}
+          onDragLeave={this.onDragLeave}
+          ref={dropzone =&gt; { this.dropzone = dropzone } }
+          style={this.props.style}
+        &gt;
+          {this.props.children}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
 }
 &nbsp;
 FilesUpload.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]),
-    className: PropTypes.string.isRequired,
-    dropActiveClassName: PropTypes.string,
-    onChange: PropTypes.func,
-    onError: PropTypes.func,
-    accepts: PropTypes.array,
-    multiple: PropTypes.bool,
-    maxFiles: PropTypes.number,
-    maxFileSize: PropTypes.number,
-    minFileSize: PropTypes.number,
-    clickable: PropTypes.bool,
-    name: PropTypes.string,
-    style: PropTypes.object
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  className: PropTypes.string.isRequired,
+  dropActiveClassName: PropTypes.string,
+  onChange: PropTypes.func,
+  onError: PropTypes.func,
+  accepts: PropTypes.array,
+  multiple: PropTypes.bool,
+  maxFiles: PropTypes.number,
+  maxFileSize: PropTypes.number,
+  minFileSize: PropTypes.number,
+  clickable: PropTypes.bool,
+  name: PropTypes.string,
+  style: PropTypes.object
 }
 &nbsp;
 FilesUpload.defaultProps = {
-    onChange: <span class="fstat-no" title="function not covered" >fu</span>nction (files) {
-<span class="cstat-no" title="statement not covered" >        console.log(files)</span>
-    },
-    onError: <span class="fstat-no" title="function not covered" >fu</span>nction (error, file) {
-<span class="cstat-no" title="statement not covered" >        console.log('error code ' + error.code + ': ' + error.message)</span>
-    },
-    className: 'files-dropzone',
-    dropActiveClassName: 'files-dropzone-active',
-    accepts: null,
-    multiple: true,
-    maxFiles: Infinity,
-    maxFileSize: Infinity,
-    minFileSize: 0,
-    name: 'file',
-    clickable: true
+  onChange: <span class="fstat-no" title="function not covered" >fu</span>nction (files) {
+<span class="cstat-no" title="statement not covered" >    console.log(files)</span>
+  },
+  onError: <span class="fstat-no" title="function not covered" >fu</span>nction (error, file) {
+<span class="cstat-no" title="statement not covered" >    console.log('error code ' + error.code + ': ' + error.message)</span>
+  },
+  className: 'files-dropzone',
+  dropActiveClassName: 'files-dropzone-active',
+  accepts: null,
+  multiple: true,
+  maxFiles: Infinity,
+  maxFileSize: Infinity,
+  minFileSize: 0,
+  name: 'file',
+  clickable: true
 }
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -1129,7 +1153,7 @@ FilesUpload.defaultProps = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jun 20 2018 05:58:59 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 22 2018 17:15:14 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

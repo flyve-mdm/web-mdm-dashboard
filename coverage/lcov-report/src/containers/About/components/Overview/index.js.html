@@ -108,7 +108,10 @@ layout: coverage
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,8 +148,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,37 +174,39 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 &nbsp;
 /** import dependencies */
 <span class="cstat-no" title="statement not covered" >import React from 'react'</span>
 <span class="cstat-no" title="statement not covered" >import ContentPane from '../../../../components/ContentPane'</span>
-<span class="cstat-no" title="statement not covered" >import { I18n } from "react-i18nify"</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+  I18n
+} from "react-i18nify"
 &nbsp;
 /**
  * @constant Overview
@@ -209,30 +217,31 @@ const Overview = <span class="cstat-no" title="statement not covered" ><span cla
     &lt;ContentPane&gt;
       &lt;h2 style={ { margin: '10px' } }&gt;{I18n.t('about.overview.title')}&lt;/h2&gt;
       &lt;div className="about-pane" style={ { margin: '10px' } }&gt;
-            &lt;p&gt;{I18n.t('about.overview.flyve_mdm_is')}&lt;/p&gt;
-            &lt;p&gt;{I18n.t('about.overview.our_solution')}&lt;/p&gt;
-            &lt;ul&gt;
-                &lt;li&gt;{I18n.t('about.overview.provided_as_sass_platform')}&lt;/li&gt;
-                &lt;li&gt;{I18n.t('about.overview.google_indepent')}&lt;/li&gt;
-                &lt;li&gt;{I18n.t('about.overview.deploy_and_configure')}&lt;/li&gt;
-                &lt;li&gt;{I18n.t('about.overview.deploy_files')}&lt;/li&gt;
-                &lt;li&gt;{I18n.t('about.overview.wipe_phone')}&lt;/li&gt;
-                &lt;li&gt;{I18n.t('about.overview.work_with_devices')}&lt;/li&gt;
-                &lt;li&gt;{I18n.t('about.overview.simple_web_application')}&lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;p&gt;{I18n.t('about.overview.source_codes')}&lt;/p&gt;
-        &lt;/div&gt;
+        &lt;p&gt;{I18n.t('about.overview.flyve_mdm_is')}&lt;/p&gt;
+        &lt;p&gt;{I18n.t('about.overview.our_solution')}&lt;/p&gt;
+        &lt;ul&gt;
+          &lt;li&gt;{I18n.t('about.overview.provided_as_sass_platform')}&lt;/li&gt;
+          &lt;li&gt;{I18n.t('about.overview.google_indepent')}&lt;/li&gt;
+          &lt;li&gt;{I18n.t('about.overview.deploy_and_configure')}&lt;/li&gt;
+          &lt;li&gt;{I18n.t('about.overview.deploy_files')}&lt;/li&gt;
+          &lt;li&gt;{I18n.t('about.overview.wipe_phone')}&lt;/li&gt;
+          &lt;li&gt;{I18n.t('about.overview.work_with_devices')}&lt;/li&gt;
+          &lt;li&gt;{I18n.t('about.overview.simple_web_application')}&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;p&gt;{I18n.t('about.overview.source_codes')}&lt;/p&gt;
+      &lt;/div&gt;
     &lt;/ContentPane&gt;
   )
 }
 &nbsp;
-export default Overview</pre></td></tr>
+export default Overview
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jun 20 2018 05:58:59 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 22 2018 17:15:14 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

@@ -149,12 +149,7 @@ layout: coverage
 <a name='L98'></a><a href='#L98'>98</a>
 <a name='L99'></a><a href='#L99'>99</a>
 <a name='L100'></a><a href='#L100'>100</a>
-<a name='L101'></a><a href='#L101'>101</a>
-<a name='L102'></a><a href='#L102'>102</a>
-<a name='L103'></a><a href='#L103'>103</a>
-<a name='L104'></a><a href='#L104'>104</a>
-<a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L101'></a><a href='#L101'>101</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -192,17 +187,12 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -260,109 +250,104 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import { I18n } from "react-i18nify"</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+  I18n
+} from "react-i18nify"
 &nbsp;
 /**
  * Supervision data schema
  * @function agent
- * @param {object} state 
+ * @param {object} state
  * @param {function} changeState
  * @return {array}
  */
-export default function ({ state, changeState }) {
-    const helpDeskInformation = <span class="cstat-no" title="statement not covered" >[</span>
-        [
-            {
-                label: I18n.t('commons.support_name'),
-                type: "text",
-                name: "name",
-                value: state.name,
-                placeholder: null,
-                function: changeState,
-                disabled: false,
-                style: null
-            }
-        ],
-        [
-            {
-                label: I18n.t('commons.support_phone'),
-                type: "text",
-                name: "phone",
-                value: state.phone,
-                placeholder: null,
-                function: changeState,
-                disabled: false,
-                style: null
-            }
-        ],
-        [
-            {
-                label: I18n.t('commons.support_website'),
-                type: "text",
-                name: "website",
-                value: state.website,
-                placeholder: null,
-                function: changeState,
-                disabled: false,
-                style: null
-            }
-        ],
-        [
-            {
-                label: I18n.t('commons.support_email'),
-                type: "text",
-                name: "email",
-                value: state.email,
-                placeholder: null,
-                function: changeState,
-                disabled: false,
-                style: null
-            }
-        ],
-        [
-            {
-                label: I18n.t('commons.support_address'),
-                type: "textArea",
-                name: "address",
-                value: state.address,
-                placeholder: null,
-                function: changeState,
-                disabled: false,
-                style: null
-            }
-        ]
-    ]
+export default function ({
+  state,
+  changeState
+}) {
+  const helpDeskInformation = <span class="cstat-no" title="statement not covered" >[</span>
+    [{
+      label: I18n.t('commons.support_name'),
+      type: "text",
+      name: "name",
+      value: state.name,
+      placeholder: null,
+      function: changeState,
+      disabled: false,
+      style: null
+    }],
+    [{
+      label: I18n.t('commons.support_phone'),
+      type: "text",
+      name: "phone",
+      value: state.phone,
+      placeholder: null,
+      function: changeState,
+      disabled: false,
+      style: null
+    }],
+    [{
+      label: I18n.t('commons.support_website'),
+      type: "text",
+      name: "website",
+      value: state.website,
+      placeholder: null,
+      function: changeState,
+      disabled: false,
+      style: null
+    }],
+    [{
+      label: I18n.t('commons.support_email'),
+      type: "text",
+      name: "email",
+      value: state.email,
+      placeholder: null,
+      function: changeState,
+      disabled: false,
+      style: null
+    }],
+    [{
+      label: I18n.t('commons.support_address'),
+      type: "textArea",
+      name: "address",
+      value: state.address,
+      placeholder: null,
+      function: changeState,
+      disabled: false,
+      style: null
+    }]
+  ]
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return {</span>
-        helpDeskInformation
-    }
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    helpDeskInformation
+  }
 }
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -370,7 +355,7 @@ export default function ({ state, changeState }) {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jun 20 2018 05:58:59 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jun 22 2018 17:15:14 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>
