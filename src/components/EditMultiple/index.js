@@ -49,7 +49,7 @@ import {
  * @class EditMultiple
  * @extends PureComponent
  */
-export default class EditMultiple extends PureComponent {
+class EditMultiple extends PureComponent {
 
   /** @constructor */
   constructor(props) {
@@ -354,6 +354,7 @@ export default class EditMultiple extends PureComponent {
     }
   }
 }
+
 EditMultiple.propTypes = {
   selectedItems: PropTypes.array,
   FieldList: PropTypes.array.isRequired,
@@ -364,3 +365,5 @@ EditMultiple.propTypes = {
   glpi: PropTypes.object.isRequired,
   request: PropTypes.object.isRequired
 }
+
+export default EditMultiple

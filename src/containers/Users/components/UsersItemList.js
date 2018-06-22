@@ -28,7 +28,7 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import IconItemList from '../../../components/IconItemList'
@@ -44,15 +44,20 @@ export default class UsersItemList extends PureComponent {
    * @function render
    */
   render() {
-    const imageProfile = this.props.itemList['User.picture'] ?
-      this.props.itemList['User.picture']
-      : "profile.png"
+    const { itemList } = this.props
+    const imageProfile = itemList['User.picture']
+      ? itemList['User.picture']
+      : 'profile.png'
     return (
       <div>
         <IconItemList image={imageProfile} size={42} />
         <div style={{ display: 'inline-block' }}>
-          <div className="list-pane__name">{this.props.itemList['User.name']}</div>
-          <div className="list-pane__detail">{this.props.itemList['User.realname']}</div>
+          <div className="list-pane__name">
+            {itemList['User.name']}
+          </div>
+          <div className="list-pane__detail">
+            {itemList['User.realname']}
+          </div>
         </div>
       </div>
     )
@@ -60,5 +65,5 @@ export default class UsersItemList extends PureComponent {
 }
 
 UsersItemList.propTypes = {
-  itemList: PropTypes.object.isRequired
+  itemList: PropTypes.object.isRequired,
 }
