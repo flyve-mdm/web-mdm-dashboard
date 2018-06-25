@@ -100,8 +100,9 @@ class SignIn extends PureComponent {
    * @param {object} prevProds
    * @param {object} prevState
    */
-  componentDidUpdate(prevState) {
+  componentDidUpdate(...args) {
     const { phase } = this.state
+    const prevState = args[1]
 
     if (prevState.phase !== phase) {
       if (phase === 2 && this.form) {
