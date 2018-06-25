@@ -34,7 +34,7 @@
  */
 export const changeInput = (ctx, input) => {
   ctx.setState({
-    [input.name]: input.value
+    [input.name]: input.value,
   })
 }
 
@@ -46,7 +46,7 @@ export const changeInput = (ctx, input) => {
  */
 export const changePhase = (ctx, newPhase) => {
   ctx.setState({
-    phase: newPhase
+    phase: newPhase,
   })
 }
 
@@ -61,6 +61,6 @@ export const handleFormSubmit = (ctx, event) => {
 
   ctx.props.actions.fetchSignIn(
     ctx.state.username,
-    ctx.state.password
+    ctx.state.password,
   )
 }

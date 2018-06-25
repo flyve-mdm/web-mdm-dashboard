@@ -28,14 +28,14 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  Link
+  Link,
 } from 'react-router-dom'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
 import Loading from '../../../components/Loading'
 import publicURL from '../../../shared/publicURL'
@@ -52,7 +52,7 @@ class PasswordFieldset extends PureComponent {
     this.state = {
       classInput: 'win-textbox',
       errorMessage: '',
-      isLoading: false
+      isLoading: false,
     }
   }
 
@@ -71,14 +71,26 @@ class PasswordFieldset extends PureComponent {
    * @function render
    */
   render() {
+    const {
+      isLoading,
+      errorMessage,
+      classInput,
+    } = this.state
+    const {
+      username,
+      handleOnSubmit,
+      password,
+      changeInput,
+      changePhase,
+    } = this.props
+
     let renderComponent
-    if (this.state.isLoading) {
+    if (isLoading) {
       renderComponent = (
-        <div style={{margin: 50, height: '140px'}}>
+        <div style={{ margin: 50, height: '140px' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
         </div>
       )
-
     } else {
       renderComponent = (
         <div className="authentication__password">
@@ -88,25 +100,29 @@ class PasswordFieldset extends PureComponent {
           <p>
             { I18n.t('login.enter_password_for') }
             <br />
-            {this.props.username}
+            {username}
             <br />
-            {this.state.errorMessage}
+            {errorMessage}
           </p>
-          <form onSubmit={this.props.handleOnSubmit}>
+          <form onSubmit={handleOnSubmit}>
             <input
               type="password"
               name="password"
               ref={(input) => { this.passwordInput = input }}
-              className={this.state.classInput}
+              className={classInput}
               placeholder={I18n.t('commons.password')}
-              value={this.props.password}
-              onChange={this.props.changeInput}
-              required={true}
+              value={password}
+              onChange={changeInput}
+              required
             />
 
-            <button className="btn btn--secondary" type="button" onClick={
-              () => this.props.changePhase(1)
-            }>
+            <button
+              className="btn btn--secondary"
+              type="button"
+              onClick={
+              () => changePhase(1)
+            }
+            >
               { I18n.t('commons.back') }
             </button>
 
@@ -132,8 +148,8 @@ PasswordFieldset.propTypes = {
   password: PropTypes.string.isRequired,
   changeInput: PropTypes.func.isRequired,
   changePhase: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
-  handleOnSubmit: PropTypes.func.isRequired
+  handleOnSubmit: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
 }
 
 export default PasswordFieldset

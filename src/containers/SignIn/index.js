@@ -28,53 +28,53 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux'
 import {
-  connect
+  connect,
 } from 'react-redux'
+import {
+  I18n,
+} from 'react-i18nify'
+import {
+  Redirect,
+} from 'react-router'
 import UsernameFieldset from './components/UsernameFieldset'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import {
-  fetchSignIn
+  fetchSignIn,
 } from '../../store/authentication/actions'
-import {
-  I18n
-} from 'react-i18nify'
 import publicURL from '../../shared/publicURL'
 // Async Component
 import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
-import {
-  Redirect
-} from 'react-router'
 import Loading from '../../components/Loading'
 import {
   changeInput,
   changePhase,
-  handleFormSubmit
+  handleFormSubmit,
 } from './actions'
 import {
   slideLeft,
-  slideRight
+  slideRight,
 } from '../../shared/animations/index'
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
-    isLoading: state.ui.loading
+    isLoading: state.ui.loading,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    fetchSignIn: bindActionCreators(fetchSignIn, dispatch)
+    fetchSignIn: bindActionCreators(fetchSignIn, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -90,7 +90,26 @@ class SignIn extends PureComponent {
     this.state = {
       username: '',
       password: '',
-      phase: 1
+      phase: 1,
+    }
+  }
+
+  /**
+   * Play slide animation
+   * @function componentDidUpdate
+   * @param {object} prevProds
+   * @param {object} prevState
+   */
+  componentDidUpdate(prevState) {
+    const { phase } = this.state
+
+    if (prevState.phase !== phase) {
+      if (phase === 2 && this.form) {
+        slideLeft(this.form).play()
+      }
+      if (phase === 1 && this.form) {
+        slideRight(this.form).play()
+      }
     }
   }
 
@@ -116,75 +135,66 @@ class SignIn extends PureComponent {
   handleFormSubmit = event => handleFormSubmit(this, event)
 
   /**
-   * Play slide animation
-   * @function componentDidUpdate
-   * @param {object} prevProds
-   * @param {object} prevState
-   */
-  componentDidUpdate(prevProds, prevState) {
-    if (prevState.phase !== this.state.phase) {
-      if (this.state.phase === 2 && this.form) {
-        slideLeft(this.form).play()
-      }
-      if (this.state.phase === 1 && this.form) {
-        slideRight(this.form).play()
-      }
-    }
-  }
-
-  /**
    * Render component
    * @function render
    */
   render() {
+    const {
+      phase,
+      username,
+      password,
+    } = this.state
+    const {
+      history,
+      isLoading,
+    } = this.props
+
     if (localStorage.getItem('currentUser') && localStorage.getItem('sessionToken')) {
-      return <Redirect to={`${publicURL}/app`}/>
-    } else {
-      let form
-      if (this.state.phase === 1) {
-        form = (
-          <UsernameFieldset
-            username={this.state.username}
-            changeInput={this.changeInput}
-            changePhase={this.changePhase}
-          />
-        )
-      } else {
-        form = (
-          <AsyncPasswordFieldset
-            username={this.state.username}
-            password={this.state.password}
-            changeInput={this.changeInput}
-            changePhase={this.changePhase}
-            history={this.props.history}
-            handleOnSubmit={this.handleFormSubmit}
-          />
-        )
-      }
-      return this.props.isLoading ?
-        (
-          <div style={{ height: '140px' }}>
-            <Loading message={`${I18n.t('commons.loading')}...`} />
-          </div>
-        )
-        : (
-          <div ref={element => this.form = element}>
-            {form}
-          </div>
-        )
+      return <Redirect to={`${publicURL}/app`} />
     }
+    let form
+    if (phase === 1) {
+      form = (
+        <UsernameFieldset
+          username={username}
+          changeInput={this.changeInput}
+          changePhase={this.changePhase}
+        />
+      )
+    } else {
+      form = (
+        <AsyncPasswordFieldset
+          username={username}
+          password={password}
+          changeInput={this.changeInput}
+          changePhase={this.changePhase}
+          history={history}
+          handleOnSubmit={this.handleFormSubmit}
+        />
+      )
+    }
+    return isLoading
+      ? (
+        <div style={{ height: '140px' }}>
+          <Loading message={`${I18n.t('commons.loading')}...`} />
+        </div>
+      )
+      : (
+        <div ref={(element) => { this.form = element }}>
+          {form}
+        </div>
+      )
   }
 }
 
 SignIn.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withAuthenticationLayout(withHandleMessages(SignIn), {
-  centerContent: true
+  centerContent: true,
 }))
