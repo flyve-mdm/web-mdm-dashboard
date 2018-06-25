@@ -28,14 +28,14 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  Link
+  Link,
 } from 'react-router-dom'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
 import publicURL from '../../../shared/publicURL'
 import appConfig from '../../../../public/config.json'
@@ -55,7 +55,7 @@ class UsernameFieldset extends PureComponent {
       classInput: 'win-textbox',
       errorMessage: '',
       isLoading: true,
-      selfRegistration: null
+      selfRegistration: null,
     }
   }
 
@@ -65,34 +65,37 @@ class UsernameFieldset extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
+    const { glpi } = this.props
     try {
-      await this.props.glpi.initSessionByUserToken({
-        userToken: appConfig.pluginToken
+      await glpi.initSessionByUserToken({
+        userToken: appConfig.pluginToken,
       })
-      const plugins = await this.props.glpi.getAllItems({
-        itemtype: 'Plugin'
+      const plugins = await glpi.getAllItems({
+        itemtype: 'Plugin',
       })
-      const pluginDemo = plugins.filter(plugin => plugin.name === "Flyve MDM Demo")
+      const pluginDemo = plugins.filter(plugin => plugin.name === 'Flyve MDM Demo')
       if (pluginDemo.length < 1 || pluginDemo[0].state !== 1) {
         throw new Error()
       }
-      this.setState({
+      this.setState(
+        {
           isLoading: false,
-          selfRegistration: true
+          selfRegistration: true,
         },
         () => {
           this.usernameInput.focus()
-          this.props.glpi.killSession()
-        }
+          glpi.killSession()
+        },
       )
     } catch (e) {
-      this.setState({
+      this.setState(
+        {
           isLoading: false,
-          selfRegistration: false
+          selfRegistration: false,
         },
         () => {
           this.usernameInput.focus()
-        }
+        },
       )
     }
   }
@@ -103,17 +106,27 @@ class UsernameFieldset extends PureComponent {
    */
   LogInServer = (e) => {
     e.preventDefault()
-    if (this.props.username) {
-      this.props.changePhase(2)
+    const {
+      username,
+      changePhase,
+    } = this.props
+    const { selfRegistration } = this.state
+
+    if (username) {
+      changePhase(2)
     } else {
       this.setState({
         classInput: 'win-textbox color-line-alert',
         errorMessage: (
           <p className="color-type-alert">
-            <span> {I18n.t('login.username_not_registered')} </span>
+            <span>
+              {' '}
+              {I18n.t('login.username_not_registered')}
+              {' '}
+            </span>
             {
-              this.state.selfRegistration ?
-                (
+              selfRegistration
+                ? (
                   <Link to={`${publicURL}/signUp`}>
                     {I18n.t('login.create_a_new')}
                   </Link>
@@ -121,7 +134,7 @@ class UsernameFieldset extends PureComponent {
                 : null
             }
           </p>
-        )
+        ),
       })
     }
   }
@@ -131,46 +144,60 @@ class UsernameFieldset extends PureComponent {
    * @function render
    */
   render() {
+    const {
+      isLoading,
+      errorMessage,
+      selfRegistration,
+      classInput,
+    } = this.state
+    const {
+      username,
+      changeInput,
+    } = this.props
+
     return (
-      this.state.isLoading ?
-        (
-          <div style={{margin: 50, height: '140px'}}>
+      isLoading
+        ? (
+          <div style={{ margin: 50, height: '140px' }}>
             <Loading message={`${I18n.t('commons.loading')}...`} />
           </div>
         )
         : (
           <div className="authentication__email">
             <h2>
-                {I18n.t('login.title')}
+              {I18n.t('login.title')}
             </h2>
             <p>
               {I18n.t('login.use_your_account')}
-              <br/>
+              <br />
               <a href="https://flyve-mdm.com/">
                 {I18n.t('login.what_is_this')}
               </a>
             </p>
 
-            {this.state.errorMessage}
+            {errorMessage}
 
             <form onSubmit={this.LogInServer}>
               <input
                 type="text"
                 name="username"
                 ref={(input) => { this.usernameInput = input; }}
-                className={this.state.classInput}
+                className={classInput}
                 placeholder={I18n.t('commons.username')}
-                value={this.props.username}
-                onChange={this.props.changeInput}
-                required={true}
+                value={username}
+                onChange={changeInput}
+                required
               />
-              <button className="btn btn--primary">
+              <button
+                className="btn btn--primary"
+                type="submit"
+              >
                 {I18n.t('commons.next')}
               </button>
             </form>
             {
-              !this.state.selfRegistration ?
-                ''
+              !selfRegistration
+                ? ''
                 : (
                   <p>
                     {I18n.t('login.no_account')}
@@ -191,7 +218,7 @@ UsernameFieldset.propTypes = {
   username: PropTypes.string.isRequired,
   changeInput: PropTypes.func.isRequired,
   changePhase: PropTypes.func.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
 }
 
 export default withGLPI(UsernameFieldset)
