@@ -28,27 +28,27 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  supervisionScheme
+  bindActionCreators,
+} from 'redux'
+import {
+  connect,
+} from 'react-redux'
+import {
+  I18n,
+} from 'react-i18nify'
+import {
+  supervisionScheme,
 } from '../../../../components/Forms/Schemas'
 import validateData from '../../../../shared/validateData'
 import ConstructInputs from '../../../../components/Forms'
 import {
-  bindActionCreators
-} from 'redux'
-import {
-  uiSetNotification
+  uiSetNotification,
 } from '../../../../store/ui/actions'
-import {
-  connect
-} from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
-import {
-  I18n
-} from 'react-i18nify'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
@@ -56,10 +56,10 @@ import itemtype from '../../../../shared/itemtype'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -79,7 +79,57 @@ class Supervision extends PureComponent {
       email: '',
       address: '',
       entityID: '',
-      isLoading: true
+      isLoading: true,
+    }
+  }
+
+  /**
+   * Get the supervision information from glpi
+   * @function componentDidMount
+   * @async
+   */
+  componentDidMount = async () => {
+    const {
+      glpi,
+      actions,
+      handleMessage,
+    } = this.props
+
+    try {
+      const {
+        active_profile: activeProfile,
+      } = await glpi.getActiveProfile()
+      let entityID
+      if (Array.isArray(activeProfile.entities)) {
+        entityID = activeProfile.entities[0].id
+      } else {
+        for (const key in activeProfile.entities) {
+          if (Object.prototype.hasOwnProperty.call(activeProfile.entities, key)) {
+            entityID = activeProfile.entities[key].id
+          }
+        }
+      }
+      const entity = await glpi.getAnItem({
+        itemtype: itemtype.Entity,
+        id: entityID,
+      })
+      this.setState({
+        isLoading: false,
+        entityID,
+        name: validateData(entity.name),
+        phone: validateData(entity.phonenumber),
+        website: validateData(entity.website),
+        email: validateData(entity.email),
+        address: validateData(entity.address),
+      })
+    } catch (error) {
+      actions.setNotification(handleMessage({
+        type: 'alert',
+        message: error,
+      }))
+      this.setState({
+        isLoading: false,
+      })
     }
   }
 
@@ -88,36 +138,50 @@ class Supervision extends PureComponent {
    * @function saveChanges
    */
   saveChanges = () => {
+    const {
+      glpi,
+      actions,
+      handleMessage,
+    } = this.props
+    const {
+      name,
+      entityID,
+      phone,
+      website,
+      email,
+      address,
+    } = this.state
+
     this.setState({
-      isLoading: true
+      isLoading: true,
     }, async () => {
       try {
-        await this.props.glpi.updateItem({
+        await glpi.updateItem({
           itemtype: itemtype.Entity,
-          id: `${this.state.entityID}`,
+          id: `${entityID}`,
           input: {
-            name: this.state.name,
-            phonenumber: this.state.phone,
-            website: this.state.website,
-            email: this.state.email,
-            address: this.state.address
-          }
+            phonenumber: phone,
+            name,
+            website,
+            email,
+            address,
+          },
         })
         this.setState({
-          isLoading: false
+          isLoading: false,
         })
-        this.props.actions.setNotification({
+        actions.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.helpdesk_configuration_saved'),
-          type: 'success'
+          type: 'success',
         })
       } catch (error) {
-        this.props.actions.setNotification(this.props.handleMessage({
+        actions.setNotification(handleMessage({
           type: 'alert',
-          message: error
+          message: error,
         }))
         this.setState({
-          isLoading: false
+          isLoading: false,
         })
       }
     })
@@ -131,52 +195,8 @@ class Supervision extends PureComponent {
    */
   changeState = (name, value) => {
     this.setState({
-      [name]: value
+      [name]: value,
     })
-  }
-
-  /**
-   * Get the supervision information from glpi
-   * @function componentDidMount
-   * @async
-   */
-  componentDidMount = async () => {
-    try {
-      const {
-        active_profile
-      } = await this.props.glpi.getActiveProfile()
-      let entityID
-      if (Array.isArray(active_profile.entities)) {
-        entityID = active_profile.entities[0].id
-      } else {
-        for (const key in active_profile.entities) {
-          if (active_profile.entities.hasOwnProperty(key)) {
-            entityID = active_profile.entities[key].id
-          }
-        }
-      }
-      const entity = await this.props.glpi.getAnItem({
-        itemtype: itemtype.Entity,
-        id: entityID
-      })
-      this.setState({
-        isLoading: false,
-        entityID,
-        name: validateData(entity.name),
-        phone: validateData(entity.phonenumber),
-        website: validateData(entity.website),
-        email: validateData(entity.email),
-        address: validateData(entity.address)
-      })
-    } catch (error) {
-      this.props.actions.setNotification(this.props.handleMessage({
-        type: 'alert',
-        message: error
-      }))
-      this.setState({
-        isLoading: false
-      })
-    }
   }
 
   /**
@@ -184,14 +204,16 @@ class Supervision extends PureComponent {
    * @function render
    */
   render() {
+    const { isLoading } = this.state
+
     const supervision = supervisionScheme({
       state: this.state,
-      changeState: this.changeState
+      changeState: this.changeState,
     })
 
     return (
-      this.state.isLoading ?
-        <Loading message={`${I18n.t('commons.loading')}...`}/>
+      isLoading
+        ? <Loading message={`${I18n.t('commons.loading')}...`} />
         : (
           <ContentPane>
             <h2 style={{ margin: '10px' }}>
@@ -203,11 +225,12 @@ class Supervision extends PureComponent {
                 icon="supervisionIcon"
                 title={I18n.t('settings.supervision.helpdesk')}
               />
-              <div style={{overflow: 'auto', paddingBottom: 40}}>
+              <div style={{ overflow: 'auto', paddingBottom: 40 }}>
                 <button
                   className="btn btn--primary"
-                  style={{ marginRight: "20px", float: "right" }}
+                  style={{ marginRight: '20px', float: 'right' }}
                   onClick={this.saveChanges}
+                  type="button"
                 >
                   {I18n.t('commons.save')}
                 </button>
@@ -221,7 +244,8 @@ class Supervision extends PureComponent {
 
 Supervision.propTypes = {
   actions: PropTypes.object.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
 
 export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(Supervision)))
