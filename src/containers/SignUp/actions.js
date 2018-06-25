@@ -35,12 +35,10 @@ import ErrorValidation from '../../components/ErrorValidation';
  * @param {object} ctx
  * @return {function}
  */
-export const changeState = (ctx) => {
-  return (name, value) => {
-    ctx.setState({
-      [name]: value
-    })
-  }
+export const changeState = ctx => (name, value) => {
+  ctx.setState({
+    [name]: value,
+  })
 }
 
 /**
@@ -54,99 +52,99 @@ export const buildDataArray = (ctx, I18n) => {
   const dataArray = {
     personalInformation: [
       [{
-          label: I18n.t('commons.email'),
-          type: "text",
-          name: "email",
-          value: ctx.state.email,
-          placeholder: I18n.t('commons.email'),
-          function: ctx.changeState(),
-          disabled: false,
-          style: {
-            width: 340
-          },
-          parametersToEvaluate: {
-            isRequired: true,
-            isEmail: true
-          },
-          forceValidation: ctx.state.forceValidation
+        label: I18n.t('commons.email'),
+        type: 'text',
+        name: 'email',
+        value: ctx.state.email,
+        placeholder: I18n.t('commons.email'),
+        function: ctx.changeState(),
+        disabled: false,
+        style: {
+          width: 340,
         },
-        {
-          label: I18n.t('create_account.full_name'),
-          type: "text",
-          name: "realName",
-          value: ctx.state.realName,
-          placeholder: I18n.t('create_account.full_name'),
-          function: ctx.changeState(),
-          disabled: false,
-          style: {
-            width: 340
-          },
-          parametersToEvaluate: {
-            isRequired: true
-          },
-          forceValidation: ctx.state.forceValidation
-        }
-      ]
+        parametersToEvaluate: {
+          isRequired: true,
+          isEmail: true,
+        },
+        forceValidation: ctx.state.forceValidation,
+      },
+      {
+        label: I18n.t('create_account.full_name'),
+        type: 'text',
+        name: 'realName',
+        value: ctx.state.realName,
+        placeholder: I18n.t('create_account.full_name'),
+        function: ctx.changeState(),
+        disabled: false,
+        style: {
+          width: 340,
+        },
+        parametersToEvaluate: {
+          isRequired: true,
+        },
+        forceValidation: ctx.state.forceValidation,
+      },
+      ],
     ],
     passwordInformation: [
       [{
-          label: I18n.t('commons.password'),
-          type: "password",
-          name: "password",
-          value: ctx.state.password,
-          placeholder: I18n.t('commons.password'),
-          function: ctx.changeState(),
-          disabled: false,
-          style: {
-            width: 340
-          },
-          parametersToEvaluate: {
-            isRequired: true,
-            ...ctx.state.configurationPassword
-          },
-          forceValidation: ctx.state.forceValidation
+        label: I18n.t('commons.password'),
+        type: 'password',
+        name: 'password',
+        value: ctx.state.password,
+        placeholder: I18n.t('commons.password'),
+        function: ctx.changeState(),
+        disabled: false,
+        style: {
+          width: 340,
         },
-        {
-          label: I18n.t('commons.password_confirmation'),
-          type: "password",
-          name: "passwordConfirmation",
-          value: ctx.state.passwordConfirmation,
-          placeholder: I18n.t('commons.password_confirmation'),
-          function: ctx.changeState(),
-          disabled: false,
-          style: {
-            width: 340
+        parametersToEvaluate: {
+          isRequired: true,
+          ...ctx.state.configurationPassword,
+        },
+        forceValidation: ctx.state.forceValidation,
+      },
+      {
+        label: I18n.t('commons.password_confirmation'),
+        type: 'password',
+        name: 'passwordConfirmation',
+        value: ctx.state.passwordConfirmation,
+        placeholder: I18n.t('commons.password_confirmation'),
+        function: ctx.changeState(),
+        disabled: false,
+        style: {
+          width: 340,
+        },
+        parametersToEvaluate: {
+          isRequired: true,
+          ...ctx.state.configurationPassword,
+          isEqualTo: {
+            value: ctx.state.password,
+            message: I18n.t('commons.passwords_not_match'),
           },
-          parametersToEvaluate: {
-            isRequired: true,
-            ...ctx.state.configurationPassword,
-            isEqualTo: {
-              value: ctx.state.password,
-              message: I18n.t('commons.passwords_not_match')
-            }
-          },
-          forceValidation: ctx.state.forceValidation
-        }
-      ]
+        },
+        forceValidation: ctx.state.forceValidation,
+      },
+      ],
     ],
     captchaInformation: [
       [{
         label: I18n.t('create_account.enter_code_image'),
-        type: "text",
-        name: "captchaValue",
+        type: 'text',
+        name: 'captchaValue',
         value: ctx.state.captchaValue,
         placeholder: null,
         function: ctx.changeState(),
         disabled: false,
         style: {
-          width: 340
+          width: 340,
         },
         parametersToEvaluate: {
-          isRequired: true
+          isRequired: true,
         },
-        forceValidation: ctx.state.forceValidation
-      }]
-    ]
+        forceValidation: ctx.state.forceValidation,
+      }],
+    ],
   }
   return dataArray
 }
@@ -164,29 +162,28 @@ export const handleSubmitForm = (ctx, event) => {
   let isCorrect = true
 
   for (const key in user) {
-    if (user.hasOwnProperty(key)) {
+    if (Object.prototype.hasOwnProperty.call(user, key)) {
       const elements = user[key]
-      for (let index = 0; index < elements[0].length; index++) {
+      for (let index = 0; index < elements[0].length; index += 1) {
         const element = elements[0][index]
-        if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect)
-          isCorrect = false
+        if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect) { isCorrect = false }
       }
     }
   }
 
   if (isCorrect) {
     ctx.props.actions.fetchSignUp({
-      "name": ctx.state.email,
-      "realname": ctx.state.realName,
-      "password": ctx.state.password,
-      "password2": ctx.state.passwordConfirmation,
-      "_useremails": [ctx.state.email],
-      "_plugin_flyvemdmdemo_captchas_id": ctx.props.captcha.id,
-      "_answer": ctx.state.captchaValue
+      name: ctx.state.email,
+      realname: ctx.state.realName,
+      password: ctx.state.password,
+      password2: ctx.state.passwordConfirmation,
+      _useremails: [ctx.state.email],
+      _plugin_flyvemdmdemo_captchas_id: ctx.props.captcha.id,
+      _answer: ctx.state.captchaValue,
     })
   } else {
     ctx.setState({
-      forceValidation: true
+      forceValidation: true,
     })
   }
 }
