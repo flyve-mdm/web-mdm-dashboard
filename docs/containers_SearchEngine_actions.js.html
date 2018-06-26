@@ -53,24 +53,22 @@ layout: container
  */
 const setFields = (ctx) => {
   const fields = []
-  const listSearchOptions = ctx.state.listSearchOptions
+  const { listSearchOptions } = ctx.state
 
-  for (var key in listSearchOptions) {
-    if (listSearchOptions.hasOwnProperty(key)) {
-      if (listSearchOptions[key]['name'] !== undefined &amp;&amp;
-        listSearchOptions[key]['field'] !== undefined) {
-
-        let name = listSearchOptions[key]['name']
+  for (const key in listSearchOptions) {
+    if (Object.prototype.hasOwnProperty.call(listSearchOptions, key)) {
+      if (listSearchOptions[key].name !== undefined
+        &amp;&amp; listSearchOptions[key].field !== undefined) {
+        const { name } = listSearchOptions[key]
         fields.push({
-          'name': key,
-          'label': name
+          name: key,
+          label: name,
         })
-
       }
     }
   }
   ctx.setState({
-    fields: fields
+    fields,
   })
 }
 
@@ -80,13 +78,11 @@ const setFields = (ctx) => {
  * @param {object} rule
  * @return {object}
  */
-const normalizeRule = (ctx, rule) => {
-  return {
-    field: Number(rule['field']),
-    searchtype: rule['operator'],
-    value: rule['value']
-  }
-}
+const normalizeRule = (ctx, rule) => ({
+  field: Number(rule.field),
+  searchtype: rule.operator,
+  value: rule.value,
+})
 
 /**
  * Create the array of rules extracted
@@ -98,14 +94,13 @@ const normalizeRule = (ctx, rule) => {
  * @return {array}
  */
 const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator) => {
-
-  if (typeof (query.rules) === undefined || typeof (query.field) === "string") {
+  if (typeof (query.rules) === 'undefined' || typeof (query.field) === 'string') {
     /*
      * It means that it is a rule, and it has operator, value and field
      */
     arrayRulesExtracted.push({
       link: combinator, // 'AND' or 'OR'
-      ...normalizeRule(ctx, query)
+      ...normalizeRule(ctx, query),
     })
   } else {
     /*
@@ -127,12 +122,11 @@ const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator)
  * @return {array}
  */
 const normalizeQuery = (ctx) => {
-  const query = { ...ctx.state.query
-  }
+  const query = { ...ctx.state.query }
   const arrayRules = []
 
   const arrayRulesExtracted = recursiveExtractQueryRules(
-    query, ctx, arrayRules, query.combinator
+    query, ctx, arrayRules, query.combinator,
   )
 
   return arrayRulesExtracted
@@ -143,43 +137,41 @@ const normalizeQuery = (ctx) => {
  * @function getTranslation
  * @return {object}
  */
-const getTranslation = () => {
-  return {
-    fields: {
-      title: "Fields"
-    },
-    operators: {
-      title: "Operators"
-    },
-    value: {
-      title: "Value"
-    },
-    removeRule: {
-      label: "x",
-      title: "Remove rule"
-    },
-    removeGroup: {
-      label: "x",
-      title: "Remove group"
-    },
-    addRule: {
-      label: "+Rule",
-      title: "Add rule"
-    },
-    addGroup: {
-      label: "+Group",
-      title: "Add group"
-    },
-    combinators: {
-      title: "Combinators"
-    }
-  }
-}
+const getTranslation = () => ({
+  fields: {
+    title: 'Fields',
+  },
+  operators: {
+    title: 'Operators',
+  },
+  value: {
+    title: 'Value',
+  },
+  removeRule: {
+    label: 'x',
+    title: 'Remove rule',
+  },
+  removeGroup: {
+    label: 'x',
+    title: 'Remove group',
+  },
+  addRule: {
+    label: '+Rule',
+    title: 'Add rule',
+  },
+  addGroup: {
+    label: '+Group',
+    title: 'Add group',
+  },
+  combinators: {
+    title: 'Combinators',
+  },
+})
 
 module.exports = {
   setFields,
   getTranslation,
-  normalizeQuery
+  normalizeQuery,
 }
 </code></pre>
         </article>

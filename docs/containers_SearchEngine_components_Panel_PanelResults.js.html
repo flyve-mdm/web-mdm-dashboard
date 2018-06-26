@@ -48,7 +48,7 @@ layout: container
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 
@@ -63,27 +63,25 @@ class PanelResults extends PureComponent {
    * @function render
    */
   render() {
+    const { itemResults } = this.props
+
     let bodyContent = null
 
-    if (this.props.itemResults) {
-      bodyContent = this.props.itemResults.map((item, index) => {
-        return (
-          &lt;div className="rowContent" key={index}>
-            {
-              item.map((fieldObject, indexFieldObject) => {
-                return (
-                  &lt;div
-                    className={index % 2 === 0 ? "cellContent" : "cellContent cellContentTwo"}
-                    key={indexFieldObject}
-                  >
-                    {fieldObject['fieldValue']}
-                  &lt;/div>
-                )
-              })
-            }
-          &lt;/div>
-        )
-      })
+    if (itemResults) {
+      bodyContent = itemResults.map((item, index) => (
+        &lt;div className="rowContent" key={`rowContent-${index.toString()}`}>
+          {
+            item.map((fieldObject, indexFieldObject) => (
+              &lt;div
+                className={index % 2 === 0 ? 'cellContent' : 'cellContent cellContentTwo'}
+                key={`fieldObject-${indexFieldObject.toString()}`}
+              >
+                {fieldObject.fieldValue}
+              &lt;/div>
+            ))
+          }
+        &lt;/div>
+      ))
     }
 
     return bodyContent
