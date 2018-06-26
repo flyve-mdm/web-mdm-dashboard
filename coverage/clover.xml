@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1530031965451" clover="3.2.0">
-  <project timestamp="1530031965451" name="All files">
-    <metrics statements="4763" coveredstatements="241" conditionals="2002" coveredconditionals="145" methods="1108" coveredmethods="63" elements="7873" coveredelements="449" complexity="0" loc="4763" ncloc="4763" packages="109" files="199" classes="199">
+<coverage generated="1530038962812" clover="3.2.0">
+  <project timestamp="1530038962812" name="All files">
+    <metrics statements="4774" coveredstatements="241" conditionals="2002" coveredconditionals="145" methods="1108" coveredmethods="63" elements="7884" coveredelements="449" complexity="0" loc="4774" ncloc="4774" packages="109" files="199" classes="199">
       <package name="src">
         <metrics statements="50" coveredstatements="0" conditionals="29" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -3759,49 +3759,47 @@
         </file>
       </package>
       <package name="src.containers.SearchEngine">
-        <metrics statements="69" coveredstatements="0" conditionals="28" coveredconditionals="0" methods="20" coveredmethods="0"/>
+        <metrics statements="75" coveredstatements="0" conditionals="28" coveredconditionals="0" methods="20" coveredmethods="0"/>
         <file name="actions.js" path="/root/repo/src/containers/SearchEngine/actions.js">
-          <metrics statements="25" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="6" coveredmethods="0"/>
+          <metrics statements="23" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="6" coveredmethods="0"/>
           <line num="34" count="0" type="stmt"/>
           <line num="35" count="0" type="stmt"/>
           <line num="36" count="0" type="stmt"/>
           <line num="38" count="0" type="stmt"/>
           <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="40" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="42" count="0" type="stmt"/>
           <line num="43" count="0" type="stmt"/>
-          <line num="44" count="0" type="stmt"/>
-          <line num="52" count="0" type="stmt"/>
-          <line num="63" count="0" type="stmt"/>
-          <line num="64" count="0" type="stmt"/>
-          <line num="80" count="0" type="stmt"/>
-          <line num="82" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="86" count="0" type="stmt"/>
+          <line num="50" count="0" type="stmt"/>
+          <line num="61" count="0" type="stmt"/>
+          <line num="76" count="0" type="stmt"/>
+          <line num="77" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="81" count="0" type="stmt"/>
+          <line num="89" count="0" type="stmt"/>
+          <line num="90" count="0" type="stmt"/>
           <line num="94" count="0" type="stmt"/>
-          <line num="95" count="0" type="stmt"/>
-          <line num="99" count="0" type="stmt"/>
-          <line num="109" count="0" type="stmt"/>
-          <line num="110" count="0" type="stmt"/>
+          <line num="104" count="0" type="stmt"/>
+          <line num="105" count="0" type="stmt"/>
+          <line num="106" count="0" type="stmt"/>
+          <line num="108" count="0" type="stmt"/>
           <line num="112" count="0" type="stmt"/>
-          <line num="114" count="0" type="stmt"/>
-          <line num="118" count="0" type="stmt"/>
-          <line num="126" count="0" type="stmt"/>
-          <line num="127" count="0" type="stmt"/>
-          <line num="159" count="0" type="stmt"/>
+          <line num="120" count="0" type="stmt"/>
+          <line num="151" count="0" type="stmt"/>
         </file>
         <file name="index.js" path="/root/repo/src/containers/SearchEngine/index.js">
-          <metrics statements="44" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="14" coveredmethods="0"/>
+          <metrics statements="52" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="14" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
-          <line num="35" count="0" type="stmt"/>
-          <line num="36" count="0" type="stmt"/>
-          <line num="39" count="0" type="stmt"/>
-          <line num="42" count="0" type="stmt"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="40" count="0" type="stmt"/>
+          <line num="43" count="0" type="stmt"/>
+          <line num="44" count="0" type="stmt"/>
           <line num="45" count="0" type="stmt"/>
-          <line num="46" count="0" type="stmt"/>
-          <line num="47" count="0" type="stmt"/>
           <line num="48" count="0" type="stmt"/>
-          <line num="53" count="0" type="stmt"/>
+          <line num="49" count="0" type="stmt"/>
+          <line num="50" count="0" type="stmt"/>
+          <line num="51" count="0" type="stmt"/>
           <line num="58" count="0" type="stmt"/>
           <line num="61" count="0" type="stmt"/>
           <line num="73" count="0" type="stmt"/>
@@ -3810,79 +3808,92 @@
           <line num="84" count="0" type="stmt"/>
           <line num="85" count="0" type="stmt"/>
           <line num="86" count="0" type="stmt"/>
-          <line num="95" count="0" type="stmt"/>
-          <line num="105" count="0" type="stmt"/>
+          <line num="94" count="0" type="stmt"/>
+          <line num="103" count="0" type="stmt"/>
           <line num="114" count="0" type="stmt"/>
           <line num="120" count="0" type="stmt"/>
           <line num="121" count="0" type="stmt"/>
-          <line num="125" count="0" type="stmt"/>
-          <line num="129" count="0" type="stmt"/>
-          <line num="133" count="0" type="stmt"/>
-          <line num="145" count="0" type="stmt"/>
-          <line num="156" count="0" type="stmt"/>
-          <line num="157" count="0" type="stmt"/>
-          <line num="161" count="0" type="stmt"/>
+          <line num="122" count="0" type="stmt"/>
+          <line num="124" count="0" type="stmt"/>
+          <line num="128" count="0" type="stmt"/>
+          <line num="132" count="0" type="stmt"/>
+          <line num="135" count="0" type="stmt"/>
+          <line num="147" count="0" type="stmt"/>
+          <line num="158" count="0" type="stmt"/>
+          <line num="159" count="0" type="stmt"/>
+          <line num="160" count="0" type="stmt"/>
+          <line num="162" count="0" type="stmt"/>
           <line num="166" count="0" type="stmt"/>
-          <line num="178" count="0" type="stmt"/>
-          <line num="180" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="170" count="0" type="stmt"/>
           <line num="181" count="0" type="stmt"/>
-          <line num="182" count="0" type="stmt"/>
-          <line num="184" count="0" type="stmt"/>
           <line num="185" count="0" type="stmt"/>
+          <line num="187" count="0" type="stmt"/>
+          <line num="189" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="190" count="0" type="stmt"/>
-          <line num="192" count="0" type="stmt"/>
-          <line num="195" count="0" type="stmt"/>
-          <line num="203" count="0" type="stmt"/>
-          <line num="264" count="0" type="stmt"/>
+          <line num="191" count="0" type="stmt"/>
+          <line num="193" count="0" type="stmt"/>
+          <line num="194" count="0" type="stmt"/>
+          <line num="199" count="0" type="stmt"/>
+          <line num="201" count="0" type="stmt"/>
+          <line num="204" count="0" type="stmt"/>
+          <line num="211" count="0" type="stmt"/>
+          <line num="218" count="0" type="stmt"/>
+          <line num="219" count="0" type="stmt"/>
+          <line num="301" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.SearchEngine.components">
-        <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <file name="SearchQueryBuilder.js" path="/root/repo/src/containers/SearchEngine/components/SearchQueryBuilder.js">
-          <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
           <line num="35" count="0" type="stmt"/>
-          <line num="50" count="0" type="stmt"/>
-          <line num="70" count="0" type="stmt"/>
+          <line num="49" count="0" type="stmt"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="55" count="0" type="stmt"/>
+          <line num="75" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.SearchEngine.components.Panel">
-        <metrics statements="27" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <metrics statements="30" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="9" coveredmethods="0"/>
         <file name="PanelFields.js" path="/root/repo/src/containers/SearchEngine/components/Panel/PanelFields.js">
-          <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+          <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="46" count="0" type="stmt"/>
-          <line num="50" count="0" type="stmt"/>
+          <line num="47" count="0" type="stmt"/>
           <line num="51" count="0" type="stmt"/>
           <line num="52" count="0" type="stmt"/>
-          <line num="62" count="0" type="stmt"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="65" count="0" type="stmt"/>
         </file>
         <file name="PanelResults.js" path="/root/repo/src/containers/SearchEngine/components/Panel/PanelResults.js">
-          <metrics statements="9" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
+          <metrics statements="10" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="46" count="0" type="stmt"/>
-          <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="49" count="0" type="stmt"/>
-          <line num="50" count="0" type="stmt"/>
-          <line num="54" count="0" type="stmt"/>
-          <line num="69" count="0" type="stmt"/>
-          <line num="73" count="0" type="stmt"/>
+          <line num="48" count="0" type="stmt"/>
+          <line num="50" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="51" count="0" type="stmt"/>
+          <line num="52" count="0" type="stmt"/>
+          <line num="55" count="0" type="stmt"/>
+          <line num="67" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
         </file>
         <file name="index.js" path="/root/repo/src/containers/SearchEngine/components/Panel/index.js">
-          <metrics statements="11" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+          <metrics statements="12" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
           <line num="35" count="0" type="stmt"/>
           <line num="42" count="0" type="stmt"/>
           <line num="49" count="0" type="stmt"/>
-          <line num="50" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="52" count="0" type="stmt"/>
-          <line num="58" count="0" type="stmt"/>
+          <line num="51" count="0" type="stmt"/>
+          <line num="52" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="56" count="0" type="stmt"/>
+          <line num="64" count="0" type="stmt"/>
           <line num="66" count="0" type="stmt"/>
           <line num="77" count="0" type="stmt"/>
         </file>
