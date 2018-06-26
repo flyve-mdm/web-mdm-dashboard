@@ -28,11 +28,11 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
 
 /**
@@ -46,13 +46,15 @@ export default class InvitationsItemList extends PureComponent {
    * @function render
    */
   render() {
+    const { itemList } = this.props
+
     return (
       <div style={{ display: 'inline-block' }}>
         <div className="list-pane__name">
-          {(this.props.itemList["PluginFlyvemdmInvitation.User.name"] || I18n.t('commons.name_not_available'))}
+          {(itemList['PluginFlyvemdmInvitation.User.name'] || I18n.t('commons.name_not_available'))}
         </div>
         <div className="list-pane__detail">
-          {this.props.itemList["PluginFlyvemdmInvitation.status"]}
+          {itemList['PluginFlyvemdmInvitation.status']}
         </div>
       </div>
     )
@@ -60,5 +62,5 @@ export default class InvitationsItemList extends PureComponent {
 }
 
 InvitationsItemList.propTypes = {
-  itemList: PropTypes.object.isRequired
+  itemList: PropTypes.object.isRequired,
 }
