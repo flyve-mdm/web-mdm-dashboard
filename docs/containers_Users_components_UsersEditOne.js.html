@@ -65,6 +65,7 @@ import Loading from '../../../components/Loading'
 import ErrorValidation from '../../../components/ErrorValidation'
 import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
+import authtype from '../../../shared/authtype'
 
 /**
  * Component with the user edit form
@@ -82,6 +83,7 @@ class UsersEditOne extends PureComponent {
     this.state = {
       isLoading: true,
       id: getID(history.location.pathname),
+      login: undefined,
       firstName: undefined,
       realName: undefined,
       phone: undefined,
@@ -101,6 +103,10 @@ class UsersEditOne extends PureComponent {
       defaultProfile: undefined,
       validSince: undefined,
       validUntil: undefined,
+      lastLogin: undefined,
+      created: undefined,
+      modified: undefined,
+      authentication: undefined,
     }
   }
 
@@ -124,10 +130,11 @@ class UsersEditOne extends PureComponent {
       const { id } = this.state
 
       try {
-        const response = await glpi.getAnItem({
+        const myUser = await glpi.getAnItem({
           itemtype: itemtype.User,
           id,
         })
+
         const myEmails = await glpi.getSubItems({
           itemtype: itemtype.User,
           id,
@@ -145,19 +152,25 @@ class UsersEditOne extends PureComponent {
         this.setState({
           isLoading: false,
           parametersToEvaluate,
-          firstName: validateData(response.firstname),
-          realName: validateData(response.realname),
-          phone: validateData(response.phone),
-          mobilePhone: validateData(response.mobile),
-          phone2: validateData(response.phone2),
-          administrativeNumber: validateData(response.registration_number),
+          login: myUser.name,
+          firstName: validateData(myUser.firstname),
+          realName: validateData(myUser.realname),
+          phone: validateData(myUser.phone),
+          mobilePhone: validateData(myUser.mobile),
+          phone2: validateData(myUser.phone2),
+          administrativeNumber: validateData(myUser.registration_number),
           currentEmails: myEmails.map(a => ({ ...a })),
           emails: validateData(myEmails, []),
-          imageProfile: validateData(response.picture, 'profile.png'),
+          imageProfile: validateData(myUser.picture, 'profile.png'),
+          comments: validateData(myUser.comment, ''),
           password: '',
           passwordConfirmation: '',
+          lastLogin: myUser.last_login,
+          created: myUser.date_creation,
+          modified: myUser.date_mod,
+          authentication: authtype(myUser.authtype),
           category: {
-            value: validateData(response.usercategories_id),
+            value: validateData(myUser.usercategories_id),
             request: {
               params: {
                 itemtype: itemtype.UserCategory,
@@ -172,7 +185,7 @@ class UsersEditOne extends PureComponent {
             },
           },
           defaultEntity: {
-            value: validateData(response.entities_id),
+            value: validateData(myUser.entities_id),
             request: {
               params: {},
               method: 'getMyEntities',
@@ -180,10 +193,9 @@ class UsersEditOne extends PureComponent {
               value: 'id',
             },
           },
-          comments: '',
           typeImageProfile: 'file',
           title: {
-            value: validateData(response.usertitles_id),
+            value: validateData(myUser.usertitles_id),
             request: {
               params: {
                 itemtype: itemtype.UserTitle,
@@ -198,7 +210,7 @@ class UsersEditOne extends PureComponent {
             },
           },
           location: {
-            value: validateData(response.locations_id),
+            value: validateData(myUser.locations_id),
             request: {
               params: {
                 itemtype: itemtype.Location,
@@ -213,7 +225,7 @@ class UsersEditOne extends PureComponent {
             },
           },
           defaultProfile: {
-            value: validateData(response.profiles_id),
+            value: validateData(myUser.profiles_id),
             request: {
               params: {},
               method: 'getMyProfiles',
@@ -221,8 +233,8 @@ class UsersEditOne extends PureComponent {
               value: 'id',
             },
           },
-          validSince: response.begin_date ? new Date(response.begin_date) : undefined,
-          validUntil: response.end_date ? new Date(response.end_date) : undefined,
+          validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
+          validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined,
         })
       } catch (error) {
         this.setState({ isLoading: false })
@@ -455,6 +467,29 @@ class UsersEditOne extends PureComponent {
       isLoading,
       imageProfile,
       typeImageProfile,
+      realName,
+      firstName,
+      title,
+      location,
+      login,
+      phone,
+      phone2,
+      validSince,
+      administrativeNumber,
+      passwordConfirmation,
+      created,
+      mobilePhone,
+      password,
+      lastLogin,
+      comments,
+      modified,
+      validUntil,
+      parametersToEvaluate,
+      authentication,
+      defaultEntity,
+      defaultProfile,
+      category,
+      emails,
     } = this.state
     const { glpi } = this.props
 
@@ -464,7 +499,29 @@ class UsersEditOne extends PureComponent {
       componetRender = &lt;Loading message={`${I18n.t('commons.loading')}...`} />
     } else {
       const user = usersScheme({
-        state: this.state,
+        realName,
+        firstName,
+        title,
+        location,
+        login,
+        phone,
+        phone2,
+        validSince,
+        administrativeNumber,
+        passwordConfirmation,
+        created,
+        mobilePhone,
+        password,
+        lastLogin,
+        comments,
+        modified,
+        validUntil,
+        parametersToEvaluate,
+        authentication,
+        defaultEntity,
+        defaultProfile,
+        category,
+        emails,
         changeState: this.changeState,
         changeEmail: this.changeEmail,
         deleteEmail: this.deleteEmail,

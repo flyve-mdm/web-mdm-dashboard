@@ -48,7 +48,7 @@ layout: container
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import LayoutListWithNavLinks from '../../components/LayoutListWithNavLinks'
@@ -66,9 +66,21 @@ class Settings extends PureComponent {
    * @function render
    */
   render() {
+    const {
+      match,
+      history,
+    } = this.props
+
     return (
-      &lt;LayoutListWithNavLinks routes={routes} rootPath={this.props.match.url} history={this.props.history}>
-        &lt;GenerateRoutes routes={routes} rootPath={this.props.match.url}/>
+      &lt;LayoutListWithNavLinks
+        routes={routes}
+        rootPath={match.url}
+        history={history}
+      >
+        &lt;GenerateRoutes
+          routes={routes}
+          rootPath={match.url}
+        />
       &lt;/LayoutListWithNavLinks>
     )
   }
@@ -76,7 +88,7 @@ class Settings extends PureComponent {
 
 Settings.propTypes = {
   match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 }
 
 export default Settings

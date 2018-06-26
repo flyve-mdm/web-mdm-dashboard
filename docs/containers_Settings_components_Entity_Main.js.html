@@ -48,11 +48,11 @@ layout: container
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
 
 /**
@@ -66,9 +66,24 @@ class Main extends PureComponent {
    * @function render
    */
   render() {
+    const {
+      changeMode,
+      tokenLife,
+      entityID,
+      downloadURL,
+      devicesCurretlymanaged,
+      fleetsCurrentlyManaged,
+      numberUsers,
+      applicationsUploaded,
+      filesUploaded,
+      invitationsSent,
+      typesPolicies,
+      numberCategoriesForPolicies,
+    } = this.props
+
     return (
       &lt;React.Fragment>
-        &lt;div className="title" style={{ padding: '0 10px'}}>
+        &lt;div className="title" style={{ padding: '0 10px' }}>
           {I18n.t('commons.agent')}
         &lt;/div>
 
@@ -77,18 +92,32 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.token_life')}
           &lt;/div>
           &lt;div className="list-element__controller">
-            &lt;a onClick={() => this.props.changeMode("change Token life")}>{this.props.tokenLife} DAYS&lt;/a>
+            &lt;a
+              onClick={() => changeMode('change Token life')}
+              role="button"
+              tabIndex="0"
+            >
+              {tokenLife}
+              {' '}
+              DAYS
+            &lt;/a>
           &lt;/div>
         &lt;/div>
 
         &lt;div className="list-element">
           &lt;div className="list-element__message">
             {I18n.t('settings.entity.download_url')}
-            &lt;div className="list-element__detail">{this.props.downloadURL}&lt;/div>
+            &lt;div className="list-element__detail">
+              {downloadURL}
+            &lt;/div>
           &lt;/div>
 
           &lt;div className="list-element__controller">
-            &lt;button className="btn btn--secondary" onClick={() => this.props.changeMode("change download URL")}>
+            &lt;button
+              className="btn btn--secondary"
+              onClick={() => changeMode('change download URL')}
+              type="button"
+            >
               {I18n.t('commons.change')}
             &lt;/button>
           &lt;/div>
@@ -103,7 +132,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.id')}
           &lt;/div>
           &lt;div className="list-element__controller">
-            {this.props.entityID}
+            {entityID}
           &lt;/div>
         &lt;/div>
 
@@ -116,7 +145,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.devices_currently')}
           &lt;/div>
           &lt;div className="list-element__controller">
-            {this.props.devicesCurretlymanaged}
+            {devicesCurretlymanaged}
           &lt;/div>
         &lt;/div>
 
@@ -125,7 +154,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.fleets_currently')}
           &lt;/div>
           &lt;div className="list-element__controller">
-            {this.props.fleetsCurrentlyManaged}
+            {fleetsCurrentlyManaged}
           &lt;/div>
         &lt;/div>
 
@@ -134,7 +163,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.files_uploaded')}
           &lt;/div>
           &lt;div className="list-element__controller">
-            {this.props.filesUploaded}
+            {filesUploaded}
           &lt;/div>
         &lt;/div>
 
@@ -143,7 +172,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.applications_uploaded')}
           &lt;/div>
           &lt;div className="list-element__controller">
-            {this.props.applicationsUploaded}
+            {applicationsUploaded}
           &lt;/div>
         &lt;/div>
 
@@ -152,7 +181,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.number_of_users')}
           &lt;/div>
           &lt;div className="list-element__controller">
-            {this.props.numberUsers}
+            {numberUsers}
           &lt;/div>
         &lt;/div>
 
@@ -161,7 +190,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.invitations_sent')}
           &lt;/div>
           &lt;div className="list-element__controller">
-            {this.props.invitationsSent}
+            {invitationsSent}
           &lt;/div>
         &lt;/div>
 
@@ -170,7 +199,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.types_of_policies')}
           &lt;/div>
           &lt;div className="list-element__controller">
-            {this.props.typesPolicies}
+            {typesPolicies}
           &lt;/div>
         &lt;/div>
 
@@ -179,7 +208,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.number_of_categories')}
           &lt;/div>
           &lt;div className="list-element__controller">
-            {this.props.numberCategoriesForPolicies}
+            {numberCategoriesForPolicies}
           &lt;/div>
         &lt;/div>
       &lt;/React.Fragment>
@@ -199,7 +228,7 @@ Main.propTypes = {
   devicesCurretlymanaged: PropTypes.string.isRequired,
   entityID: PropTypes.string.isRequired,
   downloadURL: PropTypes.string.isRequired,
-  changeMode: PropTypes.func.isRequired
+  changeMode: PropTypes.func.isRequired,
 }
 
 export default Main

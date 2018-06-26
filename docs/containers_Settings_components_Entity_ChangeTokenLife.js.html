@@ -48,31 +48,31 @@ layout: container
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  uiSetNotification
-} from '../../../../store/ui/actions'
-import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux'
 import {
-  connect
+  connect,
 } from 'react-redux'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
+import {
+  uiSetNotification,
+} from '../../../../store/ui/actions'
 import Loading from '../../../../components/Loading'
 import itemtype from '../../../../shared/itemtype'
 import ContentPane from '../../../../components/ContentPane'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -85,9 +85,10 @@ class ChangeTokenLife extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
+    const { tokenLife } = this.props
     this.state = {
-      tokenLife: this.props.tokenLife,
-      isLoading: false
+      tokenLife,
+      isLoading: false,
     }
   }
 
@@ -98,7 +99,7 @@ class ChangeTokenLife extends PureComponent {
    */
   changeState = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     })
   }
 
@@ -108,30 +109,40 @@ class ChangeTokenLife extends PureComponent {
    */
   saveTokenLife = () => {
     this.setState({
-      isLoading: true
+      isLoading: true,
     }, async () => {
+      const {
+        glpi,
+        entityID,
+        saveValues,
+        changeMode,
+        actions,
+        handleMessage,
+      } = this.props
+      const { tokenLife } = this.state
+
       try {
-        await this.props.glpi.updateItem({
+        await glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmEntityconfig,
           input: [{
-            id: this.props.entityID,
-            agent_token_life: `P${this.state.tokenLife}D`
-          }]
+            id: entityID,
+            agent_token_life: `P${tokenLife}D`,
+          }],
         })
-        this.props.saveValues('tokenLife', this.state.tokenLife)
-        this.props.changeMode('')
-        this.props.actions.setNotification({
+        saveValues('tokenLife', tokenLife)
+        changeMode('')
+        actions.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.token_life_changed'),
-          type: 'success'
+          type: 'success',
         })
       } catch (error) {
-        this.props.actions.setNotification(this.props.handleMessage({
+        actions.setNotification(handleMessage({
           type: 'alert',
-          message: error
+          message: error,
         }))
         this.setState({
-          isLoading: false
+          isLoading: false,
         })
       }
     })
@@ -142,8 +153,14 @@ class ChangeTokenLife extends PureComponent {
    * @function render
    */
   render() {
-    return this.state.isLoading ?
-      &lt;Loading message={`${I18n.t('commons.saving')}...`}/>
+    const {
+      isLoading,
+      tokenLife,
+    } = this.state
+    const { changeMode } = this.state
+
+    return isLoading
+      ? &lt;Loading message={`${I18n.t('commons.saving')}...`} />
       : (
         &lt;ContentPane>
           &lt;div className="list-element">
@@ -157,14 +174,23 @@ class ChangeTokenLife extends PureComponent {
               type="number"
               className="win-textbox"
               name="tokenLife"
-              value={this.state.tokenLife}
+              value={tokenLife}
               onChange={this.changeState}
             />
           &lt;/div>
-          &lt;button className="btn btn--secondary" style={{marginRight: 10}} onClick={() => this.props.changeMode("")}>
+          &lt;button
+            className="btn btn--secondary"
+            style={{ marginRight: 10 }}
+            onClick={() => changeMode('')}
+            type="button"
+          >
             {I18n.t('commons.cancel')}
           &lt;/button>
-          &lt;button className="btn btn--primary" onClick={this.saveTokenLife}>
+          &lt;button
+            className="btn btn--primary"
+            onClick={this.saveTokenLife}
+            type="submit"
+          >
             {I18n.t('commons.save')}
           &lt;/button>
         &lt;/ContentPane>
@@ -178,7 +204,7 @@ ChangeTokenLife.propTypes = {
   saveValues: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
-  entityID: PropTypes.string.isRequired
+  entityID: PropTypes.string.isRequired,
 }
 
 export default connect(null, mapDispatchToProps)(ChangeTokenLife)
