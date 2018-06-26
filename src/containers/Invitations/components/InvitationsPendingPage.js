@@ -28,17 +28,17 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
+import {
+  I18n,
+} from 'react-i18nify'
 import EmptyMessage from '../../../components/EmptyMessage'
 import ContentPane from '../../../components/ContentPane'
 import Loader from '../../../components/Loader'
-import {
-  I18n
-} from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
 
@@ -48,16 +48,55 @@ import getID from '../../../shared/getID'
  * @extends PureComponent
  */
 class InvitationsPendingPage extends PureComponent {
+  /**
+   * Handle item list render
+   * @constant ItemListRenderer
+   * @type {component}
+   */
+  ItemListRenderer = ReactWinJS.reactRenderer(ItemList => (
+    <div style={{ padding: '14px', width: '100%' }}>
+      <b>
+        {ItemList.data['PluginFlyvemdmInvitationlog.event']}
+      </b>
+      <br />
+      {ItemList.data['PluginFlyvemdmInvitationlog.date_creation']}
+    </div>
+  ))
+
   /** @constructor */
   constructor(props) {
     super(props)
+    const { history } = this.props
+
     this.state = {
       layout: {
-        type: WinJS.UI.ListLayout
+        type: WinJS.UI.ListLayout,
       },
       isLoading: true,
       itemList: new WinJS.Binding.List([]),
-      id: getID(this.props.history.location.pathname)
+      id: getID(history.location.pathname),
+    }
+  }
+
+  /**
+   * Make the call to update the list
+   * @function componentDidMount
+   */
+  componentDidMount() {
+    this.handleRefresh()
+  }
+
+  /**
+   * Make the call to update the list when it's necessary
+   * @function componentDidUpdate
+   * @param {object} prevProps
+   * @param {object} prevState
+   */
+  componentDidUpdate(prevProps, prevState) {
+    const { id } = this.state
+
+    if (prevState.id !== id) {
+      this.handleRefresh()
     }
   }
 
@@ -74,33 +113,12 @@ class InvitationsPendingPage extends PureComponent {
         ...prevState,
         id: getID(nextProps.history.location.pathname),
         itemList: new WinJS.Binding.List([]),
-        isLoading: true
-      }
-    } else {
-      return {
-        ...prevState
+        isLoading: true,
       }
     }
-  }
-
-  /**
-   * Make the call to update the list when it's necessary
-   * @function componentDidUpdate
-   * @param {object} prevProps
-   * @param {object} prevState
-   */
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.id !== this.state.id) {
-      this.handleRefresh()
+    return {
+      ...prevState,
     }
-  }
-
-  /**
-   * Make the call to update the list
-   * @function componentDidMount
-   */
-  componentDidMount() {
-    this.handleRefresh()
   }
 
   /**
@@ -109,51 +127,45 @@ class InvitationsPendingPage extends PureComponent {
    * @async
    */
   handleRefresh = async () => {
+    const { glpi } = this.props
+    const { id } = this.state
+
     try {
-      const logs = await this.props.glpi.searchItems({
+      const logs = await glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitationlog,
         options: {
           uid_cols: true,
-          forcedisplay: [2, 3, 4, 5]
+          forcedisplay: [2, 3, 4, 5],
         },
         criteria: [{
           field: '4',
           searchtype: 'equal',
-          value: this.state.id
-        }]
+          value: id,
+        }],
       })
       this.setState({
         isLoading: false,
-        itemList: new WinJS.Binding.List(logs.data)
+        itemList: new WinJS.Binding.List(logs.data),
       })
     } catch (error) {
       this.setState({
         isLoading: false,
-        itemList: new WinJS.Binding.List([])
+        itemList: new WinJS.Binding.List([]),
       })
     }
   }
-
-  /**
-   * Handle item list render
-   * @constant ItemListRenderer
-   * @type {component}
-   */
-  ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-    return (
-      <div style={{ padding: '14px', width: '100%' }}>
-        <b>{ItemList.data['PluginFlyvemdmInvitationlog.event']}</b>
-        <br />
-        {ItemList.data['PluginFlyvemdmInvitationlog.date_creation']}
-      </div>
-    )
-  })
 
   /**
    * Render component
    * @function render
    */
   render() {
+    const {
+      isLoading,
+      itemList,
+      layout,
+    } = this.state
+
     let listComponent = (
       <ContentPane>
         <div className="list-pane" style={{ margin: '0 10px' }}>
@@ -167,7 +179,7 @@ class InvitationsPendingPage extends PureComponent {
       </ContentPane>
     )
 
-    if (!this.state.isLoading && this.state.itemList.length > 0) {
+    if (!isLoading && itemList.length > 0) {
       listComponent = (
         <ContentPane>
           <div className="list-pane" style={{ margin: '0 10px' }}>
@@ -180,17 +192,17 @@ class InvitationsPendingPage extends PureComponent {
               ref={(listView) => { this.listView = listView }}
               className="list-pane__content win-selectionstylefilled"
               style={{ height: 'calc(100% - 48px)' }}
-              itemDataSource={this.state.itemList.dataSource}
+              itemDataSource={itemList.dataSource}
               itemTemplate={this.ItemListRenderer}
-              layout={this.state.layout}
-              selectionMode={'single'}
+              layout={layout}
+              selectionMode="single"
             />
           </div>
         </ContentPane>
       )
-    } else if (!this.state.isLoading && this.state.itemList.length === 0) {
+    } else if (!isLoading && itemList.length === 0) {
       listComponent = (
-        <EmptyMessage message={I18n.t('invitations.no_logs')}/>
+        <EmptyMessage message={I18n.t('invitations.no_logs')} />
       )
     }
 
@@ -200,7 +212,7 @@ class InvitationsPendingPage extends PureComponent {
 
 InvitationsPendingPage.propTypes = {
   history: PropTypes.object.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
 }
 
 export default InvitationsPendingPage
