@@ -28,32 +28,32 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux'
 import {
-  connect
+  connect,
 } from 'react-redux'
+import {
+  I18n,
+} from 'react-i18nify'
 import animationsWinJs from '../../../../shared/animationsWinJs'
 import {
-  changeLanguage
+  changeLanguage,
 } from '../../../../store/i18n/actions'
-import {
-  I18n
-} from 'react-i18nify'
 import ContentPane from '../../../../components/ContentPane'
 import tractionsList from '../../../../hoc/withI18NTranslation/i18n/languages'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    changeLanguage: bindActionCreators(changeLanguage, dispatch)
+    changeLanguage: bindActionCreators(changeLanguage, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -69,8 +69,8 @@ class Display extends PureComponent {
     const display = localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')) : {}
     this.state = {
       applicationsUploaded: display.applicationsUploaded !== undefined ? display.applicationsUploaded : true,
-      devicesByOperatingSystemVersion: display.devicesByOperatingSystemVersion !== undefined ? display.devicesByOperatingSystemVersion :
-        true,
+      devicesByOperatingSystemVersion: display.devicesByOperatingSystemVersion !== undefined ? display.devicesByOperatingSystemVersion
+        : true,
       devicesByUsers: display.devicesByUsers !== undefined ? display.devicesByUsers : true,
       devicesCurrentlyManaged: display.devicesCurrentlyManaged !== undefined ? display.devicesCurrentlyManaged : true,
       filesUploaded: display.filesUploaded !== undefined ? display.filesUploaded : true,
@@ -83,23 +83,26 @@ class Display extends PureComponent {
   }
 
   /**
+   * Change local storage
+   * @function componentDidUpdate
+   */
+  componentDidUpdate() {
+    const { animations } = this.state
+
+    localStorage.setItem('display', JSON.stringify(this.state))
+    animationsWinJs(animations)
+  }
+
+  /**
    * Handle change state
    * @function changeLocalStorage
    * @param {string} name
    */
   changeLocalStorage = (name) => {
+    const { [name]: currentValue } = this.state
     this.setState({
-      [name]: !this.state[name]
+      [name]: !currentValue,
     })
-  }
-
-  /**
-   * Change local storage
-   * @function componentDidUpdate
-   */
-  componentDidUpdate() {
-    localStorage.setItem('display', JSON.stringify(this.state))
-    animationsWinJs(this.state.animations)
   }
 
   /**
@@ -107,6 +110,20 @@ class Display extends PureComponent {
    * @function render
    */
   render() {
+    const { actions } = this.props
+    const {
+      animations,
+      devicesCurrentlyManaged,
+      fleetsCurrentlyManaged,
+      filesUploaded,
+      applicationsUploaded,
+      invitationsSent,
+      numberUsers,
+      pendingInvitations,
+      devicesByUsers,
+      devicesByOperatingSystemVersion,
+    } = this.state
+
     return (
       <ContentPane>
         <h2 style={{ margin: '10px' }}>
@@ -124,14 +141,14 @@ class Display extends PureComponent {
           <div
             className="list-element__controller"
             style={{
-              paddingTop: 10
+              paddingTop: 10,
             }}
           >
-            <span className='language__span btn' style={{margin: 0}}>
+            <span className="language__span btn" style={{ margin: 0 }}>
               {I18n.t('commons.language')}
               <select
-                className='language__select'
-                onChange={event => this.props.actions.changeLanguage(event.target.value)}
+                className="language__select"
+                onChange={event => actions.changeLanguage(event.target.value)}
               >
                 {tractionsList()}
               </select>
@@ -140,17 +157,17 @@ class Display extends PureComponent {
         </div>
 
         <div className="title">
-            {I18n.t('commons.animations')}
+          {I18n.t('commons.animations')}
         </div>
 
         <div className="list-element">
           <div className="list-element__message">
-              {this.state.animations ? I18n.t('settings.display.disable_animations') : I18n.t('settings.display.enable_animations') }
+            {animations ? I18n.t('settings.display.disable_animations') : I18n.t('settings.display.enable_animations') }
           </div>
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.animations}
+              checked={animations}
               onChange={() => this.changeLocalStorage('animations')}
             />
           </div>
@@ -167,7 +184,7 @@ class Display extends PureComponent {
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.devicesCurrentlyManaged}
+              checked={devicesCurrentlyManaged}
               onChange={() => this.changeLocalStorage('devicesCurrentlyManaged')}
             />
           </div>
@@ -180,7 +197,7 @@ class Display extends PureComponent {
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.fleetsCurrentlyManaged}
+              checked={fleetsCurrentlyManaged}
               onChange={() => this.changeLocalStorage('fleetsCurrentlyManaged')}
             />
           </div>
@@ -193,7 +210,7 @@ class Display extends PureComponent {
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.filesUploaded}
+              checked={filesUploaded}
               onChange={() => this.changeLocalStorage('filesUploaded')}
             />
           </div>
@@ -206,7 +223,7 @@ class Display extends PureComponent {
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.applicationsUploaded}
+              checked={applicationsUploaded}
               onChange={() => this.changeLocalStorage('applicationsUploaded')}
             />
           </div>
@@ -219,7 +236,7 @@ class Display extends PureComponent {
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.numberUsers}
+              checked={numberUsers}
               onChange={() => this.changeLocalStorage('numberUsers')}
             />
           </div>
@@ -227,12 +244,12 @@ class Display extends PureComponent {
 
         <div className="list-element">
           <div className="list-element__message">
-              {I18n.t('settings.display.invitations_sent')}
+            {I18n.t('settings.display.invitations_sent')}
           </div>
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.invitationsSent}
+              checked={invitationsSent}
               onChange={() => this.changeLocalStorage('invitationsSent')}
             />
           </div>
@@ -245,7 +262,7 @@ class Display extends PureComponent {
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.pendingInvitations}
+              checked={pendingInvitations}
               onChange={() => this.changeLocalStorage('pendingInvitations')}
             />
           </div>
@@ -258,7 +275,7 @@ class Display extends PureComponent {
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.devicesByUsers}
+              checked={devicesByUsers}
               onChange={() => this.changeLocalStorage('devicesByUsers')}
             />
           </div>
@@ -271,7 +288,7 @@ class Display extends PureComponent {
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.devicesByOperatingSystemVersion}
+              checked={devicesByOperatingSystemVersion}
               onChange={() => this.changeLocalStorage('devicesByOperatingSystemVersion')}
             />
           </div>
@@ -282,7 +299,7 @@ class Display extends PureComponent {
 }
 
 Display.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
 }
 
 export default connect(null, mapDispatchToProps)(Display)
