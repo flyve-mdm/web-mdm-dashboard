@@ -28,7 +28,7 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import PanelResult from './PanelResults'
@@ -46,15 +46,13 @@ class Panel extends PureComponent {
    * @return {array}
    */
   createFields = () => {
+    const { itemResults } = this.props
+
     const fields = []
-    this.props.itemResults.length && fields.push.apply(
-      fields, this.props.itemResults[0].map(field => {
-        return [
-          field['fieldId'],
-          field['fieldName']
-        ]
-      })
-    )
+    itemResults.length && fields.push(...itemResults[0].map(field => [
+      field.fieldId,
+      field.fieldName,
+    ]))
     return fields
   }
 
@@ -63,11 +61,13 @@ class Panel extends PureComponent {
    * @function render
    */
   render() {
+    const { itemResults } = this.props
+
     return (
       <React.Fragment>
         <div className="searchList">
           <PanelFields fields={this.createFields()} />
-          <PanelResult itemResults={this.props.itemResults} />
+          <PanelResult itemResults={itemResults} />
         </div>
       </React.Fragment>
     )
@@ -75,8 +75,7 @@ class Panel extends PureComponent {
 }
 
 Panel.propTypes = {
-  itemType: PropTypes.string.isRequired,
-  itemResults: PropTypes.array.isRequired
+  itemResults: PropTypes.array.isRequired,
 }
 
 export default Panel

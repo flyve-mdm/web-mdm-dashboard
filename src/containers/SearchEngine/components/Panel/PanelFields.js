@@ -28,7 +28,7 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 
@@ -43,14 +43,17 @@ class PanelFields extends PureComponent {
    * @function render
    */
   render() {
+    const { fields } = this.props
     return (
       <div className="searchListHeader">
         {
-          this.props.fields.map(field => {
+          fields.map((field) => {
             const fieldKey = `${field[0]}_${field[1]}`
             const fieldName = field[1]
             return (
-              <div key={fieldKey} className="cellHeader">{fieldName}</div>
+              <div key={fieldKey} className="cellHeader">
+                {fieldName}
+              </div>
             )
           })
         }
@@ -60,7 +63,7 @@ class PanelFields extends PureComponent {
 }
 
 PanelFields.propTypes = {
-  fields: PropTypes.array.isRequired
+  fields: PropTypes.array.isRequired,
 }
 
 export default PanelFields

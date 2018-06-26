@@ -28,12 +28,12 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import QueryBuilder from 'react-querybuilder'
 import PropTypes from 'prop-types'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
 
 /**
@@ -47,10 +47,15 @@ class SearchQueryBuilder extends PureComponent {
    * @function render
    */
   render() {
+    const {
+      fields,
+      handleChangeQuery,
+    } = this.props
+
     return (
       <div className="queryBuilder">
         <QueryBuilder
-          fields={this.props.fields}
+          fields={fields}
           operators={[
             { name: 'contains', label: I18n.t('commons.contains') },
             { name: 'equal', label: I18n.t('commons.equals') }, // equal instead equals because work it
@@ -58,9 +63,9 @@ class SearchQueryBuilder extends PureComponent {
             { name: 'lessthan', label: I18n.t('commons.less_than') },
             { name: 'morethan', label: I18n.t('commons.more_than') },
             { name: 'under', label: I18n.t('commons.under') },
-            { name: 'notunder', label: I18n.t('commons.not_under') }
+            { name: 'notunder', label: I18n.t('commons.not_under') },
           ]}
-          onQueryChange={this.props.handleChangeQuery}
+          onQueryChange={handleChangeQuery}
         />
       </div>
     )
@@ -69,7 +74,7 @@ class SearchQueryBuilder extends PureComponent {
 
 SearchQueryBuilder.propTypes = {
   fields: PropTypes.array.isRequired,
-  handleChangeQuery: PropTypes.func.isRequired
+  handleChangeQuery: PropTypes.func.isRequired,
 }
 
 
