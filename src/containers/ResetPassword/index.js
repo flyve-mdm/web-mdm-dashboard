@@ -50,7 +50,6 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     isLoading: state.ui.loading,
-    type: state.ui.notification.type,
   }
 }
 
@@ -114,7 +113,7 @@ class ResetPassword extends PureComponent {
                 className="btn btn--primary"
                 style={{ margin: '20px' }}
                 onClick={this.handleResetPassword}
-                type="button"
+                type="submit"
               >
                 {I18n.t('login.reset_password')}
               </button>
@@ -146,7 +145,6 @@ class ResetPassword extends PureComponent {
      */
     render() {
       const { isLoading } = this.props
-
       if (isLoading) {
         return (
           <div style={{ height: '140px' }}>
@@ -165,14 +163,14 @@ class ResetPassword extends PureComponent {
     }
 }
 
+ResetPassword.defaultProps = {
+}
+
 ResetPassword.propTypes = {
   history: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  type: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
-}
-ResetPassword.defaultProps = {
-  type: 'info',
+  location: PropTypes.object.isRequired,
 }
 
 export default withAuthenticationLayout(
