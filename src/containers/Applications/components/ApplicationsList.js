@@ -28,18 +28,18 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
-} from "react"
+  PureComponent,
+} from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
+import {
+  I18n,
+} from 'react-i18nify'
 import ApplicationsItemList from './ApplicationsItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
-import {
-  I18n
-} from 'react-i18nify'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 
@@ -48,24 +48,31 @@ import publicURL from '../../../shared/publicURL'
  * @extends PureComponent
  */
 export default class ApplicationsList extends PureComponent {
+  /** Item list render */
+  ItemListRenderer = ReactWinJS.reactRenderer(ItemList => (
+    <ApplicationsItemList
+      itemList={ItemList.data}
+      size={42}
+    />
+  ))
+
   /** @constructor */
   constructor(props) {
     super(props)
     this.state = {
       layout: {
-        type: WinJS.UI.ListLayout
+        type: WinJS.UI.ListLayout,
       },
-      scrolling: false,
       isLoading: false,
       isLoadingMore: false,
       itemList: new WinJS.Binding.List([]),
-      order: "ASC",
+      order: 'ASC',
       totalcount: 0,
       pagination: {
         start: 0,
         page: 1,
-        count: 15
-      }
+        count: 15,
+      },
     }
   }
 
@@ -73,44 +80,48 @@ export default class ApplicationsList extends PureComponent {
     this.handleRefresh()
   }
 
-  componentDidUpdate(prevProps, prevState, prevContext) {
+  componentDidUpdate(prevProps) {
+    const {
+      totalcount,
+      pagination,
+      isLoadingMore,
+    } = this.state
+    const {
+      action,
+      changeAction,
+      selectedItems,
+      selectionMode,
+    } = this.props
+
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
-      this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state
-        .pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
+      this.listView.winControl.footer.style.height = totalcount > (pagination.page * pagination.count) ? isLoadingMore ? '100px' : '42px' : '1px'
     }
     if (this.toolBar) {
       this.toolBar.winControl.forceLayout();
     }
 
-    if (this.props.action === 'reload') {
+    if (action === 'reload') {
       this.handleRefresh()
-      this.props.changeAction(null)
+      changeAction(null)
     }
 
-    if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
+    if (prevProps.selectedItems.length > 0 && selectedItems.length === 0 && !selectionMode) {
       if (this.listView) {
         this.listView.winControl.selection.clear()
       }
     }
   }
 
+  /**
+   * Clean the selection mode
+   * @function componentWillUnmount
+   */
   componentWillUnmount() {
-    this.props.changeSelectionMode(false)
-  }
+    const { changeSelectionMode } = this.props
 
-  /** Item list render */
-  ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-    return ( <
-      ApplicationsItemList itemList = {
-        ItemList.data
-      }
-      size = {
-        42
-      }
-      />
-    )
-  })
+    changeSelectionMode(false)
+  }
 
   /**
    * handle fetch applications
@@ -118,38 +129,45 @@ export default class ApplicationsList extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = async () => {
+    const {
+      glpi,
+      history,
+    } = this.props
+    const {
+      order,
+      pagination,
+    } = this.state
+
     try {
-      this.props.history.push(`${publicURL}/app/applications`)
+      history.push(`${publicURL}/app/applications`)
       this.setState({
         isLoading: true,
-        scrolling: false,
         totalcount: 0,
         pagination: {
           start: 0,
           page: 1,
-          count: 15
-        }
+          count: 15,
+        },
       })
-      const response = await this.props.glpi.searchItems({
+      const response = await glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPackage,
         options: {
           uid_cols: true,
           forcedisplay: [1, 2, 3, 4, 5, 6],
-          order: this.state.order,
-          range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`
-        }
+          order,
+          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
+        },
       })
       this.setState({
         isLoading: false,
         order: response.order,
         itemList: new WinJS.Binding.List(response.data),
-        totalcount: response.totalcount
+        totalcount: response.totalcount,
       })
-
     } catch (error) {
       this.setState({
         isLoading: false,
-        order: "ASC"
+        order: 'ASC',
       })
     }
   }
@@ -159,8 +177,10 @@ export default class ApplicationsList extends PureComponent {
    * @function handleEdit
    */
   handleEdit = () => {
-    const location = `${this.props.history.location.pathname}/edit`
-    this.props.history.push(location)
+    const { history } = this.props
+
+    const location = `${history.location.pathname}/edit`
+    history.push(location)
   }
 
   /**
@@ -168,9 +188,15 @@ export default class ApplicationsList extends PureComponent {
    * @function handleAdd
    */
   handleAdd = () => {
-    this.props.history.push(`${publicURL}/app/applications/add`)
-    this.props.changeSelectionMode(false)
-    this.props.changeSelectedItems([])
+    const {
+      history,
+      changeSelectionMode,
+      changeSelectedItems,
+    } = this.props
+
+    history.push(`${publicURL}/app/applications/add`)
+    changeSelectionMode(false)
+    changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -181,9 +207,16 @@ export default class ApplicationsList extends PureComponent {
    * @function handleToggleSelectionMode
    */
   handleToggleSelectionMode = () => {
-    this.props.history.push(`${publicURL}/app/applications`)
-    this.props.changeSelectionMode(!this.props.selectionMode)
-    this.props.changeSelectedItems([])
+    const {
+      history,
+      changeSelectionMode,
+      selectionMode,
+      changeSelectedItems,
+    } = this.props
+
+    history.push(`${publicURL}/app/applications`)
+    changeSelectionMode(!selectionMode)
+    changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -195,19 +228,29 @@ export default class ApplicationsList extends PureComponent {
    * @param {object} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    let listView = eventObject.currentTarget.winControl
-    let index = listView.selection.getIndices()
-    let itemSelected = []
+    const {
+      changeSelectedItems,
+      selectionMode,
+      history,
+    } = this.props
+    const { itemList } = this.state
+
+    const listView = eventObject.currentTarget.winControl
+    const index = listView.selection.getIndices()
+    const itemSelected = []
 
     for (const item of index) {
-      itemSelected.push(this.state.itemList.getItem(item).data)
+      itemSelected.push(itemList.getItem(item).data)
     }
-    this.props.changeSelectedItems(itemSelected)
-    if (index.length === 1 && !this.props.selectionMode) {
-      this.props.history.push(`${publicURL}/app/applications/${itemSelected[0]["PluginFlyvemdmPackage.id"]}`)
+
+    changeSelectedItems(itemSelected)
+
+    if (index.length === 1 && !selectionMode) {
+      history.push(`${publicURL}/app/applications/${itemSelected[0]['PluginFlyvemdmPackage.id']}`)
     }
-    if (index.length > 1 && !this.props.selectionMode) {
-      this.props.history.push(`${publicURL}/app/applications/edit/`)
+
+    if (index.length > 1 && !selectionMode) {
+      history.push(`${publicURL}/app/applications/edit/`)
     }
   }
 
@@ -216,55 +259,61 @@ export default class ApplicationsList extends PureComponent {
    * @function handleSelectionChanged
    * @param {object} eventObject
    */
-  handleDelete = async (eventObject) => {
+  handleDelete = async () => {
+    const {
+      selectedItems,
+      glpi,
+      setNotification,
+      changeSelectionMode,
+      changeSelectedItems,
+      changeAction,
+      handleMessage,
+    } = this.props
+
     try {
       const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
-
-        let itemListToDelete = this.props.selectedItems.map((item) => {
-          return {
-            id: item["PluginFlyvemdmPackage.id"]
-          }
-        })
+        const itemListToDelete = selectedItems.map(item => ({
+          id: item['PluginFlyvemdmPackage.id'],
+        }))
 
         this.setState({
-          isLoading: true
+          isLoading: true,
         })
 
-        await this.props.glpi.deleteItem({
+        await glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
           input: itemListToDelete,
           queryString: {
-            force_purge: true
-          }
+            force_purge: true,
+          },
         })
 
-        this.props.setNotification({
+        setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.applications_successfully_removed'),
-          type: 'success'
+          type: 'success',
         })
-        this.props.changeSelectionMode(false)
-        this.props.changeSelectedItems([])
-        this.props.changeAction('reload')
+        changeSelectionMode(false)
+        changeSelectedItems([])
+        changeAction('reload')
       } else {
         // Exit selection mode
-        this.props.changeSelectionMode(false)
-        this.props.changeSelectedItems([])
+        changeSelectionMode(false)
+        changeSelectedItems([])
 
         this.listView.winControl.selection.clear()
       }
-
     } catch (error) {
-      this.props.setNotification(this.props.handleMessage({
+      setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
-      this.props.changeSelectionMode(false)
-      this.props.changeSelectedItems([])
+      changeSelectionMode(false)
+      changeSelectedItems([])
 
-      this.setState((prevState, props) => ({
-        isLoading: false
+      this.setState(() => ({
+        isLoading: false,
       }))
     }
   }
@@ -275,54 +324,46 @@ export default class ApplicationsList extends PureComponent {
    * @function handleSort
    */
   handleSort = async () => {
+    const { order } = this.state
+    const {
+      glpi,
+      history,
+    } = this.props
+
     try {
       this.setState({
         isLoading: true,
         pagination: {
           start: 0,
           page: 1,
-          count: 15
-        }
+          count: 15,
+        },
       })
-      let newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-      const response = await this.props.glpi.searchItems({
+      const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
+
+      const response = await glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPackage,
         options: {
           uid_cols: true,
           order: newOrder,
-          forcedisplay: [1, 2, 3, 4, 5, 6]
-        }
+          forcedisplay: [1, 2, 3, 4, 5, 6],
+        },
       })
 
       this.setState({
         isLoading: false,
         order: response.order,
         totalcount: response.totalcount,
-        itemList: new WinJS.Binding.List(response.data)
+        itemList: new WinJS.Binding.List(response.data),
       })
-      this.props.history.push(`${publicURL}/app/applications`)
 
+      history.push(`${publicURL}/app/applications`)
     } catch (error) {
       this.setState({
         isLoading: false,
-        order: "ASC"
+        order: 'ASC',
       })
-    }
-  }
-
-  /**
-   * handle change loading state
-   * @function onLoadingStateChanged
-   * @param {object} eventObject
-   */
-  onLoadingStateChanged = (eventObject) => {
-    if (eventObject.detail.scrolling === true) {
-      setTimeout(() => {
-        this.setState({
-          scrolling: true
-        })
-      }, 0)
     }
   }
 
@@ -333,49 +374,57 @@ export default class ApplicationsList extends PureComponent {
    * @param {object} eventObject
    */
   loadMoreData = async () => {
+    const {
+      pagination,
+      totalcount,
+      order,
+      itemList,
+    } = this.state
+    const { glpi } = this.props
+
     try {
       this.setState({
-        isLoadingMore: true
+        isLoadingMore: true,
       })
-      let range = {
-        from: this.state.pagination.count * this.state.pagination.page,
-        to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1
+      const range = {
+        from: pagination.count * pagination.page,
+        to: (pagination.count * (pagination.page + 1)) - 1,
       }
 
-      if (range.from <= this.state.totalcount) {
+      if (range.from <= totalcount) {
         for (const key in range) {
-          if (range.hasOwnProperty(key)) {
-            if (range[key] >= this.state.totalcount)
-              range[key] = this.state.totalcount - 1
+          if (Object.prototype.hasOwnProperty.call(range, key)) {
+            if (range[key] >= totalcount) { range[key] = totalcount - 1 }
           }
         }
-        const response = await this.props.glpi.searchItems({
+        const response = await glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmPackage,
           options: {
             uid_cols: true,
             forcedisplay: [1, 2, 3, 4, 5, 6],
-            order: this.state.order,
-            range: `${range.from}-${range.to}`
-          }
+            order,
+            range: `${range.from}-${range.to}`,
+          },
         })
 
         for (const item in response.data) {
-          this.state.itemList.push(response.data[item])
+          if (Object.prototype.hasOwnProperty.call(response.data, item)) {
+            itemList.push(response.data[item])
+          }
         }
 
         this.setState({
           isLoadingMore: false,
           totalcount: response.totalcount,
           pagination: {
-            ...this.state.pagination,
-            page: this.state.pagination.page + 1
-          }
+            ...pagination,
+            page: pagination.page + 1,
+          },
         })
       }
-
     } catch (error) {
       this.setState({
-        isLoadingMore: false
+        isLoadingMore: false,
       })
     }
   }
@@ -385,84 +434,109 @@ export default class ApplicationsList extends PureComponent {
    * @function handleAdd
    */
   handleAdd = () => {
-    this.props.history.push(`${publicURL}/app/applications/add`)
-    this.props.changeSelectionMode(false)
-    this.props.changeSelectedItems([])
+    const {
+      history,
+      changeSelectionMode,
+      changeSelectedItems,
+    } = this.props
+
+    history.push(`${publicURL}/app/applications/add`)
+    changeSelectionMode(false)
+    changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
   }
 
   render() {
-    let deleteCommand = (
+    const {
+      selectedItems,
+      selectionMode,
+      icon,
+    } = this.props
+    const {
+      layout,
+      isLoadingMore,
+      isLoading,
+      itemList,
+    } = this.state
+
+    const deleteCommand = (
       <ReactWinJS.ToolBar.Button
         key="delete"
         icon="delete"
         label={I18n.t('commons.edelete')}
         priority={0}
-        disabled={this.props.selectedItems.length === 0}
+        disabled={selectedItems.length === 0}
         onClick={this.handleDelete}
       />
     )
 
-    let editCommand = (
+    const editCommand = (
       <ReactWinJS.ToolBar.Button
         key="edit"
         icon="edit"
         label={I18n.t('commons.edit')}
         priority={0}
-        disabled={this.props.selectedItems.length === 0}
+        disabled={selectedItems.length === 0}
         onClick={this.handleEdit}
       />
     )
 
-    let footerComponent = this.state.isLoadingMore ?
-      <Loader />
+    const footerComponent = isLoadingMore
+      ? <Loader />
       : (
-        <div onClick={this.loadMoreData} style={{ cursor: 'pointer', color:'#158784'}}>
+        <div
+          onClick={this.loadMoreData}
+          style={{ cursor: 'pointer', color: '#158784' }}
+          role="button"
+          tabIndex="0"
+        >
           <span
             className="refreshIcon"
             style={{ padding: '10px', fontSize: '20px' }}
-            onClick={this.loadMoreData}/>
-          <span>{I18n.t('commons.load_more')}</span>
+          />
+          <span>
+            {I18n.t('commons.load_more')}
+          </span>
         </div>
       )
 
     let listComponent
 
-    if (this.state.isLoading) {
+    if (isLoading) {
       listComponent = <Loader count={3} />
+    } else if (itemList.length > 0) {
+      listComponent = (
+        <ReactWinJS.ListView
+          ref={(listView) => { this.listView = listView }}
+          className="list-pane__content win-selectionstylefilled"
+          style={{ height: 'calc(100% - 48px)' }}
+          itemDataSource={itemList.dataSource}
+          layout={layout}
+          itemTemplate={this.ItemListRenderer}
+          footerComponent={footerComponent}
+          selectionMode={selectionMode ? 'multi' : 'single'}
+          tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
+          onSelectionChanged={this.handleSelectionChanged}
+        />
+      )
     } else {
-      if (this.state.itemList.length > 0) {
-        listComponent = (
-          <ReactWinJS.ListView
-            ref={(listView) => { this.listView = listView }}
-            onLoadingStateChanged={this.onLoadingStateChanged}
-            className="list-pane__content win-selectionstylefilled"
-            style={{ height: 'calc(100% - 48px)' }}
-            itemDataSource={this.state.itemList.dataSource}
-            layout={this.state.layout}
-            itemTemplate={this.ItemListRenderer}
-            footerComponent={footerComponent}
-            selectionMode={this.props.selectionMode ? 'multi' : 'single'}
-            tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
-            onSelectionChanged={this.handleSelectionChanged}
-          />
-        )
-      } else {
-        listComponent = (
-          <EmptyMessage
-            message={I18n.t('applications.not_found')}
-            icon={this.props.icon}
-            showIcon={true}
-          />
-        )
-      }
+      listComponent = (
+        <EmptyMessage
+          message={I18n.t('applications.not_found')}
+          icon={icon}
+          showIcon
+        />
+      )
     }
 
     return (
       <React.Fragment>
-        <ReactWinJS.ToolBar ref={(toolBar) => { this.toolBar = toolBar }} className="listToolBar">
+        <ReactWinJS.ToolBar
+          ref={(toolBar) => { this.toolBar = toolBar }}
+          className="listToolBar"
+        >
           <ReactWinJS.ToolBar.Button
             key="sort"
             icon="sort"
@@ -486,15 +560,15 @@ export default class ApplicationsList extends PureComponent {
             onClick={this.handleAdd}
           />
 
-          {this.props.selectionMode ? editCommand : null}
-          {this.props.selectionMode ? deleteCommand : null}
+          {selectionMode ? editCommand : null}
+          {selectionMode ? deleteCommand : null}
 
           <ReactWinJS.ToolBar.Toggle
             key="select"
             icon="bullets"
             label={I18n.t('commons.select')}
             priority={0}
-            selected={this.props.selectionMode}
+            selected={selectionMode}
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
@@ -502,13 +576,17 @@ export default class ApplicationsList extends PureComponent {
         {listComponent}
         <Confirmation
           title={I18n.t('applications.delete')}
-          message={`${this.props.selectedItems.length} ${I18n.t('applications.title')}`}
-          reference={el => this.contentDialog = el}
+          message={`${selectedItems.length} ${I18n.t('applications.title')}`}
+          reference={(el) => { this.contentDialog = el }}
         />
       </React.Fragment>
     )
   }
 }
+ApplicationsList.defaultProps = {
+  action: null,
+}
+
 /** ApplicationsList propTypes */
 ApplicationsList.propTypes = {
   history: PropTypes.object.isRequired,
@@ -518,5 +596,7 @@ ApplicationsList.propTypes = {
   changeAction: PropTypes.func.isRequired,
   setNotification: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
-  selectedItems: PropTypes.array.isRequired
+  selectedItems: PropTypes.array.isRequired,
+  changeSelectedItems: PropTypes.func.isRequired,
+  icon: PropTypes.string.isRequired,
 }
