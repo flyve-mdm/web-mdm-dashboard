@@ -28,15 +28,15 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import {
+  I18n,
+} from 'react-i18nify'
 import FilesEditItemList from './FilesEditItemList'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
-import {
-  I18n
-} from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 
 /**
@@ -49,7 +49,7 @@ export default class FilesEdit extends PureComponent {
     super(props)
     this.state = {
       selectedItem: [],
-      isLoading: false
+      isLoading: false,
     }
   }
 
@@ -59,24 +59,26 @@ export default class FilesEdit extends PureComponent {
    * @param {name} name
    */
   updateItemList = (index, name) => {
-    let newItem = [...this.state.selectedItem]
+    const { selectedItem } = this.state
 
-    //Find index of specific object using findIndex method.
-    let objIndex = newItem.findIndex((obj => obj["id"] === index));
+    const newItem = [...selectedItem]
+
+    // Find index of specific object using findIndex method.
+    const objIndex = newItem.findIndex((obj => obj.id === index));
 
     // Update object's name property.
     if (objIndex !== -1) {
-      newItem[objIndex]["name"] = name
+      newItem[objIndex].name = name
     } else {
       const item = {
-        "id": index,
-        "name": name
+        id: index,
+        name,
       }
       newItem.push(item)
     }
 
     this.setState({
-      selectedItem: newItem
+      selectedItem: newItem,
     })
   }
 
@@ -86,93 +88,103 @@ export default class FilesEdit extends PureComponent {
    * @function handleSaveFiles
    */
   handleSaveFiles = async () => {
+    const { selectedItem } = this.state
+    const {
+      glpi,
+      setNotification,
+      changeSelectionMode,
+      changeAction,
+      handleMessage,
+    } = this.props
 
     try {
-      if (this.state.selectedItem.length > 0) {
-
+      if (selectedItem.length > 0) {
         this.setState({
-          isLoading: true
+          isLoading: true,
         })
-        await this.props.glpi.updateItem({
+        await glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmFile,
-          input: this.state.selectedItem
+          input: selectedItem,
         })
 
-        if (this.state.selectedItem.length > 1) {
-          this.props.setNotification({
+        if (selectedItem.length > 1) {
+          setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_files'),
-            type: 'success'
+            type: 'success',
           })
         } else {
-          this.props.setNotification({
+          setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_file'),
-            type: 'success'
+            type: 'success',
           })
         }
 
-        this.props.changeSelectionMode(false)
-        this.props.changeAction('reload')
+        changeSelectionMode(false)
+        changeAction('reload')
       }
-
     } catch (error) {
-      this.props.setNotification(this.props.handleMessage({
+      setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
       this.setState({
-        isLoading: false
+        isLoading: false,
       })
     }
   }
 
   render() {
+    const { selectedItems } = this.props
+    const { isLoading } = this.state
 
-    if (this.props.selectedItems) {
-
-      if (this.state.isLoading) {
+    if (selectedItems) {
+      if (isLoading) {
         return (
           <Loading message={`${I18n.t('commons.loading')}...`} />
         )
-      } else {
-        let renderComponent = this.props.selectedItems.map((item, index) => {
-
-          return (
-            <FilesEditItemList
-              key={index}
-              updateItemList={this.updateItemList}
-              selectedItem={item}
-            />
-          )
-        })
-
-        return (
-          <ContentPane>
-            <div className="content-header" style={{ margin: '0 10px' }}>
-              <div style={{overflow: 'auto'}}>
-                <button className="btn btn--primary" style={{marginTop: 0}} onClick={this.handleSaveFiles}>
-                  {I18n.t('commons.save')}
-                </button>
-              </div>
-            </div>
-            <div className="separator" />
-            {renderComponent}
-          </ContentPane>
-        )
       }
+      const renderComponent = selectedItems.map((item, index) => (
+        <FilesEditItemList
+          key={`FilesEditItemList-${index.toString()}`}
+          updateItemList={this.updateItemList}
+          selectedItem={item}
+        />
+      ))
 
-    } else {
-      return null
+      return (
+        <ContentPane>
+          <div className="content-header" style={{ margin: '0 10px' }}>
+            <div style={{ overflow: 'auto' }}>
+              <button
+                className="btn btn--primary"
+                style={{ marginTop: 0 }}
+                onClick={this.handleSaveFiles}
+                type="button"
+              >
+                {I18n.t('commons.save')}
+              </button>
+            </div>
+          </div>
+          <div className="separator" />
+          {renderComponent}
+        </ContentPane>
+      )
     }
+    return null
   }
 }
+
+FilesEdit.defaultProps = {
+  selectedItems: null,
+}
+
 /** FilesEdit propTypes */
 FilesEdit.propTypes = {
   selectedItems: PropTypes.array,
   changeSelectionMode: PropTypes.func.isRequired,
-  action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
   setNotification: PropTypes.func.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
 }
