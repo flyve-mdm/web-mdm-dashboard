@@ -28,35 +28,35 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  connect
+  connect,
 } from 'react-redux'
 import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux'
+import {
+  I18n,
+} from 'react-i18nify'
 import Loading from '../../components/Loading'
 import Input from '../../components/Forms/Input'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import {
-  uiSetNotification
+  uiSetNotification,
 } from '../../store/ui/actions'
 import withGLPI from '../../hoc/withGLPI'
-import {
-  I18n
-} from 'react-i18nify'
 import publicURL from '../../shared/publicURL'
 import handleMessage from '../../shared/handleMessage'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -72,52 +72,7 @@ class ForgotPassword extends PureComponent {
     this.state = {
       isLoading: false,
       isRecoverSent: false,
-      text: ''
-    }
-  }
-
-  /**
-   * Close the active session (if it exists) and make the request to recover password
-   * @function handleRecover
-   * @async
-   * @param {object} event
-   */
-  handleRecover = async (event) => {
-    event.preventDefault()
-    this.setState({
-      isLoading: true
-    })
-    if (this.props.glpi.sessionToken) {
-      try {
-        await this.props.glpi.killSession()
-      } catch (error) {}
-    }
-    try {
-      await this.props.glpi.genericRequest({
-        path: 'lostPassword',
-        requestParams: {
-          method: 'PUT',
-          body: JSON.stringify({
-            "email": this.state.text
-          })
-        }
-      })
-      this.setState({
-        isRecoverSent: true,
-        isLoading: false
-      })
-      this.props.actions.setNotification(handleMessage({
-        type: 'success',
-        message: I18n.t('notifications.request_sent')
-      }))
-    } catch (error) {
-      this.setState({
-        isLoading: false
-      })
-      this.props.actions.setNotification(handleMessage({
-        type: 'warning',
-        message: error
-      }))
+      text: '',
     }
   }
 
@@ -130,13 +85,70 @@ class ForgotPassword extends PureComponent {
   }
 
   /**
+   * Close the active session (if it exists) and make the request to recover password
+   * @function handleRecover
+   * @async
+   * @param {object} event
+   */
+  handleRecover = async (event) => {
+    const {
+      glpi,
+      actions,
+    } = this.props
+    const { text } = this.state
+
+    event.preventDefault()
+    this.setState({
+      isLoading: true,
+    })
+    if (glpi.sessionToken) {
+      try {
+        await glpi.killSession()
+      } catch (error) {}
+    }
+    try {
+      await glpi.genericRequest({
+        path: 'lostPassword',
+        requestParams: {
+          method: 'PUT',
+          body: JSON.stringify({
+            email: text,
+          }),
+        },
+      })
+      this.setState({
+        isRecoverSent: true,
+        isLoading: false,
+      })
+      actions.setNotification(handleMessage({
+        type: 'success',
+        message: I18n.t('notifications.request_sent'),
+      }))
+    } catch (error) {
+      this.setState({
+        isLoading: false,
+      })
+      actions.setNotification(handleMessage({
+        type: 'warning',
+        message: error,
+      }))
+    }
+  }
+
+  /**
    * Validate if necessary the form or the button to go home
    * @function renderElement
    * @return {component}
    */
   renderElement = () => {
+    const {
+      text,
+      isRecoverSent,
+    } = this.state
+    const { history } = this.props
+
     let element
-    if (!this.state.isRecoverSent) {
+    if (!isRecoverSent) {
       element = (
         <div className="authentication__forgot-password">
           <p>
@@ -147,17 +159,17 @@ class ForgotPassword extends PureComponent {
               label=""
               type="text"
               name="text"
-              value={this.state.text}
+              value={text}
               placeholder={I18n.t('commons.flyve_mdm_account')}
               required
-              function={(name, value) => {this.setState({ text: value })}}
+              function={(name, value) => { this.setState({ text: value }) }}
               inputRef={(input) => { this.textInput = input }}
             />
 
             <button
               className="btn btn--secondary"
               type="button"
-              onClick={() => this.props.history.push(`${publicURL}/`)}
+              onClick={() => history.push(`${publicURL}/`)}
             >
               {I18n.t('commons.back')}
             </button>
@@ -177,14 +189,13 @@ class ForgotPassword extends PureComponent {
           <button
             className="win-button"
             type="button"
-            onClick={() => this.props.history.push(`${publicURL}/`)}
+            onClick={() => history.push(`${publicURL}/`)}
           >
             {I18n.t('forgot_password.go_home')}
           </button>
         </div>
       )
     }
-
     return element
   }
 
@@ -193,33 +204,34 @@ class ForgotPassword extends PureComponent {
    * @function render
    */
   render() {
-    if (this.state.isLoading) {
+    const { isLoading } = this.state
+
+    if (isLoading) {
       return (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.sending')}...`} />
         </div>
       )
-    } else {
-      return (
-        <React.Fragment>
-          <h2>
-            {I18n.t('forgot_password.title')}
-          </h2>
-          { this.renderElement() }
-        </React.Fragment>
-      )
     }
+    return (
+      <React.Fragment>
+        <h2>
+          {I18n.t('forgot_password.title')}
+        </h2>
+        { this.renderElement() }
+      </React.Fragment>
+    )
   }
 }
 
 ForgotPassword.propTypes = {
   history: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
 }
 
 export default withGLPI(withAuthenticationLayout(
   connect(null, mapDispatchToProps)(withHandleMessages(ForgotPassword)), {
-    centerContent: true
-  }
+    centerContent: true,
+  },
 ))
