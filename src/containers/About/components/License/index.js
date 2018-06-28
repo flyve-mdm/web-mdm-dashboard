@@ -27,32 +27,33 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import ReactMarkdown from 'react-markdown'
-import ContentPane from '../../../../components/ContentPane'
 import {
-  I18n
-} from "react-i18nify"
-import Loading from "../../../../components/Loading"
-import EmptyMessage from "../../../../components/EmptyMessage"
-import withHandleMessages from '../../../../hoc/withHandleMessages'
+  I18n,
+} from 'react-i18nify'
 import {
-  uiSetNotification
-} from '../../../../store/ui/actions'
-import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux'
 import {
-  connect
+  connect,
 } from 'react-redux'
+import PropTypes from 'prop-types'
+import ContentPane from '../../../../components/ContentPane'
+import Loading from '../../../../components/Loading'
+import EmptyMessage from '../../../../components/EmptyMessage'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
+import {
+  uiSetNotification,
+} from '../../../../store/ui/actions'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -66,7 +67,7 @@ class License extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      license: undefined
+      license: undefined,
     }
   }
 
@@ -79,15 +80,20 @@ class License extends PureComponent {
     try {
       const response = await fetch('https://raw.githubusercontent.com/flyve-mdm/web-mdm-dashboard/develop/LICENSE.md')
       this.setState({
-        license: await response.text()
+        license: await response.text(),
       })
     } catch (error) {
-      this.props.actions.setNotification(this.props.handleMessage({
+      const {
+        actions,
+        handleMessage,
+      } = this.props
+
+      actions.setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
       this.setState({
-        license: 'no data'
+        license: 'no data',
       })
     }
   }
@@ -97,25 +103,29 @@ class License extends PureComponent {
    * @function render
    */
   render() {
+    const { license } = this.state
+
     let renderComponent
-    if (this.state.license) {
-      if (this.state.license === 'no data') {
+    if (license) {
+      if (license === 'no data') {
         renderComponent = (
-          <EmptyMessage message={I18n.t('commons.no_data')}/>
+          <EmptyMessage message={I18n.t('commons.no_data')} />
         )
       } else {
         renderComponent = (
           <ContentPane>
-            <h2 style={{ margin: '10px' }}>{I18n.t('about.license.title')}</h2>
+            <h2 style={{ margin: '10px' }}>
+              {I18n.t('about.license.title')}
+            </h2>
             <div className="about-pane" style={{ margin: '10px' }}>
-              <ReactMarkdown source={this.state.license} />
+              <ReactMarkdown source={license} />
             </div>
           </ContentPane>
         )
       }
     } else {
       renderComponent = (
-        <Loading message={`${I18n.t('commons.loading')}...`}/>
+        <Loading message={`${I18n.t('commons.loading')}...`} />
       )
     }
 
@@ -123,7 +133,13 @@ class License extends PureComponent {
   }
 }
 
+/** License propsTypes */
+License.propTypes = {
+  actions: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
+}
+
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withHandleMessages(License))
