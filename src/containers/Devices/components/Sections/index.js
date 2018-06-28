@@ -38,5 +38,5 @@ export {
   Main,
   SystemReport,
   Applications,
-  Geolocation
+  Geolocation,
 }

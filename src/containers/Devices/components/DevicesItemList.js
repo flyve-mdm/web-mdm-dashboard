@@ -28,7 +28,7 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import IconItemList from '../../../components/IconItemList'
@@ -39,14 +39,23 @@ import IconItemList from '../../../components/IconItemList'
  */
 export default class DevicesItemList extends PureComponent {
   render() {
-    let size = this.props.size
-    let imageAgent = this.props.itemList["PluginFlyvemdmAgent.mdm_type"] ?
-      `${this.props.itemList["PluginFlyvemdmAgent.mdm_type"]}.png` : null
+    const {
+      size,
+      itemList,
+    } = this.props
+
+    const imageAgent = itemList['PluginFlyvemdmAgent.mdm_type']
+      ? `${itemList['PluginFlyvemdmAgent.mdm_type']}.png`
+      : null
     let iconComponent
 
     if (imageAgent) {
       iconComponent = (
-        <IconItemList image={imageAgent} size={size} backgroundColor="transparent"/>
+        <IconItemList
+          image={imageAgent}
+          size={size}
+          backgroundColor="transparent"
+        />
       )
     } else {
       iconComponent = (
@@ -57,15 +66,15 @@ export default class DevicesItemList extends PureComponent {
     return (
       <div>
         {iconComponent}
-        <div style={{ display: 'inline-block'}}>
+        <div style={{ display: 'inline-block' }}>
           <div className="list-pane__name">
-            {this.props.itemList["PluginFlyvemdmAgent.name"]}
+            {itemList['PluginFlyvemdmAgent.name']}
           </div>
           <div className="list-pane__detail">
-            {this.props.itemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"]}
+            {itemList['PluginFlyvemdmAgent.PluginFlyvemdmFleet.name']}
           </div>
           <div className="list-pane__detail">
-            {this.props.itemList["PluginFlyvemdmAgent.mdm_type"].toUpperCase()}
+            {itemList['PluginFlyvemdmAgent.mdm_type'].toUpperCase()}
           </div>
         </div>
       </div>
@@ -75,5 +84,5 @@ export default class DevicesItemList extends PureComponent {
 /** DevicesItemList propTypes */
 DevicesItemList.propTypes = {
   itemList: PropTypes.object.isRequired,
-  size: PropTypes.number.isRequired
+  size: PropTypes.number.isRequired,
 }
