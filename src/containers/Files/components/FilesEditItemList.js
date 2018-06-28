@@ -28,11 +28,11 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
 
 /**
@@ -45,13 +45,15 @@ export default class FilesEditItemList extends PureComponent {
     super(props)
 
     this.state = {
-      input: ''
+      input: '',
     }
   }
 
   componentDidMount() {
+    const { selectedItem } = this.props
+
     this.setState({
-      input: this.props.selectedItem["PluginFlyvemdmFile.name"]
+      input: selectedItem['PluginFlyvemdmFile.name'],
     })
   }
 
@@ -62,7 +64,7 @@ export default class FilesEditItemList extends PureComponent {
    */
   changeInput = (e) => {
     this.setState({
-      input: e.target.value
+      input: e.target.value,
     })
   }
 
@@ -72,24 +74,30 @@ export default class FilesEditItemList extends PureComponent {
    * @param {object} e
    */
   blurInput = (e) => {
-    if (e.target.value.trim() !== "") {
-      this.props.updateItemList(this.props.selectedItem["PluginFlyvemdmFile.id"], e.target.value)
+    const {
+      updateItemList,
+      selectedItem,
+    } = this.props
+
+    if (e.target.value.trim() !== '') {
+      updateItemList(selectedItem['PluginFlyvemdmFile.id'], e.target.value)
     }
   }
 
   render() {
+    const { input } = this.state
     return (
-      <div className='files-list' >
-        <div className='files-list__content'>
-          <div className='files-list__item'>
-            <div className='files-list__item-content-primary'>
+      <div className="files-list">
+        <div className="files-list__content">
+          <div className="files-list__item">
+            <div className="files-list__item-content-primary">
               <input
                 type="text"
-                style={{ width: '240px'}}
+                style={{ width: '240px' }}
                 className="win-textbox"
                 placeholder={I18n.t('files.input_name')}
                 name="input"
-                value={this.state.input}
+                value={input}
                 onChange={this.changeInput}
                 onBlur={this.blurInput}
               />
@@ -103,5 +111,5 @@ export default class FilesEditItemList extends PureComponent {
 /** FilesEditItemList propTypes */
 FilesEditItemList.propTypes = {
   selectedItem: PropTypes.object.isRequired,
-  updateItemList: PropTypes.func.isRequired
+  updateItemList: PropTypes.func.isRequired,
 }

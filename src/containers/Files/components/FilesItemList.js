@@ -28,21 +28,31 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
+import PropTypes from 'prop-types'
 
 /**
  * @class FilesItemList
  * @extends PureComponent
  */
-export default class FilesItemList extends PureComponent {
+class FilesItemList extends PureComponent {
   render() {
+    const { itemList } = this.props
+
     return (
       <div style={{ display: 'inline-block' }}>
         <div className="list-pane__name">
-          {this.props.itemList["PluginFlyvemdmFile.name"]}
+          {itemList['PluginFlyvemdmFile.name']}
         </div>
       </div>
     )
   }
 }
+
+/** FilesItemList propTypes */
+FilesItemList.propTypes = {
+  itemList: PropTypes.object.isRequired,
+}
+
+export default FilesItemList
