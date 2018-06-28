@@ -27,32 +27,33 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import ReactMarkdown from 'react-markdown'
-import ContentPane from '../../../../components/ContentPane'
 import {
-  I18n
-} from "react-i18nify"
-import Loading from "../../../../components/Loading"
-import EmptyMessage from "../../../../components/EmptyMessage"
-import withHandleMessages from '../../../../hoc/withHandleMessages'
+  I18n,
+} from 'react-i18nify'
 import {
-  uiSetNotification
-} from '../../../../store/ui/actions'
-import {
-  bindActionCreators
+  bindActionCreators,
 } from 'redux'
 import {
-  connect
+  connect,
 } from 'react-redux'
+import PropTypes from 'prop-types'
+import ContentPane from '../../../../components/ContentPane'
+import Loading from '../../../../components/Loading'
+import EmptyMessage from '../../../../components/EmptyMessage'
+import withHandleMessages from '../../../../hoc/withHandleMessages'
+import {
+  uiSetNotification,
+} from '../../../../store/ui/actions'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -66,7 +67,7 @@ class ReleaseNotes extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      release: undefined
+      release: undefined,
     }
   }
 
@@ -78,17 +79,23 @@ class ReleaseNotes extends PureComponent {
   componentDidMount = async () => {
     try {
       const response = await fetch(
-        'https://raw.githubusercontent.com/flyve-mdm/web-mdm-dashboard/gh-pages/CHANGELOG.md')
+        'https://raw.githubusercontent.com/flyve-mdm/web-mdm-dashboard/gh-pages/CHANGELOG.md',
+      )
       this.setState({
-        release: await response.text()
+        release: await response.text(),
       })
     } catch (error) {
-      this.props.actions.setNotification(this.props.handleMessage({
+      const {
+        actions,
+        handleMessage,
+      } = this.props
+
+      actions.setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
       this.setState({
-        release: 'no data'
+        release: 'no data',
       })
     }
   }
@@ -98,25 +105,29 @@ class ReleaseNotes extends PureComponent {
    * @function render
    */
   render() {
+    const { release } = this.state
+
     let renderComponent
-    if (this.state.release) {
-      if (this.state.release === 'no data') {
+    if (release) {
+      if (release === 'no data') {
         renderComponent = (
-          <EmptyMessage message={I18n.t('commons.no_data')}/>
+          <EmptyMessage message={I18n.t('commons.no_data')} />
         )
       } else {
         renderComponent = (
           <ContentPane>
-            <h2 style={{ margin: '10px' }}>{I18n.t('about.release_notes.title')}</h2>
+            <h2 style={{ margin: '10px' }}>
+              {I18n.t('about.release_notes.title')}
+            </h2>
             <div className="about-pane" style={{ margin: '10px' }}>
-              <ReactMarkdown source={this.state.release} />
+              <ReactMarkdown source={release} />
             </div>
           </ContentPane>
         )
       }
     } else {
       renderComponent = (
-        <Loading message={`${I18n.t('commons.loading')}...`}/>
+        <Loading message={`${I18n.t('commons.loading')}...`} />
       )
     }
 
@@ -124,7 +135,13 @@ class ReleaseNotes extends PureComponent {
   }
 }
 
+/** ReleaseNotes propsTypes */
+ReleaseNotes.propTypes = {
+  actions: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
+}
+
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withHandleMessages(ReleaseNotes))
