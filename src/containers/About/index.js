@@ -28,8 +28,8 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
-} from "react"
+  PureComponent,
+} from 'react'
 import PropTypes from 'prop-types'
 import LayoutListWithNavLinks from '../../components/LayoutListWithNavLinks'
 import routes from './routes'
@@ -41,13 +41,18 @@ import GenerateRoutes from '../../components/GenerateRoutes'
  */
 class About extends PureComponent {
   render() {
+    const {
+      match,
+      history,
+    } = this.props
+
     return (
       <LayoutListWithNavLinks
         routes={routes}
-        rootPath={this.props.match.url}
-        history={this.props.history}
+        rootPath={match.url}
+        history={history}
       >
-        <GenerateRoutes routes={routes} rootPath={this.props.match.url}/>
+        <GenerateRoutes routes={routes} rootPath={match.url} />
       </LayoutListWithNavLinks>
     )
   }
@@ -56,7 +61,7 @@ class About extends PureComponent {
 /** About propTypes */
 About.propTypes = {
   match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 }
 
 export default About
