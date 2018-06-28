@@ -28,15 +28,15 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  DatePicker
-} from '../../../../components/Forms'
+  I18n,
+} from 'react-i18nify'
 import {
-  I18n
-} from "react-i18nify"
+  DatePicker,
+} from '../../../../components/Forms'
 
 /**
  * @class GeolocationRange
@@ -46,9 +46,14 @@ export default class GeolocationRange extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
+    const {
+      min,
+      max,
+    } = this.props
+
     this.state = {
-      min: this.props.min,
-      max: this.props.max
+      min,
+      max,
     }
   }
 
@@ -60,33 +65,44 @@ export default class GeolocationRange extends PureComponent {
    */
   changeRange = (name, value) => {
     this.setState({
-      [name]: value
+      [name]: value,
     })
   }
 
   render() {
+    const {
+      min,
+      max,
+    } = this.state
+    const {
+      applyRange,
+    } = this.props
+
     return (
       <React.Fragment>
-        <p>{I18n.t('devices.geolocation.filter_range')}</p>
+        <p>
+          {I18n.t('devices.geolocation.filter_range')}
+        </p>
         <DatePicker
           label={I18n.t('commons.min')}
           name="min"
           function={this.changeRange}
-          value={this.state.min}
+          value={min}
         />
         <DatePicker
           label={I18n.t('commons.max')}
           name="max"
           function={this.changeRange}
-          value={this.state.max}
+          value={max}
         />
         <button
           className="btn btn--primary"
-          style={{margin: '20px 0'}}
-          onClick={() => this.props.applyRange(
-            this.state.min,
-            this.state.max
+          style={{ margin: '20px 0' }}
+          onClick={() => applyRange(
+            min,
+            max,
           )}
+          type="button"
         >
           {I18n.t('commons.filter')}
         </button>
@@ -94,9 +110,15 @@ export default class GeolocationRange extends PureComponent {
     )
   }
 }
+
+GeolocationRange.defaultProps = {
+  min: undefined,
+  max: undefined,
+}
+
 /** GeolocationRange propTypes */
 GeolocationRange.propTypes = {
   min: PropTypes.string,
   max: PropTypes.string,
-  applyRange: PropTypes.func
+  applyRange: PropTypes.func.isRequired,
 }
