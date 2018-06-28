@@ -28,39 +28,21 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
-} from "react"
+  PureComponent,
+} from 'react'
 import PropTypes from 'prop-types'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
 import Loading from '../../../../components/Loading'
-import {
-  uiSetNotification
-} from '../../../../store/ui/actions'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import ContentPane from '../../../../components/ContentPane'
 import {
   TextArea,
-  Input
+  Input,
 } from '../../../../components/Forms'
-import itemtype from "../../../../shared/itemtype"
+import itemtype from '../../../../shared/itemtype'
 import withGLPI from '../../../../hoc/withGLPI'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
-  }
-  return {
-    actions
-  }
-}
 
 /**
  * @class Feedback
@@ -73,49 +55,8 @@ class Feedback extends PureComponent {
       feedbackSent: false,
       textarea: '',
       subject: I18n.t('about.help_center.feedback'),
-      isLoading: false
+      isLoading: false,
     }
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    this.setState({
-      isLoading: true
-    }, async () => {
-      const {
-        active_profile
-      } = await this.props.glpi.getActiveProfile()
-      let entityID
-      if (Array.isArray(active_profile.entities)) {
-        entityID = active_profile.entities[0].id
-      } else {
-        for (const key in active_profile.entities) {
-          if (active_profile.entities.hasOwnProperty(key)) {
-            entityID = `${active_profile.entities[key].id}`
-          }
-        }
-      }
-
-      let entityconfig = await this.props.glpi.getAnItem({
-        itemtype: itemtype.PluginFlyvemdmEntityconfig,
-        id: entityID
-      })
-
-      if (Array.isArray(entityconfig)) entityconfig = entityconfig[0]
-
-      const link = `mailto:${entityconfig.support_email}` +
-        `?subject=${escape(this.state.subject)}` +
-        `&body=${escape(this.state.textarea)}`
-
-      if (process.env.NODE_ENV !== 'test') window.location.href = link
-
-      setTimeout(() => {
-        this.setState({
-          feedbackSent: true,
-          isLoading: false
-        })
-      }, 2000)
-    })
   }
 
   componentDidMount() {
@@ -124,65 +65,123 @@ class Feedback extends PureComponent {
     }
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const { glpi } = this.props
+    const {
+      subject,
+      textarea,
+    } = this.state
+
+    this.setState({
+      isLoading: true,
+    }, async () => {
+      const {
+        active_profile: activeProfile,
+      } = await glpi.getActiveProfile()
+      let entityID
+      if (Array.isArray(activeProfile.entities)) {
+        entityID = activeProfile.entities[0].id
+      } else {
+        for (const key in activeProfile.entities) {
+          if (Object.prototype.hasOwnProperty.call(activeProfile.entities, key)) {
+            entityID = `${activeProfile.entities[key].id}`
+          }
+        }
+      }
+
+      let entityconfig = await glpi.getAnItem({
+        itemtype: itemtype.PluginFlyvemdmEntityconfig,
+        id: entityID,
+      })
+
+      if (Array.isArray(entityconfig)) entityconfig = { ...entityconfig[0] }
+
+      const link = `mailto:${entityconfig.support_email}`
+        + `?subject=${escape(subject)}`
+        + `&body=${escape(textarea)}`
+
+      if (process.env.NODE_ENV !== 'test') window.location.href = link
+
+      setTimeout(() => {
+        this.setState({
+          feedbackSent: true,
+          isLoading: false,
+        })
+      }, 2000)
+    })
+  }
+
   changeMessage = (name, value) => {
     this.setState({
-      [name]: value
+      [name]: value,
     })
   }
 
   render() {
-    if (this.state.isLoading) {
+    const {
+      isLoading,
+      feedbackSent,
+      subject,
+      textarea,
+    } = this.state
+
+    if (isLoading) {
       return (
         <Loading message={I18n.t('commons.sending')} />
       )
-    } else if (this.state.feedbackSent) {
+    } if (feedbackSent) {
       return (
         <React.Fragment>
           <div style={{ textAlign: 'center' }}>
-            <h3>{I18n.t('about.help_center.thank_you')}</h3>
-            <p>{I18n.t('about.help_center.submission_received')}</p>
+            <h3>
+              {I18n.t('about.help_center.thank_you')}
+            </h3>
+            <p>
+              {I18n.t('about.help_center.submission_received')}
+            </p>
           </div>
         </React.Fragment>
       )
-    } else {
-      return (
-        <ContentPane className="feedback">
-          <h3>{I18n.t('about.help_center.feedback')}</h3>
-          <div>
-            <form onSubmit={this.handleSubmit}>
-              <Input
-                label={I18n.t('commons.subject')}
-                name="subject"
-                value={this.state.subject}
-                function={this.changeMessage}
-                required
-              />
-              <TextArea
-                label={I18n.t('commons.message')}
-                name="textarea"
-                value={this.state.textarea}
-                function={this.changeMessage}
-                placeholder={I18n.t('about.help_center.write_feedback')}
-                required
-              />
-              <button className="btn btn--primary">
-                {I18n.t('commons.send') }
-              </button>
-            </form>
-          </div>
-        </ContentPane>
-      )
     }
+    return (
+      <ContentPane className="feedback">
+        <h3>
+          {I18n.t('about.help_center.feedback')}
+        </h3>
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <Input
+              label={I18n.t('commons.subject')}
+              name="subject"
+              value={subject}
+              function={this.changeMessage}
+              required
+            />
+            <TextArea
+              label={I18n.t('commons.message')}
+              name="textarea"
+              value={textarea}
+              function={this.changeMessage}
+              placeholder={I18n.t('about.help_center.write_feedback')}
+              required
+            />
+            <button
+              className="btn btn--primary"
+              type="button"
+            >
+              {I18n.t('commons.send') }
+            </button>
+          </form>
+        </div>
+      </ContentPane>
+    )
   }
 }
 
 /** Feedback propTypes */
 Feedback.propTypes = {
-  actions: PropTypes.object.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withGLPI(withHandleMessages(Feedback)))
+export default withGLPI(withHandleMessages(Feedback))
