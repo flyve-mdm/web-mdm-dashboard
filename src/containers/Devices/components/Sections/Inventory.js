@@ -28,7 +28,7 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import Loader from '../../../../components/Loader'
@@ -43,7 +43,7 @@ export default class Inventory extends PureComponent {
     super(props)
     this.state = {
       data: undefined,
-      isLoading: false
+      isLoading: false,
     }
   }
 
@@ -56,28 +56,34 @@ export default class Inventory extends PureComponent {
    * @function handleRefresh
    * */
   handleRefresh = () => {
+    const {
+      glpi,
+      itemType,
+      itemID,
+      parameters,
+      fields,
+    } = this.props
+
     this.setState({
-      isLoading: true
+      isLoading: true,
     }, async () => {
       try {
-        const data = await this.props.glpi.getAnItem({
-          itemtype: this.props.itemType,
-          id: this.props.itemID,
-          queryString: this.props.parameters
+        const data = await glpi.getAnItem({
+          itemtype: itemType,
+          id: itemID,
+          queryString: parameters,
         })
-        let object = Object.keys(this.props.fields).map((key, index) => {
-          return {
-            [this.props.fields[key]]: data[key]
-          }
-        })
+        const object = Object.keys(fields).map(key => ({
+          [fields[key]]: data[key],
+        }))
         this.setState({
           isLoading: false,
-          data: object
+          data: object,
         })
       } catch (error) {
         this.setState({
           isLoading: false,
-          data: undefined
+          data: undefined,
         })
       }
     })
@@ -88,42 +94,43 @@ export default class Inventory extends PureComponent {
    * @function buildList
    * @param {object} value
    */
-  buildList = (value) => {
-    return Object.keys(value).map((element, index) => {
-      return (
-        <div style={{padding:'20px'}}>
-          <Loader type="content"/>
-        </div>
-      )
-    })
-  }
+  buildList = value => Object.keys(value).map(() => (
+    <div style={{ padding: '20px' }}>
+      <Loader type="content" />
+    </div>
+  ))
 
   render() {
-    if (this.state.isLoading && !this.state.data) {
+    const {
+      isLoading,
+      data,
+    } = this.state
+    const { title } = this.props
+
+    if (isLoading && !data) {
       return (
-        <div style={{padding:'20px'}}>
-          <Loader type="content"/>
+        <div style={{ padding: '20px' }}>
+          <Loader type="content" />
         </div>
       )
-    } else if (!this.state.isLoading && this.state.data) {
+    } if (!isLoading && data) {
       return (
         <div>
-          <div className="title">{this.props.title}</div>
+          <div className="title">
+            {title}
+          </div>
           {
-            this.state.data.map((value, index) => {
-              return (this.buildList(value))
-            })
+            data.map(value => (this.buildList(value)))
           }
         </div>
       )
-    } else {
-      return (null)
     }
+    return (null)
   }
 }
 /** Inventory defaultProps */
 Inventory.defaultProps = {
-  parameters: {}
+  parameters: {},
 }
 /** Inventory propTypes */
 Inventory.propTypes = {
@@ -132,5 +139,5 @@ Inventory.propTypes = {
   itemID: PropTypes.number.isRequired,
   fields: PropTypes.object.isRequired,
   parameters: PropTypes.object,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
 }

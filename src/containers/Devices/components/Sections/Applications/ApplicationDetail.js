@@ -28,18 +28,18 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import {
+  I18n,
+} from 'react-i18nify'
 import itemtype from '../../../../../shared/itemtype'
 import Loading from '../../../../../components/Loading'
-import {
-  I18n
-} from 'react-i18nify'
 import EmptyMessage from '../../../../../components/EmptyMessage'
 import {
   Input,
-  TextArea
+  TextArea,
 } from '../../../../../components/Forms'
 import toDateInputValue from '../../../../../shared/toDateInputValue'
 import validateData from '../../../../../shared/validateData'
@@ -54,77 +54,94 @@ export default class Applications extends PureComponent {
     super(props)
     this.state = {
       isLoading: true,
-      software: undefined
+      software: undefined,
     }
   }
 
   componentDidMount = async () => {
+    const {
+      glpi,
+      id,
+    } = this.props
+
     try {
-      const software = await this.props.glpi.getAnItem({
+      const software = await glpi.getAnItem({
+        id,
         itemtype: itemtype.Software,
-        id: this.props.id
       })
       this.setState({
         software,
-        isLoading: false
+        isLoading: false,
       })
     } catch (error) {
       this.setState({
-        isLoading: false
+        isLoading: false,
       })
     }
   }
 
   render() {
+    const {
+      isLoading,
+      software,
+    } = this.state
+    const {
+      id,
+      selectApplication,
+    } = this.props
+
     return (
-      this.state.isLoading ?
-        <Loading message={`${I18n.t('commons.loading')}...`}/>
+      isLoading
+        ? <Loading message={`${I18n.t('commons.loading')}...`} />
         : (
-          this.state.software ?
-          (
-            <React.Fragment>
-              <h3>{`${I18n.t('commons.application')} ${this.props.id}`}</h3>
-              <Input
-                label={I18n.t('commons.name')}
-                name="name"
-                type="text"
-                value={validateData(this.state.software.name)}
-                disabled
-              />
-              <Input
-                label={I18n.t('commons.date_creation')}
-                name="comment"
-                type="date"
-                value={validateData(toDateInputValue(this.state.software.date_creation))}
-                disabled
-              />
-              <Input
-                label={I18n.t('commons.date_mod')}
-                name="comment"
-                type="date"
-                value={validateData(toDateInputValue(this.state.software.date_mod))}
-                disabled
-              />
-              <TextArea
-                label={I18n.t('commons.comments')}
-                name="comment"
-                type="textArea"
-                value={validateData(this.state.software.comment)}
-                disabled
-              />
-              <button
-                className="btn btn--secondary"
-                onClick={() => {
-                  this.props.selectApplication(undefined)
-                }}
-              >
-                {I18n.t('commons.back')}
-              </button>
-            </React.Fragment>
-          )
-          : (
-            <EmptyMessage message={I18n.t('commons.problems_loading_data')}/>
-          )
+          software
+            ? (
+              <React.Fragment>
+                <h3>
+                  {`${I18n.t('commons.application')} ${id}`}
+                </h3>
+                <Input
+                  label={I18n.t('commons.name')}
+                  name="name"
+                  type="text"
+                  value={validateData(software.name)}
+                  disabled
+                />
+                <Input
+                  label={I18n.t('commons.date_creation')}
+                  name="comment"
+                  type="date"
+                  value={validateData(toDateInputValue(software.date_creation))}
+                  disabled
+                />
+                <Input
+                  label={I18n.t('commons.date_mod')}
+                  name="comment"
+                  type="date"
+                  value={validateData(toDateInputValue(software.date_mod))}
+                  disabled
+                />
+                <TextArea
+                  label={I18n.t('commons.comments')}
+                  name="comment"
+                  type="textArea"
+                  value={validateData(software.comment)}
+                  disabled
+                />
+                <button
+                  className="btn btn--secondary"
+                  onClick={() => {
+                    selectApplication(undefined)
+                  }}
+                  type="button"
+                >
+                  {I18n.t('commons.back')}
+                </button>
+              </React.Fragment>
+            )
+            : (
+              <EmptyMessage message={I18n.t('commons.problems_loading_data')} />
+            )
         )
     )
   }
@@ -133,5 +150,5 @@ export default class Applications extends PureComponent {
 Applications.propTypes = {
   id: PropTypes.number.isRequired,
   glpi: PropTypes.object.isRequired,
-  selectApplication: PropTypes.func.isRequired
+  selectApplication: PropTypes.func.isRequired,
 }
