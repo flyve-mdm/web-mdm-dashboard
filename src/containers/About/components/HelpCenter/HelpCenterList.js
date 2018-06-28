@@ -28,36 +28,36 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
-} from "react"
+  PureComponent,
+} from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
+import {
+  bindActionCreators,
+} from 'redux'
+import {
+  connect,
+} from 'react-redux'
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import Loading from '../../../../components/Loading'
 import {
-  uiSetNotification
+  uiSetNotification,
 } from '../../../../store/ui/actions'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
 import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -65,6 +65,18 @@ function mapDispatchToProps(dispatch) {
  * @class HelpCenterList
  */
 class HelpCenterList extends PureComponent {
+  itemRenderer = ReactWinJS.reactRenderer(item => (
+    <div
+      style={{ padding: '14px', width: '100%' }}
+      onClick={() => this.redirectToArticle(item.data.id)}
+      role="link"
+      tabIndex="0"
+    >
+      <span className="documentIcon" style={{ marginRight: '5px' }} />
+      {item.data.name}
+    </div>
+  ))
+
   constructor(props) {
     super(props)
     this.state = {
@@ -72,23 +84,26 @@ class HelpCenterList extends PureComponent {
       list: {},
       suggestionList: undefined,
       layout: {
-        type: WinJS.UI.ListLayout
+        type: WinJS.UI.ListLayout,
       },
       labelList: I18n.t('about.help_center.recent_articles'),
-      itemSelected: null,
-      isLoading: true
+      isLoading: true,
     }
   }
 
   componentDidMount = async () => {
+    const {
+      glpi,
+      actions,
+      handleMessage,
+    } = this.props
+
     try {
-      const response = await this.props.glpi.getAllItems({
-        itemtype: itemtype.KnowbaseItem
+      const response = await glpi.getAllItems({
+        itemtype: itemtype.KnowbaseItem,
       })
 
-      const recentArticles = response.slice().sort((a, b) => {
-        return new Date(a).getTime() - new Date(b).getTime()
-      })
+      const recentArticles = response.slice().sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
 
       recentArticles.splice(5)
 
@@ -96,83 +111,63 @@ class HelpCenterList extends PureComponent {
         articles: response,
         list: new WinJS.Binding.List(recentArticles),
         suggestionList: response.map(article => article.name),
-        isLoading: false
+        isLoading: false,
       })
     } catch (error) {
-      this.props.actions.setNotification(this.props.handleMessage({
+      actions.setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
       this.setState({
-        isLoading: false
+        isLoading: false,
       })
     }
   }
 
-  redirectToArticle = article => (
-    this.props.history.push(`${publicURL}/app/about/help/${article}`)
-  )
-
-  redirectToFeedBack = () => {
-    this.props.history.push(`${publicURL}/app/about/help/feedback`)
+  redirectToArticle = (article) => {
+    const { history } = this.props
+    history.push(`${publicURL}/app/about/help/${article}`)
   }
 
-  itemRenderer = ReactWinJS.reactRenderer((item) => {
-    return (
-      <div
-        style={{ padding: '14px', width: '100%' }}
-        onClick={() => this.redirectToArticle(item.data.id)}
-      >
-        <span className="documentIcon" style={{marginRight: '5px'}}/>
-        {item.data.name}
-      </div>
-    )
-  })
-
-  changeSelectItem = (item) => {
-    this.setState({
-      itemSelected: item
-    })
+  redirectToFeedBack = () => {
+    const { history } = this.props
+    history.push(`${publicURL}/app/about/help/feedback`)
   }
 
   showAllArticles = () => {
+    const { articles } = this.state
+
     this.setState({
       labelList: I18n.t('about.help_center.all_articles'),
-      list: new WinJS.Binding.List(this.state.articles)
+      list: new WinJS.Binding.List(articles),
     })
   }
 
   filterArticles = (filter) => {
+    const { articles } = this.state
+
     const filteredArticles = []
-    this.state.articles.forEach(element => {
+    articles.forEach((element) => {
       if (element.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
         filteredArticles.push(element)
       }
     })
     this.setState({
-      list: new WinJS.Binding.List(filteredArticles)
+      list: new WinJS.Binding.List(filteredArticles),
     })
   }
 
-  handleSelectionChanged = (eventObject) => {
-    const listView = eventObject.currentTarget.winControl
-    const id = listView.selection.getItems()._value[0].data['HelpCenter.id']
-    setTimeout(() => {
-      this.setState({
-        itemSelected: id
-      })
-    }, 0)
-  }
-
   handleSuggestionsRequested = (eventObject) => {
-    let queryText = eventObject.detail.queryText,
-      query = queryText.toLowerCase(),
-      suggestionCollection = eventObject.detail.searchSuggestionCollection
+    const { suggestionList } = this.state
+
+    const { queryText } = eventObject.detail
+    const query = queryText.toLowerCase()
+    const suggestionCollection = eventObject.detail.searchSuggestionCollection
 
     if (queryText.length > 0) {
-      for (let i = 0, len = this.state.suggestionList.length; i < len; i++) {
-        if (this.state.suggestionList[i].toLowerCase().indexOf(query) !== -1) {
-          suggestionCollection.appendQuerySuggestion(this.state.suggestionList[i])
+      for (let i = 0, len = suggestionList.length; i < len; i += 1) {
+        if (suggestionList[i].toLowerCase().indexOf(query) !== -1) {
+          suggestionCollection.appendQuerySuggestion(suggestionList[i])
         }
       }
     }
@@ -187,73 +182,88 @@ class HelpCenterList extends PureComponent {
   }
 
   render() {
+    const {
+      isLoading,
+      list,
+      labelList,
+      layout,
+    } = this.state
+
     return (
-      this.state.isLoading ?
-      <Loading message={`${I18n.t('commons.loading')}...`} />
-      : (
-        <ContentPane>
-          <h2 style={{ margin: '10px' }}>{I18n.t('about.help_center.title')}</h2>
-          <div className="list-pane" style={{ padding: 0 }}>
-            <div>
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between'
-              }}>
-                <div>
-                  <h3 style={{ margin: '10px' }}>
-                    {this.state.labelList}
-                  </h3>
-                </div>
-                <div>
+      isLoading
+        ? <Loading message={`${I18n.t('commons.loading')}...`} />
+        : (
+          <ContentPane>
+            <h2 style={{ margin: '10px' }}>
+              {I18n.t('about.help_center.title')}
+            </h2>
+            <div className="list-pane" style={{ padding: 0 }}>
+              <div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}
+                >
                   <div>
-                    <ReactWinJS.AutoSuggestBox
-                      style={{
+                    <h3 style={{ margin: '10px' }}>
+                      {labelList}
+                    </h3>
+                  </div>
+                  <div>
+                    <div>
+                      <ReactWinJS.AutoSuggestBox
+                        style={{
                           marginTop: '20px',
                           marginRight: '50px',
                           width: '150px',
-                          minWidth: 'unset'
+                          minWidth: 'unset',
+                        }}
+                        placeholderText={I18n.t('about.help_center.search_an_article')}
+                        onSuggestionsRequested={this.handleSuggestionsRequested}
+                        onQuerySubmitted={this.handleQuerySubmitted}
+                      />
+                    </div>
+                    <div
+                      onClick={this.handleSearch}
+                      style={{
+                        fontSize: '20px',
+                        float: 'right',
+                        marginTop: '-26px',
+                        marginRight: '20px',
+                        cursor: 'pointer',
                       }}
-                      placeholderText={I18n.t('about.help_center.search_an_article')}
-                      onSuggestionsRequested={this.handleSuggestionsRequested}
-                      onQuerySubmitted={this.handleQuerySubmitted}
-                    />
-                  </div>
-                  <div
-                    onClick={this.handleSearch}
-                    style={{
-                      fontSize: '20px',
-                      float: 'right',
-                      marginTop: '-26px',
-                      marginRight: '20px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    <span className="searchIcon"></span>
+                      role="button"
+                      tabIndex="0"
+                    >
+                      <span className="searchIcon" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <ReactWinJS.ListView
-              ref="listView"
-              className="list-pane__content win-selectionstylefilled"
-              style={{ height: 'calc(100% - 48px)' }}
-              itemDataSource={this.state.list.dataSource}
-              itemTemplate={this.itemRenderer}
-              layout={this.state.layout}
-              selectionMode="single"
-              tapBehavior="directSelect"
-              onSelectionChanged={this.handleSelectionChanged}
-            />
+              <ReactWinJS.ListView
+                className="list-pane__content win-selectionstylefilled"
+                style={{ height: 'calc(100% - 48px)' }}
+                itemDataSource={list.dataSource}
+                itemTemplate={this.itemRenderer}
+                layout={layout}
+                selectionMode="single"
+                tapBehavior="directSelect"
+              />
 
-            {
-              this.state.labelList !== I18n.t('about.help_center.recent_articles') ?
-                ''
+              {
+              labelList !== I18n.t('about.help_center.recent_articles')
+                ? ''
                 : (
                   <div>
                     <div className="separator" />
 
                     <div>
-                      <a onClick={this.showAllArticles}>
+                      <a
+                        onClick={this.showAllArticles}
+                        role="link"
+                        tabIndex="0"
+                      >
                         { I18n.t('about.help_center.browse_all_articles') }
                       </a>
                     </div>
@@ -261,15 +271,20 @@ class HelpCenterList extends PureComponent {
                 )
             }
 
-            <div className="separator" />
+              <div className="separator" />
 
-            <div className="itemList" onClick={this.redirectToFeedBack}>
-              <span className="messageIcon" style={{marginRight: '5px'}}/>
-              { I18n.t('about.help_center.send_feedback') }
+              <div
+                className="itemList"
+                onClick={this.redirectToFeedBack}
+                role="link"
+                tabIndex="0"
+              >
+                <span className="messageIcon" style={{ marginRight: '5px' }} />
+                { I18n.t('about.help_center.send_feedback') }
+              </div>
             </div>
-          </div>
-        </ContentPane>
-      )
+          </ContentPane>
+        )
     )
   }
 }
@@ -277,10 +292,10 @@ class HelpCenterList extends PureComponent {
 /** HelpCenterList propTypes */
 HelpCenterList.propTypes = {
   history: PropTypes.object.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
 }
 
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withGLPI(withHandleMessages(HelpCenterList)))

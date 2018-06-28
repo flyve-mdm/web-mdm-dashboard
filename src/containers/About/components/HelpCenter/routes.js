@@ -27,36 +27,37 @@
  */
 
 /** import dependencies */
+import {
+  I18n,
+} from 'react-i18nify'
 import HelpCenterArticle from './HelpCenterArticle'
 import HelpCenterList from './HelpCenterList'
 import Feedback from './Feedback'
-import {
-  I18n
-} from 'react-i18nify'
 
 /**
  * Represents all private routes from HelpCenter
  * @constant routes
  * @type {Array}
  */
-const routes = [{
+const routes = [
+  {
     path: '/',
     name: I18n.t('about.help_center.home'),
     component: HelpCenterList,
-    exact: true
+    exact: true,
   },
   {
     path: '/feedback',
     name: I18n.t('commons.feedback'),
     component: Feedback,
-    exact: true
+    exact: true,
   },
   {
     path: '/:article',
     name: I18n.t('commons.article'),
     component: HelpCenterArticle,
-    exact: false
-  }
+    exact: false,
+  },
 ]
 
 export default routes

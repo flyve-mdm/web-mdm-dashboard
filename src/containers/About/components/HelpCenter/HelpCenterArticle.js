@@ -28,34 +28,34 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import {
+  bindActionCreators,
+} from 'redux'
+import {
+  connect,
+} from 'react-redux'
+import {
+  I18n,
+} from 'react-i18nify'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import {
-  uiSetNotification
+  uiSetNotification,
 } from '../../../../store/ui/actions'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
-import {
-  I18n
-} from 'react-i18nify'
 import itemtype from '../../../../shared/itemtype'
 import getID from '../../../../shared/getID'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -65,58 +65,76 @@ function mapDispatchToProps(dispatch) {
 class HelpCenterArticle extends PureComponent {
   constructor(props) {
     super(props)
+    const { history } = this.props
+
     this.state = {
       article: undefined,
-      id: getID(this.props.history.location.pathname, 4),
-      isLoading: true
+      id: getID(history.location.pathname, 4),
+      isLoading: true,
     }
   }
 
   componentDidMount = async () => {
+    const {
+      glpi,
+      actions,
+      handleMessage,
+    } = this.props
+    const { id } = this.state
+
     try {
       this.setState({
-        article: await this.props.glpi.getAnItem({
+        article: await glpi.getAnItem({
           itemtype: itemtype.KnowbaseItem,
-          id: this.state.id
+          id,
         }),
-        isLoading: false
+        isLoading: false,
       })
     } catch (error) {
-      this.props.actions.setNotification(this.props.handleMessage({
+      actions.setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
       this.setState({
-        isLoading: false
+        isLoading: false,
       })
     }
   }
 
+  /* eslint class-methods-use-this: ["error", { "exceptMethods": ["htmlDecode"] }] */
   htmlDecode(input) {
     const e = document.createElement('div')
     e.innerHTML = input
-    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue
+    return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue
   }
 
   render() {
+    const {
+      isLoading,
+      article,
+    } = this.state
+
     return (
-      this.state.isLoading ?
-      (
-        <div style={{height: "100%", marginTop: "-80px"}}>
-          <Loading message={`${I18n.t('commons.loading')}...`} />
-        </div>
-      )
-      : (
-        <ContentPane>
-          <h2 style={{ margin: '10px' }}>
-            {this.state.article.name}
-          </h2>
-          <div className="date" style={{ margin: '10px' }}>
-            {this.state.article.date}
+      isLoading
+        ? (
+          <div style={{ height: '100%', marginTop: '-80px' }}>
+            <Loading message={`${I18n.t('commons.loading')}...`} />
           </div>
-          <div style={{ margin: '10px' }} dangerouslySetInnerHTML={{ __html: this.htmlDecode(this.state.article.answer) }} />
-        </ContentPane>
-      )
+        )
+        : (
+          <ContentPane>
+            <h2 style={{ margin: '10px' }}>
+              {article.name}
+            </h2>
+            <div className="date" style={{ margin: '10px' }}>
+              {article.date}
+            </div>
+            <div
+              style={{ margin: '10px' }}
+              dangerouslySetInnerHTML={{ __html: this.htmlDecode(article.answer) }}
+            />
+          </ContentPane>
+        )
 
     )
   }
@@ -125,10 +143,10 @@ class HelpCenterArticle extends PureComponent {
 /** HelpCenterArticle propTypes */
 HelpCenterArticle.propTypes = {
   history: PropTypes.object.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
 }
 
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withGLPI(withHandleMessages(HelpCenterArticle)))
