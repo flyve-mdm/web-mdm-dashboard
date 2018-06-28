@@ -28,13 +28,13 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import Confirmation from '../../../../components/Confirmation'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
+import Confirmation from '../../../../components/Confirmation'
 import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
 import ContentPane from '../../../../components/ContentPane'
@@ -47,9 +47,25 @@ class DangerZone extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
+    const {
+      id,
+      update,
+    } = this.props
+
     this.state = {
-      id: this.props.id,
-      update: this.props.update
+      id,
+      update,
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      id,
+      update,
+    } = this.state
+
+    if (prevState.id !== id || prevState.update !== update) {
+      this.pane.forceAnimation()
     }
   }
 
@@ -58,18 +74,11 @@ class DangerZone extends PureComponent {
       return {
         ...prevState,
         id: nextProps.id,
-        update: nextProps.update
-      }
-    } else {
-      return {
-        ...prevState
+        update: nextProps.update,
       }
     }
-  }
-
-  componentDidUpdate(prevProps, prevState, prevContext) {
-    if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
-      this.pane.forceAnimation()
+    return {
+      ...prevState,
     }
   }
 
@@ -79,27 +88,37 @@ class DangerZone extends PureComponent {
    * @function wipe
    */
   wipe = async () => {
-    const isOK = await Confirmation.isOK(this.props.wipeDevice)
+    const {
+      wipeDevice,
+      glpi,
+      setNotification,
+      changeAction,
+      history,
+      handleMessage,
+    } = this.props
+    const { id } = this.state
+
+    const isOK = await Confirmation.isOK(wipeDevice)
     if (isOK) {
       try {
-        const response = await this.props.glpi.updateItem({
+        const response = await glpi.updateItem({
+          id,
           itemtype: itemtype.PluginFlyvemdmAgent,
-          id: this.state.id,
           input: {
-            "wipe": "1"
-          }
+            wipe: '1',
+          },
         })
-        this.props.setNotification({
+        setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.data_deleted_successfully'),
-          type: 'success'
+          type: 'success',
         })
-        this.props.changeAction('reload')
-        this.props.history.push(`${publicURL}/app/devices`)
+        changeAction('reload')
+        history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        this.props.setNotification(this.props.handleMessage({
+        setNotification(handleMessage({
           type: 'alert',
-          message: error
+          message: error,
         }))
       }
     }
@@ -111,27 +130,37 @@ class DangerZone extends PureComponent {
    * @function unenroll
    */
   unenroll = async () => {
-    const isOK = await Confirmation.isOK(this.props.unenrollmentDevice)
+    const {
+      unenrollmentDevice,
+      glpi,
+      setNotification,
+      changeAction,
+      history,
+      handleMessage,
+    } = this.props
+    const { id } = this.state
+
+    const isOK = await Confirmation.isOK(unenrollmentDevice)
     if (isOK) {
       try {
-        const response = await this.props.glpi.updateItem({
+        const response = await glpi.updateItem({
+          id,
           itemtype: itemtype.PluginFlyvemdmAgent,
-          id: this.state.id,
           input: {
-            "_unenroll": "1"
-          }
+            _unenroll: '1',
+          },
         })
-        this.props.setNotification({
+        setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.unenrollment_device'),
-          type: 'success'
+          type: 'success',
         })
-        this.props.changeAction('reload')
-        this.props.history.push(`${publicURL}/app/devices`)
+        changeAction('reload')
+        history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        this.props.setNotification(this.props.handleMessage({
+        setNotification(handleMessage({
           type: 'alert',
-          message: error
+          message: error,
         }))
       }
     }
@@ -143,24 +172,34 @@ class DangerZone extends PureComponent {
    * @function delete
    */
   delete = async () => {
-    const isOK = await Confirmation.isOK(this.props.deleteDevice)
+    const {
+      deleteDevice,
+      glpi,
+      setNotification,
+      changeAction,
+      history,
+      handleMessage,
+    } = this.props
+    const { id } = this.state
+
+    const isOK = await Confirmation.isOK(deleteDevice)
     if (isOK) {
       try {
-        const response = await this.props.glpi.deleteItem({
+        const response = await glpi.deleteItem({
+          id,
           itemtype: itemtype.PluginFlyvemdmAgent,
-          id: this.state.id,
         })
-        this.props.setNotification({
+        setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.devices_successfully_deleted'),
-          type: 'success'
+          type: 'success',
         })
-        this.props.changeAction('reload')
-        this.props.history.push(`${publicURL}/app/devices`)
+        changeAction('reload')
+        history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        this.props.setNotification(this.props.handleMessage({
+        setNotification(handleMessage({
           type: 'alert',
-          message: error
+          message: error,
         }))
       }
     }
@@ -169,7 +208,7 @@ class DangerZone extends PureComponent {
   render() {
     return (
       <React.Fragment>
-        <ContentPane ref={pane => this.pane = pane}>
+        <ContentPane ref={(pane) => { this.pane = pane }}>
           <div className="list-element">
             <div className="list-element__message">
               {I18n.t('devices.danger_zone.wipe')}
@@ -178,7 +217,11 @@ class DangerZone extends PureComponent {
               </div>
             </div>
             <div className="list-element__controller">
-              <button className="btn btn--secondary" onClick={this.wipe}>
+              <button
+                className="btn btn--secondary"
+                onClick={this.wipe}
+                type="button"
+              >
                 {I18n.t('commons.wipe')}
               </button>
             </div>
@@ -192,7 +235,11 @@ class DangerZone extends PureComponent {
               </div>
             </div>
             <div className="list-element__controller">
-              <button className="btn btn--secondary" onClick={this.unenroll}>
+              <button
+                className="btn btn--secondary"
+                onClick={this.unenroll}
+                type="button"
+              >
                 {I18n.t('commons.unenroll')}
               </button>
             </div>
@@ -206,7 +253,11 @@ class DangerZone extends PureComponent {
               </div>
             </div>
             <div className="list-element__controller">
-              <button className="btn btn--secondary" onClick={this.delete}>
+              <button
+                className="btn btn--secondary"
+                onClick={this.delete}
+                type="button"
+              >
                 {I18n.t('commons.delete')}
               </button>
             </div>
@@ -216,6 +267,13 @@ class DangerZone extends PureComponent {
     )
   }
 }
+
+DangerZone.defaultProps = {
+  wipeDevice: null,
+  unenrollmentDevice: null,
+  deleteDevice: null,
+}
+
 /** DangerZone propTypes */
 DangerZone.propTypes = {
   id: PropTypes.string.isRequired,
@@ -226,7 +284,7 @@ DangerZone.propTypes = {
   update: PropTypes.bool.isRequired,
   wipeDevice: PropTypes.object,
   unenrollmentDevice: PropTypes.object,
-  deleteDevice: PropTypes.object
+  deleteDevice: PropTypes.object,
 }
 
 export default DangerZone
