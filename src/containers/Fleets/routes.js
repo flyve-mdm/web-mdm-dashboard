@@ -27,49 +27,50 @@
  */
 
 /** import dependencies */
+import {
+  I18n,
+} from 'react-i18nify'
 import FleetsContent from './components/FleetsContent'
 import EmptyMessage from '../../components/EmptyMessage'
 import DevicesAssociated from './components/DevicesAssociated'
 import FleetsEdit from './components/FleetsEdit'
-import {
-  I18n
-} from 'react-i18nify'
 
 /**
  * Represents all private routes from Fleets
  * @constant routes
  * @type {Array}
  */
-const routes = [{
+const routes = [
+  {
     path: '/',
     name: I18n.t('commons.no_selection'),
     component: EmptyMessage,
-    exact: true
+    exact: true,
   },
   {
     path: '/edit',
     name: I18n.t('fleets.edit'),
     component: FleetsEdit,
-    exact: true
+    exact: true,
   },
   {
     path: '/:id',
     name: I18n.t('commons.fleet'),
     component: FleetsContent,
-    exact: true
+    exact: true,
   },
   {
     path: '/:id/list',
     name: I18n.t('commons.list'),
     component: DevicesAssociated,
-    exact: true
+    exact: true,
   },
   {
     path: '/add',
     name: I18n.t('fleets.add'),
     component: FleetsContent,
-    exact: true
-  }
+    exact: true,
+  },
 ]
 
 export default routes

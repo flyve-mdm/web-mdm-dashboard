@@ -28,16 +28,17 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import WinJS from 'winjs'
+import {
+  I18n,
+} from 'react-i18nify'
+import PropTypes from 'prop-types'
 import FleetsTaskItemList from './FleetsTaskItemList'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import Confirmation from '../../../components/Confirmation'
-import {
-  I18n
-} from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
 import getID from '../../../shared/getID'
@@ -50,12 +51,14 @@ class FleetsContent extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
+    const { itemType } = this.props
+
     this.state = {
       layout: {
-        type: WinJS.UI.ListLayout
+        type: WinJS.UI.ListLayout,
       },
       itemID: undefined,
-      itemType: this.props.itemType,
+      itemType,
       selectedItems: [],
       isLoading: false,
       notManaged: false,
@@ -67,9 +70,42 @@ class FleetsContent extends PureComponent {
         files: undefined,
         applications: undefined,
         tasksNew: {},
-        tasksRemove: {}
+        tasksRemove: {},
       },
-      devices__length: 0
+      devicesLength: 0,
+    }
+  }
+
+  /**
+   * @function componentDidMount
+   */
+  componentDidMount = () => {
+    const { notManaged } = this.state
+
+    if (!notManaged) {
+      this.requestAllData()
+    } else {
+      this.resetData()
+    }
+  }
+
+  /**
+   * @function componentDidUpdate
+   * @param {object} prevProps
+   * @param {object} prevState
+   */
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      itemID,
+      notManaged,
+    } = this.state
+
+    if (prevState.itemID !== itemID) {
+      if (!notManaged) {
+        this.requestAllData()
+      } else {
+        this.resetData()
+      }
     }
   }
 
@@ -86,40 +122,289 @@ class FleetsContent extends PureComponent {
         ...prevState,
         isLoading: true,
         itemID: Number(getID(nextProps.history.location.pathname)),
-        input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]["PluginFlyvemdmFleet.name"] : 'New Feet',
+        input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]['PluginFlyvemdmFleet.name'] : 'New Feet',
         notManaged: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0][
-          "PluginFlyvemdmFleet.is_default"
-        ] === 1 ? true : false : false,
-        selectedItems: nextProps.selectedItems
+          'PluginFlyvemdmFleet.is_default'
+        ] === 1 : false,
+        selectedItems: nextProps.selectedItems,
       }
     }
     return null
   }
 
   /**
-   * @function componentDidMount
+   * Get Task value
+   * @function getValueOfTask
+   * @param {object} policy
+   * @param {*} fleetHaveTask
    */
-  componentDidMount = () => {
-    if (!this.state.notManaged) {
-      this.requestAllData()
+  getValueOfTask = (policy, fleetHaveTask) => {
+    const { data } = this.state
+
+    // Check if the current Fleet have a Task that have a relation with this Policy
+    if (fleetHaveTask) {
+      // Return a Object that is the Task
+      switch (policy['PluginFlyvemdmPolicy.type']) {
+        case 'deployapp':
+        case 'removeapp':
+        case 'deployfile':
+        case 'removefile':
+          return data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? data.tasksNew[policy[
+            'PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
+        default:
+          return data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? data.tasksNew[policy[
+            'PluginFlyvemdmPolicy.id']].value : policy['PluginFlyvemdmPolicy.recommended_value']
+      }
     } else {
-      this.resetData()
+      // Return recommended value
+      return policy['PluginFlyvemdmPolicy.recommended_value']
     }
   }
 
   /**
-   * @function componentDidUpdate
-   * @param {object} prevProps
-   * @param {object} prevState
+   * Get policy type
+   * @function getTypeData
+   * @param {object} policy
    */
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.itemID !== this.state.itemID) {
-      if (!this.state.notManaged) {
-        this.requestAllData()
-      } else {
-        this.resetData()
+  getTypeData = (policy) => {
+    const { data } = this.state
+
+    const policyType = policy['PluginFlyvemdmPolicy.type']
+    // Check if the policy default value are applications, files or other
+    switch (policyType) {
+      case 'deployapp':
+      case 'removeapp':
+        return data.applications
+      case 'deployfile':
+      case 'removefile':
+        return data.files
+      case 'dropdown':
+        return Object.entries(JSON.parse(policy['PluginFlyvemdmPolicy.type_data']))
+      default:
+        return JSON.parse(policy['PluginFlyvemdmPolicy.type_data'])
+    }
+  }
+
+  /**
+   * handle request all data to show fleet policies
+   * @function requestAllData
+   * @async
+   */
+  requestAllData = async () => {
+    const {
+      glpi,
+      setNotification,
+      handleMessage,
+      changeSelectionMode,
+      changeAction,
+    } = this.props
+    const {
+      input,
+      itemID,
+      itemType,
+    } = this.state
+
+    /*
+     * Get Devices
+     * */
+    const devices = await glpi.searchItems({
+      itemtype: itemtype.PluginFlyvemdmAgent,
+      criteria: [{
+        link: 'and',
+        field: 3,
+        searchtype: 'contains',
+        value: input,
+      }],
+    })
+
+    /*
+     * Get Policies
+     * */
+    const countPolicies = await glpi.searchItems({
+      itemtype: itemtype.PluginFlyvemdmPolicy,
+      options: {
+        uid_cols: true,
+        range: '0-0',
+      },
+    })
+    const policies = await glpi.searchItems({
+      itemtype: itemtype.PluginFlyvemdmPolicy,
+      options: {
+        uid_cols: true,
+        forcedisplay: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+        range: `0-${countPolicies.totalcount}`,
+      },
+    })
+
+    let tasks = []
+    const tasksNew = {}
+
+    if (Number(itemID)) {
+      /*
+       * Get Tasks
+       * */
+      try {
+        const countTasks = await glpi.searchItems({
+          itemtype: itemtype.PluginFlyvemdmTask,
+          options: {
+            uid_cols: true,
+            range: '0-0',
+          },
+          criteria: [
+            {
+              link: 'and',
+              field: 9,
+              searchtype: 'equals',
+              value: itemType,
+            },
+            {
+              link: 'and',
+              field: 10,
+              searchtype: 'equals',
+              value: itemID,
+            },
+          ],
+        })
+
+        tasks = await glpi.searchItems({
+          itemtype: itemtype.PluginFlyvemdmTask,
+          options: {
+            uid_cols: true,
+            forcedisplay: [1, 2, 3, 5, 6, 7],
+            range: `0-${countTasks.totalcount}`,
+          },
+          criteria: [{
+            link: 'and',
+            field: 9,
+            searchtype: 'equals',
+            value: itemType,
+          },
+          {
+            link: 'and',
+            field: 10,
+            searchtype: 'equals',
+            value: itemID,
+          },
+          ],
+        })
+      } catch (error) {
+        setNotification(handleMessage({
+          type: 'alert',
+          message: error,
+        }))
+        changeSelectionMode(false)
+        changeAction('reload')
+      }
+
+      if (tasks.data) {
+        tasks.data.forEach((task) => {
+          const taskDeploy = {
+            itemtype_applied: itemType,
+            items_id_applied: task['PluginFlyvemdmTask.items_id_applied'],
+            plugin_flyvemdm_policies_id: task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id'],
+            value: task['PluginFlyvemdmTask.value'],
+          }
+
+          if (task['PluginFlyvemdmTask.itemtype']) {
+            taskDeploy.itemtype = task['PluginFlyvemdmTask.itemtype']
+          }
+          if (task['PluginFlyvemdmTask.items_id']) {
+            taskDeploy.items_id = task['PluginFlyvemdmTask.items_id']
+          }
+
+          const deployType = policies.data.filter(policy => (
+            policy['PluginFlyvemdmPolicy.type'] === 'deployapp'
+                || policy['PluginFlyvemdmPolicy.type'] === 'removeapp'
+                || policy['PluginFlyvemdmPolicy.type'] === 'deployfile'
+                || policy['PluginFlyvemdmPolicy.type'] === 'removefile')
+              && (policy['PluginFlyvemdmPolicy.id'] === taskDeploy.plugin_flyvemdm_policies_id))
+
+          if (deployType.length > 0) {
+            if (tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]) {
+              tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].push(taskDeploy)
+            } else {
+              tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] = [taskDeploy]
+            }
+          } else {
+            tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] = taskDeploy
+          }
+        })
       }
     }
+
+    /*
+     * Get categories
+     * */
+    const countCategories = await glpi.searchItems({
+      itemtype: itemtype.PluginFlyvemdmPolicyCategory,
+      options: {
+        uid_cols: true,
+        range: '0-0',
+      },
+    })
+    const categories = await glpi.searchItems({
+      itemtype: itemtype.PluginFlyvemdmPolicyCategory,
+      options: {
+        uid_cols: true,
+        forcedisplay: [1, 2],
+        range: `0-${countCategories.totalcount}`,
+      },
+    })
+
+    /*
+     * Get files
+     */
+    const files = await glpi.getAllItems({
+      itemtype: itemtype.PluginFlyvemdmFile,
+    })
+
+    /*
+     * Get Applications
+     */
+
+    const applications = await glpi.getAllItems({
+      itemtype: itemtype.PluginFlyvemdmPackage,
+    })
+
+    /*
+     * Update props
+     */
+    this.setState(() => ({
+      isLoading: false,
+      data: {
+        tasks: tasks.data ? tasks.data : [],
+        tasksNew,
+        policies: policies.data ? policies.data : [],
+        categories: categories.data ? categories.data : [],
+        files: files || [],
+        applications: applications || [],
+        tasksRemove: {},
+      },
+      devicesLength: devices.totalcount,
+    }))
+  }
+
+  /**
+   * Set value when input change
+   * @function handleChangeInput
+   * @param {object} e
+   */
+  handleChangeInput = (e) => {
+    this.setState({
+      input: e.target.value,
+    })
+  }
+
+  /**
+   * Get if task is enable/disable
+   * @function handleFleetHaveTask
+   * @param {object} policy
+   * @returns {boolean}
+   */
+  handleFleetHaveTask = (policy) => {
+    const { data } = this.state
+
+    return (!!data.tasksNew[policy['PluginFlyvemdmPolicy.id']])
   }
 
   /**
@@ -135,271 +420,10 @@ class FleetsContent extends PureComponent {
         files: undefined,
         applications: undefined,
         tasksNew: {},
-        tasksRemove: {}
+        tasksRemove: {},
       },
-      devices__length: 0
+      devicesLength: 0,
     })
-  }
-
-  /**
-   * handle request all data to show fleet policies
-   * @function requestAllData
-   * @async
-   */
-  requestAllData = async () => {
-    /*
-     * Get Devices
-     * */
-    const devices = await this.props.glpi.searchItems({
-      itemtype: itemtype.PluginFlyvemdmAgent,
-      criteria: [{
-        link: 'and',
-        field: 3,
-        searchtype: 'contains',
-        value: this.state.input
-      }]
-    })
-
-    /*
-     * Get Policies
-     * */
-    const countPolicies = await this.props.glpi.searchItems({
-      itemtype: itemtype.PluginFlyvemdmPolicy,
-      options: {
-        uid_cols: true,
-        range: '0-0'
-      }
-    })
-    const policies = await this.props.glpi.searchItems({
-      itemtype: itemtype.PluginFlyvemdmPolicy,
-      options: {
-        uid_cols: true,
-        forcedisplay: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-        range: `0-${countPolicies.totalcount}`
-      }
-    })
-
-    let tasks = []
-    let tasksNew = {}
-
-    if (Number(this.state.itemID)) {
-      /*
-       * Get Tasks
-       * */
-      try {
-        const countTasks = await this.props.glpi.searchItems({
-          itemtype: itemtype.PluginFlyvemdmTask,
-          options: {
-            uid_cols: true,
-            range: '0-0'
-          },
-          criteria: [{
-              link: 'and',
-              field: 9,
-              searchtype: 'equals',
-              value: this.state.itemType
-            },
-            {
-              link: 'and',
-              field: 10,
-              searchtype: 'equals',
-              value: this.state.itemID
-            }
-          ]
-        })
-
-        tasks = await this.props.glpi.searchItems({
-          itemtype: itemtype.PluginFlyvemdmTask,
-          options: {
-            uid_cols: true,
-            forcedisplay: [1, 2, 3, 5, 6, 7],
-            range: `0-${countTasks.totalcount}`
-          },
-          criteria: [{
-              link: 'and',
-              field: 9,
-              searchtype: 'equals',
-              value: this.state.itemType
-            },
-            {
-              link: 'and',
-              field: 10,
-              searchtype: 'equals',
-              value: this.state.itemID
-            }
-          ]
-        })
-      } catch (error) {
-        this.props.setNotification(this.props.handleMessage({
-          type: 'alert',
-          message: error
-        }))
-        this.props.changeSelectionMode(false)
-        this.props.changeAction('reload')
-      }
-
-      if (tasks.data) {
-        tasks.data.forEach((task, index) => {
-
-          let taskDeploy = {
-            itemtype_applied: this.state.itemType,
-            items_id_applied: task['PluginFlyvemdmTask.items_id_applied'],
-            plugin_flyvemdm_policies_id: task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id'],
-            value: task['PluginFlyvemdmTask.value']
-          }
-
-          if (task['PluginFlyvemdmTask.itemtype']) {
-            taskDeploy['itemtype'] = task['PluginFlyvemdmTask.itemtype']
-          }
-          if (task['PluginFlyvemdmTask.items_id']) {
-            taskDeploy['items_id'] = task['PluginFlyvemdmTask.items_id']
-          }
-
-          const deployType = policies.data.filter(policy => {
-            return (
-                policy['PluginFlyvemdmPolicy.type'] === 'deployapp' ||
-                policy['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
-                policy['PluginFlyvemdmPolicy.type'] === 'deployfile' ||
-                policy['PluginFlyvemdmPolicy.type'] === 'removefile') &&
-              (policy['PluginFlyvemdmPolicy.id'] === taskDeploy['plugin_flyvemdm_policies_id'])
-          })
-
-          if (deployType.length > 0) {
-
-            if (tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]) {
-              tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].push(taskDeploy)
-            } else {
-              tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] = [taskDeploy]
-            }
-
-          } else {
-            tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] = taskDeploy
-          }
-        })
-      }
-    }
-
-    /*
-     * Get categories
-     * */
-    const countCategories = await this.props.glpi.searchItems({
-      itemtype: itemtype.PluginFlyvemdmPolicyCategory,
-      options: {
-        uid_cols: true,
-        range: '0-0'
-      }
-    })
-    const categories = await this.props.glpi.searchItems({
-      itemtype: itemtype.PluginFlyvemdmPolicyCategory,
-      options: {
-        uid_cols: true,
-        forcedisplay: [1, 2],
-        range: `0-${countCategories.totalcount}`
-      }
-    })
-
-    /*
-     * Get files
-     */
-    const files = await this.props.glpi.getAllItems({
-      itemtype: itemtype.PluginFlyvemdmFile
-    })
-
-    /*
-     * Get Applications
-     */
-
-    const applications = await this.props.glpi.getAllItems({
-      itemtype: itemtype.PluginFlyvemdmPackage,
-    })
-
-    /*
-     * Update props
-     */
-    this.setState((prevState, props) => ({
-      isLoading: false,
-      data: {
-        tasks: tasks.data ? tasks.data : [],
-        tasksNew: tasksNew,
-        policies: policies.data ? policies.data : [],
-        categories: categories.data ? categories.data : [],
-        files: files ? files : [],
-        applications: applications ? applications : [],
-        tasksRemove: {}
-      },
-      devices__length: devices.totalcount
-    }))
-
-  }
-
-  /**
-   * Set value when input change
-   * @function handleChangeInput
-   * @param {object} e
-   */
-  handleChangeInput = (e) => {
-    this.setState({
-      input: e.target.value
-    })
-  }
-
-  /**
-   * Get if task is enable/disable
-   * @function handleFleetHaveTask
-   * @param {object} policy
-   * @returns {boolean}
-   */
-  handleFleetHaveTask = policy => {
-    return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? true : false
-  }
-
-  /**
-   * Get policy type
-   * @function getTypeData
-   * @param {object} policy
-   */
-  getTypeData = policy => {
-    const policyType = policy['PluginFlyvemdmPolicy.type']
-    // Check if the policy default value are applications, files or other
-    switch (policyType) {
-      case 'deployapp':
-      case 'removeapp':
-        return this.state.data.applications
-      case 'deployfile':
-      case 'removefile':
-        return this.state.data.files
-      case 'dropdown':
-        return Object.entries(JSON.parse(policy['PluginFlyvemdmPolicy.type_data']))
-      default:
-        return JSON.parse(policy['PluginFlyvemdmPolicy.type_data'])
-    }
-  }
-
-  /**
-   * Get Task value
-   * @function getValueOfTask
-   * @param {object} policy
-   * @param {*} fleetHaveTask
-   */
-  getValueOfTask = (policy, fleetHaveTask) => {
-    // Check if the current Fleet have a Task that have a relation with this Policy
-    if (fleetHaveTask) {
-      // Return a Object that is the Task
-      switch (policy['PluginFlyvemdmPolicy.type']) {
-        case 'deployapp':
-        case 'removeapp':
-        case 'deployfile':
-        case 'removefile':
-          return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy[
-            'PluginFlyvemdmPolicy.id']] : policy['PluginFlyvemdmPolicy.recommended_value']
-        default:
-          return this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']] ? this.state.data.tasksNew[policy[
-            'PluginFlyvemdmPolicy.id']]['value'] : policy['PluginFlyvemdmPolicy.recommended_value']
-      }
-    } else {
-      // Return recommended value
-      return policy['PluginFlyvemdmPolicy.recommended_value']
-    }
   }
 
   /**
@@ -408,19 +432,18 @@ class FleetsContent extends PureComponent {
    * @return {array}
    */
   filterPoliciesPerCategory = () => {
+    const { data } = this.state
+
     const policiesPerCategory = []
 
-    this.state.data.categories.forEach(category => {
-      let obj = {}
-      let categoryCompleteName = category['PluginFlyvemdmPolicyCategory.completename']
-      let policiesPerThisCategory = this.state.data.policies.filter(policy => {
-        // Check if the same Policy Category name is equal to the Category name
-        return policy['PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename'] ===
-          categoryCompleteName
-      })
-      obj['name'] = categoryCompleteName
-      obj['id'] = category['PluginFlyvemdmPolicyCategory.id']
-      obj['policies'] = policiesPerThisCategory
+    data.categories.forEach((category) => {
+      const obj = {}
+      const categoryCompleteName = category['PluginFlyvemdmPolicyCategory.completename']
+      const policiesPerThisCategory = data.policies.filter(policy => policy['PluginFlyvemdmPolicy.PluginFlyvemdmPolicyCategory.completename']
+          === categoryCompleteName)
+      obj.name = categoryCompleteName
+      obj.id = category['PluginFlyvemdmPolicyCategory.id']
+      obj.policies = policiesPerThisCategory
       policiesPerCategory.push(obj)
     })
     return policiesPerCategory
@@ -432,29 +455,36 @@ class FleetsContent extends PureComponent {
    * @param {object} policy
    */
   handleAddTask = (policy) => {
+    const {
+      data,
+      itemType,
+      itemID,
+    } = this.state
+
     if (policy) {
-      if (policy['PluginFlyvemdmPolicy.type'] !== 'deployapp' &&
-        policy['PluginFlyvemdmPolicy.type'] !== 'removeapp' &&
-        policy['PluginFlyvemdmPolicy.type'] !== 'deployfile' &&
-        policy['PluginFlyvemdmPolicy.type'] !== 'removefile') {
-        let tasks = { ...this.state.data.tasksRemove
-        }
+      if (policy['PluginFlyvemdmPolicy.type'] !== 'deployapp'
+        && policy['PluginFlyvemdmPolicy.type'] !== 'removeapp'
+        && policy['PluginFlyvemdmPolicy.type'] !== 'deployfile'
+        && policy['PluginFlyvemdmPolicy.type'] !== 'removefile') {
+        const tasks = { ...data.tasksRemove }
         delete tasks[policy['PluginFlyvemdmPolicy.id']]
 
-        let addPolicy = {
-          itemtype_applied: this.state.itemType,
-          items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
+        const addPolicy = {
+          itemtype_applied: itemType,
+          items_id_applied: Number(itemID) ? itemID : null,
           plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
-          value: policy['PluginFlyvemdmPolicy.recommended_value']
+          value: policy['PluginFlyvemdmPolicy.recommended_value'],
         }
 
-        this.setState((prevState, props) => ({
-          data: { ...prevState.data,
-            tasksNew: { ...prevState.data.tasksNew,
-              [policy['PluginFlyvemdmPolicy.id']]: addPolicy
+        this.setState(prevState => ({
+          data: {
+            ...prevState.data,
+            tasksNew: {
+              ...prevState.data.tasksNew,
+              [policy['PluginFlyvemdmPolicy.id']]: addPolicy,
             },
-            tasksRemove: tasks
-          }
+            tasksRemove: tasks,
+          },
         }))
       }
     }
@@ -465,10 +495,15 @@ class FleetsContent extends PureComponent {
    * @function handleRemoveTask
    * @param {object} policy
    */
-  handleRemoveTask = policy => {
+  handleRemoveTask = (policy) => {
+    const {
+      data,
+      itemType,
+      itemID,
+    } = this.state
+
     if (policy) {
-      let tasks = { ...this.state.data.tasksNew
-      }
+      const tasks = { ...data.tasksNew }
       delete tasks[policy['PluginFlyvemdmPolicy.id']]
       let removePolicy
 
@@ -477,29 +512,29 @@ class FleetsContent extends PureComponent {
         case 'removeapp':
         case 'deployfile':
         case 'removefile':
-          if (this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
-            removePolicy = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
+          if (data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
+            removePolicy = data.tasksNew[policy['PluginFlyvemdmPolicy.id']].map(item => item)
           }
           break
         default:
           removePolicy = {
-            itemtype_applied: this.state.itemType,
-            items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
+            itemtype_applied: itemType,
+            items_id_applied: Number(itemID) ? itemID : null,
             plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
-            value: policy['PluginFlyvemdmPolicy.default_value']
+            value: policy['PluginFlyvemdmPolicy.default_value'],
           }
           break
       }
       if (removePolicy) {
-        this.setState((prevState, props) => ({
+        this.setState(prevState => ({
           data: {
             ...prevState.data,
             tasksNew: tasks,
             tasksRemove: {
               ...prevState.data.tasksRemove,
-              [policy['PluginFlyvemdmPolicy.id']]: removePolicy
-            }
-          }
+              [policy['PluginFlyvemdmPolicy.id']]: removePolicy,
+            },
+          },
         }))
       }
     }
@@ -512,6 +547,13 @@ class FleetsContent extends PureComponent {
    * @param {*} value
    */
   handleUpdateValueTask = (policy, value) => {
+    const {
+      itemType,
+      itemID,
+      data,
+    } = this.state
+
+
     if (policy) {
       let newDeploy
       let newValue
@@ -523,25 +565,22 @@ class FleetsContent extends PureComponent {
           break
         case 'deployapp':
           newDeploy = {
-            itemtype_applied: this.state.itemType,
-            items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
+            itemtype_applied: itemType,
+            items_id_applied: Number(itemID) ? itemID : null,
             plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
             value: {
-              remove_on_delete: 1
+              remove_on_delete: 1,
             },
             items_id: Number(value),
-            itemtype: itemtype.PluginFlyvemdmPackage
+            itemtype: itemtype.PluginFlyvemdmPackage,
           }
-          if (this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
-            alreadyTask = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => {
-              return item['items_id'] === newDeploy['items_id']
-            })
+          if (data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
+            alreadyTask = data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => item.items_id === newDeploy.items_id)
           }
-          tasksToRemove = { ...this.state.data.tasksRemove
-          }
+          tasksToRemove = { ...data.tasksRemove }
           if (tasksToRemove[policy['PluginFlyvemdmPolicy.id']]) {
-            this.state.data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
-              if (item['items_id'] === newDeploy['items_id']) {
+            data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
+              if (item.items_id === newDeploy.items_id) {
                 tasksToRemove[policy['PluginFlyvemdmPolicy.id']].splice(index, 1)
               }
             })
@@ -550,21 +589,18 @@ class FleetsContent extends PureComponent {
         case 'removeapp':
         case 'removefile':
           newDeploy = {
-            itemtype_applied: this.state.itemType,
-            items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
+            itemtype_applied: itemType,
+            items_id_applied: Number(itemID) ? itemID : null,
             plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
-            value: value
+            value,
           }
-          if (this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
-            alreadyTask = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => {
-              return item['value'] === newDeploy['value']
-            })
+          if (data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
+            alreadyTask = data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => item.value === newDeploy.value)
           }
-          tasksToRemove = { ...this.state.data.tasksRemove
-          }
+          tasksToRemove = { ...data.tasksRemove }
           if (tasksToRemove[policy['PluginFlyvemdmPolicy.id']]) {
-            this.state.data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
-              if (item['value'] === newDeploy['value']) {
+            data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
+              if (item.value === newDeploy.value) {
                 tasksToRemove[policy['PluginFlyvemdmPolicy.id']].splice(index, 1)
               }
             })
@@ -572,26 +608,23 @@ class FleetsContent extends PureComponent {
           break
         case 'deployfile':
           newDeploy = {
-            itemtype_applied: this.state.itemType,
-            items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
+            itemtype_applied: itemType,
+            items_id_applied: Number(itemID) ? itemID : null,
             plugin_flyvemdm_policies_id: policy['PluginFlyvemdmPolicy.id'],
             value: {
-              destination: "%DOCUMENTS%",
-              remove_on_delete: 1
+              destination: '%DOCUMENTS%',
+              remove_on_delete: 1,
             },
             items_id: Number(value),
-            itemtype: itemtype.PluginFlyvemdmFile
+            itemtype: itemtype.PluginFlyvemdmFile,
           }
-          if (this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
-            alreadyTask = this.state.data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => {
-              return item['items_id'] === newDeploy['items_id']
-            })
+          if (data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
+            alreadyTask = data.tasksNew[policy['PluginFlyvemdmPolicy.id']].filter(item => item.items_id === newDeploy.items_id)
           }
-          tasksToRemove = { ...this.state.data.tasksRemove
-          }
+          tasksToRemove = { ...data.tasksRemove }
           if (tasksToRemove[policy['PluginFlyvemdmPolicy.id']]) {
-            this.state.data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
-              if (item['items_id'] === newDeploy['items_id']) {
+            data.tasksRemove[policy['PluginFlyvemdmPolicy.id']].forEach((item, index) => {
+              if (item.items_id === newDeploy.items_id) {
                 tasksToRemove[policy['PluginFlyvemdmPolicy.id']].splice(index, 1)
               }
             })
@@ -603,22 +636,20 @@ class FleetsContent extends PureComponent {
       }
 
       if (alreadyTask.length === 0) {
-        this.setState((prevState, props) => {
-
-          if (policy['PluginFlyvemdmPolicy.type'] === 'deployapp' ||
-            policy['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
-            policy['PluginFlyvemdmPolicy.type'] === 'deployfile' ||
-            policy['PluginFlyvemdmPolicy.type'] === 'removefile') {
-
+        this.setState((prevState) => {
+          if (policy['PluginFlyvemdmPolicy.type'] === 'deployapp'
+            || policy['PluginFlyvemdmPolicy.type'] === 'removeapp'
+            || policy['PluginFlyvemdmPolicy.type'] === 'deployfile'
+            || policy['PluginFlyvemdmPolicy.type'] === 'removefile') {
             let newDeployAdd = []
             if (prevState.data.tasksNew[policy['PluginFlyvemdmPolicy.id']]) {
               newDeployAdd = [
                 ...prevState.data.tasksNew[policy['PluginFlyvemdmPolicy.id']],
-                newDeploy
+                newDeploy,
               ]
             } else {
               newDeployAdd = [
-                newDeploy
+                newDeploy,
               ]
             }
 
@@ -627,24 +658,23 @@ class FleetsContent extends PureComponent {
                 ...prevState.data,
                 tasksNew: {
                   ...prevState.data.tasksNew,
-                  [policy['PluginFlyvemdmPolicy.id']]: newDeployAdd
+                  [policy['PluginFlyvemdmPolicy.id']]: newDeployAdd,
                 },
-                tasksRemove: tasksToRemove
-              }
+                tasksRemove: tasksToRemove,
+              },
             }
-          } else {
-            return {
-              data: {
-                ...prevState.data,
-                tasksNew: {
-                  ...prevState.data.tasksNew,
-                  [policy['PluginFlyvemdmPolicy.id']]: {
-                    ...prevState.data.tasksNew[policy['PluginFlyvemdmPolicy.id']],
-                    value: newValue
-                  }
-                }
-              }
-            }
+          }
+          return {
+            data: {
+              ...prevState.data,
+              tasksNew: {
+                ...prevState.data.tasksNew,
+                [policy['PluginFlyvemdmPolicy.id']]: {
+                  ...prevState.data.tasksNew[policy['PluginFlyvemdmPolicy.id']],
+                  value: newValue,
+                },
+              },
+            },
           }
         })
       }
@@ -658,59 +688,61 @@ class FleetsContent extends PureComponent {
    * @param {object} task
    */
   handleRemoveValueTask = (policy, task) => {
+    const {
+      data,
+      itemType,
+      itemID,
+    } = this.state
+
     let newTasks
 
-    if (this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']]) {
-
+    if (data.tasksNew[task.plugin_flyvemdm_policies_id]) {
       switch (policy['PluginFlyvemdmPolicy.type']) {
         case 'deployapp':
         case 'deployfile':
-          newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
-            return item['items_id'] !== task['items_id']
-          })
+          newTasks = data.tasksNew[task.plugin_flyvemdm_policies_id].filter(item => item.items_id !== task.items_id)
           break
         case 'removeapp':
         case 'removefile':
-          newTasks = this.state.data.tasksNew[task['plugin_flyvemdm_policies_id']].filter(item => {
-            return item['value'] !== task['value']
-          })
+          newTasks = data.tasksNew[task.plugin_flyvemdm_policies_id].filter(item => item.value !== task.value)
           break
         default:
           break
       }
 
-      let removePolicy = {
-        itemtype_applied: this.state.itemType,
-        items_id_applied: Number(this.state.itemID) ? this.state.itemID : null,
-        plugin_flyvemdm_policies_id: task['plugin_flyvemdm_policies_id'],
-        value: task['value']
+      const removePolicy = {
+        itemtype_applied: itemType,
+        items_id_applied: Number(itemID) ? itemID : null,
+        plugin_flyvemdm_policies_id: task.plugin_flyvemdm_policies_id,
+        value: task.value,
       }
 
-      if (task['itemtype']) {
-        removePolicy['itemtype'] = task['itemtype']
+      if (task.itemtype) {
+        removePolicy.itemtype = task.itemtype
       }
-      if (task['items_id']) {
-        removePolicy['items_id'] = task['items_id']
+      if (task.items_id) {
+        removePolicy.items_id = task.items_id
       }
 
       let newRemoveTasks = []
-      if (this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']]) {
-        newRemoveTasks = [...this.state.data.tasksRemove[task['plugin_flyvemdm_policies_id']], removePolicy]
+      if (data.tasksRemove[task.plugin_flyvemdm_policies_id]) {
+        newRemoveTasks = [...data.tasksRemove[task.plugin_flyvemdm_policies_id], removePolicy]
       } else {
         newRemoveTasks = [removePolicy]
       }
 
-      this.setState((prevState, props) => ({
+      this.setState(prevState => ({
         data: {
           ...prevState.data,
           tasksNew: {
             ...prevState.data.tasksNew,
-            [task['plugin_flyvemdm_policies_id']]: newTasks
+            [task.plugin_flyvemdm_policies_id]: newTasks,
           },
-          tasksRemove: { ...prevState.data.tasksRemove,
-            [task['plugin_flyvemdm_policies_id']]: newRemoveTasks
-          }
-        }
+          tasksRemove: {
+            ...prevState.data.tasksRemove,
+            [task.plugin_flyvemdm_policies_id]: newRemoveTasks,
+          },
+        },
       }))
     }
   }
@@ -721,21 +753,25 @@ class FleetsContent extends PureComponent {
    * @async
    */
   handleSaveFleet = async () => {
-    if (this.state.itemType === itemtype.PluginFlyvemdmFleet) {
-      if (this.props.selectedItems.length === 1) {
-        if (!this.state.notManaged) {
+    const {
+      itemType,
+      notManaged,
+    } = this.state
+    const { selectedItems } = this.props
+
+    if (itemType === itemtype.PluginFlyvemdmFleet) {
+      if (selectedItems.length === 1) {
+        if (!notManaged) {
           this.handleUpdateFleet()
         } else {
           this.handleUpdateFleetName()
         }
-
       } else {
         this.handleCreateFleet()
       }
     } else {
       this.handleUpdateFleet()
     }
-
   }
 
   /**
@@ -744,35 +780,49 @@ class FleetsContent extends PureComponent {
    * @async
    */
   handleUpdateFleetName = async () => {
+    const {
+      input,
+      itemID,
+    } = this.state
+    const {
+      glpi,
+      setNotification,
+      changeAction,
+      handleMessage,
+    } = this.props
+
     try {
       this.setState({
-        isLoading: true
+        isLoading: true,
       })
       const fleetToUpdate = {
-        name: this.state.input
+        name: input,
       }
 
-      await this.props.glpi.updateItem({
+      await glpi.updateItem({
         itemtype: itemtype.PluginFlyvemdmFleet,
-        id: this.state.itemID,
-        input: fleetToUpdate
+        id: itemID,
+        input: fleetToUpdate,
       })
-      this.props.setNotification({
+
+      setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.fleet_successfully_updated'),
-        type: 'success'
+        type: 'success',
       })
-      this.props.changeAction('reload')
+
+      changeAction('reload')
+
       this.setState({
-        isLoading: false
+        isLoading: false,
       })
     } catch (error) {
-      this.props.setNotification(this.props.handleMessage({
+      setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
       this.setState({
-        isLoading: false
+        isLoading: false,
       })
     }
   }
@@ -783,53 +833,57 @@ class FleetsContent extends PureComponent {
    * @async
    */
   handleUpdateFleet = async () => {
+    const {
+      input,
+      data,
+      itemType,
+      itemID,
+    } = this.satte
+    const {
+      glpi,
+      setNotification,
+      handleMessage,
+    } = this.props
+
     this.setState({
-      isLoading: true
+      isLoading: true,
     })
     const fleetToUpdate = {
-      name: this.state.input
+      name: input,
     }
     let itemsToDelete = []
 
-    if (this.state.data.tasksRemove) {
-      itemsToDelete = this.state.data.tasks.filter(task => {
+    if (data.tasksRemove) {
+      itemsToDelete = data.tasks.filter((task) => {
         // Check if the same Policy id is equal on object to remove
-        if (Array.isArray(this.state.data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']])) {
-
-          const value = this.state.data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].filter(
-            item => {
-              if (item['items_id']) {
-                return item['items_id'] === task['PluginFlyvemdmTask.items_id'] ? true : false
-              } else {
-                return item['value'] === task['PluginFlyvemdmTask.value'] ? true : false
+        if (Array.isArray(data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']])) {
+          const value = data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].filter(
+            (item) => {
+              if (item.items_id) {
+                return item.items_id === task['PluginFlyvemdmTask.items_id']
               }
-            })
+              return item.value === task['PluginFlyvemdmTask.value']
+            },
+          )
 
-          return value.length > 0 ? true : false
-        } else {
-          return this.state.data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] ? true : false
+          return value.length > 0
         }
-
-      }).map((item) => {
-        return {
-          id: item['PluginFlyvemdmTask.id']
-        }
-      })
+        return !!data.tasksRemove[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]
+      }).map(item => ({
+        id: item['PluginFlyvemdmTask.id'],
+      }))
     }
-    let itemsToUpdate = []
+    const itemsToUpdate = []
 
-    const specialPolicies = this.state.data.policies.filter(policy => {
-      return policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || policy['PluginFlyvemdmPolicy.type'] ===
-        'removeapp' || policy['PluginFlyvemdmPolicy.type'] === 'deployfile' || policy['PluginFlyvemdmPolicy.type'] ===
-        'removefile'
-    })
+    const specialPolicies = data.policies.filter(policy => policy['PluginFlyvemdmPolicy.type'] === 'deployapp' || policy['PluginFlyvemdmPolicy.type']
+        === 'removeapp' || policy['PluginFlyvemdmPolicy.type'] === 'deployfile' || policy['PluginFlyvemdmPolicy.type']
+        === 'removefile')
 
-    this.state.data.tasks.forEach(task => {
-
-      if (this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]) {
+    data.tasks.forEach((task) => {
+      if (data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]) {
         let idDeployApp
 
-        for (let element of specialPolicies) {
+        for (const element of specialPolicies) {
           if (element['PluginFlyvemdmPolicy.id'] === task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']) {
             idDeployApp = element['PluginFlyvemdmPolicy.id']
             break
@@ -837,31 +891,27 @@ class FleetsContent extends PureComponent {
         }
 
         if (!idDeployApp) {
-          if (this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]['value'] !== task[
-              'PluginFlyvemdmTask.value']) {
+          if (data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].value !== task[
+            'PluginFlyvemdmTask.value']) {
             itemsToUpdate.push({
               id: task['PluginFlyvemdmTask.id'],
-              value: this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']]['value']
+              value: data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].value,
             })
           }
-
         }
       }
     })
-    let itemsToAdd = { ...this.state.data.tasksNew
-    }
+    const itemsToAdd = { ...data.tasksNew }
 
-    this.state.data.tasks.forEach(task => {
-
+    data.tasks.forEach((task) => {
       if (Array.isArray(itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']])) {
-        this.state.data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].forEach((item, index) => {
+        data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].forEach((item, index) => {
           if (task['PluginFlyvemdmTask.items_id']) {
-            return item['items_id'] === task['PluginFlyvemdmTask.items_id'] ? itemsToAdd[task[
-              'PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].splice(index, 1) : null
-          } else {
-            return item['value'] === task['PluginFlyvemdmTask.value'] ? itemsToAdd[task[
+            return item.items_id === task['PluginFlyvemdmTask.items_id'] ? itemsToAdd[task[
               'PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].splice(index, 1) : null
           }
+          return item.value === task['PluginFlyvemdmTask.value'] ? itemsToAdd[task[
+            'PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].splice(index, 1) : null
         })
       } else {
         return itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] ? delete itemsToAdd[task[
@@ -869,10 +919,10 @@ class FleetsContent extends PureComponent {
       }
     })
 
-    let itemsToSave = []
-    Object.values(itemsToAdd).forEach(item => {
+    const itemsToSave = []
+    Object.values(itemsToAdd).forEach((item) => {
       if (Array.isArray(item)) {
-        item.forEach(deploy => {
+        item.forEach((deploy) => {
           itemsToSave.push(deploy)
         })
       } else {
@@ -880,44 +930,44 @@ class FleetsContent extends PureComponent {
       }
     })
     try {
-      if (this.state.itemType === itemtype.PluginFlyvemdmFleet) {
-        await this.props.glpi.updateItem({
+      if (itemType === itemtype.PluginFlyvemdmFleet) {
+        await glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmFleet,
-          id: this.state.itemID,
-          input: fleetToUpdate
+          id: itemID,
+          input: fleetToUpdate,
         })
       }
       if (itemsToDelete.length > 0) {
-        await this.props.glpi.deleteItem({
+        await glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmTask,
-          input: itemsToDelete
+          input: itemsToDelete,
         })
       }
 
       if (itemsToUpdate.length > 0) {
-        await this.props.glpi.updateItem({
+        await glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmTask,
-          input: itemsToUpdate
+          input: itemsToUpdate,
         })
       }
 
       if (itemsToSave.length > 0) {
-        await this.props.glpi.addItem({
+        await glpi.addItem({
           itemtype: itemtype.PluginFlyvemdmTask,
-          input: itemsToSave
+          input: itemsToSave,
         })
       }
 
-      this.props.setNotification({
+      setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.fleet_successfully_updated'),
-        type: 'success'
+        type: 'success',
       })
       this.requestAllData()
     } catch (error) {
-      this.props.setNotification(this.props.handleMessage({
+      setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
       this.requestAllData()
     }
@@ -929,72 +979,81 @@ class FleetsContent extends PureComponent {
    * @async
    */
   handleCreateFleet = async () => {
+    const {
+      input,
+      data,
+    } = this.state
+    const {
+      glpi,
+      setNotification,
+      changeSelectionMode,
+      changeAction,
+      handleMessage,
+    } = this.props
+
     this.setState({
-      isLoading: true
+      isLoading: true,
     })
 
     try {
       const fleetToCreate = {
-        name: this.state.input
+        name: input,
       }
 
-      const newFleet = await this.props.glpi.addItem({
+      const newFleet = await glpi.addItem({
         itemtype: itemtype.PluginFlyvemdmFleet,
-        input: fleetToCreate
+        input: fleetToCreate,
       })
 
-      let itemsToAdd = { ...this.state.data.tasksNew
-      }
+      const itemsToAdd = { ...data.tasksNew }
 
-      this.state.data.tasks.map(task => {
-        // Check if the same Policy id is equal on object to remove
-        return itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] ? delete itemsToAdd[task[
-          'PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] : null
-      })
+      data.tasks.map(task => (itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] ? delete itemsToAdd[task[
+        'PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']] : null))
 
-      let itemsToSave = []
-      Object.values(itemsToAdd).forEach(item => {
+      const itemsToSave = []
+      Object.values(itemsToAdd).forEach((item) => {
+        /* eslint no-param-reassign: ["error", { "props": false }] */
         if (Array.isArray(item)) {
-          item.forEach(deploy => {
-            deploy['items_id_applied'] = newFleet['id']
+          item.forEach((deploy) => {
+            deploy.items_id_applied = newFleet.id
 
             try {
-              const objValue = JSON.parse(deploy['value'])
-              deploy['value'] = objValue
+              const objValue = JSON.parse(deploy.value)
+              deploy.value = objValue
             } catch (e) {}
 
             itemsToSave.push(deploy)
           })
         } else {
-          item['items_id_applied'] = newFleet['id']
+          item.items_id_applied = newFleet.id
           itemsToSave.push(item)
         }
       })
 
       if (itemsToSave.length > 0) {
-        await this.props.glpi.addItem({
+        await glpi.addItem({
           itemtype: itemtype.PluginFlyvemdmTask,
-          input: itemsToSave
+          input: itemsToSave,
         })
       }
 
       this.setState({
-        isLoading: false
+        isLoading: false,
       })
-      this.props.setNotification({
+      setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.fleet_successfully_created'),
-        type: 'success'
+        type: 'success',
       })
-      this.props.changeSelectionMode(false)
-      this.props.changeAction('reload')
+      changeSelectionMode(false)
+      changeAction('reload')
     } catch (error) {
-      this.props.setNotification(this.props.handleMessage({
+      setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
       this.setState({
-        isLoading: false
+        isLoading: false,
       })
     }
   }
@@ -1005,36 +1064,45 @@ class FleetsContent extends PureComponent {
    * @async
    * @param {object} eventObject
    */
-  handleDeleteFleet = async (eventObject) => {
-    if (this.props.selectedItems.length === 1) {
+  handleDeleteFleet = async () => {
+    const {
+      selectedItems,
+      glpi,
+      setNotification,
+      changeSelectionMode,
+      changeAction,
+      handleMessage,
+    } = this.props
+    const { itemID } = this.state
+
+    if (selectedItems.length === 1) {
       this.setState({
-        isLoading: true
+        isLoading: true,
       })
 
       try {
-        await this.props.glpi.deleteItem({
+        await glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmFleet,
-          id: this.state.itemID
+          id: itemID,
         })
 
         this.setState({
-          isLoading: false
+          isLoading: false,
         })
-        this.props.setNotification({
+        setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.fleet_successfully_removed'),
-          type: 'success'
+          type: 'success',
         })
-        this.props.changeSelectionMode(false)
-        this.props.changeAction('reload')
-
+        changeSelectionMode(false)
+        changeAction('reload')
       } catch (error) {
-        this.props.setNotification(this.props.handleMessage({
+        setNotification(handleMessage({
           type: 'alert',
-          message: error
+          message: error,
         }))
         this.setState({
-          isLoading: false
+          isLoading: false,
         })
       }
     }
@@ -1045,7 +1113,7 @@ class FleetsContent extends PureComponent {
    * @function handleDuplicateFleet
    */
   handleDuplicateFleet = () => {
-    this.setState((prevState, props) => ({
+    this.setState(prevState => ({
       input: prevState.input !== '' ? prevState.input.concat(' copy') : 'Copy',
       data: {
         tasks: [],
@@ -1054,8 +1122,8 @@ class FleetsContent extends PureComponent {
         categories: prevState.data.categories,
         files: prevState.data.files,
         applications: prevState.data.applications,
-        tasksRemove: {}
-      }
+        tasksRemove: {},
+      },
     }), () => {
       this.handleCreateFleet()
     })
@@ -1066,7 +1134,10 @@ class FleetsContent extends PureComponent {
    * @function goToList
    */
   goToList = () => {
-    this.props.history.push(`${publicURL}/app/fleets/${this.state.itemID}/list`)
+    const { history } = this.props
+    const { itemID } = this.state
+
+    history.push(`${publicURL}/app/fleets/${itemID}/list`)
   }
 
   /**
@@ -1074,28 +1145,38 @@ class FleetsContent extends PureComponent {
    * @function render
    */
   render() {
+    const {
+      data,
+      isLoading,
+      itemType,
+      input,
+      devicesLength,
+      notManaged,
+    } = this.state
+    const { selectedItems } = this.props
+
     let policiesPerCategory
 
-    if (this.state.data.policies &&
-      this.state.data.categories &&
-      this.state.data.tasksNew &&
-      this.state.data.files &&
-      this.state.data.applications) {
+    if (data.policies
+      && data.categories
+      && data.tasksNew
+      && data.files
+      && data.applications) {
       policiesPerCategory = this.filterPoliciesPerCategory()
     }
-    if (this.state.isLoading) {
+    if (isLoading) {
       return (
         <Loading message={`${I18n.t('commons.loading')}...`} />
       )
-    } else {
-      return (
-        <ContentPane>
-          <div className="fleets" style={{ display: 'flex', flexDirection: 'column', height: '100%'}}>
-            <div style={{ display: '-moz-flex', flexDirection: 'row' }}>
-              <div className="content-header">
-                {
-                  this.state.itemType === itemtype.PluginFlyvemdmFleet ?
-                    (
+    }
+    return (
+      <ContentPane>
+        <div className="fleets" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <div style={{ display: '-moz-flex', flexDirection: 'row' }}>
+            <div className="content-header">
+              {
+                  itemType === itemtype.PluginFlyvemdmFleet
+                    ? (
                       <React.Fragment>
                         <h1 className="content-header__title">
                           <input
@@ -1104,12 +1185,17 @@ class FleetsContent extends PureComponent {
                             placeholder={I18n.t('fleets.input_name')}
                             name="fleetName"
                             onChange={this.handleChangeInput}
-                            value={this.state.input}
+                            value={input}
                           />
                         </h1>
-                        <div className="devices__length" onClick={this.goToList}>
+                        <div
+                          className="devices__length"
+                          onClick={this.goToList}
+                          role="button"
+                          tabIndex="0"
+                        >
                           <div>
-                            {this.state.devices__length}
+                            {devicesLength}
                           </div>
                           <span className="deviceIcon" />
                         </div>
@@ -1117,87 +1203,109 @@ class FleetsContent extends PureComponent {
                     )
                     : ''
                 }
-                <div className="item-info">
-                    <span
-                      className="saveIcon"
-                      onClick={this.handleSaveFleet}
-                    />
-                    {
-                      this.props.selectedItems.length !== 0 && this.state.itemType === itemtype.PluginFlyvemdmFleet ?
-                        (
-                          <React.Fragment>
-                            <span
-                              className="copyIcon"
-                              onClick={this.handleDuplicateFleet}
-                            />
-                            <span
-                              className="deleteIcon"
-                              onClick={this.handleDeleteFleet}
-                            />
-                          </React.Fragment>
-                        )
-                        : ''
-                    }
-                  </div>
-                  <div className="item-info" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
-                    <div/>
-                  </div>
+              <div className="item-info">
+                <span
+                  className="saveIcon"
+                  onClick={this.handleSaveFleet}
+                  role="button"
+                  tabIndex="0"
+                />
+                {
+                  selectedItems.length !== 0 && itemType === itemtype.PluginFlyvemdmFleet
+                    ? (
+                      <React.Fragment>
+                        <span
+                          className="copyIcon"
+                          onClick={this.handleDuplicateFleet}
+                          role="button"
+                          tabIndex="0"
+                        />
+                        <span
+                          className="deleteIcon"
+                          onClick={this.handleDeleteFleet}
+                          role="button"
+                          tabIndex="0"
+                        />
+                      </React.Fragment>
+                    )
+                    : ''
+                }
+              </div>
+              <div className="item-info" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+                <div />
               </div>
             </div>
-            <div style={{ display: '-moz-flex', flexDirection: 'row' }}>
-              <div className="separator" style={{ width: '100%'}} />
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'row', overflowY: 'auto' }}>
-              <div className="content-info" >
-                <h3 style={{ margin: '10px' }}>
-                  {I18n.t('fleets.tasks_per_Category')}
-                </h3>
-                <div>
-                    {
-                      policiesPerCategory ? (
-                        policiesPerCategory.map((category) => {
-                          return category['policies'].length > 0
-                            ? (
-                              <div key={category['id']}>
-                                <div className="title">
-                                  {category['name']}
-                                </div>
-                                <div>
-                                  {category['policies'].map((policy, index) => (
-                                    <FleetsTaskItemList
-                                      key={[policy['PluginFlyvemdmPolicy.name'], index].join("_")}
-                                      fleetHaveTask={this.handleFleetHaveTask(policy)}
-                                      data={policy}
-                                      value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
-                                      addTask={this.handleAddTask}
-                                      removeTask={this.handleRemoveTask}
-                                      updateValueTask={this.handleUpdateValueTask}
-                                      removeValueTask={this.handleRemoveValueTask}
-                                      typeData={this.getTypeData(policy)}
-                                    />
-                                  ))}
-                                </div>
-                              </div>
-                            )
-                            : null
-                          })
-                        )
-                        : this.state.notManaged ?
-                          <h1>{I18n.t('fleets.not_managed')}</h1>
-                          : <h1>{I18n.t('fleets.loading_tasks')}</h1>}
-                  </div>
-              </div>
-            </div>
-            <Confirmation
-              title={`Delete Fleets`}
-              message={this.props.selectedItems.length + ` Fleets`}
-              reference={el => this.contentDialog = el}
-            />
           </div>
-        </ContentPane>
-      )
-    }
+          <div style={{ display: '-moz-flex', flexDirection: 'row' }}>
+            <div className="separator" style={{ width: '100%' }} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row', overflowY: 'auto' }}>
+            <div className="content-info">
+              <h3 style={{ margin: '10px' }}>
+                {I18n.t('fleets.tasks_per_Category')}
+              </h3>
+              <div>
+                {
+                  policiesPerCategory ? (
+                    policiesPerCategory.map(category => (category.policies.length > 0
+                      ? (
+                        <div key={category.id}>
+                          <div className="title">
+                            {category.name}
+                          </div>
+                          <div>
+                            {category.policies.map((policy, index) => (
+                              <FleetsTaskItemList
+                                key={[policy['PluginFlyvemdmPolicy.name'], index].join('_')}
+                                fleetHaveTask={this.handleFleetHaveTask(policy)}
+                                data={policy}
+                                value={this.getValueOfTask(policy, this.handleFleetHaveTask(policy))}
+                                addTask={this.handleAddTask}
+                                removeTask={this.handleRemoveTask}
+                                updateValueTask={this.handleUpdateValueTask}
+                                removeValueTask={this.handleRemoveValueTask}
+                                typeData={this.getTypeData(policy)}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      )
+                      : null))
+                  )
+                    : notManaged
+                      ? (
+                        <h1>
+                          {I18n.t('fleets.not_managed')}
+                        </h1>
+                      )
+                      : (
+                        <h1>
+                          {I18n.t('fleets.loading_tasks')}
+                        </h1>
+                      )}
+              </div>
+            </div>
+          </div>
+          <Confirmation
+            title="Delete Fleets"
+            message={`${selectedItems.length} Fleets`}
+            reference={(el) => { this.contentDialog = el }}
+          />
+        </div>
+      </ContentPane>
+    )
   }
+}
+
+FleetsContent.defaultProps = {
+  selectedItems: null,
+  itemType: null,
+}
+
+FleetsContent.propTypes = {
+  history: PropTypes.object.isRequired,
+  selectedItems: PropTypes.array,
+  itemType: PropTypes.string,
 }
 
 export default FleetsContent

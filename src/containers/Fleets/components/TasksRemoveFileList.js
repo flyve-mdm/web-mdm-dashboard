@@ -28,22 +28,15 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
+import PropTypes from 'prop-types'
 
 /**
  * @class TasksRemoveFileList
  * @extends PureComponent
  */
 class TasksRemoveFileList extends PureComponent {
-  /** @constructor */
-  constructor(props) {
-    super(props)
-    this.state = {
-      renderElements: undefined
-    }
-  }
-
   /**
    * @function componentDidMount
    */
@@ -56,28 +49,34 @@ class TasksRemoveFileList extends PureComponent {
    * @return {*}
    */
   refreshRender = () => {
-    return (
-      Array.isArray(this.props.data) ?
-        this.props.data.map((item, index) => {
-          return (
-            <div className='files-list' style={{ width: '320px' }} key={[item['value'], index].join("_")}>
-              <div className='files-list__content'>
-                <div className='files-list__item'>
-                  <div className='files-list__item-content-primary'>
-                    <div className='files-list__content-text-primary'>{item['value']}</div>
-                  </div>
-                  <div className='files-list__item-content-secondary'>
-                    <div className='files-list__item-icon'>
-                      <span className='deleteIcon' style={{ fontSize: '18px' }} onClick={this.handleRemove.bind(this, item)}></span>
-                    </div>
-                  </div>
+    const { data } = this.props
+
+    return Array.isArray(data)
+      ? data.map((item, index) => (
+        <div className="files-list" style={{ width: '320px' }} key={[item.value, index].join('_')}>
+          <div className="files-list__content">
+            <div className="files-list__item">
+              <div className="files-list__item-content-primary">
+                <div className="files-list__content-text-primary">
+                  {item.value}
+                </div>
+              </div>
+              <div className="files-list__item-content-secondary">
+                <div className="files-list__item-icon">
+                  <span
+                    className="deleteIcon"
+                    style={{ fontSize: '18px' }}
+                    onClick={() => this.handleRemove(item)}
+                    role="button"
+                    tabIndex="0"
+                  />
                 </div>
               </div>
             </div>
-          )
-        })
-        : null
-    )
+          </div>
+        </div>
+      ))
+      : null
   }
 
   /**
@@ -85,7 +84,8 @@ class TasksRemoveFileList extends PureComponent {
    * @param {*} task
    */
   handleRemove = (task) => {
-    this.props.removeTask(task)
+    const { removeTask } = this.props
+    removeTask(task)
   }
 
   /**
@@ -94,8 +94,16 @@ class TasksRemoveFileList extends PureComponent {
    */
   render() {
     return this.refreshRender()
-
   }
+}
+
+TasksRemoveFileList.defaultProps = {
+  data: null,
+}
+
+TasksRemoveFileList.propTypes = {
+  removeTask: PropTypes.func.isRequired,
+  data: PropTypes.any,
 }
 
 export default TasksRemoveFileList

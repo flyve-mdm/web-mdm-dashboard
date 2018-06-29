@@ -31,27 +31,27 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { I18n } from 'react-i18nify'
 import Loading from '../../components/Loading'
 import ConstructInputs from '../../components/Forms'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import { fetchResetPassword } from '../../store/authentication/actions'
 import { resetPassword, changeState, buildDataArray } from './actions';
-import { I18n } from 'react-i18nify'
 import publicURL from '../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
-    const actions = {
-        fetchResetPassword: bindActionCreators(fetchResetPassword, dispatch),
-    }
-    return { actions }
+  const actions = {
+    fetchResetPassword: bindActionCreators(fetchResetPassword, dispatch),
+  }
+  return { actions }
 }
 
-function mapStateToProps(state, props) {
-    return {
-        isLoading: state.ui.loading,
-        type: state.ui.notification.type
-    }
+function mapStateToProps(state) {
+  return {
+    isLoading: state.ui.loading,
+    type: state.ui.notification.type,
+  }
 }
 
 /**
@@ -60,32 +60,37 @@ function mapStateToProps(state, props) {
  * @extends PureComponent
  */
 class ResetPassword extends PureComponent {
-    /** @constructor */
-    constructor(props) {
-        super(props)
-        this.state = {
-            isResetSent: false,
-            email: '',
-            password: '',
-            passwordConfirmation: '',
-            token: '',
-            forceValidation: false
-        }
+  /** @constructor */
+  constructor(props) {
+    super(props)
+    const {
+      location,
+      history,
+    } = this.props
 
-        const search = this.props.location.search
-        const params = new URLSearchParams(search)
-        const token = params.get('token')
-
-        if (token) {
-            this.setState({ token })
-        } else {
-            this.props.history.push(`${publicURL}/`)
-        }
-
-        this.handleResetPassword = () => resetPassword(this)
-        this.changeState = () => changeState(this)
-        this.buildDataArray = () => buildDataArray(this, I18n)
+    this.state = {
+      isResetSent: false,
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      token: '',
+      forceValidation: false,
     }
+
+    const { search } = location
+    const params = new URLSearchParams(search)
+    const token = params.get('token')
+
+    if (token) {
+      this.setState({ token })
+    } else {
+      history.push(`${publicURL}/`)
+    }
+
+    this.handleResetPassword = () => resetPassword(this)
+    this.changeState = () => changeState(this)
+    this.buildDataArray = () => buildDataArray(this, I18n)
+  }
 
     /**
      * Create the element to render
@@ -93,42 +98,46 @@ class ResetPassword extends PureComponent {
      * @return {component}
      */
     createRenderElament = () => {
-        let element
-        if (!this.state.isResetSent) {
-            const reset = this.buildDataArray()
-            element = (
-              <React.Fragment>
-                <div style={{ textAlign: 'left' }}>
-                  <ConstructInputs data={reset.resetInformation} />
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                  <button
-                    className='btn btn--primary'
-                    style={{ margin: "20px" }}
-                    onClick={this.handleResetPassword}
-                  >
-                    {I18n.t('login.reset_password')}
-                  </button>
-                </div>
-              </React.Fragment>
-            )
-        } else {
-            element = (
-              <div>
-                <p>
-                  {I18n.t('forgot_password.reset_your_password')}
-                </p>
-                <button
-                  className="win-button"
-                  type="button"
-                  onClick={() => this.props.history.push(`${publicURL}/`)}
-                >
-                  {I18n.t('forgot_password.go_home')}
-                </button>
-              </div>
-            )
-        }
-        return element
+      const { isResetSent } = this.state
+      const { history } = this.props
+
+      let element
+      if (!isResetSent) {
+        const reset = this.buildDataArray()
+        element = (
+          <React.Fragment>
+            <div style={{ textAlign: 'left' }}>
+              <ConstructInputs data={reset.resetInformation} />
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <button
+                className="btn btn--primary"
+                style={{ margin: '20px' }}
+                onClick={this.handleResetPassword}
+                type="button"
+              >
+                {I18n.t('login.reset_password')}
+              </button>
+            </div>
+          </React.Fragment>
+        )
+      } else {
+        element = (
+          <div>
+            <p>
+              {I18n.t('forgot_password.reset_your_password')}
+            </p>
+            <button
+              className="win-button"
+              type="button"
+              onClick={() => history.push(`${publicURL}/`)}
+            >
+              {I18n.t('forgot_password.go_home')}
+            </button>
+          </div>
+        )
+      }
+      return element
     }
 
     /**
@@ -136,37 +145,38 @@ class ResetPassword extends PureComponent {
      * @function render
      */
     render() {
-        if (this.props.isLoading) {
-            return (
-              <div style={{ height: '140px' }}>
-                <Loading message={`${I18n.t('commons.sending')}...`} />
-              </div>
-            )
-        } else {
-            return (
-              <React.Fragment>
-                <h2 style={{ textAlign: 'center' }}>
-                  {I18n.t('login.reset_password')}
-                </h2>
-                {this.createRenderElament()}
-              </React.Fragment>
-            )
-        }
+      const { isLoading } = this.props
+
+      if (isLoading) {
+        return (
+          <div style={{ height: '140px' }}>
+            <Loading message={`${I18n.t('commons.sending')}...`} />
+          </div>
+        )
+      }
+      return (
+        <React.Fragment>
+          <h2 style={{ textAlign: 'center' }}>
+            {I18n.t('login.reset_password')}
+          </h2>
+          {this.createRenderElament()}
+        </React.Fragment>
+      )
     }
 }
 
 ResetPassword.propTypes = {
-    history: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired,
-    type: PropTypes.string,
-    isLoading: PropTypes.bool.isRequired
+  history: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  type: PropTypes.string,
+  isLoading: PropTypes.bool.isRequired,
 }
 ResetPassword.defaultProps = {
-    type: 'info',
+  type: 'info',
 }
 
 export default withAuthenticationLayout(
-    connect(mapStateToProps, mapDispatchToProps)(withHandleMessages(ResetPassword)), {
-        centerContent: true
-    }
+  connect(mapStateToProps, mapDispatchToProps)(withHandleMessages(ResetPassword)), {
+    centerContent: true,
+  },
 )
