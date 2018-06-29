@@ -48,21 +48,21 @@ layout: container
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import {
+  I18n,
+} from 'react-i18nify'
 import ContentPane from '../../../components/ContentPane'
 import ConstructInputs from '../../../components/Forms'
 import {
-  agentScheme
+  agentScheme,
 } from '../../../components/Forms/Schemas'
 import Loading from '../../../components/Loading'
-import {
-  I18n
-} from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
-import publicURL from "../../../shared/publicURL"
-import getID from "../../../shared/getID"
+import publicURL from '../../../shared/publicURL'
+import getID from '../../../shared/getID'
 
 /**
  * @class DevicesEditOne
@@ -72,17 +72,22 @@ export default class DevicesEditOne extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
+    const { history } = this.props
+
     this.state = {
       isLoading: true,
-      id: getID(this.props.history.location.pathname, 3)
+      id: getID(history.location.pathname, 3),
     }
   }
 
   componentDidMount() {
-    if (Number(this.state.id)) {
+    const { id } = this.state
+    const { history } = this.props
+
+    if (Number(id)) {
       this.handleRefresh()
     } else {
-      this.props.history.push(`${publicURL}/app/devices`);
+      history.push(`${publicURL}/app/devices`);
     }
   }
 
@@ -91,32 +96,35 @@ export default class DevicesEditOne extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = () => {
-    this.props.glpi.getAnItem({
-        itemtype: itemtype.PluginFlyvemdmAgent,
-        id: this.state.id
-      })
+    const { glpi } = this.props
+    const { id } = this.state
+
+    glpi.getAnItem({
+      itemtype: itemtype.PluginFlyvemdmAgent,
+      id,
+    })
       .then((response) => {
         this.setState({
           isLoading: false,
-          id: response["id"],
-          name: response["name"],
+          id: response.id,
+          name: response.name,
           fleet: {
-            value: response["plugin_flyvemdm_fleets_id"],
+            value: response.plugin_flyvemdm_fleets_id,
             request: {
               params: {
                 itemtype: itemtype.PluginFlyvemdmFleet,
                 options: {
-                  forcedisplay: [2]
-                }
+                  forcedisplay: [2],
+                },
               },
               method: 'searchItems',
               content: '1',
-              value: '2'
-            }
-          }
+              value: '2',
+            },
+          },
         })
       })
-      .catch((error) => {
+      .catch(() => {
         this.setState({
           isLoading: false,
           id: null,
@@ -127,14 +135,14 @@ export default class DevicesEditOne extends PureComponent {
               params: {
                 itemtype: itemtype.PluginFlyvemdmFleet,
                 options: {
-                  forcedisplay: [2]
-                }
+                  forcedisplay: [2],
+                },
               },
               method: 'searchItems',
               content: '1',
-              value: '2'
-            }
-          }
+              value: '2',
+            },
+          },
         })
       })
   }
@@ -147,14 +155,17 @@ export default class DevicesEditOne extends PureComponent {
    */
   changeState = (name, value) => {
     if (name === 'fleet') {
+      const { [name]: currentValue } = this.state
+
       this.setState({
-        [name]: { ...this.state[name],
-          value
-        }
+        [name]: {
+          ...currentValue,
+          value,
+        },
       })
     } else {
       this.setState({
-        [name]: value
+        [name]: value,
       })
     }
   }
@@ -164,40 +175,60 @@ export default class DevicesEditOne extends PureComponent {
    * @function handleSaveOneDevices
    */
   handleSaveOneDevices = () => {
+    const {
+      name,
+      fleet,
+      id,
+    } = this.state
+    const {
+      glpi,
+      setNotification,
+      changeAction,
+      changeSelectionMode,
+      history,
+      handleMessage,
+    } = this.props
+
     this.setState({
-      isLoading: true
+      isLoading: true,
     })
     const input = {
-      name: this.state.name,
-      plugin_flyvemdm_fleets_id: this.state.fleet.value
+      name,
+      plugin_flyvemdm_fleets_id: fleet.value,
     }
-    this.props.glpi.updateItem({
-        itemtype: itemtype.PluginFlyvemdmAgent,
-        id: this.state.id,
-        input
-      })
+    glpi.updateItem({
+      itemtype: itemtype.PluginFlyvemdmAgent,
+      id,
+      input,
+    })
       .then(() => {
-        this.props.setNotification({
+        setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.changes_saved_successfully'),
-          type: 'success'
+          type: 'success',
         })
-        this.props.changeAction('reload')
-        this.props.changeSelectionMode(false);
-        this.props.history.push(`${publicURL}/app/devices/${this.state.id}`);
+        changeAction('reload')
+        changeSelectionMode(false);
+        history.push(`${publicURL}/app/devices/${id}`);
       })
       .catch((error) => {
-        this.props.setNotification(this.props.handleMessage({
+        setNotification(handleMessage({
           type: 'alert',
-          message: error
+          message: error,
         }))
         this.setState({
-          isLoading: false
+          isLoading: false,
         })
       })
   }
 
   render() {
+    const { glpi } = this.props
+    const {
+      name,
+      isLoading,
+    } = this.state
+
     const componetRender = (
       &lt;ContentPane>
         &lt;Loading message={`${I18n.t('commons.loading')}...`} />
@@ -206,38 +237,43 @@ export default class DevicesEditOne extends PureComponent {
 
     if (!this.state) {
       return componetRender
-    } else {
-      const agent = this.state.name ? agentScheme({
-        state: this.state,
-        changeState: this.changeState,
-        glpi: this.props.glpi
-      }) : null
-
-      if (agent &amp;&amp; !this.state.isLoading) {
-        return (
-          &lt;ContentPane>
-            &lt;div className="content-header" style={{ display: 'inline-flex'}}>
-              &lt;button className="btn btn--primary" style={{ margin: 0 }} onClick={this.handleSaveOneDevices}>
-                {I18n.t('commons.save')}
-              &lt;/button>
-            &lt;/div>
-            &lt;div className="separator" />
-            &lt;ConstructInputs data={agent.mainInformation} />
-          &lt;/ContentPane>
-        )
-      } else {
-        return componetRender
-      }
     }
+    const agent = name ? agentScheme({
+      state: this.state,
+      changeState: this.changeState,
+      glpi,
+    }) : null
+
+    if (agent &amp;&amp; !isLoading) {
+      return (
+        &lt;ContentPane>
+          &lt;div className="content-header" style={{ display: 'inline-flex' }}>
+            &lt;button
+              className="btn btn--primary"
+              style={{ margin: 0 }}
+              onClick={this.handleSaveOneDevices}
+              type="button"
+            >
+              {I18n.t('commons.save')}
+            &lt;/button>
+          &lt;/div>
+          &lt;div className="separator" />
+          &lt;ConstructInputs data={agent.mainInformation} />
+        &lt;/ContentPane>
+      )
+    }
+    return componetRender
   }
 }
+
 /** DevicesEditOne propTypes */
 DevicesEditOne.propTypes = {
-  selectedItems: PropTypes.array,
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
   setNotification: PropTypes.func.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
 </code></pre>
         </article>

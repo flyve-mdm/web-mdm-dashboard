@@ -48,7 +48,7 @@ layout: container
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import IconItemList from '../../../components/IconItemList'
@@ -59,14 +59,23 @@ import IconItemList from '../../../components/IconItemList'
  */
 export default class DevicesItemList extends PureComponent {
   render() {
-    let size = this.props.size
-    let imageAgent = this.props.itemList["PluginFlyvemdmAgent.mdm_type"] ?
-      `${this.props.itemList["PluginFlyvemdmAgent.mdm_type"]}.png` : null
+    const {
+      size,
+      itemList,
+    } = this.props
+
+    const imageAgent = itemList['PluginFlyvemdmAgent.mdm_type']
+      ? `${itemList['PluginFlyvemdmAgent.mdm_type']}.png`
+      : null
     let iconComponent
 
     if (imageAgent) {
       iconComponent = (
-        &lt;IconItemList image={imageAgent} size={size} backgroundColor="transparent"/>
+        &lt;IconItemList
+          image={imageAgent}
+          size={size}
+          backgroundColor="transparent"
+        />
       )
     } else {
       iconComponent = (
@@ -77,15 +86,15 @@ export default class DevicesItemList extends PureComponent {
     return (
       &lt;div>
         {iconComponent}
-        &lt;div style={{ display: 'inline-block'}}>
+        &lt;div style={{ display: 'inline-block' }}>
           &lt;div className="list-pane__name">
-            {this.props.itemList["PluginFlyvemdmAgent.name"]}
+            {itemList['PluginFlyvemdmAgent.name']}
           &lt;/div>
           &lt;div className="list-pane__detail">
-            {this.props.itemList["PluginFlyvemdmAgent.PluginFlyvemdmFleet.name"]}
+            {itemList['PluginFlyvemdmAgent.PluginFlyvemdmFleet.name']}
           &lt;/div>
           &lt;div className="list-pane__detail">
-            {this.props.itemList["PluginFlyvemdmAgent.mdm_type"].toUpperCase()}
+            {itemList['PluginFlyvemdmAgent.mdm_type'].toUpperCase()}
           &lt;/div>
         &lt;/div>
       &lt;/div>
@@ -95,7 +104,7 @@ export default class DevicesItemList extends PureComponent {
 /** DevicesItemList propTypes */
 DevicesItemList.propTypes = {
   itemList: PropTypes.object.isRequired,
-  size: PropTypes.number.isRequired
+  size: PropTypes.number.isRequired,
 }
 </code></pre>
         </article>

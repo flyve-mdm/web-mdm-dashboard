@@ -48,21 +48,21 @@ layout: container
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
+import {
+  I18n,
+} from 'react-i18nify'
 import ContentPane from '../../../components/ContentPane'
 import {
   DangerZone,
   Main,
   SystemReport,
   Applications,
-  Geolocation
+  Geolocation,
 } from './Sections'
-import {
-  I18n
-} from 'react-i18nify'
 import getID from '../../../shared/getID'
 import Confirmation from '../../../components/Confirmation'
 import FleetsContent from '../../Fleets/components/FleetsContent'
@@ -76,9 +76,11 @@ export default class DevicesContent extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
+    const { history } = this.props
+
     this.state = {
-      id: getID(this.props.history.location.pathname),
-      selectedIndex: 0
+      id: getID(history.location.pathname),
+      selectedIndex: 0,
     }
   }
 
@@ -86,12 +88,11 @@ export default class DevicesContent extends PureComponent {
     if (prevState.id !== getID(nextProps.history.location.pathname)) {
       return {
         ...prevState,
-        id: getID(nextProps.history.location.pathname)
+        id: getID(nextProps.history.location.pathname),
       }
-    } else {
-      return {
-        ...prevState
-      }
+    }
+    return {
+      ...prevState,
     }
   }
 
@@ -101,113 +102,137 @@ export default class DevicesContent extends PureComponent {
    * @param {object} pivot
    */
   changeselectedItem = (pivot) => {
+    const { selectedIndex } = this.state
+
     if (pivot) {
-      if (pivot.winControl.selectedIndex !== this.state.selectedIndex) {
+      if (pivot.winControl.selectedIndex !== selectedIndex) {
         this.setState({
-          selectedIndex: pivot.winControl.selectedIndex
+          selectedIndex: pivot.winControl.selectedIndex,
         })
       }
+      /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["pivot"] }] */
       pivot.winControl.onselectionchanged = (event) => {
         this.setState({
-          selectedIndex: event.detail.index
+          selectedIndex: event.detail.index,
         })
       }
     }
   }
 
   render() {
+    const {
+      changeAction,
+      changeSelectionMode,
+      setNotification,
+      handleMessage,
+      history,
+      glpi,
+      selectedItems,
+    } = this.props
+    const {
+      selectedIndex,
+      id,
+    } = this.state
+
     return (
       &lt;React.Fragment>
         &lt;Confirmation
-            title={I18n.t('devices.danger_zone.last_warning')}
-            message={I18n.t('devices.danger_zone.last_warning_message')}
-            reference={el => this.wipeDevice = el}
+          title={I18n.t('devices.danger_zone.last_warning')}
+          message={I18n.t('devices.danger_zone.last_warning_message')}
+          reference={(el) => { this.wipeDevice = el }}
         />
         &lt;Confirmation
-            title={`${I18n.t('devices.danger_zone.unenroll_device')} # ${this.state.id}`}
-            message={`${I18n.t('devices.danger_zone.going_to_unenroll')} ${this.state.id}`}
-            reference={el => this.unenrollmentDevice = el}
+          title={`${I18n.t('devices.danger_zone.unenroll_device')} # ${id}`}
+          message={`${I18n.t('devices.danger_zone.going_to_unenroll')} ${id}`}
+          reference={(el) => { this.unenrollmentDevice = el }}
         />
         &lt;Confirmation
-            title={`${I18n.t('devices.danger_zone.delete')} # ${this.state.id}`}
-            message={`${I18n.t('devices.danger_zone.delete_message')} ${this.state.id}`}
-            reference={el => this.deleteDevice = el}
+          title={`${I18n.t('devices.danger_zone.delete')} # ${id}`}
+          message={`${I18n.t('devices.danger_zone.delete_message')} ${id}`}
+          reference={(el) => { this.deleteDevice = el }}
         />
         &lt;ContentPane className="devices">
-            &lt;ReactWinJS.Pivot ref={this.changeselectedItem}>
-              &lt;ReactWinJS.Pivot.Item key="main" header={I18n.t('devices.main.title')}>
-                &lt;Main
-                  id={this.state.id}
-                  changeAction={this.props.changeAction}
-                  changeSelectionMode={this.props.changeSelectionMode}
-                  setNotification={this.props.setNotification}
-                  handleMessage={this.props.handleMessage}
-                  history={this.props.history}
-                  glpi={this.props.glpi}
-                  update={this.state.selectedIndex === 0}
-                />
-              &lt;/ReactWinJS.Pivot.Item>
-              &lt;ReactWinJS.Pivot.Item key="systemReport" header={I18n.t('devices.system_report.title')}>
-                &lt;SystemReport
-                  id={this.state.id}
-                  glpi={this.props.glpi}
-                  setNotification={this.props.setNotification}
-                  handleMessage={this.props.handleMessage}
-                  update={this.state.selectedIndex === 1}
-                />
-              &lt;/ReactWinJS.Pivot.Item>
-              &lt;ReactWinJS.Pivot.Item key="applications" header={I18n.t('devices.applications.title')}>
-                  &lt;Applications
-                    id={this.state.id}
-                    glpi={this.props.glpi}
-                    handleMessage={this.props.handleMessage}
-                    update={this.state.selectedIndex === 2}
-                  />
-              &lt;/ReactWinJS.Pivot.Item>
-              &lt;ReactWinJS.Pivot.Item key="policies" header={I18n.t('devices.policies.title')}>
-                  &lt;FleetsContent
-                    {...this.props}
-                    itemType={itemtype.PluginFlyvemdmAgent}
-                    selectedItems={this.props.selectedItems}
-                    update={this.state.selectedIndex === 3}
-                  />
-              &lt;/ReactWinJS.Pivot.Item>
-              &lt;ReactWinJS.Pivot.Item key="geolocation" header={I18n.t('devices.geolocation.title')}>
-                &lt;Geolocation
-                  id={this.state.id}
-                  setNotification={this.props.setNotification}
-                  handleMessage={this.props.handleMessage}
-                  glpi={this.props.glpi}
-                  update={this.state.selectedIndex === 4}
-                />
-              &lt;/ReactWinJS.Pivot.Item>
-              &lt;ReactWinJS.Pivot.Item key="dangerZone" header={I18n.t('devices.danger_zone.title')}>
-                &lt;DangerZone
-                  id={this.state.id}
-                  changeAction={this.props.changeAction}
-                  setNotification={this.props.setNotification}
-                  handleMessage={this.props.handleMessage}
-                  glpi={this.props.glpi}
-                  history={this.props.history}
-                  wipeDevice={this.wipeDevice}
-                  unenrollmentDevice={this.unenrollmentDevice}
-                  deleteDevice={this.deleteDevice}
-                  update={this.state.selectedIndex === 5}
-                />
-              &lt;/ReactWinJS.Pivot.Item>
+          &lt;ReactWinJS.Pivot ref={this.changeselectedItem}>
+            &lt;ReactWinJS.Pivot.Item key="main" header={I18n.t('devices.main.title')}>
+              &lt;Main
+                id={id}
+                changeAction={changeAction}
+                changeSelectionMode={changeSelectionMode}
+                setNotification={setNotification}
+                handleMessage={handleMessage}
+                history={history}
+                glpi={glpi}
+                update={selectedIndex === 0}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+            &lt;ReactWinJS.Pivot.Item key="systemReport" header={I18n.t('devices.system_report.title')}>
+              &lt;SystemReport
+                id={id}
+                glpi={glpi}
+                setNotification={setNotification}
+                handleMessage={handleMessage}
+                update={selectedIndex === 1}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+            &lt;ReactWinJS.Pivot.Item key="applications" header={I18n.t('devices.applications.title')}>
+              &lt;Applications
+                id={id}
+                glpi={glpi}
+                handleMessage={handleMessage}
+                update={selectedIndex === 2}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+            &lt;ReactWinJS.Pivot.Item key="policies" header={I18n.t('devices.policies.title')}>
+              &lt;FleetsContent
+                {...this.props}
+                itemType={itemtype.PluginFlyvemdmAgent}
+                selectedItems={selectedItems}
+                update={selectedIndex === 3}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+            &lt;ReactWinJS.Pivot.Item key="geolocation" header={I18n.t('devices.geolocation.title')}>
+              &lt;Geolocation
+                id={id}
+                setNotification={setNotification}
+                handleMessage={handleMessage}
+                glpi={glpi}
+                update={selectedIndex === 4}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+            &lt;ReactWinJS.Pivot.Item key="dangerZone" header={I18n.t('devices.danger_zone.title')}>
+              &lt;DangerZone
+                id={id}
+                changeAction={changeAction}
+                setNotification={setNotification}
+                handleMessage={handleMessage}
+                glpi={glpi}
+                history={history}
+                wipeDevice={this.wipeDevice}
+                unenrollmentDevice={this.unenrollmentDevice}
+                deleteDevice={this.deleteDevice}
+                update={selectedIndex === 5}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
           &lt;/ReactWinJS.Pivot>
         &lt;/ContentPane>
       &lt;/React.Fragment>
     )
   }
 }
+
+DevicesContent.defaultProps = {
+  selectedItems: undefined,
+}
+
 /** DevicesContent propTypes */
 DevicesContent.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
   setNotification: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  selectedItems: PropTypes.array,
 }
 </code></pre>
         </article>

@@ -48,17 +48,17 @@ layout: container
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
+import {
+  I18n,
+} from 'react-i18nify'
 import EmptyMessage from '../../../../../components/EmptyMessage'
 import ContentPane from '../../../../../components/ContentPane'
 import Loader from '../../../../../components/Loader'
-import {
-  I18n
-} from 'react-i18nify'
 import itemtype from '../../../../../shared/itemtype'
 import ApplicationDetail from './ApplicationDetail'
 
@@ -67,19 +67,69 @@ import ApplicationDetail from './ApplicationDetail'
  * @extends PureComponent
  */
 export default class Applications extends PureComponent {
+  /**
+   * handle item list render
+   * @function ItemListRenderer
+   */
+  ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
+    const styles = {
+      boxSizing: 'border-box',
+      padding: '15px',
+      float: 'left',
+      overflow: 'auto',
+    }
+
+    return (
+      &lt;div
+        onClick={() => this.selectApplication(ItemList.data['Software.id'])}
+        role="menuitem"
+        tabIndex="0"
+      >
+        &lt;div style={{ ...styles, width: '15%' }}>
+          {ItemList.data['Software.id']}
+        &lt;/div>
+        &lt;div style={{ ...styles, width: '40%' }}>
+          {ItemList.data['Software.name']}
+        &lt;/div>
+        &lt;div style={{ ...styles, width: '35%' }}>
+          {ItemList.data['Software.date_mod']}
+        &lt;/div>
+      &lt;/div>
+    )
+  })
 
   /** @constructor */
   constructor(props) {
     super(props)
+    const {
+      id,
+      update,
+    } = this.props
+
     this.state = {
-      id: this.props.id,
-      update: this.props.update,
+      id,
+      update,
       layout: {
-        type: WinJS.UI.ListLayout
+        type: WinJS.UI.ListLayout,
       },
       isLoading: true,
       itemList: new WinJS.Binding.List([]),
-      applicationSelected: null
+      applicationSelected: null,
+    }
+  }
+
+  componentDidMount() {
+    this.handleRefresh()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      id,
+      update,
+    } = this.state
+
+    if (prevState.id !== id || prevState.update !== update) {
+      this.handleRefresh()
     }
   }
 
@@ -89,23 +139,12 @@ export default class Applications extends PureComponent {
         ...prevState,
         id: nextProps.id,
         update: nextProps.update,
-        isLoading: true
-      }
-    } else {
-      return {
-        ...prevState
+        isLoading: true,
       }
     }
-  }
-
-  componentDidUpdate(prevProps, prevState, prevContext) {
-    if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
-      this.handleRefresh()
+    return {
+      ...prevState,
     }
-  }
-
-  componentDidMount() {
-    this.handleRefresh()
   }
 
   /**
@@ -114,21 +153,27 @@ export default class Applications extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = async () => {
-    if (this.state.update) {
+    const {
+      update,
+      id,
+    } = this.state
+    const { glpi } = this.props
+
+    if (update) {
       try {
         const {
-          computers_id
-        } = await this.props.glpi.getAnItem({
+          computers_id: computersID,
+        } = await glpi.getAnItem({
+          id,
           itemtype: itemtype.PluginFlyvemdmAgent,
-          id: this.state.id
         })
         const {
-          totalcount
-        } = await this.props.glpi.searchItems({
+          totalcount,
+        } = await glpi.searchItems({
           itemtype: itemtype.Software,
           options: {
             uid_cols: true,
-            forcedisplay: [2]
+            forcedisplay: [2],
           },
           range: '0-0',
           metacriteria: [{
@@ -136,14 +181,14 @@ export default class Applications extends PureComponent {
             itemtype: itemtype.Computer,
             field: 2,
             searchtype: 'equals',
-            value: computers_id
-          }]
+            value: computersID,
+          }],
         })
-        const softwareList = await this.props.glpi.searchItems({
+        const softwareList = await glpi.searchItems({
           itemtype: itemtype.Software,
           options: {
             uid_cols: true,
-            forcedisplay: [1, 2, 19]
+            forcedisplay: [1, 2, 19],
           },
           range: `0-${totalcount}`,
           metacriteria: [{
@@ -151,19 +196,18 @@ export default class Applications extends PureComponent {
             itemtype: itemtype.Computer,
             field: 2,
             searchtype: 'equals',
-            value: computers_id
-          }]
+            value: computersID,
+          }],
         })
 
         this.setState({
           isLoading: false,
-          itemList: new WinJS.Binding.List(softwareList.data)
+          itemList: new WinJS.Binding.List(softwareList.data),
         })
-
       } catch (error) {
         this.setState({
           isLoading: false,
-          itemList: new WinJS.Binding.List([])
+          itemList: new WinJS.Binding.List([]),
         })
       }
     }
@@ -174,72 +218,51 @@ export default class Applications extends PureComponent {
    * @function handleRefresh
    * @param {object} applicationSelected
    */
-  selectApplication = (applicationSelected) => this.setState({
-    applicationSelected
-  })
-
-  /**
-   * handle item list render
-   * @function ItemListRenderer
-   */
-  ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-
-    const styles = {
-      boxSizing: 'border-box',
-      padding: '15px',
-      float: 'left',
-      overflow: 'auto'
-    }
-
-    return (
-      &lt;div onClick={() => this.selectApplication(ItemList.data['Software.id'])}>
-        &lt;div style={{...styles, width: '15%'}}>
-          {ItemList.data['Software.id']}
-        &lt;/div>
-        &lt;div style={{...styles, width: '40%'}}>
-          {ItemList.data['Software.name']}
-        &lt;/div>
-        &lt;div style={{...styles, width: '35%'}}>
-          {ItemList.data['Software.date_mod']}
-        &lt;/div>
-      &lt;/div>
-    )
+  selectApplication = applicationSelected => this.setState({
+    applicationSelected,
   })
 
   render() {
+    const {
+      applicationSelected,
+      isLoading,
+      itemList,
+      layout,
+    } = this.state
+    const { glpi } = this.props
 
     let renderComponent
 
-    if (this.state.applicationSelected) {
+    if (applicationSelected) {
       renderComponent = (
         &lt;ApplicationDetail
-          id={this.state.applicationSelected}
-          glpi={this.props.glpi}
+          id={applicationSelected}
+          glpi={glpi}
           selectApplication={this.selectApplication}
         />
       )
-    } else if (this.state.isLoading) {
+    } else if (isLoading) {
       renderComponent = (
-        &lt;div style={{padding:'20px'}}>
-          &lt;Loader type="content"/>
+        &lt;div style={{ padding: '20px' }}>
+          &lt;Loader type="content" />
         &lt;/div>
       )
-    } else if (this.state.itemList.length > 0) {
+    } else if (itemList.length > 0) {
       const stylesHeader = {
         boxSizing: 'border-box',
         padding: '15px',
         float: 'left',
-        overflow: 'auto'
+        overflow: 'auto',
       }
       const header = (
         &lt;React.Fragment>
-          &lt;div style={{...stylesHeader, width: '15%'}}>
+          &lt;div style={{ ...stylesHeader, width: '15%' }}>
             #
           &lt;/div>
-          &lt;div style={{...stylesHeader, width: '40%'}}>
+          &lt;div style={{ ...stylesHeader, width: '40%' }}>
             {I18n.t('devices.applications.id')}
           &lt;/div>
-          &lt;div style={{...stylesHeader, width: '35%'}}>
+          &lt;div style={{ ...stylesHeader, width: '35%' }}>
             {I18n.t('devices.applications.last_modification')}
           &lt;/div>
         &lt;/React.Fragment>
@@ -251,10 +274,10 @@ export default class Applications extends PureComponent {
               ref={(listView) => { this.listView = listView }}
               className="list-pane__content win-selectionstylefilled"
               headerComponent={header}
-              itemDataSource={this.state.itemList.dataSource}
+              itemDataSource={itemList.dataSource}
               itemTemplate={this.ItemListRenderer}
-              layout={this.state.layout}
-              selectionMode={'single'}
+              layout={layout}
+              selectionMode="single"
             />
           &lt;/div>
         &lt;/ContentPane>
@@ -272,7 +295,7 @@ export default class Applications extends PureComponent {
 Applications.propTypes = {
   id: PropTypes.string.isRequired,
   glpi: PropTypes.object.isRequired,
-  update: PropTypes.bool.isRequired
+  update: PropTypes.bool.isRequired,
 }
 </code></pre>
         </article>
