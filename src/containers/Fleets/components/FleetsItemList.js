@@ -28,21 +28,24 @@
 
 /** import dependencies */
 import React from 'react'
+import PropTypes from 'prop-types'
 
 /**
  * @function FleetsItemList
  * @param {object} itemList
  */
 const FleetsItemList = ({
-  itemList
-}) => {
-  return (
-    <div style={{ display: 'inline-block' }}>
-      <div className="list-pane__name">
-        {itemList["PluginFlyvemdmFleet.name"]}
-      </div>
+  itemList,
+}) => (
+  <div style={{ display: 'inline-block' }}>
+    <div className="list-pane__name">
+      {itemList['PluginFlyvemdmFleet.name']}
     </div>
-  )
+  </div>
+)
+
+FleetsItemList.propTypes = {
+  itemList: PropTypes.object.isRequired,
 }
 
 export default FleetsItemList
