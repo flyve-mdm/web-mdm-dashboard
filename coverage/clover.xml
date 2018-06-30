@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1530381010531" clover="3.2.0">
-  <project timestamp="1530381010532" name="All files">
-    <metrics statements="5264" coveredstatements="241" conditionals="1986" coveredconditionals="145" methods="1050" coveredmethods="63" elements="8300" coveredelements="449" complexity="0" loc="5264" ncloc="5264" packages="109" files="199" classes="199">
+<coverage generated="1530389845076" clover="3.2.0">
+  <project timestamp="1530389845076" name="All files">
+    <metrics statements="5262" coveredstatements="241" conditionals="1986" coveredconditionals="145" methods="1043" coveredmethods="63" elements="8291" coveredelements="449" complexity="0" loc="5262" ncloc="5262" packages="109" files="198" classes="198">
       <package name="src">
         <metrics statements="50" coveredstatements="0" conditionals="29" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -4179,31 +4179,9 @@
         </file>
       </package>
       <package name="src.containers.ResetPassword">
-        <metrics statements="61" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="12" coveredmethods="0"/>
-        <file name="actions.js" path="/root/repo/src/containers/ResetPassword/actions.js">
-          <metrics statements="19" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="0"/>
-          <line num="30" count="0" type="stmt"/>
-          <line num="37" count="0" type="stmt"/>
-          <line num="38" count="0" type="stmt"/>
-          <line num="39" count="0" type="stmt"/>
-          <line num="41" count="0" type="stmt"/>
-          <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="43" count="0" type="stmt"/>
-          <line num="44" count="0" type="stmt"/>
-          <line num="45" count="0" type="stmt"/>
-          <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="50" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="51" count="0" type="stmt"/>
-          <line num="54" count="0" type="stmt"/>
-          <line num="60" count="0" type="stmt"/>
-          <line num="72" count="0" type="stmt"/>
-          <line num="73" count="0" type="stmt"/>
-          <line num="84" count="0" type="stmt"/>
-          <line num="85" count="0" type="stmt"/>
-          <line num="145" count="0" type="stmt"/>
-        </file>
+        <metrics statements="59" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/containers/ResetPassword/index.js">
-          <metrics statements="42" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="8" coveredmethods="0"/>
+          <metrics statements="59" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="5" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="31" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
@@ -4219,33 +4197,50 @@
           <line num="44" count="0" type="stmt"/>
           <line num="47" count="0" type="stmt"/>
           <line num="51" count="0" type="stmt"/>
+          <line num="63" count="0" type="stmt"/>
           <line num="64" count="0" type="stmt"/>
-          <line num="65" count="0" type="stmt"/>
-          <line num="69" count="0" type="stmt"/>
-          <line num="71" count="0" type="stmt"/>
+          <line num="68" count="0" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
+          <line num="79" count="0" type="stmt"/>
           <line num="80" count="0" type="stmt"/>
           <line num="81" count="0" type="stmt"/>
-          <line num="82" count="0" type="stmt"/>
-          <line num="84" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="85" count="0" type="stmt"/>
-          <line num="87" count="0" type="stmt"/>
-          <line num="90" count="0" type="stmt"/>
-          <line num="91" count="0" type="stmt"/>
-          <line num="92" count="0" type="stmt"/>
+          <line num="83" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="84" count="0" type="stmt"/>
+          <line num="86" count="0" type="stmt"/>
+          <line num="96" count="0" type="stmt"/>
+          <line num="97" count="0" type="stmt"/>
+          <line num="100" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="101" count="0" type="stmt"/>
           <line num="102" count="0" type="stmt"/>
-          <line num="105" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="106" count="0" type="stmt"/>
-          <line num="107" count="0" type="stmt"/>
-          <line num="125" count="0" type="stmt"/>
-          <line num="133" count="0" type="stmt"/>
-          <line num="140" count="0" type="stmt"/>
+          <line num="120" count="0" type="stmt"/>
+          <line num="128" count="0" type="stmt"/>
+          <line num="135" count="0" type="stmt"/>
+          <line num="142" count="0" type="stmt"/>
+          <line num="147" count="0" type="stmt"/>
           <line num="148" count="0" type="stmt"/>
-          <line num="150" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="150" count="0" type="stmt"/>
           <line num="151" count="0" type="stmt"/>
+          <line num="153" count="0" type="stmt"/>
+          <line num="154" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="155" count="0" type="stmt"/>
+          <line num="156" count="0" type="stmt"/>
           <line num="157" count="0" type="stmt"/>
-          <line num="168" count="0" type="stmt"/>
-          <line num="174" count="0" type="stmt"/>
+          <line num="158" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="162" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="163" count="0" type="stmt"/>
+          <line num="166" count="0" type="stmt"/>
+          <line num="172" count="0" type="stmt"/>
+          <line num="184" count="0" type="stmt"/>
+          <line num="194" count="0" type="stmt"/>
+          <line num="201" count="0" type="stmt"/>
+          <line num="203" count="0" type="stmt"/>
+          <line num="263" count="0" type="stmt"/>
+          <line num="272" count="0" type="stmt"/>
+          <line num="273" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="274" count="0" type="stmt"/>
+          <line num="280" count="0" type="stmt"/>
+          <line num="291" count="0" type="stmt"/>
+          <line num="294" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.SearchEngine">
