@@ -51,12 +51,8 @@ import {
   fetchCaptcha,
   fetchSignUp,
 } from '../../store/authentication/actions'
-import {
-  buildDataArray,
-  changeState,
-  handleSubmitForm,
-} from './actions'
 import publicURL from '../../shared/publicURL'
+import ErrorValidation from '../../components/ErrorValidation'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
@@ -89,17 +85,12 @@ class SignUp extends PureComponent {
     super(props)
     this.state = {
       email: '',
-      login: '',
       realName: '',
       password: '',
       passwordConfirmation: '',
       captchaValue: '',
       forceValidation: false,
     }
-
-    this.handleSubmitForm = event => handleSubmitForm(this, event)
-    this.changeState = () => changeState(this)
-    this.buildDataArray = () => buildDataArray(this, I18n)
   }
 
   /**
@@ -123,6 +114,184 @@ class SignUp extends PureComponent {
 
     if (type === 'success') {
       history.push(`${publicURL}/validateAccount`)
+    }
+  }
+
+  /**
+   * Handle change state
+   * @function changeState
+   * @return {function}
+   */
+  changeState = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
+  }
+
+  /**
+   * Build the array to generate the form
+   * @function buildDataArray
+   * @return {array}
+   */
+  buildDataArray = () => {
+    const {
+      email,
+      forceValidation,
+      realName,
+      password,
+      configurationPassword,
+      passwordConfirmation,
+      captchaValue,
+    } = this.state
+
+    const dataArray = {
+      personalInformation: [
+        [{
+          label: I18n.t('commons.email'),
+          type: 'text',
+          name: 'email',
+          value: email,
+          placeholder: I18n.t('commons.email'),
+          function: this.changeState,
+          disabled: false,
+          style: {
+            width: 340,
+          },
+          parametersToEvaluate: {
+            isRequired: true,
+            isEmail: true,
+          },
+          forceValidation,
+        },
+        {
+          label: I18n.t('create_account.full_name'),
+          type: 'text',
+          name: 'realName',
+          value: realName,
+          placeholder: I18n.t('create_account.full_name'),
+          function: this.changeState,
+          disabled: false,
+          style: {
+            width: 340,
+          },
+          parametersToEvaluate: {
+            isRequired: true,
+          },
+          forceValidation,
+        },
+        ],
+      ],
+      passwordInformation: [
+        [{
+          label: I18n.t('commons.password'),
+          type: 'password',
+          name: 'password',
+          value: password,
+          placeholder: I18n.t('commons.password'),
+          function: this.changeState,
+          disabled: false,
+          style: {
+            width: 340,
+          },
+          parametersToEvaluate: {
+            isRequired: true,
+            ...configurationPassword,
+          },
+          forceValidation,
+        },
+        {
+          label: I18n.t('commons.password_confirmation'),
+          type: 'password',
+          name: 'passwordConfirmation',
+          value: passwordConfirmation,
+          placeholder: I18n.t('commons.password_confirmation'),
+          function: this.changeState,
+          disabled: false,
+          style: {
+            width: 340,
+          },
+          parametersToEvaluate: {
+            isRequired: true,
+            ...configurationPassword,
+            isEqualTo: {
+              value: password,
+              message: I18n.t('commons.passwords_not_match'),
+            },
+          },
+          forceValidation,
+        },
+        ],
+      ],
+      captchaInformation: [
+        [{
+          label: I18n.t('create_account.enter_code_image'),
+          type: 'text',
+          name: 'captchaValue',
+          value: captchaValue,
+          placeholder: null,
+          function: this.changeState,
+          disabled: false,
+          style: {
+            width: 340,
+          },
+          parametersToEvaluate: {
+            isRequired: true,
+          },
+          forceValidation,
+        }],
+      ],
+    }
+    return dataArray
+  }
+
+  /**
+   * Handle submit form
+   * @function handleSubmitForm
+   * @param {*} event
+   */
+  handleSubmitForm = (event) => {
+    event.preventDefault()
+
+    const {
+      email,
+      realName,
+      password,
+      passwordConfirmation,
+      captchaValue,
+    } = this.state
+    const {
+      actions,
+      captcha,
+    } = this.props
+
+    const user = this.buildDataArray()
+
+    let isCorrect = true
+
+    for (const key in user) {
+      if (Object.prototype.hasOwnProperty.call(user, key)) {
+        const elements = user[key]
+        for (let index = 0; index < elements[0].length; index += 1) {
+          const element = elements[0][index]
+          if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect) { isCorrect = false }
+        }
+      }
+    }
+
+    if (isCorrect) {
+      actions.fetchSignUp({
+        name: email,
+        realname: realName,
+        password,
+        password2: passwordConfirmation,
+        _useremails: [email],
+        _plugin_flyvemdmdemo_captchas_id: captcha.id,
+        _answer: captchaValue,
+      })
+    } else {
+      this.setState({
+        forceValidation: true,
+      })
     }
   }
 
