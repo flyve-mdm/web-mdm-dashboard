@@ -192,17 +192,20 @@ class FleetsTaskItemList extends PureComponent {
       value,
     } = this.props
     const { input } = this.state
-
     switch (data['PluginFlyvemdmPolicy.type']) {
       case 'bool':
         updateValueTask(data, !value)
         break
       case 'int':
       case 'deployapp':
-      case 'removeapp':
       case 'deployfile':
+        if (`${input}`.trim()) {
+          updateValueTask(data, input)
+        }
+        break
+      case 'removeapp':
       case 'removefile':
-        if (input.trim()) {
+        if (`${input}`.trim()) {
           updateValueTask(data, input)
           this.setState({
             input: '',

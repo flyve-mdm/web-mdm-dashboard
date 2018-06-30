@@ -108,25 +108,6 @@ class Fleets extends PureComponent {
   }
 
   /**
-   * Make sure that the state and props are in sync for when it is required
-   * @static
-   * @function getDerivedStateFromProps
-   * @param {object} nextProps
-   * @param {object} prevState
-   */
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.history.location.pathname === `${publicURL}/app/fleets` &amp;&amp; prevState.selectedItems.length > 0) {
-      return {
-        ...prevState,
-        selectedItems: [],
-      }
-    }
-    return {
-      ...prevState,
-    }
-  }
-
-  /**
    * Change state according to the resolution of the screen
    * @function handleResize
    */
