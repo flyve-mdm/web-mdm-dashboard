@@ -838,7 +838,7 @@ class FleetsContent extends PureComponent {
       data,
       itemType,
       itemID,
-    } = this.satte
+    } = this.state
     const {
       glpi,
       setNotification,
