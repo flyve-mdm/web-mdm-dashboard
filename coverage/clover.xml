@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1530397849695" clover="3.2.0">
-  <project timestamp="1530397849695" name="All files">
-    <metrics statements="5264" coveredstatements="241" conditionals="1982" coveredconditionals="145" methods="1038" coveredmethods="63" elements="8284" coveredelements="449" complexity="0" loc="5264" ncloc="5264" packages="109" files="197" classes="197">
+<coverage generated="1530398390603" clover="3.2.0">
+  <project timestamp="1530398390603" name="All files">
+    <metrics statements="5263" coveredstatements="241" conditionals="1982" coveredconditionals="145" methods="1038" coveredmethods="63" elements="8283" coveredelements="449" complexity="0" loc="5263" ncloc="5263" packages="109" files="197" classes="197">
       <package name="src">
         <metrics statements="50" coveredstatements="0" conditionals="29" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -4179,9 +4179,9 @@
         </file>
       </package>
       <package name="src.containers.ResetPassword">
-        <metrics statements="59" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <metrics statements="58" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/containers/ResetPassword/index.js">
-          <metrics statements="59" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="5" coveredmethods="0"/>
+          <metrics statements="58" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="5" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="31" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
@@ -4201,46 +4201,45 @@
           <line num="64" count="0" type="stmt"/>
           <line num="68" count="0" type="stmt"/>
           <line num="70" count="0" type="stmt"/>
-          <line num="79" count="0" type="stmt"/>
-          <line num="80" count="0" type="stmt"/>
-          <line num="81" count="0" type="stmt"/>
-          <line num="83" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="84" count="0" type="stmt"/>
-          <line num="86" count="0" type="stmt"/>
-          <line num="96" count="0" type="stmt"/>
-          <line num="97" count="0" type="stmt"/>
-          <line num="100" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="101" count="0" type="stmt"/>
-          <line num="102" count="0" type="stmt"/>
-          <line num="120" count="0" type="stmt"/>
-          <line num="128" count="0" type="stmt"/>
-          <line num="135" count="0" type="stmt"/>
-          <line num="142" count="0" type="stmt"/>
-          <line num="147" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
+          <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="75" count="0" type="stmt"/>
+          <line num="78" count="0" type="stmt"/>
+          <line num="94" count="0" type="stmt"/>
+          <line num="95" count="0" type="stmt"/>
+          <line num="98" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="99" count="0" type="stmt"/>
+          <line num="100" count="0" type="stmt"/>
+          <line num="118" count="0" type="stmt"/>
+          <line num="126" count="0" type="stmt"/>
+          <line num="133" count="0" type="stmt"/>
+          <line num="140" count="0" type="stmt"/>
+          <line num="145" count="0" type="stmt"/>
+          <line num="146" count="0" type="stmt"/>
           <line num="148" count="0" type="stmt"/>
-          <line num="150" count="0" type="stmt"/>
+          <line num="149" count="0" type="stmt"/>
           <line num="151" count="0" type="stmt"/>
+          <line num="152" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="153" count="0" type="stmt"/>
-          <line num="154" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="154" count="0" type="stmt"/>
           <line num="155" count="0" type="stmt"/>
-          <line num="156" count="0" type="stmt"/>
-          <line num="157" count="0" type="stmt"/>
-          <line num="158" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="162" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="163" count="0" type="stmt"/>
-          <line num="166" count="0" type="stmt"/>
-          <line num="172" count="0" type="stmt"/>
-          <line num="184" count="0" type="stmt"/>
-          <line num="194" count="0" type="stmt"/>
+          <line num="156" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="160" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="161" count="0" type="stmt"/>
+          <line num="164" count="0" type="stmt"/>
+          <line num="170" count="0" type="stmt"/>
+          <line num="182" count="0" type="stmt"/>
+          <line num="192" count="0" type="stmt"/>
+          <line num="199" count="0" type="stmt"/>
           <line num="201" count="0" type="stmt"/>
-          <line num="203" count="0" type="stmt"/>
-          <line num="263" count="0" type="stmt"/>
+          <line num="261" count="0" type="stmt"/>
+          <line num="270" count="0" type="stmt"/>
+          <line num="271" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="272" count="0" type="stmt"/>
-          <line num="273" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="274" count="0" type="stmt"/>
-          <line num="280" count="0" type="stmt"/>
-          <line num="291" count="0" type="stmt"/>
-          <line num="294" count="0" type="stmt"/>
+          <line num="278" count="0" type="stmt"/>
+          <line num="289" count="0" type="stmt"/>
+          <line num="292" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.SearchEngine">
