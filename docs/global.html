@@ -7987,7 +7987,7 @@ and disable its 'beforeSend' function by being in a test or development environm
     
 
     
-    <h4 class="name" id="buildDataArray"><span class="type-signature"></span>buildDataArray<span class="signature">(ctx, I18n)</span><span class="type-signature"> &rarr; {array}</span></h4>
+    <h4 class="name" id="buildDataArray"><span class="type-signature"></span>buildDataArray<span class="signature">()</span><span class="type-signature"> &rarr; {array}</span></h4>
     
 
     
@@ -8004,78 +8004,6 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>ctx</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>I18n</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -8111,7 +8039,7 @@ and disable its 'beforeSend' function by being in a test or development environm
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_SignUp_actions.js.html">containers/SignUp/actions.js</a>, <a href="containers_SignUp_actions.js.html#line46">line 46</a>
+        <a href="containers_SignUp_index.js.html">containers/SignUp/index.js</a>, <a href="containers_SignUp_index.js.html#line131">line 131</a>
     </li></ul></dd>
     
 
@@ -14583,7 +14511,7 @@ and disable its 'beforeSend' function by being in a test or development environm
     
 
     
-    <h4 class="name" id="changeState"><span class="type-signature"></span>changeState<span class="signature">(name, value)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="changeState"><span class="type-signature"></span>changeState<span class="signature">()</span><span class="type-signature"> &rarr; {function}</span></h4>
     
 
     
@@ -14591,7 +14519,7 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 <div class="description">
-    Handle set state
+    Handle change state
 </div>
 
 
@@ -14600,78 +14528,6 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">strinf</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">strinf</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -14707,7 +14563,7 @@ and disable its 'beforeSend' function by being in a test or development environm
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Settings_components_Security_index.js.html">containers/Settings/components/Security/index.js</a>, <a href="containers_Settings_components_Security_index.js.html#line276">line 276</a>
+        <a href="containers_SignUp_index.js.html">containers/SignUp/index.js</a>, <a href="containers_SignUp_index.js.html#line120">line 120</a>
     </li></ul></dd>
     
 
@@ -14732,6 +14588,24 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -15466,7 +15340,7 @@ and disable its 'beforeSend' function by being in a test or development environm
     
 
     
-    <h4 class="name" id="changeState"><span class="type-signature"></span>changeState<span class="signature">(ctx)</span><span class="type-signature"> &rarr; {function}</span></h4>
+    <h4 class="name" id="changeState"><span class="type-signature"></span>changeState<span class="signature">(name, value)</span><span class="type-signature"></span></h4>
     
 
     
@@ -15474,7 +15348,7 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 <div class="description">
-    Handle change state
+    Handle set state
 </div>
 
 
@@ -15510,13 +15384,36 @@ and disable its 'beforeSend' function by being in a test or development environm
 
         <tr>
             
-                <td class="name"><code>ctx</code></td>
+                <td class="name"><code>name</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">strinf</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">strinf</span>
 
 
             
@@ -15567,7 +15464,7 @@ and disable its 'beforeSend' function by being in a test or development environm
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_SignUp_actions.js.html">containers/SignUp/actions.js</a>, <a href="containers_SignUp_actions.js.html#line32">line 32</a>
+        <a href="containers_Settings_components_Security_index.js.html">containers/Settings/components/Security/index.js</a>, <a href="containers_Settings_components_Security_index.js.html#line276">line 276</a>
     </li></ul></dd>
     
 
@@ -15592,24 +15489,6 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">function</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -17458,6 +17337,10 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 
+<div class="description">
+    Fetch the captcha
+</div>
+
 
 
 
@@ -17499,7 +17382,7 @@ and disable its 'beforeSend' function by being in a test or development environm
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Fleets_components_TaskDeployFileList.js.html">containers/Fleets/components/TaskDeployFileList.js</a>, <a href="containers_Fleets_components_TaskDeployFileList.js.html#line40">line 40</a>
+        <a href="containers_SignUp_index.js.html">containers/SignUp/index.js</a>, <a href="containers_SignUp_index.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -17588,6 +17471,90 @@ and disable its 'beforeSend' function by being in a test or development environm
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="containers_About_components_ReleaseNotes_index.js.html">containers/About/components/ReleaseNotes/index.js</a>, <a href="containers_About_components_ReleaseNotes_index.js.html#line74">line 74</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentDidMount"><span class="type-signature"></span>componentDidMount<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Fleets_components_TaskDeployFileList.js.html">containers/Fleets/components/TaskDeployFileList.js</a>, <a href="containers_Fleets_components_TaskDeployFileList.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -18155,94 +18122,6 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 <div class="description">
-    Make the call to update the list
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Invitations_components_InvitationsPendingPage.js.html">containers/Invitations/components/InvitationsPendingPage.js</a>, <a href="containers_Invitations_components_InvitationsPendingPage.js.html#line81">line 81</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentDidMount"><span class="type-signature"></span>componentDidMount<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
     Set state from fleets
 </div>
 
@@ -18330,6 +18209,10 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 
+<div class="description">
+    Make the call to update the list
+</div>
+
 
 
 
@@ -18371,7 +18254,7 @@ and disable its 'beforeSend' function by being in a test or development environm
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Applications_components_ApplicationsEditItemList.js.html">containers/Applications/components/ApplicationsEditItemList.js</a>, <a href="containers_Applications_components_ApplicationsEditItemList.js.html#line52">line 52</a>
+        <a href="containers_Invitations_components_InvitationsPendingPage.js.html">containers/Invitations/components/InvitationsPendingPage.js</a>, <a href="containers_Invitations_components_InvitationsPendingPage.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -18586,10 +18469,6 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 
-<div class="description">
-    Fetch the captcha
-</div>
-
 
 
 
@@ -18631,7 +18510,7 @@ and disable its 'beforeSend' function by being in a test or development environm
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_SignUp_index.js.html">containers/SignUp/index.js</a>, <a href="containers_SignUp_index.js.html#line115">line 115</a>
+        <a href="containers_Applications_components_ApplicationsEditItemList.js.html">containers/Applications/components/ApplicationsEditItemList.js</a>, <a href="containers_Applications_components_ApplicationsEditItemList.js.html#line52">line 52</a>
     </li></ul></dd>
     
 
@@ -19199,6 +19078,231 @@ and disable its 'beforeSend' function by being in a test or development environm
 
 
 <div class="description">
+    Change local storage
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Settings_components_Display_index.js.html">containers/Settings/components/Display/index.js</a>, <a href="containers_Settings_components_Display_index.js.html#line85">line 85</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProps)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Setup Listview
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>prevProps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Fleets_components_FleetsList.js.html">containers/Fleets/components/FleetsList.js</a>, <a href="containers_Fleets_components_FleetsList.js.html#line91">line 91</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
     redirect to '/validateAccount' when the registration is success
 </div>
 
@@ -19244,6 +19348,460 @@ and disable its 'beforeSend' function by being in a test or development environm
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="containers_SignUp_index.js.html">containers/SignUp/index.js</a>, <a href="containers_SignUp_index.js.html#line105">line 105</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProps, prevState)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Update the content when it's necessary
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>prevProps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>prevState</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Applications_components_ApplicationsContent.js.html">containers/Applications/components/ApplicationsContent.js</a>, <a href="containers_Applications_components_ApplicationsContent.js.html#line70">line 70</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProps, prevState)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>prevProps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>prevState</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Fleets_components_FleetsContent.js.html">containers/Fleets/components/FleetsContent.js</a>, <a href="containers_Fleets_components_FleetsContent.js.html#line92">line 92</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProps)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Validate if 'load more data' button is necessary.
+And force layout of the toolBar
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>prevProps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Invitations_components_InvitationsList.js.html">containers/Invitations/components/InvitationsList.js</a>, <a href="containers_Invitations_components_InvitationsList.js.html#line102">line 102</a>
     </li></ul></dd>
     
 
@@ -19577,6 +20135,166 @@ And force layout of the toolBar
     
 
     
+    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProds, prevState)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Play slide animation
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>prevProds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>prevState</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_SignIn_index.js.html">containers/SignIn/index.js</a>, <a href="containers_SignIn_index.js.html#line97">line 97</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProps)</span><span class="type-signature"></span></h4>
     
 
@@ -19874,1197 +20592,6 @@ And force layout of the toolBar
     
 
     
-    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProps, prevState)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Update the content when it's necessary
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>prevProps</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>prevState</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Applications_components_ApplicationsContent.js.html">containers/Applications/components/ApplicationsContent.js</a>, <a href="containers_Applications_components_ApplicationsContent.js.html#line70">line 70</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProds, prevState)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Play slide animation
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>prevProds</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>prevState</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_SignIn_index.js.html">containers/SignIn/index.js</a>, <a href="containers_SignIn_index.js.html#line97">line 97</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProps)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Setup Listview
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>prevProps</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Fleets_components_FleetsList.js.html">containers/Fleets/components/FleetsList.js</a>, <a href="containers_Fleets_components_FleetsList.js.html#line91">line 91</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProps, prevState)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>prevProps</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>prevState</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Fleets_components_FleetsContent.js.html">containers/Fleets/components/FleetsContent.js</a>, <a href="containers_Fleets_components_FleetsContent.js.html#line92">line 92</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">(prevProps)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Validate if 'load more data' button is necessary.
-And force layout of the toolBar
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>prevProps</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Invitations_components_InvitationsList.js.html">containers/Invitations/components/InvitationsList.js</a>, <a href="containers_Invitations_components_InvitationsList.js.html#line102">line 102</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentDidUpdate"><span class="type-signature"></span>componentDidUpdate<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Change local storage
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Settings_components_Display_index.js.html">containers/Settings/components/Display/index.js</a>, <a href="containers_Settings_components_Display_index.js.html#line85">line 85</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentWillUnmount"><span class="type-signature"></span>componentWillUnmount<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Remove event listener 'resize'
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Users_index.js.html">containers/Users/index.js</a>, <a href="containers_Users_index.js.html#line81">line 81</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentWillUnmount"><span class="type-signature"></span>componentWillUnmount<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Remove 'resize' event listener
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Applications_index.js.html">containers/Applications/index.js</a>, <a href="containers_Applications_index.js.html#line81">line 81</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentWillUnmount"><span class="type-signature"></span>componentWillUnmount<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Remove 'resize' event listener
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Files_index.js.html">containers/Files/index.js</a>, <a href="containers_Files_index.js.html#line81">line 81</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="componentWillUnmount"><span class="type-signature"></span>componentWillUnmount<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Remove event listener 'resize'
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Invitations_index.js.html">containers/Invitations/index.js</a>, <a href="containers_Invitations_index.js.html#line81">line 81</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="componentWillUnmount"><span class="type-signature"></span>componentWillUnmount<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -21118,6 +20645,94 @@ And force layout of the toolBar
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="containers_Fleets_index.js.html">containers/Fleets/index.js</a>, <a href="containers_Fleets_index.js.html#line82">line 82</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentWillUnmount"><span class="type-signature"></span>componentWillUnmount<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Remove 'resize' event listener
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="components_LayoutListWithNavLinks_index.js.html">components/LayoutListWithNavLinks/index.js</a>, <a href="components_LayoutListWithNavLinks_index.js.html#line104">line 104</a>
     </li></ul></dd>
     
 
@@ -21293,7 +20908,7 @@ And force layout of the toolBar
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_LayoutListWithNavLinks_index.js.html">components/LayoutListWithNavLinks/index.js</a>, <a href="components_LayoutListWithNavLinks_index.js.html#line104">line 104</a>
+        <a href="containers_Applications_index.js.html">containers/Applications/index.js</a>, <a href="containers_Applications_index.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -21425,6 +21040,94 @@ And force layout of the toolBar
 
 
 <div class="description">
+    Remove 'resize' event listener
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Files_index.js.html">containers/Files/index.js</a>, <a href="containers_Files_index.js.html#line81">line 81</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentWillUnmount"><span class="type-signature"></span>componentWillUnmount<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
     Unregister the panel
 </div>
 
@@ -21470,6 +21173,182 @@ And force layout of the toolBar
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="components_ScrollSync_ScrollSyncPanel.js.html">components/ScrollSync/ScrollSyncPanel.js</a>, <a href="components_ScrollSync_ScrollSyncPanel.js.html#line93">line 93</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentWillUnmount"><span class="type-signature"></span>componentWillUnmount<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Remove event listener 'resize'
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Users_index.js.html">containers/Users/index.js</a>, <a href="containers_Users_index.js.html#line81">line 81</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="componentWillUnmount"><span class="type-signature"></span>componentWillUnmount<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Remove event listener 'resize'
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Invitations_index.js.html">containers/Invitations/index.js</a>, <a href="containers_Invitations_index.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -23664,7 +23543,7 @@ And force layout of the toolBar
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Files_components_FilesAdd.js.html">containers/Files/components/FilesAdd.js</a>, <a href="containers_Files_components_FilesAdd.js.html#line88">line 88</a>
+        <a href="containers_Applications_components_ApplicationsAdd.js.html">containers/Applications/components/ApplicationsAdd.js</a>, <a href="containers_Applications_components_ApplicationsAdd.js.html#line100">line 100</a>
     </li></ul></dd>
     
 
@@ -23801,7 +23680,7 @@ And force layout of the toolBar
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Applications_components_ApplicationsAdd.js.html">containers/Applications/components/ApplicationsAdd.js</a>, <a href="containers_Applications_components_ApplicationsAdd.js.html#line100">line 100</a>
+        <a href="containers_Files_components_FilesAdd.js.html">containers/Files/components/FilesAdd.js</a>, <a href="containers_Files_components_FilesAdd.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -37954,7 +37833,7 @@ And force layout of the toolBar
     
 
     
-    <h4 class="name" id="handleSubmitForm"><span class="type-signature"></span>handleSubmitForm<span class="signature">(ctx, event)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="handleSubmitForm"><span class="type-signature"></span>handleSubmitForm<span class="signature">(event)</span><span class="type-signature"></span></h4>
     
 
     
@@ -37994,29 +37873,6 @@ And force layout of the toolBar
     </thead>
 
     <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>ctx</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
     
 
         <tr>
@@ -38078,7 +37934,7 @@ And force layout of the toolBar
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_SignUp_actions.js.html">containers/SignUp/actions.js</a>, <a href="containers_SignUp_actions.js.html#line154">line 154</a>
+        <a href="containers_SignUp_index.js.html">containers/SignUp/index.js</a>, <a href="containers_SignUp_index.js.html#line247">line 247</a>
     </li></ul></dd>
     
 
@@ -50768,7 +50624,7 @@ And normalize for correct format to GLPI REST API URI
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Settings_components_Profiles_index.js.html">containers/Settings/components/Profiles/index.js</a>, <a href="containers_Settings_components_Profiles_index.js.html#line428">line 428</a>
+        <a href="containers_Settings_components_Supervision_index.js.html">containers/Settings/components/Supervision/index.js</a>, <a href="containers_Settings_components_Supervision_index.js.html#line202">line 202</a>
     </li></ul></dd>
     
 
@@ -50944,7 +50800,7 @@ And normalize for correct format to GLPI REST API URI
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Settings_components_Supervision_index.js.html">containers/Settings/components/Supervision/index.js</a>, <a href="containers_Settings_components_Supervision_index.js.html#line202">line 202</a>
+        <a href="components_FilesUpload_FilesUploadItemList.js.html">components/FilesUpload/FilesUploadItemList.js</a>, <a href="components_FilesUpload_FilesUploadItemList.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -51032,7 +50888,7 @@ And normalize for correct format to GLPI REST API URI
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="components_FilesUpload_FilesUploadItemList.js.html">components/FilesUpload/FilesUploadItemList.js</a>, <a href="components_FilesUpload_FilesUploadItemList.js.html#line40">line 40</a>
+        <a href="containers_Settings_components_Profiles_index.js.html">containers/Settings/components/Profiles/index.js</a>, <a href="containers_Settings_components_Profiles_index.js.html#line428">line 428</a>
     </li></ul></dd>
     
 
@@ -51296,7 +51152,7 @@ And normalize for correct format to GLPI REST API URI
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_SignUp_index.js.html">containers/SignUp/index.js</a>, <a href="containers_SignUp_index.js.html#line123">line 123</a>
+        <a href="containers_SignUp_index.js.html">containers/SignUp/index.js</a>, <a href="containers_SignUp_index.js.html#line298">line 298</a>
     </li></ul></dd>
     
 
@@ -56502,94 +56358,6 @@ And normalize for correct format to GLPI REST API URI
 
 
 <div class="description">
-    Save the new values in glpi
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Settings_components_Supervision_index.js.html">containers/Settings/components/Supervision/index.js</a>, <a href="containers_Settings_components_Supervision_index.js.html#line136">line 136</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="saveChanges"><span class="type-signature"></span>saveChanges<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
     Validate data and save the new information in glpi
 </div>
 
@@ -56635,6 +56403,94 @@ And normalize for correct format to GLPI REST API URI
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="containers_Users_components_UsersEditOne.js.html">containers/Users/components/UsersEditOne.js</a>, <a href="containers_Users_components_UsersEditOne.js.html#line225">line 225</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="saveChanges"><span class="type-signature"></span>saveChanges<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Save the new values in glpi
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Settings_components_Supervision_index.js.html">containers/Settings/components/Supervision/index.js</a>, <a href="containers_Settings_components_Supervision_index.js.html#line136">line 136</a>
     </li></ul></dd>
     
 
@@ -57956,7 +57812,7 @@ And normalize for correct format to GLPI REST API URI
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Invitations_index.js.html">containers/Invitations/index.js</a>, <a href="containers_Invitations_index.js.html#line227">line 227</a>
+        <a href="containers_Fleets_index.js.html">containers/Fleets/index.js</a>, <a href="containers_Fleets_index.js.html#line233">line 233</a>
     </li></ul></dd>
     
 
@@ -58062,113 +57918,7 @@ And normalize for correct format to GLPI REST API URI
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Fleets_index.js.html">containers/Fleets/index.js</a>, <a href="containers_Fleets_index.js.html#line233">line 233</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="stylesContent"><span class="type-signature"></span>stylesContent<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Build content styles
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Applications_index.js.html">containers/Applications/index.js</a>, <a href="containers_Applications_index.js.html#line227">line 227</a>
+        <a href="containers_Invitations_index.js.html">containers/Invitations/index.js</a>, <a href="containers_Invitations_index.js.html#line227">line 227</a>
     </li></ul></dd>
     
 
@@ -58434,7 +58184,7 @@ And normalize for correct format to GLPI REST API URI
     
 
     
-    <h4 class="name" id="stylesList"><span class="type-signature"></span>stylesList<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="stylesContent"><span class="type-signature"></span>stylesContent<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
     
 
     
@@ -58442,7 +58192,7 @@ And normalize for correct format to GLPI REST API URI
 
 
 <div class="description">
-    Construct the styles of the list
+    Build content styles
 </div>
 
 
@@ -58486,219 +58236,7 @@ And normalize for correct format to GLPI REST API URI
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Fleets_index.js.html">containers/Fleets/index.js</a>, <a href="containers_Fleets_index.js.html#line198">line 198</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="stylesList"><span class="type-signature"></span>stylesList<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Construct the styles of the list
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Users_index.js.html">containers/Users/index.js</a>, <a href="containers_Users_index.js.html#line196">line 196</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="stylesList"><span class="type-signature"></span>stylesList<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Build list styles
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="containers_Applications_index.js.html">containers/Applications/index.js</a>, <a href="containers_Applications_index.js.html#line192">line 192</a>
+        <a href="containers_Applications_index.js.html">containers/Applications/index.js</a>, <a href="containers_Applications_index.js.html#line227">line 227</a>
     </li></ul></dd>
     
 
@@ -59017,6 +58555,324 @@ And normalize for correct format to GLPI REST API URI
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="containers_Files_index.js.html">containers/Files/index.js</a>, <a href="containers_Files_index.js.html#line173">line 173</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="stylesList"><span class="type-signature"></span>stylesList<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Construct the styles of the list
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Fleets_index.js.html">containers/Fleets/index.js</a>, <a href="containers_Fleets_index.js.html#line198">line 198</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="stylesList"><span class="type-signature"></span>stylesList<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Construct the styles of the list
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Users_index.js.html">containers/Users/index.js</a>, <a href="containers_Users_index.js.html#line196">line 196</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="stylesList"><span class="type-signature"></span>stylesList<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Build list styles
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Applications_index.js.html">containers/Applications/index.js</a>, <a href="containers_Applications_index.js.html#line192">line 192</a>
     </li></ul></dd>
     
 
