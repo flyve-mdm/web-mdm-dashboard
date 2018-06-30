@@ -12,7 +12,7 @@ describe('Applications', () => {
 
         cy.route({
             method: 'GET',
-            url: `${glpiApiLink}/search/PluginFlyvemdmAgent/?criteria[0][link]=and&criteria[0][field]=3&criteria[0][searchtype]=contains&criteria[0][value]=New Feet&`,
+            url: `${glpiApiLink}/search/PluginFlyvemdmAgent/?criteria[0][link]=and&criteria[0][field]=3&criteria[0][searchtype]=contains&criteria[0][value]=demo fleet&`,
             response: {"totalcount":0,"count":0,"sort":1,"order":"ASC","content-range":"0--1/0"}
         })
 
