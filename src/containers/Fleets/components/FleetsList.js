@@ -146,10 +146,10 @@ export default class FleetsList extends PureComponent {
       changeSelectionMode,
       changeSelectedItems,
     } = this.props
-
-    history.push(`${publicURL}/app/fleets/add`)
-    changeSelectionMode(false)
     changeSelectedItems([])
+    changeSelectionMode(false)
+    history.push(`${publicURL}/app/fleets/add`)
+
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
