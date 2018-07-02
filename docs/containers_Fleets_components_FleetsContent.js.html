@@ -137,11 +137,11 @@ class FleetsContent extends PureComponent {
    * @param {object} prevState
    */
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (Number(prevState.itemID) !== Number(getID(nextProps.history.location.pathname))) {
+    if (prevState.itemID !== getID(nextProps.history.location.pathname)) {
       return {
         ...prevState,
         isLoading: true,
-        itemID: Number(getID(nextProps.history.location.pathname)),
+        itemID: getID(nextProps.history.location.pathname),
         input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]['PluginFlyvemdmFleet.name'] : 'New Feet',
         notManaged: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0][
           'PluginFlyvemdmFleet.is_default'
@@ -433,6 +433,7 @@ class FleetsContent extends PureComponent {
    */
   resetData = () => {
     this.setState({
+      isLoading: false,
       data: {
         policies: undefined,
         tasks: undefined,
