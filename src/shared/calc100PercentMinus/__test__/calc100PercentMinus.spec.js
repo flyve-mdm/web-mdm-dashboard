@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import calc100PercentMinus from '../index.js'
+import calc100PercentMinus from '../index'
 
 describe('calc100PercentMinus', () => {
   it('should return "100%"', () => {
