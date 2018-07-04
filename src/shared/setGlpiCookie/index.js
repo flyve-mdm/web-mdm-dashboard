@@ -31,7 +31,7 @@
 /** import dependencies */
 import glpi from '../glpiApi'
 import {
-  setCookie
+  setCookie,
 } from '../cookies'
 
 /**
@@ -42,14 +42,15 @@ import {
 export default async (callback) => {
   const cookies = document.cookie.split(';')
   let glpiCookieName
-  for (let index = 0; index < cookies.length; index++) {
-    if (cookies[index].indexOf("glpi_") !== -1) {
-      glpiCookieName = cookies[index].split("=")[0]
+  for (let index = 0; index < cookies.length; index += 1) {
+    if (cookies[index].indexOf('glpi_') !== -1) {
+      const cookie = cookies[index].split('=')[0]
+      glpiCookieName = cookie
     }
   }
   setCookie(glpiCookieName, glpi.sessionToken)
   if (callback) callback()
   return ({
-    [glpiCookieName]: glpi.sessionToken
+    [glpiCookieName]: glpi.sessionToken,
   })
 }
