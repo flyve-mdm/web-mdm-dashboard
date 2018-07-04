@@ -26,29 +26,29 @@
  * ------------------------------------------------------------------------------
  */
 
-import setGlpiCookie from '../index.js'
+import setGlpiCookie from '../index'
 import {
   setCookie,
   getCookie,
-  eraseCookie
+  eraseCookie,
 } from '../../cookies'
 import glpi from '../../glpiApi'
 
 describe('setGlpiCookie', () => {
   beforeEach(() => {
-    setCookie("glpi_123", "123")
+    setCookie('glpi_123', '123')
     glpi.sessionToken = 12345678
   })
 
   afterEach(() => {
     glpi.sessionToken = undefined
-    eraseCookie("glpi_123")
+    eraseCookie('glpi_123')
   })
 
   it('should set glpi cookie', async () => {
     expect(await setGlpiCookie()).toEqual({
-      glpi_123: 12345678
+      glpi_123: 12345678,
     })
-    expect(getCookie('glpi_123')).toEqual("12345678")
+    expect(getCookie('glpi_123')).toEqual('12345678')
   })
 })
