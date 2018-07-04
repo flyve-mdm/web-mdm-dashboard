@@ -1,4 +1,7 @@
 {
+  "globals": {
+    "sinon": false
+  },
   "extends": "airbnb",
   "env": {
     "es6": true,

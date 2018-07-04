@@ -26,11 +26,10 @@
  * ------------------------------------------------------------------------------
  */
 
-import handleMessage from '../index.js'
+import handleMessage from '../index'
 import history from '../../history'
 
 describe('handleMessage', () => {
-
   beforeEach(() => {
     sinon.stub(history, 'push').returns({})
   })
@@ -41,24 +40,24 @@ describe('handleMessage', () => {
 
   it('should set a generic error message', () => {
     expect(handleMessage({
-        type: 'alert',
-        message: 'error message'
-      }))
+      type: 'alert',
+      message: 'error message',
+    }))
       .toEqual({
-        body: "error message",
-        title: "error",
-        type: "alert"
+        body: 'error message',
+        title: 'error',
+        type: 'alert',
       })
   })
 
   it('should set a generic message', () => {
     expect(handleMessage({
-        message: 'message'
-      }))
+      message: 'message',
+    }))
       .toEqual({
-        "body": "message",
-        "title": "info",
-        "type": "info"
+        body: 'message',
+        title: 'info',
+        type: 'info',
       })
   })
 
@@ -67,13 +66,13 @@ describe('handleMessage', () => {
       handleMessage({
         type: 'alert',
         message: {
-          status: 0
-        }
-      })
+          status: 0,
+        },
+      }),
     ).toEqual({
-      body: "no_internet_connection",
-      title: "error",
-      type: "alert"
+      body: 'no_internet_connection',
+      title: 'error',
+      type: 'alert',
     })
   })
 
@@ -83,16 +82,16 @@ describe('handleMessage', () => {
         type: 'alert',
         message: {
           status: 404,
-          statusText: "error 404",
+          statusText: 'error 404',
           data: [
-            ['Error', '']
-          ]
-        }
-      })
+            ['Error', ''],
+          ],
+        },
+      }),
     ).toEqual({
-      body: "error 404",
-      title: "error",
-      type: "alert"
+      body: 'error 404',
+      title: 'error',
+      type: 'alert',
     })
   })
 
@@ -103,14 +102,14 @@ describe('handleMessage', () => {
         message: {
           status: 401,
           data: [
-            ["ERROR_SESSION_TOKEN_INVALID", "session_token seems invalid"]
-          ]
-        }
-      })
+            ['ERROR_SESSION_TOKEN_INVALID', 'session_token seems invalid'],
+          ],
+        },
+      }),
     ).toEqual({
-      body: "session_token seems invalid",
-      title: "error",
-      type: "alert"
+      body: 'session_token seems invalid',
+      title: 'error',
+      type: 'alert',
     })
   })
 })
@@ -122,13 +121,13 @@ it('should set a 400 error message', () => {
       message: {
         status: 400,
         data: [
-          ['Error', 'error 400']
-        ]
-      }
-    })
+          ['Error', 'error 400'],
+        ],
+      },
+    }),
   ).toEqual({
-    body: "error 400",
-    title: "error",
-    type: "alert"
+    body: 'error 400',
+    title: 'error',
+    type: 'alert',
   })
 })
