@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import validateData from '../index.js'
+import validateData from '../index'
 
 describe('validateData', () => {
   it('should validate correct data', () => {
