@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import authtype from '../index.js'
+import authtype from '../index'
 
 describe('authtype', () => {
   it('should return "glpi_internal_database"', () => {
