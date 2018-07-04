@@ -30,40 +30,40 @@
 
 /** Import dependencies */
 import {
-  AnimateFrom
+  AnimateFrom,
 } from '@microsoft/fast-animation'
 
 /** Get animations configuration from local store */
-const animate = () => localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')).animations : {}
+const animate = () => (localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')).animations : {})
 
 /** Execute animation from bottom to top position */
-const slideTop = element => {
+const slideTop = (element) => {
   const animation = new AnimateFrom(element, {
-    y: 20
+    y: 20,
   }, {
-    duration: 150
+    duration: 150,
   })
   if (!animate()) animation.play = () => {}
   return animation
 }
 
 /** Execute animation from right to left position */
-const slideLeft = element => {
+const slideLeft = (element) => {
   const animation = new AnimateFrom(element, {
-    x: 60
+    x: 60,
   }, {
-    duration: 100
+    duration: 100,
   })
   if (!animate()) animation.play = () => {}
   return animation
 }
 
 /** Execute animation from left to right position */
-const slideRight = element => {
+const slideRight = (element) => {
   const animation = new AnimateFrom(element, {
-    x: -60
+    x: -60,
   }, {
-    duration: 100
+    duration: 100,
   })
   if (!animate()) animation.play = () => {}
   return animation
@@ -73,5 +73,5 @@ const slideRight = element => {
 export {
   slideTop,
   slideLeft,
-  slideRight
+  slideRight,
 }
