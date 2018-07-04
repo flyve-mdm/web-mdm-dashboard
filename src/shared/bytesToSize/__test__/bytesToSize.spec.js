@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import bytesToSize from '../index.js'
+import bytesToSize from '../index'
 
 describe('bytesToSize', () => {
   it('should return "0 Bytes"', () => {
