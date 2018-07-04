@@ -45,7 +45,7 @@ describe('Devices', () => {
         cy.route({
             method: 'GET',
             url: `${glpiApiLink}/search/PluginFlyvemdmFleet/?forcedisplay[0]=2&`,
-            response: {"totalcount":12,"count":12,"sort":1,"order":"ASC","data":[{"1":"demo fleet","2":58},{"1":"DIOHz0r Tests","2":173},{"1":"Files&Apk","2":57},{"1":"fleet","2":61},{"1":"FlyveDevMcy","2":52},{"1":"Multiple file","2":59},{"1":"MyFleet","2":196},{"1":"New Feet","2":199},{"1":"New Feet copy","2":200},{"1":"not managed fleet","2":1},{"1":"Policies test","2":60},{"1":"test","2":68}],"content-range":"0-11/12"}
+            response: {"totalcount":12,"count":12,"sort":1,"order":"ASC","data":[{"1":"demo fleet","2":58},{"1":"DIOHz0r Tests","2":173},{"1":"Files&Apk","2":57},{"1":"fleet","2":61},{"1":"FlyveDevMcy","2":52},{"1":"Multiple file","2":59},{"1":"MyFleet","2":196},{"1":"New Fleet","2":199},{"1":"New Fleet copy","2":200},{"1":"not managed fleet","2":1},{"1":"Policies test","2":60},{"1":"test","2":68}],"content-range":"0-11/12"}
         })
 
         cy.route({
@@ -75,7 +75,7 @@ describe('Devices', () => {
         cy.route({
             method: 'GET',
             delay: 200,
-            url: `${glpiApiLink}/search/PluginFlyvemdmAgent/?criteria[0][link]=and&criteria[0][field]=3&criteria[0][searchtype]=contains&criteria[0][value]=New Feet&`,
+            url: `${glpiApiLink}/search/PluginFlyvemdmAgent/?criteria[0][link]=and&criteria[0][field]=3&criteria[0][searchtype]=contains&criteria[0][value]=New Fleet&`,
             response: {"totalcount":0,"count":0,"sort":1,"order":"ASC","content-range":"0--1/0"}
         }).as('polices1')
 

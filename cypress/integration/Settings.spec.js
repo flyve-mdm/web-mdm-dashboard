@@ -15,7 +15,7 @@ describe('Settings', () => {
                     password_need_caps: 1,
                     password_need_symbol: 1,
                     url_base: "https://your-url.com/glpi"
-                }  
+                }
             }
         })
 
@@ -76,7 +76,7 @@ describe('Settings', () => {
         cy.route({
             method: 'GET',
             url: `${glpiApiLink}/search/PluginFlyvemdmFleet/?`,
-            response: {"totalcount":12,"count":12,"sort":1,"order":"ASC","data":[{"1":"demo fleet"},{"1":"DIOHz0r Tests"},{"1":"Files&Apk"},{"1":"fleet"},{"1":"FlyveDevMcy"},{"1":"Multiple file"},{"1":"MyFleet"},{"1":"New Feet"},{"1":"New Feet copy"},{"1":"not managed fleet"},{"1":"Policies test"},{"1":"test"}],"content-range":"0-11/12"}
+            response: {"totalcount":12,"count":12,"sort":1,"order":"ASC","data":[{"1":"demo fleet"},{"1":"DIOHz0r Tests"},{"1":"Files&Apk"},{"1":"fleet"},{"1":"FlyveDevMcy"},{"1":"Multiple file"},{"1":"MyFleet"},{"1":"New Fleet"},{"1":"New Fleet copy"},{"1":"not managed fleet"},{"1":"Policies test"},{"1":"test"}],"content-range":"0-11/12"}
         })
 
         cy.route({
@@ -126,7 +126,7 @@ describe('Settings', () => {
             url: `${glpiApiLink}/search/UserTitle/?range=0-200&forcedisplay[0]=2&`,
             response: {"totalcount":1,"count":1,"sort":1,"order":"ASC","data":[{"1":"Example location","80":"Root entity","2":1}],"content-range":"0-0/1"}
         })
-        
+
         cy.route({
             method: 'GET',
             url: `${glpiApiLink}/search/UserCategory/?range=0-200&forcedisplay[0]=2&`,
@@ -169,38 +169,38 @@ describe('Settings', () => {
         cy.visit('/app/settings')
         cy.contains('No selection')
         cy.get('main').screenshot('settings_noSelection', {capture: 'viewport'})
-        cy.get('.header-block').click('topRight')        
+        cy.get('.header-block').click('topRight')
         cy.get('ul > :nth-child(6) > a').click()
         cy.get('main').screenshot('settings_display', {capture: 'viewport'})
-        cy.get('.header-block').click('topRight')        
+        cy.get('.header-block').click('topRight')
         cy.get('ul > :nth-child(5) > a').click()
         cy.get('main').screenshot('settings_notifications', {capture: 'viewport'})
         cy.get('ul > :nth-child(4) > a').click()
-        cy.get('.header-block').click('topRight')        
+        cy.get('.header-block').click('topRight')
         cy.get('.content-pane > h2')
         cy.get('main').screenshot('settings_security', {capture: 'viewport'})
-        cy.get('.header-block').click('topRight')        
+        cy.get('.header-block').click('topRight')
         cy.get(':nth-child(2) > .list-element__controller > .btn').click()
         cy.get('main').screenshot('settings_changePassword', {capture: 'viewport'})
         cy.get('.btn--secondary').click()
-        cy.get('.header-block').click('topRight')        
+        cy.get('.header-block').click('topRight')
         cy.get(':nth-child(3) > .list-element__controller > .btn').click()
         cy.get('main').screenshot('settings_killSession', {capture: 'viewport'})
         cy.get('.win-contentdialog-visible > .win-contentdialog-dialog > .win-contentdialog-commands > .win-contentdialog-secondarycommand').click()
-        cy.get('.header-block').click('topRight')        
+        cy.get('.header-block').click('topRight')
         cy.get(':nth-child(4) > .list-element__controller > .btn').click()
         cy.get('main').screenshot('settings_deleteBrowserData', {capture: 'viewport'})
         cy.get('.win-contentdialog-visible > .win-contentdialog-dialog > .win-contentdialog-commands > .win-contentdialog-secondarycommand').click()
         cy.get('ul > :nth-child(3) > a').click()
-        cy.get('.header-block').click('topRight')        
+        cy.get('.header-block').click('topRight')
         cy.get('.content-pane > h2')
         cy.get('main').screenshot('settings_supervision', {capture: 'viewport'})
         cy.get('ul > :nth-child(1) > a').click()
-        cy.get('.header-block').click('topRight')        
+        cy.get('.header-block').click('topRight')
         cy.get('[style="width: calc(100% - 320px); overflow-y: auto;"]')
         cy.get('main').screenshot('settings_entity', {capture: 'viewport'})
         cy.get('ul > :nth-child(2) > a').click()
-        cy.get('.header-block').click('topRight')        
+        cy.get('.header-block').click('topRight')
         cy.get('.content-pane > h2')
         cy.get('main').screenshot('settings_profiles', {capture: 'viewport'})
     })
