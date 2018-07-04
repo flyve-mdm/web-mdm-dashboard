@@ -30,11 +30,11 @@
 
 /** import dependencies */
 import {
-  createBrowserHistory as createHistory
+  createBrowserHistory as createHistory,
 } from 'history'
 
 /** Get browser history */
-let history = createHistory()
+const history = createHistory()
 
 /** Export history object */
 export default history
