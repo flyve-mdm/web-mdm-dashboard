@@ -29,17 +29,15 @@
 /** @module toDateInputValue */
 
 /**
- * Get date next month
- * @param {date} date current
- * @returns {date} next month
+ * Get convert date
+ * @param {date} x current date
+ * @returns {date} converted date
  */
-export default (date) => {
-  date = new Date(date)
+export default (x) => {
+  const date = new Date(x)
   let month = (date.getMonth() + 1)
   let day = date.getDate()
-  if (month < 10)
-    month = "0" + month
-  if (day < 10)
-    day = "0" + day
-  return (date.getFullYear() + '-' + month + '-' + day)
+  if (month < 10) { month = `0${month}` }
+  if (day < 10) { day = `0${day}` }
+  return (`${date.getFullYear()}-${month}-${day}`)
 }
