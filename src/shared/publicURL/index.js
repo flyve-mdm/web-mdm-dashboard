@@ -30,7 +30,7 @@
 
 /** Get path without URL base */
 const path = () => {
-  let location = document.createElement("a")
+  const location = document.createElement('a')
   location.href = process.env.PUBLIC_URL
   return (process.env.PUBLIC_URL !== '') ? location.pathname : ''
 }
