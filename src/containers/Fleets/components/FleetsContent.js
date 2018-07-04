@@ -122,7 +122,7 @@ class FleetsContent extends PureComponent {
         ...prevState,
         isLoading: true,
         itemID: getID(nextProps.history.location.pathname),
-        input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]['PluginFlyvemdmFleet.name'] : 'New Feet',
+        input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]['PluginFlyvemdmFleet.name'] : 'New Fleet',
         notManaged: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0][
           'PluginFlyvemdmFleet.is_default'
         ] === 1 : false,

@@ -557,7 +557,7 @@ export default class InvitationsList extends PureComponent {
 
     if (isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList !== undefined) {
+    } else if (itemList) {
       if (itemList.length > 0) {
         listComponent = (
           <ReactWinJS.ListView
