@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import configureDisplay from '../index.js'
+import configureDisplay from '../index'
 
 describe('configureDisplay', () => {
   beforeEach(() => {
@@ -48,7 +48,7 @@ describe('configureDisplay', () => {
       fleetsCurrentlyManaged: true,
       invitationsSent: true,
       numberUsers: true,
-      pendingInvitations: true
+      pendingInvitations: true,
     }
 
     expect(configureDisplay()).toEqual(defaultValues)
