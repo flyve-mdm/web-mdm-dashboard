@@ -32,10 +32,8 @@
  * Get current size
  * @returns {string} the current size to string
  */
-export default () => {
-  return (
-    window.innerWidth >= 1024 ? 'large' :
-    window.innerWidth >= 772 ? 'medium' :
-    'small'
-  )
-}
+export default () => (
+  window.innerWidth >= 1024 ? 'large'
+    : window.innerWidth >= 772 ? 'medium'
+      : 'small'
+)

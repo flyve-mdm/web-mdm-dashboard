@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import getMode from '../index.js'
+import getMode from '../index'
 
 describe('getMode', () => {
   it('should return "small"', () => {
