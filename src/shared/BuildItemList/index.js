@@ -31,13 +31,14 @@
 /** Import dependencies */
 import WinJS from 'winjs'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
 
 /**
  * Sort elements ascending / descending
  * @param {object} dataSource
  * @param {int} index
+ * @return {object} WinJS.Binding.List
  */
 export default function (dataSource, index = 0) {
   const groupKey = function (data) {
@@ -50,7 +51,7 @@ export default function (dataSource, index = 0) {
 
   const groupData = function (data) {
     return {
-      title: groupKey(data)
+      title: groupKey(data),
     }
   }
 
@@ -58,30 +59,26 @@ export default function (dataSource, index = 0) {
     if (dataSource.order === 'ASC') {
       if (a < b) {
         return -1
-      } else if (a > b) {
+      } if (a > b) {
         return 1
-      } else {
-        return 0
       }
-    } else {
-      if (a > b) {
-        return -1
-      } else if (a < b) {
-        return 1
-      } else {
-        return 0
-      }
+      return 0
     }
+    if (a > b) {
+      return -1
+    } if (a < b) {
+      return 1
+    }
+    return 0
   }
 
   const sorter = (a, b) => {
     if (a[Object.keys(a)[0]] < b[Object.keys(b)[0]]) {
       return -1
-    } else if (a[Object.keys(a)[0]] > b[Object.keys(b)[0]]) {
+    } if (a[Object.keys(a)[0]] > b[Object.keys(b)[0]]) {
       return 1
-    } else {
-      return 0
     }
+    return 0
   }
 
   if (dataSource.data) {
@@ -89,4 +86,6 @@ export default function (dataSource, index = 0) {
       .createSorted(sorter)
       .createGrouped(groupKey, groupData, groupSorted)
   }
+
+  return null
 }
