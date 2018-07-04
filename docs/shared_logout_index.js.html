@@ -53,9 +53,9 @@ import history from '../history'
 import glpi from '../glpiApi'
 import publicURL from '../publicURL'
 
-/**  Export fuction to logout user*/
+/**  Export fuction to logout user */
 export default () => {
-  /** Remove current user and session token from local store*/
+  /** Remove current user and session token from local store */
   localStorage.removeItem('currentUser')
   localStorage.removeItem('sessionToken')
   /** if exists a session token kill session */

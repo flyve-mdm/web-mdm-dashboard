@@ -58,7 +58,7 @@ export default (data, specialReturn) => {
   let value
 
   if (!data &amp;&amp; (specialReturn || specialReturn === '')) value = specialReturn
-  else if (!data &amp;&amp; data !== 0) value = ""
+  else if (!data &amp;&amp; data !== 0) value = ''
   else value = data
 
   if (Array.isArray(value)) return value
