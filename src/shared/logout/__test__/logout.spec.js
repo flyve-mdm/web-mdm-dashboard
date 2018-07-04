@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import logout from '../index.js'
+import logout from '../index'
 import history from '../../history'
 import glpi from '../../glpiApi'
 
