@@ -28,8 +28,9 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
-} from "react"
+  PureComponent,
+} from 'react'
+import PropTypes from 'prop-types'
 import GenerateRoutes from '../../../../components/GenerateRoutes'
 import routes from './routes'
 
@@ -38,12 +39,19 @@ import routes from './routes'
  */
 class HelpCenter extends PureComponent {
   render() {
+    const { match } = this.props
+
     return (
       <React.Fragment>
-        <GenerateRoutes routes={routes} rootPath={this.props.match.url}/>
+        <GenerateRoutes routes={routes} rootPath={match.url} />
       </React.Fragment>
     )
   }
+}
+
+/** HelpCenter propsTypes */
+HelpCenter.propTypes = {
+  match: PropTypes.object.isRequired,
 }
 
 export default HelpCenter

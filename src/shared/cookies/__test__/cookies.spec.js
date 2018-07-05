@@ -29,8 +29,8 @@
 import {
   setCookie,
   getCookie,
-  eraseCookie
-} from '../index.js'
+  eraseCookie,
+} from '../index'
 
 describe('cookies', () => {
   it('should create, get and delete a cookie', () => {

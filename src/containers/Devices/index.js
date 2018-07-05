@@ -28,32 +28,33 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
+import {
+  bindActionCreators,
+} from 'redux'
+import {
+  connect,
+} from 'react-redux'
+import PropTypes from 'prop-types'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import DevicesList from './components/DevicesList'
 import {
-  uiSetNotification
+  uiSetNotification,
 } from '../../store/ui/actions'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -62,43 +63,18 @@ function mapDispatchToProps(dispatch) {
  * @extends PureComponent
  */
 class Devices extends PureComponent {
-
   constructor(props) {
     super(props)
     this.state = {
-      icon: "deviceIcon",
+      icon: 'deviceIcon',
       mode: getMode(),
       itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
       selectionMode: false,
       action: null,
-      selectedItems: []
+      selectedItems: [],
     }
 
     window.addEventListener('resize', this.handleResize)
-  }
-
-  /**
-   * handle page resize
-   * @function handleResize
-   */
-  handleResize = () => {
-    let nextMode = getMode()
-
-    if (nextMode === 'small') {
-      this.setState({
-        itemListPaneWidth: '100%'
-      })
-    } else {
-      this.setState({
-        itemListPaneWidth: 320
-      })
-    }
-
-    if (this.state.mode !== nextMode) {
-      this.setState({
-        mode: nextMode
-      })
-    }
   }
 
   componentWillUnmount() {
@@ -109,12 +85,37 @@ class Devices extends PureComponent {
     if (nextProps.history.location.pathname === `${publicURL}/app/devices` && prevState.selectedItems.length > 0 && prevState.selectionMode === false) {
       return {
         ...prevState,
-        selectedItems: []
+        selectedItems: [],
       }
+    }
+    return {
+      ...prevState,
+    }
+  }
+
+  /**
+   * handle page resize
+   * @function handleResize
+   */
+  handleResize = () => {
+    const { mode } = this.state
+
+    const nextMode = getMode()
+
+    if (nextMode === 'small') {
+      this.setState({
+        itemListPaneWidth: '100%',
+      })
     } else {
-      return {
-        ...prevState
-      }
+      this.setState({
+        itemListPaneWidth: 320,
+      })
+    }
+
+    if (mode !== nextMode) {
+      this.setState({
+        mode: nextMode,
+      })
     }
   }
 
@@ -124,19 +125,32 @@ class Devices extends PureComponent {
    * @returns {object}
    */
   propsData = () => {
-    return {
-      icon: this.state.icon,
+    const {
+      icon,
+      selectionMode,
+      selectedItems,
+      action,
+    } = this.state
+    const {
+      actions,
+      history,
+      glpi,
+      handleMessage,
+    } = this.props
+
+    return ({
+      icon,
+      action,
+      selectionMode,
+      selectedItems,
       changeSelectionMode: this.changeSelectionMode,
-      selectionMode: this.state.selectionMode,
-      selectedItems: this.state.selectedItems,
       changeSelectedItems: this.changeSelectedItems,
-      action: this.state.action,
       changeAction: this.changeAction,
-      setNotification: this.props.actions.setNotification,
-      history: this.props.history,
-      glpi: this.props.glpi,
-      handleMessage: this.props.handleMessage
-    }
+      setNotification: actions.setNotification,
+      history,
+      glpi,
+      handleMessage,
+    })
   }
 
   /**
@@ -144,21 +158,23 @@ class Devices extends PureComponent {
    * @function changeSelectedItems
    */
   changeSelectedItems = selectedItems => this.setState({
-    selectedItems
+    selectedItems,
   })
+
   /**
    * Change action
    * @function changeAction
    */
   changeAction = action => this.setState({
-    action
+    action,
   })
+
   /**
    * Change selection mode
    * @function changeSelectionMode
    */
   changeSelectionMode = selectionMode => this.setState({
-    selectionMode
+    selectionMode,
   })
 
   /**
@@ -167,22 +183,28 @@ class Devices extends PureComponent {
    * @returns {object}
    */
   stylesList = () => {
+    const {
+      itemListPaneWidth,
+      mode,
+      selectedItems,
+      selectionMode,
+    } = this.state
+    const { history } = this.props
 
-    let styles = {
-      width: this.state.itemListPaneWidth
+    const styles = {
+      width: itemListPaneWidth,
     }
 
-    if (this.state.mode === 'small') {
-      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname ===
-          `${publicURL}/app/devices`) ||
-        this.props.history.location.pathname === `${publicURL}/app/devices` ||
-        (this.props.history.location.pathname === `${publicURL}/app/devices` &&
-          this.state.selectionMode)) {
+    if (mode === 'small') {
+      if ((selectedItems.length === 0 && history.location.pathname
+          === `${publicURL}/app/devices`)
+        || history.location.pathname === `${publicURL}/app/devices`
+        || (history.location.pathname === `${publicURL}/app/devices`
+          && selectionMode)) {
         styles.display = 'inline-block'
       } else {
         styles.display = 'none'
       }
-
     } else {
       styles.display = 'inline-block'
     }
@@ -196,24 +218,30 @@ class Devices extends PureComponent {
    * @returns {object}
    */
   stylesContent = () => {
+    const {
+      itemListPaneWidth,
+      mode,
+      selectedItems,
+      selectionMode,
+    } = this.state
+    const { history } = this.props
 
-    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
-    let styles = {
+    const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
+    const styles = {
       width: calc100PercentMinus(validWidth),
-      height: '100%'
+      height: '100%',
     }
 
-    if (this.state.mode === 'small') {
-      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname ===
-          `${publicURL}/app/devices`) ||
-        this.props.history.location.pathname === `${publicURL}/app/devices` ||
-        (this.props.history.location.pathname === `${publicURL}/app/devices` &&
-          this.state.selectionMode)) {
+    if (mode === 'small') {
+      if ((selectedItems.length === 0 && history.location.pathname
+          === `${publicURL}/app/devices`)
+        || history.location.pathname === `${publicURL}/app/devices`
+        || (history.location.pathname === `${publicURL}/app/devices`
+          && selectionMode)) {
         styles.display = 'none'
       } else {
         styles.display = 'inline-flex'
       }
-
     } else {
       styles.display = 'inline-flex'
     }
@@ -222,20 +250,22 @@ class Devices extends PureComponent {
   }
 
   render() {
-    let renderComponents = (
+    const { match } = this.props
+
+    const renderComponents = (
       <React.Fragment>
-        <div className="list-pane flex-block__list" style={{...this.stylesList()}}>
+        <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
           <DevicesList
             key="list"
             {...this.propsData()}
           />
         </div>
-        <div className="flex-block__content" style={{...this.stylesContent()}}>
+        <div className="flex-block__content" style={{ ...this.stylesContent() }}>
           <GenerateRoutes
             key="content"
             routes={routes}
-            rootPath={this.props.match.url}
-            data={{...this.propsData()}}
+            rootPath={match.url}
+            data={{ ...this.propsData() }}
           />
         </div>
       </React.Fragment>
@@ -248,7 +278,17 @@ class Devices extends PureComponent {
     )
   }
 }
+
+/** Devices propTypes */
+Devices.propTypes = {
+  match: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  glpi: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+}
+
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withGLPI(withHandleMessages(Devices)))

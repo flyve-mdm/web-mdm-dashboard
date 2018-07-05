@@ -28,33 +28,33 @@
 
 /** impport dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
-import ContentPane from '../../../../components/ContentPane'
 import {
-  I18n
-} from "react-i18nify"
+  I18n,
+} from 'react-i18nify'
+import PropTypes from 'prop-types'
+import {
+  bindActionCreators,
+} from 'redux'
+import {
+  connect,
+} from 'react-redux'
+import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
-import PropTypes from 'prop-types'
 import itemtype from '../../../../shared/itemtype'
 import {
-  uiSetNotification
+  uiSetNotification,
 } from '../../../../store/ui/actions'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -67,56 +67,78 @@ class SystemInformation extends PureComponent {
     super(props)
     this.state = {
       isLoading: true,
-      plugins: undefined
+      plugins: undefined,
     }
   }
 
   componentDidMount = async () => {
+    const {
+      glpi,
+      actions,
+      handleMessage,
+    } = this.props
+
     try {
-      const plugins = await this.props.glpi.getAllItems({
-        itemtype: itemtype.Plugin
+      const plugins = await glpi.getAllItems({
+        itemtype: itemtype.Plugin,
       })
       this.setState({
         isLoading: false,
-        plugins: plugins
+        plugins,
       })
     } catch (error) {
-      this.props.actions.setNotification(this.props.handleMessage({
+      actions.setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
       this.setState({
-        isLoading: false
+        isLoading: false,
       })
     }
   }
 
   render() {
-    let element = []
+    const {
+      plugins,
+      isLoading,
+    } = this.state
 
-    if (this.state.plugins) {
-      this.state.plugins.forEach(plugin => {
+    const element = []
+
+    if (plugins) {
+      plugins.forEach((plugin) => {
         element.push(
           <div className="plugins" key={plugin.id}>
             <div className="plugins--left">
-              <div className="plugin__title">{ plugin.name }</div>
-              <div className="plugin__detail" dangerouslySetInnerHTML={{__html: plugin.author}}></div>
+              <div className="plugin__title">
+                { plugin.name }
+              </div>
+              <div
+                className="plugin__detail"
+                dangerouslySetInnerHTML={{ __html: plugin.author }}
+              />
             </div>
             <div className="plugin--right">
-              <span className="plugin__title">{ plugin.version }</span>
-              <div className="plugin__detail">{ plugin.license }</div>
+              <span className="plugin__title">
+                { plugin.version }
+              </span>
+              <div className="plugin__detail">
+                { plugin.license }
+              </div>
             </div>
-          </div>
+          </div>,
         )
       })
     }
 
     return (
-      this.state.isLoading ?
-        <Loading message={`${I18n.t('commons.loading')}...`}/>
+      isLoading
+        ? <Loading message={`${I18n.t('commons.loading')}...`} />
         : (
           <ContentPane>
-            <h2 style={{ margin: '10px' }}>{I18n.t('about.system_information.title')}</h2>
+            <h2 style={{ margin: '10px' }}>
+              {I18n.t('about.system_information.title')}
+            </h2>
             <div className="about-pane" style={{ margin: '10px' }}>
               {element}
             </div>
@@ -128,7 +150,9 @@ class SystemInformation extends PureComponent {
 
 /** SystemInformation propsTypes */
 SystemInformation.propTypes = {
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
 
 export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(SystemInformation)))

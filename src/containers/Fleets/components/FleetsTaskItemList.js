@@ -28,16 +28,17 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import ReactWinJS from 'react-winjs'
+import {
+  I18n,
+} from 'react-i18nify'
+import PropTypes from 'prop-types'
 import TasksDeployAppList from './TasksDeployAppList'
 import TasksRemoveAppList from './TasksRemoveAppList'
 import TasksDeployFileList from './TaskDeployFileList'
 import TasksRemoveFileList from './TasksRemoveFileList'
-import {
-  I18n
-} from 'react-i18nify'
 
 /**
  * @class FleetsTaskItemList
@@ -47,11 +48,74 @@ class FleetsTaskItemList extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
+    const { fleetHaveTask } = this.props
+
     this.state = {
-      fleetHaveTask: this.props.fleetHaveTask,
+      fleetHaveTask,
       alreadyAdded: false,
       active: false,
-      input: ''
+      input: '',
+    }
+  }
+
+  /**
+   * Set state from fleets
+   * @function componentDidMount
+   */
+  componentDidMount = () => {
+    const {
+      fleetHaveTask,
+      data,
+      value,
+    } = this.props
+
+    this.updateState(fleetHaveTask)
+    let input
+    if (data['PluginFlyvemdmPolicy.type'] === 'removeapp'
+      || data['PluginFlyvemdmPolicy.type'] === 'removefile') {
+      input = ''
+    } else {
+      input = (value || '')
+    }
+    this.setState({
+      input,
+    })
+  }
+
+  /**
+   * Make sure that the state and props are in sync for when it is required
+   * @static
+   * @function getDerivedStateFromProps
+   * @param {object} nextProps
+   * @param {object} prevState
+   */
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let input
+    if (nextProps.data['PluginFlyvemdmPolicy.type'] === 'removeapp'
+      || nextProps.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
+      input = ''
+    } else {
+      input = nextProps.value ? nextProps.value : ''
+    }
+
+    if (nextProps.fleetHaveTask !== prevState.fleetHaveTask) {
+      if (nextProps.fleetHaveTask) {
+        return {
+          fleetHaveTask: nextProps.fleetHaveTask,
+          alreadyAdded: true,
+          active: true,
+          input,
+        }
+      }
+      return {
+        fleetHaveTask: nextProps.fleetHaveTask,
+        alreadyAdded: false,
+        active: false,
+        input,
+      }
+    }
+    return {
+      ...prevState,
     }
   }
 
@@ -64,72 +128,15 @@ class FleetsTaskItemList extends PureComponent {
     if (fleetHaveTask) {
       this.setState({
         alreadyAdded: true,
-        active: true
+        active: true,
       })
     } else {
       this.setState({
         alreadyAdded: false,
         active: false,
-        input: ''
+        input: '',
       })
     }
-  }
-
-  /**
-   * Make sure that the state and props are in sync for when it is required
-   * @static
-   * @function getDerivedStateFromProps
-   * @param {object} nextProps
-   * @param {object} prevState
-   */
-  static getDerivedStateFromProps(nextProps, prevState) {
-    let input
-    if (nextProps.data['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
-      nextProps.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
-      input = ''
-    } else {
-      input = nextProps.value ? nextProps.value : ''
-    }
-
-    if (nextProps.fleetHaveTask !== prevState.fleetHaveTask) {
-      if (nextProps.fleetHaveTask) {
-        return {
-          fleetHaveTask: nextProps.fleetHaveTask,
-          alreadyAdded: true,
-          active: true,
-          input: input
-        }
-      } else {
-        return {
-          fleetHaveTask: nextProps.fleetHaveTask,
-          alreadyAdded: false,
-          active: false,
-          input: input
-        }
-      }
-    } else {
-      return {
-        ...prevState
-      }
-    }
-  }
-
-  /**
-   * Set state from fleets
-   * @function componentDidMount
-   */
-  componentDidMount = () => {
-    this.updateState(this.props.fleetHaveTask)
-    let input
-    if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removeapp' ||
-      this.props.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
-      input = ''
-    } else {
-      input = this.props.value ? this.props.value : ''
-    }
-    this.setState({
-      input
-    })
   }
 
   /**
@@ -137,16 +144,21 @@ class FleetsTaskItemList extends PureComponent {
    * @function handleAddedToggle
    */
   handleAddedToggle = () => {
-    if (!this.state.alreadyAdded) {
-      this.props.addTask(this.props.data)
+    const { alreadyAdded } = this.state
+    const {
+      addTask,
+      removeTask,
+      data,
+    } = this.props
+
+    if (!alreadyAdded) {
+      addTask(data)
     } else {
-      this.props.removeTask(this.props.data)
+      removeTask(data)
     }
-    this.setState((prevState) => {
-      return {
-        alreadyAdded: !prevState.alreadyAdded
-      }
-    })
+    this.setState(prevState => ({
+      alreadyAdded: !prevState.alreadyAdded,
+    }))
   }
 
   /**
@@ -154,20 +166,29 @@ class FleetsTaskItemList extends PureComponent {
    * @function handleActivePolicyToggle
    */
   handleActivePolicyToggle = () => {
-    switch (this.props.data['PluginFlyvemdmPolicy.type']) {
+    const {
+      data,
+      updateValueTask,
+      value,
+    } = this.props
+    const { input } = this.state
+    switch (data['PluginFlyvemdmPolicy.type']) {
       case 'bool':
-        this.props.updateValueTask(this.props.data, !this.props.value)
+        updateValueTask(data, !value)
         break
       case 'int':
       case 'deployapp':
-      case 'removeapp':
       case 'deployfile':
+        if (`${input}`.trim()) {
+          updateValueTask(data, input)
+        }
+        break
+      case 'removeapp':
       case 'removefile':
-        if (this.state.input.trim()) {
-          const value = this.state.input
-          this.props.updateValueTask(this.props.data, value)
+        if (`${input}`.trim()) {
+          updateValueTask(data, input)
           this.setState({
-            input: ''
+            input: '',
           })
         }
         break
@@ -182,17 +203,22 @@ class FleetsTaskItemList extends PureComponent {
    * @param {object} e
    */
   handleChangeInput = (e) => {
-    switch (this.props.data['PluginFlyvemdmPolicy.type']) {
+    const {
+      data,
+      updateValueTask,
+    } = this.props
+
+    switch (data['PluginFlyvemdmPolicy.type']) {
       case 'deployapp':
       case 'deployfile':
       case 'dropdown':
         if (e.target.value.trim()) {
-          this.props.updateValueTask(this.props.data, e.target.value)
+          updateValueTask(data, e.target.value)
         }
         break
       default:
         this.setState({
-          input: e.target.value
+          input: e.target.value,
         })
         break
     }
@@ -201,9 +227,8 @@ class FleetsTaskItemList extends PureComponent {
   /**
    * request update task value
    * @function handleBlurInput
-   * @param {object} e
    */
-  handleBlurInput = (e) => {
+  handleBlurInput = () => {
     this.handleActivePolicyToggle()
   }
 
@@ -213,7 +238,12 @@ class FleetsTaskItemList extends PureComponent {
    * @param {*} task
    */
   handleRemoveTask = (task) => {
-    this.props.removeValueTask(this.props.data, task)
+    const {
+      removeValueTask,
+      data,
+    } = this.props
+
+    removeValueTask(data, task)
   }
 
   /**
@@ -222,65 +252,69 @@ class FleetsTaskItemList extends PureComponent {
    * @return {array}
    */
   renderMinMaxVersion = () => {
-    let renderComponent = []
+    const { data } = this.props
 
-    if (this.props.data['PluginFlyvemdmPolicy.android_min_version'] !== 0) {
+    const renderComponent = []
+
+    if (data['PluginFlyvemdmPolicy.android_min_version'] !== 0) {
       renderComponent.push(
-        <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_android_min`}>
+        <React.Fragment key={`${data['PluginFlyvemdmPolicy.id']}_android_min`}>
           <span className="badge android">
             Android
             <span className="tooltip">
               {
-                `> ${this.props.data['PluginFlyvemdmPolicy.android_min_version']} `
+                `> ${data['PluginFlyvemdmPolicy.android_min_version']} `
               }
               {
-                this.props.data['PluginFlyvemdmPolicy.android_max_version'] !== 0 ?
-                  `< ${this.props.data['PluginFlyvemdmPolicy.android_max_version']} `
+                data['PluginFlyvemdmPolicy.android_max_version'] !== 0
+                  ? `< ${data['PluginFlyvemdmPolicy.android_max_version']} `
                   : ''
               }
             </span>
           </span>
-        </React.Fragment>
+        </React.Fragment>,
       )
     } else {
       renderComponent.push(
-        <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_android_min`}>
+        <React.Fragment key={`${data['PluginFlyvemdmPolicy.id']}_android_min`}>
           <span className="badge not_available">
             Android
             <span className="tooltip">
               {I18n.t('commons.not_available')}
             </span>
           </span>
-        </React.Fragment>
+        </React.Fragment>,
       )
     }
 
-    if (this.props.data['PluginFlyvemdmPolicy.apple_min_version'] !== 0) {
+    if (data['PluginFlyvemdmPolicy.apple_min_version'] !== 0) {
       renderComponent.push(
-        <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_apple_min`}>
+        <React.Fragment key={`${data['PluginFlyvemdmPolicy.id']}_apple_min`}>
           <span className="badge apple">
             iOS
             <span className="tooltip">
               {
-                `> ${this.props.data['PluginFlyvemdmPolicy.apple_min_version']} `
+                `> ${data['PluginFlyvemdmPolicy.apple_min_version']} `
               }
               {
-                this.props.data['PluginFlyvemdmPolicy.apple_max_version'] !== 0 ?
-                  `< ${this.props.data['PluginFlyvemdmPolicy.apple_max_version']} `
+                data['PluginFlyvemdmPolicy.apple_max_version'] !== 0
+                  ? `< ${data['PluginFlyvemdmPolicy.apple_max_version']} `
                   : ''
               }
             </span>
           </span>
-        </React.Fragment>
+        </React.Fragment>,
       )
     } else {
       renderComponent.push(
-        <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_apple_min`}>
+        <React.Fragment key={`${data['PluginFlyvemdmPolicy.id']}_apple_min`}>
           <span className="badge not_available">
             iOS
-          <span className="tooltip">{I18n.t('commons.not_available')}</span>
+            <span className="tooltip">
+              {I18n.t('commons.not_available')}
+            </span>
           </span>
-        </React.Fragment>
+        </React.Fragment>,
       )
     }
     return renderComponent
@@ -291,21 +325,36 @@ class FleetsTaskItemList extends PureComponent {
    * @function render
    */
   render() {
-    if (this.props.data === undefined) {
+    const {
+      data,
+      typeData,
+      value,
+    } = this.props
+    const {
+      alreadyAdded,
+      input,
+    } = this.state
+
+    if (data === undefined) {
       return (
-        <div className='files-list fleet-list' >
-          <div className='files-list__content'>
-            <div className='files-list__item'>
-              <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
-                <div className='files-list__content-text-primary'>
+        <div className="files-list fleet-list">
+          <div className="files-list__content">
+            <div className="files-list__item">
+              <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
+                <div className="files-list__content-text-primary">
                   {I18n.t('commons.not_available')}
                 </div>
               </div>
-              <div className='files-list__item-content-secondary'>
-                <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
+              <div className="files-list__item-content-secondary">
+                <div
+                  className="files-list__item-icon"
+                  onClick={this.handleAddedToggle}
+                  role="button"
+                  tabIndex="0"
+                >
                   <ReactWinJS.ToggleSwitch
                     className="files-list__content-text-primary"
-                    checked={this.state.alreadyAdded}
+                    checked={alreadyAdded}
                     onChange={() => this.handleAddedToggle}
                     labelOn=""
                     labelOff=""
@@ -316,363 +365,417 @@ class FleetsTaskItemList extends PureComponent {
           </div>
         </div>
       )
-    } else {
-      switch (this.props.data["PluginFlyvemdmPolicy.type"]) {
-        case "bool":
-          let value = this.props.data['PluginFlyvemdmPolicy.default_value']
-          if (typeof (value) !== "boolean") {
-            value = true
-          }
-          return (
-            <div className='files-list fleet-list'>
-              <div className='files-list__content'>
-                <div className='files-list__item'>
-                  <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`} >
-                    <div className='files-list__content-text-primary'>
-                      {this.props.data['PluginFlyvemdmPolicy.name']}
-                    </div>
-                    <div
-                      className={`files-list__item-list-field files-list__checkbox ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`}
-                      onClick={this.handleActivePolicyToggle}
+    }
+    switch (data['PluginFlyvemdmPolicy.type']) {
+      case 'bool':
+        return (
+          <div className="files-list fleet-list">
+            <div className="files-list__content">
+              <div className="files-list__item">
+                <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
+                  <div className="files-list__content-text-primary">
+                    {data['PluginFlyvemdmPolicy.name']}
+                  </div>
+                  <div
+                    className={`files-list__item-list-field files-list__checkbox ${alreadyAdded && 'files-list__item-list-field--active'}`}
+                    onClick={this.handleActivePolicyToggle}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    {
+                      value === 1
+                        ? <span className="selectIcon" />
+                        : <span className="unselectIcon" />
+                    }
+                  </div>
+                </div>
+                <div className="files-list__item-content-secondary version">
+                  {this.renderMinMaxVersion()}
+                </div>
+                <div className="files-list__item-content-secondary">
+                  <div
+                    className="files-list__item-icon"
+                    onClick={this.handleAddedToggle}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <ReactWinJS.ToggleSwitch
+                      className="files-list__content-text-primary"
+                      checked={alreadyAdded}
+                      onChange={() => this.handleAddedToggle}
+                      labelOn=""
+                      labelOff=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      case 'int':
+        return (
+          <div className="files-list fleet-list">
+            <div className="files-list__content">
+              <div className="files-list__item">
+                <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
+                  <div className="files-list__content-text-primary">
+                    {data['PluginFlyvemdmPolicy.name']}
+                  </div>
+                  <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
+                    <input
+                      type="number"
+                      className="win-textbox"
+                      placeholder={data['PluginFlyvemdmPolicy.name']}
+                      name={data['PluginFlyvemdmPolicy.id']}
+                      value={input}
+                      onChange={this.handleChangeInput}
+                      onBlur={this.handleBlurInput}
+                    />
+                  </div>
+                </div>
+                <div className="files-list__item-content-secondary version">
+                  {this.renderMinMaxVersion()}
+                </div>
+                <div className="files-list__item-content-secondary ">
+                  <div
+                    className="files-list__item-icon"
+                    onClick={this.handleAddedToggle}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <ReactWinJS.ToggleSwitch
+                      className="files-list__content-text-primary"
+                      checked={alreadyAdded}
+                      onChange={() => this.handleAddedToggle}
+                      labelOn=""
+                      labelOff=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      case 'dropdown':
+        return (
+          <div className="files-list fleet-list">
+            <div className="files-list__content">
+              <div className="files-list__item">
+                <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
+                  <div className="files-list__content-text-primary">
+                    {data['PluginFlyvemdmPolicy.name']}
+                  </div>
+                  <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
+                    <select
+                      name={data['PluginFlyvemdmPolicy.id']}
+                      value={value}
+                      onChange={this.handleChangeInput}
                     >
                       {
-                        this.props.value === 1 ?
-                          <span className='selectIcon'></span>
-                          : <span className='unselectIcon'></span>
+                        typeData.map(type => (
+                          <option
+                            key={type[0]}
+                            value={type[0]}
+                          >
+                            {type[1]}
+                          </option>
+                        ))
+                        }
+                    </select>
+                  </div>
+                </div>
+                <div className="files-list__item-content-secondary version">
+                  {this.renderMinMaxVersion()}
+                </div>
+                <div
+                  className="files-list__item-content-secondary"
+                  onClick={this.handleAddedToggle}
+                  role="button"
+                  tabIndex="0"
+                >
+                  <div className="files-list__item-icon">
+                    <ReactWinJS.ToggleSwitch
+                      className="files-list__content-text-primary"
+                      checked={alreadyAdded}
+                      onChange={() => this.handleAddedToggle}
+                      labelOn=""
+                      labelOff=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      case 'deployapp':
+        return (
+          <div className="files-list fleet-list">
+            <div className="files-list__content">
+              <div className="files-list__item">
+                <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
+                  <div className="files-list__content-text-primary">
+                    {data['PluginFlyvemdmPolicy.name']}
+                  </div>
+                  <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
+                    <select
+                      name={data['PluginFlyvemdmPolicy.id']}
+                      value={0}
+                      onChange={this.handleChangeInput}
+                    >
+                      <option value={0}>
+                        {I18n.t('commons.select_an_application')}
+                      </option>
+                      {
+                        typeData.map((type, index) => (
+                          <option
+                            key={`${type.id}_${index.toString()}`}
+                            value={type.id}
+                          >
+                            {type.alias}
+                          </option>
+                        ))
                       }
-                    </div>
+                    </select>
+                    <TasksDeployAppList
+                      data={value}
+                      typeData={typeData}
+                      removeTask={this.handleRemoveTask}
+                    />
                   </div>
-                  <div className='files-list__item-content-secondary version'>
-                      {this.renderMinMaxVersion()}
-                  </div>
-                  <div className='files-list__item-content-secondary'>
-                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
-                      <ReactWinJS.ToggleSwitch
-                        className="files-list__content-text-primary"
-                        checked={this.state.alreadyAdded}
-                        onChange={() => this.handleAddedToggle}
-                        labelOn=""
-                        labelOff=""
-                      />
-                    </div>
+                </div>
+                <div className="files-list__item-content-secondary version">
+                  {this.renderMinMaxVersion()}
+                </div>
+                <div className="files-list__item-content-secondary ">
+                  <div
+                    className="files-list__item-icon"
+                    onClick={this.handleAddedToggle}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <ReactWinJS.ToggleSwitch
+                      className="files-list__content-text-primary"
+                      checked={alreadyAdded}
+                      onChange={() => this.handleAddedToggle}
+                      labelOn=""
+                      labelOff=""
+                    />
                   </div>
                 </div>
               </div>
             </div>
-          )
-        case "int":
-          return (
-            <div className='files-list fleet-list'>
-              <div className='files-list__content'>
-                <div className='files-list__item'>
-                  <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
-                    <div className='files-list__content-text-primary'>
-                      {this.props.data['PluginFlyvemdmPolicy.name']}
-                    </div>
-                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
-                      <input
-                        type="number"
-                        className="win-textbox"
-                        placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
-                        name={this.props.data['PluginFlyvemdmPolicy.id']}
-                        value={this.state.input}
-                        onChange={this.handleChangeInput}
-                        onBlur={this.handleBlurInput}
-                      />
-                    </div>
+          </div>
+        )
+      case 'removeapp':
+        return (
+          <div className="files-list fleet-list">
+            <div className="files-list__content">
+              <div className="files-list__item">
+                <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
+                  <div className="files-list__content-text-primary">
+                    {data['PluginFlyvemdmPolicy.name']}
                   </div>
-                  <div className='files-list__item-content-secondary version'>
-                      {this.renderMinMaxVersion()}
+                  <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
+                    <input
+                      type="text"
+                      className="win-textbox"
+                      placeholder={I18n.t('commons.package_name')}
+                      name={data['PluginFlyvemdmPolicy.id']}
+                      value={input}
+                      onChange={this.handleChangeInput}
+                    />
+                    <span
+                      className="addIcon"
+                      style={{ padding: '0 10px', fontSize: '18px' }}
+                      onClick={this.handleBlurInput}
+                      role="button"
+                      tabIndex="0"
+                    />
+                    <TasksRemoveAppList
+                      data={value}
+                      removeTask={this.handleRemoveTask}
+                    />
                   </div>
-                  <div className='files-list__item-content-secondary '>
-                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
-                      <ReactWinJS.ToggleSwitch
-                        className="files-list__content-text-primary"
-                        checked={this.state.alreadyAdded}
-                        onChange={() => this.handleAddedToggle}
-                        labelOn=""
-                        labelOff=""
-                      />
-                    </div>
+                </div>
+                <div className="files-list__item-content-secondary version">
+                  {this.renderMinMaxVersion()}
+                </div>
+                <div className="files-list__item-content-secondary ">
+                  <div
+                    className="files-list__item-icon"
+                    onClick={this.handleAddedToggle}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <ReactWinJS.ToggleSwitch
+                      className="files-list__content-text-primary"
+                      checked={alreadyAdded}
+                      onChange={() => this.handleAddedToggle}
+                      labelOn=""
+                      labelOff=""
+                    />
                   </div>
                 </div>
               </div>
             </div>
-          )
-        case "dropdown":
-          return (
-            <div className='files-list fleet-list'>
-              <div className='files-list__content'>
-                <div className='files-list__item'>
-                  <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
-                    <div className='files-list__content-text-primary'>
-                      {this.props.data['PluginFlyvemdmPolicy.name']}
-                    </div>
-                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
-                      <select
-                        name={this.props.data['PluginFlyvemdmPolicy.id']}
-                        value={this.props.value}
-                        onChange={this.handleChangeInput}
-                      >
-                        {
-                          this.props.typeData.map((value, index) =>
+          </div>
+        )
+      case 'deployfile':
+        return (
+          <div className="files-list fleet-list">
+            <div className="files-list__content">
+              <div className="files-list__item">
+                <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
+                  <div className="files-list__content-text-primary">
+                    {data['PluginFlyvemdmPolicy.name']}
+                  </div>
+                  <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
+                    <select
+                      name={data['PluginFlyvemdmPolicy.id']}
+                      value={0}
+                      onChange={this.handleChangeInput}
+                    >
+                      <option value={0}>
+                        {I18n.t('commons.select_a_file')}
+                      </option>
+                      {
+                          typeData.map((type, index) => (
                             <option
-                              key={value[0]}
-                              value={value[0]}>
-                              {value[1]}
-                            </option>
-                          )
-                        }
-                      </select>
-                    </div>
-                  </div>
-                  <div className='files-list__item-content-secondary version'>
-                    {this.renderMinMaxVersion()}
-                  </div>
-                  <div className='files-list__item-content-secondary ' onClick={this.handleAddedToggle}>
-                    <div className='files-list__item-icon'>
-                      <ReactWinJS.ToggleSwitch
-                        className="files-list__content-text-primary"
-                        checked={this.state.alreadyAdded}
-                        onChange={() => this.handleAddedToggle}
-                        labelOn=""
-                        labelOff=""
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
-        case "deployapp":
-          return (
-            <div className='files-list fleet-list'>
-              <div className='files-list__content'>
-                <div className='files-list__item'>
-                  <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
-                    <div className='files-list__content-text-primary'>
-                        {this.props.data['PluginFlyvemdmPolicy.name']}
-                    </div>
-                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
-                      <select
-                        name={this.props.data['PluginFlyvemdmPolicy.id']}
-                        value = {0}
-                        onChange={this.handleChangeInput}
-                      >
-                        <option value={0}>
-                          {I18n.t('commons.select_an_application')}
-                        </option>
-                        {
-                          this.props.typeData.map((value, index) =>
-                            <option
-                              key={`${value['id']}_${index}`}
-                              value={value['id']}
+                              key={`${type.id}_${index.toString()}`}
+                              value={type.id}
                             >
-                              {value["alias"]}
+                              {type.name}
                             </option>
-                          )
+                          ))
                         }
-                      </select>
-                      <TasksDeployAppList
-                        data={this.props.value}
-                        typeData={this.props.typeData}
-                        removeTask={this.handleRemoveTask}
-                      />
-                    </div>
+                    </select>
+                    <TasksDeployFileList
+                      data={value}
+                      typeData={typeData}
+                      removeTask={this.handleRemoveTask}
+                    />
                   </div>
-                  <div className='files-list__item-content-secondary version'>
-                    {this.renderMinMaxVersion()}
-                  </div>
-                  <div className='files-list__item-content-secondary '>
-                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
-                      <ReactWinJS.ToggleSwitch
-                        className="files-list__content-text-primary"
-                        checked={this.state.alreadyAdded}
-                        onChange={() => this.handleAddedToggle}
-                        labelOn=""
-                        labelOff=""
-                      />
-                    </div>
+                </div>
+                <div className="files-list__item-content-secondary version">
+                  {this.renderMinMaxVersion()}
+                </div>
+                <div className="files-list__item-content-secondary ">
+                  <div
+                    className="item-icon"
+                    onClick={this.handleAddedToggle}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <ReactWinJS.ToggleSwitch
+                      className="files-list__content-text-primary"
+                      checked={alreadyAdded}
+                      onChange={() => this.handleAddedToggle}
+                      labelOn=""
+                      labelOff=""
+                    />
                   </div>
                 </div>
               </div>
             </div>
-          )
-        case "removeapp":
-          return (
-            <div className='files-list fleet-list'>
-              <div className='files-list__content'>
-                <div className='files-list__item'>
-                  <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
-                    <div className='files-list__content-text-primary'>
-                      {this.props.data['PluginFlyvemdmPolicy.name']}
-                    </div>
-                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
-                      <input
-                        type="text"
-                        className="win-textbox"
-                        placeholder={I18n.t('commons.package_name')}
-                        name={this.props.data['PluginFlyvemdmPolicy.id']}
-                        value={this.state.input}
-                        onChange={this.handleChangeInput}
-                      />
-                      <span
-                        className="addIcon"
-                        style={{ padding: '0 10px', fontSize: '18px' }}
-                        onClick={this.handleBlurInput}
-                      />
-                      <TasksRemoveAppList
-                        data={this.props.value}
-                        removeTask={this.handleRemoveTask}
-                      />
-                    </div>
+          </div>
+        )
+      case 'removefile':
+        return (
+          <div className="files-list fleet-list">
+            <div className="files-list__content">
+              <div className="files-list__item">
+                <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
+                  <div className="files-list__content-text-primary">
+                    {data['PluginFlyvemdmPolicy.name']}
                   </div>
-                  <div className='files-list__item-content-secondary version'>
-                    {this.renderMinMaxVersion()}
+                  <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
+                    <input
+                      type="text"
+                      className="win-textbox"
+                      placeholder={I18n.t('files.input_name')}
+                      name={data['PluginFlyvemdmPolicy.id']}
+                      value={input}
+                      onChange={this.handleChangeInput}
+                    />
+                    <span
+                      className="addIcon"
+                      style={{ padding: '0 10px', fontSize: '18px' }}
+                      onClick={this.handleBlurInput}
+                      role="button"
+                      tabIndex="0"
+                    />
+                    <TasksRemoveFileList
+                      data={value}
+                      removeTask={this.handleRemoveTask}
+                    />
                   </div>
-                  <div className='files-list__item-content-secondary '>
-                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
-                      <ReactWinJS.ToggleSwitch
-                        className="files-list__content-text-primary"
-                        checked={this.state.alreadyAdded}
-                        onChange={() => this.handleAddedToggle}
-                        labelOn=""
-                        labelOff=""
-                      />
-                    </div>
+                </div>
+                <div className="files-list__item-content-secondary version">
+                  {this.renderMinMaxVersion()}
+                </div>
+                <div className="files-list__item-content-secondary ">
+                  <div
+                    className="files-list__item-icon"
+                    onClick={this.handleAddedToggle}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <ReactWinJS.ToggleSwitch
+                      className="files-list__content-text-primary"
+                      checked={alreadyAdded}
+                      onChange={() => this.handleAddedToggle}
+                      labelOn=""
+                      labelOff=""
+                    />
                   </div>
                 </div>
               </div>
             </div>
-          )
-        case "deployfile":
-          return (
-            <div className='files-list fleet-list'>
-              <div className='files-list__content'>
-                <div className='files-list__item'>
-                  <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
-                    <div className='files-list__content-text-primary'>
-                      {this.props.data['PluginFlyvemdmPolicy.name']}
-                    </div>
-                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
-                      <select
-                        name={this.props.data['PluginFlyvemdmPolicy.id']}
-                        value={0}
-                        onChange={this.handleChangeInput}
-                      >
-                        <option value={0}>
-                          {I18n.t('commons.select_a_file')}
-                        </option>
-                        {
-                          this.props.typeData.map((value, index) =>
-                            <option
-                              key={`${value['id']}_${index}`}
-                              value={value['id']}>
-                              {value["name"]}
-                            </option>
-                          )
-                        }
-                      </select>
-                      <TasksDeployFileList
-                        data={this.props.value}
-                        typeData={this.props.typeData}
-                        removeTask={this.handleRemoveTask}
-                      />
-                    </div>
+          </div>
+        )
+      default:
+        return (
+          <div className="files-list fleet-list">
+            <div className="files-list__content">
+              <div className="files-list__item">
+                <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
+                  <div className="files-list__content-text-primary">
+                    {I18n.t('commons.not_available')}
                   </div>
-                  <div className='files-list__item-content-secondary version'>
-                    {this.renderMinMaxVersion()}
-                  </div>
-                  <div className='files-list__item-content-secondary '>
-                    <div className='item-icon' onClick={this.handleAddedToggle}>
-                      <ReactWinJS.ToggleSwitch
-                        className="files-list__content-text-primary"
-                        checked={this.state.alreadyAdded}
-                        onChange={() => this.handleAddedToggle}
-                        labelOn=""
-                        labelOff=""
-                      />
-                    </div>
+                </div>
+                <div className="files-list__item-content-secondary ">
+                  <div className="files-list__item-icon">
+                    <ReactWinJS.ToggleSwitch
+                      className="files-list__content-text-primary"
+                      checked={false}
+                      disabled
+                      labelOn=""
+                      labelOff=""
+                    />
                   </div>
                 </div>
               </div>
             </div>
-          )
-        case "removefile":
-          return (
-            <div className='files-list fleet-list'>
-              <div className='files-list__content'>
-                <div className='files-list__item'>
-                  <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
-                    <div className='files-list__content-text-primary'>
-                      {this.props.data['PluginFlyvemdmPolicy.name']}
-                    </div>
-                    <div className={`files-list__item-list-field ${this.state.alreadyAdded && 'files-list__item-list-field--active'}`} >
-                      <input
-                        type="text"
-                        className="win-textbox"
-                        placeholder={I18n.t('files.input_name')}
-                        name={this.props.data['PluginFlyvemdmPolicy.id']}
-                        value={this.state.input}
-                        onChange={this.handleChangeInput}
-                      />
-                      <span
-                        className="addIcon"
-                        style={{ padding: '0 10px', fontSize: '18px' }}
-                        onClick={this.handleBlurInput}
-                      />
-                      <TasksRemoveFileList
-                        data={this.props.value}
-                        removeTask={this.handleRemoveTask}
-                      />
-                    </div>
-                  </div>
-                  <div className='files-list__item-content-secondary version'>
-                    {this.renderMinMaxVersion()}
-                  </div>
-                  <div className='files-list__item-content-secondary '>
-                    <div className='files-list__item-icon' onClick={this.handleAddedToggle}>
-                      <ReactWinJS.ToggleSwitch
-                        className="files-list__content-text-primary"
-                        checked={this.state.alreadyAdded}
-                        onChange={() => this.handleAddedToggle}
-                        labelOn=""
-                        labelOff=""
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
-        default:
-          return (
-            <div className='files-list fleet-list' >
-              <div className='files-list__content'>
-                <div className='files-list__item'>
-                  <div className={`files-list__item-content-primary ${this.state.alreadyAdded || 'files-list__item--deactive'}`}>
-                    <div className='files-list__content-text-primary'>
-                      {I18n.t('commons.not_available')}
-                    </div>
-                  </div>
-                  <div className='files-list__item-content-secondary '>
-                    <div className='files-list__item-icon'>
-                      <ReactWinJS.ToggleSwitch
-                        className="files-list__content-text-primary"
-                        checked={false}
-                        disabled
-                        labelOn=""
-                        labelOff=""
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
-      }
+          </div>
+        )
     }
   }
+}
+
+FleetsTaskItemList.defaultProps = {
+  typeData: null,
+  value: null,
+}
+
+FleetsTaskItemList.propTypes = {
+  removeValueTask: PropTypes.func.isRequired,
+  updateValueTask: PropTypes.func.isRequired,
+  addTask: PropTypes.func.isRequired,
+  removeTask: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+  fleetHaveTask: PropTypes.bool.isRequired,
+  typeData: PropTypes.any,
+  value: PropTypes.any,
 }
 
 export default FleetsTaskItemList

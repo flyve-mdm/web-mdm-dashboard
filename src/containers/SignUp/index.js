@@ -28,53 +28,49 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  Link
+  Link,
 } from 'react-router-dom'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
+import {
+  bindActionCreators,
+} from 'redux'
+import {
+  connect,
+} from 'react-redux'
 import Loading from '../../components/Loading'
 import ConstructInputs from '../../components/Forms'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import {
   changeNotificationMessage,
   fetchCaptcha,
-  fetchSignUp
+  fetchSignUp,
 } from '../../store/authentication/actions'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
-import {
-  buildDataArray,
-  changeState,
-  handleSubmitForm
-} from './actions'
 import publicURL from '../../shared/publicURL'
+import ErrorValidation from '../../components/ErrorValidation'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
     fetchCaptcha: bindActionCreators(fetchCaptcha, dispatch),
     fetchSignUp: bindActionCreators(fetchSignUp, dispatch),
-    changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch)
+    changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
     isLoading: state.ui.loading,
     type: state.ui.notification.type,
     captcha: state.auth.captcha,
-    configurationPassword: state.auth.configurationPassword
+    configurationPassword: state.auth.configurationPassword,
   }
 }
 
@@ -89,26 +85,11 @@ class SignUp extends PureComponent {
     super(props)
     this.state = {
       email: '',
-      login: '',
       realName: '',
       password: '',
       passwordConfirmation: '',
       captchaValue: '',
       forceValidation: false,
-    }
-
-    this.handleSubmitForm = event => handleSubmitForm(this, event)
-    this.changeState = () => changeState(this)
-    this.buildDataArray = () => buildDataArray(this, I18n)
-  }
-
-  /**
-   * redirect to '/validateAccount' when the registration is success
-   * @function componentDidUpdate
-   */
-  componentDidUpdate() {
-    if (this.props.type === 'success') {
-      this.props.history.push(`${publicURL}/validateAccount`)
     }
   }
 
@@ -117,7 +98,201 @@ class SignUp extends PureComponent {
    * @function componentDidMount
    */
   componentDidMount() {
-    this.props.actions.fetchCaptcha()
+    const { actions } = this.props
+    actions.fetchCaptcha()
+  }
+
+  /**
+   * redirect to '/validateAccount' when the registration is success
+   * @function componentDidUpdate
+   */
+  componentDidUpdate() {
+    const {
+      type,
+      history,
+    } = this.props
+
+    if (type === 'success') {
+      history.push(`${publicURL}/validateAccount`)
+    }
+  }
+
+  /**
+   * Handle change state
+   * @function changeState
+   * @return {function}
+   */
+  changeState = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
+  }
+
+  /**
+   * Build the array to generate the form
+   * @function buildDataArray
+   * @return {array}
+   */
+  buildDataArray = () => {
+    const {
+      email,
+      forceValidation,
+      realName,
+      password,
+      configurationPassword,
+      passwordConfirmation,
+      captchaValue,
+    } = this.state
+
+    const dataArray = {
+      personalInformation: [
+        [{
+          label: I18n.t('commons.email'),
+          type: 'text',
+          name: 'email',
+          value: email,
+          placeholder: I18n.t('commons.email'),
+          function: this.changeState,
+          disabled: false,
+          style: {
+            width: 340,
+          },
+          parametersToEvaluate: {
+            isRequired: true,
+            isEmail: true,
+          },
+          forceValidation,
+        },
+        {
+          label: I18n.t('create_account.full_name'),
+          type: 'text',
+          name: 'realName',
+          value: realName,
+          placeholder: I18n.t('create_account.full_name'),
+          function: this.changeState,
+          disabled: false,
+          style: {
+            width: 340,
+          },
+          parametersToEvaluate: {
+            isRequired: true,
+          },
+          forceValidation,
+        },
+        ],
+      ],
+      passwordInformation: [
+        [{
+          label: I18n.t('commons.password'),
+          type: 'password',
+          name: 'password',
+          value: password,
+          placeholder: I18n.t('commons.password'),
+          function: this.changeState,
+          disabled: false,
+          style: {
+            width: 340,
+          },
+          parametersToEvaluate: {
+            isRequired: true,
+            ...configurationPassword,
+          },
+          forceValidation,
+        },
+        {
+          label: I18n.t('commons.password_confirmation'),
+          type: 'password',
+          name: 'passwordConfirmation',
+          value: passwordConfirmation,
+          placeholder: I18n.t('commons.password_confirmation'),
+          function: this.changeState,
+          disabled: false,
+          style: {
+            width: 340,
+          },
+          parametersToEvaluate: {
+            isRequired: true,
+            ...configurationPassword,
+            isEqualTo: {
+              value: password,
+              message: I18n.t('commons.passwords_not_match'),
+            },
+          },
+          forceValidation,
+        },
+        ],
+      ],
+      captchaInformation: [
+        [{
+          label: I18n.t('create_account.enter_code_image'),
+          type: 'text',
+          name: 'captchaValue',
+          value: captchaValue,
+          placeholder: null,
+          function: this.changeState,
+          disabled: false,
+          style: {
+            width: 340,
+          },
+          parametersToEvaluate: {
+            isRequired: true,
+          },
+          forceValidation,
+        }],
+      ],
+    }
+    return dataArray
+  }
+
+  /**
+   * Handle submit form
+   * @function handleSubmitForm
+   * @param {*} event
+   */
+  handleSubmitForm = (event) => {
+    event.preventDefault()
+
+    const {
+      email,
+      realName,
+      password,
+      passwordConfirmation,
+      captchaValue,
+    } = this.state
+    const {
+      actions,
+      captcha,
+    } = this.props
+
+    const user = this.buildDataArray()
+
+    let isCorrect = true
+
+    for (const key in user) {
+      if (Object.prototype.hasOwnProperty.call(user, key)) {
+        const elements = user[key]
+        for (let index = 0; index < elements[0].length; index += 1) {
+          const element = elements[0][index]
+          if (!ErrorValidation.validation(element.parametersToEvaluate, element.value).isCorrect) { isCorrect = false }
+        }
+      }
+    }
+
+    if (isCorrect) {
+      actions.fetchSignUp({
+        name: email,
+        realname: realName,
+        password,
+        password2: passwordConfirmation,
+        _useremails: [email],
+        _plugin_flyvemdmdemo_captchas_id: captcha.id,
+        _answer: captchaValue,
+      })
+    } else {
+      this.setState({
+        forceValidation: true,
+      })
+    }
   }
 
   /**
@@ -125,34 +300,51 @@ class SignUp extends PureComponent {
    * @function render
    */
   render() {
+    const {
+      isLoading,
+      captcha,
+      actions,
+    } = this.props
+
     let renderComponent
-    if (this.props.isLoading) {
+    if (isLoading) {
       renderComponent = (
         <div style={{ height: '140px' }}>
-          <Loading message={`${I18n.t('commons.loading')}...`}/>
+          <Loading message={`${I18n.t('commons.loading')}...`} />
         </div>
       )
     } else {
       const user = this.buildDataArray()
       renderComponent = (
         <React.Fragment>
-          <h2 style={{textAlign: 'center'}}>
+          <h2 style={{ textAlign: 'center' }}>
             { I18n.t('create_account.title') }
           </h2>
 
-          <form onSubmit={(event) => this.handleSubmitForm(event)}>
+          <form onSubmit={event => this.handleSubmitForm(event)}>
             <ConstructInputs data={user.personalInformation} />
             <ConstructInputs data={user.passwordInformation} />
-            <ConstructInputs data={user.captchaInformation } />
+            <ConstructInputs data={user.captchaInformation} />
             <div className="authentication__captcha-img">
-              <img src={this.props.captcha ? this.props.captcha.img : null } alt='Captcha' />
+              <img src={captcha.img} alt="Captcha" />
             </div>
-            <div className="authentication__captcha-refresh" onClick={this.props.actions.fetchCaptcha} >
+            <div
+              className="authentication__captcha-refresh"
+              onClick={actions.fetchCaptcha}
+              role="button"
+              tabIndex="0"
+            >
               <span className="refreshIcon" />
-              <span>{I18n.t('login.refresh_captcha')}</span>
+              <span>
+                {I18n.t('login.refresh_captcha')}
+              </span>
             </div>
-            <div style={{textAlign: 'center'}}>
-              <button className='btn btn--primary' style={{ margin: "20px" }}>
+            <div style={{ textAlign: 'center' }}>
+              <button
+                className="btn btn--primary"
+                style={{ margin: '20px' }}
+                type="submit"
+              >
                 { I18n.t('commons.register') }
               </button>
               <p>
@@ -173,17 +365,23 @@ class SignUp extends PureComponent {
 }
 
 SignUp.defaultProps = {
-  captcha: {}
+  captcha: {
+    img: null,
+  },
+  type: null,
 }
 
 SignUp.propTypes = {
   history: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  captcha: PropTypes.object,
+  type: PropTypes.string,
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withAuthenticationLayout(SignUp, {
-  contentCenter: true
+  contentCenter: true,
 }))

@@ -307,11 +307,11 @@ export const fetchResetPassword = ({
           })
         }
       })
-      .then(([response, json]) => {
+      .then((response) => {
         dispatch(uiTransactionFinish())
         dispatch(changeNotificationMessage({
-          title: appConfig.APP_NAME,
-          body: json[0],
+          title: appConfig.appName,
+          body: response[0],
           type: 'success'
         }))
       })

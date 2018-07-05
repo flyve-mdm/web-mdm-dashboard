@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import toDateInputValue from '../index.js'
+import toDateInputValue from '../index'
 
 describe('toDateInputValue', () => {
   it('should convert date correctly', () => {

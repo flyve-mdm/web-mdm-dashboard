@@ -30,7 +30,7 @@
 
 /** Import dependencies */
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
 
 /**
@@ -38,7 +38,7 @@ import {
  * @param {int} id Status code authentication
  * @returns {string} string associated with a staus code
  */
-const authtype = id => {
+const authtype = (id) => {
   switch (id) {
     case 1:
       return I18n.t('authtype.glpi_internal_database')

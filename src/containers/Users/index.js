@@ -28,32 +28,33 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
+import PropTypes from 'prop-types'
+import {
+  bindActionCreators,
+} from 'redux'
+import {
+  connect,
+} from 'react-redux'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import UsersList from './components/UsersList'
 import {
-  uiSetNotification
+  uiSetNotification,
 } from '../../store/ui/actions'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
 
 function mapDispatchToProps(dispatch) {
   const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
   }
   return {
-    actions
+    actions,
   }
 }
 
@@ -67,38 +68,14 @@ class Users extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      icon: "peopleIcon",
+      icon: 'peopleIcon',
       mode: getMode(),
       itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
       selectionMode: false,
       action: null,
-      selectedItems: []
+      selectedItems: [],
     }
     window.addEventListener('resize', this.handleResize)
-  }
-
-  /**
-   * Change state according to the resolution of the screen
-   * @function handleResize
-   */
-  handleResize = () => {
-    let nextMode = getMode()
-
-    if (nextMode === 'small') {
-      this.setState({
-        itemListPaneWidth: '100%'
-      })
-    } else {
-      this.setState({
-        itemListPaneWidth: 320
-      })
-    }
-
-    if (this.state.mode !== nextMode) {
-      this.setState({
-        mode: nextMode
-      })
-    }
   }
 
   /**
@@ -120,12 +97,37 @@ class Users extends PureComponent {
     if (nextProps.history.location.pathname === `${publicURL}/app/users` && prevState.selectedItems.length > 0 && prevState.selectionMode === false) {
       return {
         ...prevState,
-        selectedItems: []
+        selectedItems: [],
       }
+    }
+    return {
+      ...prevState,
+    }
+  }
+
+  /**
+   * Change state according to the resolution of the screen
+   * @function handleResize
+   */
+  handleResize = () => {
+    const { mode } = this.state
+
+    const nextMode = getMode()
+
+    if (nextMode === 'small') {
+      this.setState({
+        itemListPaneWidth: '100%',
+      })
     } else {
-      return {
-        ...prevState
-      }
+      this.setState({
+        itemListPaneWidth: 320,
+      })
+    }
+
+    if (mode !== nextMode) {
+      this.setState({
+        mode: nextMode,
+      })
     }
   }
 
@@ -135,18 +137,32 @@ class Users extends PureComponent {
    * @return {object}
    */
   propsData = () => {
+    const {
+      icon,
+      selectionMode,
+      selectedItems,
+      action,
+    } = this.state
+
+    const {
+      actions,
+      history,
+      glpi,
+      handleMessage,
+    } = this.props
+
     return {
-      icon: this.state.icon,
+      icon,
+      selectionMode,
+      selectedItems,
+      action,
+      history,
+      glpi,
+      handleMessage,
       changeSelectionMode: this.changeSelectionMode,
-      selectionMode: this.state.selectionMode,
-      selectedItems: this.state.selectedItems,
       changeSelectedItems: this.changeSelectedItems,
-      action: this.state.action,
+      setNotification: actions.setNotification,
       changeAction: this.changeAction,
-      setNotification: this.props.actions.setNotification,
-      history: this.props.history,
-      glpi: this.props.glpi,
-      handleMessage: this.props.handleMessage
     }
   }
 
@@ -156,7 +172,7 @@ class Users extends PureComponent {
    * @param {array} selectedItems
    */
   changeSelectedItems = selectedItems => this.setState({
-    selectedItems
+    selectedItems,
   })
 
   /**
@@ -165,7 +181,7 @@ class Users extends PureComponent {
    * @param {string} action
    */
   changeAction = action => this.setState({
-    action
+    action,
   })
 
   /**
@@ -174,7 +190,7 @@ class Users extends PureComponent {
    * @param {boolean} selectionMode
    */
   changeSelectionMode = selectionMode => this.setState({
-    selectionMode
+    selectionMode,
   })
 
   /**
@@ -183,20 +199,27 @@ class Users extends PureComponent {
    * @return {object}
    */
   stylesList = () => {
-    let styles = {
-      width: this.state.itemListPaneWidth
+    const {
+      selectedItems,
+      selectionMode,
+      itemListPaneWidth,
+      mode,
+    } = this.state
+    const { history } = this.props
+
+    const styles = {
+      width: itemListPaneWidth,
     }
 
-    if (this.state.mode === 'small') {
-      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/users`) ||
-        this.props.history.location.pathname === `${publicURL}/app/users` ||
-        (this.props.history.location.pathname === `${publicURL}/app/users` &&
-          this.state.selectionMode)) {
+    if (mode === 'small') {
+      if ((selectedItems.length === 0 && history.location.pathname === `${publicURL}/app/users`)
+        || history.location.pathname === `${publicURL}/app/users`
+        || (history.location.pathname === `${publicURL}/app/users`
+          && selectionMode)) {
         styles.display = 'inline-block'
       } else {
         styles.display = 'none'
       }
-
     } else {
       styles.display = 'inline-block'
     }
@@ -210,22 +233,29 @@ class Users extends PureComponent {
    * @return {object}
    */
   stylesContent = () => {
-    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
-    let styles = {
+    const {
+      itemListPaneWidth,
+      selectedItems,
+      selectionMode,
+      mode,
+    } = this.state
+    const { history } = this.props
+
+    const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
+    const styles = {
       width: calc100PercentMinus(validWidth),
-      height: '100%'
+      height: '100%',
     }
 
-    if (this.state.mode === 'small') {
-      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/users`) ||
-        this.props.history.location.pathname === `${publicURL}/app/users` ||
-        (this.props.history.location.pathname === `${publicURL}/app/users` &&
-          this.state.selectionMode)) {
+    if (mode === 'small') {
+      if ((selectedItems.length === 0 && history.location.pathname === `${publicURL}/app/users`)
+        || history.location.pathname === `${publicURL}/app/users`
+        || (history.location.pathname === `${publicURL}/app/users`
+          && selectionMode)) {
         styles.display = 'none'
       } else {
         styles.display = 'inline-flex'
       }
-
     } else {
       styles.display = 'inline-flex'
     }
@@ -238,20 +268,28 @@ class Users extends PureComponent {
    * @function render
    */
   render() {
+    const { match } = this.props
+
     return (
       <div className="flex-block flex-block--with-scroll">
-        <div className="list-pane flex-block__list" style={{...this.stylesList()}}>
+        <div
+          className="list-pane flex-block__list"
+          style={{ ...this.stylesList() }}
+        >
           <UsersList
             key="list"
             {...this.propsData()}
           />
         </div>
-        <div className="flex-block__content" style={{...this.stylesContent()}}>
+        <div
+          className="flex-block__content"
+          style={{ ...this.stylesContent() }}
+        >
           <GenerateRoutes
             key="content"
             routes={routes}
-            rootPath={this.props.match.url}
-            data={{...this.propsData()}}
+            rootPath={match.url}
+            data={{ ...this.propsData() }}
           />
         </div>
       </div>
@@ -259,7 +297,15 @@ class Users extends PureComponent {
   }
 }
 
+Users.propTypes = {
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  glpi: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
+}
+
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withGLPI(withHandleMessages(Users)))

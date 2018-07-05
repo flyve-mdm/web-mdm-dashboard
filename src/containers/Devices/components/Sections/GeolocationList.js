@@ -28,12 +28,12 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  I18n
-} from "react-i18nify"
+  I18n,
+} from 'react-i18nify'
 
 /**
  * @class GeolocationList
@@ -41,25 +41,42 @@ import {
  */
 class GeolocationList extends PureComponent {
   render() {
+    const {
+      locations,
+      goToLocation,
+      showLocation,
+      markers,
+    } = this.props
+
     let renderList
-    if (this.props.locations.length > 0) {
-      renderList = this.props.locations.map((location, index) => {
-        return (
-          <div key={`location-${index}`} style={{paddingLeft:5, cursor: 'pointer'}} onClick={() => this.props.goToLocation(location)}>
+    if (locations.length > 0) {
+      renderList = locations.map((location, index) => (
+        <div
+          key={`location-${index.toString()}`}
+          style={{ paddingLeft: 5, cursor: 'pointer' }}
+          onClick={() => goToLocation(location)}
+          role="button"
+          tabIndex="0"
+        >
+          <label
+            style={{ cursor: 'pointer' }}
+            htmlFor={`location-${index.toString()}`}
+          >
             <input
+              id={`location-${index.toString()}`}
               type="checkbox"
               className="win-checkbox"
-              style={{width: 'auto', cursor: 'pointer'}}
-              onChange={() => this.props.showLocation(location)}
-              checked={(this.props.markers.indexOf(location) !== -1)}
+              style={{ width: 'auto', cursor: 'pointer' }}
+              onChange={() => showLocation(location)}
+              checked={(markers.indexOf(location) !== -1)}
             />
-            <label style={{cursor: 'pointer'}}>{ location.date }</label>
-          </div>
-        )
-      })
+            { location.date }
+          </label>
+        </div>
+      ))
     } else {
       renderList = (
-        <p style={{ color: 'grey', marginLeft:5}}>
+        <p style={{ color: 'grey', marginLeft: 5 }}>
           {I18n.t('devices.geolocation.no_locations')}
         </p>
       )
@@ -70,14 +87,14 @@ class GeolocationList extends PureComponent {
 /** GeolocationList defaultProps */
 GeolocationList.defaultProps = {
   locations: [],
-  markers: []
+  markers: [],
 }
 /** GeolocationList propTypes */
 GeolocationList.propTypes = {
   locations: PropTypes.array,
-  showLocation: PropTypes.func,
+  showLocation: PropTypes.func.isRequired,
   markers: PropTypes.array,
-  goToLocation: PropTypes.func.isRequired
+  goToLocation: PropTypes.func.isRequired,
 }
 
 export default GeolocationList

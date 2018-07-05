@@ -36,7 +36,7 @@ import PropTypes from 'prop-types'
  * @class IconItemList
  * @extends PureComponent
  */
-export default class IconItemList extends PureComponent {
+class IconItemList extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
@@ -160,3 +160,5 @@ IconItemList.propTypes = {
   imgClick: PropTypes.func,
   imgClass: PropTypes.string
 }
+
+export default IconItemList

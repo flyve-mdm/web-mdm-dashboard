@@ -28,36 +28,41 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import {
+  I18n,
+} from 'react-i18nify'
 import ConstructInputs from '../../../components/Forms'
 import ContentPane from '../../../components/ContentPane'
 import validateData from '../../../shared/validateData'
 import IconItemList from '../../../components/IconItemList'
 import {
-  usersScheme
+  usersScheme,
 } from '../../../components/Forms/Schemas'
 import Loading from '../../../components/Loading'
 import ErrorValidation from '../../../components/ErrorValidation'
-import {
-  I18n
-} from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 import getID from '../../../shared/getID'
+import authtype from '../../../shared/authtype'
 
 /**
  * Component with the user edit form
  * @class UsersEditOne
  * @extends PureComponent
  */
-export default class UsersEditOne extends PureComponent {
+class UsersEditOne extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
+    const {
+      history,
+    } = this.props
+
     this.state = {
       isLoading: true,
-      id: getID(this.props.history.location.pathname),
+      id: getID(history.location.pathname),
       login: undefined,
       firstName: undefined,
       realName: undefined,
@@ -65,12 +70,8 @@ export default class UsersEditOne extends PureComponent {
       mobilePhone: undefined,
       phone2: undefined,
       administrativeNumber: undefined,
-      lastLogin: undefined,
-      created: undefined,
-      modified: undefined,
       emails: undefined,
       imageProfile: undefined,
-      authentication: undefined,
       password: undefined,
       passwordConfirmation: undefined,
       category: undefined,
@@ -81,7 +82,11 @@ export default class UsersEditOne extends PureComponent {
       location: undefined,
       defaultProfile: undefined,
       validSince: undefined,
-      validUntil: undefined
+      validUntil: undefined,
+      lastLogin: undefined,
+      created: undefined,
+      modified: undefined,
+      authentication: undefined,
     }
   }
 
@@ -99,121 +104,120 @@ export default class UsersEditOne extends PureComponent {
    */
   handleRefresh = () => {
     this.setState({
-      isLoading: true
+      isLoading: true,
     }, async () => {
+      const { glpi } = this.props
+      const { id } = this.state
+
       try {
-        const response = await this.props.glpi.getAnItem({
+        const myUser = await glpi.getAnItem({
           itemtype: itemtype.User,
-          id: this.state.id
+          id,
         })
-        const myEmails = await this.props.glpi.getSubItems({
+
+        const myEmails = await glpi.getSubItems({
           itemtype: itemtype.User,
-          id: this.state.id,
-          subItemtype: 'UserEmail'
+          id,
+          subItemtype: 'UserEmail',
         })
-        const {
-          cfg_glpi
-        } = await this.props.glpi.getGlpiConfig()
+        const { cfg_glpi: cfgGlpi } = await glpi.getGlpiConfig()
 
         const parametersToEvaluate = {
-          minimunLength: cfg_glpi.password_min_length,
-          needDigit: cfg_glpi.password_need_number,
-          needLowercaseCharacter: cfg_glpi.password_need_letter,
-          needUppercaseCharacter: cfg_glpi.password_need_caps,
-          needSymbol: cfg_glpi.password_need_symbol
+          minimunLength: cfgGlpi.password_min_length,
+          needDigit: cfgGlpi.password_need_number,
+          needLowercaseCharacter: cfgGlpi.password_need_letter,
+          needUppercaseCharacter: cfgGlpi.password_need_caps,
+          needSymbol: cfgGlpi.password_need_symbol,
         }
         this.setState({
           isLoading: false,
           parametersToEvaluate,
-          login: validateData(response.name),
-          firstName: validateData(response.firstname),
-          realName: validateData(response.realname),
-          phone: validateData(response.phone),
-          mobilePhone: validateData(response.mobile),
-          phone2: validateData(response.phone2),
-          administrativeNumber: validateData(response.registration_number),
-          lastLogin: validateData(response.last_login),
-          created: validateData(response.date_creation),
-          modified: validateData(response.date_mod),
-          currentEmails: myEmails.map(a => ({ ...a
-          })),
+          login: myUser.name,
+          firstName: validateData(myUser.firstname),
+          realName: validateData(myUser.realname),
+          phone: validateData(myUser.phone),
+          mobilePhone: validateData(myUser.mobile),
+          phone2: validateData(myUser.phone2),
+          administrativeNumber: validateData(myUser.registration_number),
+          currentEmails: myEmails.map(a => ({ ...a })),
           emails: validateData(myEmails, []),
-          imageProfile: validateData(response.picture, "profile.png"),
-          authentication: 'GLPI internal database',
+          imageProfile: validateData(myUser.picture, 'profile.png'),
+          comments: validateData(myUser.comment, ''),
           password: '',
           passwordConfirmation: '',
+          lastLogin: myUser.last_login,
+          created: myUser.date_creation,
+          modified: myUser.date_mod,
+          authentication: authtype(myUser.authtype),
           category: {
-            value: validateData(response.usercategories_id),
+            value: validateData(myUser.usercategories_id),
             request: {
               params: {
                 itemtype: itemtype.UserCategory,
                 options: {
                   range: '0-200',
-                  forcedisplay: [2]
-                }
+                  forcedisplay: [2],
+                },
               },
               method: 'searchItems',
               content: '1',
-              value: '2'
-            }
+              value: '2',
+            },
           },
           defaultEntity: {
-            value: validateData(response.entities_id),
+            value: validateData(myUser.entities_id),
             request: {
               params: {},
               method: 'getMyEntities',
               content: 'name',
-              value: 'id'
-            }
+              value: 'id',
+            },
           },
-          comments: '',
           typeImageProfile: 'file',
           title: {
-            value: validateData(response.usertitles_id),
+            value: validateData(myUser.usertitles_id),
             request: {
               params: {
                 itemtype: itemtype.UserTitle,
                 options: {
                   range: '0-200',
-                  forcedisplay: [2]
-                }
+                  forcedisplay: [2],
+                },
               },
               method: 'searchItems',
               content: '1',
-              value: '2'
-            }
+              value: '2',
+            },
           },
           location: {
-            value: validateData(response.locations_id),
+            value: validateData(myUser.locations_id),
             request: {
               params: {
                 itemtype: itemtype.Location,
                 options: {
                   range: '0-200',
-                  forcedisplay: [2]
-                }
+                  forcedisplay: [2],
+                },
               },
               method: 'searchItems',
               content: '1',
-              value: '2'
-            }
+              value: '2',
+            },
           },
           defaultProfile: {
-            value: validateData(response.profiles_id),
+            value: validateData(myUser.profiles_id),
             request: {
               params: {},
               method: 'getMyProfiles',
               content: 'name',
-              value: 'id'
-            }
+              value: 'id',
+            },
           },
-          validSince: response.begin_date ? new Date(response.begin_date) : undefined,
-          validUntil: response.end_date ? new Date(response.end_date) : undefined
+          validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
+          validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined,
         })
       } catch (error) {
-        this.setState({
-          isLoading: false
-        })
+        this.setState({ isLoading: false })
       }
     })
   }
@@ -223,78 +227,111 @@ export default class UsersEditOne extends PureComponent {
    * @function saveChanges
    */
   saveChanges = () => {
+    const {
+      id,
+      firstName,
+      realName,
+      phone,
+      mobilePhone,
+      phone2,
+      administrativeNumber,
+      imageProfile,
+      category,
+      defaultEntity,
+      comments,
+      title,
+      location,
+      defaultProfile,
+      validSince,
+      validUntil,
+      passwordConfirmation,
+      parametersToEvaluate,
+      password,
+    } = this.state
+
     let newUser = {
-      id: this.state.id,
-      firstname: this.state.firstName,
-      realname: this.state.realName,
-      phone: this.state.phone,
-      mobile: this.state.mobilePhone,
-      phone2: this.state.phone2,
-      registration_number: this.state.administrativeNumber,
-      picture: this.state.imageProfile,
-      usercategories_id: this.state.category.value,
-      entities_id: this.state.defaultEntity.value,
-      comment: this.state.comments,
-      usertitles_id: this.state.title.value,
-      locations_id: this.state.location.value,
-      profiles_id: this.state.defaultProfile.value,
-      begin_date: this.state.validSince,
-      end_date: this.state.validUntil
+      id,
+      phone,
+      phone2,
+      firstname: firstName,
+      realname: realName,
+      mobile: mobilePhone,
+      registration_number: administrativeNumber,
+      picture: imageProfile,
+      usercategories_id: category.value,
+      entities_id: defaultEntity.value,
+      comment: comments,
+      usertitles_id: title.value,
+      locations_id: location.value,
+      profiles_id: defaultProfile.value,
+      begin_date: validSince,
+      end_date: validUntil,
     }
 
     let correctPassword = true
 
-    if (this.state.password !== '' || this.state.passwordConfirmation !== '') {
-      if (!ErrorValidation.validation(this.state.parametersToEvaluate, this.state.password).isCorrect) {
+    if (password !== '' || passwordConfirmation !== '') {
+      if (!ErrorValidation.validation(parametersToEvaluate, password).isCorrect) {
         correctPassword = false
-      } else if (!ErrorValidation.validation({ ...this.state.parametersToEvaluate,
-          isEqualTo: {
-            value: this.state.password,
-            message: "Passwords do not match"
-          }
-        }, this.state.passwordConfirmation).isCorrect) {
+      } else if (!ErrorValidation.validation({
+        ...parametersToEvaluate,
+        isEqualTo: {
+          value: password,
+          message: 'Passwords do not match',
+        },
+      }, passwordConfirmation).isCorrect) {
         correctPassword = false
       } else {
         newUser = {
           ...newUser,
-          password: this.state.password,
-          password2: this.state.passwordConfirmation,
+          password,
+          password2: passwordConfirmation,
         }
       }
     }
 
     if (correctPassword) {
       this.setState({
-          isLoading: true
-        },
-        async () => {
-          try {
-            await this.props.glpi.updateItem({
-              itemtype: itemtype.User,
-              input: newUser
-            })
-            await this.props.glpi.updateEmails({
-              userID: newUser.id,
-              currentEmails: this.state.currentEmails,
-              newEmails: this.state.emails
-            })
-            this.props.setNotification({
-              title: I18n.t('commons.success'),
-              body: I18n.t('notifications.saved_profile'),
-              type: 'success'
-            })
-            this.props.changeAction('reload')
-          } catch (error) {
-            this.props.setNotification(this.props.handleMessage({
-              type: 'alert',
-              message: error
-            }))
-            this.setState({
-              isLoading: false
-            })
-          }
+        isLoading: true,
+      },
+      async () => {
+        const {
+          glpi,
+          changeAction,
+          setNotification,
+          handleMessage,
+        } = this.props
+        const {
+          currentEmails,
+          emails,
+        } = this.state
+
+        try {
+          await glpi.updateItem({
+            itemtype: itemtype.User,
+            input: newUser,
+          })
+          await glpi.updateEmails({
+            userID: newUser.id,
+            currentEmails,
+            newEmails: emails,
+          })
+          setNotification({
+            title: I18n.t('commons.success'),
+            body: I18n.t('notifications.saved_profile'),
+            type: 'success',
+          })
+          changeAction('reload')
+        } catch (error) {
+          setNotification(handleMessage({
+            type: 'alert',
+            message: error,
+          }))
+          this.setState({
+            isLoading: false,
+          })
         }
-      )
+      })
     }
   }
 
@@ -306,7 +343,7 @@ export default class UsersEditOne extends PureComponent {
    */
   changeState = (name, value) => {
     this.setState({
-      [name]: value
+      [name]: value,
     })
   }
 
@@ -317,10 +354,12 @@ export default class UsersEditOne extends PureComponent {
    * @param {string} value
    */
   changeEmail = (index, value) => {
-    let emails = [...this.state.emails]
-    emails[index].email = value
+    const { emails } = this.state
+
+    const emailsCopy = [...emails]
+    emailsCopy[index].email = value
     this.setState({
-      emails
+      emails: emailsCopy,
     })
   }
 
@@ -331,11 +370,12 @@ export default class UsersEditOne extends PureComponent {
    * @param {string} value
    */
   changeSelect = (name, value) => {
+    const { [name]: current } = this.state
     this.setState({
       [name]: {
-        ...this.state[name],
-        value
-      }
+        ...current,
+        value,
+      },
     })
   }
 
@@ -345,8 +385,9 @@ export default class UsersEditOne extends PureComponent {
    * @param {number} index
    */
   deleteEmail = (index) => {
+    const { emails } = this.state
     this.setState({
-      emails: this.state.emails.slice(0, index).concat(this.state.emails.slice(index + 1))
+      emails: emails.slice(0, index).concat(emails.slice(index + 1)),
     })
   }
 
@@ -355,13 +396,15 @@ export default class UsersEditOne extends PureComponent {
    * @function addEmail
    */
   addEmail = () => {
+    const { emails } = this.state
+
     this.setState({
       emails: [
-        ...this.state.emails,
+        ...emails,
         {
-          email: ''
-        }
-      ]
+          email: '',
+        },
+      ],
     })
   }
 
@@ -373,15 +416,13 @@ export default class UsersEditOne extends PureComponent {
   previewFile = (evt) => {
     const file = evt.target.files[0]
     if (file.type.match('image.*')) {
-      let reader = new FileReader()
+      const reader = new FileReader()
 
-      reader.onload = ((theFile) => {
-        return (e) => {
-          this.setState({
-            imageProfile: e.target.result,
-            typeImageProfile: 'file'
-          })
-        }
+      reader.onload = (() => (e) => {
+        this.setState({
+          imageProfile: e.target.result,
+          typeImageProfile: 'file',
+        })
       })(file)
 
       reader.readAsDataURL(file)
@@ -402,47 +443,99 @@ export default class UsersEditOne extends PureComponent {
    * @function render
    */
   render() {
+    const {
+      isLoading,
+      imageProfile,
+      typeImageProfile,
+      realName,
+      firstName,
+      title,
+      location,
+      login,
+      phone,
+      phone2,
+      validSince,
+      administrativeNumber,
+      passwordConfirmation,
+      created,
+      mobilePhone,
+      password,
+      lastLogin,
+      comments,
+      modified,
+      validUntil,
+      parametersToEvaluate,
+      authentication,
+      defaultEntity,
+      defaultProfile,
+      category,
+      emails,
+    } = this.state
+    const { glpi } = this.props
+
     let componetRender
 
-    if (this.state.isLoading) {
+    if (isLoading) {
       componetRender = <Loading message={`${I18n.t('commons.loading')}...`} />
     } else {
       const user = usersScheme({
-        state: this.state,
+        realName,
+        firstName,
+        title,
+        location,
+        login,
+        phone,
+        phone2,
+        validSince,
+        administrativeNumber,
+        passwordConfirmation,
+        created,
+        mobilePhone,
+        password,
+        lastLogin,
+        comments,
+        modified,
+        validUntil,
+        parametersToEvaluate,
+        authentication,
+        defaultEntity,
+        defaultProfile,
+        category,
+        emails,
         changeState: this.changeState,
         changeEmail: this.changeEmail,
         deleteEmail: this.deleteEmail,
         changeSelect: this.changeSelect,
-        glpi: this.props.glpi
+        glpi,
       })
 
       const inputAttributes = {
         type: 'file',
-        accept: "image/*",
-        name: "imageProfile",
+        accept: 'image/*',
+        name: 'imageProfile',
         style: {
-          display: 'none'
+          display: 'none',
         },
         ref: (element) => {
           this.inputElement = element
         },
-        onChange: this.previewFile
+        onChange: this.previewFile,
       }
 
       componetRender = (
         <div className="froms Profiles">
           <div className="froms__row froms__row--icon">
-            <span className="viewIcon"/>
+            <span className="viewIcon" />
           </div>
 
           <div className="froms__row">
-            <div style={{ overflow: 'hidden', paddingLeft: '20px'}}>
+            <div style={{ overflow: 'hidden', paddingLeft: '20px' }}>
               <input
                 {...inputAttributes}
               />
               <IconItemList
-                image={this.state.imageProfile}
-                type={this.state.typeImageProfile}
+                image={imageProfile}
+                type={typeImageProfile}
                 imgClick={this.openFileChooser}
                 size={150}
                 imgClass="clickable"
@@ -455,8 +548,13 @@ export default class UsersEditOne extends PureComponent {
           <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
           <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
 
-          <div style={{ overflow: 'auto', paddingRight: '20px'}}>
-            <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>
+          <div style={{ overflow: 'auto', paddingRight: '20px' }}>
+            <button
+              className="win-button"
+              style={{ float: 'right' }}
+              onClick={this.addEmail}
+              type="button"
+            >
               {I18n.t('commons.add_email')}
             </button>
           </div>
@@ -465,11 +563,16 @@ export default class UsersEditOne extends PureComponent {
           <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
           <ConstructInputs data={user.activityInformation} icon="documentIcon" />
 
-          <button className="btn btn--primary" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
+          <button
+            className="btn btn--primary"
+            style={{ margin: '20px', float: 'right' }}
+            onClick={this.saveChanges}
+            type="button"
+          >
             {I18n.t('commons.save')}
           </button>
 
-          <br/>
+          <br />
         </div>
       )
     }
@@ -481,9 +584,12 @@ export default class UsersEditOne extends PureComponent {
     )
   }
 }
+
 UsersEditOne.propTypes = {
   history: PropTypes.object.isRequired,
   changeAction: PropTypes.func.isRequired,
   setNotification: PropTypes.func.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
 }
+
+export default UsersEditOne

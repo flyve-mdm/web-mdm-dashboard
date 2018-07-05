@@ -26,8 +26,9 @@
  * ------------------------------------------------------------------------------
  */
 
-import glpiApi from '../index.js'
+import glpiApi from '../index'
 
+/* eslint no-underscore-dangle: ["error", { "allow": ["_parser", "_makeRequest"] }] */
 describe('glpiApi', () => {
   it('should exist all methods of "javascript-library-glpi"', () => {
     expect(glpiApi).toBeDefined()

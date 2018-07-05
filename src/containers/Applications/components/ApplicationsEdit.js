@@ -28,17 +28,17 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import {
+  I18n,
+} from 'react-i18nify'
 import ApplicationsEditItemList from './ApplicationsEditItemList'
 import EmptyMessage from '../../../components/EmptyMessage'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import itemtype from '../../../shared/itemtype'
-import {
-  I18n
-} from "react-i18nify"
 
 /**
  * @class ApplicationsEdit
@@ -48,9 +48,11 @@ export default class ApplicationsEdit extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
+    const { selectedItems } = this.props
+
     this.state = {
-      itemListEdit: [...this.props.selectedItems],
-      isLoading: false
+      itemListEdit: [...selectedItems],
+      isLoading: false,
     }
   }
 
@@ -60,24 +62,26 @@ export default class ApplicationsEdit extends PureComponent {
    * @param {name} name
    */
   updateItemList = (index, name) => {
-    let newItem = [...this.state.itemListEdit]
+    const { itemListEdit } = this.state
 
-    //Find index of specific object using findIndex method.
-    let objIndex = newItem.findIndex((obj => obj["id"] === index));
+    const newItem = [...itemListEdit]
+
+    // Find index of specific object using findIndex method.
+    const objIndex = newItem.findIndex((obj => obj.id === index));
 
     // Update object's name property.
     if (objIndex !== -1) {
-      newItem[objIndex]["alias"] = name
+      newItem[objIndex].alias = name
     } else {
       const item = {
-        "id": index,
-        "alias": name
+        id: index,
+        alias: name,
       }
       newItem.push(item)
     }
 
     this.setState({
-      itemListEdit: [...newItem]
+      itemListEdit: [...newItem],
     })
   }
 
@@ -87,103 +91,109 @@ export default class ApplicationsEdit extends PureComponent {
    * @function handleSaveFiles
    */
   handleSaveFiles = async () => {
+    const { itemListEdit } = this.state
+    const {
+      glpi,
+      setNotification,
+      changeSelectionMode,
+      changeAction,
+      handleMessage,
+    } = this.props
 
     try {
-      if (this.state.itemListEdit.length > 0) {
-
+      if (itemListEdit.length > 0) {
         this.setState({
-          isLoading: true
+          isLoading: true,
         })
-        await this.props.glpi.updateItem({
+        await glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
-          input: this.state.itemListEdit
+          input: itemListEdit,
         })
 
-        if (this.state.itemListEdit.length > 1) {
-          this.props.setNotification({
+        if (itemListEdit.length > 1) {
+          setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_files'),
-            type: 'success'
+            type: 'success',
           })
         } else {
-          this.props.setNotification({
+          setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_file'),
-            type: 'success'
+            type: 'success',
           })
         }
 
-        this.props.changeSelectionMode(false)
-        this.props.changeAction('reload')
+        changeSelectionMode(false)
+        changeAction('reload')
       }
-
     } catch (error) {
-      this.props.setNotification(this.props.handleMessage({
+      setNotification(handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
       this.setState({
-        isLoading: false
+        isLoading: false,
       })
     }
   }
 
   render() {
+    const {
+      selectedItems,
+      history,
+    } = this.props
+    const { isLoading } = this.state
 
-    if (this.props.selectedItems) {
-
-      if (this.state.isLoading) {
+    if (selectedItems) {
+      if (isLoading) {
         return (
           <Loading message={`${I18n.t('commons.loading')}...`} />
         )
-      } else {
-        let renderComponent = this.props.selectedItems.map((item, index) => {
-
-          return (
-            <ApplicationsEditItemList
-              key={index}
-              history={this.props.history}
-              updateItemList={this.updateItemList}
-              selectedItem={item}
-              changeAction={this.props.changeAction}
-            />
-          )
-        })
-
-        return (
-          <ContentPane>
-            <div className="content-header" style={{ margin: '0 10px' }}>
-              <h2 className="content-header__title">
-                {I18n.t('applications.edit')}
-              </h2>
-              <button className="btn btn--primary" onClick={this.handleSaveFiles}>
-                {I18n.t('commons.save')}
-              </button>
-            </div>
-            <div className="separator" />
-            {renderComponent}
-          </ContentPane>
-        )
       }
+      const renderComponent = selectedItems.map((item, index) => (
+        <ApplicationsEditItemList
+          key={`ApplicationsEditItemList-${index.toString()}`}
+          history={history}
+          updateItemList={this.updateItemList}
+          selectedItem={item}
+        />
+      ))
 
-    } else {
       return (
-        <EmptyMessage message={I18n.t('commons.no_selection')}/>
+        <ContentPane>
+          <div className="content-header" style={{ margin: '0 10px' }}>
+            <h2 className="content-header__title">
+              {I18n.t('applications.edit')}
+            </h2>
+            <button
+              className="btn btn--primary"
+              onClick={this.handleSaveFiles}
+              type="button"
+            >
+              {I18n.t('commons.save')}
+            </button>
+          </div>
+          <div className="separator" />
+          {renderComponent}
+        </ContentPane>
       )
     }
+    return (
+      <EmptyMessage message={I18n.t('commons.no_selection')} />
+    )
   }
 }
 /** ApplicationsEdit propTypes */
 ApplicationsEdit.propTypes = {
   selectedItems: PropTypes.array,
   changeSelectionMode: PropTypes.func.isRequired,
-  action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
   setNotification: PropTypes.func.isRequired,
-  glpi: PropTypes.object.isRequired
+  glpi: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 }
 /** ApplicationsEdit defaultProps */
 ApplicationsEdit.defaultProps = {
   selectedItems: [],
-  action: null
 }

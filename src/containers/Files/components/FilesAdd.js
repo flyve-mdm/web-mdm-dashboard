@@ -28,18 +28,18 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
+  I18n,
+} from 'react-i18nify'
+import {
   FilesUpload,
-  FilesUploadItemList
+  FilesUploadItemList,
 } from '../../../components/FilesUpload'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
-import {
-  I18n
-} from "react-i18nify"
 import itemtype from '../../../shared/itemtype'
 
 /**
@@ -52,7 +52,7 @@ export default class FilesAdd extends PureComponent {
     super(props)
     this.state = {
       files: [],
-      isLoading: false
+      isLoading: false,
     }
   }
 
@@ -63,7 +63,7 @@ export default class FilesAdd extends PureComponent {
    */
   onFilesChange = (files) => {
     this.setState({
-      files
+      files,
     })
   }
 
@@ -73,10 +73,15 @@ export default class FilesAdd extends PureComponent {
    * @param {object} file
    * @param {object} error
    */
-  onFilesError = (error, file) => {
-    this.props.setNotification(this.props.handleMessage({
+  onFilesError = (error) => {
+    const {
+      setNotification,
+      handleMessage,
+    } = this.props
+
+    setNotification(handleMessage({
       type: 'alert',
-      message: error.message
+      message: error.message,
     }))
   }
 
@@ -102,98 +107,121 @@ export default class FilesAdd extends PureComponent {
    * @function filesUpload
    */
   filesUpload = () => {
+    const { files } = this.state
+    const {
+      setNotification,
+      glpi,
+      changeAction,
+      handleMessage,
+    } = this.props
+
     const formData = new FormData()
-    Object.keys(this.state.files).forEach(async (key) => {
+
+    Object.keys(files).forEach(async (key) => {
       try {
-        const file = this.state.files[key]
-        formData.append("file", file)
-        formData.append("uploadManifest", `{"input":{"name":"${file.name}"}}`)
+        const file = files[key]
+        formData.append('file', file)
+        formData.append('uploadManifest', `{"input":{"name":"${file.name}"}}`)
         this.setState({
-          isLoading: true
+          isLoading: true,
         })
-        await this.props.glpi.uploadFile({
+        await glpi.uploadFile({
           itemtype: itemtype.PluginFlyvemdmFile,
-          input: formData
+          input: formData,
         })
         this.setState({
-          isLoading: false
+          isLoading: false,
         })
-        this.props.setNotification({
+        setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.saved_file'),
-          type: 'success'
+          type: 'success',
         })
-        this.props.changeAction('reload')
+        changeAction('reload')
       } catch (error) {
-        this.props.setNotification(this.props.handleMessage({
+        setNotification(handleMessage({
           type: 'alert',
-          message: error
+          message: error,
         }))
         this.setState({
-          isLoading: false
+          isLoading: false,
         })
       }
     })
   }
 
   render() {
+    const {
+      isLoading,
+      files,
+    } = this.state
+
     let renderComponent
-    if (this.state.isLoading) {
-      renderComponent = ( <Loading message={`${I18n.t('commons.loading')}...`} /> )
-      }
-      else {
-        renderComponent = (
-          <ContentPane>
-            <div style={{ margin: '0 10px' }}>
-              <div className="content-header">
-                  <h2 className="content-header__title">
-                      {I18n.t('commons.new_file')}
-                  </h2>
-              </div>
-              <div className="separator" />
-              <div style={{ padding: '10px' }}>
-                <React.Fragment>
-                  <FilesUpload
-                    ref={(files) => { this.files = files }}
-                    className='files-dropzone'
-                    onChange={this.onFilesChange}
-                    onError={this.onFilesError}
-                    maxFiles={1}
-                    maxFileSize={10000000}
-                    minFileSize={0}
-                    clickable
+    if (isLoading) {
+      renderComponent = (<Loading message={`${I18n.t('commons.loading')}...`} />)
+    } else {
+      renderComponent = (
+        <ContentPane>
+          <div style={{ margin: '0 10px' }}>
+            <div className="content-header">
+              <h2 className="content-header__title">
+                {I18n.t('commons.new_file')}
+              </h2>
+            </div>
+            <div className="separator" />
+            <div style={{ padding: '10px' }}>
+              <React.Fragment>
+                <FilesUpload
+                  ref={(filesUpload) => { this.files = filesUpload }}
+                  className="files-dropzone"
+                  onChange={this.onFilesChange}
+                  onError={this.onFilesError}
+                  maxFiles={1}
+                  maxFileSize={10000000}
+                  minFileSize={0}
+                  clickable
+                >
+                  {I18n.t('commons.drop_file')}
+                </FilesUpload>
+                <div style={{ marginTop: 10 }}>
+                  <button
+                    className="btn btn--primary"
+                    onClick={this.filesUpload}
+                    type="button"
                   >
-                    {I18n.t('commons.drop_file')}
-                  </FilesUpload>
-                  <div style={{ marginTop: 10 }}>
-                    <button className="btn btn--primary" onClick={this.filesUpload}>
-                      {I18n.t('commons.save')}
-                    </button>
-                    {
-                      this.state.files.length > 0
-                        ?
+                    {I18n.t('commons.save')}
+                  </button>
+                  {
+                      files.length > 0
+                        ? (
                           <div>
                             {
-                              this.state.files.map((file) =>
-                                <FilesUploadItemList key={file.id} fileData={file} onRemove={this.filesRemoveOne.bind(this, file)} />
-                              )
+                              files.map(file => (
+                                <FilesUploadItemList
+                                  key={file.id}
+                                  fileData={file}
+                                  onRemove={() => this.filesRemoveOne(file)}
+                                />
+                              ))
                             }
                           </div>
-                          : null
+                        )
+                        : null
                     }
-                  </div>
-                </React.Fragment>
-              </div>
+                </div>
+              </React.Fragment>
             </div>
-          </ContentPane>
-        )
-      }
-      return renderComponent
+          </div>
+        </ContentPane>
+      )
     }
+    return renderComponent
   }
-  /** FilesAdd propTypes */
-  FilesAdd.propTypes = {
-    changeAction: PropTypes.func.isRequired,
-    setNotification: PropTypes.func.isRequired,
-    glpi: PropTypes.object.isRequired
-  }
+}
+/** FilesAdd propTypes */
+FilesAdd.propTypes = {
+  changeAction: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  glpi: PropTypes.object.isRequired,
+}

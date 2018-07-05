@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import validateNotifications from '../index.js'
+import validateNotifications from '../index'
 
 describe('validateNotifications', () => {
   afterEach(() => {
@@ -37,7 +37,7 @@ describe('validateNotifications', () => {
   it('should validate notifications without localstorage', () => {
     expect(validateNotifications()).toEqual({
       show: true,
-      type: "Toast"
+      type: 'Toast',
     })
   })
 
@@ -46,7 +46,7 @@ describe('validateNotifications', () => {
     localStorage.setItem('notificationType', 'Native')
     expect(validateNotifications()).toEqual({
       show: false,
-      type: "Native"
+      type: 'Native',
     })
   })
 })

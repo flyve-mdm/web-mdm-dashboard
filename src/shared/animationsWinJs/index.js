@@ -44,7 +44,11 @@ export default function (isAnimate) {
 }
 
 /** Get WinJS animations configuration from local store */
-const animate = () => localStorage.getItem('display') ? JSON.parse(localStorage.getItem('display')).animations : {}
+const animate = () => (
+  localStorage.getItem('display')
+    ? JSON.parse(localStorage.getItem('display')).animations
+    : {}
+)
 
 /**
  * Execute animation expanded or contract splitview
@@ -53,7 +57,7 @@ const animate = () => localStorage.getItem('display') ? JSON.parse(localStorage.
  */
 const splitview = (element, expanded) => {
   const animation = element.animate({
-    width: expanded ? ['0px', '200px'] : ['200px', '0px']
+    width: expanded ? ['0px', '200px'] : ['200px', '0px'],
   }, 150)
   if (!animate()) animation.play = () => {}
   return animation
@@ -61,5 +65,5 @@ const splitview = (element, expanded) => {
 
 /** Export SplitView animation */
 export {
-  splitview
+  splitview,
 }

@@ -28,13 +28,13 @@
 
 /** import dependencies */
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import ReactWinJS from 'react-winjs'
-import ContentPane from '../../../../components/ContentPane'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
+import ContentPane from '../../../../components/ContentPane'
 
 /**
  * Component with the notifications section
@@ -46,17 +46,17 @@ class Notifications extends PureComponent {
   constructor(props) {
     super(props)
 
-    const notificationType = (localStorage.getItem('notificationType') && Notification.permission === 'granted') ?
-      localStorage.getItem('notificationType') :
-      'Toast'
+    const notificationType = (localStorage.getItem('notificationType') && Notification.permission === 'granted')
+      ? localStorage.getItem('notificationType')
+      : 'Toast'
 
-    const showNotifications = localStorage.getItem('showNotifications') ?
-      (localStorage.getItem('showNotifications') === 'true') :
-      true
+    const showNotifications = localStorage.getItem('showNotifications')
+      ? (localStorage.getItem('showNotifications') === 'true')
+      : true
 
     this.state = {
       notificationType,
-      showNotifications
+      showNotifications,
     }
   }
 
@@ -68,11 +68,11 @@ class Notifications extends PureComponent {
   changeNotificationType = (e) => {
     const newNotificationType = e.target.value
     if (Notification) {
-      Notification.requestPermission(permission => {
-        if (permission === "granted") {
+      Notification.requestPermission((permission) => {
+        if (permission === 'granted') {
           localStorage.setItem('notificationType', newNotificationType)
           this.setState({
-            notificationType: newNotificationType
+            notificationType: newNotificationType,
           })
         }
       })
@@ -84,9 +84,10 @@ class Notifications extends PureComponent {
    * @function changeShowNotifications
    */
   changeShowNotifications = () => {
-    localStorage.setItem('showNotifications', !this.state.showNotifications)
+    const { showNotifications } = this.state
+    localStorage.setItem('showNotifications', !showNotifications)
     this.setState({
-      showNotifications: !this.state.showNotifications
+      showNotifications: !showNotifications,
     })
   }
 
@@ -95,6 +96,11 @@ class Notifications extends PureComponent {
    * @function render
    */
   render() {
+    const {
+      showNotifications,
+      notificationType,
+    } = this.state
+
     return (
       <ContentPane>
         <h2 style={{ margin: '10px' }}>
@@ -110,7 +116,7 @@ class Notifications extends PureComponent {
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.showNotifications}
+              checked={showNotifications}
               onChange={this.changeShowNotifications}
             />
           </div>
@@ -125,8 +131,8 @@ class Notifications extends PureComponent {
           </div>
           <div className="list-element__controller" style={{ paddingTop: 10 }}>
             <select
-              name='notificationType'
-              value={this.state.notificationType}
+              name="notificationType"
+              value={notificationType}
               onChange={this.changeNotificationType}
             >
               <option>

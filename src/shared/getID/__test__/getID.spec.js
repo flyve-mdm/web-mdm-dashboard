@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import getID from '../index.js'
+import getID from '../index'
 
 describe('getID', () => {
   it('should get user id', () => {
