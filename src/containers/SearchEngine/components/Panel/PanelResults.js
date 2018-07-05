@@ -1,55 +1,67 @@
 /*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+/** import dependencies */
+import React, {
+  PureComponent,
+} from 'react'
+import PropTypes from 'prop-types'
 
-
+/**
+ * Component con the results of the search
+ * @class PanelResults
+ * @extends PureComponent
+ */
 class PanelResults extends PureComponent {
-  render() { 
+  /**
+   * Render component
+   * @function render
+   */
+  render() {
+    const { itemResults } = this.props
+
     let bodyContent = null
 
-    if (this.props.itemResults) {
-      bodyContent = this.props.itemResults.map((item, index) => {
-        return (
-          <div className="rowContent" key={index}>
-           {
-             item.map((fieldObject, indexFieldObject) => {
-               return (
-                 <div className={index % 2 === 0 ? "cellContent" : "cellContent cellContentTwo"} key={indexFieldObject}>
-                  {fieldObject['fieldValue']}
-                </div>
-               )
-             })
-           }
-         </div>
-        )
-     })
+    if (itemResults) {
+      bodyContent = itemResults.map((item, index) => (
+        <div className="rowContent" key={`rowContent-${index.toString()}`}>
+          {
+            item.map((fieldObject, indexFieldObject) => (
+              <div
+                className={index % 2 === 0 ? 'cellContent' : 'cellContent cellContentTwo'}
+                key={`fieldObject-${indexFieldObject.toString()}`}
+              >
+                {fieldObject.fieldValue}
+              </div>
+            ))
+          }
+        </div>
+      ))
     }
 
     return bodyContent
@@ -60,4 +72,4 @@ PanelResults.propTypes = {
   itemResults: PropTypes.array.isRequired,
 }
 
-export default PanelResults;
+export default PanelResults

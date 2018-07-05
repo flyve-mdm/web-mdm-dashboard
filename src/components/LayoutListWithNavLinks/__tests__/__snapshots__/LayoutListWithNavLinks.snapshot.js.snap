@@ -12,7 +12,7 @@ exports[`LayoutListWithNavLinks renders LayoutListWithNavLinks 1`] = `
       
       <li>
         <a
-          aria-current={false}
+          aria-current={null}
           className={undefined}
           href="test//test"
           onClick={[Function]}
@@ -26,6 +26,7 @@ exports[`LayoutListWithNavLinks renders LayoutListWithNavLinks 1`] = `
   <div
     style={
       Object {
+        "overflowY": "auto",
         "width": "calc(100% - 320px)",
       }
     }

@@ -1,51 +1,53 @@
 /*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
 /** @module itemtype */
 
 /** import dependencies */
-import { itemtype } from '@glpi-project/javascript-library-glpi'
+import {
+  itemtype,
+} from '@glpi-project/javascript-library-glpi'
 
 /** Add custom itemTypes and export */
 export default {
-    ...itemtype,
-    PluginFlyvemdmAgent: "PluginFlyvemdmAgent",
-    PluginFlyvemdmFile: "PluginFlyvemdmFile",
-    PluginFlyvemdmInvitation: "PluginFlyvemdmInvitation",
-    PluginFlyvemdmPackage: "PluginFlyvemdmPackage",
-    PluginFlyvemdmdemoCaptcha: "PluginFlyvemdmdemoCaptcha",
-    PluginFlyvemdmdemoUser: "PluginFlyvemdmdemoUser",
-    PluginFlyvemdmFleet: "PluginFlyvemdmFleet",
-    PluginFlyvemdmPolicy: "PluginFlyvemdmPolicy",
-    PluginFlyvemdmPolicyCategory: "PluginFlyvemdmPolicyCategory",
-    PluginFlyvemdmTask: "PluginFlyvemdmTask",
-    PluginFlyvemdmGeolocation: "PluginFlyvemdmGeolocation",
-    PluginFlyvemdmdemoAccountvalidation: "PluginFlyvemdmdemoAccountvalidation",
-    PluginFlyvemdmEntityconfig: "PluginFlyvemdmEntityconfig",
-    PluginFlyvemdmInvitationlog: "PluginFlyvemdmInvitationlog"
+  ...itemtype,
+  PluginFlyvemdmAgent: 'PluginFlyvemdmAgent',
+  PluginFlyvemdmFile: 'PluginFlyvemdmFile',
+  PluginFlyvemdmInvitation: 'PluginFlyvemdmInvitation',
+  PluginFlyvemdmPackage: 'PluginFlyvemdmPackage',
+  PluginFlyvemdmdemoCaptcha: 'PluginFlyvemdmdemoCaptcha',
+  PluginFlyvemdmdemoUser: 'PluginFlyvemdmdemoUser',
+  PluginFlyvemdmFleet: 'PluginFlyvemdmFleet',
+  PluginFlyvemdmPolicy: 'PluginFlyvemdmPolicy',
+  PluginFlyvemdmPolicyCategory: 'PluginFlyvemdmPolicyCategory',
+  PluginFlyvemdmTask: 'PluginFlyvemdmTask',
+  PluginFlyvemdmGeolocation: 'PluginFlyvemdmGeolocation',
+  PluginFlyvemdmdemoAccountvalidation: 'PluginFlyvemdmdemoAccountvalidation',
+  PluginFlyvemdmEntityconfig: 'PluginFlyvemdmEntityconfig',
+  PluginFlyvemdmInvitationlog: 'PluginFlyvemdmInvitationlog',
 }

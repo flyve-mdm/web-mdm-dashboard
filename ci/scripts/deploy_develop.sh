@@ -12,6 +12,8 @@ git add docs -f
 git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
 # Copy documentation to gh-pages branch
 yarn gh-pages-docs -m "ci(docs): generate documentation with jsdoc for version ${GIT_TAG}"
+# Copy screenshots to gh-pages branch
+yarn gh-pages-screenshots -m "ci(docs): take screenshots of the dashboard automatically"
 # Genarate coverage
 yarn coverage
 # Add headers to all HTML files of the coverage

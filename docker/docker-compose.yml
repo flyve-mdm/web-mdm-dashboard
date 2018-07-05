@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  # node server
+  dashboard-node:
+    build:
+      context: ./docker/node
+      dockerfile: Dockerfile
+      args:
+        NODE_TAG: ${NODE_TAG}
+        APPPATH: ${APPPATH}
+    container_name: Dashboard-Node
+    working_dir: ${APPPATH}
+    hostname: dashboardnode
+    ports:
+      # http port
+      - ${HOST_SERVER_WEB_PORT}:3000
+    volumes:
+      - ../:${APPPATH}
+    command: ["yarn", "start"]
+    networks:
+      red:
+        aliases:
+          - dashnode
+        ipv4_address: 172.27.0.31
+# In this section we defined the network interface
+networks:
+  red:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.27.0.0/24
+# End of file

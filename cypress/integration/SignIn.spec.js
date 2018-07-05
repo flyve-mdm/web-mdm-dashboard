@@ -1,16 +1,18 @@
+import { glpiApiLink } from '../../public/config.json'
+
 describe('SignIn', () => {
   beforeEach(function () {
     cy.server()
 
     cy.route({
       method: 'GET',
-      url: 'https://dev.flyve.org/glpi/apirest.php/initSession',
+      url: `${glpiApiLink}/initSession`,
       response: { session_token: "12345678" }
     })
 
     cy.route({
       method: 'GET',
-      url: 'https://dev.flyve.org/glpi/apirest.php/search/Plugin/?range=0-0&',
+      url: `${glpiApiLink}/search/Plugin/?range=0-0&`,
       response: {
         totalcount: 5
       }
@@ -18,7 +20,7 @@ describe('SignIn', () => {
 
     cy.route({
       method: 'GET',
-      url: 'https://dev.flyve.org/glpi/apirest.php/Plugin/?range=0-5&',
+      url: `${glpiApiLink}/Plugin/?range=0-5&`,
       response: [
         {"id":1,"directory":"flyvemdmdemo","name":"Flyve MDM Demo","version":"1.0.0-dev","state":1,"author":"<a href='http://www.teclib.com'>Teclib</a>","homepage":"","license":"AGPLv3+"},
       ]
@@ -26,13 +28,13 @@ describe('SignIn', () => {
 
     cy.route({
       method: 'GET',
-      url: 'https://dev.flyve.org/glpi/apirest.php/killSession',
+      url: `${glpiApiLink}/killSession`,
       response: {}
     })
 
     cy.route({
       method: 'GET',
-      url: 'https://dev.flyve.org/glpi/apirest.php/getFullSession',
+      url: `${glpiApiLink}/getFullSession`,
       response: {
         session: {
           glpiID: 256
@@ -42,19 +44,19 @@ describe('SignIn', () => {
 
     cy.route({
       method: 'GET',
-      url: 'https://dev.flyve.org/glpi/apirest.php/User/256',
+      url: `${glpiApiLink}/User/256`,
       response: {}
     })
 
     cy.route({
       method: 'GET',
-      url: 'https://dev.flyve.org/glpi/apirest.php/User/256/UserEmail',
+      url: `${glpiApiLink}/User/256/UserEmail`,
       response: {}
     })
 
     cy.route({
       method: 'GET',
-      url: 'https://dev.flyve.org/glpi/apirest.php/getGlpiConfig',
+      url: `${glpiApiLink}/getGlpiConfig`,
       response: {
         "cfg_glpi":{
           password_min_length: 10,
@@ -77,21 +79,24 @@ describe('SignIn', () => {
       fleetsCurrentlyManaged: false,
       invitationsSent: false,
       numberUsers: false,
-      animations: true,
+      animations: false,
       pendingInvitations: false
     }))
   })
 
-  it('should log in without problems', () => {
+  it('should login without problems', () => {
     cy.visit('/')
     cy.wait('@getFlyveDemo')
     cy.get('a[href="/signUp"]').should('be.visible') 
+    cy.screenshot('login_userName', {capture: 'viewport'})
     cy.get('.win-textbox')
       .type('example name')
       .type('{enter}')
+    cy.screenshot('login_password', {capture: 'viewport'})    
     cy.get('.win-textbox')
       .type('12345678')
       .type('{enter}')
     cy.get('.empty-message').should('be.visible') 
+    cy.screenshot('home_noData', {capture: 'viewport'})
   })
 })

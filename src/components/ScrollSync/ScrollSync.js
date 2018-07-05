@@ -1,106 +1,179 @@
-/*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+/**
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
-import React, { PureComponent } from 'react'
+import React, {
+  PureComponent
+} from 'react'
 import PropTypes from 'prop-types'
 
+/**
+ * Component for the scroll sync of the side menu
+ * @class ScrollSync
+ * @extends PureComponent
+ */
 class ScrollSync extends PureComponent {
 
+  /**
+   * Validate types of the props
+   * @constant propTypes
+   * @static
+   * @type {object}
+   */
   static propTypes = {
     children: PropTypes.element.isRequired,
     proportional: PropTypes.bool,
     vertical: PropTypes.bool,
     horizontal: PropTypes.bool
-  };
+  }
 
+
+  /**
+   * Set default values for the props
+   * @constant defaultProps
+   * @static
+   * @type {object}
+   */
   static defaultProps = {
     proportional: true,
     vertical: true,
     horizontal: true
-  };
-
-  static childContextTypes = {
-    registerPane: PropTypes.func,
-    unregisterPane: PropTypes.func
   }
 
+  /**
+   * @constant childContextTypes
+   * @static
+   * @type {object}
+   */
+  static childContextTypes = {
+    registerPanel: PropTypes.func,
+    unregisterPanel: PropTypes.func
+  }
+
+  /**
+   * @function getChildContext
+   * @return {object}
+   */
   getChildContext() {
     return {
-      registerPane: this.registerPane,
-      unregisterPane: this.unregisterPane
+      registerPanel: this.registerPanel,
+      unregisterPanel: this.unregisterPanel
     }
   }
 
-  panes = {}
+  /**
+   * @name panels
+   * @type {object}
+   */
+  panels = {}
 
-  registerPane = (node, group) => {
-    if (!this.panes[group]) {
-      this.panes[group] = []
+  /**
+   * Register panel
+   * @function registerPanel
+   * @param {component} node
+   * @param {string} group
+   */
+  registerPanel = (node, group) => {
+    if (!this.panels[group]) {
+      this.panels[group] = []
     }
 
-    if (!this.findPane(node, group)) {
+    if (!this.findPanel(node, group)) {
       this.addEvents(node, group)
-      this.panes[group].push(node)
+      this.panels[group].push(node)
     }
   }
 
-  unregisterPane = (node, group) => {
-    if (this.findPane(node, group)) {
+  /**
+   * Unregister panel
+   * @function unregisterPanel
+   * @param {component} node
+   * @param {string} group
+   */
+  unregisterPanel = (node, group) => {
+    if (this.findPanel(node, group)) {
       this.removeEvents(node)
-      this.panes[group].splice(this.panes[group].indexOf(node), 1)
+      this.panels[group].splice(this.panels[group].indexOf(node), 1)
     }
   }
 
+  /**
+   * Add events of scroll
+   * @function addEvents
+   * @param {component} node
+   * @param {string} group
+   */
   addEvents = (node, group) => {
-    /* For some reason element.addEventListener doesnt work with document.body */
-    node.onscroll = this.handlePaneScroll.bind(this, node, group) // eslint-disable-line
+    node.onscroll = this.handlePanelScroll.bind(this, node, group)
   }
 
+  /**
+   * Remove events of scroll
+   * @function removeEvents
+   * @param {component} node
+   */
   removeEvents = (node) => {
-    /* For some reason element.removeEventListener doesnt work with document.body */
-    node.onscroll = null // eslint-disable-line
+    node.onscroll = null
   }
 
-  findPane = (node, group) => {
-    if (!this.panes[group]) {
+  /**
+   * Find a panel
+   * @function addEvents
+   * @param {component} node
+   * @param {string} group
+   * @return {(component|boolean)}
+   */
+  findPanel = (node, group) => {
+    if (!this.panels[group]) {
       return false
     }
 
-    return this.panes[group].find(pane => pane === node)
+    return this.panels[group].find(panel => panel === node)
   }
 
-  handlePaneScroll = (node, group) => {
+  /**
+   * Run requestAnimationFrame with 'syncScrollPositions'
+   * @function handlePanelScroll
+   * @param {component} node
+   * @param {string} group
+   */
+  handlePanelScroll = (node, group) => {
     window.requestAnimationFrame(() => {
       this.syncScrollPositions(node, group)
     })
   }
 
-  syncScrollPositions = (scrolledPane, group) => {
+  /**
+   * Determines the position of the scroll in the side menu
+   * @function handlePanelScroll
+   * @param {object} scrolledPanel
+   * @param {string} group
+   */
+  syncScrollPositions = (scrolledPanel, group) => {
     const {
       scrollTop,
       scrollHeight,
@@ -108,36 +181,45 @@ class ScrollSync extends PureComponent {
       scrollLeft,
       scrollWidth,
       clientWidth
-    } = scrolledPane
+    } = scrolledPanel
 
     const scrollTopOffset = scrollHeight - clientHeight
+
     const scrollLeftOffset = scrollWidth - clientWidth
 
-    const { proportional, vertical, horizontal } = this.props
+    const {
+      proportional,
+      vertical,
+      horizontal
+    } = this.props
 
-    this.panes[group].forEach((pane) => {
-      /* For all panes beside the currently scrolling one */
-      if (scrolledPane !== pane) {
-        /* Remove event listeners from the node that we'll manipulate */
-        this.removeEvents(pane, group)
-        /* Calculate the actual pane height */
-        const paneHeight = pane.scrollHeight - clientHeight
-        const paneWidth = pane.scrollWidth - clientWidth
-        /* Adjust the scrollTop position of it accordingly */
+    this.panels[group].forEach((panel) => {
+      // For all panels beside the currently scrolling one
+      if (scrolledPanel !== panel) {
+        // Remove event listeners from the node that we'll manipulate
+        this.removeEvents(panel, group)
+        // Calculate the actual panel height
+        const panelHeight = panel.scrollHeight - clientHeight
+        const panelWidth = panel.scrollWidth - clientWidth
+        // Adjust the scrollTop position of it accordingly
         if (vertical && scrollTopOffset > 0) {
-          pane.scrollTop = proportional ? (paneHeight * scrollTop) / scrollTopOffset : scrollTop // eslint-disable-line
+          panel.scrollTop = proportional ? (panelHeight * scrollTop) / scrollTopOffset : scrollTop
         }
         if (horizontal && scrollLeftOffset > 0) {
-          pane.scrollLeft = proportional ? (paneWidth * scrollLeft) / scrollLeftOffset : scrollLeft // eslint-disable-line
+          panel.scrollLeft = proportional ? (panelWidth * scrollLeft) / scrollLeftOffset : scrollLeft
         }
-        /* Re-attach event listeners after we're done scrolling */
+        // Re-attach event listeners after we're done scrolling
         window.requestAnimationFrame(() => {
-          this.addEvents(pane, group)
+          this.addEvents(panel, group)
         })
       }
     })
   }
 
+  /**
+   * Render component
+   * @function render
+   */
   render() {
     return React.Children.only(this.props.children)
   }

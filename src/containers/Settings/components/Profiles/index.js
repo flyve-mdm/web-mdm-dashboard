@@ -1,380 +1,595 @@
 /*
-*   Copyright © 2018 Teclib. All rights reserved.
-*
-*   This file is part of web-mdm-dashboard
-*
-* web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
-* device management software.
-*
-* Flyve MDM is free software: you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 3
-* of the License, or (at your option) any later version.
-*
-* Flyve MDM is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-* ------------------------------------------------------------------------------
-* @author     Gianfranco Manganiello (gmanganiello@teclib.com)
-* @author     Hector Rondon (hrondon@teclib.com)
-* @copyright  Copyright © 2018 Teclib. All rights reserved.
-* @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
-* @link       https://github.com/flyve-mdm/web-mdm-dashboard
-* @link       http://flyve.org/web-mdm-dashboard
-* @link       https://flyve-mdm.com
-* ------------------------------------------------------------------------------
-*/
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
+/** import dependencies */
+import React, {
+  PureComponent,
+} from 'react'
+import PropTypes from 'prop-types'
+import {
+  connect,
+} from 'react-redux'
+import {
+  bindActionCreators,
+} from 'redux'
+import {
+  I18n,
+} from 'react-i18nify'
 import validateData from '../../../../shared/validateData'
 import IconItemList from '../../../../components/IconItemList'
-import { usersScheme } from '../../../../components/Forms/Schemas'
+import {
+  usersScheme,
+} from '../../../../components/Forms/Schemas'
 import Loading from '../../../../components/Loading'
 import authtype from '../../../../shared/authtype'
 import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
-import { uiTransactionStart, uiTransactionFinish, uiSetNotification } from '../../../../store/ui/actions'
-import { bindActionCreators } from 'redux'
+import {
+  uiSetNotification,
+} from '../../../../store/ui/actions'
 import ContentPane from '../../../../components/ContentPane'
-import { I18n } from "react-i18nify"
 import itemtype from '../../../../shared/itemtype'
 
-function mapStateToProps(state, props) {
-    return {
-        isLoading: state.ui.loading,        
-        currentUser: state.auth.currentUser
-    }
+function mapStateToProps(state) {
+  return {
+    currentUser: state.auth.currentUser,
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-    const actions = {
-        uiTransactionStart: bindActionCreators(uiTransactionStart, dispatch),
-        uiTransactionFinish: bindActionCreators(uiTransactionFinish, dispatch),
-        setNotification: bindActionCreators(uiSetNotification, dispatch)
-    }
-    return { actions }
+  const actions = {
+    setNotification: bindActionCreators(uiSetNotification, dispatch),
+  }
+  return {
+    actions,
+  }
 }
 
+/**
+ * Component with the profiles section
+ * @class Profiles
+ * @extends PureComponent
+ */
 class Profiles extends PureComponent {
-    constructor(props) {
-        super(props)
-        this.state = {
-            login: null
-        }
+  /** @constructor */
+  constructor(props) {
+    super(props)
+    this.state = {
+      login: null,
+      isLoading: true,
     }
+  }
 
-    componentDidMount = async () => {
-        if (this.state.login === null) {
-            this.props.actions.uiTransactionStart()
+  /**
+   * Get the user information from glpi
+   * @function componentDidMount
+   * @async
+   */
+  componentDidMount = async () => {
+    const { login } = this.state
+    const {
+      glpi,
+      currentUser,
+    } = this.props
 
-            const myUser = await this.props.glpi.getAnItem({itemtype: itemtype.User, id: this.props.currentUser.id})
+    if (login === null) {
+      const myUser = await glpi.getAnItem({
+        itemtype: itemtype.User,
+        id: currentUser.id,
+      })
 
-            const myEmails = await this.props.glpi.getSubItems({
-                itemtype: itemtype.User, 
-                id: this.props.currentUser.id, 
-                subItemtype: 'UserEmail'
-            })
-    
-            const {cfg_glpi} = await this.props.glpi.getGlpiConfig()
-    
-            const parametersToEvaluate = {
-                minimunLength: cfg_glpi.password_min_length,
-                needDigit: cfg_glpi.password_need_number,
-                needLowercaseCharacter: cfg_glpi.password_need_letter,
-                needUppercaseCharacter: cfg_glpi.password_need_caps,
-                needSymbol: cfg_glpi.password_need_symbol
-            }
-    
-            this.setState({
-                parametersToEvaluate,
-                login: myUser.name,
-                firstName: myUser.firstname,
-                realName: myUser.realname,
-                phone: myUser.phone,
-                mobilePhone: myUser.mobile,
-                phone2: myUser.phone2,
-                administrativeNumber: myUser.registration_number,
-                lastLogin: myUser.last_login,
-                created: myUser.date_creation,
-                modified: myUser.date_mod,
-                currentEmails: myEmails.map(a => ({...a})),
-                emails: validateData(myEmails, []),
-                imageProfile: validateData(myUser.picture, "profile.png"),
-                authentication: authtype(myUser.authtype),
-                password: '',
-                passwordConfirmation: '',
-                category: {
-                    value: myUser.usercategories_id,
-                    request: {
-                        params: {itemtype: itemtype.UserCategory, options: {range: '0-200', forcedisplay: [2]}},
-                        method: 'searchItems',
-                        content: '1',
-                        value: '2'
-                    }
-                },
-                defaultEntity:  {
-                    value: myUser.entities_id,
-                    request: {
-                        params: {},
-                        method: 'getMyEntities',
-                        content: 'name',
-                        value: 'id'
-                    }
-                },
-                comments: validateData(myUser.comment, ''),
-                typeImageProfile: 'file',
-                title: {
-                    value: myUser.usertitles_id,
-                    request: {
-                        params: {itemtype: itemtype.UserTitle, options: {range: '0-200', forcedisplay: [2]}},
-                        method: 'searchItems',
-                        content: '1',
-                        value: '2'
-                    }
-                },
-                location: {
-                    value: myUser.locations_id,
-                    request: {
-                        params: {itemtype: itemtype.Location, options: {range: '0-200', forcedisplay: [2]}},
-                        method: 'searchItems',
-                        content: '1',
-                        value: '2'
-                    }
-                },
-                defaultProfile: {
-                    value: myUser.profiles_id,
-                    request: {
-                        params: {},
-                        method: 'getMyProfiles',
-                        content: 'name',
-                        value: 'id'
-                    }
-                },
-                validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
-                validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined
-            }, () => {
-                this.props.actions.uiTransactionFinish()
-            })
-        }
-    }
+      const myEmails = await glpi.getSubItems({
+        itemtype: itemtype.User,
+        id: currentUser.id,
+        subItemtype: 'UserEmail',
+      })
 
-    saveChanges = () => {
+      const {
+        cfg_glpi: cfgGlpi,
+      } = await glpi.getGlpiConfig()
 
-        let newUser = { 
-            id: this.props.currentUser.id,
-            firstname: this.state.firstName,
-            realname: this.state.realName,
-            phone: this.state.phone,
-            mobile: this.state.mobilePhone,
-            phone2: this.state.phone2,
-            registration_number: this.state.administrativeNumber,
-            picture: this.state.imageProfile,
-            usercategories_id: this.state.category.value,
-            entities_id: this.state.defaultEntity.value,
-            comment: this.state.comments,
-            usertitles_id: this.state.title.value,
-            locations_id: this.state.location.value,
-            profiles_id: this.state.defaultProfile.value,
-            begin_date: this.state.validSince,
-            end_date: this.state.validUntil
-        }
+      const parametersToEvaluate = {
+        minimunLength: cfgGlpi.password_min_length,
+        needDigit: cfgGlpi.password_need_number,
+        needLowercaseCharacter: cfgGlpi.password_need_letter,
+        needUppercaseCharacter: cfgGlpi.password_need_caps,
+        needSymbol: cfgGlpi.password_need_symbol,
+      }
 
-        let correctPassword = true        
-
-        if (this.state.password !== '' || this.state.passwordConfirmation !== '') {
-            if (!ErrorValidation.validation(this.state.parametersToEvaluate, this.state.password).isCorrect) {
-                correctPassword = false
-            } else if (!ErrorValidation.validation({...this.state.parametersToEvaluate, isEqualTo: {value: this.state.password, message: I18n.t('commons.passwords_not_match')}}, this.state.passwordConfirmation).isCorrect) {
-                correctPassword = false
-            } else {
-                newUser = {
-                    ...newUser,
-                    password: this.state.password,
-                    password2: this.state.passwordConfirmation,
-                }
-            }
-        }
-        
-        if (correctPassword) { 
-            this.setState (
-                { isLoading: true },
-                async () => {
-                    this.props.actions.uiTransactionStart()
-                    try {
-                        await this.props.glpi.updateItem({itemtype: itemtype.User, input: newUser})
-                        await this.props.glpi.updateEmails({
-                            userID: newUser.id, 
-                            currentEmails: this.state.currentEmails, 
-                            newEmails: this.state.emails
-                        })
-                        this.props.actions.uiTransactionFinish()
-                    } catch (e) {
-                        this.props.actions.uiTransactionFinish()
-                    }
-                }
-            , () => this.props.actions.setNotification({
-                    title: I18n.t('commons.success'),
-                    body: I18n.t('notifications.profile_data_changed'),
-                    type: 'info'
-                })
-            )
-        }
-    }
-
-    changeState = (name, value) => {
+      this.setState({
+        parametersToEvaluate,
+        login: myUser.name,
+        firstName: myUser.firstname,
+        realName: myUser.realname,
+        phone: myUser.phone,
+        mobilePhone: myUser.mobile,
+        phone2: myUser.phone2,
+        administrativeNumber: myUser.registration_number,
+        lastLogin: myUser.last_login,
+        created: myUser.date_creation,
+        modified: myUser.date_mod,
+        currentEmails: myEmails.map(a => ({ ...a })),
+        emails: validateData(myEmails, []),
+        imageProfile: validateData(myUser.picture, 'profile.png'),
+        authentication: authtype(myUser.authtype),
+        password: '',
+        passwordConfirmation: '',
+        category: {
+          value: myUser.usercategories_id,
+          request: {
+            params: {
+              itemtype: itemtype.UserCategory,
+              options: {
+                range: '0-200',
+                forcedisplay: [2],
+              },
+            },
+            method: 'searchItems',
+            content: '1',
+            value: '2',
+          },
+        },
+        defaultEntity: {
+          value: myUser.entities_id,
+          request: {
+            params: {},
+            method: 'getMyEntities',
+            content: 'name',
+            value: 'id',
+          },
+        },
+        comments: validateData(myUser.comment, ''),
+        typeImageProfile: 'file',
+        title: {
+          value: myUser.usertitles_id,
+          request: {
+            params: {
+              itemtype: itemtype.UserTitle,
+              options: {
+                range: '0-200',
+                forcedisplay: [2],
+              },
+            },
+            method: 'searchItems',
+            content: '1',
+            value: '2',
+          },
+        },
+        location: {
+          value: myUser.locations_id,
+          request: {
+            params: {
+              itemtype: itemtype.Location,
+              options: {
+                range: '0-200',
+                forcedisplay: [2],
+              },
+            },
+            method: 'searchItems',
+            content: '1',
+            value: '2',
+          },
+        },
+        defaultProfile: {
+          value: myUser.profiles_id,
+          request: {
+            params: {},
+            method: 'getMyProfiles',
+            content: 'name',
+            value: 'id',
+          },
+        },
+        validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
+        validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined,
+      }, () => {
         this.setState({
-            [name]: value
+          isLoading: false,
         })
+      })
+    }
+  }
+
+  /**
+   * Save the new values in glpi
+   * @function saveChanges
+   */
+  saveChanges = () => {
+    const {
+      currentUser,
+      actions,
+      glpi,
+    } = this.props
+    const {
+      firstName,
+      realName,
+      phone,
+      mobilePhone,
+      phone2,
+      administrativeNumber,
+      imageProfile,
+      category,
+      defaultEntity,
+      comments,
+      title,
+      location,
+      defaultProfile,
+      validSince,
+      validUntil,
+      passwordConfirmation,
+      password,
+      parametersToEvaluate,
+      currentEmails,
+      emails,
+    } = this.state
+
+    let newUser = {
+      id: currentUser.id,
+      firstname: firstName,
+      realname: realName,
+      phone,
+      phone2,
+      mobile: mobilePhone,
+      registration_number: administrativeNumber,
+      picture: imageProfile,
+      usercategories_id: category.value,
+      entities_id: defaultEntity.value,
+      comment: comments,
+      usertitles_id: title.value,
+      locations_id: location.value,
+      profiles_id: defaultProfile.value,
+      begin_date: validSince,
+      end_date: validUntil,
     }
 
-    changeEmail = (index, value) => {
-        let emails = [...this.state.emails]
-        emails[index].email = value
-        this.setState({emails})
-    }
+    let correctPassword = true
 
-    changeSelect = (name, value) => {
-        this.setState({
-            [name]: {
-                ...this.state[name],
-                value
-            }
-        })
-    }
-
-    deleteEmail = (index) => {
-        this.setState({
-            emails: this.state.emails.slice(0,index).concat(this.state.emails.slice(index+1))
-        })
-    }
-
-    addEmail = () => {
-        this.setState({
-            emails: [
-                ...this.state.emails,
-                { email: '' }
-            ]
-        })
-    }
-
-    previewFile = (evt) => {
-
-        const file = evt.target.files[0]
-        if (file.type.match('image.*')) {
-            let reader = new FileReader()
-
-            reader.onload = ((theFile) => {
-                return (e) => {
-                this.setState({
-                    imageProfile: e.target.result,
-                    typeImageProfile: 'file'
-                })
-            }})(file)
-
-            reader.readAsDataURL(file)
+    if (password !== '' || passwordConfirmation !== '') {
+      if (!ErrorValidation.validation(parametersToEvaluate, password).isCorrect) {
+        correctPassword = false
+      } else if (!ErrorValidation.validation({
+        ...parametersToEvaluate,
+        isEqualTo: {
+          value: password,
+          message: I18n.t('commons.passwords_not_match'),
+        },
+      }, passwordConfirmation).isCorrect) {
+        correctPassword = false
+      } else {
+        newUser = {
+          ...newUser,
+          password,
+          password2: passwordConfirmation,
         }
-   }
-
-    openFileChooser = () => {
-        this.inputElement.value = null
-        this.inputElement.click()
+      }
     }
 
-    render () {        
-        let component = null
-
-        if (this.props.isLoading || !this.state.login) {
-            component = <div style={{width: '100%', height: 'calc(100vh - 120px)'}}><Loading message={`${I18n.t('commons.loading')}...`} /></div>
-        } else {
-            let user = usersScheme({
-                state: this.state, 
-                changeState: this.changeState,
-                changeEmail: this.changeEmail,
-                deleteEmail: this.deleteEmail,
-                changeSelect: this.changeSelect,
-                glpi: this.props.glpi
-            })
-    
-            let inputAttributes = {
-                type: 'file',
-                accept: "image/*",
-                name: "imageProfile",
-                style: { display: 'none' },
-                ref: (element) => {
-                    this.inputElement = element
-                },
-                onChange: this.previewFile
-            }    
-
-            component = (
-                <div className="froms Profiles" style={{marginTop: '20px'}}>
-
-                    <div className="froms__row froms__row--icon">
-                        <span className="viewIcon"/>
-                    </div>
-                    
-    
-                    <div className="froms__row">
-    
-                        <div style={{ overflow: 'hidden' }}>
-                            <input
-                                {...inputAttributes}
-                            />
-                            <IconItemList 
-                                image={this.state.imageProfile} 
-                                type={this.state.typeImageProfile}
-                                imgClick={this.openFileChooser}
-                                size={150}
-                                imgClass="clickable"
-                            />
-                        </div>
-    
-                    </div>
-    
-                    <ConstructInputs data={user.personalInformation} icon="contactIcon" />
-    
-                    <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
-                
-                    <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
-    
-                    <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
-                    <div style={{ overflow: 'auto' }}>
-                        <button className="win-button" style={{ float: 'right'}} onClick={this.addEmail}>
-                            {I18n.t('commons.add_email')}
-                        </button>
-                    </div>
-    
-                    <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
-                
-                    <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
-    
-                    <ConstructInputs data={user.activityInformation} icon="documentIcon" />
-    
-                    <button className="win-button" style={{ margin: "20px", float: "right" }} onClick={this.saveChanges}>
-                        {I18n.t('commons.save')}
-                    </button>
-                
-                    <br/>
-    
-                </div>   
-            )
-        }       
-        return (
-            <ContentPane>
-                <h2 style={{ margin: '10px' }}>
-                    {I18n.t('commons.profiles')}
-                </h2>
-                { component }
-            </ContentPane>
-        )
+    if (correctPassword) {
+      this.setState({
+        isLoading: true,
+      },
+      async () => {
+        try {
+          await glpi.updateItem({
+            itemtype: itemtype.User,
+            input: newUser,
+          })
+          await glpi.updateEmails({
+            userID: newUser.id,
+            currentEmails,
+            newEmails: emails,
+          })
+          this.setState({
+            isLoading: false,
+          })
+          actions.setNotification({
+            title: I18n.t('commons.success'),
+            body: I18n.t('notifications.profile_data_changed'),
+            type: 'success',
+          })
+        } catch (e) {
+          this.setState({
+            isLoading: false,
+          })
+        }
+      })
     }
+  }
+
+  /**
+   * Handle set state
+   * @function changeState
+   * @param {string} name
+   * @param {string} value
+   */
+  changeState = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
+  }
+
+  /**
+   * Handle set of the emails
+   * @function changeEmail
+   * @param {number} index
+   * @param {string} value
+   */
+  changeEmail = (index, value) => {
+    const { emails: currentEmails } = this.state
+    const emails = [...currentEmails]
+    emails[index].email = value
+    this.setState({
+      emails,
+    })
+  }
+
+  /**
+   * Handle set state
+   * @function changeSelect
+   * @param {string} name
+   * @param {string} value
+   */
+  changeSelect = (name, value) => {
+    const { [name]: currentValue } = this.state
+    this.setState({
+      [name]: {
+        ...currentValue,
+        value,
+      },
+    })
+  }
+
+  /**
+   * Delete an email
+   * @function deleteEmail
+   * @param {number} index
+   */
+  deleteEmail = (index) => {
+    const { emails } = this.state
+
+    this.setState({
+      emails: emails.slice(0, index).concat(emails.slice(index + 1)),
+    })
+  }
+
+  /**
+   * Add an email
+   * @function addEmail
+   */
+  addEmail = () => {
+    const { emails } = this.state
+
+    this.setState({
+      emails: [
+        ...emails,
+        {
+          email: '',
+        },
+      ],
+    })
+  }
+
+  /**
+   * Preview of the profile image
+   * @function previewFile
+   * @param {object} evt
+   */
+  previewFile = (evt) => {
+    const file = evt.target.files[0]
+    if (file.type.match('image.*')) {
+      const reader = new FileReader()
+
+      reader.onload = (() => (e) => {
+        this.setState({
+          imageProfile: e.target.result,
+          typeImageProfile: 'file',
+        });
+      })(file)
+
+      reader.readAsDataURL(file)
+    }
+  }
+
+  /**
+   * Handle set of the profile image
+   * @function openFileChooser
+   */
+  openFileChooser = () => {
+    this.inputElement.value = null
+    this.inputElement.click()
+  }
+
+  /**
+   * Render component
+   * @function render
+   */
+  render() {
+    const {
+      glpi,
+    } = this.props
+    const {
+      login,
+      isLoading,
+      imageProfile,
+      typeImageProfile,
+      realName,
+      firstName,
+      title,
+      location,
+      phone,
+      phone2,
+      validSince,
+      administrativeNumber,
+      passwordConfirmation,
+      created,
+      mobilePhone,
+      password,
+      lastLogin,
+      comments,
+      modified,
+      validUntil,
+      parametersToEvaluate,
+      authentication,
+      defaultEntity,
+      defaultProfile,
+      category,
+      emails,
+    } = this.state
+
+    let component = null
+
+    if (isLoading || !login) {
+      component = (
+        <div
+          style={{
+            width: '100%',
+            height: 'calc(100vh - 120px)',
+          }}
+        >
+          <Loading message={`${I18n.t('commons.loading')}...`} />
+        </div>
+      )
+    } else {
+      const user = usersScheme({
+        realName,
+        firstName,
+        title,
+        location,
+        login,
+        phone,
+        phone2,
+        validSince,
+        administrativeNumber,
+        passwordConfirmation,
+        created,
+        mobilePhone,
+        password,
+        lastLogin,
+        comments,
+        modified,
+        validUntil,
+        parametersToEvaluate,
+        authentication,
+        defaultEntity,
+        defaultProfile,
+        category,
+        emails,
+        changeState: this.changeState,
+        changeEmail: this.changeEmail,
+        deleteEmail: this.deleteEmail,
+        changeSelect: this.changeSelect,
+        glpi,
+      })
+
+      const inputAttributes = {
+        type: 'file',
+        accept: 'image/*',
+        name: 'imageProfile',
+        style: {
+          display: 'none',
+        },
+        ref: (element) => {
+          this.inputElement = element
+        },
+        onChange: this.previewFile,
+      }
+
+      component = (
+        <React.Fragment>
+          <h2 style={{ margin: '10px' }}>
+            {I18n.t('commons.profiles')}
+          </h2>
+          <div className="froms Profiles" style={{ marginTop: '20px' }}>
+            <div className="froms__row froms__row--icon">
+              <span className="viewIcon" />
+            </div>
+            <div className="froms__row">
+              <div style={{ overflow: 'hidden' }}>
+                <input
+                  {...inputAttributes}
+                />
+                <IconItemList
+                  image={imageProfile}
+                  type={typeImageProfile}
+                  imgClick={this.openFileChooser}
+                  size={150}
+                  imgClass="clickable"
+                />
+              </div>
+            </div>
+
+            <ConstructInputs data={user.personalInformation} icon="contactIcon" />
+            <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
+            <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
+            <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
+            <div style={{ overflow: 'auto' }}>
+              <button
+                className="btn btn--secondary"
+                style={{ float: 'right' }}
+                onClick={this.addEmail}
+                type="button"
+              >
+                {I18n.t('commons.add_email')}
+              </button>
+            </div>
+            <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
+            <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
+            <ConstructInputs data={user.activityInformation} icon="documentIcon" />
+            <button
+              className="btn btn--primary"
+              style={{ margin: '20px', float: 'right' }}
+              onClick={this.saveChanges}
+              type="button"
+            >
+              {I18n.t('commons.save')}
+            </button>
+
+            <br />
+          </div>
+        </React.Fragment>
+      )
+    }
+    return (
+      <ContentPane>
+        { component }
+      </ContentPane>
+    )
+  }
+}
+
+Profiles.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired,
+  glpi: PropTypes.object.isRequired,
 }
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(withGLPI(withHandleMessages(Profiles)))

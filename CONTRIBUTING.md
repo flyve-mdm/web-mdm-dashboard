@@ -82,16 +82,16 @@ Use our official [support channel](https://support.teclib.com/).
 # <a name="3"></a> 3. Feature Requests [:top:](#top)
 
 ## <a name="3.1"></a> 3.1 Requirement for a Feature Request
-If you like to _implement_ a new feature please [submit an Issue](https://github.com/flyve-mdm/web-mdm-dashboard/issues/new) with a proposal, so we can be sure it's relevant.
+If you like to _implement_ a new feature please [submit an Issue](https://github.com/flyve-mdm/web-mdm-dashboard/issues/new?template=Feature_request.md) with a proposal, so we can be sure it's relevant.
 
 ### <a name="3.1.1"></a> 3.1.1 Major Feature Request
-For a major new feature request, [open an Issue](https://github.com/flyve-mdm/web-mdm-dashboard/issues/new) and outline your proposal so it can be discussed.
+For a major new feature request, [open an Issue](https://github.com/flyve-mdm/web-mdm-dashboard/issues/new?template=Feature_request.md) and outline your proposal so it can be discussed.
 
 ### <a name="3.1.2"></a> 3.1.2 Minor Feature Request
 For a minor new feature request, you can craft it and directly [submit it as a Pull Request](https://github.com/flyve-mdm/web-mdm-dashboard/pulls), we'll take care of it.
 
 ## <a name="3.2"></a> 3.2 Request a New Feature
-You can request a new feature by [submitting an Issue](https://github.com/flyve-mdm/web-mdm-dashboard/issues/new)
+You can request a new feature by [submitting an Issue](https://github.com/flyve-mdm/web-mdm-dashboard/issues/new?template=Feature_request.md)
 
 # <a name="4"></a> 4. Submitting [:top:](#top)
 
@@ -118,7 +118,7 @@ We require the following information:
 * :boom: **Expected Results:** What did you expect to happen?
 
 ### <a name="4.1.5"></a> 4.1.5 Submit an Issue. :rocket:
-Having all data at hand, file the new issue by filling out our [Issue form](https://github.com/flyve-mdm/web-mdm-dashboard/issues/new).
+Having all data at hand, file the new issue by filling out our [Issue form](https://github.com/flyve-mdm/web-mdm-dashboard/issues/new?template=Bug_report.md).
 
 **&mdash; That's it! :tada:**
 
@@ -257,6 +257,12 @@ After working on your changes you need to Push it (upload) your **newly created 
 
 ```console
     git push origin feature/created-branch
+```
+
+Then you'll need to run the following to track your remote branch.
+
+```console
+    git branch --track origin/feature/created-branch
 ```
 
 ### <a name="4.2.5"></a> 4.2.5 Create a Pull Request

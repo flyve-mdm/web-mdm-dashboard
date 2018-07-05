@@ -4,6 +4,8 @@ $nav-width: 320px;
   width: $nav-width;
   > ul {
     @extend %normalize-list;
+    height: calc(100vh - #{ $header-height });
+    overflow-y: auto;
 
     > li {
       > a {
