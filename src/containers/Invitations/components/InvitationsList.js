@@ -33,9 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import InvitationsItemList from './InvitationsItemList'
 import BuildItemList from '../../../shared/BuildItemList'
 import Loader from '../../../components/Loader'
@@ -208,7 +206,7 @@ export default class InvitationsList extends PureComponent {
     const {
       glpi,
       handleMessage,
-      setNotification,
+      toast,
       history,
     } = this.props
     const {
@@ -242,16 +240,15 @@ export default class InvitationsList extends PureComponent {
         itemList: BuildItemList(invitations, 2),
         totalcount: invitations.totalcount,
       })
-    } catch (e) {
-      handleMessage({
-        notification: setNotification,
-        error: e,
-        type: 'alert',
-      })
+    } catch (error) {
       this.setState({
         isLoading: false,
         order: 'ASC',
       })
+      this.props.toast.setNotification(handleMessage({
+        message: error,
+        type: 'alert',
+      }))
     }
   }
 
@@ -264,7 +261,7 @@ export default class InvitationsList extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
+      toast,
       changeSelectionMode,
       changeSelectedItems,
       changeAction,
@@ -289,7 +286,7 @@ export default class InvitationsList extends PureComponent {
             },
           })
 
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.elements_successfully_removed'),
             type: 'success',
@@ -308,7 +305,7 @@ export default class InvitationsList extends PureComponent {
         }
       }
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -377,7 +374,7 @@ export default class InvitationsList extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
+      toast,
       handleMessage,
     } = this.props
 
@@ -393,7 +390,7 @@ export default class InvitationsList extends PureComponent {
         itemtype: itemtype.PluginFlyvemdmInvitation,
         input: itemListToSend,
       })
-      setNotification({
+      this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.invitation_successfully_sent'),
         type: 'success',
@@ -403,7 +400,7 @@ export default class InvitationsList extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -516,7 +513,7 @@ export default class InvitationsList extends PureComponent {
       <ReactWinJS.ToolBar.Button
         key="delete"
         icon="delete"
-        label={I18n.t('commons.dalete')}
+        label={I18n.t('commons.delete')}
         priority={0}
         disabled={selectedItems.length === 0}
         onClick={this.handleDelete}
@@ -557,7 +554,7 @@ export default class InvitationsList extends PureComponent {
 
     if (isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList) {
+    } else if (itemList !== undefined) {
       if (itemList.length > 0) {
         listComponent = (
           <ReactWinJS.ListView
@@ -643,7 +640,7 @@ InvitationsList.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   selectedItems: PropTypes.array.isRequired,
   changeSelectedItems: PropTypes.func.isRequired,
