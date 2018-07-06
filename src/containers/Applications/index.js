@@ -30,33 +30,15 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import PropTypes from 'prop-types'
 import ApplicationsList from './components/ApplicationsList'
 import getMode from '../../shared/getMode'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import routes from './routes'
 import publicURL from '../../shared/publicURL'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * @class Applications
@@ -144,7 +126,7 @@ class Applications extends PureComponent {
       action,
     } = this.state
     const {
-      actions,
+      toast,
       history,
       glpi,
       handleMessage,
@@ -161,7 +143,7 @@ class Applications extends PureComponent {
       changeSelectionMode: this.changeSelectionMode,
       changeSelectedItems: this.changeSelectedItems,
       changeAction: this.changeAction,
-      setNotification: actions.setNotification,
+      toast,
     })
   }
 
@@ -280,7 +262,7 @@ class Applications extends PureComponent {
             key="content"
             routes={routes}
             rootPath={match.url}
-            data={{ ...this.propsData() }}
+            {...this.propsData()}
           />
         </div>
       </React.Fragment>
@@ -299,11 +281,8 @@ Applications.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(Applications)))
+export default withGLPI(Applications)

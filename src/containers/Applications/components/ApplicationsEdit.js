@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ApplicationsEditItemList from './ApplicationsEditItemList'
 import EmptyMessage from '../../../components/EmptyMessage'
 import ContentPane from '../../../components/ContentPane'
@@ -94,7 +92,6 @@ export default class ApplicationsEdit extends PureComponent {
     const { itemListEdit } = this.state
     const {
       glpi,
-      setNotification,
       changeSelectionMode,
       changeAction,
       handleMessage,
@@ -111,13 +108,13 @@ export default class ApplicationsEdit extends PureComponent {
         })
 
         if (itemListEdit.length > 1) {
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_files'),
             type: 'success',
           })
         } else {
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_file'),
             type: 'success',
@@ -128,7 +125,7 @@ export default class ApplicationsEdit extends PureComponent {
         changeAction('reload')
       }
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -189,7 +186,7 @@ ApplicationsEdit.propTypes = {
   selectedItems: PropTypes.array,
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }
