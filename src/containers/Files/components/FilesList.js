@@ -33,9 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import FilesItemList from './FilesItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
@@ -257,7 +255,6 @@ class FilesList extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
       changeSelectionMode,
       changeSelectedItems,
       changeAction,
@@ -282,7 +279,7 @@ class FilesList extends PureComponent {
             },
           })
 
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.device_successfully_removed'),
             type: 'success',
@@ -291,7 +288,7 @@ class FilesList extends PureComponent {
           changeSelectedItems([])
           changeAction('reload')
         } catch (error) {
-          setNotification(handleMessage({
+          this.props.toast.setNotification(handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -565,7 +562,7 @@ FilesList.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   icon: PropTypes.string.isRequired,
 }
