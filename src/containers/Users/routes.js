@@ -27,9 +27,7 @@
  */
 
 /** import dependencies */
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../shared/i18n'
 import EmptyMessage from '../../components/EmptyMessage'
 import UsersContent from './components/UsersContent'
 import UsersEditOne from './components/UsersEditOne'

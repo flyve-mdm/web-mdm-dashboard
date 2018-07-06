@@ -30,9 +30,7 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
@@ -267,7 +265,6 @@ export default class UsersList extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
       changeSelectionMode,
       changeSelectedItems,
       changeAction,
@@ -292,7 +289,7 @@ export default class UsersList extends PureComponent {
             },
           })
 
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.user_successfully_removed'),
             type: 'success',
@@ -301,7 +298,7 @@ export default class UsersList extends PureComponent {
           changeSelectedItems([])
           changeAction('reload')
         } catch (error) {
-          setNotification(handleMessage({
+          this.props.toast.setNotification(handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -570,7 +567,7 @@ UsersList.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   icon: PropTypes.string.isRequired,
 }

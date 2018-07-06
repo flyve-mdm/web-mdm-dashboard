@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import IconItemList from '../../../components/IconItemList'
 import Confirmation from '../../../components/Confirmation'
@@ -111,7 +109,6 @@ class UsersContent extends PureComponent {
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
       const {
-        setNotification,
         handleMessage,
         selectedItems,
       } = this.props
@@ -136,7 +133,7 @@ class UsersContent extends PureComponent {
           itemtype: itemtype.User,
           input: itemListToDelete,
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.elements_successfully_removed'),
           type: 'success',
@@ -145,7 +142,7 @@ class UsersContent extends PureComponent {
         changeSelectionMode(false)
         history.push(`${publicURL}/app/users`)
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -180,11 +177,10 @@ class UsersContent extends PureComponent {
     } catch (error) {
       const {
         handleMessage,
-        setNotification,
         history,
       } = this.props
 
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -318,7 +314,7 @@ UsersContent.propTypes = {
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 

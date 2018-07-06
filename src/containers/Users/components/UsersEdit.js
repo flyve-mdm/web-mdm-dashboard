@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import EditMultiple from '../../../components/EditMultiple'
 import itemtype from '../../../shared/itemtype'
 
@@ -174,7 +172,7 @@ class DevicesEdit extends PureComponent {
       changeAction,
       changeSelectionMode,
       history,
-      setNotification,
+      toast,
       glpi,
     } = this.props
     const { FieldList } = this.state
@@ -185,7 +183,7 @@ class DevicesEdit extends PureComponent {
         changeAction={changeAction}
         changeSelectionMode={changeSelectionMode}
         history={history}
-        setNotification={setNotification}
+        toast={toast}
         glpi={glpi}
         request={{
           id: 'User.id',
@@ -205,7 +203,7 @@ DevicesEdit.propTypes = {
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 
