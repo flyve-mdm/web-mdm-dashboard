@@ -35,19 +35,19 @@ import PropTypes from 'prop-types'
  * @param {object} props
  * @return {component} loading component
  */
-const Loading = props => {
+const Loading = (props) => {
   /**
    * Create loader
    * @constant loader
    * @type {component}
    */
   const loader = (
-    <div className='loader'>
-      <div className='circle'></div>
-      <div className='circle'></div>
-      <div className='circle'></div>
-      <div className='circle'></div>
-      <div className='circle'></div>
+    <div className="loader">
+      <div className="circle" />
+      <div className="circle" />
+      <div className="circle" />
+      <div className="circle" />
+      <div className="circle" />
     </div>
   )
 
@@ -56,8 +56,8 @@ const Loading = props => {
    * @constant loadComponent
    * @type {component}
    */
-  const loadComponent = props.small ?
-    (
+  const loadComponent = props.small
+    ? (
       <div className="loading loading--small" style={props.style}>
         <div>
           { loader }
@@ -65,10 +65,12 @@ const Loading = props => {
       </div>
     )
     : (
-      <div className="loading" style={{marginTop: - props.headerSize, ...props.style}}>
+      <div className="loading" style={{ marginTop: -props.headerSize, ...props.style }}>
         <div>
           { loader }
-          <p>{props.message}</p>
+          <p>
+            {props.message}
+          </p>
         </div>
       </div>
     )
@@ -80,14 +82,14 @@ Loading.defaultProps = {
   style: {},
   small: false,
   headerSize: 0,
-  message: ''
+  message: '',
 }
 
 Loading.propTypes = {
   message: PropTypes.string,
   headerSize: PropTypes.number,
   small: PropTypes.bool,
-  style: PropTypes.object
+  style: PropTypes.object,
 }
 
 export default Loading
