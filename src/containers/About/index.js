@@ -51,6 +51,7 @@ class About extends PureComponent {
         routes={routes}
         rootPath={match.url}
         history={history}
+        languageCurrent={this.props.languageCurrent}
       >
         <GenerateRoutes routes={routes} rootPath={match.url} toast={this.props.toast} handleMessage={this.props.handleMessage} />
       </LayoutListWithNavLinks>

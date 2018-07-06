@@ -56,6 +56,7 @@ class Settings extends PureComponent {
         routes={routes}
         rootPath={match.url}
         history={history}
+        languageCurrent={this.props.languageCurrent}
       >
         <GenerateRoutes
           routes={routes}
