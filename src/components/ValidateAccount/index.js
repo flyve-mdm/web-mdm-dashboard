@@ -35,31 +35,11 @@ import {
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import withGLPI from '../../hoc/withGLPI'
-import {
-  uiSetNotification
-} from '../../store/ui/actions'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
 import publicURL from '../../shared/publicURL'
 import itemtype from '../../shared/itemtype'
-import {
-  I18n
-} from "react-i18nify"
+import I18n from '../../shared/i18n'
 import Loading from '../../components/Loading'
 import appConfig from '../../../public/config.json'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
-  }
-  return {
-    actions
-  }
-}
 
 /**
  * Component with page of 'validate account'
@@ -132,7 +112,7 @@ class ValidateAccount extends PureComponent {
       })
 
     } catch (error) {
-      this.props.actions.setNotification(this.props.handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'warning',
         message: error
       }))
@@ -191,9 +171,6 @@ class ValidateAccount extends PureComponent {
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withAuthenticationLayout(withGLPI(withHandleMessages(ValidateAccount)), {
+export default withAuthenticationLayout(withGLPI(withHandleMessages(ValidateAccount)), {
   centerContent: true
-}))
+})

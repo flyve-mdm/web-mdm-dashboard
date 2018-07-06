@@ -37,9 +37,7 @@ import React from 'react'
  */
 const RenderMergedProps = (component, ...rest) => {
   const finalProps = Object.assign({}, ...rest)
-  return (
-    React.createElement(component, finalProps)
-  )
-}
+  return React.createElement(component, finalProps)
+};
 
 export default RenderMergedProps
