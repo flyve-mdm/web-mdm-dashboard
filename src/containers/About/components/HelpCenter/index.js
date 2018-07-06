@@ -43,7 +43,7 @@ class HelpCenter extends PureComponent {
 
     return (
       <React.Fragment>
-        <GenerateRoutes routes={routes} rootPath={match.url} />
+        <GenerateRoutes routes={routes} rootPath={match.url} toast={this.props.toast} handleMessage={this.props.handleMessage} />
       </React.Fragment>
     )
   }
@@ -52,6 +52,7 @@ class HelpCenter extends PureComponent {
 /** HelpCenter propsTypes */
 HelpCenter.propTypes = {
   match: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
 }
 
 export default HelpCenter

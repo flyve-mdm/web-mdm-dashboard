@@ -31,15 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  connect,
-} from 'react-redux'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import validateData from '../../../../shared/validateData'
 import IconItemList from '../../../../components/IconItemList'
 import {
@@ -50,27 +42,9 @@ import authtype from '../../../../shared/authtype'
 import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
 import ContentPane from '../../../../components/ContentPane'
 import itemtype from '../../../../shared/itemtype'
-
-function mapStateToProps(state) {
-  return {
-    currentUser: state.auth.currentUser,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
+import withAuthentication from '../../../../hoc/withAuthentication'
 
 /**
  * Component with the profiles section
@@ -96,18 +70,18 @@ class Profiles extends PureComponent {
     const { login } = this.state
     const {
       glpi,
-      currentUser,
+      auth,
     } = this.props
 
     if (login === null) {
       const myUser = await glpi.getAnItem({
         itemtype: itemtype.User,
-        id: currentUser.id,
+        id: auth.currentUser.id,
       })
 
       const myEmails = await glpi.getSubItems({
         itemtype: itemtype.User,
-        id: currentUser.id,
+        id: auth.currentUser.id,
         subItemtype: 'UserEmail',
       })
 
@@ -222,8 +196,7 @@ class Profiles extends PureComponent {
    */
   saveChanges = () => {
     const {
-      currentUser,
-      actions,
+      auth,
       glpi,
     } = this.props
     const {
@@ -250,7 +223,7 @@ class Profiles extends PureComponent {
     } = this.state
 
     let newUser = {
-      id: currentUser.id,
+      id: auth.currentUser.id,
       firstname: firstName,
       realname: realName,
       phone,
@@ -308,7 +281,7 @@ class Profiles extends PureComponent {
           this.setState({
             isLoading: false,
           })
-          actions.setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.profile_data_changed'),
             type: 'success',
@@ -584,12 +557,9 @@ class Profiles extends PureComponent {
 }
 
 Profiles.propTypes = {
-  currentUser: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(Profiles)))
+export default withGLPI(withAuthentication(Profiles))

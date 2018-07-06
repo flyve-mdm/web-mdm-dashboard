@@ -30,33 +30,12 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Show System Information
@@ -74,7 +53,6 @@ class SystemInformation extends PureComponent {
   componentDidMount = async () => {
     const {
       glpi,
-      actions,
       handleMessage,
     } = this.props
 
@@ -87,7 +65,7 @@ class SystemInformation extends PureComponent {
         plugins,
       })
     } catch (error) {
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -151,8 +129,8 @@ class SystemInformation extends PureComponent {
 /** SystemInformation propsTypes */
 SystemInformation.propTypes = {
   glpi: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(SystemInformation)))
+export default withGLPI(SystemInformation)

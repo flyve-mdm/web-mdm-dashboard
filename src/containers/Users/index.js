@@ -31,32 +31,14 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import UsersList from './components/UsersList'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the users section
@@ -145,7 +127,7 @@ class Users extends PureComponent {
     } = this.state
 
     const {
-      actions,
+      toast,
       history,
       glpi,
       handleMessage,
@@ -161,7 +143,7 @@ class Users extends PureComponent {
       handleMessage,
       changeSelectionMode: this.changeSelectionMode,
       changeSelectedItems: this.changeSelectedItems,
-      setNotification: actions.setNotification,
+      toast,
       changeAction: this.changeAction,
     }
   }
@@ -289,7 +271,7 @@ class Users extends PureComponent {
             key="content"
             routes={routes}
             rootPath={match.url}
-            data={{ ...this.propsData() }}
+            {...this.propsData()}
           />
         </div>
       </div>
@@ -302,10 +284,7 @@ Users.propTypes = {
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(Users)))
+export default withGLPI(Users)

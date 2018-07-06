@@ -45,7 +45,7 @@ describe('handleMessage', () => {
     }))
       .toEqual({
         body: 'error message',
-        title: 'error',
+        title: 'Error',
         type: 'alert',
       })
   })
@@ -56,7 +56,7 @@ describe('handleMessage', () => {
     }))
       .toEqual({
         body: 'message',
-        title: 'info',
+        title: 'Info',
         type: 'info',
       })
   })
@@ -70,8 +70,8 @@ describe('handleMessage', () => {
         },
       }),
     ).toEqual({
-      body: 'no_internet_connection',
-      title: 'error',
+      body: 'No Internet Connection',
+      title: 'Error',
       type: 'alert',
     })
   })
@@ -90,7 +90,7 @@ describe('handleMessage', () => {
       }),
     ).toEqual({
       body: 'error 404',
-      title: 'error',
+      title: 'Error',
       type: 'alert',
     })
   })
@@ -108,7 +108,7 @@ describe('handleMessage', () => {
       }),
     ).toEqual({
       body: 'session_token seems invalid',
-      title: 'error',
+      title: 'Error',
       type: 'alert',
     })
   })
@@ -127,7 +127,7 @@ it('should set a 400 error message', () => {
     }),
   ).toEqual({
     body: 'error 400',
-    title: 'error',
+    title: 'Error',
     type: 'alert',
   })
 })

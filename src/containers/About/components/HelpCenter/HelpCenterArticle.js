@@ -31,33 +31,12 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
 import ContentPane from '../../../../components/ContentPane'
 import itemtype from '../../../../shared/itemtype'
 import getID from '../../../../shared/getID'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * @class HelpCenterArticle
@@ -77,7 +56,6 @@ class HelpCenterArticle extends PureComponent {
   componentDidMount = async () => {
     const {
       glpi,
-      actions,
       handleMessage,
     } = this.props
     const { id } = this.state
@@ -91,7 +69,7 @@ class HelpCenterArticle extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -144,9 +122,7 @@ class HelpCenterArticle extends PureComponent {
 HelpCenterArticle.propTypes = {
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(HelpCenterArticle)))
+export default withGLPI(HelpCenterArticle)

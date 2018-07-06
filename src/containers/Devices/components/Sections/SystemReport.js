@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import Inventory from './Inventory'
 import Loader from '../../../../components/Loader'
 import itemtype from '../../../../shared/itemtype'
@@ -102,7 +100,7 @@ export default class SystemReport extends PureComponent {
     } = this.state
     const {
       glpi,
-      setNotification,
+      toast,
       handleMessage,
     } = this.props
 
@@ -120,7 +118,7 @@ export default class SystemReport extends PureComponent {
             }),
           })
         } catch (error) {
-          setNotification(handleMessage({
+          this.props.toast.setNotification(handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -136,7 +134,7 @@ export default class SystemReport extends PureComponent {
   requestInventory = () => {
     const {
       glpi,
-      setNotification,
+      toast,
       handleMessage,
     } = this.props
     const { id } = this.state
@@ -156,14 +154,14 @@ export default class SystemReport extends PureComponent {
             }),
           },
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message,
           type: 'success',
         })
         this.handleRefresh()
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -290,7 +288,7 @@ export default class SystemReport extends PureComponent {
 SystemReport.propTypes = {
   id: PropTypes.string.isRequired,
   glpi: PropTypes.object.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   update: PropTypes.bool.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }

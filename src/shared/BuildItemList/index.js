@@ -30,9 +30,7 @@
 
 /** Import dependencies */
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../shared/i18n'
 
 /**
  * Sort elements ascending / descending

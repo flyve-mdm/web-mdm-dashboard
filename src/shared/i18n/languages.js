@@ -1,8 +1,6 @@
 /** import dependencies */
 import React from 'react'
-import {
-  I18n
-} from 'react-i18nify'
+import I18n from '../i18n'
 
 /**
  * Generate array with the different available language options
@@ -32,7 +30,7 @@ export default () => {
       abbreviation: 'es_MX',
       name: I18n.t('commons.spanish'),
       country: I18n.t('commons.Mexico'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'es_AR',
@@ -140,7 +138,7 @@ export default () => {
     {
       abbreviation: 'ur_PK',
       name: I18n.t('commons.China'),
-      country: I18n.t('commons.Pakistanxx'),
+      country: I18n.t('commons.Pakistan'),
       isAvailable: false
     },
     {

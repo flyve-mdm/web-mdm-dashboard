@@ -30,33 +30,15 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import PropTypes from 'prop-types'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import FilesList from './components/FilesList'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * @class Files
@@ -125,7 +107,7 @@ class Files extends PureComponent {
       action,
     } = this.state
     const {
-      actions,
+      toast,
       history,
       glpi,
       handleMessage,
@@ -139,7 +121,7 @@ class Files extends PureComponent {
       changeSelectionMode: this.changeSelectionMode,
       changeSelectedItems: this.changeSelectedItems,
       changeAction: this.changeAction,
-      setNotification: actions.setNotification,
+      toast,
       history,
       glpi,
       handleMessage,
@@ -256,7 +238,7 @@ class Files extends PureComponent {
             key="content"
             routes={routes}
             rootPath={match.url}
-            data={{ ...this.propsData() }}
+            {...this.propsData()}
           />
         </div>
       </React.Fragment>
@@ -274,13 +256,10 @@ class Files extends PureComponent {
 /** Files propTypes */
 Files.propTypes = {
   match: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(Files)))
+export default withGLPI(Files)

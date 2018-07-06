@@ -26,35 +26,19 @@
  * ------------------------------------------------------------------------------
  */
 
-/** ui Actions Types */
+import I18n from '../../i18n'
 
-/**
- * CHANGE_NOTIFICATION_MESSAGE
- * @constant
- * @type {string}
- */
-export const CHANGE_NOTIFICATION_MESSAGE = 'CHANGE_NOTIFICATION_MESSAGE'
-/**
- * HIDE_NOTIFICATION
- * @constant
- * @type {string}
- */
-export const HIDE_NOTIFICATION = 'HIDE_NOTIFICATION'
-/**
- * UI_TRANSACTION_START
- * @constant
- * @type {string}
- */
-export const UI_TRANSACTION_START = 'UI_TRANSACTION_START'
-/**
- * UI_TRANSACTION_FINISH
- * @constant
- * @type {string}
- */
-export const UI_TRANSACTION_FINISH = 'UI_TRANSACTION_FINISH'
-/**
- * UI_TRANSACTION_FAIL
- * @constant
- * @type {string}
- */
-export const UI_TRANSACTION_FAIL = 'UI_TRANSACTION_FAIL'
+describe('Check if translations are available', () => {
+
+  it('login page should have english translations', () => {
+    expect(I18n.t('login.title')).toBe('Sign in')
+    expect(I18n.t('login.username_not_registered')).toBe('The username entered is not registered. Try a different account or')
+    expect(I18n.t('login.use_your_account')).toBe('Use your Flyve MDM account')
+    expect(I18n.t('login.what_is_this')).toBe('What\'s this?')
+    expect(I18n.t('login.no_account')).toBe('No account?')
+    expect(I18n.t('login.create_one')).toBe('Create one!')
+    expect(I18n.t('login.enter_password')).toBe('Enter password')
+    expect(I18n.t('login.enter_password_for')).toBe('Enter the password for')
+    expect(I18n.t('login.forgot_my_password')).toBe('Forgot my password')
+  })
+})

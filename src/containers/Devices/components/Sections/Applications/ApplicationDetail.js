@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../../shared/i18n'
 import itemtype from '../../../../../shared/itemtype'
 import Loading from '../../../../../components/Loading'
 import EmptyMessage from '../../../../../components/EmptyMessage'

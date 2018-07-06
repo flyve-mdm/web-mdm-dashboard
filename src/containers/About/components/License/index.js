@@ -30,32 +30,12 @@ import React, {
   PureComponent,
 } from 'react'
 import ReactMarkdown from 'react-markdown'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
+import I18n from '../../../../shared/i18n'
 import PropTypes from 'prop-types'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import EmptyMessage from '../../../../components/EmptyMessage'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component to show the license information
@@ -84,11 +64,10 @@ class License extends PureComponent {
       })
     } catch (error) {
       const {
-        actions,
         handleMessage,
       } = this.props
 
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -135,11 +114,8 @@ class License extends PureComponent {
 
 /** License propsTypes */
 License.propTypes = {
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withHandleMessages(License))
+export default withHandleMessages(License)

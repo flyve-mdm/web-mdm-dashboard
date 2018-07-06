@@ -32,30 +32,10 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import animationsWinJs from '../../../../shared/animationsWinJs'
-import {
-  changeLanguage,
-} from '../../../../store/i18n/actions'
 import ContentPane from '../../../../components/ContentPane'
-import tractionsList from '../../../../hoc/withI18NTranslation/i18n/languages'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    changeLanguage: bindActionCreators(changeLanguage, dispatch),
-  }
-  return {
-    actions,
-  }
-}
+import languageList from '../../../../shared/i18n/languages'
 
 /**
  * Component with the display section
@@ -148,9 +128,10 @@ class Display extends PureComponent {
               {I18n.t('commons.language')}
               <select
                 className="language__select"
-                onChange={event => actions.changeLanguage(event.target.value)}
+                value={this.props.languageCurrent}
+                onChange={event => this.props.changeLanguage(event.target.value)}
               >
-                {tractionsList()}
+                {languageList()}
               </select>
             </span>
           </div>
@@ -299,7 +280,7 @@ class Display extends PureComponent {
 }
 
 Display.propTypes = {
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(Display)
+export default Display

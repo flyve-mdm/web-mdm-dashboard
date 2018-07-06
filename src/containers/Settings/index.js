@@ -56,10 +56,16 @@ class Settings extends PureComponent {
         routes={routes}
         rootPath={match.url}
         history={history}
+        languageCurrent={this.props.languageCurrent}
       >
         <GenerateRoutes
           routes={routes}
           rootPath={match.url}
+          toast={this.props.toast}
+          handleMessage={this.props.handleMessage}
+          changeLanguage={this.props.changeLanguage}
+          languageCurrent={this.props.languageCurrent}
+
         />
       </LayoutListWithNavLinks>
     )
@@ -67,6 +73,8 @@ class Settings extends PureComponent {
 }
 
 Settings.propTypes = {
+  toast: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }

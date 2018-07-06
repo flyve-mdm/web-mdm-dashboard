@@ -17,7 +17,7 @@ exports[`NotFound renders NotFound 1`] = `
       />
     </figure>
     <h1>
-      not_found
+      Not Found
     </h1>
     <h1>
       404
@@ -27,7 +27,7 @@ exports[`NotFound renders NotFound 1`] = `
     <a
       href="https://flyve-mdm.com/privacy-policy/"
     >
-      terms_and_conditions
+      Terms and Conditions
     </a>
     <br />
     <span>

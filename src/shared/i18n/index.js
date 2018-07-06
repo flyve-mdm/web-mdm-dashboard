@@ -26,21 +26,48 @@
  * ------------------------------------------------------------------------------
  */
 
-/**
- * Initial State for management the state of UI:
- * - Nofications, Error and Succes messages states
- * - Loading state for show / hiden Loaders, Sppiners etc.
- */
+import Polyglot from 'node-polyglot'
+import language from '../language'
+import sourceFile from './source_file.json'
 
-const initialState = {
-  notification: {
-    title: '',
-    body: '',
-    type: 'info'
-  },
-  error: '',
-  success: '',
-  loading: false
+const languageDefault = 'en_GB'
+
+let polyglot = new Polyglot({
+  locale: language,
+  phrases: tryRequire(`./translations/${language}`) || sourceFile,
+})
+
+function tryRequire(path) {
+  try {
+    return require(`${path}`)
+  } catch (err) {
+    return null
+  }
 }
 
-export default initialState
+function getTranslations(lang) {
+  try {
+    const json = lang === languageDefault
+      ? tryRequire('./source_file.json')
+      : tryRequire(`./translations/${lang}`)
+
+    return json
+  } catch (error) {
+    return null
+  }
+}
+
+function setPolyglot(lang) {
+  localStorage.setItem('language', lang)
+  const json = getTranslations(lang) || sourceFile
+  polyglot.extend(json)
+  polyglot.locale(lang)
+}
+
+export default {
+  languageDefault,
+  languageCurrent: language,
+  setPolyglot,
+  getTranslations,
+  t: polyglot.t.bind(polyglot),
+}

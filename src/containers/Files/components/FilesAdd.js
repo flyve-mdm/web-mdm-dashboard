@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import {
   FilesUpload,
   FilesUploadItemList,
@@ -75,11 +73,10 @@ export default class FilesAdd extends PureComponent {
    */
   onFilesError = (error) => {
     const {
-      setNotification,
       handleMessage,
     } = this.props
 
-    setNotification(handleMessage({
+    this.props.toast.setNotification(handleMessage({
       type: 'alert',
       message: error.message,
     }))
@@ -109,7 +106,6 @@ export default class FilesAdd extends PureComponent {
   filesUpload = () => {
     const { files } = this.state
     const {
-      setNotification,
       glpi,
       changeAction,
       handleMessage,
@@ -132,14 +128,14 @@ export default class FilesAdd extends PureComponent {
         this.setState({
           isLoading: false,
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.saved_file'),
           type: 'success',
         })
         changeAction('reload')
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -221,7 +217,7 @@ export default class FilesAdd extends PureComponent {
 /** FilesAdd propTypes */
 FilesAdd.propTypes = {
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
 }

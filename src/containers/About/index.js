@@ -51,8 +51,9 @@ class About extends PureComponent {
         routes={routes}
         rootPath={match.url}
         history={history}
+        languageCurrent={this.props.languageCurrent}
       >
-        <GenerateRoutes routes={routes} rootPath={match.url} />
+        <GenerateRoutes routes={routes} rootPath={match.url} toast={this.props.toast} handleMessage={this.props.handleMessage} />
       </LayoutListWithNavLinks>
     )
   }
@@ -60,6 +61,8 @@ class About extends PureComponent {
 
 /** About propTypes */
 About.propTypes = {
+  toast: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }

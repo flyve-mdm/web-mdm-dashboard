@@ -27,10 +27,8 @@
  */
 
 import React from 'react'
-import {
-  Route,
-  Switch
-} from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { Route, Switch } from 'react-router-dom'
 import PropsRoute from './PropsRoute'
 import NotFound from '../../components/NotFound'
 
@@ -45,63 +43,42 @@ import NotFound from '../../components/NotFound'
  * @param {object} data
  * @return {component}
  */
-const GenerateRoutes = ({
-  routes,
-  rootPath,
-  withNotFound,
-  data
-}) => {
-  let r = routes.map(({
-    exact,
-    path,
-    component
-  }, i) => {
-    if (typeof (data) === 'object') {
-      return (
-        <PropsRoute
-          exact={exact}
-          component={component}
-          key={i}
-          {...data}
-          path={
-            typeof (rootPath) === "string" ?
-              path === '/' ?
-                rootPath
-                : rootPath + path
-              : path
-          }
-        />
-      )
-    } else {
-      return (
-        <Route
-          exact={exact}
-          component={component}
-          key={i}
-          path={
-            typeof (rootPath) === "string" ?
-              path === '/' ?
-                rootPath
-                : rootPath + path
-              : path
-          }
-        />
-      )
-    }
-  })
+const GenerateRoutes = (props) => {
+  const r = props.routes.map(({
+    exact, path, component, authenticate,
+  }) =>
+    (
+      <PropsRoute
+        exact={exact}
+        component={component}
+        authenticate={authenticate}
+        {...props}
+        key={path}
+        path={
+          typeof props.rootPath === 'string'
+            ? path === '/'
+              ? props.rootPath
+              : props.rootPath + path
+            : path
+        }
+      />
+    ))
 
-  withNotFound && r.push(
-    <Route
-      key={routes.length + 1}
-      render={() => <NotFound />}
-    />
-  )
+  props.withNotFound &&
+    r.push(<Route key={props.routes.length + 1} render={() => <NotFound />} />)
 
-  return (
-    <Switch>
-      {r}
-    </Switch>
-  )
+  return <Switch>{r}</Switch>
+}
+
+GenerateRoutes.defaultProps = {
+  rootPath: undefined,
+  withNotFound: false,
+}
+
+GenerateRoutes.propTypes = {
+  routes: PropTypes.array.isRequired,
+  rootPath: PropTypes.string,
+  withNotFound: PropTypes.bool,
 }
 
 export default GenerateRoutes

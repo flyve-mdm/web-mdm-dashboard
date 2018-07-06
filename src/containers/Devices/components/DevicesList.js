@@ -33,9 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import DevicesItemList from './DevicesItemList'
 import BuildItemList from '../../../shared/BuildItemList'
 import Loader from '../../../components/Loader'
@@ -311,7 +309,6 @@ export default class DevicesList extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
       changeSelectionMode,
       changeSelectedItems,
       changeAction,
@@ -337,7 +334,7 @@ export default class DevicesList extends PureComponent {
           },
         })
 
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.device_successfully_removed'),
           type: 'success',
@@ -355,7 +352,7 @@ export default class DevicesList extends PureComponent {
         }
       }
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -566,7 +563,7 @@ DevicesList.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   selectedItems: PropTypes.array.isRequired,
   changeSelectedItems: PropTypes.func.isRequired,

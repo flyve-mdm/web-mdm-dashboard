@@ -32,9 +32,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import {
   DangerZone,
@@ -103,7 +101,7 @@ export default class DevicesContent extends PureComponent {
     const {
       changeAction,
       changeSelectionMode,
-      setNotification,
+      toast,
       handleMessage,
       history,
       glpi,
@@ -138,7 +136,7 @@ export default class DevicesContent extends PureComponent {
                 id={id}
                 changeAction={changeAction}
                 changeSelectionMode={changeSelectionMode}
-                setNotification={setNotification}
+                toast={toast}
                 handleMessage={handleMessage}
                 history={history}
                 glpi={glpi}
@@ -149,7 +147,7 @@ export default class DevicesContent extends PureComponent {
               <SystemReport
                 id={id}
                 glpi={glpi}
-                setNotification={setNotification}
+                toast={toast}
                 handleMessage={handleMessage}
                 update={selectedIndex === 1}
               />
@@ -173,7 +171,7 @@ export default class DevicesContent extends PureComponent {
             <ReactWinJS.Pivot.Item key="geolocation" header={I18n.t('devices.geolocation.title')}>
               <Geolocation
                 id={id}
-                setNotification={setNotification}
+                toast={toast}
                 handleMessage={handleMessage}
                 glpi={glpi}
                 update={selectedIndex === 4}
@@ -183,7 +181,7 @@ export default class DevicesContent extends PureComponent {
               <DangerZone
                 id={id}
                 changeAction={changeAction}
-                setNotification={setNotification}
+                toast={toast}
                 handleMessage={handleMessage}
                 glpi={glpi}
                 history={history}
@@ -208,7 +206,7 @@ DevicesContent.defaultProps = {
 DevicesContent.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,

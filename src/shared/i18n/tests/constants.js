@@ -26,30 +26,14 @@
  * ------------------------------------------------------------------------------
  */
 
-/** import dependencies */
-import * as actionTypes from './actionTypes'
-import initialState from "./initialState"
+const TRANSLATIONS_AVAILABLES = {}
+const LANGUAGE_DEFAULT = 'en_GB'
+const TRANSLATION_FOLDER = 'translations'
+const LANGUAGE_NAMES = Object.keys(TRANSLATIONS_AVAILABLES)
 
-// Actions
-/**
- * Action change current language
- * @param {string} languageName
- * @returns {object} language
- */
-export const changeLanguage = languageName => {
-  return {
-    type: actionTypes.CHANGE_LANGUAGE,
-    languageCurrent: languageName
-  }
-}
-
-/**
- * Action change fallback language default
- * @returns {object} language
- */
-export const changeLanguageFallBack = () => {
-  return {
-    type: actionTypes.CHANGE_LANGUAGE_FALLBACK,
-    languageDefault: initialState.languageDefault
-  }
+export {
+  TRANSLATIONS_AVAILABLES,
+  LANGUAGE_DEFAULT,
+  TRANSLATION_FOLDER,
+  LANGUAGE_NAMES,
 }

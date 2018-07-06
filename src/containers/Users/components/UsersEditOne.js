@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ConstructInputs from '../../../components/Forms'
 import ContentPane from '../../../components/ContentPane'
 import validateData from '../../../shared/validateData'
@@ -298,7 +296,6 @@ class UsersEditOne extends PureComponent {
         const {
           glpi,
           changeAction,
-          setNotification,
           handleMessage,
         } = this.props
         const {
@@ -316,14 +313,14 @@ class UsersEditOne extends PureComponent {
             currentEmails,
             newEmails: emails,
           })
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.saved_profile'),
             type: 'success',
           })
           changeAction('reload')
         } catch (error) {
-          setNotification(handleMessage({
+          this.props.toast.setNotification(handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -588,7 +585,7 @@ class UsersEditOne extends PureComponent {
 UsersEditOne.propTypes = {
   history: PropTypes.object.isRequired,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 

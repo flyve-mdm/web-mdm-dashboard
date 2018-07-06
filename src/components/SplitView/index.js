@@ -38,9 +38,7 @@ import {
   ScrollSyncPanel
 } from '../ScrollSync'
 import withGLPI from '../../hoc/withGLPI'
-import {
-  I18n
-} from "react-i18nify"
+import I18n from '../../shared/i18n'
 import publicURL from '../../shared/publicURL'
 import {
   splitview

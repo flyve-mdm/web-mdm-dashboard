@@ -29,23 +29,13 @@
 /** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { I18n } from 'react-i18nify'
+import I18n from '../../shared/i18n'
 import Loading from '../../components/Loading'
 import ConstructInputs from '../../components/Forms'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
-import { fetchResetPassword } from '../../store/authentication/actions'
 import publicURL from '../../shared/publicURL'
 import ErrorValidation from '../../components/ErrorValidation'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    fetchResetPassword: bindActionCreators(fetchResetPassword, dispatch),
-  }
-  return { actions }
-}
 
 function mapStateToProps(state) {
   return {
@@ -143,7 +133,7 @@ class ResetPassword extends PureComponent {
       token,
       password,
     } = this.state
-    const { actions } = this.props
+    const { auth } = this.props
 
     const user = this.buildDataArray()
     let isCorrect = true
@@ -161,10 +151,19 @@ class ResetPassword extends PureComponent {
       this.setState({
         isResetSent: true,
       })
-      actions.fetchResetPassword({
+      auth.fetchResetPassword({
         email,
         token,
         newPassword: password,
+      })
+      .then((response) => {
+        this.props.toast.setNotification(response)
+      })
+      .catch((error) => {
+        this.props.toast.setNotification(this.props.handleMessages({
+          type: 'alert',
+          message: error,
+        }))
       })
     } else {
       this.setState({
@@ -267,8 +266,8 @@ class ResetPassword extends PureComponent {
    * @function render
    */
   render() {
-    const { isLoading } = this.props
-    if (isLoading) {
+    const { auth } = this.props
+    if (auth.isLoading) {
       return (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.sending')}...`} />
@@ -291,13 +290,11 @@ ResetPassword.defaultProps = {
 
 ResetPassword.propTypes = {
   history: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  auth: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 }
 
-export default withAuthenticationLayout(
-  connect(mapStateToProps, mapDispatchToProps)(withHandleMessages(ResetPassword)), {
+export default withAuthenticationLayout((withHandleMessages(ResetPassword)), {
     centerContent: true,
   },
 )
