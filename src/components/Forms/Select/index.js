@@ -27,7 +27,7 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 
@@ -41,7 +41,16 @@ class Select extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      options: this.props.options
+      options: this.props.options,
+    }
+  }
+
+  /** Validate the needs of the list of options */
+  componentDidMount = () => {
+    if (this.props.glpi && this.props.request) {
+      this.listRequest()
+    } else {
+      this.handleRefresh(this.state.options)
     }
   }
 
@@ -60,15 +69,15 @@ class Select extends PureComponent {
    * @function listRequest
    */
   listRequest = async () => {
-    let options = []
+    const options = []
     let response = await this.props.glpi[this.props.request.method](this.props.request.params)
 
     switch (this.props.request.method) {
       case 'getMyProfiles':
-        response.myprofiles.forEach(element => {
+        response.myprofiles.forEach((element) => {
           options.push({
             content: element[this.props.request.content],
-            value: element[this.props.request.value]
+            value: element[this.props.request.value],
           })
         })
         break
@@ -76,48 +85,48 @@ class Select extends PureComponent {
       case 'searchItems':
         if (response.data) {
           if (response.totalcount !== response.count) {
-            let params = {
+            const params = {
               itemtype: this.props.request.params.itemtype,
               options: {
                 ...this.props.request.params.options,
-                range: `0-${response.totalcount - 1}`
-              }
+                range: `0-${response.totalcount - 1}`,
+              },
             }
             response = await this.props.glpi[this.props.request.method](params)
           }
 
-          response.data.forEach(element => {
+          response.data.forEach((element) => {
             options.push({
               content: element[this.props.request.content],
-              value: element[this.props.request.value]
+              value: element[this.props.request.value],
             })
           })
         }
         break
       case 'getAllItems':
         if (response) {
-          response.forEach(element => {
+          response.forEach((element) => {
             options.push({
               content: element[this.props.request.content],
-              value: element[this.props.request.value]
+              value: element[this.props.request.value],
             })
           })
         }
         break
 
       case 'getSubItems':
-        response.forEach(element => {
+        response.forEach((element) => {
           options.push({
             content: element[this.props.request.content],
-            value: element[this.props.request.value]
+            value: element[this.props.request.value],
           })
         })
         break
       case 'getMyEntities':
-        response.myentities.forEach(element => {
+        response.myentities.forEach((element) => {
           options.push({
             content: element[this.props.request.content],
-            value: element[this.props.request.value]
+            value: element[this.props.request.value],
           })
         })
         break
@@ -126,16 +135,8 @@ class Select extends PureComponent {
     }
 
     this.setState({
-      options
+      options,
     })
-  }
-  /** Validate the needs of the list of options */
-  componentDidMount = () => {
-    if (this.props.glpi && this.props.request) {
-      this.listRequest()
-    } else {
-      this.handleRefresh(this.state.options)
-    }
   }
 
   /**
@@ -144,22 +145,22 @@ class Select extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = async (options) => {
-    let optionsList = []
-    options.forEach(element => {
+    const optionsList = []
+    options.forEach((element) => {
       if (!element.name) {
         optionsList.push({
           value: element,
-          content: element
+          content: element,
         })
       } else {
         optionsList.push({
           value: element.value,
-          content: element.name
+          content: element.name,
         })
       }
     })
     this.setState({
-      options: optionsList
+      options: optionsList,
     })
   }
 
@@ -170,7 +171,9 @@ class Select extends PureComponent {
   render() {
     return (
       <div className="froms__col">
-        <p>{this.props.label}</p>
+        <p>
+          {this.props.label}
+        </p>
         <select
           name={this.props.name}
           value={this.props.value}
@@ -178,16 +181,14 @@ class Select extends PureComponent {
           required={this.props.required}
         >
           <option>
-              ---
+            ---
           </option>
           {
-            this.state.options.map((element, index) => {
-              return (
-                <option value={element.value} key={`${this.props.name}${index}`}>
-                  { element.content }
-                </option>
-              )
-            })
+            this.state.options.map((element, index) => (
+              <option value={element.value} key={`${this.props.name}${index.toString()}`}>
+                { element.content }
+              </option>
+            ))
           }
         </select>
       </div>
@@ -197,7 +198,11 @@ class Select extends PureComponent {
 
 Select.defaultProps = {
   options: [],
-  required: false
+  required: false,
+  label: null,
+  glpi: null,
+  request: null,
+  value: null,
 }
 
 Select.propTypes = {
@@ -205,13 +210,13 @@ Select.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.number
+    PropTypes.number,
   ]),
   options: PropTypes.array,
-  function: PropTypes.func,
+  function: PropTypes.func.isRequired,
   glpi: PropTypes.object,
   request: PropTypes.object,
-  required: PropTypes.bool
+  required: PropTypes.bool,
 }
 
 export default Select
