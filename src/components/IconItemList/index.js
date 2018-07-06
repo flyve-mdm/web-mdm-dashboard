@@ -27,7 +27,7 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 
@@ -37,11 +37,26 @@ import PropTypes from 'prop-types'
  * @extends PureComponent
  */
 class IconItemList extends PureComponent {
+
+  /**
+   * Convert arraybuffer to base64
+   * @param {*} buffer
+   * @return {string}
+   */
+  static rrayBufferToBase64(buffer) {
+    let binary = ''
+    const bytes = [].slice.call(new Uint8Array(buffer))
+
+    bytes.forEach(b => binary += String.fromCharCode(b))
+
+    return window.btoa(binary)
+  }
+
   /** @constructor */
   constructor(props) {
     super(props)
     this.state = {
-      image: this.props.type !== 'file' || this.props.image === '' ? this.props.image : ''
+      image: this.props.type !== 'file' || this.props.image === '' ? this.props.image : '',
     }
   }
 
@@ -68,7 +83,7 @@ class IconItemList extends PureComponent {
         case 'apple.png':
         case 'Phone.png':
           this.setState({
-            image: require(`../../assets/images/${this.props.image}`)
+            image: require(`../../assets/images/${this.props.image}`),
           })
           break
 
@@ -76,31 +91,22 @@ class IconItemList extends PureComponent {
           const url_base = localStorage.getItem('baseURL')
           let url
           if (this.props.isMin) {
-            const image = this.props.image.split(".")
-            url = `//${url_base.split("//")[1]}/front/document.send.php?file=_pictures/${image[0]}_min.${image[1]}`
+            const image = this.props.image.split('.')
+            url = `//${url_base.split('//')[1]}/front/document.send.php?file=_pictures/${image[0]}_min.${image[1]}`
           } else {
-            url = `//${url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`
+            url = `//${url_base.split('//')[1]}/front/document.send.php?file=_pictures/${this.props.image}`
           }
 
           fetch(url, {
             method: 'GET',
-            credentials: 'same-origin'
+            credentials: 'same-origin',
           }).then((response) => {
             response.arrayBuffer().then((buffer) => {
               this.setState({
-                image: 'data:image/jpeg;base64,' + arrayBufferToBase64(buffer)
+                image: `data:image/jpeg;base64,${this.arrayBufferToBase64(buffer)}`,
               })
             })
           })
-
-          function arrayBufferToBase64(buffer) {
-            let binary = ''
-            let bytes = [].slice.call(new Uint8Array(buffer))
-
-            bytes.forEach((b) => binary += String.fromCharCode(b))
-
-            return window.btoa(binary)
-          }
           break
       }
     } catch (error) {}
@@ -116,7 +122,7 @@ class IconItemList extends PureComponent {
       width: this.props.size,
       height: this.props.size,
       backgroundSize: 'cover',
-      display: 'inline-block'
+      display: 'inline-block',
     }
     let className = ''
     if (this.props.type !== 'base64') {
@@ -125,18 +131,21 @@ class IconItemList extends PureComponent {
         ...style,
         WebkitBorderRadius: this.props.size,
         MozBorderRadius: this.props.size,
-        borderRadius: this.props.size
+        borderRadius: this.props.size,
       }
     }
 
     return (
       <div className={className} style={style}>
-        <div className={this.props.imgClass} >
+        <div
+          className={this.props.imgClass}
+          onClick={this.props.imgClick}
+          role="presentation"
+        >
           <img
             alt=""
             src={this.state.image}
             style={style}
-            onClick={this.props.imgClick}
           />
         </div>
       </div>
@@ -148,17 +157,20 @@ IconItemList.defaultProps = {
   size: 100,
   backgroundColor: '#e6e6e6',
   image: '',
-  type: 'file'
+  type: 'file',
+  isMin: false,
+  imgClick: () => {},
+  imgClass: '',
 }
 
 IconItemList.propTypes = {
-  size: PropTypes.number.isRequired,
-  backgroundColor: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(["file", "base64"]).isRequired,
+  size: PropTypes.number,
+  backgroundColor: PropTypes.string,
+  image: PropTypes.string,
+  type: PropTypes.oneOf(['file', 'base64']),
   isMin: PropTypes.bool,
   imgClick: PropTypes.func,
-  imgClass: PropTypes.string
+  imgClass: PropTypes.string,
 }
 
 export default IconItemList
