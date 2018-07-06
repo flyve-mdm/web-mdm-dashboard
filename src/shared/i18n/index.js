@@ -26,64 +26,48 @@
  * ------------------------------------------------------------------------------
  */
 
-/** @module BuildItemList */
+import Polyglot from 'node-polyglot'
+import language from '../language'
+import sourceFile from './source_file.json'
 
-/** Import dependencies */
-import WinJS from 'winjs'
-import I18n from '../../shared/i18n'
+const languageDefault = 'en_GB'
 
-/**
- * Sort elements ascending / descending
- * @param {object} dataSource
- * @param {int} index
- * @return {object} WinJS.Binding.List
- */
-export default function (dataSource, index = 0) {
-  const groupKey = function (data) {
-    try {
-      return (data[Object.keys(data)[index]])[0].toUpperCase()
-    } catch (error) {
-      return (I18n.t('commons.n/a'))
-    }
+let polyglot = new Polyglot({
+  locale: language,
+  phrases: tryRequire(`./translations/${language}`) || sourceFile,
+})
+
+function tryRequire(path) {
+  try {
+    return require(`${path}`)
+  } catch (err) {
+    return null
   }
+}
 
-  const groupData = function (data) {
-    return {
-      title: groupKey(data),
-    }
+function getTranslations(lang) {
+  try {
+    const json = lang === languageDefault
+      ? tryRequire('./source_file.json')
+      : tryRequire(`./translations/${lang}`)
+
+    return json
+  } catch (error) {
+    return null
   }
+}
 
-  const groupSorted = function (a, b) {
-    if (dataSource.order === 'ASC') {
-      if (a < b) {
-        return -1
-      } if (a > b) {
-        return 1
-      }
-      return 0
-    }
-    if (a > b) {
-      return -1
-    } if (a < b) {
-      return 1
-    }
-    return 0
-  }
+function setPolyglot(lang) {
+  localStorage.setItem('language', lang)
+  const json = getTranslations(lang) || sourceFile
+  polyglot.extend(json)
+  polyglot.locale(lang)
+}
 
-  const sorter = (a, b) => {
-    if (a[Object.keys(a)[0]] < b[Object.keys(b)[0]]) {
-      return -1
-    } if (a[Object.keys(a)[0]] > b[Object.keys(b)[0]]) {
-      return 1
-    }
-    return 0
-  }
-
-  if (dataSource.data) {
-    return new WinJS.Binding.List(dataSource.data)
-      .createSorted(sorter)
-      .createGrouped(groupKey, groupData, groupSorted)
-  }
-
-  return null
+export default {
+  languageDefault,
+  languageCurrent: language,
+  setPolyglot,
+  getTranslations,
+  t: polyglot.t.bind(polyglot),
 }

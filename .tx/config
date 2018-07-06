@@ -2,8 +2,8 @@
 host = https://www.transifex.com
 
 [web-mdm-dashboard.sourcefilejson]
-file_filter = src/hoc/withI18NTranslation/i18n/translations/<lang>.json
+file_filter = src/shared/i18n/translations/<lang>.json
 minimum_perc = 0
-source_file = src/hoc/withI18NTranslation/i18n/source_file.json
+source_file = src/shared/i18n/source_file.json
 source_lang = en_GB
 type = KEYVALUEJSON

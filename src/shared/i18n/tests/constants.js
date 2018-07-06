@@ -26,64 +26,14 @@
  * ------------------------------------------------------------------------------
  */
 
-/** @module BuildItemList */
+const TRANSLATIONS_AVAILABLES = {}
+const LANGUAGE_DEFAULT = 'en_GB'
+const TRANSLATION_FOLDER = 'translations'
+const LANGUAGE_NAMES = Object.keys(TRANSLATIONS_AVAILABLES)
 
-/** Import dependencies */
-import WinJS from 'winjs'
-import I18n from '../../shared/i18n'
-
-/**
- * Sort elements ascending / descending
- * @param {object} dataSource
- * @param {int} index
- * @return {object} WinJS.Binding.List
- */
-export default function (dataSource, index = 0) {
-  const groupKey = function (data) {
-    try {
-      return (data[Object.keys(data)[index]])[0].toUpperCase()
-    } catch (error) {
-      return (I18n.t('commons.n/a'))
-    }
-  }
-
-  const groupData = function (data) {
-    return {
-      title: groupKey(data),
-    }
-  }
-
-  const groupSorted = function (a, b) {
-    if (dataSource.order === 'ASC') {
-      if (a < b) {
-        return -1
-      } if (a > b) {
-        return 1
-      }
-      return 0
-    }
-    if (a > b) {
-      return -1
-    } if (a < b) {
-      return 1
-    }
-    return 0
-  }
-
-  const sorter = (a, b) => {
-    if (a[Object.keys(a)[0]] < b[Object.keys(b)[0]]) {
-      return -1
-    } if (a[Object.keys(a)[0]] > b[Object.keys(b)[0]]) {
-      return 1
-    }
-    return 0
-  }
-
-  if (dataSource.data) {
-    return new WinJS.Binding.List(dataSource.data)
-      .createSorted(sorter)
-      .createGrouped(groupKey, groupData, groupSorted)
-  }
-
-  return null
+export {
+  TRANSLATIONS_AVAILABLES,
+  LANGUAGE_DEFAULT,
+  TRANSLATION_FOLDER,
+  LANGUAGE_NAMES,
 }

@@ -26,64 +26,29 @@
  * ------------------------------------------------------------------------------
  */
 
-/** @module BuildItemList */
+import Polyglot from 'node-polyglot'
+import sourceFile from '../source_file.json'
+import { LANGUAGE_DEFAULT } from './constants'
 
-/** Import dependencies */
-import WinJS from 'winjs'
-import I18n from '../../shared/i18n'
-
-/**
- * Sort elements ascending / descending
- * @param {object} dataSource
- * @param {int} index
- * @return {object} WinJS.Binding.List
- */
-export default function (dataSource, index = 0) {
-  const groupKey = function (data) {
-    try {
-      return (data[Object.keys(data)[index]])[0].toUpperCase()
-    } catch (error) {
-      return (I18n.t('commons.n/a'))
-    }
+describe('Check if translations are available', () => {
+  const polyglot = new Polyglot({
+    locale: LANGUAGE_DEFAULT,
+    phrases: sourceFile,
+  })
+  const i18n = {
+    t: polyglot.t.bind(polyglot),
   }
 
-  const groupData = function (data) {
-    return {
-      title: groupKey(data),
-    }
-  }
-
-  const groupSorted = function (a, b) {
-    if (dataSource.order === 'ASC') {
-      if (a < b) {
-        return -1
-      } if (a > b) {
-        return 1
-      }
-      return 0
-    }
-    if (a > b) {
-      return -1
-    } if (a < b) {
-      return 1
-    }
-    return 0
-  }
-
-  const sorter = (a, b) => {
-    if (a[Object.keys(a)[0]] < b[Object.keys(b)[0]]) {
-      return -1
-    } if (a[Object.keys(a)[0]] > b[Object.keys(b)[0]]) {
-      return 1
-    }
-    return 0
-  }
-
-  if (dataSource.data) {
-    return new WinJS.Binding.List(dataSource.data)
-      .createSorted(sorter)
-      .createGrouped(groupKey, groupData, groupSorted)
-  }
-
-  return null
-}
+  it('login page should have english translations', () => {
+    expect(i18n.t('login.title')).toBe('Sign in')
+    expect(i18n.t('login.username_not_registered')).toBe('The username entered is not registered. Try a different account or')
+    expect(i18n.t('login.create_an_new')).toBe('create an new')
+    expect(i18n.t('login.use_your_account')).toBe('Use your Teclib account')
+    expect(i18n.t('login.what_is_this')).toBe('What\'s this?')
+    expect(i18n.t('login.no_account')).toBe('No account?')
+    expect(i18n.t('login.create_one')).toBe('Create one!')
+    expect(i18n.t('login.enter_password')).toBe('Enter password')
+    expect(i18n.t('login.enter_password_for')).toBe('Enter the password for')
+    expect(i18n.t('login.forgot_my_password')).toBe('Forgot my password')
+  })
+})
