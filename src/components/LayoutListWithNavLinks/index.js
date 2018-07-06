@@ -27,16 +27,16 @@
  */
 
 import React, {
-  PureComponent
-} from "react"
+  PureComponent,
+} from 'react'
 import PropTypes from 'prop-types'
 import {
-  NavLink
+  NavLink,
 } from 'react-router-dom'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import {
-  slideTop
+  slideTop,
 } from '../../shared/animations/index'
 
 /**
@@ -45,60 +45,41 @@ import {
  * @extends PureComponent
  */
 class ListWithNavLinks extends PureComponent {
-  /** @constructor */
-  constructor(props) {
-    super(props)
-    this.state = {
-      mode: getMode(),
-      itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
-      styleNav: this.styleNav(getMode(), this.props.history)
-    }
-
-    window.addEventListener('resize', this.handleResize)
-  }
-
-  /**
-   * Change state according to the resolution of the screen
-   * @function handleResize
-   */
-  handleResize = () => {
-    const nextMode = getMode()
-    if (this.state.mode !== nextMode) {
-      this.setState({
-        mode: nextMode,
-        itemListPaneWidth: nextMode === "small" ? "100%" : 320,
-        styleNav: this.styleNav(nextMode, this.props.history)
-      })
-    }
-  }
-
   /**
    * Change render of the menu according to the screen resolution
    * @function styleNav
    * @param {string} mode
    * @param {object} history
    */
-  styleNav(mode, history) {
+  static styleNav(mode, history) {
     return (
-      mode === "small" ?
-      history.location.pathname.split("/").length > 3 ? {
-        display: 'none'
-      } : {
-        width: '100%'
-      } : {}
+      mode === 'small'
+        ? history.location.pathname.split('/').length > 3 ? {
+          display: 'none',
+        } : {
+          width: '100%',
+        } : {}
     )
   }
 
+  /** @constructor */
+  constructor(props) {
+    super(props)
+    this.state = {
+      mode: getMode(),
+      itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
+      styleNav: this.styleNav(getMode(), this.props.history),
+    }
+
+    window.addEventListener('resize', this.handleResize)
+  }
+
   /**
-   * Change render of the child according to the screen resolution
-   * @function stylesArticle
+   * Run the 'slideTop' animation
+   * @function componentDidMount
    */
-  stylesArticle() {
-    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
-    return ({
-      width: calc100PercentMinus(validWidth),
-      overflowY: 'auto'
-    })
+  componentDidMount() {
+    slideTop(this.nav).play()
   }
 
   /**
@@ -118,21 +99,40 @@ class ListWithNavLinks extends PureComponent {
     return {
       ...prevState,
       styleNav: (
-        getMode() === "small" ? nextProps.history.location.pathname.split("/").length > 3 ? {
-          display: 'none'
+        getMode() === 'small' ? nextProps.history.location.pathname.split('/').length > 3 ? {
+          display: 'none',
         } : {
-          width: '100%'
+          width: '100%',
         } : {}
-      )
+      ),
     }
   }
 
   /**
-   * Run the 'slideTop' animation
-   * @function componentDidMount
+   * Change state according to the resolution of the screen
+   * @function handleResize
    */
-  componentDidMount() {
-    slideTop(this.nav).play()
+  handleResize = () => {
+    const nextMode = getMode()
+    if (this.state.mode !== nextMode) {
+      this.setState({
+        mode: nextMode,
+        itemListPaneWidth: nextMode === 'small' ? '100%' : 320,
+        styleNav: this.styleNav(nextMode, this.props.history),
+      })
+    }
+  }
+
+  /**
+   * Change render of the child according to the screen resolution
+   * @function stylesArticle
+   */
+  stylesArticle() {
+    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
+    return ({
+      width: calc100PercentMinus(validWidth),
+      overflowY: 'auto',
+    })
   }
 
   /**
@@ -145,30 +145,30 @@ class ListWithNavLinks extends PureComponent {
         <nav
           style={this.state.styleNav}
           className="flex-block__list navlinks"
-          ref={nav => this.nav = nav}
+          ref={(nav) => { this.nav = nav }}
         >
           <ul>
             {this.props.routes.map((route, i) => {
-              if (route.path !== "/") {
+              if (route.path !== '/') {
                 return (
-                  <li key={i}>
+                  <li key={`ListWithNavLinks-${i.toString()}`}>
                     <NavLink
                       exact
                       to={`${this.props.rootPath}${route.path}`}
-                      activeClassName='--active'>
+                      activeClassName="--active"
+                    >
                       {route.name}
                     </NavLink>
                   </li>
                 )
-              } else {
-                return ""
               }
+              return ''
             })}
           </ul>
         </nav>
         {
-          (this.state.mode === "small" && !this.state.styleNav.display) ?
-            ""
+          (this.state.mode === 'small' && !this.state.styleNav.display)
+            ? ''
             : (
               <div style={this.stylesArticle()}>
                 {this.props.children}
@@ -184,7 +184,7 @@ ListWithNavLinks.propTypes = {
   routes: PropTypes.array.isRequired,
   rootPath: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 }
 
 export default ListWithNavLinks

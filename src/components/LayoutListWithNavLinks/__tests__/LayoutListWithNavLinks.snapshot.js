@@ -29,11 +29,11 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 import {
-  Router
+  Router,
 } from 'react-router-dom'
 import history from '../../../shared/history'
 
-import LayoutListWithNavLinks from "../index"
+import LayoutListWithNavLinks from '../index'
 
 describe('LayoutListWithNavLinks', () => {
   beforeAll(() => {
@@ -58,22 +58,22 @@ describe('LayoutListWithNavLinks', () => {
             {
               path: '/',
               name: 'test 1',
-              component: <ul/>,
-              exact: true
+              component: <ul />,
+              exact: true,
             },
             {
               path: '/test',
               name: 'test 2',
-              component: <ol/>,
-              exact: true
-            }
+              component: <ol />,
+              exact: true,
+            },
           ]}
         >
-          <div/>
+          <div />
         </LayoutListWithNavLinks>
-      </Router>
+      </Router>,
     )
-    let tree = component.toJSON()
+    const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 })
