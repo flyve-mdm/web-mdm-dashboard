@@ -27,9 +27,7 @@
  */
 
 /** import dependencies */
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import HelpCenterArticle from './HelpCenterArticle'
 import HelpCenterList from './HelpCenterList'
 import Feedback from './Feedback'
