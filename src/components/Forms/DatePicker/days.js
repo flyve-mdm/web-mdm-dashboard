@@ -46,19 +46,19 @@ export default (year, month) => {
     September: 30,
     October: 31,
     November: 30,
-    December: 31
+    December: 31,
   }
 
   if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
     daysList.February = 29
   }
 
-  let days = []
+  const days = []
 
   if (month) {
-    for (let index = 1; index <= daysList[month]; index++) {
+    for (let index = 1; index <= daysList[month]; index += 1) {
       days.push((
-        <option value={index} key={`day${index}`}>
+        <option value={index} key={`day-${index.toString()}`}>
           { index }
         </option>
       ))
