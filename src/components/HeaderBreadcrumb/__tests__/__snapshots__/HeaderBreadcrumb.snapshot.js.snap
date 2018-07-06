@@ -20,7 +20,7 @@ exports[`HeaderBreadcrumb renders HeaderBreadcrumb 1`] = `
         href="/app"
         onClick={[Function]}
       >
-        dashboard
+        Dashboard
       </a>
     </span>
     <span

@@ -32,9 +32,7 @@ import React, {
 import PropTypes from 'prop-types'
 import Confirmation from '../../Confirmation'
 import ErrorValidation from '../../ErrorValidation'
-import {
-  I18n
-} from "react-i18nify"
+import I18n from '../../../shared/i18n'
 
 /**
  * Component to create a custom input
