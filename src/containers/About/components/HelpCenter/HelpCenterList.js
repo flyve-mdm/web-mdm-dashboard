@@ -33,33 +33,13 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
+import I18n from '../../../../shared/i18n'
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import Loading from '../../../../components/Loading'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
 import ContentPane from '../../../../components/ContentPane'
 import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * @class HelpCenterList
@@ -94,7 +74,6 @@ class HelpCenterList extends PureComponent {
   componentDidMount = async () => {
     const {
       glpi,
-      actions,
       handleMessage,
     } = this.props
 
@@ -114,7 +93,7 @@ class HelpCenterList extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -293,9 +272,7 @@ class HelpCenterList extends PureComponent {
 HelpCenterList.propTypes = {
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(HelpCenterList)))
+export default withGLPI(HelpCenterList)
