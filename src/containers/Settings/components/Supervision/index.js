@@ -31,37 +31,17 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import {
   supervisionScheme,
 } from '../../../../components/Forms/Schemas'
 import validateData from '../../../../shared/validateData'
 import ConstructInputs from '../../../../components/Forms'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the supervision section
@@ -91,7 +71,6 @@ class Supervision extends PureComponent {
   componentDidMount = async () => {
     const {
       glpi,
-      actions,
       handleMessage,
     } = this.props
 
@@ -123,7 +102,7 @@ class Supervision extends PureComponent {
         address: validateData(entity.address),
       })
     } catch (error) {
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -170,13 +149,13 @@ class Supervision extends PureComponent {
         this.setState({
           isLoading: false,
         })
-        actions.setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.helpdesk_configuration_saved'),
           type: 'success',
         })
       } catch (error) {
-        actions.setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -243,9 +222,9 @@ class Supervision extends PureComponent {
 }
 
 Supervision.propTypes = {
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(Supervision)))
+export default withGLPI(Supervision)

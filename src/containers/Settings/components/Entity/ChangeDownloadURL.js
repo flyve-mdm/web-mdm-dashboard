@@ -32,30 +32,10 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
+import I18n from '../../../../shared/i18n'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import itemtype from '../../../../shared/itemtype'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the form of change the download url
@@ -99,7 +79,6 @@ class ChangeDownloadURL extends PureComponent {
         entityID,
         saveValues,
         changeMode,
-        actions,
         handleMessage,
       } = this.props
       const { downloadURL } = this.state
@@ -114,13 +93,13 @@ class ChangeDownloadURL extends PureComponent {
         })
         saveValues('downloadURL', downloadURL)
         changeMode('')
-        actions.setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.download_url_changed'),
           type: 'success',
         })
       } catch (error) {
-        actions.setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -182,12 +161,12 @@ class ChangeDownloadURL extends PureComponent {
 }
 
 ChangeDownloadURL.propTypes = {
+  toast: PropTypes.object.isRequired,
   changeMode: PropTypes.func.isRequired,
   downloadURL: PropTypes.string.isRequired,
   saveValues: PropTypes.func.isRequired,
-  actions: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   entityID: PropTypes.string.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(ChangeDownloadURL)
+export default ChangeDownloadURL
