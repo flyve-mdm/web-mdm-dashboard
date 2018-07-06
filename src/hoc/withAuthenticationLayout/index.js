@@ -28,25 +28,9 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
-import {
-  I18n
-} from 'react-i18nify'
-import {
-  changeLanguage
-} from '../../store/i18n/actions'
-import tractionsList from '../../hoc/withI18NTranslation/i18n/languages'
-
-function mapDispatchToProps(dispatch) {
-  return {
-    changeLanguage: bindActionCreators(changeLanguage, dispatch)
-  }
-}
+import I18n from '../../shared/i18n'
+import languagesList from '../../shared/i18n/languages'
+import { AuthenticationConsumer } from '../../providers/AuthenticationProvider'
 
 /**
  * Wrapper component with the basic structure of the authentication pages
@@ -71,7 +55,11 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
           <figure>
             <img alt="Flyve MDM Dashboard" src={require('../../assets/images/dashboard.svg')} />
           </figure>
-          <WrappedComponent {...props} />
+          <AuthenticationConsumer>
+            {value =>
+              <WrappedComponent {...props} {...value} />
+            }
+          </AuthenticationConsumer>
         </section>
         <footer>
           <a href="https://flyve-mdm.com/privacy-policy/">
@@ -82,10 +70,11 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
             © 2017 - 2018 Teclib'.
           </span>
           <br/>
-          <select onChange={
-            event => props.changeLanguage(event.target.value)
-          }>
-            {tractionsList()}
+          <select
+            onChange={ event => props.changeLanguage(event.target.value) }
+            value={props.languageCurrent}
+          >
+            {languagesList()}
           </select>
         </footer>
       </div>
@@ -105,7 +94,7 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
     ]).isRequired
   }
 
-  return connect(null, mapDispatchToProps)(authenticationLayout)
+  return authenticationLayout
 }
 
 export default withAuthenticationLayout
