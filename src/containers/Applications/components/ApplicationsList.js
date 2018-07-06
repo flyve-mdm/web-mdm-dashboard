@@ -33,9 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ApplicationsItemList from './ApplicationsItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
@@ -263,7 +261,6 @@ export default class ApplicationsList extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
       changeSelectionMode,
       changeSelectedItems,
       changeAction,
@@ -289,7 +286,7 @@ export default class ApplicationsList extends PureComponent {
           },
         })
 
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.applications_successfully_removed'),
           type: 'success',
@@ -305,7 +302,7 @@ export default class ApplicationsList extends PureComponent {
         this.listView.winControl.selection.clear()
       }
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -465,7 +462,7 @@ export default class ApplicationsList extends PureComponent {
       <ReactWinJS.ToolBar.Button
         key="delete"
         icon="delete"
-        label={I18n.t('commons.edelete')}
+        label={I18n.t('commons.delete')}
         priority={0}
         disabled={selectedItems.length === 0}
         onClick={this.handleDelete}
@@ -594,7 +591,7 @@ ApplicationsList.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   selectedItems: PropTypes.array.isRequired,
   changeSelectedItems: PropTypes.func.isRequired,

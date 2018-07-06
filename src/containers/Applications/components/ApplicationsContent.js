@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import IconItemList from '../../../components/IconItemList'
 import BytesToSize from '../../../shared/bytesToSize'
@@ -109,7 +107,6 @@ export default class ApplicationsContent extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
       changeAction,
       changeSelectionMode,
       handleMessage,
@@ -132,7 +129,7 @@ export default class ApplicationsContent extends PureComponent {
             force_purge: true,
           },
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.elements_successfully_removed'),
           type: 'success',
@@ -140,7 +137,7 @@ export default class ApplicationsContent extends PureComponent {
         changeAction('reload')
         changeSelectionMode(false)
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -159,7 +156,6 @@ export default class ApplicationsContent extends PureComponent {
   handleRefresh = async () => {
     const {
       glpi,
-      setNotification,
       handleMessage,
       history,
     } = this.props
@@ -173,7 +169,7 @@ export default class ApplicationsContent extends PureComponent {
         }),
       })
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -285,7 +281,7 @@ ApplicationsContent.propTypes = {
   selectedItems: PropTypes.array,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   size: PropTypes.number,
   history: PropTypes.object.isRequired,
