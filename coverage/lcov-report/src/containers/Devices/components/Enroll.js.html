@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/32</span>
+        <span class='fraction'>0/33</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,12 +35,12 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>0/8</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/32</span>
+        <span class='fraction'>0/33</span>
       </div>
     </div>
     <p class="quiet">
@@ -263,8 +263,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -281,6 +279,7 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -295,7 +294,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -303,7 +301,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -311,13 +308,8 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -328,7 +320,15 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -442,9 +442,7 @@ layout: coverage
   PureComponent,
 } from 'react'
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import {</span>
-  I18n,
-} from 'react-i18nify'
+<span class="cstat-no" title="statement not covered" >import I18n from '../../../shared/i18n'</span>
 <span class="cstat-no" title="statement not covered" >import ContentPane from '../../../components/ContentPane'</span>
 <span class="cstat-no" title="statement not covered" >import Loading from '../../../components/Loading'</span>
 <span class="cstat-no" title="statement not covered" >import itemtype from '../../../shared/itemtype'</span>
@@ -461,6 +459,7 @@ export default class Enroll extends PureComponent {
       isLoading: false,
       email: '',
     }
+<span class="cstat-no" title="statement not covered" >    console.log(this.props)</span>
   }
 &nbsp;
   /**
@@ -472,7 +471,6 @@ export default class Enroll extends PureComponent {
     const { email } = <span class="cstat-no" title="statement not covered" >this.state</span>
     const {
       glpi,
-      setNotification,
       history,
       changeAction,
       handleMessage,
@@ -482,34 +480,36 @@ export default class Enroll extends PureComponent {
 <span class="cstat-no" title="statement not covered" >      if (email.trim() !== '') {</span>
 <span class="cstat-no" title="statement not covered" >        this.setState({</span>
           isLoading: true,
-        })
-&nbsp;
-<span class="cstat-no" title="statement not covered" >        await glpi.addItem({</span>
-          itemtype: itemtype.PluginFlyvemdmInvitation,
-          input: {
-            _useremails: email.trim(),
-          },
+        }, <span class="fstat-no" title="function not covered" >async () =&gt; </span>{
+<span class="cstat-no" title="statement not covered" >          await glpi.addItem({</span>
+            itemtype: itemtype.PluginFlyvemdmInvitation,
+            input: {
+              _useremails: email.trim(),
+            },
+          })
         })
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        this.setState({</span>
           isLoading: false,
+        }, <span class="fstat-no" title="function not covered" >() =&gt; </span>{
+<span class="cstat-no" title="statement not covered" >          history.goBack()</span>
+<span class="cstat-no" title="statement not covered" >          changeAction('reload')</span>
         })
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        setNotification({</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification({</span>
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.invitation_successfully_sent'),
           type: 'success',
         })
-<span class="cstat-no" title="statement not covered" >        history.goBack()</span>
-<span class="cstat-no" title="statement not covered" >        changeAction('reload')</span>
       }
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      setNotification(handleMessage({</span>
-        type: 'alert',
-        message: error,
-      }))
 <span class="cstat-no" title="statement not covered" >      this.setState({</span>
         isLoading: false,
+      }, <span class="fstat-no" title="function not covered" >() =&gt; </span>{
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification(handleMessage({</span>
+          type: 'alert',
+          message: error,
+        }))
       })
     }
   }
@@ -585,7 +585,7 @@ export default class Enroll extends PureComponent {
 }
 /** Enroll propTypes */
 <span class="cstat-no" title="statement not covered" >Enroll.propTypes = {</span>
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }
@@ -595,7 +595,7 @@ export default class Enroll extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 05 2018 22:47:46 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 06 2018 21:12:11 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

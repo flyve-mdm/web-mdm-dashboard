@@ -697,10 +697,7 @@ layout: coverage
 <a name='L646'></a><a href='#L646'>646</a>
 <a name='L647'></a><a href='#L647'>647</a>
 <a name='L648'></a><a href='#L648'>648</a>
-<a name='L649'></a><a href='#L649'>649</a>
-<a name='L650'></a><a href='#L650'>650</a>
-<a name='L651'></a><a href='#L651'>651</a>
-<a name='L652'></a><a href='#L652'>652</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L649'></a><a href='#L649'>649</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -736,8 +733,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -946,7 +941,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1386,9 +1380,7 @@ layout: coverage
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 <span class="cstat-no" title="statement not covered" >import ReactWinJS from 'react-winjs'</span>
 <span class="cstat-no" title="statement not covered" >import WinJS from 'winjs'</span>
-<span class="cstat-no" title="statement not covered" >import {</span>
-  I18n,
-} from 'react-i18nify'
+<span class="cstat-no" title="statement not covered" >import I18n from '../../../shared/i18n'</span>
 <span class="cstat-no" title="statement not covered" >import InvitationsItemList from './InvitationsItemList'</span>
 <span class="cstat-no" title="statement not covered" >import BuildItemList from '../../../shared/BuildItemList'</span>
 <span class="cstat-no" title="statement not covered" >import Loader from '../../../components/Loader'</span>
@@ -1561,7 +1553,7 @@ export default class InvitationsList extends PureComponent {
     const {
       glpi,
       handleMessage,
-      setNotification,
+      toast,
       history,
     } = <span class="cstat-no" title="statement not covered" >this.props</span>
     const {
@@ -1595,16 +1587,15 @@ export default class InvitationsList extends PureComponent {
         itemList: BuildItemList(invitations, 2),
         totalcount: invitations.totalcount,
       })
-    } catch (e) {
-<span class="cstat-no" title="statement not covered" >      handleMessage({</span>
-        notification: setNotification,
-        error: e,
-        type: 'alert',
-      })
+    } catch (error) {
 <span class="cstat-no" title="statement not covered" >      this.setState({</span>
         isLoading: false,
         order: 'ASC',
       })
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(handleMessage({</span>
+        message: error,
+        type: 'alert',
+      }))
     }
   }
 &nbsp;
@@ -1617,7 +1608,7 @@ export default class InvitationsList extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
+      toast,
       changeSelectionMode,
       changeSelectedItems,
       changeAction,
@@ -1642,7 +1633,7 @@ export default class InvitationsList extends PureComponent {
             },
           })
 &nbsp;
-<span class="cstat-no" title="statement not covered" >          setNotification({</span>
+<span class="cstat-no" title="statement not covered" >          this.props.toast.setNotification({</span>
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.elements_successfully_removed'),
             type: 'success',
@@ -1661,7 +1652,7 @@ export default class InvitationsList extends PureComponent {
         }
       }
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(handleMessage({</span>
         type: 'alert',
         message: error,
       }))
@@ -1730,7 +1721,7 @@ export default class InvitationsList extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
+      toast,
       handleMessage,
     } = <span class="cstat-no" title="statement not covered" >this.props</span>
 &nbsp;
@@ -1746,7 +1737,7 @@ export default class InvitationsList extends PureComponent {
         itemtype: itemtype.PluginFlyvemdmInvitation,
         input: itemListToSend,
       })
-<span class="cstat-no" title="statement not covered" >      setNotification({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification({</span>
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.invitation_successfully_sent'),
         type: 'success',
@@ -1756,7 +1747,7 @@ export default class InvitationsList extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(handleMessage({</span>
         type: 'alert',
         message: error,
       }))
@@ -1869,7 +1860,7 @@ export default class InvitationsList extends PureComponent {
 <span class="cstat-no" title="statement not covered" >      &lt;ReactWinJS.ToolBar.Button</span>
         key="delete"
         icon="delete"
-        label={I18n.t('commons.dalete')}
+        label={I18n.t('commons.delete')}
         priority={0}
         disabled={selectedItems.length === 0}
         onClick={this.handleDelete}
@@ -1910,7 +1901,7 @@ export default class InvitationsList extends PureComponent {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (isLoading) {</span>
 <span class="cstat-no" title="statement not covered" >      listComponent = &lt;Loader count={3} /&gt;</span>
-    } else <span class="cstat-no" title="statement not covered" >if (itemList) {</span>
+    } else <span class="cstat-no" title="statement not covered" >if (itemList !== undefined) {</span>
 <span class="cstat-no" title="statement not covered" >      if (itemList.length &gt; 0) {</span>
 <span class="cstat-no" title="statement not covered" >        listComponent = (</span>
           &lt;ReactWinJS.ListView
@@ -1996,7 +1987,7 @@ export default class InvitationsList extends PureComponent {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   selectedItems: PropTypes.array.isRequired,
   changeSelectedItems: PropTypes.func.isRequired,
@@ -2008,7 +1999,7 @@ export default class InvitationsList extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 05 2018 22:47:46 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 06 2018 21:12:11 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

@@ -406,9 +406,7 @@ layout: coverage
 <a name='L355'></a><a href='#L355'>355</a>
 <a name='L356'></a><a href='#L356'>356</a>
 <a name='L357'></a><a href='#L357'>357</a>
-<a name='L358'></a><a href='#L358'>358</a>
-<a name='L359'></a><a href='#L359'>359</a>
-<a name='L360'></a><a href='#L360'>360</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L358'></a><a href='#L358'>358</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -442,8 +440,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -800,9 +796,7 @@ layout: coverage
   PureComponent,
 } from 'react'
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import {</span>
-  I18n,
-} from 'react-i18nify'
+<span class="cstat-no" title="statement not covered" >import I18n from '../../../../shared/i18n'</span>
 <span class="cstat-no" title="statement not covered" >import IconItemList from '../../../../components/IconItemList'</span>
 <span class="cstat-no" title="statement not covered" >import Confirmation from '../../../../components/Confirmation'</span>
 <span class="cstat-no" title="statement not covered" >import Loading from '../../../../components/Loading'</span>
@@ -872,7 +866,7 @@ export default class Main extends PureComponent {
     } = <span class="cstat-no" title="statement not covered" >this.state</span>
     const {
       glpi,
-      setNotification,
+      toast,
       handleMessage,
       history,
     } = <span class="cstat-no" title="statement not covered" >this.props</span>
@@ -886,7 +880,7 @@ export default class Main extends PureComponent {
           }),
         })
       } catch (error) {
-<span class="cstat-no" title="statement not covered" >        setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification(handleMessage({</span>
           type: 'alert',
           message: error,
         }))
@@ -904,7 +898,7 @@ export default class Main extends PureComponent {
     const {
       glpi,
       changeSelectionMode,
-      setNotification,
+      toast,
       history,
       changeAction,
       handleMessage,
@@ -922,7 +916,7 @@ export default class Main extends PureComponent {
         id,
       })
         .then(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >          setNotification({</span>
+<span class="cstat-no" title="statement not covered" >          this.props.toast.setNotification({</span>
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.device_successfully_removed'),
             type: 'success',
@@ -932,7 +926,7 @@ export default class Main extends PureComponent {
 <span class="cstat-no" title="statement not covered" >          changeAction('reload')</span>
         })
         .catch((<span class="fstat-no" title="function not covered" >error) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >          setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >          this.props.toast.setNotification(handleMessage({</span>
             type: 'alert',
             message: error,
           }))
@@ -959,7 +953,7 @@ export default class Main extends PureComponent {
   ping = () =&gt; <span class="cstat-no" title="statement not covered" >{</span>
     const {
       glpi,
-      setNotification,
+      toast,
       handleMessage,
     } = <span class="cstat-no" title="statement not covered" >this.props</span>
     const {
@@ -981,7 +975,7 @@ export default class Main extends PureComponent {
             }),
           },
         })
-<span class="cstat-no" title="statement not covered" >        setNotification({</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification({</span>
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.ping_sent'),
           type: 'success',
@@ -992,7 +986,7 @@ export default class Main extends PureComponent {
 <span class="cstat-no" title="statement not covered" >          this.handleRefresh()</span>
         })
       } catch (error) {
-<span class="cstat-no" title="statement not covered" >        setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification(handleMessage({</span>
           type: 'alert',
           message: error,
         }))
@@ -1120,7 +1114,7 @@ export default class Main extends PureComponent {
   id: PropTypes.string.isRequired,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   update: PropTypes.bool.isRequired,
@@ -1132,7 +1126,7 @@ export default class Main extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 05 2018 22:47:46 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 06 2018 21:12:11 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

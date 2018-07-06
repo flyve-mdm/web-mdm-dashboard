@@ -337,11 +337,7 @@ layout: coverage
 <a name='L286'></a><a href='#L286'>286</a>
 <a name='L287'></a><a href='#L287'>287</a>
 <a name='L288'></a><a href='#L288'>288</a>
-<a name='L289'></a><a href='#L289'>289</a>
-<a name='L290'></a><a href='#L290'>290</a>
-<a name='L291'></a><a href='#L291'>291</a>
-<a name='L292'></a><a href='#L292'>292</a>
-<a name='L293'></a><a href='#L293'>293</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L289'></a><a href='#L289'>289</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -375,8 +371,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -455,7 +449,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -500,7 +493,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -666,9 +658,7 @@ layout: coverage
   PureComponent,
 } from 'react'
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import {</span>
-  I18n,
-} from 'react-i18nify'
+<span class="cstat-no" title="statement not covered" >import I18n from '../../../shared/i18n'</span>
 <span class="cstat-no" title="statement not covered" >import ContentPane from '../../../components/ContentPane'</span>
 <span class="cstat-no" title="statement not covered" >import IconItemList from '../../../components/IconItemList'</span>
 <span class="cstat-no" title="statement not covered" >import BytesToSize from '../../../shared/bytesToSize'</span>
@@ -744,7 +734,6 @@ export default class ApplicationsContent extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
       changeAction,
       changeSelectionMode,
       handleMessage,
@@ -767,7 +756,7 @@ export default class ApplicationsContent extends PureComponent {
             force_purge: true,
           },
         })
-<span class="cstat-no" title="statement not covered" >        setNotification({</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification({</span>
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.elements_successfully_removed'),
           type: 'success',
@@ -775,7 +764,7 @@ export default class ApplicationsContent extends PureComponent {
 <span class="cstat-no" title="statement not covered" >        changeAction('reload')</span>
 <span class="cstat-no" title="statement not covered" >        changeSelectionMode(false)</span>
       } catch (error) {
-<span class="cstat-no" title="statement not covered" >        setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification(handleMessage({</span>
           type: 'alert',
           message: error,
         }))
@@ -794,7 +783,6 @@ export default class ApplicationsContent extends PureComponent {
   handleRefresh = async () =&gt; <span class="cstat-no" title="statement not covered" >{</span>
     const {
       glpi,
-      setNotification,
       handleMessage,
       history,
     } = <span class="cstat-no" title="statement not covered" >this.props</span>
@@ -808,7 +796,7 @@ export default class ApplicationsContent extends PureComponent {
         }),
       })
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(handleMessage({</span>
         type: 'alert',
         message: error,
       }))
@@ -920,7 +908,7 @@ export default class ApplicationsContent extends PureComponent {
   selectedItems: PropTypes.array,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   size: PropTypes.number,
   history: PropTypes.object.isRequired,
@@ -931,7 +919,7 @@ export default class ApplicationsContent extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 05 2018 22:47:46 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 06 2018 21:12:11 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

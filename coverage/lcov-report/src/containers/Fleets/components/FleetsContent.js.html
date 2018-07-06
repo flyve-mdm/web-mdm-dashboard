@@ -1354,14 +1354,7 @@ layout: coverage
 <a name='L1303'></a><a href='#L1303'>1303</a>
 <a name='L1304'></a><a href='#L1304'>1304</a>
 <a name='L1305'></a><a href='#L1305'>1305</a>
-<a name='L1306'></a><a href='#L1306'>1306</a>
-<a name='L1307'></a><a href='#L1307'>1307</a>
-<a name='L1308'></a><a href='#L1308'>1308</a>
-<a name='L1309'></a><a href='#L1309'>1309</a>
-<a name='L1310'></a><a href='#L1310'>1310</a>
-<a name='L1311'></a><a href='#L1311'>1311</a>
-<a name='L1312'></a><a href='#L1312'>1312</a>
-<a name='L1313'></a><a href='#L1313'>1313</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L1306'></a><a href='#L1306'>1306</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1395,8 +1388,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1554,7 +1545,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2152,7 +2142,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -2203,7 +2192,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2352,7 +2340,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -2429,7 +2416,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2706,9 +2692,7 @@ layout: coverage
   PureComponent,
 } from 'react'
 <span class="cstat-no" title="statement not covered" >import WinJS from 'winjs'</span>
-<span class="cstat-no" title="statement not covered" >import {</span>
-  I18n,
-} from 'react-i18nify'
+<span class="cstat-no" title="statement not covered" >import I18n from '../../../shared/i18n'</span>
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 <span class="cstat-no" title="statement not covered" >import FleetsTaskItemList from './FleetsTaskItemList'</span>
 <span class="cstat-no" title="statement not covered" >import ContentPane from '../../../components/ContentPane'</span>
@@ -2797,7 +2781,7 @@ class FleetsContent extends PureComponent {
         ...prevState,
         isLoading: true,
         itemID: getID(nextProps.history.location.pathname),
-        input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]['PluginFlyvemdmFleet.name'] : 'New Fleet',
+        input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]['PluginFlyvemdmFleet.name'] : I18n.t('fleets.new_fleet'),
         notManaged: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0][
           'PluginFlyvemdmFleet.is_default'
         ] === 1 : false,
@@ -2868,7 +2852,6 @@ class FleetsContent extends PureComponent {
   requestAllData = async () =&gt; <span class="cstat-no" title="statement not covered" >{</span>
     const {
       glpi,
-      setNotification,
       handleMessage,
       changeSelectionMode,
       changeAction,
@@ -2963,7 +2946,7 @@ class FleetsContent extends PureComponent {
           ],
         })
       } catch (error) {
-<span class="cstat-no" title="statement not covered" >        setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification(handleMessage({</span>
           type: 'alert',
           message: error,
         }))
@@ -3462,7 +3445,6 @@ class FleetsContent extends PureComponent {
     } = <span class="cstat-no" title="statement not covered" >this.state</span>
     const {
       glpi,
-      setNotification,
       changeAction,
       handleMessage,
     } = <span class="cstat-no" title="statement not covered" >this.props</span>
@@ -3481,7 +3463,7 @@ class FleetsContent extends PureComponent {
         input: fleetToUpdate,
       })
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      setNotification({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification({</span>
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.fleet_successfully_updated'),
         type: 'success',
@@ -3493,7 +3475,7 @@ class FleetsContent extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(handleMessage({</span>
         type: 'alert',
         message: error,
       }))
@@ -3517,7 +3499,6 @@ class FleetsContent extends PureComponent {
     } = <span class="cstat-no" title="statement not covered" >this.state</span>
     const {
       glpi,
-      setNotification,
       handleMessage,
     } = <span class="cstat-no" title="statement not covered" >this.props</span>
 &nbsp;
@@ -3634,14 +3615,14 @@ class FleetsContent extends PureComponent {
         })
       }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      setNotification({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification({</span>
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.fleet_successfully_updated'),
         type: 'success',
       })
 <span class="cstat-no" title="statement not covered" >      this.requestAllData()</span>
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(handleMessage({</span>
         type: 'alert',
         message: error,
       }))
@@ -3661,7 +3642,6 @@ class FleetsContent extends PureComponent {
     } = <span class="cstat-no" title="statement not covered" >this.state</span>
     const {
       glpi,
-      setNotification,
       changeSelectionMode,
       changeAction,
       handleMessage,
@@ -3716,7 +3696,7 @@ class FleetsContent extends PureComponent {
 <span class="cstat-no" title="statement not covered" >      this.setState({</span>
         isLoading: false,
       })
-<span class="cstat-no" title="statement not covered" >      setNotification({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification({</span>
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.fleet_successfully_created'),
         type: 'success',
@@ -3724,7 +3704,7 @@ class FleetsContent extends PureComponent {
 <span class="cstat-no" title="statement not covered" >      changeSelectionMode(false)</span>
 <span class="cstat-no" title="statement not covered" >      changeAction('reload')</span>
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(handleMessage({</span>
         type: 'alert',
         message: error,
       }))
@@ -3744,7 +3724,6 @@ class FleetsContent extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
       changeSelectionMode,
       changeAction,
       handleMessage,
@@ -3765,7 +3744,7 @@ class FleetsContent extends PureComponent {
 <span class="cstat-no" title="statement not covered" >        this.setState({</span>
           isLoading: false,
         })
-<span class="cstat-no" title="statement not covered" >        setNotification({</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification({</span>
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.fleet_successfully_removed'),
           type: 'success',
@@ -3773,7 +3752,7 @@ class FleetsContent extends PureComponent {
 <span class="cstat-no" title="statement not covered" >        changeSelectionMode(false)</span>
 <span class="cstat-no" title="statement not covered" >        changeAction('reload')</span>
       } catch (error) {
-<span class="cstat-no" title="statement not covered" >        setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification(handleMessage({</span>
           type: 'alert',
           message: error,
         }))
@@ -3991,7 +3970,7 @@ export default FleetsContent
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 05 2018 22:47:46 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 06 2018 21:12:11 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

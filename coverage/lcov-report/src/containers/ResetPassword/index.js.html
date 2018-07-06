@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/60</span>
+        <span class='fraction'>0/57</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,12 +35,12 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/58</span>
+        <span class='fraction'>0/55</span>
       </div>
     </div>
     <p class="quiet">
@@ -349,10 +349,7 @@ layout: coverage
 <a name='L298'></a><a href='#L298'>298</a>
 <a name='L299'></a><a href='#L299'>299</a>
 <a name='L300'></a><a href='#L300'>300</a>
-<a name='L301'></a><a href='#L301'>301</a>
-<a name='L302'></a><a href='#L302'>302</a>
-<a name='L303'></a><a href='#L303'>303</a>
-<a name='L304'></a><a href='#L304'>304</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L301'></a><a href='#L301'>301</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -390,16 +387,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -512,6 +499,15 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -644,8 +640,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -686,23 +680,13 @@ layout: coverage
 /** import dependencies */
 <span class="cstat-no" title="statement not covered" >import React, { PureComponent } from 'react'</span>
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import { connect } from 'react-redux'</span>
-<span class="cstat-no" title="statement not covered" >import { bindActionCreators } from 'redux'</span>
-<span class="cstat-no" title="statement not covered" >import { I18n } from 'react-i18nify'</span>
+<span class="cstat-no" title="statement not covered" >import I18n from '../../shared/i18n'</span>
 <span class="cstat-no" title="statement not covered" >import Loading from '../../components/Loading'</span>
 <span class="cstat-no" title="statement not covered" >import ConstructInputs from '../../components/Forms'</span>
 <span class="cstat-no" title="statement not covered" >import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'</span>
 <span class="cstat-no" title="statement not covered" >import withHandleMessages from '../../hoc/withHandleMessages'</span>
-<span class="cstat-no" title="statement not covered" >import { fetchResetPassword } from '../../store/authentication/actions'</span>
 <span class="cstat-no" title="statement not covered" >import publicURL from '../../shared/publicURL'</span>
 <span class="cstat-no" title="statement not covered" >import ErrorValidation from '../../components/ErrorValidation'</span>
-&nbsp;
-function <span class="fstat-no" title="function not covered" >mapDispatchToProps(dispatch) {</span>
-  const actions = <span class="cstat-no" title="statement not covered" >{</span>
-    fetchResetPassword: bindActionCreators(fetchResetPassword, dispatch),
-  }
-<span class="cstat-no" title="statement not covered" >  return { actions }</span>
-}
 &nbsp;
 function <span class="fstat-no" title="function not covered" >mapStateToProps(state) {</span>
 <span class="cstat-no" title="statement not covered" >  return {</span>
@@ -800,7 +784,7 @@ class ResetPassword extends PureComponent {
       token,
       password,
     } = <span class="cstat-no" title="statement not covered" >this.state</span>
-    const { actions } = <span class="cstat-no" title="statement not covered" >this.props</span>
+    const { auth } = <span class="cstat-no" title="statement not covered" >this.props</span>
 &nbsp;
     const user = <span class="cstat-no" title="statement not covered" >this.buildDataArray()</span>
     let isCorrect = <span class="cstat-no" title="statement not covered" >true</span>
@@ -818,10 +802,19 @@ class ResetPassword extends PureComponent {
 <span class="cstat-no" title="statement not covered" >      this.setState({</span>
         isResetSent: true,
       })
-<span class="cstat-no" title="statement not covered" >      actions.fetchResetPassword({</span>
+<span class="cstat-no" title="statement not covered" >      auth.fetchResetPassword({</span>
         email,
         token,
         newPassword: password,
+      })
+      .then((<span class="fstat-no" title="function not covered" >response) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification(response)</span>
+      })
+      .catch((<span class="fstat-no" title="function not covered" >error) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        this.props.toast.setNotification(this.props.handleMessages({</span>
+          type: 'alert',
+          message: error,
+        }))
       })
     } else {
 <span class="cstat-no" title="statement not covered" >      this.setState({</span>
@@ -924,8 +917,8 @@ class ResetPassword extends PureComponent {
    * @function render
    */
 <span class="fstat-no" title="function not covered" >  render() </span>{
-    const { isLoading } = <span class="cstat-no" title="statement not covered" >this.props</span>
-<span class="cstat-no" title="statement not covered" >    if (isLoading) {</span>
+    const { auth } = <span class="cstat-no" title="statement not covered" >this.props</span>
+<span class="cstat-no" title="statement not covered" >    if (auth.isLoading) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
         &lt;div style={ { height: '140px' } }&gt;
           &lt;Loading message={`${I18n.t('commons.sending')}...`} /&gt;
@@ -948,13 +941,11 @@ class ResetPassword extends PureComponent {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >ResetPassword.propTypes = {</span>
   history: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  auth: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 }
 &nbsp;
-export default withAuthenticationLayout(
-  connect(mapStateToProps, mapDispatchToProps)(withHandleMessages(ResetPassword)), {
+export default withAuthenticationLayout((withHandleMessages(ResetPassword)), {
     centerContent: true,
   },
 )
@@ -964,7 +955,7 @@ export default withAuthenticationLayout(
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 05 2018 22:47:46 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 06 2018 21:12:11 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
