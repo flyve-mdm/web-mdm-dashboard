@@ -36,30 +36,29 @@ import I18n from '../../shared/i18n'
  * @param {object} props
  * @return {component} Message to show
  */
-const EmptyMessage = props => {
-  return (
-    <div className="center-block-content">
-      {
-        props.icon && props.showIcon ?
-          <span className={"icon-empty-message " + props.icon} />
+const EmptyMessage = props => (
+  <div className="center-block-content">
+    {
+        props.icon && props.showIcon
+          ? <span className={`icon-empty-message ${props.icon}`} />
           : null
       }
-      <h1 className="empty-message">
-        { props.message }
-      </h1>
-    </div>
-  )
-}
+    <h1 className="empty-message">
+      { props.message }
+    </h1>
+  </div>
+)
 
 EmptyMessage.propTypes = {
   icon: PropTypes.string,
   showIcon: PropTypes.bool,
-  message: PropTypes.string.isRequired
+  message: PropTypes.string,
 }
 
 EmptyMessage.defaultProps = {
+  icon: null,
   showIcon: false,
-  message: I18n.t('commons.no_selection')
+  message: I18n.t('commons.no_selection'),
 }
 
 export default EmptyMessage
