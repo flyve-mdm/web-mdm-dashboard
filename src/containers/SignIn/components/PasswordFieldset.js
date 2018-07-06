@@ -34,9 +34,7 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import Loading from '../../../components/Loading'
 import publicURL from '../../../shared/publicURL'
 

@@ -26,6 +26,8 @@
  * ------------------------------------------------------------------------------
  */
 
+import appConfig from '../../../public/config.json'
+
 /**
  * Handle change input value
  * @function changeInput
@@ -59,8 +61,17 @@ export const changePhase = (ctx, newPhase) => {
 export const handleFormSubmit = (ctx, event) => {
   event.preventDefault()
 
-  ctx.props.actions.fetchSignIn(
+  ctx.props.auth.fetchSignIn(
     ctx.state.username,
     ctx.state.password,
-  )
+  ).then(() => {
+    ctx.props.toast.setNotification({
+      title: appConfig.appName,
+      body: 'Welcome!',
+      type: 'success'
+    })
+  })
+  .catch((error) => {
+    ctx.props.toast.setNotification(ctx.props.handleMessage({ type: 'alert', message: error }))
+  })
 }

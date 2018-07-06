@@ -32,33 +32,16 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  connect,
-} from 'react-redux'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  I18n,
-} from 'react-i18nify'
+  Link
+} from 'react-router-dom'
+import I18n from '../../shared/i18n'
 import Loading from '../../components/Loading'
 import Input from '../../components/Forms/Input'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import withGLPI from '../../hoc/withGLPI'
 import publicURL from '../../shared/publicURL'
 import handleMessage from '../../shared/handleMessage'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the ForgotPassword section
@@ -93,7 +76,6 @@ class ForgotPassword extends PureComponent {
   handleRecover = async (event) => {
     const {
       glpi,
-      actions,
     } = this.props
     const { text } = this.state
 
@@ -120,7 +102,7 @@ class ForgotPassword extends PureComponent {
         isRecoverSent: true,
         isLoading: false,
       })
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'success',
         message: I18n.t('notifications.request_sent'),
       }))
@@ -128,7 +110,7 @@ class ForgotPassword extends PureComponent {
       this.setState({
         isLoading: false,
       })
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'warning',
         message: error,
       }))
@@ -226,12 +208,10 @@ class ForgotPassword extends PureComponent {
 
 ForgotPassword.propTypes = {
   history: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 
-export default withGLPI(withAuthenticationLayout(
-  connect(null, mapDispatchToProps)(withHandleMessages(ForgotPassword)), {
+export default withGLPI(withAuthenticationLayout((withHandleMessages(ForgotPassword)), {
     centerContent: true,
   },
 ))

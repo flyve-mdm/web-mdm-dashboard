@@ -31,24 +31,13 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../shared/i18n'
 import {
   Redirect,
 } from 'react-router'
 import UsernameFieldset from './components/UsernameFieldset'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
-import {
-  fetchSignIn,
-} from '../../store/authentication/actions'
 import publicURL from '../../shared/publicURL'
 // Async Component
 import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
@@ -62,21 +51,6 @@ import {
   slideLeft,
   slideRight,
 } from '../../shared/animations/index'
-
-function mapStateToProps(state) {
-  return {
-    isLoading: state.ui.loading,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    fetchSignIn: bindActionCreators(fetchSignIn, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the login form
@@ -147,7 +121,6 @@ class SignIn extends PureComponent {
     } = this.state
     const {
       history,
-      isLoading,
     } = this.props
 
     if (localStorage.getItem('currentUser') && localStorage.getItem('sessionToken')) {
@@ -157,6 +130,7 @@ class SignIn extends PureComponent {
     if (phase === 1) {
       form = (
         <UsernameFieldset
+          {...this.props}
           username={username}
           changeInput={this.changeInput}
           changePhase={this.changePhase}
@@ -165,6 +139,7 @@ class SignIn extends PureComponent {
     } else {
       form = (
         <AsyncPasswordFieldset
+          {...this.props}
           username={username}
           password={password}
           changeInput={this.changeInput}
@@ -174,7 +149,7 @@ class SignIn extends PureComponent {
         />
       )
     }
-    return isLoading
+    return this.props.auth.isLoading
       ? (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -189,13 +164,9 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withAuthenticationLayout(withHandleMessages(SignIn), {
+export default withAuthenticationLayout(withHandleMessages(SignIn), {
   centerContent: true,
-}))
+})

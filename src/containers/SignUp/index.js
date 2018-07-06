@@ -34,45 +34,14 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
+import I18n from '../../shared/i18n'
 import Loading from '../../components/Loading'
 import ConstructInputs from '../../components/Forms'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import {
-  changeNotificationMessage,
-  fetchCaptcha,
-  fetchSignUp,
-} from '../../store/authentication/actions'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import publicURL from '../../shared/publicURL'
 import ErrorValidation from '../../components/ErrorValidation'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    fetchCaptcha: bindActionCreators(fetchCaptcha, dispatch),
-    fetchSignUp: bindActionCreators(fetchSignUp, dispatch),
-    changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
-  }
-  return {
-    actions,
-  }
-}
-
-function mapStateToProps(state) {
-  return {
-    isLoading: state.ui.loading,
-    type: state.ui.notification.type,
-    captcha: state.auth.captcha,
-    configurationPassword: state.auth.configurationPassword,
-  }
-}
+import appConfig from '../../../public/config.json'
 
 /**
  * Component with the registration form
@@ -97,23 +66,15 @@ class SignUp extends PureComponent {
    * Fetch the captcha
    * @function componentDidMount
    */
-  componentDidMount() {
-    const { actions } = this.props
-    actions.fetchCaptcha()
-  }
-
-  /**
-   * redirect to '/validateAccount' when the registration is success
-   * @function componentDidUpdate
-   */
-  componentDidUpdate() {
-    const {
-      type,
-      history,
-    } = this.props
-
-    if (type === 'success') {
-      history.push(`${publicURL}/validateAccount`)
+  async componentDidMount() {
+    try {
+      const { auth } = this.props
+      await auth.fetchCaptcha()
+    } catch (error) {
+      this.props.toast.setNotification(this.props.handleMessage({
+        type: 'alert',
+        message: error
+      }))
     }
   }
 
@@ -260,8 +221,7 @@ class SignUp extends PureComponent {
       captchaValue,
     } = this.state
     const {
-      actions,
-      captcha,
+      auth,
     } = this.props
 
     const user = this.buildDataArray()
@@ -279,14 +239,28 @@ class SignUp extends PureComponent {
     }
 
     if (isCorrect) {
-      actions.fetchSignUp({
+      auth.fetchSignUp({
         name: email,
         realname: realName,
         password,
         password2: passwordConfirmation,
         _useremails: [email],
-        _plugin_flyvemdmdemo_captchas_id: captcha.id,
+        _plugin_flyvemdmdemo_captchas_id: auth.captcha.id,
         _answer: captchaValue,
+      })
+      .then(() => {
+        this.props.toast.setNotification({
+          title: appConfig.appName,
+          body: 'Successfully registered user',
+          type: 'success'
+        })
+        this.props.history.push(`${publicURL}/validateAccount`)
+      })
+      .catch((error) => {
+        this.props.toast.setNotification(this.props.handleMessage({
+          type: 'alert',
+          message: error
+        }))
       })
     } else {
       this.setState({
@@ -301,13 +275,11 @@ class SignUp extends PureComponent {
    */
   render() {
     const {
-      isLoading,
-      captcha,
-      actions,
+      auth
     } = this.props
 
     let renderComponent
-    if (isLoading) {
+    if (auth.isLoading) {
       renderComponent = (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -326,11 +298,11 @@ class SignUp extends PureComponent {
             <ConstructInputs data={user.passwordInformation} />
             <ConstructInputs data={user.captchaInformation} />
             <div className="authentication__captcha-img">
-              <img src={captcha.img} alt="Captcha" />
+              <img src={auth.captcha.img} alt="Captcha" />
             </div>
             <div
               className="authentication__captcha-refresh"
-              onClick={actions.fetchCaptcha}
+              onClick={auth.fetchCaptcha}
               role="button"
               tabIndex="0"
             >
@@ -373,15 +345,10 @@ SignUp.defaultProps = {
 
 SignUp.propTypes = {
   history: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  captcha: PropTypes.object,
+  auth: PropTypes.object.isRequired,
   type: PropTypes.string,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withAuthenticationLayout(SignUp, {
+export default withAuthenticationLayout(withHandleMessages(SignUp), {
   contentCenter: true,
-}))
+})
