@@ -34,15 +34,7 @@ import PropTypes from 'prop-types'
 import {
   VictoryPie,
 } from 'victory'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
+import I18n from '../../shared/i18n'
 import {
   NavLink,
 } from 'react-router-dom'
@@ -50,9 +42,6 @@ import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import Loading from '../../components/Loading'
 import InfoBox from '../../components/InfoBox'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import EmptyMessage from '../../components/EmptyMessage'
 import ContentPane from '../../components/ContentPane'
 import itemtype from '../../shared/itemtype'
@@ -61,15 +50,6 @@ import logout from '../../shared/logout'
 import {
   slideTop,
 } from '../../shared/animations/index'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the Home section
@@ -101,10 +81,8 @@ class Dashboard extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const { glpi } = this.props
-    const { display } = this.state
 
-    if (glpi.sessionToken) {
+    if (this.props.glpi.sessionToken) {
       let isValid = true
       const newState = {
         applicationsUploaded: undefined,
@@ -117,71 +95,71 @@ class Dashboard extends PureComponent {
         devicesByOperatingSystemVersion: undefined,
         devicesByUsers: undefined,
       }
-      if (isValid && display.applicationsUploaded) {
+      if (isValid && this.state.display.applicationsUploaded) {
         try {
           newState.applicationsUploaded = await this.getApplications()
         } catch (error) {
           isValid = this.validateError(error)
         }
       }
-      if (isValid && display.filesUploaded) {
+      if (isValid && this.state.display.filesUploaded) {
         try {
           newState.filesUploaded = await this.getFiles()
         } catch (error) {
           isValid = this.validateError(error)
         }
       }
-      if (isValid && display.fleetsCurrentlyManaged) {
+      if (isValid && this.state.display.fleetsCurrentlyManaged) {
         try {
           newState.fleetsCurrentlyManaged = await this.getFleets()
         } catch (error) {
           isValid = this.validateError(error)
         }
       }
-      if (isValid && display.invitationsSent) {
+      if (isValid && this.state.display.invitationsSent) {
         try {
           newState.invitationsSent = await this.getInvitations()
         } catch (error) {
           isValid = this.validateError(error)
         }
       }
-      if (isValid && display.pendingInvitations) {
+      if (isValid && this.state.display.pendingInvitations) {
         try {
           newState.pendingInvitations = await this.getPendingInvitations()
         } catch (error) {
           isValid = this.validateError(error)
         }
       }
-      if (isValid && display.numberUsers) {
+      if (isValid && this.state.display.numberUsers) {
         try {
           newState.numberUsers = await this.getUsers()
         } catch (error) {
           isValid = this.validateError(error)
         }
       }
-      if (isValid && (display.devicesCurrentlyManaged || display.devicesByOperatingSystemVersion
-          || display.devicesByUsers)) {
+      if (isValid && (this.state.display.devicesCurrentlyManaged || this.state.display.devicesByOperatingSystemVersion
+          || this.state.display.devicesByUsers)) {
         try {
           newState.devices = await this.getDevices()
         } catch (error) {
           isValid = this.validateError(error)
         }
       }
-      if (display.devicesCurrentlyManaged && newState.devices) {
+      if (this.state.display.devicesCurrentlyManaged && newState.devices) {
         try {
           newState.devicesCurrentlyManaged = newState.devices.totalcount
         } catch (error) {
           isValid = this.validateError(error)
         }
       }
-      if (display.devicesByOperatingSystemVersion && newState.devices && newState.devices.totalcount > 0) {
+      if (this.state.display.devicesByOperatingSystemVersion && newState.devices && newState.devices.totalcount > 0) {
         try {
           newState.devicesByOperatingSystemVersion = await this.getDevicesByOperatingSystemVersion(newState.devices)
         } catch (error) {
           isValid = this.validateError(error)
         }
       }
-      if (display.devicesByUsers && newState.devices && newState.devices.totalcount > 0) {
+      if (this.state.display.devicesByUsers && newState.devices && newState.devices.totalcount > 0) {
         try {
           newState.devicesByUsers = await this.getDevicesByUsers(newState.devices)
         } catch (error) {
@@ -217,9 +195,8 @@ class Dashboard extends PureComponent {
    */
   getDevices = () => new Promise(async (resolve, reject) => {
     try {
-      const { glpi } = this.props
 
-      const devices = await glpi.searchItems({
+      const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
         options: {
           uid_cols: true,
@@ -241,9 +218,8 @@ class Dashboard extends PureComponent {
    */
   getUsers = () => new Promise(async (resolve, reject) => {
     try {
-      const { glpi } = this.props
 
-      const users = await glpi.searchItems({
+      const users = await this.props.glpi.searchItems({
         itemtype: itemtype.User,
       })
       resolve(users.totalcount)
@@ -322,9 +298,8 @@ class Dashboard extends PureComponent {
    */
   getInvitations = () => new Promise(async (resolve, reject) => {
     try {
-      const { glpi } = this.props
 
-      const invitations = await glpi.searchItems({
+      const invitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
       })
       resolve(invitations.totalcount)
@@ -342,9 +317,8 @@ class Dashboard extends PureComponent {
    */
   getPendingInvitations = () => new Promise(async (resolve, reject) => {
     try {
-      const { glpi } = this.props
 
-      const pendingInvitations = await glpi.searchItems({
+      const pendingInvitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
         criteria: [{
           field: 3,
@@ -368,9 +342,8 @@ class Dashboard extends PureComponent {
    */
   getFleets = () => new Promise(async (resolve, reject) => {
     try {
-      const { glpi } = this.props
 
-      const fleets = await glpi.searchItems({
+      const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
       })
       resolve(fleets.totalcount)
@@ -388,9 +361,8 @@ class Dashboard extends PureComponent {
    */
   getFiles = () => new Promise(async (resolve, reject) => {
     try {
-      const { glpi } = this.props
 
-      const files = await glpi.searchItems({
+      const files = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFile,
       })
       resolve(files.totalcount)
@@ -408,9 +380,8 @@ class Dashboard extends PureComponent {
    */
   getApplications = () => new Promise(async (resolve, reject) => {
     try {
-      const { glpi } = this.props
 
-      const applications = await glpi.searchItems({
+      const applications = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPackage,
       })
       resolve(applications.totalcount)
@@ -426,12 +397,8 @@ class Dashboard extends PureComponent {
    * @param {*} error
    */
   showError = (error) => {
-    const {
-      actions,
-      handleMessage,
-    } = this.props
 
-    actions.setNotification(handleMessage({
+    this.props.toast.setNotification(this.props.handleMessage({
       type: 'alert',
       message: error,
     }))
@@ -453,83 +420,75 @@ class Dashboard extends PureComponent {
    * @return {array}
    */
   renderInfoBox() {
-    const {
-      devicesCurrentlyManaged,
-      invitationsSent,
-      fleetsCurrentlyManaged,
-      filesUploaded,
-      applicationsUploaded,
-      numberUsers,
-    } = this.state
 
     const boxes = []
 
-    if (devicesCurrentlyManaged) {
+    if (this.state.devicesCurrentlyManaged) {
       boxes.push(
         <InfoBox
           to="app/devices"
-          count={devicesCurrentlyManaged}
-          name={(devicesCurrentlyManaged === 1) ? I18n.t('commons.device') : I18n.t('commons.devices')}
+          count={this.state.devicesCurrentlyManaged}
+          name={(this.state.devicesCurrentlyManaged === 1) ? I18n.t('commons.device') : I18n.t('commons.devices')}
           icon="deviceIcon"
           key="devicesCurrentlyManaged"
         />,
       )
     }
 
-    if (invitationsSent) {
+    if (this.state.invitationsSent) {
       boxes.push(
         <InfoBox
           to="app/invitations"
-          count={invitationsSent}
-          name={(invitationsSent === 1) ? I18n.t('commons.invitation') : I18n.t('commons.invitations')}
+          count={this.state.invitationsSent}
+          name={(this.state.invitationsSent === 1) ? I18n.t('commons.invitation') : I18n.t('commons.invitations')}
           icon="emailIcon"
           key="invitationsSent"
         />,
       )
     }
 
-    if (fleetsCurrentlyManaged) {
+    if (this.state.fleetsCurrentlyManaged) {
       boxes.push(
         <InfoBox
           to="app/fleets"
-          count={fleetsCurrentlyManaged}
-          name={(fleetsCurrentlyManaged === 1) ? I18n.t('commons.fleet') : I18n.t('commons.fleets')}
+          count={this.state.fleetsCurrentlyManaged}
+          name={(this.state.fleetsCurrentlyManaged === 1) ? I18n.t('commons.fleet') : I18n.t('commons.fleets')}
           icon="goToStartIcon"
           key="fleetsCurrentlyManaged"
         />,
       )
     }
 
-    if (filesUploaded) {
+    if (this.state.filesUploaded) {
       boxes.push(
         <InfoBox
           to="app/files"
-          count={filesUploaded}
-          name={(filesUploaded === 1) ? I18n.t('commons.file') : I18n.t('commons.files')}
+          count={this.state.filesUploaded}
+          name={(this.state.filesUploaded === 1) ? I18n.t('commons.file') : I18n.t('commons.files')}
           icon="filesIcon"
           key="filesUploaded"
         />,
       )
     }
 
-    if (applicationsUploaded) {
+    if (this.state.applicationsUploaded) {
       boxes.push(
         <InfoBox
           to="app/applications"
-          count={applicationsUploaded}
-          name={(applicationsUploaded === 1) ? I18n.t('commons.application') : I18n.t('commons.applications')}
+          count={this.state.applicationsUploaded}
+          name={(this.state.applicationsUploaded === 1) ? I18n.t('commons.application') : I18n.t('commons.applications')}
           icon="switchAppsIcon"
           key="applicationsUploaded"
         />,
       )
     }
 
-    if (numberUsers) {
+    if (this.state.numberUsers) {
       boxes.push(
         <InfoBox
           to="app/users"
-          count={numberUsers}
-          name={(numberUsers === 1) ? I18n.t('commons.user') : I18n.t('commons.users')}
+          count={this.state.numberUsers}
+          name={(this.state.numberUsers === 1) ? I18n.t('commons.user') : I18n.t('commons.users')}
           icon="peopleIcon"
           key="numberUsers"
         />,
@@ -545,15 +504,10 @@ class Dashboard extends PureComponent {
    * @return {array}
    */
   renderGraphics() {
-    const {
-      devicesByOperatingSystemVersion,
-      pendingInvitations,
-      devicesByUsers,
-    } = this.state
 
     const graphics = []
 
-    if (devicesByOperatingSystemVersion) {
+    if (this.state.devicesByOperatingSystemVersion) {
       graphics.push(
         <div key="DevicesOS" className="info-box">
           <VictoryPie
@@ -566,7 +520,7 @@ class Dashboard extends PureComponent {
             padAngle={5}
             labelRadius={90}
             labels={d => `${d.x} ${d.y}`}
-            data={devicesByOperatingSystemVersion}
+            data={this.state.devicesByOperatingSystemVersion}
             style={{ labels: { fill: '#000', fontSize: 24, fontWeight: 300 } }}
           />
           <span className="title-box">
@@ -576,7 +530,7 @@ class Dashboard extends PureComponent {
       )
     }
 
-    if (pendingInvitations) {
+    if (this.state.pendingInvitations) {
       graphics.push(
         <div key="InvitationsChart" className="info-box">
           <VictoryPie
@@ -590,7 +544,7 @@ class Dashboard extends PureComponent {
             labelRadius={90}
             labels={d => `${d.x} ${d.y}`}
             data={[
-              { x: I18n.t('commons.invitations'), y: pendingInvitations },
+              { x: I18n.t('commons.invitations'), y: this.state.pendingInvitations },
             ]}
             style={{ labels: { fill: '#000', fontSize: 24, fontWeight: 300 } }}
           />
@@ -601,12 +555,12 @@ class Dashboard extends PureComponent {
       )
     }
 
-    if (devicesByUsers) {
+    if (this.state.devicesByUsers) {
       graphics.push(
         <div key="devicesByUsersChart" className="info-box navlinks">
           <ul>
             {
-              devicesByUsers.map((device, id) => (
+              this.state.devicesByUsers.map((device, id) => (
                 <li key={`device-${id.toString()}`}>
                   <NavLink
                     exact
@@ -633,11 +587,10 @@ class Dashboard extends PureComponent {
    * @function render
    */
   render() {
-    const { isLoading } = this.state
 
     const renderInfoBox = this.renderInfoBox()
     const renderGraphics = this.renderGraphics()
-    const renderComponent = isLoading
+    const renderComponent = this.state.isLoading
       ? (
         <div style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -670,11 +623,8 @@ class Dashboard extends PureComponent {
 
 Dashboard.propTypes = {
   glpi: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(Dashboard)))
+export default withGLPI(Dashboard)
