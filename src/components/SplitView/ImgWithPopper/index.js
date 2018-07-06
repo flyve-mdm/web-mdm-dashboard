@@ -27,10 +27,10 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import {
-  NavLink
+  NavLink,
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -54,7 +54,7 @@ class ImgWithPopper extends PureComponent {
             style={{
               width: '20px',
               maxWidth: '100%',
-              height: 'auto'
+              height: 'auto',
             }}
             title={this.props.title}
           />
@@ -65,14 +65,14 @@ class ImgWithPopper extends PureComponent {
 }
 
 ImgWithPopper.defaultProps = {
-  alt: ""
+  alt: '',
 }
 
 ImgWithPopper.propTypes = {
   to: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   alt: PropTypes.string,
-  title: PropTypes.string
 }
 
 export default ImgWithPopper
