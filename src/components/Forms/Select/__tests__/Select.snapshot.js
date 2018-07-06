@@ -29,7 +29,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import Select from "../index"
+import Select from '../index'
 
 describe('Select', () => {
   test('renders Select', () => {
@@ -40,13 +40,13 @@ describe('Select', () => {
         value="test"
         function={() => {}}
         options={[
-          {name: 'test', value: 1234},
-          {name: 'test2', value: 5678}
+          { name: 'test', value: 1234 },
+          { name: 'test2', value: 5678 },
         ]}
         required
-      />
+      />,
     )
-    let tree = component.toJSON()
+    const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 })

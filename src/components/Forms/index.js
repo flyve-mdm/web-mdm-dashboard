@@ -38,5 +38,5 @@ export {
   Input,
   Select,
   DatePicker,
-  TextArea
+  TextArea,
 }

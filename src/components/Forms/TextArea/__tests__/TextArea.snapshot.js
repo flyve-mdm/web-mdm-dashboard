@@ -29,7 +29,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import TextArea from "../index"
+import TextArea from '../index'
 
 describe('TextArea', () => {
   test('renders TextArea', () => {
@@ -41,11 +41,11 @@ describe('TextArea', () => {
         placeholder="test"
         rows={8}
         function={() => {}}
-        style={{height: '40px'}}
+        style={{ height: '40px' }}
         required
-      />
+      />,
     )
-    let tree = component.toJSON()
+    const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 })
