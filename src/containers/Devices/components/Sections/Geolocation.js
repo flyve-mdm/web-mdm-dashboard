@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import Loading from '../../../../components/Loading'
 import Map from '../Map'
 import GeolocationList from './GeolocationList'
@@ -137,7 +135,7 @@ export default class Geolocation extends PureComponent {
   requestLocation = async () => {
     const {
       glpi,
-      setNotification,
+      toast,
       handleMessage,
     } = this.props
     const { id } = this.state
@@ -153,7 +151,7 @@ export default class Geolocation extends PureComponent {
           _geolocate: '',
         },
       })
-      setNotification({
+      this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.request_sent'),
         type: 'success',
@@ -163,7 +161,7 @@ export default class Geolocation extends PureComponent {
       this.setState({
         isLoadingGeolocation: false,
       })
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -182,7 +180,7 @@ export default class Geolocation extends PureComponent {
     } = this.state
     const {
       glpi,
-      setNotification,
+      toast,
       handleMessage,
     } = this.props
 
@@ -206,7 +204,7 @@ export default class Geolocation extends PureComponent {
           isLoadingGeolocation: false,
         })
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -297,7 +295,7 @@ export default class Geolocation extends PureComponent {
 /** Geolocation propTypes */
 Geolocation.propTypes = {
   id: PropTypes.string.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   update: PropTypes.bool.isRequired,
 }

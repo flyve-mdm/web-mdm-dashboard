@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import itemtype from '../../../shared/itemtype'
@@ -50,6 +48,7 @@ export default class Enroll extends PureComponent {
       isLoading: false,
       email: '',
     }
+    console.log(this.props)
   }
 
   /**
@@ -61,7 +60,6 @@ export default class Enroll extends PureComponent {
     const { email } = this.state
     const {
       glpi,
-      setNotification,
       history,
       changeAction,
       handleMessage,
@@ -71,34 +69,36 @@ export default class Enroll extends PureComponent {
       if (email.trim() !== '') {
         this.setState({
           isLoading: true,
-        })
-
-        await glpi.addItem({
-          itemtype: itemtype.PluginFlyvemdmInvitation,
-          input: {
-            _useremails: email.trim(),
-          },
+        }, async () => {
+          await glpi.addItem({
+            itemtype: itemtype.PluginFlyvemdmInvitation,
+            input: {
+              _useremails: email.trim(),
+            },
+          })
         })
 
         this.setState({
           isLoading: false,
+        }, () => {
+          history.goBack()
+          changeAction('reload')
         })
 
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.invitation_successfully_sent'),
           type: 'success',
         })
-        history.goBack()
-        changeAction('reload')
       }
     } catch (error) {
-      setNotification(handleMessage({
-        type: 'alert',
-        message: error,
-      }))
       this.setState({
         isLoading: false,
+      }, () => {
+        this.props.toast.setNotification(handleMessage({
+          type: 'alert',
+          message: error,
+        }))
       })
     }
   }
@@ -174,7 +174,7 @@ export default class Enroll extends PureComponent {
 }
 /** Enroll propTypes */
 Enroll.propTypes = {
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }

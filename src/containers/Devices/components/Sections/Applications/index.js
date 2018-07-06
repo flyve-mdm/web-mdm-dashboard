@@ -33,9 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../../shared/i18n'
 import EmptyMessage from '../../../../../components/EmptyMessage'
 import ContentPane from '../../../../../components/ContentPane'
 import Loader from '../../../../../components/Loader'

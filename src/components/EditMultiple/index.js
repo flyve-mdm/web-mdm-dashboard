@@ -40,9 +40,7 @@ import {
 } from '../Forms'
 import ErrorValidation from '../ErrorValidation'
 import EmptyMessage from '../EmptyMessage'
-import {
-  I18n
-} from "react-i18nify"
+import I18n from '../../shared/i18n'
 
 /**
  * Component with the menu for multiple edition
@@ -110,7 +108,7 @@ class EditMultiple extends PureComponent {
           this.setState({
             isLoading: false
           })
-          this.props.setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.elements_successfully_edited'),
             type: 'success'
@@ -122,11 +120,7 @@ class EditMultiple extends PureComponent {
           this.setState({
             isLoading: false
           })
-          this.props.setNotification({
-            title: error[0],
-            body: error[1],
-            type: 'alert'
-          })
+          this.props.toast.setNotification(handleMessage({type: 'alert', message: error}))
         }
       })
     } else {
@@ -361,7 +355,7 @@ EditMultiple.propTypes = {
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   request: PropTypes.object.isRequired
 }

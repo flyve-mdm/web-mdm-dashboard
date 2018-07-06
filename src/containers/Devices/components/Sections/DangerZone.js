@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import Confirmation from '../../../../components/Confirmation'
 import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
@@ -91,7 +89,7 @@ class DangerZone extends PureComponent {
     const {
       wipeDevice,
       glpi,
-      setNotification,
+      toast,
       changeAction,
       history,
       handleMessage,
@@ -108,7 +106,7 @@ class DangerZone extends PureComponent {
             wipe: '1',
           },
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.data_deleted_successfully'),
           type: 'success',
@@ -116,7 +114,7 @@ class DangerZone extends PureComponent {
         changeAction('reload')
         history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -133,7 +131,7 @@ class DangerZone extends PureComponent {
     const {
       unenrollmentDevice,
       glpi,
-      setNotification,
+      toast,
       changeAction,
       history,
       handleMessage,
@@ -150,7 +148,7 @@ class DangerZone extends PureComponent {
             _unenroll: '1',
           },
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.unenrollment_device'),
           type: 'success',
@@ -158,7 +156,7 @@ class DangerZone extends PureComponent {
         changeAction('reload')
         history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -175,7 +173,7 @@ class DangerZone extends PureComponent {
     const {
       deleteDevice,
       glpi,
-      setNotification,
+      toast,
       changeAction,
       history,
       handleMessage,
@@ -189,7 +187,7 @@ class DangerZone extends PureComponent {
           id,
           itemtype: itemtype.PluginFlyvemdmAgent,
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.devices_successfully_deleted'),
           type: 'success',
@@ -197,7 +195,7 @@ class DangerZone extends PureComponent {
         changeAction('reload')
         history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -277,7 +275,7 @@ DangerZone.defaultProps = {
 /** DangerZone propTypes */
 DangerZone.propTypes = {
   id: PropTypes.string.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   changeAction: PropTypes.func.isRequired,

@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import ConstructInputs from '../../../components/Forms'
 import {
@@ -162,7 +160,7 @@ export default class DevicesEditOne extends PureComponent {
     } = this.state
     const {
       glpi,
-      setNotification,
+      toast,
       changeAction,
       changeSelectionMode,
       history,
@@ -182,7 +180,7 @@ export default class DevicesEditOne extends PureComponent {
       input,
     })
       .then(() => {
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.changes_saved_successfully'),
           type: 'success',
@@ -192,7 +190,7 @@ export default class DevicesEditOne extends PureComponent {
         history.push(`${publicURL}/app/devices/${id}`);
       })
       .catch((error) => {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -250,7 +248,7 @@ export default class DevicesEditOne extends PureComponent {
 DevicesEditOne.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,

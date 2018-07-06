@@ -30,33 +30,15 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import PropTypes from 'prop-types'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import DevicesList from './components/DevicesList'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * @class Devices
@@ -98,7 +80,6 @@ class Devices extends PureComponent {
    * @function handleResize
    */
   handleResize = () => {
-    const { mode } = this.state
 
     const nextMode = getMode()
 
@@ -112,7 +93,7 @@ class Devices extends PureComponent {
       })
     }
 
-    if (mode !== nextMode) {
+    if (this.state.mode !== nextMode) {
       this.setState({
         mode: nextMode,
       })
@@ -132,9 +113,9 @@ class Devices extends PureComponent {
       action,
     } = this.state
     const {
-      actions,
       history,
       glpi,
+      toast,
       handleMessage,
     } = this.props
 
@@ -146,7 +127,7 @@ class Devices extends PureComponent {
       changeSelectionMode: this.changeSelectionMode,
       changeSelectedItems: this.changeSelectedItems,
       changeAction: this.changeAction,
-      setNotification: actions.setNotification,
+      toast,
       history,
       glpi,
       handleMessage,
@@ -265,7 +246,7 @@ class Devices extends PureComponent {
             key="content"
             routes={routes}
             rootPath={match.url}
-            data={{ ...this.propsData() }}
+            {...this.propsData()}
           />
         </div>
       </React.Fragment>
@@ -285,10 +266,7 @@ Devices.propTypes = {
   handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(Devices)))
+export default withGLPI(Devices)

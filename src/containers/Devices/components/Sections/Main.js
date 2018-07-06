@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import IconItemList from '../../../../components/IconItemList'
 import Confirmation from '../../../../components/Confirmation'
 import Loading from '../../../../components/Loading'
@@ -103,7 +101,7 @@ export default class Main extends PureComponent {
     } = this.state
     const {
       glpi,
-      setNotification,
+      toast,
       handleMessage,
       history,
     } = this.props
@@ -117,7 +115,7 @@ export default class Main extends PureComponent {
           }),
         })
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -135,7 +133,7 @@ export default class Main extends PureComponent {
     const {
       glpi,
       changeSelectionMode,
-      setNotification,
+      toast,
       history,
       changeAction,
       handleMessage,
@@ -153,7 +151,7 @@ export default class Main extends PureComponent {
         id,
       })
         .then(() => {
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.device_successfully_removed'),
             type: 'success',
@@ -163,7 +161,7 @@ export default class Main extends PureComponent {
           changeAction('reload')
         })
         .catch((error) => {
-          setNotification(handleMessage({
+          this.props.toast.setNotification(handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -190,7 +188,7 @@ export default class Main extends PureComponent {
   ping = () => {
     const {
       glpi,
-      setNotification,
+      toast,
       handleMessage,
     } = this.props
     const {
@@ -212,7 +210,7 @@ export default class Main extends PureComponent {
             }),
           },
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.ping_sent'),
           type: 'success',
@@ -223,7 +221,7 @@ export default class Main extends PureComponent {
           this.handleRefresh()
         })
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -351,7 +349,7 @@ Main.propTypes = {
   id: PropTypes.string.isRequired,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   update: PropTypes.bool.isRequired,
