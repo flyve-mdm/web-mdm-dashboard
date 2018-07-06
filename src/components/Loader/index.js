@@ -36,17 +36,16 @@ import listRender from './listRender'
  * @param {object} props
  * @return {component}
  */
-const Loader = props => {
-
+const Loader = (props) => {
   /** Create the array of loaders */
   let content = []
-  for (let index = 0; index < props.count; index++) {
+  for (let index = 0; index < props.count; index += 1) {
     content = [
       ...content,
       listRender({
-        props: props,
-        index: index
-      })
+        props,
+        index,
+      }),
     ]
   }
 
@@ -59,12 +58,10 @@ const Loader = props => {
 
 Loader.propTypes = {
   count: PropTypes.number,
-  type: PropTypes.oneOf(["list", "content"])
 }
 
 Loader.defaultProps = {
   count: 1,
-  type: "list"
 }
 
 export default Loader
