@@ -27,11 +27,11 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  Link
+  Link,
 } from 'react-router-dom'
 import I18n from '../../shared/i18n'
 import publicURL from '../../shared/publicURL'
@@ -42,29 +42,30 @@ import publicURL from '../../shared/publicURL'
  * @extends PureComponent
  */
 class HeaderBreadcrumb extends PureComponent {
-
   /**
    * Create the breadcrumb menu
    * @function breadcrumbs
    * @return {array} Breadcrumb menu
    */
   breadcrumbs() {
-    let breadcrumbs = []
-    const addresses = this.props.location.pathname.split("/")
-    for (let index = (publicURL === '') ? 2 : 3; index < addresses.length; index++) {
+    const breadcrumbs = []
+    const addresses = this.props.location.pathname.split('/')
+    for (let index = (publicURL === '') ? 2 : 3; index < addresses.length; index += 1) {
       let path = `${publicURL}/app`
-      for (let i = (publicURL === '') ? 2 : 3; i < index + 1; i++) {
+      for (let i = (publicURL === '') ? 2 : 3; i < index + 1; i += 1) {
         path += `/${addresses[i]}`
       }
       breadcrumbs.push(
         <React.Fragment key={path}>
-          <span className="header-breadcrumb-separator">/</span>
+          <span className="header-breadcrumb-separator">
+            /
+          </span>
           <span>
             <Link to={path}>
               {addresses[index].replace(/\b\w/g, l => l.toUpperCase())}
             </Link>
           </span>
-        </React.Fragment>
+        </React.Fragment>,
       )
     }
 
@@ -80,7 +81,12 @@ class HeaderBreadcrumb extends PureComponent {
       <header className="header-block">
 
         <div className="header-icon">
-          <span className="burgerIcon" onClick={this.props.handleToggleExpand}/>
+          <span
+            className="burgerIcon"
+            onClick={this.props.handleToggleExpand}
+            role="button"
+            tabIndex="0"
+          />
         </div>
 
         <nav className="header-breadcrumb">
@@ -101,7 +107,7 @@ class HeaderBreadcrumb extends PureComponent {
 
 HeaderBreadcrumb.propTypes = {
   handleToggleExpand: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 }
 
 export default HeaderBreadcrumb
