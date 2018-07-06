@@ -205,6 +205,7 @@ SplitView.propTypes = {
   contract: PropTypes.bool.isRequired,
   handleContract: PropTypes.func.isRequired,
   handleSetTimeOut: PropTypes.func.isRequired,
+  mode: PropTypes.string.isRequired,
 }
 
 export default SplitView
