@@ -27,9 +27,7 @@
  */
 
 /** import dependencies */
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../shared/i18n'
 import FleetsContent from './components/FleetsContent'
 import EmptyMessage from '../../components/EmptyMessage'
 import DevicesAssociated from './components/DevicesAssociated'
@@ -49,7 +47,7 @@ const routes = [
   },
   {
     path: '/edit',
-    name: I18n.t('fleets.edit'),
+    name: I18n.t('commons.edit'),
     component: FleetsEdit,
     exact: true,
   },
