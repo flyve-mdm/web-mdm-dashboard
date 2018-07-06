@@ -30,7 +30,6 @@ import React, {
   PureComponent
 } from 'react'
 import handleMessage from '../../shared/handleMessage'
-import PropTypes from 'prop-types'
 
 /**
  * Wrapper component to pass to the props the 'handleMessage' function
@@ -46,10 +45,6 @@ const withHandleMessages = (WrappedComponent) => {
     render() {
       return <WrappedComponent handleMessage={handleMessage} {...this.props} />
     }
-  }
-
-  HandleMessages.propTypes = {
-    history: PropTypes.object.isRequired
   }
 
   return HandleMessages

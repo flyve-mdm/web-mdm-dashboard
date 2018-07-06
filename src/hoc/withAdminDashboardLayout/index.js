@@ -36,31 +36,12 @@ import configureDisplay from '../../shared/configureDisplay'
 import setGlpiCookie from '../../shared/setGlpiCookie'
 import animationsWinJs from '../../shared/animationsWinJs/index'
 import glpi from '../../shared/glpiApi'
-import {
-  I18n
-} from "react-i18nify"
+import I18n from '../../shared/i18n'
 import Confirmation from '../../components/Confirmation'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
-import {
-  logout
-} from '../../store/authentication/actions'
+import withAuthentication from '../withAuthentication'
 
 /** timeout to contract the lateral menu */
 const TIMEOUT_CONTRACT = 150
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    logout: bindActionCreators(logout, dispatch)
-  }
-  return {
-    actions
-  }
-}
 
 /**
  * Wrapper component with the basic structure of the admin dashboard layout
@@ -91,7 +72,7 @@ const withAdminDashboardLayout = WrappedComponent => {
     logout = async () => {
       const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
-        this.props.actions.logout(this.props.history)
+        this.props.auth.logout(this.props.history)
       }
     }
 
@@ -200,10 +181,7 @@ const withAdminDashboardLayout = WrappedComponent => {
     }
   }
 
-  return connect(
-    null,
-    mapDispatchToProps
-  )(AdminDashboardLayout)
+  return withAuthentication(AdminDashboardLayout)
 }
 
 export default withAdminDashboardLayout
