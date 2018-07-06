@@ -30,34 +30,15 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import PropTypes from 'prop-types'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import FleetsList from './components/FleetsList'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
 import itemtype from '../../shared/itemtype'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * @class Fleets
@@ -127,7 +108,7 @@ class Fleets extends PureComponent {
       action,
     } = this.state
     const {
-      actions,
+      toast,
       history,
       glpi,
       handleMessage,
@@ -141,7 +122,7 @@ class Fleets extends PureComponent {
       changeSelectionMode: this.changeSelectionMode,
       changeSelectedItems: this.changeSelectedItems,
       changeAction: this.changeAction,
-      setNotification: actions.setNotification,
+      toast,
       history,
       glpi,
       handleMessage,
@@ -268,7 +249,7 @@ class Fleets extends PureComponent {
             key="content"
             routes={routes}
             rootPath={match.url}
-            data={{ ...this.propsData() }}
+            {...this.propsData()}
           />
         </div>
       </React.Fragment>
@@ -287,10 +268,7 @@ Fleets.propTypes = {
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(Fleets)))
+export default withGLPI(Fleets)

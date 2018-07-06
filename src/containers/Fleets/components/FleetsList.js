@@ -33,9 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import FleetsItemList from './FleetsItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
@@ -213,7 +211,6 @@ export default class FleetsList extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
       changeAction,
       changeSelectionMode,
       changeSelectedItems,
@@ -238,7 +235,7 @@ export default class FleetsList extends PureComponent {
           },
         })
 
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.fleet_successfully_removed'),
           type: 'success',
@@ -254,7 +251,7 @@ export default class FleetsList extends PureComponent {
         }
       }
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -386,7 +383,6 @@ export default class FleetsList extends PureComponent {
       history,
       glpi,
       handleMessage,
-      setNotification,
     } = this.props
     const {
       order,
@@ -420,11 +416,10 @@ export default class FleetsList extends PureComponent {
         itemList: new WinJS.Binding.List(fleets.data),
       })
     } catch (error) {
-      handleMessage({
-        notification: setNotification,
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         error,
-      })
+      }))
       this.setState({
         isLoading: false,
         order: 'ASC',
@@ -572,7 +567,7 @@ FleetsList.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   selectedItems: PropTypes.array.isRequired,
   changeSelectedItems: PropTypes.func.isRequired,
