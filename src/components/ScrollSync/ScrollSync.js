@@ -26,8 +26,10 @@
  * ------------------------------------------------------------------------------
  */
 
+/* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["node", "panel"] }] */
+
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 
@@ -37,6 +39,11 @@ import PropTypes from 'prop-types'
  * @extends PureComponent
  */
 class ScrollSync extends PureComponent {
+  /**
+   * @name panels
+   * @type {object}
+   */
+  panels = {}
 
   /**
    * Validate types of the props
@@ -48,9 +55,18 @@ class ScrollSync extends PureComponent {
     children: PropTypes.element.isRequired,
     proportional: PropTypes.bool,
     vertical: PropTypes.bool,
-    horizontal: PropTypes.bool
+    horizontal: PropTypes.bool,
   }
 
+  /**
+   * @constant childContextTypes
+   * @static
+   * @type {object}
+   */
+  static childContextTypes = {
+    registerPanel: PropTypes.func,
+    unregisterPanel: PropTypes.func,
+  }
 
   /**
    * Set default values for the props
@@ -61,17 +77,7 @@ class ScrollSync extends PureComponent {
   static defaultProps = {
     proportional: true,
     vertical: true,
-    horizontal: true
-  }
-
-  /**
-   * @constant childContextTypes
-   * @static
-   * @type {object}
-   */
-  static childContextTypes = {
-    registerPanel: PropTypes.func,
-    unregisterPanel: PropTypes.func
+    horizontal: true,
   }
 
   /**
@@ -81,15 +87,9 @@ class ScrollSync extends PureComponent {
   getChildContext() {
     return {
       registerPanel: this.registerPanel,
-      unregisterPanel: this.unregisterPanel
+      unregisterPanel: this.unregisterPanel,
     }
   }
-
-  /**
-   * @name panels
-   * @type {object}
-   */
-  panels = {}
 
   /**
    * Register panel
@@ -180,7 +180,7 @@ class ScrollSync extends PureComponent {
       clientHeight,
       scrollLeft,
       scrollWidth,
-      clientWidth
+      clientWidth,
     } = scrolledPanel
 
     const scrollTopOffset = scrollHeight - clientHeight
@@ -190,7 +190,7 @@ class ScrollSync extends PureComponent {
     const {
       proportional,
       vertical,
-      horizontal
+      horizontal,
     } = this.props
 
     this.panels[group].forEach((panel) => {

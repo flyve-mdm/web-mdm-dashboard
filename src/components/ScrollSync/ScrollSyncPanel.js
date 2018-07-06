@@ -26,10 +26,9 @@
  * ------------------------------------------------------------------------------
  */
 
-import {
-  PureComponent
+import React, {
+  PureComponent,
 } from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 /**
@@ -38,7 +37,6 @@ import PropTypes from 'prop-types'
  * @extends PureComponent
  */
 class ScrollSyncPanel extends PureComponent {
-
   /**
    * @static
    * @constant propTypes
@@ -47,16 +45,7 @@ class ScrollSyncPanel extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     attachTo: PropTypes.object,
-    group: PropTypes.string
-  }
-
-  /**
-   * @static
-   * @constant defaultProps
-   * @type {object}
-   */
-  static defaultProps = {
-    group: 'default'
+    group: PropTypes.string,
   }
 
   /**
@@ -66,7 +55,17 @@ class ScrollSyncPanel extends PureComponent {
    */
   static contextTypes = {
     registerPanel: PropTypes.func.isRequired,
-    unregisterPanel: PropTypes.func.isRequired
+    unregisterPanel: PropTypes.func.isRequired,
+  }
+
+  /**
+   * @static
+   * @constant defaultProps
+   * @type {object}
+   */
+  static defaultProps = {
+    group: 'default',
+    attachTo: null,
   }
 
   /**
@@ -74,7 +73,7 @@ class ScrollSyncPanel extends PureComponent {
    * @function componentDidMount
    */
   componentDidMount() {
-    this.node = this.props.attachTo || ReactDOM.findDOMNode(this)
+    this.node = this.props.attachTo || this.children
     this.context.registerPanel(this.node, this.props.group)
   }
 
@@ -103,7 +102,11 @@ class ScrollSyncPanel extends PureComponent {
    * @function render
    */
   render() {
-    return this.props.children
+    return (
+      <React.Fragment ref={(children) => { this.children = children }}>
+        { this.props.children }
+      </React.Fragment>
+    )
   }
 }
 
