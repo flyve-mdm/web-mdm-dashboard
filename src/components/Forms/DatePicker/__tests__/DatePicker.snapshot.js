@@ -29,7 +29,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import DatePicker from "../index"
+import DatePicker from '../index'
 
 describe('DatePicker', () => {
   test('renders DatePicker', () => {
@@ -40,9 +40,9 @@ describe('DatePicker', () => {
         value={new Date('06-10-1997')}
         function={() => {}}
         required
-      />
+      />,
     )
-    let tree = component.toJSON()
+    const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 })
