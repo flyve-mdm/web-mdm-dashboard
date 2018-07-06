@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import FilesEditItemList from './FilesEditItemList'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
@@ -91,7 +89,6 @@ export default class FilesEdit extends PureComponent {
     const { selectedItem } = this.state
     const {
       glpi,
-      setNotification,
       changeSelectionMode,
       changeAction,
       handleMessage,
@@ -108,13 +105,13 @@ export default class FilesEdit extends PureComponent {
         })
 
         if (selectedItem.length > 1) {
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_files'),
             type: 'success',
           })
         } else {
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_file'),
             type: 'success',
@@ -125,7 +122,7 @@ export default class FilesEdit extends PureComponent {
         changeAction('reload')
       }
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -185,6 +182,6 @@ FilesEdit.propTypes = {
   selectedItems: PropTypes.array,
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }

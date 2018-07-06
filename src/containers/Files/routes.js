@@ -27,9 +27,7 @@
  */
 
 /** import dependencies */
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../shared/i18n'
 import EmptyMessage from '../../components/EmptyMessage'
 import FilesAdd from './components/FilesAdd'
 import FilesEdit from './components/FilesEdit'
