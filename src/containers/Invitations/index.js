@@ -30,33 +30,15 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import PropTypes from 'prop-types'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import InvitationsList from './components/InvitationsList'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the Invitations section
@@ -142,7 +124,7 @@ class Invitations extends PureComponent {
       selectedItems,
     } = this.state
     const {
-      actions,
+      toast,
       history,
       glpi,
       handleMessage,
@@ -156,7 +138,7 @@ class Invitations extends PureComponent {
       changeSelectedItems: this.changeSelectedItems,
       action,
       changeAction: this.changeAction,
-      setNotification: actions.setNotification,
+      toast,
       history,
       glpi,
       handleMessage,
@@ -281,7 +263,7 @@ class Invitations extends PureComponent {
             key="content"
             routes={routes}
             rootPath={match.url}
-            data={{ ...this.propsData() }}
+            {...this.propsData()}
           />
         </div>
       </React.Fragment>
@@ -297,13 +279,10 @@ class Invitations extends PureComponent {
 
 Invitations.propTypes = {
   match: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(Invitations)))
+export default withGLPI(Invitations)
