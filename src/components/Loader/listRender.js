@@ -28,8 +28,9 @@
 
 import React from 'react'
 import ContentLoader, {
-  BulletList
+  BulletList,
 } from 'react-content-loader'
+import PropTypes from 'prop-types'
 
 /**
  * Render of loaders
@@ -40,22 +41,30 @@ import ContentLoader, {
  */
 const listRender = ({
   props,
-  index
+  index,
 }) => {
-  if (props.type === "list") {
+  if (props.type === 'list') {
     return (
-      <ContentLoader key={`loader-${index}`} speed={1.5} style={{ width: '320px' }}>
+      <ContentLoader key={`loader-${index.toString()}`} speed={1.5} style={{ width: '320px' }}>
         <circle cx="40" cy="45" r="27" />
         <rect x={80} y={20} rx={3} ry={3} width={250} height={10} radius={5} />
         <rect x={80} y={40} rx={3} ry={3} width={300} height={10} radius={5} />
         <rect x={80} y={60} rx={3} ry={3} width={260} height={10} radius={5} />
-      </ContentLoader >
-    )
-  } else {
-    return (
-      <BulletList key={`loader-${index}`} speed={1.5} style={{ width: '320px' }}/>
+      </ContentLoader>
     )
   }
+  return (
+    <BulletList
+      key={`loader-${index}`}
+      speed={1.5}
+      style={{ width: '320px' }}
+    />
+  )
+}
+
+listRender.propTypes = {
+  props: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
 }
 
 export default listRender
