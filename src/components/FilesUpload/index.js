@@ -31,5 +31,5 @@ import FilesUploadItemList from './FilesUploadItemList'
 
 export {
   FilesUpload,
-  FilesUploadItemList
+  FilesUploadItemList,
 }

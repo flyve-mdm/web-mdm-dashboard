@@ -27,7 +27,7 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import bytesToSize from '../../shared/bytesToSize'
@@ -39,6 +39,47 @@ import I18n from '../../shared/i18n'
  * @extends PureComponent
  */
 export default class FilesUpload extends PureComponent {
+
+  /**
+   * Open the windows to select the files
+   * @function openFileChooser
+   */
+  static openFileChooser() {
+    this.inputElement.value = null
+    this.inputElement.click()
+  }
+
+  /**
+   * Get mime type left
+   * @function mimeTypeLeft
+   * @param {string} mime
+   */
+  static mimeTypeLeft(mime) {
+    return mime.split('/')[0]
+  }
+
+  /**
+   * Get mime type right
+   * @function mimeTypeRight
+   * @param {string} mime
+   */
+  static mimeTypeRight(mime) {
+    return mime.split('/')[1]
+  }
+
+  /**
+   * Get the extension of the file
+   * @function fileExtension
+   * @param {object} file
+   */
+  static fileExtension(file) {
+    const extensionSplit = file.name.split('.')
+    if (extensionSplit.length > 1) {
+      return extensionSplit[extensionSplit.length - 1]
+    }
+    return 'none'
+  }
+
   /** @constructor */
   constructor(props) {
     super(props)
@@ -49,7 +90,7 @@ export default class FilesUpload extends PureComponent {
 
     this.id = 1
     this.state = {
-      files: []
+      files: [],
     }
   }
 
@@ -72,14 +113,14 @@ export default class FilesUpload extends PureComponent {
       filesAdded = [filesAdded[0]]
     }
 
-    let files = []
-    for (let i = 0; i < filesAdded.length; i++) {
-      let file = filesAdded[i]
+    const files = []
+    for (let i = 0; i < filesAdded.length; i += 1) {
+      const file = filesAdded[i]
 
       /** Assign file an id */
-      file.id = 'files-' + this.id++
-        /** Tell file it's own extension */
-        file.extension = this.fileExtension(file)
+      file.id = `files-${this.id += 1}`
+      /** Tell file it's own extension */
+      file.extension = this.fileExtension(file)
       /** Tell file it's own size */
       file.filesize = file.size
       /** Tell file it's own readable size */
@@ -89,11 +130,11 @@ export default class FilesUpload extends PureComponent {
       if (file.type && this.mimeTypeLeft(file.type) === 'image') {
         file.preview = {
           type: 'image',
-          url: window.URL.createObjectURL(file)
+          url: window.URL.createObjectURL(file),
         }
       } else {
         file.preview = {
-          type: 'file'
+          type: 'file',
         }
       }
 
@@ -101,7 +142,7 @@ export default class FilesUpload extends PureComponent {
       if (this.state.files.length + files.length >= this.props.maxFiles) {
         this.onError({
           code: 4,
-          message: I18n.t('files_upload.maximum_count')
+          message: I18n.t('files_upload.maximum_count'),
         }, file)
         break
       }
@@ -113,7 +154,7 @@ export default class FilesUpload extends PureComponent {
     }
 
     this.setState({
-      files: this.props.multiple === false ? files : [...this.state.files, ...files]
+      files: this.props.multiple === false ? files : [...this.state.files, ...files],
     }, () => {
       this.props.onChange.call(this, this.state.files)
     })
@@ -124,7 +165,7 @@ export default class FilesUpload extends PureComponent {
    * @function onDragOver
    * @param {*} event
    */
-  onDragOver(event) {
+  static onDragOver(event) {
     event.preventDefault()
     event.stopPropagation()
   }
@@ -134,8 +175,8 @@ export default class FilesUpload extends PureComponent {
    * @function onDragEnter
    */
   onDragEnter() {
-    let el = this.dropzone
-    el.className += ' ' + this.props.dropActiveClassName
+    const el = this.dropzone
+    el.className += ` ${this.props.dropActiveClassName}`
   }
 
   /**
@@ -143,107 +184,8 @@ export default class FilesUpload extends PureComponent {
    * @function onDragLeave
    */
   onDragLeave() {
-    let el = this.dropzone
-    this.dropzone.className = el.className.replace(' ' + this.props.dropActiveClassName, '')
-  }
-
-  /**
-   * Open the windows to select the files
-   * @function openFileChooser
-   */
-  openFileChooser() {
-    this.inputElement.value = null
-    this.inputElement.click()
-  }
-
-  /**
-   * Validate the type of the file
-   * @function fileTypeAcceptable
-   * @param {object} file
-   */
-  fileTypeAcceptable(file) {
-    let accepts = this.props.accepts
-    if (accepts) {
-      if (file.type) {
-        let typeLeft = this.mimeTypeLeft(file.type)
-        let typeRight = this.mimeTypeRight(file.type)
-        for (let i = 0; i < accepts.length; i++) {
-          let accept = accepts[i]
-          let acceptLeft = accept.split('/')[0]
-          let acceptRight = accept.split('/')[1]
-          if (acceptLeft && acceptRight) {
-            if (acceptLeft === typeLeft && acceptRight === '*') {
-              return true
-            }
-            if (acceptLeft === typeLeft && acceptRight === typeRight) {
-              return true
-            }
-          }
-        }
-      }
-      this.onError({
-        code: 1,
-        message: `${file.name} ${I18n.t('files_upload.invalid_type')}`
-      }, file)
-      return false
-    } else {
-      return true
-    }
-  }
-
-  /**
-   * Validate the size of the file
-   * @function fileSizeAcceptable
-   * @param {object} file
-   */
-  fileSizeAcceptable(file) {
-    if (file.size > this.props.maxFileSize) {
-      this.onError({
-        code: 2,
-        message: `${file.name} ${I18n.t('files_upload.too_large')}`
-      }, file)
-      return false
-    } else if (file.size < this.props.minFileSize) {
-      this.onError({
-        code: 3,
-        message: `${file.name} ${I18n.t('files_upload.too_small')}`
-      }, file)
-      return false
-    } else {
-      return true
-    }
-  }
-
-  /**
-   * Get mime type left
-   * @function mimeTypeLeft
-   * @param {string} mime
-   */
-  mimeTypeLeft(mime) {
-    return mime.split('/')[0]
-  }
-
-  /**
-   * Get mime type right
-   * @function mimeTypeRight
-   * @param {string} mime
-   */
-  mimeTypeRight(mime) {
-    return mime.split('/')[1]
-  }
-
-  /**
-   * Get the extension of the file
-   * @function fileExtension
-   * @param {object} file
-   */
-  fileExtension(file) {
-    let extensionSplit = file.name.split('.')
-    if (extensionSplit.length > 1) {
-      return extensionSplit[extensionSplit.length - 1]
-    } else {
-      return 'none'
-    }
+    const el = this.dropzone
+    this.dropzone.className = el.className.replace(` ${this.props.dropActiveClassName}`, '')
   }
 
   /**
@@ -257,13 +199,69 @@ export default class FilesUpload extends PureComponent {
   }
 
   /**
+   * Validate the type of the file
+   * @function fileTypeAcceptable
+   * @param {object} file
+   */
+  fileTypeAcceptable(file) {
+    const { accepts } = this.props
+    if (accepts) {
+      if (file.type) {
+        const typeLeft = this.mimeTypeLeft(file.type)
+        const typeRight = this.mimeTypeRight(file.type)
+        for (let i = 0; i < accepts.length; i += 1) {
+          const accept = accepts[i]
+          const acceptLeft = accept.split('/')[0]
+          const acceptRight = accept.split('/')[1]
+          if (acceptLeft && acceptRight) {
+            if (acceptLeft === typeLeft && acceptRight === '*') {
+              return true
+            }
+            if (acceptLeft === typeLeft && acceptRight === typeRight) {
+              return true
+            }
+          }
+        }
+      }
+      this.onError({
+        code: 1,
+        message: `${file.name} ${I18n.t('files_upload.invalid_type')}`,
+      }, file)
+      return false
+    }
+    return true
+  }
+
+  /**
+   * Validate the size of the file
+   * @function fileSizeAcceptable
+   * @param {object} file
+   */
+  fileSizeAcceptable(file) {
+    if (file.size > this.props.maxFileSize) {
+      this.onError({
+        code: 2,
+        message: `${file.name} ${I18n.t('files_upload.too_large')}`,
+      }, file)
+      return false
+    } if (file.size < this.props.minFileSize) {
+      this.onError({
+        code: 3,
+        message: `${file.name} ${I18n.t('files_upload.too_small')}`,
+      }, file)
+      return false
+    }
+    return true
+  }
+
+  /**
    * Remove a file of the list
    * @function removeFile
    * @param {object} fileToRemove
    */
   removeFile(fileToRemove) {
     this.setState({
-      files: this.state.files.filter(file => file.id !== fileToRemove.id)
+      files: this.state.files.filter(file => file.id !== fileToRemove.id),
     }, () => {
       this.props.onChange.call(this, this.state.files)
     })
@@ -275,7 +273,7 @@ export default class FilesUpload extends PureComponent {
    */
   removeFiles() {
     this.setState({
-      files: []
+      files: [],
     }, () => {
       this.props.onChange.call(this, this.state.files)
     })
@@ -292,12 +290,12 @@ export default class FilesUpload extends PureComponent {
       multiple: this.props.multiple,
       name: this.props.name,
       style: {
-        display: 'none'
+        display: 'none',
       },
       ref: (element) => {
         this.inputElement = element
       },
-      onChange: this.onDrop
+      onChange: this.onDrop,
     }
 
     return (
@@ -308,15 +306,15 @@ export default class FilesUpload extends PureComponent {
         <div
           className={this.props.className}
           onClick={
-            this.props.clickable === true ?
-              this.openFileChooser
+            this.props.clickable === true
+              ? this.openFileChooser
               : null
           }
           onDrop={this.onDrop}
           onDragOver={this.onDragOver}
           onDragEnter={this.onDragEnter}
           onDragLeave={this.onDragLeave}
-          ref={dropzone => { this.dropzone = dropzone }}
+          ref={(dropzone) => { this.dropzone = dropzone }}
           style={this.props.style}
         >
           {this.props.children}
@@ -329,9 +327,9 @@ export default class FilesUpload extends PureComponent {
 FilesUpload.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
-  className: PropTypes.string.isRequired,
+    PropTypes.node,
+  ]).isRequired,
+  className: PropTypes.string,
   dropActiveClassName: PropTypes.string,
   onChange: PropTypes.func,
   onError: PropTypes.func,
@@ -342,15 +340,15 @@ FilesUpload.propTypes = {
   minFileSize: PropTypes.number,
   clickable: PropTypes.bool,
   name: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
 }
 
 FilesUpload.defaultProps = {
-  onChange: function (files) {
+  onChange(files) {
     console.log(files)
   },
-  onError: function (error, file) {
-    console.log('error code ' + error.code + ': ' + error.message)
+  onError(error) {
+    console.log(`error code ${error.code}: ${error.message}`)
   },
   className: 'files-dropzone',
   dropActiveClassName: 'files-dropzone-active',
@@ -360,5 +358,6 @@ FilesUpload.defaultProps = {
   maxFileSize: Infinity,
   minFileSize: 0,
   name: 'file',
-  clickable: true
+  clickable: true,
+  style: {},
 }
