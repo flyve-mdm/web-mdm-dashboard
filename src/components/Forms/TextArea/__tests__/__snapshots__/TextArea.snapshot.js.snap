@@ -9,7 +9,7 @@ exports[`TextArea renders TextArea 1`] = `
   </p>
   <textarea
     className="win-textarea"
-    disabled={undefined}
+    disabled={false}
     name="test"
     onChange={[Function]}
     placeholder="test"

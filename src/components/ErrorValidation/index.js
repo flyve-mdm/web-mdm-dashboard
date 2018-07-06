@@ -107,7 +107,6 @@ class ErrorValidation extends PureComponent {
             this.props.errors.map((element, index) => (
               <li key={`errorMessage-${index.toString()}`}>
                 -
-                {' '}
                 {element}
               </li>
             ))

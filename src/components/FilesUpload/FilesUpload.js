@@ -39,16 +39,6 @@ import I18n from '../../shared/i18n'
  * @extends PureComponent
  */
 export default class FilesUpload extends PureComponent {
-
-  /**
-   * Open the windows to select the files
-   * @function openFileChooser
-   */
-  static openFileChooser() {
-    this.inputElement.value = null
-    this.inputElement.click()
-  }
-
   /**
    * Get mime type left
    * @function mimeTypeLeft
@@ -83,10 +73,6 @@ export default class FilesUpload extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    this.onDrop = this.onDrop.bind(this)
-    this.onDragEnter = this.onDragEnter.bind(this)
-    this.onDragLeave = this.onDragLeave.bind(this)
-    this.openFileChooser = this.openFileChooser.bind(this)
 
     this.id = 1
     this.state = {
@@ -95,11 +81,20 @@ export default class FilesUpload extends PureComponent {
   }
 
   /**
+   * Open the windows to select the files
+   * @function openFileChooser
+   */
+  openFileChooser = () => {
+    this.inputElement.value = null
+    this.inputElement.click()
+  }
+
+  /**
    * change the native behavior of the browser to add files to a list in the state
    * @function onDrop
    * @param {object} event
    */
-  onDrop(event) {
+  onDrop = (event) => {
     event.preventDefault()
     this.onDragLeave(event)
 
@@ -120,14 +115,14 @@ export default class FilesUpload extends PureComponent {
       /** Assign file an id */
       file.id = `files-${this.id += 1}`
       /** Tell file it's own extension */
-      file.extension = this.fileExtension(file)
+      file.extension = FilesUpload.fileExtension(file)
       /** Tell file it's own size */
       file.filesize = file.size
       /** Tell file it's own readable size */
       file.sizeReadable = bytesToSize(file.size)
       /** Add preview, either image or file extension */
 
-      if (file.type && this.mimeTypeLeft(file.type) === 'image') {
+      if (file.type && FilesUpload.mimeTypeLeft(file.type) === 'image') {
         file.preview = {
           type: 'image',
           url: window.URL.createObjectURL(file),
@@ -207,8 +202,8 @@ export default class FilesUpload extends PureComponent {
     const { accepts } = this.props
     if (accepts) {
       if (file.type) {
-        const typeLeft = this.mimeTypeLeft(file.type)
-        const typeRight = this.mimeTypeRight(file.type)
+        const typeLeft = FilesUpload.mimeTypeLeft(file.type)
+        const typeRight = FilesUpload.mimeTypeRight(file.type)
         for (let i = 0; i < accepts.length; i += 1) {
           const accept = accepts[i]
           const acceptLeft = accept.split('/')[0]
@@ -311,9 +306,9 @@ export default class FilesUpload extends PureComponent {
               : null
           }
           onDrop={this.onDrop}
-          onDragOver={this.onDragOver}
-          onDragEnter={this.onDragEnter}
-          onDragLeave={this.onDragLeave}
+          onDragOver={FilesUpload.onDragOver}
+          onDragEnter={FilesUpload.onDragEnter}
+          onDragLeave={FilesUpload.onDragLeave}
           ref={(dropzone) => { this.dropzone = dropzone }}
           style={this.props.style}
         >

@@ -142,7 +142,7 @@ class ScrollSync extends PureComponent {
 
   /**
    * Find a panel
-   * @function addEvents
+   * @function findPanel
    * @param {component} node
    * @param {string} group
    * @return {(component|boolean)}
@@ -209,6 +209,7 @@ class ScrollSync extends PureComponent {
           panel.scrollLeft = proportional ? (panelWidth * scrollLeft) / scrollLeftOffset : scrollLeft
         }
         // Re-attach event listeners after we're done scrolling
+        console.log(panel)
         window.requestAnimationFrame(() => {
           this.addEvents(panel, group)
         })

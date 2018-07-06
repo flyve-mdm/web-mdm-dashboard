@@ -30,7 +30,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import PropsRoute from './PropsRoute'
-import NotFound from '../../components/NotFound'
+import NotFound from '../NotFound'
 
 // TODO: Enable PrivateRoute if route if private
 
@@ -46,28 +46,36 @@ import NotFound from '../../components/NotFound'
 const GenerateRoutes = (props) => {
   const r = props.routes.map(({
     exact, path, component, authenticate,
-  }) =>
-    (
-      <PropsRoute
-        exact={exact}
-        component={component}
-        authenticate={authenticate}
-        {...props}
-        key={path}
-        path={
-          typeof props.rootPath === 'string'
-            ? path === '/'
-              ? props.rootPath
-              : props.rootPath + path
-            : path
-        }
-      />
-    ))
+  }) => (
+    <PropsRoute
+      exact={exact}
+      component={component}
+      authenticate={authenticate}
+      {...props}
+      key={path}
+      path={
+        typeof props.rootPath === 'string'
+          ? path === '/'
+            ? props.rootPath
+            : props.rootPath + path
+          : path
+      }
+    />
+  ))
 
-  props.withNotFound &&
-    r.push(<Route key={props.routes.length + 1} render={() => <NotFound />} />)
+  props.withNotFound
+    && r.push(
+      <Route
+        key={props.routes.length + 1}
+        render={() => <NotFound />}
+      />,
+    )
 
-  return <Switch>{r}</Switch>
+  return (
+    <Switch>
+      {r}
+    </Switch>
+  )
 }
 
 GenerateRoutes.defaultProps = {

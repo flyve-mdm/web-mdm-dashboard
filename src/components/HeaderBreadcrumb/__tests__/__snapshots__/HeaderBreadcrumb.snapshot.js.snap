@@ -10,6 +10,8 @@ exports[`HeaderBreadcrumb renders HeaderBreadcrumb 1`] = `
     <span
       className="burgerIcon"
       onClick={[Function]}
+      role="button"
+      tabIndex="0"
     />
   </div>
   <nav

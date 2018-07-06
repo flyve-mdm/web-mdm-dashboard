@@ -17,11 +17,12 @@ exports[`IconItemList renders IconItemList 1`] = `
   }
 >
   <div
-    className={undefined}
+    className=""
+    onClick={[Function]}
+    role="presentation"
   >
     <img
       alt=""
-      onClick={undefined}
       src="profile.png"
       style={
         Object {

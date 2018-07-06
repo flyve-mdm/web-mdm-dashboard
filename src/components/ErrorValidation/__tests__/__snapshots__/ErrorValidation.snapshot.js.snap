@@ -6,11 +6,11 @@ exports[`ErrorValidation renders ErrorValidation 1`] = `
 >
   <ul>
     <li>
-      - 
+      -
       error 1
     </li>
     <li>
-      - 
+      -
       error 2
     </li>
   </ul>

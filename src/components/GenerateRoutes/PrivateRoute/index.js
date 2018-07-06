@@ -28,13 +28,13 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import RenderMergedProps from '../RenderMergedProps'
 import {
-  Route
+  Route,
 } from 'react-router-dom'
 import {
-  Redirect
+  Redirect,
 } from 'react-router'
+import RenderMergedProps from '../RenderMergedProps'
 
 /**
  * Validate if a user is authenticated
@@ -56,25 +56,23 @@ const isAuthenticated = () => {
  * @param {*} rest
  * @return {component}
  */
-const PrivateRoute = ({ component, redirectTo, ...rest }) =>
-  (
-    <Route
-      {...rest}
-      render={routeProps =>
-        (isAuthenticated() ? (
-          RenderMergedProps(component, routeProps, rest)
-        ) :
-          (
-            <Redirect
-              to={{
-                pathname: redirectTo,
-                state: { from: routeProps.location },
-              }}
-            />
-          ))
+const PrivateRoute = ({ component, redirectTo, ...rest }) => (
+  <Route
+    {...rest}
+    render={routeProps => (isAuthenticated() ? (
+      RenderMergedProps(component, routeProps, rest)
+    )
+      : (
+        <Redirect
+          to={{
+            pathname: redirectTo,
+            state: { from: routeProps.location },
+          }}
+        />
+      ))
       }
-    />
-  )
+  />
+)
 
 PrivateRoute.defaultProps = {
   redirectTo: '/',
