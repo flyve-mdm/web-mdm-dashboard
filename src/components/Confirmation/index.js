@@ -27,7 +27,7 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
@@ -39,7 +39,6 @@ import I18n from '../../shared/i18n'
  * @extends PureComponent
  */
 class Confirmation extends PureComponent {
-
   /**
    * Asynchronous function that waits for a user's response
    * @static
@@ -48,13 +47,9 @@ class Confirmation extends PureComponent {
    * @param {object} contentDialog
    * @return {boolean} User's response
    */
-  static isOK = async (contentDialog) => {
-    return await contentDialog.winControl.show().then(({
-      result
-    }) => {
-      return result === "primary"
-    })
-  }
+  static isOK = async contentDialog => contentDialog.winControl.show().then(({
+    result,
+  }) => result === 'primary')
 
   /**
    * Render component
@@ -68,7 +63,9 @@ class Confirmation extends PureComponent {
         primaryCommandText={I18n.t('commons.ok')}
         secondaryCommandText={I18n.t('commons.cancel')}
       >
-        <p>{ this.props.message }</p>
+        <p>
+          { this.props.message }
+        </p>
       </ReactWinJS.ContentDialog>
     )
   }
@@ -77,7 +74,7 @@ class Confirmation extends PureComponent {
 Confirmation.propTypes = {
   reference: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired
+  message: PropTypes.string.isRequired,
 }
 
 export default Confirmation
