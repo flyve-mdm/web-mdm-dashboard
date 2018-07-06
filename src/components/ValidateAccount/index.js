@@ -39,9 +39,6 @@ import {
 import {
   connect,
 } from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import withGLPI from '../../hoc/withGLPI'

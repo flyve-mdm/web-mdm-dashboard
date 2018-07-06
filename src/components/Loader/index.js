@@ -58,10 +58,12 @@ const Loader = (props) => {
 
 Loader.propTypes = {
   count: PropTypes.number,
+  type: PropTypes.string,
 }
 
 Loader.defaultProps = {
   count: 1,
+  type: 'list',
 }
 
 export default Loader
