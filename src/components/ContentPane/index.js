@@ -27,11 +27,11 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  slideTop
+  slideTop,
 } from '../../shared/animations/index'
 
 
@@ -41,7 +41,6 @@ import {
  * @extends PureComponent
  */
 class ContentPane extends PureComponent {
-
   /**
    * Run the "slideTop" animation when the component is mounted
    * @function componentDidMount
@@ -64,7 +63,10 @@ class ContentPane extends PureComponent {
    */
   render() {
     return (
-      <div className={`content-pane ${this.props.className}`} ref={pane => this.pane = pane}>
+      <div
+        className={`content-pane ${this.props.className}`}
+        ref={(pane) => { this.pane = pane }}
+      >
         { this.props.children }
       </div>
     )
@@ -72,11 +74,11 @@ class ContentPane extends PureComponent {
 }
 
 ContentPane.defaultProps = {
-  className: ''
+  className: '',
 }
 
 ContentPane.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 }
 
 export default ContentPane
