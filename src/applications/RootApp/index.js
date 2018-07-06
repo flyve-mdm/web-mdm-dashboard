@@ -33,7 +33,7 @@ import React, {
 import {
   Switch
 } from 'react-router-dom'
-import withI18NTranslation from '../../hoc/withI18NTranslation'
+import withI18n from '../../hoc/withI18n'
 import withNotification from '../../hoc/withNotification'
 import routes from './routes'
 import GenerateRoutes from '../../components/GenerateRoutes'
@@ -48,12 +48,12 @@ class RootApp extends Component {
   render() {
     return (
       <Switch>
-        <GenerateRoutes routes={routes} withNotFound />
+        <GenerateRoutes routes={routes} withNotFound {...this.props} />
       </Switch>
     )
   }
 }
 
-export default withNotification(
-  withI18NTranslation(RootApp)
+export default withI18n(
+  withNotification(RootApp)
 )

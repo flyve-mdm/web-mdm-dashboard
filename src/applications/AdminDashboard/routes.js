@@ -37,9 +37,7 @@ import SearchEngine from '../../containers/SearchEngine'
 import About from '../../containers/About'
 import Settings from '../../containers/Settings'
 import Fleets from '../../containers/Fleets'
-import {
-  I18n
-} from 'react-i18nify'
+import I18n from '../../shared/i18n'
 
 /**
  * Represents all private routes
