@@ -29,14 +29,14 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import NotFound from "../index"
+import NotFound from '../index'
 
 describe('NotFound', () => {
   test('renders NotFound', () => {
     const component = renderer.create(
-      <NotFound />
+      <NotFound />,
     )
-    let tree = component.toJSON()
+    const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
   })
 })
