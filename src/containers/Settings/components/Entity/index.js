@@ -30,15 +30,7 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
+import I18n from '../../../../shared/i18n'
 import PropTypes from 'prop-types'
 import ChangeDownloadURL from './ChangeDownloadURL'
 import ChangeTokenLife from './ChangeTokenLife'
@@ -48,18 +40,6 @@ import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the entity section
@@ -95,7 +75,6 @@ class Entity extends PureComponent {
   componentDidMount = async () => {
     const {
       glpi,
-      actions,
       handleMessage,
     } = this.props
 
@@ -164,7 +143,7 @@ class Entity extends PureComponent {
         downloadURL: downloadURL || 'https://',
       })
     } catch (error) {
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -217,6 +196,7 @@ class Entity extends PureComponent {
     const {
       handleMessage,
       glpi,
+      toast,
     } = this.props
 
     let content
@@ -240,6 +220,7 @@ class Entity extends PureComponent {
             changeMode={this.changeMode}
             downloadURL={downloadURL}
             saveValues={this.saveValues}
+            toast={toast}
             handleMessage={handleMessage}
             glpi={glpi}
             entityID={entityID}
@@ -265,6 +246,7 @@ class Entity extends PureComponent {
               downloadURL={downloadURL}
               changeMode={this.changeMode}
               handleMessage={handleMessage}
+              toast={toast}
             />
           </ContentPane>
         )
@@ -290,8 +272,9 @@ class Entity extends PureComponent {
 }
 
 Entity.propTypes = {
+  toast: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(Entity)))
+export default withGLPI(Entity)

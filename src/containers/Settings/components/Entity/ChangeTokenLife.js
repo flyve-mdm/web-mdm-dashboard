@@ -31,30 +31,10 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
+import I18n from '../../../../shared/i18n'
 import Loading from '../../../../components/Loading'
 import itemtype from '../../../../shared/itemtype'
 import ContentPane from '../../../../components/ContentPane'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the form of change the token life
@@ -96,7 +76,6 @@ class ChangeTokenLife extends PureComponent {
         entityID,
         saveValues,
         changeMode,
-        actions,
         handleMessage,
       } = this.props
       const { tokenLife } = this.state
@@ -111,13 +90,13 @@ class ChangeTokenLife extends PureComponent {
         })
         saveValues('tokenLife', tokenLife)
         changeMode('')
-        actions.setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.token_life_changed'),
           type: 'success',
         })
       } catch (error) {
-        actions.setNotification(handleMessage({
+        this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -179,6 +158,7 @@ class ChangeTokenLife extends PureComponent {
 }
 
 ChangeTokenLife.propTypes = {
+  toast: PropTypes.object.isRequired,
   changeMode: PropTypes.func.isRequired,
   tokenLife: PropTypes.string.isRequired,
   saveValues: PropTypes.func.isRequired,
@@ -187,4 +167,4 @@ ChangeTokenLife.propTypes = {
   entityID: PropTypes.string.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(ChangeTokenLife)
+export default ChangeTokenLife

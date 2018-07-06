@@ -31,36 +31,16 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import Confirmation from '../../../../components/Confirmation'
 import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
 import Loading from '../../../../components/Loading'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
 import logout from '../../../../shared/logout'
 import ContentPane from '../../../../components/ContentPane'
 import withGLPI from '../../../../hoc/withGLPI'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the security section
@@ -118,8 +98,6 @@ class Security extends PureComponent {
   deleteUser = async () => {
     const {
       glpi,
-      actions,
-      setNotification,
       handleMessage,
     } = this.props
     const { currentUser } = this.state
@@ -140,7 +118,7 @@ class Security extends PureComponent {
               force_purge: true,
             },
           })
-          actions.setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.user_deleted'),
             type: 'success',
@@ -149,7 +127,7 @@ class Security extends PureComponent {
           logout()
           localStorage.clear()
         } catch (error) {
-          setNotification(handleMessage({
+          this.props.toast.setNotification(handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -168,12 +146,11 @@ class Security extends PureComponent {
    * @async
    */
   closeSession = async () => {
-    const { actions } = this.props
 
     const isOK = await Confirmation.isOK(this.killSession)
     if (isOK) {
       logout()
-      actions.setNotification({
+      this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.session_closed'),
         type: 'success',
@@ -187,13 +164,12 @@ class Security extends PureComponent {
    * @async
    */
   cleanWebStorage = async () => {
-    const { actions } = this.props
 
     const isOK = await Confirmation.isOK(this.deleteBrowserData)
     if (isOK) {
       localStorage.clear()
       logout()
-      actions.setNotification({
+      this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.clear_local_storage'),
         type: 'success',
@@ -226,7 +202,6 @@ class Security extends PureComponent {
 
       if (isCorrect) {
         const {
-          actions,
           glpi,
           handleMessage,
         } = this.props
@@ -249,13 +224,13 @@ class Security extends PureComponent {
                 password2: passwordConfirmation,
               },
             })
-            actions.setNotification({
+            this.props.toast.setNotification({
               title: I18n.t('commons.success'),
               body: I18n.t('notifications.new_password_saved'),
               type: 'success',
             })
           } catch (error) {
-            actions.setNotification(handleMessage({
+            this.props.toast.setNotification(handleMessage({
               type: 'alert',
               message: error,
             }))
@@ -535,9 +510,9 @@ class Security extends PureComponent {
 }
 
 Security.propTypes = {
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(Security)))
+export default withGLPI(Security)
