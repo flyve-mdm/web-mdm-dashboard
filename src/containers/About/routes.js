@@ -27,7 +27,6 @@
  */
 
 /** import dependencies */
-import I18n from '../../shared/i18n'
 import EmptyMessage from '../../components/EmptyMessage'
 import Overview from './components/Overview'
 import SystemInformation from './components/SystemInformation'
@@ -44,49 +43,49 @@ import Licence from './components/License'
  */
 const routes = [{
   path: '/',
-  name: I18n.t('commons.no_selection'),
+  name: 'commons.no_selection',
   component: EmptyMessage,
   exact: true,
 },
 {
   path: '/overview',
-  name: I18n.t('about.overview.title'),
+  name: 'about.overview.title',
   component: Overview,
   exact: true,
 },
 {
   path: '/system',
-  name: I18n.t('about.system_information.title'),
+  name: 'about.system_information.title',
   component: SystemInformation,
   exact: false,
 },
 {
   path: '/help',
-  name: I18n.t('about.help_center.title'),
+  name: 'about.help_center.title',
   component: HelpCenter,
   exact: false,
 },
 {
   path: '/contact',
-  name: I18n.t('about.contact.title'),
+  name: 'about.contact.title',
   component: Contact,
   exact: false,
 },
 {
   path: '/release',
-  name: I18n.t('about.release_notes.title'),
+  name: 'about.release_notes.title',
   component: ReleaseNotes,
   exact: false,
 },
 {
   path: '/term',
-  name: I18n.t('about.term_of_use.title'),
+  name: 'about.term_of_use.title',
   component: TermsOfUse,
   exact: false,
 },
 {
   path: '/license',
-  name: I18n.t('about.license.title'),
+  name: 'about.license.title',
   component: Licence,
   exact: false,
 },
