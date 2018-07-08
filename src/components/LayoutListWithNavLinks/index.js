@@ -33,6 +33,7 @@ import PropTypes from 'prop-types'
 import {
   NavLink,
 } from 'react-router-dom'
+import I18n from '../../shared/i18n'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import {
@@ -155,9 +156,8 @@ class ListWithNavLinks extends PureComponent {
                     <NavLink
                       exact
                       to={`${this.props.rootPath}${route.path}`}
-                      activeClassName="--active"
-                    >
-                      {route.name}
+                      activeClassName='--active'>
+                      {I18n.t(route.name)}
                     </NavLink>
                   </li>
                 )
