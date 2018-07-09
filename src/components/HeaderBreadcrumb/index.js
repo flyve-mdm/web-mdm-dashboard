@@ -35,6 +35,7 @@ import {
 } from 'react-router-dom'
 import I18n from '../../shared/i18n'
 import publicURL from '../../shared/publicURL'
+import { isNumber } from 'util';
 
 /**
  * Component with the breadcrumb menu of the header
@@ -62,7 +63,7 @@ class HeaderBreadcrumb extends PureComponent {
           </span>
           <span>
             <Link to={path}>
-              {I18n.t(`commons.${addresses[index].replace(/\b\w/g, l => l.toLowerCase())}`)}
+              {Number(addresses[index].replace(/\b\w/g, l => l)) ? addresses[index].replace(/\b\w/g, l => l) : I18n.t(`commons.${addresses[index].replace(/\b\w/g, l => l.toLowerCase())}`)}
             </Link>
           </span>
         </React.Fragment>,
