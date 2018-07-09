@@ -24,7 +24,7 @@ export default () => {
       abbreviation: 'fr_FR',
       name: I18n.t('commons.french'),
       country: I18n.t('commons.France'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'es_MX',
@@ -36,122 +36,122 @@ export default () => {
       abbreviation: 'es_AR',
       name: I18n.t('commons.spanish'),
       country: I18n.t('commons.Argentina'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'es_ES',
       name: I18n.t('commons.spanish'),
       country: I18n.t('commons.Spain'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'ar_EG',
       name: I18n.t('commons.arabic'),
       country: I18n.t('commons.Egypt'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'ar_SA',
       name: I18n.t('commons.arabic'),
       country: I18n.t('commons.Saudi_Arabia'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'ca_ES',
       name: I18n.t('commons.catalan'),
       country: I18n.t('commons.Spain'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'gl_ES',
       name: I18n.t('commons.galician'),
       country: I18n.t('commons.Spain'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'de_DE',
       name: I18n.t('commons.german'),
       country: I18n.t('commons.Germany'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'he_IL',
       name: I18n.t('commons.hebrew'),
       country: I18n.t('commons.Israel'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'hi_IN',
       name: I18n.t('commons.hindi'),
       country: I18n.t('commons.India'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'hu_HU',
       name: I18n.t('commons.hungarian'),
       country: I18n.t('commons.Hungary'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'it_IT',
       name: I18n.t('commons.italian'),
       country: I18n.t('commons.Italy'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'ko_KR',
       name: I18n.t('commons.korean'),
       country: I18n.t('commons.Korea'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'pl_PL',
       name: I18n.t('commons.polish'),
       country: I18n.t('commons.Poland'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'pt_BR',
       name: I18n.t('commons.portuguese'),
       country: I18n.t('commons.Brazil'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'pt_PT',
       name: I18n.t('commons.portuguese'),
       country: I18n.t('commons.Portugal'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'ja_JP',
       name: I18n.t('commons.japanese'),
       country: I18n.t('commons.Japon'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'ru_RU',
       name: I18n.t('commons.russian'),
       country: I18n.t('commons.Russia'),
-      isAvailable: false
+      isAvailable: true
     },
 
     {
       abbreviation: 'ur_PK',
       name: I18n.t('commons.China'),
       country: I18n.t('commons.Pakistan'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'zh_CN',
       name: I18n.t('commons.chinese'),
       country: I18n.t('commons.China'),
-      isAvailable: false
+      isAvailable: true
     },
     {
       abbreviation: 'th_TH',
       name: I18n.t('commons.thai'),
       country: I18n.t('commons.Thailand'),
-      isAvailable: false
+      isAvailable: true
     },
   ]
   let renderList = []
