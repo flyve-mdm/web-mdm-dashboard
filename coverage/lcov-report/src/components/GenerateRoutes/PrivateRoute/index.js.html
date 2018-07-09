@@ -138,9 +138,7 @@ layout: coverage
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -171,21 +169,10 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,13 +181,22 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -261,13 +257,13 @@ layout: coverage
 &nbsp;
 <span class="cstat-no" title="statement not covered" >import React from 'react'</span>
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import RenderMergedProps from '../RenderMergedProps'</span>
 <span class="cstat-no" title="statement not covered" >import {</span>
-  Route
+  Route,
 } from 'react-router-dom'
 <span class="cstat-no" title="statement not covered" >import {</span>
-  Redirect
+  Redirect,
 } from 'react-router'
+<span class="cstat-no" title="statement not covered" >import RenderMergedProps from '../RenderMergedProps'</span>
 &nbsp;
 /**
  * Validate if a user is authenticated
@@ -289,25 +285,23 @@ const isAuthenticated = <span class="cstat-no" title="statement not covered" ><s
  * @param {*} rest
  * @return {component}
  */
-const PrivateRoute = <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({ component, redirectTo, ...rest }) =&gt;</span></span></span></span>
-  (
-    &lt;Route
-      {...rest}
-      render={<span class="fstat-no" title="function not covered" >routeProps =&gt;</span>
-        (<span class="cstat-no" title="statement not covered" >isAuthenticated() ? (</span>
-          RenderMergedProps(component, routeProps, rest)
-        ) :
-          (
-            &lt;Redirect
-              to={ {
-                pathname: redirectTo,
-                state: { from: routeProps.location },
-              } }
-            /&gt;
-          ))
+const PrivateRoute = <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({ component, redirectTo, ...rest }) =&gt; (</span></span></span></span>
+  &lt;Route
+    {...rest}
+    render={<span class="fstat-no" title="function not covered" >routeProps =&gt; (<span class="cstat-no" title="statement not covered" ></span>isAuthenticated() ? (</span>
+      RenderMergedProps(component, routeProps, rest)
+    )
+      : (
+        &lt;Redirect
+          to={ {
+            pathname: redirectTo,
+            state: { from: routeProps.location },
+          } }
+        /&gt;
+      ))
       }
-    /&gt;
-  )
+  /&gt;
+)
 &nbsp;
 <span class="cstat-no" title="statement not covered" >PrivateRoute.defaultProps = {</span>
   redirectTo: '/',
@@ -328,7 +322,7 @@ export default PrivateRoute
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 09 2018 16:47:14 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 09 2018 17:47:11 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

@@ -33,9 +33,9 @@ layout: coverage
         <span class='fraction'>14/17</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">44.44% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/8</span>
+        <span class='fraction'>4/9</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">55.17% </span>
@@ -213,7 +213,19 @@ layout: coverage
 <a name='L162'></a><a href='#L162'>162</a>
 <a name='L163'></a><a href='#L163'>163</a>
 <a name='L164'></a><a href='#L164'>164</a>
-<a name='L165'></a><a href='#L165'>165</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -250,6 +262,21 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -306,15 +333,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -345,6 +363,9 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -360,6 +381,9 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -406,7 +430,7 @@ layout: coverage
  */
 &nbsp;
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 &nbsp;
@@ -416,11 +440,26 @@ import PropTypes from 'prop-types'
  * @extends PureComponent
  */
 class IconItemList extends PureComponent {
+&nbsp;
+  /**
+   * Convert arraybuffer to base64
+   * @param {*} buffer
+   * @return {string}
+   */
+<span class="fstat-no" title="function not covered" >  st</span>atic rrayBufferToBase64(buffer) {
+    let binary = <span class="cstat-no" title="statement not covered" >''</span>
+    const bytes = <span class="cstat-no" title="statement not covered" >[].slice.call(new Uint8Array(buffer))</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    bytes.forEach(<span class="fstat-no" title="function not covered" >b </span>=&gt; <span class="cstat-no" title="statement not covered" >binary += String.fromCharCode(b))</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return window.btoa(binary)</span>
+  }
+&nbsp;
   /** @constructor */
   constructor(props) {
     super(props)
     this.state = {
-      image: this.props.type !== 'file' || this.props.image === '' ? this.props.image : ''
+      image: this.props.type !== 'file' || this.props.image === '' ? this.props.image : '',
     }
   }
 &nbsp;
@@ -447,7 +486,7 @@ class IconItemList extends PureComponent {
         case 'apple.png':
         case 'Phone.png':
           this.setState({
-            image: require(`../../assets/images/${this.props.image}`)
+            image: require(`../../assets/images/${this.props.image}`),
           })
           break
 &nbsp;
@@ -455,31 +494,22 @@ class IconItemList extends PureComponent {
           const url_base = <span class="cstat-no" title="statement not covered" >localStorage.getItem('baseURL')</span>
           let url
 <span class="cstat-no" title="statement not covered" >          if (this.props.isMin) {</span>
-            const image = <span class="cstat-no" title="statement not covered" >this.props.image.split(".")</span>
-<span class="cstat-no" title="statement not covered" >            url = `//${url_base.split("//")[1]}/front/document.send.php?file=_pictures/${image[0]}_min.${image[1]}`</span>
+            const image = <span class="cstat-no" title="statement not covered" >this.props.image.split('.')</span>
+<span class="cstat-no" title="statement not covered" >            url = `//${url_base.split('//')[1]}/front/document.send.php?file=_pictures/${image[0]}_min.${image[1]}`</span>
           } else {
-<span class="cstat-no" title="statement not covered" >            url = `//${url_base.split("//")[1]}/front/document.send.php?file=_pictures/${this.props.image}`</span>
+<span class="cstat-no" title="statement not covered" >            url = `//${url_base.split('//')[1]}/front/document.send.php?file=_pictures/${this.props.image}`</span>
           }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >          fetch(url, {</span>
             method: 'GET',
-            credentials: 'same-origin'
+            credentials: 'same-origin',
           }).then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
 <span class="cstat-no" title="statement not covered" >            response.arrayBuffer().then(<span class="fstat-no" title="function not covered" >(b</span>uffer) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >              this.setState({</span>
-                image: 'data:image/jpeg;base64,' + arrayBufferToBase64(buffer)
+                image: `data:image/jpeg;base64,${this.arrayBufferToBase64(buffer)}`,
               })
             })
           })
-&nbsp;
-          function <span class="fstat-no" title="function not covered" >arrayBufferToBase64(</span>buffer) {
-            let binary = <span class="cstat-no" title="statement not covered" >''</span>
-            let bytes = <span class="cstat-no" title="statement not covered" >[].slice.call(new Uint8Array(buffer))</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >            bytes.forEach(<span class="fstat-no" title="function not covered" >(b</span>) =&gt; <span class="cstat-no" title="statement not covered" >binary += String.fromCharCode(b))</span></span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >            return window.btoa(binary)</span>
-          }
 <span class="cstat-no" title="statement not covered" >          break</span>
       }
     } catch (error) {}
@@ -495,7 +525,7 @@ class IconItemList extends PureComponent {
       width: this.props.size,
       height: this.props.size,
       backgroundSize: 'cover',
-      display: 'inline-block'
+      display: 'inline-block',
     }
     let className = ''
     if (this.props.type !== 'base64') {
@@ -504,18 +534,21 @@ class IconItemList extends PureComponent {
         ...style,
         WebkitBorderRadius: this.props.size,
         MozBorderRadius: this.props.size,
-        borderRadius: this.props.size
+        borderRadius: this.props.size,
       }
     }
 &nbsp;
     return (
       &lt;div className={className} style={style}&gt;
-        &lt;div className={this.props.imgClass} &gt;
+        &lt;div
+          className={this.props.imgClass}
+          onClick={this.props.imgClick}
+          role="presentation"
+        &gt;
           &lt;img
             alt=""
             src={this.state.image}
             style={style}
-            onClick={this.props.imgClick}
           /&gt;
         &lt;/div&gt;
       &lt;/div&gt;
@@ -527,17 +560,20 @@ IconItemList.defaultProps = {
   size: 100,
   backgroundColor: '#e6e6e6',
   image: '',
-  type: 'file'
+  type: 'file',
+  isMin: false,
+  imgClick: <span class="fstat-no" title="function not covered" >()</span> =&gt; {},
+  imgClass: '',
 }
 &nbsp;
 IconItemList.propTypes = {
-  size: PropTypes.number.isRequired,
-  backgroundColor: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(["file", "base64"]).isRequired,
+  size: PropTypes.number,
+  backgroundColor: PropTypes.string,
+  image: PropTypes.string,
+  type: PropTypes.oneOf(['file', 'base64']),
   isMin: PropTypes.bool,
   imgClick: PropTypes.func,
-  imgClass: PropTypes.string
+  imgClass: PropTypes.string,
 }
 &nbsp;
 export default IconItemList
@@ -547,7 +583,7 @@ export default IconItemList
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 09 2018 16:47:14 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 09 2018 17:47:11 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
