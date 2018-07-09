@@ -60,6 +60,15 @@ export const changePhase = (ctx, newPhase) => {
  */
 export const handleFormSubmit = (ctx, event) => {
   event.preventDefault()
+  try {
+    navigator.credentials.store(
+      new PasswordCredential({
+        id: ctx.state.username,
+        password: ctx.state.password,
+        name: ctx.state.username,
+      })
+    )
+  } catch (error) {}
 
   ctx.props.auth.fetchSignIn(
     ctx.state.username,

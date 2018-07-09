@@ -66,6 +66,21 @@ class SignIn extends PureComponent {
       password: '',
       phase: 1,
     }
+
+    try {
+      navigator.credentials.get({
+        password: true,
+        mediation: 'optional',
+      })
+        .then(res => {
+          if (res) {
+            this.setState({
+              username: res.name,
+              password: res.password,
+            })
+          }
+        })
+    } catch (error) {}
   }
 
   /**

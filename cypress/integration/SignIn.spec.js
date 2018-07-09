@@ -2,6 +2,10 @@ import { glpiApiLink } from '../../public/config.json'
 
 describe('SignIn', () => {
   beforeEach(function () {
+    cy.on('uncaught:exception', (err, runnable) => {
+      return false
+    })
+
     cy.server()
 
     cy.route({
@@ -65,7 +69,7 @@ describe('SignIn', () => {
           password_need_caps: 1,
           password_need_symbol: 1,
           url_base: "https://your-url.com/glpi"
-        }  
+        }
       }
     })
 
@@ -87,16 +91,16 @@ describe('SignIn', () => {
   it('should login without problems', () => {
     cy.visit('/')
     cy.wait('@getFlyveDemo')
-    cy.get('a[href="/signUp"]').should('be.visible') 
+    cy.get('a[href="/signUp"]').should('be.visible')
     cy.screenshot('login_userName', {capture: 'viewport'})
     cy.get('.win-textbox')
       .type('example name')
       .type('{enter}')
-    cy.screenshot('login_password', {capture: 'viewport'})    
+    cy.screenshot('login_password', {capture: 'viewport'})
     cy.get('.win-textbox')
       .type('12345678')
       .type('{enter}')
-    cy.get('.empty-message').should('be.visible') 
+    cy.get('.empty-message').should('be.visible')
     cy.screenshot('home_noData', {capture: 'viewport'})
   })
 })
