@@ -48,7 +48,7 @@ exports[`HeaderBreadcrumb renders HeaderBreadcrumb 1`] = `
         href="/app/devices/309"
         onClick={[Function]}
       >
-        309
+        commons.309
       </a>
     </span>
   </nav>
