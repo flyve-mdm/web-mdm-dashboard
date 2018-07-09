@@ -32,6 +32,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import Loader from '../../../../components/Loader'
+import I18n from '../../../../shared/i18n'
 
 /**
  * @class Inventory
@@ -43,7 +44,7 @@ export default class Inventory extends PureComponent {
     super(props)
     this.state = {
       data: undefined,
-      isLoading: false,
+      isLoading: true,
     }
   }
 
@@ -94,9 +95,17 @@ export default class Inventory extends PureComponent {
    * @function buildList
    * @param {object} value
    */
-  buildList = value => Object.keys(value).map(() => (
-    <div style={{ padding: '20px' }}>
-      <Loader type="content" />
+  buildList = value => Object.keys(value).map(index => (
+    <div
+      className="list-content"
+      key={`buildList-${index.toString()}`}
+    >
+      <div className="list-col">
+        {I18n.t(`commons.${index.toString().toLocaleLowerCase()}`)}
+      </div>
+      <div className="list-col">
+        {value[index]}
+      </div>
     </div>
   ))
 
@@ -107,13 +116,13 @@ export default class Inventory extends PureComponent {
     } = this.state
     const { title } = this.props
 
-    if (isLoading && !data) {
+    if (isLoading) {
       return (
         <div style={{ padding: '20px' }}>
           <Loader type="content" />
         </div>
       )
-    } if (!isLoading && data) {
+    } if (data) {
       return (
         <div>
           <div className="title">

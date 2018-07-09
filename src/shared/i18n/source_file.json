@@ -575,6 +575,12 @@
     "Russia": "Russia",
     "Pakistan": "Pakistan",
     "China": "China",
-    "Thailand": "Thailand"
+    "Thailand": "Thailand",
+    "manufacturer": "Manufacturer",
+    "model": "Model",
+    "creation": "Creation",
+    "modification": "Modification",
+    "serial": "Serial",
+    "uuid": "UUID"
   }
 }
