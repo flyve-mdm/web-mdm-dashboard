@@ -152,8 +152,9 @@ const withAdminDashboardLayout = WrappedComponent => {
       return (
         <main>
           <HeaderBreadcrumb
-              handleToggleExpand={this.handleToggleExpand}
-              location={this.props.history.location}
+            handleToggleExpand={this.handleToggleExpand}
+            location={this.props.history.location}
+            languageCurrent={this.props.languageCurrent}
           />
 
           {(this.state.iframe || '')}

@@ -62,7 +62,7 @@ class HeaderBreadcrumb extends PureComponent {
           </span>
           <span>
             <Link to={path}>
-              {addresses[index].replace(/\b\w/g, l => l.toUpperCase())}
+              {I18n.t(`commons.${addresses[index].replace(/\b\w/g, l => l.toLowerCase())}`)}
             </Link>
           </span>
         </React.Fragment>,
