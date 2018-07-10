@@ -52,7 +52,7 @@ function errorRoute(pathname) {
  * @param {string} title of message
  * @returns {string} Get error message
  */
-export default async ({
+export default ({
   type = 'info',
   message,
   title,
@@ -72,10 +72,10 @@ export default async ({
         if (message.data[0][1] === 'session_token seems invalid') {
           logout()
         }
-        try {
-          await glpi.getActiveProfile()
-          history.push(`${errorRoute(history.location.pathname)}?code=401`)
-        } catch (error) {}
+        glpi.getActiveProfile()
+          .then(res => {
+            history.push(`${errorRoute(history.location.pathname)}?code=401`)
+          })
         break
       case (message.status === 404):
         response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText

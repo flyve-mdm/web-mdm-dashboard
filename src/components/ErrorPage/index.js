@@ -30,6 +30,7 @@ import React from "react"
 import history from "../../shared/history"
 import getQueryString from "../../shared/getQueryString"
 import I18n from '../../shared/i18n'
+import EmptyMessage from '../../components/EmptyMessage'
 
 /**
  * Component with the display of the error pages
@@ -44,6 +45,30 @@ export default () => {
   }
   const title = I18n.t(`error.${errorCode}.title`)
   const message = I18n.t(`error.${errorCode}.message`)
+
+  if (errorCode !== 404 && errorCode < 500) {
+    return(
+      <div
+        className="empty-message"
+        style={{width: '100%'}}
+      >
+        <div style={{width: '320px', margin: '0 auto'}}>
+          <figure>
+            <img
+              alt="Flyve MDM Dashboard"
+              src={require('../../assets/images/dashboard.svg')}
+              style={{
+                width: '80px',
+              }}
+            />
+          </figure>
+          <h1>{title}</h1>
+          <p>{message}</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="authentication error" style={{ textAlign: 'center'}} >
       <section>

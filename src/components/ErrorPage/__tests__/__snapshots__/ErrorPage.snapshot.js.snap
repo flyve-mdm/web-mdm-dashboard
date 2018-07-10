@@ -2,43 +2,38 @@
 
 exports[`ErrorPage renders ErrorPage 1`] = `
 <div
-  className="authentication error"
+  className="empty-message"
   style={
     Object {
-      "textAlign": "center",
+      "width": "100%",
     }
   }
 >
-  <section>
+  <div
+    style={
+      Object {
+        "margin": "0 auto",
+        "width": "320px",
+      }
+    }
+  >
     <figure>
       <img
         alt="Flyve MDM Dashboard"
         src="dashboard.svg"
+        style={
+          Object {
+            "width": "80px",
+          }
+        }
       />
     </figure>
     <h1>
-      Error
-       
-      404
-    </h1>
-    <h3>
       Oops! Page not Found.
-    </h3>
+    </h1>
     <p>
       We could not find the page you were looking for. Meanwhile, you may return to the dashboard.
     </p>
-  </section>
-  <footer>
-    <a
-      href="https://flyve-mdm.com/privacy-policy/"
-    >
-      Terms and Conditions
-    </a>
-    <br />
-    <span>
-      © 2017 - 2018 Teclib'.
-    </span>
-    <br />
-  </footer>
+  </div>
 </div>
 `;
