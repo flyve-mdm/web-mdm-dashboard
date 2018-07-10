@@ -34,6 +34,17 @@ import logout from '../logout'
 import glpi from '../glpiApi'
 import history from '../history'
 
+function errorRoute(pathname) {
+  const path = pathname.split('/')
+  let route
+  if (path[1] === 'app') {
+    route = `/app/${path[2]}/error`
+  } else {
+    route = `/${path[1]}/error`
+  }
+  return route
+}
+
 /**
  * Add format to error message
  * @param {string} type of message
@@ -63,7 +74,7 @@ export default async ({
         }
         try {
           await glpi.getActiveProfile()
-          history.push('/error?code=401')
+          history.push(`${errorRoute(history.location.pathname)}?code=401`)
         } catch (error) {}
         break
       case (message.status === 404):
@@ -73,7 +84,7 @@ export default async ({
         response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? message.data[1][0].message
           : message.data[0][1] : message.statusText
         if (message.status === 403) {
-          history.push('/error?code=403')
+          history.push(`${errorRoute(history.location.pathname)}?code=403`)
         }
         break
       default:
