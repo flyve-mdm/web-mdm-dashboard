@@ -31,6 +31,8 @@
 /** import dependencies */
 import I18n from '../../shared/i18n'
 import logout from '../logout'
+import glpi from '../glpiApi'
+import history from '../history'
 
 /**
  * Add format to error message
@@ -39,7 +41,7 @@ import logout from '../logout'
  * @param {string} title of message
  * @returns {string} Get error message
  */
-export default ({
+export default async ({
   type = 'info',
   message,
   title,
@@ -59,6 +61,10 @@ export default ({
         if (message.data[0][1] === 'session_token seems invalid') {
           logout()
         }
+        try {
+          await glpi.getActiveProfile()
+          history.push('/error?code=401')
+        } catch (error) {}
         break
       case (message.status === 404):
         response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText
@@ -66,6 +72,9 @@ export default ({
       case (message.status >= 400 && message.status < 500 && message.status !== 401):
         response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? message.data[1][0].message
           : message.data[0][1] : message.statusText
+        if (message.status === 403) {
+          history.push('/error?code=403')
+        }
         break
       default:
         break

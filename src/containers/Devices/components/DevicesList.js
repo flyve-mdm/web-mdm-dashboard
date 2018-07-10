@@ -41,6 +41,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
+import handleMessage from '../../../shared/handleMessage'
 
 /**
  * @class DevicesList
@@ -226,6 +227,7 @@ export default class DevicesList extends PureComponent {
         itemList: BuildItemList(devices),
       })
     } catch (error) {
+      handleMessage({ message: error })
       this.setState({
         isLoading: false,
         order: 'ASC',
