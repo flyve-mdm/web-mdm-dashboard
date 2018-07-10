@@ -40,6 +40,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
+import handleMessage from '../../../shared/handleMessage'
 
 /**
  * @class FilesList
@@ -159,6 +160,7 @@ class FilesList extends PureComponent {
           totalcount: files.totalcount,
         })
       } catch (error) {
+        handleMessage({ message: error })
         this.setState({
           isLoading: false,
           order: 'ASC',
