@@ -38,7 +38,10 @@ import I18n from '../../shared/i18n'
  */
 export default () => {
   /** Get the error type of the query string 'code' (by default '404'). */
-  const errorCode = (getQueryString(history).code || "404")
+  let errorCode = getQueryString(history).code
+  if (errorCode !== '400' && errorCode !== '401' && errorCode !== '403' && errorCode !== '404' && errorCode !== '500') {
+    errorCode = '404'
+  }
   const title = I18n.t(`error.${errorCode}.title`)
   const message = I18n.t(`error.${errorCode}.message`)
   return (
