@@ -86,6 +86,28 @@ class SignIn extends PureComponent {
       password: '',
       phase: 1,
     }
+
+    /**
+     * Implementation of Credential Management API
+     * to obtain the access data of the saved user
+     * and load them automatically in the form.
+     *
+     * Ref: https://developer.mozilla.org/en-US/docs/Web/API/CredentialsContainer/get
+     */
+    try {
+      navigator.credentials.get({
+        password: true,
+        mediation: 'optional',
+      })
+        .then(res => {
+          if (res) {
+            this.setState({
+              username: res.name,
+              password: res.password,
+            })
+          }
+        })
+    } catch (error) {}
   }
 
   /**
