@@ -31,7 +31,13 @@ import history from "../../shared/history"
 import getQueryString from "../../shared/getQueryString"
 import I18n from '../../shared/i18n'
 
+/**
+ * Component with the display of the error pages
+ * @function ErrorPage
+ * @return {component}
+ */
 export default () => {
+  /** Get the error type of the query string 'code' (by default '404'). */
   const errorCode = (getQueryString(history).code || "404")
   const title = I18n.t(`error.${errorCode}.title`)
   const message = I18n.t(`error.${errorCode}.message`)
