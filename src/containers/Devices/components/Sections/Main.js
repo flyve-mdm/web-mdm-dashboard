@@ -279,7 +279,9 @@ export default class Main extends PureComponent {
                 </div>
                 <div className="item-info__source">
                   {data.last_contact}
-                  &nbsp; {I18n.t('devices.main.last_contact')}
+                  &nbsp;
+                  {' '}
+                  {I18n.t('devices.main.last_contact')}
                 </div>
                 <div style={{ overflow: 'auto' }}>
                   <div>

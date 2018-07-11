@@ -30,7 +30,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import PropsRoute from './PropsRoute'
-import ErrorPage from '../../components/ErrorPage'
+import ErrorPage from '../ErrorPage'
 
 // TODO: Enable PrivateRoute if route if private
 

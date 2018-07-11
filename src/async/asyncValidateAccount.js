@@ -34,8 +34,6 @@ import withAsyncComponent from '../hoc/withAsyncComponent'
  * @constant
  * @type {component}
  */
-const asyncValidateAccount = withAsyncComponent(() => {
-  return import ('../components/ValidateAccount')
-})
+const asyncValidateAccount = withAsyncComponent(() => import('../components/ValidateAccount'))
 
 export default asyncValidateAccount

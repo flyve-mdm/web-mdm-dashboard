@@ -29,7 +29,7 @@
 /** @module animations WinJS */
 
 /** Import dependencies */
-import I18n from '../../shared/i18n'
+import I18n from '../i18n'
 
 /**
  * Replace a status code with string associated

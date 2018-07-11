@@ -32,7 +32,7 @@ import sourceFile from './source_file.json'
 
 const languageDefault = 'en_GB'
 
-let polyglot = new Polyglot({
+const polyglot = new Polyglot({
   locale: language,
   phrases: tryRequire(`./translations/${language}`) || sourceFile,
 })

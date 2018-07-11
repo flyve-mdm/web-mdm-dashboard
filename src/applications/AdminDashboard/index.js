@@ -28,7 +28,7 @@
 
 /** import dependencies */
 import React, {
-  Component
+  Component,
 } from 'react'
 import withAdminDashboardLayout from '../../hoc/withAdminDashboardLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
@@ -42,14 +42,16 @@ import GenerateRoutes from '../../components/GenerateRoutes'
  */
 class AdminDashboard extends Component {
   render() {
-    return <GenerateRoutes
-      routes={routes}
-      rootPath={this.props.match.url}
-      toast={this.props.toast}
-      handleMessage={this.props.handleMessage}
-      changeLanguage={this.props.changeLanguage}
-      languageCurrent={this.props.languageCurrent}
-    />
+    return (
+      <GenerateRoutes
+        routes={routes}
+        rootPath={this.props.match.url}
+        toast={this.props.toast}
+        handleMessage={this.props.handleMessage}
+        changeLanguage={this.props.changeLanguage}
+        languageCurrent={this.props.languageCurrent}
+      />
+    )
   }
 }
 

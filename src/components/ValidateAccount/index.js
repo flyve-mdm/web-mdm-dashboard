@@ -45,7 +45,7 @@ import withGLPI from '../../hoc/withGLPI'
 import publicURL from '../../shared/publicURL'
 import itemtype from '../../shared/itemtype'
 import I18n from '../../shared/i18n'
-import Loading from '../../components/Loading'
+import Loading from '../Loading'
 import appConfig from '../../../public/config.json'
 
 /**
@@ -183,5 +183,5 @@ ValidateAccount.propTypes = {
 }
 
 export default withAuthenticationLayout(withGLPI(withHandleMessages(ValidateAccount)), {
-  centerContent: true
+  centerContent: true,
 })

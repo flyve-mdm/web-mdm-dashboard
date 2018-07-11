@@ -37,7 +37,6 @@ import PropTypes from 'prop-types'
  * @extends PureComponent
  */
 class IconItemList extends PureComponent {
-
   /**
    * Convert arraybuffer to base64
    * @param {*} buffer

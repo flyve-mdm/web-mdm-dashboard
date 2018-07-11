@@ -30,12 +30,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {
-  Router
+  Router,
 } from 'react-router-dom'
 import history from './shared/history'
 import RootApp from './applications/RootApp'
 import {
-  unregister
+  unregister,
 } from './registerServiceWorker'
 import { I18nProvider } from './providers/I18nProvider'
 import { NotificationsProvider } from './providers/NotificationsProvider'
@@ -54,9 +54,8 @@ import appConfig from '../public/config.json'
 const bugsnagClient = bugsnag({
   apiKey: appConfig.bugsnag,
   beforeSend: () => {
-    if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test")
-      return false
-  }
+    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') return false
+  },
 })
 
 /**
@@ -73,18 +72,18 @@ const ErrorBoundary = bugsnagClient.use(createPlugin(React))
 ReactDOM.render(
   (
     <ErrorBoundary>
-        <I18nProvider>
-          <NotificationsProvider>
-            <AuthenticationProvider>
-              <Router history={history}>
-                <RootApp />
-              </Router>
-            </AuthenticationProvider>
-          </NotificationsProvider>
-        </I18nProvider>
+      <I18nProvider>
+        <NotificationsProvider>
+          <AuthenticationProvider>
+            <Router history={history}>
+              <RootApp />
+            </Router>
+          </AuthenticationProvider>
+        </NotificationsProvider>
+      </I18nProvider>
     </ErrorBoundary>
   ),
-  document.getElementById('root')
+  document.getElementById('root'),
 )
 
 /** Disable service worker */

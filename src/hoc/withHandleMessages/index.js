@@ -27,7 +27,7 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import handleMessage from '../../shared/handleMessage'
 

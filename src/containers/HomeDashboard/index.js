@@ -34,10 +34,10 @@ import PropTypes from 'prop-types'
 import {
   VictoryPie,
 } from 'victory'
-import I18n from '../../shared/i18n'
 import {
   NavLink,
 } from 'react-router-dom'
+import I18n from '../../shared/i18n'
 import withGLPI from '../../hoc/withGLPI'
 import Loading from '../../components/Loading'
 import InfoBox from '../../components/InfoBox'
@@ -80,7 +80,6 @@ class Dashboard extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-
     if (this.props.glpi.sessionToken) {
       let isValid = true
       const newState = {
@@ -194,7 +193,6 @@ class Dashboard extends PureComponent {
    */
   getDevices = () => new Promise(async (resolve, reject) => {
     try {
-
       const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
         options: {
@@ -217,7 +215,6 @@ class Dashboard extends PureComponent {
    */
   getUsers = () => new Promise(async (resolve, reject) => {
     try {
-
       const users = await this.props.glpi.searchItems({
         itemtype: itemtype.User,
       })
@@ -297,7 +294,6 @@ class Dashboard extends PureComponent {
    */
   getInvitations = () => new Promise(async (resolve, reject) => {
     try {
-
       const invitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
       })
@@ -316,7 +312,6 @@ class Dashboard extends PureComponent {
    */
   getPendingInvitations = () => new Promise(async (resolve, reject) => {
     try {
-
       const pendingInvitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
         criteria: [{
@@ -341,7 +336,6 @@ class Dashboard extends PureComponent {
    */
   getFleets = () => new Promise(async (resolve, reject) => {
     try {
-
       const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
       })
@@ -360,7 +354,6 @@ class Dashboard extends PureComponent {
    */
   getFiles = () => new Promise(async (resolve, reject) => {
     try {
-
       const files = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFile,
       })
@@ -379,7 +372,6 @@ class Dashboard extends PureComponent {
    */
   getApplications = () => new Promise(async (resolve, reject) => {
     try {
-
       const applications = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPackage,
       })
@@ -396,7 +388,6 @@ class Dashboard extends PureComponent {
    * @param {*} error
    */
   showError = (error) => {
-
     this.props.toast.setNotification(this.props.handleMessage({
       type: 'alert',
       message: error,
@@ -420,7 +411,6 @@ class Dashboard extends PureComponent {
    * @return {array}
    */
   renderInfoBox() {
-
     const boxes = []
 
     if (this.state.devicesCurrentlyManaged) {
@@ -504,7 +494,6 @@ class Dashboard extends PureComponent {
    * @return {array}
    */
   renderGraphics() {
-
     const graphics = []
 
     if (this.state.devicesByOperatingSystemVersion) {
@@ -587,7 +576,6 @@ class Dashboard extends PureComponent {
    * @function render
    */
   render() {
-
     const renderInfoBox = this.renderInfoBox()
     const renderGraphics = this.renderGraphics()
     const renderComponent = this.state.isLoading

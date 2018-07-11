@@ -34,8 +34,6 @@ import withAsyncComponent from '../hoc/withAsyncComponent'
  * @constant
  * @type {component}
  */
-const asyncSignUp = withAsyncComponent(() => {
-  return import ('../containers/SignUp')
-})
+const asyncSignUp = withAsyncComponent(() => import('../containers/SignUp'))
 
 export default asyncSignUp

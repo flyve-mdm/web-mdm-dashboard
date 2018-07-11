@@ -27,7 +27,7 @@
  */
 
 import {
-  PureComponent
+  PureComponent,
 } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
@@ -46,7 +46,7 @@ class ScrollSyncPanel extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     attachTo: PropTypes.object,
-    group: PropTypes.string
+    group: PropTypes.string,
   }
 
   /**
@@ -55,7 +55,7 @@ class ScrollSyncPanel extends PureComponent {
    * @type {object}
    */
   static defaultProps = {
-    group: 'default'
+    group: 'default',
   }
 
   /**
@@ -65,7 +65,7 @@ class ScrollSyncPanel extends PureComponent {
    */
   static contextTypes = {
     registerPanel: PropTypes.func.isRequired,
-    unregisterPanel: PropTypes.func.isRequired
+    unregisterPanel: PropTypes.func.isRequired,
   }
 
   /**

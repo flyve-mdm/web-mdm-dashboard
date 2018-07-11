@@ -27,7 +27,7 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import ContentPane from '../ContentPane'
@@ -36,7 +36,7 @@ import {
   Select,
   Input,
   DatePicker,
-  TextArea
+  TextArea,
 } from '../Forms'
 import ErrorValidation from '../ErrorValidation'
 import EmptyMessage from '../EmptyMessage'
@@ -48,7 +48,6 @@ import I18n from '../../shared/i18n'
  * @extends PureComponent
  */
 class EditMultiple extends PureComponent {
-
   /** @constructor */
   constructor(props) {
     super(props)
@@ -59,7 +58,7 @@ class EditMultiple extends PureComponent {
       newValue: '',
       passwordConfirmation: '',
       passwordConfiguration: {},
-      forceValidation: false
+      forceValidation: false,
     }
   }
 
@@ -71,61 +70,57 @@ class EditMultiple extends PureComponent {
   handleSave = async () => {
     let isCorrect = true
 
-    if (this.state.selectedField.type === "password") {
-      if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.newValue).isCorrect)
-        isCorrect = false
+    if (this.state.selectedField.type === 'password') {
+      if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.newValue).isCorrect) isCorrect = false
 
-      if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.passwordConfirmation).isCorrect)
-        isCorrect = false
+      if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.passwordConfirmation).isCorrect) isCorrect = false
     }
 
     if (isCorrect) {
       this.setState({
-        isLoading: true
+        isLoading: true,
       }, async () => {
-        let input = this.state.selectedField.DBName !== "password" ? {
+        let input = this.state.selectedField.DBName !== 'password' ? {
           [this.state.selectedField.DBName]:
-            (this.state.newValue === "true") ?
-            true : (this.state.newValue === "false") ?
-            false : this.state.newValue
+            (this.state.newValue === 'true')
+              ? true : (this.state.newValue === 'false')
+                ? false : this.state.newValue,
         } : {
           [this.state.selectedField.DBName[0]]: this.state.newValue,
-          [this.state.selectedField.DBName[1]]: this.state.passwordConfirmation
+          [this.state.selectedField.DBName[1]]: this.state.passwordConfirmation,
         }
 
-        input = this.props.selectedItems.map(element => {
-          return ({
-            id: element[this.props.request.id],
-            ...input
-          })
-        })
+        input = this.props.selectedItems.map(element => ({
+          id: element[this.props.request.id],
+          ...input,
+        }))
 
         try {
           await this.props.glpi.updateItem({
             itemtype: this.props.request.itemtype,
-            input
+            input,
           })
           this.setState({
-            isLoading: false
+            isLoading: false,
           })
           this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.elements_successfully_edited'),
-            type: 'success'
+            type: 'success',
           })
           this.props.history.goBack()
           this.props.changeAction('reload')
           this.props.changeSelectionMode(false)
         } catch (error) {
           this.setState({
-            isLoading: false
+            isLoading: false,
           })
-          this.props.toast.setNotification(handleMessage({type: 'alert', message: error}))
+          this.props.toast.setNotification(handleMessage({ type: 'alert', message: error }))
         }
       })
     } else {
       this.setState({
-        forceValidation: true
+        forceValidation: true,
       })
     }
   }
@@ -137,17 +132,17 @@ class EditMultiple extends PureComponent {
    * @param {string} value
    */
   change = (name, value) => {
-    if (name === "selectedField") {
+    if (name === 'selectedField') {
       this.setState({
         newValue: '',
-        selectedField: JSON.parse(value)
+        selectedField: JSON.parse(value),
       }, () => {
-        if (value === "password") {
+        if (value === 'password') {
           this.setState({
-            isLoading: true
+            isLoading: true,
           }, async () => {
             const {
-              cfg_glpi
+              cfg_glpi,
             } = await this.props.glpi.getGlpiConfig()
             this.setState({
               passwordConfiguration: {
@@ -155,16 +150,16 @@ class EditMultiple extends PureComponent {
                 needDigit: cfg_glpi.password_need_number,
                 needLowercaseCharacter: cfg_glpi.password_need_letter,
                 needUppercaseCharacter: cfg_glpi.password_need_caps,
-                needSymbol: cfg_glpi.password_need_symbol
+                needSymbol: cfg_glpi.password_need_symbol,
               },
-              isLoading: false
+              isLoading: false,
             })
           })
         }
       })
     } else {
       this.setState({
-        [name]: value
+        [name]: value,
       })
     }
   }
@@ -188,7 +183,7 @@ class EditMultiple extends PureComponent {
       let renderComponent
       if (this.state.isLoading) {
         renderComponent = (
-          <div style={{marginTop: 40}}>
+          <div style={{ marginTop: 40 }}>
             <Loading message={`${I18n.t('commons.loading')}...`} />
           </div>
         )
@@ -196,7 +191,7 @@ class EditMultiple extends PureComponent {
         let input
 
         switch (this.state.selectedField.type) {
-          case "text":
+          case 'text':
             input = (
               <Input
                 label={I18n.t('edit_multiple.what_new_value')}
@@ -208,7 +203,7 @@ class EditMultiple extends PureComponent {
             )
             break
 
-          case "password":
+          case 'password':
             input = [
               <Input
                 label={I18n.t('edit_multiple.what_new_password')}
@@ -229,13 +224,13 @@ class EditMultiple extends PureComponent {
                   ...this.state.passwordConfiguration,
                   isEqualTo: {
                     value: this.state.newValue,
-                    message: "Passwords do not match"
-                  }
+                    message: 'Passwords do not match',
+                  },
                 }}
                 function={this.change}
                 forceValidation={this.state.forceValidation}
                 key="password-2"
-              />
+              />,
             ]
             break
 
@@ -243,7 +238,7 @@ class EditMultiple extends PureComponent {
             if (this.state.selectedField.options) {
               input = (
                 <Select
-                  label= {I18n.t('edit_multiple.what_new_value')}
+                  label={I18n.t('edit_multiple.what_new_value')}
                   name="newValue"
                   value={this.state.newValue}
                   options={this.state.selectedField.options}
@@ -253,7 +248,7 @@ class EditMultiple extends PureComponent {
             } else {
               input = (
                 <Select
-                  label= {I18n.t('edit_multiple.what_new_value')}
+                  label={I18n.t('edit_multiple.what_new_value')}
                   name="newValue"
                   value={this.state.newValue}
                   options={[]}
@@ -263,7 +258,7 @@ class EditMultiple extends PureComponent {
                     params: this.state.selectedField.params,
                     method: this.state.selectedField.method,
                     content: this.state.selectedField.content,
-                    value: this.state.selectedField.value
+                    value: this.state.selectedField.value,
                   }}
                 />
               )
@@ -315,24 +310,24 @@ class EditMultiple extends PureComponent {
             <Select
               name="selectedField"
               value={this.state.field}
-              options={this.props.FieldList.map(field => { return { name: field.name, value: JSON.stringify(field) }})}
+              options={this.props.FieldList.map(field => ({ name: field.name, value: JSON.stringify(field) }))}
               function={this.change}
             />
 
             {renderComponent}
 
             {
-              this.state.isLoading ?
-                ""
+              this.state.isLoading
+                ? ''
                 : (
                   <React.Fragment>
-                    <br/>
+                    <br />
 
                     <button className="btn btn--secondary" onClick={this.cancel}>
                       {I18n.t('commons.cancel')}
                     </button>
 
-                    <button className="btn btn--primary" onClick={this.handleSave} style={{marginLeft: 10}}>
+                    <button className="btn btn--primary" onClick={this.handleSave} style={{ marginLeft: 10 }}>
                       {I18n.t('commons.save')}
                     </button>
                   </React.Fragment>
@@ -341,11 +336,10 @@ class EditMultiple extends PureComponent {
           </div>
         </ContentPane>
       )
-    } else {
-      return (
-        <EmptyMessage message={I18n.t('commons.no_selection')}/>
-      )
     }
+    return (
+      <EmptyMessage message={I18n.t('commons.no_selection')} />
+    )
   }
 }
 
@@ -357,7 +351,7 @@ EditMultiple.propTypes = {
   history: PropTypes.object.isRequired,
   toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
-  request: PropTypes.object.isRequired
+  request: PropTypes.object.isRequired,
 }
 
 export default EditMultiple

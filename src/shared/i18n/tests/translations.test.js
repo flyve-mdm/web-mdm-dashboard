@@ -26,10 +26,9 @@
  * ------------------------------------------------------------------------------
  */
 
-import I18n from '../../i18n'
+import I18n from '..'
 
 describe('Check if translations are available', () => {
-
   it('login page should have english translations', () => {
     expect(I18n.t('login.title')).toBe('Sign in')
     expect(I18n.t('login.username_not_registered')).toBe('The username entered is not registered. Try a different account or')

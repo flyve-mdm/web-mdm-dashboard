@@ -80,7 +80,6 @@ class Devices extends PureComponent {
    * @function handleResize
    */
   handleResize = () => {
-
     const nextMode = getMode()
 
     if (nextMode === 'small') {

@@ -27,9 +27,9 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
-import SplitView from "../../components/SplitView"
+import SplitView from '../../components/SplitView'
 import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
 import getMode from '../../shared/getMode'
 import configureDisplay from '../../shared/configureDisplay'
@@ -48,7 +48,7 @@ const TIMEOUT_CONTRACT = 150
  * @param {component} WrappedComponent Component to wrap
  * @return {component} The component with the admin dashboard layout
  */
-const withAdminDashboardLayout = WrappedComponent => {
+const withAdminDashboardLayout = (WrappedComponent) => {
   class AdminDashboardLayout extends PureComponent {
     /**
      * Create AdminDashboardLayout
@@ -60,7 +60,7 @@ const withAdminDashboardLayout = WrappedComponent => {
         expanded: false,
         contract: false,
         mode: getMode(),
-        iframe: undefined
+        iframe: undefined,
       }
 
       window.addEventListener('resize', this.handleResize)
@@ -78,12 +78,12 @@ const withAdminDashboardLayout = WrappedComponent => {
 
     /** Change 'mode' according to the resolution of the screen */
     handleResize = () => {
-      let prevMode = this.state.mode
-      let nextMode = getMode()
+      const prevMode = this.state.mode
+      const nextMode = getMode()
 
       if (prevMode !== nextMode) {
         this.setState({
-          mode: nextMode
+          mode: nextMode,
         })
       }
     }
@@ -91,18 +91,23 @@ const withAdminDashboardLayout = WrappedComponent => {
     /** Configure 'baseURL' and the cookies of glpi */
     componentDidMount = async () => {
       const {
-        cfg_glpi
+        cfg_glpi,
       } = await glpi.getGlpiConfig()
       localStorage.setItem('baseURL', cfg_glpi.url_base)
       this.setState({
-          iframe: <iframe title="glpi-backend" src={`//${cfg_glpi.url_base.split("//")[1]}`} style={{ height: 0, width: 0, opacity: 0, position: 'absolute' }}></iframe>
-        },
-        () => setGlpiCookie(
-          this.setState({
-            iframe: undefined
-          })
-        )
-      )
+        iframe: <iframe
+          title="glpi-backend"
+          src={`//${cfg_glpi.url_base.split('//')[1]}`}
+          style={{
+            height: 0, width: 0, opacity: 0, position: 'absolute',
+          }}
+        />,
+      },
+      () => setGlpiCookie(
+        this.setState({
+          iframe: undefined,
+        }),
+      ))
     }
 
     /** Remove 'resize' event listener */
@@ -119,14 +124,14 @@ const withAdminDashboardLayout = WrappedComponent => {
     handleExpand = () => {
       this.setState({
         expanded: true,
-        contract: false
+        contract: false,
       })
     }
 
     /** Collapse the side menu */
     handleContract = () => {
       this.setState({
-        contract: true
+        contract: true,
       }, () => {
         this.handleSetTimeOut()
       })
@@ -138,7 +143,7 @@ const withAdminDashboardLayout = WrappedComponent => {
         setTimeout(() => {
           this.setState({
             expanded: false,
-            contract: false
+            contract: false,
           })
         }, TIMEOUT_CONTRACT)
       }

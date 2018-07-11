@@ -175,7 +175,8 @@ class ListWithNavLinks extends PureComponent {
                     <NavLink
                       exact
                       to={`${this.props.rootPath}${route.path}`}
-                      activeClassName='--active'>
+                      activeClassName="--active"
+                    >
                       {I18n.t(route.name)}
                     </NavLink>
                   </li>

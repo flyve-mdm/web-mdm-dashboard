@@ -28,10 +28,10 @@
 
 /** import dependencies */
 import React, {
-  Component
+  Component,
 } from 'react'
 import {
-  Switch
+  Switch,
 } from 'react-router-dom'
 import withI18n from '../../hoc/withI18n'
 import withNotification from '../../hoc/withNotification'
@@ -55,5 +55,5 @@ class RootApp extends Component {
 }
 
 export default withI18n(
-  withNotification(RootApp)
+  withNotification(RootApp),
 )

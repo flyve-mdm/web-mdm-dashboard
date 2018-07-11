@@ -44,20 +44,19 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
    * Create authenticationLayout
    * @param {object} props
    */
-  const authenticationLayout = props => {
+  const authenticationLayout = (props) => {
     const style = {
       textAlign: configStyles.centerContent ? 'center' : null,
-      width: props.width
+      width: props.width,
     }
     return (
-      <div className="authentication" style={style} >
+      <div className="authentication" style={style}>
         <section>
           <figure>
             <img alt="Flyve MDM Dashboard" src={require('../../assets/images/dashboard.svg')} />
           </figure>
           <AuthenticationConsumer>
-            {value =>
-              <WrappedComponent {...props} {...value} />
+            {value => <WrappedComponent {...props} {...value} />
             }
           </AuthenticationConsumer>
         </section>
@@ -69,9 +68,9 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
           <span>
             © 2017 - 2018 Teclib'.
           </span>
-          <br/>
+          <br />
           <select
-            onChange={ event => props.changeLanguage(event.target.value) }
+            onChange={event => props.changeLanguage(event.target.value)}
             value={props.languageCurrent}
           >
             {languagesList()}
@@ -83,15 +82,15 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
 
   authenticationLayout.defaultProps = {
     centerContent: true,
-    width: 340
+    width: 340,
   }
 
   authenticationLayout.propTypes = {
     centerContent: PropTypes.bool.isRequired,
     width: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.number
-    ]).isRequired
+      PropTypes.number,
+    ]).isRequired,
   }
 
   return authenticationLayout

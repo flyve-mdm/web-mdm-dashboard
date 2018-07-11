@@ -33,9 +33,9 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
+import { isNumber } from 'util';
 import I18n from '../../shared/i18n'
 import publicURL from '../../shared/publicURL'
-import { isNumber } from 'util';
 
 /**
  * Component with the breadcrumb menu of the header

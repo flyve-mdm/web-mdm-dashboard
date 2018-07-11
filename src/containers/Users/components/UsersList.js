@@ -30,10 +30,10 @@
 import React, {
   PureComponent,
 } from 'react'
-import I18n from '../../../shared/i18n'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
+import I18n from '../../../shared/i18n'
 import UsersItemList from './UsersItemList'
 import BuildItemList from '../../../shared/BuildItemList'
 import Loader from '../../../components/Loader'

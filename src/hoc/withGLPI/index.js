@@ -27,10 +27,10 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import {
-  withRouter
+  withRouter,
 } from 'react-router'
 import glpi from '../../shared/glpiApi'
 

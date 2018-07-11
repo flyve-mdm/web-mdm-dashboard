@@ -156,15 +156,15 @@ class ResetPassword extends PureComponent {
         token,
         newPassword: password,
       })
-      .then((response) => {
-        this.props.toast.setNotification(response)
-      })
-      .catch((error) => {
-        this.props.toast.setNotification(this.props.handleMessages({
-          type: 'alert',
-          message: error,
-        }))
-      })
+        .then((response) => {
+          this.props.toast.setNotification(response)
+        })
+        .catch((error) => {
+          this.props.toast.setNotification(this.props.handleMessages({
+            type: 'alert',
+            message: error,
+          }))
+        })
     } else {
       this.setState({
         forceValidation: true,
@@ -295,6 +295,5 @@ ResetPassword.propTypes = {
 }
 
 export default withAuthenticationLayout((withHandleMessages(ResetPassword)), {
-    centerContent: true,
-  },
-)
+  centerContent: true,
+})

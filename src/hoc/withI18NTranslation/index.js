@@ -27,24 +27,24 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  I18n
+  I18n,
 } from 'react-i18nify'
 import {
-  connect
+  connect,
 } from 'react-redux'
 import {
-  withRouter
+  withRouter,
 } from 'react-router'
 import source_file_translation from './i18n/source_file.json'
 
 function mapStateToProps(state, props) {
   return {
     languageDefault: state.language.languageDefault,
-    languageCurrent: state.language.languageCurrent
+    languageCurrent: state.language.languageCurrent,
   }
 }
 
@@ -53,13 +53,13 @@ function mapStateToProps(state, props) {
  * @param {component} WrappedComponent React Component
  * @return {component} The translated component
  */
-const withI18NTranslation = WrappedComponent => {
+const withI18NTranslation = (WrappedComponent) => {
   class I18NTranslation extends PureComponent {
     /** @constructor */
     constructor(props) {
       super(props)
       I18n.setTranslations({
-        [this.props.languageDefault]: source_file_translation
+        [this.props.languageDefault]: source_file_translation,
       })
     }
 
@@ -68,22 +68,22 @@ const withI18NTranslation = WrappedComponent => {
      * @function findI18NString
      * @param {string} i18nConvention
      */
-    findI18NString = i18nConvention => {
-      let path = i18nConvention === this.props.languageDefault ?
-        `./i18n/source_file` :
-        `./i18n/translations/${i18nConvention}`
+    findI18NString = (i18nConvention) => {
+      const path = i18nConvention === this.props.languageDefault
+        ? './i18n/source_file'
+        : `./i18n/translations/${i18nConvention}`
 
-      import (`${path}.json`)
-      .then(jsonModule => {
-        I18n.setTranslations({
-          [i18nConvention]: jsonModule
+      import(`${path}.json`)
+        .then((jsonModule) => {
+          I18n.setTranslations({
+            [i18nConvention]: jsonModule,
+          })
+          I18n.setLocale(i18nConvention)
+          this.forceUpdate()
+        }).catch((error) => {
+          I18n.setTranslations(this.props.languageDefault)
+          this.forceUpdate()
         })
-        I18n.setLocale(i18nConvention)
-        this.forceUpdate()
-      }).catch((error) => {
-        I18n.setTranslations(this.props.languageDefault)
-        this.forceUpdate()
-      })
     }
 
     /**
@@ -110,19 +110,21 @@ const withI18NTranslation = WrappedComponent => {
      * @function render
      */
     render() {
-      return <WrappedComponent { ...this.props
+      return (
+        <WrappedComponent {...this.props
       }
-      />
+        />
+      )
     }
   }
 
   I18NTranslation.propTypes = {
     languageDefault: PropTypes.string.isRequired,
-    languageCurrent: PropTypes.string.isRequired
+    languageCurrent: PropTypes.string.isRequired,
   }
 
   return withRouter(
-    connect(mapStateToProps, null)(I18NTranslation)
+    connect(mapStateToProps, null)(I18NTranslation),
   )
 }
 

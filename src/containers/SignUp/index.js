@@ -73,7 +73,7 @@ class SignUp extends PureComponent {
     } catch (error) {
       this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
-        message: error
+        message: error,
       }))
     }
   }
@@ -248,20 +248,20 @@ class SignUp extends PureComponent {
         _plugin_flyvemdmdemo_captchas_id: auth.captcha.id,
         _answer: captchaValue,
       })
-      .then(() => {
-        this.props.toast.setNotification({
-          title: appConfig.appName,
-          body: 'Successfully registered user',
-          type: 'success'
+        .then(() => {
+          this.props.toast.setNotification({
+            title: appConfig.appName,
+            body: 'Successfully registered user',
+            type: 'success',
+          })
+          this.props.history.push(`${publicURL}/validateAccount`)
         })
-        this.props.history.push(`${publicURL}/validateAccount`)
-      })
-      .catch((error) => {
-        this.props.toast.setNotification(this.props.handleMessage({
-          type: 'alert',
-          message: error
-        }))
-      })
+        .catch((error) => {
+          this.props.toast.setNotification(this.props.handleMessage({
+            type: 'alert',
+            message: error,
+          }))
+        })
     } else {
       this.setState({
         forceValidation: true,
@@ -275,7 +275,7 @@ class SignUp extends PureComponent {
    */
   render() {
     const {
-      auth
+      auth,
     } = this.props
 
     let renderComponent
