@@ -119,7 +119,7 @@ class ListWithNavLinks extends PureComponent {
       this.setState({
         mode: nextMode,
         itemListPaneWidth: nextMode === 'small' ? '100%' : 320,
-        styleNav: this.styleNav(nextMode, this.props.history),
+        styleNav: ListWithNavLinks.styleNav(nextMode, this.props.history),
       })
     }
   }
