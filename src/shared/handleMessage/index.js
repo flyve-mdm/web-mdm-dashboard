@@ -34,15 +34,26 @@ import logout from '../logout'
 import glpi from '../glpiApi'
 import history from '../history'
 
-function errorRoute(pathname) {
-  const path = pathname.split('/')
-  let route
-  if (path[1] === 'app') {
-    route = `/app/${path[2]}/error`
-  } else {
-    route = `/${path[1]}/error`
+function errorRoute(pathname, customErrorRoute) {
+  if (customErrorRoute) {
+    return customErrorRoute
   }
-  return route
+  const path = pathname.split('/')
+  if (path[1] === 'app') {
+    return `/app/${path[2]}/error`
+  }
+  return `/${path[1]}/error`
+}
+
+function pushError(pathname, code, customErrorRoute) {
+  history.push(`${errorRoute(pathname, customErrorRoute)}?code=${code}`)
+}
+
+function validateActiveProfile(pathname, code, customErrorRoute) {
+  glpi.getActiveProfile()
+    .then(res => {
+      pushError(pathname, code, customErrorRoute)
+    })
 }
 
 /**
@@ -56,6 +67,7 @@ export default ({
   type = 'info',
   message,
   title,
+  customErrorRoute
 }) => {
   const response = {
     type,
@@ -72,20 +84,15 @@ export default ({
         if (message.data[0][1] === 'session_token seems invalid') {
           logout()
         }
-        glpi.getActiveProfile()
-          .then(res => {
-            history.push(`${errorRoute(history.location.pathname)}?code=401`)
-          })
+        validateActiveProfile(history.location.pathname, message.status, customErrorRoute)
         break
       case (message.status === 404):
         response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText
         break
-      case (message.status >= 400 && message.status < 500 && message.status !== 401):
+      case (message.status >= 400 && message.status < 500):
         response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? message.data[1][0].message
           : message.data[0][1] : message.statusText
-        if (message.status === 403) {
-          history.push(`${errorRoute(history.location.pathname)}?code=403`)
-        }
+        pushError(history.location.pathname, message.status, customErrorRoute)
         break
       default:
         break
