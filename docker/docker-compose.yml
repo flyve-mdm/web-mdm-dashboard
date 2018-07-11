@@ -17,7 +17,7 @@ services:
       - ${HOST_SERVER_WEB_PORT}:3000
     volumes:
       - ../:${APPPATH}
-    command: ["yarn", "start"]
+    command: ["/opt/dev-tools/cliinstall.sh"]
     networks:
       red:
         aliases:
