@@ -2,7 +2,7 @@
 
 exports[`InfoBox renders InfoBox 1`] = `
 <a
-  href="test/"
+  href="/test/"
   onClick={[Function]}
 >
   <div

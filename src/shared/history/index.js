@@ -31,10 +31,17 @@
 /** import dependencies */
 import {
   createBrowserHistory as createHistory,
+  createMemoryHistory,
 } from 'history'
 
-/** Get browser history */
-const history = createHistory()
+let history
+if (process.env.NODE_ENV !== 'test') {
+  /** Get browser history */
+  history = createHistory()
+} else {
+  history = createMemoryHistory('/')
+}
+
 
 /** Export history object */
 export default history
