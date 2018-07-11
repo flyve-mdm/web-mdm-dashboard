@@ -35,7 +35,6 @@ import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
 import I18n from '../../../../shared/i18n'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
 import Loading from '../../../../components/Loading'
 import ContentPane from '../../../../components/ContentPane'
 import itemtype from '../../../../shared/itemtype'
@@ -93,10 +92,11 @@ class HelpCenterList extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      handleMessage({
         type: 'alert',
         message: error,
-      }))
+        customErrorRoute: '/app/about/help/error'
+      })
       this.setState({
         isLoading: false,
       })
