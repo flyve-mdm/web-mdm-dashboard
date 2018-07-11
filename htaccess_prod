@@ -1,0 +1,20 @@
+# .htaccess for production server
+
+# url relative to web root dir
+SetEnvIf Host ^ DASHBOARD_WEBROOT /
+
+#Custom error pages
+ErrorDocument 400 %{ENV:DASHBOARD_WEBROOT}error?code=400
+ErrorDocument 401 %{ENV:DASHBOARD_WEBROOT}error?code=401
+ErrorDocument 403 %{ENV:DASHBOARD_WEBROOT}error?code=403
+ErrorDocument 404 %{ENV:DASHBOARD_WEBROOT}error?code=404
+ErrorDocument 500 %{ENV:DASHBOARD_WEBROOT}error?code=500
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase %{ENV:DASHBOARD_WEBROOT}
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . %{ENV:DASHBOARD_WEBROOT}index.html [L]
+</IfModule>

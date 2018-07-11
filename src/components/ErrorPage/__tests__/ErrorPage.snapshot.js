@@ -29,12 +29,12 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 
-import NotFound from '../index'
+import ErrorPage from "../index"
 
-describe('NotFound', () => {
-  test('renders NotFound', () => {
+describe('ErrorPage', () => {
+  test('renders ErrorPage', () => {
     const component = renderer.create(
-      <NotFound />,
+      <ErrorPage />
     )
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()

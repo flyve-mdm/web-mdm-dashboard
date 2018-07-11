@@ -28,6 +28,7 @@
 
 import I18n from '../../shared/i18n'
 import EmptyMessage from '../../components/EmptyMessage'
+import ErrorPage from '../../components/ErrorPage'
 import DevicesContent from './components/DevicesContent'
 import Enroll from './components/Enroll'
 import DevicesEditOne from './components/DevicesEditOne'
@@ -42,6 +43,12 @@ const routes = [{
   path: '/',
   name: I18n.t('commons.no_selection'),
   component: EmptyMessage,
+  exact: true,
+},
+{
+  path: '/error',
+  name: I18n.t('commons.error'),
+  component: ErrorPage,
   exact: true,
 },
 {

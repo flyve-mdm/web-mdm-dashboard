@@ -61,6 +61,22 @@ export const changePhase = (ctx, newPhase) => {
 export const handleFormSubmit = (ctx, event) => {
   event.preventDefault()
 
+  /**
+   * Implementation of Credential Management API
+   * to save the access data of the users.
+   *
+   * Ref: https://developer.mozilla.org/en-US/docs/Web/API/PasswordCredential
+   */
+  try {
+    navigator.credentials.store(
+      new PasswordCredential({
+        id: ctx.state.username,
+        password: ctx.state.password,
+        name: ctx.state.username,
+      })
+    )
+  } catch (error) {}
+
   ctx.props.auth.fetchSignIn(
     ctx.state.username,
     ctx.state.password,

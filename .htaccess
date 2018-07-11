@@ -1,3 +1,24 @@
+# .htaccess for production server
+
+# url relative to web root dir
+SetEnvIf Host ^ DASHBOARD_WEBROOT /
+
+#Custom error pages
+ErrorDocument 400 /build/error?code=400
+ErrorDocument 401 /build/error?code=401
+ErrorDocument 403 /build/error?code=403
+ErrorDocument 404 /build/error?code=404
+ErrorDocument 500 /build/error?code=500
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /build/
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /build/index.html [L]
+</IfModule>
+
 # DISABLE ALL CACHING WHILE DEVELOPING
 <FilesMatch "\.(html|htm|js|css|json)$">
   FileETag None
@@ -11,7 +32,7 @@
   </IfModule>
 </FilesMatch>
 
-# EXPIRES CACHING 
+# EXPIRES CACHING
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType image/jpg "access 1 year"

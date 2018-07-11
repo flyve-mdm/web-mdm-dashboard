@@ -29,6 +29,7 @@
 /** import dependencies */
 import I18n from '../../shared/i18n'
 import EmptyMessage from '../../components/EmptyMessage'
+import ErrorPage from '../../components/ErrorPage'
 import UsersContent from './components/UsersContent'
 import UsersEditOne from './components/UsersEditOne'
 import UsersEdit from './components/UsersEdit'
@@ -42,6 +43,12 @@ const routes = [{
   path: '/',
   name: I18n.t('commons.no_selection'),
   component: EmptyMessage,
+  exact: true,
+},
+{
+  path: '/error',
+  name: I18n.t('commons.error'),
+  component: ErrorPage,
   exact: true,
 },
 {

@@ -362,6 +362,28 @@
       }
     }
   },
+  "error": {
+    "400": {
+      "title": "Oops! Bad request",
+      "message": "Apparently you are making an erroneous request. Please return to the dashboard."
+    },
+    "401": {
+      "title": "Unauthorized",
+      "message": "The request has not been applied because it lacks valid authentication credentials for the target resource."
+    },
+    "403": {
+      "title": "Action is forbidden",
+      "message": "Apparently you are trying to perform an action not allowed. Please return to the dashboard."
+    },
+    "404": {
+      "title": "Oops! Page not Found.",
+      "message": "We could not find the page you were looking for. Meanwhile, you may return to the dashboard."
+    },
+    "500": {
+      "title": "Oops! Something went wrong.",
+      "message": "We will work on fixing that rigth away. Meanwhile, you may return to the dashboard."
+    }
+  },
   "commons": {
     "overview": "Overview",
     "system": "System information",
@@ -527,7 +549,6 @@
     "setting_flyve_mdm": "Setting of Flyve MDM",
     "about_flyve_mdm": "About of Flyve MDM",
     "package_name": "Package name",
-    "not_found": "Not Found",
     "load_more": "load more data",
     "saving": "Saving",
     "child_entities": "Child entities",

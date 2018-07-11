@@ -40,6 +40,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
+import handleMessage from '../../../shared/handleMessage'
 
 /**
  * @class ApplicationsList
@@ -163,6 +164,7 @@ export default class ApplicationsList extends PureComponent {
         totalcount: response.totalcount,
       })
     } catch (error) {
+      handleMessage({ message: error })
       this.setState({
         isLoading: false,
         order: 'ASC',

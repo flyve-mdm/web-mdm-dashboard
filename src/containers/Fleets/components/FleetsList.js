@@ -40,6 +40,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
+import handleMessage from '../../../shared/handleMessage'
 
 /**
  * @class FleetsList
@@ -416,6 +417,7 @@ export default class FleetsList extends PureComponent {
         itemList: new WinJS.Binding.List(fleets.data),
       })
     } catch (error) {
+      handleMessage({ message: error })
       this.props.toast.setNotification(handleMessage({
         type: 'alert',
         error,

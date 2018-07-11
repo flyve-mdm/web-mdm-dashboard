@@ -117,7 +117,7 @@
     "webpack-dev-server": "^2.11.2",
     "webpack-manifest-plugin": "2.0.3"
   },
-  "homepage": "https://dev.flyve.org/dashboard",
+  "homepage": ".",
   "babel": {
     "presets": [
       "react-app"

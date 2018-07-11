@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorPage renders ErrorPage 1`] = `
+<div
+  className="empty-message"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "margin": "0 auto",
+        "width": "320px",
+      }
+    }
+  >
+    <figure>
+      <img
+        alt="Flyve MDM Dashboard"
+        src="dashboard.svg"
+        style={
+          Object {
+            "width": "80px",
+          }
+        }
+      />
+    </figure>
+    <h1>
+      Oops! Page not Found.
+    </h1>
+    <p>
+      We could not find the page you were looking for. Meanwhile, you may return to the dashboard.
+    </p>
+  </div>
+</div>
+`;

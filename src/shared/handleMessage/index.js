@@ -31,6 +31,19 @@
 /** import dependencies */
 import I18n from '../../shared/i18n'
 import logout from '../logout'
+import glpi from '../glpiApi'
+import history from '../history'
+
+function errorRoute(pathname) {
+  const path = pathname.split('/')
+  let route
+  if (path[1] === 'app') {
+    route = `/app/${path[2]}/error`
+  } else {
+    route = `/${path[1]}/error`
+  }
+  return route
+}
 
 /**
  * Add format to error message
@@ -59,6 +72,10 @@ export default ({
         if (message.data[0][1] === 'session_token seems invalid') {
           logout()
         }
+        glpi.getActiveProfile()
+          .then(res => {
+            history.push(`${errorRoute(history.location.pathname)}?code=401`)
+          })
         break
       case (message.status === 404):
         response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText
@@ -66,6 +83,9 @@ export default ({
       case (message.status >= 400 && message.status < 500 && message.status !== 401):
         response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? message.data[1][0].message
           : message.data[0][1] : message.statusText
+        if (message.status === 403) {
+          history.push(`${errorRoute(history.location.pathname)}?code=403`)
+        }
         break
       default:
         break
