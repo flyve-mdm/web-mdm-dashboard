@@ -30,7 +30,6 @@ import React from "react"
 import history from "../../shared/history"
 import getQueryString from "../../shared/getQueryString"
 import I18n from '../../shared/i18n'
-import EmptyMessage from '../../components/EmptyMessage'
 
 /**
  * Component with the display of the error pages
@@ -45,8 +44,9 @@ export default () => {
   }
   const title = I18n.t(`error.${errorCode}.title`)
   const message = I18n.t(`error.${errorCode}.message`)
+  const path = pathname.split('/')
 
-  if (errorCode !== 404 && errorCode < 500) {
+  if (errorCode !== 404 && errorCode < 500 && path[1] === 'app') {
     return(
       <div
         className="empty-message"
