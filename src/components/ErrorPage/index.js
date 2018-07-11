@@ -44,7 +44,7 @@ export default () => {
   }
   const title = I18n.t(`error.${errorCode}.title`)
   const message = I18n.t(`error.${errorCode}.message`)
-  const path = pathname.split('/')
+  const path = history.location.pathname.split('/')
 
   if (errorCode !== 404 && errorCode < 500 && path[1] === 'app') {
     return(
