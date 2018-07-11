@@ -4,11 +4,12 @@ import { I18nConsumer } from '../../providers/I18nProvider'
 export default (WrappedComponent) => {
   const i18n = props => (
     <I18nConsumer>
-      {value =>
-        (<WrappedComponent
+      {value => (
+        <WrappedComponent
           {...props}
           {...value}
-        />)}
+        />
+      )}
     </I18nConsumer>
   )
 

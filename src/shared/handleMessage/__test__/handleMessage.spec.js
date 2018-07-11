@@ -68,7 +68,7 @@ describe('handleMessage', () => {
         message: {
           status: 0,
         },
-      })
+      }),
     ).toEqual({
       body: 'No Internet Connection',
       title: 'Error',
@@ -87,7 +87,7 @@ describe('handleMessage', () => {
             ['Error', ''],
           ],
         },
-      })
+      }),
     ).toEqual({
       body: 'error 404',
       title: 'Error',
@@ -105,7 +105,7 @@ describe('handleMessage', () => {
             ['ERROR_SESSION_TOKEN_INVALID', 'session_token seems invalid'],
           ],
         },
-      })
+      }),
     ).toEqual({
       body: 'session_token seems invalid',
       title: 'Error',
@@ -124,7 +124,7 @@ it('should set a 400 error message', () => {
           ['Error', 'error 400'],
         ],
       },
-    })
+    }),
   ).toEqual({
     body: 'error 400',
     title: 'Error',

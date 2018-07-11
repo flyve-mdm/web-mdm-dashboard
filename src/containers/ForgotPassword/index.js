@@ -32,7 +32,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  Link
+  Link,
 } from 'react-router-dom'
 import I18n from '../../shared/i18n'
 import Loading from '../../components/Loading'
@@ -212,6 +212,5 @@ ForgotPassword.propTypes = {
 }
 
 export default withGLPI(withAuthenticationLayout((withHandleMessages(ForgotPassword)), {
-    centerContent: true,
-  },
-))
+  centerContent: true,
+}))

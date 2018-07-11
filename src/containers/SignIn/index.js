@@ -31,10 +31,10 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../shared/i18n'
 import {
   Redirect,
 } from 'react-router'
+import I18n from '../../shared/i18n'
 import UsernameFieldset from './components/UsernameFieldset'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
@@ -79,7 +79,7 @@ class SignIn extends PureComponent {
         password: true,
         mediation: 'optional',
       })
-        .then(res => {
+        .then((res) => {
           if (res) {
             this.setState({
               username: res.name,

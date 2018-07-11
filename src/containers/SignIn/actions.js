@@ -73,7 +73,7 @@ export const handleFormSubmit = (ctx, event) => {
         id: ctx.state.username,
         password: ctx.state.password,
         name: ctx.state.username,
-      })
+      }),
     )
   } catch (error) {}
 
@@ -84,10 +84,9 @@ export const handleFormSubmit = (ctx, event) => {
     ctx.props.toast.setNotification({
       title: appConfig.appName,
       body: 'Welcome!',
-      type: 'success'
+      type: 'success',
     })
-  })
-  .catch((error) => {
+  }).catch((error) => {
     ctx.props.toast.setNotification(ctx.props.handleMessage({
       type: 'alert',
       message: error,

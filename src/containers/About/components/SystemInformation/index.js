@@ -30,8 +30,8 @@
 import React, {
   PureComponent,
 } from 'react'
-import I18n from '../../../../shared/i18n'
 import PropTypes from 'prop-types'
+import I18n from '../../../../shared/i18n'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'

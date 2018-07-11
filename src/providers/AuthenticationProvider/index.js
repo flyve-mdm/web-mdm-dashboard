@@ -46,172 +46,165 @@ export class AuthenticationProvider extends PureComponent {
         })
       }
     },
-    fetchSignIn: (username, password) => {
-      return new Promise((resolve, reject) => {
-        this.setState(
-          {
-            isLoading: true,
-          },
-          () => {
-            glpi.login({
-              userName: username,
-              userPassword: password
-            }).then(response => {
-              const user = {
-                id: response.userData.id,
-                name: response.userData.name,
-                email: response.userEmails.length > 0 ? response.userEmails[0].email : '',
-                picture: null
-              }
-
-              localStorage.setItem('sessionToken', response.sessionToken)
-              localStorage.setItem('currentUser', JSON.stringify(user))
-
-              this.setState(
-                {
-                  isLoading: false,
-                },
-                () => {
-                  resolve()
-                }
-              )
-            }).catch(error => {
-
-              this.setState(
-                {
-                  isLoading: false,
-                },
-                () => {
-                  reject(error)
-                }
-              )
-            })
-          },
-        )
-      })
-    },
-    fetchCaptcha: () => {
-      return new Promise((resolve, reject) => {
-        this.setState(
-          {
-            isLoading: true,
-          },
-          async () => {
-            try {
-              const session = await glpi.initSessionByUserToken({
-                userToken: appConfig.demoToken
-              })
-              glpi.sessionToken = session.session_token
-              const {
-                id
-              } = await glpi.addItem({
-                itemtype: itemtype.PluginFlyvemdmdemoCaptcha,
-                input: {}
-              })
-              const captcha = await glpi.genericRequest({
-                path: `PluginFlyvemdmdemoCaptcha/${id}`,
-                queryString: {
-                  alt: 'media'
-                },
-                requestParams: {
-                  method: 'GET',
-                  headers: {
-                    'Content-Type': 'application/octet-stream'
-                  },
-                  responseType: 'blob'
-                }
-              })
-              const {
-                cfg_glpi
-              } = await glpi.getGlpiConfig()
-              const configurationPassword = {
-                minimunLength: cfg_glpi.password_min_length,
-                needDigit: cfg_glpi.password_need_number,
-                needLowercaseCharacter: cfg_glpi.password_need_letter,
-                needUppercaseCharacter: cfg_glpi.password_need_caps,
-                needSymbol: cfg_glpi.password_need_symbol
-              }
-
-              this.setState(
-                {
-                  isLoading: false,
-                  configurationPassword,
-                  captcha: {
-                    id: id,
-                    img: URL.createObjectURL(captcha),
-                  }
-                },
-                () => {
-                  resolve()
-                }
-              )
-
-            } catch (error) {
-              this.setState(
-                {
-                  isLoading: false,
-                },
-                () => {
-                  reject(error)
-                }
-              )
+    fetchSignIn: (username, password) => new Promise((resolve, reject) => {
+      this.setState(
+        {
+          isLoading: true,
+        },
+        () => {
+          glpi.login({
+            userName: username,
+            userPassword: password,
+          }).then((response) => {
+            const user = {
+              id: response.userData.id,
+              name: response.userData.name,
+              email: response.userEmails.length > 0 ? response.userEmails[0].email : '',
+              picture: null,
             }
-          }
-        )}
+
+            localStorage.setItem('sessionToken', response.sessionToken)
+            localStorage.setItem('currentUser', JSON.stringify(user))
+
+            this.setState(
+              {
+                isLoading: false,
+              },
+              () => {
+                resolve()
+              },
+            )
+          }).catch((error) => {
+            this.setState(
+              {
+                isLoading: false,
+              },
+              () => {
+                reject(error)
+              },
+            )
+          })
+        },
       )
-    },
-    fetchSignUp: (data) => {
-      return new Promise((resolve, reject) => {
-        this.setState(
-          {
-            isLoading: true,
-          },
-          () => {
-            glpi.registerUser({
+    }),
+    fetchCaptcha: () => new Promise((resolve, reject) => {
+      this.setState(
+        {
+          isLoading: true,
+        },
+        async () => {
+          try {
+            const session = await glpi.initSessionByUserToken({
               userToken: appConfig.demoToken,
-              userData: data,
-              itemtype: itemtype.PluginFlyvemdmdemoUser
             })
-              .then(() => {
-                this.setState(
-                  {
-                    isLoading: false,
-                  },
-                  () => {
-                    resolve()
-                })
-              })
-              .catch((error) => {
-                this.setState(
-                  {
-                    isLoading: false,
-                  },
-                  () => {
-                    reject(error)
-                  })
-              })
-          }
-        )
-      })
-    },
-    fetchResetPassword: ({email, token, newPassword}) => {
-      return new Promise((resolve, reject) => {
-        this.setState(
-          {
-            isLoading: true,
-          },
-          () => {
-            glpi.genericRequest({
-              path: 'lostPassword',
+            glpi.sessionToken = session.session_token
+            const {
+              id,
+            } = await glpi.addItem({
+              itemtype: itemtype.PluginFlyvemdmdemoCaptcha,
+              input: {},
+            })
+            const captcha = await glpi.genericRequest({
+              path: `PluginFlyvemdmdemoCaptcha/${id}`,
+              queryString: {
+                alt: 'media',
+              },
               requestParams: {
-                method: 'PUT',
-                body: JSON.stringify({
-                  "email": email,
-                  "password_forget_token": token,
-                  "password": newPassword
-                })
-              }
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/octet-stream',
+                },
+                responseType: 'blob',
+              },
             })
+            const {
+              cfg_glpi,
+            } = await glpi.getGlpiConfig()
+            const configurationPassword = {
+              minimunLength: cfg_glpi.password_min_length,
+              needDigit: cfg_glpi.password_need_number,
+              needLowercaseCharacter: cfg_glpi.password_need_letter,
+              needUppercaseCharacter: cfg_glpi.password_need_caps,
+              needSymbol: cfg_glpi.password_need_symbol,
+            }
+
+            this.setState(
+              {
+                isLoading: false,
+                configurationPassword,
+                captcha: {
+                  id,
+                  img: URL.createObjectURL(captcha),
+                },
+              },
+              () => {
+                resolve()
+              },
+            )
+          } catch (error) {
+            this.setState(
+              {
+                isLoading: false,
+              },
+              () => {
+                reject(error)
+              },
+            )
+          }
+        },
+      )
+    }),
+    fetchSignUp: data => new Promise((resolve, reject) => {
+      this.setState(
+        {
+          isLoading: true,
+        },
+        () => {
+          glpi.registerUser({
+            userToken: appConfig.demoToken,
+            userData: data,
+            itemtype: itemtype.PluginFlyvemdmdemoUser,
+          })
+            .then(() => {
+              this.setState(
+                {
+                  isLoading: false,
+                },
+                () => {
+                  resolve()
+                },
+              )
+            })
+            .catch((error) => {
+              this.setState(
+                {
+                  isLoading: false,
+                },
+                () => {
+                  reject(error)
+                },
+              )
+            })
+        },
+      )
+    }),
+    fetchResetPassword: ({ email, token, newPassword }) => new Promise((resolve, reject) => {
+      this.setState(
+        {
+          isLoading: true,
+        },
+        () => {
+          glpi.genericRequest({
+            path: 'lostPassword',
+            requestParams: {
+              method: 'PUT',
+              body: JSON.stringify({
+                email,
+                password_forget_token: token,
+                password: newPassword,
+              }),
+            },
+          })
             .then((response) => {
               this.setState(
                 {
@@ -221,9 +214,10 @@ export class AuthenticationProvider extends PureComponent {
                   resolve({
                     title: appConfig.appName,
                     body: response[0],
-                    type: 'success'
+                    type: 'success',
                   })
-              })
+                },
+              )
             })
             .catch((error) => {
               this.setState(
@@ -232,12 +226,12 @@ export class AuthenticationProvider extends PureComponent {
                 },
                 () => {
                   reject(error)
-                })
+                },
+              )
             })
-          }
-        )
-      })
-    },
+        },
+      )
+    }),
   }
 
   render() {

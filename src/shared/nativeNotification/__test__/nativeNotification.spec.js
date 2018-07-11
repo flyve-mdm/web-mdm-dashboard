@@ -32,6 +32,7 @@ describe('nativeNotification', () => {
   beforeEach(() => {
     global.Notification = sinon.spy(class Notification {
       permission = 'granted'
+
       static requestPermission = (callback) => {
         callback()
       }

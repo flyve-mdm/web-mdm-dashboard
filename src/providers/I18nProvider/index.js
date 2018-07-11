@@ -29,7 +29,9 @@ export class I18nProvider extends Component {
 
   render() {
     const context = { ...this.state }
-    return Children.only(<I18nContext.Provider value={{ ...context }}>{this.props.children}</I18nContext.Provider>)
+    return Children.only(<I18nContext.Provider value={{ ...context }}>
+      {this.props.children}
+                         </I18nContext.Provider>)
   }
 }
 

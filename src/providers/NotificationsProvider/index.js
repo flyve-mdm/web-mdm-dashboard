@@ -17,22 +17,20 @@ export class NotificationsProvider extends PureComponent {
     },
     show: false,
     setNotification: (notification = {}) => {
-      if (typeof notification !== 'object') {
-        notification = {}
+      let getNotification = notification
+      if (typeof getNotification !== 'object') {
+        getNotification = {}
       }
       this.setState(
         {
           show: true,
-          notification,
+          notification: getNotification,
         },
         () => {
-
-          const notification = validateNotifications()
-          if (notification.type === "Native") {
+          const { type } = validateNotifications()
+          if (type === 'Native') {
             nativeNotification(
-              this.state.notification.title,
-              this.state.notification.body,
-              this.state.notification.icon,
+              [...getNotification],
             )
           }
           setTimeout(() => {
@@ -45,8 +43,8 @@ export class NotificationsProvider extends PureComponent {
       WinJS.UI.Animation.exitContent(
         document.getElementsByClassName('toast'), {
           top: '0px',
-          left: '20px'
-        }
+          left: '20px',
+        },
       ).then(() => {
         this.setState(
           {
@@ -69,21 +67,21 @@ export class NotificationsProvider extends PureComponent {
     let toast = null
     if (context.show && notification.type === 'Toast') {
       toast = (
-      <div className={`toast toast--${context.notification.type}`}>
-        <span
-          className="cancelIcon"
-          style={{ float: 'right', cursor: 'pointer', color: '#ffffff' }}
-          onClick={() => {
-            context.hidenNotification()
-          }}
-        />
-        <div className="toast__title">
-          {context.notification.title}
-        </div>
-        <div className="toast__body">
-          {context.notification.body}
-        </div>
-      </div>)
+        <div className={`toast toast--${context.notification.type}`}>
+          <span
+            className="cancelIcon"
+            style={{ float: 'right', cursor: 'pointer', color: '#ffffff' }}
+            onClick={() => {
+              context.hidenNotification()
+            }}
+          />
+          <div className="toast__title">
+            {context.notification.title}
+          </div>
+          <div className="toast__body">
+            {context.notification.body}
+          </div>
+        </div>)
     }
 
     return (

@@ -146,7 +146,6 @@ class Security extends PureComponent {
    * @async
    */
   closeSession = async () => {
-
     const isOK = await Confirmation.isOK(this.killSession)
     if (isOK) {
       logout()
@@ -164,7 +163,6 @@ class Security extends PureComponent {
    * @async
    */
   cleanWebStorage = async () => {
-
     const isOK = await Confirmation.isOK(this.deleteBrowserData)
     if (isOK) {
       localStorage.clear()

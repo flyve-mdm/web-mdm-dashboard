@@ -31,8 +31,8 @@ import React, {
   PureComponent,
 } from 'react'
 import WinJS from 'winjs'
-import I18n from '../../../shared/i18n'
 import PropTypes from 'prop-types'
+import I18n from '../../../shared/i18n'
 import FleetsTaskItemList from './FleetsTaskItemList'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'

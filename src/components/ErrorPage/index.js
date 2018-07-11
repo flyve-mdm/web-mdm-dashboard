@@ -26,9 +26,9 @@
  * ------------------------------------------------------------------------------
  */
 
-import React from "react"
-import history from "../../shared/history"
-import getQueryString from "../../shared/getQueryString"
+import React from 'react'
+import history from '../../shared/history'
+import getQueryString from '../../shared/getQueryString'
 import I18n from '../../shared/i18n'
 
 /**
@@ -50,9 +50,9 @@ export default () => {
     return(
       <div
         className="empty-message"
-        style={{width: '100%'}}
+        style={{ width: '100%' }}
       >
-        <div style={{width: '320px', margin: '0 auto'}}>
+        <div style={{ width: '320px', margin: '0 auto' }}>
           <figure>
             <img
               alt="Flyve MDM Dashboard"
@@ -62,15 +62,19 @@ export default () => {
               }}
             />
           </figure>
-          <h1>{title}</h1>
-          <p>{message}</p>
+          <h1>
+            {title}
+          </h1>
+          <p>
+            {message}
+          </p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="authentication error" style={{ textAlign: 'center'}} >
+    <div className="authentication error" style={{ textAlign: 'center' }}>
       <section>
         <figure>
           <img
@@ -78,9 +82,17 @@ export default () => {
             src={require('../../assets/images/dashboard.svg')}
           />
         </figure>
-        <h1>{I18n.t('commons.error')} {errorCode}</h1>
-        <h3>{title}</h3>
-        <p>{message}</p>
+        <h1>
+          {I18n.t('commons.error')}
+          {' '}
+          {errorCode}
+        </h1>
+        <h3>
+          {title}
+        </h3>
+        <p>
+          {message}
+        </p>
       </section>
       <footer>
         <a href="https://flyve-mdm.com/privacy-policy/">

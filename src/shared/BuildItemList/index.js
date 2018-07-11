@@ -30,7 +30,7 @@
 
 /** Import dependencies */
 import WinJS from 'winjs'
-import I18n from '../../shared/i18n'
+import I18n from '../i18n'
 
 /**
  * Sort elements ascending / descending

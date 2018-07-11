@@ -31,9 +31,9 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
 import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import withGLPI from '../../../hoc/withGLPI'

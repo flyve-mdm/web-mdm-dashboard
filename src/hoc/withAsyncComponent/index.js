@@ -27,7 +27,7 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 
 /**
@@ -35,18 +35,17 @@ import React, {
  * @param {function} importComponent
  * @return {component} The imported component
  */
-const withAsyncComponent = importComponent => {
-  return class AsyncComponent extends PureComponent {
+const withAsyncComponent = importComponent => class AsyncComponent extends PureComponent {
     state = {
-      component: null
+      component: null,
     }
 
     /** Import the component */
     componentDidMount() {
       importComponent()
-        .then(cmp => {
+        .then((cmp) => {
           this.setState({
-            component: cmp.default
+            component: cmp.default,
           })
         })
     }
@@ -60,7 +59,6 @@ const withAsyncComponent = importComponent => {
 
       return C ? <C {...this.props} /> : null
     }
-  }
 }
 
 export default withAsyncComponent

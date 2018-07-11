@@ -30,8 +30,8 @@
 import React, {
   PureComponent,
 } from 'react'
-import I18n from '../../../../shared/i18n'
 import PropTypes from 'prop-types'
+import I18n from '../../../../shared/i18n'
 import ChangeDownloadURL from './ChangeDownloadURL'
 import ChangeTokenLife from './ChangeTokenLife'
 import Main from './Main'
