@@ -52,7 +52,7 @@ describe('LayoutListWithNavLinks', () => {
     const component = renderer.create(
       <Router history={history}>
         <LayoutListWithNavLinks
-          rootPath="test/"
+          rootPath=""
           history={history}
           routes={[
             {
