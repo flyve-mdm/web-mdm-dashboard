@@ -105,11 +105,11 @@ class Map extends PureComponent {
     if (map) {
       this.addMarkers()
       if (prevProps.selectedLocation !== selectedLocation) {
+        map.setZoom(10)
         map.panTo([
           selectedLocation.latitude,
           selectedLocation.longitude,
         ])
-        map.setZoom(10)
       }
     }
   }
