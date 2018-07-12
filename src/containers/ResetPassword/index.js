@@ -160,7 +160,7 @@ class ResetPassword extends PureComponent {
           this.props.toast.setNotification(response)
         })
         .catch((error) => {
-          this.props.toast.setNotification(this.props.handleMessages({
+          this.props.toast.setNotification(this.props.handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -289,6 +289,10 @@ ResetPassword.defaultProps = {
 }
 
 ResetPassword.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,

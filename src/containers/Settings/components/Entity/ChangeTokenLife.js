@@ -158,7 +158,10 @@ class ChangeTokenLife extends PureComponent {
 }
 
 ChangeTokenLife.propTypes = {
-  toast: PropTypes.object.isRequired,
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   changeMode: PropTypes.func.isRequired,
   tokenLife: PropTypes.string.isRequired,
   saveValues: PropTypes.func.isRequired,

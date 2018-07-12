@@ -162,7 +162,10 @@ class ChangeDownloadURL extends PureComponent {
 }
 
 ChangeDownloadURL.propTypes = {
-  toast: PropTypes.object.isRequired,
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   changeMode: PropTypes.func.isRequired,
   downloadURL: PropTypes.string.isRequired,
   saveValues: PropTypes.func.isRequired,

@@ -41,7 +41,6 @@ import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import withGLPI from '../../hoc/withGLPI'
 import publicURL from '../../shared/publicURL'
-import handleMessage from '../../shared/handleMessage'
 
 /**
  * Component with the ForgotPassword section
@@ -102,7 +101,7 @@ class ForgotPassword extends PureComponent {
         isRecoverSent: true,
         isLoading: false,
       })
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'success',
         message: I18n.t('notifications.request_sent'),
       }))
@@ -110,7 +109,7 @@ class ForgotPassword extends PureComponent {
       this.setState({
         isLoading: false,
       })
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'warning',
         message: error,
       }))
@@ -207,6 +206,10 @@ class ForgotPassword extends PureComponent {
 }
 
 ForgotPassword.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }

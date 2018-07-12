@@ -174,7 +174,11 @@ export default class Enroll extends PureComponent {
 }
 /** Enroll propTypes */
 Enroll.propTypes = {
-  toast: PropTypes.object.isRequired,
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  changeAction: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }

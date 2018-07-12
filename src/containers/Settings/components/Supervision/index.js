@@ -40,7 +40,6 @@ import ConstructInputs from '../../../../components/Forms'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
 
 /**
@@ -69,15 +68,11 @@ class Supervision extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const {
-      glpi,
-      handleMessage,
-    } = this.props
 
     try {
       const {
         active_profile: activeProfile,
-      } = await glpi.getActiveProfile()
+      } = await this.props.glpi.getActiveProfile()
       let entityID
       if (Array.isArray(activeProfile.entities)) {
         entityID = activeProfile.entities[0].id
@@ -88,7 +83,7 @@ class Supervision extends PureComponent {
           }
         }
       }
-      const entity = await glpi.getAnItem({
+      const entity = await this.props.glpi.getAnItem({
         itemtype: itemtype.Entity,
         id: entityID,
       })
@@ -102,7 +97,7 @@ class Supervision extends PureComponent {
         address: validateData(entity.address),
       })
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -117,11 +112,7 @@ class Supervision extends PureComponent {
    * @function saveChanges
    */
   saveChanges = () => {
-    const {
-      glpi,
-      actions,
-      handleMessage,
-    } = this.props
+
     const {
       name,
       entityID,
@@ -135,7 +126,7 @@ class Supervision extends PureComponent {
       isLoading: true,
     }, async () => {
       try {
-        await glpi.updateItem({
+        await this.props.glpi.updateItem({
           itemtype: itemtype.Entity,
           id: `${entityID}`,
           input: {
@@ -155,7 +146,7 @@ class Supervision extends PureComponent {
           type: 'success',
         })
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -222,7 +213,9 @@ class Supervision extends PureComponent {
 }
 
 Supervision.propTypes = {
-  toast: PropTypes.object.isRequired,
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }

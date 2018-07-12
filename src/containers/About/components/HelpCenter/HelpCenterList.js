@@ -270,9 +270,9 @@ class HelpCenterList extends PureComponent {
 
 /** HelpCenterList propTypes */
 HelpCenterList.propTypes = {
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
-  toast: PropTypes.object.isRequired,
 }
 
 export default withGLPI(HelpCenterList)

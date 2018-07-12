@@ -68,8 +68,7 @@ class SignUp extends PureComponent {
    */
   async componentDidMount() {
     try {
-      const { auth } = this.props
-      await auth.fetchCaptcha()
+      await this.props.auth.fetchCaptcha()
     } catch (error) {
       this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
@@ -220,9 +219,6 @@ class SignUp extends PureComponent {
       passwordConfirmation,
       captchaValue,
     } = this.state
-    const {
-      auth,
-    } = this.props
 
     const user = this.buildDataArray()
 
@@ -239,13 +235,13 @@ class SignUp extends PureComponent {
     }
 
     if (isCorrect) {
-      auth.fetchSignUp({
+      this.props.auth.fetchSignUp({
         name: email,
         realname: realName,
         password,
         password2: passwordConfirmation,
         _useremails: [email],
-        _plugin_flyvemdmdemo_captchas_id: auth.captcha.id,
+        _plugin_flyvemdmdemo_captchas_id: this.props.auth.captcha.id,
         _answer: captchaValue,
       })
         .then(() => {
@@ -274,12 +270,8 @@ class SignUp extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      auth,
-    } = this.props
-
     let renderComponent
-    if (auth.isLoading) {
+    if (this.props.auth.isLoading) {
       renderComponent = (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -298,11 +290,11 @@ class SignUp extends PureComponent {
             <ConstructInputs data={user.passwordInformation} />
             <ConstructInputs data={user.captchaInformation} />
             <div className="authentication__captcha-img">
-              <img src={auth.captcha.img} alt="Captcha" />
+              <img src={this.props.auth.captcha.img} alt="Captcha" />
             </div>
             <div
               className="authentication__captcha-refresh"
-              onClick={auth.fetchCaptcha}
+              onClick={this.props.auth.fetchCaptcha}
               role="button"
               tabIndex="0"
             >
@@ -336,17 +328,18 @@ class SignUp extends PureComponent {
   }
 }
 
-SignUp.defaultProps = {
-  captcha: {
-    img: null,
-  },
-  type: null,
-}
-
 SignUp.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    isLoading: PropTypes.bool,
+    fetchSignUp: PropTypes.func,
+    fetchCaptcha: PropTypes.func,
+    captcha: PropTypes.object,
+  }).isRequired,
   history: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  type: PropTypes.string,
 }
 
 export default withAuthenticationLayout(withHandleMessages(SignUp), {

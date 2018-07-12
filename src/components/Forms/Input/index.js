@@ -174,6 +174,7 @@ Input.defaultProps = {
   function: () => {},
   disabled: false,
   style: {},
+  inputRef: () => { },
   delete: null,
   parametersToEvaluate: null,
   forceValidation: false,
@@ -191,8 +192,10 @@ Input.propTypes = {
   function: PropTypes.func,
   disabled: PropTypes.bool,
   style: PropTypes.object,
+  inputRef: PropTypes.func,
   delete: PropTypes.func,
   parametersToEvaluate: PropTypes.object,
+  // eslint-disable-next-line
   forceValidation: PropTypes.bool,
   required: PropTypes.bool,
 }

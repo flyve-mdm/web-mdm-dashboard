@@ -53,6 +53,7 @@ class HelpCenter extends PureComponent {
 HelpCenter.propTypes = {
   match: PropTypes.object.isRequired,
   toast: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
 
 export default HelpCenter
