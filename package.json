@@ -43,7 +43,7 @@
   "scripts": {
     "prestart": "yarn test:watch -u &",
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js && node ./ci/scripts/create_htaccess.js",
     "release": "standard-version",
     "conventional-github-releaser": "conventional-github-releaser",
     "github-release": "github-release",
