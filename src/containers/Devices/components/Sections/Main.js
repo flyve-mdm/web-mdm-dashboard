@@ -47,14 +47,10 @@ export default class Main extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const {
-      id,
-      update,
-    } = this.props
 
     this.state = {
-      id,
-      update,
+      id: this.props.id,
+      update: this.props.update,
       data: undefined,
       sendingPing: false,
     }
@@ -99,27 +95,21 @@ export default class Main extends PureComponent {
       update,
       id,
     } = this.state
-    const {
-      glpi,
-      toast,
-      handleMessage,
-      history,
-    } = this.props
 
     if (update) {
       try {
         this.setState({
-          data: await glpi.getAnItem({
+          data: await this.props.glpi.getAnItem({
             itemtype: itemtype.PluginFlyvemdmAgent,
             id,
           }),
         })
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
-        history.push(`${publicURL}/app/devices`)
+        this.props.history.push(`${publicURL}/app/devices`)
       }
     }
   }
@@ -130,13 +120,6 @@ export default class Main extends PureComponent {
    * @function handleRefresh
    */
   handleDelete = async () => {
-    const {
-      glpi,
-      changeSelectionMode,
-      history,
-      changeAction,
-      handleMessage,
-    } = this.props
     const { id } = this.state
 
     const isOK = await Confirmation.isOK(this.contentDialog)
@@ -145,7 +128,7 @@ export default class Main extends PureComponent {
         isLoading: true,
       })
 
-      glpi.deleteItem({
+      this.props.glpi.deleteItem({
         itemtype: itemtype.PluginFlyvemdmAgent,
         id,
       })
@@ -155,12 +138,12 @@ export default class Main extends PureComponent {
             body: I18n.t('notifications.device_successfully_removed'),
             type: 'success',
           })
-          changeSelectionMode(false)
-          history.push(`${publicURL}/app/devices`)
-          changeAction('reload')
+          this.props.changeSelectionMode(false)
+          this.props.history.push(`${publicURL}/app/devices`)
+          this.props.changeAction('reload')
         })
         .catch((error) => {
-          this.props.toast.setNotification(handleMessage({
+          this.props.toast.setNotification(this.props.handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -174,10 +157,9 @@ export default class Main extends PureComponent {
    */
   handleEdit = () => {
     const { id } = this.state
-    const { history } = this.props
 
     const path = `${publicURL}/app/devices/${id}/edit`
-    history.push(path)
+    this.props.history.push(path)
   }
 
   /**
@@ -186,11 +168,6 @@ export default class Main extends PureComponent {
    */
   ping = () => {
     const {
-      glpi,
-      toast,
-      handleMessage,
-    } = this.props
-    const {
       id,
     } = this.state
 
@@ -198,7 +175,7 @@ export default class Main extends PureComponent {
       sendingPing: true,
     }, async () => {
       try {
-        const response = await glpi.genericRequest({
+        const response = await this.props.glpi.genericRequest({
           path: `${itemtype.PluginFlyvemdmAgent}/${id}`,
           requestParams: {
             method: 'PUT',
@@ -220,7 +197,7 @@ export default class Main extends PureComponent {
           this.handleRefresh()
         })
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
           displayErrorPage: false,
@@ -348,12 +325,14 @@ export default class Main extends PureComponent {
 }
 /** Main propTypes */
 Main.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
-  toast: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   update: PropTypes.bool.isRequired,
-  handleMessage: PropTypes.func.isRequired,
 }

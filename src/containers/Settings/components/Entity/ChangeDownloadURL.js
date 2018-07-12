@@ -47,10 +47,8 @@ class ChangeDownloadURL extends PureComponent {
   constructor(props) {
     super(props)
 
-    const { downloadURL } = this.props
-
     this.state = {
-      downloadURL,
+      downloadURL: this.props.downloadURL,
       isLoading: false,
     }
   }
@@ -74,32 +72,25 @@ class ChangeDownloadURL extends PureComponent {
     this.setState({
       isLoading: true,
     }, async () => {
-      const {
-        glpi,
-        entityID,
-        saveValues,
-        changeMode,
-        handleMessage,
-      } = this.props
       const { downloadURL } = this.state
 
       try {
-        await glpi.updateItem({
+        await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmEntityconfig,
           input: [{
-            id: entityID,
+            id: this.props.entityID,
             download_url: downloadURL,
           }],
         })
-        saveValues('downloadURL', downloadURL)
-        changeMode('')
+        this.props.saveValues('downloadURL', downloadURL)
+        this.props.changeMode('')
         this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.download_url_changed'),
           type: 'success',
         })
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
           displayErrorPage: false,
@@ -120,7 +111,6 @@ class ChangeDownloadURL extends PureComponent {
       isLoading,
       downloadURL,
     } = this.state
-    const { changeMode } = this.props
 
     return isLoading
       ? <Loading message={`${I18n.t('commons.saving')}...`} />
@@ -144,7 +134,7 @@ class ChangeDownloadURL extends PureComponent {
           <button
             className="btn btn--secondary"
             style={{ marginRight: 10 }}
-            onClick={() => changeMode('')}
+            onClick={() => this.props.changeMode('')}
             type="button"
           >
             {I18n.t('commons.cancel')}

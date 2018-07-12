@@ -41,19 +41,14 @@ import GenerateRoutes from '../../components/GenerateRoutes'
  */
 class About extends PureComponent {
   render() {
-    const {
-      match,
-      history,
-    } = this.props
-
     return (
       <LayoutListWithNavLinks
         routes={routes}
-        rootPath={match.url}
-        history={history}
+        rootPath={this.props.match.url}
+        history={this.props.history}
         languageCurrent={this.props.languageCurrent}
       >
-        <GenerateRoutes routes={routes} rootPath={match.url} toast={this.props.toast} handleMessage={this.props.handleMessage} />
+        <GenerateRoutes routes={routes} rootPath={this.props.match.url} toast={this.props.toast} handleMessage={this.props.handleMessage} />
       </LayoutListWithNavLinks>
     )
   }

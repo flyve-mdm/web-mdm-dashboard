@@ -35,7 +35,6 @@ import I18n from '../../../../shared/i18n'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import EmptyMessage from '../../../../components/EmptyMessage'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
 
 /**
  * Component to show the release notes
@@ -65,11 +64,7 @@ class ReleaseNotes extends PureComponent {
         release: await response.text(),
       })
     } catch (error) {
-      const {
-        handleMessage,
-      } = this.props
-
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))

@@ -54,13 +54,10 @@ class UsersEditOne extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const {
-      history,
-    } = this.props
 
     this.state = {
       isLoading: true,
-      id: getID(history.location.pathname),
+      id: getID(this.props.history.location.pathname),
       login: undefined,
       firstName: undefined,
       realName: undefined,
@@ -104,21 +101,20 @@ class UsersEditOne extends PureComponent {
     this.setState({
       isLoading: true,
     }, async () => {
-      const { glpi } = this.props
       const { id } = this.state
 
       try {
-        const myUser = await glpi.getAnItem({
+        const myUser = await this.props.glpi.getAnItem({
           itemtype: itemtype.User,
           id,
         })
 
-        const myEmails = await glpi.getSubItems({
+        const myEmails = await this.props.glpi.getSubItems({
           itemtype: itemtype.User,
           id,
           subItemtype: 'UserEmail',
         })
-        const { cfg_glpi: cfgGlpi } = await glpi.getGlpiConfig()
+        const { cfg_glpi: cfgGlpi } = await this.props.glpi.getGlpiConfig()
 
         const parametersToEvaluate = {
           minimunLength: cfgGlpi.password_min_length,
@@ -294,21 +290,16 @@ class UsersEditOne extends PureComponent {
       },
       async () => {
         const {
-          glpi,
-          changeAction,
-          handleMessage,
-        } = this.props
-        const {
           currentEmails,
           emails,
         } = this.state
 
         try {
-          await glpi.updateItem({
+          await this.props.glpi.updateItem({
             itemtype: itemtype.User,
             input: newUser,
           })
-          await glpi.updateEmails({
+          await this.props.glpi.updateEmails({
             userID: newUser.id,
             currentEmails,
             newEmails: emails,
@@ -318,9 +309,9 @@ class UsersEditOne extends PureComponent {
             body: I18n.t('notifications.saved_profile'),
             type: 'success',
           })
-          changeAction('reload')
+          this.props.changeAction('reload')
         } catch (error) {
-          this.props.toast.setNotification(handleMessage({
+          this.props.toast.setNotification(this.props.handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -468,7 +459,6 @@ class UsersEditOne extends PureComponent {
       category,
       emails,
     } = this.state
-    const { glpi } = this.props
 
     let componetRender
 
@@ -503,7 +493,7 @@ class UsersEditOne extends PureComponent {
         changeEmail: this.changeEmail,
         deleteEmail: this.deleteEmail,
         changeSelect: this.changeSelect,
-        glpi,
+        glpi: this.props.glpi,
       })
 
       const inputAttributes = {

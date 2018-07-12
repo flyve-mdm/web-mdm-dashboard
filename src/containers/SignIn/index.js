@@ -141,9 +141,6 @@ class SignIn extends PureComponent {
       username,
       password,
     } = this.state
-    const {
-      history,
-    } = this.props
 
     if (localStorage.getItem('currentUser') && localStorage.getItem('sessionToken')) {
       return <Redirect to={`${publicURL}/app`} />
@@ -166,7 +163,7 @@ class SignIn extends PureComponent {
           password={password}
           changeInput={this.changeInput}
           changePhase={this.changePhase}
-          history={history}
+          history={this.props.history}
           handleOnSubmit={this.handleFormSubmit}
         />
       )

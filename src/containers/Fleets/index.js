@@ -107,12 +107,6 @@ class Fleets extends PureComponent {
       selectedItems,
       action,
     } = this.state
-    const {
-      toast,
-      history,
-      glpi,
-      handleMessage,
-    } = this.props
 
     return ({
       icon,
@@ -122,10 +116,10 @@ class Fleets extends PureComponent {
       changeSelectionMode: this.changeSelectionMode,
       changeSelectedItems: this.changeSelectedItems,
       changeAction: this.changeAction,
-      toast,
-      history,
-      glpi,
-      handleMessage,
+      toast: this.props.toast,
+      history: this.props.history,
+      glpi: this.props.glpi,
+      handleMessage: this.props.handleMessage,
       itemType: itemtype.PluginFlyvemdmFleet,
     })
   }
@@ -169,17 +163,16 @@ class Fleets extends PureComponent {
       selectedItems,
       selectionMode,
     } = this.state
-    const { history } = this.props
 
     const styles = {
       width: itemListPaneWidth,
     }
 
     if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname
+      if ((selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/fleets`)
-        || history.location.pathname === `${publicURL}/app/fleets`
-        || (history.location.pathname === `${publicURL}/app/fleets`
+        || this.props.history.location.pathname === `${publicURL}/app/fleets`
+        || (this.props.history.location.pathname === `${publicURL}/app/fleets`
           && selectionMode)) {
         styles.display = 'inline-block'
       } else {
@@ -204,7 +197,6 @@ class Fleets extends PureComponent {
       selectionMode,
       mode,
     } = this.state
-    const { history } = this.props
 
     const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
     const styles = {
@@ -213,10 +205,10 @@ class Fleets extends PureComponent {
     }
 
     if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname
+      if ((selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/fleets`)
-        || history.location.pathname === `${publicURL}/app/fleets`
-        || (history.location.pathname === `${publicURL}/app/fleets`
+        || this.props.history.location.pathname === `${publicURL}/app/fleets`
+        || (this.props.history.location.pathname === `${publicURL}/app/fleets`
           && selectionMode)) {
         styles.display = 'none'
       } else {
@@ -234,8 +226,6 @@ class Fleets extends PureComponent {
    * @function render
    */
   render() {
-    const { match } = this.props
-
     const renderComponents = (
       <React.Fragment>
         <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
@@ -248,7 +238,7 @@ class Fleets extends PureComponent {
           <GenerateRoutes
             key="content"
             routes={routes}
-            rootPath={match.url}
+            rootPath={this.props.match.url}
             {...this.propsData()}
           />
         </div>

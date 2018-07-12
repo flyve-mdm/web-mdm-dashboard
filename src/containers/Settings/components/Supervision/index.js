@@ -68,7 +68,6 @@ class Supervision extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-
     try {
       const {
         active_profile: activeProfile,
@@ -112,7 +111,6 @@ class Supervision extends PureComponent {
    * @function saveChanges
    */
   saveChanges = () => {
-
     const {
       name,
       entityID,

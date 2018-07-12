@@ -46,21 +46,16 @@ class Settings extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      match,
-      history,
-    } = this.props
-
     return (
       <LayoutListWithNavLinks
         routes={routes}
-        rootPath={match.url}
-        history={history}
+        rootPath={this.props.match.url}
+        history={this.props.history}
         languageCurrent={this.props.languageCurrent}
       >
         <GenerateRoutes
           routes={routes}
-          rootPath={match.url}
+          rootPath={this.props.match.url}
           toast={this.props.toast}
           handleMessage={this.props.handleMessage}
           changeLanguage={this.props.changeLanguage}

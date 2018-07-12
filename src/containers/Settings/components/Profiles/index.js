@@ -68,26 +68,22 @@ class Profiles extends PureComponent {
    */
   componentDidMount = async () => {
     const { login } = this.state
-    const {
-      glpi,
-      auth,
-    } = this.props
 
     if (login === null) {
-      const myUser = await glpi.getAnItem({
+      const myUser = await this.props.glpi.getAnItem({
         itemtype: itemtype.User,
-        id: auth.currentUser.id,
+        id: this.props.auth.currentUser.id,
       })
 
-      const myEmails = await glpi.getSubItems({
+      const myEmails = await this.props.glpi.getSubItems({
         itemtype: itemtype.User,
-        id: auth.currentUser.id,
+        id: this.props.auth.currentUser.id,
         subItemtype: 'UserEmail',
       })
 
       const {
         cfg_glpi: cfgGlpi,
-      } = await glpi.getGlpiConfig()
+      } = await this.props.glpi.getGlpiConfig()
 
       const parametersToEvaluate = {
         minimunLength: cfgGlpi.password_min_length,
@@ -196,10 +192,6 @@ class Profiles extends PureComponent {
    */
   saveChanges = () => {
     const {
-      auth,
-      glpi,
-    } = this.props
-    const {
       firstName,
       realName,
       phone,
@@ -223,7 +215,7 @@ class Profiles extends PureComponent {
     } = this.state
 
     let newUser = {
-      id: auth.currentUser.id,
+      id: this.props.auth.currentUser.id,
       firstname: firstName,
       realname: realName,
       phone,
@@ -269,11 +261,11 @@ class Profiles extends PureComponent {
       },
       async () => {
         try {
-          await glpi.updateItem({
+          await this.props.glpi.updateItem({
             itemtype: itemtype.User,
             input: newUser,
           })
-          await glpi.updateEmails({
+          await this.props.glpi.updateEmails({
             userID: newUser.id,
             currentEmails,
             newEmails: emails,
@@ -403,7 +395,6 @@ class Profiles extends PureComponent {
    * @function render
    */
   render() {
-    const { glpi } = this.props
     const {
       login,
       isLoading,
@@ -475,7 +466,7 @@ class Profiles extends PureComponent {
         changeEmail: this.changeEmail,
         deleteEmail: this.deleteEmail,
         changeSelect: this.changeSelect,
-        glpi,
+        glpi: this.props.glpi,
       })
 
       const inputAttributes = {

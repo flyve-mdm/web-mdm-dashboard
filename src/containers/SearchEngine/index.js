@@ -33,7 +33,6 @@ import React, {
 import PropTypes from 'prop-types'
 import I18n from '../../shared/i18n'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleMessages from '../../hoc/withHandleMessages'
 import SearchQueryBuilder from './components/SearchQueryBuilder'
 import Panel from './components/Panel'
 import ContentPane from '../../components/ContentPane'
@@ -99,9 +98,8 @@ class SearchEngine extends PureComponent {
     })
     try {
       const { itemType } = this.state
-      const { glpi } = this.props
 
-      const listSearchOptions = await glpi.listSearchOptions({
+      const listSearchOptions = await this.props.glpi.listSearchOptions({
         itemtype: itemType,
       })
 
@@ -136,10 +134,9 @@ class SearchEngine extends PureComponent {
    */
   handleOnSearch = async () => {
     try {
-      const { glpi } = this.props
       const { itemType } = this.state
 
-      const search = await glpi.searchItems({
+      const search = await this.props.glpi.searchItems({
         itemtype: itemType,
         criteria: this.normalizeQuery(),
       })

@@ -73,11 +73,7 @@ export default class ApplicationsAdd extends PureComponent {
    * @param {object} error
    */
   onFilesError = (error) => {
-    const {
-      handleMessage,
-    } = this.props
-
-    this.props.toast.setNotification(handleMessage({
+    this.props.toast.setNotification(this.props.handleMessage({
       type: 'alert',
       message: error.message,
     }))
@@ -120,12 +116,6 @@ export default class ApplicationsAdd extends PureComponent {
       files,
       input,
     } = this.state
-    const {
-      glpi,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     const formData = new FormData()
     Object.keys(files).forEach(async (key) => {
       try {
@@ -135,7 +125,7 @@ export default class ApplicationsAdd extends PureComponent {
         this.setState({
           isLoading: true,
         })
-        await glpi.uploadFile({
+        await this.props.glpi.uploadFile({
           itemtype: itemtype.PluginFlyvemdmPackage,
           input: formData,
         })
@@ -147,9 +137,9 @@ export default class ApplicationsAdd extends PureComponent {
           body: I18n.t('notifications.saved_file'),
           type: 'success',
         })
-        changeAction('reload')
+        this.props.changeAction('reload')
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))

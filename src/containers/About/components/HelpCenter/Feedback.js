@@ -65,7 +65,6 @@ class Feedback extends PureComponent {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const { glpi } = this.props
     const {
       subject,
       textarea,
@@ -76,7 +75,7 @@ class Feedback extends PureComponent {
     }, async () => {
       const {
         active_profile: activeProfile,
-      } = await glpi.getActiveProfile()
+      } = await this.props.glpi.getActiveProfile()
       let entityID
       if (Array.isArray(activeProfile.entities)) {
         entityID = activeProfile.entities[0].id
@@ -88,7 +87,7 @@ class Feedback extends PureComponent {
         }
       }
 
-      let entityconfig = await glpi.getAnItem({
+      let entityconfig = await this.props.glpi.getAnItem({
         itemtype: itemtype.PluginFlyvemdmEntityconfig,
         id: entityID,
       })

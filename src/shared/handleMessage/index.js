@@ -60,7 +60,7 @@ function pushError(pathname, code, customErrorRoute) {
 
 function validateActiveProfile(pathname, code, customErrorRoute) {
   glpi.getActiveProfile()
-    .then(res => {
+    .then(() => {
       pushError(pathname, code, customErrorRoute)
     })
 }
@@ -77,7 +77,7 @@ export default ({
   message,
   title,
   customErrorRoute,
-  displayErrorPage = true
+  displayErrorPage = true,
 }) => {
   const response = {
     type,

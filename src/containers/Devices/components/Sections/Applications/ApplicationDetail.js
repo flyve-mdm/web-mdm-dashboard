@@ -57,14 +57,9 @@ export default class Applications extends PureComponent {
   }
 
   componentDidMount = async () => {
-    const {
-      glpi,
-      id,
-    } = this.props
-
     try {
-      const software = await glpi.getAnItem({
-        id,
+      const software = await this.props.glpi.getAnItem({
+        id: this.props.id,
         itemtype: itemtype.Software,
       })
       this.setState({
@@ -88,10 +83,6 @@ export default class Applications extends PureComponent {
       isLoading,
       software,
     } = this.state
-    const {
-      id,
-      selectApplication,
-    } = this.props
 
     return (
       isLoading
@@ -101,7 +92,7 @@ export default class Applications extends PureComponent {
             ? (
               <React.Fragment>
                 <h3>
-                  {`${I18n.t('commons.application')} ${id}`}
+                  {`${I18n.t('commons.application')} ${this.props.id}`}
                 </h3>
                 <Input
                   label={I18n.t('commons.name')}
@@ -134,7 +125,7 @@ export default class Applications extends PureComponent {
                 <button
                   className="btn btn--secondary"
                   onClick={() => {
-                    selectApplication(undefined)
+                    this.props.selectApplication(undefined)
                   }}
                   type="button"
                 >

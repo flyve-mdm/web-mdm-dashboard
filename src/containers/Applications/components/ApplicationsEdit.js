@@ -46,10 +46,9 @@ export default class ApplicationsEdit extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const { selectedItems } = this.props
 
     this.state = {
-      itemListEdit: [...selectedItems],
+      itemListEdit: [...this.props.selectedItems],
       isLoading: false,
     }
   }
@@ -90,19 +89,13 @@ export default class ApplicationsEdit extends PureComponent {
    */
   handleSaveFiles = async () => {
     const { itemListEdit } = this.state
-    const {
-      glpi,
-      changeSelectionMode,
-      changeAction,
-      handleMessage,
-    } = this.props
 
     try {
       if (itemListEdit.length > 0) {
         this.setState({
           isLoading: true,
         })
-        await glpi.updateItem({
+        await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
           input: itemListEdit,
         })
@@ -121,11 +114,11 @@ export default class ApplicationsEdit extends PureComponent {
           })
         }
 
-        changeSelectionMode(false)
-        changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.changeAction('reload')
       }
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -136,22 +129,18 @@ export default class ApplicationsEdit extends PureComponent {
   }
 
   render() {
-    const {
-      selectedItems,
-      history,
-    } = this.props
     const { isLoading } = this.state
 
-    if (selectedItems) {
+    if (this.props.selectedItems) {
       if (isLoading) {
         return (
           <Loading message={`${I18n.t('commons.loading')}...`} />
         )
       }
-      const renderComponent = selectedItems.map((item, index) => (
+      const renderComponent = this.props.selectedItems.map((item, index) => (
         <ApplicationsEditItemList
           key={`ApplicationsEditItemList-${index.toString()}`}
-          history={history}
+          history={this.props.history}
           updateItemList={this.updateItemList}
           selectedItem={item}
         />
@@ -183,10 +172,13 @@ export default class ApplicationsEdit extends PureComponent {
 }
 /** ApplicationsEdit propTypes */
 ApplicationsEdit.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   selectedItems: PropTypes.array,
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
-  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }

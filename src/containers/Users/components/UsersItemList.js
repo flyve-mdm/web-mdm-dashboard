@@ -44,19 +44,18 @@ export default class UsersItemList extends PureComponent {
    * @function render
    */
   render() {
-    const { itemList } = this.props
-    const imageProfile = itemList['User.picture']
-      ? itemList['User.picture']
+    const imageProfile = this.props.itemList['User.picture']
+      ? this.props.itemList['User.picture']
       : 'profile.png'
     return (
       <div>
         <IconItemList image={imageProfile} size={42} />
         <div style={{ display: 'inline-block' }}>
           <div className="list-pane__name">
-            {itemList['User.name']}
+            {this.props.itemList['User.name']}
           </div>
           <div className="list-pane__detail">
-            {itemList['User.realname']}
+            {this.props.itemList['User.realname']}
           </div>
         </div>
       </div>

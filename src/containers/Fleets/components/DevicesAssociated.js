@@ -68,25 +68,21 @@ class DevicesAssociated extends PureComponent {
    * @constant ItemListRenderer
    * @type {component}
    */
-  ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-    const { history } = this.props
-
-    return (
-      <div
-        style={{ cursor: 'pointer' }}
-        onClick={() => history.push(`${publicURL}/app/devices/${ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}`)}
-        role="link"
-        tabIndex="0"
-      >
-        <span className="id">
-          {ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}
-        </span>
-        <span className="name">
-          {ItemList.data[`${itemtype.PluginFlyvemdmAgent}.name`]}
-        </span>
-      </div>
-    )
-  })
+  ItemListRenderer = ReactWinJS.reactRenderer(ItemList => (
+    <div
+      style={{ cursor: 'pointer' }}
+      onClick={() => this.props.history.push(`${publicURL}/app/devices/${ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}`)}
+      role="link"
+      tabIndex="0"
+    >
+      <span className="id">
+        {ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}
+      </span>
+      <span className="name">
+        {ItemList.data[`${itemtype.PluginFlyvemdmAgent}.name`]}
+      </span>
+    </div>
+  ))
 
   /** @constructor */
   constructor(props) {
@@ -107,20 +103,15 @@ class DevicesAssociated extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const {
-      glpi,
-      history,
-    } = this.props
-
     try {
       const {
         name,
-      } = await glpi.getAnItem({
+      } = await this.props.glpi.getAnItem({
         itemtype: itemtype.PluginFlyvemdmFleet,
-        id: getID(history.location.pathname),
+        id: getID(this.props.history.location.pathname),
       })
 
-      const devices = await glpi.searchItems({
+      const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
         options: {
           uid_cols: true,

@@ -39,7 +39,6 @@ import Loading from '../../../../components/Loading'
 import logout from '../../../../shared/logout'
 import ContentPane from '../../../../components/ContentPane'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
 
 /**
@@ -68,10 +67,8 @@ class Security extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const { glpi } = this.props
-
     try {
-      const plugins = await glpi.getAllItems({
+      const plugins = await this.props.glpi.getAllItems({
         itemtype: 'Plugin',
       })
       const pluginDemo = plugins.filter(plugin => plugin.name === 'Flyve MDM Demo')
@@ -96,10 +93,6 @@ class Security extends PureComponent {
    * @async
    */
   deleteUser = async () => {
-    const {
-      glpi,
-      handleMessage,
-    } = this.props
     const { currentUser } = this.state
 
     const isOK = await Confirmation.isOK(this.deleteAccount)
@@ -109,7 +102,7 @@ class Security extends PureComponent {
       },
       async () => {
         try {
-          await glpi.deleteItem({
+          await this.props.glpi.deleteItem({
             itemtype: itemtype.User,
             input: {
               id: currentUser.id,
@@ -127,7 +120,7 @@ class Security extends PureComponent {
           logout()
           localStorage.clear()
         } catch (error) {
-          this.props.toast.setNotification(handleMessage({
+          this.props.toast.setNotification(this.props.handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -200,10 +193,6 @@ class Security extends PureComponent {
 
       if (isCorrect) {
         const {
-          glpi,
-          handleMessage,
-        } = this.props
-        const {
           currentUser,
           password,
           passwordConfirmation,
@@ -214,7 +203,7 @@ class Security extends PureComponent {
         },
         async () => {
           try {
-            await glpi.updateItem({
+            await this.props.glpi.updateItem({
               itemtype: itemtype.User,
               id: currentUser.id,
               input: {
@@ -228,7 +217,7 @@ class Security extends PureComponent {
               type: 'success',
             })
           } catch (error) {
-            this.props.toast.setNotification(handleMessage({
+            this.props.toast.setNotification(this.props.handleMessage({
               type: 'alert',
               message: error,
             }))
@@ -268,11 +257,9 @@ class Security extends PureComponent {
       this.setState({
         isLoading: true,
       }, async () => {
-        const { glpi } = this.props
-
         const {
           cfg_glpi: cfgGlpi,
-        } = await glpi.getGlpiConfig()
+        } = await this.props.glpi.getGlpiConfig()
         this.setState({
           isLoading: false,
           passwordConfiguration: {

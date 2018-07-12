@@ -58,19 +58,13 @@ export default class Enroll extends PureComponent {
    */
   inviteDevice = async () => {
     const { email } = this.state
-    const {
-      glpi,
-      history,
-      changeAction,
-      handleMessage,
-    } = this.props
 
     try {
       if (email.trim() !== '') {
         this.setState({
           isLoading: true,
         }, async () => {
-          await glpi.addItem({
+          await this.props.glpi.addItem({
             itemtype: itemtype.PluginFlyvemdmInvitation,
             input: {
               _useremails: email.trim(),
@@ -81,8 +75,8 @@ export default class Enroll extends PureComponent {
         this.setState({
           isLoading: false,
         }, () => {
-          history.goBack()
-          changeAction('reload')
+          this.props.history.goBack()
+          this.props.changeAction('reload')
         })
 
         this.props.toast.setNotification({
@@ -95,7 +89,7 @@ export default class Enroll extends PureComponent {
       this.setState({
         isLoading: false,
       }, () => {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -119,7 +113,6 @@ export default class Enroll extends PureComponent {
       isLoading,
       email,
     } = this.state
-    const { history } = this.props
 
     let renderComponent
     if (isLoading) {
@@ -152,7 +145,7 @@ export default class Enroll extends PureComponent {
           <br />
           <button
             className="btn btn--secondary"
-            onClick={() => history.goBack()}
+            onClick={() => this.props.history.goBack()}
             type="button"
           >
             {I18n.t('commons.cancel')}

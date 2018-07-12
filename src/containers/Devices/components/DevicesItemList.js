@@ -39,13 +39,8 @@ import IconItemList from '../../../components/IconItemList'
  */
 export default class DevicesItemList extends PureComponent {
   render() {
-    const {
-      size,
-      itemList,
-    } = this.props
-
-    const imageAgent = itemList['PluginFlyvemdmAgent.mdm_type']
-      ? `${itemList['PluginFlyvemdmAgent.mdm_type']}.png`
+    const imageAgent = this.props.itemList['PluginFlyvemdmAgent.mdm_type']
+      ? `${this.props.itemList['PluginFlyvemdmAgent.mdm_type']}.png`
       : null
     let iconComponent
 
@@ -53,13 +48,13 @@ export default class DevicesItemList extends PureComponent {
       iconComponent = (
         <IconItemList
           image={imageAgent}
-          size={size}
+          size={this.props.size}
           backgroundColor="transparent"
         />
       )
     } else {
       iconComponent = (
-        <IconItemList size={size} />
+        <IconItemList size={this.props.size} />
       )
     }
 
@@ -68,13 +63,13 @@ export default class DevicesItemList extends PureComponent {
         {iconComponent}
         <div style={{ display: 'inline-block' }}>
           <div className="list-pane__name">
-            {itemList['PluginFlyvemdmAgent.name']}
+            {this.props.itemList['PluginFlyvemdmAgent.name']}
           </div>
           <div className="list-pane__detail">
-            {itemList['PluginFlyvemdmAgent.PluginFlyvemdmFleet.name']}
+            {this.props.itemList['PluginFlyvemdmAgent.PluginFlyvemdmFleet.name']}
           </div>
           <div className="list-pane__detail">
-            {itemList['PluginFlyvemdmAgent.mdm_type'].toUpperCase()}
+            {this.props.itemList['PluginFlyvemdmAgent.mdm_type'].toUpperCase()}
           </div>
         </div>
       </div>

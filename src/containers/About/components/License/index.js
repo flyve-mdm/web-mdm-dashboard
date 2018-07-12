@@ -63,11 +63,7 @@ class License extends PureComponent {
         license: await response.text(),
       })
     } catch (error) {
-      const {
-        handleMessage,
-      } = this.props
-
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))

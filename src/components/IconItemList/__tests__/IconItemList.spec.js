@@ -27,6 +27,7 @@
  */
 
 import React from 'react'
+import { mount } from 'enzyme'
 import IconItemList from '../index'
 
 describe('IconItemList', () => {

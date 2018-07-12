@@ -118,6 +118,7 @@ export class AuthenticationProvider extends PureComponent {
               },
             })
             const {
+              // eslint-disable-next-line
               cfg_glpi,
             } = await glpi.getGlpiConfig()
             const configurationPassword = {

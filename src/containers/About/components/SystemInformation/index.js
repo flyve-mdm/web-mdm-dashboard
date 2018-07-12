@@ -51,13 +51,8 @@ class SystemInformation extends PureComponent {
   }
 
   componentDidMount = async () => {
-    const {
-      glpi,
-      handleMessage,
-    } = this.props
-
     try {
-      const plugins = await glpi.getAllItems({
+      const plugins = await this.props.glpi.getAllItems({
         itemtype: itemtype.Plugin,
       })
       this.setState({
@@ -65,7 +60,7 @@ class SystemInformation extends PureComponent {
         plugins,
       })
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))

@@ -50,10 +50,8 @@ class UsersContent extends PureComponent {
   constructor(props) {
     super(props)
 
-    const { history } = this.props
-
     this.state = {
-      id: getID(history.location.pathname),
+      id: getID(this.props.history.location.pathname),
       data: undefined,
       emails: [],
     }
@@ -108,12 +106,7 @@ class UsersContent extends PureComponent {
   handleDelete = async () => {
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
-      const {
-        handleMessage,
-        selectedItems,
-      } = this.props
-
-      const itemListToDelete = selectedItems.map(item => ({
+      const itemListToDelete = this.props.selectedItems.map(item => ({
         id: item['User.id'],
       }))
 
@@ -122,14 +115,7 @@ class UsersContent extends PureComponent {
       })
 
       try {
-        const {
-          glpi,
-          changeAction,
-          changeSelectionMode,
-          history,
-        } = this.props
-
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.User,
           input: itemListToDelete,
         })
@@ -138,11 +124,11 @@ class UsersContent extends PureComponent {
           body: I18n.t('notifications.elements_successfully_removed'),
           type: 'success',
         })
-        changeAction('reload')
-        changeSelectionMode(false)
-        history.push(`${publicURL}/app/users`)
+        this.props.changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.history.push(`${publicURL}/app/users`)
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -157,15 +143,14 @@ class UsersContent extends PureComponent {
    */
   handleRefresh = async () => {
     try {
-      const { glpi } = this.props
       const { id } = this.state
 
-      const user = await glpi.getAnItem({
+      const user = await this.props.glpi.getAnItem({
         itemtype: itemtype.User,
         id,
       })
 
-      const emails = await glpi.getSubItems({
+      const emails = await this.props.glpi.getSubItems({
         itemtype: itemtype.User,
         id,
         subItemtype: 'UserEmail',
@@ -175,16 +160,11 @@ class UsersContent extends PureComponent {
         emails,
       })
     } catch (error) {
-      const {
-        handleMessage,
-        history,
-      } = this.props
-
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
-      history.push(`${publicURL}/app/users`)
+      this.props.history.push(`${publicURL}/app/users`)
     }
   }
 
@@ -198,10 +178,6 @@ class UsersContent extends PureComponent {
       emails,
       id,
     } = this.state
-    const {
-      selectedItems,
-      history,
-    } = this.props
 
     let renderComponent
     if (!data) {
@@ -239,14 +215,14 @@ class UsersContent extends PureComponent {
                 <span
                   className="editIcon"
                   style={{ padding: '0 10px', fontSize: '20px' }}
-                  onClick={() => history.push(`${publicURL}/app/users/${id}/edit`)}
+                  onClick={() => this.props.history.push(`${publicURL}/app/users/${id}/edit`)}
                   role="button"
                   tabIndex="0"
                 />
 
                 <span
                   className="deleteIcon"
-                  style={{ padding: '0 10px', fontSize: '20px', display: selectedItems.length === 0 ? 'none' : '' }}
+                  style={{ padding: '0 10px', fontSize: '20px', display: this.props.selectedItems.length === 0 ? 'none' : '' }}
                   onClick={this.handleDelete}
                   role="button"
                   tabIndex="0"
@@ -310,11 +286,14 @@ UsersContent.defaultProps = {
 }
 
 UsersContent.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   selectedItems: PropTypes.array,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 

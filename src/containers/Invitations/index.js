@@ -33,7 +33,6 @@ import React, {
 import PropTypes from 'prop-types'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import InvitationsList from './components/InvitationsList'
 import getMode from '../../shared/getMode'
@@ -123,12 +122,6 @@ class Invitations extends PureComponent {
       action,
       selectedItems,
     } = this.state
-    const {
-      toast,
-      history,
-      glpi,
-      handleMessage,
-    } = this.props
 
     return ({
       icon,
@@ -138,10 +131,10 @@ class Invitations extends PureComponent {
       changeSelectedItems: this.changeSelectedItems,
       action,
       changeAction: this.changeAction,
-      toast,
-      history,
-      glpi,
-      handleMessage,
+      toast: this.props.toast,
+      history: this.props.history,
+      glpi: this.props.glpi,
+      handleMessage: this.props.handleMessage,
     })
   }
 
@@ -184,16 +177,15 @@ class Invitations extends PureComponent {
       selectedItems,
       selectionMode,
     } = this.state
-    const { history } = this.props
 
     const styles = {
       width: itemListPaneWidth,
     }
     if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname
+      if ((selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/invitations`)
-        || history.location.pathname === `${publicURL}/app/invitations`
-        || (history.location.pathname === `${publicURL}/app/invitations`
+        || this.props.history.location.pathname === `${publicURL}/app/invitations`
+        || (this.props.history.location.pathname === `${publicURL}/app/invitations`
           && selectionMode)) {
         styles.display = 'inline-block'
       } else {
@@ -218,7 +210,6 @@ class Invitations extends PureComponent {
       selectedItems,
       selectionMode,
     } = this.state
-    const { history } = this.props
 
     const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
     const styles = {
@@ -227,10 +218,10 @@ class Invitations extends PureComponent {
     }
 
     if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname
+      if ((selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/invitations`)
-        || history.location.pathname === `${publicURL}/app/invitations`
-        || (history.location.pathname === `${publicURL}/app/invitations`
+        || this.props.history.location.pathname === `${publicURL}/app/invitations`
+        || (this.props.history.location.pathname === `${publicURL}/app/invitations`
           && selectionMode)) {
         styles.display = 'none'
       } else {
@@ -248,8 +239,6 @@ class Invitations extends PureComponent {
    * @function render
    */
   render() {
-    const { match } = this.props
-
     const renderComponents = (
       <React.Fragment>
         <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
@@ -262,7 +251,7 @@ class Invitations extends PureComponent {
           <GenerateRoutes
             key="content"
             routes={routes}
-            rootPath={match.url}
+            rootPath={this.props.match.url}
             {...this.propsData()}
           />
         </div>

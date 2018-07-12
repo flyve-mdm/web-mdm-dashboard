@@ -79,14 +79,10 @@ export default class Applications extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const {
-      id,
-      update,
-    } = this.props
 
     this.state = {
-      id,
-      update,
+      id: this.props.id,
+      update: this.props.update,
       layout: {
         type: WinJS.UI.ListLayout,
       },
@@ -133,7 +129,6 @@ export default class Applications extends PureComponent {
   handleRefresh = async () => {
     const {
       update,
-      id,
     } = this.state
     const { glpi } = this.props
     this.setState({
@@ -210,7 +205,6 @@ export default class Applications extends PureComponent {
       itemList,
       layout,
     } = this.state
-    const { glpi } = this.props
 
     let renderComponent
 
@@ -218,7 +212,7 @@ export default class Applications extends PureComponent {
       renderComponent = (
         <ApplicationDetail
           id={applicationSelected}
-          glpi={glpi}
+          glpi={this.props.glpi}
           selectApplication={this.selectApplication}
           toast={this.props.toast}
           handleMessage={this.props.handleMessage}

@@ -43,11 +43,10 @@ class PanelFields extends PureComponent {
    * @function render
    */
   render() {
-    const { fields } = this.props
     return (
       <div className="searchListHeader">
         {
-          fields.map((field) => {
+          this.props.fields.map((field) => {
             const fieldKey = `${field[0]}_${field[1]}`
             const fieldName = field[1]
             return (

@@ -44,32 +44,27 @@ import getID from '../../../../shared/getID'
 class HelpCenterArticle extends PureComponent {
   constructor(props) {
     super(props)
-    const { history } = this.props
 
     this.state = {
       article: undefined,
-      id: getID(history.location.pathname, 4),
+      id: getID(this.props.history.location.pathname, 4),
       isLoading: true,
     }
   }
 
   componentDidMount = async () => {
-    const {
-      glpi,
-      handleMessage,
-    } = this.props
     const { id } = this.state
 
     try {
       this.setState({
-        article: await glpi.getAnItem({
+        article: await this.props.glpi.getAnItem({
           itemtype: itemtype.KnowbaseItem,
           id,
         }),
         isLoading: false,
       })
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))

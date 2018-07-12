@@ -45,15 +45,10 @@ class SearchQueryBuilder extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      fields,
-      handleChangeQuery,
-    } = this.props
-
     return (
       <div className="queryBuilder">
         <QueryBuilder
-          fields={fields}
+          fields={this.props.fields}
           operators={[
             { name: 'contains', label: I18n.t('commons.contains') },
             { name: 'equal', label: I18n.t('commons.equals') }, // equal instead equals because work it
@@ -63,7 +58,7 @@ class SearchQueryBuilder extends PureComponent {
             { name: 'under', label: I18n.t('commons.under') },
             { name: 'notunder', label: I18n.t('commons.not_under') },
           ]}
-          onQueryChange={handleChangeQuery}
+          onQueryChange={this.props.handleChangeQuery}
         />
       </div>
     )

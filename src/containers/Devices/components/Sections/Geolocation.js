@@ -46,14 +46,10 @@ import validateDate from '../../../../shared/validateDate'
 export default class Geolocation extends PureComponent {
   constructor(props) {
     super(props)
-    const {
-      id,
-      update,
-    } = this.props
 
     this.state = {
-      id,
-      update,
+      id: this.props.id,
+      update: this.props.update,
       isLoading: true,
       isLoadingGeolocation: false,
       locations: [],
@@ -133,18 +129,13 @@ export default class Geolocation extends PureComponent {
    * @function requestLocation
    */
   requestLocation = async () => {
-    const {
-      glpi,
-      toast,
-      handleMessage,
-    } = this.props
     const { id } = this.state
 
     try {
       this.setState({
         isLoadingGeolocation: true,
       })
-      await glpi.updateItem({
+      await this.props.glpi.updateItem({
         id,
         itemtype: itemtype.PluginFlyvemdmAgent,
         input: {
@@ -161,7 +152,7 @@ export default class Geolocation extends PureComponent {
       this.setState({
         isLoadingGeolocation: false,
       })
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
         displayErrorPage: false,
@@ -179,21 +170,16 @@ export default class Geolocation extends PureComponent {
       update,
       id,
     } = this.state
-    const {
-      glpi,
-      toast,
-      handleMessage,
-    } = this.props
 
     if (update) {
       try {
         const {
           computers_id: computersID,
-        } = await glpi.getAnItem({
+        } = await this.props.glpi.getAnItem({
           id,
           itemtype: itemtype.PluginFlyvemdmAgent,
         })
-        const response = await glpi.getSubItems({
+        const response = await this.props.glpi.getSubItems({
           itemtype: itemtype.Computer,
           id: computersID,
           subItemtype: itemtype.PluginFlyvemdmGeolocation,
@@ -205,7 +191,7 @@ export default class Geolocation extends PureComponent {
           isLoadingGeolocation: false,
         })
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -295,8 +281,11 @@ export default class Geolocation extends PureComponent {
 }
 /** Geolocation propTypes */
 Geolocation.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   update: PropTypes.bool.isRequired,
 }

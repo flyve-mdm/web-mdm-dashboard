@@ -34,7 +34,6 @@ import PropTypes from 'prop-types'
 import ApplicationsList from './components/ApplicationsList'
 import getMode from '../../shared/getMode'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleMessages from '../../hoc/withHandleMessages'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import routes from './routes'
@@ -125,25 +124,19 @@ class Applications extends PureComponent {
       selectedItems,
       action,
     } = this.state
-    const {
-      toast,
-      history,
-      glpi,
-      handleMessage,
-    } = this.props
 
     return ({
       icon,
       selectionMode,
       selectedItems,
       action,
-      history,
-      glpi,
-      handleMessage,
+      history: this.props.history,
+      glpi: this.props.glpi,
+      handleMessage: this.props.handleMessage,
       changeSelectionMode: this.changeSelectionMode,
       changeSelectedItems: this.changeSelectedItems,
       changeAction: this.changeAction,
-      toast,
+      toast: this.props.toast,
     })
   }
 
@@ -183,17 +176,16 @@ class Applications extends PureComponent {
       selectedItems,
       selectionMode,
     } = this.state
-    const { history } = this.props
 
     const styles = {
       width: itemListPaneWidth,
     }
 
     if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname
+      if ((selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/applications`)
-        || history.location.pathname === `${publicURL}/app/applications`
-        || (history.location.pathname === `${publicURL}/app/applications`
+        || this.props.history.location.pathname === `${publicURL}/app/applications`
+        || (this.props.history.location.pathname === `${publicURL}/app/applications`
           && selectionMode)) {
         styles.display = 'inline-block'
       } else {
@@ -218,7 +210,6 @@ class Applications extends PureComponent {
       selectedItems,
       selectionMode,
     } = this.state
-    const { history } = this.props
 
     const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
     const styles = {
@@ -228,10 +219,10 @@ class Applications extends PureComponent {
 
     if (mode === 'small') {
       if (
-        (selectedItems.length === 0 && history.location.pathname === `${publicURL}/app/applications`)
-        || (history.location.pathname === `${publicURL}/app/applications`)
+        (selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/applications`)
+        || (this.props.history.location.pathname === `${publicURL}/app/applications`)
         || (
-          (history.location.pathname === `${publicURL}/app/applications`)
+          (this.props.history.location.pathname === `${publicURL}/app/applications`)
           && selectionMode
         )
       ) {
@@ -247,8 +238,6 @@ class Applications extends PureComponent {
   }
 
   render() {
-    const { match } = this.props
-
     const renderComponents = (
       <React.Fragment>
         <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
@@ -261,7 +250,7 @@ class Applications extends PureComponent {
           <GenerateRoutes
             key="content"
             routes={routes}
-            rootPath={match.url}
+            rootPath={this.props.match.url}
             {...this.propsData()}
           />
         </div>

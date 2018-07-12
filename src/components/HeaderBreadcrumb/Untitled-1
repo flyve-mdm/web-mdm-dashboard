@@ -1,0 +1,125 @@
+
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Fleets/components/TaskDeployFileList.js
+  51:25  error  Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`  arrow-body-style
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Fleets/components/TasksDeployAppList.js
+  51:25  error  Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`  arrow-body-style
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Fleets/components/TasksRemoveAppList.js
+  51:25  error  Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`  arrow-body-style
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Fleets/components/TasksRemoveFileList.js
+  51:25  error  Unexpected block statement surrounding arrow body; move the returned value immediately after the `=>`  arrow-body-style
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/ForgotPassword/index.js
+   35:3   error  'Link' is defined but never used  no-unused-vars
+  169:28  error  Unexpected use of 'history'       no-restricted-globals
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/HomeDashboard/index.js
+  42:8  error  'withHandleMessages' is defined but never used  no-unused-vars
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Invitations/components/InvitationsList.js
+  358:51  error  'handleMessage' is missing in props validation  react/prop-types
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Invitations/index.js
+   36:8   error  'withHandleMessages' is defined but never used  no-unused-vars
+  242:12  error  Block must not be padded by blank lines         padded-blocks
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/ResetPassword/index.js
+  40:10  error  'mapStateToProps' is defined but never used  no-unused-vars
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/SearchEngine/index.js
+  36:8  error  'withHandleMessages' is defined but never used  no-unused-vars
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Settings/components/Entity/ChangeDownloadURL.js
+  93:53  error  'handleMessage' is missing in props validation  react/prop-types
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Settings/components/Entity/ChangeTokenLife.js
+  91:53  error  'handleMessage' is missing in props validation  react/prop-types
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Settings/components/Entity/index.js
+   41:8   error  'withHandleMessages' is defined but never used  no-unused-vars
+  238:30  error  'handleMessage' is not defined                  no-undef
+  239:22  error  'toast' is not defined                          no-undef
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Settings/components/Entity/Main.js
+  46:12  error  Block must not be padded by blank lines  padded-blocks
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Settings/components/Security/index.js
+  42:8  error  'withHandleMessages' is defined but never used  no-unused-vars
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Settings/components/Supervision/index.js
+   70:35  error  Block must not be padded by blank lines  padded-blocks
+  114:23  error  Block must not be padded by blank lines  padded-blocks
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Users/components/UsersContent.js
+  108:15  error  Block must not be padded by blank lines         padded-blocks
+  132:53  error  'handleMessage' is missing in props validation  react/prop-types
+  164:51  error  'handleMessage' is missing in props validation  react/prop-types
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Users/components/UsersEditOne.js
+  314:55  error  'handleMessage' is missing in props validation  react/prop-types
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/containers/Users/index.js
+  36:8  error  'withHandleMessages' is defined but never used  no-unused-vars
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/hoc/withAdminDashboardLayout/index.js
+   75:9   error  Identifier 'cfg_glpi' is not in camel case   camelcase
+  183:26  error  Arrow function should not return assignment  no-return-assign
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/hoc/withAuthenticationLayout/index.js
+  56:49  error  Unexpected require()           global-require
+  69:33  error  HTML entities must be escaped  react/no-unescaped-entities
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/hoc/withI18NTranslation/index.js
+  35:8   error  Unable to resolve path to module 'react-i18nify'             import/no-unresolved
+  42:8   error  Identifier 'source_file_translation' is not in camel case    camelcase
+  42:37  error  Unable to resolve path to module './i18n/source_file.json'   import/no-unresolved
+  44:33  error  'props' is defined but never used                            no-unused-vars
+  83:19  error  'error' is defined but never used                            no-unused-vars
+  94:5   error  componentDidUpdate should be placed after componentDidMount  react/sort-comp
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/index.js
+  44:1   error  `bugsnag-js` import should occur before import of `./shared/history`     import/order
+  45:1   error  `bugsnag-react` import should occur before import of `./shared/history`  import/order
+  56:18  error  Expected to return a value at the end of arrow function 'beforeSend'     consistent-return
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/providers/AuthenticationProvider/index.js
+  121:15  error  Identifier 'cfg_glpi' is not in camel case  camelcase
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/providers/I18nProvider/index.js
+  34:26  error  Expected indentation of 4 space characters but found 25  react/jsx-indent
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/providers/NotificationsProvider/index.js
+  26:17  error  'notification' is already declared in the upper scope    no-shadow
+  65:11  error  Static HTML elements with event handlers require a role  jsx-a11y/no-static-element-interactions
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/shared/getQueryString/__test__/getQueryString.spec.js
+  29:28  error  Unexpected use of file extension "js" for "../index.js"  import/extensions
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/shared/handleMessage/index.js
+  54:11  error  Expected parentheses around arrow function argument having a body with curly braces  arrow-parens
+  54:11  error  'res' is defined but never used                                                      no-unused-vars
+  70:19  error  Missing trailing comma                                                               comma-dangle
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/shared/history/index.js
+  37:1  error  Exporting mutable 'let' binding, use 'const' instead  import/no-mutable-exports
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/shared/i18n/index.js
+  37:12  error  'tryRequire' was used before it was defined    no-use-before-define
+  42:12  error  Unexpected require()                           global-require
+  42:12  error  Calls to require() should use string literals  import/no-dynamic-require
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/shared/nativeNotification/__test__/nativeNotification.spec.js
+  29:32  error  Unexpected use of file extension "js" for "../index.js"  import/extensions
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/shared/nativeNotification/index.js
+  38:46  error  Unexpected require()                    global-require
+  41:37  error  'permission' is defined but never used  no-unused-vars
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/shared/updateObject/__test__/updateObject.spec.js
+  31:8  error  Unexpected use of file extension "js" for "../index.js"  import/extensions
+
+/Users/mac2/Develop/web/teclib/forks/web-mdm-dashboard/src/shared/updateObject/index.js
+  37:1  error  Prefer default export  import/prefer-default-export

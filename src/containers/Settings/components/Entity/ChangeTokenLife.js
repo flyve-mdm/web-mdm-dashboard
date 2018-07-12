@@ -45,9 +45,8 @@ class ChangeTokenLife extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const { tokenLife } = this.props
     this.state = {
-      tokenLife,
+      tokenLife: this.props.tokenLife,
       isLoading: false,
     }
   }
@@ -71,24 +70,18 @@ class ChangeTokenLife extends PureComponent {
     this.setState({
       isLoading: true,
     }, async () => {
-      const {
-        glpi,
-        entityID,
-        saveValues,
-        changeMode,
-      } = this.props
       const { tokenLife } = this.state
 
       try {
-        await glpi.updateItem({
+        await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmEntityconfig,
           input: [{
-            id: entityID,
+            id: this.props.entityID,
             agent_token_life: `P${tokenLife}D`,
           }],
         })
-        saveValues('tokenLife', tokenLife)
-        changeMode('')
+        this.props.saveValues('tokenLife', tokenLife)
+        this.props.changeMode('')
         this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.token_life_changed'),

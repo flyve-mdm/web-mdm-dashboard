@@ -33,7 +33,6 @@ import React, {
 import PropTypes from 'prop-types'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import FilesList from './components/FilesList'
 import getMode from '../../shared/getMode'
@@ -41,7 +40,7 @@ import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
 
 /**
- * @class Files
+ * @class FileswithHandleMessages
  * @extends PureComponent
  */
 class Files extends PureComponent {
@@ -106,12 +105,6 @@ class Files extends PureComponent {
       selectedItems,
       action,
     } = this.state
-    const {
-      toast,
-      history,
-      glpi,
-      handleMessage,
-    } = this.props
 
     return ({
       icon,
@@ -121,10 +114,10 @@ class Files extends PureComponent {
       changeSelectionMode: this.changeSelectionMode,
       changeSelectedItems: this.changeSelectedItems,
       changeAction: this.changeAction,
-      toast,
-      history,
-      glpi,
-      handleMessage,
+      toast: this.props.toast,
+      history: this.props.history,
+      glpi: this.props.glpi,
+      handleMessage: this.props.handleMessage,
     })
   }
 
@@ -164,16 +157,15 @@ class Files extends PureComponent {
       selectedItems,
       selectionMode,
     } = this.state
-    const { history } = this.props
 
     const styles = {
       width: itemListPaneWidth,
     }
 
     if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname === `${publicURL}/app/files`)
-        || history.location.pathname === `${publicURL}/app/files`
-        || (history.location.pathname === `${publicURL}/app/files`
+      if ((selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/files`)
+        || this.props.history.location.pathname === `${publicURL}/app/files`
+        || (this.props.history.location.pathname === `${publicURL}/app/files`
           && selectionMode)) {
         styles.display = 'inline-block'
       } else {
@@ -198,8 +190,6 @@ class Files extends PureComponent {
       selectedItems,
       selectionMode,
     } = this.state
-    const { history } = this.props
-
     const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
     const styles = {
       width: calc100PercentMinus(validWidth),
@@ -207,9 +197,9 @@ class Files extends PureComponent {
     }
 
     if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname === `${publicURL}/app/files`)
-        || history.location.pathname === `${publicURL}/app/files`
-        || (history.location.pathname === `${publicURL}/app/files`
+      if ((selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/files`)
+        || this.props.history.location.pathname === `${publicURL}/app/files`
+        || (this.props.history.location.pathname === `${publicURL}/app/files`
           && selectionMode)) {
         styles.display = 'none'
       } else {
@@ -223,8 +213,6 @@ class Files extends PureComponent {
   }
 
   render() {
-    const { match } = this.props
-
     const renderComponents = (
       <React.Fragment>
         <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
@@ -237,7 +225,7 @@ class Files extends PureComponent {
           <GenerateRoutes
             key="content"
             routes={routes}
-            rootPath={match.url}
+            rootPath={this.props.match.url}
             {...this.propsData()}
           />
         </div>

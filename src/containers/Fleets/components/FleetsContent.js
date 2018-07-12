@@ -49,14 +49,13 @@ class FleetsContent extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const { itemType } = this.props
 
     this.state = {
       layout: {
         type: WinJS.UI.ListLayout,
       },
       itemID: undefined,
-      itemType,
+      itemType: this.props.itemType,
       selectedItems: [],
       isLoading: false,
       notManaged: false,
@@ -190,12 +189,6 @@ class FleetsContent extends PureComponent {
    */
   requestAllData = async () => {
     const {
-      glpi,
-      handleMessage,
-      changeSelectionMode,
-      changeAction,
-    } = this.props
-    const {
       input,
       itemID,
       itemType,
@@ -204,7 +197,7 @@ class FleetsContent extends PureComponent {
     /*
      * Get Devices
      * */
-    const devices = await glpi.searchItems({
+    const devices = await this.props.glpi.searchItems({
       itemtype: itemtype.PluginFlyvemdmAgent,
       criteria: [{
         link: 'and',
@@ -217,14 +210,14 @@ class FleetsContent extends PureComponent {
     /*
      * Get Policies
      * */
-    const countPolicies = await glpi.searchItems({
+    const countPolicies = await this.props.glpi.searchItems({
       itemtype: itemtype.PluginFlyvemdmPolicy,
       options: {
         uid_cols: true,
         range: '0-0',
       },
     })
-    const policies = await glpi.searchItems({
+    const policies = await this.props.glpi.searchItems({
       itemtype: itemtype.PluginFlyvemdmPolicy,
       options: {
         uid_cols: true,
@@ -241,7 +234,7 @@ class FleetsContent extends PureComponent {
        * Get Tasks
        * */
       try {
-        const countTasks = await glpi.searchItems({
+        const countTasks = await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmTask,
           options: {
             uid_cols: true,
@@ -263,7 +256,7 @@ class FleetsContent extends PureComponent {
           ],
         })
 
-        tasks = await glpi.searchItems({
+        tasks = await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmTask,
           options: {
             uid_cols: true,
@@ -285,12 +278,12 @@ class FleetsContent extends PureComponent {
           ],
         })
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
-        changeSelectionMode(false)
-        changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.changeAction('reload')
       }
 
       if (tasks.data) {
@@ -332,14 +325,14 @@ class FleetsContent extends PureComponent {
     /*
      * Get categories
      * */
-    const countCategories = await glpi.searchItems({
+    const countCategories = await this.props.glpi.searchItems({
       itemtype: itemtype.PluginFlyvemdmPolicyCategory,
       options: {
         uid_cols: true,
         range: '0-0',
       },
     })
-    const categories = await glpi.searchItems({
+    const categories = await this.props.glpi.searchItems({
       itemtype: itemtype.PluginFlyvemdmPolicyCategory,
       options: {
         uid_cols: true,
@@ -351,7 +344,7 @@ class FleetsContent extends PureComponent {
     /*
      * Get files
      */
-    const files = await glpi.getAllItems({
+    const files = await this.props.glpi.getAllItems({
       itemtype: itemtype.PluginFlyvemdmFile,
     })
 
@@ -359,7 +352,7 @@ class FleetsContent extends PureComponent {
      * Get Applications
      */
 
-    const applications = await glpi.getAllItems({
+    const applications = await this.props.glpi.getAllItems({
       itemtype: itemtype.PluginFlyvemdmPackage,
     })
 
@@ -755,10 +748,9 @@ class FleetsContent extends PureComponent {
       itemType,
       notManaged,
     } = this.state
-    const { selectedItems } = this.props
 
     if (itemType === itemtype.PluginFlyvemdmFleet) {
-      if (selectedItems.length === 1) {
+      if (this.props.selectedItems.length === 1) {
         if (!notManaged) {
           this.handleUpdateFleet()
         } else {
@@ -782,11 +774,6 @@ class FleetsContent extends PureComponent {
       input,
       itemID,
     } = this.state
-    const {
-      glpi,
-      changeAction,
-      handleMessage,
-    } = this.props
 
     try {
       this.setState({
@@ -796,7 +783,7 @@ class FleetsContent extends PureComponent {
         name: input,
       }
 
-      await glpi.updateItem({
+      await this.props.glpi.updateItem({
         itemtype: itemtype.PluginFlyvemdmFleet,
         id: itemID,
         input: fleetToUpdate,
@@ -808,13 +795,13 @@ class FleetsContent extends PureComponent {
         type: 'success',
       })
 
-      changeAction('reload')
+      this.props.changeAction('reload')
 
       this.setState({
         isLoading: false,
       })
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -836,10 +823,6 @@ class FleetsContent extends PureComponent {
       itemType,
       itemID,
     } = this.state
-    const {
-      glpi,
-      handleMessage,
-    } = this.props
 
     this.setState({
       isLoading: true,
@@ -927,28 +910,28 @@ class FleetsContent extends PureComponent {
     })
     try {
       if (itemType === itemtype.PluginFlyvemdmFleet) {
-        await glpi.updateItem({
+        await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmFleet,
           id: itemID,
           input: fleetToUpdate,
         })
       }
       if (itemsToDelete.length > 0) {
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmTask,
           input: itemsToDelete,
         })
       }
 
       if (itemsToUpdate.length > 0) {
-        await glpi.updateItem({
+        await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmTask,
           input: itemsToUpdate,
         })
       }
 
       if (itemsToSave.length > 0) {
-        await glpi.addItem({
+        await this.props.glpi.addItem({
           itemtype: itemtype.PluginFlyvemdmTask,
           input: itemsToSave,
         })
@@ -961,7 +944,7 @@ class FleetsContent extends PureComponent {
       })
       this.requestAllData()
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -979,12 +962,6 @@ class FleetsContent extends PureComponent {
       input,
       data,
     } = this.state
-    const {
-      glpi,
-      changeSelectionMode,
-      changeAction,
-      handleMessage,
-    } = this.props
 
     this.setState({
       isLoading: true,
@@ -995,7 +972,7 @@ class FleetsContent extends PureComponent {
         name: input,
       }
 
-      const newFleet = await glpi.addItem({
+      const newFleet = await this.props.glpi.addItem({
         itemtype: itemtype.PluginFlyvemdmFleet,
         input: fleetToCreate,
       })
@@ -1026,7 +1003,7 @@ class FleetsContent extends PureComponent {
       })
 
       if (itemsToSave.length > 0) {
-        await glpi.addItem({
+        await this.props.glpi.addItem({
           itemtype: itemtype.PluginFlyvemdmTask,
           input: itemsToSave,
         })
@@ -1040,10 +1017,10 @@ class FleetsContent extends PureComponent {
         body: I18n.t('notifications.fleet_successfully_created'),
         type: 'success',
       })
-      changeSelectionMode(false)
-      changeAction('reload')
+      this.props.changeSelectionMode(false)
+      this.props.changeAction('reload')
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -1060,13 +1037,6 @@ class FleetsContent extends PureComponent {
    * @param {object} eventObject
    */
   handleDeleteFleet = async () => {
-    const {
-      selectedItems,
-      glpi,
-      changeSelectionMode,
-      changeAction,
-      handleMessage,
-    } = this.props
     const { itemID } = this.state
 
     if (this.props.selectedItems.length === 1) {
@@ -1088,10 +1058,10 @@ class FleetsContent extends PureComponent {
           body: I18n.t('notifications.fleet_successfully_removed'),
           type: 'success',
         })
-        changeSelectionMode(false)
-        changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.changeAction('reload')
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -1128,10 +1098,8 @@ class FleetsContent extends PureComponent {
    * @function goToList
    */
   goToList = () => {
-    const { history } = this.props
     const { itemID } = this.state
-
-    history.push(`${publicURL}/app/fleets/${itemID}/list`)
+    this.props.history.push(`${publicURL}/app/fleets/${itemID}/list`)
   }
 
   /**
@@ -1147,7 +1115,6 @@ class FleetsContent extends PureComponent {
       devicesLength,
       notManaged,
     } = this.state
-    const { selectedItems } = this.props
 
     let policiesPerCategory
 
@@ -1205,7 +1172,7 @@ class FleetsContent extends PureComponent {
                   tabIndex="0"
                 />
                 {
-                  selectedItems.length !== 0 && itemType === itemtype.PluginFlyvemdmFleet
+                  this.props.selectedItems.length !== 0 && itemType === itemtype.PluginFlyvemdmFleet
                     ? (
                       <React.Fragment>
                         <span

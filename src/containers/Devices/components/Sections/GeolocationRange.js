@@ -44,14 +44,10 @@ export default class GeolocationRange extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const {
-      min,
-      max,
-    } = this.props
 
     this.state = {
-      min,
-      max,
+      min: this.props.min,
+      max: this.props.max,
     }
   }
 
@@ -72,9 +68,6 @@ export default class GeolocationRange extends PureComponent {
       min,
       max,
     } = this.state
-    const {
-      applyRange,
-    } = this.props
 
     return (
       <React.Fragment>

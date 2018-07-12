@@ -48,53 +48,44 @@ class TasksDeployAppList extends PureComponent {
    * @function refreshRender
    * @return {*}
    */
-  refreshRender = () => {
-    const {
-      data,
-      typeData,
-    } = this.props
-
-    return Array.isArray(data)
-      ? data.map(item => typeData.map(value => (item.items_id === value.id
-        ? (
-          <div className="files-list" style={{ width: '320px' }} key={value.id}>
-            <div className="files-list-content">
-              <div className="files-list__item">
-                <div className="files-list__item-content-primary">
-                  <div className="files-list__content-text-primary">
-                    {value.alias}
-                  </div>
-                  <div className="files-list__content-text-secondary">
-                    {value.package_name}
-                  </div>
+  refreshRender = () => (Array.isArray(this.props.data)
+    ? this.props.data.map(item => this.props.typeData.map(value => (item.items_id === value.id
+      ? (
+        <div className="files-list" style={{ width: '320px' }} key={value.id}>
+          <div className="files-list-content">
+            <div className="files-list__item">
+              <div className="files-list__item-content-primary">
+                <div className="files-list__content-text-primary">
+                  {value.alias}
                 </div>
-                <div className="files-list__item-content-secondary">
-                  <div className="files-list__item-icon">
-                    <span
-                      className="deleteIcon"
-                      style={{ fontSize: '18px' }}
-                      onClick={() => this.handleRemove(item)}
-                      role="button"
-                      tabIndex="0"
-                    />
-                  </div>
+                <div className="files-list__content-text-secondary">
+                  {value.package_name}
+                </div>
+              </div>
+              <div className="files-list__item-content-secondary">
+                <div className="files-list__item-icon">
+                  <span
+                    className="deleteIcon"
+                    style={{ fontSize: '18px' }}
+                    onClick={() => this.handleRemove(item)}
+                    role="button"
+                    tabIndex="0"
+                  />
                 </div>
               </div>
             </div>
           </div>
-        )
-        : null)))
-      : null
-  }
+        </div>
+      )
+      : null)))
+    : null)
 
   /**
    * @function handleRemove
    * @param {*} task
    */
   handleRemove = (task) => {
-    const { removeTask } = this.props
-
-    removeTask(task)
+    this.props.removeTask(task)
   }
 
   /**
