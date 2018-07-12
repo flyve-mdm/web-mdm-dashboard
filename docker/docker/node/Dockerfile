@@ -7,7 +7,7 @@ ARG APPPATH=${APPPATH}
 ENV APPPATH ${APPPATH}
 # Install modules
 RUN apt-get update --fix-missing && apt-get install -y curl nano git
-WORKDIR /app
+WORKDIR $APPPATH
 ADD ./cliinstall.sh /opt/dev-tools/cliinstall.sh
 RUN chmod +x /opt/dev-tools/cliinstall.sh
 
