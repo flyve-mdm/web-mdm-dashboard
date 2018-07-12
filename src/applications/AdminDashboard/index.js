@@ -30,6 +30,7 @@
 import React, {
   Component,
 } from 'react'
+import PropTypes from 'prop-types'
 import withAdminDashboardLayout from '../../hoc/withAdminDashboardLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import routes from './routes'
@@ -53,6 +54,16 @@ class AdminDashboard extends Component {
       />
     )
   }
+}
+
+AdminDashboard.propTypes = {
+  toast: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  changeLanguage: PropTypes.func.isRequired,
+  languageCurrent: PropTypes.string.isRequired,
 }
 
 export default withAdminDashboardLayout(withHandleMessages(AdminDashboard))

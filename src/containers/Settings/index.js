@@ -72,10 +72,14 @@ class Settings extends PureComponent {
 }
 
 Settings.propTypes = {
-  toast: PropTypes.object.isRequired,
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
   handleMessage: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  changeLanguage: PropTypes.func.isRequired,
+  languageCurrent: PropTypes.string.isRequired,
 }
 
 export default Settings

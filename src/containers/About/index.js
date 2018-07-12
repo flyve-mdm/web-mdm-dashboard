@@ -65,6 +65,7 @@ About.propTypes = {
   handleMessage: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  languageCurrent: PropTypes.string.isRequired,
 }
 
 export default About

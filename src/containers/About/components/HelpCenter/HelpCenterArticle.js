@@ -120,9 +120,12 @@ class HelpCenterArticle extends PureComponent {
 
 /** HelpCenterArticle propTypes */
 HelpCenterArticle.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
-  toast: PropTypes.object.isRequired,
 }
 
 export default withGLPI(HelpCenterArticle)

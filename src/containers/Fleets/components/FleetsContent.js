@@ -30,8 +30,8 @@
 import React, {
   PureComponent,
 } from 'react'
-import WinJS from 'winjs'
 import PropTypes from 'prop-types'
+import WinJS from 'winjs'
 import I18n from '../../../shared/i18n'
 import FleetsTaskItemList from './FleetsTaskItemList'
 import ContentPane from '../../../components/ContentPane'
@@ -1069,13 +1069,13 @@ class FleetsContent extends PureComponent {
     } = this.props
     const { itemID } = this.state
 
-    if (selectedItems.length === 1) {
+    if (this.props.selectedItems.length === 1) {
       this.setState({
         isLoading: true,
       })
 
       try {
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmFleet,
           id: itemID,
         })
@@ -1282,7 +1282,7 @@ class FleetsContent extends PureComponent {
           </div>
           <Confirmation
             title="Delete Fleets"
-            message={`${selectedItems.length} Fleets`}
+            message={`${this.props.selectedItems.length} Fleets`}
             reference={(el) => { this.contentDialog = el }}
           />
         </div>
@@ -1297,9 +1297,22 @@ FleetsContent.defaultProps = {
 }
 
 FleetsContent.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  glpi: PropTypes.shape({
+    searchItems: PropTypes.func,
+    getAllItems: PropTypes.func,
+    updateItem: PropTypes.func,
+    deleteItem: PropTypes.func,
+    addItem: PropTypes.func,
+  }).isRequired,
   history: PropTypes.object.isRequired,
   selectedItems: PropTypes.array,
   itemType: PropTypes.string,
+  changeSelectionMode: PropTypes.func.isRequired,
+  changeAction: PropTypes.func.isRequired,
 }
 
 export default FleetsContent

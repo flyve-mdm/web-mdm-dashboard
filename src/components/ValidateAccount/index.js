@@ -177,6 +177,9 @@ class ValidateAccount extends PureComponent {
 }
 
 ValidateAccount.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
   glpi: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,

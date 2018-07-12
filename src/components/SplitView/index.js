@@ -201,6 +201,7 @@ class SplitView extends PureComponent {
 }
 
 SplitView.propTypes = {
+  logout: PropTypes.func.isRequired,
   expanded: PropTypes.bool.isRequired,
   contract: PropTypes.bool.isRequired,
   handleContract: PropTypes.func.isRequired,

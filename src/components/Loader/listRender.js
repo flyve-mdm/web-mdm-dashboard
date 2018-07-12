@@ -27,10 +27,10 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import ContentLoader, {
   BulletList,
 } from 'react-content-loader'
-import PropTypes from 'prop-types'
 
 /**
  * Render of loaders
@@ -62,7 +62,12 @@ const listRender = ({
   )
 }
 
+listRender.defaultProps = {
+  type: '',
+}
+
 listRender.propTypes = {
+  type: PropTypes.string,
   props: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
 }

@@ -90,7 +90,6 @@ class Display extends PureComponent {
    * @function render
    */
   render() {
-    const { actions } = this.props
     const {
       animations,
       devicesCurrentlyManaged,
@@ -280,7 +279,8 @@ class Display extends PureComponent {
 }
 
 Display.propTypes = {
-  toast: PropTypes.object.isRequired,
+  changeLanguage: PropTypes.func.isRequired,
+  languageCurrent: PropTypes.string.isRequired,
 }
 
 export default Display

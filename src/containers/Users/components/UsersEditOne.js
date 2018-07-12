@@ -583,9 +583,12 @@ class UsersEditOne extends PureComponent {
 }
 
 UsersEditOne.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   changeAction: PropTypes.func.isRequired,
-  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 

@@ -187,6 +187,9 @@ class SignIn extends PureComponent {
 
 SignIn.propTypes = {
   history: PropTypes.object.isRequired,
+  auth: PropTypes.shape({
+    isLoading: PropTypes.bool,
+  }).isRequired,
 }
 
 export default withAuthenticationLayout(withHandleMessages(SignIn), {

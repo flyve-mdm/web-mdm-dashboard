@@ -29,6 +29,7 @@
 import React, {
   PureComponent,
 } from 'react'
+import PropTypes from 'prop-types'
 import SplitView from '../../components/SplitView'
 import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
 import getMode from '../../shared/getMode'
@@ -68,26 +69,6 @@ const withAdminDashboardLayout = (WrappedComponent) => {
       animationsWinJs()
     }
 
-    /** Close current session */
-    logout = async () => {
-      const isOK = await Confirmation.isOK(this.contentDialog)
-      if (isOK) {
-        this.props.auth.logout(this.props.history)
-      }
-    }
-
-    /** Change 'mode' according to the resolution of the screen */
-    handleResize = () => {
-      const prevMode = this.state.mode
-      const nextMode = getMode()
-
-      if (prevMode !== nextMode) {
-        this.setState({
-          mode: nextMode,
-        })
-      }
-    }
-
     /** Configure 'baseURL' and the cookies of glpi */
     componentDidMount = async () => {
       const {
@@ -113,6 +94,26 @@ const withAdminDashboardLayout = (WrappedComponent) => {
     /** Remove 'resize' event listener */
     componentWillUnmount() {
       window.removeEventListener('resize', this.handleResize)
+    }
+
+    /** Close current session */
+    logout = async () => {
+      const isOK = await Confirmation.isOK(this.contentDialog)
+      if (isOK) {
+        this.props.auth.logout(this.props.history)
+      }
+    }
+
+    /** Change 'mode' according to the resolution of the screen */
+    handleResize = () => {
+      const prevMode = this.state.mode
+      const nextMode = getMode()
+
+      if (prevMode !== nextMode) {
+        this.setState({
+          mode: nextMode,
+        })
+      }
     }
 
     /** Expand and collapse the side menu */
@@ -187,7 +188,20 @@ const withAdminDashboardLayout = (WrappedComponent) => {
     }
   }
 
+  AdminDashboardLayout.propTypes = {
+    toast: PropTypes.shape({
+      setNotification: PropTypes.func,
+    }).isRequired,
+    handleMessage: PropTypes.func.isRequired,
+    auth: PropTypes.shape({
+      logout: PropTypes.func,
+    }).isRequired,
+    history: PropTypes.object.isRequired,
+    languageCurrent: PropTypes.string.isRequired,
+  }
+
   return withAuthentication(AdminDashboardLayout)
 }
+
 
 export default withAdminDashboardLayout
