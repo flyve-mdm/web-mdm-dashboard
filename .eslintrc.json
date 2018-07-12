@@ -39,7 +39,7 @@
       }
     ],
     "react/forbid-prop-types": "off",
-
+    "react/destructuring-assignment": "off",
     "react/jsx-filename-extension": [
       1,
       {
