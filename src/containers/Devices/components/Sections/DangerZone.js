@@ -45,14 +45,10 @@ class DangerZone extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const {
-      id,
-      update,
-    } = this.props
 
     this.state = {
-      id,
-      update,
+      id: this.props.id,
+      update: this.props.update,
     }
   }
 
@@ -86,20 +82,12 @@ class DangerZone extends PureComponent {
    * @function wipe
    */
   wipe = async () => {
-    const {
-      wipeDevice,
-      glpi,
-      toast,
-      changeAction,
-      history,
-      handleMessage,
-    } = this.props
     const { id } = this.state
 
-    const isOK = await Confirmation.isOK(wipeDevice)
+    const isOK = await Confirmation.isOK(this.props.wipeDevice)
     if (isOK) {
       try {
-        const response = await glpi.updateItem({
+        const response = await this.props.glpi.updateItem({
           id,
           itemtype: itemtype.PluginFlyvemdmAgent,
           input: {
@@ -111,10 +99,10 @@ class DangerZone extends PureComponent {
           body: response[0].message ? response[0].message : I18n.t('notifications.data_deleted_successfully'),
           type: 'success',
         })
-        changeAction('reload')
-        history.push(`${publicURL}/app/devices`)
+        this.props.changeAction('reload')
+        this.props.history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -128,20 +116,12 @@ class DangerZone extends PureComponent {
    * @function unenroll
    */
   unenroll = async () => {
-    const {
-      unenrollmentDevice,
-      glpi,
-      toast,
-      changeAction,
-      history,
-      handleMessage,
-    } = this.props
     const { id } = this.state
 
-    const isOK = await Confirmation.isOK(unenrollmentDevice)
+    const isOK = await Confirmation.isOK(this.props.unenrollmentDevice)
     if (isOK) {
       try {
-        const response = await glpi.updateItem({
+        const response = await this.props.glpi.updateItem({
           id,
           itemtype: itemtype.PluginFlyvemdmAgent,
           input: {
@@ -153,10 +133,10 @@ class DangerZone extends PureComponent {
           body: response[0].message ? response[0].message : I18n.t('notifications.unenrollment_device'),
           type: 'success',
         })
-        changeAction('reload')
-        history.push(`${publicURL}/app/devices`)
+        this.props.changeAction('reload')
+        this.props.history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -170,20 +150,12 @@ class DangerZone extends PureComponent {
    * @function delete
    */
   delete = async () => {
-    const {
-      deleteDevice,
-      glpi,
-      toast,
-      changeAction,
-      history,
-      handleMessage,
-    } = this.props
     const { id } = this.state
 
-    const isOK = await Confirmation.isOK(deleteDevice)
+    const isOK = await Confirmation.isOK(this.props.deleteDevice)
     if (isOK) {
       try {
-        const response = await glpi.deleteItem({
+        const response = await this.props.glpi.deleteItem({
           id,
           itemtype: itemtype.PluginFlyvemdmAgent,
         })
@@ -192,10 +164,10 @@ class DangerZone extends PureComponent {
           body: response[0].message ? response[0].message : I18n.t('notifications.devices_successfully_deleted'),
           type: 'success',
         })
-        changeAction('reload')
-        history.push(`${publicURL}/app/devices`)
+        this.props.changeAction('reload')
+        this.props.history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -274,8 +246,11 @@ DangerZone.defaultProps = {
 
 /** DangerZone propTypes */
 DangerZone.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   changeAction: PropTypes.func.isRequired,

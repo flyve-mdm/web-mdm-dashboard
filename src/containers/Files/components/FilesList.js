@@ -85,12 +85,6 @@ class FilesList extends PureComponent {
       pagination,
       isLoadingMore,
     } = this.state
-    const {
-      action,
-      changeAction,
-      selectedItems,
-      selectionMode,
-    } = this.props
 
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
@@ -100,12 +94,12 @@ class FilesList extends PureComponent {
       this.toolBar.winControl.forceLayout();
     }
 
-    if (action === 'reload') {
+    if (this.props.action === 'reload') {
       this.handleRefresh()
-      changeAction(null)
+      this.props.changeAction(null)
     }
 
-    if (prevProps.selectedItems.length > 0 && selectedItems.length === 0 && !selectionMode) {
+    if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
       if (this.listView) {
         this.listView.winControl.selection.clear()
       }
@@ -113,9 +107,7 @@ class FilesList extends PureComponent {
   }
 
   componentWillUnmount() {
-    const { changeSelectionMode } = this.props
-
-    changeSelectionMode(false)
+    this.props.changeSelectionMode(false)
   }
 
   /**
@@ -125,15 +117,11 @@ class FilesList extends PureComponent {
    */
   handleRefresh = () => {
     const {
-      history,
-      glpi,
-    } = this.props
-    const {
       order,
       pagination,
     } = this.state
 
-    history.push(`${publicURL}/app/files`)
+    this.props.history.push(`${publicURL}/app/files`)
     this.setState({
       isLoading: true,
       totalcount: 0,
@@ -144,7 +132,7 @@ class FilesList extends PureComponent {
       },
     }, async () => {
       try {
-        const files = await glpi.searchItems({
+        const files = await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmFile,
           options: {
             uid_cols: true,
@@ -174,10 +162,8 @@ class FilesList extends PureComponent {
    * @function handleEdit
    */
   handleEdit = () => {
-    const { history } = this.props
-
     const path = `${publicURL}/app/files/edit`
-    history.push(path)
+    this.props.history.push(path)
   }
 
   /**
@@ -185,15 +171,9 @@ class FilesList extends PureComponent {
    * @function handleAdd
    */
   handleAdd = () => {
-    const {
-      history,
-      changeSelectionMode,
-      changeSelectedItems,
-    } = this.props
-
-    history.push(`${publicURL}/app/files/add`)
-    changeSelectionMode(false)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/files/add`)
+    this.props.changeSelectionMode(false)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -204,16 +184,9 @@ class FilesList extends PureComponent {
    * @function handleToggleSelectionMode
    */
   handleToggleSelectionMode = () => {
-    const {
-      history,
-      changeSelectionMode,
-      changeSelectedItems,
-      selectionMode,
-    } = this.props
-
-    history.push(`${publicURL}/app/files`)
-    changeSelectionMode(!selectionMode)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/files`)
+    this.props.changeSelectionMode(!this.props.selectionMode)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -225,11 +198,6 @@ class FilesList extends PureComponent {
    * @param {object} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    const {
-      changeSelectedItems,
-      history,
-      selectionMode,
-    } = this.props
     const { itemList } = this.state
 
     const listView = eventObject.currentTarget.winControl
@@ -239,12 +207,12 @@ class FilesList extends PureComponent {
     for (const item of index) {
       itemSelected.push(itemList.getItem(item).data)
     }
-    changeSelectedItems(itemSelected)
-    if (index.length === 1 && !selectionMode) {
-      history.push(`${publicURL}/app/files/${itemSelected[0]['PluginFlyvemdmFile.id']}`)
+    this.props.changeSelectedItems(itemSelected)
+    if (index.length === 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/files/${itemSelected[0]['PluginFlyvemdmFile.id']}`)
     }
-    if (index.length > 1 && !selectionMode) {
-      history.push(`${publicURL}/app/files/edit/`)
+    if (index.length > 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/files/edit/`)
     }
   }
 
@@ -254,18 +222,9 @@ class FilesList extends PureComponent {
    * @param {object} eventObject
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      changeSelectionMode,
-      changeSelectedItems,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
-      const itemListToDelete = selectedItems.map(item => ({
+      const itemListToDelete = this.props.selectedItems.map(item => ({
         id: item['PluginFlyvemdmFile.id'],
       }))
 
@@ -273,7 +232,7 @@ class FilesList extends PureComponent {
         isLoading: true,
       }, async () => {
         try {
-          await glpi.deleteItem({
+          await this.props.glpi.deleteItem({
             itemtype: itemtype.PluginFlyvemdmFile,
             input: itemListToDelete,
             queryString: {
@@ -286,24 +245,24 @@ class FilesList extends PureComponent {
             body: I18n.t('notifications.device_successfully_removed'),
             type: 'success',
           })
-          changeSelectionMode(false)
-          changeSelectedItems([])
-          changeAction('reload')
+          this.props.changeSelectionMode(false)
+          this.props.changeSelectedItems([])
+          this.props.changeAction('reload')
         } catch (error) {
           this.props.toast.setNotification(handleMessage({
             type: 'alert',
             message: error,
           }))
-          changeSelectionMode(false)
-          changeSelectedItems([])
+          this.props.changeSelectionMode(false)
+          this.props.changeSelectedItems([])
           this.setState({
             isLoading: false,
           })
         }
       })
     } else {
-      changeSelectionMode(false)
-      changeSelectedItems([])
+      this.props.changeSelectionMode(false)
+      this.props.changeSelectedItems([])
       if (this.listView) {
         this.listView.winControl.selection.clear()
       }
@@ -317,10 +276,6 @@ class FilesList extends PureComponent {
    */
   handleSort = async () => {
     const { order } = this.state
-    const {
-      glpi,
-      history,
-    } = this.props
 
     try {
       this.setState({
@@ -333,7 +288,7 @@ class FilesList extends PureComponent {
       })
       const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
 
-      const files = await glpi.searchItems({
+      const files = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFile,
         options: {
           uid_cols: true,
@@ -348,7 +303,7 @@ class FilesList extends PureComponent {
         totalcount: files.totalcount,
         itemList: new WinJS.Binding.List(files.data),
       })
-      history.push(`${publicURL}/app/files`)
+      this.props.history.push(`${publicURL}/app/files`)
     } catch (error) {
       this.setState({
         isLoading: false,
@@ -370,7 +325,6 @@ class FilesList extends PureComponent {
       order,
       itemList,
     } = this.state
-    const { glpi } = this.props
 
     try {
       this.setState({
@@ -386,7 +340,7 @@ class FilesList extends PureComponent {
             if (range[key] >= totalcount) { range[key] = totalcount - 1 }
           }
         }
-        const files = await glpi.searchItems({
+        const files = await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmFile,
           options: {
             uid_cols: true,
@@ -420,11 +374,6 @@ class FilesList extends PureComponent {
 
   render() {
     const {
-      selectedItems,
-      selectionMode,
-      icon,
-    } = this.props
-    const {
       isLoadingMore,
       isLoading,
       itemList,
@@ -437,7 +386,7 @@ class FilesList extends PureComponent {
         icon="delete"
         label={I18n.t('commons.delete')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleDelete}
       />
     )
@@ -448,7 +397,7 @@ class FilesList extends PureComponent {
         icon="edit"
         label={I18n.t('commons.edit')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleEdit}
       />
     )
@@ -486,8 +435,8 @@ class FilesList extends PureComponent {
           layout={layout}
           itemTemplate={this.ItemListRenderer}
           footerComponent={footerComponent}
-          selectionMode={selectionMode ? 'multi' : 'single'}
-          tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
+          selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+          tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
           onSelectionChanged={this.handleSelectionChanged}
         />
       )
@@ -495,7 +444,7 @@ class FilesList extends PureComponent {
       listComponent = (
         <EmptyMessage
           message={I18n.t('files.not_found')}
-          icon={icon}
+          icon={this.props.icon}
           showIcon
         />
       )
@@ -527,15 +476,15 @@ class FilesList extends PureComponent {
             onClick={this.handleAdd}
           />
 
-          {selectionMode ? editCommand : null}
-          {selectionMode ? deleteCommand : null}
+          {this.props.selectionMode ? editCommand : null}
+          {this.props.selectionMode ? deleteCommand : null}
 
           <ReactWinJS.ToolBar.Toggle
             key="select"
             icon="bullets"
             label={I18n.t('commons.select')}
             priority={0}
-            selected={selectionMode}
+            selected={this.props.selectionMode}
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
@@ -544,7 +493,7 @@ class FilesList extends PureComponent {
 
         <Confirmation
           title={I18n.t('files.delete')}
-          message={`${selectedItems.length} ${I18n.t('files.delete_message')}`}
+          message={`${this.props.selectedItems.length} ${I18n.t('files.delete_message')}`}
           reference={(el) => { this.contentDialog = el }}
         />
       </React.Fragment>

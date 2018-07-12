@@ -45,14 +45,9 @@ export default class SystemReport extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const {
-      id,
-      update,
-    } = this.props
-
     this.state = {
-      id,
-      update,
+      id: this.props.id,
+      update: this.props.update,
       data: undefined,
       isLoading: true,
       requestingInventory: false,
@@ -98,10 +93,6 @@ export default class SystemReport extends PureComponent {
       update,
       id,
     } = this.state
-    const {
-      glpi,
-      handleMessage,
-    } = this.props
 
     if (update) {
       this.setState({
@@ -111,13 +102,13 @@ export default class SystemReport extends PureComponent {
         try {
           this.setState({
             isLoading: false,
-            data: await glpi.getAnItem({
+            data: await this.props.glpi.getAnItem({
               itemtype: itemtype.PluginFlyvemdmAgent,
               id,
             }),
           })
         } catch (error) {
-          this.props.toast.setNotification(handleMessage({
+          this.props.toast.setNotification(this.props.handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -131,18 +122,13 @@ export default class SystemReport extends PureComponent {
    * @function requestInventory
    */
   requestInventory = () => {
-    const {
-      glpi,
-      toast,
-      handleMessage,
-    } = this.props
     const { id } = this.state
 
     this.setState({
       requestingInventory: true,
     }, async () => {
       try {
-        const response = await glpi.genericRequest({
+        const response = await this.props.glpi.genericRequest({
           path: `${itemtype.PluginFlyvemdmAgent}/${id}`,
           requestParams: {
             method: 'PUT',
@@ -160,7 +146,7 @@ export default class SystemReport extends PureComponent {
         })
         this.handleRefresh()
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
           displayErrorPage: false,
@@ -178,7 +164,6 @@ export default class SystemReport extends PureComponent {
       data,
       requestingInventory,
     } = this.state
-    const { glpi } = this.props
 
     if (isLoading && !data) {
       return (
@@ -249,7 +234,7 @@ export default class SystemReport extends PureComponent {
               itemType="PluginFlyvemdmFleet"
               itemID={data.plugin_flyvemdm_fleets_id}
               fields={{ id: 'ID', name: 'Name' }}
-              glpi={glpi}
+              glpi={this.props.glpi}
             />
 
             <Inventory
@@ -275,7 +260,7 @@ export default class SystemReport extends PureComponent {
                 with_connections: true,
                 with_networkports: true,
               }}
-              glpi={glpi}
+              glpi={this.props.glpi}
             />
           </div>
         </div>
@@ -286,9 +271,11 @@ export default class SystemReport extends PureComponent {
 }
 /** SystemReport propTypes */
 SystemReport.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   glpi: PropTypes.object.isRequired,
-  toast: PropTypes.object.isRequired,
   update: PropTypes.bool.isRequired,
-  handleMessage: PropTypes.func.isRequired,
 }

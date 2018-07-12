@@ -47,7 +47,7 @@ export default () => {
   const path = history.location.pathname.split('/')
 
   if (errorCode !== 404 && errorCode < 500 && path[1] === 'app') {
-    return(
+    return (
       <div
         className="empty-message"
         style={{ width: '100%' }}

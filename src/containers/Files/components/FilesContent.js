@@ -46,18 +46,14 @@ export default class FilesContent extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const {
-      selectedItems,
-      history,
-    } = this.props
 
     this.state = {
       isLoading: false,
     }
 
-    if (selectedItems.length === 0) {
+    if (this.props.selectedItems.length === 0) {
       const path = `${publicURL}/app/files`
-      history.push(path)
+      this.props.history.push(path)
     }
   }
 
@@ -67,10 +63,8 @@ export default class FilesContent extends PureComponent {
    * @function handleEdit
    */
   handleEdit = () => {
-    const { history } = this.props
-
-    const location = `${history.location.pathname}/edit`
-    history.push(location)
+    const location = `${this.props.history.location.pathname}/edit`
+    this.props.history.push(location)
   }
 
   /**
@@ -79,18 +73,10 @@ export default class FilesContent extends PureComponent {
    * @function handleDelete
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      changeSelectionMode,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     try {
       const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
-        const itemListToDelete = selectedItems.map(item => ({
+        const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmFile.id'],
         }))
 
@@ -98,7 +84,7 @@ export default class FilesContent extends PureComponent {
           isLoading: true,
         })
 
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmFile,
           input: itemListToDelete,
           queryString: {
@@ -111,15 +97,15 @@ export default class FilesContent extends PureComponent {
           body: I18n.t('notifications.file_successfully_removed'),
           type: 'success',
         })
-        changeSelectionMode(false)
-        changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.changeAction('reload')
       } else {
         this.setState({
           isLoading: false,
         })
       }
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -131,7 +117,6 @@ export default class FilesContent extends PureComponent {
 
   render() {
     const { isLoading } = this.state
-    const { selectedItems } = this.props
 
     if (isLoading) {
       return (
@@ -143,7 +128,7 @@ export default class FilesContent extends PureComponent {
       )
     }
 
-    const fileName = selectedItems.length > 0 ? selectedItems[0]['PluginFlyvemdmFile.name']
+    const fileName = this.props.selectedItems.length > 0 ? this.props.selectedItems[0]['PluginFlyvemdmFile.name']
       : ''
     return (
       <ContentPane>
@@ -191,10 +176,13 @@ FilesContent.defaultProps = {
 
 /** FilesContent propTypes */
 FilesContent.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   selectedItems: PropTypes.array,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
-  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }

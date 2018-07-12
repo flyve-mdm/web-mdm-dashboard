@@ -72,39 +72,34 @@ class Entity extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const {
-      glpi,
-      handleMessage,
-    } = this.props
-
     try {
-      const devices = await glpi.searchItems({
+      const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
       })
-      const applications = await glpi.searchItems({
+      const applications = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPackage,
       })
-      const users = await glpi.searchItems({
+      const users = await this.props.glpi.searchItems({
         itemtype: itemtype.User,
       })
-      const invitations = await glpi.searchItems({
+      const invitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
       })
-      const files = await glpi.searchItems({
+      const files = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFile,
       })
-      const fleets = await glpi.searchItems({
+      const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
       })
-      const policies = await glpi.searchItems({
+      const policies = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPolicy,
       })
-      const policyCategories = await glpi.searchItems({
+      const policyCategories = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPolicyCategory,
       })
       const {
         active_profile: activeProfile,
-      } = await glpi.getActiveProfile()
+      } = await this.props.glpi.getActiveProfile()
       let entityID
       if (Array.isArray(activeProfile.entities)) {
         entityID = activeProfile.entities[0].id
@@ -116,7 +111,7 @@ class Entity extends PureComponent {
         }
       }
 
-      let entityconfig = await glpi.getAnItem({
+      let entityconfig = await this.props.glpi.getAnItem({
         itemtype: itemtype.PluginFlyvemdmEntityconfig,
         id: entityID,
       })
@@ -142,7 +137,7 @@ class Entity extends PureComponent {
         downloadURL: downloadURL || 'https://',
       })
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -192,11 +187,6 @@ class Entity extends PureComponent {
       devicesCurretlymanaged,
       isLoading,
     } = this.state
-    const {
-      handleMessage,
-      glpi,
-      toast,
-    } = this.props
 
     let content
     switch (mode) {
@@ -206,9 +196,7 @@ class Entity extends PureComponent {
             changeMode={this.changeMode}
             tokenLife={tokenLife}
             saveValues={this.saveValues}
-            handleMessage={handleMessage}
-            glpi={glpi}
-            toast={toast}
+            glpi={this.props.glpi}
             entityID={entityID}
           />
         )
@@ -221,9 +209,9 @@ class Entity extends PureComponent {
             changeMode={this.changeMode}
             downloadURL={downloadURL}
             saveValues={this.saveValues}
-            toast={toast}
-            handleMessage={handleMessage}
-            glpi={glpi}
+            toast={this.props.toast}
+            handleMessage={this.props.handleMessage}
+            glpi={this.props.glpi}
             entityID={entityID}
           />
         )
@@ -246,8 +234,8 @@ class Entity extends PureComponent {
               entityID={entityID}
               downloadURL={downloadURL}
               changeMode={this.changeMode}
-              handleMessage={handleMessage}
-              toast={toast}
+              handleMessage={this.props.handleMessage}
+              toast={this.props.toast}
             />
           </ContentPane>
         )

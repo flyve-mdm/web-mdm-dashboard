@@ -187,12 +187,6 @@ class ScrollSync extends PureComponent {
 
     const scrollLeftOffset = scrollWidth - clientWidth
 
-    const {
-      proportional,
-      vertical,
-      horizontal,
-    } = this.props
-
     this.panels[group].forEach((panel) => {
       // For all panels beside the currently scrolling one
       if (scrolledPanel !== panel) {
@@ -202,11 +196,11 @@ class ScrollSync extends PureComponent {
         const panelHeight = panel.scrollHeight - clientHeight
         const panelWidth = panel.scrollWidth - clientWidth
         // Adjust the scrollTop position of it accordingly
-        if (vertical && scrollTopOffset > 0) {
-          panel.scrollTop = proportional ? (panelHeight * scrollTop) / scrollTopOffset : scrollTop
+        if (this.props.vertical && scrollTopOffset > 0) {
+          panel.scrollTop = this.props.proportional ? (panelHeight * scrollTop) / scrollTopOffset : scrollTop
         }
-        if (horizontal && scrollLeftOffset > 0) {
-          panel.scrollLeft = proportional ? (panelWidth * scrollLeft) / scrollLeftOffset : scrollLeft
+        if (this.props.horizontal && scrollLeftOffset > 0) {
+          panel.scrollLeft = this.props.proportional ? (panelWidth * scrollLeft) / scrollLeftOffset : scrollLeft
         }
         // Re-attach event listeners after we're done scrolling
         console.log(panel)

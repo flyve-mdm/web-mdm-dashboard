@@ -63,24 +63,16 @@ export default class DevicesEdit extends PureComponent {
 
   render() {
     const { FieldList } = this.state
-    const {
-      selectedItems,
-      changeAction,
-      changeSelectionMode,
-      history,
-      toast,
-      glpi,
-    } = this.props
 
     return (
       <EditMultiple
-        selectedItems={selectedItems}
+        selectedItems={this.props.selectedItems}
         FieldList={FieldList}
-        changeAction={changeAction}
-        changeSelectionMode={changeSelectionMode}
-        history={history}
-        toast={toast}
-        glpi={glpi}
+        changeAction={this.props.changeAction}
+        changeSelectionMode={this.props.changeSelectionMode}
+        history={this.props.history}
+        toast={this.props.toast}
+        glpi={this.props.glpi}
         request={{
           id: 'PluginFlyvemdmAgent.id',
           itemtype: itemtype.PluginFlyvemdmAgent,

@@ -46,10 +46,8 @@ class Panel extends PureComponent {
    * @return {array}
    */
   createFields = () => {
-    const { itemResults } = this.props
-
     const fields = []
-    itemResults.length && fields.push(...itemResults[0].map(field => [
+    this.props.itemResults.length && fields.push(...this.props.itemResults[0].map(field => [
       field.fieldId,
       field.fieldName,
     ]))
@@ -61,13 +59,11 @@ class Panel extends PureComponent {
    * @function render
    */
   render() {
-    const { itemResults } = this.props
-
     return (
       <React.Fragment>
         <div className="searchList">
           <PanelFields fields={this.createFields()} />
-          <PanelResult itemResults={itemResults} />
+          <PanelResult itemResults={this.props.itemResults} />
         </div>
       </React.Fragment>
     )

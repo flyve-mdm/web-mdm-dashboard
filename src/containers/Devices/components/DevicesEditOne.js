@@ -50,22 +50,20 @@ export default class DevicesEditOne extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const { history } = this.props
 
     this.state = {
       isLoading: true,
-      id: getID(history.location.pathname, 3),
+      id: getID(this.props.history.location.pathname, 3),
     }
   }
 
   componentDidMount() {
     const { id } = this.state
-    const { history } = this.props
 
     if (Number(id)) {
       this.handleRefresh()
     } else {
-      history.push(`${publicURL}/app/devices`);
+      this.props.history.push(`${publicURL}/app/devices`);
     }
   }
 
@@ -74,10 +72,9 @@ export default class DevicesEditOne extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = () => {
-    const { glpi } = this.props
     const { id } = this.state
 
-    glpi.getAnItem({
+    this.props.glpi.getAnItem({
       itemtype: itemtype.PluginFlyvemdmAgent,
       id,
     })
@@ -158,14 +155,6 @@ export default class DevicesEditOne extends PureComponent {
       fleet,
       id,
     } = this.state
-    const {
-      glpi,
-      toast,
-      changeAction,
-      changeSelectionMode,
-      history,
-      handleMessage,
-    } = this.props
 
     this.setState({
       isLoading: true,
@@ -174,7 +163,7 @@ export default class DevicesEditOne extends PureComponent {
       name,
       plugin_flyvemdm_fleets_id: fleet.value,
     }
-    glpi.updateItem({
+    this.props.glpi.updateItem({
       itemtype: itemtype.PluginFlyvemdmAgent,
       id,
       input,
@@ -185,12 +174,12 @@ export default class DevicesEditOne extends PureComponent {
           body: I18n.t('notifications.changes_saved_successfully'),
           type: 'success',
         })
-        changeAction('reload')
-        changeSelectionMode(false);
-        history.push(`${publicURL}/app/devices/${id}`);
+        this.props.changeAction('reload')
+        this.props.changeSelectionMode(false);
+        this.props.history.push(`${publicURL}/app/devices/${id}`);
       })
       .catch((error) => {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -201,7 +190,6 @@ export default class DevicesEditOne extends PureComponent {
   }
 
   render() {
-    const { glpi } = this.props
     const {
       name,
       isLoading,
@@ -219,7 +207,7 @@ export default class DevicesEditOne extends PureComponent {
     const agent = name ? agentScheme({
       state: this.state,
       changeState: this.changeState,
-      glpi,
+      glpi: this.props.glpi,
     }) : null
 
     if (agent && !isLoading) {

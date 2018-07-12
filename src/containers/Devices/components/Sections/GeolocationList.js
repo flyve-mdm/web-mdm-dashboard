@@ -39,20 +39,13 @@ import I18n from '../../../../shared/i18n'
  */
 class GeolocationList extends PureComponent {
   render() {
-    const {
-      locations,
-      goToLocation,
-      showLocation,
-      markers,
-    } = this.props
-
     let renderList
-    if (locations.length > 0) {
-      renderList = locations.map((location, index) => (
+    if (this.props.locations.length > 0) {
+      renderList = this.props.locations.map((location, index) => (
         <div
           key={`location-${index.toString()}`}
           style={{ paddingLeft: 5, cursor: 'pointer' }}
-          onClick={() => goToLocation(location)}
+          onClick={() => this.props.goToLocation(location)}
           role="button"
           tabIndex="0"
         >
@@ -65,8 +58,8 @@ class GeolocationList extends PureComponent {
               type="checkbox"
               className="win-checkbox"
               style={{ width: 'auto', cursor: 'pointer' }}
-              onChange={() => showLocation(location)}
-              checked={(markers.indexOf(location) !== -1)}
+              onChange={() => this.props.showLocation(location)}
+              checked={(this.props.markers.indexOf(location) !== -1)}
             />
             { location.date }
           </label>

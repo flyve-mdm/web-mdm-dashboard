@@ -31,9 +31,6 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  Link,
-} from 'react-router-dom'
 import I18n from '../../shared/i18n'
 import Loading from '../../components/Loading'
 import Input from '../../components/Forms/Input'
@@ -73,22 +70,19 @@ class ForgotPassword extends PureComponent {
    * @param {object} event
    */
   handleRecover = async (event) => {
-    const {
-      glpi,
-    } = this.props
     const { text } = this.state
 
     event.preventDefault()
     this.setState({
       isLoading: true,
     })
-    if (glpi.sessionToken) {
+    if (this.props.glpi.sessionToken) {
       try {
-        await glpi.killSession()
+        await this.props.glpi.killSession()
       } catch (error) {}
     }
     try {
-      await glpi.genericRequest({
+      await this.props.glpi.genericRequest({
         path: 'lostPassword',
         requestParams: {
           method: 'PUT',
@@ -126,7 +120,6 @@ class ForgotPassword extends PureComponent {
       text,
       isRecoverSent,
     } = this.state
-    const { history } = this.props
 
     let element
     if (!isRecoverSent) {
@@ -150,7 +143,7 @@ class ForgotPassword extends PureComponent {
             <button
               className="btn btn--secondary"
               type="button"
-              onClick={() => history.push(`${publicURL}/`)}
+              onClick={() => this.props.history.push(`${publicURL}/`)}
             >
               {I18n.t('commons.back')}
             </button>

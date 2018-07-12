@@ -46,10 +46,9 @@ class FleetsTaskItemList extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const { fleetHaveTask } = this.props
 
     this.state = {
-      fleetHaveTask,
+      fleetHaveTask: this.props.fleetHaveTask,
       alreadyAdded: false,
       active: false,
       input: '',
@@ -61,19 +60,13 @@ class FleetsTaskItemList extends PureComponent {
    * @function componentDidMount
    */
   componentDidMount = () => {
-    const {
-      fleetHaveTask,
-      data,
-      value,
-    } = this.props
-
-    this.updateState(fleetHaveTask)
+    this.updateState(this.props.fleetHaveTask)
     let input
-    if (data['PluginFlyvemdmPolicy.type'] === 'removeapp'
-      || data['PluginFlyvemdmPolicy.type'] === 'removefile') {
+    if (this.props.data['PluginFlyvemdmPolicy.type'] === 'removeapp'
+      || this.props.data['PluginFlyvemdmPolicy.type'] === 'removefile') {
       input = ''
     } else {
-      input = (value || '')
+      input = (this.props.value || '')
     }
     this.setState({
       input,
@@ -143,16 +136,11 @@ class FleetsTaskItemList extends PureComponent {
    */
   handleAddedToggle = () => {
     const { alreadyAdded } = this.state
-    const {
-      addTask,
-      removeTask,
-      data,
-    } = this.props
 
     if (!alreadyAdded) {
-      addTask(data)
+      this.props.addTask(this.props.data)
     } else {
-      removeTask(data)
+      this.props.removeTask(this.props.data)
     }
     this.setState(prevState => ({
       alreadyAdded: !prevState.alreadyAdded,
@@ -164,27 +152,22 @@ class FleetsTaskItemList extends PureComponent {
    * @function handleActivePolicyToggle
    */
   handleActivePolicyToggle = () => {
-    const {
-      data,
-      updateValueTask,
-      value,
-    } = this.props
     const { input } = this.state
-    switch (data['PluginFlyvemdmPolicy.type']) {
+    switch (this.props.data['PluginFlyvemdmPolicy.type']) {
       case 'bool':
-        updateValueTask(data, !value)
+        this.props.updateValueTask(this.props.data, !this.props.value)
         break
       case 'int':
       case 'deployapp':
       case 'deployfile':
         if (`${input}`.trim()) {
-          updateValueTask(data, input)
+          this.props.updateValueTask(this.props.data, input)
         }
         break
       case 'removeapp':
       case 'removefile':
         if (`${input}`.trim()) {
-          updateValueTask(data, input)
+          this.props.updateValueTask(this.props.data, input)
           this.setState({
             input: '',
           })
@@ -201,17 +184,12 @@ class FleetsTaskItemList extends PureComponent {
    * @param {object} e
    */
   handleChangeInput = (e) => {
-    const {
-      data,
-      updateValueTask,
-    } = this.props
-
-    switch (data['PluginFlyvemdmPolicy.type']) {
+    switch (this.props.data['PluginFlyvemdmPolicy.type']) {
       case 'deployapp':
       case 'deployfile':
       case 'dropdown':
         if (e.target.value.trim()) {
-          updateValueTask(data, e.target.value)
+          this.props.updateValueTask(this.props.data, e.target.value)
         }
         break
       default:
@@ -236,12 +214,7 @@ class FleetsTaskItemList extends PureComponent {
    * @param {*} task
    */
   handleRemoveTask = (task) => {
-    const {
-      removeValueTask,
-      data,
-    } = this.props
-
-    removeValueTask(data, task)
+    this.props.removeValueTask(this.props.data, task)
   }
 
   /**
@@ -250,22 +223,20 @@ class FleetsTaskItemList extends PureComponent {
    * @return {array}
    */
   renderMinMaxVersion = () => {
-    const { data } = this.props
-
     const renderComponent = []
 
-    if (data['PluginFlyvemdmPolicy.android_min_version'] !== 0) {
+    if (this.props.data['PluginFlyvemdmPolicy.android_min_version'] !== 0) {
       renderComponent.push(
-        <React.Fragment key={`${data['PluginFlyvemdmPolicy.id']}_android_min`}>
+        <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_android_min`}>
           <span className="badge android">
             Android
             <span className="tooltip">
               {
-                `> ${data['PluginFlyvemdmPolicy.android_min_version']} `
+                `> ${this.props.data['PluginFlyvemdmPolicy.android_min_version']} `
               }
               {
-                data['PluginFlyvemdmPolicy.android_max_version'] !== 0
-                  ? `< ${data['PluginFlyvemdmPolicy.android_max_version']} `
+                this.props.data['PluginFlyvemdmPolicy.android_max_version'] !== 0
+                  ? `< ${this.props.data['PluginFlyvemdmPolicy.android_max_version']} `
                   : ''
               }
             </span>
@@ -274,7 +245,7 @@ class FleetsTaskItemList extends PureComponent {
       )
     } else {
       renderComponent.push(
-        <React.Fragment key={`${data['PluginFlyvemdmPolicy.id']}_android_min`}>
+        <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_android_min`}>
           <span className="badge not_available">
             Android
             <span className="tooltip">
@@ -285,18 +256,18 @@ class FleetsTaskItemList extends PureComponent {
       )
     }
 
-    if (data['PluginFlyvemdmPolicy.apple_min_version'] !== 0) {
+    if (this.props.data['PluginFlyvemdmPolicy.apple_min_version'] !== 0) {
       renderComponent.push(
-        <React.Fragment key={`${data['PluginFlyvemdmPolicy.id']}_apple_min`}>
+        <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_apple_min`}>
           <span className="badge apple">
             iOS
             <span className="tooltip">
               {
-                `> ${data['PluginFlyvemdmPolicy.apple_min_version']} `
+                `> ${this.props.data['PluginFlyvemdmPolicy.apple_min_version']} `
               }
               {
-                data['PluginFlyvemdmPolicy.apple_max_version'] !== 0
-                  ? `< ${data['PluginFlyvemdmPolicy.apple_max_version']} `
+                this.props.data['PluginFlyvemdmPolicy.apple_max_version'] !== 0
+                  ? `< ${this.props.data['PluginFlyvemdmPolicy.apple_max_version']} `
                   : ''
               }
             </span>
@@ -305,7 +276,7 @@ class FleetsTaskItemList extends PureComponent {
       )
     } else {
       renderComponent.push(
-        <React.Fragment key={`${data['PluginFlyvemdmPolicy.id']}_apple_min`}>
+        <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_apple_min`}>
           <span className="badge not_available">
             iOS
             <span className="tooltip">
@@ -324,16 +295,11 @@ class FleetsTaskItemList extends PureComponent {
    */
   render() {
     const {
-      data,
-      typeData,
-      value,
-    } = this.props
-    const {
       alreadyAdded,
       input,
     } = this.state
 
-    if (data === undefined) {
+    if (this.props.data === undefined) {
       return (
         <div className="files-list fleet-list">
           <div className="files-list__content">
@@ -364,7 +330,7 @@ class FleetsTaskItemList extends PureComponent {
         </div>
       )
     }
-    switch (data['PluginFlyvemdmPolicy.type']) {
+    switch (this.props.data['PluginFlyvemdmPolicy.type']) {
       case 'bool':
         return (
           <div className="files-list fleet-list">
@@ -372,7 +338,7 @@ class FleetsTaskItemList extends PureComponent {
               <div className="files-list__item">
                 <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
                   <div className="files-list__content-text-primary">
-                    {data['PluginFlyvemdmPolicy.name']}
+                    {this.props.data['PluginFlyvemdmPolicy.name']}
                   </div>
                   <div
                     className={`files-list__item-list-field files-list__checkbox ${alreadyAdded && 'files-list__item-list-field--active'}`}
@@ -381,7 +347,7 @@ class FleetsTaskItemList extends PureComponent {
                     tabIndex="0"
                   >
                     {
-                      value === 1
+                      this.props.value === 1
                         ? <span className="selectIcon" />
                         : <span className="unselectIcon" />
                     }
@@ -417,14 +383,14 @@ class FleetsTaskItemList extends PureComponent {
               <div className="files-list__item">
                 <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
                   <div className="files-list__content-text-primary">
-                    {data['PluginFlyvemdmPolicy.name']}
+                    {this.props.data['PluginFlyvemdmPolicy.name']}
                   </div>
                   <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
                     <input
                       type="number"
                       className="win-textbox"
-                      placeholder={data['PluginFlyvemdmPolicy.name']}
-                      name={data['PluginFlyvemdmPolicy.id']}
+                      placeholder={this.props.data['PluginFlyvemdmPolicy.name']}
+                      name={this.props.data['PluginFlyvemdmPolicy.id']}
                       value={input}
                       onChange={this.handleChangeInput}
                       onBlur={this.handleBlurInput}
@@ -461,16 +427,16 @@ class FleetsTaskItemList extends PureComponent {
               <div className="files-list__item">
                 <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
                   <div className="files-list__content-text-primary">
-                    {data['PluginFlyvemdmPolicy.name']}
+                    {this.props.data['PluginFlyvemdmPolicy.name']}
                   </div>
                   <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
                     <select
-                      name={data['PluginFlyvemdmPolicy.id']}
-                      value={value}
+                      name={this.props.data['PluginFlyvemdmPolicy.id']}
+                      value={this.props.value}
                       onChange={this.handleChangeInput}
                     >
                       {
-                        typeData.map(type => (
+                        this.props.typeData.map(type => (
                           <option
                             key={type[0]}
                             value={type[0]}
@@ -512,11 +478,11 @@ class FleetsTaskItemList extends PureComponent {
               <div className="files-list__item">
                 <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
                   <div className="files-list__content-text-primary">
-                    {data['PluginFlyvemdmPolicy.name']}
+                    {this.props.data['PluginFlyvemdmPolicy.name']}
                   </div>
                   <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
                     <select
-                      name={data['PluginFlyvemdmPolicy.id']}
+                      name={this.props.data['PluginFlyvemdmPolicy.id']}
                       value={0}
                       onChange={this.handleChangeInput}
                     >
@@ -524,7 +490,7 @@ class FleetsTaskItemList extends PureComponent {
                         {I18n.t('commons.select_an_application')}
                       </option>
                       {
-                        typeData.map((type, index) => (
+                        this.props.typeData.map((type, index) => (
                           <option
                             key={`${type.id}_${index.toString()}`}
                             value={type.id}
@@ -535,8 +501,8 @@ class FleetsTaskItemList extends PureComponent {
                       }
                     </select>
                     <TasksDeployAppList
-                      data={value}
-                      typeData={typeData}
+                      data={this.props.value}
+                      typeData={this.props.typeData}
                       removeTask={this.handleRemoveTask}
                     />
                   </div>
@@ -571,14 +537,14 @@ class FleetsTaskItemList extends PureComponent {
               <div className="files-list__item">
                 <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
                   <div className="files-list__content-text-primary">
-                    {data['PluginFlyvemdmPolicy.name']}
+                    {this.props.data['PluginFlyvemdmPolicy.name']}
                   </div>
                   <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
                     <input
                       type="text"
                       className="win-textbox"
                       placeholder={I18n.t('commons.package_name')}
-                      name={data['PluginFlyvemdmPolicy.id']}
+                      name={this.props.data['PluginFlyvemdmPolicy.id']}
                       value={input}
                       onChange={this.handleChangeInput}
                     />
@@ -590,7 +556,7 @@ class FleetsTaskItemList extends PureComponent {
                       tabIndex="0"
                     />
                     <TasksRemoveAppList
-                      data={value}
+                      data={this.props.value}
                       removeTask={this.handleRemoveTask}
                     />
                   </div>
@@ -625,11 +591,11 @@ class FleetsTaskItemList extends PureComponent {
               <div className="files-list__item">
                 <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
                   <div className="files-list__content-text-primary">
-                    {data['PluginFlyvemdmPolicy.name']}
+                    {this.props.data['PluginFlyvemdmPolicy.name']}
                   </div>
                   <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
                     <select
-                      name={data['PluginFlyvemdmPolicy.id']}
+                      name={this.props.data['PluginFlyvemdmPolicy.id']}
                       value={0}
                       onChange={this.handleChangeInput}
                     >
@@ -637,19 +603,19 @@ class FleetsTaskItemList extends PureComponent {
                         {I18n.t('commons.select_a_file')}
                       </option>
                       {
-                          typeData.map((type, index) => (
-                            <option
-                              key={`${type.id}_${index.toString()}`}
-                              value={type.id}
-                            >
-                              {type.name}
-                            </option>
-                          ))
+                        this.props.typeData.map((type, index) => (
+                          <option
+                            key={`${type.id}_${index.toString()}`}
+                            value={type.id}
+                          >
+                            {type.name}
+                          </option>
+                        ))
                         }
                     </select>
                     <TasksDeployFileList
-                      data={value}
-                      typeData={typeData}
+                      data={this.props.value}
+                      typeData={this.props.typeData}
                       removeTask={this.handleRemoveTask}
                     />
                   </div>
@@ -684,14 +650,14 @@ class FleetsTaskItemList extends PureComponent {
               <div className="files-list__item">
                 <div className={`files-list__item-content-primary ${alreadyAdded || 'files-list__item--deactive'}`}>
                   <div className="files-list__content-text-primary">
-                    {data['PluginFlyvemdmPolicy.name']}
+                    {this.props.data['PluginFlyvemdmPolicy.name']}
                   </div>
                   <div className={`files-list__item-list-field ${alreadyAdded && 'files-list__item-list-field--active'}`}>
                     <input
                       type="text"
                       className="win-textbox"
                       placeholder={I18n.t('files.input_name')}
-                      name={data['PluginFlyvemdmPolicy.id']}
+                      name={this.props.data['PluginFlyvemdmPolicy.id']}
                       value={input}
                       onChange={this.handleChangeInput}
                     />
@@ -703,7 +669,7 @@ class FleetsTaskItemList extends PureComponent {
                       tabIndex="0"
                     />
                     <TasksRemoveFileList
-                      data={value}
+                      data={this.props.value}
                       removeTask={this.handleRemoveTask}
                     />
                   </div>

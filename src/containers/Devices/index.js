@@ -33,7 +33,6 @@ import React, {
 import PropTypes from 'prop-types'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import DevicesList from './components/DevicesList'
 import getMode from '../../shared/getMode'
@@ -111,12 +110,6 @@ class Devices extends PureComponent {
       selectedItems,
       action,
     } = this.state
-    const {
-      history,
-      glpi,
-      toast,
-      handleMessage,
-    } = this.props
 
     return ({
       icon,
@@ -126,10 +119,10 @@ class Devices extends PureComponent {
       changeSelectionMode: this.changeSelectionMode,
       changeSelectedItems: this.changeSelectedItems,
       changeAction: this.changeAction,
-      toast,
-      history,
-      glpi,
-      handleMessage,
+      toast: this.props.toast,
+      history: this.props.history,
+      glpi: this.props.glpi,
+      handleMessage: this.props.handleMessage,
     })
   }
 
@@ -169,17 +162,16 @@ class Devices extends PureComponent {
       selectedItems,
       selectionMode,
     } = this.state
-    const { history } = this.props
 
     const styles = {
       width: itemListPaneWidth,
     }
 
     if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname
+      if ((selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/devices`)
-        || history.location.pathname === `${publicURL}/app/devices`
-        || (history.location.pathname === `${publicURL}/app/devices`
+        || this.props.history.location.pathname === `${publicURL}/app/devices`
+        || (this.props.history.location.pathname === `${publicURL}/app/devices`
           && selectionMode)) {
         styles.display = 'inline-block'
       } else {
@@ -204,7 +196,6 @@ class Devices extends PureComponent {
       selectedItems,
       selectionMode,
     } = this.state
-    const { history } = this.props
 
     const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
     const styles = {
@@ -213,10 +204,10 @@ class Devices extends PureComponent {
     }
 
     if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname
+      if ((selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/devices`)
-        || history.location.pathname === `${publicURL}/app/devices`
-        || (history.location.pathname === `${publicURL}/app/devices`
+        || this.props.history.location.pathname === `${publicURL}/app/devices`
+        || (this.props.history.location.pathname === `${publicURL}/app/devices`
           && selectionMode)) {
         styles.display = 'none'
       } else {
@@ -230,8 +221,6 @@ class Devices extends PureComponent {
   }
 
   render() {
-    const { match } = this.props
-
     const renderComponents = (
       <React.Fragment>
         <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
@@ -244,7 +233,7 @@ class Devices extends PureComponent {
           <GenerateRoutes
             key="content"
             routes={routes}
-            rootPath={match.url}
+            rootPath={this.props.match.url}
             {...this.propsData()}
           />
         </div>

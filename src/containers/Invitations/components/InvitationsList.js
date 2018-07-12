@@ -110,12 +110,6 @@ export default class InvitationsList extends PureComponent {
       pagination,
       isLoadingMore,
     } = this.state
-    const {
-      action,
-      changeAction,
-      selectedItems,
-      selectionMode,
-    } = this.props
 
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
@@ -129,12 +123,12 @@ export default class InvitationsList extends PureComponent {
       this.toolBar.winControl.forceLayout()
     }
 
-    if (action === 'reload') {
+    if (this.props.action === 'reload') {
       this.handleRefresh()
-      changeAction(null)
+      this.props.changeAction(null)
     }
 
-    if (prevProps.selectedItems.length > 0 && selectedItems.length === 0 && !selectionMode) {
+    if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
       if (this.listView) {
         this.listView.winControl.selection.clear()
       }
@@ -146,9 +140,7 @@ export default class InvitationsList extends PureComponent {
    * @constant componentWillUnmount
    */
   componentWillUnmount() {
-    const { changeSelectionMode } = this.props
-
-    changeSelectionMode(false)
+    this.props.changeSelectionMode(false)
   }
 
   /**
@@ -156,16 +148,9 @@ export default class InvitationsList extends PureComponent {
    * @function handleToggleSelectionMode
    */
   handleToggleSelectionMode = () => {
-    const {
-      history,
-      changeSelectionMode,
-      changeSelectedItems,
-      selectionMode,
-    } = this.props
-
-    history.push(`${publicURL}/app/invitations`)
-    changeSelectionMode(!selectionMode)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/invitations`)
+    this.props.changeSelectionMode(!this.props.selectionMode)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -178,11 +163,6 @@ export default class InvitationsList extends PureComponent {
    */
   handleSelectionChanged = (eventObject) => {
     const { itemList } = this.state
-    const {
-      changeSelectedItems,
-      selectionMode,
-      history,
-    } = this.props
 
     const listView = eventObject.currentTarget.winControl
     const index = listView.selection.getIndices()
@@ -191,10 +171,10 @@ export default class InvitationsList extends PureComponent {
     for (const item of index) {
       itemSelected.push(itemList.getItem(item).data)
     }
-    changeSelectedItems(itemSelected)
+    this.props.changeSelectedItems(itemSelected)
 
-    if (index.length === 1 && !selectionMode) {
-      history.push(`${publicURL}/app/invitations/${itemSelected[0]['PluginFlyvemdmInvitation.id']}`)
+    if (index.length === 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/invitations/${itemSelected[0]['PluginFlyvemdmInvitation.id']}`)
     }
   }
 
@@ -205,18 +185,12 @@ export default class InvitationsList extends PureComponent {
    */
   handleRefresh = async () => {
     const {
-      glpi,
-      handleMessage,
-      toast,
-      history,
-    } = this.props
-    const {
       order,
       pagination,
     } = this.state
 
     try {
-      history.push(`${publicURL}/app/invitations`)
+      this.props.history.push(`${publicURL}/app/invitations`)
       this.setState({
         isLoading: true,
         totalcount: 0,
@@ -226,7 +200,7 @@ export default class InvitationsList extends PureComponent {
           count: 15,
         },
       })
-      const invitations = await glpi.searchItems({
+      const invitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
         options: {
           uid_cols: true,
@@ -260,27 +234,17 @@ export default class InvitationsList extends PureComponent {
    * @async
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      toast,
-      changeSelectionMode,
-      changeSelectedItems,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     try {
       const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
-        const itemListToDelete = selectedItems.map(item => ({
+        const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmInvitation.id'],
         }))
 
         this.setState({
           isLoading: true,
         }, async () => {
-          await glpi.deleteItem({
+          await this.props.glpi.deleteItem({
             itemtype: itemtype.PluginFlyvemdmInvitation,
             input: itemListToDelete,
             queryString: {
@@ -293,14 +257,14 @@ export default class InvitationsList extends PureComponent {
             body: I18n.t('notifications.elements_successfully_removed'),
             type: 'success',
           })
-          changeSelectionMode(false)
-          changeSelectedItems([])
-          changeAction('reload')
+          this.props.changeSelectionMode(false)
+          this.props.changeSelectedItems([])
+          this.props.changeAction('reload')
         })
       } else {
         // Exit selection mode
-        changeSelectionMode(false)
-        changeSelectedItems([])
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
 
         if (this.listView) {
           this.listView.winControl.selection.clear()
@@ -311,8 +275,8 @@ export default class InvitationsList extends PureComponent {
         type: 'alert',
         message: error,
       }))
-      changeSelectionMode(false)
-      changeSelectedItems([])
+      this.props.changeSelectionMode(false)
+      this.props.changeSelectedItems([])
 
       this.setState(() => ({
         isLoading: false,
@@ -327,10 +291,6 @@ export default class InvitationsList extends PureComponent {
    */
   handleSort = async () => {
     const { order } = this.state
-    const {
-      glpi,
-      history,
-    } = this.props
 
     try {
       this.setState({
@@ -343,7 +303,7 @@ export default class InvitationsList extends PureComponent {
       })
       const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
 
-      const invitations = await glpi.searchItems({
+      const invitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
         options: {
           uid_cols: true,
@@ -358,7 +318,7 @@ export default class InvitationsList extends PureComponent {
         totalcount: invitations.totalcount,
         itemList: BuildItemList(invitations, 2),
       })
-      history.push(`${publicURL}/app/invitations`)
+      this.props.history.push(`${publicURL}/app/invitations`)
     } catch (error) {
       this.setState({
         isLoading: false,
@@ -373,22 +333,15 @@ export default class InvitationsList extends PureComponent {
    * @async
    */
   handleResendEmail = async () => {
-    const {
-      selectedItems,
-      glpi,
-      toast,
-      handleMessage,
-    } = this.props
-
     try {
       this.setState({
         isLoading: true,
       })
-      const itemListToSend = selectedItems.map(item => ({
+      const itemListToSend = this.props.selectedItems.map(item => ({
         id: item['PluginFlyvemdmInvitation.id'],
         _notify: item['PluginFlyvemdmInvitation.User.name'],
       }))
-      await glpi.updateItem({
+      await this.props.glpi.updateItem({
         itemtype: itemtype.PluginFlyvemdmInvitation,
         input: itemListToSend,
       })
@@ -402,7 +355,7 @@ export default class InvitationsList extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -425,9 +378,6 @@ export default class InvitationsList extends PureComponent {
       totalcount,
       order,
     } = this.state
-    const {
-      glpi,
-    } = this.props
 
     try {
       this.setState({
@@ -443,7 +393,7 @@ export default class InvitationsList extends PureComponent {
             if (range[key] >= totalcount) { range[key] = totalcount - 1 }
           }
         }
-        const invitations = await glpi.searchItems({
+        const invitations = await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmInvitation,
           options: {
             uid_cols: true,
@@ -480,15 +430,9 @@ export default class InvitationsList extends PureComponent {
    * @function handleAdd
    */
   handleAdd = () => {
-    const {
-      history,
-      changeSelectionMode,
-      changeSelectedItems,
-    } = this.props
-
-    history.push(`${publicURL}/app/invitations/add`)
-    changeSelectionMode(false)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/invitations/add`)
+    this.props.changeSelectionMode(false)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -499,11 +443,6 @@ export default class InvitationsList extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      selectedItems,
-      selectionMode,
-      icon,
-    } = this.props
     const {
       isLoadingMore,
       isLoading,
@@ -517,7 +456,7 @@ export default class InvitationsList extends PureComponent {
         icon="delete"
         label={I18n.t('commons.delete')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleDelete}
       />
     )
@@ -528,7 +467,7 @@ export default class InvitationsList extends PureComponent {
         icon="mail"
         label={I18n.t('commons.resend_email')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleResendEmail}
       />
     )
@@ -568,13 +507,13 @@ export default class InvitationsList extends PureComponent {
           itemTemplate={this.ItemListRenderer}
           groupHeaderTemplate={this.groupHeaderRenderer}
           footerComponent={footerComponent}
-          selectionMode={selectionMode ? 'multi' : 'single'}
-          tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
+          selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+          tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
           onSelectionChanged={this.handleSelectionChanged}
         />
       )
     } else {
-      listComponent = <EmptyMessage message={I18n.t('invitations.not_found')} icon={icon} showIcon />
+      listComponent = <EmptyMessage message={I18n.t('invitations.not_found')} icon={this.props.icon} showIcon />
     }
 
     return (
@@ -603,15 +542,15 @@ export default class InvitationsList extends PureComponent {
             onClick={this.handleAdd}
           />
 
-          {selectionMode ? resendCommand : null}
-          {selectionMode ? deleteCommand : null}
+          {this.props.selectionMode ? resendCommand : null}
+          {this.props.selectionMode ? deleteCommand : null}
 
           <ReactWinJS.ToolBar.Toggle
             key="select"
             icon="bullets"
             label={I18n.t('commons.select')}
             priority={0}
-            selected={selectionMode}
+            selected={this.props.selectionMode}
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
@@ -619,7 +558,7 @@ export default class InvitationsList extends PureComponent {
         { listComponent }
         <Confirmation
           title={I18n.t('invitations.delete')}
-          message={`${selectedItems.length} ${I18n.t('commons.invitations')}`}
+          message={`${this.props.selectedItems.length} ${I18n.t('commons.invitations')}`}
           reference={(el) => { this.contentDialog = el }}
         />
       </React.Fragment>
@@ -633,12 +572,15 @@ InvitationsList.defaultProps = {
 }
 
 InvitationsList.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   selectionMode: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   selectedItems: PropTypes.array.isRequired,
   changeSelectedItems: PropTypes.func.isRequired,

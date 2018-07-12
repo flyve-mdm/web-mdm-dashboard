@@ -96,12 +96,6 @@ export default class DevicesList extends PureComponent {
       pagination,
       isLoadingMore,
     } = this.state
-    const {
-      action,
-      changeAction,
-      selectedItems,
-      selectionMode,
-    } = this.props
 
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
@@ -111,12 +105,12 @@ export default class DevicesList extends PureComponent {
       this.toolBar.winControl.forceLayout()
     }
 
-    if (action === 'reload') {
+    if (this.props.action === 'reload') {
       this.handleRefresh()
-      changeAction(null)
+      this.props.changeAction(null)
     }
 
-    if (prevProps.selectedItems.length > 0 && selectedItems.length === 0 && !selectionMode) {
+    if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
       if (this.listView) {
         this.listView.winControl.selection.clear()
       }
@@ -124,8 +118,7 @@ export default class DevicesList extends PureComponent {
   }
 
   componentWillUnmount() {
-    const { changeSelectionMode } = this.props
-    changeSelectionMode(false)
+    this.props.changeSelectionMode(false)
   }
 
   /**
@@ -140,7 +133,6 @@ export default class DevicesList extends PureComponent {
       order,
       itemList,
     } = this.state
-    const { glpi } = this.props
 
     try {
       this.setState({
@@ -157,7 +149,7 @@ export default class DevicesList extends PureComponent {
             if (range[key] >= totalcount) { range[key] = totalcount - 1 }
           }
         }
-        const devices = await glpi.searchItems({
+        const devices = await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmAgent,
           options: {
             uid_cols: true,
@@ -196,7 +188,6 @@ export default class DevicesList extends PureComponent {
    */
   handleRefresh = async () => {
     try {
-      const { glpi } = this.props
       const {
         order,
         pagination,
@@ -211,7 +202,7 @@ export default class DevicesList extends PureComponent {
           count: 15,
         },
       })
-      const devices = await glpi.searchItems({
+      const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
         options: {
           uid_cols: true,
@@ -240,15 +231,9 @@ export default class DevicesList extends PureComponent {
    * @function handleAdd
    */
   handleAdd = () => {
-    const {
-      history,
-      changeSelectionMode,
-      changeSelectedItems,
-    } = this.props
-
-    history.push(`${publicURL}/app/devices/add`)
-    changeSelectionMode(false)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/devices/add`)
+    this.props.changeSelectionMode(false)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -259,16 +244,9 @@ export default class DevicesList extends PureComponent {
    * @function handleToggleSelectionMode
    */
   handleToggleSelectionMode = () => {
-    const {
-      history,
-      changeSelectionMode,
-      selectionMode,
-      changeSelectedItems,
-    } = this.props
-
-    history.push(`${publicURL}/app/devices`)
-    changeSelectionMode(!selectionMode)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/devices`)
+    this.props.changeSelectionMode(!this.props.selectionMode)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -280,11 +258,6 @@ export default class DevicesList extends PureComponent {
    * @param {object} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    const {
-      changeSelectedItems,
-      selectionMode,
-      history,
-    } = this.props
     const { itemList } = this.state
 
     const listView = eventObject.currentTarget.winControl
@@ -294,12 +267,12 @@ export default class DevicesList extends PureComponent {
     for (const item of index) {
       itemSelected.push(itemList.getItem(item).data)
     }
-    changeSelectedItems(itemSelected)
-    if (index.length === 1 && !selectionMode) {
-      history.push(`${publicURL}/app/devices/${itemSelected[0]['PluginFlyvemdmAgent.id']}`)
+    this.props.changeSelectedItems(itemSelected)
+    if (index.length === 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/devices/${itemSelected[0]['PluginFlyvemdmAgent.id']}`)
     }
-    if (index.length > 1 && !selectionMode) {
-      history.push(`${publicURL}/app/devices/edit/`)
+    if (index.length > 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/devices/edit/`)
     }
   }
 
@@ -308,19 +281,10 @@ export default class DevicesList extends PureComponent {
    * @function handleDelete
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      changeSelectionMode,
-      changeSelectedItems,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     try {
       const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
-        const itemListToDelete = selectedItems.map(item => ({
+        const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmAgent.id'],
         }))
 
@@ -328,7 +292,7 @@ export default class DevicesList extends PureComponent {
           isLoading: true,
         })
 
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmAgent,
           input: itemListToDelete,
           queryString: {
@@ -341,13 +305,13 @@ export default class DevicesList extends PureComponent {
           body: I18n.t('notifications.device_successfully_removed'),
           type: 'success',
         })
-        changeSelectionMode(false)
-        changeSelectedItems([])
-        changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
+        this.props.changeAction('reload')
       } else {
         // Exit selection mode
-        changeSelectionMode(false)
-        changeSelectedItems([])
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
 
         if (this.listView) {
           this.listView.winControl.selection.clear()
@@ -358,8 +322,8 @@ export default class DevicesList extends PureComponent {
         type: 'alert',
         message: error,
       }))
-      changeSelectionMode(false)
-      changeSelectedItems([])
+      this.props.changeSelectionMode(false)
+      this.props.changeSelectedItems([])
 
       this.setState(() => ({
         isLoading: false,
@@ -376,7 +340,6 @@ export default class DevicesList extends PureComponent {
   handleSort = async () => {
     try {
       const { order } = this.state
-      const { glpi } = this.props
 
       this.setState({
         isLoading: true,
@@ -388,7 +351,7 @@ export default class DevicesList extends PureComponent {
       })
       const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
 
-      const devices = await glpi.searchItems({
+      const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
         options: {
           uid_cols: true,
@@ -416,17 +379,10 @@ export default class DevicesList extends PureComponent {
    * @function handleEdit
    */
   handleEdit() {
-    const { history } = this.props
-
-    history.push(`${publicURL}/app/devices/edit`)
+    this.props.history.push(`${publicURL}/app/devices/edit`)
   }
 
   render() {
-    const {
-      selectedItems,
-      selectionMode,
-      icon,
-    } = this.props
     const {
       isLoadingMore,
       itemList,
@@ -440,7 +396,7 @@ export default class DevicesList extends PureComponent {
         icon="delete"
         label={I18n.t('commons.delete')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleDelete}
       />
     )
@@ -451,7 +407,7 @@ export default class DevicesList extends PureComponent {
         icon="edit"
         label={I18n.t('commons.edit')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={e => this.handleEdit(e)}
       />
     )
@@ -491,13 +447,13 @@ export default class DevicesList extends PureComponent {
           itemTemplate={this.ItemListRenderer}
           groupHeaderTemplate={this.groupHeaderRenderer}
           footerComponent={footerComponent}
-          selectionMode={selectionMode ? 'multi' : 'single'}
-          tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
+          selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+          tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
           onSelectionChanged={this.handleSelectionChanged}
         />
       )
     } else {
-      listComponent = <EmptyMessage message={I18n.t('devices.not_found')} icon={icon} showIcon />
+      listComponent = <EmptyMessage message={I18n.t('devices.not_found')} icon={this.props.icon} showIcon />
     }
 
     return (
@@ -527,22 +483,22 @@ export default class DevicesList extends PureComponent {
             onClick={this.handleAdd}
           />
 
-          {selectionMode ? editCommand : null}
-          {selectionMode ? deleteCommand : null}
+          {this.props.selectionMode ? editCommand : null}
+          {this.props.selectionMode ? deleteCommand : null}
 
           <ReactWinJS.ToolBar.Toggle
             key="select"
             icon="bullets"
             label={I18n.t('commons.select')}
             priority={0}
-            selected={selectionMode}
+            selected={this.props.selectionMode}
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
         { listComponent }
         <Confirmation
           title={I18n.t('devices.delete')}
-          message={`${selectedItems.length} ${I18n.t('devices.title')}`}
+          message={`${this.props.selectedItems.length} ${I18n.t('devices.title')}`}
           reference={(el) => { this.contentDialog = el }}
         />
       </React.Fragment>

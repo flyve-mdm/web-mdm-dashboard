@@ -50,10 +50,8 @@ export default class ApplicationsContent extends PureComponent {
   constructor(props) {
     super(props)
 
-    const { history } = this.props
-
     this.state = {
-      id: getID(history.location.pathname),
+      id: getID(this.props.history.location.pathname),
       data: undefined,
     }
   }
@@ -104,17 +102,9 @@ export default class ApplicationsContent extends PureComponent {
    * @function handleDelete
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      changeAction,
-      changeSelectionMode,
-      handleMessage,
-    } = this.props
-
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
-      const itemListToDelete = selectedItems.map(item => ({
+      const itemListToDelete = this.props.selectedItems.map(item => ({
         id: item['PluginFlyvemdmPackage.id'],
       }))
 
@@ -122,7 +112,7 @@ export default class ApplicationsContent extends PureComponent {
         isLoading: true,
       })
       try {
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
           input: itemListToDelete,
           queryString: {
@@ -134,10 +124,10 @@ export default class ApplicationsContent extends PureComponent {
           body: I18n.t('notifications.elements_successfully_removed'),
           type: 'success',
         })
-        changeAction('reload')
-        changeSelectionMode(false)
+        this.props.changeAction('reload')
+        this.props.changeSelectionMode(false)
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -154,26 +144,21 @@ export default class ApplicationsContent extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = async () => {
-    const {
-      glpi,
-      handleMessage,
-      history,
-    } = this.props
     const { id } = this.state
 
     try {
       this.setState({
-        data: await glpi.getAnItem({
+        data: await this.props.glpi.getAnItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
           id,
         }),
       })
     } catch (error) {
-      this.props.toast.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
-      history.push(`${publicURL}/app/applications`)
+      this.props.history.push(`${publicURL}/app/applications`)
     }
   }
 
@@ -183,10 +168,6 @@ export default class ApplicationsContent extends PureComponent {
       data,
       id,
     } = this.state
-    const {
-      size,
-      history,
-    } = this.props
 
     if (isLoading || data === undefined) {
       return (
@@ -197,7 +178,7 @@ export default class ApplicationsContent extends PureComponent {
     if (data.icon) {
       image = (
         <IconItemList
-          size={size}
+          size={this.props.size}
           image={`data:image/png;base64, ${data.icon}`}
           type="base64"
           backgroundColor="transparent"
@@ -244,7 +225,7 @@ export default class ApplicationsContent extends PureComponent {
                 <span
                   className="editIcon"
                   style={{ marginRight: '20px', fontSize: '20px' }}
-                  onClick={() => history.push(`${publicURL}/app/applications/${id}/edit`)}
+                  onClick={() => this.props.history.push(`${publicURL}/app/applications/${id}/edit`)}
                   role="button"
                   tabIndex="0"
                 />
@@ -285,4 +266,5 @@ ApplicationsContent.propTypes = {
   glpi: PropTypes.object.isRequired,
   size: PropTypes.number,
   history: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }

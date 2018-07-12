@@ -64,7 +64,6 @@ class InvitationsPendingPage extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const { history } = this.props
 
     this.state = {
       layout: {
@@ -72,7 +71,7 @@ class InvitationsPendingPage extends PureComponent {
       },
       isLoading: true,
       itemList: new WinJS.Binding.List([]),
-      id: getID(history.location.pathname),
+      id: getID(this.props.history.location.pathname),
     }
   }
 
@@ -125,11 +124,10 @@ class InvitationsPendingPage extends PureComponent {
    * @async
    */
   handleRefresh = async () => {
-    const { glpi } = this.props
     const { id } = this.state
 
     try {
-      const logs = await glpi.searchItems({
+      const logs = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitationlog,
         options: {
           uid_cols: true,

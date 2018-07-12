@@ -51,10 +51,8 @@ export default class ApplicationsEditItemList extends PureComponent {
    * @function componentDidMount
    */
   componentDidMount() {
-    const { selectedItem } = this.props
-
     this.setState({
-      input: selectedItem['PluginFlyvemdmPackage.alias'],
+      input: this.props.selectedItem['PluginFlyvemdmPackage.alias'],
     })
   }
 
@@ -75,13 +73,8 @@ export default class ApplicationsEditItemList extends PureComponent {
    * @param {object} e
    */
   blurInput = (e) => {
-    const {
-      updateItemList,
-      selectedItem,
-    } = this.props
-
     if (e.target.value.trim() !== '') {
-      updateItemList(selectedItem['PluginFlyvemdmPackage.id'], e.target.value)
+      this.props.updateItemList(this.props.selectedItem['PluginFlyvemdmPackage.id'], e.target.value)
     }
   }
 

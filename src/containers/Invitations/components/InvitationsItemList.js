@@ -44,15 +44,13 @@ export default class InvitationsItemList extends PureComponent {
    * @function render
    */
   render() {
-    const { itemList } = this.props
-
     return (
       <div style={{ display: 'inline-block' }}>
         <div className="list-pane__name">
-          {(itemList['PluginFlyvemdmInvitation.User.name'] || I18n.t('commons.name_not_available'))}
+          {(this.props.itemList['PluginFlyvemdmInvitation.User.name'] || I18n.t('commons.name_not_available'))}
         </div>
         <div className="list-pane__detail">
-          {itemList['PluginFlyvemdmInvitation.status']}
+          {this.props.itemList['PluginFlyvemdmInvitation.status']}
         </div>
       </div>
     )

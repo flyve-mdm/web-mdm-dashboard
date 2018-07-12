@@ -37,12 +37,6 @@ import withHandleMessages from '../../hoc/withHandleMessages'
 import publicURL from '../../shared/publicURL'
 import ErrorValidation from '../../components/ErrorValidation'
 
-function mapStateToProps(state) {
-  return {
-    isLoading: state.ui.loading,
-  }
-}
-
 /**
  * Component with the reset password section
  * @class ResetPassword
@@ -52,17 +46,13 @@ class ResetPassword extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const {
-      location,
-      history,
-    } = this.props
 
-    const { search } = location
+    const { search } = this.props.location
     const params = new URLSearchParams(search)
     const token = params.get('token')
 
     if (!token) {
-      history.push(`${publicURL}/`)
+      this.props.history.push(`${publicURL}/`)
     }
 
     this.state = {
@@ -82,7 +72,6 @@ class ResetPassword extends PureComponent {
    */
   createRenderElament = () => {
     const { isResetSent } = this.state
-    const { history } = this.props
 
     let element
     if (!isResetSent) {
@@ -113,7 +102,7 @@ class ResetPassword extends PureComponent {
           <button
             className="win-button"
             type="button"
-            onClick={() => history.push(`${publicURL}/`)}
+            onClick={() => this.props.history.push(`${publicURL}/`)}
           >
             {I18n.t('forgot_password.go_home')}
           </button>
@@ -133,7 +122,6 @@ class ResetPassword extends PureComponent {
       token,
       password,
     } = this.state
-    const { auth } = this.props
 
     const user = this.buildDataArray()
     let isCorrect = true
@@ -151,7 +139,7 @@ class ResetPassword extends PureComponent {
       this.setState({
         isResetSent: true,
       })
-      auth.fetchResetPassword({
+      this.props.auth.fetchResetPassword({
         email,
         token,
         newPassword: password,
@@ -266,8 +254,7 @@ class ResetPassword extends PureComponent {
    * @function render
    */
   render() {
-    const { auth } = this.props
-    if (auth.isLoading) {
+    if (this.props.auth.isLoading) {
       return (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.sending')}...`} />

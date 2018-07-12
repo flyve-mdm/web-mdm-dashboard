@@ -48,10 +48,8 @@ export default class FilesEditItemList extends PureComponent {
   }
 
   componentDidMount() {
-    const { selectedItem } = this.props
-
     this.setState({
-      input: selectedItem['PluginFlyvemdmFile.name'],
+      input: this.props.selectedItem['PluginFlyvemdmFile.name'],
     })
   }
 
@@ -72,13 +70,8 @@ export default class FilesEditItemList extends PureComponent {
    * @param {object} e
    */
   blurInput = (e) => {
-    const {
-      updateItemList,
-      selectedItem,
-    } = this.props
-
     if (e.target.value.trim() !== '') {
-      updateItemList(selectedItem['PluginFlyvemdmFile.id'], e.target.value)
+      this.props.updateItemList(this.props.selectedItem['PluginFlyvemdmFile.id'], e.target.value)
     }
   }
 

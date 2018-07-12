@@ -72,11 +72,7 @@ export default class FilesAdd extends PureComponent {
    * @param {object} error
    */
   onFilesError = (error) => {
-    const {
-      handleMessage,
-    } = this.props
-
-    this.props.toast.setNotification(handleMessage({
+    this.props.toast.setNotification(this.props.handleMessage({
       type: 'alert',
       message: error.message,
     }))
@@ -105,11 +101,6 @@ export default class FilesAdd extends PureComponent {
    */
   filesUpload = () => {
     const { files } = this.state
-    const {
-      glpi,
-      changeAction,
-      handleMessage,
-    } = this.props
 
     const formData = new FormData()
 
@@ -121,7 +112,7 @@ export default class FilesAdd extends PureComponent {
         this.setState({
           isLoading: true,
         })
-        await glpi.uploadFile({
+        await this.props.glpi.uploadFile({
           itemtype: itemtype.PluginFlyvemdmFile,
           input: formData,
         })
@@ -133,9 +124,9 @@ export default class FilesAdd extends PureComponent {
           body: I18n.t('notifications.saved_file'),
           type: 'success',
         })
-        changeAction('reload')
+        this.props.changeAction('reload')
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))

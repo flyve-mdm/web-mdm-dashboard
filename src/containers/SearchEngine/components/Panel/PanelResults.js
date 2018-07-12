@@ -43,12 +43,10 @@ class PanelResults extends PureComponent {
    * @function render
    */
   render() {
-    const { itemResults } = this.props
-
     let bodyContent = null
 
-    if (itemResults) {
-      bodyContent = itemResults.map((item, index) => (
+    if (this.props.itemResults) {
+      bodyContent = this.props.itemResults.map((item, index) => (
         <div className="rowContent" key={`rowContent-${index.toString()}`}>
           {
             item.map((fieldObject, indexFieldObject) => (

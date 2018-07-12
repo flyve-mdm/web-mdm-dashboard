@@ -199,13 +199,12 @@ export default class FilesUpload extends PureComponent {
    * @param {object} file
    */
   fileTypeAcceptable(file) {
-    const { accepts } = this.props
-    if (accepts) {
+    if (this.props.accepts) {
       if (file.type) {
         const typeLeft = FilesUpload.mimeTypeLeft(file.type)
         const typeRight = FilesUpload.mimeTypeRight(file.type)
-        for (let i = 0; i < accepts.length; i += 1) {
-          const accept = accepts[i]
+        for (let i = 0; i < this.props.accepts.length; i += 1) {
+          const accept = this.props.accepts[i]
           const acceptLeft = accept.split('/')[0]
           const acceptRight = accept.split('/')[1]
           if (acceptLeft && acceptRight) {

@@ -63,12 +63,11 @@ class UsernameFieldset extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const { glpi } = this.props
     try {
-      await glpi.initSessionByUserToken({
+      await this.props.glpi.initSessionByUserToken({
         userToken: appConfig.pluginToken,
       })
-      const plugins = await glpi.getAllItems({
+      const plugins = await this.props.glpi.getAllItems({
         itemtype: 'Plugin',
       })
       const pluginDemo = plugins.filter(plugin => plugin.name === 'Flyve MDM Demo')
@@ -82,7 +81,7 @@ class UsernameFieldset extends PureComponent {
         },
         () => {
           this.usernameInput.focus()
-          glpi.killSession()
+          this.props.glpi.killSession()
         },
       )
     } catch (e) {
@@ -104,14 +103,10 @@ class UsernameFieldset extends PureComponent {
    */
   LogInServer = (e) => {
     e.preventDefault()
-    const {
-      username,
-      changePhase,
-    } = this.props
     const { selfRegistration } = this.state
 
-    if (username) {
-      changePhase(2)
+    if (this.props.username) {
+      this.props.changePhase(2)
     } else {
       this.setState({
         classInput: 'win-textbox color-line-alert',
@@ -148,10 +143,6 @@ class UsernameFieldset extends PureComponent {
       selfRegistration,
       classInput,
     } = this.state
-    const {
-      username,
-      changeInput,
-    } = this.props
 
     return (
       isLoading
@@ -182,8 +173,8 @@ class UsernameFieldset extends PureComponent {
                 ref={(input) => { this.usernameInput = input; }}
                 className={classInput}
                 placeholder={I18n.t('commons.username')}
-                value={username}
-                onChange={changeInput}
+                value={this.props.username}
+                onChange={this.props.changeInput}
                 required
               />
               <button

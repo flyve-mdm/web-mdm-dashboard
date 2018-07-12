@@ -39,11 +39,9 @@ import routes from './routes'
  */
 class HelpCenter extends PureComponent {
   render() {
-    const { match } = this.props
-
     return (
       <React.Fragment>
-        <GenerateRoutes routes={routes} rootPath={match.url} toast={this.props.toast} handleMessage={this.props.handleMessage} />
+        <GenerateRoutes routes={routes} rootPath={this.props.match.url} toast={this.props.toast} handleMessage={this.props.handleMessage} />
       </React.Fragment>
     )
   }

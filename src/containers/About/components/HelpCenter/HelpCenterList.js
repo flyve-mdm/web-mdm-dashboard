@@ -71,13 +71,8 @@ class HelpCenterList extends PureComponent {
   }
 
   componentDidMount = async () => {
-    const {
-      glpi,
-      handleMessage,
-    } = this.props
-
     try {
-      const response = await glpi.getAllItems({
+      const response = await this.props.glpi.getAllItems({
         itemtype: itemtype.KnowbaseItem,
       })
 
@@ -92,10 +87,10 @@ class HelpCenterList extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-      handleMessage({
+      this.props.handleMessage({
         type: 'alert',
         message: error,
-        customErrorRoute: '/app/about/help/error'
+        customErrorRoute: '/app/about/help/error',
       })
       this.setState({
         isLoading: false,
@@ -104,13 +99,11 @@ class HelpCenterList extends PureComponent {
   }
 
   redirectToArticle = (article) => {
-    const { history } = this.props
-    history.push(`${publicURL}/app/about/help/${article}`)
+    this.props.history.push(`${publicURL}/app/about/help/${article}`)
   }
 
   redirectToFeedBack = () => {
-    const { history } = this.props
-    history.push(`${publicURL}/app/about/help/feedback`)
+    this.props.history.push(`${publicURL}/app/about/help/feedback`)
   }
 
   showAllArticles = () => {
