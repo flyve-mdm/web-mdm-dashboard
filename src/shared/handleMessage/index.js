@@ -67,7 +67,8 @@ export default ({
   type = 'info',
   message,
   title,
-  customErrorRoute
+  customErrorRoute,
+  displayErrorPage = true
 }) => {
   const response = {
     type,
@@ -84,7 +85,9 @@ export default ({
         if (message.data[0][1] === 'session_token seems invalid') {
           logout()
         }
-        validateActiveProfile(history.location.pathname, message.status, customErrorRoute)
+        if (displayErrorPage) {
+          validateActiveProfile(history.location.pathname, message.status, customErrorRoute)
+        }
         break
       case (message.status === 404):
         response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText
@@ -92,7 +95,9 @@ export default ({
       case (message.status >= 400 && message.status < 500):
         response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? message.data[1][0].message
           : message.data[0][1] : message.statusText
-        pushError(history.location.pathname, message.status, customErrorRoute)
+        if (displayErrorPage) {
+          pushError(history.location.pathname, message.status, customErrorRoute)
+        }
         break
       default:
         break
@@ -100,3 +105,4 @@ export default ({
   }
   return response
 }
+

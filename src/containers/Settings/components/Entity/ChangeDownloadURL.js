@@ -102,6 +102,7 @@ class ChangeDownloadURL extends PureComponent {
         this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
+          displayErrorPage: false,
         }))
         this.setState({
           isLoading: false,
