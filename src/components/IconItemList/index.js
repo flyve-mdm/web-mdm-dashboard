@@ -100,13 +100,13 @@ class IconItemList extends PureComponent {
           break
 
         default:
-          const url_base = localStorage.getItem('baseURL')
+          const urlBase = localStorage.getItem('baseURL')
           let url
           if (this.props.isMin) {
             const image = this.props.image.split('.')
-            url = `//${url_base.split('//')[1]}/front/document.send.php?file=_pictures/${image[0]}_min.${image[1]}`
+            url = `//${urlBase.split('//')[1]}/front/document.send.php?file=_pictures/${image[0]}_min.${image[1]}`
           } else {
-            url = `//${url_base.split('//')[1]}/front/document.send.php?file=_pictures/${this.props.image}`
+            url = `//${urlBase.split('//')[1]}/front/document.send.php?file=_pictures/${this.props.image}`
           }
 
           fetch(url, {
