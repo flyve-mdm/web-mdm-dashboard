@@ -72,6 +72,7 @@ const withAdminDashboardLayout = (WrappedComponent) => {
     /** Configure 'baseURL' and the cookies of glpi */
     componentDidMount = async () => {
       const {
+        // eslint-disable-next-line
         cfg_glpi,
       } = await glpi.getGlpiConfig()
       localStorage.setItem('baseURL', cfg_glpi.url_base)

@@ -141,6 +141,7 @@ class EditMultiple extends PureComponent {
             isLoading: true,
           }, async () => {
             const {
+              // eslint-disable-next-line
               cfg_glpi,
             } = await this.props.glpi.getGlpiConfig()
             this.setState({
