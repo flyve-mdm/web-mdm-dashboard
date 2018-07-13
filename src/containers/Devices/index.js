@@ -103,28 +103,19 @@ class Devices extends PureComponent {
    * @function propsData
    * @returns {object}
    */
-  propsData = () => {
-    const {
-      icon,
-      selectionMode,
-      selectedItems,
-      action,
-    } = this.state
-
-    return ({
-      icon,
-      action,
-      selectionMode,
-      selectedItems,
-      changeSelectionMode: this.changeSelectionMode,
-      changeSelectedItems: this.changeSelectedItems,
-      changeAction: this.changeAction,
-      toast: this.props.toast,
-      history: this.props.history,
-      glpi: this.props.glpi,
-      handleMessage: this.props.handleMessage,
-    })
-  }
+  propsData = () => ({
+    icon: this.state.icon,
+    action: this.state.action,
+    selectionMode: this.state.selectionMode,
+    selectedItems: this.state.selectedItems,
+    changeSelectionMode: this.changeSelectionMode,
+    changeSelectedItems: this.changeSelectedItems,
+    changeAction: this.changeAction,
+    toast: this.props.toast,
+    history: this.props.history,
+    glpi: this.props.glpi,
+    handleMessage: this.props.handleMessage,
+  })
 
   /**
    * Change selected items
@@ -156,23 +147,16 @@ class Devices extends PureComponent {
    * @returns {object}
    */
   stylesList = () => {
-    const {
-      itemListPaneWidth,
-      mode,
-      selectedItems,
-      selectionMode,
-    } = this.state
-
     const styles = {
-      width: itemListPaneWidth,
+      width: this.state.itemListPaneWidth,
     }
 
-    if (mode === 'small') {
-      if ((selectedItems.length === 0 && this.props.history.location.pathname
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/devices`)
         || this.props.history.location.pathname === `${publicURL}/app/devices`
         || (this.props.history.location.pathname === `${publicURL}/app/devices`
-          && selectionMode)) {
+          && this.state.selectionMode)) {
         styles.display = 'inline-block'
       } else {
         styles.display = 'none'
@@ -190,25 +174,18 @@ class Devices extends PureComponent {
    * @returns {object}
    */
   stylesContent = () => {
-    const {
-      itemListPaneWidth,
-      mode,
-      selectedItems,
-      selectionMode,
-    } = this.state
-
-    const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
+    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
     const styles = {
       width: calc100PercentMinus(validWidth),
       height: '100%',
     }
 
-    if (mode === 'small') {
-      if ((selectedItems.length === 0 && this.props.history.location.pathname
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/devices`)
         || this.props.history.location.pathname === `${publicURL}/app/devices`
         || (this.props.history.location.pathname === `${publicURL}/app/devices`
-          && selectionMode)) {
+          && this.state.selectionMode)) {
         styles.display = 'none'
       } else {
         styles.display = 'inline-flex'

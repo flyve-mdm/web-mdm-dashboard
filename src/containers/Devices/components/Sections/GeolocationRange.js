@@ -64,11 +64,6 @@ export default class GeolocationRange extends PureComponent {
   }
 
   render() {
-    const {
-      min,
-      max,
-    } = this.state
-
     return (
       <React.Fragment>
         <p>
@@ -78,20 +73,20 @@ export default class GeolocationRange extends PureComponent {
           label={I18n.t('commons.min')}
           name="min"
           function={this.changeRange}
-          value={min}
+          value={this.state.min}
         />
         <DatePicker
           label={I18n.t('commons.max')}
           name="max"
           function={this.changeRange}
-          value={max}
+          value={this.state.max}
         />
         <button
           className="btn btn--primary"
           style={{ margin: '20px 0' }}
-          onClick={() => applyRange(
-            min,
-            max,
+          onClick={() => this.props.applyRange(
+            this.state.min,
+            this.state.max,
           )}
           type="button"
         >

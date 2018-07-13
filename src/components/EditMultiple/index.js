@@ -52,7 +52,6 @@ class EditMultiple extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      itemListEdit: [...this.props.selectedItems],
       isLoading: false,
       selectedField: {},
       newValue: '',
@@ -115,7 +114,7 @@ class EditMultiple extends PureComponent {
           this.setState({
             isLoading: false,
           })
-          this.props.toast.setNotification(handleMessage({ type: 'alert', message: error }))
+          this.props.toast.setNotification(this.props.handleMessage({ type: 'alert', message: error }))
         }
       })
     } else {
@@ -341,6 +340,9 @@ class EditMultiple extends PureComponent {
       <EmptyMessage message={I18n.t('commons.no_selection')} />
     )
   }
+}
+EditMultiple.defaultProps = {
+  selectedItems: [],
 }
 
 EditMultiple.propTypes = {

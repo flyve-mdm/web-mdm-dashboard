@@ -90,9 +90,7 @@ class InvitationsPendingPage extends PureComponent {
    * @param {object} prevState
    */
   componentDidUpdate(prevProps, prevState) {
-    const { id } = this.state
-
-    if (prevState.id !== id) {
+    if (prevState.id !== this.state.id) {
       this.handleRefresh()
     }
   }
@@ -124,10 +122,8 @@ class InvitationsPendingPage extends PureComponent {
    * @async
    */
   handleRefresh = async () => {
-    const { id } = this.state
-
     try {
-      const logs = await this.props.glpi.searchItems({
+      await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitationlog,
         options: {
           uid_cols: true,
@@ -136,12 +132,13 @@ class InvitationsPendingPage extends PureComponent {
         criteria: [{
           field: '4',
           searchtype: 'equal',
-          value: id,
+          value: this.state.id,
         }],
-      })
-      this.setState({
-        isLoading: false,
-        itemList: new WinJS.Binding.List(logs.data),
+      }, (logs) => {
+        this.setState({
+          isLoading: false,
+          itemList: new WinJS.Binding.List(logs.data),
+        })
       })
     } catch (error) {
       this.setState({
@@ -156,12 +153,6 @@ class InvitationsPendingPage extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      itemList,
-      layout,
-    } = this.state
-
     let listComponent = (
       <ContentPane>
         <div className="list-pane" style={{ margin: '0 10px' }}>
@@ -175,7 +166,7 @@ class InvitationsPendingPage extends PureComponent {
       </ContentPane>
     )
 
-    if (!isLoading && itemList.length > 0) {
+    if (!this.state.isLoading && this.state.itemList.length > 0) {
       listComponent = (
         <ContentPane>
           <div className="list-pane" style={{ margin: '0 10px' }}>
@@ -188,15 +179,15 @@ class InvitationsPendingPage extends PureComponent {
               ref={(listView) => { this.listView = listView }}
               className="list-pane__content win-selectionstylefilled"
               style={{ height: 'calc(100% - 48px)' }}
-              itemDataSource={itemList.dataSource}
+              itemDataSource={this.state.itemList.dataSource}
               itemTemplate={this.ItemListRenderer}
-              layout={layout}
+              layout={this.state.layout}
               selectionMode="single"
             />
           </div>
         </ContentPane>
       )
-    } else if (!isLoading && itemList.length === 0) {
+    } else if (!this.state.isLoading && this.state.itemList.length === 0) {
       listComponent = (
         <EmptyMessage message={I18n.t('invitations.no_logs')} />
       )

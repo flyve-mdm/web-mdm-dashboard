@@ -72,17 +72,15 @@ class ChangeDownloadURL extends PureComponent {
     this.setState({
       isLoading: true,
     }, async () => {
-      const { downloadURL } = this.state
-
       try {
         await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmEntityconfig,
           input: [{
             id: this.props.entityID,
-            download_url: downloadURL,
+            download_url: this.state.downloadURL,
           }],
         })
-        this.props.saveValues('downloadURL', downloadURL)
+        this.props.saveValues('downloadURL', this.state.downloadURL)
         this.props.changeMode('')
         this.props.toast.setNotification({
           title: I18n.t('commons.success'),
@@ -107,12 +105,7 @@ class ChangeDownloadURL extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      downloadURL,
-    } = this.state
-
-    return isLoading
+    return this.state.isLoading
       ? <Loading message={`${I18n.t('commons.saving')}...`} />
       : (
         <ContentPane>
@@ -127,7 +120,7 @@ class ChangeDownloadURL extends PureComponent {
               type="text"
               className="win-textbox"
               name="downloadURL"
-              value={downloadURL}
+              value={this.state.downloadURL}
               onChange={this.changeState}
             />
           </div>

@@ -80,15 +80,9 @@ class FilesList extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      totalcount,
-      pagination,
-      isLoadingMore,
-    } = this.state
-
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
-      this.listView.winControl.footer.style.height = totalcount > (pagination.page * pagination.count) ? isLoadingMore ? '100px' : '42px' : '1px'
+      this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
     }
     if (this.toolBar) {
       this.toolBar.winControl.forceLayout();
@@ -116,11 +110,6 @@ class FilesList extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = () => {
-    const {
-      order,
-      pagination,
-    } = this.state
-
     this.props.history.push(`${publicURL}/app/files`)
     this.setState({
       isLoading: true,
@@ -132,20 +121,21 @@ class FilesList extends PureComponent {
       },
     }, async () => {
       try {
-        const files = await this.props.glpi.searchItems({
+        await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmFile,
           options: {
             uid_cols: true,
             forcedisplay: [1, 2, 3],
-            order,
-            range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
+            order: this.state.order,
+            range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`,
           },
-        })
-        this.setState({
-          order: files.order,
-          itemList: new WinJS.Binding.List(files.data),
-          isLoading: false,
-          totalcount: files.totalcount,
+        }, (files) => {
+          this.setState({
+            order: files.order,
+            itemList: new WinJS.Binding.List(files.data),
+            isLoading: false,
+            totalcount: files.totalcount,
+          })
         })
       } catch (error) {
         handleMessage({ message: error })
@@ -198,14 +188,12 @@ class FilesList extends PureComponent {
    * @param {object} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    const { itemList } = this.state
-
     const listView = eventObject.currentTarget.winControl
     const index = listView.selection.getIndices()
     const itemSelected = []
 
     for (const item of index) {
-      itemSelected.push(itemList.getItem(item).data)
+      itemSelected.push(this.state.itemList.getItem(item).data)
     }
     this.props.changeSelectedItems(itemSelected)
     if (index.length === 1 && !this.props.selectionMode) {
@@ -275,8 +263,6 @@ class FilesList extends PureComponent {
    * @function handleSort
    */
   handleSort = async () => {
-    const { order } = this.state
-
     try {
       this.setState({
         isLoading: true,
@@ -286,7 +272,7 @@ class FilesList extends PureComponent {
           count: 15,
         },
       })
-      const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
+      const newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
       const files = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFile,
@@ -319,50 +305,45 @@ class FilesList extends PureComponent {
    * @param {object} eventObject
    */
   loadMoreData = async () => {
-    const {
-      pagination,
-      totalcount,
-      order,
-      itemList,
-    } = this.state
-
     try {
       this.setState({
         isLoadingMore: true,
       })
       const range = {
-        from: pagination.count * pagination.page,
-        to: (pagination.count * (pagination.page + 1)) - 1,
+        from: this.state.pagination.count * this.state.pagination.page,
+        to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
       }
-      if (range.from <= totalcount) {
+      if (range.from <= this.state.totalcount) {
         for (const key in range) {
           if (Object.prototype.hasOwnProperty.call(range, key)) {
-            if (range[key] >= totalcount) { range[key] = totalcount - 1 }
+            if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
           }
         }
-        const files = await this.props.glpi.searchItems({
+        await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmFile,
           options: {
             uid_cols: true,
             forcedisplay: [1, 2, 3],
-            order,
+            order: this.state.order,
             range: `${range.from}-${range.to}`,
           },
-        })
-
-        for (const item in files.data) {
-          if (Object.prototype.hasOwnProperty.call(files.data, item)) {
-            itemList.push(files.data[item])
+        }, (files) => {
+          for (const item in files.data) {
+            if (Object.prototype.hasOwnProperty.call(files.data, item)) {
+              this.state.itemList.push(files.data[item])
+            }
           }
-        }
 
-        this.setState({
-          isLoadingMore: false,
-          totalcount: files.totalcount,
-          pagination: {
-            ...pagination,
-            page: pagination.page + 1,
-          },
+          this.setState((prevState) => {
+            ({
+              isLoadingMore: false,
+              totalcount: files.totalcount,
+              pagination: {
+                ...prevState.pagination,
+                page: prevState.pagination.page + 1,
+              },
+            })
+          })
         })
       }
     } catch (error) {
@@ -373,13 +354,6 @@ class FilesList extends PureComponent {
   }
 
   render() {
-    const {
-      isLoadingMore,
-      isLoading,
-      itemList,
-      layout,
-    } = this.state
-
     const deleteCommand = (
       <ReactWinJS.ToolBar.Button
         key="delete"
@@ -402,7 +376,7 @@ class FilesList extends PureComponent {
       />
     )
 
-    const footerComponent = isLoadingMore
+    const footerComponent = this.state.isLoadingMore
       ? <Loader />
       : (
         <div
@@ -423,16 +397,16 @@ class FilesList extends PureComponent {
 
     let listComponent
 
-    if (isLoading) {
+    if (this.state.isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList && itemList.length > 0) {
+    } else if (this.state.itemList && this.state.itemList.length > 0) {
       listComponent = (
         <ReactWinJS.ListView
           ref={(listView) => { this.listView = listView }}
           className="list-pane__content win-selectionstylefilled"
           style={{ height: 'calc(100% - 48px)' }}
-          itemDataSource={itemList.dataSource}
-          layout={layout}
+          itemDataSource={this.state.itemList.dataSource}
+          layout={this.state.layout}
           itemTemplate={this.ItemListRenderer}
           footerComponent={footerComponent}
           selectionMode={this.props.selectionMode ? 'multi' : 'single'}

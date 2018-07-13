@@ -97,12 +97,7 @@ export default class Applications extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      id,
-      update,
-    } = this.state
-
-    if (prevState.id !== id || prevState.update !== update) {
+    if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
       this.handleRefresh()
     }
   }
@@ -199,32 +194,25 @@ export default class Applications extends PureComponent {
   })
 
   render() {
-    const {
-      applicationSelected,
-      isLoading,
-      itemList,
-      layout,
-    } = this.state
-
     let renderComponent
 
-    if (applicationSelected) {
+    if (this.state.applicationSelected) {
       renderComponent = (
         <ApplicationDetail
-          id={applicationSelected}
+          id={this.state.applicationSelected}
           glpi={this.props.glpi}
           selectApplication={this.selectApplication}
           toast={this.props.toast}
           handleMessage={this.props.handleMessage}
         />
       )
-    } else if (isLoading) {
+    } else if (this.state.isLoading) {
       renderComponent = (
         <div style={{ padding: '20px' }}>
           <Loader type="content" />
         </div>
       )
-    } else if (itemList.length > 0) {
+    } else if (this.state.itemList.length > 0) {
       const stylesHeader = {
         boxSizing: 'border-box',
         padding: '15px',
@@ -251,9 +239,9 @@ export default class Applications extends PureComponent {
               ref={(listView) => { this.listView = listView }}
               className="list-pane__content win-selectionstylefilled"
               headerComponent={header}
-              itemDataSource={itemList.dataSource}
+              itemDataSource={this.state.itemList.dataSource}
               itemTemplate={this.ItemListRenderer}
-              layout={layout}
+              layout={this.state.layout}
               selectionMode="single"
             />
           </div>

@@ -94,23 +94,13 @@ class SignUp extends PureComponent {
    * @return {array}
    */
   buildDataArray = () => {
-    const {
-      email,
-      forceValidation,
-      realName,
-      password,
-      configurationPassword,
-      passwordConfirmation,
-      captchaValue,
-    } = this.state
-
     const dataArray = {
       personalInformation: [
         [{
           label: I18n.t('commons.email'),
           type: 'text',
           name: 'email',
-          value: email,
+          value: this.state.email,
           placeholder: I18n.t('commons.email'),
           function: this.changeState,
           disabled: false,
@@ -121,13 +111,13 @@ class SignUp extends PureComponent {
             isRequired: true,
             isEmail: true,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         {
           label: I18n.t('create_account.full_name'),
           type: 'text',
           name: 'realName',
-          value: realName,
+          value: this.state.realName,
           placeholder: I18n.t('create_account.full_name'),
           function: this.changeState,
           disabled: false,
@@ -137,7 +127,7 @@ class SignUp extends PureComponent {
           parametersToEvaluate: {
             isRequired: true,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         ],
       ],
@@ -146,7 +136,7 @@ class SignUp extends PureComponent {
           label: I18n.t('commons.password'),
           type: 'password',
           name: 'password',
-          value: password,
+          value: this.state.password,
           placeholder: I18n.t('commons.password'),
           function: this.changeState,
           disabled: false,
@@ -155,15 +145,15 @@ class SignUp extends PureComponent {
           },
           parametersToEvaluate: {
             isRequired: true,
-            ...configurationPassword,
+            ...this.state.configurationPassword,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         {
           label: I18n.t('commons.password_confirmation'),
           type: 'password',
           name: 'passwordConfirmation',
-          value: passwordConfirmation,
+          value: this.state.passwordConfirmation,
           placeholder: I18n.t('commons.password_confirmation'),
           function: this.changeState,
           disabled: false,
@@ -172,13 +162,13 @@ class SignUp extends PureComponent {
           },
           parametersToEvaluate: {
             isRequired: true,
-            ...configurationPassword,
+            ...this.state.configurationPassword,
             isEqualTo: {
-              value: password,
+              value: this.state.password,
               message: I18n.t('commons.passwords_not_match'),
             },
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         ],
       ],
@@ -187,7 +177,7 @@ class SignUp extends PureComponent {
           label: I18n.t('create_account.enter_code_image'),
           type: 'text',
           name: 'captchaValue',
-          value: captchaValue,
+          value: this.state.captchaValue,
           placeholder: null,
           function: this.changeState,
           disabled: false,
@@ -197,7 +187,7 @@ class SignUp extends PureComponent {
           parametersToEvaluate: {
             isRequired: true,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         }],
       ],
     }
@@ -211,15 +201,6 @@ class SignUp extends PureComponent {
    */
   handleSubmitForm = (event) => {
     event.preventDefault()
-
-    const {
-      email,
-      realName,
-      password,
-      passwordConfirmation,
-      captchaValue,
-    } = this.state
-
     const user = this.buildDataArray()
 
     let isCorrect = true
@@ -236,13 +217,13 @@ class SignUp extends PureComponent {
 
     if (isCorrect) {
       this.props.auth.fetchSignUp({
-        name: email,
-        realname: realName,
-        password,
-        password2: passwordConfirmation,
-        _useremails: [email],
+        name: this.state.email,
+        realname: this.state.realName,
+        password: this.state.password,
+        password2: this.state.passwordConfirmation,
+        _useremails: [this.state.email],
         _plugin_flyvemdmdemo_captchas_id: this.props.auth.captcha.id,
-        _answer: captchaValue,
+        _answer: this.state.captchaValue,
       })
         .then(() => {
           this.props.toast.setNotification({

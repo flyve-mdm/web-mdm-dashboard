@@ -93,15 +93,9 @@ export default class FleetsList extends PureComponent {
    * @param {object} prevProps
    */
   componentDidUpdate(prevProps) {
-    const {
-      totalcount,
-      pagination,
-      isLoadingMore,
-    } = this.state
-
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
-      this.listView.winControl.footer.style.height = totalcount > (pagination.page * pagination.count) ? isLoadingMore ? '100px' : '42px' : '1px'
+      this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
     }
     if (this.toolBar) {
       this.toolBar.winControl.forceLayout();
@@ -160,14 +154,12 @@ export default class FleetsList extends PureComponent {
    * @param {object} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    const { itemList } = this.state
-
     const listView = eventObject.currentTarget.winControl
     const index = listView.selection.getIndices()
     const itemSelected = []
 
     for (const item of index) {
-      itemSelected.push(itemList.getItem(item).data)
+      itemSelected.push(this.state.itemList.getItem(item).data)
     }
     this.props.changeSelectedItems(itemSelected)
     if (index.length === 1 && !this.props.selectionMode) {
@@ -238,34 +230,29 @@ export default class FleetsList extends PureComponent {
    * @async
    */
   handleSort = async () => {
-    const {
-      order,
-      pagination,
-    } = this.state
-
     try {
       this.setState({
         isLoading: true,
       })
-      const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
+      const newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-      const fleets = await this.props.glpi.searchItems({
+      await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
         options: {
           uid_cols: true,
           forcedisplay: [2],
           order: newOrder,
-          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
+          range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`,
         },
+      }, (fleets) => {
+        this.setState({
+          isLoading: false,
+          order: fleets.order,
+          totalcount: fleets.totalcount,
+          itemList: new WinJS.Binding.List(fleets.data),
+        })
+        this.props.history.push(`${publicURL}/app/fleets`)
       })
-
-      this.setState({
-        isLoading: false,
-        order: fleets.order,
-        totalcount: fleets.totalcount,
-        itemList: new WinJS.Binding.List(fleets.data),
-      })
-      this.props.history.push(`${publicURL}/app/fleets`)
     } catch (error) {
       this.setState({
         isLoading: false,
@@ -279,45 +266,40 @@ export default class FleetsList extends PureComponent {
    * @async
    */
   loadMoreData = async () => {
-    const {
-      pagination,
-      order,
-      itemList,
-    } = this.state
-
     try {
       this.setState({
         isLoadingMore: true,
       })
 
       const range = {
-        from: pagination.count * pagination.page,
-        to: (pagination.count * (pagination.page + 1)) - 1,
+        from: this.state.pagination.count * this.state.pagination.page,
+        to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
       }
 
-      const fleets = await this.props.glpi.searchItems({
+      await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
         options: {
           uid_cols: true,
-          order,
+          order: this.state.order,
           forcedisplay: [2],
           range: `${range.from}-${range.to}`,
         },
-      })
-
-      for (const item in fleets.data) {
-        if (Object.prototype.hasOwnProperty.call(fleets.data, item)) {
-          itemList.push(fleets.data[item])
+      }, (fleets) => {
+        for (const item in fleets.data) {
+          if (Object.prototype.hasOwnProperty.call(fleets.data, item)) {
+            this.state.itemList.push(fleets.data[item])
+          }
         }
-      }
-
-      this.setState({
-        isLoadingMore: false,
-        totalcount: fleets.totalcount,
-        pagination: {
-          ...pagination,
-          page: pagination.page + 1,
-        },
+        this.setState((prevState) => {
+          ({
+            isLoadingMore: false,
+            totalcount: fleets.totalcount,
+            pagination: {
+              ...prevState.pagination,
+              page: prevState.pagination.page + 1,
+            },
+          })
+        })
       })
     } catch (error) {
       this.setState({
@@ -340,11 +322,6 @@ export default class FleetsList extends PureComponent {
    * @async
    */
   handleRefresh = async () => {
-    const {
-      order,
-      pagination,
-    } = this.state
-
     try {
       this.props.history.push(`${publicURL}/app/fleets`)
       this.setState({
@@ -356,20 +333,21 @@ export default class FleetsList extends PureComponent {
           count: 15,
         },
       })
-      const fleets = await this.props.glpi.searchItems({
+      await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
         options: {
           uid_cols: true,
           forcedisplay: [2],
-          order,
-          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
+          order: this.state.order,
+          range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`,
         },
-      })
-      this.setState({
-        isLoading: false,
-        order: fleets.order,
-        totalcount: fleets.totalcount,
-        itemList: new WinJS.Binding.List(fleets.data),
+      }, (fleets) => {
+        this.setState({
+          isLoading: false,
+          order: fleets.order,
+          totalcount: fleets.totalcount,
+          itemList: new WinJS.Binding.List(fleets.data),
+        })
       })
     } catch (error) {
       handleMessage({ message: error })
@@ -389,13 +367,6 @@ export default class FleetsList extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoadingMore,
-      isLoading,
-      itemList,
-      layout,
-    } = this.state
-
     const deleteCommand = (
       <ReactWinJS.ToolBar.Button
         key="delete"
@@ -417,7 +388,7 @@ export default class FleetsList extends PureComponent {
       />
     )
 
-    const footerComponent = isLoadingMore
+    const footerComponent = this.state.isLoadingMore
       ? <Loader />
       : (
         <div
@@ -438,16 +409,16 @@ export default class FleetsList extends PureComponent {
 
     let listComponent
 
-    if (isLoading) {
+    if (this.state.isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList && itemList.length > 0) {
+    } else if (this.state.itemList && this.state.itemList.length > 0) {
       listComponent = (
         <ReactWinJS.ListView
           ref={(listView) => { this.listView = listView }}
           className="list-pane__content win-selectionstylefilled"
           style={{ height: 'calc(100% - 48px)' }}
-          itemDataSource={itemList.dataSource}
-          layout={layout}
+          itemDataSource={this.state.itemList.dataSource}
+          layout={this.state.layout}
           itemTemplate={this.ItemListRenderer}
           footerComponent={footerComponent}
           selectionMode={this.props.selectionMode ? 'multi' : 'single'}

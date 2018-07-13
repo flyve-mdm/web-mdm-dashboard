@@ -61,12 +61,7 @@ export default class Main extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      id,
-      update,
-    } = this.state
-
-    if (prevState.id !== id || prevState.update !== update) {
+    if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
       this.handleRefresh()
     }
   }
@@ -90,19 +85,16 @@ export default class Main extends PureComponent {
    * @async
    * @function handleRefresh
    */
-  handleRefresh = async () => {
-    const {
-      update,
-      id,
-    } = this.state
-
-    if (update) {
+  handleRefresh = () => {
+    if (this.state.update) {
       try {
-        this.setState({
-          data: await this.props.glpi.getAnItem({
-            itemtype: itemtype.PluginFlyvemdmAgent,
-            id,
-          }),
+        this.setState(async (prevState) => {
+          ({
+            data: await this.props.glpi.getAnItem({
+              itemtype: itemtype.PluginFlyvemdmAgent,
+              id: prevState.id,
+            }),
+          })
         })
       } catch (error) {
         this.props.toast.setNotification(this.props.handleMessage({
@@ -120,8 +112,6 @@ export default class Main extends PureComponent {
    * @function handleRefresh
    */
   handleDelete = async () => {
-    const { id } = this.state
-
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
       this.setState({
@@ -130,7 +120,7 @@ export default class Main extends PureComponent {
 
       this.props.glpi.deleteItem({
         itemtype: itemtype.PluginFlyvemdmAgent,
-        id,
+        id: this.state.id,
       })
         .then(() => {
           this.props.toast.setNotification({
@@ -156,9 +146,7 @@ export default class Main extends PureComponent {
    * @function handleEdit
    */
   handleEdit = () => {
-    const { id } = this.state
-
-    const path = `${publicURL}/app/devices/${id}/edit`
+    const path = `${publicURL}/app/devices/${this.state.id}/edit`
     this.props.history.push(path)
   }
 
@@ -167,16 +155,12 @@ export default class Main extends PureComponent {
    * @function ping
    */
   ping = () => {
-    const {
-      id,
-    } = this.state
-
     this.setState({
       sendingPing: true,
     }, async () => {
       try {
         const response = await this.props.glpi.genericRequest({
-          path: `${itemtype.PluginFlyvemdmAgent}/${id}`,
+          path: `${itemtype.PluginFlyvemdmAgent}/${this.state.id}`,
           requestParams: {
             method: 'PUT',
             body: JSON.stringify({
@@ -210,19 +194,13 @@ export default class Main extends PureComponent {
   }
 
   render() {
-    const {
-      data,
-      isLoading,
-      sendingPing,
-    } = this.state
-
     let renderComponent
-    if (data === undefined || isLoading) {
+    if (this.state.data === undefined || this.state.isLoading) {
       renderComponent = (
         <Loading message={`${I18n.t('commons.loading')}...`} />
       )
     } else {
-      const imageAgent = data.mdm_type ? `${data.mdm_type}.png` : null
+      const imageAgent = this.state.data.mdm_type ? `${this.state.data.mdm_type}.png` : null
       let iconComponent
 
       if (imageAgent) {
@@ -245,17 +223,17 @@ export default class Main extends PureComponent {
               {iconComponent}
               <div>
                 <div className="item-info__name">
-                  {data.name}
+                  {this.state.data.name}
                 </div>
                 <div className="item-info__message">
                   {
-                    data.is_online === 1
+                    this.state.data.is_online === 1
                       ? I18n.t('commons.online')
                       : I18n.t('commons.offline')
                   }
                 </div>
                 <div className="item-info__source">
-                  {data.last_contact}
+                  {this.state.data.last_contact}
                   &nbsp;
                   {' '}
                   {I18n.t('devices.main.last_contact')}
@@ -271,7 +249,7 @@ export default class Main extends PureComponent {
                       {I18n.t('commons.ping')}
                     </button>
                     {
-                      sendingPing
+                      this.state.sendingPing
                         ? <Loading small />
                         : ''
                     }
@@ -302,19 +280,19 @@ export default class Main extends PureComponent {
               {I18n.t('commons.version')}
             </div>
             <div style={{ paddingLeft: 20 }}>
-              {data.version}
+              {this.state.data.version}
             </div>
             <div className="title">
               {I18n.t('commons.type')}
             </div>
             <div style={{ paddingLeft: 20 }}>
-              {data.mdm_type}
+              {this.state.data.mdm_type}
             </div>
           </div>
 
           <Confirmation
             title={I18n.t('devices.delete')}
-            message={data.name}
+            message={this.state.data.name}
             reference={(el) => { this.contentDialog = el }}
           />
         </ContentPane>

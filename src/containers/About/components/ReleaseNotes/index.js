@@ -79,11 +79,9 @@ class ReleaseNotes extends PureComponent {
    * @function render
    */
   render() {
-    const { release } = this.state
-
     let renderComponent
-    if (release) {
-      if (release === 'no data') {
+    if (this.state.release) {
+      if (this.state.release === 'no data') {
         renderComponent = (
           <EmptyMessage message={I18n.t('commons.no_data')} />
         )
@@ -94,7 +92,7 @@ class ReleaseNotes extends PureComponent {
               {I18n.t('about.release_notes.title')}
             </h2>
             <div className="about-pane" style={{ margin: '10px' }}>
-              <ReactMarkdown source={release} />
+              <ReactMarkdown source={this.state.release} />
             </div>
           </ContentPane>
         )

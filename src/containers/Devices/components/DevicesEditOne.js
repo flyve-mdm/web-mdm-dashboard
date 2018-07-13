@@ -58,9 +58,7 @@ export default class DevicesEditOne extends PureComponent {
   }
 
   componentDidMount() {
-    const { id } = this.state
-
-    if (Number(id)) {
+    if (Number(this.state.id)) {
       this.handleRefresh()
     } else {
       this.props.history.push(`${publicURL}/app/devices`);
@@ -72,11 +70,9 @@ export default class DevicesEditOne extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = () => {
-    const { id } = this.state
-
     this.props.glpi.getAnItem({
       itemtype: itemtype.PluginFlyvemdmAgent,
-      id,
+      id: this.state.id,
     })
       .then((response) => {
         this.setState({
@@ -150,22 +146,16 @@ export default class DevicesEditOne extends PureComponent {
    * @function handleSaveOneDevices
    */
   handleSaveOneDevices = () => {
-    const {
-      name,
-      fleet,
-      id,
-    } = this.state
-
     this.setState({
       isLoading: true,
     })
     const input = {
-      name,
-      plugin_flyvemdm_fleets_id: fleet.value,
+      name: this.state.name,
+      plugin_flyvemdm_fleets_id: this.state.fleet.value,
     }
     this.props.glpi.updateItem({
       itemtype: itemtype.PluginFlyvemdmAgent,
-      id,
+      id: this.state.id,
       input,
     })
       .then(() => {
@@ -176,7 +166,7 @@ export default class DevicesEditOne extends PureComponent {
         })
         this.props.changeAction('reload')
         this.props.changeSelectionMode(false);
-        this.props.history.push(`${publicURL}/app/devices/${id}`);
+        this.props.history.push(`${publicURL}/app/devices/${this.state.id}`);
       })
       .catch((error) => {
         this.props.toast.setNotification(this.props.handleMessage({
@@ -190,11 +180,6 @@ export default class DevicesEditOne extends PureComponent {
   }
 
   render() {
-    const {
-      name,
-      isLoading,
-    } = this.state
-
     const componetRender = (
       <ContentPane>
         <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -204,13 +189,13 @@ export default class DevicesEditOne extends PureComponent {
     if (!this.state) {
       return componetRender
     }
-    const agent = name ? agentScheme({
+    const agent = this.state.name ? agentScheme({
       state: this.state,
       changeState: this.changeState,
       glpi: this.props.glpi,
     }) : null
 
-    if (agent && !isLoading) {
+    if (agent && !this.state.isLoading) {
       return (
         <ContentPane>
           <div className="content-header" style={{ display: 'inline-flex' }}>

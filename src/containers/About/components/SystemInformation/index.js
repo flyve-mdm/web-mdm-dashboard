@@ -71,20 +71,15 @@ class SystemInformation extends PureComponent {
   }
 
   render() {
-    const {
-      plugins,
-      isLoading,
-    } = this.state
-
     const element = []
 
-    if (plugins) {
-      plugins.forEach((plugin) => {
+    if (this.state.plugins) {
+      this.state.plugins.forEach((plugin) => {
         element.push(
           <div className="plugins" key={plugin.id}>
             <div className="plugins--left">
               <div className="plugin__title">
-                { plugin.name }
+                { this.state.plugin.name }
               </div>
               <div
                 className="plugin__detail"
@@ -105,7 +100,7 @@ class SystemInformation extends PureComponent {
     }
 
     return (
-      isLoading
+      this.state.isLoading
         ? <Loading message={`${I18n.t('commons.loading')}...`} />
         : (
           <ContentPane>

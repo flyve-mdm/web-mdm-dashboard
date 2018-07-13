@@ -105,16 +105,10 @@ export default class InvitationsList extends PureComponent {
    * @param {object} prevProps
    */
   componentDidUpdate(prevProps) {
-    const {
-      totalcount,
-      pagination,
-      isLoadingMore,
-    } = this.state
-
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
-      this.listView.winControl.footer.style.height = totalcount > (pagination.page * pagination.count)
-        ? isLoadingMore
+      this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count)
+        ? this.state.isLoadingMore
           ? '100px'
           : '42px'
         : '1px'
@@ -162,14 +156,12 @@ export default class InvitationsList extends PureComponent {
    * @param {object} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    const { itemList } = this.state
-
     const listView = eventObject.currentTarget.winControl
     const index = listView.selection.getIndices()
     const itemSelected = []
 
     for (const item of index) {
-      itemSelected.push(itemList.getItem(item).data)
+      itemSelected.push(this.state.itemList.getItem(item).data)
     }
     this.props.changeSelectedItems(itemSelected)
 
@@ -184,11 +176,6 @@ export default class InvitationsList extends PureComponent {
    * @async
    */
   handleRefresh = async () => {
-    const {
-      order,
-      pagination,
-    } = this.state
-
     try {
       this.props.history.push(`${publicURL}/app/invitations`)
       this.setState({
@@ -200,20 +187,21 @@ export default class InvitationsList extends PureComponent {
           count: 15,
         },
       })
-      const invitations = await this.props.glpi.searchItems({
+      await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
         options: {
           uid_cols: true,
           forcedisplay: [1, 2, 3],
-          order,
-          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
+          order: this.state.order,
+          range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`,
         },
-      })
-      this.setState({
-        isLoading: false,
-        order: invitations.order,
-        itemList: BuildItemList(invitations, 2),
-        totalcount: invitations.totalcount,
+      }, (invitations) => {
+        this.setState({
+          isLoading: false,
+          order: invitations.order,
+          itemList: BuildItemList(invitations, 2),
+          totalcount: invitations.totalcount,
+        })
       })
     } catch (error) {
       handleMessage({ message: error })
@@ -290,8 +278,6 @@ export default class InvitationsList extends PureComponent {
    * @async
    */
   handleSort = async () => {
-    const { order } = this.state
-
     try {
       this.setState({
         isLoading: true,
@@ -301,7 +287,7 @@ export default class InvitationsList extends PureComponent {
           count: 15,
         },
       })
-      const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
+      const newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
       const invitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
@@ -372,50 +358,45 @@ export default class InvitationsList extends PureComponent {
    * @async
    */
   loadMoreData = async () => {
-    const {
-      itemList,
-      pagination,
-      totalcount,
-      order,
-    } = this.state
-
     try {
       this.setState({
         isLoadingMore: true,
       })
       const range = {
-        from: pagination.count * pagination.page,
-        to: (pagination.count * (pagination.page + 1)) - 1,
+        from: this.state.pagination.count * this.state.pagination.page,
+        to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
       }
-      if (range.from <= totalcount) {
+      if (range.from <= this.state.totalcount) {
         for (const key in range) {
           if (Object.prototype.hasOwnProperty.call(range, key)) {
-            if (range[key] >= totalcount) { range[key] = totalcount - 1 }
+            if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
           }
         }
-        const invitations = await this.props.glpi.searchItems({
+        await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmInvitation,
           options: {
             uid_cols: true,
             forcedisplay: [1, 2, 3],
-            order,
+            order: this.state.order,
             range: `${range.from}-${range.to}`,
           },
-        })
-
-        for (const item in invitations.data) {
-          if (Object.prototype.hasOwnProperty.call(invitations.data, item)) {
-            itemList.push(invitations.data[item])
+        }, (invitations) => {
+          for (const item in invitations.data) {
+            if (Object.prototype.hasOwnProperty.call(invitations.data, item)) {
+              this.state.itemList.push(invitations.data[item])
+            }
           }
-        }
 
-        this.setState({
-          isLoadingMore: false,
-          totalcount: invitations.totalcount,
-          pagination: {
-            ...pagination,
-            page: pagination.page + 1,
-          },
+          this.setState((prevState) => {
+            ({
+              isLoadingMore: false,
+              totalcount: invitations.totalcount,
+              pagination: {
+                ...prevState.pagination,
+                page: prevState.pagination.page + 1,
+              },
+            })
+          })
         })
       }
     } catch (error) {
@@ -443,13 +424,6 @@ export default class InvitationsList extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoadingMore,
-      isLoading,
-      itemList,
-      layout,
-    } = this.state
-
     const deleteCommand = (
       <ReactWinJS.ToolBar.Button
         key="delete"
@@ -472,7 +446,7 @@ export default class InvitationsList extends PureComponent {
       />
     )
 
-    const footerComponent = isLoadingMore
+    const footerComponent = this.state.isLoadingMore
       ? <Loader />
       : (
         <div
@@ -493,7 +467,7 @@ export default class InvitationsList extends PureComponent {
 
     let listComponent
 
-    if (isLoading) {
+    if (this.state.isLoading) {
       listComponent = <Loader count={3} />
     } else if (itemList && itemList.length > 0) {
       listComponent = (

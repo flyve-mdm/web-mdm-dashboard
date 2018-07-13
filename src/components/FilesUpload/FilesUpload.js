@@ -81,15 +81,6 @@ export default class FilesUpload extends PureComponent {
   }
 
   /**
-   * Open the windows to select the files
-   * @function openFileChooser
-   */
-  openFileChooser = () => {
-    this.inputElement.value = null
-    this.inputElement.click()
-  }
-
-  /**
    * change the native behavior of the browser to add files to a list in the state
    * @function onDrop
    * @param {object} event
@@ -148,11 +139,23 @@ export default class FilesUpload extends PureComponent {
       }
     }
 
-    this.setState({
-      files: this.props.multiple === false ? files : [...this.state.files, ...files],
+    this.setState((prevState) => {
+      ({
+        files: this.props.multiple === false ? files : [...prevState.files, ...files],
+      })
     }, () => {
       this.props.onChange.call(this, this.state.files)
     })
+  }
+
+  /**
+   * Execute the function to handle the errors
+   * @function onError
+   * @param {*} error
+   * @param {object} file
+   */
+  onError(error, file) {
+    this.props.onError.call(this, error, file)
   }
 
   /**
@@ -184,13 +187,12 @@ export default class FilesUpload extends PureComponent {
   }
 
   /**
-   * Execute the function to handle the errors
-   * @function onError
-   * @param {*} error
-   * @param {object} file
+   * Open the windows to select the files
+   * @function openFileChooser
    */
-  onError(error, file) {
-    this.props.onError.call(this, error, file)
+  openFileChooser = () => {
+    this.inputElement.value = null
+    this.inputElement.click()
   }
 
   /**
@@ -254,8 +256,10 @@ export default class FilesUpload extends PureComponent {
    * @param {object} fileToRemove
    */
   removeFile(fileToRemove) {
-    this.setState({
-      files: this.state.files.filter(file => file.id !== fileToRemove.id),
+    this.setState((prevState) => {
+      ({
+        files: prevState.files.filter(file => file.id !== fileToRemove.id),
+      })
     }, () => {
       this.props.onChange.call(this, this.state.files)
     })

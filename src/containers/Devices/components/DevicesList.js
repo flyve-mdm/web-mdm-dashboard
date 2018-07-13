@@ -91,15 +91,9 @@ export default class DevicesList extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      totalcount,
-      pagination,
-      isLoadingMore,
-    } = this.state
-
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
-      this.listView.winControl.footer.style.height = totalcount > (pagination.page * pagination.count) ? isLoadingMore ? '100px' : '42px' : '1px'
+      this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
     }
     if (this.toolBar) {
       this.toolBar.winControl.forceLayout()
@@ -126,54 +120,49 @@ export default class DevicesList extends PureComponent {
    * @async
    * @function loadMoreData
    */
-  loadMoreData = async () => {
-    const {
-      pagination,
-      totalcount,
-      order,
-      itemList,
-    } = this.state
-
+  loadMoreData = () => {
     try {
       this.setState({
         isLoadingMore: true,
+      }, async () => {
+        const range = {
+          from: this.state.pagination.count * this.state.pagination.page,
+          to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
+        }
+
+        if (range.from <= this.state.totalcount) {
+          for (const key in range) {
+            if (Object.prototype.hasOwnProperty.call(range, key)) {
+              if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
+            }
+          }
+          await this.props.glpi.searchItems({
+            itemtype: itemtype.PluginFlyvemdmAgent,
+            options: {
+              uid_cols: true,
+              forcedisplay: [2, 3, 4, 12],
+              order: this.state.order,
+              range: `${range.from}-${range.to}`,
+            },
+          }, (devices) => {
+            for (const item in devices.data) {
+              if (Object.prototype.hasOwnProperty.call(devices.data, item)) {
+                this.state.itemList.push(devices.data[item])
+              }
+            }
+            this.setState((prevState) => {
+              ({
+                isLoadingMore: false,
+                totalcount: devices.totalcount,
+                pagination: {
+                  ...prevState.pagination,
+                  page: prevState.pagination.page + 1,
+                },
+              })
+            })
+          })
+        }
       })
-      const range = {
-        from: pagination.count * pagination.page,
-        to: (pagination.count * (pagination.page + 1)) - 1,
-      }
-
-      if (range.from <= totalcount) {
-        for (const key in range) {
-          if (Object.prototype.hasOwnProperty.call(range, key)) {
-            if (range[key] >= totalcount) { range[key] = totalcount - 1 }
-          }
-        }
-        const devices = await this.props.glpi.searchItems({
-          itemtype: itemtype.PluginFlyvemdmAgent,
-          options: {
-            uid_cols: true,
-            forcedisplay: [2, 3, 4, 12],
-            order,
-            range: `${range.from}-${range.to}`,
-          },
-        })
-
-        for (const item in devices.data) {
-          if (Object.prototype.hasOwnProperty.call(devices.data, item)) {
-            itemList.push(devices.data[item])
-          }
-        }
-
-        this.setState({
-          isLoadingMore: false,
-          totalcount: devices.totalcount,
-          pagination: {
-            ...pagination,
-            page: pagination.page + 1,
-          },
-        })
-      }
     } catch (error) {
       this.setState({
         isLoadingMore: false,
@@ -186,13 +175,8 @@ export default class DevicesList extends PureComponent {
    * @async
    * @function handleRefresh
    */
-  handleRefresh = async () => {
+  handleRefresh = () => {
     try {
-      const {
-        order,
-        pagination,
-      } = this.state
-
       this.setState({
         isLoading: true,
         totalcount: 0,
@@ -201,21 +185,23 @@ export default class DevicesList extends PureComponent {
           page: 1,
           count: 15,
         },
-      })
-      const devices = await this.props.glpi.searchItems({
-        itemtype: itemtype.PluginFlyvemdmAgent,
-        options: {
-          uid_cols: true,
-          forcedisplay: [2, 3, 4, 12],
-          order,
-          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
-        },
-      })
-      this.setState({
-        isLoading: false,
-        order: devices.order,
-        totalcount: devices.totalcount,
-        itemList: BuildItemList(devices),
+      }, async () => {
+        await this.props.glpi.searchItems({
+          itemtype: itemtype.PluginFlyvemdmAgent,
+          options: {
+            uid_cols: true,
+            forcedisplay: [2, 3, 4, 12],
+            order: this.state.order,
+            range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`,
+          },
+        }, (devices) => {
+          this.setState({
+            isLoading: false,
+            order: devices.order,
+            totalcount: devices.totalcount,
+            itemList: BuildItemList(devices),
+          })
+        })
       })
     } catch (error) {
       handleMessage({ message: error })
@@ -258,14 +244,12 @@ export default class DevicesList extends PureComponent {
    * @param {object} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    const { itemList } = this.state
-
     const listView = eventObject.currentTarget.winControl
     const index = listView.selection.getIndices()
     const itemSelected = []
 
     for (const item of index) {
-      itemSelected.push(itemList.getItem(item).data)
+      itemSelected.push(this.state.itemList.getItem(item).data)
     }
     this.props.changeSelectedItems(itemSelected)
     if (index.length === 1 && !this.props.selectionMode) {
@@ -339,8 +323,6 @@ export default class DevicesList extends PureComponent {
    */
   handleSort = async () => {
     try {
-      const { order } = this.state
-
       this.setState({
         isLoading: true,
         pagination: {
@@ -349,7 +331,7 @@ export default class DevicesList extends PureComponent {
           count: 15,
         },
       })
-      const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
+      const newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
       const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
@@ -383,13 +365,6 @@ export default class DevicesList extends PureComponent {
   }
 
   render() {
-    const {
-      isLoadingMore,
-      itemList,
-      isLoading,
-      layout,
-    } = this.state
-
     const deleteCommand = (
       <ReactWinJS.ToolBar.Button
         key="delete"
@@ -412,7 +387,7 @@ export default class DevicesList extends PureComponent {
       />
     )
 
-    const footerComponent = isLoadingMore
+    const footerComponent = this.state.isLoadingMore
       ? <Loader />
       : (
         <div
@@ -433,7 +408,7 @@ export default class DevicesList extends PureComponent {
 
     let listComponent
 
-    if (isLoading) {
+    if (this.state.isLoading) {
       listComponent = <Loader count={3} />
     } else if (itemList && itemList.length > 0) {
       listComponent = (

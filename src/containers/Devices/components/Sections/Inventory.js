@@ -102,25 +102,20 @@ export default class Inventory extends PureComponent {
   ))
 
   render() {
-    const {
-      isLoading,
-      data,
-    } = this.state
-
-    if (isLoading) {
+    if (this.state.isLoading) {
       return (
         <div style={{ padding: '20px' }}>
           <Loader type="content" />
         </div>
       )
-    } if (data) {
+    } if (this.state.data) {
       return (
         <div>
           <div className="title">
             {this.props.title}
           </div>
           {
-            data.map(value => (this.buildList(value)))
+            this.state.data.map(value => (this.buildList(value)))
           }
         </div>
       )

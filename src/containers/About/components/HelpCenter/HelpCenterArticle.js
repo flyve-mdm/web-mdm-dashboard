@@ -53,16 +53,15 @@ class HelpCenterArticle extends PureComponent {
   }
 
   componentDidMount = async () => {
-    const { id } = this.state
-
     try {
-      this.setState({
+      const newState = {
         article: await this.props.glpi.getAnItem({
           itemtype: itemtype.KnowbaseItem,
-          id,
+          id: this.state.id,
         }),
         isLoading: false,
-      })
+      }
+      this.setState({ ...newState })
     } catch (error) {
       this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
@@ -82,13 +81,8 @@ class HelpCenterArticle extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      article,
-    } = this.state
-
     return (
-      isLoading
+      this.state.isLoading
         ? (
           <div style={{ height: '100%', marginTop: '-80px' }}>
             <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -97,14 +91,14 @@ class HelpCenterArticle extends PureComponent {
         : (
           <ContentPane>
             <h2 style={{ margin: '10px' }}>
-              {article.name}
+              {this.state.article.name}
             </h2>
             <div className="date" style={{ margin: '10px' }}>
-              {article.date}
+              {this.state.article.date}
             </div>
             <div
               style={{ margin: '10px' }}
-              dangerouslySetInnerHTML={{ __html: this.htmlDecode(article.answer) }}
+              dangerouslySetInnerHTML={{ __html: this.htmlDecode(this.state.article.answer) }}
             />
           </ContentPane>
         )

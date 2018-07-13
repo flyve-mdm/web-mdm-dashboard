@@ -111,28 +111,19 @@ class Supervision extends PureComponent {
    * @function saveChanges
    */
   saveChanges = () => {
-    const {
-      name,
-      entityID,
-      phone,
-      website,
-      email,
-      address,
-    } = this.state
-
     this.setState({
       isLoading: true,
     }, async () => {
       try {
         await this.props.glpi.updateItem({
           itemtype: itemtype.Entity,
-          id: `${entityID}`,
+          id: `${this.state.entityID}`,
           input: {
-            phonenumber: phone,
-            name,
-            website,
-            email,
-            address,
+            phonenumber: this.state.phone,
+            name: this.state.name,
+            website: this.state.website,
+            email: this.state.email,
+            address: this.state.address,
           },
         })
         this.setState({
@@ -172,15 +163,13 @@ class Supervision extends PureComponent {
    * @function render
    */
   render() {
-    const { isLoading } = this.state
-
     const supervision = supervisionScheme({
       state: this.state,
       changeState: this.changeState,
     })
 
     return (
-      isLoading
+      this.state.isLoading
         ? <Loading message={`${I18n.t('commons.loading')}...`} />
         : (
           <ContentPane>

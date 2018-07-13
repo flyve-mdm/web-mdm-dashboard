@@ -142,37 +142,28 @@ class DevicesAssociated extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      devices,
-      name,
-      itemList,
-      layout,
-    } = this.state
-
-
     return (
       <ContentPane className="fleets">
         {
-          isLoading
+          this.state.isLoading
             ? <Loading message={`${I18n.t('commons.loading')}...`} />
             : (
-              (!devices || devices.totalcount === 0)
+              (!this.state.devices || this.state.devices.totalcount === 0)
                 ? <EmptyMessage message={I18n.t('fleets.no_associated_devices')} />
                 : (
                   <React.Fragment>
                     <h2>
                       {I18n.t('fleets.devices_of')}
-                      {` '${name}' `}
+                      {` '${this.state.name}' `}
                     </h2>
                     <div className="list-pane">
                       <ReactWinJS.ListView
                         ref={(listView) => { this.listView = listView }}
                         className="list-pane__content win-selectionstylefilled"
-                        itemDataSource={itemList.dataSource}
+                        itemDataSource={this.state.itemList.dataSource}
                         itemTemplate={this.ItemListRenderer}
                         headerComponent={this.headerComponent}
-                        layout={layout}
+                        layout={this.state.layout}
                         selectionMode="single"
                       />
                     </div>

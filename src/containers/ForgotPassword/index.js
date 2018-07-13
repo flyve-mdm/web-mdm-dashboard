@@ -70,8 +70,6 @@ class ForgotPassword extends PureComponent {
    * @param {object} event
    */
   handleRecover = async (event) => {
-    const { text } = this.state
-
     event.preventDefault()
     this.setState({
       isLoading: true,
@@ -87,7 +85,7 @@ class ForgotPassword extends PureComponent {
         requestParams: {
           method: 'PUT',
           body: JSON.stringify({
-            email: text,
+            email: this.state.text,
           }),
         },
       })
@@ -116,13 +114,8 @@ class ForgotPassword extends PureComponent {
    * @return {component}
    */
   renderElement = () => {
-    const {
-      text,
-      isRecoverSent,
-    } = this.state
-
     let element
-    if (!isRecoverSent) {
+    if (!this.state.isRecoverSent) {
       element = (
         <div className="authentication__forgot-password">
           <p>
@@ -133,7 +126,7 @@ class ForgotPassword extends PureComponent {
               label=""
               type="text"
               name="text"
-              value={text}
+              value={this.state.text}
               placeholder={I18n.t('commons.flyve_mdm_email')}
               required
               function={(name, value) => { this.setState({ text: value }) }}
@@ -163,7 +156,7 @@ class ForgotPassword extends PureComponent {
           <button
             className="win-button"
             type="button"
-            onClick={() => history.push(`${publicURL}/`)}
+            onClick={() => this.state.history.push(`${publicURL}/`)}
           >
             {I18n.t('forgot_password.go_home')}
           </button>
@@ -178,9 +171,7 @@ class ForgotPassword extends PureComponent {
    * @function render
    */
   render() {
-    const { isLoading } = this.state
-
-    if (isLoading) {
+    if (this.state.isLoading) {
       return (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.sending')}...`} />

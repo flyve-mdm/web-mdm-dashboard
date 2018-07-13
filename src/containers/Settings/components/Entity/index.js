@@ -172,32 +172,16 @@ class Entity extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      mode,
-      tokenLife,
-      entityID,
-      downloadURL,
-      numberCategoriesForPolicies,
-      typesPolicies,
-      invitationsSent,
-      numberUsers,
-      applicationsUploaded,
-      filesUploaded,
-      fleetsCurrentlyManaged,
-      devicesCurretlymanaged,
-      isLoading,
-    } = this.state
-
     let content
-    switch (mode) {
+    switch (this.state.mode) {
       case 'change Token life':
         content = (
           <ChangeTokenLife
             changeMode={this.changeMode}
-            tokenLife={tokenLife}
+            tokenLife={this.state.tokenLife}
             saveValues={this.saveValues}
             glpi={this.props.glpi}
-            entityID={entityID}
+            entityID={this.state.entityID}
           />
         )
 
@@ -207,12 +191,12 @@ class Entity extends PureComponent {
         content = (
           <ChangeDownloadURL
             changeMode={this.changeMode}
-            downloadURL={downloadURL}
+            downloadURL={this.state.downloadURL}
             saveValues={this.saveValues}
             toast={this.props.toast}
             handleMessage={this.props.handleMessage}
             glpi={this.props.glpi}
-            entityID={entityID}
+            entityID={this.state.entityID}
           />
         )
 
@@ -222,17 +206,17 @@ class Entity extends PureComponent {
         content = (
           <ContentPane>
             <Main
-              tokenLife={tokenLife}
-              numberCategoriesForPolicies={numberCategoriesForPolicies}
-              typesPolicies={typesPolicies}
-              invitationsSent={invitationsSent}
-              numberUsers={numberUsers}
-              applicationsUploaded={applicationsUploaded}
-              filesUploaded={filesUploaded}
-              fleetsCurrentlyManaged={fleetsCurrentlyManaged}
-              devicesCurretlymanaged={devicesCurretlymanaged}
-              entityID={entityID}
-              downloadURL={downloadURL}
+              tokenLife={this.state.tokenLife}
+              numberCategoriesForPolicies={this.state.numberCategoriesForPolicies}
+              typesPolicies={this.state.typesPolicies}
+              invitationsSent={this.state.invitationsSent}
+              numberUsers={this.state.numberUsers}
+              applicationsUploaded={this.state.applicationsUploaded}
+              filesUploaded={this.state.filesUploaded}
+              fleetsCurrentlyManaged={this.state.fleetsCurrentlyManaged}
+              devicesCurretlymanaged={this.state.devicesCurretlymanaged}
+              entityID={this.state.entityID}
+              downloadURL={this.state.downloadURL}
               changeMode={this.changeMode}
               handleMessage={this.props.handleMessage}
               toast={this.props.toast}
@@ -242,7 +226,7 @@ class Entity extends PureComponent {
     }
 
     return (
-      isLoading
+      this.state.isLoading
         ? (
           <Loading message={`${I18n.t('commons.loading')}...`} />
         )
