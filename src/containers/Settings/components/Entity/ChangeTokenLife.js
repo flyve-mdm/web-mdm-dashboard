@@ -76,7 +76,6 @@ class ChangeTokenLife extends PureComponent {
         entityID,
         saveValues,
         changeMode,
-        handleMessage,
       } = this.props
       const { tokenLife } = this.state
 

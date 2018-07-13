@@ -36,6 +36,7 @@ import {
 import I18n from '../../shared/i18n'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
+import ErrorPage from '../../components/ErrorPage'
 import {
   slideTop,
 } from '../../shared/animations/index'
@@ -136,6 +137,24 @@ class ListWithNavLinks extends PureComponent {
     })
   }
 
+  renderComponent = () => {
+    const paths = this.props.history.location.pathname.split('/')
+
+    if (paths[paths.length - 1].indexOf('error') === 0) {
+      return <ErrorPage/>
+    }
+
+    if (this.state.mode === 'small' && !this.state.styleNav.display) {
+      return null
+    }
+
+    return (
+      <div style={this.stylesArticle()}>
+        {this.props.children}
+      </div>
+    )
+  }
+
   /**
    * Render component
    * @function render
@@ -166,15 +185,9 @@ class ListWithNavLinks extends PureComponent {
             })}
           </ul>
         </nav>
-        {
-          (this.state.mode === 'small' && !this.state.styleNav.display)
-            ? ''
-            : (
-              <div style={this.stylesArticle()}>
-                {this.props.children}
-              </div>
-            )
-        }
+
+        { this.renderComponent() }
+
       </div>
     )
   }

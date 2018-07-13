@@ -65,7 +65,6 @@ class Settings extends PureComponent {
           handleMessage={this.props.handleMessage}
           changeLanguage={this.props.changeLanguage}
           languageCurrent={this.props.languageCurrent}
-
         />
       </LayoutListWithNavLinks>
     )
