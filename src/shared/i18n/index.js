@@ -32,18 +32,19 @@ import sourceFile from './source_file.json'
 
 const languageDefault = 'en_GB'
 
-const polyglot = new Polyglot({
-  locale: language,
-  phrases: tryRequire(`./translations/${language}`) || sourceFile,
-})
-
 function tryRequire(path) {
   try {
+    // eslint-disable-next-line
     return require(`${path}`)
   } catch (err) {
     return null
   }
 }
+
+const polyglot = new Polyglot({
+  locale: language,
+  phrases: tryRequire(`./translations/${language}`) || sourceFile,
+})
 
 function getTranslations(lang) {
   try {

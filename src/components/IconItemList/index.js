@@ -94,6 +94,7 @@ class IconItemList extends PureComponent {
         case 'apple.png':
         case 'Phone.png':
           this.setState({
+            // eslint-disable-next-line
             image: require(`../../assets/images/${this.props.image}`),
           })
           break

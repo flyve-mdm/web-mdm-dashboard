@@ -31,6 +31,7 @@ import PropTypes from 'prop-types'
 import I18n from '../../shared/i18n'
 import languagesList from '../../shared/i18n/languages'
 import { AuthenticationConsumer } from '../../providers/AuthenticationProvider'
+import logo from '../../assets/images/dashboard.svg'
 
 /**
  * Wrapper component with the basic structure of the authentication pages
@@ -53,7 +54,7 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
       <div className="authentication" style={style}>
         <section>
           <figure>
-            <img alt="Flyve MDM Dashboard" src={require('../../assets/images/dashboard.svg')} />
+            <img alt="Flyve MDM Dashboard" src={logo} />
           </figure>
           <AuthenticationConsumer>
             {value => <WrappedComponent {...props} {...value} />
