@@ -74,6 +74,8 @@ export class NotificationsProvider extends PureComponent {
             onClick={() => {
               context.hidenNotification()
             }}
+            role="button"
+            tabIndex="0"
           />
           <div className="toast__title">
             {context.notification.title}
@@ -91,7 +93,7 @@ export class NotificationsProvider extends PureComponent {
           {this.props.children}
         </NotificationsContext.Provider>
       </React.Fragment>
-    );
+    )
   }
 }
 

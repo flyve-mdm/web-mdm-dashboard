@@ -260,19 +260,10 @@ export default class ApplicationsList extends PureComponent {
    * @param {object} eventObject
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      changeSelectionMode,
-      changeSelectedItems,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     try {
       const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
-        const itemListToDelete = selectedItems.map(item => ({
+        const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmPackage.id'],
         }))
 
@@ -280,7 +271,7 @@ export default class ApplicationsList extends PureComponent {
           isLoading: true,
         })
 
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
           input: itemListToDelete,
           queryString: {
@@ -293,13 +284,13 @@ export default class ApplicationsList extends PureComponent {
           body: I18n.t('notifications.applications_successfully_removed'),
           type: 'success',
         })
-        changeSelectionMode(false)
-        changeSelectedItems([])
-        changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
+        this.props.changeAction('reload')
       } else {
         // Exit selection mode
-        changeSelectionMode(false)
-        changeSelectedItems([])
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
 
         this.listView.winControl.selection.clear()
       }
@@ -308,8 +299,8 @@ export default class ApplicationsList extends PureComponent {
         type: 'alert',
         message: error,
       }))
-      changeSelectionMode(false)
-      changeSelectedItems([])
+      this.props.changeSelectionMode(false)
+      this.props.changeSelectedItems([])
 
       this.setState(() => ({
         isLoading: false,
@@ -433,26 +424,15 @@ export default class ApplicationsList extends PureComponent {
    * @function handleAdd
    */
   handleAdd = () => {
-    const {
-      history,
-      changeSelectionMode,
-      changeSelectedItems,
-    } = this.props
-
-    history.push(`${publicURL}/app/applications/add`)
-    changeSelectionMode(false)
-    changeSelectedItems([])
+    this.prosp.history.push(`${publicURL}/app/applications/add`)
+    this.prosp.changeSelectionMode(false)
+    this.prosp.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
   }
 
   render() {
-    const {
-      selectedItems,
-      selectionMode,
-      icon,
-    } = this.props
     const {
       layout,
       isLoadingMore,
@@ -466,7 +446,7 @@ export default class ApplicationsList extends PureComponent {
         icon="delete"
         label={I18n.t('commons.delete')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.prosp.selectedItems.length === 0}
         onClick={this.handleDelete}
       />
     )
@@ -477,7 +457,7 @@ export default class ApplicationsList extends PureComponent {
         icon="edit"
         label={I18n.t('commons.edit')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.prosp.selectedItems.length === 0}
         onClick={this.handleEdit}
       />
     )
@@ -505,7 +485,7 @@ export default class ApplicationsList extends PureComponent {
 
     if (isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList && itemList.length > 0) {
+    } else if (this.state.itemList && this.state.itemList.length > 0) {
       listComponent = (
         <ReactWinJS.ListView
           ref={(listView) => { this.listView = listView }}
@@ -515,8 +495,8 @@ export default class ApplicationsList extends PureComponent {
           layout={layout}
           itemTemplate={this.ItemListRenderer}
           footerComponent={footerComponent}
-          selectionMode={selectionMode ? 'multi' : 'single'}
-          tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
+          selectionMode={this.prosp.selectionMode ? 'multi' : 'single'}
+          tapBehavior={this.prosp.selectionMode ? 'toggleSelect' : 'directSelect'}
           onSelectionChanged={this.handleSelectionChanged}
         />
       )
@@ -524,7 +504,7 @@ export default class ApplicationsList extends PureComponent {
       listComponent = (
         <EmptyMessage
           message={I18n.t('applications.not_found')}
-          icon={icon}
+          icon={this.props.icon}
           showIcon
         />
       )
@@ -559,15 +539,15 @@ export default class ApplicationsList extends PureComponent {
             onClick={this.handleAdd}
           />
 
-          {selectionMode ? editCommand : null}
-          {selectionMode ? deleteCommand : null}
+          {this.prosp.selectionMode ? editCommand : null}
+          {this.prosp.selectionMode ? deleteCommand : null}
 
           <ReactWinJS.ToolBar.Toggle
             key="select"
             icon="bullets"
             label={I18n.t('commons.select')}
             priority={0}
-            selected={selectionMode}
+            selected={this.prosp.selectionMode}
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
@@ -575,7 +555,7 @@ export default class ApplicationsList extends PureComponent {
         {listComponent}
         <Confirmation
           title={I18n.t('applications.delete')}
-          message={`${selectedItems.length} ${I18n.t('applications.title')}`}
+          message={`${this.prosp.selectedItems.length} ${I18n.t('applications.title')}`}
           reference={(el) => { this.contentDialog = el }}
         />
       </React.Fragment>

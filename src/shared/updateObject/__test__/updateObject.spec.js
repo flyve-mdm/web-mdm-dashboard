@@ -26,9 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import {
-  updateObject,
-} from '../index.js'
+import updateObject from '../index'
 
 describe('updateObject', () => {
   it('should update object', () => {

@@ -45,9 +45,11 @@ class IconItemList extends PureComponent {
   static arrayBufferToBase64(buffer) {
     let binary = ''
     const bytes = [].slice.call(new Uint8Array(buffer))
-
-    bytes.forEach(b => binary += String.fromCharCode(b))
-
+    for (const item in bytes) {
+      if (Object.prototype.hasOwnProperty.call(bytes, item)) {
+        binary += String.fromCharCode(item)
+      }
+    }
     return window.btoa(binary)
   }
 
@@ -60,18 +62,6 @@ class IconItemList extends PureComponent {
   }
 
   /**
-   * Update the preview of the image
-   * @function componentDidUpdate
-   */
-  componentDidUpdate(prevProps) {
-    if (prevProps.image !== this.props.image) {
-      this.setState({
-        image: this.props.image,
-      })
-    }
-  }
-
-  /**
    * Request an image if it's necessary
    * @function componentDidMount
    */
@@ -80,6 +70,23 @@ class IconItemList extends PureComponent {
       this.getImage()
     }
   }
+
+  /**
+   * Update the preview of the image
+   * @function componentDidUpdate
+   */
+  componentDidUpdate(prevProps) {
+    if (prevProps.image !== this.props.image) {
+      // eslint-disable-next-line
+      this.setState({
+        image: this.props.image,
+      })
+    }
+  }
+
+  // static getDerivedStateFromProps(nextProps, prevState) {
+
+  // }
 
   /**
    * Asynchronous function to get a requested image
@@ -100,28 +107,32 @@ class IconItemList extends PureComponent {
           break
 
         default:
-          const urlBase = localStorage.getItem('baseURL')
-          let url
-          if (this.props.isMin) {
-            const image = this.props.image.split('.')
-            url = `//${urlBase.split('//')[1]}/front/document.send.php?file=_pictures/${image[0]}_min.${image[1]}`
-          } else {
-            url = `//${urlBase.split('//')[1]}/front/document.send.php?file=_pictures/${this.props.image}`
-          }
-
-          fetch(url, {
-            method: 'GET',
-            credentials: 'same-origin',
-          }).then((response) => {
-            response.arrayBuffer().then((buffer) => {
-              this.setState({
-                image: `data:image/jpeg;base64,${IconItemList.arrayBufferToBase64(buffer)}`,
-              })
-            })
-          })
+          this.requestImage()
           break
       }
     } catch (error) {}
+  }
+
+  requestImage = async () => {
+    const urlBase = localStorage.getItem('baseURL')
+    let url
+    if (this.props.isMin) {
+      const image = this.props.image.split('.')
+      url = `//${urlBase.split('//')[1]}/front/document.send.php?file=_pictures/${image[0]}_min.${image[1]}`
+    } else {
+      url = `//${urlBase.split('//')[1]}/front/document.send.php?file=_pictures/${this.props.image}`
+    }
+
+    fetch(url, {
+      method: 'GET',
+      credentials: 'same-origin',
+    }).then((response) => {
+      response.arrayBuffer().then((buffer) => {
+        this.setState({
+          image: `data:image/jpeg;base64,${IconItemList.arrayBufferToBase64(buffer)}`,
+        })
+      })
+    })
   }
 
   /**

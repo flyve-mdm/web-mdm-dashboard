@@ -51,15 +51,6 @@ class ScrollSyncPanel extends PureComponent {
 
   /**
    * @static
-   * @constant defaultProps
-   * @type {object}
-   */
-  static defaultProps = {
-    group: 'default',
-  }
-
-  /**
-   * @static
    * @constant contextTypes
    * @type {object}
    */
@@ -69,10 +60,21 @@ class ScrollSyncPanel extends PureComponent {
   }
 
   /**
+   * @static
+   * @constant defaultProps
+   * @type {object}
+   */
+  static defaultProps = {
+    group: 'default',
+    attachTo: undefined,
+  }
+
+  /**
    * Register panel
    * @function componentDidMount
    */
   componentDidMount() {
+    // eslint-disable-next-line
     this.node = this.props.attachTo || ReactDOM.findDOMNode(this)
     this.context.registerPanel(this.node, this.props.group)
   }

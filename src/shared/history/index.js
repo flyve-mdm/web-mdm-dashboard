@@ -34,14 +34,13 @@ import {
   createMemoryHistory,
 } from 'history'
 
-let history
-if (process.env.NODE_ENV !== 'test') {
-  /** Get browser history */
-  history = createHistory()
-} else {
-  history = createMemoryHistory('/')
+const history = function () {
+  if (process.env.NODE_ENV !== 'test') {
+    /** Get browser history */
+    return createHistory()
+  }
+  return createMemoryHistory('/')
 }
 
-
 /** Export history object */
-export default history
+export default history()

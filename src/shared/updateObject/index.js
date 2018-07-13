@@ -34,7 +34,7 @@
  * @param {object} updatedProperties properties to update
  * @param {function} callback function
  */
-export const updateObject = (oldObject, updatedProperties, callback) => {
+export default (oldObject, updatedProperties, callback) => {
   if (callback) callback()
   return {
     ...oldObject,

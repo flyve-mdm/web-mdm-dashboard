@@ -38,6 +38,7 @@
         "peerDependencies": false
       }
     ],
+    "react/no-danger": "off",
     "react/forbid-prop-types": "off",
     "react/destructuring-assignment": "off",
     "react/react-in-jsx-scope": "off",
