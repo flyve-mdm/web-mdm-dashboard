@@ -207,7 +207,9 @@ class Entity extends PureComponent {
             changeMode={this.changeMode}
             tokenLife={tokenLife}
             saveValues={this.saveValues}
+            handleMessage={handleMessage}
             glpi={glpi}
+            toast={toast}
             entityID={entityID}
           />
         )
