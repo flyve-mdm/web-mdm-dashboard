@@ -98,6 +98,7 @@ class ChangeTokenLife extends PureComponent {
         this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
+          displayErrorPage: false,
         }))
         this.setState({
           isLoading: false,
@@ -115,7 +116,7 @@ class ChangeTokenLife extends PureComponent {
       isLoading,
       tokenLife,
     } = this.state
-    const { changeMode } = this.state
+    const { changeMode } = this.props
 
     return isLoading
       ? <Loading message={`${I18n.t('commons.saving')}...`} />
