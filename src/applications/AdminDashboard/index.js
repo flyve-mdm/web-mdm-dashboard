@@ -27,6 +27,7 @@
  */
 
 /** import dependencies */
+import React from 'react'
 import PropTypes from 'prop-types'
 import withAdminDashboardLayout from '../../hoc/withAdminDashboardLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'

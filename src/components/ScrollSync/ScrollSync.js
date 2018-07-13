@@ -203,7 +203,6 @@ class ScrollSync extends PureComponent {
           panel.scrollLeft = this.props.proportional ? (panelWidth * scrollLeft) / scrollLeftOffset : scrollLeft
         }
         // Re-attach event listeners after we're done scrolling
-        console.log(panel)
         window.requestAnimationFrame(() => {
           this.addEvents(panel, group)
         })

@@ -40,6 +40,7 @@ import glpi from '../../shared/glpiApi'
 import I18n from '../../shared/i18n'
 import Confirmation from '../../components/Confirmation'
 import withAuthentication from '../withAuthentication'
+import withHandleMessages from '../withHandleMessages'
 
 /** timeout to contract the lateral menu */
 const TIMEOUT_CONTRACT = 150
@@ -181,7 +182,7 @@ const withAdminDashboardLayout = (WrappedComponent) => {
             <Confirmation
               title={I18n.t('logout.close_session')}
               message={I18n.t('settings.security.close_session_message')}
-              reference={el => this.contentDialog = el}
+              reference={(el) => { this.contentDialog = el }}
             />
           </div>
         </main>
@@ -201,7 +202,7 @@ const withAdminDashboardLayout = (WrappedComponent) => {
     languageCurrent: PropTypes.string.isRequired,
   }
 
-  return withAuthentication(AdminDashboardLayout)
+  return withAuthentication(withHandleMessages(AdminDashboardLayout))
 }
 
 

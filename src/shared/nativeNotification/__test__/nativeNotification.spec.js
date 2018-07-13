@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import nativeNotification from '../index.js'
+import nativeNotification from '../index'
 
 describe('nativeNotification', () => {
   beforeEach(() => {

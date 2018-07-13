@@ -152,7 +152,6 @@ ChangeTokenLife.propTypes = {
   saveValues: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
   entityID: PropTypes.string.isRequired,
-  handleMessage: PropTypes.func.isRequired,
 }
 
 export default ChangeTokenLife

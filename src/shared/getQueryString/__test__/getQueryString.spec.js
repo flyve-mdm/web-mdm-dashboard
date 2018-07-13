@@ -26,7 +26,7 @@
 * ------------------------------------------------------------------------------
 */
 
-import getQueryString from '../index.js'
+import getQueryString from '../index'
 
 describe('getQueryString', () => {
   it('should get QueryString', () => {

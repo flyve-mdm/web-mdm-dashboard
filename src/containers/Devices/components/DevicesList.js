@@ -410,15 +410,15 @@ export default class DevicesList extends PureComponent {
 
     if (this.state.isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList && itemList.length > 0) {
+    } else if (this.state.itemList && this.state.itemList.length > 0) {
       listComponent = (
         <ReactWinJS.ListView
           ref={(listView) => { this.listView = listView }}
           className="list-pane__content win-selectionstylefilled"
           style={{ height: 'calc(100% - 48px)' }}
-          itemDataSource={itemList.dataSource}
-          groupDataSource={itemList.groups.dataSource}
-          layout={layout}
+          itemDataSource={this.state.itemList.dataSource}
+          groupDataSource={this.state.itemList.groups.dataSource}
+          layout={this.state.layout}
           itemTemplate={this.ItemListRenderer}
           groupHeaderTemplate={this.groupHeaderRenderer}
           footerComponent={footerComponent}

@@ -102,7 +102,7 @@ export default () => {
         <br />
 
         <span>
-          © 2017 - 2018 Teclib'.
+          © 2017 - 2018 Teclib&apos;.
         </span>
         <br />
       </footer>

@@ -342,12 +342,8 @@ FilesUpload.propTypes = {
 }
 
 FilesUpload.defaultProps = {
-  onChange(files) {
-    console.log(files)
-  },
-  onError(error) {
-    console.log(`error code ${error.code}: ${error.message}`)
-  },
+  onChange: () => {},
+  onError: () => {},
   className: 'files-dropzone',
   dropActiveClassName: 'files-dropzone-active',
   accepts: null,

@@ -48,7 +48,6 @@ export default class Enroll extends PureComponent {
       isLoading: false,
       email: '',
     }
-    console.log(this.props)
   }
 
   /**

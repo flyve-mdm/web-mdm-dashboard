@@ -36,7 +36,7 @@ import {
 import I18n from '../../shared/i18n'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
-import ErrorPage from '../../components/ErrorPage'
+import ErrorPage from '../ErrorPage'
 import {
   slideTop,
 } from '../../shared/animations/index'
@@ -141,7 +141,7 @@ class ListWithNavLinks extends PureComponent {
     const paths = this.props.history.location.pathname.split('/')
 
     if (paths[paths.length - 1].indexOf('error') === 0) {
-      return <ErrorPage/>
+      return <ErrorPage />
     }
 
     if (this.state.mode === 'small' && !this.state.styleNav.display) {

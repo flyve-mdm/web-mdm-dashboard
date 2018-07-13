@@ -241,7 +241,7 @@ export class AuthenticationProvider extends PureComponent {
       <AuthenticationContext.Provider value={{ auth: context }}>
         {this.props.children}
       </AuthenticationContext.Provider>
-    );
+    )
   }
 }
 
