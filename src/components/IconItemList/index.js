@@ -43,7 +43,7 @@ class IconItemList extends PureComponent {
    * @param {*} buffer
    * @return {string}
    */
-  static rrayBufferToBase64(buffer) {
+  static arrayBufferToBase64(buffer) {
     let binary = ''
     const bytes = [].slice.call(new Uint8Array(buffer))
 
@@ -103,7 +103,7 @@ class IconItemList extends PureComponent {
           }).then((response) => {
             response.arrayBuffer().then((buffer) => {
               this.setState({
-                image: `data:image/jpeg;base64,${this.arrayBufferToBase64(buffer)}`,
+                image: `data:image/jpeg;base64,${IconItemList.arrayBufferToBase64(buffer)}`,
               })
             })
           })
