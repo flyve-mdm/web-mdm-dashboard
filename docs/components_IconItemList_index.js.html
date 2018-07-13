@@ -81,6 +81,18 @@ class IconItemList extends PureComponent {
   }
 
   /**
+   * Update the preview of the image
+   * @function componentDidUpdate
+   */
+  componentDidUpdate(prevProps) {
+    if (prevProps.image !== this.props.image) {
+      this.setState({
+        image: this.props.image,
+      })
+    }
+  }
+
+  /**
    * Request an image if it's necessary
    * @function componentDidMount
    */
