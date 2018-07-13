@@ -27,9 +27,6 @@
  */
 
 /** import dependencies */
-import React, {
-  Component,
-} from 'react'
 import {
   Switch,
 } from 'react-router-dom'
@@ -44,15 +41,11 @@ import GenerateRoutes from '../../components/GenerateRoutes'
  * @class RootApp
  * @extends Component
  */
-class RootApp extends Component {
-  render() {
-    return (
-      <Switch>
-        <GenerateRoutes routes={routes} withNotFound {...this.props} />
-      </Switch>
-    )
-  }
-}
+const RootApp = props => (
+  <Switch>
+    <GenerateRoutes routes={routes} withNotFound {...props} />
+  </Switch>
+)
 
 export default withI18n(
   withNotification(RootApp),
