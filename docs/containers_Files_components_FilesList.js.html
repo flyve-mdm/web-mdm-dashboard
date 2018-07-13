@@ -496,7 +496,7 @@ class FilesList extends PureComponent {
 
     if (isLoading) {
       listComponent = &lt;Loader count={3} />
-    } else if (itemList.length > 0) {
+    } else if (itemList &amp;&amp; itemList.length > 0) {
       listComponent = (
         &lt;ReactWinJS.ListView
           ref={(listView) => { this.listView = listView }}
