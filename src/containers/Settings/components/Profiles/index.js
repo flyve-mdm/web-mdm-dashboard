@@ -382,7 +382,7 @@ class Profiles extends PureComponent {
         this.setState({
           imageProfile: e.target.result,
           typeImageProfile: 'file',
-        });
+        })
       })(file)
 
       reader.readAsDataURL(file)
@@ -403,9 +403,7 @@ class Profiles extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      glpi,
-    } = this.props
+    const { glpi } = this.props
     const {
       login,
       isLoading,

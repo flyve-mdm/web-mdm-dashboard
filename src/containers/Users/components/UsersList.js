@@ -490,7 +490,7 @@ export default class UsersList extends PureComponent {
     if (isLoading) {
       listComponent = <Loader count={3} />
     } else if (itemList) {
-      if (itemList.length > 0) {
+      if (itemList && itemList.length > 0) {
         listComponent = (
           <ReactWinJS.ListView
             ref={(listView) => { this.listView = listView }}
