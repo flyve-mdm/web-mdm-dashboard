@@ -23,14 +23,14 @@ layout: coverage
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.46% </span>
+        <span class="strong">89.29% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>23/26</span>
+        <span class='fraction'>25/28</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">73.53% </span>
+        <span class="strong">71.79% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>25/34</span>
+        <span class='fraction'>28/39</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">80% </span>
@@ -38,9 +38,9 @@ layout: coverage
         <span class='fraction'>4/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.46% </span>
+        <span class="strong">89.29% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>23/26</span>
+        <span class='fraction'>25/28</span>
       </div>
     </div>
     <p class="quiet">
@@ -151,7 +151,13 @@ layout: coverage
 <a name='L100'></a><a href='#L100'>100</a>
 <a name='L101'></a><a href='#L101'>101</a>
 <a name='L102'></a><a href='#L102'>102</a>
-<a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,12 +228,13 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -241,17 +248,22 @@ layout: coverage
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
  *   Copyright © 2018 Teclib. All rights reserved.
@@ -322,7 +334,8 @@ export default ({
   type = 'info',
   message,
   title,
-  customErrorRoute
+  customErrorRoute,
+  displayErrorPage = true
 }) =&gt; {
   const response = {
     type,
@@ -339,7 +352,9 @@ export default ({
         <span class="missing-if-branch" title="else path not taken" >E</span>if (message.data[0][1] === 'session_token seems invalid') {
           logout()
         }
-        validateActiveProfile(history.location.pathname, message.status, customErrorRoute)
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (displayErrorPage) {
+          validateActiveProfile(history.location.pathname, message.status, customErrorRoute)
+        }
         break
       case (message.status === 404):
         response.body = message.data[0][1] !== '' ? <span class="branch-0 cbranch-no" title="branch not covered" >message.data[0][1] </span>: message.statusText
@@ -347,7 +362,9 @@ export default ({
       case (message.status &gt;= 400 &amp;&amp; message.status &lt; 500):
         response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? <span class="branch-0 cbranch-no" title="branch not covered" >message.data[1][0].message</span>
           : message.data[0][1] : <span class="branch-1 cbranch-no" title="branch not covered" >message.statusText</span>
-        pushError(history.location.pathname, message.status, customErrorRoute)
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (displayErrorPage) {
+          pushError(history.location.pathname, message.status, customErrorRoute)
+        }
         break
       default:
         break
@@ -355,13 +372,14 @@ export default ({
   }
   return response
 }
+&nbsp;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 13 2018 22:17:30 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 13 2018 23:20:28 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

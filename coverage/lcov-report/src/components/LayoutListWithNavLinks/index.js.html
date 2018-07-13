@@ -23,24 +23,24 @@ layout: coverage
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">77.78% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>14/18</span>
+        <span class='fraction'>18/24</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">36.36% </span>
+        <span class="strong">37.5% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>8/22</span>
+        <span class='fraction'>9/24</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80% </span>
+        <span class="strong">81.82% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>8/10</span>
+        <span class='fraction'>9/11</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">77.78% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>14/18</span>
+        <span class='fraction'>18/24</span>
       </div>
     </div>
     <p class="quiet">
@@ -239,7 +239,21 @@ layout: coverage
 <a name='L188'></a><a href='#L188'>188</a>
 <a name='L189'></a><a href='#L189'>189</a>
 <a name='L190'></a><a href='#L190'>190</a>
-<a name='L191'></a><a href='#L191'>191</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a>
+<a name='L197'></a><a href='#L197'>197</a>
+<a name='L198'></a><a href='#L198'>198</a>
+<a name='L199'></a><a href='#L199'>199</a>
+<a name='L200'></a><a href='#L200'>200</a>
+<a name='L201'></a><a href='#L201'>201</a>
+<a name='L202'></a><a href='#L202'>202</a>
+<a name='L203'></a><a href='#L203'>203</a>
+<a name='L204'></a><a href='#L204'>204</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -372,6 +386,24 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -404,12 +436,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -467,6 +493,7 @@ import {
 import I18n from '../../shared/i18n'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
+import ErrorPage from '../../components/ErrorPage'
 import {
   slideTop,
 } from '../../shared/animations/index'
@@ -567,6 +594,24 @@ class ListWithNavLinks extends PureComponent {
     })
   }
 &nbsp;
+  renderComponent = () =&gt; {
+    const paths = this.props.history.location.pathname.split('/')
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (paths[paths.length - 1].indexOf('error') === 0) {
+<span class="cstat-no" title="statement not covered" >      return &lt;ErrorPage/&gt;</span>
+    }
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.state.mode === 'small' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >!this.state.styleNav.display)</span> {
+<span class="cstat-no" title="statement not covered" >      return null</span>
+    }
+&nbsp;
+    return (
+      &lt;div style={this.stylesArticle()}&gt;
+        {this.props.children}
+      &lt;/div&gt;
+    )
+  }
+&nbsp;
   /**
    * Render component
    * @function render
@@ -597,15 +642,9 @@ class ListWithNavLinks extends PureComponent {
             })}
           &lt;/ul&gt;
         &lt;/nav&gt;
-        {
-          (this.state.mode === 'small' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >!this.state.styleNav.display)</span>
-            ? <span class="branch-0 cbranch-no" title="branch not covered" >''</span>
-            : (
-              &lt;div style={this.stylesArticle()}&gt;
-                {this.props.children}
-              &lt;/div&gt;
-            )
-        }
+&nbsp;
+        { this.renderComponent() }
+&nbsp;
       &lt;/div&gt;
     )
   }
@@ -625,7 +664,7 @@ export default ListWithNavLinks
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 13 2018 22:17:30 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 13 2018 23:20:28 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
