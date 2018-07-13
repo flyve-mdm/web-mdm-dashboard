@@ -176,7 +176,7 @@ class Select extends PureComponent {
         </p>
         <select
           name={this.props.name}
-          value={this.props.value}
+          value={(this.props.value || undefined)}
           onChange={this.change}
           required={this.props.required}
         >
@@ -202,7 +202,7 @@ Select.defaultProps = {
   label: null,
   glpi: null,
   request: null,
-  value: null,
+  value: undefined,
 }
 
 Select.propTypes = {
