@@ -71,10 +71,8 @@ class ResetPassword extends PureComponent {
    * @return {component}
    */
   createRenderElament = () => {
-    const { isResetSent } = this.state
-
     let element
-    if (!isResetSent) {
+    if (!this.state.isResetSent) {
       const reset = this.buildDataArray()
       element = (
         <React.Fragment>
@@ -117,12 +115,6 @@ class ResetPassword extends PureComponent {
    * @function handleResetPassword
    */
   handleResetPassword = () => {
-    const {
-      email,
-      token,
-      password,
-    } = this.state
-
     const user = this.buildDataArray()
     let isCorrect = true
 
@@ -140,9 +132,9 @@ class ResetPassword extends PureComponent {
         isResetSent: true,
       })
       this.props.auth.fetchResetPassword({
-        email,
-        token,
-        newPassword: password,
+        email: this.state.email,
+        token: this.state.token,
+        newPassword: this.state.password,
       })
         .then((response) => {
           this.props.toast.setNotification(response)
@@ -177,21 +169,13 @@ class ResetPassword extends PureComponent {
    * @return {array}
    */
   buildDataArray = () => {
-    const {
-      email,
-      forceValidation,
-      password,
-      configurationPassword,
-      passwordConfirmation,
-    } = this.state
-
     const dataArray = {
       resetInformation: [
         [{
           label: I18n.t('commons.email'),
           type: 'text',
           name: 'email',
-          value: email,
+          value: this.state.email,
           placeholder: I18n.t('commons.email'),
           function: this.changeState,
           disabled: false,
@@ -202,13 +186,13 @@ class ResetPassword extends PureComponent {
             isRequired: true,
             isEmail: true,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         {
           label: I18n.t('commons.password'),
           type: 'password',
           name: 'password',
-          value: password,
+          value: this.state.password,
           placeholder: I18n.t('commons.password'),
           function: this.changeState,
           disabled: false,
@@ -217,15 +201,15 @@ class ResetPassword extends PureComponent {
           },
           parametersToEvaluate: {
             isRequired: true,
-            ...configurationPassword,
+            ...this.state.configurationPassword,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         {
           label: I18n.t('commons.password_confirmation'),
           type: 'password',
           name: 'passwordConfirmation',
-          value: passwordConfirmation,
+          value: this.state.passwordConfirmation,
           placeholder: I18n.t('commons.password_confirmation'),
           function: this.changeState,
           disabled: false,
@@ -234,13 +218,13 @@ class ResetPassword extends PureComponent {
           },
           parametersToEvaluate: {
             isRequired: true,
-            ...configurationPassword,
+            ...this.state.configurationPassword,
             isEqualTo: {
-              value: password,
+              value: this.state.password,
               message: I18n.t('commons.passwords_not_match'),
             },
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         ],
       ],

@@ -79,16 +79,11 @@ export default class Applications extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      software,
-    } = this.state
-
     return (
-      isLoading
+      this.state.isLoading
         ? <Loading message={`${I18n.t('commons.loading')}...`} />
         : (
-          software
+          this.state.software
             ? (
               <React.Fragment>
                 <h3>
@@ -98,28 +93,28 @@ export default class Applications extends PureComponent {
                   label={I18n.t('commons.name')}
                   name="name"
                   type="text"
-                  value={validateData(software.name)}
+                  value={validateData(this.state.software.name)}
                   disabled
                 />
                 <Input
                   label={I18n.t('commons.date_creation')}
                   name="comment"
                   type="date"
-                  value={validateData(toDateInputValue(software.date_creation))}
+                  value={validateData(toDateInputValue(this.state.software.date_creation))}
                   disabled
                 />
                 <Input
                   label={I18n.t('commons.date_mod')}
                   name="comment"
                   type="date"
-                  value={validateData(toDateInputValue(software.date_mod))}
+                  value={validateData(toDateInputValue(this.state.software.date_mod))}
                   disabled
                 />
                 <TextArea
                   label={I18n.t('commons.comments')}
                   name="comment"
                   type="textArea"
-                  value={validateData(software.comment)}
+                  value={validateData(this.state.software.comment)}
                   disabled
                 />
                 <button

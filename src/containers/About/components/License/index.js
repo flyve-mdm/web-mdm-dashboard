@@ -78,11 +78,9 @@ class License extends PureComponent {
    * @function render
    */
   render() {
-    const { license } = this.state
-
     let renderComponent
-    if (license) {
-      if (license === 'no data') {
+    if (this.state.license) {
+      if (this.state.license === 'no data') {
         renderComponent = (
           <EmptyMessage message={I18n.t('commons.no_data')} />
         )
@@ -93,7 +91,7 @@ class License extends PureComponent {
               {I18n.t('about.license.title')}
             </h2>
             <div className="about-pane" style={{ margin: '10px' }}>
-              <ReactMarkdown source={license} />
+              <ReactMarkdown source={this.state.license} />
             </div>
           </ContentPane>
         )

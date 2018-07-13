@@ -69,14 +69,8 @@ class PasswordFieldset extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      errorMessage,
-      classInput,
-    } = this.state
-
     let renderComponent
-    if (isLoading) {
+    if (this.state.isLoading) {
       renderComponent = (
         <div style={{ margin: 50, height: '140px' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -93,14 +87,14 @@ class PasswordFieldset extends PureComponent {
             <br />
             {this.props.username}
             <br />
-            {errorMessage}
+            {this.state.errorMessage}
           </p>
           <form onSubmit={this.props.handleOnSubmit}>
             <input
               type="password"
               name="password"
               ref={(input) => { this.passwordInput = input }}
-              className={classInput}
+              className={this.state.classInput}
               placeholder={I18n.t('commons.password')}
               value={this.props.password}
               onChange={this.props.changeInput}

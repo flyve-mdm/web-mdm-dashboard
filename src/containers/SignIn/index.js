@@ -97,14 +97,13 @@ class SignIn extends PureComponent {
    * @param {object} prevState
    */
   componentDidUpdate(...args) {
-    const { phase } = this.state
     const prevState = args[1]
 
-    if (prevState.phase !== phase) {
-      if (phase === 2 && this.form) {
+    if (prevState.phase !== this.state.phase) {
+      if (this.state.phase === 2 && this.form) {
         slideLeft(this.form).play()
       }
-      if (phase === 1 && this.form) {
+      if (this.state.phase === 1 && this.form) {
         slideRight(this.form).play()
       }
     }
@@ -136,21 +135,15 @@ class SignIn extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      phase,
-      username,
-      password,
-    } = this.state
-
     if (localStorage.getItem('currentUser') && localStorage.getItem('sessionToken')) {
       return <Redirect to={`${publicURL}/app`} />
     }
     let form
-    if (phase === 1) {
+    if (this.state.phase === 1) {
       form = (
         <UsernameFieldset
           {...this.props}
-          username={username}
+          username={this.state.username}
           changeInput={this.changeInput}
           changePhase={this.changePhase}
         />
@@ -159,8 +152,8 @@ class SignIn extends PureComponent {
       form = (
         <AsyncPasswordFieldset
           {...this.props}
-          username={username}
-          password={password}
+          username={this.state.username}
+          password={this.state.password}
           changeInput={this.changeInput}
           changePhase={this.changePhase}
           history={this.props.history}

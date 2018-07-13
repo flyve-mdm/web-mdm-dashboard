@@ -91,7 +91,6 @@ class Invitations extends PureComponent {
    * @function handleResize
    */
   handleResize = () => {
-    const { mode } = this.state
     const nextMode = getMode()
 
     if (nextMode === 'small') {
@@ -103,7 +102,7 @@ class Invitations extends PureComponent {
         itemListPaneWidth: 320,
       })
     }
-    if (mode !== nextMode) {
+    if (this.state.mode !== nextMode) {
       this.setState({
         mode: nextMode,
       })
@@ -115,28 +114,19 @@ class Invitations extends PureComponent {
    * @function propsData
    * @return {object}
    */
-  propsData = () => {
-    const {
-      icon,
-      selectionMode,
-      action,
-      selectedItems,
-    } = this.state
-
-    return ({
-      icon,
-      changeSelectionMode: this.changeSelectionMode,
-      selectionMode,
-      selectedItems,
-      changeSelectedItems: this.changeSelectedItems,
-      action,
-      changeAction: this.changeAction,
-      toast: this.props.toast,
-      history: this.props.history,
-      glpi: this.props.glpi,
-      handleMessage: this.props.handleMessage,
-    })
-  }
+  propsData = () => ({
+    icon: this.state.icon,
+    changeSelectionMode: this.changeSelectionMode,
+    selectionMode: this.state.selectionMode,
+    selectedItems: this.state.selectedItems,
+    changeSelectedItems: this.changeSelectedItems,
+    action: this.state.action,
+    changeAction: this.changeAction,
+    toast: this.props.toast,
+    history: this.props.history,
+    glpi: this.props.glpi,
+    handleMessage: this.props.handleMessage,
+  })
 
   /**
    * Change selected items
@@ -171,22 +161,15 @@ class Invitations extends PureComponent {
    * @return {object}
    */
   stylesList = () => {
-    const {
-      itemListPaneWidth,
-      mode,
-      selectedItems,
-      selectionMode,
-    } = this.state
-
     const styles = {
-      width: itemListPaneWidth,
+      width: this.state.itemListPaneWidth,
     }
-    if (mode === 'small') {
-      if ((selectedItems.length === 0 && this.props.history.location.pathname
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/invitations`)
         || this.props.history.location.pathname === `${publicURL}/app/invitations`
         || (this.props.history.location.pathname === `${publicURL}/app/invitations`
-          && selectionMode)) {
+        && this.state.selectionMode)) {
         styles.display = 'inline-block'
       } else {
         styles.display = 'none'
@@ -204,25 +187,17 @@ class Invitations extends PureComponent {
    * @return {object}
    */
   stylesContent = () => {
-    const {
-      itemListPaneWidth,
-      mode,
-      selectedItems,
-      selectionMode,
-    } = this.state
-
-    const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
+    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
     const styles = {
       width: calc100PercentMinus(validWidth),
       height: '100%',
     }
 
-    if (mode === 'small') {
-      if ((selectedItems.length === 0 && this.props.history.location.pathname
-          === `${publicURL}/app/invitations`)
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/invitations`)
         || this.props.history.location.pathname === `${publicURL}/app/invitations`
         || (this.props.history.location.pathname === `${publicURL}/app/invitations`
-          && selectionMode)) {
+        && this.state.selectionMode)) {
         styles.display = 'none'
       } else {
         styles.display = 'inline-flex'

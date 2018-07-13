@@ -107,19 +107,17 @@ class HelpCenterList extends PureComponent {
   }
 
   showAllArticles = () => {
-    const { articles } = this.state
-
-    this.setState({
-      labelList: I18n.t('about.help_center.all_articles'),
-      list: new WinJS.Binding.List(articles),
+    this.setState((prevState) => {
+      ({
+        labelList: I18n.t('about.help_center.all_articles'),
+        list: new WinJS.Binding.List(prevState.articles),
+      })
     })
   }
 
   filterArticles = (filter) => {
-    const { articles } = this.state
-
     const filteredArticles = []
-    articles.forEach((element) => {
+    this.state.articles.forEach((element) => {
       if (element.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
         filteredArticles.push(element)
       }
@@ -130,16 +128,14 @@ class HelpCenterList extends PureComponent {
   }
 
   handleSuggestionsRequested = (eventObject) => {
-    const { suggestionList } = this.state
-
     const { queryText } = eventObject.detail
     const query = queryText.toLowerCase()
     const suggestionCollection = eventObject.detail.searchSuggestionCollection
 
     if (queryText.length > 0) {
-      for (let i = 0, len = suggestionList.length; i < len; i += 1) {
-        if (suggestionList[i].toLowerCase().indexOf(query) !== -1) {
-          suggestionCollection.appendQuerySuggestion(suggestionList[i])
+      for (let i = 0, len = this.state.suggestionList.length; i < len; i += 1) {
+        if (this.state.suggestionList[i].toLowerCase().indexOf(query) !== -1) {
+          suggestionCollection.appendQuerySuggestion(this.state.suggestionList[i])
         }
       }
     }
@@ -154,15 +150,8 @@ class HelpCenterList extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      list,
-      labelList,
-      layout,
-    } = this.state
-
     return (
-      isLoading
+      this.state.isLoading
         ? <Loading message={`${I18n.t('commons.loading')}...`} />
         : (
           <ContentPane>
@@ -179,7 +168,7 @@ class HelpCenterList extends PureComponent {
                 >
                   <div>
                     <h3 style={{ margin: '10px' }}>
-                      {labelList}
+                      {this.state.labelList}
                     </h3>
                   </div>
                   <div>
@@ -216,15 +205,15 @@ class HelpCenterList extends PureComponent {
               <ReactWinJS.ListView
                 className="list-pane__content win-selectionstylefilled"
                 style={{ height: 'calc(100% - 48px)' }}
-                itemDataSource={list.dataSource}
+                itemDataSource={this.state.list.dataSource}
                 itemTemplate={this.itemRenderer}
-                layout={layout}
+                layout={this.state.layout}
                 selectionMode="single"
                 tapBehavior="directSelect"
               />
 
               {
-              labelList !== I18n.t('about.help_center.recent_articles')
+              this.state.labelList !== I18n.t('about.help_center.recent_articles')
                 ? ''
                 : (
                   <div>

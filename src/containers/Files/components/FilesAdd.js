@@ -100,13 +100,11 @@ export default class FilesAdd extends PureComponent {
    * @function filesUpload
    */
   filesUpload = () => {
-    const { files } = this.state
-
     const formData = new FormData()
 
-    Object.keys(files).forEach(async (key) => {
+    Object.keys(this.state.files).forEach(async (key) => {
       try {
-        const file = files[key]
+        const file = this.state.files[key]
         formData.append('file', file)
         formData.append('uploadManifest', `{"input":{"name":"${file.name}"}}`)
         this.setState({
@@ -138,13 +136,8 @@ export default class FilesAdd extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      files,
-    } = this.state
-
     let renderComponent
-    if (isLoading) {
+    if (this.state.isLoading) {
       renderComponent = (<Loading message={`${I18n.t('commons.loading')}...`} />)
     } else {
       renderComponent = (
@@ -179,11 +172,11 @@ export default class FilesAdd extends PureComponent {
                     {I18n.t('commons.save')}
                   </button>
                   {
-                      files.length > 0
+                      this.state.files.length > 0
                         ? (
                           <div>
                             {
-                              files.map(file => (
+                              this.state.files.map(file => (
                                 <FilesUploadItemList
                                   key={file.id}
                                   fileData={file}

@@ -67,10 +67,8 @@ class Display extends PureComponent {
    * @function componentDidUpdate
    */
   componentDidUpdate() {
-    const { animations } = this.state
-
     localStorage.setItem('display', JSON.stringify(this.state))
-    animationsWinJs(animations)
+    animationsWinJs(this.state.animations)
   }
 
   /**

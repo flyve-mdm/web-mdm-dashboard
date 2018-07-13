@@ -72,8 +72,7 @@ class UsersContent extends PureComponent {
    * @param {object} prevState
    */
   componentDidUpdate(prevProps, prevState) {
-    const { id } = this.state
-    if (prevState.id !== id) {
+    if (prevState.id !== this.state.id) {
       this.handleRefresh()
     }
   }
@@ -143,21 +142,20 @@ class UsersContent extends PureComponent {
    */
   handleRefresh = async () => {
     try {
-      const { id } = this.state
-
-      const user = await this.props.glpi.getAnItem({
+      await this.props.glpi.getAnItem({
         itemtype: itemtype.User,
-        id,
-      })
-
-      const emails = await this.props.glpi.getSubItems({
-        itemtype: itemtype.User,
-        id,
-        subItemtype: 'UserEmail',
-      })
-      this.setState({
-        data: user,
-        emails,
+        id: this.state.id,
+      }, async (user) => {
+        await this.props.glpi.getSubItems({
+          itemtype: itemtype.User,
+          id: this.state.id,
+          subItemtype: 'UserEmail',
+        }, (emails) => {
+          this.setState({
+            data: user,
+            emails,
+          })
+        })
       })
     } catch (error) {
       this.props.toast.setNotification(this.props.handleMessage({
@@ -173,18 +171,12 @@ class UsersContent extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      data,
-      emails,
-      id,
-    } = this.state
-
     let renderComponent
-    if (!data) {
+    if (!this.state.data) {
       renderComponent = <Loading message={`${I18n.t('commons.loading')}...`} />
     } else {
-      const imageProfile = data.picture
-        ? data.picture
+      const imageProfile = this.state.data.picture
+        ? this.state.data.picture
         : 'profile.png'
       renderComponent = (
         <React.Fragment>
@@ -194,12 +186,12 @@ class UsersContent extends PureComponent {
               <div>
                 <div className="item-info__name">
                   <b>
-                    {data.name}
+                    {this.state.data.name}
                   </b>
                 </div>
 
                 <span className="item-info__message">
-                  {data.realname}
+                  {this.state.data.realname}
                 </span>
 
                 <br />
@@ -207,7 +199,7 @@ class UsersContent extends PureComponent {
                 <span className="item-info__source">
                   {I18n.t('commons.joined')}
                   {' '}
-                  {data.date_creation}
+                  {this.state.data.date_creation}
                 </span>
 
                 <br />
@@ -215,7 +207,7 @@ class UsersContent extends PureComponent {
                 <span
                   className="editIcon"
                   style={{ padding: '0 10px', fontSize: '20px' }}
-                  onClick={() => this.props.history.push(`${publicURL}/app/users/${id}/edit`)}
+                  onClick={() => this.props.history.push(`${publicURL}/app/users/${this.state.id}/edit`)}
                   role="button"
                   tabIndex="0"
                 />
@@ -237,39 +229,39 @@ class UsersContent extends PureComponent {
               <li>
                 <span className="phoneIcon" />
                 <div>
-                  <a href={data.mobile ? `tel: ${data.mobile}` : '#call'}>
+                  <a href={this.state.data.mobile ? `tel: ${this.state.data.mobile}` : '#call'}>
                     {I18n.t('commons.call_mobile')}
                   </a>
                   <div>
-                    {data.mobile ? data.mobile : I18n.t('commons.not_available')}
+                    {this.state.data.mobile ? this.state.data.mobile : I18n.t('commons.not_available')}
                   </div>
                 </div>
               </li>
               <li>
                 <span className="phoneIcon" />
                 <div>
-                  <a href={data.phone2 ? `tel: ${data.phone2}` : '#call'}>
+                  <a href={this.state.data.phone2 ? `tel: ${this.state.data.phone2}` : '#call'}>
                     {I18n.t('commons.call_work')}
                   </a>
                   <div>
-                    {data.phone2 ? data.phone2 : I18n.t('commons.not_available')}
+                    {this.state.data.phone2 ? this.state.data.phone2 : I18n.t('commons.not_available')}
                   </div>
                 </div>
               </li>
               <li>
                 <span className="emailIcon" />
                 <div>
-                  <a href={emails.length > 0 ? `mailto: ${emails[0].email}` : '#email'}>
+                  <a href={this.state.emails.length > 0 ? `mailto: ${this.state.emails[0].email}` : '#email'}>
                     {I18n.t('commons.email')}
                   </a>
                   <div>
-                    {emails.length > 0 ? emails[0].email : I18n.t('commons.not_available')}
+                    {this.state.emails.length > 0 ? this.state.emails[0].email : I18n.t('commons.not_available')}
                   </div>
                 </div>
               </li>
             </ul>
           </div>
-          <Confirmation title={I18n.t('users.delete_one')} message={data.name} reference={(el) => { this.contentDialog = el }} />
+          <Confirmation title={I18n.t('users.delete_one')} message={this.state.data.name} reference={(el) => { this.contentDialog = el }} />
         </React.Fragment>
       )
     }

@@ -65,10 +65,6 @@ class Feedback extends PureComponent {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const {
-      subject,
-      textarea,
-    } = this.state
 
     this.setState({
       isLoading: true,
@@ -95,8 +91,8 @@ class Feedback extends PureComponent {
       if (Array.isArray(entityconfig)) entityconfig = { ...entityconfig[0] }
 
       const link = `mailto:${entityconfig.support_email}`
-        + `?subject=${escape(subject)}`
-        + `&body=${escape(textarea)}`
+        + `?subject=${escape(this.state.subject)}`
+        + `&body=${escape(this.state.textarea)}`
 
       if (process.env.NODE_ENV !== 'test') window.location.href = link
 
@@ -116,18 +112,11 @@ class Feedback extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      feedbackSent,
-      subject,
-      textarea,
-    } = this.state
-
-    if (isLoading) {
+    if (this.state.isLoading) {
       return (
         <Loading message={I18n.t('commons.sending')} />
       )
-    } if (feedbackSent) {
+    } if (this.state.feedbackSent) {
       return (
         <React.Fragment>
           <div style={{ textAlign: 'center' }}>
@@ -151,14 +140,14 @@ class Feedback extends PureComponent {
             <Input
               label={I18n.t('commons.subject')}
               name="subject"
-              value={subject}
+              value={this.state.subject}
               function={this.changeMessage}
               required
             />
             <TextArea
               label={I18n.t('commons.message')}
               name="textarea"
-              value={textarea}
+              value={this.state.textarea}
               function={this.changeMessage}
               placeholder={I18n.t('about.help_center.write_feedback')}
               required

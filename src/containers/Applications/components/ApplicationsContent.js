@@ -70,9 +70,7 @@ export default class ApplicationsContent extends PureComponent {
    * @param {object} prevState
    */
   componentDidUpdate(prevProps, prevState) {
-    const { id } = this.state
-
-    if (id !== prevState.id) {
+    if (this.state.id !== prevState.id) {
       this.handleRefresh()
     }
   }
@@ -144,14 +142,14 @@ export default class ApplicationsContent extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = async () => {
-    const { id } = this.state
-
     try {
-      this.setState({
-        data: await this.props.glpi.getAnItem({
-          itemtype: itemtype.PluginFlyvemdmPackage,
-          id,
-        }),
+      await this.props.glpi.getAnItem({
+        itemtype: itemtype.PluginFlyvemdmPackage,
+        id: this.state.id,
+      }, (data) => {
+        this.setState({
+          data,
+        })
       })
     } catch (error) {
       this.props.toast.setNotification(this.props.handleMessage({
@@ -163,23 +161,17 @@ export default class ApplicationsContent extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      data,
-      id,
-    } = this.state
-
-    if (isLoading || data === undefined) {
+    if (this.state.isLoading || this.state.data === undefined) {
       return (
         <Loading message={`${I18n.t('commons.loading')}...`} />
       )
     }
     let image
-    if (data.icon) {
+    if (this.state.data.icon) {
       image = (
         <IconItemList
           size={this.props.size}
-          image={`data:image/png;base64, ${data.icon}`}
+          image={`data:image/png;base64, ${this.state.data.icon}`}
           type="base64"
           backgroundColor="transparent"
         />
@@ -209,23 +201,23 @@ export default class ApplicationsContent extends PureComponent {
             {image}
             <div>
               <div className="item-info__name">
-                {data.alias}
+                {this.state.data.alias}
               </div>
               <div className="item-info__detail">
-                {data.name}
+                {this.state.data.name}
               </div>
               <div className="item-info__detail">
-                {BytesToSize(data.filesize)}
+                {BytesToSize(this.state.data.filesize)}
               </div>
               <span className="item-info__source">
-                {data.source}
+                {this.state.data.source}
               </span>
               <br />
               <div>
                 <span
                   className="editIcon"
                   style={{ marginRight: '20px', fontSize: '20px' }}
-                  onClick={() => this.props.history.push(`${publicURL}/app/applications/${id}/edit`)}
+                  onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)}
                   role="button"
                   tabIndex="0"
                 />
@@ -243,7 +235,7 @@ export default class ApplicationsContent extends PureComponent {
         <div className="separator" />
         <Confirmation
           title={I18n.t('applications.delete')}
-          message={data.name}
+          message={this.state.data.name}
           reference={(el) => { this.contentDialog = el }}
         />
       </ContentPane>

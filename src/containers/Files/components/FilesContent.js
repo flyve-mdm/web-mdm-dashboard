@@ -116,9 +116,7 @@ export default class FilesContent extends PureComponent {
   }
 
   render() {
-    const { isLoading } = this.state
-
-    if (isLoading) {
+    if (this.state.isLoading) {
       return (
         <Loading
           message={

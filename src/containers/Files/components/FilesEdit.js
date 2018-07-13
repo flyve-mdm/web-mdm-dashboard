@@ -58,7 +58,6 @@ export default class FilesEdit extends PureComponent {
    */
   updateItemList = (index, name) => {
     const { selectedItem } = this.state
-
     const newItem = [...selectedItem]
 
     // Find index of specific object using findIndex method.
@@ -86,19 +85,17 @@ export default class FilesEdit extends PureComponent {
    * @function handleSaveFiles
    */
   handleSaveFiles = async () => {
-    const { selectedItem } = this.state
-
     try {
-      if (selectedItem.length > 0) {
+      if (this.state.selectedItem.length > 0) {
         this.setState({
           isLoading: true,
         })
         await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmFile,
-          input: selectedItem,
+          input: this.state.selectedItem,
         })
 
-        if (selectedItem.length > 1) {
+        if (this.state.selectedItem.length > 1) {
           this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_files'),
@@ -127,10 +124,8 @@ export default class FilesEdit extends PureComponent {
   }
 
   render() {
-    const { isLoading } = this.state
-
     if (this.props.selectedItems) {
-      if (isLoading) {
+      if (this.state.isLoading) {
         return (
           <Loading message={`${I18n.t('commons.loading')}...`} />
         )

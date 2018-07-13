@@ -64,12 +64,7 @@ export default class Geolocation extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      id,
-      update,
-    } = this.state
-
-    if (prevState.id !== id || prevState.update !== update) {
+    if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
       this.handleRefresh()
     }
   }
@@ -96,10 +91,10 @@ export default class Geolocation extends PureComponent {
    * @param {date}
    */
   applyRange = (min, max) => {
-    const { locations } = this.state
-
-    this.setState({
-      showLocations: locations.filter(location => validateDate(new Date(location.date), min, max)),
+    this.setState((prevState) => {
+      ({
+        showLocations: prevState.locations.filter(location => validateDate(new Date(location.date), min, max)),
+      })
     })
   }
 
@@ -110,8 +105,7 @@ export default class Geolocation extends PureComponent {
    */
   showLocation = (location) => {
     const { showLocations } = this.state
-
-    const showLocationsCopy = showLocations.map(element => element)
+    const showLocationsCopy = showLocations.showLocations.map(element => element)
     const index = showLocationsCopy.map(e => e.id).indexOf(location.id)
     if (index === -1) {
       showLocationsCopy.push(location)
@@ -129,14 +123,12 @@ export default class Geolocation extends PureComponent {
    * @function requestLocation
    */
   requestLocation = async () => {
-    const { id } = this.state
-
     try {
       this.setState({
         isLoadingGeolocation: true,
       })
       await this.props.glpi.updateItem({
-        id,
+        id: this.state.id,
         itemtype: itemtype.PluginFlyvemdmAgent,
         input: {
           _geolocate: '',
@@ -166,17 +158,12 @@ export default class Geolocation extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = async () => {
-    const {
-      update,
-      id,
-    } = this.state
-
-    if (update) {
+    if (this.state.update) {
       try {
         const {
           computers_id: computersID,
         } = await this.props.glpi.getAnItem({
-          id,
+          id: this.state.id,
           itemtype: itemtype.PluginFlyvemdmAgent,
         })
         const response = await this.props.glpi.getSubItems({
@@ -215,34 +202,27 @@ export default class Geolocation extends PureComponent {
   })
 
   render() {
-    const {
-      isLoading,
-      showLocations,
-      selectedLocation,
-      filter,
-      isLoadingGeolocation,
-      locations,
-    } = this.state
-
-    return isLoading
+    return this.state.isLoading
       ? <Loading message={`${I18n.t('commons.loading')}...`} />
       : (
         <React.Fragment>
           <Map
-            markers={showLocations}
+            markers={this.state.showLocations}
             style={{ margin: '0 5px', height: '300px', maxWidth: '800px' }}
-            selectedLocation={selectedLocation}
+            selectedLocation={this.state.selectedLocation}
           />
           <button
             className="btn btn--secondary"
             style={{ margin: 5 }}
-            onClick={() => this.setState({
-              filter: !filter,
+            onClick={() => this.setState((prevState) => {
+              ({
+                filter: !prevState.filter,
+              })
             })}
             type="button"
           >
             {
-              filter
+              this.state.filter
                 ? I18n.t('devices.geolocation.hide_filter')
                 : I18n.t('devices.geolocation.filter_range')
             }
@@ -257,23 +237,23 @@ export default class Geolocation extends PureComponent {
               {I18n.t('devices.geolocation.request_current_location')}
             </button>
             {
-              isLoadingGeolocation
+              this.state.isLoadingGeolocation
                 ? <Loading small style={{ paddingBottom: '20px' }} />
                 : ''
             }
           </div>
 
           {
-            filter
+            this.state.filter
               ? <GeolocationRange applyRange={this.applyRange} />
               : ''
           }
 
           <GeolocationList
-            locations={locations}
+            locations={this.state.locations}
             showLocation={this.showLocation}
             goToLocation={this.goToLocation}
-            markers={showLocations}
+            markers={this.state.showLocations}
           />
         </React.Fragment>
       )

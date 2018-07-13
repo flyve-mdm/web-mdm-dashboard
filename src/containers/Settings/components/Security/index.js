@@ -93,8 +93,6 @@ class Security extends PureComponent {
    * @async
    */
   deleteUser = async () => {
-    const { currentUser } = this.state
-
     const isOK = await Confirmation.isOK(this.deleteAccount)
     if (isOK) {
       this.setState({
@@ -105,7 +103,7 @@ class Security extends PureComponent {
           await this.props.glpi.deleteItem({
             itemtype: itemtype.User,
             input: {
-              id: currentUser.id,
+              id: this.state.currentUser.id,
             },
             queryString: {
               force_purge: true,
@@ -192,12 +190,6 @@ class Security extends PureComponent {
       }
 
       if (isCorrect) {
-        const {
-          currentUser,
-          password,
-          passwordConfirmation,
-        } = this.state
-
         this.setState({
           isLoading: true,
         },
@@ -205,10 +197,10 @@ class Security extends PureComponent {
           try {
             await this.props.glpi.updateItem({
               itemtype: itemtype.User,
-              id: currentUser.id,
+              id: this.state.currentUser.id,
               input: {
-                password,
-                password2: passwordConfirmation,
+                password: this.state.password,
+                password2: this.state.passwordConfirmation,
               },
             })
             this.props.toast.setNotification({
@@ -286,65 +278,51 @@ class Security extends PureComponent {
    * Build the data array for the password change form
    * @function buildDataArray
    */
-  buildDataArray = () => {
-    const {
-      password,
-      passwordConfiguration,
-      forceValidation,
-      passwordConfirmation,
-    } = this.state
-    return (
-      [
-        [{
-          label: I18n.t('commons.password'),
-          type: 'password',
-          name: 'password',
-          value: password,
-          placeholder: I18n.t('commons.password'),
-          function: this.changeState,
-          parametersToEvaluate: {
-            isRequired: true,
-            ...passwordConfiguration,
+  buildDataArray = () => (
+    [
+      [{
+        label: I18n.t('commons.password'),
+        type: 'password',
+        name: 'password',
+        value: this.state.password,
+        placeholder: I18n.t('commons.password'),
+        function: this.changeState,
+        parametersToEvaluate: {
+          isRequired: true,
+          ...this.state.passwordConfiguration,
+        },
+        forceValidation: this.state.forceValidation,
+        disabled: false,
+        style: null,
+      }],
+      [{
+        label: I18n.t('commons.password_confirmation'),
+        type: 'password',
+        name: 'passwordConfirmation',
+        value: this.state.passwordConfirmation,
+        placeholder: I18n.t('commons.password_confirmation'),
+        function: this.changeState,
+        parametersToEvaluate: {
+          isRequired: true,
+          ...this.state.passwordConfiguration,
+          isEqualTo: {
+            value: this.state.password,
+            message: I18n.t('commons.passwords_not_match'),
           },
-          forceValidation,
-          disabled: false,
-          style: null,
-        }],
-        [{
-          label: I18n.t('commons.password_confirmation'),
-          type: 'password',
-          name: 'passwordConfirmation',
-          value: passwordConfirmation,
-          placeholder: I18n.t('commons.password_confirmation'),
-          function: this.changeState,
-          parametersToEvaluate: {
-            isRequired: true,
-            ...passwordConfiguration,
-            isEqualTo: {
-              value: password,
-              message: I18n.t('commons.passwords_not_match'),
-            },
-          },
-          forceValidation,
-          disabled: false,
-          style: null,
-        }],
-      ]
-    )
-  }
+        },
+        forceValidation: this.state.forceValidation,
+        disabled: false,
+        style: null,
+      }],
+    ]
+  )
 
   /**
    * Render component
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      mode,
-      selfRegistration,
-    } = this.state
-
-    if (isLoading) {
+    if (this.state.isLoading) {
       return (
         <div style={{ height: '100%' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -352,13 +330,13 @@ class Security extends PureComponent {
       )
     }
 
-    switch (mode) {
+    switch (this.state.mode) {
       case I18n.t('commons.change_password'):
         return (
           <ContentPane>
             <h2>
               {' '}
-              {mode}
+              {this.state.mode}
               {' '}
             </h2>
             <form className="list-content" onSubmit={this.savePassword}>
@@ -464,7 +442,7 @@ class Security extends PureComponent {
               </div>
 
               {
-                !selfRegistration
+                !this.state.selfRegistration
                   ? '' : (
                     <React.Fragment>
                       <div className="list-element">

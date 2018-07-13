@@ -59,9 +59,7 @@ export default class ApplicationsEdit extends PureComponent {
    * @param {name} name
    */
   updateItemList = (index, name) => {
-    const { itemListEdit } = this.state
-
-    const newItem = [...itemListEdit]
+    const newItem = [...this.state.itemListEdit]
 
     // Find index of specific object using findIndex method.
     const objIndex = newItem.findIndex((obj => obj.id === index));
@@ -88,19 +86,17 @@ export default class ApplicationsEdit extends PureComponent {
    * @function handleSaveFiles
    */
   handleSaveFiles = async () => {
-    const { itemListEdit } = this.state
-
     try {
-      if (itemListEdit.length > 0) {
+      if (this.state.itemListEdit.length > 0) {
         this.setState({
           isLoading: true,
         })
         await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
-          input: itemListEdit,
+          input: this.state.itemListEdit,
         })
 
-        if (itemListEdit.length > 1) {
+        if (this.state.itemListEdit.length > 1) {
           this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_files'),
@@ -129,10 +125,8 @@ export default class ApplicationsEdit extends PureComponent {
   }
 
   render() {
-    const { isLoading } = this.state
-
     if (this.props.selectedItems) {
-      if (isLoading) {
+      if (this.state.isLoading) {
         return (
           <Loading message={`${I18n.t('commons.loading')}...`} />
         )

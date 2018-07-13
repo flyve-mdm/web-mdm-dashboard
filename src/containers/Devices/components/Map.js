@@ -79,16 +79,14 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate = (prevProps) => {
-    const { map } = this.state
-
-    if (map) {
+    if (this.state.map) {
       this.addMarkers()
       if (prevProps.selectedLocation !== this.props.selectedLocation) {
-        map.setZoom(10)
-        map.panTo([
+        this.state.map.panTo([
           this.props.selectedLocation.latitude,
           this.props.selectedLocation.longitude,
         ])
+        this.state.map.setZoom(10)
       }
     }
   }
@@ -98,21 +96,16 @@ class Map extends PureComponent {
    * @function addMarkers
    */
   addMarkers = () => {
-    const {
-      markerGroup,
-      map,
-    } = this.state
-
-    markerGroup.clearLayers()
+    this.state.markerGroup.clearLayers()
     for (let index = 0; index < this.props.markers.length; index += 1) {
       L.marker([
         this.props.markers[index].latitude,
         this.props.markers[index].longitude,
-      ]).addTo(markerGroup)
+      ]).addTo(this.state.markerGroup)
     }
     if (this.props.markers[0]) {
-      map.setZoom(10)
-      map.panTo(
+      this.state.map.setZoom(10)
+      this.state.map.panTo(
         new L.LatLng(
           this.props.markers[this.props.markers.length - 1].latitude,
           this.props.markers[this.props.markers.length - 1].longitude,

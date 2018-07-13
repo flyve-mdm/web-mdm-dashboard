@@ -79,8 +79,6 @@ export default class ApplicationsEditItemList extends PureComponent {
   }
 
   render() {
-    const { input } = this.state
-
     return (
       <div className="files-list">
         <div className="files-list__content">
@@ -92,7 +90,7 @@ export default class ApplicationsEditItemList extends PureComponent {
                 className="win-textbox"
                 placeholder={I18n.t('applications.name')}
                 name="input"
-                value={input}
+                value={this.state.input}
                 onChange={this.changeInput}
                 onBlur={this.blurInput}
               />

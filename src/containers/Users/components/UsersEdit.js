@@ -167,11 +167,10 @@ class DevicesEdit extends PureComponent {
    * @function render
    */
   render() {
-    const { FieldList } = this.state
     return (
       <EditMultiple
         selectedItems={this.props.selectedItems}
-        FieldList={FieldList}
+        FieldList={this.state.FieldList}
         changeAction={this.props.changeAction}
         changeSelectionMode={this.props.changeSelectionMode}
         history={this.props.history}

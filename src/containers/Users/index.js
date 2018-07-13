@@ -91,8 +91,6 @@ class Users extends PureComponent {
    * @function handleResize
    */
   handleResize = () => {
-    const { mode } = this.state
-
     const nextMode = getMode()
 
     if (nextMode === 'small') {
@@ -105,7 +103,7 @@ class Users extends PureComponent {
       })
     }
 
-    if (mode !== nextMode) {
+    if (this.state.mode !== nextMode) {
       this.setState({
         mode: nextMode,
       })
@@ -117,28 +115,19 @@ class Users extends PureComponent {
    * @function propsData
    * @return {object}
    */
-  propsData = () => {
-    const {
-      icon,
-      selectionMode,
-      selectedItems,
-      action,
-    } = this.state
-
-    return {
-      icon,
-      selectionMode,
-      selectedItems,
-      action,
-      history: this.props.history,
-      glpi: this.props.glpi,
-      handleMessage: this.props.handleMessage,
-      changeSelectionMode: this.changeSelectionMode,
-      changeSelectedItems: this.changeSelectedItems,
-      toast: this.props.toast,
-      changeAction: this.changeAction,
-    }
-  }
+  propsData = () => ({
+    icon: this.state.icon,
+    selectionMode: this.state.selectionMode,
+    selectedItems: this.state.selectedItems,
+    action: this.state.action,
+    history: this.props.history,
+    glpi: this.props.glpi,
+    handleMessage: this.props.handleMessage,
+    changeSelectionMode: this.changeSelectionMode,
+    changeSelectedItems: this.changeSelectedItems,
+    toast: this.props.toast,
+    changeAction: this.changeAction,
+  })
 
   /**
    * Change selected items
@@ -173,22 +162,15 @@ class Users extends PureComponent {
    * @return {object}
    */
   stylesList = () => {
-    const {
-      selectedItems,
-      selectionMode,
-      itemListPaneWidth,
-      mode,
-    } = this.state
-
     const styles = {
-      width: itemListPaneWidth,
+      width: this.state.itemListPaneWidth,
     }
 
-    if (mode === 'small') {
-      if ((selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/users`)
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/users`)
         || this.props.history.location.pathname === `${publicURL}/app/users`
         || (this.props.history.location.pathname === `${publicURL}/app/users`
-          && selectionMode)) {
+        && this.state.selectionMode)) {
         styles.display = 'inline-block'
       } else {
         styles.display = 'none'
@@ -206,24 +188,17 @@ class Users extends PureComponent {
    * @return {object}
    */
   stylesContent = () => {
-    const {
-      itemListPaneWidth,
-      selectedItems,
-      selectionMode,
-      mode,
-    } = this.state
-
-    const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
+    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
     const styles = {
       width: calc100PercentMinus(validWidth),
       height: '100%',
     }
 
-    if (mode === 'small') {
-      if ((selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/users`)
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/users`)
         || this.props.history.location.pathname === `${publicURL}/app/users`
         || (this.props.history.location.pathname === `${publicURL}/app/users`
-          && selectionMode)) {
+        && this.state.selectionMode)) {
         styles.display = 'none'
       } else {
         styles.display = 'inline-flex'

@@ -53,12 +53,7 @@ class DangerZone extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      id,
-      update,
-    } = this.state
-
-    if (prevState.id !== id || prevState.update !== update) {
+    if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
       this.pane.forceAnimation()
     }
   }
@@ -82,13 +77,11 @@ class DangerZone extends PureComponent {
    * @function wipe
    */
   wipe = async () => {
-    const { id } = this.state
-
     const isOK = await Confirmation.isOK(this.props.wipeDevice)
     if (isOK) {
       try {
         const response = await this.props.glpi.updateItem({
-          id,
+          i: this.state.id,
           itemtype: itemtype.PluginFlyvemdmAgent,
           input: {
             wipe: '1',
@@ -116,13 +109,11 @@ class DangerZone extends PureComponent {
    * @function unenroll
    */
   unenroll = async () => {
-    const { id } = this.state
-
     const isOK = await Confirmation.isOK(this.props.unenrollmentDevice)
     if (isOK) {
       try {
         const response = await this.props.glpi.updateItem({
-          id,
+          id: this.state.id,
           itemtype: itemtype.PluginFlyvemdmAgent,
           input: {
             _unenroll: '1',
@@ -150,13 +141,11 @@ class DangerZone extends PureComponent {
    * @function delete
    */
   delete = async () => {
-    const { id } = this.state
-
     const isOK = await Confirmation.isOK(this.props.deleteDevice)
     if (isOK) {
       try {
         const response = await this.props.glpi.deleteItem({
-          id,
+          id: this.state.id,
           itemtype: itemtype.PluginFlyvemdmAgent,
         })
         this.props.toast.setNotification({

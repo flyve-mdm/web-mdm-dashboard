@@ -57,17 +57,15 @@ export default class Enroll extends PureComponent {
    * @function inviteDevice
    */
   inviteDevice = async () => {
-    const { email } = this.state
-
     try {
-      if (email.trim() !== '') {
+      if (this.state.email.trim() !== '') {
         this.setState({
           isLoading: true,
         }, async () => {
           await this.props.glpi.addItem({
             itemtype: itemtype.PluginFlyvemdmInvitation,
             input: {
-              _useremails: email.trim(),
+              _useremails: this.state.email.trim(),
             },
           })
         })
@@ -109,13 +107,8 @@ export default class Enroll extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      email,
-    } = this.state
-
     let renderComponent
-    if (isLoading) {
+    if (this.state.isLoading) {
       renderComponent = (
         <Loading message={`${I18n.t('commons.loading')}...`} />
       )
@@ -138,7 +131,7 @@ export default class Enroll extends PureComponent {
             className="win-textbox"
             placeholder={I18n.t('commons.email')}
             name="email"
-            value={email}
+            value={this.state.email}
             onChange={this.changeInput}
             required
           />

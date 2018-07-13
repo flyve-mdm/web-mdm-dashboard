@@ -70,17 +70,15 @@ class ChangeTokenLife extends PureComponent {
     this.setState({
       isLoading: true,
     }, async () => {
-      const { tokenLife } = this.state
-
       try {
         await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmEntityconfig,
           input: [{
             id: this.props.entityID,
-            agent_token_life: `P${tokenLife}D`,
+            agent_token_life: `P${this.state.tokenLife}D`,
           }],
         })
-        this.props.saveValues('tokenLife', tokenLife)
+        this.props.saveValues('tokenLife', this.state.tokenLife)
         this.props.changeMode('')
         this.props.toast.setNotification({
           title: I18n.t('commons.success'),
@@ -105,13 +103,7 @@ class ChangeTokenLife extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      tokenLife,
-    } = this.state
-    const { changeMode } = this.props
-
-    return isLoading
+    return this.state.isLoading
       ? <Loading message={`${I18n.t('commons.saving')}...`} />
       : (
         <ContentPane>
@@ -126,14 +118,14 @@ class ChangeTokenLife extends PureComponent {
               type="number"
               className="win-textbox"
               name="tokenLife"
-              value={tokenLife}
+              value={this.state.tokenLife}
               onChange={this.changeState}
             />
           </div>
           <button
             className="btn btn--secondary"
             style={{ marginRight: 10 }}
-            onClick={() => changeMode('')}
+            onClick={() => this.state.changeMode('')}
             type="button"
           >
             {I18n.t('commons.cancel')}

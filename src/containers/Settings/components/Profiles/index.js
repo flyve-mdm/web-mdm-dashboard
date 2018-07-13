@@ -67,9 +67,7 @@ class Profiles extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const { login } = this.state
-
-    if (login === null) {
+    if (this.state.login === null) {
       const myUser = await this.props.glpi.getAnItem({
         itemtype: itemtype.User,
         id: this.props.auth.currentUser.id,
@@ -191,66 +189,43 @@ class Profiles extends PureComponent {
    * @function saveChanges
    */
   saveChanges = () => {
-    const {
-      firstName,
-      realName,
-      phone,
-      mobilePhone,
-      phone2,
-      administrativeNumber,
-      imageProfile,
-      category,
-      defaultEntity,
-      comments,
-      title,
-      location,
-      defaultProfile,
-      validSince,
-      validUntil,
-      passwordConfirmation,
-      password,
-      parametersToEvaluate,
-      currentEmails,
-      emails,
-    } = this.state
-
     let newUser = {
       id: this.props.auth.currentUser.id,
-      firstname: firstName,
-      realname: realName,
-      phone,
-      phone2,
-      mobile: mobilePhone,
-      registration_number: administrativeNumber,
-      picture: imageProfile,
-      usercategories_id: category.value,
-      entities_id: defaultEntity.value,
-      comment: comments,
-      usertitles_id: title.value,
-      locations_id: location.value,
-      profiles_id: defaultProfile.value,
-      begin_date: validSince,
-      end_date: validUntil,
+      firstname: this.state.firstName,
+      realname: this.state.realName,
+      phone: this.state.phone,
+      phone2: this.state.phone2,
+      mobile: this.state.mobilePhone,
+      registration_number: this.state.administrativeNumber,
+      picture: this.state.imageProfile,
+      usercategories_id: this.state.category.value,
+      entities_id: this.state.defaultEntity.value,
+      comment: this.state.comments,
+      usertitles_id: this.state.title.value,
+      locations_id: this.state.location.value,
+      profiles_id: this.state.defaultProfile.value,
+      begin_date: this.state.validSince,
+      end_date: this.state.validUntil,
     }
 
     let correctPassword = true
 
-    if (password !== '' || passwordConfirmation !== '') {
-      if (!ErrorValidation.validation(parametersToEvaluate, password).isCorrect) {
+    if (this.state.password !== '' || this.state.passwordConfirmation !== '') {
+      if (!ErrorValidation.validation(this.state.parametersToEvaluate, this.state.password).isCorrect) {
         correctPassword = false
       } else if (!ErrorValidation.validation({
-        ...parametersToEvaluate,
+        ...this.state.parametersToEvaluate,
         isEqualTo: {
-          value: password,
+          value: this.state.password,
           message: I18n.t('commons.passwords_not_match'),
         },
-      }, passwordConfirmation).isCorrect) {
+      }, this.state.passwordConfirmation).isCorrect) {
         correctPassword = false
       } else {
         newUser = {
           ...newUser,
-          password,
-          password2: passwordConfirmation,
+          password: this.state.password,
+          password2: this.state.passwordConfirmation,
         }
       }
     }
@@ -267,8 +242,8 @@ class Profiles extends PureComponent {
           })
           await this.props.glpi.updateEmails({
             userID: newUser.id,
-            currentEmails,
-            newEmails: emails,
+            currentEmails: this.state.currentEmails,
+            newEmails: this.state.emails,
           })
           this.setState({
             isLoading: false,
@@ -336,10 +311,10 @@ class Profiles extends PureComponent {
    * @param {number} index
    */
   deleteEmail = (index) => {
-    const { emails } = this.state
-
-    this.setState({
-      emails: emails.slice(0, index).concat(emails.slice(index + 1)),
+    this.setState((prevState) => {
+      ({
+        emails: prevState.emails.slice(0, index).concat(prevState.emails.slice(index + 1)),
+      })
     })
   }
 
@@ -348,15 +323,15 @@ class Profiles extends PureComponent {
    * @function addEmail
    */
   addEmail = () => {
-    const { emails } = this.state
-
-    this.setState({
-      emails: [
-        ...emails,
-        {
-          email: '',
-        },
-      ],
+    this.setState((prevState) => {
+      ({
+        emails: [
+          ...prevState.emails,
+          {
+            email: '',
+          },
+        ],
+      })
     })
   }
 
@@ -395,38 +370,9 @@ class Profiles extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      login,
-      isLoading,
-      imageProfile,
-      typeImageProfile,
-      realName,
-      firstName,
-      title,
-      location,
-      phone,
-      phone2,
-      validSince,
-      administrativeNumber,
-      passwordConfirmation,
-      created,
-      mobilePhone,
-      password,
-      lastLogin,
-      comments,
-      modified,
-      validUntil,
-      parametersToEvaluate,
-      authentication,
-      defaultEntity,
-      defaultProfile,
-      category,
-      emails,
-    } = this.state
-
     let component = null
 
-    if (isLoading || !login) {
+    if (this.state.isLoading || !this.state.login) {
       component = (
         <div
           style={{
@@ -439,29 +385,29 @@ class Profiles extends PureComponent {
       )
     } else {
       const user = usersScheme({
-        realName,
-        firstName,
-        title,
-        location,
-        login,
-        phone,
-        phone2,
-        validSince,
-        administrativeNumber,
-        passwordConfirmation,
-        created,
-        mobilePhone,
-        password,
-        lastLogin,
-        comments,
-        modified,
-        validUntil,
-        parametersToEvaluate,
-        authentication,
-        defaultEntity,
-        defaultProfile,
-        category,
-        emails,
+        realName: this.state.realName,
+        firstName: this.state.firstName,
+        title: this.state.title,
+        location: this.state.location,
+        login: this.state.login,
+        phone: this.state.phone,
+        phone2: this.state.phone2,
+        validSince: this.state.validSince,
+        administrativeNumber: this.state.administrativeNumber,
+        passwordConfirmation: this.state.passwordConfirmation,
+        created: this.state.created,
+        mobilePhone: this.state.mobilePhone,
+        password: this.state.password,
+        lastLogin: this.state.lastLogin,
+        comments: this.state.comments,
+        modified: this.state.modified,
+        validUntil: this.state.validUntil,
+        parametersToEvaluate: this.state.parametersToEvaluate,
+        authentication: this.state.authentication,
+        defaultEntity: this.state.defaultEntity,
+        defaultProfile: this.state.defaultProfile,
+        category: this.state.category,
+        emails: this.state.emails,
         changeState: this.changeState,
         changeEmail: this.changeEmail,
         deleteEmail: this.deleteEmail,
@@ -497,8 +443,8 @@ class Profiles extends PureComponent {
                   {...inputAttributes}
                 />
                 <IconItemList
-                  image={imageProfile}
-                  type={typeImageProfile}
+                  image={this.state.imageProfile}
+                  type={this.state.typeImageProfile}
                   imgClick={this.openFileChooser}
                   size={150}
                   imgClass="clickable"
