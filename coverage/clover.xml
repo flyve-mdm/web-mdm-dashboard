@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1531481675523" clover="3.2.0">
-  <project timestamp="1531481675523" name="All files">
-    <metrics statements="5073" coveredstatements="260" conditionals="1966" coveredconditionals="162" methods="1016" coveredmethods="71" elements="8055" coveredelements="493" complexity="0" loc="5073" ncloc="5073" packages="112" files="192" classes="192">
+<coverage generated="1531494692277" clover="3.2.0">
+  <project timestamp="1531494692277" name="All files">
+    <metrics statements="5073" coveredstatements="260" conditionals="1972" coveredconditionals="164" methods="1016" coveredmethods="71" elements="8061" coveredelements="495" complexity="0" loc="5073" ncloc="5073" packages="112" files="192" classes="192">
       <package name="src">
         <metrics statements="48" coveredstatements="0" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -499,9 +499,9 @@
         </file>
       </package>
       <package name="src.components.Forms.Input">
-        <metrics statements="26" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <metrics statements="26" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="9" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/components/Forms/Input/index.js">
-          <metrics statements="26" coveredstatements="0" conditionals="18" coveredconditionals="0" methods="9" coveredmethods="0"/>
+          <metrics statements="26" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="9" coveredmethods="0"/>
           <line num="29" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
@@ -569,9 +569,9 @@
         </file>
       </package>
       <package name="src.components.Forms.Select">
-        <metrics statements="41" coveredstatements="13" conditionals="18" coveredconditionals="3" methods="13" coveredmethods="6"/>
+        <metrics statements="41" coveredstatements="13" conditionals="20" coveredconditionals="4" methods="13" coveredmethods="6"/>
         <file name="index.js" path="/root/repo/src/components/Forms/Select/index.js">
-          <metrics statements="41" coveredstatements="13" conditionals="18" coveredconditionals="3" methods="13" coveredmethods="6"/>
+          <metrics statements="41" coveredstatements="13" conditionals="20" coveredconditionals="4" methods="13" coveredmethods="6"/>
           <line num="42" count="1" type="stmt"/>
           <line num="43" count="1" type="stmt"/>
           <line num="50" count="1" type="cond" truecount="2" falsecount="2"/>
@@ -616,14 +616,14 @@
         </file>
       </package>
       <package name="src.components.Forms.TextArea">
-        <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="1"/>
         <file name="index.js" path="/root/repo/src/components/Forms/TextArea/index.js">
-          <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+          <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="1"/>
           <line num="38" count="1" type="stmt"/>
           <line num="39" count="1" type="stmt"/>
           <line num="49" count="0" type="stmt"/>
           <line num="57" count="1" type="stmt"/>
-          <line num="67" count="1" type="stmt"/>
+          <line num="68" count="1" type="stmt"/>
         </file>
       </package>
       <package name="src.components.GenerateRoutes">
