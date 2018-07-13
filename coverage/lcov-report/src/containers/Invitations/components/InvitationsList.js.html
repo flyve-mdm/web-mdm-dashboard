@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/152</span>
+        <span class='fraction'>0/150</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/148</span>
+        <span class='fraction'>0/146</span>
       </div>
     </div>
     <p class="quiet">
@@ -695,11 +695,7 @@ layout: coverage
 <a name='L644'></a><a href='#L644'>644</a>
 <a name='L645'></a><a href='#L645'>645</a>
 <a name='L646'></a><a href='#L646'>646</a>
-<a name='L647'></a><a href='#L647'>647</a>
-<a name='L648'></a><a href='#L648'>648</a>
-<a name='L649'></a><a href='#L649'>649</a>
-<a name='L650'></a><a href='#L650'>650</a>
-<a name='L651'></a><a href='#L651'>651</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L647'></a><a href='#L647'>647</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1259,10 +1255,8 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1275,8 +1269,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1907,27 +1899,23 @@ export default class InvitationsList extends PureComponent {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    if (isLoading) {</span>
 <span class="cstat-no" title="statement not covered" >      listComponent = &lt;Loader count={3} /&gt;</span>
-    } else <span class="cstat-no" title="statement not covered" >if (itemList !== undefined) {</span>
-<span class="cstat-no" title="statement not covered" >      if (itemList.length &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >        listComponent = (</span>
-          &lt;ReactWinJS.ListView
-            ref={(<span class="fstat-no" title="function not covered" >listView) =&gt; { <span class="cstat-no" title="statement not covered" >this.listView = listView } }</span></span>
-            className="list-pane__content win-selectionstylefilled"
-            style={ { height: 'calc(100% - 48px)' } }
-            itemDataSource={itemList.dataSource}
-            groupDataSource={itemList.groups.dataSource}
-            layout={layout}
-            itemTemplate={this.ItemListRenderer}
-            groupHeaderTemplate={this.groupHeaderRenderer}
-            footerComponent={footerComponent}
-            selectionMode={selectionMode ? 'multi' : 'single'}
-            tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
-            onSelectionChanged={this.handleSelectionChanged}
-          /&gt;
-        )
-      } else {
-<span class="cstat-no" title="statement not covered" >        listComponent = &lt;EmptyMessage message={I18n.t('invitations.not_found')} icon={icon} showIcon /&gt;</span>
-      }
+    } else <span class="cstat-no" title="statement not covered" >if (itemList &amp;&amp; itemList.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      listComponent = (</span>
+        &lt;ReactWinJS.ListView
+          ref={(<span class="fstat-no" title="function not covered" >listView) =&gt; { <span class="cstat-no" title="statement not covered" >this.listView = listView } }</span></span>
+          className="list-pane__content win-selectionstylefilled"
+          style={ { height: 'calc(100% - 48px)' } }
+          itemDataSource={itemList.dataSource}
+          groupDataSource={itemList.groups.dataSource}
+          layout={layout}
+          itemTemplate={this.ItemListRenderer}
+          groupHeaderTemplate={this.groupHeaderRenderer}
+          footerComponent={footerComponent}
+          selectionMode={selectionMode ? 'multi' : 'single'}
+          tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
+          onSelectionChanged={this.handleSelectionChanged}
+        /&gt;
+      )
     } else {
 <span class="cstat-no" title="statement not covered" >      listComponent = &lt;EmptyMessage message={I18n.t('invitations.not_found')} icon={icon} showIcon /&gt;</span>
     }
@@ -2005,7 +1993,7 @@ export default class InvitationsList extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 13 2018 18:42:38 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 13 2018 22:17:30 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

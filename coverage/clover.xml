@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1531507358800" clover="3.2.0">
-  <project timestamp="1531507358800" name="All files">
-    <metrics statements="5075" coveredstatements="261" conditionals="1974" coveredconditionals="165" methods="1017" coveredmethods="72" elements="8066" coveredelements="498" complexity="0" loc="5075" ncloc="5075" packages="112" files="192" classes="192">
+<coverage generated="1531520251271" clover="3.2.0">
+  <project timestamp="1531520251271" name="All files">
+    <metrics statements="5071" coveredstatements="261" conditionals="1982" coveredconditionals="165" methods="1017" coveredmethods="72" elements="8070" coveredelements="498" complexity="0" loc="5071" ncloc="5071" packages="112" files="192" classes="192">
       <package name="src">
         <metrics statements="48" coveredstatements="0" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -1371,7 +1371,7 @@
         </file>
       </package>
       <package name="src.containers.Applications.components">
-        <metrics statements="312" coveredstatements="0" conditionals="87" coveredconditionals="0" methods="52" coveredmethods="0"/>
+        <metrics statements="312" coveredstatements="0" conditionals="89" coveredconditionals="0" methods="52" coveredmethods="0"/>
         <file name="ApplicationsAdd.js" path="/root/repo/src/containers/Applications/components/ApplicationsAdd.js">
           <metrics statements="42" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="12" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
@@ -1558,7 +1558,7 @@
           <line num="95" count="0" type="stmt"/>
         </file>
         <file name="ApplicationsList.js" path="/root/repo/src/containers/Applications/components/ApplicationsList.js">
-          <metrics statements="142" coveredstatements="0" conditionals="57" coveredconditionals="0" methods="20" coveredmethods="0"/>
+          <metrics statements="142" coveredstatements="0" conditionals="59" coveredconditionals="0" methods="20" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
@@ -1692,7 +1692,7 @@
           <line num="485" count="0" type="stmt"/>
           <line num="506" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="507" count="0" type="stmt"/>
-          <line num="508" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="508" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="509" count="0" type="stmt"/>
           <line num="511" count="0" type="stmt"/>
           <line num="524" count="0" type="stmt"/>
@@ -1777,7 +1777,7 @@
         </file>
       </package>
       <package name="src.containers.Devices.components">
-        <metrics statements="308" coveredstatements="0" conditionals="91" coveredconditionals="0" methods="54" coveredmethods="0"/>
+        <metrics statements="306" coveredstatements="0" conditionals="91" coveredconditionals="0" methods="54" coveredmethods="0"/>
         <file name="DevicesContent.js" path="/root/repo/src/containers/Devices/components/DevicesContent.js">
           <metrics statements="32" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="8" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
@@ -1898,7 +1898,7 @@
           <line num="85" count="0" type="stmt"/>
         </file>
         <file name="DevicesList.js" path="/root/repo/src/containers/Devices/components/DevicesList.js">
-          <metrics statements="136" coveredstatements="0" conditionals="59" coveredconditionals="0" methods="21" coveredmethods="0"/>
+          <metrics statements="134" coveredstatements="0" conditionals="59" coveredconditionals="0" methods="21" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
@@ -2024,17 +2024,15 @@
           <line num="459" count="0" type="stmt"/>
           <line num="480" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="481" count="0" type="stmt"/>
-          <line num="482" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="483" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="484" count="0" type="stmt"/>
-          <line num="486" count="0" type="stmt"/>
-          <line num="501" count="0" type="stmt"/>
-          <line num="504" count="0" type="stmt"/>
-          <line num="507" count="0" type="stmt"/>
-          <line num="509" count="0" type="stmt"/>
-          <line num="550" count="0" type="stmt"/>
-          <line num="557" count="0" type="stmt"/>
-          <line num="562" count="0" type="stmt"/>
+          <line num="482" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="483" count="0" type="stmt"/>
+          <line num="485" count="0" type="stmt"/>
+          <line num="500" count="0" type="stmt"/>
+          <line num="503" count="0" type="stmt"/>
+          <line num="505" count="0" type="stmt"/>
+          <line num="546" count="0" type="stmt"/>
+          <line num="553" count="0" type="stmt"/>
+          <line num="558" count="0" type="stmt"/>
         </file>
         <file name="Enroll.js" path="/root/repo/src/containers/Devices/components/Enroll.js">
           <metrics statements="33" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="0"/>
@@ -2578,7 +2576,7 @@
         </file>
       </package>
       <package name="src.containers.Files.components">
-        <metrics statements="282" coveredstatements="0" conditionals="81" coveredconditionals="0" methods="47" coveredmethods="0"/>
+        <metrics statements="282" coveredstatements="0" conditionals="83" coveredconditionals="0" methods="47" coveredmethods="0"/>
         <file name="FilesAdd.js" path="/root/repo/src/containers/Files/components/FilesAdd.js">
           <metrics statements="41" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="11" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
@@ -2741,7 +2739,7 @@
           <line num="54" count="0" type="stmt"/>
         </file>
         <file name="FilesList.js" path="/root/repo/src/containers/Files/components/FilesList.js">
-          <metrics statements="136" coveredstatements="0" conditionals="57" coveredconditionals="0" methods="20" coveredmethods="0"/>
+          <metrics statements="136" coveredstatements="0" conditionals="59" coveredconditionals="0" methods="20" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
@@ -2869,7 +2867,7 @@
           <line num="456" count="0" type="stmt"/>
           <line num="477" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="478" count="0" type="stmt"/>
-          <line num="479" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="479" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="480" count="0" type="stmt"/>
           <line num="482" count="0" type="stmt"/>
           <line num="495" count="0" type="stmt"/>
@@ -2951,7 +2949,7 @@
         </file>
       </package>
       <package name="src.containers.Fleets.components">
-        <metrics statements="643" coveredstatements="0" conditionals="371" coveredconditionals="0" methods="112" coveredmethods="0"/>
+        <metrics statements="643" coveredstatements="0" conditionals="373" coveredconditionals="0" methods="112" coveredmethods="0"/>
         <file name="DevicesAssociated.js" path="/root/repo/src/containers/Fleets/components/DevicesAssociated.js">
           <metrics statements="30" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="6" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
@@ -3323,7 +3321,7 @@
           <line num="47" count="0" type="stmt"/>
         </file>
         <file name="FleetsList.js" path="/root/repo/src/containers/Fleets/components/FleetsList.js">
-          <metrics statements="132" coveredstatements="0" conditionals="51" coveredconditionals="0" methods="19" coveredmethods="0"/>
+          <metrics statements="132" coveredstatements="0" conditionals="53" coveredconditionals="0" methods="19" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
@@ -3447,7 +3445,7 @@
           <line num="470" count="0" type="stmt"/>
           <line num="491" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="492" count="0" type="stmt"/>
-          <line num="493" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="493" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="494" count="0" type="stmt"/>
           <line num="496" count="0" type="stmt"/>
           <line num="509" count="0" type="stmt"/>
@@ -3915,7 +3913,7 @@
         </file>
       </package>
       <package name="src.containers.Invitations.components">
-        <metrics statements="192" coveredstatements="0" conditionals="69" coveredconditionals="0" methods="31" coveredmethods="0"/>
+        <metrics statements="190" coveredstatements="0" conditionals="69" coveredconditionals="0" methods="31" coveredmethods="0"/>
         <file name="InvitationsItemList.js" path="/root/repo/src/containers/Invitations/components/InvitationsItemList.js">
           <metrics statements="6" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
@@ -3926,7 +3924,7 @@
           <line num="62" count="0" type="stmt"/>
         </file>
         <file name="InvitationsList.js" path="/root/repo/src/containers/Invitations/components/InvitationsList.js">
-          <metrics statements="148" coveredstatements="0" conditionals="55" coveredconditionals="0" methods="22" coveredmethods="0"/>
+          <metrics statements="146" coveredstatements="0" conditionals="55" coveredconditionals="0" methods="22" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
@@ -4064,17 +4062,15 @@
           <line num="536" count="0" type="stmt"/>
           <line num="557" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="558" count="0" type="stmt"/>
-          <line num="559" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="560" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="561" count="0" type="stmt"/>
-          <line num="563" count="0" type="stmt"/>
-          <line num="578" count="0" type="stmt"/>
-          <line num="581" count="0" type="stmt"/>
-          <line num="584" count="0" type="stmt"/>
-          <line num="586" count="0" type="stmt"/>
-          <line num="627" count="0" type="stmt"/>
-          <line num="634" count="0" type="stmt"/>
-          <line num="639" count="0" type="stmt"/>
+          <line num="559" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="560" count="0" type="stmt"/>
+          <line num="562" count="0" type="stmt"/>
+          <line num="577" count="0" type="stmt"/>
+          <line num="580" count="0" type="stmt"/>
+          <line num="582" count="0" type="stmt"/>
+          <line num="623" count="0" type="stmt"/>
+          <line num="630" count="0" type="stmt"/>
+          <line num="635" count="0" type="stmt"/>
         </file>
         <file name="InvitationsPendingPage.js" path="/root/repo/src/containers/Invitations/components/InvitationsPendingPage.js">
           <metrics statements="38" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="8" coveredmethods="0"/>
@@ -5019,7 +5015,7 @@
         </file>
       </package>
       <package name="src.containers.Users.components">
-        <metrics statements="291" coveredstatements="0" conditionals="101" coveredconditionals="0" methods="49" coveredmethods="0"/>
+        <metrics statements="291" coveredstatements="0" conditionals="103" coveredconditionals="0" methods="49" coveredmethods="0"/>
         <file name="UsersContent.js" path="/root/repo/src/containers/Users/components/UsersContent.js">
           <metrics statements="56" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="8" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
@@ -5190,7 +5186,7 @@
           <line num="67" count="0" type="stmt"/>
         </file>
         <file name="UsersList.js" path="/root/repo/src/containers/Users/components/UsersList.js">
-          <metrics statements="134" coveredstatements="0" conditionals="57" coveredconditionals="0" methods="20" coveredmethods="0"/>
+          <metrics statements="134" coveredstatements="0" conditionals="59" coveredconditionals="0" methods="20" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
@@ -5315,7 +5311,7 @@
           <line num="490" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="491" count="0" type="stmt"/>
           <line num="492" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="493" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="493" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="494" count="0" type="stmt"/>
           <line num="496" count="0" type="stmt"/>
           <line num="511" count="0" type="stmt"/>
