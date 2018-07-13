@@ -38,7 +38,6 @@ import Main from './Main'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
 
 /**
@@ -207,7 +206,9 @@ class Entity extends PureComponent {
             changeMode={this.changeMode}
             tokenLife={tokenLife}
             saveValues={this.saveValues}
+            handleMessage={handleMessage}
             glpi={glpi}
+            toast={toast}
             entityID={entityID}
           />
         )

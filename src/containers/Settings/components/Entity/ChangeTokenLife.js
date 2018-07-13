@@ -76,7 +76,6 @@ class ChangeTokenLife extends PureComponent {
         entityID,
         saveValues,
         changeMode,
-        handleMessage,
       } = this.props
       const { tokenLife } = this.state
 
@@ -96,9 +95,10 @@ class ChangeTokenLife extends PureComponent {
           type: 'success',
         })
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
+          displayErrorPage: false,
         }))
         this.setState({
           isLoading: false,
@@ -116,7 +116,7 @@ class ChangeTokenLife extends PureComponent {
       isLoading,
       tokenLife,
     } = this.state
-    const { changeMode } = this.state
+    const { changeMode } = this.props
 
     return isLoading
       ? <Loading message={`${I18n.t('commons.saving')}...`} />
@@ -162,9 +162,9 @@ ChangeTokenLife.propTypes = {
   changeMode: PropTypes.func.isRequired,
   tokenLife: PropTypes.string.isRequired,
   saveValues: PropTypes.func.isRequired,
-  actions: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   entityID: PropTypes.string.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
 
 export default ChangeTokenLife
