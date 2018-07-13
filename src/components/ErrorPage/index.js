@@ -30,6 +30,7 @@ import React from 'react'
 import history from '../../shared/history'
 import getQueryString from '../../shared/getQueryString'
 import I18n from '../../shared/i18n'
+import logo from '../../assets/images/dashboard.svg'
 
 /**
  * Component with the display of the error pages
@@ -56,7 +57,7 @@ export default () => {
           <figure>
             <img
               alt="Flyve MDM Dashboard"
-              src={require('../../assets/images/dashboard.svg')}
+              src={logo}
               style={{
                 width: '80px',
               }}
@@ -79,7 +80,7 @@ export default () => {
         <figure>
           <img
             alt="Flyve MDM Dashboard"
-            src={require('../../assets/images/dashboard.svg')}
+            src={logo}
           />
         </figure>
         <h1>

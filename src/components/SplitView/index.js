@@ -42,6 +42,7 @@ import publicURL from '../../shared/publicURL'
 import {
   splitview,
 } from '../../shared/animationsWinJs'
+import logo from '../../assets/images/dashboard.svg'
 
 /**
  * Component with side menu
@@ -89,7 +90,7 @@ class SplitView extends PureComponent {
                         <ImgWithPopper
                           to={`${publicURL}/app`}
                           alt="Flyve MDM Dashboard"
-                          img={require('../../assets/images/dashboard.svg')}
+                          img={logo}
                           title={I18n.t('commons.dashboard')}
                           disabled={this.props.expanded}
                         />
