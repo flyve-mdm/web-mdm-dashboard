@@ -44,7 +44,7 @@ const TextArea = props => (
       rows={props.rows}
       className="win-textarea"
       name={props.name}
-      value={props.value}
+      value={(props.value || undefined)}
       placeholder={props.placeholder}
       onChange={event => props.function(props.name, event.target.value)}
       disabled={props.disabled}
@@ -62,6 +62,7 @@ TextArea.defaultProps = {
   function: () => {},
   style: {},
   disabled: false,
+  value: undefined,
 }
 
 TextArea.propTypes = {
@@ -70,7 +71,7 @@ TextArea.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   placeholder: PropTypes.string,
   function: PropTypes.func,
   disabled: PropTypes.bool,
