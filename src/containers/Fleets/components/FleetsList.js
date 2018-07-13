@@ -490,7 +490,7 @@ export default class FleetsList extends PureComponent {
 
     if (isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList.length > 0) {
+    } else if (itemList && itemList.length > 0) {
       listComponent = (
         <ReactWinJS.ListView
           ref={(listView) => { this.listView = listView }}

@@ -556,27 +556,23 @@ export default class InvitationsList extends PureComponent {
 
     if (isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList !== undefined) {
-      if (itemList.length > 0) {
-        listComponent = (
-          <ReactWinJS.ListView
-            ref={(listView) => { this.listView = listView }}
-            className="list-pane__content win-selectionstylefilled"
-            style={{ height: 'calc(100% - 48px)' }}
-            itemDataSource={itemList.dataSource}
-            groupDataSource={itemList.groups.dataSource}
-            layout={layout}
-            itemTemplate={this.ItemListRenderer}
-            groupHeaderTemplate={this.groupHeaderRenderer}
-            footerComponent={footerComponent}
-            selectionMode={selectionMode ? 'multi' : 'single'}
-            tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
-            onSelectionChanged={this.handleSelectionChanged}
-          />
-        )
-      } else {
-        listComponent = <EmptyMessage message={I18n.t('invitations.not_found')} icon={icon} showIcon />
-      }
+    } else if (itemList && itemList.length > 0) {
+      listComponent = (
+        <ReactWinJS.ListView
+          ref={(listView) => { this.listView = listView }}
+          className="list-pane__content win-selectionstylefilled"
+          style={{ height: 'calc(100% - 48px)' }}
+          itemDataSource={itemList.dataSource}
+          groupDataSource={itemList.groups.dataSource}
+          layout={layout}
+          itemTemplate={this.ItemListRenderer}
+          groupHeaderTemplate={this.groupHeaderRenderer}
+          footerComponent={footerComponent}
+          selectionMode={selectionMode ? 'multi' : 'single'}
+          tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
+          onSelectionChanged={this.handleSelectionChanged}
+        />
+      )
     } else {
       listComponent = <EmptyMessage message={I18n.t('invitations.not_found')} icon={icon} showIcon />
     }
