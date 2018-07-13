@@ -96,7 +96,7 @@ class ChangeTokenLife extends PureComponent {
           type: 'success',
         })
       } catch (error) {
-        this.props.toast.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -162,9 +162,9 @@ ChangeTokenLife.propTypes = {
   changeMode: PropTypes.func.isRequired,
   tokenLife: PropTypes.string.isRequired,
   saveValues: PropTypes.func.isRequired,
-  actions: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   entityID: PropTypes.string.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
 
 export default ChangeTokenLife
