@@ -156,59 +156,62 @@ export default class Applications extends PureComponent {
       id,
     } = this.state
     const { glpi } = this.props
+    this.setState({
+      applicationSelected: null,
+    }, async () => {
+      if (update) {
+        try {
+          const {
+            computers_id: computersID,
+          } = await glpi.getAnItem({
+            id,
+            itemtype: itemtype.PluginFlyvemdmAgent,
+          })
+          const {
+            totalcount,
+          } = await glpi.searchItems({
+            itemtype: itemtype.Software,
+            options: {
+              uid_cols: true,
+              forcedisplay: [2],
+            },
+            range: '0-0',
+            metacriteria: [{
+              link: 'AND',
+              itemtype: itemtype.Computer,
+              field: 2,
+              searchtype: 'equals',
+              value: computersID,
+            }],
+          })
+          const softwareList = await glpi.searchItems({
+            itemtype: itemtype.Software,
+            options: {
+              uid_cols: true,
+              forcedisplay: [1, 2, 19],
+            },
+            range: `0-${totalcount}`,
+            metacriteria: [{
+              link: 'AND',
+              itemtype: itemtype.Computer,
+              field: 2,
+              searchtype: 'equals',
+              value: computersID,
+            }],
+          })
 
-    if (update) {
-      try {
-        const {
-          computers_id: computersID,
-        } = await glpi.getAnItem({
-          id,
-          itemtype: itemtype.PluginFlyvemdmAgent,
-        })
-        const {
-          totalcount,
-        } = await glpi.searchItems({
-          itemtype: itemtype.Software,
-          options: {
-            uid_cols: true,
-            forcedisplay: [2],
-          },
-          range: '0-0',
-          metacriteria: [{
-            link: 'AND',
-            itemtype: itemtype.Computer,
-            field: 2,
-            searchtype: 'equals',
-            value: computersID,
-          }],
-        })
-        const softwareList = await glpi.searchItems({
-          itemtype: itemtype.Software,
-          options: {
-            uid_cols: true,
-            forcedisplay: [1, 2, 19],
-          },
-          range: `0-${totalcount}`,
-          metacriteria: [{
-            link: 'AND',
-            itemtype: itemtype.Computer,
-            field: 2,
-            searchtype: 'equals',
-            value: computersID,
-          }],
-        })
-
-        this.setState({
-          isLoading: false,
-          itemList: new WinJS.Binding.List(softwareList.data),
-        })
-      } catch (error) {
-        this.setState({
-          isLoading: false,
-          itemList: new WinJS.Binding.List([]),
-        })
+          this.setState({
+            isLoading: false,
+            itemList: new WinJS.Binding.List(softwareList.data),
+          })
+        } catch (error) {
+          this.setState({
+            isLoading: false,
+            itemList: new WinJS.Binding.List([]),
+          })
+        }
       }
-    }
+    })
   }
 
   /**
@@ -237,6 +240,8 @@ export default class Applications extends PureComponent {
           id={applicationSelected}
           glpi={glpi}
           selectApplication={this.selectApplication}
+          toast={this.props.toast}
+          handleMessage={this.props.handleMessage}
         />
       )
     } else if (isLoading) {
@@ -294,6 +299,8 @@ Applications.propTypes = {
   id: PropTypes.string.isRequired,
   glpi: PropTypes.object.isRequired,
   update: PropTypes.bool.isRequired,
+  toast: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
 </code></pre>
         </article>
