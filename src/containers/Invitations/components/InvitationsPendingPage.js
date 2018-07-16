@@ -123,7 +123,8 @@ class InvitationsPendingPage extends PureComponent {
    */
   handleRefresh = async () => {
     try {
-      await this.props.glpi.searchItems({
+      const { id } = this.state
+      const logs = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitationlog,
         options: {
           uid_cols: true,
@@ -132,13 +133,12 @@ class InvitationsPendingPage extends PureComponent {
         criteria: [{
           field: '4',
           searchtype: 'equal',
-          value: this.state.id,
+          value: id,
         }],
-      }, (logs) => {
-        this.setState({
-          isLoading: false,
-          itemList: new WinJS.Binding.List(logs.data),
-        })
+      })
+      this.setState({
+        isLoading: false,
+        itemList: new WinJS.Binding.List(logs.data),
       })
     } catch (error) {
       this.setState({

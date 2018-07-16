@@ -156,7 +156,7 @@ class ForgotPassword extends PureComponent {
           <button
             className="win-button"
             type="button"
-            onClick={() => this.state.history.push(`${publicURL}/`)}
+            onClick={() => this.props.history.push(`${publicURL}/`)}
           >
             {I18n.t('forgot_password.go_home')}
           </button>

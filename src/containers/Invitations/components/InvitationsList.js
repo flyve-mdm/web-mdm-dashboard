@@ -175,7 +175,7 @@ export default class InvitationsList extends PureComponent {
    * @function handleRefresh
    * @async
    */
-  handleRefresh = async () => {
+  handleRefresh = () => {
     try {
       this.props.history.push(`${publicURL}/app/invitations`)
       this.setState({
@@ -186,16 +186,17 @@ export default class InvitationsList extends PureComponent {
           page: 1,
           count: 15,
         },
-      })
-      await this.props.glpi.searchItems({
-        itemtype: itemtype.PluginFlyvemdmInvitation,
-        options: {
-          uid_cols: true,
-          forcedisplay: [1, 2, 3],
-          order: this.state.order,
-          range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`,
-        },
-      }, (invitations) => {
+      }, async () => {
+        const { order, pagination } = this.state
+        const invitations = await this.props.glpi.searchItems({
+          itemtype: itemtype.PluginFlyvemdmInvitation,
+          options: {
+            uid_cols: true,
+            forcedisplay: [1, 2, 3],
+            order,
+            range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
+          },
+        })
         this.setState({
           isLoading: false,
           order: invitations.order,
@@ -357,48 +358,46 @@ export default class InvitationsList extends PureComponent {
    * @function loadMoreData
    * @async
    */
-  loadMoreData = async () => {
+  loadMoreData = () => {
     try {
       this.setState({
         isLoadingMore: true,
-      })
-      const range = {
-        from: this.state.pagination.count * this.state.pagination.page,
-        to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
-      }
-      if (range.from <= this.state.totalcount) {
-        for (const key in range) {
-          if (Object.prototype.hasOwnProperty.call(range, key)) {
-            if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
-          }
+      }, async () => {
+        const range = {
+          from: this.state.pagination.count * this.state.pagination.page,
+          to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
         }
-        await this.props.glpi.searchItems({
-          itemtype: itemtype.PluginFlyvemdmInvitation,
-          options: {
-            uid_cols: true,
-            forcedisplay: [1, 2, 3],
-            order: this.state.order,
-            range: `${range.from}-${range.to}`,
-          },
-        }, (invitations) => {
+        if (range.from <= this.state.totalcount) {
+          for (const key in range) {
+            if (Object.prototype.hasOwnProperty.call(range, key)) {
+              if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
+            }
+          }
+          const { order, pagination } = this.state
+          const invitations = await this.props.glpi.searchItems({
+            itemtype: itemtype.PluginFlyvemdmInvitation,
+            options: {
+              uid_cols: true,
+              forcedisplay: [1, 2, 3],
+              order,
+              range: `${range.from}-${range.to}`,
+            },
+          })
           for (const item in invitations.data) {
             if (Object.prototype.hasOwnProperty.call(invitations.data, item)) {
               this.state.itemList.push(invitations.data[item])
             }
           }
-
-          this.setState((prevState) => {
-            ({
-              isLoadingMore: false,
-              totalcount: invitations.totalcount,
-              pagination: {
-                ...prevState.pagination,
-                page: prevState.pagination.page + 1,
-              },
-            })
+          this.setState({
+            isLoadingMore: false,
+            totalcount: invitations.totalcount,
+            pagination: {
+              ...pagination,
+              page: pagination.page + 1,
+            },
           })
-        })
-      }
+        }
+      })
     } catch (error) {
       this.setState({
         isLoadingMore: false,

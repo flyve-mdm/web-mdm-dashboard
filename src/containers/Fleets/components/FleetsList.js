@@ -234,25 +234,25 @@ export default class FleetsList extends PureComponent {
       this.setState({
         isLoading: true,
       })
-      const newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
+      const { order, pagination } = this.state
+      const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
 
-      await this.props.glpi.searchItems({
+      const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
         options: {
           uid_cols: true,
           forcedisplay: [2],
           order: newOrder,
-          range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`,
+          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
         },
-      }, (fleets) => {
-        this.setState({
-          isLoading: false,
-          order: fleets.order,
-          totalcount: fleets.totalcount,
-          itemList: new WinJS.Binding.List(fleets.data),
-        })
-        this.props.history.push(`${publicURL}/app/fleets`)
       })
+      this.setState({
+        isLoading: false,
+        order: fleets.order,
+        totalcount: fleets.totalcount,
+        itemList: new WinJS.Binding.List(fleets.data),
+      })
+      this.props.history.push(`${publicURL}/app/fleets`)
     } catch (error) {
       this.setState({
         isLoading: false,
@@ -275,31 +275,29 @@ export default class FleetsList extends PureComponent {
         from: this.state.pagination.count * this.state.pagination.page,
         to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
       }
-
-      await this.props.glpi.searchItems({
+      const { order, pagination } = this.state
+      const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
         options: {
           uid_cols: true,
-          order: this.state.order,
+          order,
           forcedisplay: [2],
           range: `${range.from}-${range.to}`,
         },
-      }, (fleets) => {
-        for (const item in fleets.data) {
-          if (Object.prototype.hasOwnProperty.call(fleets.data, item)) {
-            this.state.itemList.push(fleets.data[item])
-          }
+      })
+
+      for (const item in fleets.data) {
+        if (Object.prototype.hasOwnProperty.call(fleets.data, item)) {
+          this.state.itemList.push(fleets.data[item])
         }
-        this.setState((prevState) => {
-          ({
-            isLoadingMore: false,
-            totalcount: fleets.totalcount,
-            pagination: {
-              ...prevState.pagination,
-              page: prevState.pagination.page + 1,
-            },
-          })
-        })
+      }
+      this.setState({
+        isLoadingMore: false,
+        totalcount: fleets.totalcount,
+        pagination: {
+          ...pagination,
+          page: pagination.page + 1,
+        },
       })
     } catch (error) {
       this.setState({
@@ -333,21 +331,21 @@ export default class FleetsList extends PureComponent {
           count: 15,
         },
       })
-      await this.props.glpi.searchItems({
+      const { order, pagination } = this.state
+      const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
         options: {
           uid_cols: true,
           forcedisplay: [2],
-          order: this.state.order,
-          range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`,
+          order,
+          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
         },
-      }, (fleets) => {
-        this.setState({
-          isLoading: false,
-          order: fleets.order,
-          totalcount: fleets.totalcount,
-          itemList: new WinJS.Binding.List(fleets.data),
-        })
+      })
+      this.setState({
+        isLoading: false,
+        order: fleets.order,
+        totalcount: fleets.totalcount,
+        itemList: new WinJS.Binding.List(fleets.data),
       })
     } catch (error) {
       handleMessage({ message: error })

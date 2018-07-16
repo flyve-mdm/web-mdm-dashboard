@@ -79,7 +79,10 @@ ContentPane.defaultProps = {
 
 ContentPane.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
 }
 
 export default ContentPane

@@ -105,7 +105,7 @@ export default class Geolocation extends PureComponent {
    */
   showLocation = (location) => {
     const { showLocations } = this.state
-    const showLocationsCopy = showLocations.showLocations.map(element => element)
+    const showLocationsCopy = showLocations.map(element => element)
     const index = showLocationsCopy.map(e => e.id).indexOf(location.id)
     if (index === -1) {
       showLocationsCopy.push(location)
