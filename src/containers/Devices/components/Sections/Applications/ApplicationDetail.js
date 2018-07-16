@@ -72,6 +72,11 @@ export default class Applications extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
+      this.props.toast.setNotification(this.props.handleMessage({
+        type: 'alert',
+        message: error,
+        displayErrorPage: false,
+      }))
       this.setState({
         isLoading: false,
       })
@@ -149,4 +154,6 @@ Applications.propTypes = {
   id: PropTypes.number.isRequired,
   glpi: PropTypes.object.isRequired,
   selectApplication: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
