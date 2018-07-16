@@ -185,22 +185,21 @@ export default class UsersList extends PureComponent {
           count: 15,
         },
       })
-
-      await this.props.glpi.searchItems({
+      const { order, pagination } = this.state
+      const response = await this.props.glpi.searchItems({
         itemtype: itemtype.User,
         options: {
           uid_cols: true,
           forcedisplay: [1, 2, 5, 34, 150],
-          order: this.state.order,
-          range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`,
+          order,
+          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
         },
-      }, (response) => {
-        this.setState({
-          isLoading: false,
-          order: response.order,
-          itemList: BuildItemList(response),
-          totalcount: response.totalcount,
-        })
+      })
+      this.setState({
+        isLoading: false,
+        order: response.order,
+        itemList: BuildItemList(response),
+        totalcount: response.totalcount,
       })
     } catch (e) {
       handleMessage({ message: e })
@@ -262,9 +261,9 @@ export default class UsersList extends PureComponent {
           if (this.listView) {
             this.listView.winControl.selection.clear()
           }
-          this.setState(() => ({
+          this.setState({
             isLoading: false,
-          }))
+          })
         }
       })
     } else {
@@ -325,9 +324,10 @@ export default class UsersList extends PureComponent {
       this.setState({
         isLoadingMore: true,
       })
+      const { order, pagination } = this.state
       const range = {
-        from: this.state.pagination.count * this.state.pagination.page,
-        to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
+        from: pagination.count * pagination.page,
+        to: (pagination.count * (pagination.page + 1)) - 1,
       }
       if (range.from <= this.state.totalcount) {
         for (const key in range) {
@@ -335,31 +335,29 @@ export default class UsersList extends PureComponent {
             if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
           }
         }
-        await this.props.glpi.searchItems({
+        const response = await this.props.glpi.searchItems({
           itemtype: itemtype.User,
           options: {
             uid_cols: true,
             forcedisplay: [1, 2, 5, 34, 150],
-            order: this.state.order,
+            order,
             range: `${range.from}-${range.to}`,
           },
-        }, (response) => {
-          for (const item in response.data) {
-            if (Object.prototype.hasOwnProperty.call(response.data, item)) {
-              this.state.itemList.push(response.data[item])
-            }
-          }
+        })
 
-          this.setState((prevState) => {
-            ({
-              isLoadingMore: false,
-              totalcount: response.totalcount,
-              pagination: {
-                ...prevState.pagination,
-                page: prevState.pagination.page + 1,
-              },
-            })
-          })
+        for (const item in response.data) {
+          if (Object.prototype.hasOwnProperty.call(response.data, item)) {
+            this.state.itemList.push(response.data[item])
+          }
+        }
+
+        this.setState({
+          isLoadingMore: false,
+          totalcount: response.totalcount,
+          pagination: {
+            ...pagination,
+            page: pagination.page + 1,
+          },
         })
       }
     } catch (error) {

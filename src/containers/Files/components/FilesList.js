@@ -109,42 +109,41 @@ class FilesList extends PureComponent {
    * @async
    * @function handleRefresh
    */
-  handleRefresh = () => {
-    this.props.history.push(`${publicURL}/app/files`)
-    this.setState({
-      isLoading: true,
-      totalcount: 0,
-      pagination: {
-        start: 0,
-        page: 1,
-        count: 15,
-      },
-    }, async () => {
-      try {
-        const { order, pagination } = this.state
-        const files = await this.props.glpi.searchItems({
-          itemtype: itemtype.PluginFlyvemdmFile,
-          options: {
-            uid_cols: true,
-            forcedisplay: [1, 2, 3],
-            order,
-            range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
-          },
-        })
-        this.setState({
-          order: files.order,
-          itemList: new WinJS.Binding.List(files.data),
-          isLoading: false,
-          totalcount: files.totalcount,
-        })
-      } catch (error) {
-        handleMessage({ message: error })
-        this.setState({
-          isLoading: false,
-          order: 'ASC',
-        })
-      }
-    })
+  handleRefresh = async () => {
+    try {
+      this.props.history.push(`${publicURL}/app/files`)
+      this.setState({
+        isLoading: true,
+        totalcount: 0,
+        pagination: {
+          start: 0,
+          page: 1,
+          count: 15,
+        },
+      })
+      const { order, pagination } = this.state
+      const files = await this.props.glpi.searchItems({
+        itemtype: itemtype.PluginFlyvemdmFile,
+        options: {
+          uid_cols: true,
+          forcedisplay: [1, 2, 3],
+          order,
+          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
+        },
+      })
+      this.setState({
+        order: files.order,
+        itemList: new WinJS.Binding.List(files.data),
+        isLoading: false,
+        totalcount: files.totalcount,
+      })
+    } catch (error) {
+      handleMessage({ message: error })
+      this.setState({
+        isLoading: false,
+        order: 'ASC',
+      })
+    }
   }
 
   /**

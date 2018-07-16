@@ -175,7 +175,7 @@ export default class InvitationsList extends PureComponent {
    * @function handleRefresh
    * @async
    */
-  handleRefresh = () => {
+  handleRefresh = async () => {
     try {
       this.props.history.push(`${publicURL}/app/invitations`)
       this.setState({
@@ -186,23 +186,22 @@ export default class InvitationsList extends PureComponent {
           page: 1,
           count: 15,
         },
-      }, async () => {
-        const { order, pagination } = this.state
-        const invitations = await this.props.glpi.searchItems({
-          itemtype: itemtype.PluginFlyvemdmInvitation,
-          options: {
-            uid_cols: true,
-            forcedisplay: [1, 2, 3],
-            order,
-            range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
-          },
-        })
-        this.setState({
-          isLoading: false,
-          order: invitations.order,
-          itemList: BuildItemList(invitations, 2),
-          totalcount: invitations.totalcount,
-        })
+      })
+      const { order, pagination } = this.state
+      const invitations = await this.props.glpi.searchItems({
+        itemtype: itemtype.PluginFlyvemdmInvitation,
+        options: {
+          uid_cols: true,
+          forcedisplay: [1, 2, 3],
+          order,
+          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
+        },
+      })
+      this.setState({
+        isLoading: false,
+        order: invitations.order,
+        itemList: BuildItemList(invitations, 2),
+        totalcount: invitations.totalcount,
       })
     } catch (error) {
       handleMessage({ message: error })
@@ -232,24 +231,24 @@ export default class InvitationsList extends PureComponent {
 
         this.setState({
           isLoading: true,
-        }, async () => {
-          await this.props.glpi.deleteItem({
-            itemtype: itemtype.PluginFlyvemdmInvitation,
-            input: itemListToDelete,
-            queryString: {
-              force_purge: true,
-            },
-          })
-
-          this.props.toast.setNotification({
-            title: I18n.t('commons.success'),
-            body: I18n.t('notifications.elements_successfully_removed'),
-            type: 'success',
-          })
-          this.props.changeSelectionMode(false)
-          this.props.changeSelectedItems([])
-          this.props.changeAction('reload')
         })
+
+        await this.props.glpi.deleteItem({
+          itemtype: itemtype.PluginFlyvemdmInvitation,
+          input: itemListToDelete,
+          queryString: {
+            force_purge: true,
+          },
+        })
+
+        this.props.toast.setNotification({
+          title: I18n.t('commons.success'),
+          body: I18n.t('notifications.elements_successfully_removed'),
+          type: 'success',
+        })
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
+        this.props.changeAction('reload')
       } else {
         // Exit selection mode
         this.props.changeSelectionMode(false)
@@ -358,46 +357,45 @@ export default class InvitationsList extends PureComponent {
    * @function loadMoreData
    * @async
    */
-  loadMoreData = () => {
+  loadMoreData = async () => {
     try {
       this.setState({
         isLoadingMore: true,
-      }, async () => {
-        const range = {
-          from: this.state.pagination.count * this.state.pagination.page,
-          to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
-        }
-        if (range.from <= this.state.totalcount) {
-          for (const key in range) {
-            if (Object.prototype.hasOwnProperty.call(range, key)) {
-              if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
-            }
-          }
-          const { order, pagination } = this.state
-          const invitations = await this.props.glpi.searchItems({
-            itemtype: itemtype.PluginFlyvemdmInvitation,
-            options: {
-              uid_cols: true,
-              forcedisplay: [1, 2, 3],
-              order,
-              range: `${range.from}-${range.to}`,
-            },
-          })
-          for (const item in invitations.data) {
-            if (Object.prototype.hasOwnProperty.call(invitations.data, item)) {
-              this.state.itemList.push(invitations.data[item])
-            }
-          }
-          this.setState({
-            isLoadingMore: false,
-            totalcount: invitations.totalcount,
-            pagination: {
-              ...pagination,
-              page: pagination.page + 1,
-            },
-          })
-        }
       })
+      const range = {
+        from: this.state.pagination.count * this.state.pagination.page,
+        to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
+      }
+      if (range.from <= this.state.totalcount) {
+        for (const key in range) {
+          if (Object.prototype.hasOwnProperty.call(range, key)) {
+            if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
+          }
+        }
+        const { order, pagination } = this.state
+        const invitations = await this.props.glpi.searchItems({
+          itemtype: itemtype.PluginFlyvemdmInvitation,
+          options: {
+            uid_cols: true,
+            forcedisplay: [1, 2, 3],
+            order,
+            range: `${range.from}-${range.to}`,
+          },
+        })
+        for (const item in invitations.data) {
+          if (Object.prototype.hasOwnProperty.call(invitations.data, item)) {
+            this.state.itemList.push(invitations.data[item])
+          }
+        }
+        this.setState({
+          isLoadingMore: false,
+          totalcount: invitations.totalcount,
+          pagination: {
+            ...pagination,
+            page: pagination.page + 1,
+          },
+        })
+      }
     } catch (error) {
       this.setState({
         isLoadingMore: false,
