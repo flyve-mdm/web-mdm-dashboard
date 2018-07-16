@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1531758952536" clover="3.2.0">
-  <project timestamp="1531758952537" name="All files">
-    <metrics statements="5080" coveredstatements="267" conditionals="1989" coveredconditionals="169" methods="1019" coveredmethods="73" elements="8088" coveredelements="509" complexity="0" loc="5080" ncloc="5080" packages="112" files="192" classes="192">
+<coverage generated="1531776463330" clover="3.2.0">
+  <project timestamp="1531776463330" name="All files">
+    <metrics statements="5081" coveredstatements="267" conditionals="1989" coveredconditionals="169" methods="1019" coveredmethods="73" elements="8089" coveredelements="509" complexity="0" loc="5081" ncloc="5081" packages="112" files="192" classes="192">
       <package name="src">
         <metrics statements="48" coveredstatements="0" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -60,7 +60,7 @@
         </file>
       </package>
       <package name="src.applications.AdminDashboard">
-        <metrics statements="18" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="19" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/applications/AdminDashboard/index.js">
           <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
@@ -71,7 +71,7 @@
           <line num="45" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/repo/src/applications/AdminDashboard/routes.js">
-          <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <metrics statements="13" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="31" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>
@@ -83,7 +83,8 @@
           <line num="38" count="0" type="stmt"/>
           <line num="39" count="0" type="stmt"/>
           <line num="40" count="0" type="stmt"/>
-          <line num="47" count="0" type="stmt"/>
+          <line num="41" count="0" type="stmt"/>
+          <line num="48" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.applications.RootApp">
@@ -3814,38 +3815,38 @@
           <line num="389" count="0" type="stmt"/>
           <line num="390" count="0" type="stmt"/>
           <line num="401" count="0" type="stmt"/>
-          <line num="414" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="424" count="0" type="stmt"/>
-          <line num="426" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="427" count="0" type="stmt"/>
-          <line num="438" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="439" count="0" type="stmt"/>
-          <line num="450" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="451" count="0" type="stmt"/>
-          <line num="462" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="463" count="0" type="stmt"/>
-          <line num="474" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="475" count="0" type="stmt"/>
-          <line num="486" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="487" count="0" type="stmt"/>
-          <line num="498" count="0" type="stmt"/>
-          <line num="508" count="0" type="stmt"/>
-          <line num="510" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="511" count="0" type="stmt"/>
-          <line num="522" count="0" type="stmt"/>
-          <line num="533" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="534" count="0" type="stmt"/>
-          <line num="545" count="0" type="stmt"/>
-          <line num="558" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="559" count="0" type="stmt"/>
-          <line num="564" count="0" type="stmt"/>
-          <line num="582" count="0" type="stmt"/>
-          <line num="591" count="0" type="stmt"/>
+          <line num="415" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="425" count="0" type="stmt"/>
+          <line num="427" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="428" count="0" type="stmt"/>
+          <line num="439" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="440" count="0" type="stmt"/>
+          <line num="451" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="452" count="0" type="stmt"/>
+          <line num="463" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="464" count="0" type="stmt"/>
+          <line num="475" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="476" count="0" type="stmt"/>
+          <line num="487" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="488" count="0" type="stmt"/>
+          <line num="499" count="0" type="stmt"/>
+          <line num="509" count="0" type="stmt"/>
+          <line num="511" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="512" count="0" type="stmt"/>
+          <line num="523" count="0" type="stmt"/>
+          <line num="534" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="535" count="0" type="stmt"/>
+          <line num="546" count="0" type="stmt"/>
+          <line num="559" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="560" count="0" type="stmt"/>
+          <line num="565" count="0" type="stmt"/>
+          <line num="583" count="0" type="stmt"/>
           <line num="592" count="0" type="stmt"/>
           <line num="593" count="0" type="stmt"/>
-          <line num="601" count="0" type="stmt"/>
-          <line num="620" count="0" type="stmt"/>
-          <line num="624" count="0" type="stmt"/>
+          <line num="594" count="0" type="stmt"/>
+          <line num="602" count="0" type="stmt"/>
+          <line num="621" count="0" type="stmt"/>
+          <line num="625" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Invitations">
