@@ -26,7 +26,11 @@ export class NotificationsProvider extends PureComponent {
 
           const notification = validateNotifications()
           if (notification.type === "Native") {
-            nativeNotification(this.state.title, this.state.body, this.state.icon)
+            nativeNotification(
+              this.state.notification.title,
+              this.state.notification.body,
+              this.state.notification.icon,
+            )
           }
           setTimeout(() => {
             this.state.hidenNotification()
