@@ -85,16 +85,17 @@ export default class Main extends PureComponent {
    * @async
    * @function handleRefresh
    */
-  handleRefresh = () => {
+  handleRefresh = async () => {
     if (this.state.update) {
       try {
-        this.setState(async (prevState) => {
-          ({
-            data: await this.props.glpi.getAnItem({
-              itemtype: itemtype.PluginFlyvemdmAgent,
-              id: prevState.id,
-            }),
-          })
+        const { id } = this.state
+        const data = await this.props.glpi.getAnItem({
+          itemtype: itemtype.PluginFlyvemdmAgent,
+          id,
+        })
+
+        this.setState({
+          data,
         })
       } catch (error) {
         this.props.toast.setNotification(this.props.handleMessage({

@@ -134,7 +134,7 @@ export default class Applications extends PureComponent {
           const {
             computers_id: computersID,
           } = await glpi.getAnItem({
-            id,
+            id: this.state.id,
             itemtype: itemtype.PluginFlyvemdmAgent,
           })
           const {

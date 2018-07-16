@@ -70,6 +70,7 @@ export default class DevicesEdit extends PureComponent {
         changeSelectionMode={this.props.changeSelectionMode}
         history={this.props.history}
         toast={this.props.toast}
+        handleMessage={this.props.handleMessage}
         glpi={this.props.glpi}
         request={{
           id: 'PluginFlyvemdmAgent.id',
@@ -86,10 +87,13 @@ DevicesEdit.defaultProps = {
 
 /** DevicesEdit propTypes */
 DevicesEdit.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   selectedItems: PropTypes.array,
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
-  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }

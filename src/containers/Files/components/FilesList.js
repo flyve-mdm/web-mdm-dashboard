@@ -121,21 +121,21 @@ class FilesList extends PureComponent {
       },
     }, async () => {
       try {
-        await this.props.glpi.searchItems({
+        const { order, pagination } = this.state
+        const files = await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmFile,
           options: {
             uid_cols: true,
             forcedisplay: [1, 2, 3],
-            order: this.state.order,
-            range: `${this.state.pagination.start}-${(this.state.pagination.count * this.state.pagination.page) - 1}`,
+            order,
+            range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
           },
-        }, (files) => {
-          this.setState({
-            order: files.order,
-            itemList: new WinJS.Binding.List(files.data),
-            isLoading: false,
-            totalcount: files.totalcount,
-          })
+        })
+        this.setState({
+          order: files.order,
+          itemList: new WinJS.Binding.List(files.data),
+          isLoading: false,
+          totalcount: files.totalcount,
         })
       } catch (error) {
         handleMessage({ message: error })
@@ -319,31 +319,29 @@ class FilesList extends PureComponent {
             if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
           }
         }
-        await this.props.glpi.searchItems({
+        const { order, pagination } = this.state
+        const files = await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmFile,
           options: {
             uid_cols: true,
             forcedisplay: [1, 2, 3],
-            order: this.state.order,
+            order,
             range: `${range.from}-${range.to}`,
           },
-        }, (files) => {
-          for (const item in files.data) {
-            if (Object.prototype.hasOwnProperty.call(files.data, item)) {
-              this.state.itemList.push(files.data[item])
-            }
+        })
+        for (const item in files.data) {
+          if (Object.prototype.hasOwnProperty.call(files.data, item)) {
+            this.state.itemList.push(files.data[item])
           }
+        }
 
-          this.setState((prevState) => {
-            ({
-              isLoadingMore: false,
-              totalcount: files.totalcount,
-              pagination: {
-                ...prevState.pagination,
-                page: prevState.pagination.page + 1,
-              },
-            })
-          })
+        this.setState({
+          isLoadingMore: false,
+          totalcount: files.totalcount,
+          pagination: {
+            ...pagination,
+            page: pagination.page + 1,
+          },
         })
       }
     } catch (error) {

@@ -88,16 +88,16 @@ export default class SystemReport extends PureComponent {
       this.setState({
         isLoading: true,
         requestingInventory: false,
-      }, () => {
+      }, async () => {
         try {
-          this.setState(async (prevState) => {
-            ({
-              isLoading: false,
-              data: await this.props.glpi.getAnItem({
-                itemtype: itemtype.PluginFlyvemdmAgent,
-                id: prevState.id,
-              }),
-            })
+          const { id } = this.state
+          const data = await this.props.glpi.getAnItem({
+            itemtype: itemtype.PluginFlyvemdmAgent,
+            id,
+          })
+          this.setState({
+            isLoading: false,
+            data,
           })
         } catch (error) {
           this.props.toast.setNotification(this.props.handleMessage({

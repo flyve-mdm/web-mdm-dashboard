@@ -54,10 +54,9 @@ export default class DevicesContent extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const { history } = this.props
 
     this.state = {
-      id: getID(history.location.pathname),
+      id: getID(this.props.history.location.pathname),
       selectedIndex: 0,
     }
   }
@@ -80,10 +79,8 @@ export default class DevicesContent extends PureComponent {
    * @param {object} pivot
    */
   changeselectedItem = (pivot) => {
-    const { selectedIndex } = this.state
-
     if (pivot) {
-      if (pivot.winControl.selectedIndex !== selectedIndex) {
+      if (pivot.winControl.selectedIndex !== this.state.selectedIndex) {
         this.setState({
           selectedIndex: pivot.winControl.selectedIndex,
         })
@@ -98,20 +95,6 @@ export default class DevicesContent extends PureComponent {
   }
 
   render() {
-    const {
-      changeAction,
-      changeSelectionMode,
-      toast,
-      handleMessage,
-      history,
-      glpi,
-      selectedItems,
-    } = this.props
-    const {
-      selectedIndex,
-      id,
-    } = this.state
-
     return (
       <React.Fragment>
         <Confirmation
@@ -120,76 +103,75 @@ export default class DevicesContent extends PureComponent {
           reference={(el) => { this.wipeDevice = el }}
         />
         <Confirmation
-          title={`${I18n.t('devices.danger_zone.unenroll_device')} # ${id}`}
-          message={`${I18n.t('devices.danger_zone.going_to_unenroll')} ${id}`}
+          title={`${I18n.t('devices.danger_zone.unenroll_device')} # ${this.state.id}`}
+          message={`${I18n.t('devices.danger_zone.going_to_unenroll')} ${this.state.id}`}
           reference={(el) => { this.unenrollmentDevice = el }}
         />
         <Confirmation
-          title={`${I18n.t('devices.danger_zone.delete')} # ${id}`}
-          message={`${I18n.t('devices.danger_zone.delete_message')} ${id}`}
+          title={`${I18n.t('devices.danger_zone.delete')} # ${this.state.id}`}
+          message={`${I18n.t('devices.danger_zone.delete_message')} ${this.state.id}`}
           reference={(el) => { this.deleteDevice = el }}
         />
         <ContentPane className="devices">
           <ReactWinJS.Pivot ref={this.changeselectedItem}>
             <ReactWinJS.Pivot.Item key="main" header={I18n.t('devices.main.title')}>
               <Main
-                id={id}
-                changeAction={changeAction}
-                changeSelectionMode={changeSelectionMode}
-                toast={toast}
-                handleMessage={handleMessage}
-                history={history}
-                glpi={glpi}
-                update={selectedIndex === 0}
+                id={this.state.id}
+                changeAction={this.props.changeAction}
+                changeSelectionMode={this.props.changeSelectionMode}
+                toast={this.props.toast}
+                handleMessage={this.props.handleMessage}
+                history={this.props.history}
+                glpi={this.props.glpi}
+                update={this.state.selectedIndex === 0}
               />
             </ReactWinJS.Pivot.Item>
             <ReactWinJS.Pivot.Item key="systemReport" header={I18n.t('devices.system_report.title')}>
               <SystemReport
-                id={id}
-                glpi={glpi}
-                toast={toast}
-                handleMessage={handleMessage}
-                update={selectedIndex === 1}
+                id={this.state.id}
+                glpi={this.props.glpi}
+                toast={this.props.toast}
+                handleMessage={this.props.handleMessage}
+                update={this.state.selectedIndex === 1}
               />
             </ReactWinJS.Pivot.Item>
             <ReactWinJS.Pivot.Item key="applications" header={I18n.t('devices.applications.title')}>
               <Applications
-                id={id}
-                glpi={glpi}
-                handleMessage={handleMessage}
-                toast={toast}
-                update={selectedIndex === 2}
+                id={this.state.id}
+                glpi={this.props.glpi}
+                handleMessage={this.props.handleMessage}
+                update={this.state.selectedIndex === 2}
               />
             </ReactWinJS.Pivot.Item>
             <ReactWinJS.Pivot.Item key="policies" header={I18n.t('devices.policies.title')}>
               <FleetsContent
                 {...this.props}
                 itemType={itemtype.PluginFlyvemdmAgent}
-                selectedItems={selectedItems}
-                update={selectedIndex === 3}
+                selectedItems={this.props.selectedItems}
+                update={this.state.selectedIndex === 3}
               />
             </ReactWinJS.Pivot.Item>
             <ReactWinJS.Pivot.Item key="geolocation" header={I18n.t('devices.geolocation.title')}>
               <Geolocation
-                id={id}
-                toast={toast}
-                handleMessage={handleMessage}
-                glpi={glpi}
-                update={selectedIndex === 4}
+                id={this.state.id}
+                toast={this.props.toast}
+                handleMessage={this.props.handleMessage}
+                glpi={this.props.glpi}
+                update={this.state.selectedIndex === 4}
               />
             </ReactWinJS.Pivot.Item>
             <ReactWinJS.Pivot.Item key="dangerZone" header={I18n.t('devices.danger_zone.title')}>
               <DangerZone
-                id={id}
-                changeAction={changeAction}
-                toast={toast}
-                handleMessage={handleMessage}
-                glpi={glpi}
-                history={history}
+                id={this.state.id}
+                changeAction={this.props.changeAction}
+                toast={this.props.toast}
+                handleMessage={this.props.handleMessage}
+                glpi={this.props.glpi}
+                history={this.props.history}
                 wipeDevice={this.wipeDevice}
                 unenrollmentDevice={this.unenrollmentDevice}
                 deleteDevice={this.deleteDevice}
-                update={selectedIndex === 5}
+                update={this.state.selectedIndex === 5}
               />
             </ReactWinJS.Pivot.Item>
           </ReactWinJS.Pivot>

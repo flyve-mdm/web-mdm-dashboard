@@ -43,7 +43,7 @@ const Loader = (props) => {
     content = [
       ...content,
       listRender({
-        props,
+        props: { ...props, type: props.type },
         index,
       }),
     ]
@@ -57,10 +57,12 @@ const Loader = (props) => {
 }
 
 Loader.defaultProps = {
+  type: 'list',
   count: 1,
 }
 
 Loader.propTypes = {
+  type: PropTypes.string,
   count: PropTypes.number,
 }
 

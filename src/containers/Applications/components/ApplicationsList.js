@@ -424,9 +424,9 @@ export default class ApplicationsList extends PureComponent {
    * @function handleAdd
    */
   handleAdd = () => {
-    this.prosp.history.push(`${publicURL}/app/applications/add`)
-    this.prosp.changeSelectionMode(false)
-    this.prosp.changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/applications/add`)
+    this.props.changeSelectionMode(false)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -446,7 +446,7 @@ export default class ApplicationsList extends PureComponent {
         icon="delete"
         label={I18n.t('commons.delete')}
         priority={0}
-        disabled={this.prosp.selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleDelete}
       />
     )
@@ -457,7 +457,7 @@ export default class ApplicationsList extends PureComponent {
         icon="edit"
         label={I18n.t('commons.edit')}
         priority={0}
-        disabled={this.prosp.selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleEdit}
       />
     )
@@ -495,8 +495,8 @@ export default class ApplicationsList extends PureComponent {
           layout={layout}
           itemTemplate={this.ItemListRenderer}
           footerComponent={footerComponent}
-          selectionMode={this.prosp.selectionMode ? 'multi' : 'single'}
-          tapBehavior={this.prosp.selectionMode ? 'toggleSelect' : 'directSelect'}
+          selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+          tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
           onSelectionChanged={this.handleSelectionChanged}
         />
       )
@@ -539,15 +539,15 @@ export default class ApplicationsList extends PureComponent {
             onClick={this.handleAdd}
           />
 
-          {this.prosp.selectionMode ? editCommand : null}
-          {this.prosp.selectionMode ? deleteCommand : null}
+          {this.props.selectionMode ? editCommand : null}
+          {this.props.selectionMode ? deleteCommand : null}
 
           <ReactWinJS.ToolBar.Toggle
             key="select"
             icon="bullets"
             label={I18n.t('commons.select')}
             priority={0}
-            selected={this.prosp.selectionMode}
+            selected={this.props.selectionMode}
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
@@ -555,7 +555,7 @@ export default class ApplicationsList extends PureComponent {
         {listComponent}
         <Confirmation
           title={I18n.t('applications.delete')}
-          message={`${this.prosp.selectedItems.length} ${I18n.t('applications.title')}`}
+          message={`${this.props.selectedItems.length} ${I18n.t('applications.title')}`}
           reference={(el) => { this.contentDialog = el }}
         />
       </React.Fragment>

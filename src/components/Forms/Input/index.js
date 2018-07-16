@@ -138,7 +138,7 @@ class Input extends PureComponent {
           type={this.props.type}
           className={this.state.className}
           name={`${this.props.type}-${this.props.name}`}
-          value={(this.props.value || undefined)}
+          value={(this.props.value || '')}
           placeholder={this.props.placeholder}
           onChange={this.change}
           onBlur={() => this.validate(this.props.parametersToEvaluate, this.props.value)}
