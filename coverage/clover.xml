@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1531781184332" clover="3.2.0">
-  <project timestamp="1531781184333" name="All files">
-    <metrics statements="5081" coveredstatements="267" conditionals="1989" coveredconditionals="169" methods="1019" coveredmethods="73" elements="8089" coveredelements="509" complexity="0" loc="5081" ncloc="5081" packages="112" files="192" classes="192">
+<coverage generated="1531781580912" clover="3.2.0">
+  <project timestamp="1531781580912" name="All files">
+    <metrics statements="5084" coveredstatements="268" conditionals="1992" coveredconditionals="169" methods="1019" coveredmethods="73" elements="8095" coveredelements="510" complexity="0" loc="5084" ncloc="5084" packages="112" files="192" classes="192">
       <package name="src">
         <metrics statements="48" coveredstatements="0" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -5591,9 +5591,9 @@
         </file>
       </package>
       <package name="src.providers.NotificationsProvider">
-        <metrics statements="24" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <metrics statements="26" coveredstatements="0" conditionals="9" coveredconditionals="0" methods="9" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/providers/NotificationsProvider/index.js">
-          <metrics statements="24" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="9" coveredmethods="0"/>
+          <metrics statements="26" coveredstatements="0" conditionals="9" coveredconditionals="0" methods="9" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="2" count="0" type="stmt"/>
           <line num="3" count="0" type="stmt"/>
@@ -5602,22 +5602,24 @@
           <line num="7" count="0" type="stmt"/>
           <line num="9" count="0" type="stmt"/>
           <line num="11" count="0" type="stmt"/>
-          <line num="20" count="0" type="stmt"/>
-          <line num="27" count="0" type="stmt"/>
-          <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="29" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
+          <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="21" count="0" type="stmt"/>
+          <line num="23" count="0" type="stmt"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="32" count="0" type="stmt"/>
           <line num="38" count="0" type="stmt"/>
-          <line num="44" count="0" type="stmt"/>
-          <line num="60" count="0" type="stmt"/>
-          <line num="61" count="0" type="stmt"/>
-          <line num="62" count="0" type="stmt"/>
-          <line num="63" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="64" count="0" type="stmt"/>
-          <line num="70" count="0" type="stmt"/>
-          <line num="82" count="0" type="stmt"/>
-          <line num="93" count="0" type="stmt"/>
+          <line num="39" count="0" type="stmt"/>
+          <line num="45" count="0" type="stmt"/>
+          <line num="51" count="0" type="stmt"/>
+          <line num="67" count="0" type="stmt"/>
+          <line num="68" count="0" type="stmt"/>
+          <line num="69" count="0" type="stmt"/>
+          <line num="70" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="77" count="0" type="stmt"/>
+          <line num="89" count="0" type="stmt"/>
+          <line num="100" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.shared.BuildItemList">
@@ -5902,14 +5904,15 @@
         </file>
       </package>
       <package name="src.shared.nativeNotification">
-        <metrics statements="5" coveredstatements="5" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <metrics statements="6" coveredstatements="6" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <file name="index.js" path="/root/repo/src/shared/nativeNotification/index.js">
-          <metrics statements="5" coveredstatements="5" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
+          <metrics statements="6" coveredstatements="6" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
           <line num="39" count="1" type="stmt"/>
-          <line num="40" count="1" type="cond" truecount="3" falsecount="1"/>
-          <line num="41" count="1" type="stmt"/>
+          <line num="40" count="1" type="stmt"/>
+          <line num="41" count="1" type="cond" truecount="3" falsecount="1"/>
           <line num="42" count="1" type="stmt"/>
-          <line num="48" count="1" type="stmt"/>
+          <line num="43" count="1" type="stmt"/>
+          <line num="49" count="1" type="stmt"/>
         </file>
       </package>
       <package name="src.shared.publicURL">
