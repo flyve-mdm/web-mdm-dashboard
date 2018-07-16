@@ -100,7 +100,6 @@ export default class SystemReport extends PureComponent {
     } = this.state
     const {
       glpi,
-      toast,
       handleMessage,
     } = this.props
 
@@ -164,6 +163,7 @@ export default class SystemReport extends PureComponent {
         this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
+          displayErrorPage: false,
         }))
         this.setState({
           requestingInventory: false,
