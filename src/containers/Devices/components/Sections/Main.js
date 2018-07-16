@@ -133,7 +133,6 @@ export default class Main extends PureComponent {
     const {
       glpi,
       changeSelectionMode,
-      toast,
       history,
       changeAction,
       handleMessage,
@@ -224,6 +223,7 @@ export default class Main extends PureComponent {
         this.props.toast.setNotification(handleMessage({
           type: 'alert',
           message: error,
+          displayErrorPage: false,
         }))
         this.setState({
           sendingPing: false,

@@ -157,6 +157,7 @@ export default class DevicesContent extends PureComponent {
                 id={id}
                 glpi={glpi}
                 handleMessage={handleMessage}
+                toast={toast}
                 update={selectedIndex === 2}
               />
             </ReactWinJS.Pivot.Item>
