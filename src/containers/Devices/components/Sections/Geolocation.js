@@ -164,6 +164,7 @@ export default class Geolocation extends PureComponent {
       this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
+        displayErrorPage: false,
       }))
     }
   }
