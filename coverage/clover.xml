@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1531753599019" clover="3.2.0">
-  <project timestamp="1531753599019" name="All files">
-    <metrics statements="5078" coveredstatements="267" conditionals="1989" coveredconditionals="169" methods="1018" coveredmethods="73" elements="8085" coveredelements="509" complexity="0" loc="5078" ncloc="5078" packages="112" files="192" classes="192">
+<coverage generated="1531758952536" clover="3.2.0">
+  <project timestamp="1531758952537" name="All files">
+    <metrics statements="5080" coveredstatements="267" conditionals="1989" coveredconditionals="169" methods="1019" coveredmethods="73" elements="8088" coveredelements="509" complexity="0" loc="5080" ncloc="5080" packages="112" files="192" classes="192">
       <package name="src">
         <metrics statements="48" coveredstatements="0" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -1816,8 +1816,8 @@
           <line num="120" count="0" type="stmt"/>
           <line num="125" count="0" type="stmt"/>
           <line num="130" count="0" type="stmt"/>
-          <line num="201" count="0" type="stmt"/>
-          <line num="206" count="0" type="stmt"/>
+          <line num="202" count="0" type="stmt"/>
+          <line num="207" count="0" type="stmt"/>
         </file>
         <file name="DevicesEdit.js" path="/root/repo/src/containers/Devices/components/DevicesEdit.js">
           <metrics statements="13" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
@@ -2429,9 +2429,9 @@
         </file>
       </package>
       <package name="src.containers.Devices.components.Sections.Applications">
-        <metrics statements="74" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <metrics statements="76" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="13" coveredmethods="0"/>
         <file name="ApplicationDetail.js" path="/root/repo/src/containers/Devices/components/Sections/Applications/ApplicationDetail.js">
-          <metrics statements="24" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
+          <metrics statements="25" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
@@ -2450,15 +2450,16 @@
           <line num="66" count="0" type="stmt"/>
           <line num="70" count="0" type="stmt"/>
           <line num="75" count="0" type="stmt"/>
-          <line num="81" count="0" type="stmt"/>
-          <line num="85" count="0" type="stmt"/>
-          <line num="89" count="0" type="stmt"/>
-          <line num="91" count="0" type="stmt"/>
-          <line num="132" count="0" type="stmt"/>
-          <line num="148" count="0" type="stmt"/>
+          <line num="80" count="0" type="stmt"/>
+          <line num="86" count="0" type="stmt"/>
+          <line num="90" count="0" type="stmt"/>
+          <line num="94" count="0" type="stmt"/>
+          <line num="96" count="0" type="stmt"/>
+          <line num="137" count="0" type="stmt"/>
+          <line num="153" count="0" type="stmt"/>
         </file>
         <file name="index.js" path="/root/repo/src/containers/Devices/components/Sections/Applications/index.js">
-          <metrics statements="50" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="8" coveredmethods="0"/>
+          <metrics statements="51" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="9" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
@@ -2487,28 +2488,29 @@
           <line num="133" count="0" type="stmt"/>
           <line num="137" count="0" type="stmt"/>
           <line num="138" count="0" type="stmt"/>
-          <line num="140" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="141" count="0" type="stmt"/>
-          <line num="144" count="0" type="stmt"/>
-          <line num="150" count="0" type="stmt"/>
-          <line num="165" count="0" type="stmt"/>
-          <line num="181" count="0" type="stmt"/>
-          <line num="186" count="0" type="stmt"/>
-          <line num="203" count="0" type="stmt"/>
-          <line num="209" count="0" type="stmt"/>
-          <line num="210" count="0" type="stmt"/>
-          <line num="214" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="215" count="0" type="stmt"/>
-          <line num="222" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="223" count="0" type="stmt"/>
-          <line num="228" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="229" count="0" type="stmt"/>
-          <line num="236" count="0" type="stmt"/>
-          <line num="248" count="0" type="stmt"/>
-          <line num="252" count="0" type="stmt"/>
-          <line num="264" count="0" type="stmt"/>
+          <line num="139" count="0" type="stmt"/>
+          <line num="142" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="143" count="0" type="stmt"/>
+          <line num="146" count="0" type="stmt"/>
+          <line num="152" count="0" type="stmt"/>
+          <line num="167" count="0" type="stmt"/>
+          <line num="183" count="0" type="stmt"/>
+          <line num="188" count="0" type="stmt"/>
+          <line num="206" count="0" type="stmt"/>
+          <line num="212" count="0" type="stmt"/>
+          <line num="213" count="0" type="stmt"/>
+          <line num="217" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="218" count="0" type="stmt"/>
+          <line num="227" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="228" count="0" type="stmt"/>
+          <line num="233" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="234" count="0" type="stmt"/>
+          <line num="241" count="0" type="stmt"/>
+          <line num="253" count="0" type="stmt"/>
+          <line num="257" count="0" type="stmt"/>
           <line num="269" count="0" type="stmt"/>
-          <line num="273" count="0" type="stmt"/>
+          <line num="274" count="0" type="stmt"/>
+          <line num="278" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Files">
