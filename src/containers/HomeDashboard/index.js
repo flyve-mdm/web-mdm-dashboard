@@ -401,6 +401,7 @@ class Dashboard extends PureComponent {
     this.props.toast.setNotification(this.props.handleMessage({
       type: 'alert',
       message: error,
+      customErrorRoute: '/app/error',
     }))
   }
 
