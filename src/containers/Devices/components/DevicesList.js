@@ -124,42 +124,41 @@ export default class DevicesList extends PureComponent {
     try {
       this.setState({
         isLoadingMore: true,
-      }, async () => {
-        const range = {
-          from: this.state.pagination.count * this.state.pagination.page,
-          to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
-        }
-        if (range.from <= this.state.totalcount) {
-          for (const key in range) {
-            if (Object.prototype.hasOwnProperty.call(range, key)) {
-              if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
-            }
-          }
-          const { order, pagination } = this.state
-          const devices = await this.props.glpi.searchItems({
-            itemtype: itemtype.PluginFlyvemdmAgent,
-            options: {
-              uid_cols: true,
-              forcedisplay: [2, 3, 4, 12],
-              order,
-              range: `${range.from}-${range.to}`,
-            },
-          })
-          for (const item in devices.data) {
-            if (Object.prototype.hasOwnProperty.call(devices.data, item)) {
-              this.state.itemList.push(devices.data[item])
-            }
-          }
-          this.setState({
-            isLoadingMore: false,
-            totalcount: devices.totalcount,
-            pagination: {
-              ...pagination,
-              page: pagination.page + 1,
-            },
-          })
-        }
       })
+      const range = {
+        from: this.state.pagination.count * this.state.pagination.page,
+        to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
+      }
+      if (range.from <= this.state.totalcount) {
+        for (const key in range) {
+          if (Object.prototype.hasOwnProperty.call(range, key)) {
+            if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
+          }
+        }
+        const { order, pagination } = this.state
+        const devices = await this.props.glpi.searchItems({
+          itemtype: itemtype.PluginFlyvemdmAgent,
+          options: {
+            uid_cols: true,
+            forcedisplay: [2, 3, 4, 12],
+            order,
+            range: `${range.from}-${range.to}`,
+          },
+        })
+        for (const item in devices.data) {
+          if (Object.prototype.hasOwnProperty.call(devices.data, item)) {
+            this.state.itemList.push(devices.data[item])
+          }
+        }
+        this.setState({
+          isLoadingMore: false,
+          totalcount: devices.totalcount,
+          pagination: {
+            ...pagination,
+            page: pagination.page + 1,
+          },
+        })
+      }
     } catch (error) {
       this.setState({
         isLoadingMore: false,
@@ -174,7 +173,6 @@ export default class DevicesList extends PureComponent {
    */
   handleRefresh = async () => {
     try {
-      let devices
       this.setState({
         isLoading: true,
         isLoadingMore: false,
@@ -184,23 +182,22 @@ export default class DevicesList extends PureComponent {
           page: 1,
           count: 15,
         },
-      }, async () => {
-        const { order, pagination } = this.state
-        devices = await this.props.glpi.searchItems({
-          itemtype: itemtype.PluginFlyvemdmAgent,
-          options: {
-            uid_cols: true,
-            forcedisplay: [2, 3, 4, 12],
-            order,
-            range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
-          },
-        })
-        this.setState({
-          isLoading: false,
-          order: devices.order,
-          totalcount: devices.totalcount,
-          itemList: BuildItemList(devices),
-        })
+      })
+      const { order, pagination } = this.state
+      const devices = await this.props.glpi.searchItems({
+        itemtype: itemtype.PluginFlyvemdmAgent,
+        options: {
+          uid_cols: true,
+          forcedisplay: [2, 3, 4, 12],
+          order,
+          range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
+        },
+      })
+      this.setState({
+        isLoading: false,
+        order: devices.order,
+        totalcount: devices.totalcount,
+        itemList: BuildItemList(devices),
       })
     } catch (error) {
       handleMessage({ message: error })
@@ -469,7 +466,7 @@ export default class DevicesList extends PureComponent {
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
-        { listComponent }
+        {listComponent}
         <Confirmation
           title={I18n.t('devices.delete')}
           message={`${this.props.selectedItems.length} ${I18n.t('devices.title')}`}
