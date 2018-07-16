@@ -79,7 +79,7 @@ class SystemInformation extends PureComponent {
           <div className="plugins" key={plugin.id}>
             <div className="plugins--left">
               <div className="plugin__title">
-                { this.state.plugin.name }
+                { plugin.name }
               </div>
               <div
                 className="plugin__detail"
