@@ -38,6 +38,7 @@ import About from '../../containers/About'
 import Settings from '../../containers/Settings'
 import Fleets from '../../containers/Fleets'
 import I18n from '../../shared/i18n'
+import ErrorPage from '../../components/ErrorPage'
 
 /**
  * Represents all private routes
@@ -49,6 +50,12 @@ const routes = [{
     name: I18n.t('commons.home'),
     component: Dashboard,
     exact: true
+  },
+  {
+    path: '/error',
+    name: I18n.t('commons.error'),
+    component: ErrorPage,
+    exact: true,
   },
   {
     path: '/devices',
