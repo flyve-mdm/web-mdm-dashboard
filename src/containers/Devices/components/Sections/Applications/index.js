@@ -220,6 +220,8 @@ export default class Applications extends PureComponent {
           id={applicationSelected}
           glpi={glpi}
           selectApplication={this.selectApplication}
+          toast={this.props.toast}
+          handleMessage={this.props.handleMessage}
         />
       )
     } else if (isLoading) {
@@ -277,4 +279,6 @@ Applications.propTypes = {
   id: PropTypes.string.isRequired,
   glpi: PropTypes.object.isRequired,
   update: PropTypes.bool.isRequired,
+  toast: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
