@@ -180,7 +180,7 @@ export default class ApplicationsAdd extends PureComponent {
                 minFileSize={0}
                 clickable
               >
-                {I18n.t('commons.drop_or_click_file')}
+                {I18n.t('commons.drop_file')}
               </FilesUpload>
               <div style={{ marginTop: 10 }}>
                 <button
