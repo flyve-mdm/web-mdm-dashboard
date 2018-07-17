@@ -68,6 +68,9 @@ function errorRoute(pathname, customErrorRoute) {
   if (path[1] === 'app') {
     return `${publicURL}/app/${path[2]}/error`
   }
+  if (!path[1] || path[1] === '') {
+    return `${publicURL}/error`
+  }
   return `${publicURL}/${path[1]}/error`
 }
 
