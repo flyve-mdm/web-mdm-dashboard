@@ -102,9 +102,7 @@ export default class ApplicationsContent extends PureComponent {
   handleDelete = async () => {
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
-      const itemListToDelete = this.props.selectedItems.map(item => ({
-        id: item['PluginFlyvemdmPackage.id'],
-      }))
+      const itemListToDelete = [{ id: this.state.id }]
 
       this.setState({
         isLoading: true,
@@ -245,13 +243,11 @@ export default class ApplicationsContent extends PureComponent {
 
 /** ApplicationsContent defaultProps */
 ApplicationsContent.defaultProps = {
-  selectedItems: [],
   size: undefined,
 }
 
 /** ApplicationsContent propTypes */
 ApplicationsContent.propTypes = {
-  selectedItems: PropTypes.array,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   toast: PropTypes.object.isRequired,
