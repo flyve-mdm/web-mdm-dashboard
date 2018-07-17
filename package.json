@@ -35,7 +35,7 @@
     "react-winjs": "git+https://github.com/TECLIB/react-winjs.git#develop",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "victory": "^0.27.0",
+    "victory": "^30.0.0-alpha.3",
     "web-animations-js": "^2.3.1",
     "whatwg-fetch": "2.0.3",
     "winjs": "^4.4.3"
