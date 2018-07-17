@@ -142,20 +142,19 @@ class UsersContent extends PureComponent {
    */
   handleRefresh = async () => {
     try {
-      await this.props.glpi.getAnItem({
+      const { id } = this.state
+      const user = await this.props.glpi.getAnItem({
         itemtype: itemtype.User,
-        id: this.state.id,
-      }, async (user) => {
-        await this.props.glpi.getSubItems({
-          itemtype: itemtype.User,
-          id: this.state.id,
-          subItemtype: 'UserEmail',
-        }, (emails) => {
-          this.setState({
-            data: user,
-            emails,
-          })
-        })
+        id,
+      })
+      const emails = await this.props.glpi.getSubItems({
+        itemtype: itemtype.User,
+        id,
+        subItemtype: 'UserEmail',
+      })
+      this.setState({
+        data: user,
+        emails,
       })
     } catch (error) {
       this.props.toast.setNotification(this.props.handleMessage({

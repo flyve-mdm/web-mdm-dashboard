@@ -102,112 +102,110 @@ class UsersEditOne extends PureComponent {
       isLoading: true,
     }, async () => {
       try {
-        await this.props.glpi.getAnItem({
+        const { id } = this.state
+        const myUser = await this.props.glpi.getAnItem({
           itemtype: itemtype.User,
-          id: this.state.id,
-        }, async (myUser) => {
-          await this.props.glpi.getSubItems({
-            itemtype: itemtype.User,
-            id: this.state.id,
-            subItemtype: 'UserEmail',
-          }, async (myEmails) => {
-            const { cfg_glpi: cfgGlpi } = await this.props.glpi.getGlpiConfig()
-
-            const parametersToEvaluate = {
-              minimunLength: cfgGlpi.password_min_length,
-              needDigit: cfgGlpi.password_need_number,
-              needLowercaseCharacter: cfgGlpi.password_need_letter,
-              needUppercaseCharacter: cfgGlpi.password_need_caps,
-              needSymbol: cfgGlpi.password_need_symbol,
-            }
-            this.setState({
-              isLoading: false,
-              parametersToEvaluate,
-              login: myUser.name,
-              firstName: validateData(myUser.firstname),
-              realName: validateData(myUser.realname),
-              phone: validateData(myUser.phone),
-              mobilePhone: validateData(myUser.mobile),
-              phone2: validateData(myUser.phone2),
-              administrativeNumber: validateData(myUser.registration_number),
-              currentEmails: myEmails.map(a => ({ ...a })),
-              emails: validateData(myEmails, []),
-              imageProfile: validateData(myUser.picture, 'profile.png'),
-              comments: validateData(myUser.comment, ''),
-              password: '',
-              passwordConfirmation: '',
-              lastLogin: myUser.last_login,
-              created: myUser.date_creation,
-              modified: myUser.date_mod,
-              authentication: authtype(myUser.authtype),
-              category: {
-                value: validateData(myUser.usercategories_id),
-                request: {
-                  params: {
-                    itemtype: itemtype.UserCategory,
-                    options: {
-                      range: '0-200',
-                      forcedisplay: [2],
-                    },
-                  },
-                  method: 'searchItems',
-                  content: '1',
-                  value: '2',
+          id,
+        })
+        const myEmails = await this.props.glpi.getSubItems({
+          itemtype: itemtype.User,
+          id,
+          subItemtype: 'UserEmail',
+        })
+        const { cfg_glpi: cfgGlpi } = await this.props.glpi.getGlpiConfig()
+        const parametersToEvaluate = {
+          minimunLength: cfgGlpi.password_min_length,
+          needDigit: cfgGlpi.password_need_number,
+          needLowercaseCharacter: cfgGlpi.password_need_letter,
+          needUppercaseCharacter: cfgGlpi.password_need_caps,
+          needSymbol: cfgGlpi.password_need_symbol,
+        }
+        this.setState({
+          isLoading: false,
+          parametersToEvaluate,
+          login: myUser.name,
+          firstName: validateData(myUser.firstname),
+          realName: validateData(myUser.realname),
+          phone: validateData(myUser.phone),
+          mobilePhone: validateData(myUser.mobile),
+          phone2: validateData(myUser.phone2),
+          administrativeNumber: validateData(myUser.registration_number),
+          currentEmails: myEmails.map(a => ({ ...a })),
+          emails: validateData(myEmails, []),
+          imageProfile: validateData(myUser.picture, 'profile.png'),
+          comments: validateData(myUser.comment, ''),
+          password: '',
+          passwordConfirmation: '',
+          lastLogin: myUser.last_login,
+          created: myUser.date_creation,
+          modified: myUser.date_mod,
+          authentication: authtype(myUser.authtype),
+          category: {
+            value: validateData(myUser.usercategories_id),
+            request: {
+              params: {
+                itemtype: itemtype.UserCategory,
+                options: {
+                  range: '0-200',
+                  forcedisplay: [2],
                 },
               },
-              defaultEntity: {
-                value: validateData(myUser.entities_id),
-                request: {
-                  params: {},
-                  method: 'getMyEntities',
-                  content: 'name',
-                  value: 'id',
+              method: 'searchItems',
+              content: '1',
+              value: '2',
+            },
+          },
+          defaultEntity: {
+            value: validateData(myUser.entities_id),
+            request: {
+              params: {},
+              method: 'getMyEntities',
+              content: 'name',
+              value: 'id',
+            },
+          },
+          typeImageProfile: 'file',
+          title: {
+            value: validateData(myUser.usertitles_id),
+            request: {
+              params: {
+                itemtype: itemtype.UserTitle,
+                options: {
+                  range: '0-200',
+                  forcedisplay: [2],
                 },
               },
-              typeImageProfile: 'file',
-              title: {
-                value: validateData(myUser.usertitles_id),
-                request: {
-                  params: {
-                    itemtype: itemtype.UserTitle,
-                    options: {
-                      range: '0-200',
-                      forcedisplay: [2],
-                    },
-                  },
-                  method: 'searchItems',
-                  content: '1',
-                  value: '2',
+              method: 'searchItems',
+              content: '1',
+              value: '2',
+            },
+          },
+          location: {
+            value: validateData(myUser.locations_id),
+            request: {
+              params: {
+                itemtype: itemtype.Location,
+                options: {
+                  range: '0-200',
+                  forcedisplay: [2],
                 },
               },
-              location: {
-                value: validateData(myUser.locations_id),
-                request: {
-                  params: {
-                    itemtype: itemtype.Location,
-                    options: {
-                      range: '0-200',
-                      forcedisplay: [2],
-                    },
-                  },
-                  method: 'searchItems',
-                  content: '1',
-                  value: '2',
-                },
-              },
-              defaultProfile: {
-                value: validateData(myUser.profiles_id),
-                request: {
-                  params: {},
-                  method: 'getMyProfiles',
-                  content: 'name',
-                  value: 'id',
-                },
-              },
-              validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
-              validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined,
-            })
-          })
+              method: 'searchItems',
+              content: '1',
+              value: '2',
+            },
+          },
+          defaultProfile: {
+            value: validateData(myUser.profiles_id),
+            request: {
+              params: {},
+              method: 'getMyProfiles',
+              content: 'name',
+              value: 'id',
+            },
+          },
+          validSince: myUser.begin_date ? new Date(myUser.begin_date) : undefined,
+          validUntil: myUser.end_date ? new Date(myUser.end_date) : undefined,
         })
       } catch (error) {
         this.setState({ isLoading: false })
