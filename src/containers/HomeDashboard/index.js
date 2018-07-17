@@ -39,7 +39,6 @@ import {
   NavLink,
 } from 'react-router-dom'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleMessages from '../../hoc/withHandleMessages'
 import Loading from '../../components/Loading'
 import InfoBox from '../../components/InfoBox'
 import EmptyMessage from '../../components/EmptyMessage'
@@ -401,7 +400,7 @@ class Dashboard extends PureComponent {
     this.props.toast.setNotification(this.props.handleMessage({
       type: 'alert',
       message: error,
-      customErrorRoute: '/app/error',
+      customErrorRoute: `${publicURL}/app/error`,
     }))
   }
 
