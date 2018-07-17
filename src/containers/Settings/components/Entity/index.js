@@ -178,6 +178,8 @@ class Entity extends PureComponent {
         content = (
           <ChangeTokenLife
             changeMode={this.changeMode}
+            toast={this.props.toast}
+            handleMessage={this.props.handleMessage}
             tokenLife={this.state.tokenLife}
             saveValues={this.saveValues}
             glpi={this.props.glpi}
@@ -245,7 +247,9 @@ class Entity extends PureComponent {
 }
 
 Entity.propTypes = {
-  toast: PropTypes.object.isRequired,
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
   handleMessage: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
 }
