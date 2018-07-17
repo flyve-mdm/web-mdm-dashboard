@@ -9,129 +9,144 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Source: components/ErrorPage/index.js</h1>
+        <h1 class="page-title">Class: FileswithHandleMessages</h1>
 
         
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/*
- *   Copyright © 2018 Teclib. All rights reserved.
- *
- *   This file is part of web-mdm-dashboard
- *
- * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
- * device management software.
- *
- * Flyve MDM is free software: you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 3
- * of the License, or (at your option) any later version.
- *
- * Flyve MDM is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * ------------------------------------------------------------------------------
- * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
- * @author     Hector Rondon (hrondon@teclib.com)
- * @copyright  Copyright © 2018 Teclib. All rights reserved.
- * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
- * @link       https://github.com/flyve-mdm/web-mdm-dashboard
- * @link       http://flyve.org/web-mdm-dashboard
- * @link       https://flyve-mdm.com
- * ------------------------------------------------------------------------------
- */
+        <h2><span class="attribs"><span class="type-signature"></span></span>FileswithHandleMessages<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+    
+</header>
 
-import React from 'react'
-import history from '../../shared/history'
-import getQueryString from '../../shared/getQueryString'
-import I18n from '../../shared/i18n'
-import logo from '../../assets/images/dashboard.svg'
+<article>
+    <div class="container-overview">
+    
+        
 
-/**
- * Component with the display of the error pages
- * @function ErrorPage
- * @return {component}
- */
-export default () => {
-  /** Get the error type of the query string 'code' (by default '404'). */
-  let errorCode = getQueryString(history).code
-  if (errorCode !== '400' &amp;&amp; errorCode !== '401' &amp;&amp; errorCode !== '403' &amp;&amp; errorCode !== '404' &amp;&amp; errorCode !== '500') {
-    errorCode = '404'
-  }
-  const title = I18n.t(`error.${errorCode}.title`)
-  const message = I18n.t(`error.${errorCode}.message`)
-  const path = history.location.pathname.split('/')
+    
 
-  if (errorCode !== 404 &amp;&amp; errorCode &lt; 500 &amp;&amp; path[1] === 'app') {
-    return (
-      &lt;div
-        className="empty-message"
-        style={{ width: '100%' }}
-      >
-        &lt;div style={{ width: '320px', margin: '0 auto' }}>
-          &lt;figure>
-            &lt;img
-              alt="Flyve MDM Dashboard"
-              src={logo}
-              style={{
-                width: '80px',
-              }}
-            />
-          &lt;/figure>
-          &lt;h1>
-            {title}
-          &lt;/h1>
-          &lt;p>
-            {message}
-          &lt;/p>
-        &lt;/div>
-      &lt;/div>
-    )
-  }
+    
+    <h4 class="name" id="FileswithHandleMessages"><span class="type-signature"></span>new FileswithHandleMessages<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-  return (
-    &lt;div className="authentication error" style={{ textAlign: 'center' }}>
-      &lt;section>
-        &lt;figure>
-          &lt;img
-            alt="Flyve MDM Dashboard"
-            src={logo}
-          />
-        &lt;/figure>
-        &lt;h1>
-          {I18n.t('commons.error')}
-          {' '}
-          {errorCode}
-        &lt;/h1>
-        &lt;h3>
-          {title}
-        &lt;/h3>
-        &lt;p>
-          {message}
-        &lt;/p>
-      &lt;/section>
-      &lt;footer>
-        &lt;a href="https://flyve-mdm.com/privacy-policy/">
-          {I18n.t('commons.terms_and_conditions')}
-        &lt;/a>
-        &lt;br />
+    
 
-        &lt;span>
-          © 2017 - 2018 Teclib&amp;apos;.
-        &lt;/span>
-        &lt;br />
-      &lt;/footer>
-    &lt;/div>
-  )
-}
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="containers_Files_index.js.html">containers/Files/index.js</a>, <a href="containers_Files_index.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>PureComponent</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
