@@ -105,9 +105,7 @@ class UsersContent extends PureComponent {
   handleDelete = async () => {
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
-      const itemListToDelete = this.props.selectedItems.map(item => ({
-        id: item['User.id'],
-      }))
+      const itemListToDelete = [{ id: this.state.id }]
 
       this.setState({
         isLoading: true,
@@ -213,7 +211,7 @@ class UsersContent extends PureComponent {
 
                 <span
                   className="deleteIcon"
-                  style={{ padding: '0 10px', fontSize: '20px', display: this.props.selectedItems.length === 0 ? 'none' : '' }}
+                  style={{ padding: '0 10px', fontSize: '20px' }}
                   onClick={this.handleDelete}
                   role="button"
                   tabIndex="0"
@@ -272,16 +270,11 @@ class UsersContent extends PureComponent {
   }
 }
 
-UsersContent.defaultProps = {
-  selectedItems: null,
-}
-
 UsersContent.propTypes = {
   toast: PropTypes.shape({
     setNotification: PropTypes.func,
   }).isRequired,
   handleMessage: PropTypes.func.isRequired,
-  selectedItems: PropTypes.array,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
