@@ -139,23 +139,12 @@ export default class FilesUpload extends PureComponent {
       }
     }
 
-    this.setState((prevState) => {
-      ({
-        files: this.props.multiple === false ? files : [...prevState.files, ...files],
-      })
-    }, () => {
+    this.setState(prevState => ({
+      files: this.props.multiple === false ? files : [...prevState.files, ...files],
+    }),
+    () => {
       this.props.onChange.call(this, this.state.files)
     })
-  }
-
-  /**
-   * Execute the function to handle the errors
-   * @function onError
-   * @param {*} error
-   * @param {object} file
-   */
-  onError(error, file) {
-    this.props.onError.call(this, error, file)
   }
 
   /**
@@ -187,6 +176,16 @@ export default class FilesUpload extends PureComponent {
   }
 
   /**
+   * Execute the function to handle the errors
+   * @function onError
+   * @param {*} error
+   * @param {object} file
+   */
+  onError(error, file) {
+    this.props.onError.call(this, error, file)
+  }
+
+  /**
    * Open the windows to select the files
    * @function openFileChooser
    */
@@ -201,12 +200,13 @@ export default class FilesUpload extends PureComponent {
    * @param {object} file
    */
   fileTypeAcceptable(file) {
-    if (this.props.accepts) {
+    const { accepts } = this.props
+    if (accepts) {
       if (file.type) {
         const typeLeft = FilesUpload.mimeTypeLeft(file.type)
         const typeRight = FilesUpload.mimeTypeRight(file.type)
-        for (let i = 0; i < this.props.accepts.length; i += 1) {
-          const accept = this.props.accepts[i]
+        for (let i = 0; i < accepts.length; i += 1) {
+          const accept = accepts[i]
           const acceptLeft = accept.split('/')[0]
           const acceptRight = accept.split('/')[1]
           if (acceptLeft && acceptRight) {
@@ -256,11 +256,9 @@ export default class FilesUpload extends PureComponent {
    * @param {object} fileToRemove
    */
   removeFile(fileToRemove) {
-    this.setState((prevState) => {
-      ({
-        files: prevState.files.filter(file => file.id !== fileToRemove.id),
-      })
-    }, () => {
+    this.setState(prevState => ({
+      files: prevState.files.filter(file => file.id !== fileToRemove.id),
+    }), () => {
       this.props.onChange.call(this, this.state.files)
     })
   }
