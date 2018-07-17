@@ -139,6 +139,7 @@ export default class DevicesContent extends PureComponent {
               <Applications
                 id={this.state.id}
                 glpi={this.props.glpi}
+                toast={this.props.toast}
                 handleMessage={this.props.handleMessage}
                 update={this.state.selectedIndex === 2}
               />
