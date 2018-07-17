@@ -143,13 +143,13 @@ export default class ApplicationsContent extends PureComponent {
    */
   handleRefresh = async () => {
     try {
-      await this.props.glpi.getAnItem({
+      const { id } = this.state
+      const data = await this.props.glpi.getAnItem({
         itemtype: itemtype.PluginFlyvemdmPackage,
-        id: this.state.id,
-      }, (data) => {
-        this.setState({
-          data,
-        })
+        id,
+      })
+      this.setState({
+        data,
       })
     } catch (error) {
       this.props.toast.setNotification(this.props.handleMessage({
