@@ -154,7 +154,7 @@ class Feedback extends PureComponent {
             />
             <button
               className="btn btn--primary"
-              type="button"
+              type="submit"
             >
               {I18n.t('commons.send') }
             </button>
