@@ -125,7 +125,7 @@ class ChangeTokenLife extends PureComponent {
           <button
             className="btn btn--secondary"
             style={{ marginRight: 10 }}
-            onClick={() => this.state.changeMode('')}
+            onClick={() => this.props.changeMode('')}
             type="button"
           >
             {I18n.t('commons.cancel')}
