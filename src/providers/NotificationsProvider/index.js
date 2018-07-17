@@ -30,7 +30,8 @@ export class NotificationsProvider extends PureComponent {
           const { type } = validateNotifications()
           if (type === 'Native') {
             nativeNotification(
-              [...getNotification],
+              getNotification.title,
+              getNotification.body,
             )
           }
           setTimeout(() => {
