@@ -29,20 +29,26 @@
 /** @module handleMessage */
 
 /** import dependencies */
-import I18n from '../../shared/i18n'
+import I18n from '../i18n'
 import logout from '../logout'
 import glpi from '../glpiApi'
 import history from '../history'
+import publicURL from '../publicURL'
 
 function errorRoute(pathname, customErrorRoute) {
   if (customErrorRoute) {
     return customErrorRoute
   }
-  const path = pathname.split('/')
-  if (path[1] === 'app') {
-    return `/app/${path[2]}/error`
+  let path
+  if (publicURL !== '') {
+    path = pathname.split(publicURL)[1].split('/')
+  } else {
+    path = pathname.split('/')
   }
-  return `/${path[1]}/error`
+  if (path[1] === 'app') {
+    return `${publicURL}/app/${path[2]}/error`
+  }
+  return `${publicURL}/${path[1]}/error`
 }
 
 function pushError(pathname, code, customErrorRoute) {
