@@ -313,27 +313,40 @@ class EditMultiple extends PureComponent {
               options={this.props.FieldList.map(field => ({ name: field.name, value: JSON.stringify(field) }))}
               function={this.change}
             />
-
-            {renderComponent}
-
-            {
-              this.state.isLoading
-                ? ''
-                : (
-                  <React.Fragment>
-                    <br />
-
-                    <button type="button" className="btn btn--secondary" onClick={this.cancel}>
-                      {I18n.t('commons.cancel')}
-                    </button>
-
-                    <button type="button" className="btn btn--primary" onClick={this.handleSave} style={{ marginLeft: 10 }}>
-                      {I18n.t('commons.save')}
-                    </button>
-                  </React.Fragment>
-                )
-            }
           </div>
+          {renderComponent}
+
+          {
+            this.state.isLoading
+              ? ''
+              : (
+                <React.Fragment>
+                  <br />
+
+                  <button
+                    type="button"
+                    className="btn btn--secondary"
+                    onClick={this.cancel}
+                    style={{
+                      marginLeft: 10,
+                    }}
+                  >
+                    {I18n.t('commons.cancel')}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="btn btn--primary"
+                    onClick={this.handleSave}
+                    style={{
+                      marginLeft: 10,
+                    }}
+                  >
+                    {I18n.t('commons.save')}
+                  </button>
+                </React.Fragment>
+              )
+            }
         </ContentPane>
       )
     }
