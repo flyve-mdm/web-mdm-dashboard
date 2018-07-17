@@ -36,7 +36,6 @@
  * @returns {object} of native notification type
  */
 export default function (title, body, icon = require('../../assets/images/logo2.png')) {
-  console.log(title, body, icon)
   let newNotification = null
   if (Notification && Notification.permission !== "denied") {
     Notification.requestPermission(permission => {
