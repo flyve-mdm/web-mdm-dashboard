@@ -121,16 +121,12 @@ class Display extends PureComponent {
               paddingTop: 10,
             }}
           >
-            <span className="language__span btn" style={{ margin: 0 }}>
-              {I18n.t('commons.language')}
-              <select
-                className="language__select"
-                value={this.props.languageCurrent}
-                onChange={event => this.props.changeLanguage(event.target.value)}
-              >
-                {languageList()}
-              </select>
-            </span>
+            <select
+              value={this.props.languageCurrent}
+              onChange={event => this.props.changeLanguage(event.target.value)}
+            >
+              {languageList()}
+            </select>
           </div>
         </div>
 
