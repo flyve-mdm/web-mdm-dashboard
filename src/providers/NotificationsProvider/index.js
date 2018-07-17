@@ -17,7 +17,7 @@ export class NotificationsProvider extends PureComponent {
     },
     show: false,
     setNotification: (notification = {}) => {
-      if (typeof notification === 'object') {
+      if (typeof notification !== 'object') {
         notification = {}
       }
       this.setState(

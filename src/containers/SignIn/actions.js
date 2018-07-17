@@ -88,6 +88,10 @@ export const handleFormSubmit = (ctx, event) => {
     })
   })
   .catch((error) => {
-    ctx.props.toast.setNotification(ctx.props.handleMessage({ type: 'alert', message: error }))
+    ctx.props.toast.setNotification(ctx.props.handleMessage({
+      type: 'alert',
+      message: error,
+      displayErrorPage: false,
+    }))
   })
 }
