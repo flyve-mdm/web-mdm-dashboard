@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/26</span>
+        <span class='fraction'>0/21</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/26</span>
+        <span class='fraction'>0/21</span>
       </div>
     </div>
     <p class="quiet">
@@ -169,15 +169,7 @@ layout: coverage
 <a name='L118'></a><a href='#L118'>118</a>
 <a name='L119'></a><a href='#L119'>119</a>
 <a name='L120'></a><a href='#L120'>120</a>
-<a name='L121'></a><a href='#L121'>121</a>
-<a name='L122'></a><a href='#L122'>122</a>
-<a name='L123'></a><a href='#L123'>123</a>
-<a name='L124'></a><a href='#L124'>124</a>
-<a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a>
-<a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L121'></a><a href='#L121'>121</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -223,7 +215,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -232,12 +223,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -247,6 +232,7 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -265,11 +251,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -299,6 +280,9 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -351,32 +335,26 @@ layout: coverage
 class HelpCenterArticle extends PureComponent {
 <span class="fstat-no" title="function not covered" >  constructor(</span>props) <span class="cstat-no" title="statement not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >    super(props)</span>
-    const { history } = <span class="cstat-no" title="statement not covered" >this.props</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    this.state = {</span>
       article: undefined,
-      id: getID(history.location.pathname, 4),
+      id: getID(this.props.history.location.pathname, 4),
       isLoading: true,
     }
   }
 &nbsp;
-  componentDidMount = <span class="fstat-no" title="function not covered" >async () =&gt; <span class="cstat-no" title="statement not covered" ></span>{</span>
-    const {
-      glpi,
-      handleMessage,
-    } = <span class="cstat-no" title="statement not covered" >this.props</span>
-    const { id } = <span class="cstat-no" title="statement not covered" >this.state</span>
-&nbsp;
+  componentDidMount = <span class="fstat-no" title="function not covered" >async () =&gt; </span>{
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      this.setState({</span>
-        article: await glpi.getAnItem({
+      const newState = <span class="cstat-no" title="statement not covered" >{</span>
+        article: await this.props.glpi.getAnItem({
           itemtype: itemtype.KnowbaseItem,
-          id,
+          id: this.state.id,
         }),
         isLoading: false,
-      })
+      }
+<span class="cstat-no" title="statement not covered" >      this.setState({ ...newState })</span>
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(this.props.handleMessage({</span>
         type: 'alert',
         message: error,
       }))
@@ -393,14 +371,9 @@ class HelpCenterArticle extends PureComponent {
 <span class="cstat-no" title="statement not covered" >    return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue</span>
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  render() <span class="cstat-no" title="statement not covered" ></span>{</span>
-    const {
-      isLoading,
-      article,
-    } = <span class="cstat-no" title="statement not covered" >this.state</span>
-&nbsp;
+<span class="fstat-no" title="function not covered" >  render() </span>{
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      isLoading
+      this.state.isLoading
         ? (
           &lt;div style={ { height: '100%', marginTop: '-80px' } }&gt;
             &lt;Loading message={`${I18n.t('commons.loading')}...`} /&gt;
@@ -409,14 +382,14 @@ class HelpCenterArticle extends PureComponent {
         : (
           &lt;ContentPane&gt;
             &lt;h2 style={ { margin: '10px' } }&gt;
-              {article.name}
+              {this.state.article.name}
             &lt;/h2&gt;
             &lt;div className="date" style={ { margin: '10px' } }&gt;
-              {article.date}
+              {this.state.article.date}
             &lt;/div&gt;
             &lt;div
               style={ { margin: '10px' } }
-              dangerouslySetInnerHTML={ { __html: this.htmlDecode(article.answer) } }
+              dangerouslySetInnerHTML={ { __html: this.htmlDecode(this.state.article.answer) } }
             /&gt;
           &lt;/ContentPane&gt;
         )
@@ -427,9 +400,12 @@ class HelpCenterArticle extends PureComponent {
 &nbsp;
 /** HelpCenterArticle propTypes */
 <span class="cstat-no" title="statement not covered" >HelpCenterArticle.propTypes = {</span>
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
-  toast: PropTypes.object.isRequired,
 }
 &nbsp;
 export default withGLPI(HelpCenterArticle)
@@ -439,7 +415,7 @@ export default withGLPI(HelpCenterArticle)
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 14:58:20 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 16:59:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

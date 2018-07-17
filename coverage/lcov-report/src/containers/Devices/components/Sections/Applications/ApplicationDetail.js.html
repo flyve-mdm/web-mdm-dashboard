@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/25</span>
+        <span class='fraction'>0/20</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/25</span>
+        <span class='fraction'>0/20</span>
       </div>
     </div>
     <p class="quiet">
@@ -194,21 +194,7 @@ layout: coverage
 <a name='L143'></a><a href='#L143'>143</a>
 <a name='L144'></a><a href='#L144'>144</a>
 <a name='L145'></a><a href='#L145'>145</a>
-<a name='L146'></a><a href='#L146'>146</a>
-<a name='L147'></a><a href='#L147'>147</a>
-<a name='L148'></a><a href='#L148'>148</a>
-<a name='L149'></a><a href='#L149'>149</a>
-<a name='L150'></a><a href='#L150'>150</a>
-<a name='L151'></a><a href='#L151'>151</a>
-<a name='L152'></a><a href='#L152'>152</a>
-<a name='L153'></a><a href='#L153'>153</a>
-<a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a>
-<a name='L157'></a><a href='#L157'>157</a>
-<a name='L158'></a><a href='#L158'>158</a>
-<a name='L159'></a><a href='#L159'>159</a>
-<a name='L160'></a><a href='#L160'>160</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L146'></a><a href='#L146'>146</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -266,11 +252,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -293,15 +274,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -425,15 +397,10 @@ export default class Applications extends PureComponent {
     }
   }
 &nbsp;
-  componentDidMount = <span class="fstat-no" title="function not covered" >async () =&gt; <span class="cstat-no" title="statement not covered" ></span>{</span>
-    const {
-      glpi,
-      id,
-    } = <span class="cstat-no" title="statement not covered" >this.props</span>
-&nbsp;
+  componentDidMount = <span class="fstat-no" title="function not covered" >async () =&gt; </span>{
 <span class="cstat-no" title="statement not covered" >    try {</span>
-      const software = <span class="cstat-no" title="statement not covered" >await glpi.getAnItem({</span>
-        id,
+      const software = <span class="cstat-no" title="statement not covered" >await this.props.glpi.getAnItem({</span>
+        id: this.props.id,
         itemtype: itemtype.Software,
       })
 <span class="cstat-no" title="statement not covered" >      this.setState({</span>
@@ -452,58 +419,49 @@ export default class Applications extends PureComponent {
     }
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  render() <span class="cstat-no" title="statement not covered" ></span>{</span>
-    const {
-      isLoading,
-      software,
-    } = <span class="cstat-no" title="statement not covered" >this.state</span>
-    const {
-      id,
-      selectApplication,
-    } = <span class="cstat-no" title="statement not covered" >this.props</span>
-&nbsp;
+<span class="fstat-no" title="function not covered" >  render() </span>{
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      isLoading
+      this.state.isLoading
         ? &lt;Loading message={`${I18n.t('commons.loading')}...`} /&gt;
         : (
-          software
+          this.state.software
             ? (
               &lt;React.Fragment&gt;
                 &lt;h3&gt;
-                  {`${I18n.t('commons.application')} ${id}`}
+                  {`${I18n.t('commons.application')} ${this.props.id}`}
                 &lt;/h3&gt;
                 &lt;Input
                   label={I18n.t('commons.name')}
                   name="name"
                   type="text"
-                  value={validateData(software.name)}
+                  value={validateData(this.state.software.name)}
                   disabled
                 /&gt;
                 &lt;Input
                   label={I18n.t('commons.date_creation')}
                   name="comment"
                   type="date"
-                  value={validateData(toDateInputValue(software.date_creation))}
+                  value={validateData(toDateInputValue(this.state.software.date_creation))}
                   disabled
                 /&gt;
                 &lt;Input
                   label={I18n.t('commons.date_mod')}
                   name="comment"
                   type="date"
-                  value={validateData(toDateInputValue(software.date_mod))}
+                  value={validateData(toDateInputValue(this.state.software.date_mod))}
                   disabled
                 /&gt;
                 &lt;TextArea
                   label={I18n.t('commons.comments')}
                   name="comment"
                   type="textArea"
-                  value={validateData(software.comment)}
+                  value={validateData(this.state.software.comment)}
                   disabled
                 /&gt;
                 &lt;button
                   className="btn btn--secondary"
                   onClick={<span class="fstat-no" title="function not covered" >() =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >                    selectApplication(undefined)</span>
+<span class="cstat-no" title="statement not covered" >                    this.props.selectApplication(undefined)</span>
                   } }
                   type="button"
                 &gt;
@@ -532,7 +490,7 @@ export default class Applications extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 14:58:20 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 16:59:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../../prettify.js"></script>

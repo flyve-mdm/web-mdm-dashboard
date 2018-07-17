@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/40</span>
+        <span class='fraction'>0/36</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/40</span>
+        <span class='fraction'>0/36</span>
       </div>
     </div>
     <p class="quiet">
@@ -236,14 +236,7 @@ layout: coverage
 <a name='L185'></a><a href='#L185'>185</a>
 <a name='L186'></a><a href='#L186'>186</a>
 <a name='L187'></a><a href='#L187'>187</a>
-<a name='L188'></a><a href='#L188'>188</a>
-<a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a>
-<a name='L191'></a><a href='#L191'>191</a>
-<a name='L192'></a><a href='#L192'>192</a>
-<a name='L193'></a><a href='#L193'>193</a>
-<a name='L194'></a><a href='#L194'>194</a>
-<a name='L195'></a><a href='#L195'>195</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L188'></a><a href='#L188'>188</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -277,9 +270,9 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -343,7 +336,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -380,15 +372,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -431,6 +414,9 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -470,10 +456,10 @@ layout: coverage
   PureComponent,
 } from 'react'
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import I18n from '../../shared/i18n'</span>
 <span class="cstat-no" title="statement not covered" >import {</span>
   Redirect,
 } from 'react-router'
+<span class="cstat-no" title="statement not covered" >import I18n from '../../shared/i18n'</span>
 <span class="cstat-no" title="statement not covered" >import UsernameFieldset from './components/UsernameFieldset'</span>
 <span class="cstat-no" title="statement not covered" >import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'</span>
 <span class="cstat-no" title="statement not covered" >import withHandleMessages from '../../hoc/withHandleMessages'</span>
@@ -518,7 +504,7 @@ class SignIn extends PureComponent {
         password: true,
         mediation: 'optional',
       })
-        .then(<span class="fstat-no" title="function not covered" >res =&gt; </span>{
+        .then((<span class="fstat-no" title="function not covered" >res) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >          if (res) {</span>
 <span class="cstat-no" title="statement not covered" >            this.setState({</span>
               username: res.name,
@@ -536,14 +522,13 @@ class SignIn extends PureComponent {
    * @param {object} prevState
    */
 <span class="fstat-no" title="function not covered" >  componentDidUpdate(</span>...args) {
-    const { phase } = <span class="cstat-no" title="statement not covered" >this.state</span>
     const prevState = <span class="cstat-no" title="statement not covered" >args[1]</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (prevState.phase !== phase) {</span>
-<span class="cstat-no" title="statement not covered" >      if (phase === 2 &amp;&amp; this.form) {</span>
+<span class="cstat-no" title="statement not covered" >    if (prevState.phase !== this.state.phase) {</span>
+<span class="cstat-no" title="statement not covered" >      if (this.state.phase === 2 &amp;&amp; this.form) {</span>
 <span class="cstat-no" title="statement not covered" >        slideLeft(this.form).play()</span>
       }
-<span class="cstat-no" title="statement not covered" >      if (phase === 1 &amp;&amp; this.form) {</span>
+<span class="cstat-no" title="statement not covered" >      if (this.state.phase === 1 &amp;&amp; this.form) {</span>
 <span class="cstat-no" title="statement not covered" >        slideRight(this.form).play()</span>
       }
     }
@@ -574,25 +559,16 @@ class SignIn extends PureComponent {
    * Render component
    * @function render
    */
-<span class="fstat-no" title="function not covered" >  render() <span class="cstat-no" title="statement not covered" ></span>{</span>
-    const {
-      phase,
-      username,
-      password,
-    } = <span class="cstat-no" title="statement not covered" >this.state</span>
-    const {
-      history,
-    } = <span class="cstat-no" title="statement not covered" >this.props</span>
-&nbsp;
+<span class="fstat-no" title="function not covered" >  render() </span>{
 <span class="cstat-no" title="statement not covered" >    if (localStorage.getItem('currentUser') &amp;&amp; localStorage.getItem('sessionToken')) {</span>
 <span class="cstat-no" title="statement not covered" >      return &lt;Redirect to={`${publicURL}/app`} /&gt;</span>
     }
     let form
-<span class="cstat-no" title="statement not covered" >    if (phase === 1) {</span>
+<span class="cstat-no" title="statement not covered" >    if (this.state.phase === 1) {</span>
 <span class="cstat-no" title="statement not covered" >      form = (</span>
         &lt;UsernameFieldset
           {...this.props}
-          username={username}
+          username={this.state.username}
           changeInput={this.changeInput}
           changePhase={this.changePhase}
         /&gt;
@@ -601,11 +577,11 @@ class SignIn extends PureComponent {
 <span class="cstat-no" title="statement not covered" >      form = (</span>
         &lt;AsyncPasswordFieldset
           {...this.props}
-          username={username}
-          password={password}
+          username={this.state.username}
+          password={this.state.password}
           changeInput={this.changeInput}
           changePhase={this.changePhase}
-          history={history}
+          history={this.props.history}
           handleOnSubmit={this.handleFormSubmit}
         /&gt;
       )
@@ -626,6 +602,9 @@ class SignIn extends PureComponent {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >SignIn.propTypes = {</span>
   history: PropTypes.object.isRequired,
+  auth: PropTypes.shape({
+    isLoading: PropTypes.bool,
+  }).isRequired,
 }
 &nbsp;
 export default withAuthenticationLayout(withHandleMessages(SignIn), {
@@ -637,7 +616,7 @@ export default withAuthenticationLayout(withHandleMessages(SignIn), {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 14:58:20 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 16:59:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

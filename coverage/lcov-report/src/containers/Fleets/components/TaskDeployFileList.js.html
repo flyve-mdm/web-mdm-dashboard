@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/11</span>
       </div>
     </div>
     <p class="quiet">
@@ -157,16 +157,7 @@ layout: coverage
 <a name='L106'></a><a href='#L106'>106</a>
 <a name='L107'></a><a href='#L107'>107</a>
 <a name='L108'></a><a href='#L108'>108</a>
-<a name='L109'></a><a href='#L109'>109</a>
-<a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a>
-<a name='L117'></a><a href='#L117'>117</a>
-<a name='L118'></a><a href='#L118'>118</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L109'></a><a href='#L109'>109</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -217,12 +208,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -255,9 +240,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -333,50 +315,41 @@ class TasksDeployFileList extends PureComponent <span class="cstat-no" title="st
    * @function refreshRender
    * @return {*}
    */
-  refreshRender = <span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>{</span>
-    const {
-      data,
-      typeData,
-    } = <span class="cstat-no" title="statement not covered" >this.props</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    return Array.isArray(data)</span>
-      ? data.map(<span class="fstat-no" title="function not covered" >item =&gt; <span class="cstat-no" title="statement not covered" ></span>typeData.map(<span class="fstat-no" title="function not covered" >value =&gt; (<span class="cstat-no" title="statement not covered" ></span>item.items_id === value.id</span></span>
-        ? (
-          &lt;div className="files-list" style={ { width: '320px' } } key={value.id}&gt;
-            &lt;div className="files-list__content"&gt;
-              &lt;div className="files-list__item"&gt;
-                &lt;div className="files-list__item-content-primary"&gt;
-                  &lt;div className="files-list__content-text-primary"&gt;
-                    {value.name}
-                  &lt;/div&gt;
+  refreshRender = <span class="fstat-no" title="function not covered" >() =&gt; (<span class="cstat-no" title="statement not covered" ></span>Array.isArray(this.props.data)</span>
+    ? this.props.data.map(<span class="fstat-no" title="function not covered" >item =&gt; <span class="cstat-no" title="statement not covered" ></span>this.props.typeData.map(<span class="fstat-no" title="function not covered" >value =&gt; (<span class="cstat-no" title="statement not covered" ></span>item.items_id === value.id</span></span>
+      ? (
+        &lt;div className="files-list" style={ { width: '320px' } } key={value.id}&gt;
+          &lt;div className="files-list__content"&gt;
+            &lt;div className="files-list__item"&gt;
+              &lt;div className="files-list__item-content-primary"&gt;
+                &lt;div className="files-list__content-text-primary"&gt;
+                  {value.name}
                 &lt;/div&gt;
-                &lt;div className="files-list__item-content-secondary"&gt;
-                  &lt;div className="files-list__item-icon"&gt;
-                    &lt;span
-                      className="deleteIcon"
-                      style={ { fontSize: '18px' } }
-                      onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.handleRemove(item)}</span>
-                      role="button"
-                      tabIndex="0"
-                    /&gt;
-                  &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div className="files-list__item-content-secondary"&gt;
+                &lt;div className="files-list__item-icon"&gt;
+                  &lt;span
+                    className="deleteIcon"
+                    style={ { fontSize: '18px' } }
+                    onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.handleRemove(item)}</span>
+                    role="button"
+                    tabIndex="0"
+                  /&gt;
                 &lt;/div&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
-        )
-        : null)))
-      : null
-  }
+        &lt;/div&gt;
+      )
+      : null)))
+    : null)
 &nbsp;
   /**
    * @function handleRemove
    * @param {*} task
    */
   handleRemove = (<span class="fstat-no" title="function not covered" >task) =&gt; {</span>
-    const { removeTask } = <span class="cstat-no" title="statement not covered" >this.props</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    removeTask(task)</span>
+<span class="cstat-no" title="statement not covered" >    this.props.removeTask(task)</span>
   }
 &nbsp;
   /**
@@ -406,7 +379,7 @@ export default TasksDeployFileList
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 14:58:20 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 16:59:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

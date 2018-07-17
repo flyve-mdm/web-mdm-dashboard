@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/7</span>
       </div>
     </div>
     <p class="quiet">
@@ -246,22 +246,7 @@ layout: coverage
 <a name='L195'></a><a href='#L195'>195</a>
 <a name='L196'></a><a href='#L196'>196</a>
 <a name='L197'></a><a href='#L197'>197</a>
-<a name='L198'></a><a href='#L198'>198</a>
-<a name='L199'></a><a href='#L199'>199</a>
-<a name='L200'></a><a href='#L200'>200</a>
-<a name='L201'></a><a href='#L201'>201</a>
-<a name='L202'></a><a href='#L202'>202</a>
-<a name='L203'></a><a href='#L203'>203</a>
-<a name='L204'></a><a href='#L204'>204</a>
-<a name='L205'></a><a href='#L205'>205</a>
-<a name='L206'></a><a href='#L206'>206</a>
-<a name='L207'></a><a href='#L207'>207</a>
-<a name='L208'></a><a href='#L208'>208</a>
-<a name='L209'></a><a href='#L209'>209</a>
-<a name='L210'></a><a href='#L210'>210</a>
-<a name='L211'></a><a href='#L211'>211</a>
-<a name='L212'></a><a href='#L212'>212</a>
-<a name='L213'></a><a href='#L213'>213</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L198'></a><a href='#L198'>198</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -306,21 +291,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -518,22 +488,7 @@ class Main extends PureComponent {
    * Render component
    * @function render
    */
-<span class="fstat-no" title="function not covered" >  render() <span class="cstat-no" title="statement not covered" ></span>{</span>
-    const {
-      changeMode,
-      tokenLife,
-      entityID,
-      downloadURL,
-      devicesCurretlymanaged,
-      fleetsCurrentlyManaged,
-      numberUsers,
-      applicationsUploaded,
-      filesUploaded,
-      invitationsSent,
-      typesPolicies,
-      numberCategoriesForPolicies,
-    } = <span class="cstat-no" title="statement not covered" >this.props</span>
-&nbsp;
+<span class="fstat-no" title="function not covered" >  render() </span>{
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;React.Fragment&gt;
         &lt;div className="title" style={ { padding: '0 10px' } }&gt;
@@ -546,11 +501,11 @@ class Main extends PureComponent {
           &lt;/div&gt;
           &lt;div className="list-element__controller"&gt;
             &lt;a
-              onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>changeMode('change Token life')}</span>
+              onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.props.changeMode('change Token life')}</span>
               role="button"
               tabIndex="0"
             &gt;
-              {tokenLife}
+              {this.props.tokenLife}
               {' '}
               DAYS
             &lt;/a&gt;
@@ -561,14 +516,14 @@ class Main extends PureComponent {
           &lt;div className="list-element__message"&gt;
             {I18n.t('settings.entity.download_url')}
             &lt;div className="list-element__detail"&gt;
-              {downloadURL}
+              {this.props.downloadURL}
             &lt;/div&gt;
           &lt;/div&gt;
 &nbsp;
           &lt;div className="list-element__controller"&gt;
             &lt;button
               className="btn btn--secondary"
-              onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>changeMode('change download URL')}</span>
+              onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.props.changeMode('change download URL')}</span>
               type="button"
             &gt;
               {I18n.t('commons.change')}
@@ -585,7 +540,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.id')}
           &lt;/div&gt;
           &lt;div className="list-element__controller"&gt;
-            {entityID}
+            {this.props.entityID}
           &lt;/div&gt;
         &lt;/div&gt;
 &nbsp;
@@ -598,7 +553,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.devices_currently')}
           &lt;/div&gt;
           &lt;div className="list-element__controller"&gt;
-            {devicesCurretlymanaged}
+            {this.props.devicesCurretlymanaged}
           &lt;/div&gt;
         &lt;/div&gt;
 &nbsp;
@@ -607,7 +562,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.fleets_currently')}
           &lt;/div&gt;
           &lt;div className="list-element__controller"&gt;
-            {fleetsCurrentlyManaged}
+            {this.props.fleetsCurrentlyManaged}
           &lt;/div&gt;
         &lt;/div&gt;
 &nbsp;
@@ -616,7 +571,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.files_uploaded')}
           &lt;/div&gt;
           &lt;div className="list-element__controller"&gt;
-            {filesUploaded}
+            {this.props.filesUploaded}
           &lt;/div&gt;
         &lt;/div&gt;
 &nbsp;
@@ -625,7 +580,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.applications_uploaded')}
           &lt;/div&gt;
           &lt;div className="list-element__controller"&gt;
-            {applicationsUploaded}
+            {this.props.applicationsUploaded}
           &lt;/div&gt;
         &lt;/div&gt;
 &nbsp;
@@ -634,7 +589,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.number_of_users')}
           &lt;/div&gt;
           &lt;div className="list-element__controller"&gt;
-            {numberUsers}
+            {this.props.numberUsers}
           &lt;/div&gt;
         &lt;/div&gt;
 &nbsp;
@@ -643,7 +598,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.invitations_sent')}
           &lt;/div&gt;
           &lt;div className="list-element__controller"&gt;
-            {invitationsSent}
+            {this.props.invitationsSent}
           &lt;/div&gt;
         &lt;/div&gt;
 &nbsp;
@@ -652,7 +607,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.types_of_policies')}
           &lt;/div&gt;
           &lt;div className="list-element__controller"&gt;
-            {typesPolicies}
+            {this.props.typesPolicies}
           &lt;/div&gt;
         &lt;/div&gt;
 &nbsp;
@@ -661,7 +616,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.number_of_categories')}
           &lt;/div&gt;
           &lt;div className="list-element__controller"&gt;
-            {numberCategoriesForPolicies}
+            {this.props.numberCategoriesForPolicies}
           &lt;/div&gt;
         &lt;/div&gt;
       &lt;/React.Fragment&gt;
@@ -691,7 +646,7 @@ export default Main
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 14:58:20 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 16:59:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

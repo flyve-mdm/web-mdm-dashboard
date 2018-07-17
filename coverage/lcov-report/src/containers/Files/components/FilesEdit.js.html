@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/44</span>
+        <span class='fraction'>0/39</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/43</span>
+        <span class='fraction'>0/38</span>
       </div>
     </div>
     <p class="quiet">
@@ -227,16 +227,7 @@ layout: coverage
 <a name='L176'></a><a href='#L176'>176</a>
 <a name='L177'></a><a href='#L177'>177</a>
 <a name='L178'></a><a href='#L178'>178</a>
-<a name='L179'></a><a href='#L179'>179</a>
-<a name='L180'></a><a href='#L180'>180</a>
-<a name='L181'></a><a href='#L181'>181</a>
-<a name='L182'></a><a href='#L182'>182</a>
-<a name='L183'></a><a href='#L183'>183</a>
-<a name='L184'></a><a href='#L184'>184</a>
-<a name='L185'></a><a href='#L185'>185</a>
-<a name='L186'></a><a href='#L186'>186</a>
-<a name='L187'></a><a href='#L187'>187</a>
-<a name='L188'></a><a href='#L188'>188</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L179'></a><a href='#L179'>179</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -296,7 +287,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -323,14 +313,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -370,9 +352,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -417,6 +396,9 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -483,7 +465,6 @@ export default class FilesEdit extends PureComponent {
    */
   updateItemList = <span class="fstat-no" title="function not covered" >(i</span>ndex, name) =&gt; {
     const { selectedItem } = <span class="cstat-no" title="statement not covered" >this.state</span>
-&nbsp;
     const newItem = <span class="cstat-no" title="statement not covered" >[...selectedItem]</span>
 &nbsp;
     // Find index of specific object using findIndex method.
@@ -510,26 +491,18 @@ export default class FilesEdit extends PureComponent {
    * @async
    * @function handleSaveFiles
    */
-  handleSaveFiles = <span class="fstat-no" title="function not covered" >async () =&gt; <span class="cstat-no" title="statement not covered" ></span>{</span>
-    const { selectedItem } = <span class="cstat-no" title="statement not covered" >this.state</span>
-    const {
-      glpi,
-      changeSelectionMode,
-      changeAction,
-      handleMessage,
-    } = <span class="cstat-no" title="statement not covered" >this.props</span>
-&nbsp;
+  handleSaveFiles = <span class="fstat-no" title="function not covered" >async () =&gt; </span>{
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      if (selectedItem.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      if (this.state.selectedItem.length &gt; 0) {</span>
 <span class="cstat-no" title="statement not covered" >        this.setState({</span>
           isLoading: true,
         })
-<span class="cstat-no" title="statement not covered" >        await glpi.updateItem({</span>
+<span class="cstat-no" title="statement not covered" >        await this.props.glpi.updateItem({</span>
           itemtype: itemtype.PluginFlyvemdmFile,
-          input: selectedItem,
+          input: this.state.selectedItem,
         })
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        if (selectedItem.length &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >        if (this.state.selectedItem.length &gt; 1) {</span>
 <span class="cstat-no" title="statement not covered" >          this.props.toast.setNotification({</span>
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_files'),
@@ -543,11 +516,11 @@ export default class FilesEdit extends PureComponent {
           })
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        changeSelectionMode(false)</span>
-<span class="cstat-no" title="statement not covered" >        changeAction('reload')</span>
+<span class="cstat-no" title="statement not covered" >        this.props.changeSelectionMode(false)</span>
+<span class="cstat-no" title="statement not covered" >        this.props.changeAction('reload')</span>
       }
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(this.props.handleMessage({</span>
         type: 'alert',
         message: error,
       }))
@@ -558,16 +531,13 @@ export default class FilesEdit extends PureComponent {
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  render() </span>{
-    const { selectedItems } = <span class="cstat-no" title="statement not covered" >this.props</span>
-    const { isLoading } = <span class="cstat-no" title="statement not covered" >this.state</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    if (selectedItems) {</span>
-<span class="cstat-no" title="statement not covered" >      if (isLoading) {</span>
+<span class="cstat-no" title="statement not covered" >    if (this.props.selectedItems) {</span>
+<span class="cstat-no" title="statement not covered" >      if (this.state.isLoading) {</span>
 <span class="cstat-no" title="statement not covered" >        return (</span>
           &lt;Loading message={`${I18n.t('commons.loading')}...`} /&gt;
         )
       }
-      const renderComponent = <span class="cstat-no" title="statement not covered" >selectedItems.map(<span class="fstat-no" title="function not covered" >(i</span>tem, index) =&gt; (</span>
+      const renderComponent = <span class="cstat-no" title="statement not covered" >this.props.selectedItems.map(<span class="fstat-no" title="function not covered" >(i</span>tem, index) =&gt; (</span>
 <span class="cstat-no" title="statement not covered" >        &lt;FilesEditItemList</span>
           key={`FilesEditItemList-${index.toString()}`}
           updateItemList={this.updateItemList}
@@ -604,10 +574,13 @@ export default class FilesEdit extends PureComponent {
 &nbsp;
 /** FilesEdit propTypes */
 <span class="cstat-no" title="statement not covered" >FilesEdit.propTypes = {</span>
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   selectedItems: PropTypes.array,
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
-  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 &nbsp;</pre></td></tr>
@@ -616,7 +589,7 @@ export default class FilesEdit extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 14:58:20 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 16:59:06 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>
