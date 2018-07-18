@@ -41,6 +41,7 @@ import {
 import ErrorValidation from '../ErrorValidation'
 import EmptyMessage from '../EmptyMessage'
 import I18n from '../../shared/i18n'
+import withHandleMessages from '../../hoc/withHandleMessages'
 
 /**
  * Component with the menu for multiple edition
@@ -375,4 +376,4 @@ EditMultiple.propTypes = {
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default EditMultiple
+export default withHandleMessages(EditMultiple)
