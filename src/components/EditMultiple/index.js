@@ -71,9 +71,18 @@ class EditMultiple extends PureComponent {
     let isCorrect = true
 
     if (this.state.selectedField.type === 'password') {
-      if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.newValue).isCorrect) isCorrect = false
-
-      if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.passwordConfirmation).isCorrect) isCorrect = false
+      if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.newValue).isCorrect) {
+        isCorrect = false
+      }
+      if (!ErrorValidation.validation({
+        ...this.state.passwordConfiguration,
+        isEqualTo: {
+          value: this.state.newValue,
+          message: 'Passwords do not match',
+        },
+      }, this.state.passwordConfirmation).isCorrect) {
+        isCorrect = false
+      }
     }
 
     if (isCorrect) {
