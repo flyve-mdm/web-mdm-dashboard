@@ -122,8 +122,13 @@ export default ({
         response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText
         break
       case (message.status >= 400 &amp;&amp; message.status &lt; 500):
-        response.body = message.data[0][1] ? Array.isArray(message.data[1]) ? message.data[1][0].message
-          : message.data[0][1] : message.statusText
+        response.body = message.data[0][1]
+          ? Array.isArray(message.data[1])
+            ? message.data[1][0]
+              ? message.data[1][0].message
+              : message.statusText
+            : message.data[0][1]
+          : message.statusText
         if (displayErrorPage) {
           pushError(history.location.pathname, message.status, customErrorRoute)
         }
