@@ -30,11 +30,9 @@
 import React, {
   PureComponent,
 } from 'react'
-import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
 import PropTypes from 'prop-types'
+import WinJS from 'winjs'
+import I18n from '../../../shared/i18n'
 import FleetsTaskItemList from './FleetsTaskItemList'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
@@ -122,7 +120,7 @@ class FleetsContent extends PureComponent {
         ...prevState,
         isLoading: true,
         itemID: getID(nextProps.history.location.pathname),
-        input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]['PluginFlyvemdmFleet.name'] : 'New Fleet',
+        input: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0]['PluginFlyvemdmFleet.name'] : I18n.t('fleets.new_fleet'),
         notManaged: nextProps.selectedItems.length === 1 ? nextProps.selectedItems[0][
           'PluginFlyvemdmFleet.is_default'
         ] === 1 : false,
@@ -193,8 +191,6 @@ class FleetsContent extends PureComponent {
   requestAllData = async () => {
     const {
       glpi,
-      setNotification,
-      handleMessage,
       changeSelectionMode,
       changeAction,
     } = this.props
@@ -288,7 +284,7 @@ class FleetsContent extends PureComponent {
           ],
         })
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -787,9 +783,7 @@ class FleetsContent extends PureComponent {
     } = this.state
     const {
       glpi,
-      setNotification,
       changeAction,
-      handleMessage,
     } = this.props
 
     try {
@@ -806,7 +800,7 @@ class FleetsContent extends PureComponent {
         input: fleetToUpdate,
       })
 
-      setNotification({
+      this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.fleet_successfully_updated'),
         type: 'success',
@@ -818,7 +812,7 @@ class FleetsContent extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -833,6 +827,7 @@ class FleetsContent extends PureComponent {
    * @function handleUpdateFleet
    * @async
    */
+  // eslint-disable-next-line
   handleUpdateFleet = async () => {
     const {
       input,
@@ -842,8 +837,6 @@ class FleetsContent extends PureComponent {
     } = this.state
     const {
       glpi,
-      setNotification,
-      handleMessage,
     } = this.props
 
     this.setState({
@@ -902,8 +895,9 @@ class FleetsContent extends PureComponent {
         }
       }
     })
-    const itemsToAdd = { ...data.tasksNew }
 
+    const itemsToAdd = { ...data.tasksNew }
+    // eslint-disable-next-line
     data.tasks.forEach((task) => {
       if (Array.isArray(itemsToAdd[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']])) {
         data.tasksNew[task['PluginFlyvemdmTask.PluginFlyvemdmPolicy.id']].forEach((item, index) => {
@@ -959,14 +953,14 @@ class FleetsContent extends PureComponent {
         })
       }
 
-      setNotification({
+      this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.fleet_successfully_updated'),
         type: 'success',
       })
       this.requestAllData()
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -986,10 +980,8 @@ class FleetsContent extends PureComponent {
     } = this.state
     const {
       glpi,
-      setNotification,
       changeSelectionMode,
       changeAction,
-      handleMessage,
     } = this.props
 
     this.setState({
@@ -1041,7 +1033,7 @@ class FleetsContent extends PureComponent {
       this.setState({
         isLoading: false,
       })
-      setNotification({
+      this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.fleet_successfully_created'),
         type: 'success',
@@ -1049,7 +1041,7 @@ class FleetsContent extends PureComponent {
       changeSelectionMode(false)
       changeAction('reload')
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -1069,10 +1061,8 @@ class FleetsContent extends PureComponent {
     const {
       selectedItems,
       glpi,
-      setNotification,
       changeSelectionMode,
       changeAction,
-      handleMessage,
     } = this.props
     const { itemID } = this.state
 
@@ -1090,7 +1080,7 @@ class FleetsContent extends PureComponent {
         this.setState({
           isLoading: false,
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.fleet_successfully_removed'),
           type: 'success',
@@ -1098,7 +1088,7 @@ class FleetsContent extends PureComponent {
         changeSelectionMode(false)
         changeAction('reload')
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -1304,6 +1294,10 @@ FleetsContent.defaultProps = {
 }
 
 FleetsContent.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   selectedItems: PropTypes.array,
   itemType: PropTypes.string,

@@ -26,9 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import {
-  I18n
-} from "react-i18nify"
+import I18n from '../../../../shared/i18n'
 
 /**
  * Agent data schema
@@ -41,32 +39,32 @@ import {
 export default function ({
   state,
   changeState,
-  glpi
+  glpi,
 }) {
   const mainInformation = [
     [{
       label: I18n.t('commons.device_name'),
-      type: "text",
-      name: "name",
+      type: 'text',
+      name: 'name',
       value: state.name,
       placeholder: I18n.t('commons.device_name'),
       function: changeState,
       disabled: false,
-      style: null
-    }, ],
+      style: null,
+    }],
     [{
       label: I18n.t('commons.fleet_name'),
-      type: "select",
-      name: "fleet",
+      type: 'select',
+      name: 'fleet',
       value: state.fleet.value,
       options: [],
       function: changeState,
       request: state.fleet.request,
-      glpi
-    }]
+      glpi,
+    }],
   ]
 
   return {
-    mainInformation
+    mainInformation,
   }
 }

@@ -45,11 +45,13 @@ exports[`FilesUploadItemList renders FilesUploadItemList 1`] = `
           <span
             className="deleteIcon"
             onClick={[Function]}
+            role="button"
             style={
               Object {
                 "fontSize": "18px",
               }
             }
+            tabIndex="0"
           />
         </div>
       </div>

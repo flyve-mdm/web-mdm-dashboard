@@ -30,42 +30,42 @@ import authtype from '../index'
 
 describe('authtype', () => {
   it('should return "glpi_internal_database"', () => {
-    expect(authtype(1)).toEqual('glpi_internal_database')
+    expect(authtype(1)).toEqual('GLPI internal database')
   })
 
   it('should return "mail_server"', () => {
-    expect(authtype(2)).toEqual('mail_server')
+    expect(authtype(2)).toEqual('Mail server')
   })
 
   it('should return "ldap_directory"', () => {
-    expect(authtype(3)).toEqual('ldap_directory')
+    expect(authtype(3)).toEqual('LDAP directory')
   })
 
   it('should return "other"', () => {
-    expect(authtype(4)).toEqual('other')
+    expect(authtype(4)).toEqual('Other')
   })
 
   it('should return "cas"', () => {
-    expect(authtype(5)).toEqual('cas')
+    expect(authtype(5)).toEqual('CAS')
   })
 
   it('should return "certificate_authentication"', () => {
-    expect(authtype(6)).toEqual('certificate_authentication')
+    expect(authtype(6)).toEqual('x509 certificate authentication')
   })
 
   it('should return "api"', () => {
-    expect(authtype(7)).toEqual('api')
+    expect(authtype(7)).toEqual('API')
   })
 
   it('should return "cookie"', () => {
-    expect(authtype(8)).toEqual('cookie')
+    expect(authtype(8)).toEqual('Cookie')
   })
 
   it('should return "not_yet_authenticated"', () => {
-    expect(authtype(0)).toEqual('not_yet_authenticated')
+    expect(authtype(0)).toEqual('Not yet authenticated')
   })
 
   it('should return "not_available"', () => {
-    expect(authtype(-1)).toEqual('not_available')
+    expect(authtype(-1)).toEqual('Not available')
   })
 })

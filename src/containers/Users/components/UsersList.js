@@ -30,12 +30,10 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  I18n,
-} from 'react-i18nify'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
+import I18n from '../../../shared/i18n'
 import UsersItemList from './UsersItemList'
 import BuildItemList from '../../../shared/BuildItemList'
 import Loader from '../../../components/Loader'
@@ -43,6 +41,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
+import handleMessage from '../../../shared/handleMessage'
 
 /**
  * Component with the list of users
@@ -106,32 +105,20 @@ export default class UsersList extends PureComponent {
    * @param {object} prevProps
    */
   componentDidUpdate(prevProps) {
-    const {
-      totalcount,
-      pagination,
-      isLoadingMore,
-    } = this.state
-    const {
-      action,
-      changeAction,
-      selectedItems,
-      selectionMode,
-    } = this.props
-
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
-      this.listView.winControl.footer.style.height = totalcount > (pagination.page * pagination.count) ? isLoadingMore ? '100px' : '42px' : '1px'
+      this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
     }
     if (this.toolBar) {
       this.toolBar.winControl.forceLayout()
     }
 
-    if (action === 'reload') {
+    if (this.props.action === 'reload') {
       this.handleRefresh()
-      changeAction(null)
+      this.props.changeAction(null)
     }
 
-    if (prevProps.selectedItems.length > 0 && selectedItems.length === 0 && !selectionMode) {
+    if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
       if (this.listView) {
         this.listView.winControl.selection.clear()
       }
@@ -143,8 +130,7 @@ export default class UsersList extends PureComponent {
    * @function componentWillUnmount
    */
   componentWillUnmount() {
-    const { changeSelectionMode } = this.props
-    changeSelectionMode(false)
+    this.props.changeSelectionMode(false)
   }
 
   /**
@@ -152,16 +138,9 @@ export default class UsersList extends PureComponent {
    * @function handleToggleSelectionMode
    */
   handleToggleSelectionMode = () => {
-    const {
-      history,
-      changeSelectionMode,
-      changeSelectedItems,
-      selectionMode,
-    } = this.props
-
-    history.push(`${publicURL}/app/users`)
-    changeSelectionMode(!selectionMode)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/users`)
+    this.props.changeSelectionMode(!this.props.selectionMode)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -173,26 +152,19 @@ export default class UsersList extends PureComponent {
    * @param {component} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    const {
-      changeSelectedItems,
-      history,
-      selectionMode,
-    } = this.props
-    const { itemList } = this.state
-
     const listView = eventObject.currentTarget.winControl
     const index = listView.selection.getIndices()
     const itemSelected = []
 
     for (const item of index) {
-      itemSelected.push(itemList.getItem(item).data)
+      itemSelected.push(this.state.itemList.getItem(item).data)
     }
-    changeSelectedItems(itemSelected)
-    if (index.length === 1 && !selectionMode) {
-      history.push(`${publicURL}/app/users/${itemSelected[0]['User.id']}`)
+    this.props.changeSelectedItems(itemSelected)
+    if (index.length === 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/users/${itemSelected[0]['User.id']}`)
     }
-    if (index.length > 1 && !selectionMode) {
-      history.push(`${publicURL}/app/users/edit/`)
+    if (index.length > 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/users/edit/`)
     }
   }
 
@@ -202,17 +174,8 @@ export default class UsersList extends PureComponent {
    * @async
    */
   handleRefresh = async () => {
-    const {
-      history,
-      glpi,
-    } = this.props
-    const {
-      order,
-      pagination,
-    } = this.state
-
     try {
-      history.push(`${publicURL}/app/users`)
+      this.props.history.push(`${publicURL}/app/users`)
       this.setState({
         isLoading: true,
         totalcount: 0,
@@ -222,8 +185,8 @@ export default class UsersList extends PureComponent {
           count: 15,
         },
       })
-
-      const response = await glpi.searchItems({
+      const { order, pagination } = this.state
+      const response = await this.props.glpi.searchItems({
         itemtype: itemtype.User,
         options: {
           uid_cols: true,
@@ -232,7 +195,6 @@ export default class UsersList extends PureComponent {
           range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
         },
       })
-
       this.setState({
         isLoading: false,
         order: response.order,
@@ -240,6 +202,7 @@ export default class UsersList extends PureComponent {
         totalcount: response.totalcount,
       })
     } catch (e) {
+      handleMessage({ message: e })
       this.setState({
         isLoading: false,
         order: 'ASC',
@@ -252,10 +215,8 @@ export default class UsersList extends PureComponent {
    * @function handleEdit
    */
   handleEdit = () => {
-    const { history } = this.props
-
     const path = `${publicURL}/app/users/edit`
-    history.push(path)
+    this.props.history.push(path)
   }
 
   /**
@@ -264,19 +225,9 @@ export default class UsersList extends PureComponent {
    * @async
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      setNotification,
-      changeSelectionMode,
-      changeSelectedItems,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
-      const itemListToDelete = selectedItems.map(item => ({
+      const itemListToDelete = this.props.selectedItems.map(item => ({
         id: item['User.id'],
       }))
 
@@ -284,7 +235,7 @@ export default class UsersList extends PureComponent {
         isLoading: true,
       }, async () => {
         try {
-          await glpi.deleteItem({
+          await this.props.glpi.deleteItem({
             itemtype: itemtype.User,
             input: itemListToDelete,
             queryString: {
@@ -292,32 +243,32 @@ export default class UsersList extends PureComponent {
             },
           })
 
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.user_successfully_removed'),
             type: 'success',
           })
-          changeSelectionMode(false)
-          changeSelectedItems([])
-          changeAction('reload')
+          this.props.changeSelectionMode(false)
+          this.props.changeSelectedItems([])
+          this.props.changeAction('reload')
         } catch (error) {
-          setNotification(handleMessage({
+          this.props.toast.setNotification(handleMessage({
             type: 'alert',
             message: error,
           }))
-          changeSelectionMode(false)
-          changeSelectedItems([])
+          this.props.changeSelectionMode(false)
+          this.props.changeSelectedItems([])
           if (this.listView) {
             this.listView.winControl.selection.clear()
           }
-          this.setState(() => ({
+          this.setState({
             isLoading: false,
-          }))
+          })
         }
       })
     } else {
-      changeSelectionMode(false)
-      changeSelectedItems([])
+      this.props.changeSelectionMode(false)
+      this.props.changeSelectedItems([])
       this.listView.winControl.selection.clear()
     }
   }
@@ -328,12 +279,6 @@ export default class UsersList extends PureComponent {
    * @async
    */
   handleSort = async () => {
-    const { order } = this.state
-    const {
-      history,
-      glpi,
-    } = this.props
-
     try {
       this.setState({
         isLoading: true,
@@ -343,9 +288,9 @@ export default class UsersList extends PureComponent {
           count: 15,
         },
       })
-      const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
+      const newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-      const response = await glpi.searchItems({
+      const response = await this.props.glpi.searchItems({
         itemtype: itemtype.User,
         options: {
           uid_cols: true,
@@ -360,7 +305,7 @@ export default class UsersList extends PureComponent {
         totalcount: response.totalcount,
         itemList: BuildItemList(response),
       })
-      history.push(`${publicURL}/app/users`)
+      this.props.history.push(`${publicURL}/app/users`)
     } catch (error) {
       this.setState({
         isLoading: false,
@@ -375,29 +320,22 @@ export default class UsersList extends PureComponent {
    * @async
    */
   loadMoreData = async () => {
-    const { glpi } = this.props
-    const {
-      pagination,
-      totalcount,
-      order,
-      itemList,
-    } = this.state
-
     try {
       this.setState({
         isLoadingMore: true,
       })
+      const { order, pagination } = this.state
       const range = {
         from: pagination.count * pagination.page,
         to: (pagination.count * (pagination.page + 1)) - 1,
       }
-      if (range.from <= totalcount) {
+      if (range.from <= this.state.totalcount) {
         for (const key in range) {
           if (Object.prototype.hasOwnProperty.call(range, key)) {
-            if (range[key] >= totalcount) { range[key] = totalcount - 1 }
+            if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
           }
         }
-        const response = await glpi.searchItems({
+        const response = await this.props.glpi.searchItems({
           itemtype: itemtype.User,
           options: {
             uid_cols: true,
@@ -409,7 +347,7 @@ export default class UsersList extends PureComponent {
 
         for (const item in response.data) {
           if (Object.prototype.hasOwnProperty.call(response.data, item)) {
-            itemList.push(response.data[item])
+            this.state.itemList.push(response.data[item])
           }
         }
 
@@ -434,25 +372,13 @@ export default class UsersList extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      isLoadingMore,
-      itemList,
-      layout,
-    } = this.state
-    const {
-      selectedItems,
-      selectionMode,
-      icon,
-    } = this.props
-
     const deleteCommand = (
       <ReactWinJS.ToolBar.Button
         key="delete"
         icon="delete"
         label={I18n.t('commons.delete')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleDelete}
       />
     )
@@ -463,12 +389,12 @@ export default class UsersList extends PureComponent {
         icon="edit"
         label={I18n.t('commons.edit')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleEdit}
       />
     )
 
-    const footerComponent = isLoadingMore
+    const footerComponent = this.state.isLoadingMore
       ? <Loader />
       : (
         <div
@@ -488,31 +414,31 @@ export default class UsersList extends PureComponent {
 
     let listComponent
 
-    if (isLoading) {
+    if (this.state.isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList) {
-      if (itemList.length > 0) {
+    } else if (this.state.itemList) {
+      if (this.state.itemList && this.state.itemList.length > 0) {
         listComponent = (
           <ReactWinJS.ListView
             ref={(listView) => { this.listView = listView }}
             className="list-pane__content win-selectionstylefilled"
             style={{ height: 'calc(100% - 48px)' }}
-            itemDataSource={itemList.dataSource}
-            groupDataSource={itemList.groups.dataSource}
-            layout={layout}
+            itemDataSource={this.state.itemList.dataSource}
+            groupDataSource={this.state.itemList.groups.dataSource}
+            layout={this.state.layout}
             itemTemplate={this.ItemListRenderer}
             groupHeaderTemplate={this.groupHeaderRenderer}
             footerComponent={footerComponent}
-            selectionMode={selectionMode ? 'multi' : 'single'}
-            tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
+            selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+            tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
             onSelectionChanged={this.handleSelectionChanged}
           />
         )
       } else {
-        listComponent = <EmptyMessage message={I18n.t('users.not_found')} icon={icon} showIcon />
+        listComponent = <EmptyMessage message={I18n.t('users.not_found')} icon={this.props.icon} showIcon />
       }
     } else {
-      listComponent = <EmptyMessage message={I18n.t('users.not_found')} icon={icon} showIcon />
+      listComponent = <EmptyMessage message={I18n.t('users.not_found')} icon={this.props.icon} showIcon />
     }
 
     return (
@@ -533,15 +459,15 @@ export default class UsersList extends PureComponent {
             onClick={this.handleRefresh}
           />
 
-          {selectionMode ? editCommand : null}
-          {selectionMode ? deleteCommand : null}
+          {this.props.selectionMode ? editCommand : null}
+          {this.props.selectionMode ? deleteCommand : null}
 
           <ReactWinJS.ToolBar.Toggle
             key="select"
             icon="bullets"
             label={I18n.t('commons.select')}
             priority={0}
-            selected={selectionMode}
+            selected={this.props.selectionMode}
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
@@ -550,7 +476,7 @@ export default class UsersList extends PureComponent {
 
         <Confirmation
           title={I18n.t('users.delete')}
-          message={`${selectedItems.length} ${I18n.t('commons.users')}`}
+          message={`${this.props.selectedItems.length} ${I18n.t('commons.users')}`}
           reference={(el) => { this.contentDialog = el }}
         />
       </React.Fragment>
@@ -570,7 +496,7 @@ UsersList.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   icon: PropTypes.string.isRequired,
 }

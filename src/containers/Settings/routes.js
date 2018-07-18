@@ -27,9 +27,6 @@
  */
 
 /** import dependencies */
-import {
-  I18n,
-} from 'react-i18nify'
 import EmptyMessage from '../../components/EmptyMessage'
 import Entity from './components/Entity'
 import Profiles from './components/Profiles'
@@ -45,43 +42,43 @@ import Display from './components/Display'
  */
 const routes = [{
   path: '/',
-  name: I18n.t('commons.no_selection'),
+  name: 'commons.no_selection',
   component: EmptyMessage,
   exact: true,
 },
 {
   path: '/entity',
-  name: I18n.t('commons.entity'),
+  name: 'commons.entity',
   component: Entity,
   exact: true,
 },
 {
   path: '/profiles',
-  name: I18n.t('commons.profiles'),
+  name: 'commons.profiles',
   component: Profiles,
   exact: false,
 },
 {
   path: '/supervision',
-  name: I18n.t('commons.supervision'),
+  name: 'commons.supervision',
   component: Supervision,
   exact: false,
 },
 {
   path: '/security',
-  name: I18n.t('commons.security'),
+  name: 'commons.security',
   component: Security,
   exact: false,
 },
 {
   path: '/notifications',
-  name: I18n.t('commons.notifications'),
+  name: 'commons.notifications',
   component: Notifications,
   exact: false,
 },
 {
   path: '/display',
-  name: I18n.t('commons.display'),
+  name: 'commons.display',
   component: Display,
   exact: false,
 },

@@ -34,45 +34,14 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
+import I18n from '../../shared/i18n'
 import Loading from '../../components/Loading'
 import ConstructInputs from '../../components/Forms'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import {
-  changeNotificationMessage,
-  fetchCaptcha,
-  fetchSignUp,
-} from '../../store/authentication/actions'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import publicURL from '../../shared/publicURL'
 import ErrorValidation from '../../components/ErrorValidation'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    fetchCaptcha: bindActionCreators(fetchCaptcha, dispatch),
-    fetchSignUp: bindActionCreators(fetchSignUp, dispatch),
-    changeNotificationMessage: bindActionCreators(changeNotificationMessage, dispatch),
-  }
-  return {
-    actions,
-  }
-}
-
-function mapStateToProps(state) {
-  return {
-    isLoading: state.ui.loading,
-    type: state.ui.notification.type,
-    captcha: state.auth.captcha,
-    configurationPassword: state.auth.configurationPassword,
-  }
-}
+import appConfig from '../../../public/config.json'
 
 /**
  * Component with the registration form
@@ -97,23 +66,14 @@ class SignUp extends PureComponent {
    * Fetch the captcha
    * @function componentDidMount
    */
-  componentDidMount() {
-    const { actions } = this.props
-    actions.fetchCaptcha()
-  }
-
-  /**
-   * redirect to '/validateAccount' when the registration is success
-   * @function componentDidUpdate
-   */
-  componentDidUpdate() {
-    const {
-      type,
-      history,
-    } = this.props
-
-    if (type === 'success') {
-      history.push(`${publicURL}/validateAccount`)
+  async componentDidMount() {
+    try {
+      await this.props.auth.fetchCaptcha()
+    } catch (error) {
+      this.props.toast.setNotification(this.props.handleMessage({
+        type: 'alert',
+        message: error,
+      }))
     }
   }
 
@@ -134,23 +94,13 @@ class SignUp extends PureComponent {
    * @return {array}
    */
   buildDataArray = () => {
-    const {
-      email,
-      forceValidation,
-      realName,
-      password,
-      configurationPassword,
-      passwordConfirmation,
-      captchaValue,
-    } = this.state
-
     const dataArray = {
       personalInformation: [
         [{
           label: I18n.t('commons.email'),
           type: 'text',
           name: 'email',
-          value: email,
+          value: this.state.email,
           placeholder: I18n.t('commons.email'),
           function: this.changeState,
           disabled: false,
@@ -161,13 +111,13 @@ class SignUp extends PureComponent {
             isRequired: true,
             isEmail: true,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         {
           label: I18n.t('create_account.full_name'),
           type: 'text',
           name: 'realName',
-          value: realName,
+          value: this.state.realName,
           placeholder: I18n.t('create_account.full_name'),
           function: this.changeState,
           disabled: false,
@@ -177,7 +127,7 @@ class SignUp extends PureComponent {
           parametersToEvaluate: {
             isRequired: true,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         ],
       ],
@@ -186,7 +136,7 @@ class SignUp extends PureComponent {
           label: I18n.t('commons.password'),
           type: 'password',
           name: 'password',
-          value: password,
+          value: this.state.password,
           placeholder: I18n.t('commons.password'),
           function: this.changeState,
           disabled: false,
@@ -195,15 +145,15 @@ class SignUp extends PureComponent {
           },
           parametersToEvaluate: {
             isRequired: true,
-            ...configurationPassword,
+            ...this.state.configurationPassword,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         {
           label: I18n.t('commons.password_confirmation'),
           type: 'password',
           name: 'passwordConfirmation',
-          value: passwordConfirmation,
+          value: this.state.passwordConfirmation,
           placeholder: I18n.t('commons.password_confirmation'),
           function: this.changeState,
           disabled: false,
@@ -212,13 +162,13 @@ class SignUp extends PureComponent {
           },
           parametersToEvaluate: {
             isRequired: true,
-            ...configurationPassword,
+            ...this.state.configurationPassword,
             isEqualTo: {
-              value: password,
+              value: this.state.password,
               message: I18n.t('commons.passwords_not_match'),
             },
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         ],
       ],
@@ -227,7 +177,7 @@ class SignUp extends PureComponent {
           label: I18n.t('create_account.enter_code_image'),
           type: 'text',
           name: 'captchaValue',
-          value: captchaValue,
+          value: this.state.captchaValue,
           placeholder: null,
           function: this.changeState,
           disabled: false,
@@ -237,7 +187,7 @@ class SignUp extends PureComponent {
           parametersToEvaluate: {
             isRequired: true,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         }],
       ],
     }
@@ -251,19 +201,6 @@ class SignUp extends PureComponent {
    */
   handleSubmitForm = (event) => {
     event.preventDefault()
-
-    const {
-      email,
-      realName,
-      password,
-      passwordConfirmation,
-      captchaValue,
-    } = this.state
-    const {
-      actions,
-      captcha,
-    } = this.props
-
     const user = this.buildDataArray()
 
     let isCorrect = true
@@ -279,15 +216,29 @@ class SignUp extends PureComponent {
     }
 
     if (isCorrect) {
-      actions.fetchSignUp({
-        name: email,
-        realname: realName,
-        password,
-        password2: passwordConfirmation,
-        _useremails: [email],
-        _plugin_flyvemdmdemo_captchas_id: captcha.id,
-        _answer: captchaValue,
+      this.props.auth.fetchSignUp({
+        name: this.state.email,
+        realname: this.state.realName,
+        password: this.state.password,
+        password2: this.state.passwordConfirmation,
+        _useremails: [this.state.email],
+        _plugin_flyvemdmdemo_captchas_id: this.props.auth.captcha.id,
+        _answer: this.state.captchaValue,
       })
+        .then(() => {
+          this.props.toast.setNotification({
+            title: appConfig.appName,
+            body: 'Successfully registered user',
+            type: 'success',
+          })
+          this.props.history.push(`${publicURL}/validateAccount`)
+        })
+        .catch((error) => {
+          this.props.toast.setNotification(this.props.handleMessage({
+            type: 'alert',
+            message: error,
+          }))
+        })
     } else {
       this.setState({
         forceValidation: true,
@@ -300,14 +251,8 @@ class SignUp extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      captcha,
-      actions,
-    } = this.props
-
     let renderComponent
-    if (isLoading) {
+    if (this.props.auth.isLoading) {
       renderComponent = (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -326,11 +271,11 @@ class SignUp extends PureComponent {
             <ConstructInputs data={user.passwordInformation} />
             <ConstructInputs data={user.captchaInformation} />
             <div className="authentication__captcha-img">
-              <img src={captcha.img} alt="Captcha" />
+              <img src={this.props.auth.captcha.img} alt="Captcha" />
             </div>
             <div
               className="authentication__captcha-refresh"
-              onClick={actions.fetchCaptcha}
+              onClick={this.props.auth.fetchCaptcha}
               role="button"
               tabIndex="0"
             >
@@ -364,24 +309,20 @@ class SignUp extends PureComponent {
   }
 }
 
-SignUp.defaultProps = {
-  captcha: {
-    img: null,
-  },
-  type: null,
-}
-
 SignUp.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    isLoading: PropTypes.bool,
+    fetchSignUp: PropTypes.func,
+    fetchCaptcha: PropTypes.func,
+    captcha: PropTypes.object,
+  }).isRequired,
   history: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  captcha: PropTypes.object,
-  type: PropTypes.string,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withAuthenticationLayout(SignUp, {
+export default withAuthenticationLayout(withHandleMessages(SignUp), {
   contentCenter: true,
-}))
+})

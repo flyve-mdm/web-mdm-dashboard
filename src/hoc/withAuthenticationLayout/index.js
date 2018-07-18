@@ -28,25 +28,10 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
-import {
-  I18n
-} from 'react-i18nify'
-import {
-  changeLanguage
-} from '../../store/i18n/actions'
-import tractionsList from '../../hoc/withI18NTranslation/i18n/languages'
-
-function mapDispatchToProps(dispatch) {
-  return {
-    changeLanguage: bindActionCreators(changeLanguage, dispatch)
-  }
-}
+import I18n from '../../shared/i18n'
+import languagesList from '../../shared/i18n/languages'
+import { AuthenticationConsumer } from '../../providers/AuthenticationProvider'
+import logo from '../../assets/images/dashboard.svg'
 
 /**
  * Wrapper component with the basic structure of the authentication pages
@@ -60,18 +45,21 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
    * Create authenticationLayout
    * @param {object} props
    */
-  const authenticationLayout = props => {
+  const authenticationLayout = (props) => {
     const style = {
       textAlign: configStyles.centerContent ? 'center' : null,
-      width: props.width
+      width: props.width,
     }
     return (
-      <div className="authentication" style={style} >
+      <div className="authentication" style={style}>
         <section>
           <figure>
-            <img alt="Flyve MDM Dashboard" src={require('../../assets/images/dashboard.svg')} />
+            <img alt="Flyve MDM Dashboard" src={logo} />
           </figure>
-          <WrappedComponent {...props} />
+          <AuthenticationConsumer>
+            {value => <WrappedComponent {...props} {...value} />
+            }
+          </AuthenticationConsumer>
         </section>
         <footer>
           <a href="https://flyve-mdm.com/privacy-policy/">
@@ -79,13 +67,14 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
           </a>
           <br />
           <span>
-            © 2017 - 2018 Teclib'.
+            © 2017 - 2018 Teclib&apos;.
           </span>
-          <br/>
-          <select onChange={
-            event => props.changeLanguage(event.target.value)
-          }>
-            {tractionsList()}
+          <br />
+          <select
+            onChange={event => props.changeLanguage(event.target.value)}
+            value={props.languageCurrent}
+          >
+            {languagesList()}
           </select>
         </footer>
       </div>
@@ -94,18 +83,20 @@ const withAuthenticationLayout = (WrappedComponent, configStyles) => {
 
   authenticationLayout.defaultProps = {
     centerContent: true,
-    width: 340
+    width: 340,
   }
 
   authenticationLayout.propTypes = {
-    centerContent: PropTypes.bool.isRequired,
+    centerContent: PropTypes.bool,
     width: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.number
-    ]).isRequired
+      PropTypes.number,
+    ]),
+    languageCurrent: PropTypes.string.isRequired,
+    changeLanguage: PropTypes.func.isRequired,
   }
 
-  return connect(null, mapDispatchToProps)(authenticationLayout)
+  return authenticationLayout
 }
 
 export default withAuthenticationLayout

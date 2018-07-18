@@ -31,34 +31,13 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  connect,
-} from 'react-redux'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../shared/i18n'
 import Loading from '../../components/Loading'
 import Input from '../../components/Forms/Input'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import withGLPI from '../../hoc/withGLPI'
 import publicURL from '../../shared/publicURL'
-import handleMessage from '../../shared/handleMessage'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the ForgotPassword section
@@ -91,28 +70,22 @@ class ForgotPassword extends PureComponent {
    * @param {object} event
    */
   handleRecover = async (event) => {
-    const {
-      glpi,
-      actions,
-    } = this.props
-    const { text } = this.state
-
     event.preventDefault()
     this.setState({
       isLoading: true,
     })
-    if (glpi.sessionToken) {
+    if (this.props.glpi.sessionToken) {
       try {
-        await glpi.killSession()
+        await this.props.glpi.killSession()
       } catch (error) {}
     }
     try {
-      await glpi.genericRequest({
+      await this.props.glpi.genericRequest({
         path: 'lostPassword',
         requestParams: {
           method: 'PUT',
           body: JSON.stringify({
-            email: text,
+            email: this.state.text,
           }),
         },
       })
@@ -120,7 +93,7 @@ class ForgotPassword extends PureComponent {
         isRecoverSent: true,
         isLoading: false,
       })
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'success',
         message: I18n.t('notifications.request_sent'),
       }))
@@ -128,7 +101,7 @@ class ForgotPassword extends PureComponent {
       this.setState({
         isLoading: false,
       })
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'warning',
         message: error,
       }))
@@ -141,14 +114,8 @@ class ForgotPassword extends PureComponent {
    * @return {component}
    */
   renderElement = () => {
-    const {
-      text,
-      isRecoverSent,
-    } = this.state
-    const { history } = this.props
-
     let element
-    if (!isRecoverSent) {
+    if (!this.state.isRecoverSent) {
       element = (
         <div className="authentication__forgot-password">
           <p>
@@ -159,7 +126,7 @@ class ForgotPassword extends PureComponent {
               label=""
               type="text"
               name="text"
-              value={text}
+              value={this.state.text}
               placeholder={I18n.t('commons.flyve_mdm_email')}
               required
               function={(name, value) => { this.setState({ text: value }) }}
@@ -169,7 +136,7 @@ class ForgotPassword extends PureComponent {
             <button
               className="btn btn--secondary"
               type="button"
-              onClick={() => history.push(`${publicURL}/`)}
+              onClick={() => this.props.history.push(`${publicURL}/`)}
             >
               {I18n.t('commons.back')}
             </button>
@@ -189,7 +156,7 @@ class ForgotPassword extends PureComponent {
           <button
             className="win-button"
             type="button"
-            onClick={() => history.push(`${publicURL}/`)}
+            onClick={() => this.props.history.push(`${publicURL}/`)}
           >
             {I18n.t('forgot_password.go_home')}
           </button>
@@ -204,9 +171,7 @@ class ForgotPassword extends PureComponent {
    * @function render
    */
   render() {
-    const { isLoading } = this.state
-
-    if (isLoading) {
+    if (this.state.isLoading) {
       return (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.sending')}...`} />
@@ -225,13 +190,14 @@ class ForgotPassword extends PureComponent {
 }
 
 ForgotPassword.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 
-export default withGLPI(withAuthenticationLayout(
-  connect(null, mapDispatchToProps)(withHandleMessages(ForgotPassword)), {
-    centerContent: true,
-  },
-))
+export default withGLPI(withAuthenticationLayout((withHandleMessages(ForgotPassword)), {
+  centerContent: true,
+}))

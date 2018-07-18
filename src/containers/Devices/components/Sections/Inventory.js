@@ -32,6 +32,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import Loader from '../../../../components/Loader'
+import I18n from '../../../../shared/i18n'
 
 /**
  * @class Inventory
@@ -43,7 +44,7 @@ export default class Inventory extends PureComponent {
     super(props)
     this.state = {
       data: undefined,
-      isLoading: false,
+      isLoading: true,
     }
   }
 
@@ -56,25 +57,17 @@ export default class Inventory extends PureComponent {
    * @function handleRefresh
    * */
   handleRefresh = () => {
-    const {
-      glpi,
-      itemType,
-      itemID,
-      parameters,
-      fields,
-    } = this.props
-
     this.setState({
       isLoading: true,
     }, async () => {
       try {
-        const data = await glpi.getAnItem({
-          itemtype: itemType,
-          id: itemID,
-          queryString: parameters,
+        const data = await this.props.glpi.getAnItem({
+          itemtype: this.props.itemType,
+          id: this.props.itemID,
+          queryString: this.props.parameters,
         })
-        const object = Object.keys(fields).map(key => ({
-          [fields[key]]: data[key],
+        const object = Object.keys(this.props.fields).map(key => ({
+          [this.props.fields[key]]: data[key],
         }))
         this.setState({
           isLoading: false,
@@ -94,33 +87,35 @@ export default class Inventory extends PureComponent {
    * @function buildList
    * @param {object} value
    */
-  buildList = value => Object.keys(value).map(() => (
-    <div style={{ padding: '20px' }}>
-      <Loader type="content" />
+  buildList = value => Object.keys(value).map(index => (
+    <div
+      className="list-content"
+      key={`buildList-${index.toString()}`}
+    >
+      <div className="list-col">
+        {I18n.t(`commons.${index.toString().toLocaleLowerCase()}`)}
+      </div>
+      <div className="list-col">
+        {value[index]}
+      </div>
     </div>
   ))
 
   render() {
-    const {
-      isLoading,
-      data,
-    } = this.state
-    const { title } = this.props
-
-    if (isLoading && !data) {
+    if (this.state.isLoading) {
       return (
         <div style={{ padding: '20px' }}>
           <Loader type="content" />
         </div>
       )
-    } if (!isLoading && data) {
+    } if (this.state.data) {
       return (
         <div>
           <div className="title">
-            {title}
+            {this.props.title}
           </div>
           {
-            data.map(value => (this.buildList(value)))
+            this.state.data.map(value => (this.buildList(value)))
           }
         </div>
       )

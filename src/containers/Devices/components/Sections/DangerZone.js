@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import Confirmation from '../../../../components/Confirmation'
 import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
@@ -47,24 +45,15 @@ class DangerZone extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const {
-      id,
-      update,
-    } = this.props
 
     this.state = {
-      id,
-      update,
+      id: this.props.id,
+      update: this.props.update,
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      id,
-      update,
-    } = this.state
-
-    if (prevState.id !== id || prevState.update !== update) {
+    if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
       this.pane.forceAnimation()
     }
   }
@@ -88,35 +77,25 @@ class DangerZone extends PureComponent {
    * @function wipe
    */
   wipe = async () => {
-    const {
-      wipeDevice,
-      glpi,
-      setNotification,
-      changeAction,
-      history,
-      handleMessage,
-    } = this.props
-    const { id } = this.state
-
-    const isOK = await Confirmation.isOK(wipeDevice)
+    const isOK = await Confirmation.isOK(this.props.wipeDevice)
     if (isOK) {
       try {
-        const response = await glpi.updateItem({
-          id,
+        const response = await this.props.glpi.updateItem({
+          i: this.state.id,
           itemtype: itemtype.PluginFlyvemdmAgent,
           input: {
             wipe: '1',
           },
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.data_deleted_successfully'),
           type: 'success',
         })
-        changeAction('reload')
-        history.push(`${publicURL}/app/devices`)
+        this.props.changeAction('reload')
+        this.props.history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -130,35 +109,25 @@ class DangerZone extends PureComponent {
    * @function unenroll
    */
   unenroll = async () => {
-    const {
-      unenrollmentDevice,
-      glpi,
-      setNotification,
-      changeAction,
-      history,
-      handleMessage,
-    } = this.props
-    const { id } = this.state
-
-    const isOK = await Confirmation.isOK(unenrollmentDevice)
+    const isOK = await Confirmation.isOK(this.props.unenrollmentDevice)
     if (isOK) {
       try {
-        const response = await glpi.updateItem({
-          id,
+        const response = await this.props.glpi.updateItem({
+          id: this.state.id,
           itemtype: itemtype.PluginFlyvemdmAgent,
           input: {
             _unenroll: '1',
           },
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.unenrollment_device'),
           type: 'success',
         })
-        changeAction('reload')
-        history.push(`${publicURL}/app/devices`)
+        this.props.changeAction('reload')
+        this.props.history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -172,32 +141,22 @@ class DangerZone extends PureComponent {
    * @function delete
    */
   delete = async () => {
-    const {
-      deleteDevice,
-      glpi,
-      setNotification,
-      changeAction,
-      history,
-      handleMessage,
-    } = this.props
-    const { id } = this.state
-
-    const isOK = await Confirmation.isOK(deleteDevice)
+    const isOK = await Confirmation.isOK(this.props.deleteDevice)
     if (isOK) {
       try {
-        const response = await glpi.deleteItem({
-          id,
+        const response = await this.props.glpi.deleteItem({
+          id: this.state.id,
           itemtype: itemtype.PluginFlyvemdmAgent,
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: response[0].message ? response[0].message : I18n.t('notifications.devices_successfully_deleted'),
           type: 'success',
         })
-        changeAction('reload')
-        history.push(`${publicURL}/app/devices`)
+        this.props.changeAction('reload')
+        this.props.history.push(`${publicURL}/app/devices`)
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -276,8 +235,11 @@ DangerZone.defaultProps = {
 
 /** DangerZone propTypes */
 DangerZone.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  setNotification: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   changeAction: PropTypes.func.isRequired,

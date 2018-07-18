@@ -27,11 +27,11 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  NavLink
+  NavLink,
 } from 'react-router-dom'
 
 /**
@@ -53,20 +53,28 @@ class SpanWithPopper extends PureComponent {
           </NavLink>
         </div>
       )
-    } else {
-      return (
-        <div onClick={this.props.click}>
-          { this.props.description }
-        </div>
-      )
     }
+    return (
+      <div
+        onClick={this.props.click}
+        role="link"
+        tabIndex="0"
+      >
+        { this.props.description }
+      </div>
+    )
   }
 }
 
 SpanWithPopper.propTypes = {
   description: PropTypes.string.isRequired,
   to: PropTypes.string,
-  click: PropTypes.func
+  click: PropTypes.func,
+}
+
+SpanWithPopper.defaultProps = {
+  to: null,
+  click: () => {},
 }
 
 export default SpanWithPopper

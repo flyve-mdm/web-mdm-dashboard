@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 
 /**
  * @class ApplicationsEditItemList
@@ -53,10 +51,8 @@ export default class ApplicationsEditItemList extends PureComponent {
    * @function componentDidMount
    */
   componentDidMount() {
-    const { selectedItem } = this.props
-
     this.setState({
-      input: selectedItem['PluginFlyvemdmPackage.alias'],
+      input: this.props.selectedItem['PluginFlyvemdmPackage.alias'],
     })
   }
 
@@ -77,19 +73,12 @@ export default class ApplicationsEditItemList extends PureComponent {
    * @param {object} e
    */
   blurInput = (e) => {
-    const {
-      updateItemList,
-      selectedItem,
-    } = this.props
-
     if (e.target.value.trim() !== '') {
-      updateItemList(selectedItem['PluginFlyvemdmPackage.id'], e.target.value)
+      this.props.updateItemList(this.props.selectedItem['PluginFlyvemdmPackage.id'], e.target.value)
     }
   }
 
   render() {
-    const { input } = this.state
-
     return (
       <div className="files-list">
         <div className="files-list__content">
@@ -101,7 +90,7 @@ export default class ApplicationsEditItemList extends PureComponent {
                 className="win-textbox"
                 placeholder={I18n.t('applications.name')}
                 name="input"
-                value={input}
+                value={this.state.input}
                 onChange={this.changeInput}
                 onBlur={this.blurInput}
               />

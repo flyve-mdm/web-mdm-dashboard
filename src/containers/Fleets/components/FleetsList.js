@@ -33,15 +33,14 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import FleetsItemList from './FleetsItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
+import handleMessage from '../../../shared/handleMessage'
 
 /**
  * @class FleetsList
@@ -94,32 +93,20 @@ export default class FleetsList extends PureComponent {
    * @param {object} prevProps
    */
   componentDidUpdate(prevProps) {
-    const {
-      totalcount,
-      pagination,
-      isLoadingMore,
-    } = this.state
-    const {
-      action,
-      changeAction,
-      selectedItems,
-      selectionMode,
-    } = this.props
-
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
-      this.listView.winControl.footer.style.height = totalcount > (pagination.page * pagination.count) ? isLoadingMore ? '100px' : '42px' : '1px'
+      this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
     }
     if (this.toolBar) {
       this.toolBar.winControl.forceLayout();
     }
 
-    if (action === 'reload') {
+    if (this.props.action === 'reload') {
       this.handleRefresh()
-      changeAction(null)
+      this.props.changeAction(null)
     }
 
-    if (prevProps.selectedItems.length > 0 && selectedItems.length === 0 && !selectionMode) {
+    if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
       if (this.listView) {
         this.listView.winControl.selection.clear()
       }
@@ -131,9 +118,7 @@ export default class FleetsList extends PureComponent {
    * @function componentWillUnmount
    */
   componentWillUnmount() {
-    const { changeSelectionMode } = this.props
-
-    changeSelectionMode(false)
+    this.props.changeSelectionMode(false)
   }
 
   /**
@@ -141,14 +126,9 @@ export default class FleetsList extends PureComponent {
    * @function handleAdd
    */
   handleAdd = () => {
-    const {
-      history,
-      changeSelectionMode,
-      changeSelectedItems,
-    } = this.props
-    changeSelectedItems([])
-    changeSelectionMode(false)
-    history.push(`${publicURL}/app/fleets/add`)
+    this.props.changeSelectedItems([])
+    this.props.changeSelectionMode(false)
+    this.props.history.push(`${publicURL}/app/fleets/add`)
 
     if (this.listView) {
       this.listView.winControl.selection.clear()
@@ -160,16 +140,9 @@ export default class FleetsList extends PureComponent {
    * @function handleToggleSelectionMode
    */
   handleToggleSelectionMode = () => {
-    const {
-      history,
-      changeSelectionMode,
-      selectionMode,
-      changeSelectedItems,
-    } = this.props
-
-    history.push(`${publicURL}/app/fleets`)
-    changeSelectionMode(!selectionMode)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/fleets`)
+    this.props.changeSelectionMode(!this.props.selectionMode)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -181,26 +154,19 @@ export default class FleetsList extends PureComponent {
    * @param {object} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    const { itemList } = this.state
-    const {
-      changeSelectedItems,
-      selectionMode,
-      history,
-    } = this.props
-
     const listView = eventObject.currentTarget.winControl
     const index = listView.selection.getIndices()
     const itemSelected = []
 
     for (const item of index) {
-      itemSelected.push(itemList.getItem(item).data)
+      itemSelected.push(this.state.itemList.getItem(item).data)
     }
-    changeSelectedItems(itemSelected)
-    if (index.length === 1 && !selectionMode) {
-      history.push(`${publicURL}/app/fleets/${itemSelected[0]['PluginFlyvemdmFleet.id']}`)
+    this.props.changeSelectedItems(itemSelected)
+    if (index.length === 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/fleets/${itemSelected[0]['PluginFlyvemdmFleet.id']}`)
     }
-    if (index.length > 1 && !selectionMode) {
-      history.push(`${publicURL}/app/fleets/edit/`)
+    if (index.length > 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/fleets/edit/`)
     }
   }
 
@@ -210,19 +176,10 @@ export default class FleetsList extends PureComponent {
    * @async
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      setNotification,
-      changeAction,
-      changeSelectionMode,
-      changeSelectedItems,
-      handleMessage,
-    } = this.props
     try {
       const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
-        const itemListToDelete = selectedItems.map(item => ({
+        const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmFleet.id'],
         }))
 
@@ -230,7 +187,7 @@ export default class FleetsList extends PureComponent {
           isLoading: true,
         })
 
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmFleet,
           input: itemListToDelete,
           queryString: {
@@ -238,28 +195,28 @@ export default class FleetsList extends PureComponent {
           },
         })
 
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.fleet_successfully_removed'),
           type: 'success',
         })
-        changeAction('reload')
-        changeSelectionMode(false)
-        changeSelectedItems([])
+        this.props.changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
       } else {
-        changeSelectionMode(false)
-        changeSelectedItems([])
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
         if (this.listView) {
           this.listView.winControl.selection.clear()
         }
       }
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
-      changeSelectionMode(false)
-      changeSelectedItems([])
+      this.props.changeSelectionMode(false)
+      this.props.changeSelectedItems([])
 
       this.setState(() => ({
         isLoading: false,
@@ -273,22 +230,14 @@ export default class FleetsList extends PureComponent {
    * @async
    */
   handleSort = async () => {
-    const {
-      glpi,
-      history,
-    } = this.props
-    const {
-      order,
-      pagination,
-    } = this.state
-
     try {
       this.setState({
         isLoading: true,
       })
+      const { order, pagination } = this.state
       const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
 
-      const fleets = await glpi.searchItems({
+      const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
         options: {
           uid_cols: true,
@@ -297,14 +246,13 @@ export default class FleetsList extends PureComponent {
           range: `${pagination.start}-${(pagination.count * pagination.page) - 1}`,
         },
       })
-
       this.setState({
         isLoading: false,
         order: fleets.order,
         totalcount: fleets.totalcount,
         itemList: new WinJS.Binding.List(fleets.data),
       })
-      history.push(`${publicURL}/app/fleets`)
+      this.props.history.push(`${publicURL}/app/fleets`)
     } catch (error) {
       this.setState({
         isLoading: false,
@@ -318,24 +266,17 @@ export default class FleetsList extends PureComponent {
    * @async
    */
   loadMoreData = async () => {
-    const {
-      pagination,
-      order,
-      itemList,
-    } = this.state
-    const { glpi } = this.props
-
     try {
       this.setState({
         isLoadingMore: true,
       })
 
       const range = {
-        from: pagination.count * pagination.page,
-        to: (pagination.count * (pagination.page + 1)) - 1,
+        from: this.state.pagination.count * this.state.pagination.page,
+        to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
       }
-
-      const fleets = await glpi.searchItems({
+      const { order, pagination } = this.state
+      const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
         options: {
           uid_cols: true,
@@ -347,10 +288,9 @@ export default class FleetsList extends PureComponent {
 
       for (const item in fleets.data) {
         if (Object.prototype.hasOwnProperty.call(fleets.data, item)) {
-          itemList.push(fleets.data[item])
+          this.state.itemList.push(fleets.data[item])
         }
       }
-
       this.setState({
         isLoadingMore: false,
         totalcount: fleets.totalcount,
@@ -371,9 +311,7 @@ export default class FleetsList extends PureComponent {
    * @function handleEdit
    */
   handleEdit = () => {
-    const { history } = this.props
-
-    history.push(`${publicURL}/app/fleets/edit`)
+    this.props.history.push(`${publicURL}/app/fleets/edit`)
   }
 
   /**
@@ -382,19 +320,8 @@ export default class FleetsList extends PureComponent {
    * @async
    */
   handleRefresh = async () => {
-    const {
-      history,
-      glpi,
-      handleMessage,
-      setNotification,
-    } = this.props
-    const {
-      order,
-      pagination,
-    } = this.state
-
     try {
-      history.push(`${publicURL}/app/fleets`)
+      this.props.history.push(`${publicURL}/app/fleets`)
       this.setState({
         isLoading: true,
         totalcount: 0,
@@ -404,7 +331,8 @@ export default class FleetsList extends PureComponent {
           count: 15,
         },
       })
-      const fleets = await glpi.searchItems({
+      const { order, pagination } = this.state
+      const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
         options: {
           uid_cols: true,
@@ -420,11 +348,11 @@ export default class FleetsList extends PureComponent {
         itemList: new WinJS.Binding.List(fleets.data),
       })
     } catch (error) {
-      handleMessage({
-        notification: setNotification,
+      handleMessage({ message: error })
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         error,
-      })
+      }))
       this.setState({
         isLoading: false,
         order: 'ASC',
@@ -437,25 +365,13 @@ export default class FleetsList extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      selectedItems,
-      selectionMode,
-      icon,
-    } = this.props
-    const {
-      isLoadingMore,
-      isLoading,
-      itemList,
-      layout,
-    } = this.state
-
     const deleteCommand = (
       <ReactWinJS.ToolBar.Button
         key="delete"
         icon="delete"
         label={I18n.t('commons.delete')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleDelete}
       />
     )
@@ -465,12 +381,12 @@ export default class FleetsList extends PureComponent {
         icon="edit"
         label={I18n.t('commons.edit')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleEdit}
       />
     )
 
-    const footerComponent = isLoadingMore
+    const footerComponent = this.state.isLoadingMore
       ? <Loader />
       : (
         <div
@@ -491,25 +407,25 @@ export default class FleetsList extends PureComponent {
 
     let listComponent
 
-    if (isLoading) {
+    if (this.state.isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList.length > 0) {
+    } else if (this.state.itemList && this.state.itemList.length > 0) {
       listComponent = (
         <ReactWinJS.ListView
           ref={(listView) => { this.listView = listView }}
           className="list-pane__content win-selectionstylefilled"
           style={{ height: 'calc(100% - 48px)' }}
-          itemDataSource={itemList.dataSource}
-          layout={layout}
+          itemDataSource={this.state.itemList.dataSource}
+          layout={this.state.layout}
           itemTemplate={this.ItemListRenderer}
           footerComponent={footerComponent}
-          selectionMode={selectionMode ? 'multi' : 'single'}
-          tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
+          selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+          tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
           onSelectionChanged={this.handleSelectionChanged}
         />
       )
     } else {
-      listComponent = <EmptyMessage message={I18n.t('fleets.not_found')} icon={icon} showIcon />
+      listComponent = <EmptyMessage message={I18n.t('fleets.not_found')} icon={this.props.icon} showIcon />
     }
 
     return (
@@ -539,22 +455,22 @@ export default class FleetsList extends PureComponent {
             onClick={this.handleAdd}
           />
 
-          {selectionMode ? editCommand : null}
-          {selectionMode ? deleteCommand : null}
+          {this.props.selectionMode ? editCommand : null}
+          {this.props.selectionMode ? deleteCommand : null}
 
           <ReactWinJS.ToolBar.Toggle
             key="select"
             icon="bullets"
             label={I18n.t('commons.select')}
             priority={0}
-            selected={selectionMode}
+            selected={this.props.selectionMode}
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
         {listComponent}
         <Confirmation
           title={I18n.t('fleets.delete')}
-          message={`${selectedItems.length} ${I18n.t('commons.fleets')}`}
+          message={`${this.props.selectedItems.length} ${I18n.t('commons.fleets')}`}
           reference={(el) => { this.contentDialog = el }}
         />
       </React.Fragment>
@@ -572,7 +488,7 @@ FleetsList.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   selectedItems: PropTypes.array.isRequired,
   changeSelectedItems: PropTypes.func.isRequired,

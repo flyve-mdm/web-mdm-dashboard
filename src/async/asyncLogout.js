@@ -34,8 +34,6 @@ import withAsyncComponent from '../hoc/withAsyncComponent'
  * @constant
  * @type {component}
  */
-const asyncLogout = withAsyncComponent(() => {
-  return import ('../containers/Logout')
-})
+const asyncLogout = withAsyncComponent(() => import('../containers/Logout'))
 
 export default asyncLogout

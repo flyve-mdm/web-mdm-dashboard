@@ -33,9 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import DevicesItemList from './DevicesItemList'
 import BuildItemList from '../../../shared/BuildItemList'
 import Loader from '../../../components/Loader'
@@ -43,6 +41,7 @@ import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
+import handleMessage from '../../../shared/handleMessage'
 
 /**
  * @class DevicesList
@@ -92,32 +91,20 @@ export default class DevicesList extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      totalcount,
-      pagination,
-      isLoadingMore,
-    } = this.state
-    const {
-      action,
-      changeAction,
-      selectedItems,
-      selectionMode,
-    } = this.props
-
     if (this.listView) {
       this.listView.winControl.footer.style.outline = 'none'
-      this.listView.winControl.footer.style.height = totalcount > (pagination.page * pagination.count) ? isLoadingMore ? '100px' : '42px' : '1px'
+      this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
     }
     if (this.toolBar) {
       this.toolBar.winControl.forceLayout()
     }
 
-    if (action === 'reload') {
+    if (this.props.action === 'reload') {
       this.handleRefresh()
-      changeAction(null)
+      this.props.changeAction(null)
     }
 
-    if (prevProps.selectedItems.length > 0 && selectedItems.length === 0 && !selectionMode) {
+    if (prevProps.selectedItems.length > 0 && this.props.selectedItems.length === 0 && !this.props.selectionMode) {
       if (this.listView) {
         this.listView.winControl.selection.clear()
       }
@@ -125,8 +112,7 @@ export default class DevicesList extends PureComponent {
   }
 
   componentWillUnmount() {
-    const { changeSelectionMode } = this.props
-    changeSelectionMode(false)
+    this.props.changeSelectionMode(false)
   }
 
   /**
@@ -135,30 +121,22 @@ export default class DevicesList extends PureComponent {
    * @function loadMoreData
    */
   loadMoreData = async () => {
-    const {
-      pagination,
-      totalcount,
-      order,
-      itemList,
-    } = this.state
-    const { glpi } = this.props
-
     try {
       this.setState({
         isLoadingMore: true,
       })
       const range = {
-        from: pagination.count * pagination.page,
-        to: (pagination.count * (pagination.page + 1)) - 1,
+        from: this.state.pagination.count * this.state.pagination.page,
+        to: (this.state.pagination.count * (this.state.pagination.page + 1)) - 1,
       }
-
-      if (range.from <= totalcount) {
+      if (range.from <= this.state.totalcount) {
         for (const key in range) {
           if (Object.prototype.hasOwnProperty.call(range, key)) {
-            if (range[key] >= totalcount) { range[key] = totalcount - 1 }
+            if (range[key] >= this.state.totalcount) { range[key] = this.state.totalcount - 1 }
           }
         }
-        const devices = await glpi.searchItems({
+        const { order, pagination } = this.state
+        const devices = await this.props.glpi.searchItems({
           itemtype: itemtype.PluginFlyvemdmAgent,
           options: {
             uid_cols: true,
@@ -167,13 +145,11 @@ export default class DevicesList extends PureComponent {
             range: `${range.from}-${range.to}`,
           },
         })
-
         for (const item in devices.data) {
           if (Object.prototype.hasOwnProperty.call(devices.data, item)) {
-            itemList.push(devices.data[item])
+            this.state.itemList.push(devices.data[item])
           }
         }
-
         this.setState({
           isLoadingMore: false,
           totalcount: devices.totalcount,
@@ -197,14 +173,9 @@ export default class DevicesList extends PureComponent {
    */
   handleRefresh = async () => {
     try {
-      const { glpi } = this.props
-      const {
-        order,
-        pagination,
-      } = this.state
-
       this.setState({
         isLoading: true,
+        isLoadingMore: false,
         totalcount: 0,
         pagination: {
           start: 0,
@@ -212,7 +183,8 @@ export default class DevicesList extends PureComponent {
           count: 15,
         },
       })
-      const devices = await glpi.searchItems({
+      const { order, pagination } = this.state
+      const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
         options: {
           uid_cols: true,
@@ -228,6 +200,7 @@ export default class DevicesList extends PureComponent {
         itemList: BuildItemList(devices),
       })
     } catch (error) {
+      handleMessage({ message: error })
       this.setState({
         isLoading: false,
         order: 'ASC',
@@ -240,15 +213,9 @@ export default class DevicesList extends PureComponent {
    * @function handleAdd
    */
   handleAdd = () => {
-    const {
-      history,
-      changeSelectionMode,
-      changeSelectedItems,
-    } = this.props
-
-    history.push(`${publicURL}/app/devices/add`)
-    changeSelectionMode(false)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/devices/add`)
+    this.props.changeSelectionMode(false)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -259,16 +226,9 @@ export default class DevicesList extends PureComponent {
    * @function handleToggleSelectionMode
    */
   handleToggleSelectionMode = () => {
-    const {
-      history,
-      changeSelectionMode,
-      selectionMode,
-      changeSelectedItems,
-    } = this.props
-
-    history.push(`${publicURL}/app/devices`)
-    changeSelectionMode(!selectionMode)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/devices`)
+    this.props.changeSelectionMode(!this.props.selectionMode)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
@@ -280,26 +240,19 @@ export default class DevicesList extends PureComponent {
    * @param {object} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    const {
-      changeSelectedItems,
-      selectionMode,
-      history,
-    } = this.props
-    const { itemList } = this.state
-
     const listView = eventObject.currentTarget.winControl
     const index = listView.selection.getIndices()
     const itemSelected = []
 
     for (const item of index) {
-      itemSelected.push(itemList.getItem(item).data)
+      itemSelected.push(this.state.itemList.getItem(item).data)
     }
-    changeSelectedItems(itemSelected)
-    if (index.length === 1 && !selectionMode) {
-      history.push(`${publicURL}/app/devices/${itemSelected[0]['PluginFlyvemdmAgent.id']}`)
+    this.props.changeSelectedItems(itemSelected)
+    if (index.length === 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/devices/${itemSelected[0]['PluginFlyvemdmAgent.id']}`)
     }
-    if (index.length > 1 && !selectionMode) {
-      history.push(`${publicURL}/app/devices/edit/`)
+    if (index.length > 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/devices/edit/`)
     }
   }
 
@@ -308,20 +261,10 @@ export default class DevicesList extends PureComponent {
    * @function handleDelete
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      setNotification,
-      changeSelectionMode,
-      changeSelectedItems,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     try {
       const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
-        const itemListToDelete = selectedItems.map(item => ({
+        const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmAgent.id'],
         }))
 
@@ -329,7 +272,7 @@ export default class DevicesList extends PureComponent {
           isLoading: true,
         })
 
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmAgent,
           input: itemListToDelete,
           queryString: {
@@ -337,30 +280,30 @@ export default class DevicesList extends PureComponent {
           },
         })
 
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.device_successfully_removed'),
           type: 'success',
         })
-        changeSelectionMode(false)
-        changeSelectedItems([])
-        changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
+        this.props.changeAction('reload')
       } else {
         // Exit selection mode
-        changeSelectionMode(false)
-        changeSelectedItems([])
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
 
         if (this.listView) {
           this.listView.winControl.selection.clear()
         }
       }
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
-      changeSelectionMode(false)
-      changeSelectedItems([])
+      this.props.changeSelectionMode(false)
+      this.props.changeSelectedItems([])
 
       this.setState(() => ({
         isLoading: false,
@@ -376,9 +319,6 @@ export default class DevicesList extends PureComponent {
    */
   handleSort = async () => {
     try {
-      const { order } = this.state
-      const { glpi } = this.props
-
       this.setState({
         isLoading: true,
         pagination: {
@@ -387,9 +327,9 @@ export default class DevicesList extends PureComponent {
           count: 15,
         },
       })
-      const newOrder = order === 'ASC' ? 'DESC' : 'ASC'
+      const newOrder = this.state.order === 'ASC' ? 'DESC' : 'ASC'
 
-      const devices = await glpi.searchItems({
+      const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
         options: {
           uid_cols: true,
@@ -417,31 +357,17 @@ export default class DevicesList extends PureComponent {
    * @function handleEdit
    */
   handleEdit() {
-    const { history } = this.props
-
-    history.push(`${publicURL}/app/devices/edit`)
+    this.props.history.push(`${publicURL}/app/devices/edit`)
   }
 
   render() {
-    const {
-      selectedItems,
-      selectionMode,
-      icon,
-    } = this.props
-    const {
-      isLoadingMore,
-      itemList,
-      isLoading,
-      layout,
-    } = this.state
-
     const deleteCommand = (
       <ReactWinJS.ToolBar.Button
         key="delete"
         icon="delete"
         label={I18n.t('commons.delete')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleDelete}
       />
     )
@@ -452,12 +378,12 @@ export default class DevicesList extends PureComponent {
         icon="edit"
         label={I18n.t('commons.edit')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={e => this.handleEdit(e)}
       />
     )
 
-    const footerComponent = isLoadingMore
+    const footerComponent = this.state.isLoadingMore
       ? <Loader />
       : (
         <div
@@ -478,31 +404,27 @@ export default class DevicesList extends PureComponent {
 
     let listComponent
 
-    if (isLoading) {
+    if (this.state.isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList) {
-      if (itemList.length > 0) {
-        listComponent = (
-          <ReactWinJS.ListView
-            ref={(listView) => { this.listView = listView }}
-            className="list-pane__content win-selectionstylefilled"
-            style={{ height: 'calc(100% - 48px)' }}
-            itemDataSource={itemList.dataSource}
-            groupDataSource={itemList.groups.dataSource}
-            layout={layout}
-            itemTemplate={this.ItemListRenderer}
-            groupHeaderTemplate={this.groupHeaderRenderer}
-            footerComponent={footerComponent}
-            selectionMode={selectionMode ? 'multi' : 'single'}
-            tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
-            onSelectionChanged={this.handleSelectionChanged}
-          />
-        )
-      } else {
-        listComponent = <EmptyMessage message={I18n.t('devices.not_found')} icon={icon} showIcon />
-      }
+    } else if (this.state.itemList && this.state.itemList.length > 0) {
+      listComponent = (
+        <ReactWinJS.ListView
+          ref={(listView) => { this.listView = listView }}
+          className="list-pane__content win-selectionstylefilled"
+          style={{ height: 'calc(100% - 48px)' }}
+          itemDataSource={this.state.itemList.dataSource}
+          groupDataSource={this.state.itemList.groups.dataSource}
+          layout={this.state.layout}
+          itemTemplate={this.ItemListRenderer}
+          groupHeaderTemplate={this.groupHeaderRenderer}
+          footerComponent={footerComponent}
+          selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+          tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
+          onSelectionChanged={this.handleSelectionChanged}
+        />
+      )
     } else {
-      listComponent = <EmptyMessage message={I18n.t('devices.not_found')} icon={icon} showIcon />
+      listComponent = <EmptyMessage message={I18n.t('devices.not_found')} icon={this.props.icon} showIcon />
     }
 
     return (
@@ -532,22 +454,22 @@ export default class DevicesList extends PureComponent {
             onClick={this.handleAdd}
           />
 
-          {selectionMode ? editCommand : null}
-          {selectionMode ? deleteCommand : null}
+          {this.props.selectionMode ? editCommand : null}
+          {this.props.selectionMode ? deleteCommand : null}
 
           <ReactWinJS.ToolBar.Toggle
             key="select"
             icon="bullets"
             label={I18n.t('commons.select')}
             priority={0}
-            selected={selectionMode}
+            selected={this.props.selectionMode}
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
-        { listComponent }
+        {listComponent}
         <Confirmation
           title={I18n.t('devices.delete')}
-          message={`${selectedItems.length} ${I18n.t('devices.title')}`}
+          message={`${this.props.selectedItems.length} ${I18n.t('devices.title')}`}
           reference={(el) => { this.contentDialog = el }}
         />
       </React.Fragment>
@@ -566,7 +488,7 @@ DevicesList.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   selectedItems: PropTypes.array.isRequired,
   changeSelectedItems: PropTypes.func.isRequired,

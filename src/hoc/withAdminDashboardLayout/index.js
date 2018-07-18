@@ -27,47 +27,30 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
-import SplitView from "../../components/SplitView"
+import PropTypes from 'prop-types'
+import SplitView from '../../components/SplitView'
 import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
 import getMode from '../../shared/getMode'
 import configureDisplay from '../../shared/configureDisplay'
 import setGlpiCookie from '../../shared/setGlpiCookie'
 import animationsWinJs from '../../shared/animationsWinJs/index'
 import glpi from '../../shared/glpiApi'
-import {
-  I18n
-} from "react-i18nify"
+import I18n from '../../shared/i18n'
 import Confirmation from '../../components/Confirmation'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
-import {
-  logout
-} from '../../store/authentication/actions'
+import withAuthentication from '../withAuthentication'
+import withHandleMessages from '../withHandleMessages'
 
 /** timeout to contract the lateral menu */
 const TIMEOUT_CONTRACT = 150
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    logout: bindActionCreators(logout, dispatch)
-  }
-  return {
-    actions
-  }
-}
 
 /**
  * Wrapper component with the basic structure of the admin dashboard layout
  * @param {component} WrappedComponent Component to wrap
  * @return {component} The component with the admin dashboard layout
  */
-const withAdminDashboardLayout = WrappedComponent => {
+const withAdminDashboardLayout = (WrappedComponent) => {
   class AdminDashboardLayout extends PureComponent {
     /**
      * Create AdminDashboardLayout
@@ -79,7 +62,7 @@ const withAdminDashboardLayout = WrappedComponent => {
         expanded: false,
         contract: false,
         mode: getMode(),
-        iframe: undefined
+        iframe: undefined,
       }
 
       window.addEventListener('resize', this.handleResize)
@@ -87,46 +70,52 @@ const withAdminDashboardLayout = WrappedComponent => {
       animationsWinJs()
     }
 
-    /** Close current session */
-    logout = async () => {
-      const isOK = await Confirmation.isOK(this.contentDialog)
-      if (isOK) {
-        this.props.actions.logout(this.props.history)
-      }
-    }
-
-    /** Change 'mode' according to the resolution of the screen */
-    handleResize = () => {
-      let prevMode = this.state.mode
-      let nextMode = getMode()
-
-      if (prevMode !== nextMode) {
-        this.setState({
-          mode: nextMode
-        })
-      }
-    }
-
     /** Configure 'baseURL' and the cookies of glpi */
     componentDidMount = async () => {
       const {
-        cfg_glpi
+        // eslint-disable-next-line
+        cfg_glpi,
       } = await glpi.getGlpiConfig()
       localStorage.setItem('baseURL', cfg_glpi.url_base)
       this.setState({
-          iframe: <iframe title="glpi-backend" src={`//${cfg_glpi.url_base.split("//")[1]}`} style={{ height: 0, width: 0, opacity: 0, position: 'absolute' }}></iframe>
-        },
-        () => setGlpiCookie(
-          this.setState({
-            iframe: undefined
-          })
-        )
-      )
+        iframe: <iframe
+          title="glpi-backend"
+          src={`//${cfg_glpi.url_base.split('//')[1]}`}
+          style={{
+            height: 0, width: 0, opacity: 0, position: 'absolute',
+          }}
+        />,
+      },
+      () => setGlpiCookie(
+        this.setState({
+          iframe: undefined,
+        }),
+      ))
     }
 
     /** Remove 'resize' event listener */
     componentWillUnmount() {
       window.removeEventListener('resize', this.handleResize)
+    }
+
+    /** Close current session */
+    logout = async () => {
+      const isOK = await Confirmation.isOK(this.contentDialog)
+      if (isOK) {
+        this.props.auth.logout(this.props.history)
+      }
+    }
+
+    /** Change 'mode' according to the resolution of the screen */
+    handleResize = () => {
+      const prevMode = this.state.mode
+      const nextMode = getMode()
+
+      if (prevMode !== nextMode) {
+        this.setState({
+          mode: nextMode,
+        })
+      }
     }
 
     /** Expand and collapse the side menu */
@@ -138,14 +127,14 @@ const withAdminDashboardLayout = WrappedComponent => {
     handleExpand = () => {
       this.setState({
         expanded: true,
-        contract: false
+        contract: false,
       })
     }
 
     /** Collapse the side menu */
     handleContract = () => {
       this.setState({
-        contract: true
+        contract: true,
       }, () => {
         this.handleSetTimeOut()
       })
@@ -157,7 +146,7 @@ const withAdminDashboardLayout = WrappedComponent => {
         setTimeout(() => {
           this.setState({
             expanded: false,
-            contract: false
+            contract: false,
           })
         }, TIMEOUT_CONTRACT)
       }
@@ -171,8 +160,9 @@ const withAdminDashboardLayout = WrappedComponent => {
       return (
         <main>
           <HeaderBreadcrumb
-              handleToggleExpand={this.handleToggleExpand}
-              location={this.props.history.location}
+            handleToggleExpand={this.handleToggleExpand}
+            location={this.props.history.location}
+            languageCurrent={this.props.languageCurrent}
           />
 
           {(this.state.iframe || '')}
@@ -192,7 +182,7 @@ const withAdminDashboardLayout = WrappedComponent => {
             <Confirmation
               title={I18n.t('logout.close_session')}
               message={I18n.t('settings.security.close_session_message')}
-              reference={el => this.contentDialog = el}
+              reference={(el) => { this.contentDialog = el }}
             />
           </div>
         </main>
@@ -200,10 +190,20 @@ const withAdminDashboardLayout = WrappedComponent => {
     }
   }
 
-  return connect(
-    null,
-    mapDispatchToProps
-  )(AdminDashboardLayout)
+  AdminDashboardLayout.propTypes = {
+    toast: PropTypes.shape({
+      setNotification: PropTypes.func,
+    }).isRequired,
+    handleMessage: PropTypes.func.isRequired,
+    auth: PropTypes.shape({
+      logout: PropTypes.func,
+    }).isRequired,
+    history: PropTypes.object.isRequired,
+    languageCurrent: PropTypes.string.isRequired,
+  }
+
+  return withAuthentication(withHandleMessages(AdminDashboardLayout))
 }
+
 
 export default withAdminDashboardLayout

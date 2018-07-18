@@ -27,9 +27,8 @@
  */
 
 /** import dependencies */
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
+import ErrorPage from '../../../../components/ErrorPage'
 import HelpCenterArticle from './HelpCenterArticle'
 import HelpCenterList from './HelpCenterList'
 import Feedback from './Feedback'
@@ -44,6 +43,12 @@ const routes = [
     path: '/',
     name: I18n.t('about.help_center.home'),
     component: HelpCenterList,
+    exact: true,
+  },
+  {
+    path: '/error',
+    name: 'commons.error',
+    component: ErrorPage,
     exact: true,
   },
   {

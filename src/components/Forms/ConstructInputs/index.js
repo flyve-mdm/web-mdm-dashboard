@@ -37,18 +37,20 @@ import createListElement from './createListElement'
  * @param {object} props
  * @return {component} List of form entries
  */
-const ConstructInputs = props => {
+const ConstructInputs = (props) => {
   let icon
 
   if (props.icon) {
     icon = (
       <div className="froms__row froms__row--icon">
-        <span className={props.icon}/>
+        <span className={props.icon} />
         {
-          props.title ?
-            <span style={{ marginLeft: '10px' }}>
-              {props.title}
-            </span>
+          props.title
+            ? (
+              <span style={{ marginLeft: '10px' }}>
+                {props.title}
+              </span>
+            )
             : null
         }
       </div>
@@ -59,13 +61,11 @@ const ConstructInputs = props => {
     <React.Fragment>
       { icon }
       {
-        props.data.map((elements, index) => {
-          return createListElement({
-            icon: props.icon,
-            elements: elements,
-            index: index
-          })
-        })
+        props.data.map((elements, index) => createListElement({
+          icon: props.icon,
+          elements,
+          index,
+        }))
       }
     </React.Fragment>
   )
@@ -74,7 +74,12 @@ const ConstructInputs = props => {
 ConstructInputs.propTypes = {
   data: PropTypes.array.isRequired,
   icon: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string,
+}
+
+ConstructInputs.defaultProps = {
+  icon: null,
+  title: null,
 }
 
 export default ConstructInputs

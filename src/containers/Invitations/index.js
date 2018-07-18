@@ -30,33 +30,14 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import PropTypes from 'prop-types'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import InvitationsList from './components/InvitationsList'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the Invitations section
@@ -110,7 +91,6 @@ class Invitations extends PureComponent {
    * @function handleResize
    */
   handleResize = () => {
-    const { mode } = this.state
     const nextMode = getMode()
 
     if (nextMode === 'small') {
@@ -122,7 +102,7 @@ class Invitations extends PureComponent {
         itemListPaneWidth: 320,
       })
     }
-    if (mode !== nextMode) {
+    if (this.state.mode !== nextMode) {
       this.setState({
         mode: nextMode,
       })
@@ -134,34 +114,19 @@ class Invitations extends PureComponent {
    * @function propsData
    * @return {object}
    */
-  propsData = () => {
-    const {
-      icon,
-      selectionMode,
-      action,
-      selectedItems,
-    } = this.state
-    const {
-      actions,
-      history,
-      glpi,
-      handleMessage,
-    } = this.props
-
-    return ({
-      icon,
-      changeSelectionMode: this.changeSelectionMode,
-      selectionMode,
-      selectedItems,
-      changeSelectedItems: this.changeSelectedItems,
-      action,
-      changeAction: this.changeAction,
-      setNotification: actions.setNotification,
-      history,
-      glpi,
-      handleMessage,
-    })
-  }
+  propsData = () => ({
+    icon: this.state.icon,
+    changeSelectionMode: this.changeSelectionMode,
+    selectionMode: this.state.selectionMode,
+    selectedItems: this.state.selectedItems,
+    changeSelectedItems: this.changeSelectedItems,
+    action: this.state.action,
+    changeAction: this.changeAction,
+    toast: this.props.toast,
+    history: this.props.history,
+    glpi: this.props.glpi,
+    handleMessage: this.props.handleMessage,
+  })
 
   /**
    * Change selected items
@@ -196,23 +161,15 @@ class Invitations extends PureComponent {
    * @return {object}
    */
   stylesList = () => {
-    const {
-      itemListPaneWidth,
-      mode,
-      selectedItems,
-      selectionMode,
-    } = this.state
-    const { history } = this.props
-
     const styles = {
-      width: itemListPaneWidth,
+      width: this.state.itemListPaneWidth,
     }
-    if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname
           === `${publicURL}/app/invitations`)
-        || history.location.pathname === `${publicURL}/app/invitations`
-        || (history.location.pathname === `${publicURL}/app/invitations`
-          && selectionMode)) {
+        || this.props.history.location.pathname === `${publicURL}/app/invitations`
+        || (this.props.history.location.pathname === `${publicURL}/app/invitations`
+        && this.state.selectionMode)) {
         styles.display = 'inline-block'
       } else {
         styles.display = 'none'
@@ -230,26 +187,17 @@ class Invitations extends PureComponent {
    * @return {object}
    */
   stylesContent = () => {
-    const {
-      itemListPaneWidth,
-      mode,
-      selectedItems,
-      selectionMode,
-    } = this.state
-    const { history } = this.props
-
-    const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
+    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
     const styles = {
       width: calc100PercentMinus(validWidth),
       height: '100%',
     }
 
-    if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname
-          === `${publicURL}/app/invitations`)
-        || history.location.pathname === `${publicURL}/app/invitations`
-        || (history.location.pathname === `${publicURL}/app/invitations`
-          && selectionMode)) {
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/invitations`)
+        || this.props.history.location.pathname === `${publicURL}/app/invitations`
+        || (this.props.history.location.pathname === `${publicURL}/app/invitations`
+        && this.state.selectionMode)) {
         styles.display = 'none'
       } else {
         styles.display = 'inline-flex'
@@ -266,8 +214,6 @@ class Invitations extends PureComponent {
    * @function render
    */
   render() {
-    const { match } = this.props
-
     const renderComponents = (
       <React.Fragment>
         <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
@@ -280,8 +226,8 @@ class Invitations extends PureComponent {
           <GenerateRoutes
             key="content"
             routes={routes}
-            rootPath={match.url}
-            data={{ ...this.propsData() }}
+            rootPath={this.props.match.url}
+            {...this.propsData()}
           />
         </div>
       </React.Fragment>
@@ -297,13 +243,10 @@ class Invitations extends PureComponent {
 
 Invitations.propTypes = {
   match: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(Invitations)))
+export default withGLPI(Invitations)

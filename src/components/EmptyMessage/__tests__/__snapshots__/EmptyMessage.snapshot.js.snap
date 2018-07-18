@@ -7,7 +7,7 @@ exports[`EmptyMessage renders EmptyMessage 1`] = `
   <h1
     className="empty-message"
   >
-    no_selection
+    No selection
   </h1>
 </div>
 `;

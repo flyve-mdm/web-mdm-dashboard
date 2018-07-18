@@ -34,12 +34,12 @@ import React from 'react'
  * @return {component} List of options for a select
  */
 export default () => {
-  let years = []
-  for (let index = 1980; index <= 2100; index++) {
+  const years = []
+  for (let index = 1980; index <= 2100; index += 1) {
     years.push(
       <option value={index} key={`year${index}`}>
         { index }
-      </option>
+      </option>,
     )
   }
   return years

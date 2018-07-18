@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import ConstructInputs from '../../../components/Forms'
 import {
@@ -52,22 +50,18 @@ export default class DevicesEditOne extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const { history } = this.props
 
     this.state = {
       isLoading: true,
-      id: getID(history.location.pathname, 3),
+      id: getID(this.props.history.location.pathname, 3),
     }
   }
 
   componentDidMount() {
-    const { id } = this.state
-    const { history } = this.props
-
-    if (Number(id)) {
+    if (Number(this.state.id)) {
       this.handleRefresh()
     } else {
-      history.push(`${publicURL}/app/devices`);
+      this.props.history.push(`${publicURL}/app/devices`);
     }
   }
 
@@ -76,12 +70,9 @@ export default class DevicesEditOne extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = () => {
-    const { glpi } = this.props
-    const { id } = this.state
-
-    glpi.getAnItem({
+    this.props.glpi.getAnItem({
       itemtype: itemtype.PluginFlyvemdmAgent,
-      id,
+      id: this.state.id,
     })
       .then((response) => {
         this.setState({
@@ -155,44 +146,30 @@ export default class DevicesEditOne extends PureComponent {
    * @function handleSaveOneDevices
    */
   handleSaveOneDevices = () => {
-    const {
-      name,
-      fleet,
-      id,
-    } = this.state
-    const {
-      glpi,
-      setNotification,
-      changeAction,
-      changeSelectionMode,
-      history,
-      handleMessage,
-    } = this.props
-
     this.setState({
       isLoading: true,
     })
     const input = {
-      name,
-      plugin_flyvemdm_fleets_id: fleet.value,
+      name: this.state.name,
+      plugin_flyvemdm_fleets_id: this.state.fleet.value,
     }
-    glpi.updateItem({
+    this.props.glpi.updateItem({
       itemtype: itemtype.PluginFlyvemdmAgent,
-      id,
+      id: this.state.id,
       input,
     })
       .then(() => {
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.changes_saved_successfully'),
           type: 'success',
         })
-        changeAction('reload')
-        changeSelectionMode(false);
-        history.push(`${publicURL}/app/devices/${id}`);
+        this.props.changeAction('reload')
+        this.props.changeSelectionMode(false);
+        this.props.history.push(`${publicURL}/app/devices/${this.state.id}`);
       })
       .catch((error) => {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -203,12 +180,6 @@ export default class DevicesEditOne extends PureComponent {
   }
 
   render() {
-    const { glpi } = this.props
-    const {
-      name,
-      isLoading,
-    } = this.state
-
     const componetRender = (
       <ContentPane>
         <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -218,13 +189,13 @@ export default class DevicesEditOne extends PureComponent {
     if (!this.state) {
       return componetRender
     }
-    const agent = name ? agentScheme({
+    const agent = this.state.name ? agentScheme({
       state: this.state,
       changeState: this.changeState,
-      glpi,
+      glpi: this.props.glpi,
     }) : null
 
-    if (agent && !isLoading) {
+    if (agent && !this.state.isLoading) {
       return (
         <ContentPane>
           <div className="content-header" style={{ display: 'inline-flex' }}>
@@ -250,7 +221,7 @@ export default class DevicesEditOne extends PureComponent {
 DevicesEditOne.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,

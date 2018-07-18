@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import Loading from '../../../../components/Loading'
 import Map from '../Map'
 import GeolocationList from './GeolocationList'
@@ -48,14 +46,10 @@ import validateDate from '../../../../shared/validateDate'
 export default class Geolocation extends PureComponent {
   constructor(props) {
     super(props)
-    const {
-      id,
-      update,
-    } = this.props
 
     this.state = {
-      id,
-      update,
+      id: this.props.id,
+      update: this.props.update,
       isLoading: true,
       isLoadingGeolocation: false,
       locations: [],
@@ -70,12 +64,7 @@ export default class Geolocation extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {
-      id,
-      update,
-    } = this.state
-
-    if (prevState.id !== id || prevState.update !== update) {
+    if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
       this.handleRefresh()
     }
   }
@@ -102,10 +91,10 @@ export default class Geolocation extends PureComponent {
    * @param {date}
    */
   applyRange = (min, max) => {
-    const { locations } = this.state
-
-    this.setState({
-      showLocations: locations.filter(location => validateDate(new Date(location.date), min, max)),
+    this.setState((prevState) => {
+      ({
+        showLocations: prevState.locations.filter(location => validateDate(new Date(location.date), min, max)),
+      })
     })
   }
 
@@ -116,7 +105,6 @@ export default class Geolocation extends PureComponent {
    */
   showLocation = (location) => {
     const { showLocations } = this.state
-
     const showLocationsCopy = showLocations.map(element => element)
     const index = showLocationsCopy.map(e => e.id).indexOf(location.id)
     if (index === -1) {
@@ -135,25 +123,18 @@ export default class Geolocation extends PureComponent {
    * @function requestLocation
    */
   requestLocation = async () => {
-    const {
-      glpi,
-      setNotification,
-      handleMessage,
-    } = this.props
-    const { id } = this.state
-
     try {
       this.setState({
         isLoadingGeolocation: true,
       })
-      await glpi.updateItem({
-        id,
+      await this.props.glpi.updateItem({
+        id: this.state.id,
         itemtype: itemtype.PluginFlyvemdmAgent,
         input: {
           _geolocate: '',
         },
       })
-      setNotification({
+      this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.request_sent'),
         type: 'success',
@@ -163,9 +144,10 @@ export default class Geolocation extends PureComponent {
       this.setState({
         isLoadingGeolocation: false,
       })
-      setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
+        displayErrorPage: false,
       }))
     }
   }
@@ -176,25 +158,15 @@ export default class Geolocation extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = async () => {
-    const {
-      update,
-      id,
-    } = this.state
-    const {
-      glpi,
-      setNotification,
-      handleMessage,
-    } = this.props
-
-    if (update) {
+    if (this.state.update) {
       try {
         const {
           computers_id: computersID,
-        } = await glpi.getAnItem({
-          id,
+        } = await this.props.glpi.getAnItem({
+          id: this.state.id,
           itemtype: itemtype.PluginFlyvemdmAgent,
         })
-        const response = await glpi.getSubItems({
+        const response = await this.props.glpi.getSubItems({
           itemtype: itemtype.Computer,
           id: computersID,
           subItemtype: itemtype.PluginFlyvemdmGeolocation,
@@ -206,7 +178,7 @@ export default class Geolocation extends PureComponent {
           isLoadingGeolocation: false,
         })
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -230,34 +202,27 @@ export default class Geolocation extends PureComponent {
   })
 
   render() {
-    const {
-      isLoading,
-      showLocations,
-      selectedLocation,
-      filter,
-      isLoadingGeolocation,
-      locations,
-    } = this.state
-
-    return isLoading
+    return this.state.isLoading
       ? <Loading message={`${I18n.t('commons.loading')}...`} />
       : (
         <React.Fragment>
           <Map
-            markers={showLocations}
+            markers={this.state.showLocations}
             style={{ margin: '0 5px', height: '300px', maxWidth: '800px' }}
-            selectedLocation={selectedLocation}
+            selectedLocation={this.state.selectedLocation}
           />
           <button
             className="btn btn--secondary"
             style={{ margin: 5 }}
-            onClick={() => this.setState({
-              filter: !filter,
+            onClick={() => this.setState((prevState) => {
+              ({
+                filter: !prevState.filter,
+              })
             })}
             type="button"
           >
             {
-              filter
+              this.state.filter
                 ? I18n.t('devices.geolocation.hide_filter')
                 : I18n.t('devices.geolocation.filter_range')
             }
@@ -272,23 +237,23 @@ export default class Geolocation extends PureComponent {
               {I18n.t('devices.geolocation.request_current_location')}
             </button>
             {
-              isLoadingGeolocation
+              this.state.isLoadingGeolocation
                 ? <Loading small style={{ paddingBottom: '20px' }} />
                 : ''
             }
           </div>
 
           {
-            filter
+            this.state.filter
               ? <GeolocationRange applyRange={this.applyRange} />
               : ''
           }
 
           <GeolocationList
-            locations={locations}
+            locations={this.state.locations}
             showLocation={this.showLocation}
             goToLocation={this.goToLocation}
-            markers={showLocations}
+            markers={this.state.showLocations}
           />
         </React.Fragment>
       )
@@ -296,8 +261,11 @@ export default class Geolocation extends PureComponent {
 }
 /** Geolocation propTypes */
 Geolocation.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  setNotification: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
   update: PropTypes.bool.isRequired,
 }

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+webroot="/var/www/public/dashboard"
+
 # set transifex credentials and update the translations
 cat /dev/null > ~/.transifexrc
 echo "[https://www.transifex.com]" >> ~/.transifexrc
@@ -18,8 +20,7 @@ apt-get -y install jq wget
 source ci/scripts/create_config_file.sh
 
 # build the dashboard
-yarn build
+yarn build --webRoot /dashboard/ --dev
 source ci/scripts/sitemap_generator.sh
-rm -r /var/www/public/dashboard
-cp -r ./build /var/www/public/dashboard
-cp -f ./htaccess_dev /var/www/public/dashboard/.htaccess
+rm -r ${webroot}
+cp -r ./build ${webroot}

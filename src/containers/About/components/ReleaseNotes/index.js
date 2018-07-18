@@ -30,32 +30,11 @@ import React, {
   PureComponent,
 } from 'react'
 import ReactMarkdown from 'react-markdown'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import PropTypes from 'prop-types'
+import I18n from '../../../../shared/i18n'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import EmptyMessage from '../../../../components/EmptyMessage'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component to show the release notes
@@ -85,12 +64,7 @@ class ReleaseNotes extends PureComponent {
         release: await response.text(),
       })
     } catch (error) {
-      const {
-        actions,
-        handleMessage,
-      } = this.props
-
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -105,11 +79,9 @@ class ReleaseNotes extends PureComponent {
    * @function render
    */
   render() {
-    const { release } = this.state
-
     let renderComponent
-    if (release) {
-      if (release === 'no data') {
+    if (this.state.release) {
+      if (this.state.release === 'no data') {
         renderComponent = (
           <EmptyMessage message={I18n.t('commons.no_data')} />
         )
@@ -120,7 +92,7 @@ class ReleaseNotes extends PureComponent {
               {I18n.t('about.release_notes.title')}
             </h2>
             <div className="about-pane" style={{ margin: '10px' }}>
-              <ReactMarkdown source={release} />
+              <ReactMarkdown source={this.state.release} />
             </div>
           </ContentPane>
         )
@@ -137,11 +109,8 @@ class ReleaseNotes extends PureComponent {
 
 /** ReleaseNotes propsTypes */
 ReleaseNotes.propTypes = {
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withHandleMessages(ReleaseNotes))
+export default ReleaseNotes

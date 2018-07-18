@@ -27,10 +27,10 @@
  */
 
 /** import dependencies */
-import React, {
-  Component
-} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import withAdminDashboardLayout from '../../hoc/withAdminDashboardLayout'
+import withHandleMessages from '../../hoc/withHandleMessages'
 import routes from './routes'
 import GenerateRoutes from '../../components/GenerateRoutes'
 
@@ -39,10 +39,25 @@ import GenerateRoutes from '../../components/GenerateRoutes'
  * @class AdminDashboard
  * @extends Component
  */
-class AdminDashboard extends Component {
-  render() {
-    return <GenerateRoutes routes={routes} rootPath={this.props.match.url} />
-  }
+const AdminDashboard = props => (
+  <GenerateRoutes
+    routes={routes}
+    rootPath={props.match.url}
+    toast={props.toast}
+    handleMessage={props.handleMessage}
+    changeLanguage={props.changeLanguage}
+    languageCurrent={props.languageCurrent}
+  />
+)
+
+AdminDashboard.propTypes = {
+  toast: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  changeLanguage: PropTypes.func.isRequired,
+  languageCurrent: PropTypes.string.isRequired,
 }
 
-export default withAdminDashboardLayout(AdminDashboard)
+export default withAdminDashboardLayout(withHandleMessages(AdminDashboard))

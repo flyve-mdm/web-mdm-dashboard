@@ -30,9 +30,7 @@
 
 /** Import dependencies */
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../i18n'
 
 /**
  * Sort elements ascending / descending
@@ -43,7 +41,7 @@ import {
 export default function (dataSource, index = 0) {
   const groupKey = function (data) {
     try {
-      return (data[Object.keys(data)[index]])[0].toUpperCase()
+      return (data[Object.keys(data)[index]].trim())[0].toUpperCase()
     } catch (error) {
       return (I18n.t('commons.n/a'))
     }

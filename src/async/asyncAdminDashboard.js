@@ -34,8 +34,6 @@ import withAsyncComponent from '../hoc/withAsyncComponent';
  * @constant
  * @type {component}
  */
-const asyncAdminDashboard = withAsyncComponent(() => {
-  return import ('../applications/AdminDashboard')
-})
+const asyncAdminDashboard = withAsyncComponent(() => import('../applications/AdminDashboard'))
 
 export default asyncAdminDashboard

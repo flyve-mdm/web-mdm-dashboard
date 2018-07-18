@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import ReactWinJS from 'react-winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import ContentPane from '../../../../components/ContentPane'
 
 /**
@@ -84,10 +82,11 @@ class Notifications extends PureComponent {
    * @function changeShowNotifications
    */
   changeShowNotifications = () => {
-    const { showNotifications } = this.state
-    localStorage.setItem('showNotifications', !showNotifications)
-    this.setState({
-      showNotifications: !showNotifications,
+    localStorage.setItem('showNotifications', !this.state.showNotifications)
+    this.setState((prevState) => {
+      ({
+        showNotifications: !prevState.showNotifications,
+      })
     })
   }
 
@@ -96,11 +95,6 @@ class Notifications extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      showNotifications,
-      notificationType,
-    } = this.state
-
     return (
       <ContentPane>
         <h2 style={{ margin: '10px' }}>
@@ -116,7 +110,7 @@ class Notifications extends PureComponent {
           <div className="list-element__controller">
             <ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={showNotifications}
+              checked={this.state.showNotifications}
               onChange={this.changeShowNotifications}
             />
           </div>
@@ -132,7 +126,7 @@ class Notifications extends PureComponent {
           <div className="list-element__controller" style={{ paddingTop: 10 }}>
             <select
               name="notificationType"
-              value={notificationType}
+              value={this.state.notificationType}
               onChange={this.changeNotificationType}
             >
               <option>

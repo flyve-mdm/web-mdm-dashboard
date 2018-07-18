@@ -30,33 +30,12 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  I18n,
-} from 'react-i18nify'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
+import I18n from '../../../../shared/i18n'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Show System Information
@@ -72,14 +51,8 @@ class SystemInformation extends PureComponent {
   }
 
   componentDidMount = async () => {
-    const {
-      glpi,
-      actions,
-      handleMessage,
-    } = this.props
-
     try {
-      const plugins = await glpi.getAllItems({
+      const plugins = await this.props.glpi.getAllItems({
         itemtype: itemtype.Plugin,
       })
       this.setState({
@@ -87,7 +60,7 @@ class SystemInformation extends PureComponent {
         plugins,
       })
     } catch (error) {
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -98,15 +71,10 @@ class SystemInformation extends PureComponent {
   }
 
   render() {
-    const {
-      plugins,
-      isLoading,
-    } = this.state
-
     const element = []
 
-    if (plugins) {
-      plugins.forEach((plugin) => {
+    if (this.state.plugins) {
+      this.state.plugins.forEach((plugin) => {
         element.push(
           <div className="plugins" key={plugin.id}>
             <div className="plugins--left">
@@ -132,7 +100,7 @@ class SystemInformation extends PureComponent {
     }
 
     return (
-      isLoading
+      this.state.isLoading
         ? <Loading message={`${I18n.t('commons.loading')}...`} />
         : (
           <ContentPane>
@@ -151,8 +119,8 @@ class SystemInformation extends PureComponent {
 /** SystemInformation propsTypes */
 SystemInformation.propTypes = {
   glpi: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(SystemInformation)))
+export default withGLPI(SystemInformation)

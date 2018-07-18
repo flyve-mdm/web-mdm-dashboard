@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 
 /**
  * Component with the 'Main' page of the entity section
@@ -46,21 +44,6 @@ class Main extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      changeMode,
-      tokenLife,
-      entityID,
-      downloadURL,
-      devicesCurretlymanaged,
-      fleetsCurrentlyManaged,
-      numberUsers,
-      applicationsUploaded,
-      filesUploaded,
-      invitationsSent,
-      typesPolicies,
-      numberCategoriesForPolicies,
-    } = this.props
-
     return (
       <React.Fragment>
         <div className="title" style={{ padding: '0 10px' }}>
@@ -73,11 +56,11 @@ class Main extends PureComponent {
           </div>
           <div className="list-element__controller">
             <a
-              onClick={() => changeMode('change Token life')}
+              onClick={() => this.props.changeMode('change Token life')}
               role="button"
               tabIndex="0"
             >
-              {tokenLife}
+              {this.props.tokenLife}
               {' '}
               DAYS
             </a>
@@ -88,14 +71,14 @@ class Main extends PureComponent {
           <div className="list-element__message">
             {I18n.t('settings.entity.download_url')}
             <div className="list-element__detail">
-              {downloadURL}
+              {this.props.downloadURL}
             </div>
           </div>
 
           <div className="list-element__controller">
             <button
               className="btn btn--secondary"
-              onClick={() => changeMode('change download URL')}
+              onClick={() => this.props.changeMode('change download URL')}
               type="button"
             >
               {I18n.t('commons.change')}
@@ -112,7 +95,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.id')}
           </div>
           <div className="list-element__controller">
-            {entityID}
+            {this.props.entityID}
           </div>
         </div>
 
@@ -125,7 +108,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.devices_currently')}
           </div>
           <div className="list-element__controller">
-            {devicesCurretlymanaged}
+            {this.props.devicesCurretlymanaged}
           </div>
         </div>
 
@@ -134,7 +117,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.fleets_currently')}
           </div>
           <div className="list-element__controller">
-            {fleetsCurrentlyManaged}
+            {this.props.fleetsCurrentlyManaged}
           </div>
         </div>
 
@@ -143,7 +126,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.files_uploaded')}
           </div>
           <div className="list-element__controller">
-            {filesUploaded}
+            {this.props.filesUploaded}
           </div>
         </div>
 
@@ -152,7 +135,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.applications_uploaded')}
           </div>
           <div className="list-element__controller">
-            {applicationsUploaded}
+            {this.props.applicationsUploaded}
           </div>
         </div>
 
@@ -161,7 +144,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.number_of_users')}
           </div>
           <div className="list-element__controller">
-            {numberUsers}
+            {this.props.numberUsers}
           </div>
         </div>
 
@@ -170,7 +153,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.invitations_sent')}
           </div>
           <div className="list-element__controller">
-            {invitationsSent}
+            {this.props.invitationsSent}
           </div>
         </div>
 
@@ -179,7 +162,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.types_of_policies')}
           </div>
           <div className="list-element__controller">
-            {typesPolicies}
+            {this.props.typesPolicies}
           </div>
         </div>
 
@@ -188,7 +171,7 @@ class Main extends PureComponent {
             {I18n.t('settings.entity.number_of_categories')}
           </div>
           <div className="list-element__controller">
-            {numberCategoriesForPolicies}
+            {this.props.numberCategoriesForPolicies}
           </div>
         </div>
       </React.Fragment>

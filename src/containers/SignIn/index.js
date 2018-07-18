@@ -32,23 +32,12 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
   Redirect,
 } from 'react-router'
+import I18n from '../../shared/i18n'
 import UsernameFieldset from './components/UsernameFieldset'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
-import {
-  fetchSignIn,
-} from '../../store/authentication/actions'
 import publicURL from '../../shared/publicURL'
 // Async Component
 import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
@@ -62,21 +51,6 @@ import {
   slideLeft,
   slideRight,
 } from '../../shared/animations/index'
-
-function mapStateToProps(state) {
-  return {
-    isLoading: state.ui.loading,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    fetchSignIn: bindActionCreators(fetchSignIn, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the login form
@@ -92,6 +66,28 @@ class SignIn extends PureComponent {
       password: '',
       phase: 1,
     }
+
+    /**
+     * Implementation of Credential Management API
+     * to obtain the access data of the saved user
+     * and load them automatically in the form.
+     *
+     * Ref: https://developer.mozilla.org/en-US/docs/Web/API/CredentialsContainer/get
+     */
+    try {
+      navigator.credentials.get({
+        password: true,
+        mediation: 'optional',
+      })
+        .then((res) => {
+          if (res) {
+            this.setState({
+              username: res.name,
+              password: res.password,
+            })
+          }
+        })
+    } catch (error) {}
   }
 
   /**
@@ -101,14 +97,13 @@ class SignIn extends PureComponent {
    * @param {object} prevState
    */
   componentDidUpdate(...args) {
-    const { phase } = this.state
     const prevState = args[1]
 
-    if (prevState.phase !== phase) {
-      if (phase === 2 && this.form) {
+    if (prevState.phase !== this.state.phase) {
+      if (this.state.phase === 2 && this.form) {
         slideLeft(this.form).play()
       }
-      if (phase === 1 && this.form) {
+      if (this.state.phase === 1 && this.form) {
         slideRight(this.form).play()
       }
     }
@@ -140,24 +135,15 @@ class SignIn extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      phase,
-      username,
-      password,
-    } = this.state
-    const {
-      history,
-      isLoading,
-    } = this.props
-
     if (localStorage.getItem('currentUser') && localStorage.getItem('sessionToken')) {
       return <Redirect to={`${publicURL}/app`} />
     }
     let form
-    if (phase === 1) {
+    if (this.state.phase === 1) {
       form = (
         <UsernameFieldset
-          username={username}
+          {...this.props}
+          username={this.state.username}
           changeInput={this.changeInput}
           changePhase={this.changePhase}
         />
@@ -165,16 +151,17 @@ class SignIn extends PureComponent {
     } else {
       form = (
         <AsyncPasswordFieldset
-          username={username}
-          password={password}
+          {...this.props}
+          username={this.state.username}
+          password={this.state.password}
           changeInput={this.changeInput}
           changePhase={this.changePhase}
-          history={history}
+          history={this.props.history}
           handleOnSubmit={this.handleFormSubmit}
         />
       )
     }
-    return isLoading
+    return this.props.auth.isLoading
       ? (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -189,13 +176,12 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
   history: PropTypes.object.isRequired,
+  auth: PropTypes.shape({
+    isLoading: PropTypes.bool,
+  }).isRequired,
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withAuthenticationLayout(withHandleMessages(SignIn), {
+export default withAuthenticationLayout(withHandleMessages(SignIn), {
   centerContent: true,
-}))
+})

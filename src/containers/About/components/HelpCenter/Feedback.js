@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import Loading from '../../../../components/Loading'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
 import ContentPane from '../../../../components/ContentPane'
@@ -67,18 +65,13 @@ class Feedback extends PureComponent {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const { glpi } = this.props
-    const {
-      subject,
-      textarea,
-    } = this.state
 
     this.setState({
       isLoading: true,
     }, async () => {
       const {
         active_profile: activeProfile,
-      } = await glpi.getActiveProfile()
+      } = await this.props.glpi.getActiveProfile()
       let entityID
       if (Array.isArray(activeProfile.entities)) {
         entityID = activeProfile.entities[0].id
@@ -90,7 +83,7 @@ class Feedback extends PureComponent {
         }
       }
 
-      let entityconfig = await glpi.getAnItem({
+      let entityconfig = await this.props.glpi.getAnItem({
         itemtype: itemtype.PluginFlyvemdmEntityconfig,
         id: entityID,
       })
@@ -98,8 +91,8 @@ class Feedback extends PureComponent {
       if (Array.isArray(entityconfig)) entityconfig = { ...entityconfig[0] }
 
       const link = `mailto:${entityconfig.support_email}`
-        + `?subject=${escape(subject)}`
-        + `&body=${escape(textarea)}`
+        + `?subject=${escape(this.state.subject)}`
+        + `&body=${escape(this.state.textarea)}`
 
       if (process.env.NODE_ENV !== 'test') window.location.href = link
 
@@ -119,18 +112,11 @@ class Feedback extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      feedbackSent,
-      subject,
-      textarea,
-    } = this.state
-
-    if (isLoading) {
+    if (this.state.isLoading) {
       return (
         <Loading message={I18n.t('commons.sending')} />
       )
-    } if (feedbackSent) {
+    } if (this.state.feedbackSent) {
       return (
         <React.Fragment>
           <div style={{ textAlign: 'center' }}>
@@ -154,21 +140,21 @@ class Feedback extends PureComponent {
             <Input
               label={I18n.t('commons.subject')}
               name="subject"
-              value={subject}
+              value={this.state.subject}
               function={this.changeMessage}
               required
             />
             <TextArea
               label={I18n.t('commons.message')}
               name="textarea"
-              value={textarea}
+              value={this.state.textarea}
               function={this.changeMessage}
               placeholder={I18n.t('about.help_center.write_feedback')}
               required
             />
             <button
               className="btn btn--primary"
-              type="button"
+              type="submit"
             >
               {I18n.t('commons.send') }
             </button>

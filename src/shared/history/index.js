@@ -31,10 +31,16 @@
 /** import dependencies */
 import {
   createBrowserHistory as createHistory,
+  createMemoryHistory,
 } from 'history'
 
-/** Get browser history */
-const history = createHistory()
+const history = function () {
+  if (process.env.NODE_ENV !== 'test') {
+    /** Get browser history */
+    return createHistory()
+  }
+  return createMemoryHistory('/')
+}
 
 /** Export history object */
-export default history
+export default history()

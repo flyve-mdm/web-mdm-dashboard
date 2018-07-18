@@ -32,30 +32,10 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
+import I18n from '../../../../shared/i18n'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import itemtype from '../../../../shared/itemtype'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the form of change the download url
@@ -67,10 +47,8 @@ class ChangeDownloadURL extends PureComponent {
   constructor(props) {
     super(props)
 
-    const { downloadURL } = this.props
-
     this.state = {
-      downloadURL,
+      downloadURL: this.props.downloadURL,
       isLoading: false,
     }
   }
@@ -94,35 +72,26 @@ class ChangeDownloadURL extends PureComponent {
     this.setState({
       isLoading: true,
     }, async () => {
-      const {
-        glpi,
-        entityID,
-        saveValues,
-        changeMode,
-        actions,
-        handleMessage,
-      } = this.props
-      const { downloadURL } = this.state
-
       try {
-        await glpi.updateItem({
+        await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmEntityconfig,
           input: [{
-            id: entityID,
-            download_url: downloadURL,
+            id: this.props.entityID,
+            download_url: this.state.downloadURL,
           }],
         })
-        saveValues('downloadURL', downloadURL)
-        changeMode('')
-        actions.setNotification({
+        this.props.saveValues('downloadURL', this.state.downloadURL)
+        this.props.changeMode('')
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.download_url_changed'),
           type: 'success',
         })
       } catch (error) {
-        actions.setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
+          displayErrorPage: false,
         }))
         this.setState({
           isLoading: false,
@@ -136,13 +105,7 @@ class ChangeDownloadURL extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      downloadURL,
-    } = this.state
-    const { changeMode } = this.props
-
-    return isLoading
+    return this.state.isLoading
       ? <Loading message={`${I18n.t('commons.saving')}...`} />
       : (
         <ContentPane>
@@ -157,14 +120,14 @@ class ChangeDownloadURL extends PureComponent {
               type="text"
               className="win-textbox"
               name="downloadURL"
-              value={downloadURL}
+              value={this.state.downloadURL}
               onChange={this.changeState}
             />
           </div>
           <button
             className="btn btn--secondary"
             style={{ marginRight: 10 }}
-            onClick={() => changeMode('')}
+            onClick={() => this.props.changeMode('')}
             type="button"
           >
             {I18n.t('commons.cancel')}
@@ -182,12 +145,15 @@ class ChangeDownloadURL extends PureComponent {
 }
 
 ChangeDownloadURL.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   changeMode: PropTypes.func.isRequired,
   downloadURL: PropTypes.string.isRequired,
   saveValues: PropTypes.func.isRequired,
-  actions: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   entityID: PropTypes.string.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(ChangeDownloadURL)
+export default ChangeDownloadURL

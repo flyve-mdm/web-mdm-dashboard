@@ -31,20 +31,8 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../shared/i18n'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleMessages from '../../hoc/withHandleMessages'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import SearchQueryBuilder from './components/SearchQueryBuilder'
 import Panel from './components/Panel'
 import ContentPane from '../../components/ContentPane'
@@ -53,15 +41,6 @@ import {
   getTranslation,
   normalizeQuery,
 } from './actions'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the SearchEngine section
@@ -241,13 +220,13 @@ class SearchEngine extends PureComponent {
         </div>
         {
           fields.length > 0
-            && (
-              <SearchQueryBuilder
-                fields={fields}
-                handleChangeQuery={this.handleChangeQuery}
-                translations={this.translations}
-              />
-            )
+          && (
+            <SearchQueryBuilder
+              fields={fields}
+              handleChangeQuery={this.handleChangeQuery}
+              translations={this.translations}
+            />
+          )
         }
         <br />
         <div style={{ margin: '0 10px' }}>
@@ -302,7 +281,4 @@ SearchEngine.propTypes = {
   glpi: PropTypes.object.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(SearchEngine)))
+export default withGLPI(SearchEngine)

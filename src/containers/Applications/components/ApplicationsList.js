@@ -33,15 +33,14 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ApplicationsItemList from './ApplicationsItemList'
 import Loader from '../../../components/Loader'
 import Confirmation from '../../../components/Confirmation'
 import EmptyMessage from '../../../components/EmptyMessage'
 import itemtype from '../../../shared/itemtype'
 import publicURL from '../../../shared/publicURL'
+import handleMessage from '../../../shared/handleMessage'
 
 /**
  * @class ApplicationsList
@@ -165,6 +164,7 @@ export default class ApplicationsList extends PureComponent {
         totalcount: response.totalcount,
       })
     } catch (error) {
+      handleMessage({ message: error })
       this.setState({
         isLoading: false,
         order: 'ASC',
@@ -260,20 +260,10 @@ export default class ApplicationsList extends PureComponent {
    * @param {object} eventObject
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      setNotification,
-      changeSelectionMode,
-      changeSelectedItems,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     try {
       const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
-        const itemListToDelete = selectedItems.map(item => ({
+        const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmPackage.id'],
         }))
 
@@ -281,7 +271,7 @@ export default class ApplicationsList extends PureComponent {
           isLoading: true,
         })
 
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
           input: itemListToDelete,
           queryString: {
@@ -289,28 +279,28 @@ export default class ApplicationsList extends PureComponent {
           },
         })
 
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.applications_successfully_removed'),
           type: 'success',
         })
-        changeSelectionMode(false)
-        changeSelectedItems([])
-        changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
+        this.props.changeAction('reload')
       } else {
         // Exit selection mode
-        changeSelectionMode(false)
-        changeSelectedItems([])
+        this.props.changeSelectionMode(false)
+        this.props.changeSelectedItems([])
 
         this.listView.winControl.selection.clear()
       }
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(handleMessage({
         type: 'alert',
         message: error,
       }))
-      changeSelectionMode(false)
-      changeSelectedItems([])
+      this.props.changeSelectionMode(false)
+      this.props.changeSelectedItems([])
 
       this.setState(() => ({
         isLoading: false,
@@ -434,26 +424,15 @@ export default class ApplicationsList extends PureComponent {
    * @function handleAdd
    */
   handleAdd = () => {
-    const {
-      history,
-      changeSelectionMode,
-      changeSelectedItems,
-    } = this.props
-
-    history.push(`${publicURL}/app/applications/add`)
-    changeSelectionMode(false)
-    changeSelectedItems([])
+    this.props.history.push(`${publicURL}/app/applications/add`)
+    this.props.changeSelectionMode(false)
+    this.props.changeSelectedItems([])
     if (this.listView) {
       this.listView.winControl.selection.clear()
     }
   }
 
   render() {
-    const {
-      selectedItems,
-      selectionMode,
-      icon,
-    } = this.props
     const {
       layout,
       isLoadingMore,
@@ -465,9 +444,9 @@ export default class ApplicationsList extends PureComponent {
       <ReactWinJS.ToolBar.Button
         key="delete"
         icon="delete"
-        label={I18n.t('commons.edelete')}
+        label={I18n.t('commons.delete')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleDelete}
       />
     )
@@ -478,7 +457,7 @@ export default class ApplicationsList extends PureComponent {
         icon="edit"
         label={I18n.t('commons.edit')}
         priority={0}
-        disabled={selectedItems.length === 0}
+        disabled={this.props.selectedItems.length === 0}
         onClick={this.handleEdit}
       />
     )
@@ -506,7 +485,7 @@ export default class ApplicationsList extends PureComponent {
 
     if (isLoading) {
       listComponent = <Loader count={3} />
-    } else if (itemList.length > 0) {
+    } else if (this.state.itemList && this.state.itemList.length > 0) {
       listComponent = (
         <ReactWinJS.ListView
           ref={(listView) => { this.listView = listView }}
@@ -516,8 +495,8 @@ export default class ApplicationsList extends PureComponent {
           layout={layout}
           itemTemplate={this.ItemListRenderer}
           footerComponent={footerComponent}
-          selectionMode={selectionMode ? 'multi' : 'single'}
-          tapBehavior={selectionMode ? 'toggleSelect' : 'directSelect'}
+          selectionMode={this.props.selectionMode ? 'multi' : 'single'}
+          tapBehavior={this.props.selectionMode ? 'toggleSelect' : 'directSelect'}
           onSelectionChanged={this.handleSelectionChanged}
         />
       )
@@ -525,7 +504,7 @@ export default class ApplicationsList extends PureComponent {
       listComponent = (
         <EmptyMessage
           message={I18n.t('applications.not_found')}
-          icon={icon}
+          icon={this.props.icon}
           showIcon
         />
       )
@@ -560,15 +539,15 @@ export default class ApplicationsList extends PureComponent {
             onClick={this.handleAdd}
           />
 
-          {selectionMode ? editCommand : null}
-          {selectionMode ? deleteCommand : null}
+          {this.props.selectionMode ? editCommand : null}
+          {this.props.selectionMode ? deleteCommand : null}
 
           <ReactWinJS.ToolBar.Toggle
             key="select"
             icon="bullets"
             label={I18n.t('commons.select')}
             priority={0}
-            selected={selectionMode}
+            selected={this.props.selectionMode}
             onClick={this.handleToggleSelectionMode}
           />
         </ReactWinJS.ToolBar>
@@ -576,7 +555,7 @@ export default class ApplicationsList extends PureComponent {
         {listComponent}
         <Confirmation
           title={I18n.t('applications.delete')}
-          message={`${selectedItems.length} ${I18n.t('applications.title')}`}
+          message={`${this.props.selectedItems.length} ${I18n.t('applications.title')}`}
           reference={(el) => { this.contentDialog = el }}
         />
       </React.Fragment>
@@ -594,7 +573,7 @@ ApplicationsList.propTypes = {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   selectedItems: PropTypes.array.isRequired,
   changeSelectedItems: PropTypes.func.isRequired,

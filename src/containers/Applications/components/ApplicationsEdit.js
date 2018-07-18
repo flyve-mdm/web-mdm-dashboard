@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ApplicationsEditItemList from './ApplicationsEditItemList'
 import EmptyMessage from '../../../components/EmptyMessage'
 import ContentPane from '../../../components/ContentPane'
@@ -48,10 +46,9 @@ export default class ApplicationsEdit extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const { selectedItems } = this.props
 
     this.state = {
-      itemListEdit: [...selectedItems],
+      itemListEdit: [...this.props.selectedItems],
       isLoading: false,
     }
   }
@@ -62,9 +59,7 @@ export default class ApplicationsEdit extends PureComponent {
    * @param {name} name
    */
   updateItemList = (index, name) => {
-    const { itemListEdit } = this.state
-
-    const newItem = [...itemListEdit]
+    const newItem = [...this.state.itemListEdit]
 
     // Find index of specific object using findIndex method.
     const objIndex = newItem.findIndex((obj => obj.id === index));
@@ -91,44 +86,35 @@ export default class ApplicationsEdit extends PureComponent {
    * @function handleSaveFiles
    */
   handleSaveFiles = async () => {
-    const { itemListEdit } = this.state
-    const {
-      glpi,
-      setNotification,
-      changeSelectionMode,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     try {
-      if (itemListEdit.length > 0) {
+      if (this.state.itemListEdit.length > 0) {
         this.setState({
           isLoading: true,
         })
-        await glpi.updateItem({
+        await this.props.glpi.updateItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
-          input: itemListEdit,
+          input: this.state.itemListEdit,
         })
 
-        if (itemListEdit.length > 1) {
-          setNotification({
+        if (this.state.itemListEdit.length > 1) {
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_files'),
             type: 'success',
           })
         } else {
-          setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.edited_file'),
             type: 'success',
           })
         }
 
-        changeSelectionMode(false)
-        changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.changeAction('reload')
       }
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -139,22 +125,16 @@ export default class ApplicationsEdit extends PureComponent {
   }
 
   render() {
-    const {
-      selectedItems,
-      history,
-    } = this.props
-    const { isLoading } = this.state
-
-    if (selectedItems) {
-      if (isLoading) {
+    if (this.props.selectedItems) {
+      if (this.state.isLoading) {
         return (
           <Loading message={`${I18n.t('commons.loading')}...`} />
         )
       }
-      const renderComponent = selectedItems.map((item, index) => (
+      const renderComponent = this.props.selectedItems.map((item, index) => (
         <ApplicationsEditItemList
           key={`ApplicationsEditItemList-${index.toString()}`}
-          history={history}
+          history={this.props.history}
           updateItemList={this.updateItemList}
           selectedItem={item}
         />
@@ -186,10 +166,13 @@ export default class ApplicationsEdit extends PureComponent {
 }
 /** ApplicationsEdit propTypes */
 ApplicationsEdit.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   selectedItems: PropTypes.array,
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }

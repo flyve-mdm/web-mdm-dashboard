@@ -79,17 +79,14 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate = (prevProps) => {
-    const { map } = this.state
-    const { selectedLocation } = this.props
-
-    if (map) {
+    if (this.state.map) {
       this.addMarkers()
-      if (prevProps.selectedLocation !== selectedLocation) {
-        map.panTo([
-          selectedLocation.latitude,
-          selectedLocation.longitude,
+      if (prevProps.selectedLocation !== this.props.selectedLocation) {
+        this.state.map.panTo([
+          this.props.selectedLocation.latitude,
+          this.props.selectedLocation.longitude,
         ])
-        map.setZoom(10)
+        this.state.map.setZoom(10)
       }
     }
   }
@@ -99,34 +96,26 @@ class Map extends PureComponent {
    * @function addMarkers
    */
   addMarkers = () => {
-    const {
-      markerGroup,
-      map,
-    } = this.state
-    const { markers } = this.props
-
-    markerGroup.clearLayers()
-    for (let index = 0; index < markers.length; index += 1) {
+    this.state.markerGroup.clearLayers()
+    for (let index = 0; index < this.props.markers.length; index += 1) {
       L.marker([
-        markers[index].latitude,
-        markers[index].longitude,
-      ]).addTo(markerGroup)
+        this.props.markers[index].latitude,
+        this.props.markers[index].longitude,
+      ]).addTo(this.state.markerGroup)
     }
-    if (markers[0]) {
-      map.setZoom(10)
-      map.panTo(
+    if (this.props.markers[0]) {
+      this.state.map.setZoom(10)
+      this.state.map.panTo(
         new L.LatLng(
-          markers[markers.length - 1].latitude,
-          markers[markers.length - 1].longitude,
+          this.props.markers[this.props.markers.length - 1].latitude,
+          this.props.markers[this.props.markers.length - 1].longitude,
         ),
       )
     }
   }
 
   render() {
-    const { style } = this.props
-
-    return <div id="map" style={{ ...style, zIndex: 0 }} />
+    return <div id="map" style={{ ...this.props.style, zIndex: 0 }} />
   }
 }
 /** Map defaultProps */

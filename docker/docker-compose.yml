@@ -17,12 +17,34 @@ services:
       - ${HOST_SERVER_WEB_PORT}:3000
     volumes:
       - ../:${APPPATH}
-    command: ["yarn", "start"]
+    command: ["/opt/dev-tools/cliinstall.sh"]
     networks:
       red:
         aliases:
           - dashnode
         ipv4_address: 172.27.0.31
+  # web server
+  dashboard-apache:
+    build:
+      context: ./docker/apache
+      dockerfile: Dockerfile
+      args:
+        APACHE_TAG: ${APACHE_TAG}
+        APPPATH: ${APPPATH}
+    container_name: Dashboard-apache
+    hostname: dashboardapache
+    volumes:
+      # app folder
+      - ../build:${APPPATH}:z
+      - ./docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./docker/apache/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+    working_dir: ${APPPATH}
+    ports:
+      # http port
+      - ${HOST_SERVER_WEB_PORT_APACHE}:80
+    networks:
+      red:
+        ipv4_address: 172.27.0.32
 # In this section we defined the network interface
 networks:
   red:

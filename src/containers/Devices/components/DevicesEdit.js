@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import EditMultiple from '../../../components/EditMultiple'
 import itemtype from '../../../shared/itemtype'
 
@@ -64,25 +62,16 @@ export default class DevicesEdit extends PureComponent {
   }
 
   render() {
-    const { FieldList } = this.state
-    const {
-      selectedItems,
-      changeAction,
-      changeSelectionMode,
-      history,
-      setNotification,
-      glpi,
-    } = this.props
-
     return (
       <EditMultiple
-        selectedItems={selectedItems}
-        FieldList={FieldList}
-        changeAction={changeAction}
-        changeSelectionMode={changeSelectionMode}
-        history={history}
-        setNotification={setNotification}
-        glpi={glpi}
+        selectedItems={this.props.selectedItems}
+        FieldList={this.state.FieldList}
+        changeAction={this.props.changeAction}
+        changeSelectionMode={this.props.changeSelectionMode}
+        history={this.props.history}
+        toast={this.props.toast}
+        handleMessage={this.props.handleMessage}
+        glpi={this.props.glpi}
         request={{
           id: 'PluginFlyvemdmAgent.id',
           itemtype: itemtype.PluginFlyvemdmAgent,
@@ -98,10 +87,13 @@ DevicesEdit.defaultProps = {
 
 /** DevicesEdit propTypes */
 DevicesEdit.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   selectedItems: PropTypes.array,
   changeSelectionMode: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }

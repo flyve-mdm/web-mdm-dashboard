@@ -31,11 +31,9 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
 import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import withGLPI from '../../../hoc/withGLPI'
@@ -70,25 +68,21 @@ class DevicesAssociated extends PureComponent {
    * @constant ItemListRenderer
    * @type {component}
    */
-  ItemListRenderer = ReactWinJS.reactRenderer((ItemList) => {
-    const { history } = this.props
-
-    return (
-      <div
-        style={{ cursor: 'pointer' }}
-        onClick={() => history.push(`${publicURL}/app/devices/${ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}`)}
-        role="link"
-        tabIndex="0"
-      >
-        <span className="id">
-          {ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}
-        </span>
-        <span className="name">
-          {ItemList.data[`${itemtype.PluginFlyvemdmAgent}.name`]}
-        </span>
-      </div>
-    )
-  })
+  ItemListRenderer = ReactWinJS.reactRenderer(ItemList => (
+    <div
+      style={{ cursor: 'pointer' }}
+      onClick={() => this.props.history.push(`${publicURL}/app/devices/${ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}`)}
+      role="link"
+      tabIndex="0"
+    >
+      <span className="id">
+        {ItemList.data[`${itemtype.PluginFlyvemdmAgent}.id`]}
+      </span>
+      <span className="name">
+        {ItemList.data[`${itemtype.PluginFlyvemdmAgent}.name`]}
+      </span>
+    </div>
+  ))
 
   /** @constructor */
   constructor(props) {
@@ -109,20 +103,15 @@ class DevicesAssociated extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const {
-      glpi,
-      history,
-    } = this.props
-
     try {
       const {
         name,
-      } = await glpi.getAnItem({
+      } = await this.props.glpi.getAnItem({
         itemtype: itemtype.PluginFlyvemdmFleet,
-        id: getID(history.location.pathname),
+        id: getID(this.props.history.location.pathname),
       })
 
-      const devices = await glpi.searchItems({
+      const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
         options: {
           uid_cols: true,
@@ -153,37 +142,28 @@ class DevicesAssociated extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      devices,
-      name,
-      itemList,
-      layout,
-    } = this.state
-
-
     return (
       <ContentPane className="fleets">
         {
-          isLoading
+          this.state.isLoading
             ? <Loading message={`${I18n.t('commons.loading')}...`} />
             : (
-              (!devices || devices.totalcount === 0)
+              (!this.state.devices || this.state.devices.totalcount === 0)
                 ? <EmptyMessage message={I18n.t('fleets.no_associated_devices')} />
                 : (
                   <React.Fragment>
                     <h2>
                       {I18n.t('fleets.devices_of')}
-                      {` '${name}' `}
+                      {` '${this.state.name}' `}
                     </h2>
                     <div className="list-pane">
                       <ReactWinJS.ListView
                         ref={(listView) => { this.listView = listView }}
                         className="list-pane__content win-selectionstylefilled"
-                        itemDataSource={itemList.dataSource}
+                        itemDataSource={this.state.itemList.dataSource}
                         itemTemplate={this.ItemListRenderer}
                         headerComponent={this.headerComponent}
-                        layout={layout}
+                        layout={this.state.layout}
                         selectionMode="single"
                       />
                     </div>

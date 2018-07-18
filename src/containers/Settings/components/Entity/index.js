@@ -30,36 +30,15 @@
 import React, {
   PureComponent,
 } from 'react'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import PropTypes from 'prop-types'
+import I18n from '../../../../shared/i18n'
 import ChangeDownloadURL from './ChangeDownloadURL'
 import ChangeTokenLife from './ChangeTokenLife'
 import Main from './Main'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the entity section
@@ -93,40 +72,34 @@ class Entity extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const {
-      glpi,
-      actions,
-      handleMessage,
-    } = this.props
-
     try {
-      const devices = await glpi.searchItems({
+      const devices = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmAgent,
       })
-      const applications = await glpi.searchItems({
+      const applications = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPackage,
       })
-      const users = await glpi.searchItems({
+      const users = await this.props.glpi.searchItems({
         itemtype: itemtype.User,
       })
-      const invitations = await glpi.searchItems({
+      const invitations = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmInvitation,
       })
-      const files = await glpi.searchItems({
+      const files = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFile,
       })
-      const fleets = await glpi.searchItems({
+      const fleets = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmFleet,
       })
-      const policies = await glpi.searchItems({
+      const policies = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPolicy,
       })
-      const policyCategories = await glpi.searchItems({
+      const policyCategories = await this.props.glpi.searchItems({
         itemtype: itemtype.PluginFlyvemdmPolicyCategory,
       })
       const {
         active_profile: activeProfile,
-      } = await glpi.getActiveProfile()
+      } = await this.props.glpi.getActiveProfile()
       let entityID
       if (Array.isArray(activeProfile.entities)) {
         entityID = activeProfile.entities[0].id
@@ -138,7 +111,7 @@ class Entity extends PureComponent {
         }
       }
 
-      let entityconfig = await glpi.getAnItem({
+      let entityconfig = await this.props.glpi.getAnItem({
         itemtype: itemtype.PluginFlyvemdmEntityconfig,
         id: entityID,
       })
@@ -164,7 +137,7 @@ class Entity extends PureComponent {
         downloadURL: downloadURL || 'https://',
       })
     } catch (error) {
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -199,36 +172,18 @@ class Entity extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      mode,
-      tokenLife,
-      entityID,
-      downloadURL,
-      numberCategoriesForPolicies,
-      typesPolicies,
-      invitationsSent,
-      numberUsers,
-      applicationsUploaded,
-      filesUploaded,
-      fleetsCurrentlyManaged,
-      devicesCurretlymanaged,
-      isLoading,
-    } = this.state
-    const {
-      handleMessage,
-      glpi,
-    } = this.props
-
     let content
-    switch (mode) {
+    switch (this.state.mode) {
       case 'change Token life':
         content = (
           <ChangeTokenLife
             changeMode={this.changeMode}
-            tokenLife={tokenLife}
+            toast={this.props.toast}
+            handleMessage={this.props.handleMessage}
+            tokenLife={this.state.tokenLife}
             saveValues={this.saveValues}
-            glpi={glpi}
-            entityID={entityID}
+            glpi={this.props.glpi}
+            entityID={this.state.entityID}
           />
         )
 
@@ -238,11 +193,12 @@ class Entity extends PureComponent {
         content = (
           <ChangeDownloadURL
             changeMode={this.changeMode}
-            downloadURL={downloadURL}
+            downloadURL={this.state.downloadURL}
             saveValues={this.saveValues}
-            handleMessage={handleMessage}
-            glpi={glpi}
-            entityID={entityID}
+            toast={this.props.toast}
+            handleMessage={this.props.handleMessage}
+            glpi={this.props.glpi}
+            entityID={this.state.entityID}
           />
         )
 
@@ -252,26 +208,27 @@ class Entity extends PureComponent {
         content = (
           <ContentPane>
             <Main
-              tokenLife={tokenLife}
-              numberCategoriesForPolicies={numberCategoriesForPolicies}
-              typesPolicies={typesPolicies}
-              invitationsSent={invitationsSent}
-              numberUsers={numberUsers}
-              applicationsUploaded={applicationsUploaded}
-              filesUploaded={filesUploaded}
-              fleetsCurrentlyManaged={fleetsCurrentlyManaged}
-              devicesCurretlymanaged={devicesCurretlymanaged}
-              entityID={entityID}
-              downloadURL={downloadURL}
+              tokenLife={this.state.tokenLife}
+              numberCategoriesForPolicies={this.state.numberCategoriesForPolicies}
+              typesPolicies={this.state.typesPolicies}
+              invitationsSent={this.state.invitationsSent}
+              numberUsers={this.state.numberUsers}
+              applicationsUploaded={this.state.applicationsUploaded}
+              filesUploaded={this.state.filesUploaded}
+              fleetsCurrentlyManaged={this.state.fleetsCurrentlyManaged}
+              devicesCurretlymanaged={this.state.devicesCurretlymanaged}
+              entityID={this.state.entityID}
+              downloadURL={this.state.downloadURL}
               changeMode={this.changeMode}
-              handleMessage={handleMessage}
+              handleMessage={this.props.handleMessage}
+              toast={this.props.toast}
             />
           </ContentPane>
         )
     }
 
     return (
-      isLoading
+      this.state.isLoading
         ? (
           <Loading message={`${I18n.t('commons.loading')}...`} />
         )
@@ -290,8 +247,11 @@ class Entity extends PureComponent {
 }
 
 Entity.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
   handleMessage: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(Entity)))
+export default withGLPI(Entity)

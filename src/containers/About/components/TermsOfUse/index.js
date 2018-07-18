@@ -28,9 +28,7 @@
 
 /** impport dependencies */
 import React from 'react'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import ContentPane from '../../../../components/ContentPane'
 
 /**
@@ -62,7 +60,8 @@ const TermsOfUse = () => (
           { I18n.t('about.term_of_use.the_editor') }
           &#8221;
         </strong>
-        &nbsp;{ I18n.t('about.term_of_use.teclib_spain')}
+        &nbsp;
+        { I18n.t('about.term_of_use.teclib_spain')}
       </p>
       <p>
         <strong>
@@ -70,7 +69,8 @@ const TermsOfUse = () => (
           { I18n.t('about.term_of_use.services') }
           &#8221;
         </strong>
-        &nbsp;{ I18n.t('about.term_of_use.any_or_several')}
+        &nbsp;
+        { I18n.t('about.term_of_use.any_or_several')}
       </p>
       <p>
         <strong>
@@ -78,7 +78,8 @@ const TermsOfUse = () => (
           { I18n.t('about.term_of_use.company') }
           &#8221;
         </strong>
-        &nbsp;{I18n.t('about.term_of_use.any_company') }
+        &nbsp;
+        {I18n.t('about.term_of_use.any_company') }
       </p>
       <p>
         <strong>
@@ -88,7 +89,8 @@ const TermsOfUse = () => (
           {' '}
           &#8221;
         </strong>
-        &nbsp;{I18n.t('about.term_of_use.beneficial_owner') }
+        &nbsp;
+        {I18n.t('about.term_of_use.beneficial_owner') }
       </p>
       <p>
         <strong>
@@ -97,7 +99,8 @@ const TermsOfUse = () => (
           { I18n.t('about.term_of_use.contact_form') }
           &#8221;
         </strong>
-        &nbsp;{I18n.t('about.term_of_use.standard_contact') }
+        &nbsp;
+        {I18n.t('about.term_of_use.standard_contact') }
       </p>
       <p>
         <strong>
@@ -106,7 +109,8 @@ const TermsOfUse = () => (
           { I18n.t('about.term_of_use.communication') }
           &#8221;
         </strong>
-        &nbsp;{I18n.t('about.term_of_use.communication_between') }
+        &nbsp;
+        {I18n.t('about.term_of_use.communication_between') }
       </p>
       <p>
         <u>

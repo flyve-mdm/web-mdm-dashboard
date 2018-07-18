@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import Loading from '../../../components/Loading'
 import itemtype from '../../../shared/itemtype'
@@ -58,47 +56,40 @@ export default class Enroll extends PureComponent {
    * @function inviteDevice
    */
   inviteDevice = async () => {
-    const { email } = this.state
-    const {
-      glpi,
-      setNotification,
-      history,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     try {
-      if (email.trim() !== '') {
+      if (this.state.email.trim() !== '') {
         this.setState({
           isLoading: true,
-        })
-
-        await glpi.addItem({
-          itemtype: itemtype.PluginFlyvemdmInvitation,
-          input: {
-            _useremails: email.trim(),
-          },
+        }, async () => {
+          await this.props.glpi.addItem({
+            itemtype: itemtype.PluginFlyvemdmInvitation,
+            input: {
+              _useremails: this.state.email.trim(),
+            },
+          })
         })
 
         this.setState({
           isLoading: false,
+        }, () => {
+          this.props.history.goBack()
+          this.props.changeAction('reload')
         })
 
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.invitation_successfully_sent'),
           type: 'success',
         })
-        history.goBack()
-        changeAction('reload')
       }
     } catch (error) {
-      setNotification(handleMessage({
-        type: 'alert',
-        message: error,
-      }))
       this.setState({
         isLoading: false,
+      }, () => {
+        this.props.toast.setNotification(this.props.handleMessage({
+          type: 'alert',
+          message: error,
+        }))
       })
     }
   }
@@ -115,14 +106,8 @@ export default class Enroll extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      email,
-    } = this.state
-    const { history } = this.props
-
     let renderComponent
-    if (isLoading) {
+    if (this.state.isLoading) {
       renderComponent = (
         <Loading message={`${I18n.t('commons.loading')}...`} />
       )
@@ -145,14 +130,14 @@ export default class Enroll extends PureComponent {
             className="win-textbox"
             placeholder={I18n.t('commons.email')}
             name="email"
-            value={email}
+            value={this.state.email}
             onChange={this.changeInput}
             required
           />
           <br />
           <button
             className="btn btn--secondary"
-            onClick={() => history.goBack()}
+            onClick={() => this.props.history.goBack()}
             type="button"
           >
             {I18n.t('commons.cancel')}
@@ -174,7 +159,11 @@ export default class Enroll extends PureComponent {
 }
 /** Enroll propTypes */
 Enroll.propTypes = {
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  changeAction: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 }

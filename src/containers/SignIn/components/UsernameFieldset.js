@@ -34,9 +34,7 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import publicURL from '../../../shared/publicURL'
 import appConfig from '../../../../public/config.json'
 import withGLPI from '../../../hoc/withGLPI'
@@ -65,12 +63,11 @@ class UsernameFieldset extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const { glpi } = this.props
     try {
-      await glpi.initSessionByUserToken({
+      await this.props.glpi.initSessionByUserToken({
         userToken: appConfig.pluginToken,
       })
-      const plugins = await glpi.getAllItems({
+      const plugins = await this.props.glpi.getAllItems({
         itemtype: 'Plugin',
       })
       const pluginDemo = plugins.filter(plugin => plugin.name === 'Flyve MDM Demo')
@@ -84,7 +81,7 @@ class UsernameFieldset extends PureComponent {
         },
         () => {
           this.usernameInput.focus()
-          glpi.killSession()
+          this.props.glpi.killSession()
         },
       )
     } catch (e) {
@@ -106,35 +103,32 @@ class UsernameFieldset extends PureComponent {
    */
   LogInServer = (e) => {
     e.preventDefault()
-    const {
-      username,
-      changePhase,
-    } = this.props
-    const { selfRegistration } = this.state
 
-    if (username) {
-      changePhase(2)
+    if (this.props.username) {
+      this.props.changePhase(2)
     } else {
-      this.setState({
-        classInput: 'win-textbox color-line-alert',
-        errorMessage: (
-          <p className="color-type-alert">
-            <span>
-              {' '}
-              {I18n.t('login.username_not_registered')}
-              {' '}
-            </span>
-            {
-              selfRegistration
-                ? (
-                  <Link to={`${publicURL}/signUp`}>
-                    {I18n.t('login.create_a_new')}
-                  </Link>
-                )
-                : null
-            }
-          </p>
-        ),
+      this.setState((prevState) => {
+        ({
+          classInput: 'win-textbox color-line-alert',
+          errorMessage: (
+            <p className="color-type-alert">
+              <span>
+                {' '}
+                {I18n.t('login.username_not_registered')}
+                {' '}
+              </span>
+              {
+                prevState.selfRegistration
+                  ? (
+                    <Link to={`${publicURL}/signUp`}>
+                      {I18n.t('login.create_a_new')}
+                    </Link>
+                  )
+                  : null
+              }
+            </p>
+          ),
+        })
       })
     }
   }
@@ -144,19 +138,8 @@ class UsernameFieldset extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      errorMessage,
-      selfRegistration,
-      classInput,
-    } = this.state
-    const {
-      username,
-      changeInput,
-    } = this.props
-
     return (
-      isLoading
+      this.state.isLoading
         ? (
           <div style={{ margin: 50, height: '140px' }}>
             <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -175,17 +158,17 @@ class UsernameFieldset extends PureComponent {
               </a>
             </p>
 
-            {errorMessage}
+            {this.state.errorMessage}
 
             <form onSubmit={this.LogInServer}>
               <input
                 type="text"
                 name="username"
                 ref={(input) => { this.usernameInput = input; }}
-                className={classInput}
+                className={this.state.classInput}
                 placeholder={I18n.t('commons.username')}
-                value={username}
-                onChange={changeInput}
+                value={this.props.username}
+                onChange={this.props.changeInput}
                 required
               />
               <button
@@ -196,7 +179,7 @@ class UsernameFieldset extends PureComponent {
               </button>
             </form>
             {
-              !selfRegistration
+              !this.state.selfRegistration
                 ? ''
                 : (
                   <p>

@@ -26,12 +26,13 @@
  * ------------------------------------------------------------------------------
  */
 
-import nativeNotification from '../index.js'
+import nativeNotification from '../index'
 
 describe('nativeNotification', () => {
   beforeEach(() => {
     global.Notification = sinon.spy(class Notification {
       permission = 'granted'
+
       static requestPermission = (callback) => {
         callback()
       }

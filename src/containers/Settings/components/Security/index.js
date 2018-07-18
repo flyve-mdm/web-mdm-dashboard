@@ -31,36 +31,15 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import Confirmation from '../../../../components/Confirmation'
 import ErrorValidation from '../../../../components/ErrorValidation'
 import ConstructInputs from '../../../../components/Forms'
 import Loading from '../../../../components/Loading'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
 import logout from '../../../../shared/logout'
 import ContentPane from '../../../../components/ContentPane'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
 import itemtype from '../../../../shared/itemtype'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the security section
@@ -88,10 +67,8 @@ class Security extends PureComponent {
    * @async
    */
   componentDidMount = async () => {
-    const { glpi } = this.props
-
     try {
-      const plugins = await glpi.getAllItems({
+      const plugins = await this.props.glpi.getAllItems({
         itemtype: 'Plugin',
       })
       const pluginDemo = plugins.filter(plugin => plugin.name === 'Flyve MDM Demo')
@@ -116,14 +93,6 @@ class Security extends PureComponent {
    * @async
    */
   deleteUser = async () => {
-    const {
-      glpi,
-      actions,
-      setNotification,
-      handleMessage,
-    } = this.props
-    const { currentUser } = this.state
-
     const isOK = await Confirmation.isOK(this.deleteAccount)
     if (isOK) {
       this.setState({
@@ -131,16 +100,16 @@ class Security extends PureComponent {
       },
       async () => {
         try {
-          await glpi.deleteItem({
+          await this.props.glpi.deleteItem({
             itemtype: itemtype.User,
             input: {
-              id: currentUser.id,
+              id: this.state.currentUser.id,
             },
             queryString: {
               force_purge: true,
             },
           })
-          actions.setNotification({
+          this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.user_deleted'),
             type: 'success',
@@ -149,7 +118,7 @@ class Security extends PureComponent {
           logout()
           localStorage.clear()
         } catch (error) {
-          setNotification(handleMessage({
+          this.props.toast.setNotification(this.props.handleMessage({
             type: 'alert',
             message: error,
           }))
@@ -168,12 +137,10 @@ class Security extends PureComponent {
    * @async
    */
   closeSession = async () => {
-    const { actions } = this.props
-
     const isOK = await Confirmation.isOK(this.killSession)
     if (isOK) {
       logout()
-      actions.setNotification({
+      this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.session_closed'),
         type: 'success',
@@ -187,13 +154,11 @@ class Security extends PureComponent {
    * @async
    */
   cleanWebStorage = async () => {
-    const { actions } = this.props
-
     const isOK = await Confirmation.isOK(this.deleteBrowserData)
     if (isOK) {
       localStorage.clear()
       logout()
-      actions.setNotification({
+      this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.clear_local_storage'),
         type: 'success',
@@ -225,37 +190,26 @@ class Security extends PureComponent {
       }
 
       if (isCorrect) {
-        const {
-          actions,
-          glpi,
-          handleMessage,
-        } = this.props
-        const {
-          currentUser,
-          password,
-          passwordConfirmation,
-        } = this.state
-
         this.setState({
           isLoading: true,
         },
         async () => {
           try {
-            await glpi.updateItem({
+            await this.props.glpi.updateItem({
               itemtype: itemtype.User,
-              id: currentUser.id,
+              id: this.state.currentUser.id,
               input: {
-                password,
-                password2: passwordConfirmation,
+                password: this.state.password,
+                password2: this.state.passwordConfirmation,
               },
             })
-            actions.setNotification({
+            this.props.toast.setNotification({
               title: I18n.t('commons.success'),
               body: I18n.t('notifications.new_password_saved'),
               type: 'success',
             })
           } catch (error) {
-            actions.setNotification(handleMessage({
+            this.props.toast.setNotification(this.props.handleMessage({
               type: 'alert',
               message: error,
             }))
@@ -295,11 +249,9 @@ class Security extends PureComponent {
       this.setState({
         isLoading: true,
       }, async () => {
-        const { glpi } = this.props
-
         const {
           cfg_glpi: cfgGlpi,
-        } = await glpi.getGlpiConfig()
+        } = await this.props.glpi.getGlpiConfig()
         this.setState({
           isLoading: false,
           passwordConfiguration: {
@@ -326,65 +278,51 @@ class Security extends PureComponent {
    * Build the data array for the password change form
    * @function buildDataArray
    */
-  buildDataArray = () => {
-    const {
-      password,
-      passwordConfiguration,
-      forceValidation,
-      passwordConfirmation,
-    } = this.state
-    return (
-      [
-        [{
-          label: I18n.t('commons.password'),
-          type: 'password',
-          name: 'password',
-          value: password,
-          placeholder: I18n.t('commons.password'),
-          function: this.changeState,
-          parametersToEvaluate: {
-            isRequired: true,
-            ...passwordConfiguration,
+  buildDataArray = () => (
+    [
+      [{
+        label: I18n.t('commons.password'),
+        type: 'password',
+        name: 'password',
+        value: this.state.password,
+        placeholder: I18n.t('commons.password'),
+        function: this.changeState,
+        parametersToEvaluate: {
+          isRequired: true,
+          ...this.state.passwordConfiguration,
+        },
+        forceValidation: this.state.forceValidation,
+        disabled: false,
+        style: null,
+      }],
+      [{
+        label: I18n.t('commons.password_confirmation'),
+        type: 'password',
+        name: 'passwordConfirmation',
+        value: this.state.passwordConfirmation,
+        placeholder: I18n.t('commons.password_confirmation'),
+        function: this.changeState,
+        parametersToEvaluate: {
+          isRequired: true,
+          ...this.state.passwordConfiguration,
+          isEqualTo: {
+            value: this.state.password,
+            message: I18n.t('commons.passwords_not_match'),
           },
-          forceValidation,
-          disabled: false,
-          style: null,
-        }],
-        [{
-          label: I18n.t('commons.password_confirmation'),
-          type: 'password',
-          name: 'passwordConfirmation',
-          value: passwordConfirmation,
-          placeholder: I18n.t('commons.password_confirmation'),
-          function: this.changeState,
-          parametersToEvaluate: {
-            isRequired: true,
-            ...passwordConfiguration,
-            isEqualTo: {
-              value: password,
-              message: I18n.t('commons.passwords_not_match'),
-            },
-          },
-          forceValidation,
-          disabled: false,
-          style: null,
-        }],
-      ]
-    )
-  }
+        },
+        forceValidation: this.state.forceValidation,
+        disabled: false,
+        style: null,
+      }],
+    ]
+  )
 
   /**
    * Render component
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      mode,
-      selfRegistration,
-    } = this.state
-
-    if (isLoading) {
+    if (this.state.isLoading) {
       return (
         <div style={{ height: '100%' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -392,13 +330,13 @@ class Security extends PureComponent {
       )
     }
 
-    switch (mode) {
+    switch (this.state.mode) {
       case I18n.t('commons.change_password'):
         return (
           <ContentPane>
             <h2>
               {' '}
-              {mode}
+              {this.state.mode}
               {' '}
             </h2>
             <form className="list-content" onSubmit={this.savePassword}>
@@ -504,7 +442,7 @@ class Security extends PureComponent {
               </div>
 
               {
-                !selfRegistration
+                !this.state.selfRegistration
                   ? '' : (
                     <React.Fragment>
                       <div className="list-element">
@@ -535,9 +473,9 @@ class Security extends PureComponent {
 }
 
 Security.propTypes = {
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(withGLPI(withHandleMessages(Security)))
+export default withGLPI(Security)

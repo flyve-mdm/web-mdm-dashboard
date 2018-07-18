@@ -27,11 +27,11 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  NavLink
+  NavLink,
 } from 'react-router-dom'
 
 /**
@@ -49,26 +49,41 @@ class IconWithPopper extends PureComponent {
       return (
         <div>
           <NavLink to={this.props.to} activeClassName="selected">
-            <span className={this.props.iconName} title={this.props.title}/>
+            <span
+              className={this.props.iconName}
+              title={this.props.title}
+            />
           </NavLink>
         </div>
       )
-    } else {
-      return (
-        <div onClick={this.props.click}>
-          <a>
-            <span className={this.props.iconName} title={this.props.title}/>
-          </a>
-        </div>
-      )
     }
+    return (
+      <div
+        onClick={this.props.click}
+        role="link"
+        tabIndex="0"
+      >
+        <a>
+          <span
+            className={this.props.iconName}
+            title={this.props.title}
+          />
+        </a>
+      </div>
+    )
   }
 }
 
+IconWithPopper.defaultProps = {
+  to: null,
+  click: () => {},
+}
+
 IconWithPopper.propTypes = {
+  title: PropTypes.string.isRequired,
   to: PropTypes.string,
   iconName: PropTypes.string.isRequired,
-  click: PropTypes.func
+  click: PropTypes.func,
 }
 
 export default IconWithPopper

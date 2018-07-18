@@ -34,9 +34,7 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import Loading from '../../../components/Loading'
 import publicURL from '../../../shared/publicURL'
 
@@ -71,21 +69,8 @@ class PasswordFieldset extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      isLoading,
-      errorMessage,
-      classInput,
-    } = this.state
-    const {
-      username,
-      handleOnSubmit,
-      password,
-      changeInput,
-      changePhase,
-    } = this.props
-
     let renderComponent
-    if (isLoading) {
+    if (this.state.isLoading) {
       renderComponent = (
         <div style={{ margin: 50, height: '140px' }}>
           <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -100,19 +85,19 @@ class PasswordFieldset extends PureComponent {
           <p>
             { I18n.t('login.enter_password_for') }
             <br />
-            {username}
+            {this.props.username}
             <br />
-            {errorMessage}
+            {this.state.errorMessage}
           </p>
-          <form onSubmit={handleOnSubmit}>
+          <form onSubmit={this.props.handleOnSubmit}>
             <input
               type="password"
               name="password"
               ref={(input) => { this.passwordInput = input }}
-              className={classInput}
+              className={this.state.classInput}
               placeholder={I18n.t('commons.password')}
-              value={password}
-              onChange={changeInput}
+              value={this.props.password}
+              onChange={this.props.changeInput}
               required
             />
 
@@ -120,7 +105,7 @@ class PasswordFieldset extends PureComponent {
               className="btn btn--secondary"
               type="button"
               onClick={
-              () => changePhase(1)
+                () => this.props.changePhase(1)
             }
             >
               { I18n.t('commons.back') }

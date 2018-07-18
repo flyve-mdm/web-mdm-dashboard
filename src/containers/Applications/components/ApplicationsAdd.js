@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import {
   FilesUpload,
   FilesUploadItemList,
@@ -75,12 +73,7 @@ export default class ApplicationsAdd extends PureComponent {
    * @param {object} error
    */
   onFilesError = (error) => {
-    const {
-      setNotification,
-      handleMessage,
-    } = this.props
-
-    setNotification(handleMessage({
+    this.props.toast.setNotification(this.props.handleMessage({
       type: 'alert',
       message: error.message,
     }))
@@ -119,41 +112,30 @@ export default class ApplicationsAdd extends PureComponent {
    * @function filesUpload
    */
   filesUpload = () => {
-    const {
-      files,
-      input,
-    } = this.state
-    const {
-      glpi,
-      setNotification,
-      changeAction,
-      handleMessage,
-    } = this.props
-
     const formData = new FormData()
-    Object.keys(files).forEach(async (key) => {
+    Object.keys(this.state.files).forEach(async (key) => {
       try {
-        const file = files[key]
+        const file = this.state.files[key]
         formData.append('file', file)
-        formData.append('uploadManifest', `{"input":{"name":"${file.name}","alias":"${input}"}}`)
+        formData.append('uploadManifest', `{"input":{"name":"${this.state.file.name}","alias":"${this.state.input}"}}`)
         this.setState({
           isLoading: true,
         })
-        await glpi.uploadFile({
+        await this.props.glpi.uploadFile({
           itemtype: itemtype.PluginFlyvemdmPackage,
           input: formData,
         })
         this.setState({
           isLoading: false,
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.saved_file'),
           type: 'success',
         })
-        changeAction('reload')
+        this.props.changeAction('reload')
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -165,14 +147,8 @@ export default class ApplicationsAdd extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      input,
-      files,
-    } = this.state
-
     let renderComponent
-    if (isLoading) {
+    if (this.state.isLoading) {
       renderComponent = (
         <Loading message={`${I18n.t('commons.loading')}...`} />
       )
@@ -191,7 +167,7 @@ export default class ApplicationsAdd extends PureComponent {
                 className="win-textbox"
                 placeholder={I18n.t('applications.name')}
                 name="input"
-                value={input}
+                value={this.state.input}
                 onChange={this.changeInput}
               />
               <FilesUpload
@@ -204,7 +180,7 @@ export default class ApplicationsAdd extends PureComponent {
                 minFileSize={0}
                 clickable
               >
-                {I18n.t('commons.drop_or_click_file')}
+                {I18n.t('commons.drop_file')}
               </FilesUpload>
               <div style={{ marginTop: 10 }}>
                 <button
@@ -215,11 +191,11 @@ export default class ApplicationsAdd extends PureComponent {
                   {I18n.t('commons.save')}
                 </button>
                 {
-                  files.length > 0
+                  this.state.files.length > 0
                     ? (
                       <div>
                         {
-                          files.map(file => (
+                          this.state.files.map(file => (
                             <FilesUploadItemList
                               key={file.id}
                               fileData={file}
@@ -244,7 +220,7 @@ export default class ApplicationsAdd extends PureComponent {
 /** ApplicationsAdd propTypes */
 ApplicationsAdd.propTypes = {
   changeAction: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }

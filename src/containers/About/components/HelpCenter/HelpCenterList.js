@@ -33,33 +33,12 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
+import I18n from '../../../../shared/i18n'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
 import Loading from '../../../../components/Loading'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
 import ContentPane from '../../../../components/ContentPane'
 import itemtype from '../../../../shared/itemtype'
 import publicURL from '../../../../shared/publicURL'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * @class HelpCenterList
@@ -92,14 +71,8 @@ class HelpCenterList extends PureComponent {
   }
 
   componentDidMount = async () => {
-    const {
-      glpi,
-      actions,
-      handleMessage,
-    } = this.props
-
     try {
-      const response = await glpi.getAllItems({
+      const response = await this.props.glpi.getAllItems({
         itemtype: itemtype.KnowbaseItem,
       })
 
@@ -114,10 +87,11 @@ class HelpCenterList extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-      actions.setNotification(handleMessage({
+      this.props.handleMessage({
         type: 'alert',
         message: error,
-      }))
+        customErrorRoute: '/app/about/help/error',
+      })
       this.setState({
         isLoading: false,
       })
@@ -125,29 +99,23 @@ class HelpCenterList extends PureComponent {
   }
 
   redirectToArticle = (article) => {
-    const { history } = this.props
-    history.push(`${publicURL}/app/about/help/${article}`)
+    this.props.history.push(`${publicURL}/app/about/help/${article}`)
   }
 
   redirectToFeedBack = () => {
-    const { history } = this.props
-    history.push(`${publicURL}/app/about/help/feedback`)
+    this.props.history.push(`${publicURL}/app/about/help/feedback`)
   }
 
   showAllArticles = () => {
-    const { articles } = this.state
-
-    this.setState({
+    this.setState(prevState => ({
       labelList: I18n.t('about.help_center.all_articles'),
-      list: new WinJS.Binding.List(articles),
-    })
+      list: new WinJS.Binding.List(prevState.articles),
+    }))
   }
 
   filterArticles = (filter) => {
-    const { articles } = this.state
-
     const filteredArticles = []
-    articles.forEach((element) => {
+    this.state.articles.forEach((element) => {
       if (element.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
         filteredArticles.push(element)
       }
@@ -158,16 +126,14 @@ class HelpCenterList extends PureComponent {
   }
 
   handleSuggestionsRequested = (eventObject) => {
-    const { suggestionList } = this.state
-
     const { queryText } = eventObject.detail
     const query = queryText.toLowerCase()
     const suggestionCollection = eventObject.detail.searchSuggestionCollection
 
     if (queryText.length > 0) {
-      for (let i = 0, len = suggestionList.length; i < len; i += 1) {
-        if (suggestionList[i].toLowerCase().indexOf(query) !== -1) {
-          suggestionCollection.appendQuerySuggestion(suggestionList[i])
+      for (let i = 0, len = this.state.suggestionList.length; i < len; i += 1) {
+        if (this.state.suggestionList[i].toLowerCase().indexOf(query) !== -1) {
+          suggestionCollection.appendQuerySuggestion(this.state.suggestionList[i])
         }
       }
     }
@@ -182,15 +148,8 @@ class HelpCenterList extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      list,
-      labelList,
-      layout,
-    } = this.state
-
     return (
-      isLoading
+      this.state.isLoading
         ? <Loading message={`${I18n.t('commons.loading')}...`} />
         : (
           <ContentPane>
@@ -207,7 +166,7 @@ class HelpCenterList extends PureComponent {
                 >
                   <div>
                     <h3 style={{ margin: '10px' }}>
-                      {labelList}
+                      {this.state.labelList}
                     </h3>
                   </div>
                   <div>
@@ -244,15 +203,15 @@ class HelpCenterList extends PureComponent {
               <ReactWinJS.ListView
                 className="list-pane__content win-selectionstylefilled"
                 style={{ height: 'calc(100% - 48px)' }}
-                itemDataSource={list.dataSource}
+                itemDataSource={this.state.list.dataSource}
                 itemTemplate={this.itemRenderer}
-                layout={layout}
+                layout={this.state.layout}
                 selectionMode="single"
                 tapBehavior="directSelect"
               />
 
               {
-              labelList !== I18n.t('about.help_center.recent_articles')
+              this.state.labelList !== I18n.t('about.help_center.recent_articles')
                 ? ''
                 : (
                   <div>
@@ -291,11 +250,9 @@ class HelpCenterList extends PureComponent {
 
 /** HelpCenterList propTypes */
 HelpCenterList.propTypes = {
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(HelpCenterList)))
+export default withGLPI(HelpCenterList)

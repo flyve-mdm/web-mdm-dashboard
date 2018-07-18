@@ -31,32 +31,13 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import routes from './routes'
 import withGLPI from '../../hoc/withGLPI'
-import withHandleMessages from '../../hoc/withHandleMessages'
 import GenerateRoutes from '../../components/GenerateRoutes'
 import UsersList from './components/UsersList'
-import {
-  uiSetNotification,
-} from '../../store/ui/actions'
 import getMode from '../../shared/getMode'
 import calc100PercentMinus from '../../shared/calc100PercentMinus'
 import publicURL from '../../shared/publicURL'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component with the users section
@@ -110,8 +91,6 @@ class Users extends PureComponent {
    * @function handleResize
    */
   handleResize = () => {
-    const { mode } = this.state
-
     const nextMode = getMode()
 
     if (nextMode === 'small') {
@@ -124,7 +103,7 @@ class Users extends PureComponent {
       })
     }
 
-    if (mode !== nextMode) {
+    if (this.state.mode !== nextMode) {
       this.setState({
         mode: nextMode,
       })
@@ -136,35 +115,19 @@ class Users extends PureComponent {
    * @function propsData
    * @return {object}
    */
-  propsData = () => {
-    const {
-      icon,
-      selectionMode,
-      selectedItems,
-      action,
-    } = this.state
-
-    const {
-      actions,
-      history,
-      glpi,
-      handleMessage,
-    } = this.props
-
-    return {
-      icon,
-      selectionMode,
-      selectedItems,
-      action,
-      history,
-      glpi,
-      handleMessage,
-      changeSelectionMode: this.changeSelectionMode,
-      changeSelectedItems: this.changeSelectedItems,
-      setNotification: actions.setNotification,
-      changeAction: this.changeAction,
-    }
-  }
+  propsData = () => ({
+    icon: this.state.icon,
+    selectionMode: this.state.selectionMode,
+    selectedItems: this.state.selectedItems,
+    action: this.state.action,
+    history: this.props.history,
+    glpi: this.props.glpi,
+    handleMessage: this.props.handleMessage,
+    changeSelectionMode: this.changeSelectionMode,
+    changeSelectedItems: this.changeSelectedItems,
+    toast: this.props.toast,
+    changeAction: this.changeAction,
+  })
 
   /**
    * Change selected items
@@ -199,23 +162,15 @@ class Users extends PureComponent {
    * @return {object}
    */
   stylesList = () => {
-    const {
-      selectedItems,
-      selectionMode,
-      itemListPaneWidth,
-      mode,
-    } = this.state
-    const { history } = this.props
-
     const styles = {
-      width: itemListPaneWidth,
+      width: this.state.itemListPaneWidth,
     }
 
-    if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname === `${publicURL}/app/users`)
-        || history.location.pathname === `${publicURL}/app/users`
-        || (history.location.pathname === `${publicURL}/app/users`
-          && selectionMode)) {
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/users`)
+        || this.props.history.location.pathname === `${publicURL}/app/users`
+        || (this.props.history.location.pathname === `${publicURL}/app/users`
+        && this.state.selectionMode)) {
         styles.display = 'inline-block'
       } else {
         styles.display = 'none'
@@ -233,25 +188,17 @@ class Users extends PureComponent {
    * @return {object}
    */
   stylesContent = () => {
-    const {
-      itemListPaneWidth,
-      selectedItems,
-      selectionMode,
-      mode,
-    } = this.state
-    const { history } = this.props
-
-    const validWidth = itemListPaneWidth === '100%' ? 0 : itemListPaneWidth
+    const validWidth = this.state.itemListPaneWidth === '100%' ? 0 : this.state.itemListPaneWidth
     const styles = {
       width: calc100PercentMinus(validWidth),
       height: '100%',
     }
 
-    if (mode === 'small') {
-      if ((selectedItems.length === 0 && history.location.pathname === `${publicURL}/app/users`)
-        || history.location.pathname === `${publicURL}/app/users`
-        || (history.location.pathname === `${publicURL}/app/users`
-          && selectionMode)) {
+    if (this.state.mode === 'small') {
+      if ((this.state.selectedItems.length === 0 && this.props.history.location.pathname === `${publicURL}/app/users`)
+        || this.props.history.location.pathname === `${publicURL}/app/users`
+        || (this.props.history.location.pathname === `${publicURL}/app/users`
+        && this.state.selectionMode)) {
         styles.display = 'none'
       } else {
         styles.display = 'inline-flex'
@@ -268,8 +215,6 @@ class Users extends PureComponent {
    * @function render
    */
   render() {
-    const { match } = this.props
-
     return (
       <div className="flex-block flex-block--with-scroll">
         <div
@@ -288,8 +233,8 @@ class Users extends PureComponent {
           <GenerateRoutes
             key="content"
             routes={routes}
-            rootPath={match.url}
-            data={{ ...this.propsData() }}
+            rootPath={this.props.match.url}
+            {...this.propsData()}
           />
         </div>
       </div>
@@ -302,10 +247,7 @@ Users.propTypes = {
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(Users)))
+export default withGLPI(Users)

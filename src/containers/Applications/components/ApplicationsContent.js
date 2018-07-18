@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import IconItemList from '../../../components/IconItemList'
 import BytesToSize from '../../../shared/bytesToSize'
@@ -52,10 +50,8 @@ export default class ApplicationsContent extends PureComponent {
   constructor(props) {
     super(props)
 
-    const { history } = this.props
-
     this.state = {
-      id: getID(history.location.pathname),
+      id: getID(this.props.history.location.pathname),
       data: undefined,
     }
   }
@@ -74,9 +70,7 @@ export default class ApplicationsContent extends PureComponent {
    * @param {object} prevState
    */
   componentDidUpdate(prevProps, prevState) {
-    const { id } = this.state
-
-    if (id !== prevState.id) {
+    if (this.state.id !== prevState.id) {
       this.handleRefresh()
     }
   }
@@ -106,41 +100,30 @@ export default class ApplicationsContent extends PureComponent {
    * @function handleDelete
    */
   handleDelete = async () => {
-    const {
-      selectedItems,
-      glpi,
-      setNotification,
-      changeAction,
-      changeSelectionMode,
-      handleMessage,
-    } = this.props
-
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
-      const itemListToDelete = selectedItems.map(item => ({
-        id: item['PluginFlyvemdmPackage.id'],
-      }))
+      const itemListToDelete = [{ id: this.state.id }]
 
       this.setState({
         isLoading: true,
       })
       try {
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
           input: itemListToDelete,
           queryString: {
             force_purge: true,
           },
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.elements_successfully_removed'),
           type: 'success',
         })
-        changeAction('reload')
-        changeSelectionMode(false)
+        this.props.changeAction('reload')
+        this.props.changeSelectionMode(false)
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -157,52 +140,36 @@ export default class ApplicationsContent extends PureComponent {
    * @function handleRefresh
    */
   handleRefresh = async () => {
-    const {
-      glpi,
-      setNotification,
-      handleMessage,
-      history,
-    } = this.props
-    const { id } = this.state
-
     try {
+      const { id } = this.state
+      const data = await this.props.glpi.getAnItem({
+        itemtype: itemtype.PluginFlyvemdmPackage,
+        id,
+      })
       this.setState({
-        data: await glpi.getAnItem({
-          itemtype: itemtype.PluginFlyvemdmPackage,
-          id,
-        }),
+        data,
       })
     } catch (error) {
-      setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
-      history.push(`${publicURL}/app/applications`)
+      this.props.history.push(`${publicURL}/app/applications`)
     }
   }
 
   render() {
-    const {
-      isLoading,
-      data,
-      id,
-    } = this.state
-    const {
-      size,
-      history,
-    } = this.props
-
-    if (isLoading || data === undefined) {
+    if (this.state.isLoading || this.state.data === undefined) {
       return (
         <Loading message={`${I18n.t('commons.loading')}...`} />
       )
     }
     let image
-    if (data.icon) {
+    if (this.state.data.icon) {
       image = (
         <IconItemList
-          size={size}
-          image={`data:image/png;base64, ${data.icon}`}
+          size={this.props.size}
+          image={`data:image/png;base64, ${this.state.data.icon}`}
           type="base64"
           backgroundColor="transparent"
         />
@@ -232,23 +199,23 @@ export default class ApplicationsContent extends PureComponent {
             {image}
             <div>
               <div className="item-info__name">
-                {data.alias}
+                {this.state.data.alias}
               </div>
               <div className="item-info__detail">
-                {data.name}
+                {this.state.data.name}
               </div>
               <div className="item-info__detail">
-                {BytesToSize(data.filesize)}
+                {BytesToSize(this.state.data.filesize)}
               </div>
               <span className="item-info__source">
-                {data.source}
+                {this.state.data.source}
               </span>
               <br />
               <div>
                 <span
                   className="editIcon"
                   style={{ marginRight: '20px', fontSize: '20px' }}
-                  onClick={() => history.push(`${publicURL}/app/applications/${id}/edit`)}
+                  onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)}
                   role="button"
                   tabIndex="0"
                 />
@@ -266,7 +233,7 @@ export default class ApplicationsContent extends PureComponent {
         <div className="separator" />
         <Confirmation
           title={I18n.t('applications.delete')}
-          message={data.name}
+          message={this.state.data.name}
           reference={(el) => { this.contentDialog = el }}
         />
       </ContentPane>
@@ -276,17 +243,16 @@ export default class ApplicationsContent extends PureComponent {
 
 /** ApplicationsContent defaultProps */
 ApplicationsContent.defaultProps = {
-  selectedItems: [],
   size: undefined,
 }
 
 /** ApplicationsContent propTypes */
 ApplicationsContent.propTypes = {
-  selectedItems: PropTypes.array,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   size: PropTypes.number,
   history: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }

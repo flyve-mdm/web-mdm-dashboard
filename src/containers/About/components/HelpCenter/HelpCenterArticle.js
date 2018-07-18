@@ -31,33 +31,12 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import Loading from '../../../../components/Loading'
 import withGLPI from '../../../../hoc/withGLPI'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
 import ContentPane from '../../../../components/ContentPane'
 import itemtype from '../../../../shared/itemtype'
 import getID from '../../../../shared/getID'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * @class HelpCenterArticle
@@ -65,33 +44,26 @@ function mapDispatchToProps(dispatch) {
 class HelpCenterArticle extends PureComponent {
   constructor(props) {
     super(props)
-    const { history } = this.props
 
     this.state = {
       article: undefined,
-      id: getID(history.location.pathname, 4),
+      id: getID(this.props.history.location.pathname, 4),
       isLoading: true,
     }
   }
 
   componentDidMount = async () => {
-    const {
-      glpi,
-      actions,
-      handleMessage,
-    } = this.props
-    const { id } = this.state
-
     try {
-      this.setState({
-        article: await glpi.getAnItem({
+      const newState = {
+        article: await this.props.glpi.getAnItem({
           itemtype: itemtype.KnowbaseItem,
-          id,
+          id: this.state.id,
         }),
         isLoading: false,
-      })
+      }
+      this.setState({ ...newState })
     } catch (error) {
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -109,13 +81,8 @@ class HelpCenterArticle extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      article,
-    } = this.state
-
     return (
-      isLoading
+      this.state.isLoading
         ? (
           <div style={{ height: '100%', marginTop: '-80px' }}>
             <Loading message={`${I18n.t('commons.loading')}...`} />
@@ -124,14 +91,14 @@ class HelpCenterArticle extends PureComponent {
         : (
           <ContentPane>
             <h2 style={{ margin: '10px' }}>
-              {article.name}
+              {this.state.article.name}
             </h2>
             <div className="date" style={{ margin: '10px' }}>
-              {article.date}
+              {this.state.article.date}
             </div>
             <div
               style={{ margin: '10px' }}
-              dangerouslySetInnerHTML={{ __html: this.htmlDecode(article.answer) }}
+              dangerouslySetInnerHTML={{ __html: this.htmlDecode(this.state.article.answer) }}
             />
           </ContentPane>
         )
@@ -142,11 +109,12 @@ class HelpCenterArticle extends PureComponent {
 
 /** HelpCenterArticle propTypes */
 HelpCenterArticle.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withGLPI(withHandleMessages(HelpCenterArticle)))
+export default withGLPI(HelpCenterArticle)

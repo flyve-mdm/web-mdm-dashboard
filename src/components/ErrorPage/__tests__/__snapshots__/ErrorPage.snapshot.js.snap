@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorPage renders ErrorPage 1`] = `
+<div
+  className="authentication error"
+  style={
+    Object {
+      "textAlign": "center",
+    }
+  }
+>
+  <section>
+    <figure>
+      <img
+        alt="Flyve MDM Dashboard"
+        src="dashboard.svg"
+      />
+    </figure>
+    <h1>
+      Error
+       
+      404
+    </h1>
+    <h3>
+      Oops! Page not Found.
+    </h3>
+    <p>
+      We could not find the page you were looking for. Meanwhile, you may return to the dashboard.
+    </p>
+  </section>
+  <footer>
+    <a
+      href="https://flyve-mdm.com/privacy-policy/"
+    >
+      Terms and Conditions
+    </a>
+    <br />
+    <span>
+      © 2017 - 2018 Teclib'.
+    </span>
+    <br />
+  </footer>
+</div>
+`;

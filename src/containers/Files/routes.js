@@ -27,13 +27,12 @@
  */
 
 /** import dependencies */
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../shared/i18n'
 import EmptyMessage from '../../components/EmptyMessage'
 import FilesAdd from './components/FilesAdd'
 import FilesEdit from './components/FilesEdit'
 import FilesContent from './components/FilesContent'
+import ErrorPage from '../../components/ErrorPage'
 
 /**
  * Represents all routes from Files section
@@ -44,6 +43,12 @@ const routes = [{
   path: '/',
   name: I18n.t('commons.no_selection'),
   component: EmptyMessage,
+  exact: true,
+},
+{
+  path: '/error',
+  name: I18n.t('commons.error'),
+  component: ErrorPage,
   exact: true,
 },
 {

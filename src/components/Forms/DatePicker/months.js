@@ -35,8 +35,8 @@ import monthsList from './monthsList.json'
  * @return {component} List of options for a select
  */
 export default () => {
-  let months = []
-  monthsList.forEach(month => {
+  const months = []
+  monthsList.forEach((month) => {
     months.push((
       <option value={month} key={`month${month}`}>
         { month }

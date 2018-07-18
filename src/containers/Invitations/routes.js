@@ -27,10 +27,9 @@
  */
 
 /** import dependencies */
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../shared/i18n'
 import EmptyMessage from '../../components/EmptyMessage'
+import ErrorPage from '../../components/ErrorPage'
 import InvitationsPendingPage from './components/InvitationsPendingPage'
 import Enroll from '../Devices/components/Enroll'
 
@@ -43,6 +42,12 @@ const routes = [{
   path: '/',
   name: I18n.t('commons.no_selection'),
   component: EmptyMessage,
+  exact: true,
+},
+{
+  path: '/error',
+  name: I18n.t('commons.error'),
+  component: ErrorPage,
   exact: true,
 },
 {

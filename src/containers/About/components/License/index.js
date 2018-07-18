@@ -30,32 +30,12 @@ import React, {
   PureComponent,
 } from 'react'
 import ReactMarkdown from 'react-markdown'
-import {
-  I18n,
-} from 'react-i18nify'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
 import PropTypes from 'prop-types'
+import I18n from '../../../../shared/i18n'
 import ContentPane from '../../../../components/ContentPane'
 import Loading from '../../../../components/Loading'
 import EmptyMessage from '../../../../components/EmptyMessage'
 import withHandleMessages from '../../../../hoc/withHandleMessages'
-import {
-  uiSetNotification,
-} from '../../../../store/ui/actions'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch),
-  }
-  return {
-    actions,
-  }
-}
 
 /**
  * Component to show the license information
@@ -83,12 +63,7 @@ class License extends PureComponent {
         license: await response.text(),
       })
     } catch (error) {
-      const {
-        actions,
-        handleMessage,
-      } = this.props
-
-      actions.setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
@@ -103,11 +78,9 @@ class License extends PureComponent {
    * @function render
    */
   render() {
-    const { license } = this.state
-
     let renderComponent
-    if (license) {
-      if (license === 'no data') {
+    if (this.state.license) {
+      if (this.state.license === 'no data') {
         renderComponent = (
           <EmptyMessage message={I18n.t('commons.no_data')} />
         )
@@ -118,7 +91,7 @@ class License extends PureComponent {
               {I18n.t('about.license.title')}
             </h2>
             <div className="about-pane" style={{ margin: '10px' }}>
-              <ReactMarkdown source={license} />
+              <ReactMarkdown source={this.state.license} />
             </div>
           </ContentPane>
         )
@@ -135,11 +108,8 @@ class License extends PureComponent {
 
 /** License propsTypes */
 License.propTypes = {
-  actions: PropTypes.object.isRequired,
+  toast: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withHandleMessages(License))
+export default withHandleMessages(License)

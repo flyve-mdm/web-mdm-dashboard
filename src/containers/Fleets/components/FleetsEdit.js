@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import EditMultiple from '../../../components/EditMultiple'
 import itemtype from '../../../shared/itemtype'
 
@@ -68,25 +66,15 @@ class FleetsEdit extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      selectedItems,
-      changeAction,
-      changeSelectionMode,
-      history,
-      setNotification,
-      glpi,
-    } = this.props
-    const { FieldList } = this.state
-
     return (
       <EditMultiple
-        selectedItems={selectedItems}
-        FieldList={FieldList}
-        changeAction={changeAction}
-        changeSelectionMode={changeSelectionMode}
-        history={history}
-        setNotification={setNotification}
-        glpi={glpi}
+        selectedItems={this.props.selectedItems}
+        FieldList={this.state.FieldList}
+        changeAction={this.props.changeAction}
+        changeSelectionMode={this.props.changeSelectionMode}
+        history={this.props.history}
+        toast={this.props.toast}
+        glpi={this.props.glpi}
         request={{
           id: `${itemtype.PluginFlyvemdmFleet}.id`,
           itemtype: itemtype.PluginFlyvemdmFleet,
@@ -105,7 +93,7 @@ FleetsEdit.propTypes = {
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  setNotification: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 

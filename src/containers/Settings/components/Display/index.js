@@ -32,30 +32,10 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import {
-  bindActionCreators,
-} from 'redux'
-import {
-  connect,
-} from 'react-redux'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../shared/i18n'
 import animationsWinJs from '../../../../shared/animationsWinJs'
-import {
-  changeLanguage,
-} from '../../../../store/i18n/actions'
 import ContentPane from '../../../../components/ContentPane'
-import tractionsList from '../../../../hoc/withI18NTranslation/i18n/languages'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    changeLanguage: bindActionCreators(changeLanguage, dispatch),
-  }
-  return {
-    actions,
-  }
-}
+import languageList from '../../../../shared/i18n/languages'
 
 /**
  * Component with the display section
@@ -87,10 +67,8 @@ class Display extends PureComponent {
    * @function componentDidUpdate
    */
   componentDidUpdate() {
-    const { animations } = this.state
-
     localStorage.setItem('display', JSON.stringify(this.state))
-    animationsWinJs(animations)
+    animationsWinJs(this.state.animations)
   }
 
   /**
@@ -110,7 +88,6 @@ class Display extends PureComponent {
    * @function render
    */
   render() {
-    const { actions } = this.props
     const {
       animations,
       devicesCurrentlyManaged,
@@ -144,15 +121,12 @@ class Display extends PureComponent {
               paddingTop: 10,
             }}
           >
-            <span className="language__span btn" style={{ margin: 0 }}>
-              {I18n.t('commons.language')}
-              <select
-                className="language__select"
-                onChange={event => actions.changeLanguage(event.target.value)}
-              >
-                {tractionsList()}
-              </select>
-            </span>
+            <select
+              value={this.props.languageCurrent}
+              onChange={event => this.props.changeLanguage(event.target.value)}
+            >
+              {languageList()}
+            </select>
           </div>
         </div>
 
@@ -299,7 +273,8 @@ class Display extends PureComponent {
 }
 
 Display.propTypes = {
-  actions: PropTypes.object.isRequired,
+  changeLanguage: PropTypes.func.isRequired,
+  languageCurrent: PropTypes.string.isRequired,
 }
 
-export default connect(null, mapDispatchToProps)(Display)
+export default Display

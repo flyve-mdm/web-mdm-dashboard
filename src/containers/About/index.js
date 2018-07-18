@@ -41,18 +41,14 @@ import GenerateRoutes from '../../components/GenerateRoutes'
  */
 class About extends PureComponent {
   render() {
-    const {
-      match,
-      history,
-    } = this.props
-
     return (
       <LayoutListWithNavLinks
         routes={routes}
-        rootPath={match.url}
-        history={history}
+        rootPath={this.props.match.url}
+        history={this.props.history}
+        languageCurrent={this.props.languageCurrent}
       >
-        <GenerateRoutes routes={routes} rootPath={match.url} />
+        <GenerateRoutes routes={routes} rootPath={this.props.match.url} toast={this.props.toast} handleMessage={this.props.handleMessage} />
       </LayoutListWithNavLinks>
     )
   }
@@ -60,8 +56,11 @@ class About extends PureComponent {
 
 /** About propTypes */
 About.propTypes = {
+  toast: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  languageCurrent: PropTypes.string.isRequired,
 }
 
 export default About

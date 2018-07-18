@@ -38,12 +38,10 @@ import PropTypes from 'prop-types'
  */
 class FilesItemList extends PureComponent {
   render() {
-    const { itemList } = this.props
-
     return (
       <div style={{ display: 'inline-block' }}>
         <div className="list-pane__name">
-          {itemList['PluginFlyvemdmFile.name']}
+          {this.props.itemList['PluginFlyvemdmFile.name']}
         </div>
       </div>
     )

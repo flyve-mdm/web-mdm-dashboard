@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../../../shared/i18n'
 import itemtype from '../../../../../shared/itemtype'
 import Loading from '../../../../../components/Loading'
 import EmptyMessage from '../../../../../components/EmptyMessage'
@@ -59,14 +57,9 @@ export default class Applications extends PureComponent {
   }
 
   componentDidMount = async () => {
-    const {
-      glpi,
-      id,
-    } = this.props
-
     try {
-      const software = await glpi.getAnItem({
-        id,
+      const software = await this.props.glpi.getAnItem({
+        id: this.props.id,
         itemtype: itemtype.Software,
       })
       this.setState({
@@ -74,6 +67,11 @@ export default class Applications extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
+      this.props.toast.setNotification(this.props.handleMessage({
+        type: 'alert',
+        message: error,
+        displayErrorPage: false,
+      }))
       this.setState({
         isLoading: false,
       })
@@ -81,57 +79,48 @@ export default class Applications extends PureComponent {
   }
 
   render() {
-    const {
-      isLoading,
-      software,
-    } = this.state
-    const {
-      id,
-      selectApplication,
-    } = this.props
-
     return (
-      isLoading
+      this.state.isLoading
         ? <Loading message={`${I18n.t('commons.loading')}...`} />
         : (
-          software
+          this.state.software
             ? (
               <React.Fragment>
                 <h3>
-                  {`${I18n.t('commons.application')} ${id}`}
+                  {`${I18n.t('commons.application')} ${this.props.id}`}
                 </h3>
                 <Input
                   label={I18n.t('commons.name')}
                   name="name"
                   type="text"
-                  value={validateData(software.name)}
+                  value={validateData(this.state.software.name)}
                   disabled
                 />
                 <Input
                   label={I18n.t('commons.date_creation')}
                   name="comment"
                   type="date"
-                  value={validateData(toDateInputValue(software.date_creation))}
+                  value={validateData(toDateInputValue(this.state.software.date_creation))}
                   disabled
                 />
                 <Input
                   label={I18n.t('commons.date_mod')}
                   name="comment"
                   type="date"
-                  value={validateData(toDateInputValue(software.date_mod))}
+                  value={validateData(toDateInputValue(this.state.software.date_mod))}
                   disabled
                 />
                 <TextArea
                   label={I18n.t('commons.comments')}
                   name="comment"
                   type="textArea"
-                  value={validateData(software.comment)}
+                  value={validateData(this.state.software.comment)}
                   disabled
                 />
                 <button
                   className="btn btn--secondary"
                   onClick={() => {
-                    selectApplication(undefined)
+                    this.props.selectApplication(undefined)
                   }}
                   type="button"
                 >
@@ -151,4 +140,6 @@ Applications.propTypes = {
   id: PropTypes.number.isRequired,
   glpi: PropTypes.object.isRequired,
   selectApplication: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }

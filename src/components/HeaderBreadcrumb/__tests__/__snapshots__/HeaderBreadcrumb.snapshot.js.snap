@@ -10,6 +10,8 @@ exports[`HeaderBreadcrumb renders HeaderBreadcrumb 1`] = `
     <span
       className="burgerIcon"
       onClick={[Function]}
+      role="button"
+      tabIndex="0"
     />
   </div>
   <nav
@@ -20,7 +22,7 @@ exports[`HeaderBreadcrumb renders HeaderBreadcrumb 1`] = `
         href="/app"
         onClick={[Function]}
       >
-        dashboard
+        Dashboard
       </a>
     </span>
     <span

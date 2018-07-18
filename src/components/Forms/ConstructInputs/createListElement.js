@@ -27,6 +27,7 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import Select from '../Select'
 import DatePicker from '../DatePicker'
 import TextArea from '../TextArea'
@@ -43,18 +44,18 @@ import Input from '../Input'
 const createListElement = ({
   icon,
   elements,
-  index
+  index,
 }) => {
-  let style = icon ? {
+  const style = icon ? {
     marginLeft: 30,
-    overflow: 'hidden'
+    overflow: 'hidden',
   } : {
-    overflow: 'hidden'
+    overflow: 'hidden',
   }
   return (
-    <div className="froms__row" style={style} key={index}>
+    <div className="froms__row" style={style} key={`fromsRow-${index.toString()}`}>
       {
-        elements.map((element, index2) => {
+        elements.map((element) => {
           let renderElement
           if (element.type === 'select') {
             renderElement = (
@@ -117,6 +118,16 @@ const createListElement = ({
       }
     </div>
   )
+}
+
+createListElement.propTypes = {
+  icon: PropTypes.string,
+  elements: PropTypes.array.isRequired,
+  index: PropTypes.number.isRequired,
+}
+
+createListElement.defaultProps = {
+  icon: null,
 }
 
 export default createListElement

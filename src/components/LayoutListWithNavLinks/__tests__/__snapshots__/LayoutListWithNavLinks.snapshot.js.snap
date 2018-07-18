@@ -14,7 +14,7 @@ exports[`LayoutListWithNavLinks renders LayoutListWithNavLinks 1`] = `
         <a
           aria-current={null}
           className={undefined}
-          href="test//test"
+          href="/test"
           onClick={[Function]}
           style={undefined}
         >

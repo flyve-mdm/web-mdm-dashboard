@@ -29,29 +29,13 @@
 /** import dependencies */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { I18n } from 'react-i18nify'
+import I18n from '../../shared/i18n'
 import Loading from '../../components/Loading'
 import ConstructInputs from '../../components/Forms'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
-import { fetchResetPassword } from '../../store/authentication/actions'
 import publicURL from '../../shared/publicURL'
 import ErrorValidation from '../../components/ErrorValidation'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    fetchResetPassword: bindActionCreators(fetchResetPassword, dispatch),
-  }
-  return { actions }
-}
-
-function mapStateToProps(state) {
-  return {
-    isLoading: state.ui.loading,
-  }
-}
 
 /**
  * Component with the reset password section
@@ -62,17 +46,13 @@ class ResetPassword extends PureComponent {
   /** @constructor */
   constructor(props) {
     super(props)
-    const {
-      location,
-      history,
-    } = this.props
 
-    const { search } = location
+    const { search } = this.props.location
     const params = new URLSearchParams(search)
     const token = params.get('token')
 
     if (!token) {
-      history.push(`${publicURL}/`)
+      this.props.history.push(`${publicURL}/`)
     }
 
     this.state = {
@@ -91,11 +71,8 @@ class ResetPassword extends PureComponent {
    * @return {component}
    */
   createRenderElament = () => {
-    const { isResetSent } = this.state
-    const { history } = this.props
-
     let element
-    if (!isResetSent) {
+    if (!this.state.isResetSent) {
       const reset = this.buildDataArray()
       element = (
         <React.Fragment>
@@ -123,7 +100,7 @@ class ResetPassword extends PureComponent {
           <button
             className="win-button"
             type="button"
-            onClick={() => history.push(`${publicURL}/`)}
+            onClick={() => this.props.history.push(`${publicURL}/`)}
           >
             {I18n.t('forgot_password.go_home')}
           </button>
@@ -138,13 +115,6 @@ class ResetPassword extends PureComponent {
    * @function handleResetPassword
    */
   handleResetPassword = () => {
-    const {
-      email,
-      token,
-      password,
-    } = this.state
-    const { actions } = this.props
-
     const user = this.buildDataArray()
     let isCorrect = true
 
@@ -161,11 +131,20 @@ class ResetPassword extends PureComponent {
       this.setState({
         isResetSent: true,
       })
-      actions.fetchResetPassword({
-        email,
-        token,
-        newPassword: password,
+      this.props.auth.fetchResetPassword({
+        email: this.state.email,
+        token: this.state.token,
+        newPassword: this.state.password,
       })
+        .then((response) => {
+          this.props.toast.setNotification(response)
+        })
+        .catch((error) => {
+          this.props.toast.setNotification(this.props.handleMessage({
+            type: 'alert',
+            message: error,
+          }))
+        })
     } else {
       this.setState({
         forceValidation: true,
@@ -190,21 +169,13 @@ class ResetPassword extends PureComponent {
    * @return {array}
    */
   buildDataArray = () => {
-    const {
-      email,
-      forceValidation,
-      password,
-      configurationPassword,
-      passwordConfirmation,
-    } = this.state
-
     const dataArray = {
       resetInformation: [
         [{
           label: I18n.t('commons.email'),
           type: 'text',
           name: 'email',
-          value: email,
+          value: this.state.email,
           placeholder: I18n.t('commons.email'),
           function: this.changeState,
           disabled: false,
@@ -215,13 +186,13 @@ class ResetPassword extends PureComponent {
             isRequired: true,
             isEmail: true,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         {
           label: I18n.t('commons.password'),
           type: 'password',
           name: 'password',
-          value: password,
+          value: this.state.password,
           placeholder: I18n.t('commons.password'),
           function: this.changeState,
           disabled: false,
@@ -230,15 +201,15 @@ class ResetPassword extends PureComponent {
           },
           parametersToEvaluate: {
             isRequired: true,
-            ...configurationPassword,
+            ...this.state.configurationPassword,
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         {
           label: I18n.t('commons.password_confirmation'),
           type: 'password',
           name: 'passwordConfirmation',
-          value: passwordConfirmation,
+          value: this.state.passwordConfirmation,
           placeholder: I18n.t('commons.password_confirmation'),
           function: this.changeState,
           disabled: false,
@@ -247,13 +218,13 @@ class ResetPassword extends PureComponent {
           },
           parametersToEvaluate: {
             isRequired: true,
-            ...configurationPassword,
+            ...this.state.configurationPassword,
             isEqualTo: {
-              value: password,
+              value: this.state.password,
               message: I18n.t('commons.passwords_not_match'),
             },
           },
-          forceValidation,
+          forceValidation: this.state.forceValidation,
         },
         ],
       ],
@@ -267,8 +238,7 @@ class ResetPassword extends PureComponent {
    * @function render
    */
   render() {
-    const { isLoading } = this.props
-    if (isLoading) {
+    if (this.props.auth.isLoading) {
       return (
         <div style={{ height: '140px' }}>
           <Loading message={`${I18n.t('commons.sending')}...`} />
@@ -290,14 +260,15 @@ ResetPassword.defaultProps = {
 }
 
 ResetPassword.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  auth: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 }
 
-export default withAuthenticationLayout(
-  connect(mapStateToProps, mapDispatchToProps)(withHandleMessages(ResetPassword)), {
-    centerContent: true,
-  },
-)
+export default withAuthenticationLayout((withHandleMessages(ResetPassword)), {
+  centerContent: true,
+})

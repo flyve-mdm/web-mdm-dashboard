@@ -34,8 +34,6 @@ import withAsyncComponent from '../hoc/withAsyncComponent'
  * @constant
  * @type {component}
  */
-const asyncForgotPassword = withAsyncComponent(() => {
-  return import ('../containers/ForgotPassword')
-})
+const asyncForgotPassword = withAsyncComponent(() => import('../containers/ForgotPassword'))
 
 export default asyncForgotPassword

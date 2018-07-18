@@ -27,7 +27,7 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import IconWithPopper from './IconWithPopper'
@@ -35,16 +35,14 @@ import ImgWithPopper from './ImgWithPopper'
 import SpanWithPopper from './SpanWithPopper'
 import {
   ScrollSync,
-  ScrollSyncPanel
+  ScrollSyncPanel,
 } from '../ScrollSync'
-import withGLPI from '../../hoc/withGLPI'
-import {
-  I18n
-} from "react-i18nify"
+import I18n from '../../shared/i18n'
 import publicURL from '../../shared/publicURL'
 import {
-  splitview
+  splitview,
 } from '../../shared/animationsWinJs'
+import logo from '../../assets/images/dashboard.svg'
 
 /**
  * Component with side menu
@@ -52,14 +50,6 @@ import {
  * @extends PureComponent
  */
 class SplitView extends PureComponent {
-  /**
-   * Close session
-   * @function logout
-   */
-  logout = () => {
-    this.props.logout()
-  }
-
   /**
    * Run 'splitview' animation
    * @function componentDidUpdate
@@ -71,13 +61,21 @@ class SplitView extends PureComponent {
   }
 
   /**
+   * Close session
+   * @function logout
+   */
+  logout = () => {
+    this.props.logout()
+  }
+
+  /**
    * Render component
    * @function render
    */
   render() {
     this.props.handleSetTimeOut()
 
-    let toRender = ""
+    let toRender = ''
 
     if (this.props.mode !== 'small' || this.props.expanded) {
       toRender = (
@@ -91,50 +89,50 @@ class SplitView extends PureComponent {
                       <section className="splitview-wrapped-navbar-wrapped-top__section">
                         <ImgWithPopper
                           to={`${publicURL}/app`}
-                          alt='Flyve MDM Dashboard'
-                          img={require('../../assets/images/dashboard.svg')}
+                          alt="Flyve MDM Dashboard"
+                          img={logo}
                           title={I18n.t('commons.dashboard')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/devices`}
-                          iconName='deviceIcon'
+                          iconName="deviceIcon"
                           title={I18n.t('commons.device')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/invitations`}
-                          iconName='emailIcon'
+                          iconName="emailIcon"
                           title={I18n.t('commons.invitations')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/fleets`}
-                          iconName='goToStartIcon'
+                          iconName="goToStartIcon"
                           title={I18n.t('commons.fleets')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/files`}
-                          iconName='filesIcon'
+                          iconName="filesIcon"
                           title={I18n.t('commons.files')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/applications`}
-                          iconName='switchAppsIcon'
+                          iconName="switchAppsIcon"
                           title={I18n.t('commons.applications')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/users`}
-                          iconName='peopleIcon'
+                          iconName="peopleIcon"
                           title={I18n.t('commons.users')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/search`}
-                          iconName='searchIcon'
+                          iconName="searchIcon"
                           title={I18n.t('commons.search_or_other')}
                           disabled={this.props.expanded}
                         />
@@ -142,19 +140,19 @@ class SplitView extends PureComponent {
                       <section className="splitview-wrapped-navbar-wrapped-bottom__section">
                         <IconWithPopper
                           to={`${publicURL}/app/settings`}
-                          iconName='settingsIcon'
+                          iconName="settingsIcon"
                           title={I18n.t('commons.setting_flyve_mdm')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/about`}
-                          iconName='contactInfoIcon'
+                          iconName="contactInfoIcon"
                           title={I18n.t('commons.about_flyve_mdm')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           click={this.logout}
-                          iconName='PowerButtonIcon'
+                          iconName="PowerButtonIcon"
                           title={I18n.t('commons.logout')}
                           disabled={this.props.expanded}
                         />
@@ -162,12 +160,13 @@ class SplitView extends PureComponent {
                     </div>
                   </ScrollSyncPanel>
                 </nav>
-                { this.props.expanded ?
-                  (
+                { this.props.expanded
+                  ? (
                     <nav
                       className="splitview-wrapped__navbar"
                       onClick={() => this.props.handleContract()}
-                      ref={nav => this.splitview = nav}
+                      ref={(nav) => { this.splitview = nav }}
+                      role="presentation"
                     >
                       <ScrollSyncPanel>
                         <div className="splitview-wrapper-wrapper__div --large --end">
@@ -189,7 +188,7 @@ class SplitView extends PureComponent {
                         </div>
                       </ScrollSyncPanel>
                     </nav>
-                  ) : ""
+                  ) : ''
                 }
               </div>
             </div>
@@ -203,13 +202,12 @@ class SplitView extends PureComponent {
 }
 
 SplitView.propTypes = {
+  logout: PropTypes.func.isRequired,
   expanded: PropTypes.bool.isRequired,
   contract: PropTypes.bool.isRequired,
-  handleExpand: PropTypes.func.isRequired,
   handleContract: PropTypes.func.isRequired,
   handleSetTimeOut: PropTypes.func.isRequired,
-  handleToggleExpand: PropTypes.func.isRequired,
-  glpi: PropTypes.object.isRequired
+  mode: PropTypes.string.isRequired,
 }
 
-export default withGLPI(SplitView)
+export default SplitView

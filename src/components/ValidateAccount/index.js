@@ -27,39 +27,20 @@
  */
 
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
+import PropTypes from 'prop-types'
 import {
-  Link
+  Link,
 } from 'react-router-dom'
 import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import withGLPI from '../../hoc/withGLPI'
-import {
-  uiSetNotification
-} from '../../store/ui/actions'
-import {
-  bindActionCreators
-} from 'redux'
-import {
-  connect
-} from 'react-redux'
 import publicURL from '../../shared/publicURL'
 import itemtype from '../../shared/itemtype'
-import {
-  I18n
-} from "react-i18nify"
-import Loading from '../../components/Loading'
+import I18n from '../../shared/i18n'
+import Loading from '../Loading'
 import appConfig from '../../../public/config.json'
-
-function mapDispatchToProps(dispatch) {
-  const actions = {
-    setNotification: bindActionCreators(uiSetNotification, dispatch)
-  }
-  return {
-    actions
-  }
-}
 
 /**
  * Component with page of 'validate account'
@@ -72,7 +53,7 @@ class ValidateAccount extends PureComponent {
     super(props)
     this.state = {
       isValidated: false,
-      isLoading: false
+      isLoading: false,
     }
   }
 
@@ -81,15 +62,15 @@ class ValidateAccount extends PureComponent {
    * @function componentDidMount
    */
   componentDidMount() {
-    let path = this.props.location.pathname.replace("/validateAccount/", "&validateAccount=")
-    path = path.replace("/validation/", "&validation=")
+    let path = this.props.location.pathname.replace('/validateAccount/', '&validateAccount=')
+    path = path.replace('/validation/', '&validation=')
     const params = new URLSearchParams(path)
     const account = params.get('validateAccount')
     const validation = params.get('validation')
 
     if (account && validation) {
       this.setState({
-        isLoading: true
+        isLoading: true,
       })
       this.requestValidation(account, validation)
     }
@@ -105,20 +86,20 @@ class ValidateAccount extends PureComponent {
   requestValidation = async (account, validation) => {
     try {
       const session = await this.props.glpi.initSessionByUserToken({
-        userToken: appConfig.demoToken
+        userToken: appConfig.demoToken,
       })
       this.props.glpi.sessionToken = session.session_token
       const response = await this.props.glpi.updateItem({
         itemtype: itemtype.PluginFlyvemdmdemoAccountvalidation,
         id: account,
         input: {
-          _validate: validation
-        }
+          _validate: validation,
+        },
       })
       let isValidated = false
 
       if (Array.isArray(response)) {
-        for (let item of response) {
+        for (const item of response) {
           if (item[account]) {
             isValidated = true
             break
@@ -128,17 +109,16 @@ class ValidateAccount extends PureComponent {
 
       this.setState({
         isLoading: false,
-        isValidated
+        isValidated,
       })
-
     } catch (error) {
-      this.props.actions.setNotification(this.props.handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'warning',
-        message: error
+        message: error,
       }))
       this.setState({
         isLoading: false,
-        isValidated: false
+        isValidated: false,
       })
     }
   }
@@ -155,45 +135,50 @@ class ValidateAccount extends PureComponent {
           <Loading message={`${I18n.t('commons.loading')}...`} />
         </div>
       )
+    } else if (this.state.isValidated) {
+      renderComponent = (
+        <React.Fragment>
+          <h2>
+            {I18n.t('validate_account.title')}
+          </h2>
+          <p>
+            {I18n.t('validate_account.is_validated')}
+            <br />
+          </p>
+          <p>
+            <Link to={`${publicURL}/`}>
+              {I18n.t('commons.sign_in')}
+            </Link>
+          </p>
+        </React.Fragment>
+      )
     } else {
-      if (this.state.isValidated) {
-        renderComponent = (
-          <React.Fragment>
-            <h2>
-              {I18n.t('validate_account.title')}
-            </h2>
-            <p>
-              {I18n.t('validate_account.is_validated')}
-              <br />
-            </p>
-            <p>
-              <Link to={`${publicURL}/`}>{I18n.t('commons.sign_in')}</Link>
-            </p>
-          </React.Fragment>
-        )
-
-      } else {
-        renderComponent = (
-          <React.Fragment>
-            <h2>
-              {I18n.t('validate_account.title')}
-            </h2>
-            <p>
-              {I18n.t('validate_account.message')}
-              <br />
-            </p>
-          </React.Fragment>
-        )
-      }
+      renderComponent = (
+        <React.Fragment>
+          <h2>
+            {I18n.t('validate_account.title')}
+          </h2>
+          <p>
+            {I18n.t('validate_account.message')}
+            <br />
+          </p>
+        </React.Fragment>
+      )
     }
 
     return renderComponent
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(withAuthenticationLayout(withGLPI(withHandleMessages(ValidateAccount)), {
-  centerContent: true
-}))
+ValidateAccount.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  glpi: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
+}
+
+export default withAuthenticationLayout(withGLPI(withHandleMessages(ValidateAccount)), {
+  centerContent: true,
+})

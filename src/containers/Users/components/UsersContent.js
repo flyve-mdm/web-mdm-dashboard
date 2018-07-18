@@ -31,9 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n,
-} from 'react-i18nify'
+import I18n from '../../../shared/i18n'
 import ContentPane from '../../../components/ContentPane'
 import IconItemList from '../../../components/IconItemList'
 import Confirmation from '../../../components/Confirmation'
@@ -52,10 +50,8 @@ class UsersContent extends PureComponent {
   constructor(props) {
     super(props)
 
-    const { history } = this.props
-
     this.state = {
-      id: getID(history.location.pathname),
+      id: getID(this.props.history.location.pathname),
       data: undefined,
       emails: [],
     }
@@ -76,8 +72,7 @@ class UsersContent extends PureComponent {
    * @param {object} prevState
    */
   componentDidUpdate(prevProps, prevState) {
-    const { id } = this.state
-    if (prevState.id !== id) {
+    if (prevState.id !== this.state.id) {
       this.handleRefresh()
     }
   }
@@ -110,42 +105,27 @@ class UsersContent extends PureComponent {
   handleDelete = async () => {
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) {
-      const {
-        setNotification,
-        handleMessage,
-        selectedItems,
-      } = this.props
-
-      const itemListToDelete = selectedItems.map(item => ({
-        id: item['User.id'],
-      }))
+      const itemListToDelete = [{ id: this.state.id }]
 
       this.setState({
         isLoading: true,
       })
 
       try {
-        const {
-          glpi,
-          changeAction,
-          changeSelectionMode,
-          history,
-        } = this.props
-
-        await glpi.deleteItem({
+        await this.props.glpi.deleteItem({
           itemtype: itemtype.User,
           input: itemListToDelete,
         })
-        setNotification({
+        this.props.toast.setNotification({
           title: I18n.t('commons.success'),
           body: I18n.t('notifications.elements_successfully_removed'),
           type: 'success',
         })
-        changeAction('reload')
-        changeSelectionMode(false)
-        history.push(`${publicURL}/app/users`)
+        this.props.changeAction('reload')
+        this.props.changeSelectionMode(false)
+        this.props.history.push(`${publicURL}/app/users`)
       } catch (error) {
-        setNotification(handleMessage({
+        this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
         }))
@@ -160,15 +140,12 @@ class UsersContent extends PureComponent {
    */
   handleRefresh = async () => {
     try {
-      const { glpi } = this.props
       const { id } = this.state
-
-      const user = await glpi.getAnItem({
+      const user = await this.props.glpi.getAnItem({
         itemtype: itemtype.User,
         id,
       })
-
-      const emails = await glpi.getSubItems({
+      const emails = await this.props.glpi.getSubItems({
         itemtype: itemtype.User,
         id,
         subItemtype: 'UserEmail',
@@ -178,17 +155,11 @@ class UsersContent extends PureComponent {
         emails,
       })
     } catch (error) {
-      const {
-        handleMessage,
-        setNotification,
-        history,
-      } = this.props
-
-      setNotification(handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
       }))
-      history.push(`${publicURL}/app/users`)
+      this.props.history.push(`${publicURL}/app/users`)
     }
   }
 
@@ -197,22 +168,12 @@ class UsersContent extends PureComponent {
    * @function render
    */
   render() {
-    const {
-      data,
-      emails,
-      id,
-    } = this.state
-    const {
-      selectedItems,
-      history,
-    } = this.props
-
     let renderComponent
-    if (!data) {
+    if (!this.state.data) {
       renderComponent = <Loading message={`${I18n.t('commons.loading')}...`} />
     } else {
-      const imageProfile = data.picture
-        ? data.picture
+      const imageProfile = this.state.data.picture
+        ? this.state.data.picture
         : 'profile.png'
       renderComponent = (
         <React.Fragment>
@@ -222,12 +183,12 @@ class UsersContent extends PureComponent {
               <div>
                 <div className="item-info__name">
                   <b>
-                    {data.name}
+                    {this.state.data.name}
                   </b>
                 </div>
 
                 <span className="item-info__message">
-                  {data.realname}
+                  {this.state.data.realname}
                 </span>
 
                 <br />
@@ -235,7 +196,7 @@ class UsersContent extends PureComponent {
                 <span className="item-info__source">
                   {I18n.t('commons.joined')}
                   {' '}
-                  {data.date_creation}
+                  {this.state.data.date_creation}
                 </span>
 
                 <br />
@@ -243,14 +204,14 @@ class UsersContent extends PureComponent {
                 <span
                   className="editIcon"
                   style={{ padding: '0 10px', fontSize: '20px' }}
-                  onClick={() => history.push(`${publicURL}/app/users/${id}/edit`)}
+                  onClick={() => this.props.history.push(`${publicURL}/app/users/${this.state.id}/edit`)}
                   role="button"
                   tabIndex="0"
                 />
 
                 <span
                   className="deleteIcon"
-                  style={{ padding: '0 10px', fontSize: '20px', display: selectedItems.length === 0 ? 'none' : '' }}
+                  style={{ padding: '0 10px', fontSize: '20px' }}
                   onClick={this.handleDelete}
                   role="button"
                   tabIndex="0"
@@ -265,39 +226,39 @@ class UsersContent extends PureComponent {
               <li>
                 <span className="phoneIcon" />
                 <div>
-                  <a href={data.mobile ? `tel: ${data.mobile}` : '#call'}>
+                  <a href={this.state.data.mobile ? `tel: ${this.state.data.mobile}` : '#call'}>
                     {I18n.t('commons.call_mobile')}
                   </a>
                   <div>
-                    {data.mobile ? data.mobile : I18n.t('commons.not_available')}
+                    {this.state.data.mobile ? this.state.data.mobile : I18n.t('commons.not_available')}
                   </div>
                 </div>
               </li>
               <li>
                 <span className="phoneIcon" />
                 <div>
-                  <a href={data.phone2 ? `tel: ${data.phone2}` : '#call'}>
+                  <a href={this.state.data.phone2 ? `tel: ${this.state.data.phone2}` : '#call'}>
                     {I18n.t('commons.call_work')}
                   </a>
                   <div>
-                    {data.phone2 ? data.phone2 : I18n.t('commons.not_available')}
+                    {this.state.data.phone2 ? this.state.data.phone2 : I18n.t('commons.not_available')}
                   </div>
                 </div>
               </li>
               <li>
                 <span className="emailIcon" />
                 <div>
-                  <a href={emails.length > 0 ? `mailto: ${emails[0].email}` : '#email'}>
+                  <a href={this.state.emails.length > 0 ? `mailto: ${this.state.emails[0].email}` : '#email'}>
                     {I18n.t('commons.email')}
                   </a>
                   <div>
-                    {emails.length > 0 ? emails[0].email : I18n.t('commons.not_available')}
+                    {this.state.emails.length > 0 ? this.state.emails[0].email : I18n.t('commons.not_available')}
                   </div>
                 </div>
               </li>
             </ul>
           </div>
-          <Confirmation title={I18n.t('users.delete_one')} message={data.name} reference={(el) => { this.contentDialog = el }} />
+          <Confirmation title={I18n.t('users.delete_one')} message={this.state.data.name} reference={(el) => { this.contentDialog = el }} />
         </React.Fragment>
       )
     }
@@ -309,16 +270,14 @@ class UsersContent extends PureComponent {
   }
 }
 
-UsersContent.defaultProps = {
-  selectedItems: null,
-}
-
 UsersContent.propTypes = {
-  selectedItems: PropTypes.array,
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  setNotification: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
 }
 
