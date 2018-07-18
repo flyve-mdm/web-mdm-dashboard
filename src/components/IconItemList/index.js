@@ -127,7 +127,9 @@ class IconItemList extends PureComponent {
       method: 'GET',
       credentials: 'same-origin',
     }).then((response) => {
+      console.log(response)
       response.arrayBuffer().then((buffer) => {
+        console.log(buffer)
         this.setState({
           image: `data:image/jpeg;base64,${IconItemList.arrayBufferToBase64(buffer)}`,
         })
