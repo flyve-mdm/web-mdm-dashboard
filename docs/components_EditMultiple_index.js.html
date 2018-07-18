@@ -61,6 +61,7 @@ import {
 import ErrorValidation from '../ErrorValidation'
 import EmptyMessage from '../EmptyMessage'
 import I18n from '../../shared/i18n'
+import withHandleMessages from '../../hoc/withHandleMessages'
 
 /**
  * Component with the menu for multiple edition
@@ -90,24 +91,37 @@ class EditMultiple extends PureComponent {
     let isCorrect = true
 
     if (this.state.selectedField.type === 'password') {
-      if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.newValue).isCorrect) isCorrect = false
-
-      if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.passwordConfirmation).isCorrect) isCorrect = false
+      if (!ErrorValidation.validation(this.state.passwordConfiguration, this.state.newValue).isCorrect) {
+        isCorrect = false
+      }
+      if (!ErrorValidation.validation({
+        ...this.state.passwordConfiguration,
+        isEqualTo: {
+          value: this.state.newValue,
+          message: 'Passwords do not match',
+        },
+      }, this.state.passwordConfirmation).isCorrect) {
+        isCorrect = false
+      }
     }
 
     if (isCorrect) {
       this.setState({
         isLoading: true,
       }, async () => {
-        let input = this.state.selectedField.DBName !== 'password' ? {
-          [this.state.selectedField.DBName]:
-            (this.state.newValue === 'true')
-              ? true : (this.state.newValue === 'false')
-                ? false : this.state.newValue,
-        } : {
-          [this.state.selectedField.DBName[0]]: this.state.newValue,
-          [this.state.selectedField.DBName[1]]: this.state.passwordConfirmation,
-        }
+        let input = (this.state.selectedField.type !== 'password')
+          ? {
+            [this.state.selectedField.DBName]:
+              (this.state.newValue === 'true')
+                ? true
+                : (this.state.newValue === 'false')
+                  ? false
+                  : this.state.newValue,
+          }
+          : {
+            [this.state.selectedField.DBName[0]]: this.state.newValue,
+            [this.state.selectedField.DBName[1]]: this.state.passwordConfirmation,
+          }
 
         input = this.props.selectedItems.map(element => ({
           id: element[this.props.request.id],
@@ -388,9 +402,10 @@ EditMultiple.propTypes = {
   toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   request: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
 
-export default EditMultiple
+export default withHandleMessages(EditMultiple)
 </code></pre>
         </article>
     </section>
