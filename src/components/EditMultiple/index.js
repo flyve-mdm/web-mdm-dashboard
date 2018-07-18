@@ -79,15 +79,19 @@ class EditMultiple extends PureComponent {
       this.setState({
         isLoading: true,
       }, async () => {
-        let input = this.state.selectedField.DBName !== 'password' ? {
-          [this.state.selectedField.DBName]:
-            (this.state.newValue === 'true')
-              ? true : (this.state.newValue === 'false')
-                ? false : this.state.newValue,
-        } : {
-          [this.state.selectedField.DBName[0]]: this.state.newValue,
-          [this.state.selectedField.DBName[1]]: this.state.passwordConfirmation,
-        }
+        let input = (this.state.selectedField.type !== 'password')
+          ? {
+            [this.state.selectedField.DBName]:
+              (this.state.newValue === 'true')
+                ? true
+                : (this.state.newValue === 'false')
+                  ? false
+                  : this.state.newValue,
+          }
+          : {
+            [this.state.selectedField.DBName[0]]: this.state.newValue,
+            [this.state.selectedField.DBName[1]]: this.state.passwordConfirmation,
+          }
 
         input = this.props.selectedItems.map(element => ({
           id: element[this.props.request.id],
@@ -368,6 +372,7 @@ EditMultiple.propTypes = {
   toast: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
   request: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
 }
 
 export default EditMultiple
