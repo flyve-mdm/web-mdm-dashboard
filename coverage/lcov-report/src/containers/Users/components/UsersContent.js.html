@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/47</span>
+        <span class='fraction'>0/45</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/24</span>
+        <span class='fraction'>0/22</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/9</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/46</span>
+        <span class='fraction'>0/45</span>
       </div>
     </div>
     <p class="quiet">
@@ -333,14 +333,7 @@ layout: coverage
 <a name='L282'></a><a href='#L282'>282</a>
 <a name='L283'></a><a href='#L283'>283</a>
 <a name='L284'></a><a href='#L284'>284</a>
-<a name='L285'></a><a href='#L285'>285</a>
-<a name='L286'></a><a href='#L286'>286</a>
-<a name='L287'></a><a href='#L287'>287</a>
-<a name='L288'></a><a href='#L288'>288</a>
-<a name='L289'></a><a href='#L289'>289</a>
-<a name='L290'></a><a href='#L290'>290</a>
-<a name='L291'></a><a href='#L291'>291</a>
-<a name='L292'></a><a href='#L292'>292</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L285'></a><a href='#L285'>285</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -448,8 +441,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -615,11 +606,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -738,9 +724,7 @@ class UsersContent extends PureComponent {
   handleDelete = <span class="fstat-no" title="function not covered" >async () =&gt; </span>{
     const isOK = <span class="cstat-no" title="statement not covered" >await Confirmation.isOK(this.contentDialog)</span>
 <span class="cstat-no" title="statement not covered" >    if (isOK) {</span>
-      const itemListToDelete = <span class="cstat-no" title="statement not covered" >this.props.selectedItems.map(<span class="fstat-no" title="function not covered" >item =&gt; (<span class="cstat-no" title="statement not covered" ></span>{</span></span>
-        id: item['User.id'],
-      }))
+      const itemListToDelete = <span class="cstat-no" title="statement not covered" >[{ id: this.state.id }]</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      this.setState({</span>
         isLoading: true,
@@ -846,7 +830,7 @@ class UsersContent extends PureComponent {
 &nbsp;
                 &lt;span
                   className="deleteIcon"
-                  style={ { padding: '0 10px', fontSize: '20px', display: this.props.selectedItems.length === 0 ? 'none' : '' } }
+                  style={ { padding: '0 10px', fontSize: '20px' } }
                   onClick={this.handleDelete}
                   role="button"
                   tabIndex="0"
@@ -905,16 +889,11 @@ class UsersContent extends PureComponent {
   }
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >UsersContent.defaultProps = {</span>
-  selectedItems: null,
-}
-&nbsp;
 <span class="cstat-no" title="statement not covered" >UsersContent.propTypes = {</span>
   toast: PropTypes.shape({
     setNotification: PropTypes.func,
   }).isRequired,
   handleMessage: PropTypes.func.isRequired,
-  selectedItems: PropTypes.array,
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
@@ -928,7 +907,7 @@ export default UsersContent
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 17 2018 16:59:06 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jul 18 2018 19:33:55 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>
