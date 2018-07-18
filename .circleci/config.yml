@@ -7,21 +7,11 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
-
-      - run: 
+      - run:
           name: "Install dependencies"
           command: source ci/scripts/install.sh
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      
-      - run: 
+      - run:
           name: "Build application"
           command: |
             source ci/scripts/create_config_file.sh
@@ -33,47 +23,37 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
-
-      - run: 
+      - run:
           name: "Install dependencies"
           command: source ci/scripts/install.sh
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
           name: "Start server in background"
           command: node scripts/start.js > ../yarn.log
           background: true
 
-      - run: 
+      - run:
           name: "Run tests"
           command: yarn test
 
-      - run: 
+      - run:
           name: "Run end to end tests"
           command: |
             until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
             yarn test:cypress
 
-      - run: 
+      - run:
           name: "Run sonarwhal"
           command: |
             until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
             yarn test:sonarwhal
-          
+
       - run:
           name: "Validate HTML"
           command: |
             yarn build
             html5validator --root build/
- 
+
       - store_artifacts:
           path: cypress/screenshots
 
@@ -84,21 +64,11 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
-
-      - run: 
+      - run:
           name: "Install dependencies"
           command: source ci/scripts/install.sh
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run: 
+      - run:
           name: "Install Transifex Client and Files"
           command: source ci/scripts/transifex.sh
 
@@ -107,33 +77,33 @@ jobs:
           command: node scripts/start.js > ../yarn.log
           background: true
 
-      - run: 
+      - run:
           name: "Take screenshots"
           command: |
             until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
             yarn test:cypress
 
-      - run: 
+      - run:
           name: "Build application"
           command: |
             source ci/scripts/create_config_file.sh
             yarn build
-      
+
       - run:
           name: "Create artifact"
           command: |
             mkdir /tmp/artifacts
             zip -r ./build.zip build/* > /tmp/artifacts/build.zip
-      
+
       - store_artifacts:
           path: /tmp/artifacts
           destination: artifacts
-      
+
       - run:
           name: "Configure GIT"
           command: source ci/scripts/git_config.sh
-      
-      - run: 
+
+      - run:
           name: "Deploy application"
           command: source ci/scripts/deploy.sh
 
@@ -148,6 +118,6 @@ workflows:
             - build
           filters:
             branches:
-              only: 
+              only:
                 - develop
                 - master
