@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Install jq for json parse
-
+# System dependencies
 echo "deb http://ftp.us.debian.org/debian/ jessie main contrib non-free" > /etc/apt/sources.list
 echo "deb http://security.debian.org/ jessie/updates main contrib non-free" >> /etc/apt/sources.list
 echo "deb http://ftp.us.debian.org/debian/ jessie-updates main contrib non-free" >> /etc/apt/sources.list
@@ -9,9 +8,3 @@ echo "deb http://ftp.us.debian.org/debian/ jessie-backports main contrib non-fre
 apt-get -y update
 apt-get -y install -t jessie-backports  openjdk-8-jre-headless ca-certificates-java
 apt-get -y install jq python-pip zip unzip wget xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 ruby-full
-npm rebuild node-sass
-yarn cache clean
-yarn global add jsdoc
-yarn global add gh-pages
-yarn install
-pip install html5validator

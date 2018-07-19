@@ -1,6 +1,7 @@
 version: 2
 
 references:
+  # Configuration
   workspace: &workspace
     ~/flyve
 
@@ -12,32 +13,64 @@ references:
       - image: *docker_image
     working_directory: *workspace
 
+  transifex_config: &transifex_config
+    run:
+      name: Configure transifex
+      command: source ci/scripts/transife_config.sh
+
+  transifex_pull: &transifex_pull
+    run:
+      name: Pull translations to transifex
+      command: source ci/scripts/transife_pull.sh
+
+  transifex_push: &transifex_push
+    run:
+      name: Push translations to transifex
+      command: source ci/scripts/transife_push.sh
+
+  # Dependencies
+  system_install: &system_install
+    run:
+      name: Update system dependencies
+      command: source ci/scripts/system_install.sh
+
+  node_install: &node_install
+    run:
+      name: Install node dependencies
+      command: source ci/scripts/node_install.sh
+
+  python_install: &python_install
+    run:
+      name: Install python dependencies
+      command: source ci/scripts/python_install.sh
+
+  # Build application
+  build_app: &build_app
+    run:
+      name: "Build application"
+      command: |
+        source ci/scripts/create_config_file.sh
+        yarn build
+
 jobs:
   build:
     <<: *container_config
-    docker:
-      - image: kkarczmarczyk/node-yarn
-    working_directory: ~/repo
+
     steps:
       - checkout
+      - *system_install
+      - *node_install
+      - *python_install
+      - *build_app
 
-      - run:
-          name: "Install dependencies"
-          command: source ci/scripts/install.sh
-
-      - run:
-          name: "Build application"
-          command: |
-            source ci/scripts/create_config_file.sh
-            yarn build
   test:
     <<: *container_config
+
     steps:
       - checkout
-
-      - run:
-          name: "Install dependencies"
-          command: source ci/scripts/install.sh
+      - *system_install
+      - *node_install
+      - *python_install
 
       - run:
           name: "Start server in background"
@@ -71,15 +104,13 @@ jobs:
 
   deploy:
     <<: *container_config
-    docker:
-      - image: kkarczmarczyk/node-yarn
-    working_directory: ~/repo
+
     steps:
       - checkout
 
-      - run:
-          name: "Install dependencies"
-          command: source ci/scripts/install.sh
+      - *system_install
+      - *node_install
+      - *python_install
 
       - run:
           name: "Install Transifex Client and Files"
