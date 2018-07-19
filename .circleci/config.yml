@@ -61,6 +61,8 @@ jobs:
       - *system_install
       - *node_install
       - *python_install
+      - *transifex_config
+      - *transifex_pull
       - *build_app
 
   test:
