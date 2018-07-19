@@ -1,6 +1,20 @@
 version: 2
+
+references:
+  workspace: &workspace
+    ~/flyve
+
+  docker_image: &docker_image
+    kkarczmarczyk/node-yarn
+
+  container_config: &container_config
+    docker:
+      - image: *docker_image
+    working_directory: *workspace
+
 jobs:
   build:
+    <<: *container_config
     docker:
       - image: kkarczmarczyk/node-yarn
     working_directory: ~/repo
@@ -17,9 +31,7 @@ jobs:
             source ci/scripts/create_config_file.sh
             yarn build
   test:
-    docker:
-      - image: kkarczmarczyk/node-yarn
-    working_directory: ~/repo
+    <<: *container_config
     steps:
       - checkout
 
@@ -58,6 +70,7 @@ jobs:
           path: cypress/screenshots
 
   deploy:
+    <<: *container_config
     docker:
       - image: kkarczmarczyk/node-yarn
     working_directory: ~/repo
