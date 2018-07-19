@@ -246,7 +246,6 @@ class UsersEditOne extends PureComponent {
       realname: this.state.realName,
       mobile: this.state.mobilePhone,
       registration_number: this.state.administrativeNumber,
-      picture: this.state.imageProfile,
       usercategories_id: this.state.category.value,
       entities_id: this.state.defaultEntity.value,
       comment: this.state.comments,
@@ -408,15 +407,6 @@ class UsersEditOne extends PureComponent {
   }
 
   /**
-   * Handle set of the profile image
-   * @function openFileChooser
-   */
-  openFileChooser = () => {
-    this.inputElement.value = null
-    this.inputElement.click()
-  }
-
-  /**
    * Render component
    * @function render
    */
@@ -457,19 +447,6 @@ class UsersEditOne extends PureComponent {
         glpi: this.props.glpi,
       })
 
-      const inputAttributes = {
-        type: 'file',
-        accept: 'image/*',
-        name: 'imageProfile',
-        style: {
-          display: 'none',
-        },
-        ref: (element) => {
-          this.inputElement = element
-        },
-        onChange: this.previewFile,
-      }
-
       componetRender = (
         &lt;div className="froms Profiles">
           &lt;div className="froms__row froms__row--icon">
@@ -478,13 +455,9 @@ class UsersEditOne extends PureComponent {
 
           &lt;div className="froms__row">
             &lt;div style={{ overflow: 'hidden', paddingLeft: '20px' }}>
-              &lt;input
-                {...inputAttributes}
-              />
               &lt;IconItemList
                 image={this.state.imageProfile}
                 type={this.state.typeImageProfile}
-                imgClick={this.openFileChooser}
                 size={150}
                 imgClass="clickable"
               />
