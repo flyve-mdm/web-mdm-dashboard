@@ -45,11 +45,9 @@ class IconItemList extends PureComponent {
   static arrayBufferToBase64(buffer) {
     let binary = ''
     const bytes = [].slice.call(new Uint8Array(buffer))
-    for (const item in bytes) {
-      if (Object.prototype.hasOwnProperty.call(bytes, item)) {
-        binary += String.fromCharCode(item)
-      }
-    }
+    bytes.forEach((b) => {
+      binary += String.fromCharCode(b)
+    })
     return window.btoa(binary)
   }
 
@@ -83,10 +81,6 @@ class IconItemList extends PureComponent {
       })
     }
   }
-
-  // static getDerivedStateFromProps(nextProps, prevState) {
-
-  // }
 
   /**
    * Asynchronous function to get a requested image
