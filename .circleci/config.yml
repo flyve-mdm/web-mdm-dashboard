@@ -52,6 +52,42 @@ references:
         source ci/scripts/create_config_file.sh
         yarn build
 
+  # Test configuration
+  start_server: &start_server
+    run:
+      name: Start server in background
+      command: node scripts/start.js > ../yarn.log
+      background: true
+
+  unit_test: &unit_test
+    run:
+      name: Run unit tests
+      command: yarn test
+
+  end_to_end_test: &end_to_end_test
+    run:
+      name: Run End-to-End tests
+      command: |
+        until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
+        yarn test:cypress
+
+  sonarwhal_test: &sonarwhal_test
+    run:
+      name: Run sonarwhal tests
+      command: |
+        until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
+        yarn test:sonarwhal
+
+  validate_html: &validate_html
+    run:
+      name: "Validate HTML"
+      command: html5validator --root build/
+
+  # Handle cache
+  store_screenshots: &store_screenshots
+    store_artifacts:
+      path: cypress/screenshots
+
 jobs:
   build:
     <<: *container_config
@@ -73,36 +109,13 @@ jobs:
       - *system_install
       - *node_install
       - *python_install
-
-      - run:
-          name: "Start server in background"
-          command: node scripts/start.js > ../yarn.log
-          background: true
-
-      - run:
-          name: "Run tests"
-          command: yarn test
-
-      - run:
-          name: "Run end to end tests"
-          command: |
-            until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
-            yarn test:cypress
-
-      - run:
-          name: "Run sonarwhal"
-          command: |
-            until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
-            yarn test:sonarwhal
-
-      - run:
-          name: "Validate HTML"
-          command: |
-            yarn build
-            html5validator --root build/
-
-      - store_artifacts:
-          path: cypress/screenshots
+      - *start_server
+      - *unit_test
+      - *end_to_end_test
+      - *sonarwhal_test
+      - *build_app
+      - *validate_html
+      - *store_screenshots
 
   deploy:
     <<: *container_config
