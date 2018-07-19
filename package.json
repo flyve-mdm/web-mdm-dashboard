@@ -77,7 +77,7 @@
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.4.0",
     "conventional-github-releaser": "^3.0.0",
-    "css-loader": "0.28.11",
+    "css-loader": "1.0.0",
     "cypress": "^3.0.1",
     "dotenv": "6.0.0",
     "enzyme": "^3.3.0",
