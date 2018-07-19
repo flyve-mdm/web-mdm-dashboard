@@ -197,7 +197,6 @@ class Profiles extends PureComponent {
       phone2: this.state.phone2,
       mobile: this.state.mobilePhone,
       registration_number: this.state.administrativeNumber,
-      picture: this.state.imageProfile,
       usercategories_id: this.state.category.value,
       entities_id: this.state.defaultEntity.value,
       comment: this.state.comments,
@@ -357,15 +356,6 @@ class Profiles extends PureComponent {
   }
 
   /**
-   * Handle set of the profile image
-   * @function openFileChooser
-   */
-  openFileChooser = () => {
-    this.inputElement.value = null
-    this.inputElement.click()
-  }
-
-  /**
    * Render component
    * @function render
    */
@@ -415,19 +405,6 @@ class Profiles extends PureComponent {
         glpi: this.props.glpi,
       })
 
-      const inputAttributes = {
-        type: 'file',
-        accept: 'image/*',
-        name: 'imageProfile',
-        style: {
-          display: 'none',
-        },
-        ref: (element) => {
-          this.inputElement = element
-        },
-        onChange: this.previewFile,
-      }
-
       component = (
         <React.Fragment>
           <h2 style={{ margin: '10px' }}>
@@ -439,13 +416,9 @@ class Profiles extends PureComponent {
             </div>
             <div className="froms__row">
               <div style={{ overflow: 'hidden' }}>
-                <input
-                  {...inputAttributes}
-                />
                 <IconItemList
                   image={this.state.imageProfile}
                   type={this.state.typeImageProfile}
-                  imgClick={this.openFileChooser}
                   size={150}
                   imgClass="clickable"
                 />
