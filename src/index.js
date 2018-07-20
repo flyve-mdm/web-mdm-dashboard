@@ -42,8 +42,8 @@ import {
 import { I18nProvider } from './providers/I18nProvider'
 import { NotificationsProvider } from './providers/NotificationsProvider'
 import { AuthenticationProvider } from './providers/AuthenticationProvider'
-import './assets/styles/main.scss' // Global CSS Styles
-import appConfig from '../public/config.json'
+import './assets/styles/css/main.css' // Global CSS Styles
+import 'web-animations-js/web-animations-next-lite.min.js'
 
 /**
  * Create the bugsnag client
@@ -52,7 +52,7 @@ import appConfig from '../public/config.json'
  * @type {object}
  */
 const bugsnagClient = bugsnag({
-  apiKey: appConfig.bugsnag,
+  apiKey: window.appConfig.bugsnag,
   beforeSend: () => {
     if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
       return false

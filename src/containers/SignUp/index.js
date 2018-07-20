@@ -41,7 +41,6 @@ import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
 import withHandleMessages from '../../hoc/withHandleMessages'
 import publicURL from '../../shared/publicURL'
 import ErrorValidation from '../../components/ErrorValidation'
-import appConfig from '../../../public/config.json'
 
 /**
  * Component with the registration form
@@ -227,7 +226,7 @@ class SignUp extends PureComponent {
       })
         .then(() => {
           this.props.toast.setNotification({
-            title: appConfig.appName,
+            title: window.appConfig.appName,
             body: 'Successfully registered user',
             type: 'success',
           })

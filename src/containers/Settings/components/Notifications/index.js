@@ -83,11 +83,9 @@ class Notifications extends PureComponent {
    */
   changeShowNotifications = () => {
     localStorage.setItem('showNotifications', !this.state.showNotifications)
-    this.setState((prevState) => {
-      ({
-        showNotifications: !prevState.showNotifications,
-      })
-    })
+    this.setState((prevState) => ({
+      showNotifications: !prevState.showNotifications,
+    }))
   }
 
   /**

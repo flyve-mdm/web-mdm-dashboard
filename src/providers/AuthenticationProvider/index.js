@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import publicURL from '../../shared/publicURL'
 import glpi from '../../shared/glpiApi'
 import itemtype from '../../shared/itemtype'
-import appConfig from '../../../public/config.json'
 
 const AuthenticationContext = React.createContext()
 
@@ -95,7 +94,7 @@ export class AuthenticationProvider extends PureComponent {
         async () => {
           try {
             const session = await glpi.initSessionByUserToken({
-              userToken: appConfig.demoToken,
+              userToken: window.appConfig.demoToken,
             })
             glpi.sessionToken = session.session_token
             const {
@@ -162,7 +161,7 @@ export class AuthenticationProvider extends PureComponent {
         },
         () => {
           glpi.registerUser({
-            userToken: appConfig.demoToken,
+            userToken: window.appConfig.demoToken,
             userData: data,
             itemtype: itemtype.PluginFlyvemdmdemoUser,
           })
@@ -213,7 +212,7 @@ export class AuthenticationProvider extends PureComponent {
                 },
                 () => {
                   resolve({
-                    title: appConfig.appName,
+                    title: window.appConfig.appName,
                     body: response[0],
                     type: 'success',
                   })

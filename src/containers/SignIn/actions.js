@@ -26,7 +26,6 @@
  * ------------------------------------------------------------------------------
  */
 
-import appConfig from '../../../public/config.json'
 
 /**
  * Handle change input value
@@ -82,7 +81,7 @@ export const handleFormSubmit = (ctx, event) => {
     ctx.state.password,
   ).then(() => {
     ctx.props.toast.setNotification({
-      title: appConfig.appName,
+      title: window.appConfig.appName,
       body: 'Welcome!',
       type: 'success',
     })
