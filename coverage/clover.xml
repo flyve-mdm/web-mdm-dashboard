@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1532055437250" clover="3.2.0">
-  <project timestamp="1532055437250" name="All files">
+<coverage generated="1532090034176" clover="3.2.0">
+  <project timestamp="1532090034176" name="All files">
     <metrics statements="4519" coveredstatements="269" conditionals="1998" coveredconditionals="172" methods="1051" coveredmethods="74" elements="7568" coveredelements="515" complexity="0" loc="4519" ncloc="4519" packages="111" files="191" classes="191">
       <package name="src">
         <metrics statements="49" coveredstatements="0" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
@@ -4453,14 +4453,14 @@
           <line num="229" count="0" type="stmt"/>
           <line num="234" count="0" type="stmt"/>
           <line num="237" count="0" type="stmt"/>
-          <line num="243" count="0" type="stmt"/>
-          <line num="255" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="256" count="0" type="stmt"/>
-          <line num="262" count="0" type="stmt"/>
+          <line num="244" count="0" type="stmt"/>
+          <line num="256" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="257" count="0" type="stmt"/>
           <line num="263" count="0" type="stmt"/>
-          <line num="269" count="0" type="stmt"/>
-          <line num="308" count="0" type="stmt"/>
-          <line num="312" count="0" type="stmt"/>
+          <line num="264" count="0" type="stmt"/>
+          <line num="270" count="0" type="stmt"/>
+          <line num="309" count="0" type="stmt"/>
+          <line num="313" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Users">
