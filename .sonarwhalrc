@@ -1,19 +1,19 @@
 {
-    "connector": {
-        "name": "jsdom",
-        "options": {
-            "waitFor": 5000
-        }
-    },
-    "formatters": [
-        "codeframe"
-    ],
-    "rules": {
-        "disown-opener": "error",
-        "highest-available-document-mode": "error",
-        "html-checker": "error",
-        "http-cache": "warning",
-        "http-compression": "warning"
-    },
-    "rulesTimeout": 120000
+  "connector": {
+    "name": "jsdom",
+    "options": {
+      "waitFor": 5000
+    }
+  },
+  "formatters": [
+    "codeframe"
+  ],
+  "rules": {
+    "disown-opener": "error",
+    "highest-available-document-mode": "error",
+    "html-checker": "error",
+    "http-cache": "warning",
+    "http-compression": "warning"
+  },
+  "rulesTimeout": 120000
 }

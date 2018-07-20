@@ -310,11 +310,9 @@ class Profiles extends PureComponent {
    * @param {number} index
    */
   deleteEmail = (index) => {
-    this.setState((prevState) => {
-      ({
-        emails: prevState.emails.slice(0, index).concat(prevState.emails.slice(index + 1)),
-      })
-    })
+    this.setState((prevState) => ({
+      emails: prevState.emails.slice(0, index).concat(prevState.emails.slice(index + 1)),
+    }))
   }
 
   /**
@@ -322,16 +320,14 @@ class Profiles extends PureComponent {
    * @function addEmail
    */
   addEmail = () => {
-    this.setState((prevState) => {
-      ({
-        emails: [
-          ...prevState.emails,
-          {
-            email: '',
-          },
-        ],
-      })
-    })
+    this.setState((prevState) => ({
+      emails: [
+        ...prevState.emails,
+        {
+          email: '',
+        },
+      ],
+    }))
   }
 
   /**

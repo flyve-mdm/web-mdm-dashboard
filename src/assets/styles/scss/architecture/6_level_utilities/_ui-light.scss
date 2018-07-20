@@ -1,4 +1,4 @@
-/* 
+/*
   Copyright (c) Microsoft Corporation.
   All Rights Reserved. Licensed under the MIT License.
   See License.txt in the project root for license information.
@@ -357,7 +357,7 @@
   }
   @font-face {
     font-family: "Symbols";
-    src: url("../fonts/SegMDL2.ttf") format("truetype");
+    src: url("../../fonts/SegMDL2.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
   }
@@ -407,36 +407,36 @@
     font-family: "Segoe UI";
     font-weight: 200;
     src: local("Segoe UI Light");
-    src: url("../fonts/selawkl.eot");
-    src: url("../fonts/selawkl.ttf") format("truetype");
+    src: url("../../fonts/selawkl.eot");
+    src: url("../../fonts/selawkl.ttf") format("truetype");
   }
   @font-face {
     font-family: "Segoe UI";
     font-weight: 300;
     src: local("Segoe UI Semilight");
-    src: url("../fonts/selawksl.eot");
-    src: url("../fonts/selawksl.ttf") format("truetype");
+    src: url("../../fonts/selawksl.eot");
+    src: url("../../fonts/selawksl.ttf") format("truetype");
   }
   @font-face {
     font-family: "Segoe UI";
     font-weight: 400;
     src: local("Segoe UI");
-    src: url("../fonts/selawk.eot");
-    src: url("../fonts/selawk.ttf") format("truetype");
+    src: url("../../fonts/selawk.eot");
+    src: url("../../fonts/selawk.ttf") format("truetype");
   }
   @font-face {
     font-family: "Segoe UI";
     font-weight: bold;
     src: local("Segoe UI Semibold");
-    src: url("../fonts/selawksb.eot");
-    src: url("../fonts/selawksb.ttf") format("truetype");
+    src: url("../../fonts/selawksb.eot");
+    src: url("../../fonts/selawksb.ttf") format("truetype");
   }
   @font-face {
     font-family: "Segoe UI";
     font-weight: 600;
     src: local("Segoe UI Bold");
-    src: url("../fonts/selawkb.eot");
-    src: url("../fonts/selawkb.ttf") format("truetype");
+    src: url("../../fonts/selawkb.eot");
+    src: url("../../fonts/selawkb.ttf") format("truetype");
   }
 
   @font-face {
@@ -7948,4 +7948,3 @@
       background-color: Highlight;
     }
   }
-  

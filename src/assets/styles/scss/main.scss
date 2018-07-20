@@ -1,30 +1,30 @@
 // Level 1
-@import 
+@import
     './architecture/1_level_settings/sizes',
     './architecture/1_level_settings/colors',
     './architecture/1_level_settings/breakpoints';
 
 // Level 2
-@import 
+@import
     './architecture/2_level_tools/mq',
     './architecture/2_level_tools/mixins',
     './architecture/2_level_tools/placeholders';
 
 // Level 3
-@import 
+@import
     './architecture/3_level_generic/normalize';
 
 // Level 4
-@import 
+@import
     './architecture/4_level_elements/body_font_size',
     './architecture/4_level_elements/main',
     './architecture/4_level_elements/a',
-    './architecture/4_level_elements/h',   
+    './architecture/4_level_elements/h',
     './architecture/4_level_elements/input_and_textarea',
     './architecture/4_level_elements/select';
 
 // Level 5
-@import 
+@import
     './architecture/5_level_components/btn',
     './architecture/5_level_components/authentication_layout',
     './architecture/5_level_components/header_admin_dashboard',
@@ -56,11 +56,10 @@
     './architecture/5_level_components/error';
 
 // Level 6
-@import 
+@import
     './architecture/6_level_utilities/ui-light',
     './architecture/6_level_utilities/win_toggles_overwrite',
     './architecture/6_level_utilities/flex_container',
     './architecture/6_level_utilities/win_pivot_viewport',
     './architecture/6_level_utilities/win_dropdown',
     './architecture/6_level_utilities/win_contentdialog_dialog';
-    

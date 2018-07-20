@@ -73,24 +73,25 @@ const withAdminDashboardLayout = (WrappedComponent) => {
     /** Configure 'baseURL' and the cookies of glpi */
     componentDidMount = async () => {
       const {
-        // eslint-disable-next-line
-        cfg_glpi,
+        cfg_glpi: cfgGlpi,
       } = await glpi.getGlpiConfig()
-      localStorage.setItem('baseURL', cfg_glpi.url_base)
-      this.setState({
-        iframe: <iframe
-          title="glpi-backend"
-          src={`//${cfg_glpi.url_base.split('//')[1]}`}
-          style={{
-            height: 0, width: 0, opacity: 0, position: 'absolute',
-          }}
-        />,
-      },
-      () => setGlpiCookie(
+      if(cfgGlpi) {
+        localStorage.setItem('baseURL', cfgGlpi.url_base)
         this.setState({
-          iframe: undefined,
-        }),
-      ))
+          iframe: <iframe
+            title="glpi-backend"
+            src={`//${cfgGlpi.url_base.split('//')[1]}`}
+            style={{
+              height: 0, width: 0, opacity: 0, position: 'absolute',
+            }}
+          />,
+        },
+        () => setGlpiCookie(
+          this.setState({
+            iframe: undefined,
+          }),
+        ))
+      }
     }
 
     /** Remove 'resize' event listener */

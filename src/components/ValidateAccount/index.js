@@ -40,7 +40,6 @@ import publicURL from '../../shared/publicURL'
 import itemtype from '../../shared/itemtype'
 import I18n from '../../shared/i18n'
 import Loading from '../Loading'
-import appConfig from '../../../public/config.json'
 
 /**
  * Component with page of 'validate account'
@@ -86,7 +85,7 @@ class ValidateAccount extends PureComponent {
   requestValidation = async (account, validation) => {
     try {
       const session = await this.props.glpi.initSessionByUserToken({
-        userToken: appConfig.demoToken,
+        userToken: window.appConfig.demoToken,
       })
       this.props.glpi.sessionToken = session.session_token
       const response = await this.props.glpi.updateItem({

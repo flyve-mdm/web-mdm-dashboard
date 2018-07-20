@@ -1,6 +1,3 @@
-#!/bin/bash
-
-cat <<EOF >public/config.js
 window.appConfig = {
   glpiApiLink: "your_URL",
   demoToken: "your_token",
@@ -8,4 +5,3 @@ window.appConfig = {
   appName: "MDM Dashboard",
   bugsnag: "your_bugsnag_key",
 }
-EOF
