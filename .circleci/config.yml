@@ -63,6 +63,7 @@ references:
     run:
       name: Run End-to-End tests
       command: |
+        yarn cypress install
         until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
         yarn test:cypress
 
@@ -91,16 +92,17 @@ references:
 
   # Handle cache
   node_key: &node_key
-    yarn-{{ checksum "yarn.lock" }}
+    yarn-dependencies-v1-{{ checksum "yarn.lock" }}
 
   build_key: &build_key
-    build-{{ .Environment.CIRCLE_WORKFLOW_ID }}
+    build-app-v1-{{ .Environment.CIRCLE_WORKFLOW_ID }}
 
   store_node_cache: &store_node_cache
     save_cache:
       key: *node_key
       paths:
         - node_modules
+        - /root/.cache/Cypress
 
   store_build_cache: &store_build_cache
     save_cache:
@@ -157,7 +159,6 @@ jobs:
       - *system_install
       - *python_install
       - *restore_node_cache
-      - *node_install
       - *start_server
       - *unit_test
       - *end_to_end_test
