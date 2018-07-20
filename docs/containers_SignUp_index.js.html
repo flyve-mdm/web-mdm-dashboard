@@ -257,6 +257,7 @@ class SignUp extends PureComponent {
           this.props.toast.setNotification(this.props.handleMessage({
             type: 'alert',
             message: error,
+            displayErrorPage: false,
           }))
         })
     } else {
