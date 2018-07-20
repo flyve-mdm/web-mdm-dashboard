@@ -93,19 +93,28 @@ references:
   node_key: &node_key
     yarn-{{ checksum "yarn.lock" }}
 
+  build_key: &build_key
+    build-{{ .Environment.CIRCLE_WORKFLOW_ID }}
+
   store_node_cache: &store_node_cache
     save_cache:
       key: *node_key
       paths:
         - node_modules
 
+  store_build_cache: &store_build_cache
+    save_cache:
+      key: *build_key
+      paths:
+        - build
+
   restore_node_cache: &restore_node_cache
     restore_cache:
       key: *node_key
 
-  store_screenshots: &store_screenshots
-    store_artifacts:
-      path: cypress/screenshots
+  restore_build_cache: &restore_build_cache
+    restore_cache:
+      key: *build_key
 
   store_screenshots: &store_screenshots
     store_artifacts:
@@ -138,6 +147,7 @@ jobs:
       - *transifex_config
       - *transifex_sync
       - *build_app
+      - *store_build_cache
 
   test:
     <<: *container_config
@@ -148,13 +158,13 @@ jobs:
       - *python_install
       - *restore_node_cache
       - *node_install
-      # - *start_server
-      # - *unit_test
-      # - *end_to_end_test
-      # - *sonarwhal_test
-      # - *build_app
-      # - *validate_html
-      # - *store_screenshots
+      - *start_server
+      - *unit_test
+      - *end_to_end_test
+      - *sonarwhal_test
+      - *restore_build_cache
+      - *validate_html
+      - *store_screenshots
 
   deploy:
     <<: *container_config
