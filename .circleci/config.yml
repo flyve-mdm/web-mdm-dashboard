@@ -90,6 +90,23 @@ references:
       command: source ci/scripts/deploy.sh
 
   # Handle cache
+  node_key: &node_key
+    yarn-{{ checksum "yarn.lock" }}
+
+  store_node_cache: &store_node_cache
+    save_cache:
+      key: *node_key
+      paths:
+        - node_modules
+
+  restore_node_cache: &restore_node_cache
+    restore_cache:
+      key: *node_key
+
+  store_screenshots: &store_screenshots
+    store_artifacts:
+      path: cypress/screenshots
+
   store_screenshots: &store_screenshots
     store_artifacts:
       path: cypress/screenshots
@@ -114,8 +131,10 @@ jobs:
     steps:
       - checkout
       - *system_install
-      - *node_install
       - *python_install
+      - *restore_node_cache
+      - *node_install
+      - *store_node_cache
       - *transifex_config
       - *transifex_sync
       - *build_app
@@ -126,15 +145,16 @@ jobs:
     steps:
       - checkout
       - *system_install
-      - *node_install
       - *python_install
-      - *start_server
-      - *unit_test
-      - *end_to_end_test
-      - *sonarwhal_test
-      - *build_app
-      - *validate_html
-      - *store_screenshots
+      - *restore_node_cache
+      - *node_install
+      # - *start_server
+      # - *unit_test
+      # - *end_to_end_test
+      # - *sonarwhal_test
+      # - *build_app
+      # - *validate_html
+      # - *store_screenshots
 
   deploy:
     <<: *container_config
@@ -159,7 +179,9 @@ workflows:
   build-and-deploy:
     jobs:
       - build
-      - test
+      - test:
+          requires:
+            - build
       - deploy:
           requires:
             - build
