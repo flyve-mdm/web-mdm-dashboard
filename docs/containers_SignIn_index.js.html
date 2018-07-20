@@ -94,20 +94,22 @@ class SignIn extends PureComponent {
      *
      * Ref: https://developer.mozilla.org/en-US/docs/Web/API/CredentialsContainer/get
      */
-    try {
-      navigator.credentials.get({
-        password: true,
-        mediation: 'optional',
-      })
-        .then((res) => {
-          if (res) {
-            this.setState({
-              username: res.name,
-              password: res.password,
-            })
-          }
+    if (!localStorage.getItem('currentUser') || !localStorage.getItem('sessionToken')) {
+      try {
+        navigator.credentials.get({
+          password: true,
+          mediation: 'optional',
         })
-    } catch (error) {}
+          .then((res) => {
+            if (res) {
+              this.setState({
+                username: res.name,
+                password: res.password,
+              })
+            }
+          })
+      } catch (error) {}
+    }
   }
 
   /**
