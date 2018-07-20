@@ -97,6 +97,9 @@ references:
   build_key: &build_key
     build-app-v1-{{ .Environment.CIRCLE_WORKFLOW_ID }}
 
+  screenshots_key: &screenshots_key
+    screenshots-app-v1-{{ .Environment.CIRCLE_WORKFLOW_ID }}
+
   store_node_cache: &store_node_cache
     save_cache:
       key: *node_key
@@ -110,6 +113,12 @@ references:
       paths:
         - build
 
+  store_screenshots: &store_screenshots
+    save_cache:
+      key: *screenshots_key
+      paths:
+        - cypress/screenshots
+
   restore_node_cache: &restore_node_cache
     restore_cache:
       key: *node_key
@@ -118,9 +127,9 @@ references:
     restore_cache:
       key: *build_key
 
-  store_screenshots: &store_screenshots
-    store_artifacts:
-      path: cypress/screenshots
+  restore_screenshots_cache: &restore_screenshots_cache
+    restore_cache:
+      key: *screenshots_key
 
   # Handle artifact
   build_artifact: &build_artifact
