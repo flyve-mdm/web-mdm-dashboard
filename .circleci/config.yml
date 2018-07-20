@@ -75,13 +75,37 @@ references:
 
   validate_html: &validate_html
     run:
-      name: "Validate HTML"
+      name: Validate HTML
       command: html5validator --root build/
+
+  # Settings deploy
+  git_config: &git_config
+    run:
+      name: Configure GIT
+      command: source ci/scripts/git_config.sh
+
+  deploy_app: &deploy_app
+    run:
+      name: Deploy application
+      command: source ci/scripts/deploy.sh
 
   # Handle cache
   store_screenshots: &store_screenshots
     store_artifacts:
       path: cypress/screenshots
+
+  # Handle artifact
+  build_artifact: &build_artifact
+    run:
+      name: Create build artifact
+      command: |
+        mkdir /tmp/artifacts
+        zip -r ./build.zip build/* > /tmp/artifacts/build.zip
+
+  store_build_artifact: &store_build_artifact
+    store_artifacts:
+      path: /tmp/artifacts
+      destination: artifacts
 
 jobs:
   build:
@@ -117,49 +141,18 @@ jobs:
 
     steps:
       - checkout
-
       - *system_install
       - *node_install
       - *python_install
-
-      - run:
-          name: "Install Transifex Client and Files"
-          command: source ci/scripts/transifex.sh
-
-      - run:
-          name: "Start server in background"
-          command: node scripts/start.js > ../yarn.log
-          background: true
-
-      - run:
-          name: "Take screenshots"
-          command: |
-            until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
-            yarn test:cypress
-
-      - run:
-          name: "Build application"
-          command: |
-            source ci/scripts/create_config_file.sh
-            yarn build
-
-      - run:
-          name: "Create artifact"
-          command: |
-            mkdir /tmp/artifacts
-            zip -r ./build.zip build/* > /tmp/artifacts/build.zip
-
-      - store_artifacts:
-          path: /tmp/artifacts
-          destination: artifacts
-
-      - run:
-          name: "Configure GIT"
-          command: source ci/scripts/git_config.sh
-
-      - run:
-          name: "Deploy application"
-          command: source ci/scripts/deploy.sh
+      - *transifex_config
+      - *transifex_sync
+      - *start_server
+      - *end_to_end_test
+      - *build_app
+      - *build_artifact
+      - *store_build_artifact
+      - *git_config
+      - *deploy_app
 
 workflows:
   version: 2
