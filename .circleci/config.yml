@@ -16,17 +16,12 @@ references:
   transifex_config: &transifex_config
     run:
       name: Configure transifex
-      command: source ci/scripts/transife_config.sh
+      command: source ci/scripts/transifex_config.sh
 
-  transifex_pull: &transifex_pull
+  transifex_sync: &transifex_sync
     run:
-      name: Pull translations to transifex
-      command: source ci/scripts/transife_pull.sh
-
-  transifex_push: &transifex_push
-    run:
-      name: Push translations to transifex
-      command: source ci/scripts/transife_push.sh
+      name: Synchronize translations to transifex
+      command: source ci/scripts/transifex_sync.sh
 
   # Dependencies
   system_install: &system_install
@@ -98,7 +93,7 @@ jobs:
       - *node_install
       - *python_install
       - *transifex_config
-      - *transifex_pull
+      - *transifex_sync
       - *build_app
 
   test:
