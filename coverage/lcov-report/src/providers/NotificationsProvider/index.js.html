@@ -25,12 +25,12 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/28</span>
+        <span class='fraction'>0/24</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/28</span>
+        <span class='fraction'>0/24</span>
       </div>
     </div>
     <p class="quiet">
@@ -147,15 +147,7 @@ layout: coverage
 <a name='L96'></a><a href='#L96'>96</a>
 <a name='L97'></a><a href='#L97'>97</a>
 <a name='L98'></a><a href='#L98'>98</a>
-<a name='L99'></a><a href='#L99'>99</a>
-<a name='L100'></a><a href='#L100'>100</a>
-<a name='L101'></a><a href='#L101'>101</a>
-<a name='L102'></a><a href='#L102'>102</a>
-<a name='L103'></a><a href='#L103'>103</a>
-<a name='L104'></a><a href='#L104'>104</a>
-<a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a>
-<a name='L107'></a><a href='#L107'>107</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L99'></a><a href='#L99'>99</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -175,10 +167,8 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -186,10 +176,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -231,8 +217,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -279,23 +263,17 @@ export class NotificationsProvider extends PureComponent <span class="cstat-no" 
       type: 'info',
     },
     show: false,
-    setNotification: <span class="fstat-no" title="function not covered" >(n</span>otification = <span class="branch-0 cbranch-no" title="branch not covered" >{}) =&gt; {</span>
-      let getNotification = <span class="cstat-no" title="statement not covered" >notification</span>
-<span class="cstat-no" title="statement not covered" >      if (typeof getNotification !== 'object') {</span>
-<span class="cstat-no" title="statement not covered" >        getNotification = {}</span>
-      }
+    setNotification: (<span class="fstat-no" title="function not covered" >notification) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      this.setState(</span>
         {
           show: true,
-          notification: getNotification,
+          notification,
         },
-<span class="fstat-no" title="function not covered" >        () =&gt; <span class="cstat-no" title="statement not covered" ></span>{</span>
-          const { type } = <span class="cstat-no" title="statement not covered" >validateNotifications()</span>
-<span class="cstat-no" title="statement not covered" >          if (type === 'Native') {</span>
-<span class="cstat-no" title="statement not covered" >            nativeNotification(</span>
-              getNotification.title,
-              getNotification.body,
-            )
+<span class="fstat-no" title="function not covered" >        () =&gt; </span>{
+&nbsp;
+          const notification = <span class="cstat-no" title="statement not covered" >validateNotifications()</span>
+<span class="cstat-no" title="statement not covered" >          if (notification.type === "Native") {</span>
+<span class="cstat-no" title="statement not covered" >            nativeNotification(this.state.title, this.state.body, this.state.icon)</span>
           }
 <span class="cstat-no" title="statement not covered" >          setTimeout(<span class="fstat-no" title="function not covered" >() =&gt; </span>{</span>
 <span class="cstat-no" title="statement not covered" >            this.state.hidenNotification()</span>
@@ -307,8 +285,8 @@ export class NotificationsProvider extends PureComponent <span class="cstat-no" 
 <span class="cstat-no" title="statement not covered" >      WinJS.UI.Animation.exitContent(</span>
         document.getElementsByClassName('toast'), {
           top: '0px',
-          left: '20px',
-        },
+          left: '20px'
+        }
       ).then(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
 <span class="cstat-no" title="statement not covered" >        this.setState(</span>
           {
@@ -331,23 +309,21 @@ export class NotificationsProvider extends PureComponent <span class="cstat-no" 
     let toast = <span class="cstat-no" title="statement not covered" >null</span>
 <span class="cstat-no" title="statement not covered" >    if (context.show &amp;&amp; notification.type === 'Toast') {</span>
 <span class="cstat-no" title="statement not covered" >      toast = (</span>
-        &lt;div className={`toast toast--${context.notification.type}`}&gt;
-          &lt;span
-            className="cancelIcon"
-            style={ { float: 'right', cursor: 'pointer', color: '#ffffff' } }
-            onClick={<span class="fstat-no" title="function not covered" >() =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >              context.hidenNotification()</span>
-            } }
-            role="button"
-            tabIndex="0"
-          /&gt;
-          &lt;div className="toast__title"&gt;
-            {context.notification.title}
-          &lt;/div&gt;
-          &lt;div className="toast__body"&gt;
-            {context.notification.body}
-          &lt;/div&gt;
-        &lt;/div&gt;)
+      &lt;div className={`toast toast--${context.notification.type}`}&gt;
+        &lt;span
+          className="cancelIcon"
+          style={ { float: 'right', cursor: 'pointer', color: '#ffffff' } }
+          onClick={<span class="fstat-no" title="function not covered" >() =&gt; </span>{
+<span class="cstat-no" title="statement not covered" >            context.hidenNotification()</span>
+          } }
+        /&gt;
+        &lt;div className="toast__title"&gt;
+          {context.notification.title}
+        &lt;/div&gt;
+        &lt;div className="toast__body"&gt;
+          {context.notification.body}
+        &lt;/div&gt;
+      &lt;/div&gt;)
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
@@ -357,7 +333,7 @@ export class NotificationsProvider extends PureComponent <span class="cstat-no" 
           {this.props.children}
         &lt;/NotificationsContext.Provider&gt;
       &lt;/React.Fragment&gt;
-    )
+    );
   }
 }
 &nbsp;
@@ -373,7 +349,7 @@ export class NotificationsProvider extends PureComponent <span class="cstat-no" 
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 12:33:53 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

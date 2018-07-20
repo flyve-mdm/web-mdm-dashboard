@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/19</span>
+        <span class='fraction'>0/21</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,12 +35,12 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/19</span>
+        <span class='fraction'>0/21</span>
       </div>
     </div>
     <p class="quiet">
@@ -195,7 +195,11 @@ layout: coverage
 <a name='L144'></a><a href='#L144'>144</a>
 <a name='L145'></a><a href='#L145'>145</a>
 <a name='L146'></a><a href='#L146'>146</a>
-<a name='L147'></a><a href='#L147'>147</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -290,7 +294,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -406,7 +414,7 @@ class Notifications extends PureComponent {
    * @function changeNotificationType
    * @param {object} e
    */
-  changeNotificationType = (<span class="fstat-no" title="function not covered" >e) =&gt; {</span>
+  changeNotificationType = (e) =&gt; {
     const newNotificationType = <span class="cstat-no" title="statement not covered" >e.target.value</span>
 <span class="cstat-no" title="statement not covered" >    if (Notification) {</span>
 <span class="cstat-no" title="statement not covered" >      Notification.requestPermission((<span class="fstat-no" title="function not covered" >permission) =&gt; {</span></span>
@@ -424,12 +432,11 @@ class Notifications extends PureComponent {
    * Change show notifications
    * @function changeShowNotifications
    */
-  changeShowNotifications = <span class="fstat-no" title="function not covered" >() =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >    localStorage.setItem('showNotifications', !this.state.showNotifications)</span>
-<span class="cstat-no" title="statement not covered" >    this.setState((<span class="fstat-no" title="function not covered" >prevState) =&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >      ({</span>
-        showNotifications: !prevState.showNotifications,
-      })
+  changeShowNotifications = () =&gt; {
+    const { showNotifications } = <span class="cstat-no" title="statement not covered" >this.state</span>
+<span class="cstat-no" title="statement not covered" >    localStorage.setItem('showNotifications', !showNotifications)</span>
+<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+      showNotifications: !showNotifications,
     })
   }
 &nbsp;
@@ -437,7 +444,12 @@ class Notifications extends PureComponent {
    * Render component
    * @function render
    */
-<span class="fstat-no" title="function not covered" >  render() </span>{
+<span class="fstat-no" title="function not covered" >  render() <span class="cstat-no" title="statement not covered" ></span>{</span>
+    const {
+      showNotifications,
+      notificationType,
+    } = <span class="cstat-no" title="statement not covered" >this.state</span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;ContentPane&gt;
         &lt;h2 style={ { margin: '10px' } }&gt;
@@ -453,7 +465,7 @@ class Notifications extends PureComponent {
           &lt;div className="list-element__controller"&gt;
             &lt;ReactWinJS.ToggleSwitch
               className="files-list__content-text-primary"
-              checked={this.state.showNotifications}
+              checked={showNotifications}
               onChange={this.changeShowNotifications}
             /&gt;
           &lt;/div&gt;
@@ -469,7 +481,7 @@ class Notifications extends PureComponent {
           &lt;div className="list-element__controller" style={ { paddingTop: 10 } }&gt;
             &lt;select
               name="notificationType"
-              value={this.state.notificationType}
+              value={notificationType}
               onChange={this.changeNotificationType}
             &gt;
               &lt;option&gt;
@@ -493,7 +505,7 @@ export default Notifications
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 12:33:53 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/20</span>
+        <span class='fraction'>0/19</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/20</span>
+        <span class='fraction'>0/19</span>
       </div>
     </div>
     <p class="quiet">
@@ -140,9 +140,7 @@ layout: coverage
 <a name='L89'></a><a href='#L89'>89</a>
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,8 +177,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -188,6 +184,8 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -199,8 +197,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -267,19 +263,19 @@ layout: coverage
 <span class="cstat-no" title="statement not covered" >import React from 'react'</span>
 <span class="cstat-no" title="statement not covered" >import ReactDOM from 'react-dom'</span>
 <span class="cstat-no" title="statement not covered" >import {</span>
-  Router,
+  Router
 } from 'react-router-dom'
-<span class="cstat-no" title="statement not covered" >import bugsnag from 'bugsnag-js'</span>
-<span class="cstat-no" title="statement not covered" >import createPlugin from 'bugsnag-react'</span>
 <span class="cstat-no" title="statement not covered" >import history from './shared/history'</span>
 <span class="cstat-no" title="statement not covered" >import RootApp from './applications/RootApp'</span>
 <span class="cstat-no" title="statement not covered" >import {</span>
-  unregister,
+  unregister
 } from './registerServiceWorker'
 <span class="cstat-no" title="statement not covered" >import { I18nProvider } from './providers/I18nProvider'</span>
 <span class="cstat-no" title="statement not covered" >import { NotificationsProvider } from './providers/NotificationsProvider'</span>
 <span class="cstat-no" title="statement not covered" >import { AuthenticationProvider } from './providers/AuthenticationProvider'</span>
 <span class="cstat-no" title="statement not covered" >import './assets/styles/main.scss' // Global CSS Styles</span>
+<span class="cstat-no" title="statement not covered" >import bugsnag from 'bugsnag-js'</span>
+<span class="cstat-no" title="statement not covered" >import createPlugin from 'bugsnag-react'</span>
 <span class="cstat-no" title="statement not covered" >import appConfig from '../public/config.json'</span>
 &nbsp;
 /**
@@ -291,11 +287,9 @@ layout: coverage
 const bugsnagClient = <span class="cstat-no" title="statement not covered" >bugsnag({</span>
   apiKey: appConfig.bugsnag,
   beforeSend: <span class="fstat-no" title="function not covered" >() =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {</span>
+<span class="cstat-no" title="statement not covered" >    if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test")</span>
 <span class="cstat-no" title="statement not covered" >      return false</span>
-    }
-<span class="cstat-no" title="statement not covered" >    return true</span>
-  },
+  }
 })
 &nbsp;
 /**
@@ -312,18 +306,18 @@ const ErrorBoundary = <span class="cstat-no" title="statement not covered" >bugs
 <span class="cstat-no" title="statement not covered" >ReactDOM.render(</span>
   (
     &lt;ErrorBoundary&gt;
-      &lt;I18nProvider&gt;
-        &lt;NotificationsProvider&gt;
-          &lt;AuthenticationProvider&gt;
-            &lt;Router history={history}&gt;
-              &lt;RootApp /&gt;
-            &lt;/Router&gt;
-          &lt;/AuthenticationProvider&gt;
-        &lt;/NotificationsProvider&gt;
-      &lt;/I18nProvider&gt;
+        &lt;I18nProvider&gt;
+          &lt;NotificationsProvider&gt;
+            &lt;AuthenticationProvider&gt;
+              &lt;Router history={history}&gt;
+                &lt;RootApp /&gt;
+              &lt;/Router&gt;
+            &lt;/AuthenticationProvider&gt;
+          &lt;/NotificationsProvider&gt;
+        &lt;/I18nProvider&gt;
     &lt;/ErrorBoundary&gt;
   ),
-  document.getElementById('root'),
+  document.getElementById('root')
 )
 &nbsp;
 /** Disable service worker */
@@ -334,7 +328,7 @@ const ErrorBoundary = <span class="cstat-no" title="statement not covered" >bugs
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 12:33:53 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../prettify.js"></script>

@@ -33,14 +33,14 @@ layout: coverage
         <span class='fraction'>2/44</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">16% </span>
+        <span class="strong">19.05% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/25</span>
+        <span class='fraction'>4/21</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">12% </span>
+        <span class="strong">11.69% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>9/75</span>
+        <span class='fraction'>9/77</span>
       </div>
     </div>
     <p class="quiet">
@@ -404,7 +404,10 @@ layout: coverage
 <a name='L353'></a><a href='#L353'>353</a>
 <a name='L354'></a><a href='#L354'>354</a>
 <a name='L355'></a><a href='#L355'>355</a>
-<a name='L356'></a><a href='#L356'>356</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L356'></a><a href='#L356'>356</a>
+<a name='L357'></a><a href='#L357'>357</a>
+<a name='L358'></a><a href='#L358'>358</a>
+<a name='L359'></a><a href='#L359'>359</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -491,6 +494,15 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -548,7 +560,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -588,15 +599,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -747,6 +749,10 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -842,6 +848,15 @@ export default class FilesUpload extends PureComponent {
   }
 &nbsp;
   /**
+   * Open the windows to select the files
+   * @function openFileChooser
+   */
+  openFileChooser = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.inputElement.value = null</span>
+<span class="cstat-no" title="statement not covered" >    this.inputElement.click()</span>
+  }
+&nbsp;
+  /**
    * change the native behavior of the browser to add files to a list in the state
    * @function onDrop
    * @param {object} event
@@ -900,10 +915,9 @@ export default class FilesUpload extends PureComponent {
       }
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.setState(<span class="fstat-no" title="function not covered" >pr</span>evState =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
-      files: this.props.multiple === false ? files : [...prevState.files, ...files],
-    }),
-<span class="fstat-no" title="function not covered" >    ()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+      files: this.props.multiple === false ? files : [...this.state.files, ...files],
+    }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >      this.props.onChange.call(this, this.state.files)</span>
     })
   }
@@ -944,15 +958,6 @@ export default class FilesUpload extends PureComponent {
    */
 <span class="fstat-no" title="function not covered" >  on</span>Error(error, file) {
 <span class="cstat-no" title="statement not covered" >    this.props.onError.call(this, error, file)</span>
-  }
-&nbsp;
-  /**
-   * Open the windows to select the files
-   * @function openFileChooser
-   */
-  openFileChooser = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >    this.inputElement.value = null</span>
-<span class="cstat-no" title="statement not covered" >    this.inputElement.click()</span>
   }
 &nbsp;
   /**
@@ -1017,9 +1022,9 @@ export default class FilesUpload extends PureComponent {
    * @param {object} fileToRemove
    */
 <span class="fstat-no" title="function not covered" >  re</span>moveFile(fileToRemove) {
-<span class="cstat-no" title="statement not covered" >    this.setState(<span class="fstat-no" title="function not covered" >pr</span>evState =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
-      files: prevState.files.filter(<span class="fstat-no" title="function not covered" >fi</span>le =&gt; <span class="cstat-no" title="statement not covered" >file.id !== fileToRemove.id)</span>,
-    }), <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >    this.setState({</span>
+      files: this.state.files.filter(<span class="fstat-no" title="function not covered" >fi</span>le =&gt; <span class="cstat-no" title="statement not covered" >file.id !== fileToRemove.id)</span>,
+    }, <span class="fstat-no" title="function not covered" >()</span> =&gt; {
 <span class="cstat-no" title="statement not covered" >      this.props.onChange.call(this, this.state.files)</span>
     })
   }
@@ -1101,8 +1106,12 @@ FilesUpload.propTypes = {
 }
 &nbsp;
 FilesUpload.defaultProps = {
-  onChange: <span class="fstat-no" title="function not covered" >()</span> =&gt; {},
-  onError: <span class="fstat-no" title="function not covered" >()</span> =&gt; {},
+  onChange(files) {
+<span class="cstat-no" title="statement not covered" >    console.log(files)</span>
+  },
+  onError(error) {
+<span class="cstat-no" title="statement not covered" >    console.log(`error code ${error.code}: ${error.message}`)</span>
+  },
   className: 'files-dropzone',
   dropActiveClassName: 'files-dropzone-active',
   accepts: null,
@@ -1120,7 +1129,7 @@ FilesUpload.defaultProps = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 12:33:53 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

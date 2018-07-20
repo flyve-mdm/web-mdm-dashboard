@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/38</span>
+        <span class='fraction'>0/43</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/36</span>
+        <span class='fraction'>0/41</span>
       </div>
     </div>
     <p class="quiet">
@@ -222,7 +222,19 @@ layout: coverage
 <a name='L171'></a><a href='#L171'>171</a>
 <a name='L172'></a><a href='#L172'>172</a>
 <a name='L173'></a><a href='#L173'>173</a>
-<a name='L174'></a><a href='#L174'>174</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -287,6 +299,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -335,6 +352,13 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -460,15 +484,20 @@ class Feedback extends PureComponent {
     }
   }
 &nbsp;
-  handleSubmit = (<span class="fstat-no" title="function not covered" >event) =&gt; {</span>
+  handleSubmit = (<span class="fstat-no" title="function not covered" >event) =&gt; <span class="cstat-no" title="statement not covered" >{</span></span>
 <span class="cstat-no" title="statement not covered" >    event.preventDefault()</span>
+    const { glpi } = <span class="cstat-no" title="statement not covered" >this.props</span>
+    const {
+      subject,
+      textarea,
+    } = <span class="cstat-no" title="statement not covered" >this.state</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    this.setState({</span>
       isLoading: true,
     }, <span class="fstat-no" title="function not covered" >async () =&gt; <span class="cstat-no" title="statement not covered" ></span>{</span>
       const {
         active_profile: activeProfile,
-      } = <span class="cstat-no" title="statement not covered" >await this.props.glpi.getActiveProfile()</span>
+      } = <span class="cstat-no" title="statement not covered" >await glpi.getActiveProfile()</span>
       let entityID
 <span class="cstat-no" title="statement not covered" >      if (Array.isArray(activeProfile.entities)) {</span>
 <span class="cstat-no" title="statement not covered" >        entityID = activeProfile.entities[0].id</span>
@@ -480,7 +509,7 @@ class Feedback extends PureComponent {
         }
       }
 &nbsp;
-      let entityconfig = <span class="cstat-no" title="statement not covered" >await this.props.glpi.getAnItem({</span>
+      let entityconfig = <span class="cstat-no" title="statement not covered" >await glpi.getAnItem({</span>
         itemtype: itemtype.PluginFlyvemdmEntityconfig,
         id: entityID,
       })
@@ -488,8 +517,8 @@ class Feedback extends PureComponent {
 <span class="cstat-no" title="statement not covered" >      if (Array.isArray(entityconfig)) <span class="cstat-no" title="statement not covered" >e</span>ntityconfig = { ...entityconfig[0] }</span>
 &nbsp;
       const link = `<span class="cstat-no" title="statement not covered" >mailto:${entityconfig.support_email}`</span>
-        + `?subject=${escape(this.state.subject)}`
-        + `&amp;body=${escape(this.state.textarea)}`
+        + `?subject=${escape(subject)}`
+        + `&amp;body=${escape(textarea)}`
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (process.env.NODE_ENV !== 'test') <span class="cstat-no" title="statement not covered" >w</span>indow.location.href = link</span>
 &nbsp;
@@ -508,12 +537,19 @@ class Feedback extends PureComponent {
     })
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  render() </span>{
-<span class="cstat-no" title="statement not covered" >    if (this.state.isLoading) {</span>
+<span class="fstat-no" title="function not covered" >  render() <span class="cstat-no" title="statement not covered" ></span>{</span>
+    const {
+      isLoading,
+      feedbackSent,
+      subject,
+      textarea,
+    } = <span class="cstat-no" title="statement not covered" >this.state</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (isLoading) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
         &lt;Loading message={I18n.t('commons.sending')} /&gt;
       )
-    } <span class="cstat-no" title="statement not covered" >if (this.state.feedbackSent) {</span>
+    } <span class="cstat-no" title="statement not covered" >if (feedbackSent) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
         &lt;React.Fragment&gt;
           &lt;div style={ { textAlign: 'center' } }&gt;
@@ -537,21 +573,21 @@ class Feedback extends PureComponent {
             &lt;Input
               label={I18n.t('commons.subject')}
               name="subject"
-              value={this.state.subject}
+              value={subject}
               function={this.changeMessage}
               required
             /&gt;
             &lt;TextArea
               label={I18n.t('commons.message')}
               name="textarea"
-              value={this.state.textarea}
+              value={textarea}
               function={this.changeMessage}
               placeholder={I18n.t('about.help_center.write_feedback')}
               required
             /&gt;
             &lt;button
               className="btn btn--primary"
-              type="submit"
+              type="button"
             &gt;
               {I18n.t('commons.send') }
             &lt;/button&gt;
@@ -574,7 +610,7 @@ export default withGLPI(withHandleMessages(Feedback))
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 12:33:53 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

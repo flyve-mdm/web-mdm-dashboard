@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/21</span>
+        <span class='fraction'>0/25</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/21</span>
+        <span class='fraction'>0/25</span>
       </div>
     </div>
     <p class="quiet">
@@ -175,7 +175,17 @@ layout: coverage
 <a name='L124'></a><a href='#L124'>124</a>
 <a name='L125'></a><a href='#L125'>125</a>
 <a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -227,6 +237,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -247,6 +262,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -333,8 +353,8 @@ layout: coverage
 <span class="cstat-no" title="statement not covered" >import React, {</span>
   PureComponent,
 } from 'react'
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 <span class="cstat-no" title="statement not covered" >import I18n from '../../../../shared/i18n'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 <span class="cstat-no" title="statement not covered" >import ContentPane from '../../../../components/ContentPane'</span>
 <span class="cstat-no" title="statement not covered" >import Loading from '../../../../components/Loading'</span>
 <span class="cstat-no" title="statement not covered" >import withGLPI from '../../../../hoc/withGLPI'</span>
@@ -353,9 +373,14 @@ class SystemInformation extends PureComponent {
     }
   }
 &nbsp;
-  componentDidMount = <span class="fstat-no" title="function not covered" >async () =&gt; </span>{
+  componentDidMount = <span class="fstat-no" title="function not covered" >async () =&gt; <span class="cstat-no" title="statement not covered" ></span>{</span>
+    const {
+      glpi,
+      handleMessage,
+    } = <span class="cstat-no" title="statement not covered" >this.props</span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >    try {</span>
-      const plugins = <span class="cstat-no" title="statement not covered" >await this.props.glpi.getAllItems({</span>
+      const plugins = <span class="cstat-no" title="statement not covered" >await glpi.getAllItems({</span>
         itemtype: itemtype.Plugin,
       })
 <span class="cstat-no" title="statement not covered" >      this.setState({</span>
@@ -363,7 +388,7 @@ class SystemInformation extends PureComponent {
         plugins,
       })
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(this.props.handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >      this.props.toast.setNotification(handleMessage({</span>
         type: 'alert',
         message: error,
       }))
@@ -373,11 +398,16 @@ class SystemInformation extends PureComponent {
     }
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  render() </span>{
+<span class="fstat-no" title="function not covered" >  render() <span class="cstat-no" title="statement not covered" ></span>{</span>
+    const {
+      plugins,
+      isLoading,
+    } = <span class="cstat-no" title="statement not covered" >this.state</span>
+&nbsp;
     const element = <span class="cstat-no" title="statement not covered" >[]</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (this.state.plugins) {</span>
-<span class="cstat-no" title="statement not covered" >      this.state.plugins.forEach((<span class="fstat-no" title="function not covered" >plugin) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >    if (plugins) {</span>
+<span class="cstat-no" title="statement not covered" >      plugins.forEach((<span class="fstat-no" title="function not covered" >plugin) =&gt; {</span></span>
 <span class="cstat-no" title="statement not covered" >        element.push(</span>
           &lt;div className="plugins" key={plugin.id}&gt;
             &lt;div className="plugins--left"&gt;
@@ -403,7 +433,7 @@ class SystemInformation extends PureComponent {
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      this.state.isLoading
+      isLoading
         ? &lt;Loading message={`${I18n.t('commons.loading')}...`} /&gt;
         : (
           &lt;ContentPane&gt;
@@ -433,7 +463,7 @@ export default withGLPI(SystemInformation)
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 12:33:53 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

@@ -217,10 +217,7 @@ layout: coverage
 <a name='L166'></a><a href='#L166'>166</a>
 <a name='L167'></a><a href='#L167'>167</a>
 <a name='L168'></a><a href='#L168'>168</a>
-<a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a>
-<a name='L171'></a><a href='#L171'>171</a>
-<a name='L172'></a><a href='#L172'>172</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L169'></a><a href='#L169'>169</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -380,9 +377,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -393,7 +387,7 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/** import dependencies */
 <span class="cstat-no" title="statement not covered" >import React from 'react'</span>
-<span class="cstat-no" title="statement not covered" >import I18n from '.'</span>
+<span class="cstat-no" title="statement not covered" >import I18n from '../i18n'</span>
 &nbsp;
 /**
  * Generate array with the different available language options
@@ -402,161 +396,158 @@ layout: coverage
  */
 export default () =&gt; {
   const languages = <span class="cstat-no" title="statement not covered" >[{</span>
-    abbreviation: 'en_GB',
-    name: I18n.t('commons.english'),
-    country: I18n.t('commons.Britain'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'cs_CZ',
-    name: I18n.t('commons.czech'),
-    country: I18n.t('commons.Czech_Republic'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'fr_FR',
-    name: I18n.t('commons.french'),
-    country: I18n.t('commons.France'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'es_MX',
-    name: I18n.t('commons.spanish'),
-    country: I18n.t('commons.Mexico'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'es_AR',
-    name: I18n.t('commons.spanish'),
-    country: I18n.t('commons.Argentina'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'es_ES',
-    name: I18n.t('commons.spanish'),
-    country: I18n.t('commons.Spain'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'ar_EG',
-    name: I18n.t('commons.arabic'),
-    country: I18n.t('commons.Egypt'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'ar_SA',
-    name: I18n.t('commons.arabic'),
-    country: I18n.t('commons.Saudi_Arabia'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'ca_ES',
-    name: I18n.t('commons.catalan'),
-    country: I18n.t('commons.Spain'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'gl_ES',
-    name: I18n.t('commons.galician'),
-    country: I18n.t('commons.Spain'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'de_DE',
-    name: I18n.t('commons.german'),
-    country: I18n.t('commons.Germany'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'he_IL',
-    name: I18n.t('commons.hebrew'),
-    country: I18n.t('commons.Israel'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'hi_IN',
-    name: I18n.t('commons.hindi'),
-    country: I18n.t('commons.India'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'hu_HU',
-    name: I18n.t('commons.hungarian'),
-    country: I18n.t('commons.Hungary'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'it_IT',
-    name: I18n.t('commons.italian'),
-    country: I18n.t('commons.Italy'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'ko_KR',
-    name: I18n.t('commons.korean'),
-    country: I18n.t('commons.Korea'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'pl_PL',
-    name: I18n.t('commons.polish'),
-    country: I18n.t('commons.Poland'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'pt_BR',
-    name: I18n.t('commons.portuguese'),
-    country: I18n.t('commons.Brazil'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'pt_PT',
-    name: I18n.t('commons.portuguese'),
-    country: I18n.t('commons.Portugal'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'ja_JP',
-    name: I18n.t('commons.japanese'),
-    country: I18n.t('commons.Japon'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'ru_RU',
-    name: I18n.t('commons.russian'),
-    country: I18n.t('commons.Russia'),
-    isAvailable: true,
-  },
+      abbreviation: 'en_GB',
+      name: I18n.t('commons.english'),
+      country: I18n.t('commons.Britain'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'cs_CZ',
+      name: I18n.t('commons.czech'),
+      country: I18n.t('commons.Czech_Republic'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'fr_FR',
+      name: I18n.t('commons.french'),
+      country: I18n.t('commons.France'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'es_MX',
+      name: I18n.t('commons.spanish'),
+      country: I18n.t('commons.Mexico'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'es_AR',
+      name: I18n.t('commons.spanish'),
+      country: I18n.t('commons.Argentina'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'es_ES',
+      name: I18n.t('commons.spanish'),
+      country: I18n.t('commons.Spain'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'ar_EG',
+      name: I18n.t('commons.arabic'),
+      country: I18n.t('commons.Egypt'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'ar_SA',
+      name: I18n.t('commons.arabic'),
+      country: I18n.t('commons.Saudi_Arabia'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'ca_ES',
+      name: I18n.t('commons.catalan'),
+      country: I18n.t('commons.Spain'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'gl_ES',
+      name: I18n.t('commons.galician'),
+      country: I18n.t('commons.Spain'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'de_DE',
+      name: I18n.t('commons.german'),
+      country: I18n.t('commons.Germany'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'he_IL',
+      name: I18n.t('commons.hebrew'),
+      country: I18n.t('commons.Israel'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'hi_IN',
+      name: I18n.t('commons.hindi'),
+      country: I18n.t('commons.India'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'hu_HU',
+      name: I18n.t('commons.hungarian'),
+      country: I18n.t('commons.Hungary'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'it_IT',
+      name: I18n.t('commons.italian'),
+      country: I18n.t('commons.Italy'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'ko_KR',
+      name: I18n.t('commons.korean'),
+      country: I18n.t('commons.Korea'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'pl_PL',
+      name: I18n.t('commons.polish'),
+      country: I18n.t('commons.Poland'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'pt_BR',
+      name: I18n.t('commons.portuguese'),
+      country: I18n.t('commons.Brazil'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'pt_PT',
+      name: I18n.t('commons.portuguese'),
+      country: I18n.t('commons.Portugal'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'ja_JP',
+      name: I18n.t('commons.japanese'),
+      country: I18n.t('commons.Japon'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'ru_RU',
+      name: I18n.t('commons.russian'),
+      country: I18n.t('commons.Russia'),
+      isAvailable: true
+    },
 &nbsp;
-  {
-    abbreviation: 'ur_PK',
-    name: I18n.t('commons.China'),
-    country: I18n.t('commons.Pakistan'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'zh_CN',
-    name: I18n.t('commons.chinese'),
-    country: I18n.t('commons.China'),
-    isAvailable: true,
-  },
-  {
-    abbreviation: 'th_TH',
-    name: I18n.t('commons.thai'),
-    country: I18n.t('commons.Thailand'),
-    isAvailable: true,
-  },
+    {
+      abbreviation: 'ur_PK',
+      name: I18n.t('commons.China'),
+      country: I18n.t('commons.Pakistan'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'zh_CN',
+      name: I18n.t('commons.chinese'),
+      country: I18n.t('commons.China'),
+      isAvailable: true
+    },
+    {
+      abbreviation: 'th_TH',
+      name: I18n.t('commons.thai'),
+      country: I18n.t('commons.Thailand'),
+      isAvailable: true
+    },
   ]
-  const renderList = <span class="cstat-no" title="statement not covered" >[]</span>
-<span class="cstat-no" title="statement not covered" >  languages.forEach((<span class="fstat-no" title="function not covered" >language) =&gt; {</span></span>
+  let renderList = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >  languages.forEach(<span class="fstat-no" title="function not covered" >language =&gt; </span>{</span>
 <span class="cstat-no" title="statement not covered" >    if (language.isAvailable) {</span>
 <span class="cstat-no" title="statement not covered" >      renderList.push(</span>
         &lt;option value={language.abbreviation} key={language.abbreviation}&gt;
-          {language.name}
-          {' '}
--
-          {language.country}
-        &lt;/option&gt;,
+          {language.name} - {language.country}
+        &lt;/option&gt;
       )
     }
   })
@@ -568,7 +559,7 @@ export default () =&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 12:33:53 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
