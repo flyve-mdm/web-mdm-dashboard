@@ -8,7 +8,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@glpi-project/javascript-library-glpi": ">=0.1.0-beta <=1.0.0",
-    "@microsoft/fast-animation": "^0.0.12-beta.0",
+    "@microsoft/fast-animation": "^1.9.2",
     "bugsnag-js": "^4.6.3",
     "bugsnag-react": "^1.1.1",
     "clang-format": "^1.2.3",
