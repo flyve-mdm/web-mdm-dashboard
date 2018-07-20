@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/12</span>
       </div>
     </div>
     <p class="quiet">
@@ -132,22 +132,7 @@ layout: coverage
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a>
-<a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a>
-<a name='L97'></a><a href='#L97'>97</a>
-<a name='L98'></a><a href='#L98'>98</a>
-<a name='L99'></a><a href='#L99'>99</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -187,29 +172,14 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -275,53 +245,38 @@ layout: coverage
 &nbsp;
 /** import dependencies */
 <span class="cstat-no" title="statement not covered" >import React, {</span>
-  PureComponent,
+  PureComponent
 } from 'react'
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import I18n from '../../../../shared/i18n'</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+  I18n
+} from "react-i18nify"
 &nbsp;
 /**
  * @class GeolocationList
  * @extends PureComponent
  */
 class GeolocationList extends PureComponent {
-<span class="fstat-no" title="function not covered" >  render() <span class="cstat-no" title="statement not covered" ></span>{</span>
-    const {
-      locations,
-      goToLocation,
-      showLocation,
-      markers,
-    } = <span class="cstat-no" title="statement not covered" >this.props</span>
-&nbsp;
+<span class="fstat-no" title="function not covered" >  render() </span>{
     let renderList
-<span class="cstat-no" title="statement not covered" >    if (locations.length &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >      renderList = locations.map(<span class="fstat-no" title="function not covered" >(l</span>ocation, index) =&gt; (</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div</span>
-          key={`location-${index.toString()}`}
-          style={ { paddingLeft: 5, cursor: 'pointer' } }
-          onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>goToLocation(location)}</span>
-          role="button"
-          tabIndex="0"
-        &gt;
-          &lt;label
-            style={ { cursor: 'pointer' } }
-            htmlFor={`location-${index.toString()}`}
-          &gt;
+<span class="cstat-no" title="statement not covered" >    if (this.props.locations.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      renderList = this.props.locations.map(<span class="fstat-no" title="function not covered" >(l</span>ocation, index) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return (</span>
+          &lt;div key={`location-${index}`} style={ {paddingLeft:5, cursor: 'pointer'} } onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.props.goToLocation(location)}&gt;</span>
             &lt;input
-              id={`location-${index.toString()}`}
               type="checkbox"
               className="win-checkbox"
-              style={ { width: 'auto', cursor: 'pointer' } }
-              onChange={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>showLocation(location)}</span>
-              checked={(markers.indexOf(location) !== -1)}
+              style={ {width: 'auto', cursor: 'pointer'} }
+              onChange={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.props.showLocation(location)}</span>
+              checked={(this.props.markers.indexOf(location) !== -1)}
             /&gt;
-            { location.date }
-          &lt;/label&gt;
-        &lt;/div&gt;
-      ))
+            &lt;label style={ {cursor: 'pointer'} }&gt;{ location.date }&lt;/label&gt;
+          &lt;/div&gt;
+        )
+      })
     } else {
 <span class="cstat-no" title="statement not covered" >      renderList = (</span>
-        &lt;p style={ { color: 'grey', marginLeft: 5 } }&gt;
+        &lt;p style={ { color: 'grey', marginLeft:5} }&gt;
           {I18n.t('devices.geolocation.no_locations')}
         &lt;/p&gt;
       )
@@ -332,14 +287,14 @@ class GeolocationList extends PureComponent {
 /** GeolocationList defaultProps */
 <span class="cstat-no" title="statement not covered" >GeolocationList.defaultProps = {</span>
   locations: [],
-  markers: [],
+  markers: []
 }
 /** GeolocationList propTypes */
 <span class="cstat-no" title="statement not covered" >GeolocationList.propTypes = {</span>
   locations: PropTypes.array,
-  showLocation: PropTypes.func.isRequired,
+  showLocation: PropTypes.func,
   markers: PropTypes.array,
-  goToLocation: PropTypes.func.isRequired,
+  goToLocation: PropTypes.func.isRequired
 }
 &nbsp;
 export default GeolocationList
@@ -349,7 +304,7 @@ export default GeolocationList
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

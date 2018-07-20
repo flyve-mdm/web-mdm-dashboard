@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/7</span>
+        <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/7</span>
+        <span class='fraction'>0/6</span>
       </div>
     </div>
     <p class="quiet">
@@ -124,12 +124,7 @@ layout: coverage
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -163,20 +158,15 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -238,12 +228,13 @@ layout: coverage
  */
 &nbsp;
 /** import dependencies */
-<span class="cstat-no" title="statement not covered" >import I18n from '../../shared/i18n'</span>
 <span class="cstat-no" title="statement not covered" >import EmptyMessage from '../../components/EmptyMessage'</span>
-<span class="cstat-no" title="statement not covered" >import ErrorPage from '../../components/ErrorPage'</span>
 <span class="cstat-no" title="statement not covered" >import DevicesContent from './components/ApplicationsContent'</span>
 <span class="cstat-no" title="statement not covered" >import ApplicationsAdd from './components/ApplicationsAdd'</span>
 <span class="cstat-no" title="statement not covered" >import ApplicationsEdit from './components/ApplicationsEdit'</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+  I18n
+} from 'react-i18nify'
 &nbsp;
 /**
  * Represents all routes from Applications section
@@ -251,41 +242,35 @@ layout: coverage
  * @type {Array}
  */
 const routes = <span class="cstat-no" title="statement not covered" >[{</span>
-  path: '/',
-  name: I18n.t('commons.no_selection'),
-  component: EmptyMessage,
-  exact: true,
-},
-{
-  path: '/error',
-  name: I18n.t('commons.error'),
-  component: ErrorPage,
-  exact: true,
-},
-{
-  path: '/add',
-  name: I18n.t('commons.add'),
-  component: ApplicationsAdd,
-  exact: true,
-},
-{
-  path: '/edit',
-  name: I18n.t('commons.edit'),
-  component: ApplicationsEdit,
-  exact: true,
-},
-{
-  path: '/:id/edit',
-  name: I18n.t('commons.edit_one'),
-  component: ApplicationsEdit,
-  exact: true,
-},
-{
-  path: '/:id',
-  name: I18n.t('commons.edit_one'),
-  component: DevicesContent,
-  exact: true,
-},
+    path: '/',
+    name: I18n.t('commons.no_selection'),
+    component: EmptyMessage,
+    exact: true
+  },
+  {
+    path: '/add',
+    name: I18n.t('commons.add'),
+    component: ApplicationsAdd,
+    exact: true
+  },
+  {
+    path: '/edit',
+    name: I18n.t('commons.edit'),
+    component: ApplicationsEdit,
+    exact: true
+  },
+  {
+    path: '/:id/edit',
+    name: I18n.t('commons.edit_one'),
+    component: ApplicationsEdit,
+    exact: true
+  },
+  {
+    path: '/:id',
+    name: I18n.t('commons.edit_one'),
+    component: DevicesContent,
+    exact: true
+  }
 ]
 &nbsp;
 export default routes
@@ -295,7 +280,7 @@ export default routes
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

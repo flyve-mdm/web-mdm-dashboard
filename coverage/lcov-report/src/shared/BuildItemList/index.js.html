@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/29</span>
+        <span class='fraction'>0/28</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/29</span>
+        <span class='fraction'>0/28</span>
       </div>
     </div>
     <p class="quiet">
@@ -138,7 +138,10 @@ layout: coverage
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,6 +182,7 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -202,6 +206,7 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -210,6 +215,8 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -219,13 +226,12 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
  *   Copyright © 2018 Teclib. All rights reserved.
@@ -259,13 +265,14 @@ layout: coverage
 &nbsp;
 /** Import dependencies */
 <span class="cstat-no" title="statement not covered" >import WinJS from 'winjs'</span>
-<span class="cstat-no" title="statement not covered" >import I18n from '../../shared/i18n'</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+  I18n
+} from 'react-i18nify'
 &nbsp;
 /**
  * Sort elements ascending / descending
  * @param {object} dataSource
  * @param {int} index
- * @return {object} WinJS.Binding.List
  */
 export default function (dataSource, index = <span class="branch-0 cbranch-no" title="branch not covered" >0) {</span>
   const groupKey = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function (</span>data) {</span>
@@ -278,7 +285,7 @@ export default function (dataSource, index = <span class="branch-0 cbranch-no" t
 &nbsp;
   const groupData = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function (</span>data) {</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
-      title: groupKey(data),
+      title: groupKey(data)
     }
   }
 &nbsp;
@@ -286,26 +293,30 @@ export default function (dataSource, index = <span class="branch-0 cbranch-no" t
 <span class="cstat-no" title="statement not covered" >    if (dataSource.order === 'ASC') {</span>
 <span class="cstat-no" title="statement not covered" >      if (a &lt; b) {</span>
 <span class="cstat-no" title="statement not covered" >        return -1</span>
-      } <span class="cstat-no" title="statement not covered" >if (a &gt; b) {</span>
+      } else <span class="cstat-no" title="statement not covered" >if (a &gt; b) {</span>
 <span class="cstat-no" title="statement not covered" >        return 1</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        return 0</span>
       }
-<span class="cstat-no" title="statement not covered" >      return 0</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      if (a &gt; b) {</span>
+<span class="cstat-no" title="statement not covered" >        return -1</span>
+      } else <span class="cstat-no" title="statement not covered" >if (a &lt; b) {</span>
+<span class="cstat-no" title="statement not covered" >        return 1</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        return 0</span>
+      }
     }
-<span class="cstat-no" title="statement not covered" >    if (a &gt; b) {</span>
-<span class="cstat-no" title="statement not covered" >      return -1</span>
-    } <span class="cstat-no" title="statement not covered" >if (a &lt; b) {</span>
-<span class="cstat-no" title="statement not covered" >      return 1</span>
-    }
-<span class="cstat-no" title="statement not covered" >    return 0</span>
   }
 &nbsp;
   const sorter = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    if (a[Object.keys(a)[0]] &lt; b[Object.keys(b)[0]]) {</span>
 <span class="cstat-no" title="statement not covered" >      return -1</span>
-    } <span class="cstat-no" title="statement not covered" >if (a[Object.keys(a)[0]] &gt; b[Object.keys(b)[0]]) {</span>
+    } else <span class="cstat-no" title="statement not covered" >if (a[Object.keys(a)[0]] &gt; b[Object.keys(b)[0]]) {</span>
 <span class="cstat-no" title="statement not covered" >      return 1</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      return 0</span>
     }
-<span class="cstat-no" title="statement not covered" >    return 0</span>
   }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  if (dataSource.data) {</span>
@@ -313,8 +324,6 @@ export default function (dataSource, index = <span class="branch-0 cbranch-no" t
       .createSorted(sorter)
       .createGrouped(groupKey, groupData, groupSorted)
   }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return null</span>
 }
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -322,7 +331,7 @@ export default function (dataSource, index = <span class="branch-0 cbranch-no" t
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

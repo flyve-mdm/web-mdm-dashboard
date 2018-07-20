@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/16</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/16</span>
+        <span class='fraction'>0/12</span>
       </div>
     </div>
     <p class="quiet">
@@ -156,13 +156,7 @@ layout: coverage
 <a name='L105'></a><a href='#L105'>105</a>
 <a name='L106'></a><a href='#L106'>106</a>
 <a name='L107'></a><a href='#L107'>107</a>
-<a name='L108'></a><a href='#L108'>108</a>
-<a name='L109'></a><a href='#L109'>109</a>
-<a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L108'></a><a href='#L108'>108</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -203,23 +197,12 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -235,19 +218,24 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -305,10 +293,12 @@ layout: coverage
 &nbsp;
 /** import dependencies */
 <span class="cstat-no" title="statement not covered" >import React, {</span>
-  PureComponent,
+  PureComponent
 } from 'react'
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import I18n from '../../../shared/i18n'</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+  I18n
+} from 'react-i18nify'
 &nbsp;
 /**
  * @class FilesEditItemList
@@ -320,15 +310,13 @@ export default class FilesEditItemList extends PureComponent {
 <span class="cstat-no" title="statement not covered" >    super(props)</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    this.state = {</span>
-      input: '',
+      input: ''
     }
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  componentDidMount() </span>{
-    const { selectedItem } = <span class="cstat-no" title="statement not covered" >this.props</span>
-&nbsp;
 <span class="cstat-no" title="statement not covered" >    this.setState({</span>
-      input: selectedItem['PluginFlyvemdmFile.name'],
+      input: this.props.selectedItem["PluginFlyvemdmFile.name"]
     })
   }
 &nbsp;
@@ -339,7 +327,7 @@ export default class FilesEditItemList extends PureComponent {
    */
   changeInput = (<span class="fstat-no" title="function not covered" >e) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    this.setState({</span>
-      input: e.target.value,
+      input: e.target.value
     })
   }
 &nbsp;
@@ -348,31 +336,25 @@ export default class FilesEditItemList extends PureComponent {
    * @function blurInput
    * @param {object} e
    */
-  blurInput = (<span class="fstat-no" title="function not covered" >e) =&gt; <span class="cstat-no" title="statement not covered" >{</span></span>
-    const {
-      updateItemList,
-      selectedItem,
-    } = <span class="cstat-no" title="statement not covered" >this.props</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    if (e.target.value.trim() !== '') {</span>
-<span class="cstat-no" title="statement not covered" >      updateItemList(selectedItem['PluginFlyvemdmFile.id'], e.target.value)</span>
+  blurInput = (<span class="fstat-no" title="function not covered" >e) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (e.target.value.trim() !== "") {</span>
+<span class="cstat-no" title="statement not covered" >      this.props.updateItemList(this.props.selectedItem["PluginFlyvemdmFile.id"], e.target.value)</span>
     }
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  render() </span>{
-    const { input } = <span class="cstat-no" title="statement not covered" >this.state</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;div className="files-list"&gt;
-        &lt;div className="files-list__content"&gt;
-          &lt;div className="files-list__item"&gt;
-            &lt;div className="files-list__item-content-primary"&gt;
+      &lt;div className='files-list' &gt;
+        &lt;div className='files-list__content'&gt;
+          &lt;div className='files-list__item'&gt;
+            &lt;div className='files-list__item-content-primary'&gt;
               &lt;input
                 type="text"
-                style={ { width: '240px' } }
+                style={ { width: '240px'} }
                 className="win-textbox"
                 placeholder={I18n.t('files.input_name')}
                 name="input"
-                value={input}
+                value={this.state.input}
                 onChange={this.changeInput}
                 onBlur={this.blurInput}
               /&gt;
@@ -386,7 +368,7 @@ export default class FilesEditItemList extends PureComponent {
 /** FilesEditItemList propTypes */
 <span class="cstat-no" title="statement not covered" >FilesEditItemList.propTypes = {</span>
   selectedItem: PropTypes.object.isRequired,
-  updateItemList: PropTypes.func.isRequired,
+  updateItemList: PropTypes.func.isRequired
 }
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -394,7 +376,7 @@ export default class FilesEditItemList extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

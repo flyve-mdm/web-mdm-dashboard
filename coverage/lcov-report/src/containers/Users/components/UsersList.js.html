@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/137</span>
+        <span class='fraction'>0/135</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/134</span>
+        <span class='fraction'>0/132</span>
       </div>
     </div>
     <p class="quiet">
@@ -624,7 +624,8 @@ layout: coverage
 <a name='L573'></a><a href='#L573'>573</a>
 <a name='L574'></a><a href='#L574'>574</a>
 <a name='L575'></a><a href='#L575'>575</a>
-<a name='L576'></a><a href='#L576'>576</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L576'></a><a href='#L576'>576</a>
+<a name='L577'></a><a href='#L577'>577</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -657,7 +658,8 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -866,7 +868,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -890,6 +891,7 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1231,7 +1233,9 @@ layout: coverage
 <span class="cstat-no" title="statement not covered" >import React, {</span>
   PureComponent,
 } from 'react'
-<span class="cstat-no" title="statement not covered" >import I18n from '../../../shared/i18n'</span>
+<span class="cstat-no" title="statement not covered" >import {</span>
+  I18n,
+} from 'react-i18nify'
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 <span class="cstat-no" title="statement not covered" >import ReactWinJS from 'react-winjs'</span>
 <span class="cstat-no" title="statement not covered" >import WinJS from 'winjs'</span>
@@ -1242,7 +1246,6 @@ layout: coverage
 <span class="cstat-no" title="statement not covered" >import EmptyMessage from '../../../components/EmptyMessage'</span>
 <span class="cstat-no" title="statement not covered" >import itemtype from '../../../shared/itemtype'</span>
 <span class="cstat-no" title="statement not covered" >import publicURL from '../../../shared/publicURL'</span>
-<span class="cstat-no" title="statement not covered" >import handleMessage from '../../../shared/handleMessage'</span>
 &nbsp;
 /**
  * Component with the list of users
@@ -1440,7 +1443,6 @@ export default class UsersList extends PureComponent {
         totalcount: response.totalcount,
       })
     } catch (e) {
-<span class="cstat-no" title="statement not covered" >      handleMessage({ message: e })</span>
 <span class="cstat-no" title="statement not covered" >      this.setState({</span>
         isLoading: false,
         order: 'ASC',
@@ -1468,6 +1470,7 @@ export default class UsersList extends PureComponent {
     const {
       selectedItems,
       glpi,
+      setNotification,
       changeSelectionMode,
       changeSelectedItems,
       changeAction,
@@ -1492,7 +1495,7 @@ export default class UsersList extends PureComponent {
             },
           })
 &nbsp;
-<span class="cstat-no" title="statement not covered" >          this.props.toast.setNotification({</span>
+<span class="cstat-no" title="statement not covered" >          setNotification({</span>
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.user_successfully_removed'),
             type: 'success',
@@ -1501,7 +1504,7 @@ export default class UsersList extends PureComponent {
 <span class="cstat-no" title="statement not covered" >          changeSelectedItems([])</span>
 <span class="cstat-no" title="statement not covered" >          changeAction('reload')</span>
         } catch (error) {
-<span class="cstat-no" title="statement not covered" >          this.props.toast.setNotification(handleMessage({</span>
+<span class="cstat-no" title="statement not covered" >          setNotification(handleMessage({</span>
             type: 'alert',
             message: error,
           }))
@@ -1770,7 +1773,7 @@ export default class UsersList extends PureComponent {
   changeSelectionMode: PropTypes.func.isRequired,
   action: PropTypes.string,
   changeAction: PropTypes.func.isRequired,
-  toast: PropTypes.object.isRequired,
+  setNotification: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
   icon: PropTypes.string.isRequired,
 }
@@ -1780,7 +1783,7 @@ export default class UsersList extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

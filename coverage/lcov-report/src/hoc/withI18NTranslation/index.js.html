@@ -175,10 +175,7 @@ layout: coverage
 <a name='L124'></a><a href='#L124'>124</a>
 <a name='L125'></a><a href='#L125'>125</a>
 <a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a>
-<a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a>
-<a name='L130'></a><a href='#L130'>130</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L127'></a><a href='#L127'>127</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -219,25 +216,10 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -253,6 +235,24 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -271,12 +271,8 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -291,8 +287,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -348,6 +342,7 @@ layout: coverage
 <span class="cstat-no" title="statement not covered" >import {</span>
   withRouter
 } from 'react-router'
+&nbsp;
 <span class="cstat-no" title="statement not covered" >import source_file_translation from './i18n/source_file.json'</span>
 &nbsp;
 function <span class="fstat-no" title="function not covered" >mapStateToProps(state, props) {</span>
@@ -364,7 +359,10 @@ function <span class="fstat-no" title="function not covered" >mapStateToProps(st
  */
 const withI18NTranslation = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >WrappedComponent =&gt; </span>{</span>
   class I18NTranslation extends PureComponent {
-    /** @constructor */
+    /**
+     * Create I18NTranslation
+     * @param {object} props
+     */
 <span class="fstat-no" title="function not covered" >    constructor(</span>props) <span class="cstat-no" title="statement not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >      super(props)</span>
 <span class="cstat-no" title="statement not covered" >      I18n.setTranslations({</span>
@@ -374,7 +372,6 @@ const withI18NTranslation = <span class="cstat-no" title="statement not covered"
 &nbsp;
     /**
      * Find translation
-     * @function findI18NString
      * @param {string} i18nConvention
      */
     findI18NString = <span class="fstat-no" title="function not covered" >i18nConvention =&gt; </span>{
@@ -397,7 +394,6 @@ const withI18NTranslation = <span class="cstat-no" title="statement not covered"
 &nbsp;
     /**
      * Execute findI18NString if it's necessary
-     * @function componentDidUpdate
      * @param {object} prevProps
      */
 <span class="fstat-no" title="function not covered" >    componentDidUpdate(</span>prevProps) {
@@ -406,10 +402,7 @@ const withI18NTranslation = <span class="cstat-no" title="statement not covered"
       }
     }
 &nbsp;
-    /**
-     * Execute componentDidMount
-     * @function componentDidMount
-     */
+    /** Execute componentDidMount */
 <span class="fstat-no" title="function not covered" >    componentDidMount() </span>{
 <span class="cstat-no" title="statement not covered" >      this.findI18NString(this.props.languageCurrent)</span>
     }
@@ -419,9 +412,7 @@ const withI18NTranslation = <span class="cstat-no" title="statement not covered"
      * @function render
      */
 <span class="fstat-no" title="function not covered" >    render() </span>{
-<span class="cstat-no" title="statement not covered" >      return &lt;WrappedComponent { ...this.props</span>
-      }
-      /&gt;
+<span class="cstat-no" title="statement not covered" >      return &lt;WrappedComponent {...this.props} /&gt;</span>
     }
   }
 &nbsp;
@@ -442,7 +433,7 @@ export default withI18NTranslation
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

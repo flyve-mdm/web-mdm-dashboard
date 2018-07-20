@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/10</span>
       </div>
     </div>
     <p class="quiet">
@@ -143,7 +143,10 @@ layout: coverage
 <a name='L92'></a><a href='#L92'>92</a>
 <a name='L93'></a><a href='#L93'>93</a>
 <a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,6 +173,9 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -266,11 +272,14 @@ layout: coverage
  */
 &nbsp;
 /** import dependencies */
+<span class="cstat-no" title="statement not covered" >import {</span>
+  I18n
+} from 'react-i18nify'
 <span class="cstat-no" title="statement not covered" >import EmptyMessage from '../../components/EmptyMessage'</span>
-<span class="cstat-no" title="statement not covered" >import Overview from './components/Overview'</span>
-<span class="cstat-no" title="statement not covered" >import SystemInformation from './components/SystemInformation'</span>
-<span class="cstat-no" title="statement not covered" >import HelpCenter from './components/HelpCenter'</span>
-<span class="cstat-no" title="statement not covered" >import Contact from './components/Contact'</span>
+<span class="cstat-no" title="statement not covered" >import Overview from './components/Overview/'</span>
+<span class="cstat-no" title="statement not covered" >import SystemInformation from './components/SystemInformation/'</span>
+<span class="cstat-no" title="statement not covered" >import HelpCenter from './components/HelpCenter/'</span>
+<span class="cstat-no" title="statement not covered" >import Contact from './components/Contact/'</span>
 <span class="cstat-no" title="statement not covered" >import ReleaseNotes from './components/ReleaseNotes'</span>
 <span class="cstat-no" title="statement not covered" >import TermsOfUse from './components/TermsOfUse'</span>
 <span class="cstat-no" title="statement not covered" >import Licence from './components/License'</span>
@@ -281,53 +290,53 @@ layout: coverage
  * @type {Array}
  */
 const routes = <span class="cstat-no" title="statement not covered" >[{</span>
-  path: '/',
-  name: 'commons.no_selection',
-  component: EmptyMessage,
-  exact: true,
-},
-{
-  path: '/overview',
-  name: 'about.overview.title',
-  component: Overview,
-  exact: true,
-},
-{
-  path: '/system',
-  name: 'about.system_information.title',
-  component: SystemInformation,
-  exact: false,
-},
-{
-  path: '/help',
-  name: 'about.help_center.title',
-  component: HelpCenter,
-  exact: false,
-},
-{
-  path: '/contact',
-  name: 'about.contact.title',
-  component: Contact,
-  exact: false,
-},
-{
-  path: '/release',
-  name: 'about.release_notes.title',
-  component: ReleaseNotes,
-  exact: false,
-},
-{
-  path: '/term',
-  name: 'about.term_of_use.title',
-  component: TermsOfUse,
-  exact: false,
-},
-{
-  path: '/license',
-  name: 'about.license.title',
-  component: Licence,
-  exact: false,
-},
+    path: '/',
+    name: I18n.t('commons.no_selection'),
+    component: EmptyMessage,
+    exact: true
+  },
+  {
+    path: '/overview',
+    name: I18n.t('about.overview.title'),
+    component: Overview,
+    exact: true
+  },
+  {
+    path: '/system',
+    name: I18n.t('about.system_information.title'),
+    component: SystemInformation,
+    exact: false
+  },
+  {
+    path: '/help',
+    name: I18n.t('about.help_center.title'),
+    component: HelpCenter,
+    exact: false
+  },
+  {
+    path: '/contact',
+    name: I18n.t('about.contact.title'),
+    component: Contact,
+    exact: false
+  },
+  {
+    path: '/release',
+    name: I18n.t('about.release_notes.title'),
+    component: ReleaseNotes,
+    exact: false
+  },
+  {
+    path: '/term',
+    name: I18n.t('about.term_of_use.title'),
+    component: TermsOfUse,
+    exact: false
+  },
+  {
+    path: '/license',
+    name: I18n.t('about.license.title'),
+    component: Licence,
+    exact: false
+  }
 ]
 &nbsp;
 export default routes
@@ -337,7 +346,7 @@ export default routes
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 14:51:45 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
