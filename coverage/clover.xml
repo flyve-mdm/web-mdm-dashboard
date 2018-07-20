@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1532049016581" clover="3.2.0">
-  <project timestamp="1532049016582" name="All files">
-    <metrics statements="4518" coveredstatements="269" conditionals="1994" coveredconditionals="172" methods="1051" coveredmethods="74" elements="7563" coveredelements="515" complexity="0" loc="4518" ncloc="4518" packages="111" files="191" classes="191">
+<coverage generated="1532055437250" clover="3.2.0">
+  <project timestamp="1532055437250" name="All files">
+    <metrics statements="4519" coveredstatements="269" conditionals="1998" coveredconditionals="172" methods="1051" coveredmethods="74" elements="7568" coveredelements="515" complexity="0" loc="4519" ncloc="4519" packages="111" files="191" classes="191">
       <package name="src">
         <metrics statements="49" coveredstatements="0" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
         <file name="index.js" path="/root/repo/src/index.js">
@@ -4302,7 +4302,7 @@
         </file>
       </package>
       <package name="src.containers.SignIn">
-        <metrics statements="48" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="13" coveredmethods="0"/>
+        <metrics statements="49" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="13" coveredmethods="0"/>
         <file name="actions.js" path="/root/repo/src/containers/SignIn/actions.js">
           <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
           <line num="29" count="0" type="stmt"/>
@@ -4319,7 +4319,7 @@
           <line num="90" count="0" type="stmt"/>
         </file>
         <file name="index.js" path="/root/repo/src/containers/SignIn/index.js">
-          <metrics statements="36" coveredstatements="0" conditionals="20" coveredconditionals="0" methods="8" coveredmethods="0"/>
+          <metrics statements="37" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="8" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
@@ -4335,27 +4335,28 @@
           <line num="62" count="0" type="stmt"/>
           <line num="63" count="0" type="stmt"/>
           <line num="64" count="0" type="stmt"/>
-          <line num="77" count="0" type="stmt"/>
+          <line num="77" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="78" count="0" type="stmt"/>
-          <line num="83" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="84" count="0" type="stmt"/>
-          <line num="100" count="0" type="stmt"/>
-          <line num="102" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="103" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="104" count="0" type="stmt"/>
-          <line num="106" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="107" count="0" type="stmt"/>
-          <line num="117" count="0" type="stmt"/>
-          <line num="124" count="0" type="stmt"/>
-          <line num="131" count="0" type="stmt"/>
-          <line num="138" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="139" count="0" type="stmt"/>
-          <line num="142" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="143" count="0" type="stmt"/>
-          <line num="152" count="0" type="stmt"/>
-          <line num="164" count="0" type="stmt"/>
-          <line num="171" count="0" type="stmt"/>
-          <line num="178" count="0" type="stmt"/>
+          <line num="79" count="0" type="stmt"/>
+          <line num="84" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="85" count="0" type="stmt"/>
+          <line num="102" count="0" type="stmt"/>
+          <line num="104" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="105" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="106" count="0" type="stmt"/>
+          <line num="108" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="109" count="0" type="stmt"/>
+          <line num="119" count="0" type="stmt"/>
+          <line num="126" count="0" type="stmt"/>
+          <line num="133" count="0" type="stmt"/>
+          <line num="140" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="141" count="0" type="stmt"/>
+          <line num="144" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="145" count="0" type="stmt"/>
+          <line num="154" count="0" type="stmt"/>
+          <line num="166" count="0" type="stmt"/>
+          <line num="173" count="0" type="stmt"/>
+          <line num="180" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.SignIn.components">
