@@ -90,6 +90,11 @@ references:
       name: Deploy application
       command: source ci/scripts/deploy.sh
 
+  create_changelog: &create_changelog
+    run:
+      name: Generate changelog
+      command: source ci/scripts/changelog.sh
+
   # Handle cache
   node_key: &node_key
     yarn-dependencies-v1-{{ checksum "yarn.lock" }}
@@ -176,6 +181,15 @@ jobs:
       - *validate_html
       - *store_screenshots
 
+  changelog:
+    <<: *container_config
+
+    steps:
+      - checkout
+      - *system_install
+      - *restore_node_cache
+      - *create_changelog
+
   deploy:
     <<: *container_config
 
@@ -208,4 +222,5 @@ workflows:
           filters:
             branches:
               only:
+                - /^release/*/
                 - master
