@@ -105,6 +105,11 @@ references:
       name: Generate documentation
       command: source ci/scripts/documentation.sh
 
+  create_coverage: &create_coverage
+    run:
+      name: Generate coverage
+      command: source ci/scripts/coverage.sh
+
   # Handle cache
   node_key: &node_key
     yarn-dependencies-v1-{{ checksum "yarn.lock" }}
@@ -127,6 +132,7 @@ references:
       key: *build_key
       paths:
         - build
+        - reports
 
   store_screenshots: &store_screenshots
     save_cache:
@@ -210,6 +216,17 @@ jobs:
       - *system_install
       - *restore_node_cache
       - *create_documentation
+
+  coverage:
+    <<: *container_config
+
+    steps:
+      - checkout
+      - *system_install
+      - *restore_node_cache
+      - *git_config
+      - *restore_build_cache
+      - *create_coverage
 
   changelog:
     <<: *container_config
