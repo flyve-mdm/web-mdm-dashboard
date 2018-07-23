@@ -22,4 +22,14 @@ if [[ $GITHUB_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version
     --tag "v${GIT_TAG}" \
     --name "build.zip" \
     --file "./build.zip"
+
+    # Update develop branch
+    git checkout develop
+    git merge $CIRCLE_BRANCH
+    git push origin develop
+
+    # Update master branch
+    git checkout master
+    git merge $CIRCLE_BRANCH
+    git push origin master
 fi
