@@ -53,7 +53,7 @@
     "gh-pages-changelog": "yarn gh-pages --dist ./ --src '{./C*.md,CHANGELOG.md}' --dest ./ --add",
     "test": "yarn jest --config ./config/jest/jest.config.json",
     "test:watch": "yarn test --watch",
-    "test:cypress": "cypress run",
+    "test:cypress": "yarn cypress run",
     "test:sonarwhal": "node node_modules/sonarwhal/dist/src/bin/sonarwhal.js http://localhost:3000/",
     "coverage": "yarn test --coverage"
   },
