@@ -239,37 +239,41 @@ jobs:
       - *git_config
       - *create_changelog
 
-  deploy:
-    <<: *container_config
-
-    steps:
-      - checkout
-      - *system_install
-      - *node_install
-      - *python_install
-      - *transifex_config
-      - *transifex_sync
-      - *start_server
-      - *end_to_end_test
-      - *build_app
-      - *build_artifact
-      - *store_build_artifact
-      - *git_config
-      - *deploy_app
-
 workflows:
   version: 2
-  build-and-deploy:
+  build-test-deploy:
     jobs:
       - build
       - test:
           requires:
             - build
-      - deploy:
+      - screenshots:
           requires:
-            - build
+            - test
           filters:
             branches:
               only:
                 - /^release/*/
-                - master
+      - documentation:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - /^release/*/
+      - coverage:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - /^release/*/
+      - changelog:
+          requires:
+            - screenshots
+            - documentation
+            - coverage
+          filters:
+            branches:
+              only:
+                - /^release/*/
