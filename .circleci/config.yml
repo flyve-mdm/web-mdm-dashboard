@@ -215,6 +215,7 @@ jobs:
       - checkout
       - *system_install
       - *restore_node_cache
+      - *git_config
       - *create_documentation
 
   coverage:
@@ -235,6 +236,7 @@ jobs:
       - checkout
       - *system_install
       - *restore_node_cache
+      - *git_config
       - *create_changelog
 
   deploy:
