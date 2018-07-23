@@ -20,7 +20,7 @@
     "react"
   ],
   "rules": {
-    "semi": "off",
+    "semi": ["error", "never"],
     "no-nested-ternary": "off",
     "max-len": "off",
     "func-names": "off",

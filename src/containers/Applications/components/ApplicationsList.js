@@ -97,7 +97,7 @@ export default class ApplicationsList extends PureComponent {
       this.listView.winControl.footer.style.height = totalcount > (pagination.page * pagination.count) ? isLoadingMore ? '100px' : '42px' : '1px'
     }
     if (this.toolBar) {
-      this.toolBar.winControl.forceLayout();
+      this.toolBar.winControl.forceLayout()
     }
 
     if (action === 'reload') {

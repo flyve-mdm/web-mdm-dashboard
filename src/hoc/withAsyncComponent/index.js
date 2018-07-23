@@ -55,7 +55,7 @@ const withAsyncComponent = importComponent => class AsyncComponent extends PureC
      * @function render
      */
     render() {
-      const C = this.state.component;
+      const C = this.state.component
 
       return C ? <C {...this.props} /> : null
     }

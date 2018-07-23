@@ -106,7 +106,7 @@ class UsernameFieldset extends PureComponent {
     if (this.props.username) {
       this.props.changePhase(2)
     } else {
-      this.setState((prevState) => ({
+      this.setState(prevState => ({
         classInput: 'win-textbox color-line-alert',
         errorMessage: (
           <p className="color-type-alert">
@@ -161,7 +161,7 @@ class UsernameFieldset extends PureComponent {
               <input
                 type="text"
                 name="username"
-                ref={(input) => { this.usernameInput = input; }}
+                ref={(input) => { this.usernameInput = input }}
                 className={this.state.classInput}
                 placeholder={I18n.t('commons.username')}
                 value={this.props.username}

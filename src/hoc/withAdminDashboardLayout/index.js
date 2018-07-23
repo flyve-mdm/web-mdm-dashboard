@@ -75,7 +75,7 @@ const withAdminDashboardLayout = (WrappedComponent) => {
       const {
         cfg_glpi: cfgGlpi,
       } = await glpi.getGlpiConfig()
-      if(cfgGlpi) {
+      if (cfgGlpi) {
         localStorage.setItem('baseURL', cfgGlpi.url_base)
         this.setState({
           iframe: <iframe
