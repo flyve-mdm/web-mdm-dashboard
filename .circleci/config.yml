@@ -110,6 +110,11 @@ references:
       name: Generate coverage
       command: source ci/scripts/coverage.sh
 
+  release_master: &release_master
+    run:
+      name: Release master branch
+      command: source ci/scripts/release_master.sh
+
   zip_build: &zip_build
     run:
       name: Pack build folder
@@ -246,6 +251,14 @@ jobs:
       - *zip_build
       - *create_release
 
+  master:
+    <<: *container_config
+    steps:
+      - checkout
+      - *system_install
+      - *git_config
+      - *release_master
+
 workflows:
   version: 2
   build-test-deploy:
@@ -284,3 +297,8 @@ workflows:
             branches:
               only:
                 - /^release/.*/
+      - master:
+          filters:
+            branches:
+              only:
+                - master
