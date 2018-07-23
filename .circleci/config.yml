@@ -95,6 +95,11 @@ references:
       name: Generate changelog
       command: source ci/scripts/changelog.sh
 
+  create_screenshots: &create_screenshots
+    run:
+      name: Generate screenshots
+      command: source ci/scripts/screenshots.sh
+
   # Handle cache
   node_key: &node_key
     yarn-dependencies-v1-{{ checksum "yarn.lock" }}
@@ -180,6 +185,17 @@ jobs:
       - *restore_build_cache
       - *validate_html
       - *store_screenshots
+
+  screenshots:
+    <<: *container_config
+
+    steps:
+      - checkout
+      - *system_install
+      - *restore_node_cache
+      - *git_config
+      - *restore_screenshots_cache
+      - *create_screenshots
 
   changelog:
     <<: *container_config
