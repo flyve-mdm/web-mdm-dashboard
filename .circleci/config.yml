@@ -90,10 +90,10 @@ references:
       name: Deploy application
       command: source ci/scripts/deploy.sh
 
-  create_changelog: &create_changelog
+  create_release: &create_release
     run:
-      name: Generate changelog
-      command: source ci/scripts/changelog.sh
+      name: Generate release
+      command: source ci/scripts/release.sh
 
   create_screenshots: &create_screenshots
     run:
@@ -109,6 +109,11 @@ references:
     run:
       name: Generate coverage
       command: source ci/scripts/coverage.sh
+
+  zip_build: &zip_build
+    run:
+      name: Pack build folder
+      command: zip -r ./build.zip build/*
 
   # Handle cache
   node_key: &node_key
@@ -229,7 +234,7 @@ jobs:
       - *restore_build_cache
       - *create_coverage
 
-  changelog:
+  release:
     <<: *container_config
 
     steps:
@@ -237,7 +242,9 @@ jobs:
       - *system_install
       - *restore_node_cache
       - *git_config
-      - *create_changelog
+      - *restore_build_cache
+      - *zip_build
+      - *create_release
 
 workflows:
   version: 2
@@ -253,22 +260,22 @@ workflows:
           filters:
             branches:
               only:
-                - /^release/*/
+                - /release/*/
       - documentation:
           requires:
             - test
           filters:
             branches:
               only:
-                - /^release/*/
+                - /release/*/
       - coverage:
           requires:
             - test
           filters:
             branches:
               only:
-                - /^release/*/
-      - changelog:
+                - /release/*/
+      - release:
           requires:
             - screenshots
             - documentation
@@ -276,4 +283,4 @@ workflows:
           filters:
             branches:
               only:
-                - /^release/*/
+                - /release/*/
