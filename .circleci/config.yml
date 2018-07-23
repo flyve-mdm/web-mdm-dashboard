@@ -260,21 +260,21 @@ workflows:
           filters:
             branches:
               only:
-                - /release/*/
+                - /^release/.*/
       - documentation:
           requires:
             - test
           filters:
             branches:
               only:
-                - /release/*/
+                - /^release/.*/
       - coverage:
           requires:
             - test
           filters:
             branches:
               only:
-                - /release/*/
+                - /^release/.*/
       - release:
           requires:
             - screenshots
@@ -283,4 +283,4 @@ workflows:
           filters:
             branches:
               only:
-                - /release/*/
+                - /^release/.*/
