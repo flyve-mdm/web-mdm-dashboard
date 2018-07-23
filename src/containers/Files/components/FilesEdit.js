@@ -61,7 +61,7 @@ export default class FilesEdit extends PureComponent {
     const newItem = [...selectedItem]
 
     // Find index of specific object using findIndex method.
-    const objIndex = newItem.findIndex((obj => obj.id === index));
+    const objIndex = newItem.findIndex((obj => obj.id === index))
 
     // Update object's name property.
     if (objIndex !== -1) {

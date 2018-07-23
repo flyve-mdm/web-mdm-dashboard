@@ -98,7 +98,7 @@ export default class FleetsList extends PureComponent {
       this.listView.winControl.footer.style.height = this.state.totalcount > (this.state.pagination.page * this.state.pagination.count) ? this.state.isLoadingMore ? '100px' : '42px' : '1px'
     }
     if (this.toolBar) {
-      this.toolBar.winControl.forceLayout();
+      this.toolBar.winControl.forceLayout()
     }
 
     if (this.props.action === 'reload') {

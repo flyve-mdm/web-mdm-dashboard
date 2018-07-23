@@ -43,7 +43,7 @@ import { I18nProvider } from './providers/I18nProvider'
 import { NotificationsProvider } from './providers/NotificationsProvider'
 import { AuthenticationProvider } from './providers/AuthenticationProvider'
 import './assets/styles/css/main.css' // Global CSS Styles
-import 'web-animations-js/web-animations-next-lite.min.js'
+import 'web-animations-js/web-animations-next-lite.min'
 
 /**
  * Create the bugsnag client
@@ -60,7 +60,6 @@ const bugsnagClient = bugsnag({
     return true
   },
 })
-
 /**
  * Wrapper component with the errors monitor of bugsnag
  * @constant ErrorBoundary

@@ -91,7 +91,7 @@ export default class Geolocation extends PureComponent {
    * @param {date}
    */
   applyRange = (min, max) => {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       showLocations: prevState.locations.filter(location => validateDate(new Date(location.date), min, max)),
     }))
   }
@@ -212,7 +212,7 @@ export default class Geolocation extends PureComponent {
           <button
             className="btn btn--secondary"
             style={{ margin: 5 }}
-            onClick={() => this.setState((prevState) => ({
+            onClick={() => this.setState(prevState => ({
               filter: !prevState.filter,
             }))}
             type="button"

@@ -61,7 +61,7 @@ export default class DevicesEditOne extends PureComponent {
     if (Number(this.state.id)) {
       this.handleRefresh()
     } else {
-      this.props.history.push(`${publicURL}/app/devices`);
+      this.props.history.push(`${publicURL}/app/devices`)
     }
   }
 
@@ -165,8 +165,8 @@ export default class DevicesEditOne extends PureComponent {
           type: 'success',
         })
         this.props.changeAction('reload')
-        this.props.changeSelectionMode(false);
-        this.props.history.push(`${publicURL}/app/devices/${this.state.id}`);
+        this.props.changeSelectionMode(false)
+        this.props.history.push(`${publicURL}/app/devices/${this.state.id}`)
       })
       .catch((error) => {
         this.props.toast.setNotification(this.props.handleMessage({
