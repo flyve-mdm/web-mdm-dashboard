@@ -100,6 +100,11 @@ references:
       name: Generate screenshots
       command: source ci/scripts/screenshots.sh
 
+  create_documentation: &create_documentation
+    run:
+      name: Generate documentation
+      command: source ci/scripts/documentation.sh
+
   # Handle cache
   node_key: &node_key
     yarn-dependencies-v1-{{ checksum "yarn.lock" }}
@@ -196,6 +201,15 @@ jobs:
       - *git_config
       - *restore_screenshots_cache
       - *create_screenshots
+
+  documentation:
+    <<: *container_config
+
+    steps:
+      - checkout
+      - *system_install
+      - *restore_node_cache
+      - *create_documentation
 
   changelog:
     <<: *container_config
