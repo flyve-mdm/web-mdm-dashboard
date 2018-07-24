@@ -25,17 +25,17 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>11/11</span>
+        <span class='fraction'>13/13</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>5/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -158,10 +158,11 @@ layout: coverage
 <a name='L107'></a><a href='#L107'>107</a>
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
-<a name='L110'></a><a href='#L110'>110</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -223,6 +224,8 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -239,6 +242,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -296,15 +304,13 @@ layout: coverage
  */
 &nbsp;
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
 import {
-  Link
+  Link,
 } from 'react-router-dom'
-import {
-  I18n
-} from "react-i18nify"
+import I18n from '../../shared/i18n'
 import publicURL from '../../shared/publicURL'
 &nbsp;
 /**
@@ -313,29 +319,30 @@ import publicURL from '../../shared/publicURL'
  * @extends PureComponent
  */
 class HeaderBreadcrumb extends PureComponent {
-&nbsp;
   /**
    * Create the breadcrumb menu
    * @function breadcrumbs
    * @return {array} Breadcrumb menu
    */
   breadcrumbs() {
-    let breadcrumbs = []
-    const addresses = this.props.location.pathname.split("/")
-    for (let index = (publicURL === '') ? 2 : 3; index &lt; addresses.length; index++) {
+    const breadcrumbs = []
+    const addresses = this.props.location.pathname.split('/')
+    for (let index = (publicURL === '') ? 2 : 3; index &lt; addresses.length; index += 1) {
       let path = `${publicURL}/app`
-      for (let i = (publicURL === '') ? 2 : 3; i &lt; index + 1; i++) {
+      for (let i = (publicURL === '') ? 2 : 3; i &lt; index + 1; i += 1) {
         path += `/${addresses[i]}`
       }
       breadcrumbs.push(
         &lt;React.Fragment key={path}&gt;
-          &lt;span className="header-breadcrumb-separator"&gt;/&lt;/span&gt;
+          &lt;span className="header-breadcrumb-separator"&gt;
+            /
+          &lt;/span&gt;
           &lt;span&gt;
             &lt;Link to={path}&gt;
-              {addresses[index].replace(/\b\w/g, l =&gt; l.toUpperCase())}
+              {Number(addresses[index].replace(/\b\w/g, l =&gt; l)) ? addresses[index].replace(/\b\w/g, l =&gt; l) : I18n.t(`commons.${addresses[index].replace(/\b\w/g, l =&gt; l.toLowerCase())}`)}
             &lt;/Link&gt;
           &lt;/span&gt;
-        &lt;/React.Fragment&gt;
+        &lt;/React.Fragment&gt;,
       )
     }
 &nbsp;
@@ -351,7 +358,12 @@ class HeaderBreadcrumb extends PureComponent {
       &lt;header className="header-block"&gt;
 &nbsp;
         &lt;div className="header-icon"&gt;
-          &lt;span className="burgerIcon" onClick={this.props.handleToggleExpand}/&gt;
+          &lt;span
+            className="burgerIcon"
+            onClick={this.props.handleToggleExpand}
+            role="button"
+            tabIndex="0"
+          /&gt;
         &lt;/div&gt;
 &nbsp;
         &lt;nav className="header-breadcrumb"&gt;
@@ -372,7 +384,7 @@ class HeaderBreadcrumb extends PureComponent {
 &nbsp;
 HeaderBreadcrumb.propTypes = {
   handleToggleExpand: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 }
 &nbsp;
 export default HeaderBreadcrumb
@@ -382,7 +394,7 @@ export default HeaderBreadcrumb
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

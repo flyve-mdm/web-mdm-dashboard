@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/10</span>
       </div>
     </div>
     <p class="quiet">
@@ -147,7 +147,9 @@ layout: coverage
 <a name='L96'></a><a href='#L96'>96</a>
 <a name='L97'></a><a href='#L97'>97</a>
 <a name='L98'></a><a href='#L98'>98</a>
-<a name='L99'></a><a href='#L99'>99</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,8 +184,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -232,6 +232,10 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -275,13 +279,11 @@ layout: coverage
 &nbsp;
 /** import dependencies */
 <span class="cstat-no" title="statement not covered" >import React, {</span>
-  PureComponent
+  PureComponent,
 } from 'react'
 <span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
+<span class="cstat-no" title="statement not covered" >import I18n from '../../../shared/i18n'</span>
 <span class="cstat-no" title="statement not covered" >import EditMultiple from '../../../components/EditMultiple'</span>
-<span class="cstat-no" title="statement not covered" >import {</span>
-  I18n
-} from 'react-i18nify'
 <span class="cstat-no" title="statement not covered" >import itemtype from '../../../shared/itemtype'</span>
 &nbsp;
 /**
@@ -295,18 +297,18 @@ class FleetsEdit extends PureComponent {
 <span class="cstat-no" title="statement not covered" >    this.state = {</span>
       FieldList: [{
         name: I18n.t('commons.child_entities'),
-        type: "select",
-        DBName: "is_recursive",
+        type: 'select',
+        DBName: 'is_recursive',
         options: [{
-            name: I18n.t('commons.yes'),
-            value: true
-          },
-          {
-            name: I18n.t('commons.no'),
-            value: false
-          }
-        ]
-      }]
+          name: I18n.t('commons.yes'),
+          value: true,
+        },
+        {
+          name: I18n.t('commons.no'),
+          value: false,
+        },
+        ],
+      }],
     }
   }
 &nbsp;
@@ -322,15 +324,19 @@ class FleetsEdit extends PureComponent {
         changeAction={this.props.changeAction}
         changeSelectionMode={this.props.changeSelectionMode}
         history={this.props.history}
-        setNotification={this.props.setNotification}
+        toast={this.props.toast}
         glpi={this.props.glpi}
         request={ {
           id: `${itemtype.PluginFlyvemdmFleet}.id`,
-          itemtype: itemtype.PluginFlyvemdmFleet
+          itemtype: itemtype.PluginFlyvemdmFleet,
         } }
       /&gt;
     )
   }
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >FleetsEdit.defaultProps = {</span>
+  selectedItems: null,
 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >FleetsEdit.propTypes = {</span>
@@ -338,8 +344,8 @@ class FleetsEdit extends PureComponent {
   changeAction: PropTypes.func.isRequired,
   changeSelectionMode: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  setNotification: PropTypes.func.isRequired,
-  glpi: PropTypes.object.isRequired
+  toast: PropTypes.object.isRequired,
+  glpi: PropTypes.object.isRequired,
 }
 &nbsp;
 export default FleetsEdit
@@ -349,7 +355,7 @@ export default FleetsEdit
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

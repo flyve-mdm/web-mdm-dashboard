@@ -38,9 +38,9 @@ layout: coverage
         <span class='fraction'>2/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">10.53% </span>
+        <span class="strong">13.33% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>4/38</span>
+        <span class='fraction'>4/30</span>
       </div>
     </div>
     <p class="quiet">
@@ -177,17 +177,7 @@ layout: coverage
 <a name='L126'></a><a href='#L126'>126</a>
 <a name='L127'></a><a href='#L127'>127</a>
 <a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a>
-<a name='L130'></a><a href='#L130'>130</a>
-<a name='L131'></a><a href='#L131'>131</a>
-<a name='L132'></a><a href='#L132'>132</a>
-<a name='L133'></a><a href='#L133'>133</a>
-<a name='L134'></a><a href='#L134'>134</a>
-<a name='L135'></a><a href='#L135'>135</a>
-<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L129'></a><a href='#L129'>129</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -242,31 +232,14 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -276,6 +249,16 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -302,6 +285,9 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -348,12 +334,10 @@ layout: coverage
  */
 &nbsp;
 import React, {
-  PureComponent
+  PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  I18n
-} from "react-i18nify"
+import I18n from '../../shared/i18n'
 &nbsp;
 /**
  * Component to errors of a form field
@@ -361,7 +345,6 @@ import {
  * @extends PureComponent
  */
 class ErrorValidation extends PureComponent {
-&nbsp;
   /**
    * Validate a data according to determined parameters
    * @static
@@ -371,56 +354,49 @@ class ErrorValidation extends PureComponent {
    * @return {object} shows if there are errors or not, and what are these
    */
   static validation = <span class="fstat-no" title="function not covered" >(p</span>arametersToEvaluate, value) =&gt; {
-    let errorMessages = <span class="cstat-no" title="statement not covered" >[]</span>
+    const errorMessages = <span class="cstat-no" title="statement not covered" >[]</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (parametersToEvaluate.isRequired &amp;&amp; !value)</span>
-<span class="cstat-no" title="statement not covered" >      errorMessages.push(I18n.t('validation.required_field'))</span>
+<span class="cstat-no" title="statement not covered" >    if (parametersToEvaluate.isRequired &amp;&amp; !value) { <span class="cstat-no" title="statement not covered" >errorMessages.push(I18n.t('validation.required_field')) </span>}</span>
 <span class="cstat-no" title="statement not covered" >    if (parametersToEvaluate.minimunLength) {</span>
-<span class="cstat-no" title="statement not covered" >      if (value.length &lt; parametersToEvaluate.minimunLength)</span>
+<span class="cstat-no" title="statement not covered" >      if (value.length &lt; parametersToEvaluate.minimunLength) {</span>
 <span class="cstat-no" title="statement not covered" >        errorMessages.push(</span>
-          `${I18n.t('validation.insufficient_characters')} ${parametersToEvaluate.minimunLength} ${I18n.t('validation.is_requiered')}`
+          `${I18n.t('validation.insufficient_characters')} ${parametersToEvaluate.minimunLength} ${I18n.t('validation.is_requiered')}`,
         )
+      }
     }
 <span class="cstat-no" title="statement not covered" >    if (parametersToEvaluate.needDigit) {</span>
       const myRe = <span class="cstat-no" title="statement not covered" >/[\d]/g</span>
-<span class="cstat-no" title="statement not covered" >      if (!myRe.test(value))</span>
-<span class="cstat-no" title="statement not covered" >        errorMessages.push(I18n.t('validation.one_digit'))</span>
+<span class="cstat-no" title="statement not covered" >      if (!myRe.test(value)) { <span class="cstat-no" title="statement not covered" >errorMessages.push(I18n.t('validation.one_digit')) </span>}</span>
     }
 <span class="cstat-no" title="statement not covered" >    if (parametersToEvaluate.needLowercaseCharacter) {</span>
       const myRe = <span class="cstat-no" title="statement not covered" >/[a-z]/g</span>
-<span class="cstat-no" title="statement not covered" >      if (!myRe.test(value))</span>
-<span class="cstat-no" title="statement not covered" >        errorMessages.push(I18n.t('validation.lowercase_character'))</span>
+<span class="cstat-no" title="statement not covered" >      if (!myRe.test(value)) { <span class="cstat-no" title="statement not covered" >errorMessages.push(I18n.t('validation.lowercase_character')) </span>}</span>
     }
 <span class="cstat-no" title="statement not covered" >    if (parametersToEvaluate.needUppercaseCharacter) {</span>
       const myRe = <span class="cstat-no" title="statement not covered" >/[A-Z]/g</span>
-<span class="cstat-no" title="statement not covered" >      if (!myRe.test(value))</span>
-<span class="cstat-no" title="statement not covered" >        errorMessages.push(I18n.t('validation.uppercase_character'))</span>
+<span class="cstat-no" title="statement not covered" >      if (!myRe.test(value)) { <span class="cstat-no" title="statement not covered" >errorMessages.push(I18n.t('validation.uppercase_character')) </span>}</span>
     }
 <span class="cstat-no" title="statement not covered" >    if (parametersToEvaluate.needSymbol) {</span>
       const myRe = <span class="cstat-no" title="statement not covered" >/[!@#%^&amp;*?&gt;&lt;)(+=._\-\\[\]^~`'"˜$ˆ/:;{}|]/g</span>
-<span class="cstat-no" title="statement not covered" >      if (!myRe.test(value))</span>
-<span class="cstat-no" title="statement not covered" >        errorMessages.push(I18n.t('validation.special_character'))</span>
+<span class="cstat-no" title="statement not covered" >      if (!myRe.test(value)) { <span class="cstat-no" title="statement not covered" >errorMessages.push(I18n.t('validation.special_character')) </span>}</span>
     }
 <span class="cstat-no" title="statement not covered" >    if (parametersToEvaluate.isEmail) {</span>
       const myRe = <span class="cstat-no" title="statement not covered" >/^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/g</span>
-<span class="cstat-no" title="statement not covered" >      if (!myRe.test(value))</span>
-<span class="cstat-no" title="statement not covered" >        errorMessages.push(I18n.t('validation.invalid_email'))</span>
+<span class="cstat-no" title="statement not covered" >      if (!myRe.test(value)) { <span class="cstat-no" title="statement not covered" >errorMessages.push(I18n.t('validation.invalid_email')) </span>}</span>
     }
 <span class="cstat-no" title="statement not covered" >    if (parametersToEvaluate.isEqualTo) {</span>
-<span class="cstat-no" title="statement not covered" >      if (value !== parametersToEvaluate.isEqualTo.value)</span>
-<span class="cstat-no" title="statement not covered" >        errorMessages.push(parametersToEvaluate.isEqualTo.message)</span>
+<span class="cstat-no" title="statement not covered" >      if (value !== parametersToEvaluate.isEqualTo.value) { <span class="cstat-no" title="statement not covered" >errorMessages.push(parametersToEvaluate.isEqualTo.message) </span>}</span>
     }
 <span class="cstat-no" title="statement not covered" >    if (parametersToEvaluate.customValidation) {</span>
-<span class="cstat-no" title="statement not covered" >      if (parametersToEvaluate.customValidation(value))</span>
-<span class="cstat-no" title="statement not covered" >        errorMessages.push(parametersToEvaluate.customValidation(value))</span>
+<span class="cstat-no" title="statement not covered" >      if (parametersToEvaluate.customValidation(value)) { <span class="cstat-no" title="statement not covered" >errorMessages.push(parametersToEvaluate.customValidation(value)) </span>}</span>
     }
 &nbsp;
     const result = <span class="cstat-no" title="statement not covered" >(errorMessages.length &lt;= 0) ? {</span>
       isCorrect: true,
-      errors: []
+      errors: [],
     } : {
       isCorrect: false,
-      errors: errorMessages
+      errors: errorMessages,
     }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    return result</span>
@@ -435,9 +411,12 @@ class ErrorValidation extends PureComponent {
       &lt;div className="error-message"&gt;
         &lt;ul&gt;
           {
-            this.props.errors.map((element, index) =&gt; {
-              return &lt;li key={index}&gt;- {element}&lt;/li&gt;
-            })
+            this.props.errors.map((element, index) =&gt; (
+              &lt;li key={`errorMessage-${index.toString()}`}&gt;
+                -
+                {element}
+              &lt;/li&gt;
+            ))
           }
         &lt;/ul&gt;
       &lt;/div&gt;
@@ -446,11 +425,11 @@ class ErrorValidation extends PureComponent {
 }
 &nbsp;
 ErrorValidation.defaultProps = {
-  errors: []
+  errors: [],
 }
 &nbsp;
 ErrorValidation.propTypes = {
-  errors: PropTypes.array
+  errors: PropTypes.array,
 }
 &nbsp;
 export default ErrorValidation
@@ -460,7 +439,7 @@ export default ErrorValidation
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

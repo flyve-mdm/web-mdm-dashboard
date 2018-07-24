@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,12 +35,12 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/7</span>
+        <span class='fraction'>0/8</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/11</span>
       </div>
     </div>
     <p class="quiet">
@@ -154,7 +154,10 @@ layout: coverage
 <a name='L103'></a><a href='#L103'>103</a>
 <a name='L104'></a><a href='#L104'>104</a>
 <a name='L105'></a><a href='#L105'>105</a>
-<a name='L106'></a><a href='#L106'>106</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -186,19 +189,7 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,10 +200,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -228,6 +220,10 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -254,6 +250,16 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -289,22 +295,15 @@ layout: coverage
 &nbsp;
 /** import dependencies */
 <span class="cstat-no" title="statement not covered" >import React, {</span>
-  PureComponent
+  PureComponent,
 } from 'react'
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
 &nbsp;
 /**
  * @class TasksDeployFileList
  * @extends PureComponent
  */
-class TasksDeployFileList extends PureComponent {
-  /** @constructor */
-<span class="fstat-no" title="function not covered" >  constructor(</span>props) <span class="cstat-no" title="statement not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >    super(props)</span>
-<span class="cstat-no" title="statement not covered" >    this.state = {</span>
-      renderElements: undefined
-    }
-  }
-&nbsp;
+class TasksDeployFileList extends PureComponent <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
   /**
    * @function componentDidMount
    */
@@ -316,34 +315,34 @@ class TasksDeployFileList extends PureComponent {
    * @function refreshRender
    * @return {*}
    */
-  refreshRender = <span class="fstat-no" title="function not covered" >() =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >    return (</span>
-      Array.isArray(this.props.data) ?
-        this.props.data.map(<span class="fstat-no" title="function not covered" >item =&gt; </span>{
-<span class="cstat-no" title="statement not covered" >          return this.props.typeData.map(<span class="fstat-no" title="function not covered" >(v</span>alue, index) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >            return item['items_id'] === value['id'] ?</span>
-              (
-                &lt;div className='files-list' style={ { width: '320px' } } key={value['id']}&gt;
-                  &lt;div className='files-list__content'&gt;
-                    &lt;div className='files-list__item'&gt;
-                      &lt;div className='files-list__item-content-primary'&gt;
-                        &lt;div className='files-list__content-text-primary'&gt;{value['name']}&lt;/div&gt;
-                      &lt;/div&gt;
-                      &lt;div className='files-list__item-content-secondary'&gt;
-                        &lt;div className='files-list__item-icon'&gt;
-                          &lt;span className='deleteIcon' style={ { fontSize: '18px' } } onClick={this.handleRemove.bind(this, item)}&gt;&lt;/span&gt;
-                        &lt;/div&gt;
-                      &lt;/div&gt;
-                    &lt;/div&gt;
-                  &lt;/div&gt;
+  refreshRender = <span class="fstat-no" title="function not covered" >() =&gt; (<span class="cstat-no" title="statement not covered" ></span>Array.isArray(this.props.data)</span>
+    ? this.props.data.map(<span class="fstat-no" title="function not covered" >item =&gt; <span class="cstat-no" title="statement not covered" ></span>this.props.typeData.map(<span class="fstat-no" title="function not covered" >value =&gt; (<span class="cstat-no" title="statement not covered" ></span>item.items_id === value.id</span></span>
+      ? (
+        &lt;div className="files-list" style={ { width: '320px' } } key={value.id}&gt;
+          &lt;div className="files-list__content"&gt;
+            &lt;div className="files-list__item"&gt;
+              &lt;div className="files-list__item-content-primary"&gt;
+                &lt;div className="files-list__content-text-primary"&gt;
+                  {value.name}
                 &lt;/div&gt;
-              )
-              : null
-          })
-        })
-        : null
-    )
-  }
+              &lt;/div&gt;
+              &lt;div className="files-list__item-content-secondary"&gt;
+                &lt;div className="files-list__item-icon"&gt;
+                  &lt;span
+                    className="deleteIcon"
+                    style={ { fontSize: '18px' } }
+                    onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.handleRemove(item)}</span>
+                    role="button"
+                    tabIndex="0"
+                  /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      )
+      : null)))
+    : null)
 &nbsp;
   /**
    * @function handleRemove
@@ -359,8 +358,18 @@ class TasksDeployFileList extends PureComponent {
    */
 <span class="fstat-no" title="function not covered" >  render() </span>{
 <span class="cstat-no" title="statement not covered" >    return this.refreshRender()</span>
-&nbsp;
   }
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >TasksDeployFileList.defaultProps = {</span>
+  data: null,
+  typeData: null,
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >TasksDeployFileList.propTypes = {</span>
+  removeTask: PropTypes.func.isRequired,
+  data: PropTypes.any,
+  typeData: PropTypes.any,
 }
 &nbsp;
 export default TasksDeployFileList
@@ -370,7 +379,7 @@ export default TasksDeployFileList
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jul 20 2018 15:31:44 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>
