@@ -263,10 +263,18 @@ workflows:
   version: 2
   build-test-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore:
+                - master
       - test:
           requires:
             - build
+          filters:
+            branches:
+              ignore:
+                - master
       - screenshots:
           requires:
             - test
