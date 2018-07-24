@@ -51,7 +51,7 @@ references:
   start_server: &start_server
     run:
       name: Start server in background
-      command: node scripts/start.js > ../yarn.log
+      command: yarn react-scripts start > ../yarn.log
       background: true
 
   unit_test: &unit_test
@@ -63,7 +63,6 @@ references:
     run:
       name: Run End-to-End tests
       command: |
-        yarn cypress install
         until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
         yarn test:cypress
 
