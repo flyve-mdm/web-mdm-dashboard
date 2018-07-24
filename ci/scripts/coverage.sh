@@ -18,9 +18,9 @@ git commit -m "ci(docs): generate **coverage** for version ${GIT_TAG}"
 # Copy code coverage to gh-pages branch
 yarn gh-pages-coverage -m "ci(docs): generate code coverage for version ${GIT_TAG}"
 
-GITHUB_COMMIT_MESSAGE=$(git log --format=oneline -n 1 ${CIRCLE_SHA1})
+# GITHUB_COMMIT_MESSAGE=$(git log --format=oneline -n 1 ${CIRCLE_SHA1})
 
-if [[ $GITHUB_COMMIT_MESSAGE != *"ci(stats): generate stats.json for version"* ]]; then
-    git add reports -f
-    yarn gh-pages-reports -m "ci(stats): generate stats.json for version ${GIT_TAG}"
-fi
+# if [[ $GITHUB_COMMIT_MESSAGE != *"ci(stats): generate stats.json for version"* ]]; then
+#     git add reports -f
+#     yarn gh-pages-reports -m "ci(stats): generate stats.json for version ${GIT_TAG}"
+# fi

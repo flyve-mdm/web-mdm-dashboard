@@ -142,7 +142,7 @@ references:
       key: *build_key
       paths:
         - build
-        - reports
+        # - reports
 
   store_screenshots: &store_screenshots
     save_cache:
