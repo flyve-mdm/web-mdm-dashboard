@@ -1,5 +1,4 @@
 before_script:
-  - npm rebuild node-sass
   - yarn install
 
 stages:
@@ -11,4 +10,4 @@ deployment:
     - ./gitlabRunner.sh
   only:
     - develop
-    
+

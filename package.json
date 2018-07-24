@@ -36,7 +36,6 @@
     "cypress": "^3.0.2",
     "history": "^4.7.2",
     "leaflet": "^1.3.3",
-    "lodash-es": "^4.17.10",
     "node-polyglot": "^2.3.0",
     "react": "^16.4.1",
     "react-content-loader": "^3.1.2",
@@ -57,6 +56,7 @@
     "@sonarwhal/rule-html-checker": "^4.0.0",
     "@sonarwhal/rule-http-cache": "^3.1.2",
     "@sonarwhal/rule-http-compression": "^4.0.4",
+    "conventional-github-releaser": "^3.1.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.4",
@@ -66,11 +66,11 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
     "gh-pages": "^1.2.0",
-    "node-sass": "^4.9.2",
+    "node-github-release": "^0.2.1",
     "react-test-renderer": "^16.4.1",
     "sass": "^1.10.0",
-    "sass-loader": "^7.0.3",
     "sinon": "^6.1.3",
-    "sonarwhal": "^1.11.2"
+    "sonarwhal": "^1.11.2",
+    "standard-version": "^4.4.0"
   }
 }
