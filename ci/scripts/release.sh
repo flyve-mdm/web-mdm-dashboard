@@ -26,12 +26,14 @@ if [[ $GITHUB_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version
     # Update develop branch
     git fetch origin develop
     git checkout develop
+    git clean -d -x -f
     git merge $CIRCLE_BRANCH
     git push origin develop
 
     # Update master branch
     git fetch origin master
     git checkout master
+    git clean -d -x -f
     git merge $CIRCLE_BRANCH
     git push origin master
 fi
