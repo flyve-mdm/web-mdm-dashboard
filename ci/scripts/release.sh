@@ -27,13 +27,28 @@ if [[ $GITHUB_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version
     # Create release with conventional-github-releaser
     yarn conventional-github-releaser -p angular -t $GITHUB_TOKEN
 
-    # Upload build file to release
-    yarn github-release upload \
-    --user "${CIRCLE_PROJECT_USERNAME}" \
-    --repo "${CIRCLE_PROJECT_REPONAME}" \
-    --tag "v${GIT_TAG}" \
-    --name "build.zip" \
-    --file "./build.zip"
+    if [[ $CIRCLE_BRANCH != "$IS_PRERELEASE" ]]; then
+
+      # Upload build file to release
+      yarn github-release upload \
+      --user "${CIRCLE_PROJECT_USERNAME}" \
+      --repo "${CIRCLE_PROJECT_REPONAME}" \
+      --tag "v${GIT_TAG}" \
+      --name "build.zip" \
+      --file "./build.zip"
+
+    else
+
+      # Upload build file to prerelease
+      yarn github-release upload \
+      --user "${CIRCLE_PROJECT_USERNAME}" \
+      --repo "${CIRCLE_PROJECT_REPONAME}" \
+      --tag "v${GIT_TAG}" \
+      --name "build.zip" \
+      --file "./build.zip" \
+      --pre-release
+
+    fi
 
     # Update develop branch
     git fetch origin develop
