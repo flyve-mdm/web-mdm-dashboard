@@ -51,7 +51,7 @@ references:
   start_server: &start_server
     run:
       name: Start server in background
-      command: yarn react-scripts start > ../yarn.log
+      command: yarn start > ../yarn.log
       background: true
 
   unit_test: &unit_test
