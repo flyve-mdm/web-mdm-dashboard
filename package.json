@@ -10,6 +10,7 @@
   "scripts": {
     "prestart": "yarn sass && yarn test:watch -u &",
     "start": "react-scripts start",
+    "start:only": "react-scripts start",
     "build": "yarn sass:build && yarn lint && react-scripts build && node ./ci/scripts/create_htaccess.js",
     "release": "yarn standard-version",
     "docs": "yarn jsdoc src -r -d docs -t ./jsdoc_theme",
