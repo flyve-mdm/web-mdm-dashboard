@@ -36,4 +36,7 @@ if [[ $GITHUB_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version
     git clean -d -x -f
     git merge $CIRCLE_BRANCH
     git push origin master
+
+    # Remove release branch
+    git push origin :$CIRCLE_BRANCH
 fi
