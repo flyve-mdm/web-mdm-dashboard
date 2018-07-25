@@ -5,7 +5,19 @@ GITHUB_COMMIT_MESSAGE=$(git log --format=oneline -n 1 ${CIRCLE_SHA1})
 if [[ $GITHUB_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version"* ]]; then
 
     # Generate CHANGELOG.md and increment version
-    yarn release -m "ci(release): generate CHANGELOG.md for version %s"
+    IS_PRERELEASE="$( cut -d '-' -f 2 <<< "$CIRCLE_BRANCH" )";
+
+    if [[ $CIRCLE_BRANCH != "$IS_PRERELEASE" ]]; then
+
+      PREFIX_PRERELEASE="$( cut -d '.' -f 1 <<< "$IS_PRERELEASE" )";
+      yarn release -m "ci(release): generate CHANGELOG.md for version %s" --prerelease "$PREFIX_PRERELEASE"
+
+    else
+
+      yarn release -m "ci(release): generate CHANGELOG.md for version %s"
+
+    fi
+
     # Get version number from package.json
     export GIT_TAG=$(jq -r ".version" package.json)
     # Copy CHANGELOG.md to gh-pages branch
