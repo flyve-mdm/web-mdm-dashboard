@@ -31,9 +31,9 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
-import EditMultiple from '../../../components/EditMultiple'
-import itemtype from '../../../shared/itemtype'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import EditMultiple from 'components/EditMultiple'
 
 /**
  * @class FleetsEdit

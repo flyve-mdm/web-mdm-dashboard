@@ -37,18 +37,18 @@ import {
 import {
   NavLink,
 } from 'react-router-dom'
-import I18n from '../../shared/i18n'
-import withGLPI from '../../hoc/withGLPI'
-import Loading from '../../components/Loading'
-import InfoBox from '../../components/InfoBox'
-import EmptyMessage from '../../components/EmptyMessage'
-import ContentPane from '../../components/ContentPane'
-import itemtype from '../../shared/itemtype'
-import publicURL from '../../shared/publicURL'
-import logout from '../../shared/logout'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import publicURL from 'shared/publicURL'
+import logout from 'shared/logout'
 import {
   slideTop,
-} from '../../shared/animations/index'
+} from 'shared/animations/index'
+import Loading from 'components/Loading'
+import InfoBox from 'components/InfoBox'
+import EmptyMessage from 'components/EmptyMessage'
+import ContentPane from 'components/ContentPane'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * Component with the Home section

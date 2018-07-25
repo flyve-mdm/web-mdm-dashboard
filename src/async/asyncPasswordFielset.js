@@ -27,7 +27,7 @@
  */
 
 /** import dependencies */
-import withAsyncComponent from '../hoc/withAsyncComponent'
+import withAsyncComponent from 'hoc/withAsyncComponent'
 
 /**
  * Calls asynchronous PasswordFieldset component

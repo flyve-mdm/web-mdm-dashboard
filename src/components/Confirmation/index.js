@@ -31,7 +31,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import I18n from '../../shared/i18n'
+import I18n from 'shared/i18n'
 
 /**
  * Component with a dialogue box

@@ -27,7 +27,7 @@
  */
 
 /** import dependencies */
-import EmptyMessage from '../../components/EmptyMessage'
+import EmptyMessage from 'components/EmptyMessage'
 import Overview from './components/Overview'
 import SystemInformation from './components/SystemInformation'
 import HelpCenter from './components/HelpCenter'

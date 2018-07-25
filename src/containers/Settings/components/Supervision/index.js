@@ -31,16 +31,16 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
+import I18n from 'shared/i18n'
+import validateData from 'shared/validateData'
+import itemtype from 'shared/itemtype'
 import {
   supervisionScheme,
-} from '../../../../components/Forms/Schemas'
-import validateData from '../../../../shared/validateData'
-import ConstructInputs from '../../../../components/Forms'
-import ContentPane from '../../../../components/ContentPane'
-import Loading from '../../../../components/Loading'
-import withGLPI from '../../../../hoc/withGLPI'
-import itemtype from '../../../../shared/itemtype'
+} from 'components/Forms/Schemas'
+import ConstructInputs from 'components/Forms'
+import ContentPane from 'components/ContentPane'
+import Loading from 'components/Loading'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * Component with the supervision section

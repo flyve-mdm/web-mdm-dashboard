@@ -31,7 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
+import I18n from 'shared/i18n'
 
 /**
  * Component with the 'Main' page of the entity section

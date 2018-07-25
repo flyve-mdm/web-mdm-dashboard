@@ -31,14 +31,14 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
-import ContentPane from '../../../components/ContentPane'
-import IconItemList from '../../../components/IconItemList'
-import Confirmation from '../../../components/Confirmation'
-import Loading from '../../../components/Loading'
-import itemtype from '../../../shared/itemtype'
-import getID from '../../../shared/getID'
-import publicURL from '../../../shared/publicURL'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import getID from 'shared/getID'
+import publicURL from 'shared/publicURL'
+import ContentPane from 'components/ContentPane'
+import IconItemList from 'components/IconItemList'
+import Confirmation from 'components/Confirmation'
+import Loading from 'components/Loading'
 
 /**
  * Component with the content of the users

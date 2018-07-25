@@ -32,7 +32,7 @@ import React, {
 import PropTypes from 'prop-types'
 import {
   slideTop,
-} from '../../shared/animations/index'
+} from 'shared/animations/index'
 
 
 /**

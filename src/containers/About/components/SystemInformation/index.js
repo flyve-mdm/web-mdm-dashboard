@@ -31,11 +31,11 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
-import ContentPane from '../../../../components/ContentPane'
-import Loading from '../../../../components/Loading'
-import withGLPI from '../../../../hoc/withGLPI'
-import itemtype from '../../../../shared/itemtype'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import ContentPane from 'components/ContentPane'
+import Loading from 'components/Loading'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * Show System Information

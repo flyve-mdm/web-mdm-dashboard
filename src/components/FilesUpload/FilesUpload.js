@@ -30,8 +30,8 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import bytesToSize from '../../shared/bytesToSize'
-import I18n from '../../shared/i18n'
+import bytesToSize from 'shared/bytesToSize'
+import I18n from 'shared/i18n'
 
 /**
  * Component used to upload files

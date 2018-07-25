@@ -31,8 +31,8 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import Loader from '../../../../components/Loader'
-import I18n from '../../../../shared/i18n'
+import Loader from 'components/Loader'
+import I18n from 'shared/i18n'
 
 /**
  * @class Inventory

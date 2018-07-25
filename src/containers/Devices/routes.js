@@ -26,9 +26,9 @@
  * ------------------------------------------------------------------------------
  */
 
-import I18n from '../../shared/i18n'
-import EmptyMessage from '../../components/EmptyMessage'
-import ErrorPage from '../../components/ErrorPage'
+import I18n from 'shared/i18n'
+import EmptyMessage from 'components/EmptyMessage'
+import ErrorPage from 'components/ErrorPage'
 import DevicesContent from './components/DevicesContent'
 import Enroll from './components/Enroll'
 import DevicesEditOne from './components/DevicesEditOne'

@@ -34,9 +34,9 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
-import I18n from '../../../shared/i18n'
-import Loading from '../../../components/Loading'
-import publicURL from '../../../shared/publicURL'
+import I18n from 'shared/i18n'
+import publicURL from 'shared/publicURL'
+import Loading from 'components/Loading'
 
 /**
  * Component with the step 2 (the user password) of the login

@@ -26,7 +26,7 @@
  * ------------------------------------------------------------------------------
  */
 
-import I18n from '../../../../shared/i18n'
+import I18n from 'shared/i18n'
 
 /**
  * Supervision data schema

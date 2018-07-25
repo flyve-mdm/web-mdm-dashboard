@@ -32,10 +32,10 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import I18n from '../../../../shared/i18n'
-import animationsWinJs from '../../../../shared/animationsWinJs'
-import ContentPane from '../../../../components/ContentPane'
-import languageList from '../../../../shared/i18n/languages'
+import I18n from 'shared/i18n'
+import animationsWinJs from 'shared/animationsWinJs'
+import languageList from 'shared/i18n/languages'
+import ContentPane from 'components/ContentPane'
 
 /**
  * Component with the display section

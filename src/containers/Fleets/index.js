@@ -31,14 +31,14 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import routes from './routes'
-import withGLPI from '../../hoc/withGLPI'
-import GenerateRoutes from '../../components/GenerateRoutes'
+import getMode from 'shared/getMode'
+import calc100PercentMinus from 'shared/calc100PercentMinus'
+import publicURL from 'shared/publicURL'
+import itemtype from 'shared/itemtype'
+import GenerateRoutes from 'components/GenerateRoutes'
+import withGLPI from 'hoc/withGLPI'
 import FleetsList from './components/FleetsList'
-import getMode from '../../shared/getMode'
-import calc100PercentMinus from '../../shared/calc100PercentMinus'
-import publicURL from '../../shared/publicURL'
-import itemtype from '../../shared/itemtype'
+import routes from './routes'
 
 /**
  * @class Fleets

@@ -27,10 +27,10 @@
  */
 
 import React from 'react'
-import history from '../../shared/history'
-import getQueryString from '../../shared/getQueryString'
-import I18n from '../../shared/i18n'
-import logo from '../../assets/images/dashboard.svg'
+import history from 'shared/history'
+import getQueryString from 'shared/getQueryString'
+import I18n from 'shared/i18n'
+import logo from 'assets/images/dashboard.svg'
 
 /**
  * Component with the display of the error pages

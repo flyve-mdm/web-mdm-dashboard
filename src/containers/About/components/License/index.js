@@ -31,11 +31,11 @@ import React, {
 } from 'react'
 import ReactMarkdown from 'react-markdown'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
-import ContentPane from '../../../../components/ContentPane'
-import Loading from '../../../../components/Loading'
-import EmptyMessage from '../../../../components/EmptyMessage'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
+import I18n from 'shared/i18n'
+import ContentPane from 'components/ContentPane'
+import Loading from 'components/Loading'
+import EmptyMessage from 'components/EmptyMessage'
+import withHandleMessages from 'hoc/withHandleMessages'
 
 /**
  * Component to show the license information

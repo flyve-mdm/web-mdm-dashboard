@@ -27,7 +27,7 @@
  */
 
 /** import dependencies */
-import EmptyMessage from '../../components/EmptyMessage'
+import EmptyMessage from 'components/EmptyMessage'
 import Entity from './components/Entity'
 import Profiles from './components/Profiles'
 import Supervision from './components/Supervision'

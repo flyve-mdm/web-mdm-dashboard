@@ -31,13 +31,13 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import routes from './routes'
-import withGLPI from '../../hoc/withGLPI'
-import GenerateRoutes from '../../components/GenerateRoutes'
+import getMode from 'shared/getMode'
+import calc100PercentMinus from 'shared/calc100PercentMinus'
+import publicURL from 'shared/publicURL'
+import GenerateRoutes from 'components/GenerateRoutes'
+import withGLPI from 'hoc/withGLPI'
 import UsersList from './components/UsersList'
-import getMode from '../../shared/getMode'
-import calc100PercentMinus from '../../shared/calc100PercentMinus'
-import publicURL from '../../shared/publicURL'
+import routes from './routes'
 
 /**
  * Component with the users section

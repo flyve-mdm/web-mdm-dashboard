@@ -31,7 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import GenerateRoutes from '../../../../components/GenerateRoutes'
+import GenerateRoutes from 'components/GenerateRoutes'
 import routes from './routes'
 
 /**

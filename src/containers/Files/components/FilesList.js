@@ -33,14 +33,14 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import I18n from '../../../shared/i18n'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import publicURL from 'shared/publicURL'
+import handleMessage from 'shared/handleMessage'
+import Loader from 'components/Loader'
+import Confirmation from 'components/Confirmation'
+import EmptyMessage from 'components/EmptyMessage'
 import FilesItemList from './FilesItemList'
-import Loader from '../../../components/Loader'
-import Confirmation from '../../../components/Confirmation'
-import EmptyMessage from '../../../components/EmptyMessage'
-import itemtype from '../../../shared/itemtype'
-import publicURL from '../../../shared/publicURL'
-import handleMessage from '../../../shared/handleMessage'
 
 /**
  * @class FilesList

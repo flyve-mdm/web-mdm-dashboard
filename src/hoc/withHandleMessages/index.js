@@ -29,7 +29,7 @@
 import React, {
   PureComponent,
 } from 'react'
-import handleMessage from '../../shared/handleMessage'
+import handleMessage from 'shared/handleMessage'
 
 /**
  * Wrapper component to pass to the props the 'handleMessage' function

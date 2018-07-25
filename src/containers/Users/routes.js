@@ -27,9 +27,9 @@
  */
 
 /** import dependencies */
-import I18n from '../../shared/i18n'
-import EmptyMessage from '../../components/EmptyMessage'
-import ErrorPage from '../../components/ErrorPage'
+import I18n from 'shared/i18n'
+import EmptyMessage from 'components/EmptyMessage'
+import ErrorPage from 'components/ErrorPage'
 import UsersContent from './components/UsersContent'
 import UsersEditOne from './components/UsersEditOne'
 import UsersEdit from './components/UsersEdit'

@@ -27,10 +27,10 @@
  */
 
 /** import dependencies */
-import I18n from '../../shared/i18n'
+import I18n from 'shared/i18n'
+import EmptyMessage from 'components/EmptyMessage'
+import ErrorPage from 'components/ErrorPage'
 import FleetsContent from './components/FleetsContent'
-import EmptyMessage from '../../components/EmptyMessage'
-import ErrorPage from '../../components/ErrorPage'
 import DevicesAssociated from './components/DevicesAssociated'
 import FleetsEdit from './components/FleetsEdit'
 

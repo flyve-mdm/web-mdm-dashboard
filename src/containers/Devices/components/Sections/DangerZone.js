@@ -31,11 +31,11 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
-import Confirmation from '../../../../components/Confirmation'
-import itemtype from '../../../../shared/itemtype'
-import publicURL from '../../../../shared/publicURL'
-import ContentPane from '../../../../components/ContentPane'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import publicURL from 'shared/publicURL'
+import Confirmation from 'components/Confirmation'
+import ContentPane from 'components/ContentPane'
 
 /**
  * @class DangerZone
