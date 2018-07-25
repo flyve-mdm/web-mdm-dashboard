@@ -31,7 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import IconItemList from '../../../components/IconItemList'
+import IconItemList from 'components/IconItemList'
 
 /**
  * Component with the template of the items of the user lists

@@ -33,12 +33,12 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import I18n from '../../../../shared/i18n'
-import withGLPI from '../../../../hoc/withGLPI'
-import Loading from '../../../../components/Loading'
-import ContentPane from '../../../../components/ContentPane'
-import itemtype from '../../../../shared/itemtype'
-import publicURL from '../../../../shared/publicURL'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import publicURL from 'shared/publicURL'
+import Loading from 'components/Loading'
+import ContentPane from 'components/ContentPane'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * @class HelpCenterList

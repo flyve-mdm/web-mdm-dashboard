@@ -32,7 +32,7 @@ import React, {
 } from 'react'
 import ReactWinJS from 'react-winjs'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
+import I18n from 'shared/i18n'
 import TasksDeployAppList from './TasksDeployAppList'
 import TasksRemoveAppList from './TasksRemoveAppList'
 import TasksDeployFileList from './TaskDeployFileList'

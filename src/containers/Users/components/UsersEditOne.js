@@ -31,19 +31,19 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
-import ConstructInputs from '../../../components/Forms'
-import ContentPane from '../../../components/ContentPane'
-import validateData from '../../../shared/validateData'
-import IconItemList from '../../../components/IconItemList'
+import I18n from 'shared/i18n'
+import validateData from 'shared/validateData'
+import itemtype from 'shared/itemtype'
+import getID from 'shared/getID'
+import authtype from 'shared/authtype'
+import ConstructInputs from 'components/Forms'
+import ContentPane from 'components/ContentPane'
+import IconItemList from 'components/IconItemList'
 import {
   usersScheme,
-} from '../../../components/Forms/Schemas'
-import Loading from '../../../components/Loading'
-import ErrorValidation from '../../../components/ErrorValidation'
-import itemtype from '../../../shared/itemtype'
-import getID from '../../../shared/getID'
-import authtype from '../../../shared/authtype'
+} from 'components/Forms/Schemas'
+import Loading from 'components/Loading'
+import ErrorValidation from 'components/ErrorValidation'
 
 /**
  * Component with the user edit form

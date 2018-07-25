@@ -30,9 +30,9 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import Confirmation from '../../Confirmation'
-import ErrorValidation from '../../ErrorValidation'
-import I18n from '../../../shared/i18n'
+import I18n from 'shared/i18n'
+import Confirmation from 'components/Confirmation'
+import ErrorValidation from 'components/ErrorValidation'
 
 /**
  * Component to create a custom input

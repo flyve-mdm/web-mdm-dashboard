@@ -31,8 +31,7 @@ import renderer from 'react-test-renderer'
 import {
   Router,
 } from 'react-router-dom'
-import history from '../../../shared/history'
-
+import history from 'shared/history'
 import InfoBox from '../index'
 
 describe('InfoBox', () => {

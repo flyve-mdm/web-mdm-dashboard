@@ -27,11 +27,11 @@
  */
 
 /** import dependencies */
-import I18n from '../../shared/i18n'
-import EmptyMessage from '../../components/EmptyMessage'
-import ErrorPage from '../../components/ErrorPage'
-import InvitationsPendingPage from './components/InvitationsPendingPage'
+import I18n from 'shared/i18n'
+import EmptyMessage from 'components/EmptyMessage'
+import ErrorPage from 'components/ErrorPage'
 import Enroll from '../Devices/components/Enroll'
+import InvitationsPendingPage from './components/InvitationsPendingPage'
 
 /**
  * Represents all private routes from Invitations

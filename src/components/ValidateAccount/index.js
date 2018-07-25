@@ -33,12 +33,12 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
-import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import withHandleMessages from '../../hoc/withHandleMessages'
-import withGLPI from '../../hoc/withGLPI'
-import publicURL from '../../shared/publicURL'
-import itemtype from '../../shared/itemtype'
-import I18n from '../../shared/i18n'
+import publicURL from 'shared/publicURL'
+import itemtype from 'shared/itemtype'
+import I18n from 'shared/i18n'
+import withAuthenticationLayout from 'hoc/withAuthenticationLayout'
+import withHandleMessages from 'hoc/withHandleMessages'
+import withGLPI from 'hoc/withGLPI'
 import Loading from '../Loading'
 
 /**

@@ -31,13 +31,13 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import routes from './routes'
-import withGLPI from '../../hoc/withGLPI'
-import GenerateRoutes from '../../components/GenerateRoutes'
+import getMode from 'shared/getMode'
+import calc100PercentMinus from 'shared/calc100PercentMinus'
+import publicURL from 'shared/publicURL'
+import withGLPI from 'hoc/withGLPI'
+import GenerateRoutes from 'components/GenerateRoutes'
 import InvitationsList from './components/InvitationsList'
-import getMode from '../../shared/getMode'
-import calc100PercentMinus from '../../shared/calc100PercentMinus'
-import publicURL from '../../shared/publicURL'
+import routes from './routes'
 
 /**
  * Component with the Invitations section

@@ -31,16 +31,16 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../../shared/i18n'
-import itemtype from '../../../../../shared/itemtype'
-import Loading from '../../../../../components/Loading'
-import EmptyMessage from '../../../../../components/EmptyMessage'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import toDateInputValue from 'shared/toDateInputValue'
+import validateData from 'shared/validateData'
+import Loading from 'components/Loading'
+import EmptyMessage from 'components/EmptyMessage'
 import {
   Input,
   TextArea,
-} from '../../../../../components/Forms'
-import toDateInputValue from '../../../../../shared/toDateInputValue'
-import validateData from '../../../../../shared/validateData'
+} from 'components/Forms'
 
 /**
  * @class Applications

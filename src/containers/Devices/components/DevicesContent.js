@@ -32,8 +32,12 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import I18n from '../../../shared/i18n'
-import ContentPane from '../../../components/ContentPane'
+import I18n from 'shared/i18n'
+import getID from 'shared/getID'
+import itemtype from 'shared/itemtype'
+import ContentPane from 'components/ContentPane'
+import Confirmation from 'components/Confirmation'
+import FleetsContent from '../../Fleets/components/FleetsContent'
 import {
   DangerZone,
   Main,
@@ -41,10 +45,6 @@ import {
   Applications,
   Geolocation,
 } from './Sections'
-import getID from '../../../shared/getID'
-import Confirmation from '../../../components/Confirmation'
-import FleetsContent from '../../Fleets/components/FleetsContent'
-import itemtype from '../../../shared/itemtype'
 
 /**
  * @class DevicesContent

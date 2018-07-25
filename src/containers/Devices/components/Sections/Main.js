@@ -31,13 +31,13 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
-import IconItemList from '../../../../components/IconItemList'
-import Confirmation from '../../../../components/Confirmation'
-import Loading from '../../../../components/Loading'
-import ContentPane from '../../../../components/ContentPane'
-import itemtype from '../../../../shared/itemtype'
-import publicURL from '../../../../shared/publicURL'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import publicURL from 'shared/publicURL'
+import IconItemList from 'components/IconItemList'
+import Confirmation from 'components/Confirmation'
+import Loading from 'components/Loading'
+import ContentPane from 'components/ContentPane'
 
 /**
  * @class Main

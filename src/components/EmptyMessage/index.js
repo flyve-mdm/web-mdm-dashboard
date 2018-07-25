@@ -28,7 +28,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../shared/i18n'
+import I18n from 'shared/i18n'
 
 /**
  * Component to show a message when the screen is void

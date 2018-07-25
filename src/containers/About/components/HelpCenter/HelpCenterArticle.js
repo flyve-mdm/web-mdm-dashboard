@@ -31,12 +31,12 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
-import Loading from '../../../../components/Loading'
-import withGLPI from '../../../../hoc/withGLPI'
-import ContentPane from '../../../../components/ContentPane'
-import itemtype from '../../../../shared/itemtype'
-import getID from '../../../../shared/getID'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import getID from 'shared/getID'
+import Loading from 'components/Loading'
+import ContentPane from 'components/ContentPane'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * @class HelpCenterArticle

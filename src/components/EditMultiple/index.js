@@ -30,6 +30,8 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import I18n from 'shared/i18n'
+import withHandleMessages from 'hoc/withHandleMessages'
 import ContentPane from '../ContentPane'
 import Loading from '../Loading'
 import {
@@ -40,8 +42,6 @@ import {
 } from '../Forms'
 import ErrorValidation from '../ErrorValidation'
 import EmptyMessage from '../EmptyMessage'
-import I18n from '../../shared/i18n'
-import withHandleMessages from '../../hoc/withHandleMessages'
 
 /**
  * Component with the menu for multiple edition

@@ -1,4 +1,4 @@
-/*
+/**
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard

@@ -31,11 +31,11 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import ContentPane from 'components/ContentPane'
+import Loading from 'components/Loading'
 import FilesEditItemList from './FilesEditItemList'
-import ContentPane from '../../../components/ContentPane'
-import Loading from '../../../components/Loading'
-import itemtype from '../../../shared/itemtype'
 
 /**
  * @class FilesEdit

@@ -27,9 +27,9 @@
  */
 
 /** import dependencies */
-import I18n from '../../shared/i18n'
-import EmptyMessage from '../../components/EmptyMessage'
-import ErrorPage from '../../components/ErrorPage'
+import I18n from 'shared/i18n'
+import EmptyMessage from 'components/EmptyMessage'
+import ErrorPage from 'components/ErrorPage'
 import DevicesContent from './components/ApplicationsContent'
 import ApplicationsAdd from './components/ApplicationsAdd'
 import ApplicationsEdit from './components/ApplicationsEdit'

@@ -31,13 +31,13 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
-import Loading from '../../../../components/Loading'
-import Map from '../Map'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import validateDate from 'shared/validateDate'
+import Loading from 'components/Loading'
 import GeolocationList from './GeolocationList'
-import itemtype from '../../../../shared/itemtype'
 import GeolocationRange from './GeolocationRange'
-import validateDate from '../../../../shared/validateDate'
+import Map from '../Map'
 
 /**
  * @class Geolocation

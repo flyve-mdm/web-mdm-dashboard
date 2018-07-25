@@ -31,10 +31,10 @@ import React from 'react'
 import {
   Switch,
 } from 'react-router-dom'
-import withI18n from '../../hoc/withI18n'
-import withNotification from '../../hoc/withNotification'
+import GenerateRoutes from 'components/GenerateRoutes'
+import withI18n from 'hoc/withI18n'
+import withNotification from 'hoc/withNotification'
 import routes from './routes'
-import GenerateRoutes from '../../components/GenerateRoutes'
 
 /**
  * Main Component in the React Tree

@@ -27,8 +27,8 @@
  */
 
 /** import dependencies */
-import I18n from '../../../../shared/i18n'
-import ErrorPage from '../../../../components/ErrorPage'
+import I18n from 'shared/i18n'
+import ErrorPage from 'components/ErrorPage'
 import HelpCenterArticle from './HelpCenterArticle'
 import HelpCenterList from './HelpCenterList'
 import Feedback from './Feedback'

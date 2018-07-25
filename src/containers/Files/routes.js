@@ -27,12 +27,12 @@
  */
 
 /** import dependencies */
-import I18n from '../../shared/i18n'
-import EmptyMessage from '../../components/EmptyMessage'
+import I18n from 'shared/i18n'
+import EmptyMessage from 'components/EmptyMessage'
+import ErrorPage from 'components/ErrorPage'
 import FilesAdd from './components/FilesAdd'
 import FilesEdit from './components/FilesEdit'
 import FilesContent from './components/FilesContent'
-import ErrorPage from '../../components/ErrorPage'
 
 /**
  * Represents all routes from Files section

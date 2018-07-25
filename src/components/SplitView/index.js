@@ -30,6 +30,12 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import I18n from 'shared/i18n'
+import publicURL from 'shared/publicURL'
+import {
+  splitview,
+} from 'shared/animationsWinJs'
+import logo from 'assets/images/dashboard.svg'
 import IconWithPopper from './IconWithPopper'
 import ImgWithPopper from './ImgWithPopper'
 import SpanWithPopper from './SpanWithPopper'
@@ -37,12 +43,6 @@ import {
   ScrollSync,
   ScrollSyncPanel,
 } from '../ScrollSync'
-import I18n from '../../shared/i18n'
-import publicURL from '../../shared/publicURL'
-import {
-  splitview,
-} from '../../shared/animationsWinJs'
-import logo from '../../assets/images/dashboard.svg'
 
 /**
  * Component with side menu

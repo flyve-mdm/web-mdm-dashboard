@@ -28,7 +28,6 @@
 
 import React from 'react'
 import renderer from 'react-test-renderer'
-
 import DatePicker from '../index'
 
 describe('DatePicker', () => {

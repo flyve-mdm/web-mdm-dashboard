@@ -31,13 +31,13 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../shared/i18n'
-import Loading from '../../components/Loading'
-import Input from '../../components/Forms/Input'
-import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import withHandleMessages from '../../hoc/withHandleMessages'
-import withGLPI from '../../hoc/withGLPI'
-import publicURL from '../../shared/publicURL'
+import I18n from 'shared/i18n'
+import publicURL from 'shared/publicURL'
+import Loading from 'components/Loading'
+import Input from 'components/Forms/Input'
+import withAuthenticationLayout from 'hoc/withAuthenticationLayout'
+import withHandleMessages from 'hoc/withHandleMessages'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * Component with the ForgotPassword section

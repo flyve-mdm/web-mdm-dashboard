@@ -31,14 +31,14 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
 import {
   FilesUpload,
   FilesUploadItemList,
-} from '../../../components/FilesUpload'
-import ContentPane from '../../../components/ContentPane'
-import Loading from '../../../components/Loading'
-import itemtype from '../../../shared/itemtype'
+} from 'components/FilesUpload'
+import ContentPane from 'components/ContentPane'
+import Loading from 'components/Loading'
 
 /**
  * @class ApplicationsAdd

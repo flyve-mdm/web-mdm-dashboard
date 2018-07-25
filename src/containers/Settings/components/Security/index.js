@@ -31,15 +31,15 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
-import Confirmation from '../../../../components/Confirmation'
-import ErrorValidation from '../../../../components/ErrorValidation'
-import ConstructInputs from '../../../../components/Forms'
-import Loading from '../../../../components/Loading'
-import logout from '../../../../shared/logout'
-import ContentPane from '../../../../components/ContentPane'
-import withGLPI from '../../../../hoc/withGLPI'
-import itemtype from '../../../../shared/itemtype'
+import I18n from 'shared/i18n'
+import logout from 'shared/logout'
+import itemtype from 'shared/itemtype'
+import Confirmation from 'components/Confirmation'
+import ErrorValidation from 'components/ErrorValidation'
+import ConstructInputs from 'components/Forms'
+import Loading from 'components/Loading'
+import ContentPane from 'components/ContentPane'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * Component with the security section

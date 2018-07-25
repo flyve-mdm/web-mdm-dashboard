@@ -33,14 +33,14 @@ import React, {
 import PropTypes from 'prop-types'
 import WinJS from 'winjs'
 import ReactWinJS from 'react-winjs'
-import I18n from '../../../shared/i18n'
-import ContentPane from '../../../components/ContentPane'
-import Loading from '../../../components/Loading'
-import withGLPI from '../../../hoc/withGLPI'
-import itemtype from '../../../shared/itemtype'
-import getID from '../../../shared/getID'
-import EmptyMessage from '../../../components/EmptyMessage'
-import publicURL from '../../../shared/publicURL'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import getID from 'shared/getID'
+import publicURL from 'shared/publicURL'
+import ContentPane from 'components/ContentPane'
+import Loading from 'components/Loading'
+import EmptyMessage from 'components/EmptyMessage'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * @class DevicesAssociated

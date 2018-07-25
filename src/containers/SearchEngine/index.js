@@ -31,11 +31,11 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../shared/i18n'
-import withGLPI from '../../hoc/withGLPI'
+import I18n from 'shared/i18n'
+import withGLPI from 'hoc/withGLPI'
+import ContentPane from 'components/ContentPane'
 import SearchQueryBuilder from './components/SearchQueryBuilder'
 import Panel from './components/Panel'
-import ContentPane from '../../components/ContentPane'
 import {
   setFields,
   getTranslation,

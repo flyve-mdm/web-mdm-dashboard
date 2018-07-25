@@ -27,7 +27,7 @@
  */
 
 /** @module nativeNotification */
-import logo from '../../assets/images/logo2.png'
+import logo from 'assets/images/logo2.png'
 /**
  * Get one new native notification
  * @param {string} title message for notification

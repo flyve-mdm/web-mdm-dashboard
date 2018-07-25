@@ -31,11 +31,11 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import Loader from 'components/Loader'
+import Loading from 'components/Loading'
 import Inventory from './Inventory'
-import Loader from '../../../../components/Loader'
-import itemtype from '../../../../shared/itemtype'
-import Loading from '../../../../components/Loading'
 
 /**
  * @class SystemReport

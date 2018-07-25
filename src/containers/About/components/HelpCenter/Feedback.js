@@ -31,16 +31,16 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
-import Loading from '../../../../components/Loading'
-import withHandleMessages from '../../../../hoc/withHandleMessages'
-import ContentPane from '../../../../components/ContentPane'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import Loading from 'components/Loading'
+import ContentPane from 'components/ContentPane'
 import {
   TextArea,
   Input,
-} from '../../../../components/Forms'
-import itemtype from '../../../../shared/itemtype'
-import withGLPI from '../../../../hoc/withGLPI'
+} from 'components/Forms'
+import withHandleMessages from 'hoc/withHandleMessages'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * @class Feedback

@@ -33,13 +33,13 @@ import PropTypes from 'prop-types'
 import {
   NavLink,
 } from 'react-router-dom'
-import I18n from '../../shared/i18n'
-import getMode from '../../shared/getMode'
-import calc100PercentMinus from '../../shared/calc100PercentMinus'
-import ErrorPage from '../ErrorPage'
+import I18n from 'shared/i18n'
+import getMode from 'shared/getMode'
+import calc100PercentMinus from 'shared/calc100PercentMinus'
 import {
   slideTop,
-} from '../../shared/animations/index'
+} from 'shared/animations/index'
+import ErrorPage from '../ErrorPage'
 
 /**
  * List of nav links

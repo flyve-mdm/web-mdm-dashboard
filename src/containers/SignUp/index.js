@@ -34,13 +34,13 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
-import I18n from '../../shared/i18n'
-import Loading from '../../components/Loading'
-import ConstructInputs from '../../components/Forms'
-import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import withHandleMessages from '../../hoc/withHandleMessages'
-import publicURL from '../../shared/publicURL'
-import ErrorValidation from '../../components/ErrorValidation'
+import I18n from 'shared/i18n'
+import publicURL from 'shared/publicURL'
+import Loading from 'components/Loading'
+import ConstructInputs from 'components/Forms'
+import ErrorValidation from 'components/ErrorValidation'
+import withAuthenticationLayout from 'hoc/withAuthenticationLayout'
+import withHandleMessages from 'hoc/withHandleMessages'
 
 /**
  * Component with the registration form

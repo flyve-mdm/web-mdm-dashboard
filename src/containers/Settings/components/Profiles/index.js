@@ -31,20 +31,20 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
-import validateData from '../../../../shared/validateData'
-import IconItemList from '../../../../components/IconItemList'
+import I18n from 'shared/i18n'
+import validateData from 'shared/validateData'
+import authtype from 'shared/authtype'
+import itemtype from 'shared/itemtype'
+import IconItemList from 'components/IconItemList'
 import {
   usersScheme,
-} from '../../../../components/Forms/Schemas'
-import Loading from '../../../../components/Loading'
-import authtype from '../../../../shared/authtype'
-import ErrorValidation from '../../../../components/ErrorValidation'
-import ConstructInputs from '../../../../components/Forms'
-import withGLPI from '../../../../hoc/withGLPI'
-import ContentPane from '../../../../components/ContentPane'
-import itemtype from '../../../../shared/itemtype'
-import withAuthentication from '../../../../hoc/withAuthentication'
+} from 'components/Forms/Schemas'
+import Loading from 'components/Loading'
+import ErrorValidation from 'components/ErrorValidation'
+import ConstructInputs from 'components/Forms'
+import ContentPane from 'components/ContentPane'
+import withGLPI from 'hoc/withGLPI'
+import withAuthentication from 'hoc/withAuthentication'
 
 /**
  * Component with the profiles section

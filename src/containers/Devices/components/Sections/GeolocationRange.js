@@ -31,10 +31,10 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
+import I18n from 'shared/i18n'
 import {
   DatePicker,
-} from '../../../../components/Forms'
+} from 'components/Forms'
 
 /**
  * @class GeolocationRange

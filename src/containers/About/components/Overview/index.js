@@ -28,8 +28,8 @@
 
 /** import dependencies */
 import React from 'react'
-import I18n from '../../../../shared/i18n'
-import ContentPane from '../../../../components/ContentPane'
+import I18n from 'shared/i18n'
+import ContentPane from 'components/ContentPane'
 
 /**
  * @constant Overview
