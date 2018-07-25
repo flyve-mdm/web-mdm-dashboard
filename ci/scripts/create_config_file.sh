@@ -2,10 +2,10 @@
 
 cat <<EOF >public/config.js
 window.appConfig = {
-  glpiApiLink: "your_URL",
-  demoToken: "your_token",
-  pluginToken: "your_token",
+  glpiApiLink: "$API_LINK",
+  demoToken: "$DEMO_TOKEN",
+  pluginToken: "$PLUGIN_TOKEN",
   appName: "MDM Dashboard",
-  bugsnag: "your_bugsnag_key",
+  bugsnag: "$BUGSNAG_KEY"
 }
 EOF
