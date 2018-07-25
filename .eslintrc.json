@@ -3,6 +3,13 @@
     "sinon": false
   },
   "extends": "airbnb",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  },
   "env": {
     "es6": true,
     "browser": true,
