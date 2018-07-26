@@ -1,0 +1,58 @@
+version: '2'
+
+services:
+  # node server
+  dashboard-node:
+    build:
+      context: ./docker/node
+      dockerfile: Dockerfile
+      args:
+        NODE_TAG: ${NODE_TAG}
+        APPPATH: ${APPPATH}
+    container_name: Dashboard-Node
+    working_dir: ${APPPATH}
+    hostname: dashboardnode
+    ports:
+      # http port
+      - ${HOST_SERVER_WEB_PORT}:3000
+    volumes:
+      - ../:${APPPATH}
+    command: ["/opt/dev-tools/cliinstall.sh"]
+    networks:
+      red:
+        aliases:
+          - dashnode
+        ipv4_address: 172.27.0.31
+  # web server
+  dashboard-apache:
+    build:
+      context: ./docker/apache
+      dockerfile: Dockerfile
+      args:
+        APACHE_TAG: ${APACHE_TAG}
+        APPPATH: ${APPPATH}
+    container_name: Dashboard-apache
+    hostname: dashboardapache
+    volumes:
+      # app folder
+      - ../build:${APPPATH}:z
+      - ./docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./docker/apache/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+    working_dir: ${APPPATH}
+    ports:
+      # http port
+      - ${HOST_SERVER_WEB_PORT_APACHE}:80
+    networks:
+      red:
+        ipv4_address: 172.27.0.32
+# In this section we defined the network interface
+networks:
+  red:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.27.0.0/24
+# End of file
