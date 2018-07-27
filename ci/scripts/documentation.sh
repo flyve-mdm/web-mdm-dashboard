@@ -6,8 +6,8 @@ yarn release
 export GIT_TAG=$(jq -r ".version" package.json)
 # Generate documentation with jsdoc
 yarn docs
-# Add spaces between '{{' and '}}' characters in the coverage
-ruby ci/scripts/add_space.rb
+# Add spaces between '{{' and '}}' characters
+ruby ci/scripts/add_space.rb docs
 # Add docs folder
 git add docs -f
 # Create commit, NOTICE: this commit is not sent
