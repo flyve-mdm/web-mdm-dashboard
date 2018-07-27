@@ -31,6 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import BytesToSize from 'shared/bytesToSize'
 import itemtype from 'shared/itemtype'
@@ -212,19 +213,15 @@ export default class ApplicationsContent extends PureComponent {
               </span>
               <br />
               <div>
-                <span
-                  className="editIcon"
+                <Icon
+                  iconName="Edit"
                   style={{ marginRight: '20px', fontSize: '20px' }}
                   onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)}
-                  role="button"
-                  tabIndex="0"
                 />
-                <span
-                  className="deleteIcon"
+                <Icon
+                  iconName="Delete"
                   style={{ marginRight: '20px', fontSize: '20px' }}
                   onClick={this.handleDelete}
-                  role="button"
-                  tabIndex="0"
                 />
               </div>
             </div>

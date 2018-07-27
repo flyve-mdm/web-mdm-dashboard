@@ -30,6 +30,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 
 /**
  * Component with the layout of the list of files to upload
@@ -62,12 +63,10 @@ class FilesUploadItemList extends PureComponent {
             </div>
             <div className="files-list__item-content-secondary">
               <div className="icon files-list__item-icon">
-                <span
-                  className="deleteIcon"
+                <Icon
+                  iconName="Delete"
                   style={{ fontSize: '18px' }}
                   onClick={this.props.onRemove}
-                  role="button"
-                  tabIndex="0"
                 />
               </div>
             </div>

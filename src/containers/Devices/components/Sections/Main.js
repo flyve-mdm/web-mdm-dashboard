@@ -32,6 +32,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import I18n from 'shared/i18n'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import itemtype from 'shared/itemtype'
 import publicURL from 'shared/publicURL'
 import IconItemList from 'components/IconItemList'
@@ -257,19 +258,15 @@ export default class Main extends PureComponent {
                   </div>
                 </div>
                 <div>
-                  <span
-                    className="editIcon"
+                  <Icon
+                    iconName="Edit"
                     style={{ marginRight: '20px', fontSize: '20px' }}
                     onClick={this.handleEdit}
-                    role="button"
-                    tabIndex="0"
                   />
-                  <span
-                    className="deleteIcon"
+                  <Icon
+                    iconName="Delete"
                     style={{ marginRight: '20px', fontSize: '20px' }}
                     onClick={this.handleDelete}
-                    role="button"
-                    tabIndex="0"
                   />
                 </div>
               </div>

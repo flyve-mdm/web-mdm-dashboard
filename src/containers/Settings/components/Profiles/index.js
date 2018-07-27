@@ -422,9 +422,9 @@ class Profiles extends PureComponent {
             </div>
 
             <ConstructInputs data={user.personalInformation} icon="contactIcon" />
-            <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
-            <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
-            <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
+            <ConstructInputs data={user.passwordInformation} icon="Permissions" />
+            <ConstructInputs data={user.validDatesInformation} icon="Calendar" />
+            <ConstructInputs data={user.emailsInformation} icon="Mail" />
             <div style={{ overflow: 'auto' }}>
               <button
                 className="btn btn--secondary"
@@ -435,7 +435,7 @@ class Profiles extends PureComponent {
                 {I18n.t('commons.add_email')}
               </button>
             </div>
-            <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
+            <ConstructInputs data={user.contactInformation} icon="Phone" />
             <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
             <ConstructInputs data={user.activityInformation} icon="documentIcon" />
             <button

@@ -28,6 +28,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 
 /**
@@ -40,7 +41,7 @@ const EmptyMessage = props => (
   <div className="center-block-content">
     {
         props.icon && props.showIcon
-          ? <span className={`icon-empty-message ${props.icon}`} />
+          ? <Icon iconName={props.icon} className="icon-empty-message" />
           : null
       }
     <h1 className="empty-message">

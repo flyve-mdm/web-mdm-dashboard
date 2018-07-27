@@ -41,7 +41,7 @@ describe('InfoBox', () => {
         <InfoBox
           name="test"
           to="test/"
-          icon="filesIcon"
+          icon="Page"
           count={3}
         />
       </Router>,

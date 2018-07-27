@@ -33,6 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import itemtype from 'shared/itemtype'
 import publicURL from 'shared/publicURL'
@@ -195,7 +196,7 @@ class HelpCenterList extends PureComponent {
                       role="button"
                       tabIndex="0"
                     >
-                      <span className="searchIcon" />
+                      <Icon iconName="Search" />
                     </div>
                   </div>
                 </div>
@@ -238,7 +239,7 @@ class HelpCenterList extends PureComponent {
                 role="link"
                 tabIndex="0"
               >
-                <span className="messageIcon" style={{ marginRight: '5px' }} />
+                <Icon iconName="Chat" style={{ marginRight: '5px' }} />
                 { I18n.t('about.help_center.send_feedback') }
               </div>
             </div>
