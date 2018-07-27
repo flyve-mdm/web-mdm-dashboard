@@ -27,7 +27,7 @@
     "eject": "react-scripts eject",
     "sass": "sass --watch src/assets/styles/scss:src/assets/styles/css",
     "sass:build": "sass src/assets/styles/scss:src/assets/styles/css",
-    "lint": "yarn eslint src"
+    "lint": "yarn eslint src --fix"
   },
   "dependencies": {
     "@glpi-project/javascript-library-glpi": ">=0.1.0-beta <=1.0.0",
