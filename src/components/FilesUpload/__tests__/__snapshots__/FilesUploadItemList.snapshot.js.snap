@@ -14,7 +14,7 @@ exports[`FilesUploadItemList renders FilesUploadItemList 1`] = `
         className="icon files-list__item-icon"
       >
         <span
-          className="documentIcon"
+          className="iconFont documentIcon"
         />
       </div>
       <div
@@ -43,7 +43,7 @@ exports[`FilesUploadItemList renders FilesUploadItemList 1`] = `
           className="icon files-list__item-icon"
         >
           <span
-            className="deleteIcon"
+            className="iconFont deleteIcon"
             onClick={[Function]}
             role="button"
             style={

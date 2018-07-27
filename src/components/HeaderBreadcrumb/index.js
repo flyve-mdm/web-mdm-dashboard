@@ -82,7 +82,7 @@ class HeaderBreadcrumb extends PureComponent {
 
         <div className="header-icon">
           <span
-            className="burgerIcon"
+            className="iconFont burgerIcon"
             onClick={this.props.handleToggleExpand}
             role="button"
             tabIndex="0"

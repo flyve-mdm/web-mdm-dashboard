@@ -24,14 +24,14 @@ $chart-size: 310px;
 
         a {
             color: $splitview-color-fonts;
-            
+
             @extend %normalize-anchor;
 
             &:hover {
                 color: $splitview-color-fonts-hover;
             }
         }
-        
+
         .info-box {
             display: -webkit-flex;
             display: flex;
@@ -53,6 +53,7 @@ $chart-size: 310px;
                 margin: 10px 10px 0;
                 font-size: 32px;
                 text-align: right;
+                font-family: Symbols;
             }
             .content-box {
                 -webkit-order: 2;
@@ -61,14 +62,14 @@ $chart-size: 310px;
                 font-size: 64px;
                 font-weight: 200;
                 line-height: 90%;
-                
+
             }
             .title-box {
                 -webkit-order: 3;
                 order: 3;
                 margin: 10px;
             }
-            
+
         }
     }
 
@@ -84,17 +85,17 @@ $chart-size: 310px;
 
         .info-box {
             background: #E1E1E1;
-            display: inline-block;    
+            display: inline-block;
             position: relative;
             width: $chart-size;
             height: $chart-size;
-            
+
             ul {
                 height: $chart-size - 40px;
                 overflow-x: hidden;
                 overflow-y: auto;
             }
-            
+
             .title-box {
                 padding: 10px;
                 position: absolute;

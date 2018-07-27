@@ -50,7 +50,7 @@ class IconWithPopper extends PureComponent {
         <div>
           <NavLink to={this.props.to} activeClassName="selected">
             <span
-              className={this.props.iconName}
+              className={`iconFont ${this.props.iconName}`}
               title={this.props.title}
             />
           </NavLink>
@@ -65,7 +65,7 @@ class IconWithPopper extends PureComponent {
       >
         <a>
           <span
-            className={this.props.iconName}
+            className={`iconFont ${this.props.iconName}`}
             title={this.props.title}
           />
         </a>

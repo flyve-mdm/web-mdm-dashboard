@@ -185,7 +185,7 @@ export default class ApplicationsContent extends PureComponent {
             textAlign: 'center',
           }}
         >
-          <span className="documentIcon" />
+          <span className="iconFont documentIcon" />
         </div>
       )
     }
@@ -213,14 +213,14 @@ export default class ApplicationsContent extends PureComponent {
               <br />
               <div>
                 <span
-                  className="editIcon"
+                  className="iconFont editIcon"
                   style={{ marginRight: '20px', fontSize: '20px' }}
                   onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)}
                   role="button"
                   tabIndex="0"
                 />
                 <span
-                  className="deleteIcon"
+                  className="iconFont deleteIcon"
                   style={{ marginRight: '20px', fontSize: '20px' }}
                   onClick={this.handleDelete}
                   role="button"

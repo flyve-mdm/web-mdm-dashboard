@@ -258,14 +258,14 @@ export default class Main extends PureComponent {
                 </div>
                 <div>
                   <span
-                    className="editIcon"
+                    className="iconFont editIcon"
                     style={{ marginRight: '20px', fontSize: '20px' }}
                     onClick={this.handleEdit}
                     role="button"
                     tabIndex="0"
                   />
                   <span
-                    className="deleteIcon"
+                    className="iconFont deleteIcon"
                     style={{ marginRight: '20px', fontSize: '20px' }}
                     onClick={this.handleDelete}
                     role="button"

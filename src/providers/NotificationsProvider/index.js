@@ -98,7 +98,7 @@ export class NotificationsProvider extends PureComponent {
       toast = (
         <div className={`toast toast--${context.notification.type}`}>
           <span
-            className="cancelIcon"
+            className="iconFont cancelIcon"
             style={{ float: 'right', cursor: 'pointer', color: '#ffffff' }}
             onClick={() => {
               context.hidenNotification()
