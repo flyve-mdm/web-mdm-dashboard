@@ -46,6 +46,10 @@ It allows you to manage all your mobile devices effectively through a secure and
 
 For more information visit our [website](http://flyve.org/web-mdm-dashboard/).
 
+### Docker Environment
+
+Flyve MDM Web Dashboard comes with a docker environment, allowing you to have a development instance ready to work on, to set it up just follow our [documentation](http://flyve.org/web-mdm-dashboard/howtos/)
+
 ## Build Status
 
 |**LTS**|**Bleeding Edge**|
