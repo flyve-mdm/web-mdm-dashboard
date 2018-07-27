@@ -7,10 +7,9 @@ export GIT_TAG=$(jq -r ".version" package.json)
 # Genarate coverage
 yarn coverage
 # Add headers to all HTML files of the coverage
-export LC_ALL=C.UTF-8
 ruby ci/scripts/add_header.rb
 # Add spaces between '{{' and '}}' characters in the coverage
-ruby ci/scripts/add_space.rb
+ruby ci/scripts/add_space.rb coverage
 # Add docs folder
 git add coverage -f
 # Create commit, NOTICE: this commit is not sent

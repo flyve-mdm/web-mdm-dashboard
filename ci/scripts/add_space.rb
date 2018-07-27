@@ -1,5 +1,5 @@
 # Add spaces between '{{' and '}}' characters
-Dir.glob("coverage/**/*.html") do |file_name|
+Dir.glob("#{ARGV[0]}/**/*.html") do |file_name|
     text = File.read(file_name)
     replace = text.gsub!(/{{/, "{ {")
     if replace
