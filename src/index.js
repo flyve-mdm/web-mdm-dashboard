@@ -34,6 +34,7 @@ import {
 } from 'react-router-dom'
 import bugsnag from 'bugsnag-js'
 import createPlugin from 'bugsnag-react'
+import { initializeIcons } from 'office-ui-fabric-react/lib/Icons'
 import history from './shared/history'
 import RootApp from './applications/RootApp'
 import {
@@ -44,6 +45,8 @@ import { NotificationsProvider } from './providers/NotificationsProvider'
 import { AuthenticationProvider } from './providers/AuthenticationProvider'
 import './assets/styles/css/main.css' // Global CSS Styles
 import 'web-animations-js/web-animations-next-lite.min'
+
+initializeIcons()
 
 /**
  * Create the bugsnag client

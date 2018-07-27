@@ -28,6 +28,7 @@
 
 /** import dependencies */
 import React from 'react'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import ContentPane from 'components/ContentPane'
 
@@ -51,7 +52,7 @@ const Contact = () => (
       <div className="content-info">
         <ul className="contact-list">
           <li>
-            <span className="phoneIcon" />
+            <Icon iconName="Phone" />
             <div>
               <div>
                 { I18n.t('commons.email') }
@@ -62,7 +63,7 @@ const Contact = () => (
             </div>
           </li>
           <li>
-            <span className="phoneIcon" />
+            <Icon iconName="Phone" />
             <div>
               <div>
                 { I18n.t('commons.call') }
@@ -73,7 +74,7 @@ const Contact = () => (
             </div>
           </li>
           <li>
-            <span className="mapIcon" />
+            <Icon iconName="MapPin" />
             <div>
               <div>
                 { I18n.t('commons.map') }

@@ -31,6 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import itemtype from 'shared/itemtype'
 import publicURL from 'shared/publicURL'
@@ -132,26 +133,29 @@ export default class FilesContent extends PureComponent {
       <ContentPane>
         <div className="content-header" style={{ margin: '0 10px' }}>
           <div className="item-info">
-            <span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} />
+            <Icon
+              iconName="Page"
+              style={{
+                fontSize: '48px',
+                paddingLeft: '20px',
+                paddingTop: '20px',
+              }}
+            />
             <div>
               <div className="item-info__name">
                 {fileName}
               </div>
               <br />
               <div>
-                <span
-                  className="editIcon"
+                <Icon
+                  iconName="Edit"
                   style={{ marginRight: '20px', fontSize: '20px' }}
                   onClick={this.handleEdit}
-                  role="button"
-                  tabIndex="0"
                 />
-                <span
-                  className="deleteIcon"
+                <Icon
+                  iconName="Delete"
                   style={{ marginRight: '20px', fontSize: '20px' }}
                   onClick={this.handleDelete}
-                  role="button"
-                  tabIndex="0"
                 />
               </div>
             </div>

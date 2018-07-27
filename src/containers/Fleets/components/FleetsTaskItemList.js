@@ -32,6 +32,7 @@ import React, {
 } from 'react'
 import ReactWinJS from 'react-winjs'
 import PropTypes from 'prop-types'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import TasksDeployAppList from './TasksDeployAppList'
 import TasksRemoveAppList from './TasksRemoveAppList'
@@ -540,12 +541,10 @@ class FleetsTaskItemList extends PureComponent {
                       value={this.state.input}
                       onChange={this.handleChangeInput}
                     />
-                    <span
-                      className="addIcon"
+                    <Icon
+                      iconName="Add"
                       style={{ padding: '0 10px', fontSize: '18px' }}
                       onClick={this.handleBlurInput}
-                      role="button"
-                      tabIndex="0"
                     />
                     <TasksRemoveAppList
                       data={this.props.value}
@@ -653,12 +652,10 @@ class FleetsTaskItemList extends PureComponent {
                       value={this.state.input}
                       onChange={this.handleChangeInput}
                     />
-                    <span
-                      className="addIcon"
+                    <Icon
+                      iconName="Add"
                       style={{ padding: '0 10px', fontSize: '18px' }}
                       onClick={this.handleBlurInput}
-                      role="button"
-                      tabIndex="0"
                     />
                     <TasksRemoveFileList
                       data={this.props.value}

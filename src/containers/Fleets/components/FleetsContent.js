@@ -32,6 +32,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import WinJS from 'winjs'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import itemtype from 'shared/itemtype'
 import publicURL from 'shared/publicURL'
@@ -1188,34 +1189,28 @@ class FleetsContent extends PureComponent {
                           <div>
                             {devicesLength}
                           </div>
-                          <span className="deviceIcon" />
+                          <Icon iconName="CellPhone" />
                         </div>
                       </React.Fragment>
                     )
                     : ''
                 }
               <div className="item-info">
-                <span
-                  className="saveIcon"
+                <Icon
+                  iconName="Save"
                   onClick={this.handleSaveFleet}
-                  role="button"
-                  tabIndex="0"
                 />
                 {
                   selectedItems.length !== 0 && itemType === itemtype.PluginFlyvemdmFleet
                     ? (
                       <React.Fragment>
-                        <span
-                          className="copyIcon"
+                        <Icon
+                          iconName="Copy"
                           onClick={this.handleDuplicateFleet}
-                          role="button"
-                          tabIndex="0"
                         />
-                        <span
-                          className="deleteIcon"
+                        <Icon
+                          iconName="Delete"
                           onClick={this.handleDeleteFleet}
-                          role="button"
-                          tabIndex="0"
                         />
                       </React.Fragment>
                     )

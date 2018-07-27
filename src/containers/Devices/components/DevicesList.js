@@ -33,6 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import BuildItemList from 'shared/BuildItemList'
 import itemtype from 'shared/itemtype'
@@ -392,8 +393,8 @@ export default class DevicesList extends PureComponent {
           role="button"
           tabIndex="0"
         >
-          <span
-            className="refreshIcon"
+          <Icon
+            iconName="Refresh"
             style={{ padding: '10px', fontSize: '20px' }}
           />
           <span>
