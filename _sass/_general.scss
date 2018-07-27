@@ -1,4 +1,5 @@
 $background-color: #fff;
+$grey: #f2f2f2;
 
 html {
   min-height: 100%;
@@ -35,4 +36,21 @@ img {
 
 .article-wiki {
   margin-left: 40px;
+}
+
+.zebra-style {
+
+  margin-top: 20px;
+
+  th,
+  td {
+    padding: 16px;
+    width: 200px;
+  }
+
+  tr {
+    &:nth-child(odd) {
+      background-color: $grey;
+    }
+  }
 }
