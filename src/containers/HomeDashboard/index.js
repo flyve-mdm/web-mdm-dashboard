@@ -419,7 +419,7 @@ class Dashboard extends PureComponent {
           to="app/devices"
           count={this.state.devicesCurrentlyManaged}
           name={(this.state.devicesCurrentlyManaged === 1) ? I18n.t('commons.device') : I18n.t('commons.devices')}
-          icon="deviceIcon"
+          icon="CellPhone"
           key="devicesCurrentlyManaged"
         />,
       )
@@ -431,7 +431,7 @@ class Dashboard extends PureComponent {
           to="app/invitations"
           count={this.state.invitationsSent}
           name={(this.state.invitationsSent === 1) ? I18n.t('commons.invitation') : I18n.t('commons.invitations')}
-          icon="emailIcon"
+          icon="Mail"
           key="invitationsSent"
         />,
       )
@@ -443,7 +443,7 @@ class Dashboard extends PureComponent {
           to="app/fleets"
           count={this.state.fleetsCurrentlyManaged}
           name={(this.state.fleetsCurrentlyManaged === 1) ? I18n.t('commons.fleet') : I18n.t('commons.fleets')}
-          icon="goToStartIcon"
+          icon="Ferry"
           key="fleetsCurrentlyManaged"
         />,
       )
@@ -455,7 +455,7 @@ class Dashboard extends PureComponent {
           to="app/files"
           count={this.state.filesUploaded}
           name={(this.state.filesUploaded === 1) ? I18n.t('commons.file') : I18n.t('commons.files')}
-          icon="filesIcon"
+          icon="Page"
           key="filesUploaded"
         />,
       )
@@ -467,7 +467,7 @@ class Dashboard extends PureComponent {
           to="app/applications"
           count={this.state.applicationsUploaded}
           name={(this.state.applicationsUploaded === 1) ? I18n.t('commons.application') : I18n.t('commons.applications')}
-          icon="switchAppsIcon"
+          icon="AppIconDefault"
           key="applicationsUploaded"
         />,
       )
@@ -479,7 +479,7 @@ class Dashboard extends PureComponent {
           to="app/users"
           count={this.state.numberUsers}
           name={(this.state.numberUsers === 1) ? I18n.t('commons.user') : I18n.t('commons.users')}
-          icon="peopleIcon"
+          icon="People"
           key="numberUsers"
         />,
       )

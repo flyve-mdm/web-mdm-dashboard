@@ -28,6 +28,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import {
   Link,
 } from 'react-router-dom'
@@ -49,7 +50,8 @@ const InfoBox = ({
 }) => (
   <Link to={to}>
     <div className="info-box">
-      <span className={`icon-box ${icon}`} />
+      <Icon iconName={icon} className="icon-box" />
+
       <span className="content-box">
         {count}
       </span>

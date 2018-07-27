@@ -28,6 +28,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import createListElement from './createListElement'
 
 /**
@@ -42,7 +43,7 @@ const ConstructInputs = (props) => {
   if (props.icon) {
     icon = (
       <div className="froms__row froms__row--icon">
-        <span className={props.icon} />
+        <Icon iconName={props.icon} />
         {
           props.title
             ? (

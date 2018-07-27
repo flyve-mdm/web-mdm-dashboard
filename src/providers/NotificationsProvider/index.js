@@ -29,6 +29,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import WinJS from 'winjs'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import validateNotifications from 'shared/validateNotifications'
 import nativeNotification from 'shared/nativeNotification'
 
@@ -97,14 +98,12 @@ export class NotificationsProvider extends PureComponent {
     if (context.show && notification.type === 'Toast') {
       toast = (
         <div className={`toast toast--${context.notification.type}`}>
-          <span
-            className="cancelIcon"
+          <Icon
+            iconName="Cancel"
             style={{ float: 'right', cursor: 'pointer', color: '#ffffff' }}
             onClick={() => {
               context.hidenNotification()
             }}
-            role="button"
-            tabIndex="0"
           />
           <div className="toast__title">
             {context.notification.title}

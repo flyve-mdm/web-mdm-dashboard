@@ -30,6 +30,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import Confirmation from 'components/Confirmation'
 import ErrorValidation from 'components/ErrorValidation'
@@ -120,12 +121,10 @@ class Input extends PureComponent {
   render() {
     const deleteIcon = this.props.delete
       ? (
-        <span
-          className="deleteIcon"
+        <Icon
+          iconName="Delete"
           style={{ margin: 10, fontSize: 18 }}
           onClick={this.deleteEmail}
-          role="button"
-          tabIndex="0"
         />
       )
       : undefined

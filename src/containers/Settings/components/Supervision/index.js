@@ -179,7 +179,7 @@ class Supervision extends PureComponent {
             <div className="list-content" style={{ margin: '10px' }}>
               <ConstructInputs
                 data={supervision.helpDeskInformation}
-                icon="supervisionIcon"
+                icon="Admin"
                 title={I18n.t('settings.supervision.helpdesk')}
               />
               <div style={{ overflow: 'auto', paddingBottom: 40 }}>

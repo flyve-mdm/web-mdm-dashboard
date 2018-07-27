@@ -34,6 +34,7 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import publicURL from 'shared/publicURL'
 import Loading from 'components/Loading'
@@ -279,7 +280,7 @@ class SignUp extends PureComponent {
               role="button"
               tabIndex="0"
             >
-              <span className="refreshIcon" />
+              <Icon iconName="Refresh" />
               <span>
                 {I18n.t('login.refresh_captcha')}
               </span>

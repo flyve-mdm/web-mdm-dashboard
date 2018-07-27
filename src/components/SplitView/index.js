@@ -96,43 +96,43 @@ class SplitView extends PureComponent {
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/devices`}
-                          iconName="deviceIcon"
+                          iconName="CellPhone"
                           title={I18n.t('commons.device')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/invitations`}
-                          iconName="emailIcon"
+                          iconName="Mail"
                           title={I18n.t('commons.invitations')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/fleets`}
-                          iconName="goToStartIcon"
+                          iconName="Ferry"
                           title={I18n.t('commons.fleets')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/files`}
-                          iconName="filesIcon"
+                          iconName="Page"
                           title={I18n.t('commons.files')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/applications`}
-                          iconName="switchAppsIcon"
+                          iconName="AppIconDefault"
                           title={I18n.t('commons.applications')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/users`}
-                          iconName="peopleIcon"
+                          iconName="People"
                           title={I18n.t('commons.users')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/search`}
-                          iconName="searchIcon"
+                          iconName="Search"
                           title={I18n.t('commons.search_or_other')}
                           disabled={this.props.expanded}
                         />
@@ -140,19 +140,19 @@ class SplitView extends PureComponent {
                       <section className="splitview-wrapped-navbar-wrapped-bottom__section">
                         <IconWithPopper
                           to={`${publicURL}/app/settings`}
-                          iconName="settingsIcon"
+                          iconName="Settings"
                           title={I18n.t('commons.setting_flyve_mdm')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           to={`${publicURL}/app/about`}
-                          iconName="contactInfoIcon"
+                          iconName="ContactInfo"
                           title={I18n.t('commons.about_flyve_mdm')}
                           disabled={this.props.expanded}
                         />
                         <IconWithPopper
                           click={this.logout}
-                          iconName="PowerButtonIcon"
+                          iconName="PowerButton"
                           title={I18n.t('commons.logout')}
                           disabled={this.props.expanded}
                         />

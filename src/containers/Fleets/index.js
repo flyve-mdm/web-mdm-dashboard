@@ -49,7 +49,7 @@ class Fleets extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      icon: 'goToStartIcon',
+      icon: 'Ferry',
       mode: getMode(),
       itemListPaneWidth: getMode() === 'small' ? '100%' : 320,
       selectionMode: false,

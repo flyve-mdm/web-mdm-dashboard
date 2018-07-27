@@ -1,18 +1,18 @@
 .authentication {
     margin: auto;
-    
+
     section {
         padding-top: 20px;
         padding-bottom: 20px;
         min-height: 75vh;
-        
+
         .loading {
             margin-top: 100px !important;
         }
 
         figure {
             text-align: center;
-            
+
             img {
                 width: 90px;
             }
@@ -28,10 +28,6 @@
                 margin-top: 15px;
                 color: $color-1-primary;
                 cursor: pointer;
-                
-                .refreshIcon {
-                    padding-right: 5px;
-                }
             }
         }
 

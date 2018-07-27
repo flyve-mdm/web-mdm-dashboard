@@ -31,6 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import validateData from 'shared/validateData'
 import authtype from 'shared/authtype'
@@ -408,7 +409,7 @@ class Profiles extends PureComponent {
           </h2>
           <div className="froms Profiles" style={{ marginTop: '20px' }}>
             <div className="froms__row froms__row--icon">
-              <span className="viewIcon" />
+              <Icon iconName="View" />
             </div>
             <div className="froms__row">
               <div style={{ overflow: 'hidden' }}>
@@ -421,10 +422,10 @@ class Profiles extends PureComponent {
               </div>
             </div>
 
-            <ConstructInputs data={user.personalInformation} icon="contactIcon" />
-            <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
-            <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
-            <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
+            <ConstructInputs data={user.personalInformation} icon="Contact" />
+            <ConstructInputs data={user.passwordInformation} icon="Permissions" />
+            <ConstructInputs data={user.validDatesInformation} icon="Calendar" />
+            <ConstructInputs data={user.emailsInformation} icon="Mail" />
             <div style={{ overflow: 'auto' }}>
               <button
                 className="btn btn--secondary"
@@ -435,9 +436,9 @@ class Profiles extends PureComponent {
                 {I18n.t('commons.add_email')}
               </button>
             </div>
-            <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
-            <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
-            <ConstructInputs data={user.activityInformation} icon="documentIcon" />
+            <ConstructInputs data={user.contactInformation} icon="Phone" />
+            <ConstructInputs data={user.moreInformation} icon="BulletedList2" />
+            <ConstructInputs data={user.activityInformation} icon="Page" />
             <button
               className="btn btn--primary"
               style={{ margin: '20px', float: 'right' }}

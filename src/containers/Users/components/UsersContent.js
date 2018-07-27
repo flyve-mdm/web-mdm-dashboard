@@ -31,6 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import I18n from 'shared/i18n'
 import itemtype from 'shared/itemtype'
 import getID from 'shared/getID'
@@ -201,20 +202,16 @@ class UsersContent extends PureComponent {
 
                 <br />
 
-                <span
-                  className="editIcon"
+                <Icon
+                  iconName="Edit"
                   style={{ padding: '0 10px', fontSize: '20px' }}
                   onClick={() => this.props.history.push(`${publicURL}/app/users/${this.state.id}/edit`)}
-                  role="button"
-                  tabIndex="0"
                 />
 
-                <span
-                  className="deleteIcon"
+                <Icon
+                  iconName="Delete"
                   style={{ padding: '0 10px', fontSize: '20px' }}
                   onClick={this.handleDelete}
-                  role="button"
-                  tabIndex="0"
                 />
 
               </div>
@@ -224,7 +221,7 @@ class UsersContent extends PureComponent {
           <div className="content-info">
             <ul>
               <li>
-                <span className="phoneIcon" />
+                <Icon iconName="Phone" />
                 <div>
                   <a href={this.state.data.mobile ? `tel: ${this.state.data.mobile}` : '#call'}>
                     {I18n.t('commons.call_mobile')}
@@ -235,7 +232,7 @@ class UsersContent extends PureComponent {
                 </div>
               </li>
               <li>
-                <span className="phoneIcon" />
+                <Icon iconName="Phone" />
                 <div>
                   <a href={this.state.data.phone2 ? `tel: ${this.state.data.phone2}` : '#call'}>
                     {I18n.t('commons.call_work')}
@@ -246,7 +243,7 @@ class UsersContent extends PureComponent {
                 </div>
               </li>
               <li>
-                <span className="emailIcon" />
+                <Icon iconName="Mail" />
                 <div>
                   <a href={this.state.emails.length > 0 ? `mailto: ${this.state.emails[0].email}` : '#email'}>
                     {I18n.t('commons.email')}
