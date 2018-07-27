@@ -340,8 +340,8 @@ class FleetsTaskItemList extends PureComponent {
                   >
                     {
                       this.props.value === 1
-                        ? <span className="selectIcon" />
-                        : <span className="unselectIcon" />
+                        ? <span className="iconFont selectIcon" />
+                        : <span className="iconFont unselectIcon" />
                     }
                   </div>
                 </div>
@@ -541,7 +541,7 @@ class FleetsTaskItemList extends PureComponent {
                       onChange={this.handleChangeInput}
                     />
                     <span
-                      className="addIcon"
+                      className="iconFont addIcon"
                       style={{ padding: '0 10px', fontSize: '18px' }}
                       onClick={this.handleBlurInput}
                       role="button"
@@ -654,7 +654,7 @@ class FleetsTaskItemList extends PureComponent {
                       onChange={this.handleChangeInput}
                     />
                     <span
-                      className="addIcon"
+                      className="iconFont addIcon"
                       style={{ padding: '0 10px', fontSize: '18px' }}
                       onClick={this.handleBlurInput}
                       role="button"

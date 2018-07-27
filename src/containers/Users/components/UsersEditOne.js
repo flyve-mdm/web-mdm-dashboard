@@ -426,7 +426,7 @@ class UsersEditOne extends PureComponent {
       componetRender = (
         <div className="froms Profiles">
           <div className="froms__row froms__row--icon">
-            <span className="viewIcon" />
+            <span className="iconFont viewIcon" />
           </div>
 
           <div className="froms__row">

@@ -66,7 +66,7 @@ export default class ApplicationsItemList extends PureComponent {
             verticalAlign: 'super',
           }}
         >
-          <span className="documentIcon" />
+          <span className="iconFont documentIcon" />
         </div>
       )
     }

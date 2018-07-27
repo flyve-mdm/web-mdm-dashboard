@@ -51,7 +51,7 @@ const Contact = () => (
       <div className="content-info">
         <ul className="contact-list">
           <li>
-            <span className="phoneIcon" />
+            <span className="iconFont phoneIcon" />
             <div>
               <div>
                 { I18n.t('commons.email') }
@@ -62,7 +62,7 @@ const Contact = () => (
             </div>
           </li>
           <li>
-            <span className="phoneIcon" />
+            <span className="iconFont phoneIcon" />
             <div>
               <div>
                 { I18n.t('commons.call') }
@@ -73,7 +73,7 @@ const Contact = () => (
             </div>
           </li>
           <li>
-            <span className="mapIcon" />
+            <span className="iconFont mapIcon" />
             <div>
               <div>
                 { I18n.t('commons.map') }

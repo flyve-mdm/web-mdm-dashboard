@@ -8,7 +8,7 @@ exports[`HeaderBreadcrumb renders HeaderBreadcrumb 1`] = `
     className="header-icon"
   >
     <span
-      className="burgerIcon"
+      className="iconFont burgerIcon"
       onClick={[Function]}
       role="button"
       tabIndex="0"

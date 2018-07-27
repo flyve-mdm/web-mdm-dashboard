@@ -62,7 +62,7 @@ class TasksDeployFileList extends PureComponent {
               <div className="files-list__item-content-secondary">
                 <div className="files-list__item-icon">
                   <span
-                    className="deleteIcon"
+                    className="iconFont deleteIcon"
                     style={{ fontSize: '18px' }}
                     onClick={() => this.handleRemove(item)}
                     role="button"

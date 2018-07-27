@@ -202,7 +202,7 @@ class UsersContent extends PureComponent {
                 <br />
 
                 <span
-                  className="editIcon"
+                  className="iconFont editIcon"
                   style={{ padding: '0 10px', fontSize: '20px' }}
                   onClick={() => this.props.history.push(`${publicURL}/app/users/${this.state.id}/edit`)}
                   role="button"
@@ -210,7 +210,7 @@ class UsersContent extends PureComponent {
                 />
 
                 <span
-                  className="deleteIcon"
+                  className="iconFont deleteIcon"
                   style={{ padding: '0 10px', fontSize: '20px' }}
                   onClick={this.handleDelete}
                   role="button"
@@ -224,7 +224,7 @@ class UsersContent extends PureComponent {
           <div className="content-info">
             <ul>
               <li>
-                <span className="phoneIcon" />
+                <span className="iconFont phoneIcon" />
                 <div>
                   <a href={this.state.data.mobile ? `tel: ${this.state.data.mobile}` : '#call'}>
                     {I18n.t('commons.call_mobile')}
@@ -235,7 +235,7 @@ class UsersContent extends PureComponent {
                 </div>
               </li>
               <li>
-                <span className="phoneIcon" />
+                <span className="iconFont phoneIcon" />
                 <div>
                   <a href={this.state.data.phone2 ? `tel: ${this.state.data.phone2}` : '#call'}>
                     {I18n.t('commons.call_work')}
@@ -246,7 +246,7 @@ class UsersContent extends PureComponent {
                 </div>
               </li>
               <li>
-                <span className="emailIcon" />
+                <span className="iconFont emailIcon" />
                 <div>
                   <a href={this.state.emails.length > 0 ? `mailto: ${this.state.emails[0].email}` : '#email'}>
                     {I18n.t('commons.email')}

@@ -279,7 +279,7 @@ class SignUp extends PureComponent {
               role="button"
               tabIndex="0"
             >
-              <span className="refreshIcon" />
+              <span className="iconFont refreshIcon" />
               <span>
                 {I18n.t('login.refresh_captcha')}
               </span>

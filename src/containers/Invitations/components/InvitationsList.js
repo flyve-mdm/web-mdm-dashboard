@@ -453,7 +453,7 @@ export default class InvitationsList extends PureComponent {
           tabIndex="0"
         >
           <span
-            className="refreshIcon"
+            className="iconFont refreshIcon"
             style={{ padding: '10px', fontSize: '20px' }}
           />
           <span>

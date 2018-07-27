@@ -121,7 +121,7 @@ class Input extends PureComponent {
     const deleteIcon = this.props.delete
       ? (
         <span
-          className="deleteIcon"
+          className="iconFont deleteIcon"
           style={{ margin: 10, fontSize: 18 }}
           onClick={this.deleteEmail}
           role="button"

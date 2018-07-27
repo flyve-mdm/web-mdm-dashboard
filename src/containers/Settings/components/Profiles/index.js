@@ -408,7 +408,7 @@ class Profiles extends PureComponent {
           </h2>
           <div className="froms Profiles" style={{ marginTop: '20px' }}>
             <div className="froms__row froms__row--icon">
-              <span className="viewIcon" />
+              <span className="iconFont viewIcon" />
             </div>
             <div className="froms__row">
               <div style={{ overflow: 'hidden' }}>

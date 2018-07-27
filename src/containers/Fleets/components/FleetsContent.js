@@ -1188,7 +1188,7 @@ class FleetsContent extends PureComponent {
                           <div>
                             {devicesLength}
                           </div>
-                          <span className="deviceIcon" />
+                          <span className="iconFont deviceIcon" />
                         </div>
                       </React.Fragment>
                     )
@@ -1196,7 +1196,7 @@ class FleetsContent extends PureComponent {
                 }
               <div className="item-info">
                 <span
-                  className="saveIcon"
+                  className="iconFont saveIcon"
                   onClick={this.handleSaveFleet}
                   role="button"
                   tabIndex="0"
@@ -1206,13 +1206,13 @@ class FleetsContent extends PureComponent {
                     ? (
                       <React.Fragment>
                         <span
-                          className="copyIcon"
+                          className="iconFont copyIcon"
                           onClick={this.handleDuplicateFleet}
                           role="button"
                           tabIndex="0"
                         />
                         <span
-                          className="deleteIcon"
+                          className="iconFont deleteIcon"
                           onClick={this.handleDeleteFleet}
                           role="button"
                           tabIndex="0"

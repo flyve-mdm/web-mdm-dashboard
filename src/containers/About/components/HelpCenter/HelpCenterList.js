@@ -51,7 +51,7 @@ class HelpCenterList extends PureComponent {
       role="link"
       tabIndex="0"
     >
-      <span className="documentIcon" style={{ marginRight: '5px' }} />
+      <span className="iconFont documentIcon" style={{ marginRight: '5px' }} />
       {item.data.name}
     </div>
   ))
@@ -195,7 +195,7 @@ class HelpCenterList extends PureComponent {
                       role="button"
                       tabIndex="0"
                     >
-                      <span className="searchIcon" />
+                      <span className="iconFont searchIcon" />
                     </div>
                   </div>
                 </div>
@@ -238,7 +238,7 @@ class HelpCenterList extends PureComponent {
                 role="link"
                 tabIndex="0"
               >
-                <span className="messageIcon" style={{ marginRight: '5px' }} />
+                <span className="iconFont messageIcon" style={{ marginRight: '5px' }} />
                 { I18n.t('about.help_center.send_feedback') }
               </div>
             </div>
