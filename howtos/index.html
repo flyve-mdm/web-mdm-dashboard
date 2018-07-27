@@ -31,6 +31,21 @@ layout: container
                 </p>
             </h4>
         {% endfor %}
+        <ul>
+            <li><h3>Docker Environment for Web MDM Dashboard</h3></li>
+            <ul>
+              {% for post in site.categories.docker %}
+                <li>
+                    <h4>
+                        <a class="post-link" href="{{ post.url | absolute_url }}">{{ post.title | escape }}</a>
+                        <p>
+                            {{ post.description }}
+                        </p>
+                    </h4>
+                </li>
+              {% endfor %}
+            </ul>
+        </ul>
 
     <h3>Want to Contribute?</h3>
         {% for post in site.categories.contributing %}
