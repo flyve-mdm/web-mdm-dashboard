@@ -54,14 +54,13 @@ import PropTypes from 'prop-types'
 import {
   Link,
 } from 'react-router-dom'
-import I18n from '../../shared/i18n'
-import Loading from '../../components/Loading'
-import ConstructInputs from '../../components/Forms'
-import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import withHandleMessages from '../../hoc/withHandleMessages'
-import publicURL from '../../shared/publicURL'
-import ErrorValidation from '../../components/ErrorValidation'
-import appConfig from '../../../public/config.json'
+import I18n from 'shared/i18n'
+import publicURL from 'shared/publicURL'
+import Loading from 'components/Loading'
+import ConstructInputs from 'components/Forms'
+import ErrorValidation from 'components/ErrorValidation'
+import withAuthenticationLayout from 'hoc/withAuthenticationLayout'
+import withHandleMessages from 'hoc/withHandleMessages'
 
 /**
  * Component with the registration form
@@ -247,7 +246,7 @@ class SignUp extends PureComponent {
       })
         .then(() => {
           this.props.toast.setNotification({
-            title: appConfig.appName,
+            title: window.appConfig.appName,
             body: 'Successfully registered user',
             type: 'success',
           })
@@ -275,7 +274,7 @@ class SignUp extends PureComponent {
     let renderComponent
     if (this.props.auth.isLoading) {
       renderComponent = (
-        &lt;div style={{ height: '140px' }}>
+        &lt;div style={ { height: '140px' } }>
           &lt;Loading message={`${I18n.t('commons.loading')}...`} />
         &lt;/div>
       )
@@ -283,7 +282,7 @@ class SignUp extends PureComponent {
       const user = this.buildDataArray()
       renderComponent = (
         &lt;React.Fragment>
-          &lt;h2 style={{ textAlign: 'center' }}>
+          &lt;h2 style={ { textAlign: 'center' } }>
             { I18n.t('create_account.title') }
           &lt;/h2>
 
@@ -305,10 +304,10 @@ class SignUp extends PureComponent {
                 {I18n.t('login.refresh_captcha')}
               &lt;/span>
             &lt;/div>
-            &lt;div style={{ textAlign: 'center' }}>
+            &lt;div style={ { textAlign: 'center' } }>
               &lt;button
                 className="btn btn--primary"
-                style={{ margin: '20px' }}
+                style={ { margin: '20px' } }
                 type="submit"
               >
                 { I18n.t('commons.register') }

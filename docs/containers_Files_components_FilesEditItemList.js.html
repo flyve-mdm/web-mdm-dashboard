@@ -51,7 +51,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
+import I18n from 'shared/i18n'
 
 /**
  * @class FilesEditItemList
@@ -103,7 +103,7 @@ export default class FilesEditItemList extends PureComponent {
             &lt;div className="files-list__item-content-primary">
               &lt;input
                 type="text"
-                style={{ width: '240px' }}
+                style={ { width: '240px' } }
                 className="win-textbox"
                 placeholder={I18n.t('files.input_name')}
                 name="input"

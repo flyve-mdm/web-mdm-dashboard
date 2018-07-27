@@ -51,12 +51,12 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
-import Loading from '../../../../components/Loading'
-import withGLPI from '../../../../hoc/withGLPI'
-import ContentPane from '../../../../components/ContentPane'
-import itemtype from '../../../../shared/itemtype'
-import getID from '../../../../shared/getID'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import getID from 'shared/getID'
+import Loading from 'components/Loading'
+import ContentPane from 'components/ContentPane'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * @class HelpCenterArticle
@@ -104,21 +104,21 @@ class HelpCenterArticle extends PureComponent {
     return (
       this.state.isLoading
         ? (
-          &lt;div style={{ height: '100%', marginTop: '-80px' }}>
+          &lt;div style={ { height: '100%', marginTop: '-80px' } }>
             &lt;Loading message={`${I18n.t('commons.loading')}...`} />
           &lt;/div>
         )
         : (
           &lt;ContentPane>
-            &lt;h2 style={{ margin: '10px' }}>
+            &lt;h2 style={ { margin: '10px' } }>
               {this.state.article.name}
             &lt;/h2>
-            &lt;div className="date" style={{ margin: '10px' }}>
+            &lt;div className="date" style={ { margin: '10px' } }>
               {this.state.article.date}
             &lt;/div>
             &lt;div
-              style={{ margin: '10px' }}
-              dangerouslySetInnerHTML={{ __html: this.htmlDecode(this.state.article.answer) }}
+              style={ { margin: '10px' } }
+              dangerouslySetInnerHTML={ { __html: this.htmlDecode(this.state.article.answer) } }
             />
           &lt;/ContentPane>
         )

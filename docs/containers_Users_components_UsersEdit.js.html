@@ -51,9 +51,9 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
-import EditMultiple from '../../../components/EditMultiple'
-import itemtype from '../../../shared/itemtype'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import EditMultiple from 'components/EditMultiple'
 
 /**
  * Component with the form of massive edition of users
@@ -196,10 +196,10 @@ class DevicesEdit extends PureComponent {
         history={this.props.history}
         toast={this.props.toast}
         glpi={this.props.glpi}
-        request={{
+        request={ {
           id: 'User.id',
           itemtype: itemtype.User,
-        }}
+        } }
       />
     )
   }

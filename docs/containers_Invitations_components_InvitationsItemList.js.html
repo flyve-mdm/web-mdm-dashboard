@@ -51,7 +51,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
+import I18n from 'shared/i18n'
 
 /**
  * Component with the template of the items of the invitations lists
@@ -65,7 +65,7 @@ export default class InvitationsItemList extends PureComponent {
    */
   render() {
     return (
-      &lt;div style={{ display: 'inline-block' }}>
+      &lt;div style={ { display: 'inline-block' } }>
         &lt;div className="list-pane__name">
           {(this.props.itemList['PluginFlyvemdmInvitation.User.name'] || I18n.t('commons.name_not_available'))}
         &lt;/div>

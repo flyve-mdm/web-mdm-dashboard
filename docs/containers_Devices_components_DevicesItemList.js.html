@@ -51,7 +51,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import IconItemList from '../../../components/IconItemList'
+import IconItemList from 'components/IconItemList'
 
 /**
  * @class DevicesItemList
@@ -81,7 +81,7 @@ export default class DevicesItemList extends PureComponent {
     return (
       &lt;div>
         {iconComponent}
-        &lt;div style={{ display: 'inline-block' }}>
+        &lt;div style={ { display: 'inline-block' } }>
           &lt;div className="list-pane__name">
             {this.props.itemList['PluginFlyvemdmAgent.name']}
           &lt;/div>

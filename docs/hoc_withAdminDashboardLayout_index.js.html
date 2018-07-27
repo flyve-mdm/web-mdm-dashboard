@@ -50,15 +50,15 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import SplitView from '../../components/SplitView'
-import HeaderBreadcrumb from '../../components/HeaderBreadcrumb'
-import getMode from '../../shared/getMode'
-import configureDisplay from '../../shared/configureDisplay'
-import setGlpiCookie from '../../shared/setGlpiCookie'
-import animationsWinJs from '../../shared/animationsWinJs/index'
-import glpi from '../../shared/glpiApi'
-import I18n from '../../shared/i18n'
-import Confirmation from '../../components/Confirmation'
+import getMode from 'shared/getMode'
+import configureDisplay from 'shared/configureDisplay'
+import setGlpiCookie from 'shared/setGlpiCookie'
+import animationsWinJs from 'shared/animationsWinJs/index'
+import glpi from 'shared/glpiApi'
+import I18n from 'shared/i18n'
+import SplitView from 'components/SplitView'
+import HeaderBreadcrumb from 'components/HeaderBreadcrumb'
+import Confirmation from 'components/Confirmation'
 import withAuthentication from '../withAuthentication'
 import withHandleMessages from '../withHandleMessages'
 
@@ -93,24 +93,25 @@ const withAdminDashboardLayout = (WrappedComponent) => {
     /** Configure 'baseURL' and the cookies of glpi */
     componentDidMount = async () => {
       const {
-        // eslint-disable-next-line
-        cfg_glpi,
+        cfg_glpi: cfgGlpi,
       } = await glpi.getGlpiConfig()
-      localStorage.setItem('baseURL', cfg_glpi.url_base)
-      this.setState({
-        iframe: &lt;iframe
-          title="glpi-backend"
-          src={`//${cfg_glpi.url_base.split('//')[1]}`}
-          style={{
-            height: 0, width: 0, opacity: 0, position: 'absolute',
-          }}
-        />,
-      },
-      () => setGlpiCookie(
+      if (cfgGlpi) {
+        localStorage.setItem('baseURL', cfgGlpi.url_base)
         this.setState({
-          iframe: undefined,
-        }),
-      ))
+          iframe: &lt;iframe
+            title="glpi-backend"
+            src={`//${cfgGlpi.url_base.split('//')[1]}`}
+            style={ {
+              height: 0, width: 0, opacity: 0, position: 'absolute',
+            } }
+          />,
+        },
+        () => setGlpiCookie(
+          this.setState({
+            iframe: undefined,
+          }),
+        ))
+      }
     }
 
     /** Remove 'resize' event listener */
@@ -202,7 +203,7 @@ const withAdminDashboardLayout = (WrappedComponent) => {
             &lt;Confirmation
               title={I18n.t('logout.close_session')}
               message={I18n.t('settings.security.close_session_message')}
-              reference={(el) => { this.contentDialog = el }}
+              reference={(el) => { this.contentDialog = el } }
             />
           &lt;/div>
         &lt;/main>

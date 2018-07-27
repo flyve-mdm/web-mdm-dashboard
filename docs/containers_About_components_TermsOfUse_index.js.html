@@ -48,8 +48,8 @@ layout: container
 
 /** impport dependencies */
 import React from 'react'
-import I18n from '../../../../shared/i18n'
-import ContentPane from '../../../../components/ContentPane'
+import I18n from 'shared/i18n'
+import ContentPane from 'components/ContentPane'
 
 /**
  * @constant TermsOfUse
@@ -57,10 +57,10 @@ import ContentPane from '../../../../components/ContentPane'
  */
 const TermsOfUse = () => (
   &lt;ContentPane>
-    &lt;h2 style={{ margin: '10px' }}>
+    &lt;h2 style={ { margin: '10px' } }>
       {I18n.t('about.term_of_use.title')}
     &lt;/h2>
-    &lt;div className="about-pane" style={{ margin: '10px' }}>
+    &lt;div className="about-pane" style={ { margin: '10px' } }>
       &lt;p>
         {I18n.t('about.term_of_use.using_our_website')}
       &lt;/p>

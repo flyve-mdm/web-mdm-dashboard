@@ -51,15 +51,15 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
-import ContentPane from '../../../components/ContentPane'
-import IconItemList from '../../../components/IconItemList'
-import BytesToSize from '../../../shared/bytesToSize'
-import Confirmation from '../../../components/Confirmation'
-import Loading from '../../../components/Loading'
-import itemtype from '../../../shared/itemtype'
-import getID from '../../../shared/getID'
-import publicURL from '../../../shared/publicURL'
+import I18n from 'shared/i18n'
+import BytesToSize from 'shared/bytesToSize'
+import itemtype from 'shared/itemtype'
+import getID from 'shared/getID'
+import publicURL from 'shared/publicURL'
+import ContentPane from 'components/ContentPane'
+import IconItemList from 'components/IconItemList'
+import Confirmation from 'components/Confirmation'
+import Loading from 'components/Loading'
 
 /**
  * @class ApplicationsContent
@@ -197,13 +197,13 @@ export default class ApplicationsContent extends PureComponent {
     } else {
       image = (
         &lt;div
-          style={{
+          style={ {
             display: 'inline-block',
             width: 72,
             height: 72,
             fontSize: '40px',
             textAlign: 'center',
-          }}
+          } }
         >
           &lt;span className="documentIcon" />
         &lt;/div>
@@ -211,8 +211,8 @@ export default class ApplicationsContent extends PureComponent {
     }
     return (
       &lt;ContentPane>
-        &lt;div className="content-header" style={{ margin: '0 10px' }}>
-          &lt;h2 style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}>
+        &lt;div className="content-header" style={ { margin: '0 10px' } }>
+          &lt;h2 style={ { marginTop: '10px', marginLeft: '10px', marginBottom: '20px' } }>
             {I18n.t('applications.title')}
           &lt;/h2>
           &lt;div className="item-info">
@@ -234,14 +234,14 @@ export default class ApplicationsContent extends PureComponent {
               &lt;div>
                 &lt;span
                   className="editIcon"
-                  style={{ marginRight: '20px', fontSize: '20px' }}
+                  style={ { marginRight: '20px', fontSize: '20px' } }
                   onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)}
                   role="button"
                   tabIndex="0"
                 />
                 &lt;span
                   className="deleteIcon"
-                  style={{ marginRight: '20px', fontSize: '20px' }}
+                  style={ { marginRight: '20px', fontSize: '20px' } }
                   onClick={this.handleDelete}
                   role="button"
                   tabIndex="0"
@@ -254,7 +254,7 @@ export default class ApplicationsContent extends PureComponent {
         &lt;Confirmation
           title={I18n.t('applications.delete')}
           message={this.state.data.name}
-          reference={(el) => { this.contentDialog = el }}
+          reference={(el) => { this.contentDialog = el } }
         />
       &lt;/ContentPane>
     )

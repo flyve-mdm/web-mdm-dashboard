@@ -51,16 +51,16 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../../shared/i18n'
+import I18n from 'shared/i18n'
+import validateData from 'shared/validateData'
+import itemtype from 'shared/itemtype'
 import {
   supervisionScheme,
-} from '../../../../components/Forms/Schemas'
-import validateData from '../../../../shared/validateData'
-import ConstructInputs from '../../../../components/Forms'
-import ContentPane from '../../../../components/ContentPane'
-import Loading from '../../../../components/Loading'
-import withGLPI from '../../../../hoc/withGLPI'
-import itemtype from '../../../../shared/itemtype'
+} from 'components/Forms/Schemas'
+import ConstructInputs from 'components/Forms'
+import ContentPane from 'components/ContentPane'
+import Loading from 'components/Loading'
+import withGLPI from 'hoc/withGLPI'
 
 /**
  * Component with the supervision section
@@ -193,19 +193,19 @@ class Supervision extends PureComponent {
         ? &lt;Loading message={`${I18n.t('commons.loading')}...`} />
         : (
           &lt;ContentPane>
-            &lt;h2 style={{ margin: '10px' }}>
+            &lt;h2 style={ { margin: '10px' } }>
               {I18n.t('settings.supervision.title')}
             &lt;/h2>
-            &lt;div className="list-content" style={{ margin: '10px' }}>
+            &lt;div className="list-content" style={ { margin: '10px' } }>
               &lt;ConstructInputs
                 data={supervision.helpDeskInformation}
                 icon="supervisionIcon"
                 title={I18n.t('settings.supervision.helpdesk')}
               />
-              &lt;div style={{ overflow: 'auto', paddingBottom: 40 }}>
+              &lt;div style={ { overflow: 'auto', paddingBottom: 40 } }>
                 &lt;button
                   className="btn btn--primary"
-                  style={{ marginRight: '20px', float: 'right' }}
+                  style={ { marginRight: '20px', float: 'right' } }
                   onClick={this.saveChanges}
                   type="button"
                 >

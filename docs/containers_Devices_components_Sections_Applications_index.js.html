@@ -53,11 +53,11 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import I18n from '../../../../../shared/i18n'
-import EmptyMessage from '../../../../../components/EmptyMessage'
-import ContentPane from '../../../../../components/ContentPane'
-import Loader from '../../../../../components/Loader'
-import itemtype from '../../../../../shared/itemtype'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import EmptyMessage from 'components/EmptyMessage'
+import ContentPane from 'components/ContentPane'
+import Loader from 'components/Loader'
 import ApplicationDetail from './ApplicationDetail'
 
 /**
@@ -83,13 +83,13 @@ export default class Applications extends PureComponent {
         role="menuitem"
         tabIndex="0"
       >
-        &lt;div style={{ ...styles, width: '15%' }}>
+        &lt;div style={ { ...styles, width: '15%' } }>
           {ItemList.data['Software.id']}
         &lt;/div>
-        &lt;div style={{ ...styles, width: '40%' }}>
+        &lt;div style={ { ...styles, width: '40%' } }>
           {ItemList.data['Software.name']}
         &lt;/div>
-        &lt;div style={{ ...styles, width: '35%' }}>
+        &lt;div style={ { ...styles, width: '35%' } }>
           {ItemList.data['Software.date_mod']}
         &lt;/div>
       &lt;/div>
@@ -228,7 +228,7 @@ export default class Applications extends PureComponent {
       )
     } else if (this.state.isLoading) {
       renderComponent = (
-        &lt;div style={{ padding: '20px' }}>
+        &lt;div style={ { padding: '20px' } }>
           &lt;Loader type="content" />
         &lt;/div>
       )
@@ -241,22 +241,22 @@ export default class Applications extends PureComponent {
       }
       const header = (
         &lt;React.Fragment>
-          &lt;div style={{ ...stylesHeader, width: '15%' }}>
+          &lt;div style={ { ...stylesHeader, width: '15%' } }>
             #
           &lt;/div>
-          &lt;div style={{ ...stylesHeader, width: '40%' }}>
+          &lt;div style={ { ...stylesHeader, width: '40%' } }>
             {I18n.t('devices.applications.id')}
           &lt;/div>
-          &lt;div style={{ ...stylesHeader, width: '35%' }}>
+          &lt;div style={ { ...stylesHeader, width: '35%' } }>
             {I18n.t('devices.applications.last_modification')}
           &lt;/div>
         &lt;/React.Fragment>
       )
       renderComponent = (
         &lt;ContentPane className="applications">
-          &lt;div className="list-pane" style={{ padding: 0 }}>
+          &lt;div className="list-pane" style={ { padding: 0 } }>
             &lt;ReactWinJS.ListView
-              ref={(listView) => { this.listView = listView }}
+              ref={(listView) => { this.listView = listView } }
               className="list-pane__content win-selectionstylefilled"
               headerComponent={header}
               itemDataSource={this.state.itemList.dataSource}

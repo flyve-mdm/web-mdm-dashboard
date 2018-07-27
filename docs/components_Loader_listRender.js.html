@@ -65,7 +65,7 @@ const listRender = ({
 }) => {
   if (props.type === 'list') {
     return (
-      &lt;ContentLoader key={`loader-${index.toString()}`} speed={1.5} style={{ width: '320px' }}>
+      &lt;ContentLoader key={`loader-${index.toString()}`} speed={1.5} style={ { width: '320px' } }>
         &lt;circle cx="40" cy="45" r="27" />
         &lt;rect x={80} y={20} rx={3} ry={3} width={250} height={10} radius={5} />
         &lt;rect x={80} y={40} rx={3} ry={3} width={300} height={10} radius={5} />
@@ -77,7 +77,7 @@ const listRender = ({
     &lt;BulletList
       key={`loader-${index}`}
       speed={1.5}
-      style={{ width: '320px' }}
+      style={ { width: '320px' } }
     />
   )
 }

@@ -51,14 +51,14 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
-import ContentPane from '../../../components/ContentPane'
-import IconItemList from '../../../components/IconItemList'
-import Confirmation from '../../../components/Confirmation'
-import Loading from '../../../components/Loading'
-import itemtype from '../../../shared/itemtype'
-import getID from '../../../shared/getID'
-import publicURL from '../../../shared/publicURL'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import getID from 'shared/getID'
+import publicURL from 'shared/publicURL'
+import ContentPane from 'components/ContentPane'
+import IconItemList from 'components/IconItemList'
+import Confirmation from 'components/Confirmation'
+import Loading from 'components/Loading'
 
 /**
  * Component with the content of the users
@@ -223,7 +223,7 @@ class UsersContent extends PureComponent {
 
                 &lt;span
                   className="editIcon"
-                  style={{ padding: '0 10px', fontSize: '20px' }}
+                  style={ { padding: '0 10px', fontSize: '20px' } }
                   onClick={() => this.props.history.push(`${publicURL}/app/users/${this.state.id}/edit`)}
                   role="button"
                   tabIndex="0"
@@ -231,7 +231,7 @@ class UsersContent extends PureComponent {
 
                 &lt;span
                   className="deleteIcon"
-                  style={{ padding: '0 10px', fontSize: '20px' }}
+                  style={ { padding: '0 10px', fontSize: '20px' } }
                   onClick={this.handleDelete}
                   role="button"
                   tabIndex="0"
@@ -278,7 +278,7 @@ class UsersContent extends PureComponent {
               &lt;/li>
             &lt;/ul>
           &lt;/div>
-          &lt;Confirmation title={I18n.t('users.delete_one')} message={this.state.data.name} reference={(el) => { this.contentDialog = el }} />
+          &lt;Confirmation title={I18n.t('users.delete_one')} message={this.state.data.name} reference={(el) => { this.contentDialog = el } } />
         &lt;/React.Fragment>
       )
     }

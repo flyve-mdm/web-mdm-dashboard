@@ -47,10 +47,10 @@ layout: container
  */
 
 import React from 'react'
-import history from '../../shared/history'
-import getQueryString from '../../shared/getQueryString'
-import I18n from '../../shared/i18n'
-import logo from '../../assets/images/dashboard.svg'
+import history from 'shared/history'
+import getQueryString from 'shared/getQueryString'
+import I18n from 'shared/i18n'
+import logo from 'assets/images/dashboard.svg'
 
 /**
  * Component with the display of the error pages
@@ -71,16 +71,16 @@ export default () => {
     return (
       &lt;div
         className="empty-message"
-        style={{ width: '100%' }}
+        style={ { width: '100%' } }
       >
-        &lt;div style={{ width: '320px', margin: '0 auto' }}>
+        &lt;div style={ { width: '320px', margin: '0 auto' } }>
           &lt;figure>
             &lt;img
               alt="Flyve MDM Dashboard"
               src={logo}
-              style={{
+              style={ {
                 width: '80px',
-              }}
+              } }
             />
           &lt;/figure>
           &lt;h1>
@@ -95,7 +95,7 @@ export default () => {
   }
 
   return (
-    &lt;div className="authentication error" style={{ textAlign: 'center' }}>
+    &lt;div className="authentication error" style={ { textAlign: 'center' } }>
       &lt;section>
         &lt;figure>
           &lt;img

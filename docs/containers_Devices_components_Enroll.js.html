@@ -51,10 +51,10 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
-import ContentPane from '../../../components/ContentPane'
-import Loading from '../../../components/Loading'
-import itemtype from '../../../shared/itemtype'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import ContentPane from 'components/ContentPane'
+import Loading from 'components/Loading'
 
 /**
  * @class Enroll
@@ -134,7 +134,7 @@ export default class Enroll extends PureComponent {
     } else {
       renderComponent = (
         &lt;ContentPane>
-          &lt;div className="content-header" style={{ margin: '0 10px' }}>
+          &lt;div className="content-header" style={ { margin: '0 10px' } }>
             &lt;h2 className="content-header__title">
               {I18n.t('devices.enroll.title')}
             &lt;/h2>
@@ -164,7 +164,7 @@ export default class Enroll extends PureComponent {
           &lt;/button>
           &lt;button
             className="btn btn--primary"
-            style={{ marginLeft: 10 }}
+            style={ { marginLeft: 10 } }
             onClick={this.inviteDevice}
             type="button"
           >

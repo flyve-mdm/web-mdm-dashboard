@@ -52,7 +52,7 @@ import React, {
 import PropTypes from 'prop-types'
 import {
   slideTop,
-} from '../../shared/animations/index'
+} from 'shared/animations/index'
 
 
 /**
@@ -85,7 +85,7 @@ class ContentPane extends PureComponent {
     return (
       &lt;div
         className={`content-pane ${this.props.className}`}
-        ref={(pane) => { this.pane = pane }}
+        ref={(pane) => { this.pane = pane } }
       >
         { this.props.children }
       &lt;/div>

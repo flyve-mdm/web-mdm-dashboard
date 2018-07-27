@@ -50,8 +50,8 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import bytesToSize from '../../shared/bytesToSize'
-import I18n from '../../shared/i18n'
+import bytesToSize from 'shared/bytesToSize'
+import I18n from 'shared/i18n'
 
 /**
  * Component used to upload files
@@ -330,7 +330,7 @@ export default class FilesUpload extends PureComponent {
           onDragOver={FilesUpload.onDragOver}
           onDragEnter={FilesUpload.onDragEnter}
           onDragLeave={FilesUpload.onDragLeave}
-          ref={(dropzone) => { this.dropzone = dropzone }}
+          ref={(dropzone) => { this.dropzone = dropzone } }
           style={this.props.style}
         >
           {this.props.children}

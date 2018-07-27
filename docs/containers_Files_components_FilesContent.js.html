@@ -51,12 +51,12 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from '../../../shared/i18n'
-import ContentPane from '../../../components/ContentPane'
-import Confirmation from '../../../components/Confirmation'
-import Loading from '../../../components/Loading'
-import itemtype from '../../../shared/itemtype'
-import publicURL from '../../../shared/publicURL'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import publicURL from 'shared/publicURL'
+import ContentPane from 'components/ContentPane'
+import Confirmation from 'components/Confirmation'
+import Loading from 'components/Loading'
 
 /**
  * @class FilesContent
@@ -150,9 +150,9 @@ export default class FilesContent extends PureComponent {
       : ''
     return (
       &lt;ContentPane>
-        &lt;div className="content-header" style={{ margin: '0 10px' }}>
+        &lt;div className="content-header" style={ { margin: '0 10px' } }>
           &lt;div className="item-info">
-            &lt;span className="fileIcon" style={{ fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' }} />
+            &lt;span className="fileIcon" style={ { fontSize: '48px', paddingLeft: '20px', paddingTop: '20px' } } />
             &lt;div>
               &lt;div className="item-info__name">
                 {fileName}
@@ -161,14 +161,14 @@ export default class FilesContent extends PureComponent {
               &lt;div>
                 &lt;span
                   className="editIcon"
-                  style={{ marginRight: '20px', fontSize: '20px' }}
+                  style={ { marginRight: '20px', fontSize: '20px' } }
                   onClick={this.handleEdit}
                   role="button"
                   tabIndex="0"
                 />
                 &lt;span
                   className="deleteIcon"
-                  style={{ marginRight: '20px', fontSize: '20px' }}
+                  style={ { marginRight: '20px', fontSize: '20px' } }
                   onClick={this.handleDelete}
                   role="button"
                   tabIndex="0"
@@ -181,7 +181,7 @@ export default class FilesContent extends PureComponent {
         &lt;Confirmation
           title={I18n.t('files.delete_one')}
           message={fileName}
-          reference={(el) => { this.contentDialog = el }}
+          reference={(el) => { this.contentDialog = el } }
         />
       &lt;/ContentPane>
     )

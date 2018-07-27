@@ -54,23 +54,22 @@ import PropTypes from 'prop-types'
 import {
   Redirect,
 } from 'react-router'
-import I18n from '../../shared/i18n'
+import I18n from 'shared/i18n'
+import publicURL from 'shared/publicURL'
+import {
+  slideLeft,
+  slideRight,
+} from 'shared/animations/index'
+import withAuthenticationLayout from 'hoc/withAuthenticationLayout'
+import withHandleMessages from 'hoc/withHandleMessages'
+import Loading from 'components/Loading'
+import AsyncPasswordFieldset from 'async/asyncPasswordFielset'
 import UsernameFieldset from './components/UsernameFieldset'
-import withAuthenticationLayout from '../../hoc/withAuthenticationLayout'
-import withHandleMessages from '../../hoc/withHandleMessages'
-import publicURL from '../../shared/publicURL'
-// Async Component
-import AsyncPasswordFieldset from '../../async/asyncPasswordFielset'
-import Loading from '../../components/Loading'
 import {
   changeInput,
   changePhase,
   handleFormSubmit,
 } from './actions'
-import {
-  slideLeft,
-  slideRight,
-} from '../../shared/animations/index'
 
 /**
  * Component with the login form
@@ -185,12 +184,12 @@ class SignIn extends PureComponent {
     }
     return this.props.auth.isLoading
       ? (
-        &lt;div style={{ height: '140px' }}>
+        &lt;div style={ { height: '140px' } }>
           &lt;Loading message={`${I18n.t('commons.loading')}...`} />
         &lt;/div>
       )
       : (
-        &lt;div ref={(element) => { this.form = element }}>
+        &lt;div ref={(element) => { this.form = element } }>
           {form}
         &lt;/div>
       )

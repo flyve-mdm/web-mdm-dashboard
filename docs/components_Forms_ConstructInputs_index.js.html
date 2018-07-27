@@ -48,7 +48,6 @@ layout: container
 
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import createListElement from './createListElement'
 
 /**
@@ -67,7 +66,7 @@ const ConstructInputs = (props) => {
         {
           props.title
             ? (
-              &lt;span style={{ marginLeft: '10px' }}>
+              &lt;span style={ { marginLeft: '10px' } }>
                 {props.title}
               &lt;/span>
             )

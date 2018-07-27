@@ -53,12 +53,12 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import I18n from '../../../shared/i18n'
-import EmptyMessage from '../../../components/EmptyMessage'
-import ContentPane from '../../../components/ContentPane'
-import Loader from '../../../components/Loader'
-import itemtype from '../../../shared/itemtype'
-import getID from '../../../shared/getID'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import getID from 'shared/getID'
+import EmptyMessage from 'components/EmptyMessage'
+import ContentPane from 'components/ContentPane'
+import Loader from 'components/Loader'
 
 /**
  * Component with the list of pending invitations
@@ -72,7 +72,7 @@ class InvitationsPendingPage extends PureComponent {
    * @type {component}
    */
   ItemListRenderer = ReactWinJS.reactRenderer(ItemList => (
-    &lt;div style={{ padding: '14px', width: '100%' }}>
+    &lt;div style={ { padding: '14px', width: '100%' } }>
       &lt;b>
         {ItemList.data['PluginFlyvemdmInvitationlog.event']}
       &lt;/b>
@@ -175,7 +175,7 @@ class InvitationsPendingPage extends PureComponent {
   render() {
     let listComponent = (
       &lt;ContentPane>
-        &lt;div className="list-pane" style={{ margin: '0 10px' }}>
+        &lt;div className="list-pane" style={ { margin: '0 10px' } }>
           &lt;div className="content-header">
             &lt;h2 className="content-header__title">
               {I18n.t('invitations.pending')}
@@ -189,16 +189,16 @@ class InvitationsPendingPage extends PureComponent {
     if (!this.state.isLoading &amp;&amp; this.state.itemList.length > 0) {
       listComponent = (
         &lt;ContentPane>
-          &lt;div className="list-pane" style={{ margin: '0 10px' }}>
+          &lt;div className="list-pane" style={ { margin: '0 10px' } }>
             &lt;div className="content-header">
               &lt;h2 className="content-header__title">
                 {I18n.t('invitations.pending')}
               &lt;/h2>
             &lt;/div>
             &lt;ReactWinJS.ListView
-              ref={(listView) => { this.listView = listView }}
+              ref={(listView) => { this.listView = listView } }
               className="list-pane__content win-selectionstylefilled"
-              style={{ height: 'calc(100% - 48px)' }}
+              style={ { height: 'calc(100% - 48px)' } }
               itemDataSource={this.state.itemList.dataSource}
               itemTemplate={this.ItemListRenderer}
               layout={this.state.layout}

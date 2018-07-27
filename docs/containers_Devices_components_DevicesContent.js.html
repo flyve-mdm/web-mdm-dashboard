@@ -52,8 +52,12 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
-import I18n from '../../../shared/i18n'
-import ContentPane from '../../../components/ContentPane'
+import I18n from 'shared/i18n'
+import getID from 'shared/getID'
+import itemtype from 'shared/itemtype'
+import ContentPane from 'components/ContentPane'
+import Confirmation from 'components/Confirmation'
+import FleetsContent from '../../Fleets/components/FleetsContent'
 import {
   DangerZone,
   Main,
@@ -61,10 +65,6 @@ import {
   Applications,
   Geolocation,
 } from './Sections'
-import getID from '../../../shared/getID'
-import Confirmation from '../../../components/Confirmation'
-import FleetsContent from '../../Fleets/components/FleetsContent'
-import itemtype from '../../../shared/itemtype'
 
 /**
  * @class DevicesContent
@@ -120,17 +120,17 @@ export default class DevicesContent extends PureComponent {
         &lt;Confirmation
           title={I18n.t('devices.danger_zone.last_warning')}
           message={I18n.t('devices.danger_zone.last_warning_message')}
-          reference={(el) => { this.wipeDevice = el }}
+          reference={(el) => { this.wipeDevice = el } }
         />
         &lt;Confirmation
           title={`${I18n.t('devices.danger_zone.unenroll_device')} # ${this.state.id}`}
           message={`${I18n.t('devices.danger_zone.going_to_unenroll')} ${this.state.id}`}
-          reference={(el) => { this.unenrollmentDevice = el }}
+          reference={(el) => { this.unenrollmentDevice = el } }
         />
         &lt;Confirmation
           title={`${I18n.t('devices.danger_zone.delete')} # ${this.state.id}`}
           message={`${I18n.t('devices.danger_zone.delete_message')} ${this.state.id}`}
-          reference={(el) => { this.deleteDevice = el }}
+          reference={(el) => { this.deleteDevice = el } }
         />
         &lt;ContentPane className="devices">
           &lt;ReactWinJS.Pivot ref={this.changeselectedItem}>

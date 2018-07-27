@@ -51,8 +51,8 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import Loader from '../../../../components/Loader'
-import I18n from '../../../../shared/i18n'
+import Loader from 'components/Loader'
+import I18n from 'shared/i18n'
 
 /**
  * @class Inventory
@@ -124,7 +124,7 @@ export default class Inventory extends PureComponent {
   render() {
     if (this.state.isLoading) {
       return (
-        &lt;div style={{ padding: '20px' }}>
+        &lt;div style={ { padding: '20px' } }>
           &lt;Loader type="content" />
         &lt;/div>
       )
