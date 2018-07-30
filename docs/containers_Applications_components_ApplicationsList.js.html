@@ -487,13 +487,13 @@ export default class ApplicationsList extends PureComponent {
       : (
         &lt;div
           onClick={this.loadMoreData}
-          style={{ cursor: 'pointer', color: '#158784' }}
+          style={ { cursor: 'pointer', color: '#158784' } }
           role="button"
           tabIndex="0"
         >
           &lt;span
             className="iconFont refreshIcon"
-            style={{ padding: '10px', fontSize: '20px' }}
+            style={ { padding: '10px', fontSize: '20px' } }
           />
           &lt;span>
             {I18n.t('commons.load_more')}
@@ -508,9 +508,9 @@ export default class ApplicationsList extends PureComponent {
     } else if (this.state.itemList &amp;&amp; this.state.itemList.length > 0) {
       listComponent = (
         &lt;ReactWinJS.ListView
-          ref={(listView) => { this.listView = listView }}
+          ref={(listView) => { this.listView = listView } }
           className="list-pane__content win-selectionstylefilled"
-          style={{ height: 'calc(100% - 48px)' }}
+          style={ { height: 'calc(100% - 48px)' } }
           itemDataSource={itemList.dataSource}
           layout={layout}
           itemTemplate={this.ItemListRenderer}
@@ -533,7 +533,7 @@ export default class ApplicationsList extends PureComponent {
     return (
       &lt;React.Fragment>
         &lt;ReactWinJS.ToolBar
-          ref={(toolBar) => { this.toolBar = toolBar }}
+          ref={(toolBar) => { this.toolBar = toolBar } }
           className="listToolBar"
         >
           &lt;ReactWinJS.ToolBar.Button
@@ -576,7 +576,7 @@ export default class ApplicationsList extends PureComponent {
         &lt;Confirmation
           title={I18n.t('applications.delete')}
           message={`${this.props.selectedItems.length} ${I18n.t('applications.title')}`}
-          reference={(el) => { this.contentDialog = el }}
+          reference={(el) => { this.contentDialog = el } }
         />
       &lt;/React.Fragment>
     )

@@ -171,7 +171,7 @@ export default class SystemReport extends PureComponent {
   render() {
     if (this.state.isLoading &amp;&amp; !this.state.data) {
       return (
-        &lt;div style={{ padding: '20px' }}>
+        &lt;div style={ { padding: '20px' } }>
           &lt;Loader type="content" />
         &lt;/div>
       )
@@ -187,7 +187,7 @@ export default class SystemReport extends PureComponent {
               >
                 {I18n.t('devices.system_report.request_inventory')}
               &lt;/button>
-              {this.state.requestingInventory ? &lt;Loading small style={{ paddingTop: '6px' }} /> : ''}
+              {this.state.requestingInventory ? &lt;Loading small style={ { paddingTop: '6px' } } /> : ''}
             &lt;/div>
             &lt;div className="title">
               {I18n.t('commons.agent')}
@@ -237,7 +237,7 @@ export default class SystemReport extends PureComponent {
               title={I18n.t('commons.fleet')}
               itemType="PluginFlyvemdmFleet"
               itemID={this.state.data.plugin_flyvemdm_fleets_id}
-              fields={{ id: 'ID', name: 'Name' }}
+              fields={ { id: 'ID', name: 'Name' } }
               glpi={this.props.glpi}
             />
 
@@ -245,7 +245,7 @@ export default class SystemReport extends PureComponent {
               title={I18n.t('commons.device')}
               itemType="Computer"
               itemID={this.state.data.computers_id}
-              fields={{
+              fields={ {
                 id: 'ID',
                 name: 'Name',
                 uuid: 'UUID',
@@ -255,15 +255,15 @@ export default class SystemReport extends PureComponent {
                 computertypes_id: 'Type',
                 manufacturers_id: 'Manufacturer',
                 serial: 'Serial',
-              }}
-              parameters={{
+              } }
+              parameters={ {
                 expand_dropdowns: true,
                 with_devices: true,
                 with_disks: true,
                 with_softwares: true,
                 with_connections: true,
                 with_networkports: true,
-              }}
+              } }
               glpi={this.props.glpi}
             />
           &lt;/div>

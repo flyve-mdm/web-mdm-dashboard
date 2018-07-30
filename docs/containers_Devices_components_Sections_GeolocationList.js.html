@@ -64,20 +64,20 @@ class GeolocationList extends PureComponent {
       renderList = this.props.locations.map((location, index) => (
         &lt;div
           key={`location-${index.toString()}`}
-          style={{ paddingLeft: 5, cursor: 'pointer' }}
+          style={ { paddingLeft: 5, cursor: 'pointer' } }
           onClick={() => this.props.goToLocation(location)}
           role="button"
           tabIndex="0"
         >
           &lt;label
-            style={{ cursor: 'pointer' }}
+            style={ { cursor: 'pointer' } }
             htmlFor={`location-${index.toString()}`}
           >
             &lt;input
               id={`location-${index.toString()}`}
               type="checkbox"
               className="win-checkbox"
-              style={{ width: 'auto', cursor: 'pointer' }}
+              style={ { width: 'auto', cursor: 'pointer' } }
               onChange={() => this.props.showLocation(location)}
               checked={(this.props.markers.indexOf(location) !== -1)}
             />
@@ -87,7 +87,7 @@ class GeolocationList extends PureComponent {
       ))
     } else {
       renderList = (
-        &lt;p style={{ color: 'grey', marginLeft: 5 }}>
+        &lt;p style={ { color: 'grey', marginLeft: 5 } }>
           {I18n.t('devices.geolocation.no_locations')}
         &lt;/p>
       )

@@ -184,12 +184,12 @@ class SignIn extends PureComponent {
     }
     return this.props.auth.isLoading
       ? (
-        &lt;div style={{ height: '140px' }}>
+        &lt;div style={ { height: '140px' } }>
           &lt;Loading message={`${I18n.t('commons.loading')}...`} />
         &lt;/div>
       )
       : (
-        &lt;div ref={(element) => { this.form = element }}>
+        &lt;div ref={(element) => { this.form = element } }>
           {form}
         &lt;/div>
       )

@@ -1182,8 +1182,8 @@ class FleetsContent extends PureComponent {
     }
     return (
       &lt;ContentPane>
-        &lt;div className="fleets" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-          &lt;div style={{ display: '-moz-flex', flexDirection: 'row' }}>
+        &lt;div className="fleets" style={ { display: 'flex', flexDirection: 'column', height: '100%' } }>
+          &lt;div style={ { display: '-moz-flex', flexDirection: 'row' } }>
             &lt;div className="content-header">
               {
                   itemType === itemtype.PluginFlyvemdmFleet
@@ -1242,17 +1242,17 @@ class FleetsContent extends PureComponent {
                     : ''
                 }
               &lt;/div>
-              &lt;div className="item-info" style={{ display: 'table-cell', verticalAlign: 'middle' }}>
+              &lt;div className="item-info" style={ { display: 'table-cell', verticalAlign: 'middle' } }>
                 &lt;div />
               &lt;/div>
             &lt;/div>
           &lt;/div>
-          &lt;div style={{ display: '-moz-flex', flexDirection: 'row' }}>
-            &lt;div className="separator" style={{ width: '100%' }} />
+          &lt;div style={ { display: '-moz-flex', flexDirection: 'row' } }>
+            &lt;div className="separator" style={ { width: '100%' } } />
           &lt;/div>
-          &lt;div style={{ display: 'flex', flexDirection: 'row', overflowY: 'auto' }}>
+          &lt;div style={ { display: 'flex', flexDirection: 'row', overflowY: 'auto' } }>
             &lt;div className="content-info">
-              &lt;h3 style={{ margin: '10px' }}>
+              &lt;h3 style={ { margin: '10px' } }>
                 {I18n.t('fleets.tasks_per_Category')}
               &lt;/h3>
               &lt;div>
@@ -1300,7 +1300,7 @@ class FleetsContent extends PureComponent {
           &lt;Confirmation
             title="Delete Fleets"
             message={`${selectedItems.length} Fleets`}
-            reference={(el) => { this.contentDialog = el }}
+            reference={(el) => { this.contentDialog = el } }
           />
         &lt;/div>
       &lt;/ContentPane>

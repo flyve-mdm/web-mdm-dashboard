@@ -330,7 +330,7 @@ export default class FilesUpload extends PureComponent {
           onDragOver={FilesUpload.onDragOver}
           onDragEnter={FilesUpload.onDragEnter}
           onDragLeave={FilesUpload.onDragLeave}
-          ref={(dropzone) => { this.dropzone = dropzone }}
+          ref={(dropzone) => { this.dropzone = dropzone } }
           style={this.props.style}
         >
           {this.props.children}

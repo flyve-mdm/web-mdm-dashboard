@@ -142,7 +142,7 @@ class Input extends PureComponent {
       ? (
         &lt;span
           className="iconFont deleteIcon"
-          style={{ margin: 10, fontSize: 18 }}
+          style={ { margin: 10, fontSize: 18 } }
           onClick={this.deleteEmail}
           role="button"
           tabIndex="0"
@@ -175,7 +175,7 @@ class Input extends PureComponent {
               &lt;Confirmation
                 title={`${I18n.t('commons.delete')} ${this.props.label}`}
                 message={this.props.value}
-                reference={(el) => { this.contentDialog = el }}
+                reference={(el) => { this.contentDialog = el } }
               />
             )
             : &lt;span />
