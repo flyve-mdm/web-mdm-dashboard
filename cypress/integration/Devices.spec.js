@@ -1,23 +1,13 @@
 import '../../public/config'
 
 describe('Devices', () => {
-  beforeEach(function () {
+  beforeEach(() => {
     cy.server()
 
     cy.route({
       method: 'GET',
       url: `${window.appConfig.glpiApiLink}/search/PluginFlyvemdmAgent/?uid_cols=true&forcedisplay[0]=2&forcedisplay[1]=3&forcedisplay[2]=4&forcedisplay[3]=12&order=ASC&range=0-14&`,
-      response: {
-        "totalcount":4,
-        "count":4,
-        "sort":1,
-        "order":"ASC",
-        "data":[
-          {"PluginFlyvemdmAgent.name":"device1@teclib.com","PluginFlyvemdmAgent.id":221,"PluginFlyvemdmAgent.PluginFlyvemdmFleet.name":"not managed fleet","PluginFlyvemdmAgent.Computer.id":916,"PluginFlyvemdmAgent.mdm_type":"android"},
-          {"PluginFlyvemdmAgent.name":"device2@teclib.com","PluginFlyvemdmAgent.id":234,"PluginFlyvemdmAgent.PluginFlyvemdmFleet.name":"MyFleet","PluginFlyvemdmAgent.Computer.id":216,"PluginFlyvemdmAgent.mdm_type":"android"}
-        ],
-        "content-range":"0-3/4"
-      }
+      response: {"totalcount":4, "count":4, "sort":1, "order":"ASC", "data":[ {"PluginFlyvemdmAgent.name":"device1@teclib.com","PluginFlyvemdmAgent.id":221,"PluginFlyvemdmAgent.PluginFlyvemdmFleet.name":"not managed fleet","PluginFlyvemdmAgent.Computer.id":916,"PluginFlyvemdmAgent.mdm_type":"android"}, {"PluginFlyvemdmAgent.name":"device2@teclib.com","PluginFlyvemdmAgent.id":234,"PluginFlyvemdmAgent.PluginFlyvemdmFleet.name":"MyFleet","PluginFlyvemdmAgent.Computer.id":216,"PluginFlyvemdmAgent.mdm_type":"android"} ], "content-range":"0-3/4"}
     })
 
     cy.route({
@@ -188,34 +178,34 @@ describe('Devices', () => {
     cy.visit('/app/devices')
     cy.contains('No selection')
     cy.get('#element__11')
-    cy.get('main').screenshot('devices_noSelection', {capture: 'viewport'})
+    cy.get('main').screenshot('devices_noSelection', { capture: 'viewport' })
     cy.get('.win-itemscontainer').click('top')
     cy.get('.content-info > :nth-child(1)')
     cy.get('.header-block').click('topRight')
-    cy.get('main').screenshot('devices_main', {capture: 'viewport'})
+    cy.get('main').screenshot('devices_main', { capture: 'viewport' })
     cy.get('.win-pivot-headers > :nth-child(2)').click()
     cy.get('.system-report > :nth-child(2)')
     cy.get('.header-block').click('topRight')
-    cy.get('main').screenshot('devices_systemReport', {capture: 'viewport'})
+    cy.get('main').screenshot('devices_systemReport', { capture: 'viewport' })
     cy.get('.win-pivot-headers > :nth-child(3)').click()
     cy.get('.header-block').click('topRight')
-    cy.get('main').screenshot('devices_systemReport', {capture: 'viewport'})
+    cy.get('main').screenshot('devices_systemReport', { capture: 'viewport' })
     cy.get('.win-pivot-headers > :nth-child(4)').click()
-    cy.wait(['@polices1', '@polices2', '@polices3', '@polices4', '@polices5', '@polices6', '@polices7', '@polices8', '@polices9', '@polices10', '@polices11' ])
-    cy.get('main').screenshot('devices_polices', {capture: 'viewport'})
+    cy.wait(['@polices1', '@polices2', '@polices3', '@polices4', '@polices5', '@polices6', '@polices7', '@polices8', '@polices9', '@polices10', '@polices11'])
+    cy.get('main').screenshot('devices_polices', { capture: 'viewport' })
     cy.get('.win-pivot-headers > :nth-child(5)').click()
     cy.wait('@geolocation')
     cy.wait(1000)
-    cy.get('main').screenshot('devices_geolocation', {capture: 'viewport'})
+    cy.get('main').screenshot('devices_geolocation', { capture: 'viewport' })
     cy.get('.win-pivot-headers > :nth-child(6)').click()
-    cy.get('main').screenshot('devices_dangerZone', {capture: 'viewport'})
+    cy.get('main').screenshot('devices_dangerZone', { capture: 'viewport' })
     cy.get(':nth-child(1) > .list-element__controller > .btn').click()
-    cy.get('main').screenshot('devices_dangerZone_wipe', {capture: 'viewport'})
+    cy.get('main').screenshot('devices_dangerZone_wipe', { capture: 'viewport' })
     cy.get('.win-contentdialog-visible > .win-contentdialog-dialog > .win-contentdialog-commands > .win-contentdialog-secondarycommand').click()
     cy.get(':nth-child(2) > .list-element__controller > .btn').click()
-    cy.get('main').screenshot('devices_dangerZone_unenroll', {capture: 'viewport'})
+    cy.get('main').screenshot('devices_dangerZone_unenroll', { capture: 'viewport' })
     cy.get('.win-contentdialog-visible > .win-contentdialog-dialog > .win-contentdialog-commands > .win-contentdialog-secondarycommand').click()
     cy.get(':nth-child(3) > .list-element__controller > .btn').click()
-    cy.get('main').screenshot('devices_dangerZone_delete', {capture: 'viewport'})
+    cy.get('main').screenshot('devices_dangerZone_delete', { capture: 'viewport' })
   })
 })
