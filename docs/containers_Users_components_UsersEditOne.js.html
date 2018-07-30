@@ -446,11 +446,11 @@ class UsersEditOne extends PureComponent {
       componetRender = (
         &lt;div className="froms Profiles">
           &lt;div className="froms__row froms__row--icon">
-            &lt;span className="viewIcon" />
+            &lt;span className="iconFont viewIcon" />
           &lt;/div>
 
           &lt;div className="froms__row">
-            &lt;div style={ { overflow: 'hidden', paddingLeft: '20px' } }>
+            &lt;div style={{ overflow: 'hidden', paddingLeft: '20px' }}>
               &lt;IconItemList
                 image={this.state.imageProfile}
                 type={this.state.typeImageProfile}
@@ -465,10 +465,10 @@ class UsersEditOne extends PureComponent {
           &lt;ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
           &lt;ConstructInputs data={user.emailsInformation} icon="emailIcon" />
 
-          &lt;div style={ { overflow: 'auto', paddingRight: '20px' } }>
+          &lt;div style={{ overflow: 'auto', paddingRight: '20px' }}>
             &lt;button
               className="win-button"
-              style={ { float: 'right' } }
+              style={{ float: 'right' }}
               onClick={this.addEmail}
               type="button"
             >
@@ -482,7 +482,7 @@ class UsersEditOne extends PureComponent {
 
           &lt;button
             className="btn btn--primary"
-            style={ { margin: '20px', float: 'right' } }
+            style={{ margin: '20px', float: 'right' }}
             onClick={this.saveChanges}
             type="button"
           >

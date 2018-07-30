@@ -259,11 +259,11 @@ export default class Main extends PureComponent {
                   {' '}
                   {I18n.t('devices.main.last_contact')}
                 &lt;/div>
-                &lt;div style={ { overflow: 'auto' } }>
+                &lt;div style={{ overflow: 'auto' }}>
                   &lt;div>
                     &lt;button
                       className="btn btn--secondary"
-                      style={ { float: 'left', marginTop: 5, marginBottom: 5 } }
+                      style={{ float: 'left', marginTop: 5, marginBottom: 5 }}
                       onClick={this.ping}
                       type="button"
                     >
@@ -278,15 +278,15 @@ export default class Main extends PureComponent {
                 &lt;/div>
                 &lt;div>
                   &lt;span
-                    className="editIcon"
-                    style={ { marginRight: '20px', fontSize: '20px' } }
+                    className="iconFont editIcon"
+                    style={{ marginRight: '20px', fontSize: '20px' }}
                     onClick={this.handleEdit}
                     role="button"
                     tabIndex="0"
                   />
                   &lt;span
-                    className="deleteIcon"
-                    style={ { marginRight: '20px', fontSize: '20px' } }
+                    className="iconFont deleteIcon"
+                    style={{ marginRight: '20px', fontSize: '20px' }}
                     onClick={this.handleDelete}
                     role="button"
                     tabIndex="0"
@@ -300,13 +300,13 @@ export default class Main extends PureComponent {
             &lt;div className="title">
               {I18n.t('commons.version')}
             &lt;/div>
-            &lt;div style={ { paddingLeft: 20 } }>
+            &lt;div style={{ paddingLeft: 20 }}>
               {this.state.data.version}
             &lt;/div>
             &lt;div className="title">
               {I18n.t('commons.type')}
             &lt;/div>
-            &lt;div style={ { paddingLeft: 20 } }>
+            &lt;div style={{ paddingLeft: 20 }}>
               {this.state.data.mdm_type}
             &lt;/div>
           &lt;/div>
@@ -314,7 +314,7 @@ export default class Main extends PureComponent {
           &lt;Confirmation
             title={I18n.t('devices.delete')}
             message={this.state.data.name}
-            reference={(el) => { this.contentDialog = el } }
+            reference={(el) => { this.contentDialog = el }}
           />
         &lt;/ContentPane>
       )

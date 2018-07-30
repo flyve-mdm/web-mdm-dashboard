@@ -58,10 +58,10 @@ import ContentPane from 'components/ContentPane'
  */
 const Contact = () => (
   &lt;ContentPane>
-    &lt;h2 style={ { margin: '10px' } }>
+    &lt;h2 style={{ margin: '10px' }}>
       { I18n.t('about.contact.title') }
     &lt;/h2>
-    &lt;div className="about-pane" style={ { margin: '10px' } }>
+    &lt;div className="about-pane" style={{ margin: '10px' }}>
       {/* eslint-disable global-require */}
       &lt;img src={require('../../../../assets/images/logo-teclib.png')} alt="Teclib" />
       &lt;p>
@@ -71,7 +71,7 @@ const Contact = () => (
       &lt;div className="content-info">
         &lt;ul className="contact-list">
           &lt;li>
-            &lt;span className="phoneIcon" />
+            &lt;span className="iconFont phoneIcon" />
             &lt;div>
               &lt;div>
                 { I18n.t('commons.email') }
@@ -82,7 +82,7 @@ const Contact = () => (
             &lt;/div>
           &lt;/li>
           &lt;li>
-            &lt;span className="phoneIcon" />
+            &lt;span className="iconFont phoneIcon" />
             &lt;div>
               &lt;div>
                 { I18n.t('commons.call') }
@@ -93,7 +93,7 @@ const Contact = () => (
             &lt;/div>
           &lt;/li>
           &lt;li>
-            &lt;span className="mapIcon" />
+            &lt;span className="iconFont mapIcon" />
             &lt;div>
               &lt;div>
                 { I18n.t('commons.map') }

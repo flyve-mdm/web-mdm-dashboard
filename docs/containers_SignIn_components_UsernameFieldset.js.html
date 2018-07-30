@@ -158,7 +158,7 @@ class UsernameFieldset extends PureComponent {
     return (
       this.state.isLoading
         ? (
-          &lt;div style={ { margin: 50, height: '140px' } }>
+          &lt;div style={{ margin: 50, height: '140px' }}>
             &lt;Loading message={`${I18n.t('commons.loading')}...`} />
           &lt;/div>
         )
@@ -181,7 +181,7 @@ class UsernameFieldset extends PureComponent {
               &lt;input
                 type="text"
                 name="username"
-                ref={(input) => { this.usernameInput = input } }
+                ref={(input) => { this.usernameInput = input }}
                 className={this.state.classInput}
                 placeholder={I18n.t('commons.username')}
                 value={this.props.username}

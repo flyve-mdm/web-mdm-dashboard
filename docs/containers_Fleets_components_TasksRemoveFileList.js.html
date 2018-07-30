@@ -70,7 +70,7 @@ class TasksRemoveFileList extends PureComponent {
    */
   refreshRender = () => (Array.isArray(this.props.data)
     ? this.props.data.map((item, index) => (
-      &lt;div className="files-list" style={ { width: '320px' } } key={[item.value, index].join('_')}>
+      &lt;div className="files-list" style={{ width: '320px' }} key={[item.value, index].join('_')}>
         &lt;div className="files-list__content">
           &lt;div className="files-list__item">
             &lt;div className="files-list__item-content-primary">
@@ -81,8 +81,8 @@ class TasksRemoveFileList extends PureComponent {
             &lt;div className="files-list__item-content-secondary">
               &lt;div className="files-list__item-icon">
                 &lt;span
-                  className="deleteIcon"
-                  style={ { fontSize: '18px' } }
+                  className="iconFont deleteIcon"
+                  style={{ fontSize: '18px' }}
                   onClick={() => this.handleRemove(item)}
                   role="button"
                   tabIndex="0"

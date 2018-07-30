@@ -211,13 +211,13 @@ class Files extends PureComponent {
   render() {
     const renderComponents = (
       &lt;React.Fragment>
-        &lt;div className="list-pane flex-block__list" style={ { ...this.stylesList() } }>
+        &lt;div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
           &lt;FilesList
             key="list"
             {...this.propsData()}
           />
         &lt;/div>
-        &lt;div className="flex-block__content" style={ { ...this.stylesContent() } }>
+        &lt;div className="flex-block__content" style={{ ...this.stylesContent() }}>
           &lt;GenerateRoutes
             key="content"
             routes={routes}

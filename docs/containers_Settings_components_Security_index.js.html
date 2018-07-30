@@ -344,7 +344,7 @@ class Security extends PureComponent {
   render() {
     if (this.state.isLoading) {
       return (
-        &lt;div style={ { height: '100%' } }>
+        &lt;div style={{ height: '100%' }}>
           &lt;Loading message={`${I18n.t('commons.loading')}...`} />
         &lt;/div>
       )
@@ -367,7 +367,7 @@ class Security extends PureComponent {
               &lt;button
                 className="btn btn--secondary"
                 type="button"
-                style={ { marginRight: 10 } }
+                style={{ marginRight: 10 }}
                 onClick={() => this.changeMode('')}
               >
                 {I18n.t('commons.cancel')}
@@ -388,22 +388,22 @@ class Security extends PureComponent {
             &lt;Confirmation
               title={I18n.t('commons.kill_session')}
               message={I18n.t('settings.security.close_session_message')}
-              reference={(el) => { this.killSession = el } }
+              reference={(el) => { this.killSession = el }}
             />
 
             &lt;Confirmation
               title={I18n.t('settings.security.delete_data')}
               message={I18n.t('settings.security.delete_data_message')}
-              reference={(el) => { this.deleteBrowserData = el } }
+              reference={(el) => { this.deleteBrowserData = el }}
             />
 
             &lt;Confirmation
               title={I18n.t('settings.security.delete_account')}
               message={I18n.t('settings.security.delete_account_message')}
-              reference={(el) => { this.deleteAccount = el } }
+              reference={(el) => { this.deleteAccount = el }}
             />
             &lt;ContentPane>
-              &lt;h2 style={ { margin: '10px' } }>
+              &lt;h2 style={{ margin: '10px' }}>
                 {I18n.t('commons.security')}
               &lt;/h2>
 

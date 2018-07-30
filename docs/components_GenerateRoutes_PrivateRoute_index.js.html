@@ -84,10 +84,10 @@ const PrivateRoute = ({ component, redirectTo, ...rest }) => (
     )
       : (
         &lt;Redirect
-          to={ {
+          to={{
             pathname: redirectTo,
             state: { from: routeProps.location },
-          } }
+          }}
         />
       ))
       }

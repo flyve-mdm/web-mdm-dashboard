@@ -381,10 +381,10 @@ class Profiles extends PureComponent {
     if (this.state.isLoading || !this.state.login) {
       component = (
         &lt;div
-          style={ {
+          style={{
             width: '100%',
             height: 'calc(100vh - 120px)',
-          } }
+          }}
         >
           &lt;Loading message={`${I18n.t('commons.loading')}...`} />
         &lt;/div>
@@ -423,15 +423,15 @@ class Profiles extends PureComponent {
 
       component = (
         &lt;React.Fragment>
-          &lt;h2 style={ { margin: '10px' } }>
+          &lt;h2 style={{ margin: '10px' }}>
             {I18n.t('commons.profiles')}
           &lt;/h2>
-          &lt;div className="froms Profiles" style={ { marginTop: '20px' } }>
+          &lt;div className="froms Profiles" style={{ marginTop: '20px' }}>
             &lt;div className="froms__row froms__row--icon">
-              &lt;span className="viewIcon" />
+              &lt;span className="iconFont viewIcon" />
             &lt;/div>
             &lt;div className="froms__row">
-              &lt;div style={ { overflow: 'hidden' } }>
+              &lt;div style={{ overflow: 'hidden' }}>
                 &lt;IconItemList
                   image={this.state.imageProfile}
                   type={this.state.typeImageProfile}
@@ -445,10 +445,10 @@ class Profiles extends PureComponent {
             &lt;ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
             &lt;ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
             &lt;ConstructInputs data={user.emailsInformation} icon="emailIcon" />
-            &lt;div style={ { overflow: 'auto' } }>
+            &lt;div style={{ overflow: 'auto' }}>
               &lt;button
                 className="btn btn--secondary"
-                style={ { float: 'right' } }
+                style={{ float: 'right' }}
                 onClick={this.addEmail}
                 type="button"
               >
@@ -460,7 +460,7 @@ class Profiles extends PureComponent {
             &lt;ConstructInputs data={user.activityInformation} icon="documentIcon" />
             &lt;button
               className="btn btn--primary"
-              style={ { margin: '20px', float: 'right' } }
+              style={{ margin: '20px', float: 'right' }}
               onClick={this.saveChanges}
               type="button"
             >

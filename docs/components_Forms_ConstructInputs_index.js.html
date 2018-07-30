@@ -62,11 +62,11 @@ const ConstructInputs = (props) => {
   if (props.icon) {
     icon = (
       &lt;div className="froms__row froms__row--icon">
-        &lt;span className={props.icon} />
+        &lt;span className={`iconFont ${props.icon}`} />
         {
           props.title
             ? (
-              &lt;span style={ { marginLeft: '10px' } }>
+              &lt;span style={{ marginLeft: '10px' }}>
                 {props.title}
               &lt;/span>
             )

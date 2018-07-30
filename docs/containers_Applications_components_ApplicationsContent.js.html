@@ -197,22 +197,22 @@ export default class ApplicationsContent extends PureComponent {
     } else {
       image = (
         &lt;div
-          style={ {
+          style={{
             display: 'inline-block',
             width: 72,
             height: 72,
             fontSize: '40px',
             textAlign: 'center',
-          } }
+          }}
         >
-          &lt;span className="documentIcon" />
+          &lt;span className="iconFont documentIcon" />
         &lt;/div>
       )
     }
     return (
       &lt;ContentPane>
-        &lt;div className="content-header" style={ { margin: '0 10px' } }>
-          &lt;h2 style={ { marginTop: '10px', marginLeft: '10px', marginBottom: '20px' } }>
+        &lt;div className="content-header" style={{ margin: '0 10px' }}>
+          &lt;h2 style={{ marginTop: '10px', marginLeft: '10px', marginBottom: '20px' }}>
             {I18n.t('applications.title')}
           &lt;/h2>
           &lt;div className="item-info">
@@ -233,15 +233,15 @@ export default class ApplicationsContent extends PureComponent {
               &lt;br />
               &lt;div>
                 &lt;span
-                  className="editIcon"
-                  style={ { marginRight: '20px', fontSize: '20px' } }
+                  className="iconFont editIcon"
+                  style={{ marginRight: '20px', fontSize: '20px' }}
                   onClick={() => this.props.history.push(`${publicURL}/app/applications/${this.state.id}/edit`)}
                   role="button"
                   tabIndex="0"
                 />
                 &lt;span
-                  className="deleteIcon"
-                  style={ { marginRight: '20px', fontSize: '20px' } }
+                  className="iconFont deleteIcon"
+                  style={{ marginRight: '20px', fontSize: '20px' }}
                   onClick={this.handleDelete}
                   role="button"
                   tabIndex="0"
@@ -254,7 +254,7 @@ export default class ApplicationsContent extends PureComponent {
         &lt;Confirmation
           title={I18n.t('applications.delete')}
           message={this.state.data.name}
-          reference={(el) => { this.contentDialog = el } }
+          reference={(el) => { this.contentDialog = el }}
         />
       &lt;/ContentPane>
     )

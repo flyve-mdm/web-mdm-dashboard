@@ -222,16 +222,16 @@ class UsersContent extends PureComponent {
                 &lt;br />
 
                 &lt;span
-                  className="editIcon"
-                  style={ { padding: '0 10px', fontSize: '20px' } }
+                  className="iconFont editIcon"
+                  style={{ padding: '0 10px', fontSize: '20px' }}
                   onClick={() => this.props.history.push(`${publicURL}/app/users/${this.state.id}/edit`)}
                   role="button"
                   tabIndex="0"
                 />
 
                 &lt;span
-                  className="deleteIcon"
-                  style={ { padding: '0 10px', fontSize: '20px' } }
+                  className="iconFont deleteIcon"
+                  style={{ padding: '0 10px', fontSize: '20px' }}
                   onClick={this.handleDelete}
                   role="button"
                   tabIndex="0"
@@ -244,7 +244,7 @@ class UsersContent extends PureComponent {
           &lt;div className="content-info">
             &lt;ul>
               &lt;li>
-                &lt;span className="phoneIcon" />
+                &lt;span className="iconFont phoneIcon" />
                 &lt;div>
                   &lt;a href={this.state.data.mobile ? `tel: ${this.state.data.mobile}` : '#call'}>
                     {I18n.t('commons.call_mobile')}
@@ -255,7 +255,7 @@ class UsersContent extends PureComponent {
                 &lt;/div>
               &lt;/li>
               &lt;li>
-                &lt;span className="phoneIcon" />
+                &lt;span className="iconFont phoneIcon" />
                 &lt;div>
                   &lt;a href={this.state.data.phone2 ? `tel: ${this.state.data.phone2}` : '#call'}>
                     {I18n.t('commons.call_work')}
@@ -266,7 +266,7 @@ class UsersContent extends PureComponent {
                 &lt;/div>
               &lt;/li>
               &lt;li>
-                &lt;span className="emailIcon" />
+                &lt;span className="iconFont emailIcon" />
                 &lt;div>
                   &lt;a href={this.state.emails.length > 0 ? `mailto: ${this.state.emails[0].email}` : '#email'}>
                     {I18n.t('commons.email')}
@@ -278,7 +278,7 @@ class UsersContent extends PureComponent {
               &lt;/li>
             &lt;/ul>
           &lt;/div>
-          &lt;Confirmation title={I18n.t('users.delete_one')} message={this.state.data.name} reference={(el) => { this.contentDialog = el } } />
+          &lt;Confirmation title={I18n.t('users.delete_one')} message={this.state.data.name} reference={(el) => { this.contentDialog = el }} />
         &lt;/React.Fragment>
       )
     }

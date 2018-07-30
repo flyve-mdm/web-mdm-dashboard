@@ -226,12 +226,12 @@ export default class Geolocation extends PureComponent {
         &lt;React.Fragment>
           &lt;Map
             markers={this.state.showLocations}
-            style={ { margin: '0 5px', height: '300px', maxWidth: '800px' } }
+            style={{ margin: '0 5px', height: '300px', maxWidth: '800px' }}
             selectedLocation={this.state.selectedLocation}
           />
           &lt;button
             className="btn btn--secondary"
-            style={ { margin: 5 } }
+            style={{ margin: 5 }}
             onClick={() => this.setState(prevState => ({
               filter: !prevState.filter,
             }))}
@@ -243,10 +243,10 @@ export default class Geolocation extends PureComponent {
                 : I18n.t('devices.geolocation.filter_range')
             }
           &lt;/button>
-          &lt;div style={ { display: 'inline-block' } }>
+          &lt;div style={{ display: 'inline-block' }}>
             &lt;button
               className="btn btn--secondary"
-              style={ { margin: 5 } }
+              style={{ margin: 5 }}
               onClick={this.requestLocation}
               type="button"
             >
@@ -254,7 +254,7 @@ export default class Geolocation extends PureComponent {
             &lt;/button>
             {
               this.state.isLoadingGeolocation
-                ? &lt;Loading small style={ { paddingBottom: '20px' } } />
+                ? &lt;Loading small style={{ paddingBottom: '20px' }} />
                 : ''
             }
           &lt;/div>

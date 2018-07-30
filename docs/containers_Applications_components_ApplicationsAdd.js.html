@@ -137,7 +137,7 @@ export default class ApplicationsAdd extends PureComponent {
       try {
         const file = this.state.files[key]
         formData.append('file', file)
-        formData.append('uploadManifest', `{"input":{"name":"${this.state.file.name}","alias":"${this.state.input}"} }`)
+        formData.append('uploadManifest', `{"input":{"name":"${this.state.file.name}","alias":"${this.state.input}"}}`)
         this.setState({
           isLoading: true,
         })
@@ -175,13 +175,13 @@ export default class ApplicationsAdd extends PureComponent {
     } else {
       renderComponent = (
         &lt;ContentPane>
-          &lt;div style={ { margin: '0 10px' } }>
+          &lt;div style={{ margin: '0 10px' }}>
             &lt;div className="content-header">
               &lt;h2 className="content-header__title">
                 {I18n.t('applications.new')}
               &lt;/h2>
             &lt;/div>
-            &lt;div style={ { padding: '10px' } }>
+            &lt;div style={{ padding: '10px' }}>
               &lt;input
                 type="text"
                 className="win-textbox"
@@ -191,7 +191,7 @@ export default class ApplicationsAdd extends PureComponent {
                 onChange={this.changeInput}
               />
               &lt;FilesUpload
-                ref={(filesUpload) => { this.files = filesUpload } }
+                ref={(filesUpload) => { this.files = filesUpload }}
                 className="files-dropzone"
                 onChange={this.onFilesChange}
                 onError={this.onFilesError}
@@ -202,7 +202,7 @@ export default class ApplicationsAdd extends PureComponent {
               >
                 {I18n.t('commons.drop_file')}
               &lt;/FilesUpload>
-              &lt;div style={ { marginTop: 10 } }>
+              &lt;div style={{ marginTop: 10 }}>
                 &lt;button
                   className="btn btn--primary"
                   onClick={this.filesUpload}
