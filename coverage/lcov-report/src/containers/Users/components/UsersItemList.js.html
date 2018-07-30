@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/13</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/1</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/8</span>
       </div>
     </div>
     <p class="quiet">
@@ -117,7 +117,7 @@ layout: coverage
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,13 +179,13 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -214,11 +214,11 @@ layout: coverage
  */
 &nbsp;
 /** import dependencies */
-<span class="cstat-no" title="statement not covered" >import React, {</span>
+import React,<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ></span></span>
   PureComponent,
 } from 'react'
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import IconItemList from '../../../components/IconItemList'</span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import IconItemList <span class="cstat-no" title="statement not covered" >from 'components/IconItemList'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
 &nbsp;
 /**
  * Component with the template of the items of the user lists
@@ -230,14 +230,14 @@ export default class UsersItemList extends PureComponent {
    * Render component
    * @function render
    */
-<span class="fstat-no" title="function not covered" >  render() </span>{
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
     const imageProfile = <span class="cstat-no" title="statement not covered" >this.props.itemList['User.picture']</span>
       ? this.props.itemList['User.picture']
       : 'profile.png'
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div&gt;
         &lt;IconItemList image={imageProfile} size={42} /&gt;
-        &lt;div style={ { display: 'inline-block' } }&gt;
+        &lt;div style={{ display: 'inline-block' }}&gt;
           &lt;div className="list-pane__name"&gt;
             {this.props.itemList['User.name']}
           &lt;/div&gt;
@@ -247,7 +247,7 @@ export default class UsersItemList extends PureComponent {
         &lt;/div&gt;
       &lt;/div&gt;
     )
-  }
+  }<span class="cstat-no" title="statement not covered" ></span>
 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >UsersItemList.propTypes = {</span>
@@ -259,7 +259,7 @@ export default class UsersItemList extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

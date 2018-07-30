@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/13</span>
+        <span class='fraction'>0/21</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/13</span>
+        <span class='fraction'>0/15</span>
       </div>
     </div>
     <p class="quiet">
@@ -141,7 +141,7 @@ layout: coverage
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
 <a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -229,11 +229,11 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -261,11 +261,11 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import React from 'react'</span>
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import { Route, Switch } from 'react-router-dom'</span>
-<span class="cstat-no" title="statement not covered" >import PropsRoute from './PropsRoute'</span>
-<span class="cstat-no" title="statement not covered" >import ErrorPage from '../ErrorPage'</span>
+import React <span class="cstat-no" title="statement not covered" >from 'react'<span class="cstat-no" title="statement not covered" ></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import { Route, Switch<span class="cstat-no" title="statement not covered" > } from 'react-router-dom'</span>
+import ErrorPage <span class="cstat-no" title="statement not covered" >from '../ErrorPage'<span class="cstat-no" title="statement not covered" ></span></span>
+import PropsRoute <span class="cstat-no" title="statement not covered" >from './PropsRoute'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
 &nbsp;
 // TODO: Enable PrivateRoute if route if private
 &nbsp;
@@ -278,7 +278,7 @@ layout: coverage
  * @param {object} data
  * @return {component}
  */
-const GenerateRoutes = (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >props) =&gt; {</span></span>
+const GenerateRoutes = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops) =&gt; {</span>
   const r = <span class="cstat-no" title="statement not covered" >props.routes.map(<span class="fstat-no" title="function not covered" >({</span></span>
     exact, path, component, authenticate,
   }) =&gt; (
@@ -302,7 +302,7 @@ const GenerateRoutes = (<span class="cstat-no" title="statement not covered" ><s
     &amp;&amp; r.push(
       &lt;Route
         key={props.routes.length + 1}
-        render={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>&lt;ErrorPage /&gt;}</span>
+        rend<span class="fstat-no" title="function not covered" >er</span>={()<span class="cstat-no" title="statement not covered" > =&gt; &lt;ErrorPage /&gt;}</span>
       /&gt;,
     )
 &nbsp;
@@ -321,7 +321,7 @@ const GenerateRoutes = (<span class="cstat-no" title="statement not covered" ><s
 <span class="cstat-no" title="statement not covered" >GenerateRoutes.propTypes = {</span>
   routes: PropTypes.array.isRequired,
   rootPath: PropTypes.string,
-  withNotFound: PropTypes.bool,
+  withNotFound: PropTypes.bool,<span class="cstat-no" title="statement not covered" ></span>
 }
 &nbsp;
 export default GenerateRoutes
@@ -331,7 +331,7 @@ export default GenerateRoutes
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

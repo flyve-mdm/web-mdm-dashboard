@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/14</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/10</span>
       </div>
     </div>
     <p class="quiet">
@@ -138,7 +138,7 @@ layout: coverage
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -223,11 +223,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -255,11 +255,11 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import React, {</span>
+import React,<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ></span></span>
   PureComponent,
 } from 'react'
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import {</span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
   NavLink,
 } from 'react-router-dom'
 &nbsp;
@@ -273,13 +273,13 @@ class IconWithPopper extends PureComponent {
    * Render component
    * @function render
    */
-<span class="fstat-no" title="function not covered" >  render() </span>{
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
 <span class="cstat-no" title="statement not covered" >    if (this.props.to) {</span>
 <span class="cstat-no" title="statement not covered" >      return (</span>
         &lt;div&gt;
           &lt;NavLink to={this.props.to} activeClassName="selected"&gt;
             &lt;span
-              className={this.props.iconName}
+              className={`iconFont ${this.props.iconName}`}
               title={this.props.title}
             /&gt;
           &lt;/NavLink&gt;
@@ -294,7 +294,7 @@ class IconWithPopper extends PureComponent {
       &gt;
         &lt;a&gt;
           &lt;span
-            className={this.props.iconName}
+            className={`iconFont ${this.props.iconName}`}
             title={this.props.title}
           /&gt;
         &lt;/a&gt;
@@ -305,14 +305,14 @@ class IconWithPopper extends PureComponent {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >IconWithPopper.defaultProps = {</span>
   to: null,
-  click: <span class="fstat-no" title="function not covered" >() =&gt; </span>{},
+  click: <span class="fstat-no" title="function not covered" >()</span> =&gt; {},
 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >IconWithPopper.propTypes = {</span>
   title: PropTypes.string.isRequired,
   to: PropTypes.string,
   iconName: PropTypes.string.isRequired,
-  click: PropTypes.func,
+  click: PropTypes.func,<span class="cstat-no" title="statement not covered" ></span>
 }
 &nbsp;
 export default IconWithPopper
@@ -322,7 +322,7 @@ export default IconWithPopper
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

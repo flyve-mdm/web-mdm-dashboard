@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/8</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/9</span>
       </div>
     </div>
     <p class="quiet">
@@ -160,7 +160,7 @@ layout: coverage
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
 <a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L112'></a><a href='#L112'>112</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -237,19 +237,14 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -263,6 +258,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -271,7 +271,7 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**<span class="cstat-no" title="statement not covered" ></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -299,11 +299,11 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import {</span>
+import {<span class="cstat-no" title="statement not covered" ></span>
   PureComponent,
 } from 'react'
-<span class="cstat-no" title="statement not covered" >import ReactDOM from 'react-dom'</span>
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
+import ReactDOM <span class="cstat-no" title="statement not covered" >from 'react-dom'<span class="cstat-no" title="statement not covered" ></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
 &nbsp;
 /**
  * Component for the scroll sync of the side menu panel
@@ -346,29 +346,29 @@ class ScrollSyncPanel extends PureComponent {
    * Register panel
    * @function componentDidMount
    */
-<span class="fstat-no" title="function not covered" >  componentDidMount() </span>{
+  componentDidMount() {
     // eslint-disable-next-line
-<span class="cstat-no" title="statement not covered" >    this.node = this.props.attachTo || ReactDOM.findDOMNode(this)</span>
-<span class="cstat-no" title="statement not covered" >    this.context.registerPanel(this.node, this.props.group)</span>
-  }
+    this.node = this.props.attachTo || ReactDOM.findDOMNode(this)
+    this.context.registerPanel(this.node, this.props.group)<span class="fstat-no" title="function not covered" ></span>
+  }<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
 &nbsp;
   /**
    * Unregister old panel and register the new
    * @function componentDidUpdate
    * @param {object} prevProps
    */
-<span class="fstat-no" title="function not covered" >  componentDidUpdate(</span>prevProps) {
-<span class="cstat-no" title="statement not covered" >    if (this.props.group !== prevProps.group) {</span>
-<span class="cstat-no" title="statement not covered" >      this.context.unregisterPanel(this.node, prevProps.group)</span>
-<span class="cstat-no" title="statement not covered" >      this.context.registerPanel(this.node, this.props.group)</span>
+  componentDidUpdate(prevProps) {
+    if (this.props.group !== prevProps.group) {
+      this.context.unregisterPanel(this.node, prevProps.group)
+      this.context.registerPanel(this.node, this.props.group)
     }
   }
 &nbsp;
-  /**
+  /**<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
    * Unregister the panel
    * @function componentWillUnmount
    */
-<span class="fstat-no" title="function not covered" >  componentWillUnmount() </span>{
+<span class="fstat-no" title="function not covered" >  co</span>mponentWillUnmount() {
 <span class="cstat-no" title="statement not covered" >    this.context.unregisterPanel(this.node, this.props.group)</span>
   }
 &nbsp;
@@ -376,7 +376,7 @@ class ScrollSyncPanel extends PureComponent {
    * Render component
    * @function render
    */
-<span class="fstat-no" title="function not covered" >  render() </span>{
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
 <span class="cstat-no" title="statement not covered" >    return this.props.children</span>
   }
 }
@@ -388,7 +388,7 @@ export default ScrollSyncPanel
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

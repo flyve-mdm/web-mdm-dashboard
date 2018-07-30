@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/9</span>
-      </div>
-      <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
-        <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>0/15</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
-        <span class="quiet">Functions</span>
+        <span class="quiet">Branches</span>
         <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/11</span>
       </div>
     </div>
     <p class="quiet">
@@ -137,7 +137,7 @@ layout: coverage
 <a name='L86'></a><a href='#L86'>86</a>
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L89'></a><a href='#L89'>89</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,11 +221,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -253,13 +253,13 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import React, {</span>
+import React,<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ></span></span>
   PureComponent,
 } from 'react'
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import {</span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
   slideTop,
-} from '../../shared/animations/index'
+} from 'shared/animations/index'
 &nbsp;
 &nbsp;
 /**
@@ -272,7 +272,7 @@ class ContentPane extends PureComponent {
    * Run the "slideTop" animation when the component is mounted
    * @function componentDidMount
    */
-<span class="fstat-no" title="function not covered" >  componentDidMount() </span>{
+<span class="fstat-no" title="function not covered" >  co</span>mponentDidMount() {
 <span class="cstat-no" title="statement not covered" >    this.forceAnimation()</span>
   }
 &nbsp;
@@ -280,7 +280,7 @@ class ContentPane extends PureComponent {
    * Run the "slideTop" animation
    * @function forceAnimation
    */
-<span class="fstat-no" title="function not covered" >  forceAnimation() </span>{
+<span class="fstat-no" title="function not covered" >  fo</span>rceAnimation() {
 <span class="cstat-no" title="statement not covered" >    slideTop(this.pane).play()</span>
   }
 &nbsp;
@@ -288,11 +288,11 @@ class ContentPane extends PureComponent {
    * Render component
    * @function render
    */
-<span class="fstat-no" title="function not covered" >  render() </span>{
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div
         className={`content-pane ${this.props.className}`}
-        ref={(<span class="fstat-no" title="function not covered" >pane) =&gt; { <span class="cstat-no" title="statement not covered" >this.pane = pane } }</span></span>
+        ref={(p<span class="fstat-no" title="function not covered" >an</span>e) =&gt; {<span class="cstat-no" title="statement not covered" > this.pane = pane </span>}}
       &gt;
         { this.props.children }
       &lt;/div&gt;
@@ -309,7 +309,7 @@ class ContentPane extends PureComponent {
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
-  ]).isRequired,
+  ]).isRequired<span class="cstat-no" title="statement not covered" >,</span>
 }
 &nbsp;
 export default ContentPane
@@ -319,7 +319,7 @@ export default ContentPane
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/19</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/12</span>
       </div>
     </div>
     <p class="quiet">
@@ -250,7 +250,7 @@ layout: coverage
 <a name='L199'></a><a href='#L199'>199</a>
 <a name='L200'></a><a href='#L200'>200</a>
 <a name='L201'></a><a href='#L201'>201</a>
-<a name='L202'></a><a href='#L202'>202</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L202'></a><a href='#L202'>202</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -447,11 +447,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -480,13 +480,13 @@ layout: coverage
  */
 &nbsp;
 /** import dependencies */
-<span class="cstat-no" title="statement not covered" >import React, {</span>
+import React,<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ></span></span>
   PureComponent,
 } from 'react'
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import I18n from '../../../shared/i18n'</span>
-<span class="cstat-no" title="statement not covered" >import EditMultiple from '../../../components/EditMultiple'</span>
-<span class="cstat-no" title="statement not covered" >import itemtype from '../../../shared/itemtype'</span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import I18n <span class="cstat-no" title="statement not covered" >from 'shared/i18n'<span class="cstat-no" title="statement not covered" ></span></span>
+import itemtype <span class="cstat-no" title="statement not covered" >from 'shared/itemtype'<span class="cstat-no" title="statement not covered" ></span></span>
+import EditMultiple <span class="cstat-no" title="statement not covered" >from 'components/EditMultiple'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
 &nbsp;
 /**
  * Component with the form of massive edition of users
@@ -495,7 +495,7 @@ layout: coverage
  */
 class DevicesEdit extends PureComponent {
   /** @constructor */
-<span class="fstat-no" title="function not covered" >  constructor(</span>props) {
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) {
 <span class="cstat-no" title="statement not covered" >    super(props)</span>
 <span class="cstat-no" title="statement not covered" >    this.state = {</span>
       FieldList: [{
@@ -619,7 +619,7 @@ class DevicesEdit extends PureComponent {
    * Render component
    * @function render
    */
-<span class="fstat-no" title="function not covered" >  render() </span>{
+<span class="fstat-no" title="function not covered" >  re</span>nder() {
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;EditMultiple
         selectedItems={this.props.selectedItems}
@@ -629,10 +629,10 @@ class DevicesEdit extends PureComponent {
         history={this.props.history}
         toast={this.props.toast}
         glpi={this.props.glpi}
-        request={ {
+        request={{
           id: 'User.id',
           itemtype: itemtype.User,
-        } }
+        }}
       /&gt;
     )
   }
@@ -648,7 +648,7 @@ class DevicesEdit extends PureComponent {
   changeSelectionMode: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   toast: PropTypes.object.isRequired,
-  glpi: PropTypes.object.isRequired,
+  glpi: PropTypes.object.isRequired,<span class="cstat-no" title="statement not covered" ></span>
 }
 &nbsp;
 export default DevicesEdit
@@ -658,7 +658,7 @@ export default DevicesEdit
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

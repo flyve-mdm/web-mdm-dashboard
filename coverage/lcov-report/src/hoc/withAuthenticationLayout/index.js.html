@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/24</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/17</span>
       </div>
     </div>
     <p class="quiet">
@@ -151,7 +151,7 @@ layout: coverage
 <a name='L100'></a><a href='#L100'>100</a>
 <a name='L101'></a><a href='#L101'>101</a>
 <a name='L102'></a><a href='#L102'>102</a>
-<a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -250,10 +250,10 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -281,12 +281,12 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import React from 'react'</span>
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import I18n from '../../shared/i18n'</span>
-<span class="cstat-no" title="statement not covered" >import languagesList from '../../shared/i18n/languages'</span>
-<span class="cstat-no" title="statement not covered" >import { AuthenticationConsumer } from '../../providers/AuthenticationProvider'</span>
-<span class="cstat-no" title="statement not covered" >import logo from '../../assets/images/dashboard.svg'</span>
+import React <span class="cstat-no" title="statement not covered" >from 'react'<span class="cstat-no" title="statement not covered" ></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import I18n <span class="cstat-no" title="statement not covered" >from 'shared/i18n'<span class="cstat-no" title="statement not covered" ></span></span>
+import languagesL<span class="cstat-no" title="statement not covered" >ist from 'shared/i18n/languages'<span class="cstat-no" title="statement not covered" ></span></span>
+import { AuthenticationConsume<span class="cstat-no" title="statement not covered" >r } from 'providers/AuthenticationProvider'</span>
+import logo from <span class="cstat-no" title="statement not covered" >'assets/images/dashboard.svg'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
 &nbsp;
 /**
  * Wrapper component with the basic structure of the authentication pages
@@ -300,7 +300,7 @@ const withAuthenticationLayout = <span class="cstat-no" title="statement not cov
    * Create authenticationLayout
    * @param {object} props
    */
-  const authenticationLayout = (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >props) =&gt; {</span></span>
+  const authenticationLayout = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops) =&gt; {</span>
     const style = <span class="cstat-no" title="statement not covered" >{</span>
       textAlign: configStyles.centerContent ? 'center' : null,
       width: props.width,
@@ -312,7 +312,7 @@ const withAuthenticationLayout = <span class="cstat-no" title="statement not cov
             &lt;img alt="Flyve MDM Dashboard" src={logo} /&gt;
           &lt;/figure&gt;
           &lt;AuthenticationConsumer&gt;
-            {<span class="fstat-no" title="function not covered" >value =&gt; <span class="cstat-no" title="statement not covered" ></span>&lt;WrappedComponent {...props} {...value} /&gt;</span>
+<span class="fstat-no" title="function not covered" >            {v</span>alue =&gt;<span class="cstat-no" title="statement not covered" > &lt;WrappedComponent {...props} {...value} /&gt;</span>
             }
           &lt;/AuthenticationConsumer&gt;
         &lt;/section&gt;
@@ -326,7 +326,7 @@ const withAuthenticationLayout = <span class="cstat-no" title="statement not cov
           &lt;/span&gt;
           &lt;br /&gt;
           &lt;select
-            onChange={<span class="fstat-no" title="function not covered" >event =&gt; <span class="cstat-no" title="statement not covered" ></span>props.changeLanguage(event.target.value)}</span>
+            onChange={ev<span class="fstat-no" title="function not covered" >en</span>t =&gt; pr<span class="cstat-no" title="statement not covered" >ops.changeLanguage(event.target.value)}</span>
             value={props.languageCurrent}
           &gt;
             {languagesList()}
@@ -352,7 +352,7 @@ const withAuthenticationLayout = <span class="cstat-no" title="statement not cov
   }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return authenticationLayout</span>
-}
+}<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
 export default withAuthenticationLayout
 &nbsp;</pre></td></tr>
@@ -361,7 +361,7 @@ export default withAuthenticationLayout
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

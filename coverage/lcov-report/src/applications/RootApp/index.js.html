@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/17</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/1</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/10</span>
       </div>
     </div>
     <p class="quiet">
@@ -102,7 +102,7 @@ layout: coverage
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -148,14 +148,14 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -184,14 +184,14 @@ layout: coverage
  */
 &nbsp;
 /** import dependencies */
-<span class="cstat-no" title="statement not covered" >import React from 'react'</span>
-<span class="cstat-no" title="statement not covered" >import {</span>
+import React <span class="cstat-no" title="statement not covered" >from 'react'<span class="cstat-no" title="statement not covered" ></span></span>
+import {<span class="cstat-no" title="statement not covered" ></span>
   Switch,
 } from 'react-router-dom'
-<span class="cstat-no" title="statement not covered" >import withI18n from '../../hoc/withI18n'</span>
-<span class="cstat-no" title="statement not covered" >import withNotification from '../../hoc/withNotification'</span>
-<span class="cstat-no" title="statement not covered" >import routes from './routes'</span>
-<span class="cstat-no" title="statement not covered" >import GenerateRoutes from '../../components/GenerateRoutes'</span>
+import GenerateRoutes <span class="cstat-no" title="statement not covered" >from 'components/GenerateRoutes'<span class="cstat-no" title="statement not covered" ></span></span>
+import withI18n <span class="cstat-no" title="statement not covered" >from 'hoc/withI18n'<span class="cstat-no" title="statement not covered" ></span></span>
+import withNotification <span class="cstat-no" title="statement not covered" >from 'hoc/withNotification'<span class="cstat-no" title="statement not covered" ></span></span>
+import routes <span class="cstat-no" title="statement not covered" >from './routes'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
 &nbsp;
 /**
  * Main Component in the React Tree
@@ -199,9 +199,9 @@ layout: coverage
  * @class RootApp
  * @extends Component
  */
-const RootApp = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >props =&gt; (</span></span>
+const RootApp = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >pr</span>ops =&gt; (</span>
 <span class="cstat-no" title="statement not covered" >  &lt;Switch&gt;</span>
-    &lt;GenerateRoutes routes={routes} withNotFound {...props} /&gt;
+    &lt;GenerateRoutes routes={routes} withNotFound {...props} /&gt;<span class="cstat-no" title="statement not covered" ></span>
   &lt;/Switch&gt;
 )
 &nbsp;
@@ -214,7 +214,7 @@ export default withI18n(
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

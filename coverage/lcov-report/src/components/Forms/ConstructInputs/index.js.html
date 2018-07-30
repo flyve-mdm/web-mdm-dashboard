@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/17</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/8</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/10</span>
+        <span class='fraction'>0/12</span>
       </div>
     </div>
     <p class="quiet">
@@ -133,8 +133,7 @@ layout: coverage
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L85'></a><a href='#L85'>85</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -164,7 +163,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,11 +213,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -247,10 +245,9 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import React from 'react'</span>
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >import createListElement from './createListElement'</span>
+import React <span class="cstat-no" title="statement not covered" >from 'react'<span class="cstat-no" title="statement not covered" ></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import createListElement <span class="cstat-no" title="statement not covered" >from './createListElement'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
 &nbsp;
 /**
  * Component to create a list of form entries
@@ -258,17 +255,17 @@ layout: coverage
  * @param {object} props
  * @return {component} List of form entries
  */
-const ConstructInputs = (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >props) =&gt; {</span></span>
+const ConstructInputs = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops) =&gt; {</span>
   let icon
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  if (props.icon) {</span>
 <span class="cstat-no" title="statement not covered" >    icon = (</span>
       &lt;div className="froms__row froms__row--icon"&gt;
-        &lt;span className={props.icon} /&gt;
+        &lt;span className={`iconFont ${props.icon}`} /&gt;
         {
           props.title
             ? (
-              &lt;span style={ { marginLeft: '10px' } }&gt;
+              &lt;span style={{ marginLeft: '10px' }}&gt;
                 {props.title}
               &lt;/span&gt;
             )
@@ -282,7 +279,7 @@ const ConstructInputs = (<span class="cstat-no" title="statement not covered" ><
     &lt;React.Fragment&gt;
       { icon }
       {
-        props.data.map(<span class="fstat-no" title="function not covered" >(e</span>lements, index) =&gt; <span class="cstat-no" title="statement not covered" >createListElement({</span>
+        props.data.ma<span class="fstat-no" title="function not covered" >p(</span>(elements, index) =<span class="cstat-no" title="statement not covered" >&gt; createListElement({</span>
           icon: props.icon,
           elements,
           index,
@@ -300,7 +297,7 @@ const ConstructInputs = (<span class="cstat-no" title="statement not covered" ><
 &nbsp;
 <span class="cstat-no" title="statement not covered" >ConstructInputs.defaultProps = {</span>
   icon: null,
-  title: null,
+  title: null,<span class="cstat-no" title="statement not covered" ></span>
 }
 &nbsp;
 export default ConstructInputs
@@ -310,7 +307,7 @@ export default ConstructInputs
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

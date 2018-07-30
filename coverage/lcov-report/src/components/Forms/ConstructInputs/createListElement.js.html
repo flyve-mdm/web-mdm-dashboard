@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/19</span>
+        <span class='fraction'>0/29</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/19</span>
+        <span class='fraction'>0/21</span>
       </div>
     </div>
     <p class="quiet">
@@ -182,7 +182,7 @@ layout: coverage
 <a name='L131'></a><a href='#L131'>131</a>
 <a name='L132'></a><a href='#L132'>132</a>
 <a name='L133'></a><a href='#L133'>133</a>
-<a name='L134'></a><a href='#L134'>134</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L134'></a><a href='#L134'>134</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -311,11 +311,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -343,12 +343,12 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import React from 'react'</span>
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import Select from '../Select'</span>
-<span class="cstat-no" title="statement not covered" >import DatePicker from '../DatePicker'</span>
-<span class="cstat-no" title="statement not covered" >import TextArea from '../TextArea'</span>
-<span class="cstat-no" title="statement not covered" >import Input from '../Input'</span>
+import React <span class="cstat-no" title="statement not covered" >from 'react'<span class="cstat-no" title="statement not covered" ></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import Select <span class="cstat-no" title="statement not covered" >from '../Select'<span class="cstat-no" title="statement not covered" ></span></span>
+import DatePicker <span class="cstat-no" title="statement not covered" >from '../DatePicker'<span class="cstat-no" title="statement not covered" ></span></span>
+import TextArea <span class="cstat-no" title="statement not covered" >from '../TextArea'<span class="cstat-no" title="statement not covered" ></span></span>
+import Input <span class="cstat-no" title="statement not covered" >from '../Input'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
 &nbsp;
 /**
  * Component to select the type of the form entry
@@ -372,7 +372,7 @@ const createListElement = <span class="cstat-no" title="statement not covered" >
 <span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;div className="froms__row" style={style} key={`fromsRow-${index.toString()}`}&gt;
       {
-        elements.map((<span class="fstat-no" title="function not covered" >element) =&gt; {</span>
+        elements.ma<span class="fstat-no" title="function not covered" >p(</span>(element) =&gt; {
           let renderElement
 <span class="cstat-no" title="statement not covered" >          if (element.type === 'select') {</span>
 <span class="cstat-no" title="statement not covered" >            renderElement = (</span>
@@ -387,7 +387,7 @@ const createListElement = <span class="cstat-no" title="statement not covered" >
                 key={element.name}
               /&gt;
             )
-          } else <span class="cstat-no" title="statement not covered" >if (element.type === 'date') {</span>
+          } els<span class="cstat-no" title="statement not covered" >e if (element.type === 'date') {</span>
 <span class="cstat-no" title="statement not covered" >            renderElement = (</span>
               &lt;DatePicker
                 label={element.label}
@@ -397,7 +397,7 @@ const createListElement = <span class="cstat-no" title="statement not covered" >
                 key={element.name}
               /&gt;
             )
-          } else <span class="cstat-no" title="statement not covered" >if (element.type === 'textArea') {</span>
+          } els<span class="cstat-no" title="statement not covered" >e if (element.type === 'textArea') {</span>
 <span class="cstat-no" title="statement not covered" >            renderElement = (</span>
               &lt;TextArea
                 label={element.label}
@@ -444,7 +444,7 @@ const createListElement = <span class="cstat-no" title="statement not covered" >
 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >createListElement.defaultProps = {</span>
-  icon: null,
+  icon: null,<span class="cstat-no" title="statement not covered" ></span>
 }
 &nbsp;
 export default createListElement
@@ -454,7 +454,7 @@ export default createListElement
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

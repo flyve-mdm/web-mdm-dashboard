@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/16</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/1</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/11</span>
       </div>
     </div>
     <p class="quiet">
@@ -124,7 +124,7 @@ layout: coverage
 <a name='L73'></a><a href='#L73'>73</a>
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -195,11 +195,11 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -227,9 +227,9 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import React from 'react'</span>
-<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
-<span class="cstat-no" title="statement not covered" >import ContentLoader, {</span>
+import React <span class="cstat-no" title="statement not covered" >from 'react'<span class="cstat-no" title="statement not covered" ></span></span>
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import ContentLoader, {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
   BulletList,
 } from 'react-content-loader'
 &nbsp;
@@ -246,7 +246,7 @@ const listRender = <span class="cstat-no" title="statement not covered" ><span c
 }) =&gt; {
 <span class="cstat-no" title="statement not covered" >  if (props.type === 'list') {</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;ContentLoader key={`loader-${index.toString()}`} speed={1.5} style={ { width: '320px' } }&gt;
+      &lt;ContentLoader key={`loader-${index.toString()}`} speed={1.5} style={{ width: '320px' }}&gt;
         &lt;circle cx="40" cy="45" r="27" /&gt;
         &lt;rect x={80} y={20} rx={3} ry={3} width={250} height={10} radius={5} /&gt;
         &lt;rect x={80} y={40} rx={3} ry={3} width={300} height={10} radius={5} /&gt;
@@ -258,7 +258,7 @@ const listRender = <span class="cstat-no" title="statement not covered" ><span c
     &lt;BulletList
       key={`loader-${index}`}
       speed={1.5}
-      style={ { width: '320px' } }
+      style={{ width: '320px' }}
     /&gt;
   )
 }
@@ -270,7 +270,7 @@ const listRender = <span class="cstat-no" title="statement not covered" ><span c
 <span class="cstat-no" title="statement not covered" >listRender.propTypes = {</span>
   type: PropTypes.string,
   props: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,<span class="cstat-no" title="statement not covered" ></span>
 }
 &nbsp;
 export default listRender
@@ -280,7 +280,7 @@ export default listRender
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jul 24 2018 14:44:29 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 30 2018 19:03:04 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
