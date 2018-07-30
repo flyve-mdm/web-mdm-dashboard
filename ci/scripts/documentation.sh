@@ -1,5 +1,8 @@
 #!/bin/bash
-
+# Set locales
+export LC_ALL=C.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 # Generate CHANGELOG.md and increment version
 yarn release
 # Get version number from package.json
