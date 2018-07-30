@@ -28,7 +28,7 @@
 
 /** import dependencies */
 import React from 'react'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Icon } from 'office-ui-fabric-react'
 import I18n from 'shared/i18n'
 import ContentPane from 'components/ContentPane'
 

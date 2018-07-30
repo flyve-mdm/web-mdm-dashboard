@@ -33,7 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import ReactWinJS from 'react-winjs'
 import WinJS from 'winjs'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Icon } from 'office-ui-fabric-react'
 import I18n from 'shared/i18n'
 import BuildItemList from 'shared/BuildItemList'
 import itemtype from 'shared/itemtype'

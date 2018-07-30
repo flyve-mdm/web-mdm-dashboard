@@ -13,8 +13,11 @@ exports[`FilesUploadItemList renders FilesUploadItemList 1`] = `
       <div
         className="icon files-list__item-icon"
       >
-        <span
-          className="documentIcon"
+        <i
+          aria-hidden={true}
+          className="root-44"
+          data-icon-name="Page"
+          role="presentation"
         />
       </div>
       <div
@@ -42,16 +45,17 @@ exports[`FilesUploadItemList renders FilesUploadItemList 1`] = `
         <div
           className="icon files-list__item-icon"
         >
-          <span
-            className="deleteIcon"
+          <i
+            aria-hidden={true}
+            className="root-44"
+            data-icon-name="Delete"
             onClick={[Function]}
-            role="button"
+            role="presentation"
             style={
               Object {
                 "fontSize": "18px",
               }
             }
-            tabIndex="0"
           />
         </div>
       </div>

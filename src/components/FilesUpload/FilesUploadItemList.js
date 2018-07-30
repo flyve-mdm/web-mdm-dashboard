@@ -30,7 +30,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Icon } from 'office-ui-fabric-react'
 
 /**
  * Component with the layout of the list of files to upload

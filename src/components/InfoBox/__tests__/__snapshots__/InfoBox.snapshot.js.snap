@@ -8,8 +8,11 @@ exports[`InfoBox renders InfoBox 1`] = `
   <div
     className="info-box"
   >
-    <span
-      className="icon-box filesIcon"
+    <i
+      aria-hidden={true}
+      className="icon-box root-44"
+      data-icon-name="Page"
+      role="presentation"
     />
     <span
       className="content-box"

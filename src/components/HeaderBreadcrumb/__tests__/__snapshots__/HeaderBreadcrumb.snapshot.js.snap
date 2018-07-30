@@ -7,11 +7,12 @@ exports[`HeaderBreadcrumb renders HeaderBreadcrumb 1`] = `
   <div
     className="header-icon"
   >
-    <span
-      className="burgerIcon"
+    <i
+      aria-hidden={true}
+      className="root-44"
+      data-icon-name="GlobalNavButton"
       onClick={[Function]}
-      role="button"
-      tabIndex="0"
+      role="presentation"
     />
   </div>
   <nav

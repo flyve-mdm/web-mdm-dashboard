@@ -33,7 +33,7 @@ import PropTypes from 'prop-types'
 import {
   NavLink,
 } from 'react-router-dom'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Icon } from 'office-ui-fabric-react'
 
 /**
  * Component with the icons of the side menu

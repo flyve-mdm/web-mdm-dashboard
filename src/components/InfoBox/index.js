@@ -28,7 +28,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Icon } from 'office-ui-fabric-react'
 import {
   Link,
 } from 'react-router-dom'

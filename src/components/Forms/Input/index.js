@@ -30,7 +30,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Icon } from 'office-ui-fabric-react'
 import I18n from 'shared/i18n'
 import Confirmation from 'components/Confirmation'
 import ErrorValidation from 'components/ErrorValidation'

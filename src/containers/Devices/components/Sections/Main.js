@@ -32,7 +32,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import I18n from 'shared/i18n'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Icon } from 'office-ui-fabric-react'
 import itemtype from 'shared/itemtype'
 import publicURL from 'shared/publicURL'
 import IconItemList from 'components/IconItemList'
