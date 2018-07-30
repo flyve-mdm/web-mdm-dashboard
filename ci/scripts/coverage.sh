@@ -4,7 +4,18 @@ export LC_ALL=C.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 # Generate CHANGELOG.md and increment version
-yarn release
+IS_PRERELEASE="$( cut -d '-' -f 2 <<< "$CIRCLE_BRANCH" )";
+
+if [[ $CIRCLE_BRANCH != "$IS_PRERELEASE" ]]; then
+
+  PREFIX_PRERELEASE="$( cut -d '.' -f 1 <<< "$IS_PRERELEASE" )";
+  yarn release -m "ci(release): generate CHANGELOG.md for version %s" --prerelease "$PREFIX_PRERELEASE"
+
+else
+
+  yarn release -m "ci(release): generate CHANGELOG.md for version %s"
+
+fi
 # Get version number from package.json
 export GIT_TAG=$(jq -r ".version" package.json)
 # Genarate coverage
