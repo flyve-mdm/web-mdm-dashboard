@@ -35,6 +35,7 @@ import {
 import bugsnag from 'bugsnag-js'
 import createPlugin from 'bugsnag-react'
 import { initializeIcons } from 'office-ui-fabric-react/lib/Icons'
+import { loadTheme } from 'office-ui-fabric-react'
 import history from './shared/history'
 import RootApp from './applications/RootApp'
 import {
@@ -47,6 +48,35 @@ import './assets/styles/css/main.css' // Global CSS Styles
 import 'web-animations-js/web-animations-next-lite.min'
 
 initializeIcons()
+
+loadTheme({
+  palette: {
+    themePrimary: '#158784',
+    themeLighterAlt: '#f2fafa',
+    themeLighter: '#cceceb',
+    themeLight: '#a4dbd9',
+    themeTertiary: '#5bb7b4',
+    themeSecondary: '#279692',
+    themeDarkAlt: '#137a76',
+    themeDark: '#106764',
+    themeDarker: '#0c4c4a',
+    neutralLighterAlt: '#f3f3f3',
+    neutralLighter: '#efefef',
+    neutralLight: '#e5e5e5',
+    neutralQuaternaryAlt: '#d6d6d6',
+    neutralQuaternary: '#cccccc',
+    neutralTertiaryAlt: '#c4c4c4',
+    neutralTertiary: '#c2c2c2',
+    neutralSecondary: '#858585',
+    neutralPrimaryAlt: '#4b4b4b',
+    neutralPrimary: '#333',
+    neutralDark: '#272727',
+    black: '#1d1d1d',
+    white: '#fafafa',
+    bodyBackground: '#fafafa',
+    bodyText: '#333',
+  },
+})
 
 /**
  * Create the bugsnag client
