@@ -58,6 +58,9 @@ class Security extends PureComponent {
       isLoading: true,
       selfRegistration: null,
       currentUser: localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')) : {},
+      hideKillSession: true,
+      hideDeleteBrowserData: true,
+      hideDeleteAccount: true,
     }
   }
 
@@ -90,80 +93,68 @@ class Security extends PureComponent {
   /**
    * Delete the current user
    * @function deleteUser
-   * @async
    */
-  deleteUser = async () => {
-    const isOK = await Confirmation.isOK(this.deleteAccount)
-    if (isOK) {
-      this.setState({
-        isLoading: true,
-      },
-      async () => {
-        try {
-          await this.props.glpi.deleteItem({
-            itemtype: itemtype.User,
-            input: {
-              id: this.state.currentUser.id,
-            },
-            queryString: {
-              force_purge: true,
-            },
-          })
-          this.props.toast.setNotification({
-            title: I18n.t('commons.success'),
-            body: I18n.t('notifications.user_deleted'),
-            type: 'success',
-          })
+  deleteUser = () => {
+    this.setState({
+      isLoading: true,
+    },
+    async () => {
+      try {
+        await this.props.glpi.deleteItem({
+          itemtype: itemtype.User,
+          input: {
+            id: this.state.currentUser.id,
+          },
+          queryString: {
+            force_purge: true,
+          },
+        })
+        this.props.toast.setNotification({
+          title: I18n.t('commons.success'),
+          body: I18n.t('notifications.user_deleted'),
+          type: 'success',
+        })
 
-          logout()
-          localStorage.clear()
-        } catch (error) {
-          this.props.toast.setNotification(this.props.handleMessage({
-            type: 'alert',
-            message: error,
-          }))
-          this.setState({
-            isLoading: false,
-          })
-          this.changeMode('')
-        }
-      })
-    }
+        logout()
+        localStorage.clear()
+      } catch (error) {
+        this.props.toast.setNotification(this.props.handleMessage({
+          type: 'alert',
+          message: error,
+        }))
+        this.setState({
+          isLoading: false,
+        })
+        this.changeMode('')
+      }
+    })
   }
 
   /**
    * Close session
    * @function closeSession
-   * @async
    */
-  closeSession = async () => {
-    const isOK = await Confirmation.isOK(this.killSession)
-    if (isOK) {
-      logout()
-      this.props.toast.setNotification({
-        title: I18n.t('commons.success'),
-        body: I18n.t('notifications.session_closed'),
-        type: 'success',
-      })
-    }
+  closeSession = () => {
+    logout()
+    this.props.toast.setNotification({
+      title: I18n.t('commons.success'),
+      body: I18n.t('notifications.session_closed'),
+      type: 'success',
+    })
   }
 
   /**
    * Clean web storage and close session
    * @function cleanWebStorage
-   * @async
    */
-  cleanWebStorage = async () => {
-    const isOK = await Confirmation.isOK(this.deleteBrowserData)
-    if (isOK) {
-      localStorage.clear()
-      logout()
-      this.props.toast.setNotification({
-        title: I18n.t('commons.success'),
-        body: I18n.t('notifications.clear_local_storage'),
-        type: 'success',
-      })
-    }
+  cleanWebStorage = () => {
+    localStorage.clear()
+    logout()
+    this.props.toast.setNotification({
+      title: I18n.t('commons.success'),
+      body: I18n.t('notifications.clear_local_storage'),
+      type: 'success',
+    })
   }
 
   /**
@@ -366,21 +357,39 @@ class Security extends PureComponent {
         return (
           <React.Fragment>
             <Confirmation
+              hideDialog={this.state.hideKillSession}
               title={I18n.t('commons.kill_session')}
               message={I18n.t('settings.security.close_session_message')}
-              reference={(el) => { this.killSession = el }}
+              isOK={() => {
+                this.setState({ hideKillSession: true }, () => {
+                  this.closeSession()
+                })
+              }}
+              cancel={() => this.setState({ hideKillSession: true })}
             />
 
             <Confirmation
+              hideDialog={this.state.hideDeleteBrowserData}
               title={I18n.t('settings.security.delete_data')}
               message={I18n.t('settings.security.delete_data_message')}
-              reference={(el) => { this.deleteBrowserData = el }}
+              isOK={() => {
+                this.setState({ hideDeleteBrowserData: true }, () => {
+                  this.cleanWebStorage()
+                })
+              }}
+              cancel={() => this.setState({ hideDeleteBrowserData: true })}
             />
 
             <Confirmation
+              hideDialog={this.state.hideDeleteAccount}
               title={I18n.t('settings.security.delete_account')}
               message={I18n.t('settings.security.delete_account_message')}
-              reference={(el) => { this.deleteAccount = el }}
+              isOK={() => {
+                this.setState({ hideDeleteAccount: true }, () => {
+                  this.deleteUser()
+                })
+              }}
+              cancel={() => this.setState({ hideDeleteAccount: true })}
             />
             <ContentPane>
               <h2 style={{ margin: '10px' }}>
@@ -415,7 +424,7 @@ class Security extends PureComponent {
                 <div className="list-element__controller">
                   <button
                     className="btn btn--secondary"
-                    onClick={this.closeSession}
+                    onClick={() => this.setState({ hideKillSession: false })}
                     type="button"
                   >
                     {I18n.t('commons.logout')}
@@ -433,7 +442,7 @@ class Security extends PureComponent {
                 <div className="list-element__controller">
                   <button
                     className="btn btn--secondary"
-                    onClick={this.cleanWebStorage}
+                    onClick={() => this.setState({ hideDeleteBrowserData: false })}
                     type="button"
                   >
                     {I18n.t('commons.delete')}
@@ -443,7 +452,7 @@ class Security extends PureComponent {
 
               {
                 !this.state.selfRegistration
-                  ? '' : (
+                  ? null : (
                     <React.Fragment>
                       <div className="list-element">
                         <div className="list-element__message">
@@ -455,7 +464,7 @@ class Security extends PureComponent {
                         <div className="list-element__controller">
                           <button
                             className="btn btn--secondary"
-                            onClick={this.deleteUser}
+                            onClick={() => this.setState({ hideDeleteBrowserData: false })}
                             type="button"
                           >
                             {I18n.t('commons.delete')}
