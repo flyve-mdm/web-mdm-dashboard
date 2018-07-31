@@ -54,6 +54,7 @@ export default class Main extends PureComponent {
       update: this.props.update,
       data: undefined,
       sendingPing: false,
+      hideContentDialog: true,
     }
   }
 
@@ -109,38 +110,41 @@ export default class Main extends PureComponent {
   }
 
   /**
+   * Show the content dialog
+   * @function showContentDialog
+   */
+  showContentDialog = () => this.setState({ hideContentDialog: false })
+
+
+  /**
    * handle delete selected device
-   * @async
    * @function handleRefresh
    */
   handleDelete = async () => {
-    const isOK = await Confirmation.isOK(this.contentDialog)
-    if (isOK) {
-      this.setState({
-        isLoading: true,
-      })
+    this.setState({
+      isLoading: true,
+    })
 
-      this.props.glpi.deleteItem({
-        itemtype: itemtype.PluginFlyvemdmAgent,
-        id: this.state.id,
+    this.props.glpi.deleteItem({
+      itemtype: itemtype.PluginFlyvemdmAgent,
+      id: this.state.id,
+    })
+      .then(() => {
+        this.props.toast.setNotification({
+          title: I18n.t('commons.success'),
+          body: I18n.t('notifications.device_successfully_removed'),
+          type: 'success',
+        })
+        this.props.changeSelectionMode(false)
+        this.props.history.push(`${publicURL}/app/devices`)
+        this.props.changeAction('reload')
       })
-        .then(() => {
-          this.props.toast.setNotification({
-            title: I18n.t('commons.success'),
-            body: I18n.t('notifications.device_successfully_removed'),
-            type: 'success',
-          })
-          this.props.changeSelectionMode(false)
-          this.props.history.push(`${publicURL}/app/devices`)
-          this.props.changeAction('reload')
-        })
-        .catch((error) => {
-          this.props.toast.setNotification(this.props.handleMessage({
-            type: 'alert',
-            message: error,
-          }))
-        })
-    }
+      .catch((error) => {
+        this.props.toast.setNotification(this.props.handleMessage({
+          type: 'alert',
+          message: error,
+        }))
+      })
   }
 
   /**
@@ -266,7 +270,7 @@ export default class Main extends PureComponent {
                   <Icon
                     iconName="Delete"
                     style={{ marginRight: '20px', fontSize: '20px' }}
-                    onClick={this.handleDelete}
+                    onClick={this.showContentDialog}
                   />
                 </div>
               </div>
@@ -289,9 +293,15 @@ export default class Main extends PureComponent {
           </div>
 
           <Confirmation
+            hideDialog={this.state.hideContentDialog}
             title={I18n.t('devices.delete')}
             message={this.state.data.name}
-            reference={(el) => { this.contentDialog = el }}
+            isOK={() => {
+              this.setState({ hideContentDialog: true }, () => {
+                this.handleDelete()
+              })
+            }}
+            cancel={() => this.setState({ hideContentDialog: true })}
           />
         </ContentPane>
       )

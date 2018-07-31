@@ -84,6 +84,8 @@ export default class DevicesList extends PureComponent {
         page: 1,
         count: 15,
       },
+      hideContentDialog: true,
+
     }
   }
 
@@ -258,12 +260,19 @@ export default class DevicesList extends PureComponent {
   }
 
   /**
-   * handle delete to selected device
-   * @function handleDelete
+   * Show the content dialog
+   * @function showContentDialog
    */
-  handleDelete = async () => {
+  showContentDialog = () => this.setState({ hideContentDialog: false })
+
+  /**
+   * handle delete selected devices
+   * @function handleSelectionChanged
+   * @param {object} eventObject
+   * @async
+   */
+  handleDelete = async (isOK) => {
     try {
-      const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
         const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmAgent.id'],
@@ -369,7 +378,7 @@ export default class DevicesList extends PureComponent {
         label={I18n.t('commons.delete')}
         priority={0}
         disabled={this.props.selectedItems.length === 0}
-        onClick={this.handleDelete}
+        onClick={this.showContentDialog}
       />
     )
 
@@ -469,9 +478,19 @@ export default class DevicesList extends PureComponent {
         </ReactWinJS.ToolBar>
         {listComponent}
         <Confirmation
+          hideDialog={this.state.hideContentDialog}
           title={I18n.t('devices.delete')}
           message={`${this.props.selectedItems.length} ${I18n.t('devices.title')}`}
-          reference={(el) => { this.contentDialog = el }}
+          isOK={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete(true)
+            })
+          }}
+          cancel={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete(false)
+            })
+          }}
         />
       </React.Fragment>
     )

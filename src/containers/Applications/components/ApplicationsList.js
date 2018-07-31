@@ -266,6 +266,7 @@ export default class ApplicationsList extends PureComponent {
    * handle delete selected application
    * @function handleSelectionChanged
    * @param {object} eventObject
+   * @async
    */
   handleDelete = async (isOK) => {
     try {
