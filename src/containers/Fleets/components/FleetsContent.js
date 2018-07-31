@@ -72,6 +72,7 @@ class FleetsContent extends PureComponent {
         tasksRemove: {},
       },
       devicesLength: 0,
+      hideContentDialog: true,
     }
   }
 
@@ -1053,6 +1054,12 @@ class FleetsContent extends PureComponent {
   }
 
   /**
+   * Show the content dialog
+   * @function showContentDialog
+   */
+  showContentDialog = () => this.setState({ hideContentDialog: false })
+
+  /**
    * Handle remove fleet
    * @function handleDeleteFleet
    * @async
@@ -1210,7 +1217,7 @@ class FleetsContent extends PureComponent {
                         />
                         <Icon
                           iconName="Delete"
-                          onClick={this.handleDeleteFleet}
+                          onClick={this.showContentDialog}
                         />
                       </React.Fragment>
                     )
@@ -1273,9 +1280,15 @@ class FleetsContent extends PureComponent {
             </div>
           </div>
           <Confirmation
+            hideDialog={this.state.hideContentDialog}
             title="Delete Fleets"
             message={`${selectedItems.length} Fleets`}
-            reference={(el) => { this.contentDialog = el }}
+            isOK={() => {
+              this.setState({ hideContentDialog: true }, () => {
+                this.handleDeleteFleet()
+              })
+            }}
+            cancel={() => this.setState({ hideContentDialog: true })}
           />
         </div>
       </ContentPane>

@@ -77,6 +77,7 @@ export default class FleetsList extends PureComponent {
         page: 1,
         count: 15,
       },
+      hideContentDialog: true,
     }
   }
 
@@ -172,13 +173,19 @@ export default class FleetsList extends PureComponent {
   }
 
   /**
-   * handle remove fleets from list
-   * @function handleDelete
+   * Show the content dialog
+   * @function showContentDialog
+   */
+  showContentDialog = () => this.setState({ hideContentDialog: false })
+
+  /**
+   * handle delete selected fleets
+   * @function handleSelectionChanged
+   * @param {object} eventObject
    * @async
    */
-  handleDelete = async () => {
+  handleDelete = async (isOK) => {
     try {
-      const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
         const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmFleet.id'],
@@ -373,7 +380,7 @@ export default class FleetsList extends PureComponent {
         label={I18n.t('commons.delete')}
         priority={0}
         disabled={this.props.selectedItems.length === 0}
-        onClick={this.handleDelete}
+        onClick={this.showContentDialog}
       />
     )
     const editCommand = (
@@ -470,9 +477,19 @@ export default class FleetsList extends PureComponent {
         </ReactWinJS.ToolBar>
         {listComponent}
         <Confirmation
+          hideDialog={this.state.hideContentDialog}
           title={I18n.t('fleets.delete')}
           message={`${this.props.selectedItems.length} ${I18n.t('commons.fleets')}`}
-          reference={(el) => { this.contentDialog = el }}
+          isOK={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete(true)
+            })
+          }}
+          cancel={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete(false)
+            })
+          }}
         />
       </React.Fragment>
     )
