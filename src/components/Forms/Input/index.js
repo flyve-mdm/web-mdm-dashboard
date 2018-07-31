@@ -48,6 +48,7 @@ class Input extends PureComponent {
       isCorrect: true,
       errors: [],
       className: 'win-textbox',
+      hideContentDialog: true,
     }
   }
 
@@ -106,13 +107,9 @@ class Input extends PureComponent {
 
   /**
    * Delete an email of the list
-   * @async
    * @function deleteEmail
    */
-  deleteEmail = async () => {
-    const isOK = await Confirmation.isOK(this.contentDialog)
-    if (isOK) this.props.delete(this.props.name)
-  }
+  deleteEmail = () => this.setState({ hideContentDialog: false })
 
   /**
    * Render component
@@ -152,9 +149,11 @@ class Input extends PureComponent {
           this.props.delete
             ? (
               <Confirmation
+                hideDialog={this.state.hideContentDialog}
                 title={`${I18n.t('commons.delete')} ${this.props.label}`}
                 message={this.props.value}
-                reference={(el) => { this.contentDialog = el }}
+                isOK={() => this.props.delete(this.props.name)}
+                cancel={() => this.setState({ hideContentDialog: true })}
               />
             )
             : <span />
