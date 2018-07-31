@@ -50,6 +50,7 @@ export default class FilesContent extends PureComponent {
 
     this.state = {
       isLoading: false,
+      hideContentDialog: true,
     }
 
     if (this.props.selectedItems.length === 0) {
@@ -69,42 +70,41 @@ export default class FilesContent extends PureComponent {
   }
 
   /**
+   * Show the content dialog
+   * @function showContentDialog
+   */
+  showContentDialog = () => this.setState({ hideContentDialog: false })
+
+  /**
    * Handle delete current file
    * @async
    * @function handleDelete
    */
   handleDelete = async () => {
     try {
-      const isOK = await Confirmation.isOK(this.contentDialog)
-      if (isOK) {
-        const itemListToDelete = this.props.selectedItems.map(item => ({
-          id: item['PluginFlyvemdmFile.id'],
-        }))
+      const itemListToDelete = this.props.selectedItems.map(item => ({
+        id: item['PluginFlyvemdmFile.id'],
+      }))
 
-        this.setState({
-          isLoading: true,
-        })
+      this.setState({
+        isLoading: true,
+      })
 
-        await this.props.glpi.deleteItem({
-          itemtype: itemtype.PluginFlyvemdmFile,
-          input: itemListToDelete,
-          queryString: {
-            force_purge: true,
-          },
-        })
+      await this.props.glpi.deleteItem({
+        itemtype: itemtype.PluginFlyvemdmFile,
+        input: itemListToDelete,
+        queryString: {
+          force_purge: true,
+        },
+      })
 
-        this.props.toast.setNotification({
-          title: I18n.t('commons.success'),
-          body: I18n.t('notifications.file_successfully_removed'),
-          type: 'success',
-        })
-        this.props.changeSelectionMode(false)
-        this.props.changeAction('reload')
-      } else {
-        this.setState({
-          isLoading: false,
-        })
-      }
+      this.props.toast.setNotification({
+        title: I18n.t('commons.success'),
+        body: I18n.t('notifications.file_successfully_removed'),
+        type: 'success',
+      })
+      this.props.changeSelectionMode(false)
+      this.props.changeAction('reload')
     } catch (error) {
       this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
@@ -155,7 +155,7 @@ export default class FilesContent extends PureComponent {
                 <Icon
                   iconName="Delete"
                   style={{ marginRight: '20px', fontSize: '20px' }}
-                  onClick={this.handleDelete}
+                  onClick={this.showContentDialog}
                 />
               </div>
             </div>
@@ -163,9 +163,15 @@ export default class FilesContent extends PureComponent {
         </div>
         <div className="separator" />
         <Confirmation
+          hideDialog={this.state.hideContentDialog}
           title={I18n.t('files.delete_one')}
           message={fileName}
-          reference={(el) => { this.contentDialog = el }}
+          isOK={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete()
+            })
+          }}
+          cancel={() => this.setState({ hideContentDialog: true })}
         />
       </ContentPane>
     )

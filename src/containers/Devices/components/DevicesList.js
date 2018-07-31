@@ -292,7 +292,7 @@ export default class DevicesList extends PureComponent {
 
         this.props.toast.setNotification({
           title: I18n.t('commons.success'),
-          body: I18n.t('notifications.device_successfully_removed'),
+          body: I18n.t('notifications.file_successfully_removed'),
           type: 'success',
         })
         this.props.changeSelectionMode(false)

@@ -73,6 +73,7 @@ class FilesList extends PureComponent {
         page: 1,
         count: 15,
       },
+      hideContentDialog: true,
     }
   }
 
@@ -205,12 +206,18 @@ class FilesList extends PureComponent {
   }
 
   /**
+   * Show the content dialog
+   * @function showContentDialog
+   */
+  showContentDialog = () => this.setState({ hideContentDialog: false })
+
+  /**
    * handle delete selected files
    * @function handleSelectionChanged
    * @param {object} eventObject
+   * @async
    */
-  handleDelete = async () => {
-    const isOK = await Confirmation.isOK(this.contentDialog)
+  handleDelete = async (isOK) => {
     if (isOK) {
       const itemListToDelete = this.props.selectedItems.map(item => ({
         id: item['PluginFlyvemdmFile.id'],
@@ -230,7 +237,7 @@ class FilesList extends PureComponent {
 
           this.props.toast.setNotification({
             title: I18n.t('commons.success'),
-            body: I18n.t('notifications.device_successfully_removed'),
+            body: I18n.t('notifications.file_successfully_removed'),
             type: 'success',
           })
           this.props.changeSelectionMode(false)
@@ -359,7 +366,7 @@ class FilesList extends PureComponent {
         label={I18n.t('commons.delete')}
         priority={0}
         disabled={this.props.selectedItems.length === 0}
-        onClick={this.handleDelete}
+        onClick={this.showContentDialog}
       />
     )
 
@@ -464,9 +471,19 @@ class FilesList extends PureComponent {
         { listComponent }
 
         <Confirmation
+          hideDialog={this.state.hideContentDialog}
           title={I18n.t('files.delete')}
           message={`${this.props.selectedItems.length} ${I18n.t('files.delete_message')}`}
-          reference={(el) => { this.contentDialog = el }}
+          isOK={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete(true)
+            })
+          }}
+          cancel={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete(false)
+            })
+          }}
         />
       </React.Fragment>
     )
