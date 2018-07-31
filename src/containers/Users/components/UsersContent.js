@@ -99,38 +99,41 @@ class UsersContent extends PureComponent {
   }
 
   /**
+   * Show the content dialog
+   * @function showContentDialog
+   */
+  showContentDialog = () => this.setState({ hideContentDialog: false })
+
+  /**
    * Delete user
    * @function handleDelete
    * @async
    */
   handleDelete = async () => {
-    const isOK = await Confirmation.isOK(this.contentDialog)
-    if (isOK) {
-      const itemListToDelete = [{ id: this.state.id }]
+    const itemListToDelete = [{ id: this.state.id }]
 
-      this.setState({
-        isLoading: true,
+    this.setState({
+      isLoading: true,
+    })
+
+    try {
+      await this.props.glpi.deleteItem({
+        itemtype: itemtype.User,
+        input: itemListToDelete,
       })
-
-      try {
-        await this.props.glpi.deleteItem({
-          itemtype: itemtype.User,
-          input: itemListToDelete,
-        })
-        this.props.toast.setNotification({
-          title: I18n.t('commons.success'),
-          body: I18n.t('notifications.elements_successfully_removed'),
-          type: 'success',
-        })
-        this.props.changeAction('reload')
-        this.props.changeSelectionMode(false)
-        this.props.history.push(`${publicURL}/app/users`)
-      } catch (error) {
-        this.props.toast.setNotification(this.props.handleMessage({
-          type: 'alert',
-          message: error,
-        }))
-      }
+      this.props.toast.setNotification({
+        title: I18n.t('commons.success'),
+        body: I18n.t('notifications.elements_successfully_removed'),
+        type: 'success',
+      })
+      this.props.changeAction('reload')
+      this.props.changeSelectionMode(false)
+      this.props.history.push(`${publicURL}/app/users`)
+    } catch (error) {
+      this.props.toast.setNotification(this.props.handleMessage({
+        type: 'alert',
+        message: error,
+      }))
     }
   }
 
@@ -211,7 +214,7 @@ class UsersContent extends PureComponent {
                 <Icon
                   iconName="Delete"
                   style={{ padding: '0 10px', fontSize: '20px' }}
-                  onClick={this.handleDelete}
+                  onClick={this.showContentDialog}
                 />
 
               </div>
@@ -255,7 +258,17 @@ class UsersContent extends PureComponent {
               </li>
             </ul>
           </div>
-          <Confirmation title={I18n.t('users.delete_one')} message={this.state.data.name} reference={(el) => { this.contentDialog = el }} />
+          <Confirmation
+            hideDialog={this.state.hideContentDialog}
+            title={I18n.t('users.delete_one')}
+            message={this.state.data.name}
+            isOK={() => {
+              this.setState({ hideContentDialog: true }, () => {
+                this.handleDelete()
+              })
+            }}
+            cancel={() => this.setState({ hideContentDialog: true })}
+          />
         </React.Fragment>
       )
     }
