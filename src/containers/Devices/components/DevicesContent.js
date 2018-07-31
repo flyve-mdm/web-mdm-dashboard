@@ -36,7 +36,6 @@ import I18n from 'shared/i18n'
 import getID from 'shared/getID'
 import itemtype from 'shared/itemtype'
 import ContentPane from 'components/ContentPane'
-import Confirmation from 'components/Confirmation'
 import FleetsContent from '../../Fleets/components/FleetsContent'
 import {
   DangerZone,
@@ -97,21 +96,6 @@ export default class DevicesContent extends PureComponent {
   render() {
     return (
       <React.Fragment>
-        <Confirmation
-          title={I18n.t('devices.danger_zone.last_warning')}
-          message={I18n.t('devices.danger_zone.last_warning_message')}
-          reference={(el) => { this.wipeDevice = el }}
-        />
-        <Confirmation
-          title={`${I18n.t('devices.danger_zone.unenroll_device')} # ${this.state.id}`}
-          message={`${I18n.t('devices.danger_zone.going_to_unenroll')} ${this.state.id}`}
-          reference={(el) => { this.unenrollmentDevice = el }}
-        />
-        <Confirmation
-          title={`${I18n.t('devices.danger_zone.delete')} # ${this.state.id}`}
-          message={`${I18n.t('devices.danger_zone.delete_message')} ${this.state.id}`}
-          reference={(el) => { this.deleteDevice = el }}
-        />
         <ContentPane className="devices">
           <ReactWinJS.Pivot ref={this.changeselectedItem}>
             <ReactWinJS.Pivot.Item key="main" header={I18n.t('devices.main.title')}>
