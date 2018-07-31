@@ -30,7 +30,13 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import ReactWinJS from 'react-winjs'
+import {
+  Dialog,
+  DialogType,
+  DialogFooter,
+  PrimaryButton,
+  DefaultButton,
+} from 'office-ui-fabric-react'
 import I18n from 'shared/i18n'
 
 /**
@@ -39,17 +45,25 @@ import I18n from 'shared/i18n'
  * @extends PureComponent
  */
 class Confirmation extends PureComponent {
+  /** @constructor */
+  constructor(props) {
+    super(props)
+    this.state = {
+      hideDialog: this.props.hideDialog,
+    }
+  }
+
   /**
-   * Asynchronous function that waits for a user's response
-   * @static
-   * @async
-   * @function isOK
-   * @param {object} contentDialog
-   * @return {boolean} User's response
+   * Make sure that the state and props are in sync for when it is required
+   * @param {object} nextProps
+   * @param {object} prevState
    */
-  static isOK = async contentDialog => contentDialog.winControl.show().then(({
-    result,
-  }) => result === 'primary')
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      ...prevState,
+      hideDialog: nextProps.hideDialog,
+    }
+  }
 
   /**
    * Render component
@@ -57,24 +71,42 @@ class Confirmation extends PureComponent {
    */
   render() {
     return (
-      <ReactWinJS.ContentDialog
-        ref={this.props.reference}
-        title={this.props.title}
-        primaryCommandText={I18n.t('commons.ok')}
-        secondaryCommandText={I18n.t('commons.cancel')}
+      <Dialog
+        hidden={this.state.hideDialog}
+        onDismiss={(this.props.dismiss || this.props.cancel)}
+        dialogContentProps={{
+          type: DialogType.normal,
+          title: this.props.title,
+          subText: this.props.message,
+        }}
       >
-        <p>
-          { this.props.message }
-        </p>
-      </ReactWinJS.ContentDialog>
+        {null /** You can also include null values as the result of conditionals */}
+        <DialogFooter>
+          <PrimaryButton
+            onClick={this.props.isOK}
+            text={I18n.t('commons.ok')}
+          />
+          <DefaultButton
+            onClick={this.props.cancel}
+            text={I18n.t('commons.cancel')}
+          />
+        </DialogFooter>
+      </Dialog>
     )
   }
 }
 
+Confirmation.defaultProps = {
+  dismiss: null,
+}
+
 Confirmation.propTypes = {
-  reference: PropTypes.func.isRequired,
+  hideDialog: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
+  isOK: PropTypes.func.isRequired,
+  cancel: PropTypes.func.isRequired,
+  dismiss: PropTypes.func,
 }
 
 export default Confirmation
