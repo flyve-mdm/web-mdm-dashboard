@@ -54,6 +54,7 @@ export default class ApplicationsContent extends PureComponent {
     this.state = {
       id: getID(this.props.history.location.pathname),
       data: undefined,
+      hideContentDialog: true,
     }
   }
 
@@ -96,18 +97,21 @@ export default class ApplicationsContent extends PureComponent {
   }
 
   /**
+   * Show the content dialog
+   * @function showContentDialog
+   */
+  showContentDialog = () => this.setState({ hideContentDialog: false })
+
+  /**
    * Handle delete current application
    * @async
    * @function handleDelete
    */
-  handleDelete = async () => {
-    const isOK = await Confirmation.isOK(this.contentDialog)
-    if (isOK) {
+  handleDelete = () => {
+    this.setState({
+      isLoading: true,
+    }, async () => {
       const itemListToDelete = [{ id: this.state.id }]
-
-      this.setState({
-        isLoading: true,
-      })
       try {
         await this.props.glpi.deleteItem({
           itemtype: itemtype.PluginFlyvemdmPackage,
@@ -132,7 +136,7 @@ export default class ApplicationsContent extends PureComponent {
           isLoading: false,
         })
       }
-    }
+    })
   }
 
   /**
@@ -221,7 +225,7 @@ export default class ApplicationsContent extends PureComponent {
                 <Icon
                   iconName="Delete"
                   style={{ marginRight: '20px', fontSize: '20px' }}
-                  onClick={this.handleDelete}
+                  onClick={this.showContentDialog}
                 />
               </div>
             </div>
@@ -229,9 +233,15 @@ export default class ApplicationsContent extends PureComponent {
         </div>
         <div className="separator" />
         <Confirmation
+          hideDialog={this.state.hideContentDialog}
           title={I18n.t('applications.delete')}
           message={this.state.data.name}
-          reference={(el) => { this.contentDialog = el }}
+          isOK={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete()
+            })
+          }}
+          cancel={() => this.setState({ hideContentDialog: true })}
         />
       </ContentPane>
     )

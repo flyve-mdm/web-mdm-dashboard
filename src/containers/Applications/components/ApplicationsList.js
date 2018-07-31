@@ -73,6 +73,7 @@ export default class ApplicationsList extends PureComponent {
         page: 1,
         count: 15,
       },
+      hideDialog: true,
     }
   }
 
@@ -256,13 +257,18 @@ export default class ApplicationsList extends PureComponent {
   }
 
   /**
+   * Show the content dialog
+   * @function showContentDialog
+   */
+  showContentDialog = () => this.setState({ hideContentDialog: false })
+
+  /**
    * handle delete selected application
    * @function handleSelectionChanged
    * @param {object} eventObject
    */
-  handleDelete = async () => {
+  handleDelete = async (isOK) => {
     try {
-      const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
         const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmPackage.id'],
@@ -448,7 +454,7 @@ export default class ApplicationsList extends PureComponent {
         label={I18n.t('commons.delete')}
         priority={0}
         disabled={this.props.selectedItems.length === 0}
-        onClick={this.handleDelete}
+        onClick={this.showContentDialog}
       />
     )
 
@@ -555,9 +561,19 @@ export default class ApplicationsList extends PureComponent {
 
         {listComponent}
         <Confirmation
+          hideDialog={this.state.hideContentDialog}
           title={I18n.t('applications.delete')}
           message={`${this.props.selectedItems.length} ${I18n.t('applications.title')}`}
-          reference={(el) => { this.contentDialog = el }}
+          isOK={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete(true)
+            })
+          }}
+          cancel={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete(false)
+            })
+          }}
         />
       </React.Fragment>
     )

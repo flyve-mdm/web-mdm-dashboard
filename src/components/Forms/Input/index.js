@@ -152,7 +152,11 @@ class Input extends PureComponent {
                 hideDialog={this.state.hideContentDialog}
                 title={`${I18n.t('commons.delete')} ${this.props.label}`}
                 message={this.props.value}
-                isOK={() => this.props.delete(this.props.name)}
+                isOK={() => {
+                  this.setState({ hideContentDialog: true }, () => {
+                    this.props.delete(this.props.name)
+                  })
+                }}
                 cancel={() => this.setState({ hideContentDialog: true })}
               />
             )
