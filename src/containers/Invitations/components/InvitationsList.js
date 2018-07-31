@@ -88,6 +88,7 @@ export default class InvitationsList extends PureComponent {
         page: 1,
         count: 15,
       },
+      hideContentDialog: true,
     }
   }
 
@@ -218,13 +219,19 @@ export default class InvitationsList extends PureComponent {
   }
 
   /**
-   * Delete invitatios
-   * @function handleDelete
+   * Show the content dialog
+   * @function showContentDialog
+   */
+  showContentDialog = () => this.setState({ hideContentDialog: false })
+
+  /**
+   * handle delete selected invitations
+   * @function handleSelectionChanged
+   * @param {object} eventObject
    * @async
    */
-  handleDelete = async () => {
+  handleDelete = async (isOK) => {
     try {
-      const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
         const itemListToDelete = this.props.selectedItems.map(item => ({
           id: item['PluginFlyvemdmInvitation.id'],
@@ -429,7 +436,7 @@ export default class InvitationsList extends PureComponent {
         label={I18n.t('commons.delete')}
         priority={0}
         disabled={this.props.selectedItems.length === 0}
-        onClick={this.handleDelete}
+        onClick={this.showContentDialog}
       />
     )
 
@@ -529,9 +536,19 @@ export default class InvitationsList extends PureComponent {
 
         { listComponent }
         <Confirmation
+          hideDialog={this.state.hideContentDialog}
           title={I18n.t('invitations.delete')}
           message={`${this.props.selectedItems.length} ${I18n.t('commons.invitations')}`}
-          reference={(el) => { this.contentDialog = el }}
+          isOK={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete(true)
+            })
+          }}
+          cancel={() => {
+            this.setState({ hideContentDialog: true }, () => {
+              this.handleDelete(false)
+            })
+          }}
         />
       </React.Fragment>
     )
