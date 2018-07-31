@@ -63,6 +63,7 @@ const withAdminDashboardLayout = (WrappedComponent) => {
         contract: false,
         mode: getMode(),
         iframe: undefined,
+        hideContentDialog: true,
       }
 
       window.addEventListener('resize', this.handleResize)
@@ -100,12 +101,7 @@ const withAdminDashboardLayout = (WrappedComponent) => {
     }
 
     /** Close current session */
-    logout = async () => {
-      const isOK = await Confirmation.isOK(this.contentDialog)
-      if (isOK) {
-        this.props.auth.logout(this.props.history)
-      }
-    }
+    logout = () => this.setState({ hideContentDialog: false })
 
     /** Change 'mode' according to the resolution of the screen */
     handleResize = () => {
@@ -132,7 +128,10 @@ const withAdminDashboardLayout = (WrappedComponent) => {
       })
     }
 
-    /** Collapse the side menu */
+    /**
+     * Collapse the side menu
+     * @function handleContract
+     */
     handleContract = () => {
       this.setState({
         contract: true,
@@ -141,7 +140,10 @@ const withAdminDashboardLayout = (WrappedComponent) => {
       })
     }
 
-    /** Collapse the side menu after of the timeout */
+    /**
+     * Collapse the side menu after of the timeout
+     * @function handleSetTimeOut
+     */
     handleSetTimeOut = () => {
       if (this.state.contract) {
         setTimeout(() => {
@@ -181,9 +183,11 @@ const withAdminDashboardLayout = (WrappedComponent) => {
             />
             <WrappedComponent {...this.props} mode={this.state.mode} />
             <Confirmation
+              hideDialog={this.state.hideContentDialog}
               title={I18n.t('logout.close_session')}
               message={I18n.t('settings.security.close_session_message')}
-              reference={(el) => { this.contentDialog = el }}
+              isOK={() => this.props.auth.logout(this.props.history)}
+              cancel={() => this.setState({ hideContentDialog: true })}
             />
           </div>
         </main>
