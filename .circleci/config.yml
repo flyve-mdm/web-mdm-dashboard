@@ -6,7 +6,7 @@ references:
     ~/flyve
 
   docker_image: &docker_image
-    kkarczmarczyk/node-yarn
+    node:8.11
 
   container_config: &container_config
     docker:
