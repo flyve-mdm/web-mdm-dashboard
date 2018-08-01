@@ -14,3 +14,9 @@ echo "LC_ALL=en_US.UTF-8" >> /etc/environment
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 locale-gen en_US.UTF-8
+
+# Install yarn
+apt-get -y install curl apt-transport-https
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+apt-get update && apt-get -y install yarn
