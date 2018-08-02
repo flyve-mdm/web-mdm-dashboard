@@ -7,7 +7,7 @@ sudo apt-get install build-essential ruby-dev
 # install bundle
 sudo gem install bundle
 
-# install html linter
+# install html link checker
 go get -v -u github.com/raviqqe/muffet
 
 # install dependencies

@@ -7,8 +7,7 @@
     "test-sass": "./node_modules/.bin/sass-lint -c app/config/.sass-lint.yml 'css/**/*.scss, _sass/**/*.scss' -v -q",
     "test-js": "./node_modules/.bin/eslint js/*.js",
     "test-yaml": "ci/yamllint.sh",
-    "test-site": "ci/test-jekyll.sh",
-    "test": "npm run test-sass & npm run test-js & npm run test-yaml & npm run test-site"
+    "test": "npm run test-sass & npm run test-js & npm run test-yaml"
   },
   "repository": {
     "type": "git",
