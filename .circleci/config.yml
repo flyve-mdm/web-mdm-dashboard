@@ -26,6 +26,7 @@ jobs:
           name: "Run tests"
           command: npm test
       - run:
-          name: "Run muffet"
+          name: "Run Muffet"
           command: |
-            muffet -f -t 30 http://flyve.org/web-mdm-dashboard/
+            EXC=".*\.com|bugsnag|doc|t\.me|\.io|malware|deeplink|android-|blackberry-|ios-|glpi|docker-|windows-|legacy-|backend-|demo-|graphql-"
+            muffet -c 100 -e $EXC -f http://flyve.org/web-mdm-dashboard/
