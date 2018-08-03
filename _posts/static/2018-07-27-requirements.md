@@ -45,3 +45,6 @@ The Docker Environments were tested in the following operating systems:
   - Ubuntu 16.04
 - **Mac**:
   - MacOS Sierra 10.12.6
+- **Windows**:
+  - Windows 7 Home Basic
+  - Windows 10 Professional

@@ -101,4 +101,4 @@ We must verify the services running in these ports:
 
 If your host machine has a service listening in some of these ports, you have to stop that service or change the port in the *.env* file that is in the docker root in the project, before the build process of the  docker environment.
 
-<img src="{{ '/images/picto-warning.png' | absolute_url }}" alt="Important!" height="16px"/> If the *.env* file is edited, PLEASE DO NOT PUSH OF THIS CHANGE in the repository.
+<img src="{{ '/images/picto-warning.png' | absolute_url }}" alt="Important!" height="16px"/> If the *.env* file is edited, PLEASE DO NOT PUSH THIS CHANGE in the repository.
