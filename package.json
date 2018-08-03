@@ -1,6 +1,6 @@
 {
   "name": "web-mdm-dashboard",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Branch created with the intention of functioning as an introduction web site of the project, a small point of entry where anyone can find out what it is about and to be able to get relevant information.",
   "sasslintConfig": ".sass-lint.yml",
   "scripts": {
