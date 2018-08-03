@@ -16,7 +16,7 @@ To start with the installation process, we must get the [Web MDM Dashboard](http
 - [Download the project from GitHub](https://github.com/flyve-mdm/web-mdm-dashboard/archive/develop.zip)
 - [From GitHub Releases](https://github.com/flyve-mdm/web-mdm-dashboard/releases)
 
-### If you're on Linux or Mac OS
+### If you're on Linux, Mac OS or Windows
 
 #### 1. Enter into the docker directory
 
@@ -31,6 +31,20 @@ In the terminal, execute the command corresponding to build the docker environme
 ```user@localhost:web-mdm-dashboard/docker $ docker-compose up --build```
 
 This process downloads the docker images, build the containers, execute the configuration, create the network interface and start running all containers.
+
+### 3. Enter to see the Application
+
+#### Developer environment
+
+To enter in the application in developer mode, we must enter in the browser the address:
+    ```http://localhost:3000```
+
+#### Build environment
+
+To enter in the application in Build mode, we must enter in the browser the address:
+    ```http://localhost:8081```
+
+The Ports described in this step, are corresponding to the configured in the **.env* file**
 
 #### Note
 
