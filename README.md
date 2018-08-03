@@ -1,4 +1,4 @@
-# Web Admin Dashboard
+# Web MDM Dashboard
 
 ![Flyve MDM banner](https://user-images.githubusercontent.com/663460/26935464-54267e9c-4c6c-11e7-86df-8cfa6658133e.png)
 
@@ -18,7 +18,7 @@ To get started, check out [Flyve MDM website](https://flyve-mdm.com/)!
 
 * [Synopsis](#synopsis)
 * [Build Status](#build-status)
-* [Compatibility Matrix](#matrix)
+* [Compatibility Matrix](#compatibility-matrix)
 * [Installation](#installation)
 * [Documentation](#documentation)
 * [Versioning](#versioning)
@@ -48,7 +48,7 @@ For more information visit our [website](http://flyve.org/web-mdm-dashboard/).
 
 ### Docker Environment
 
-Flyve MDM Web Dashboard comes with a docker environment, allowing you to have a development instance ready to work on, to set it up just follow our [documentation](http://flyve.org/web-mdm-dashboard/howtos/)
+Flyve MDM Web Dashboard comes with a docker environment, allowing you to have a development instance ready to work on, to set it up just follow our [documentation](http://flyve.org/web-mdm-dashboard/howtos/).
 
 ## Build Status
 
@@ -56,14 +56,16 @@ Flyve MDM Web Dashboard comes with a docker environment, allowing you to have a 
 |:---:|:---:|
 |[![Circle CI build](https://circleci.com/gh/flyve-mdm/web-mdm-dashboard/tree/master.svg?style=svg)](https://circleci.com/gh/flyve-mdm/web-mdm-dashboard/tree/master)|[![Circle CI build](https://circleci.com/gh/flyve-mdm/web-mdm-dashboard/tree/develop.svg?style=svg)](https://circleci.com/gh/flyve-mdm/web-mdm-dashboard/tree/develop)|
 
-## Matrix
+## Compatibility Matrix
 
 |**GLPI Version**|9.1.x|9.2.x|
 |:---|:---:|:---:|
 |GLPI API Client|||
 |Flyve MDM|1.x|2.0.0-dev|
 |Demo Mode|-|1.0.0-dev|
-|Web MDM Dashboard|-|1.0.0-dev|
+|Web MDM Dashboard|-|2.0.0-dev|
+
+**Docker Environment** was tested on **Mac OS** (Sierra 10.12.6), **Linux** (Ubuntu 16.04) and **Windows** (7 Home Basic, 10 Professional).
 
 ## Installation
 
