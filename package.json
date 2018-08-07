@@ -10,7 +10,8 @@
     "test-sass": "./node_modules/.bin/sass-lint -c app/config/.sass-lint.yml 'css/**/*.scss, _sass/**/*.scss' -v -q",
     "test-js": "./node_modules/.bin/eslint js/*.js",
     "test-yaml": "ci/yamllint.sh",
-    "test": "npm run test-sass & npm run test-js & npm run test-yaml"
+    "test": "npm run test-sass & npm run test-js & npm run test-yaml",
+    "lint": "yarn eslint js --fix"
   },
   "repository": {
     "type": "git",
@@ -24,8 +25,9 @@
   },
   "homepage": "http://flyve.org/web-mdm-dashboard/",
   "devDependencies": {
-    "eslint": "^4.7.2",
-    "eslint-config-google": "^0.9.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
     "sass-lint": "^1.12.1",
     "yaml-lint": "^1.0.0"
   }
