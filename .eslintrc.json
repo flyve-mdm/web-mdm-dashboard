@@ -6,7 +6,6 @@
         "window": false
     },
     "rules": {
-        "semi": ["error", "never"],
-        "no-unused-expressions": "off"
+        "semi": ["error", "never"]
     }
 }
