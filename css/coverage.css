@@ -16,30 +16,6 @@ h1 {
   margin-left:8px;
 }
 
-.el_report {
-}
-
-.el_group {
-}
-
-.el_bundle {
-}
-
-.el_package {
-}
-
-.el_class {
-}
-
-.el_source {
-}
-
-.el_method {
-}
-
-.el_session {
-}
-
 pre.source {
   border:#d6d3ce 1px solid;
   font-family:monospace;
@@ -100,7 +76,7 @@ pre.source span.bpc:hover {
 
 table.coverage {
   empty-cells:show;
-  border-collapse:collapse; 
+  border-collapse:collapse;
 }
 
 table.coverage thead {
@@ -148,7 +124,7 @@ table.coverage tbody td {
   border-bottom:#d6d3ce 1px solid;
 }
 
-table.coverage tbody tr:hover { 
+table.coverage tbody tr:hover {
   background: #f0f0d0 !important;
 }
 

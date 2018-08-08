@@ -1,23 +1,24 @@
 ---
 ---
-self.addEventListener('install', function(e) { 
-  
-  {% assign name = site.github.project_title | replace: "flyve-mdm-", "" %} 
-    
+
+self.addEventListener('install', (e) => {
+
+  {% assign name = site.github.project_title | replace: "flyve-mdm-", "" %}
+
   var CACHE_NAME = '{{ site.data.config.cache_version }}'
 
-  caches.keys().then(function(cacheNames) {
+  caches.keys().then((cacheNames) => {
     return Promise.all(
-      cacheNames.map(function(cacheName) {
+      cacheNames.map((cacheName) => {
         if(cacheName != CACHE_NAME) {
           return caches.delete(cacheName)
         }
       })
     )
   })
-  
+
   e.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
+    caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll([
         '{{ site.baseurl }}/',
         '{{ site.baseurl }}/?homescreen=1',
@@ -41,10 +42,10 @@ self.addEventListener('install', function(e) {
   )
 })
 
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', (event) => {
   console.log(event.request.url)
   event.respondWith(
-    caches.match(event.request).then(function(response) {
+    caches.match(event.request).then((response) => {
       return response || fetch(event.request)
     })
   )

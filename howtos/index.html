@@ -5,55 +5,65 @@ layout: container
 <h2>How tos</h2>
 
 {% assign articles = site.posts %}
+
 {% for article in articles %}
-   {% if article.howtos %}
-        {% unless article.category %}
-            <div class="article-wiki">
-                <h3>
-                    <a class="post-link" href="{{ article.url | absolute_url }}">{{ article.title | escape }}</a>
-                    <p>
-                        {{ article.description }}
-                    </p>
-                </h3>
-            </div>
-        {% endunless %}
-    {% endif %}
+  {% if article.howtos %}
+    {% unless article.category %}
+      <div class="article-wiki">
+        <h3>
+          <a class="post-link" href="{{ article.url | absolute_url }}">
+            {{ article.title | escape }}
+          </a>
+          <p>
+            {{ article.description }}
+          </p>
+        </h3>
+      </div>
+    {% endunless %}
+  {% endif %}
 {% endfor %}
 
-
 <div class="article-wiki">
-    <h3>User Documentation</h3>
-        {% for post in site.categories.user %}
+  <h3>User Documentation</h3>
+    {% for post in site.categories.user %}
+      <h4>
+        <a class="post-link" href="{{ post.url | absolute_url }}">
+          {{ post.title | escape }}
+        </a>
+        <p>
+          {{ post.description }}
+        </p>
+      </h4>
+    {% endfor %}
+    <ul>
+      <li>
+        <h3>Docker Environment for Web MDM Dashboard</h3>
+      </li>
+      <ul>
+        {% for post in site.categories.docker %}
+          <li>
             <h4>
-                <a class="post-link" href="{{ post.url | absolute_url }}">{{ post.title | escape }}</a>
-                <p>
-                    {{ post.description }}
-                </p>
+              <a class="post-link" href="{{ post.url | absolute_url }}">
+                {{ post.title | escape }}
+              </a>
+              <p>
+                {{ post.description }}
+              </p>
             </h4>
+          </li>
         {% endfor %}
-        <ul>
-            <li><h3>Docker Environment for Web MDM Dashboard</h3></li>
-            <ul>
-              {% for post in site.categories.docker %}
-                <li>
-                    <h4>
-                        <a class="post-link" href="{{ post.url | absolute_url }}">{{ post.title | escape }}</a>
-                        <p>
-                            {{ post.description }}
-                        </p>
-                    </h4>
-                </li>
-              {% endfor %}
-            </ul>
-        </ul>
+      </ul>
+    </ul>
 
-    <h3>Want to Contribute?</h3>
-        {% for post in site.categories.contributing %}
-            <h4>
-                <a class="post-link" href="{{ post.url | absolute_url }}">{{ post.title | escape }}</a>
-                <p>
-                    {{ post.description }}
-                </p>
-            </h4>
-        {% endfor %}
+  <h3>Want to Contribute?</h3>
+    {% for post in site.categories.contributing %}
+      <h4>
+        <a class="post-link" href="{{ post.url | absolute_url }}">
+          {{ post.title | escape }}
+        </a>
+        <p>
+          {{ post.description }}
+        </p>
+      </h4>
+    {% endfor %}
 </div>
