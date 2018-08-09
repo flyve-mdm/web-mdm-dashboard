@@ -99,7 +99,7 @@ describe('SignIn', () => {
     cy.screenshot('login_password', {capture: 'viewport'})
     cy.get('.win-textbox')
       .type('12345678')
-      .type('{enter}')
+    cy.get('.btn--primary').click()
     cy.get('.empty-message').should('be.visible')
     cy.screenshot('home_noData', {capture: 'viewport'})
   })
