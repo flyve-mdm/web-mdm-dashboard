@@ -1,7 +1,11 @@
 files:
   ignore:
-    - 'sass/vendor/**/*.*' 
-    - 'css/jazzy.scss' 
+    - 'sass/vendor/**/*.*'
+    - 'css/jazzy.scss'
     - 'css/syntax.css'
-    - 'css/highlight.scss' 
+    - 'css/highlight.scss'
     - 'node_modules/**'
+rules:
+  class-name-format:
+    - 1
+    - convention: strictbem
