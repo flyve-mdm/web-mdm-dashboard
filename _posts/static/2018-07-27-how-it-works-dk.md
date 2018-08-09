@@ -20,7 +20,7 @@ This container has the necessary dependencies to start the project in develop.
 
 - Components:
 
-<table class="zebra-style">
+<table class="zebra-table">
   <tbody>
   <tr>	   
      <th>Component</th>
@@ -53,7 +53,7 @@ This container has installed the necessary dependencies to build and execute the
 
 - Components:
 
-<table class="zebra-style">
+<table class="zebra-table">
   <tbody>
   <tr>	   
      <th>Component</th>
@@ -82,7 +82,7 @@ This environment has a network defined to link the service containers. This netw
 
 We must verify the services running in these ports:
 
-<table class="zebra-style">
+<table class="zebra-table">
   <tbody>
   <tr>	   
      <th>Port</th>

@@ -1,0 +1,23 @@
+header {
+  .navbar-nav {
+
+    img {
+      vertical-align: middle;
+      width: 50px;
+    }
+  }
+
+  @media (max-width: 1084px) {
+    .logo {
+      height: 30px;
+      margin-top: -1.5px;
+    }
+  }
+
+  @media (min-width: 1084px) {
+    .logo {
+      height: 50px;
+      margin-top: -11px;
+    }
+  }
+}
