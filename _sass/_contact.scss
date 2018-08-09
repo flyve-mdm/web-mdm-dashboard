@@ -1,13 +1,10 @@
 .contact-page {
-  .social {
-    text-align: center;
 
-    img {
-      margin: 0 20px;
-    }
+  img {
+    width: 30px;
   }
 
-  .row {
+  .contact-page__row {
     text-align: center;
 
     a {
@@ -15,7 +12,11 @@
     }
   }
 
-  img {
-    width: 30px;
+  .contact-page__row--social {
+    text-align: center;
+
+    img {
+      margin: 0 20px;
+    }
   }
 }
