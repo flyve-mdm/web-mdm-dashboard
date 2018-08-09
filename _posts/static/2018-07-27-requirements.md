@@ -17,7 +17,7 @@ category: docker
 
 It's necesary to have installed the following components with the recommended version:
 
-<table class="zebra-style">
+<table class="zebra-table">
   <tr>	   
      <th>Component</th>
      <th>Recommended Version</th>
