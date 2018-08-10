@@ -5,6 +5,7 @@
   }
 
   .contact-page__row {
+    overflow: auto;
     text-align: center;
 
     a {
@@ -13,8 +14,6 @@
   }
 
   .contact-page__row--social {
-    text-align: center;
-
     img {
       margin: 0 20px;
     }
