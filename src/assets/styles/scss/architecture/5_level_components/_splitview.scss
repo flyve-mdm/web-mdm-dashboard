@@ -97,9 +97,9 @@ $color-fonts-hover: $splitview-color-fonts-hover;
         }
 
         &.--end {
-          align-items: end;
-          -webkit-box-align: end;
-          -ms-flex-align: end;
+          align-items: baseline;
+          -webkit-box-align: baseline;
+          -ms-flex-align: baseline;
           -webkit-align-items: left;
         }
 
@@ -114,7 +114,7 @@ $color-fonts-hover: $splitview-color-fonts-hover;
           -ms-preferred-size: 0;
           -webkit-flex-basis: 0;
         }
-  
+
         .splitview-wrapped-navbar-wrapped-bottom__section {
           flex-grow: 0;
           -ms-flex-positive: 0;
@@ -127,20 +127,20 @@ $color-fonts-hover: $splitview-color-fonts-hover;
           > div {
             height: 40px;
             text-align: center;
-            
+
             > a {
-              cursor: pointer;            
+              cursor: pointer;
               font-size: $splitview-icon-size;
               color: $color-fonts;
-  
+
               @extend %normalize-anchor;
-              
+
               @include transition(all, .2s, ease);
-              
+
               &:hover {
                 color: $color-fonts-hover;
               }
-  
+
               &:active {
                 text-shadow: 1px 1px 1px darken($color-2-primary, 30);
               }
@@ -154,13 +154,13 @@ $color-fonts-hover: $splitview-color-fonts-hover;
               text-align: left;
 
               span {
-                cursor: pointer;           
+                cursor: pointer;
                 color: $color-fonts;
                 white-space: nowrap;
                 overflow: hidden;
 
                 @include transition(all, .1s, linear);
-                
+
                 &:hover {
                   color: $color-fonts-hover;
                 }
