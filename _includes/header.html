@@ -1,21 +1,7 @@
 <header class="site-header" role="banner">
   <div class="wrapper">
     <nav class="navbar navbar-default">
-      <div class="navbar-global theme-default">
-        <div class="container">
-          <div class="navbar-header">
-            <a href="{{ site.url }}{{ site.baseurl }}/" class="navbar-brand">
-              <img
-                src="{{ 'images/typo.png' | absolute_url }}"
-                height="23"
-                alt="Flyve MDM"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="navbar-local color-accent theme-dark">
+      <div class="navbar-global navbar-default">
         <div class="container">
           <div class="navbar-header">
             <button
@@ -27,9 +13,30 @@
               <span class="sr-only">Toggle navigation</span>
               <i class="glyph glyph-hamburger"></i>
             </button>
-            <a href="{{ '/' | absolute_url }}" class="navbar-brand">
-              <img src="{{ 'images/logo.png' | absolute_url }}" alt="Home" class="logo"/>
-            </a>
+
+            <div class="navbar__logo">
+              <a
+                href="https://flyve-mdm.com/"
+                class="navbar__logo--first"
+              >
+                <img
+                  src="{{ 'images/typo.png' | absolute_url }}"
+                  alt="Flyve MDM"
+                />
+              </a>
+
+              <div class="navbar__separator"></div>
+
+              <a
+                href="{{ '/' | absolute_url }}"
+                class="navbar__logo--second"
+              >
+                <img
+                  src="{{ 'images/logo2.png' | absolute_url }}"
+                  alt="Home"
+                />
+              </a>
+            </div>
           </div>
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
