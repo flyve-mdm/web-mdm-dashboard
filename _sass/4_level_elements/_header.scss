@@ -1,23 +1,49 @@
 header {
-  .navbar-nav {
+  border-bottom: 1px solid #3e3e3e4d;
 
+  .navbar-nav {
     img {
       vertical-align: middle;
       width: 50px;
     }
   }
 
-  @media (max-width: 1084px) {
-    .logo {
-      height: 30px;
-      margin-top: -1.5px;
+  .navbar__logo {
+    display: inline-block;
+    padding: 10px 0;
+
+    .navbar__logo--first {
+      margin-right: 18px;
+
+      img {
+        height: 23px;
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .navbar__logo--second {
+      margin: 0 18px;
+
+      img {
+        height: 30px;
+        margin-top: -2px;
+      }
     }
   }
 
-  @media (min-width: 1084px) {
-    .logo {
-      height: 50px;
-      margin-top: -11px;
+  .navbar__separator {
+    display: inline-block;
+
+    &::after {
+      content: '|';
+      display: inline-block;
+      font-size: 24px;
+      font-weight: normal;
+      position: absolute;
+      top: 2px;
     }
   }
 }
