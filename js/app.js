@@ -147,6 +147,15 @@ $(() => {
   }())
 
 
+  // Dropdown sub-menu
+  $('ul.dropdown-menu [data-toggle=dropdown]').on('click', (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    $(this).parent().siblings().removeClass('open')
+    $(this).parent().toggleClass('open')
+  })
+
+
   // Tooltips
   $('[data-toggle="tooltip"]').tooltip({
     // Override Bootsrap's default template with one that does not have arrow
