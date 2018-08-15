@@ -2,73 +2,68 @@
 layout: container
 ---
 
-<h2>How tos</h2>
-
 {% assign articles = site.posts %}
 
-{% for article in articles %}
-  {% if article.howtos %}
-    {% unless article.category %}
-      <div class="article-wiki">
-        <h3>
-          <a class="post-link" href="{{ article.url | absolute_url }}">
-            {{ article.title | escape }}
-          </a>
-          <p>
-            {{ article.description }}
-          </p>
-        </h3>
-      </div>
-    {% endunless %}
-  {% endif %}
-{% endfor %}
+<div class="row">
+  <div class="col-md-6">
+    <a class="btn btn-lightweight no-outline navigation-btn">Index</a>
 
-<div class="article-wiki">
-  <h3>User Documentation</h3>
-  <ul>
-    {% for post in site.categories.user %}
-      <li>
-        <h4>
-          <a class="post-link" href="{{ post.url | absolute_url }}">
-            {{ post.title | escape }}
-          </a>
-          <p>
-            {{ post.description }}
-          </p>
-        </h4>
+    <ul role="navigation" id="sidenav-small" class="howtos-sidebar nav side-navigation side-navigation-small">
+      <button type="button" class="close" data-dismiss="side-navigation" aria-label="close">
+        <i class="glyph glyph-cancel"></i>
+      </button>
+
+      <li class="side-nav-c2">
+        <a data-toggle="collapse" data-parent="#sidenav-small" href="#the-national" aria-expanded="true" aria-controls="#the-national">
+          User Documentation <i class="glyph glyph-chevron-down-2"></i>
+        </a>
+        <ul class="nav collapse in" id="the-national">
+          {% for post in site.categories.user %}
+            <li>
+              <a href="{{ post.url | absolute_url }}">
+                {{ post.title | escape }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
       </li>
-    {% endfor %}
-  </ul>
 
-  <h3>Docker Environment for Web MDM Dashboard</h3>
-  <ul>
-    {% for post in site.categories.docker %}
-      <li>
-        <h4>
-          <a class="post-link" href="{{ post.url | absolute_url }}">
-            {{ post.title | escape }}
-          </a>
-          <p>
-            {{ post.description }}
-          </p>
-        </h4>
+      <li class="side-nav-c2">
+        <a data-toggle="collapse" data-parent="#sidenav-small" href="#the-national" aria-expanded="true" aria-controls="#the-national">
+          Docker of the Web MDM Dashboard <i class="glyph glyph-chevron-down-2"></i>
+        </a>
+        <ul class="nav collapse in" id="the-national">
+          {% for post in site.categories.docker %}
+            <li>
+              <a href="{{ post.url | absolute_url }}">
+                {{ post.title | escape }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
       </li>
-    {% endfor %}
-  </ul>
 
-  <h3>Want to Contribute?</h3>
-    <ul>
-      {% for post in site.categories.contributing %}
-        <li>
-          <h4>
-            <a class="post-link" href="{{ post.url | absolute_url }}">
-              {{ post.title | escape }}
-            </a>
-            <p>
-              {{ post.description }}
-            </p>
-          </h4>
-        </li>
-      {% endfor %}
+      <li class="side-nav-c2">
+        <a data-toggle="collapse" data-parent="#sidenav-small" href="#the-national" aria-expanded="true" aria-controls="#the-national">
+          Want to Contribute? <i class="glyph glyph-chevron-down-2"></i>
+        </a>
+        <ul class="nav collapse in" id="the-national">
+          {% for post in site.categories.contributing %}
+            <li>
+              <a href="{{ post.url | absolute_url }}">
+                {{ post.title | escape }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
     </ul>
+  </div>
+  <div class="col-md-18 navigation-section">
+      <article class="main-content">
+        <section>
+        </section>
+      </article>
+    </div>
+  </div>
 </div>
