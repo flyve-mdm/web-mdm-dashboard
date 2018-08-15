@@ -66,12 +66,12 @@ references:
         until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
         yarn test:cypress
 
-  sonarwhal_test: &sonarwhal_test
+  webhint_test: &webhint_test
     run:
-      name: Run sonarwhal tests
+      name: Run webhint tests
       command: |
         until grep -m 1 'Compiled successfully!' ../yarn.log ; do true; done
-        yarn test:sonarwhal
+        yarn test:webhint
 
   validate_html: &validate_html
     run:
@@ -203,7 +203,7 @@ jobs:
       - *start_server
       - *unit_test
       - *end_to_end_test
-      - *sonarwhal_test
+      - *webhint_test
       - *restore_build_cache
       - *validate_html
       - *store_screenshots

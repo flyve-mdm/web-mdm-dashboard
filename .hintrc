@@ -8,12 +8,12 @@
   "formatters": [
     "codeframe"
   ],
-  "rules": {
+  "hints": {
     "disown-opener": "error",
     "highest-available-document-mode": "error",
     "html-checker": "error",
     "http-cache": "warning",
     "http-compression": "warning"
   },
-  "rulesTimeout": 120000
+  "hintsTimeout": 120000
 }
