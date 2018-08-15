@@ -7,12 +7,12 @@ Here is placed the bash script required to build, test and deploy the app.
 ### On develop and feature branch
 
 - Build: install dependencies, configure, pull and push Transifex translations
-- Test: install dependencies, start server in background, run unit, end to end, sonarwhal tests, validate html.
+- Test: install dependencies, start server in background, run unit, end to end, webhint tests, validate html.
 
 ### On release branch
 
 - Build: install dependencies, configure, pull and push Transifex translations
-- Test: install dependencies, start server in background, run unit, end to end, sonarwhal tests, validate html.
+- Test: install dependencies, start server in background, run unit, end to end, webhint tests, validate html.
 - Screenshots: install dependencies, configure git, create screenshots
 - Documentation: install dependencies, configure git, create documentation
 - Coverage: install dependencies, configure git, create code coverage
