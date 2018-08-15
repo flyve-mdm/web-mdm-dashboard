@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: howtos
 howtos: true
 published: true
 title: Join our Community!
