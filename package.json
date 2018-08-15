@@ -51,7 +51,7 @@
     "winjs": "^4.4.3"
   },
   "devDependencies": {
-    "@sonarwhal/formatter-codeframe": "^2.0.4",
+    "@sonarwhal/formatter-codeframe": "^3.0.0",
     "@sonarwhal/rule-disown-opener": "^3.0.5",
     "@sonarwhal/rule-highest-available-document-mode": "^3.0.4",
     "@sonarwhal/rule-html-checker": "^4.0.0",
