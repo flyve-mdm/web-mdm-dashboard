@@ -6,64 +6,13 @@ layout: container
 
 <div class="row">
   <div class="col-md-6">
-    <a class="btn btn-lightweight no-outline navigation-btn">Index</a>
-
-    <ul role="navigation" id="sidenav-small" class="howtos-sidebar nav side-navigation side-navigation-small">
-      <button type="button" class="close" data-dismiss="side-navigation" aria-label="close">
-        <i class="glyph glyph-cancel"></i>
-      </button>
-
-      <li class="side-nav-c2">
-        <a data-toggle="collapse" data-parent="#sidenav-small" href="#the-national" aria-expanded="true" aria-controls="#the-national">
-          User Documentation <i class="glyph glyph-chevron-down-2"></i>
-        </a>
-        <ul class="nav collapse in" id="the-national">
-          {% for post in site.categories.user %}
-            <li>
-              <a href="{{ post.url | absolute_url }}">
-                {{ post.title | escape }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </li>
-
-      <li class="side-nav-c2">
-        <a data-toggle="collapse" data-parent="#sidenav-small" href="#the-national" aria-expanded="true" aria-controls="#the-national">
-          Docker of the Web MDM Dashboard <i class="glyph glyph-chevron-down-2"></i>
-        </a>
-        <ul class="nav collapse in" id="the-national">
-          {% for post in site.categories.docker %}
-            <li>
-              <a href="{{ post.url | absolute_url }}">
-                {{ post.title | escape }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </li>
-
-      <li class="side-nav-c2">
-        <a data-toggle="collapse" data-parent="#sidenav-small" href="#the-national" aria-expanded="true" aria-controls="#the-national">
-          Want to Contribute? <i class="glyph glyph-chevron-down-2"></i>
-        </a>
-        <ul class="nav collapse in" id="the-national">
-          {% for post in site.categories.contributing %}
-            <li>
-              <a href="{{ post.url | absolute_url }}">
-                {{ post.title | escape }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      </li>
-    </ul>
+    {% include howtos-sidebar.html %}
   </div>
   <div class="col-md-18 navigation-section">
-      <article class="main-content">
-        <section>
-        </section>
-      </article>
+    <div class="empty-message">
+      <h3>
+        No article selected
+      </h3>
     </div>
   </div>
 </div>

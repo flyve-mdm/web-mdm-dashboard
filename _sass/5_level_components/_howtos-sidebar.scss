@@ -1,4 +1,8 @@
 .howtos-sidebar {
+  &.side-navigation-small {
+    margin-top: 45px;
+  }
+
   .glyph-chevron-down-2 {
     font-size: 6px;
     line-height: 12px;
