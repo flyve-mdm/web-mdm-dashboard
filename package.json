@@ -56,7 +56,7 @@
     "@sonarwhal/rule-highest-available-document-mode": "^3.0.4",
     "@sonarwhal/rule-html-checker": "^4.0.0",
     "@sonarwhal/rule-http-cache": "^3.1.2",
-    "@sonarwhal/rule-http-compression": "^4.0.4",
+    "@sonarwhal/rule-http-compression": "^5.0.0",
     "conventional-github-releaser": "^3.1.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
