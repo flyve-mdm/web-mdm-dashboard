@@ -1,11 +1,10 @@
 .howtos-sidebar {
-  height: 80%;
-  overflow: auto;
-
   &.side-navigation-small {
     margin-top: 45px;
 
     &.affix {
+      height: 80%;
+      overflow: auto;
       top: 55px;
     }
   }
