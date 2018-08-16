@@ -184,4 +184,18 @@ $(() => {
       $(this).addClass('active')
     }
   })
+
+  // Howtos header
+  $('.howtos-sidebar').affix({
+    offset: {
+      top: 32,
+    },
+  })
+
+  // Site header
+  $('.site-header').affix({
+    offset: {
+      top: 16,
+    },
+  })
 })
