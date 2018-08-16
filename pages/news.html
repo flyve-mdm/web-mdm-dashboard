@@ -5,18 +5,26 @@ layout: page
 <div class="container">
   <h1>News post</h1>
 
-  <ul class="post-list">
+  <ul class="news">
     {% for post in site.posts %}
       {% if post.howtos != true %}
         <li>
           {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-          <span class="post-meta">{{ post.date | date: date_format }}</span>
 
-          <h2>
-            <a class="post-link" href="{{ post.url | absolute_url }}">
+          <h3>
+            <a href="{{ post.url | absolute_url }}">
               {{ post.title | escape }}
             </a>
-          </h2>
+          </h3>
+
+          <span>
+            {{ post.date | date: date_format }}
+          </span>
+
+          <p>
+            {{ post.content | strip_html | truncatewords: 70 }}
+          </p>
+
         </li>
       {% endif %}
     {% endfor %}
