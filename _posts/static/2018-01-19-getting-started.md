@@ -17,7 +17,7 @@ The New Generation of the Web Dashboard presents a brand new design.
 
 In this article you will learn how to
 
-* [Create an Account](#ca)
+* [Sign in](#si)
 * [Enroll an Agent](#ea)
 * [Create a fleet](#cf)
 * [Upload files and applications for deployment](#afd)
@@ -26,19 +26,9 @@ In this article you will learn how to
 * [Delete an Agent](#da)
 * [Our Policies](#op)
 
-## <a name="ca"></a>Create Account
+## <a name="si"></a>Sign in
 
-To create an account you only require an email address and fill the form and validate the captcha, then you'll receive an email to validate your account.
-
-<div>
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/create-account.png?raw=true" alt="New Account form" />
-
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/email.jpg?raw=true" alt="Sign in" />
-</div>
-
-Once this is done, Congratulations you are part of Flyve MDM!
-
-##### You can now Login and take full control of your IT infrastructure!
+Using the same credential from your GLPI instance, you can login and take full control of your IT infrastructure
 
 <img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/dashboard.png?raw=true" alt="Dashboard" width="900px"/>
 
