@@ -19,3 +19,143 @@
     }
   }
 }
+
+.options {
+
+  border-bottom: 1px solid $black;
+  padding-bottom: 10px;
+
+}
+
+// ICON'S TRANSITION
+.img-pop {
+
+  transition: .2s ease-in-out;
+
+  // INCREASES THE SIZE OF THE ICONS ON HOVER
+  &:hover {
+
+    @include box-shadow(0 0 5px $gray);
+    transform: scale(1.1);
+  }
+
+}
+
+//CONTACT BANNER
+
+img {
+
+  &.img-contact-banner {
+
+    float: left;
+
+  }
+}
+
+//IMAGE BREAKPOINTS
+
+@media (min-width: 768px) {
+
+  img {
+
+    &.img-contact-banner {
+
+      max-width: 80%;
+      margin-left: 50px;
+
+    }
+  }
+
+}
+
+@media (min-width: 1024px) {
+
+  img {
+
+    &.img-contact-banner {
+
+      max-width: 60%;
+      margin-left: 120px;
+
+    }
+  }
+
+}
+
+
+.contact-header {
+
+  margin: 0;
+  padding: 0;
+  background-color: $lightgray4;
+  box-sizing: border-box;
+
+}
+
+.contact-banner-text {
+
+  position: relative;
+  min-height: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+
+@media (max-width: 1024px) {
+
+  .contact-header {
+
+   blockquote {
+
+     margin-bottom: 15px;
+
+   }
+
+  }
+
+
+}
+
+
+//COMPLEMENTARY INFO CARDS
+
+.contact-page__row {
+
+  &contact-page__row--social {
+
+    margin-top: 0;
+
+  }
+
+}
+
+.contact-page__row {
+
+  margin-top: 50px;
+
+}
+
+.info-cards {
+
+  background-color: $lightgray3;
+
+}
+
+@media (min-width: 768px) {
+
+  .info-cards {
+
+    width: 33.33333%;
+    height: 253px;
+
+  }
+
+}
+
+.card-header {
+
+  color: $white;
+  background-color: $theme-secondary;
+  margin-bottom: 10px;
+
+}
