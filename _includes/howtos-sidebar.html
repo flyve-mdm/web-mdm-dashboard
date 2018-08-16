@@ -15,11 +15,13 @@
     </a>
     <ul class="nav collapse in" id="user-documentation">
       {% for post in site.categories.user %}
-        <li>
-          <a href="{{ post.url | absolute_url }}">
-            {{ post.title | escape }}
-          </a>
-        </li>
+        {% if post.howtos == true %}
+          <li>
+            <a href="{{ post.url | absolute_url }}">
+              {{ post.title | escape }}
+            </a>
+          </li>
+        {% endif %}
       {% endfor %}
     </ul>
   </li>
@@ -30,11 +32,13 @@
     </a>
     <ul class="nav collapse in" id="docker">
       {% for post in site.categories.docker %}
-        <li>
-          <a href="{{ post.url | absolute_url }}">
-            {{ post.title | escape }}
-          </a>
-        </li>
+        {% if post.howtos == true %}
+          <li>
+            <a href="{{ post.url | absolute_url }}">
+              {{ post.title | escape }}
+            </a>
+          </li>
+        {% endif %}
       {% endfor %}
     </ul>
   </li>
@@ -45,11 +49,13 @@
     </a>
     <ul class="nav collapse in" id="contribute">
       {% for post in site.categories.contributing %}
-        <li>
-          <a href="{{ post.url | absolute_url }}">
-            {{ post.title | escape }}
-          </a>
-        </li>
+        {% if post.howtos == true %}
+          <li>
+            <a href="{{ post.url | absolute_url }}">
+              {{ post.title | escape }}
+            </a>
+          </li>
+        {% endif %}
       {% endfor %}
     </ul>
   </li>
