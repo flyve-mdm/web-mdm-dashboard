@@ -6,13 +6,13 @@ header {
     }
   }
 
-  .navbar {
-    border-bottom: 1px solid $neutral-tertiary;
-  }
-
-  .affix {
+  &.site-header {
     width: 100%;
     z-index: 100;
+  }
+
+  .navbar {
+    border-bottom: 1px solid $neutral-tertiary;
   }
 
   .navbar__logo {
