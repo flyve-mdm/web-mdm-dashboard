@@ -34,6 +34,16 @@
     <link rel="stylesheet" href="{{ 'css/codeDocumentation.css' | absolute_url }}" />
   {% endif %}
 
+  <!-- fontawesome brand icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+<!--
+  <link rel="stylesheet" href="{{ "/css/brands.min.css" | absolute_url }}">
+  <link rel="stylesheet" href="{{ "/css/fontawesome.min.css" | absolute_url }}"> -->
+
+
   <link rel="stylesheet" href="{{ "/css/flyve-mdm.min.css" | absolute_url }}">
   <link rel="stylesheet" href="{{ "/css/main.css" | absolute_url }}">
   <link rel="stylesheet" href="{{ 'css/syntax.css' | absolute_url }}" />
@@ -58,7 +68,7 @@
   <meta name="apple-mobile-web-app-title" content="{{name}}">
 
   {% if jekyll.environment == 'production' and site.google_analytics %}
-  {% include google-analytics.html %}
+    {% include google-analytics.html %}
   {% endif %}
   <script src="{{ "/js/jquery.min.js" | absolute_url }}"></script>
   <script
