@@ -1,13 +1,11 @@
 .upvote-bar {
-  float: right;
-  margin-top: 24px;
-
   .reddit {
     display: inline-block;
   }
 
   .hacker-news {
     display: inline-block;
-    top: 0;
+    position: relative;
+    top: -1px;
   }
 }

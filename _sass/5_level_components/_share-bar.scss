@@ -1,0 +1,130 @@
+.share-bar {
+  .btn {
+    background-color: #ffffff;
+    min-width: 36px;
+
+    i {
+      color: #ffffff;
+    }
+  }
+
+  .share-bar__facebook {
+    i {
+      color: #3b5998;
+    }
+
+    &:hover {
+      background-color: #3b5998;
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
+
+  // Twitter button
+  .share-bar__twitter {
+    i {
+      color: #55acee;
+    }
+
+    &:hover {
+      background-color: #55acee;
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
+
+  // Google-PLus button
+  .share-bar__google {
+    i {
+      color: #dd4b39;
+    }
+
+    &:hover {
+      background-color: #dd4b39;
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
+
+  // Pinterest button
+  .share-bar__pinterest {
+    i {
+      color: #cb2027;
+    }
+
+    &:hover {
+      background-color: #cb2027;
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
+
+  // Tumblr button
+  .share-bar__tumblr {
+    i {
+      color: #32506d;
+    }
+
+    &:hover {
+      background-color: #32506d;
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
+
+
+  // Reddit button
+  .share-bar__reddit {
+    i {
+      color: #ff4500;
+    }
+
+    &:hover {
+      background-color: #ff4500;
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
+
+  // LinkedIn button
+  .share-bar__linkedin {
+    i {
+      color: #007bb5;
+    }
+
+    &:hover {
+      background-color: #007bb5;
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
+
+  // Email button
+  .share-bar__email {
+    i {
+      color: #444444;
+    }
+
+    &:hover {
+      background-color: #444444;
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
+}
