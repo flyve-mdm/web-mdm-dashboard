@@ -15,7 +15,7 @@
     </a>
     <ul class="nav collapse in" id="user-documentation">
       {% for post in site.categories.user %}
-        {% if post.howtos == true %}
+        {% if post.layout == 'howtos' %}
           <li>
             <a href="{{ post.url | absolute_url }}">
               {{ post.title | escape }}
@@ -32,7 +32,7 @@
     </a>
     <ul class="nav collapse in" id="docker">
       {% for post in site.categories.docker %}
-        {% if post.howtos == true %}
+        {% if post.layout == 'howtos' %}
           <li>
             <a href="{{ post.url | absolute_url }}">
               {{ post.title | escape }}
@@ -49,7 +49,7 @@
     </a>
     <ul class="nav collapse in" id="contribute">
       {% for post in site.categories.contributing %}
-        {% if post.howtos == true %}
+        {% if post.layout == 'howtos' %}
           <li>
             <a href="{{ post.url | absolute_url }}">
               {{ post.title | escape }}

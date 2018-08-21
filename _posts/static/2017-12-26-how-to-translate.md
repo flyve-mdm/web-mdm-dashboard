@@ -1,6 +1,5 @@
 ---
 layout: howtos
-howtos: true
 published: true
 title: Contribute Translating
 permalink: howtos/contribute-translating

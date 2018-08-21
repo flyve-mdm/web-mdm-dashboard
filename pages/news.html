@@ -7,7 +7,7 @@ layout: page
 
   <ul class="news">
     {% for post in site.posts %}
-      {% if post.howtos != true %}
+      {% if post.layout == 'news' %}
         <li>
           {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
 

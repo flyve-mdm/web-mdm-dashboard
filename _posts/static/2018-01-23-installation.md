@@ -1,6 +1,5 @@
 ---
 layout: howtos
-howtos: true
 published: true
 title: Installation
 permalink: howtos/installation

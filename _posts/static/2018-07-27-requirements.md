@@ -1,6 +1,5 @@
 ---
 layout: howtos
-howtos: true
 published: true
 title: Previous Requirements
 permalink: howtos/requirements
