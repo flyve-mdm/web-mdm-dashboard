@@ -1,6 +1,5 @@
 ---
 layout: howtos
-howtos: true
 published: true
 title: How to use
 permalink: howtos/how-to-use-dk

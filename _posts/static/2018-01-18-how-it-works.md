@@ -1,6 +1,5 @@
 ---
 layout: howtos
-howtos: true
 published: true
 title: How it works
 permalink: howtos/how-it-works

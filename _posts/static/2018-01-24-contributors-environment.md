@@ -1,6 +1,5 @@
 ---
 layout: howtos
-howtos: true
 published: true
 title: Contributors Environment
 permalink: howtos/contributors

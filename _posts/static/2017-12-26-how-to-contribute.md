@@ -1,6 +1,5 @@
 ---
 layout: howtos
-howtos: true
 published: true
 title: Join our Community!
 permalink: howtos/contribute

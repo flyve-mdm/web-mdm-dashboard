@@ -1,6 +1,5 @@
 ---
 layout: howtos
-howtos: true
 published: true
 title: Getting started
 permalink: howtos/getting-started
