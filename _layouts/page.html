@@ -4,7 +4,7 @@ layout: default
 
 <div class="sub-header">
   <div class="container">
-    {% if page.namePage != "products" %}
+    {% if page.permalink != "projects" %}
       {% assign name = site.github.project_title | replace: "flyve-mdm-", "" %}
       {% assign name = name | replace: "-", " " %}
       <span class="sub-header__text-primary">
