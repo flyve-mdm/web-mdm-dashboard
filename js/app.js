@@ -148,7 +148,7 @@ $(() => {
 
 
   // Dropdown sub-menu
-  $('ul.dropdown-menu [data-toggle=dropdown]').on('click', (event) => {
+  $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function toggleDropdownMenu(event) {
     event.preventDefault()
     event.stopPropagation()
     $(this).parent().siblings().removeClass('open')
