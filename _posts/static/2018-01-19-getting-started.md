@@ -6,13 +6,10 @@ permalink: howtos/getting-started
 description: Welcome to Flyve MDM
 category: user
 ---
-# Flyve MDM Web Dashboard
 
 The New Generation of the Web Dashboard presents a brand new design.
 
 <img src="{{ '/images/picto-information.png' | absolute_url }}" alt="Important!" height="16px"/> You must have previously installed the [Flyve MDM plugin for GLPI](http://flyvemdm-doc.readthedocs.io/en/latest/installation/index.html) and in the devices the [MDM Agent for Android](http://flyve.org/android-mdm-agent/howtos/installation).
-
-## Index
 
 In this article you will learn how to
 
@@ -29,7 +26,7 @@ In this article you will learn how to
 
 Using the same credential from your GLPI instance, you can login and take full control of your IT infrastructure
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/dashboard.png?raw=true" alt="Dashboard" width="900px"/>
+<img src="{{ '/images/posts/sign-in.gif' | absolute_url }}" alt="Signing in" width="300px"/>
 
 ## <a name="ea"></a>Enrolling Agents
 
@@ -40,13 +37,13 @@ In order to manage the agents, you must invite the user of the device:
 * Write the email of the user whose device you'll control
 * Save
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/new-invitation.png?raw=true" alt="Invitation" />
+<img src="{{ '/images/posts/new-invitation.png' | absolute_url }}" alt="Invitation" width="700px"/>
 
 Automatically, the user will receive an invitation in his email account and the invitation will be displayed on the left side in the dashboard.
 
 The Invitations can have one of the following status:
 
-* Pending: when the invitation haven't been used for enrollment.
+* Pending: when the invitation hasn't been used for enrollment.
 * Done: when the invitation had been used.
 
 Please note that the users must have installed in the devices the Android or iOS MDM Agent, see these links for more information:
@@ -67,7 +64,7 @@ Every new enrolled device will have assigned the "not managed fleet" by default.
 * Add the policies your fleet requires
 * Save
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/new-fleet.png?raw=true" alt="New Fleet" />
+<img src="{{ '/images/posts/new-fleet.png' | absolute_url }}" alt="New Fleet" width="700px"/>
 
 ##### Once you [assign the devices](#main) to the Fleet, all the policies will be immediately applied!
 
@@ -79,7 +76,7 @@ To Deploy applications on your fleets they must be added first on their respecti
 * Click on "+" button
 * Select the application your fleet requires
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/add-app.png?raw=true" alt="Add application" />
+<img src="{{ '/images/posts/add-app.png' | absolute_url }}" alt="Add application" />
 
 The same procedures applies to the Files.
 
@@ -87,11 +84,11 @@ The same procedures applies to the Files.
 * Click on "+" button
 * Select the file your fleet requires
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/filse-saved.png?raw=true" alt="Add file" />
+<img src="{{ '/images/posts/file-saved.png' | absolute_url }}" alt="Add file" />
 
 ##### Once this is done you will be able to use them with the Deploy policy on the fleets.
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/deploy.png?raw=true" alt="Deploy app & file" />
+<img src="{{ '/images/posts/deploy.png' | absolute_url }}" alt="Deploy app & file" width="600px" />
 
 For this:
 
@@ -109,25 +106,31 @@ You can assign the device to a Fleet or rename it.
 * Click on the pencil Icon
 * Save changes
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/main-device.gif?raw=true" alt="Main" />
+<img src="{{ '/images/posts/main-devices.png' | absolute_url }}" alt="Main" />
 
 ### System report
 
 Get a report of both software and hardware information.
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/system-report.png?raw=true" alt="Device System report" />
+<img src="{{ '/images/posts/system-report.png' | absolute_url }}" alt="Device System report" />
 
 ### Applications
 
-Show the information of the applications installed
+Show the information of the applications installed.
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/device-apps.png?raw=true" alt="Device applications" />
+<img src="{{ '/images/posts/device-apps.png' | absolute_url }}" alt="Device applications" />
+
+### Policies
+
+Apply policies specifically to a single device.
+
+<img src="{{ '/images/posts/device-policies.png' | absolute_url }}" alt="Main" />
 
 ### Geolocation
 
 Show the current location of the device.
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/geolocate.png?raw=true" alt="Device Geolocation" />
+<img src="{{ '/images/posts/geolocate.png' | absolute_url }}" alt="Device Geolocation" />
 
 ### Danger Zone
 
@@ -137,7 +140,7 @@ Show the current location of the device.
 * <a name="da"></a>Delete Device: force the deletion of the device from database, the policies will be unapplied, however files and applications already deployed won't be removed, as the MDM Agent app.
 * Wipe: erase all data on the device.
 
-<img src="https://github.com/Naylin15/Screenshots/blob/master/web-dashboard/danger-zone.png?raw=true" alt="Danger zone" />
+<img src="{{ '/images/posts/danger-zone.png' | absolute_url }}" alt="Danger zone" />
 
 ## <a name="op"></a>Our Policies
 
@@ -236,7 +239,7 @@ If the MDM Agent does not have the system privileges it will require the confirm
    Values:
 
    * Unspecified: no complexity specified.
-   * Something: 
+   * Something: requires a password but without a specific requirement.
    * Numeric: numbers only.
    * Alphabetic: letters only.
    * Alphanumeric: numbers and letters.
