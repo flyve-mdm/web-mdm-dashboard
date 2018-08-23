@@ -7,17 +7,13 @@ description: Get it now
 category: user
 ---
 
-## First of all
-
 The Web MDM Dashboard works in conjuction with [Flyve MDM plugin](http://flyve.org/glpi-plugin/) for GLPI.
 
-The plugin must be already installed in your GLPI instance, as they provide features to the Dashboard. For more information, check the [Installation article](http://flyve.org/glpi-plugin/howtos/installation-wizard) of Flyve MDM plugin for GLPI, there your'll find instructions and links that will help you to make a successful installation of GLPI + Flyve MDM.
+The plugin must be already installed in your GLPI instance, as they provide features to the Dashboard. For more information, check the [documentation](https://flyvemdm-doc.readthedocs.io/en/latest/) of Flyve MDM plugin for GLPI, there your'll find instructions and links that will help you to make a successful installation of GLPI + Flyve MDM.
 
 ### Compatibility Matrix
 
-<br>
-
-<table>
+<table class="zebra-table">
     <tr>
         <th style="width:200px">GLPI</th>
         <td style="width:100px">9.1.x</td>
@@ -44,8 +40,23 @@ You can download it with any of these methods:
 1. Using Git, clone the repo:
 
 ```console
-    git clone https://github.com/flyve-mdm/web-mdm-dashboard.git
+git clone https://github.com/flyve-mdm/web-mdm-dashboard.git
 ```
+
+## Configure the Dashboard
+
+* Go to public/config.example.js
+* Rename the file to config.js
+* Add the url of your GLPI API, where indicated, you'll also see the following settings too:
+  * Optional:
+    * bugsnag: your url to your bugsnag link, for catching bugs
+  * Deprecated:
+    * Plugin token, used to chack if demo plugin is enabled to display create account option
+    * Demo token, used by demo plugin to create new accounts
+
+<img src="{{ 'images/picto-information.png' | absolute_url }}" alt="Good to know!" height="16"> You can find the GLPI API url in Setup>General>API
+
+<img src="{{ 'images/posts/api-dashboard.png' | absolute_url }}" alt="GLPI">
 
 ## Install Dependencies
 
@@ -57,26 +68,11 @@ The following commands can be used either with npm or yarn
     npm install
 ```
 
-## Configure the Dashboard
-
-* Go to public/config.example.json
-* Rename the file to config.json
-* Add the url of your GLPI API, where indicated, you'll also see the following settings too:
-  * Optional:
-    * bugsnag: your url to your bugsnag link, for catching bugs
-  * Deprecated:
-    * Plugin token, used to chack if demo plugin is enabled to display create account option
-    * Demo token, used by demo plugin to create new accounts
-
-<img src="{{ 'images/picto-information.png' | absolute_url }}" alt="Good to know!" height="16"> You can find the GLPI API url in Setup>General>API
-
-![GLPI](https://raw.githubusercontent.com/Naylin15/Screenshots/master/dashboard-legacy/api-legacy-dashboard.png)
-
 * For building, use one of the following commands depending of the package manager you prefer:
 
 ```console
-     npm run-script build
-     yarn build
+   npm run-script build
+   yarn build
 ```
 
 * Check that all tests pass
@@ -91,4 +87,4 @@ The following commands can be used either with npm or yarn
     npm start
 ```
 
-It will open a new window with a test server localhost:3000.
+It will open a new tab with a test server localhost:3000.
