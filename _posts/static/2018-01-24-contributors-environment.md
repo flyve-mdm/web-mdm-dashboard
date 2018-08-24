@@ -13,6 +13,6 @@ Add this information where indicated in config.json file:
 
 * GLPI Api Rest:
 
-> https://dev.flyve.org/glpi/apirest.php
+```https://dev.flyve.org/glpi/apirest.php```
 
 Once all this is set, you can create an account to Sign In to Flyve MDM Web Dashboard.
