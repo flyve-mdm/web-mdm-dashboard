@@ -7,9 +7,7 @@ description: Useful commands
 category: docker
 ---
 
-## Commands
-
-In this article we show you how to use the environment and how to execute the commands of Nodejs and YARN in your environment.
+In this article we'll show you how to use the environment and how to execute the commands of Nodejs and YARN in your environment.
 
 ### Index
 

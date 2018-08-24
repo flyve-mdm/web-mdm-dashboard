@@ -7,8 +7,6 @@ description: Container's specifications
 category: docker
 ---
 
-## Docker Environment for Web MDM Dashboard
-
 Docker is a tool that allows us to create an environment based in containers and work with several dependencies linked together.
 
 ### Containers

@@ -7,13 +7,6 @@ description: For every Docker Environment
 category: docker
 ---
 
-## Index
-
-- [Requirements](#requirements)
-- [Operating System](#operating-system)
-
-## Requirements
-
 It's necesary to have installed the following components with the recommended version:
 
 <table class="zebra-table">
@@ -36,9 +29,9 @@ It's necesary to have installed the following components with the recommended ve
 
 For more information, see the [compatibility table in the official web of Docker](https://docs.docker.com/compose/compose-file/compose-versioning/#compatibility-matrix).
 
-## Operating System
+### Operating System
 
-The Docker Environments were tested in the following operating systems:
+The Docker Environment was tested in the following operating systems:
 
 - **Linux**:
   - Ubuntu 16.04
