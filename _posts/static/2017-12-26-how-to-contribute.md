@@ -8,9 +8,9 @@ category: contributing
 date: 2017-12-28
 ---
 
-# Getting started
+Welcome to our ever growing community! 
 
-Welcome to our ever growing community! We are more than happy to accept external contributions to the project in the form of feedback, [translations](http://flyve.org/web-mdm-dashboard/howtos/contribute-translating), bug reports and even better, pull requests!
+We are more than happy to accept external contributions to the project in the form of feedback, [translations](http://flyve.org/web-mdm-dashboard/howtos/contribute-translating), bug reports and even better, pull requests!
 
 Here you'll learn everything you must know to start contributing in any of the Flyve MDM projects.
 
