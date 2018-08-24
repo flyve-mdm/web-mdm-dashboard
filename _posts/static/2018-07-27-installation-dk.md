@@ -7,9 +7,7 @@ description: Building and configuring the environment
 category: docker
 ---
 
-## Get the Web MDM Dashboard
-
-To start with the installation process, we must get the [Web MDM Dashboard](https://github.com/flyve-mdm/web-mdm-dashboard) from its source.
+To start with the installation process, we must download the [Web MDM Dashboard](https://github.com/flyve-mdm/web-mdm-dashboard) from its source.
 
 - Using git, clone the repo: ```git clone https://github.com/flyve-mdm/web-mdm-dashboard.git```
 - [Download the project from GitHub](https://github.com/flyve-mdm/web-mdm-dashboard/archive/develop.zip)
