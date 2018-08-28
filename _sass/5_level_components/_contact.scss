@@ -74,7 +74,7 @@ img {
 
     &.img-contact-banner {
 
-      max-width: 60%;
+      max-width: 50%;
       margin-left: 120px;
 
     }
@@ -101,7 +101,7 @@ img {
 
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 2506px) {
 
   .contact-header {
 
@@ -156,6 +156,16 @@ img {
 
   color: $white;
   background-color: $theme-secondary;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
+
+}
+
+.card-header {
+
+  h3 {
+
+    padding-top: 2px;
+
+  }
 
 }
