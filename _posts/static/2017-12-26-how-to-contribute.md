@@ -8,7 +8,7 @@ category: contributing
 date: 2017-12-28
 ---
 
-Welcome to our ever growing community! 
+Welcome to our ever growing community!
 
 We are more than happy to accept external contributions to the project in the form of feedback, [translations](http://flyve.org/web-mdm-dashboard/howtos/contribute-translating), bug reports and even better, pull requests!
 
@@ -36,7 +36,7 @@ After installing git, run:
 ```terminal
 
 git config --global user.name "First.Name Last.Name"
-git config --global email "myemail@email.com"
+git config --global user.email "myemail@email.com"
 
 ```
 
