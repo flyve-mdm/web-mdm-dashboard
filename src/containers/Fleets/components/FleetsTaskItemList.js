@@ -221,13 +221,14 @@ class FleetsTaskItemList extends PureComponent {
    */
   renderMinMaxVersion = () => {
     const renderComponent = []
-
+    const systemPrivilegies = this.props.data['PluginFlyvemdmPolicy.is_android_system'] === 1 ? I18n.t('fleets.system_privileges') : ''
+    const tooltipTop = this.props.data['PluginFlyvemdmPolicy.is_android_system'] === 1 ? '-54px' : '-32px'
     if (this.props.data['PluginFlyvemdmPolicy.android_min_version'] !== 0) {
       renderComponent.push(
         <React.Fragment key={`${this.props.data['PluginFlyvemdmPolicy.id']}_android_min`}>
           <span className="badge android">
             Android
-            <span className="tooltip">
+            <span className="tooltip" style={{ top: tooltipTop }}>
               {
                 `> ${this.props.data['PluginFlyvemdmPolicy.android_min_version']} `
               }
@@ -236,6 +237,11 @@ class FleetsTaskItemList extends PureComponent {
                   ? `< ${this.props.data['PluginFlyvemdmPolicy.android_max_version']} `
                   : ''
               }
+              <div>
+                {
+                  systemPrivilegies
+                }
+              </div>
             </span>
           </span>
         </React.Fragment>,
