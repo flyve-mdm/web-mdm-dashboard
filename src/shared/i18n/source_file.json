@@ -253,7 +253,8 @@
     "not_found": "No Fleets yet!",
     "no_associated_devices": "No associated devices",
     "not_managed": "This fleet doesn't allow policies",
-    "devices_of": "Devices of"
+    "devices_of": "Devices of",
+    "system_privileges": "Requires system privileges"
   },
   "about": {
     "system_information": {
