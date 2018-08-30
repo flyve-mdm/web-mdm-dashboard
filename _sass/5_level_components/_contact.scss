@@ -27,6 +27,8 @@
 
 }
 
+//SHARE-BAR STYLE:
+
 // ICON'S TRANSITION
 .img-pop {
 
@@ -37,6 +39,46 @@
 
     @include box-shadow(0 0 5px $gray);
     transform: scale(1.1);
+  }
+
+}
+
+//SHARE-BAR SOCIAL NETWORK ICONS
+
+.share-bar {
+
+  .btn {
+
+    font-size: 45px;
+    &.btn-social{
+
+      font-size: 15px;
+
+    }
+
+  }
+
+}
+
+.btn-social {
+
+  font-size: 15px;
+  &:hover{
+
+    color: $white;
+
+
+  }
+
+}
+
+.fa-telegram {
+
+  :before{
+
+    content: "\f1d9";
+
+
   }
 
 }
