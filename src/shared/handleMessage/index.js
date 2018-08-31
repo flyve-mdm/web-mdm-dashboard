@@ -102,13 +102,34 @@ export default ({
         response.body = message.data[0][1] !== '' ? message.data[0][1] : message.statusText
         break
       case (message.status >= 400 && message.status < 500):
-        response.body = message.data[0][1]
-          ? Array.isArray(message.data[1])
-            ? message.data[1][0]
-              ? message.data[1][0].message
-              : message.statusText
-            : message.data[0][1]
-          : message.statusText
+        if (message.data) {
+          const messageData = Array.isArray(message.data[0]) ? message.data[0] : message.data
+
+          if (Array.isArray(messageData) && messageData[0]) {
+            if (messageData[0].message) {
+              response.body = messageData[0].message
+            } else if (Array.isArray(messageData[0]) && messageData[0][0].message) {
+              response.body = messageData[0][0].message
+            } else if (messageData[1]) {
+              if (Array.isArray(messageData[1]) && messageData[1][0].message) {
+                response.body = messageData[1][0].message
+              } else if (messageData[1].message) {
+                response.body = messageData[1].message
+              } else {
+                response.body = messageData[1]
+              }
+            } else if (messageData[0].message) {
+              response.body = messageData[0].message
+            } else {
+              response.body = messageData[0]
+            }
+          } else {
+            response.body = messageData
+          }
+        } else {
+          response.body = message.statusText
+        }
+
         if (displayErrorPage) {
           pushError(history.location.pathname, message.status, customErrorRoute)
         }
