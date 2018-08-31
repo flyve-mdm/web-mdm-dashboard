@@ -11,7 +11,7 @@
   "hints": {
     "disown-opener": "error",
     "highest-available-document-mode": "error",
-    "html-checker": "error",
+    "html-checker": "warning",
     "http-cache": "warning",
     "http-compression": "warning"
   },
