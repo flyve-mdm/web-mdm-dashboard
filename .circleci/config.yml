@@ -2,11 +2,9 @@ version: 2
 
 references:
   # Configuration
-  workspace: &workspace
-    ~/flyve
+  workspace: &workspace  ~/flyve
 
-  docker_image: &docker_image
-    node:8.11
+  docker_image: &docker_image node:8.11
 
   container_config: &container_config
     docker:
@@ -120,14 +118,11 @@ references:
       command: zip -r ./build.zip build/*
 
   # Handle cache
-  node_key: &node_key
-    yarn-dependencies-v1-{{ checksum "yarn.lock" }}
+  node_key: &node_key yarn-dependencies-v1-{{ checksum "yarn.lock" }}
 
-  build_key: &build_key
-    build-app-v1-{{ .Environment.CIRCLE_WORKFLOW_ID }}
+  build_key: &build_key build-app-v1-{{ .Environment.CIRCLE_WORKFLOW_ID }}
 
-  screenshots_key: &screenshots_key
-    screenshots-app-v1-{{ .Environment.CIRCLE_WORKFLOW_ID }}
+  screenshots_key: &screenshots_key screenshots-app-v1-{{ .Environment.CIRCLE_WORKFLOW_ID }}
 
   store_node_cache: &store_node_cache
     save_cache:
@@ -256,18 +251,10 @@ workflows:
   version: 2
   build-test-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - master
+      - build
       - test:
           requires:
             - build
-          filters:
-            branches:
-              ignore:
-                - master
       - screenshots:
           requires:
             - test
