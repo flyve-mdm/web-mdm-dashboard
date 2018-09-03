@@ -27,4 +27,4 @@ git add docs -f
 # Create commit, NOTICE: this commit is not sent
 git commit -m "ci(docs): generate **docs** for version ${GIT_TAG}"
 # Copy documentation to gh-pages branch
-yarn gh-pages-docs -m "ci(docs): generate documentation with jsdoc for version ${GIT_TAG}"
+yarn gh-pages-docs --dest $DOCUMENTATION_DESTINATION -m "ci(docs): generate documentation with jsdoc for version ${GIT_TAG}"
