@@ -151,13 +151,13 @@ Also run the following command to sign all commits by default:
 
 <img src="{{ '/images/picto-warning.png' | absolute_url }}" alt="Watch out:" height="16px"> Make sure that the email address in git, the Primary email in your GitHub account and the one in your GPG key are all the same.
 
-In case you wan to add an email account to your GPG, follow this guide [Associating an email account with your GPG key](https://help.github.com/articles/associating-an-email-with-your-gpg-key/)
+In case you want to add an email account to your GPG, follow this guide [Associating an email account with your GPG key](https://help.github.com/articles/associating-an-email-with-your-gpg-key/)
 
 After adding your email account, remember to update your GPG on keybase, to do that, follow these steps:
 
 1. Sign in from a browser to your Keybase Account.
 2. Next to your key ID, click on edit and select _Update my key (I edited it elsewhere)_.
-3. Run again ```gpg –armor –export B344E73DA95715F4```
+3. Run again ```gpg –-armor –-export B344E73DA95715F4```
 4. Copy the output and paste it where indicated in keybase.
 
 ## Now that everything is set up
