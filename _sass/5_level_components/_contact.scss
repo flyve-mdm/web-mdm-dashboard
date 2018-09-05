@@ -13,10 +13,20 @@
     }
   }
 
+  .contact-page__row2 {
+    overflow: auto;
+    text-align: center;
+
+    a {
+      margin-top: 15px;
+    }
+  }
+
   .contact-page__row--social {
     img {
       margin: 0 20px;
     }
+
   }
 }
 
@@ -49,6 +59,8 @@
 
   .btn {
 
+    width: 79px;
+    height: 103px;
     font-size: 45px;
     &.btn-social{
 
@@ -171,7 +183,7 @@ img {
 
 }
 
-.contact-page__row {
+.contact-page__row2 {
 
   margin-top: 50px;
 
@@ -180,6 +192,12 @@ img {
 .info-cards {
 
   background-color: $lightgray3;
+  padding-bottom: 10px;
+  p {
+
+    margin-bottom: 10px;
+
+  }
 
 }
 
@@ -198,7 +216,7 @@ img {
 
   color: $white;
   background-color: $theme-secondary;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 
 }
 
