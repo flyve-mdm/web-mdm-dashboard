@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Generate CHANGELOG.md to increment version
-yarn release
 # Get version number from package.json
 export GIT_TAG=$(jq -r ".version" package.json)
 # Copy screenshots to gh-pages branch
