@@ -266,7 +266,6 @@ workflows:
             branches:
               only:
                 - master
-                - develop
       - documentation:
           requires:
             - test
