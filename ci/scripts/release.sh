@@ -50,13 +50,6 @@ if [[ $GITHUB_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version
 
   fi
 
-  # Update develop branch
-  git fetch origin develop
-  git checkout develop
-  git clean -d -x -f
-  git merge $CIRCLE_BRANCH
-  git push origin develop
-
   # Update master branch
   git fetch origin master
   git checkout master
@@ -64,6 +57,11 @@ if [[ $GITHUB_COMMIT_MESSAGE != *"ci(release): generate CHANGELOG.md for version
   git merge $CIRCLE_BRANCH
   git push origin master
 
-  # Remove release branch
-  git push origin :$CIRCLE_BRANCH
+  # Update develop branch
+  git fetch origin develop
+  git checkout develop
+  git clean -d -x -f
+  git merge $CIRCLE_BRANCH
+  git push origin develop
+
 fi
