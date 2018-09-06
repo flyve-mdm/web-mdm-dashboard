@@ -92,6 +92,11 @@ references:
       name: Generate release
       command: source ci/scripts/release.sh
 
+  update_develop: &update_develop
+    run:
+      name: Update develop branch
+      command: source ci/scripts/update_develop.sh
+
   create_screenshots: &create_screenshots
     run:
       name: Generate screenshots
@@ -250,6 +255,7 @@ jobs:
       - *restore_build_cache
       - *zip_build
       - *create_release
+      - *update_develop
 
 workflows:
   version: 2
