@@ -14,11 +14,11 @@ if [[ $CIRCLE_BRANCH != "develop" ]]; then
   if [[ $GIT_OLD_TAG != "$IS_PRERELEASE" ]]; then
 
     PREFIX_PRERELEASE="$( cut -d '.' -f 1 <<< "$IS_PRERELEASE" )";
-    yarn release -m "ci(release): generate CHANGELOG.md for version %s" --prerelease "$PREFIX_PRERELEASE"
+    yarn release --skip.changelog=true --skip.tag=true -m "ci(release): generate CHANGELOG.md for version %s" --prerelease "$PREFIX_PRERELEASE"
 
   else
 
-    yarn release -m "ci(release): generate CHANGELOG.md for version %s"
+    yarn release --skip.changelog=true --skip.tag=true -m "ci(release): generate CHANGELOG.md for version %s"
 
   fi
 
