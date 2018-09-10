@@ -110,14 +110,14 @@ references:
       name: Generate documentation
       command: source ci/scripts/documentation.sh
       environment:
-        DOCUMENTATION_DESTINATION: development/coverage/{{ .Environment.CIRCLE_BRANCH }}
+        DOCUMENTATION_DESTINATION: development/code-documentation/
 
   create_coverage: &create_coverage
     run:
       name: Generate coverage
       command: source ci/scripts/coverage.sh
       environment:
-        COVERAGE_DESTINATION: development/code-documentation/{{ .Environment.CIRCLE_BRANCH }}
+        COVERAGE_DESTINATION: development/coverage/
 
   release_master: &release_master
     run:
