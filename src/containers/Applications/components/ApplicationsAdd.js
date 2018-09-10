@@ -117,7 +117,7 @@ export default class ApplicationsAdd extends PureComponent {
       try {
         const file = this.state.files[key]
         formData.append('file', file)
-        formData.append('uploadManifest', `{"input":{"name":"${this.state.files[0].name}","alias":"${this.state.input}"}}`)
+        formData.append('uploadManifest', `{"input":{"name":"${this.state.files[key].name}","alias":"${(this.state.input !== '' ? this.state.input : this.state.files[key].name)}"}}`)
         this.setState({
           isLoading: true,
         })
@@ -135,7 +135,6 @@ export default class ApplicationsAdd extends PureComponent {
         })
         this.props.changeAction('reload')
       } catch (error) {
-        console.log(error)
         this.props.toast.setNotification(this.props.handleMessage({
           type: 'alert',
           message: error,
