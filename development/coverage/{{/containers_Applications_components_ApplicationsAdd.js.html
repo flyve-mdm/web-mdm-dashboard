@@ -137,7 +137,7 @@ export default class ApplicationsAdd extends PureComponent {
       try {
         const file = this.state.files[key]
         formData.append('file', file)
-        formData.append('uploadManifest', `{"input":{"name":"${this.state.file.name}","alias":"${this.state.input}"} }`)
+        formData.append('uploadManifest', `{"input":{"name":"${this.state.files[key].name}","alias":"${(this.state.input !== '' ? this.state.input : this.state.files[key].name)}"} }`)
         this.setState({
           isLoading: true,
         })
