@@ -37,7 +37,7 @@ git add coverage -f
 # Create commit, NOTICE: this commit is not sent
 git commit -m "ci(docs): generate **coverage** for version ${GIT_TAG}"
 # Copy code coverage to gh-pages branch
-yarn gh-pages-coverage --dest $COVERAGE_DESTINATION -m "ci(docs): generate code coverage for version ${GIT_TAG}"
+yarn gh-pages-coverage --dest "${COVERAGE_DESTINATION}${CIRCLE_BRANCH}" -m "ci(docs): generate code coverage for version ${GIT_TAG}"
 
 # GITHUB_COMMIT_MESSAGE=$(git log --format=oneline -n 1 ${CIRCLE_SHA1})
 
