@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1536399112185" clover="3.2.0">
-  <project timestamp="1536399112186" name="All files">
-    <metrics statements="4319" coveredstatements="278" conditionals="2620" coveredconditionals="182" methods="1237" coveredmethods="75" elements="8176" coveredelements="535" complexity="0" loc="4319" ncloc="4319" packages="111" files="191" classes="191">
+<coverage generated="1536619444173" clover="3.2.0">
+  <project timestamp="1536619444174" name="All files">
+    <metrics statements="4319" coveredstatements="278" conditionals="2622" coveredconditionals="182" methods="1237" coveredmethods="75" elements="8178" coveredelements="535" complexity="0" loc="4319" ncloc="4319" packages="111" files="191" classes="191">
       <package name="src">
         <metrics statements="25" coveredstatements="0" conditionals="29" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/index.js">
@@ -1372,9 +1372,9 @@
         </file>
       </package>
       <package name="src.containers.Applications.components">
-        <metrics statements="265" coveredstatements="0" conditionals="113" coveredconditionals="0" methods="59" coveredmethods="0"/>
+        <metrics statements="265" coveredstatements="0" conditionals="115" coveredconditionals="0" methods="59" coveredmethods="0"/>
         <file name="ApplicationsAdd.js" path="/root/flyve/src/containers/Applications/components/ApplicationsAdd.js">
-          <metrics statements="40" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="13" coveredmethods="0"/>
+          <metrics statements="40" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="13" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
@@ -1399,7 +1399,7 @@
           <line num="117" count="0" type="stmt"/>
           <line num="118" count="0" type="stmt"/>
           <line num="119" count="0" type="stmt"/>
-          <line num="120" count="0" type="stmt"/>
+          <line num="120" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="121" count="0" type="stmt"/>
           <line num="124" count="0" type="stmt"/>
           <line num="128" count="0" type="stmt"/>
