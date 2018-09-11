@@ -43,8 +43,8 @@ import {
 import withAuthenticationLayout from 'hoc/withAuthenticationLayout'
 import withHandleMessages from 'hoc/withHandleMessages'
 import Loading from 'components/Loading'
-import AsyncPasswordFieldset from 'async/asyncPasswordFielset'
-import UsernameFieldset from './components/UsernameFieldset'
+import AsyncPasswordFieldset from './async/asyncPasswordFieldset'
+import AsyncUsernameFieldset from './async/asyncUsernameFieldset'
 import {
   changeInput,
   changePhase,
@@ -142,7 +142,7 @@ class SignIn extends PureComponent {
     let form
     if (this.state.phase === 1) {
       form = (
-        <UsernameFieldset
+        <AsyncUsernameFieldset
           {...this.props}
           username={this.state.username}
           changeInput={this.changeInput}
