@@ -25,12 +25,12 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/34</span>
+        <span class='fraction'>0/35</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/14</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -40,7 +40,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/22</span>
+        <span class='fraction'>0/23</span>
       </div>
     </div>
     <p class="quiet">
@@ -255,14 +255,7 @@ layout: coverage
 <a name='L204'></a><a href='#L204'>204</a>
 <a name='L205'></a><a href='#L205'>205</a>
 <a name='L206'></a><a href='#L206'>206</a>
-<a name='L207'></a><a href='#L207'>207</a>
-<a name='L208'></a><a href='#L208'>208</a>
-<a name='L209'></a><a href='#L209'>209</a>
-<a name='L210'></a><a href='#L210'>210</a>
-<a name='L211'></a><a href='#L211'>211</a>
-<a name='L212'></a><a href='#L212'>212</a>
-<a name='L213'></a><a href='#L213'>213</a>
-<a name='L214'></a><a href='#L214'>214</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L207'></a><a href='#L207'>207</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -418,17 +411,10 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -569,49 +555,41 @@ class SplitView extends PureComponent {<span class="cstat-no" title="statement n
                           alt="Flyve MDM Dashboard"
                           img={logo}
                           title={I18n.t('commons.dashboard')}
-                          disabled={this.props.expanded}
                         /&gt;
                         &lt;IconWithPopper
                           to={`${publicURL}/app/devices`}
                           iconName="deviceIcon"
                           title={I18n.t('commons.device')}
-                          disabled={this.props.expanded}
                         /&gt;
                         &lt;IconWithPopper
                           to={`${publicURL}/app/invitations`}
                           iconName="emailIcon"
                           title={I18n.t('commons.invitations')}
-                          disabled={this.props.expanded}
                         /&gt;
                         &lt;IconWithPopper
                           to={`${publicURL}/app/fleets`}
                           iconName="goToStartIcon"
                           title={I18n.t('commons.fleets')}
-                          disabled={this.props.expanded}
                         /&gt;
                         &lt;IconWithPopper
                           to={`${publicURL}/app/files`}
                           iconName="filesIcon"
                           title={I18n.t('commons.files')}
-                          disabled={this.props.expanded}
                         /&gt;
                         &lt;IconWithPopper
                           to={`${publicURL}/app/applications`}
                           iconName="switchAppsIcon"
                           title={I18n.t('commons.applications')}
-                          disabled={this.props.expanded}
                         /&gt;
                         &lt;IconWithPopper
                           to={`${publicURL}/app/users`}
                           iconName="peopleIcon"
                           title={I18n.t('commons.users')}
-                          disabled={this.props.expanded}
                         /&gt;
                         &lt;IconWithPopper
                           to={`${publicURL}/app/search`}
                           iconName="searchIcon"
                           title={I18n.t('commons.search_or_other')}
-                          disabled={this.props.expanded}
                         /&gt;
                       &lt;/section&gt;
                       &lt;section className="splitview-wrapped-navbar-wrapped-bottom__section"&gt;
@@ -619,19 +597,16 @@ class SplitView extends PureComponent {<span class="cstat-no" title="statement n
                           to={`${publicURL}/app/settings`}
                           iconName="settingsIcon"
                           title={I18n.t('commons.setting_flyve_mdm')}
-                          disabled={this.props.expanded}
                         /&gt;
                         &lt;IconWithPopper
                           to={`${publicURL}/app/about`}
                           iconName="contactInfoIcon"
                           title={I18n.t('commons.about_flyve_mdm')}
-                          disabled={this.props.expanded}
                         /&gt;
                         &lt;IconWithPopper
                           click={this.logout}
                           iconName="PowerButtonIcon"
                           title={I18n.t('commons.logout')}
-                          disabled={this.props.expanded}
                         /&gt;
                       &lt;/section&gt;
                     &lt;/div&gt;
@@ -641,7 +616,11 @@ class SplitView extends PureComponent {<span class="cstat-no" title="statement n
                   ? (
                     &lt;nav
                       className="splitview-wrapped__navbar"
-                      onCli<span class="fstat-no" title="function not covered" >ck</span>={()<span class="cstat-no" title="statement not covered" > =&gt; this.props.handleContrac</span>t()}
+                      onCli<span class="fstat-no" title="function not covered" >ck</span>={() =&gt; {
+<span class="cstat-no" title="statement not covered" >                        if (this.props.mode !== 'large') {</span>
+<span class="cstat-no" title="statement not covered" >                          this.props.handleContract</span>()
+                        }
+                      } }
                       r<span class="fstat-no" title="function not covered" >ef</span>={(nav<span class="cstat-no" title="statement not covered" >) =&gt; { this.splitview </span>= nav } }
                       role="presentation"
                     &gt;
@@ -694,7 +673,7 @@ export default SplitView
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Aug 03 2018 18:56:17 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 11 2018 20:54:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
