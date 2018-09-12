@@ -25,7 +25,7 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/16</span>
+        <span class='fraction'>0/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -35,12 +35,12 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/1</span>
+        <span class='fraction'>0/11</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/6</span>
       </div>
     </div>
     <p class="quiet">
@@ -119,11 +119,7 @@ layout: coverage
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,10 +148,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -191,7 +183,7 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -226,12 +218,8 @@ layout: coverage
  */
 &nbsp;
 /** import dependencies */
-import I18n <span class="cstat-no" title="statement not covered" >from 'shared/i18n'<span class="cstat-no" title="statement not covered" ></span></span>
-import EmptyMessage <span class="cstat-no" title="statement not covered" >from 'components/EmptyMessage'<span class="cstat-no" title="statement not covered" ></span></span>
-import ErrorPage <span class="cstat-no" title="statement not covered" >from 'components/ErrorPage'<span class="cstat-no" title="statement not covered" ></span></span>
-import UsersContent <span class="cstat-no" title="statement not covered" >from './components/UsersContent'<span class="cstat-no" title="statement not covered" ></span></span>
-import UsersEditOne <span class="cstat-no" title="statement not covered" >from './components/UsersEditOne'<span class="cstat-no" title="statement not covered" ></span></span>
-import UsersEdit <span class="cstat-no" title="statement not covered" >from './components/UsersEdit'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+import withAsyncComponent <span class="cstat-no" title="statement not covered" >from 'hoc/withAsyncComponent'<span class="cstat-no" title="statement not covered" ></span></span>
+import I18n <span class="cstat-no" title="statement not covered" >from 'shared/i18n'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
 &nbsp;
 /**
  * Represents all private routes from Users
@@ -241,31 +229,31 @@ import UsersEdit <span class="cstat-no" title="statement not covered" >from './c
 const routes = [{
   path: '/',
   name: I18n.t('commons.no_selection'),
-  component: EmptyMessage,
+  component: withAsyncComponent(() =&gt; import('components/EmptyMessage')),
   exact: true,
 },
 {
   path: '/error',
   name: I18n.t('commons.error'),
-  component: ErrorPage,
+  component: withAsyncComponent(() =&gt; import('components/ErrorPage')),
   exact: true,
 },
 {
   path: '/edit',
   name: I18n.t('commons.edit'),
-  component: UsersEdit,
+  component: withAsyncComponent(() =&gt; import('./components/UsersEdit')),
   exact: true,
 },
 {
   path: '/:id/edit',
   name: I18n.t('commons.edit_one'),
-  component: UsersEditOne,
+  component: withAsyncComponent(() =&gt; import('./components/UsersEditOne')),
   exact: true,
 },
 {
-  path: '/:id',<span class="cstat-no" title="statement not covered" ></span>
+  path: '/:id',<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
   name: I18n.t('commons.selected'),
-  component: UsersContent,
+  component: withAsyncComponent(() =&gt; import('.<span class="fstat-no" title="function not covered" >/c</span>ompo<span class="cstat-no" title="statement not covered" >nents/UsersContent')),<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
   exact: true,<span class="cstat-no" title="statement not covered" ></span>
 },
 ]
@@ -277,7 +265,7 @@ export default routes
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Sep 11 2018 20:54:34 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 12 2018 21:09:44 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

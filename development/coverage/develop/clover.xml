@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1536699275358" clover="3.2.0">
-  <project timestamp="1536699275358" name="All files">
-    <metrics statements="4319" coveredstatements="278" conditionals="2622" coveredconditionals="182" methods="1237" coveredmethods="75" elements="8178" coveredelements="535" complexity="0" loc="4319" ncloc="4319" packages="111" files="191" classes="191">
+<coverage generated="1536786584951" clover="3.2.0">
+  <project timestamp="1536786584952" name="All files">
+    <metrics statements="4279" coveredstatements="278" conditionals="2602" coveredconditionals="182" methods="1352" coveredmethods="75" elements="8233" coveredelements="535" complexity="0" loc="4279" ncloc="4279" packages="111" files="186" classes="186">
       <package name="src">
         <metrics statements="25" coveredstatements="0" conditionals="29" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/index.js">
@@ -37,7 +37,7 @@
         </file>
       </package>
       <package name="src.applications.AdminDashboard">
-        <metrics statements="26" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="23" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="25" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/applications/AdminDashboard/index.js">
           <metrics statements="11" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -53,26 +53,23 @@
           <line num="60" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/flyve/src/applications/AdminDashboard/routes.js">
-          <metrics statements="15" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="12" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="23" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="34" count="0" type="stmt"/>
-          <line num="35" count="0" type="stmt"/>
-          <line num="36" count="0" type="stmt"/>
-          <line num="37" count="0" type="stmt"/>
-          <line num="38" count="0" type="stmt"/>
-          <line num="39" count="0" type="stmt"/>
-          <line num="40" count="0" type="stmt"/>
-          <line num="41" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="73" count="0" type="stmt"/>
-          <line num="112" count="0" type="stmt"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="63" count="0" type="stmt"/>
+          <line num="65" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="77" count="0" type="stmt"/>
+          <line num="83" count="0" type="stmt"/>
+          <line num="89" count="0" type="stmt"/>
+          <line num="95" count="0" type="stmt"/>
+          <line num="101" count="0" type="stmt"/>
+          <line num="102" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.applications.RootApp">
-        <metrics statements="20" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="17" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="15" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/applications/RootApp/index.js">
           <metrics statements="10" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -87,69 +84,14 @@
           <line num="47" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/flyve/src/applications/RootApp/routes.js">
-          <metrics statements="10" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="7" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="13" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="34" count="0" type="stmt"/>
-          <line num="35" count="0" type="stmt"/>
-          <line num="36" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="43" count="0" type="stmt"/>
-          <line num="103" count="0" type="stmt"/>
-        </file>
-      </package>
-      <package name="src.async">
-        <metrics statements="28" coveredstatements="0" conditionals="28" coveredconditionals="0" methods="21" coveredmethods="0"/>
-        <file name="asyncAdminDashboard.js" path="/root/flyve/src/async/asyncAdminDashboard.js">
-          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="37" count="0" type="stmt"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="4"/>
           <line num="63" count="0" type="stmt"/>
-        </file>
-        <file name="asyncForgotPassword.js" path="/root/flyve/src/async/asyncForgotPassword.js">
-          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="37" count="0" type="stmt"/>
-          <line num="63" count="0" type="stmt"/>
-        </file>
-        <file name="asyncLogout.js" path="/root/flyve/src/async/asyncLogout.js">
-          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="37" count="0" type="stmt"/>
-          <line num="63" count="0" type="stmt"/>
-        </file>
-        <file name="asyncPasswordFielset.js" path="/root/flyve/src/async/asyncPasswordFielset.js">
-          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="37" count="0" type="stmt"/>
-          <line num="63" count="0" type="stmt"/>
-        </file>
-        <file name="asyncResetPassword.js" path="/root/flyve/src/async/asyncResetPassword.js">
-          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="37" count="0" type="stmt"/>
-          <line num="63" count="0" type="stmt"/>
-        </file>
-        <file name="asyncSignUp.js" path="/root/flyve/src/async/asyncSignUp.js">
-          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="37" count="0" type="stmt"/>
-          <line num="63" count="0" type="stmt"/>
-        </file>
-        <file name="asyncValidateAccount.js" path="/root/flyve/src/async/asyncValidateAccount.js">
-          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="37" count="0" type="stmt"/>
-          <line num="63" count="0" type="stmt"/>
+          <line num="64" count="0" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.components.Confirmation">
@@ -1013,7 +955,7 @@
         </file>
       </package>
       <package name="src.containers.About">
-        <metrics statements="20" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="21" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="19" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/containers/About/index.js">
           <metrics statements="9" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -1027,18 +969,19 @@
           <line num="63" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/flyve/src/containers/About/routes.js">
-          <metrics statements="11" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="12" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="17" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="34" count="0" type="stmt"/>
-          <line num="35" count="0" type="stmt"/>
-          <line num="36" count="0" type="stmt"/>
-          <line num="37" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="69" count="0" type="stmt"/>
-          <line num="90" count="0" type="stmt"/>
+          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="40" count="0" type="stmt"/>
+          <line num="46" count="0" type="stmt"/>
+          <line num="52" count="0" type="stmt"/>
+          <line num="58" count="0" type="stmt"/>
+          <line num="64" count="0" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
+          <line num="76" count="0" type="stmt"/>
+          <line num="82" count="0" type="stmt"/>
+          <line num="109" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.About.components.Contact">
@@ -1307,7 +1250,7 @@
         </file>
       </package>
       <package name="src.containers.Applications">
-        <metrics statements="56" coveredstatements="0" conditionals="39" coveredconditionals="0" methods="13" coveredmethods="0"/>
+        <metrics statements="54" coveredstatements="0" conditionals="39" coveredconditionals="0" methods="25" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/containers/Applications/index.js">
           <metrics statements="47" coveredstatements="0" conditionals="35" coveredconditionals="0" methods="12" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -1359,16 +1302,14 @@
           <line num="249" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/flyve/src/containers/Applications/routes.js">
-          <metrics statements="9" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="7" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="13" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="34" count="0" type="stmt"/>
-          <line num="35" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="67" count="0" type="stmt"/>
-          <line num="76" count="0" type="stmt"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="63" count="0" type="stmt"/>
+          <line num="65" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Applications.components">
@@ -1658,7 +1599,7 @@
         </file>
       </package>
       <package name="src.containers.Devices">
-        <metrics statements="56" coveredstatements="0" conditionals="39" coveredconditionals="0" methods="13" coveredmethods="0"/>
+        <metrics statements="53" coveredstatements="0" conditionals="39" coveredconditionals="0" methods="25" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/containers/Devices/index.js">
           <metrics statements="46" coveredstatements="0" conditionals="35" coveredconditionals="0" methods="12" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -1709,17 +1650,14 @@
           <line num="234" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/flyve/src/containers/Devices/routes.js">
-          <metrics statements="10" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="7" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="13" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="29" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="34" count="0" type="stmt"/>
-          <line num="35" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="42" count="0" type="stmt"/>
-          <line num="102" count="0" type="stmt"/>
+          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="62" count="0" type="stmt"/>
+          <line num="64" count="0" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Devices.components">
@@ -2307,7 +2245,7 @@
         </file>
       </package>
       <package name="src.containers.Files">
-        <metrics statements="56" coveredstatements="0" conditionals="34" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <metrics statements="54" coveredstatements="0" conditionals="34" coveredconditionals="0" methods="24" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/containers/Files/index.js">
           <metrics statements="47" coveredstatements="0" conditionals="30" coveredconditionals="0" methods="11" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -2359,16 +2297,14 @@
           <line num="226" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/flyve/src/containers/Files/routes.js">
-          <metrics statements="9" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="7" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="13" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="34" count="0" type="stmt"/>
-          <line num="35" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="67" count="0" type="stmt"/>
-          <line num="76" count="0" type="stmt"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="63" count="0" type="stmt"/>
+          <line num="65" count="0" type="stmt"/>
+          <line num="71" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Files.components">
@@ -2624,7 +2560,7 @@
         </file>
       </package>
       <package name="src.containers.Fleets">
-        <metrics statements="57" coveredstatements="0" conditionals="34" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <metrics statements="55" coveredstatements="0" conditionals="34" coveredconditionals="0" methods="24" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/containers/Fleets/index.js">
           <metrics statements="48" coveredstatements="0" conditionals="30" coveredconditionals="0" methods="11" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -2677,16 +2613,14 @@
           <line num="236" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/flyve/src/containers/Fleets/routes.js">
-          <metrics statements="9" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="7" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="13" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="34" count="0" type="stmt"/>
-          <line num="35" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="67" count="0" type="stmt"/>
-          <line num="77" count="0" type="stmt"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="63" count="0" type="stmt"/>
+          <line num="66" count="0" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
+          <line num="73" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Fleets.components">
@@ -3257,7 +3191,7 @@
         </file>
       </package>
       <package name="src.containers.Invitations">
-        <metrics statements="54" coveredstatements="0" conditionals="39" coveredconditionals="0" methods="13" coveredmethods="0"/>
+        <metrics statements="50" coveredstatements="0" conditionals="39" coveredconditionals="0" methods="21" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/containers/Invitations/index.js">
           <metrics statements="46" coveredstatements="0" conditionals="35" coveredconditionals="0" methods="12" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -3308,15 +3242,11 @@
           <line num="249" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/flyve/src/containers/Invitations/routes.js">
-          <metrics statements="8" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="9" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="34" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="41" count="0" type="stmt"/>
-          <line num="89" count="0" type="stmt"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="63" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Invitations.components">
@@ -3666,7 +3596,7 @@
         </file>
       </package>
       <package name="src.containers.Settings">
-        <metrics statements="19" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="20" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="17" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/containers/Settings/index.js">
           <metrics statements="9" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -3680,17 +3610,18 @@
           <line num="77" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/flyve/src/containers/Settings/routes.js">
-          <metrics statements="10" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="11" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="15" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="34" count="0" type="stmt"/>
-          <line num="35" count="0" type="stmt"/>
-          <line num="36" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="43" count="0" type="stmt"/>
-          <line num="109" count="0" type="stmt"/>
+          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="40" count="0" type="stmt"/>
+          <line num="46" count="0" type="stmt"/>
+          <line num="52" count="0" type="stmt"/>
+          <line num="58" count="0" type="stmt"/>
+          <line num="64" count="0" type="stmt"/>
+          <line num="70" count="0" type="stmt"/>
+          <line num="76" count="0" type="stmt"/>
+          <line num="103" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Settings.components.Display">
@@ -4118,6 +4049,23 @@
           <line num="183" count="0" type="stmt"/>
         </file>
       </package>
+      <package name="src.containers.SignIn.async">
+        <metrics statements="8" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <file name="asyncPasswordFieldset.js" path="/root/flyve/src/containers/SignIn/async/asyncPasswordFieldset.js">
+          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="63" count="0" type="stmt"/>
+        </file>
+        <file name="asyncUsernameFieldset.js" path="/root/flyve/src/containers/SignIn/async/asyncUsernameFieldset.js">
+          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="30" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="37" count="0" type="stmt"/>
+          <line num="63" count="0" type="stmt"/>
+        </file>
+      </package>
       <package name="src.containers.SignIn.components">
         <metrics statements="49" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="16" coveredmethods="0"/>
         <file name="PasswordFieldset.js" path="/root/flyve/src/containers/SignIn/components/PasswordFieldset.js">
@@ -4222,7 +4170,7 @@
         </file>
       </package>
       <package name="src.containers.Users">
-        <metrics statements="55" coveredstatements="0" conditionals="39" coveredconditionals="0" methods="13" coveredmethods="0"/>
+        <metrics statements="52" coveredstatements="0" conditionals="39" coveredconditionals="0" methods="23" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/containers/Users/index.js">
           <metrics statements="46" coveredstatements="0" conditionals="35" coveredconditionals="0" methods="12" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
@@ -4273,16 +4221,13 @@
           <line num="250" count="0" type="stmt"/>
         </file>
         <file name="routes.js" path="/root/flyve/src/containers/Users/routes.js">
-          <metrics statements="9" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <metrics statements="6" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="11" coveredmethods="0"/>
           <line num="1" count="0" type="stmt"/>
           <line num="30" count="0" type="stmt"/>
-          <line num="31" count="0" type="stmt"/>
-          <line num="32" count="0" type="stmt"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="34" count="0" type="stmt"/>
-          <line num="35" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="67" count="0" type="stmt"/>
-          <line num="70" count="0" type="stmt"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="63" count="0" type="stmt"/>
+          <line num="65" count="0" type="stmt"/>
+          <line num="66" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.containers.Users.components">
