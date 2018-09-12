@@ -27,12 +27,8 @@
  */
 
 /** import dependencies */
+import withAsyncComponent from 'hoc/withAsyncComponent'
 import I18n from 'shared/i18n'
-import EmptyMessage from 'components/EmptyMessage'
-import ErrorPage from 'components/ErrorPage'
-import DevicesContent from './components/ApplicationsContent'
-import ApplicationsAdd from './components/ApplicationsAdd'
-import ApplicationsEdit from './components/ApplicationsEdit'
 
 /**
  * Represents all routes from Applications section
@@ -42,37 +38,37 @@ import ApplicationsEdit from './components/ApplicationsEdit'
 const routes = [{
   path: '/',
   name: I18n.t('commons.no_selection'),
-  component: EmptyMessage,
+  component: withAsyncComponent(() => import('components/EmptyMessage')),
   exact: true,
 },
 {
   path: '/error',
   name: I18n.t('commons.error'),
-  component: ErrorPage,
+  component: withAsyncComponent(() => import('components/ErrorPage')),
   exact: true,
 },
 {
   path: '/add',
   name: I18n.t('commons.add'),
-  component: ApplicationsAdd,
+  component: withAsyncComponent(() => import('./components/ApplicationsAdd')),
   exact: true,
 },
 {
   path: '/edit',
   name: I18n.t('commons.edit'),
-  component: ApplicationsEdit,
+  component: withAsyncComponent(() => import('./components/ApplicationsEdit')),
   exact: true,
 },
 {
   path: '/:id/edit',
   name: I18n.t('commons.edit_one'),
-  component: ApplicationsEdit,
+  component: withAsyncComponent(() => import('./components/ApplicationsEdit')),
   exact: true,
 },
 {
   path: '/:id',
   name: I18n.t('commons.edit_one'),
-  component: DevicesContent,
+  component: withAsyncComponent(() => import('./components/ApplicationsContent')),
   exact: true,
 },
 ]
