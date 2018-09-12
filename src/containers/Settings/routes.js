@@ -27,13 +27,7 @@
  */
 
 /** import dependencies */
-import EmptyMessage from 'components/EmptyMessage'
-import Entity from './components/Entity'
-import Profiles from './components/Profiles'
-import Supervision from './components/Supervision'
-import Security from './components/Security'
-import Notifications from './components/Notifications'
-import Display from './components/Display'
+import withAsyncComponent from 'hoc/withAsyncComponent'
 
 /**
  * Represents all private routes from Settings
@@ -43,43 +37,43 @@ import Display from './components/Display'
 const routes = [{
   path: '/',
   name: 'commons.no_selection',
-  component: EmptyMessage,
+  component: withAsyncComponent(() => import('components/EmptyMessage')),
   exact: true,
 },
 {
   path: '/entity',
   name: 'commons.entity',
-  component: Entity,
+  component: withAsyncComponent(() => import('./components/Entity')),
   exact: true,
 },
 {
   path: '/profiles',
   name: 'commons.profiles',
-  component: Profiles,
+  component: withAsyncComponent(() => import('./components/Profiles')),
   exact: false,
 },
 {
   path: '/supervision',
   name: 'commons.supervision',
-  component: Supervision,
+  component: withAsyncComponent(() => import('./components/Supervision')),
   exact: false,
 },
 {
   path: '/security',
   name: 'commons.security',
-  component: Security,
+  component: withAsyncComponent(() => import('./components/Security')),
   exact: false,
 },
 {
   path: '/notifications',
   name: 'commons.notifications',
-  component: Notifications,
+  component: withAsyncComponent(() => import('./components/Notifications')),
   exact: false,
 },
 {
   path: '/display',
   name: 'commons.display',
-  component: Display,
+  component: withAsyncComponent(() => import('./components/Display')),
   exact: false,
 },
 ]
