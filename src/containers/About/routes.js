@@ -27,14 +27,7 @@
  */
 
 /** import dependencies */
-import EmptyMessage from 'components/EmptyMessage'
-import Overview from './components/Overview'
-import SystemInformation from './components/SystemInformation'
-import HelpCenter from './components/HelpCenter'
-import Contact from './components/Contact'
-import ReleaseNotes from './components/ReleaseNotes'
-import TermsOfUse from './components/TermsOfUse'
-import Licence from './components/License'
+import withAsyncComponent from 'hoc/withAsyncComponent'
 
 /**
  * Represents all private routes from About
@@ -44,49 +37,49 @@ import Licence from './components/License'
 const routes = [{
   path: '/',
   name: 'commons.no_selection',
-  component: EmptyMessage,
+  component: withAsyncComponent(() => import('components/EmptyMessage')),
   exact: true,
 },
 {
   path: '/overview',
   name: 'about.overview.title',
-  component: Overview,
+  component: withAsyncComponent(() => import('./components/Overview')),
   exact: true,
 },
 {
   path: '/system',
   name: 'about.system_information.title',
-  component: SystemInformation,
+  component: withAsyncComponent(() => import('./components/SystemInformation')),
   exact: false,
 },
 {
   path: '/help',
   name: 'about.help_center.title',
-  component: HelpCenter,
+  component: withAsyncComponent(() => import('./components/HelpCenter')),
   exact: false,
 },
 {
   path: '/contact',
   name: 'about.contact.title',
-  component: Contact,
+  component: withAsyncComponent(() => import('./components/Contact')),
   exact: false,
 },
 {
   path: '/release',
   name: 'about.release_notes.title',
-  component: ReleaseNotes,
+  component: withAsyncComponent(() => import('./components/ReleaseNotes')),
   exact: false,
 },
 {
   path: '/term',
   name: 'about.term_of_use.title',
-  component: TermsOfUse,
+  component: withAsyncComponent(() => import('./components/TermsOfUse')),
   exact: false,
 },
 {
   path: '/license',
   name: 'about.license.title',
-  component: Licence,
+  component: withAsyncComponent(() => import('./components/License')),
   exact: false,
 },
 ]
