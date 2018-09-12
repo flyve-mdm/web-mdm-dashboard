@@ -27,12 +27,8 @@
  */
 
 /** import dependencies */
+import withAsyncComponent from 'hoc/withAsyncComponent'
 import I18n from 'shared/i18n'
-import EmptyMessage from 'components/EmptyMessage'
-import ErrorPage from 'components/ErrorPage'
-import UsersContent from './components/UsersContent'
-import UsersEditOne from './components/UsersEditOne'
-import UsersEdit from './components/UsersEdit'
 
 /**
  * Represents all private routes from Users
@@ -42,31 +38,31 @@ import UsersEdit from './components/UsersEdit'
 const routes = [{
   path: '/',
   name: I18n.t('commons.no_selection'),
-  component: EmptyMessage,
+  component: withAsyncComponent(() => import('components/EmptyMessage')),
   exact: true,
 },
 {
   path: '/error',
   name: I18n.t('commons.error'),
-  component: ErrorPage,
+  component: withAsyncComponent(() => import('components/ErrorPage')),
   exact: true,
 },
 {
   path: '/edit',
   name: I18n.t('commons.edit'),
-  component: UsersEdit,
+  component: withAsyncComponent(() => import('./components/UsersEdit')),
   exact: true,
 },
 {
   path: '/:id/edit',
   name: I18n.t('commons.edit_one'),
-  component: UsersEditOne,
+  component: withAsyncComponent(() => import('./components/UsersEditOne')),
   exact: true,
 },
 {
   path: '/:id',
   name: I18n.t('commons.selected'),
-  component: UsersContent,
+  component: withAsyncComponent(() => import('./components/UsersContent')),
   exact: true,
 },
 ]
