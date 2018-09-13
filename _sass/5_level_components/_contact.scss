@@ -5,7 +5,7 @@
   }
 
   .contact-page__row {
-    overflow: auto;
+    //overflow: auto;
     text-align: center;
 
     a {
@@ -54,17 +54,36 @@
 }
 
 //SHARE-BAR SOCIAL NETWORK ICONS
+.fab {
+
+  margin-left: 12px;
+
+}
 
 .share-bar {
 
   .btn {
 
-    width: 79px;
+    width: 100px;
     height: 103px;
     font-size: 45px;
     &.btn-social{
 
       font-size: 15px;
+
+    }
+
+  }
+
+}
+
+.btn {
+
+  a {
+
+    &:hover {
+
+      text-decoration: none;
 
     }
 
@@ -129,7 +148,7 @@ img {
     &.img-contact-banner {
 
       max-width: 50%;
-      margin-left: 120px;
+      margin-left: 150px;
 
     }
   }
@@ -152,6 +171,36 @@ img {
   min-height: 1px;
   padding-left: 10px;
   padding-right: 10px;
+
+}
+
+//CONTACT HEADER BREAKPOINTS
+
+@media (min-width: 768px) {
+
+  .contact-header {
+
+    .col-md-12 {
+
+      margin-left: -30px;
+
+    }
+
+  }
+
+}
+
+@media (min-width: 1200px) {
+
+  .contact-header {
+
+    .col-md-12 {
+
+      margin-left: -50px;
+
+    }
+
+  }
 
 }
 
@@ -201,12 +250,23 @@ img {
 
 }
 
+@media (max-width: 540px) {
+
+  .info-cards {
+
+    margin-top: 7px;
+
+  }
+
+}
+
 @media (min-width: 768px) {
 
   .info-cards {
 
-    width: 33.33333%;
+    width: 32.4%;
     height: 253px;
+    margin: 3px;
 
   }
 
