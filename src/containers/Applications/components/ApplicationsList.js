@@ -228,29 +228,20 @@ export default class ApplicationsList extends PureComponent {
    * @param {object} eventObject
    */
   handleSelectionChanged = (eventObject) => {
-    const {
-      changeSelectedItems,
-      selectionMode,
-      history,
-    } = this.props
-    const { itemList } = this.state
-
     const listView = eventObject.currentTarget.winControl
     const index = listView.selection.getIndices()
     const itemSelected = []
 
     for (const item of index) {
-      itemSelected.push(itemList.getItem(item).data)
+      itemSelected.push(this.state.itemList.getItem(item).data)
     }
 
-    changeSelectedItems(itemSelected)
-
-    if (index.length === 1 && !selectionMode) {
-      history.push(`${publicURL}/app/applications/${itemSelected[0]['PluginFlyvemdmPackage.id']}`)
+    this.props.changeSelectedItems(itemSelected)
+    if (index.length === 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/applications/${itemSelected[0]['PluginFlyvemdmPackage.id']}`)
     }
-
-    if (index.length > 1 && !selectionMode) {
-      history.push(`${publicURL}/app/applications/edit/`)
+    if (index.length > 1 && !this.props.selectionMode) {
+      this.props.history.push(`${publicURL}/app/applications/edit/`)
     }
   }
 
