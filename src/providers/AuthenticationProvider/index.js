@@ -96,6 +96,8 @@ export class AuthenticationProvider extends PureComponent {
             this.setState(
               {
                 isLoading: false,
+                sessionToken: response.sessionToken,
+                currentUser: user,
               },
               () => {
                 resolve()
