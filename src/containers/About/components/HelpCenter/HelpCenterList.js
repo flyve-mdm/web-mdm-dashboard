@@ -87,11 +87,11 @@ class HelpCenterList extends PureComponent {
         isLoading: false,
       })
     } catch (error) {
-      this.props.handleMessage({
+      this.props.toast.setNotification(this.props.handleMessage({
         type: 'alert',
         message: error,
-        customErrorRoute: '/app/about/help/error',
-      })
+        displayErrorPage: false,
+      }))
       this.setState({
         isLoading: false,
       })
@@ -250,6 +250,7 @@ class HelpCenterList extends PureComponent {
 
 /** HelpCenterList propTypes */
 HelpCenterList.propTypes = {
+  toast: PropTypes.object.isRequired,
   handleMessage: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   glpi: PropTypes.object.isRequired,
