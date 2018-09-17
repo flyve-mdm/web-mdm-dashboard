@@ -611,6 +611,8 @@
     "creation": "Creation",
     "modification": "Modification",
     "serial": "Serial",
-    "uuid": "UUID"
+    "uuid": "UUID",
+    "AND": "AND",
+    "OR": "OR"
   }
 }
