@@ -195,6 +195,7 @@ class SearchEngine extends PureComponent {
       query,
       itemResults,
     } = this.state
+
     return (
       <ContentPane>
         <div style={{ margin: '0 10px' }}>

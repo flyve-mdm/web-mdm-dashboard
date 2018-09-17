@@ -58,6 +58,10 @@ class SearchQueryBuilder extends PureComponent {
             { name: 'under', label: I18n.t('commons.under') },
             { name: 'notunder', label: I18n.t('commons.not_under') },
           ]}
+          combinators={[
+            { name: 'AND', label: I18n.t('commons.AND') },
+            { name: 'OR', label: I18n.t('commons.OR') },
+          ]}
           onQueryChange={this.props.handleChangeQuery}
         />
       </div>
