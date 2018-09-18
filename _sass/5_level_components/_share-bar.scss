@@ -1,10 +1,21 @@
 .share-bar {
-  .btn {
-    background-color: $white;
-    min-width: 36px;
-
+  .share-bar__irc {
     i {
-      color: $white;
+      color: $irc;
+    }
+
+    &:hover {
+      background-color: $irc;
+    }
+  }
+
+  .share-bar__telegram {
+    i {
+      color: $telegram;
+    }
+
+    &:hover {
+      background-color: $telegram;
     }
   }
 
@@ -15,14 +26,9 @@
 
     &:hover {
       background-color: $facebook;
-
-      i {
-        color: $white;
-      }
     }
   }
 
-  // Twitter button
   .share-bar__twitter {
     i {
       color: $twitter;
@@ -30,14 +36,9 @@
 
     &:hover {
       background-color: $twitter;
-
-      i {
-        color: $white;
-      }
     }
   }
 
-  // Google-PLus button
   .share-bar__google {
     i {
       color: $google;
@@ -45,14 +46,9 @@
 
     &:hover {
       background-color: $google;
-
-      i {
-        color: $white;
-      }
     }
   }
 
-  // Pinterest button
   .share-bar__pinterest {
     i {
       color: $pinterest;
@@ -60,14 +56,9 @@
 
     &:hover {
       background-color: $pinterest;
-
-      i {
-        color: $white;
-      }
     }
   }
 
-  // Tumblr button
   .share-bar__tumblr {
     i {
       color: $tumblr;
@@ -75,15 +66,10 @@
 
     &:hover {
       background-color: $tumblr;
-
-      i {
-        color: $white;
-      }
     }
   }
 
 
-  // Reddit button
   .share-bar__reddit {
     i {
       color: $reddit;
@@ -91,14 +77,9 @@
 
     &:hover {
       background-color: $reddit;
-
-      i {
-        color: $white;
-      }
     }
   }
 
-  // LinkedIn button
   .share-bar__linkedin {
     i {
       color: $linkedin;
@@ -106,14 +87,9 @@
 
     &:hover {
       background-color: $linkedin;
-
-      i {
-        color: $white;
-      }
     }
   }
 
-  // Email button
   .share-bar__email {
     i {
       color: $email;
@@ -121,10 +97,26 @@
 
     &:hover {
       background-color: $email;
+    }
+  }
+
+  .btn {
+    background-color: $white;
+    min-width: 36px;
+    text-align: center;
+
+    &:hover {
+      color: $white;
 
       i {
         color: $white;
       }
+    }
+
+    span {
+      display: inline-block;
+      margin-top: 5px;
+      width: 80px;
     }
   }
 }
