@@ -3,18 +3,17 @@ layout: page
 permalink: contact
 ---
 
-<div class="row">
-  <div class="container">
-    <div class="col-md-12 text-center">
+<div class="container contact">
+  <div class="row">
+    <div class="col-sm-8 col-sm-push-16 text-center">
       <img
-        class="img-dashboard img-contact-banner"
+        class="contact__img"
         src="images/Flyvemdmlogo.png"
         alt="Flyve MDM"
-        style="padding: 30px"
       >
     </div>
 
-    <div class="col-md-12">
+    <div class="col-sm-16 col-sm-pull-8">
       <h2>Get in touch with Us at any time</h2>
 
       <p>
@@ -28,59 +27,61 @@ permalink: contact
       </p>
     </div>
   </div>
-</div>
 
-<div class="container contact-page">
-  <p>
-    <b>You can start with...</b>
-  </p>
+  <div class="row" style="padding: 38px">
+    <div class="col-md-6 col-sm-12 contact__card">
+      <i class="fas fa-4x fa-map-marker-alt"></i>
 
-  <div class="contact-page__row2">
-    <div class="col-md-8 col-sm-12 info-cards">
-      <div class="card-header">
-        <h3>Teclib' Address</h3>
-      </div>
+      <h4>
+        Teclib' Address
+      </h4>
 
       <a href="https://goo.gl/maps/qDijeVyCUwq" target="_blank">
-        <img class="img-pop" src="{{ '/images/Marker.png' | absolute_url }}" alt="Marker">
-
         <p>
-          <br/>
           08036 Barcelona
         </p>
       </a>
     </div>
 
-    <div class="col-md-8 col-sm-12 info-cards">
-      <div class="card-header">
-        <h3>Phone</h3>
-      </div>
+    <div class="col-md-6 col-sm-12 contact__card">
+      <i class="fas fa-4x fa-phone"></i>
+
+      <h4>Phone</h4>
 
       <a href="tel:+34512702140">
-        <img class="img-pop" src="{{ '/images/Phone.png' | absolute_url }}" alt="Phone"><br/>
         <p>
           +34 512 702 140
         </p>
       </a>
     </div>
 
-    <div class="col-md-8 col-sm-24 info-cards">
-      <div class="card-header">
-        <h3>Email</h3>
-      </div>
+    <div class="col-md-6 col-sm-12 contact__card">
+      <i class="far fa-4x fa-envelope"></i>
+
+      <h4>Email</h4>
 
       <a href="mailto:{{ site.email }}">
-        <img class="img-pop" src="{{ '/images/PaperPlane.png' | absolute_url }}" alt="PaperPlane">
-        <br/>
         <p>
           {{ site.email }}
         </p>
       </a>
     </div>
+
+    <div class="col-md-6 col-sm-12 contact__card">
+      <i class="fas fa-4x fa-users"></i>
+
+      <h4>Customers</h4>
+
+      <a href="mailto:{{ site.email }}">
+        <p>
+          support channel
+        </p>
+      </a>
+    </div>
   </div>
 
-  <h3>
-    Find Us on...
+  <h3 class="text-center">
+    You can also find us on...
   </h3>
 
   <div class="share-bar">
