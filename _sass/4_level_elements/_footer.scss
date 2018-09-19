@@ -1,4 +1,5 @@
 footer {
+  border-top: 1px $theme-primary solid;
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -8,7 +9,6 @@ footer {
   text-align: right;
   white-space: nowrap;
   width: 100%;
-  border-top: 3px $theme-primary solid;
 
   h4 {
     padding-top: 8px;

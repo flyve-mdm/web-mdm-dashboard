@@ -102,8 +102,15 @@
 
   .btn {
     background-color: $white;
+    color: $body-text;
     min-width: 36px;
     text-align: center;
+
+    span {
+      display: inline-block;
+      margin-top: 10px;
+      width: 80px;
+    }
 
     &:hover {
       color: $white;
@@ -111,12 +118,6 @@
       i {
         color: $white;
       }
-    }
-
-    span {
-      display: inline-block;
-      margin-top: 5px;
-      width: 80px;
     }
   }
 }
