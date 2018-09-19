@@ -4,6 +4,11 @@
     text-align: center;
   }
 
+  .contact__header {
+    background-color: $theme-lighter-alt;
+    border-bottom: 1px solid $neutral-quaternary;
+  }
+
   .contact__img {
     padding: 38px 5% 5%;
   }
