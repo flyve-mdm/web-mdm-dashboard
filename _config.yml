@@ -1,9 +1,14 @@
 title: web admin dashboard
-email: ml-flyvemdm@teclib.com
-twitter: flyvemdm
 baseurl: "/web-mdm-dashboard"
-url: "http://flyve.org"   
+url: "http://flyve.org"
 image: http://flyve.org/web-mdm-dashboard/images/logo2.png
+email: ml-flyvemdm@teclib.com
+twitter: https://twitter.com/flyvemdm
+facebook: https://www.facebook.com/FlyveMDM
+googlePlus: https://plus.google.com/collection/c32TsB
+telegram: https://t.me/flyvemdm
+irc: http://webchat.freenode.net/?channels=flyve-mdm
+reddit: https://www.reddit.com/r/FlyveMDM/
 
 # Build settings
 markdown: kramdown
@@ -16,9 +21,8 @@ plugins:
 repository: flyve-mdm/web-mdm-dashboard
 
 prose:
+  rooturl: '_posts'
 
-  rooturl: '_posts' 
-  
   ignore:
     - .keep
 
@@ -91,7 +95,7 @@ prose:
           value: ""
       - name: "redditURL"
         field:
-          element: "text" 
+          element: "text"
           label: Reddit URL
           value: ""
 
