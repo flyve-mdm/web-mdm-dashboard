@@ -2,10 +2,7 @@
 ---
 
 self.addEventListener('install', (e) => {
-
-  {% assign name = site.github.project_title | replace: "flyve-mdm-", "" %}
-
-  var CACHE_NAME = '{{ site.data.config.cache_version }}'
+  var CACHE_NAME = '{{ site.github.build_revision }}'
 
   caches.keys().then((cacheNames) => {
     return Promise.all(
@@ -63,6 +60,7 @@ self.addEventListener('install', (e) => {
         '{{ "/fonts/fontawesome/fa-solid-900.ttf" | absolute_url }}',
         '{{ "/fonts/fontawesome/fa-solid-900.woff" | absolute_url }}',
         '{{ "/fonts/fontawesome/fa-solid-900.woff2" | absolute_url }}',
+        '{{ "/js/share-bar.js" | absolute_url }}',
       ])
     })
   )
