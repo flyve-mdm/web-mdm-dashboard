@@ -19,6 +19,7 @@
     }
   }
 
+
   .share-bar__facebook {
     i {
       color: $facebook;
@@ -39,13 +40,23 @@
     }
   }
 
-  .share-bar__google {
+  .share-bar__google-plus {
     i {
-      color: $google;
+      color: $google-plus;
     }
 
     &:hover {
-      background-color: $google;
+      background-color: $google-plus;
+    }
+  }
+
+  .share-bar__google-group {
+    i {
+      color: $google-group;
+    }
+
+    &:hover {
+      background-color: $google-group;
     }
   }
 
