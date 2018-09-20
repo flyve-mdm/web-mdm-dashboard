@@ -1,5 +1,5 @@
 .hero {
-  @extend .jumbotron;
+  // @extend .jumbotron;
 }
 
 .jumbotron {
@@ -55,16 +55,16 @@
     color: $color-type-primary;
 
     .btn.btn-primary {
-      @extend .btn.btn-primary.theme-light;
+      @include btn-primary-light()
     }
 
     .btn.btn-secondary {
-      @extend .btn.btn-secondary.theme-light;
+      @include btn-secondary-light();
     }
 
     .btn.btn-lightweight,
     .btn.btn-link {
-      @extend .btn-lightweight.theme-light;
+      @include btn-link-light();
     }
   }
 
@@ -73,16 +73,16 @@
     color: $color-type-primary-alt;
 
     .btn.btn-primary {
-      @extend .btn.btn-primary.theme-dark;
+      @include btn-primary-dark()
     }
 
     .btn.btn-secondary {
-      @extend .btn.btn-secondary.theme-dark;
+      @include btn-secondary-dark();
     }
 
     .btn.btn-lightweight,
     .btn.btn-link {
-      @extend .btn-lightweight.theme-dark;
+      @include btn-link-dark();
     }
   }
 
@@ -91,16 +91,16 @@
     color: $color-type-primary-alt;
 
     .btn.btn-primary {
-      @extend .btn.btn-primary.theme-alt;
+      @include btn-primary-alt()
     }
 
     .btn.btn-secondary {
-      @extend .btn.btn-secondary.theme-alt;
+      @include btn-secondary-alt();
     }
 
     .btn.btn-lightweight,
     .btn.btn-link {
-      @extend .btn-lightweight.theme-alt;
+      @include btn-link-alt();
     }
   }
 }
