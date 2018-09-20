@@ -40,7 +40,7 @@ const EmptyMessage = props => (
   <div className="center-block-content">
     {
         props.icon && props.showIcon
-          ? <span className={`icon-empty-message ${props.icon}`} />
+          ? <span className={`icon-empty-message iconFont ${props.icon}`} />
           : null
       }
     <h1 className="empty-message">
