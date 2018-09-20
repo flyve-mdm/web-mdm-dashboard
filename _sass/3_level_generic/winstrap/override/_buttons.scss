@@ -35,98 +35,25 @@
   &.btn-primary {
     &,
     &.theme-default {
-      background-color: $color-accent;
-      border-color: transparent;
-      color: $color-type-primary-alt;
-
-      &:hover {
-        background-color: darken($color-accent-vivid-high, 5%);
-        border-color: $color-neutral-high;
-        color: $color-type-primary-alt;
-      }
-
-      &:focus,
-      &:active,
-      &.active {
-        @include box-shadow(none);
-        background-color: darken($color-accent-vivid-high, 10%);
-        border-color: transparent;
-      }
-
-      &:disabled,
-      &.disabled {
-        background-color: $color-accent-neutral-low;
-      }
+      @include btn-primary-default();
     }
 
     // Alt theme
     &.theme-alt {
-      &:hover {
-        background-color: lighten($color-accent-vivid-high, 5%);
-        border-color: $color-neutral-high-alt;
-      }
-
-      &:focus,
-      &:active,
-      &.active {
-        background-color: lighten($color-accent-vivid-high, 10%);
-      }
-
-      &:disabled,
-      &.disabled {
-        color: $color-type-disabled-alt;
-      }
+      @include btn-primary-alt();
     }
 
     // On solid color
     &.theme-on-color,
     &.theme-on-img-dark,
     &.theme-dark {
-      background-color: $color-vivid-high-alt;
-      color: $color-type-primary;
-
-      &:hover {
-        background-color: $color-vivid-mid-alt;
-        border-color: $color-vivid-high-alt;
-      }
-
-      &:focus,
-      &:active,
-      &.active {
-        background-color: $color-vivid-low-alt;
-        border-color: transparent;
-      }
-
-      &:disabled,
-      &.disabled {
-        background-color: $color-neutral-low-alt;
-        color: $color-type-disabled-alt;
-      }
+      @include btn-primary-dark();
     }
 
     // On light images
     &.theme-on-img-light,
     &.theme-light {
-      background-color: $color-vivid-high;
-      color: $color-type-primary-alt;
-
-      &:hover {
-        background-color: $color-vivid-mid;
-        border-color: $color-neutral-high;
-      }
-
-      &:focus,
-      &:active,
-      &.active {
-        background-color: $color-vivid-low;
-        border-color: transparent;
-      }
-
-      &:disabled,
-      &.disabled {
-        background-color: $color-neutral-low;
-        color: $color-type-disabled;
-      }
+      @include btn-primary-light();
     }
   }
 
@@ -135,102 +62,25 @@
   &.btn-default {
     &,
     &.theme-default {
-      @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
-
-      &:hover {
-        background-color: $color-neutral-mid;
-      }
-
-      &:focus,
-      &:active,
-      &.active {
-        @include box-shadow(none);
-        background-color: $color-neutral-high;
-      }
-
-      &:disabled,
-      &.disabled {
-        background-color: $color-neutral-low;
-        color: $color-type-disabled;
-      }
+      @include btn-secondary-default();
     }
 
     // Alt theme
     &.theme-alt {
-      background-color: $color-neutral-low-alt;
-      color: $color-type-primary-alt;
-
-      &:hover {
-        border-color: $color-neutral-high-alt;
-      }
-
-      &:focus,
-      &:active,
-      &.active {
-        background-color: $color-neutral-high-alt;
-      }
-
-      &:disabled,
-      &.disabled {
-        background-color: $color-neutral-low-alt;
-        border-color: transparent;
-        color: $color-type-disabled-alt;
-        opacity: 1;
-      }
+      @include btn-secondary-alt();
     }
 
     // Dark background
     &.theme-on-color,
     &.theme-on-img-dark,
     &.theme-dark {
-      background-color: transparent;
-      border-color: $color-vivid-high-alt;
-      color: $color-type-primary-alt;
-
-      &:hover {
-        background-color: $color-neutral-low-alt;
-        border-color: $color-vivid-high-alt;
-        color: $color-vivid-mid-alt;
-      }
-
-      &:focus,
-      &:active,
-      &.active {
-        background-color: $color-neutral-high-alt;
-      }
-
-      &:disabled,
-      &.disabled {
-        background-color: $color-neutral-low-alt;
-        border-color: $color-neutral-low-alt;
-        color: $color-type-disabled-alt;
-      }
+      @include btn-secondary-dark();
     }
 
     // Light background
     &.theme-on-img-light,
     &.theme-light {
-      background-color: transparent;
-      border-color: $color-vivid-high;
-      color: $color-type-primary;
-
-      &:hover {
-        background-color: $color-neutral-low;
-        border-color: $color-neutral-high;
-      }
-
-      &:focus,
-      &:active,
-      &.active {
-        background-color: $color-neutral-high;
-      }
-
-      &:disabled,
-      &.disabled {
-        background-color: $color-neutral-low;
-        border-color: $color-neutral-high;
-        color: $color-type-disabled;
-      }
+      @include btn-secondary-light();
     }
   }
 
@@ -286,71 +136,25 @@
   //
   &,
   &.theme-default {
-    color: $color-accent-vivid-high;
-
-    &:focus,
-    &:active {
-      border-color: transparent;
-      color: darken($color-accent-vivid-high, 5%);
-    }
-
-    &:disabled,
-    &.disabled,
-    &[disabled],
-    fieldset[disabled] {
-      @include box-shadow(none);
-      background-color: transparent;
-      color: $color-type-disabled;
-    }
+    @include btn-link-default()
   }
 
   // Alt theme
   &.theme-alt {
-    &:disabled,
-    &.disabled,
-    &[disabled],
-    fieldset[disabled] {
-      @include box-shadow(none);
-      background-color: transparent;
-      color: $color-type-disabled-alt;
-    }
+    @include btn-link-alt()
   }
 
   // Dark background
   &.theme-on-color,
   &.theme-on-img-dark,
   &.theme-dark {
-    color: $color-type-primary-alt;
-
-    &:focus,
-    &:active {
-      color: $color-vivid-low-alt;
-    }
-
-    &:disabled,
-    &.disabled,
-    &[disabled],
-    fieldset[disabled] {
-      color: $color-type-disabled-alt;
-    }
+    @include btn-link-dark();
   }
 
   // Light background
   &.theme-on-img-light,
   &.theme-light {
-    color: $color-type-primary;
-
-    &:focus,
-    &:active {
-      color: $color-vivid-low;
-    }
-
-    &:disabled,
-    &.disabled,
-    &[disabled],
-    fieldset[disabled] {
-      color: $color-type-disabled;
-    }
+    @include btn-link-light();
   }
 }
 
