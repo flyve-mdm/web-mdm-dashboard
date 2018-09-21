@@ -68,6 +68,7 @@ export const handleFormSubmit = (ctx, event) => {
    */
   try {
     navigator.credentials.store(
+      // eslint-disable-next-line
       new PasswordCredential({
         id: ctx.state.username,
         password: ctx.state.password,
