@@ -1,0 +1,698 @@
+---
+layout: coverage
+---
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/hoc/withAdminDashboardLayout/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/hoc/withAdminDashboardLayout</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/69</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/48</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
+&nbsp;
+import React,<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ></span></span>
+  PureComponent,
+} from 'react'
+import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
+import getMode <span class="cstat-no" title="statement not covered" >from 'shared/getMode'<span class="cstat-no" title="statement not covered" ></span></span>
+import configureDisplay <span class="cstat-no" title="statement not covered" >from 'shared/configureDisplay'<span class="cstat-no" title="statement not covered" ></span></span>
+import setGlpiCookie <span class="cstat-no" title="statement not covered" >from 'shared/setGlpiCookie'<span class="cstat-no" title="statement not covered" ></span></span>
+import animat<span class="cstat-no" title="statement not covered" >ionsWinJs from 'shared/animationsWinJs/i</span>ndex'<span class="cstat-no" title="statement not covered" ></span>
+import glpi fro<span class="cstat-no" title="statement not covered" >m 'shared/glpiApi'<span class="cstat-no" title="statement not covered" ></span></span>
+import I18n <span class="cstat-no" title="statement not covered" >from 'shared/i18n'<span class="cstat-no" title="statement not covered" ></span></span>
+import SplitView <span class="cstat-no" title="statement not covered" >from 'components/SplitView'<span class="cstat-no" title="statement not covered" ></span></span>
+import HeaderBreadcrumb <span class="cstat-no" title="statement not covered" >from 'components/HeaderBreadcrumb'<span class="cstat-no" title="statement not covered" ></span></span>
+import Confirmation <span class="cstat-no" title="statement not covered" >from 'components/Confirmation'<span class="cstat-no" title="statement not covered" ></span></span>
+import withAuthentication <span class="cstat-no" title="statement not covered" >from '../withAuthentication'<span class="cstat-no" title="statement not covered" ></span></span>
+import withHandleMessages <span class="cstat-no" title="statement not covered" >from '../withHandleMessages'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+&nbsp;
+/** timeout to contract the lateral menu */
+const TIMEOUT_CONTRACT = <span class="cstat-no" title="statement not covered" >150</span>
+&nbsp;
+/**
+ * Wrapper component with the basic structure of the admin dashboard layout
+ * @param {component} WrappedComponent Component to wrap
+ * @return {component} The component with the admin dashboard layout
+ */
+const withAdminDashboardLayout = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(W</span>rappedComponent) =&gt; {</span>
+  class AdminDashboardLayout extends PureComponent {
+    /**
+     * Create AdminDashboardLayout
+     * @param {object} props
+     */
+<span class="fstat-no" title="function not covered" >    co</span>nstructor(props) {
+<span class="cstat-no" title="statement not covered" >      super(props)<span class="cstat-no" title="statement not covered" ></span></span>
+      this.state = {
+        expanded: false,
+        contract: false,
+        mode: getMode(),
+        iframe: undefined,
+      }
+&nbsp;
+      window.addEventListener('resize', this.handleResize)
+      configureDisplay()
+      animationsWinJs()
+    }
+&nbsp;
+    /** Configure 'baseURL' and the cookies of glpi */
+    componentDidMount = as<span class="fstat-no" title="function not covered" >yn</span>c () =&gt; {
+      const {
+        cfg_glpi: cfgGlpi,
+      } <span class="cstat-no" title="statement not covered" >= await glpi.getGlpiConfig()<span class="cstat-no" title="statement not covered" ></span></span>
+      if<span class="cstat-no" title="statement not covered" > (cfgGlpi) {</span>
+        lo<span class="cstat-no" title="statement not covered" >calStorage.setItem('baseURL', cfgGlpi.url_base)</span>
+        th<span class="cstat-no" title="statement not covered" >is.setState({</span>
+          iframe: &lt;iframe
+            title="glpi-backend"
+            src={`//${cfgGlpi.url_base.split('//')[1]}`}
+            style={ {
+              height: 0, width: 0, opacity: 0, position: 'absolute',
+            } }
+          /&gt;,
+        },
+        ()<span class="fstat-no" title="function not covered" > =</span>&gt; se<span class="cstat-no" title="statement not covered" >tGlpiCookie(</span>
+          this.setState({
+            iframe: undefined,
+          }),
+        ))
+      }
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /** Remove 'resize' event listener */
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.handleResize)
+    }
+&nbsp;
+    /** Close current session */
+    logout = as<span class="fstat-no" title="function not covered" >yn</span>c () =&gt; {
+      const isOK = aw<span class="cstat-no" title="statement not covered" >ait Confirmation.isOK(this.contentDialog)</span>
+      if<span class="cstat-no" title="statement not covered" > (isOK) {</span>
+        th<span class="cstat-no" title="statement not covered" >is.props.auth.logout(this.props.history)</span>
+      }
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /** Change 'mode' according to the resolution of the screen */
+    handleResize = ()<span class="fstat-no" title="function not covered" > =</span>&gt; {
+      const prevMode = th<span class="cstat-no" title="statement not covered" >is.state.mode</span>
+      const nextMode = ge<span class="cstat-no" title="statement not covered" >tMode()</span>
+&nbsp;
+      if<span class="cstat-no" title="statement not covered" > (prevMode !== nextMode) {</span>
+        th<span class="cstat-no" title="statement not covered" >is.setState({</span>
+          mode: nextMode,
+        })
+      }
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /** Expand and collapse the side menu */
+    handleToggleExpand = ()<span class="fstat-no" title="function not covered" > =</span>&gt; {
+      th<span class="cstat-no" title="statement not covered" >is.state.expanded === false ? this.handleExpand() : this.handleContract()</span>
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /** Expand side menu */
+    handleExpand = ()<span class="fstat-no" title="function not covered" > =</span>&gt; {
+      th<span class="cstat-no" title="statement not covered" >is.setState({</span>
+        expanded: true,
+        contract: false,
+      })
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /** Collapse the side menu */
+    handleContract = ()<span class="fstat-no" title="function not covered" > =</span>&gt; {
+      th<span class="cstat-no" title="statement not covered" >is.setState({</span>
+        contract: true,
+      },<span class="fstat-no" title="function not covered" > (</span>) =&gt; {
+        th<span class="cstat-no" title="statement not covered" >is.handleSetTimeOut()</span>
+      })
+    }<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    /** Collapse the side menu after of the timeout */
+    handleSetTimeOut = ()<span class="fstat-no" title="function not covered" > =</span>&gt; {
+      if<span class="cstat-no" title="statement not covered" > (this.state.contract) {</span>
+        se<span class="cstat-no" title="statement not covered" >tTimeout(()<span class="fstat-no" title="function not covered" > =</span>&gt; {</span>
+          th<span class="cstat-no" title="statement not covered" >is.setState({</span>
+            expanded: false,
+            contract: false,
+          })
+        }, TIMEOUT_CONTRACT)
+      }
+    }<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span>
+&nbsp;
+    /**
+     * Render component
+     * @function render
+     */
+<span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="cstat-no" title="statement not covered" >      return (</span>
+        &lt;main&gt;
+          &lt;HeaderBreadcrumb
+            handleToggleExpand={this.handleToggleExpand}
+            location={this.props.history.location}
+            languageCurrent={this.props.languageCurrent}
+          /&gt;
+&nbsp;
+          {(this.state.iframe || '')}
+&nbsp;
+          &lt;div className="flex-block"&gt;
+            &lt;SplitView
+              expanded={this.state.expanded}
+              contract={this.state.contract}
+              handleExpand={this.handleExpand}
+              handleContract={this.handleContract}
+              handleSetTimeOut={this.handleSetTimeOut}
+              handleToggleExpand={this.handleToggleExpand}
+              mode={this.state.mode}
+              logout={this.logout}
+            /&gt;
+            &lt;WrappedComponent {...this.props} mode={this.state.mode} /&gt;
+            &lt;Confirmation
+              title={I18n.t('logout.close_session')}
+              message={I18n.t('settings.security.close_session_message')}
+              reference={<span class="fstat-no" title="function not covered" >(e</span>l) =&gt;<span class="cstat-no" title="statement not covered" > { this.contentDialog = e</span>l } }
+            /&gt;
+          &lt;/div&gt;
+        &lt;/main&gt;
+      )
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  AdminDashboardLayout.propTypes = {</span>
+    toast: PropTypes.shape({
+      setNotification: PropTypes.func,
+    }).isRequired,
+    handleMessage: PropTypes.func.isRequired,
+    auth: PropTypes.shape({
+      logout: PropTypes.func,
+    }).isRequired,
+    history: PropTypes.object.isRequired,
+    languageCurrent: PropTypes.string.isRequired,
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return withAuthentication(withHandleMessages(AdminDashboardLayout))</span>
+}<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+&nbsp;
+export default withAdminDashboardLayout
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 21 2018 22:24:45 GMT+0000 (UTC)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
