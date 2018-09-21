@@ -312,8 +312,8 @@ export default class DevicesList extends PureComponent {
   }
 
   /**
-   * @async
    * handle list sort
+   * @async
    * @function handleSort
    * @param {object} eventObject
    */
