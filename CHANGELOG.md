@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0-rc.2"></a>
+# [2.0.0-rc.2](https://github.com/flyve-mdm/web-mdm-dashboard/compare/v2.0.0-rc.1...v2.0.0-rc.2) (2018-09-21)
+
+
+### Bug Fixes
+
+* **applications:** add 'alias' field ([4137b38](https://github.com/flyve-mdm/web-mdm-dashboard/commit/4137b38))
+* **applications:** get the name of the application correctly ([1ed61eb](https://github.com/flyve-mdm/web-mdm-dashboard/commit/1ed61eb))
+* **layout:** show empty messages icons ([257a31c](https://github.com/flyve-mdm/web-mdm-dashboard/commit/257a31c))
+* **search-engine:** use correct values for the combiner ([1edeb5f](https://github.com/flyve-mdm/web-mdm-dashboard/commit/1edeb5f))
+
+
+
 <a name="2.0.0-rc.1"></a>
 # 2.0.0-rc.1 (2018-08-03)
 
