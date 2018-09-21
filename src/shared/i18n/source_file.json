@@ -185,6 +185,7 @@
     "edit": "Edit application",
     "new": "New Application",
     "name": "Application name",
+    "alias": "Application alias",
     "not_found": "No Applications yet!"
   },
   "devices": {
@@ -386,6 +387,7 @@
     }
   },
   "commons": {
+    "alias": "Alias",
     "overview": "Overview",
     "system": "System information",
     "help": "Help Center",
