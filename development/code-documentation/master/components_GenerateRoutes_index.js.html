@@ -9,32 +9,110 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: components/GenerateRoutes/index.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Route, Switch } from 'react-router-dom'
+import ErrorPage from '../ErrorPage'
+import PropsRoute from './PropsRoute'
 
-    <h3> </h3>
+// TODO: Enable PrivateRoute if route if private
 
+/**
+ * Generate routes
+ * @function GenerateRoutes
+ * @param {array} routes
+ * @param {string} rootPath
+ * @param {boolean} withNotFound
+ * @param {object} data
+ * @return {component}
+ */
+const GenerateRoutes = (props) => {
+  const r = props.routes.map(({
+    exact, path, component, authenticate,
+  }) => (
+    &lt;PropsRoute
+      exact={exact}
+      component={component}
+      authenticate={authenticate}
+      {...props}
+      key={path}
+      path={
+        typeof props.rootPath === 'string'
+          ? path === '/'
+            ? props.rootPath
+            : props.rootPath + path
+          : path
+      }
+    />
+  ))
 
+  props.withNotFound
+    &amp;&amp; r.push(
+      &lt;Route
+        key={props.routes.length + 1}
+        render={() => &lt;ErrorPage />}
+      />,
+    )
 
+  return (
+    &lt;Switch>
+      {r}
+    &lt;/Switch>
+  )
+}
 
+GenerateRoutes.defaultProps = {
+  rootPath: undefined,
+  withNotFound: false,
+}
 
+GenerateRoutes.propTypes = {
+  routes: PropTypes.array.isRequired,
+  rootPath: PropTypes.string,
+  withNotFound: PropTypes.bool,
+}
 
-
-
-
-
-    
-
-
-
-
-
+export default GenerateRoutes
+</code></pre>
+        </article>
+    </section>
 
 
 

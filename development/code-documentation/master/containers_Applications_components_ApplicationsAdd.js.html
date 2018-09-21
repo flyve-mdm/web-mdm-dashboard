@@ -9,32 +9,279 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: containers/Applications/components/ApplicationsAdd.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
+/** import dependencies */
+import React, {
+  PureComponent,
+} from 'react'
+import PropTypes from 'prop-types'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import {
+  FilesUpload,
+  FilesUploadItemList,
+} from 'components/FilesUpload'
+import ContentPane from 'components/ContentPane'
+import Loading from 'components/Loading'
 
-    <h3> </h3>
+/**
+ * @class ApplicationsAdd
+ * @extends PureComponent
+ */
+export default class ApplicationsAdd extends PureComponent {
+  /** @constructor */
+  constructor(props) {
+    super(props)
+    this.state = {
+      files: [],
+      isLoading: false,
+      name: '',
+      alias: '',
+    }
+  }
 
+  /**
+   * Handle change file
+   * @function onFilesChange
+   * @param {object} files
+   */
+  onFilesChange = (files) => {
+    this.setState({
+      files,
+    })
+  }
 
+  /**
+   * Handle show file errors
+   * @function onFilesError
+   * @param {object} file
+   * @param {object} error
+   */
+  onFilesError = (error) => {
+    this.props.toast.setNotification(this.props.handleMessage({
+      type: 'alert',
+      message: error.message,
+    }))
+  }
 
+  /**
+   * Handle change input
+   * @function changeInput
+   * @param {object} e
+   */
+  changeInput = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
 
+  /**
+   * Handle remove files from list
+   * @function filesRemoveOne
+   * @param {object} file
+   */
+  filesRemoveOne = (file) => {
+    this.files.removeFile(file)
+  }
 
+  /**
+   * Handle remove all files from list
+   * @function filesRemoveAll
+   */
+  filesRemoveAll = () => {
+    this.files.removeFiles()
+  }
 
+  /**
+   * returns the value of the field in case the field is not empty,
+   * otherwise returns the name of the file
+   * @param {string} input Name of the field to be evaluated
+   * @param {string} key File key
+   * @function validateInput
+   */
+  validateInput = (input, key) => {
+    if (this.state[input] === '') {
+      return this.state.files[key].name
+    }
 
+    return this.state[input]
+  }
 
+  /**
+   * Handle upload files
+   * @function filesUpload
+   */
+  filesUpload = () => {
+    const formData = new FormData()
+    Object.keys(this.state.files).forEach(async (key) => {
+      try {
+        const file = this.state.files[key]
+        formData.append('file', file)
+        formData.append('uploadManifest', `{"input":{"name":"${this.validateInput('name', key)}","alias":"${this.validateInput('alias', key)}"} }`)
+        this.setState({
+          isLoading: true,
+        })
+        await this.props.glpi.uploadFile({
+          itemtype: itemtype.PluginFlyvemdmPackage,
+          input: formData,
+        })
+        this.setState({
+          isLoading: false,
+        })
+        this.props.toast.setNotification({
+          title: I18n.t('commons.success'),
+          body: I18n.t('notifications.saved_file'),
+          type: 'success',
+        })
+        this.props.changeAction('reload')
+      } catch (error) {
+        this.props.toast.setNotification(this.props.handleMessage({
+          type: 'alert',
+          message: error,
+        }))
+        this.setState({
+          isLoading: false,
+        })
+      }
+    })
+  }
 
+  render() {
+    let renderComponent
+    if (this.state.isLoading) {
+      renderComponent = (
+        &lt;Loading message={`${I18n.t('commons.loading')}...`} />
+      )
+    } else {
+      renderComponent = (
+        &lt;ContentPane>
+          &lt;div style={ { margin: '0 10px' } }>
+            &lt;div className="content-header">
+              &lt;h2 className="content-header__title">
+                {I18n.t('applications.new')}
+              &lt;/h2>
+            &lt;/div>
 
-    
+            &lt;div style={ { padding: '10px' } }>
+              &lt;p>
+                {I18n.t('commons.name')}
+              &lt;/p>
+              &lt;input
+                type="text"
+                className="win-textbox"
+                placeholder={I18n.t('applications.name')}
+                name="name"
+                value={this.state.name}
+                onChange={this.changeInput}
+              />
 
+              &lt;p>
+                {I18n.t('commons.alias')}
+              &lt;/p>
+              &lt;input
+                type="text"
+                className="win-textbox"
+                placeholder={I18n.t('applications.alias')}
+                name="alias"
+                value={this.state.alias}
+                onChange={this.changeInput}
+              />
 
+              &lt;FilesUpload
+                ref={(filesUpload) => { this.files = filesUpload } }
+                className="files-dropzone"
+                onChange={this.onFilesChange}
+                onError={this.onFilesError}
+                maxFiles={1}
+                maxFileSize={10000000}
+                minFileSize={0}
+                clickable
+              >
+                {I18n.t('commons.drop_file')}
+              &lt;/FilesUpload>
 
+              &lt;div style={ { marginTop: 10 } }>
+                &lt;button
+                  className="btn btn--primary"
+                  onClick={this.filesUpload}
+                  type="button"
+                >
+                  {I18n.t('commons.save')}
+                &lt;/button>
 
+                {
+                  this.state.files.length > 0
+                    ? (
+                      &lt;div>
+                        {
+                          this.state.files.map(file => (
+                            &lt;FilesUploadItemList
+                              key={file.id}
+                              fileData={file}
+                              onRemove={() => this.filesRemoveOne(file)}
+                            />
+                          ))
+                        }
+                      &lt;/div>
+                    )
+                    : null
+                }
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        &lt;/ContentPane>
+      )
+    }
+    return renderComponent
+  }
+}
 
+/** ApplicationsAdd propTypes */
+ApplicationsAdd.propTypes = {
+  changeAction: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
+  glpi: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -9,32 +9,216 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: containers/Devices/components/DevicesContent.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
+/** import dependencies */
+import React, {
+  PureComponent,
+} from 'react'
+import PropTypes from 'prop-types'
+import ReactWinJS from 'react-winjs'
+import I18n from 'shared/i18n'
+import getID from 'shared/getID'
+import itemtype from 'shared/itemtype'
+import ContentPane from 'components/ContentPane'
+import Confirmation from 'components/Confirmation'
+import FleetsContent from '../../Fleets/components/FleetsContent'
+import {
+  DangerZone,
+  Main,
+  SystemReport,
+  Applications,
+  Geolocation,
+} from './Sections'
 
-    <h3> </h3>
+/**
+ * @class DevicesContent
+ * @extends PureComponent
+ */
+export default class DevicesContent extends PureComponent {
+  /** @constructor */
+  constructor(props) {
+    super(props)
 
+    this.state = {
+      id: getID(this.props.history.location.pathname),
+      selectedIndex: 0,
+    }
+  }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.id !== getID(nextProps.history.location.pathname)) {
+      return {
+        ...prevState,
+        id: getID(nextProps.history.location.pathname),
+      }
+    }
+    return {
+      ...prevState,
+    }
+  }
 
+  /**
+   * handle change selected item
+   * @function changeselectedItem
+   * @param {object} pivot
+   */
+  changeselectedItem = (pivot) => {
+    if (pivot) {
+      if (pivot.winControl.selectedIndex !== this.state.selectedIndex) {
+        this.setState({
+          selectedIndex: pivot.winControl.selectedIndex,
+        })
+      }
+      /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["pivot"] }] */
+      pivot.winControl.onselectionchanged = (event) => {
+        this.setState({
+          selectedIndex: event.detail.index,
+        })
+      }
+    }
+  }
 
+  render() {
+    return (
+      &lt;React.Fragment>
+        &lt;Confirmation
+          title={I18n.t('devices.danger_zone.last_warning')}
+          message={I18n.t('devices.danger_zone.last_warning_message')}
+          reference={(el) => { this.wipeDevice = el } }
+        />
+        &lt;Confirmation
+          title={`${I18n.t('devices.danger_zone.unenroll_device')} # ${this.state.id}`}
+          message={`${I18n.t('devices.danger_zone.going_to_unenroll')} ${this.state.id}`}
+          reference={(el) => { this.unenrollmentDevice = el } }
+        />
+        &lt;Confirmation
+          title={`${I18n.t('devices.danger_zone.delete')} # ${this.state.id}`}
+          message={`${I18n.t('devices.danger_zone.delete_message')} ${this.state.id}`}
+          reference={(el) => { this.deleteDevice = el } }
+        />
+        &lt;ContentPane className="devices">
+          &lt;ReactWinJS.Pivot ref={this.changeselectedItem}>
+            &lt;ReactWinJS.Pivot.Item key="main" header={I18n.t('devices.main.title')}>
+              &lt;Main
+                id={this.state.id}
+                changeAction={this.props.changeAction}
+                changeSelectionMode={this.props.changeSelectionMode}
+                toast={this.props.toast}
+                handleMessage={this.props.handleMessage}
+                history={this.props.history}
+                glpi={this.props.glpi}
+                update={this.state.selectedIndex === 0}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+            &lt;ReactWinJS.Pivot.Item key="systemReport" header={I18n.t('devices.system_report.title')}>
+              &lt;SystemReport
+                id={this.state.id}
+                glpi={this.props.glpi}
+                toast={this.props.toast}
+                handleMessage={this.props.handleMessage}
+                update={this.state.selectedIndex === 1}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+            &lt;ReactWinJS.Pivot.Item key="applications" header={I18n.t('devices.applications.title')}>
+              &lt;Applications
+                id={this.state.id}
+                glpi={this.props.glpi}
+                toast={this.props.toast}
+                handleMessage={this.props.handleMessage}
+                update={this.state.selectedIndex === 2}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+            &lt;ReactWinJS.Pivot.Item key="policies" header={I18n.t('devices.policies.title')}>
+              &lt;FleetsContent
+                {...this.props}
+                itemType={itemtype.PluginFlyvemdmAgent}
+                selectedItems={this.props.selectedItems}
+                update={this.state.selectedIndex === 3}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+            &lt;ReactWinJS.Pivot.Item key="geolocation" header={I18n.t('devices.geolocation.title')}>
+              &lt;Geolocation
+                id={this.state.id}
+                toast={this.props.toast}
+                handleMessage={this.props.handleMessage}
+                glpi={this.props.glpi}
+                update={this.state.selectedIndex === 4}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+            &lt;ReactWinJS.Pivot.Item key="dangerZone" header={I18n.t('devices.danger_zone.title')}>
+              &lt;DangerZone
+                id={this.state.id}
+                changeAction={this.props.changeAction}
+                toast={this.props.toast}
+                handleMessage={this.props.handleMessage}
+                glpi={this.props.glpi}
+                history={this.props.history}
+                wipeDevice={this.wipeDevice}
+                unenrollmentDevice={this.unenrollmentDevice}
+                deleteDevice={this.deleteDevice}
+                update={this.state.selectedIndex === 5}
+              />
+            &lt;/ReactWinJS.Pivot.Item>
+          &lt;/ReactWinJS.Pivot>
+        &lt;/ContentPane>
+      &lt;/React.Fragment>
+    )
+  }
+}
 
+DevicesContent.defaultProps = {
+  selectedItems: undefined,
+}
 
-
-
-
-
-    
-
-
-
-
-
+/** DevicesContent propTypes */
+DevicesContent.propTypes = {
+  changeSelectionMode: PropTypes.func.isRequired,
+  changeAction: PropTypes.func.isRequired,
+  toast: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  glpi: PropTypes.object.isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  selectedItems: PropTypes.array,
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

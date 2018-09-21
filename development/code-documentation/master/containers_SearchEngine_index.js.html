@@ -9,32 +9,303 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: containers/SearchEngine/index.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
+/** import dependencies */
+import React, {
+  PureComponent,
+} from 'react'
+import PropTypes from 'prop-types'
+import I18n from 'shared/i18n'
+import withGLPI from 'hoc/withGLPI'
+import ContentPane from 'components/ContentPane'
+import SearchQueryBuilder from './components/SearchQueryBuilder'
+import Panel from './components/Panel'
+import {
+  setFields,
+  getTranslation,
+  normalizeQuery,
+} from './actions'
 
-    <h3> </h3>
+/**
+ * Component with the SearchEngine section
+ * @class SearchEngine
+ * @extends PureComponent
+ */
+class SearchEngine extends PureComponent {
+  /** @constructor */
+  constructor(props) {
+    super(props)
 
+    this.state = {
+      query: null,
+      itemType: 'computer',
+      itemResults: undefined,
+      fields: [],
+      isLoading: true,
+    }
 
+    this.translations = getTranslation() // Friendly translations of each QueryBuilder input
+    this.setFields = () => setFields(this)
+    this.normalizeQuery = () => normalizeQuery(this)
+  }
 
+  /**
+   * Make the call to fetch search options list of itemType
+   * @function componentDidMount
+   */
+  componentDidMount() {
+    this.handleRequestItemType()
+  }
 
+  /**
+   * Handle change itemType
+   * @function handleChangeItemType
+   * @param {object} e
+   */
+  handleChangeItemType = (e) => {
+    this.setState({
+      itemType: e.target.value,
+    })
+  }
 
+  /**
+   * Fetch search options list of itemType
+   * @function handleRequestItemType
+   * @async
+   */
+  handleRequestItemType = async () => {
+    this.setState({
+      query: null,
+      itemResults: undefined,
+      fields: [],
+      isLoading: true,
+    })
+    try {
+      const { itemType } = this.state
+      const { glpi } = this.props
 
+      const listSearchOptions = await glpi.listSearchOptions({
+        itemtype: itemType,
+      })
 
+      this.setState({
+        isLoading: false,
+        listSearchOptions,
+      }, () => {
+        this.setFields()
+      })
+    } catch (error) {
+      this.setState({
+        isLoading: false,
+      })
+    }
+  }
 
+  /**
+   * Update the query state each time that the QueryBuilde query change
+   * @function handleChangeQuery
+   * @param {string} query
+   */
+  handleChangeQuery = (query) => {
+    this.setState({
+      query,
+    })
+  }
 
+  /**
+   * Handle click event in the search button
+   * @function handleOnSearch
+   * @async
+   */
+  handleOnSearch = async () => {
+    try {
+      const { glpi } = this.props
+      const { itemType } = this.state
 
-    
+      const search = await glpi.searchItems({
+        itemtype: itemType,
+        criteria: this.normalizeQuery(),
+      })
+      this.setState({
+        itemResults: search.data ? search.data : [],
+      })
+    } catch (error) {
+      this.setState({
+        itemResults: [],
+      })
+    }
+  }
 
+  /**
+   * Create Array of objects with the result of the search
+   * @function arrayResultsWithFields
+   * @return {array}
+   */
+  arrayResultsWithFields = () => {
+    const {
+      itemResults,
+      listSearchOptions,
+    } = this.state
 
+    const resultsWithFields = []
 
+    itemResults &amp;&amp; itemResults.forEach((result) => {
+      const arrayResult = []
+      const arrayOfArraysIdAndData = Object.entries(result)
 
+      arrayOfArraysIdAndData.forEach((field) => {
+        const objectField = {
+          fieldName: listSearchOptions[field[0]].name,
+          fieldValue: field[1],
+          fieldId: field[0],
+        }
+        arrayResult.push(objectField)
+      })
+      resultsWithFields.push(arrayResult)
+    })
 
+    return resultsWithFields
+  }
+
+  /**
+   * Render component
+   * @function render
+   */
+  render() {
+    const {
+      itemType,
+      fields,
+      isLoading,
+      query,
+      itemResults,
+    } = this.state
+
+    return (
+      &lt;ContentPane>
+        &lt;div style={ { margin: '0 10px' } }>
+          &lt;h1>
+            {I18n.t('search_engine.title')}
+          &lt;/h1>
+          &lt;input
+            type="text"
+            style={ { marginRight: 10 } }
+            className="win-textbox"
+            placeholder="Itemtype"
+            name="itemTypeName"
+            value={itemType}
+            onChange={this.handleChangeItemType}
+          />
+          &lt;button
+            className="btn btn--secondary"
+            onClick={this.handleRequestItemType}
+            type="button"
+          >
+            {I18n.t('commons.change')}
+          &lt;/button>
+        &lt;/div>
+        {
+          fields.length > 0
+          &amp;&amp; (
+            &lt;SearchQueryBuilder
+              fields={fields}
+              handleChangeQuery={this.handleChangeQuery}
+              translations={this.translations}
+            />
+          )
+        }
+        &lt;br />
+        &lt;div style={ { margin: '0 10px' } }>
+          {
+            isLoading
+              ? (
+                &lt;p>
+                  {I18n.t('commons.loading')}
+                  ...
+                &lt;/p>
+              )
+              : query
+                ? query.rules.length
+                  ? (
+                    &lt;button
+                      className="btn btn--primary"
+                      onClick={this.handleOnSearch}
+                      type="submit"
+                    >
+                      {I18n.t('commons.search')}
+                    &lt;/button>
+                  )
+                  : null
+                : (
+                  &lt;p>
+                    {I18n.t('search_engine.itemType_not_found')}
+                  &lt;/p>
+                )
+          }
+          {
+            itemResults
+              ? itemResults.length > 0
+                ? (
+                  &lt;Panel
+                    itemResults={itemResults.length > 0 ? this.arrayResultsWithFields() : []}
+                  />
+                )
+                : (
+                  &lt;p>
+                    {I18n.t('search_engine.item_not_found')}
+                  &lt;/p>
+                )
+              : null
+          }
+        &lt;/div>
+      &lt;/ContentPane>
+    )
+  }
+}
+
+SearchEngine.propTypes = {
+  glpi: PropTypes.object.isRequired,
+}
+
+export default withGLPI(SearchEngine)
+</code></pre>
+        </article>
+    </section>
 
 
 

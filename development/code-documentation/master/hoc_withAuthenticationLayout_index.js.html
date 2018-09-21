@@ -9,32 +9,120 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: hoc/withAuthenticationLayout/index.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
+import React from 'react'
+import PropTypes from 'prop-types'
+import I18n from 'shared/i18n'
+import languagesList from 'shared/i18n/languages'
+import { AuthenticationConsumer } from 'providers/AuthenticationProvider'
+import logo from 'assets/images/dashboard.svg'
 
-    <h3> </h3>
+/**
+ * Wrapper component with the basic structure of the authentication pages
+ * (Flyve MDM logo in the header and a footer with a drop-down of languages)
+ * @param {component} WrappedComponent Component to wrap
+ * @param {object} stylesConfiguration Config styles of wrapper div
+ * @return {component} The component with the authentication layout
+ */
+const withAuthenticationLayout = (WrappedComponent, configStyles) => {
+  /**
+   * Create authenticationLayout
+   * @param {object} props
+   */
+  const authenticationLayout = (props) => {
+    const style = {
+      textAlign: configStyles.centerContent ? 'center' : null,
+      width: props.width,
+    }
+    return (
+      &lt;div className="authentication" style={style}>
+        &lt;section>
+          &lt;figure>
+            &lt;img alt="Flyve MDM Dashboard" src={logo} />
+          &lt;/figure>
+          &lt;AuthenticationConsumer>
+            {value => &lt;WrappedComponent {...props} {...value} />
+            }
+          &lt;/AuthenticationConsumer>
+        &lt;/section>
+        &lt;footer>
+          &lt;a href="https://flyve-mdm.com/privacy-policy/">
+            {I18n.t('commons.terms_and_conditions')}
+          &lt;/a>
+          &lt;br />
+          &lt;span>
+            © 2017 - 2018 Teclib&amp;apos;.
+          &lt;/span>
+          &lt;br />
+          &lt;select
+            onChange={event => props.changeLanguage(event.target.value)}
+            value={props.languageCurrent}
+          >
+            {languagesList()}
+          &lt;/select>
+        &lt;/footer>
+      &lt;/div>
+    )
+  }
 
+  authenticationLayout.defaultProps = {
+    centerContent: true,
+    width: 340,
+  }
 
+  authenticationLayout.propTypes = {
+    centerContent: PropTypes.bool,
+    width: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    languageCurrent: PropTypes.string.isRequired,
+    changeLanguage: PropTypes.func.isRequired,
+  }
 
+  return authenticationLayout
+}
 
-
-
-
-
-
-
-    
-
-
-
-
-
+export default withAuthenticationLayout
+</code></pre>
+        </article>
+    </section>
 
 
 

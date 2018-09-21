@@ -9,32 +9,131 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: components/HeaderBreadcrumb/index.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
+import React, {
+  PureComponent,
+} from 'react'
+import PropTypes from 'prop-types'
+import {
+  Link,
+} from 'react-router-dom'
+import I18n from 'shared/i18n'
+import publicURL from 'shared/publicURL'
 
-    <h3> </h3>
+/**
+ * Component with the breadcrumb menu of the header
+ * @class HeaderBreadcrumb
+ * @extends PureComponent
+ */
+class HeaderBreadcrumb extends PureComponent {
+  /**
+   * Create the breadcrumb menu
+   * @function breadcrumbs
+   * @return {array} Breadcrumb menu
+   */
+  breadcrumbs() {
+    const breadcrumbs = []
+    const addresses = this.props.location.pathname.split('/')
+    for (let index = (publicURL === '') ? 2 : 3; index &lt; addresses.length; index += 1) {
+      let path = `${publicURL}/app`
+      for (let i = (publicURL === '') ? 2 : 3; i &lt; index + 1; i += 1) {
+        path += `/${addresses[i]}`
+      }
+      breadcrumbs.push(
+        &lt;React.Fragment key={path}>
+          &lt;span className="header-breadcrumb-separator">
+            /
+          &lt;/span>
+          &lt;span>
+            &lt;Link to={path}>
+              {Number(addresses[index].replace(/\b\w/g, l => l)) ? addresses[index].replace(/\b\w/g, l => l) : I18n.t(`commons.${addresses[index].replace(/\b\w/g, l => l.toLowerCase())}`)}
+            &lt;/Link>
+          &lt;/span>
+        &lt;/React.Fragment>,
+      )
+    }
 
+    return breadcrumbs
+  }
 
+  /**
+   * Render component
+   * @function render
+   */
+  render() {
+    return (
+      &lt;header className="header-block">
 
+        &lt;div className="header-icon">
+          &lt;span
+            className="iconFont burgerIcon"
+            onClick={this.props.handleToggleExpand}
+            role="button"
+            tabIndex="0"
+          />
+        &lt;/div>
 
+        &lt;nav className="header-breadcrumb">
+          &lt;span>
+            &lt;Link to={`${publicURL}/app`}>
+              {I18n.t('commons.dashboard')}
+            &lt;/Link>
+          &lt;/span>
 
+          {this.breadcrumbs()}
 
+        &lt;/nav>
 
+      &lt;/header>
+    )
+  }
+}
 
+HeaderBreadcrumb.propTypes = {
+  handleToggleExpand: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
+}
 
-
-    
-
-
-
-
-
+export default HeaderBreadcrumb
+</code></pre>
+        </article>
+    </section>
 
 
 

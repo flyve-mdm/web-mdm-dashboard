@@ -9,32 +9,94 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: containers/Applications/routes.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
+/** import dependencies */
+import withAsyncComponent from 'hoc/withAsyncComponent'
+import I18n from 'shared/i18n'
 
-    <h3> </h3>
+/**
+ * Represents all routes from Applications section
+ * @constant
+ * @type {Array}
+ */
+const routes = [{
+  path: '/',
+  name: I18n.t('commons.no_selection'),
+  component: withAsyncComponent(() => import('components/EmptyMessage')),
+  exact: true,
+},
+{
+  path: '/error',
+  name: I18n.t('commons.error'),
+  component: withAsyncComponent(() => import('components/ErrorPage')),
+  exact: true,
+},
+{
+  path: '/add',
+  name: I18n.t('commons.add'),
+  component: withAsyncComponent(() => import('./components/ApplicationsAdd')),
+  exact: true,
+},
+{
+  path: '/edit',
+  name: I18n.t('commons.edit'),
+  component: withAsyncComponent(() => import('./components/ApplicationsEdit')),
+  exact: true,
+},
+{
+  path: '/:id/edit',
+  name: I18n.t('commons.edit_one'),
+  component: withAsyncComponent(() => import('./components/ApplicationsEdit')),
+  exact: true,
+},
+{
+  path: '/:id',
+  name: I18n.t('commons.edit_one'),
+  component: withAsyncComponent(() => import('./components/ApplicationsContent')),
+  exact: true,
+},
+]
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default routes
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -9,32 +9,283 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: containers/Devices/components/Sections/SystemReport.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
+/** import dependencies */
+import React, {
+  PureComponent,
+} from 'react'
+import PropTypes from 'prop-types'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import Loader from 'components/Loader'
+import Loading from 'components/Loading'
+import Inventory from './Inventory'
 
-    <h3> </h3>
+/**
+ * @class SystemReport
+ * @extends PureComponent
+ */
+export default class SystemReport extends PureComponent {
+  /** @constructor */
+  constructor(props) {
+    super(props)
+    this.state = {
+      id: this.props.id,
+      update: this.props.update,
+      data: undefined,
+      isLoading: true,
+      requestingInventory: false,
+    }
+  }
 
+  componentDidMount() {
+    this.handleRefresh()
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
+      this.handleRefresh()
+    }
+  }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.id !== nextProps.id || prevState.update !== nextProps.update) {
+      return {
+        ...prevState,
+        id: nextProps.id,
+        update: nextProps.update,
+        data: undefined,
+        isLoading: true,
+      }
+    }
+    return {
+      ...prevState,
+    }
+  }
 
+  /**
+   * handle refresh system report
+   * @function handleRefresh
+   */
+  handleRefresh = () => {
+    if (this.state.update) {
+      this.setState({
+        isLoading: true,
+        requestingInventory: false,
+      }, async () => {
+        try {
+          const { id } = this.state
+          const data = await this.props.glpi.getAnItem({
+            itemtype: itemtype.PluginFlyvemdmAgent,
+            id,
+          })
+          this.setState({
+            isLoading: false,
+            data,
+          })
+        } catch (error) {
+          this.props.toast.setNotification(this.props.handleMessage({
+            type: 'alert',
+            message: error,
+          }))
+        }
+      })
+    }
+  }
 
+  /**
+   * handle request inventory
+   * @function requestInventory
+   */
+  requestInventory = () => {
+    this.setState({
+      requestingInventory: true,
+    }, async () => {
+      try {
+        const response = await this.props.glpi.genericRequest({
+          path: `${itemtype.PluginFlyvemdmAgent}/${this.state.id}`,
+          requestParams: {
+            method: 'PUT',
+            body: JSON.stringify({
+              input: {
+                _inventory: '',
+              },
+            }),
+          },
+        })
+        this.props.toast.setNotification({
+          title: I18n.t('commons.success'),
+          body: response[0].message,
+          type: 'success',
+        })
+        this.handleRefresh()
+      } catch (error) {
+        this.props.toast.setNotification(this.props.handleMessage({
+          type: 'alert',
+          message: error,
+          displayErrorPage: false,
+        }))
+        this.setState({
+          requestingInventory: false,
+        })
+      }
+    })
+  }
 
+  render() {
+    if (this.state.isLoading &amp;&amp; !this.state.data) {
+      return (
+        &lt;div style={ { padding: '20px' } }>
+          &lt;Loader type="content" />
+        &lt;/div>
+      )
+    } if (!this.state.isLoading &amp;&amp; this.state.data) {
+      return (
+        &lt;div className="devices">
+          &lt;div className="system-report">
+            &lt;div className="request-inventory">
+              &lt;button
+                className="btn btn--secondary"
+                onClick={this.requestInventory}
+                type="button"
+              >
+                {I18n.t('devices.system_report.request_inventory')}
+              &lt;/button>
+              {this.state.requestingInventory ? &lt;Loading small style={ { paddingTop: '6px' } } /> : ''}
+            &lt;/div>
+            &lt;div className="title">
+              {I18n.t('commons.agent')}
+            &lt;/div>
+            &lt;div className="list-content">
+              &lt;div className="list-col">
+                {I18n.t('commons.id')}
+              &lt;/div>
+              &lt;div className="list-col">
+                {this.state.data.id}
+              &lt;/div>
+            &lt;/div>
+            &lt;div className="list-content">
+              &lt;div className="list-col">
+                {I18n.t('commons.name')}
+              &lt;/div>
+              &lt;div className="list-col">
+                {this.state.data.name}
+              &lt;/div>
+            &lt;/div>
+            &lt;div className="list-content">
+              &lt;div className="list-col">
+                {I18n.t('commons.version')}
+              &lt;/div>
+              &lt;div className="list-col">
+                {this.state.data.version}
+              &lt;/div>
+            &lt;/div>
+            &lt;div className="list-content">
+              &lt;div className="list-col">
+                {I18n.t('commons.last_contact')}
+              &lt;/div>
+              &lt;div className="list-col">
+                {this.state.data.last_contact}
+              &lt;/div>
+            &lt;/div>
+            &lt;div className="list-content">
+              &lt;div className="list-col">
+                {I18n.t('commons.last_report')}
+              &lt;/div>
+              &lt;div className="list-col">
+                {this.state.data.last_report ? this.state.data.last_report : 'N/A'}
+              &lt;/div>
+            &lt;/div>
 
+            &lt;Inventory
+              title={I18n.t('commons.fleet')}
+              itemType="PluginFlyvemdmFleet"
+              itemID={this.state.data.plugin_flyvemdm_fleets_id}
+              fields={ { id: 'ID', name: 'Name' } }
+              glpi={this.props.glpi}
+            />
 
-
-
-    
-
-
-
-
-
+            &lt;Inventory
+              title={I18n.t('commons.device')}
+              itemType="Computer"
+              itemID={this.state.data.computers_id}
+              fields={ {
+                id: 'ID',
+                name: 'Name',
+                uuid: 'UUID',
+                date_creation: 'Creation',
+                date_mod: 'Modification',
+                computermodels_id: 'Model',
+                computertypes_id: 'Type',
+                manufacturers_id: 'Manufacturer',
+                serial: 'Serial',
+              } }
+              parameters={ {
+                expand_dropdowns: true,
+                with_devices: true,
+                with_disks: true,
+                with_softwares: true,
+                with_connections: true,
+                with_networkports: true,
+              } }
+              glpi={this.props.glpi}
+            />
+          &lt;/div>
+        &lt;/div>
+      )
+    }
+    return ''
+  }
+}
+/** SystemReport propTypes */
+SystemReport.propTypes = {
+  toast: PropTypes.shape({
+    setNotification: PropTypes.func,
+  }).isRequired,
+  handleMessage: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  glpi: PropTypes.object.isRequired,
+  update: PropTypes.bool.isRequired,
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -9,32 +9,191 @@ layout: container
     <div class="col-md-18 navigation-section">
     <div id="main">
 
-        <h1 class="page-title">Home</h1>
+        <h1 class="page-title">Source: containers/About/components/HelpCenter/Feedback.js</h1>
 
         
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
 
+/** import dependencies */
+import React, {
+  PureComponent,
+} from 'react'
+import PropTypes from 'prop-types'
+import I18n from 'shared/i18n'
+import itemtype from 'shared/itemtype'
+import Loading from 'components/Loading'
+import ContentPane from 'components/ContentPane'
+import {
+  TextArea,
+  Input,
+} from 'components/Forms'
+import withHandleMessages from 'hoc/withHandleMessages'
+import withGLPI from 'hoc/withGLPI'
 
-    <h3> </h3>
+/**
+ * @class Feedback
+ */
+class Feedback extends PureComponent {
+  constructor(props) {
+    super(props)
 
+    this.state = {
+      feedbackSent: false,
+      textarea: '',
+      subject: I18n.t('about.help_center.feedback'),
+      isLoading: false,
+    }
+  }
 
+  componentDidMount() {
+    if (this.textareaInput) {
+      this.textareaInput.focus()
+    }
+  }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
 
+    this.setState({
+      isLoading: true,
+    }, async () => {
+      const {
+        active_profile: activeProfile,
+      } = await this.props.glpi.getActiveProfile()
+      let entityID
+      if (Array.isArray(activeProfile.entities)) {
+        entityID = activeProfile.entities[0].id
+      } else {
+        for (const key in activeProfile.entities) {
+          if (Object.prototype.hasOwnProperty.call(activeProfile.entities, key)) {
+            entityID = `${activeProfile.entities[key].id}`
+          }
+        }
+      }
 
+      let entityconfig = await this.props.glpi.getAnItem({
+        itemtype: itemtype.PluginFlyvemdmEntityconfig,
+        id: entityID,
+      })
 
+      if (Array.isArray(entityconfig)) entityconfig = { ...entityconfig[0] }
 
+      const link = `mailto:${entityconfig.support_email}`
+        + `?subject=${escape(this.state.subject)}`
+        + `&amp;body=${escape(this.state.textarea)}`
 
+      if (process.env.NODE_ENV !== 'test') window.location.href = link
 
+      setTimeout(() => {
+        this.setState({
+          feedbackSent: true,
+          isLoading: false,
+        })
+      }, 2000)
+    })
+  }
 
-    
+  changeMessage = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
+  }
 
+  render() {
+    if (this.state.isLoading) {
+      return (
+        &lt;Loading message={I18n.t('commons.sending')} />
+      )
+    } if (this.state.feedbackSent) {
+      return (
+        &lt;React.Fragment>
+          &lt;div style={ { textAlign: 'center' } }>
+            &lt;h3>
+              {I18n.t('about.help_center.thank_you')}
+            &lt;/h3>
+            &lt;p>
+              {I18n.t('about.help_center.submission_received')}
+            &lt;/p>
+          &lt;/div>
+        &lt;/React.Fragment>
+      )
+    }
+    return (
+      &lt;ContentPane className="feedback">
+        &lt;h3>
+          {I18n.t('about.help_center.feedback')}
+        &lt;/h3>
+        &lt;div>
+          &lt;form onSubmit={this.handleSubmit}>
+            &lt;Input
+              label={I18n.t('commons.subject')}
+              name="subject"
+              value={this.state.subject}
+              function={this.changeMessage}
+              required
+            />
+            &lt;TextArea
+              label={I18n.t('commons.message')}
+              name="textarea"
+              value={this.state.textarea}
+              function={this.changeMessage}
+              placeholder={I18n.t('about.help_center.write_feedback')}
+              required
+            />
+            &lt;button
+              className="btn btn--primary"
+              type="submit"
+            >
+              {I18n.t('commons.send') }
+            &lt;/button>
+          &lt;/form>
+        &lt;/div>
+      &lt;/ContentPane>
+    )
+  }
+}
 
+/** Feedback propTypes */
+Feedback.propTypes = {
+  glpi: PropTypes.object.isRequired,
+}
 
-
-
+export default withGLPI(withHandleMessages(Feedback))
+</code></pre>
+        </article>
+    </section>
 
 
 
