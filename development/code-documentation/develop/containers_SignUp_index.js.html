@@ -274,7 +274,7 @@ class SignUp extends PureComponent {
     let renderComponent
     if (this.props.auth.isLoading) {
       renderComponent = (
-        &lt;div style={{ height: '140px' }}>
+        &lt;div style={ { height: '140px' } }>
           &lt;Loading message={`${I18n.t('commons.loading')}...`} />
         &lt;/div>
       )
@@ -282,7 +282,7 @@ class SignUp extends PureComponent {
       const user = this.buildDataArray()
       renderComponent = (
         &lt;React.Fragment>
-          &lt;h2 style={{ textAlign: 'center' }}>
+          &lt;h2 style={ { textAlign: 'center' } }>
             { I18n.t('create_account.title') }
           &lt;/h2>
 
@@ -304,10 +304,10 @@ class SignUp extends PureComponent {
                 {I18n.t('login.refresh_captcha')}
               &lt;/span>
             &lt;/div>
-            &lt;div style={{ textAlign: 'center' }}>
+            &lt;div style={ { textAlign: 'center' } }>
               &lt;button
                 className="btn btn--primary"
-                style={{ margin: '20px' }}
+                style={ { margin: '20px' } }
                 type="submit"
               >
                 { I18n.t('commons.register') }

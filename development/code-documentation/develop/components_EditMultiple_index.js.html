@@ -217,7 +217,7 @@ class EditMultiple extends PureComponent {
       let renderComponent
       if (this.state.isLoading) {
         renderComponent = (
-          &lt;div style={{ marginTop: 40 }}>
+          &lt;div style={ { marginTop: 40 } }>
             &lt;Loading message={`${I18n.t('commons.loading')}...`} />
           &lt;/div>
         )
@@ -254,13 +254,13 @@ class EditMultiple extends PureComponent {
                 type="password"
                 name="passwordConfirmation"
                 value={this.state.passwordConfirmation}
-                parametersToEvaluate={{
+                parametersToEvaluate={ {
                   ...this.state.passwordConfiguration,
                   isEqualTo: {
                     value: this.state.newValue,
                     message: 'Passwords do not match',
                   },
-                }}
+                } }
                 function={this.change}
                 forceValidation={this.state.forceValidation}
                 key="password-2"
@@ -288,12 +288,12 @@ class EditMultiple extends PureComponent {
                   options={[]}
                   function={this.change}
                   glpi={this.props.glpi}
-                  request={{
+                  request={ {
                     params: this.state.selectedField.params,
                     method: this.state.selectedField.method,
                     content: this.state.selectedField.content,
                     value: this.state.selectedField.value,
-                  }}
+                  } }
                 />
               )
             }
@@ -334,7 +334,7 @@ class EditMultiple extends PureComponent {
 
       return (
         &lt;ContentPane>
-          &lt;div className="content-header" style={{ margin: '0 10px' }}>
+          &lt;div className="content-header" style={ { margin: '0 10px' } }>
             &lt;h2 className="content-header__title">
               {I18n.t('edit_multiple.title')}
             &lt;/h2>
@@ -361,9 +361,9 @@ class EditMultiple extends PureComponent {
                     type="button"
                     className="btn btn--secondary"
                     onClick={this.cancel}
-                    style={{
+                    style={ {
                       marginLeft: 10,
-                    }}
+                    } }
                   >
                     {I18n.t('commons.cancel')}
                   &lt;/button>
@@ -372,9 +372,9 @@ class EditMultiple extends PureComponent {
                     type="button"
                     className="btn btn--primary"
                     onClick={this.handleSave}
-                    style={{
+                    style={ {
                       marginLeft: 10,
-                    }}
+                    } }
                   >
                     {I18n.t('commons.save')}
                   &lt;/button>

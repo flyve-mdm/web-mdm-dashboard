@@ -104,21 +104,21 @@ class HelpCenterArticle extends PureComponent {
     return (
       this.state.isLoading
         ? (
-          &lt;div style={{ height: '100%', marginTop: '-80px' }}>
+          &lt;div style={ { height: '100%', marginTop: '-80px' } }>
             &lt;Loading message={`${I18n.t('commons.loading')}...`} />
           &lt;/div>
         )
         : (
           &lt;ContentPane>
-            &lt;h2 style={{ margin: '10px' }}>
+            &lt;h2 style={ { margin: '10px' } }>
               {this.state.article.name}
             &lt;/h2>
-            &lt;div className="date" style={{ margin: '10px' }}>
+            &lt;div className="date" style={ { margin: '10px' } }>
               {this.state.article.date}
             &lt;/div>
             &lt;div
-              style={{ margin: '10px' }}
-              dangerouslySetInnerHTML={{ __html: this.htmlDecode(this.state.article.answer) }}
+              style={ { margin: '10px' } }
+              dangerouslySetInnerHTML={ { __html: this.htmlDecode(this.state.article.answer) } }
             />
           &lt;/ContentPane>
         )

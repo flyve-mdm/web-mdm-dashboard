@@ -108,10 +108,10 @@ class ReleaseNotes extends PureComponent {
       } else {
         renderComponent = (
           &lt;ContentPane>
-            &lt;h2 style={{ margin: '10px' }}>
+            &lt;h2 style={ { margin: '10px' } }>
               {I18n.t('about.release_notes.title')}
             &lt;/h2>
-            &lt;div className="about-pane" style={{ margin: '10px' }}>
+            &lt;div className="about-pane" style={ { margin: '10px' } }>
               &lt;ReactMarkdown source={this.state.release} />
             &lt;/div>
           &lt;/ContentPane>

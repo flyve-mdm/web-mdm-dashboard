@@ -103,7 +103,7 @@ class SystemInformation extends PureComponent {
               &lt;/div>
               &lt;div
                 className="plugin__detail"
-                dangerouslySetInnerHTML={{ __html: plugin.author }}
+                dangerouslySetInnerHTML={ { __html: plugin.author } }
               />
             &lt;/div>
             &lt;div className="plugin--right">
@@ -124,10 +124,10 @@ class SystemInformation extends PureComponent {
         ? &lt;Loading message={`${I18n.t('commons.loading')}...`} />
         : (
           &lt;ContentPane>
-            &lt;h2 style={{ margin: '10px' }}>
+            &lt;h2 style={ { margin: '10px' } }>
               {I18n.t('about.system_information.title')}
             &lt;/h2>
-            &lt;div className="about-pane" style={{ margin: '10px' }}>
+            &lt;div className="about-pane" style={ { margin: '10px' } }>
               {element}
             &lt;/div>
           &lt;/ContentPane>

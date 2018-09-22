@@ -77,14 +77,14 @@ export default class ApplicationsItemList extends PureComponent {
     } else {
       image = (
         &lt;div
-          style={{
+          style={ {
             display: 'inline-block',
             width: size,
             height: size,
             fontSize: '25px',
             textAlign: 'center',
             verticalAlign: 'super',
-          }}
+          } }
         >
           &lt;span className="iconFont documentIcon" />
         &lt;/div>
@@ -93,7 +93,7 @@ export default class ApplicationsItemList extends PureComponent {
     return (
       &lt;div>
         {image}
-        &lt;div style={{ marginLeft: 5, display: 'inline-block' }}>
+        &lt;div style={ { marginLeft: 5, display: 'inline-block' } }>
           &lt;div className="list-pane__name">
             {itemList['PluginFlyvemdmPackage.alias']}
           &lt;/div>

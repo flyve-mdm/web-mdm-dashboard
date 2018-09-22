@@ -95,10 +95,10 @@ class FleetsEdit extends PureComponent {
         history={this.props.history}
         toast={this.props.toast}
         glpi={this.props.glpi}
-        request={{
+        request={ {
           id: `${itemtype.PluginFlyvemdmFleet}.id`,
           itemtype: itemtype.PluginFlyvemdmFleet,
-        }}
+        } }
       />
     )
   }

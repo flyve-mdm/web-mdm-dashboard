@@ -218,13 +218,13 @@ class SearchEngine extends PureComponent {
 
     return (
       &lt;ContentPane>
-        &lt;div style={{ margin: '0 10px' }}>
+        &lt;div style={ { margin: '0 10px' } }>
           &lt;h1>
             {I18n.t('search_engine.title')}
           &lt;/h1>
           &lt;input
             type="text"
-            style={{ marginRight: 10 }}
+            style={ { marginRight: 10 } }
             className="win-textbox"
             placeholder="Itemtype"
             name="itemTypeName"
@@ -250,7 +250,7 @@ class SearchEngine extends PureComponent {
           )
         }
         &lt;br />
-        &lt;div style={{ margin: '0 10px' }}>
+        &lt;div style={ { margin: '0 10px' } }>
           {
             isLoading
               ? (

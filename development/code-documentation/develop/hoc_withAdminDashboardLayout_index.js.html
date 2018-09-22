@@ -101,9 +101,9 @@ const withAdminDashboardLayout = (WrappedComponent) => {
           iframe: &lt;iframe
             title="glpi-backend"
             src={`//${cfgGlpi.url_base.split('//')[1]}`}
-            style={{
+            style={ {
               height: 0, width: 0, opacity: 0, position: 'absolute',
-            }}
+            } }
           />,
         },
         () => setGlpiCookie(
@@ -203,7 +203,7 @@ const withAdminDashboardLayout = (WrappedComponent) => {
             &lt;Confirmation
               title={I18n.t('logout.close_session')}
               message={I18n.t('settings.security.close_session_message')}
-              reference={(el) => { this.contentDialog = el }}
+              reference={(el) => { this.contentDialog = el } }
             />
           &lt;/div>
         &lt;/main>

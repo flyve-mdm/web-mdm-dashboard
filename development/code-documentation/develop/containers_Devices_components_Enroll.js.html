@@ -134,7 +134,7 @@ export default class Enroll extends PureComponent {
     } else {
       renderComponent = (
         &lt;ContentPane>
-          &lt;div className="content-header" style={{ margin: '0 10px' }}>
+          &lt;div className="content-header" style={ { margin: '0 10px' } }>
             &lt;h2 className="content-header__title">
               {I18n.t('devices.enroll.title')}
             &lt;/h2>
@@ -164,7 +164,7 @@ export default class Enroll extends PureComponent {
           &lt;/button>
           &lt;button
             className="btn btn--primary"
-            style={{ marginLeft: 10 }}
+            style={ { marginLeft: 10 } }
             onClick={this.inviteDevice}
             type="button"
           >

@@ -530,7 +530,7 @@ class Dashboard extends PureComponent {
             labelRadius={90}
             labels={d => `${d.x} ${d.y}`}
             data={this.state.devicesByOperatingSystemVersion}
-            style={{ labels: { fill: '#000', fontSize: 24, fontWeight: 300 } }}
+            style={ { labels: { fill: '#000', fontSize: 24, fontWeight: 300 } } }
           />
           &lt;span className="title-box">
             {I18n.t('commons.devices_by_plataform').toUpperCase()}
@@ -555,7 +555,7 @@ class Dashboard extends PureComponent {
             data={[
               { x: I18n.t('commons.invitations'), y: this.state.pendingInvitations },
             ]}
-            style={{ labels: { fill: '#000', fontSize: 24, fontWeight: 300 } }}
+            style={ { labels: { fill: '#000', fontSize: 24, fontWeight: 300 } } }
           />
           &lt;span className="title-box">
             {I18n.t('commons.pending_invitations').toUpperCase()}
@@ -600,13 +600,13 @@ class Dashboard extends PureComponent {
     const renderGraphics = this.renderGraphics()
     const renderComponent = this.state.isLoading
       ? (
-        &lt;div style={{ width: '100%', height: 'calc(100vh - 80px)' }}>
+        &lt;div style={ { width: '100%', height: 'calc(100vh - 80px)' } }>
           &lt;Loading message={`${I18n.t('commons.loading')}...`} />
         &lt;/div>
       )
       : (
         &lt;ContentPane>
-          &lt;div className="dashboard" ref={(home) => { this.home = home }}>
+          &lt;div className="dashboard" ref={(home) => { this.home = home } }>
             {
                 (renderInfoBox.length > 0 || renderGraphics.length > 0)
                   ? (

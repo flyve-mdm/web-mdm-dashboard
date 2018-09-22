@@ -126,7 +126,7 @@ export default class FilesAdd extends PureComponent {
       try {
         const file = this.state.files[key]
         formData.append('file', file)
-        formData.append('uploadManifest', `{"input":{"name":"${file.name}"}}`)
+        formData.append('uploadManifest', `{"input":{"name":"${file.name}"} }`)
         this.setState({
           isLoading: true,
         })
@@ -162,17 +162,17 @@ export default class FilesAdd extends PureComponent {
     } else {
       renderComponent = (
         &lt;ContentPane>
-          &lt;div style={{ margin: '0 10px' }}>
+          &lt;div style={ { margin: '0 10px' } }>
             &lt;div className="content-header">
               &lt;h2 className="content-header__title">
                 {I18n.t('commons.new_file')}
               &lt;/h2>
             &lt;/div>
             &lt;div className="separator" />
-            &lt;div style={{ padding: '10px' }}>
+            &lt;div style={ { padding: '10px' } }>
               &lt;React.Fragment>
                 &lt;FilesUpload
-                  ref={(filesUpload) => { this.files = filesUpload }}
+                  ref={(filesUpload) => { this.files = filesUpload } }
                   className="files-dropzone"
                   onChange={this.onFilesChange}
                   onError={this.onFilesError}
@@ -183,7 +183,7 @@ export default class FilesAdd extends PureComponent {
                 >
                   {I18n.t('commons.drop_file')}
                 &lt;/FilesUpload>
-                &lt;div style={{ marginTop: 10 }}>
+                &lt;div style={ { marginTop: 10 } }>
                   &lt;button
                     className="btn btn--primary"
                     onClick={this.filesUpload}

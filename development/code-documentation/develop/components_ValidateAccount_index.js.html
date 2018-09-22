@@ -150,7 +150,7 @@ class ValidateAccount extends PureComponent {
     let renderComponent
     if (this.state.isLoading) {
       renderComponent = (
-        &lt;div style={{ height: '140px' }}>
+        &lt;div style={ { height: '140px' } }>
           &lt;Loading message={`${I18n.t('commons.loading')}...`} />
         &lt;/div>
       )

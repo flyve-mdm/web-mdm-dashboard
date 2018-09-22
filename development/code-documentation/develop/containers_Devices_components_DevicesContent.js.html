@@ -120,17 +120,17 @@ export default class DevicesContent extends PureComponent {
         &lt;Confirmation
           title={I18n.t('devices.danger_zone.last_warning')}
           message={I18n.t('devices.danger_zone.last_warning_message')}
-          reference={(el) => { this.wipeDevice = el }}
+          reference={(el) => { this.wipeDevice = el } }
         />
         &lt;Confirmation
           title={`${I18n.t('devices.danger_zone.unenroll_device')} # ${this.state.id}`}
           message={`${I18n.t('devices.danger_zone.going_to_unenroll')} ${this.state.id}`}
-          reference={(el) => { this.unenrollmentDevice = el }}
+          reference={(el) => { this.unenrollmentDevice = el } }
         />
         &lt;Confirmation
           title={`${I18n.t('devices.danger_zone.delete')} # ${this.state.id}`}
           message={`${I18n.t('devices.danger_zone.delete_message')} ${this.state.id}`}
-          reference={(el) => { this.deleteDevice = el }}
+          reference={(el) => { this.deleteDevice = el } }
         />
         &lt;ContentPane className="devices">
           &lt;ReactWinJS.Pivot ref={this.changeselectedItem}>
