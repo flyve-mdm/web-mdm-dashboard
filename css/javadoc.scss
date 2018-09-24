@@ -1,0 +1,779 @@
+---
+---
+
+// sass-lint:disable force-element-nesting
+// sass-lint:disable force-pseudo-nesting
+// sass-lint:disable force-attribute-nesting
+// sass-lint:disable no-qualifying-elements
+// sass-lint:disable class-name-format
+// sass-lint:disable no-color-literals
+// sass-lint:disable no-mergeable-selectors
+// sass-lint:disable no-important
+
+footer h4 {
+  font-size: 24px;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+h3 {
+  font-size: 16px;
+  font-style: italic;
+}
+
+h4 {
+  font-size: 13px;
+}
+
+h5 {
+  font-size: 12px;
+}
+
+h6 {
+  font-size: 11px;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+a[name]:hover {
+  text-decoration: none;
+}
+
+pre {
+  font-size: 14px;
+}
+
+.blockList h4 {
+  font-size: 13px;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+code,
+tt {
+  font-size: 14px;
+  line-height: 1.4em;
+  margin-top: 8px;
+  padding-top: 4px;
+}
+
+dt code {
+  font-size: 14px;
+  padding-top: 4px;
+}
+
+table tr td dt code {
+  font-size: 14px;
+  padding-top: 4px;
+  vertical-align: top;
+}
+
+sup {
+  font-size: 8px;
+}
+
+// Document title and Copyright styles
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+.aboutLanguage {
+  float: right;
+  font-size: 11px;
+  margin-top: -9px;
+  padding: 0 21px;
+  z-index: 200;
+}
+
+.legalCopy {
+  margin-left: .5em;
+}
+
+.bar a,
+.bar a:link,
+.bar a:visited,
+.bar a:active {
+  color: #fff;
+  text-decoration: none;
+}
+
+.bar a:hover,
+.bar a:focus {
+  color: #bb7a2a;
+}
+
+.tab {
+  background-color: #06f;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px;
+  width: 5em;
+}
+
+// Navigation bar styles
+
+.bar {
+  background-color: rgba(62, 62, 62, .3);
+  color: #fff;
+  font-size: 11px;
+  height: auto; //height: 1.8em;
+  margin: 0;
+  padding: .8em .5em .4em .8em;
+}
+
+.topNav {
+  background-color: rgba(62, 62, 62, .3);
+  clear: right;
+  color: #fff;
+  float: left;
+  font-size: 12px;
+  height: 2.8em;
+  overflow: hidden;
+  padding: 0;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.bottomNav {
+  background-color: rgba(62, 62, 62, .3);
+  clear: right;
+  color: #fff;
+  float: left;
+  font-size: 12px;
+  height: 2.8em;
+  margin-top: 10px;
+  overflow: hidden;
+  padding: 0;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.subNav {
+  background-color: #dee3e9;
+  float: left;
+  font-size: 12px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.subNav div {
+  clear: left;
+  float: left;
+  padding: 0 0 5px 6px;
+  text-transform: uppercase;
+}
+
+ul.navList,
+ul.subNavList {
+  float: left;
+  margin: 0 25px 0 0;
+  padding: 0;
+}
+
+ul.navList li {
+  float: left;
+  list-style: none;
+  padding: 5px 6px;
+  text-transform: uppercase;
+}
+
+ul.subNavList li {
+  float: left;
+  list-style: none;
+}
+
+.topNav a:link,
+.topNav a:active,
+.topNav a:visited,
+.bottomNav a:link,
+.bottomNav a:active,
+.bottomNav a:visited {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.topNav a:hover,
+.bottomNav a:hover {
+  color: #bb7a2a;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.navBarCell1Rev {
+  background-color: #008785;
+  color: #253441;
+  margin: auto 5px;
+}
+
+.skipNav {
+  left: -9999px;
+  overflow: hidden;
+  position: absolute;
+  top: auto;
+}
+
+// Page header and footer styles
+
+.header,
+.footer {
+  clear: both;
+  margin: 0 20px;
+  padding: 5px 0 0;
+}
+
+.indexHeader {
+  margin: 10px;
+  position: relative;
+}
+
+.indexHeader span {
+  margin-right: 15px;
+}
+
+.indexHeader h1 {
+  font-size: 13px;
+}
+
+.title {
+  color: #2c4557;
+  margin: 10px 0;
+}
+
+.subTitle {
+  margin: 5px 0 0;
+}
+
+.header ul {
+  margin: 0 0 15px;
+  padding: 0;
+}
+
+.footer ul {
+  margin: 20px 0 5px;
+}
+
+.header ul li,
+.footer ul li {
+  font-size: 13px;
+  list-style: none;
+}
+
+// Heading styles
+
+div.details ul.blockList ul.blockList ul.blockList li.blockList h4,
+div.details ul.blockList ul.blockList ul.blockListLast li.blockList h4 {
+  background-color: #dee3e9;
+  border: 1px solid #d0d9e0;
+  margin: 0 0 6px -8px;
+  padding: 7px 5px;
+}
+
+ul.blockList ul.blockList ul.blockList li.blockList h3 {
+  background-color: #dee3e9;
+  border: 1px solid #d0d9e0;
+  margin: 0 0 6px -8px;
+  padding: 7px 5px;
+}
+
+ul.blockList ul.blockList li.blockList h3 {
+  margin: 15px 0;
+  padding: 0;
+}
+
+ul.blockList li.blockList h2 {
+  padding: 0 0 20px;
+}
+
+// Page layout container styles
+.contentContainer,
+.sourceContainer,
+.classUseContainer,
+.serializedFormContainer,
+.constantValuesContainer {
+  clear: both;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.indexContainer {
+  font-size: 12px;
+  margin: 10px;
+  position: relative;
+}
+
+.indexContainer h2 {
+  font-size: 13px;
+  padding: 0 0 3px;
+}
+
+.indexContainer ul {
+  margin: 0;
+  padding: 0;
+}
+
+.indexContainer ul li {
+  list-style: none;
+  padding-top: 2px;
+}
+
+.contentContainer .description dl dt,
+.contentContainer .details dl dt,
+.serializedFormContainer dl dt {
+  color: #4e4e4e;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 10px 0 0;
+}
+
+.contentContainer .description dl dd,
+.contentContainer .details dl dd,
+.serializedFormContainer dl dd {
+  font-size: 14px;
+  margin: 5px 0 10px;
+}
+
+.serializedFormContainer dl.nameValue dt {
+  display: inline;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-left: 1px;
+}
+
+.serializedFormContainer dl.nameValue dd {
+  display: inline;
+  font-size: 1.1em;
+  margin: 0 0 0 1px;
+}
+
+// List styles
+
+ul.horizontal li {
+  display: inline;
+  font-size: .9em;
+}
+
+ul.inheritance {
+  margin: 0;
+  padding: 0;
+}
+
+ul.inheritance li {
+  display: inline;
+  list-style: none;
+}
+
+ul.inheritance li ul.inheritance {
+  margin-left: 15px;
+  padding-left: 15px;
+  padding-top: 1px;
+}
+
+ul.blockList,
+ul.blockListLast {
+  margin: 10px 0;
+  padding: 0;
+}
+
+ul.blockList li.blockList,
+ul.blockListLast li.blockList {
+  line-height: 1.4;
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+ul.blockList ul.blockList li.blockList,
+ul.blockList ul.blockListLast li.blockList {
+  background-color: #f8f8f8;
+  border: 1px solid #ededed;
+  padding: 0 20px 5px 10px;
+}
+
+ul.blockList ul.blockList ul.blockList li.blockList,
+ul.blockList ul.blockList ul.blockListLast li.blockList {
+  background-color: #fff;
+  border: 0;
+  padding: 0 0 5px 8px;
+}
+
+ul.blockList ul.blockList ul.blockList ul.blockList li.blockList {
+  border: 0;
+  margin-left: 0;
+  padding-bottom: 15px;
+  padding-left: 0;
+}
+
+ul.blockList ul.blockList ul.blockList ul.blockList li.blockListLast {
+  border-bottom: 0;
+  list-style: none;
+  padding-bottom: 0;
+}
+
+table tr td dl,
+table tr td dl dt,
+table tr td dl dd {
+  margin-bottom: 1px;
+  margin-top: 0;
+}
+
+// Table styles
+
+.overviewSummary,
+.memberSummary,
+.typeSummary,
+.useSummary,
+.constantsSummary,
+.deprecatedSummary {
+  border-bottom: 1px solid #eee;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  width: 100%;
+}
+
+.overviewSummary,
+.memberSummary  {
+  padding: 0;
+}
+
+.overviewSummary caption,
+.memberSummary caption,
+.typeSummary caption,
+.useSummary caption,
+.constantsSummary caption,
+.deprecatedSummary caption {
+  background-repeat: no-repeat;
+  clear: none;
+  color: #253441;
+  font-weight: bold;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  padding-left: 1px;
+  padding-top: 10px;
+  position: relative;
+  text-align: left;
+  white-space: pre;
+}
+
+.overviewSummary caption a:link,
+.memberSummary caption a:link,
+.typeSummary caption a:link,
+.useSummary caption a:link,
+.constantsSummary caption a:link,
+.deprecatedSummary caption a:link,
+.overviewSummary caption a:hover,
+.memberSummary caption a:hover,
+.typeSummary caption a:hover,
+.useSummary caption a:hover,
+.constantsSummary caption a:hover,
+.deprecatedSummary caption a:hover,
+.overviewSummary caption a:active,
+.memberSummary caption a:active,
+.typeSummary caption a:active,
+.useSummary caption a:active,
+.constantsSummary caption a:active,
+.deprecatedSummary caption a:active,
+.overviewSummary caption a:visited,
+.memberSummary caption a:visited,
+.typeSummary caption a:visited,
+.useSummary caption a:visited,
+.constantsSummary caption a:visited,
+.deprecatedSummary caption a:visited {
+  color: #474747;
+}
+
+.useSummary caption span,
+.constantsSummary caption span,
+.deprecatedSummary caption span {
+  background-color: #008785;
+  border: 0;
+  color: #fff;
+  // display: inline-block;
+  float: left;
+  height: 30px;
+  margin-bottom: 5px;
+  padding-bottom: 7px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  white-space: nowrap;
+}
+
+.memberSummary caption span.activeTableTab span {
+  background-color: #008785;
+  color: #fff;
+  // display: inline-block;
+  float: left;
+  height: 30px;
+  margin-bottom: 5px;
+  margin-right: 3px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  white-space: nowrap;
+}
+
+.memberSummary caption span.tableTab span {
+  background-color: rgba(62, 62, 62, .3);
+  // display: inline-block;
+  float: left;
+  height: 30px;
+  margin-bottom: 5px;
+  margin-right: 3px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  white-space: nowrap;
+}
+
+.memberSummary caption span.tableTab,
+.memberSummary caption span.activeTableTab {
+  background-image: none;
+  display: inline;
+  float: none;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+}
+
+.overviewSummary .tabEnd,
+.memberSummary .tabEnd,
+.typeSummary .tabEnd,
+.useSummary .tabEnd,
+.constantsSummary .tabEnd,
+.deprecatedSummary .tabEnd {
+  background-color: #008785;
+  color: #fff;
+  display: none;
+  float: left;
+  position: relative;
+  width: 5px;
+}
+
+.memberSummary .activeTableTab .tabEnd {
+  background-color: #008785;
+  color: #fff;
+  display: none;
+  float: left;
+  margin-right: 3px;
+  position: relative;
+  width: 5px;
+}
+
+.memberSummary .tableTab .tabEnd {
+  background-color: rgba(62, 62, 62, .3);
+  color: #000;
+  display: none;
+  float: left;
+  margin-right: 3px;
+  position: relative;
+  white-space: nowrap;
+  width: 5px;
+}
+
+.overviewSummary td,
+.memberSummary td,
+.typeSummary td,
+.useSummary td,
+.constantsSummary td,
+.deprecatedSummary td {
+  padding: 0 0 12px 10px;
+  text-align: left;
+}
+
+th.colOne,
+th.colFirst,
+th.colLast,
+.useSummary th,
+.constantsSummary th,
+td.colOne,
+td.colFirst,
+td.colLast,
+.useSummary td,
+.constantsSummary td {
+  padding-bottom: 3px;
+  padding-right: 0;
+  padding-top: 8px;
+  vertical-align: top;
+}
+
+th.colFirst,
+th.colLast,
+th.colOne,
+.constantsSummary th {
+  background: #dee3e9;
+  padding: 8px 3px 3px 7px;
+  text-align: left;
+}
+
+td.colFirst,
+th.colFirst {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+td.colLast,
+th.colLast {
+  font-size: 13px;
+}
+
+td.colOne,
+th.colOne {
+  font-size: 13px;
+}
+
+.overviewSummary td.colFirst,
+.overviewSummary th.colFirst,
+.useSummary td.colFirst,
+.useSummary th.colFirst,
+.overviewSummary td.colOne,
+.overviewSummary th.colOne,
+.memberSummary td.colFirst,
+.memberSummary th.colFirst,
+.memberSummary td.colOne,
+.memberSummary th.colOne,
+.typeSummary td.colFirst {
+  vertical-align: top;
+  width: 25%;
+}
+
+td.colOne a:link,
+td.colOne a:active,
+td.colOne a:visited,
+td.colOne a:hover,
+td.colFirst a:link,
+td.colFirst a:active,
+td.colFirst a:visited,
+td.colFirst a:hover,
+td.colLast a:link,
+td.colLast a:active,
+td.colLast a:visited,
+td.colLast a:hover,
+.constantValuesContainer td a:link,
+.constantValuesContainer td a:active,
+.constantValuesContainer td a:visited,
+.constantValuesContainer td a:hover {
+  font-weight: bold;
+}
+
+.tableSubHeadingColor {
+  background-color: #eef;
+}
+
+.altColor {
+  background-color: #fff;
+}
+
+.rowColor {
+  background-color: #eeeeef;
+}
+
+// Content styles
+
+.description pre {
+  margin-top: 0;
+}
+
+.deprecatedContent {
+  margin: 0;
+  padding: 10px 0;
+}
+
+.docSummary {
+  padding: 0;
+}
+
+ul.blockList ul.blockList ul.blockList li.blockList h3 {
+  font-style: normal;
+}
+
+div.block {
+  font-size: 14px;
+}
+
+td.colLast div {
+  padding-top: 0;
+}
+
+
+td.colLast a {
+  padding-bottom: 3px;
+}
+
+// Formatting effect styles
+
+.sourceLineNo {
+  color: #008000;
+  padding: 0 30px 0 0;
+}
+
+h1.hidden {
+  font-size: 10px;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.block {
+  color: #474747;
+  display: block;
+  margin: 3px 10px 2px 0;
+}
+
+.deprecatedLabel,
+.descfrmTypeLabel,
+.memberNameLabel,
+.memberNameLink,
+.overrideSpecifyLabel,
+.packageHierarchyLabel,
+.paramLabel,
+.returnLabel,
+.seeLabel,
+.simpleTagLabel,
+.throwsLabel,
+.typeNameLabel,
+.typeNameLink {
+  font-weight: bold;
+}
+
+.deprecationComment,
+.emphasizedPhrase,
+.interfaceName {
+  font-style: italic;
+}
+
+div.block div.block span.deprecationComment,
+div.block div.block span.emphasizedPhrase,
+div.block div.block span.interfaceName {
+  font-style: normal;
+}
+
+div.contentContainer ul.blockList li.blockList h2 {
+  padding-bottom: 0;
+}
+
+code {
+  white-space: normal !important;
+}
