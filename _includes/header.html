@@ -97,12 +97,12 @@
                     </a>
                     <ul class="dropdown-menu">
                       <li><a href="{{ '/development/coverage/develop/lcov-report' | absolute_url }}">Develop</a></li>
-                      <li><a href="{{ '/development/coverage/master' | absolute_url }}">Master</a></li>
-                      {% for version in site.data.whitelist_version %}
-                        <li>
-                          <a href="{{ 'development/coverage/support/' | absolute_url }}{{ version }}">{{ version }}</a>
-                        </li>
-                      {% endfor %}
+                        <li><a href="{{ '/development/coverage/master/lcov-report' | absolute_url }}">Master</a></li>
+                        {% for version in site.data.whitelist_version %}
+                          <li>
+                            <a href="{{ 'development/coverage/support/' | absolute_url | append: version | append: "/lcov-report/" }}">{{ version }}</a>
+                          </li>
+                        {% endfor %}
                     </ul>
                   </li>
                 </ul>
