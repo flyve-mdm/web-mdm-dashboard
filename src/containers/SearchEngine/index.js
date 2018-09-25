@@ -35,7 +35,9 @@ import I18n from 'shared/i18n'
 import withGLPI from 'hoc/withGLPI'
 import ContentPane from 'components/ContentPane'
 import SearchQueryBuilder from './components/SearchQueryBuilder'
-import Panel from './components/Panel'
+import ItemTypeSelector from './components/ItemTypeSelector'
+import ResultsDisplay from './components/ResultsDisplay'
+
 import {
   setFields,
   getTranslation,
@@ -153,37 +155,6 @@ class SearchEngine extends PureComponent {
   }
 
   /**
-   * Create Array of objects with the result of the search
-   * @function arrayResultsWithFields
-   * @return {array}
-   */
-  arrayResultsWithFields = () => {
-    const {
-      itemResults,
-      listSearchOptions,
-    } = this.state
-
-    const resultsWithFields = []
-
-    itemResults && itemResults.forEach((result) => {
-      const arrayResult = []
-      const arrayOfArraysIdAndData = Object.entries(result)
-
-      arrayOfArraysIdAndData.forEach((field) => {
-        const objectField = {
-          fieldName: listSearchOptions[field[0]].name,
-          fieldValue: field[1],
-          fieldId: field[0],
-        }
-        arrayResult.push(objectField)
-      })
-      resultsWithFields.push(arrayResult)
-    })
-
-    return resultsWithFields
-  }
-
-  /**
    * Render component
    * @function render
    */
@@ -194,6 +165,7 @@ class SearchEngine extends PureComponent {
       isLoading,
       query,
       itemResults,
+      listSearchOptions,
     } = this.state
 
     return (
@@ -202,23 +174,14 @@ class SearchEngine extends PureComponent {
           <h1>
             {I18n.t('search_engine.title')}
           </h1>
-          <input
-            type="text"
-            style={{ marginRight: 10 }}
-            className="win-textbox"
-            placeholder="Itemtype"
-            name="itemTypeName"
-            value={itemType}
-            onChange={this.handleChangeItemType}
+
+          <ItemTypeSelector
+            itemType={itemType}
+            handleChangeItemType={this.handleChangeItemType}
+            handleRequestItemType={this.handleRequestItemType}
           />
-          <button
-            className="btn btn--secondary"
-            onClick={this.handleRequestItemType}
-            type="button"
-          >
-            {I18n.t('commons.change')}
-          </button>
         </div>
+
         {
           fields.length > 0
           && (
@@ -229,7 +192,9 @@ class SearchEngine extends PureComponent {
             />
           )
         }
+
         <br />
+
         <div style={{ margin: '0 10px' }}>
           {
             isLoading
@@ -257,21 +222,9 @@ class SearchEngine extends PureComponent {
                   </p>
                 )
           }
-          {
-            itemResults
-              ? itemResults.length > 0
-                ? (
-                  <Panel
-                    itemResults={itemResults.length > 0 ? this.arrayResultsWithFields() : []}
-                  />
-                )
-                : (
-                  <p>
-                    {I18n.t('search_engine.item_not_found')}
-                  </p>
-                )
-              : null
-          }
+
+          <ResultsDisplay results={itemResults} listSearchOptions={listSearchOptions} />
+
         </div>
       </ContentPane>
     )
