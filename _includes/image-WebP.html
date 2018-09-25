@@ -1,0 +1,23 @@
+
+{% assign url_img = include.img | absolute_url %}
+
+{% assign my_array = url_img | split: "." %}
+{% assign format = url_img | replace: my_array.first, "" %}
+
+{% assign url_img = url_img | replace: format, "" %}
+
+
+{% if include.lazy == "true" %}
+  <picture class="lazy" }}">
+    <data-src type="image/webp" srcset="{{ url_img | append: ".webp" }}"></data-src>
+    <data-img src="{{ url_img | append: format }}" alt="{{ include.alt }}" class="{{ include.class }}"></data-img>
+  </picture>
+
+{% else %}
+
+  <picture>
+    <source type="image/webp" srcset="{{ url_img | append: ".webp" }}">
+    <img src="{{ url_img | append: format }}" alt="{{ include.alt }}" class="{{ include.class }}">
+  </picture>
+{% endif %}
+

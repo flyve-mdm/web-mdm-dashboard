@@ -207,4 +207,7 @@ $(() => {
       top: 16,
     },
   })
+
+  // Enable jQuery Lazy plugin
+  $('.lazy').lazy()
 })

@@ -19,10 +19,9 @@
                 href="https://flyve-mdm.com/"
                 class="navbar__logo--first"
               >
-                <img
-                  src="{{ 'images/typo.png' | absolute_url }}"
-                  alt="Flyve MDM"
-                />
+
+                {% include image-WebP.html img="images/typo.png" alt="Flyve MDM" %}
+
               </a>
 
               <div class="navbar__separator"></div>
@@ -31,10 +30,9 @@
                 href="{{ '/' | absolute_url }}"
                 class="navbar__logo--second"
               >
-                <img
-                  src="{{ 'images/logo2.png' | absolute_url }}"
-                  alt="Home"
-                />
+
+                {% include image-WebP.html img="images/logo2.png" alt="Home" %}
+
               </a>
             </div>
           </div>
