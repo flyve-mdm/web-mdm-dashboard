@@ -39,7 +39,7 @@ import ItemTypeSelector from './components/ItemTypeSelector'
 import ResultsDisplay from './components/ResultsDisplay'
 
 import {
-  setFields,
+  getFields,
   getTranslation,
   normalizeQuery,
 } from './actions'
@@ -60,10 +60,10 @@ class SearchEngine extends PureComponent {
       itemResults: undefined,
       fields: [],
       isLoading: true,
+      listSearchOptions: null,
     }
 
     this.translations = getTranslation() // Friendly translations of each QueryBuilder input
-    this.setFields = () => setFields(this)
     this.normalizeQuery = () => normalizeQuery(this)
   }
 
@@ -98,6 +98,7 @@ class SearchEngine extends PureComponent {
       fields: [],
       isLoading: true,
     })
+
     try {
       const { itemType } = this.state
       const { glpi } = this.props
@@ -109,8 +110,7 @@ class SearchEngine extends PureComponent {
       this.setState({
         isLoading: false,
         listSearchOptions,
-      }, () => {
-        this.setFields()
+        fields: getFields(listSearchOptions),
       })
     } catch (error) {
       this.setState({
@@ -144,6 +144,7 @@ class SearchEngine extends PureComponent {
         itemtype: itemType,
         criteria: this.normalizeQuery(),
       })
+
       this.setState({
         itemResults: search.data ? search.data : [],
       })
@@ -195,7 +196,7 @@ class SearchEngine extends PureComponent {
 
         <br />
 
-        <div style={{ margin: '0 10px' }}>
+        <div style={{ margin: '0 10px 10px' }}>
           {
             isLoading
               ? (
