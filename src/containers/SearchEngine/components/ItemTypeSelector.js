@@ -47,14 +47,14 @@ class ItemTypeSelector extends PureComponent {
           style={{ marginRight: 10 }}
           className="win-textbox"
           placeholder="Itemtype"
-          name="itemTypeName"
-          value={this.props.itemType}
-          onChange={this.props.handleChangeItemType}
+          name="itemtypeName"
+          value={this.props.itemtype}
+          onChange={this.props.changeItemType}
         />
 
         <button
           className="btn btn--secondary"
-          onClick={this.props.handleRequestItemType}
+          onClick={this.props.handleSearchItem}
           type="button"
         >
           {I18n.t('commons.change')}
@@ -65,9 +65,9 @@ class ItemTypeSelector extends PureComponent {
 }
 
 ItemTypeSelector.propTypes = {
-  itemType: PropTypes.string.isRequired,
-  handleChangeItemType: PropTypes.func.isRequired,
-  handleRequestItemType: PropTypes.func.isRequired,
+  itemtype: PropTypes.string.isRequired,
+  changeItemType: PropTypes.func.isRequired,
+  handleSearchItem: PropTypes.func.isRequired,
 }
 
 export default ItemTypeSelector
