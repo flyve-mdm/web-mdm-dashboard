@@ -26,62 +26,12 @@
  * ------------------------------------------------------------------------------
  */
 
-/** import dependencies */
-import React, {
-  PureComponent,
-} from 'react'
-import PropTypes from 'prop-types'
-import I18n from 'shared/i18n'
+import normalizeQuery from './normalizeQuery'
+import getListSearchOptions from './getListSearchOptions'
+import searchItem from './searchItem'
 
-/**
- * Component with the render of the search button
- * @class SearchQueryBuilder
- * @extends SeachArea
- */
-class SeachArea extends PureComponent {
-  render() {
-    let display = null
-
-    if (this.props.isLoading) {
-      display = (
-        <p>
-          {I18n.t('commons.loading')}
-          ...
-        </p>
-      )
-    } else if (this.props.query) {
-      if (this.props.query.rules.length) {
-        display = (
-          <button
-            className="btn btn--primary"
-            onClick={this.props.handleSearchItem}
-            type="submit"
-          >
-            {I18n.t('commons.search')}
-          </button>
-        )
-      } else {
-        display = (
-          <p>
-            {I18n.t('search_engine.itemtype_not_found')}
-          </p>
-        )
-      }
-    }
-
-    return display
-  }
+export {
+  normalizeQuery,
+  getListSearchOptions,
+  searchItem,
 }
-
-SeachArea.defaultProps = {
-  query: null,
-}
-
-SeachArea.propTypes = {
-  query: PropTypes.object,
-  isLoading: PropTypes.bool.isRequired,
-  handleSearchItem: PropTypes.func.isRequired,
-}
-
-
-export default SeachArea

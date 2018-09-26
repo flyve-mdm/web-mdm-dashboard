@@ -32,17 +32,16 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import I18n from 'shared/i18n'
-import withGLPI from 'hoc/withGLPI'
 import ContentPane from 'components/ContentPane'
-import SearchQueryBuilder from './components/SearchQueryBuilder'
+import withGLPI from 'hoc/withGLPI'
+import QueryBuilder from './components/QueryBuilder'
 import ItemTypeSelector from './components/ItemTypeSelector'
 import ResultsDisplay from './components/ResultsDisplay'
-
+import SeachArea from './components/SeachArea'
 import {
-  getFields,
-  getTranslation,
-  normalizeQuery,
-} from './actions'
+  getListSearchOptions,
+  searchItem,
+} from './actions/index'
 
 /**
  * Component with the SearchEngine section
@@ -55,62 +54,41 @@ class SearchEngine extends PureComponent {
     super(props)
 
     this.state = {
+      searchResult: [],
       query: null,
-      itemType: 'computer',
-      itemResults: undefined,
-      fields: [],
-      isLoading: true,
+      itemtype: 'Computer',
       listSearchOptions: null,
+      isLoading: true,
     }
-
-    this.translations = getTranslation() // Friendly translations of each QueryBuilder input
-    this.normalizeQuery = () => normalizeQuery(this)
   }
 
   /**
-   * Make the call to fetch search options list of itemType
+   * Make the call to fetch search options list of itemtype
    * @function componentDidMount
    */
   componentDidMount() {
-    this.handleRequestItemType()
-  }
-
-  /**
-   * Handle change itemType
-   * @function handleChangeItemType
-   * @param {object} e
-   */
-  handleChangeItemType = (e) => {
-    this.setState({
-      itemType: e.target.value,
-    })
+    this.handleGetListSearchOptions()
   }
 
   /**
    * Fetch search options list of itemType
-   * @function handleRequestItemType
+   * @function handleGetListSearchOptions
    * @async
    */
-  handleRequestItemType = async () => {
-    this.setState({
-      query: null,
-      itemResults: undefined,
-      fields: [],
-      isLoading: true,
-    })
-
+  handleGetListSearchOptions = async () => {
     try {
-      const { itemType } = this.state
-      const { glpi } = this.props
-
-      const listSearchOptions = await glpi.listSearchOptions({
-        itemtype: itemType,
+      await this.setState({
+        isLoading: true,
+        query: null,
+        searchResult: [],
+        listSearchOptions: null,
       })
 
+      const { itemtype } = this.state
+
       this.setState({
+        listSearchOptions: await getListSearchOptions(itemtype, this.props.glpi),
         isLoading: false,
-        listSearchOptions,
-        fields: getFields(listSearchOptions),
       })
     } catch (error) {
       this.setState({
@@ -119,38 +97,43 @@ class SearchEngine extends PureComponent {
     }
   }
 
+
+  /**
+   * Handle change itemtype
+   * @function changeItemType
+   * @param {object} e
+   */
+  changeItemType = (e) => {
+    this.setState({
+      itemtype: e.target.value,
+    })
+  }
+
   /**
    * Update the query state each time that the QueryBuilde query change
-   * @function handleChangeQuery
+   * @function changeQuery
    * @param {string} query
    */
-  handleChangeQuery = (query) => {
+  changeQuery = (query) => {
     this.setState({
       query,
     })
   }
 
   /**
-   * Handle click event in the search button
-   * @function handleOnSearch
-   * @async
+   * Search items in glpi
+   * @function handleSearchItem
    */
-  handleOnSearch = async () => {
+  handleSearchItem = async () => {
     try {
-      const { glpi } = this.props
-      const { itemType } = this.state
-
-      const search = await glpi.searchItems({
-        itemtype: itemType,
-        criteria: this.normalizeQuery(),
-      })
+      const { itemtype, query } = this.state
 
       this.setState({
-        itemResults: search.data ? search.data : [],
+        searchResult: await searchItem(this.props.glpi, itemtype, query),
       })
     } catch (error) {
       this.setState({
-        itemResults: [],
+        searchResult: [],
       })
     }
   }
@@ -161,72 +144,48 @@ class SearchEngine extends PureComponent {
    */
   render() {
     const {
-      itemType,
-      fields,
+      itemtype,
       isLoading,
       query,
-      itemResults,
+      searchResult,
       listSearchOptions,
     } = this.state
 
     return (
-      <ContentPane>
-        <div style={{ margin: '0 10px' }}>
-          <h1>
-            {I18n.t('search_engine.title')}
-          </h1>
+      <ContentPane className="search-engine">
+        <h1>
+          {I18n.t('search_engine.title')}
+        </h1>
 
-          <ItemTypeSelector
-            itemType={itemType}
-            handleChangeItemType={this.handleChangeItemType}
-            handleRequestItemType={this.handleRequestItemType}
-          />
-        </div>
+        <ItemTypeSelector
+          itemtype={itemtype}
+          changeItemType={this.changeItemType}
+          handleSearchItem={this.handleSearchItem}
+        />
 
         {
-          fields.length > 0
+          listSearchOptions && itemtype
           && (
-            <SearchQueryBuilder
-              fields={fields}
-              handleChangeQuery={this.handleChangeQuery}
-              translations={this.translations}
+            <QueryBuilder
+              changeQuery={this.changeQuery}
+              itemtype={itemtype}
+              listSearchOptions={listSearchOptions}
+              glpi={this.props.glpi}
             />
           )
         }
 
-        <br />
+        <SeachArea
+          isLoading={isLoading}
+          query={query}
+          handleSearchItem={this.handleSearchItem}
+        />
 
-        <div style={{ margin: '0 10px 10px' }}>
-          {
-            isLoading
-              ? (
-                <p>
-                  {I18n.t('commons.loading')}
-                  ...
-                </p>
-              )
-              : query
-                ? query.rules.length
-                  ? (
-                    <button
-                      className="btn btn--primary"
-                      onClick={this.handleOnSearch}
-                      type="submit"
-                    >
-                      {I18n.t('commons.search')}
-                    </button>
-                  )
-                  : null
-                : (
-                  <p>
-                    {I18n.t('search_engine.itemType_not_found')}
-                  </p>
-                )
-          }
+        <ResultsDisplay
+          results={searchResult}
+          listSearchOptions={listSearchOptions}
+        />
 
-          <ResultsDisplay results={itemResults} listSearchOptions={listSearchOptions} />
-
-        </div>
       </ContentPane>
     )
   }

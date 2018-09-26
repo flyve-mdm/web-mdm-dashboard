@@ -26,62 +26,26 @@
  * ------------------------------------------------------------------------------
  */
 
-/** import dependencies */
-import React, {
-  PureComponent,
-} from 'react'
-import PropTypes from 'prop-types'
-import I18n from 'shared/i18n'
-
 /**
- * Component with the render of the search button
- * @class SearchQueryBuilder
- * @extends SeachArea
+ * Returns the fields to use in the QueryBuilder component
+ * @function getFields
+ * @param {object} listSearchOptions
  */
-class SeachArea extends PureComponent {
-  render() {
-    let display = null
+export default function (listSearchOptions) {
+  const fields = []
 
-    if (this.props.isLoading) {
-      display = (
-        <p>
-          {I18n.t('commons.loading')}
-          ...
-        </p>
-      )
-    } else if (this.props.query) {
-      if (this.props.query.rules.length) {
-        display = (
-          <button
-            className="btn btn--primary"
-            onClick={this.props.handleSearchItem}
-            type="submit"
-          >
-            {I18n.t('commons.search')}
-          </button>
-        )
-      } else {
-        display = (
-          <p>
-            {I18n.t('search_engine.itemtype_not_found')}
-          </p>
-        )
+  for (const key in listSearchOptions) {
+    if (Object.prototype.hasOwnProperty.call(listSearchOptions, key)) {
+      const { name, field } = listSearchOptions[key]
+
+      if (name !== undefined && field !== undefined) {
+        fields.push({
+          name: key,
+          label: name,
+        })
       }
     }
-
-    return display
   }
+
+  return fields
 }
-
-SeachArea.defaultProps = {
-  query: null,
-}
-
-SeachArea.propTypes = {
-  query: PropTypes.object,
-  isLoading: PropTypes.bool.isRequired,
-  handleSearchItem: PropTypes.func.isRequired,
-}
-
-
-export default SeachArea
