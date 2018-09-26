@@ -26,20 +26,20 @@
  * ------------------------------------------------------------------------------
  */
 
+
 /**
- * Set state for render field in the QueryBuilder component
- * @function setFields
- * @param {object} ctx
+ * Returns the fields to use in the QueryBuilder component
+ * @function getFields
+ * @param {object} listSearchOptions
  */
-const setFields = (ctx) => {
+function getFields(listSearchOptions) {
   const fields = []
-  const { listSearchOptions } = ctx.state
 
   for (const key in listSearchOptions) {
     if (Object.prototype.hasOwnProperty.call(listSearchOptions, key)) {
-      if (listSearchOptions[key].name !== undefined
-        && listSearchOptions[key].field !== undefined) {
-        const { name } = listSearchOptions[key]
+      const { name, field } = listSearchOptions[key]
+
+      if (name !== undefined && field !== undefined) {
         fields.push({
           name: key,
           label: name,
@@ -47,22 +47,9 @@ const setFields = (ctx) => {
       }
     }
   }
-  ctx.setState({
-    fields,
-  })
-}
 
-/**
- * Normalize keys of rule object
- * @param {object} ctx
- * @param {object} rule
- * @return {object}
- */
-const normalizeRule = (ctx, rule) => ({
-  field: Number(rule.field),
-  searchtype: rule.operator,
-  value: rule.value,
-})
+  return fields
+}
 
 /**
  * Create the array of rules extracted
@@ -80,7 +67,9 @@ const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator)
      */
     arrayRulesExtracted.push({
       link: combinator, // 'AND' or 'OR'
-      ...normalizeRule(ctx, query),
+      field: Number(query.field),
+      searchtype: query.operator,
+      value: query.value,
     })
   } else {
     /*
@@ -149,7 +138,7 @@ const getTranslation = () => ({
 })
 
 module.exports = {
-  setFields,
   getTranslation,
   normalizeQuery,
+  getFields,
 }
