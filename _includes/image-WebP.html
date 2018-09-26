@@ -1,10 +1,8 @@
 
-{% assign url_img = include.img | absolute_url %}
+{% assign my_array = include.img | split: "." %}
+{% assign format = include.img | replace: my_array.first, "" %}
 
-{% assign my_array = url_img | split: "." %}
-{% assign format = url_img | replace: my_array.first, "" %}
-
-{% assign url_img = url_img | replace: format, "" %}
+{% assign url_img = my_array.first | absolute_url %}
 
 
 {% if include.lazy == "true" %}
