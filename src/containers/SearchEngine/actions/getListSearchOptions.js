@@ -26,62 +26,15 @@
  * ------------------------------------------------------------------------------
  */
 
-/** import dependencies */
-import React, {
-  PureComponent,
-} from 'react'
-import PropTypes from 'prop-types'
-import I18n from 'shared/i18n'
-
 /**
- * Component with the render of the search button
- * @class SearchQueryBuilder
- * @extends SeachArea
+ * Fetch search options list of itemType
+ * @function getListSearchOptions
+ * @async
  */
-class SeachArea extends PureComponent {
-  render() {
-    let display = null
-
-    if (this.props.isLoading) {
-      display = (
-        <p>
-          {I18n.t('commons.loading')}
-          ...
-        </p>
-      )
-    } else if (this.props.query) {
-      if (this.props.query.rules.length) {
-        display = (
-          <button
-            className="btn btn--primary"
-            onClick={this.props.handleSearchItem}
-            type="submit"
-          >
-            {I18n.t('commons.search')}
-          </button>
-        )
-      } else {
-        display = (
-          <p>
-            {I18n.t('search_engine.itemtype_not_found')}
-          </p>
-        )
-      }
-    }
-
-    return display
+export default async (itemtype, glpi) => new Promise(async (resolve, reject) => {
+  try {
+    resolve(await glpi.listSearchOptions({ itemtype }))
+  } catch (error) {
+    reject(error)
   }
-}
-
-SeachArea.defaultProps = {
-  query: null,
-}
-
-SeachArea.propTypes = {
-  query: PropTypes.object,
-  isLoading: PropTypes.bool.isRequired,
-  handleSearchItem: PropTypes.func.isRequired,
-}
-
-
-export default SeachArea
+})

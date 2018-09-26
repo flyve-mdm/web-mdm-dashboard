@@ -26,41 +26,15 @@
  * ------------------------------------------------------------------------------
  */
 
-
-/**
- * Returns the fields to use in the QueryBuilder component
- * @function getFields
- * @param {object} listSearchOptions
- */
-function getFields(listSearchOptions) {
-  const fields = []
-
-  for (const key in listSearchOptions) {
-    if (Object.prototype.hasOwnProperty.call(listSearchOptions, key)) {
-      const { name, field } = listSearchOptions[key]
-
-      if (name !== undefined && field !== undefined) {
-        fields.push({
-          name: key,
-          label: name,
-        })
-      }
-    }
-  }
-
-  return fields
-}
-
 /**
  * Create the array of rules extracted
  * @function recursiveExtractQueryRules
  * @param {object} query
- * @param {object} ctx
  * @param {array} arrayRulesExtracted
  * @param {string} combinator
  * @return {array}
  */
-const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator) => {
+const recursiveExtractQueryRules = (query, arrayRulesExtracted, combinator) => {
   if (typeof (query.rules) === 'undefined' || typeof (query.field) === 'string') {
     /*
      * It means that it is a rule, and it has operator, value and field
@@ -76,7 +50,7 @@ const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator)
      * It means that it is a group and you have rules and combinator
      */
     query.rules.forEach((rule) => {
-      recursiveExtractQueryRules(rule, ctx, arrayRulesExtracted, query.combinator)
+      recursiveExtractQueryRules(rule, arrayRulesExtracted, query.combinator)
     })
   }
 
@@ -87,58 +61,17 @@ const recursiveExtractQueryRules = (query, ctx, arrayRulesExtracted, combinator)
  * Process query create by QueryBuilde.
  * And normalize for correct format to GLPI REST API URI
  * @function normalizeQuery
- * @param {object} ctx
+ * @param {object} query
  * @return {array}
  */
-const normalizeQuery = (ctx) => {
-  const query = { ...ctx.state.query }
+const normalizeQuery = (query) => {
   const arrayRules = []
 
   const arrayRulesExtracted = recursiveExtractQueryRules(
-    query, ctx, arrayRules, query.combinator,
+    query, arrayRules, query.combinator,
   )
 
   return arrayRulesExtracted
 }
 
-/**
- * Friendly translation for each QueryBuilder input
- * @function getTranslation
- * @return {object}
- */
-const getTranslation = () => ({
-  fields: {
-    title: 'Fields',
-  },
-  operators: {
-    title: 'Operators',
-  },
-  value: {
-    title: 'Value',
-  },
-  removeRule: {
-    label: 'x',
-    title: 'Remove rule',
-  },
-  removeGroup: {
-    label: 'x',
-    title: 'Remove group',
-  },
-  addRule: {
-    label: '+Rule',
-    title: 'Add rule',
-  },
-  addGroup: {
-    label: '+Group',
-    title: 'Add group',
-  },
-  combinators: {
-    title: 'Combinators',
-  },
-})
-
-module.exports = {
-  getTranslation,
-  normalizeQuery,
-  getFields,
-}
+export default normalizeQuery
