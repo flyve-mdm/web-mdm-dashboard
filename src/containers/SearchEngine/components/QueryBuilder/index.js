@@ -3,6 +3,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import Rule from './Rule'
+import createFieldList from '../../actions/createFieldList'
 
 /**
  * Component to select a item type
@@ -16,14 +17,31 @@ class QueryBuilder extends PureComponent {
     this.state = {
       criteria: [],
       metaCriteria: [],
+      fieldList: createFieldList(props.listSearchOptions),
     }
   }
 
+  componentDidUpdate() {
+    this.props.changeQuery({
+      itemtype: this.props.itemtype,
+      criteria: this.state.criteria,
+      metacriteria: this.state.metaCriteria,
+    })
+  }
+
   addCriteria = () => {
-    const { criteria: currentCriteria } = this.state
+    const { criteria: currentCriteria, fieldList } = this.state
 
     this.setState({
-      criteria: [...currentCriteria, {}],
+      criteria: [
+        ...currentCriteria,
+        {
+          link: 'AND',
+          field: fieldList[0].value,
+          searchtype: 'contains',
+          value: '',
+        },
+      ],
     })
   }
 
@@ -40,7 +58,7 @@ class QueryBuilder extends PureComponent {
     const newRules = [...CurrentRules]
 
     if (newValue) {
-      newRules[id] = newValue
+      newRules[id] = { ...newRules[id], ...newValue }
 
       this.setState({
         [type]: newRules,
@@ -68,11 +86,12 @@ class QueryBuilder extends PureComponent {
               <Rule
                 id={index}
                 type="criteria"
-                link="AND"
+                link={rule.link}
                 field={rule.field}
                 searchtype={rule.searchtype}
                 value={rule.value}
                 changeRule={this.changeRule}
+                fieldList={this.state.fieldList}
                 key={`criteria-${index}`}
               />
             )
@@ -85,7 +104,6 @@ class QueryBuilder extends PureComponent {
 
 QueryBuilder.propTypes = {
   changeQuery: PropTypes.func.isRequired,
-  glpi: PropTypes.object.isRequired,
   itemtype: PropTypes.string.isRequired,
   listSearchOptions: PropTypes.object.isRequired,
 }
