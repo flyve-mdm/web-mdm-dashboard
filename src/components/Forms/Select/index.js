@@ -180,9 +180,15 @@ class Select extends PureComponent {
           onChange={this.change}
           required={this.props.required}
         >
-          <option>
-            ---
-          </option>
+          {
+            !this.props.noEmpty
+            && (
+              <option>
+                ---
+              </option>
+            )
+          }
+
           {
             this.state.options.map((element, index) => (
               <option value={element.value} key={`${this.props.name}${index.toString()}`}>
@@ -203,6 +209,7 @@ Select.defaultProps = {
   glpi: null,
   request: null,
   value: undefined,
+  noEmpty: false,
 }
 
 Select.propTypes = {
@@ -217,6 +224,7 @@ Select.propTypes = {
   glpi: PropTypes.object,
   request: PropTypes.object,
   required: PropTypes.bool,
+  noEmpty: PropTypes.bool,
 }
 
 export default Select
