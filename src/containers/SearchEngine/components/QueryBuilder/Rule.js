@@ -11,16 +11,7 @@ import { Select } from 'components/Forms'
  */
 class Rule extends PureComponent {
   handleChangeRule = (name, value) => {
-    const newValue = {
-      link: this.props.link,
-      field: this.props.field,
-      searchtype: this.props.searchtype,
-      value: this.props.value,
-    }
-
-    newValue[name] = value
-
-    this.props.changeRule(this.props.type, this.props.id, newValue)
+    this.props.changeRule(this.props.type, this.props.id, { [name]: value })
   }
 
   deleteRule = () => {
@@ -38,6 +29,31 @@ class Rule extends PureComponent {
             { name: 'OR', value: 'OR' },
           ]}
           function={this.handleChangeRule}
+          noEmpty
+        />
+
+        <Select
+          name="field"
+          value={this.props.field}
+          options={this.props.fieldList}
+          function={this.handleChangeRule}
+          noEmpty
+        />
+
+        <Select
+          name="searchtype"
+          value={this.props.searchtype}
+          options={[
+            { name: 'contains', value: 'contains' },
+            { name: 'equals', value: 'equals' },
+            { name: 'notequals', value: 'notequals' },
+            { name: 'lessthan', value: 'lessthan' },
+            { name: 'morethan', value: 'morethan' },
+            { name: 'under', value: 'under' },
+            { name: 'notunder', value: 'notunder' },
+          ]}
+          function={this.handleChangeRule}
+          noEmpty
         />
 
         <input
@@ -66,12 +82,13 @@ Rule.defaultProps = {
 
 Rule.propTypes = {
   id: PropTypes.number.isRequired,
+  itemtype: PropTypes.string,
+  value: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
-  itemtype: PropTypes.string,
   field: PropTypes.string.isRequired,
+  fieldList: PropTypes.array.isRequired,
   searchtype: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
   changeRule: PropTypes.func.isRequired,
 }
 

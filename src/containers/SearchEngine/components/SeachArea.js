@@ -50,23 +50,33 @@ class SeachArea extends PureComponent {
         </p>
       )
     } else if (this.props.query) {
-      if (this.props.query.rules.length) {
-        display = (
-          <button
-            className="btn btn--primary"
-            onClick={this.props.handleSearchItem}
-            type="submit"
-          >
-            {I18n.t('commons.search')}
-          </button>
-        )
-      } else {
-        display = (
-          <p>
-            {I18n.t('search_engine.itemtype_not_found')}
-          </p>
-        )
-      }
+      // if (this.props.query.rules.length) {
+      //   display = (
+      //     <button
+      //       className="btn btn--primary"
+      //       onClick={this.props.handleSearchItem}
+      //       type="submit"
+      //     >
+      //       {I18n.t('commons.search')}
+      //     </button>
+      //   )
+      // } else {
+      //   display = (
+      //     <p>
+      //       {I18n.t('search_engine.itemtype_not_found')}
+      //     </p>
+      //   )
+      // }
+
+      display = (
+        <button
+          className="btn btn--primary"
+          onClick={this.props.handleSearchItem}
+          type="submit"
+        >
+          {I18n.t('commons.search')}
+        </button>
+      )
     }
 
     return display
