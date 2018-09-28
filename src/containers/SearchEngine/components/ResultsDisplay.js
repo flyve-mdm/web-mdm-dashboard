@@ -43,7 +43,9 @@ class ResultsDisplay extends PureComponent {
   render() {
     let display = null
 
-    if (this.props.results && this.props.query) {
+    console.log(this.props.results)
+
+    if (this.props.results) {
       if (this.props.results.length > 0) {
         const resultsWithFields = []
 

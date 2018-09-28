@@ -51,6 +51,7 @@ class Panel extends PureComponent {
       field.fieldId,
       field.fieldName,
     ]))
+
     return fields
   }
 
