@@ -38,10 +38,7 @@ import QueryBuilder from './components/QueryBuilder'
 import ItemTypeSelector from './components/ItemTypeSelector'
 import ResultsDisplay from './components/ResultsDisplay'
 import SeachArea from './components/SeachArea'
-import {
-  getListSearchOptions,
-  searchItem,
-} from './actions/index'
+import getListSearchOptions from './actions/getListSearchOptions'
 
 /**
  * Component with the SearchEngine section
@@ -54,7 +51,7 @@ class SearchEngine extends PureComponent {
     super(props)
 
     this.state = {
-      searchResult: [],
+      searchResult: null,
       query: null,
       itemtype: 'Computer',
       listSearchOptions: null,
@@ -80,7 +77,7 @@ class SearchEngine extends PureComponent {
       await this.setState({
         isLoading: true,
         query: null,
-        searchResult: [],
+        searchResult: null,
         listSearchOptions: null,
       })
 
@@ -126,10 +123,11 @@ class SearchEngine extends PureComponent {
    */
   handleSearchItem = async () => {
     try {
-      const { itemtype, query } = this.state
+      const { query } = this.state
+      const searchResult = await this.props.glpi.searchItems(query)
 
       this.setState({
-        searchResult: await searchItem(this.props.glpi, itemtype, query),
+        searchResult: searchResult.data,
       })
     } catch (error) {
       this.setState({
@@ -151,6 +149,8 @@ class SearchEngine extends PureComponent {
       listSearchOptions,
     } = this.state
 
+    console.log(searchResult)
+
     return (
       <ContentPane className="search-engine">
         <h1>
@@ -170,7 +170,6 @@ class SearchEngine extends PureComponent {
               changeQuery={this.changeQuery}
               itemtype={itemtype}
               listSearchOptions={listSearchOptions}
-              glpi={this.props.glpi}
             />
           )
         }
