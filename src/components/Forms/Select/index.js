@@ -171,9 +171,14 @@ class Select extends PureComponent {
   render() {
     return (
       <div className="froms__col">
-        <p>
-          {this.props.label}
-        </p>
+        {
+          this.props.label
+          && (
+            <p>
+              {this.props.label}
+            </p>
+          )
+        }
         <select
           name={this.props.name}
           value={(this.props.value || undefined)}

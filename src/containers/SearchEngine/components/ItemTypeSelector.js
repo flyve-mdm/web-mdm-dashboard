@@ -41,7 +41,7 @@ import I18n from 'shared/i18n'
 class ItemTypeSelector extends PureComponent {
   render() {
     return (
-      <React.Fragment>
+      <div className="search-engine__selector">
         <input
           type="text"
           style={{ marginRight: 10 }}
@@ -59,7 +59,7 @@ class ItemTypeSelector extends PureComponent {
         >
           {I18n.t('commons.change')}
         </button>
-      </React.Fragment>
+      </div>
     )
   }
 }

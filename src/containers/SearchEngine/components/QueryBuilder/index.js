@@ -86,51 +86,65 @@ class QueryBuilder extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
-        <button
-          className="btn btn--primary"
-          type="button"
-          onClick={this.addCriteria}
-        >
-          + Rule
-        </button>
-        <button
-          className="btn btn--secondary"
-          type="button"
-          onClick={this.addMetaCriteria}
-        >
-          +
-        </button>
+      <div className="froms">
+        <div className="search-engine__add-buttons">
+          <button
+            className="btn btn--primary"
+            type="button"
+            onClick={this.addCriteria}
+          >
+            + Rule
+          </button>
+          <button
+            className="btn btn--secondary"
+            type="button"
+            onClick={this.addMetaCriteria}
+          >
+            + Intersection
+          </button>
+        </div>
+
         {
-          this.state.criteria.map((rule, index) => {
-            return (
-              <Rule
-                key={`criteria-${index}`}
-                id={index}
-                type="criteria"
-                searchtype={rule.searchtype}
-                changeRule={this.changeRule}
-                fieldList={this.state.fieldList}
-                {...rule}
-              />
-            )
-          })
+          this.state.criteria.length > 0
+          && (
+            <h3> Rules </h3>
+          )
         }
+
         {
-          this.state.metaCriteria.map((rule, index) => {
-            return (
-              <Rule
-                key={`metaCriteria-${index}`}
-                id={index}
-                type="metaCriteria"
-                value={rule.value}
-                changeRule={this.changeRule}
-                {...rule}
-              />
-            )
-          })
+          this.state.criteria.map((rule, index) => (
+            <Rule
+              key={`criteria-${index}`}
+              id={index}
+              type="criteria"
+              searchtype={rule.searchtype}
+              changeRule={this.changeRule}
+              fieldList={this.state.fieldList}
+              {...rule}
+            />
+          ))
         }
-      </React.Fragment>
+
+        {
+          this.state.metaCriteria.length > 0
+          && (
+            <h3> Intersection rules </h3>
+          )
+        }
+
+        {
+          this.state.metaCriteria.map((rule, index) => (
+            <Rule
+              key={`metaCriteria-${index}`}
+              id={index}
+              type="metaCriteria"
+              value={rule.value}
+              changeRule={this.changeRule}
+              {...rule}
+            />
+          ))
+        }
+      </div>
     )
   }
 }
