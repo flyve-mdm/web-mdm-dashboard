@@ -19,7 +19,6 @@ class Rule extends PureComponent {
   }
 
   render() {
-    console.log(this.props.field)
     return (
       <div className="search-engine__rule">
         <Select
