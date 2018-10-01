@@ -2,6 +2,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import itemtype from 'shared/itemtype'
 import Rule from './Rule'
 import createFieldList from '../../actions/createFieldList'
 
@@ -46,10 +47,19 @@ class QueryBuilder extends PureComponent {
   }
 
   addMetaCriteria = () => {
-    const { metaCriteria: currentMetaCriteria } = this.state
+    const { metaCriteria: currentCriteria } = this.state
 
     this.setState({
-      metaCriteria: [...currentMetaCriteria, {}],
+      metaCriteria: [
+        ...currentCriteria,
+        {
+          link: 'AND',
+          itemtype: Object.keys(itemtype)[0],
+          field: null,
+          searchtype: 'contains',
+          value: '',
+        },
+      ],
     })
   }
 
@@ -79,6 +89,13 @@ class QueryBuilder extends PureComponent {
           onClick={this.addCriteria}
         >
           + Rule
+        </button>
+        <button
+          className="btn btn--secondary"
+          type="button"
+          onClick={this.addMetaCriteria}
+        >
+          +
         </button>
         {
           this.state.criteria.map((rule, index) => {
