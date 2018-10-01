@@ -149,8 +149,6 @@ class SearchEngine extends PureComponent {
       listSearchOptions,
     } = this.state
 
-    console.log(searchResult)
-
     return (
       <ContentPane className="search-engine">
         <h1>

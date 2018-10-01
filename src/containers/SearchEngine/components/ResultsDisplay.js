@@ -43,8 +43,6 @@ class ResultsDisplay extends PureComponent {
   render() {
     let display = null
 
-    console.log(this.props.results)
-
     if (this.props.results) {
       if (this.props.results.length > 0) {
         const resultsWithFields = []
@@ -81,13 +79,11 @@ class ResultsDisplay extends PureComponent {
 ResultsDisplay.defaultProps = {
   listSearchOptions: {},
   results: null,
-  query: null,
 }
 
 ResultsDisplay.propTypes = {
   results: PropTypes.array,
   listSearchOptions: PropTypes.object,
-  query: PropTypes.object,
 }
 
 export default ResultsDisplay

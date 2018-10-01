@@ -19,6 +19,7 @@ class Rule extends PureComponent {
   }
 
   render() {
+    console.log(this.props.field)
     return (
       <div className="search-engine__rule">
         <Select
@@ -32,37 +33,44 @@ class Rule extends PureComponent {
           noEmpty
         />
 
-        <Select
-          name="field"
-          value={this.props.field}
-          options={this.props.fieldList}
-          function={this.handleChangeRule}
-          noEmpty
-        />
+        {
+          this.props.field
+          && (
+            <React.Fragment>
+              <Select
+                name="field"
+                value={this.props.field}
+                options={this.props.fieldList}
+                function={this.handleChangeRule}
+                noEmpty
+              />
 
-        <Select
-          name="searchtype"
-          value={this.props.searchtype}
-          options={[
-            { name: 'contains', value: 'contains' },
-            { name: 'equals', value: 'equals' },
-            { name: 'notequals', value: 'notequals' },
-            { name: 'lessthan', value: 'lessthan' },
-            { name: 'morethan', value: 'morethan' },
-            { name: 'under', value: 'under' },
-            { name: 'notunder', value: 'notunder' },
-          ]}
-          function={this.handleChangeRule}
-          noEmpty
-        />
+              <Select
+                name="searchtype"
+                value={this.props.searchtype}
+                options={[
+                  { name: 'contains', value: 'contains' },
+                  { name: 'equals', value: 'equals' },
+                  { name: 'notequals', value: 'notequals' },
+                  { name: 'lessthan', value: 'lessthan' },
+                  { name: 'morethan', value: 'morethan' },
+                  { name: 'under', value: 'under' },
+                  { name: 'notunder', value: 'notunder' },
+                ]}
+                function={this.handleChangeRule}
+                noEmpty
+              />
 
-        <input
-          type="text"
-          className="win-textbox"
-          name="value"
-          value={this.props.value}
-          onChange={e => this.handleChangeRule(e.target.name, e.target.value)}
-        />
+              <input
+                name="value"
+                type="text"
+                className="win-textbox"
+                value={this.props.value}
+                onChange={e => this.handleChangeRule(e.target.name, e.target.value)}
+              />
+            </React.Fragment>
+          )
+        }
 
         <button
           className="btn"
@@ -78,16 +86,18 @@ class Rule extends PureComponent {
 
 Rule.defaultProps = {
   itemtype: null,
+  fieldList: null,
+  field: null,
 }
 
 Rule.propTypes = {
   id: PropTypes.number.isRequired,
   itemtype: PropTypes.string,
+  field: PropTypes.string,
+  fieldList: PropTypes.array,
   value: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
-  field: PropTypes.string.isRequired,
-  fieldList: PropTypes.array.isRequired,
   searchtype: PropTypes.string.isRequired,
   changeRule: PropTypes.func.isRequired,
 }
