@@ -3,6 +3,9 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import { Select } from 'components/Forms'
+import itemtype from 'shared/itemtype'
+import withGLPI from 'hoc/withGLPI'
+import createFieldList from '../../actions/createFieldList'
 
 /**
  * Component with the parameters of one query rule
@@ -10,8 +13,29 @@ import { Select } from 'components/Forms'
  * @extends PureComponent
  */
 class Rule extends PureComponent {
-  handleChangeRule = (name, value) => {
-    this.props.changeRule(this.props.type, this.props.id, { [name]: value })
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      fieldList: props.fieldList,
+    }
+  }
+
+  componentDidMount() {
+    if (!this.props.field) {
+      this.handleChangeRule('itemtype', this.props.itemtype)
+    }
+  }
+
+  handleChangeRule = async (name, value) => {
+    if (name === 'itemtype') {
+      this.props.changeRule(this.props.type, this.props.id, { itemtype: value, field: null })
+      const fieldList = createFieldList(await this.props.glpi.listSearchOptions({ itemtype: value }))
+      await this.setState({ fieldList })
+      this.props.changeRule(this.props.type, this.props.id, { field: fieldList[0].value })
+    } else {
+      this.props.changeRule(this.props.type, this.props.id, { [name]: value })
+    }
   }
 
   deleteRule = () => {
@@ -33,13 +57,34 @@ class Rule extends PureComponent {
         />
 
         {
+          this.props.itemtype
+          && (
+            <Select
+              name="itemtype"
+              value={this.props.itemtype}
+              options={Object.keys(itemtype).map(e => ({ name: e, value: e })).sort((a, b) => {
+                if (a.name > b.name) {
+                  return 1
+                }
+                if (a.name < b.name) {
+                  return -1
+                }
+                return 0
+              })}
+              function={this.handleChangeRule}
+              noEmpty
+            />
+          )
+        }
+
+        {
           this.props.field
           && (
             <React.Fragment>
               <Select
                 name="field"
                 value={this.props.field}
-                options={this.props.fieldList}
+                options={this.state.fieldList}
                 function={this.handleChangeRule}
                 noEmpty
               />
@@ -99,6 +144,7 @@ Rule.propTypes = {
   link: PropTypes.string.isRequired,
   searchtype: PropTypes.string.isRequired,
   changeRule: PropTypes.func.isRequired,
+  glpi: PropTypes.object.isRequired,
 }
 
-export default Rule
+export default withGLPI(Rule)

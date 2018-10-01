@@ -105,15 +105,27 @@ class QueryBuilder extends PureComponent {
           this.state.criteria.map((rule, index) => {
             return (
               <Rule
+                key={`criteria-${index}`}
                 id={index}
                 type="criteria"
-                link={rule.link}
-                field={rule.field}
                 searchtype={rule.searchtype}
-                value={rule.value}
                 changeRule={this.changeRule}
                 fieldList={this.state.fieldList}
-                key={`criteria-${index}`}
+                {...rule}
+              />
+            )
+          })
+        }
+        {
+          this.state.metaCriteria.map((rule, index) => {
+            return (
+              <Rule
+                key={`metaCriteria-${index}`}
+                id={index}
+                type="metaCriteria"
+                value={rule.value}
+                changeRule={this.changeRule}
+                {...rule}
               />
             )
           })
