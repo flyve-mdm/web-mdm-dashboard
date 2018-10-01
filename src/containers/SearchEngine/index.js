@@ -151,7 +151,7 @@ class SearchEngine extends PureComponent {
 
     return (
       <ContentPane className="search-engine">
-        <h1>
+        <h1 style={{ margin: '10px' }}>
           {I18n.t('search_engine.title')}
         </h1>
 

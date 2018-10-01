@@ -1,19 +1,18 @@
 .froms {
+  .froms__row {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-    .froms__row {
-        display: flex;
-        flex-wrap: wrap;
+  .froms__col {
+    margin-right: 10px;
+  }
+
+  .froms__row--icon {
+    margin: 40px 10px 5px;
+
+    span {
+      font-size: 25px;
     }
-
-    .froms__col {
-        margin-right: 10px;
-    }
-
-    .froms__row--icon {
-        margin: 40px 10px 5px;
-
-        span {
-            font-size: 25px;
-        }
-    }
+  }
 }

@@ -2,7 +2,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import { Select } from 'components/Forms'
+import { Select, Input } from 'components/Forms'
 import itemtype from 'shared/itemtype'
 import withGLPI from 'hoc/withGLPI'
 import createFieldList from '../../actions/createFieldList'
@@ -44,7 +44,14 @@ class Rule extends PureComponent {
 
   render() {
     return (
-      <div className="search-engine__rule">
+      <div className="search-engine__rule froms__row">
+        <span
+          className="iconFont deleteIcon"
+          onClick={this.deleteRule}
+          role="button"
+          tabIndex="0"
+        />
+
         <Select
           name="link"
           value={this.props.link}
@@ -105,24 +112,25 @@ class Rule extends PureComponent {
                 noEmpty
               />
 
-              <input
+              <Input
                 name="value"
                 type="text"
-                className="win-textbox"
                 value={this.props.value}
-                onChange={e => this.handleChangeRule(e.target.name, e.target.value)}
+                function={this.handleChangeRule}
               />
             </React.Fragment>
           )
         }
 
-        <button
+        {/* <button
           className="btn"
           type="button"
           onClick={this.deleteRule}
         >
          -
-        </button>
+        </button> */}
+
+
       </div>
     )
   }
