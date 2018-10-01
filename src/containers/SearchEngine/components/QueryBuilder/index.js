@@ -111,19 +111,21 @@ class QueryBuilder extends PureComponent {
           )
         }
 
-        {
-          this.state.criteria.map((rule, index) => (
-            <Rule
-              key={`criteria-${index}`}
-              id={index}
-              type="criteria"
-              searchtype={rule.searchtype}
-              changeRule={this.changeRule}
-              fieldList={this.state.fieldList}
-              {...rule}
-            />
-          ))
-        }
+        <div>
+          {
+            this.state.criteria.map((rule, index) => (
+              <Rule
+                key={`criteria-${index.toString()}`}
+                id={index}
+                type="criteria"
+                searchtype={rule.searchtype}
+                changeRule={this.changeRule}
+                fieldList={this.state.fieldList}
+                {...rule}
+              />
+            ))
+          }
+        </div>
 
         {
           this.state.metaCriteria.length > 0
@@ -132,18 +134,19 @@ class QueryBuilder extends PureComponent {
           )
         }
 
-        {
-          this.state.metaCriteria.map((rule, index) => (
-            <Rule
-              key={`metaCriteria-${index}`}
-              id={index}
-              type="metaCriteria"
-              value={rule.value}
-              changeRule={this.changeRule}
-              {...rule}
-            />
-          ))
-        }
+        <div>
+          {
+            this.state.metaCriteria.map((rule, index) => (
+              <Rule
+                key={`metaCriteria-${index.toString()}`}
+                id={index}
+                type="metaCriteria"
+                changeRule={this.changeRule}
+                {...rule}
+              />
+            ))
+          }
+        </div>
       </div>
     )
   }
