@@ -22,6 +22,10 @@ class QueryBuilder extends PureComponent {
     }
   }
 
+  componentDidMount() {
+    this.addCriteria()
+  }
+
   componentDidUpdate() {
     this.props.changeQuery({
       itemtype: this.props.itemtype,
