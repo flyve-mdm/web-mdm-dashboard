@@ -175,6 +175,12 @@
   dependencies:
     iltorb "^2.4.0"
 
+"@hint/hint-http-compression@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@hint/hint-http-compression/-/hint-http-compression-2.0.0.tgz#5cd2036a8f2d8382fcc463a959ea146a6d7a394c"
+  dependencies:
+    iltorb "^2.4.0"
+
 "@hint/hint-image-optimization-cloudinary@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@hint/hint-image-optimization-cloudinary/-/hint-image-optimization-cloudinary-1.0.3.tgz#59408d30114bb9ec34e0d30b578938871f03bf1c"
