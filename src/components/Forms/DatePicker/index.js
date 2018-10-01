@@ -78,9 +78,14 @@ class DatePicker extends PureComponent {
   render() {
     return (
       <div className="froms__col">
-        <p>
-          {this.props.label}
-        </p>
+        {
+          this.props.label
+          && (
+            <p>
+              {this.props.label}
+            </p>
+          )
+        }
 
         <div className="win-disposable win-datepicker">
           <select

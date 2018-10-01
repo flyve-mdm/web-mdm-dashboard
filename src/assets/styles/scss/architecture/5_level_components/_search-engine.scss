@@ -1,0 +1,35 @@
+.search-engine {
+  h3 {
+    margin-left: 5px;
+  }
+
+  .search-engine__rule {
+    padding: 10px 5px;
+
+    &:nth-child(even) {
+      background: #eaeaea;
+    }
+
+    .deleteIcon {
+      margin: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
+
+  .search-engine__selector {
+    margin-left: 5px;
+  }
+
+  .search-engine__add-buttons {
+    margin-bottom: 20px;
+
+    button {
+      margin-left: 5px;
+    }
+  }
+
+  .search-engine__seach-area {
+    margin: 5px;
+  }
+}

@@ -61,7 +61,11 @@ class SeachArea extends PureComponent {
       )
     }
 
-    return display
+    return (
+      <div className="search-engine__seach-area">
+        { display }
+      </div>
+    )
   }
 }
 

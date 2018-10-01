@@ -131,9 +131,15 @@ class Input extends PureComponent {
       : undefined
     return (
       <div className="froms__col">
-        <p>
-          {this.props.label}
-        </p>
+        {
+          this.props.label
+          && (
+            <p>
+              {this.props.label}
+            </p>
+          )
+        }
+
         <input
           type={this.props.type}
           className={this.state.className}
