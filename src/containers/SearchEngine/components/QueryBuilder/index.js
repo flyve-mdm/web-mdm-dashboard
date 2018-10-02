@@ -1,3 +1,31 @@
+/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
+
 import React, {
   PureComponent,
 } from 'react'
@@ -12,6 +40,7 @@ import createFieldList from '../../actions/createFieldList'
  * @extends PureComponent
  */
 class QueryBuilder extends PureComponent {
+  /** @constructor */
   constructor(props) {
     super(props)
 
@@ -22,10 +51,18 @@ class QueryBuilder extends PureComponent {
     }
   }
 
+  /**
+   * Add a criteria by default
+   * @function componentDidMount
+   */
   componentDidMount() {
     this.addCriteria()
   }
 
+  /**
+   * Change the query values
+   * @function componentDidUpdate
+   */
   componentDidUpdate() {
     this.props.changeQuery({
       itemtype: this.props.itemtype,
@@ -34,6 +71,10 @@ class QueryBuilder extends PureComponent {
     })
   }
 
+  /**
+   * Add a new criteria
+   * @function addCriteria
+   */
   addCriteria = () => {
     const { criteria: currentCriteria, fieldList } = this.state
 
@@ -50,6 +91,10 @@ class QueryBuilder extends PureComponent {
     })
   }
 
+  /**
+   * Add a new metacriteria
+   * @function addMetaCriteria
+   */
   addMetaCriteria = () => {
     const { metaCriteria: currentCriteria } = this.state
 
@@ -67,6 +112,13 @@ class QueryBuilder extends PureComponent {
     })
   }
 
+  /**
+   * Manage the change of values of the rules
+   * @function changeRule
+   * @param {string} type
+   * @param {string} id
+   * @param {object} newValue
+   */
   changeRule = (type, id, newValue) => {
     const CurrentRules = this.state[type]
     const newRules = [...CurrentRules]
@@ -84,6 +136,10 @@ class QueryBuilder extends PureComponent {
     }
   }
 
+  /**
+   * Render component
+   * @function render
+   */
   render() {
     return (
       <div className="froms">

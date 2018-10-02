@@ -26,7 +26,6 @@
  * ------------------------------------------------------------------------------
  */
 
-/** import dependencies */
 import React, {
   PureComponent,
 } from 'react'
@@ -38,7 +37,6 @@ import QueryBuilder from './components/QueryBuilder'
 import ItemTypeSelector from './components/ItemTypeSelector'
 import ResultsDisplay from './components/ResultsDisplay'
 import SeachArea from './components/SeachArea'
-import getListSearchOptions from './actions/getListSearchOptions'
 
 /**
  * Component with the SearchEngine section
@@ -84,7 +82,7 @@ class SearchEngine extends PureComponent {
       const { itemtype } = this.state
 
       this.setState({
-        listSearchOptions: await getListSearchOptions(itemtype, this.props.glpi),
+        listSearchOptions: await this.props.glpi.listSearchOptions({ itemtype }),
         isLoading: false,
       })
     } catch (error) {
@@ -98,7 +96,7 @@ class SearchEngine extends PureComponent {
   /**
    * Handle change itemtype
    * @function changeItemType
-   * @param {object} e
+   * @param {string} e
    */
   changeItemType = (e) => {
     this.setState({
@@ -107,9 +105,9 @@ class SearchEngine extends PureComponent {
   }
 
   /**
-   * Update the query state each time that the QueryBuilde query change
+   * Update the query state each time that the QueryBuilder change
    * @function changeQuery
-   * @param {string} query
+   * @param {object} query
    */
   changeQuery = (query) => {
     this.setState({
@@ -120,6 +118,7 @@ class SearchEngine extends PureComponent {
   /**
    * Search items in glpi
    * @function handleSearchItem
+   * @async
    */
   handleSearchItem = async () => {
     try {
