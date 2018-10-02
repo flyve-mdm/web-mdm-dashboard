@@ -26,7 +26,6 @@
  * ------------------------------------------------------------------------------
  */
 
-/** import dependencies */
 import React, {
   PureComponent,
 } from 'react'
@@ -46,15 +45,11 @@ class PanelFields extends PureComponent {
     return (
       <div className="searchListHeader">
         {
-          this.props.fields.map((field) => {
-            const fieldKey = `${field[0]}_${field[1]}`
-            const fieldName = field[1]
-            return (
-              <div key={fieldKey} className="cellHeader">
-                {fieldName}
-              </div>
-            )
-          })
+          this.props.fields.map(field => (
+            <div key={`${field[0]}_${field[1]}`} className="cellHeader">
+              {field[1]}
+            </div>
+          ))
         }
       </div>
     )

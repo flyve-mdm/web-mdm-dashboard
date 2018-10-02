@@ -26,7 +26,6 @@
  * ------------------------------------------------------------------------------
  */
 
-/** import dependencies */
 import React, {
   PureComponent,
 } from 'react'
@@ -39,6 +38,10 @@ import I18n from 'shared/i18n'
  * @extends PureComponent
  */
 class ItemTypeSelector extends PureComponent {
+  /**
+   * Render component
+   * @function render
+   */
   render() {
     return (
       <div className="search-engine__selector">

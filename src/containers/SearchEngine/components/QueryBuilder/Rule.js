@@ -1,3 +1,31 @@
+/*
+ *   Copyright © 2018 Teclib. All rights reserved.
+ *
+ *   This file is part of web-mdm-dashboard
+ *
+ * web-mdm-dashboard is a subproject of Flyve MDM. Flyve MDM is a mobile
+ * device management software.
+ *
+ * Flyve MDM is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * Flyve MDM is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * ------------------------------------------------------------------------------
+ * @author     Gianfranco Manganiello (gmanganiello@teclib.com)
+ * @author     Hector Rondon (hrondon@teclib.com)
+ * @copyright  Copyright © 2018 Teclib. All rights reserved.
+ * @license    GPLv3 https://www.gnu.org/licenses/gpl-3.0.html
+ * @link       https://github.com/flyve-mdm/web-mdm-dashboard
+ * @link       http://flyve.org/web-mdm-dashboard
+ * @link       https://flyve-mdm.com
+ * ------------------------------------------------------------------------------
+ */
+
 import React, {
   PureComponent,
 } from 'react'
@@ -13,6 +41,7 @@ import createFieldList from '../../actions/createFieldList'
  * @extends PureComponent
  */
 class Rule extends PureComponent {
+  /** @constructor */
   constructor(props) {
     super(props)
 
@@ -21,12 +50,23 @@ class Rule extends PureComponent {
     }
   }
 
+  /**
+   * If it is a metacriteria rule, it will update the list of fields
+   * @function componentDidMount
+   */
   componentDidMount() {
     if (!this.props.field) {
       this.handleChangeRule('itemtype', this.props.itemtype)
     }
   }
 
+  /**
+   * Manage the change of values
+   * @function handleChangeRule
+   * @async
+   * @param {string} name
+   * @param {string} value
+   */
   handleChangeRule = async (name, value) => {
     if (name === 'itemtype') {
       this.props.changeRule(this.props.type, this.props.id, { itemtype: value, field: null })
@@ -38,10 +78,18 @@ class Rule extends PureComponent {
     }
   }
 
+  /**
+   * Delete the current rule
+   * @function deleteRule
+   */
   deleteRule = () => {
     this.props.changeRule(this.props.type, this.props.id, null)
   }
 
+  /**
+   * Render component
+   * @function render
+   */
   render() {
     return (
       <div className="search-engine__rule froms__row">
