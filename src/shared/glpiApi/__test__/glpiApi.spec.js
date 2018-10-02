@@ -28,9 +28,29 @@
 
 import glpiApi from '../index'
 
+
+
 /* eslint no-underscore-dangle: ["error", { "allow": ["_parser", "_makeRequest"] }] */
 describe('glpiApi', () => {
+  beforeAll(() => {
+    global.appConfig = {
+      glpiApiLink: 'https://demo-api.flyve.org/apirest.php',
+      demoToken: 'pe90W27ebPXIeYXsj2mYE0nMrRz9q1AlguKhbhcI',
+      pluginToken: '2JoAOqcPcqkMZDf2QeeQBAVjERO2LamlZghkvWPB',
+      appName: 'MDM Dashboard',
+      bugsnag: 'fba7440f31b8f7a7e72495cf000b2c42',
+    }
+  })
+
   it('should exist all methods of "javascript-library-glpi"', () => {
+    global.appConfig = {
+      glpiApiLink: 'https://demo-api.flyve.org/apirest.php',
+      demoToken: 'pe90W27ebPXIeYXsj2mYE0nMrRz9q1AlguKhbhcI',
+      pluginToken: '2JoAOqcPcqkMZDf2QeeQBAVjERO2LamlZghkvWPB',
+      appName: 'MDM Dashboard',
+      bugsnag: 'fba7440f31b8f7a7e72495cf000b2c42',
+    }
+
     expect(glpiApi).toBeDefined()
     expect(glpiApi._parser).toBeDefined()
     expect(glpiApi._makeRequest).toBeDefined()
