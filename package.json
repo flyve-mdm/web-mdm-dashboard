@@ -19,7 +19,7 @@
     "gh-pages-coverage": "yarn gh-pages --dist coverage",
     "gh-pages-reports": "yarn gh-pages --dist reports --dest reports",
     "gh-pages-changelog": "yarn gh-pages --dist ./ --src '{./C*.md,CHANGELOG.md}' --dest ./ --add",
-    "test": "NODE_PATH=./src yarn jest --config ./config/jest/jest.config.json",
+    "test": "NODE_PATH=./src yarn react-scripts test",
     "test:watch": "NODE_PATH=./src yarn test --watch",
     "test:cypress": "yarn cypress run",
     "test:webhint": "node node_modules/hint/dist/src/bin/hint.js http://localhost:3000/",
@@ -43,7 +43,7 @@
     "react-dom": "^16.5.2",
     "react-markdown": "^4.0.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^1.1.5",
+    "react-scripts": "^2.0.3",
     "react-winjs": "git+https://github.com/TECLIB/react-winjs.git#develop",
     "victory": "^30.3.1",
     "web-animations-js": "^2.3.1",
@@ -73,5 +73,11 @@
     "sass": "^1.14.0",
     "sinon": "^6.3.4",
     "standard-version": "^4.4.0"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
