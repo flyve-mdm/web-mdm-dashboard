@@ -19,8 +19,6 @@ exports[`FilesUpload renders FilesUpload 1`] = `
   <div
     className="files-dropzone"
     onClick={[Function]}
-    onDragEnter={undefined}
-    onDragLeave={undefined}
     onDragOver={[Function]}
     onDrop={[Function]}
     style={Object {}}
