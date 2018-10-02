@@ -48,8 +48,8 @@ describe('logout', () => {
 
   it('should close the session', async () => {
     logout()
-    expect(localStorage.getItem('currentUser')).toBeUndefined()
-    expect(localStorage.getItem('sessionToken')).toBeUndefined()
+    expect(localStorage.getItem('currentUser')).toBeNull()
+    expect(localStorage.getItem('sessionToken')).toBeNull()
     expect(history.push.called).toEqual(true)
     expect(glpi.killSession.called).toEqual(true)
   })
