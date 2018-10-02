@@ -26,7 +26,6 @@
  * ------------------------------------------------------------------------------
  */
 
-/** import dependencies */
 import React, {
   PureComponent,
 } from 'react'
@@ -35,11 +34,15 @@ import I18n from 'shared/i18n'
 import Panel from './Panel'
 
 /**
- * Component to select a item type
+ * Component with the render of the search result
  * @class SearchEngine
  * @extends PureComponent
  */
 class ResultsDisplay extends PureComponent {
+  /**
+   * Render component
+   * @function render
+   */
   render() {
     let display = null
 

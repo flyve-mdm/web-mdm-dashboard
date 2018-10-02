@@ -39,6 +39,10 @@ import I18n from 'shared/i18n'
  * @extends SeachArea
  */
 class SeachArea extends PureComponent {
+  /**
+   * Render component
+   * @function render
+   */
   render() {
     let display = null
 
@@ -78,6 +82,5 @@ SeachArea.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   handleSearchItem: PropTypes.func.isRequired,
 }
-
 
 export default SeachArea

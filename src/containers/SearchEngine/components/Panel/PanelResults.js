@@ -26,7 +26,6 @@
  * ------------------------------------------------------------------------------
  */
 
-/** import dependencies */
 import React, {
   PureComponent,
 } from 'react'
@@ -51,8 +50,8 @@ class PanelResults extends PureComponent {
           {
             item.map((fieldObject, indexFieldObject) => (
               <div
-                className={index % 2 === 0 ? 'cellContent' : 'cellContent cellContentTwo'}
                 key={`fieldObject-${indexFieldObject.toString()}`}
+                className={index % 2 === 0 ? 'cellContent' : 'cellContent cellContentTwo'}
               >
                 {fieldObject.fieldValue}
               </div>
