@@ -157,7 +157,7 @@ class SearchEngine extends PureComponent {
         <ItemTypeSelector
           itemtype={itemtype}
           changeItemType={this.changeItemType}
-          handleSearchItem={this.handleSearchItem}
+          handleGetListSearchOptions={this.handleGetListSearchOptions}
         />
 
         {
