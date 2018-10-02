@@ -57,7 +57,7 @@ class ItemTypeSelector extends PureComponent {
 
         <button
           className="btn btn--secondary"
-          onClick={this.props.handleSearchItem}
+          onClick={this.props.handleGetListSearchOptions}
           type="button"
         >
           {I18n.t('commons.change')}
@@ -70,7 +70,7 @@ class ItemTypeSelector extends PureComponent {
 ItemTypeSelector.propTypes = {
   itemtype: PropTypes.string.isRequired,
   changeItemType: PropTypes.func.isRequired,
-  handleSearchItem: PropTypes.func.isRequired,
+  handleGetListSearchOptions: PropTypes.func.isRequired,
 }
 
 export default ItemTypeSelector
