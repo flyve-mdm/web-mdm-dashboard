@@ -28,8 +28,6 @@
 
 import glpiApi from '../index'
 
-
-
 /* eslint no-underscore-dangle: ["error", { "allow": ["_parser", "_makeRequest"] }] */
 describe('glpiApi', () => {
   beforeAll(() => {

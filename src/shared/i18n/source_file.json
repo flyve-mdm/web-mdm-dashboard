@@ -95,7 +95,20 @@
   "search_engine": {
     "title": "Search Engine",
     "itemType_not_found": "ItemType not found",
-    "item_not_found": "No match found"
+    "item_not_found": "No match found",
+    "contains": "contains",
+    "equals": "equals",
+    "notequals": "notequals",
+    "lessthan": "lessthan",
+    "morethan": "morethan",
+    "under": "under",
+    "notunder": "notunder",
+    "AND": "AND",
+    "OR": "OR",
+    "rule": "Rule",
+    "intersection": "Intersection",
+    "rules": "Rules",
+    "intersection_rules": "Intersection rules"
   },
   "users": {
     "delete": "Delete Users",

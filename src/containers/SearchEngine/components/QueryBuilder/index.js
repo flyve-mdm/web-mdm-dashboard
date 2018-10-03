@@ -31,6 +31,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import itemtype from 'shared/itemtype'
+import I18n from 'shared/i18n'
 import Rule from './Rule'
 import createFieldList from '../../actions/createFieldList'
 
@@ -149,21 +150,27 @@ class QueryBuilder extends PureComponent {
             type="button"
             onClick={this.addCriteria}
           >
-            + Rule
+            +
+            {' '}
+            {I18n.t('search_engine.rule')}
           </button>
           <button
             className="btn btn--secondary"
             type="button"
             onClick={this.addMetaCriteria}
           >
-            + Intersection
+            +
+            {' '}
+            {I18n.t('search_engine.intersection')}
           </button>
         </div>
 
         {
           this.state.criteria.length > 0
           && (
-            <h3> Rules </h3>
+            <h3>
+              {I18n.t('search_engine.rules')}
+            </h3>
           )
         }
 
@@ -186,7 +193,9 @@ class QueryBuilder extends PureComponent {
         {
           this.state.metaCriteria.length > 0
           && (
-            <h3> Intersection rules </h3>
+            <h3>
+              {I18n.t('search_engine.intersection_rules')}
+            </h3>
           )
         }
 
