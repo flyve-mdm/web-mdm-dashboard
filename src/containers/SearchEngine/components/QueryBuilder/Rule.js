@@ -30,8 +30,9 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import { Select, Input } from 'components/Forms'
+import I18n from 'shared/i18n'
 import itemtype from 'shared/itemtype'
+import { Select, Input } from 'components/Forms'
 import withGLPI from 'hoc/withGLPI'
 import createFieldList from '../../actions/createFieldList'
 
@@ -104,8 +105,8 @@ class Rule extends PureComponent {
           name="link"
           value={this.props.link}
           options={[
-            { name: 'AND', value: 'AND' },
-            { name: 'OR', value: 'OR' },
+            { name: I18n.t('search_engine.AND'), value: 'AND' },
+            { name: I18n.t('search_engine.OR'), value: 'OR' },
           ]}
           function={this.handleChangeRule}
           noEmpty
@@ -148,13 +149,13 @@ class Rule extends PureComponent {
                 name="searchtype"
                 value={this.props.searchtype}
                 options={[
-                  { name: 'contains', value: 'contains' },
-                  { name: 'equals', value: 'equals' },
-                  { name: 'notequals', value: 'notequals' },
-                  { name: 'lessthan', value: 'lessthan' },
-                  { name: 'morethan', value: 'morethan' },
-                  { name: 'under', value: 'under' },
-                  { name: 'notunder', value: 'notunder' },
+                  { name: I18n.t('search_engine.contains'), value: 'contains' },
+                  { name: I18n.t('search_engine.equals'), value: 'equals' },
+                  { name: I18n.t('search_engine.notequals'), value: 'notequals' },
+                  { name: I18n.t('search_engine.lessthan'), value: 'lessthan' },
+                  { name: I18n.t('search_engine.morethan'), value: 'morethan' },
+                  { name: I18n.t('search_engine.under'), value: 'under' },
+                  { name: I18n.t('search_engine.notunder'), value: 'notunder' },
                 ]}
                 function={this.handleChangeRule}
                 noEmpty
@@ -169,16 +170,6 @@ class Rule extends PureComponent {
             </>
           )
         }
-
-        {/* <button
-          className="btn"
-          type="button"
-          onClick={this.deleteRule}
-        >
-         -
-        </button> */}
-
-
       </div>
     )
   }
