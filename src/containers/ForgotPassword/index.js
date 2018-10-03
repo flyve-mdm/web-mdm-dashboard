@@ -179,12 +179,12 @@ class ForgotPassword extends PureComponent {
       )
     }
     return (
-      <React.Fragment>
+      <>
         <h2>
           {I18n.t('forgot_password.title')}
         </h2>
         { this.renderElement() }
-      </React.Fragment>
+      </>
     )
   }
 }

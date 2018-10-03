@@ -442,7 +442,7 @@ export default class UsersList extends PureComponent {
     }
 
     return (
-      <React.Fragment>
+      <>
         <ReactWinJS.ToolBar ref={(toolBar) => { this.toolBar = toolBar }} className="listToolBar">
           <ReactWinJS.ToolBar.Button
             key="sort"
@@ -479,7 +479,7 @@ export default class UsersList extends PureComponent {
           message={`${this.props.selectedItems.length} ${I18n.t('commons.users')}`}
           reference={(el) => { this.contentDialog = el }}
         />
-      </React.Fragment>
+      </>
     )
   }
 }

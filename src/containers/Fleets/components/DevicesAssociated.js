@@ -53,14 +53,14 @@ class DevicesAssociated extends PureComponent {
    * @type {component}
    */
   headerComponent = (
-    <React.Fragment>
+    <>
       <span className="id">
         #
       </span>
       <span className="name">
         {I18n.t('commons.name')}
       </span>
-    </React.Fragment>
+    </>
   )
 
   /**
@@ -151,7 +151,7 @@ class DevicesAssociated extends PureComponent {
               (!this.state.devices || this.state.devices.totalcount === 0)
                 ? <EmptyMessage message={I18n.t('fleets.no_associated_devices')} />
                 : (
-                  <React.Fragment>
+                  <>
                     <h2>
                       {I18n.t('fleets.devices_of')}
                       {` '${this.state.name}' `}
@@ -167,7 +167,7 @@ class DevicesAssociated extends PureComponent {
                         selectionMode="single"
                       />
                     </div>
-                  </React.Fragment>
+                  </>
                 )
             )
         }
