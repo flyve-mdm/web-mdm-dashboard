@@ -1,5 +1,6 @@
-a {
-    cursor: pointer;
-    color: $color-1-primary;
-    text-decoration: none;
+a,
+.btn-link {
+  cursor: pointer;
+  color: $color-1-primary;
+  text-decoration: none;
 }
