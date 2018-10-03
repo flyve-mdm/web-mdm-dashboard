@@ -203,7 +203,7 @@ export default class Geolocation extends PureComponent {
     return this.state.isLoading
       ? <Loading message={`${I18n.t('commons.loading')}...`} />
       : (
-        <React.Fragment>
+        <>
           <Map
             markers={this.state.showLocations}
             style={{ margin: '0 5px', height: '300px', maxWidth: '800px' }}
@@ -251,7 +251,7 @@ export default class Geolocation extends PureComponent {
             goToLocation={this.goToLocation}
             markers={this.state.showLocations}
           />
-        </React.Fragment>
+        </>
       )
   }
 }

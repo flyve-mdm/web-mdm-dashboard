@@ -79,7 +79,7 @@ class SplitView extends PureComponent {
 
     if (this.props.mode !== 'small' || this.props.expanded) {
       toRender = (
-        <React.Fragment>
+        <>
           <ScrollSync>
             <div className="splitview-block">
               <div className="splitview-wrapper__div">
@@ -186,7 +186,7 @@ class SplitView extends PureComponent {
               </div>
             </div>
           </ScrollSync>
-        </React.Fragment>
+        </>
       )
     }
 

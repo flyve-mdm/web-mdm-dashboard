@@ -136,7 +136,7 @@ class ValidateAccount extends PureComponent {
       )
     } else if (this.state.isValidated) {
       renderComponent = (
-        <React.Fragment>
+        <>
           <h2>
             {I18n.t('validate_account.title')}
           </h2>
@@ -149,11 +149,11 @@ class ValidateAccount extends PureComponent {
               {I18n.t('commons.sign_in')}
             </Link>
           </p>
-        </React.Fragment>
+        </>
       )
     } else {
       renderComponent = (
-        <React.Fragment>
+        <>
           <h2>
             {I18n.t('validate_account.title')}
           </h2>
@@ -161,7 +161,7 @@ class ValidateAccount extends PureComponent {
             {I18n.t('validate_account.message')}
             <br />
           </p>
-        </React.Fragment>
+        </>
       )
     }
 

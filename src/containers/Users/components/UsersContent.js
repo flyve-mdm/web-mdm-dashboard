@@ -176,7 +176,7 @@ class UsersContent extends PureComponent {
         ? this.state.data.picture
         : 'profile.png'
       renderComponent = (
-        <React.Fragment>
+        <>
           <div className="content-header">
             <div className="item-info">
               <IconItemList image={imageProfile} size={100} />
@@ -259,7 +259,7 @@ class UsersContent extends PureComponent {
             </ul>
           </div>
           <Confirmation title={I18n.t('users.delete_one')} message={this.state.data.name} reference={(el) => { this.contentDialog = el }} />
-        </React.Fragment>
+        </>
       )
     }
     return (

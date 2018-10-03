@@ -75,7 +75,7 @@ class ResetPassword extends PureComponent {
     if (!this.state.isResetSent) {
       const reset = this.buildDataArray()
       element = (
-        <React.Fragment>
+        <>
           <div style={{ textAlign: 'left' }}>
             <ConstructInputs data={reset.resetInformation} />
           </div>
@@ -89,7 +89,7 @@ class ResetPassword extends PureComponent {
               {I18n.t('login.reset_password')}
             </button>
           </div>
-        </React.Fragment>
+        </>
       )
     } else {
       element = (
@@ -246,12 +246,12 @@ class ResetPassword extends PureComponent {
       )
     }
     return (
-      <React.Fragment>
+      <>
         <h2 style={{ textAlign: 'center' }}>
           {I18n.t('login.reset_password')}
         </h2>
         {this.createRenderElament()}
-      </React.Fragment>
+      </>
     )
   }
 }

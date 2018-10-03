@@ -261,7 +261,7 @@ class SignUp extends PureComponent {
     } else {
       const user = this.buildDataArray()
       renderComponent = (
-        <React.Fragment>
+        <>
           <h2 style={{ textAlign: 'center' }}>
             { I18n.t('create_account.title') }
           </h2>
@@ -301,7 +301,7 @@ class SignUp extends PureComponent {
               </p>
             </div>
           </form>
-        </React.Fragment>
+        </>
       )
     }
 

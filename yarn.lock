@@ -991,13 +991,15 @@
   dependencies:
     lodash "^4.17.10"
 
-arity-n@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/arity-n/-/arity-n-1.0.4.tgz#d9e76b11733e08569c0847ae7b39b2860b30b745"
+"@hint/hint-http-cache@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@hint/hint-http-cache/-/hint-http-cache-1.0.3.tgz#c87393306ed8e3112b54247b2cf6ca0364e118e8"
+  integrity sha512-LexG3I03P1oXFyKN7//iHIU0n+g2cuDjG4nn82lg9XdvYtXHnOT44BAw9nr9T1YxqvhGnRA0pXWIKk0dthNdfg==
 
-arr-diff@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/arr-diff/-/arr-diff-2.0.0.tgz#8f3b827f955a8bd669697e4a4256ac3ceae356cf"
+"@hint/hint-http-compression@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@hint/hint-http-compression/-/hint-http-compression-1.0.7.tgz#a46efa425019eaf54e0c64e5b6687e0f6058bae6"
+  integrity sha512-Oic/9irAl5ISuxjfZ+1/jCWJxaSwbfcJ4se2NmBgIFzDAP1FVX9FB9eTrxj4dHfDC06gw5/yhl2EOESWiW4TVg==
   dependencies:
     iltorb "^2.4.0"
 
@@ -1706,6 +1708,11 @@ aria-query@^3.0.0:
   dependencies:
     ast-types-flow "0.0.7"
     commander "^2.11.0"
+
+arity-n@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/arity-n/-/arity-n-1.0.4.tgz#d9e76b11733e08569c0847ae7b39b2860b30b745"
+  integrity sha1-2edrEXM+CFacCEeuezmyhgswt0U=
 
 arr-diff@^2.0.0:
   version "2.0.0"
@@ -2859,6 +2866,7 @@ cheerio@^1.0.0-rc.2:
 chickencurry@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/chickencurry/-/chickencurry-1.1.1.tgz#02655f2b26b3bc2ee1ae1e5316886de38eb79738"
+  integrity sha1-AmVfKyazvC7hrh5TFoht4463lzg=
 
 chokidar@^2.0.0, chokidar@^2.0.2, chokidar@^2.0.4:
   version "2.0.4"
@@ -3190,6 +3198,7 @@ component-emitter@^1.2.1:
 compose-function@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/compose-function/-/compose-function-2.0.0.tgz#e642fa7e1da21529720031476776fc24691ac0b0"
+  integrity sha1-5kL6fh2iFSlyADFHZ3b8JGkawLA=
   dependencies:
     arity-n "^1.0.4"
 
@@ -6360,6 +6369,7 @@ html-minifier@^3.2.3:
 html-to-react@^1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/html-to-react/-/html-to-react-1.3.3.tgz#e41666a735f9997ed2372dcd21d8b0e42b334467"
+  integrity sha512-4Qi5/t8oBr6c1t1kBJKyxEeJu0lb7ctvq29oFZioiUHH0Wz88VWGwoXuH26HDt9v64bDHA4NMPNTH8bVrcaJWA==
   dependencies:
     domhandler "^2.3.0"
     escape-string-regexp "^1.0.5"
@@ -6367,9 +6377,10 @@ html-to-react@^1.3.3:
     ramda "^0.25.0"
     underscore.string.fp "^1.0.4"
 
-html-webpack-plugin@2.29.0:
-  version "2.29.0"
-  resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-2.29.0.tgz#e987f421853d3b6938c8c4c8171842e5fd17af23"
+html-webpack-plugin@4.0.0-alpha.2:
+  version "4.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-4.0.0-alpha.2.tgz#7745967e389a57a098e26963f328ebe4c19b598d"
+  integrity sha512-tyvhjVpuGqD7QYHi1l1drMQTg5i+qRxpQEGbdnYFREgOKy7aFDf/ocQ/V1fuEDlQx7jV2zMap3Hj2nE9i5eGXw==
   dependencies:
     "@types/tapable" "1.0.2"
     html-minifier "^3.2.3"
@@ -10562,7 +10573,15 @@ promise@8.0.2:
   dependencies:
     asap "~2.0.6"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2:
+prompts@^0.1.9:
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/prompts/-/prompts-0.1.14.tgz#a8e15c612c5c9ec8f8111847df3337c9cbd443b2"
+  integrity sha512-rxkyiE9YH6zAz/rZpywySLKkpaj0NMVyNw1qhsubdbjjSgcayjTShDreZGlFMcGSu5sab3bAKPfFk78PB90+8w==
+  dependencies:
+    kleur "^2.0.1"
+    sisteransi "^0.1.1"
+
+prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -10724,6 +10743,7 @@ ramda@0.24.1:
 ramda@^0.25.0:
   version "0.25.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
+  integrity sha512-GXpfrYVPwx3K7RQ6aYT8KPS8XViSXUVJT1ONhoKPE9VAleW42YE+U+8VEyGWt41EnEQW7gwecYJriTI0pKoecQ==
 
 randexp@0.4.6:
   version "0.4.6"
@@ -10854,6 +10874,7 @@ react-is@^16.4.2, react-is@^16.5.2:
 react-markdown@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-4.0.0.tgz#00f851a0917dd2973b21416a4b68744e3461d57f"
+  integrity sha512-KadYSb/7n1NGHKMwq8lAcCYj1qMSYR5piXjH7PDLR9YtKmS8ckOeDRqXYh26pHYZ22+0JMkENv3OmS/uDVXG1g==
   dependencies:
     html-to-react "^1.3.3"
     mdast-add-list-metadata "1.0.1"
@@ -11453,12 +11474,17 @@ retry@^0.10.0:
 reverse-arguments@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/reverse-arguments/-/reverse-arguments-1.0.0.tgz#c28095a3a921ac715d61834ddece9027992667cd"
+  integrity sha1-woCVo6khrHFdYYNN3s6QJ5kmZ80=
 
-right-align@^0.1.1:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/right-align/-/right-align-0.1.3.tgz#61339b722fe6a3515689210d24e14c96148613ef"
-  dependencies:
-    align-text "^0.1.1"
+rgb-regex@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/rgb-regex/-/rgb-regex-1.0.1.tgz#c0e0d6882df0e23be254a475e8edd41915feaeb1"
+  integrity sha1-wODWiC3w4jviVKR16O3UGRX+rrE=
+
+rgba-regex@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
+  integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
 rimraf@2, rimraf@^2.2.8, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2:
   version "2.6.2"
@@ -12837,6 +12863,7 @@ underscore-contrib@~0.3.0:
 underscore.string.fp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/underscore.string.fp/-/underscore.string.fp-1.0.4.tgz#054b3f1843bcae561286c87de5e8879b4fc98364"
+  integrity sha1-BUs/GEO8rlYShsh95eiHm0/Jg2Q=
   dependencies:
     chickencurry "1.1.1"
     compose-function "^2.0.0"
@@ -12846,6 +12873,7 @@ underscore.string.fp@^1.0.4:
 underscore.string@3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-3.0.3.tgz#4617b8c1a250cf6e5064fbbb363d0fa96cf14552"
+  integrity sha1-Rhe4waJQz25QZPu7Nj0PqWzxRVI=
 
 underscore@1.6.0, underscore@~1.6.0:
   version "1.6.0"
