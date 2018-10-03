@@ -364,7 +364,7 @@ class Security extends PureComponent {
         )
       default:
         return (
-          <React.Fragment>
+          <>
             <Confirmation
               title={I18n.t('commons.kill_session')}
               message={I18n.t('settings.security.close_session_message')}
@@ -444,7 +444,7 @@ class Security extends PureComponent {
               {
                 !this.state.selfRegistration
                   ? '' : (
-                    <React.Fragment>
+                    <>
                       <div className="list-element">
                         <div className="list-element__message">
                           {I18n.t('settings.security.delete_account')}
@@ -462,11 +462,11 @@ class Security extends PureComponent {
                           </button>
                         </div>
                       </div>
-                    </React.Fragment>
+                    </>
                   )
               }
             </ContentPane>
-          </React.Fragment>
+          </>
         )
     }
   }

@@ -402,7 +402,7 @@ class Profiles extends PureComponent {
       })
 
       component = (
-        <React.Fragment>
+        <>
           <h2 style={{ margin: '10px' }}>
             {I18n.t('commons.profiles')}
           </h2>
@@ -449,7 +449,7 @@ class Profiles extends PureComponent {
 
             <br />
           </div>
-        </React.Fragment>
+        </>
       )
     }
     return (
