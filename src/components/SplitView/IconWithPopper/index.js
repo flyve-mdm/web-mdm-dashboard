@@ -63,12 +63,15 @@ class IconWithPopper extends PureComponent {
         role="link"
         tabIndex="0"
       >
-        <a>
+        <button
+          className="btn btn-link"
+          type="button"
+        >
           <span
             className={`iconFont ${this.props.iconName}`}
             title={this.props.title}
           />
-        </a>
+        </button>
       </div>
     )
   }
