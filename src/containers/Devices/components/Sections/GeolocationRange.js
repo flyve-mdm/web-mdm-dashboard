@@ -65,7 +65,7 @@ export default class GeolocationRange extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <p>
           {I18n.t('devices.geolocation.filter_range')}
         </p>
@@ -92,7 +92,7 @@ export default class GeolocationRange extends PureComponent {
         >
           {I18n.t('commons.filter')}
         </button>
-      </React.Fragment>
+      </>
     )
   }
 }

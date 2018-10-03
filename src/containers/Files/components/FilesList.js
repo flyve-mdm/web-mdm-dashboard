@@ -422,7 +422,7 @@ class FilesList extends PureComponent {
     }
 
     return (
-      <React.Fragment>
+      <>
         <ReactWinJS.ToolBar ref={(toolBar) => { this.toolBar = toolBar }} className="listToolBar">
           <ReactWinJS.ToolBar.Button
             key="sort"
@@ -467,7 +467,7 @@ class FilesList extends PureComponent {
           message={`${this.props.selectedItems.length} ${I18n.t('files.delete_message')}`}
           reference={(el) => { this.contentDialog = el }}
         />
-      </React.Fragment>
+      </>
     )
   }
 }

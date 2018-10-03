@@ -195,7 +195,7 @@ class Applications extends PureComponent {
 
   render() {
     const renderComponents = (
-      <React.Fragment>
+      <>
         <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
           <ApplicationsList
             key="list"
@@ -210,7 +210,7 @@ class Applications extends PureComponent {
             {...this.propsData()}
           />
         </div>
-      </React.Fragment>
+      </>
     )
 
     return (

@@ -150,7 +150,7 @@ export default class FilesAdd extends PureComponent {
             </div>
             <div className="separator" />
             <div style={{ padding: '10px' }}>
-              <React.Fragment>
+              <>
                 <FilesUpload
                   ref={(filesUpload) => { this.files = filesUpload }}
                   className="files-dropzone"
@@ -189,7 +189,7 @@ export default class FilesAdd extends PureComponent {
                         : null
                     }
                 </div>
-              </React.Fragment>
+              </>
             </div>
           </div>
         </ContentPane>
