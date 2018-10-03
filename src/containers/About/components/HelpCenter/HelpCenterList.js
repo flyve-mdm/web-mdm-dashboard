@@ -218,13 +218,13 @@ class HelpCenterList extends PureComponent {
                     <div className="separator" />
 
                     <div>
-                      <a
+                      <button
+                        className="btn btn-link"
                         onClick={this.showAllArticles}
-                        role="link"
-                        tabIndex="0"
+                        type="button"
                       >
                         { I18n.t('about.help_center.browse_all_articles') }
-                      </a>
+                      </button>
                     </div>
                   </div>
                 )
