@@ -64,6 +64,7 @@ self.addEventListener('install', (e) => {
         '{{ "/fonts/fontawesome/fa-solid-900.woff" | absolute_url }}',
         '{{ "/fonts/fontawesome/fa-solid-900.woff2" | absolute_url }}',
         '{{ "/js/share-bar.js" | absolute_url }}',
+        '{{ "/js/send-contact-email.js" | absolute_url }}',
       ])
     })
   )
