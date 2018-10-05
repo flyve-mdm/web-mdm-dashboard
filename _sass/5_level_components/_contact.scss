@@ -21,4 +21,18 @@
   .page-header {
     padding-bottom: 20px;
   }
+
+  form {
+    margin-top: 60px;
+
+    input {
+      height: 25px;
+      min-height: 25px;
+    }
+
+    .checkbox {
+      display: inline-block;
+      margin: 5px 5px 0 0;
+    }
+  }
 }
