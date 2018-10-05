@@ -1,99 +1,94 @@
-<script>
-
-</script>
-
-
 <form onsubmit="sendContactEmail()" action="javascript:void(0);" >
-  <div class="row">
-    <div class="col-sx-3">
-      Name
+  <div class="form-group">
+    <div id="contactName">
+      Name <span>*</span>
     </div>
 
-    <div class="col-xs-21">
-      <input type="text" name="contactName">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sx-3">
-      Email
-    </div>
-
-    <div class="col-xs-21">
-      <input type="text" name="contactEmail">
+    <div class="contact__input">
+      <input class="form-control" type="text" name="contactName">
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sx-3">
+  <div class="form-group">
+    <div id="contactEmail">
+      Email <span>*</span>
+    </div>
+
+    <div class="contact__input">
+      <input class="form-control" type="text" name="contactEmail">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div id="contactCompany">
       Company
     </div>
 
-    <div class="col-xs-21">
-      <input type="text" name="contactCompany">
+    <div class="contact__input">
+      <input class="form-control" type="text" name="contactCompany">
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sx-3">
+  <div class="form-group">
+    <div id="contactJobPosition">
       Job position
     </div>
 
-    <div class="col-xs-21">
-      <input type="text" name="contactJobPosition">
+    <div class="contact__input">
+      <input class="form-control" type="text" name="contactJobPosition">
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sx-24">Motive</div>
+  <div class="form-group">
+    <div id="contactMotive">
+      Motive <span>*</span>
+    </div>
 
-    <div class="col-sx-3"></div>
-
-    <div class="col-xs-21">
+    <div class="contact__input">
       <div class="checkbox">
         <label>
-          <input name="contactMotivePricing" type="checkbox"></input>
+          <input class="form-control" name="contactMotivePricing" type="checkbox"></input>
           <span>Pricing</span>
         </label>
       </div>
 
       <div class="checkbox">
         <label>
-          <input name="contactMotivePartnership" type="checkbox"></input>
+          <input class="form-control" name="contactMotivePartnership" type="checkbox"></input>
           <span>Partnership</span>
         </label>
       </div>
 
       <div class="checkbox">
         <label>
-          <input name="contactMotiveSupport" type="checkbox"></input>
+          <input class="form-control" name="contactMotiveSupport" type="checkbox"></input>
           <span>Support</span>
         </label>
       </div>
 
       <div>
         <div>Other</div>
-        <input type="text" name="contactMotiveOther">
+        <input class="form-control" type="text" name="contactMotiveOther">
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sx-3">
-      Subject
+  <div class="form-group">
+    <div id="contactSubject">
+      Subject <span>*</span>
     </div>
 
-    <div class="col-xs-21">
-      <input type="text" name="contactSubject">
+    <div class="contact__input">
+      <input class="form-control" type="text" name="contactSubject">
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sx-3">
-      Message
+  <div class="form-group">
+    <div id="contactMessage">
+      Message <span>*</span>
     </div>
 
-    <div class="col-xs-21">
+    <div class="contact__input">
       <textarea name="contactMessage" class='form-control'></textarea>
     </div>
   </div>
