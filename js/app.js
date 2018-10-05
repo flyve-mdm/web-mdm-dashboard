@@ -229,29 +229,66 @@ const sendContactEmail = () => {
     }
   })
 
-  const link = `mailto:sales@teclib.com?subject=${escape(contactData.contactSubject)}`
-  const body = escape(`
-  URL: ${window.location.href}
+  let isValid = true
 
-  Name: ${contactData.contactName}
+  const requiredElements = [
+    'contactName',
+    'contactEmail',
+    [
+      'contactMotivePricing',
+      'contactMotivePartnership',
+      'contactMotiveSupport',
+      'contactMotiveOther',
+    ],
+    'contactSubject',
+    'contactMessage',
+  ]
 
-  Email: ${contactData.contactEmail}
+  requiredElements.forEach((element) => {
+    if (Array.isArray(element)) {
+      let nestedElementIsValid = false
 
-  Company: ${contactData.contactCompany}
+      element.forEach((nestedElement) => {
+        if (contactData[nestedElement] && nestedElement[nestedElement] !== '') {
+          nestedElementIsValid = true
+        }
+      })
 
-  Job position: ${contactData.contactJobPosition}
+      if (!nestedElementIsValid) {
+        $('#contactMotive').css('color', 'red')
+        isValid = false
+      }
+    } else if (!contactData[element] || contactData[element] === '') {
+      $(`#${element}`).css('color', 'red')
+      isValid = false
+    }
+  })
 
-  Motive:
-    - Pricing: ${contactData.contactMotivePricing ? 'Yes' : 'No'}
-    - Partnership: ${contactData.contactMotivePartnership ? 'Yes' : 'No'}
-    - Support: ${contactData.contactMotiveSupport ? 'Yes' : 'No'}
-    - Other: ${contactData.contactMotiveOther}
+  if (isValid) {
+    const link = `mailto:sales@teclib.com?subject=${escape(contactData.contactSubject)}`
+    const body = escape(`
+    URL: ${window.location.href}
 
-  Subject: ${contactData.contactSubject}
+    Name: ${contactData.contactName}
 
-  Message:
-    ${contactData.contactMessage}
-  `)
+    Email: ${contactData.contactEmail}
 
-  window.location.href = `${link}&body=${body}`
+    Company: ${contactData.contactCompany}
+
+    Job position: ${contactData.contactJobPosition}
+
+    Motive:
+      - Pricing: ${contactData.contactMotivePricing ? 'Yes' : 'No'}
+      - Partnership: ${contactData.contactMotivePartnership ? 'Yes' : 'No'}
+      - Support: ${contactData.contactMotiveSupport ? 'Yes' : 'No'}
+      - Other: ${contactData.contactMotiveOther}
+
+    Subject: ${contactData.contactSubject}
+
+    Message:
+      ${contactData.contactMessage}
+    `)
+
+    window.location.href = `${link}&body=${body}`
+  }
 }
