@@ -9,10 +9,6 @@
     border-bottom: 1px solid $neutral-quaternary;
   }
 
-  .contact__img {
-    padding: 38px 5% 5%;
-  }
-
   .share-bar {
     margin-top: 38px;
     text-align: center;
@@ -34,9 +30,9 @@
       display: inline-block;
       margin: 5px 5px 0 0;
     }
-  }
 
-  .contact__input {
-    margin-left: 10px;
+    .contact__input {
+      margin-left: 10px;
+    }
   }
 }
