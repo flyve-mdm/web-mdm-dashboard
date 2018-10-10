@@ -42,7 +42,7 @@ class MetaCriteria extends PureComponent {
           this.props.rules.length > 0
           && (
             <h3>
-              {I18n.t('search_engine.intersection_rules')}
+              {I18n.t('search_engine.global_rules')}
             </h3>
           )
         }
@@ -50,9 +50,9 @@ class MetaCriteria extends PureComponent {
         {
           this.props.rules.map((rule, index) => (
             <Rule
-              key={`metaCriteria-${index.toString()}`}
+              key={`metacriteria-${index.toString()}`}
               id={index}
-              type="metaCriteria"
+              type="metacriteria"
               changeRule={this.props.changeRule}
               {...rule}
             />

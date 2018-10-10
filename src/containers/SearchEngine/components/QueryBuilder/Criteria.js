@@ -33,7 +33,6 @@ import PropTypes from 'prop-types'
 import I18n from 'shared/i18n'
 import Rule from './Rule'
 
-
 class Criteria extends PureComponent {
   render() {
     return (
