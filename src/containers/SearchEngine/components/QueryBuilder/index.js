@@ -32,8 +32,9 @@ import React, {
 import PropTypes from 'prop-types'
 import itemtype from 'shared/itemtype'
 import I18n from 'shared/i18n'
-import Rule from './Rule'
 import createFieldList from '../../actions/createFieldList'
+import Criteria from './Criteria'
+import MetaCriteria from './MetaCriteria'
 
 /**
  * Component to select a item type
@@ -165,53 +166,16 @@ class QueryBuilder extends PureComponent {
           </button>
         </div>
 
-        {
-          this.state.criteria.length > 0
-          && (
-            <h3>
-              {I18n.t('search_engine.rules')}
-            </h3>
-          )
-        }
+        <Criteria
+          rules={this.state.criteria}
+          changeRule={this.changeRule}
+          fieldList={this.state.fieldList}
+        />
 
-        <div>
-          {
-            this.state.criteria.map((rule, index) => (
-              <Rule
-                key={`criteria-${index.toString()}`}
-                id={index}
-                type="criteria"
-                searchtype={rule.searchtype}
-                changeRule={this.changeRule}
-                fieldList={this.state.fieldList}
-                {...rule}
-              />
-            ))
-          }
-        </div>
-
-        {
-          this.state.metaCriteria.length > 0
-          && (
-            <h3>
-              {I18n.t('search_engine.intersection_rules')}
-            </h3>
-          )
-        }
-
-        <div>
-          {
-            this.state.metaCriteria.map((rule, index) => (
-              <Rule
-                key={`metaCriteria-${index.toString()}`}
-                id={index}
-                type="metaCriteria"
-                changeRule={this.changeRule}
-                {...rule}
-              />
-            ))
-          }
-        </div>
+        <MetaCriteria
+          rules={this.state.metaCriteria}
+          changeRule={this.changeRule}
+        />
       </div>
     )
   }
