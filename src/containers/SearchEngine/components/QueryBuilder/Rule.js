@@ -182,7 +182,7 @@ Rule.defaultProps = {
 }
 
 Rule.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.array.isRequired,
   itemtype: PropTypes.string,
   field: PropTypes.string,
   fieldList: PropTypes.array,

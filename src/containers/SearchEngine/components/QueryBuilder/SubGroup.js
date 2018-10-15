@@ -64,21 +64,32 @@ class SubGroup extends PureComponent {
 
   render() {
     const render = []
-    const { index } = this.props
     const rules = SubGroup.getRules(this.props.rule)
 
-    rules.forEach((rule) => {
+    rules.forEach((rule, index) => {
       if (!rule.criteria && !rule.metacriteria) {
         if (!rule.itemtype) {
-          render.push(this.selectRule('criteria', rule, index))
+          render.push(
+            this.selectRule(
+              'criteria',
+              rule,
+              [...this.props.index, 'criteria', index],
+            ),
+          )
         } else {
-          render.push(this.selectRule('metacriteria', rule, index))
+          render.push(
+            this.selectRule(
+              'metacriteria',
+              rule,
+              [...this.props.index, 'metacriteria', index],
+            ),
+          )
         }
       } else {
         render.push(
           <SubGroup
             key={`group-${index.toString()}`}
-            index={[index]}
+            index={[...this.props.index, index]}
             rule={rule}
             changeRule={this.props.changeRule}
             fieldList={this.props.fieldList}

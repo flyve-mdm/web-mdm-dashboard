@@ -65,7 +65,7 @@ class Group extends PureComponent {
       return (
         <Rule
           key={`criteria-${index.toString()}`}
-          id={index}
+          id={[index]}
           type="criteria"
           changeRule={this.props.changeRule}
           fieldList={this.props.fieldList}
@@ -77,7 +77,7 @@ class Group extends PureComponent {
     return (
       <Rule
         key={`metacriteria-${index.toString()}`}
-        id={index}
+        id={[index]}
         type="metacriteria"
         changeRule={this.props.changeRule}
         {...rule}

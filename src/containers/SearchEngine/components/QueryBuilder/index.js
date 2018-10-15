@@ -31,6 +31,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import itemtype from 'shared/itemtype'
+import { flatten, unflatten } from 'shared/flat'
 import I18n from 'shared/i18n'
 import createFieldList from '../../actions/createFieldList'
 // import Criteria from './Criteria'
@@ -99,6 +100,18 @@ class QueryBuilder extends PureComponent {
               searchtype: 'contains',
               value: '',
             },
+            {
+              link: 'AND',
+              field: fieldList[0].value,
+              searchtype: 'contains',
+              value: 'test',
+            },
+            {
+              link: 'AND',
+              field: fieldList[0].value,
+              searchtype: 'contains',
+              value: '',
+            },
           ],
         },
       ],
@@ -134,14 +147,23 @@ class QueryBuilder extends PureComponent {
    * @param {object} newValue
    */
   changeRule = (type, id, newValue) => {
-    const CurrentRules = this.state[type]
-    const newRules = [...CurrentRules]
+    const newRules = [...this.state[type]]
+    let index = type
+    id.forEach((element) => {
+      index += isNaN(element) ? `.${element}` : `[${element}]`
+    })
+
+    const flat = flatten({ [type]: newRules })
 
     if (newValue) {
-      newRules[id] = { ...newRules[id], ...newValue }
+      for (const key in newValue) {
+        if (Object.prototype.hasOwnProperty.call(newValue, key)) {
+          flat[`${index}.${key}`] = newValue[key]
+        }
+      }
 
       this.setState({
-        [type]: newRules,
+        [type]: unflatten(flat)[type],
       })
     } else {
       this.setState({
