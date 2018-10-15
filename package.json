@@ -17,7 +17,7 @@
     "gh-pages-docs": "yarn gh-pages --dist docs",
     "gh-pages-coverage": "yarn gh-pages --dist coverage",
     "gh-pages-reports": "yarn gh-pages --dist reports --dest reports",
-    "gh-pages-changelog": "yarn gh-pages --dist ./ --src '{./C*.md,CHANGELOG.md}' --dest ./ --add",
+    "gh-pages-changelog": "yarn gh-pages --dist ./ --src '{./CHANGELOG.md,CHANGELOG.md}' --dest ./_includes --add",
     "test": "NODE_PATH=./src yarn react-scripts test",
     "test:watch": "NODE_PATH=./src yarn test --watch",
     "test:cypress": "yarn cypress run",
