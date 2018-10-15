@@ -90,6 +90,17 @@ class QueryBuilder extends PureComponent {
           searchtype: 'contains',
           value: '',
         },
+        {
+          criteria: [
+            ...currentCriteria,
+            {
+              link: 'AND',
+              field: fieldList[0].value,
+              searchtype: 'contains',
+              value: '',
+            },
+          ],
+        },
       ],
     })
   }

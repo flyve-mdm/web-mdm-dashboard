@@ -30,34 +30,11 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import I18n from 'shared/i18n'
 import Rule from './Rule'
-import SubGroup from './SubGroup'
 
-class Group extends PureComponent {
-  getRules(rules) {
-    const render = []
-    rules.forEach((rule, index) => {
-      if (!rule.criteria && !rule.metacriteria) {
-        if (!rule.itemtype) {
-          render.push(this.selectRule('criteria', rule, index))
-        } else {
-          render.push(this.selectRule('metacriteria', rule, index))
-        }
-      } else {
-        render.push(
-          <SubGroup
-            key={`group-${index.toString()}`}
-            index={[index]}
-            rule={rule}
-            changeRule={this.props.changeRule}
-            fieldList={this.props.fieldList}
-          />,
-        )
-      }
-    })
-
-    return render
+class SubGroup extends PureComponent {
+  static getRules(rule) {
+    return (rule.criteria || rule.metacriteria)
   }
 
   selectRule(type, rule, index) {
@@ -86,41 +63,47 @@ class Group extends PureComponent {
   }
 
   render() {
-    return (
-      <>
-        <div className="search-engine__group">
-          {this.getRules(this.props.criteria)}
-          <button
-            className="btn btn--primary"
-            type="button"
-            onClick={() => console.log('test')}
-          >
-            +
-            {' '}
-            {I18n.t('search_engine.group')}
-          </button>
-        </div>
+    const render = []
+    const { index } = this.props
+    const rules = SubGroup.getRules(this.props.rule)
 
-        <div className="search-engine__group">
-          {this.getRules(this.props.metacriteria)}
-        </div>
-      </>
+    rules.forEach((rule) => {
+      if (!rule.criteria && !rule.metacriteria) {
+        if (!rule.itemtype) {
+          render.push(this.selectRule('criteria', rule, index))
+        } else {
+          render.push(this.selectRule('metacriteria', rule, index))
+        }
+      } else {
+        render.push(
+          <SubGroup
+            key={`group-${index.toString()}`}
+            index={[index]}
+            rule={rule}
+            changeRule={this.props.changeRule}
+            fieldList={this.props.fieldList}
+          />,
+        )
+      }
+    })
+
+    return (
+      <div className="search-engine__group">
+        { render }
+      </div>
     )
   }
 }
 
-Group.defaultProps = {
-  criteria: [],
-  metacriteria: [],
+SubGroup.defaultProps = {
   index: [],
 }
 
-Group.propTypes = {
+SubGroup.propTypes = {
   index: PropTypes.array,
-  criteria: PropTypes.array,
-  metacriteria: PropTypes.array,
+  rule: PropTypes.object.isRequired,
   changeRule: PropTypes.func.isRequired,
   fieldList: PropTypes.array.isRequired,
 }
 
-export default Group
+export default SubGroup
