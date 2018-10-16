@@ -136,8 +136,8 @@ Show the current location of the device.
 
 <img src="{{ '/images/picto-warning.png' | absolute_url }}" alt="Warning:" height="16px"> Be sure of what you're doing here, once an action is taken there is no going back.
 
-* <a name="ua"></a>Unenroll Device: the policies will be unapplied, however files and applications already deployed won't be removed, as the MDM Agent app.
-* <a name="da"></a>Delete Device: force the deletion of the device from database, the policies will be unapplied, however files and applications already deployed won't be removed, as the MDM Agent app.
+* <a name="ua"></a>Unenroll Device: the policies will be unapplied, however files and applications already deployed won't be removed, as the MDM Agent app. The device will be erased from the database.
+* <a name="da"></a>Delete Device: force the deletion of the device from database, the policies will be unapplied, however files and applications already deployed won't be removed, as the MDM Agent app. This is in case the device is stolen or lost and therefore offline forever.
 * Wipe: erase all data on the device.
 
 <img src="{{ '/images/posts/danger-zone.png' | absolute_url }}" alt="Danger zone" />
