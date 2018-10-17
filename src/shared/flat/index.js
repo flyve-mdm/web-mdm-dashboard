@@ -1,18 +1,3 @@
-// function flatten(obj) {
-//   const root = {};
-//   (function tree(obj, index) {
-//     for (const key in obj) {
-//       if (Object.prototype.hasOwnProperty.call(obj, key)) {
-//         root[index + key] = obj[key]
-//         if (toString.call(obj[key]) === '[object Array]')tree(obj[key], `${index + key}.`)
-//         if (toString.call(obj[key]) === '[object Object]')tree(obj[key], `${index + key}.`)
-//       }
-//     }
-//   }(obj, ''))
-//   return root
-// }
-
-
 function flatten(data) {
   const result = {}
   function recurse(cur, prop) {
@@ -24,9 +9,11 @@ function flatten(data) {
       if (l === 0) { result[prop] = [] }
     } else {
       let isEmpty = true
-      for (const p in cur) {
-        isEmpty = false
-        recurse(cur[p], prop ? `${prop}.${p}` : p)
+      for (const key in cur) {
+        if (Object.prototype.hasOwnProperty.call(cur, key)) {
+          isEmpty = false
+          recurse(cur[key], prop ? `${prop}.${key}` : key)
+        }
       }
       if (isEmpty) { result[prop] = {} }
     }
@@ -35,23 +22,22 @@ function flatten(data) {
   return result
 }
 
-
 function unflatten(data) {
   if (Object(data) !== data || Array.isArray(data)) { return data }
   const regex = /\.?([^.[\]]+)|\[(\d+)\]/g
 
 
   const resultholder = {}
-  for (const p in data) {
-    if (Object.prototype.hasOwnProperty.call(data, p)) {
+  for (const key in data) {
+    if (Object.prototype.hasOwnProperty.call(data, key)) {
       let cur = resultholder
       let prop = ''
       let m
-      while (m = regex.exec(p)) {
+      while (m = regex.exec(key)) {
         cur = cur[prop] || (cur[prop] = (m[2] ? [] : {}))
         prop = m[2] || m[1]
       }
-      cur[prop] = data[p]
+      cur[prop] = data[key]
     }
   }
   return resultholder[''] || resultholder

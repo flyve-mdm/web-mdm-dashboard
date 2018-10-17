@@ -34,8 +34,6 @@ import itemtype from 'shared/itemtype'
 import { flatten, unflatten } from 'shared/flat'
 import I18n from 'shared/i18n'
 import createFieldList from '../../actions/createFieldList'
-// import Criteria from './Criteria'
-// import MetaCriteria from './MetaCriteria'
 import Group from './Group'
 
 /**
@@ -166,8 +164,62 @@ class QueryBuilder extends PureComponent {
         [type]: unflatten(flat)[type],
       })
     } else {
+      function getNestedObject(nestedObj, pathArr) {
+        return pathArr.reduce((obj, key) => ((obj && obj[key] !== 'undefined') ? obj[key] : undefined), nestedObj)
+      }
+
+      const rule = getNestedObject(newRules, id)
+
+      function getObject(element, rule) {
+        let result
+
+        if (element !== rule) {
+          if (element.criteria) {
+            const criteria = getObject(element.criteria, rule)
+            if (criteria) {
+              result = {
+                ...element,
+                criteria,
+              }
+            }
+          } else if (element.metacriteria) {
+            const metacriteria = getObject(element.metacriteria, rule)
+            if (metacriteria) {
+              result = {
+                ...element,
+                metacriteria,
+              }
+            }
+          } else if (Array.isArray(element)) {
+            result = []
+            element.forEach((element2) => {
+              const x = getObject(element2, rule)
+              if (x) {
+                result.push(x)
+              }
+            })
+
+            if (result.length === 0) {
+              result = null
+            }
+          } else {
+            result = element
+          }
+        }
+        return result
+      }
+
+      const test = []
+
+      newRules.forEach((element) => {
+        const rules = getObject(element, rule)
+        if (rules) {
+          test.push(rules)
+        }
+      })
+
       this.setState({
-        [type]: newRules.slice(0, id).concat(newRules.slice(id + 1)),
+        [type]: test,
       })
     }
   }
