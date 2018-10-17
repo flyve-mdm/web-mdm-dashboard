@@ -36,6 +36,7 @@ import setGlpiCookie from 'shared/setGlpiCookie'
 import animationsWinJs from 'shared/animationsWinJs/index'
 import glpi from 'shared/glpiApi'
 import I18n from 'shared/i18n'
+import logout from 'shared/logout'
 import SplitView from 'components/SplitView'
 import HeaderBreadcrumb from 'components/HeaderBreadcrumb'
 import Confirmation from 'components/Confirmation'
@@ -103,7 +104,7 @@ const withAdminDashboardLayout = (WrappedComponent) => {
     logout = async () => {
       const isOK = await Confirmation.isOK(this.contentDialog)
       if (isOK) {
-        this.props.auth.logout(this.props.history)
+        logout()
       }
     }
 

@@ -31,11 +31,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import {
-  Link,
-} from 'react-router-dom'
 import I18n from 'shared/i18n'
-import publicURL from 'shared/publicURL'
 import withGLPI from 'hoc/withGLPI'
 import Loading from 'components/Loading'
 
@@ -51,48 +47,7 @@ class UsernameFieldset extends PureComponent {
     this.state = {
       classInput: 'win-textbox',
       errorMessage: '',
-      isLoading: true,
-      selfRegistration: null,
-    }
-  }
-
-  /**
-   * Validate if the self-registration is avidated
-   * @function componentDidMount
-   * @async
-   */
-  componentDidMount = async () => {
-    try {
-      await this.props.glpi.initSessionByUserToken({
-        userToken: window.appConfig.pluginToken,
-      })
-      const plugins = await this.props.glpi.getAllItems({
-        itemtype: 'Plugin',
-      })
-      const pluginDemo = plugins.filter(plugin => plugin.name === 'Flyve MDM Demo')
-      if (pluginDemo.length < 1 || pluginDemo[0].state !== 1) {
-        throw new Error()
-      }
-      this.setState(
-        {
-          isLoading: false,
-          selfRegistration: true,
-        },
-        () => {
-          this.usernameInput.focus()
-          this.props.glpi.killSession()
-        },
-      )
-    } catch (e) {
-      this.setState(
-        {
-          isLoading: false,
-          selfRegistration: false,
-        },
-        () => {
-          this.usernameInput.focus()
-        },
-      )
+      isLoading: false,
     }
   }
 
@@ -106,7 +61,7 @@ class UsernameFieldset extends PureComponent {
     if (this.props.username) {
       this.props.changePhase(2)
     } else {
-      this.setState(prevState => ({
+      this.setState(() => ({
         classInput: 'win-textbox color-line-alert',
         errorMessage: (
           <p className="color-type-alert">
@@ -115,17 +70,7 @@ class UsernameFieldset extends PureComponent {
               {I18n.t('login.username_not_registered')}
               {' '}
             </span>
-            {
-              prevState.selfRegistration
-                ? (
-                  <Link to={`${publicURL}/signUp`}>
-                    {I18n.t('login.create_a_new')}
-                  </Link>
-                )
-                : null
-            }
-          </p>
-        ),
+          </p>),
       }))
     }
   }
@@ -175,19 +120,6 @@ class UsernameFieldset extends PureComponent {
                 {I18n.t('commons.next')}
               </button>
             </form>
-            {
-              !this.state.selfRegistration
-                ? ''
-                : (
-                  <p>
-                    {I18n.t('login.no_account')}
-                    &nbsp;
-                    <Link to={`${publicURL}/signUp`}>
-                      {I18n.t('login.create_one')}
-                    </Link>
-                  </p>
-                )
-            }
           </div>
         )
     )
@@ -198,7 +130,6 @@ UsernameFieldset.propTypes = {
   username: PropTypes.string.isRequired,
   changeInput: PropTypes.func.isRequired,
   changePhase: PropTypes.func.isRequired,
-  glpi: PropTypes.object.isRequired,
 }
 
 export default withGLPI(UsernameFieldset)

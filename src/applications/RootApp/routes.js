@@ -42,18 +42,6 @@ const routes = [{
   private: false,
 },
 {
-  path: `${publicURL}/signUp`,
-  component: withAsyncComponent(() => import('containers/SignUp')),
-  exact: false,
-  private: false,
-},
-{
-  path: `${publicURL}/validateAccount`,
-  component: withAsyncComponent(() => import('components/ValidateAccount')),
-  exact: false,
-  private: false,
-},
-{
   path: `${publicURL}/forgotPassword`,
   component: withAsyncComponent(() => import('containers/ForgotPassword')),
   exact: false,
