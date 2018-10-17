@@ -30,7 +30,6 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import publicURL from 'shared/publicURL'
 import glpi from 'shared/glpiApi'
-import itemtype from 'shared/itemtype'
 
 const AuthenticationContext = React.createContext()
 
@@ -49,29 +48,6 @@ export class AuthenticationProvider extends PureComponent {
         localStorage.setItem('sessionToken', sessionToken)
         this.props.children.props.history.push(`${publicURL}/app`)
       })
-    },
-    logout: () => {
-      try {
-        this.setState(
-          {
-            currentUser: undefined,
-            sessionToken: undefined,
-          },
-          async () => {
-            localStorage.removeItem('currentUser')
-            localStorage.removeItem('sessionToken')
-            await glpi.killSession()
-            this.props.children.props.history.push(`${publicURL}/`)
-          },
-        )
-      } catch (error) {
-        this.setState({
-          currentUser: undefined,
-          sessionToken: undefined,
-        }, () => {
-          this.props.children.props.history.push(`${publicURL}/`)
-        })
-      }
     },
     fetchSignIn: (username, password) => new Promise((resolve, reject) => {
       this.setState(
@@ -113,108 +89,6 @@ export class AuthenticationProvider extends PureComponent {
               },
             )
           })
-        },
-      )
-    }),
-    fetchCaptcha: () => new Promise((resolve, reject) => {
-      this.setState(
-        {
-          isLoading: true,
-        },
-        async () => {
-          try {
-            const session = await glpi.initSessionByUserToken({
-              userToken: window.appConfig.demoToken,
-            })
-            glpi.sessionToken = session.session_token
-            const {
-              id,
-            } = await glpi.addItem({
-              itemtype: itemtype.PluginFlyvemdmdemoCaptcha,
-              input: {},
-            })
-            const captcha = await glpi.genericRequest({
-              path: `PluginFlyvemdmdemoCaptcha/${id}`,
-              queryString: {
-                alt: 'media',
-              },
-              requestParams: {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/octet-stream',
-                },
-                responseType: 'blob',
-              },
-            })
-            const {
-              // eslint-disable-next-line
-              cfg_glpi,
-            } = await glpi.getGlpiConfig()
-            const configurationPassword = {
-              minimunLength: cfg_glpi.password_min_length,
-              needDigit: cfg_glpi.password_need_number,
-              needLowercaseCharacter: cfg_glpi.password_need_letter,
-              needUppercaseCharacter: cfg_glpi.password_need_caps,
-              needSymbol: cfg_glpi.password_need_symbol,
-            }
-
-            this.setState(
-              {
-                isLoading: false,
-                configurationPassword,
-                captcha: {
-                  id,
-                  img: URL.createObjectURL(captcha),
-                },
-              },
-              () => {
-                resolve()
-              },
-            )
-          } catch (error) {
-            this.setState(
-              {
-                isLoading: false,
-              },
-              () => {
-                reject(error)
-              },
-            )
-          }
-        },
-      )
-    }),
-    fetchSignUp: data => new Promise((resolve, reject) => {
-      this.setState(
-        {
-          isLoading: true,
-        },
-        () => {
-          glpi.registerUser({
-            userToken: window.appConfig.demoToken,
-            userData: data,
-            itemtype: itemtype.PluginFlyvemdmdemoUser,
-          })
-            .then(() => {
-              this.setState(
-                {
-                  isLoading: false,
-                },
-                () => {
-                  resolve()
-                },
-              )
-            })
-            .catch((error) => {
-              this.setState(
-                {
-                  isLoading: false,
-                },
-                () => {
-                  reject(error)
-                },
-              )
-            })
         },
       )
     }),
