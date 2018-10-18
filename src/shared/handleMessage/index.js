@@ -48,7 +48,7 @@ function errorRoute(pathname, customErrorRoute) {
   if (path[1] === 'app') {
     return `${publicURL}/app/${path[2]}/error`
   }
-  if (!path[1] || path[1] === '') {
+  if (!path[1]) {
     return `${publicURL}/error`
   }
   return `${publicURL}/${path[1]}/error`
@@ -122,8 +122,6 @@ export default ({
               } else {
                 response.body = splitMessage(messageData[1])
               }
-            } else if (messageData[0].message) {
-              response.body = splitMessage(messageData[0].message)
             } else {
               response.body = splitMessage(messageData[0])
             }

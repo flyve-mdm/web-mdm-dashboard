@@ -106,9 +106,10 @@
     "AND": "AND",
     "OR": "OR",
     "rule": "Rule",
-    "intersection": "Intersection",
     "rules": "Rules",
-    "intersection_rules": "Intersection rules"
+    "global_rule": "Global rule",
+    "global_rules": "Global rules",
+    "group": "Group"
   },
   "users": {
     "delete": "Delete Users",

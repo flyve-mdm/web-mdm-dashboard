@@ -31,9 +31,11 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import itemtype from 'shared/itemtype'
+import { flatten, unflatten } from 'shared/flat'
 import I18n from 'shared/i18n'
-import Rule from './Rule'
+import getNestedObject from 'shared/getNestedObject'
 import createFieldList from '../../actions/createFieldList'
+import Group from './Group'
 
 /**
  * Component to select a item type
@@ -47,7 +49,7 @@ class QueryBuilder extends PureComponent {
 
     this.state = {
       criteria: [],
-      metaCriteria: [],
+      metacriteria: [],
       fieldList: createFieldList(props.listSearchOptions),
     }
   }
@@ -68,7 +70,7 @@ class QueryBuilder extends PureComponent {
     this.props.changeQuery({
       itemtype: this.props.itemtype,
       criteria: this.state.criteria,
-      metacriteria: this.state.metaCriteria,
+      metacriteria: this.state.metacriteria,
     })
   }
 
@@ -88,6 +90,29 @@ class QueryBuilder extends PureComponent {
           searchtype: 'contains',
           value: '',
         },
+        {
+          criteria: [
+            ...currentCriteria,
+            {
+              link: 'AND',
+              field: fieldList[0].value,
+              searchtype: 'contains',
+              value: '',
+            },
+            {
+              link: 'AND',
+              field: fieldList[0].value,
+              searchtype: 'contains',
+              value: 'test',
+            },
+            {
+              link: 'AND',
+              field: fieldList[0].value,
+              searchtype: 'contains',
+              value: '',
+            },
+          ],
+        },
       ],
     })
   }
@@ -97,10 +122,10 @@ class QueryBuilder extends PureComponent {
    * @function addMetaCriteria
    */
   addMetaCriteria = () => {
-    const { metaCriteria: currentCriteria } = this.state
+    const { metacriteria: currentCriteria } = this.state
 
     this.setState({
-      metaCriteria: [
+      metacriteria: [
         ...currentCriteria,
         {
           link: 'AND',
@@ -113,6 +138,45 @@ class QueryBuilder extends PureComponent {
     })
   }
 
+  constructNestedObject = (element, rule) => {
+    let result
+
+    if (element !== rule) {
+      if (element.criteria) {
+        const criteria = this.constructNestedObject(element.criteria, rule)
+        if (criteria) {
+          result = {
+            ...element,
+            criteria,
+          }
+        }
+      } else if (element.metacriteria) {
+        const metacriteria = this.constructNestedObject(element.metacriteria, rule)
+        if (metacriteria) {
+          result = {
+            ...element,
+            metacriteria,
+          }
+        }
+      } else if (Array.isArray(element)) {
+        result = []
+        element.forEach((element2) => {
+          const x = this.constructNestedObject(element2, rule)
+          if (x) {
+            result.push(x)
+          }
+        })
+
+        if (result.length === 0) {
+          result = null
+        }
+      } else {
+        result = element
+      }
+    }
+    return result
+  }
+
   /**
    * Manage the change of values of the rules
    * @function changeRule
@@ -121,18 +185,38 @@ class QueryBuilder extends PureComponent {
    * @param {object} newValue
    */
   changeRule = (type, id, newValue) => {
-    const CurrentRules = this.state[type]
-    const newRules = [...CurrentRules]
+    const newRules = [...this.state[type]]
+    let index = type
+    id.forEach((element) => {
+      index += isNaN(element) ? `.${element}` : `[${element}]`
+    })
+
+    const flat = flatten({ [type]: newRules })
 
     if (newValue) {
-      newRules[id] = { ...newRules[id], ...newValue }
+      for (const key in newValue) {
+        if (Object.prototype.hasOwnProperty.call(newValue, key)) {
+          flat[`${index}.${key}`] = newValue[key]
+        }
+      }
 
       this.setState({
-        [type]: newRules,
+        [type]: unflatten(flat)[type],
       })
     } else {
+      const rule = getNestedObject(newRules, id)
+
+      const test = []
+
+      newRules.forEach((element) => {
+        const rules = this.constructNestedObject(element, rule)
+        if (rules) {
+          test.push(rules)
+        }
+      })
+
       this.setState({
-        [type]: newRules.slice(0, id).concat(newRules.slice(id + 1)),
+        [type]: test,
       })
     }
   }
@@ -161,57 +245,16 @@ class QueryBuilder extends PureComponent {
           >
             +
             {' '}
-            {I18n.t('search_engine.intersection')}
+            {I18n.t('search_engine.global_rule')}
           </button>
         </div>
 
-        {
-          this.state.criteria.length > 0
-          && (
-            <h3>
-              {I18n.t('search_engine.rules')}
-            </h3>
-          )
-        }
-
-        <div>
-          {
-            this.state.criteria.map((rule, index) => (
-              <Rule
-                key={`criteria-${index.toString()}`}
-                id={index}
-                type="criteria"
-                searchtype={rule.searchtype}
-                changeRule={this.changeRule}
-                fieldList={this.state.fieldList}
-                {...rule}
-              />
-            ))
-          }
-        </div>
-
-        {
-          this.state.metaCriteria.length > 0
-          && (
-            <h3>
-              {I18n.t('search_engine.intersection_rules')}
-            </h3>
-          )
-        }
-
-        <div>
-          {
-            this.state.metaCriteria.map((rule, index) => (
-              <Rule
-                key={`metaCriteria-${index.toString()}`}
-                id={index}
-                type="metaCriteria"
-                changeRule={this.changeRule}
-                {...rule}
-              />
-            ))
-          }
-        </div>
+        <Group
+          criteria={this.state.criteria}
+          metacriteria={this.state.metacriteria}
+          changeRule={this.changeRule}
+          fieldList={this.state.fieldList}
+        />
       </div>
     )
   }
