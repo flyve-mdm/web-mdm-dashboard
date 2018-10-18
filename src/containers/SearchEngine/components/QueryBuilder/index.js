@@ -31,7 +31,6 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import itemtype from 'shared/itemtype'
-import { flatten, unflatten } from 'shared/flat'
 import I18n from 'shared/i18n'
 import getNestedObject from 'shared/getNestedObject'
 import createFieldList from '../../actions/createFieldList'
@@ -138,12 +137,12 @@ class QueryBuilder extends PureComponent {
     })
   }
 
-  constructNestedObject = (element, rule) => {
+  constructNestedObject = (element, rule, newRule) => {
     let result
 
     if (element !== rule) {
       if (element.criteria) {
-        const criteria = this.constructNestedObject(element.criteria, rule)
+        const criteria = this.constructNestedObject(element.criteria, rule, newRule)
         if (criteria) {
           result = {
             ...element,
@@ -151,7 +150,7 @@ class QueryBuilder extends PureComponent {
           }
         }
       } else if (element.metacriteria) {
-        const metacriteria = this.constructNestedObject(element.metacriteria, rule)
+        const metacriteria = this.constructNestedObject(element.metacriteria, rule, newRule)
         if (metacriteria) {
           result = {
             ...element,
@@ -161,7 +160,8 @@ class QueryBuilder extends PureComponent {
       } else if (Array.isArray(element)) {
         result = []
         element.forEach((element2) => {
-          const x = this.constructNestedObject(element2, rule)
+          const x = this.constructNestedObject(element2, rule, newRule)
+
           if (x) {
             result.push(x)
           }
@@ -173,7 +173,13 @@ class QueryBuilder extends PureComponent {
       } else {
         result = element
       }
+    } else if (newRule) {
+      result = {
+        ...rule,
+        ...newRule,
+      }
     }
+
     return result
   }
 
@@ -186,39 +192,19 @@ class QueryBuilder extends PureComponent {
    */
   changeRule = (type, id, newValue) => {
     const newRules = [...this.state[type]]
-    let index = type
-    id.forEach((element) => {
-      index += isNaN(element) ? `.${element}` : `[${element}]`
+    const rule = getNestedObject(newRules, id)
+    const test = []
+
+    newRules.forEach((element) => {
+      const rules = this.constructNestedObject(element, rule, newValue)
+      if (rules) {
+        test.push(rules)
+      }
     })
 
-    const flat = flatten({ [type]: newRules })
-
-    if (newValue) {
-      for (const key in newValue) {
-        if (Object.prototype.hasOwnProperty.call(newValue, key)) {
-          flat[`${index}.${key}`] = newValue[key]
-        }
-      }
-
-      this.setState({
-        [type]: unflatten(flat)[type],
-      })
-    } else {
-      const rule = getNestedObject(newRules, id)
-
-      const test = []
-
-      newRules.forEach((element) => {
-        const rules = this.constructNestedObject(element, rule)
-        if (rules) {
-          test.push(rules)
-        }
-      })
-
-      this.setState({
-        [type]: test,
-      })
-    }
+    this.setState({
+      [type]: test,
+    })
   }
 
   /**
