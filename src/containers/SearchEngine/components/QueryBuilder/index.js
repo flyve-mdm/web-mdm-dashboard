@@ -33,6 +33,7 @@ import PropTypes from 'prop-types'
 import itemtype from 'shared/itemtype'
 import { flatten, unflatten } from 'shared/flat'
 import I18n from 'shared/i18n'
+import getNestedObject from 'shared/getNestedObject'
 import createFieldList from '../../actions/createFieldList'
 import Group from './Group'
 
@@ -164,10 +165,6 @@ class QueryBuilder extends PureComponent {
         [type]: unflatten(flat)[type],
       })
     } else {
-      function getNestedObject(nestedObj, pathArr) {
-        return pathArr.reduce((obj, key) => ((obj && obj[key] !== 'undefined') ? obj[key] : undefined), nestedObj)
-      }
-
       const rule = getNestedObject(newRules, id)
 
       function getObject(element, rule) {
