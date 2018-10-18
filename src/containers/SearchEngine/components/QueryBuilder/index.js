@@ -138,6 +138,45 @@ class QueryBuilder extends PureComponent {
     })
   }
 
+  constructNestedObject = (element, rule) => {
+    let result
+
+    if (element !== rule) {
+      if (element.criteria) {
+        const criteria = this.constructNestedObject(element.criteria, rule)
+        if (criteria) {
+          result = {
+            ...element,
+            criteria,
+          }
+        }
+      } else if (element.metacriteria) {
+        const metacriteria = this.constructNestedObject(element.metacriteria, rule)
+        if (metacriteria) {
+          result = {
+            ...element,
+            metacriteria,
+          }
+        }
+      } else if (Array.isArray(element)) {
+        result = []
+        element.forEach((element2) => {
+          const x = this.constructNestedObject(element2, rule)
+          if (x) {
+            result.push(x)
+          }
+        })
+
+        if (result.length === 0) {
+          result = null
+        }
+      } else {
+        result = element
+      }
+    }
+    return result
+  }
+
   /**
    * Manage the change of values of the rules
    * @function changeRule
@@ -167,49 +206,10 @@ class QueryBuilder extends PureComponent {
     } else {
       const rule = getNestedObject(newRules, id)
 
-      function getObject(element, rule) {
-        let result
-
-        if (element !== rule) {
-          if (element.criteria) {
-            const criteria = getObject(element.criteria, rule)
-            if (criteria) {
-              result = {
-                ...element,
-                criteria,
-              }
-            }
-          } else if (element.metacriteria) {
-            const metacriteria = getObject(element.metacriteria, rule)
-            if (metacriteria) {
-              result = {
-                ...element,
-                metacriteria,
-              }
-            }
-          } else if (Array.isArray(element)) {
-            result = []
-            element.forEach((element2) => {
-              const x = getObject(element2, rule)
-              if (x) {
-                result.push(x)
-              }
-            })
-
-            if (result.length === 0) {
-              result = null
-            }
-          } else {
-            result = element
-          }
-        }
-        return result
-      }
-
       const test = []
 
       newRules.forEach((element) => {
-        const rules = getObject(element, rule)
+        const rules = this.constructNestedObject(element, rule)
         if (rules) {
           test.push(rules)
         }
@@ -248,17 +248,6 @@ class QueryBuilder extends PureComponent {
             {I18n.t('search_engine.global_rule')}
           </button>
         </div>
-
-        {/* <Criteria
-          rules={this.state.criteria}
-          changeRule={this.changeRule}
-          fieldList={this.state.fieldList}
-        />
-
-        <MetaCriteria
-          rules={this.state.metacriteria}
-          changeRule={this.changeRule}
-        /> */}
 
         <Group
           criteria={this.state.criteria}
