@@ -30,6 +30,7 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
+import I18n from 'shared/i18n'
 import Rule from './Rule'
 
 class SubGroup extends PureComponent {
@@ -101,6 +102,15 @@ class SubGroup extends PureComponent {
     return (
       <div className="search-engine__group">
         { render }
+        <button
+          className="btn btn--secondary"
+          type="button"
+          onClick={() => this.props.addGroup()}
+        >
+            +
+          {' '}
+          {I18n.t('search_engine.group')}
+        </button>
       </div>
     )
   }
@@ -115,6 +125,7 @@ SubGroup.propTypes = {
   rule: PropTypes.object.isRequired,
   changeRule: PropTypes.func.isRequired,
   fieldList: PropTypes.array.isRequired,
+  addGroup: PropTypes.func.isRequired,
 }
 
 export default SubGroup

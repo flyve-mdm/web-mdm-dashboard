@@ -52,6 +52,7 @@ class Group extends PureComponent {
             rule={rule}
             changeRule={this.props.changeRule}
             fieldList={this.props.fieldList}
+            addGroup={this.props.addGroup}
           />,
         )
       }
@@ -87,40 +88,33 @@ class Group extends PureComponent {
 
   render() {
     return (
-      <>
-        <div className="search-engine__group">
-          {this.getRules(this.props.criteria)}
-          <button
-            className="btn btn--primary"
-            type="button"
-            onClick={() => console.log('test')}
-          >
-            +
-            {' '}
-            {I18n.t('search_engine.group')}
-          </button>
-        </div>
-
-        <div className="search-engine__group">
-          {this.getRules(this.props.metacriteria)}
-        </div>
-      </>
+      <div className="search-engine__group">
+        {this.getRules(this.props.rules)}
+        <button
+          className="btn btn--secondary"
+          type="button"
+          onClick={() => this.props.addGroup()}
+        >
+          +
+          {' '}
+          {I18n.t('search_engine.group')}
+        </button>
+      </div>
     )
   }
 }
 
 Group.defaultProps = {
-  criteria: [],
-  metacriteria: [],
+  rules: [],
   index: [],
 }
 
 Group.propTypes = {
   index: PropTypes.array,
-  criteria: PropTypes.array,
-  metacriteria: PropTypes.array,
+  rules: PropTypes.array,
   changeRule: PropTypes.func.isRequired,
   fieldList: PropTypes.array.isRequired,
+  addGroup: PropTypes.func.isRequired,
 }
 
 export default Group

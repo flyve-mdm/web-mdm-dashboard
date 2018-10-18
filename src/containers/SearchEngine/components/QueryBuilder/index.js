@@ -207,6 +207,10 @@ class QueryBuilder extends PureComponent {
     })
   }
 
+  addGroup = () => {
+    console.log('test')
+  }
+
   /**
    * Render component
    * @function render
@@ -235,12 +239,30 @@ class QueryBuilder extends PureComponent {
           </button>
         </div>
 
-        <Group
-          criteria={this.state.criteria}
-          metacriteria={this.state.metacriteria}
-          changeRule={this.changeRule}
-          fieldList={this.state.fieldList}
-        />
+
+        {
+          this.state.criteria.length > 0
+          && (
+            <Group
+              rules={this.state.criteria}
+              changeRule={this.changeRule}
+              fieldList={this.state.fieldList}
+              addGroup={this.addGroup}
+            />
+          )
+        }
+
+        {
+          this.state.metacriteria.length > 0
+          && (
+            <Group
+              rules={this.state.metacriteria}
+              changeRule={this.changeRule}
+              fieldList={this.state.fieldList}
+              addGroup={this.addGroup}
+            />
+          )
+        }
       </div>
     )
   }
