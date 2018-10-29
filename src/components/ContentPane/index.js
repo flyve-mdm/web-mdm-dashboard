@@ -65,6 +65,7 @@ class ContentPane extends PureComponent {
     return (
       <div
         className={`content-pane ${this.props.className}`}
+        style={this.props.style}
         ref={(pane) => { this.pane = pane }}
       >
         { this.props.children }
@@ -75,10 +76,12 @@ class ContentPane extends PureComponent {
 
 ContentPane.defaultProps = {
   className: '',
+  style: {},
 }
 
 ContentPane.propTypes = {
   className: PropTypes.string,
+  style: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
