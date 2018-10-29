@@ -203,15 +203,14 @@ export default class Geolocation extends PureComponent {
     return this.state.isLoading
       ? <Loading message={`${I18n.t('commons.loading')}...`} />
       : (
-        <>
+        <div className="geolocation">
           <Map
             markers={this.state.showLocations}
-            style={{ margin: '0 5px', height: '300px', maxWidth: '800px' }}
+            style={{ height: '300px', maxWidth: '800px' }}
             selectedLocation={this.state.selectedLocation}
           />
           <button
             className="btn btn--secondary"
-            style={{ margin: 5 }}
             onClick={() => this.setState(prevState => ({
               filter: !prevState.filter,
             }))}
@@ -226,7 +225,6 @@ export default class Geolocation extends PureComponent {
           <div style={{ display: 'inline-block' }}>
             <button
               className="btn btn--secondary"
-              style={{ margin: 5 }}
               onClick={this.requestLocation}
               type="button"
             >
@@ -251,7 +249,7 @@ export default class Geolocation extends PureComponent {
             goToLocation={this.goToLocation}
             markers={this.state.showLocations}
           />
-        </>
+        </div>
       )
   }
 }
