@@ -411,7 +411,7 @@ class Profiles extends PureComponent {
               <span className="iconFont viewIcon" />
             </div>
             <div className="froms__row">
-              <div style={{ overflow: 'hidden' }}>
+              <div style={{ overflow: 'hidden', paddingLeft: '20px' }}>
                 <IconItemList
                   image={this.state.imageProfile}
                   type={this.state.typeImageProfile}
