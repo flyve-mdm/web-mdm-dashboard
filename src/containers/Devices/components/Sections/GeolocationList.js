@@ -44,7 +44,7 @@ class GeolocationList extends PureComponent {
       renderList = this.props.locations.map((location, index) => (
         <div
           key={`location-${index.toString()}`}
-          style={{ paddingLeft: 5, cursor: 'pointer' }}
+          style={{ cursor: 'pointer' }}
           onClick={() => this.props.goToLocation(location)}
           role="button"
           tabIndex="0"
@@ -67,7 +67,7 @@ class GeolocationList extends PureComponent {
       ))
     } else {
       renderList = (
-        <p style={{ color: 'grey', marginLeft: 5 }}>
+        <p style={{ color: 'grey' }}>
           {I18n.t('devices.geolocation.no_locations')}
         </p>
       )
