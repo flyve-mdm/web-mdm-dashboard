@@ -34,7 +34,6 @@ import PropTypes from 'prop-types'
 import I18n from 'shared/i18n'
 import validateData from 'shared/validateData'
 import itemtype from 'shared/itemtype'
-import getID from 'shared/getID'
 import authtype from 'shared/authtype'
 import ConstructInputs from 'components/Forms'
 import ContentPane from 'components/ContentPane'
@@ -56,7 +55,7 @@ class UsersAdd extends PureComponent {
     super(props)
 
     this.state = {
-      isLoading: false,
+      isLoading: true,
       login: '',
       firstName: '',
       realName: '',
@@ -85,8 +84,20 @@ class UsersAdd extends PureComponent {
    * Make the call to update the content
    * @function componentDidMount
    */
-  componentDidMount() {
-    // this.handleRefresh()
+  componentDidMount = async () => {
+    const { cfg_glpi: cfgGlpi } = await this.props.glpi.getGlpiConfig()
+    const parametersToEvaluate = {
+      minimunLength: cfgGlpi.password_min_length,
+      needDigit: cfgGlpi.password_need_number,
+      needLowercaseCharacter: cfgGlpi.password_need_letter,
+      needUppercaseCharacter: cfgGlpi.password_need_caps,
+      needSymbol: cfgGlpi.password_need_symbol,
+    }
+
+    this.setState({
+      parametersToEvaluate,
+      isLoading: false,
+    })
   }
 
   /**
@@ -179,6 +190,81 @@ class UsersAdd extends PureComponent {
     }
   }
 
+
+  createUser = () => {
+    let newUser = {
+      phone: this.state.phone,
+      phone2: this.state.phone2,
+      firstname: this.state.firstName,
+      realname: this.state.realName,
+      mobile: this.state.mobilePhone,
+      registration_number: this.state.administrativeNumber,
+      usercategories_id: this.state.category.value,
+      entities_id: this.state.defaultEntity.value,
+      comment: this.state.comments,
+      usertitles_id: this.state.title.value,
+      locations_id: this.state.location.value,
+      profiles_id: this.state.defaultProfile.value,
+      begin_date: this.state.validSince,
+      end_date: this.state.validUntil,
+    }
+
+    let correctPassword = true
+
+    if (this.state.password !== '' || this.state.passwordConfirmation !== '') {
+      if (!ErrorValidation.validation(this.state.parametersToEvaluate, this.state.password).isCorrect) {
+        correctPassword = false
+      } else if (!ErrorValidation.validation({
+        ...this.state.parametersToEvaluate,
+        isEqualTo: {
+          value: this.state.password,
+          message: 'Passwords do not match',
+        },
+      }, this.state.passwordConfirmation).isCorrect) {
+        correctPassword = false
+      } else {
+        newUser = {
+          ...newUser,
+          password: this.state.password,
+          password2: this.state.passwordConfirmation,
+        }
+      }
+    }
+
+    if (correctPassword) {
+      this.setState({
+        isLoading: true,
+      },
+      async () => {
+        try {
+          await this.props.glpi.addItem({
+            itemtype: itemtype.User,
+            input: newUser,
+          })
+          // await this.props.glpi.addItem({
+          //   userID: newUser.id,
+          //   currentEmails: this.state.currentEmails,
+          //   newEmails: this.state.emails,
+          // })
+          this.props.toast.setNotification({
+            title: I18n.t('commons.success'),
+            body: I18n.t('notifications.saved_profile'),
+            type: 'success',
+          })
+          this.props.changeAction('reload')
+        } catch (error) {
+          this.props.toast.setNotification(this.props.handleMessage({
+            type: 'alert',
+            message: error,
+          }))
+          this.setState({
+            isLoading: false,
+          })
+        }
+      })
+    }
+  }
+
   /**
    * Render component
    * @function render
@@ -260,7 +346,7 @@ class UsersAdd extends PureComponent {
           <button
             className="btn btn--primary"
             style={{ margin: '20px', float: 'right' }}
-            onClick={this.saveChanges}
+            onClick={this.createUser}
             type="button"
           >
             {I18n.t('commons.save')}
