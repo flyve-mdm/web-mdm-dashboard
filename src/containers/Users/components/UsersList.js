@@ -211,15 +211,6 @@ export default class UsersList extends PureComponent {
   }
 
   /**
-   * Open the mass edition page
-   * @function handleEdit
-   */
-  handleEdit = () => {
-    const path = `${publicURL}/app/users/edit`
-    this.props.history.push(path)
-  }
-
-  /**
    * Delete users
    * @function handleDelete
    * @async
@@ -390,7 +381,7 @@ export default class UsersList extends PureComponent {
         label={I18n.t('commons.edit')}
         priority={0}
         disabled={this.props.selectedItems.length === 0}
-        onClick={this.handleEdit}
+        onClick={() => this.props.history.push(`${publicURL}/app/users/edit`)}
       />
     )
 
@@ -445,12 +436,21 @@ export default class UsersList extends PureComponent {
       <>
         <ReactWinJS.ToolBar ref={(toolBar) => { this.toolBar = toolBar }} className="listToolBar">
           <ReactWinJS.ToolBar.Button
+            key="add"
+            icon="add"
+            label={I18n.t('commons.add')}
+            priority={1}
+            onClick={() => this.props.history.push(`${publicURL}/app/users/add`)}
+          />
+
+          <ReactWinJS.ToolBar.Button
             key="sort"
             icon="sort"
             label={I18n.t('commons.sort')}
             priority={1}
             onClick={this.handleSort}
           />
+
           <ReactWinJS.ToolBar.Button
             key="refresh"
             icon="refresh"
