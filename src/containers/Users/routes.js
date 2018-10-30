@@ -35,36 +35,43 @@ import I18n from 'shared/i18n'
  * @constant routes
  * @type {Array}
  */
-const routes = [{
-  path: '/',
-  name: I18n.t('commons.no_selection'),
-  component: withAsyncComponent(() => import('components/EmptyMessage')),
-  exact: true,
-},
-{
-  path: '/error',
-  name: I18n.t('commons.error'),
-  component: withAsyncComponent(() => import('components/ErrorPage')),
-  exact: true,
-},
-{
-  path: '/edit',
-  name: I18n.t('commons.edit'),
-  component: withAsyncComponent(() => import('./components/UsersEdit')),
-  exact: true,
-},
-{
-  path: '/:id/edit',
-  name: I18n.t('commons.edit_one'),
-  component: withAsyncComponent(() => import('./components/UsersEditOne')),
-  exact: true,
-},
-{
-  path: '/:id',
-  name: I18n.t('commons.selected'),
-  component: withAsyncComponent(() => import('./components/UsersContent')),
-  exact: true,
-},
+const routes = [
+  {
+    path: '/',
+    name: I18n.t('commons.no_selection'),
+    component: withAsyncComponent(() => import('components/EmptyMessage')),
+    exact: true,
+  },
+  {
+    path: '/error',
+    name: I18n.t('commons.error'),
+    component: withAsyncComponent(() => import('components/ErrorPage')),
+    exact: true,
+  },
+  {
+    path: '/edit',
+    name: I18n.t('commons.edit'),
+    component: withAsyncComponent(() => import('./components/UsersEdit')),
+    exact: true,
+  },
+  {
+    path: '/add',
+    name: I18n.t('commons.selected'),
+    component: withAsyncComponent(() => import('./components/UsersAdd')),
+    exact: true,
+  },
+  {
+    path: '/:id/edit',
+    name: I18n.t('commons.edit_one'),
+    component: withAsyncComponent(() => import('./components/UsersEditOne')),
+    exact: true,
+  },
+  {
+    path: '/:id',
+    name: I18n.t('commons.selected'),
+    component: withAsyncComponent(() => import('./components/UsersContent')),
+    exact: true,
+  },
 ]
 
 export default routes
