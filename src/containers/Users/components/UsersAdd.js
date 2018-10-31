@@ -104,11 +104,23 @@ class UsersAdd extends PureComponent {
           value: '2',
         },
       },
-      location: {},
-      defaultProfile: {},
-      validSince: {},
-      validUntil: {},
-      authentication: {},
+      defaultProfile: {
+        value: undefined,
+        request: {
+          params: {
+            itemtype: itemtype.Profile,
+            options: {
+              range: '0-200',
+              forcedisplay: [2],
+            },
+          },
+          method: 'searchItems',
+          content: '1',
+          value: '2',
+        },
+      },
+      validSince: undefined,
+      validUntil: undefined,
     }
   }
 
@@ -214,7 +226,6 @@ class UsersAdd extends PureComponent {
       entities_id: this.state.defaultEntity.value,
       comment: this.state.comments,
       usertitles_id: this.state.title.value,
-      locations_id: this.state.location.value,
       profiles_id: this.state.defaultProfile.value,
       begin_date: this.state.validSince,
       end_date: this.state.validUntil,
@@ -292,7 +303,6 @@ class UsersAdd extends PureComponent {
         realName: this.state.realName,
         firstName: this.state.firstName,
         title: this.state.title,
-        location: this.state.location,
         login: this.state.login,
         phone: this.state.phone,
         phone2: this.state.phone2,
@@ -307,7 +317,6 @@ class UsersAdd extends PureComponent {
         modified: this.state.modified,
         validUntil: this.state.validUntil,
         parametersToEvaluate: this.state.parametersToEvaluate,
-        authentication: this.state.authentication,
         defaultEntity: this.state.defaultEntity,
         defaultProfile: this.state.defaultProfile,
         category: this.state.category,

@@ -83,7 +83,8 @@ export default function ({
         style: {
           width: 'auto',
         },
-      }],
+      },
+    ],
     [
       {
         label: I18n.t('commons.realname'),
@@ -117,6 +118,16 @@ export default function ({
         request: title.request,
         glpi,
       },
+      {
+        label: I18n.t('commons.default_profile'),
+        type: 'select',
+        name: 'defaultProfile',
+        value: defaultProfile.value,
+        options: [],
+        function: changeSelect,
+        request: defaultProfile.request,
+        glpi,
+      },
     ],
   ]
 
@@ -130,16 +141,6 @@ export default function ({
         options: [],
         function: changeSelect,
         request: location.request,
-        glpi,
-      },
-      {
-        label: I18n.t('commons.default_profile'),
-        type: 'select',
-        name: 'defaultProfile',
-        value: defaultProfile.value,
-        options: [],
-        function: changeSelect,
-        request: defaultProfile.request,
         glpi,
       },
     )
