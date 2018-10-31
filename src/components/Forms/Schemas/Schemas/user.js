@@ -117,6 +117,11 @@ export default function ({
         request: title.request,
         glpi,
       },
+    ],
+  ]
+
+  if (!newUser) {
+    personalInformation[2].push(
       {
         label: I18n.t('commons.location'),
         type: 'select',
@@ -137,8 +142,8 @@ export default function ({
         request: defaultProfile.request,
         glpi,
       },
-    ],
-  ]
+    )
+  }
 
   const contactInformation = [
     [
