@@ -440,7 +440,11 @@ export default class UsersList extends PureComponent {
             icon="add"
             label={I18n.t('commons.add')}
             priority={1}
-            onClick={() => this.props.history.push(`${publicURL}/app/users/add`)}
+            onClick={() => {
+              this.props.changeSelectionMode(false)
+              this.props.changeSelectedItems([])
+              this.props.history.push(`${publicURL}/app/users/add`)
+            }}
           />
 
           <ReactWinJS.ToolBar.Button
