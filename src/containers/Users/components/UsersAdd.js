@@ -192,6 +192,7 @@ class UsersAdd extends PureComponent {
 
   createUser = () => {
     let newUser = {
+      name: this.state.login,
       phone: this.state.phone,
       phone2: this.state.phone2,
       firstname: this.state.firstName,
@@ -232,38 +233,37 @@ class UsersAdd extends PureComponent {
       correctPassword = false
     }
 
-    console.log(correctPassword)
-    if (correctPassword) {
-      // this.setState({
-      //   isLoading: true,
-      // },
-      // async () => {
-      //   try {
-      //     await this.props.glpi.addItem({
-      //       itemtype: itemtype.User,
-      //       input: newUser,
-      //     })
-      //     // await this.props.glpi.addItem({
-      //     //   userID: newUser.id,
-      //     //   currentEmails: this.state.currentEmails,
-      //     //   newEmails: this.state.emails,
-      //     // })
-      //     this.props.toast.setNotification({
-      //       title: I18n.t('commons.success'),
-      //       body: I18n.t('notifications.saved_profile'),
-      //       type: 'success',
-      //     })
-      //     this.props.changeAction('reload')
-      //   } catch (error) {
-      //     this.props.toast.setNotification(this.props.handleMessage({
-      //       type: 'alert',
-      //       message: error,
-      //     }))
-      //     this.setState({
-      //       isLoading: false,
-      //     })
-      //   }
-      // })
+    if (correctPassword && newUser.name) {
+      this.setState({
+        isLoading: true,
+      },
+      async () => {
+        try {
+          await this.props.glpi.addItem({
+            itemtype: itemtype.User,
+            input: newUser,
+          })
+          // await this.props.glpi.addItem({
+          //   userID: newUser.id,
+          //   currentEmails: this.state.currentEmails,
+          //   newEmails: this.state.emails,
+          // })
+          this.props.toast.setNotification({
+            title: I18n.t('commons.success'),
+            body: I18n.t('notifications.saved_profile'),
+            type: 'success',
+          })
+          this.props.changeAction('reload')
+        } catch (error) {
+          this.props.toast.setNotification(this.props.handleMessage({
+            type: 'alert',
+            message: error,
+          }))
+          this.setState({
+            isLoading: false,
+          })
+        }
+      })
     }
   }
 
