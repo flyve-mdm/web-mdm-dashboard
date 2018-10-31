@@ -284,18 +284,6 @@ export default function ({
   const moreInformation = [
     [
       {
-        label: I18n.t('commons.authentication'),
-        type: 'text',
-        name: 'authentication',
-        value: `${authentication}`,
-        placeholder: null,
-        function: changeState,
-        disabled: true,
-        style: null,
-      },
-    ],
-    [
-      {
         label: I18n.t('commons.category'),
         type: 'select',
         name: 'category',
@@ -329,6 +317,23 @@ export default function ({
       },
     ],
   ]
+
+  if (!newUser) {
+    moreInformation.unshift(
+      [
+        {
+          label: I18n.t('commons.authentication'),
+          type: 'text',
+          name: 'authentication',
+          value: `${authentication}`,
+          placeholder: null,
+          function: changeState,
+          disabled: true,
+          style: null,
+        },
+      ],
+    )
+  }
 
   let emailsInformation = [
     [],
