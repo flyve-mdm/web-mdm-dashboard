@@ -66,7 +66,21 @@ class UsersAdd extends PureComponent {
       imageProfile: undefined,
       password: '',
       passwordConfirmation: '',
-      category: {},
+      category: {
+        value: undefined,
+        request: {
+          params: {
+            itemtype: itemtype.UserCategory,
+            options: {
+              range: '0-200',
+              forcedisplay: [2],
+            },
+          },
+          method: 'searchItems',
+          content: '1',
+          value: '2',
+        },
+      },
       defaultEntity: {},
       comments: '',
       typeImageProfile: {},
