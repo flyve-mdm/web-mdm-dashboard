@@ -36,7 +36,6 @@ import itemtype from 'shared/itemtype'
 // import authtype from 'shared/authtype'
 import ConstructInputs from 'components/Forms'
 import ContentPane from 'components/ContentPane'
-import IconItemList from 'components/IconItemList'
 import {
   usersScheme,
 } from 'components/Forms/Schemas'
@@ -63,7 +62,6 @@ class UsersAdd extends PureComponent {
       phone2: '',
       administrativeNumber: '',
       emails: [],
-      imageProfile: undefined,
       password: '',
       passwordConfirmation: '',
       category: {
@@ -81,10 +79,31 @@ class UsersAdd extends PureComponent {
           value: '2',
         },
       },
-      defaultEntity: {},
+      defaultEntity: {
+        value: undefined,
+        request: {
+          params: {},
+          method: 'getMyEntities',
+          content: 'name',
+          value: 'id',
+        },
+      },
       comments: '',
-      typeImageProfile: {},
-      title: {},
+      title: {
+        value: undefined,
+        request: {
+          params: {
+            itemtype: itemtype.UserTitle,
+            options: {
+              range: '0-200',
+              forcedisplay: [2],
+            },
+          },
+          method: 'searchItems',
+          content: '1',
+          value: '2',
+        },
+      },
       location: {},
       defaultProfile: {},
       validSince: {},
@@ -181,28 +200,6 @@ class UsersAdd extends PureComponent {
       ],
     }))
   }
-
-  /**
-   * Preview of the profile image
-   * @function previewFile
-   * @param {component} evt
-   */
-  previewFile = (evt) => {
-    const file = evt.target.files[0]
-    if (file.type.match('image.*')) {
-      const reader = new FileReader()
-
-      reader.onload = (() => (e) => {
-        this.setState({
-          imageProfile: e.target.result,
-          typeImageProfile: 'file',
-        })
-      })(file)
-
-      reader.readAsDataURL(file)
-    }
-  }
-
 
   createUser = () => {
     let newUser = {
@@ -325,20 +322,6 @@ class UsersAdd extends PureComponent {
 
       componetRender = (
         <div className="froms Profiles">
-          <div className="froms__row froms__row--icon">
-            <span className="iconFont viewIcon" />
-          </div>
-
-          <div className="froms__row">
-            <div style={{ overflow: 'hidden', paddingLeft: '20px' }}>
-              <IconItemList
-                image={this.state.imageProfile}
-                type={this.state.typeImageProfile}
-                size={150}
-                imgClass="clickable"
-              />
-            </div>
-          </div>
 
           <ConstructInputs data={user.personalInformation} icon="contactIcon" />
           <ConstructInputs data={user.passwordInformation} icon="permissionsIcon" />
