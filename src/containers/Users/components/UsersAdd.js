@@ -32,9 +32,8 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import I18n from 'shared/i18n'
-import validateData from 'shared/validateData'
 import itemtype from 'shared/itemtype'
-import authtype from 'shared/authtype'
+// import authtype from 'shared/authtype'
 import ConstructInputs from 'components/Forms'
 import ContentPane from 'components/ContentPane'
 import IconItemList from 'components/IconItemList'
@@ -65,8 +64,8 @@ class UsersAdd extends PureComponent {
       administrativeNumber: '',
       emails: [],
       imageProfile: undefined,
-      password: null,
-      passwordConfirmation: null,
+      password: '',
+      passwordConfirmation: '',
       category: {},
       defaultEntity: {},
       comments: '',
@@ -229,39 +228,42 @@ class UsersAdd extends PureComponent {
           password2: this.state.passwordConfirmation,
         }
       }
+    } else {
+      correctPassword = false
     }
 
+    console.log(correctPassword)
     if (correctPassword) {
-      this.setState({
-        isLoading: true,
-      },
-      async () => {
-        try {
-          await this.props.glpi.addItem({
-            itemtype: itemtype.User,
-            input: newUser,
-          })
-          // await this.props.glpi.addItem({
-          //   userID: newUser.id,
-          //   currentEmails: this.state.currentEmails,
-          //   newEmails: this.state.emails,
-          // })
-          this.props.toast.setNotification({
-            title: I18n.t('commons.success'),
-            body: I18n.t('notifications.saved_profile'),
-            type: 'success',
-          })
-          this.props.changeAction('reload')
-        } catch (error) {
-          this.props.toast.setNotification(this.props.handleMessage({
-            type: 'alert',
-            message: error,
-          }))
-          this.setState({
-            isLoading: false,
-          })
-        }
-      })
+      // this.setState({
+      //   isLoading: true,
+      // },
+      // async () => {
+      //   try {
+      //     await this.props.glpi.addItem({
+      //       itemtype: itemtype.User,
+      //       input: newUser,
+      //     })
+      //     // await this.props.glpi.addItem({
+      //     //   userID: newUser.id,
+      //     //   currentEmails: this.state.currentEmails,
+      //     //   newEmails: this.state.emails,
+      //     // })
+      //     this.props.toast.setNotification({
+      //       title: I18n.t('commons.success'),
+      //       body: I18n.t('notifications.saved_profile'),
+      //       type: 'success',
+      //     })
+      //     this.props.changeAction('reload')
+      //   } catch (error) {
+      //     this.props.toast.setNotification(this.props.handleMessage({
+      //       type: 'alert',
+      //       message: error,
+      //     }))
+      //     this.setState({
+      //       isLoading: false,
+      //     })
+      //   }
+      // })
     }
   }
 
