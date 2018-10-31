@@ -82,10 +82,16 @@ class UsersAdd extends PureComponent {
       defaultEntity: {
         value: undefined,
         request: {
-          params: {},
-          method: 'getMyEntities',
-          content: 'name',
-          value: 'id',
+          params: {
+            itemtype: itemtype.Entity,
+            options: {
+              range: '0-200',
+              forcedisplay: [2],
+            },
+          },
+          method: 'searchItems',
+          content: '1',
+          value: '2',
         },
       },
       comments: '',
