@@ -82,6 +82,7 @@ class UsersEditOne extends PureComponent {
       created: undefined,
       modified: undefined,
       authentication: undefined,
+      active: '0',
     }
   }
 
@@ -120,6 +121,7 @@ class UsersEditOne extends PureComponent {
           needUppercaseCharacter: cfgGlpi.password_need_caps,
           needSymbol: cfgGlpi.password_need_symbol,
         }
+
         this.setState({
           isLoading: false,
           parametersToEvaluate,
@@ -135,6 +137,7 @@ class UsersEditOne extends PureComponent {
           imageProfile: validateData(myUser.picture, 'profile.png'),
           comments: validateData(myUser.comment, ''),
           password: '',
+          active: `${validateData(myUser.is_active, '0')}`,
           passwordConfirmation: '',
           lastLogin: myUser.last_login,
           created: myUser.date_creation,
@@ -234,6 +237,7 @@ class UsersEditOne extends PureComponent {
       profiles_id: this.state.defaultProfile.value,
       begin_date: this.state.validSince,
       end_date: this.state.validUntil,
+      is_active: Number(this.state.active),
     }
 
     let correctPassword = true
@@ -420,6 +424,7 @@ class UsersEditOne extends PureComponent {
         changeEmail: this.changeEmail,
         deleteEmail: this.deleteEmail,
         changeSelect: this.changeSelect,
+        active: this.state.active,
         glpi: this.props.glpi,
       })
 

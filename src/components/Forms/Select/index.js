@@ -223,6 +223,7 @@ Select.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
+    PropTypes.bool,
   ]),
   options: PropTypes.array,
   function: PropTypes.func.isRequired,
