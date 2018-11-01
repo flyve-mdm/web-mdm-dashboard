@@ -67,6 +67,7 @@ const createListElement = ({
                 function={element.function}
                 glpi={element.glpi}
                 request={element.request}
+                noEmpty={element.noEmpty}
                 key={element.name}
               />
             )
