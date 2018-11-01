@@ -93,6 +93,7 @@ class Profiles extends PureComponent {
 
       this.setState({
         parametersToEvaluate,
+        active: `${validateData(myUser.is_active, '0')}`,
         login: myUser.name,
         firstName: myUser.firstname,
         realName: myUser.realname,
@@ -205,6 +206,7 @@ class Profiles extends PureComponent {
       profiles_id: this.state.defaultProfile.value,
       begin_date: this.state.validSince,
       end_date: this.state.validUntil,
+      is_active: Number(this.state.active),
     }
 
     let correctPassword = true

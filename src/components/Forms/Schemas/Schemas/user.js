@@ -69,6 +69,7 @@ export default function ({
   changeSelect,
   glpi,
   newUser,
+  active,
 }) {
   const personalInformation = [
     [
@@ -127,6 +128,26 @@ export default function ({
         function: changeSelect,
         request: defaultProfile.request,
         glpi,
+      },
+    ],
+    [
+      {
+        label: I18n.t('commons.active'),
+        type: 'select',
+        name: 'active',
+        value: active,
+        options: [
+          {
+            value: '1',
+            name: I18n.t('commons.yes'),
+          },
+          {
+            value: '0',
+            name: I18n.t('commons.no'),
+          },
+        ],
+        function: changeState,
+        noEmpty: true,
       },
     ],
   ]
