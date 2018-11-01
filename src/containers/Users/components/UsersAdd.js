@@ -64,6 +64,7 @@ class UsersAdd extends PureComponent {
       emails: [],
       password: '',
       passwordConfirmation: '',
+      active: '1',
       category: {
         value: undefined,
         request: {
@@ -185,6 +186,8 @@ class UsersAdd extends PureComponent {
    */
   changeSelect = (name, value) => {
     const { [name]: current } = this.state
+
+    console.log(value)
     this.setState({
       [name]: {
         ...current,
@@ -235,6 +238,7 @@ class UsersAdd extends PureComponent {
       profiles_id: this.state.defaultProfile.value,
       begin_date: this.state.validSince,
       end_date: this.state.validUntil,
+      is_active: Number(this.state.active),
     }
 
     let correctPassword = true
@@ -312,6 +316,7 @@ class UsersAdd extends PureComponent {
         login: this.state.login,
         phone: this.state.phone,
         phone2: this.state.phone2,
+        active: this.state.active,
         validSince: this.state.validSince,
         administrativeNumber: this.state.administrativeNumber,
         passwordConfirmation: this.state.passwordConfirmation,

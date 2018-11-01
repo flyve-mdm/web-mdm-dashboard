@@ -628,6 +628,7 @@
     "serial": "Serial",
     "uuid": "UUID",
     "AND": "AND",
-    "OR": "OR"
+    "OR": "OR",
+    "active": "Active"
   }
 }
