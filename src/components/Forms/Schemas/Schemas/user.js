@@ -70,6 +70,7 @@ export default function ({
   glpi,
   newUser,
   active,
+  recursive,
 }) {
   const personalInformation = [
     [
@@ -152,7 +153,28 @@ export default function ({
     ],
   ]
 
-  if (!newUser) {
+  if (newUser) {
+    personalInformation[3].push(
+      {
+        label: I18n.t('commons.recursive'),
+        type: 'select',
+        name: 'recursive',
+        value: recursive,
+        options: [
+          {
+            value: '1',
+            name: I18n.t('commons.yes'),
+          },
+          {
+            value: '0',
+            name: I18n.t('commons.no'),
+          },
+        ],
+        function: changeState,
+        noEmpty: true,
+      },
+    )
+  } else {
     personalInformation[2].push(
       {
         label: I18n.t('commons.location'),

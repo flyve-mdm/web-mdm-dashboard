@@ -570,6 +570,7 @@
     "child_entities": "Child entities",
     "yes": "Yes",
     "no": "No",
+    "recursive": "Recursive",
     "null": {
       "default": "Null",
       "min": "null"
