@@ -65,6 +65,7 @@ class UsersAdd extends PureComponent {
       password: '',
       passwordConfirmation: '',
       active: '1',
+      recursive: '0',
       category: {
         value: undefined,
         request: {
@@ -239,6 +240,7 @@ class UsersAdd extends PureComponent {
       begin_date: this.state.validSince,
       end_date: this.state.validUntil,
       is_active: Number(this.state.active),
+      _is_recursive: this.state.recursive,
     }
 
     let correctPassword = true
@@ -317,6 +319,7 @@ class UsersAdd extends PureComponent {
         phone: this.state.phone,
         phone2: this.state.phone2,
         active: this.state.active,
+        recursive: this.state.recursive,
         validSince: this.state.validSince,
         administrativeNumber: this.state.administrativeNumber,
         passwordConfirmation: this.state.passwordConfirmation,
