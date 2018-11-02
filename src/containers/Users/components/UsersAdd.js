@@ -33,7 +33,6 @@ import React, {
 import PropTypes from 'prop-types'
 import I18n from 'shared/i18n'
 import itemtype from 'shared/itemtype'
-// import authtype from 'shared/authtype'
 import ConstructInputs from 'components/Forms'
 import ContentPane from 'components/ContentPane'
 import {
@@ -188,7 +187,6 @@ class UsersAdd extends PureComponent {
   changeSelect = (name, value) => {
     const { [name]: current } = this.state
 
-    console.log(value)
     this.setState({
       [name]: {
         ...current,
@@ -241,6 +239,7 @@ class UsersAdd extends PureComponent {
       end_date: this.state.validUntil,
       is_active: Number(this.state.active),
       _is_recursive: this.state.recursive,
+      _useremails: this.state.emails.map(e => e.email),
     }
 
     let correctPassword = true
@@ -277,11 +276,6 @@ class UsersAdd extends PureComponent {
             itemtype: itemtype.User,
             input: newUser,
           })
-          // await this.props.glpi.addItem({
-          //   userID: newUser.id,
-          //   currentEmails: this.state.currentEmails,
-          //   newEmails: this.state.emails,
-          // })
           this.props.toast.setNotification({
             title: I18n.t('commons.success'),
             body: I18n.t('notifications.saved_profile'),
@@ -392,7 +386,6 @@ UsersAdd.propTypes = {
     setNotification: PropTypes.func,
   }).isRequired,
   handleMessage: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
   changeAction: PropTypes.func.isRequired,
   glpi: PropTypes.object.isRequired,
 }
