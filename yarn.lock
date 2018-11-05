@@ -908,6 +908,10 @@
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@hint/hint-disown-opener/-/hint-disown-opener-1.0.4.tgz#04ef270da2c443bf4bfadd1262c20f2cd5b8d4fb"
 
+"@hint/hint-disown-opener@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@hint/hint-disown-opener/-/hint-disown-opener-2.0.0.tgz#2a54210ca86bfc3db551f80c0ad60101ed537841"
+
 "@hint/hint-highest-available-document-mode@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@hint/hint-highest-available-document-mode/-/hint-highest-available-document-mode-1.0.4.tgz#d20796f24af00eb9050e4dd53ae217c36f3c09ae"
