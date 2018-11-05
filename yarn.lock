@@ -912,6 +912,10 @@
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@hint/hint-highest-available-document-mode/-/hint-highest-available-document-mode-1.0.4.tgz#d20796f24af00eb9050e4dd53ae217c36f3c09ae"
 
+"@hint/hint-highest-available-document-mode@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@hint/hint-highest-available-document-mode/-/hint-highest-available-document-mode-2.0.0.tgz#99e66ee0aa1ca2e2b3f86b3748ac78b7e9e2879d"
+
 "@hint/hint-html-checker@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@hint/hint-html-checker/-/hint-html-checker-1.0.2.tgz#a74a7bd3f57ab5e66c9c5b37229948eeeec344d3"
