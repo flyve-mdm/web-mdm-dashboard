@@ -795,64 +795,65 @@
   version "0.1.0-beta.12"
   resolved "https://registry.yarnpkg.com/@glpi-project/javascript-library-glpi/-/javascript-library-glpi-0.1.0-beta.12.tgz#33815244c31489e350fae2fe1fd10153986d6011"
 
-"@hint/configuration-web-recommended@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@hint/configuration-web-recommended/-/configuration-web-recommended-2.0.0.tgz#0f4e237c7b6134e5d03d8395b17e18b5f802a90e"
+"@hint/configuration-web-recommended@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@hint/configuration-web-recommended/-/configuration-web-recommended-2.0.1.tgz#0ede8e18210ab30131115a8bed7d8056fc5fa865"
   dependencies:
-    "@hint/connector-chrome" "^1.1.2"
-    "@hint/connector-jsdom" "^1.0.5"
-    "@hint/connector-local" "^1.1.2"
-    "@hint/formatter-html" "^1.0.4"
-    "@hint/formatter-stylish" "^1.0.1"
-    "@hint/formatter-summary" "^1.0.2"
-    "@hint/hint-axe" "^1.1.0"
-    "@hint/hint-content-type" "^1.0.3"
-    "@hint/hint-disown-opener" "^1.0.3"
-    "@hint/hint-highest-available-document-mode" "^1.0.3"
-    "@hint/hint-html-checker" "^1.0.2"
-    "@hint/hint-http-cache" "^1.0.3"
-    "@hint/hint-http-compression" "^2.0.0"
-    "@hint/hint-image-optimization-cloudinary" "^1.0.3"
-    "@hint/hint-meta-charset-utf-8" "^1.0.2"
-    "@hint/hint-meta-viewport" "^1.0.2"
-    "@hint/hint-no-bom" "^1.0.3"
-    "@hint/hint-no-disallowed-headers" "^1.0.3"
-    "@hint/hint-no-friendly-error-pages" "^1.0.2"
-    "@hint/hint-no-html-only-headers" "^1.0.3"
-    "@hint/hint-no-http-redirects" "^1.0.3"
-    "@hint/hint-no-protocol-relative-urls" "^1.0.2"
-    "@hint/hint-no-vulnerable-javascript-libraries" "^1.6.0"
-    "@hint/hint-sri" "^1.0.2"
-    "@hint/hint-ssllabs" "^1.0.2"
-    "@hint/hint-strict-transport-security" "^1.0.5"
-    "@hint/hint-stylesheet-limits" "^1.0.1"
-    "@hint/hint-validate-set-cookie-header" "^1.0.2"
-    "@hint/hint-x-content-type-options" "^1.0.3"
-    "@hint/parser-html" "^1.0.3"
+    "@hint/connector-chrome" "^1.1.5"
+    "@hint/connector-jsdom" "^1.0.9"
+    "@hint/connector-local" "^1.1.3"
+    "@hint/formatter-html" "^1.1.2"
+    "@hint/formatter-stylish" "^1.0.2"
+    "@hint/formatter-summary" "^1.0.3"
+    "@hint/hint-axe" "^1.1.1"
+    "@hint/hint-content-type" "^1.0.4"
+    "@hint/hint-disown-opener" "^1.0.5"
+    "@hint/hint-highest-available-document-mode" "^1.0.5"
+    "@hint/hint-html-checker" "^1.0.3"
+    "@hint/hint-http-cache" "^1.0.4"
+    "@hint/hint-http-compression" "^2.0.1"
+    "@hint/hint-image-optimization-cloudinary" "^1.0.4"
+    "@hint/hint-meta-charset-utf-8" "^1.0.4"
+    "@hint/hint-meta-viewport" "^1.0.3"
+    "@hint/hint-no-bom" "^1.0.4"
+    "@hint/hint-no-disallowed-headers" "^1.0.4"
+    "@hint/hint-no-friendly-error-pages" "^1.0.3"
+    "@hint/hint-no-html-only-headers" "^1.0.4"
+    "@hint/hint-no-http-redirects" "^1.0.4"
+    "@hint/hint-no-protocol-relative-urls" "^1.0.4"
+    "@hint/hint-no-vulnerable-javascript-libraries" "^1.9.1"
+    "@hint/hint-sri" "^1.0.3"
+    "@hint/hint-ssllabs" "^1.0.3"
+    "@hint/hint-strict-transport-security" "^1.0.7"
+    "@hint/hint-stylesheet-limits" "^1.0.2"
+    "@hint/hint-validate-set-cookie-header" "^1.0.3"
+    "@hint/hint-x-content-type-options" "^1.0.4"
+    "@hint/parser-html" "^1.0.6"
 
-"@hint/connector-chrome@^1.1.2":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@hint/connector-chrome/-/connector-chrome-1.1.3.tgz#1dfaa2f2327e2aba1e495f3f70c00c3a7e26a2a3"
+"@hint/connector-chrome@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@hint/connector-chrome/-/connector-chrome-1.1.5.tgz#1a8276c1f18dee7c3b37a7691954713ec2933787"
   dependencies:
-    "@hint/utils-debugging-protocol-common" "^1.0.12"
+    "@hint/utils-debugging-protocol-common" "^1.0.14"
     chrome-launcher "^0.10.4"
     is-ci "^1.2.1"
     lockfile "^1.0.4"
 
-"@hint/connector-jsdom@^1.0.5":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@hint/connector-jsdom/-/connector-jsdom-1.0.7.tgz#f0cbcfd8070f7afe8033f4deee5dfc73a733bbb3"
+"@hint/connector-jsdom@^1.0.9":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@hint/connector-jsdom/-/connector-jsdom-1.1.0.tgz#7350957577439e7d67f85e8f4bf0ad850b505d3c"
   dependencies:
-    "@hint/utils-connector-tools" "^1.0.6"
-    canvas-prebuilt "^1.6.11"
-    jsdom "^12.1.0"
+    "@hint/utils-connector-tools" "^1.0.8"
+    jsdom "^13.0.0"
     mutationobserver-shim "^0.3.2"
     node-pre-gyp "^0.11.0"
-    whatwg-fetch "^2.0.4"
+    whatwg-fetch "^3.0.0"
+  optionalDependencies:
+    canvas "^2.0.1"
 
-"@hint/connector-local@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@hint/connector-local/-/connector-local-1.1.2.tgz#4d0959d6e7b9519ca12569935273209e19fe6de5"
+"@hint/connector-local@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@hint/connector-local/-/connector-local-1.1.3.tgz#2497374dc19d6c16d0aadf63cfe7fd5f123479d7"
   dependencies:
     chokidar "^2.0.4"
     globby "^8.0.1"
@@ -865,42 +866,42 @@
     lodash "^4.17.10"
     log-symbols "^2.2.0"
 
-"@hint/formatter-html@^1.0.4":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@hint/formatter-html/-/formatter-html-1.0.7.tgz#640bf1053361ae1f432c76031c221154ca65ace9"
+"@hint/formatter-html@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@hint/formatter-html/-/formatter-html-1.1.2.tgz#cffb06244342b08b2542dd6f1c9f88c5c5662742"
   dependencies:
     ejs "^2.6.1"
     fs-extra "^7.0.0"
     lodash "^4.17.11"
     moment "^2.22.2"
 
-"@hint/formatter-stylish@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@hint/formatter-stylish/-/formatter-stylish-1.0.1.tgz#348606ef5a92918554b900c396a4b14fcc638b1a"
-  dependencies:
-    chalk "^2.4.1"
-    lodash "^4.17.10"
-    log-symbols "^2.2.0"
-    text-table "^0.2.0"
-
-"@hint/formatter-summary@^1.0.2":
+"@hint/formatter-stylish@^1.0.2":
   version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@hint/formatter-summary/-/formatter-summary-1.0.2.tgz#37746380ea3c87c031ed0cada29cc339597146c2"
+  resolved "https://registry.yarnpkg.com/@hint/formatter-stylish/-/formatter-stylish-1.0.2.tgz#0f53b9387ea9db57dff26841d15a36f08588f4c4"
   dependencies:
     chalk "^2.4.1"
-    lodash "^4.17.10"
+    lodash "^4.17.11"
     log-symbols "^2.2.0"
     text-table "^0.2.0"
 
-"@hint/hint-axe@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@hint/hint-axe/-/hint-axe-1.1.0.tgz#4788673a9f8005b6267c8305e9fb7e86f1151378"
+"@hint/formatter-summary@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@hint/formatter-summary/-/formatter-summary-1.0.3.tgz#6331966546d5a9ea08f3e356ababe0d7e22e3d75"
+  dependencies:
+    chalk "^2.4.1"
+    lodash "^4.17.11"
+    log-symbols "^2.2.0"
+    text-table "^0.2.0"
+
+"@hint/hint-axe@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@hint/hint-axe/-/hint-axe-1.1.1.tgz#317ea22349f24a05c2dc631b29afcb1cd7d282ff"
   dependencies:
     axe-core "^3.1.1"
 
-"@hint/hint-content-type@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hint/hint-content-type/-/hint-content-type-1.0.3.tgz#d8c2d587c65812d7d4affa41fcb62fb9372c65ba"
+"@hint/hint-content-type@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hint/hint-content-type/-/hint-content-type-1.0.4.tgz#0e439769847549f70fef58fcf7c8b15d0f9e3542"
   dependencies:
     content-type "^1.0.4"
 
@@ -908,9 +909,17 @@
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@hint/hint-disown-opener/-/hint-disown-opener-1.0.4.tgz#04ef270da2c443bf4bfadd1262c20f2cd5b8d4fb"
 
+"@hint/hint-disown-opener@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@hint/hint-disown-opener/-/hint-disown-opener-1.0.5.tgz#8e79dc5d4ba3d52116fff12bf094da7fda6bc1a6"
+
 "@hint/hint-highest-available-document-mode@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@hint/hint-highest-available-document-mode/-/hint-highest-available-document-mode-1.0.4.tgz#d20796f24af00eb9050e4dd53ae217c36f3c09ae"
+
+"@hint/hint-highest-available-document-mode@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@hint/hint-highest-available-document-mode/-/hint-highest-available-document-mode-1.0.5.tgz#5050d73b3950dba60239f415c442d6a5bfbdf03b"
 
 "@hint/hint-html-checker@^1.0.2":
   version "1.0.2"
@@ -918,9 +927,19 @@
   dependencies:
     lodash "^4.17.10"
 
+"@hint/hint-html-checker@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@hint/hint-html-checker/-/hint-html-checker-1.0.3.tgz#1bab2cc9617c0ee04545035ff72c2dda4994646d"
+  dependencies:
+    lodash "^4.17.11"
+
 "@hint/hint-http-cache@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@hint/hint-http-cache/-/hint-http-cache-1.0.3.tgz#c87393306ed8e3112b54247b2cf6ca0364e118e8"
+
+"@hint/hint-http-cache@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hint/hint-http-cache/-/hint-http-cache-1.0.4.tgz#3352e4dedc96a9face8858e81ae9d094e477289a"
 
 "@hint/hint-http-compression@^1.0.7":
   version "1.0.7"
@@ -928,101 +947,101 @@
   dependencies:
     iltorb "^2.4.0"
 
-"@hint/hint-http-compression@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@hint/hint-http-compression/-/hint-http-compression-2.0.0.tgz#5cd2036a8f2d8382fcc463a959ea146a6d7a394c"
+"@hint/hint-http-compression@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@hint/hint-http-compression/-/hint-http-compression-2.0.1.tgz#5f231a974019a8cfe4b323e9c1532166f17e176d"
   dependencies:
     iltorb "^2.4.0"
 
-"@hint/hint-image-optimization-cloudinary@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hint/hint-image-optimization-cloudinary/-/hint-image-optimization-cloudinary-1.0.3.tgz#59408d30114bb9ec34e0d30b578938871f03bf1c"
+"@hint/hint-image-optimization-cloudinary@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hint/hint-image-optimization-cloudinary/-/hint-image-optimization-cloudinary-1.0.4.tgz#18a50832af17fd64b781637e2ecb909239c5900a"
   dependencies:
     cloudinary "^1.9.1"
     fs-extra "^7.0.0"
     image-size "^0.6.3"
 
-"@hint/hint-meta-charset-utf-8@^1.0.2":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hint/hint-meta-charset-utf-8/-/hint-meta-charset-utf-8-1.0.3.tgz#22ea6b594fa9b181bf2bd2dd395f4c8d938749dc"
+"@hint/hint-meta-charset-utf-8@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hint/hint-meta-charset-utf-8/-/hint-meta-charset-utf-8-1.0.4.tgz#d5c42a1bc1beb9bb73773bd084f51152e0ca8c32"
   dependencies:
     cheerio "^1.0.0-rc.2"
 
-"@hint/hint-meta-viewport@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@hint/hint-meta-viewport/-/hint-meta-viewport-1.0.2.tgz#ddc9be5f5ecd2a9470d490e7c5b61acf6db9d7bb"
+"@hint/hint-meta-viewport@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@hint/hint-meta-viewport/-/hint-meta-viewport-1.0.3.tgz#7a3e3d72898aaecc3b8a44e0fe1a5b36d52cfe34"
   dependencies:
     metaviewport-parser "^0.2.0"
 
-"@hint/hint-no-bom@^1.0.3":
+"@hint/hint-no-bom@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hint/hint-no-bom/-/hint-no-bom-1.0.4.tgz#959ce93f16b9ff9834692d427b68535195fd6878"
+
+"@hint/hint-no-disallowed-headers@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hint/hint-no-disallowed-headers/-/hint-no-disallowed-headers-1.0.4.tgz#982757743b3445a9584f4a02695d21bb5d6af982"
+
+"@hint/hint-no-friendly-error-pages@^1.0.3":
   version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hint/hint-no-bom/-/hint-no-bom-1.0.3.tgz#136ad7b1ebcb0e2c41b69073b3148ce458ecdef9"
+  resolved "https://registry.yarnpkg.com/@hint/hint-no-friendly-error-pages/-/hint-no-friendly-error-pages-1.0.3.tgz#bf72dec3875e8cef210e05349fdb0910320848a5"
 
-"@hint/hint-no-disallowed-headers@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hint/hint-no-disallowed-headers/-/hint-no-disallowed-headers-1.0.3.tgz#8edff7184dff2aed81710071a4963c658b0db05c"
+"@hint/hint-no-html-only-headers@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hint/hint-no-html-only-headers/-/hint-no-html-only-headers-1.0.4.tgz#f880788e5d6e406dc2c1efbd3c33cdf69e40c5a8"
 
-"@hint/hint-no-friendly-error-pages@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@hint/hint-no-friendly-error-pages/-/hint-no-friendly-error-pages-1.0.2.tgz#20cec4bda9a3e1b0d4b25dce4b9d0e01f46114e9"
+"@hint/hint-no-http-redirects@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hint/hint-no-http-redirects/-/hint-no-http-redirects-1.0.4.tgz#f4ea5a9623404c7d657b2b78c43171a355531a45"
 
-"@hint/hint-no-html-only-headers@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hint/hint-no-html-only-headers/-/hint-no-html-only-headers-1.0.3.tgz#f1641e7a98d6320b662c3c5732907c7e15808d9d"
+"@hint/hint-no-protocol-relative-urls@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hint/hint-no-protocol-relative-urls/-/hint-no-protocol-relative-urls-1.0.4.tgz#814f35cb18429b905e9d0df7b873f8bc86fc7532"
 
-"@hint/hint-no-http-redirects@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hint/hint-no-http-redirects/-/hint-no-http-redirects-1.0.3.tgz#90cfbca0590918b51693eb91af88571fef5418e3"
-
-"@hint/hint-no-protocol-relative-urls@^1.0.2":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hint/hint-no-protocol-relative-urls/-/hint-no-protocol-relative-urls-1.0.3.tgz#6c93344a23b25505daa4636578e73963b62533bf"
-
-"@hint/hint-no-vulnerable-javascript-libraries@^1.6.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@hint/hint-no-vulnerable-javascript-libraries/-/hint-no-vulnerable-javascript-libraries-1.7.0.tgz#8655323360b4a9c3ff02f5893c39442c5c827006"
+"@hint/hint-no-vulnerable-javascript-libraries@^1.9.1":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@hint/hint-no-vulnerable-javascript-libraries/-/hint-no-vulnerable-javascript-libraries-1.10.0.tgz#715035ab542f489ca1276aad8e1f310af3548f96"
   dependencies:
     js-library-detector "^5.1.0"
     lodash "^4.17.11"
     semver "^5.6.0"
 
-"@hint/hint-sri@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@hint/hint-sri/-/hint-sri-1.0.2.tgz#04a5874793d19c07f05ca1a8e9897fe3ecddb988"
+"@hint/hint-sri@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@hint/hint-sri/-/hint-sri-1.0.3.tgz#007da628d9562e03a2240a6cefa59a330ca49200"
   dependencies:
     async "^2.6.1"
 
-"@hint/hint-ssllabs@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@hint/hint-ssllabs/-/hint-ssllabs-1.0.2.tgz#74f65d00132961fc367d327a2503fdaebfd2ac1f"
+"@hint/hint-ssllabs@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@hint/hint-ssllabs/-/hint-ssllabs-1.0.3.tgz#3ccabfba6fd083846cce6a9cf2d9dab15cfce9e9"
   dependencies:
     node-ssllabs "^0.5.0"
 
-"@hint/hint-strict-transport-security@^1.0.5":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@hint/hint-strict-transport-security/-/hint-strict-transport-security-1.0.6.tgz#14c60c894598c985898c55072e8674edeb05d1c0"
-
-"@hint/hint-stylesheet-limits@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@hint/hint-stylesheet-limits/-/hint-stylesheet-limits-1.0.1.tgz#7d0618395060907adf22a7898a222a4eeb67a87c"
-
-"@hint/hint-validate-set-cookie-header@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@hint/hint-validate-set-cookie-header/-/hint-validate-set-cookie-header-1.0.2.tgz#46b003120a578c64897f8dfb7505e1a727fe841e"
-
-"@hint/hint-x-content-type-options@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hint/hint-x-content-type-options/-/hint-x-content-type-options-1.0.3.tgz#e8cad127173cfb1294a92310af44ccba2c972c14"
-
-"@hint/parser-html@^1.0.3":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@hint/parser-html/-/parser-html-1.0.4.tgz#6d71153b85c23a167be1d3789058778b75f31006"
-  dependencies:
-    jsdom "^12.1.0"
-
-"@hint/utils-connector-tools@^1.0.6", "@hint/utils-connector-tools@^1.0.7":
+"@hint/hint-strict-transport-security@^1.0.7":
   version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@hint/utils-connector-tools/-/utils-connector-tools-1.0.7.tgz#86f48e935937768c13f0546430774142623ab831"
+  resolved "https://registry.yarnpkg.com/@hint/hint-strict-transport-security/-/hint-strict-transport-security-1.0.7.tgz#f91c76e28a1cc92f0254ffff8bd2167d800b3723"
+
+"@hint/hint-stylesheet-limits@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@hint/hint-stylesheet-limits/-/hint-stylesheet-limits-1.0.2.tgz#c073fdd91fa3f1078433b8466c05bbeebc8e6768"
+
+"@hint/hint-validate-set-cookie-header@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@hint/hint-validate-set-cookie-header/-/hint-validate-set-cookie-header-1.0.3.tgz#88e5c79d0a1c3e0e61c5f281a3eb1e2e5fbad0fc"
+
+"@hint/hint-x-content-type-options@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@hint/hint-x-content-type-options/-/hint-x-content-type-options-1.0.4.tgz#3976fd02b5c1578a9af4a9098814447ec397afa1"
+
+"@hint/parser-html@^1.0.6":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@hint/parser-html/-/parser-html-1.1.0.tgz#bd15c1e2d8ad9b78fd926646b9f3f5dd59ac26f2"
+  dependencies:
+    jsdom "^13.0.0"
+
+"@hint/utils-connector-tools@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@hint/utils-connector-tools/-/utils-connector-tools-1.0.8.tgz#ee4d49c0494f9e6bd818824d45b6a5a8e53f1988"
   dependencies:
     async "^2.6.1"
     data-urls "^1.0.1"
@@ -1030,11 +1049,11 @@
     iltorb "^2.4.0"
     request "^2.88.0"
 
-"@hint/utils-debugging-protocol-common@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@hint/utils-debugging-protocol-common/-/utils-debugging-protocol-common-1.0.12.tgz#1b83a457bc29d1110a7efcce141cad918e8171a3"
+"@hint/utils-debugging-protocol-common@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@hint/utils-debugging-protocol-common/-/utils-debugging-protocol-common-1.0.14.tgz#146a92defed8f46b1e84ab5f02599e54bada6a07"
   dependencies:
-    "@hint/utils-connector-tools" "^1.0.7"
+    "@hint/utils-connector-tools" "^1.0.8"
     abab "^2.0.0"
     chrome-remote-interface "^0.26.1"
     lodash "^4.17.11"
@@ -1428,9 +1447,18 @@ ajv@^5.1.0, ajv@^5.3.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
-ajv@^6.0.1, ajv@^6.1.0, ajv@^6.5.3, ajv@^6.5.4:
+ajv@^6.0.1, ajv@^6.1.0, ajv@^6.5.3:
   version "6.5.4"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.4.tgz#247d5274110db653706b550fcc2b797ca28cfc59"
+  dependencies:
+    fast-deep-equal "^2.0.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
+
+ajv@^6.5.5:
+  version "6.5.5"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.5.5.tgz#cf97cdade71c6399a92c6d6c4177381291b781a1"
   dependencies:
     fast-deep-equal "^2.0.1"
     fast-json-stable-stringify "^2.0.0"
@@ -1498,7 +1526,7 @@ append-transform@^0.4.0:
   dependencies:
     default-require-extensions "^1.0.0"
 
-applicationinsights@^1.0.4:
+applicationinsights@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/applicationinsights/-/applicationinsights-1.0.6.tgz#bc201810de91cea910dab34e8ad35ecde488edeb"
   dependencies:
@@ -2222,13 +2250,21 @@ browserslist@4.1.1:
     electron-to-chromium "^1.3.62"
     node-releases "^1.0.0-alpha.11"
 
-browserslist@^4.0.0, browserslist@^4.1.0, browserslist@^4.1.1, browserslist@^4.2.0, browserslist@^4.2.1:
+browserslist@^4.0.0, browserslist@^4.1.0, browserslist@^4.1.1, browserslist@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.2.1.tgz#257a24c879d1cd4016348eee5c25de683260b21d"
   dependencies:
     caniuse-lite "^1.0.30000890"
     electron-to-chromium "^1.3.79"
     node-releases "^1.0.0-alpha.14"
+
+browserslist@^4.3.4:
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.3.4.tgz#4477b737db6a1b07077275b24791e680d4300425"
+  dependencies:
+    caniuse-lite "^1.0.30000899"
+    electron-to-chromium "^1.3.82"
+    node-releases "^1.0.1"
 
 bser@^2.0.0:
   version "2.0.0"
@@ -2444,11 +2480,16 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000884, caniuse-lite@^1.0.30000887, can
   version "1.0.30000892"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000892.tgz#344d2b51ee3ff5977537da4aa449c90eec40b759"
 
-canvas-prebuilt@^1.6.11:
-  version "1.6.11"
-  resolved "https://registry.yarnpkg.com/canvas-prebuilt/-/canvas-prebuilt-1.6.11.tgz#9b37071aa0ddd4f7c2b4a9e279b63fb2dc30db9b"
+caniuse-lite@^1.0.30000899:
+  version "1.0.30000905"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000905.tgz#8f731ecf5b8553c7154a691c3df3a635a1a3fda5"
+
+canvas@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/canvas/-/canvas-2.0.1.tgz#267649ac4c9876de992fb2361252304b599b3e93"
   dependencies:
-    node-pre-gyp "^0.10.0"
+    nan "^2.11.1"
+    node-pre-gyp "^0.11.0"
 
 capture-exit@^1.2.0:
   version "1.2.0"
@@ -3643,7 +3684,7 @@ debug@^3.1.0:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.0.1:
+debug@^4.0.1, debug@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.0.tgz#373687bffa678b38b1cd91f861b63850035ddc87"
   dependencies:
@@ -3991,6 +4032,10 @@ ejs@^2.6.1:
 electron-to-chromium@^1.3.62, electron-to-chromium@^1.3.79:
   version "1.3.79"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.79.tgz#774718f06284a4bf8f578ac67e74508fe659f13a"
+
+electron-to-chromium@^1.3.82:
+  version "1.3.83"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.83.tgz#74584eb0972bb6777811c5d68d988c722f5e6666"
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -4661,9 +4706,9 @@ file-loader@2.0.0:
     loader-utils "^1.0.2"
     schema-utils "^1.0.0"
 
-file-type@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/file-type/-/file-type-10.0.0.tgz#084f32ab827238aa9a1482195ca7448c77a006b3"
+file-type@^10.4.0:
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/file-type/-/file-type-10.4.0.tgz#e730e93ffdf30992c0b7d38fc2f15c4371353d44"
 
 file-url@^2.0.2:
   version "2.0.2"
@@ -5452,21 +5497,21 @@ hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
 
-hint@^3.4.2:
-  version "3.4.10"
-  resolved "https://registry.yarnpkg.com/hint/-/hint-3.4.10.tgz#257a76ce8deeaa12698315472f103a62f42fb233"
+hint@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/hint/-/hint-4.0.0.tgz#834f569f56407b255dd5cfd4e3220354f2bd7144"
   dependencies:
-    ajv "^6.5.4"
-    applicationinsights "^1.0.4"
+    ajv "^6.5.5"
+    applicationinsights "^1.0.6"
     async "^2.6.1"
     boxen "^2.0.0"
-    browserslist "^4.2.0"
+    browserslist "^4.3.4"
     caniuse-api "^3.0.0"
     chalk "^2.4.1"
     content-type "^1.0.4"
-    debug "^4.0.1"
+    debug "^4.1.0"
     eventemitter2 "^5.0.1"
-    file-type "^10.0.0"
+    file-type "^10.4.0"
     file-url "^2.0.2"
     globby "^8.0.1"
     handlebars "^4.0.11"
@@ -5479,12 +5524,12 @@ hint@^3.4.2:
     optionator "^0.8.2"
     ora "^3.0.0"
     request "^2.88.0"
-    semver "^5.5.1"
+    semver "^5.6.0"
     strip-bom "^3.0.0"
     strip-json-comments "^2.0.1"
     update-notifier "^2.5.0"
   optionalDependencies:
-    "@hint/configuration-web-recommended" "^2.0.0"
+    "@hint/configuration-web-recommended" "^2.0.1"
 
 history@^4.7.2:
   version "4.7.2"
@@ -6718,7 +6763,7 @@ jsdoc@^3.5.5:
     taffydb "2.6.2"
     underscore "~1.8.3"
 
-jsdom@>=11.0.0, jsdom@^12.1.0:
+jsdom@>=11.0.0:
   version "12.2.0"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-12.2.0.tgz#7cf3f5b5eafd47f8f09ca52315d367ff6e95de23"
   dependencies:
@@ -6777,6 +6822,37 @@ jsdom@^11.5.1:
     whatwg-mimetype "^2.1.0"
     whatwg-url "^6.4.1"
     ws "^5.2.0"
+    xml-name-validator "^3.0.0"
+
+jsdom@^13.0.0:
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-13.0.0.tgz#f1df2411b714a4e08d1bdc343c0a0889c688210f"
+  dependencies:
+    abab "^2.0.0"
+    acorn "^6.0.2"
+    acorn-globals "^4.3.0"
+    array-equal "^1.0.0"
+    cssom "^0.3.4"
+    cssstyle "^1.1.1"
+    data-urls "^1.0.1"
+    domexception "^1.0.1"
+    escodegen "^1.11.0"
+    html-encoding-sniffer "^1.0.2"
+    nwsapi "^2.0.9"
+    parse5 "5.1.0"
+    pn "^1.1.0"
+    request "^2.88.0"
+    request-promise-native "^1.0.5"
+    saxes "^3.1.3"
+    symbol-tree "^3.2.2"
+    tough-cookie "^2.4.3"
+    w3c-hr-time "^1.0.1"
+    w3c-xmlserializer "^1.0.0"
+    webidl-conversions "^4.0.2"
+    whatwg-encoding "^1.0.5"
+    whatwg-mimetype "^2.2.0"
+    whatwg-url "^7.0.0"
+    ws "^6.1.0"
     xml-name-validator "^3.0.0"
 
 jsesc@^1.3.0:
@@ -7676,7 +7752,7 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-nan@^2.10.0, nan@^2.9.2:
+nan@^2.10.0, nan@^2.11.1, nan@^2.9.2:
   version "2.11.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.1.tgz#90e22bccb8ca57ea4cd37cc83d3819b52eea6766"
 
@@ -7881,6 +7957,12 @@ node-pre-gyp@^0.11.0:
 node-releases@^1.0.0-alpha.11, node-releases@^1.0.0-alpha.14:
   version "1.0.0-alpha.14"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.0.0-alpha.14.tgz#da9e2780add4bbb59ad890af9e2018a1d9c0034b"
+  dependencies:
+    semver "^5.3.0"
+
+node-releases@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.0.3.tgz#3414ed84595096459c251699bfcb47d88324a9e4"
   dependencies:
     semver "^5.3.0"
 
@@ -11773,6 +11855,14 @@ w3c-hr-time@^1.0.1:
   dependencies:
     browser-process-hrtime "^0.1.2"
 
+w3c-xmlserializer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/w3c-xmlserializer/-/w3c-xmlserializer-1.0.0.tgz#d23e20de595b892056f20a359fc2622908d48695"
+  dependencies:
+    domexception "^1.0.1"
+    webidl-conversions "^4.0.2"
+    xml-name-validator "^3.0.0"
+
 walker@~1.0.5:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/walker/-/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"
@@ -11936,13 +12026,9 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3, whatwg-encoding@^1.0.5:
   dependencies:
     iconv-lite "0.4.24"
 
-whatwg-fetch@3.0.0:
+whatwg-fetch@3.0.0, whatwg-fetch@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
-
-whatwg-fetch@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.4.tgz#dde6a5df315f9d39991aa17621853d720b85566f"
 
 whatwg-mimetype@^2.1.0, whatwg-mimetype@^2.2.0:
   version "2.2.0"
