@@ -918,6 +918,12 @@
   dependencies:
     lodash "^4.17.10"
 
+"@hint/hint-html-checker@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@hint/hint-html-checker/-/hint-html-checker-2.0.0.tgz#81936a95c0437f3165116c20f0d502017297aabf"
+  dependencies:
+    lodash "^4.17.11"
+
 "@hint/hint-http-cache@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@hint/hint-http-cache/-/hint-http-cache-1.0.3.tgz#c87393306ed8e3112b54247b2cf6ca0364e118e8"
