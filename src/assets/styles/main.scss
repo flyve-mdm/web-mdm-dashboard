@@ -1,66 +1,66 @@
 // Level 1
 @import
-    './architecture/1_level_settings/sizes',
-    './architecture/1_level_settings/colors',
-    './architecture/1_level_settings/breakpoints';
+  './architecture/1_level_settings/sizes',
+  './architecture/1_level_settings/colors',
+  './architecture/1_level_settings/breakpoints';
 
 // Level 2
 @import
-    './architecture/2_level_tools/mq',
-    './architecture/2_level_tools/mixins',
-    './architecture/2_level_tools/placeholders';
+  './architecture/2_level_tools/mq',
+  './architecture/2_level_tools/mixins',
+  './architecture/2_level_tools/placeholders';
 
 // Level 3
 @import
-    './architecture/3_level_generic/normalize';
+  './architecture/3_level_generic/normalize';
 
 // Level 4
 @import
-    './architecture/4_level_elements/body_font_size',
-    './architecture/4_level_elements/main',
-    './architecture/4_level_elements/a',
-    './architecture/4_level_elements/h',
-    './architecture/4_level_elements/input_and_textarea',
-    './architecture/4_level_elements/select';
+  './architecture/4_level_elements/body_font_size',
+  './architecture/4_level_elements/main',
+  './architecture/4_level_elements/a',
+  './architecture/4_level_elements/h',
+  './architecture/4_level_elements/input_and_textarea',
+  './architecture/4_level_elements/select';
 
 // Level 5
 @import
-    './architecture/5_level_components/btn',
-    './architecture/5_level_components/authentication_layout',
-    './architecture/5_level_components/header_admin_dashboard',
-    './architecture/5_level_components/select_language',
-    './architecture/5_level_components/splitview',
-    './architecture/5_level_components/icons',
-    './architecture/5_level_components/toast',
-    './architecture/5_level_components/files_list',
-    './architecture/5_level_components/dashboard',
-    './architecture/5_level_components/title',
-    './architecture/5_level_components/navlinks',
-    './architecture/5_level_components/listpane',
-    './architecture/5_level_components/devices',
-    './architecture/5_level_components/about',
-    './architecture/5_level_components/applications',
-    './architecture/5_level_components/errors',
-    './architecture/5_level_components/files',
-    './architecture/5_level_components/fleets',
-    './architecture/5_level_components/invitations',
-    './architecture/5_level_components/loading',
-    './architecture/5_level_components/settings',
-    './architecture/5_level_components/users',
-    './architecture/5_level_components/search-engine',
-    './architecture/5_level_components/froms',
-    './architecture/5_level_components/file_upload',
-    './architecture/5_level_components/empty_message',
-    './architecture/5_level_components/badge',
-    './architecture/5_level_components/tooltip',
-    './architecture/5_level_components/geolocation',
-    './architecture/5_level_components/error';
+  './architecture/5_level_components/btn',
+  './architecture/5_level_components/authentication_layout',
+  './architecture/5_level_components/header_admin_dashboard',
+  './architecture/5_level_components/select_language',
+  './architecture/5_level_components/splitview',
+  './architecture/5_level_components/icons',
+  './architecture/5_level_components/toast',
+  './architecture/5_level_components/files_list',
+  './architecture/5_level_components/dashboard',
+  './architecture/5_level_components/title',
+  './architecture/5_level_components/navlinks',
+  './architecture/5_level_components/listpane',
+  './architecture/5_level_components/devices',
+  './architecture/5_level_components/about',
+  './architecture/5_level_components/applications',
+  './architecture/5_level_components/errors',
+  './architecture/5_level_components/files',
+  './architecture/5_level_components/fleets',
+  './architecture/5_level_components/invitations',
+  './architecture/5_level_components/loading',
+  './architecture/5_level_components/settings',
+  './architecture/5_level_components/users',
+  './architecture/5_level_components/search-engine',
+  './architecture/5_level_components/froms',
+  './architecture/5_level_components/file_upload',
+  './architecture/5_level_components/empty_message',
+  './architecture/5_level_components/badge',
+  './architecture/5_level_components/tooltip',
+  './architecture/5_level_components/geolocation',
+  './architecture/5_level_components/error';
 
 // Level 6
 @import
-    './architecture/6_level_utilities/ui-light',
-    './architecture/6_level_utilities/win_toggles_overwrite',
-    './architecture/6_level_utilities/flex_container',
-    './architecture/6_level_utilities/win_pivot_viewport',
-    './architecture/6_level_utilities/win_dropdown',
-    './architecture/6_level_utilities/win_contentdialog_dialog';
+  './architecture/6_level_utilities/ui-light',
+  './architecture/6_level_utilities/win_toggles_overwrite',
+  './architecture/6_level_utilities/flex_container',
+  './architecture/6_level_utilities/win_pivot_viewport',
+  './architecture/6_level_utilities/win_dropdown',
+  './architecture/6_level_utilities/win_contentdialog_dialog';

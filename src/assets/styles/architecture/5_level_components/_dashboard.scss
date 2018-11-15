@@ -2,108 +2,111 @@ $box-size: 150px;
 $chart-size: 310px;
 
 .dashboard {
-    flex: 1 100%;
-    @extend %content-with-scroll;
+  flex: 1 100%;
+  @extend %content-with-scroll;
 
-    .dashboard__wrapper {
-        display: inline-block;
+  .dashboard__wrapper {
+    display: inline-block;
+  }
+
+  .dashboard__infobox {
+    margin: 10px 10px;
+    display: grid;
+    grid-template-columns: repeat(6, $box-size);
+    grid-gap: 10px;
+
+    @media only screen and (max-width: 1036px) {
+      grid-template-columns: repeat(3, $box-size);
     }
 
-    .dashboard__infobox {
-        margin: 10px 10px;
-        display: grid;
-        grid-template-columns: repeat(6, $box-size);
-        grid-gap: 10px;
-
-        @media only screen and (max-width: 1036px) {
-            grid-template-columns: repeat(3, $box-size);
-        }
-        @media only screen and (max-width: 540px) {
-            grid-template-columns: repeat(2, $box-size);
-        }
-
-        a {
-            color: $splitview-color-fonts;
-
-            @extend %normalize-anchor;
-
-            &:hover {
-                color: $splitview-color-fonts-hover;
-            }
-        }
-
-        .info-box {
-            display: -webkit-flex;
-            display: flex;
-            -webkit-flex-direction: column;
-            flex-direction: column;
-            -webkit-order: 0;
-            order: 0;
-            background: #E1E1E1;
-            position: relative;
-            width: $box-size;
-            height: $box-size;
-            cursor: pointer;
-
-            @extend %box-shadow;
-
-            .icon-box {
-                -webkit-order: 1;
-                order: 1;
-                margin: 10px 10px 0;
-                font-size: 32px;
-                text-align: right;
-                font-family: Symbols;
-            }
-            .content-box {
-                -webkit-order: 2;
-                order: 2;
-                margin: 0 10px;
-                font-size: 64px;
-                font-weight: 200;
-                line-height: 90%;
-
-            }
-            .title-box {
-                -webkit-order: 3;
-                order: 3;
-                margin: 10px;
-            }
-
-        }
+    @media only screen and (max-width: 540px) {
+      grid-template-columns: repeat(2, $box-size);
     }
 
-    .dashboard__chart {
-        margin: 10px 10px;
-        display: grid;
-        grid-template-columns: repeat(3, $chart-size);
-        grid-gap: 10px;
+    a {
+      color: $splitview-color-fonts;
 
-        @media only screen and (max-width: 1036px) {
-            grid-template-columns: repeat(1, $chart-size);
-        }
+      @extend %normalize-anchor;
 
-        .info-box {
-            background: #E1E1E1;
-            display: inline-block;
-            position: relative;
-            width: $chart-size;
-            height: $chart-size;
-
-            ul {
-                height: $chart-size - 40px;
-                overflow-x: hidden;
-                overflow-y: auto;
-            }
-
-            .title-box {
-                padding: 10px;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-            }
-
-            @extend %box-shadow;
-        }
+      &:hover {
+        color: $splitview-color-fonts-hover;
+      }
     }
+
+    .info-box {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: column;
+      flex-direction: column;
+      -webkit-order: 0;
+      order: 0;
+      background: #E1E1E1;
+      position: relative;
+      width: $box-size;
+      height: $box-size;
+      cursor: pointer;
+
+      @extend %box-shadow;
+
+      .icon-box {
+        -webkit-order: 1;
+        order: 1;
+        margin: 10px 10px 0;
+        font-size: 32px;
+        text-align: right;
+        font-family: Symbols;
+      }
+
+      .content-box {
+        -webkit-order: 2;
+        order: 2;
+        margin: 0 10px;
+        font-size: 64px;
+        font-weight: 200;
+        line-height: 90%;
+
+      }
+
+      .title-box {
+        -webkit-order: 3;
+        order: 3;
+        margin: 10px;
+      }
+
+    }
+  }
+
+  .dashboard__chart {
+    margin: 10px 10px;
+    display: grid;
+    grid-template-columns: repeat(3, $chart-size);
+    grid-gap: 10px;
+
+    @media only screen and (max-width: 1036px) {
+      grid-template-columns: repeat(1, $chart-size);
+    }
+
+    .info-box {
+      background: #E1E1E1;
+      display: inline-block;
+      position: relative;
+      width: $chart-size;
+      height: $chart-size;
+
+      ul {
+        height: $chart-size - 40px;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .title-box {
+        padding: 10px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+
+      @extend %box-shadow;
+    }
+  }
 }

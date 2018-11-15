@@ -1,117 +1,140 @@
 .loading {
 
-    display: flex;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+
+  p {
+    font-size: 20px;
     text-align: center;
-    align-items: center;
-    flex-direction: column;
+    padding-top: 60px !important;
+    font-weight: 200;
+  }
 
-    p {
-        font-size: 20px;
-        text-align: center;
-        padding-top: 60px !important;
-        font-weight: 200;
-    }
-
-    .loader {
-        position: relative;
-        width: 40px;
-        margin: auto;
-        .circle {
-            width: 48px;
-            height: 48px;
-            &:after {
-                width: 5px;
-                height: 5px;
-            }
-        }
-    }
+  .loader {
+    position: relative;
+    width: 40px;
+    margin: auto;
 
     .circle {
-        position: absolute;
-        opacity: 0;
-        transform: rotate(225deg);
-        animation-iteration-count: infinite;
-        animation-name: orbit;
-        animation-duration: 5.5s;
+      width: 48px;
+      height: 48px;
 
-        &:after {
-            content: '';
-            position: absolute;
-            border-radius: 5px;
-            background: $app-color; /* Pick a color */
-        }
+      &:after {
+        width: 5px;
+        height: 5px;
+      }
+    }
+  }
 
-        &:nth-child(2) { animation-delay: 240ms; }
-        &:nth-child(3) { animation-delay: 480ms; }
-        &:nth-child(4) { animation-delay: 720ms; }
-        &:nth-child(5) { animation-delay: 960ms; }
+  .circle {
+    position: absolute;
+    opacity: 0;
+    transform: rotate(225deg);
+    animation-iteration-count: infinite;
+    animation-name: orbit;
+    animation-duration: 5.5s;
+
+    &:after {
+      content: '';
+      position: absolute;
+      border-radius: 5px;
+      background: $app-color;
+      /* Pick a color */
     }
 
-    @keyframes orbit {
-        0%  {
-            transform:rotate(225deg);
-            opacity: 1;
-            animation-timing-function: ease-out;
-        }
-        7%  {
-            transform:rotate(345deg);
-            animation-timing-function: linear;
-        }
-        30% {
-            transform:rotate(455deg);
-            animation-timing-function: ease-in-out;
-        }
-        39% {
-            transform:rotate(690deg);
-            animation-timing-function: linear;
-        }
-        70% {
-            transform:rotate(815deg);
-            opacity: 1;
-            animation-timing-function: ease-out;
-        }
-        75% {
-            transform:rotate(945deg);
-            animation-timing-function: ease-out;
-        }
-        76% {
-            transform:rotate(945deg);
-            opacity: 0;
-        }
-        100% {
-            transform:rotate(945deg);
-            opacity: 0;
-        }
+    &:nth-child(2) {
+      animation-delay: 240ms;
     }
+
+    &:nth-child(3) {
+      animation-delay: 480ms;
+    }
+
+    &:nth-child(4) {
+      animation-delay: 720ms;
+    }
+
+    &:nth-child(5) {
+      animation-delay: 960ms;
+    }
+  }
+
+  @keyframes orbit {
+    0% {
+      transform: rotate(225deg);
+      opacity: 1;
+      animation-timing-function: ease-out;
+    }
+
+    7% {
+      transform: rotate(345deg);
+      animation-timing-function: linear;
+    }
+
+    30% {
+      transform: rotate(455deg);
+      animation-timing-function: ease-in-out;
+    }
+
+    39% {
+      transform: rotate(690deg);
+      animation-timing-function: linear;
+    }
+
+    70% {
+      transform: rotate(815deg);
+      opacity: 1;
+      animation-timing-function: ease-out;
+    }
+
+    75% {
+      transform: rotate(945deg);
+      animation-timing-function: ease-out;
+    }
+
+    76% {
+      transform: rotate(945deg);
+      opacity: 0;
+    }
+
+    100% {
+      transform: rotate(945deg);
+      opacity: 0;
+    }
+  }
 }
 
 .loading--small {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 10px 0;
-    height: initial;
-    width: initial;
-    justify-content: initial;
-    text-align: initial;
-    align-items: initial;
-    flex-direction: initial;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 10px 0;
+  height: initial;
+  width: initial;
+  justify-content: initial;
+  text-align: initial;
+  align-items: initial;
+  flex-direction: initial;
 
-    padding-bottom: 6px;
+  padding-bottom: 6px;
 
-    .loader {
-        position: relative;
-        width: 10px;
-        margin: auto;
-        .circle {
-            width: 18px;
-            height: 18px;
-            &:after {
-                width: 3px;
-                height: 3px;
-            }
-        }
+  .loader {
+    position: relative;
+    width: 10px;
+    margin: auto;
+
+    .circle {
+      width: 18px;
+      height: 18px;
+
+      &:after {
+        width: 3px;
+        height: 3px;
+      }
     }
+  }
 }
