@@ -1,15 +1,15 @@
 .win-dropdown {
-        width: 100%;
-        min-width: 67px;
-        max-width: 368px;
-        min-height: 36px;
-        padding: 4px 42px 4px 12px;
-        background-color: $dropdown-color;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        -o-appearance: none;
+  width: 100%;
+  min-width: 67px;
+  max-width: 368px;
+  min-height: 36px;
+  padding: 4px 42px 4px 12px;
+  background-color: $dropdown-color;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
 
-    &:hover{ 
-        background-color: $dropdown-color-hover;
-    }
+  &:hover {
+    background-color: $dropdown-color-hover;
+  }
 }

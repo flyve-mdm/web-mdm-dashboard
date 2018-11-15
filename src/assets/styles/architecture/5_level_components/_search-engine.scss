@@ -46,30 +46,36 @@
 .searchList {
   padding: 10px 0 0 0;
   border: 1px solid $color-2-primary;
-  width: 100%; display:table
+  width: 100%;
+  display: table
 }
+
 .searchListHeader {
   border: 1px solid $color-2-primary;
   background-color: $color-1-primary;
   color: white;
-  font-weight: bold; display:table-row
+  font-weight: bold;
+  display: table-row
 }
+
 .cellHeader {
   border-right: 1px solid white;
   display: table-cell;
-  width:12%;
+  width: 12%;
   padding: 1px;
   text-align: center;
 }
+
 .rowContent {
   border: 1px solid $color-2-primary;
   background-color: white;
-  display:table-row
+  display: table-row
 }
+
 .cellContent {
   border-right: 1px solid white;
   display: table-cell;
-  width:10%;
+  width: 10%;
   padding-right: 4px;
   text-align: center;
   border-bottom: none;

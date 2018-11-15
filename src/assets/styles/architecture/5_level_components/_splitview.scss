@@ -1,37 +1,67 @@
 $width-desktop: 200px;
-$width-tablet-small:  200px;
-$width-phablet:  200px;
+$width-tablet-small: 200px;
+$width-phablet: 200px;
 $color-fonts: $splitview-color-fonts;
 $color-fonts-hover: $splitview-color-fonts-hover;
 
 @include keyframes(expanding-splitview-desktop) {
-  0% { width: 0; }
-  90% { width: $width-desktop; }
+  0% {
+    width: 0;
+  }
+
+  90% {
+    width: $width-desktop;
+  }
 }
 
 @include keyframes(expanding-splitview-tablet-small) {
-  0% { width: 0; }
-  90% { width: $width-tablet-small; }
+  0% {
+    width: 0;
+  }
+
+  90% {
+    width: $width-tablet-small;
+  }
 }
 
 @include keyframes(expanding-splitview-phablet) {
-  0% { width: 0;}
-  90% { width: $width-phablet;}
+  0% {
+    width: 0;
+  }
+
+  90% {
+    width: $width-phablet;
+  }
 }
 
 @include keyframes(contract-splitview-desktop) {
-  0% { width: $width-desktop;}
-  100% { width: 0;}
+  0% {
+    width: $width-desktop;
+  }
+
+  100% {
+    width: 0;
+  }
 }
 
 @include keyframes(contract-splitview-tablet-small) {
-  0% { width:  $width-tablet-small;}
-  100% { width: 0;}
+  0% {
+    width: $width-tablet-small;
+  }
+
+  100% {
+    width: 0;
+  }
 }
 
 @include keyframes(contract-splitview-phablet) {
-  0% { width: $width-phablet;}
-  100% { width: 0;}
+  0% {
+    width: $width-phablet;
+  }
+
+  100% {
+    width: 0;
+  }
 }
 
 
@@ -124,11 +154,11 @@ $color-fonts-hover: $splitview-color-fonts-hover;
         .splitview-wrapped-navbar-wrapped-top__section,
         .splitview-wrapped-navbar-wrapped-bottom__section {
 
-          > div {
+          >div {
             height: 40px;
             text-align: center;
 
-            > a {
+            >a {
               cursor: pointer;
               font-size: $splitview-icon-size;
               color: $color-fonts;
@@ -149,7 +179,7 @@ $color-fonts-hover: $splitview-color-fonts-hover;
 
           &.--description {
 
-            > div {
+            >div {
               height: 40px;
               text-align: left;
 

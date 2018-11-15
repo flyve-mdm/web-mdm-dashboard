@@ -1,7 +1,6 @@
 // Responsive Font Mixin
-@mixin font-source($font-family, $size_tablet: false, $size_desktop: false,
-                   $colour: false, $weight: false, $lh: false) {
-                     
+@mixin font-source($font-family, $size_tablet: false, $size_desktop: false, $colour: false, $weight: false, $lh: false) {
+
   font-family: $font-family, "Segoe UI", sans-serif, "Segoe MDL2 Assets", "Symbols", "Segoe UI Emoji";
 
   @if $size_tablet {
@@ -16,11 +15,17 @@
     }
   }
 
-  @if $colour { color: $colour; }
+  @if $colour {
+    color: $colour;
+  }
 
-  @if $weight { font-weight: $weight; }
+  @if $weight {
+    font-weight: $weight;
+  }
 
-  @if $lh { line-height: $lh; }
+  @if $lh {
+    line-height: $lh;
+  }
 }
 
 // Keep images from scaling beyond the width of their parents.
@@ -33,10 +38,10 @@
 // Transtions
 @mixin transition($what: all, $time: 0.2s, $how: ease-in-out) {
   -webkit-transition: $what $time $how;
-  -moz-transition:    $what $time $how;
-  -ms-transition:     $what $time $how;
-  -o-transition:      $what $time $how;
-  transition:         $what $time $how;
+  -moz-transition: $what $time $how;
+  -ms-transition: $what $time $how;
+  -o-transition: $what $time $how;
+  transition: $what $time $how;
 }
 
 
@@ -50,15 +55,25 @@
 }
 
 @mixin keyframes($animation-name) {
-  @-webkit-keyframes #{$animation-name} { @content ; }
+  @-webkit-keyframes #{$animation-name} {
+    @content ;
+  }
 
-  @-moz-keyframes #{$animation-name} { @content ; }
+  @-moz-keyframes #{$animation-name} {
+    @content ;
+  }
 
-  @-ms-keyframes #{$animation-name} { @content ; }
+  @-ms-keyframes #{$animation-name} {
+    @content ;
+  }
 
-  @-o-keyframes #{$animation-name} { @content ; }
+  @-o-keyframes #{$animation-name} {
+    @content ;
+  }
 
-  @keyframes #{$animation-name} { @content ; }
+  @keyframes #{$animation-name} {
+    @content ;
+  }
 }
 
 @mixin animation($str) {

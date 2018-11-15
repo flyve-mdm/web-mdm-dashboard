@@ -1,70 +1,74 @@
 .fleets {
-    height: 100%;
+  height: 100%;
 
-    .content-header {
+  .content-header {
 
-        .content-header__title {
-            display: inline-block;
-            padding: 0 10px 0 20px;
+    .content-header__title {
+      display: inline-block;
+      padding: 0 10px 0 20px;
 
-            input {
-                font-size: 24px;
-                font-weight: 200;
-            }
-        }
-
-        .devices__length {
-            cursor: pointer;
-            display: inline-block;
-            div {
-                display: inline-block;
-                vertical-align: 5px;
-            }
-            span {
-                padding-left: 5px;
-            }
-        }
-
-        .item-info {
-            padding: 0 20px;
-            vertical-align: middle;
-        }
-
-        span {
-            padding: 0 10px;
-            font-size: 20px;
-            cursor: pointer;
-        }
+      input {
+        font-size: 24px;
+        font-weight: 200;
+      }
     }
 
-    .list-pane {
+    .devices__length {
+      cursor: pointer;
+      display: inline-block;
 
-        .list-pane__content {
+      div {
+        display: inline-block;
+        vertical-align: 5px;
+      }
 
-            .win-groupheadercontainer {
-                width: 100% !important;
-            }
-
-            .win-groupheader {
-                display: inline-block !important;
-                width: initial !important;
-                padding: 0 20px !important;
-            }
-        }
-
-        .win-headercontainer {
-            padding: 8px 0 8px 12px
-        }
-
-        span {
-            display: inline-block;
-            vertical-align: middle;
-        }
-        .id {
-            width: 20%;
-        }
-        .name {
-            width: 80%;
-        }
+      span {
+        padding-left: 5px;
+      }
     }
+
+    .item-info {
+      padding: 0 20px;
+      vertical-align: middle;
+    }
+
+    span {
+      padding: 0 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+
+  .list-pane {
+
+    .list-pane__content {
+
+      .win-groupheadercontainer {
+        width: 100% !important;
+      }
+
+      .win-groupheader {
+        display: inline-block !important;
+        width: initial !important;
+        padding: 0 20px !important;
+      }
+    }
+
+    .win-headercontainer {
+      padding: 8px 0 8px 12px
+    }
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .id {
+      width: 20%;
+    }
+
+    .name {
+      width: 80%;
+    }
+  }
 }
