@@ -21,6 +21,7 @@
     "test": "NODE_PATH=./src yarn react-scripts test",
     "test:watch": "NODE_PATH=./src yarn test --watch",
     "test:cypress": "yarn cypress run",
+    "test:cypress-open": "yarn cypress open",
     "test:webhint": "node node_modules/hint/dist/src/bin/hint.js http://localhost:3000/",
     "coverage": "NODE_PATH=./src yarn test --coverage",
     "eject": "react-scripts eject",
