@@ -345,16 +345,14 @@ class UsersAdd extends PureComponent {
           <ConstructInputs data={user.validDatesInformation} icon="monthIcon" />
           <ConstructInputs data={user.emailsInformation} icon="emailIcon" />
 
-          <div style={{ overflow: 'auto', paddingRight: '20px' }}>
-            <button
-              className="win-button"
-              style={{ float: 'right' }}
-              onClick={this.addEmail}
-              type="button"
-            >
-              {I18n.t('commons.add_email')}
-            </button>
-          </div>
+          <button
+            className="win-button"
+            style={{ margin: '20px 0 0 30px' }}
+            onClick={this.addEmail}
+            type="button"
+          >
+            {I18n.t('commons.add_email')}
+          </button>
 
           <ConstructInputs data={user.contactInformation} icon="phoneIcon" />
           <ConstructInputs data={user.moreInformation} icon="detailsIcon" />
