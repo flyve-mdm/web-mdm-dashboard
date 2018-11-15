@@ -1,12 +1,14 @@
 .error-message {
-    color: $alert;
+  color: $alert;
 
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 }
-.error-input, .error-input:focus {
-    border-color: $alert !important;
+
+.error-input,
+.error-input:focus {
+  border-color: $alert !important;
 }

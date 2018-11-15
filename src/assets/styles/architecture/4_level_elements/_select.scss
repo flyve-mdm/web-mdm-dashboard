@@ -1,21 +1,21 @@
 select {
-    border: 0;
-    border-radius: 0;
-    margin: 8px 1px;
-    height: 32px;
-    width: auto;
-    min-width: 64px;
-    min-height: 28px;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.333;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    outline: 2px solid rgba(0, 0, 0, 0.4);
-    outline-offset: -1px;
-    font-family: Segoe UI, "Segoe UI", sans-serif, "Segoe MDL2 Assets", "Symbols", "Segoe UI Emoji";
+  border: 0;
+  border-radius: 0;
+  margin: 8px 1px;
+  height: 32px;
+  width: auto;
+  min-width: 64px;
+  min-height: 28px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.333;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  outline: 2px solid rgba(0, 0, 0, 0.4);
+  outline-offset: -1px;
+  font-family: Segoe UI, "Segoe UI", sans-serif, "Segoe MDL2 Assets", "Symbols", "Segoe UI Emoji";
 }
 
 select:focus {
-    outline: 2px solid #158784;
+  outline: 2px solid #158784;
 }

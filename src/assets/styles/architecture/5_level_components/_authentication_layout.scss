@@ -1,61 +1,62 @@
 .authentication {
-    margin: auto;
-    
-    section {
-        padding-top: 20px;
-        padding-bottom: 20px;
-        min-height: 75vh;
-        
-        .loading {
-            margin-top: 100px !important;
-        }
+  margin: auto;
 
-        figure {
-            text-align: center;
-            
-            img {
-                width: 90px;
-            }
-        }
+  section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: 75vh;
 
-        form {
-            .authentication__captcha-img {
-                text-align: center;
-                margin-top: 15px;
-            }
-            .authentication__captcha-refresh {
-                text-align: center;
-                margin-top: 15px;
-                color: $color-1-primary;
-                cursor: pointer;
-                
-                .refreshIcon {
-                    padding-right: 5px;
-                }
-            }
-        }
-
-        .authentication__password,
-        .authentication__email,
-        .authentication__forgot-password {
-            min-height: 18vw;
-        }
-
-        .authentication__email {
-            .btn {
-                width: 270px;
-            }
-        }
-
-        .authentication__password,
-        .authentication__forgot-password {
-            .btn--primary {
-                margin-left: 30px
-            }
-        }
+    .loading {
+      margin-top: 100px !important;
     }
 
-    footer {
+    figure {
+      text-align: center;
+
+      img {
+        width: 90px;
+      }
+    }
+
+    form {
+      .authentication__captcha-img {
         text-align: center;
+        margin-top: 15px;
+      }
+
+      .authentication__captcha-refresh {
+        text-align: center;
+        margin-top: 15px;
+        color: $color-1-primary;
+        cursor: pointer;
+
+        .refreshIcon {
+          padding-right: 5px;
+        }
+      }
     }
+
+    .authentication__password,
+    .authentication__email,
+    .authentication__forgot-password {
+      min-height: 18vw;
+    }
+
+    .authentication__email {
+      .btn {
+        width: 270px;
+      }
+    }
+
+    .authentication__password,
+    .authentication__forgot-password {
+      .btn--primary {
+        margin-left: 30px
+      }
+    }
+  }
+
+  footer {
+    text-align: center;
+  }
 }

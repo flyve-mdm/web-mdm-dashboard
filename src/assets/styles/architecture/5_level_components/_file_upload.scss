@@ -1,15 +1,15 @@
 .file-upload {
-    width: auto;
+  width: auto;
 }
 
 .files-dropzone {
-    text-align: center;
-    padding: 60px;
-    border: 1px dashed $color-1-secondary;
-    cursor: pointer;
+  text-align: center;
+  padding: 60px;
+  border: 1px dashed $color-1-secondary;
+  cursor: pointer;
 }
 
 .files-dropzone-active {
-    border: 1px solid $color-1-primary;
-    color: $color-1-primary;
+  border: 1px solid $color-1-primary;
+  color: $color-1-primary;
 }
