@@ -113,8 +113,8 @@ export default class Enroll extends PureComponent {
       )
     } else {
       renderComponent = (
-        <ContentPane>
-          <div className="content-header" style={{ margin: '0 10px' }}>
+        <ContentPane style={{ marginLeft: 10 }}>
+          <div className="content-header">
             <h2 className="content-header__title">
               {I18n.t('devices.enroll.title')}
             </h2>
