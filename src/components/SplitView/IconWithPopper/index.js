@@ -58,20 +58,15 @@ class IconWithPopper extends PureComponent {
       )
     }
     return (
-      <div
-        onClick={this.props.click}
-        role="link"
-        tabIndex="0"
-      >
-        <button
-          className="btn btn-link"
-          type="button"
-        >
-          <span
-            className={`iconFont ${this.props.iconName}`}
-            title={this.props.title}
-          />
-        </button>
+      <div>
+        <span
+          className={`iconFont ${this.props.iconName}`}
+          title={this.props.title}
+          onClick={this.props.click}
+          style={{ cursor: 'pointer' }}
+          role="link"
+          tabIndex="0"
+        />
       </div>
     )
   }
