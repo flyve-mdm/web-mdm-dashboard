@@ -4,8 +4,8 @@
 
   .list-element__message {
     display: inline-block;
-    padding: 18px 0px 15px 15px;
-    width: 50%;
+    padding: 10px 0px 10px 15px;
+    width: 40%;
     vertical-align: middle;
 
     &.--without-padding-left {
@@ -20,9 +20,8 @@
   }
 
   .list-element__controller {
-    padding: 15px 15px 15px 0;
+    padding: 10px 15px 10px 0;
     float: right;
-    display: inline-block;
 
     .win-toggleswitch-values {
       display: none;
