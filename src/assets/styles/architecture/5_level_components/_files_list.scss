@@ -81,31 +81,30 @@
       .files-list__content-text-primary {
         text-transform: capitalize;
       }
+    }
 
-      .files-list__item-list-field {
-        transition: opacity 1s ease-out;
-        opacity: 0;
-        height: 0;
-        overflow: hidden;
+    .files-list__item-list-field {
+      transition: opacity 1s ease-out;
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .files-list__checkbox.files-list__item-list-field--active {
+      display: inline-block;
+
+      >span {
+        cursor: pointer;
+        font-size: 2em;
       }
+    }
 
-      .files-list__checkbox.files-list__item-list-field--active {
-        display: inline-block;
-        margin-top: 20px;
+    .files-list__item-list-field--active {
+      opacity: 1;
+      height: auto;
 
-        >span {
-          cursor: pointer;
-          font-size: 2em;
-        }
-      }
-
-      .files-list__item-list-field--active {
-        opacity: 1;
-        height: auto;
-
-        >input.win-textbox {
-          width: 38%;
-        }
+      >input.win-textbox {
+        width: 38%;
       }
     }
   }
