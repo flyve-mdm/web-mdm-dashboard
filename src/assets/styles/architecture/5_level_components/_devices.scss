@@ -1,94 +1,102 @@
 .devices {
-    height: 100%;
+  height: 100%;
 
-    .content-info {
-        ul {
-            list-style: none;
-        }
+  .content-info {
+    ul {
+      list-style: none;
+    }
+  }
+
+  .applications {
+    .list-pane {
+      height: 100%;
+
+      .list-pane__content {
+        height: 100%;
+      }
     }
 
-    .applications {
-        .list-pane {
-            height: 100%;
-            .list-pane__content {
-                height: 100%;
-            }
-        }
-        .win-listview > .win-vertical .win-container {
-            margin: 0;
-        }
-        .win-listview ._win-dynamic-containersize-1 .win-container {
-            height: auto;
-        }
-
-        .list-content {
-            padding: 14px;
-
-            .list-col:first-child {
-                padding: 0;
-                width: 70px;
-                vertical-align: top;
-            }
-            .list-col {
-                width: -webkit-calc(100% - 98px);
-                width:    -moz-calc(100% - 98px);
-                width:         calc(100% - 98px);
-                overflow: auto;
-
-                .aplication {
-                    font-weight: 400;
-                    .aplication-detail {
-                        color: $text-detail-color;
-                        display: inline-block;
-                        font-size: 13px;
-                        line-height: 16px;
-                    }
-                }
-            }
-        }
+    .win-listview>.win-vertical .win-container {
+      margin: 0;
     }
 
-    .system-report {
-
-        .request-inventory {
-            overflow: auto;
-            .loading {
-                float: right;
-            }
-            button {
-                float: right;
-                margin: 2px 10px;
-            }
-        }
-
-        .list-content {
-            padding: 5px 5px 5px 30px;
-            
-            .list-col:first-child {
-                padding: 0;
-                width: 30%;
-                vertical-align: top;
-                color: black;
-            }
-            .list-col {
-                display: inline-block;
-                width: 70%;
-                overflow: auto;
-                font-weight: 400;
-                color: $text-detail-color;
-            }
-
-            @media screen and (max-width: 772px) {
-                .list-col {
-                    display: block !important; 
-                    width: 100% !important;
-                }
-            }
-        }
-
-        .list-content:nth-child(even) {
-            background: #f2f2f2;
-        }
+    .win-listview ._win-dynamic-containersize-1 .win-container {
+      height: auto;
     }
+
+    .list-content {
+      padding: 14px;
+
+      .list-col:first-child {
+        padding: 0;
+        width: 70px;
+        vertical-align: top;
+      }
+
+      .list-col {
+        width: -webkit-calc(100% - 98px);
+        width: -moz-calc(100% - 98px);
+        width: calc(100% - 98px);
+        overflow: auto;
+
+        .aplication {
+          font-weight: 400;
+
+          .aplication-detail {
+            color: $text-detail-color;
+            display: inline-block;
+            font-size: 13px;
+            line-height: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  .system-report {
+
+    .request-inventory {
+      overflow: auto;
+
+      .loading {
+        float: right;
+      }
+
+      button {
+        float: right;
+        margin: 2px 10px;
+      }
+    }
+
+    .list-content {
+      padding: 5px 5px 5px 30px;
+
+      .list-col:first-child {
+        padding: 0;
+        width: 30%;
+        vertical-align: top;
+        color: black;
+      }
+
+      .list-col {
+        display: inline-block;
+        width: 70%;
+        overflow: auto;
+        font-weight: 400;
+        color: $text-detail-color;
+      }
+
+      @media screen and (max-width: 772px) {
+        .list-col {
+          display: block !important;
+          width: 100% !important;
+        }
+      }
+    }
+
+    .list-content:nth-child(even) {
+      background: #f2f2f2;
+    }
+  }
 
 }

@@ -7,7 +7,7 @@
 %normalize-anchor {
   text-decoration: none;
   color: unset;
-  
+
   &:hover {
     text-decoration: none;
   }
@@ -29,11 +29,12 @@
 
   .content-header {
     line-height: 1.5;
+
     .name {
-        font-size: 18px;
-        line-height: 28px;
-        font-weight: 400;
-        padding-top: 6px;
+      font-size: 18px;
+      line-height: 28px;
+      font-weight: 400;
+      padding-top: 6px;
     }
 
     button {
@@ -46,29 +47,29 @@
       display: flex;
 
       .item-info__message {
-          font-size: 14px;
-          line-height: 20px;
-          font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
       }
 
       .item-info__source {
-          display:block;
-          color: $text-detail-color;
-          font-size: 12px;
-          line-height: 16px;
-          font-weight: 400;
+        display: block;
+        color: $text-detail-color;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 400;
       }
     }
 
     .list-pane__picture {
-        width: 100px;
-        height: 100px;
-        background-size: cover;
-        display: inline-block;
-        border-radius: 100px;
-        -webkit-border-radius: 100px;
-        -moz-border-radius: 100px;
-        margin: 15px;
+      width: 100px;
+      height: 100px;
+      background-size: cover;
+      display: inline-block;
+      border-radius: 100px;
+      -webkit-border-radius: 100px;
+      -moz-border-radius: 100px;
+      margin: 15px;
     }
   }
 

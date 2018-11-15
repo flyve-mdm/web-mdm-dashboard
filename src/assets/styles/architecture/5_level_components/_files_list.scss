@@ -1,112 +1,112 @@
 .files-list {
-    padding: 20px 5px;
-    display: table;
-    border: 0;
+  padding: 20px 5px;
+  display: table;
+  border: 0;
 
-    .files-list__content {
-        display: table-row-group;
+  .files-list__content {
+    display: table-row-group;
 
-        .files-list__item {
-            display: table-row;
+    .files-list__item {
+      display: table-row;
 
-            .files-list__item-icon {
-                cursor: pointer;
-                display: table-cell;
-                float: left;
-                width: $list-item-icon-size;
-                height: $list-item-icon-size;
+      .files-list__item-icon {
+        cursor: pointer;
+        display: table-cell;
+        float: left;
+        width: $list-item-icon-size;
+        height: $list-item-icon-size;
 
-                span {
-                    font-size: 32px;
-                    text-align: center;
-                    cursor: pointer;
-                }
-            }
-
-            .files-list__item-content-primary {
-                display: table-cell;
-                padding-right: 10px;
-                vertical-align: top;
-                text-align: left;
-                width: 100%;
-            }
-
-            .files-list__item--deactive {
-                .files-list__content-text-primary {
-                    color: rgba(156, 156, 156, 0.726);
-                }
-            }
-
-            .files-list__item-content-secondary {
-                position: relative;
-
-                .files-list__item-icon {
-                    &.--fleets {
-                        width: 48px;
-                        position: absolute;
-                        right: 0;
-
-                        .win-toggleswitch-header {
-                            margin-bottom: 0;
-                            margin-top: 0;
-                        }
-                    }
-                }
-
-                &.version {
-                    display: table-cell;
-                    vertical-align: top;
-                    padding-right: 10px;
-                    width: 100%;
-                }
-            }
-
-            .files-list__content-text-primary {
-                font-weight: 700;
-            }
-
-            .files-list__content-text-secondary {
-                font-size: 13px;
-                line-height: 16px;
-                font-weight: 400;
-                color: $text-detail-color;
-            }
+        span {
+          font-size: 32px;
+          text-align: center;
+          cursor: pointer;
         }
-    }
+      }
 
-    &.fleet-list {
-        padding: 10px;
+      .files-list__item-content-primary {
+        display: table-cell;
+        padding-right: 10px;
+        vertical-align: top;
+        text-align: left;
+        width: 100%;
+      }
 
-        .files-list__item-content-primary {
-            .files-list__content-text-primary {
-                text-transform: capitalize;
-            }
-
-            .files-list__item-list-field {
-                transition: opacity 1s ease-out;
-                opacity: 0;
-                height: 0;
-                overflow: hidden;
-            }
-
-            .files-list__checkbox.files-list__item-list-field--active {
-                display: inline-block;
-                margin-top: 20px;
-
-                > span {
-                    cursor: pointer;
-                    font-size: 2em;
-                }
-            }
-
-            .files-list__item-list-field--active {
-                opacity: 1;
-                height: auto;
-
-                > input.win-textbox {
-                    width: 38%;
-                }
-            }
+      .files-list__item--deactive {
+        .files-list__content-text-primary {
+          color: rgba(156, 156, 156, 0.726);
         }
+      }
+
+      .files-list__item-content-secondary {
+        position: relative;
+
+        .files-list__item-icon {
+          &.--fleets {
+            width: 48px;
+            position: absolute;
+            right: 0;
+
+            .win-toggleswitch-header {
+              margin-bottom: 0;
+              margin-top: 0;
+            }
+          }
+        }
+
+        &.version {
+          display: table-cell;
+          vertical-align: top;
+          padding-right: 10px;
+          width: 100%;
+        }
+      }
+
+      .files-list__content-text-primary {
+        font-weight: 700;
+      }
+
+      .files-list__content-text-secondary {
+        font-size: 13px;
+        line-height: 16px;
+        font-weight: 400;
+        color: $text-detail-color;
+      }
     }
+  }
+
+  &.fleet-list {
+    padding: 10px;
+
+    .files-list__item-content-primary {
+      .files-list__content-text-primary {
+        text-transform: capitalize;
+      }
+
+      .files-list__item-list-field {
+        transition: opacity 1s ease-out;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .files-list__checkbox.files-list__item-list-field--active {
+        display: inline-block;
+        margin-top: 20px;
+
+        >span {
+          cursor: pointer;
+          font-size: 2em;
+        }
+      }
+
+      .files-list__item-list-field--active {
+        opacity: 1;
+        height: auto;
+
+        >input.win-textbox {
+          width: 38%;
+        }
+      }
+    }
+  }
 }

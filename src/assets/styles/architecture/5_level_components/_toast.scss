@@ -1,55 +1,55 @@
 .toast {
-    position: fixed;
-    top: 48px;
-    z-index: 100;
-    right: 0;
-    margin: 10px;
-    padding: 12px;
-    overflow: hidden;
-    width: 200px;
-    min-height: 48px;
+  position: fixed;
+  top: 48px;
+  z-index: 100;
+  right: 0;
+  margin: 10px;
+  padding: 12px;
+  overflow: hidden;
+  width: 200px;
+  min-height: 48px;
 
-    .toast__body {
-        margin-top: 8px;
-        font-size: 13px;
-        line-height: 16px;
-    }
+  .toast__body {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 16px;
+  }
 
-    @extend %box-shadow;
+  @extend %box-shadow;
 }
 
 .toast--alert {
-    background-color: $alert;
+  background-color: $alert;
 
-    .toast__body,
-    .toast__title {
-        color: white
-    }
+  .toast__body,
+  .toast__title {
+    color: white
+  }
 }
 
 .toast--warning {
-    background-color: $warning;
+  background-color: $warning;
 
-    .toast__body,
-    .toast__title {
-        color: white
-    }
+  .toast__body,
+  .toast__title {
+    color: white
+  }
 }
 
 .toast--success {
-    background-color: $success;
+  background-color: $success;
 
-    .toast__body,
-    .toast__title {
-        color: darken($color-2-primary, 5)
-    }
+  .toast__body,
+  .toast__title {
+    color: darken($color-2-primary, 5)
+  }
 }
 
 .toast--info {
-    background-color: $info;
+  background-color: $info;
 
-    .toast__body,
-    .toast__title {
-        color: darken($color-2-primary, 5)
-    }
+  .toast__body,
+  .toast__title {
+    color: darken($color-2-primary, 5)
+  }
 }

@@ -1,7 +1,8 @@
-input, textarea {
-    box-shadow: none;
-    
-    &:focus {
-        border-color: $app-color !important;
-    }
+input,
+textarea {
+  box-shadow: none;
+
+  &:focus {
+    border-color: $app-color !important;
+  }
 }

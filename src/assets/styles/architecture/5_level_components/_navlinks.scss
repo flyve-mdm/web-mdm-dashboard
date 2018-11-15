@@ -2,28 +2,29 @@ $nav-width: 320px;
 
 .navlinks {
   width: $nav-width;
-  > ul {
+
+  >ul {
     @extend %normalize-list;
     height: calc(100vh - #{ $header-height });
     overflow-y: auto;
 
-    > li {
-      > a {
+    >li {
+      >a {
         display: block;
         padding-left: 11px;
         padding-bottom: 20px;
         padding-top: 20px;
-        
+
         @extend %normalize-anchor;
 
         @include transition(all, .2s, ease);
 
         &:hover {
-          background-color: lighten($color-2-secondary, 45) 
+          background-color: lighten($color-2-secondary, 45)
         }
 
         &.--active {
-          background-color: lighten($color-2-secondary, 25) 
+          background-color: lighten($color-2-secondary, 25)
         }
       }
     }
