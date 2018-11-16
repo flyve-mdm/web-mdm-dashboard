@@ -103,6 +103,18 @@ class Select extends PureComponent {
           })
         }
         break
+
+      case 'searchAllItems':
+        if (response.data) {
+          response.data.forEach((element) => {
+            options.push({
+              content: element[this.props.request.content],
+              value: element[this.props.request.value],
+            })
+          })
+        }
+        break
+
       case 'getAllItems':
         if (response) {
           response.forEach((element) => {
@@ -122,6 +134,7 @@ class Select extends PureComponent {
           })
         })
         break
+
       case 'getMyEntities':
         response.myentities.forEach((element) => {
           options.push({
@@ -130,6 +143,7 @@ class Select extends PureComponent {
           })
         })
         break
+
       default:
         break
     }
