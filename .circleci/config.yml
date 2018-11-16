@@ -36,22 +36,23 @@ references:
     run:
       name: Install python dependencies
       command: source ci/scripts/python_install.sh
+  
+  config_file: &config_file
+    run:
+      name: Create configuration file
+      command: source ci/scripts/create_config_file.sh
 
   # Build application
   build_app: &build_app
     run:
       name: "Build application"
-      command: |
-        source ci/scripts/create_config_file.sh
-        yarn build
+      command: yarn build
 
   # Test configuration
   start_server: &start_server
     run:
       name: Start server in background
-      command: |
-        source ci/scripts/create_config_file.sh
-        yarn start:only > ../yarn.log
+      command: yarn start:only > ../yarn.log
 
       background: true
 
@@ -115,9 +116,7 @@ references:
   create_coverage: &create_coverage
     run:
       name: Generate coverage
-      command: |
-        source ci/scripts/create_config_file.sh
-        source ci/scripts/coverage.sh
+      command: source ci/scripts/coverage.sh
       environment:
         COVERAGE_DESTINATION: development/coverage/
 
@@ -197,6 +196,7 @@ jobs:
       - *store_node_cache
       - *transifex_config
       - *transifex_sync
+      - *config_file
       - *build_app
       - *store_build_cache
 
@@ -209,6 +209,7 @@ jobs:
       - *python_install
       - *restore_node_cache
       - *restore_build_cache
+      - *config_file
       - *start_server
       - *unit_test
       - *end_to_end_test
@@ -246,6 +247,7 @@ jobs:
       - *system_install
       - *restore_node_cache
       - *git_config
+      - *config_file
       # - *restore_build_cache
       - *create_coverage
 
