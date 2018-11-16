@@ -964,15 +964,6 @@
     chokidar "^2.0.4"
     globby "^8.0.1"
 
-"@hint/formatter-codeframe@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@hint/formatter-codeframe/-/formatter-codeframe-2.0.0.tgz#f1b8967df90776512d0a25bd98d5d1437b9740ca"
-  integrity sha512-a+7et6JlBQZ3e1wNR+rN2r+4RujaBjnSPK0LWbkL2gg37Igdko1E5/TpqBI6jASSArMt6xikNaAMeWb00oe2tA==
-  dependencies:
-    chalk "^2.4.1"
-    lodash "^4.17.11"
-    log-symbols "^2.2.0"
-
 "@hint/formatter-html@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@hint/formatter-html/-/formatter-html-2.0.0.tgz#795cbd38f6514ffe307b84cd8787c30ec236ac64"
@@ -6293,7 +6284,7 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
-hint@^4.0.0:
+hint@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/hint/-/hint-4.0.2.tgz#145c667782a4e441e8211d48159d53f06d710e12"
   integrity sha512-Jb++KJSgHtMCP+n3C/F4/TsqDqtqbSAG1QlzhZPzm/XupWD0KEzO+NxxznbcEUO7HySTDSd6M50xTMewK231Eg==

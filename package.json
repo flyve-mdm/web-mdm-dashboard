@@ -22,13 +22,14 @@
     "test:watch": "NODE_PATH=./src yarn test --watch",
     "test:cypress": "yarn cypress run",
     "test:cypress-open": "yarn cypress open",
-    "test:webhint": "node node_modules/hint/dist/src/bin/hint.js http://localhost:3000/",
+    "test:webhint": "yarn hint http://localhost:3000/",
     "coverage": "NODE_PATH=./src yarn test --coverage",
     "eject": "react-scripts eject",
     "lint": "yarn eslint src --fix"
   },
   "dependencies": {
     "@glpi-project/javascript-library-glpi": ">=0.1.0-beta <=1.0.0",
+    "@hint/configuration-web-recommended": "^3.0.0",
     "@microsoft/fast-animation": "^0.0.12-beta.0",
     "bugsnag-js": "^4.7.3",
     "bugsnag-react": "^1.1.1",
@@ -49,12 +50,6 @@
     "winjs": "^4.4.3"
   },
   "devDependencies": {
-    "@hint/formatter-codeframe": "^2.0.0",
-    "@hint/hint-disown-opener": "^2.0.0",
-    "@hint/hint-highest-available-document-mode": "^2.0.0",
-    "@hint/hint-html-checker": "^2.0.0",
-    "@hint/hint-http-cache": "^2.0.0",
-    "@hint/hint-http-compression": "^3.0.0",
     "conventional-github-releaser": "^3.1.2",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
@@ -64,7 +59,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^2.0.0",
-    "hint": "^4.0.0",
+    "hint": "^4.0.2",
     "jsdoc": "^3.5.5",
     "node-github-release": "^0.2.1",
     "react-test-renderer": "^16.5.2",

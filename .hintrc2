@@ -1,0 +1,19 @@
+{
+  "connector": {
+    "name": "jsdom",
+    "options": {
+      "waitFor": 5000
+    }
+  },
+  "formatters": [
+    "codeframe"
+  ],
+  "hints": {
+    "disown-opener": "error",
+    "highest-available-document-mode": "error",
+    "html-checker": "warning",
+    "http-cache": "warning",
+    "http-compression": "warning"
+  },
+  "hintsTimeout": 120000
+}
