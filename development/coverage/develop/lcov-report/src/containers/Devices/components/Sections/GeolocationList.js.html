@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/19</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/12</span>
       </div>
     </div>
   </div>
@@ -137,7 +137,7 @@ layout: coverage
 89
 90
 91
-92</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+92</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -224,11 +224,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -257,25 +257,25 @@ layout: coverage
  */
 &nbsp;
 /** import dependencies */
-import React,<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >import React, {</span>
   PureComponent,
 } from 'react'
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import I18n <span class="cstat-no" title="statement not covered" >from 'shared/i18n'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
+<span class="cstat-no" title="statement not covered" >import I18n from 'shared/i18n'</span>
 &nbsp;
 /**
  * @class GeolocationList
  * @extends PureComponent
  */
 class GeolocationList extends PureComponent {
-<span class="fstat-no" title="function not covered" >  re</span>nder() {
+<span class="fstat-no" title="function not covered" >  render</span>() {
     let renderList
 <span class="cstat-no" title="statement not covered" >    if (this.props.locations.length &gt; 0) {</span>
 <span class="cstat-no" title="statement not covered" >      renderList = this.props.locations.map(<span class="fstat-no" title="function not covered" >(l</span>ocation, index) =&gt; (</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div</span>
           key={`location-${index.toString()}`}
-          style={ { paddingLeft: 5, cursor: 'pointer' } }
-          onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >this.props.goToLocation(location)}</span>
+          style={ { cursor: 'pointer' } }
+          onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.props.goToLocation(location)}</span>
           role="button"
           tabIndex="0"
         &gt;
@@ -288,7 +288,7 @@ class GeolocationList extends PureComponent {
               type="checkbox"
               className="win-checkbox"
               style={ { width: 'auto', cursor: 'pointer' } }
-              onChange<span class="fstat-no" title="function not covered" >={</span>() =<span class="cstat-no" title="statement not covered" >&gt; this.props.showLocation(location</span>)}
+              onChange={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" ></span>this.props.showLocation(location)}</span>
               checked={(this.props.markers.indexOf(location) !== -1)}
             /&gt;
             { location.date }
@@ -297,7 +297,7 @@ class GeolocationList extends PureComponent {
       ))
     } else {
 <span class="cstat-no" title="statement not covered" >      renderList = (</span>
-        &lt;p style={ { color: 'grey', marginLeft: 5 } }&gt;
+        &lt;p style={ { color: 'grey' } }&gt;
           {I18n.t('devices.geolocation.no_locations')}
         &lt;/p&gt;
       )
@@ -315,7 +315,7 @@ class GeolocationList extends PureComponent {
   locations: PropTypes.array,
   showLocation: PropTypes.func.isRequired,
   markers: PropTypes.array,
-  goToLocation: PropTypes.func.isRequired,<span class="cstat-no" title="statement not covered" ></span>
+  goToLocation: PropTypes.func.isRequired,
 }
 &nbsp;
 export default GeolocationList
@@ -325,7 +325,7 @@ export default GeolocationList
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 03 2018 10:40:23 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Nov 16 2018 21:19:09 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

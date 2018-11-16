@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/17</span>
+        <span class='fraction'>0/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/10</span>
       </div>
     </div>
   </div>
@@ -130,7 +130,7 @@ layout: coverage
 82
 83
 84
-85</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+85</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -210,11 +210,11 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -242,9 +242,9 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-import React <span class="cstat-no" title="statement not covered" >from 'react'<span class="cstat-no" title="statement not covered" ></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import createListElement <span class="cstat-no" title="statement not covered" >from './createListElement'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cstat-no" title="statement not covered" >import React from 'react'</span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
+<span class="cstat-no" title="statement not covered" >import createListElement from './createListElement'</span>
 &nbsp;
 /**
  * Component to create a list of form entries
@@ -252,7 +252,7 @@ import createListElement <span class="cstat-no" title="statement not covered" >f
  * @param {object} props
  * @return {component} List of form entries
  */
-const ConstructInputs = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops) =&gt; {</span>
+const ConstructInputs = (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >props) =&gt; {</span></span>
   let icon
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  if (props.icon) {</span>
@@ -273,16 +273,16 @@ const ConstructInputs = <span class="cstat-no" title="statement not covered" ><s
   }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;React.Fragment&gt;
+    &lt;&gt;
       { icon }
       {
-        props.data.ma<span class="fstat-no" title="function not covered" >p(</span>(elements, index) =<span class="cstat-no" title="statement not covered" >&gt; createListElement({</span>
+        props.data.map(<span class="fstat-no" title="function not covered" >(e</span>lements, index) =&gt; <span class="cstat-no" title="statement not covered" >createListElement({</span>
           icon: props.icon,
           elements,
           index,
         }))
       }
-    &lt;/React.Fragment&gt;
+    &lt;/&gt;
   )
 }
 &nbsp;
@@ -294,7 +294,7 @@ const ConstructInputs = <span class="cstat-no" title="statement not covered" ><s
 &nbsp;
 <span class="cstat-no" title="statement not covered" >ConstructInputs.defaultProps = {</span>
   icon: null,
-  title: null,<span class="cstat-no" title="statement not covered" ></span>
+  title: null,
 }
 &nbsp;
 export default ConstructInputs
@@ -304,7 +304,7 @@ export default ConstructInputs
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 03 2018 10:40:23 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Nov 16 2018 21:19:09 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

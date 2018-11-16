@@ -25,17 +25,17 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/34</span>
+        <span class='fraction'>0/29</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/21</span>
+        <span class='fraction'>0/17</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -135,7 +135,7 @@ layout: coverage
 87
 88
 89
-90</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+90</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,8 +166,8 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -223,8 +223,8 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -255,8 +255,8 @@ layout: coverage
 /** @module BuildItemList */
 &nbsp;
 /** Import dependencies */
-import WinJS from 'winjs'
-import I18n from '../i18n'
+<span class="cstat-no" title="statement not covered" >import WinJS from 'winjs'</span>
+<span class="cstat-no" title="statement not covered" >import I18n from '../i18n'</span>
 &nbsp;
 /**
  * Sort elements ascending / descending
@@ -264,8 +264,8 @@ import I18n from '../i18n'
  * @param {int} index
  * @return {object} WinJS.Binding.List
  */
-<span class="fstat-no" title="function not covered" >ex</span>port default function (dataS<span class="branch-0 cbranch-no" title="branch not covered" >ou</span>rce, index = 0) {
-  const groupKey = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (data) {</span>
+export default <span class="fstat-no" title="function not covered" >function (</span>dataSource, index = <span class="branch-0 cbranch-no" title="branch not covered" >0) {</span>
+  const groupKey = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function (</span>data) {</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      return (data[Object.keys(data)[index]].trim())[0].toUpperCase()</span>
     } catch (error) {
@@ -273,24 +273,24 @@ import I18n from '../i18n'
     }
   }
 &nbsp;
-  const groupData = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (data) {</span>
+  const groupData = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function (</span>data) {</span>
 <span class="cstat-no" title="statement not covered" >    return {</span>
       title: groupKey(data),
     }
   }
 &nbsp;
-  const groupSorted = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction (a, b) {</span>
+  const groupSorted = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function (</span>a, b) {</span>
 <span class="cstat-no" title="statement not covered" >    if (dataSource.order === 'ASC') {</span>
 <span class="cstat-no" title="statement not covered" >      if (a &lt; b) {</span>
 <span class="cstat-no" title="statement not covered" >        return -1</span>
-      }<span class="cstat-no" title="statement not covered" > if (a &gt; b) {</span>
+      } <span class="cstat-no" title="statement not covered" >if (a &gt; b) {</span>
 <span class="cstat-no" title="statement not covered" >        return 1</span>
       }
 <span class="cstat-no" title="statement not covered" >      return 0</span>
     }
 <span class="cstat-no" title="statement not covered" >    if (a &gt; b) {</span>
 <span class="cstat-no" title="statement not covered" >      return -1</span>
-    }<span class="cstat-no" title="statement not covered" > if (a &lt; b) {</span>
+    } <span class="cstat-no" title="statement not covered" >if (a &lt; b) {</span>
 <span class="cstat-no" title="statement not covered" >      return 1</span>
     }
 <span class="cstat-no" title="statement not covered" >    return 0</span>
@@ -299,7 +299,7 @@ import I18n from '../i18n'
   const sorter = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    if (a[Object.keys(a)[0]] &lt; b[Object.keys(b)[0]]) {</span>
 <span class="cstat-no" title="statement not covered" >      return -1</span>
-    }<span class="cstat-no" title="statement not covered" > if (a[Object.keys(a)[0]] &gt; b[Object.keys(b)[0]]) {</span>
+    } <span class="cstat-no" title="statement not covered" >if (a[Object.keys(a)[0]] &gt; b[Object.keys(b)[0]]) {</span>
 <span class="cstat-no" title="statement not covered" >      return 1</span>
     }
 <span class="cstat-no" title="statement not covered" >    return 0</span>
@@ -312,14 +312,14 @@ import I18n from '../i18n'
   }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return null</span>
-}<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span></span></span>
+}
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Oct 03 2018 10:40:23 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Nov 16 2018 21:19:09 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
