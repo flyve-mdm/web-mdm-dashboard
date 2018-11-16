@@ -115,7 +115,9 @@ references:
   create_coverage: &create_coverage
     run:
       name: Generate coverage
-      command: source ci/scripts/coverage.sh
+      command: |
+        source ci/scripts/create_config_file.sh
+        source ci/scripts/coverage.sh
       environment:
         COVERAGE_DESTINATION: development/coverage/
 
