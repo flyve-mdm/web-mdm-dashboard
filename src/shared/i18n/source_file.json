@@ -246,8 +246,7 @@
     },
     "enroll": {
       "title": "Enroll new device",
-      "insert_active_email": "Please insert an active email address.",
-      "email_with_qr": "An email will be sent with a QR code."
+      "select_user": "Please select a user to send an enrollment invitation."
     }
   },
   "files": {
