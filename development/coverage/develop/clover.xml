@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1542403149521" clover="3.2.0">
-  <project timestamp="1542403149521" name="All files">
-    <metrics statements="4518" coveredstatements="283" conditionals="2032" coveredconditionals="190" methods="1126" coveredmethods="75" elements="7676" coveredelements="548" complexity="0" loc="4518" ncloc="4518" packages="111" files="190" classes="190">
+<coverage generated="1542433699445" clover="3.2.0">
+  <project timestamp="1542433699445" name="All files">
+    <metrics statements="4523" coveredstatements="283" conditionals="2035" coveredconditionals="190" methods="1127" coveredmethods="75" elements="7685" coveredelements="548" complexity="0" loc="4523" ncloc="4523" packages="111" files="190" classes="190">
       <package name="src">
         <metrics statements="54" coveredstatements="5" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
         <file name="index.js" path="/root/flyve/src/index.js">
@@ -542,9 +542,9 @@
         </file>
       </package>
       <package name="src.components.Forms.Select">
-        <metrics statements="41" coveredstatements="13" conditionals="24" coveredconditionals="8" methods="13" coveredmethods="6"/>
+        <metrics statements="45" coveredstatements="13" conditionals="27" coveredconditionals="8" methods="14" coveredmethods="6"/>
         <file name="index.js" path="/root/flyve/src/components/Forms/Select/index.js">
-          <metrics statements="41" coveredstatements="13" conditionals="24" coveredconditionals="8" methods="13" coveredmethods="6"/>
+          <metrics statements="45" coveredstatements="13" conditionals="27" coveredconditionals="8" methods="14" coveredmethods="6"/>
           <line num="42" count="1" type="stmt"/>
           <line num="43" count="1" type="stmt"/>
           <line num="50" count="1" type="cond" truecount="2" falsecount="2"/>
@@ -553,7 +553,7 @@
           <line num="63" count="0" type="stmt"/>
           <line num="72" count="0" type="stmt"/>
           <line num="73" count="0" type="stmt"/>
-          <line num="75" count="0" type="cond" truecount="0" falsecount="6"/>
+          <line num="75" count="0" type="cond" truecount="0" falsecount="7"/>
           <line num="77" count="0" type="stmt"/>
           <line num="78" count="0" type="stmt"/>
           <line num="83" count="0" type="stmt"/>
@@ -564,28 +564,32 @@
           <line num="98" count="0" type="stmt"/>
           <line num="99" count="0" type="stmt"/>
           <line num="105" count="0" type="stmt"/>
-          <line num="107" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="108" count="0" type="stmt"/>
+          <line num="108" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="109" count="0" type="stmt"/>
-          <line num="115" count="0" type="stmt"/>
-          <line num="118" count="0" type="stmt"/>
-          <line num="119" count="0" type="stmt"/>
-          <line num="124" count="0" type="stmt"/>
-          <line num="126" count="0" type="stmt"/>
+          <line num="110" count="0" type="stmt"/>
+          <line num="116" count="0" type="stmt"/>
+          <line num="119" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="120" count="0" type="stmt"/>
+          <line num="121" count="0" type="stmt"/>
           <line num="127" count="0" type="stmt"/>
-          <line num="132" count="0" type="stmt"/>
-          <line num="134" count="0" type="stmt"/>
-          <line num="137" count="0" type="stmt"/>
-          <line num="148" count="1" type="stmt"/>
-          <line num="149" count="1" type="stmt"/>
-          <line num="150" count="2" type="cond" truecount="1" falsecount="1"/>
+          <line num="130" count="0" type="stmt"/>
+          <line num="131" count="0" type="stmt"/>
+          <line num="136" count="0" type="stmt"/>
+          <line num="139" count="0" type="stmt"/>
+          <line num="140" count="0" type="stmt"/>
+          <line num="145" count="0" type="stmt"/>
+          <line num="148" count="0" type="stmt"/>
           <line num="151" count="0" type="stmt"/>
-          <line num="156" count="2" type="stmt"/>
           <line num="162" count="1" type="stmt"/>
-          <line num="172" count="2" type="stmt"/>
-          <line num="199" count="4" type="stmt"/>
-          <line num="210" count="1" type="stmt"/>
-          <line num="220" count="1" type="stmt"/>
+          <line num="163" count="1" type="stmt"/>
+          <line num="164" count="2" type="cond" truecount="1" falsecount="1"/>
+          <line num="165" count="0" type="stmt"/>
+          <line num="170" count="2" type="stmt"/>
+          <line num="176" count="1" type="stmt"/>
+          <line num="186" count="2" type="stmt"/>
+          <line num="213" count="4" type="stmt"/>
+          <line num="224" count="1" type="stmt"/>
+          <line num="234" count="1" type="stmt"/>
         </file>
       </package>
       <package name="src.components.Forms.TextArea">
@@ -1624,7 +1628,7 @@
         </file>
       </package>
       <package name="src.containers.Devices.components">
-        <metrics statements="250" coveredstatements="0" conditionals="91" coveredconditionals="0" methods="57" coveredmethods="0"/>
+        <metrics statements="251" coveredstatements="0" conditionals="91" coveredconditionals="0" methods="57" coveredmethods="0"/>
         <file name="DevicesContent.js" path="/root/flyve/src/containers/Devices/components/DevicesContent.js">
           <metrics statements="27" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="8" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
@@ -1839,33 +1843,34 @@
           <line num="485" count="0" type="stmt"/>
         </file>
         <file name="Enroll.js" path="/root/flyve/src/containers/Devices/components/Enroll.js">
-          <metrics statements="26" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="0"/>
+          <metrics statements="27" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="8" coveredmethods="0"/>
           <line num="30" count="0" type="stmt"/>
           <line num="33" count="0" type="stmt"/>
           <line num="34" count="0" type="stmt"/>
           <line num="35" count="0" type="stmt"/>
           <line num="36" count="0" type="stmt"/>
           <line num="37" count="0" type="stmt"/>
-          <line num="45" count="0" type="stmt"/>
+          <line num="38" count="0" type="stmt"/>
           <line num="46" count="0" type="stmt"/>
           <line num="47" count="0" type="stmt"/>
-          <line num="59" count="0" type="stmt"/>
-          <line num="60" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="61" count="0" type="stmt"/>
-          <line num="64" count="0" type="stmt"/>
-          <line num="72" count="0" type="stmt"/>
-          <line num="75" count="0" type="stmt"/>
+          <line num="48" count="0" type="stmt"/>
+          <line num="60" count="0" type="stmt"/>
+          <line num="61" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="62" count="0" type="stmt"/>
+          <line num="65" count="0" type="stmt"/>
+          <line num="73" count="0" type="stmt"/>
           <line num="76" count="0" type="stmt"/>
-          <line num="79" count="0" type="stmt"/>
-          <line num="86" count="0" type="stmt"/>
-          <line num="89" count="0" type="stmt"/>
-          <line num="103" count="0" type="stmt"/>
-          <line num="110" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="111" count="0" type="stmt"/>
-          <line num="115" count="0" type="stmt"/>
-          <line num="140" count="0" type="stmt"/>
-          <line num="157" count="0" type="stmt"/>
-          <line num="161" count="0" type="stmt"/>
+          <line num="77" count="0" type="stmt"/>
+          <line num="80" count="0" type="stmt"/>
+          <line num="87" count="0" type="stmt"/>
+          <line num="90" count="0" type="stmt"/>
+          <line num="104" count="0" type="stmt"/>
+          <line num="111" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="112" count="0" type="stmt"/>
+          <line num="116" count="0" type="stmt"/>
+          <line num="151" count="0" type="stmt"/>
+          <line num="169" count="0" type="stmt"/>
+          <line num="173" count="0" type="stmt"/>
         </file>
         <file name="Map.js" path="/root/flyve/src/containers/Devices/components/Map.js">
           <metrics statements="26" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="7" coveredmethods="0"/>
