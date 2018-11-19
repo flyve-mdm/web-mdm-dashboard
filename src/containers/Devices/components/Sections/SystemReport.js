@@ -206,6 +206,14 @@ export default class SystemReport extends PureComponent {
             </div>
             <div className="list-content">
               <div className="list-col">
+                {I18n.t('commons.enroll_status')}
+              </div>
+              <div className="list-col">
+                {this.state.data.enroll_status}
+              </div>
+            </div>
+            <div className="list-content">
+              <div className="list-col">
                 {I18n.t('commons.last_contact')}
               </div>
               <div className="list-col">
