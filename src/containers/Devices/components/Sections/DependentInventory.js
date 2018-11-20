@@ -31,7 +31,6 @@ import React, {
   PureComponent,
 } from 'react'
 import PropTypes from 'prop-types'
-import Loader from 'components/Loader'
 import I18n from 'shared/i18n'
 
 /**
@@ -39,19 +38,30 @@ import I18n from 'shared/i18n'
  * @extends PureComponent
  */
 export default class DependentInventory extends PureComponent {
-  /** @constructor */
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
-  }
-
   render() {
+    if (this.props.data) {
+      return (
+        <div>
+          <div className="title">
+            {this.props.title}
+          </div>
+          {
+            this.props.data.map(value => (this.buildList(value)))
+          }
+        </div>
+      )
+    }
     return (null)
   }
 }
 
+DependentInventory.defaultProps = {
+  data: null,
+}
+
 /** Inventory propTypes */
 DependentInventory.propTypes = {
-
+  title: PropTypes.string.isRequired,
+  fields: PropTypes.object.isRequired,
+  data: PropTypes.object,
 }
