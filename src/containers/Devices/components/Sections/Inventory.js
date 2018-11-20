@@ -73,6 +73,7 @@ export default class Inventory extends PureComponent {
           isLoading: false,
           data: object,
         })
+        this.props.afterLoading(data.plugin_flyvemdm_fleets_id, data.computers_id)
       } catch (error) {
         this.setState({
           isLoading: false,
@@ -93,7 +94,7 @@ export default class Inventory extends PureComponent {
       key={`buildList-${index.toString()}`}
     >
       <div className="list-col">
-        {I18n.t(`commons.${index.toString().toLocaleLowerCase()}`)}
+        {I18n.t(`commons.${index.toString()}`)}
       </div>
       <div className="list-col">
         {value[index]}
@@ -126,6 +127,7 @@ export default class Inventory extends PureComponent {
 /** Inventory defaultProps */
 Inventory.defaultProps = {
   parameters: {},
+  afterLoading: () => {},
 }
 /** Inventory propTypes */
 Inventory.propTypes = {
@@ -135,4 +137,5 @@ Inventory.propTypes = {
   fields: PropTypes.object.isRequired,
   parameters: PropTypes.object,
   glpi: PropTypes.object.isRequired,
+  afterLoading: PropTypes.func,
 }
