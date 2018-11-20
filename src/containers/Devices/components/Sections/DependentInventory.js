@@ -38,6 +38,25 @@ import I18n from 'shared/i18n'
  * @extends PureComponent
  */
 export default class DependentInventory extends PureComponent {
+  /**
+   * handle build inventory list
+   * @function buildList
+   * @param {object} value
+   */
+  buildList = value => Object.keys(value).map(index => (
+    <div
+      className="list-content"
+      key={`buildList-${index.toString()}`}
+    >
+      <div className="list-col">
+        {I18n.t(`commons.${index.toString()}`)}
+      </div>
+      <div className="list-col">
+        {value[index]}
+      </div>
+    </div>
+  ))
+
   render() {
     if (this.props.data) {
       return (
@@ -46,7 +65,9 @@ export default class DependentInventory extends PureComponent {
             {this.props.title}
           </div>
           {
-            this.props.data.map(value => (this.buildList(value)))
+            Object.keys(this.props.fields).map(key => ({
+              [this.props.fields[key]]: this.props.data[key],
+            })).map(value => (this.buildList(value)))
           }
         </div>
       )
@@ -55,6 +76,7 @@ export default class DependentInventory extends PureComponent {
   }
 }
 
+/** Inventory defaultProps */
 DependentInventory.defaultProps = {
   data: null,
 }
