@@ -69,12 +69,26 @@ export default class Inventory extends PureComponent {
         const object = Object.keys(this.props.fields).map(key => ({
           [this.props.fields[key]]: this.data[key],
         }))
+
+        if (this.props.itemType === 'DeviceProcessor') {
+          const manufacturer = await this.props.glpi.getAnItem({
+            itemtype: 'Manufacturer',
+            id: this.data.manufacturers_id,
+          })
+          object.push({
+            manufacturer: (manufacturer.name || I18n.t('commons.n/a')),
+          })
+        }
+
         this.setState({
           isLoading: false,
           data: object,
         })
         if (this.props.itemType === 'PluginFlyvemdmAgent') {
-          this.props.afterLoading(this.data.plugin_flyvemdm_fleets_id, this.data.computers_id)
+          this.props.afterLoading(
+            this.data.plugin_flyvemdm_fleets_id,
+            this.data.computers_id,
+          )
         }
         if (this.props.itemType === 'Computer') {
           this.props.afterLoading(this.data._devices.Item_DeviceProcessor[Object.keys(this.data._devices.Item_DeviceProcessor)[0]].deviceprocessors_id)
