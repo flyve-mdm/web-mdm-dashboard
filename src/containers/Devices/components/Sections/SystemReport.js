@@ -50,6 +50,7 @@ export default class SystemReport extends PureComponent {
       requestingInventory: false,
       fleetID: undefined,
       computersID: undefined,
+      coreID: undefined,
     }
   }
 
@@ -80,6 +81,7 @@ export default class SystemReport extends PureComponent {
     this.setState({
       fleetID: undefined,
       computersID: undefined,
+      coreID: undefined,
       requestingInventory: false,
     })
     this.inventory.handleRefresh()
@@ -125,6 +127,7 @@ export default class SystemReport extends PureComponent {
   }
 
   render() {
+    console.log(this.device)
     return (
       <div className="devices">
         <div className="system-report">
@@ -198,6 +201,29 @@ export default class SystemReport extends PureComponent {
                   with_softwares: true,
                   with_connections: true,
                   with_networkports: true,
+                }}
+                glpi={this.props.glpi}
+                afterLoading={(coreID) => {
+                  this.setState({ coreID })
+                }}
+                ref={(device) => { this.device = device }}
+              />
+            )
+          }
+
+          {
+            this.state.coreID && (
+              <Inventory
+                title={I18n.t('commons.device_processor')}
+                itemType="DeviceProcessor"
+                itemID={this.state.coreID}
+                fields={{
+                  id: 'id',
+                  designation: 'name',
+                  frequence: 'cpu_frequency',
+                }}
+                specialFields={{
+                  number_cores: (this.device.data._devices.Item_DeviceProcessor[Object.keys(this.device.data._devices.Item_DeviceProcessor)[0]].nbcores || I18n.t('commons.n/a')),
                 }}
                 glpi={this.props.glpi}
               />
