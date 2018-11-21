@@ -127,7 +127,6 @@ export default class SystemReport extends PureComponent {
   }
 
   render() {
-    console.log(this.device)
     return (
       <div className="devices">
         <div className="system-report">
