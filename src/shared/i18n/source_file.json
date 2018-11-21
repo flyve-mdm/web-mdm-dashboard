@@ -576,6 +576,9 @@
       "min": "null"
     },
     "mdm_type": "MDM Type",
+    "device_processor": "Device processor",
+    "cpu_frequency": "CPU frequency",
+    "number_cores": "Number of cores",
     "n/a": "n/a",
     "name_not_available": "Name not available",
     "problems_loading_data": "Problems loading data",
