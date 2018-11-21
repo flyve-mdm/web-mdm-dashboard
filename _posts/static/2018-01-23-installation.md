@@ -17,7 +17,7 @@ The plugin must be already installed in your GLPI instance, as they provide feat
     <tr>
         <th style="width:200px">GLPI</th>
         <td style="width:100px">9.1.x</td>
-        <td>9.2.x</td>
+        <td>9.2.x+</td>
     </tr>
     <tr>
         <th>Flyve MDM plugin</th>
@@ -47,12 +47,9 @@ git clone https://github.com/flyve-mdm/web-mdm-dashboard.git
 
 * Go to public/config.example.js
 * Rename the file to config.js
-* Add the url of your GLPI API, where indicated, you'll also see the following settings too:
-  * Optional:
-    * bugsnag: your url to your bugsnag link, for catching bugs
-  * Deprecated:
-    * Plugin token, used to chack if demo plugin is enabled to display create account option
-    * Demo token, used by demo plugin to create new accounts
+* Add the url of your GLPI API, where indicated.
+    * Optional setting:
+        * bugsnag: your url to your bugsnag link, for catching bugs
 
 <img src="{{ 'images/picto-information.png' | absolute_url }}" alt="Good to know!" height="16"> You can find the GLPI API url in Setup>General>API
 
@@ -71,8 +68,8 @@ The following commands can be used either with npm or yarn
 * For building, use one of the following commands depending of the package manager you prefer:
 
 ```console
-   npm run-script build
-   yarn build
+    npm run-script build
+    yarn build
 ```
 
 * Check that all tests pass
