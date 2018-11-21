@@ -61,19 +61,24 @@ export default class Inventory extends PureComponent {
       isLoading: true,
     }, async () => {
       try {
-        const data = await this.props.glpi.getAnItem({
+        this.data = await this.props.glpi.getAnItem({
           itemtype: this.props.itemType,
           id: this.props.itemID,
           queryString: this.props.parameters,
         })
         const object = Object.keys(this.props.fields).map(key => ({
-          [this.props.fields[key]]: data[key],
+          [this.props.fields[key]]: this.data[key],
         }))
         this.setState({
           isLoading: false,
           data: object,
         })
-        this.props.afterLoading(data.plugin_flyvemdm_fleets_id, data.computers_id)
+        if (this.props.itemType === 'PluginFlyvemdmAgent') {
+          this.props.afterLoading(this.data.plugin_flyvemdm_fleets_id, this.data.computers_id)
+        }
+        if (this.props.itemType === 'Computer') {
+          this.props.afterLoading(this.data._devices.Item_DeviceProcessor[Object.keys(this.data._devices.Item_DeviceProcessor)[0]].deviceprocessors_id)
+        }
       } catch (error) {
         this.setState({
           isLoading: false,
@@ -102,6 +107,29 @@ export default class Inventory extends PureComponent {
     </div>
   ))
 
+  /**
+   * handle build inventory list
+   * @function buildList
+   * @param {object} elements
+   */
+  buildSpecialList = (elements) => {
+    const specialList = Object.keys(elements).map((element, index) => (
+      <div
+        className="list-content"
+        key={`buildSpecialList-${index.toString()}`}
+      >
+        <div className="list-col">
+          {I18n.t(`commons.${element}`)}
+        </div>
+        <div className="list-col">
+          {elements[element]}
+        </div>
+      </div>
+    ))
+
+    return specialList
+  }
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -118,6 +146,11 @@ export default class Inventory extends PureComponent {
           {
             this.state.data.map(value => (this.buildList(value)))
           }
+          {
+            this.props.specialFields && (
+              this.buildSpecialList(this.props.specialFields)
+            )
+          }
         </div>
       )
     }
@@ -128,6 +161,7 @@ export default class Inventory extends PureComponent {
 Inventory.defaultProps = {
   parameters: {},
   afterLoading: () => {},
+  specialFields: null,
 }
 /** Inventory propTypes */
 Inventory.propTypes = {
@@ -138,4 +172,5 @@ Inventory.propTypes = {
   parameters: PropTypes.object,
   glpi: PropTypes.object.isRequired,
   afterLoading: PropTypes.func,
+  specialFields: PropTypes.object,
 }
