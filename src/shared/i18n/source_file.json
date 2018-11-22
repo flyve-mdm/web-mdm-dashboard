@@ -571,6 +571,8 @@
     "yes": "Yes",
     "no": "No",
     "recursive": "Recursive",
+    "device_battery": "Device battery",
+    "voltage": "Voltage",
     "null": {
       "default": "Null",
       "min": "null"
