@@ -577,6 +577,7 @@
       "default": "Null",
       "min": "null"
     },
+    "capacity": "Capacity",
     "mdm_type": "MDM Type",
     "device_processor": "Device processor",
     "cpu_frequency": "CPU frequency",

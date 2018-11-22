@@ -240,6 +240,7 @@ export default class SystemReport extends PureComponent {
                 fields={{
                   id: 'id',
                   voltage: 'voltage',
+                  capacity: 'capacity',
                 }}
                 glpi={this.props.glpi}
               />
