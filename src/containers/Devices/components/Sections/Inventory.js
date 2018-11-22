@@ -80,6 +80,16 @@ export default class Inventory extends PureComponent {
           })
         }
 
+        if (this.props.itemType === 'DeviceBattery') {
+          const type = await this.props.glpi.getAnItem({
+            itemtype: 'DeviceBatteryType',
+            id: this.data.devicebatterytypes_id,
+          })
+          object.push({
+            type: (type.name || I18n.t('commons.n/a')),
+          })
+        }
+
         this.setState({
           isLoading: false,
           data: object,
