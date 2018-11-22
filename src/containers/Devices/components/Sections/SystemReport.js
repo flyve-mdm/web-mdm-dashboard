@@ -51,6 +51,7 @@ export default class SystemReport extends PureComponent {
       fleetID: undefined,
       computersID: undefined,
       coreID: undefined,
+      batteryID: undefined,
     }
   }
 
@@ -82,6 +83,7 @@ export default class SystemReport extends PureComponent {
       fleetID: undefined,
       computersID: undefined,
       coreID: undefined,
+      batteryID: undefined,
       requestingInventory: false,
     })
     this.inventory.handleRefresh()
@@ -202,8 +204,8 @@ export default class SystemReport extends PureComponent {
                   with_networkports: true,
                 }}
                 glpi={this.props.glpi}
-                afterLoading={(coreID) => {
-                  this.setState({ coreID })
+                afterLoading={(coreID, batteryID) => {
+                  this.setState({ coreID, batteryID })
                 }}
                 ref={(device) => { this.device = device }}
               />
@@ -223,6 +225,21 @@ export default class SystemReport extends PureComponent {
                 }}
                 specialFields={{
                   number_cores: (this.device.data._devices.Item_DeviceProcessor[Object.keys(this.device.data._devices.Item_DeviceProcessor)[0]].nbcores || I18n.t('commons.n/a')),
+                }}
+                glpi={this.props.glpi}
+              />
+            )
+          }
+
+          {
+            this.state.batteryID && (
+              <Inventory
+                title={I18n.t('commons.device_battery')}
+                itemType="DeviceBattery"
+                itemID={this.state.batteryID}
+                fields={{
+                  id: 'id',
+                  voltage: 'voltage',
                 }}
                 glpi={this.props.glpi}
               />

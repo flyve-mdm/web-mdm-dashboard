@@ -91,7 +91,11 @@ export default class Inventory extends PureComponent {
           )
         }
         if (this.props.itemType === 'Computer') {
-          this.props.afterLoading(this.data._devices.Item_DeviceProcessor[Object.keys(this.data._devices.Item_DeviceProcessor)[0]].deviceprocessors_id)
+          const { _devices } = this.data
+          this.props.afterLoading(
+            _devices.Item_DeviceProcessor[Object.keys(_devices.Item_DeviceProcessor)[0]].deviceprocessors_id,
+            _devices.Item_DeviceBattery[Object.keys(_devices.Item_DeviceBattery)[0]].devicebatteries_id,
+          )
         }
       } catch (error) {
         this.setState({
