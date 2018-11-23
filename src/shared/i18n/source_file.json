@@ -577,6 +577,7 @@
       "default": "Null",
       "min": "null"
     },
+    "operating-system": "Operating system",
     "capacity": "Capacity",
     "mdm_type": "MDM Type",
     "device_processor": "Device processor",
