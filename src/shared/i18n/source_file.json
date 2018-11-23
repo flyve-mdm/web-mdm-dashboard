@@ -469,6 +469,7 @@
     "offline": "Offline",
     "online": "Online",
     "loading": "Loading",
+    "description": "Description",
     "tasks": "Tasks",
     "files_uploaded_succesfully!": "Files uploaded succesfully!",
     "drop_files": "Drop files here or click to upload",
@@ -577,6 +578,8 @@
       "default": "Null",
       "min": "null"
     },
+    "network": "Network",
+    "mac": "MAC",
     "operating-system": "Operating system",
     "capacity": "Capacity",
     "mdm_type": "MDM Type",

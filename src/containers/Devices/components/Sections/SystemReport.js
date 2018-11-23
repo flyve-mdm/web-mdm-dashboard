@@ -52,6 +52,7 @@ export default class SystemReport extends PureComponent {
       computersID: undefined,
       coreID: undefined,
       batteryID: undefined,
+      networkID: undefined,
     }
   }
 
@@ -84,6 +85,7 @@ export default class SystemReport extends PureComponent {
       computersID: undefined,
       coreID: undefined,
       batteryID: undefined,
+      networkID: undefined,
       requestingInventory: false,
     })
     this.inventory.handleRefresh()
@@ -204,8 +206,8 @@ export default class SystemReport extends PureComponent {
                   with_networkports: true,
                 }}
                 glpi={this.props.glpi}
-                afterLoading={(coreID, batteryID) => {
-                  this.setState({ coreID, batteryID })
+                afterLoading={(coreID, batteryID, networkID) => {
+                  this.setState({ coreID, batteryID, networkID })
                 }}
                 ref={(device) => { this.device = device }}
               />
@@ -241,6 +243,21 @@ export default class SystemReport extends PureComponent {
                   id: 'id',
                   voltage: 'voltage',
                   capacity: 'capacity',
+                }}
+                glpi={this.props.glpi}
+              />
+            )
+          }
+
+          {
+            this.state.networkID && (
+              <Inventory
+                title={I18n.t('commons.network')}
+                itemType="NetworkPort"
+                itemID={this.state.networkID}
+                fields={{
+                  mac: 'mac',
+                  name: 'description',
                 }}
                 glpi={this.props.glpi}
               />
