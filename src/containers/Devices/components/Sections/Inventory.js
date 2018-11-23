@@ -127,10 +127,11 @@ export default class Inventory extends PureComponent {
         }
 
         if (this.props.itemType === 'Computer') {
-          const { _devices } = this.data
+          const { _devices, _networkports } = this.data
           this.props.afterLoading(
             _devices.Item_DeviceProcessor[Object.keys(_devices.Item_DeviceProcessor)[0]].deviceprocessors_id,
             _devices.Item_DeviceBattery[Object.keys(_devices.Item_DeviceBattery)[0]].devicebatteries_id,
+            _networkports.NetworkPortEthernet[0].netport_id,
           )
         }
       } catch (error) {
