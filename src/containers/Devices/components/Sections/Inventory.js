@@ -66,6 +66,7 @@ export default class Inventory extends PureComponent {
           id: this.props.itemID,
           queryString: this.props.parameters,
         })
+
         const object = Object.keys(this.props.fields).map(key => ({
           [this.props.fields[key]]: this.data[key],
         }))
@@ -90,16 +91,41 @@ export default class Inventory extends PureComponent {
           })
         }
 
+        if (this.props.itemType === 'Computer') {
+          const operatingSystem = await this.props.glpi.searchItems({
+            itemtype: 'Computer',
+            criteria: [{
+              field: 2,
+              link: 'AND',
+              searchtype: 'contains',
+              value: this.props.itemID,
+            }],
+            metacriteria: [{
+              field: 'common',
+              itemtype: 'OperatingSystem',
+              link: 'AND',
+              searchtype: 'contains',
+              value: '',
+            }],
+          })
+
+          object.push({
+            'operating-system': (operatingSystem.data[0][45] || I18n.t('commons.n/a')),
+          })
+        }
+
         this.setState({
           isLoading: false,
           data: object,
         })
+
         if (this.props.itemType === 'PluginFlyvemdmAgent') {
           this.props.afterLoading(
             this.data.plugin_flyvemdm_fleets_id,
             this.data.computers_id,
           )
         }
+
         if (this.props.itemType === 'Computer') {
           const { _devices } = this.data
           this.props.afterLoading(
