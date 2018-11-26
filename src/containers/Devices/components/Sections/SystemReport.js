@@ -53,6 +53,7 @@ export default class SystemReport extends PureComponent {
       coreID: undefined,
       batteryID: undefined,
       networkID: undefined,
+      hardDrive: undefined,
     }
   }
 
@@ -86,6 +87,7 @@ export default class SystemReport extends PureComponent {
       coreID: undefined,
       batteryID: undefined,
       networkID: undefined,
+      hardDrive: undefined,
       requestingInventory: false,
     })
     this.inventory.handleRefresh()
@@ -206,8 +208,13 @@ export default class SystemReport extends PureComponent {
                   with_networkports: true,
                 }}
                 glpi={this.props.glpi}
-                afterLoading={(coreID, batteryID, networkID) => {
-                  this.setState({ coreID, batteryID, networkID })
+                afterLoading={(coreID, batteryID, networkID, hardDrive) => {
+                  this.setState({
+                    coreID,
+                    batteryID,
+                    networkID,
+                    hardDrive,
+                  })
                 }}
                 ref={(device) => { this.device = device }}
               />
@@ -226,6 +233,7 @@ export default class SystemReport extends PureComponent {
                   frequence: 'cpu_frequency',
                 }}
                 specialFields={{
+                  // eslint-disable-next-line no-underscore-dangle
                   number_cores: (this.device.data._devices.Item_DeviceProcessor[Object.keys(this.device.data._devices.Item_DeviceProcessor)[0]].nbcores || I18n.t('commons.n/a')),
                 }}
                 glpi={this.props.glpi}
@@ -258,6 +266,21 @@ export default class SystemReport extends PureComponent {
                 fields={{
                   mac: 'mac',
                   name: 'description',
+                }}
+                glpi={this.props.glpi}
+              />
+            )
+          }
+
+          {
+            (this.state.hardDrive) && (
+              <Inventory
+                title={I18n.t('commons.Storages')}
+                itemType="Item_DeviceHardDrive"
+                itemID={this.state.hardDrive}
+                fields={{
+                  designation: 'name',
+                  capacity: 'capacity',
                 }}
                 glpi={this.props.glpi}
               />
