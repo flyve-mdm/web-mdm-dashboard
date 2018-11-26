@@ -34,6 +34,17 @@ import PropTypes from 'prop-types'
 import Loader from 'components/Loader'
 import I18n from 'shared/i18n'
 
+// function getInternalData(base, type, data) {
+//   const keys = Object.keys(base[type])
+//   if (keys.length > 1) {
+//     return keys.map(key => (
+//       base[type][key][data]
+//     ))
+//   }
+
+//   return base[type][keys[0]][data]
+// }
+
 /**
  * @class Inventory
  * @extends PureComponent
@@ -61,15 +72,49 @@ export default class Inventory extends PureComponent {
       isLoading: true,
     }, async () => {
       try {
-        this.data = await this.props.glpi.getAnItem({
-          itemtype: this.props.itemType,
-          id: this.props.itemID,
-          queryString: this.props.parameters,
-        })
+        let object = []
 
-        const object = Object.keys(this.props.fields).map(key => ({
-          [this.props.fields[key]]: this.data[key],
-        }))
+        if (Array.isArray(this.props.itemID)) {
+          const data = []
+
+          for (let i = 0; i < this.props.itemID.length; i += 1) {
+            data.push(
+              // eslint-disable-next-line no-await-in-loop
+              await this.props.glpi.getAnItem({
+                itemtype: this.props.itemType,
+                id: this.props.itemID[i],
+                queryString: this.props.parameters,
+              }),
+            )
+
+            if (this.props.itemType === 'Item_DeviceHardDrive') {
+              data[i] = {
+                ...data[i],
+                // eslint-disable-next-line no-await-in-loop
+                ...await this.props.glpi.getAnItem({
+                  itemtype: 'DeviceHardDrive',
+                  id: data[i].deviceharddrives_id,
+                }),
+              }
+            }
+          }
+          this.data = data
+
+          object = this.data.map(d => Object.keys(this.props.fields)
+            .map(key => ({
+              [this.props.fields[key]]: d[key],
+            })))
+        } else {
+          this.data = await this.props.glpi.getAnItem({
+            itemtype: this.props.itemType,
+            id: this.props.itemID,
+            queryString: this.props.parameters,
+          })
+
+          object = Object.keys(this.props.fields).map(key => ({
+            [this.props.fields[key]]: this.data[key],
+          }))
+        }
 
         if (this.props.itemType === 'DeviceProcessor') {
           const manufacturer = await this.props.glpi.getAnItem({
@@ -128,10 +173,12 @@ export default class Inventory extends PureComponent {
 
         if (this.props.itemType === 'Computer') {
           const { _devices, _networkports } = this.data
+
           this.props.afterLoading(
             _devices.Item_DeviceProcessor[Object.keys(_devices.Item_DeviceProcessor)[0]].deviceprocessors_id,
             _devices.Item_DeviceBattery[Object.keys(_devices.Item_DeviceBattery)[0]].devicebatteries_id,
             _networkports.NetworkPortEthernet[0].netport_id,
+            Object.keys(_devices.Item_DeviceHardDrive),
           )
         }
       } catch (error) {
@@ -199,7 +246,28 @@ export default class Inventory extends PureComponent {
             {this.props.title}
           </div>
           {
-            this.state.data.map(value => (this.buildList(value)))
+            this.state.data.map((value, index) => {
+              if (Array.isArray(value)) {
+                return (
+                  <>
+                    {
+                      index !== 0 && (
+                        <>
+                          <div /> {/* Used to make the colors of the zebra list look good  */}
+                          <hr />
+                        </>
+                      )
+                    }
+                    {
+                      value.map(x => (
+                        this.buildList(x)
+                      ))
+                    }
+                  </>
+                )
+              }
+              return this.buildList(value)
+            })
           }
           {
             this.props.specialFields && (
@@ -212,17 +280,23 @@ export default class Inventory extends PureComponent {
     return (null)
   }
 }
+
 /** Inventory defaultProps */
 Inventory.defaultProps = {
   parameters: {},
   afterLoading: () => {},
   specialFields: null,
 }
+
 /** Inventory propTypes */
 Inventory.propTypes = {
   title: PropTypes.string.isRequired,
   itemType: PropTypes.string.isRequired,
-  itemID: PropTypes.number.isRequired,
+  itemID: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array,
+  ]).isRequired,
   fields: PropTypes.object.isRequired,
   parameters: PropTypes.object,
   glpi: PropTypes.object.isRequired,
