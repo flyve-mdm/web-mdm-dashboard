@@ -235,7 +235,7 @@ export default class Main extends PureComponent {
         renderComponent = (
           <ContentPane className="devices">
             <EditNumbers
-              numbers={[21, 22]}
+              numbers={['+584144331251']}
               save={this.changeNumbers}
             />
           </ContentPane>
