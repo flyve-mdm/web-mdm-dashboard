@@ -629,6 +629,8 @@
     "uuid": "UUID",
     "AND": "AND",
     "OR": "OR",
-    "active": "Active"
+    "active": "Active",
+    "cell_numbers": "Cell numbers",
+    "edit_numbers": "Edit numbers"
   }
 }
