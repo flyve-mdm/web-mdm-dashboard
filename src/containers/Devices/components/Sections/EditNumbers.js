@@ -59,7 +59,10 @@ export default class EditNumbers extends PureComponent {
 
   render() {
     return (
-      <>
+      <div style={{ paddingLeft: 20 }}>
+        <h3>
+          {I18n.t('commons.edit_numbers')}
+        </h3>
         {
           this.state.numbers.map((number, index) => (
             <div>
@@ -81,7 +84,7 @@ export default class EditNumbers extends PureComponent {
         >
           {I18n.t('commons.save')}
         </button>
-      </>
+      </div>
     )
   }
 }
