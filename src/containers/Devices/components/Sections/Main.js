@@ -38,6 +38,7 @@ import IconItemList from 'components/IconItemList'
 import Confirmation from 'components/Confirmation'
 import Loading from 'components/Loading'
 import ContentPane from 'components/ContentPane'
+import EditNumbers from './EditNumbers'
 
 /**
  * @class Main
@@ -53,6 +54,7 @@ export default class Main extends PureComponent {
       update: this.props.update,
       data: undefined,
       sendingPing: false,
+      changeNumbers: false,
     }
   }
 
@@ -194,6 +196,18 @@ export default class Main extends PureComponent {
     })
   }
 
+  changeNumbers = () => {
+    this.setState({
+      changeNumbers: false,
+    })
+  }
+
+  editNumbers = () => {
+    this.setState({
+      changeNumbers: true,
+    })
+  }
+
   render() {
     let renderComponent
     if (this.state.data === undefined || this.state.isLoading) {
@@ -217,87 +231,114 @@ export default class Main extends PureComponent {
           <IconItemList size={72} />
         )
       }
-      renderComponent = (
-        <ContentPane className="devices">
-          <div className="content-header">
-            <div className="item-info">
-              {iconComponent}
-              <div>
-                <div className="item-info__name">
-                  {this.state.data.name}
-                </div>
-                <div className="item-info__message">
-                  {
-                    this.state.data.is_online === 1
-                      ? I18n.t('commons.online')
-                      : I18n.t('commons.offline')
-                  }
-                </div>
-                <div className="item-info__source">
-                  {this.state.data.last_contact}
-                  &nbsp;
-                  {' '}
-                  {I18n.t('devices.main.last_contact')}
-                </div>
-                <div style={{ overflow: 'auto' }}>
-                  <div>
-                    <button
-                      className="btn btn--secondary"
-                      style={{ float: 'left', marginTop: 5, marginBottom: 5 }}
-                      onClick={this.ping}
-                      type="button"
-                    >
-                      {I18n.t('commons.ping')}
-                    </button>
+      if (this.state.changeNumbers) {
+        renderComponent = (
+          <ContentPane className="devices">
+            <EditNumbers
+              numbers={[21, 22]}
+              save={this.changeNumbers}
+            />
+          </ContentPane>
+        )
+      } else {
+        renderComponent = (
+          <ContentPane className="devices">
+            <div className="content-header">
+              <div className="item-info">
+                {iconComponent}
+                <div>
+                  <div className="item-info__name">
+                    {this.state.data.name}
+                  </div>
+                  <div className="item-info__message">
                     {
-                      this.state.sendingPing
-                        ? <Loading small />
-                        : ''
+                      this.state.data.is_online === 1
+                        ? I18n.t('commons.online')
+                        : I18n.t('commons.offline')
                     }
                   </div>
-                </div>
-                <div>
-                  <span
-                    className="iconFont editIcon"
-                    style={{ marginRight: '20px', fontSize: '20px' }}
-                    onClick={this.handleEdit}
-                    role="button"
-                    tabIndex="0"
-                  />
-                  <span
-                    className="iconFont deleteIcon"
-                    style={{ marginRight: '20px', fontSize: '20px' }}
-                    onClick={this.handleDelete}
-                    role="button"
-                    tabIndex="0"
-                  />
+                  <div className="item-info__source">
+                    {this.state.data.last_contact}
+                    &nbsp;
+                    {' '}
+                    {I18n.t('devices.main.last_contact')}
+                  </div>
+                  <div style={{ overflow: 'auto' }}>
+                    <div>
+                      <button
+                        className="btn btn--secondary"
+                        style={{ float: 'left', marginTop: 5, marginBottom: 5 }}
+                        onClick={this.ping}
+                        type="button"
+                      >
+                        {I18n.t('commons.ping')}
+                      </button>
+                      {
+                        this.state.sendingPing
+                          ? <Loading small />
+                          : ''
+                      }
+                    </div>
+                  </div>
+                  <div>
+                    <span
+                      className="iconFont editIcon"
+                      style={{ marginRight: '20px', fontSize: '20px' }}
+                      onClick={this.handleEdit}
+                      role="button"
+                      tabIndex="0"
+                    />
+                    <span
+                      className="iconFont deleteIcon"
+                      style={{ marginRight: '20px', fontSize: '20px' }}
+                      onClick={this.handleDelete}
+                      role="button"
+                      tabIndex="0"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="separator" />
-          <div className="content-info">
-            <div className="title">
-              {I18n.t('commons.version')}
-            </div>
-            <div style={{ paddingLeft: 20 }}>
-              {this.state.data.version}
-            </div>
-            <div className="title">
-              {I18n.t('commons.type')}
-            </div>
-            <div style={{ paddingLeft: 20 }}>
-              {this.state.data.mdm_type}
-            </div>
-          </div>
+            <div className="separator" />
+            <div className="content-info">
+              <div className="title">
+                {I18n.t('commons.version')}
+              </div>
+              <div style={{ paddingLeft: 20 }}>
+                {this.state.data.version}
+              </div>
+              <div className="title">
+                {I18n.t('commons.type')}
+              </div>
+              <div style={{ paddingLeft: 20 }}>
+                {this.state.data.mdm_type}
+              </div>
 
-          <Confirmation
-            title={I18n.t('devices.delete')}
-            message={this.state.data.name}
-            reference={(el) => { this.contentDialog = el }}
-          />
-        </ContentPane>
-      )
+              <div className="title">
+                {I18n.t('commons.cell_numbers')}
+              </div>
+              <div style={{ paddingLeft: 20 }}>
+                <a href="call:+584365475356">+584144331251</a>
+              </div>
+              <div style={{ padding: '10px 20px' }}>
+                <button
+                  className="btn btn--secondary"
+                  onClick={this.editNumbers}
+                  type="button"
+                >
+                  {I18n.t('commons.edit_numbers')}
+                </button>
+              </div>
+            </div>
+
+            <Confirmation
+              title={I18n.t('devices.delete')}
+              message={this.state.data.name}
+              reference={(el) => { this.contentDialog = el }}
+            />
+          </ContentPane>
+        )
+      }
     }
     return renderComponent
   }
