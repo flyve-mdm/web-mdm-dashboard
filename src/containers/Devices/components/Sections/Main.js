@@ -371,8 +371,21 @@ export default class Main extends PureComponent {
               </div>
 
               <div className="title">
-                {I18n.t('commons.cell_numbers')}
+                {I18n.t('commons.telephone_numbers')}
               </div>
+
+              {
+                this.state.numbers.map((number, index) => (
+                  <div
+                    key={`cell-number-${index.toString()}`}
+                    style={{ paddingLeft: 20 }}
+                  >
+                    <a href={`tel:${number.value}`}>
+                      { number.value }
+                    </a>
+                  </div>
+                ))
+              }
 
               <div style={{ padding: '10px 20px' }}>
                 <button
