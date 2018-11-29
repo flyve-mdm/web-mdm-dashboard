@@ -55,6 +55,7 @@ export default class Main extends PureComponent {
       data: undefined,
       sendingPing: false,
       changeNumbers: false,
+      numbers: undefined,
     }
   }
 
@@ -96,8 +97,36 @@ export default class Main extends PureComponent {
           id,
         })
 
+        let numbers = []
+
+        const deviceSimcard = await this.props.glpi.getAllItems({
+          itemtype: itemtype.Item_DeviceSimcard,
+          queryString: {
+            searchText: {
+              itemtype: itemtype.Computer,
+              items_id: id,
+            },
+          },
+        })
+        if (deviceSimcard.length > 0) {
+          const lineID = deviceSimcard.map(e => ({
+            itemtype: itemtype.Line,
+            items_id: e.lines_id,
+          }))
+
+          const lines = await this.props.glpi.getMultipleItems({
+            items: lineID,
+          })
+
+          numbers = lines.map(line => ({
+            id: line.id,
+            value: line.name,
+          }))
+        }
+
         this.setState({
           data,
+          numbers,
         })
       } catch (error) {
         this.props.toast.setNotification(this.props.handleMessage({
@@ -213,15 +242,9 @@ export default class Main extends PureComponent {
     }
   }
 
-  editNumbers = () => {
-    this.setState({
-      changeNumbers: true,
-    })
-  }
-
   render() {
     let renderComponent
-    if (this.state.data === undefined || this.state.isLoading) {
+    if (!this.state.data || !this.state.numbers || this.state.isLoading) {
       renderComponent = (
         <Loading message={`${I18n.t('commons.loading')}...`} />
       )
@@ -246,7 +269,7 @@ export default class Main extends PureComponent {
         renderComponent = (
           <ContentPane className="devices">
             <EditNumbers
-              numbers={['+584144331251']}
+              numbers={this.state.numbers}
               save={this.changeNumbers}
             />
           </ContentPane>
@@ -328,13 +351,13 @@ export default class Main extends PureComponent {
               <div className="title">
                 {I18n.t('commons.cell_numbers')}
               </div>
-              <div style={{ paddingLeft: 20 }}>
-                <a href="call:+584365475356">+584144331251</a>
-              </div>
+
               <div style={{ padding: '10px 20px' }}>
                 <button
                   className="btn btn--secondary"
-                  onClick={this.editNumbers}
+                  onClick={() => {
+                    this.setState({ changeNumbers: true })
+                  }}
                   type="button"
                 >
                   {I18n.t('commons.edit_numbers')}
