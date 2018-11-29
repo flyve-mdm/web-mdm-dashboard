@@ -58,7 +58,10 @@ export default class EditNumbers extends PureComponent {
     this.setState(prevState => ({
       numbers: [
         ...prevState.numbers,
-        '',
+        {
+          id: 0,
+          value: '',
+        },
       ],
     }))
   }
@@ -68,7 +71,7 @@ export default class EditNumbers extends PureComponent {
     if (myPhoneRegex.test(value)) {
       this.setState((prevState) => {
         const newValue = [...prevState.numbers]
-        newValue[index] = value
+        newValue[index].value = value
 
         return ({
           numbers: newValue,
@@ -89,7 +92,7 @@ export default class EditNumbers extends PureComponent {
               <Input
                 type="text"
                 name={index}
-                value={number}
+                value={number.value}
                 className="win-textbox"
                 function={this.changeNumber}
                 delete={this.deleteNumber}
