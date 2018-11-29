@@ -64,14 +64,17 @@ export default class EditNumbers extends PureComponent {
   }
 
   changeNumber = (index, value) => {
-    this.setState((prevState) => {
-      const newValue = [...prevState.numbers]
-      newValue[index] = value
+    const myPhoneRegex = /^[0-9-+s()]*$/i
+    if (myPhoneRegex.test(value)) {
+      this.setState((prevState) => {
+        const newValue = [...prevState.numbers]
+        newValue[index] = value
 
-      return ({
-        numbers: newValue,
+        return ({
+          numbers: newValue,
+        })
       })
-    })
+    }
   }
 
   render() {
