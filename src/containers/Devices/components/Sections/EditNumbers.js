@@ -49,19 +49,28 @@ export default class EditNumbers extends PureComponent {
   }
 
   deleteNumber = (index) => {
-    console.log(this.state.numbers.slice(0, index).concat(this.state.numbers.slice(index + 1)) )
     this.setState(prevState => ({
       numbers: prevState.numbers.slice(0, index).concat(prevState.numbers.slice(index + 1)),
     }))
   }
 
-  changeNumber(index, value) {
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    const newValue = [...this.state.numbers]
-    newValue[index] = value
+  addNewNumber = () => {
+    this.setState(prevState => ({
+      numbers: [
+        ...prevState.numbers,
+        '',
+      ],
+    }))
+  }
 
-    this.setState({
-      numbers: newValue,
+  changeNumber = (index, value) => {
+    this.setState((prevState) => {
+      const newValue = [...prevState.numbers]
+      newValue[index] = value
+
+      return ({
+        numbers: newValue,
+      })
     })
   }
 
@@ -88,20 +97,31 @@ export default class EditNumbers extends PureComponent {
         }
         <button
           className="btn btn--secondary"
-          style={{ marginRight: 10 }}
-          onClick={() => this.props.save(this.state.numbers)}
+          style={{ marginBottom: 10 }}
+          onClick={this.addNewNumber}
           type="button"
         >
-          {I18n.t('commons.cancel')}
+          {`+ ${I18n.t('commons.add')}`}
         </button>
 
-        <button
-          className="btn btn--primary"
-          onClick={() => this.props.save(this.state.numbers)}
-          type="button"
-        >
-          {I18n.t('commons.save')}
-        </button>
+        <div>
+          <button
+            className="btn btn--secondary"
+            style={{ marginRight: 10 }}
+            onClick={() => this.props.save(this.state.numbers)}
+            type="button"
+          >
+            {I18n.t('commons.cancel')}
+          </button>
+
+          <button
+            className="btn btn--primary"
+            onClick={() => this.props.save(this.state.numbers)}
+            type="button"
+          >
+            {I18n.t('commons.save')}
+          </button>
+        </div>
       </div>
     )
   }
