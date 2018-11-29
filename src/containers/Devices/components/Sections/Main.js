@@ -229,7 +229,29 @@ export default class Main extends PureComponent {
     if (newNumbers) {
       this.setState({
         isLoading: true,
-      }, async () => {
+      }, () => {
+        newNumbers.forEach(async (newNumber) => {
+          if (newNumber.id === 0) {
+            const deviceSimcard = await this.props.glpi.addItem({
+              itemtype: itemtype.DeviceSimcard,
+              input: {},
+            })
+
+            const line = await this.props.glpi.addItem({
+              itemtype: itemtype.Line,
+              input: { name: newNumber.value },
+            })
+
+            await this.props.glpi.addItem({
+              itemtype: itemtype.Item_DeviceSimcard,
+              input: {
+                lines_id: line.id,
+                devicesimcards_id: deviceSimcard.id,
+              },
+            })
+          }
+        })
+
         this.setState({
           isLoading: false,
           changeNumbers: false,
