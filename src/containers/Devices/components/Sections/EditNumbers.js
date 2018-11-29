@@ -79,6 +79,15 @@ export default class EditNumbers extends PureComponent {
         }
         <button
           className="btn btn--secondary"
+          style={{ marginRight: 10 }}
+          onClick={() => this.props.save(this.state.numbers)}
+          type="button"
+        >
+          {I18n.t('commons.cancel')}
+        </button>
+
+        <button
+          className="btn btn--primary"
           onClick={() => this.props.save(this.state.numbers)}
           type="button"
         >

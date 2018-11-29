@@ -196,10 +196,21 @@ export default class Main extends PureComponent {
     })
   }
 
-  changeNumbers = () => {
-    this.setState({
-      changeNumbers: false,
-    })
+  changeNumbers = (newNumbers) => {
+    if (newNumbers) {
+      this.setState({
+        isLoading: true,
+      }, async () => {
+        this.setState({
+          isLoading: false,
+          changeNumbers: false,
+        })
+      })
+    } else {
+      this.setState({
+        changeNumbers: false,
+      })
+    }
   }
 
   editNumbers = () => {
