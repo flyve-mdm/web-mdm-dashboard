@@ -106,9 +106,9 @@ class Input extends PureComponent {
   /**
    * Delete an email of the list
    * @async
-   * @function deleteEmail
+   * @function deleteInput
    */
-  deleteEmail = async () => {
+  deleteInput = async () => {
     const isOK = await Confirmation.isOK(this.contentDialog)
     if (isOK) this.props.delete(this.props.name)
   }
@@ -123,7 +123,7 @@ class Input extends PureComponent {
         <span
           className="iconFont deleteIcon"
           style={{ margin: 10, fontSize: 18 }}
-          onClick={this.deleteEmail}
+          onClick={this.deleteInput}
           role="button"
           tabIndex="0"
         />

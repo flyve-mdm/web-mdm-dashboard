@@ -32,6 +32,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 import I18n from 'shared/i18n'
+import { Input } from 'components/Forms'
 
 /**
  * @class EditNumbers
@@ -45,6 +46,13 @@ export default class EditNumbers extends PureComponent {
     this.state = {
       numbers: this.props.numbers,
     }
+  }
+
+  deleteNumber = (index) => {
+    console.log(this.state.numbers.slice(0, index).concat(this.state.numbers.slice(index + 1)) )
+    this.setState(prevState => ({
+      numbers: prevState.numbers.slice(0, index).concat(prevState.numbers.slice(index + 1)),
+    }))
   }
 
   changeNumber(index, value) {
@@ -66,12 +74,13 @@ export default class EditNumbers extends PureComponent {
         {
           this.state.numbers.map((number, index) => (
             <div>
-              <input
+              <Input
                 type="text"
                 name={index}
                 value={number}
                 className="win-textbox"
-                onChange={e => this.changeNumber(e.target.name, e.target.value)}
+                function={this.changeNumber}
+                delete={this.deleteNumber}
                 key={`number-${index.toString()}`}
               />
             </div>
