@@ -50,5 +50,7 @@ export default {
   PluginFlyvemdmdemoAccountvalidation: 'PluginFlyvemdmdemoAccountvalidation',
   PluginFlyvemdmEntityconfig: 'PluginFlyvemdmEntityconfig',
   PluginFlyvemdmInvitationlog: 'PluginFlyvemdmInvitationlog',
+  DeviceSimcard: 'DeviceSimcard',
   Item_DeviceSimcard: 'Item_DeviceSimcard',
+  Line: 'Line',
 }
