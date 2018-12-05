@@ -225,13 +225,15 @@ export default class Main extends PureComponent {
     })
   }
 
-  changeNumbers = (newNumbers) => {
+  changeNumbers = (newNumbers, deleteNumbers) => {
+    console.log(newNumbers)
     if (newNumbers) {
       this.setState({
         isLoading: true,
-      }, () => {
+      }, async () => {
         newNumbers.forEach(async (newNumber) => {
           if (newNumber.id === 0) {
+            console.log(1)
             const deviceSimcard = await this.props.glpi.addItem({
               itemtype: itemtype.DeviceSimcard,
               input: {},
@@ -249,7 +251,8 @@ export default class Main extends PureComponent {
                 devicesimcards_id: deviceSimcard.id,
               },
             })
-          } else {
+          } else if (newNumber.value) {
+            console.log(2)
             await this.props.glpi.updateItem({
               itemtype: itemtype.Line,
               id: newNumber.id,
@@ -259,6 +262,46 @@ export default class Main extends PureComponent {
             })
           }
         })
+
+        if (deleteNumbers) {
+          console.log(3)
+
+          const itemDeviceSimcard = await this.props.glpi.getAllItems({
+            itemtype: itemtype.Item_DeviceSimcard,
+            queryString: {
+              searchText: {
+                itemtype: itemtype.Computer,
+                items_id: this.state.id,
+              },
+            },
+          })
+
+          deleteNumbers.forEach(async (numberID) => {
+            console.log(numberID)
+            let deviceSimcard
+
+            itemDeviceSimcard.forEach((x) => {
+              if (x.lines_id === numberID) {
+                deviceSimcard = x
+              }
+            })
+
+            await this.props.glpi.deleteItem({
+              itemtype: itemtype.Line,
+              id: numberID,
+            })
+
+            await this.props.glpi.deleteItem({
+              itemtype: itemtype.DeviceSimcard,
+              id: deviceSimcard.devicesimcards_id,
+            })
+
+            await this.props.glpi.deleteItem({
+              itemtype: itemtype.Item_DeviceSimcard,
+              id: deviceSimcard.id,
+            })
+          })
+        }
 
         this.setState({
           isLoading: false,
