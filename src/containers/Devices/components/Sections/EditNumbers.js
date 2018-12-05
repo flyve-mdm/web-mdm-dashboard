@@ -46,9 +46,13 @@ export default class EditNumbers extends PureComponent {
     this.state = {
       numbers: this.props.numbers,
     }
+
+    this.deleteNumbers = []
   }
 
   deleteNumber = (index) => {
+    this.deleteNumbers.push(this.state.numbers[index].id)
+
     this.setState(prevState => ({
       numbers: prevState.numbers.slice(0, index).concat(prevState.numbers.slice(index + 1)),
     }))
@@ -122,7 +126,7 @@ export default class EditNumbers extends PureComponent {
 
           <button
             className="btn btn--primary"
-            onClick={() => this.props.save(this.state.numbers)}
+            onClick={() => this.props.save(this.state.numbers, this.deleteNumbers)}
             type="button"
           >
             {I18n.t('commons.save')}
