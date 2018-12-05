@@ -249,6 +249,14 @@ export default class Main extends PureComponent {
                 devicesimcards_id: deviceSimcard.id,
               },
             })
+          } else {
+            await this.props.glpi.updateItem({
+              itemtype: itemtype.Line,
+              id: newNumber.id,
+              input: {
+                name: newNumber.value,
+              },
+            })
           }
         })
 
