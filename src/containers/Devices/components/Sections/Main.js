@@ -110,6 +110,7 @@ export default class Main extends PureComponent {
             },
           },
         })
+
         if (deviceSimcard.length > 0) {
           const lineID = deviceSimcard.map(e => ({
             itemtype: itemtype.Line,
