@@ -33,6 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import I18n from 'shared/i18n'
 import { Input } from 'components/Forms'
+import EmptyMessage from 'components/EmptyMessage'
 
 /**
  * @class EditNumbers
@@ -111,6 +112,14 @@ export default class EditNumbers extends PureComponent {
               />
             </div>
           ))
+        }
+        {
+          this.state.numbers.length === 0 && (
+            <EmptyMessage
+              message={I18n.t('commons.not_available')}
+              style={{ margin: '20px 0' }}
+            />
+          )
         }
         <button
           className="btn btn--secondary"
