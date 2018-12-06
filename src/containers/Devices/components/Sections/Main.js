@@ -453,6 +453,13 @@ export default class Main extends PureComponent {
                   </div>
                 ))
               }
+              {
+                this.state.numbers.length === 0 && (
+                  <div style={{ padding: '0 20px' }}>
+                    {I18n.t('commons.not_available')}
+                  </div>
+                )
+              }
 
               <div style={{ padding: '10px 20px' }}>
                 <button
