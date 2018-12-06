@@ -118,7 +118,7 @@ export default class EditNumbers extends PureComponent {
           <button
             className="btn btn--secondary"
             style={{ marginRight: 10 }}
-            onClick={() => this.props.save(this.state.numbers)}
+            onClick={() => this.props.cancel()}
             type="button"
           >
             {I18n.t('commons.cancel')}
@@ -140,5 +140,6 @@ export default class EditNumbers extends PureComponent {
 /** EditNumbers propTypes */
 EditNumbers.propTypes = {
   save: PropTypes.func.isRequired,
+  cancel: PropTypes.func.isRequired,
   numbers: PropTypes.array.isRequired,
 }
