@@ -37,7 +37,7 @@ import I18n from 'shared/i18n'
  * @return {component} Message to show
  */
 const EmptyMessage = props => (
-  <div className="center-block-content">
+  <div className="center-block-content" style={props.style}>
     {
         props.icon && props.showIcon
           ? <span className={`icon-empty-message iconFont ${props.icon}`} />
@@ -53,12 +53,14 @@ EmptyMessage.propTypes = {
   icon: PropTypes.string,
   showIcon: PropTypes.bool,
   message: PropTypes.string,
+  style: PropTypes.object,
 }
 
 EmptyMessage.defaultProps = {
   icon: null,
   showIcon: false,
   message: I18n.t('commons.no_selection'),
+  style: {},
 }
 
 export default EmptyMessage
