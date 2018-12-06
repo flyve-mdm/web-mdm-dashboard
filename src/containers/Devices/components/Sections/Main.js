@@ -55,7 +55,7 @@ export default class Main extends PureComponent {
       data: undefined,
       sendingPing: false,
       changeNumbers: false,
-      numbers: undefined,
+      numbers: [],
     }
   }
 
@@ -65,6 +65,8 @@ export default class Main extends PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.id !== this.state.id || prevState.update !== this.state.update) {
+      this.handleRefresh()
+    } else if (this.state.changeNumbers === 2) {
       this.handleRefresh()
     }
   }
@@ -127,6 +129,8 @@ export default class Main extends PureComponent {
         this.setState({
           data,
           numbers,
+          isLoading: false,
+          changeNumbers: false,
         })
       } catch (error) {
         this.props.toast.setNotification(this.props.handleMessage({
@@ -225,94 +229,104 @@ export default class Main extends PureComponent {
     })
   }
 
-  changeNumbers = (newNumbers, deleteNumbers) => {
-    console.log(newNumbers)
-    if (newNumbers) {
-      this.setState({
-        isLoading: true,
-      }, async () => {
-        newNumbers.forEach(async (newNumber) => {
-          if (newNumber.id === 0) {
-            console.log(1)
-            const deviceSimcard = await this.props.glpi.addItem({
-              itemtype: itemtype.DeviceSimcard,
-              input: {},
-            })
+  changeNumbers = async (newNumbers, deleteNumbers) => {
+    this.setState({
+      isLoading: true,
+      changeNumbers: 0,
+    })
 
-            const line = await this.props.glpi.addItem({
-              itemtype: itemtype.Line,
-              input: { name: newNumber.value },
-            })
-
-            await this.props.glpi.addItem({
-              itemtype: itemtype.Item_DeviceSimcard,
-              input: {
-                lines_id: line.id,
-                devicesimcards_id: deviceSimcard.id,
-              },
-            })
-          } else if (newNumber.value) {
-            console.log(2)
-            await this.props.glpi.updateItem({
-              itemtype: itemtype.Line,
-              id: newNumber.id,
-              input: {
-                name: newNumber.value,
-              },
-            })
-          }
+    // Update and add numbers
+    newNumbers.forEach(async (newNumber, index) => {
+      if (newNumber.id === 0) {
+        const deviceSimcard = await this.props.glpi.addItem({
+          itemtype: itemtype.DeviceSimcard,
+          input: {},
         })
 
-        if (deleteNumbers) {
-          console.log(3)
+        const line = await this.props.glpi.addItem({
+          itemtype: itemtype.Line,
+          input: { name: newNumber.value },
+        })
 
-          const itemDeviceSimcard = await this.props.glpi.getAllItems({
-            itemtype: itemtype.Item_DeviceSimcard,
-            queryString: {
-              searchText: {
-                itemtype: itemtype.Computer,
-                items_id: this.state.id,
-              },
-            },
-          })
+        await this.props.glpi.addItem({
+          itemtype: itemtype.Item_DeviceSimcard,
+          input: {
+            lines_id: line.id,
+            devicesimcards_id: deviceSimcard.id,
+          },
+        })
+      } else if (newNumber.value) {
+        await this.props.glpi.updateItem({
+          itemtype: itemtype.Line,
+          id: newNumber.id,
+          input: {
+            name: newNumber.value,
+          },
+        })
+      }
 
-          deleteNumbers.forEach(async (numberID) => {
-            console.log(numberID)
-            let deviceSimcard
+      // Counter to update the device data
+      if (newNumbers.length === index + 1) {
+        // validator used to update the data
+        // (when this value reaches two the component is updated)
+        const update = deleteNumbers.length > 0
+          ? 1
+          : 2
+        this.setState(prevState => ({
+          changeNumbers: prevState.changeNumbers + update,
+        }))
+      }
+    })
 
-            itemDeviceSimcard.forEach((x) => {
-              if (x.lines_id === numberID) {
-                deviceSimcard = x
-              }
-            })
+    // Delete numbers
+    const itemDeviceSimcard = await this.props.glpi.getAllItems({
+      itemtype: itemtype.Item_DeviceSimcard,
+      queryString: {
+        searchText: {
+          itemtype: itemtype.Computer,
+          items_id: this.state.id,
+        },
+      },
+    })
 
-            await this.props.glpi.deleteItem({
-              itemtype: itemtype.Line,
-              id: numberID,
-            })
+    await deleteNumbers.forEach(async (numberID, index) => {
+      let deviceSimcard
 
-            await this.props.glpi.deleteItem({
-              itemtype: itemtype.DeviceSimcard,
-              id: deviceSimcard.devicesimcards_id,
-            })
-
-            await this.props.glpi.deleteItem({
-              itemtype: itemtype.Item_DeviceSimcard,
-              id: deviceSimcard.id,
-            })
-          })
+      itemDeviceSimcard.forEach((x) => {
+        if (x.lines_id === numberID) {
+          deviceSimcard = x
         }
+      })
 
-        this.setState({
-          isLoading: false,
-          changeNumbers: false,
+      if (deviceSimcard) {
+        await this.props.glpi.deleteItem({
+          itemtype: itemtype.Line,
+          id: numberID,
         })
-      })
-    } else {
-      this.setState({
-        changeNumbers: false,
-      })
-    }
+
+        await this.props.glpi.deleteItem({
+          itemtype: itemtype.DeviceSimcard,
+          id: deviceSimcard.devicesimcards_id,
+        })
+
+        await this.props.glpi.deleteItem({
+          itemtype: itemtype.Item_DeviceSimcard,
+          id: deviceSimcard.id,
+        })
+
+        // Counter to update the device data
+        if (deleteNumbers.length === index + 1) {
+          // validator used to update the data
+          // (when this value reaches two the component is updated)
+          const update = newNumbers.length > 0
+            ? 1
+            : 2
+          this.setState(prevState => ({
+            changeNumbers: prevState.changeNumbers + update,
+          }))
+        }
+      }
+    })
   }
 
   render() {
@@ -344,6 +358,7 @@ export default class Main extends PureComponent {
             <EditNumbers
               numbers={this.state.numbers}
               save={this.changeNumbers}
+              cancel={() => this.setState({ changeNumbers: false })}
             />
           </ContentPane>
         )
