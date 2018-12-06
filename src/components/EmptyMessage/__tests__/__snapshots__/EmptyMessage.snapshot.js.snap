@@ -3,6 +3,7 @@
 exports[`EmptyMessage renders EmptyMessage 1`] = `
 <div
   className="center-block-content"
+  style={Object {}}
 >
   <h1
     className="empty-message"
