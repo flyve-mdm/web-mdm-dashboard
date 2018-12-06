@@ -86,7 +86,13 @@ export default class EditNumbers extends PureComponent {
 
   render() {
     return (
-      <div style={{ paddingLeft: 20 }}>
+      <form
+        style={{ paddingLeft: 20 }}
+        onSubmit={(e) => {
+          e.preventDefault()
+          this.props.save(this.state.numbers, this.deleteNumbers)
+        }}
+      >
         <h3>
           {I18n.t('commons.edit_numbers')}
         </h3>
@@ -101,6 +107,7 @@ export default class EditNumbers extends PureComponent {
                 function={this.changeNumber}
                 delete={this.deleteNumber}
                 key={`number-${index.toString()}`}
+                required
               />
             </div>
           ))
@@ -126,13 +133,12 @@ export default class EditNumbers extends PureComponent {
 
           <button
             className="btn btn--primary"
-            onClick={() => this.props.save(this.state.numbers, this.deleteNumbers)}
-            type="button"
+            type="submit"
           >
             {I18n.t('commons.save')}
           </button>
         </div>
-      </div>
+      </form>
     )
   }
 }
