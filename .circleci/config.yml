@@ -36,7 +36,7 @@ references:
     run:
       name: Install python dependencies
       command: source ci/scripts/python_install.sh
-  
+
   config_file: &config_file
     run:
       name: Create configuration file
@@ -52,7 +52,7 @@ references:
   start_server: &start_server
     run:
       name: Start server in background
-      command: yarn start:only > ../yarn.log
+      command: yarn start > ../yarn.log
 
       background: true
 
