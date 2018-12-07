@@ -101,14 +101,8 @@ export default class Main extends PureComponent {
 
         let numbers = []
 
-        const deviceSimcard = await this.props.glpi.getAllItems({
-          itemtype: itemtype.Item_DeviceSimcard,
-          queryString: {
-            searchText: {
-              itemtype: itemtype.Computer,
-              items_id: id,
-            },
-          },
+        const deviceSimcard = await this.props.glpi.genericRequest({
+          path: `${itemtype.Item_DeviceSimcard}/?searchText[itemtype]=${itemtype.Computer}&searchText[items_id]=${id}`
         })
 
         if (deviceSimcard.length > 0) {
@@ -252,6 +246,8 @@ export default class Main extends PureComponent {
         await this.props.glpi.addItem({
           itemtype: itemtype.Item_DeviceSimcard,
           input: {
+            itemtype: itemtype.Computer,
+            items_id: this.state.id,
             lines_id: line.id,
             devicesimcards_id: deviceSimcard.id,
           },
