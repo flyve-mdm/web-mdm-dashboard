@@ -10889,7 +10889,7 @@ react-is@^16.6.1, react-is@^16.6.3:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
   integrity sha512-u7FDWtthB4rWibG/+mFbVd5FvdI20yde86qKGx4lVUTWmPlSWQ4QxbBIrrs+HnXGbxOUlUzTAP/VDmvCwaP2yA==
 
-react-markdown@^4.0.0:
+react-markdown@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-4.0.4.tgz#bdc882bc3eb4dfac45d57bfe58d8f482c5a85a64"
   integrity sha512-G2dpkraP12A/1xZ1oJgm0hop213kscc7jMY0hqlx9VgxJ+5Jda1C+E+HVFL8PL0WGMVxgh95ksQzFXYGBcnQ9g==
