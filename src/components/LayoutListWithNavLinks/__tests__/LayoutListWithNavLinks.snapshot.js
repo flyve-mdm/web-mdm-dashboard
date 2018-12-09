@@ -56,13 +56,13 @@ describe('LayoutListWithNavLinks', () => {
           routes={[
             {
               path: '/',
-              name: 'users',
+              name: 'about.overview.title',
               component: <ul />,
               exact: true,
             },
             {
-              path: '/test',
-              name: 'invitations',
+              path: '/system_information',
+              name: 'about.system_information.title',
               component: <ol />,
               exact: true,
             },
