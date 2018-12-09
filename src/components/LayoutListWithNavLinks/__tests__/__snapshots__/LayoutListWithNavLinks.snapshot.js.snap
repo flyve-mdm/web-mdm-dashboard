@@ -16,7 +16,7 @@ exports[`LayoutListWithNavLinks renders LayoutListWithNavLinks 1`] = `
           href="/test"
           onClick={[Function]}
         >
-          test 2
+          invitations
         </a>
       </li>
     </ul>
