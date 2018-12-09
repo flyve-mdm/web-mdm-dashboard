@@ -210,8 +210,8 @@ jobs:
       - *restore_node_cache
       - *restore_build_cache
       - *config_file
-      - *start_server
       - *unit_test
+      - *start_server
       - *end_to_end_test
       - *webhint_test
       - *restore_build_cache
