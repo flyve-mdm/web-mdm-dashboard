@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/13</span>
+        <span class='fraction'>0/8</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/6</span>
       </div>
     </div>
   </div>
@@ -110,7 +110,7 @@ layout: coverage
 62
 63
 64
-65</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+65</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,11 +170,11 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -202,7 +202,7 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-import React,<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cstat-no" title="statement not covered" >import React, {</span>
   PureComponent,
 } from 'react'
 &nbsp;
@@ -211,15 +211,15 @@ import React,<span class="cstat-no" title="statement not covered" > {<span class
  * @param {function} importComponent
  * @return {component} The imported component
  */
-const withAsyncComponent = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >im</span>portComponent =&gt; c<span class="cstat-no" title="statement not covered" >lass AsyncComponent extends PureComponent {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+const withAsyncComponent = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >importComponent</span> =&gt; <span class="cstat-no" title="statement not covered" >class AsyncComponent extends PureComponent <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span></span></span>
     state = {
       component: null,
     }
 &nbsp;
     /** Import the component */
-<span class="fstat-no" title="function not covered" >    co</span>mponentDidMount() {
+<span class="fstat-no" title="function not covered" >    componentDidMount</span>() {
 <span class="cstat-no" title="statement not covered" >      importComponent()</span>
-        .th<span class="fstat-no" title="function not covered" >en</span>((cmp) =&gt; {
+        .then((<span class="fstat-no" title="function not covered" >cmp) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >          this.setState({</span>
             component: cmp.default,
           })
@@ -230,11 +230,11 @@ const withAsyncComponent = <span class="cstat-no" title="statement not covered" 
      * Render component
      * @function render
      */
-<span class="fstat-no" title="function not covered" >    re</span>nder() {
+<span class="fstat-no" title="function not covered" >    render</span>() {
       const C = <span class="cstat-no" title="statement not covered" >this.state.component</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      return C ? &lt;C {...this.props} /&gt; : null</span>
-    }<span class="cstat-no" title="statement not covered" ></span>
+    }
 }
 &nbsp;
 export default withAsyncComponent
@@ -244,7 +244,7 @@ export default withAsyncComponent
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 21 2018 22:40:10 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Dec 09 2018 23:21:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

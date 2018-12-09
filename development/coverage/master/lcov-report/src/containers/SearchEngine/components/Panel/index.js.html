@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/19</span>
+        <span class='fraction'>0/11</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>0/10</span>
       </div>
     </div>
   </div>
@@ -121,10 +121,7 @@ layout: coverage
 73
 74
 75
-76
-77
-78</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+76</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -176,13 +173,6 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -192,15 +182,21 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -228,52 +224,50 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-/** import dependencies */
-import React,<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >import React, {</span>
   PureComponent,
 } from 'react'
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import PanelResult f<span class="cstat-no" title="statement not covered" >rom './PanelResults'<span class="cstat-no" title="statement not covered" ></span></span>
-import PanelFields <span class="cstat-no" title="statement not covered" >from './PanelFields'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
+<span class="cstat-no" title="statement not covered" >import PanelResult from './PanelResults'</span>
+<span class="cstat-no" title="statement not covered" >import PanelFields from './PanelFields'</span>
 &nbsp;
 /**
  * Component with the panel with the search results
  * @class Panel
  * @extends PureComponent
  */
-class Panel extends PureComponent {<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
+class Panel extends PureComponent <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
   /**
    * Create array of fields
    * @function createFields
    * @return {array}
    */
-  createFields = ()<span class="fstat-no" title="function not covered" > =</span>&gt; {
-    const fields = []<span class="cstat-no" title="statement not covered" ></span>
-    th<span class="cstat-no" title="statement not covered" >is.props.itemResults.length &amp;&amp; fields.push(...this.props.itemResults[0].map(fi<span class="fstat-no" title="function not covered" >el</span>d =&gt; [<span class="cstat-no" title="statement not covered" ></span></span>
+  createFields = <span class="fstat-no" title="function not covered" >() =&gt; </span>{
+    const fields = <span class="cstat-no" title="statement not covered" >[]</span>
+<span class="cstat-no" title="statement not covered" >    this.props.itemResults.length &amp;&amp; fields.push(...this.props.itemResults[0].map(<span class="fstat-no" title="function not covered" >field</span> =&gt; <span class="cstat-no" title="statement not covered" >[</span></span>
       field.fieldId,
       field.fieldName,
     ]))
-    re<span class="cstat-no" title="statement not covered" >turn fields</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return fields</span>
   }
 &nbsp;
   /**
    * Render component
    * @function render
    */
-  render() {
-    return (<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span>
-      &lt;React.Fragment&gt;
-        &lt;div className="searchList"&gt;
-          &lt;PanelFields fields={this.createFields()} /&gt;
-          &lt;PanelResult itemResults={this.props.itemResults} /&gt;
-        &lt;/div&gt;
-      &lt;/React.Fragment&gt;
+<span class="fstat-no" title="function not covered" >  render</span>() {
+<span class="cstat-no" title="statement not covered" >    return (</span>
+      &lt;div className="searchList"&gt;
+        &lt;PanelFields fields={this.createFields()} /&gt;
+        &lt;PanelResult itemResults={this.props.itemResults} /&gt;
+      &lt;/div&gt;
     )
   }
 }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >Panel.propTypes = {</span>
-  itemResults: PropTypes.array.isRequired,<span class="cstat-no" title="statement not covered" ></span>
+  itemResults: PropTypes.array.isRequired,
 }
 &nbsp;
 export default Panel
@@ -283,7 +277,7 @@ export default Panel
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 21 2018 22:40:10 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Dec 09 2018 23:21:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

@@ -25,22 +25,22 @@ layout: coverage
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/20</span>
+        <span class='fraction'>0/16</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/15</span>
+        <span class='fraction'>0/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/11</span>
+        <span class='fraction'>0/9</span>
       </div>
     </div>
   </div>
@@ -127,7 +127,7 @@ layout: coverage
 79
 80
 81
-82</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+82</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -208,7 +208,7 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ></span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -237,7 +237,7 @@ layout: coverage
  */
 &nbsp;
 /** import dependencies */
-import withAsyncComponent <span class="cstat-no" title="statement not covered" >from 'hoc/withAsyncComponent'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cstat-no" title="statement not covered" >import withAsyncComponent from 'hoc/withAsyncComponent'</span>
 &nbsp;
 /**
  * Represents all private routes from Settings
@@ -247,43 +247,43 @@ import withAsyncComponent <span class="cstat-no" title="statement not covered" >
 const routes = <span class="cstat-no" title="statement not covered" >[{</span>
   path: '/',
   name: 'commons.no_selection',
-  component: withAsyncComponent(() =&gt; import('c<span class="fstat-no" title="function not covered" >om</span>pone<span class="cstat-no" title="statement not covered" >nts/EmptyMessage')),<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+  component: withAsyncComponent(<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; import(</span>'components/EmptyMessage')),</span></span>
   exact: true,
 },
 {
   path: '/entity',
   name: 'commons.entity',
-  component: withAsyncComponent(() =&gt; import('.<span class="fstat-no" title="function not covered" >/c</span>ompo<span class="cstat-no" title="statement not covered" >nents/Entity')),<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+  component: withAsyncComponent(<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; import(</span>'./components/Entity')),</span></span>
   exact: true,
 },
 {
   path: '/profiles',
   name: 'commons.profiles',
-  component: withAsyncComponent(() =&gt; import('.<span class="fstat-no" title="function not covered" >/c</span>ompo<span class="cstat-no" title="statement not covered" >nents/Profiles')),<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+  component: withAsyncComponent(<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; import(</span>'./components/Profiles')),</span></span>
   exact: false,
 },
 {
   path: '/supervision',
   name: 'commons.supervision',
-  component: withAsyncComponent(() =&gt; import('.<span class="fstat-no" title="function not covered" >/c</span>ompo<span class="cstat-no" title="statement not covered" >nents/Supervision')),<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+  component: withAsyncComponent(<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; import(</span>'./components/Supervision')),</span></span>
   exact: false,
 },
 {
   path: '/security',
   name: 'commons.security',
-  component: withAsyncComponent(() =&gt; import('.<span class="fstat-no" title="function not covered" >/c</span>ompo<span class="cstat-no" title="statement not covered" >nents/Security')),<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+  component: withAsyncComponent(<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; import(</span>'./components/Security')),</span></span>
   exact: false,
 },
 {
   path: '/notifications',
   name: 'commons.notifications',
-  component: withAsyncComponent(() =&gt; import('.<span class="fstat-no" title="function not covered" >/c</span>ompo<span class="cstat-no" title="statement not covered" >nents/Notifications')),<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+  component: withAsyncComponent(<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; import(</span>'./components/Notifications')),</span></span>
   exact: false,
 },
 {
   path: '/display',
   name: 'commons.display',
-  component: withAsyncComponent(() =&gt; import('.<span class="fstat-no" title="function not covered" >/c</span>ompo<span class="cstat-no" title="statement not covered" >nents/Display')),<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span>
+  component: withAsyncComponent(<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; import(</span>'./components/Display')),</span></span>
   exact: false,
 },
 ]
@@ -295,7 +295,7 @@ export default routes
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 21 2018 22:40:10 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Dec 09 2018 23:21:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

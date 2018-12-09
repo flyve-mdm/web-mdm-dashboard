@@ -4,7 +4,7 @@ layout: coverage
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/containers/SearchEngine/components/SearchQueryBuilder.js</title>
+    <title>Code coverage report for src/containers/SearchEngine/components/ItemTypeSelector.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,28 +19,28 @@ layout: coverage
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../../../index.html">All files</a> / <a href="index.html">src/containers/SearchEngine/components</a> SearchQueryBuilder.js
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/containers/SearchEngine/components</a> ItemTypeSelector.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/14</span>
+        <span class='fraction'>0/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/1</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/8</span>
+        <span class='fraction'>0/5</span>
       </div>
     </div>
   </div>
@@ -122,10 +122,7 @@ layout: coverage
 74
 75
 76
-77
-78
-79</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+77</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,7 +153,6 @@ layout: coverage
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,12 +193,12 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -230,63 +226,61 @@ layout: coverage
  * ------------------------------------------------------------------------------
  */
 &nbsp;
-/** import dependencies */
-import React,<span class="cstat-no" title="statement not covered" > {<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >import React, {</span>
   PureComponent,
 } from 'react'
-import QueryBuilder from <span class="cstat-no" title="statement not covered" >'react-querybuilder'<span class="cstat-no" title="statement not covered" ></span></span>
-import PropTypes <span class="cstat-no" title="statement not covered" >from 'prop-types'<span class="cstat-no" title="statement not covered" ></span></span>
-import I18n <span class="cstat-no" title="statement not covered" >from 'shared/i18n'<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ></span></span></span></span>
+<span class="cstat-no" title="statement not covered" >import PropTypes from 'prop-types'</span>
+<span class="cstat-no" title="statement not covered" >import I18n from 'shared/i18n'</span>
 &nbsp;
 /**
- * Componente with the query builder
- * @class SearchQueryBuilder
+ * Component to select a item type
+ * @class SearchEngine
  * @extends PureComponent
  */
-class SearchQueryBuilder extends PureComponent {
+class ItemTypeSelector extends PureComponent {
   /**
    * Render component
    * @function render
    */
-<span class="fstat-no" title="function not covered" >  re</span>nder() {
+<span class="fstat-no" title="function not covered" >  render</span>() {
 <span class="cstat-no" title="statement not covered" >    return (</span>
-      &lt;div className="queryBuilder"&gt;
-        &lt;QueryBuilder
-          fields={this.props.fields}
-          operators={[
-            { name: 'contains', label: I18n.t('commons.contains') },
-            { name: 'equal', label: I18n.t('commons.equals') }, // equal instead equals because work it
-            { name: 'notequals', label: I18n.t('commons.not_equals') },
-            { name: 'lessthan', label: I18n.t('commons.less_than') },
-            { name: 'morethan', label: I18n.t('commons.more_than') },
-            { name: 'under', label: I18n.t('commons.under') },
-            { name: 'notunder', label: I18n.t('commons.not_under') },
-          ]}
-          combinators={[
-            { name: 'AND', label: I18n.t('commons.AND') },
-            { name: 'OR', label: I18n.t('commons.OR') },
-          ]}
-          onQueryChange={this.props.handleChangeQuery}
+      &lt;div className="search-engine__selector"&gt;
+        &lt;input
+          type="text"
+          style={ { marginRight: 10 } }
+          className="win-textbox"
+          placeholder="Itemtype"
+          name="itemtypeName"
+          value={this.props.itemtype}
+          onChange={this.props.changeItemType}
         /&gt;
+&nbsp;
+        &lt;button
+          className="btn btn--secondary"
+          onClick={this.props.handleGetListSearchOptions}
+          type="button"
+        &gt;
+          {I18n.t('commons.change')}
+        &lt;/button&gt;
       &lt;/div&gt;
     )
   }
 }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >SearchQueryBuilder.propTypes = {</span>
-  fields: PropTypes.array.isRequired,
-  handleChangeQuery: PropTypes.func.isRequired,<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >ItemTypeSelector.propTypes = {</span>
+  itemtype: PropTypes.string.isRequired,
+  changeItemType: PropTypes.func.isRequired,
+  handleGetListSearchOptions: PropTypes.func.isRequired,
 }
 &nbsp;
-&nbsp;
-export default SearchQueryBuilder
+export default ItemTypeSelector
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 21 2018 22:40:10 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Dec 09 2018 23:21:25 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>
