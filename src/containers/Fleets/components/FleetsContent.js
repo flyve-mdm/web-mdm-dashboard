@@ -1168,8 +1168,8 @@ class FleetsContent extends PureComponent {
               {
                   itemType === itemtype.PluginFlyvemdmFleet
                     ? (
-                      <>
-                        <h1 className="content-header__title">
+                      <div className="content-header__title">
+                        <h1>
                           <input
                             type="text"
                             className="win-textbox"
@@ -1190,7 +1190,7 @@ class FleetsContent extends PureComponent {
                           </div>
                           <span className="iconFont deviceIcon" />
                         </div>
-                      </>
+                      </div>
                     )
                     : ''
                 }
