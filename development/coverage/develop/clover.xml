@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1544459425775" clover="3.2.0">
-  <project timestamp="1544459425775" name="All files">
+<coverage generated="1544476711606" clover="3.2.0">
+  <project timestamp="1544476711606" name="All files">
     <metrics statements="4620" coveredstatements="283" conditionals="2094" coveredconditionals="190" methods="1163" coveredmethods="75" elements="7877" coveredelements="548" complexity="0" loc="4620" ncloc="4620" packages="111" files="192" classes="192">
       <package name="src">
         <metrics statements="54" coveredstatements="5" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
@@ -2067,9 +2067,9 @@
           <line num="48" count="0" type="stmt"/>
           <line num="61" count="0" type="stmt"/>
           <line num="67" count="0" type="stmt"/>
-          <line num="87" count="0" type="stmt"/>
-          <line num="100" count="0" type="stmt"/>
-          <line num="106" count="0" type="stmt"/>
+          <line num="90" count="0" type="stmt"/>
+          <line num="103" count="0" type="stmt"/>
+          <line num="109" count="0" type="stmt"/>
         </file>
         <file name="Inventory.js" path="/root/flyve/src/containers/Devices/components/Sections/Inventory.js">
           <metrics statements="54" coveredstatements="0" conditionals="30" coveredconditionals="0" methods="15" coveredmethods="0"/>
