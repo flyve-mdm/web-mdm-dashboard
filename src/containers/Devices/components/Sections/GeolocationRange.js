@@ -69,18 +69,21 @@ export default class GeolocationRange extends PureComponent {
         <p>
           {I18n.t('devices.geolocation.filter_range')}
         </p>
-        <DatePicker
-          label={I18n.t('commons.min')}
-          name="min"
-          function={this.changeRange}
-          value={this.state.min}
-        />
-        <DatePicker
-          label={I18n.t('commons.max')}
-          name="max"
-          function={this.changeRange}
-          value={this.state.max}
-        />
+
+        <div style={{ marginLeft: 10 }}>
+          <DatePicker
+            label={I18n.t('commons.min')}
+            name="min"
+            function={this.changeRange}
+            value={this.state.min}
+          />
+          <DatePicker
+            label={I18n.t('commons.max')}
+            name="max"
+            function={this.changeRange}
+            value={this.state.max}
+          />
+        </div>
         <button
           className="btn btn--primary"
           style={{ margin: '20px 0' }}
