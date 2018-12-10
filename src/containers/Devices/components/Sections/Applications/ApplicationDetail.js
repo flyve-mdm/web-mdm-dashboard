@@ -85,7 +85,7 @@ export default class Applications extends PureComponent {
         : (
           this.state.software
             ? (
-              <>
+              <div style={{ marginLeft: 10, marginBottom: 15 }}>
                 <h3>
                   {`${I18n.t('commons.application')} ${this.props.id}`}
                 </h3>
@@ -126,7 +126,7 @@ export default class Applications extends PureComponent {
                 >
                   {I18n.t('commons.back')}
                 </button>
-              </>
+              </div>
             )
             : (
               <EmptyMessage message={I18n.t('commons.problems_loading_data')} />
