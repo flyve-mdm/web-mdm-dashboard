@@ -102,7 +102,7 @@ export default class Main extends PureComponent {
         let numbers = []
 
         const deviceSimcard = await this.props.glpi.genericRequest({
-          path: `${itemtype.Item_DeviceSimcard}/?searchText[itemtype]=${itemtype.Computer}&searchText[items_id]=${id}`
+          path: `${itemtype.Item_DeviceSimcard}/?searchText[itemtype]=${itemtype.Computer}&searchText[items_id]=${id}`,
         })
 
         if (deviceSimcard.length > 0) {
