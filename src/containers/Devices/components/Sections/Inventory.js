@@ -198,7 +198,7 @@ export default class Inventory extends PureComponent {
   buildList = value => Object.keys(value).map(index => (
     <div
       className="list-content"
-      key={`buildList-${index.toString()}`}
+      key={`buildList-${this.props.title}-${value[index]}-${index.toString()}`}
     >
       <div className="list-col">
         {I18n.t(`commons.${index.toString()}`)}
@@ -218,7 +218,7 @@ export default class Inventory extends PureComponent {
     const specialList = Object.keys(elements).map((element, index) => (
       <div
         className="list-content"
-        key={`buildSpecialList-${index.toString()}`}
+        key={`buildSpecialList-${this.props.title}-${element}-${index.toString()}`}
       >
         <div className="list-col">
           {I18n.t(`commons.${element}`)}
@@ -249,7 +249,7 @@ export default class Inventory extends PureComponent {
             this.state.data.map((value, index) => {
               if (Array.isArray(value)) {
                 return (
-                  <>
+                  <React.Fragment key={`zebra-list-${index.toString()}`}>
                     {
                       index !== 0 && (
                         <>
@@ -263,7 +263,7 @@ export default class Inventory extends PureComponent {
                         this.buildList(x)
                       ))
                     }
-                  </>
+                  </React.Fragment>
                 )
               }
               return this.buildList(value)
