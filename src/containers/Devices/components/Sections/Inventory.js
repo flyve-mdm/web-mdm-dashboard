@@ -116,6 +116,19 @@ export default class Inventory extends PureComponent {
           }))
         }
 
+        if (this.props.itemType === 'Item_OperatingSystem' && this.data.length > 0) {
+          const operatingSystem = await this.props.glpi.getAnItem({
+            itemtype: 'OperatingSystem',
+            id: this.data[0].operatingsystems_id,
+          })
+
+
+          object.push({
+            id: operatingSystem.id,
+            name: operatingSystem.name,
+          })
+        }
+
         if (this.props.itemType === 'DeviceProcessor') {
           const manufacturer = await this.props.glpi.getAnItem({
             itemtype: 'Manufacturer',
