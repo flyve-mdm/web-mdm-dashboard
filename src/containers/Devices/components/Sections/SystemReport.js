@@ -225,9 +225,7 @@ export default class SystemReport extends PureComponent {
                   itemType="Item_OperatingSystem"
                   itemID={this.state.computersID}
                   glpi={this.props.glpi}
-                  fields={{
-                    id: 'id',
-                  }}
+                  fields={{}}
                 />
               </>
             )
