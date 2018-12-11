@@ -646,6 +646,8 @@
     "telephone_numbers": "Telephone numbers",
     "edit_numbers": "Edit numbers",
     "Storages": "Storages",
-    "architecture": "Architecture"
+    "architecture": "Architecture",
+    "kernel_version": "Kernel version",
+    "kernel_name": "Kernel name"
   }
 }
