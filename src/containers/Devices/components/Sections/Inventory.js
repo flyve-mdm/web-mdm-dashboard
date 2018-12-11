@@ -33,17 +33,7 @@ import React, {
 import PropTypes from 'prop-types'
 import Loader from 'components/Loader'
 import I18n from 'shared/i18n'
-
-// function getInternalData(base, type, data) {
-//   const keys = Object.keys(base[type])
-//   if (keys.length > 1) {
-//     return keys.map(key => (
-//       base[type][key][data]
-//     ))
-//   }
-
-//   return base[type][keys[0]][data]
-// }
+import itemtype from 'shared/itemtype'
 
 /**
  * @class Inventory
@@ -104,6 +94,16 @@ export default class Inventory extends PureComponent {
             .map(key => ({
               [this.props.fields[key]]: d[key],
             })))
+        } else if (this.props.itemType === 'Item_OperatingSystem') {
+          this.data = await this.props.glpi.genericRequest({
+            path: `${itemtype.Item_OperatingSystem}/?searchText[itemtype]=${itemtype.Computer}&searchText[items_id]=${this.props.itemID}`,
+          })
+
+          if (this.data.length > 0) {
+            object = Object.keys(this.props.fields).map(key => ({
+              [this.props.fields[key]]: this.data[0][key],
+            }))
+          }
         } else {
           this.data = await this.props.glpi.getAnItem({
             itemtype: this.props.itemType,

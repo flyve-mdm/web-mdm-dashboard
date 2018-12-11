@@ -184,40 +184,52 @@ export default class SystemReport extends PureComponent {
 
           {
             this.state.computersID && (
-              <Inventory
-                title={I18n.t('commons.device')}
-                itemType="Computer"
-                itemID={this.state.computersID}
-                fields={{
-                  id: 'id',
-                  name: 'name',
-                  uuid: 'uuid',
-                  date_creation: 'creation',
-                  date_mod: 'modification',
-                  computermodels_id: 'model',
-                  computertypes_id: 'type',
-                  manufacturers_id: 'manufacturer',
-                  serial: 'serial',
-                }}
-                parameters={{
-                  expand_dropdowns: true,
-                  with_devices: true,
-                  with_disks: true,
-                  with_softwares: true,
-                  with_connections: true,
-                  with_networkports: true,
-                }}
-                glpi={this.props.glpi}
-                afterLoading={(coreID, batteryID, networkID, hardDrive) => {
-                  this.setState({
-                    coreID,
-                    batteryID,
-                    networkID,
-                    hardDrive,
-                  })
-                }}
-                ref={(device) => { this.device = device }}
-              />
+              <>
+                <Inventory
+                  title={I18n.t('commons.device')}
+                  itemType="Computer"
+                  itemID={this.state.computersID}
+                  fields={{
+                    id: 'id',
+                    name: 'name',
+                    uuid: 'uuid',
+                    date_creation: 'creation',
+                    date_mod: 'modification',
+                    computermodels_id: 'model',
+                    computertypes_id: 'type',
+                    manufacturers_id: 'manufacturer',
+                    serial: 'serial',
+                  }}
+                  parameters={{
+                    expand_dropdowns: true,
+                    with_devices: true,
+                    with_disks: true,
+                    with_softwares: true,
+                    with_connections: true,
+                    with_networkports: true,
+                  }}
+                  glpi={this.props.glpi}
+                  afterLoading={(coreID, batteryID, networkID, hardDrive) => {
+                    this.setState({
+                      coreID,
+                      batteryID,
+                      networkID,
+                      hardDrive,
+                    })
+                  }}
+                  ref={(device) => { this.device = device }}
+                />
+
+                <Inventory
+                  title={I18n.t('commons.operating_system')}
+                  itemType="Item_OperatingSystem"
+                  itemID={this.state.computersID}
+                  glpi={this.props.glpi}
+                  fields={{
+                    id: 'id',
+                  }}
+                />
+              </>
             )
           }
 
@@ -291,6 +303,7 @@ export default class SystemReport extends PureComponent {
     )
   }
 }
+
 /** SystemReport propTypes */
 SystemReport.propTypes = {
   toast: PropTypes.shape({
