@@ -132,11 +132,17 @@ export default class Inventory extends PureComponent {
             id: this.data[0].operatingsystemarchitectures_id,
           })
 
+          const operatingSystemKernelVersion = await this.props.glpi.getAnItem({
+            itemtype: 'OperatingSystemKernelVersion',
+            id: this.data[0].operatingsystemkernelversions_id,
+          })
+
           object.push({
             id: operatingSystem.id,
             name: operatingSystem.name,
             version: operatingSystemVersion.name,
             architecture: operatingSystemArchitecture.name,
+            kernel_version: operatingSystemKernelVersion.name,
           })
         }
 
