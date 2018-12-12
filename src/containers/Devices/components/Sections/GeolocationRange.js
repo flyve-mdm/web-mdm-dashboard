@@ -84,6 +84,7 @@ export default class GeolocationRange extends PureComponent {
             value={this.state.max}
           />
         </div>
+
         <button
           className="btn btn--primary"
           style={{ margin: '20px 0' }}
