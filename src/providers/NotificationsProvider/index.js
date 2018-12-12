@@ -116,12 +116,12 @@ export class NotificationsProvider extends PureComponent {
     }
 
     return (
-      <>
+      <React.Fragment>
         {toast}
         <NotificationsContext.Provider value={{ toast: context }}>
           {this.props.children}
         </NotificationsContext.Provider>
-      </>
+      </React.Fragment>
     )
   }
 }

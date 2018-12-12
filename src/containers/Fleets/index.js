@@ -202,7 +202,7 @@ class Fleets extends PureComponent {
    */
   render() {
     const renderComponents = (
-      <>
+      <React.Fragment>
         <div className="list-pane flex-block__list" style={{ ...this.stylesList() }}>
           <FleetsList
             key="list"
@@ -217,7 +217,7 @@ class Fleets extends PureComponent {
             {...this.propsData()}
           />
         </div>
-      </>
+      </React.Fragment>
     )
 
     return (
