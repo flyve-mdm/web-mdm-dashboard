@@ -133,6 +133,11 @@ export default class SystemReport extends PureComponent {
   }
 
   render() {
+    // Used to obtain the number of cores
+    const { _devices } = this.device && this.device.data
+      ? this.device.data
+      : {}
+
     return (
       <div className="devices">
         <div className="system-report">
@@ -243,8 +248,9 @@ export default class SystemReport extends PureComponent {
                   frequence: 'cpu_frequency',
                 }}
                 specialFields={{
-                  // eslint-disable-next-line no-underscore-dangle
-                  number_cores: (this.device.data._devices.Item_DeviceProcessor[Object.keys(this.device.data._devices.Item_DeviceProcessor)[0]].nbcores || I18n.t('commons.n/a')),
+                  number_cores: _devices
+                    ? (_devices.Item_DeviceProcessor[Object.keys(_devices.Item_DeviceProcessor)[0]].nbcores || I18n.t('commons.n/a'))
+                    : I18n.t('commons.n/a'),
                 }}
                 glpi={this.props.glpi}
               />

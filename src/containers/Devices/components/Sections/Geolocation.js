@@ -125,6 +125,7 @@ export default class Geolocation extends PureComponent {
       this.setState({
         isLoadingGeolocation: true,
       })
+
       await this.props.glpi.updateItem({
         id: this.state.id,
         itemtype: itemtype.PluginFlyvemdmAgent,
@@ -132,21 +133,26 @@ export default class Geolocation extends PureComponent {
           _geolocate: '',
         },
       })
+
       this.props.toast.setNotification({
         title: I18n.t('commons.success'),
         body: I18n.t('notifications.request_sent'),
         type: 'success',
       })
+
       this.handleRefresh()
     } catch (error) {
       this.setState({
         isLoadingGeolocation: false,
       })
-      this.props.toast.setNotification(this.props.handleMessage({
-        type: 'alert',
-        message: error,
-        displayErrorPage: false,
-      }))
+
+      this.props.toast.setNotification(
+        this.props.handleMessage({
+          type: 'alert',
+          message: error,
+          displayErrorPage: false,
+        }),
+      )
     }
   }
 
@@ -164,11 +170,13 @@ export default class Geolocation extends PureComponent {
           id: this.state.id,
           itemtype: itemtype.PluginFlyvemdmAgent,
         })
+
         const response = await this.props.glpi.getSubItems({
           itemtype: itemtype.Computer,
           id: computersID,
           subItemtype: itemtype.PluginFlyvemdmGeolocation,
         })
+
         this.setState({
           locations: response,
           showLocations: [],
@@ -176,10 +184,13 @@ export default class Geolocation extends PureComponent {
           isLoadingGeolocation: false,
         })
       } catch (error) {
-        this.props.toast.setNotification(this.props.handleMessage({
-          type: 'alert',
-          message: error,
-        }))
+        this.props.toast.setNotification(
+          this.props.handleMessage({
+            type: 'alert',
+            message: error,
+          }),
+        )
+
         this.setState({
           locations: [],
           showLocations: [],
@@ -209,6 +220,7 @@ export default class Geolocation extends PureComponent {
             style={{ height: '300px', maxWidth: '800px' }}
             selectedLocation={this.state.selectedLocation}
           />
+
           <button
             className="btn btn--secondary"
             onClick={() => this.setState(prevState => ({
@@ -222,6 +234,7 @@ export default class Geolocation extends PureComponent {
                 : I18n.t('devices.geolocation.filter_range')
             }
           </button>
+
           <div style={{ display: 'inline-block' }}>
             <button
               className="btn btn--secondary"
