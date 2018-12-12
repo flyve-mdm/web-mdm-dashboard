@@ -349,7 +349,18 @@ layout: coverage
 301
 302
 303
-304</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -560,6 +571,14 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -567,7 +586,10 @@ layout: coverage
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -838,40 +860,50 @@ export default class SystemReport extends PureComponent {
 &nbsp;
           {
             this.state.computersID &amp;&amp; (
-              &lt;Inventory
-                title={I18n.t('commons.device')}
-                itemType="Computer"
-                itemID={this.state.computersID}
-                fields={ {
-                  id: 'id',
-                  name: 'name',
-                  uuid: 'uuid',
-                  date_creation: 'creation',
-                  date_mod: 'modification',
-                  computermodels_id: 'model',
-                  computertypes_id: 'type',
-                  manufacturers_id: 'manufacturer',
-                  serial: 'serial',
-                } }
-                parameters={ {
-                  expand_dropdowns: true,
-                  with_devices: true,
-                  with_disks: true,
-                  with_softwares: true,
-                  with_connections: true,
-                  with_networkports: true,
-                } }
-                glpi={this.props.glpi}
-                afterLoading={<span class="fstat-no" title="function not covered" >(c</span>oreID, batteryID, networkID, hardDrive) =&gt; {
-<span class="cstat-no" title="statement not covered" >                  this.setState({</span>
-                    coreID,
-                    batteryID,
-                    networkID,
-                    hardDrive,
-                  })
-                } }
-                ref={(<span class="fstat-no" title="function not covered" >device) =&gt; { <span class="cstat-no" title="statement not covered" >this.device = device } }</span></span>
-              /&gt;
+              &lt;&gt;
+                &lt;Inventory
+                  title={I18n.t('commons.device')}
+                  itemType="Computer"
+                  itemID={this.state.computersID}
+                  fields={ {
+                    id: 'id',
+                    name: 'name',
+                    uuid: 'uuid',
+                    date_creation: 'creation',
+                    date_mod: 'modification',
+                    computermodels_id: 'model',
+                    computertypes_id: 'type',
+                    manufacturers_id: 'manufacturer',
+                    serial: 'serial',
+                  } }
+                  parameters={ {
+                    expand_dropdowns: true,
+                    with_devices: true,
+                    with_disks: true,
+                    with_softwares: true,
+                    with_connections: true,
+                    with_networkports: true,
+                  } }
+                  glpi={this.props.glpi}
+                  afterLoading={<span class="fstat-no" title="function not covered" >(c</span>oreID, batteryID, networkID, hardDrive) =&gt; {
+<span class="cstat-no" title="statement not covered" >                    this.setState({</span>
+                      coreID,
+                      batteryID,
+                      networkID,
+                      hardDrive,
+                    })
+                  } }
+                  ref={(<span class="fstat-no" title="function not covered" >device) =&gt; { <span class="cstat-no" title="statement not covered" >this.device = device } }</span></span>
+                /&gt;
+&nbsp;
+                &lt;Inventory
+                  title={I18n.t('commons.operating_system')}
+                  itemType="Item_OperatingSystem"
+                  itemID={this.state.computersID}
+                  glpi={this.props.glpi}
+                  fields={ {} }
+                /&gt;
+              &lt;/&gt;
             )
           }
 &nbsp;
@@ -945,6 +977,7 @@ export default class SystemReport extends PureComponent {
     )
   }
 }
+&nbsp;
 /** SystemReport propTypes */
 <span class="cstat-no" title="statement not covered" >SystemReport.propTypes = {</span>
   toast: PropTypes.shape({
@@ -961,7 +994,7 @@ export default class SystemReport extends PureComponent {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Dec 10 2018 21:18:31 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Dec 12 2018 19:30:34 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>
