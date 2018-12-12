@@ -288,10 +288,11 @@ export default class Inventory extends PureComponent {
                   <React.Fragment key={`zebra-list-${index.toString()}`}>
                     {
                       index !== 0 && (
-                        <>
-                          <div /> {/* Used to make the colors of the zebra list look good  */}
+                        <React.Fragment>
+                          {/* Used to make the colors of the zebra list look good  */}
+                          <div />
                           <hr />
-                        </>
+                        </React.Fragment>
                       )
                     }
                     {

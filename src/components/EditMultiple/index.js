@@ -334,7 +334,7 @@ class EditMultiple extends PureComponent {
             this.state.isLoading
               ? ''
               : (
-                <>
+                <React.Fragment>
                   <br />
 
                   <button
@@ -353,7 +353,7 @@ class EditMultiple extends PureComponent {
                   >
                     {I18n.t('commons.save')}
                   </button>
-                </>
+                </React.Fragment>
               )
             }
         </ContentPane>

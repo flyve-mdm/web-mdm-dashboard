@@ -166,7 +166,7 @@ class DangerZone extends PureComponent {
 
   render() {
     return (
-      <>
+      <React.Fragment>
         <ContentPane ref={(pane) => { this.pane = pane }}>
           <div className="list-element">
             <div className="list-element__message">
@@ -222,7 +222,7 @@ class DangerZone extends PureComponent {
             </div>
           </div>
         </ContentPane>
-      </>
+      </React.Fragment>
     )
   }
 }

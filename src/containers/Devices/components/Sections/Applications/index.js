@@ -220,7 +220,7 @@ export default class Applications extends PureComponent {
         overflow: 'auto',
       }
       const header = (
-        <>
+        <React.Fragment>
           <div style={{ ...stylesHeader, width: '15%' }}>
             #
           </div>
@@ -230,7 +230,7 @@ export default class Applications extends PureComponent {
           <div style={{ ...stylesHeader, width: '35%' }}>
             {I18n.t('devices.applications.last_modification')}
           </div>
-        </>
+        </React.Fragment>
       )
       renderComponent = (
         <ContentPane className="applications">

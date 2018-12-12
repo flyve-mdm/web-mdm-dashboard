@@ -45,7 +45,7 @@ class Main extends PureComponent {
    */
   render() {
     return (
-      <>
+      <React.Fragment>
         <div className="title" style={{ padding: '0 10px' }}>
           {I18n.t('commons.agent')}
         </div>
@@ -174,7 +174,7 @@ class Main extends PureComponent {
             {this.props.numberCategoriesForPolicies}
           </div>
         </div>
-      </>
+      </React.Fragment>
     )
   }
 }
