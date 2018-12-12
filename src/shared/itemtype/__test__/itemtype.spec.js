@@ -374,6 +374,9 @@ describe('itemtype', () => {
       DeviceSimcard: 'DeviceSimcard',
       Item_DeviceSimcard: 'Item_DeviceSimcard',
       Line: 'Line',
+      Item_OperatingSystem: 'Item_OperatingSystem',
+      OperatingSystemArchitecture: 'OperatingSystemArchitecture',
+      OperatingSystemKernelVersion: 'OperatingSystemKernelVersion',
     })
   })
 })
