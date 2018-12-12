@@ -96,7 +96,7 @@ export default class DevicesContent extends PureComponent {
 
   render() {
     return (
-      <>
+      <React.Fragment>
         <Confirmation
           title={I18n.t('devices.danger_zone.last_warning')}
           message={I18n.t('devices.danger_zone.last_warning_message')}
@@ -177,7 +177,7 @@ export default class DevicesContent extends PureComponent {
             </ReactWinJS.Pivot.Item>
           </ReactWinJS.Pivot>
         </ContentPane>
-      </>
+      </React.Fragment>
     )
   }
 }

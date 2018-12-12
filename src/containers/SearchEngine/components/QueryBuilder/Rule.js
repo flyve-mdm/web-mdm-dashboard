@@ -136,7 +136,7 @@ class Rule extends PureComponent {
         {
           this.props.field
           && (
-            <>
+            <React.Fragment>
               <Select
                 name="field"
                 value={this.props.field}
@@ -167,7 +167,7 @@ class Rule extends PureComponent {
                 value={this.props.value}
                 function={this.handleChangeRule}
               />
-            </>
+            </React.Fragment>
           )
         }
       </div>

@@ -189,7 +189,7 @@ export default class SystemReport extends PureComponent {
 
           {
             this.state.computersID && (
-              <>
+              <React.Fragment>
                 <Inventory
                   title={I18n.t('commons.device')}
                   itemType="Computer"
@@ -232,7 +232,7 @@ export default class SystemReport extends PureComponent {
                   glpi={this.props.glpi}
                   fields={{}}
                 />
-              </>
+              </React.Fragment>
             )
           }
 
