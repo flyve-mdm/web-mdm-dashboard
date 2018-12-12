@@ -224,7 +224,7 @@
       "request_current_location": "Request current location",
       "no_locations": "No locations available",
       "filter_range": "Filter locations in a range of dates",
-      "hide_filter": "Hide filter"
+      "remove_filter": "Remove filter"
     },
     "applications": {
       "title": "Applications",

@@ -57,6 +57,8 @@ export default class Geolocation extends PureComponent {
       selectedLocation: undefined,
       filter: false,
     }
+
+    this.allLocations = []
   }
 
   componentDidMount() {
@@ -91,9 +93,17 @@ export default class Geolocation extends PureComponent {
    * @param {date}
    */
   applyRange = (min, max) => {
-    this.setState(prevState => ({
-      showLocations: prevState.locations.filter(location => validateDate(new Date(location.date), min, max)),
-    }))
+    if (!min || !max) {
+      this.setState({
+        locations: this.allLocations,
+      })
+    } else {
+      const locations = this.allLocations.filter(location => validateDate(new Date(location.date), min, max))
+      this.setState({
+        locations,
+        showLocations: locations,
+      })
+    }
   }
 
   /**
@@ -177,6 +187,8 @@ export default class Geolocation extends PureComponent {
           subItemtype: itemtype.PluginFlyvemdmGeolocation,
         })
 
+        this.allLocations = response
+
         this.setState({
           locations: response,
           showLocations: [],
@@ -201,6 +213,17 @@ export default class Geolocation extends PureComponent {
     }
   }
 
+  showFilter = () => {
+    this.setState(prevState => ({
+      filter: !prevState.filter,
+    }), () => {
+      if (!this.state.filter) {
+        // Remove the filter in the locations shown to the user
+        this.applyRange(null)
+      }
+    })
+  }
+
   /**
    * handle go to selected location
    * @function goToLocation
@@ -223,14 +246,12 @@ export default class Geolocation extends PureComponent {
 
           <button
             className="btn btn--secondary"
-            onClick={() => this.setState(prevState => ({
-              filter: !prevState.filter,
-            }))}
+            onClick={this.showFilter}
             type="button"
           >
             {
               this.state.filter
-                ? I18n.t('devices.geolocation.hide_filter')
+                ? I18n.t('devices.geolocation.remove_filter')
                 : I18n.t('devices.geolocation.filter_range')
             }
           </button>
