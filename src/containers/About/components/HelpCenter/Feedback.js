@@ -118,7 +118,7 @@ class Feedback extends PureComponent {
       )
     } if (this.state.feedbackSent) {
       return (
-        <>
+        <React.Fragment>
           <div style={{ textAlign: 'center' }}>
             <h3>
               {I18n.t('about.help_center.thank_you')}
@@ -127,7 +127,7 @@ class Feedback extends PureComponent {
               {I18n.t('about.help_center.submission_received')}
             </p>
           </div>
-        </>
+        </React.Fragment>
       )
     }
     return (

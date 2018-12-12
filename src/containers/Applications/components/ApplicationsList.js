@@ -502,7 +502,7 @@ export default class ApplicationsList extends PureComponent {
     }
 
     return (
-      <>
+      <React.Fragment>
         <ReactWinJS.ToolBar
           ref={(toolBar) => { this.toolBar = toolBar }}
           className="listToolBar"
@@ -549,7 +549,7 @@ export default class ApplicationsList extends PureComponent {
           message={`${this.props.selectedItems.length} ${I18n.t('applications.title')}`}
           reference={(el) => { this.contentDialog = el }}
         />
-      </>
+      </React.Fragment>
     )
   }
 }

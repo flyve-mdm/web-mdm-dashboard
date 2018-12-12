@@ -1204,7 +1204,7 @@ class FleetsContent extends PureComponent {
                 {
                   selectedItems.length !== 0 && itemType === itemtype.PluginFlyvemdmFleet
                     ? (
-                      <>
+                      <React.Fragment>
                         <span
                           className="iconFont copyIcon"
                           onClick={this.handleDuplicateFleet}
@@ -1217,7 +1217,7 @@ class FleetsContent extends PureComponent {
                           role="button"
                           tabIndex="0"
                         />
-                      </>
+                      </React.Fragment>
                     )
                     : ''
                 }
