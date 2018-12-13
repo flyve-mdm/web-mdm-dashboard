@@ -648,6 +648,7 @@
     "Storages": "Storages",
     "architecture": "Architecture",
     "kernel_version": "Kernel version",
-    "kernel_name": "Kernel name"
+    "kernel_name": "Kernel name",
+    "notification_type": "Notification type"
   }
 }

@@ -434,6 +434,13 @@ export default class Main extends PureComponent {
               </div>
 
               <div className="title">
+                {I18n.t('commons.notification_type')}
+              </div>
+              <div style={{ paddingLeft: 20 }}>
+                {this.state.data.notification_type}
+              </div>
+
+              <div className="title">
                 {I18n.t('commons.telephone_numbers')}
               </div>
 
