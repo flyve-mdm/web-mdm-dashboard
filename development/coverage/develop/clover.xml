@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1544651212477" clover="3.2.0">
-  <project timestamp="1544651212477" name="All files">
+<coverage generated="1544663033360" clover="3.2.0">
+  <project timestamp="1544663033360" name="All files">
     <metrics statements="4640" coveredstatements="283" conditionals="2114" coveredconditionals="190" methods="1164" coveredmethods="75" elements="7918" coveredelements="548" complexity="0" loc="4640" ncloc="4640" packages="111" files="192" classes="192">
       <package name="src">
         <metrics statements="54" coveredstatements="5" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
@@ -2140,11 +2140,11 @@
           <line num="279" count="0" type="stmt"/>
           <line num="286" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="287" count="0" type="stmt"/>
-          <line num="299" count="0" type="stmt"/>
-          <line num="305" count="0" type="stmt"/>
-          <line num="316" count="0" type="stmt"/>
-          <line num="321" count="0" type="stmt"/>
-          <line num="328" count="0" type="stmt"/>
+          <line num="300" count="0" type="stmt"/>
+          <line num="306" count="0" type="stmt"/>
+          <line num="317" count="0" type="stmt"/>
+          <line num="322" count="0" type="stmt"/>
+          <line num="329" count="0" type="stmt"/>
         </file>
         <file name="Main.js" path="/root/flyve/src/containers/Devices/components/Sections/Main.js">
           <metrics statements="91" coveredstatements="0" conditionals="51" coveredconditionals="0" methods="25" coveredmethods="0"/>
