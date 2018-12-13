@@ -33,6 +33,6 @@ The management features are the same of the Flyve MDM plugin, the Administrator 
 
 #### MDM Agent
 
-The MDM Agent takes control of the device and implements the policies coming from the Dashboard, the backend and the Agent on the devices maintain a two-way communication through a M2M server.
+The MDM Agent takes control of the device and implements the policies coming from the Dashboard, the backend and the Agent on the devices maintain a two-way communication through a MQTT server or FCM.
 
 The exception is at the moment of the enrollment, since the information from the Agent is sent directly to the backend.
