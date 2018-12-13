@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1544663087565" clover="3.2.0">
-  <project timestamp="1544663087565" name="All files">
+<coverage generated="1544721656532" clover="3.2.0">
+  <project timestamp="1544721656532" name="All files">
     <metrics statements="4640" coveredstatements="283" conditionals="2114" coveredconditionals="190" methods="1164" coveredmethods="75" elements="7918" coveredelements="548" complexity="0" loc="4640" ncloc="4640" packages="111" files="192" classes="192">
       <package name="src">
         <metrics statements="54" coveredstatements="5" conditionals="25" coveredconditionals="0" methods="15" coveredmethods="0"/>
@@ -2234,11 +2234,11 @@
           <line num="353" count="0" type="stmt"/>
           <line num="358" count="0" type="stmt"/>
           <line num="363" count="0" type="stmt"/>
-          <line num="442" count="0" type="stmt"/>
-          <line num="464" count="0" type="stmt"/>
-          <line num="476" count="0" type="stmt"/>
-          <line num="482" count="0" type="stmt"/>
-          <line num="486" count="0" type="stmt"/>
+          <line num="449" count="0" type="stmt"/>
+          <line num="471" count="0" type="stmt"/>
+          <line num="483" count="0" type="stmt"/>
+          <line num="489" count="0" type="stmt"/>
+          <line num="493" count="0" type="stmt"/>
         </file>
         <file name="SystemReport.js" path="/root/flyve/src/containers/Devices/components/Sections/SystemReport.js">
           <metrics statements="31" coveredstatements="0" conditionals="30" coveredconditionals="0" methods="11" coveredmethods="0"/>
