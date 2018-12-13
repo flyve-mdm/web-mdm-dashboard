@@ -76,11 +76,13 @@ If there is a new folder with your repo name, then the setup of SSH was successf
 
 This configuration requires some patience.
 
-1. Go to your Keybase account and generate a new GPG key.
-2. Sign in from a browser to your Keybase Account.
-3. Click on the ID of your PGP key.
-4. Copy and paste the command to import your public GPG key on the terminal: ```curl https://keybase.io/MY_USER_NAME/pgp_keys.asc | gpg --import```
-5. Copy everything between:
+1. Open a Terminal.
+2. Use the following command to create your GPG key: ``keybase pgp gen``
+    2. Add your information: Name, Email(s)
+    2. Make sure to push an encrypted copy of your secret key to keybase.io
+    2. Add a passphrase to encrypt the key, be sure to remember it since the keychain will request it to save your keys.
+
+3. Run the following command ``keybase pgp export`` and copy everything that starts and ends with:
 
     ```key
 
@@ -89,46 +91,76 @@ This configuration requires some patience.
 
     ```
 
-6. Paste it on your GitHub settings
-   Go to settings > SSH and GPG keys > New GPG key
-7. Import your private key to your PC:
+4. Add it to your GitHub account, go to settings > SSH and GPG keys > New GPG key
+5. Get the ID of your PGP key:
 
-      7.1. Go to your keybase account on your browser
+    * Run ``gpg --list-secret-keys --keyid-format LONG``
+    * Check your keybase profile
 
-      7.2. Next to your key ID, click on edit and select export private
+    <img src="https://github.com/Naylin15/Screenshots/blob/master/docs/check-key-id-terminal.png?raw=true" alt="Key ID on Terminal">
 
-      <img src="https://github.com/Naylin15/Screenshots/blob/master/docs/Export-private-key.png?raw=true" alt="Export private key on Keybase">
+6. Tell git about your GPG key, run:
 
-      7.3. Copy and paste your private key in a txt editor, and save it with the name ```private.key```
+``git config --global user.signingkey B344E73DA95715F4``
 
-      <img src="{{ '/images/picto-information.png' | absolute_url }}" alt="Awesome tips:" height="16px"> On Windows make sure it is on your user folder.
+Also run the following commands to sign all commits by default in your current local repository:
 
-      7.4. Go to command line and run:
+``git config --global commit.gpgsign true``
+
+  * Only for Windows:
+
+  ``git config --global gpg.program "C:\Program Files (x86)\GnuPG\bin\gpg.exe"`` 
+
+##### I already have a GPG key
+
+1. Sign in from a browser to your Keybase Account.
+2. Click on the ID of your PGP key.
+3. Copy and paste the command to import your public GPG key on the terminal: ```curl https://keybase.io/MY_USER_NAME/pgp_keys.asc | gpg --import```
+4. Add it to your GitHub account, go to settings > SSH and GPG keys > New GPG key
+
+    ```key
+
+    -----BEGIN PGP PUBLIC KEY BLOCK-----
+    -----END PGP PUBLIC KEY BLOCK-----
+
+    ```
+
+5. Import your private key to your PC:
+   5. Go to your keybase account on your browser
+   5. Next to your key ID, click on edit and select export private key
+
+        <img src="https://github.com/Naylin15/Screenshots/blob/master/docs/Export-private-key.png?raw=true" alt="Export private key on Keybase">
+
+   5. Copy and paste your private key in a txt editor, and save it with the name ``private.key``
+
+       * On Windows make sure it is on your user folder.
+
+   5. Go to command line and run:
 
       ```gpg --import private.key```
 
-      7.5 Check the key was imported by running:
+   5. Check the key was imported by running:
 
       ```gpg --list-secret-keys --keyid-format LONG```
 
    Here should be listed your key, check the ID from keybase is the same on the sec line.
+    <br/>
+    <div>
+        <img src="https://github.com/Naylin15/Screenshots/blob/master/docs/check-key-id-terminal.png?raw=true" alt="Key ID on Terminal">
+        <img src="https://github.com/Naylin15/Screenshots/blob/master/docs/check-key-id.png?raw=true" alt="Key ID on Keybase">
+    </div>
 
-     <div>
-       <img src="https://github.com/Naylin15/Screenshots/blob/master/docs/check-key-id-terminal.png?raw=true" alt="Key ID on Terminal">
-       <img src="https://github.com/Naylin15/Screenshots/blob/master/docs/check-key-id.png?raw=true" alt="Key ID on Keybase">
-     </div>
+6. Tell git about your GPG key, run:
 
-8. Telling git of your GPG key, run:
+    ``git config --global user.signingkey B344E73DA95715F4``
 
-```git config --global user.signingkey B344E73DA95715F4```
+Also run the following commands to sign all commits by default in your current local repository:
 
-Also run the following command to sign all commits by default:
+    ``git config --global commit.gpgsign true``
 
-```git config --global commit.gpgsign true```
+  * Only for Windows:
 
-* On Windows also run:
-
-  ```git config --global gpg.program "C:\Program Files (x86)\GnuPG\bin\gpg.exe"```
+  ``git config --global gpg.program "C:\Program Files (x86)\GnuPG\bin\gpg.exe"``
 
 ### Test it!
 
