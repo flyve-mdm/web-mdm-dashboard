@@ -650,6 +650,9 @@
     "kernel_version": "Kernel version",
     "kernel_name": "Kernel name",
     "notification_type": "Notification type",
-    "speed": "Speed"
+    "speed": "Speed",
+    "mountpoint": "Mountpoint",
+    "totalsize": "Total size",
+    "freesize": "Free size"
   }
 }

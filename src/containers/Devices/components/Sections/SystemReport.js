@@ -234,6 +234,20 @@ export default class SystemReport extends PureComponent {
                   glpi={this.props.glpi}
                   fields={{}}
                 />
+
+                <Inventory
+                  title={I18n.t('commons.Storages')}
+                  itemType="computerdisk"
+                  itemID={this.state.computersID}
+                  fields={{
+                    name: 'name',
+                    mountpoint: 'mountpoint',
+                    device: 'device',
+                    totalsize: 'totalsize',
+                    freesize: 'freesize',
+                  }}
+                  glpi={this.props.glpi}
+                />
               </React.Fragment>
             )
           }
@@ -296,7 +310,7 @@ export default class SystemReport extends PureComponent {
             )
           }
 
-          {
+          {/* {
             (this.state.hardDrive) && (
               <Inventory
                 title={I18n.t('commons.Storages')}
@@ -309,7 +323,7 @@ export default class SystemReport extends PureComponent {
                 glpi={this.props.glpi}
               />
             )
-          }
+          } */}
         </div>
       </div>
     )
