@@ -124,6 +124,20 @@ export default class Inventory extends PureComponent {
               [this.props.fields[key]]: this.data[0][key],
             }))
           }
+        } else if (this.props.itemType === 'computerdisk') {
+          this.data = await this.props.glpi.getSubItems({
+            itemtype: itemtype.Computer,
+            id: this.props.itemID,
+            subItemtype: this.props.itemType,
+          })
+
+          if (Array.isArray(this.data)) {
+            this.data.forEach((data) => {
+              object = [...object, Object.keys(this.props.fields).map(key => ({
+                [this.props.fields[key]]: data[key],
+              }))]
+            })
+          }
         } else {
           this.data = await this.props.glpi.getAnItem({
             itemtype: this.props.itemType,

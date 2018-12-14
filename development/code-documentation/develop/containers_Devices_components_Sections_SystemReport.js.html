@@ -18,7 +18,8 @@ layout: container
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/*
+            <pre class="prettyprint source linenums"><code>/* eslint-disable no-underscore-dangle */
+/*
  *   Copyright © 2018 Teclib. All rights reserved.
  *
  *   This file is part of web-mdm-dashboard
@@ -232,6 +233,7 @@ export default class SystemReport extends PureComponent {
                     with_softwares: true,
                     with_connections: true,
                     with_networkports: true,
+                    get_hateoas: true,
                   } }
                   glpi={this.props.glpi}
                   afterLoading={(coreID, batteryID, networkID, hardDrive) => {
@@ -252,6 +254,20 @@ export default class SystemReport extends PureComponent {
                   glpi={this.props.glpi}
                   fields={ {} }
                 />
+
+                &lt;Inventory
+                  title={I18n.t('commons.Storages')}
+                  itemType="computerdisk"
+                  itemID={this.state.computersID}
+                  fields={ {
+                    name: 'name',
+                    mountpoint: 'mountpoint',
+                    device: 'device',
+                    totalsize: 'totalsize',
+                    freesize: 'freesize',
+                  } }
+                  glpi={this.props.glpi}
+                />
               &lt;/React.Fragment>
             )
           }
@@ -270,7 +286,7 @@ export default class SystemReport extends PureComponent {
                 specialFields={ {
                   number_cores: _devices
                     ? (_devices.Item_DeviceProcessor[Object.keys(_devices.Item_DeviceProcessor)[0]].nbcores || I18n.t('commons.n/a'))
-                    : I18n.t('commons.n/a'),
+                    : null,
                 } }
                 glpi={this.props.glpi}
               />
@@ -300,15 +316,21 @@ export default class SystemReport extends PureComponent {
                 itemType="NetworkPort"
                 itemID={this.state.networkID}
                 fields={ {
+                  id: 'id',
                   mac: 'mac',
                   name: 'description',
+                } }
+                specialFields={ {
+                  speed: this.device &amp;&amp; this.device.data &amp;&amp; this.device.data._networkports
+                    ? (this.device.data._networkports.NetworkPortEthernet[0].speed)
+                    : null,
                 } }
                 glpi={this.props.glpi}
               />
             )
           }
 
-          {
+          {/* {
             (this.state.hardDrive) &amp;&amp; (
               &lt;Inventory
                 title={I18n.t('commons.Storages')}
@@ -321,7 +343,7 @@ export default class SystemReport extends PureComponent {
                 glpi={this.props.glpi}
               />
             )
-          }
+          } */}
         &lt;/div>
       &lt;/div>
     )
