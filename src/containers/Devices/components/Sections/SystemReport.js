@@ -212,6 +212,7 @@ export default class SystemReport extends PureComponent {
                     with_softwares: true,
                     with_connections: true,
                     with_networkports: true,
+                    get_hateoas: true,
                   }}
                   glpi={this.props.glpi}
                   afterLoading={(coreID, batteryID, networkID, hardDrive) => {
@@ -280,6 +281,7 @@ export default class SystemReport extends PureComponent {
                 itemType="NetworkPort"
                 itemID={this.state.networkID}
                 fields={{
+                  id: 'id',
                   mac: 'mac',
                   name: 'description',
                 }}
