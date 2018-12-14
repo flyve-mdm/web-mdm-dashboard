@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /*
  *   Copyright © 2018 Teclib. All rights reserved.
  *
@@ -251,7 +252,7 @@ export default class SystemReport extends PureComponent {
                 specialFields={{
                   number_cores: _devices
                     ? (_devices.Item_DeviceProcessor[Object.keys(_devices.Item_DeviceProcessor)[0]].nbcores || I18n.t('commons.n/a'))
-                    : I18n.t('commons.n/a'),
+                    : null,
                 }}
                 glpi={this.props.glpi}
               />
@@ -284,6 +285,11 @@ export default class SystemReport extends PureComponent {
                   id: 'id',
                   mac: 'mac',
                   name: 'description',
+                }}
+                specialFields={{
+                  speed: this.device && this.device.data && this.device.data._networkports
+                    ? (this.device.data._networkports.NetworkPortEthernet[0].speed)
+                    : null,
                 }}
                 glpi={this.props.glpi}
               />
