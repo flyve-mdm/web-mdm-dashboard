@@ -87,7 +87,7 @@ const Overview = () => (
               ${I18n.t('commons.last_commit')}
             `}
             <a href={`https://github.com/flyve-mdm/web-mdm-dashboard/commit/${window.appConfig.release.lastCommit}`}>
-              {`${window.appConfig.release.lastCommit}.`}
+              {`${(window.appConfig.release.lastCommit).substring(0, 7)}.`}
             </a>
           </p>
         )
