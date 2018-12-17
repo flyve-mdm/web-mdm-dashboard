@@ -283,7 +283,6 @@
       "title": "Overview",
       "flyve_mdm_is": "Flyve MDM is a mobile device management software that enables you to secure and manage all the mobile devices of your business via a unique web-based console (MDM).",
       "our_solution": "Our solution allows you to efficiently and easily control any aspects of your Android-based mobile fleet, providing a panel of functionalities:",
-      "source_codes": "Source codes will be released during fall 2016.",
       "provided_as_sass_platform": "Provided as sass platform",
       "google_indepent": "Google independent",
       "deploy_and_configure": "Deploy and configure applications",
@@ -653,6 +652,9 @@
     "speed": "Speed",
     "mountpoint": "Mountpoint",
     "totalsize": "Total size",
-    "freesize": "Free size"
+    "freesize": "Free size",
+    "build": "Build",
+    "build_on": "Build on",
+    "last_commit": "Last commit"
   }
 }
