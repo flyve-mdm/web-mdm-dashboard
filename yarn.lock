@@ -963,10 +963,10 @@
     chokidar "^2.0.4"
     globby "^8.0.1"
 
-"@hint/formatter-codeframe@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@hint/formatter-codeframe/-/formatter-codeframe-2.0.0.tgz#f1b8967df90776512d0a25bd98d5d1437b9740ca"
-  integrity sha512-a+7et6JlBQZ3e1wNR+rN2r+4RujaBjnSPK0LWbkL2gg37Igdko1E5/TpqBI6jASSArMt6xikNaAMeWb00oe2tA==
+"@hint/formatter-codeframe@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@hint/formatter-codeframe/-/formatter-codeframe-2.0.1.tgz#942fa51a9158ae9880f5015d7f3ed705a72de3ee"
+  integrity sha512-oelBbsRNDZWV7ZjK0TxiDEEl48JlTtEMZC1SxPTLf2xxjxf6A7Ut9ZiPxTP3NGj+fXNuGc0lJ+rd4QIepgFiNg==
   dependencies:
     chalk "^2.4.1"
     lodash "^4.17.11"
