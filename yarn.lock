@@ -1016,10 +1016,15 @@
   dependencies:
     content-type "^1.0.4"
 
-"@hint/hint-disown-opener@^2.0.0", "@hint/hint-disown-opener@^2.1.0":
+"@hint/hint-disown-opener@^2.0.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@hint/hint-disown-opener/-/hint-disown-opener-2.1.0.tgz#ee44572929036313eccb7e1f189b89fdb77ef504"
   integrity sha512-hs8T3kwF/jQoPYdURyqAyzywfSbLHFBCzxflBez7MncG1gxKhDduzEGX8QbLcXlMjgHVNmvwP0j/vXzAxmmn+g==
+
+"@hint/hint-disown-opener@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@hint/hint-disown-opener/-/hint-disown-opener-2.1.1.tgz#2bde5185ecc5a37d5df177ffd6b95a084383fd3b"
+  integrity sha512-2pA1tA+diuNyVJMr9d+2KrDudAirl0JVM6amwueFPyqApywTwpo/jMHR6CAAa2rVfUD8mEV5m2PQ1nCDpo/MKA==
 
 "@hint/hint-highest-available-document-mode@^2.0.0", "@hint/hint-highest-available-document-mode@^2.1.0":
   version "2.1.0"
