@@ -40,7 +40,7 @@
     "react-dom": "^16.6.3",
     "react-markdown": "^4.0.4",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.2",
+    "react-scripts": "2.1.5",
     "react-winjs": "git+https://github.com/TECLIB/react-winjs.git#develop",
     "victory": "31.0.2",
     "web-animations-js": "^2.3.1",
