@@ -1038,10 +1038,17 @@
   resolved "https://registry.yarnpkg.com/@hint/hint-http-cache/-/hint-http-cache-2.1.0.tgz#98209e3664abe48c640ab047c5ea9094cf3fe76e"
   integrity sha512-rPJf2X4cVgexnJdMDvxyZkuy7CkM+OBslJUNBokGn1bp6C6LqjX/mjRoJpQU5/xR5ko1J72HpkvqqD4m6utzfg==
 
-"@hint/hint-http-compression@^3.0.0", "@hint/hint-http-compression@^3.1.0":
+"@hint/hint-http-compression@^3.0.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@hint/hint-http-compression/-/hint-http-compression-3.1.0.tgz#ac58535e334a820d2096a7036fca3d1902204b43"
   integrity sha512-eEtPxY7OHu3e7uypCD4EDSOTOePLbIM3PPAbdL+pRGSA0rAo7r2VNTA/jzW2EQwpv4dFDQJFnioTzIXyoC+dpw==
+  dependencies:
+    iltorb "^2.4.1"
+
+"@hint/hint-http-compression@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@hint/hint-http-compression/-/hint-http-compression-4.0.1.tgz#19c7af099ff2e1fadf3a21dfcda31c53e6859ec4"
+  integrity sha512-JCPNgDdM7mhYsEv2YJvQDh9lSPLqbjtqyIrqT7oV5UaEMOBgPVPM1MgerVa3kP99OBqAXB4e9mbWJuAVte0TSw==
   dependencies:
     iltorb "^2.4.1"
 
