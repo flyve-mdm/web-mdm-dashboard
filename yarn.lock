@@ -1033,10 +1033,15 @@
   dependencies:
     lodash "^4.17.11"
 
-"@hint/hint-http-cache@^2.0.0", "@hint/hint-http-cache@^2.1.0":
+"@hint/hint-http-cache@^2.0.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@hint/hint-http-cache/-/hint-http-cache-2.1.0.tgz#98209e3664abe48c640ab047c5ea9094cf3fe76e"
   integrity sha512-rPJf2X4cVgexnJdMDvxyZkuy7CkM+OBslJUNBokGn1bp6C6LqjX/mjRoJpQU5/xR5ko1J72HpkvqqD4m6utzfg==
+
+"@hint/hint-http-cache@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@hint/hint-http-cache/-/hint-http-cache-3.0.1.tgz#419012e5f574a049b9fa3e0c2cb2e10b6eb42c36"
+  integrity sha512-v2+Oc0ezuOXzQwN7X57gw9ZoxaVgm9bqnIPy4p0aT2lxgV41n6qbsLvmysjb4+lHpiLslIfXZXjBCzCHhyZ9CA==
 
 "@hint/hint-http-compression@^3.0.0", "@hint/hint-http-compression@^3.1.0":
   version "3.1.0"
