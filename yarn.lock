@@ -1026,10 +1026,17 @@
   resolved "https://registry.yarnpkg.com/@hint/hint-highest-available-document-mode/-/hint-highest-available-document-mode-2.1.0.tgz#397ca1c50f3790ef17d18754456dd64217f6e53b"
   integrity sha512-bbI34Z2qh3aBKO8im0yzCp6FAopdMDCX7zk3DLH5AVMr30+jWtJ3RTTpJJuVd8Hmfa30SbYwwK7j82KHJZpuMw==
 
-"@hint/hint-html-checker@^2.0.0", "@hint/hint-html-checker@^2.1.0":
+"@hint/hint-html-checker@^2.0.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@hint/hint-html-checker/-/hint-html-checker-2.1.0.tgz#bc8bb50a45b76e0257a2025ea67b93624107fbc6"
   integrity sha512-V2WXUQPqX2mM7w7N4xNIgV736O3WY7oMUOnCDGj9a/2Uurycj8JYPHFbQgFkNJjiWtMdjUXQQ/PQgBrwbiaKhQ==
+  dependencies:
+    lodash "^4.17.11"
+
+"@hint/hint-html-checker@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@hint/hint-html-checker/-/hint-html-checker-3.0.1.tgz#9ed47dbf806f075288ea99dbb66ccf9d4e6e547a"
+  integrity sha512-Yk84z8/e030r1Zqai9q7BQruaFAF5+UHnmoxULSgnJhk2h4a0kapRpx+w+J0+hL7gVQIDG+nftT7r0I0PDhWeA==
   dependencies:
     lodash "^4.17.11"
 
