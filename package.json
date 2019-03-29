@@ -67,7 +67,7 @@
     "jsdoc": "^3.5.5",
     "node-github-release": "^0.2.1",
     "react-test-renderer": "^16.6.3",
-    "sinon": "^7.2.0",
+    "sinon": "7.3.0",
     "standard-version": "^4.4.0"
   },
   "browserslist": [
