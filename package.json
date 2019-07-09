@@ -36,7 +36,7 @@
     "node-polyglot": "^2.3.0",
     "node-sass": "^4.11.0",
     "react": "^16.6.3",
-    "react-content-loader": "^3.4.1",
+    "react-content-loader": "^4.2.2",
     "react-dom": "^16.6.3",
     "react-markdown": "^4.0.4",
     "react-router-dom": "^4.3.1",
