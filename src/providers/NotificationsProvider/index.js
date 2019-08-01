@@ -112,7 +112,8 @@ export class NotificationsProvider extends PureComponent {
           <div className="toast__body">
             {context.notification.body}
           </div>
-        </div>)
+        </div>
+      )
     }
 
     return (
