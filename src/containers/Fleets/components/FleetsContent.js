@@ -1291,6 +1291,7 @@ class FleetsContent extends PureComponent {
 FleetsContent.defaultProps = {
   selectedItems: null,
   itemType: null,
+  glpi: null,
 }
 
 FleetsContent.propTypes = {
@@ -1301,6 +1302,9 @@ FleetsContent.propTypes = {
   history: PropTypes.object.isRequired,
   selectedItems: PropTypes.array,
   itemType: PropTypes.string,
+  glpi: PropTypes.object,
+  changeAction: PropTypes.func.isRequired,
+  changeSelectionMode: PropTypes.func.isRequired,
 }
 
 export default FleetsContent
