@@ -4,7 +4,7 @@ references:
   # Configuration
   workspace: &workspace  ~/flyve
 
-  docker_image: &docker_image node:8.11
+  docker_image: &docker_image node:10.16
 
   container_config: &container_config
     docker:
