@@ -1033,10 +1033,15 @@
   resolved "https://registry.yarnpkg.com/@hint/hint-disown-opener/-/hint-disown-opener-2.1.0.tgz#ee44572929036313eccb7e1f189b89fdb77ef504"
   integrity sha512-hs8T3kwF/jQoPYdURyqAyzywfSbLHFBCzxflBez7MncG1gxKhDduzEGX8QbLcXlMjgHVNmvwP0j/vXzAxmmn+g==
 
-"@hint/hint-highest-available-document-mode@^2.0.0", "@hint/hint-highest-available-document-mode@^2.1.0":
+"@hint/hint-highest-available-document-mode@^2.0.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@hint/hint-highest-available-document-mode/-/hint-highest-available-document-mode-2.1.0.tgz#397ca1c50f3790ef17d18754456dd64217f6e53b"
   integrity sha512-bbI34Z2qh3aBKO8im0yzCp6FAopdMDCX7zk3DLH5AVMr30+jWtJ3RTTpJJuVd8Hmfa30SbYwwK7j82KHJZpuMw==
+
+"@hint/hint-highest-available-document-mode@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@hint/hint-highest-available-document-mode/-/hint-highest-available-document-mode-3.0.0.tgz#6f258eabbefeefd13e8fc2fab09ffcc6065cb2c8"
+  integrity sha512-s/fcKErLaU9AYDraqoi9oR8dUFNRFsvtLaX8dz8zvIPj28ok/jem42kbRVh/4q/NOhAF6prMcdQhide51/G0Rg==
 
 "@hint/hint-html-checker@^2.0.0", "@hint/hint-html-checker@^2.1.0":
   version "2.1.0"
