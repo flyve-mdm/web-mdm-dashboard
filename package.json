@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@glpi-project/javascript-library-glpi": ">=0.1.0-beta <=1.0.0",
-    "@microsoft/fast-animation": "^0.0.12-beta.0",
+    "@microsoft/fast-animation": "^4.0.3",
     "bugsnag-js": "^4.7.3",
     "bugsnag-react": "^1.1.1",
     "history": "^4.7.2",
