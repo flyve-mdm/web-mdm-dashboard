@@ -66,7 +66,7 @@
     "hint": "^4.1.0",
     "jsdoc": "^3.6.0",
     "node-github-release": "^0.2.1",
-    "react-test-renderer": "^16.6.3",
+    "react-test-renderer": "^16.10.0",
     "sinon": "^7.3.2",
     "standard-version": "^4.4.0"
   },
