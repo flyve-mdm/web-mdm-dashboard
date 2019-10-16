@@ -63,7 +63,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.2",
     "eslint-plugin-react": "^7.14.3",
     "gh-pages": "^2.1.0",
-    "hint": "^4.1.0",
+    "hint": "^5.3.2",
     "jsdoc": "^3.6.0",
     "node-github-release": "^0.2.1",
     "react-test-renderer": "^16.6.3",
