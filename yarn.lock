@@ -1181,13 +1181,10 @@
     chrome-remote-interface "^0.26.1"
     lodash "^4.17.11"
 
-"@microsoft/fast-animation@^0.0.12-beta.0":
-  version "0.0.12-beta.0"
-  resolved "https://registry.yarnpkg.com/@microsoft/fast-animation/-/fast-animation-0.0.12-beta.0.tgz#4d6acb1005977e9585e63e4f95985d68677f95f4"
-  integrity sha512-Wag72AWVaD2CYsnvGwNxPdV6XFSFFSMYT3BPgj18Bc9JHP3ZlgtWbMD2Xya8hGhB9BwQCaiSY/8U/jx0DC2hDw==
-  dependencies:
-    "@types/web-animations-js" "^2.2.5"
-    lodash.throttle "^4.1.1"
+"@microsoft/fast-animation@^4.0.9":
+  version "4.0.9"
+  resolved "https://registry.yarnpkg.com/@microsoft/fast-animation/-/fast-animation-4.0.9.tgz#2483d78394284511f32b04a911f1619858c68600"
+  integrity sha512-Lk4eeTDNDd4z5KCecULQw0GSzOHyUspiF0KbygM5ZjmnIAPZd2p691vzlCsZQMIV7v8N71s8LTBWYBYZiZv8uw==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -1313,11 +1310,6 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.2.tgz#e13182e1b69871a422d7863e11a4a6f5b814a4bd"
   integrity sha512-42zEJkBpNfMEAvWR5WlwtTH22oDzcMjFsL9gDGExwF8X8WvAiw7Vwop7hPw03QT8TKfec83LwbHj6SvpqM4ELQ==
-
-"@types/web-animations-js@^2.2.5":
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/@types/web-animations-js/-/web-animations-js-2.2.6.tgz#70de009baa343ddf612aa4f0cda75b76c058288f"
-  integrity sha512-U8GPq6pNFCwettZNgEPiSh4Y9FJZryv4y3ELxpTURzQly+NHx1LpOsA8lSxqDp7/XyBcViFpqQ0H/w+tmIcR8A==
 
 "@webassemblyjs/ast@1.7.6":
   version "1.7.6"
@@ -8307,11 +8299,6 @@ lodash.templatesettings@^4.0.0:
   integrity sha1-K01OlbpEDZFf8IvImeRVNmZxMxY=
   dependencies:
     lodash._reinterpolate "~3.0.0"
-
-lodash.throttle@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
-  integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
 lodash.uniq@^4.5.0:
   version "4.5.0"
