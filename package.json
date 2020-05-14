@@ -42,7 +42,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
     "react-winjs": "git+https://github.com/TECLIB/react-winjs.git#develop",
-    "victory": "31.0.2",
+    "victory": "34.3.2",
     "web-animations-js": "^2.3.1",
     "winjs": "^4.4.3"
   },
